@@ -100,7 +100,7 @@ cp -r snort3/lua/ Test/snortrules/
 
 #### Download the Packet Capture (PCAP) files
 
-You can use any PCAP files that are relevant to your test scenario. 
+You can use any packet capture (PCAP) files that are relevant to your test scenario. 
 
 You can obtain PCAP files at: https://www.netresec.com/?page=MACCDC.
 
@@ -123,7 +123,7 @@ Now make two modifications to the Lau configurations:
 
 #### Pin Snort Threads to Unique CPU Core
 
-Navigate to the `Test/snortrules/lua` directory.
+Navigate to the `Test/snortrules/lua` directory:
 
 ```bash
 cd Test/snortrules/lua
@@ -153,7 +153,6 @@ process = { threads = threads }
 search_engine = { }
 snort_whitelist_append("threads")
 ```
- 
 Edit `snort.lua` to include the contents above, and then add in the line below to the end of the file: 
 
  ``` bash
@@ -190,7 +189,7 @@ The max_detect policy focuses on maximum security, and the connectivity policy f
 
 #### Specify the data acquisition module
 
-Snort supports DAQ modules which serves as an abstraction layer for interfacing with data source such as network interface. 
+Snort supports data acquisition (DAQ) modules which serve as an abstraction layer for interfacing with a data source such as a network interface. 
 
 To see list of DAQ modules supported by Snort use the `--daq-list` command.
 
@@ -200,7 +199,7 @@ Return to the `build` directory:
 cd $HOME/build
 ```
 
-Run using the command:
+Run Snort with the command:
 
 ``` bash
 snort  --daq-dir ./snort3/dependencies/libdaq/install/lib/daq --daq-list
@@ -263,7 +262,6 @@ To run Snort 3 with multithreading, start from the `Test` directory.
 ```bash
 cd $HOME/build/Test
 ```
-
 The following example shows you how to use multiple Snort threads to analyze PCAP files.
 
 ``` bash
@@ -295,7 +293,6 @@ The output is similar to:
 22:52:28       8   98.00    0.00    2.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
 22:52:28       9   97.50    0.00    2.50    0.00    0.00    0.00    0.00    0.00    0.00    0.00
 ```
-
 #### Test Snort 3 multithreading to process a single PCAP file 
 
 The example demonstrates how multithreading increases the number of packets processed per second. 

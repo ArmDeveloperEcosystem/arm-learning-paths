@@ -1,21 +1,21 @@
 ---
-title: Introduction to CCA Attestation with Veraison
+title: Get Started with CCA Attestation and Veraison
 
 minutes_to_complete: 30
 
 
-who_is_this_for: This learning path is aimed at developers who wish to understand attestation in the context of confidential computing, using Arm’s Confidential Computing Architecture (CCA). It will provide you with some practical, hands-on experience with the data formats and workflows associated with attestation, which will help to provide you with a joined-up understanding of the many separate documents and specifications that exist on this topic.
+who_is_this_for: This Learning Path is for developers who would like to learn about attestation in confidential computing, using Arm’s Confidential Computing Architecture (CCA). 
 
 learning_objectives:
-    - Describe the importance of attestation for confidential computing
-    - Understand what a CCA attestation token is, and describe its format
-    - Inspect the contents of a CCA attestation token using command-line tools
-    - Use an attestation verification service to evaluate a CCA attestation token
-    - Understand the purpose of the open source Veraison project
+    - Describe the importance of attestation in confidential computing.
+    - Understand what a CCA attestation token is, and describe its format.
+    - Inspect the contents of a CCA attestation token using command-line tools.
+    - Use an attestation verification service to evaluate a CCA attestation token.
+    - Understand the purpose of the Open-Source Veraison project.
 
 
 prerequisites:
-    - An Arm-based or x86 computer running Ubuntu. You can use a server instance from the cloud service provider of your choice.
+    - An Arm-based or x86 computer running Ubuntu. You can use a server instance from a cloud service provider of your choice.
 
 
 author_primary: Paul Howard

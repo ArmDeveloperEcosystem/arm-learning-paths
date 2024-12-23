@@ -34,8 +34,7 @@ review:
             - pcap.
         correct_answer: 3          
         explanation: >
-            The dump module in Snort 3 is used to read capture files, such as .pcap or .pcapng files, for offline packet analysis. 
-
+            The dump module in Snort 3 is used to read capture files, such as .pcap or .pcapng files, for offline packet analysis.
 
 
 # ================================================================================

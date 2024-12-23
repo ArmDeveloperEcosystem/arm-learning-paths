@@ -13,6 +13,6 @@ With general profilers this is hard to do, as there needs to be annotation insid
 
 Depending on the model you use, your choice of tools will vary. For example, if you are using LiteRT (formerly TensorFlow Lite), Arm provides the Arm NN delegate that you can run with the model running on Linux or Android, CPU or GPU. 
 
-Arm NN in turn provides a tool called ExecuteNetwork that can run the model and provide layer timings, amongst other useful information.
+Arm NN in turn provides a tool called ExecuteNetwork that can run the model and provide layer timings.
 
 If you are using PyTorch, you will probably use ExecuTorch, which is the on-device inference runtime for your Android phone. ExecuTorch has a profiler available alongside it.

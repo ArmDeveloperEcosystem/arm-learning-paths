@@ -9,9 +9,9 @@ maintopic: true
 operatingsystems_filter:
 - Android: 2
 - Baremetal: 1
-- Linux: 111
-- macOS: 9
-- Windows: 13
+- Linux: 113
+- macOS: 7
+- Windows: 12
 pinned_modules:
 - module:
     name: Recommended getting started learning paths
@@ -20,21 +20,21 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 4
-- Containers and Virtualization: 25
+- Containers and Virtualization: 26
 - Databases: 15
 - Libraries: 7
-- ML: 14
-- Performance and Architecture: 40
+- ML: 13
+- Performance and Architecture: 42
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
 title: Servers and Cloud Computing
 tools_software_languages_filter:
-- .NET: 1
+- .NET: 2
 - .NET SDK: 1
 - 5G: 1
 - ACL: 1
-- Android Studio: 2
+- Android Studio: 1
 - Ansible: 2
 - Arm Development Studio: 4
 - armclang: 1
@@ -52,28 +52,28 @@ tools_software_languages_filter:
 - BOLT: 1
 - bpftool: 1
 - C: 4
-- C#: 1
+- C#: 2
 - C++: 3
 - C/C++: 2
 - Capstone: 1
-- CCA: 3
+- CCA: 5
 - Clair: 1
 - Clang: 10
 - ClickBench: 1
 - ClickHouse: 1
 - CloudFormation: 1
 - CMake: 1
-- Coding: 20
+- Coding: 18
 - Django: 1
-- Docker: 15
+- Docker: 16
 - Envoy: 2
 - Flink: 1
 - Fortran: 1
-- FVP: 3
-- GCC: 19
+- FVP: 4
+- GCC: 20
 - gdb: 1
 - Geekbench: 1
-- GenAI: 5
+- GenAI: 6
 - GitHub: 3
 - GitLab: 1
 - Glibc: 1
@@ -92,7 +92,7 @@ tools_software_languages_filter:
 - Lambda: 1
 - libbpf: 1
 - Linaro Forge: 1
-- LLM: 3
+- LLM: 4
 - llvm-mca: 1
 - LSE: 1
 - MariaDB: 1
@@ -108,15 +108,14 @@ tools_software_languages_filter:
 - PAPI: 1
 - perf: 4
 - PostgreSQL: 4
-- Python: 13
+- Python: 14
 - PyTorch: 5
 - RAG: 1
 - Redis: 3
 - Remote.It: 2
-- RME: 3
+- RME: 4
 - Rust: 2
 - snappy: 1
-- Snort: 1
 - Snort3: 1
 - SQL: 7
 - Streamline CLI: 1
@@ -131,7 +130,10 @@ tools_software_languages_filter:
 - Trusted Firmware: 1
 - TypeScript: 1
 - Vectorscan: 1
-- Visual Studio Code: 3
+- Veraison: 1
+- Visual Studio Code: 4
+- vLLM: 1
+- VS Code: 1
 - WindowsPerf: 1
 - WordPress: 3
 - x265: 1

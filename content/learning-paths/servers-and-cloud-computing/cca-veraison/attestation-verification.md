@@ -1,6 +1,6 @@
 ---
 title: Use the verification service
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -11,7 +11,7 @@ layout: learningpathall
 
 Linaro’s verification service is implemented using components from the open source [Veraison](https://github.com/veraison) project.
 
-The URL for reaching this experimental verifier service is http://veraison.test.linaro.org:8080
+The URL for reaching this experimental verifier service is http://veraison.test.linaro.org:8080.
 
 To check that you can reach the Linaro attestation verifier service, run the following command:
 
@@ -89,4 +89,4 @@ The `| tr -d \"` is used to remove the double quotes in capturing the output fro
 {{% /notice %}}
 
 The verification service has now evaluated the token and returned a result, which you have saved.
-The last two steps in this learning path will be about understanding the result data that came back from the verification service.
+The last two steps in this Learning Path are about understanding the resultant data that came back from the verification service.
