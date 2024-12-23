@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - An AArch64 or x86_64 computer running Linux. You can use cloud instances, see this list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
-    - Completion of the [Introduction to CCA Attestation with Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison) Learning Path.
+    - Completion of [Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison) Learning Path.
     - Completion of the [Run an application in a Realm using the Arm Confidential Computing Architecture (CCA)](/learning-paths/servers-and-cloud-computing/cca-container/) Learning Path.
 
 author_primary: Arnaud de Grandmaison, Paul Howard, and Pareena Verma
