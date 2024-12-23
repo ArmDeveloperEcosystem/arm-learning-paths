@@ -165,7 +165,7 @@ x_mul:python312_d.dll
 ```
 
 The above SPE sampling pass records that the function `x_mul:python312_d.dll`
-n source file `C:\path\to\cpython\Objects\longobject.c`, line `3590` is a hot spot for the `load_filter`.
+in source file `C:\path\to\cpython\Objects\longobject.c`, line `3590` is a hot spot for the `load_filter`.
 
 #### Example output with disassemble enabled
 
