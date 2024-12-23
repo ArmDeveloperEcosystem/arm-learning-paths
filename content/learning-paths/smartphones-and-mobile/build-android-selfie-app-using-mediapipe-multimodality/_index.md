@@ -1,3 +1,4 @@
+more :q!
 ---
 title: Build a Hands-Free Selfie app with Modern Android Development and MediaPipe Multimodal AI
 draft: true
