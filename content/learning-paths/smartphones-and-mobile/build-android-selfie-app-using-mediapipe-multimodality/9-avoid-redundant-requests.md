@@ -1,16 +1,16 @@
 ---
-title: Avoid duplicated photo capture requests
+title: Avoid duplicate photo capture requests
 weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-So far, we have implemented the core logic for mediating MediaPipe's face and gesture task results and executing photo captures. However, the view controller does not communicate its execution results back to the view model. This introduces risks such as photo capture failures, frequent or duplicate requests, and other potential issues.
+So far, you have implemented the core logic for MediaPipe's face and gesture task results and executing photo captures. However, the view controller does not communicate its execution results back to the view model. This introduces risks such as photo capture failures, frequent or duplicate requests, and other potential issues.
 
 ## Introduce camera readiness state
 
-It is a best practice to complete the data flow cycle by providing callbacks for the view controller's states. This ensures that the view model does not emit values in undesired states, such as when the camera is busy or unavailable.
+It is best practice to complete the data flow cycle by providing callbacks for the view controller's states. This ensures that the view model does not emit values in undesired states, such as when the camera is busy or unavailable.
 
 1. Navigate to `MainViewModel` and add a `MutableStateFlow` named `_isCameraReady` as a  private member variable. This keeps track of whether the camera is busy or unavailable.
 
@@ -58,7 +58,7 @@ The duration of image capture can vary across Android devices due to hardware di
 
 To address this, implementing a simple cooldown mechanism after each photo capture can enhance the user experience while conserving computing resources.
 
-1. Add the following constant value to `MainViewModel`'s companion object. This defines a `3` sec cooldown before marking the camera available again.
+1. Add the following constant value to `MainViewModel`'s companion object. This defines a 3 seconds cooldown before making the camera available again.
 
 ```kotlin
     private const val IMAGE_CAPTURE_DEFAULT_COUNTDOWN = 3000L
@@ -91,6 +91,6 @@ However, silently failing without notifying the user is not a good practice for 
 
 ## Completed sample code on GitHub
 
-If you run into any difficulties completing this learning path, feel free to check out the [completed sample code](https://github.com/hanyin-arm/sample-android-selfie-app-using-mediapipe-multimodality) and import it into Android Studio.
+If you run into any difficulties completing this learning path, you can check out the [complete sample code](https://github.com/hanyin-arm/sample-android-selfie-app-using-mediapipe-multimodality) and import it into Android Studio.
 
-If you discover a bug, encounter an issue, or have suggestions for improvement, we’d love to hear from you! Please feel free to [open an issue](https://github.com/hanyin-arm/sample-android-selfie-app-using-mediapipe-multimodality/issues/new) with detailed information.
+If you discover a bug, encounter an issue, or have suggestions for improvement, please feel free to [open an issue](https://github.com/hanyin-arm/sample-android-selfie-app-using-mediapipe-multimodality/issues/new) with detailed information.
