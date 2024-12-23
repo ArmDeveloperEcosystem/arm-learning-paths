@@ -28,9 +28,9 @@ author_primary: Han Yin
 skilllevels: Beginner
 subjects: ML
 armips:
-    - ARM Cortex-A
-    - ARM Cortex-X
-    - ARM Mali GPU
+    - Cortex-A
+    - Cortex-X
+    - Mali GPU
 tools_software_languages:
     - mobile
     - Android Studio

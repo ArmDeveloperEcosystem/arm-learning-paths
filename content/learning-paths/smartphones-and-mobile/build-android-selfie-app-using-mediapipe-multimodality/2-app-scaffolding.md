@@ -12,7 +12,7 @@ This learning path will teach you to architect an app following [modern Android 
 
 Download and install the latest version of [Android Studio](https://developer.android.com/studio/) on your host machine.
 
-This learning path's instructions and screenshots are taken on macOS with Apple Silicon, but you may choose any of the supported hardware systems as described [here](https://developer.android.com/studio/install).
+The instructions for this learning path were tested on a Apple Silicon host machine running macOS, but you may choose any of the supported hardware systems as described [here](https://developer.android.com/studio/install).
 
 Upon first installation, open Android Studio and proceed with the default or recommended settings. Accept license agreements and let Android Studio download all the required assets.
 
