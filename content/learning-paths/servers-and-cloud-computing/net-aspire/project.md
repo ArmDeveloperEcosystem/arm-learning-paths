@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-In this section, you will set up the project. This involves several steps, including installing the Aspire workload. Then, you will learn about the project structure and launch it locally. Finally, you will modify the project to add additional computations to mimic computationally intensive work.
+In this section, you will set up the project. This involves several steps, including installing the Aspire workload. Then, you will learn about the project structure and launch it locally. Finally, you will modify the project to add additional computations to mimic computationally-intensive work.
 
 ## Create a Project
 To create a .NET Aspire application, first ensure that you have [.NET 8.0 or later installed](https://dotnet.microsoft.com/en-us/download/dotnet) on your Windows on Arm development machine.

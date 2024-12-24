@@ -3,15 +3,15 @@ title: Run .NET Aspire applications on Arm-based Virtual Machines in AWS and GCP
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for software developers interested in learning how to deploy .NET Aspire applications in Amazon Web Services (AWS) and Google Cloud Platform (GCP).
+who_is_this_for: This is an introductory topic for software developers interested in learning how to deploy .NET Aspire applications on Amazon Web Services (AWS) and Google Cloud Platform (GCP).
 
 learning_objectives: 
     - Describe .NET Aspire.
-    - Create a .NET Aspire project and deploy it to Arm-powered Virtual Machines in the Cloud.
+    - Create a .NET Aspire project and deploy it to Arm-powered virtual machines in the Cloud.
 
 prerequisites:
-    - A Windows on Arm machine such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), a Lenovo Thinkpad X13s running Windows 11 to build the .NET Aspire project.    
-    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from AWS or GCP.
+    - A Windows on Arm machine, for example [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), or a Lenovo Thinkpad X13s running Windows 11 to build the .NET Aspire project.    
+    - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from AWS or GCP.
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.    
 
 author_primary: Dawid Borycki
