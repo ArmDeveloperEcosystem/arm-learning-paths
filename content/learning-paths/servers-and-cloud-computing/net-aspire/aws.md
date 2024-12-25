@@ -7,10 +7,10 @@ layout: learningpathall
 ---
 
 ### Objective
-In this section, you will learn how to deploy the .NET Aspire application on to an AWS EC2 (Elastic Compute Cloud) Virtual Machine powered by Arm-based processors, such as AWS Graviton. This involves leveraging the cost and performance benefits of Arm architecture while demonstrating the seamless deployment of cloud-native applications on modern infrastructure.
+In this section, you will learn how to deploy the .NET Aspire application on to an AWS Elastic Compute Cloud (EC2) Virtual Machine powered by Arm-based processors, such as AWS Graviton. This leverages the cost and performance benefits of Arm architecture while demonstrating the seamless deployment of cloud-native applications on modern infrastructure.
 
 ### Set up your AWS EC2 Instance
-Follow these steps to deploy an app on to an Arm-powered EC2 instance:
+Follow these steps to set up an Arm-powered EC2 instance:
 1. Log in to the [AWS Management Console](http://console.aws.amazon.com).
 2. Navigate to the EC2 Service. 
 
@@ -20,13 +20,13 @@ Follow these steps to deploy an app on to an Arm-powered EC2 instance:
 
 ![Figure 5 alt-text#center](figures/05.png "Figure 5: Search for EC2 Service in the AWS Management Console.")
 
-3. In the EC2 Dashboard, click **Launch Instance** and fill out the following details:
+3. In the EC2 Dashboard, click **Launch Instance** and add this information to configure your setup:
 * Name: type "arm-server".
 * AMI: select **Arm-compatible Amazon Machine Image, Ubuntu 22.04 LTS for Arm64**.
 * Architecture: select **64-bit (Arm)**.
 * Instance Type: select **t4g.small**.
 
-The configuration should look like the configuration fields shown in Figure 6:
+The configuration should look like the configuration fields that are shown in Figure 6:
 
 ![Figure 6 alt-text#center](figures/06.png "Figure 6: Configuration.")
 
@@ -40,29 +40,29 @@ The configuration should look like the configuration fields shown in Figure 6:
 
 ![fig7](figures/07.png)
 
-5. Scroll down to "Network Settings", where:
-* VPC: use default
-* Subnet: select no preference
-* Auto-assign public IP: Enable
-* Firewall: Check Create security group
-* Security group name: arm-security-group
-* Description: arm-security-group
-* Inbound security groups 
+5. Scroll down to "Network Settings", and confgure the settings in this way:
+* VPC: select the default.
+* Subnet: select no preference.
+* Auto-assign public IP: Enable.
+* Firewall: Check Create security group.
+* Security group name: arm-security-group.
+* Description: arm-security-group.
+* Inbound security groups. 
 
 ![fig8](figures/08.png)
 
-6. Configure "Inbound Security Group Rules". Specifically, click "Add Rule" and set the following details:
-* Type: Custom TCP
-* Protocol: TCP
+6. Configure "Inbound Security Group Rules" by clicking "Add Rule" and then setting the following details:
+* Type: Custom TCP.
+* Protocol: TCP.
 * Port Range: 7133.
-* Source: Select Anywhere (0.0.0.0/0) for public access or restrict access to your specific IP for better security.
-* Repeat this step for all three ports the application is using. Here I have 7133, 7511, 17222. These must match the values we had, when we run the app locally.
+* Source: Select "Anywhere (0.0.0.0/0)" for public access or restrict access to your specific IP for better security.
+* Repeat this step for all three ports the application is using. This example demonstrates setup using ports 7133, 7511, and 17222. These must match the values that you have when you run the app locally.
 
-The configuration should look as follows:
+The configuration should look like:
 
 ![fig9](figures/09.png)
 
-7. Launch an instance by clicking "Launch instance" button. You should see the green box with the Success label. This box also contains a link to the EC2 instance. Click it. It will take you to the instance dashboard, which looks like the one below:
+7. Launch an instance by clicking the **Launch instance** button. You should see the green box with the Success label. This box also contains a link to the EC2 instance. Click it, and it will take you to the instance dashboard, which looks like Figure 10:
 
 ![fig10](figures/10.png)
 
