@@ -1,5 +1,5 @@
 ---
-title: Run .NET Aspire applications on Arm-based virtual machines on AWS and GCP
+title: Run a .NET Aspire application on Arm-based virtual machines on AWS and GCP
 
 minutes_to_complete: 60
 
