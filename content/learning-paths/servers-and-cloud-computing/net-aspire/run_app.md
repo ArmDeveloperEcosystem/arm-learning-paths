@@ -43,6 +43,6 @@ On the dashboard, locate and click the endpoint link for `NetAspire.Arm.Web`. Th
 
 Now return to the dashboard, and select the **Traces** option. This section provides detailed telemetry tracing, allowing you to view the flow of requests, track service dependencies, and analyze performance metrics for your application:
 
-![fig3](figures/03.png)
+![fig3 alt-text#center](figures/03.png "Figure 3: Traces Option.")
 
-By following these steps, you will explore the key components of the .NET Aspire application, including its dashboard, data interaction through APIs, and telemetry tracing capabilities.
+By following these steps, you can explore the key components of the .NET Aspire application, including its dashboard, data interaction through APIs, and telemetry tracing capabilities.
