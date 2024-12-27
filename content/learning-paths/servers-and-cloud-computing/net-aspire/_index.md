@@ -11,9 +11,9 @@ learning_objectives:
     - Modify code on a Windows on Arm development machine.
     - Deploy a .NET Aspire application to Arm-powered virtual machines in the Cloud.
 prerequisites:
-    - A Windows on Arm machine, for example [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), or a Lenovo Thinkpad X13s running Windows 11 to build the .NET Aspire project.    
+    - A Windows on Arm machine, for example the [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), or a Lenovo Thinkpad X13s running Windows 11 to build the .NET Aspire project.    
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from AWS or GCP.
-    - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.    
+    - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is an example of a suitable editor.    
 
 author_primary: Dawid Borycki
 
