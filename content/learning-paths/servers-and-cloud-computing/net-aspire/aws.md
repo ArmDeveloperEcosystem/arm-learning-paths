@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ### Objective
-In this section, you will learn how to deploy the .NET Aspire application on to an AWS Elastic Compute Cloud (EC2) Virtual Machine powered by Arm-based processors, such as AWS Graviton. This allows you to leverage the cost and performance benefits of Arm architecture while benefiting from the seamless deployment of cloud-native applications on modern infrastructure.
+In this section, you will learn how to deploy the .NET Aspire application you created on to an AWS Elastic Compute Cloud (EC2) Virtual Machine powered by Arm-based processors, such as AWS Graviton. This allows you to leverage the cost and performance benefits of Arm architecture while benefiting from the seamless deployment of cloud-native applications on modern infrastructure.
 
 ### Set up your AWS EC2 Instance
 To set up an Arm-powered EC2 instance, follow these steps:
