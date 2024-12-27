@@ -1,6 +1,6 @@
 ---
 title: Deploy to GCP
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
