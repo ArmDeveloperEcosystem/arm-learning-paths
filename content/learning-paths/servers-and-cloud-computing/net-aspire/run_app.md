@@ -5,7 +5,7 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Run the Project
+## Using the dashboard
 The application will issue a certificate. Before you run the application, add support to trust the HTTPS development certificate by running:
  
 ```console
@@ -33,11 +33,17 @@ info: Aspire.Hosting.DistributedApplication[0]
       Login to the dashboard at https://localhost:17222/login?t=81f99566c9ec462e66f5eab5aa9307b0
 ```
 
-Click on the link generated for the dashboard. In this case it is: [https://localhost:17222/login?t=81f99566c9ec462e66f5eab5aa9307b0](https://localhost:17222/login?t=81f99566c9ec462e66f5eab5aa9307b0). This directs you to the application dashboard, as shown in Figure 1:
+Click on the link generated for the dashboard. 
+
+In this case, it is: [https://localhost:17222/login?t=81f99566c9ec462e66f5eab5aa9307b0](https://localhost:17222/login?t=81f99566c9ec462e66f5eab5aa9307b0). 
+
+This directs you to the application dashboard, as Figure 1 shows:
 
 ![fig1 alt-text#center](figures/01.png "Figure 1: Application Dashboard.")
 
-On the dashboard, locate and click the endpoint link for `NetAspire.Arm.Web`. This takes you to the Blazor-based web application. In the Blazor app, navigate to the Weather section to access and display data retrieved from the WeatherForecast API:
+On the dashboard, locate and click the endpoint link for `NetAspire.Arm.Web`. 
+
+This takes you to the Blazor-based web application. In the Blazor app, navigate to the Weather section to access and display data retrieved from the WeatherForecast API:
 
 ![fig2 alt-text#center](figures/02.png "Figure 2: Data Displayed from WeatherForecast API.")
 

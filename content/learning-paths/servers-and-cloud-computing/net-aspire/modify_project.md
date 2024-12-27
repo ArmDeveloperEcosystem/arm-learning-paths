@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Modify the Project
+## Add additional computations
 
 Now you can move on to add additional computations to mimic computationally-intensive work. 
 
@@ -45,11 +45,11 @@ static class ComputationService
 }
 ```
 
-This code defines a static class, ComputationService, designed to perform computationally-intensive tasks; in particular, matrix multiplication. It contains a public method, PerformIntensiveCalculations, which generates two matrices of a specified size, multiplies them, and stores the resulting matrix.
+This code defines a static class, **ComputationService**, designed to perform computationally-intensive tasks; in particular, matrix multiplication. It contains a public method, **PerformIntensiveCalculations**, which generates two matrices of a specified size, multiplies them, and stores the resulting matrix.
 
-* The private method, GenerateMatrix, creates a one-dimensional array representing a matrix of the given size (matrixSize x matrixSize). Each element in the matrix is initialized with a random double-value generated using Random.Shared.NextDouble().
+* The private method, **GenerateMatrix**, creates a one-dimensional array representing a matrix of the given size (matrixSize x matrixSize). Each element in the matrix is initialized with a random double-value generated using **Random.Shared.NextDouble()**.
 
-* The public method, PerformIntensiveCalculations, multiplies two matrices (matrix1 and matrix2) element-by-element using nested loops and LINQ. It iterates through each row of the first matrix and each column of the second matrix, calculating the dot product for each element in the resulting matrix. The result of the multiplication is stored in a flattened one-dimensional array, called matrixResult.
+* The public method, **PerformIntensiveCalculations**, multiplies two matrices (matrix1 and matrix2) element-by-element using nested loops and LINQ. It iterates through each row of the first matrix and each column of the second matrix, calculating the dot product for each element in the resulting matrix. The result of the multiplication is stored in a flattened one-dimensional array, called **matrixResult**.
 
 This code is provided for demonstrating heavy computational operations, such as large matrix manipulations, and can simulate workloads in scenarios that mimic intensive data processing or scientific calculations.
 

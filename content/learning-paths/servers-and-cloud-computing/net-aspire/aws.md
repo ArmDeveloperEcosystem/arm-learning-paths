@@ -21,7 +21,7 @@ To set up an Arm-powered EC2 instance, follow these steps:
 ![Figure 5 alt-text#center](figures/05.png "Figure 5: Search for the EC2 Service in the AWS Management Console.")
 
 3. In the EC2 Dashboard, click **Launch Instance** and add the following information in these corresponding data fields to configure your setup:
-* Name: type "arm-server".
+* Name: enter **arm-server**.
 * AMI: select **Arm-compatible Amazon Machine Image, Ubuntu 22.04 LTS for Arm64**.
 * Architecture: select **64-bit (Arm)**.
 * Instance Type: select **t4g.small**.
@@ -31,7 +31,7 @@ The configuration should look like the configuration fields that Figure 6 shows:
 ![Figure 6 alt-text#center](figures/06.png "Figure 6: Configuration Fields.")
 
 4. Scroll down to **Key pair** (login), and click **Create new key pair**. 
-  This displays the "Create key pair" window. 
+  This displays the **Create key pair** window. 
   Now configure the following fields:
 * Key pair name: **arm-key-pair**.
 * Key pair type: **RSA**.
@@ -40,22 +40,22 @@ The configuration should look like the configuration fields that Figure 6 shows:
 
 ![fig7](figures/07.png)
 
-5. Scroll down to "Network Settings", and confgure the settings:
+5. Scroll down to **Network Settings**, and configure the settings:
 * VPC: select the default.
 * Subnet: select **No preference**.
 * Auto-assign public IP: **Enable**.
 * Firewall: Check **Create security group**.
-* Security group name: arm-security-group.
-* Description: arm-security-group.
+* Security group name: **arm-security-group**.
+* Description: **arm-security-group**.
 * Inbound security groups. 
 
 ![fig8](figures/08.png)
 
-6. Configure "Inbound Security Group Rules" by selecting **Add Rule** and then setting the following details:
-* Type: Custom TCP.
-* Protocol: TCP.
-* Port Range: 7133.
-* Source: Select "Anywhere (0.0.0.0/0)" for public access or restrict access to your specific IP for better security.
+6. Configure **Inbound Security Group Rules** by selecting **Add Rule** and then setting the following details:
+* Type: **Custom TCP**.
+* Protocol: **TCP**.
+* Port Range: **7133**.
+* Source: Select **Anywhere (0.0.0.0/0)** for public access or restrict access to your specific IP for better security.
 
 Repeat this step for all three ports that the application is using. This example demonstrates setup using ports 7133, 7511, and 17222. These must match the values that you have when you run the app locally.
 
@@ -63,7 +63,9 @@ The configuration should look like:
 
 ![fig9](figures/09.png)
 
-7. Launch an instance by clicking the **Launch instance** button. You should see the green box with the Success label. This box also contains a link to the EC2 instance. Click it, and it takes you to the instance dashboard, which looks like Figure 10:
+7. Launch an instance by clicking the **Launch instance** button. You should see the green box with the **Success** label. 
+
+This box also contains a link to the EC2 instance. Click on it, and it takes you to the instance dashboard, as Figure 10 shows:
 
 ![fig10](figures/10.png)
 

@@ -121,4 +121,4 @@ To make your application publicly-accessible, configure the firewall rules:
 5. Click the **Save** button.
 
 ### Summary
-You have successfully deployed the Aspire app onto an Arm-powered GCP virtual machine. This deployment demonstrates the compatibility of .NET applications with Arm architecture and GCP, offering high performance and cost-efficiency.
+You have successfully deployed the Aspire app onto an Arm-powered GCP virtual machine. This deployment demonstrates the compatibility of .NET applications with Arm architecture and GCP, offering high performance and cost efficiency.
