@@ -31,4 +31,7 @@ With a few helper method calls, you can create local resources, wait for the res
 
 By providing a consistent set of tools and patterns, .NET Aspire streamlines the development process of cloud-native applications. It manages complex applications during the development phase without dealing with low-level implementation details. .NET Aspire easily connects to commonly-used services with standardized interfaces and configurations. There are also various templates and tooling to accelerate project setup and development cycles.
 
-In this Learning Path, you will learn how to create a .NET Aspire application, describe the project, and modify the code on a Windows on Arm development machine. You will then deploy the application firstly, to an AWS Arm-powered virtual machine, and secondly, to a GCP Arm-powered virtual machine.
+In this Learning Path, you will learn how to create a .NET Aspire application, describe the project, and modify the code on a Windows on Arm development machine. You will then deploy the application:
+
+* Firstly, to an AWS Arm-powered virtual machine.
+* Secondly, to a GCP Arm-powered virtual machine.

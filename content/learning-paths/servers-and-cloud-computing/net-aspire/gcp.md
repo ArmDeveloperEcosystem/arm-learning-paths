@@ -106,14 +106,18 @@ You will see output similar to this:
 
 To make your application publicly-accessible, configure the firewall rules:
 1. In the Google Cloud Console, navigate to **VPC Network** > **Firewall**.
+
 2. Click **Create Firewall Rule** and configure the following:
     * Name: **allow-dotnet-ports**.
     * Target Tags: **dotnet-app**.
     * Source IP Ranges: **0.0.0.0/0** (for public access).
     * Protocols and Ports: **allow TCP on ports 7133, 7511, and 17222**.
     * Click the **Create** button.
+
 3. Go back to your VM instance.
+
 4. Click **Edit**, and under **Networking** find **Network Tags**, add the tag **dotnet-app**. 
+
 5. Click the **Save** button.
 
 ### Summary

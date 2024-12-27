@@ -68,13 +68,21 @@ This command generates a solution with the following structure:
     * Standard health check implementations.
     * Logging configurations to ensure consistent and efficient monitoring and debugging.
 
-The structure of this project is designed to enhance efficiency, and simplify the development of cloud-native applications. At its core, it incorporates features to ensure seamless service interactions, robust monitoring, and an exceptional development experience.
+The structure of this project is designed to enhance efficiency and simplify the development of cloud-native applications. At its core, it incorporates features to ensure seamless service interactions, robust monitoring, and an exceptional development experience.
+
+#### Service discovery
 
 One of the foundational elements is service discovery, which enables automatic service registration, dynamic endpoint resolution, and load balancing. These features ensure that services communicate effectively and handle traffic efficiently, even in complex, distributed environments.
 
+#### Monitoring and telemetry
+
 For monitoring and telemetry, the architecture integrates tools like built-in health checks, OpenTelemetry for monitoring, and metrics collection with distributed tracing. These features provide developers with deep insights into application performance, helping to maintain reliability and optimize system operations.
 
+#### Configuration management
+
 Configuration management offers environment-based settings that make deploying applications across different stages straightforward. Secure secrets management safeguards sensitive information, while standardized service-to-service communication simplifies interactions between microservices.
+
+#### Improved development experience
 
 The architecture is also tailored to improve the development experience. Developers can benefit from local debugging support and a powerful monitoring dashboard. This dashboard provides a detailed view of the following:
 

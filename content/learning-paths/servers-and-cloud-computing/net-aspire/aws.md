@@ -5,13 +5,13 @@ weight: 6
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
 ### Objective
 In this section, you will learn how to deploy the .NET Aspire application you created on to an AWS Elastic Compute Cloud (EC2) virtual machine powered by Arm-based processors, such as AWS Graviton. This allows you to leverage the cost and performance benefits of Arm architecture while benefiting from the seamless deployment of cloud-native applications on modern infrastructure.
 
 ### Set up your AWS EC2 Instance
 To set up an Arm-powered EC2 instance, follow these steps:
 1. Log in to the [AWS Management Console](http://console.aws.amazon.com).
+
 2. Navigate to the EC2 Service. 
 
    As Figure 5 shows, in the search box, type "EC2". 
@@ -69,7 +69,9 @@ The configuration should look like:
 
 ### Deploy the application
 Once the EC2 instance is ready, you can connect to it, and deploy the application. Follow these steps to connect:
+
 1. Locate the instance public IP (here this is 98.83.137.101).
+
 2. Use an SSH client to connect:
 * Open the terminal.
 * Set the appropriate permissions for the key pair file, using your own IP address:
