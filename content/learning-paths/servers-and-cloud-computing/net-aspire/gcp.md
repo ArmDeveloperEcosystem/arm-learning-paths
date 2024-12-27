@@ -26,15 +26,15 @@ The configuration setup should resemble the following:
 
 ![fig14](figures/14.png)
 
-6. Configure the Remaining Settings.
+6. Configure the Remaining Settings:
 * Availability Policies: Standard.
-* Boot Disk: Click Change, then select Ubuntu as the operating system.
+* Boot Disk: Click **Change**, then select **Ubuntu** as the operating system.
 * Identity and API Access: Keep the default settings.
-* Firewall Settings: Check Allow HTTP traffic and Allow HTTPS traffic.
+* Firewall Settings: Check **Allow HTTP traffic** and **Allow HTTPS traffic**.
 
 ![fig15](figures/15.png)
 
-7. Click the Create Button and wait for the VM to be created.
+7. Click the **Create** Button and wait for the VM to be created.
 
 ### Connecting to VM
 After creating the VM, connect to it as follows:
@@ -42,7 +42,7 @@ After creating the VM, connect to it as follows:
 
 ![fig16](figures/16.png)
 
-2. This will open a browser window. First, click the Authorize button:
+2. This opens a browser window. First, click the **Authorize** button:
 
 ![fig17](figures/17.png)
 
@@ -99,7 +99,7 @@ You will see output similar to this:
 ### Exposing the application to the Public
 To make your application publicly-accessible, configure the firewall rules:
 1. In the Google Cloud Console, navigate to **VPC Network** > **Firewall**.
-2. Click “Create Firewall Rule” and configure the following:
+2. Click **Create Firewall Rule** and configure the following:
 * Name: allow-dotnet-ports
 * Target Tags: dotnet-app
 * Source IP Ranges: 0.0.0.0/0 (for public access).

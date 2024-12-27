@@ -8,9 +8,11 @@ layout: learningpathall
 
 ## Modify the Project
 
-Now modify the project to add additional computations to mimic computationally-intensive work.
+Now you can move on to add additional computations to mimic computationally-intensive work. 
 
-You will now include additional code for the purpose of demonstrating computation intense work. Go to the `NetAspire.Arm.ApiService` project, and create a new file `ComputationService.cs`. Add the code shown below to this file:
+Go to the `NetAspire.Arm.ApiService` project, and create a new file, and name it `ComputationService.cs`. 
+
+Add the code shown below to this file:
 
 ```cs
 static class ComputationService
@@ -43,15 +45,15 @@ static class ComputationService
 }
 ```
 
-This code defines a static class, ComputationService, designed to perform computationally intensive tasks, specifically matrix multiplication. It contains a public method, PerformIntensiveCalculations, which generates two matrices of a specified size, multiplies them, and stores the resulting matrix.
+This code defines a static class, ComputationService, designed to perform computationally-intensive tasks; in particular, matrix multiplication. It contains a public method, PerformIntensiveCalculations, which generates two matrices of a specified size, multiplies them, and stores the resulting matrix.
 
-The private method GenerateMatrix creates a one-dimensional array representing a matrix of the given size (matrixSize x matrixSize). Each element in the matrix is initialized with a random double value generated using Random.Shared.NextDouble().
+* The private method, GenerateMatrix, creates a one-dimensional array representing a matrix of the given size (matrixSize x matrixSize). Each element in the matrix is initialized with a random double-value generated using Random.Shared.NextDouble().
 
-The public method PerformIntensiveCalculations multiplies two matrices (matrix1 and matrix2) element by element using nested loops and LINQ. It iterates through each row of the first matrix and each column of the second matrix, calculating the dot product for each element in the resulting matrix. The result of the multiplication is stored in a flattened one-dimensional array, matrixResult.
+* The public method, PerformIntensiveCalculations, multiplies two matrices (matrix1 and matrix2) element-by-element using nested loops and LINQ. It iterates through each row of the first matrix and each column of the second matrix, calculating the dot product for each element in the resulting matrix. The result of the multiplication is stored in a flattened one-dimensional array, called matrixResult.
 
 This code is provided for demonstrating heavy computational operations, such as large matrix manipulations, and can simulate workloads in scenarios that mimic intensive data processing or scientific calculations.
 
-Then, open the `Program.cs` file in the `NetAspire.Arm.ApiService` directory and add modify the `MapGet` function of the app as shown:
+Now open the `Program.cs` file in the `NetAspire.Arm.ApiService` directory, and modify the `MapGet` function of the app as shown:
 
 ```cs
 app.MapGet("/weatherforecast", () =>
@@ -70,7 +72,7 @@ app.MapGet("/weatherforecast", () =>
 });
 ```
 
-This will trigger matrix multiplications when you click Weather in the web frontend application.
+This triggers matrix multiplications when you select **Weather** in the web-frontend application.
 
 To test the code, re-run the application using the following command:
 
@@ -78,8 +80,8 @@ To test the code, re-run the application using the following command:
 dotnet run --project NetAspire.Arm.AppHost 
 ```
 
-Next, navigate to the web frontend, click Weather, and then return to the dashboard. Click Traces to observe that the operation now takes significantly longer to complete—approximately 4 seconds in the example below:
+Next, navigate to the web frontend, select **Weather**, and then return to the dashboard. Click **Traces** and note that the operation now takes significantly longer to complete — approximately four seconds in the example below:
 
-![fig4](figures/04.png)
+![fig4 alt-text#center](figures/04.png "Figure 4: Traces Example.")
 
 You are now ready to deploy the application to the cloud.

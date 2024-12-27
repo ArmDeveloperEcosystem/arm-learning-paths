@@ -14,7 +14,7 @@ To set up an Arm-powered EC2 instance, follow these steps:
 1. Log in to the [AWS Management Console](http://console.aws.amazon.com).
 2. Navigate to the EC2 Service. 
 
-   As shown in Figure 5, in the search box, type "EC2". 
+   As Figure 5 shows, in the search box, type "EC2". 
    
    Then, click on **EC2** in the search results:
 
@@ -26,7 +26,7 @@ To set up an Arm-powered EC2 instance, follow these steps:
 * Architecture: select **64-bit (Arm)**.
 * Instance Type: select **t4g.small**.
 
-The configuration should look like the configuration fields that are shown in Figure 6:
+The configuration should look like the configuration fields that Figure 6 shows:
 
 ![Figure 6 alt-text#center](figures/06.png "Figure 6: Configuration Fields.")
 
