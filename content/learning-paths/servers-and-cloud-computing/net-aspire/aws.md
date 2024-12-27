@@ -7,10 +7,10 @@ layout: learningpathall
 ---
 
 ### Objective
-In this section, you will learn how to deploy the .NET Aspire application on to an AWS Elastic Compute Cloud (EC2) Virtual Machine powered by Arm-based processors, such as AWS Graviton. This leverages the cost and performance benefits of Arm architecture while demonstrating the seamless deployment of cloud-native applications on modern infrastructure.
+In this section, you will learn how to deploy the .NET Aspire application on to an AWS Elastic Compute Cloud (EC2) Virtual Machine powered by Arm-based processors, such as AWS Graviton. This allows you to leverage the cost and performance benefits of Arm architecture while benefiting from the seamless deployment of cloud-native applications on modern infrastructure.
 
 ### Set up your AWS EC2 Instance
-Follow these steps to set up an Arm-powered EC2 instance:
+To set up an Arm-powered EC2 instance, follow these steps:
 1. Log in to the [AWS Management Console](http://console.aws.amazon.com).
 2. Navigate to the EC2 Service. 
 
@@ -18,9 +18,9 @@ Follow these steps to set up an Arm-powered EC2 instance:
    
    Then, click on **EC2** in the search results:
 
-![Figure 5 alt-text#center](figures/05.png "Figure 5: Search for EC2 Service in the AWS Management Console.")
+![Figure 5 alt-text#center](figures/05.png "Figure 5: Search for the EC2 Service in the AWS Management Console.")
 
-3. In the EC2 Dashboard, click **Launch Instance** and add this information to configure your setup:
+3. In the EC2 Dashboard, click **Launch Instance** and add the following information in these corresponding data fields to configure your setup:
 * Name: type "arm-server".
 * AMI: select **Arm-compatible Amazon Machine Image, Ubuntu 22.04 LTS for Arm64**.
 * Architecture: select **64-bit (Arm)**.
@@ -28,7 +28,7 @@ Follow these steps to set up an Arm-powered EC2 instance:
 
 The configuration should look like the configuration fields that are shown in Figure 6:
 
-![Figure 6 alt-text#center](figures/06.png "Figure 6: Configuration.")
+![Figure 6 alt-text#center](figures/06.png "Figure 6: Configuration Fields.")
 
 4. Scroll down to **Key pair** (login), and click **Create new key pair**. 
   This displays the "Create key pair" window. 
@@ -40,38 +40,39 @@ The configuration should look like the configuration fields that are shown in Fi
 
 ![fig7](figures/07.png)
 
-5. Scroll down to "Network Settings", and confgure the settings in this way:
+5. Scroll down to "Network Settings", and confgure the settings:
 * VPC: select the default.
-* Subnet: select no preference.
-* Auto-assign public IP: Enable.
-* Firewall: Check Create security group.
+* Subnet: select **No preference**.
+* Auto-assign public IP: **Enable**.
+* Firewall: Check **Create security group**.
 * Security group name: arm-security-group.
 * Description: arm-security-group.
 * Inbound security groups. 
 
 ![fig8](figures/08.png)
 
-6. Configure "Inbound Security Group Rules" by clicking "Add Rule" and then setting the following details:
+6. Configure "Inbound Security Group Rules" by selecting **Add Rule** and then setting the following details:
 * Type: Custom TCP.
 * Protocol: TCP.
 * Port Range: 7133.
 * Source: Select "Anywhere (0.0.0.0/0)" for public access or restrict access to your specific IP for better security.
-* Repeat this step for all three ports the application is using. This example demonstrates setup using ports 7133, 7511, and 17222. These must match the values that you have when you run the app locally.
+
+Repeat this step for all three ports that the application is using. This example demonstrates setup using ports 7133, 7511, and 17222. These must match the values that you have when you run the app locally.
 
 The configuration should look like:
 
 ![fig9](figures/09.png)
 
-7. Launch an instance by clicking the **Launch instance** button. You should see the green box with the Success label. This box also contains a link to the EC2 instance. Click it, and it will take you to the instance dashboard, which looks like Figure 10:
+7. Launch an instance by clicking the **Launch instance** button. You should see the green box with the Success label. This box also contains a link to the EC2 instance. Click it, and it takes you to the instance dashboard, which looks like Figure 10:
 
 ![fig10](figures/10.png)
 
 ### Deploy the application
-Once the EC2 instance is ready, you can connect to it and deploy the application. Follow these steps to connect:
-1. Locate the instance public IP (e.g. 98.83.137.101 in this case).
+Once the EC2 instance is ready, you can connect to it, and deploy the application. Follow these steps to connect:
+1. Locate the instance public IP (here this is 98.83.137.101).
 2. Use an SSH client to connect:
-* Open the terminal
-* Set appropriate permissions for the key pair file (remember to use your IP address)
+* Open the terminal.
+* Set the appropriate permissions for the key pair file, using your own IP address:
 ```console
 chmod 400 arm-key-pair.pem                     
 ssh -i arm-key-pair.pem ubuntu@98.83.137.101 
@@ -79,13 +80,13 @@ ssh -i arm-key-pair.pem ubuntu@98.83.137.101
 
 ![fig11](figures/11.png)
 
-You can now install required components, pull the application code from git, and launch the app:
+You can now install the required components, pull the application code from git, and launch the app:
 In the EC2 terminal run: 
 ```console
 sudo apt update && sudo apt upgrade -y
 ```
 
-This will update the package list and upgrade the installed packages.
+This updates the package list and upgrades the installed packages.
 
 Install .NET SDK using the following commands:
 ```console
@@ -99,11 +100,11 @@ Verify the installation:
 ```console
 dotnet --version
 ```
-Install the Aspire workload using the dotnet CLI
+Install the Aspire workload using the dotnet CLI:
 ```console
 dotnet workload install aspire
 ```
-Clone the repository which contains the application you created in the previous section:
+Clone the repository that contains the application that you created in the previous section:
 ```console
 git clone https://github.com/dawidborycki/NetAspire.Arm.git
 cd NetAspire.Arm/
@@ -112,13 +113,13 @@ Trust the development certificate:
 ```console
 dotnet dev-certs https --trust
 ```
- Build and run the project:
+Build and run the project:
 ```console
 dotnet restore
 dotnet run --project NetAspire.Arm.AppHost
 ```
 
-The application will run the same way as locally. You should see the following:
+The application runs the same way as it does locally. You should see the following:
 
 ![fig12](figures/12.png)
 
