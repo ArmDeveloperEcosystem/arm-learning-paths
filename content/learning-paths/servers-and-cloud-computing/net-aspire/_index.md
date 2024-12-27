@@ -3,7 +3,7 @@ title: Run a .NET Aspire application on Arm-based VMs on AWS and GCP
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for software developers interested in learning how to deploy .NET Aspire applications on Arm-based Virtual Machines (VMs) on Amazon Web Services (AWS) and Google Cloud Platform (GCP).
+who_is_this_for: This is an introductory topic for software developers interested in learning how to deploy .NET Aspire applications on Arm-based virtual machines (VMs) on Amazon Web Services (AWS) and Google Cloud Platform (GCP).
 
 learning_objectives: 
     - Describe .NET Aspire, and what it can achieve.
