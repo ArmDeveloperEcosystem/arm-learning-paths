@@ -6,9 +6,11 @@ weight: 3
 layout: learningpathall
 ---
 
-In this section, you will set up the project. This involves several steps, including installing the Aspire workload. Then, you will learn about the project structure and launch it locally. Finally, you will modify the project to add additional computations to mimic computationally-intensive work.
 
 ## Create a Project
+
+In this section, you will set up the project, which involves installing the Aspire workload.
+
 To create a .NET Aspire application, first ensure that you have [.NET 8.0 or later installed](https://dotnet.microsoft.com/en-us/download/dotnet) on your Windows on Arm development machine.
 
 To find out which version you have, open a Powershell terminal and run:
@@ -37,7 +39,6 @@ Once the Aspire workload is installed, you can create a new application by execu
 ```console
 dotnet new aspire-starter -o NetAspire.Arm
 ```
-
 This command generates a solution with the following structure:
 * **NetAspire.Arm.AppHost** - the orchestrator, or coordinator, project serves as the backbone of your distributed application. Its primary responsibilities include defining how services connect to one another, configuring ports and endpoints to ensure seamless communication, managing service discovery to enable efficient interactions between components, and handling container orchestration to streamline the deployment and operation of services within your application.
 
@@ -57,5 +58,5 @@ Configuration management offers environment-based settings that make deploying a
 
 The architecture is also tailored to improve the development experience. Developers can benefit from local debugging support and a powerful monitoring dashboard. This dashboard provides a detailed view of service health, logs, metrics, trace information, resource usage, and service dependencies. Additionally, hot reload capability allows real-time updates during development, and container support ensures consistency across local and production environments.
 
-This thoughtfully crafted architecture embodies microservices best practices, promoting scalability, maintainability, and service isolation. It not only simplifies deployment and monitoring but also fosters developer productivity by streamlining workflows and providing intuitive tools for building modern, distributed applications.
+This thoughtfully-crafted architecture embodies microservices best practices, promoting scalability, maintainability, and service isolation. It not only simplifies deployment and monitoring, but also fosters developer productivity by streamlining workflows and providing intuitive tools for building modern, distributed applications.
 

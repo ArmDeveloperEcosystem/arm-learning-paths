@@ -7,6 +7,9 @@ layout: learningpathall
 ---
 
 ## Modify the Project
+
+Now modify the project to add additional computations to mimic computationally-intensive work.
+
 You will now include additional code for the purpose of demonstrating computation intense work. Go to the `NetAspire.Arm.ApiService` project, and create a new file `ComputationService.cs`. Add the code shown below to this file:
 
 ```cs

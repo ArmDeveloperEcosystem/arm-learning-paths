@@ -5,7 +5,6 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
 ## Run the Project
 The application will issue a certificate. Before you run the application, add support to trust the HTTPS development certificate by running:
  
