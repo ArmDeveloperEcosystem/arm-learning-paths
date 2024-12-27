@@ -1,6 +1,6 @@
 ---
 title: Deploy to AWS EC2
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
