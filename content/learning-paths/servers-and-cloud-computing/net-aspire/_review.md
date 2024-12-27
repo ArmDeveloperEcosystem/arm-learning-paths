@@ -24,7 +24,7 @@ review:
 
     - questions:
         question: >
-            In Google Cloud Platform, which series should you select to use an Arm64 processor for your VM?
+            In Google Cloud Platform, which series should you select to use an Arm64 processor for the VM?
         answers:
             - T2A (Ampere Altra Arm).
             - E2 (General Purpose).
