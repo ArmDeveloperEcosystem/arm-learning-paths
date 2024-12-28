@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 ## Introduction to PyTorch
 
-PyTorch is an open-source deep learning framework that is developed by Meta AI and is now part of the Linux Foundation.
+PyTorch is an open source deep learning framework that is developed by Meta AI and is now part of the Linux Foundation.
 
 PyTorch is designed to provide a flexible and efficient platform for building and training neural networks. It is widely used due to its dynamic computational graph, which allows users to modify the architecture during runtime, making debugging and experimentation easier. 
 
@@ -28,31 +28,31 @@ In this Learning Path, you will explore how to use PyTorch to create and train a
 
 ## Before you begin
 
-Before you begin make sure Python3 is installed on your system. You can check this by running:
+Before you begin, make sure Python3 is installed on your system. You can check this by running:
 
 ```console
 python3 --version
 ```
 
-The expected output is the Python version, for example:
+You should then see the Python version output, for example:
 
 ```output
 Python 3.11.2
 ```
 
-If Python3 is not installed, download and install it from [python.org](https://www.python.org/downloads/). 
+If Python3 is not installed, you can download and install it from [python.org](https://www.python.org/downloads/). 
 
 Alternatively, you can also install Python3 using package managers such as Homebrew or APT. 
 
-If you are using Windows on Arm you can refer to the [Python install guide](https://learn.arm.com/install-guides/py-woa/).
+If you are using Windows on Arm, see the [Python install guide](https://learn.arm.com/install-guides/py-woa/).
 
-Next, download and install [Visual Studio Code](https://code.visualstudio.com/download).
+Next, if you do not already have it, download and install [Visual Studio Code](https://code.visualstudio.com/download).
 
 ## Install PyTorch and additional Python packages
 
 To prepare a virtual Python environment, install PyTorch, and the additional tools you will need for this Learning Path:
 
-1. Open a terminal or command prompt and navigate to your project directory. 
+1. Open a terminal or command prompt, and navigate to your project directory. 
 
 2. Create a virtual environment by running:
 
@@ -60,7 +60,7 @@ To prepare a virtual Python environment, install PyTorch, and the additional too
 python -m venv pytorch-env
 ```
 
-This will create a virtual environment named pytorch-env. 
+This will create a virtual environment named `pytorch-env`. 
 
 3. Activate the virtual environment:
 
@@ -74,7 +74,7 @@ pytorch-env\Scripts\activate
 source pytorch-env/bin/activate
 ```
 
-Once activated, you see the virtual environment name `(pytorch-env)` before your terminal prompt.
+Once activated, you can see the virtual environment name `(pytorch-env)` before your terminal prompt.
 
 3. Install PyTorch using Pip:
 
@@ -98,20 +98,20 @@ python3 -m ipykernel install --user --name=pytorch-env
 
 6. Install the Jupyter Extension in VS Code:
 
-* Open VS Code and go to the Extensions view (click on the Extensions icon or press Ctrl+Shift+X).
+* Open VS Code and go to the **Extensions** view, by clicking on the **Extensions** icon or pressing Ctrl+Shift+X.
 
 * Search for “Jupyter” and install the official Jupyter extension.
 
-* Optionally, also install the Python extension if you haven’t already, as it improves Python language support in VS Code.
+* Optionally, also install the Python extension if you have not already, as it improves Python language support in VS Code.
 
-To ensure everything is set up correctly:
+To ensure everything is set up correctly, follow these next steps:
 
 1. Open Visual Studio Code. 
-2. Click New file, and select `Jupyter Notebook .ipynb Support`.
+2. Click **New file**, and select `Jupyter Notebook .ipynb Support`.
 3. Save the file as `pytorch-digits.ipynb`.
-4. Select the Python kernel you created earlier (pytorch-env). To do so, click Kernels in the top right corner. Then, click Jupyter Kernel..., and you will see the Python kernel as shown below:
+4. Select the Python kernel you created earlier, `pytorch-env`. To do so, click **Kernels** in the top right-hand corner. Then, click **Jupyter Kernel...**, and you will see the Python kernel as shown below:
 
-![img1](Figures/1.png)
+![img1 alt-text#center](Figures/1.png "Figure 1: Python kernel.")
 
 5. In your Jupyter notebook, run the following code to verify PyTorch is working correctly:
 
@@ -121,6 +121,6 @@ print(torch.__version__)
 ```
 
 It will look as follows:
-![img2](Figures/2.png)
+![img2 alt-text#center](Figures/2.png "Figure 2: Jupyter Notebook.")
 
 With your development environment created, you can proceed to creating a PyTorch model.
