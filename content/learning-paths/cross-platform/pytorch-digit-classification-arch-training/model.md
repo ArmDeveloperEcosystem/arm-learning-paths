@@ -7,15 +7,15 @@ weight: 3
 layout: "learningpathall"
 ---
 
-You can create and train a feedforward neural network to classify handwritten digits from the MNIST dataset. This dataset contains 70,000 images, comprised of 60,000 training images and 10,000 testing images, of handwritten numerals (0-9), each with dimensions of 28x28 pixels. Some representative MNIST digits with their corresponding labels are shown below.
+You can create and train a feedforward neural network to classify handwritten digits from the MNIST dataset (Modified National Institute of Standards and Technology database). This dataset contains 70,000 images, comprised of 60,000 training images and 10,000 testing images, of handwritten numerals (0-9), each with dimensions of 28x28 pixels. Some representative MNIST digits with their corresponding labels are shown below.
 
-![img3](Figures/3.png)
+![img3 alt-text#center](Figures/3.png "Figure 3: MNIST Digits and Labels.")
 
-The neural network begins with an input layer containing 28x28 = 784 input nodes, with each node accepting a single pixel from an MNIST image. 
+The neural network begins with an input layer containing 28x28 = 784 input nodes, with each node accepting a single pixel from a MNIST image. 
 
 You will add a linear hidden layer with 96 nodes, using the hyperbolic tangent (tanh) activation function. To prevent overfitting, a dropout layer is applied, randomly setting 20% of the nodes to zero.
 
-You will then include another hidden layer with 256 nodes, followed by a second dropout layer that again removes 20% of the nodes. Finally, the output layer consists of ten nodes, each representing the probability of recognizing one of the digits (0-9).
+You will then include another hidden layer with 256 nodes, followed by a second dropout layer that again removes 20% of the nodes. Finally, you will reach a situation where the output layer consists of ten nodes, each representing the probability of recognizing one of the digits (0-9).
 
 The total number of trainable parameters for this network is calculated as follows:
 
@@ -23,7 +23,7 @@ The total number of trainable parameters for this network is calculated as follo
 * Second hidden layer:  96 x 256 + 256 = 24,832 parameters.
 * Output layer:  256 x 10 + 10 = 2,570 parameters.
 
-In total, the network will have 102,762 trainable parameters.
+So in total, the network has 102,762 trainable parameters.
 
 # Implementation
 
@@ -75,7 +75,7 @@ The network consists of:
 * Another Dropout layer, that removes 20% of the nodes.
 * A final Linear layer, with 10 nodes (matching the number of classes in the dataset), followed by a Softmax activation function that outputs class probabilities.
 
-2. forward method 
+2. Forward method 
 
 This method defines the forward pass of the network. It takes an input tensor x, flattens it using self.flatten, and then passes it through the defined sequential stack of layers (self.linear_stack). 
 
@@ -91,7 +91,7 @@ summary(model, (1, 28, 28))
 
 After running the notebook, you will see the following output:
 
-![img4](Figures/4.png)
+![img4 alt-text#center](Figures/4.png "Figure 4: Notebook Output.")
 
 You will see a detailed summary of the NeuralNetwork model’s architecture, including the following information:
 
