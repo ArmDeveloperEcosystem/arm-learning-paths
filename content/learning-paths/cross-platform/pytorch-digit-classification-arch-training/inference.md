@@ -7,18 +7,18 @@ weight: 6
 layout: "learningpathall"
 ---
 
-The inference process involves using a trained model to make predictions on new, unseen data. It typically follows these steps:
+You can use a trained model to make predictions on new, unseen data. This is called the inference process, and it typically follows these steps:
 
-1. **Load the Trained Model**: the model, along with its learned parameters - weights and biases - is loaded from a saved file.
-2. **Prepare the Input Data**: the input data is pre-processed in the same way as during training, for example, normalization and tensor conversion, to ensure compatibility with the model.
-3. **Make Predictions**: the pre-processed data is fed into the model, which computes the output based on its trained parameters. The output is often a probability distribution over possible classes.
-4. **Interpret the Results**: the predicted class is usually the one with the highest probability. The results can then be used for further analysis or decision-making.
+1. **Load the Trained Model**: firstly, you load the model with its learned weights and biases, the parameters, from a saved file. 
+2. **Prepare the Input Data**: next, the input data is pre-processed in the same way as during training, for example, normalization and tensor conversion, to ensure compatibility with the model.
+3. **Make Predictions**: then the pre-processed data is fed into the model, which computes the output based on its trained parameters. The output is often a probability distribution over possible classes.
+4. **Interpret the Results**: finally, you can interpret the results. The predicted class is usually the one with the highest probability. You can then use the results for further analysis or decision-making.
 
 This process allows the model to generalize its learned knowledge to make accurate predictions on new data.
 
 # Running inference in PyTorch
 
-You can inference in PyTorch using the previously saved model. To display results, you can use matplotlib. 
+You can run inference in PyTorch using the previously-saved model. You can then use matplotlib to display the results. 
 
 Start by installing matplotlib package:
 
@@ -26,7 +26,7 @@ Start by installing matplotlib package:
 pip install matplotlib
 ```
 
-Use Visual Studio Code to create a new file named `pytorch-digits-inference.ipynb` and modify the file to include the code below:
+Use Visual Studio Code to create a new file named `pytorch-digits-inference.ipynb`, and modify the file to include the code below:
 
 ```python
 import torch
@@ -83,11 +83,17 @@ plt.tight_layout()
 plt.show()
 ```
 
-The above code performs inference on the saved PyTorch model using 16 randomly-selected images from the MNIST test dataset and displays them along with their actual and predicted labels.
+This code detailed above performs inference on the saved PyTorch model using 16 randomly-selected images from the MNIST test dataset, and then displays them alongside their actual and predicted labels.
 
-As before, start by importing the necessary Python libraries: torch, datasets, transforms, matplotlib.pyplot, and random. Torch is used for loading the model and performing tensor operations. Datasets and transforms from torchvision are used for loading and transforming the MNIST dataset. Use matplotlib.pyplot for plotting and displaying images, and random is used for selecting random images from the dataset.
+As before, start by importing the necessary Python libraries: 
 
-Next, load the MNIST test dataset using datasets.MNIST() with train=False to specify that it’s the test data. The dataset is automatically downloaded if it’s not available locally.
+* Torch - used for loading the model and performing tensor operations.
+* Datasets - used for loading the MNIST dataset.
+* Transforms - used for transforming the MNIST dataset. 
+* Matplotlib.pyplot - used for plotting and displaying images. 
+* Random - used for selecting random images from the dataset.
+
+Next, load the MNIST test dataset using datasets.MNIST() with train=False to specify that it is the test data. The dataset is automatically downloaded if it is not available locally.
 
 Load the saved model using torch.jit.load("model.pth") and set the model to evaluation mode using model.eval(). This ensures that layers like dropout and batch normalization behave appropriately during inference.
 
