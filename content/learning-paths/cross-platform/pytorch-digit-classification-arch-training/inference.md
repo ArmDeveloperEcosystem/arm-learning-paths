@@ -83,23 +83,23 @@ plt.tight_layout()
 plt.show()
 ```
 
-This code detailed above performs inference on the saved PyTorch model using 16 randomly-selected images from the MNIST test dataset, and then displays them alongside their actual and predicted labels.
+The code detailed above performs inference on the saved PyTorch model using 16 randomly-selected images from the MNIST test dataset, and then displays them alongside their actual and predicted labels.
 
 As before, start by importing the necessary Python libraries: 
 
-* Torch - used for loading the model and performing tensor operations.
-* Datasets - used for loading the MNIST dataset.
-* Transforms - used for transforming the MNIST dataset. 
-* Matplotlib.pyplot - used for plotting and displaying images. 
-* Random - used for selecting random images from the dataset.
+* Torch - for loading the model and performing tensor operations.
+* Datasets - for loading the MNIST dataset.
+* Transforms - for transforming the MNIST dataset. 
+* Matplotlib.pyplot - for plotting and displaying images. 
+* Random - for selecting random images from the dataset.
 
-Next, load the MNIST test dataset using datasets.MNIST() with train=False to specify that it is the test data. The dataset is automatically downloaded if it is not available locally.
+Next, load the MNIST test dataset using `datasets.MNIST()` with `train=False` to specify that it is the test data. The dataset is automatically downloaded if it is not available locally.
 
-Load the saved model using torch.jit.load("model.pth") and set the model to evaluation mode using model.eval(). This ensures that layers like dropout and batch normalization behave appropriately during inference.
+Load the saved model using `torch.jit.load("model.pth")` and set the model to evaluation mode using `model.eval()`. This ensures that layers like dropout and batch normalization behave appropriately during inference.
 
 Subsequently, select 16 random images and create a 4x4 grid of subplots using plt.subplots(4, 4, figsize=(12, 12)) for displaying the images.
 
-Afterwards, perform inference and display the images in a loop. Specifically, for each of the 16 selected images, the image and its label are retrieved from the dataset using the random index. The image tensor is expanded to include a batch dimension (image.unsqueeze(0)) because the model expects a batch of images. Inference is performed with model(image_batch) to get the prediction. The predicted label is determined using torch.argmax() to find the index of the maximum probability in the output. Each image is displayed in its respective subplot with the actual and predicted labels. We use plt.tight_layout() to ensure that the layout is adjusted nicely, and plt.show() to display the 16 images with their actual and predicted labels.
+Afterwards, perform inference and display the images in a loop. Specifically, for each of the 16 selected images, the image and its label are retrieved from the dataset using the random index. The image tensor is expanded to include a batch dimension (image.unsqueeze(0)) because the model expects a batch of images. Inference is performed with model(image_batch) to get the prediction. The predicted label is determined using torch.argmax() to find the index of the maximum probability in the output. Each image is displayed in its respective subplot with the actual and predicted labels. You can use plt.tight_layout() to ensure that the layout is adjusted nicely, and plt.show() to display the 16 images with their actual and predicted labels.
 
 This code demonstrates how to use a saved PyTorch model for inference and visualization of predictions on a subset of the MNIST test dataset.
 
