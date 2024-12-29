@@ -7,10 +7,10 @@ weight: 6
 layout: "learningpathall"
 ---
 
-You can use a trained model to make predictions on new, unseen data. This is called the inference process, and it typically follows these steps:
+You can use a trained model to make predictions on new, unseen data. The model uses a process called inference, and it typically follows these steps:
 
-1. **Load the Trained Model**: firstly, you load the model with its learned weights and biases, the parameters, from a saved file. 
-2. **Prepare the Input Data**: next, the input data is pre-processed in the same way as during training, for example, normalization and tensor conversion, to ensure compatibility with the model.
+1. **Load the Trained Model**: firstly, you load the model with its parameters that consist of learned weights and biases, from a saved file. 
+2. **Prepare the Input Data**: next, the input data is pre-processed in the same way as during training, for example, undergoing normalization and tensor conversion, to ensure compatibility with the model.
 3. **Make Predictions**: then the pre-processed data is fed into the model, which computes the output based on its trained parameters. The output is often a probability distribution over possible classes.
 4. **Interpret the Results**: finally, you can interpret the results. The predicted class is usually the one with the highest probability. You can then use the results for further analysis or decision-making.
 
