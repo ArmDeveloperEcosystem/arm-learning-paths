@@ -1,5 +1,5 @@
 ---
-title: ML profiling of a LiteRT model with ExecuteNetwork
+title: ML Profiling of a LiteRT model with ExecuteNetwork
 weight: 6
 
 ### FIXED, DO NOT MODIFY
