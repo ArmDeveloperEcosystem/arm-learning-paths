@@ -9,15 +9,18 @@ layout: "learningpathall"
 
 ## PyTorch model training
 
-In the previous section, you created a feedforward neural network for digit classification using the MNIST dataset. The network was left untrained and lacks the ability to make accurate predictions. 
+In the previous section, you created a feedforward neural network for digit classification using the MNIST dataset. To enable the network to recognize handwritten digits effectively and make accurate predictions, training is needed. 
 
-To enable the network to recognize handwritten digits effectively, training is needed. Training in PyTorch involves configuring the network's parameters, such as weights and biases, by exposing the model to labeled data and iteratively adjusting these parameters to minimize prediction errors. This process allows the model to learn the patterns in the data, enabling it to make accurate classifications on new, unseen inputs.
+Training in PyTorch involves exposing the model to labeled data and iteratively configuring the network's parameters, such as the weights and biases, to reduce the number of prediction errors. This process allows the model to learn the patterns in the data, enabling it to make accurate classifications on new, unseen inputs.
 
-The typical approach to training a neural network in PyTorch involves several key steps. 
+The typical approach to training a neural network in PyTorch involves several key steps: 
 
-First, obtain and preprocess the dataset, which usually includes normalizing the data and converting it into a format suitable for the model. 
-
-Next, the dataset is split into training and testing subsets. Training data is used to update the model's parameters, while testing data evaluates its performance. During training, feed batches of input data through the network, calculate the prediction error or loss using a loss function (such as cross-entropy for classification tasks), and optimize the model's weights and biases using backpropagation. Backpropagation involves computing the gradient of the loss with respect to each parameter and then updating the parameters using an optimizer, like Stochastic Gradient Descent (SGD) or Adam. This process is repeated for multiple epochs until the model achieves satisfactory performance, balancing accuracy and generalization.
+* Firstly, preprocess the dataset, which often involves normalizing the data and converting it into a format suitable for the model.
+* Next, split the dataset into training and testing subsets. Training data is used to update the model's parameters, while testing data evaluates its performance.
+* Feed batches of input data through the network.
+* Calculate the prediction error or loss using a loss function (such as cross-entropy for classification tasks).
+* Optimize the model's weights and biases using backpropagation. Backpropagation involves computing the gradient of the loss with respect to each parameter and then updating the parameters using an optimizer, like Stochastic Gradient Descent (SGD) or Adam.
+* Repeat the process for multiple epochs until the model achieves satisfactory performance, balancing accuracy and generalization.
 
 ### Loss, gradients, epoch and backpropagation
 
