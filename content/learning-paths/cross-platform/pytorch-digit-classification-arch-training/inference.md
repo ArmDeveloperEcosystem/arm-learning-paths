@@ -9,13 +9,13 @@ layout: "learningpathall"
 
 You can use a trained model to make predictions on new, unseen data. The model uses a process called inference, and it typically follows these steps:
 
-1. **Load the Trained Model**: firstly, you load the model with its parameters that consist of learned weights and biases, from a saved file. 
+1. **Load the Trained Model**: load the trained model with its parameters that consist of learned weights and biases, from a saved file. 
 
-2. **Prepare the Input Data**: next, the input data is pre-processed in the same way as during training, for example, undergoing normalization and tensor conversion, to ensure compatibility with the model.
+2. **Prepare the Input Data**: prepare the input data with pre-processing in the same way as during training. For example, undergoing normalization and tensor conversion, to ensure compatibility with the model.
 
-3. **Feed Pre-Processed Data into the Model to compute predictions**: then the pre-processed data is fed into the model, which computes the output based on its trained parameters. The output is often a probability distribution over possible classes.
+3. **Feed Pre-Processed Data into the Model to compute predictions**: feed the pre-processed data into the model, which then computes the output based on its trained parameters. The output is often a probability distribution over possible classes.
 
-4. **Interpret the Results**: finally, you can interpret the results. The predicted class is usually the one with the highest probability. You can then use the results for further analysis or decision-making.
+4. **Interpret the Results**: finally, you can interpret the results. The predicted class is usually the one with the highest probability. You can also use the results for further analysis or decision-making.
 
 This process allows the model to generalize its learned knowledge to make accurate predictions on new data.
 
@@ -86,7 +86,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-The code detailed above performs inference on the saved PyTorch model using 16 randomly-selected images from the MNIST test dataset, and then displays them alongside their predicted and actual labels.
+This code performs inference on the saved PyTorch model using 16 randomly-selected images from the MNIST test dataset, and then displays them alongside their predicted and actual labels.
 
 As before, start by importing the necessary Python libraries: 
 
