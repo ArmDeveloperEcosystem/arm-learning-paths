@@ -89,7 +89,7 @@ camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "
 
 {{% notice Tip %}}
 
-You may also click the __"Sync Project with Gradle Files"__ button in the toolbar or pressing the corresponding shorcut to start a sync.
+You may also click the __"Sync Project with Gradle Files"__ button in the toolbar or pressing the corresponding shortcut to start a sync.
 
 ![Sync Project with Gradle Files](images/2/sync%20project%20with%20gradle%20files.png)
 {{% /notice %}}
