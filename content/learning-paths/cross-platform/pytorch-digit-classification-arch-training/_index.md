@@ -3,7 +3,7 @@ title: Create and train a PyTorch model for digit classification
 
 minutes_to_complete: 160
 
-who_is_this_for: This is an advanced topic for software developers interested in learning how to use PyTorch to create and train a feedforward neural network for digit classification. You will also learn how to use the trained model in an Android application. Finally, you will apply model optimizations.
+who_is_this_for: This is an advanced topic for software developers interested in learning how to use PyTorch to create and train a feedforward neural network for digit classification, and also software developers interested in learning how to use and apply optimizations to the trained model in an Android application.
 
 learning_objectives:
     - Prepare a PyTorch development environment.
