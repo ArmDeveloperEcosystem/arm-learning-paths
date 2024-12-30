@@ -15,7 +15,7 @@ Training in PyTorch involves exposing the model to labeled data and iteratively 
 
 The typical approach to training a neural network in PyTorch involves several key steps: 
 
-* Pre-process the dataset, for example normalize the data and convert it into a suitable format.
+* Preprocess the dataset, for example normalize the data and convert it into a suitable format.
 
 * Divide the dataset into training and testing subsets. You can use training data to update the model's parameters, and testing data to evaluate its performance.
 
