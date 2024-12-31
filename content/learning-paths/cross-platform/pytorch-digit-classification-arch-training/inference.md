@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Use the model for inference"
+title: "Deploy the Model for Inference"
 
 weight: 6
 
@@ -110,11 +110,11 @@ After running the code, you should see results similar to the following figure:
 
 ![image](Figures/03.png)
 
-# What have you learned?
+### What have you learned?
 
 You have completed the process of training and using a PyTorch model for digit classification on the MNIST dataset. Using the training dataset, you optimized the model’s weights and biases over multiple epochs. You employed the `CrossEntropyLoss` function and the `Adam optimizer` to minimize prediction errors and improve accuracy. You periodically evaluated the model on the test dataset to monitor its performance, ensuring it was learning effectively without overfitting.
 
-After training, you saved the model using `TorchScript`, which captures both the model’s architecture and its learned parameters. This improved the flexibility of the model; making it portable and able to function independently of the original class definition, which simplifyies deployment.
+After training, you saved the model using `TorchScript`, which captures both the model’s architecture and its learned parameters. This improved the flexibility of the model; making it portable and able to function independently of the original class definition, which simplifies deployment.
 
 Next, you performed inference. You loaded the saved model and set it to evaluation mode to ensure that layers like dropout and batch normalization behaved correctly during inference. You randomly selected 16 images from the MNIST test dataset to evaluate the model’s performance on unseen data. For each selected image, you used the model to predict the digit, comparing the predicted labels with the actual ones. You displayed the images alongside their actual and predicted labels in a 4x4 grid, visually assessing the model’s accuracy and performance.
 
