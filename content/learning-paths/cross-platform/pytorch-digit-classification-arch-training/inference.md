@@ -108,7 +108,7 @@ This code demonstrates how to use a saved PyTorch model for inference and visual
 
 After running the code, you should see results similar to the following figure:
 
-![image](Figures/03.png "Figure 6. Example image caption")
+![image](Figures/03.png "Figure 6. Results Displayed")
 
 ### What have you learned?
 
