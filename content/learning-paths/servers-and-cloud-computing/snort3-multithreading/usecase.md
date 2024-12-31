@@ -253,7 +253,7 @@ trace(v1): inline unpriv wrapper
   file <arg> - Filename to write text traces to (default: inline-out.txt)
 ```
 
-For testing, you can use `--daq dump` to analyze Pthe CAP files.
+For testing, you can use `--daq dump` to analyze the CAP files.
 
 #### Spawn Snort 3 process with multithreading
 
