@@ -232,11 +232,11 @@ This would allow the model to take full advantage of the device's computational 
 
 ![fig](Figures/08.jpg)
 
-# What have you learned?
+### What have you learned?
 
 You have successfully optimized a neural network model for mobile inference using quantization and layer fusion. 
 
-Quantization and layer fusion removed unnecessary elements such as dropout layers during inference. 
+Quantization and layer fusion removes unnecessary elements such as dropout layers during inference. 
 
 By running multiple iterations of the inference process, you learned that the optimized model significantly reduced the average inference time to around 65% of the original time. 
 
