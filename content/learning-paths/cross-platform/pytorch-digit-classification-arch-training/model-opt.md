@@ -57,7 +57,7 @@ class NeuralNetwork(nn.Module):
         return x  # Outputs raw logits
 ```
 
-This code defines a neural network in PyTorch for digit classification, consisting of three linear layers with ReLU activations and optional dropout layers for regularization. The network first flattens the input, that is a 28x28 image, and passes it through two linear layers, each followed by a ReLU activation and if enbaled, a dropout layer. The final layer produces raw logits as the output. Notably, the softmax layer has been removed to enable quantization and layer fusion during model optimization, allowing better performance when deploying the model on mobile or edge devices. 
+This code defines a neural network in PyTorch for digit classification, consisting of three linear layers with ReLU activations and optional dropout layers for regularization. The network first flattens the input, that is a 28x28 image, and passes it through two linear layers, each followed by a ReLU activation and if enabled, a dropout layer. The final layer produces raw logits as the output. Notably, the softmax layer has been removed to enable quantization and layer fusion during model optimization, allowing better performance when deploying the model on mobile or edge devices. 
 
 The output is left as logits, and the softmax function can be applied during post-processing, particularly during inference.
 
