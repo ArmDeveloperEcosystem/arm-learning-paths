@@ -74,7 +74,7 @@ A directory named `mnist_bitmaps` is created to store the images. A dictionary t
 
 The loop breaks once the specified number of examples per digit is saved, ensuring that exactly 20 images, two per digit, are generated and stored in the specified directory.
 
-{% notice Note %}}
+{{% notice Note %}}
 This data is included in the [GitHub repository](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference.git)
 {{% /notice %}}
 

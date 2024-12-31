@@ -15,7 +15,7 @@ Start by creating a new notebook named `pytorch-digits-model-optimizations.ipynb
 
 Then define the model architecture using the code below. 
 
-{% notice Note%}}
+{{% notice Note%}}
 You can also find the source code on [GitHub](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference.Python).
 {{% /notice %}}
 
