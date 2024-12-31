@@ -1,6 +1,5 @@
 ---
 title: Skopeo
-draft: true
 author_primary: Jason Andrews
 minutes_to_complete: 10
 official_docs: https://github.com/containers/skopeo
