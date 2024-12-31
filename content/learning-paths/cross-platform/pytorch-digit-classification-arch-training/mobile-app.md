@@ -228,9 +228,9 @@ This optimization showcases the benefits of quantization and layer fusion for mo
 
 This would allow the model to take full advantage of the device's computational capabilities, potentially further reducing the inference time.
 
-![fig](Figures/07.jpg)
+![fig alt-text#center](Figures/07.jpg "Figure 9.")
 
-![fig](Figures/08.jpg)
+![fig alt-text#center](Figures/08.jpg "Figure 10.")
 
 ### What have you learned?
 
