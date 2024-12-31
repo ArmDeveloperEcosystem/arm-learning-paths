@@ -15,7 +15,7 @@ To add the model, create a folder named `assets` in the `app/src/main` folder.
 
 Copy the pre-trained model, named `model.pth`, to the `assets` folder.  
 
-The model is also available in the [GitHub repository](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference.git) if you need to copy it.
+The model is also available in the [GitHub repository](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference.git) if you require it.
 
 ## Image data
 
