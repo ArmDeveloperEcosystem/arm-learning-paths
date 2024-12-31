@@ -3382,7 +3382,7 @@ Dsouza
 FGCT
 GCT
 GCs
-GC’s
+GC's
 HNso
 HeapRegionSize
 HugePages
@@ -3428,7 +3428,6 @@ EOF
 EVCLI
 EVidence
 Evcli
-GC’s
 GenerateMatrix
 ImageCapture
 InputStream
@@ -3453,6 +3452,7 @@ TestOpenCV
 TrustedFirmware
 Veraison
 WeatherForecast
+weatherForecast
 WebGPU's
 Wiredtiger
 androidml
