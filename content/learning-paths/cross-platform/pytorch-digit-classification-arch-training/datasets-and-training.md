@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Perform training and save the model"
+title: "Perform Training and Save the Model"
 
 weight: 5
 
@@ -74,7 +74,7 @@ After running the code, you will see output similar to Figure 1:
 
 ![image alt-text#center](Figures/01.png "Figure 1. Output 1".)
 
-# Train the model
+## Train the Model
 
 To train the model, specify the loss function and the optimizer:
 
