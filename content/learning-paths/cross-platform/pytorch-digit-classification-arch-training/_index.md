@@ -1,5 +1,5 @@
 ---
-title: Create and train a PyTorch model for digit classification
+title: Create and train a PyTorch model for digit classification using the MNIST dataset
 
 minutes_to_complete: 160
 
@@ -16,7 +16,7 @@ learning_objectives:
     - Deploy an optimized model in an Android application.
 
 prerequisites:
-    - A computer that can run Python3, Visual Studio Code, and Android Studio. 
+    - A machine that can run Python3, Visual Studio Code, and Android Studio. 
     - For the OS, you can use Windows, Linux, or macOS.
   
 
