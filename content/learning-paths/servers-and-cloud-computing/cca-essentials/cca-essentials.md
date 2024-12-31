@@ -20,7 +20,7 @@ The role of the KBS is to be a repository for encryption keys or other confident
 
 The workload that runs inside the realm is a client of the KBS. It calls the KBS to request a secret, but the KBS does not return the secret immediately. Instead, it issues an attestation challenge back to the client. The client must respond with evidence in the form of a [CCA attestation token](/learning-paths/servers-and-cloud-computing/cca-container/cca-container/#obtain-a-cca-attestation-token-from-the-virtual-guest-in-a-realm).
 
-When the KBS receives an attestation token from the realm, it needs to call a verification service that checks the token's cryptographic signature and verifies that it denotes a confidential computing platform. As you saw in the prerequisite reading [Introduction to CCA Attestation with Veraison Learning Path](/learning-paths/servers-and-cloud-computing/cca-veraison), Linaro provides such an attestation verifier for use with pre-silicon CCA platforms. This verifier is built from the open-source [Veraison project](https://github.com/veraison). The KBS calls this verifier to obtain an attestation result. The KBS then uses this result to decide whether to release the secrets into the realm for processing.
+When the KBS receives an attestation token from the realm, it needs to call a verification service that checks the token's cryptographic signature and verifies that it denotes a confidential computing platform. As you saw in the prerequisite reading Learning Path [Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison), Linaro provides such an attestation verifier for use with pre-silicon CCA platforms. This verifier is built from the Open-Source [Veraison project](https://github.com/veraison). The KBS calls this verifier to obtain an attestation result. The KBS then uses this result to decide whether to release the secrets into the realm for processing.
 
 For additional security, the KBS does not release any secrets in clear text, even after a successful verification of the attestation token. Instead, the realm provides an additional public encryption key to the KBS. This is known as a wrapping key. The KBS uses this public key to wrap, which here means encrypt, the secrets. The client workload inside the realm is then able to use its own private key to unwrap the secrets and use them.
 
@@ -32,6 +32,6 @@ The attestation verification service is hosted by Linaro, so it is not necessary
 
 Figure 1 demonstrates the software architecture that you will construct to run the attestation example.
 
-![cca-essentials](cca-essentials.png "Figure 1: Software architecture for running attestation")
+![cca-essentials](cca-essentials.png "Figure 1: Software architecture for running attestation.")
 
 You can now proceed to the next section to run the end-to-end attestation example with the software components and architecture as described here.

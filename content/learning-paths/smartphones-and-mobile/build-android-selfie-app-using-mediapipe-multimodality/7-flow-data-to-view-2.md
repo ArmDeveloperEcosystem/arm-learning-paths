@@ -25,7 +25,7 @@ Therefore, `StateFlow` is a specialized type of `SharedFlow` that represents a s
     val gestureOk: StateFlow<Boolean> = _gestureOk
 ```
 
-2. Append the following constant values to `MainViewModel`'s companion object. In this demo app, we are only focusing on smiling faces and thumb-up gestures.
+2. Append the following constant values to `MainViewModel`'s companion object. In this demo app, you will focus on smiling faces and thumb-up gestures.
 
 ```kotlin
         private const val FACE_CATEGORY_MOUTH_SMILE = "mouthSmile"
@@ -75,7 +75,7 @@ Therefore, `StateFlow` is a specialized type of `SharedFlow` that represents a s
     <string name="condition_indicator_text_gesture">Gesture</string>
 ```
 
-2. In the same directory, create a new resource file named `dimens.xml` if not exist, which is used to define layout related dimension values:
+2. In the same directory, create a new resource file named `dimens.xml` if it does not exist. This file is used to define layout related dimension values:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -85,7 +85,7 @@ Therefore, `StateFlow` is a specialized type of `SharedFlow` that represents a s
 </resources>
 ```
 
-3. Navigate to `activity_main.xml` layout file and add the following code to the root `ConstraintLayout`, **below** the two overlay views which you just added in the previous chapter.
+3. Navigate to `activity_main.xml` layout file and add the following code to the root `ConstraintLayout`. Add this code after the two overlay views which you just added in the previous section.
 
 ```xml
     <androidx.appcompat.widget.SwitchCompat
@@ -111,7 +111,7 @@ Therefore, `StateFlow` is a specialized type of `SharedFlow` that represents a s
         app:layout_constraintBottom_toBottomOf="parent" />
 ```
 
-4. Finally, navigate to `MainActivity.kt` and append the following code inside `repeatOnLifecycle(Lifecycle.State.RESUMED)` block, **below** the `launch` block you just added in the previous chapter. This makes sure each of the **three** parallel `launch` runs in its own Coroutine concurrently without blocking each other.
+4. Finally, navigate to `MainActivity.kt` and append the following code inside `repeatOnLifecycle(Lifecycle.State.RESUMED)` block, after the `launch` block you just added in the previous section. This makes sure each of the three parallel `launch` run in its own co-routine concurrently without blocking each other.
 
 ```kotlin
                 launch {
@@ -127,7 +127,7 @@ Therefore, `StateFlow` is a specialized type of `SharedFlow` that represents a s
                 }
 ```
 
-5. Build and run the app again. Now you should be seeing two switches on the bottom of the screen as shown below, which turns on and off while you smile and show thumb-up gestures. Good job!
+5. Build and run the app again. Now you should see two switches on the bottom of the screen as shown below, which turn on and off while you smile and show thumb-up gestures. Good job!
 
 ![indicator UI](images/7/indicator%20ui.png)
 
@@ -135,7 +135,7 @@ Therefore, `StateFlow` is a specialized type of `SharedFlow` that represents a s
 
 This app uses `SharedFlow` for dispatching overlay views' UI events without mandating a specific stateful model, which avoids redundant computation. Meanwhile, it uses `StateFlow` for dispatching condition switches' UI states, which prevents duplicated emission and consequent UI updates.
 
-Here's a breakdown of the differences between `SharedFlow` and `StateFlow`:
+Here's a overview of the differences between `SharedFlow` and `StateFlow`:
 
 |  | SharedFlow | StateFlow |
 | --- | --- | --- |

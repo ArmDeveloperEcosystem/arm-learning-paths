@@ -1,36 +1,36 @@
 ---
 # User change
-title: "Optimizing neural network models in PyTorch"
+title: "Optimizing Neural Network Models in PyTorch"
 
 weight: 11
 
 layout: "learningpathall"
 ---
 
-## Optimizing models
+## Optimizing Models
 
 Optimizing models is crucial to achieving efficient performance while minimizing resource consumption. 
 
-Because mobile and edge devices can have limited computational power, memory, and energy availability, various strategies are used to ensure that ML models can run effectively in these constrained environments. 
+As mobile and edge devices can have limited computational power, memory, and energy availability, various strategies can be deployed to ensure that ML models can run effectively in these constrained environments. 
 
 ### Quantization
 
-Quantization is one of the most widely used techniques, which reduces the precision of the model's weights and activations from floating-point to lower-bit representations, such as int8 or float16. This not only reduces the model size but also accelerates inference speed on hardware that supports lower precision arithmetic. 
+Quantization is one of the most widely used techniques, which reduces the precision of the model's weights and activations from floating-point to lower-bit representations, such as int8 or float16. This not only reduces the model size but also accelerates inference speed on hardware that supports low-precision arithmetic. 
 
-### Layer fusion
+### Layer Fusion
 
-Another key optimization strategy is layer fusion, where multiple operations, such as combining linear layers with their subsequent activation functions (like ReLU), into a single layer. This reduces the number of operations that need to be executed during inference, minimizing latency and improving throughput. 
+Another key optimization strategy is layer fusion. Layer fusion involves combining linear layers with their subsequent activation functions, such as ReLU, into a single layer. This reduces the number of operations that need to be executed during inference, minimizing latency and improving throughput. 
 
 ### Pruning
 
-In addition to these techniques, pruning, which involves removing less important weights or neurons from the model, can help in creating a leaner model that requires fewer resources without significantly affecting accuracy. 
+In addition to these techniques, pruning, which involves removing less significant weights or neurons from the model, can help in creating a leaner model that requires fewer resources without markedly affecting accuracy. 
 
 
 ### Android NNAPI
 
 Leveraging hardware-specific optimizations, such as the Android Neural Networks API (NNAPI) allows you to take full advantage of the underlying hardware acceleration available on edge devices. 
 
-### More on optimization
+### More on Optimization
 
 By employing these strategies, you can significantly enhance the efficiency of ML models for deployment on mobile and edge platforms, ensuring a balance between performance and resource utilization.
 
@@ -46,7 +46,7 @@ PyTorch’s integration with hardware acceleration libraries, such as NNAPI for 
 
 Overall, PyTorch provides a comprehensive ecosystem that empowers developers to implement effective optimizations for mobile and edge deployment, enhancing both speed and efficiency.
 
-### Optimization Next steps
+### Optimization Next Steps
 
 In the following sections, you will delve into the techniques of quantization and fusion using the previously created neural network model and Android  application. 
 

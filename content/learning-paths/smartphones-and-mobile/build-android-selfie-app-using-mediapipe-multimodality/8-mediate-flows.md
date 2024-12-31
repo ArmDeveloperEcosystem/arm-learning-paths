@@ -6,7 +6,7 @@ weight: 8
 layout: learningpathall
 ---
 
-Now you have two independent Flows indicating the conditions of face landmark detection and gesture recognition. The simplest multimodality strategy is to combine multiple source Flows into a single output Flow, which emits consolidated values as the [single source of truth](https://en.wikipedia.org/wiki/Single_source_of_truth) for its observers (collectors) to carry out corresponding actions.
+Now you have two independent Flows indicating the conditions of face landmark detection and gesture recognition. The simplest multimodality strategy is to combine multiple source Flows into a single output Flow, which emits consolidated values as the single source of truth for its observers (collectors) to carry out corresponding actions.
 
 ## Combine two Flows into a single Flow
 
@@ -33,9 +33,9 @@ Now you have two independent Flows indicating the conditions of face landmark de
 ```
 
 {{% notice Note %}}
-Kotlin Flow's [`combine`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/combine.html) transformation is equivalent to ReactiveX's [`combineLatest`](https://reactivex.io/documentation/operators/combinelatest.html). It combines emissions from multiple observables, so that each time **any** observable emits, the combinator function is called with the latest values from all sources.
+Kotlin Flow's [`combine`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/combine.html) transformation is equivalent to ReactiveX's [`combineLatest`](https://reactivex.io/documentation/operators/combinelatest.html). It combines emissions from multiple observables, so that each time any observable emits, the combinator function is called with the latest values from all sources.
 
-You might need to add `@OptIn(FlowPreview::class)` annotation since `sample` is still in preview. For more information on similar transformations, please refer to [this blog](https://kt.academy/article/cc-flow-combine).
+You might need to add `@OptIn(FlowPreview::class)` annotation since `sample` is still in preview.
 
 {{% /notice %}}
 
@@ -49,30 +49,7 @@ You might need to add `@OptIn(FlowPreview::class)` annotation since `sample` is 
         .shareIn(viewModelScope, SharingStarted.WhileSubscribed())
 ```
 
-If this code looks confusing to you, please see the explanations below for Kotlin beginners.
-
-{{% notice Info %}}
-
-###### Keyword "it"
-
-The operation `filter { it }` is simplified from `filter { bothOk -> bothOk == true }`. 
-
-Since Kotlin allows for implictly calling the single parameter in a lambda `it`, `{ bothOk -> bothOk == true }` is equivalent to `{ it == true }`, and again  `{ it }`. 
-
-See [this doc](https://kotlinlang.org/docs/lambdas.html#it-implicit-name-of-a-single-parameter) for more details.
-
-{{% /notice %}}
-
-{{% notice Info %}}
-
-###### "Unit" type
-This `SharedFlow` has a generic type `Unit`, which doesn't contain any value. You may think of it as a "pulse" signal.
-
-The operation `map { }` simply maps the upstream `Boolean` value emitted from `_bothOk` to `Unit` regardless their values are true or false. It's simplified from `map { bothOk -> Unit }`, which becomes `map { Unit } ` where the keyword `it` is not used at all. Since an empty block already returns `Unit` implicitly, we don't need to explicitly return it.
-
-{{% /notice %}}
-
-If this still looks confusing, you may also opt to use `SharedFlow<Boolean>` and remove the `map { }` operation. Just note that when you collect this Flow, it doesn't matter whether the emitted `Boolean` values are true or false. In fact, they are always `true` due to the `filter` operation.
+You may also opt to use `SharedFlow<Boolean>` and remove the `map { }` operation. Just note that when you collect this Flow, it doesn't matter whether the emitted `Boolean` values are true or false. In fact, they are always `true` due to the `filter` operation.
 
 ## Configure ImageCapture use case
 
@@ -92,7 +69,7 @@ If this still looks confusing, you may also opt to use `SharedFlow<Boolean>` and
             .build()
 ```
 
-3. Again, don't forget to append this use case to `bindToLifecycle`.
+3. Append this use case to `bindToLifecycle`.
 
 ```kotlin
             camera = cameraProvider.bindToLifecycle(
@@ -102,7 +79,7 @@ If this still looks confusing, you may also opt to use `SharedFlow<Boolean>` and
 
 ## Execute photo capture with ImageCapture
 
-1. Append the following constant values to `MainActivity`'s companion object. They define the file name format and the [MIME type](https://en.wikipedia.org/wiki/Media_type).
+1. Append the following constant values to `MainActivity`'s companion object. They define the file name format and the media type:
 
 ```kotlin
         // Image capture
@@ -165,7 +142,7 @@ If this still looks confusing, you may also opt to use `SharedFlow<Boolean>` and
 
 ## Add a flash effect upon capturing photo
 
-1. Navigate to `activity_main.xml` layout file and insert the following `View` element **between** the two overlay views and two `SwitchCompat` views. This is essentially just a white blank view covering the whole surface.
+1. Navigate to `activity_main.xml` layout file and insert the following `View` element between the two overlay views and two `SwitchCompat` views. This is essentially just a white blank view covering the whole surface.
 
 ```
     <View
@@ -204,6 +181,6 @@ If this still looks confusing, you may also opt to use `SharedFlow<Boolean>` and
     }
 ``` 
 
-3. Invoke `showFlashEffect()` method in `executeCapturePhoto()` method, **before** invoking `imageCapture.takePicture()`
+3. Invoke `showFlashEffect()` method in `executeCapturePhoto()` method, before invoking `imageCapture.takePicture()`
 
 4. Build and run the app. Try keeping up a smiling face while presenting thumb-up gestures. When you see both switches turn on and stay stable for approximately half a second, the screen should flash white and then a photo should be captured and shows up in your album, which may take a few seconds depending on your Android device's hardware. Good job!

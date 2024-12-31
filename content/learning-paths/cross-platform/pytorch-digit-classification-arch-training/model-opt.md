@@ -7,15 +7,19 @@ weight: 12
 layout: "learningpathall"
 ---
 
-You can create and train an optimized feedforward neural network to classify handwritten digits from the MNIST dataset. As a reminder, the dataset contains 70,000 images, comprising 60,000 training and 10,000 testing images, of handwritten numerals (0-9), each with dimensions of 28x28 pixels. 
-
-This time you will introduce several changes to enable model quantization and fusing.
+You can create and train an optimized feedforward neural network to classify handwritten digits from the MNIST dataset. This time you will introduce several changes to enable model quantization and fusing.
 
 # Model architecture
 
-Start by creating a new notebook named `pytorch-digits-model-optimisations.ipynb`. 
+Start by creating a new notebook named `pytorch-digits-model-optimizations.ipynb`. 
 
-Then define the model architecture using the code below. You can also find the source code on [GitHub](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference.Python)
+Then define the model architecture using the code below. 
+
+{{% notice Note%}}
+You can also find the source code on [GitHub](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference.Python).
+{{% /notice %}}
+
+
 
 ```python
 import torch
@@ -53,13 +57,13 @@ class NeuralNetwork(nn.Module):
         return x  # Outputs raw logits
 ```
 
-This code defines a neural network in PyTorch for digit classification, consisting of three linear layers with ReLU activations and optional dropout layers for regularization. The network first flattens the input (a 28x28 image) and passes it through two linear layers, each followed by a ReLU activation and a dropout layer (if enabled). The final layer produces raw logits as the output. Notably, the softmax layer has been removed to enable quantization and layer fusion during model optimization, allowing better performance when deploying the model on mobile or edge devices. 
+This code defines a neural network in PyTorch for digit classification, consisting of three linear layers with ReLU activations and optional dropout layers for regularization. The network first flattens the input, that is a 28x28 image, and passes it through two linear layers, each followed by a ReLU activation and if enabled, a dropout layer. The final layer produces raw logits as the output. Notably, the softmax layer has been removed to enable quantization and layer fusion during model optimization, allowing better performance when deploying the model on mobile or edge devices. 
 
 The output is left as logits, and the softmax function can be applied during post-processing, particularly during inference.
 
 This model includes dropout layers, which are used during training to randomly set a portion of the neurons to zero in order to prevent overfitting and improve generalization. 
 
-The `use_dropout` parameter allows you to enable or disable dropout, with the option to bypass dropout by replacing it with an `nn.Identity` layer when set to `False`, which is typically done during inference or quantization for more consistent behavior.
+The `use_dropout` parameter allows you to enable or disable dropout, with the option to bypass dropout by replacing it with a `nn.Identity` layer when set to `False`, which is typically done during inference or quantization for more consistent behavior.
 
 Add the following lines to display the model architecture:
 
@@ -69,7 +73,7 @@ model = NeuralNetwork()
 summary(model, (1, 28, 28))
 ```
 
-After running the code, you see the following output:
+After running the code, you will see the following output:
 
 ```output
 ----------------------------------------------------------------
@@ -98,14 +102,14 @@ Estimated Total Size (MB): 0.41
 The output shows the structure of the neural network, including the layers, their output shapes, and the number of parameters.
 
 * The network starts with a Flatten layer, which reshapes the input from [1, 28, 28] to [1, 784] without adding any parameters.
-* This is followed by two Linear (fully connected) layers with ReLU activations and optional Dropout layers in between, contributing to the parameter count.
-* The first linear layer (from 784 to 96 units) has 75,360 parameters, while the second (from 96 to 256 units) has 24,832 parameters.
+* This is followed by two linear, fully-connected, layers with ReLU activations and optional Dropout layers in between that contribute to the parameter count.
+* The first linear layer, from 784 to 96 units, has 75,360 parameters, while the second, from 96 to 256 units, has 24,832 parameters.
 * The final linear layer, which outputs raw logits for the 10 classes, has 2,570 parameters.
-* The total number of trainable parameters in the model is 102,762, with no non-trainable parameters.
+* The total number of trainable parameters in the model is 102,762, without any non-trainable parameters.
 
 # Training the model
 
-Now add the data loading, train, and test loops to actually train the model. This proceeds exactly the same as in the original model:
+Now add the load-the-data, train, and test loops to train the model. This process is the same as with the original model:
 
 ```
 from torchvision import transforms, datasets
@@ -175,21 +179,21 @@ for t in range(epochs):
     test_loop(test_dataloader, model, loss_fn)
 ```
 
-You begin by preparing the MNIST dataset for training and testing our neural network model. 
+Begin by preparing the MNIST dataset for training and testing the neural network model. 
 
-Using the torchvision library, you download the MNIST dataset and apply a transformation to convert the images into tensors, making them suitable for input into the model. 
+Using the torchvision library, download the MNIST dataset and apply a transformation to convert the images into tensors, making them suitable for input into the model. 
 
 Next, create two data loaders: one for the training set and one for the test set, each configured with a batch size of 32. These data loaders allow you to easily feed batches of images into the model during training and testing.
 
-Next, define a training loop, which is the core of the model’s learning process. For each batch of images and labels, the model generates predictions, and you calculate the cross-entropy loss to measure how far off the predictions are from the true labels. 
+Next, define a training loop, which is at the core of the model’s learning process. For each batch of images and labels, the model generates predictions, and you calculate the cross-entropy loss to measure how far off the predictions are from the true labels. 
 
 The Adam optimizer is used to perform backpropagation, updating the model's weights to reduce this error. The process repeats for every batch in the training dataset, gradually improving model accuracy over time.
 
-To ensure the model is learning effectively, you also define a testing loop. 
+To ensure the model is learning effectively, you need to define a testing loop. 
 
-Here, the model is evaluated on a separate set of test images that it hasn't seen during training. You calculate both the average loss and the accuracy of the predictions, giving a clear sense of how well the model is performing. Importantly, this evaluation is done without updating the model's weights, as the goal is simply to measure its performance.
+Here, the model is evaluated on a separate set of test images that it has not seen during training. You can calculate both the average loss and the accuracy of the predictions, and it will give you a clear sense of how well the model is performing. This evaluation must be done without updating the model's weights, as the goal is simply to measure its performance.
 
-Finally, run the training and testing loops over the course of 10 epochs. With each epoch, the model trains on the full training dataset, and afterward, you test it to monitor its progress. By the end of the process, the model has learned to classify the MNIST digits with a high degree of accuracy, as reflected in the final test results.
+Finally, run the training and testing loops over the course of 10 epochs. With each epoch, the model trains on the full training dataset, and afterwards, you can test it to monitor its progress. By the end of the process, the model has learned to classify the MNIST digits with a high degree of accuracy, as reflected in the final test results.
 
 This setup efficiently trains and evaluates the model for digit classification, providing feedback after each epoch on accuracy and loss.
 
@@ -227,7 +231,7 @@ Epoch 10:
 Accuracy: 96.5%, Avg loss: 0.137004 
 ```
 
-The above shows a similar accuracy as the original model.
+These results show a similar rate of accuracy as the original model.
 
 You now have the trained model with the modified architecture. 
 
