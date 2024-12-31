@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Prepare a PyTorch development environment"
+title: "Prepare a PyTorch Development Environment"
 
 weight: 2
 
@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 Meta AI have designed an Open Source deep learning framework called PyTorch, that is now part of the Linux Foundation.
 
-PyTorch provides a flexible and efficient platform for building and training neural networks. It has a dynamic computational graph that allows users to modify the architecture during runtime, making debugging and experimentation easier, and therefore makes it popular amongste developers.
+PyTorch provides a flexible and efficient platform for building and training neural networks. It has a dynamic computational graph that allows users to modify the architecture during runtime, making debugging and experimentation easier, and therefore makes it popular amongst developers.
 
 PyTorch provides a more flexible, user-friendly deep learning framework that reduces the limitations of static computational graphs found in earlier tools, such as TensorFlow. 
 
@@ -21,7 +21,7 @@ Prior to PyTorch, many frameworks used static computational graphs that require 
 * Easier debugging.
 * More intuitive code.
 
-PyTorch also seamlessly integrates with Python, which creates a native coding experience. Its deep integration with GPU acceleration also makes it a powerful tool for both research and production environments. This combination of flexibility, usability, and performance has ensured PyTorch’s rapid adoption, particualrly in academic research, where experimentation and iteration are crucial activities.
+PyTorch also seamlessly integrates with Python, which creates a native coding experience. Its deep integration with GPU acceleration also makes it a powerful tool for both research and production environments. This combination of flexibility, usability, and performance has ensured PyTorch’s rapid adoption, particularly in academic research, where experimentation and iteration are crucial activities.
 
 A typical process for creating a feedforward neural network in PyTorch involves defining a sequential stack of fully-connected layers, which are also known as linear layers. Each layer transforms the input by applying a set of weights and biases, followed by an activation function like ReLU. PyTorch supports this process using the torch.nn module, where layers are easily defined and composed.
 
