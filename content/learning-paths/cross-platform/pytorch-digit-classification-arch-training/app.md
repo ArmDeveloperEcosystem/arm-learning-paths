@@ -30,8 +30,8 @@ To run the app in Android Studio using an emulator, follow these steps:
 
 Once the application starts, click the **Load Image** button. It loads a randomly-selected image. Then, click **Run Inference** to recognize the digit. The application displays the predicted label and the inference time as shown below:
 
-![img](Figures/05.png)
+![img alt-text#center](Figures/05.png "Figure 7. Digit Recognition 1")
 
-![img](Figures/06.png)
+![img alt-text#center](Figures/06.png "Figure 8. Digit Recognition 2")
 
 In the next step of this Learning Path, you will learn how to further optimize the model.
