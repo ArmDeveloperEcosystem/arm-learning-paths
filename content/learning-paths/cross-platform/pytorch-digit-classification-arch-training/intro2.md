@@ -1,13 +1,13 @@
 ---
 # User change
-title: "About PyTorch model training"
+title: "About PyTorch Model Training"
 
 weight: 4
 
 layout: "learningpathall"
 ---
 
-## PyTorch model training
+## Training
 
 Now you have created a feedforward neural network for digit classification using the MNIST dataset, to enable the network to recognize handwritten digits effectively and make accurate predictions, training is needed. 
 
