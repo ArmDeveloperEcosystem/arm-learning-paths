@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 Meta AI have designed an Open Source deep learning framework called PyTorch, that is now part of the Linux Foundation.
 
-PyTorch provides a flexible and efficient platform for building and training neural networks. It has a dynamic computational graph that allows users to modify the architecture during runtime, making debugging and experimentation easier, and therefore makes it popular amongst developers.
+PyTorch provides a flexible and efficient platform for building and training neural networks. It has a dynamic computational graph that allows users to modify the architecture during runtime, making debugging and experimentation easier, and therefore makes it popular among developers.
 
 PyTorch provides a more flexible, user-friendly deep learning framework that reduces the limitations of static computational graphs found in earlier tools, such as TensorFlow. 
 
