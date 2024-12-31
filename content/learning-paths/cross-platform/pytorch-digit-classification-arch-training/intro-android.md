@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Learn about inference on Android"
+title: "Learn about Inference on Android"
 
 weight: 7
 
@@ -29,7 +29,7 @@ In this Learning Path, you will learn how to perform inference in an Android app
 
 Before you begin make [Android Studio](https://developer.android.com/studio/install) is installed on your system.
 
-## Project source code
+## Project Source Code
 
 The following steps explain how to build an Android application for MNIST inference. The application can be constructed from scratch, but there are two GitHub repositories available if you need to copy any files from them as you learn how to create the Android application. 
 
