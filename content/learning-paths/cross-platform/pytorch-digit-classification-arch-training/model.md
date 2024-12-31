@@ -7,7 +7,7 @@ weight: 3
 layout: "learningpathall"
 ---
 
-You can create and train a feedforward neural network to classify handwritten digits from the MNIST dataset. This dataset contains 70,000 images, comprising 60,000 training images and 10,000 testing images of handwritten numerals (0-9), each with dimensions of 28x28 pixels. Some representative MNIST digits with their corresponding labels are shown below.
+You can create and train a feedforward neural network to classify handwritten digits from the MNIST dataset. This dataset contains 70,000 images, comprising 60,000 training images and 10,000 testing images of handwritten numerals (0-9), each with dimensions of 28x28 pixels. Some representative MNIST digits with their corresponding labels are shown in Figure 3:
 
 ![img3 alt-text#center](Figures/3.png "Figure 3: MNIST Digits and Labels.")
 
@@ -92,7 +92,7 @@ model = NeuralNetwork()
 summary(model, (1, 28, 28))
 ```
 
-After running the notebook, you will see the following output:
+After running the notebook, you will see the output as shown in Figure 4:
 
 ![img4 alt-text#center](Figures/4.png "Figure 4: Notebook Output.")
 
