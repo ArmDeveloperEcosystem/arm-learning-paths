@@ -6,51 +6,51 @@ weight: 2
 layout: learningpathall
 ---
 
-This learning path will teach you to architect an app following [modern Android architecture](https://developer.android.com/courses/pathways/android-architecture) design with a focus on the [UI layer](https://developer.android.com/topic/architecture/ui-layer).
+This learning path shows you how to architect an app following [Modern Android Architecture](https://developer.android.com/courses/pathways/android-architecture) design with a focus on the [UI layer](https://developer.android.com/topic/architecture/ui-layer).
 
 ## Development environment setup
 
 Download and install the latest version of [Android Studio](https://developer.android.com/studio/) on your host machine.
 
-The instructions for this learning path were tested on a Apple Silicon host machine running macOS, but you may choose any of the supported hardware systems as described [here](https://developer.android.com/studio/install).
+The instructions for this learning path were tested on a host machine running macOS, but you can use any of the supported hardware systems as described in [Install Android Studio](https://developer.android.com/studio/install) on the Android Developer website. 
 
-Upon first installation, open Android Studio and proceed with the default or recommended settings. Accept license agreements and let Android Studio download all the required assets.
+After installation, open Android Studio and proceed with the default or recommended settings. Accept license agreements and download all the required assets.
 
 Before you proceed to coding, here are some tips that might come handy:
 
 {{% notice Tip %}}
-1. To navigate to a file, simply double-tap `Shift` key and input the file name, then select the correct result using `Up` & `Down` arrow keys and then tap `Enter`.
+1. To navigate to a file, simply press the Shift key twice, input the file name, select the correct result using the up and down arrow keys, and then press Enter.
 
-2. Every time after you copy-paste a code block from this learning path, make sure you **import the correct classes** and resolved the errors. Refer to [this doc](https://www.jetbrains.com/help/idea/creating-and-optimizing-imports.html) to learn more.
+2. Every time after you copy-and-paste a code block from this Learning Path, ensure that you import the correct classes and resolve the errors. For more information, see the [Auto import](https://www.jetbrains.com/help/idea/creating-and-optimizing-imports.html) web page.
 {{% /notice %}}
 
 ## Create a new Android project
 
-1. Navigate to File > New > New Project....
+1. Navigate to **File** > **New** > **New Project**.
 
-2. Select Empty Views Activity in the Phone and Tablet gallery as shown below, then click Next.
-![Empty Views Activity](images/2/empty%20project.png)
+2. Select **Empty Views Activity** in **Phone and Tablet** gallery as Figure 1 shows, then select **Next**.
+![Empty Views Activity.png alt-text#center](images/2/empty%20project.png "Figure 1: Empty Views Activity.")
 
-3. Enter a project name and use the default configurations as shown below. Make sure that Language is set to Kotlin, and that Build configuration language is set to Kotlin DSL.
-![Project configuration](images/2/project%20config.png)
+3. Choose a project name and select the default configurations as Figure 2 shows. Make sure that **Language** is set to **Kotlin**, and **Build configuration language** is set to **Kotlin DSL**.
+![Project configuration.png alt-text#center](images/2/project%20config.png "Figure 2: Project Configuration.")
 
 ### Introduce CameraX dependencies
 
 [CameraX](https://developer.android.com/media/camera/camerax) is a Jetpack library, built to help make camera app development easier. It provides a consistent, easy-to-use API that works across the vast majority of Android devices with a great backward-compatibility.
 
-1. Wait for Android Studio to sync project with Gradle files, this make take up to several minutes.
+1. Wait for Android Studio to sync project with Gradle files, this might take several minutes.
 
-2. Once project is synced, navigate to `libs.versions.toml` in your project's root directory as shown below. This file serves as the version catalog for all dependencies used in the project.
+2. Once project is synced, navigate to `libs.versions.toml` in your project's root directory as Figure 3 shows. This file serves as the version catalog for all dependencies used in the project.
 
-![version catalog](images/2/dependency%20version%20catalog.png)
+![Version Catalog.png alt-text#center](images/2/dependency%20version%20catalog.png "Figure 3: Version Catalog.")
 
 {{% notice Info %}}
 
-For more information on version catalogs, please refer to [this doc](https://developer.android.com/build/migrate-to-catalogs).
+For more information on version catalogs, see [this doc](https://developer.android.com/build/migrate-to-catalogs).
 
 {{% /notice %}}
 
-3. Append the following line to the end of `[versions]` section. This defines the version of CameraX libraries we will be using.
+3. Append the following line to the end of `[versions]` section. This defines the version of CameraX libraries that you will be using.
 ```toml
 camerax = "1.4.0"
 ```
@@ -64,7 +64,7 @@ camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", versi
 camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "camerax" }
 ```
 
-5. Navigate to `build.gradle.kts` in your project's `app` directory, then insert the following lines into `dependencies` block. This introduces the above dependencies into the `app` subproject.
+5. Navigate to `build.gradle.kts` in your project's `app` directory, then insert the following lines into `dependencies` block. This introduces the dependencies listed above into the `app` subproject.
 
 ```kotlin
     implementation(libs.camera.core)
@@ -83,18 +83,18 @@ camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "
     }
 ```
 
-2. You should be seeing a notification shows up, as shown below. Click **"Sync Now"** to sync your project.
+2. You should see that a notification appears, as Figure 4 shows. Click **"Sync Now"** to sync your project.
 
-![Gradle sync](images/2/gradle%20sync.png)
+![Gradle sync.png alt-text#center](images/2/gradle%20sync.png "Figure 4: Gradle Sync.")
 
 {{% notice Tip %}}
 
-You may also click the __"Sync Project with Gradle Files"__ button in the toolbar or pressing the corresponding shortcut to start a sync.
+You can also click the __"Sync Project with Gradle Files"__ button in the toolbar, or pressing the corresponding shortcut to start a sync.
 
 ![Sync Project with Gradle Files](images/2/sync%20project%20with%20gradle%20files.png)
 {{% /notice %}}
 
-3. Navigate to `MainActivity.kt` source file and make following changes. This inflates the layout file into a view binding object and stores it in a member variable within the view controller for easier access later.
+3. Navigate to the `MainActivity.kt` source file and make the following changes. This inflates the layout file into a view binding object and stores it in a member variable within the view controller for easier access later.
 
 ![view binding](images/2/view%20binding.png)
 
@@ -111,7 +111,7 @@ You may also click the __"Sync Project with Gradle Files"__ button in the toolba
 ```
 
 
-2. Add the following member variables to `MainActivity.kt` to store camera related objects:
+2. Add the following member variables to `MainActivity.kt` to store camera-related objects:
 
 ```kotlin
     // Camera
@@ -186,7 +186,7 @@ private fun bindCameraUseCases() {
     }
 ```
 
-5. Add a [companion object](https://kotlinlang.org/docs/object-declarations.html#companion-objects) to `MainActivity.kt` and declare a `TAG` constant value for `Log` calls to work correctly. This companion object comes handy for us to define all the constants and shared values accessible across the entire class.
+5. Add a [companion object](https://kotlinlang.org/docs/object-declarations.html#companion-objects) to `MainActivity.kt` and declare a `TAG` constant value for `Log` calls to work correctly. This companion object is useful in enabling you to define all the constants and shared values accessible across the entire class.
 
 ```kotlin
     companion object {
@@ -194,4 +194,4 @@ private fun bindCameraUseCases() {
     }
 ```
 
-In the next section, you will build and run the app to make sure the camera works well.
+In the next section, you will build and run the app to ensure that the camera works as expected.
