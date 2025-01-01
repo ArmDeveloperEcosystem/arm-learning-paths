@@ -25,7 +25,7 @@ The total number of trainable parameters for this network is calculated as follo
 
 In total, the network has 102,762 trainable parameters.
 
-# Implementation
+## Implementation
 
 To implement the model, supplement the `pytorch-digits.ipynb` notebook with the following statements:
 
@@ -132,7 +132,7 @@ The output is still a probability distribution over the 10 digit classes (0-9), 
 
 Technically, the code will run without errors as long as you provide it with an input image of the correct dimensions, which is 28x28 pixels. The model can accept input, pass it through the layers, and return a prediction - a vector of 10 probabilities. However, the results are not useful until the model is trained.
 
-# What have you learned so far?
+## What have you learned so far?
 
 You have successfully defined and initialized a feedforward neural network using PyTorch. 
 
