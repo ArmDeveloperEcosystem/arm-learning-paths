@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 Meta AI have designed an Open Source deep learning framework called PyTorch, that is now part of the Linux Foundation.
 
-PyTorch provides a flexible and efficient platform for building and training neural networks. It has a dynamic computational graph that allows users to modify the architecture during runtime, making debugging and experimentation easier, and therefore makes it popular among developers.
+PyTorch provides a flexible and efficient platform for building and training neural networks. It has a dynamic computational graph that allows users to modify the architecture during runtime, making debugging and experimentation easier, and therefore making it popular among developers.
 
 PyTorch provides a more flexible, user-friendly deep learning framework that reduces the limitations of static computational graphs found in earlier tools, such as TensorFlow. 
 
@@ -110,8 +110,11 @@ python3 -m ipykernel install --user --name=pytorch-env
 To ensure everything is set up correctly, follow these next steps:
 
 1. Open Visual Studio Code. 
+
 2. Click **New file**, and select `Jupyter Notebook .ipynb Support`.
+
 3. Save the file as `pytorch-digits.ipynb`.
+
 4. Select the Python kernel you created earlier, `pytorch-env`. To do so, click **Kernels** in the top right-hand corner. Then, click **Jupyter Kernel...**, and you will see the Python kernel as shown below:
 
 ![img1 alt-text#center](Figures/1.png "Figure 1: Python kernel.")
