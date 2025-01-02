@@ -28,4 +28,4 @@ By combining OpenCV’s rich feature set, hardware optimization via HAL, and spe
 
 In this Learning Path we will demonstrate how to use KleidiCV-accelerated OpenCV in Android application
 
-You can find all the code used in this Learning Path in a [GitHub repository]().
+You can find all the code used in this Learning Path in a [GitHub repository](https://github.com/dawidborycki/Arm64.KleidiCV.Demo.git).
