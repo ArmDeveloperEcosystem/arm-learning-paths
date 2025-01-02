@@ -1,5 +1,5 @@
 ---
-title: Development Environment Setup
+title: Set up the Development Environment
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -99,11 +99,11 @@ You can also click the **Sync Project with Gradle Files** button in the toolbar,
 
     This inflates the layout file into a view binding object and stores it in a member variable within the view controller for easier access later.
 
-![view binding](images/2/view%20binding.png)
+![view binding alt-text#center](images/2/view%20binding.png "Figure 5: View Binding.")
 
 ## Configure CameraX preview
 
-1. Replace the placeholder "Hello World!" `TextView` within the layout file `activity_main.xml` with a camera preview view:
+1. Replace the placeholder "Hello World!" in `TextView` within the layout file `activity_main.xml` with a camera preview view:
 
 ```xml
     <androidx.camera.view.PreviewView
@@ -148,7 +148,7 @@ You can also click the **Sync Project with Gradle Files** button in the toolbar,
     }
 ```
 
-4. Implement the above `bindCameraUseCases()` method:
+4. Implement the `bindCameraUseCases()` method:
 
 ```kotlin
 private fun bindCameraUseCases() {
