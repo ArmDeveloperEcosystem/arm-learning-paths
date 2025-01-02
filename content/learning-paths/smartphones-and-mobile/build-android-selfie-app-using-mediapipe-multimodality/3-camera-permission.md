@@ -1,5 +1,5 @@
 ---
-title: Handle camera permissions
+title: Manage Camera Permissions
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Run the app on your device
 
-1. Connect your Android device to your computer via a USB data cable. If this is your first time running and debugging Android apps, follow [this guide](https://developer.android.com/studio/run/device#setting-up) and double check this checklist:
+1. Connect your Android device to your computer via a USB data cable. If this is your first time running and debugging Android apps, follow the guidance on the Android Developer website [Set up a device for development](https://developer.android.com/studio/run/device#setting-up) and double check this checklist:
     
     1. You have enabled USB debugging on your Android device following [this doc](https://developer.android.com/studio/debug/dev-options#Enable-debugging). 
     
