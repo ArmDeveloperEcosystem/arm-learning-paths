@@ -51,7 +51,7 @@ https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recog
 ```
 
 {{% notice Tip %}}
-You might need to create the `assets` directory if it is not there already.
+You might need to create an `assets` directory if it is not there already.
 {{% /notice %}}
 
 ### Advanced approach: configure prebuild download tasks 
@@ -62,10 +62,7 @@ Gradle does not come with a convenient [Task](https://docs.gradle.org/current/us
 
     * Append `download = "5.6.0"` to the `[versions]` section, and append `de-undercouch-download = { id = "de.undercouch.download", version.ref = "download" }  to `[plugins]` section.
 
-2. Navigate to `build.gradle.kts` in your project's `app` directory. Then:
-
-    * Append `alias(libs.plugins.de.undercouch.download)` to the `plugins` block. This enables the 
-      **Download** task plugin in this `app` subproject.
+2. Navigate to `build.gradle.kts` in your project's `app` directory. Then append `alias(libs.plugins.de.undercouch.download)` to the `plugins` block. This enables the _Download_ task plugin in this `app` subproject.
 
 3. Insert the following lines between the `plugins` block and the `android` block to define the constant values, including the asset directory path and the URLs for both models:
 
