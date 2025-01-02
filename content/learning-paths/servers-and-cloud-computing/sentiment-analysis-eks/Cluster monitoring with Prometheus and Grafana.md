@@ -1,33 +1,48 @@
 ---
-title: Cluster monitoring with Prometheus and Grafana in Amazon EKS
+title: Monitor the cluster with Prometheus and Grafana 
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## CPU and RAM usage statistics with Prometheus and Grafana
+## Monitor CPU and RAM usage with Prometheus and Grafana
 
-Prometheus is a monitoring and alerting tool. It is used for collecting and querying real-time metrics in cloud-native environments like Kubernetes. Prometheus collects essential metrics (e.g., CPU, memory usage, pod counts, request latency) that help in monitoring the health and performance of Kubernetes clusters. Grafana is a visualization and analytics tool that integrates with data sources from Prometheus, to create interactive dashboards to monitor and analyze Kubernetes metrics over time. 
+Prometheus is a monitoring and alerting tool. It is used for collecting and querying real-time metrics in cloud-native environments like Kubernetes. Prometheus collects essential metrics about CPU usage, memory usage, pod counts, and request latency. This helps you monitor the health and performance of your Kubernetes clusters. 
 
+Grafana is a visualization and analytics tool that integrates with data sources from Prometheus to create interactive dashboards to monitor and analyze Kubernetes metrics over time. 
 
-## Install Prometheus on Arm-based EKS cluster
+## Install Prometheus on your EKS cluster
 
-This learning path uses `helm` to install prometheus on the Kubernetes cluster. Follow the [helm documentation](https://helm.sh/docs/intro/install/) to install it on your laptop.
+You can use Helm to install prometheus on the Kubernetes cluster. 
 
-Create a namespace in your EKS cluster to host `prometheus` pods
+Follow the [Helm documentation](https://helm.sh/docs/intro/install/) to install it on your computer.
+
+Confirm Helm is installed by running the version command:
+
+```console
+helm version
+```
+
+The output is similar to:
+
+```output
+version.BuildInfo{Version:"v3.16.3", GitCommit:"cfd07493f46efc9debd9cc1b02a0961186df7fdf", GitTreeState:"clean", GoVersion:"go1.22.7"}
+```
+
+Create a namespace in your EKS cluster to host `prometheus` pods:
 
 ```console
 kubectl create namespace prometheus
 ```
 
-Add the following helm repo for prometheus
+Add the following Helm repo for prometheus:
 
 ```console
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 ```
 
-Install `prometheus` on the cluster with the following command
+Install Prometheus on the cluster with the following command:
 
 ```console
 helm install prometheus prometheus-community/prometheus \
@@ -36,22 +51,21 @@ helm install prometheus prometheus-community/prometheus \
   --set server.persistentVolume.storageClass="gp2"
 ```
 
-Check all pods are up and running
+Check all pods are up and running:
 
 ```console
 kubectl get pods -n prometheus
 ```
 
+## Install Grafana on your EKS cluster
 
-## Install Grafana on Arm-based EKS cluster
-
-Add the following helm repo for grafana
+Add the following Helm repo for Grafana:
 
 ```console
 helm repo add grafana https://grafana.github.io/helm-charts
 ```
 
-Create `grafana.yaml` file with the following contents
+Use a text editor to create a `grafana.yaml` file with the following contents:
 
 ```console
 datasources:
@@ -65,13 +79,13 @@ datasources:
       isDefault: true
 ```
 
-Create another namespace for `grafana` pods
+Create another namespace for Grafana pods:
 
 ```console
 kubectl create namespace grafana
 ```
 
-Install `grafana` on the cluster with the following command
+Install Grafana on the cluster with the following command:
 
 ```console
 helm install grafana grafana/grafana \
@@ -82,12 +96,15 @@ helm install grafana grafana/grafana \
   --values grafana.yaml \
   --set service.type=LoadBalancer
 ```
+
 Check all pods are up and running
 
 ```console
 kubectl get pods -n grafana
 ```
 
-Login to the grafana dashboard using the LoadBalancer IP and click on `Dashboards` in the left navigation page. Locate a `Kubernetes / Compute Resources / Node` dashboard and click on it. You should see a dashboard like below for your Kubernetes cluster
+Login to the grafana dashboard using the LoadBalancer IP and click on `Dashboards` in the left navigation page. Locate a `Kubernetes / Compute Resources / Node` dashboard and click on it. 
+
+You see a dashboard like below for your Kubernetes cluster:
 
 ![grafana #center](_images/grafana.png)

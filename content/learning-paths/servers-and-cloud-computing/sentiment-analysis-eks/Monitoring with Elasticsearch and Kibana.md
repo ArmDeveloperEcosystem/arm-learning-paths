@@ -1,5 +1,5 @@
 ---
-title: Monitoring the sentiments with Elasticsearch and Kibana
+title: Monitoring sentiment with Elasticsearch and Kibana
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,11 +8,13 @@ layout: learningpathall
 
 ## Deploy Elasticsearch and Kibana on Arm-based EC2 instance
 
-Elasticsearch is a NoSQL database and search & analytics engine. It's designed to store, search and analyze large amounts of data. It has real-time indexing capability which is crucial for handling high-velocity data streams like tweets. Kibana is a dashboard and visualization tool that integrates seamlessly with Elasticsearch. It provides an interface to interact with twitter data, apply filters and receive alerts. There are multiple ways to install Elasticsearch and Kibana, one of the methods is shown below.
+Elasticsearch is a NoSQL database, search, and analytics engine. It's designed to store, search and analyze large amounts of data. It has real-time indexing capability which is crucial for handling high-velocity data streams like Tweets. 
 
-Before you begin, ensure that docker and docker compose have been installed on your laptop. 
+Kibana is a dashboard and visualization tool that integrates seamlessly with Elasticsearch. It provides an interface to interact with twitter data, apply filters, and receive alerts. There are multiple ways to install Elasticsearch and Kibana, one method is shown below.
 
-Create the following docker-compose.yml file
+Before you begin, ensure that Docker and Docker Compose have been installed on your computer. 
+
+Use a text editor to create a `docker-compose.yml` file with the contents below:
 
 ```yml
 version: '2.18.1'
@@ -47,15 +49,18 @@ networks:
   elk:
     driver: bridge
 ```
+
 Use the following command to deploy Elasticsearch and Kibana Dashboard.
 
+```console
 docker-compose up
+```
 
 After the dashboard is up, use the the public IP of your server on the port 5601 to access the Kibana dashboard.
 
 ![kibana #center](_images/kibana.png)
 
-Now switch to the stack management using the menu on the left side as shown in below image.
+Switch to the stack management using the menu on the left side as shown in below image.
 
 ![kibana-data #center](_images/Kibana-data.png)
 
@@ -71,7 +76,7 @@ One of the sample dashboard structures looks as below, showing the records of di
 
 ![kibana-dashboard2 #center](_images/Kibana-dashboard2.png)
 
-Similarly, you can desgin and create dashboards to analyze a particular set of data. The screenshot below shows the dashboard designed for this learning path
+Similarly, you can design and create dashboards to analyze a particular set of data. The screenshot below shows the dashboard designed for this learning path
 
 ![kibana-dashboard3 #center](_images/Kibana-dashboard3.png)
 
