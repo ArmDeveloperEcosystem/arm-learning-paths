@@ -10,12 +10,13 @@ layout: learningpathall
 
 You will need an [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html). Create an account if needed. 
 
-Four tools are required on your local machine. Follow the links to install each tool.
+Multiple tools are required on your local computer. Follow the links to install each tool.
 
 * [Kubectl](/install-guides/kubectl/)
 * [AWS CLI](/install-guides/aws-cli/)
 * [Docker](/install-guides/docker/)
 * [Terraform](/install-guides/terraform/)
+* [Java](/install-guides/java/)
 
 To use the AWS CLI, you will need to generate AWS access keys and configure the CLI. Follow the [AWS Credentials](/install-guides/aws_access_keys/) install guide for instructions. 
 
@@ -25,10 +26,10 @@ Take a look at the [GitHub repository](https://github.com/koleini/spark-sentimen
 
 ```console
 git clone https://github.com/koleini/spark-sentiment-analysis.git
-cd spark-sentiment-analysis
+cd spark-sentiment-analysis/eks
 ```
 
-Edit the file `eks/variables.tf` if you want to change the default AWS region.
+Edit the file `variables.tf` if you want to change the default AWS region.
 
 The default value is at the top of the file and is set to `us-east-1`.
 
@@ -48,7 +49,7 @@ terraform apply --auto-approve
 
 Update the `kubeconfig` file to access the deployed EKS cluster with the following command:
 
-If you want to use an AWS CLI profile not named `default`, change the profile name before running the command. 
+If you want to use an AWS CLI profile with is not the default, change the profile name before running the command. 
 
 ```console
 aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name) --profile default
@@ -63,10 +64,22 @@ kubectl create clusterrolebinding spark-role --clusterrole=edit --serviceaccount
 
 ## Build the sentiment analysis JAR file
 
-Navigate to the `sentiment_analysis` folder and create a JAR file for the sentiment analyzer:
+Navigate to the `sentiment_analysis` folder to create a JAR file for the sentiment analyzer.
+
+You will need `sbt` installed. If you are running Ubuntu, you can install it with:
 
 ```console
-cd sentiment_analysis
+echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | sudo tee /etc/apt/sources.list.d/sbt.list
+echo "deb https://repo.scala-sbt.org/scalasbt/debian /" | sudo tee /etc/apt/sources.list.d/sbt_old.list
+curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | sudo apt-key add
+sudo apt-get update
+sudo apt-get install sbt
+```
+
+If you have another operating system, refer to [Installing sbt](https://www.scala-sbt.org/1.x/docs/Setup.html).
+
+```console
+cd ../sentiment_analysis
 sbt assembly
 ```
 
