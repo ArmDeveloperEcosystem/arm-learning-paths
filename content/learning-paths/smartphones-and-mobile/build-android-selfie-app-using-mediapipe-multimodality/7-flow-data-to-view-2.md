@@ -1,5 +1,5 @@
 ---
-title: Flow data to view controller - States
+title: Flow data to view controller:States
 weight: 7
 
 ### FIXED, DO NOT MODIFY

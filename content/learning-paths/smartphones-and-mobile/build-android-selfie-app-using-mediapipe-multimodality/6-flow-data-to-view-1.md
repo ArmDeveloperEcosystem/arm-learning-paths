@@ -1,5 +1,5 @@
 ---
-title: Flow data to view controller - Events
+title: Flow data to view controller:Events
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 [SharedFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#sharedflow) and [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#stateflow) are [Kotlin Flow](https://developer.android.com/kotlin/flow) APIs that enable Flows to optimally emit state updates and emit values to multiple consumers.
 
-In this learning path, you will experiment with both `SharedFlow` and `StateFlow`. This section will focus on SharedFlow while the next chapter will focus on StateFlow.
+In this learning path, you will experiment with both `SharedFlow` and `StateFlow`. This section focuses on SharedFlow, and the next chapter focuses on StateFlow.
 
 `SharedFlow` is a general-purpose, hot flow that can emit values to multiple subscribers. It is highly configurable, allowing you to set the replay cache size, buffer capacity, etc.
 

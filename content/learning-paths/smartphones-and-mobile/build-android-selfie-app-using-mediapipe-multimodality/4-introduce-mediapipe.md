@@ -12,7 +12,9 @@ MediaPipe Tasks provides the core programming interface of the MediaPipe Solutio
 
 ## Add MediaPipe dependencies
 
-1. Navigate to `libs.versions.toml` and append the following line to the end of the `[versions]` section. This defines the version of MediaPipe library that you will be using.
+1. Navigate to `libs.versions.toml` and append the following line to the end of the `[versions]` section. 
+
+This defines the version of MediaPipe library that you will be using.
 
 ```toml
 mediapipe-vision = "0.10.15"
@@ -42,7 +44,7 @@ Choose one of the two options below that aligns best with your learning needs.
 
 ### Basic approach: manual download
 
-Download the following two files, then move them into the default asset directory: `app/src/main/assets`: 
+Download the following two files, then move them into the default asset directory `app/src/main/assets`: 
 
 ```console
 https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
@@ -51,7 +53,7 @@ https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recog
 ```
 
 {{% notice Tip %}}
-You might need to create an `assets` directory if it is not there already.
+You might need to create an `assets` directory if you do not have one already.
 {{% /notice %}}
 
 ### Advanced approach: configure prebuild download tasks 
@@ -94,7 +96,7 @@ tasks.named("preBuild") {
 
 ## Encapsulate MediaPipe vision tasks in a helper
 
-1. Sync project again. 
+1. Sync the project again. 
 
 {{% notice Tip %}}
 Refer to [this section](2-app-scaffolding.md#enable-view-binding) if you need help.
@@ -104,7 +106,11 @@ Refer to [this section](2-app-scaffolding.md#enable-view-binding) if you need he
 
 ![model asset bundles](images/4/model%20asset%20bundles.png)
 
-3. You are ready to import MediaPipe's Face Landmark Detection and Gesture Recognizer into the project. Example code is already implemented for ease of use based on [MediaPipe's sample code](https://github.com/google-ai-edge/mediapipe-samples/tree/main/examples). Simply create a new file `HolisticRecognizerHelper.kt` placed in the source directory along with `MainActivity.kt`, then copy paste the code below into it.
+3. You are ready to import MediaPipe's Face Landmark Detection and Gesture Recognizer into the project. 
+
+    Example code is already implemented for ease of use based on [MediaPipe's sample code](https://github.com/google-ai-edge/mediapipe-samples/tree/main/examples). 
+
+    Simply create a new file `HolisticRecognizerHelper.kt` placed in the source directory along with `MainActivity.kt`, then copy and paste the code below into it.
 
 ```kotlin
 package com.example.holisticselfiedemo
@@ -429,9 +435,9 @@ data class GestureResultBundle(
 ```
 
 {{% notice Info %}}
-In this learning path you are only configuring the MediaPipe vision solutions to recognize one person with at most two hands in the camera. 
+The scope of this Learning Path is limited to the recognition of at most one person with two hands in the camera using the MediaPipe vision solutions. 
 
-If you'd like to experiment with more people, change the `FACES_COUNT` constant to be your desired value.
+If you do want to experiment with a greater number of people, change the `FACES_COUNT` constant to a different value.
 {{% /notice %}}
 
-In the next section, you will connect the dots from this helper class to the UI layer via a ViewModel.
+In the next section, you will connect the dots from this helper class to the UI layer through a ViewModel.
