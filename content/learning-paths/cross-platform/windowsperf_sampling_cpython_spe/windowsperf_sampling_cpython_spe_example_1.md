@@ -24,7 +24,7 @@ start /affinity 2 cpython\PCbuild\arm64\python_d.exe -c 10**10**100
 ```
 
 {{% notice Note %}}
-The [start](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/start) command  line `/affinity <hexaffinity>` applies the specified processor affinity mask (expressed as a hexadecimal number). In this example, decimal `2` is `0x02` or `0b0010`. This value denotes core number `1` as `1` is a first bit in the mask, where the mask is indexed from `0`.
+The [start](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/start) command  line `/affinity <hexaffinity>` applies the specified processor affinity mask (expressed as a hexadecimal number). In this example, decimal `2` is `0x02` or `0b0010`. This value denotes core number `1` as `1` is a second bit in the mask, where the mask is indexed from `0`.
 {{% /notice %}}
 
 You can use the Windows Task Manager to confirm that `python_d.exe` is running on CPU core 1.
