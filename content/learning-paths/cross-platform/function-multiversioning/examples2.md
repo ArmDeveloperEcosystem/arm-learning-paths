@@ -10,8 +10,6 @@ This example computes the dot product of two vectors using Arm C Language Extens
 
 The intention is to enable the compiler to use SVE instructions in the specialized case, while restricting it to use only Armv8 instructions in the default case.
 
-More details on the default implementation can be found in [Implement dot product of two vectors](/learning-paths/smartphones-and-mobile/android_neon/dot_product_neon).
-
 Use a text editor to create a file named `dotprod.c` with the code below:
 
 ```c

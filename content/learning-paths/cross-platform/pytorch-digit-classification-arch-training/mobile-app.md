@@ -21,9 +21,9 @@ Start by modifying the `activity_main.xml` by adding a `CheckBox` to use the opt
     android:textSize="16sp"/>
 ```
 
-Copy the optimized model to the `assets` folder of the Android project.
+Copy the optimized model to the `assets` folder in the Android project.
 
-Replace the `MainActivity.kt` by the following code:
+Replace the code in `MainActivity.kt` Kotlin file with the following code:
 
 ```Kotlin
 package com.arm.armpytorchmnistinference
@@ -214,7 +214,7 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-The updated version of the Android application includes modifications to the Android Activity to dynamically load the model based on the state of the `CheckBox`.
+The updated version of the Android application includes modifications to the Android Activity source code to dynamically load the model based on the state of the `CheckBox`.
 
 When the `CheckBox` is selected, the app loads the optimized model, which is quantized and fused for improved performance. 
 
@@ -222,21 +222,21 @@ If the `CheckBox` is not selected, the app loads the original model.
 
 After the model is loaded, the inference is run. To better estimate the execution time, the `runInference()` method executes the inference 100 times in a loop. This provides a more reliable measure of the average inference time by smoothing out any inconsistencies from single executions.
 
-The results for a run on a physical device are shown below. These results indicate that, on average, the optimized model reduced the inference time to about 65% of the original model's execution time, showing a significant improvement in performance. 
+The results for a run on a physical device are shown below. These results indicate that, on average, the optimized model reduced the inference time to about 65% of the original model's execution time, which demonstrates a significant improvement in performance. 
 
 This optimization showcases the benefits of quantization and layer fusion for mobile inference, and there is further potential for enhancement by enabling hardware acceleration on supported devices. 
 
-This would allow the model to take full advantage of the device's computational capabilities, potentially reducing the inference time even more.
+This would allow the model to take full advantage of the device's computational capabilities, potentially further reducing the inference time.
 
-![fig](Figures/07.jpg)
+![fig alt-text#center](Figures/07.jpg "Figure 9.")
 
-![fig](Figures/08.jpg)
+![fig alt-text#center](Figures/08.jpg "Figure 10.")
 
-# What have you learned?
+### What have you learned?
 
 You have successfully optimized a neural network model for mobile inference using quantization and layer fusion. 
 
-Quantization and layer fusion removed unnecessary elements such as dropout layers during inference. 
+Quantization and layer fusion removes unnecessary elements such as dropout layers during inference. 
 
 By running multiple iterations of the inference process, you learned that the optimized model significantly reduced the average inference time to around 65% of the original time. 
 

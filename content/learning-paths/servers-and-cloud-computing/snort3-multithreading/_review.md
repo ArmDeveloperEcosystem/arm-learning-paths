@@ -2,40 +2,39 @@
 review:
     - questions:
         question: >
-            Which of the following is a key benefit of Snort3's multithreading support?
+            Which of the following is a key benefit of Snort 3's multithreading support?
         answers:
             - It allows Snort to detect encrypted traffic.
-            - It improves packet processing performance 
-            - It enables Snort to be run on legacy hardware
-            - It support multiple rule sets at the same time.
+            - It improves packet processing performance. 
+            - It enables Snort to be run on legacy hardware.
+            - It supports multiple rule sets at the same time.
         correct_answer: 2                    
         explanation: >
             It improves packet processing performance by parallelizing tasks.
 
     - questions:
         question: >
-            Which parameter is used to enable multithreading in Snort3?
+            Which parameter is used to enable multithreading in Snort 3?
         answers:
-            - --max-packet-threads
-            - --enable-threads
-            - --enable-multithreading
-            - --packet-loop
+            - --max-packet-threads.
+            - --enable-threads.
+            - --enable-multithreading.
+            - --packet-loop.
         correct_answer: 1                   
         explanation: >
             --max-packet-threads parameter is used to enable and configure multithreading.
                
     - questions:
         question: >
-            In Snort 3, which DAQ (Data Acquisition) module is used to read capture files for packet processing?
+            In Snort 3, which Data Acquisition (DAQ) module is used to read capture files for packet processing?
         answers:
-            - afpacket
-            - vpp
-            - dump
-            - pcap
+            - afpacket.
+            - vpp.
+            - dump.
+            - pcap.
         correct_answer: 3          
         explanation: >
-            The dump module in Snort3 is used to read capture files (such as .pcap or .pcapng files) for offline packet analysis. 
-
+            The dump module in Snort 3 is used to read capture files, such as .pcap or .pcapng files, for offline packet analysis.
 
 
 # ================================================================================

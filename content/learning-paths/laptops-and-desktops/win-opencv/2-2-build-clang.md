@@ -162,7 +162,7 @@ Once the library files are correctly generated, run the following command to ens
 
 Once the OpenCV library has been successfully created, you can create a simple application and try using it.
 
-### Prepare a application program
+### Prepare an application program
 
 First, use a text editor to save the following C++ program as `test_opencv.cpp` in the `build_clang` directory.
 
@@ -216,7 +216,7 @@ Run the test program:
 .\test_opencv.exe
 ```
 
-When you execute the command, it will finish quickly, and `test_image.png` is generated. If you don't have the DLL directory in your search path, the program appears to run, but no `test_image.png` is generated. 
+When you execute the command, it will finish quickly, and `test_image.png` is generated. If you do not have the DLL directory in your search path, the program appears to run, but no `test_image.png` is generated. 
 
 Open the image file, it should look like the example shown below.
 
