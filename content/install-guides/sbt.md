@@ -24,11 +24,16 @@ weight: 1
 
 sbt is available for Windows, macOS, Linux and supports the Arm architecture.
 
+{{% notice Note %}}
+When the project was created, it was called *Simple Build Tool*, but quickly evolved to *sbt*. Some have incorrectly redefined it to *Scala Build Tool*, which does not reflect the fact that sbt works with Java-only projects. 
+
+It is now called *sbt* in all lowercase letters, which emphasises the fact that it is not an acronym.{{% /notice %}}
+
 ## What should I consider before installing sbt on Arm?
 
 Before installing sbt, ensure you have Java installed on your system as sbt requires Java to run.
 
-Check the [Java install guide](/install-guides/java/) for more information.
+See the [Java install guide](/install-guides/java/) for more information.
 
 Confirm you are using an Arm machine by running:
 
@@ -45,9 +50,9 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## How do I install sbt for Ubuntu on Arm?
 
-sbt can be installed using the Ubuntu package manager. 
+You can install sbt using the Ubuntu package manager. 
 
-First, you will need to add the sbt repository:
+First, you need to add the sbt repository:
 
 ```bash
 sudo apt-get update
@@ -63,13 +68,13 @@ sudo apt-get update
 sudo apt-get install sbt -y
 ```
 
-Confirm the sbt and Java installation by running the sbt version command:
+Run the sbt version command to confirm the sbt and Java installation:
 
 ```bash
 sbt --version
 ```
 
-The version command also confirms you have a working Java. 
+The version command also confirms you have a working Java setup. 
 
 The version is printed and looks similar to:
 
@@ -78,4 +83,4 @@ sbt version in this project: 1.10.7
 sbt script version: 1.10.7
 ```
 
-You are ready to use sbt.
+You are now ready to use sbt.
