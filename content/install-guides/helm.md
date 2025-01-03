@@ -21,19 +21,17 @@ tool_install: true
 weight: 1
 ---
 
-[Helm](https://helm.sh/) is a tool for managing Kubernetes packages in a format called charts. 
-
-A chart is a group of configuration files that give you the resources that you need to deploy an application to a Kubernetes cluster.
+[Helm](https://helm.sh/) is a tool for managing Kubernetes packages in a format called charts. A chart is a group of configuration files that give you the resources that you need to deploy an application to a Kubernetes cluster.
 
 Helm supports the Arm architecture, and is available for Windows, macOS, and Linux.
 
 ## Before you begin
 
-There is information on [Installing Helm](https://helm.sh/docs/intro/install/) available which covers all supported operating systems.
+There is documentation available on [Installing Helm](https://helm.sh/docs/intro/install/) which covers all supported operating systems. 
 
-This article gives you a quick solution to install Helm for Ubuntu on Arm.
+This Install Guide gives you a quick solution for installing Helm for Ubuntu on Arm.
 
-Confirm you are using an Arm machine by running:
+To start, confirm you are using an Arm machine by running:
 
 ```bash
 uname -m
@@ -46,7 +44,7 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-You might need to install `curl` and `wget` if you don't already have them installed.
+You might need to install `curl` and `wget` if you do not already have them installed:
 
 ```bash
 sudo apt install -y curl wget
@@ -54,7 +52,7 @@ sudo apt install -y curl wget
 
 ## How do I download and install Helm?
 
-There are multiple ways to install Helm for Ubuntu on Arm, pick the one you like most.
+There are multiple ways to install Helm for Ubuntu on Arm. Here are three options from which you can choose.
 
 ### Option 1: Install using the release tar file
 
@@ -91,7 +89,7 @@ sudo snap install helm --classic
 
 ### How do I confirm that Helm is installed?
 
-Regardless of which option you use, confirm the executable is available:
+Regardless of which option you are using, confirm the executable is available:
 
 ```bash
 helm version
