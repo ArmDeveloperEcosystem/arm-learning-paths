@@ -8,22 +8,26 @@ layout: learningpathall
 
 ## Run the app on your device
 
-1. Connect your Android device to your computer with a USB data cable. 
+In this section, you will learn how to run the app on your device.
 
-    If this is your first time running and debugging Android apps, follow the guidance on the webpage [Set up a device for development](https://developer.android.com/studio/run/device#setting-up) on the Android Developer website, and check that you have done these two steps:
+#### Connect your device to your machine with a USB data cable
+
+If this is your first time running and debugging Android apps, follow the guidance on the Android Developer website [Set up a device for development](https://developer.android.com/studio/run/device#setting-up), and check that you have completed these steps:
     
-    * You have enabled USB debugging on your Android device following this webpage [Enable USB debugging on your device](https://developer.android.com/studio/debug/dev-options#Enable-debugging), also on the Android Developer website. 
+1. You have followed the instructions [Enable USB debugging on your device](https://developer.android.com/studio/debug/dev-options#Enable-debugging) from the Android Developer website. 
     
-    * You have confirmed that you have enabled USB debugging by tapping **OK** on your Android device when the **Allow USB debugging** dialog pops up, and that you have checked **Always allow from this computer**.
+2. You have confirmed that you have enabled USB debugging by tapping **OK** on your device when the **Allow USB debugging** dialog appears, and that you have checked **Always allow from this computer**, as Figure 6 shows.
 
-    ![AllowUSBDebugging alt-text#center](https://ftc-docs.firstinspires.org/en/latest/_images/AllowUSBDebugging.jpg "Figure 6: Allow USB Debugging.")
+![AllowUSBDebugging.jpg alt-text#center](https://ftc-docs.firstinspires.org/en/latest/_images/AllowUSBDebugging.jpg) "Figure 6: Allow USB Debugging."
 
 
-2. Make sure that your device model name and SDK version correctly show up on the top-right toolbar. Click the **Run** button to build and run the app.
+3. Make sure that your device model name and SDK version correctly show up in the top-right toolbar. 
 
-3. After a while, you should see a success notification in Android Studio and the new app will be displayed on your Android device. 
+    Click the **Run** button to build and run the app.
 
-4. However, you will see that the app shows a black screen while printing error messages in your [Logcat](https://developer.android.com/tools/logcat), which looks like this:
+4. After a while, you should see a notification of a successful build in Android Studio and the new app will be displayed on your Android device. 
+
+5. However, you will also see that the app shows a black screen while printing error messages in your [Logcat](https://developer.android.com/tools/logcat), which looks like this:
 
 ```
 2024-11-20 11:15:00.398 18782-18818 Camera2CameraImpl       com.example.holisticselfiedemo      E  Camera reopening attempted for 10000ms without success.
@@ -32,11 +36,11 @@ layout: learningpathall
 2024-11-20 11:43:03.408  2709-3807  PackageManager          pid-2709                             E  Permission android.permission.CAMERA isn't requested by package com.example.holisticselfiedemo
 ```
 
-5. This is expected behavior because you haven't yet correctly configured the app's [permissions](https://developer.android.com/guide/topics/permissions/overview). Android OS restricts this app's access to camera features due to privacy constraints.
+6. This is the expected behavior from having not yet correctly configured the app's [permissions](https://developer.android.com/guide/topics/permissions/overview). Android OS restricts this app's access to camera features due to privacy constraints.
 
-## Request camera permission at runtime
+#### Request camera permission at runtime
 
-1. Navigate to `manifest.xml` in your `app` subproject's `src/main` path. 
+1. Navigate to `manifest.xml` in your `app` sub-project's `src/main` path. 
 
     Declare the camera hardware and set the permissions by inserting the following lines into the `<manifest>` element. Ensure that it is declared outside and above the `<application>` element.
 
@@ -47,7 +51,7 @@ layout: learningpathall
     <uses-permission android:name="android.permission.CAMERA" />
 ```
 
-2. Navigate to `strings.xml` in your `app` subproject's `src/main/res/values` path.            
+2. Navigate to `strings.xml` in your `app` sub-project's `src/main/res/values` path.            
    Insert the following lines of text resources, which you will use at a later stage.
 
 ```xml
@@ -87,7 +91,7 @@ layout: learningpathall
         }
 ```
 
-6. Override `onRequestPermissionsResult` method to handle permission request results:
+6. Override the `onRequestPermissionsResult` method to handle permission request results:
 
 ```kotlin
     override fun onRequestPermissionsResult(
@@ -113,7 +117,7 @@ layout: learningpathall
     }
 ```
 
-## Verify camera permission
+#### Verify camera permission
 
 1. Rebuild and run the app. Now you should see a dialog pop up requesting camera permissions. 
 

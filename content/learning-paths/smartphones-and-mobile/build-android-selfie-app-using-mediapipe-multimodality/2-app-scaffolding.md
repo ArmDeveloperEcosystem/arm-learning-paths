@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 ## Download Android Studio
 
-Download and install the latest version of [Android Studio](https://developer.android.com/studio/) on your host machine.
+Start by downloading and installing the latest version of [Android Studio](https://developer.android.com/studio/) on your host machine.
 
 The instructions for this learning path were tested on a host machine running macOS, but you can use any of the supported hardware systems listed on the [Install Android Studio](https://developer.android.com/studio/install) webpage on the Android Developer website. 
 
@@ -18,11 +18,11 @@ After installation, open Android Studio and do the following:
 * Select the default or recommended settings. 
 
 {{% notice Tips %}}
-Before you proceed to coding, here are some tips that might come handy:
+Before you start coding, here are some useful tips:
 
 1. To navigate to a file, simply press the Shift key twice, input the file name, select the correct result using the up and down arrow keys, and then press Enter.
 
-2. Every time after you copy-and-paste a code block from this Learning Path, ensure that you import the correct classes and resolve the errors. For more information, see the [Auto import](https://www.jetbrains.com/help/idea/creating-and-optimizing-imports.html) web page.
+2. Every time after you copy-and-paste a code block from this Learning Path, ensure that you import the correct classes and resolve any errors. For more information, see the [Auto import](https://www.jetbrains.com/help/idea/creating-and-optimizing-imports.html) web page.
 {{% /notice %}}
 
 ## Create a new Android project
@@ -95,15 +95,15 @@ You can also click the **Sync Project with Gradle Files** button in the toolbar,
 ![Sync Project with Gradle Files](images/2/sync%20project%20with%20gradle%20files.png)
 {{% /notice %}}
 
-3. Navigate to the `MainActivity.kt` source file and make the following changes. 
+3. Navigate to the `MainActivity.kt` source file and make the changes that Figure 5 shows in the View Binding screenshot. 
 
-    This inflates the layout file into a view binding object and stores it in a member variable within the view controller for easier access later.
+    This inflates the layout file into a view binding object, and stores it in a member variable within the view controller for easier access later.
 
 ![view binding alt-text#center](images/2/view%20binding.png "Figure 5: View Binding.")
 
 ## Configure CameraX preview
 
-1. Replace the placeholder "Hello World!" in `TextView` within the layout file `activity_main.xml` with a camera preview view:
+1. Within the layout file `activity_main.xml`, replace the placeholder "Hello World!" in `TextView` with a camera preview view:
 
 ```xml
     <androidx.camera.view.PreviewView
@@ -189,7 +189,7 @@ private fun bindCameraUseCases() {
     }
 ```
 
-5. Add a [companion object](https://kotlinlang.org/docs/object-declarations.html#companion-objects) to `MainActivity.kt` and declare a `TAG` constant value for `Log` calls to work correctly. This companion object is useful in enabling you to define all the constants and shared values accessible across the entire class.
+5. Add a [companion object](https://kotlinlang.org/docs/object-declarations.html#companion-objects) to `MainActivity.kt`, and declare a `TAG` constant value for `Log` calls to work correctly. This companion object is useful in enabling you to define all the constants and shared values accessible across the entire class.
 
 ```kotlin
     companion object {
