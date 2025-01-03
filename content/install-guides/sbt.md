@@ -20,9 +20,9 @@ tool_install: true
 weight: 1
 ---
 
-[sbt](https://www.scala-sbt.org/) is a popular build tool for Scala and Java projects.
+[`sbt`](https://www.scala-sbt.org/) is a popular build tool for Scala and Java projects.
 
-sbt is available for Windows, macOS, Linux and supports the Arm architecture.
+`sbt` is available for Windows, macOS, Linux and supports the Arm architecture.
 
 {{% notice Note %}}
 When the project was created, it was called *Simple Build Tool*, but quickly evolved to *sbt*. Some have incorrectly redefined it to *Scala Build Tool*, which does not reflect the fact that sbt works with Java-only projects. 
@@ -31,7 +31,7 @@ It is now called *sbt* in all lowercase letters, which emphasises the fact that 
 
 ## What should I consider before installing sbt on Arm?
 
-Before installing sbt, ensure you have Java installed on your system as sbt requires Java to run.
+Before installing `sbt`, ensure you have Java installed on your system as `sbt` requires Java to run.
 
 See the [Java install guide](/install-guides/java/) for more information.
 
@@ -50,9 +50,9 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## How do I install sbt for Ubuntu on Arm?
 
-You can install sbt using the Ubuntu package manager. 
+You can install `sbt` using the Ubuntu package manager. 
 
-First, you need to add the sbt repository:
+First, you need to add the `sbt` repository:
 
 ```bash
 sudo apt-get update
@@ -61,14 +61,14 @@ echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | sudo tee /etc/a
 curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x99E82A75642AC823" | sudo apt-key add
 ```
 
-Next, install sbt:
+Next, install `sbt`:
 
 ```bash
 sudo apt-get update
 sudo apt-get install sbt -y
 ```
 
-Run the sbt version command to confirm the sbt and Java installation:
+Run the `sbt` version command to confirm the `sbt` and Java installation:
 
 ```bash
 sbt --version
@@ -83,4 +83,4 @@ sbt version in this project: 1.10.7
 sbt script version: 1.10.7
 ```
 
-You are now ready to use sbt.
+You are now ready to use `sbt`.
