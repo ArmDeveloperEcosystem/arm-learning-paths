@@ -1,23 +1,22 @@
 ---
-title: Sampling CPython with WindowsPerf and Arm SPE
-draft: true
-cascade:
-    draft: true
+title: Sample Instructions with WindowsPerf and Arm SPE
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers keen to understand sampling with the Arm Statistical Profiling Extension (SPE).
+who_is_this_for: This is an introductory topic for developers who would like to learn about sampling CPU instructions with WindowsPerf and the Arm Statistical Profiling Extension (SPE).
 
 learning_objectives:
     - Use WindowsPerf with a native Windows on Arm workload.
-    - Understand the basics of sampling with Arm SPE.
+    - Describe the basic concepts of sampling with Arm SPE.
     - Explore the WindowsPerf command line.
-    - Build CPython from sources for Windows on Arm (ARM64).
+    - Build CPython from sources for Windows on Arm (AArch64).
 
 prerequisites:
-    - Windows on Arm desktop or development machine with [WindowsPerf](/install-guides/wperf), [Visual Studio](/install-guides/vs-woa/), and [Git](/install-guides/git-woa/) installed.
-    - The Windows on Arm system must have an Arm CPU with SPE support. 
-
+    - A Windows on Arm desktop or development machine, with CPU support for SPE.
+    - An installation of [WindowsPerf](/install-guides/wperf).
+    - An installation of [Visual Studio](/install-guides/vs-woa/).
+    - An installation of [Git](/install-guides/git-woa/).
+  
 author_primary: Przemyslaw Wirkus
 
 ### Tags
