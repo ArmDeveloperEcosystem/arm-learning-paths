@@ -1,5 +1,5 @@
 ---
-title: SBT (Scala Build Tool)
+title: sbt
 
 author_primary: Jason Andrews
 minutes_to_complete: 10
@@ -20,13 +20,13 @@ tool_install: true
 weight: 1
 ---
 
-The Scala Build Tool, [SBT](https://www.scala-sbt.org/), is a popular build tool for Scala and Java projects.
+[sbt](https://www.scala-sbt.org/) is a popular build tool for Scala and Java projects.
 
-SBT is available for Windows, macOS, Linux and supports the Arm architecture.
+sbt is available for Windows, macOS, Linux and supports the Arm architecture.
 
-## What should I consider before installing SBT on Arm?
+## What should I consider before installing sbt on Arm?
 
-Before installing SBT, ensure you have Java installed on your system as SBT requires Java to run.
+Before installing sbt, ensure you have Java installed on your system as sbt requires Java to run.
 
 Check the [Java install guide](/install-guides/java/) for more information.
 
@@ -43,11 +43,11 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## How do I install SBT for Ubuntu on Arm?
+## How do I install sbt for Ubuntu on Arm?
 
-SBT can be installed using the Ubuntu package manager. 
+sbt can be installed using the Ubuntu package manager. 
 
-First, you'll need to add the SBT repository:
+First, you will need to add the sbt repository:
 
 ```bash
 sudo apt-get update
@@ -56,14 +56,14 @@ echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | sudo tee /etc/a
 curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x99E82A75642AC823" | sudo apt-key add
 ```
 
-Next, install SBT:
+Next, install sbt:
 
 ```bash
 sudo apt-get update
 sudo apt-get install sbt -y
 ```
 
-Confirm the SBT and Java installation by running the SBT version command:
+Confirm the sbt and Java installation by running the sbt version command:
 
 ```bash
 sbt --version
@@ -78,4 +78,4 @@ sbt version in this project: 1.10.7
 sbt script version: 1.10.7
 ```
 
-You are ready to use the Scala Build Tool, `sbt`.
+You are ready to use sbt.
