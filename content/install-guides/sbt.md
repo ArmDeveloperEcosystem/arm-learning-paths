@@ -22,7 +22,7 @@ weight: 1
 
 [`sbt`](https://www.scala-sbt.org/) is a popular build tool for Scala and Java projects.
 
-`sbt` is available for Windows, macOS, Linux and supports the Arm architecture.
+`sbt` supports the Arm architecture is available for Windows, macOS, and Linux.
 
 {{% notice Note %}}
 When the project was created, it was called *Simple Build Tool*, but quickly evolved to *sbt*. Some have incorrectly redefined it to *Scala Build Tool*, which does not reflect the fact that sbt works with Java-only projects. 
