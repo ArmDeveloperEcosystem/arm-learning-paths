@@ -1,16 +1,17 @@
 ---
-title: Flow data to view controller:Events
+title: Use SharedFlow to View Events
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Kotlin Flow APIs
 
 [SharedFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#sharedflow) and [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#stateflow) are [Kotlin Flow](https://developer.android.com/kotlin/flow) APIs that enable Flows to optimally emit state updates and emit values to multiple consumers.
 
-In this learning path, you will experiment with both `SharedFlow` and `StateFlow`. This section focuses on SharedFlow, and the next chapter focuses on StateFlow.
+In this Learning Path, you will experiment with both `SharedFlow` and `StateFlow`. This section focuses on SharedFlow, and the section focuses on StateFlow.
 
-`SharedFlow` is a general-purpose, hot flow that can emit values to multiple subscribers. It is highly configurable, allowing you to set the replay cache size, buffer capacity, etc.
+`SharedFlow` is a general-purpose, hot flow that can emit values to multiple subscribers. It is highly configurable, allowing you to configure settings such as the replay cache size and buffer capacity.
 
 ## Expose UI events in SharedFlow
 
@@ -180,7 +181,7 @@ class FaceLandmarkerOverlayView(context: Context?, attrs: AttributeSet?) :
 ```
 
 
-2. Create a new file named `GestureOverlayView.kt` and copy the content below:
+2. Create a new file named `GestureOverlayView.kt` and copy in the text below:
 
 ```kotlin
 /*
