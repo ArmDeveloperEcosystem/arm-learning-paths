@@ -10,9 +10,11 @@ layout: learningpathall
 
 The `ViewModel` class is a [business logic or screen level state holder](https://developer.android.com/topic/architecture/ui-layer/stateholders). It exposes state to the UI and encapsulates related business logic. 
 
-The main advantage of using View Model is that it caches state and persists it through configuration changes. This means that the UI does not have to fetch data again when navigating between activities, or following configuration changes, such as screen rotation.
+The main advantage of using `ViewModel` is that it caches state and persists it through configuration changes. This means that the UI does not have to fetch data again when navigating between activities, or following configuration changes, such as screen rotation.
 
 ## Introduce Jetpack Lifecycle dependency
+
+You can now bring in the Jetpack Lifecycle libraries.
 
 1. Navigate to `libs.versions.toml` and append the following line to the end of `[versions]` section. This defines the version of the Jetpack Lifecycle libraries that you will be using.
 
