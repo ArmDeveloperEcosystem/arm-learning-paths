@@ -6,13 +6,15 @@ weight: 9
 layout: learningpathall
 ---
 
-So far, you have implemented the core logic for MediaPipe's face and gesture task results and photo capture execution. However, the view controller does not communicate its execution results back to the view model, which raises the risk of photo capture failures, frequent or duplicate requests, and other potential issues.
+So far you have implemented the core logic for MediaPipe's face and gesture task results and photo capture execution. However, the view controller is not communicating its execution results back to the view model, which raises the risk for photo capture failures, frequent or duplicate requests, and other potential issues.
 
 ### Introduce camera readiness state
 
-It is best practice to complete the data flow cycle by providing callbacks for the view controller's states. This ensures that the view model does not emit values in undesired states, such as when the camera is busy or unavailable.
+It is best practice to complete the data flow cycle by providing callbacks for the states of the view controller. This ensures that the view model does not emit values in undesired states, such as when the camera is busy or unavailable.
 
-1. Navigate to `MainViewModel` and add a `MutableStateFlow` named `_isCameraReady` as a  private member variable. This tracks whether the camera is busy or unavailable.
+1. Navigate to `MainViewModel` and add a `MutableStateFlow` named `_isCameraReady` as a  private member variable. This tracks whether the camera is busy or unavailable. 
+
+Copy in the following:
 
 ```kotlin
     private val _isCameraReady = MutableStateFlow(true)
@@ -54,9 +56,9 @@ It is best practice to complete the data flow cycle by providing callbacks for t
 
 ## Introduce camera cooldown
 
-The duration of an image capture can vary across Android devices due to differences in hardware. Additionally, consecutive image captures place a heavy load on the CPU, GPU, camera, and flash memory buffer.
+The differences in hardware mean that the duration of an image capture varies across Android devices. Additionally, consecutive image captures place a heavy load on the CPU, GPU, camera, and flash memory buffer.
 
-To address this, implementing a simple cooldown mechanism after each photo capture can enhance the user experience while conserving computing resources.
+To address this, you can implement a simple cooldown mechanism after each photo capture that can enhance the user experience while conserving computing resources.
 
 1. Add the following constant value to `MainViewModel`'s companion object. This defines a three-second cooldown before making the camera available again.
 
