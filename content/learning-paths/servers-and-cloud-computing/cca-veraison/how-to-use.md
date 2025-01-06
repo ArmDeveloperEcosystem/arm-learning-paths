@@ -8,10 +8,10 @@ layout: learningpathall
 
 ## Highlights
 
-Some highlights of using this Learning Path are the following:
+These are some highlights of using this Learning Path:
 
-* Practical, hands-on experience with the data formats and workflows associated with attestation, which in turn will help to provide you with a joined-up understanding of the many separate documents and specifications that exist on this topic.
+* Code examples that demonstrate some of the common concepts in attestation.
 
-* An opportunity to learn about the common concepts in attestation, supported by code examples as a demonstration. 
+* Practical, hands-on experience with the data formats and workflows associated with attestation, which help to provide you with a joined-up understanding of the many separate documents and specifications that exist on this topic.
 
-* In advance of the practical sections, a chance to read theoretical overviews of both CCA Attestation and Veraison to help you grasp the basic concepts before progressing to the practical sections.
+* Theoretical overviews of both CCA Attestation and Veraison to help you grasp the basic concepts before progressing to the practical sections.

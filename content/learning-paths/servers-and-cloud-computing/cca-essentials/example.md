@@ -59,11 +59,11 @@ INFO Actix runtime found; starting in Actix runtime
 INFO starting service: "actix-web-service-172.17.0.2:8088", workers: 16, listening on: 172.17.0.2:8088
 ```
 
-With the key broker server running in one terminal, open up a new terminal in which you will run the key broker client in the next step.
+With the Key Broker Server running in one terminal, open up a new terminal in which you will run the Key Broker Client in the next step.
 
 ## Run the Key Broker Client
 
-In the new terminal that you have just opened, pull the docker container image that contains the FVP and pre-built software binaries to run the key broker client in a realm.
+In the new terminal that you have just opened, pull the docker container image that contains the FVP and pre-built software binaries to run the Key Broker Client in a realm.
 
 ```bash
 docker pull armswdev/cca-learning-path:cca-simulation-v1
@@ -134,15 +134,15 @@ realm login: root
 (realm) #
 ```
 
-Now run the key broker client application in the realm. 
+Now run the Key Broker Client application in the realm. 
 
-Use the endpoint address that the key broker server is listening in on the other terminal:
+Use the endpoint address that the Key Broker Server is listening in on the other terminal:
 
 ```bash
 cd /cca 
 ./keybroker-app -v --endpoint http://172.17.0.2:8088 skywalker 
 ```
-In the command above, `skywalker` is the key name that is requested from the key broker server. 
+In the command above, `skywalker` is the key name that is requested from the Key Broker Server. 
 
 After some time, you should see the following output:
 ```
@@ -151,11 +151,11 @@ INFO Challenge (64 bytes) = [0f, ea, c4, e2, 24, 4e, fa, dc, 1d, ea, ea, 3d, 60,
 INFO Submitting evidence to URL http://172.17.0.2:8088/keys/v1/evidence/3974368321
 INFO Attestation failure :-( ! AttestationFailure: No attestation result was obtained. No known-good reference values.
 ```
-You can see from the key broker client application output that the `skywalker` key is requested from the key broker server, which did send a challenge. 
+You can see from the Key Broker client application output that the `skywalker` key is requested from the Key Broker Server, which did send a challenge. 
 
-The key broker client application uses the challenge to submit its evidence back to the key broker server, but it receives an attestation failure. This is because the server does not have any known good reference values.
+The Key Broker Client application uses the challenge to submit its evidence back to the Key Broker Server, but it receives an attestation failure. This is because the server does not have any known good reference values.
 
-Now look at the key broker server output on the terminal where the server is running. It will look like this:
+Now look at the Key Broker Server output on the terminal where the server is running. It will look like this:
 
 ```output
 INFO Known-good RIM values are missing. If you trust the client that submitted
@@ -164,15 +164,15 @@ command-line option to populate it with known-good RIM values:
 --reference-values <(echo '{ "reference-values": [ "tiA66VOokO071FfsCHr7es02vUbtVH5FpLLqTzT7jps=" ] }')
 INFO Evidence submitted for challenge 1302147796: no attestation result was obtained. No known-good reference values.
 ```
-From the server output, you can see that it did create the challenge for the key broker application, but it reports that it has no known good reference values. 
+From the server output, you can see that it did create the challenge for the Key Broker application, but it reports that it has no known good reference values. 
 
-It does however provide a way to provision the key broker server with known good values if the client is trusted. 
+It does however provide a way to provision the Key Broker Server with known good values if the client is trusted. 
 
-In a production environment, the known good reference value is generated using a deployment- specific process, but for demonstration purposes and simplification, you will use the value proposed by the key broker server.
+In a production environment, the known good reference value is generated using a deployment- specific process, but for demonstration purposes and simplification, you will use the value proposed by the Key Broker Server.
 
-Now go ahead and terminate the running instance of the key broker server using Ctrl+C and restart it with the known good reference value. 
+Now go ahead and terminate the running instance of the Key Broker Server using Ctrl+C and restart it with the known good reference value. 
 
-Notice here that you need to copy the `--reference-values` argument directly from the previous error message reported by the key broker. 
+Notice here that you need to copy the `--reference-values` argument directly from the previous error message reported by the Key Broker. 
 
 When running the next command, ensure that you are copying the exact value reported, for example:
 
@@ -180,7 +180,7 @@ When running the next command, ensure that you are copying the exact value repor
 ./keybroker-server -v --addr 172.17.0.2 --reference-values <(echo '{ "reference-values": [ "tiA66VOokO071FfsCHr7es02vUbtVH5FpLLqTzT7jps=" ] }')
 ```
 
-On the terminal with the running realm, rerun the key broker client application with the exact same command line parameters as before:
+On the terminal with the running realm, rerun the Key Broker Client application with the exact same command line parameters as before:
 
 ```bash
 ./keybroker-app -v --endpoint http://172.17.0.2:8088 skywalker

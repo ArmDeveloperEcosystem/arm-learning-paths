@@ -19,7 +19,7 @@ wget https://go.dev/dl/go1.23.3.linux-$(dpkg --print-architecture).tar.gz
 tar -C /usr/local -xzf go1.23.3.linux-$(dpkg --print-architecture).tar.gz
 ```
 
-Export the installation path and add it to your `$PATH environment` variable.
+Export the installation path and add it to your `$PATH environment` variable:
 
 ```bash
 export PATH=$PATH:/usr/local/go/bin
@@ -56,17 +56,19 @@ Use GitHub’s download button, located on the right of the upper toolbar, to do
 
 ![download_raw.png](./download_raw.png)
 
-Place this file in the `$HOME` folder, while retaining the file name. The rest of this Learning Path uses the notation `$HOME/cca_example_token.cbor` as the file path.
+Place this file in the `$HOME` folder, while retaining the file name. 
+
+The rest of this Learning Path uses the notation `$HOME/cca_example_token.cbor` as the file path.
 
 {{% notice Note %}}
 You will notice that the filename extension on the example token is `.cbor`, which also denotes the format of the data. CBOR is an acronym for Concise Binary Object Representation. You might already be familiar with JSON (the JavaScript Object Notation). JSON provides a standard way of conveying the nested structures of key-value pairs. CBOR is conceptually the same as JSON. The difference is that CBOR is a binary format, rather than a text-based format like JSON. CBOR is designed for compactness and machine-readability, but at the expense of human-readability. You can learn more about CBOR [here](https://cbor.io/).
 {{% /notice %}}
 
-## Build the EVCLI Tool
+## Build the evcli tool
 
-Now that you have downloaded the example CCA attestation token, the next step is to look inside the token and learn about the data that it contains. As the token is a binary file, you will need to use a tool to parse the file and display its contents. The tool that you will use is a command-line tool called `evcli`. Evcli is an acronym for EVidence Command Line Interface, linking with the idea that attestation tokens are used to convey evidence about realms and the platforms on which they are hosted.
+Now that you have downloaded the example CCA attestation token, the next step is to look inside the token and learn about the data that it contains. As the token is a binary file, you will need to use a tool to parse the file and display its contents. The tool that you will use is a command-line tool called `evcli`. 
 
-The `evcli` tool is part of the Veraison Open-Source project, which was covered in the previous section.
+`evcli` is an acronym for EVidence Command Line Interface, which goes back to the idea that attestation tokens are used to convey evidence about realms and the platforms on which they are hosted. The `evcli` tool is part of the Veraison Open-Source project, which was covered in the previous section.
 
 Clone the source code using git as follows:
 

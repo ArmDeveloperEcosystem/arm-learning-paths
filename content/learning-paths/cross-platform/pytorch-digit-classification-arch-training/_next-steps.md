@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   Proceed to Use Keras Core with TensorFlow, PyTorch, and JAX backends to continue exploring Machine Learning.
+   To continue exploring Machine Learning, you can now learn about using Keras Core with TensorFlow, PyTorch, and JAX backends.
 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 

@@ -1,7 +1,7 @@
 summary:
-  content_total: 308
-  content_with_all_tests_passing: 32
-  content_with_tests_enabled: 34
+  content_total: 317
+  content_with_all_tests_passing: 31
+  content_with_tests_enabled: 33
 sw_categories:
   cross-platform:
     dynamic-memory-allocator:
@@ -117,10 +117,6 @@ sw_categories:
       readable_title: Measure Machine Learning Inference Performance on Arm servers
       tests_and_status:
       - ubuntu:latest: passed
-    mongodb:
-      readable_title: Test the performance of MongoDB on Arm servers
-      tests_and_status:
-      - mongo:latest: passed
     mysql_tune:
       readable_title: Learn how to Tune MySQL
       tests_and_status:

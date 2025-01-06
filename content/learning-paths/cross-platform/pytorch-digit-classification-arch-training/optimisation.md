@@ -7,7 +7,7 @@ weight: 13
 layout: "learningpathall"
 ---
 
-To optimize the model use the `pytorch-digits-model-optimisations.ipynb` to add the following lines:
+To optimize the model, use the `pytorch-digits-model-optimizations.ipynb` to add the following lines:
 
 ```python
 from torch.utils.mobile_optimizer import optimize_for_mobile

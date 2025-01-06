@@ -6,9 +6,9 @@ weight: 7
 layout: learningpathall
 ---
 
-## Build the ARC Tool
+## Build the arc tool
 
-You are already familiar with the evcli tool, which you can use to process attestation tokens. There is a very similar tool called `arc`, which you can use to process attestation results. The arc tool is also part of the Veraison project. 
+You are already familiar with the evcli tool, which you can use to process attestation tokens. There is a very similar tool called `arc`, which you can use to process attestation results. The `arc` tool is also part of the Veraison project. 
 
 Clone its repository as follows:
 

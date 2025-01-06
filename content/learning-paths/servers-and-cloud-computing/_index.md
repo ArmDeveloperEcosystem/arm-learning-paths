@@ -83,8 +83,7 @@ tools_software_languages_filter:
 - HammerDB: 1
 - InnoDB: 1
 - Intrinsics: 1
-- JAVA: 1
-- Java: 2
+- Java: 3
 - JAX: 1
 - Kafka: 1
 - Keras: 1
