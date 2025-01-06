@@ -14,14 +14,14 @@ MediaPipe Tasks provides the core programming interface of the MediaPipe Solutio
 
 1. Navigate to `libs.versions.toml` and append the following line to the end of the `[versions]` section. 
 
-This defines the version of MediaPipe library that you will be using.
+This defines the version of MediaPipe library that you will be using:
 
 ```toml
 mediapipe-vision = "0.10.15"
 ```
 
 {{% notice Note %}}
-Ensure that you use this version and not newer versions as they might introduce bugs and unexpected behavior.
+Ensure that you use this particular version, and not later versions as they might produce unexpected behavior.
 {{% /notice %}}
 
 2. Append the following lines to the end of the `[libraries]` section. This declares MediaPipe's vision dependency:
@@ -42,7 +42,7 @@ In this app, you will use MediaPipe's [Face Landmark Detection](https://ai.googl
 
 Choose one of the two options below that aligns best with your learning needs.
 
-### Basic approach: manual download
+### 1. Basic approach: manual download
 
 Download the following two files, then move them into the default asset directory `app/src/main/assets`: 
 
@@ -56,15 +56,17 @@ https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recog
 You might need to create an `assets` directory if you do not have one already.
 {{% /notice %}}
 
-### Advanced approach: configure prebuild download tasks 
+### 2. Advanced approach: configure prebuild download tasks 
 
-Gradle does not come with a convenient [Task](https://docs.gradle.org/current/userguide/tutorial_using_tasks.html) type to manage downloads, so you will use the [gradle-download-task](https://github.com/michel-kraemer/gradle-download-task) dependency.
+As Gradle does not come with a convenient [Task](https://docs.gradle.org/current/userguide/tutorial_using_tasks.html) type to manage downloads, you will need to use the [gradle-download-task](https://github.com/michel-kraemer/gradle-download-task) dependency.
 
 1. Navigate to `libs.versions.toml`. Then:
 
     * Append `download = "5.6.0"` to the `[versions]` section, and append `de-undercouch-download = { id = "de.undercouch.download", version.ref = "download" }  to `[plugins]` section.
 
-2. Navigate to `build.gradle.kts` in your project's `app` directory. Then append `alias(libs.plugins.de.undercouch.download)` to the `plugins` block. This enables the _Download_ task plugin in this `app` subproject.
+2. Navigate to `build.gradle.kts` in your project's `app` directory. Then:
+
+    * Append `alias(libs.plugins.de.undercouch.download)` to the `plugins` block. This enables the _Download_ task plugin in this `app` subproject.
 
 3. Insert the following lines between the `plugins` block and the `android` block to define the constant values, including the asset directory path and the URLs for both models:
 
@@ -99,7 +101,7 @@ tasks.named("preBuild") {
 1. Sync the project again. 
 
 {{% notice Tip %}}
-Refer to [this section](2-app-scaffolding.md#enable-view-binding) if you need help.
+See the previous section [Set up the Development Environment](2-app-scaffolding.md#enable-view-binding), as a reminder on how to do this.
 {{% /notice %}}
 
 2. Now you should see both model asset bundles in your `assets` directory, as shown below:
@@ -110,7 +112,7 @@ Refer to [this section](2-app-scaffolding.md#enable-view-binding) if you need he
 
     Example code is already implemented for ease of use based on [MediaPipe's sample code](https://github.com/google-ai-edge/mediapipe-samples/tree/main/examples). 
 
-    Simply create a new file `HolisticRecognizerHelper.kt` placed in the source directory along with `MainActivity.kt`, then copy and paste the code below into it.
+    Simply create a new file called `HolisticRecognizerHelper.kt`, and place it in the source directory along with `MainActivity.kt`, then copy-and-paste the code below into it:
 
 ```kotlin
 package com.example.holisticselfiedemo
@@ -435,9 +437,9 @@ data class GestureResultBundle(
 ```
 
 {{% notice Info %}}
-The scope of this Learning Path is limited to the recognition of at most one person with two hands in the camera using the MediaPipe vision solutions. 
+The scope of this Learning Path is limited to the recognition of one person with two hands in the camera using the MediaPipe vision solutions. 
 
-If you do want to experiment with a greater number of people, change the `FACES_COUNT` constant to a different value.
+If you would like to experiment with a greater number of people, change the `FACES_COUNT` constant to a higher value.
 {{% /notice %}}
 
 In the next section, you will connect the dots from this helper class to the UI layer through a ViewModel.

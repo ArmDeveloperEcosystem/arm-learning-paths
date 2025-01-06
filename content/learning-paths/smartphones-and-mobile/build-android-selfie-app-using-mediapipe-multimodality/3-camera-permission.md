@@ -6,19 +6,15 @@ weight: 3
 layout: learningpathall
 ---
 
-## Run the app on your device
+### Connect your device to your machine with a USB data cable
 
-In this section, you will learn how to run the app on your device.
-
-#### Connect your device to your machine with a USB data cable
-
-If this is your first time running and debugging Android apps, follow the guidance on the Android Developer website [Set up a device for development](https://developer.android.com/studio/run/device#setting-up), and check that you have completed these steps:
+If this is your first time running and debugging Android apps, follow the guidance on the Android Developer website. See [Set up a device for development](https://developer.android.com/studio/run/device#setting-up), and check that you have completed these steps:
     
-1. You have followed the instructions [Enable USB debugging on your device](https://developer.android.com/studio/debug/dev-options#Enable-debugging) from the Android Developer website. 
+1. You have followed the instructions [Enable USB debugging on your device](https://developer.android.com/studio/debug/dev-options#Enable-debugging). 
     
-2. You have confirmed that you have enabled USB debugging by tapping **OK** on your device when the **Allow USB debugging** dialog appears, and that you have checked **Always allow from this computer**, as Figure 6 shows.
+2. You have confirmed that you have enabled USB debugging by tapping **OK** on your device when the **Allow USB debugging** dialog appears, and that you have checked **Always allow from this computer**. See Figure 6.
 
-![AllowUSBDebugging.jpg alt-text#center](https://ftc-docs.firstinspires.org/en/latest/_images/AllowUSBDebugging.jpg) "Figure 6: Allow USB Debugging."
+![AllowUSBDebugging.jpg #center](https://ftc-docs.firstinspires.org/en/latest/_images/AllowUSBDebugging.jpg "Figure 6: Allow USB Debugging.")
 
 
 3. Make sure that your device model name and SDK version correctly show up in the top-right toolbar. 
@@ -36,13 +32,13 @@ If this is your first time running and debugging Android apps, follow the guidan
 2024-11-20 11:43:03.408  2709-3807  PackageManager          pid-2709                             E  Permission android.permission.CAMERA isn't requested by package com.example.holisticselfiedemo
 ```
 
-6. This is the expected behavior from having not yet correctly configured the app's [permissions](https://developer.android.com/guide/topics/permissions/overview). Android OS restricts this app's access to camera features due to privacy constraints.
+This is the expected behavior from having not yet correctly configured the app's permissions. See[Permissions](https://developer.android.com/guide/topics/permissions/overview) on the Android Developer website. Android OS restricts the app's access to camera features due to privacy constraints.
 
-#### Request camera permission at runtime
+### Request camera permission at runtime
 
 1. Navigate to `manifest.xml` in your `app` sub-project's `src/main` path. 
 
-    Declare the camera hardware and set the permissions by inserting the following lines into the `<manifest>` element. Ensure that it is declared outside and above the `<application>` element.
+    Declare the camera hardware, and set the permissions by inserting the following lines into the `<manifest>` element, ensuring that it is declared outside and above the `<application>` element:
 
 ```xml
     <uses-feature
@@ -52,7 +48,7 @@ If this is your first time running and debugging Android apps, follow the guidan
 ```
 
 2. Navigate to `strings.xml` in your `app` sub-project's `src/main/res/values` path.            
-   Insert the following lines of text resources, which you will use at a later stage.
+   Insert the following lines of text resources, which you will use at a later stage:
 
 ```xml
     <string name="permission_request_camera_message">Camera permission is required to recognize face and hands</string>
@@ -77,8 +73,8 @@ If this is your first time running and debugging Android apps, follow the guidan
     }
 ```
 
-5. Add a condition check in `onCreate()` wrapping `setupCamera()` method, to request camera 
-   permission on runtime.
+5. Add a condition check in on the `onCreate()` wrapping `setupCamera()` method, to request camera 
+   permission on runtime:
 
 ```kotlin
         if (!hasPermissions(baseContext)) {
@@ -117,14 +113,16 @@ If this is your first time running and debugging Android apps, follow the guidan
     }
 ```
 
-#### Verify camera permission
+### Verify camera permission
 
 1. Rebuild and run the app. Now you should see a dialog pop up requesting camera permissions. 
 
-2. Depending on your Android OS version, tap **Allow** or **While using the app**(). Then you should see your own face in the camera preview. Good job!  
+2. Depending on your Android OS version, tap **Allow** or **While using the app**(). 
+
+You should then see your own face in the camera preview. Good job!  
 
 {{% notice Tip %}}
-You might need to restart the app to observe the permission change take effect.
+You might need to restart the app to ensure that the permission change takes effect.
 {{% /notice %}}
 
 In the next section, you will learn how to integrate MediaPipe vision solutions. 

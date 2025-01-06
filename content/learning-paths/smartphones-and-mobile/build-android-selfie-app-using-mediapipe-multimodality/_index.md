@@ -6,7 +6,7 @@ minutes_to_complete: 120
 who_is_this_for: This is an introductory topic for mobile application developers interested in learning how to build an Android selfie application with Modern MediaPipe Multimodal AI, Kotlin flows, and CameraX, using the Modern Android Development (MAD) architecture design.
 
 learning_objectives:
-    - Architect a modern Android app focussing on the UI layer.
+    - Architect a modern hands-free selfie Android app with MediaPipe.
     - Leverage lifecycle-aware components within the Model-View-ViewModel (MVVM) architecture.
     - Combine MediaPipe's face landmark detection and gesture recognition for integration in a multimodel selfie solution.
     - Use JetPack CameraX to access camera features.

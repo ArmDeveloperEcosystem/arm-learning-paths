@@ -32,16 +32,18 @@ Before you start coding, here are some useful tips:
 2. Select **Empty Views Activity** in the **Phone and Tablet** gallery as Figure 1 shows, then select **Next**.
 ![Empty Views Activity.png alt-text#center](images/2/empty%20project.png "Figure 1: Select Empty Views Activity.")
 
-3. Choose a project name, and select the default configurations as Figure 2 shows. Make sure that the **Language** field is set to **Kotlin**, and **Build configuration language** is set to **Kotlin DSL**.
+3. Choose a project name, and select the default configurations as Figure 2 shows. 
+
+    Make sure that the **Language** field is set to **Kotlin**, and the **Build configuration language** field is set to **Kotlin DSL**.
 ![Project configuration.png alt-text#center](images/2/project%20config.png "Figure 2: Project Configuration.")
 
-## Introduce CameraX dependencies
+## Add CameraX dependencies
 
 [CameraX](https://developer.android.com/media/camera/camerax) is a Jetpack library, built to help make camera app development easier. It provides a consistent, easy-to-use API that works across the vast majority of Android devices with great backward-compatibility.
 
-1. Wait for Android Studio to sync project with Gradle files, this might take several minutes.
+1. Wait for Android Studio to sync project with Gradle files. This might take several minutes.
 
-2. Once the project is synced, navigate to `libs.versions.toml` in your project's root directory as Figure 3 shows. This file serves as the version catalog for all dependencies used in the project.
+2. Once the project is synced, navigate to `libs.versions.toml` in your project's root directory. See Figure 3. This file serves as the version catalog for all dependencies that the project uses.
 
 ![Version Catalog.png alt-text#center](images/2/dependency%20version%20catalog.png "Figure 3: Version Catalog.")
 
@@ -84,7 +86,7 @@ camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "
     }
 ```
 
-2. You should see that a notification appears, as Figure 4 shows. Click **Sync Now** to sync your project.
+2. You should see that a notification appears. See Figure 4. Click **Sync Now** to sync your project.
 
 ![Gradle sync.png alt-text#center](images/2/gradle%20sync.png "Figure 4: Gradle Sync.")
 
