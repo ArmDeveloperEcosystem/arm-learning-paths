@@ -53,7 +53,13 @@ networks:
 Use the following command to deploy Elasticsearch and Kibana Dashboard.
 
 ```console
-docker-compose up
+docker compose up
+```
+
+```Note
+If you don't have the `docker compose` plugin already installed, you can install it via the following commands
+sudo apt-get update
+sudo apt-get install docker-compose-plugin
 ```
 
 After the dashboard is up, use the the public IP of your server on the port 5601 to access the Kibana dashboard.
