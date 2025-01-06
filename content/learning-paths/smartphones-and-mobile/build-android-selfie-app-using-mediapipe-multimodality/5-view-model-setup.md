@@ -8,21 +8,21 @@ layout: learningpathall
 
 ## ViewModel
 
-The `ViewModel` class is a [business logic or screen level state holder](https://developer.android.com/topic/architecture/ui-layer/stateholders). It exposes state to the UI and encapsulates related business logic. 
+The `ViewModel` class is a business logic or screen level state holder, as explained in [ViewModel overview](https://developer.android.com/topic/architecture/ui-layer/stateholders) on the Android Developer website. It exposes state to the UI and encapsulates related business logic. 
 
-The main advantage of using `ViewModel` is that it caches state and persists it through configuration changes. This means that the UI does not have to fetch data again when navigating between activities, or following configuration changes, such as screen rotation.
+The main advantage of using the `ViewModel` class is that it caches state and persists it through configuration changes. This means that the UI does not have to fetch data again when navigating between activities, or following configuration changes, such as screen rotation.
 
-## Introduce Jetpack Lifecycle dependency
+## Add Android Jetpack Lifecycle libraries 
 
-You can now bring in the Jetpack Lifecycle libraries.
+You can now add Jetpack Lifecycle libraries to your app.
 
-1. Navigate to `libs.versions.toml` and append the following line to the end of `[versions]` section. This defines the version of the Jetpack Lifecycle libraries that you will be using.
+1. Navigate to `libs.versions.toml` and append the following line to the end of the `[versions]` section. This defines the version of the Jetpack Lifecycle libraries that you will be using.
 
 ```toml
 lifecycle = "2.8.7"
 ```
 
-2. Insert the following line to `[libraries]` section, ideally between `androidx-appcompat` and `material`. This declares the Jetpack Lifecycle ViewModel Kotlin extension:
+2. Insert the following line to the `[libraries]` section, ideally between `androidx-appcompat` and `material`. This declares the Jetpack Lifecycle ViewModel Kotlin extension:
 
 ```toml
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
@@ -102,7 +102,7 @@ You might notice that success and failure messages are logged with different API
 {{% /notice %}}
 
 2. Bind `MainViewModel` to `MainActivity` by inserting the following line into `MainActivity.kt`, above the `onCreate` method. 
-Don't forget to import the `viewModels` [extension function](https://kotlinlang.org/docs/extensions.html#extension-functions) through `import androidx.activity.viewModels`.
+Do not forget to import the `viewModels` [extension function](https://kotlinlang.org/docs/extensions.html#extension-functions) through `import androidx.activity.viewModels`.
 
 ```kotlin
     private val viewModel: MainViewModel by viewModels()
