@@ -4,13 +4,16 @@ title: Build and run vvenc (H.266 encoder) on Arm servers
 weight: 2
 ---
 
-## Install necessary software packages
+## Overview
 
-`vvenc` is an open-source H.266/VVC encoder that offers very high compression efficiency and performance. There have been significant efforts ongoing to optimize the open-source implementation of the H.266 encoder on Arm Neoverse platforms which supports Neon and SVE/SVE2 instructions. The optimized code is available on [Github](https://github.com/fraunhoferhhi/vvenc)
+`vvenc` is an open-source H.266/VVC encoder that offers very high compression efficiency and performance. There have been significant efforts made to optimize the open-source implementation of the H.266 encoder on Arm Neoverse platforms which supports Neon and SVE/SVE2 instructions. The optimized code for use with Arm Neoverse platforms is available on [Github](https://github.com/fraunhoferhhi/vvenc). 
 
-Install `Cmake` and other dependencies:
+## Install dependencies
+On your Arm based server instance running Ubuntu 22.04, install the dependencies to build and run vvenc:
+
 ```bash
-sudo apt install git wget cmake p7zip-full -y
+sudo apt update
+sudo apt install git wget cmake p7zip-full numactl -y
 ```
 Install llvm compiler to compile the C++ code:
 ```bash
@@ -21,12 +24,15 @@ sudo ./llvm.sh 18 all
 
 ## Download and build vvenc source
 
+You can now download the optimized vvenc source code and run cmake to configure the build:
+
 ```bash
 git clone https://github.com/fraunhoferhhi/vvenc.git
 cd vvenc
 CXX=clang++-18 CC=clang-18 cmake -S . -B build/release-static -DVVENC_ENABLE_ARM_SIMD_SVE=1 -DVVENC_ENABLE_ARM_SIMD_SVE2=1
 ```
-Make sure sve/sve2 has been enabled in the Makefile:
+Confirm that sve/sve2 has been enabled in the Makefile by looking at the output from the configuration step:
+
 ```output
 root@iZuf61ixurqifmpxuji4viZ:~/vvenc-1.13.0# CXX=clang++-18 CC=clang-18 cmake -S . -B build/release-static -DVVENC_ENABLE_ARM_SIMD_SVE=1 -DVVENC_ENABLE_ARM_SIMD_SVE2=1
 -- The C compiler identification is Clang 18.1.8
@@ -102,27 +108,37 @@ root@iZuf61ixurqifmpxuji4viZ:~/vvenc-1.13.0# CXX=clang++-18 CC=clang-18 cmake -S
 -- Generating done
 -- Build files have been written to: /root/vvenc-1.13.0/build/release-static
 ```
-Start the build process:
+Now run cmake to build:
 ```bash
 cmake --build build/release-static -j
 ```
+The project should build successfully and the end of the output should look like:
 
-## Download video streams to run vvenc on and measure the performance
+```output
+[100%] Linking CXX executable ../../../../../bin/release-static/vvencapp
+[100%] Built target vvencinterfacetest
+[100%] Built target vvenclibtest
+[100%] Built target vvencFFapp
+[100%] Built target vvencapp
+```
+
+## Download sample video files
 
 To benchmark the compression efficiency and performance of `vvenc`, you will need a set of video streams to run the codec on. 
 
-Download the `1080P` video files:
+Download sample `1080P` video files and uncompress them:
 ```bash
-cd ../video
+mkdir ../video && cd ../video
 wget http://ultravideo.cs.tut.fi/video/Bosphorus_1920x1080_120fps_420_8bit_YUV_Y4M.7z
-7z -x Bosphorus_1920x1080_120fps_420_8bit_YUV_Y4M.7z
+7z x Bosphorus_1920x1080_120fps_420_8bit_YUV_Y4M.7z
 ```
 
 ## Run vvenc on the sample video files
 
 To benchmark the performance of `vvenc` over 100 frames of the `1080P` video file, run the command:
 ```console
-numactl -C 0-3 bin/release-static/vvencFFapp --preset faster --BitstreamFile stream.266 --Threads 4 --InputFile ~/video/Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m --InputBitDepth 8 --InputChromaFormat 420 --fps 30 --FramesToBeEncoded 100 --SourceWidth 1920 --SourceHeight 1080 --Qp 22 --IntraPeriod 256 --NumPasses 1 --InternalBitDepth 10 --stats 1 --Verbosity 3 --pools ','
+cd ../vvenc
+numactl -C 0-3 bin/release-static/vvencFFapp --preset faster --BitstreamFile stream.266 --Threads 4 --InputFile ~/video/Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m --InputBitDepth 8 --InputChromaFormat 420 --fps 30 --FramesToBeEncoded 100 --SourceWidth 1920 --SourceHeight 1080 --Qp 22 --IntraPeriod 256 --NumPasses 1 --InternalBitDepth 10 --stats 1 --Verbosity 3
 ```
 
 You can vary the preset settings and measure the impact on performance.
@@ -161,3 +177,5 @@ vvenc [info]:	      100    a    2490.9480   43.7378   48.7096   47.9283   44.747
 vvencFFapp [info]: finished @ Wed Dec 25 16:06:19 2024
 vvencFFapp [info]: Total Time:       58.962 sec. [user]       15.209 sec. [elapsed]
 ```
+
+You have successfully run the vvenc h.266 encoder on an 1080P sample video file and measured the performance.

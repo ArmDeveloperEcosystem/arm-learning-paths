@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-    You can continue learning about porting cloud applications to the Arm architecture for increased performance and cost savings. The Learning Path on MongoDB is a great next step.
+    You can continue learning about building and running other codecs on Arm servers. The learning path on AV1 and VP9 is a great next step.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/mongodb/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/codec1/"
 # Link to the next learning path being recommended.
 
 
