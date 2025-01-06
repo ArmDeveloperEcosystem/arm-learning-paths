@@ -11,20 +11,20 @@ operatingsystems_filter:
 - Android: 2
 - Baremetal: 1
 - ChromeOS: 1
-- Linux: 29
-- macOS: 7
-- Windows: 37
+- Linux: 27
+- macOS: 5
+- Windows: 36
 subjects_filter:
 - CI-CD: 3
 - Containers and Virtualization: 6
 - Migration to Arm: 26
-- Performance and Architecture: 20
+- Performance and Architecture: 21
 subtitle: Create and migrate apps for power efficient performance
 title: Laptops and Desktops
 tools_software_languages_filter:
 - .NET: 12
 - Alacritty: 1
-- Android Studio: 2
+- Android Studio: 1
 - Arm Development Studio: 2
 - Arm64EC: 1
 - assembly: 1
@@ -36,7 +36,7 @@ tools_software_languages_filter:
 - CCA: 1
 - Clang: 10
 - CMake: 2
-- Coding: 19
+- Coding: 17
 - CSS: 1
 - Docker: 4
 - GCC: 9
@@ -57,8 +57,8 @@ tools_software_languages_filter:
 - Neovim: 1
 - Node.js: 3
 - OpenCV: 1
-- perf: 2
-- Python: 2
+- perf: 3
+- Python: 3
 - Qt: 2
 - Remote.It: 1
 - RME: 1
@@ -68,12 +68,12 @@ tools_software_languages_filter:
 - Trusted Firmware: 1
 - Visual Studio: 10
 - Visual Studio Code: 9
-- VS Code: 2
+- VS Code: 3
 - Windows Forms: 1
 - Windows Performance Analyzer: 1
 - Windows Presentation Foundation: 1
 - Windows Sandbox: 1
-- WindowsPerf: 3
+- WindowsPerf: 4
 - WinUI 3: 1
 - WSL: 1
 - Xamarin Forms: 1

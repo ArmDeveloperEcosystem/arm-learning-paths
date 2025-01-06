@@ -15,31 +15,31 @@ review:
         question: >        
             Does the input layer of the model flatten the 28x28 pixel image into a 1D array of 784 elements?
         answers:
-            - "Yes"
-            - "No"
+            - "Yes."
+            - "No."
         correct_answer: 1
         explanation: >
             Yes, the model uses nn.Flatten() to reshape the 28x28 pixel image into a 1D array of 784 elements for processing by the fully connected layers.
     - questions:
         question: >
-            Will the model make random predictions if it’s run before training?
+            Will the model make random predictions if it is run before training?
         answers:
-            - "Yes"
-            - "No"
+            - "Yes."
+            - "No."
         correct_answer: 1
         explanation: >
-            Yes, however in such the case the model will produce random outputs, as the network has not been trained to recognize any patterns from the data. 
+            Yes, however in this scenario the model will produce random outputs, as the network has not been trained to recognize any patterns from the data. 
     - questions:
         question: >
-            Which loss function was used to train the PyTorch model on the MNIST dataset?
+            Which loss function did you use to train the PyTorch model on the MNIST dataset in this Learning Path?
         answers:
-            - Mean Squared Error Loss
-            - CrossEntropyLoss
-            - Hinge Loss
+            - Mean Squared Error Loss.
+            - Cross-Entropy Loss.
+            - Hinge Loss.
             - Binary Cross-Entropy Loss
         correct_answer: 2
         explanation: >
-            The CrossEntropyLoss function was used to train the model because it is suitable for multi-class classification tasks like digit classification. It measures the difference between the predicted probabilities and the true class labels, helping the model learn to make accurate predictions. 
+            Cross-Entropy Loss was used to train the model as it is suitable for multi-class classification such as digit classification. It measures the difference between the predicted probabilities and the true class labels, helping the model to learn to make accurate predictions. 
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

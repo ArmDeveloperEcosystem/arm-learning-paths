@@ -3,29 +3,29 @@ title: Tune the Performance of the Java Garbage Collector
 
 minutes_to_complete: 45
 
-who_is_this_for: This learning path is designed for Java developers aiming to optimize application performance on Arm-based servers. It is especially valuable for those migrating applications from x86-based to Arm-based instances. Here, you'll learn about essential garbage collection (GC) tuning parameters and how to adjust them to meet your specific performance needs. 
+who_is_this_for: This Learning Path is for Java developers aiming to optimize application performance on Arm-based servers, especially those migrating applications from x86-based to Arm-based instances. 
 
 learning_objectives: 
-    - Understand the key differences among Java garbage collectors (GCs).
-    - Monitor and interpret GC performance metrics.
-    - Adjust core parameters to optimize performance for your specific workload
+    - Describe the key differences between individual Java Garbage Collectors (GCs).
+    - Monitor and interpret Garbage Collector performance metrics.
+    - Adjust core parameters to optimize performance for your specific workload.
 
 prerequisites:
-    - Access to an Arm-based server
-    - Basic understanding of Java
-    - Java installed on your system
+    - An Arm-based instance from a cloud service provider, or an on-premise Arm server.
+    - Basic understanding of Java.
+    - An [installation of Java](/install-guides/java/) on your machine.
 
 author_primary: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
-subjects: Java
+subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
     - Java
 operatingsystems:
-    - AWS Linux
+    - Linux
 
 
 ### FIXED, DO NOT MODIFY

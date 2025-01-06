@@ -113,7 +113,7 @@ ShaderModule shaderModule = device.createShaderModule(shaderDesc);
 
 By default the `nextInChain` member of `ShaderModuleDescriptor` is a `nullptr`.
 
-The `nextInChain` pointer is the entry point of WebGPU’s extension mechanism. It is either null or pointing to a structure of type `WGPUChainedStruct`. 
+The `nextInChain` pointer is the entry point of WebGPU's extension mechanism. It is either null or pointing to a structure of type `WGPUChainedStruct`. 
 
 It may recursively have a next element (again, either null or pointing to a `WGPUChainedStruct`). 
 
