@@ -9,7 +9,7 @@ layout: learningpathall
 
 [SharedFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#sharedflow) and [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#stateflow) are [Kotlin Flow](https://developer.android.com/kotlin/flow) APIs that enable Flows to optimally emit state updates and emit values to multiple consumers.
 
-In this Learning Path, you will experiment with both `SharedFlow` and `StateFlow`. This section focuses on SharedFlow, and the section focuses on StateFlow.
+In this Learning Path, you will experiment with both `SharedFlow` and `StateFlow`. This section focuses on SharedFlow, and the next section focuses on StateFlow.
 
 `SharedFlow` is a general-purpose, hot flow that can emit values to multiple subscribers. It is highly configurable, allowing you to configure settings such as the replay cache size and buffer capacity.
 
@@ -366,5 +366,5 @@ class GestureOverlayView(context: Context?, attrs: AttributeSet?) :
 
 4. Build and run the app again. Now you should see face and gesture overlays on top of the camera preview as shown below. Good job!
 
-![overlay views](images/6/overlay%20views.png)
+![overlay views alt-text#center](images/6/overlay%20views.png "Figure 7: Face and Gesture Overlays.")
 

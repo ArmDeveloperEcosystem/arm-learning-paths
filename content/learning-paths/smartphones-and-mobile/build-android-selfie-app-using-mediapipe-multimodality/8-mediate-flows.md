@@ -6,11 +6,13 @@ weight: 8
 layout: learningpathall
 ---
 
-Now you have two independent Flows indicating the conditions of face landmark detection and gesture recognition. The simplest multimodality strategy is to combine multiple source Flows into a single output Flow, which emits consolidated values as the single source of truth for its observers (collectors) to carry out corresponding actions.
+Now you have two independent Flows indicating the conditions of face landmark detection and gesture recognition. 
+
+The simplest multimodality strategy is to combine multiple source Flows into a single output Flow, which emits consolidated values as the single source of truth for its observers, the collectors, to carry out corresponding actions.
 
 ## Combine two Flows into a single Flow
 
-1. Navigate to `MainViewModel` and append the following constant values to its companion object. 
+1. Navigate to `MainViewModel` and append the following constant values to its companion object: 
 
     * The first constant defines how frequently you sample the conditions from each Flow.
 
@@ -39,7 +41,7 @@ You might need to add the `@OptIn(FlowPreview::class)` annotation as `sample` is
 
 {{% /notice %}}
 
-3. Expose a `SharedFlow` variable which emits a `Unit` whenever the face and gesture conditions are met and stay stable for a while, which means `500`ms as defined above. Again, add `@OptIn(FlowPreview::class)` if needed.
+3. Expose a `SharedFlow` variable which emits a `Unit` whenever the face and gesture conditions are met and stays stable for a while, which means `500`ms as defined above. Again, add `@OptIn(FlowPreview::class)` if required.
 
 ```kotlin
     val captureEvents: SharedFlow<Unit> = _bothOk
@@ -138,13 +140,11 @@ You can also opt to use `SharedFlow<Boolean>` and remove the `map { }` operation
                     }
                 }
 ```
-4. Even though the photo capture has already been implemented, it is still quite inconvenient to check out the logs afterwards to find out whether the photo capture has been successfully executed. 
-
-You can now add a flash effect UI to explicitly show the users that a photo has been captured.
+4. Even though the photo capture has already been implemented, it is still inconvenient to check out the logs afterwards to find out whether the photo capture has been successfully executed, so you can now add a flash effect UI to explicitly show the users that a photo has been captured.
 
 ## Add a flash effect upon capturing photo
 
-1. Navigate to the `activity_main.xml` layout file and insert the following `View` element between the two overlay views and the two `SwitchCompat` views. This is essentially just a white blank view covering the whole surface.
+1. Navigate to the `activity_main.xml` layout file and insert the following `View` element between the two overlay views and the two `SwitchCompat` views. This is essentially just a white blank view covering the whole surface:
 
 ```
     <View
@@ -187,6 +187,6 @@ You can now add a flash effect UI to explicitly show the users that a photo has 
 
 4. Build and run the app:
 
-    * Try keeping up a smiling face while presenting thumb-up gestures. 
+    * Try to maintain a smiling face whilst also presenting thumb-up gestures. 
     * When you see both switches, turn on and stay stable for approximately half a second.
-    * The screen should flash white and then a photo should be captured and show up in your        album,  which might take a few seconds depending on your Android device's hardware. Good job!
+    * The screen should flash white and then a photo should be captured. This will show up in your album, which might take a few seconds depending on your Android device's hardware. Good job!

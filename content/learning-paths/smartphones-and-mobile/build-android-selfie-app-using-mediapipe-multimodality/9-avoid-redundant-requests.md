@@ -6,7 +6,9 @@ weight: 9
 layout: learningpathall
 ---
 
-So far you have implemented the core logic for MediaPipe's face and gesture task results and photo capture execution. However, the view controller is not communicating its execution results back to the view model, which raises the risk for photo capture failures, frequent or duplicate requests, and other potential issues.
+So far you have implemented the core logic for MediaPipe's face and gesture task results and photo capture execution. 
+
+However, the view controller is not communicating its execution results back to the view model, which raises the risk for photo capture failures, frequent or duplicate requests, and other potential issues.
 
 ### Introduce camera readiness state
 
@@ -54,11 +56,11 @@ Copy in the following:
 ```
 
 
-## Introduce camera cooldown
+## Introduce a camera cooldown mechanism
 
 The differences in hardware mean that the duration of an image capture varies across Android devices. Additionally, consecutive image captures place a heavy load on the CPU, GPU, camera, and flash memory buffer.
 
-To address this, you can implement a simple cooldown mechanism after each photo capture that can enhance the user experience while conserving computing resources.
+To address this, you can implement a simple cooldown mechanism after each photo capture that can both enhance the user experience whilst also conserving computing resources.
 
 1. Add the following constant value to `MainViewModel`'s companion object. This defines a three-second cooldown before making the camera available again.
 
@@ -91,7 +93,7 @@ However, silently failing without notifying the user is not a good practice for 
 
 {{% /notice %}}
 
-## Entire sample code on GitHub
+## Further resource for support: entire sample code on GitHub
 
 If you run into any difficulties completing this Learning Path, you can check out the [complete sample code](https://github.com/hanyin-arm/sample-android-selfie-app-using-mediapipe-multimodality) and import it into Android Studio.
 
