@@ -1,5 +1,5 @@
 ---
-title: Cluster monitoring with Prometheus and Grafana in Amazon EKS
+title: Setup Sentiment Analysis with Amazon EKS
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -40,6 +40,15 @@ variable "AWS_region" {
 }
 ```
 
+Also, if you're using a profile other than `default` then update the following variable
+
+```output
+variable "AWS_profile" {
+  default     = "Your_AWS_Profile"
+  description = "AWS authorization profile"
+}
+```
+
 Execute the following commands to create the Amazon EKS cluster:
 
 ```console
@@ -47,12 +56,14 @@ terraform init
 terraform apply --auto-approve
 ```
 
+Once the cluster gets created, verify it in AWS console.
+
 Update the `kubeconfig` file to access the deployed EKS cluster with the following command:
 
 If you want to use an AWS CLI profile with is not the default, change the profile name before running the command. 
 
 ```console
-aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name) --profile default
+aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name) --profile <Your_AWS_Profile>
 ```
 
 Create a service account for Apache spark
@@ -97,18 +108,22 @@ The Spark repository contains a script to build the container image you need to 
 
 Execute this script on your Arm-based computer to build the arm64 image.
 
-In the current working directory, clone the `apache spark` github repository prior to building the image
+In the current working directory, use the following commands to get the `apache spark` tar. Extract this repository prior to building the image
 
 ```console
-git clone https://github.com/apache/spark.git
-cd spark
-git checkout v3.4.3
+wget https://archive.apache.org/dist/spark/spark-3.4.3/spark-3.4.3-bin-hadoop3-scala2.13.tgz
+tar -xvzf spark-3.4.3-bin-hadoop3-scala2.13.tgz
+cd spark-3.4.3-bin-hadoop3-scala2.13
+```
+
+Copy the JAR file generated in previous step to the following location
+```console
+cp ../sentiment_analysis/target/scala-2.13/bigdata-assembly-0.1.jar jars/
 ```
 
 Build the docker container using the following commands. Substitute the name of your container repository before running the commands.
 
 ```console
-cp ../sentiment_analysis/target/scala-2.13/bigdata-assembly-0.1.jar jars/
 bin/docker-image-tool.sh -r <your-docker-repository> -t sentiment-analysis build
 bin/docker-image-tool.sh -r <your-docker-repository> -t sentiment-analysis push
 ```
@@ -123,7 +138,7 @@ Set the following variables before executing the `spark-submit` command:
 export MASTER_ADDRESS=<K8S_MASTER_ADDRESS>
 export ES_ADDRESS=<IP_ADDRESS_OF_ELASTICS_SEARCH>
 export CHECKPOINT_BUCKET=<BUCKET_NAME>
-export EKS_ADDRESS=<EKS_REGISTERY_ADDRESS>
+export ECR_ADDRESS=<ECR_REGISTERY_ADDRESS>
 ```
 
 Execute the `spark-submit` command:
@@ -134,7 +149,7 @@ bin/spark-submit \
       --master k8s://$MASTER_ADDRESS:443 \
       --deploy-mode cluster \
       --conf spark.executor.instances=2 \
-      --conf spark.kubernetes.container.image=532275579171.dkr.ecr.us-east-1.amazonaws.com/spark:sentiment-analysis \
+      --conf spark.kubernetes.container.image=$ECR_ADDRESS \
       --conf spark.kubernetes.driver.pod.name="spark-twitter" \
       --conf spark.kubernetes.namespace=default \
       --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark \
