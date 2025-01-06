@@ -55,7 +55,7 @@ This `SharedFlow` is initialized with a replay size of `1`. This retains the mos
 
 ## Visualize face and gesture results
 
-To visualize the results of Face Landmark Detection and Gesture Recognition tasks, based on [MediaPipe's samples](https://github.com/google-ai-edge/mediapipe-samples/tree/main/examples) follow the intructions in this section.
+To visualize the results of Face Landmark Detection and Gesture Recognition tasks, based on [MediaPipe's samples](https://github.com/google-ai-edge/mediapipe-samples/tree/main/examples) follow the instructions in this section.
 
 1. Create a new file named `FaceLandmarkerOverlayView.kt` and copy the content below:
 

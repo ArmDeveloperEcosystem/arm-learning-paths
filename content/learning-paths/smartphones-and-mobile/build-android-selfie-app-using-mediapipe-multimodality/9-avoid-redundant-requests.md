@@ -87,14 +87,14 @@ You might need to import the `kotlinx.coroutines.delay` function.
 
 {{% notice Note %}}
 
-Furthermore, if you remove the `viewModel.onPhotoCaptureComplete()` to simulate something going wrong upon photo capture, the camera won't become available ever again.
+Furthermore, if you remove the `viewModel.onPhotoCaptureComplete()` to simulate something going wrong during photo capture, the camera will not become available again.
 
 However, silently failing without notifying the user is not a good practice for app development. Error handling is omitted in this learning path only for the sake of simplicity.
 
 {{% /notice %}}
 
-## Further resource for support: entire sample code on GitHub
+## Further resource for support: complete sample code on GitHub
 
-If you run into any difficulties completing this Learning Path, you can check out the [complete sample code](https://github.com/hanyin-arm/sample-android-selfie-app-using-mediapipe-multimodality) and import it into Android Studio.
+If you run into any difficulties completing this Learning Path, you can check out the [complete sample code](https://github.com/hanyin-arm/sample-android-selfie-app-using-mediapipe-multimodality) on GitHub and import it into Android Studio.
 
 If you discover a bug, encounter an issue, or have suggestions for improvement, please feel free to [open an issue](https://github.com/hanyin-arm/sample-android-selfie-app-using-mediapipe-multimodality/issues/new) with detailed information.
