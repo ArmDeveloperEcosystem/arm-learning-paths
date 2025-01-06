@@ -6,31 +6,37 @@ weight: 5
 layout: learningpathall
 ---
 
-The `ViewModel` class is a [business logic or screen level state holder](https://developer.android.com/topic/architecture/ui-layer/stateholders). It exposes state to the UI and encapsulates related business logic. Its principal advantage is that it caches state and persists it through configuration changes. This means that your UI doesn’t have to fetch data again when navigating between activities, or following configuration changes, such as when rotating the screen.
+## ViewModel
 
-## Introduce Jetpack Lifecycle dependency
+The `ViewModel` class is a business logic or screen level state holder, as explained in [ViewModel overview](https://developer.android.com/topic/architecture/ui-layer/stateholders) on the Android Developer website. It exposes state to the UI and encapsulates related business logic. 
 
-1. Navigate to `libs.versions.toml` and append the following line to the end of `[versions]` section. This defines the version of the Jetpack Lifecycle libraries we will be using.
+The main advantage of using the `ViewModel` class is that it caches state and persists it through configuration changes. This means that the UI does not have to fetch data again when navigating between activities, or following configuration changes, such as screen rotation.
+
+## Add Android Jetpack Lifecycle libraries 
+
+You can now add Jetpack Lifecycle libraries to your app.
+
+1. Navigate to `libs.versions.toml` and append the following line to the end of the `[versions]` section. This defines the version of the Jetpack Lifecycle libraries that you will be using.
 
 ```toml
 lifecycle = "2.8.7"
 ```
 
-2. Insert the following line to `[libraries]` section, ideally between `androidx-appcompat` and `material`. This declares Jetpack Lifecycle ViewModel Kotlin extension.
+2. Insert the following line to the `[libraries]` section, ideally between `androidx-appcompat` and `material`. This declares the Jetpack Lifecycle ViewModel Kotlin extension:
 
 ```toml
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 ```
 
-3. Navigate to `build.gradle.kts` in your project's `app` directory, then insert the following line into `dependencies` block, ideally between `implementation(libs.androidx.constraintlayout)` and `implementation(libs.camera.core)`. 
+3. Navigate to `build.gradle.kts` in your project's `app` directory, then insert the following line into the `dependencies` block, ideally between `implementation(libs.androidx.constraintlayout)` and `implementation(libs.camera.core)`: 
 
 ```kotlin
 implementation(libs.androidx.lifecycle.viewmodel)
 ```
 
-## Access the helper via a ViewModel
+## Access the helper through a ViewModel
 
-1. Create a new file named `MainViewModel.kt` and place it into the same directory of `MainActivity.kt` and other files, then copy the code below into it.
+1. Create a new file named `MainViewModel.kt` and place it into the same directory of `MainActivity.kt`. Now copy and paste the code below into it:
 
 ```kotlin
 package com.example.holisticselfiedemo
@@ -92,16 +98,17 @@ class MainViewModel : ViewModel(), HolisticRecognizerHelper.Listener {
 ```
 
 {{% notice Info %}}
-You might have noticed that success and failure messages are logged with different APIs. For more information on log level guidelines, please refer to [this doc](https://source.android.com/docs/core/tests/debug/understanding-logging#log-level-guidelines). 
+You might notice that success and failure messages are logged with different APIs. For more information on log level guidelines, see [Understanding Logging: Log Level Guidelines](https://source.android.com/docs/core/tests/debug/understanding-logging#log-level-guidelines). 
 {{% /notice %}}
 
-2. Bind `MainViewModel` to `MainActivity` by inserting the following line into `MainActivity.kt`, above the `onCreate` method. Don't forget to import `viewModels` [extension function](https://kotlinlang.org/docs/extensions.html#extension-functions) via `import androidx.activity.viewModels`.
+2. Bind `MainViewModel` to `MainActivity` by inserting the following line into `MainActivity.kt`, above the `onCreate` method. 
+Do not forget to import the `viewModels` [extension function](https://kotlinlang.org/docs/extensions.html#extension-functions) through `import androidx.activity.viewModels`.
 
 ```kotlin
     private val viewModel: MainViewModel by viewModels()
 ```
 
-3. Setup and shutdown the helper's internal MediaPipe tasks upon the app becomes [active and inactive](https://developer.android.com/guide/components/activities/activity-lifecycle#alc).
+3. Setup and shutdown the helper's internal MediaPipe tasks on the app becomes [active and inactive](https://developer.android.com/guide/components/activities/activity-lifecycle#alc).
 
 ```kotlin
     private var isHelperReady = false
@@ -121,13 +128,13 @@ You might have noticed that success and failure messages are logged with differe
 
 ## Feed camera frames into livestream recognition
 
-1. Add a new member variable named `imageAnalysis` to `MainActivity`, along with other camera related member variables:
+1. Add a new member variable named `imageAnalysis` to `MainActivity`, along with other camera- related member variables:
 
 ```kotlin
 private var imageAnalysis: ImageAnalysis? = null
 ```
 
-2. Within `MainActivity`'s `bindCameraUseCases()` method, insert the following code after building `preview`, above `cameraProvider.unbindAll()`:
+2. In `MainActivity`'s `bindCameraUseCases()` method, insert the following code after building `preview`, above `cameraProvider.unbindAll()`:
 
 ```kotlin
         // ImageAnalysis. Using RGBA 8888 to match how MediaPipe models work
@@ -153,7 +160,7 @@ private var imageAnalysis: ImageAnalysis? = null
 
 {{% notice Note %}}
 
-`isHelperReady` flag is a lightweight mechanism to prevent camera image frames being sent to helper once we have started shutting down the helper.
+The `isHelperReady` flag is a lightweight mechanism to prevent camera image frames being sent to helper once you have started shutting down the helper.
 
 {{% /notice %}}
 
@@ -165,5 +172,5 @@ private var imageAnalysis: ImageAnalysis? = null
             )
 ```
 
-4. Build and run the app again. Now you should be seeing `Face result: ...` and `Gesture result: ...` debug messages in your [Logcat](https://developer.android.com/tools/logcat), which proves that MediaPipe tasks are functioning properly. Good job!
+4. Build and run the app again. Now you should see `Face result: ...` and `Gesture result: ...` debug messages in your [Logcat](https://developer.android.com/tools/logcat), which prove that MediaPipe tasks are functioning properly. Good job!
 
