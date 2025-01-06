@@ -1,0 +1,42 @@
+{{/*
+Configuration box for demo page.
+
+Where it is used:
+    - learning paths, demo page
+
+Called from:
+    - partials learning-paths/demo.html
+
+Calls to:
+    - the demo's frontmater metadata (.Params)
+
+*/}}
+
+
+
+
+
+
+
+<div class="content-box">
+    <div class="c-row u-gap-1/2 u-flex-nowrap u-padding-top-0" style="--column-count: {{ len .Params.configuration_rag_prompts }}">
+        <div class="c-col">
+            <h2>Configuration</h2>
+            <p>View the full configuration details on <a href="https://www.google.com">this page.</a></p>
+            <p>RAG trained on MM/DD/YYYY, newer content will not be included!</p>
+            <div class="c-row u-gap-1/2 u-padding-top-0">
+                {{- range .Params.configuration_rag_prompts -}}
+                    <div class="c-col eq-width-cols">
+                        <h6>{{ .example_prompts.prompt_name }}</h6>
+                        <!-- Prepopulated hidden paragraphs for each spec -->
+                        <div class="spcs-div"> 
+                            {{- range .example_prompts.prompts -}}
+                                {{partial "general-formatting/prismjs-codeblock.html"  (dict "input_from" "normal" "code" . "language" "" "line_numbers" ""  "output_lines" "" "command_line" "") }}
+                            {{- end -}}
+                        </div>                  
+                    </div>
+                {{- end -}}          
+            </div>  
+        </div>    
+    </div>
+</div>

@@ -23,6 +23,9 @@ Calls to:
     {{/* {{partial "demo-components/config-params-only.html" .}} */}}
 {{else if eq .Params.demo_template_name "kubectl_demo"}}
     {{partial "demo-components/config-param-and-file.html" .}}
+
+{{else if eq .Params.demo_template_name "llm_chatbot_rag_demo"}}
+    {{partial "demo-components/config-rag.html" .}}
 {{else}}
 {{end}}
 
@@ -34,5 +37,9 @@ Calls to:
 
 {{else if eq .Params.demo_template_name "kubectl_demo"}}
     {{partial "demo-components/demo--kubectl.html" .}}
+
+{{else if eq .Params.demo_template_name "llm_chatbot_rag_demo"}}
+    {{partial "demo-components/llm-chatbot/demo-stats--llm-chatbot.html" .}} 
+    {{partial "demo-components/llm-chatbot/javascript--llm-chatbot.html" .}}
 {{else}}
 {{end}}
