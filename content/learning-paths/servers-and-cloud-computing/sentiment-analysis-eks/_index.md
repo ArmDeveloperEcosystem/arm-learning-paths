@@ -1,14 +1,14 @@
 ---
-title: Perform sentiment analysis on X on Arm-based EKS clusters
+title: Perform Sentiment Analysis on X on Arm-based EKS clusters
 
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for software developers who want to build an end-to-end ML sentiment analysis solution to analyze live posts on X (formerly known as Twitter) on an Arm-based Amazon EKS cluster.
+who_is_this_for: This is for software developers who want to build an end-to-end ML sentiment analysis solution to analyze live posts on X on an Arm-based Amazon EKS cluster.
 
 learning_objectives: 
     - Deploy a text classification model on Amazon EKS with Apache Spark.
-    - Use Elasticsearch and a Kibana dashboard to analyze the posts.
+    - Use Elasticsearch and a Kibana dashboard to analyze the posts on X.
     - Deploy Prometheus and Grafana dashboards to monitor CPU and RAM usage of Kubernetes nodes.
 
 prerequisites:

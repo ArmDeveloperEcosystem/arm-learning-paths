@@ -1,5 +1,5 @@
 ---
-title: Understand sentiment analysis
+title: What is Sentiment Analysis?
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## What is sentiment analysis?
 
-Sentiment analysis is a natural language processing technique used to identify and categorize opinions expressed in a piece of text, such as a tweet or a product review. It can help gauge public opinion, identify trends and patterns, and improve decision-making. Social media platforms, such as Twitter (X), provide a wealth of information about public opinion, trends, and events. Sentiment analysis is important because it provides insights into how people feel about a particular topic or issue, and can help to identify emerging trends and patterns.
+Sentiment analysis is a natural language processing (NLP) technique used to identify and categorize opinions expressed in digital text, such as an X post or a product review. It can help gauge public opinion, identify trends and patterns, and improve decision-making. Social media platforms, such as X, provide a wealth of information about public opinion, trends, and events. Sentiment analysis is important because it provides insights into how people feel about a particular topic or issue, and can help to identify emerging trends and patterns.
 
 ## Can I perform real-time sentiment analysis using an Arm-based Amazon EKS cluster?
 

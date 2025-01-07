@@ -1,5 +1,5 @@
 ---
-title: Setup Sentiment Analysis with Amazon EKS
+title: Set up Sentiment Analysis with Amazon EKS
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -10,7 +10,7 @@ layout: learningpathall
 
 You will need an [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html). Create an account if needed. 
 
-Multiple tools are required on your local computer. Follow the links to install each tool.
+You also require multiple tools on your local computer. Follow these links to install each tool:
 
 * [Kubectl](/install-guides/kubectl/)
 * [AWS CLI](/install-guides/aws-cli/)
@@ -18,9 +18,9 @@ Multiple tools are required on your local computer. Follow the links to install 
 * [Terraform](/install-guides/terraform/)
 * [Java](/install-guides/java/)
 
-To use the AWS CLI, you will need to generate AWS access keys and configure the CLI. Follow the [AWS Credentials](/install-guides/aws_access_keys/) install guide for instructions. 
+To use the AWS CLI, you need to generate AWS access keys and configure the CLI. Follow the [AWS Credentials](/install-guides/aws_access_keys/) install guide for instructions on how to do this. 
 
-## Setup sentiment analysis
+## Set up Sentiment Analysis
 
 Take a look at the [GitHub repository](https://github.com/koleini/spark-sentiment-analysis) then clone it on your local computer:
 
@@ -29,9 +29,9 @@ git clone https://github.com/koleini/spark-sentiment-analysis.git
 cd spark-sentiment-analysis/eks
 ```
 
-Edit the file `variables.tf` if you want to change the default AWS region.
+If you would like to change the default AWS region, you can do so by editing the file `variables.tf`.
 
-The default value is at the top of the file and is set to `us-east-1`.
+As you will see, the default value is at the top of the file and is set to `us-east-1`:
 
 ```output
 variable "AWS_region" {
@@ -40,7 +40,7 @@ variable "AWS_region" {
 }
 ```
 
-Also, if you're using a profile other than `default` then update the following variable
+In addition, if you're using a profile other than `default`, then update the following variable:
 
 ```output
 variable "AWS_profile" {
@@ -49,24 +49,26 @@ variable "AWS_profile" {
 }
 ```
 
-Execute the following commands to create the Amazon EKS cluster:
+To create the Amazon EKS cluster, execute the following commands:
 
 ```console
 terraform init
 terraform apply --auto-approve
 ```
 
-Once the cluster gets created, verify it in AWS console.
+Once the cluster is created, verify it in AWS console.
+
+{{% notice Note %}}
+If you want to use an AWS CLI profile that is not the default, make sure that you change the profile name before running the command to verify the cluster.
+{{% /notice %}} 
 
 Update the `kubeconfig` file to access the deployed EKS cluster with the following command:
-
-If you want to use an AWS CLI profile with is not the default, change the profile name before running the command. 
 
 ```console
 aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name) --profile <Your_AWS_Profile>
 ```
 
-Create a service account for Apache spark
+Create a service account for Apache spark:
 
 ```console
 kubectl create serviceaccount spark
@@ -75,7 +77,10 @@ kubectl create clusterrolebinding spark-role --clusterrole=edit --serviceaccount
 
 ## Build the sentiment analysis JAR file
 
-Navigate to the `sentiment_analysis` folder to create a JAR file for the sentiment analyzer.
+Navigate to the `sentiment_analysis` folder to create a JAR file () file for the sentiment analyzer.
+
+{{% notice Note %}}
+JAR is an anacronym for Java ARchive, and is a compressed archive file format that contains Java related-files and metadata.{{% /notice %}}
 
 You will need `sbt` installed. If you are running Ubuntu, you can install it with:
 
@@ -104,11 +109,13 @@ sentiment_analysis/target/scala-2.13/bigdata-assembly-0.1.jar
 
 Create a repository in Amazon ECR to store the docker images. You can also use Docker Hub.
 
-The Spark repository contains a script to build the container image you need to run inside the Kubernetes cluster. 
+The Spark repository contains a script to build the container image that you need to run inside the Kubernetes cluster. 
 
 Execute this script on your Arm-based computer to build the arm64 image.
 
-In the current working directory, use the following commands to get the `apache spark` tar. Extract this repository prior to building the image
+In the current working directory, use the following commands to get the `apache spark` tar. 
+
+Extract this repository prior to building the image:
 
 ```console
 wget https://archive.apache.org/dist/spark/spark-3.4.3/spark-3.4.3-bin-hadoop3-scala2.13.tgz
@@ -116,12 +123,13 @@ tar -xvzf spark-3.4.3-bin-hadoop3-scala2.13.tgz
 cd spark-3.4.3-bin-hadoop3-scala2.13
 ```
 
-Copy the JAR file generated in previous step to the following location
+Copy the JAR file generated in the previous step to the following location:
+
 ```console
 cp ../sentiment_analysis/target/scala-2.13/bigdata-assembly-0.1.jar jars/
 ```
 
-Build the docker container using the following commands. Substitute the name of your container repository before running the commands.
+To build the docker container, use the following commands, ensuring that you substitute the name of your container repository before executing them:
 
 ```console
 bin/docker-image-tool.sh -r <your-docker-repository> -t sentiment-analysis build
@@ -130,9 +138,11 @@ bin/docker-image-tool.sh -r <your-docker-repository> -t sentiment-analysis push
 
 ## Run Spark computation on the cluster
 
-Execute the `spark-submit` command within the Spark folder to deploy the application. The following commands will run the application with two executors, each with 12 cores, and allocate 24GB of memory for both the executors and driver pods.
+Execute the `spark-submit` command within the Spark folder to deploy the application. 
 
-Set the following variables before executing the `spark-submit` command:
+The following commands run the application with two executors, each with 12 cores. They allocate 24GB of memory for both the executors and driver pods.
+
+ Before executing the `spark-submit` command, set the following variables:
 
 ```console
 export MASTER_ADDRESS=<K8S_MASTER_ADDRESS>
@@ -164,7 +174,7 @@ bin/spark-submit \
       local:///opt/spark/jars/bigdata-assembly-0.1.jar
 ```
 
-Use `kubectl get pods` to check the status of the pods in the cluster.
+Use `kubectl get pods` to check the status of the pods in the cluster:
 
 ```output
 NAME                                        READY   STATUS    RESTARTS   AGE
@@ -173,20 +183,20 @@ sentimentanalysis-346f22932b484903-exec-2   1/1     Running   0          10m
 spark-twitter                               1/1     Running   0          12m
 ```
 
-## Twitter sentiment analysis
+## X Sentiment Analysis
 
 Create a twitter(X) [developer account](https://developer.x.com/en/docs/x-api/getting-started/getting-access-to-the-x-api) and create a `bearer token`. 
 
-Use the following commands to set the token and fetch the Tweets:
+Use the following commands to set the token and fetch the posts:
 
 ```console
 export BEARER_TOKEN=<BEARER_TOKEN_FROM_X>
 python3 scripts/xapi_tweets.py
 ```
 
-You can modify the script `xapi_tweets.py` with your own keywords. 
+You can modify the script `xapi_tweets.py` and use your own keywords. 
 
-Here is the code which includes the keywords: 
+Here is the code which includes some sample keywords: 
 
 ```output
 query_params = {'query': "(#onArm OR @Arm OR #Arm OR #GenAI) -is:retweet lang:en",

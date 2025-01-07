@@ -6,15 +6,25 @@ weight: 4
 layout: learningpathall
 ---
 
-## Deploy Elasticsearch and Kibana on Arm-based EC2 instance
+## Deploy Elasticsearch and Kibana
 
-Elasticsearch is a NoSQL database, search, and analytics engine. It's designed to store, search and analyze large amounts of data. It has real-time indexing capability which is crucial for handling high-velocity data streams like Tweets. 
+### What is Elasticsearch?
 
-Kibana is a dashboard and visualization tool that integrates seamlessly with Elasticsearch. It provides an interface to interact with twitter data, apply filters, and receive alerts. There are multiple ways to install Elasticsearch and Kibana, one method is shown below.
+Elasticsearch is a NoSQL database, search, and analytics engine. It is designed to store, search, and analyze large amounts of data. It has a real-time indexing capability which is crucial for handling high-velocity data streams like X posts. 
+
+### What is Kibana?
+
+Kibana is a customizable dashboard and visualization tool which integrates seamlessly with Elasticsearch. It provides valuable insights and opportunities to explore the data that you have collected by presenting it in multiple differing views. 
+
+In this Learning Path, you will use a Kibana dashboard as an interface to interact with X data, apply filters, and receive alerts. 
+
+### How do I install Elasticsearch and Kibana?
+
+There are multiple ways to install Elasticsearch and Kibana, one method is shown below.
 
 Before you begin, ensure that Docker and Docker Compose have been installed on your computer. 
 
-Use a text editor to create a `docker-compose.yml` file with the contents below:
+Use a text editor to create a `docker-compose.yml` file, and copy-and-paste in the contents below:
 
 ```yml
 version: '2.18.1'
@@ -50,7 +60,7 @@ networks:
     driver: bridge
 ```
 
-Use the following command to deploy Elasticsearch and Kibana Dashboard.
+Use the following command to deploy Elasticsearch and the Kibana Dashboard:
 
 ```console
 docker compose up
@@ -62,11 +72,11 @@ sudo apt-get update
 sudo apt-get install docker-compose-plugin
 ```
 
-After the dashboard is up, use the the public IP of your server on the port 5601 to access the Kibana dashboard.
+After the dashboard is set up, use the the public IP of your server on port 5601 to access the Kibana dashboard.
 
 ![kibana #center](_images/kibana.png)
 
-Switch to the stack management using the menu on the left side as shown in below image.
+Switch to the *Stack Management* using the menu on the left side as shown in below image.
 
 ![kibana-data #center](_images/Kibana-data.png)
 
