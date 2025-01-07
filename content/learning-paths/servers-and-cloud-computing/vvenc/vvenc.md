@@ -4,11 +4,14 @@ title: Build and run the H.266 VVenC encoder on Arm servers
 weight: 2
 ---
 
-## Overview
+## What is VVenC?
+
+* [Versatile Video Coding](https://www.hhi.fraunhofer.de/en/departments/vca/technologies-and-solutions/h266-vvc/fraunhofer-versatile-video-encoder-vvenc.html) (VVC; officially approved as ITU-T H.266 | 23090-3) is the most recent international video compression standard of ITU-T and ISO/IEC.
 
 * `vvenc` is an open-source H.266/VVC encoder that offers very high compression efficiency and performance.
-* Versatile Video Coding (VVC - officially approved as ITU-T H.266 | 23090-3) is the most recent international video-compression standard of ITU-T and ISO/IEC.
+
 * There have been significant efforts made to optimize the open-source implementation of the H.266 encoder on Arm Neoverse platforms that supports Neon and SVE/SVE2 instructions.
+
 * You can find the optimized code for use with Arm Neoverse platforms in the [vvenc Github Repository](https://github.com/fraunhoferhhi/vvenc). 
 
 ## Install dependencies
@@ -34,7 +37,7 @@ git clone https://github.com/fraunhoferhhi/vvenc.git
 cd vvenc
 CXX=clang++-18 CC=clang-18 cmake -S . -B build/release-static -DVVENC_ENABLE_ARM_SIMD_SVE=1 -DVVENC_ENABLE_ARM_SIMD_SVE2=1
 ```
-Confirm that sve/sve2 has been enabled in the Makefile by looking at the output from the configuration step:
+Confirm that sve/sve2 has been enabled in the Makefile by checking the output from the configuration step:
 
 ```output
 root@iZuf61ixurqifmpxuji4viZ:~/vvenc-1.13.0# CXX=clang++-18 CC=clang-18 cmake -S . -B build/release-static -DVVENC_ENABLE_ARM_SIMD_SVE=1 -DVVENC_ENABLE_ARM_SIMD_SVE2=1
@@ -127,9 +130,9 @@ The project should build successfully and the end of the output should look like
 
 ## Download sample video files
 
-To benchmark the compression efficiency and performance of `vvenc`, you will need a set of video streams to run the codec on. 
+To benchmark the compression efficiency and performance of `vvenc`, you need a set of video streams to run the codec on. 
 
-Download sample `1080P` video files and uncompress them:
+Download sample `1080P` video files and decompress them:
 ```bash
 mkdir ../video && cd ../video
 wget http://ultravideo.cs.tut.fi/video/Bosphorus_1920x1080_120fps_420_8bit_YUV_Y4M.7z
@@ -149,9 +152,9 @@ You can vary the preset settings and measure the impact on performance.
 
 ## View Results
 
-The encoding Frame Rate (Frames per second) for the video files is output at the end of each run.
+The encoding Frame Rate, shown in fps (frames per second), for the video files is output at the end of each run.
 
-Shown below is example output from running the vvenc h.266 encoding on the 1080P sample video file:
+This is an example output from running the VVenC H.266 encoding on a 1080P sample video file:
 
 ```output
 vvencFFapp: VVenC, the Fraunhofer H.266/VVC Encoder, version 1.13.0 [Linux][clang 18.1.8][64 bit][SIMD=SVE2]
@@ -181,4 +184,4 @@ vvencFFapp [info]: finished @ Wed Dec 25 16:06:19 2024
 vvencFFapp [info]: Total Time:       58.962 sec. [user]       15.209 sec. [elapsed]
 ```
 
-You have successfully run the vvenc h.266 encoder on an 1080P sample video file and measured the performance.
+You have successfully run the VVenC H.266 encoder on an 1080P sample video file and measured the performance.
