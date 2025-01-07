@@ -1,5 +1,5 @@
 ---
-title: Run the VVenC H.266 encoder on Arm servers
+title: Run the vvenc H.266 encoder on Arm servers
 
 author_primary: Willen Yang
 
