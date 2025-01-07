@@ -1,15 +1,18 @@
 ---
 layout: learningpathall
-title: Build and run vvenc (H.266 encoder) on Arm servers
+title: Build and run the H.266 VVenC encoder on Arm servers
 weight: 2
 ---
 
 ## Overview
 
-`vvenc` is an open-source H.266/VVC encoder that offers very high compression efficiency and performance. There have been significant efforts made to optimize the open-source implementation of the H.266 encoder on Arm Neoverse platforms which supports Neon and SVE/SVE2 instructions. The optimized code for use with Arm Neoverse platforms is available on [Github](https://github.com/fraunhoferhhi/vvenc). 
+* `vvenc` is an open-source H.266/VVC encoder that offers very high compression efficiency and performance.
+* Versatile Video Coding (VVC - officially approved as ITU-T H.266 | 23090-3) is the most recent international video-compression standard of ITU-T and ISO/IEC.
+* There have been significant efforts made to optimize the open-source implementation of the H.266 encoder on Arm Neoverse platforms that supports Neon and SVE/SVE2 instructions.
+* You can find the optimized code for use with Arm Neoverse platforms in the [vvenc Github Repository](https://github.com/fraunhoferhhi/vvenc). 
 
 ## Install dependencies
-On your Arm based server instance running Ubuntu 22.04, install the dependencies to build and run vvenc:
+On your Arm-based server instance running Ubuntu 22.04, install the dependencies to build and run vvenc:
 
 ```bash
 sudo apt update
