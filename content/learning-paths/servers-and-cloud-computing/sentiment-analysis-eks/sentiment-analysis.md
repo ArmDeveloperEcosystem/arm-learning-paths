@@ -12,13 +12,15 @@ You will need an [AWS account](https://docs.aws.amazon.com/accounts/latest/refer
 
 You also require multiple tools on your local computer. Follow these links to install each tool:
 
-* [Kubectl](/install-guides/kubectl/)
-* [AWS CLI](/install-guides/aws-cli/)
-* [Docker](/install-guides/docker/)
-* [Terraform](/install-guides/terraform/)
-* [Java](/install-guides/java/)
+* [Kubectl](/install-guides/kubectl/).
+* [AWS CLI](/install-guides/aws-cli/).
+* [Docker](/install-guides/docker/).
+* [Terraform](/install-guides/terraform/).
+* [Java](/install-guides/java/).
 
-To use the AWS CLI, you need to generate AWS access keys and configure the CLI. Follow the [AWS Credentials](/install-guides/aws_access_keys/) install guide for instructions on how to do this. 
+To use the AWS CLI, you need to generate AWS access keys and configure the CLI. 
+
+Follow the [AWS Credentials Install Guide](/install-guides/aws_access_keys/) for instructions on how to do this. 
 
 ## Set up Sentiment Analysis
 
@@ -29,7 +31,7 @@ git clone https://github.com/koleini/spark-sentiment-analysis.git
 cd spark-sentiment-analysis/eks
 ```
 
-If you would like to change the default AWS region, you can do so by editing the file `variables.tf`.
+If you would like to change the default AWS region, you can do this by editing the file `variables.tf`.
 
 As you will see, the default value is at the top of the file and is set to `us-east-1`:
 
@@ -40,7 +42,7 @@ variable "AWS_region" {
 }
 ```
 
-In addition, if you're using a profile other than `default`, then update the following variable:
+In addition, if you're using a profile other than `default`, then you need to update the following variable:
 
 ```output
 variable "AWS_profile" {
@@ -56,7 +58,7 @@ terraform init
 terraform apply --auto-approve
 ```
 
-Once the cluster is created, verify it in AWS console.
+Once the cluster is created, verify it in the AWS console.
 
 {{% notice Note %}}
 If you want to use an AWS CLI profile that is not the default, make sure that you change the profile name before running the command to verify the cluster.

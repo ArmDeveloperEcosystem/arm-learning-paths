@@ -2,23 +2,23 @@
 review:
     - questions:
         question: >
-            Sentiment Analysis does not rely on compute infrastructure
+            Sentiment Analysis does not rely on compute infrastructure.
         answers:
-            - "True"
-            - "False"
+            - "True."
+            - "False."
         correct_answer: 2                    
         explanation: >
-            Sentiment analysis is a compute-intensive task and can quickly drive up resources and increase costs if not managed effectively
+            Sentiment Analysis is a compute-intensive task and can quickly drive up resources and increase costs if not managed effectively.
 
     - questions:
         question: >
-            Elasticsearch and Kibana can't be deployed on Arm-based VMs in the cloud
+            Elasticsearch and Kibana cannot be deployed on Arm-based VMs in the cloud.
         answers:
-            - "True"
-            - "False"
+            - "True."
+            - "False."
         correct_answer: 2                   
         explanation: >
-            Elasticsearch and Kibana provide native Arm64 binaries for various platforms and can be deployed on Arm-based VMs across different clouds
+            Elasticsearch and Kibana provide native Arm64 binaries for various platforms and can be deployed on Arm-based VMs across different clouds.
 
 
 # ================================================================================
