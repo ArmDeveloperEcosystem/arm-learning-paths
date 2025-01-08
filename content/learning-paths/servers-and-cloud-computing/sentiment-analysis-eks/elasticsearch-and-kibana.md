@@ -63,18 +63,18 @@ Use the following command to deploy Elasticsearch and the Kibana Dashboard:
 ```console
 docker compose up
 ```
-If you don't have the `docker compose` plugin already installed, you can install it via the following commands:
+If you do not have the `docker compose` plugin already installed, you can install it through the following commands:
 
 ```Note
 sudo apt-get update
 sudo apt-get install docker-compose-plugin
 ```
 
-After the dashboard is set up, use the public IP of your server on port 5601 to access the Kibana dashboard.
+After the dashboard is set up, use the public IP of your server on port 5601 to access the Kibana dashboard. See Figure 2.
 
 ![kibana #center](_images/kibana.png "Figure 2: Kibana Dashboard Setup.")
 
-Switch to the *Stack Management* using the menu on the left side as shown in below image.
+Switch to *Stack Management* using the menu on the left side as Figure 3 shows.
 
 ![kibana-data #center](_images/Kibana-data.png "Figure 3: Switch to Stack Management.")
 
@@ -86,12 +86,14 @@ You can also check the types of attributes that are received as the Data Views. 
 
 ![kibana-dashboard1 #center](_images/Kibana-dashboard1.png "Figure 5: Dashboards on Left Menu." )
 
-One of the sample dashboard structures looks as below, showing the records of different sentiments.
+Figure 6 shows a sample dashboard structure, displaying the records of different sentiments.
 
 ![kibana-dashboard2 #center](_images/Kibana-dashboard2.png "Figure 6: Sample Dashboard Structure." )
 
-Similarly, you can design and create dashboards to analyze a particular set of data. The screenshot below shows the dashboard designed for this Learning Path.
+Similarly, you can design and create dashboards to analyze a particular set of data. The screenshot in Figure 7 shows the dashboard designed for this Learning Path.
 
 ![kibana-dashboard3 #center](_images/Kibana-dashboard3.png "Figure 7: Dashboard for this Learning Path.")
 
-Navigate to the `dashboards` directory in the cloned GitHub repository and locate `sentiment_dashboard.ndjson` file. Import this file into Kibana dashboard and you should see a dashboard shown in previous step.
+Navigate to the `dashboards` directory in the cloned GitHub repository and locate the  `sentiment_dashboard.ndjson` file. 
+
+Import this file into the Kibana dashboard and you should see a dashboard as shown in the previous step.
