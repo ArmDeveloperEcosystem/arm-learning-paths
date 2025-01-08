@@ -13,10 +13,10 @@
 review:
     - questions:
         question: >
-            Does vvenc(H.266 encoder) run on Arm servers?
+            Does the VVenC H.266 encoder run on Arm servers?
         answers:
-            - "Yes"
-            - "No"
+            - "Yes."
+            - "No."
         correct_answer: 1                     
         explanation: >
             H.266 codec is fully supported on 64-bit Arm servers running Linux.
@@ -25,11 +25,11 @@ review:
         question: >
             Does varying the preset settings on the images impact the codec performance?
         answers:
-            - "Yes"
-            - "No"
+            - "Yes."
+            - "No."
         correct_answer: 1                   
         explanation: >
-            You can vary the preset settings on the different resolution images and measure the impact on performance.
+            You can vary the preset settings on differing resolutions of images and measure the impact on performance.
                
 
 # ================================================================================
