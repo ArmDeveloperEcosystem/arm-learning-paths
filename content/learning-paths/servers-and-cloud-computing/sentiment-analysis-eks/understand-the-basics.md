@@ -30,7 +30,7 @@ Two relevant factors to consider when designing the architecture for this soluti
 * Tracking real-time changes enables you to understand sentiment patterns and make informed decisions promptly, allowing for timely and appropriate actions
 
 
-Using an Arm-based Amazon EKS cluster is ideal. WHY? 
+Using an Arm-based Amazon EKS cluster offers flexibility, strong performance and cost efficiences. 
 
 Figure 1 shows the architecture that this solution uses:
 

@@ -10,17 +10,17 @@ layout: learningpathall
 
 ### What is Elasticsearch?
 
-Elasticsearch is a NoSQL database, search, and analytics engine. It is designed to store, search, and analyze large amounts of data. It has a real-time indexing capability which is crucial for handling high-velocity data streams like X posts. 
+Elasticsearch is a NoSQL database, search, and analytics engine. It is designed to store, search, and analyze large amounts of data. It has a real-time indexing capabilities which are crucial for handling high-velocity data streams such as X posts. 
 
 ### What is Kibana?
 
-Kibana is a customizable dashboard and visualization tool which integrates seamlessly with Elasticsearch. It provides valuable insights and opportunities to explore the data that you have collected by presenting it in multiple differing views. 
+Kibana is a customizable dashboard and visualization tool which integrates seamlessly with Elasticsearch. It provides valuable insights and opportunities to explore collected data by presenting it in multiple differing views. 
 
 In this Learning Path, you will use a Kibana dashboard as an interface to interact with X data, apply filters, and receive alerts. 
 
 ### How do I install Elasticsearch and Kibana?
 
-There are multiple ways to install Elasticsearch and Kibana, one method is shown below.
+There are multiple ways to install Elasticsearch and Kibana. One method is described below.
 
 Before you begin, ensure that Docker and Docker Compose have been installed on your computer. 
 
@@ -65,9 +65,9 @@ Use the following command to deploy Elasticsearch and the Kibana Dashboard:
 ```console
 docker compose up
 ```
+If you don't have the `docker compose` plugin already installed, you can install it via the following commands:
 
 ```Note
-If you don't have the `docker compose` plugin already installed, you can install it via the following commands
 sudo apt-get update
 sudo apt-get install docker-compose-plugin
 ```
