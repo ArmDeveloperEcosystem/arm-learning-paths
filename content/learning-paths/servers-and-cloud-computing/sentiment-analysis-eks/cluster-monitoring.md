@@ -109,4 +109,4 @@ Locate a `Kubernetes/Compute Resources/Node` dashboard and click on it.
 
 You should see a dashboard like below for your Kubernetes cluster:
 
-![grafana #center](_images/grafana.png)
+![grafana #center](_images/grafana.png "Figure 8: Dashboard for Kubernetes Cluster.")

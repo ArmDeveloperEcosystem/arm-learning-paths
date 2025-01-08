@@ -6,13 +6,11 @@ weight: 4
 layout: learningpathall
 ---
 
-## Deploy Elasticsearch and Kibana
-
-### What is Elasticsearch?
+### Elasticsearch
 
 Elasticsearch is a NoSQL database, search, and analytics engine. It is designed to store, search, and analyze large amounts of data. It has a real-time indexing capability which is crucial for handling high-velocity data streams such as X posts. 
 
-### What is Kibana?
+### Kibana
 
 Kibana is a customizable dashboard and visualization tool which integrates seamlessly with Elasticsearch. It provides valuable insights and opportunities to explore collected data by presenting it in multiple differing views. 
 
@@ -20,7 +18,7 @@ In this Learning Path, you will use a Kibana dashboard as an interface to intera
 
 ### How do I install Elasticsearch and Kibana?
 
-There are multiple ways to install Elasticsearch and Kibana. One method is described below.
+There are multiple ways to install Elasticsearch and Kibana. One of these methods is described here.
 
 Before you begin, ensure that Docker and Docker Compose have been installed on your computer. 
 
@@ -72,28 +70,28 @@ sudo apt-get update
 sudo apt-get install docker-compose-plugin
 ```
 
-After the dashboard is set up, use the the public IP of your server on port 5601 to access the Kibana dashboard.
+After the dashboard is set up, use the public IP of your server on port 5601 to access the Kibana dashboard.
 
-![kibana #center](_images/kibana.png)
+![kibana #center](_images/kibana.png "Figure 2: Kibana Dashboard Setup.")
 
 Switch to the *Stack Management* using the menu on the left side as shown in below image.
 
-![kibana-data #center](_images/Kibana-data.png)
+![kibana-data #center](_images/Kibana-data.png "Figure 3: Switch to Stack Management.")
 
-To make sure that you are receiving the data from sentiment analysis application through Elasticsearch, check whether you have Data View in Stack Management.
+To make sure that you are receiving the data from the sentiment analysis application through Elasticsearch, check whether you have the Data View enabled in Stack Management.
 
-![kibana-sentiment #center](_images/Kibana-sentiment.png)
+![kibana-sentiment #center](_images/Kibana-sentiment.png "Figure 4: Create and Manage Data Views.")
 
 You can also check the types of attributes that are received as the Data Views. Now, you can switch to the dashboards on the left menu and start creating the visualizations to analyze the data.
 
-![kibana-dashboard1 #center](_images/Kibana-dashboard1.png)
+![kibana-dashboard1 #center](_images/Kibana-dashboard1.png "Figure 5: Dashboards on Left Menu." )
 
 One of the sample dashboard structures looks as below, showing the records of different sentiments.
 
-![kibana-dashboard2 #center](_images/Kibana-dashboard2.png)
+![kibana-dashboard2 #center](_images/Kibana-dashboard2.png "Figure 6: Sample Dashboard Structure." )
 
-Similarly, you can design and create dashboards to analyze a particular set of data. The screenshot below shows the dashboard designed for this learning path
+Similarly, you can design and create dashboards to analyze a particular set of data. The screenshot below shows the dashboard designed for this Learning Path.
 
-![kibana-dashboard3 #center](_images/Kibana-dashboard3.png)
+![kibana-dashboard3 #center](_images/Kibana-dashboard3.png "Figure 7: Dashboard for this Learning Path.")
 
-Navigate to the `dashboards` directory in the cloned github repository and locate `sentiment_dashboard.ndjson` file. Import this file into Kibana dashboard and you should see a dashboard shown in previous step.
+Navigate to the `dashboards` directory in the cloned GitHub repository and locate `sentiment_dashboard.ndjson` file. Import this file into Kibana dashboard and you should see a dashboard shown in previous step.

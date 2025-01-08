@@ -9,7 +9,7 @@ layout: learningpathall
 ## What is Sentiment Analysis?
 
 * Sentiment analysis, sometimes called *opinion mining*,  is a natural language processing (NLP) technique used to identify and categorize sentiment expressed in digital text. 
-* Sentiment analysis uses tools to scan text and dicipher the emotion behind the message, which might broadly be interpreted as postive, negative, or neutral.  
+* Sentiment analysis uses tools to scan text and decipher the emotion behind the message, which might broadly be interpreted as positive, negative, or neutral.  
 
 ## What can Sentiment Analysis achieve, and why analyze posts on X?
 
