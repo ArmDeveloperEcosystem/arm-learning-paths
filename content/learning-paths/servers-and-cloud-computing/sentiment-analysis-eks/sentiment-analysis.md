@@ -42,7 +42,7 @@ variable "AWS_region" {
 }
 ```
 
-In addition, if you're using a profile other than `default`, then you need to update the following variable:
+In addition, if you are using a profile other than `default`, then you need to update the following variable:
 
 ```output
 variable "AWS_profile" {

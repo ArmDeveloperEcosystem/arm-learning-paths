@@ -51,7 +51,7 @@ helm install prometheus prometheus-community/prometheus \
   --set server.persistentVolume.storageClass="gp2"
 ```
 
-Check all pods are up and running:
+Check that all pods are up and running:
 
 ```console
 kubectl get pods -n prometheus
@@ -97,13 +97,13 @@ helm install grafana grafana/grafana \
   --set service.type=LoadBalancer
 ```
 
-Check all pods are up and running
+Check all pods are up and running:
 
 ```console
 kubectl get pods -n grafana
 ```
 
-Log in to the Grafana dashboard using the LoadBalancer IP and click on `Dashboards` in the left navigation page. 
+Log in to the Grafana dashboard using the LoadBalancer IP and click on **Dashboards** in the left navigation page. 
 
 Locate a `Kubernetes/Compute Resources/Node` dashboard and click on it. 
 

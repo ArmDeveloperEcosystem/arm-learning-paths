@@ -10,7 +10,7 @@ layout: learningpathall
 
 ### What is Elasticsearch?
 
-Elasticsearch is a NoSQL database, search, and analytics engine. It is designed to store, search, and analyze large amounts of data. It has a real-time indexing capabilities which are crucial for handling high-velocity data streams such as X posts. 
+Elasticsearch is a NoSQL database, search, and analytics engine. It is designed to store, search, and analyze large amounts of data. It has a real-time indexing capability which is crucial for handling high-velocity data streams such as X posts. 
 
 ### What is Kibana?
 
