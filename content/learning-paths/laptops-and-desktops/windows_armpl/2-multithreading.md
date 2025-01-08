@@ -1,49 +1,62 @@
 ---
-title: Build a simple math application and profiling the performance
+title: Build a simple numerical application and profile the performance
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Clone Example from GitHub
+## Install Git for Windows on Arm
 
-We use a Windows application that renders a rotating 3D cube to perform the calculations on different programming options.
+This section uses an example application from GitHub to demonstrate the use of Arm Performance Libraries.
 
-First, clone this Windows application repository from GitHub:
+Start by installing Git using the [Git install guide](/install-guides/git-woa/) for Windows on Arm.
+
+## Clone the example from GitHub
+
+The example application renders a rotating 3D cube to perform the calculations on different programming options.
+
+First, navigate to an empty directory and clone the example repository from GitHub:
 
 ```cmd
 git clone https://github.com/odincodeshen/SpinTheCubeInGDI.git
 ```
 
 {{% notice Note %}}
-To facilitate explaining the topic, this repository is forked from the original author [here](https://github.com/marcpems/SpinTheCubeInGDI) with some modifications to aid in the following explanations.
+The example repository is forked from the [original GitHub repository](https://github.com/marcpems/SpinTheCubeInGDI) and some minor modifications have been made to aid learning.
 {{% /notice %}}
 
-## Quick Introduction
+## Spin the cube introduction
 
-Click the SpinTheCubeInGDI.sln to open the project.
-This source code implements a Windows application that renders a spinning 3D cube.
+In Windows File Explorer, double-click `SpinTheCubeInGDI.sln` to open the project in Visual Studio.
 
-Four of key components are:
+The source file `SpinTheCubeInGDI.cpp` implements a spinning cube.
+
+The four key components are:
  - Shape Generation: Generates the vertices for a sphere using a golden ratio-based algorithm.
  - Rotation Calculation: 
-   The application uses a rotation matrix to rotate the 3D shape around the X, Y, and Z axes. The rotation angle is incremented over time, creating the animation. This code apply two options to calculate:
-    - Multithreading: The application utilizes multithreading to improve performance by distributing the rotation calculations across multiple threads.
-    - Arm Performance Libraries: Used for optimized calculations. (Explained in the next session)
- - Drawing: The application draws the transformed vertices of the shapes on the screen, using Windows API.
+   The application uses a rotation matrix to rotate the 3D shape around the X, Y, and Z axes. The rotation angle is incremented over time, creating the animation. 
+ - Drawing: The application draws the transformed vertices of the shapes on the screen, using a Windows API.
  - Performance Measurement: The code measures and displays the number of transforms per second.
 
+The code has two options to calculate the rotation:
 
-## Calculation Option#1 -- Multithreading
+  1. Multithreading: The application utilizes multithreading to improve performance by distributing the rotation calculations across multiple threads.
+  2. Arm Performance Libraries: The application utilizes optimized math library functions for the rotation calculations. 
 
-In this learning path, our focus is on the impact of different Calculation option on performance.
-The multithreading implement on the project involved two of functions:
- - CalcThreadProc():
+Option 1 is explained below and option 2 is explained on the next page. By trying both methods you can compare and contrast the code and the performance. 
+
+## Option 1: Multithreading
+
+One way to speed up the rotation calculations is to use multithreading.
+
+The multithreading implementation option involves two functions:
+
+ - The `CalcThreadProc()` function
     
-    This function is the entry point for each calculation thread.  Each calculation thread waits on its semaphore in semaphoreList.
+    This function is the entry point for each calculation thread.  Each calculation thread waits on its semaphore in `semaphoreList`.
    
-    When a thread receives a signal, it calls `applyRotation()` to transform its assigned vertices. The updated vertices are stored in the drawSphereVertecies vector
+    When a thread receives a signal, it calls `applyRotation()` to transform its assigned vertices. The updated vertices are stored in the `drawSphereVertecies` vector. The code is shown below:
    
     ```c++
     DWORD WINAPI CalcThreadProc(LPVOID data)
@@ -70,9 +83,10 @@ The multithreading implement on the project involved two of functions:
         return 0;
     }
     ```
- 
- - applyRotation():
-    This function applies the rotation matrix to a subset of the shape's vertices.
+
+ - The `applyRotation()` function:
+
+    This function applies the rotation matrix to a subset of the shape's vertices using multiplication. The code is shown below:
 
     ```c++
     void applyRotation(std::vector<double>& shape, const std::vector<double>& rotMatrix, int startPoint, int stride)
@@ -113,23 +127,23 @@ The multithreading implement on the project involved two of functions:
     ```
 
 
-## Build and Test
+## Build and run the application
 
-After gaining a general understanding of the project, you can compile it. 
-Build the project, and once successful, run `SpinTheCubeInGDI.exe`.
+After gaining a general understanding of the project, you can compile and run it. 
 
-You'll see a simulated 3D sphere continuously rotating. The number in the upper-left corner represents the number of frames per second (FPS). A higher number indicates better performance, and vice versa.
+Build the project, and run `SpinTheCubeInGDI.exe`
+
+You will see a simulated 3D sphere continuously rotating. 
+
+The number in application represents the number of frames per second (FPS). A higher number indicates better performance.
 
  ![gif1](./figures/multithreading.gif)
 
-On my test machine, the performance generally falls between 3 and 6 FPS, which is unstable.
-
-{{% notice Note %}}
-Performance may vary depending on the hardware and the system load at the time of testing.
-{{% /notice %}}
+Performance varies across various Windows on Arm computers, but on the Lenovo X13s the performance generally falls between 3k and 6k FPS.
 
 
-You can also use the [profiling tools](https://learn.microsoft.com/en-us/visualstudio/profiling/profiling-feature-tour?view=vs-2022) to observe the dynamic CPU and memory usage while the program is running.
+You can use the [Visual Studio profiling tools](https://learn.microsoft.com/en-us/visualstudio/profiling/profiling-feature-tour?view=vs-2022) to observe the dynamic CPU and memory usage while the program is running.
+
  ![img8](./figures/mt_cpumem_usage1.png)
 
-
+Continue to the next section to learn how to improve performance using Arm Performance Libraries.

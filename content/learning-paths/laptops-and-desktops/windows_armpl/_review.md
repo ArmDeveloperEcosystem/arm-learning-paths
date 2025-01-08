@@ -2,24 +2,24 @@
 review:
     - questions:
         question: >
-            Arm Performance Libraries can be used to optimize
+            Arm Performance Libraries can be used to optimize:
         answers:
-            - Arm64 Linux platform.
-            - Arm64 Windows platform.
-            - Both Arm64 Linux and Windows platform.
+            - Arm64 Linux applications.
+            - Arm64 Windows applications.
+            - Both Arm64 Linux and Windows applications.
         correct_answer: 3                    
         explanation: >
-            Arm Performance Libraries support both Linux and Windows operation system.
+            Arm Performance Libraries support both Linux and Windows.
 
     - questions:
         question: >
             Arm Performance Libraries has been integrated into Microsoft Visual Studio installation.
         answers:
-            - "Yes."
-            - "No."
+            - "Yes"
+            - "No"
         correct_answer: 2                   
         explanation: >
-            No, you need install Arm Performance Libraries package before use that. 
+            No, you need install Arm Performance Libraries package before using it.
     - questions:
         question: >
             Arm Performance Libraries provides which type of code optimization?  

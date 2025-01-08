@@ -1,63 +1,74 @@
 ---
-title: Using Arm Performance Libraries to accalerate your WoA application
+title: Use Arm Performance Libraries to improve performance
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Introduce Arm Performance Libraries
-In the previous session, we gained some understanding of the performance of the first calculation option. 
-Now, we will try Arm Performance Libraries and explore the differences in performance.
+## Introducing Arm Performance Libraries
+
+In the previous section, you gained some understanding of the performance of the first calculation option, multithreading. 
+
+Now, use option 2, Arm Performance Libraries, and explore the differences.
 
 [Arm Performance Libraries](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Libraries) provides optimized standard core math libraries for numerical applications on 64-bit Arm-based processors. The libraries are built with OpenMP across many BLAS, LAPACK, FFT, and sparse routines in order to maximize your performance in multi-processor environments.
 
-Follow this [learning path](https://learn.arm.com/install-guides/armpl/) to install Arm Performance Libraries on Windows 11. 
-You can also reference this [document](https://developer.arm.com/documentation/109361/latest/) about Arm Performance Libraries on Windows.
+Use the [Arm Performance Libraries install guide](/install-guides/armpl/) to install Arm Performance Libraries on Windows 11. 
 
-After successful installation, you'll find five directories in the installation folder. The `include` and `lib` are the directories contain include header files and library files, respectively. Please take note of these two directories, as we'll need them for Visual Studio setup later.
+You can also refer to the [Arm Performance Libraries documentation](https://developer.arm.com/documentation/109361/latest/) for Windows. 
 
+After successful installation, you will find five directories in the installation folder. 
+
+The `include` and `lib` are the directories containing header files and library files, respectively. 
+
+Take note of the location of these two directories, as you will need them for configuring Visual Studio.
 
  ![img9](./figures/apl_directory.png)
 
 ## Include Arm Performance Libraries into Visual Studio
 
-To utilize the provided performance optimizations on Arm Performance Libraries, you need to manually add the paths into Visual Studio.
+To use Arm Performance Libraries in the application, you need to manually add the paths into Visual Studio.
 
-You need to configure two places in your Visual Studio projects:
- - #### External Include Directories:
+You need to configure two places in your Visual Studio project:
 
-    1. In the Solution Explorer, right-click on your project and select "Properties". 
-    2. In the left pane of the Property Pages, expand "Configuration Properties". Select "VC++ Directories"
-    3. In the right pane, find the "Additional Include Directories" setting.
-    4. Click on the dropdown menu. Select "<Edit...>"
-    5. In the dialog that opens, click the "New Line" icon to add Arm Performance Libraries `include` path.
-    ![img10](./figures/ext_include.png)
+### External Include Directories:
+
+1. In the Solution Explorer, right-click on your project and select `Properties`. 
+2. In the left pane of the Property Pages, expand `Configuration Properties`. Select `VC++ Directories`
+3. In the right pane, find the `Additional Include Directories` setting.
+4. Click on the dropdown menu. Select `<Edit...>`
+5. In the dialog that opens, click the `New Line` icon to add Arm Performance Libraries `include` path.
+
+![img10](./figures/ext_include.png)
  
- - #### Additional Library Directories:
+### Additional Library Directories:
 
-    1. In the Solution Explorer, right-click on your project and select "Properties". 
-    2. In the left pane of the Property Pages, expand "Configuration Properties". Select "Linker"
-    3. In the right pane, find the "Additional Library Directories" setting.
-    4. Click on the dropdown menu. Select "<Edit...>"
-    5. In the dialog that opens, click the "New Line" icon to add Arm Performance Libraries `library` path.
-    ![img10](./figures/linker_lib.png)
+1. In the Solution Explorer, right-click on your project and select `Properties`. 
+2. In the left pane of the Property Pages, expand `Configuration Properties`. Select `Linker`
+3. In the right pane, find the `Additional Library Directories` setting.
+4. Click on the dropdown menu. Select `<Edit...>`
+5. In the dialog that opens, click the `New Line` icon to add Arm Performance Libraries `library` path.
+
+![img10](./figures/linker_lib.png)
 
 
 {{% notice Note %}}
-
-Visual Studio allows users to set the above two paths for each individual configuration. To apply the settings to all configurations in your project, select "All Configurations" in the "Configuration" dropdown menu.
+Visual Studio allows users to set the above two paths for each individual configuration. To apply the settings to all configurations in your project, select `All Configurations` in the `Configuration` dropdown menu.
 {{% /notice %}}
 
 
-
- ## Calculation Option#2 -- Arm Performance Libraries
+## Option 2: Arm Performance Libraries
 
 You are now ready to use Arm Performance Libraries in your project.
-Open the souece code file `SpinTheCubeInGDI.cpp` and search for the `_USE_ARMPL_DEFINES` definition.
+
+Open the source code file `SpinTheCubeInGDI.cpp` and search for the `_USE_ARMPL_DEFINES` definition.
+
 Removing the comment will enable the Arm Performance Libraries feature.
 
-When variable useAPL is True, the application will call `applyRotationBLAS()` instead of multithreading code to apply the rotation matrix to the 3D vertices.
+When variable useAPL is True, the application will call `applyRotationBLAS()` instead of the multithreading code to apply the rotation matrix to the 3D vertices.
+
+The code is below:
 
 ```c++
 void RotateCube(int numCores)
@@ -96,9 +107,11 @@ void RotateCube(int numCores)
 }
 ```
 
-`applyRotationBLAS()` adopts BLAS matrix multiplier instead of multithreading for calculate implementation.
+The `applyRotationBLAS()` function adopts a BLAS matrix multiplier instead of multithreading multiplication for calculating rotation.
 
 Basic Linear Algebra Subprograms (BLAS) are a set of well defined basic linear algebra operations in Arm Performance Libraries, check [cblas_dgemm](https://developer.arm.com/documentation/101004/2410/BLAS-Basic-Linear-Algebra-Subprograms/CBLAS-functions/cblas-dgemm?lang=en) to learn more about the function.
+
+Here is the code used to compute rotation with BLAS:
 
 ```c++
 void applyRotationBLAS(std::vector<double>& shape, const std::vector<double>& rotMatrix)
@@ -114,18 +127,21 @@ void applyRotationBLAS(std::vector<double>& shape, const std::vector<double>& ro
 }
 ```
 
-## Build and Test
+## Build and run the application
 
-Rebuild the code and run `SpinTheCubeInGDI.exe` again, You'll see the Frame Rate has increased. 
-On my machine, the performance stably remains between 11 and 12.
+Rebuild the code and run `SpinTheCubeInGDI.exe` again. 
+
+With option 2 you see an increased Frame Rate.
+
+On the Lenovo X13s, the performance is between 11k and 12k FPS.
 
 ![gif2](./figures/apl_enable.gif)
 
-Re-running profiling tools, you can see that the CPU usage has decreased significantly. There is no difference in memory usage.
+Re-run the profiling tools. 
+
+You see that the CPU usage has decreased significantly. There is no difference in memory usage.
+
  ![img11](./figures/apl_on_cpu_mem_usage.png)
 
-## Conclusion:
 
-This example demonstrates that Arm Performance Libraries on Windows can improve performance for specific workloads.
-
-
+You have learned how to improve application performance using Arm Performance Libraries.
