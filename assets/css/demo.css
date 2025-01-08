@@ -21,17 +21,17 @@
 
 
 .eq-width-cols {
-    max-width: calc(100% / var(--column-count)); /* Calculate the max-width based on the number of columns */
+    max-width: calc(90% / var(--column-count)); /* Calculate the max-width based on the number of columns */
 }
 @media (min-width: 992px) { /* lg */
     .eq-width-cols {
-        max-width: calc(100% / var(--column-count));  /* Calculate the max-width based on the number of columns */
+        max-width: calc(90% / var(--column-count));  /* Calculate the max-width based on the number of columns */
     }
 }
 
 @media (max-width: 576px) { /* xs */
     .eq-width-cols {
-        max-width: 100%;
+        max-width: 90%;
         flex-basis: 100%; /* Stacks the columns vertically on smaller screens */
     }
 }

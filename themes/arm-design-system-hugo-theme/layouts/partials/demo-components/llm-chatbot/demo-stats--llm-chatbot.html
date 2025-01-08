@@ -21,8 +21,22 @@ Calls to:
             <h2>Arm KleidiAI Demo</h2>
             <div id="demo-container">
                 <div id="all-messages-div">
-                    
+
                 </div>
+                    
+                {{ if .Params.example_user_prompts}}
+                <div id="example-prompts" class="c-row u-padding-bottom-4" style="justify-content: center; text-align: center; --column-count: {{ len .Params.example_user_prompts }};"> 
+                    {{- range .Params.example_user_prompts -}}
+                        <div class="c-col eq-width-cols" style="background-color: var(--arm-black); color: var(--arm-light-blue); border-radius: 15px; padding-top: 4px; padding-bottom: 4px;    margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; cursor: pointer;">
+                            <div class="example-prompt">
+                                {{.}}
+                            </div>                  
+                        </div>
+                    {{- end -}}          
+                </div>
+                {{end}}
+
+
                 <div id="demo-actions">
                     <div class="c-row">
                         <div class="c-col" id="input-and-submit">

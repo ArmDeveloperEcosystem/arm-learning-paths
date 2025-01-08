@@ -16,17 +16,12 @@ diagram_blowup: config-diagram.png
 terms_and_conditions: demo-terms-and-conditions.txt
 
 
-configuration_rag_prompts:
-  - example_prompts:
-      prompt_name: Prompt One
-      prompts: 
-        - Do XYZ and this for another!
-        - another example!
-  - example_prompts:
-      prompt_name: Prompt Two
-      prompts: 
-        - xxx
-        - rrrrrrrr example!
+example_user_prompts:
+  - Do Hyperscan and Snort3 work on Graviton4?
+  - How can I easily build multi-architecture Docker images?
+      
+rag_data_cutoff_date: 2025/01/13
+
 
 prismjs: true
 
