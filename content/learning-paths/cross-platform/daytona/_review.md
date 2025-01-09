@@ -15,19 +15,19 @@ review:
         question: >
             Can Daytona be used to manage local dev container based environments?
         answers:
-            - "Yes"
-            - "No"
+            - "Yes."
+            - "No."
         correct_answer: 1                 
         explanation: >
             Daytona can manage local development environments.
 
     - questions:
         question: >
-            Which abstraction takes care of the details of the connection to your source code projects?
+            Which abstraction manages the details of the connection to your source code projects?
         answers:
-            - "Provider"
-            - "Target"
-            - "Git provider"
+            - "Provider."
+            - "Target."
+            - "Git provider."
         correct_answer: 3                  
         explanation: >
             Git providers connect your source code to your workspaces.
@@ -36,8 +36,8 @@ review:
         question: >
             Can Daytona manage remote development environments in machines provided by cloud service providers?
         answers:
-            - "Yes"
-            - "No"
+            - "Yes."
+            - "No."
         correct_answer: 1                  
         explanation: >
             Daytona can manage development environments in AWS, Azure, and GCP. All offer Arm-based virtual machines.

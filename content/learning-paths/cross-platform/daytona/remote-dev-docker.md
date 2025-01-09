@@ -6,17 +6,17 @@ layout: "learningpathall"
 
 ---
 
-With Daytona, you can create and manage workspaces on other computers, not your local computer. 
+With Daytona, you can create and manage workspaces on other computers, that is not your local computer. 
 
 This is useful if you have Arm-based servers on your local network or in the cloud and you want to use them for development.
 
 There are two common use cases:
-1. The remote computer is always running.
+1. The remote computer is always running. 
 2. The remote computer should stop when you stop your workspace.
 
-The first case is typical for computers on your local network or in the cloud that you don't pay for by the minute or hour. 
+The first case is typical for computers on your local network or in the cloud that you do not pay for by the minute or hour. 
 
-The second case is for cloud resources that are billed as you use them (pay as you go) and you don't want to leave idle computers running.
+The second case is for cloud resources that are billed as you use them (pay as you go) and you do not want to leave idle computers running.
 
 ## Daytona targets
 
@@ -44,7 +44,7 @@ Target Options:  {
 }
 ```
 
-You can use Daytona to manage remote development environments for always on computers (use case #1) using the Docker providers and SSH access to the computer. 
+You can use Daytona to manage remote development environments for always-on computers, which corresponds to the first use case, using the Docker providers and SSH access to the computer. 
 
 {{% notice Note %}}
 Make sure Docker is installed on the remote computer. 
@@ -54,13 +54,13 @@ Make sure Docker is installed on the remote computer.
 
 You can use key based SSH to configure Daytona targets and manage remote workspaces. 
 
-If you are using a password to SSH to the remote computer, create key based SSH by putting a public key on the remote computer at `$HOME/.ssh/authorized_keys`
+If you are using a password to SSH to the remote computer, create a key-based SSH by putting a public key on the remote computer at `$HOME/.ssh/authorized_keys`
 
-If you need to create a key pair you can use `ssh-keygen` to create a key pair with a public and private key. 
+If you need to create a key pair, then you can use `ssh-keygen` to create a key pair with a public and private key. 
 
-Refer to the [SSH install guide](/install-guides/ssh/) for more details. 
+See the [SSH install guide](/install-guides/ssh/) for more details. 
 
-Confirm you can SSH to the remote computer using a private key:
+Confirm that you can SSH to the remote computer using a private key:
 
 ```console
 ssh -i <private-key-file> user@ip
@@ -70,7 +70,7 @@ You need the name of the private key file on your local computer to configure a 
 
 ## Managing remote Docker development environments
 
-Daytona allows you to manage remote development environments for always on computers using the Docker provider. 
+Daytona allows you to manage remote development environments for always-on computers using the Docker provider. 
 
 ```console
 daytona target set
@@ -78,31 +78,31 @@ daytona target set
 
 1. Select the Docker provider then select `New Target`. 
 
-2. Enter a name for the new target, such as the name of the machine, so you can recognize it in the future.
+2. Enter a name for the new target, such as the name of the machine, so that you can recognize it in the future.
 
 3. Configure the target with the information below:
 
-Remote Hostname: The IP address or the DNS name (if you have one) of the remote computer. 
+**Remote Hostname**: This is the IP address or the DNS name of the remote computer, if you have one. 
 
-Remote Password: Not used, leave it blank.
+**Remote Password**: This is not used, so leave it blank.
 
-Remote Port: SSH port, default is 22 unless you have changed the SSH configuration on the remote computer to use a different port. 
+**Remote Port**: This is the SSH port, and the default is 22 unless you have changed the SSH configuration on the remote computer to use a different port. 
 
-Remote User: The username you use to SSH, it cannot be root.
+**Remote User**: This is the username you use to SSH, it cannot be root.
 
-Sock Path: Path to the Docker daemon, keep the default. 
+**Sock Path**: This is the path to the Docker daemon. Keep the default. 
 
-Workspace Data Dir: Location Daytona will store information on the remote computer, leave the default or change it. 
+**Workspace Data Dir**: This is the location where Daytona will store information on the remote computer. Leave the default, or change it to your preference. 
 
 The values are shown below:
 
 ![Create remote workspace #center](_images/docker-remote.png)
 
-In the next screen, enter the Remote Private Key Path. This is the path to the private key file you use to SSH to the remote computer, the same file used to `ssh -i <private-key-file>`
+In the next screen, enter the Remote Private Key Path. This is the path to the private key file that you use to SSH to the remote computer. It is the same file used to `ssh -i <private-key-file>`
 
 Your target configuration is complete. 
 
-4. List the targets to confirm your information
+4. List the targets to confirm your information:
 
 ```console
 daytona target list 
@@ -149,7 +149,7 @@ You can use `daytona create` to create a workspace on the remote computer. The c
 daytona create --no-ide https://github.com/microsoft/vscode-remote-try-python/tree/main
 ```
 
-You can also specify the target using the `-t` option be explicit about which target to use. 
+You can also specify the target using the `-t` option be explicit about which target to use: 
 
 ```console
 daytona create -t arm-server-1 --no-ide https://github.com/microsoft/vscode-remote-try-python/tree/main
@@ -161,7 +161,7 @@ The `daytona list` command shows the target where each workspace is running.
 daytona list
 ```
 
-If you have a workspace on both the local computer and the remote computer the values in the target column are similar to:
+If you have a workspace on both the local computer and the remote computer, the values in the target column are similar to:
 
 ```output
     Workspace                          Repository                                    Target                Status
@@ -175,4 +175,6 @@ Be patient the first time you create the new workspace on the remote computer as
 
 The management commands from the previous section are the same on the local computer and the remote computer. This includes `daytona code` and `daytona ssh`. Use them in the same way for the remote workspace.
 
-You have now learned how to manage remote development environments using the Docker provider. Next, learn how to manage remote development environments using the AWS provider.
+You have now learned how to manage remote development environments using the Docker provider. 
+
+In the next section, you can learn how to manage remote development environments using the AWS provider.

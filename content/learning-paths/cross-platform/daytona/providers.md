@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ---
 
-Daytona allows you to use various cloud providers to manage your development environments. Installing providers doesn't require any configuration input. The details of using a provider are required when a Daytona target is configured. 
+Daytona allows you to use various cloud providers to manage your development environments. Installing providers does not require any configuration input. The details of using a provider are required when a Daytona target is configured. 
 
 To add providers, run: 
 
