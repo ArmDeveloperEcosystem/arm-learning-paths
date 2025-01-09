@@ -50,7 +50,7 @@ You need to configure two places in your Visual Studio project:
 4. Click on the dropdown menu. Select `<Edit...>`
 5. In the dialog that opens, click the `New Line` icon to add Arm Performance Libraries `library` path.
 
-![img10](./figures/linker_lib.png)
+![img11](./figures/linker_lib.png)
 
 
 {{% notice Note %}}
@@ -64,7 +64,10 @@ You are now ready to use Arm Performance Libraries in your project.
 
 Open the source code file `SpinTheCubeInGDI.cpp` and search for the `_USE_ARMPL_DEFINES` definition.
 
-Removing the comment will enable the Arm Performance Libraries feature.
+You should see a commented-out definition on line 13 of the program. Removing the comment will enable the Arm Performance Libraries feature when you re-build the application.
+
+ ![img12](./figures/apl_define.png)
+
 
 When variable useAPL is True, the application will call `applyRotationBLAS()` instead of the multithreading code to apply the rotation matrix to the 3D vertices.
 
@@ -73,22 +76,9 @@ The code is below:
 ```c++
 void RotateCube(int numCores)
 {
-    rotationAngle += 0.00001;
-    if (rotationAngle > 2 * M_PI)
-    {
-        rotationAngle -= 2 * M_PI;
-    }
-
-    // rotate around Z and Y
-    rotationInX[0] = cos(rotationAngle) * cos(rotationAngle);
-    rotationInX[1] = -sin(rotationAngle);
-    rotationInX[2] = cos(rotationAngle) * sin(rotationAngle);
-    rotationInX[3] = sin(rotationAngle) * cos(rotationAngle);
-    rotationInX[4] = cos(rotationAngle);
-    rotationInX[5] = sin(rotationAngle) * sin(rotationAngle);
-    rotationInX[6] = -sin(rotationAngle);
-    rotationInX[7] = 0;
-    rotationInX[8] = cos(rotationAngle);
+    // 
+    //
+    //
 
     if (useAPL)
     {
@@ -116,13 +106,16 @@ Here is the code used to compute rotation with BLAS:
 ```c++
 void applyRotationBLAS(std::vector<double>& shape, const std::vector<double>& rotMatrix)
 {
+
     EnterCriticalSection(&cubeDraw[0]);
+
 #if defined(_M_ARM64) && defined(_USE_ARMPL_DEFINES)
     // Call the BLAS matrix mult for doubles. 
     // Multiplies each of the 3d points in shape 
     // list with rotation matrix, and applies scale
     cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, (int)shape.size() / 3, 3, 3, scale, shape.data(), 3, rotMatrix.data(), 3, 0.0, drawSphereVertecies.data(), 3);
 #endif
+
     LeaveCriticalSection(&cubeDraw[0]);
 }
 ```
@@ -141,7 +134,7 @@ Re-run the profiling tools.
 
 You see that the CPU usage has decreased significantly. There is no difference in memory usage.
 
- ![img11](./figures/apl_on_cpu_mem_usage.png)
+ ![img13](./figures/apl_on_cpu_mem_usage.png)
 
 
 You have learned how to improve application performance using Arm Performance Libraries.
