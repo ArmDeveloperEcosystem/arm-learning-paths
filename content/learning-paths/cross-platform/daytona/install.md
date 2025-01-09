@@ -7,17 +7,21 @@ layout: "learningpathall"
 
 ## How do I install Daytona on Arm computers?
 
-Installing Daytona on Arm-based computers is easy. The application is a single binary which can be placed anywhere. You can add the location of the `daytona` binary to your search path to make it easy to run.
+Installing Daytona on Arm-based computers is easy. The application is a single binary which cyou can place anywhere. You can add the location of the `daytona` binary to your search path to make it easy to run.
 
 Below are some recommended ways to install Daytona on a variety of operating systems.
 
 ### How do I install Daytona on macOS?
+
+Use the following code:
 
 ```console
 curl -sf -L https://download.daytona.io/daytona/install.sh | sudo bash
 ```
 
 ### How do I install Daytona on Arm Linux or Chrome OS?
+
+Use the following code:
 
 ```console
 curl -sf -L https://download.daytona.io/daytona/install.sh | sudo bash
@@ -36,7 +40,7 @@ $env:Path += ";" + $Env:APPDATA + "\bin\daytona"; [Environment]::SetEnvironmentV
 
 You can also manually download the binary for a particular operating system and place it on your computer. 
 
-Refer to the [Daytona documentation](https://www.daytona.io/docs/installation/installation/) for full details. 
+See the [Daytona documentation](https://www.daytona.io/docs/installation/installation/) for full details. 
 
 ## How do I confirm Daytona is installed? 
 

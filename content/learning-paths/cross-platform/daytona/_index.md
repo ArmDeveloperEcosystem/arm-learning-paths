@@ -1,9 +1,7 @@
 ---
 title: Manage Arm development environments with Daytona
 
-draft: true
-cascade:
-    draft: true
+
 
 minutes_to_complete: 30
 
@@ -15,8 +13,8 @@ learning_objectives:
     -  Create and manage remote development environments.
 
 prerequisites:
-    - One or more Arm-based computers running Windows, macOS, or Linux computer with Docker installed.
-    - An AWS account to create cloud development environments (optional).
+    - One or more Arm-based computers running Windows, macOS, or a Linux computer with Docker installed.
+    - Optionally, an AWS account to create cloud development environments.
 
 author_primary: Jason Andrews
 
