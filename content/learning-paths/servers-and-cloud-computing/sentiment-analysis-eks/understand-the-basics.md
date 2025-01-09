@@ -18,7 +18,7 @@ Real-time sentiment analysis is a compute-intensive task and can quickly drive u
 
 The architecture used for the solution is shown below:
 
-![sentiment analysis #center](_images/Sentiment-Analysis.png)
+![sentiment analysis #center](_images/Sentiment-Analysis-Arch.png)
 
 The technology stack for the solution includes the following steps:
 

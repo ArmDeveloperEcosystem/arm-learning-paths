@@ -12,6 +12,10 @@ Prometheus is a monitoring and alerting tool. It is used for collecting and quer
 
 Grafana is a visualization and analytics tool that integrates with data sources from Prometheus to create interactive dashboards to monitor and analyze Kubernetes metrics over time. 
 
+{{% notice Note %}}
+The terrafom script executed in the previous step automatically installs prometheus and grafana in the EKS cluster. However, if you wish to have more flexibility with the installable versions for both, follow the instructions below.
+{{% /notice %}}
+
 ## Install Prometheus on your EKS cluster
 
 You can use Helm to install prometheus on the Kubernetes cluster. 
@@ -103,8 +107,8 @@ Check all pods are up and running
 kubectl get pods -n grafana
 ```
 
-Login to the grafana dashboard using the LoadBalancer IP and click on `Dashboards` in the left navigation page. Locate a `Kubernetes / Compute Resources / Node` dashboard and click on it. 
+Login to the grafana dashboard using the LoadBalancer IP and click on `Dashboards` in the left navigation page. Locate a `Kubernetes / Compute Resources / Node (Pods)` dashboard and click on it. 
 
 You see a dashboard like below for your Kubernetes cluster:
 
-![grafana #center](_images/grafana.png)
+![grafana #center](_images/grafana-dashboard.png)

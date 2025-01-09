@@ -1,6 +1,6 @@
 ---
 title: Setup Sentiment Analysis with Amazon EKS
-weight: 3
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -135,9 +135,9 @@ Execute the `spark-submit` command within the Spark folder to deploy the applica
 Set the following variables before executing the `spark-submit` command:
 
 ```console
-export MASTER_ADDRESS=<K8S_MASTER_ADDRESS>
+export K8S_API_SERVER_ADDRESS=<K8S_API_SERVER_ENDPOINT
 export ES_ADDRESS=<IP_ADDRESS_OF_ELASTICS_SEARCH>
-export CHECKPOINT_BUCKET=<BUCKET_NAME>
+export CHECKPOINT_BUCKET=<S3_UCKET_NAME>
 export ECR_ADDRESS=<ECR_REGISTERY_ADDRESS>
 ```
 
@@ -146,14 +146,14 @@ Execute the `spark-submit` command:
 ```console
 bin/spark-submit \
       --class bigdata.SentimentAnalysis \
-      --master k8s://$MASTER_ADDRESS:443 \
+      --master k8s://K8S_API_SERVER_ADDRESS:443 \
       --deploy-mode cluster \
       --conf spark.executor.instances=2 \
       --conf spark.kubernetes.container.image=$ECR_ADDRESS \
       --conf spark.kubernetes.driver.pod.name="spark-twitter" \
       --conf spark.kubernetes.namespace=default \
       --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark \
-      --conf spark.driver.extraJavaOptions="-DES_NODES=4$ES_ADDRESS -DCHECKPOINT_LOCATION=s3a://$CHECKPOINT_BUCKET/checkpoints/" \
+      --conf spark.driver.extraJavaOptions="-DES_NODES=$ES_ADDRESS -DCHECKPOINT_LOCATION=s3a://$CHECKPOINT_BUCKET/checkpoints/" \
       --conf spark.executor.extraJavaOptions="-DES_NODES=$ES_ADDRESS -DCHECKPOINT_LOCATION=s3a://$CHECKPOINT_BUCKET/checkpoints/" \
       --conf spark.executor.cores=12 \
       --conf spark.driver.cores=12 \
@@ -175,14 +175,20 @@ spark-twitter                               1/1     Running   0          12m
 
 ## Twitter sentiment analysis
 
-Create a twitter(X) [developer account](https://developer.x.com/en/docs/x-api/getting-started/getting-access-to-the-x-api) and create a `bearer token`. 
+Create a twitter(X) [developer account](https://developer.x.com/en/docs/x-api/getting-started/getting-access-to-the-x-api) and download the `bearer token`. 
 
-Use the following commands to set the token and fetch the Tweets:
+Use the following commands to set the bearer token and fetch the Tweets:
 
 ```console
 export BEARER_TOKEN=<BEARER_TOKEN_FROM_X>
 python3 scripts/xapi_tweets.py
 ```
+
+{{% notice Note %}}
+You may need to install the following python packages, if you run into any dependency issues.
+pip3 install requests
+pip3 install boto3
+{{% /notice %}}
 
 You can modify the script `xapi_tweets.py` with your own keywords. 
 
@@ -191,4 +197,24 @@ Here is the code which includes the keywords:
 ```output
 query_params = {'query': "(#onArm OR @Arm OR #Arm OR #GenAI) -is:retweet lang:en",
                 'tweet.fields': 'lang'}
+```
+
+Use the following command to send these processed tweets to Elasticsearch
+
+```console
+python3 csv_to_kinesis.py
+```
+
+Navigate to the Kibana dashboard using the following URL and analyze the tweets
+
+```console
+http://<IP_Address_of_ES_and_Kibana>:5601
+```
+
+## Environment Cleanup
+
+Following this learning path will deploy a lot of artifacts in your cloud account. Remember to destroy the resources after you're done executing it. Use the following command to cleanup the resources
+
+```console
+terraform destroy
 ```

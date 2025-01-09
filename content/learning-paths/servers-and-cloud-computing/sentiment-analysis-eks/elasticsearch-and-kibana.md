@@ -1,6 +1,6 @@
 ---
 title: Monitoring sentiment with Elasticsearch and Kibana
-weight: 4
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -56,13 +56,13 @@ Use the following command to deploy Elasticsearch and Kibana Dashboard.
 docker compose up
 ```
 
-```Note
+{{% notice Note %}}
 If you don't have the `docker compose` plugin already installed, you can install it via the following commands
 sudo apt-get update
 sudo apt-get install docker-compose-plugin
-```
+{{% /notice %}}
 
-After the dashboard is up, use the the public IP of your server on the port 5601 to access the Kibana dashboard.
+After the dashboard is up, use the the public IP of your server on port `5601` to access the Kibana dashboard.
 
 ![kibana #center](_images/kibana.png)
 
