@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## How do I install Daytona on Arm computers?
 
-Installing Daytona on Arm-based computers is easy. The application is a single binary which cyou can place anywhere. You can add the location of the `daytona` binary to your search path to make it easy to run.
+Installing Daytona on Arm-based computers is easy. The application is a single binary which you can place anywhere. You can add the location of the `daytona` binary to your search path to make it easy to run.
 
 Below are some recommended ways to install Daytona on a variety of operating systems.
 
@@ -40,9 +40,9 @@ $env:Path += ";" + $Env:APPDATA + "\bin\daytona"; [Environment]::SetEnvironmentV
 
 You can also manually download the binary for a particular operating system and place it on your computer. 
 
-See the [Daytona documentation](https://www.daytona.io/docs/installation/installation/) for full details. 
+See the [Daytona documentation](https://www.daytona.io/docs/installation/installation/) for further information. 
 
-## How do I confirm Daytona is installed? 
+## How do I confirm that Daytona is installed? 
 
 Print the version to confirm Daytona works on your computer:
 
