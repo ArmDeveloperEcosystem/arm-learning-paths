@@ -15,6 +15,7 @@ diagram_blowup: config-diagram.png
 
 terms_and_conditions: demo-terms-and-conditions.txt
 
+prismjs: true  # enable prismjs rendering of code snippets
 
 example_user_prompts:
   - Do Hyperscan and Snort3 work on Graviton4?
@@ -22,6 +23,7 @@ example_user_prompts:
       
 rag_data_cutoff_date: 2025/01/13
 
+title_chatbot_area: Arm RAG Demo
 
 prismjs: true
 

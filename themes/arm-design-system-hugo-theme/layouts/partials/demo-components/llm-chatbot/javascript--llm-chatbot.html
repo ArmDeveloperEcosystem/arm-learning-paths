@@ -218,16 +218,71 @@ Calls to:
 
         // Append the new chunk to the existing content
         chatbot_message_span.textContent += messageData;
-        /*
+            
+    }
+
+
+    function markdownifyMessage() {
         // Convert the combined text content to markdown
+        const all_messages_div = document.getElementById('all-messages-div');
+        const chatbot_messages = all_messages_div.getElementsByClassName('chatbot-message');        
+        const chatbot_response_div = chatbot_messages[0];
+        const chatbot_message_span = chatbot_response_div.querySelector('span');
         const markdownContent = chatbot_message_span.textContent;
-        const htmlContent = marked(markdownContent);
+
+        const renderer = new marked.Renderer();
+
+        // Customize the code block rendering
+        renderer.code = (code, language) => {
+            var language = code['lang'];
+            
+            // Ensure the language class is valid for Prism.js
+            const languageClass = language ? `language-${language}` : 'language-none';
+
+            // Escape the code content to prevent XSS
+            const escapedCode = code['text']
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;')
+                .trim();
+
+            // Wrap the <code> block with the <div class="code-toolbar">
+            return `
+        <div class="code-toolbar">
+            <pre class="${languageClass}">
+                <code class="${languageClass}">${escapedCode.trim()}</code>
+            </pre>
+        </div>
+               `.replace(/\n\s+/g, ''); // Remove extra newlines and spaces between tags
+
+        };
+
+        // Set the custom renderer to `marked`
+        marked.setOptions({
+            renderer: renderer,
+            gfm: true, // Enable GitHub Flavored Markdown
+            breaks: true, // Enable line breaks
+            highlight: (code, lang) => {
+                // Optional: Use Prism.js to highlight code
+                if (Prism.languages[lang]) {
+                    return Prism.highlight(code, Prism.languages[lang], lang);
+                }
+                return code; // Return unhighlighted code if language is not recognized
+            }
+        });
+
+        // Parse the markdown content
+        const htmlContent = marked.parse(markdownContent);
+
+        console.log(markdownContent);
+        console.log(htmlContent);
 
         // Update the span with the rendered HTML
         chatbot_message_span.innerHTML = htmlContent;
-        */
+        Prism.highlightAll(); // Re-highlight the code blocks
     }
-
 
     function showPopupPostConnection(message,type,keep_last_message=false) {
 
@@ -290,7 +345,9 @@ Calls to:
     
     function hideExamplePrompts() {
         var example_prompts = document.getElementById('example-prompts');
-        example_prompts.style.display = 'none';
+        if (example_prompts) {
+            example_prompts.style.display = 'none';
+        }
     }
 
 
@@ -356,6 +413,8 @@ Calls to:
         const new_loader = document.createElement('ads-loader');
 
         const chatbot_span_for_message = document.createElement('span');
+        chatbot_span_for_message.classList.add('chatbot-response-text');
+
 
         chatbot_div.appendChild(new_icon);
         chatbot_span_for_message.appendChild(new_loader);
@@ -661,6 +720,7 @@ Calls to:
                                 }
                                 else if (return_json.message_type === 'completion_metadata') {
                                     updateLLMMetrics(return_json.value);
+                                    markdownifyMessage();
                                 }
                                 else {
                                     showPopupPostConnection("Unexpected server response - try a new message or return later.","error");                                                
