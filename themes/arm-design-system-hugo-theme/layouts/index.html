@@ -43,7 +43,7 @@ Website homepage.
                 <ads-card  id="{{.Title | urlize}}" class="main-topic-card" link="{{.Permalink}}">
                     <ads-card-content class="maintopic-content" slot="content">
                         <img alt="{{.Title}} image" src="img/main-topic-backgrounds/{{.Title | urlize}}.svg" style="width: 100%;" />
-                        <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{replace .Title "and" "&"}}</h3>   
+                        <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{.Title}}</h3>   
 
                         <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
                             <{{- delimit .Params.key_ip ", " -}}>
@@ -59,15 +59,29 @@ Website homepage.
             </div>
             {{ end }}
             <div class="gradient-box">
+                <ads-card class="main-topic-card" id="ai" link="/tag/ml">
+                    <ads-card-content class="maintopic-content" slot="content">
+                        <img alt="{{.Title}} image" src="img/main-topic-backgrounds/ai.svg" style="width: 100%;" />
+                        <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">AI</h3> 
+                        <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
+                            &#60;LLM, RAG, NLP>
+                        </p>
+                        <p class="u-margin-bottom-0 u-margin-top-0">
+                            AI/ML Learning Paths across all segments.
+                        </p>   
+                    </ads-card-content> 
+                </ads-card>
+            </div>
+            <div class="gradient-box">
                 <ads-card class="main-topic-card" id="tool-install" link="/install-guides">
                     <ads-card-content class="maintopic-content" slot="content">
                         <img alt="{{.Title}} image" src="img/main-topic-backgrounds/tools.svg" style="width: 100%;" />
                         <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">Install Guides</h3> 
                         <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
-                            &#60;Arm,  Open Source,  Commercial>
+                            &#60;Arm,  Open Source,  Commercial Tools>
                         </p>
                         <p class="u-margin-bottom-0 u-margin-top-0">
-                            Simple guides to install new tools.
+                            Simple guides to install new tools across all segments.
                         </p>   
                     </ads-card-content> 
                 </ads-card>
