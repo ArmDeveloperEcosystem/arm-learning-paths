@@ -98,7 +98,7 @@ The values are shown below:
 
 ![Create remote workspace #center](_images/docker-remote.png)
 
-The the next screen, enter the Remote Private Key Path. This is the path to the private key file you use to SSH to the remote computer, the same file used to `ssh -i <private-key-file>`
+In the next screen, enter the Remote Private Key Path. This is the path to the private key file you use to SSH to the remote computer, the same file used to `ssh -i <private-key-file>`
 
 Your target configuration is complete. 
 

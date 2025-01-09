@@ -112,7 +112,7 @@ python -m flask run --port 9000 --no-debugger --no-reload
 
 If you start Python in VS Code, it will automatically forward port 9000 and open a browser tab to see the web page. 
 
-If you run the Python command in a terminal after using SSH to connect to workspace, you can forward the port by running the command below on on your local machine with the name of your workspace:
+If you run the Python command in a terminal after using SSH to connect to workspace, you can forward the port by running the command below on your local machine with the name of your workspace:
 
 ```console
 daytona forward 9000 vscode-remote-try-python

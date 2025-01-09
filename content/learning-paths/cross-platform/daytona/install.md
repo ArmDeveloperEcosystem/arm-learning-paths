@@ -66,7 +66,7 @@ Always make sure Docker is running before using Daytona.
 Even if you plan to develop on remote computers, you still need the server on your local machine.
 {{% /notice %}}
 
-There are 3 options you can use to start the Daytona server.
+There are three options that you can use to start the Daytona server.
 
 Option 1: start the server in the background with a confirmation prompt:
 
