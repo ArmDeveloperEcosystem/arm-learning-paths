@@ -8,24 +8,7 @@ weight: 3
 layout: "learningpathall"
 ---
 
-In this section, you will prepare a development environment to compile the model.
-
-## Before you begin
-
-TODO remove this section?
-
-
-The instructions are for Ubuntu 22.04 or newer.
-
-{{% notice Note %}}
-Note that the Corstone-300 FVP is not available for the Arm architecture so your host machine needs to x86_64.
-{{% /notice %}}
-
-
-The instructions have been tested on:
-- Arm-based cloud instances running Ubuntu 22.04.
-- Desktop computer with Ubuntu 24.04.
-- Windows Subsystem for Linux (WSL).
+In this section, you will prepare a development environment to compile the model. These instructions have been tested on Ubuntu 22.04, 24.04 and on Windows Subsystem for Linux (WSL).
 
 ## Install dependencies
 
@@ -41,8 +24,8 @@ sudo apt install python-is-python3 python3-dev python3-venv gcc g++ make -y
 Create a Python virtual environment using `python venv`.
 
 ```console
-python3 -m venv $HOME/executorch
-source $HOME/executorch/bin/activate
+python3 -m venv $HOME/executorch-venv
+source $HOME/executorch-venv/bin/activate
 ```
 The prompt of your terminal now has (executorch) as a prefix to indicate the virtual environment is active.
 
@@ -62,49 +45,17 @@ Run a few commands to set up the ExecuTorch internal dependencies.
 git submodule sync
 git submodule update --init
 
-pip install buck
 ./install_requirements.sh
 ```
 
-## Install Edge Impulse CLI
+{{% notice Note %}}
+If you run into an issue of `buck` running in a stale environment, reset it by running the following instructions.
 
-1. Create an [Edge Impulse Account](https://studio.edgeimpulse.com/signup) and sign in.
-
-TODO is the account needed?
-
-2. Install the Edge Impulse CLI tools in your terminal
-
-The Edge Impulse CLI tools require Node.js.
-
-```console
-sudo apt install nodejs npm -y
+```bash
+ps aux | grep buck
+pkill -f buck
 ```
-
-Confirm `node` is available by running:
-
-```console
-node -v
-```
-
-Your version is printed, for example:
-
-```output
-v18.19.1
-```
-
-Install the Edge Impulse CLI using NPM:
-
-```console
-sudo npm install -g edge-impulse-cli
-```
-
-3. Install Screen to use with edge devices
-
-TODO is screen needed for this LP?
-
-```console
-sudo apt install screen -y
-```
+{{% /notice %}}
 
 ## Next Steps
 

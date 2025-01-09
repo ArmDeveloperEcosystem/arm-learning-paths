@@ -26,6 +26,6 @@ Test that the setup was successful by running the `run.sh` script.
 ./run.sh
 ```
 
-TODO verify that this works with the simple_nn.py
+TODO connect this part to simple_nn.py part?
 
 You will see a number of examples run on the FVP. This means you can proceed to the next section to test your environment setup.

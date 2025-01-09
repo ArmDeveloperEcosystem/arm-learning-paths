@@ -8,9 +8,8 @@ weight: 7 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-TODO Where is this executed? Context? Make sure the steps works out-of-the-box
-
-With our Environment ready, you can create a simple program to test the setup.
+TODO connect this part with the FVP/board?
+With our environment ready, you can create a simple program to test the setup.
 
 This example defines a small feedforward neural network for a classification task. The model consists of 2 linear layers with ReLU activation in between.
 
