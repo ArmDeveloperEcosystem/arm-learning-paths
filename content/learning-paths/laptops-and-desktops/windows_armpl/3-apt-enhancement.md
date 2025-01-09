@@ -122,9 +122,11 @@ void applyRotationBLAS(std::vector<double>& shape, const std::vector<double>& ro
 
 ## Build and run the application
 
-Rebuild the code and run `SpinTheCubeInGDI.exe` again. 
+Rebuild the code and run `SpinTheCubeInGDI.exe` again.
 
-With option 2 you see an increased Frame Rate.
+Click on the "Options" menu in the top left corner of the program, then select "Use APL" to utilize Option 2.
+
+ ![img13](./figures/use_apl.png)
 
 On the Lenovo X13s, the performance is between 11k and 12k FPS.
 
@@ -134,7 +136,7 @@ Re-run the profiling tools.
 
 You see that the CPU usage has decreased significantly. There is no difference in memory usage.
 
- ![img13](./figures/apl_on_cpu_mem_usage.png)
+ ![img14](./figures/apl_on_cpu_mem_usage.png)
 
 
 You have learned how to improve application performance using Arm Performance Libraries.
