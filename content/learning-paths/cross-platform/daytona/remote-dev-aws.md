@@ -18,7 +18,7 @@ The main difference is that Daytona will create an EC2 instance for you and stop
 
 To use the AWS provider you need an AWS account and the following items:
 
-1. AWS Access key ID and Secret Access Key. If you don't have them, you can generate them using AWS Identity and Access Management (IAM). For additional information, refer to the AWS documentation or the [AWS Credentials](/install-guides/aws_access_keys/) install guide.
+1. AWS Access key ID and Secret Access Key. If you do not have them, you can generate them using AWS Identity and Access Management (IAM). For additional information, refer to the AWS documentation or the [AWS Credentials](/install-guides/aws_access_keys/) install guide.
 
 2. Amazon Machine Image (AMI) for the operating system you want to use. The Arm-based AMIs are different from x86 so you need to look up the Arm-based AMIs.
 
