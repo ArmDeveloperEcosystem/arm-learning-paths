@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## Before you begin
+## Installing the tools
 
 You will need an [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html). Create an account if needed. 
 

@@ -20,22 +20,21 @@ layout: learningpathall
 
 * It is a scalable way of providing organizations and businesses with valuable data such as insights into user feedback, which can then be used in reputation management.
 
-* Tracking real-time changes enables you to understand sentiment patterns and make informed decisions promptly, allowing for timely and appropriate actions.
+* Tracking real-time changes enables you to recognize sentiment patterns and make informed decisions promptly, allowing for timely and appropriate actions.
 
 * X is one of the most popular social media platforms, and provides a wealth of rapidly-changing information about public opinion, trends, and events.
 
-{{% notice Note %}}
-From 2023, X is the new name for the social media platform formerly known as Twitter. 
-"Tweets" are also now known as "posts".
+{{% notice A Note on Twitter %}}
+Before 2023, X was formerly known as Twitter. Although often still referred to by many as Twitter, this Learning Path uses the official name, X. "Tweets" are also now known as "posts".
 {{% /notice %}}
 
-## Solution Architecture
+## Solution Architecture: Using an Arm-based Amazon EKS Cluster 
 
-* Real-time sentiment analysis is a compute-intense task and can rapidly consume resources and increase costs if not managed effectively. 
+Real-time sentiment analysis is a compute-intense task and can rapidly consume resources and increase costs if not managed effectively.
 
-* Using an Arm-based Amazon EKS cluster can address these issues by offering flexibility, strong performance and cost efficiencies.  
+Using an Arm-based Amazon EKS cluster can address these issues by offering flexibility, strong performance and cost efficiencies.  
 
-    Figure 1 shows the solution architecture that this Learning Path uses:
+Figure 1 shows the solution architecture that this Learning Path uses for sentiment analysis:
 
 ![sentiment analysis #center](_images/Sentiment-Analysis.png "Figure 1: Sentiment Analysis Architecture." )
 
