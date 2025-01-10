@@ -10,8 +10,8 @@ operatingsystems_filter:
 - Android: 2
 - Baremetal: 1
 - Linux: 116
-- macOS: 7
-- Windows: 12
+- macOS: 8
+- Windows: 13
 pinned_modules:
 - module:
     name: Recommended getting started learning paths
@@ -20,10 +20,10 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 4
-- Containers and Virtualization: 27
+- Containers and Virtualization: 28
 - Databases: 15
 - Libraries: 8
-- ML: 14
+- ML: 13
 - Performance and Architecture: 42
 - Storage: 1
 - Web: 10
@@ -64,6 +64,7 @@ tools_software_languages_filter:
 - CloudFormation: 1
 - CMake: 1
 - Coding: 18
+- Daytona: 1
 - Django: 1
 - Docker: 16
 - Envoy: 2
@@ -142,7 +143,7 @@ tools_software_languages_filter:
 weight: 1
 cloud_service_providers_filter:
 - AWS: 14
-- Google Cloud: 8
+- Google Cloud: 9
 - Microsoft Azure: 8
 - Oracle: 2
 ---

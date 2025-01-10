@@ -7,17 +7,25 @@ layout: "learningpathall"
 
 ## How do I install Daytona on Arm computers?
 
-Installing Daytona on Arm-based computers is easy. The application is a single binary which can be placed anywhere. You can add the location of the `daytona` binary to your search path to make it easy to run.
+Installing Daytona on Arm-based computers is easy. 
 
-Below are some recommended ways to install Daytona on a variety of operating systems.
+The application is a single binary which you can place anywhere. 
+
+To make it easy to run, you can add the location of the `daytona` binary to your search path.
+
+You can install Daytona on a variety of operating systems, and these are described below.
 
 ### How do I install Daytona on macOS?
+
+Use the following code:
 
 ```console
 curl -sf -L https://download.daytona.io/daytona/install.sh | sudo bash
 ```
 
 ### How do I install Daytona on Arm Linux or Chrome OS?
+
+Use the following code:
 
 ```console
 curl -sf -L https://download.daytona.io/daytona/install.sh | sudo bash
@@ -36,9 +44,9 @@ $env:Path += ";" + $Env:APPDATA + "\bin\daytona"; [Environment]::SetEnvironmentV
 
 You can also manually download the binary for a particular operating system and place it on your computer. 
 
-Refer to the [Daytona documentation](https://www.daytona.io/docs/installation/installation/) for full details. 
+See the [Daytona documentation](https://www.daytona.io/docs/installation/installation/) for further information. 
 
-## How do I confirm Daytona is installed? 
+## How do I confirm that Daytona is installed? 
 
 Print the version to confirm Daytona works on your computer:
 
@@ -57,12 +65,12 @@ Daytona version v0.50.0
 After installing Daytona, you need to start the Daytona server. 
 
 {{% notice Note %}}
-Always make sure Docker is running before using Daytona.
+Always make sure that Docker is running before using Daytona.
 
-Even if you plan to develop on remote computers, you still need the server on your local machine.
+Even if you plan to develop on remote computers, you will still need to have the server on your local machine.
 {{% /notice %}}
 
-There are 3 options you can use to start the Daytona server.
+There are three options that you can use to start the Daytona server.
 
 Option 1: start the server in the background with a confirmation prompt:
 
@@ -118,13 +126,13 @@ INFO[0013] API REQUEST                                   URI=/health/ latency=1.
    You may now begin developing
 ```
 
-If you are curious, leave the Daytona server running in the terminal and see the activity as you manage development environments.
+If you are curious, leave the Daytona server running in the terminal and watch the activity as you manage development environments.
 
 ## How do I stop the Daytona server?
 
-If the server is running in the terminal, use Control-C to stop it. 
+If the server is running in the terminal, you can stop it by using Control-C.
 
-If the server is running in the background, use the command below to stop it:
+If the server is running in the background, you can use the command below to stop it:
 
 ```console
 daytona server stop
@@ -139,7 +147,7 @@ daytona purge
 ```
 
 {{% notice Note %}}
-If you have any trouble with Daytona on macOS, remove the directory `$HOME/Library/Application\ Support/daytona`
+If you experience difficulties with running Daytona on macOS, remove the directory `$HOME/Library/Application\ Support/daytona`
 {{% /notice %}}
 
-With Daytona installed and the server running, you are ready to continue configuring Daytona.
+With Daytona installed and the server running, you are now ready to learn about configuring Daytona.

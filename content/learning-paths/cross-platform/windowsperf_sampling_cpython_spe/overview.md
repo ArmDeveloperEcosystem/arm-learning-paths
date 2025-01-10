@@ -1,6 +1,6 @@
 ---
 layout: learningpathall
-title: Overview of Arm Statistical Profiling Extenstion 
+title: Overview of Arm Statistical Profiling Extension 
 weight: 2
 ---
 

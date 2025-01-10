@@ -7,9 +7,9 @@ layout: "learningpathall"
 
 ---
 
-Daytona allows you to use various cloud providers to manage your development environments. Installing providers doesn't require any configuration input. The details of using a provider are needed when a Daytona target is configured. 
+Daytona allows you to use various cloud providers to manage your development environments. Installing providers does not require any configuration input. The details of using a provider are required when a Daytona target is configured. 
 
-To add providers run: 
+To add providers, run: 
 
 ```console
 daytona provider install
@@ -17,9 +17,9 @@ daytona provider install
 
 Docker is already installed. 
 
-Select the providers you want to install using the arrow keys to select a provider. 
+Select the providers you want to install using the arrow keys.
 
-Select No when asked about creating a target. You can enter the details later when a new target is created. 
+Select **No** when you are asked about creating a target. You can enter the details later when a new target is created. 
 
 To verify providers are installed, run the following command:
 
