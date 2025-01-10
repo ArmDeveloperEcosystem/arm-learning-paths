@@ -74,7 +74,7 @@ tools_software_languages_filter:
 - GCC: 20
 - gdb: 1
 - Geekbench: 1
-- GenAI: 6
+- GenAI: 7
 - GitHub: 3
 - GitLab: 1
 - Glibc: 1
@@ -92,7 +92,7 @@ tools_software_languages_filter:
 - Lambda: 1
 - libbpf: 1
 - Linaro Forge: 1
-- LLM: 4
+- LLM: 5
 - llvm-mca: 1
 - LSE: 1
 - MariaDB: 1
@@ -108,7 +108,7 @@ tools_software_languages_filter:
 - PAPI: 1
 - perf: 4
 - PostgreSQL: 4
-- Python: 14
+- Python: 15
 - PyTorch: 5
 - RAG: 1
 - Redis: 3

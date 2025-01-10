@@ -7,7 +7,7 @@ next_step_guidance: >
    You have built a standalone application with Rust. Why not learn how to build an embedded Linux application?
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/embedded-systems/rpi-mxnet/"
+recommended_path: "/learning-paths/embedded-and-microcontrollers/rpi-mxnet/"
 
 # Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 

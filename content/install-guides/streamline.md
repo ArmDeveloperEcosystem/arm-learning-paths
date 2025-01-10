@@ -96,4 +96,4 @@ Depending on your type of application, choose the appropriate guide below to get
 
 For Android users, a thorough [tutorial](https://developer.arm.com/documentation/102477) is also available.
 
-See also the [Get started with Arm Performance Studio](/learning-paths/smartphones-and-mobile/ams/) learning path.
+See also the [Get started with Arm Performance Studio](/learning-paths/mobile-graphics-and-gaming/ams/) learning path.

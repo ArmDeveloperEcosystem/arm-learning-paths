@@ -9,3 +9,5 @@ package-lock.json
 # macOS files
 *.DS_Store
 nohup.out
+
+venv/
