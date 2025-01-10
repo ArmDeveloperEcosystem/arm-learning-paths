@@ -82,7 +82,7 @@ A new Command Prompt opens. It's the same as the regular Windows Command Prompt 
 Run the command below with the executable you crated as an argument:
 
 ```cmd
-dumpbin /headers <your exe path>\hello-world-1.exe
+dumpbin /headers <your exe path>\ConsoleApp1.exe
 ```
 
 You can see that the file format shows `AA64 machine (ARM64)` in the file header.
