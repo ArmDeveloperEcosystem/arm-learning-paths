@@ -21,17 +21,17 @@ tool_install: true
 weight: 1
 ---
 
-[PyTorch](https://pytorch.org/) is a popular end-to-end machine learning framework for Python. It's used to build and deploy neural networks, especially around tasks such as computer vision and natural language processing (NLP).
+[PyTorch](https://pytorch.org/) is a popular end-to-end machine learning framework for Python. It is used to build and deploy neural networks, especially around tasks such as computer vision and natural language processing (NLP).
 
 Follow the instructions below to install and use PyTorch on Arm Linux.
 
 {{% notice Note %}}
-Anaconda provides another way to install PyTorch. Refer to the [Anaconda install guide](/install-guides/anaconda/) to find out how to use PyTorch from Anaconda. The Anaconda version of PyTorch may be older than the version available using `pip`.
+Anaconda provides another way to install PyTorch. See the [Anaconda install guide](/install-guides/anaconda/) to find out how to use PyTorch from Anaconda. The Anaconda version of PyTorch might be older than the version available using `pip`.
 {{% /notice %}}
 
 ## Before you begin
 
-Confirm you are using an Arm Linux system by running:
+Confirm that you are using an Arm Linux system by running:
 
 ```bash
 uname -m
@@ -43,17 +43,17 @@ The output should be:
 aarch64
 ```
 
-If you see a different result, you are not using an Arm computer running 64-bit Linux.
+If you see a different result, then you are not using an Arm computer running 64-bit Linux.
 
-PyTorch requires Python 3 and can be installed with `pip`. 
+PyTorch requires Python 3, and this can be installed with `pip`. 
 
-For Ubuntu run:
+For Ubuntu, run:
 
 ```console
 sudo apt install python-is-python3 python3-pip python3-venv -y
 ```
 
-For Amazon Linux run:
+For Amazon Linux, run:
 
 ```console
 sudo dnf install python-pip -y
@@ -62,9 +62,9 @@ alias python=python3
 
 ## Download and install PyTorch
 
-It's recommended that you install PyTorch in your own Python virtual environment. Setup your virtual environment:
+It is recommended that you install PyTorch in your own Python virtual environment. Set up your virtual environment:
 
-```bash
+```bash 
 python -m venv venv
 source venv/bin/activate
 ```
@@ -79,7 +79,7 @@ pip install torch torchvision torchaudio
 
 Test PyTorch:
 
-Use a text editor to copy and paste the code below into a text file named `pytorch.py`
+Use a text editor to copy and paste the code below into a text file named `pytorch.py`:
 
 ```console
 import torch
@@ -106,7 +106,7 @@ tensor([[0.1334, 0.7932, 0.4396],
         [0.8832, 0.5077, 0.6830]])
 ```
 
-To get more details about the build options for PyTorch run:
+To get more information about the build options for PyTorch, run:
 
 ```console
 python -c "import torch; print(*torch.__config__.show().split(\"\n\"), sep=\"\n\")"
@@ -145,7 +145,7 @@ Flags: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asi
 
 If the result is blank, you do not have a processor with BFloat16.
 
-BFloat16 provides improved performance and smaller memory footprint with the same dynamic range. You may see a slight drop in model inference accuracy with BFloat16, but the impact is acceptable for the majority of applications. 
+BFloat16 provides improved performance and smaller memory footprint with the same dynamic range. You might experience a drop in model inference accuracy with BFloat16, but the impact is acceptable for the majority of applications. 
 
 You can use an environment variable to enable BFloat16:
 
@@ -169,7 +169,7 @@ export LRU_CACHE_CAPACITY=1024
 
 ## Transparent huge pages
 
-Transparent huge pages (THP) provide an alternative method of utilizing huge pages for virtual memory. Enabling THP may result in improved performance because it reduces the overhead of Translation Lookaside Buffer (TLB) lookups by using a larger virtual memory page size. 
+Transparent huge pages (THP) provide an alternative method of utilizing huge pages for virtual memory. Enabling THP might result in improved performance because it reduces the overhead of Translation Lookaside Buffer (TLB) lookups by using a larger virtual memory page size. 
 
 To check if THP is available on your system, run:
 
@@ -201,7 +201,7 @@ export THP_MEM_ALLOC_ENABLE=1
 
 ## Profiling example
 
-To profile an [Vision Transformer (ViT) model](https://huggingface.co/google/vit-base-patch16-224), first download the transformers and datasets libraries:
+To profile a [Vision Transformer (ViT) model](https://huggingface.co/google/vit-base-patch16-224), first download the transformers and datasets libraries:
 
 ```
 pip install transformers datasets
@@ -295,13 +295,13 @@ Predicted class: Egyptian cat
 Self CPU time total: 786.880ms
 ```
 
-Experiment with the 2 environment variables for BFloat16 and THP and observe the performance differences. 
+Experiment with the two environment variables for BFloat16 and THP and observe the performance differences. 
 
 You can set each variable and run the test again and observe the new profile data and run time. 
 
 ## Profiling example with dynamic quantization
 
-You can improve the performance of model inference with the `torch.nn.Linear` layer using dynamic quantization. This technique converts weights to 8-bit integers before inference and dynamically quantizes activations during inference, without needing fine-tuning. However, it may impact accuracy of your model.
+You can improve the performance of model inference with the `torch.nn.Linear` layer using dynamic quantization. This technique converts weights to 8-bit integers before inference and dynamically quantizes activations during inference, without the requirement for fine-tuning. However, it might impact the accuracy of your model.
 
 Use a text editor to save the code below as `profile-vit-dq.py`:
 ```python
@@ -396,6 +396,6 @@ Self CPU time total: 633.541ms
 
 You should see the `quantized::linear_dynamic` layer being profiled. You can see the improvement in the model inference performance using dynamic quantization. 
 
-You are ready to use PyTorch on Arm Linux.
+You are now ready to use PyTorch on Arm Linux.
 
-Now explore the many [machine learning articles and examples using PyTorch](https://pytorch.org/tutorials/).
+Continue learning by exploring the many [machine learning articles and examples using PyTorch](https://pytorch.org/tutorials/).
