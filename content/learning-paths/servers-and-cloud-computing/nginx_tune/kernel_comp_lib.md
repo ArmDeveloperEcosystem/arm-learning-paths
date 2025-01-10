@@ -63,7 +63,7 @@ These settings open up the network stack to make sure it is not a bottleneck.
 
 ##  Compiler Considerations
 
-The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flag `-mcpu` can be used to potentially gain additional performance. Usage of this flag is explained in the [Migrating C/C++ applications](/learning-paths/servers-and-cloud-computing/migration/c-c++) section of the [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) learning path.
+The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flag `-mcpu` can be used to potentially gain additional performance. Usage of this flag is explained in the [Migrating C/C++ applications](/learning-paths/servers-and-cloud-computing/migration/c/) section of the [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) learning path.
 
 If you need to understand how to configure a build of Nginx. Please review the [build Nginx from source](/learning-paths/servers-and-cloud-computing/nginx/build_from_source) section of the [Learn to deploy Nginx learning path](/learning-paths/servers-and-cloud-computing/nginx/).
 

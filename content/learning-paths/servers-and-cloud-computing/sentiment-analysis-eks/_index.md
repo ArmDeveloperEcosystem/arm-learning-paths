@@ -1,7 +1,6 @@
 ---
 title: Perform Sentiment Analysis on X on Arm-based EKS clusters
 
-
 minutes_to_complete: 60
 
 who_is_this_for: This Learning Path is for software developers who want to build an end-to-end ML sentiment analysis solution on an Arm-based Amazon EKS cluster to analyze live posts on X .

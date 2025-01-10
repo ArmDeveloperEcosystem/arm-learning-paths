@@ -82,7 +82,7 @@ kubectl create clusterrolebinding spark-role --clusterrole=edit --serviceaccount
 Navigate to the `sentiment_analysis` folder to create a JAR file () file for the sentiment analyzer.
 
 {{% notice Note %}}
-JAR is an anacronym for Java ARchive, and is a compressed archive file format that contains Java related-files and metadata.{{% /notice %}}
+JAR is an acronym for Java ARchive, and is a compressed archive file format that contains Java related-files and metadata.{{% /notice %}}
 
 You will need `sbt` installed. If you are running Ubuntu, you can install it with:
 
