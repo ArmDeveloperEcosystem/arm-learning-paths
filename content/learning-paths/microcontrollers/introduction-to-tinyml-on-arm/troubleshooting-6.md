@@ -5,6 +5,9 @@ weight: 8
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+TODO can these be incorporated in the LP?
+
 ## Troubleshooting
 - If you encounter permission issues, try running the commands with sudo.
 - Ensure your Grove - Vision AI Module V2 is properly connected and recognized by your computer.

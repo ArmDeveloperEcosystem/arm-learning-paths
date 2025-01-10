@@ -6,29 +6,31 @@ weight: 4
 layout: learningpathall
 ---
 
-[MediaPipe Solutions](https://ai.google.dev/edge/mediapipe/solutions/guide) provides a suite of libraries and tools for you to quickly apply artificial intelligence (AI) and machine learning (ML) techniques in your applications. 
+[MediaPipe Solutions](https://ai.google.dev/edge/mediapipe/solutions/guide) provides a suite of libraries and tools for you to quickly apply Artificial Intelligence (AI) and Machine Learning (ML) techniques in your applications. 
 
-MediaPipe Tasks provides the core programming interface of the MediaPipe Solutions suite, including a set of libraries for deploying innovative ML solutions onto devices with a minimum of code. It supports multiple platforms, including Android, Web, JavaScript, Python, etc.
+MediaPipe Tasks provides the core programming interface of the MediaPipe Solutions suite, including a set of libraries for deploying innovative ML solutions onto devices with minimal coding effort. It supports multiple platforms, including Android, Web, JavaScript, and Python.
 
 ## Add MediaPipe dependencies
 
-1. Navigate to `libs.versions.toml` and append the following line to the end of `[versions]` section. This defines the version of MediaPipe library we will be using.
+1. Navigate to `libs.versions.toml` and append the following line to the end of the `[versions]` section. 
+
+This defines the version of MediaPipe library that you will be using:
 
 ```toml
 mediapipe-vision = "0.10.15"
 ```
 
 {{% notice Note %}}
-Please use this version and do not use newer versions as this introduces bugs and unexpected behavior.
+Ensure that you use this particular version, and not later versions as they might produce unexpected behavior.
 {{% /notice %}}
 
-2. Append the following lines to the end of `[libraries]` section. This declares MediaPipe's vision dependency:
+2. Append the following lines to the end of the `[libraries]` section. This declares MediaPipe's vision dependency:
 
 ```toml
 mediapipe-vision = { group = "com.google.mediapipe", name = "tasks-vision", version.ref = "mediapipe-vision" }
 ```
 
-3. Navigate to `build.gradle.kts` in your project's `app` directory, then insert the following line into `dependencies` block, between `implementation` and `testImplementation`. 
+3. Navigate to `build.gradle.kts` in your project's `app` directory, then insert the following line into the `dependencies` block, between `implementation` and `testImplementation`: 
 
 ```kotlin
 implementation(libs.mediapipe.vision)
@@ -36,13 +38,13 @@ implementation(libs.mediapipe.vision)
 
 ## Prepare model asset bundles
 
-In this app, you will use MediaPipe's [Face Landmark Detection](https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker) and [Gesture Recognizer](https://ai.google.dev/edge/mediapipe/solutions/vision/gesture_recognizer) solutions, which requires their model asset bundle files to initialize.
+In this app, you will use MediaPipe's [Face Landmark Detection](https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker) and [Gesture Recognizer](https://ai.google.dev/edge/mediapipe/solutions/vision/gesture_recognizer) solutions, which require their model asset bundle files to initialize.
 
 Choose one of the two options below that aligns best with your learning needs.
 
-### Basic approach: manual download
+### 1. Basic approach: manual download
 
-Download the following two files, then move them into the default asset directory: `app/src/main/assets`. 
+Download the following two files, then move them into the default asset directory `app/src/main/assets`: 
 
 ```console
 https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
@@ -51,18 +53,23 @@ https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recog
 ```
 
 {{% notice Tip %}}
-You might need to create the `assets` directory if it does not exist.
+You might need to create an `assets` directory if you do not have one already.
 {{% /notice %}}
 
-### Advanced approach: configure prebuild download tasks 
+### 2. Advanced approach: configure prebuild download tasks 
 
-Gradle doesn't come with a convenient [Task](https://docs.gradle.org/current/userguide/tutorial_using_tasks.html) type to manage downloads, so you will use the [gradle-download-task](https://github.com/michel-kraemer/gradle-download-task) dependency.
+As Gradle does not come with a convenient [Task](https://docs.gradle.org/current/userguide/tutorial_using_tasks.html) type to manage downloads, you will need to use the [gradle-download-task](https://github.com/michel-kraemer/gradle-download-task) dependency.
 
-1. Navigate to `libs.versions.toml`. Append `download = "5.6.0"` to `[versions]` section, and `de-undercouch-download = { id = "de.undercouch.download", version.ref = "download" }` to `[plugins]` section.
+1. Navigate to `libs.versions.toml`. Then:
 
-2. Navigate to `build.gradle.kts` in your project's `app` directory and append `alias(libs.plugins.de.undercouch.download)` to the `plugins` block. This enables the _Download_ task plugin in this `app` subproject.
+    * Append `download = "5.6.0"` to the `[versions]` section, and append `de-undercouch-download = { id = "de.undercouch.download", version.ref = "download" }  to `[plugins]` section.
 
-3. Insert the following lines between `plugins` block and `android` block to define the constant values, including: asset directory path and the URLs for both models.
+2. Navigate to `build.gradle.kts` in your project's `app` directory. Then:
+
+    * Append `alias(libs.plugins.de.undercouch.download)` to the `plugins` block. This enables the _Download_ task plugin in this `app` subproject.
+
+3. Insert the following lines between the `plugins` block and the `android` block to define the constant values, including the asset directory path and the URLs for both models:
+
 ```kotlin
 val assetDir = "$projectDir/src/main/assets"
 val gestureTaskUrl = "https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/1/gesture_recognizer.task"
@@ -91,17 +98,21 @@ tasks.named("preBuild") {
 
 ## Encapsulate MediaPipe vision tasks in a helper
 
-1. Sync project again. 
+1. Sync the project again. 
 
 {{% notice Tip %}}
-Refer to [this section](2-app-scaffolding.md#enable-view-binding) if you need help.
+See the previous section [Set up the Development Environment](../2-app-scaffolding#enable-view-binding), as a reminder on how to do this.
 {{% /notice %}}
 
 2. Now you should see both model asset bundles in your `assets` directory, as shown below:
 
 ![model asset bundles](images/4/model%20asset%20bundles.png)
 
-3. You are ready to import MediaPipe's Face Landmark Detection and Gesture Recognizer into the project. Example code is already implemented for ease of use based on [MediaPipe's sample code](https://github.com/google-ai-edge/mediapipe-samples/tree/main/examples). Simply create a new file `HolisticRecognizerHelper.kt` placed in the source directory along with `MainActivity.kt`, then copy paste the code below into it.
+3. You are ready to import MediaPipe's Face Landmark Detection and Gesture Recognizer into the project. 
+
+    Example code is already implemented for ease of use based on [MediaPipe's sample code](https://github.com/google-ai-edge/mediapipe-samples/tree/main/examples). 
+
+    Simply create a new file called `HolisticRecognizerHelper.kt`, and place it in the source directory along with `MainActivity.kt`, then copy-and-paste the code below into it:
 
 ```kotlin
 package com.example.holisticselfiedemo
@@ -426,9 +437,9 @@ data class GestureResultBundle(
 ```
 
 {{% notice Info %}}
-In this learning path you are only configuring the MediaPipe vision solutions to recognize one person with at most two hands in the camera. 
+The scope of this Learning Path is limited to the recognition of one person with two hands in the camera using the MediaPipe vision solutions. 
 
-If you'd like to experiment with more people, change the `FACES_COUNT` constant to be your desired value.
+If you would like to experiment with a greater number of people, change the `FACES_COUNT` constant to a higher value.
 {{% /notice %}}
 
-In the next section, you will connect the dots from this helper class to the UI layer via a ViewModel.
+In the next section, you will connect the dots from this helper class to the UI layer through a ViewModel.

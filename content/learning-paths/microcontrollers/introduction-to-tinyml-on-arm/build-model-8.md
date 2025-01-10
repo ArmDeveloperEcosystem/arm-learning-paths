@@ -8,9 +8,10 @@ weight: 7 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-With our Environment ready, you can create a simple program to test the setup. 
+TODO connect this part with the FVP/board?
+With our environment ready, you can create a simple program to test the setup.
 
-This example defines a small feedforward neural network for a classification task. The model consists of 2 linear layers with ReLU activation in between. 
+This example defines a small feedforward neural network for a classification task. The model consists of 2 linear layers with ReLU activation in between.
 
 Use a text editor to create a file named `simple_nn.py` with the following code:
 
@@ -26,7 +27,7 @@ class SimpleNN(torch.nn.Module):
         self.fc1 = torch.nn.Linear(input_size, hidden_size)
         self.relu = torch.nn.ReLU()
         self.fc2 = torch.nn.Linear(hidden_size, output_size)
-        
+
     def forward(self, x):
         out = self.fc1(x)
         out = self.relu(out)
@@ -73,7 +74,7 @@ Model successfully exported to simple_nn.pte
 
 The model is saved as a .pte file, which is the format used by ExecuTorch for deploying models to the edge.
 
-Run the ExecuTorch version, first build the executable: 
+Run the ExecuTorch version, first build the executable:
 
 ```console
 # Clean and configure the build system
@@ -105,7 +106,7 @@ I 00:00:00.006635 executorch:executor_runner.cpp:129] Setting up planned buffer 
 I 00:00:00.007225 executorch:executor_runner.cpp:152] Method loaded.
 I 00:00:00.007237 executorch:executor_runner.cpp:162] Inputs prepared.
 I 00:00:00.012885 executorch:executor_runner.cpp:171] Model executed successfully.
-I 00:00:00.012896 executorch:executor_runner.cpp:175] 1 outputs: 
+I 00:00:00.012896 executorch:executor_runner.cpp:175] 1 outputs:
 Output 0: tensor(sizes=[1, 2], [-0.105369, -0.178723])
 ```
 

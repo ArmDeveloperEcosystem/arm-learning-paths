@@ -1,5 +1,5 @@
 ---
-title: Build and Run a Virtual Large Language Model on Arm Servers
+title: Build and Run a Virtual Large Language Model (vLLM) on Arm Servers
 
 minutes_to_complete: 45
 

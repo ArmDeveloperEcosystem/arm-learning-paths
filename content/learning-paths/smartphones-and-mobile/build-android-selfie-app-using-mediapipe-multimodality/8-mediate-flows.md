@@ -6,22 +6,24 @@ weight: 8
 layout: learningpathall
 ---
 
-Now you have two independent Flows indicating the conditions of face landmark detection and gesture recognition. The simplest multimodality strategy is to combine multiple source Flows into a single output Flow, which emits consolidated values as the single source of truth for its observers (collectors) to carry out corresponding actions.
+Now you have two independent Flows indicating the conditions of face landmark detection and gesture recognition. 
+
+The simplest multimodality strategy is to combine multiple source Flows into a single output Flow, which emits consolidated values as the single source of truth for its observers, the collectors, to carry out corresponding actions.
 
 ## Combine two Flows into a single Flow
 
-1. Navigate to `MainViewModel` and append the following constant values to its companion object. 
+1. Navigate to `MainViewModel` and append the following constant values to its companion object: 
 
-    i. The first constant defines how frequently we sample the conditions from each Flow.
+    * The first constant defines how frequently you sample the conditions from each Flow.
 
-    ii. The second constant defines the debounce threshold of the stability check on whether to trigger a photo capture.
+    * The second constant defines the debounce threshold of the stability check on whether to trigger a photo capture.
 
 ```kotlin
         private const val CONDITION_CHECK_SAMPLING_INTERVAL = 100L
         private const val CONDITION_CHECK_STABILITY_THRESHOLD = 500L
 ```
 
-2. Add a private member variable named `_bothOk`.
+2. Add a private member variable named `_bothOk`:
 
 ```kotlin
     private val _bothOk =
@@ -35,11 +37,11 @@ Now you have two independent Flows indicating the conditions of face landmark de
 {{% notice Note %}}
 Kotlin Flow's [`combine`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/combine.html) transformation is equivalent to ReactiveX's [`combineLatest`](https://reactivex.io/documentation/operators/combinelatest.html). It combines emissions from multiple observables, so that each time any observable emits, the combinator function is called with the latest values from all sources.
 
-You might need to add `@OptIn(FlowPreview::class)` annotation since `sample` is still in preview.
+You might need to add the `@OptIn(FlowPreview::class)` annotation as `sample` is still in preview.
 
 {{% /notice %}}
 
-3. Expose a `SharedFlow` variable which emits a `Unit` whenever the face and gesture conditions are met and stay stable for a while, i.e. `500`ms as defined above. Again, add `@OptIn(FlowPreview::class)` if needed.
+3. Expose a `SharedFlow` variable which emits a `Unit` whenever the face and gesture conditions are met and stays stable for a while, which means `500`ms as defined above. Again, add `@OptIn(FlowPreview::class)` if required.
 
 ```kotlin
     val captureEvents: SharedFlow<Unit> = _bothOk
@@ -49,17 +51,17 @@ You might need to add `@OptIn(FlowPreview::class)` annotation since `sample` is 
         .shareIn(viewModelScope, SharingStarted.WhileSubscribed())
 ```
 
-You may also opt to use `SharedFlow<Boolean>` and remove the `map { }` operation. Just note that when you collect this Flow, it doesn't matter whether the emitted `Boolean` values are true or false. In fact, they are always `true` due to the `filter` operation.
+You can also opt to use `SharedFlow<Boolean>` and remove the `map { }` operation. Note that when you collect this Flow, it does not matter whether the emitted `Boolean` values are true or false. In fact, they are always `true` due to the `filter` operation.
 
-## Configure ImageCapture use case
+## Configure the ImageCapture use case
 
-1. Navigate to `MainActivity` and append a `ImageCapture` use case below the other camera related member variables:
+1. Navigate to `MainActivity` and append a `ImageCapture` use case below the other camera-related member variables:
 
 ```kotlin
     private var imageCapture: ImageCapture? = null
 ```
 
-2. Configure this `ImageCapture` in `bindCameraUseCases()` method:
+2. Configure this `ImageCapture` in the `bindCameraUseCases()` method:
 
 ```kotlin
         // Image Capture
@@ -69,7 +71,7 @@ You may also opt to use `SharedFlow<Boolean>` and remove the `map { }` operation
             .build()
 ```
 
-3. Append this use case to `bindToLifecycle`.
+3. Append this use case to `bindToLifecycle`:
 
 ```kotlin
             camera = cameraProvider.bindToLifecycle(
@@ -129,7 +131,7 @@ You may also opt to use `SharedFlow<Boolean>` and remove the `map { }` operation
     }
 ```
 
-3. Append the following code to `repeatOnLifecycle(Lifecycle.State.RESUMED)` block in `onCreate` method.
+3. Append the following code to the `repeatOnLifecycle(Lifecycle.State.RESUMED)` block in the `onCreate` method:
 
 ```kotlin
                 launch {
@@ -138,11 +140,11 @@ You may also opt to use `SharedFlow<Boolean>` and remove the `map { }` operation
                     }
                 }
 ```
-4. Now, even though the photo capture has already been implemented, it's still quite inconvenient for us to check out the logs afterwards to find out whether the photo capture has been successfully executed. Let's add a flash effect UI to explicitly show the users that a photo has been captured.
+4. Even though the photo capture has already been implemented, it is still inconvenient to check out the logs afterwards to find out whether the photo capture has been successfully executed, so you can now add a flash effect UI to explicitly show the users that a photo has been captured.
 
 ## Add a flash effect upon capturing photo
 
-1. Navigate to `activity_main.xml` layout file and insert the following `View` element between the two overlay views and two `SwitchCompat` views. This is essentially just a white blank view covering the whole surface.
+1. Navigate to the `activity_main.xml` layout file and insert the following `View` element between the two overlay views and the two `SwitchCompat` views. This is essentially just a white blank view covering the whole surface:
 
 ```
     <View
@@ -153,7 +155,7 @@ You may also opt to use `SharedFlow<Boolean>` and remove the `map { }` operation
         android:visibility="gone" />
 ```
 
-2. Append the constant value below to the companion object of `MainActivity`, then add a private method named `showFlashEffect()` to animate the above `flashOverlay` view from hidden to shown in `100`ms and then again from shown to hidden in `100`ms.
+2. Append the constant value below to the companion object of `MainActivity`, then add a private method named `showFlashEffect()` to animate the above `flashOverlay` view from **hidden** to **shown** in `100`ms and then again from **shown** to **hidden** in `100`ms.
 
 ```kotlin
     private const val IMAGE_CAPTURE_FLASH_DURATION = 100L
@@ -181,6 +183,10 @@ You may also opt to use `SharedFlow<Boolean>` and remove the `map { }` operation
     }
 ``` 
 
-3. Invoke `showFlashEffect()` method in `executeCapturePhoto()` method, before invoking `imageCapture.takePicture()`
+3. Invoke the `showFlashEffect()` method in the `executeCapturePhoto()` method, before invoking `imageCapture.takePicture()`.
 
-4. Build and run the app. Try keeping up a smiling face while presenting thumb-up gestures. When you see both switches turn on and stay stable for approximately half a second, the screen should flash white and then a photo should be captured and shows up in your album, which may take a few seconds depending on your Android device's hardware. Good job!
+4. Build and run the app:
+
+    * Try to maintain a smiling face whilst also presenting thumb-up gestures. 
+    * When you see both switches, turn on and stay stable for approximately half a second.
+    * The screen should flash white and then a photo should be captured. This will show up in your album, which might take a few seconds depending on your Android device's hardware. Good job!
