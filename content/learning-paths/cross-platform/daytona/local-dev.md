@@ -9,7 +9,7 @@ Daytona makes it easy to manage local development environments.
 
 Follow these steps to learn how to create and manage an example local development environment.
 
-To have a go, you can use a small dev container example from Microsoft. The example is a small Python application which uses flask to serve a single HTML page.
+To have a go, you can use a small dev container example from Microsoft. The example is a small Python application which uses Flask to serve a single HTML page.
 
 Visit the [GitHub repository](https://github.com/microsoft/vscode-remote-try-python) to review the project. 
 
@@ -104,9 +104,9 @@ Any of these options can be used to connect to a Daytona workspace.
 
 A number of other IDEs can be used with Daytona. Refer to the [IDE documentation](https://www.daytona.io/docs/usage/ide/) for details. 
 
-## Start the flask application
+## Start the Flask application
 
-To start the flask application, run:
+To start the Flask application, run:
 
 ```console
 python -m flask run --port 9000 --no-debugger --no-reload
@@ -114,7 +114,7 @@ python -m flask run --port 9000 --no-debugger --no-reload
 
 If you start Python in VS Code, it will automatically forward port 9000 and open a browser tab to see the web page. 
 
-If you run the Python command in a terminal after using SSH to connect to workspace, you can forward the port by running the command below on your local machine with the name of your workspace:
+If you run the Python command in a terminal after using SSH to connect to a workspace, you can forward the port by running the command below on your local machine with the name of your workspace:
 
 ```console
 daytona forward 9000 vscode-remote-try-python
@@ -125,7 +125,7 @@ daytona forward 9000 vscode-remote-try-python
 Now that you can create a workspace and connect to it, there are some other commands that you will find useful.
 
 
-Use the stop command to step the workspace. The dev container will stop on your local computer: 
+Use the stop command to stop the workspace. The dev container will stop on your local computer: 
 
 ```console
 daytona stop 

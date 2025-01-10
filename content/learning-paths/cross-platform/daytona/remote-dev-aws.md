@@ -46,9 +46,9 @@ daytona target set
 
 **Access Key ID**: Your access key ID that you generate in AWS for your account.
 
-**Device Name**: This is the root device of your EC2 virtual machine, leave the default.
+**Device Name**: This is the root device of your EC2 virtual machine. Leave the default.
 
-**Image ID**: This is the AMI for the operating system you want to run, make sure to use an Arm AMI. For example, Ubuntu 24.04 for Arm is `ami-096ea6a12ea24a797`. 
+**Image ID**: This is the AMI for the operating system you want to run. Make sure to use an Arm AMI. For example, Ubuntu 24.04 for Arm is `ami-096ea6a12ea24a797`. 
 
 **Instance Type**: EC2 instance type to create, for example `t4g.small`.
 

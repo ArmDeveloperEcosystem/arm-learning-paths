@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ---
 
-With Daytona, you can create and manage workspaces on other computers, that is not your local computer. 
+With Daytona, you can create and manage workspaces on another computer that is not your local computer.
 
 This is useful if you have Arm-based servers on your local network or in the cloud and you want to use them for development.
 
@@ -88,7 +88,7 @@ daytona target set
 
 **Remote Port**: This is the SSH port, and the default is 22 unless you have changed the SSH configuration on the remote computer to use a different port. 
 
-**Remote User**: This is the username you use to SSH, it cannot be root.
+**Remote User**: This is the username you use to SSH. It cannot be root.
 
 **Sock Path**: This is the path to the Docker daemon. Keep the default. 
 
@@ -141,9 +141,9 @@ Target Options:  {
 
 You see your new target and the parameters listed. It is now the default target. 
 
-### Create a new worksspace on the remote computer 
+### Create a new workspace on the remote computer 
 
-You can use `daytona create` to create a workspace on the remote computer. The command is the same as on the local computer. The default target is used, the new Docker remote computer. 
+You can use `daytona create` to create a workspace on the remote computer. The command is the same as on the local computer. The default target is used: the new Docker remote computer. 
 
 ```console
 daytona create --no-ide https://github.com/microsoft/vscode-remote-try-python/tree/main
