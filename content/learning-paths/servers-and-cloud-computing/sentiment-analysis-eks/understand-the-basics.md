@@ -1,30 +1,53 @@
 ---
-title: Understand sentiment analysis
+title: Overview
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What is sentiment analysis?
+## What is Sentiment Analysis?
 
-Sentiment analysis is a natural language processing technique used to identify and categorize opinions expressed in a piece of text, such as a tweet or a product review. It can help gauge public opinion, identify trends and patterns, and improve decision-making. Social media platforms, such as Twitter (X), provide a wealth of information about public opinion, trends, and events. Sentiment analysis is important because it provides insights into how people feel about a particular topic or issue, and can help to identify emerging trends and patterns.
+* Sentiment analysis, sometimes called *opinion mining*,  is a natural language processing (NLP) technique used to identify and categorize sentiment expressed in digital text. 
 
-## Can I perform real-time sentiment analysis using an Arm-based Amazon EKS cluster?
+* Sentiment analysis uses tools to scan text and decipher the emotion behind the message, which might broadly be interpreted as positive, negative, or neutral.  
 
-Yes, you can use EKS for sentiment analysis. 
+## What can Sentiment Analysis achieve, and why analyze posts on X?
 
-Real-time sentiment analysis is a compute-intensive task and can quickly drive up resources and increase costs if not managed effectively. Tracking real-time changes enables you to understand sentiment patterns and make informed decisions promptly, allowing for timely and appropriate actions.
+* Sentiment analysis can help identify trends and patterns, and inform predictions.
 
-The architecture used for the solution is shown below:
+* Sentiment analysis provides insights into how people feel about a particular topic or issue, and can help to identify emerging viewpoints.
 
-![sentiment analysis #center](_images/Sentiment-Analysis.png)
+* It is a scalable way of providing organizations and businesses with valuable data such as insights into user feedback, which can then be used in reputation management.
 
-The technology stack for the solution includes the following steps:
+* Tracking real-time changes enables you to recognize sentiment patterns and make informed decisions promptly, allowing for timely and appropriate actions.
 
-- Use the Twitter (X) developer API to fetch Tweets based on certain keywords
-- Process the captured data using Amazon Kinesis
-- Run a sentiment analysis model to classify the text and tone of the text
-- Process the sentiment of Tweets using Apache Spark streaming API
-- Use Elasticsearch and Kibana to store the processed Tweets and showcase the activity on a dashboard
-- Monitor the CPU and RAM resources of the Amazon EKS cluster with Prometheus and Grafana
+* X is one of the most popular social media platforms, and provides a wealth of rapidly-changing information about public opinion, trends, and events.
+
+{{% notice A Note on Twitter %}}
+Before 2023, X was formerly known as Twitter. Although often still referred to by many as Twitter, this Learning Path uses the official name, X. "Tweets" are also now known as "posts".
+{{% /notice %}}
+
+## Solution Architecture: Using an Arm-based Amazon EKS Cluster 
+
+Real-time sentiment analysis is a compute-intense task and can rapidly consume resources and increase costs if not managed effectively.
+
+Using an Arm-based Amazon EKS cluster can address these issues by offering flexibility, strong performance and cost efficiencies.  
+
+Figure 1 shows the solution architecture that this Learning Path uses for sentiment analysis:
+
+![sentiment analysis #center](_images/Sentiment-Analysis.png "Figure 1: Sentiment Analysis Architecture." )
+
+The technology stack for this solution includes the following steps:
+
+- Use the X developer API to fetch posts based on certain keywords.
+
+- Process the captured data using Amazon Kinesis.
+
+- Run a sentiment analysis model to categorize the text and classify the tone.
+
+- Process the sentiment of the posts using Apache Spark streaming API.
+
+- Use Elasticsearch and Kibana to store the processed Tweets and showcase the activity on a dashboard.
+
+- Monitor the CPU and RAM resources of the Amazon EKS cluster with Prometheus and Grafana.
