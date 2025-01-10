@@ -24,6 +24,10 @@ armips:
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
+operatingsystems:
+    - Windows
+    - macOS
+    - Linux
 tools_software_languages:
     - Daytona
 

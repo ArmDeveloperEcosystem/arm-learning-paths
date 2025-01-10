@@ -10,12 +10,12 @@ maintopic: true
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 10
-- Linux: 23
-- macOS: 2
-- Windows: 1
+- Linux: 24
+- macOS: 3
+- Windows: 2
 subjects_filter:
 - CI-CD: 4
-- Containers and Virtualization: 7
+- Containers and Virtualization: 8
 - Embedded Linux: 5
 - ML: 4
 - Performance and Architecture: 13
@@ -37,6 +37,7 @@ tools_software_languages_filter:
 - Clang: 1
 - Coding: 10
 - Containerd: 1
+- Daytona: 1
 - DetectNet: 1
 - Docker: 9
 - DSTREAM: 2
