@@ -101,7 +101,7 @@ tasks.named("preBuild") {
 1. Sync the project again. 
 
 {{% notice Tip %}}
-See the previous section [Set up the Development Environment](2-app-scaffolding.md#enable-view-binding), as a reminder on how to do this.
+See the previous section [Set up the Development Environment](../2-app-scaffolding#enable-view-binding), as a reminder on how to do this.
 {{% /notice %}}
 
 2. Now you should see both model asset bundles in your `assets` directory, as shown below:

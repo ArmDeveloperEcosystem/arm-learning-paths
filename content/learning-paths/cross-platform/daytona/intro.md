@@ -27,7 +27,7 @@ You can use Daytona to create development environments on the following setups:
 
 ## Daytona terminology
 
-Taking time to learn some the basic Daytona defintions will enable you to get started easily. You can find some of these terms described below. 
+Taking time to learn some the basic Daytona definitions will enable you to get started easily. You can find some of these terms described below. 
 
 #### Git Providers
 
