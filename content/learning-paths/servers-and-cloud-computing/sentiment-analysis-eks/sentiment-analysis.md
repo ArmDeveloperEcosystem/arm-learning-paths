@@ -224,7 +224,7 @@ http://<IP_Address_of_ES_and_Kibana>:5601
 
 ## Environment Clean-up
 
-Following this Learning Path will deploy many artifacts in your cloud account. Remember to destroy the resources after you've finished executing it. Use the following command to cleanup the resources:
+Following this Learning Path will deploy many artifacts in your cloud account. Remember to destroy the resources after you have finished. Use the following command to cleanup the resources:
 
 ```console
 terraform destroy
