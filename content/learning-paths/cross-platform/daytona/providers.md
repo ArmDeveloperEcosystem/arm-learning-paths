@@ -17,7 +17,7 @@ daytona provider install
 
 Docker is already installed. 
 
-Select the providers you want to install using the arrow keys to select a provider. 
+Select the providers you want to install using the arrow keys.
 
 Select **No** when you are asked about creating a target. You can enter the details later when a new target is created. 
 
