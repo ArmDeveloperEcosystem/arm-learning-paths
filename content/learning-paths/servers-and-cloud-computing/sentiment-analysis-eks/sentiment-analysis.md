@@ -144,10 +144,10 @@ Execute the `spark-submit` command within the Spark folder to deploy the applica
 
 The following commands run the application with two executors, each with 12 cores. They allocate 24GB of memory for both the executors and driver pods.
 
- Before executing the `spark-submit` command, set the following variables:
+ Before executing the `spark-submit` command, set the following variables (replacing values in angle brackets with appropriate values):
 
 ```console
-export K8S_API_SERVER_ADDRESS=<K8S_API_SERVER_ENDPOINT
+export K8S_API_SERVER_ADDRESS=<K8S_API_SERVER_ENDPOINT>
 export ES_ADDRESS=<IP_ADDRESS_OF_ELASTICS_SEARCH>
 export CHECKPOINT_BUCKET=<S3_BUCKET_NAME>
 export ECR_ADDRESS=<ECR_REGISTERY_ADDRESS>
