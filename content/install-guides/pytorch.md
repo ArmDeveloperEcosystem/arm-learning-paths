@@ -62,9 +62,9 @@ alias python=python3
 
 ## Download and install PyTorch
 
-It's recommended that you install PyTorch in your own Python virtual environment. Setup your virtual environment:
+It's recommended that you install PyTorch in your own Python virtual environment. Set up your virtual environment:
 
-```bash
+```bash 
 python -m venv venv
 source venv/bin/activate
 ```
@@ -201,7 +201,7 @@ export THP_MEM_ALLOC_ENABLE=1
 
 ## Profiling example
 
-To profile an [Vision Transformer (ViT) model](https://huggingface.co/google/vit-base-patch16-224), first download the transformers and datasets libraries:
+To profile a [Vision Transformer (ViT) model](https://huggingface.co/google/vit-base-patch16-224), first download the transformers and datasets libraries:
 
 ```
 pip install transformers datasets
@@ -301,7 +301,7 @@ You can set each variable and run the test again and observe the new profile dat
 
 ## Profiling example with dynamic quantization
 
-You can improve the performance of model inference with the `torch.nn.Linear` layer using dynamic quantization. This technique converts weights to 8-bit integers before inference and dynamically quantizes activations during inference, without needing fine-tuning. However, it may impact accuracy of your model.
+You can improve the performance of model inference with the `torch.nn.Linear` layer using dynamic quantization. This technique converts weights to 8-bit integers before inference and dynamically quantizes activations during inference, without the requirement for fine-tuning. However, it might impact the accuracy of your model.
 
 Use a text editor to save the code below as `profile-vit-dq.py`:
 ```python
