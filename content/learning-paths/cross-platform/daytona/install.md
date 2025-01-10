@@ -130,7 +130,7 @@ If you are curious, leave the Daytona server running in the terminal and watch t
 
 ## How do I stop the Daytona server?
 
-If the server is running in the terminal, you can stop it by using Control-C to stop it. 
+If the server is running in the terminal, you can stop it by using Control-C.
 
 If the server is running in the background, you can use the command below to stop it:
 
