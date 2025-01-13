@@ -2,7 +2,7 @@ name: Test Learning Path
 on: pull_request
 permissions:
   contents: write
-  pull-requests: write
+  pages: write
 jobs:
   Test-Pull-Request:
     runs-on: arm-linux-runner
@@ -51,7 +51,6 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         if: success() && env.MAINTENANCE == 'on'
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: update stats_current_test_info.yml
           title: Update stats_current_test_info.yml
           body: |
