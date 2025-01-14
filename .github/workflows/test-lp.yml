@@ -68,6 +68,7 @@ jobs:
         if: success() && env.MAINTENANCE == 'on'
         run: |
           cd data/
+          ls -la
           unzip -o ./stats_current_test_info.zip
           rm data/stats_current_test_info.zip
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
