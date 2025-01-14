@@ -34,7 +34,7 @@ operatingsystems:
 shared_path: true
 shared_between:
     - servers-and-cloud-computing
-    - smartphones-and-mobile
+    - mobile-graphics-and-gaming
 
 
 

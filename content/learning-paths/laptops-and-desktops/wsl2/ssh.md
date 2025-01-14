@@ -22,7 +22,7 @@ Substitute your username and the filename to be copied.
 cp /mnt/c/Users/<username>/Downloads/<filename> .
 ```
 
-If SSH is needed to access WSL from a different machine continue with the instructions below:
+If SSH is needed to access WSL from a different machine continue with the instructions below.
 
 ## Install SSH server
 

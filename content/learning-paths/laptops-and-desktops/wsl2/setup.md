@@ -25,6 +25,7 @@ WSL 2 replaces the system call translation layer provided in WSL 1 with the late
 WSL 2 can run containers for application development. WSL 2 provides much faster file I/O compared to WSL 1.
 
 ## Install WSL 2
+
 Installing WSL 2 requires Windows 11. It is also possible to install WSL 2 on certain Windows 10 versions, but these instructions were tested on Windows 11. Windows 11 is recommended to complete all of the examples in this Learning Path. All of the examples have been tested using WSL 2. If only WSL is specified it means WSL 2.
 
 Here is the short version on how to install WSL 2. Microsoft documentation provides a [quickstart](https://docs.microsoft.com/en-us/windows/wsl/install-win10) with full details on how to install WSL 2. There are also numerous tutorials available (for non-Arm architectures).
@@ -64,7 +65,7 @@ There are other Linux distributions available in the Microsoft Store. Make sure 
 
 Another way to install Linux distributions is using the WSL command. 
 
-Open a Windows Powershell or Command Prompt and list the distributions available:
+Open a Windows PowerShell or Command Prompt and list the distributions available:
 
 ```cmd 
 wsl --list --online
@@ -73,12 +74,15 @@ wsl --list --online
 The output will list the available distributions:
 
 ```output
-NAME            FRIENDLY NAME
-Ubuntu          Ubuntu
-Debian          Debian GNU/Linux
-Ubuntu-18.04    Ubuntu 18.04 LTS
-Ubuntu-20.04    Ubuntu 20.04 LTS
-Ubuntu-22.04    Ubuntu 22.04 LTS
+NAME                   FRIENDLY NAME
+Ubuntu                 Ubuntu
+Debian                 Debian GNU/Linux
+kali-linux             Kali Linux Rolling
+Ubuntu-18.04           Ubuntu 18.04 LTS
+Ubuntu-20.04           Ubuntu 20.04 LTS
+Ubuntu-22.04           Ubuntu 22.04 LTS
+Ubuntu-24.04           Ubuntu 24.04 LTS
+openSUSE-Tumbleweed    openSUSE Tumbleweed
 ```
 
 Install a distribution from this list:

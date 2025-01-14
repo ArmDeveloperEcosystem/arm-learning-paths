@@ -1,30 +1,26 @@
 ---
 title: Introduction to SIMD.info
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
-who_is_this_for: This is for advanced topic for software developers interested in porting SIMD code across Arm platforms.
+who_is_this_for: This Learning Path is for software developers who are interested in porting SIMD code across Arm platforms.
 
 learning_objectives: 
-    - Learn how to use SIMD.info’s tools and features, such as navigation, search, and comparison, to simplify the process of finding equivalent SIMD intrinsics between architectures and improving code portability.
+    - Describe how to use SIMD.info’s tools and features, such as navigation, search, and comparison, to simplify the process of finding equivalent SIMD intrinsics between architectures to improve code portability.
 
 prerequisites:
     - A basic understanding of SIMD.
-    - Access to an Arm platform with SIMD supported engine, with recent versions of a C compiler (Clang or GCC) installed.
+    - Access to an Arm platform with a SIMD-supported engine, installed with recent versions of a C compiler such as Clang or GCC.
 
-author_primary: Georgios Mermigkis & Konstantinos Margaritis, VectorCamp
+author_primary: Georgios Mermigkis and Konstantinos Margaritis, VectorCamp
 
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
-    - Aarch64
-    - Armv8-a
-    - Armv9-a
+    - AArch64
+    - Armv8-A
+    - Armv9-A
 tools_software_languages:
     - GCC
     - Clang
@@ -36,7 +32,7 @@ shared_path: true
 shared_between:
     - laptops-and-desktops
     - servers-and-cloud-computing
-    - smartphones-and-mobile
+    - mobile-graphics-and-gaming
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

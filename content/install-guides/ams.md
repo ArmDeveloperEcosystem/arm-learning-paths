@@ -66,4 +66,4 @@ Run the supplied `Arm_Performance_Studio_<version>_macos_x86-64.dmg` installer, 
 
 ## Get started
 
-See the [Get started with Arm Performance Studio for Mobile](/learning-paths/smartphones-and-mobile/ams/) learning path for a collection of tutorials for each component of Performance Studio.
+See the [Get started with Arm Performance Studio for Mobile](/learning-paths/mobile-graphics-and-gaming/ams/) learning path for a collection of tutorials for each component of Performance Studio.

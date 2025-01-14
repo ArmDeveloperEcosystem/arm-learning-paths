@@ -32,8 +32,8 @@ tools_software_languages:
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
-    - embedded-systems
-    - microcontrollers
+    - embedded-and-microcontrollers
+    - embedded-and-microcontrollers
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

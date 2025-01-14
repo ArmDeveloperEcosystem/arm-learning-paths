@@ -27,9 +27,9 @@ You can use Clang to build a CMake application for Windows on Arm. The example a
 
 To compile PuTTY on a Windows on Arm device, follow the steps outlined below:
 
-1. Open `Windows Powershell` on your Windows on Arm computer.
+1. Open `Windows PowerShell` on your Windows on Arm computer.
 
-Run the next two steps at the Powershell command prompt. 
+Run the next two steps at the PowerShell command prompt. 
 
 2. Create a directory to use for the build and go to the directory:
 

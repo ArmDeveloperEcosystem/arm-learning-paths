@@ -4006,6 +4006,7 @@
   content:
     cross-platform: 25
     embedded-systems: 19
+<<<<<<< HEAD
     install-guides: 89
     laptops-and-desktops: 32
     microcontrollers: 25
@@ -4015,6 +4016,17 @@
   contributions:
     external: 43
     internal: 353
+=======
+    install-guides: 90
+    laptops-and-desktops: 33
+    microcontrollers: 25
+    servers-and-cloud-computing: 88
+    smartphones-and-mobile: 25
+    total: 305
+  contributions:
+    external: 43
+    internal: 355
+>>>>>>> upstream/main
   github_engagement:
     num_forks: 30
     num_prs: 14
@@ -4046,7 +4058,11 @@
     graham-woodward: 1
     iago-calvo-lista,-arm: 1
     james-whitaker,-arm: 1
+<<<<<<< HEAD
     jason-andrews: 89
+=======
+    jason-andrews: 90
+>>>>>>> upstream/main
     joe-stech: 1
     johanna-skinnider: 2
     jonathan-davies: 2
@@ -4054,7 +4070,11 @@
     julie-gaskin: 4
     julio-suarez: 5
     kasper-mecklenburg: 1
+<<<<<<< HEAD
     koki-mitsunami: 1
+=======
+    koki-mitsunami: 2
+>>>>>>> upstream/main
     konstantinos-margaritis: 7
     kristof-beyls: 1
     liliya-wu: 1
@@ -4088,6 +4108,7 @@
     percent_closed_vs_total: 0.0
 - a_date: '2024-12-09'
   content:
+<<<<<<< HEAD
     cross-platform: 25
     embedded-systems: 19
     install-guides: 89
@@ -4099,20 +4120,42 @@
   contributions:
     external: 43
     internal: 353
+=======
+    cross-platform: 26
+    embedded-systems: 19
+    install-guides: 90
+    laptops-and-desktops: 33
+    microcontrollers: 24
+    servers-and-cloud-computing: 89
+    smartphones-and-mobile: 25
+    total: 306
+  contributions:
+    external: 44
+    internal: 354
+>>>>>>> upstream/main
   github_engagement:
     num_forks: 30
     num_prs: 7
   individual_authors:
+<<<<<<< HEAD
     alaaeddine-chakroun: 1
+=======
+    alaaeddine-chakroun: 2
+>>>>>>> upstream/main
     alexandros-lamprineas: 1
     annie-tallund: 1
     arm: 3
     arnaud-de-grandmaison: 1
     basma-el-gaabouri: 1
+<<<<<<< HEAD
     ben-clark: 1
     bolt-liu: 2
     brenda-strech: 1
     chaodong-gong,-alex-su,-kieran-hejmadi: 1
+=======
+    bolt-liu: 2
+    brenda-strech: 1
+>>>>>>> upstream/main
     chen-zhang: 1
     christopher-seidl: 7
     cyril-rohr: 1
@@ -4127,10 +4170,18 @@
     "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
+<<<<<<< HEAD
     graham-woodward: 1
     iago-calvo-lista,-arm: 1
     james-whitaker,-arm: 1
     jason-andrews: 89
+=======
+    georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
+    graham-woodward: 1
+    iago-calvo-lista,-arm: 1
+    james-whitaker,-arm: 1
+    jason-andrews: 90
+>>>>>>> upstream/main
     joe-stech: 1
     johanna-skinnider: 2
     jonathan-davies: 2
@@ -4138,6 +4189,10 @@
     julie-gaskin: 4
     julio-suarez: 5
     kasper-mecklenburg: 1
+<<<<<<< HEAD
+=======
+    kieran-hejmadi: 1
+>>>>>>> upstream/main
     koki-mitsunami: 1
     konstantinos-margaritis: 7
     kristof-beyls: 1
@@ -4160,6 +4215,10 @@
     tianyu-li: 1
     tom-pilar: 1
     uma-ramalingam: 1
+<<<<<<< HEAD
+=======
+    varun-chari,-albin-bernhardsson: 1
+>>>>>>> upstream/main
     varun-chari,-pareena-verma: 1
     visualsilicon: 1
     ying-yu: 1
@@ -4172,6 +4231,7 @@
     percent_closed_vs_total: 0.0
 - a_date: '2024-12-16'
   content:
+<<<<<<< HEAD
     cross-platform: 25
     embedded-systems: 19
     install-guides: 89
@@ -4188,6 +4248,24 @@
     num_prs: 9
   individual_authors:
     alaaeddine-chakroun: 1
+=======
+    cross-platform: 26
+    embedded-systems: 19
+    install-guides: 90
+    laptops-and-desktops: 33
+    microcontrollers: 25
+    servers-and-cloud-computing: 89
+    smartphones-and-mobile: 26
+    total: 308
+  contributions:
+    external: 44
+    internal: 358
+  github_engagement:
+    num_forks: 30
+    num_prs: 11
+  individual_authors:
+    alaaeddine-chakroun: 2
+>>>>>>> upstream/main
     alexandros-lamprineas: 1
     annie-tallund: 1
     arm: 3
@@ -4211,10 +4289,18 @@
     "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
+<<<<<<< HEAD
     graham-woodward: 1
     iago-calvo-lista,-arm: 1
     james-whitaker,-arm: 1
     jason-andrews: 89
+=======
+    georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
+    graham-woodward: 1
+    iago-calvo-lista,-arm: 1
+    james-whitaker,-arm: 1
+    jason-andrews: 90
+>>>>>>> upstream/main
     joe-stech: 1
     johanna-skinnider: 2
     jonathan-davies: 2
@@ -4222,6 +4308,10 @@
     julie-gaskin: 4
     julio-suarez: 5
     kasper-mecklenburg: 1
+<<<<<<< HEAD
+=======
+    kieran-hejmadi: 1
+>>>>>>> upstream/main
     koki-mitsunami: 1
     konstantinos-margaritis: 7
     kristof-beyls: 1
@@ -4244,6 +4334,10 @@
     tianyu-li: 1
     tom-pilar: 1
     uma-ramalingam: 1
+<<<<<<< HEAD
+=======
+    varun-chari,-albin-bernhardsson: 1
+>>>>>>> upstream/main
     varun-chari,-pareena-verma: 1
     visualsilicon: 1
     ying-yu: 1
@@ -4252,6 +4346,7 @@
     zhengjun-xing: 2
   issues:
     avg_close_time_hrs: 0
+<<<<<<< HEAD
     num_issues: 12
     percent_closed_vs_total: 0.0
 - a_date: '2024-12-23'
@@ -4267,15 +4362,40 @@
   contributions:
     external: 43
     internal: 353
+=======
+    num_issues: 14
+    percent_closed_vs_total: 0.0
+- a_date: '2024-12-23'
+  content:
+    cross-platform: 26
+    embedded-systems: 19
+    install-guides: 90
+    laptops-and-desktops: 34
+    microcontrollers: 25
+    servers-and-cloud-computing: 93
+    smartphones-and-mobile: 25
+    total: 312
+  contributions:
+    external: 45
+    internal: 362
+>>>>>>> upstream/main
   github_engagement:
     num_forks: 30
     num_prs: 8
   individual_authors:
+<<<<<<< HEAD
     alaaeddine-chakroun: 1
+=======
+    alaaeddine-chakroun: 2
+>>>>>>> upstream/main
     alexandros-lamprineas: 1
     annie-tallund: 1
     arm: 3
     arnaud-de-grandmaison: 1
+<<<<<<< HEAD
+=======
+    arnaud-de-grandmaison,-paul-howard,-and-pareena-verma: 1
+>>>>>>> upstream/main
     basma-el-gaabouri: 1
     ben-clark: 1
     bolt-liu: 2
@@ -4287,7 +4407,11 @@
     daniel-gubay: 1
     daniel-nguyen: 1
     david-spickett: 2
+<<<<<<< HEAD
     dawid-borycki: 30
+=======
+    dawid-borycki: 31
+>>>>>>> upstream/main
     diego-russo: 1
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
@@ -4295,10 +4419,18 @@
     "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
+<<<<<<< HEAD
     graham-woodward: 1
     iago-calvo-lista,-arm: 1
     james-whitaker,-arm: 1
     jason-andrews: 89
+=======
+    georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
+    graham-woodward: 1
+    iago-calvo-lista,-arm: 1
+    james-whitaker,-arm: 1
+    jason-andrews: 91
+>>>>>>> upstream/main
     joe-stech: 1
     johanna-skinnider: 2
     jonathan-davies: 2
@@ -4306,7 +4438,12 @@
     julie-gaskin: 4
     julio-suarez: 5
     kasper-mecklenburg: 1
+<<<<<<< HEAD
     koki-mitsunami: 1
+=======
+    kieran-hejmadi: 1
+    koki-mitsunami: 2
+>>>>>>> upstream/main
     konstantinos-margaritis: 7
     kristof-beyls: 1
     liliya-wu: 1
@@ -4315,10 +4452,18 @@
     nikhil-gupta,-pareena-verma,-nobel-chowdary-mandepudi,-ravi-malhotra: 1
     odin-shen: 1
     owen-wu,-arm: 2
+<<<<<<< HEAD
     pareena-verma: 35
     pareena-verma,-annie-tallund: 1
     pareena-verma,-jason-andrews,-and-zach-lasiuk: 1
     pareena-verma,-joe-stech,-adnan-alsinan: 1
+=======
+    pareena-verma: 34
+    pareena-verma,-annie-tallund: 1
+    pareena-verma,-jason-andrews,-and-zach-lasiuk: 1
+    pareena-verma,-joe-stech,-adnan-alsinan: 1
+    paul-howard: 1
+>>>>>>> upstream/main
     pranay-bakre: 4
     przemyslaw-wirkus: 1
     rin-dobrescu: 1
@@ -4328,6 +4473,10 @@
     tianyu-li: 1
     tom-pilar: 1
     uma-ramalingam: 1
+<<<<<<< HEAD
+=======
+    varun-chari,-albin-bernhardsson: 1
+>>>>>>> upstream/main
     varun-chari,-pareena-verma: 1
     visualsilicon: 1
     ying-yu: 1
@@ -4340,6 +4489,7 @@
     percent_closed_vs_total: 0.0
 - a_date: '2024-12-30'
   content:
+<<<<<<< HEAD
     cross-platform: 25
     embedded-systems: 19
     install-guides: 89
@@ -4351,15 +4501,36 @@
   contributions:
     external: 43
     internal: 353
+=======
+    cross-platform: 26
+    embedded-systems: 19
+    install-guides: 90
+    laptops-and-desktops: 34
+    microcontrollers: 25
+    servers-and-cloud-computing: 94
+    smartphones-and-mobile: 25
+    total: 313
+  contributions:
+    external: 45
+    internal: 362
+>>>>>>> upstream/main
   github_engagement:
     num_forks: 30
     num_prs: 9
   individual_authors:
+<<<<<<< HEAD
     alaaeddine-chakroun: 1
+=======
+    alaaeddine-chakroun: 2
+>>>>>>> upstream/main
     alexandros-lamprineas: 1
     annie-tallund: 1
     arm: 3
     arnaud-de-grandmaison: 1
+<<<<<<< HEAD
+=======
+    arnaud-de-grandmaison,-paul-howard,-and-pareena-verma: 1
+>>>>>>> upstream/main
     basma-el-gaabouri: 1
     ben-clark: 1
     bolt-liu: 2
@@ -4371,7 +4542,11 @@
     daniel-gubay: 1
     daniel-nguyen: 1
     david-spickett: 2
+<<<<<<< HEAD
     dawid-borycki: 30
+=======
+    dawid-borycki: 31
+>>>>>>> upstream/main
     diego-russo: 1
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
@@ -4379,10 +4554,18 @@
     "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
+<<<<<<< HEAD
     graham-woodward: 1
     iago-calvo-lista,-arm: 1
     james-whitaker,-arm: 1
     jason-andrews: 89
+=======
+    georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
+    graham-woodward: 1
+    iago-calvo-lista,-arm: 1
+    james-whitaker,-arm: 1
+    jason-andrews: 91
+>>>>>>> upstream/main
     joe-stech: 1
     johanna-skinnider: 2
     jonathan-davies: 2
@@ -4390,7 +4573,12 @@
     julie-gaskin: 4
     julio-suarez: 5
     kasper-mecklenburg: 1
+<<<<<<< HEAD
     koki-mitsunami: 1
+=======
+    kieran-hejmadi: 1
+    koki-mitsunami: 2
+>>>>>>> upstream/main
     konstantinos-margaritis: 7
     kristof-beyls: 1
     liliya-wu: 1
@@ -4399,11 +4587,21 @@
     nikhil-gupta,-pareena-verma,-nobel-chowdary-mandepudi,-ravi-malhotra: 1
     odin-shen: 1
     owen-wu,-arm: 2
+<<<<<<< HEAD
     pareena-verma: 35
     pareena-verma,-annie-tallund: 1
     pareena-verma,-jason-andrews,-and-zach-lasiuk: 1
     pareena-verma,-joe-stech,-adnan-alsinan: 1
     pranay-bakre: 4
+=======
+    pareena-verma: 34
+    pareena-verma,-annie-tallund: 1
+    pareena-verma,-jason-andrews,-and-zach-lasiuk: 1
+    pareena-verma,-joe-stech,-adnan-alsinan: 1
+    paul-howard: 1
+    pranay-bakre: 4
+    preema-merlin-dsouza: 1
+>>>>>>> upstream/main
     przemyslaw-wirkus: 1
     rin-dobrescu: 1
     roberto-lopez-mendez: 2
@@ -4412,6 +4610,10 @@
     tianyu-li: 1
     tom-pilar: 1
     uma-ramalingam: 1
+<<<<<<< HEAD
+=======
+    varun-chari,-albin-bernhardsson: 1
+>>>>>>> upstream/main
     varun-chari,-pareena-verma: 1
     visualsilicon: 1
     ying-yu: 1
@@ -4424,6 +4626,7 @@
     percent_closed_vs_total: 0.0
 - a_date: '2025-01-06'
   content:
+<<<<<<< HEAD
     cross-platform: 25
     embedded-systems: 19
     install-guides: 89
@@ -4435,15 +4638,36 @@
   contributions:
     external: 43
     internal: 353
+=======
+    cross-platform: 27
+    embedded-systems: 19
+    install-guides: 93
+    laptops-and-desktops: 34
+    microcontrollers: 25
+    servers-and-cloud-computing: 94
+    smartphones-and-mobile: 25
+    total: 317
+  contributions:
+    external: 45
+    internal: 366
+>>>>>>> upstream/main
   github_engagement:
     num_forks: 30
     num_prs: 8
   individual_authors:
+<<<<<<< HEAD
     alaaeddine-chakroun: 1
+=======
+    alaaeddine-chakroun: 2
+>>>>>>> upstream/main
     alexandros-lamprineas: 1
     annie-tallund: 1
     arm: 3
     arnaud-de-grandmaison: 1
+<<<<<<< HEAD
+=======
+    arnaud-de-grandmaison,-paul-howard,-and-pareena-verma: 1
+>>>>>>> upstream/main
     basma-el-gaabouri: 1
     ben-clark: 1
     bolt-liu: 2
@@ -4455,7 +4679,11 @@
     daniel-gubay: 1
     daniel-nguyen: 1
     david-spickett: 2
+<<<<<<< HEAD
     dawid-borycki: 30
+=======
+    dawid-borycki: 31
+>>>>>>> upstream/main
     diego-russo: 1
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
@@ -4463,10 +4691,18 @@
     "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
+<<<<<<< HEAD
     graham-woodward: 1
     iago-calvo-lista,-arm: 1
     james-whitaker,-arm: 1
     jason-andrews: 89
+=======
+    georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
+    graham-woodward: 1
+    iago-calvo-lista,-arm: 1
+    james-whitaker,-arm: 1
+    jason-andrews: 94
+>>>>>>> upstream/main
     joe-stech: 1
     johanna-skinnider: 2
     jonathan-davies: 2
@@ -4474,7 +4710,12 @@
     julie-gaskin: 4
     julio-suarez: 5
     kasper-mecklenburg: 1
+<<<<<<< HEAD
     koki-mitsunami: 1
+=======
+    kieran-hejmadi: 1
+    koki-mitsunami: 2
+>>>>>>> upstream/main
     konstantinos-margaritis: 7
     kristof-beyls: 1
     liliya-wu: 1
@@ -4483,12 +4724,23 @@
     nikhil-gupta,-pareena-verma,-nobel-chowdary-mandepudi,-ravi-malhotra: 1
     odin-shen: 1
     owen-wu,-arm: 2
+<<<<<<< HEAD
     pareena-verma: 35
     pareena-verma,-annie-tallund: 1
     pareena-verma,-jason-andrews,-and-zach-lasiuk: 1
     pareena-verma,-joe-stech,-adnan-alsinan: 1
     pranay-bakre: 4
     przemyslaw-wirkus: 1
+=======
+    pareena-verma: 34
+    pareena-verma,-annie-tallund: 1
+    pareena-verma,-jason-andrews,-and-zach-lasiuk: 1
+    pareena-verma,-joe-stech,-adnan-alsinan: 1
+    paul-howard: 1
+    pranay-bakre: 4
+    preema-merlin-dsouza: 1
+    przemyslaw-wirkus: 2
+>>>>>>> upstream/main
     rin-dobrescu: 1
     roberto-lopez-mendez: 2
     ronan-synnott: 45
@@ -4496,6 +4748,10 @@
     tianyu-li: 1
     tom-pilar: 1
     uma-ramalingam: 1
+<<<<<<< HEAD
+=======
+    varun-chari,-albin-bernhardsson: 1
+>>>>>>> upstream/main
     varun-chari,-pareena-verma: 1
     visualsilicon: 1
     ying-yu: 1
@@ -4508,6 +4764,7 @@
     percent_closed_vs_total: 0.0
 - a_date: '2025-01-13'
   content:
+<<<<<<< HEAD
     cross-platform: 25
     embedded-systems: 19
     install-guides: 89
@@ -4519,15 +4776,37 @@
   contributions:
     external: 43
     internal: 353
+=======
+    automotive: 2
+    cross-platform: 28
+    embedded-and-microcontrollers: 39
+    install-guides: 93
+    iot: 5
+    laptops-and-desktops: 33
+    mobile-graphics-and-gaming: 26
+    servers-and-cloud-computing: 97
+    total: 323
+  contributions:
+    external: 45
+    internal: 373
+>>>>>>> upstream/main
   github_engagement:
     num_forks: 30
     num_prs: 6
   individual_authors:
+<<<<<<< HEAD
     alaaeddine-chakroun: 1
+=======
+    alaaeddine-chakroun: 2
+>>>>>>> upstream/main
     alexandros-lamprineas: 1
     annie-tallund: 1
     arm: 3
     arnaud-de-grandmaison: 1
+<<<<<<< HEAD
+=======
+    arnaud-de-grandmaison,-paul-howard,-and-pareena-verma: 1
+>>>>>>> upstream/main
     basma-el-gaabouri: 1
     ben-clark: 1
     bolt-liu: 2
@@ -4539,7 +4818,11 @@
     daniel-gubay: 1
     daniel-nguyen: 1
     david-spickett: 2
+<<<<<<< HEAD
     dawid-borycki: 30
+=======
+    dawid-borycki: 31
+>>>>>>> upstream/main
     diego-russo: 1
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
@@ -4547,10 +4830,19 @@
     "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
+<<<<<<< HEAD
     graham-woodward: 1
     iago-calvo-lista,-arm: 1
     james-whitaker,-arm: 1
     jason-andrews: 89
+=======
+    georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
+    graham-woodward: 1
+    han-yin: 1
+    iago-calvo-lista,-arm: 1
+    james-whitaker,-arm: 1
+    jason-andrews: 96
+>>>>>>> upstream/main
     joe-stech: 1
     johanna-skinnider: 2
     jonathan-davies: 2
@@ -4558,7 +4850,12 @@
     julie-gaskin: 4
     julio-suarez: 5
     kasper-mecklenburg: 1
+<<<<<<< HEAD
     koki-mitsunami: 1
+=======
+    kieran-hejmadi: 1
+    koki-mitsunami: 2
+>>>>>>> upstream/main
     konstantinos-margaritis: 7
     kristof-beyls: 1
     liliya-wu: 1
@@ -4567,12 +4864,24 @@
     nikhil-gupta,-pareena-verma,-nobel-chowdary-mandepudi,-ravi-malhotra: 1
     odin-shen: 1
     owen-wu,-arm: 2
+<<<<<<< HEAD
     pareena-verma: 35
     pareena-verma,-annie-tallund: 1
     pareena-verma,-jason-andrews,-and-zach-lasiuk: 1
     pareena-verma,-joe-stech,-adnan-alsinan: 1
     pranay-bakre: 4
     przemyslaw-wirkus: 1
+=======
+    pareena-verma: 34
+    pareena-verma,-annie-tallund: 1
+    pareena-verma,-jason-andrews,-and-zach-lasiuk: 2
+    pareena-verma,-joe-stech,-adnan-alsinan: 1
+    paul-howard: 1
+    pranay-bakre: 4
+    pranay-bakre,-masoud-koleini,-nobel-chowdary-mandepudi,-na-li: 1
+    preema-merlin-dsouza: 1
+    przemyslaw-wirkus: 2
+>>>>>>> upstream/main
     rin-dobrescu: 1
     roberto-lopez-mendez: 2
     ronan-synnott: 45
@@ -4580,8 +4889,15 @@
     tianyu-li: 1
     tom-pilar: 1
     uma-ramalingam: 1
+<<<<<<< HEAD
     varun-chari,-pareena-verma: 1
     visualsilicon: 1
+=======
+    varun-chari,-albin-bernhardsson: 1
+    varun-chari,-pareena-verma: 1
+    visualsilicon: 1
+    willen-yang: 1
+>>>>>>> upstream/main
     ying-yu: 1
     ying-yu,-arm: 1
     zach-lasiuk: 1

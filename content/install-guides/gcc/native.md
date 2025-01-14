@@ -39,11 +39,11 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## Download 
+## How do I download a native GCC compiler on Linux?
 
 The Linux package manager downloads the required files so there are no special instructions.
 
-## Installation
+## How do I install a native GCC compiler on Linux?
 
 ### Installing on Debian based distributions such as Ubuntu
 

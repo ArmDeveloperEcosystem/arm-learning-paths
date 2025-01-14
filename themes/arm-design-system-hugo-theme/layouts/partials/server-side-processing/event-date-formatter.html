@@ -1,0 +1,27 @@
+
+{{/* Hugo function to format event dates cleanly. Called from next steps pages. */}}
+
+
+  {{- $startDate :=  .startDate -}}
+  {{- $endDate := .endDate -}}
+
+  {{- $startYear := dateFormat "2006" $startDate -}}
+  {{- $endYear := dateFormat "2006" $endDate -}}
+  {{- $startMonth := dateFormat "Jan" $startDate -}}
+  {{- $endMonth := dateFormat "Jan" $endDate -}}
+  {{- $startDay := dateFormat "2" $startDate -}}
+  {{- $endDay := dateFormat "2" $endDate -}}
+
+  {{- $startFormatted := printf "%s %s" $startMonth $startDay -}}
+  {{- $endFormatted := printf "%s %s" $endMonth $endDay -}}
+
+  {{- if ne $startYear $endYear -}}
+    {{- $startFormatted = printf "%s, %s" $startFormatted $startYear -}}
+    {{- $endFormatted = printf "%s, %s" $endFormatted $endYear -}}
+  {{- else if ne $startMonth $endMonth -}}
+    {{- $endFormatted = printf "%s %s, %s" $endMonth $endDay $endYear -}}
+  {{- else -}}
+    {{- $endFormatted = printf "%s %s, %s" $endMonth $endDay $endYear -}}
+  {{- end -}}
+
+  {{- printf "%s - %s" $startFormatted $endFormatted -}}

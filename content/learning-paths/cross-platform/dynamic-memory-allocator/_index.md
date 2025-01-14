@@ -34,5 +34,5 @@ who_is_this_for: This is an introductory topic for software developers learning 
 shared_path: true
 shared_between:
     - laptops-and-desktops
-    - embedded-systems
+    - embedded-and-microcontrollers
 ---

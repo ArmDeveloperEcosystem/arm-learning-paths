@@ -7,7 +7,7 @@ next_step_guidance: >
    Congratulations you have now set up a complete CI/CD workflow. For another examples using a different flavor of Arm Virtual Hardware, see:
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/embedded-systems/avh_matter"
+recommended_path: "/learning-paths/iot/avh_matter"
 # Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 

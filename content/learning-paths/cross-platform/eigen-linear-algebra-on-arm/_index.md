@@ -29,7 +29,7 @@ shared_path: true
 shared_between:
     - laptops-and-desktops
     - servers-and-cloud-computing
-    - smartphones-and-mobile
+    - mobile-graphics-and-gaming
 
 
 ### FIXED, DO NOT MODIFY

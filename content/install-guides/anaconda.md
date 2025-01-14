@@ -65,10 +65,10 @@ sudo amazon-linux-extras install mate-desktop1.x
 To download the latest Anaconda distribution, run:
 
 ```bash
-curl -O https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-aarch64.sh
+curl -O https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-aarch64.sh
 ```
 
-Depending on the version, the downloaded filename will be of the form `Anaconda3-20XX.YY-Linux-x86_64.sh` where the `XX` and `YY` values represent the year and month of the latest release.
+Depending on the version, the downloaded filename will be of the form `Anaconda3-20XX.YY-Linux-aarch64.sh` where the `XX` and `YY` values represent the year and month of the latest release.
 
 ## What are the steps to install the downloaded Anaconda distribution?
 
@@ -79,7 +79,7 @@ The default installation directory is `$HOME/anaconda3`. Change the installation
 If you wish to review the license terms before accepting, remove `-b`.
 
 ```bash
-sh ./Anaconda3-2023.09-0-Linux-aarch64.sh -b
+sh ./Anaconda3-2024.10-1-Linux-aarch64.sh -b
 ```
 
 The install takes a couple of minutes to complete.
