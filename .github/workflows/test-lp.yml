@@ -7,7 +7,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
-          path: ${{ github.head_ref }}
+          path: ${{ steps.vars.outputs.branch-name }}
       - name: Get all changed markdown files
         id: changed-markdown-files
         uses: tj-actions/changed-files@v44
