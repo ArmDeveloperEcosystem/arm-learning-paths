@@ -68,7 +68,7 @@ jobs:
         if: success() && env.MAINTENANCE == 'on'
         run: |
           cd data/
-          chmod -x stats_current_test_info.zip
+          chmod +x stats_current_test_info.zip
           ls -la
           unzip -o ./stats_current_test_info.zip
           rm data/stats_current_test_info.zip
