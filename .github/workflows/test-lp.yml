@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: success() && env.MAINTENANCE == 'on'
         with:
-          name: stats_current_test_info.yml
+          name: stats_current_test_info
           path: data/stats_current_test_info.yml
       - name: Checkout tools repo
         uses: actions/checkout@v4
@@ -62,11 +62,13 @@ jobs:
         uses: actions/download-artifact@v4
         if: success() && env.MAINTENANCE == 'on'
         with:
-            name: stats_current_test_info.yml
-            path: data/stats_current_test_info.yml
+            name: stats_current_test_info
+            path: data/stats_current_test_info.zip
       - name: Add changes to main
         if: success() && env.MAINTENANCE == 'on'
         run: |
+          unzip -o data/stats_current_test_info.zip
+          rm data/stats_current_test_info.zip
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git add data/stats_current_test_info.yml
