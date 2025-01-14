@@ -67,12 +67,15 @@ jobs:
       - name: Add changes to main
         if: success() && env.MAINTENANCE == 'on'
         run: |
+          ls ..
           rm -rf data/stats_current_test_info.zip
           git status
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git add data/stats_current_test_info.yml
+          git status
           git commit -m "Update stats_current_test_info.yml"
+          git status
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         if: success() && env.MAINTENANCE == 'on'
