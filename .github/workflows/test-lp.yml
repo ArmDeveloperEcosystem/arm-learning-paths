@@ -52,12 +52,11 @@ jobs:
         with:
           name: stats_current_test_info
           path: data/stats_current_test_info.yml
-      - name: Checkout tools repo
+      - name: Checkout main branch
         uses: actions/checkout@v4
         if: success() && env.MAINTENANCE == 'on'
         with:
-          repository: ArmDeveloperEcosystem/native-runner-arm-learning-paths
-          path: native-runner-arm-learning-paths
+          path: main
       - name: Download a single artifact
         uses: actions/download-artifact@v4
         if: success() && env.MAINTENANCE == 'on'
