@@ -61,4 +61,4 @@ pkill -f buck
 
 If you don't have the Grove AI vision board, use the Corstone-300 FVP proceed to [Environment Setup Corstone-300 FVP](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/env-setup-6-fvp/)
 
-If you have the Grove board proceed o to [Setup on Grove - Vision AI Module V2](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/setup-7-grove/)
+If you have the Grove board proceed to [Setup on Grove - Vision AI Module V2](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/setup-7-grove/)

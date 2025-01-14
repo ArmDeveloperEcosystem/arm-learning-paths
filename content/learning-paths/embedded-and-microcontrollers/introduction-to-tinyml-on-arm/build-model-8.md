@@ -8,7 +8,6 @@ weight: 7 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-TODO connect this part with the FVP/board?
 With our environment ready, you can create a simple program to test the setup.
 
 This example defines a small feedforward neural network for a classification task. The model consists of 2 linear layers with ReLU activation in between.
@@ -84,7 +83,7 @@ Run the ExecuTorch version, first build the executable:
 cmake --build cmake-out --target executor_runner -j$(nproc)
 ```
 
-You see the build output and it ends with:
+You will see the build output and it ends with:
 
 ```output
 [100%] Linking CXX executable executor_runner
@@ -111,4 +110,7 @@ Output 0: tensor(sizes=[1, 2], [-0.105369, -0.178723])
 ```
 
 When the model execution completes successfully, you’ll see confirmation messages similar to those above, indicating successful loading, inference, and output tensor shapes.
+
+
+You've now set up your environment for TinyML development, and tested a PyTorch and ExecuTorch Neural Network.
 
