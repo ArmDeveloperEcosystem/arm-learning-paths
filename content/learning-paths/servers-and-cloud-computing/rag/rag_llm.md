@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Configure to setup a RAG based LLM Chatbot"
+title: "Set up a RAG based LLM Chatbot"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -10,15 +10,15 @@ layout: "learningpathall"
 
 ## Before you begin
 
-This learning path demonstrates how to build and deploy a Retrieval Augmented Generation (RAG) enabled chatbot using open-source Large Language Models (LLMs) optimized for Arm architecture. The chatbot processes documents, stores them in a vector database, and generates contextually relevant responses by combining the LLM's capabilities with retrieved information. The instructions in this Learning Path are designed for Arm servers running Ubuntu 22.04 LTS. You need an Arm server instance with at least 16 cores and 8GB of RAM to run this example. Configure disk storage up to at least 32GB. The instructions have been tested on an AWS Graviton4 r8g.16xlarge instance.
+This learning path demonstrates how to build and deploy a Retrieval Augmented Generation (RAG) enabled chatbot using open-source Large Language Models (LLMs) optimized for Arm architecture. The chatbot processes documents, stores them in a vector database, and generates contextually-relevant responses by combining the LLM's capabilities with retrieved information. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 22.04 LTS. You need an Arm server instance with at least 16 cores and 8GB of RAM to run this example. Configure disk storage up to at least 32GB. The instructions have been tested on an AWS Graviton4 r8g.16xlarge instance.
 
 ## Overview
 
 In this Learning Path, you learn how to build a Retrieval Augmented Generation (RAG) chatbot using llama-cpp-python, a Python binding for llama.cpp that enables efficient LLM inference on Arm CPUs.
 
-The tutorial demonstrates how to integrate FAISS vector database with Llama-3.1-8B model for document retrieval, while leveraging llama-cpp-python's optimized C++ backend for high-performance inference.
+The tutorial demonstrates how to integrate the FAISS vector database with the Llama-3.1-8B model for document retrieval, while leveraging llama-cpp-python's optimized C++ backend for high-performance inference.
 
-This architecture allows the chatbot to combine the model's generative capabilities with contextual information retrieved from your documents, all optimized for Arm-based systems.
+This architecture enables the chatbot to combine the model's generative capabilities with contextual information retrieved from your documents, all optimized for Arm-based systems.
 
 ## Install dependencies
 
@@ -29,7 +29,7 @@ sudo apt update
 sudo apt install python3-pip python3-venv cmake -y
 ```
 
-## Create requirements file
+## Create a requirements file
 
 ```bash
 vim requirements.txt
@@ -89,7 +89,7 @@ pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-c
 
 ## Download the Model
 
-Create a directory for models:
+Create a directory called models, and navigate to it:
 ```bash
     mkdir models
     cd models
@@ -114,7 +114,7 @@ Clone the source repository for llama.cpp:
 git clone https://github.com/ggerganov/llama.cpp
 ```
 
-By default, `llama.cpp` builds for CPU only on Linux and Windows. You don't need to provide any extra switches to build it for the Arm CPU that you run it on.
+By default, `llama.cpp` builds for CPU only on Linux and Windows. You do not need to provide any extra switches to build it for the Arm CPU that you run it on.
 
 Run `cmake` to build it:
 

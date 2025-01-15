@@ -1,5 +1,5 @@
 ---
-title: Deploy RAG based LLM frontend server
+title: Deploy RAG-based LLM frontend server
 weight: 4
 
 layout: learningpathall
@@ -131,8 +131,8 @@ if use_vectordb and action == "Load Existing Store" and dbs:
 
 ## Run the Frontend Server
 
-You are now ready to run the frontend server for RAG Chatbot.
-Use the following command in a new terminal to start the Streamlit frontend server::
+You are now ready to run the frontend server for the RAG Chatbot.
+Use the following command in a new terminal to start the Streamlit frontend server:
 
 ```python
 python3 -m streamlit run frontend.py

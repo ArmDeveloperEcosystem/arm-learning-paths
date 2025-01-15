@@ -1,12 +1,12 @@
 ---
-title: Deploy RAG based LLM backend server
+title: Deploy a RAG-based LLM backend server
 weight: 3
 
 layout: learningpathall
 ---
 
 ## Backend Script for RAG-based LLM Server
-Once the virtual environment is activated, create a `backend.py` script with the following content. This script integrates the LLM with the FAISS vector database for RAG.
+Once the virtual environment is activated, create a `backend.py` script using the following content. This script integrates the LLM with the FAISS vector database for RAG:
 
 ```python
 import os
@@ -185,7 +185,7 @@ if __name__ == '__main__':
 
 ## Run the Backend Server
 
-You are now ready to run the backend server for RAG Chatbot.
+You are now ready to run the backend server for the RAG Chatbot.
 Use the following command in a terminal to start the backend server:
 
 ```python
