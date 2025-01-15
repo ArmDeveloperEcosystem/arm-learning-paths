@@ -62,18 +62,15 @@ jobs:
         if: success() && env.MAINTENANCE == 'on'
         with:
             name: stats_current_test_info
-            path: data/stats_current_test_info.zip
+            path: data/
       - name: Unzip artifact
         if: success() && env.MAINTENANCE == 'on'
         run: |
-          ls -la data/stats_current_test_info.zip
-          ls -la data/
           git diff
           git status
       - name: Add changes to main
         if: success() && env.MAINTENANCE == 'on'
         run: |
-          git status
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git add data/stats_current_test_info.yml
