@@ -66,7 +66,8 @@ jobs:
       - name: Add changes to main
         if: success() && env.MAINTENANCE == 'on'
         run: |
-          ls -la data/
+          unzip -o data/stats_current_test_info.zip
+          rm -rf data/stats_current_test_info.zip
           git status
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
