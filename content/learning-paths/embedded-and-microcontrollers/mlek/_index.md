@@ -3,22 +3,22 @@ title: Build and run the Arm Machine Learning Evaluation Kit examples
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for embedded software developers interested in learning about machine learning.
+who_is_this_for: This is an introductory topic for embedded software developers interested machine learning applications.
 
 learning_objectives:
     - Build examples from Machine Learning Evaluation Kit (MLEK)
-    - Run the examples on Corstone-320 FVP or Virtual Hardware
+    - Run the examples on Arm Ecosystem FVP
 
 prerequisites:
     - Some familiarity with embedded programming
-    - Either a Linux machine running Ubuntu, or an AWS account to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware)
+    - Linux host machine running Ubuntu
 
 author_primary: Ronan Synnott
 
 ### RS: Learning Path hidden until AWS instance updated
-draft: true
+draft: false
 cascade:
-    draft: true
+    draft: false
 
 
 ### Tags
