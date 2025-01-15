@@ -67,7 +67,7 @@ jobs:
         if: success() && env.MAINTENANCE == 'on'
         run: |
           ls -la data/
-          unzip -o ./data/stats_current_test_info.zip
+          tar -xvf ./data/stats_current_test_info.zip
           ls -la data/
           git diff
           git status
