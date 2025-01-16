@@ -173,7 +173,7 @@ sudo apt install acfl
 
 ### Amazon Linux 2023
 
-Arm Compiler for Linux is available to install with either the `yum` or `dnf` system package manager.
+Arm Compiler for Linux is available to install with either the `dnf` or `yum` system package manager.
 
 #### Install ACfL from the Amazon Linux 2023 package repository:
 
