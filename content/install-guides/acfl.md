@@ -182,7 +182,7 @@ Install ACfL and prerequisites from the Amazon Linux 2023 `rpm` package reposito
 ```bash
 sudo dnf update
 sudo dnf install 'dnf-command(config-manager)' procps psmisc make environment-modules
-sudo dnf config-manager --add-repo https://developer.arm.com/packages/ACfL:/AmazonLinux-2023/latest/ACfL:AmazonLinux-2023.repo
+sudo dnf config-manager --add-repo https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
 sudo dnf install acfl
 ```
 
@@ -191,7 +191,7 @@ Or using the equivalent `yum` commands:
 ```bash
 sudo yum update
 sudo yum install 'dnf-command(config-manager)' procps psmisc make environment-modules
-sudo yum config-manager --add-repo https://developer.arm.com/packages/ACfL:/AmazonLinux-2023/latest/ACfL:AmazonLinux-2023.repo
+sudo yum config-manager --add-repo https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
 sudo yum install acfl
 ```
 
