@@ -144,7 +144,7 @@ uninstall ACfL.
 
 ## Download and install using System Packages
 
-### Ubuntu Linux
+### Ubuntu Linux 20.04 and 22.04
 
 Arm Compiler for Linux is available to install with the Ubuntu system package manager `apt` command.
 
@@ -155,7 +155,7 @@ Add the ACfL `apt` package repository to your Ubuntu 20.04 or 22.04 system:
 ```bash { target="ubuntu:latest" }
 sudo apt update
 sudo apt install -y curl environment-modules python3 libc6-dev
-source /etc/os-release
+. /etc/os-release
 curl "https://developer.arm.com/packages/ACfL%3A${NAME}-${VERSION_ID/%.*/}/${VERSION_CODENAME}/Release.key" | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc
 echo "deb https://developer.arm.com/packages/ACfL%3A${NAME}-${VERSION_ID/%.*/}/${VERSION_CODENAME}/ ./" | sudo tee /etc/apt/sources.list.d/developer-arm-com.list
 sudo apt update
@@ -214,17 +214,17 @@ Set up the environment, for example, in your `.bashrc` and add module files.
 #### Ubuntu Linux:
 
 ```bash { target="ubuntu:latest" }
-echo "source /usr/share/modules/init/bash" >> ~/.bashrc
+echo ". /usr/share/modules/init/bash" >> ~/.bashrc
 echo "module use /opt/arm/modulefiles" >> ~/.bashrc
-source ~/.bashrc
+. ~/.bashrc
 ```
 
 #### Red Hat Linux:
 
 ```bash { target="fedora:latest" }
-echo "source /usr/share/Modules/init/bash" >> ~/.bashrc
+echo ". /usr/share/Modules/init/bash" >> ~/.bashrc
 echo "module use /opt/arm/modulefiles" >> ~/.bashrc
-source ~/.bashrc
+. ~/.bashrc
 ```
 
 To list available modules:
