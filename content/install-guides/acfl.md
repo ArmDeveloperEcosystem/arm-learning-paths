@@ -175,7 +175,7 @@ sudo apt install acfl
 
 Arm Compiler for Linux is available to install with either the `yum` or `dnf` system package manager.
 
-#### Setup the ACfL package repository:
+#### Install ACfL from the package repository:
 
 Install prerequisites and add the ACfL `rpm` package repository to your Amazon Linux 2023 system with `dnf`:
 
@@ -195,15 +195,8 @@ sudo yum config-manager --add-repo https://developer.arm.com/packages/ACfL:/Amaz
 sudo yum install acfl
 ```
 
-The ACfL Ubuntu package repository is now ready to use.
+The ACfL tools are now ready to use.
 
-#### Install ACfL
-
-Download and install Arm Compiler for Linux with:
-
-```bash { target="ubuntu:latest" }
-sudo apt install acfl
-```
 
 ### Set up environment
 
