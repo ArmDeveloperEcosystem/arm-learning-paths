@@ -148,7 +148,7 @@ uninstall ACfL.
 
 Arm Compiler for Linux is available to install with the Ubuntu system package manager `apt` command.
 
-#### Setup the ACfL package repository:
+#### Setup the ACfL package repository
 
 Add the ACfL `apt` package repository to your Ubuntu 20.04 or 22.04 system:
 
@@ -175,7 +175,7 @@ sudo apt install acfl
 
 Arm Compiler for Linux is available to install with either the `dnf` or `yum` system package manager.
 
-#### Install ACfL from the Amazon Linux 2023 package repository:
+#### Install ACfL from the Amazon Linux 2023 package repository
 
 Install ACfL and prerequisites from the Amazon Linux 2023 `rpm` package repository with `dnf`:
 
