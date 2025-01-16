@@ -212,7 +212,7 @@ echo "module use /opt/arm/modulefiles" >> ~/.bashrc
 . ~/.bashrc
 ```
 
-#### Red Hat Linux:
+#### Red Hat or Amazon Linux:
 
 ```bash { target="fedora:latest" }
 echo ". /usr/share/Modules/init/bash" >> ~/.bashrc
