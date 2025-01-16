@@ -154,7 +154,7 @@ Add the ACfL `apt` package repository to your Ubuntu 20.04 or 22.04 system:
 
 ```bash { target="ubuntu:latest" }
 sudo apt update
-sudo apt install -y curl
+sudo apt install -y curl environment-modules python3 libc6-dev
 source /etc/os-release
 curl "https://developer.arm.com/packages/ACfL%3A${NAME}-${VERSION_ID/%.*/}/${VERSION_CODENAME}/Release.key" | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc
 echo "deb https://developer.arm.com/packages/ACfL%3A${NAME}-${VERSION_ID/%.*/}/${VERSION_CODENAME}/ ./" | sudo tee /etc/apt/sources.list.d/developer-arm-com.list
@@ -173,7 +173,7 @@ sudo apt install acfl
 
 ### Amazon Linux 2023
 
-Arm Compiler for Linux is available to install with the either `yum` or `dnf` system package manager.
+Arm Compiler for Linux is available to install with either the `yum` or `dnf` system package manager.
 
 #### Setup the ACfL package repository:
 
