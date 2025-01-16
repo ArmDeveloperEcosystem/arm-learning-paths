@@ -1,0 +1,83 @@
+---
+title: Setup Your Environment
+weight: 3
+
+### FIXED, DO NOT MODIFY
+layout: learningpathall
+---
+
+If you are new to cloud computing, please refer to our learning path on [Getting started with Servers and Cloud Computing](https://learn.arm.com/learning-paths/servers-and-cloud-computing/intro/).
+
+## Connect to an AWS Arm-based Instance
+
+In this example we will be building and running our C++ application on an AWS Graviton 2 instance running Ubuntu 24.04 LTS. Once connected run the following commands to confirm the operating system and archiecture version. 
+
+```bash
+cat /etc/*lsb*
+```
+
+You will see an output such as the following:
+
+```output
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=24.04
+DISTRIB_CODENAME=noble
+DISTRIB_DESCRIPTION="Ubuntu 24.04.1 LTS"
+```
+
+Next, we will confirm we are using a 64-bit Arm-based system using the following command
+
+```bash
+uname -m
+```
+
+You will see the following output.
+
+```output
+aarch64
+```
+
+## Enable Environment modules
+
+Environment modules are a tool to quickly modify your shell configuration and environment variables. For this learning path, it allows us to quickly switch between different compiler versions. 
+
+Install Environment Modules
+
+   First, you need to install the environment modules package. Open your terminal and run the following command:
+   ```bash
+   sudo apt update
+   sudo apt install environment-modules
+   ```
+
+Load environment modules after the package is installed. 
+
+```bash
+/usr/share/modules/init/bash
+```
+Reload your shell configuration. 
+
+```bash
+source ~/.bashrc
+```
+
+Install various compiler version on your Ubuntu system. For this example we will install version 10 of the gcc/g++ compiler.
+
+```bash
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt update
+sudo apt install gcc-10 g++-10
+```
+
+Create a module file for each compiler installed. 
+
+```bash
+mkdir -p ~/modules/gcc
+nano ~/modules/gcc/14
+```
+Copy and paste the text below into the nano text editor and save the file
+```ouput
+#%Module1.0
+prepend-path PATH /usr/bin/gcc-10
+prepend-path PATH /usr/bin/g++-10
+```
+

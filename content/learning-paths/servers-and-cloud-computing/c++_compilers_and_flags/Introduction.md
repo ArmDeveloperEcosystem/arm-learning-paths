@@ -55,3 +55,15 @@ A number of new CPUs are supported through the -mcpu and -mtune options (GCC ide
     - Microsoft Cobalt-100 (cobalt-100).
 ...
 ```
+
+However, upgrading to a newer compiler may reveal bugs in your source code if the behaviour caused by not adhering to the C++ standard is exposed. It is rare that the compiler itself has introduced a bug with known bugs being publically available. 
+
+## Compiler Flags for Optimising on Arm 
+
+Using the g++ compiler as an example, the most course-grained dial you can adjust is the optimisation level, denoted with `-O<x>`. This adjusts a variety of lower-level optimsation flags at the expense of increased computation time, memory use and debuggability. However, the output binary may not show expected behaviour when debugging using a program such as GNU debugger (`gdb`) since the generated code may not match the source code or program order, for example with loop unrolling and vectorisation. 
+
+If running your C++ application in a memory constrained environment, for example in a containerised environment, you may wish to consider optimising for size. 
+
+Support for the latest Arm CPU extensions are supported by the GCC compiler in advance of general availability of Silicon. 
+
+Compiler flags, `-O<1,2,3>`, `-Ofast`. Please refer to your compiler documentation for full details on the optimisation level, for example [GCC](https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Optimize-Options.html).
