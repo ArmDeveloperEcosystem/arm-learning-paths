@@ -15,7 +15,6 @@ jobs:
           uses: actions/download-artifact@v4
           with:
             run-id: ${{ github.event.workflow_run.id }}
-            name: stats_current_test_info
             path: data/
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v6
