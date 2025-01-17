@@ -1,5 +1,5 @@
 ---
-title: Improve matrix multiplication performance with SME2
+title: Accelerate Matrix Multiplication Performance with SME2
 
 minutes_to_complete: 30
 
