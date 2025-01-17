@@ -17,6 +17,8 @@ on:
         required: true
       HUGO_LLM_API:
         required: true
+      HUGO_RAG_API:
+        required: true
 
 env:
   HUGO_VERSION: 0.130.0
@@ -60,6 +62,7 @@ jobs:
           bin/pagefind --site "public"
         env:
           HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
+          HUGO_RAG_API: ${{ secrets.HUGO_RAG_API }}
 
       # Deploys website to AWS S3 and invalidate CloudFront Cache
       - name: Deploy to S3
