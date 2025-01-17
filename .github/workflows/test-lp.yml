@@ -56,4 +56,3 @@ jobs:
         with:
           name: stats_current_test_info
           path: data/stats_current_test_info.yml
-
