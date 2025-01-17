@@ -148,7 +148,7 @@ uninstall ACfL.
 
 Arm Compiler for Linux is available to install with the Ubuntu system package manager `apt` command.
 
-#### Setup the ACfL package repository
+#### Set up the ACfL package repository
 
 Add the ACfL `apt` package repository to your Ubuntu 20.04 or 22.04 system:
 
@@ -246,7 +246,7 @@ Arm Compiler for Linux is available with the [Spack](https://spack.io/) package 
 
 See the [Arm Compiler for Linux and Arm PL now available in Spack](https://community.arm.com/arm-community-blogs/b/high-performance-computing-blog/posts/arm-compiler-for-linux-and-arm-pl-now-available-in-spack) blog for full details.
 
-### Setup Spack
+### Set up Spack
 
 Clone the Spack repository and add `bin` directory to the path:
 
@@ -277,7 +277,7 @@ If you wish to install just the Arm Performance Libraries, use:
 spack install armpl-gcc
 ```
 
-### Setup environment
+### Set up environment
 Use the commands below to set up the environment:
 
 ```console
