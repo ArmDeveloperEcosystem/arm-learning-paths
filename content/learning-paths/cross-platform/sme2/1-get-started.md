@@ -6,18 +6,16 @@ weight: 2
 layout: learningpathall
 ---
 
-In this section, you will setup the environment needed to develop with SME2.
+In this section, you will set up an environment to develop with SME2.
 
-SME2 hardware is not widely deployed at the time of writing of this learning
-path, so you will have to use:
+SME2 hardware is not widely deployed at the time of writing, so you will require:
 
- - a compiler with support for SME2 instructions. [clang](https://www.llvm.org/)
-   version >= 18 or [gcc](https://gcc.gnu.org/) versions >= 14. This learning
-   path will use ``clang``.
+ - A compiler with support for SME2 instructions. [clang](https://www.llvm.org/)
+   version >= 18 or [gcc](https://gcc.gnu.org/) versions >= 14. This Learning
+   Path uses ``clang``.
 
- - an emulator to execute code with those new instructions. In this learning
-   path, we will use
-   [Arm's Fixed Virtual Platform (FVP) model](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms).
+ - An emulator to execute code with the SME2 instructions. This Learning
+   Path uses [Arm's Fixed Virtual Platform (FVP) model](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms).
 
 
 ## Prerequisites
@@ -57,7 +55,7 @@ This learning path should also work without ``docker``, the only assumption is
 that the compiler and the FVP are available on your search path.
 {{% /notice %}}
 
-First, you should check that ``docker`` is installed by typing the following
+Start by checking that ``docker`` is installed on your machine by typing the following
 command line in a terminal:
 
 ```BASH { output_lines="2" }
@@ -69,7 +67,7 @@ If the above command fails with a message similar to "``docker: command not foun
 then follow the steps from the [docker install guide](https://learn.arm.com/install-guides/docker/).
 Note that you might have to re-login or restart your machine for the changes to be taken into account.
 
-Now that ``docker`` is installed on your machine, you should check that it's operating properly with:
+Once you have confirmed that ``docker`` is installed on your machine, you can check that it is operating normally with the following:
 
 ```BASH { output_lines="2-27" }
 docker run hello-world
@@ -82,12 +80,16 @@ Status: Downloaded newer image for hello-world:latest
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 
-To generate this message, Docker took the following steps:
+To generate this message, Docker followed these steps:
+ 
  1. The Docker client contacted the Docker daemon.
+ 
  2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
     (arm64v8)
+ 
  3. The Docker daemon created a new container from that image which runs the
     executable that produces the output you are currently reading.
+ 
  4. The Docker daemon streamed that output to the Docker client, which sent it
     to your terminal.
 
@@ -110,7 +112,7 @@ named ``SME2.git``:
 git clone  https://gitlab.arm.com/learning-code-examples/TODO_SOME_PATH SME2-learning-path.git
 ```
 
-This repository content is looking like:
+This repository content looks like:
 
 ```TXT
 SME2-learning-path.git/
@@ -142,10 +144,10 @@ SME2-learning-path.git/
 ```
 
 It contains:
-- the code examples used in this learning path,
-- the ``Makefile`` used to build them,
-- the ``run-fvp.sh`` shell script to run the FVP,
-- the ``docker/`` directory contains ``docker`` related material.
+- The code examples that this Learning Path uses.
+- The ``Makefile`` that builds the code examples.
+- The ``run-fvp.sh`` shell script that runs the FVP.
+- The ``docker/`` directory that contains ``docker``-related material.
   ``assets.source_me`` provides the FVP and compiler toolchain references,
   ``sme2-environment.docker`` is the docker receipe to build the container that
   you will use, ``build-my-container.sh`` is the shell script you should use in

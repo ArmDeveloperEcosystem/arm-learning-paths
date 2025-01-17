@@ -3,21 +3,20 @@ title: Accelerate Matrix Multiplication Performance with SME2
 
 minutes_to_complete: 30
 
-who_is_this_for: The Scalable Matrix Extension (SME) is an extension to Armv9-A architecture. It introduces a new execution mode and new instructions to accelerate matrix operations. This learning path is an advanced topic for developers who want to learn about how they can improve the performance of matrix multiplications with SME2.
+who_is_this_for: This Learning Path is an advanced topic for developers who want to learn about accelerating the performance of matrix multiplications using SME2.
 
 learning_objectives:
-    - Implement a by-the-book reference matrix multiplication
-    - Use SME2 assembly instructions to improve the matrix multiplication performance
-    - Use SME2 intrinsics to improve the matrix multiplication performance while staying in C
-    - Compile and run code with SME2 instructions
+    - Implement a reference matrix multiplication according to standard procedure.
+    - Use SME2 assembly instructions to improve the matrix multiplication performance.
+    - Use SME2 intrinsics to improve the matrix multiplication performance using the C programming language.
+    - Compile and run code with SME2 instructions.
 
 prerequisites:
-    - A Linux or MacOS based computer
-    - An intermediate understanding of C and assembly
+    - A computer running Linux, MacOS, or Windows.
+    - An intermediate understanding of C and assembly language.
 
 author_primary: Arnaud de Grandmaison
 
-draft: true
 
 ### Tags
 skilllevels: Advanced
