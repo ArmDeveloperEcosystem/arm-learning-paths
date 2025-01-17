@@ -7,7 +7,7 @@ next_step_guidance: >
    You have run a custom application on a cloud-based RTL simulation of an Arm based system. Why not learn about other development environments?
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/embedded-systems/docker/"
+recommended_path: "/learning-paths/embedded-and-microcontrollers/docker/"
 
 # Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 

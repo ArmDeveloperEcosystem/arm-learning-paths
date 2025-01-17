@@ -41,7 +41,7 @@ Windows, Linux, and macOS host platforms are supported.
 {{% notice Note %}}
 This install guide is for manual installation of `CMSIS-Toolbox`.
 
-For automation instructions using `vcpkg` see [Install tools on the command line using vcpkg](/learning-paths/microcontrollers/vcpkg-tool-installation/).
+For automation instructions using `vcpkg` see [Install tools on the command line using vcpkg](/learning-paths/embedded-and-microcontrollers/vcpkg-tool-installation/).
 
 `CMSIS-Toolbox` is also installed as part of a Keil MDK installation (Windows only).
 {{% /notice %}}

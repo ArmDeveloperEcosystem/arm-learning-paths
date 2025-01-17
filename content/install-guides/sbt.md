@@ -27,7 +27,7 @@ weight: 1
 {{% notice Note %}}
 When the project was created, it was called *Simple Build Tool*, but quickly evolved to *sbt*. Some have incorrectly redefined it to *Scala Build Tool*, which does not reflect the fact that sbt works with Java-only projects. 
 
-It is now called *sbt* in all lowercase letters, which emphasises the fact that it is not an acronym.{{% /notice %}}
+It is now called *sbt* in all lowercase letters, which emphasizes the fact that it is not an acronym.{{% /notice %}}
 
 ## What should I consider before installing sbt on Arm?
 

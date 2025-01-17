@@ -8,13 +8,17 @@ layout: learningpathall
 
 ## Monitor CPU and RAM usage with Prometheus and Grafana
 
-Prometheus is a monitoring and alerting tool. It is used for collecting and querying real-time metrics in cloud-native environments like Kubernetes. Prometheus collects essential metrics about CPU usage, memory usage, pod counts, and request latency. This helps you monitor the health and performance of your Kubernetes clusters. 
+* Prometheus is a monitoring and alerting tool. You can use it for collecting and querying real-time metrics in cloud-native environments like Kubernetes. Prometheus collects essential metrics about CPU usage, memory usage, pod counts, and request latency. This helps you to monitor the health and performance of your Kubernetes clusters. 
 
-Grafana is a visualization and analytics tool that integrates with data sources from Prometheus to create interactive dashboards to monitor and analyze Kubernetes metrics over time. 
+* Grafana is a visualization and analytics tool. It integrates with data sources from Prometheus to create interactive dashboards to monitor and analyze Kubernetes metrics. 
+
+{{% notice Note %}}
+The terrafom script executed in the previous step automatically installs Prometheus and Grafana in the EKS cluster. However, if you wish to have more flexibility with the installable versions for both, follow the instructions below.
+{{% /notice %}}
 
 ## Install Prometheus on your EKS cluster
 
-You can use Helm to install prometheus on the Kubernetes cluster. 
+You can use Helm to install Prometheus on the Kubernetes cluster. 
 
 Follow the [Helm documentation](https://helm.sh/docs/intro/install/) to install it on your computer.
 
@@ -51,7 +55,7 @@ helm install prometheus prometheus-community/prometheus \
   --set server.persistentVolume.storageClass="gp2"
 ```
 
-Check all pods are up and running:
+Check that all pods are up and running:
 
 ```console
 kubectl get pods -n prometheus
@@ -97,14 +101,16 @@ helm install grafana grafana/grafana \
   --set service.type=LoadBalancer
 ```
 
-Check all pods are up and running
+Check all pods are up and running:
 
 ```console
 kubectl get pods -n grafana
 ```
 
-Login to the grafana dashboard using the LoadBalancer IP and click on `Dashboards` in the left navigation page. Locate a `Kubernetes / Compute Resources / Node` dashboard and click on it. 
+Log in to the Grafana dashboard using the LoadBalancer IP and click on **Dashboards** in the left navigation page. 
 
-You see a dashboard like below for your Kubernetes cluster:
+Locate a `Kubernetes/Compute Resources/Node (Pods)` dashboard and click on it. 
 
-![grafana #center](_images/grafana.png)
+You should see a dashboard like below for your Kubernetes cluster:
+
+![grafana #center](_images/grafana.png "Figure 8: Dashboard for Kubernetes Cluster.")

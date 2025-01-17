@@ -9,9 +9,9 @@ maintopic: true
 operatingsystems_filter:
 - Android: 2
 - Baremetal: 1
-- Linux: 113
-- macOS: 7
-- Windows: 12
+- Linux: 116
+- macOS: 8
+- Windows: 13
 pinned_modules:
 - module:
     name: Recommended getting started learning paths
@@ -20,9 +20,9 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 4
-- Containers and Virtualization: 26
+- Containers and Virtualization: 28
 - Databases: 15
-- Libraries: 7
+- Libraries: 8
 - ML: 13
 - Performance and Architecture: 42
 - Storage: 1
@@ -46,7 +46,7 @@ tools_software_languages_filter:
 - AWS CodeBuild: 1
 - AWS EC2: 2
 - AWS Elastic Container Service (ECS): 1
-- AWS Elastic Kubernetes Service (EKS): 2
+- AWS Elastic Kubernetes Service (EKS): 3
 - Bash: 1
 - Bastion: 3
 - BOLT: 1
@@ -64,6 +64,7 @@ tools_software_languages_filter:
 - CloudFormation: 1
 - CMake: 1
 - Coding: 18
+- Daytona: 1
 - Django: 1
 - Docker: 16
 - Envoy: 2
@@ -73,7 +74,7 @@ tools_software_languages_filter:
 - GCC: 20
 - gdb: 1
 - Geekbench: 1
-- GenAI: 6
+- GenAI: 7
 - GitHub: 3
 - GitLab: 1
 - Glibc: 1
@@ -87,11 +88,11 @@ tools_software_languages_filter:
 - JAX: 1
 - Kafka: 1
 - Keras: 1
-- Kubernetes: 10
+- Kubernetes: 11
 - Lambda: 1
 - libbpf: 1
 - Linaro Forge: 1
-- LLM: 4
+- LLM: 5
 - llvm-mca: 1
 - LSE: 1
 - MariaDB: 1
@@ -107,7 +108,7 @@ tools_software_languages_filter:
 - PAPI: 1
 - perf: 4
 - PostgreSQL: 4
-- Python: 14
+- Python: 15
 - PyTorch: 5
 - RAG: 1
 - Redis: 3
@@ -133,6 +134,7 @@ tools_software_languages_filter:
 - Visual Studio Code: 4
 - vLLM: 1
 - VS Code: 1
+- vvenc: 1
 - WindowsPerf: 1
 - WordPress: 3
 - x265: 1
@@ -140,8 +142,8 @@ tools_software_languages_filter:
 - Zookeeper: 1
 weight: 1
 cloud_service_providers_filter:
-- AWS: 13
-- Google Cloud: 8
+- AWS: 14
+- Google Cloud: 9
 - Microsoft Azure: 8
 - Oracle: 2
 ---
