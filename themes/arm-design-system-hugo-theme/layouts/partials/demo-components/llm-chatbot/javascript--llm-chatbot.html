@@ -573,7 +573,22 @@ Calls to:
 
 
 (function() {
-    const server_location_encoded = '{{ getenv "HUGO_LLM_API" | base64Encode }}';
+
+    {{/* Get server location from GH Secrets */}}
+    {{ $server_location := "" }};
+
+    {{ if eq .Params.demo_template_name "llm_chatbot_rag_demo" }}
+        {{ $server_location = getenv "HUGO_LLM_API" | base64Encode }}
+        console.log('Using RAG API.');
+    {{ else if eq .Params.demo_template_name "llm_chatbot_first_demo" }}
+        {{ $server_location = getenv "HUGO_RAG_API" | base64Encode }}
+        console.log('Using LLM API.');
+    {{ else }}
+        console.log('No server location provided.');
+    {{ end }}
+
+
+    const server_location_encoded = '{{ $server_location }}';
 
 
     function startPingCheck() {
