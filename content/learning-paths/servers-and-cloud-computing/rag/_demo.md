@@ -21,7 +21,7 @@ example_user_prompts:
   - Do Hyperscan and Snort3 work on Graviton4?
   - How can I easily build multi-architecture Docker images?
       
-rag_data_cutoff_date: 2025/01/13
+rag_data_cutoff_date: 2025/01/17
 
 title_chatbot_area: Arm RAG Demo
 

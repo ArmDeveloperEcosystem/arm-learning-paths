@@ -42,12 +42,6 @@ Called from:
 <!-- Demo page only -->
 {{ if and $is_content (hasPrefix .File.TranslationBaseName "_demo")}}
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script>
-    // Your script using `marked`
-    const markdownString = "# Hello, Markdown!";
-    const htmlContent = marked(markdownString);
-    console.log(htmlContent);
-  </script>
 {{end}}
 
 <!-- Also add prism to any _demo page that needs it, set as a 'prismjs' variable -->
