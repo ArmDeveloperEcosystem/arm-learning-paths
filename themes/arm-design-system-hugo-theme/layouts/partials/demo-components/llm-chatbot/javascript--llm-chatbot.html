@@ -232,6 +232,38 @@ Calls to:
 
         const renderer = new marked.Renderer();
 
+        renderer.link = (link) => {
+            // Extract the link parts
+            const href = link.href;
+            const text = link.text;
+            const title = link.title;
+                        
+            // Escape href to prevent XSS attacks
+            const escapedHref = href
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+
+            // Escape title if it exists
+            const escapedTitle = title
+                ? title
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;')
+                : '';
+
+            // Create the link element with target="_blank"
+            return `
+                <a href="${escapedHref}"${escapedTitle ? ` title="${escapedTitle}"` : ''} target="_blank" rel="noopener noreferrer">
+                    ${text}
+                </a>
+            `.replace(/\n\s+/g, ''); // Remove unnecessary newlines and spaces
+        };
+
         // Customize the code block rendering
         renderer.code = (code, language) => {
             var language = code['lang'];
