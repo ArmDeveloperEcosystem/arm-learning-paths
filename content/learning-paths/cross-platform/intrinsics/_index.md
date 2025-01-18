@@ -7,7 +7,7 @@ description: Learn how to port architecture-specific intrinsics to Arm processor
 layout: learningpathall
 learning_objectives:
 - Describe what intrinsics are and how to find them in code.
-- Evaluate options and use header-only libraries to port architecture-specific intrinics
+- Evaluate options and use header-only libraries to port architecture-specific intrinsics
   to Arm.
 learning_path_main_page: 'yes'
 minutes_to_complete: 30
@@ -36,7 +36,7 @@ tools_software_languages:
 
 weight: 1
 who_is_this_for: This is an advanced topic for software developers interested in porting
-  architecture specific intrinics to Arm processors.
+  architecture specific intrinsics to Arm processors.
 
 ### Cross-platform metadata only
 shared_path: true
