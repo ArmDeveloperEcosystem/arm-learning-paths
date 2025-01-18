@@ -261,8 +261,8 @@
 }
 .chatbot-response-text * {
     max-width: 98%;
-    margin-bottom:0;
-    line-height: 1.2;
+    margin-bottom: 8px;
+    line-height: 1.3;
 }
 
 
