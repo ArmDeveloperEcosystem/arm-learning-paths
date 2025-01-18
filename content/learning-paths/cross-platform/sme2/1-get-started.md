@@ -20,7 +20,7 @@ SME2 hardware is not widely deployed at the time of writing, so you will require
 
 ## Prerequisites
 
-This learning path assumes that you have ``git`` and ``docker`` installed on your machine.
+You require ``git`` and ``docker`` installed on your machine.
 
 ### git
 
@@ -144,19 +144,18 @@ SME2-learning-path.git/
 ```
 
 It contains:
-- The code examples that this Learning Path uses.
-- The ``Makefile`` that builds the code examples.
-- The ``run-fvp.sh`` shell script that runs the FVP.
-- The ``docker/`` directory that contains ``docker``-related material.
-  ``assets.source_me`` provides the FVP and compiler toolchain references,
-  ``sme2-environment.docker`` is the docker receipe to build the container that
-  you will use, ``build-my-container.sh`` is the shell script you should use in
-  case you want to build the docker container (but you don't have to, ready-made
+- Code examples.
+- A ``Makefile`` that builds the code examples.
+- A shell script called ``run-fvp.sh`` that runs the FVP.
+- A directory called ``docker/`` that contains materials related to ``docker``.
+- A script called ``assets.source_me`` that provides the FVP and compiler toolchain references.
+- A docker receipe called ``sme2-environment.docker`` to build the container that
+  you will use.
+- A shell script called ``build-my-container.sh`` that you can use if you want to build the docker container. This is not essential however, as ready-made
   images are made available for you ). Lastly ``build-all-containers.sh`` is the
   script that was used to create the multi-arch (x86_64 and aarch64 support)
   image for you to download.
-- ``.devcontainer/devcontainer.json`` is a configuration script for VSCode to be
-  able to use the container from the IDE (read below).
+- A configuration script for VSCode to be able to use the container from the IDE called ``.devcontainer/devcontainer.json`` (see below).
 
 Change directory to your checkout:
 
@@ -164,23 +163,24 @@ Change directory to your checkout:
 cd SME2-learning-path.git
 ```
 
-From now on, all instructions in this learning path assume your current
+From this point in the Learning Path, all instructions assume your current
 directory is ``SME2-learning-path.git``.
 
 ## Using the environment
 
 Docker provides you with a way to execute commands in a different environment,
-where all necessary tools are available without cluttering your machine. You can:
-- use docker directly from the command line, for example when you are working
-  from a terminal,
-- configure VSCode to run all the commands in the docker environment.
+where all necessary tools are available without cluttering your machine. 
+
+You can use docker in the following ways:
+- You can use docker directly from the command line. For example, when you are working
+  from a terminal.
+- You can use docker to configure VSCode to run all the commands in the docker environment.
 
 ### Directly in a terminal
 
-When a command has to be executed in the docker container environment, you have
-to prepend it with instructions on the command line so that your shell will
-execute them in the container. For example, to execute ``COMMAND ARGUMENTS`` in
-the SME2 docker container, the command line looks like:
+When a command is executed in the docker container environment, you must prepend it with instructions on the command line so that your shell executes them in the container. 
+
+For example, to execute ``COMMAND ARGUMENTS`` in the SME2 docker container, the command line looks like:
 
 ```SH
 docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v1 COMMAND ARGUMENTS
@@ -192,7 +192,7 @@ image, and mounts the current working directory (the ``SME2-learning-path.git``)
 inside the container to ``/work``, sets ``/work`` as the
 working directory and run ``COMMAND ARGUMENTS`` in this environment.
 
-For example, to run ``make``, you would have to type:
+For example, to run ``make``, you need to type:
 
 ```SH
 docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v1 make
@@ -202,8 +202,8 @@ docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-enviro
 
 Make sure you have the [Dev
 Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-extension installed. It should then be as easy as using the "Reopen in
-Container" menu entry as in figure 1 (it will automatically find and use
+extension installed. It should then be as easy as using the **Reopen in
+Container** menu entry as Figure 1 shows (it automatically finds and uses
 ``.devcontainer/devcontainer.json``):
 
 ![example image alt-text#center](VSCode.png "Figure 1. Using the Dev Containers extension")
@@ -211,7 +211,7 @@ Container" menu entry as in figure 1 (it will automatically find and use
 All your commands will now take place in the container, so no need to prepend
 them with some docker invocation, VSCode handles all this transparently for you.
 
-In the remainder of this learning path, the shell commands will show the docker
+In the remainder of this learning path, the shell commands show the docker
 invocation (so readers that don't use VSCode can copy the full command line),
 but you should only use the ``COMMAND ARGUMENTS`` part.
 
