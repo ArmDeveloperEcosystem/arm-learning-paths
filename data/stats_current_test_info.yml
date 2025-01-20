@@ -31,7 +31,7 @@ sw_categories:
     anaconda:
       readable_title: Anaconda
       tests_and_status:
-      - ubuntu:latest: passed
+      - ubuntu:latest: failed
     ansible:
       readable_title: Ansible
       tests_and_status:
