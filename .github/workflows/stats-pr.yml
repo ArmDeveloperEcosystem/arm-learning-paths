@@ -15,7 +15,6 @@ jobs:
           uses: actions/download-artifact@v4
           with:
             run-id: ${{ github.event.workflow_run.id }}
-            path: data
         - name: Display structure of downloaded files
           run: |
               ls -la data
