@@ -24,7 +24,7 @@ author_primary: Nobel Chowdary Mandepudi
 skilllevels: Advanced
 armips:
     - Neoverse
-subjects: LLM
+subjects: ML
 operatingsystems:
     - Linux
 tools_software_languages:
