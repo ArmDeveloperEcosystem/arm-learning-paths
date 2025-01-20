@@ -19,12 +19,11 @@ jobs:
           uses: actions/download-artifact@v4
           with:
             run-id: ${{ github.event.workflow_run.id }}
-            path: data/
             github-token: ${{ github.token }}
-        - name: Display structure of downloaded files
+        - name: Move stats file
           run: |
-              ls -la data
-              git status
+              mv stats_current_test_info/stats_current_test_info.yml data/stats_current_test_info.yml
+              rm -rf stats_current_test_info
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v6
           if: success()
