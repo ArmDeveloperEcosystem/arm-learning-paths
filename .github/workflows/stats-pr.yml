@@ -3,6 +3,7 @@ on:
     workflow_run:
       workflows: ["Test Learning Path"]
       types: [completed]
+permissions: read-all
 jobs:
   stats-pr:
     runs-on: arm-linux-runner
@@ -15,6 +16,7 @@ jobs:
           uses: actions/download-artifact@v4
           with:
             run-id: ${{ github.event.workflow_run.id }}
+            github-token: ${{ github.token }}
         - name: Display structure of downloaded files
           run: |
               ls -la data
