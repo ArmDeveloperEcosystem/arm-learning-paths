@@ -149,7 +149,7 @@ sw_categories:
     rust_embedded:
       readable_title: Rust for Embedded Applications
       tests_and_status:
-        - ubuntu:latest: passed
+      - ubuntu:latest: passed
     ssh:
       readable_title: SSH
       tests_and_status:
