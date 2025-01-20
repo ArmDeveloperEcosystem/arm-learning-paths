@@ -20,7 +20,6 @@ jobs:
           with:
             # Run ID of the workflow that uploaded the artifact
             run-id: ${{ github.event.workflow_run.id }}
-            path: data/
             github-token: ${{ github.token }}
         - name: Move stats file
           # Unpack the artifact and move the stats file to the correct location
