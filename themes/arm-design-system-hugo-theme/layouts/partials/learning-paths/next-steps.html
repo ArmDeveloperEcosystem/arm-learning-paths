@@ -49,13 +49,16 @@ Called from:
 
   </style>
 
+
 <div class="c-row">
     <div class="c-col">
         <h2>Share</h2>
-        <p>Show your network what you've learned by sharing this Learning Path with others.</p>
+        <p>Share what you've learned.</p>
         <div class="social-sharing">
             <div class="social-icons">
-                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ (index .learningpathfiles 0).Permalink }}"
+                <a {{/*href="https://www.linkedin.com/sharing/share-offsite/?url={{ (index .learningpathfiles 0).Permalink }}" */}}
+                
+                href="https://www.linkedin.com/shareArticle?mini=true&url={{ (absURL (index .learningpathfiles 0).Permalink) | urlquery }}&title={{ (index .learningpathfiles 0).Title | urlquery }}&summary=Check%20out%20this%20insightful%20Arm%20Learning%20Path&source=Arm%20Learning%20Paths"
                 onclick="window.open(this.href, 'linkedin-share', 'width=900,height=650'); return false;"
                 title="Share via LinkedIn">
                     <svg class="share-icon">
@@ -79,7 +82,7 @@ Called from:
                     </svg>
                 </a>
                 
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ (index .learningpathfiles 0).Permalink }}" 
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ (absURL (index .learningpathfiles 0).Permalink) | urlquery }}" 
                 onclick="window.open(this.href, 'facebook-share', 'width=900,height=650'); return false;"
                 title="Share via Facebook">
                     <svg class="share-icon">
@@ -87,7 +90,7 @@ Called from:
                     </svg>
                 </a>
             
-                <a href="mailto:?subject=Check out this Arm Learning Path&body={{(index .learningpathfiles 0).Title}}: {{ (index .learningpathfiles 0).Permalink }}" target="_blank" 
+                <a href="mailto:?subject=Check out this Arm Learning Path&body={{(index .learningpathfiles 0).Title}}: {{ absURL (index .learningpathfiles 0).Permalink }}" target="_blank" 
                 title="Share via email">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-mail"></use>
@@ -173,7 +176,7 @@ Called from:
 
             <div id="arm-dev-program-div" class="content-box">
                 <h4>Talk with Arm Experts</h4>
-                <p>Join the Arm Developer Program to share ideas, ask questions, and interact with fellow peers — all with the support of Arm’s own subject-matter experts.</p>
+                <p>Join the Arm Developer Program to share ideas, ask questions, and explore solutions with the support of the developer community.</p>
                 <ads-cta-button id="join-dev-program" level="primary" sr-label="primary button">Join now</ads-cta-button>    
                 <script>
                     document.getElementById("join-dev-program").onclick = function () {
