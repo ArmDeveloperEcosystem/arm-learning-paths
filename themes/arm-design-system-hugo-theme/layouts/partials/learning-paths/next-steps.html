@@ -185,16 +185,46 @@ Called from:
 
             <div id="explore-tags-div" class="content-box">
                 {{ $csv := resources.Get "events.csv" }}
-                {{ $csv_content := $csv | transform.Unmarshal (dict "delimiter" ";") }}
+                {{ $csv_content := $csv | transform.Unmarshal (dict "delimiter" ",") }}
 
                 {{ $event_i := "" }}
+                {{ $event_priority := 100 }}
 
                 {{ $lp_category := (index .learningpathfiles 0).Parent.Title }}
-                {{ range $i, $row := $csv_content }}
-                    {{ $event_categories := split (index $row 9) ", " }}
+                {{ $lp_category_title := "" }}
+                
 
-                    {{ if in $event_categories $lp_category }}
-                        {{ if eq $event_i "" }}
+
+
+                {{/* if lp_category is 'cross platform', get first category listed in its metadata */}}
+                {{ if eq $lp_category "Cross Platform" }}
+                    {{ $lp_category = index (index .learningpathfiles 0).Params.shared_between 0 }}
+                    {{ $dirs := readDir "content/learning-paths" }}
+                    {{ range $dirs }}
+                        {{ if eq .Name $lp_category}}
+                            {{ $indexFilePath := printf "content/learning-paths/%s/_index.md" .Name }}
+                            {{ $indexFile := readFile $indexFilePath }}
+                            {{ $indexParams := transform.Unmarshal $indexFile }}
+                            {{ $lp_category_title = $indexParams.title }}
+                        {{end}}
+                    {{ end }}
+                {{else}}
+                    {{ $lp_category_title = $lp_category }}
+                {{end}}
+
+                {{/* if Learning Path has AI or ML as it's metadata 'subjects' set category to AI/ML */}}
+                {{ if eq (index .learningpathfiles 0).Params.subjects "ML" }}
+                    {{ $lp_category_title = "ML" }}
+                    {{ $lp_category = "ML" }}
+                {{ end }}
+
+                {{ range $i, $row := $csv_content }}
+                    {{ $event_categories := split (index $row 9) "; " }}
+
+                    {{ if in $event_categories $lp_category_title }}
+                        {{/* If event has a higher priority than the previous one, update the event_i */}}
+                        {{ if or (eq $event_i "") (gt $event_priority (int (index $row 1))) }}
+                            {{ $event_priority = (int (index $row 1)) }}
                             {{ $event_i = $i}}
                         {{ end }}
                     {{ end }}
@@ -216,7 +246,15 @@ Called from:
                     </script>
 
                 {{ else }}
-                    <p>No events found in category {{ $lp_category }}</p>
+                    <h4>Learn more on Arm Developer</h4>
+
+                    <p>Visit Developer.arm.com to continue your learning journey.</p>
+                    <ads-cta-button id="dev-cta" level="secondary">Developer.arm.com</ads-cta-button>
+                    <script>
+                        document.getElementById("dev-cta").onclick = function () {
+                        window.open("https://developer.arm.com","_blank");
+                        };
+                    </script>
                 {{ end }}
 
 
