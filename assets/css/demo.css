@@ -21,17 +21,17 @@
 
 
 .eq-width-cols {
-    max-width: calc(100% / var(--column-count)); /* Calculate the max-width based on the number of columns */
+    max-width: calc(90% / var(--column-count)); /* Calculate the max-width based on the number of columns */
 }
 @media (min-width: 992px) { /* lg */
     .eq-width-cols {
-        max-width: calc(100% / var(--column-count));  /* Calculate the max-width based on the number of columns */
+        max-width: calc(90% / var(--column-count));  /* Calculate the max-width based on the number of columns */
     }
 }
 
 @media (max-width: 576px) { /* xs */
     .eq-width-cols {
-        max-width: 100%;
+        max-width: 90%;
         flex-basis: 100%; /* Stacks the columns vertically on smaller screens */
     }
 }
@@ -114,7 +114,9 @@
 /* Demo section */
 
 #all-messages-div {
-    height: 300px;
+    min-height: 300px;
+    max-height: 600px;
+    height: auto;
     display: flex;
     flex-direction: column-reverse;
     overflow-y: auto;
@@ -249,6 +251,18 @@
     font-size: 14px!important;
     margin-top: 4px;
     font-style: italic;
+}
+
+.chatbot-response-text {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.chatbot-response-text * {
+    max-width: 98%;
+    margin-bottom: 8px;
+    line-height: 1.3;
 }
 
 

@@ -31,8 +31,8 @@ shared_path: true
 shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
-    - embedded-systems
-    - smartphones-and-mobile
+    - embedded-and-microcontrollers
+    - mobile-graphics-and-gaming
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

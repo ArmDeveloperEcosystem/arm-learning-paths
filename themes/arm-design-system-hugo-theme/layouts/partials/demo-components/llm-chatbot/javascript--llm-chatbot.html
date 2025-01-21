@@ -13,7 +13,6 @@ Calls to:
 */}}
 
 
-
 <script>
 
 
@@ -34,10 +33,6 @@ Calls to:
             }, 5);
         });
     }
-
-
-
-
 
 
     function insertRandomSentenceWithDelay(div) {
@@ -111,10 +106,6 @@ Calls to:
     }
     
 
-
-
-
-
     function onVisibilityChange(entries, observer) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -123,8 +114,6 @@ Calls to:
             }
         });
     }
-
-
 
 
     function getMessageForNumber(num) {
@@ -227,10 +216,105 @@ Calls to:
         const chatbot_response_div = chatbot_messages[0];
         const chatbot_message_span = chatbot_response_div.querySelector('span');
 
+        // Append the new chunk to the existing content
         chatbot_message_span.textContent += messageData;
-
+            
     }
 
+
+    function markdownifyMessage() {
+        // Convert the combined text content to markdown
+        const all_messages_div = document.getElementById('all-messages-div');
+        const chatbot_messages = all_messages_div.getElementsByClassName('chatbot-message');        
+        const chatbot_response_div = chatbot_messages[0];
+        const chatbot_message_span = chatbot_response_div.querySelector('span');
+        const markdownContent = chatbot_message_span.textContent;
+
+        const renderer = new marked.Renderer();
+
+        renderer.link = (link) => {
+            // Extract the link parts
+            const href = link.href;
+            const text = link.text;
+            const title = link.title;
+                        
+            // Escape href to prevent XSS attacks
+            const escapedHref = href
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+
+            // Escape title if it exists
+            const escapedTitle = title
+                ? title
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;')
+                : '';
+
+            // Create the link element with target="_blank"
+            return `
+                <a href="${escapedHref}"${escapedTitle ? ` title="${escapedTitle}"` : ''} target="_blank" rel="noopener noreferrer">
+                    ${text}
+                </a>
+            `.replace(/\n\s+/g, ''); // Remove unnecessary newlines and spaces
+        };
+
+        // Customize the code block rendering
+        renderer.code = (code, language) => {
+            var language = code['lang'];
+            
+            // Ensure the language class is valid for Prism.js
+            const languageClass = language ? `language-${language}` : 'language-none';
+
+            // Escape the code content to prevent XSS
+            const escapedCode = code['text']
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;')
+                .trim();
+
+            // Wrap the <code> block with the <div class="code-toolbar">
+            return `
+        <div class="code-toolbar">
+            <pre class="${languageClass}">
+                <code class="${languageClass}">${escapedCode.trim()}</code>
+            </pre>
+        </div>
+               `.replace(/\n\s+/g, ''); // Remove extra newlines and spaces between tags
+
+        };
+
+        // Set the custom renderer to `marked`
+        marked.setOptions({
+            renderer: renderer,
+            gfm: true, // Enable GitHub Flavored Markdown
+            breaks: true, // Enable line breaks
+            highlight: (code, lang) => {
+                // Optional: Use Prism.js to highlight code
+                if (Prism.languages[lang]) {
+                    return Prism.highlight(code, Prism.languages[lang], lang);
+                }
+                return code; // Return unhighlighted code if language is not recognized
+            }
+        });
+
+        // Parse the markdown content
+        const htmlContent = marked.parse(markdownContent);
+
+        console.log(markdownContent);
+        console.log(htmlContent);
+
+        // Update the span with the rendered HTML
+        chatbot_message_span.innerHTML = htmlContent;
+        Prism.highlightAll(); // Re-highlight the code blocks
+    }
 
     function showPopupPostConnection(message,type,keep_last_message=false) {
 
@@ -281,6 +365,8 @@ Calls to:
         popup_div.classList.remove('hide-popup');
         popup_div.classList.add('show-popup');
     }
+    
+
     function hidePopup() {
         var popup_div = document.getElementById('notification-popup');
 
@@ -289,198 +375,229 @@ Calls to:
         popup_div.classList.add('hide-popup');
     }
     
+    function hideExamplePrompts() {
+        var example_prompts = document.getElementById('example-prompts');
+        if (example_prompts) {
+            example_prompts.style.display = 'none';
+        }
+    }
+
+
+    // Gather all chat messages in the UI to send to the server in an array
+    function prepareConversationData() {
+        const messages_div = document.getElementById('all-messages-div');
+        const all_messages = messages_div.children;
+        
+        var conversation_data = [];
+
+        for (let i = 0; i < all_messages.length; i++) {
+            const messages_div = all_messages[i];
+            const message_text = messages_div.querySelector('span').textContent;
+
+            if (messages_div.classList.contains('user-message')) {
+                conversation_data.push({ sender: "user", text: message_text });
+            } else if (messages_div.classList.contains('chatbot-message')) {
+                conversation_data.push({ sender: "model", text: message_text });
+            }
+        }
+
+        // remove useless unfilled model placeholder
+        conversation_data.reverse();
+        conversation_data.pop();
+
+        return conversation_data;
+    }
+
+    // Add the user's input to the chat history, and spawn a new thinking chatbot response placeholder
+    function addUserMessage_andChatbotPlaceholder(user_input) {
+        const all_messages_div = document.getElementById('all-messages-div');
+        const text_area = document.querySelector('#user-input-for-demo');
+
+        const user_div = document.createElement('div');
+        user_div.classList.add('user-message');
+
+        const user_span_for_message = document.createElement('span');
+        user_div.appendChild(user_span_for_message);
+        user_span_for_message.textContent = user_input;
+
+        if (Array.from(user_input).length >= text_area.maxLength) {
+            const user_text_limit_update = document.createElement('div');
+            user_text_limit_update.classList.add('char-limit-mesg');
+            user_div.appendChild(user_text_limit_update);
+            user_text_limit_update.textContent = "Char limit reached - truncated to 10,000.";
+        }
+
+
+        all_messages_div.insertBefore(user_div, all_messages_div.firstChild);
 
 
 
-// Gather all chat messages in the UI to send to the server in an array
-function prepareConversationData() {
-    const messages_div = document.getElementById('all-messages-div');
-    const all_messages = messages_div.children;
+
+        const chatbot_div = document.createElement('div');
+        chatbot_div.classList.add('chatbot-message');
+
+        const new_icon = document.createElement('img');
+        {{ $chatbot_icon := printf "%s%s" (replaceRE "/[^/]+/?$" "/" .RelPermalink) "chatbot-icon.png" }}
+        new_icon.setAttribute('src', '{{$chatbot_icon}}');
+        new_icon.setAttribute('style', 'margin-right: 10px;');
+        new_icon.setAttribute('alt', 'Chatbot Icon');
     
-    var conversation_data = [];
+        const new_loader = document.createElement('ads-loader');
 
-    for (let i = 0; i < all_messages.length; i++) {
-        const messages_div = all_messages[i];
-        const message_text = messages_div.querySelector('span').textContent;
-
-        if (messages_div.classList.contains('user-message')) {
-            conversation_data.push({ sender: "user", text: message_text });
-        } else if (messages_div.classList.contains('chatbot-message')) {
-            conversation_data.push({ sender: "model", text: message_text });
-        }
-    }
-
-    // remove useless unfilled model placeholder
-    conversation_data.reverse();
-    conversation_data.pop();
-
-    return conversation_data;
-}
-
-// Add the user's input to the chat history, and spawn a new thinking chatbot response placeholder
-function addUserMessage_andChatbotPlaceholder(user_input) {
-    const all_messages_div = document.getElementById('all-messages-div');
-    const text_area = document.querySelector('#user-input-for-demo');
-
-    const user_div = document.createElement('div');
-    user_div.classList.add('user-message');
-
-    const user_span_for_message = document.createElement('span');
-    user_div.appendChild(user_span_for_message);
-    user_span_for_message.textContent = user_input;
-
-    if (Array.from(user_input).length >= text_area.maxLength) {
-        const user_text_limit_update = document.createElement('div');
-        user_text_limit_update.classList.add('char-limit-mesg');
-        user_div.appendChild(user_text_limit_update);
-        user_text_limit_update.textContent = "Char limit reached - truncated to 10,000.";
-    }
+        const chatbot_span_for_message = document.createElement('span');
+        chatbot_span_for_message.classList.add('chatbot-response-text');
 
 
-    all_messages_div.insertBefore(user_div, all_messages_div.firstChild);
-
-
-
-
-    const chatbot_div = document.createElement('div');
-    chatbot_div.classList.add('chatbot-message');
-
-    const new_icon = document.createElement('img');
-    {{ $chatbot_icon := printf "%s%s" (replaceRE "/[^/]+/?$" "/" .RelPermalink) "chatbot-icon.png" }}
-    new_icon.setAttribute('src', '{{$chatbot_icon}}');
-    new_icon.setAttribute('style', 'margin-right: 10px;');
-    new_icon.setAttribute('alt', 'Chatbot Icon');
-  
-    const new_loader = document.createElement('ads-loader');
-
-    const chatbot_span_for_message = document.createElement('span');
-
-    chatbot_div.appendChild(new_icon);
-    chatbot_span_for_message.appendChild(new_loader);
-    chatbot_div.appendChild(chatbot_span_for_message);
-    all_messages_div.insertBefore(chatbot_div, all_messages_div.firstChild);
-
-}
-
-// Check textarea content and enable/disable the button
-function toggleButton() {
-    const text_area = document.querySelector('#user-input-for-demo');
-    const submit_button = document.getElementById("submit-button");
-    const submit_icon = submit_button.querySelector("i");
-
-    if (connectionStatus.isActive) {
-        // Make submit icon a spinner, if not already
-        submit_icon.classList.remove('fa-arrow-up');
-        submit_icon.classList.add('fa-spinner');
-        submit_icon.classList.add('fa-spin');
+        chatbot_div.appendChild(new_icon);
+        chatbot_span_for_message.appendChild(new_loader);
+        chatbot_div.appendChild(chatbot_span_for_message);
+        all_messages_div.insertBefore(chatbot_div, all_messages_div.firstChild);
 
     }
-    else {
-        // Make submit icon a message sender, if not already
-        submit_icon.classList.remove('fa-spinner');
-        submit_icon.classList.remove('fa-spin');
-        submit_icon.classList.add('fa-arrow-up');
-    }
 
-    if (text_area.value.trim() === "") {
-        submit_button.disabled = true;
-    } else {
-        if (!connectionStatus.isActive) { // Don't enable button if there is a live connection. Prevents overdoing messages.
-            submit_button.disabled = false;
-        }
-    }
-}
+    // Check textarea content and enable/disable the button
+    function toggleButton() {
+        const text_area = document.querySelector('#user-input-for-demo');
+        const submit_button = document.getElementById("submit-button");
+        const submit_icon = submit_button.querySelector("i");
 
-// Check if textarea input makes a new line
-function hidePopupOnInputHeightIncrease() {
-    const text_area = document.getElementById('user-input-for-demo');
-    const popup = document.getElementById('notification-popup');
-    if (text_area.scrollHeight > 44) {
-        popup.classList.remove('show-popup');
-        popup.classList.add('hide-popup');
-    }
-}
+        if (connectionStatus.isActive) {
+            // Make submit icon a spinner, if not already
+            submit_icon.classList.remove('fa-arrow-up');
+            submit_icon.classList.add('fa-spinner');
+            submit_icon.classList.add('fa-spin');
 
-function adjustInputHeight() {
-    const text_area = document.getElementById('user-input-for-demo');
-    text_area.style.height = 'auto'; // Reset height to recalculate
-    text_area.style.height = (text_area.scrollHeight > text_area.clientHeight ? text_area.scrollHeight : text_area.clientHeight) + 'px';
-    hidePopupOnInputHeightIncrease(); // Auto-hide popup if height is above default (multiple lines)
-}
-
-
-function tellUserServerIsThinking() {
-    document.getElementById('all_messages_div')
-    const current_chatbot_message = document.querySelector("#all-messages-div .chatbot-message");
-    if (current_chatbot_message) {
-        const ads_loader_element = current_chatbot_message.querySelector("span ads-loader");
-
-        ads_loader_element.setAttribute('label','Still thinking, one moment...')
-    }    
-}
-
-
-// Event listener additions to key demo components
-document.addEventListener("DOMContentLoaded", function() {
-    /*
-        Event Listeners
-            1) Reset Chat button        -> clears all messages
-            2) User submits text        -> Clear msg box, add text to UI, send chat history to server
-            3) User enters text         -> enables input button, sets input height dynamically
-    */
-
-    var submit_button = document.getElementById("submit-button");
-    var text_area     = document.getElementById("user-input-for-demo");
-
-    // 'Reset chat'
-    document.querySelector('#reset-demo-txt').addEventListener('click', function() {
-        document.querySelector('#all-messages-div').innerHTML = ""; // Clear all messages
-    });
-
-    // User submits text
-    submit_button.addEventListener('click', function() {
-        const text_area = document.querySelector('#user-input-for-demo');        
-        // Get user's message
-        const user_input = text_area.value;
-        if (user_input === "") {           
         }
         else {
-            // Clear message box & toggle button
-            text_area.value = '';
+            // Make submit icon a message sender, if not already
+            submit_icon.classList.remove('fa-spinner');
+            submit_icon.classList.remove('fa-spin');
+            submit_icon.classList.add('fa-arrow-up');
+        }
+
+        if (text_area.value.trim() === "") {
+            submit_button.disabled = true;
+        } else {
+            if (!connectionStatus.isActive) { // Don't enable button if there is a live connection. Prevents overdoing messages.
+                submit_button.disabled = false;
+            }
+        }
+    }
+
+    // Check if textarea input makes a new line
+    function hidePopupOnInputHeightIncrease() {
+        const text_area = document.getElementById('user-input-for-demo');
+        const popup = document.getElementById('notification-popup');
+        if (text_area.scrollHeight > 44) {
+            popup.classList.remove('show-popup');
+            popup.classList.add('hide-popup');
+        }
+    }
+
+    function adjustInputHeight() {
+        const text_area = document.getElementById('user-input-for-demo');
+        text_area.style.height = 'auto'; // Reset height to recalculate
+        text_area.style.height = (text_area.scrollHeight > text_area.clientHeight ? text_area.scrollHeight : text_area.clientHeight) + 'px';
+        hidePopupOnInputHeightIncrease(); // Auto-hide popup if height is above default (multiple lines)
+    }
+
+
+    function tellUserServerIsThinking() {
+        document.getElementById('all_messages_div')
+        const current_chatbot_message = document.querySelector("#all-messages-div .chatbot-message");
+        if (current_chatbot_message) {
+            const ads_loader_element = current_chatbot_message.querySelector("span ads-loader");
+
+            ads_loader_element.setAttribute('label','Still thinking, one moment...')
+        }    
+    }
+
+
+    // Event listener additions to key demo components
+    document.addEventListener("DOMContentLoaded", function() {
+        /*
+            Event Listeners
+                1) Reset Chat button           -> clears all messages
+                2) User submits text           -> Clear msg box, add text to UI, send chat history to server
+                3) User enters text            -> enables input button, sets input height dynamically
+                4) User selects example prompt -> sends prompt to history and server
+        */
+
+        var submit_button = document.getElementById("submit-button");
+        var text_area     = document.getElementById("user-input-for-demo");
+
+        // (1) 'Reset chat'
+        document.querySelector('#reset-demo-txt').addEventListener('click', function() {
+            document.querySelector('#all-messages-div').innerHTML = ""; // Clear all messages
+        });
+
+        // (2a) User submits text
+        submit_button.addEventListener('click', function() {
+            const text_area = document.querySelector('#user-input-for-demo');        
+            // Get user's message
+            const user_input = text_area.value;
+            if (user_input === "") {           
+            }
+            else {
+                // Clear message box & toggle button
+                text_area.value = '';
+                adjustInputHeight();
+                toggleButton();
+                text_area.focus();
+
+                // Add new chat message in UI
+                addUserMessage_andChatbotPlaceholder(user_input);
+
+                // Get history of user chatbot interaction to send
+                const conversation_history = prepareConversationData();
+
+                // Send to server via API
+                sendToServer(conversation_history);
+            }
+        });
+
+        // (2b) User hits enter in textinput
+        text_area.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();     // Prevents the default newline behavior
+                submit_button.click();      // Triggers the click event on the submit button
+            }
+        });
+
+        // (3) User enters any text in textinput
+        text_area.addEventListener('input', function() {
             adjustInputHeight();
-            toggleButton();
-            text_area.focus();
+            toggleButton();         // enable input button
+        });
 
-            // Add new chat message in UI
-            addUserMessage_andChatbotPlaceholder(user_input);
+        // (4) User selects example prompt
+        document.querySelectorAll('.example-prompt').forEach((prompt) => {
+            prompt.addEventListener('click', function() {
+                const prompt_text = prompt.textContent.trim();
 
-            // Get history of user chatbot interaction to send
-            const conversation_history = prepareConversationData();
+                // Clear message box & toggle button
+                text_area.value = '';
+                adjustInputHeight();
+                toggleButton();
+                text_area.focus();
 
-            // Send to server via API
-            sendToServer(conversation_history);
-        }
+                // Add new chat message in UI
+                addUserMessage_andChatbotPlaceholder(prompt_text);
+
+                // Get history of user chatbot interaction to send
+                const conversation_history = prepareConversationData();
+
+                // Send to server via API
+                sendToServer(conversation_history);
+            });
+        });
+
+
+
+        startPingCheck();   // Probe server connection to see if active or not
+        
+
     });
-
-    // User enters any text in textinput
-    text_area.addEventListener('input', function() {
-        adjustInputHeight();
-        toggleButton();         // enable input button
-    });
-
-    // User hits enter in textinput
-    text_area.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();     // Prevents the default newline behavior
-            submit_button.click();      // Triggers the click event on the submit button
-        }
-    });
-
-
-    startPingCheck();   // Probe server connection to see if active or not
-    
-
-});
 
 
 
@@ -488,7 +605,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 (function() {
-    const server_location_encoded = '{{ getenv "HUGO_LLM_API" | base64Encode }}';
+
+    {{/* Get server location from GH Secrets */}}
+    {{ $server_location := "" }};
+
+    {{ if eq .Params.demo_template_name "llm_chatbot_rag_demo" }}
+        {{ $server_location = getenv "HUGO_RAG_API" | base64Encode }}
+        console.log('Using RAG API.');
+    {{ else if eq .Params.demo_template_name "llm_chatbot_first_demo" }}
+        {{ $server_location = getenv "HUGO_LLM_API" | base64Encode }}
+        console.log('Using LLM API.');
+    {{ else }}
+        console.log('No server location provided.');
+    {{ end }}
+
+    const server_location_encoded = '{{ $server_location }}';
 
 
     function startPingCheck() {
@@ -559,6 +690,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function sendToServer(data) {
         hidePopup();    // Hide previous messages, to make room for others or clear for responses
+        hideExamplePrompts(); // Hide example prompts if they are visible
       
         // Set timeout
         const controller = new AbortController();
@@ -634,6 +766,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 }
                                 else if (return_json.message_type === 'completion_metadata') {
                                     updateLLMMetrics(return_json.value);
+                                    markdownifyMessage();
                                 }
                                 else {
                                     showPopupPostConnection("Unexpected server response - try a new message or return later.","error");                                                

@@ -28,7 +28,6 @@ tools_software_languages_filter:
 - Arm Development Studio: 2
 - Arm64EC: 1
 - assembly: 1
-- Automotive: 1
 - C: 2
 - C#: 6
 - C++: 3

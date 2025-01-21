@@ -10,12 +10,13 @@ layout: "learningpathall"
 
 ## Add a new Learning Path
 
-To add a new Learning Path, first decide the appropriate category. There are 5 categories into which you can contribute content:
+To add a new Learning Path, first decide the appropriate category. There are 6 categories into which you can contribute content:
 * servers-and-cloud-computing
 * laptops-and-desktops
-* embedded-systems
-* microcontrollers
-* smartphones-and-mobile
+* embedded-and-microcontrollers
+* iot
+* mobile-graphics-and-gaming
+* automotive
 
 {{% notice Note%}}
 Place your Learning Path in the category closest to the environment where the software runs. The tags on the [front page of the website](/) help explain the categories. Feel free to ask on GitHub if you are unsure which category best matches your Learning Path. 
@@ -27,9 +28,9 @@ You can also add a new install guide. Install guides are short descriptions prov
 
 This section creates a new Learning Path. Refer to the next section to create a new install guide.
 
-Start creating your Learning Path from the template provided using a straightforward one-line command. For example, to create a new Learning Path with the directory name `my-new-learning-path` under the `microcontrollers` category, run the following command from the root directory of this project:
+Start creating your Learning Path from the template provided using a straightforward one-line command. For example, to create a new Learning Path with the directory name `my-new-learning-path` under the `embedded-and-microcontrollers` category, run the following command from the root directory of this project:
 ```bash
-hugo new --kind learning-path learning-paths/microcontrollers/my-new-learning-path
+hugo new --kind learning-path learning-paths/embedded-and-microcontrollers/my-new-learning-path
 ```
 Result: The following markdown files are added to the `my-new-learning-path` directory:
 
@@ -39,7 +40,6 @@ Result: The following markdown files are added to the `my-new-learning-path` dir
 | _index.md             | This file contains the title, target audience, and tagging metadata for your new Learning Path. The next step of this Learning Path explains these metadata elements and how to complete them correctly. |
 | how-to-1.md       | This file contains the how-to content for the Learning Path. Create multiple how-to pages to segment stages within your Learning Path. Each `how-to-N.md` file represents another distinct stage in your learning Path. Name this file to reflect the content you are adding. |
 | example-picture.png  | (optional) Pictures and screenshots can be included in this directory to appear in your Learning Path, Images can also be referenced as web links if you prefer. |
-| _review.md            | This file contains simple questions and answers to reinforce knowledge gained from your Learning Path.    |
 | _next_steps.md        | This file contains the next recommended steps and related resources for the reader to use on completion of this Learning Path.   |
 
 ### Order the content within the Learning Path

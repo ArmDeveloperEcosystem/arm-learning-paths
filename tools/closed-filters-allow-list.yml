@@ -33,28 +33,37 @@ subjects:
   laptops-and-desktops:
     - Migration to Arm
     - CI-CD
+    - ML
     - Performance and Architecture
     - Containers and Virtualization
-  smartphones-and-mobile:
+  mobile-graphics-and-gaming:
     - Gaming
     - AR-VR
     - Graphics
     - ML
     - CI-CD
     - Performance and Architecture
-  embedded-systems:
+  iot:
     - ML
     - CI-CD
     - Performance and Architecture
     - Containers and Virtualization
-    - Automotive 
-    - Storage
+    - Security
+    - Libraries
+    - Virtual Hardware
     - Embedded Linux
-  microcontrollers:
+  embedded-and-microcontrollers:
     - ML
     - CI-CD
     - Performance and Architecture
+    - Containers and Virtualization
     - Security
     - RTOS Fundamentals
     - Libraries
     - Virtual Hardware
+    - Embedded Linux
+  automotive:
+    - ML
+    - CI-CD
+    - Performance and Architecture
+    - Containers and Virtualization

@@ -23,6 +23,11 @@ name = "production"
 URL = "s3://arm-learning-paths?region=us-west-2"
 cloudFrontDistributionID = "E2NEF61QWPFRIH"
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
 [frontmatter]
 lastmod = ["lastmod", ":git", "date", "publishDate"]
 

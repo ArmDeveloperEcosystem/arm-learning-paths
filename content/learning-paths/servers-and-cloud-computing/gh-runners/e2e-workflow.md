@@ -162,6 +162,6 @@ Using what you have learned, navigate to the **Train, Test and Deploy** workflow
 
 The diagram below shows the end-to-end workflow, the relationship between the steps, and the time required to run each step:
 
-![#e2e-workflow](/images/e2e-workflow.png)
+![#e2e-workflow](images/e2e-workflow.png)
 
 You have run an MLOps workflow using GitHub Actions with Arm-hosted runners for managing all of the steps in your ML application's lifecycle.
