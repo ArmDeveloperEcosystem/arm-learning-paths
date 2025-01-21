@@ -11,9 +11,11 @@ learning_objectives:
     - Test the reference firmware stack.
 
 prerequisites:
-    - Some understanding of the Reference Design software stack architecture.
+    - Some understanding of the [Reference Design software stack architecture](https://neoverse-reference-design.docs.arm.com/en/latest/about/software_stack.html).
+    - Some understanding of the Linux command line.
+    - Optionally a basic understanding of Docker and containers.
 
-author_primary: Tom Pilar
+author_primary: Tom Pilar, Daniel Nguyen
 
 ### Tags
 skilllevels: Introductory
