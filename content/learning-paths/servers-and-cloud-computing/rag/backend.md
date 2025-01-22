@@ -34,7 +34,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Configure paths
-BASE_PATH = "/home/ubuntu"
+BASE_PATH = "$HOME"
 TEMP_DIR = os.path.join(BASE_PATH, "temp")
 VECTOR_DIR = os.path.join(BASE_PATH, "vector")
 MODEL_PATH = os.path.join(BASE_PATH, "models/llama3.1-8b-instruct.Q4_0_arm.gguf")

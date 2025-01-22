@@ -58,13 +58,13 @@ Navigate to the **Train Model** workflow under the `Actions` tab.
 
 Press the `Run workflow` button and run the workflow on the main branch. 
 
-![Train_workflow](/images/train_run.png)
+![Train_workflow](images/train_run.png)
 
 The workflow starts running. It takes about 8 minutes to complete. 
 
 Click on the workflow to see the output from each step of the workflow. 
 
-![Actions_train](/images/actions_train.png)
+![Actions_train](images/actions_train.png)
 
 Expand on the `Run training script` step to see the training loss per epoch followed by `Finished Training`.
 
@@ -86,7 +86,7 @@ Finished Training
 
 Confirm the model is generated and saved as an artifact in the job's overview.
 
-![#artifact](/images/artifact.png)
+![#artifact](images/artifact.png)
 
 This trained model artifact is used in the next step. 
 
@@ -143,7 +143,7 @@ Complete the steps below to modify the testing workflow file:
 
 4. Copy the 11-digit ID number from the end of the URL in your browser address bar.
 
-![#run-id](/images/run-id.png)
+![#run-id](images/run-id.png)
 
 5. Navigate back to the **Code** tab and open the file `.github/workflows/test-model.yml`. 
 
@@ -168,7 +168,7 @@ The workflow starts running.
 
 Click on the workflow to view the output from each step.
 
-![Actions_test](/images/actions_test.png)
+![Actions_test](images/actions_test.png)
 
 Click on the **Run testing script** step to see the accuracy of the model and a table of the results from the PyTorch profiler. 
 
