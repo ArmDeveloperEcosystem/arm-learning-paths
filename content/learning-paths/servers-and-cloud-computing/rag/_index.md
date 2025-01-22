@@ -13,6 +13,7 @@ learning_objectives:
     - Monitor and analyze inference performance metrics.
 
 prerequisites:
+    - A Google Cloud Axion (or other Arm) compute instance with at least 16 cores, 8GB of RAM, and 32GB disk space.
     - Basic understanding of Python and ML concepts.
     - Familiarity with REST APIs and web services.
     - Basic knowledge of vector databases.

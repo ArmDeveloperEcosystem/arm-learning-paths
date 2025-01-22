@@ -7,15 +7,27 @@ layout: learningpathall
 
 ## Access the Web Application
 
-Open the web application in your browser using either the local URL or the external URL:
+Open the web application in your browser using the external URL:
 
 ```bash
-http://localhost:8501 or http://75.101.253.177:8501
+http://[your instance ip]:8501
 ```
 
 {{% notice Note %}}
 
 To access the links you may need to allow inbound TCP traffic in your instance's security rules. Always review these permissions with caution as they may introduce security vulnerabilities.
+
+For an Axion instance, this can be done as follows from the gcloud cli:
+
+gcloud compute firewall-rules create allow-my-ip \
+    --direction=INGRESS \
+    --network=default \
+    --action=ALLOW \
+    --rules=tcp:8501 \
+    --source-ranges=[your IP]/32 \
+    --target-tags=allow-my-ip
+
+For this to work, you must ensure that the allow-my-ip tag is present on your Axion instance.
 
 {{% /notice %}}
 ## Upload a PDF File and Create a New Index
