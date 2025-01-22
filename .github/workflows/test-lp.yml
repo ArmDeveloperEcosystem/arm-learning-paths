@@ -17,12 +17,12 @@ jobs:
       - name: Install dependencies
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         run: pip install -r tools/requirements.txt
-      - name: Run test suite for all changed files
+      - name: Run test suite for all changed .md files
         id: run-suite
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         # Run the test suite
         run: |
-            set -o pipefail; ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee test-lp-output.txt
+            set -o pipefail; ./tools/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee test-lp-output.txt
       - name: Parse test suite errors
         id: test-suite-state
         if: success()
@@ -30,7 +30,7 @@ jobs:
         run: |
             cat test-lp-output.txt | grep -q 'Tests failed in test suite' && echo "TEST_SUITE_ERRORS=true" >> "$GITHUB_ENV" \
             || echo "TEST_SUITE_ERRORS=false" >> "$GITHUB_ENV"
-      - name: Test condition
+      - name: Check for errors in test suite
         if: env.TEST_SUITE_ERRORS == 'true' && success()
         run: |
           echo "Test failures detected in test suite, check the output in earlier steps"
@@ -42,10 +42,10 @@ jobs:
         run: |
             cat test-lp-output.txt | grep -q 'maintenance is turned off' && echo "MAINTENANCE=off" >> "$GITHUB_ENV" \
             || echo "MAINTENANCE=on" >> "$GITHUB_ENV"
-      - name: Test condition
+      - name: Check if maintenance is turned off
         if: env.MAINTENANCE == 'off' && success()
-        # Skip opening a PR if tests have not been run
         run: echo "Maintenance is turned off for one or more files"
+      # Only upload artifact if maintenance is on
       - name: Upload stats artifact
         uses: actions/upload-artifact@v4
         if: success() && env.MAINTENANCE == 'on'
