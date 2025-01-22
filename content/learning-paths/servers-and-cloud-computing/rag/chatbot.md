@@ -13,9 +13,14 @@ Open the web application in your browser using either the local URL or the exter
 http://localhost:8501 or http://75.101.253.177:8501
 ```
 
+{{% notice Note %}}
+
+To access the links you may need to allow inbound TCP traffic in your instance's security rules. Always review these permissions with caution as they may introduce security vulnerabilities.
+
+{{% /notice %}}
 ## Upload a PDF File and Create a New Index
 
-Now you can upload a PDF file in the web browser by selecting the **Create New Store** option. 
+Now you can upload a PDF file in the web browser by selecting the **Create New Store** option.
 
 Follow these steps to create a new index:
 

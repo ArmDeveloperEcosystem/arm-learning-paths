@@ -49,45 +49,42 @@ Called from:
 
   </style>
 
+
 <div class="c-row">
     <div class="c-col">
         <h2>Share</h2>
-        <p>Show your network what you've learned by sharing this Learning Path with others.</p>
+        <p>Share what you've learned.</p>
         <div class="social-sharing">
             <div class="social-icons">
-                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ (index .learningpathfiles 0).Permalink }}"
-                onclick="window.open(this.href, 'linkedin-share', 'width=900,height=650'); return false;"
+                <a id="linkedin-link"
                 title="Share via LinkedIn">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-linkedin"></use>
                     </svg>
                 </a>
 
-                <a href="https://x.com/intent/tweet?text=Check+out+this+Arm+Learning+Path:+{{(index .learningpathfiles 0).Title | urlquery }}++%40ArmSoftwareDev++&url={{ (index .learningpathfiles 0).Permalink | urlquery}}"
-                onclick="window.open(this.href, 'x-share', 'width=900,height=650'); return false;"
+                <a id="twitter-link" 
                 title="Share via X">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-twitter"></use>
                     </svg>
                 </a>
       
-                <a href="https://bsky.app/intent/compose?text=Check+out+this+Arm+Learning+Path:+{{(index .learningpathfiles 0).Title | urlquery }}+{{ (index .learningpathfiles 0).Permalink}}"
-                onclick="window.open(this.href, 'bluesky-share', 'width=900,height=650'); return false;"
+                <a id="bluesky-link"
                 title="Share via Bluesky">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-bluesky"></use>
                     </svg>
                 </a>
                 
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ (index .learningpathfiles 0).Permalink }}" 
-                onclick="window.open(this.href, 'facebook-share', 'width=900,height=650'); return false;"
+                <a id="facebook-link"
                 title="Share via Facebook">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-facebook"></use>
                     </svg>
                 </a>
             
-                <a href="mailto:?subject=Check out this Arm Learning Path&body={{(index .learningpathfiles 0).Title}}: {{ (index .learningpathfiles 0).Permalink }}" target="_blank" 
+                <a id="email-link"
                 title="Share via email">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-mail"></use>
@@ -109,23 +106,96 @@ Called from:
 </div>
 
 <script>
-    document.getElementById("copy-link").addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default link behavior
-  
-        // trim off 'next steps'
-        const fullUrl = window.location.href;
+
+    function getLearningPathFullPath(url) {
+        // trim off 'next steps' to get Learning Path original link
+        const fullUrl = url;
         const trimmedUrl = fullUrl.endsWith("/") 
         ? fullUrl.split("/").slice(0, -2).join("/") + "/"
         : fullUrl.split("/").slice(0, -1).join("/") + "/";
 
+        // if URL starts with http://localhost:1313/, replace with https://learn.arm.com/
+        if (trimmedUrl.startsWith("http://localhost:1313/")) {
+            return trimmedUrl.replace("http://localhost:1313/", "https://learn.arm.com/");
+        }
+        // if URL has internal.learn.arm.com, remove the internal. part
+        if (trimmedUrl.includes("internal.learn.arm.com")) {
+            return trimmedUrl.replace("internal.", "");
+        }
 
-        navigator.clipboard.writeText(trimmedUrl).then(() => {
+        return trimmedUrl;
+    }
+
+    document.getElementById("copy-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        navigator.clipboard.writeText(url).then(() => {
             // Show the success message
             document.getElementById("link-copied-success").hidden = false;
         }).catch(err => {
             console.error("Failed to copy link: ", err);
         });
     });
+
+    document.getElementById("email-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        // construct message
+        const subject = "{{(index .learningpathfiles 0).Title}} - Arm Learning Path";
+        const body = `I thought you might find this Arm Learning Path interesting. Check it out here:\n${url}\n`;
+        
+        const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        window.location.href = mailtoLink;
+    });
+
+    document.getElementById("facebook-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        window.open(facebookShareUrl, '_blank', 'width=900,height=650');
+
+    });
+
+    document.getElementById("bluesky-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        // construct message
+        const text = `Check out this Arm Learning Path! ${url}`;
+        
+        const blueskyShareUrl = `https://bsky.app/intent/compose?text=${encodeURIComponent(text)}`;
+
+
+        window.open(blueskyShareUrl, '_blank', 'width=900,height=650');
+    });
+
+    document.getElementById("twitter-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        // construct message
+        const text = `Check out this Arm Learning Path! ${url}`;
+        
+        const twitterShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}`;
+
+        window.open(twitterShareUrl, '_blank', 'width=900,height=650');
+    });
+
+    document.getElementById("linkedin-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+
+        // construct message        
+        const linkedinShareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}`;
+
+        window.open(linkedinShareUrl, '_blank', 'width=900,height=650');
+    });
+
   </script>
   
 <br>
@@ -173,7 +243,7 @@ Called from:
 
             <div id="arm-dev-program-div" class="content-box">
                 <h4>Talk with Arm Experts</h4>
-                <p>Join the Arm Developer Program to share ideas, ask questions, and interact with fellow peers — all with the support of Arm’s own subject-matter experts.</p>
+                <p>Join the Arm Developer Program to share ideas, ask questions, and explore solutions with the support of the developer community.</p>
                 <ads-cta-button id="join-dev-program" level="primary" sr-label="primary button">Join now</ads-cta-button>    
                 <script>
                     document.getElementById("join-dev-program").onclick = function () {

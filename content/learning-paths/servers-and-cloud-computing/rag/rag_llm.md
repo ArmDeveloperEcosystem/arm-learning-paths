@@ -14,7 +14,7 @@ This learning path demonstrates how to build and deploy a Retrieval Augmented Ge
 
 ## Overview
 
-In this Learning Path, you learn how to build a Retrieval Augmented Generation (RAG) chatbot using llama-cpp-python, a Python binding for llama.cpp that enables efficient LLM inference on Arm CPUs.
+In this Learning Path, you learn how to build a RAG chatbot using llama-cpp-python, a Python binding for llama.cpp that enables efficient LLM inference on Arm CPUs.
 
 The tutorial demonstrates how to integrate the FAISS vector database with the Llama-3.1-8B model for document retrieval, while leveraging llama-cpp-python's optimized C++ backend for high-performance inference.
 
