@@ -1,5 +1,5 @@
 ---
-title: Deploy a RAG-based Chatbot with llama-cpp-python using KleidiAI on Arm Servers
+title: Deploy a RAG-based Chatbot with llama-cpp-python using KleidiAI on Google Axion processors
 
 minutes_to_complete: 45
 
@@ -35,6 +35,7 @@ operatingsystems:
 tools_software_languages:
     - Python
     - Streamlit
+    - Google Axion
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
