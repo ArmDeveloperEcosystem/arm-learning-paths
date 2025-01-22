@@ -2,7 +2,7 @@
 title: Run a llama.cpp chatbot powered by Arm Kleidi technology
 
 overview: | 
-  This Arm learning path shows how to use a single c4a-standard-64 Google Axion instance -- powered by an Arm Neoverse CPU -- to build a simple "Token as a Service" RAG-enabled server, used below to provide a chatbot to serve a small number of concurrent users.
+  This Arm learning path shows how to use a single c4a-highcpu-72 Google Axion instance -- powered by an Arm Neoverse CPU -- to build a simple "Token as a Service" RAG-enabled server, used below to provide a chatbot to serve a small number of concurrent users.
 
   This architecture would be suitable for businesses looking to deploy the latest Generative AI technologies with RAG capabilities using their existing CPU compute capacity and deployment pipelines. It enables semantic search over chunked documents using FAISS vector store. The demo uses the open source llama.cpp framework, which Arm has enhanced by contributing the latest Arm Kleidi technologies. Further optimizations are achieved by using the smaller 8 billion parameter Llama 3.1 model, which has been quantized to optimize memory usage. 
 
