@@ -1,3 +1,4 @@
+# Run by test-lp.yml GitHub Action
 ALL_CHANGED_FILES=$@
 
 # Install dependencies and run tests,
@@ -18,7 +19,6 @@ done
 CONTENT_PATHS_UNIQUE=($(printf "%s\n" "${CONTENT_PATHS[@]}" | sort -u))
 echo "Unique content paths:         ${CONTENT_PATHS_UNIQUE[*]}"
 # Run the tests
-
 for file in ${CONTENT_PATHS_UNIQUE[*]}; do
    tools/maintenance.py -i ${file} --stats-report
 done
