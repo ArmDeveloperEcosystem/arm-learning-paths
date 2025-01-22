@@ -168,7 +168,7 @@ The workflow starts running.
 
 Click on the workflow to view the output from each step.
 
-![Actions_test](/images/actions_test.png)
+![Actions_test](images/actions_test.png)
 
 Click on the **Run testing script** step to see the accuracy of the model and a table of the results from the PyTorch profiler. 
 
