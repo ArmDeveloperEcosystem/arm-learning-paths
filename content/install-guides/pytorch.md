@@ -135,7 +135,7 @@ Recent Arm processors support the BFloat16 (BF16) number format in PyTorch. For 
 
 To check if your system includes BFloat16, use the `lscpu` command:
 
-```bash
+```console
 lscpu | grep bf16
 ```
 
@@ -211,7 +211,7 @@ pip install transformers datasets
 
 Use a text editor to save the code below as `profile-vit.py`:
 
-```python { file_name="profile.py" }
+```python { file_name="profile-vit.py" }
 import torch
 from transformers import ViTFeatureExtractor, ViTForImageClassification
 from datasets import load_dataset

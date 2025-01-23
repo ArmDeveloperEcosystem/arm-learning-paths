@@ -53,18 +53,6 @@ sw_categories:
       readable_title: Arduino core for the Raspberry Pi Pico
       tests_and_status:
       - ubuntu:latest: passed
-    ansible:
-      readable_title: Ansible
-      tests_and_status:
-      - ubuntu:latest: passed
-    aperf:
-      readable_title: AWS Perf (APerf)
-      tests_and_status:
-      - ubuntu:latest: passed
-    arduino-pico:
-      readable_title: Arduino core for the Raspberry Pi Pico
-      tests_and_status:
-      - ubuntu:latest: passed
     arm-gnu:
       readable_title: Arm GNU Toolchain
       tests_and_status:
@@ -186,39 +174,15 @@ sw_categories:
     swift:
       readable_title: Swift
       tests_and_status: []
-    rust:
-      readable_title: Rust for Linux Applications
-      tests_and_status:
-      - ubuntu:latest: passed
-    rust_embedded:
-      readable_title: Rust for Embedded Applications
-      tests_and_status:
-        - ubuntu:latest: passed
-    ssh:
-      readable_title: SSH
-      tests_and_status:
-      - ubuntu:latest: passed
-    streamline-cli:
-      readable_title: Streamline CLI Tools
-      tests_and_status:
-      - ubuntu:latest: passed
-    sysbox:
-      readable_title: Sysbox
-      tests_and_status:
-      - ubuntu:latest: passed
     terraform:
       readable_title: Terraform
-      tests_and_status:
-      - ubuntu:latest: passed
-    topdown-tool:
-      readable_title: Telemetry Solution (Topdown Methodology)
       tests_and_status:
       - ubuntu:latest: passed
     vnc:
       readable_title: VNC on Arm Linux
       tests_and_status:
       - ubuntu:latest: passed
-  iot: {}
+  iot:
     topdown-tool:
       readable_title: Telemetry Solution (Topdown Methodology)
       tests_and_status:

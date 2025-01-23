@@ -120,7 +120,7 @@ The instructions shown below are for deb based installers for GCC users.
 In a terminal, run the command shown below to download the debian package:
 
 ```bash
-wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-performance-libraries/24-10/linux/arm-performance-libraries_24.10_deb_gcc.tar
+wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_24.10/arm-performance-libraries_24.10_deb_gcc.tar
 ```
 
 Use `tar` to extract the file and then change directory:

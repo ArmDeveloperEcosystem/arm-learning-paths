@@ -215,7 +215,7 @@ def check(json_file, start, stop, md_article):
                                                     {ethos_u65} NON_INTERACTIVE=1 --name test_fvp flebeau/arm-corstone-300-fvp"
                     )
                 else:
-                    logging.info(f"Type '{test_type}' not supported for testing. Contact the maintainers if you think this is a mistake.")
+                    logging.debug(f"Type '{test_type}' not supported for testing. Contact the maintainers if you think this is a mistake.")
                     bar(skipped=True)
                     continue
 

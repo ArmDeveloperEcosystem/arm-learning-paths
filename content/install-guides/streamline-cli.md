@@ -79,16 +79,6 @@ The Python scripts provided with Streamline CLI tools require Python 3.8 or late
 Create a virtual environment:
 
 ```bash
-<<<<<<< HEAD
-=======
-wget https://artifacts.tools.arm.com/arm-performance-studio/2024.5/Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz -P $HOME
-tar -xzf $HOME/Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz -C $HOME
-```
-
-1. The `sl-format.py` Python script requires Python 3.8 or later, and depends on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. For example:
-
-```bash { cwd="$HOME/streamline_cli_tools" }
->>>>>>> 630e2a65 (Debug streamline-cli.md)
 python3 -m venv sl-venv
 source ./sl-venv/bin/activate
 ```
