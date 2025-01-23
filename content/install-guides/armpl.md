@@ -127,13 +127,12 @@ Use `tar` to extract the file and then change directory:
 
 ```bash
 tar -xf arm-performance-libraries_24.10_deb_gcc.tar
-cd arm-performance-libraries_24.10_deb/
 ```
 
 Run the installation script as a super user:
 
 ```bash
-sudo ./arm-performance-libraries_24.10_deb.sh --accept
+sudo ./arm-performance-libraries_24.10_deb/arm-performance-libraries_24.10_deb.sh --accept
 ```
 
 Using the `--accept` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.

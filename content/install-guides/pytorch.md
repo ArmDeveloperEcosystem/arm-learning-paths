@@ -197,7 +197,7 @@ With `madvise` you can use an environment variable to check performance with and
 
 To enable THP for PyTorch:
 
-```console
+```bash
 export THP_MEM_ALLOC_ENABLE=1
 ```
 
@@ -205,7 +205,7 @@ export THP_MEM_ALLOC_ENABLE=1
 
 To profile a [Vision Transformer (ViT) model](https://huggingface.co/google/vit-base-patch16-224), first download the transformers and datasets libraries:
 
-```
+```bash
 pip install transformers datasets
 ```
 

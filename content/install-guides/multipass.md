@@ -85,7 +85,7 @@ Install and run the `kvm-ok` command to confirm KVM is available.
 Install `kvm-ok` on Debian based Linux distributions using:
 
 ```bash
-sudo apt install cpu-checker kvm -y
+sudo apt install cpu-checker qemu-kvm -y
 ```
 
 To check if KVM is available run:

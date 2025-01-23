@@ -88,6 +88,7 @@ Install `topdown-tool` in `/usr/local/bin` using:
 
 ```bash
 cd telemetry-solution/tools/topdown_tool
+pip3 install packaging
 sudo pip3 install .
 ```
 
