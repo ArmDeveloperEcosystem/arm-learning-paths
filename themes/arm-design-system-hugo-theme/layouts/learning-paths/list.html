@@ -3,7 +3,7 @@ A list page that shows all Learning Paths pages under the selected category.
 
 Where it is used:
     - /learning-paths/:main-category/
-    - /learning-paths/microcontrollers/
+    - /learning-paths/embedded-and-microcontrollers/
 
 Called from:
     - baseof
@@ -76,7 +76,13 @@ Calls to:
         {{if ne "Cross Platform" .Title}}
             {{if ne "learning-paths" (.Title | urlize)}}
                 <div style="text-align: center; margin-top: -16px; padding-bottom: 16px;">
-                    <a href="/learning-paths/{{.Title | urlize}}/intro/"><h6 class="basics-title">New? Learn the basics of {{.Title}}.</h6></a>
+                    <a 
+                    {{if eq "Automotive" .Title}}
+                        href="https://developer.arm.com/Automotive"
+                    {{else}}
+                        href="/learning-paths/{{.Title | urlize}}/intro/"
+                    {{end}}
+                    ><h6 class="basics-title">New? Learn the basics of {{.Title}}.</h6></a>
                 </div>
             {{end}}
         {{end}}

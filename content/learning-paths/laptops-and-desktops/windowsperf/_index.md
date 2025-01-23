@@ -1,7 +1,7 @@
 ---
 title: Get started with WindowsPerf
 
-minutes_to_complete: 15
+minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers working on laptops and desktops and new to the Arm architecture.
 
@@ -19,6 +19,7 @@ skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-A
+    - Neoverse
 operatingsystems:
     - Windows
 tools_software_languages:

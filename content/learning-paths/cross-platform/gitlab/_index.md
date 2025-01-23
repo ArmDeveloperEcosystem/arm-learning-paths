@@ -1,8 +1,5 @@
 ---
 title: Build a CI/CD pipeline with GitLab on Google Axion
-draft: true
-cascade:
-    draft: true
 
 minutes_to_complete: 30
 
@@ -42,7 +39,7 @@ shared_path: true
 shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
-    - embedded-systems
+    - embedded-and-microcontrollers
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

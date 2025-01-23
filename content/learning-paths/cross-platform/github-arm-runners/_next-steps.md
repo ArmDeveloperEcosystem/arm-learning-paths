@@ -18,13 +18,13 @@ recommended_path: "/learning-paths/cross-platform/docker-build-cloud/"
 
 further_reading:
     - resource:
+        title: Linux arm64 hosted runners now available for free in public repositories
+        link: https://github.blog/changelog/2025-01-16-linux-arm64-hosted-runners-now-available-for-free-in-public-repositories-public-preview/
+        type: documentation
+    - resource:
         title: Using GitHub-hosted runners
         link: https://docs.github.com/en/actions/using-github-hosted-runners
         type: documentation
-    - resource:
-        title: Supercharge your CI/CD with Arm Runners in GitHub Actions
-        link: https://www.youtube.com/watch?v=vrr_OgMk458
-        type: video
     - resource:
         title: Arm64 on GitHub Actions Powering faster, more efficient build systems
         link: https://github.blog/2024-06-03-arm64-on-github-actions-powering-faster-more-efficient-build-systems/

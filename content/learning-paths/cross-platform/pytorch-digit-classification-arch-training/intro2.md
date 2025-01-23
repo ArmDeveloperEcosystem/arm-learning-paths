@@ -1,27 +1,37 @@
 ---
 # User change
-title: "PyTorch model training"
+title: "About PyTorch Model Training"
 
 weight: 4
 
 layout: "learningpathall"
 ---
 
-In the previous section, you created a feedforward neural network for digit classification using the MNIST dataset. The network was left untrained and lacks the ability to make accurate predictions. 
+## Training
 
-To enable the network to recognize handwritten digits effectively, training is needed. Training in PyTorch involves configuring the network's parameters, such as weights and biases, by exposing the model to labeled data and iteratively adjusting these parameters to minimize prediction errors. This process allows the model to learn the patterns in the data, enabling it to make accurate classifications on new, unseen inputs.
+Now you have created a feedforward neural network for digit classification using the MNIST dataset, to enable the network to recognize handwritten digits effectively and make accurate predictions, training is needed. 
 
-The typical approach to training a neural network in PyTorch involves several key steps. 
+Training in PyTorch involves exposing the model to labeled data and iteratively configuring the network's parameters. These parameters, such as the weights and biases, can be adjusted to reduce the number of prediction errors. This process allows the model to learn the patterns in the data, enabling it to make accurate classifications on new, unseen inputs.
 
-First, obtain and preprocess the dataset, which usually includes normalizing the data and converting it into a format suitable for the model. 
+The typical approach to training a neural network in PyTorch involves several key steps: 
 
-Next, the dataset is split into training and testing subsets. Training data is used to update the model’s parameters, while testing data evaluates its performance. During training, feed batches of input data through the network, calculate the prediction error or loss using a loss function (such as cross-entropy for classification tasks), and optimize the model’s weights and biases using backpropagation. Backpropagation involves computing the gradient of the loss with respect to each parameter and then updating the parameters using an optimizer, like Stochastic Gradient Descent (SGD) or Adam. This process is repeated for multiple epochs until the model achieves satisfactory performance, balancing accuracy and generalization.
+* Preprocess the dataset, for example normalize the data and convert it into a suitable format.
+
+* Divide the dataset into training and testing subsets. You can use training data to update the model's parameters, and testing data to evaluate its performance.
+
+* Feed batches of input data through the network.
+
+* Calculate the prediction error or loss using a loss function, such as Cross-Entropy for classification tasks.
+
+* Optimize the model's weights and biases using backpropagation. Backpropagation involves computing the gradient of the loss with respect to each parameter and then updating the parameters using an optimizer, like Stochastic Gradient Descent (SGD) or Adam.
+
+* Repeat the process for multiple epochs until the model achieves satisfactory performance, balancing accuracy and generalization.
 
 ### Loss, gradients, epoch and backpropagation
 
-Loss is a measure of how well a model’s predictions match the true labels of the data. It quantifies the difference between the predicted output and the actual output. The lower the loss, the better the model’s performance. In classification tasks, a common loss function is Cross-Entropy Loss, while Mean Squared Error (MSE) is often used for regression tasks. The goal of training is to minimize the loss, which indicates that the model’s predictions are getting closer to the actual labels.
+Loss is a measure of how well a model's predictions match the true labels of the data. It quantifies the difference between the predicted output and the actual output. The lower the loss, the better the model's performance. In classification tasks, a common loss function is Cross-Entropy Loss, while Mean Squared Error (MSE) is often used for regression tasks. The goal of training is to minimize the loss, and get the model's predictions closer to the actual labels.
 
-Gradients represent the rate of change of the loss with respect to each of the model’s parameters (weights and biases). They are used to update the model’s parameters in the direction that reduces the loss. Gradients are calculated during the backpropagation step, where the loss is propagated backward through the network to compute how each parameter contributes to the overall loss. Optimizers like SGD or Adam use these gradients to adjust the parameters, effectively “teaching” the model to improve its predictions.
+Gradients represent the rate of change of the loss with respect to each of the model's parameters (weights and biases). They are used to update the model's parameters in the direction that reduces the loss. Gradients are calculated during the backpropagation step, where the loss is propagated backward through the network to compute how each parameter contributes to the overall loss. Optimizers like SGD or Adam use these gradients to adjust the parameters, effectively “teaching” the model to improve its predictions.
 
 An epoch refers to one complete pass through the entire training dataset. During each epoch, the model sees every data point once and updates its parameters accordingly. Multiple epochs are typically required to train a model effectively because, during each epoch, the model learns and fine-tunes its parameters based on the data it processes. The number of epochs is a hyperparameter that you set before training, and increasing it can improve the model’s performance, but too many epochs may lead to overfitting, where the model performs well on training data but poorly on new, unseen data.
 

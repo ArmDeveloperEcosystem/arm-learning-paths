@@ -21,9 +21,11 @@ Windows on Arm laptops can also be used for software development.
 
 ### ChromeOS
 
-Chromebooks with Arm processors can also be used for software development. The Lenovo [Duet 3](https://www.lenovo.com/us/en/p/laptops/lenovo/lenovo-edu-chromebooks/ideapad-duet-3-chromebook-(11-inch,-qlc)/len101i0034) and [Duet 5](https://www.lenovo.com/us/en/p/laptops/lenovo/lenovo-edu-chromebooks/ideapad-duet-5-chromebook/len101i0023) are popular detachable Chromebooks. 
+Chromebooks with Arm processors can also be used for software development. The Lenovo [Duet Gen 9](https://www.lenovo.com/us/en/p/laptops/lenovo/lenovo-edu-chromebooks/lenovo-chromebook-duet-gen-9-11-inch-mediatek/83hh0000us) is a popular detachable Chromebook. 
 
 ### Linux
+
+The System76 [Thelio Astra](https://www.system76.com/arm/) is a powerful Arm-based desktop computer designed by System76 and ships with Ubuntu installed. 
 
 Both Windows and ChromeOS have a Linux subsystem which can be used for software development tasks. Read [WSL for Windows on Arm](/learning-paths/laptops-and-desktops/wsl2) to learn more.
 

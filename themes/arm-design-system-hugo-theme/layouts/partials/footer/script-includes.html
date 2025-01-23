@@ -39,6 +39,11 @@ Called from:
     <script src="/js/prism_post_output_formating.js" defer></script>  <!-- must be called after prism.js to modify it once rendered -->
 {{end}}
 
+<!-- Demo page only -->
+{{ if and $is_content (hasPrefix .File.TranslationBaseName "_demo")}}
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+{{end}}
+
 <!-- Also add prism to any _demo page that needs it, set as a 'prismjs' variable -->
 {{ if and $is_content (hasPrefix .File.TranslationBaseName "_demo") .Params.prismjs }}
     <script src="/js/prism.js" defer></script>                        <!-- Include code highlighting javascript, Prism-->
