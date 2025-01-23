@@ -8,7 +8,6 @@ weight: 7 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-TODO connect this part with the FVP/board?
 With our environment ready, you can create a simple program to test the setup.
 
 This example defines a small feedforward neural network for a classification task. The model consists of 2 linear layers with ReLU activation in between.
@@ -62,7 +61,7 @@ print("Model successfully exported to simple_nn.pte")
 
 Run the model from the Linux command line:
 
-```console
+```bash
 python3 simple_nn.py
 ```
 
@@ -76,7 +75,7 @@ The model is saved as a .pte file, which is the format used by ExecuTorch for de
 
 Run the ExecuTorch version, first build the executable:
 
-```console
+```bash
 # Clean and configure the build system
 (rm -rf cmake-out && mkdir cmake-out && cd cmake-out && cmake ..)
 
@@ -84,7 +83,7 @@ Run the ExecuTorch version, first build the executable:
 cmake --build cmake-out --target executor_runner -j$(nproc)
 ```
 
-You see the build output and it ends with:
+You will see the build output and it ends with:
 
 ```output
 [100%] Linking CXX executable executor_runner
@@ -93,7 +92,7 @@ You see the build output and it ends with:
 
 When the build is complete, run the executor_runner with the model as an argument:
 
-```console
+```bash
 ./cmake-out/executor_runner --model_path simple_nn.pte
 ```
 
@@ -112,3 +111,30 @@ Output 0: tensor(sizes=[1, 2], [-0.105369, -0.178723])
 
 When the model execution completes successfully, you’ll see confirmation messages similar to those above, indicating successful loading, inference, and output tensor shapes.
 
+
+
+TODO: Debug issues when running the model on the FVP, kindly ignore anything below this 
+## Running the model on the Corstone-300 FVP 
+
+
+Run the model using: 
+
+```bash
+FVP_Corstone_SSE-300_Ethos-U55 -a simple_nn.pte -C mps3_board.visualisation.disable-visualisation=1
+```
+
+{{% notice Note %}}
+
+-C mps3_board.visualisation.disable-visualisation=1 disables the FVP GUI. This can speed up launch time for the FVP.
+
+The FVP can be terminated with Ctrl+C.
+{{% /notice %}}
+
+
+
+```output
+ 
+```
+
+
+You've now set up your environment for TinyML development, and tested a PyTorch and ExecuTorch Neural Network.

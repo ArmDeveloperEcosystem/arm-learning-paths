@@ -35,22 +35,15 @@ Grove Vision V2 [Edge impulse Firmware](https://cdn.edgeimpulse.com/firmware/see
 
 ![Board connection](Connect.png)
 
+{{% notice Note %}}
+Ensure the board is properly connected and recognized by your computer.
+{{% /notice %}}
 
 3. In the extracted Edge Impulse firmware, locate and run the installation scripts to flash your device. 
 
 ```console
 ./flash_linux.sh
 ```
-
-4. Configure Edge Impulse for the board
-in your terminal, run:
-
-```console
-edge-impulse-daemon
-```
-Follow the prompts to log in.
-
-5. If successful, you should see your Grove - Vision AI Module V2 under 'Devices' in Edge Impulse.
 
 
 ## Next Steps
