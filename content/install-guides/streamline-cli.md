@@ -19,6 +19,10 @@ author_primary: Julie Gaskin
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/109847/latest/
 
+test_images:
+- ubuntu:latest
+test_maintenance: true
+
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: true              # Set to true to be listed in main selection page, else false
@@ -108,11 +112,13 @@ The script can also be used to download a specific version, or install to a user
 
 * To list all available versions:
 
+
     ```sh
     python3 get-streamline-cli.py list
     ```
 
 * To download, but not install, a specific version:
+
 
     ```sh
     python3 get-streamline-cli.py download --tool-version <version>
@@ -163,14 +169,14 @@ You might need to adapt them slightly to other Linux distributions.
 
 To apply the patch to the latest 6.7 kernel, you can use `git`:
 
-```sh
-git apply v6.7-combined.patch
+```console
+git apply patch/v6.7-combined.patch
 ```
 
 or `patch`:
 
-```sh
-patch -p 1 -i v6.7-combined.patch
+```console
+patch -p 1 -i patch/v6.7-combined.patch
 ```
 
 ### Manual application to an RPM-based distribution

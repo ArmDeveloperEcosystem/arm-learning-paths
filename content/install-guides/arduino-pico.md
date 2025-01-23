@@ -10,6 +10,7 @@ layout: installtoolsall
 minutes_to_complete: 15
 official_docs: https://docs.aws.amazon.com/greengrass/v2/developerguide/quick-installation.html
 prerequisites: Arduino IDE
+test_maintenance: true
 test_images:
 - ubuntu:latest
 tool_install: true
@@ -19,7 +20,7 @@ multitool_install_part: false
 weight: 1
 ---
 
-You can install the Arduino IDE and Arduino core software for the Raspberry Pi Pico and the Raspberry Pi Pico W. 
+You can install the Arduino IDE and Arduino core software for the Raspberry Pi Pico and the Raspberry Pi Pico W.
 
 Arduino core is the software stack that powers Arduino devices and development boards. While the Raspberry Pi Pico isn't an Arduino board, it uses the same RP2040 SoC as the Arduino RP2040 Connect, and therefore can run the same Arduino core software.
 
@@ -27,7 +28,7 @@ Arduino core is the software stack that powers Arduino devices and development b
 
 First, you need to install the Arduino IDE on your laptop or desktop. You can download it for your operating system from [the Arduino Software website](https://www.arduino.cc/en/software). Follow the provided instructions for installing the IDE.
 
-Start the IDE by clicking the Arduino IDE icon. 
+Start the IDE by clicking the Arduino IDE icon.
 
 ## Install board support package
 
@@ -43,9 +44,9 @@ When the `Boards Manager` opens search for `pico` and the `Arduino Mbed OS RP204
 
 ### Raspberry Pi Pico W
 
-The `Boards Manager` package for for `Arduino Mbed OS RP2040 Boards` does not include the Raspberry Pi Pico W. 
+The `Boards Manager` package for for `Arduino Mbed OS RP2040 Boards` does not include the Raspberry Pi Pico W.
 
-If you want to use the Pico W go to `File -> Preferences` (or `Arduino IDE -> Settings` on macOS) and enter the URL below into the `Additional Boards Manager URLs` field: 
+If you want to use the Pico W go to `File -> Preferences` (or `Arduino IDE -> Settings` on macOS) and enter the URL below into the `Additional Boards Manager URLs` field:
 
 ```console
 https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
@@ -61,9 +62,9 @@ Once the support package is installed, you need to tell the Arduino IDE which su
 
 ## Upload to your board
 
-Because the Raspberry Pi Pico doesn't come with the Arduino core software installed, the Arduino IDE won't recognize it. 
+Because the Raspberry Pi Pico doesn't come with the Arduino core software installed, the Arduino IDE won't recognize it.
 
-To fix that, you must upload a sketch. A sketch is another name for an Arduino software application. 
+To fix that, you must upload a sketch. A sketch is another name for an Arduino software application.
 
 Go to `File -> Examples -> 01.Basics -> Blink` and load the sketch.
 
@@ -75,4 +76,4 @@ You should see the LED on your Raspberry Pi Pico blink on and off every second.
 If you have trouble uploading a sketch, unplug the board, press and hold the `BOOTSEL` button on the board, plug it in, and then release the button.
 {{% /notice %}}
 
-You are ready to start writing your own Arduino sketches for Raspberry Pi Pico. 
+You are ready to start writing your own Arduino sketches for Raspberry Pi Pico.

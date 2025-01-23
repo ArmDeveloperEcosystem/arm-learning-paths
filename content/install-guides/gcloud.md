@@ -1,5 +1,5 @@
 ---
-additional_search_terms: 
+additional_search_terms:
 - cloud
 - google cloud
 - google
@@ -14,19 +14,19 @@ multitool_install_part: false
 official_docs: https://cloud.google.com/sdk/docs/install-sdk
 test_images:
 - ubuntu:latest
-test_maintenance: false
-title: Google Cloud Platform (GCP) CLI 
+test_maintenance: true
+title: Google Cloud Platform (GCP) CLI
 tool_install: true
 weight: 1
 ---
 
 The Google Cloud CLI, `gcloud`, allows you to run commands in your Google Cloud account.
 
-`gcloud` is available for Windows, macOS, Linux and supports the Arm architecture. 
+`gcloud` is available for Windows, macOS, Linux and supports the Arm architecture.
 
 ## What should I consider before installing gcloud?
 
-Use the documentation link to find alternative installation options. 
+Use the documentation link to find alternative installation options.
 
 This article provides a quick solution to install `gcloud` for Ubuntu on Arm.
 
@@ -54,7 +54,7 @@ Download and install the required software packages.
 sudo apt-get install -y curl apt-transport-https ca-certificates gnupg
 ```
 
-Install `gcloud` from the Google repository. 
+Install `gcloud` from the Google repository.
 
 ```bash { target="ubuntu:latest" }
 echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
