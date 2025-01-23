@@ -84,23 +84,24 @@ git clone https://git.gitlab.arm.com/telemetry-solution/telemetry-solution.git
 
 2. Install the `topdown-tool` executable:
 
-Install `topdown-tool` in `/usr/local/bin` using:
+It's recommended to use use a virtual environment to install the packages:
 
-```bash
-cd telemetry-solution/tools/topdown_tool
-pip3 install packaging
-sudo pip3 install .
-```
-
-{{% notice Note %}}
-If you are getting errors on the environment being externally managed, try creating a virtual environment.
 ```bash
 cd telemetry-solution/tools/topdown_tool
 sudo apt install python3-venv -y
 python3 -m venv topdown-venv
 source topdown-venv/bin/activate
+pip3 install packaging
 ```
-{{% /notice %}}
+
+Now, install `topdown-tool` in `/usr/local/bin`
+
+```bash
+cd telemetry-solution/tools/topdown_tool
+sudo pip3 install .
+```
+
+
 
 3. Confirm you can run `top-down` using the `version` command:
 
