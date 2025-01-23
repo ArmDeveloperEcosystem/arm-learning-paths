@@ -8,7 +8,7 @@
   <!-- No masthead on homepage, as that has a special gradient look/feel -->
   {{ if .IsHome }}
      <div id="global-nav-height-fixer" class="nav-black">
-        <arm-top-navigation></arm-top-navigation>
+        <arm-top-navigation observe="#breadcrumb-element"></arm-top-navigation> <!-- to set to all black all the time: observe="head" -->
     </div>
     <div id="only-breadcrumb-masthead">
         <div class="is-responsive-width">
@@ -20,7 +20,7 @@
     <div id="nav-masthead-breadcrumbs">
         <!-- Global Nav -->
         <div id="global-nav-height-fixer" class="nav-transparent">
-            <arm-top-navigation></arm-top-navigation>
+            <arm-top-navigation observe="#breadcrumb-element"></arm-top-navigation>    
         </div>
         <!-- Masthead -->
         <div id="expanded-masthead">

@@ -26,33 +26,23 @@ Arm recommends that you profile an optimized release build of your application, 
 
 ### Procedure {.section}
 
-1. Download and extract the Streamline CLI tools on your Arm server:
+1. Use the download utility script to download the latest version of the tool and extract it to the current working directory on your Arm server:
 
     ```sh
-    wget https://artifacts.tools.arm.com/arm-performance-studio/2024.4/Arm_Streamline_CLI_Tools_9.3_linux_arm64.tgz 
-    tar -xzf Arm_Streamline_CLI_Tools_9.3_linux_arm64.tgz 
-    ```
-    
-1. Follow the instructions in the [Install Guide](/install-guides/streamline-cli/) to ensure you have everything set up correctly. Arm recommends that you apply the kernel patch as described in this guide, to improve support for capturing function-attributed top-down metrics on Arm systems.
+    wget https://artifacts.tools.arm.com/arm-performance-studio/Streamline_CLI_Tools/get-streamline-cli.py
 
-1. The `sl-format.py` Python script requires Python 3.8 or later, and depends on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. For example:
-
-    ```sh
-    # From Bash
-    python3 -m venv sl-venv
-    source ./sl-venv/bin/activate
-
-    # From inside the virtual environment
-    python3 -m pip install -r ./streamline_cli_tools/bin/requirements.txt
+    python3 get-streamline-cli.py install
     ```
 
-   {{% notice Note%}}
-  The instructions in this guide assume you have added the `<install>/bin/` directory to your `PATH` environment variable, and that you run all Python commands from inside the virtual environment.
-  {{% /notice %}}
+    The script can also be used to download a specific version, or install to a user-specified directory. Refer to the [Install Guide](/install-guides/streamline-cli/) for details on all the script options.
+
+    {{% notice %}}
+    Follow the instructions in the [Install Guide](/install-guides/streamline-cli/) to ensure you have everything set up correctly. Arm recommends that you apply the kernel patch as described in this guide, to improve support for capturing function-attributed top-down metrics on Arm systems.
+    {{% /notice %}}
 
 1. Use `sl-record` to capture a raw profile of your application and save the data to a directory on the filesystem.
 
-  Arm recommends making a profile of at least 20 seconds in duration, which ensures that the profiler can capture a statistically significant number of samples for all of the metrics.
+    Arm recommends making a profile of at least 20 seconds in duration, which ensures that the profiler can capture a statistically significant number of samples for all of the metrics.
 
     ```sh
     sl-record -C workflow_topdown_basic -o <output.apc> -A <your app command-line>
@@ -110,7 +100,7 @@ Arm recommends that you profile an optimized release build of your application, 
 
 ## Capturing a system-wide profile
 
-To capture a system-wide profile, which captures all processes and threads, run `sl-record` with the `-S yes` option and omit the `-A ` application-specific option and following arguments.
+To capture a system-wide profile, which captures all processes and threads, run `sl-record` with the `-S yes` option and omit the `-A` application-specific option and following arguments.
 
 In systems without the kernel patches, system-wide profiles can capture the top-down metrics. To keep the captures to a usable size, it may be necessary to limit the duration of the profiles to less than 5 minutes.
 
@@ -118,7 +108,7 @@ In systems without the kernel patches, system-wide profiles can capture the top-
 
 To capture top-down metrics in a system without the kernel patches, there are three options available:
 
-* To capture a system-wide profile, which captures all processes and threads, run with the `-S yes` option and omit the `-A ` application-specific option and following arguments. To keep the captures to a usable size, it may be necessary to limit the duration of the profiles to less than 5 minutes.
+* To capture a system-wide profile, which captures all processes and threads, run with the `-S yes` option and omit the `-A` application-specific option and following arguments. To keep the captures to a usable size, it may be necessary to limit the duration of the profiles to less than 5 minutes.
 
 * To reliably capture single-threaded application profile, add the `--inherit no` option to the command line. However, in this mode metrics are only captured for the first thread in the application process and any child threads or processes are ignored.
 

@@ -218,3 +218,54 @@ html[theme='dark'] .incorrect-explain {color: #e86868} /* 27% lighter than arm's
 .info_text_preexplination.smooth-open {
     opacity: 1;
 }
+
+
+
+
+/* Subtitle (for Next steps styling) */
+/**************************************/
+.next-steps-subtitle {
+    color: var(--arm-black);
+    font-family: "Source Code Pro", monospace;
+    font-weight: lighter;
+    color:  #A3A8AE;
+    margin-top: 0px;
+    margin-bottom: 4px;
+}
+
+
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.social-icons a {
+    color: var(--arm-light-blue);
+    font-size: 36px;
+    text-decoration: none;
+}
+.social-icons a:hover {
+    color: var(--arm-green);
+}
+
+.share-icon {
+    width: 36px;
+    height: 36px;
+    fill: var(--arm-light-blue);
+    text-decoration: none;
+}
+.share-icon:hover {
+    fill: var(--arm-green);
+    cursor: pointer;
+  }
+#link-copied-success {
+    color: var(--arm-green);
+    background-color: var(--arm-black);
+    border-radius: 10px;
+    padding-left:8px;
+    padding-top: 4px;
+    padding-bottom: 6px;
+    padding-right: 16px;
+    font-size: 16px;
+}

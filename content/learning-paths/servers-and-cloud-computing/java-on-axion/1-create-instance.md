@@ -8,11 +8,7 @@ layout: learningpathall
 
 ## Create an Axion instance
 
-Axion is Google’s first Arm-based server processor, built using the Armv9 Neoverse V2 CPU. Created specifically for the data center, Axion delivers industry-leading performance and energy efficiency.
-
-{{% notice Note %}}
-The Axion instance type (C4A) is currently in public preview. A GA (General Availability) release will happen in the coming months.
-{{% /notice %}}
+Axion is Google’s first Arm-based server processor, built using the Armv9 Neoverse V2 CPU. Created specifically for the data center, Axion delivers industry-leading performance and energy efficiency. To learn more about Google Axion, refer to this [page](http://cloud.google.com/products/axion/)
 
 There are several ways to create an Arm-based Google Axion VM: the Google Cloud console, the gcloud CLI tool, or using your choice of IaC (Infrastructure as Code).
 

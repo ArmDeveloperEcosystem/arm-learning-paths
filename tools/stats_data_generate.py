@@ -88,7 +88,7 @@ data_weekly_file_path  = Path('../data/stats_weekly_data.yml')
 tests_status_file_path = Path('../data/stats_current_test_info.yml')
 learning_path_dir = Path('../content/learning-paths/')
 install_guide_dir = Path('../content/install-guides/')
-lp_and_ig_content_dirs = ['microcontrollers','embedded-systems','laptops-and-desktops','servers-and-cloud-computing','smartphones-and-mobile','cross-platform','install-guides']
+lp_and_ig_content_dirs = ['embedded-and-microcontrollers','iot','laptops-and-desktops','servers-and-cloud-computing','mobile-graphics-and-gaming','automotive','cross-platform','install-guides']
 
 
 # Obtain today's date in YYYY-MM-DD
@@ -158,7 +158,7 @@ def authorAdd(author_name,tracking_dic):
     ### Update 'contributions' area, internal vs external contributions
     
     # open the contributors CSV file
-    with open('../contributors.csv', mode ='r')as file:
+    with open('../assets/contributors.csv', mode ='r')as file:
         csvFile = csv.reader(file)
         for line in csvFile:
             company = line[1]

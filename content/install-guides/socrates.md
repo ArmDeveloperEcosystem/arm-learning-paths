@@ -35,9 +35,9 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 Socrates is a component of [Arm Hardware Success Kits](https://www.arm.com/products/development-tools/success-kits).
 
-It is available to download via the [Arm Product Download Hub](https://developer.arm.com/downloads/view/HWSKT-KS-0002).
+It is available to download via the [Arm Product Download Hub](https://developer.arm.com/downloads/).
 
-You can download Socrates as an individual standalone component, or you can download the complete success kits.
+You can download Socrates as an individual component, or you can download the complete success kits.
 
 For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](/install-guides/pdh/).
 

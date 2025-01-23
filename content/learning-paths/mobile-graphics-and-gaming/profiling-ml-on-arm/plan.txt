@@ -1,0 +1,20 @@
+
+want the performance of your ML app
+memory and compute
+
+how can you find that out
+
+different steps:
+- ML network
+- app around the ML network, especially pre and post processing, and the network as a whole
+
+for around the ML network - streamline profiler
+here's how to do that...
+Also Android Profiler, memory example
+
+Ml network, it will depend on the inference engine you are using
+- here's an example for if you are using Arm NN with TFLite
+- if you're not using it, it may still have some useful information, but different operators will be used and their performance will be different
+can see structure with netron or google model explorer to compare operators or different versions of networks
+may need to use a conversion tool to convert to TFLite (or whatever your inference engine wants)
+

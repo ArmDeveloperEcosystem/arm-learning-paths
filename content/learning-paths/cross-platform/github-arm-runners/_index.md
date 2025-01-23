@@ -10,14 +10,14 @@ learning_objectives:
     - Use GitHub Actions to automate image builds.
 
 prerequisites:
-    - A GitHub account with a Team or Enterprise Cloud plan.
+    - A GitHub account (a Team or Enterprise Cloud plan is required for private repositories).
     - A Docker Hub account.
 
 author_primary: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
-subjects: Containers and Virtualization
+subjects: CI-CD
 armips:
     - Neoverse
 operatingsystems:
@@ -31,7 +31,7 @@ shared_path: true
 shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
-    - embedded-systems
+    - embedded-and-microcontrollers
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

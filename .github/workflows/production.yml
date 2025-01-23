@@ -1,0 +1,25 @@
+# This workflow will be triggered on a push to the 'production' branch automatically or when called manually.
+# Upon running this workflow, the website will be built and deployed to the production instance.
+name: Build and Deploy Production Website
+
+on:
+  # Runs on pushes to the 'production' branch
+  push:
+    branches: [production]
+
+  # Allows to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy_production:
+    name: Build and Deploy Production
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      id-token: write
+      contents: read
+    with:
+      target: production
+    secrets:
+      AWS_OIDC_ROLE: ${{ secrets.AWS_OIDC_ROLE_PRODUCTION }}
+      HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
+      HUGO_RAG_API: ${{ secrets.HUGO_RAG_API }}

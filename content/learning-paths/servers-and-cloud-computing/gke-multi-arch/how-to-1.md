@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Migrate an existing x86-based application to run on Arm-based nodes in a single GKE cluster 
 
-Google Kubernetes Engine (GKE) supports hybrid clusters with x86 and Arm based nodes. The Arm-based nodes can be deployed on the `Tau T2A` family of virtual machines. The `Tau T2A` virtual machines are powered by Ampere Altra Arm-based processors.
+Google Kubernetes Engine (GKE) supports hybrid clusters with x86 and Arm based nodes. The Arm-based nodes can be deployed on the `C4A` family of virtual machines. The `C4A` VMs are based on [Google Axion](http://cloud.google.com/products/axion/), Google’s first Arm-based server processor, built using the Armv9 Neoverse V2 CPU.
 
 ## Before you begin
 
@@ -102,13 +102,13 @@ Hello from NODE:gke-multi-arch-cluster-default-pool-45537239-q83v, POD:x86-hello
 
 ## Add Arm-based nodes to your GKE cluster
 
-Use the following command to add an Arm-based node pool with VM type `t2a-standard-2` to your GKE cluster:
+Use the following command to add an Arm-based node pool with VM type `c4a-standard-2` to your GKE cluster:
 
 ```console
 gcloud container node-pools create arm-pool \
     --cluster $CLUSTER_NAME \
     --zone $ZONE \
-    --machine-type=t2a-standard-2 \
+    --machine-type=c4a-standard-2 \
     --num-nodes=3
 ```
 After the Arm-nodes are successfully added to the cluster, run the following command to check if both types of nodes show up in the cluster:

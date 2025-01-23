@@ -5,14 +5,11 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Prepare the Embedding Model
 
-In this section, you will build the online RAG part of your application.
+In your Python script, generate a test embedding and print its dimension and the first few elements.
 
-### Prepare the embedding model
-
-In your python script, generate a test embedding and print its dimension and first few elements.
-
-For the LLM, you will use the OpenAI SDK to request the Llama service launched before. You don't need to use any API key because it is running locally on your machine.
+For the LLM, you will use the OpenAI SDK to request the Llama service that you launched previously. You do not need to use an API key because it is running locally on your machine.
 
 Append the code below to `zilliz-llm-rag.py`:
 
@@ -31,7 +28,7 @@ Run the script. The output should look like:
 
 ### Retrieve data for a query
 
-You will specify a frequent question about Milvus and then search for the question in the collection and retrieve the semantic top-3 matches.
+Now specify a common question about Milvus, and search for the question in the collection, in order to retrieve the top 3 semantic matches.
 
 Append the code shown below to `zilliz-llm-rag.py`:
 
@@ -55,7 +52,7 @@ retrieved_lines_with_distances = [
 ]
 print(json.dumps(retrieved_lines_with_distances, indent=4))
 ```
-Run the script again and the output with the top 3 matches will look like:
+Run the script again, and the output with the top 3 matches should look like:
 
 ```output
 [
@@ -68,18 +65,18 @@ Run the script again and the output with the top 3 matches will look like:
         0.5974207520484924
     ],
     [
-        "What is the maximum dataset size Milvus can handle?\n\n  \nTheoretically, the maximum dataset size Milvus can handle is determined by the hardware it is run on, specifically system memory and storage:\n\n- Milvus loads all specified collections and partitions into memory before running queries. Therefore, memory size determines the maximum amount of data Milvus can query.\n- When new entities and and collection-related schema (currently only MinIO is supported for data persistence) are added to Milvus, system storage determines the maximum allowable size of inserted data.\n\n###",
+        "What is the maximum dataset size Milvus can handle?\n\n  \nTheoretically, the maximum dataset size Milvus can handle is determined by the hardware it is run on, specifically system memory and storage:\n\n- Milvus loads all specified collections and partitions into memory before running queries. Therefore, memory size determines the maximum amount of data Milvus can query.\n- When new entities and collection-related schema (currently only MinIO is supported for data persistence) are added to Milvus, system storage determines the maximum allowable size of inserted data.\n\n###",
         0.5833579301834106
     ]
 ]
 ```
-### Use LLM to get a RAG response
+### Use the LLM to obtain a RAG response
 
 You are now ready to use the LLM and obtain a RAG response. 
 
-For the LLM, you will use the OpenAI SDK to request the Llama service you launched in the previous section. You don't need to use any API key because it is running locally on your machine. 
+For the LLM, you will use the OpenAI SDK to request the Llama service you launched in the previous section. You do not need to use an API key because it is running locally on your machine. 
 
-You will then convert the retrieved documents into a string format. Define system and user prompts for the Language Model. This prompt is assembled with the retrieved documents from Milvus. Finally use the LLM to generate a response based on the prompts.
+You will then convert the retrieved documents into a string format. Define system and user prompts for the Language Model. This prompt is assembled with the retrieved documents from Milvus. Finally, use the LLM to generate a response based on the prompts.
 
 Append the code below into `zilliz-llm-rag.py`:
 
@@ -117,7 +114,7 @@ print(response.choices[0].message.content)
 ```
 
 {{% notice Note %}}
-Make sure your llama.cpp server from the previous section is running before you proceed
+Make sure your llama.cpp server from the previous section is running before you proceed.
 {{% /notice  %}}
 
 Run the script one final time with these changes using `python3 zilliz-llm-rag.py`. The output should look like:

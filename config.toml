@@ -9,48 +9,59 @@ enableRobotsTXT = true
 
 [deployment]
 [[deployment.targets]]
-name = "aws"
+name = "internal-existing"
 URL = "s3://armswdev.tk?region=us-east-1"
 cloudFrontDistributionID = "E2VDQ2CYZATMO9"
 
+[[deployment.targets]]
+name = "internal"
+URL = "s3://arm-learning-paths-internal?region=us-west-2"
+cloudFrontDistributionID = "ENN4LK1IZUDIX"
 
+[[deployment.targets]]
+name = "production"
+URL = "s3://arm-learning-paths?region=us-west-2"
+cloudFrontDistributionID = "E2NEF61QWPFRIH"
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
 
 [frontmatter]
-    lastmod = [ "lastmod", ":git", "date", "publishDate" ]
+lastmod = ["lastmod", ":git", "date", "publishDate"]
 
 [taxonomies]
-    subject                 = "subjects"
-    operatingsystem         = "operatingsystems"
-    skilllevel              = "skilllevels"
-    tool_software_language  = "tools_software_languages"
-    armip                   = "armips"
-    cloud_service_provider  = "cloud_service_providers"
-
+subject = "subjects"
+operatingsystem = "operatingsystems"
+skilllevel = "skilllevels"
+tool_software_language = "tools_software_languages"
+armip = "armips"
+cloud_service_provider = "cloud_service_providers"
 
 [permalinks]
-    tools_software_languages = "/tag/:slug/"
-    operatingsystems = "/tag/:slug/"
-    subjects = "/tag/:slug/"
-    cloud_service_providers = "/tag/:slug/"
-    armips   = "/tag/:slug/"
+tools_software_languages = "/tag/:slug/"
+operatingsystems = "/tag/:slug/"
+subjects = "/tag/:slug/"
+cloud_service_providers = "/tag/:slug/"
+armips = "/tag/:slug/"
 
 [related]
-    threshold = 0 
-    includeNewer = true
-    toLower = false
+threshold = 0
+includeNewer = true
+toLower = false
 
-    [[related.indices]]
-        name = "cloud_service_providers"
-        weight = 100
+[[related.indices]]
+name = "cloud_service_providers"
+weight = 100
 
-    [[related.indices]]
-        name = "tools_software_languages"
-        weight = 80
-    
-    [[related.indices]]
-        name = "subjects"
-        weight = 50
+[[related.indices]]
+name = "tools_software_languages"
+weight = 80
+
+[[related.indices]]
+name = "subjects"
+weight = 50
 
 [params]
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
@@ -60,13 +71,12 @@ github_project_repo = "https://github.com/ArmDeveloperEcosystem/arm-learning-pat
 # location of assets
 assetsDir = "assets"
 
-
 # Specify a value here if your content directory is not in your repo's root directory
 # github_subdir = ""
 
 # Uncomment this if your GitHub repo does not have "main" as the default branch,
 # or specify a new value if you want to reference another branch in your GitHub links
-github_branch= "main"
+github_branch = "main"
 
 # For metadata posting on socials
 title = 'Arm Learning Paths'

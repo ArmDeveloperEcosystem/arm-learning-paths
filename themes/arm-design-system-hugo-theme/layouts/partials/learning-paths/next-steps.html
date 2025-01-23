@@ -9,38 +9,214 @@ Called from:
 */}}
 
 
-<!-- Feedback at top -->
+
+<!-- Share -->
+<style>
+    .social-icons {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+    .social-icons a {
+        color: var(--arm-light-blue);
+        font-size: 36px;
+        text-decoration: none;
+    }
+    .social-icons a:hover {
+        color: var(--arm-green);
+    }
+
+    .share-icon {
+        width: 36px;
+        height: 36px;
+        fill: var(--arm-light-blue);
+        text-decoration: none;
+    }
+    .share-icon:hover {
+        fill: var(--arm-green);
+        cursor: pointer;
+      }
+    #link-copied-success {
+        color: var(--arm-green);
+        background-color: var(--arm-black);
+        border-radius: 10px;
+        padding-left:8px;
+        padding-top: 4px;
+        padding-bottom: 6px;
+        padding-right: 16px;
+        font-size: 16px;
+    }
+
+  </style>
+
+
+<div class="c-row">
+    <div class="c-col">
+        <h2>Share</h2>
+        <p>Share what you've learned.</p>
+        <div class="social-sharing">
+            <div class="social-icons">
+                <a id="linkedin-link"
+                title="Share via LinkedIn">
+                    <svg class="share-icon">
+                        <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-linkedin"></use>
+                    </svg>
+                </a>
+
+                <a id="twitter-link" 
+                title="Share via X">
+                    <svg class="share-icon">
+                        <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-twitter"></use>
+                    </svg>
+                </a>
+      
+                <a id="bluesky-link"
+                title="Share via Bluesky">
+                    <svg class="share-icon">
+                        <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-bluesky"></use>
+                    </svg>
+                </a>
+                
+                <a id="facebook-link"
+                title="Share via Facebook">
+                    <svg class="share-icon">
+                        <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-facebook"></use>
+                    </svg>
+                </a>
+            
+                <a id="email-link"
+                title="Share via email">
+                    <svg class="share-icon">
+                        <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-mail"></use>
+                    </svg>
+                </a>
+
+
+                <a id="copy-link"
+                title="Copy link to Learning Path">
+                    <svg class="share-icon">
+                        <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-link"></use>
+                    </svg>
+                </a>
+                <span id="link-copied-success" hidden>Link copied to clipboard.</span>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function getLearningPathFullPath(url) {
+        // trim off 'next steps' to get Learning Path original link
+        const fullUrl = url;
+        const trimmedUrl = fullUrl.endsWith("/") 
+        ? fullUrl.split("/").slice(0, -2).join("/") + "/"
+        : fullUrl.split("/").slice(0, -1).join("/") + "/";
+
+        // if URL starts with http://localhost:1313/, replace with https://learn.arm.com/
+        if (trimmedUrl.startsWith("http://localhost:1313/")) {
+            return trimmedUrl.replace("http://localhost:1313/", "https://learn.arm.com/");
+        }
+        // if URL has internal.learn.arm.com, remove the internal. part
+        if (trimmedUrl.includes("internal.learn.arm.com")) {
+            return trimmedUrl.replace("internal.", "");
+        }
+
+        return trimmedUrl;
+    }
+
+    document.getElementById("copy-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        navigator.clipboard.writeText(url).then(() => {
+            // Show the success message
+            document.getElementById("link-copied-success").hidden = false;
+        }).catch(err => {
+            console.error("Failed to copy link: ", err);
+        });
+    });
+
+    document.getElementById("email-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        // construct message
+        const subject = "{{(index .learningpathfiles 0).Title}} - Arm Learning Path";
+        const body = `I thought you might find this Arm Learning Path interesting. Check it out here:\n${url}\n`;
+        
+        const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        window.location.href = mailtoLink;
+    });
+
+    document.getElementById("facebook-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        window.open(facebookShareUrl, '_blank', 'width=900,height=650');
+
+    });
+
+    document.getElementById("bluesky-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        // construct message
+        const text = `Check out this Arm Learning Path! ${url}`;
+        
+        const blueskyShareUrl = `https://bsky.app/intent/compose?text=${encodeURIComponent(text)}`;
+
+
+        window.open(blueskyShareUrl, '_blank', 'width=900,height=650');
+    });
+
+    document.getElementById("twitter-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        // construct message
+        const text = `Check out this Arm Learning Path! ${url}`;
+        
+        const twitterShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}`;
+
+        window.open(twitterShareUrl, '_blank', 'width=900,height=650');
+    });
+
+    document.getElementById("linkedin-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+
+        // construct message        
+        const linkedinShareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}`;
+
+        window.open(linkedinShareUrl, '_blank', 'width=900,height=650');
+    });
+
+  </script>
+  
+<br>
+
+<!-- Feedback -->
 {{partial "general-formatting/feedback.html" (dict "context" .context "learningpath_or_toolinstall" "Learning Path")  }}
+
+
+
 
 
 <div class="c-row">
     <div class="c-col">
         <!-- Main CTA for next learning path: -->
         <h2>Continue Learning</h2>
-        <p>{{.context.Params.next_step_guidance  | markdownify}}</p>
-        {{ with .context.Site.GetPage .context.Params.recommended_path}}
-            <span>
-                <ads-cta-link id="next-learning-path" link='{{.Permalink}}'>
-                    <span>Next Learning Path:&nbsp;&nbsp;&nbsp;{{.Title}}</span>
-                </ads-cta-link>
-            </span>
-        {{ end }}
 
         <!-- 3 columns of next steps -->
         <div class="u-display-grid u-gap-1 sm:u-grid-columns-1 lg:u-grid-columns-2 xl:u-grid-columns-3 u-margin-top-1">
-            <div id="similar-lp-div" class="content-box">
-                <h4>Similar Learning Paths</h4>
-                <p>Learn about related topics:</p>
-                <ul>
-                    {{$related := (where (.context.Site.Pages.Related (index .learningpathfiles 0) ) "Params.learning_path_main_page" "yes") | first 2 }}
-                    {{range $related}}
-                        <li class="u-margin-bottom-1/2"><a href="{{.RelPermalink}}">{{.Title}}</a></li>
-                    {{end}}                            
-                </ul>
-            </div>
-
+            
             <div id="further-reading-div" class="content-box">
-                <h4>Further Reading</h4>
+                <h4>Read related resources</h4>
                 <p>Find more information about the topics in this Learning Path:</p>
                 <ul class="fa-ul u-margin-left-0">
                 {{ range $index, $r := .context.Params.further_reading }}
@@ -63,44 +239,119 @@ Called from:
                 </ul>
             </div>
 
+
+
+            <div id="arm-dev-program-div" class="content-box">
+                <h4>Talk with Arm Experts</h4>
+                <p>Join the Arm Developer Program to share ideas, ask questions, and explore solutions with the support of the developer community.</p>
+                <ads-cta-button id="join-dev-program" level="primary" sr-label="primary button">Join now</ads-cta-button>    
+                <script>
+                    document.getElementById("join-dev-program").onclick = function () {
+                    window.open("https://www.arm.com/resources/developer-program?#register","_blank");
+                    };
+                </script>
+            </div>
+
+
             <div id="explore-tags-div" class="content-box">
-                <h4>Explore Tags</h4>
-                <p>Find additional Learning Paths using tags:</p>
-                <span>
-                        <ads-tag    href='{{ "/" | relLangURL}}tag/{{(index .learningpathfiles 0).Params.subjects | urlize}}' style="margin-bottom: 4px;">
-                            <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
-                            <span class="fa-solid fa-tag"></span>
-                            {{ (index .learningpathfiles 0).Params.subjects }}
-                        </ads-tag>
-                    {{ if (index .learningpathfiles 0).Params.cloud_service_providers }}
-                        <ads-tag    href='{{ "/" | relLangURL}}tag/{{(index .learningpathfiles 0).Params.cloud_service_providers | urlize}}' style="margin-bottom: 4px;">
-                            <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
-                            <span class="fa-solid fa-tag"></span>
-                            {{ (index .learningpathfiles 0).Params.cloud_service_providers }}
-                        </ads-tag>
-                    {{end}}
-                    {{ range (index .learningpathfiles 0).Params.armips }}
-                        <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
-                            <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
-                            <span class="fa-solid fa-tag"></span>
-                            {{ replace . "_" " " }}
-                        </ads-tag>
+                {{ $csv := resources.Get "events.csv" }}
+                {{ $csv_content := $csv | transform.Unmarshal (dict "delimiter" ",") }}
+
+                {{ $event_i := "" }}
+                {{ $event_priority := 100 }}
+
+                {{ $lp_category := (index .learningpathfiles 0).Parent.Title }}
+                {{ $lp_category_title := "" }}
+                
+
+
+
+                {{/* if lp_category is 'cross platform', get first category listed in its metadata */}}
+                {{ if eq $lp_category "Cross Platform" }}
+                    {{ $lp_category = index (index .learningpathfiles 0).Params.shared_between 0 }}
+                    {{ $dirs := readDir "content/learning-paths" }}
+                    {{ range $dirs }}
+                        {{ if eq .Name $lp_category}}
+                            {{ $indexFilePath := printf "content/learning-paths/%s/_index.md" .Name }}
+                            {{ $indexFile := readFile $indexFilePath }}
+                            {{ $indexParams := transform.Unmarshal $indexFile }}
+                            {{ $lp_category_title = $indexParams.title }}
+                        {{end}}
                     {{ end }}
-                    {{ range (index .learningpathfiles 0).Params.operatingsystems }}
-                        <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
-                            <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
-                            <span class="fa-solid fa-tag"></span>
-                            {{ . }}
-                        </ads-tag>
+                {{else}}
+                    {{ $lp_category_title = $lp_category }}
+                {{end}}
+
+                {{/* if Learning Path has AI or ML as it's metadata 'subjects' set category to AI/ML */}}
+                {{ if eq (index .learningpathfiles 0).Params.subjects "ML" }}
+                    {{ $lp_category_title = "ML" }}
+                    {{ $lp_category = "ML" }}
+                {{ end }}
+
+                {{ range $i, $row := $csv_content }}
+                    {{ $event_categories := split (index $row 9) "; " }}
+
+                    {{ if in $event_categories $lp_category_title }}
+                        {{/* If event has a higher priority than the previous one, update the event_i */}}
+                        {{ if or (eq $event_i "") (gt $event_priority (int (index $row 1))) }}
+                            {{ $event_priority = (int (index $row 1)) }}
+                            {{ $event_i = $i}}
+                        {{ end }}
                     {{ end }}
-                    {{ range (index .learningpathfiles 0).Params.tools_software_languages }}
-                        <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
-                            <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
-                            <span class="fa-solid fa-tag"></span>
-                            {{.}}
-                        </ads-tag>
-                    {{ end }}
-                </span>
+                {{ end }}
+            
+                {{ if $event_i }}
+                    {{ $event := index $csv_content $event_i }}
+                    <h4>Attend {{index $event 0}}</h4>
+                    {{ $formatted_dates := partial "server-side-processing/event-date-formatter.html" (dict "startDate" (index $event 2) "endDate" (index $event 3)) }}
+
+                    <p class="next-steps-subtitle">{{ $formatted_dates }}</p>
+                    
+                    <p>{{index $event 7}}</p>
+                    <ads-cta-button id="event-cta" level="secondary">Event sign up</ads-cta-button>
+                    <script>
+                        document.getElementById("event-cta").onclick = function () {
+                        window.open("{{index $event 8}}","_blank");
+                        };
+                    </script>
+
+                {{ else }}
+                    <h4>Learn more on Arm Developer</h4>
+
+                    <p>Visit Developer.arm.com to continue your learning journey.</p>
+                    <ads-cta-button id="dev-cta" level="secondary">Developer.arm.com</ads-cta-button>
+                    <script>
+                        document.getElementById("dev-cta").onclick = function () {
+                        window.open("https://developer.arm.com","_blank");
+                        };
+                    </script>
+                {{ end }}
+
+
+<!--    NEWSLETTER INFORMATION
+                <h4>Stay up to Date</h4>
+               
+                <p>Sign up for the Arm {{(index .learningpathfiles 0).Parent.Title}} newsletter today!</p>
+                
+                <div class="placeholder-div">
+                    name@email.com
+                </div>
+                <div class="placeholder-div">
+                    Enter Country/Region
+                </div>
+                <style>
+                    .placeholder-div {
+                        border: 1px solid var(--arm-dark-grey);
+                        border-radius: 10px; 
+                        padding: 8px;
+                        width: 100%;
+                        color: var(--arm-dark-grey);
+                        margin-bottom: 8px;
+                    }
+                </style>
+                  
+                <ads-button level="primary" sr-label="primary button">Subscribe</ads-button>
+            -->
             </div>
         </div>
     </div>

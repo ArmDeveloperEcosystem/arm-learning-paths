@@ -12,11 +12,10 @@ layout: "learningpathall"
 
 Each Learning Path contains metadata which is used to create the Learning Path pages. The metadata is used by the website so all Learning Paths have the same information and are consistent. 
 
-This section explains how to add Learning Path metadata in three files:
+This section explains how to add Learning Path metadata in two files:
 
 1. Metadata and Tagging information in `_index.md`
-2. Review Questions for comprehension provided in `_review.md`
-3. Next Steps for readers in `_next-steps.md`
+2. Next Steps for readers in `_next-steps.md`
 
 ## Metadata and tagging 
 
@@ -49,7 +48,7 @@ Displaying your name on the content you contributed is a great way to promote yo
 
 If you do not want your name to be displayed leave `author_primary` blank. 
 
-You can share additional information about yourself by editing the file [`contributors.csv`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/contributors.csv) at the top of the repository. This file collects your company name, GitHub username, LinkedIn profile, Twitter handle, and your website. All fields are optional, but any you add to `contributors.csv` will appear next to your name in the `Author` field.
+You can share additional information about yourself by editing the file [`contributors.csv`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/assets/contributors.csv) at the top of the repository. This file collects your company name, GitHub username, LinkedIn profile, Twitter handle, and your website. All fields are optional, but any you add to `contributors.csv` will appear next to your name in the `Author` field.
 
 ## Tags
 Tagging metadata is also expected to increase visibility through filtering. Some tags are closed (you must select from a pre-defined list) and some are open (enter anything). The tags are:
@@ -119,24 +118,6 @@ Specifies the Arm IP this Learning Path involves, providing a quick link to IP i
 | Specific IP | The Learning Path covers a specific board with one (or a few) Arm IP | Cortex-M4, Neoverse-N1, Mali-G57 |
 | Group of IP | The Learning Path applies to a wider class of Arm IP | Cortex-M, Cortex-A, Cortex-R, Neoverse, Mali |
 
-
-
-## Review questions 
-
-Review questions both validate comprehension and re-enforce specific learning ideas. At least two questions should be provided; three questions is ideal. Each question is multiple choice. They are specified in the _review.md file as follows:
-
-| Review Metadata | Explanation |
-|---------------|----------|
-| question          | A one sentence question to the reader       |
-| answers           | The multiple-choice answers  |
-| correct_answer    | An integer indicating what answer is correct (1 for the first listed, etc.)  |
-| explanation       | A short, 1-2 sentence explanation of why the question has that answer.  |
-
-For a great simple example of this concept see the [MongoDB Learning Path review](/learning-paths/servers-and-cloud-computing/mongodb/_review).
-
-{{% notice %}}
-The explanation is displayed whether or not the reader selects the correct answer. Avoid phrases like "Correct! *This* is because..." and opt for phrasing like "*this* is correct because..."
-{{% /notice %}}
 
 ## Next Steps
 

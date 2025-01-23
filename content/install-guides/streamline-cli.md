@@ -72,26 +72,75 @@ Arm recommends that you profile an optimized release build of your application, 
 
 If you are using the `workflow_topdown_basic option`, ensure that your application workload is at least 20 seconds long, in order to give the core time to capture all of the metrics needed. This time increases linearly as you add more metrics to capture.
 
-## Install Streamline CLI Tools
+## Using Python scripts
 
-1. Download and extract the Streamline CLI tools on your Arm server:
+The Python scripts provided with Streamline CLI tools require Python 3.8 or later, and depend on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. 
 
-```bash
-wget https://artifacts.tools.arm.com/arm-performance-studio/2024.5/Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz -P $HOME
-tar -xzf $HOME/Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz -C $HOME
-```
+Create a virtual environment:
 
-1. The `sl-format.py` Python script requires Python 3.8 or later, and depends on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. For example:
-
-```bash { cwd="$HOME/streamline_cli_tools" }
+```sh
+# From Bash
 python3 -m venv sl-venv
 source ./sl-venv/bin/activate
-python3 -m pip install -r bin/requirements.txt
 ```
 
-   {{% notice Note%}}
-  The instructions in this guide assume you have added the `<install>/bin/` directory to your `PATH` environment variable, and that you run all Python commands from inside the virtual environment.
-  {{% /notice %}}
+The prompt of your terminal has (sl-venv) as a prefix indicating the virtual environment is active.
+
+{{% notice Note%}}
+The instructions assume that you run all Python commands from inside the virtual environment.
+{{% /notice %}}
+
+## Installing the tools {.reference}
+
+The Streamline CLI tools are available as a standalone download to enable easy integration in to server workflows.
+
+To download the latest version of the tool and extract it to the current working directory you can use our download utility script:
+
+```sh
+wget https://artifacts.tools.arm.com/arm-performance-studio/Streamline_CLI_Tools/get-streamline-cli.py
+python3 get-streamline-cli.py install
+python3 -m pip install -r ./streamline_cli_tools/bin/requirements.txt
+```
+
+If you want to add the Streamline tools to your search path:
+
+```sh
+export PATH=$PATH:$PWD/streamline_cli_tools/bin
+```
+
+The script can also be used to download a specific version, or install to a user-specified directory:
+
+* To list all available versions:
+
+
+    ```sh
+    python3 get-streamline-cli.py list
+    ```
+
+* To download, but not install, a specific version:
+
+
+    ```sh
+    python3 get-streamline-cli.py download --tool-version <version>
+    ```
+
+* To download and install a specific version:
+
+    ```sh
+    python3 get-streamline-cli.py install --tool-version <version>
+    ```
+
+* To download and install to a specific directory
+
+    ```sh
+    python3 get-streamline-cli.py install --install-dir <path>
+    ```
+
+For manual download, you can find all available releases here:
+
+```sh
+https://artifacts.tools.arm.com/arm-performance-studio/Streamline_CLI_Tools/
+```
 
 ## Applying the kernel patch
 
@@ -151,6 +200,7 @@ Follow these steps to integrate these patches into an RPM-based distribution's k
     ```sh
     yum download --source kernel
     ```
+
 1. Install the sources binary:
 
     ```sh
@@ -158,11 +208,13 @@ Follow these steps to integrate these patches into an RPM-based distribution's k
     ```
 
 1. Enter the `rpmbuild` directory that is created:
+
     ```sh
     cd rpmbuild
     ```
 
 1. Copy the patch into the correct location. Replace the 9999 patch number with the next available patch number in the sequence:
+
     ```sh
     cp vX.Y-combined.patch SOURCES/9999-strobing-patch.patch
     ```

@@ -69,7 +69,7 @@ resource "google_project_iam_member" "project" {
 resource "google_compute_instance" "bastion_host" {
   project      = var.project
   name         = "bastion-vm"
-  machine_type = "t2a-standard-1"
+  machine_type = "c4a-standard-1"
   zone         = var.zone
   tags         = ["public"]
   boot_disk {
@@ -91,7 +91,7 @@ resource "google_compute_instance" "bastion_host" {
 resource "google_compute_instance" "private" {
   project                   = var.project
   name                      = "bastion-private"
-  machine_type              = "t2a-standard-1"
+  machine_type              = "c4a-standard-1"
   zone                      = var.zone
   allow_stopping_for_update = true
   tags                      = ["private"]

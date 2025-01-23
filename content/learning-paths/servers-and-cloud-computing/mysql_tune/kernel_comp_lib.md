@@ -14,7 +14,7 @@ The underlying storage technology and the file system format can impact performa
 
 Aside from the storage technology, the file system format used with `MySQL` can impact performance. The `xfs` file system is a good starting point. The `ext4` file system is another good alternative. Last, it is recommended to use storage drives that are dedicated to the database (i.e. not shared with the OS or other applications).
 
-When running in the cloud, the disk scheduling algorithm is typically set to `noop` or a similar "dumb" algorithm. This is typically optimal for `MySQL` in the cloud, so no adjustment is needed. However, if running `MySQL` on an on-prem server, it's a good idea to double check what the disk scheduling algorithm is, and possibly change it. According to the [Optimizing InnoDB Disk I/O documentation]https://dev.mysql.com/doc/refman/en/optimizing-innodb-diskio.html), `noop` or `deadline` might be better options. It's worth testing this with on-prem systems.
+When running in the cloud, the disk scheduling algorithm is typically set to `noop` or a similar "dumb" algorithm. This is typically optimal for `MySQL` in the cloud, so no adjustment is needed. However, if running `MySQL` on an on-prem server, it's a good idea to double check what the disk scheduling algorithm is, and possibly change it. According to the [Optimizing InnoDB Disk I/O documentation](https://dev.mysql.com/doc/refman/en/optimizing-innodb-diskio.html), `noop` or `deadline` might be better options. It's worth testing this with on-prem systems.
 
 ##  MySQL storage engines
 
@@ -97,7 +97,7 @@ Typically, only the number of huge pages needs to be configured. However, for mo
 
 ##  Compiler Considerations
 
-The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flags `-mcpu` and `-flto` can be used to potentially gain additional performance. Usage of these flags is explained in the [Migrating C/C++ applications](/learning-paths/servers-and-cloud-computing/migration/c-c++) section of the [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) learning path.
+The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flags `-mcpu` and `-flto` can be used to potentially gain additional performance. Usage of these flags is explained in the [Migrating C/C++ applications](/learning-paths/servers-and-cloud-computing/migration/c/) section of the [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) learning path.
 
 ##  OpenSSL Considerations
 

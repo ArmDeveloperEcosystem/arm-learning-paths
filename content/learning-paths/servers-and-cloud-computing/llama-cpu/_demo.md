@@ -19,6 +19,12 @@ diagram_blowup: config-diagram.png
 
 terms_and_conditions: demo-terms-and-conditions.txt
 
+
+title_chatbot_area: Arm KleidiAI Demo 
+
+
+prismjs: true  # enable prismjs rendering of code snippets
+
 configuration_popup_details: Super long list of configuration information to provide to the user. Should be context and all that to be crystal clear what the setup is.
 
 configuration_dropdown_options:

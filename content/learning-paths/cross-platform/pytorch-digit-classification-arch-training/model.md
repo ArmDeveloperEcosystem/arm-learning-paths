@@ -7,25 +7,25 @@ weight: 3
 layout: "learningpathall"
 ---
 
-You can create and train a feedforward neural network to classify handwritten digits from the MNIST dataset. This dataset contains 70,000 images, comprising 60,000 training and 10,000 testing images, of handwritten numerals (0-9), each with dimensions of 28x28 pixels. Some representative MNIST digits with their corresponding labels are shown below.
+You can create and train a feedforward neural network to classify handwritten digits from the MNIST dataset. This dataset contains 70,000 images, comprising 60,000 training images and 10,000 testing images of handwritten numerals (0-9), each with dimensions of 28x28 pixels. Some representative MNIST digits with their corresponding labels are shown in Figure 3:
 
-![img3](Figures/3.png)
+![img3 alt-text#center](Figures/3.png "Figure 3: MNIST Digits and Labels.")
 
-The neural network begins with an input layer containing 28x28 = 784 input nodes, with each node accepting a single pixel from an MNIST image. 
+The neural network begins with an input layer containing 28x28 = 784 input nodes, with each node accepting a single pixel from a MNIST image. 
 
-You will add a linear hidden layer with 96 nodes, using the hyperbolic tangent (tanh) activation function. To prevent overfitting, a dropout layer is applied, randomly setting 20% of the nodes to zero.
+You will add a linear hidden layer with 96 nodes, using the hyperbolic tangent (tanh) activation function. To prevent overfitting, you will apply a dropout layer, randomly setting 20% of the nodes to zero.
 
-You will then include another hidden layer with 256 nodes, followed by a second dropout layer that again removes 20% of the nodes. Finally, the output layer consists of ten nodes, each representing the probability of recognizing one of the digits (0-9).
+You will then include another hidden layer with 256 nodes, followed by a second dropout layer that again removes 20% of the nodes. Finally, you will reach a situation where the output layer consists of ten nodes, each representing the probability of recognizing one of the digits (0-9).
 
 The total number of trainable parameters for this network is calculated as follows:
 
-* First hidden layer:  784 x 96 + 96 = 75,360 parameters (weights + biases).
+* First hidden layer:  784 x 96 + 96 = 75,360 parameters (weights and biases).
 * Second hidden layer:  96 x 256 + 256 = 24,832 parameters.
 * Output layer:  256 x 10 + 10 = 2,570 parameters.
 
-In total, the network will have 102,762 trainable parameters.
+In total, the network has 102,762 trainable parameters.
 
-# Implementation
+## Implementation
 
 To implement the model, supplement the `pytorch-digits.ipynb` notebook with the following statements:
 
@@ -58,9 +58,11 @@ class NeuralNetwork(nn.Module):
         return logits
 ```
 
-To build the neural network in PyTorch, define a class that inherits from PyTorch’s nn.Module. This approach is similar to TensorFlow’s subclassing API. In this case, define a class named NeuralNetwork, which consists of two main components:
+To build the neural network in PyTorch, define a class that inherits from PyTorch’s nn.Module. This approach is similar to TensorFlow’s subclassing API. 
 
-1. **__init__** method 
+Define a class named NeuralNetwork, which consists of two main components:
+
+1. __init__ method 
 
 This method serves as the constructor for the class. 
 
@@ -69,13 +71,14 @@ First initialize the nn.Module with super(NeuralNetwork, self).__init__(). Insid
 Next, create a sequential stack of layers using nn.Sequential. 
 
 The network consists of:
+
 * A fully-connected (Linear) layer with 96 nodes, followed by the Tanh activation function.
 * A Dropout layer with a 20% dropout rate to prevent overfitting.
 * A second Linear layer, with 256 nodes, followed by the Sigmoid activation function.
 * Another Dropout layer, that removes 20% of the nodes.
 * A final Linear layer, with 10 nodes (matching the number of classes in the dataset), followed by a Softmax activation function that outputs class probabilities.
 
-2. **forward** method 
+2. Forward method 
 
 This method defines the forward pass of the network. It takes an input tensor x, flattens it using self.flatten, and then passes it through the defined sequential stack of layers (self.linear_stack). 
 
@@ -89,9 +92,9 @@ model = NeuralNetwork()
 summary(model, (1, 28, 28))
 ```
 
-After running the notebook, you will see the following output:
+After running the notebook, you will see the output as shown in Figure 4:
 
-![img4](Figures/4.png)
+![img4 alt-text#center](Figures/4.png "Figure 4: Notebook Output.")
 
 You will see a detailed summary of the NeuralNetwork model’s architecture, including the following information:
 
@@ -99,14 +102,14 @@ You will see a detailed summary of the NeuralNetwork model’s architecture, inc
 
 The summary lists each layer of the network sequentially, including:
 
-* The Flatten layer, which reshapes the 28x28 input images into a 784-element vector.
-* The Linear layers with 96 and 256 nodes, respectively, along with the activation functions (Tanh and Sigmoid) applied after each linear transformation.
-* The Dropout layers that randomly-deactivate 20% of the neurons in the respective layers.
-* The final Linear layer with 10 nodes, corresponding to the output probabilities for the 10 digit classes, followed by the Softmax function.
+* The flatten layer, which reshapes the 28x28 input images into a 784-element vector.
+* The linear layers with 96 and 256 nodes, respectively, along with the activation functions (Tanh and Sigmoid) applied after each linear transformation.
+* The dropout layers that randomly-deactivate 20% of the neurons in the respective layers.
+* The final linear layer with 10 nodes, corresponding to the output probabilities for the 10 digit classes, followed by the softmax function.
 
 2. Input and Output Shapes 
 
-For each layer, the summary shows the shape of the input and output tensors, helping to trace how the data flows through the network. For example, the input shape starts as (1, 28, 28) for the image, which gets flattened to (1, 784) after the Flatten layer.
+For each layer, the summary shows the shape of the input and output tensors, helping to trace how the data flows through the network. For example, the input shape starts as (1, 28, 28) for the image, which gets flattened to (1, 784) after the flatten layer.
 
 3.	The summary 
 
@@ -129,7 +132,7 @@ The output is still a probability distribution over the 10 digit classes (0-9), 
 
 Technically, the code will run without errors as long as you provide it with an input image of the correct dimensions, which is 28x28 pixels. The model can accept input, pass it through the layers, and return a prediction - a vector of 10 probabilities. However, the results are not useful until the model is trained.
 
-# What you have learned so far
+## What have you learned so far?
 
 You have successfully defined and initialized a feedforward neural network using PyTorch. 
 

@@ -32,7 +32,7 @@ operatingsystems:
 
 tools_software_languages:
 - Flink
-- JAVA
+- Java
 - Nexmark
 
 
