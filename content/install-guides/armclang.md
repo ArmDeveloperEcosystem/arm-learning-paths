@@ -110,13 +110,9 @@ export AC6_TOOLCHAIN_6_22_0=/home/$USER/ArmCompilerforEmbedded6.22/bin
 
 ## Set up the product license
 
-<<<<<<< HEAD
 `Arm Compiler for Embedded` and `Arm Compiler for Embedded FuSa` are license managed.
 
 License setup instructions are available in the [Arm Licensing install guide](/install-guides/license/).
-=======
-Arm Compiler for Embedded and Arm Compiler for Embedded FuSa are license managed. License setup instructions are available in the [Arm Licensing install guide](../license/).
->>>>>>> 0bc88ccc (Add armclang.md to test framework)
 
 ## Verify installation
 
