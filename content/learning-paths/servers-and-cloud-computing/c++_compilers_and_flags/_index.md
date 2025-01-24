@@ -1,5 +1,5 @@
 ---
-title: Learn the Basic C++ Compiler Optimisation Techniques
+title: Learn Basic C++ Optimisation Techniques using the G++ Compiler
 
 minutes_to_complete: 60
 
