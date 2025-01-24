@@ -3,7 +3,7 @@ title: Learn the Basic C++ Compiler Optimisation Techniques
 
 minutes_to_complete: 60
 
-who_is_this_for: Beginner C++ Developers
+who_is_this_for: Beginner C++ developers who are looking to optimise their workload on Arm-based cloud instances with no source code modifications. 
 
 learning_objectives: 
     - Compile a C++ program for a specific Arm target
@@ -11,7 +11,7 @@ learning_objectives:
 
 prerequisites:
     - Basic understanding of C++
-    - Basic understanding of compiler
+    - Basic understanding of compilers
 
 author_primary: Kieran Hejmadi
 
