@@ -279,10 +279,11 @@ function attachPageFindSearchTracker() {
         else if ( ( (depth_of_path == 4) | (depth_of_path == 5) ) & (current_path.includes('/learning-paths/')) ) {
             /* Assign to the following components:
                     0. Onload detection
-                    1. Tags (only for intro and next step pages)
-                    2. Review ('check answer' button)
-                    2.5. Review (if all correct, add trigger for analytics somehow)
-                    3. Feedback (on Next Steps page)
+                    1. Tags (on Intro page)
+                    2. Feedback (on Next Steps page)
+                    3. Share (on Next Steps page)
+                    4. CTAs (on Next Steps page)
+                    5. Further Reading links (on Next Steps page)
             */
             
                     
@@ -351,7 +352,9 @@ function attachPageFindSearchTracker() {
                 });
             }
 
+            // REMOVED NOW THAT REVIEW PAGE IS REMOVED. SAFE TO TAKE OUT.
             // 2) Review check answer btn and answers
+            /*
             let check_answer_btn = document.getElementById('check-answer-btn'); 
             if (check_answer_btn) {
                 // check answer button
@@ -389,9 +392,10 @@ function attachPageFindSearchTracker() {
                     });
                 });
             } 
+            */
 
 
-            // 3) Feedback on Next Steps page
+            // 2) Feedback on Next Steps page
             // trackStarRating
             let stars = document.querySelectorAll('input[name=rating]');
             for (let star of stars) {
@@ -407,7 +411,47 @@ function attachPageFindSearchTracker() {
                     trackChoiceFeedback(feedback);
                 });
             } 
+
+            // 3) Share         on Next Steps page
+            let share_a = document.getElementsByClassName('share-button');
+            for (let share_link of share_a) {
+                share_link.addEventListener("click", () => {
+                    _satellite.track('content-interaction', {   
+                        'data-track-type'     : 'learning-path-next-steps',
+                        'data-track-location' : 'share',
+                        'data-track-name'     : share_link.getAttribute('name')     // will be 'LinkedIn' or 'Facebook' or 'Email' or similar.
+                    });
+                });
+            }
+
+            // 4) CTAs             on Next Steps page
+            let cta_links = document.querySelectorAll('.next-step-cta');
+            for (let cta of cta_links) {
+                console.log('ctalink',cta);
+                cta.addEventListener("click", () => {                   
+                    _satellite.track('content-interaction', {   
+                        'data-track-type'     : 'learning-path-next-steps',
+                        'data-track-location' : cta.getAttribute('name'),               // either 'Event', 'DevProg', or 'Developer.arm.com'
+                        'data-track-name'     : cta.getAttribute('data-event-name')     // if Event, gives event name, otherwise, null.
+                    }); 
+                })
+            }
+
+            // 5) Further Reading links on Next Steps page  
+            let further_reading_links = document.querySelectorAll('#further-reading-div a');
+            for (let link of further_reading_links) {
+                link.addEventListener("click", () => {
+                    _satellite.track('content-interaction', {   
+                        'data-track-type'     : 'learning-path-next-steps',
+                        'data-track-location' : 'metadata',
+                        'data-track-name'     : 'further-reading-link'
+                    });
+                });
+            }
+
+
                 // metadata marking for similar learning paths, further reading, next learning path.
+            /* All obsolete in new design
             let next_learning_path_link = document.getElementById('next-learning-path');
             if (next_learning_path_link) {
                 next_learning_path_link.addEventListener("click", () => {
@@ -419,7 +463,6 @@ function attachPageFindSearchTracker() {
                 });
             }
 
-
             let similar_lp_links = document.querySelectorAll('#similar-lp-div a');
             for (let link of similar_lp_links) {
                 link.addEventListener("click", () => {
@@ -430,16 +473,7 @@ function attachPageFindSearchTracker() {
                     });
                 });
             }
-            let further_reading_links = document.querySelectorAll('#further-reading-div a');
-            for (let link of further_reading_links) {
-                link.addEventListener("click", () => {
-                    _satellite.track('content-interaction', {   
-                        'data-track-type'     : 'learning-path-next-steps',
-                        'data-track-location' : 'metadata',
-                        'data-track-name'     : 'further-reading-link'
-                    });
-                });
-            }
+
             let explore_tag_links = document.querySelectorAll('#explore-tags-div ads-tag');
             for (let link of explore_tag_links) {
                 link.addEventListener("click", () => {
@@ -450,6 +484,7 @@ function attachPageFindSearchTracker() {
                     });
                 });
             }
+            */
 
 
             // 4a) Navitaion from navbar
