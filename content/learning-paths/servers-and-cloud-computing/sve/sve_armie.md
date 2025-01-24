@@ -80,10 +80,11 @@ Install `qemu-user` to run the example on processors which do not support SVE:
 ```bash {  command_line="user@localhost" }
 sudo apt install qemu-user -y
 ```
-Run the example application with a vector length of 256 bits:
+
+Run the example application with a vector length of 256 bits, note that the vector length is specified in bytes rather than bits:
 
 ```bash {  command_line="user@localhost | 2"  }
-qemu-aarch64 -cpu max,sve-default-vector-length=256 ./sve_add.exe 
+qemu-aarch64 -cpu max,sve-default-vector-length=32 ./sve_add.exe
 Done.
 ```
 
