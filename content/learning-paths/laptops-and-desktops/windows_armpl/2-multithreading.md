@@ -1,5 +1,5 @@
 ---
-title: Build a simple numerical application and profile the performance
+title: Build a Simple Numerical Application and Profile the Performance
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -10,9 +10,9 @@ layout: learningpathall
 
 This section uses an example application from GitHub to demonstrate the use of Arm Performance Libraries.
 
-Start by installing Git using the [Git install guide](/install-guides/git-woa/) for Windows on Arm.
+Start by installing Git using the [Git Install Guide](/install-guides/git-woa/) for Windows on Arm.
 
-## Clone the example from GitHub
+## Clone the Example from GitHub
 
 The example application renders a rotating 3D cube to perform the calculations on different programming options.
 
@@ -23,16 +23,17 @@ git clone https://github.com/odincodeshen/SpinTheCubeInGDI.git
 ```
 
 {{% notice Note %}}
-The example repository is forked from the [original GitHub repository](https://github.com/marcpems/SpinTheCubeInGDI) and some minor modifications have been made to aid learning.
+The example repository is forked from the [original GitHub repository](https://github.com/marcpems/SpinTheCubeInGDI) with some modifications for demonstration purposes to improve the learning experience.
 {{% /notice %}}
 
-## Spin the cube introduction
+## Spin the Cube Introduction
 
-In Windows File Explorer, double-click `SpinTheCubeInGDI.sln` to open the project in Visual Studio.
+In Windows File Explorer, double-click **SpinTheCubeInGDI.sln** to open the project in Visual Studio.
 
-The source file `SpinTheCubeInGDI.cpp` implements a spinning cube.
+The source file **SpinTheCubeInGDI.cpp** then implements a spinning cube.
 
 The four key components are:
+ 
  - Shape Generation: Generates the vertices for a sphere using a golden ratio-based algorithm.
  - Rotation Calculation: 
    The application uses a rotation matrix to rotate the 3D shape around the X, Y, and Z axes. The rotation angle is incremented over time, creating the animation. 
