@@ -1,6 +1,6 @@
 ---
 title: Build a Simple Numerical Application and Profile the Performance
-weight: 3
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
