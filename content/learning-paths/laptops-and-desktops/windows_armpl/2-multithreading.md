@@ -1,32 +1,11 @@
 ---
 title: Build a Simple Numerical Application and Profile the Performance
-weight: 4
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
-## Install Git for Windows on Arm
-
-This section uses an example application from GitHub to demonstrate the use of Arm Performance Libraries.
-
-Start by installing Git using the [Git Install Guide](/install-guides/git-woa/) for Windows on Arm.
-
-## Clone the Example from GitHub
-
-The example application renders a rotating 3D cube to perform the calculations on different programming options.
-
-First, navigate to an empty directory and clone the example repository from GitHub:
-
-```cmd
-git clone https://github.com/odincodeshen/SpinTheCubeInGDI.git
-```
-
-{{% notice Note %}}
-The example repository is forked from the [original GitHub repository](https://github.com/marcpems/SpinTheCubeInGDI) with some modifications for demonstration purposes to improve the learning experience.
-{{% /notice %}}
-
-## Spin the Cube Introduction
+## Get Started with Spin the Cube
 
 In Windows File Explorer, double-click **SpinTheCubeInGDI.sln** to open the project in Visual Studio.
 
@@ -49,7 +28,7 @@ Option 1 is explained below and option 2 is explained on the next page. By tryin
 
 ## Option 1: Multithreading
 
-One way to speed up the rotation calculations is to use multithreading.
+One way that you can speed up the rotation calculations is to use multithreading.
 
 The multithreading implementation option involves two functions:
 
@@ -130,7 +109,7 @@ The multithreading implementation option involves two functions:
 
 ## Build and run the application
 
-After gaining a general understanding of the project, you can compile and run it. 
+After grasping a basic understanding of the project, you can compile and run it. 
 
 Build the project, and run `SpinTheCubeInGDI.exe`
 
@@ -147,4 +126,4 @@ You can use the [Visual Studio profiling tools](https://learn.microsoft.com/en-u
 
  ![img8](./figures/mt_cpumem_usage1.png)
 
-Continue to the next section to learn how to improve performance using Arm Performance Libraries.
+Continue to the next section to learn how you can optimize performance using Arm Performance Libraries.

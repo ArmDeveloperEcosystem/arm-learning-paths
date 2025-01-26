@@ -1,5 +1,5 @@
 ---
-title: Get Started with Microsoft Visual Studio
+title: Get set up with Microsoft Visual Studio
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -17,11 +17,13 @@ There are three editions of Visual Studio 2022 that are tailored to various deve
  - Professional Edition offers professional developer tools, services, and subscription benefits for small teams.
  - Enterprise Edition provides the most comprehensive set of tools and services for large teams and enterprise-level development.
 
-To work out which is the best edition for your needs, see [Compare Visual Studio 2022 Editions](https://visualstudio.microsoft.com/vs/compare/).
+To establish which edition is best-suited to your needs, see [Compare Visual Studio 2022 Editions](https://visualstudio.microsoft.com/vs/compare/).
 
 {{% notice Note %}}
 This Learning Path uses the Community Edition of Visual Studio 2022, but you can also use other editions. 
 {{% /notice %}}
 
-Download and install Visual Studio using the [Visual Studio for Windows on Arm](/install-guides/vs-woa/) install guide. Make sure to install C and C++ support and the LLVM compiler. 
+Download and install Visual Studio using the [Visual Studio for Windows on Arm](/install-guides/vs-woa/) install guide. 
+
+Make sure you install C and C++ support, and the LLVM compiler. 
 

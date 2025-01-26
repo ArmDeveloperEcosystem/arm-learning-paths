@@ -1,6 +1,6 @@
 ---
 title: Use Arm Performance Libraries to improve performance
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -34,7 +34,7 @@ You need to configure two places in your Visual Studio project:
 
 ### External Include Directories:
 
-1. In the Solution Explorer, right-click on your project and select `Properties`. 
+1. In the Solution Explorer, right-click on your project and select **Properties**. 
 2. In the left pane of the Property Pages, expand `Configuration Properties`. Select `VC++ Directories`
 3. In the right pane, find the `Additional Include Directories` setting.
 4. Click on the dropdown menu. Select `<Edit...>`
@@ -44,9 +44,9 @@ You need to configure two places in your Visual Studio project:
  
 ### Additional Library Directories:
 
-1. In the Solution Explorer, right-click on your project and select `Properties`. 
-2. In the left pane of the Property Pages, expand `Configuration Properties`. Select `Linker`
-3. In the right pane, find the `Additional Library Directories` setting.
+1. In the Solution Explorer, right-click on your project and select **Properties**. 
+2. In the left pane of the Property Pages, expand **Configuration Properties**. Select **Linker**.
+3. In the right pane, find the **Additional Library Directories** setting.
 4. Click on the dropdown menu. Select `<Edit...>`
 5. In the dialog that opens, click the `New Line` icon to add Arm Performance Libraries `library` path.
 
@@ -54,7 +54,7 @@ You need to configure two places in your Visual Studio project:
 
 
 {{% notice Note %}}
-Visual Studio allows users to set the above two paths for each individual configuration. To apply the settings to all configurations in your project, select `All Configurations` in the `Configuration` dropdown menu.
+Visual Studio allows users to set the above two paths for each individual configuration. To apply the settings to all configurations in your project, select **All Configurations** in the **Configuration** drop-down menu.
 {{% /notice %}}
 
 
@@ -64,7 +64,7 @@ You are now ready to use Arm Performance Libraries in your project.
 
 Open the source code file `SpinTheCubeInGDI.cpp` and search for the `_USE_ARMPL_DEFINES` definition.
 
-You should see a commented-out definition on line 13 of the program. Removing the comment will enable the Arm Performance Libraries feature when you re-build the application.
+You will see a commented-out definition on line 13 of the program. Removing the comment enables the Arm Performance Libraries feature when you re-build the application.
 
  ![img12](./figures/apl_define.png)
 
@@ -99,7 +99,9 @@ void RotateCube(int numCores)
 
 The `applyRotationBLAS()` function adopts a BLAS matrix multiplier instead of multithreading multiplication for calculating rotation.
 
-Basic Linear Algebra Subprograms (BLAS) are a set of well defined basic linear algebra operations in Arm Performance Libraries, check [cblas_dgemm](https://developer.arm.com/documentation/101004/2410/BLAS-Basic-Linear-Algebra-Subprograms/CBLAS-functions/cblas-dgemm?lang=en) to learn more about the function.
+Basic Linear Algebra Subprograms (BLAS) are a set of well-defined basic linear algebra operations in Arm Performance Libraries.
+
+See [cblas_dgemm](https://developer.arm.com/documentation/101004/2410/BLAS-Basic-Linear-Algebra-Subprograms/CBLAS-functions/cblas-dgemm?lang=en) to learn more about the function.
 
 Here is the code used to compute rotation with BLAS:
 
@@ -124,7 +126,7 @@ void applyRotationBLAS(std::vector<double>& shape, const std::vector<double>& ro
 
 Rebuild the code and run `SpinTheCubeInGDI.exe` again.
 
-Click on the "Options" menu in the top left corner of the program, then select "Use APL" to utilize Option 2.
+Click on the **Options** menu in the top-left corner of the program, then select **Use APL** to utilize Option 2.
 
  ![img13](./figures/use_apl.png)
 
@@ -134,9 +136,9 @@ On the Lenovo X13s, the performance is between 11k and 12k FPS.
 
 Re-run the profiling tools. 
 
-You see that the CPU usage has decreased significantly. There is no difference in memory usage.
+You will see that the CPU usage has decreased significantly. There is no difference in memory usage.
 
  ![img14](./figures/apl_on_cpu_mem_usage.png)
 
 
-You have learned how to improve application performance using Arm Performance Libraries.
+You have learned how to optimize application performance using Arm Performance Libraries.

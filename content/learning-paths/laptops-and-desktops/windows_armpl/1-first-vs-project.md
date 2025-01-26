@@ -9,7 +9,7 @@ layout: learningpathall
 
 You are now ready to create a sample Windows on Arm application.
 
-In the interests of ease and simplicity, you are going to create an uncomplicated console application.
+You will create a simple and straightforward console application as your first project.
 
 On the **Start** window, select **Create a new project**. 
 
@@ -34,7 +34,7 @@ int main()
 }
 ```
 
-Microsoft Visual Studio automatically configures the build environment for the hardware's CPU architecture. However, you will benefit from familiarizing yourself with the relevant settings.
+Microsoft Visual Studio automatically configures the build environment for the hardware of the CPU architecture. However, you will benefit from familiarizing yourself with the relevant configuration settings.
 
 ## ARM64 Configuration Settings
 
@@ -51,7 +51,7 @@ Click **Build**, then **Build Solution**, and your application compiles successf
 
 ## Run your first Windows on Arm application
 
-Use the green arrow to run the program you just compiled, and you will see the print statement from your code correctly executed in the console.
+Use the green arrow to run the program you compiled, and you will see the print statement from your code correctly executed in the console.
 
  ![img6](./figures/vs_console_exe.png)
 
@@ -59,9 +59,9 @@ You can also use the tools provided by Visual Studio to check the compiled execu
 
 The [dumpbin](https://learn.microsoft.com/en-us/cpp/build/reference/dumpbin-reference?view=msvc-170) command-line tool is included with Microsoft Visual Studio. You can use it to analyze binary files such as executable files (.exe), object files (.obj), and dynamic-link libraries (.dll). 
 
-To use `dumpbin`, open a command prompt with Visual Studio configured by opening Windows search, and looking for `Arm64 Native Tools Command Prompt for VS 2022`. Find and then open this application.
+To use `dumpbin`, open a command prompt with Visual Studio configured by opening Windows search, and look for `Arm64 Native Tools Command Prompt for VS 2022`. Find this application, and open it.
 
-A new Command Prompt opens. It is the same as the regular Windows command prompt with the added benefit that Visual Studio tools can be run from the prompt.
+A new command prompt opens. It is the same as the regular Windows command prompt, but with the added benefit that you can run Visual Studio tools from the prompt.
 
 Run the command below, replacing the text with the details of the executable that you created as an argument:
 
