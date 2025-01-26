@@ -8,38 +8,42 @@ layout: learningpathall
 
 ## Install Microsoft Visual Studio 
 
-Visual Studio 2022, Microsoft's Integrated Development Environment (IDE), empowers developers to build high-performance applications for the Arm architecture. 
+Visual Studio 2022 is an Integrated Development Environment (IDE) developed by Microsoft that empowers developers to build high-performance applications for the Arm architecture. 
 
-You can learn more about [Visual Studio on Arm-powered devices](https://learn.microsoft.com/en-us/visualstudio/install/visual-studio-on-arm-devices?view=vs-2022) from Microsoft Learn.
+You can learn more about [Microsoft Visual Studio on Arm-powered devices](https://learn.microsoft.com/en-us/visualstudio/install/visual-studio-on-arm-devices?view=vs-2022) from the Microsoft Learn website.
 
-Visual Studio 2022 offers different editions tailored to various development needs:
- - Community: A free, fully-featured edition ideal for students, open-source contributors, and individual developers.
- - Professional: Offers professional developer tools, services, and subscription benefits for small teams.
- - Enterprise: Provides the most comprehensive set of tools and services for large teams and enterprise-level development.
+There are three editions of Visual Studio 2022 that are tailored to various development needs:
+ - Community Edition is a free, fully-featured edition ideal for students, open source contributors, and individual developers.
+ - Professional Edition offers professional developer tools, services, and subscription benefits for small teams.
+ - Enterprise Edition provides the most comprehensive set of tools and services for large teams and enterprise-level development.
 
-To select the best edition for you, refer to [Compare Visual Studio 2022 Editions](https://visualstudio.microsoft.com/vs/compare/).
+To work out which is the best edition for your needs, see [Compare Visual Studio 2022 Editions](https://visualstudio.microsoft.com/vs/compare/).
 
 {{% notice Note %}}
-This Learning Path uses Visual Studio Community, but you can also use other editions. 
+This Learning Path uses the Community Edition of Visual Studio 2022, but you can also use other editions. 
 {{% /notice %}}
 
 Download and install Visual Studio using the [Visual Studio for Windows on Arm](/install-guides/vs-woa/) install guide. Make sure to install C and C++ support and the LLVM compiler. 
 
 ## Create a sample project
 
-You are ready to create a sample Windows on Arm application.
+You are now ready to create a sample Windows on Arm application.
 
-To keep the example clear and concise, you can create a simple console application.
+In the interests of ease and simplicity, you are going to create an uncomplicated console application.
 
-On the start window, click `Create a new project`. 
+On the **Start** window, select **Create a new project**. 
 
 ![img1](./figures/vs_new_proj1.png)
 
-In the `Create a new project` window, select `Console App`, provide a project name, such as `hello-world-1`, and then click `Next`.
+In the **Create a new project** window, do the following:
+
+* Select **Console App**.
+* Provide a project name, such as `hello-world-1`.
+* Click **Next**.
 
 ![img2](./figures/vs_new_proj2.png)
 
-After the project is created, you will see a line of `Hello, world!` code in the newly created C++ file. 
+After the project is created, you will see a line of `Hello, World!` code in the newly-created C++ file. 
 
 ```C++
 #include <iostream>
@@ -50,11 +54,11 @@ int main()
 }
 ```
 
-Microsoft Visual Studio automatically configures the build environment for the current hardware's CPU architecture. However, you can still familiarize ourselves with the relevant settings.
+Microsoft Visual Studio automatically configures the build environment for the hardware's CPU architecture. However, you will benefit from familiarizing yourself with the relevant settings.
 
-## ARM64 Configuration Setting
+## AArch64 Configuration Settings
 
-Click the `Debug` drop down and select `Configuration Manager...`
+Click on the `Debug` drop-down menu, and select `Configuration Manager...`
 
  ![img4](./figures/vs_console_config1.png)
 
