@@ -71,6 +71,7 @@ For Debian based distributions (including Ubuntu) run:
 
 ```bash { target="ubuntu:latest" }
 sudo apt update
+sudo apt remove python3-pip
 sudo apt install python-is-python3 python3-pip python3-venv python3-packaging linux-tools-generic linux-tools-$(uname -r) -y
 ```
 
