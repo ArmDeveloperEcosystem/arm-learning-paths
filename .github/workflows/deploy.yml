@@ -26,7 +26,7 @@ env:
 jobs:
   build_and_deploy:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     permissions:
       id-token: write
       contents: read
@@ -59,7 +59,7 @@ jobs:
         run: |
           hugo --minify
           cp learn-image-sitemap.xml public/learn-image-sitemap.xml
-          bin/pagefind --site "public"
+          bin/pagefind.arm64 --site "public"
         env:
           HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
           HUGO_RAG_API: ${{ secrets.HUGO_RAG_API }}
