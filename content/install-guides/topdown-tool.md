@@ -89,6 +89,8 @@ Create a virtual environment for the installation.
 ```bash
 python3 -m venv topdown-venv
 source topdown-venv/bin/activate
+pip3 install wheel
+echo $(pip --version)
 ```
 Install `topdown-tool` in `/usr/local/bin`:
 
