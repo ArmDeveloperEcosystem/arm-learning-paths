@@ -71,7 +71,7 @@ For Debian based distributions (including Ubuntu) run:
 
 ```bash { target="ubuntu:latest" }
 sudo apt update
-sudo apt install python3-pip python-is-python3 python3-venv -y
+sudo apt install python3-pip python-is-python3 python3-venv linux-tools-generic linux-tools-$(uname -r) -y
 ```
 
 ## Install the Telemetry Solution
