@@ -182,15 +182,11 @@ sw_categories:
       readable_title: VNC on Arm Linux
       tests_and_status:
       - ubuntu:latest: passed
-  iot:
     topdown-tool:
       readable_title: Telemetry Solution (Topdown Methodology)
       tests_and_status:
       - ubuntu:latest: passed
-    vnc:
-      readable_title: VNC on Arm Linux
-      tests_and_status:
-      - ubuntu:latest: passed
+  iot: {}
   laptops-and-desktops: {}
   mobile-graphics-and-gaming: {}
   servers-and-cloud-computing:
