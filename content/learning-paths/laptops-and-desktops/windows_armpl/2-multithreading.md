@@ -115,7 +115,7 @@ The multithreading implementation option involves two functions:
 
 After grasping a basic understanding of the project, you can compile and run it. 
 
-Build the project, and run `SpinTheCubeInGDI.exe`.
+Build the project and run `SpinTheCubeInGDI.exe`.
 
 You will see a simulated 3D sphere continuously rotating. 
 

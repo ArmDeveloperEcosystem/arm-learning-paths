@@ -1,5 +1,5 @@
 ---
-title: Get set up with Git
+title: Git setup
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Install Git for Windows on Arm
 
-This section uses an sample application from GitHub to demonstrate the use of Arm Performance Libraries.
+This section uses a sample application from GitHub to demonstrate the use of Arm Performance Libraries.
 
 Start by installing Git using the [Git Install Guide](/install-guides/git-woa/) for Windows on Arm.
 

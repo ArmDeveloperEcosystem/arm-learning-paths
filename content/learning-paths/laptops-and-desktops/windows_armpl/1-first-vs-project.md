@@ -53,7 +53,7 @@ Click **Build**, then **Build Solution**, and your application will compile.
 
 Use the green arrow to run the program you compiled, and you will see the print statement from your code correctly executed in the console.
 
- ![img6 alt-text#center](./figures/vs_console_exe.png "Figure 5: Project Contexts Menu.")
+ ![img6 alt-text#center](./figures/vs_console_exe.png "Figure 5: The Console.")
 
 You can also use the tools provided by Visual Studio to check the compiled executable.
 
@@ -75,6 +75,6 @@ dumpbin /headers <your exe path>\ConsoleApp1.exe
 
 You can see that the file format shows `AA64 machine (ARM64)` in the file header.
 
- ![img7](./figures/vs_checkmachine.jpeg)
+ ![img7](./figures/vs_checkmachine.jpeg "Figure 6: AA64 Machine in File Header.")
 
 Continue to the next page to build and run a more computation-intensive application.
