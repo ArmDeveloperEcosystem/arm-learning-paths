@@ -1,5 +1,5 @@
 ---
-title: Build the Software Stack
+title: Build the software stack
 weight: 3
 
 ### FIXED, DO NOT MODIFY
