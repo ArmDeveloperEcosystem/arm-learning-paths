@@ -53,7 +53,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 Use the `apt` command to install the required software packages on any Debian-based Linux distribution, including Ubuntu.
 
 ```bash { target="ubuntu:latest" }
-sudo apt update 
+sudo apt update
 sudo apt install -y curl gcc
 ```
 
@@ -140,7 +140,7 @@ You are ready to use the Rust programming language on your Arm Linux machine.
 
 To compile an example program, run the following commands:
 
-```bash { env_source="~/.bashrc" }
+```console
 cargo new hello
 cd hello
 cargo run
