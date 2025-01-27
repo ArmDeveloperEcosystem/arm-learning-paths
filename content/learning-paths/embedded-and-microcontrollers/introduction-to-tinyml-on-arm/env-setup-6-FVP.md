@@ -26,6 +26,4 @@ Test that the setup was successful by running the `run.sh` script.
 ./run.sh
 ```
 
-TODO connect this part to simple_nn.py part?
-
-You will see a number of examples run on the FVP. This means you can proceed to the next section to test your environment setup.
+You will see a number of examples run on the FVP. This means you can proceed to the next section [Build a Simple PyTorch Model](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/build-model-8/) to test your environment setup.
