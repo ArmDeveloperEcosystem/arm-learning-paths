@@ -89,10 +89,10 @@ Create a virtual environment for the installation.
 ```bash
 python3 -m venv topdown-venv
 source topdown-venv/bin/activate
-pip3 install --upgrade pip==23.0
+pip3 install --upgrade pip==24.0
 pip3 install wheel
-pip3 install --upgrade packaging
 ```
+
 Install `topdown-tool` in `/usr/local/bin`:
 
 ```bash
