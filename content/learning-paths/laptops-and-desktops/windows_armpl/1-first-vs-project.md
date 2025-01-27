@@ -5,7 +5,7 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Create a sample project
+## Create and configure a project
 
 You are now ready to create a Windows on Arm application.
 
@@ -15,7 +15,7 @@ As shown in Figure 1, go to the **Start** window, and select **Create a new proj
 
 ![vs_new_proj1.png alt-text#center](./figures/vs_new_proj1.png "Figure 1: Create a new project.")
 
-Then, as shown in Figure 2, in the **Configure your new project** window, do the following:
+Then, as shown in Figure 2, in **Configure your new project**, do the following:
 
 * Select **Console App**.
 * Provide a project name, such as `ConsoleApp1`.

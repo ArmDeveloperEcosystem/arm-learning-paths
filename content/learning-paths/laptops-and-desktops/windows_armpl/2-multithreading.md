@@ -1,5 +1,5 @@
 ---
-title: Build a Simple Numerical Application and Profile the Performance
+title: Build a Numerical Application and Profile the Performance
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -13,13 +13,13 @@ The source file **SpinTheCubeInGDI.cpp** will then implement a spinning cube.
 
 The four key components of the application are:
  
- - Shape Generation: the application generates the vertices for a sphere using a golden ratio-based algorithm.
+ - Shape generation: the application generates the vertices for a sphere using a golden ratio-based algorithm.
  
- - Rotation Calculation: the application uses a rotation matrix to rotate the 3D shape around the X, Y, and Z axes. The rotation angle is incremented over time, creating the animation. 
+ - Rotation calculation: the application uses a rotation matrix to rotate the 3D shape around the X, Y, and Z axes. The rotation angle is incremented over time, creating the animation. 
  
  - Drawing: the application draws the transformed vertices of the shapes on the screen, using a Windows API.
  
- - Performance Measurement: the code measures and displays the number of transforms per second.
+ - Performance measurement: the code measures and displays the number of transforms per second.
 
 The code has two options to calculate the rotation:
 
@@ -38,7 +38,9 @@ The multithreading implementation option involves two functions:
     
     This function is the entry point for each calculation thread.  Each calculation thread waits on its semaphore in `semaphoreList`.
    
-    When a thread receives a signal, it calls `applyRotation()` to transform its assigned vertices. The updated vertices are stored in the `drawSphereVertecies` vector. The code is shown below:
+    When a thread receives a signal, it calls `applyRotation()` to transform its assigned vertices. The updated vertices are stored in the `drawSphereVertecies` vector. 
+    
+    The code is shown below:
    
     ```c++
     DWORD WINAPI CalcThreadProc(LPVOID data)
@@ -117,15 +119,17 @@ Build the project, and run `SpinTheCubeInGDI.exe`.
 
 You will see a simulated 3D sphere continuously rotating. 
 
-The number in application represents the number of frames per second (FPS). A higher number indicates better performance.
+The number in the application represents the number of Frames Per Second (FPS). 
+
+A higher number indicates more frames per second, which indicates improved performance.
 
  ![gif1](./figures/multithreading.gif)
 
-Performance varies across various Windows on Arm computers, but on the Lenovo X13s the performance generally falls between 3K and 6K FPS.
+Performance varies across different Windows on Arm computers, but on the Lenovo X13s specifically, the performance generally falls between 3K and 6K FPS.
 
 
 You can use the [Visual Studio profiling tools](https://learn.microsoft.com/en-us/visualstudio/profiling/profiling-feature-tour?view=vs-2022) to observe the dynamic CPU and memory usage while the program is running.
 
  ![img8](./figures/mt_cpumem_usage1.png)
 
-Continue to the next section to learn how you can optimize performance using Arm Performance Libraries.
+Continue learning to find out how you can optimize performance using Arm Performance Libraries.

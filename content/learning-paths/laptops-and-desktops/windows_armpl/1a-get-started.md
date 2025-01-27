@@ -1,12 +1,12 @@
 ---
-title: Get set up with Microsoft Visual Studio
+title: Before you begin
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Select an edition and install  
+## Get set up with Microsoft Visual Studio  
 
 Visual Studio 2022 is an Integrated Development Environment (IDE) developed by Microsoft that empowers developers to build high-performance applications for the Arm architecture. 
 
