@@ -56,7 +56,7 @@ If the result includes a line with `sshd` the daemon is running.
 root      1113     1  0 18:48 ?        00:00:00 /usr/sbin/sshd -D
 ```
 Another way to check if the SSH daemon is running is to query the SSH service.
-```bash
+```console
 sudo systemctl status sshd
 ```
 If the output displays "running", then the SSH daemon is already running.
