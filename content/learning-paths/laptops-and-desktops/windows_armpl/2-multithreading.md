@@ -5,24 +5,26 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Get Started with Spin the Cube
+## Get started with Spin the Cube
 
 In Windows File Explorer, double-click **SpinTheCubeInGDI.sln** to open the project in Visual Studio.
 
-The source file **SpinTheCubeInGDI.cpp** then implements a spinning cube.
+The source file **SpinTheCubeInGDI.cpp** will then implement a spinning cube.
 
-The four key components are:
+The four key components of the application are:
  
- - Shape Generation: Generates the vertices for a sphere using a golden ratio-based algorithm.
- - Rotation Calculation: 
-   The application uses a rotation matrix to rotate the 3D shape around the X, Y, and Z axes. The rotation angle is incremented over time, creating the animation. 
- - Drawing: The application draws the transformed vertices of the shapes on the screen, using a Windows API.
- - Performance Measurement: The code measures and displays the number of transforms per second.
+ - Shape Generation: the application generates the vertices for a sphere using a golden ratio-based algorithm.
+ 
+ - Rotation Calculation: the application uses a rotation matrix to rotate the 3D shape around the X, Y, and Z axes. The rotation angle is incremented over time, creating the animation. 
+ 
+ - Drawing: the application draws the transformed vertices of the shapes on the screen, using a Windows API.
+ 
+ - Performance Measurement: the code measures and displays the number of transforms per second.
 
 The code has two options to calculate the rotation:
 
-  1. Multithreading: The application utilizes multithreading to improve performance by distributing the rotation calculations across multiple threads.
-  2. Arm Performance Libraries: The application utilizes optimized math library functions for the rotation calculations. 
+  1. Multithreading: the application utilizes multithreading to improve performance by distributing the rotation calculations across multiple threads.
+  2. Arm Performance Libraries: the application utilizes optimized math library functions for the rotation calculations. 
 
 Option 1 is explained below and option 2 is explained on the next page. By trying both methods you can compare and contrast the code and the performance. 
 
@@ -32,7 +34,7 @@ One way that you can speed up the rotation calculations is to use multithreading
 
 The multithreading implementation option involves two functions:
 
- - The `CalcThreadProc()` function
+ - The `CalcThreadProc()` function:
     
     This function is the entry point for each calculation thread.  Each calculation thread waits on its semaphore in `semaphoreList`.
    
@@ -56,7 +58,7 @@ The multithreading implementation option involves two functions:
             applyRotation(UseCube ? cubeVertices : sphereVertices, rotationInX, threadNum * pointStride, pointStride);
             LeaveCriticalSection(&cubeDraw[threadNum]);
 
-            // set a semaphore to say we are done
+            // set a semaphore to say you are done
             ReleaseSemaphore(doneList[threadNum], 1, NULL);
         }
 
@@ -86,7 +88,7 @@ The multithreading implementation option involves two functions:
         {
             counter++;
 
-            // take the next three values for a 3d point
+            // take the next three values for a 3D point
             refx = *point; point++;
             refy = *point; point++;
             refz = *point; point++;
@@ -111,7 +113,7 @@ The multithreading implementation option involves two functions:
 
 After grasping a basic understanding of the project, you can compile and run it. 
 
-Build the project, and run `SpinTheCubeInGDI.exe`
+Build the project, and run `SpinTheCubeInGDI.exe`.
 
 You will see a simulated 3D sphere continuously rotating. 
 
@@ -119,7 +121,7 @@ The number in application represents the number of frames per second (FPS). A hi
 
  ![gif1](./figures/multithreading.gif)
 
-Performance varies across various Windows on Arm computers, but on the Lenovo X13s the performance generally falls between 3k and 6k FPS.
+Performance varies across various Windows on Arm computers, but on the Lenovo X13s the performance generally falls between 3K and 6K FPS.
 
 
 You can use the [Visual Studio profiling tools](https://learn.microsoft.com/en-us/visualstudio/profiling/profiling-feature-tour?view=vs-2022) to observe the dynamic CPU and memory usage while the program is running.
