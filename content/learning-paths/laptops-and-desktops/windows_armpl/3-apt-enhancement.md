@@ -1,5 +1,5 @@
 ---
-title: Use Arm Performance Libraries to improve performance
+title: Use Arm Performance Libraries to Optimize Performance
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -8,11 +8,9 @@ layout: learningpathall
 
 ## Introducing Arm Performance Libraries
 
-In the previous section, you gained some understanding of the performance of the first calculation option, multithreading. 
+Now that you have seen the performance of multithreading, you can move on to deploying Arm Performance Libraries, and you can explore the differences. 
 
-Now, use option 2, Arm Performance Libraries, and explore the differences.
-
-[Arm Performance Libraries](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Libraries) provides optimized standard core math libraries for numerical applications on 64-bit Arm-based processors. The libraries are built with OpenMP across many BLAS, LAPACK, FFT, and sparse routines in order to maximize your performance in multi-processor environments.
+[Arm Performance Libraries](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Libraries) provides optimized standard core math libraries for numerical applications on 64-bit Arm-based processors. The libraries are built with OpenMP across many Basic Linear Algebra Subprograms (BLAS), LAPACK, FFT, and sparse routines in order to maximize performance in multi-processor environments.
 
 Use the [Arm Performance Libraries install guide](/install-guides/armpl/) to install Arm Performance Libraries on Windows 11. 
 
@@ -26,11 +24,11 @@ Take note of the location of these two directories, as you will need them for co
 
  ![img9](./figures/apl_directory.png)
 
-## Include Arm Performance Libraries into Visual Studio
+## Add Arm Performance Libraries to Visual Studio
 
 To use Arm Performance Libraries in the application, you need to manually add the paths into Visual Studio.
 
-You need to configure two places in your Visual Studio project:
+In your Visual Studio project, configure two places  in your Visual Studio project:
 
 ### External Include Directories:
 
@@ -69,9 +67,9 @@ You will see a commented-out definition on line 13 of the program. Removing the 
  ![img12](./figures/apl_define.png)
 
 
-When variable useAPL is True, the application will call `applyRotationBLAS()` instead of the multithreading code to apply the rotation matrix to the 3D vertices.
+When variable useAPL is True, the application calls `applyRotationBLAS()` instead of the multithreading code, to apply the rotation matrix to the 3D vertices.
 
-The code is below:
+The code is shown below:
 
 ```c++
 void RotateCube(int numCores)
@@ -97,7 +95,7 @@ void RotateCube(int numCores)
 }
 ```
 
-The `applyRotationBLAS()` function adopts a BLAS matrix multiplier instead of multithreading multiplication for calculating rotation.
+The `applyRotationBLAS()` function adopts a BLAS matrix multiplier instead of multithreading multiplication for calculating the rotation.
 
 Basic Linear Algebra Subprograms (BLAS) are a set of well-defined basic linear algebra operations in Arm Performance Libraries.
 
