@@ -1,5 +1,5 @@
 ---
-title: Create a Windows on Arm application using Microsoft Visual Studio
+title: Create a Windows on Arm application
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -7,23 +7,23 @@ layout: learningpathall
 ---
 ## Create a sample project
 
-You are now ready to create a sample Windows on Arm application.
+You are now ready to create a Windows on Arm application.
 
-You will create a simple and straightforward console application as your first project.
+For your first project, you will create a simple console application.
 
-On the **Start** window, select **Create a new project**. 
+As shown in Figure 1, go to the **Start** window, and select **Create a new project**.  
 
-![img1](./figures/vs_new_proj1.png)
+![vs_new_proj1.png alt-text#center](./figures/vs_new_proj1.png "Figure 1: Create a new project.")
 
-In the **Create a new project** window, do the following:
+As shown in Figure 2, in the **Configure your new project** window, do the following:
 
 * Select **Console App**.
-* Provide a project name, such as `hello-world-1`.
+* Provide a project name, such as `ConsoleApp1`.
 * Click **Next**.
 
-![img2](./figures/vs_new_proj2.png)
+![img2 alt-text#center](./figures/vs_new_proj2.png "Figure 2: Configure your new project.")
 
-After the project is created, you will see a line of `Hello, World!` code in the newly-created C++ file. 
+After you have created the project, you will see a line of `Hello, World!` code in the newly-created C++ file. 
 
 ```C++
 #include <iostream>
@@ -34,7 +34,7 @@ int main()
 }
 ```
 
-Microsoft Visual Studio automatically configures the build environment for the hardware of the CPU architecture. However, you will benefit from familiarizing yourself with the relevant configuration settings.
+Whilst Microsoft Visual Studio automatically configures the build environment for the hardware of the CPU architecture, you will still benefit from familiarizing yourself with the relevant configuration settings and learning what to use.
 
 ## ARM64 Configuration Settings
 

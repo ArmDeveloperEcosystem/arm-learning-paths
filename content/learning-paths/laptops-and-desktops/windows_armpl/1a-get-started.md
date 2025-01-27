@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## Install Microsoft Visual Studio 
+## Select an edition and install  
 
 Visual Studio 2022 is an Integrated Development Environment (IDE) developed by Microsoft that empowers developers to build high-performance applications for the Arm architecture. 
 
