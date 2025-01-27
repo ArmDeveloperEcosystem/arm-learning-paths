@@ -71,7 +71,6 @@ For Debian based distributions (including Ubuntu) run:
 
 ```bash { target="ubuntu:latest" }
 sudo apt update
-sudo apt remove python3-pip
 sudo apt install python-is-python3 python3-pip python3-venv python3-packaging linux-tools-generic linux-tools-$(uname -r) -y
 ```
 
@@ -88,17 +87,15 @@ git clone https://git.gitlab.arm.com/telemetry-solution/telemetry-solution.git
 Create a virtual environment for the installation.
 
 ```bash
-python3 -m venv topdown-venv
+python -m venv topdown-venv
 source topdown-venv/bin/activate
-pip3 install --upgrade pip==24.0
-pip3 install wheel
 ```
 
 Install `topdown-tool` in `/usr/local/bin`:
 
 ```bash
 cd telemetry-solution/tools/topdown_tool
-sudo pip3 install -e .
+sudo pip install -e .
 ```
 
 3. Confirm you can run `top-down` using the `version` command:
