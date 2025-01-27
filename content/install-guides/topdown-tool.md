@@ -93,14 +93,14 @@ source topdown-venv/bin/activate
 
 Install `topdown-tool` in `/usr/local/bin`:
 
-```bash
+```console
 cd telemetry-solution/tools/topdown_tool
 sudo pip install -e .
 ```
 
 3. Confirm you can run `top-down` using the `version` command:
 
-```bash { target="ubuntu:latest" }
+```console
 topdown-tool --help
 ```
 
