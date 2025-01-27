@@ -9,7 +9,7 @@ permissions:
   pull-requests: write
 jobs:
   stats-pr:
-    runs-on: arm-linux-runner
+    runs-on: ubuntu-24.04-arm
     steps:
         - name: Checkout main branch
           uses: actions/checkout@v2
