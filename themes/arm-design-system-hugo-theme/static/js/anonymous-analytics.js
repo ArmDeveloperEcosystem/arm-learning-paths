@@ -292,13 +292,13 @@ function attachPageFindSearchTracker() {
            let lp_step = document.getElementById('learning-path-step-active').innerText.trim();
            let lp_step_num = document.getElementById('learning-path-step-active').getAttribute('data-step-num');
            let lp_category = current_path.split('/')[2];
+           let lp_author = document.getElementById('learning-path-author').getAttribute('data-author').trim();
 
             // specific to intro page only; 
             if (document.getElementById('skill-level')) {
                 let lp_skill_level = document.getElementById('skill-level').innerText.trim();
                 let lp_reading_time = document.getElementById('reading-time').innerText.trim();
                 let lp_last_updated = document.getElementById('last-updated').innerText.trim();
-                let lp_author = document.getElementById('author').innerText.trim();
                 let lp_tag_elements = document.querySelectorAll('#tags-for-content ads-tag');
                 let lp_tags = ''
                 for (let ele of lp_tag_elements) {
@@ -329,7 +329,8 @@ function attachPageFindSearchTracker() {
                         learningPathName: lp_title, 
                         learningTabName: lp_step,
                         pageNumber: "page " +lp_step_num,
-                        learningPathCategory: lp_category
+                        learningPathCategory: lp_category,
+                        learningPathAuthor: lp_author
                     }
                 };
             }
