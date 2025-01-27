@@ -26,31 +26,32 @@ import org.opencv.imgproc.Imgproc
 
 enum class ImageOperation(val displayName: String) {
     GAUSSIAN_BLUR("Gaussian Blur") {
-        override fun apply(mat: Mat) {
-            Imgproc.GaussianBlur(mat, mat, Size(5.0, 5.0), 5.0)
+        override fun apply(src: Mat, dst: Mat) {
+            Imgproc.GaussianBlur(src, dst, Size(7.0, 7.0), 0.0)
         }
     },
     SOBEL("Sobel") {
-        override fun apply(mat: Mat) {
-            Imgproc.Sobel(mat, mat, CvType.CV_8U, 1, 1)
+        override fun apply(src: Mat, dst: Mat) {
+            Imgproc.Sobel(src, dst, CvType.CV_16S, 1, 0, 3
+                , 1.0, 0.0, Core.BORDER_REPLICATE)
         }
     },
     RESIZE("Resize") {
-        override fun apply(mat: Mat) {
+        override fun apply(src: Mat, dst: Mat) {
             Imgproc.resize(
-                mat,
-                mat,
-                Size(mat.cols() / 2.0, mat.rows() / 2.0)
+                src,
+                dst,
+                Size(src.cols() / 2.0, src.rows() / 2.0)
             )
         }
     },
     ROTATE_90("Rotate 90°") {
-        override fun apply(mat: Mat) {
-            Core.rotate(mat, mat, Core.ROTATE_90_CLOCKWISE)
+        override fun apply(src: Mat, dst: Mat) {
+            Core.rotate(src, dst, Core.ROTATE_90_CLOCKWISE)
         }
     };
 
-    abstract fun apply(mat: Mat)
+    abstract fun apply(src: Mat, dst: Mat)
 
     companion object {
         fun fromDisplayName(name: String): ImageOperation? =
@@ -59,15 +60,17 @@ enum class ImageOperation(val displayName: String) {
 }
 ```
 
-The ImageOperation enum represents a collection of predefined image processing operations. Each enum constant is associated with a displayName (a user-friendly string describing the operation) and a unique implementation of the apply method to perform the operation on an image (Mat).
+The ImageOperation enum represents a collection of predefined image processing operations. Each enum constant is associated with a displayName (a user-friendly string describing the operation) and a unique implementation of the apply method to perform the operation on an image (Mat). The processing result is will be available in the dst parameter of the apply method.
 
 Here we have four constants:
-1. GAUSSIAN_BLUR. Applies a Gaussian blur to the image using a 5x5 kernel and a standard deviation of 5.0.
-2. SOBEL. Applies the Sobel filter to detect edges in the image. It computes the gradient in both x and y directions with an 8-bit unsigned data type (CvType.CV_8U).
+1. GAUSSIAN_BLUR. Applies a Gaussian blur to the image using a 7x7 kernel and a standard deviation of 0.0.
+2. SOBEL. Applies the Sobel filter to detect edges in the image. It computes the gradient in both x and y directions with an 8-bit unsigned data type (CvType.CV_16S).
 3. RESIZE. Resizes the image to half its original width and height.
 4. ROTATE_90. Rotates the image 90 degrees clockwise.
 
-Each enum constant must override the abstract method apply to define its specific image processing logic. The method modifies the input Mat object directly.
+Each enum constant must override the abstract method apply to define its specific image processing logic. 
+
+We configured processing operations to align with current KleidiCV restrictions. Specifically, in-place changes are not supported, so the source and destination must be different images. In general, only single-channel images are supported (Gaussian blur is an exception). Sobel’s output type must be 16SC1; dx and dy must be either (1,0) or (0,1); and the border mode must be replicate. Gaussian blur supports a non-zero sigma, but its performance is best with sigma 0.0. Its uplift is most noticeable with a kernel size of 7×7.
 
 There is also the companion object provides a utility method:
 ```Kotlin
@@ -88,8 +91,8 @@ package com.arm.arm64kleidicvdemo
 import org.opencv.core.Mat
 
 class ImageProcessor {
-    fun applyOperation(mat: Mat, operation: ImageOperation) {
-        operation.apply(mat)
+    fun applyOperation(src: Mat, dst: Mat, operation: ImageOperation) {
+        operation.apply(src, dst)
     }
 }
 ```
@@ -167,7 +170,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var imageProcessor: ImageProcessor
 
     private var originalMat: Mat? = null
-    private var currentBitmap: Bitmap? = null
 
     companion object {
         private const val REPETITIONS = 500
@@ -217,24 +219,22 @@ class MainActivity : AppCompatActivity() {
         try {
             assets.open(TEST_IMAGE).use { inputStream ->
                 val bitmap = BitmapFactory.decodeStream(inputStream)
-                displayAndStoreBitmap(bitmap)
-                convertBitmapToMat(bitmap)
+                val src = convertBitmapToMat(bitmap)
+                originalMat = src
+                displayProcessedImage(src)
             }
         } catch (e: Exception) {
             showToast("Error loading image: ${e.message}")
         }
     }
 
-    private fun displayAndStoreBitmap(bitmap: Bitmap) {
-        currentBitmap = bitmap
-        viewBinding.imageView.setImageBitmap(bitmap)
-    }
-
-    private fun convertBitmapToMat(bitmap: Bitmap) {
-        originalMat = Mat(bitmap.height, bitmap.width, CvType.CV_8UC3).also { mat ->
+    private fun convertBitmapToMat(bitmap: Bitmap): Mat {
+        return Mat(bitmap.height, bitmap.width, CvType.CV_8UC1).also { mat ->
             bitmap.copy(Bitmap.Config.ARGB_8888, true).let { tempBitmap ->
                 Utils.bitmapToMat(tempBitmap, mat)
-                Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGBA2BGR)
+                Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGBA2GRAY)
+                assert(mat.channels() == 1)
+                mat.convertTo(mat, CvType.CV_8U)
             }
         }
     }
@@ -252,20 +252,22 @@ class MainActivity : AppCompatActivity() {
                 return
             }
 
-        val processedMat = Mat()
+        val src = Mat()
+        originalMat?.copyTo(src)
+        val dst = Mat()
+
         val durations = mutableListOf<Long>()
 
         repeat(REPETITIONS) {
-            originalMat?.copyTo(processedMat)
             val duration = measureOperationTime {
-                imageProcessor.applyOperation(processedMat, operation)
+                imageProcessor.applyOperation(src, dst, operation)
             }
             durations.add(duration)
         }
 
         val metrics = PerformanceMetrics(durations)
         viewBinding.textViewTime.text = metrics.toString()
-        displayProcessedImage(processedMat)
+        displayProcessedImage(dst)
     }
 
     private fun measureOperationTime(block: () -> Unit): Long {
@@ -274,13 +276,20 @@ class MainActivity : AppCompatActivity() {
         return System.nanoTime() - start
     }
 
-    private fun displayProcessedImage(processedMat: Mat) {
+    private fun displayProcessedImage(mat: Mat) {
+        val processedMat = Mat()
+        mat.copyTo(processedMat)
+        processedMat.convertTo(processedMat, CvType.CV_8U)
+        assert(processedMat.channels() == 1)
+
         Imgproc.cvtColor(processedMat, processedMat, Imgproc.COLOR_BGR2RGBA)
+
         val resultBitmap = Bitmap.createBitmap(
             processedMat.cols(),
             processedMat.rows(),
             Bitmap.Config.ARGB_8888
         )
+
         Utils.matToBitmap(processedMat, resultBitmap)
         viewBinding.imageView.setImageBitmap(resultBitmap)
     }
@@ -304,7 +313,7 @@ There are several members of this class:
 When the activity starts, it sets up the user interface, initializes OpenCV and sets up UI listeners:
 
 The activity also implements several helper methods:
-1. setupSpinne - populates the spinner with the names of available ImageOperation enums.
+1. setupSpinner - populates the spinner with the names of available ImageOperation enums.
 2. showToast - displays a short toast message for user feedback.
 3. loadImage - loads the test image (img.png) from the app’s assets. Then, the method converts the image into a Bitmap and stores it for display. The bitmap is also converted to an OpenCV Mat object and changed its color format to BGR (used in OpenCV).
 4. displayAndStoreBitmap - updates the app’s ImageView to display the loaded image.
@@ -373,14 +382,43 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("org.opencv:opencv:4.10.0-kleidicv")
+    implementation("org.opencv:opencv:4.11.0")
 }
 ```
 
 ## Running the application
-You can launch the application in emulator or on the actual device. When you do so, click the Load image button, select the image processing operation, and then click Process. You will see the processing results and a detailed performance analysis as shown in the following figures:
+You can launch the application in emulator or on the actual device. When you do so, click the Load image button, select the image processing operation, and then click Process. You will see the processing results and a detailed performance analysis as shown in the following figures (we used Samsung Galaxy S22):
 
 ![img3](Figures/03.jpg)
 ![img4](Figures/04.jpg)
 ![img5](Figures/05.jpg)
 ![img6](Figures/06.jpg)
+
+## Performance uplift
+To appreciate the performance uplift oferred by KleidiCV you can now switch to one of the earliest OpenCV versions, which do not have KleidiCV, e.g. 4.9.0, and re-run the application. To do so open the build.gradle.kts, and modify this line
+```XML
+implementation("org.opencv:opencv:4.11.0")
+```
+
+to 
+```XML
+implementation("org.opencv:opencv:4.9.0")
+```
+
+Then, click the Sync Now button, and deploy the app to the Android device (here we used Samsung Galaxy S22):
+
+![img7](Figures/07.jpg)
+![img8](Figures/08.jpg)
+![img9](Figures/09.jpg)
+![img10](Figures/10.jpg)
+
+We achieved the following performance uplift:
+
+| Operation | Average computation time [ms]       | Performance Uplift  |
+|-----------|------------------|------------------|---------------------|
+| Gaussian  | 0,04             | 0,16             | 4x                  |
+| Sobel     | 0,02             | 0,08             | 4x                  |
+| Resize    | 0,02             | 0,04             | 2x                  |
+| Rotate    | 0,02             | 0,06             | 3x                  |
+
+As shown above, we achieved 4× faster computations for Gaussian blur and the Sobel filter, 3× faster for rotation, and 2× faster for resizing.

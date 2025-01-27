@@ -26,6 +26,6 @@ For Android developers, OpenCV offers an SDK designed for seamless integration w
 
 By combining OpenCV’s rich feature set, hardware optimization via HAL, and specialized enhancements like ARM’s KleidiCV, developers can build efficient, high-performing computer vision solutions tailored for modern mobile and embedded systems.
 
-In this Learning Path we will demonstrate how to use KleidiCV-accelerated OpenCV in Android application
+In this Learning Path we will demonstrate how to use KleidiCV-accelerated OpenCV in Android application.
 
 You can find all the code used in this Learning Path in a [GitHub repository](https://github.com/dawidborycki/Arm64.KleidiCV.Demo.git).

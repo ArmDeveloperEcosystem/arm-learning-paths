@@ -34,7 +34,7 @@ The project will be ready in a few moments, and Android Studio should appear as 
 To add OpenCV for Arm64, open the *build.gradle.ts (Module: app)*, and add the following line under the dependencies:
 
 ```JSON
-implementation("org.opencv:opencv:4.10.0-kleidicv")
+implementation("org.opencv:opencv:4.11.0")
 ```
 
 Make sure that compileSdk is set to 35:
@@ -87,10 +87,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("org.opencv:opencv:4.10.0-kleidicv")
+    implementation("org.opencv:opencv:4.11.0")
 }
 ```
-
 
 Then, click the **Sync Now** link in the top pane that appears. From here on, you can use OpenCV with KleidiCV support in your application. 
 
