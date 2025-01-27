@@ -75,6 +75,6 @@ dumpbin /headers <your exe path>\ConsoleApp1.exe
 
 You can see that the file format shows `AA64 machine (ARM64)` in the file header.
 
- ![img7](./figures/vs_checkmachine.jpeg "Figure 6: AA64 Machine in File Header.")
+ ![img7 alt-text#center](./figures/vs_checkmachine.jpeg "Figure 6: AA64 Machine in File Header.")
 
 Continue to the next page to build and run a more computation-intensive application.

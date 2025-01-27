@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## Introducing Arm Performance Libraries
+## Introuducing Arm Performance Libraries
 
 Now that you have seen the performance of multithreading, you can move on to deploying Arm Performance Libraries, and you can explore the differences. 
 
@@ -33,16 +33,16 @@ In your Visual Studio project, configure two places  in your Visual Studio proje
 ### External Include Directories:
 
 1. In the Solution Explorer, right-click on your project and select **Properties**. 
-2. In the left pane of the Property Pages, expand `Configuration Properties`. Select `VC++ Directories`
+2. In the left pane of the Property Pages, expand `Configuration Properties`. Select `VC++ Directories`.
 3. In the right pane, find the `Additional Include Directories` setting.
-4. Click on the dropdown menu. Select `<Edit...>`
+4. Click on the dropdown menu. Select `<Edit...>`.
 5. In the dialog that opens, click the `New Line` icon to add Arm Performance Libraries `include` path.
 
 ![img10](./figures/ext_include.png)
  
 ### Additional Library Directories:
 
-1. In the Solution Explorer, right-click on your project and select **Properties**. 
+1. In the Solution Explorer, right-click on your project, and select **Properties**. 
 2. In the left pane of the Property Pages, expand **Configuration Properties**. Select **Linker**.
 3. In the right pane, find the **Additional Library Directories** setting.
 4. Click on the dropdown menu. Select `<Edit...>`
