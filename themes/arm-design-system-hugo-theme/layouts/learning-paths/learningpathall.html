@@ -37,6 +37,8 @@ Calls to:
             <!-- Title of _index.md always top left -->
             {{ with .Site.GetPage $thisdir}}
                 <h6 id="learning-path-title" class="u-margin-top-1/2" style="font-size:1em; font-weight: normal;">{{ .Params.Title }}</h6>
+                <!-- Author name hidden but availible for analytics -->
+                <div hidden id="learning-path-author" data-author="{{.Params.author_primary}}"></div>
             {{ end }}
 
 
