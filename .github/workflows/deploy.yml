@@ -26,7 +26,7 @@ env:
 jobs:
   build_and_deploy:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: arm-linux-runner
     permissions:
       id-token: write
       contents: read
