@@ -1,5 +1,5 @@
 ---
-title: Create a Windows on Arm application
+title: Create and Run a Windows on Arm application
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -7,18 +7,18 @@ layout: learningpathall
 ---
 ## Create and configure a project
 
-You are now ready to create a Windows on Arm application.
+You are now ready to create a Windows on Arm application. For your first project, you will create a simple console application.
 
-For your first project, you will create a simple console application.
+The next steps will guide you through how to create and configure your project.
 
-As shown in Figure 1, go to the **Start** window, and select **Create a new project**.  
+Begin by going to the **Start** window, and selecting **Create a new project**. See Figure 1.  
 
 ![vs_new_proj1.png alt-text#center](./figures/vs_new_proj1.png "Figure 1: Create a new project.")
 
-Then, as shown in Figure 2, in **Configure your new project**, do the following:
+Then, in **Configure your new project**, do the following:
 
 * Select **Console App**.
-* Provide a project name, such as `ConsoleApp1`.
+* Provide a project name, such as `ConsoleApp1`, as Figure 2 shows.
 * Click **Create**.
 
 ![img2 alt-text#center](./figures/vs_new_proj2.png "Figure 2: Configure your new project.")
@@ -34,20 +34,20 @@ int main()
 }
 ```
 
-Whilst Microsoft Visual Studio automatically configures the build environment for the hardware of the CPU architecture, you will still benefit from familiarizing yourself with the relevant configuration settings and learning what to use. Continue to learn more about the configuration settings.
+Whilst Microsoft Visual Studio automatically configures the build environment for the hardware of the CPU architecture, you still benefit from familiarizing yourself with the relevant configuration settings. So continue to learn more about how to get set up.
 
 ## ARM64 Configuration Settings
 
-Click on the **Debug** drop-down menu, and select **Configuration Manager...**
+Now click on the **Debug** drop-down menu, and select **Configuration Manager...** 
 
  ![img4 alt-text#center](./figures/vs_console_config1.png "Figure 3: Select Configuration Manager.")
 
 
-In the **Project contexts** area, you will see the platform set to `ARM64`. 
+In the **Project contexts** area, you will see the platform set to `ARM64`, as Figure 4 shows. 
 
  ![img5 alt-text#center](./figures/vs_console_config2.png "Figure 4: Project Contexts Menu.")
 
-Click **Build**, then **Build Solution**, and your application will compile.
+Now click **Build**, then **Build Solution**, and your application will compile.
 
 ## Run your first Windows on Arm application
 
@@ -55,9 +55,9 @@ Use the green arrow to run the program you compiled, and you will see the print 
 
  ![img6 alt-text#center](./figures/vs_console_exe.png "Figure 5: The Console.")
 
-You can also use the tools provided by Visual Studio to check the compiled executable.
+You can also use the tools that Visual Studio provides to check the compiled executable.
 
-The [dumpbin](https://learn.microsoft.com/en-us/cpp/build/reference/dumpbin-reference?view=msvc-170) command-line tool is included with Microsoft Visual Studio. You can use it to analyze binary files such as:
+Visual Studio includes the command-line tool [dumpbin](https://learn.microsoft.com/en-us/cpp/build/reference/dumpbin-reference?view=msvc-170), and you can use it to analyze binary files such as:
 
 * Executable files (.exe).
 * Object files (.obj).
@@ -77,4 +77,4 @@ You can see that the file format shows `AA64 machine (ARM64)` in the file header
 
  ![img7 alt-text#center](./figures/vs_checkmachine.jpeg "Figure 6: AA64 Machine in File Header.")
 
-Continue to the next page to build and run a more computation-intensive application.
+Continue to the next page to get set up with Git before you move on to build and run a more computationally-intensive application.

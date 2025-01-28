@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## Introuducing Arm Performance Libraries
+## Introducing Arm Performance Libraries
 
 Now that you have seen the performance of multithreading, you can move on to deploying Arm Performance Libraries, and you can explore the differences. 
 
