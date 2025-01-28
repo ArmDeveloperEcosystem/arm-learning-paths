@@ -1,0 +1,199 @@
+{{/*
+    Demo page for the llm-chatbot, the first demo created in learn.arm.com.
+    
+    Where it is used:
+        - learning paths, demo page
+    
+    Called from:
+        - partials learning-paths/demo.html
+    
+    Calls to:
+        - the demo's frontmater metadata (.Params)
+    
+    */}}
+    
+    
+    
+    <script>
+    
+        let mediaRecorder;
+        let audioChunks = [];
+        let audioBlob = null;
+        let audio_cap_timeout; 
+        let audio_cap_timeout_value = 3000;
+        let isRecording = false;
+    
+        const audio_playback = document.getElementById('audio-playback');
+        const placeholder_for_audio_playback = document.getElementById('placeholder-for-audio-playback');
+        const text_status = document.getElementById('status');
+        const submit_btn = document.getElementById('send-to-server-btn');
+        const icon_div = document.getElementById('audio-icon-div');
+        const icon = document.getElementById('audio-action-icon');
+    
+        const status_msg__recording_timeout = "Recording auto-capped at "+audio_cap_timeout_value/1000+"sec. Ready to transcribe."
+        const status_msg__recording_stopped = "Audio recorded. Ready to transcribe."
+        const status_msg__recording_started = "Recording in progress..."
+        const status_msg__mic_permission_error = "Error accessing microphone. Please ensure you have granted permissions in your browser."
+        const status_msg__sending_to_server = "Transcription in process..."
+        const status_msg__transcription_show = "Transcription complete."
+    
+    
+    
+    
+    
+        icon_div.addEventListener('click', () => {
+            if (!icon_div.classList.contains('disabled')) {
+                if (!isRecording) {
+                    startRecording();
+                } else {
+                    stopRecording();
+                }
+            }
+        });
+    
+    
+        async function startRecording() {
+            try {
+                // Start audio stream, asking permission for mic if not granted.
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.start();
+                isRecording = true;
+    
+    
+                // Cap recording at set time
+                audio_cap_timeout = setTimeout(() => {
+                    stopRecording();
+                    text_status.textContent = status_msg__recording_timeout;
+                }, audio_cap_timeout_value); 
+                
+                // Indicate recording on UI
+                if (icon.classList.contains('fa-microphone-lines')) {
+                    // First recording of session
+                    icon.classList.replace('fa-microphone-lines','fa-square-full');   
+                }
+                else {
+                    // Re-recording
+                    icon.classList.replace('fa-rotate-right','fa-square-full');
+                    // hide audiPlaback, show placeholder
+                    audio_playback.style.display = 'none';
+                    placeholder_for_audio_playback.style.display = 'block';
+    
+                }
+                text_status.textContent = status_msg__recording_started;
+                icon_div.classList.add('pulse');
+    
+    
+                // Collect the audio data chunks
+                mediaRecorder.ondataavailable = event => {
+                    audioChunks.push(event.data);
+                };
+    
+                // When the recording stops, create an audio file
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    audio_playback.src = audioUrl;
+                    audio_playback.style.display = 'block';
+                    placeholder_for_audio_playback.style.display = 'none';
+                    submit_btn.disabled = 'false';
+                    audioChunks = [];  // Reset the chunks for next recording
+    
+                    clearTimeout(audio_cap_timeout); // Reset timeout
+                };
+            } catch (error) {
+                console.error('Error accessing microphone:', error);
+                text_status.textContent = status_msg__mic_permission_error;
+            }
+        }
+    
+        function stopRecording() {
+            if (mediaRecorder && isRecording) {
+                mediaRecorder.stop();
+                isRecording = false;
+    
+                // Indicate stopped on UI
+                icon.classList.replace('fa-square-full','fa-rotate-right');
+                icon_div.classList.remove('pulse');
+                icon.style.color = "white";
+    
+                text_status.textContent = status_msg__recording_stopped;
+    
+            }
+        }
+    
+    
+        // Send audio to server on button click
+        submit_btn.addEventListener('click', () => {
+            sendAudioToServer(audioBlob);
+        });
+    
+    
+    
+        function insertRandomSentenceWithDelay(div) {
+            const sentences = [
+                "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.",
+                "A journey of a thousand miles begins with a single step.\nThe quick brown fox jumps over the lazy dog.\nTo be or not to be, that is the question.\nTo be or not to be, that is the question. To be or not to be, that is the question.\n\nTo be or not to be, that is the question.",
+            ];
+            const randomIndex = Math.floor(Math.random() * sentences.length);
+            const randomDelay = Math.floor(Math.random() * 4 + 1) * 1000; // Random delay between 1 and 4 seconds
+            const sentence = sentences[randomIndex];
+    
+            setTimeout(() => {
+                const transcription_loader = document.getElementById('transcription-loader');
+                transcription_loader.style.display = 'none';
+                // show transcription
+                div.textContent = sentence;
+    
+                // update loading text
+                text_status.textContent = status_msg__transcription_show;
+    
+                // remove disabled tag on rerun
+                icon_div.classList.remove('disabled');
+    
+            }, randomDelay);
+    
+            // Return last message
+            return sentence
+    
+        }
+    
+        // Function to send the audio to the spoof server
+        function sendAudioToServer(audioBlob) {
+            const transcription_div=document.getElementById('transcription-div');
+            const transcription_p = document.getElementById('transcription-p');
+            const transcription_loader = document.getElementById('transcription-loader');
+    
+            // Update UI components
+            submit_btn.disabled = 'true';
+            text_status.textContent = status_msg__sending_to_server;
+            icon_div.classList.add('disabled');      
+            transcription_div.style.display = 'block';
+            transcription_loader.style.display = 'block';
+            transcription_p.textContent = ''; // reset if there are some present
+    
+            // Send to server
+            insertRandomSentenceWithDelay(transcription_p)
+    
+            /*
+            const formData = new FormData();
+            formData.append('audio', audioBlob, 'recording.webm');
+            
+            fetch('https://example.com/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                status.textContent = 'Audio uploaded successfully.';
+            })
+            .catch((error) => {
+                console.error('Error uploading audio:', error);
+                status.textContent = 'Error uploading audio.';
+            });
+            */
+        }
+    
+    </script>
+    
