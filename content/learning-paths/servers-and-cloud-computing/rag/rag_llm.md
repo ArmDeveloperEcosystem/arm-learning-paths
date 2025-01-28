@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-This learning path demonstrates how to build and deploy a Retrieval Augmented Generation (RAG) enabled chatbot using open-source Large Language Models (LLMs) optimized for Arm architecture. The chatbot processes documents, stores them in a vector database, and generates contextually-relevant responses by combining the LLM's capabilities with retrieved information. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 22.04 LTS. You need an Arm server instance with at least 16 cores, 8GB of RAM, and a 32GB disk to run this example. The instructions have been tested on a GCP c4a-standard-64 instance.
+This Learning Path demonstrates how to build and deploy a Retrieval Augmented Generation (RAG) enabled chatbot using open-source Large Language Models (LLMs) optimized for Arm architecture. The chatbot processes documents, stores them in a vector database, and generates contextually-relevant responses by combining the LLM's capabilities with retrieved information. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 22.04 LTS. You need an Arm server instance with at least 16 cores, 8GB of RAM, and a 32GB disk to run this example. The instructions have been tested on a GCP c4a-standard-64 instance.
 
 ## Overview
 
@@ -100,7 +100,7 @@ Download the Hugging Face model:
     wget https://huggingface.co/chatpdflocal/llama3.1-8b-gguf/resolve/main/ggml-model-Q4_K_M.gguf
 ```
 
-## Build llama.cpp & Quantize the Model
+## Build llama.cpp and Quantize the Model
 
 Navigate to your home directory:
 
