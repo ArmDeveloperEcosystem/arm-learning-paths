@@ -1,5 +1,6 @@
 ---
 title: Run a llama.cpp chatbot powered by Arm Kleidi technology
+weight: 2
 
 overview: | 
   This Learning Path shows you how to use a c4a-highcpu-72 Google Axion instance powered by an Arm Neoverse CPU to build a simple Token-as-a-Service (TaaS) RAG-enabled server that you can then use to provide a chatbot to serve a small number of concurrent users.

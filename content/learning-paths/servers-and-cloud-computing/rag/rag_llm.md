@@ -2,7 +2,7 @@
 # User change
 title: "Set up a RAG based LLM Chatbot"
 
-weight: 2 # 1 is first, 2 is second, etc.
+weight: 3 
 
 # Do not modify these elements
 layout: "learningpathall"

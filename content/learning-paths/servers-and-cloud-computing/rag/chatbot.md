@@ -1,6 +1,6 @@
 ---
 title: The RAG Chatbot and its Performance
-weight: 5
+weight: 6
 
 layout: learningpathall
 ---
