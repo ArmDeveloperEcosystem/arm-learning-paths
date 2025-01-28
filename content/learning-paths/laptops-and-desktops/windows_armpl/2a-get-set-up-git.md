@@ -10,7 +10,7 @@ layout: learningpathall
 
 This section uses an example application from GitHub to demonstrate the use of Arm Performance Libraries.
 
-If you don't already have Git installed, start by installing Git using the [Git Install Guide](/install-guides/git-woa/) for Windows on Arm.
+If you don't already have Git installed, start by installing it using the [Git for Windows on Arm](/install-guides/git-woa/) install guide.
 
 ## Clone the Example from GitHub
 

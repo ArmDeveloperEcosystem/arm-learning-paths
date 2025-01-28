@@ -34,7 +34,7 @@ This article provides quick instructions to install CMake for Arm Linux distribu
 
 ### How do I download and install CMake for Windows on Arm?
 
-Confirm you are using a Windows on Arm device such as Windows Dev Kit 2023 or a laptop such as Lenovo ThinkPad X13s or Surface Pro 9 with 5G.
+Confirm you are using a Windows on Arm device such as the Lenovo ThinkPad X13s or Surface Pro 9 with 5G.
 
 ### How do I download and install CMake for Arm Linux distributions?
 

@@ -10,7 +10,7 @@ learning_objectives:
     - Utilize Arm Performance Libraries to optimize the performance of an application.
 
 prerequisites:
-    - A Windows on Arm computer such as the [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), or a Lenovo Thinkpad X13s running Windows 11.
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11.
 
 author_primary: Odin Shen
 
