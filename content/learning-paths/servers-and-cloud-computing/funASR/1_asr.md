@@ -14,7 +14,7 @@ This technology has become an integral part of our daily lives, powering a wide 
 
 At its core, ASR involves converting spoken audio into written text. This seemingly simple task is actually quite complex, requiring sophisticated algorithms and models to accurately interpret the nuances of human speech, including variations in pronunciation, accents, and background noise.   
 
-## Key Applications of ASR
+### Key Applications of ASR
 
 ASR is now used in a myriad of applications across various domains:
 
@@ -43,7 +43,7 @@ ASR is now used in a myriad of applications across various domains:
     For example: voice-activated home automation system that allows users to control lighting, temperature, and entertainment systems with natural language commands.
 
 
-## Challenges in ASR
+### Challenges in ASR
 
 While the potential applications of ASR are vast and inspiring, it's important to acknowledge the inherent challenges in developing and deploying accurate and reliable ASR systems. These challenges stem from the complexities of human speech, environmental factors, and the intricacies of language itself. These challenges are particularly pronounced for Chinese ASR, which needs to address unique linguistic characteristics such as:
 

@@ -11,7 +11,10 @@ layout: learningpathall
 To follow the instructions for this Learning Path, you will need an Arm server running Ubuntu 22.04 LTS or later version with at least 16 cores, 16GB of RAM, and 50GB of disk storage.
 
 ## Introduce ModelScope
-ModelScope is an open-source platform offering a vast collection of pre-trained AI models, including those specifically designed for ASR. Key benefits of ModelScope include:
+[ModelScope](https://github.com/modelscope/modelscope/) is an open-source platform that makes it easy to use AI models in your applications. 
+It provides a wide variety of pre-trained models for tasks like image recognition, natural language processing, and audio analysis. With ModelScope, you can easily integrate these models into your projects with just a few lines of code.
+
+Key benefits of ModelScope include:
 
 * **Model Diversity:** 
     Access a wide range of models for various tasks, including ASR, natural language processing, and computer vision.
@@ -39,7 +42,7 @@ First, ensure your system is up-to-date and install the required tools and libra
 
 ```bash
 sudo apt-get update -y
-sudo apt-get install -y curl git wget python3 python3-pip python3-venv python-is-python3 
+sudo apt-get install -y curl git wget python3 python3-pip python3-venv python-is-python3
 ```
 
 Create and activate a virtual environment:
@@ -51,14 +54,14 @@ source venv/bin/activate
 Install related packages: 
 ```bash
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
-pip3 install numpy packaging addict datasets simplejson sortedcontainers transformers
+pip3 install numpy packaging addict datasets simplejson sortedcontainers transformers ffmpeg
 
 ```
 {{% notice Note %}}
 This learning path will use execute model in Arm Neoverse, so we only need install PyTorch CPU package.
 {{% /notice %}}
 
-## Create a sample example.
+## Create a sample example
 
 After completing the installation, we will use an example related to Chinese semantic understanding to illustrate how to use ModelScope.
 
@@ -74,7 +77,7 @@ Here ia a simple example using a general-domain Chinese word segmentation [model
 from modelscope.pipelines import pipeline
 
 word_segmentation = pipeline ('word-segmentation',model='damo/nlp_structbert_word-segmentation_chinese-base')
-text = '一段新年祝福的文字跟所有人分享 ...'
+text = '一段新年祝福的文字跟所有人分享'
 result = word_segmentation(text)
 
 print(result)
@@ -82,7 +85,23 @@ print(result)
 
 The output will be like this:
 ```output
-{'output': ['一', '段', '新年', '祝福', '的', '文字', '跟', '所有', '人', '分享']}
+2025-01-28 00:30:29,692 - modelscope - WARNING - Model revision not specified, use revision: v1.0.3
+Downloading Model to directory: /home/ubuntu/.cache/modelscope/hub/damo/nlp_structbert_word-segmentation_chinese-base
+2025-01-28 00:30:32,828 - modelscope - WARNING - Model revision not specified, use revision: v1.0.3
+2025-01-28 00:30:33,332 - modelscope - INFO - initiate model from /home/ubuntu/.cache/modelscope/hub/damo/nlp_structbert_word-segmentation_chinese-base
+2025-01-28 00:30:33,333 - modelscope - INFO - initiate model from location /home/ubuntu/.cache/modelscope/hub/damo/nlp_structbert_word-segmentation_chinese-base.
+2025-01-28 00:30:33,334 - modelscope - INFO - initialize model from /home/ubuntu/.cache/modelscope/hub/damo/nlp_structbert_word-segmentation_chinese-base
+You are using a model of type bert to instantiate a model of type structbert. This is not supported for all configurations of models and can yield errors.
+2025-01-28 00:30:35,522 - modelscope - WARNING - No preprocessor field found in cfg.
+2025-01-28 00:30:35,522 - modelscope - WARNING - No val key and type key found in preprocessor domain of configuration.json file.
+2025-01-28 00:30:35,522 - modelscope - WARNING - Cannot find available config to build preprocessor at mode inference, current config: {'model_dir': '/home/ubuntu/.cache/modelscope/hub/damo/nlp_structbert_word-segmentation_chinese-base'}. trying to build by task and model information.
+2025-01-28 00:30:35,527 - modelscope - INFO - cuda is not available, using cpu instead.
+2025-01-28 00:30:35,529 - modelscope - WARNING - No preprocessor field found in cfg.
+2025-01-28 00:30:35,529 - modelscope - WARNING - No val key and type key found in preprocessor domain of configuration.json file.
+2025-01-28 00:30:35,529 - modelscope - WARNING - Cannot find available config to build preprocessor at mode inference, current config: {'model_dir': '/home/ubuntu/.cache/modelscope/hub/damo/nlp_structbert_word-segmentation_chinese-base', 'sequence_length': 512}. trying to build by task and model information.
+/home/ubuntu/venv/lib/python3.10/site-packages/transformers/modeling_utils.py:1044: FutureWarning: The `device` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+{'output': ['生成', '一', '段', '新年', '祝福', '的', '文字', '跟', '所有', '人', '分享']}
 ```
 
 The segmentation model has correctly identified the following words:
