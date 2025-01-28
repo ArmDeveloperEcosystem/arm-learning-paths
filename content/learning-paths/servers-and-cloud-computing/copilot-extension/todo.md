@@ -1,7 +1,17 @@
 # TODO
 
+## Tasks by Person
+
+### Joe:
+
 - [ ] copy extension code to new ArmDeveloperEcosystem repo, clean up extension
-- [ ] 
+- [ ] Flask Webapp
+- [ ] Deployment
+
+### Avin:
+
+- [ ] Vector Database
+- [ ] Configuring with GitHub
 
 ## Learning Path flow
 
@@ -12,6 +22,8 @@
 - Requirements
     - Install needed developer tools / SDKs 
         - NOTE: Don't mention CDK, will handle in deployment section
+        - Python (version?)
+        - Python local environment + package install
     - Clone the example repo 
 - Walk through the main elements
     - Flask webapp / API
