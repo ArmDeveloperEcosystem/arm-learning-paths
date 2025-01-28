@@ -11,7 +11,7 @@ minutes_to_complete: 5
 author_primary: Jason Andrews
 multi_install: false
 multitool_install_part: false
-official_docs: https://cloud.google.com/sdk/docs/install-sdk
+official_docs: https://cloud.google.com/sdk/docs/install-sdk#deb
 test_images:
 - ubuntu:latest
 test_maintenance: false
@@ -44,7 +44,9 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## How do I download and install for Ubuntu on Arm?
+## How do I download and install gcloud for Ubuntu on Arm?
+
+### Install gcloud using the package manager 
 
 The easiest way to install `gcloud` for Ubuntu on Arm is to use the package manager.
 
@@ -62,13 +64,64 @@ curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 sudo apt-get update && sudo apt-get install google-cloud-cli -y
 ```
 
-Confirm the executable is available.
+### Install gcloud using the archive file
+
+If you cannot use the package manager or you get a Python version error such as the one below you can use the archive file.
+
+```output
+The following packages have unmet dependencies:
+ google-cloud-cli : Depends: python3 (< 3.12) but 3.12.3-0ubuntu2 is to be installed
+```
+
+Download the archive file and extract the contents:
+
+```bash { target="ubuntu:latest" }
+wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-arm.tar.gz
+sudo tar -xzf google-cloud-cli-linux-arm.tar.gz -C /opt
+```
+
+Run the installer:
+
+```bash { target="ubuntu:latest" }
+cd /opt/google-cloud-sdk
+sudo ./install.sh -q
+```
+
+{{% notice Note %}}
+You can change the installation directory from `/opt` to a location of your choice. 
+{{% /notice %}}
+
+Add the installation directory to your search path. The installer will print the path to a script you can source to add `gcloud` to your search path.
+
+```output
+==> Source [/opt/google-cloud-sdk/completion.bash.inc] in your profile to enable shell command completion for gcloud.
+==> Source [/opt/google-cloud-sdk/path.bash.inc] in your profile to add the Google Cloud SDK command line tools to your $PATH.
+
+For more information on how to get started, please visit:
+  https://cloud.google.com/sdk/docs/quickstarts
+```
+
+Source the file to include `gcloud` in your search path:
+
+```bash { target="ubuntu:latest" }
+source /opt/google-cloud-sdk/path.bash.inc
+```
+
+Alternatively, you can add the `bin` directory to your path by adding the line below to your `$HOME/.bashrc` file.
+
+```console
+export PATH="/opt/google-cloud-sdk/bin:$PATH"
+```
+
+## Test gcloud
+
+Confirm the executable is available and print the version:
 
 ```bash { target="ubuntu:latest" }
 gcloud -v
 ```
 
-The output should be similar to:
+The output is similar to:
 
 ```output
 Google Cloud SDK 418.0.0

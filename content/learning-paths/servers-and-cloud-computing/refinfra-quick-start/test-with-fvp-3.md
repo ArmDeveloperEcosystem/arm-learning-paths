@@ -127,7 +127,7 @@ In your original terminal, launch the FVP using the supplied script:
 Observe the platform is running successfully:
 ![fvp terminals alt-text#center](images/uefi.png "Figure 2. FVP Terminals")
 
-To boot into `busy-box`, use:
+You can also boot into `busy-box`, using the command:
 ```bash
 ./boot.sh -p rdn2
 ```

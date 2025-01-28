@@ -1,6 +1,6 @@
 ---
 title: Deploy a RAG-based LLM backend server
-weight: 3
+weight: 4
 
 layout: learningpathall
 ---

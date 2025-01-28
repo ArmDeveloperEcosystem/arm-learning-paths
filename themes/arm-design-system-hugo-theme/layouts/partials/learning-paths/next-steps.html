@@ -55,36 +55,36 @@ Called from:
         <h2>Share</h2>
         <p>Share what you've learned.</p>
         <div class="social-sharing">
-            <div class="social-icons">
-                <a id="linkedin-link"
+            <div id="social-share-icon-div" class="social-icons">
+                <a id="linkedin-link" class="share-button" name="LinkedIn"
                 title="Share via LinkedIn">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-linkedin"></use>
                     </svg>
                 </a>
 
-                <a id="twitter-link" 
+                <a id="twitter-link" class="share-button" name="Twitter"
                 title="Share via X">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-twitter"></use>
                     </svg>
                 </a>
       
-                <a id="bluesky-link"
+                <a id="bluesky-link" class="share-button" name="Bluesky"
                 title="Share via Bluesky">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-bluesky"></use>
                     </svg>
                 </a>
                 
-                <a id="facebook-link"
+                <a id="facebook-link" class="share-button" name="Facebook"
                 title="Share via Facebook">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-facebook"></use>
                     </svg>
                 </a>
             
-                <a id="email-link"
+                <a id="email-link" class="share-button" name="Email"
                 title="Share via email">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-mail"></use>
@@ -92,7 +92,7 @@ Called from:
                 </a>
 
 
-                <a id="copy-link"
+                <a id="copy-link" class="share-button" name="Copied"
                 title="Copy link to Learning Path">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-link"></use>
@@ -244,7 +244,7 @@ Called from:
             <div id="arm-dev-program-div" class="content-box">
                 <h4>Talk with Arm Experts</h4>
                 <p>Join the Arm Developer Program to share ideas, ask questions, and explore solutions with the support of the developer community.</p>
-                <ads-cta-button id="join-dev-program" level="primary" sr-label="primary button">Join now</ads-cta-button>    
+                <ads-cta-button id="join-dev-program" level="primary" sr-label="primary button" class="next-step-cta" name="DevProgram">Join now</ads-cta-button>    
                 <script>
                     document.getElementById("join-dev-program").onclick = function () {
                     window.open("https://www.arm.com/resources/developer-program?#register","_blank");
@@ -253,7 +253,7 @@ Called from:
             </div>
 
 
-            <div id="explore-tags-div" class="content-box">
+            <div id="event-div" class="content-box">
                 {{ $csv := resources.Get "events.csv" }}
                 {{ $csv_content := $csv | transform.Unmarshal (dict "delimiter" ",") }}
 
@@ -308,7 +308,7 @@ Called from:
                     <p class="next-steps-subtitle">{{ $formatted_dates }}</p>
                     
                     <p>{{index $event 7}}</p>
-                    <ads-cta-button id="event-cta" level="secondary">Event sign up</ads-cta-button>
+                    <ads-cta-button id="event-cta" level="secondary" class="next-step-cta" name="Event" data-event-name="{{index $event 0}}">Event sign up</ads-cta-button>
                     <script>
                         document.getElementById("event-cta").onclick = function () {
                         window.open("{{index $event 8}}","_blank");
@@ -319,7 +319,7 @@ Called from:
                     <h4>Learn more on Arm Developer</h4>
 
                     <p>Visit Developer.arm.com to continue your learning journey.</p>
-                    <ads-cta-button id="dev-cta" level="secondary">Developer.arm.com</ads-cta-button>
+                    <ads-cta-button id="dev-cta" level="secondary" class="next-step-cta" name="Developer.arm.com">Developer.arm.com</ads-cta-button>
                     <script>
                         document.getElementById("dev-cta").onclick = function () {
                         window.open("https://developer.arm.com","_blank");

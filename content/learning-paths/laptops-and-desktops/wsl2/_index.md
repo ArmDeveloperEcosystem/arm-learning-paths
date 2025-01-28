@@ -15,7 +15,7 @@ learning_objectives:
     - Export the WSL file system as a backup
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit) or Lenovo Thinkpad X13s running Windows 11. 
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11. 
 
 author_primary: Jason Andrews
 

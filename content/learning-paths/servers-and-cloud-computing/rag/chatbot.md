@@ -1,21 +1,33 @@
 ---
 title: The RAG Chatbot and its Performance
-weight: 5
+weight: 6
 
 layout: learningpathall
 ---
 
 ## Access the Web Application
 
-Open the web application in your browser using either the local URL or the external URL:
+Open the web application in your browser using the external URL:
 
 ```bash
-http://localhost:8501 or http://75.101.253.177:8501
+http://[your instance ip]:8501
 ```
 
 {{% notice Note %}}
 
-To access the links you may need to allow inbound TCP traffic in your instance's security rules. Always review these permissions with caution as they may introduce security vulnerabilities.
+To access the links you might need to allow inbound TCP traffic in your instance's security rules. Always review these permissions with caution as they might introduce security vulnerabilities.
+
+For an Axion instance, you can do this from the gcloud cli:
+
+gcloud compute firewall-rules create allow-my-ip \
+    --direction=INGRESS \
+    --network=default \
+    --action=ALLOW \
+    --rules=tcp:8501 \
+    --source-ranges=[your IP]/32 \
+    --target-tags=allow-my-ip
+
+For this to work, you must ensure that the allow-my-ip tag is present on your Axion instance.
 
 {{% /notice %}}
 ## Upload a PDF File and Create a New Index
@@ -31,7 +43,7 @@ Follow these steps to create a new index:
 5. Enter a name for your vector index.
 6. Click the **Create Index** button.
 
-Upload the Cortex-M processor comparison document, which can be downloaded from [this website](https://developer.arm.com/documentation/102787/latest/).
+Upload the Cortex-M processor comparison document, which can be downloaded from [the Arm developer website](https://developer.arm.com/documentation/102787/latest/).
 
 You should see a confirmation message indicating that the vector index has been created successfully. Refer to the image below for guidance:
 
@@ -44,15 +56,15 @@ After creating the index, you can switch to the **Load Existing Store** option a
 Follow these steps:
 
 1. Switch to the **Load Existing Store** option in the sidebar.
-2. Select the index you created. It should be auto-selected if it's the only one available.
+2. Select the index you created. It should be auto-selected if it is the only one available.
 
-This will allow you to use the uploaded document for generating contextually-relevant responses. Refer to the image below for guidance:
+This allows you to use the uploaded document for generating contextually-relevant responses. Refer to the image below for guidance:
 
 ![RAG_IMG2](rag_img2.png)
 
 ## Interact with the LLM
 
-You can now start asking various queries to the LLM using the prompt in the web application. The responses will be streamed both to the frontend and the backend server terminal.
+You can now start issuing various queries to the LLM using the prompt in the web application. The responses will be streamed both to the frontend and the backend server terminal.
 
 Follow these steps:
 
@@ -61,7 +73,7 @@ Follow these steps:
 
 ![RAG_IMG3](rag_img3.png)
 
-While the response is streamed to the frontend for immediate viewing, you can monitor the performance metrics on the backend server terminal. This gives you insights into the processing speed and efficiency of the LLM.
+While the response is streamed to the frontend for immediate viewing, you can monitor the performance metrics on the backend server terminal. This provides insights into the processing speed and efficiency of the LLM.
 
 ![RAG_IMG4](rag_img4.png)
 

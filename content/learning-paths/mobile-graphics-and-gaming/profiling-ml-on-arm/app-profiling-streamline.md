@@ -128,8 +128,8 @@ Now add the code below to the `build.gradle` file of the Module you wish to prof
 ```gradle
     externalNativeBuild {
         cmake {
-            path file('src/main/cpp/CMakeLists.txt')
-            version '3.22.1'
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
         }
     }
 ```

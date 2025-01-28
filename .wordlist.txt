@@ -3559,3 +3559,16 @@ threadNum
 useAPL
 vvenc
 workspaces
+ETDump
+ETRecord
+FAISS
+IVI
+PDFs
+Powertrain
+SpinTheCubeInGDI
+TaaS
+cloudsdk
+highcpu
+proj
+sln
+uploader
