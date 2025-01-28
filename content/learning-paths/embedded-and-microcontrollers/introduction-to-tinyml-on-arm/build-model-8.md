@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Build a Simple PyTorch Model"
+title: "Build a simple PyTorch model"
 
 weight: 7 # 1 is first, 2 is second, etc.
 
@@ -8,7 +8,7 @@ weight: 7 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-With our environment ready, you can create a simple program to test the setup.
+With the development environment ready, you can create a simple PyTorch model to test the setup.
 
 This example defines a small feedforward neural network for a classification task. The model consists of 2 linear layers with ReLU activation in between.
 
