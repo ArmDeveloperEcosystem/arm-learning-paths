@@ -1,5 +1,5 @@
 ---
-title: Build a Numerical Application and Profile the Performance
+title: Build and Profile an Application with Spin the Cube and Visual Studio
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -123,13 +123,13 @@ The number in the application represents the number of Frames Per Second (FPS).
 
 A higher number indicates more frames per second, which indicates improved performance.
 
- ![gif1](./figures/multithreading.gif)
+ ![gif1 alt-text#center](./figures/multithreading.gif "Figure 7: Spin The Cube Simulated 3D Sphere.")
 
 Performance varies across different Windows on Arm computers, but on the Lenovo X13s specifically, the performance generally falls between 3K and 6K FPS.
 
 
 You can use the [Visual Studio profiling tools](https://learn.microsoft.com/en-us/visualstudio/profiling/profiling-feature-tour?view=vs-2022) to observe the dynamic CPU and memory usage while the program is running.
 
- ![img8](./figures/mt_cpumem_usage1.png)
+ ![img8 alt-text#center](./figures/mt_cpumem_usage1.png "Figure 8: Using Visual Studio Profiling Tools.")
 
 Continue learning to find out how you can optimize performance using Arm Performance Libraries.

@@ -22,7 +22,7 @@ The `include` and `lib` are the directories containing header files and library 
 
 Take note of the location of these two directories, as you will need them for configuring Visual Studio.
 
- ![img9](./figures/apl_directory.png)
+ ![img9 alt-text#center](./figures/apl_directory.png "Figure 9: Arm Performance Libraries Directory.")
 
 ## Add Arm Performance Libraries to Visual Studio
 
@@ -38,7 +38,7 @@ In your Visual Studio project, configure two places  in your Visual Studio proje
 4. Click on the dropdown menu. Select `<Edit...>`.
 5. In the dialog that opens, click the `New Line` icon to add Arm Performance Libraries `include` path.
 
-![img10](./figures/ext_include.png)
+![img10 alt-text#center](./figures/ext_include.png "Figure 10: External Include Directories.")
  
 ### Additional Library Directories:
 
@@ -48,7 +48,7 @@ In your Visual Studio project, configure two places  in your Visual Studio proje
 4. Click on the dropdown menu. Select `<Edit...>`
 5. In the dialog that opens, click the `New Line` icon to add Arm Performance Libraries `library` path.
 
-![img11](./figures/linker_lib.png)
+![img11 alt-text#center](./figures/linker_lib.png "Figure 11: Linker Library.")
 
 
 {{% notice Note %}}
@@ -62,9 +62,9 @@ You are now ready to use Arm Performance Libraries in your project.
 
 Open the source code file `SpinTheCubeInGDI.cpp` and search for the `_USE_ARMPL_DEFINES` definition.
 
-You will see a commented-out definition on line 13 of the program. Removing the comment enables the Arm Performance Libraries feature when you re-build the application.
+You will see a commented-out definition on line 13 of the program. Removing the comment enables the Arm Performance Libraries feature when you rebuild the application.
 
- ![img12](./figures/apl_define.png)
+ ![img12 alt-text#center](./figures/apl_define.png "Figure 12: Arm Performance Libraries Definition.")
 
 
 When variable useAPL is True, the application calls `applyRotationBLAS()` instead of the multithreading code, to apply the rotation matrix to the 3D vertices.
