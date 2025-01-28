@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Arm NN Network Profiler
-One way of running LiteRT models is to use Arm NN, which is open-source network machine learning (ML) software. This is available as a delegate to the standard LiteRT interpreter. But to profile the model, Arm NN comes with a command-line utility called `ExecuteNetwork`. This program runs the model without the rest of the app. It is able to output layer timings and other useful information to report where there might be bottlenecks within your model.
+One way of running LiteRT models is to use Arm NN, which is open-source machine learning (ML) software. This is available as a delegate to the standard LiteRT interpreter. But to profile the model, Arm NN comes with a command-line utility called `ExecuteNetwork`. This program runs the model without the rest of the app. It is able to output layer timings and other useful information to report where there might be bottlenecks within your model.
 
 If you are using LiteRT without Arm NN, then the output from `ExecuteNetwork` is more of an indication than a definitive answer, but it can still be useful in identifying any obvious problems.
 
