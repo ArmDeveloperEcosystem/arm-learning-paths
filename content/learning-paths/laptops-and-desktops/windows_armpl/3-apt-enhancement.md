@@ -126,17 +126,17 @@ Rebuild the code and run `SpinTheCubeInGDI.exe` again.
 
 Click on the **Options** menu in the top-left corner of the program, then select **Use APL** to utilize Option 2.
 
- ![img13](./figures/use_apl.png)
+ ![img13 alt-text#center](./figures/use_apl.png "Figure 13: Selecting Arm Performance Libraries.")
 
 On the Lenovo X13s, the performance is between 11k and 12k FPS.
 
-![gif2](./figures/apl_enable.gif)
+![gif2 alt-text#center](./figures/apl_enable.gif "Figure 14: Spinning Geometry Demonstration: Arm64.")
 
 Re-run the profiling tools. 
 
 You will see that the CPU usage has decreased significantly. There is no difference in memory usage.
 
- ![img14](./figures/apl_on_cpu_mem_usage.png)
+ ![img14 alt-text#center](./figures/apl_on_cpu_mem_usage.png "Figure 15: Improved CPU Performance.")
 
 
 You have learned how to optimize application performance using Arm Performance Libraries.
