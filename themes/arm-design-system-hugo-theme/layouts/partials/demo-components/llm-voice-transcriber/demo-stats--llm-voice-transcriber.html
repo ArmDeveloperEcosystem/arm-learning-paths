@@ -19,39 +19,61 @@
             <!-- Left - Demo -->
             <div class="c-col u-display-block md:c-col-12 lg:c-col-8 ">
                 <h2>{{.Params.title_chatbot_area}}</h2>
-                <div id="demo-container">
-                    <!-- action and recording -->
+                <!-- action and recording -->
+                <div class="c-row" id="audio-buttion-total-row">
                     <div class="c-row" id="actions-row">
-                            <div class="c-col c-col-3" id="audio-icon-div">
-                                <div style="margin:16px; border: 1px solid red; height:100px">
-
-                                    <div class="c-row" style="flex-direction: column;">
-                                        <i id="audio-action-icon" class="fa-solid fa-microphone-lines"></i>
-                                    </div>
-                                    <div class="c-row" style="flex-direction: column;" id="status-div">
-                                        <p id="status">Record</p>
-                                    </div>
+                        <div class="c-col c-col-3">
+                            <div id="audio-icon-div" style="margin:8px;">
+                                <div class="c-row">
+                                    <i id="audio-action-icon" class="fa-solid fa-microphone-lines"></i>
+                                </div>
+                                <div class="c-row" id="status-div">
+                                    <p id="icon-subtitle" style="text-align: center;">Record</p>
                                 </div>
                             </div>
-                            <div class="c-col c-col-9" id="audio-playback-div">
-                                <div style="margin:16px; border: 1px solid red; height:100px">
-                                    <audio id="audio-playback" controls></audio>
-                                    <div id="placeholder-for-audio-playback">Waiting for audio recording...</div>
+                        </div>
+                        <div class="c-col c-col-9" id="audio-playback-div">
+                            <div style="margin:8px;">
+                                <div id="audio-playback-substitute" style="background-color: grey;">
+                                    
+                                    <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                                        <span id="no-waveform" class="fa-stack fa-lg">
+                                            <i class="fas fa-circle fa-stack-2x" style="color: lightgrey;"></i>
+                                            <i class="fas fa-slash fa-stack-1x" style="color: lightcoral;"></i>
+                                            <i class="fas fa-waveform fa-stack-1x" style="color: black;"></i>
+                                        </span>
+                                    </div>
+                                      
+                                    <audio id="audio-playback" controls style="display:none;"></audio>
+                                </div>                                
+                                <div id="placeholder-for-audio-playback" style="text-align: center;">
+                                    No audio saved.
+                                    
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="c-row" id="status-div">
+                        <!--<ads-button>Transcribe via LLM</ads-button>-->
+                        <div class="c-col"> <!-- style="min-height:50px;"-->
+                            <p id="status"></p>
+                        </div>
                     </div>
                     <div class="c-row" id="server-btn-div">
                         <!--<ads-button>Transcribe via LLM</ads-button>-->
-                        <ads-button level="primary" id="send-to-server-btn" disabled>Transcribe on LLM</ads-button>
+                        <div class="c-col" style="display:flex; justify-content: center;">
+                            <ads-button level="primary" id="send-to-server-btn" disabled>Transcribe audio</ads-button>
+                        </div>
                     </div>
-                    
-                    <hr id="transcription-hr">
-                    <br>
-    
-    
+                </div>
+
+
+                <!-- Transcription -->
+                <h2>Transcription</h2> 
+                <div id="demo-container">
                     <!-- Transcribed text goes here -->
                     <div class="c-row" id="transcription-div" style="display:none;">
-                        <ads-loader id="transcription-loader"></ads-loader>
+                        <ads-loader style="float:left;" label="Transcription in progress" size="xl" id="transcription-loader"></ads-loader>
                         <p id="transcription-p"></p>
                     </div>
                 </div>

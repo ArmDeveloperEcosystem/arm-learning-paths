@@ -24,22 +24,40 @@
         let isRecording = false;
     
         const audio_playback = document.getElementById('audio-playback');
+        const audio_playback_missing = document.getElementById('no-waveform');
         const placeholder_for_audio_playback = document.getElementById('placeholder-for-audio-playback');
         const text_status = document.getElementById('status');
         const submit_btn = document.getElementById('send-to-server-btn');
         const icon_div = document.getElementById('audio-icon-div');
         const icon = document.getElementById('audio-action-icon');
+        const icon_subtitle = document.getElementById('icon-subtitle');
+        
     
-        const status_msg__recording_timeout = "Recording auto-capped at "+audio_cap_timeout_value/1000+"sec. Ready to transcribe."
-        const status_msg__recording_stopped = "Audio recorded. Ready to transcribe."
-        const status_msg__recording_started = "Recording in progress..."
+        const status_msg__recording_timeout = "Auto-stopped. recording is capped at "+audio_cap_timeout_value/1000+"sec long."
         const status_msg__mic_permission_error = "Error accessing microphone. Please ensure you have granted permissions in your browser."
-        const status_msg__sending_to_server = "Transcription in process..."
-        const status_msg__transcription_show = "Transcription complete."
+        const status_msg__transcription_show = "Transcription complete." // move 
     
     
     
-    
+
+        // Function to show the message
+        function showStatus(text) {
+            text_status.textContent = text; 
+            text_status.classList.add('visible'); 
+            text_status.classList.remove('hidden', 'removed'); 
+
+            // Hide the message after 5 seconds
+            setTimeout(() => {
+                text_status.classList.add('hidden'); // Fade it out
+                text_status.classList.remove('visible');
+                // Remove it from the DOM flow after the fade-out transition (1s)
+                setTimeout(() => {
+                    text_status.classList.add('removed');
+                }, 1000); // Match the duration of the fade-out transition
+            }, 5000); // 5 seconds delay
+        }
+
+            
     
         icon_div.addEventListener('click', () => {
             if (!icon_div.classList.contains('disabled')) {
@@ -64,7 +82,7 @@
                 // Cap recording at set time
                 audio_cap_timeout = setTimeout(() => {
                     stopRecording();
-                    text_status.textContent = status_msg__recording_timeout;
+                    showStatus(status_msg__recording_timeout);
                 }, audio_cap_timeout_value); 
                 
                 // Indicate recording on UI
@@ -77,11 +95,12 @@
                     icon.classList.replace('fa-rotate-right','fa-square-full');
                     // hide audiPlaback, show placeholder
                     audio_playback.style.display = 'none';
-                    placeholder_for_audio_playback.style.display = 'block';
+                    audio_playback_missing.style.display = 'block';
+                    placeholder_for_audio_playback.textContent = 'Re-recording audio.';
     
                 }
-                text_status.textContent = status_msg__recording_started;
-                icon_div.classList.add('pulse');
+                icon.classList.add('pulse');
+                icon_subtitle.textContent = 'Stop';
     
     
                 // Collect the audio data chunks
@@ -93,9 +112,11 @@
                 mediaRecorder.onstop = () => {
                     const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
                     const audioUrl = URL.createObjectURL(audioBlob);
+                    audio_playback_missing.style.display = 'none';
                     audio_playback.src = audioUrl;
                     audio_playback.style.display = 'block';
-                    placeholder_for_audio_playback.style.display = 'none';
+                    placeholder_for_audio_playback.textContent = 'Stored temporarily in browser local storage.'
+                    //placeholder_for_audio_playback.style.display = 'none';
                     submit_btn.disabled = 'false';
                     audioChunks = [];  // Reset the chunks for next recording
     
@@ -103,7 +124,7 @@
                 };
             } catch (error) {
                 console.error('Error accessing microphone:', error);
-                text_status.textContent = status_msg__mic_permission_error;
+                showStatus(status_msg__mic_permission_error);
             }
         }
     
@@ -114,11 +135,10 @@
     
                 // Indicate stopped on UI
                 icon.classList.replace('fa-square-full','fa-rotate-right');
-                icon_div.classList.remove('pulse');
-                icon.style.color = "white";
-    
-                text_status.textContent = status_msg__recording_stopped;
-    
+                icon.classList.remove('pulse');
+                icon_subtitle.textContent = 'Re-record';
+                
+                
             }
         }
     
@@ -145,9 +165,6 @@
                 // show transcription
                 div.textContent = sentence;
     
-                // update loading text
-                text_status.textContent = status_msg__transcription_show;
-    
                 // remove disabled tag on rerun
                 icon_div.classList.remove('disabled');
     
@@ -166,7 +183,6 @@
     
             // Update UI components
             submit_btn.disabled = 'true';
-            text_status.textContent = status_msg__sending_to_server;
             icon_div.classList.add('disabled');      
             transcription_div.style.display = 'block';
             transcription_loader.style.display = 'block';

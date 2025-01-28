@@ -334,11 +334,71 @@
 
 /**************************************************/
 /*      Whisper audio demo components */
+#audio-icon-div {
+
+}
 #audio-action-icon {
-    font-size: 50px;
+    font-size: 65px;
+}
+#audio-playback-substitute {
+    height: 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Push content to the bottom */
+}
+
+#audio-action-icon {
+    color: var(--arm-light-blue);
+}
+#audio-action-icon.pulse {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        color: red;
+    }
+    50% {
+        color: #ffcccc; /* Even lighter shade of red */
+    }
+    100% {
+        color: red;
+    }
+}
+
+#audio-action-icon.pulse {
+    animation: pulse 2s infinite; /* Slower and more natural pulse */
 }
 
 
+
+
+#status {
+    margin-top: 8px;
+    font-style: italic;
+}
+#status.hidden {
+    opacity: 0;
+    transition: opacity 1s ease-out; /* Fades out in 1 second */
+  }
+  
+#status.visible {
+    opacity: 1;
+}
+#status.removed {
+    display: none;
+}
+
+
+#transcription-div {
+    text-align: left;
+    margin: 8px;
+    width: 95%;
+}
+
+#transcription-p {
+    font-size: 24px!important;
+}
 
 /**************************************************/
 
