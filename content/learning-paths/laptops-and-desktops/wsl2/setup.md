@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-This Learning Path assumes you have a  Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit) or a Lenovo Thinkpad X13s laptop running Windows 11. 
+This Learning Path assumes you have a  Windows on Arm computer such as the Lenovo Thinkpad X13s laptop running Windows 11. 
 
 WSL is useful if you are developing on Arm virtual machine instances in the cloud. It is also useful if you are developing with embedded Linux on Arm on single board computers. 
 

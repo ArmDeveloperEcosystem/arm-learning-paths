@@ -16,10 +16,6 @@ recommended_path: "/learning-paths/laptops-and-desktops/wsl2/"
 
 further_reading:
     - resource:
-        title: Windows Dev Kit 2023
-        link: https://learn.microsoft.com/en-us/windows/arm/dev-kit/ 
-        type: website
-    - resource:
         title: All Chromebooks with Arm Processors 
         link: https://www.linuxmadesimple.info/2019/08/all-chromebooks-with-arm-processors-in.html
         type: website
