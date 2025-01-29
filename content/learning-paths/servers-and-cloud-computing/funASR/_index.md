@@ -1,5 +1,5 @@
 ---
-title: Build and Run a Virtual Large Language Model (vLLM) on Arm Servers
+title: Deploy ModelScope Chinese Speech Recognition Model FunASR on Arm Servers
 
 minutes_to_complete: 60
 
