@@ -46,6 +46,7 @@ git submodule sync
 git submodule update --init
 
 ./install_requirements.sh
+./install_executorch.sh
 ```
 
 {{% notice Note %}}
@@ -56,6 +57,16 @@ ps aux | grep buck
 pkill -f buck
 ```
 {{% /notice %}}
+
+After running the commands, `executorch` should be listed upon running `pip list`:
+
+```bash
+pip list | grep executorch
+```
+
+```output
+executorch         0.6.0a0+3eea1f1
+```
 
 ## Next Steps
 

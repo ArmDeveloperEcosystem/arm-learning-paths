@@ -8,6 +8,8 @@ weight: 7 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
+## Define a small neural network using Python
+
 With our environment ready, you can create a simple program to test the setup.
 
 This example defines a small feedforward neural network for a classification task. The model consists of 2 linear layers with ReLU activation in between.
@@ -41,100 +43,85 @@ output_size = 2   # number of output classes
 model = SimpleNN(input_size, hidden_size, output_size)
 
 # Example input tensor (batch size 1, input size 10)
-x = torch.randn(1, input_size)
+x = (torch.randn(1, input_size),)
 
-# torch.export: Defines the program with the ATen operator set for SimpleNN.
-aten_dialect = export(model, (x,))
-
-# to_edge: Make optimizations for edge devices. This ensures the model runs efficiently on constrained hardware.
-edge_program = to_edge(aten_dialect)
-
-# to_executorch: Convert the graph to an ExecuTorch program
-executorch_program = edge_program.to_executorch()
-
-# Save the compiled .pte program
-with open("simple_nn.pte", "wb") as file:
-    file.write(executorch_program.buffer)
+# Add arguments to be parsed by the Ahead-of-Time (AoT) Arm compiler
+ModelUnderTest = model
+ModelInputs = x
 
 print("Model successfully exported to simple_nn.pte")
 ```
 
-Run the model from the Linux command line:
+## Running the model on the Corstone-320 FVP
+
+The final step is to take the Python-defined model and run it on the Corstone-320 FVP. This was done upon running the `run.sh` script in a previous section. To wrap up the Learning Path, you will perform these steps separately to better understand what happened under the hood. Start by setting some environment variables that are used by ExecuTorch.
 
 ```bash
-python3 simple_nn.py
+export ET_HOME=$HOME/executorch
+export executorch_DIR=$ET_HOME/build
 ```
 
-The output is:
-
-```output
-Model successfully exported to simple_nn.pte
-```
-
-The model is saved as a .pte file, which is the format used by ExecuTorch for deploying models to the edge.
-
-Run the ExecuTorch version, first build the executable:
+Then, generate a model file on the `.pte` format using the Arm examples. The Ahead-of-Time (AoT) Arm compiler will enable optimizations for devices like the Grove Vision AI Module V2 and the Corstone-320 FVP. Run it from the ExecuTorch root directory.
 
 ```bash
-# Clean and configure the build system
-(rm -rf cmake-out && mkdir cmake-out && cd cmake-out && cmake ..)
-
-# Build the executor_runner target
-cmake --build cmake-out --target executor_runner -j$(nproc)
+cd $ET_HOME
+python -m examples.arm.aot_arm_compiler --model_name=examples/arm/simple_nn.py \
+--delegate --quantize --target=ethos-u85-256 \
+--so_library=cmake-out-aot-lib/kernels/quantized/libquantized_ops_aot_lib.so \
+--system_config=Ethos_U85_SYS_DRAM_Mid --memory_mode=Sram_Only
 ```
 
-You will see the build output and it ends with:
-
-```output
-[100%] Linking CXX executable executor_runner
-[100%] Built target executor_runner
-```
-
-When the build is complete, run the executor_runner with the model as an argument:
+From the Arm Examples directory, you build an embedded Arm runner with the `.pte` included. This allows you to get the most performance out of your model, and ensures compatibility with the CPU kernels on the FVP. Finally, generate the executable `arm_executor_runner`.
 
 ```bash
-./cmake-out/executor_runner --model_path simple_nn.pte
+cd $HOME/executorch/examples/arm/executor_runner
+
+
+cmake -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_TOOLCHAIN_FILE=$ET_HOME/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake \
+-DTARGET_CPU=cortex-m85 \
+-DET_DIR_PATH:PATH=$ET_HOME/ \
+-DET_BUILD_DIR_PATH:PATH=$ET_HOME/cmake-out \
+-DET_PTE_FILE_PATH:PATH=$ET_HOME/simple_nn_arm_delegate_ethos-u85-256.pte \
+-DETHOS_SDK_PATH:PATH=$ET_HOME/examples/arm/ethos-u-scratch/ethos-u \
+-DETHOSU_TARGET_NPU_CONFIG=ethos-u85-256 \
+-DPYTHON_EXECUTABLE=$HOME/executorch-venv/bin/python3 \
+-DSYSTEM_CONFIG=Ethos_U85_SYS_DRAM_Mid  \
+-B $ET_HOME/examples/arm/executor_runner/cmake-out
+
+cmake --build $ET_HOME/examples/arm/executor_runner/cmake-out --parallel -- arm_executor_runner
+
 ```
 
-Since the model is a simple feedforward model, you see a tensor of shape [1, 2]
-
-```output
-I 00:00:00.006598 executorch:executor_runner.cpp:73] Model file simple_nn.pte is loaded.
-I 00:00:00.006628 executorch:executor_runner.cpp:82] Using method forward
-I 00:00:00.006635 executorch:executor_runner.cpp:129] Setting up planned buffer 0, size 320.
-I 00:00:00.007225 executorch:executor_runner.cpp:152] Method loaded.
-I 00:00:00.007237 executorch:executor_runner.cpp:162] Inputs prepared.
-I 00:00:00.012885 executorch:executor_runner.cpp:171] Model executed successfully.
-I 00:00:00.012896 executorch:executor_runner.cpp:175] 1 outputs:
-Output 0: tensor(sizes=[1, 2], [-0.105369, -0.178723])
-```
-
-When the model execution completes successfully, you’ll see confirmation messages similar to those above, indicating successful loading, inference, and output tensor shapes.
-
-
-
-TODO: Debug issues when running the model on the FVP, kindly ignore anything below this 
-## Running the model on the Corstone-300 FVP 
-
-
-Run the model using: 
+Now run the model on the Corstone-320 with the following command.
 
 ```bash
-FVP_Corstone_SSE-300_Ethos-U55 -a simple_nn.pte -C mps3_board.visualisation.disable-visualisation=1
+FVP_Corstone_SSE-320 \
+-C mps4_board.subsystem.ethosu.num_macs=256 \
+-C mps4_board.visualisation.disable-visualisation=1 \
+-C vis_hdlcd.disable_visualisation=1                \
+-C mps4_board.telnetterminal0.start_telnet=0        \
+-C mps4_board.uart0.out_file='-'                    \
+-C mps4_board.uart0.shutdown_on_eot=1               \
+-a "$ET_HOME/examples/arm/executor_runner/cmake-out/arm_executor_runner"
 ```
+
+
 
 {{% notice Note %}}
 
--C mps3_board.visualisation.disable-visualisation=1 disables the FVP GUI. This can speed up launch time for the FVP.
+The argument `mps4_board.visualisation.disable-visualisation=1` disables the FVP GUI. This can speed up launch time for the FVP.
 
-The FVP can be terminated with Ctrl+C.
 {{% /notice %}}
 
-
-
+Observe that the FVP loads the model file.
 ```output
- 
+telnetterminal0: Listening for serial connection on port 5000
+telnetterminal1: Listening for serial connection on port 5001
+telnetterminal2: Listening for serial connection on port 5002
+telnetterminal5: Listening for serial connection on port 5003
+I [executorch:arm_executor_runner.cpp:412] Model in 0x70000000 $
+I [executorch:arm_executor_runner.cpp:414] Model PTE file loaded. Size: 3360 bytes.
 ```
 
-
-You've now set up your environment for TinyML development, and tested a PyTorch and ExecuTorch Neural Network.
+You've now set up your environment for TinyML development on Arm, and tested a small PyTorch and ExecuTorch Neural Network.
