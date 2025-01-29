@@ -43,7 +43,12 @@ jobs:
         with:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
-
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' 
+          
       # Installs Post-CSS
       - name: Install Post-CSS
         run: npm install postcss-cli
