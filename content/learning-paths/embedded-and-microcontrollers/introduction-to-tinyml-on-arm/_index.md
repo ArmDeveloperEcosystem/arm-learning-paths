@@ -13,9 +13,7 @@ learning_objectives:
     - Identify how TinyML is different from other AI domains.
     - Understand the benefits of deploying AI models on Arm-based edge devices.
     - Select Arm-based devices for TinyML.
-    - Install and configure a TinyML development environment.
-    - Apply best practices for ensuring optimal performance on constrained edge devices.
-
+    - Install and configure a TinyML development environment using ExecuTorch and the Corstone-320 FVP.
 
 prerequisites:
     - Basic knowledge of machine learning concepts.
