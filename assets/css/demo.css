@@ -335,16 +335,26 @@
 /**************************************************/
 /*      Whisper audio demo components */
 #audio-icon-div {
-
+    cursor: pointer;
 }
 #audio-action-icon {
     font-size: 65px;
 }
+#audio-playback {
+}
+
 #audio-playback-substitute {
-    height: 65px;
+    margin: 8px;
+    height: 90px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end; /* Push content to the bottom */
+}
+#audio-playback-substitute.empty {
+    border: 1px solid var(--arm-dark-grey);
+}
+#audio-playback-substitute.full {
+    border: none;
 }
 
 #audio-action-icon {

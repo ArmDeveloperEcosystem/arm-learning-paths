@@ -24,6 +24,8 @@
         let isRecording = false;
     
         const audio_playback = document.getElementById('audio-playback');
+        const audio_playback_substitute = document.getElementById('audio-playback-substitute');
+        const audio_playback_controls_div = document.getElementById('audio-playback-controls-div');
         const audio_playback_missing = document.getElementById('no-waveform');
         const placeholder_for_audio_playback = document.getElementById('placeholder-for-audio-playback');
         const text_status = document.getElementById('status');
@@ -94,8 +96,10 @@
                     // Re-recording
                     icon.classList.replace('fa-rotate-right','fa-square-full');
                     // hide audiPlaback, show placeholder
-                    audio_playback.style.display = 'none';
-                    audio_playback_missing.style.display = 'block';
+                    audio_playback_controls_div.style.display = 'none';
+                    audio_playback_missing.style.display = 'flex';
+                    audio_playback_substitute.classList.add('empty');
+                    audio_playback_substitute.classList.remove('full');
                     placeholder_for_audio_playback.textContent = 'Re-recording audio.';
     
                 }
@@ -113,10 +117,11 @@
                     const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
                     const audioUrl = URL.createObjectURL(audioBlob);
                     audio_playback_missing.style.display = 'none';
+                    audio_playback_substitute.classList.add('full');
+                    audio_playback_substitute.classList.remove('empty');
                     audio_playback.src = audioUrl;
-                    audio_playback.style.display = 'block';
+                    audio_playback_controls_div.style.display = 'flex';
                     placeholder_for_audio_playback.textContent = 'Stored temporarily in browser local storage.'
-                    //placeholder_for_audio_playback.style.display = 'none';
                     submit_btn.disabled = 'false';
                     audioChunks = [];  // Reset the chunks for next recording
     

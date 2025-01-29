@@ -33,23 +33,24 @@
                             </div>
                         </div>
                         <div class="c-col c-col-9" id="audio-playback-div">
-                            <div style="margin:8px;">
-                                <div id="audio-playback-substitute" style="background-color: grey;">
-                                    
-                                    <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                                        <span id="no-waveform" class="fa-stack fa-lg">
-                                            <i class="fas fa-circle fa-stack-2x" style="color: lightgrey;"></i>
-                                            <i class="fas fa-slash fa-stack-1x" style="color: lightcoral;"></i>
-                                            <i class="fas fa-waveform fa-stack-1x" style="color: black;"></i>
-                                        </span>
-                                    </div>
-                                      
-                                    <audio id="audio-playback" controls style="display:none;"></audio>
-                                </div>                                
+                            <div id="audio-playback-substitute" class="empty">
+                                
+                                <div id="no-waveform" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x" style="color: lightgrey;"></i>
+                                        <i class="fas fa-slash fa-stack-1x" style="color: lightcoral;"></i>
+                                        <i class="fas fa-waveform fa-stack-1x" style="color: black;"></i>
+                                    </span>
+                                </div>
+
+                                <div id="audio-playback-controls-div" style="display: none; justify-content: center; align-items: center; height: 100%;">
+                                    <audio id="audio-playback" controls></audio>
+                                </div>
+
+                                
                                 <div id="placeholder-for-audio-playback" style="text-align: center;">
                                     No audio saved.
-                                    
-                                </div>
+                                </div>                                      
                             </div>
                         </div>
                     </div>
