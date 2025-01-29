@@ -1,20 +1,16 @@
 ---
 title: Optimize Windows applications using Arm Performance Libraries
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for software developers who want to improve computation performance of Windows on Arm applications using Arm Performance Libraries.
+who_is_this_for: This is an introductory topic for software developers who want to improve the performance of Windows on Arm applications using Arm Performance Libraries.
 
 learning_objectives: 
-    - Develop Windows on Arm applications using Microsoft Visual Studio.
-    - Utilize Arm Performance Libraries to increase application performance.
+    - Develop a Windows on Arm application using Microsoft Visual Studio.
+    - Utilize Arm Performance Libraries to optimize the performance of an application.
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit) or Lenovo Thinkpad X13s running Windows 11.
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11.
 
 author_primary: Odin Shen
 

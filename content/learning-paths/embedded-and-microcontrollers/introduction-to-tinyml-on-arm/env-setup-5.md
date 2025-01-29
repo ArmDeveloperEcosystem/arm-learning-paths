@@ -8,7 +8,7 @@ weight: 3
 layout: "learningpathall"
 ---
 
-In this section, you will prepare a development environment to compile the model. These instructions have been tested on Ubuntu 22.04, 24.04 and on Windows Subsystem for Linux (WSL).
+In this section, you will prepare a development environment to compile a machine learning model. These instructions have been tested on Ubuntu 22.04, 24.04 and on Windows Subsystem for Linux (WSL).
 
 ## Install dependencies
 
@@ -27,7 +27,7 @@ Create a Python virtual environment using `python venv`.
 python3 -m venv $HOME/executorch-venv
 source $HOME/executorch-venv/bin/activate
 ```
-The prompt of your terminal now has (executorch) as a prefix to indicate the virtual environment is active.
+The prompt of your terminal now has `(executorch)` as a prefix to indicate the virtual environment is active.
 
 
 ## Install Executorch
@@ -40,11 +40,11 @@ git clone https://github.com/pytorch/executorch.git
 cd executorch
 ```
 
-Run a few commands to set up the ExecuTorch internal dependencies.
+Run the commands below to set up the ExecuTorch internal dependencies.
+
 ```bash
 git submodule sync
 git submodule update --init
-
 ./install_requirements.sh
 ./install_executorch.sh
 ```
@@ -70,6 +70,8 @@ executorch         0.6.0a0+3eea1f1
 
 ## Next Steps
 
-If you don't have the Grove AI vision board, use the Corstone-300 FVP proceed to [Environment Setup Corstone-300 FVP](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/env-setup-6-fvp/)
+Your next steps depends on the hardware you have. 
 
-If you have the Grove board proceed to [Setup on Grove - Vision AI Module V2](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/setup-7-grove/)
+If you have the Grove Vision AI Module proceed to [Set up the Grove Vision AI Module V2](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/setup-7-grove/).
+
+If you don't have the Grove Vision AI Module, you can use the Corstone-300 FVP instead, proceed to [Set up the Corstone-300 FVP](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/env-setup-6-fvp/).
