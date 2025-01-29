@@ -264,6 +264,13 @@
     margin-bottom: 8px;
     line-height: 1.3;
 }
+.chatbot-response-text li {
+    margin-bottom: 0;
+}
+.chatbot-response-text ul, .chatbot-response-text ol {
+    line-height: 0.4;
+}
+
 
 
 
