@@ -6,15 +6,15 @@ minutes_to_complete: 60
 who_is_this_for: This is an advanced topic for software developers who want to use Nginx on Arm.
 
 learning_objectives:
-    - Learn about kernel parameters that can impact Nginx performance
-    - Learn about compiler and libraries that can impact Nginx performance
-    - Tune an Nginx file server configuration file
-    - Tune an Nginx Reverse Proxy & API Gateway configuration file
-    - Learn how to test Nginx performance
+    - Describe how kernel parameters can impact Nginx performance.
+    - Describe how compilers and libraries can impact Nginx performance.
+    - Tune a Nginx file server configuration file.
+    - Tune a Nginx Reverse Proxy and API Gateway configuration file.
+    - Describe how to test Nginx performance.
 
 prerequisites:
-    - Cloud or bare-metal installation of an Nginx file server or load balancer
-    - Review [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/) if you do not already have an Nginx setup
+    - A cloud or bare-metal installation of a Nginx file server or load balancer.
+    - If you do not already have a Nginx setup, a review of [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/).
 
 author_primary: Julio Suarez
 

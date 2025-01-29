@@ -11,12 +11,12 @@ layout: learningpathall
 
 Linaro’s verification service is implemented using components from the open source [Veraison](https://github.com/veraison) project.
 
-The URL for reaching this experimental verifier service is http://veraison.test.linaro.org:8080.
+The URL for reaching this experimental verifier service is https://veraison.test.linaro.org:8443.
 
 To check that you can reach the Linaro attestation verifier service, run the following command:
 
 ```bash
-curl http://veraison.test.linaro.org:8080/.well-known/veraison/verification
+curl https://veraison.test.linaro.org:8443/.well-known/veraison/verification
 ```
 
 This is a simple call to query the well-known characteristics of the verification service. If it succeeds, it will return a JSON response that looks something like this:
@@ -67,7 +67,7 @@ The easiest way to do this is to use the `jq` utility.
 You can save the public key by repeating the curl command from the previous step and use `jq` to filter the response down to just the public key part. Save it into a file called `pkey.json`:
 
 ```bash
-curl -s -N http://veraison.test.linaro.org:8080/.well-known/veraison/verification | jq '."ear-verification-key"' > $HOME/pkey.json
+curl -s -N https://veraison.test.linaro.org:8443/.well-known/veraison/verification | jq '."ear-verification-key"' > $HOME/pkey.json
 ```
 You have now saved the public key of the verification service. You are now ready to submit the CCA example attestation token to the service and get an attestation result.
 
@@ -75,7 +75,7 @@ You have now saved the public key of the verification service. You are now ready
 To submit the example CCA attestation token to the verification service, you will need to use the `evcli` tool once again. First, configure the correct API endpoint for the Linaro verifier service:
 
 ```bash
-export API_SERVER=http://veraison.test.linaro.org:8080/challenge-response/v1/newSession
+export API_SERVER=https://veraison.test.linaro.org:8443/challenge-response/v1/newSession
 ```
 
 Now submit the token using the following command. The output of this command is an attestation result, which will be saved in a file called `attestation_result.jwt`:

@@ -16,8 +16,8 @@ recommended_path: "/learning-paths/servers-and-cloud-computing/csp/"
 
 further_reading:
     - resource:
-        title: Where to Buy (Ampere Computing)
-        link: https://amperecomputing.com/where-to-buy
+        title: Ampere Computing
+        link: https://amperecomputing.com/developers/
         type: website
 
 # ================================================================================

@@ -49,45 +49,42 @@ Called from:
 
   </style>
 
+
 <div class="c-row">
     <div class="c-col">
         <h2>Share</h2>
-        <p>Show your network what you've learned by sharing this Learning Path with others.</p>
+        <p>Share what you've learned.</p>
         <div class="social-sharing">
-            <div class="social-icons">
-                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ (index .learningpathfiles 0).Permalink }}"
-                onclick="window.open(this.href, 'linkedin-share', 'width=900,height=650'); return false;"
+            <div id="social-share-icon-div" class="social-icons">
+                <a id="linkedin-link" class="share-button" name="LinkedIn"
                 title="Share via LinkedIn">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-linkedin"></use>
                     </svg>
                 </a>
 
-                <a href="https://x.com/intent/tweet?text=Check+out+this+Arm+Learning+Path:+{{(index .learningpathfiles 0).Title | urlquery }}++%40ArmSoftwareDev++&url={{ (index .learningpathfiles 0).Permalink | urlquery}}"
-                onclick="window.open(this.href, 'x-share', 'width=900,height=650'); return false;"
+                <a id="twitter-link" class="share-button" name="Twitter"
                 title="Share via X">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-twitter"></use>
                     </svg>
                 </a>
       
-                <a href="https://bsky.app/intent/compose?text=Check+out+this+Arm+Learning+Path:+{{(index .learningpathfiles 0).Title | urlquery }}+{{ (index .learningpathfiles 0).Permalink}}"
-                onclick="window.open(this.href, 'bluesky-share', 'width=900,height=650'); return false;"
+                <a id="bluesky-link" class="share-button" name="Bluesky"
                 title="Share via Bluesky">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-bluesky"></use>
                     </svg>
                 </a>
                 
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ (index .learningpathfiles 0).Permalink }}" 
-                onclick="window.open(this.href, 'facebook-share', 'width=900,height=650'); return false;"
+                <a id="facebook-link" class="share-button" name="Facebook"
                 title="Share via Facebook">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-facebook"></use>
                     </svg>
                 </a>
             
-                <a href="mailto:?subject=Check out this Arm Learning Path&body={{(index .learningpathfiles 0).Title}}: {{ (index .learningpathfiles 0).Permalink }}" target="_blank" 
+                <a id="email-link" class="share-button" name="Email"
                 title="Share via email">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-mail"></use>
@@ -95,7 +92,7 @@ Called from:
                 </a>
 
 
-                <a id="copy-link"
+                <a id="copy-link" class="share-button" name="Copied"
                 title="Copy link to Learning Path">
                     <svg class="share-icon">
                         <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-link"></use>
@@ -109,23 +106,96 @@ Called from:
 </div>
 
 <script>
-    document.getElementById("copy-link").addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default link behavior
-  
-        // trim off 'next steps'
-        const fullUrl = window.location.href;
+
+    function getLearningPathFullPath(url) {
+        // trim off 'next steps' to get Learning Path original link
+        const fullUrl = url;
         const trimmedUrl = fullUrl.endsWith("/") 
         ? fullUrl.split("/").slice(0, -2).join("/") + "/"
         : fullUrl.split("/").slice(0, -1).join("/") + "/";
 
+        // if URL starts with http://localhost:1313/, replace with https://learn.arm.com/
+        if (trimmedUrl.startsWith("http://localhost:1313/")) {
+            return trimmedUrl.replace("http://localhost:1313/", "https://learn.arm.com/");
+        }
+        // if URL has internal.learn.arm.com, remove the internal. part
+        if (trimmedUrl.includes("internal.learn.arm.com")) {
+            return trimmedUrl.replace("internal.", "");
+        }
 
-        navigator.clipboard.writeText(trimmedUrl).then(() => {
+        return trimmedUrl;
+    }
+
+    document.getElementById("copy-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        navigator.clipboard.writeText(url).then(() => {
             // Show the success message
             document.getElementById("link-copied-success").hidden = false;
         }).catch(err => {
             console.error("Failed to copy link: ", err);
         });
     });
+
+    document.getElementById("email-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        // construct message
+        const subject = "{{(index .learningpathfiles 0).Title}} - Arm Learning Path";
+        const body = `I thought you might find this Arm Learning Path interesting. Check it out here:\n${url}\n`;
+        
+        const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        window.location.href = mailtoLink;
+    });
+
+    document.getElementById("facebook-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        window.open(facebookShareUrl, '_blank', 'width=900,height=650');
+
+    });
+
+    document.getElementById("bluesky-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        // construct message
+        const text = `Check out this Arm Learning Path! ${url}`;
+        
+        const blueskyShareUrl = `https://bsky.app/intent/compose?text=${encodeURIComponent(text)}`;
+
+
+        window.open(blueskyShareUrl, '_blank', 'width=900,height=650');
+    });
+
+    document.getElementById("twitter-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+        // construct message
+        const text = `Check out this Arm Learning Path! ${url}`;
+        
+        const twitterShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}`;
+
+        window.open(twitterShareUrl, '_blank', 'width=900,height=650');
+    });
+
+    document.getElementById("linkedin-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const url = getLearningPathFullPath(window.location.href);
+
+
+        // construct message        
+        const linkedinShareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}`;
+
+        window.open(linkedinShareUrl, '_blank', 'width=900,height=650');
+    });
+
   </script>
   
 <br>
@@ -173,8 +243,8 @@ Called from:
 
             <div id="arm-dev-program-div" class="content-box">
                 <h4>Talk with Arm Experts</h4>
-                <p>Join the Arm Developer Program to share ideas, ask questions, and interact with fellow peers — all with the support of Arm’s own subject-matter experts.</p>
-                <ads-cta-button id="join-dev-program" level="primary" sr-label="primary button">Join now</ads-cta-button>    
+                <p>Join the Arm Developer Program to share ideas, ask questions, and explore solutions with the support of the developer community.</p>
+                <ads-cta-button id="join-dev-program" level="primary" sr-label="primary button" class="next-step-cta" name="DevProgram">Join now</ads-cta-button>    
                 <script>
                     document.getElementById("join-dev-program").onclick = function () {
                     window.open("https://www.arm.com/resources/developer-program?#register","_blank");
@@ -183,18 +253,48 @@ Called from:
             </div>
 
 
-            <div id="explore-tags-div" class="content-box">
+            <div id="event-div" class="content-box">
                 {{ $csv := resources.Get "events.csv" }}
-                {{ $csv_content := $csv | transform.Unmarshal (dict "delimiter" ";") }}
+                {{ $csv_content := $csv | transform.Unmarshal (dict "delimiter" ",") }}
 
                 {{ $event_i := "" }}
+                {{ $event_priority := 100 }}
 
                 {{ $lp_category := (index .learningpathfiles 0).Parent.Title }}
-                {{ range $i, $row := $csv_content }}
-                    {{ $event_categories := split (index $row 9) ", " }}
+                {{ $lp_category_title := "" }}
+                
 
-                    {{ if in $event_categories $lp_category }}
-                        {{ if eq $event_i "" }}
+
+
+                {{/* if lp_category is 'cross platform', get first category listed in its metadata */}}
+                {{ if eq $lp_category "Cross Platform" }}
+                    {{ $lp_category = index (index .learningpathfiles 0).Params.shared_between 0 }}
+                    {{ $dirs := readDir "content/learning-paths" }}
+                    {{ range $dirs }}
+                        {{ if eq .Name $lp_category}}
+                            {{ $indexFilePath := printf "content/learning-paths/%s/_index.md" .Name }}
+                            {{ $indexFile := readFile $indexFilePath }}
+                            {{ $indexParams := transform.Unmarshal $indexFile }}
+                            {{ $lp_category_title = $indexParams.title }}
+                        {{end}}
+                    {{ end }}
+                {{else}}
+                    {{ $lp_category_title = $lp_category }}
+                {{end}}
+
+                {{/* if Learning Path has AI or ML as it's metadata 'subjects' set category to AI/ML */}}
+                {{ if eq (index .learningpathfiles 0).Params.subjects "ML" }}
+                    {{ $lp_category_title = "ML" }}
+                    {{ $lp_category = "ML" }}
+                {{ end }}
+
+                {{ range $i, $row := $csv_content }}
+                    {{ $event_categories := split (index $row 9) "; " }}
+
+                    {{ if in $event_categories $lp_category_title }}
+                        {{/* If event has a higher priority than the previous one, update the event_i */}}
+                        {{ if or (eq $event_i "") (gt $event_priority (int (index $row 1))) }}
+                            {{ $event_priority = (int (index $row 1)) }}
                             {{ $event_i = $i}}
                         {{ end }}
                     {{ end }}
@@ -208,7 +308,7 @@ Called from:
                     <p class="next-steps-subtitle">{{ $formatted_dates }}</p>
                     
                     <p>{{index $event 7}}</p>
-                    <ads-cta-button id="event-cta" level="secondary">Event sign up</ads-cta-button>
+                    <ads-cta-button id="event-cta" level="secondary" class="next-step-cta" name="Event" data-event-name="{{index $event 0}}">Event sign up</ads-cta-button>
                     <script>
                         document.getElementById("event-cta").onclick = function () {
                         window.open("{{index $event 8}}","_blank");
@@ -216,7 +316,15 @@ Called from:
                     </script>
 
                 {{ else }}
-                    <p>No events found in category {{ $lp_category }}</p>
+                    <h4>Learn more on Arm Developer</h4>
+
+                    <p>Visit Developer.arm.com to continue your learning journey.</p>
+                    <ads-cta-button id="dev-cta" level="secondary" class="next-step-cta" name="Developer.arm.com">Developer.arm.com</ads-cta-button>
+                    <script>
+                        document.getElementById("dev-cta").onclick = function () {
+                        window.open("https://developer.arm.com","_blank");
+                        };
+                    </script>
                 {{ end }}
 
 

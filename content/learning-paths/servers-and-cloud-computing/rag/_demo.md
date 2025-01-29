@@ -1,18 +1,21 @@
 ---
 title: Run a llama.cpp chatbot powered by Arm Kleidi technology
+weight: 2
 
 overview: | 
-  This Arm learning path shows how to use a single c4a-standard-64 Google Axion instance -- powered by an Arm Neoverse CPU -- to build a simple "Token as a Service" RAG-enabled server, used below to provide a chatbot to serve a small number of concurrent users.
+  This Learning Path shows you how to use a c4a-highcpu-72 Google Axion instance powered by an Arm Neoverse CPU to build a simple Token-as-a-Service (TaaS) RAG-enabled server that you can then use to provide a chatbot to serve a small number of concurrent users.
 
-  This architecture would be suitable for businesses looking to deploy the latest Generative AI technologies with RAG capabilities using their existing CPU compute capacity and deployment pipelines. It enables semantic search over chunked documents using FAISS vector store. The demo uses the open source llama.cpp framework, which Arm has enhanced by contributing the latest Arm Kleidi technologies. Further optimizations are achieved by using the smaller 8 billion parameter Llama 3.1 model, which has been quantized to optimize memory usage. 
+  This architecture is suitable for businesses looking to deploy the latest Generative AI technologies with RAG capabilities using their existing CPU compute capacity and deployment pipelines. 
+  
+  It enables semantic search over chunked documents using the FAISS vector store. The demo uses the open source llama.cpp framework, which Arm has enhanced with its own Kleidi technologies. Further optimizations are achieved by using the smaller 8 billion parameter Llama 3.1 model, which has been quantized to optimize memory usage. 
 
-  Chat with the Llama-3.1-8B RAG-enabled LLM below to see the performance for yourself, then follow the learning path to build your own Generative AI service on Arm Neoverse.
+  Chat with the Llama-3.1-8B RAG-enabled LLM below to see the performance for yourself, and then follow the Learning Path to build your own Generative AI service on Arm Neoverse.
 
 
 demo_steps:
-  - Type & send a message to the chatbot.
+  - Type and send a message to the chatbot.
   - Receive the chatbot's reply, including references from RAG data.
-  - View stats showing how well Google Axion runs LLMs. 
+  - View performance statistics demonstrating how well Google Axion runs LLMs. 
 
 diagram: config-diagram-dark.png
 diagram_blowup: config-diagram.png

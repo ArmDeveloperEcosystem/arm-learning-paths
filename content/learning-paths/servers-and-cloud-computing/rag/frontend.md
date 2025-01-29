@@ -1,6 +1,6 @@
 ---
 title: Deploy RAG-based LLM frontend server
-weight: 4
+weight: 5
 
 layout: learningpathall
 ---
@@ -20,7 +20,7 @@ from PIL import Image
 from typing import Dict, Any
 
 # Configure paths and URLs
-BASE_PATH = "/home/ubuntu"
+BASE_PATH = "$HOME"
 API_URL = "http://localhost:5000"
 
 # Page config

@@ -2,7 +2,7 @@
 # User change
 title: "Set up a RAG based LLM Chatbot"
 
-weight: 2 # 1 is first, 2 is second, etc.
+weight: 3 
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -10,11 +10,11 @@ layout: "learningpathall"
 
 ## Before you begin
 
-This learning path demonstrates how to build and deploy a Retrieval Augmented Generation (RAG) enabled chatbot using open-source Large Language Models (LLMs) optimized for Arm architecture. The chatbot processes documents, stores them in a vector database, and generates contextually-relevant responses by combining the LLM's capabilities with retrieved information. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 22.04 LTS. You need an Arm server instance with at least 16 cores and 8GB of RAM to run this example. Configure disk storage up to at least 32GB. The instructions have been tested on an AWS Graviton4 r8g.16xlarge instance.
+This Learning Path demonstrates how to build and deploy a Retrieval Augmented Generation (RAG) enabled chatbot using open-source Large Language Models (LLMs) optimized for Arm architecture. The chatbot processes documents, stores them in a vector database, and generates contextually-relevant responses by combining the LLM's capabilities with retrieved information. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 22.04 LTS. You need an Arm server instance with at least 16 cores, 8GB of RAM, and a 32GB disk to run this example. The instructions have been tested on a GCP c4a-standard-64 instance.
 
 ## Overview
 
-In this Learning Path, you learn how to build a Retrieval Augmented Generation (RAG) chatbot using llama-cpp-python, a Python binding for llama.cpp that enables efficient LLM inference on Arm CPUs.
+In this Learning Path, you learn how to build a RAG chatbot using llama-cpp-python, a Python binding for llama.cpp that enables efficient LLM inference on Arm CPUs.
 
 The tutorial demonstrates how to integrate the FAISS vector database with the Llama-3.1-8B model for document retrieval, while leveraging llama-cpp-python's optimized C++ backend for high-performance inference.
 
@@ -100,7 +100,7 @@ Download the Hugging Face model:
     wget https://huggingface.co/chatpdflocal/llama3.1-8b-gguf/resolve/main/ggml-model-Q4_K_M.gguf
 ```
 
-## Build llama.cpp & Quantize the Model
+## Build llama.cpp and Quantize the Model
 
 Navigate to your home directory:
 

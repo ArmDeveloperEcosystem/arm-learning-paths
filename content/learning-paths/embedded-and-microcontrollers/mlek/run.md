@@ -2,34 +2,32 @@
 # User change
 title: "Run the examples on the FVP"
 
-weight: 3 # 1 is first, 2 is second, etc.
+weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
 ## Run an example
 
-Now you are ready to combine the FVP installation and the example application. Navigate to the evaluation kit repository.
+Navigate to the evaluation kit repository.
 
 ```bash
 cd ml-embedded-evaluation-kit/
 ```
 
-To run an example on the Corstone-320 FVP target, launch the FVP executable with `-a` to specify the software application.
+The built examples (`.axf` files) will be located in a `cmake-*/bin` folder based on the build configuration used.
 
-To run the key word spotting example `ethos-u-kws.axf` compiled with `gcc` use one of the two options below.
+Navigate into that folder, and list the images. For example:
 
-## Option 1: On your computer with the FVP installed
-
-Run the FVP.
-
-```console
-FVP_Corstone_SSE-320                                    \
-    -C mps4_board.subsystem.ethosu.num_macs=256         \
-    -C mps4_board.visualisation.disable-visualisation=1 \
-    -C vis_hdlcd.disable_visualisation=1                \
-    -a cmake-build-mps4-sse-320-ethos-u85-256-gnu/bin/ethos-u-kws.axf
+```bash
+cd cmake-build-mps4-sse-320-ethos-u85-256-gnu/bin/
+ 
+ls *.axf
 ```
+
+Use `-a` to specify the application to load to the FVP.
+
+Use `-C mps4_board.subsystem.ethosu.num_macs` to configure the Ethos-U component of the model.
 
 {{% notice Note %}}
 The number of NPU MACs specified in the build MUST match the number specified in the FVP. Else an error similar to the below will be emitted.
@@ -39,81 +37,87 @@ E: NPU config mismatch. npu.macs_per_cc=E: NPU config mismatch..
 ```
 {{% /notice %}}
 
-## Option 2: On Arm Virtual Hardware
-
-```console
-VHT_Corstone_SSE-300_Ethos-U55 -a cmake-build-mps3-sse-300-ethos-u55-128-gnu/bin/ethos-u-kws.axf
-```
-When the example is running, a telnet instance will open allowing you to interact with the example.
-
-{{% notice Note %}}
-It may take some time to initialize the terminal, please be patient.
-
-If you see warnings regarding loading the image, these can likely be ignored.
-{{% /notice %}}
-
-## Interact with the application
-
-Use the menu to control the application. For the key word spotting application enter 1 to classify the next audio clip.
-
-![terminal #center](term.png)
-
-The results of the classification will appear in the visualization window of the FVP.
-
-The display shows a 98% chance of the audio clips sound was down.
-
-![visualization #center](vis.png)
-
-End the simulation by pressing Control-C in the terminal where to started the FVP.
-
-You now have the ML Evaluation Kit examples running. Experiment with the different examples provided.
-
-## Addendum: Setting model parameters
-
-You can specify additional parameters to configure certain aspects of the simulated Corstone-300.
-
-### List parameters
-
-List the available parameters by running the FVP executable with the `--list-params` option, for example:
+You can list all available parameters by running the FVP executable with the `--list-params` option, for example:
 
 ```console
 FVP_Corstone_SSE-320 --list-params > parameters.txt
 ```
 
-{{% notice Note %}}
-If you are running with Arm Virtual Hardware substitute `VHT_Corstone_SSE-300_Ethos-U55` as the executable name.
-{{% /notice %}}
 
-Open the file `parameters.txt` to see all of the possible parameters and the default values.
-
-### Set parameters
-
-Individual parameters can be set with the `-C` command option.
-
-For example, to put the Ethos-U component into fast execution mode:
+### Run the application
 
 ```console
-FVP_Corstone_SSE-320 -a cmake-build-mps4-sse-320-ethos-u85-256-gnu/bin/ethos-u-kws.axf -C mps4_board.subsystem.ethosu.extra_args="--fast"
+FVP_Corstone_SSE-320								\
+    -C mps4_board.subsystem.ethosu.num_macs=256			\
+    -C mps4_board.visualisation.disable-visualisation=1	\
+    -C vis_hdlcd.disable_visualisation=1				\
+    -a ethos-u-kws.axf
 ```
+
+If adding configuration options becomes cumbersome, it can be easier to specify them in a configuration file (remove the `-C` option) and then use that on the command line (`-f`).
+
+#### config.txt
+```
+mps4_board.subsystem.ethosu.num_macs=256
+mps4_board.visualisation.disable-visualisation=1
+vis_hdlcd.disable_visualisation=1
+```
+
+The command line becomes:
+```console
+FVP_Corstone_SSE-320 -f config.txt -a ethos-u-kws.axf
+```
+
+The application executes and identifies words spoken within audio files.
+
+Repeat with any of the other built applications.
+
+Full instructions are provided in the evaluation kit [documentation](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit/+/HEAD/docs/quick_start.md).
+
+
+## Addendum: Speed up FVP execution
+
+By default, the examples are built with Ethos-U timing enabled. This provides benchmarking information, but the result is that the FVP executes relatively slowly.
+
+The build system has a macro `-DETHOS_U_NPU_TIMING_ADAPTER_ENABLED` defined to control this.
+
+Modify the command `build_default.py` passes to `cmake` to include this setting (`OFF`). Search for `cmake_command` and modify as follows:
+
+#### build_default.py
+```
+cmake_command = (
+    f"{cmake_path} -B {build_dir} -DTARGET_PLATFORM={target_platform}"
+    f" -DTARGET_SUBSYSTEM={target_subsystem}"
+    f" -DCMAKE_TOOLCHAIN_FILE={cmake_toolchain_file}"
+    f" -DETHOS_U_NPU_ID={ethos_u_cfg.processor_id}"
+    f" -DETHOS_U_NPU_CONFIG_ID={ethos_u_cfg.config_id}"
+    " -DTENSORFLOW_LITE_MICRO_CLEAN_DOWNLOADS=ON"
+    " -DETHOS_U_NPU_TIMING_ADAPTER_ENABLED=OFF"
+)
+```
+
+Rebuild the applications as before, for example:
+```
+./build_default.py --npu-config-name ethos-u85-256 --toolchain gnu --make-jobs 8
+```
+
+Add additional configuration option (`mps4_board.subsystem.ethosu.extra_args`) to the FVP command line:
+
+#### config.txt
+```
+mps4_board.subsystem.ethosu.num_macs=256
+mps4_board.visualisation.disable-visualisation=1
+vis_hdlcd.disable_visualisation=1
+mps4_board.subsystem.ethosu.extra_args="--fast"
+```
+
+Run the application again, and notice how much faster execution completes.
+
+```console
+FVP_Corstone_SSE-320 -f config.txt -a ethos-u-kws.axf
+```
+
 {{% notice Note %}}
 Do not use fast execution mode whilst benchmarking performance.
 {{% /notice %}}
 
-To set multiple parameters it may be easier to list them in a text file (without `-C`) and use `-f` to specify the file.
-
-For example, use a text editor to create a file named `options.txt` with the contents:
-
-```console
-mps4_board.visualisation.disable-visualisation=1
-mps4_board.subsystem.ethosu.extra_args="--fast"
-```
-
-Run the FVP with the `-f` option and the `options.txt` file:
-
-```console
-FVP_Corstone_SSE-320 -a cmake-build-mps4-sse-320-ethos-u85-256-gnu/bin/ethos-u-kws.axf -f options.txt
-```
-
-Full instructions are provided in the evaluation kit [documentation](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit/+/HEAD/docs/quick_start.md).
-
-You have now run an example application on an Arm Fixed Virtual Platform.

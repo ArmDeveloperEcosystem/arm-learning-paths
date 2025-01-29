@@ -10,7 +10,7 @@ learning_objectives:
     - Compare the performance of a simple application using different build configurations
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit) or Lenovo Thinkpad X13s running Windows 11.
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11.
 
 author_primary: Pareena Verma
 

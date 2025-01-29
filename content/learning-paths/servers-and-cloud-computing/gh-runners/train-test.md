@@ -17,7 +17,7 @@ https://github.com/Arm-Labs/gh_armrunner_mlops_gtsrb
 ```
 Fork the repository, using the **Fork** button:
 
-![#fork](/images/fork.png)
+![#fork](images/fork.png)
 
 Create a fork within a GitHub Organization or Team where you have access to Arm-hosted GitHub runners. 
 

@@ -1,14 +1,14 @@
 ---
 title: "Run GitHub Actions jobs on the Arm-hosted runner"
 
-weight: 3
+weight: 5
 
 layout: "learningpathall"
 ---
 
 ## Use GitHub Actions
 
-You can use GitHub Actions to build multi-architecture images by using your new Arm-hosted runner alongside a standard runner by creating a workflow file.
+You can use GitHub Actions to build multi-architecture images by creating a workflow file and using Arm-hosted runners.
 
 ## Create a new GitHub repository
 
