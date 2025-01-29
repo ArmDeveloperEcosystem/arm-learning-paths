@@ -6,7 +6,7 @@ minutes_to_complete: 30
 who_is_this_for: This Learning Path is an advanced topic for developers who want to learn about accelerating the performance of matrix multiplication using Arm's Scalable Matrix Extension Version 2 (SME2).
 
 learning_objectives:
-    - Implement a reference matrix multiplication without SME2.
+    - Implement a reference matrix multiplication without using SME2.
     - Use SME2 assembly instructions to improve the matrix multiplication performance.
     - Use SME2 intrinsics to improve the matrix multiplication performance using the C programming language.
     - Compile and run code with SME2 instructions.

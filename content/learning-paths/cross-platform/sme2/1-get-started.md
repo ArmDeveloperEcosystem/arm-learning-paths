@@ -215,22 +215,3 @@ In the remainder of this learning path, the shell commands show the docker
 invocation (so readers that don't use VSCode can copy the full command line),
 but you should only use the ``COMMAND ARGUMENTS`` part.
 
-## Suggested reading
-
-If you are not familiar with matrix multiplication --- or need a refresh ---
-this [wikipedia article on Matrix
-multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication) is a good
-start.
-
-If you are not familiar with SVE and / or SME, it is strongly suggested that you
-first read some material as this learning path assumes some basic understanding
-of those technologies:
-
- - [Introducing the Scalable Matrix Extension for the Armv9-A
-   Architecture](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/scalable-matrix-extension-armv9-a-architecture)
- - [Arm Scalable Matrix Extension (SME) Introduction (part
-   1)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction)
- - [Arm Scalable Matrix Extension (SME) Introduction (part
-   2)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2)
-
-You are now all set to move to the next chapter !
