@@ -32,6 +32,38 @@ The retrieved resources are then used to augment the context for the LLM, which 
 
 To convert data into `chunk.yaml` files, we used...
 
-## Combine Chunks into `.bin` file
+### TODO: Write how to generate yaml files? Explanation of how we made example chunks?
 
-Some words will go here
+To use our example data, you can download our example from S3 using the AWS CLI.
+
+```bash
+aws s3 cp s3://arm-github-copilot-extension/yaml_data.zip .
+```
+
+Unzip the contents:
+
+```bash
+unzip yaml_data.zip
+```
+
+## Combine Chunks into FAISS index
+
+Once you have a folder full of yaml files, copy the vectorstore creation script to that yaml directory.
+
+The file is located in the root of the example repo.
+
+```bash
+cp local_vectorstore_creation.py yaml_data
+```
+
+### Run the script:
+
+Ensure your local environment has your `AZURE_OPENAI_KEY` and `AZURE_OPENAI_ENDPOINT` set.
+
+Then run the python script
+
+```bash
+python local_vectorstore_creation.py
+```
+
+The FAISS index bin file then be created.
