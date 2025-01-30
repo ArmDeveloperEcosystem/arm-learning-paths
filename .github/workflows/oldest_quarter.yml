@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Install requirements
+        run: pip install -r tools/requirements.txt
       - name: Run maintenance for outdates files
         run: python3 tools/maintenance.py -r 1
       - name: Run find_oldest_quarter.sh
