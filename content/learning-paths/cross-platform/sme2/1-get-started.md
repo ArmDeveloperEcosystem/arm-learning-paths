@@ -1,5 +1,5 @@
 ---
-title: Get started
+title: Set up your environment
 weight: 3
 
 ### FIXED, DO NOT MODIFY

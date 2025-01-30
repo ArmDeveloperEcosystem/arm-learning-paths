@@ -1,5 +1,5 @@
 ---
-title: Check your environment
+title: Test your environment
 weight: 4
 
 ### FIXED, DO NOT MODIFY
