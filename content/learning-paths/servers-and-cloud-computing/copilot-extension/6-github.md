@@ -29,7 +29,7 @@ Make the following changes to your GitHub App settings:
 
 ### In the "General" settings
 
-In the "Callback URL" field, paste the address for your agent.
+In the "Callback URL" field, put the URL of your agent you deployed in the previous step.
 
 If you want to test locally and use an ephemeral domain in ngrok, you will need to update this URL every time you restart your ngrok server.
 
