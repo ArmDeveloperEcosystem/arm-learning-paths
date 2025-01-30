@@ -62,13 +62,8 @@ be in column-major order --- from a mathematical perspective, ``matleft`` is
 
 ### Transposition in the real world
 
-Just as trees don't grow to the sky, the SME engine has physical
-implementation limits. It operates with so called tiles in the ZA storage. Tiles
-are 2D portions of the matrices being processed. SME has dedicated instructions
-to load data to / store data from tiles efficiently, as well as instructions to
-operate with / on tiles, e.g the
-[fmopa](https://developer.arm.com/documentation/ddi0602/latest/SME-Instructions/FMOPA--non-widening---Floating-point-outer-product-and-accumulate-?lang=en)
-instruction which takes 2 vectors as inputs and accumulate all the outer
+In the same way that trees don't reach the sky, the SME engine has physical implementation limits. It operates with tiles in the ZA storage. Tiles are 2D portions of the matrices being processed. SME has dedicated instructions to load data to, and store data from tiles efficiently, as well as instructions to operate with and on tiles, for example the [fmopa](https://developer.arm.com/documentation/ddi0602/latest/SME-Instructions/FMOPA--non-widening---Floating-point-outer-product-and-accumulate-?lang=en)
+instruction which takes two vectors as inputs and accumulate all the outer
 products to a 2D tile. The tile in ZA storage is what allows SME to increase the
 ``macc`` to ``load`` ratio, as all the tile elements are loaded to the tile, to
 be used with the SME outer product instructions.
