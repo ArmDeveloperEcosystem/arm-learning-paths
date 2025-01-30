@@ -1,5 +1,5 @@
 ---
-title: PLACEHOLDER STEP TITLE 1
+title: Vector Database
 weight: 5
 
 ### FIXED, DO NOT MODIFY
