@@ -27,14 +27,38 @@ After you create your app, click **Install App** in the sidebar, then install yo
 
 Make the following changes to your GitHub App settings:
 
-- In the "General" settings, in the "Callback URL" field, paste the local address for your agent.
-- In the "Permissions & events" settings, grant read-only permissions to Copilot Chat.
-- In the "Copilot" settings, set your app type to "Agent," then fill out the remaining fields.
+### In the "General" settings
+
+In the "Callback URL" field, paste the address for your agent.
+
+If you want to test locally and use an ephemeral domain in ngrok, you will need to update this URL every time you restart your ngrok server.
+
+### In the "Permissions & events" settings
+
+Grant read-only permissions to Copilot Chat.
+
+### In the "Copilot" settings
+
+Set your app type to "Agent," then fill out the remaining fields.
+
+## Test it out
 
 After you update your GitHub App settings, you can start chatting with your extension by typing @YOUR-EXTENSION-NAME in the Copilot Chat window, then sending a prompt as normal.
 
-## Create Client ID and Secret
+## OPTIONAL: Publish your extension on the marketplace
 
-## Input Callback Endpoints
+> For the most up to date instructions, follow the [official documentation for listing your extension on the marketplace](https://docs.github.com/en/copilot/building-copilot-extensions/managing-the-availability-of-your-copilot-extension#listing-your-copilot-extension-on-the-github-marketplace).
 
-## OPTIONAL: Register the extension with the marketplace
+If you would like to make your extension public so that anyone can use it, go into your GitHub App advanced settings. 
+
+You will see one of two options:
+
+### Make public
+
+If you see the Make public option, your extension is currently private. It can only be installed by your organization (or the user) that created the app. You can click Make public to allow any other account to install your Copilot Extension, or leave your settings as they are to keep your app private.
+
+### Make private
+
+If you see the Make private option, your extension is currently public. The extension can be installed by any account. You can click Make private to only allow your organization (or user) that created the app to install it, or leave your settings as they are to keep your app public.
+
+
