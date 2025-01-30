@@ -15,8 +15,7 @@ prerequisites:
     - Basic knowledge of Arm's Scalable Matrix Extension (SME).
     - Basic knowledge of Arm's Scalable Vector Extension (SVE). 
     - A computer running Linux, MacOS, or Windows.
-    - An installation of Git.
-    - An installation of Docker.
+    - Installations of Git and Docker.
     - An emulator to run code with SME2 instructions.
     - A compiler with support for SME2 instructions. 
     - An intermediate understanding of C programming language and assembly language.
