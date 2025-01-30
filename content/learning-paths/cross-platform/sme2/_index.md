@@ -18,7 +18,7 @@ prerequisites:
     - An installation of Git.
     - An installation of Docker.
     - An emulator to run code with SME2 instructions.
-    - Clang or GCC.
+    - A compiler with support for SME2 instructions. 
     - An intermediate understanding of C programming language and assembly language.
 
 author_primary: Arnaud de Grandmaison
