@@ -1,7 +1,7 @@
 name: Oldest Quarter Workflow
 on:
   schedule:
-    - cron: '0 10 * * *'
+    - cron: '5 9 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
