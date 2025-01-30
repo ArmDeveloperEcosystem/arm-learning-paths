@@ -12,6 +12,8 @@ learning_objectives:
     - Compile and run code with SME2 instructions.
 
 prerequisites:
+    - Basic knowledge of Arm's Scalable Matrix Extension (SME).
+    - Basic knowledge of Arm's Scalable Vector Extension (SVE). 
     - A computer running Linux, MacOS, or Windows.
     - An intermediate understanding of C programming language and assembly language.
 

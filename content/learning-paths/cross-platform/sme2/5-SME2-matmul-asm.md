@@ -1,6 +1,6 @@
 ---
 title: SME2 assembly matrix multiplication
-weight: 6
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
