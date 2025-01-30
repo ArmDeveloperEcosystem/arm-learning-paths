@@ -1,14 +1,16 @@
 ---
-title: Set up your environment
+title: Set up your Environment
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-In this section, you will set up an environment to develop with SME2.
+## Installing software for this Learning Path
 
-SME2 hardware is not widely deployed at the time of writing, so you will require:
+To follow this Learning Path, you will need to set up an environment to develop with SME2.
+
+As SME2 hardware is not widely deployed at the time of writing, you will require:
 
  - A compiler with support for SME2 instructions. [clang](https://www.llvm.org/)
    version >= 18 or [gcc](https://gcc.gnu.org/) versions >= 14. This Learning
@@ -17,14 +19,11 @@ SME2 hardware is not widely deployed at the time of writing, so you will require
  - An emulator to execute code with the SME2 instructions. This Learning
    Path uses [Arm's Fixed Virtual Platform (FVP) model](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms).
 
+You will also require ``git`` and ``docker`` installed on your machine.
 
-## Prerequisites
+### Set up Git
 
-You require ``git`` and ``docker`` installed on your machine.
-
-### git
-
-Check that ``git`` is installed on your machine with the following command line in a terminal:
+To check if ``git`` is already installed on your machine, use the following command line in a terminal:
 
 ```BASH { output_lines=2 }
 git --version
@@ -42,17 +41,13 @@ brew install git
   {{< /tab >}}
 {{< /tabpane >}}
 
-### docker
+### Docker
 
-For ease of learning, without any risk of harming your computer setup, the
-required compiler and FVP are provided as a docker container that you can fetch
-from the internet to get instantly started. However, the ``Dockerfile`` to build
-the container is available as well should you prefer to build it yourself or
-study how it's built.
+To enable you to get started easily and with the tools that you need, you can fetch a Docker container with the required compiler and FVP to get started straight away. Alternatively, if you do wish to build the container yourself, the ``Dockerfile`` is also available.
+
 
 {{% notice Note %}}
-This learning path should also work without ``docker``, the only assumption is
-that the compiler and the FVP are available on your search path.
+This Learning Path should also work without ``docker``, but the compiler and the FVP must be available on your search path.
 {{% /notice %}}
 
 Start by checking that ``docker`` is installed on your machine by typing the following

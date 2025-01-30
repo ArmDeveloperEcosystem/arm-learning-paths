@@ -48,7 +48,7 @@ $ docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-envi
 ```
 {{% /notice %}}
 
-## Basic Sanity checks
+## Basic checks
 
 The very first program that you should run is the famous "Hello, world !" that
 will let you know that the basics of your environment are in place. The source
@@ -170,5 +170,4 @@ Checking in_streaming_mode: 0
 Info: /OSCI/SystemC: Simulation stopped by user.
 ```
 
-You have checked that code can be compiled and executed with full SME2 support:
-you are now all set to move to the next chapter !
+You have now checked that the code can be compiled and run with full SME2 support, so you are now all set to move to the next section.
