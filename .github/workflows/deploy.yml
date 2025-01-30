@@ -43,7 +43,10 @@ jobs:
         with:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
-
+          
+      - name: Clear npm cache
+        run: npm cache clean --force
+          
       # Installs Post-CSS
       - name: Install Post-CSS
         run: npm install postcss-cli
