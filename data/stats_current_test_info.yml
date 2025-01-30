@@ -29,8 +29,28 @@ sw_categories:
       tests_and_status:
       - ubuntu:latest: passed
       - fedora:latest: passed
+    ambaviz:
+      readable_title: Arm AMBA Viz
+      tests_and_status:
+      - ubuntu:latest: passed
+    ams:
+      readable_title: Arm Performance Studio
+      tests_and_status:
+      - ubuntu:latest: passed
     anaconda:
       readable_title: Anaconda
+      tests_and_status:
+      - ubuntu:latest: failed
+    ansible:
+      readable_title: Ansible
+      tests_and_status:
+      - ubuntu:latest: passed
+    aperf:
+      readable_title: AWS Perf (APerf)
+      tests_and_status:
+      - ubuntu:latest: passed
+    arduino-pico:
+      readable_title: Arduino core for the Raspberry Pi Pico
       tests_and_status:
       - ubuntu:latest: passed
     arm-gnu:
@@ -38,8 +58,36 @@ sw_categories:
       tests_and_status:
       - ubuntu:latest: passed
       - fedora:latest: passed
+    armclang:
+      readable_title: Arm Compiler for Embedded
+      tests_and_status:
+      - ubuntu:latest: passed
+    armds:
+      readable_title: Arm Development Studio
+      tests_and_status:
+      - ubuntu:latest: passed
+    armie:
+      readable_title: Arm Instruction Emulator
+      tests_and_status:
+      - ubuntu:latest: passed
+    armpl:
+      readable_title: Arm Performance Libraries
+      tests_and_status:
+      - ubuntu:latest: passed
+    aws-cli:
+      readable_title: AWS CLI
+      tests_and_status:
+      - ubuntu:latest: passed
+    aws-copilot:
+      readable_title: AWS Copilot CLI
+      tests_and_status:
+      - ubuntu:latest: passed
     azure-cli:
       readable_title: Azure CLI
+      tests_and_status:
+      - ubuntu:latest: passed
+    bolt:
+      readable_title: BOLT
       tests_and_status:
       - ubuntu:latest: passed
     cross:
@@ -59,6 +107,10 @@ sw_categories:
       readable_title: Linaro Forge
       tests_and_status:
       - ubuntu:latest: passed
+    gcloud:
+      readable_title: Google Cloud Platform (GCP) CLI
+      tests_and_status:
+      - ubuntu:latest: passed
     gfortran:
       readable_title: GFortran
       tests_and_status:
@@ -70,6 +122,10 @@ sw_categories:
       readable_title: Kubectl
       tests_and_status:
       - ubuntu:latest: passed
+    multipass:
+      readable_title: Multipass
+      tests_and_status:
+      - ubuntu:latest: passed
     native:
       readable_title: Native compiler
       tests_and_status:
@@ -79,8 +135,40 @@ sw_categories:
       readable_title: Oracle Cloud Infrastructure (OCI) CLI
       tests_and_status:
       - ubuntu:latest: passed
+    papi:
+      readable_title: Performance API (PAPI)
+      tests_and_status:
+      - ubuntu:latest: passed
+    perf:
+      readable_title: Perf for Linux on Arm (LinuxPerf)
+      tests_and_status:
+      - ubuntu:latest: passed
+    pulumi:
+      readable_title: Pulumi
+      tests_and_status:
+      - ubuntu:latest: passed
     pytorch:
       readable_title: PyTorch
+      tests_and_status:
+      - ubuntu:latest: passed
+    rust:
+      readable_title: Rust for Linux Applications
+      tests_and_status:
+      - ubuntu:latest: passed
+    rust_embedded:
+      readable_title: Rust for Embedded Applications
+      tests_and_status:
+      - ubuntu:latest: passed
+    ssh:
+      readable_title: SSH
+      tests_and_status:
+      - ubuntu:latest: passed
+    streamline-cli:
+      readable_title: Streamline CLI Tools
+      tests_and_status:
+      - ubuntu:latest: passed
+    sysbox:
+      readable_title: Sysbox
       tests_and_status:
       - ubuntu:latest: passed
     swift:
@@ -88,6 +176,14 @@ sw_categories:
       tests_and_status: []
     terraform:
       readable_title: Terraform
+      tests_and_status:
+      - ubuntu:latest: passed
+    vnc:
+      readable_title: VNC on Arm Linux
+      tests_and_status:
+      - ubuntu:latest: passed
+    topdown-tool:
+      readable_title: Telemetry Solution (Topdown Methodology)
       tests_and_status:
       - ubuntu:latest: passed
   iot: {}

@@ -19,24 +19,22 @@ dname = ["content/install-guides",
          "content/learning-paths/automotive"]
 
 
-
-
-'''
+"""
 Returns the date (yyyy-mm-dd) which a file in the given directory was last updated.
 If Learning Path, changes in any file in the directory will count.
-'''
+"""
 def get_latest_updated(directory, is_lp, item):
     article_path = directory if is_lp else f"{directory}/{item}"
     date = subprocess.run(["git", "log", "-1" ,"--format=%cs", str(article_path)], stdout=subprocess.PIPE)
     return date
 
-'''
+"""
 Recursive content search in a given directory.
 Returns:
 - list of articles older than a given period found
 - count of articles found
 - list of primary authors found
-'''
+"""
 def content_parser(directory, period):
     count = 0
     art_list = {}
@@ -92,12 +90,12 @@ def content_parser(directory, period):
     return [art_list, count, auth_list]
 
 
-'''
+"""
 Initialize Plotly data structure for stats
 1 graph on the left with data for install tool guides
 1 graph on the right with data for learning paths
 Input: title for the graph
-'''
+"""
 def init_graph(title):
     data = {
             "data": [
@@ -190,9 +188,9 @@ def init_graph(title):
     return data
 
 
-'''
+"""
 Generate JSON data for stats page
-'''
+"""
 def stats():
     global dname
 
@@ -266,10 +264,10 @@ def stats():
     f_contrib.close()
 
 
-'''
+"""
 List pages older than a period in days and save result as CSV
 Generate JSON file with data
-'''
+"""
 def report(period):
     global dname
 
