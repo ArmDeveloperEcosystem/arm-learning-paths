@@ -2,7 +2,7 @@ name: Oldest Quarter Workflow
 on:
   workflow_dispatch:
   schedule:
-    - cron: '5 9 * * *'
+    - cron: '0 9 * */3 *'
 jobs:
   oldest-quarter:
     runs-on: ubuntu-latest
