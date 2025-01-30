@@ -1,0 +1,19 @@
+name: Oldest Quarter Workflow
+on:
+  schedule:
+    - cron: '0 0 1 */3 *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Run maintenance for outdates files
+        run: python3 tools/maintenance.py -r 1
+      - name: Run find_oldest_quarter.sh
+        run: tools/find_oldest_quarter.sh
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: oldest-quarter
+          path: oldest-quarter.csv
