@@ -12,7 +12,7 @@ jobs:
       - name: Install requirements
         run: pip install -r tools/requirements.txt
       - name: Run maintenance for outdates files
-        run: python3 tools/maintenance.py -r 1
+        run: python3 tools/maintenance.py -r 1 --debug
       - name: Run find-oldest-quarter.sh
         run: tools/find-oldest-quarter.sh
       - name: Upload artifact
