@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '5 9 * * *'
 jobs:
-  build:
+  oldest-quarter:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -14,7 +14,7 @@ jobs:
       - name: Run find_oldest_quarter.sh
         run: tools/find_oldest_quarter.sh
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: oldest-quarter
           path: oldest-quarter.csv
