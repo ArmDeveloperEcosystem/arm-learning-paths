@@ -60,10 +60,8 @@ cp local_vectorstore_creation.py yaml_data
 
 Ensure your local environment has your `AZURE_OPENAI_KEY` and `AZURE_OPENAI_ENDPOINT` set.
 
-Then run the python script
+Then run the python script to create the FAISS index bin file.
 
 ```bash
 python local_vectorstore_creation.py
 ```
-
-The FAISS index bin file then be created.
