@@ -9,6 +9,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: main
       - name: Install requirements
         run: pip install -r tools/requirements.txt
       - name: Run maintenance for outdates files
