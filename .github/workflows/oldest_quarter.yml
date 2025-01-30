@@ -15,7 +15,7 @@ jobs:
       - name: Install requirements
         run: pip install -r tools/requirements.txt
       - name: Run maintenance for outdates files
-        run: python3 tools/maintenance.py -r 1 --debug
+        run: python3 tools/maintenance.py -r 1
       - name: Run find-oldest-quarter.sh
         run: tools/find-oldest-quarter.sh
       - name: Upload artifact
@@ -23,3 +23,7 @@ jobs:
         with:
           name: oldest-quarter
           path: oldest-quarter.csv
+      - name: Next step
+        run: |
+          echo "The content list has been uploaded as an artifact.
+          Review the content for this quarter by downloading it"
