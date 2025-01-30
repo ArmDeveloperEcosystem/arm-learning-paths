@@ -12,5 +12,5 @@
     // This line is for including ssh key path in order to be able to do commit signing via ssh within devcontainer
     "mounts": [
         "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,type=bind,consistency=cached"
-    ],
+    ]
 }
