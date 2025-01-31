@@ -1,31 +1,27 @@
 ---
-title: PLACEHOLDER TITLE
+title: Learn to use optimised Libraries
 
-minutes_to_complete: 10
+minutes_to_complete: 60
 
-who_is_this_for: PLACEHOLDER SENTENCE
+who_is_this_for: Beginners
 
 learning_objectives: 
-    - PLACEHOLDER OBJECTIVE 1
-    - PLACEHOLDER OBJECTIVE 2
-
+    - Learn how to incorporate optimised libraries
 prerequisites:
-    - PLACEHOLDER PREREQ 1
-    - PLACEHOLDER PREREQ 2
+    - Understanding of C++ and Linux
 
-author_primary: PLACEHOLDER NAME
+author_primary: Kieran Hejmadi
 
 ### Tags
-skilllevels: PLACEHOLDER SKILLLEVEL
-subjects: PLACEHOLDER SUBJECT
+skilllevels: Introductory
+subjects: Arm Performance libraries
 armips:
-    - PLACEHOLDER IP A
-    - PLACEHOLDER IP B
+    - Neoverse
 tools_software_languages:
-    - PLACEHOLDER TOOL OR SOFTWARE C
-    - PLACEHOLDER TOOL OR SOFTWARE D
+    - Arm Compiler for Linux
+    - C++
 operatingsystems:
-    - PLACEHOLDER OS G
+    - Linux
 
 
 ### FIXED, DO NOT MODIFY
