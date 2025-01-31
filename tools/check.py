@@ -163,7 +163,8 @@ def check(json_file, start, stop, md_article):
 
                 test_target = test.get("target")
                 if test_target and test_target != test_image:
-                    pass
+                    bar(skipped=True)
+                    continue
                 elif not test_target:
                     pass
                 elif test_target:
@@ -199,6 +200,10 @@ def check(json_file, start, stop, md_article):
                         subprocess.run(docker_cmd, shell=True, capture_output=True)
                         logging.debug(docker_cmd)
                         run_command = [f"docker exec -u {username} -w /home/{username} test_{n_image} bash {test_cmd_filename}"]
+                    else:
+                        logging.debug(f"Image {test_image} not supported for testing. Contact the maintainers if you think this is a mistake.")
+                        bar(skipped=True)
+                        continue
                 elif test_type == "fvp":
                     # Start instance for image
                     if start:

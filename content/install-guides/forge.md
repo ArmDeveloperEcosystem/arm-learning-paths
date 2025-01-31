@@ -73,7 +73,7 @@ Run the Windows file executable to install the Linaro Forge Remote Client.
 
 Optionally, you can run the installer executable with a graphical interface.
 
-```bash
+```console
 cd linaro-forge-24.0.3-linux-aarch64/
 ./installer
 ```

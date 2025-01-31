@@ -76,7 +76,7 @@ You are now ready to install ACfL [manually](#manual) or with [Spack](#spack).
 
 Use an Arm recommended script to select, download, and install your preferred ACfL package.
 
-```console
+```bash
 bash <(curl -L https://developer.arm.com/-/cdn-downloads/permalink/Arm-Compiler-for-Linux/Package/install.sh)
 ```
 
@@ -145,14 +145,15 @@ Arm Compiler for Linux is available to install with the Ubuntu system package ma
 
 ### Setup the ACfL package repository:
 
-Add the ACfL `apt` package repository to your Ubuntu 20.04 or 22.04 system:
+Add the ACfL `apt` package repository to your system. These instructions apply for Ubuntu 22.04. You can check the [available versions](https://developer.arm.com/packages/) for other releases.
 
 ```bash { target="ubuntu:latest" }
+export
 sudo apt update
 sudo apt install -y curl
 source /etc/os-release
-curl "https://developer.arm.com/packages/ACfL%3A${NAME}-${VERSION_ID/%.*/}/${VERSION_CODENAME}/Release.key" | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc
-echo "deb https://developer.arm.com/packages/ACfL%3A${NAME}-${VERSION_ID/%.*/}/${VERSION_CODENAME}/ ./" | sudo tee /etc/apt/sources.list.d/developer-arm-com.list
+curl "https://developer.arm.com/packages/ACfL%3AUbuntu-22/jammy/Release.key" | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc
+echo "deb https://developer.arm.com/packages/ACfL%3AUbuntu-22/jammy/ ./" | sudo tee /etc/apt/sources.list.d/developer-arm-com.list
 sudo apt update
 ```
 
@@ -162,7 +163,7 @@ The ACfL Ubuntu package repository is now ready to use.
 
 Download and install Arm Compiler for Linux with:
 
-```bash { target="ubuntu:latest" }
+```bash
 sudo apt install acfl
 ```
 
