@@ -19,6 +19,10 @@ author_primary: Julie Gaskin
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/109847/latest/
 
+test_images:
+- ubuntu:latest
+test_maintenance: true
+
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: true              # Set to true to be listed in main selection page, else false
@@ -70,12 +74,11 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
 
 ## Using Python scripts
 
-The Python scripts provided with Streamline CLI tools require Python 3.8 or later, and depend on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. 
+The Python scripts provided with Streamline CLI tools require Python 3.8 or later, and depend on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools.
 
 Create a virtual environment:
 
-```sh
-# From Bash
+```bash
 python3 -m venv sl-venv
 source ./sl-venv/bin/activate
 ```
@@ -92,7 +95,7 @@ The Streamline CLI tools are available as a standalone download to enable easy i
 
 To download the latest version of the tool and extract it to the current working directory you can use our download utility script:
 
-```sh
+```bash
 wget https://artifacts.tools.arm.com/arm-performance-studio/Streamline_CLI_Tools/get-streamline-cli.py
 python3 get-streamline-cli.py install
 python3 -m pip install -r ./streamline_cli_tools/bin/requirements.txt
@@ -100,7 +103,7 @@ python3 -m pip install -r ./streamline_cli_tools/bin/requirements.txt
 
 If you want to add the Streamline tools to your search path:
 
-```sh
+```bash
 export PATH=$PATH:$PWD/streamline_cli_tools/bin
 ```
 
@@ -163,14 +166,14 @@ You might need to adapt them slightly to other Linux distributions.
 
 To apply the patch to the latest 6.7 kernel, you can use `git`:
 
-```sh
-git apply v6.7-combined.patch
+```console
+git apply patch/v6.7-combined.patch
 ```
 
 or `patch`:
 
-```sh
-patch -p 1 -i v6.7-combined.patch
+```console
+patch -p 1 -i patch/v6.7-combined.patch
 ```
 
 ### Manual application to an RPM-based distribution
