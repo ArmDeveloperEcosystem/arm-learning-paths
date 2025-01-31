@@ -184,12 +184,21 @@ def check(json_file, start, stop, md_article):
                 test_type = test["type"]
                 # Check type
                 if test_type == "bash":
-                    # chmod cmd file
-                    run_command = [f"chmod +x {test_cmd_filename}"]
-                    subprocess.run(run_command, shell=True, capture_output=True)
-                    logging.debug(run_command)
-                    # execute file as is with bash
-                    run_command = [f"bash ./{test_cmd_filename}"]
+                    if "ubuntu" in test_image:
+                        # chmod cmd file
+                        run_command = [f"chmod +x {test_cmd_filename}"]
+                        subprocess.run(run_command, shell=True, capture_output=True)
+                        logging.debug(run_command)
+                        # execute file as is with bash
+                        run_command = [f"bash ./{test_cmd_filename}"]
+                    elif "fedora" in test_image:
+                        container_name = init_container(i_img=n_image, img=test_image)
+                        logging.info(f"{container_name} initialized")
+                        # copy files to docker
+                        docker_cmd = [f"docker cp {test_cmd_filename} test_{n_image}:/home/{username}/"]
+                        subprocess.run(docker_cmd, shell=True, capture_output=True)
+                        logging.debug(docker_cmd)
+                        run_command = [f"docker exec -u {username} -w /home/{username} test_{n_image} bash {test_cmd_filename}"]
                 elif test_type == "fvp":
                     # Start instance for image
                     if start:

@@ -1,30 +1,40 @@
 ---
-armips:
-- Neoverse
-author_primary: Pareena Verma
-layout: learningpathall
+title: Measure performance of compression libraries on Arm servers
+
+minutes_to_complete: 10
+
+who_is_this_for: This is an introductory topic for software developers using compression
+  libraries on Arm servers.
+
 learning_objectives:
 - Install and run lzbench with snappy and zstd
 - Measure compression library performance running on 64-bit Arm AWS EC2 instance
-learning_path_main_page: 'yes'
-minutes_to_complete: 10
-operatingsystems:
-- Linux
+
 prerequisites:
 - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate
   cloud service provider.
-skilllevels: Introductory
-subjects: Libraries
+
+author_primary: Pareena Verma
+
 test_images:
 - ubuntu:latest
 test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
 test_maintenance: true
-test_status:
-- passed
-title: Measure performance of compression libraries on Arm servers
+
+### Tags
+skilllevels: Introductory
+subjects: Libraries
+armips:
+- Neoverse
+operatingsystems:
+- Linux
 tools_software_languages:
 - snappy
-weight: 1
-who_is_this_for: This is an introductory topic for software developers using compression
-  libraries on Arm servers.
+
+### FIXED, DO NOT MODIFY
+# ================================================================================
+weight: 1                       # _index.md always has weight of 1 to order correctly
+layout: "learningpathall"       # All files under learning paths have this same wrapper
+learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
+layout: learningpathall
 ---

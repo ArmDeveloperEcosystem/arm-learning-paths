@@ -12,9 +12,6 @@ test_images:
 - fedora:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
-- passed
 title: Native compiler
 tool_install: false
 weight: 2
@@ -77,7 +74,7 @@ dnf groupinstall 'Development Tools' -y
 ```
 ## Setting up product license
 
-GCC is open source and freely available for use. 
+GCC is open source and freely available for use.
 
 ## Get started {#start}
 

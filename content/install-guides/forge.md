@@ -15,8 +15,6 @@ test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
 title: Linaro Forge
 tool_install: true
 weight: 1
@@ -35,7 +33,7 @@ Linaro Forge runs on Linux hosts and multiple architectures. See the Linaro Forg
 
 This install guide assumes an Arm AArch64 platform running Ubuntu Linux.
 
-## Download 
+## Download
 
 Download and extract the appropriate installation package from [Linaro Forge Downloads](https://www.linaroforge.com/downloadForge/).
 
@@ -73,9 +71,9 @@ Run the Windows file executable to install the Linaro Forge Remote Client.
 
 ### Graphical installer
 
-Optionally, you can run the installer executable with a graphical interface. 
+Optionally, you can run the installer executable with a graphical interface.
 
-```bash 
+```bash
 cd linaro-forge-24.0.3-linux-aarch64/
 ./installer
 ```
@@ -171,4 +169,4 @@ perf-report -n 128 myapp
 ```
 Two files `myapp_128p_<timestamp>.html` and `myapp_128p_<timestamp>.txt` will be created in the current directory.
 
-Linaro Forge is now installed and ready to use. 
+Linaro Forge is now installed and ready to use.

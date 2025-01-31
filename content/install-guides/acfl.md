@@ -16,9 +16,6 @@ test_images:
 - fedora:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
-- passed
 title: Arm Compiler for Linux
 tool_install: true
 weight: 1

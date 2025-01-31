@@ -4,7 +4,7 @@ title: Install Vectorscan (Hyperscan on Arm) and use it with Snort 3
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers using Hyperscan who want to migrate to Arm.
-  
+
 
 learning_objectives:
     - Install and run Vectorscan on an Arm-based instance
@@ -22,7 +22,7 @@ subjects: Libraries
 armips:
     - Neoverse
 tools_software_languages:
-    - Vectorscan    
+    - Vectorscan
 operatingsystems:
     - Linux
 
@@ -30,8 +30,6 @@ test_images:
 - ubuntu:latest
 test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
 test_maintenance: true
-test_status:
-- passed
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
