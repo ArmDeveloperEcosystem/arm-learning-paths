@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 This section describes installation of the [Corstone-320 FVP](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms/IoT%20FVPs) to run on your local machine. Similar instructions would apply for other platforms.
 
-Arm provides a selection of free to use Fixed Virtual Platforms (FVPs) that can be downloaded from the [Arm Developer](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms#Downloads) website.
+Arm provides a selection of free to use Ecosystem Fixed Virtual Platforms (FVPs) that can be downloaded from the [Arm Developer](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms#Downloads) website.
 
 You can review Arm's full FVP offering and general installation steps in the [Fast Model and Fixed Virtual Platform](/install-guides/fm_fvp) install guide.
 
