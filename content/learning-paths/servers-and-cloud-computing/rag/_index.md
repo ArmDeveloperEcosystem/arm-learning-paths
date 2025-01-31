@@ -21,10 +21,6 @@ prerequisites:
 
 author_primary: Nobel Chowdary Mandepudi
 
-draft: true
-cascade:
-    draft: true
-
 ### Tags
 skilllevels: Advanced
 armips:

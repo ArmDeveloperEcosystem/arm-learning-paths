@@ -6,10 +6,10 @@ minutes_to_complete: 60
 who_is_this_for: This is an introductory topic for software developers who want to use Linux virtual machines with Windows on Arm devices. 
 
 learning_objectives:
-    - Create Arm-based Linux virtual machines using Hyper-V 
+    - Create Arm-based Linux virtual machines using Hyper-V.
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit) or Lenovo Thinkpad X13s running Windows 11 with [Hyper-V](/install-guides/hyper-v/) installed
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 with [Hyper-V](/install-guides/hyper-v/) installed.
 
 author_primary: Jason Andrews
 

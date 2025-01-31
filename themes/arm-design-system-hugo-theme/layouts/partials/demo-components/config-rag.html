@@ -22,11 +22,10 @@ Calls to:
     <div class="c-row u-gap-1/2 u-flex-nowrap u-padding-top-0">
         <div class="c-col">
             <h2>RAG Vector Store Details</h2>
-            <p>This application uses all data on <a href="https://www.learn.arm.com">learn.arm.com</a>
-                as the RAG dataset. The content across Learning Paths and Install Guides is segmented into labeled chunks, 
-                and vector embeddings are generated. 
-                This LLM demo references the FAISS vector store to answer your query.</p>
-            <p><b>Note:</b> Data was sourced on {{.Params.rag_data_cutoff_date}}.</p>
+            <p>This application uses all data on <a href="https://learn.arm.com">learn.arm.com</a>
+                as the RAG dataset as of <b>{{.Params.rag_data_cutoff_date}}</b>. 
+            The content is segmented into labeled chunks, and vector embeddings are generated. This LLM demo references the FAISS vector store to answer your query.
+            <p>Conversation history is not saved, with only your most recent query being used in the system.</p>
         </div>    
     </div>
 </div>

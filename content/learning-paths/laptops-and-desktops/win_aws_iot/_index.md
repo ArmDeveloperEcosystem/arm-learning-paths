@@ -11,7 +11,7 @@ learning_objectives:
     - Send data from a device to AWS IoT Core.
 
 prerequisites:
-    - A Windows-on-Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11, or a Windows-on-Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
+    - A Windows-on-Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows-on-Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Any code editor. Visual Studio Code is suitable.
 
 author_primary: Dawid Borycki

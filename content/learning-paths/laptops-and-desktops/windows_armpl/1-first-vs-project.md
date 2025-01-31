@@ -1,45 +1,29 @@
 ---
-title: Create your first Windows on Arm application using Microsoft Visual Studio
-weight: 2
+title: Create and Run a Windows on Arm application
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Create and configure a project
 
-## Install Microsoft Visual Studio 
+You are now ready to create a Windows on Arm application. For your first project, you will create a simple console application.
 
-Visual Studio 2022, Microsoft's Integrated Development Environment (IDE), empowers developers to build high-performance applications for the Arm architecture. 
+The next steps will guide you through how to create and configure your project.
 
-You can learn more about [Visual Studio on Arm-powered devices](https://learn.microsoft.com/en-us/visualstudio/install/visual-studio-on-arm-devices?view=vs-2022) from Microsoft Learn.
+Begin by going to the **Start** window, and selecting **Create a new project**. See Figure 1.  
 
-Visual Studio 2022 offers different editions tailored to various development needs:
- - Community: A free, fully-featured edition ideal for students, open-source contributors, and individual developers.
- - Professional: Offers professional developer tools, services, and subscription benefits for small teams.
- - Enterprise: Provides the most comprehensive set of tools and services for large teams and enterprise-level development.
+![vs_new_proj1.png alt-text#center](./figures/vs_new_proj1.png "Figure 1: Create a new project.")
 
-To select the best edition for you, refer to [Compare Visual Studio 2022 Editions](https://visualstudio.microsoft.com/vs/compare/).
+Then, in **Configure your new project**, do the following:
 
-{{% notice Note %}}
-This Learning Path uses Visual Studio Community, but you can also use other editions. 
-{{% /notice %}}
+* Select **Console App**.
+* Provide a project name, such as `ConsoleApp1`, as Figure 2 shows.
+* Click **Create**.
 
-Download and install Visual Studio using the [Visual Studio for Windows on Arm](/install-guides/vs-woa/) install guide. Make sure to install C and C++ support and the LLVM compiler. 
+![img2 alt-text#center](./figures/vs_new_proj2.png "Figure 2: Configure your new project.")
 
-## Create a sample project
-
-You are ready to create a sample Windows on Arm application.
-
-To keep the example clear and concise, you can create a simple console application.
-
-On the start window, click `Create a new project`. 
-
-![img1](./figures/vs_new_proj1.png)
-
-In the `Create a new project` window, select `Console App`, provide a project name, such as `hello-world-1`, and then click `Next`.
-
-![img2](./figures/vs_new_proj2.png)
-
-After the project is created, you will see a line of `Hello, world!` code in the newly created C++ file. 
+After you have created the project, you will see a line of code that says `Hello, World!` in the newly-created C++ file. 
 
 ```C++
 #include <iostream>
@@ -50,36 +34,40 @@ int main()
 }
 ```
 
-Microsoft Visual Studio automatically configures the build environment for the current hardware's CPU architecture. However, you can still familiarize ourselves with the relevant settings.
+Whilst Microsoft Visual Studio automatically configures the build environment for the hardware of the CPU architecture, you still benefit from familiarizing yourself with the relevant configuration settings. So continue to learn more about how to get set up.
 
-## ARM64 Configuration Setting
+## ARM64 Configuration Settings
 
-Click the `Debug` drop down and select `Configuration Manager...`
+Now click on the **Debug** drop-down menu, and select **Configuration Manager...** 
 
- ![img4](./figures/vs_console_config1.png)
+ ![img4 alt-text#center](./figures/vs_console_config1.png "Figure 3: Select Configuration Manager.")
 
 
-In the `Project contexts` area you see the platform set to `ARM64`. 
+In the **Project contexts** area, you will see the platform set to `ARM64`, as Figure 4 shows. 
 
- ![img5](./figures/vs_console_config2.png)
+ ![img5 alt-text#center](./figures/vs_console_config2.png "Figure 4: Project Contexts Menu.")
 
-Click `Build -> Build Solution` and your application compiles successfully.
+Now click **Build**, then **Build Solution**, and your application will compile.
 
 ## Run your first Windows on Arm application
 
-Use the green arrow to run the program you just compiled, and you'll see the print statement from your code correctly executed in the console.
+Use the green arrow to run the program you compiled, and you will see the print statement from your code correctly executed in the console.
 
- ![img6](./figures/vs_console_exe.png)
+ ![img6 alt-text#center](./figures/vs_console_exe.png "Figure 5: The Console.")
 
-You can also use the tools provided by Visual Studio to check the compiled executable.
+You can also use the tools that Visual Studio provides to check the compiled executable.
 
-The [dumpbin](https://learn.microsoft.com/en-us/cpp/build/reference/dumpbin-reference?view=msvc-170) command-line tool is included with Microsoft Visual Studio. It's used to analyze binary files like executable files (.exe), object files (.obj), and dynamic-link libraries (.dll). 
+Visual Studio includes the command-line tool [dumpbin](https://learn.microsoft.com/en-us/cpp/build/reference/dumpbin-reference?view=msvc-170), and you can use it to analyze binary files such as:
 
-To use `dumpbin` open a Command Prompt with Visual Studio configured by opening Windows search, and looking for `Arm64 Native Tools Command Prompt for VS 2022`. Find and open this application.
+* Executable files (.exe).
+* Object files (.obj).
+* Dynamic-link libraries (.dll). 
 
-A new Command Prompt opens. It's the same as the regular Windows Command Prompt with the addition that Visual Studio tools can be run from the prompt.
+To use `dumpbin`, open a command prompt with Visual Studio configured by opening Windows search, and then looking for `Arm64 Native Tools Command Prompt for VS 2022`. Once you have found this application, open it.
 
-Run the command below with the executable you crated as an argument:
+A new command prompt opens. It is the same as the regular Windows command prompt, but with the added benefit that you can run Visual Studio tools.
+
+Run the command below, replacing the text with the details of the executable that you created as an argument:
 
 ```cmd
 dumpbin /headers <your exe path>\ConsoleApp1.exe
@@ -87,6 +75,6 @@ dumpbin /headers <your exe path>\ConsoleApp1.exe
 
 You can see that the file format shows `AA64 machine (ARM64)` in the file header.
 
- ![img7](./figures/vs_checkmachine.jpeg)
+ ![img7 alt-text#center](./figures/vs_checkmachine.jpeg "Figure 6: AA64 Machine in File Header.")
 
-Continue to the next page to build and run a more computation intensive application.
+Continue to the next page to get set up with Git before you move on to build and run a more computationally-intensive application.
