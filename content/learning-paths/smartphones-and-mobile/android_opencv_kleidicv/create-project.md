@@ -18,7 +18,7 @@ Follow these steps to create a project and add OpenCV with KleidiCV support:
 
 3. Configure the project as follows (see figure below):
 - Name: **Arm64.KleidiCV.Demo**.
-- Package name: **com.arm.arm64kleidicvdemoa**.
+- Package name: **com.arm.arm64kleidicvdemo**.
 - Save location: *Select relevant file location*.
 - Language: **Kotlin**.
 - Minimum SDK: **API 24**.
@@ -28,7 +28,7 @@ Follow these steps to create a project and add OpenCV with KleidiCV support:
 
 4. Click the **Finish** button. 
 
-The project will be ready in a few moments, and Android Studio should appear as shown below:
+The project will be ready in a few moments. Afterward you can configure the project.
 
 ## Add OpenCV support
 To add OpenCV for Arm64, open the *build.gradle.ts (Module: app)*, and add the following line under the dependencies:
@@ -37,7 +37,7 @@ To add OpenCV for Arm64, open the *build.gradle.ts (Module: app)*, and add the f
 implementation("org.opencv:opencv:4.11.0")
 ```
 
-Make sure that compileSdk is set to 35:
+Also, make sure that compileSdk is set to 35. The contents of the file should look something like this:
 
 ```JSON
 plugins {
@@ -78,7 +78,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

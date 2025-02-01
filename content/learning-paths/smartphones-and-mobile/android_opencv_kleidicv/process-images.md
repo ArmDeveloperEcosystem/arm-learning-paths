@@ -10,10 +10,12 @@ layout: "learningpathall"
 ## Process images
 In this final step, you will implement the application logic to process the images. 
 
-Start by adding a `assets` folder under `src/main`. Then, under `assets` folder add a `img.png` image. We will use this image for processing. Here, we use the cameraman image.
+Start by adding a `assets` folder under `src/main`. Then, under `assets` folder add a `img.png` image. This image can be any kind of image as it converted to the right type by the app. We will use this image for processing. Here, we use the [cameraman image](https://github.com/antimatter15/cameraman).
+
+To make navigation betwee files easier in Android Studio, select "Project" from the project browser pane.
 
 ## ImageOperation
-You will now create an enumeration (enum class) for a set of image processing operations in an  application that uses the OpenCV library. Under the `src/main/java` add the `ImageOperation.kt` file and modify it as follows:
+You will now create an enumeration (enum class) for a set of image processing operations in an  application that uses the OpenCV library. Under the `src/main/java/com/arm/arm64kleidicvdemo` add the `ImageOperation.kt` file and modify it as follows:
 
 ```Kotlin
 package com.arm.arm64kleidicvdemo
@@ -72,15 +74,7 @@ Each enum constant must override the abstract method apply to define its specifi
 
 We configured processing operations to align with current KleidiCV restrictions. Specifically, in-place changes are not supported, so the source and destination must be different images. In general, only single-channel images are supported (Gaussian blur is an exception). Sobel’s output type must be 16SC1; dx and dy must be either (1,0) or (0,1); and the border mode must be replicate. Gaussian blur supports a non-zero sigma, but its performance is best with sigma 0.0. Its uplift is most noticeable with a kernel size of 7×7.
 
-There is also the companion object provides a utility method:
-```Kotlin
-companion object {
-    fun fromDisplayName(name: String): ImageOperation? =
-        values().find { it.displayName == name }
-}
-```
-
-This function maps a string (displayName) to its corresponding enum constant by iterating through the list of all enum values and returns null if no match is found.
+There is also the companion object provides a utility method fromDisplayName. This function maps a string (displayName) to its corresponding enum constant by iterating through the list of all enum values and returns null if no match is found.
 
 ## ImageProcessor
 Similarly, add the ImageProcessor.kt:
@@ -232,9 +226,7 @@ class MainActivity : AppCompatActivity() {
         return Mat(bitmap.height, bitmap.width, CvType.CV_8UC1).also { mat ->
             bitmap.copy(Bitmap.Config.ARGB_8888, true).let { tempBitmap ->
                 Utils.bitmapToMat(tempBitmap, mat)
-                Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGBA2GRAY)
-                assert(mat.channels() == 1)
-                mat.convertTo(mat, CvType.CV_8U)
+                Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGBA2GRAY)                
             }
         }
     }
@@ -315,7 +307,7 @@ When the activity starts, it sets up the user interface, initializes OpenCV and 
 The activity also implements several helper methods:
 1. setupSpinner - populates the spinner with the names of available ImageOperation enums.
 2. showToast - displays a short toast message for user feedback.
-3. loadImage - loads the test image (img.png) from the app’s assets. Then, the method converts the image into a Bitmap and stores it for display. The bitmap is also converted to an OpenCV Mat object and changed its color format to BGR (used in OpenCV).
+3. loadImage - loads the test image (img.png) from the app’s assets. Then, the method converts the image into a Bitmap and stores it for display. The bitmap is also converted to an OpenCV Mat object and changed its color format to grayscale (used in OpenCV).
 4. displayAndStoreBitmap - updates the app’s ImageView to display the loaded image.
 5. convertBitmapToMat - converts the Bitmap to a Mat using OpenCV utilities.
 6. processImage - this method performs the following:
@@ -421,4 +413,4 @@ We achieved the following performance uplift:
 | Resize    | 0,02             | 0,04             | 2x                  |
 | Rotate    | 0,02             | 0,06             | 3x                  |
 
-As shown above, we achieved 4× faster computations for Gaussian blur and the Sobel filter, 3× faster for rotation, and 2× faster for resizing.
+As shown above, we achieved 4× faster computations for Gaussian blur and the Sobel filter, 3× faster for rotation, and 2× faster for resizing. Note that his numbers are noise (large standard deviation), and measurements for another device can vary.
