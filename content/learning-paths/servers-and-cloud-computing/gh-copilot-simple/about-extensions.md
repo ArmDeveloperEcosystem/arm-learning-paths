@@ -26,11 +26,11 @@ Before building an extension, make sure Copilot is configured and working in you
 
 Refer to the [Quickstart for GitHub Copilot](https://docs.github.com/en/copilot/quickstart) to get started.
 
-You can use [GitHub Copilot free](https://github.com/features/copilot?utm_source=topcopilotfree&utm_medium=blog&utm_campaign=launch) with no cost (subject to usage limits).
+You can use [GitHub Copilot free](https://github.com/features/copilot?utm_source=topcopilotfree&utm_medium=blog&utm_campaign=launch) at no cost, subject to a usage limit.
 
 ## How do I invoke GitHub Copilot Extensions?
 
-You can use extensions on any platform where Copilot chat can be used. This includes the GitHub website, various IDEs, and the command line. 
+You can use extensions on any platform where you can use Copilot chat. This includes the GitHub website, various IDEs, and the command line. 
 
 Extensions are invoked using `@` followed by the name of the extension. For example, the [Arm extension for GitHub Copilot](https://github.com/marketplace/arm-for-github-copilot) is invoked using `@arm` in the chat. 
 

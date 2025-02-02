@@ -18,7 +18,7 @@ Follow the steps below to set up ngrok.
 
 ### Download and install ngrok 
 
-If needed, create a new account. 
+If required, create a new account. 
 
 Refer to the [Setup & installation](https://dashboard.ngrok.com/get-started/setup/linux) section for installation details.
 
@@ -45,7 +45,7 @@ Substitute your token in the command below:
 ngrok config add-authtoken <your-authtoken>
 ```
 
-ngrok is easier to use if you create a domain name. Go to the [Domains](https://dashboard.ngrok.com/domains) section and add a new randomly generated domain name. You can create 1 domain name in a free account. 
+ngrok is easier to use if you create a domain name. Go to the [Domains](https://dashboard.ngrok.com/domains) section and add a new randomly generated domain name. You can create one domain name in a free account. 
 
 Use the domain name in the next section to start the server.
 

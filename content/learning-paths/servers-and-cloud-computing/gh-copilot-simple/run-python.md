@@ -70,7 +70,7 @@ if __name__ == "__main__":
 
 ```
 
-You may need to install the following Python packages:
+You might need to install the following Python packages:
 
 ```console
 sudo apt update
@@ -84,7 +84,7 @@ python -m venv venv
 source venv/bin/activate
 ```
 
-Your shell prompt now includes `(venv)` indicating the virtual environment is active. 
+Your shell prompt now includes `(venv)` indicating that the virtual environment is active. 
 
 Install the required Python packages:
 
@@ -108,4 +108,4 @@ WARNING: This is a development server. Do not use it in a production deployment.
 Press CTRL+C to quit
 ```
 
-Your extension is running, but needs to be connected to Copilot. Continue to learn how to share it with Copilot.
+Your extension is running, but it needs to be connected to Copilot. Continue to learn how to share your extension with Copilot.

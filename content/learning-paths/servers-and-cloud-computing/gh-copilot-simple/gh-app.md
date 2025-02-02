@@ -37,8 +37,6 @@ Click the `Create GitHub App` to save the configuration.
 
 ### Configure the Copilot settings
 
-### Configure the Copilot settings
-
 Click on the left side Copilot sidebar.
 
 Modify and update the following fields:
@@ -60,8 +58,8 @@ Click the `Save` button when the information is entered.
 
 When the GitHub App has been configured and save, install it into your account using the `Install App` tab on the left site and the `Install` button.
 
-You may need to agree to install the GitHub App in your account. 
+You might need to agree to install the GitHub App in your account. 
 
-Once installed, you see the App in your account's [Applications](https://github.com/settings/installations)
+Once installed, you see the App in your account's [Applications](https://github.com/settings/installations).
 
 Your GitHub App is now ready to use with Copilot. 
