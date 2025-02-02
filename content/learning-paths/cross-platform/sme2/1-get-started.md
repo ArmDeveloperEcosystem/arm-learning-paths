@@ -10,16 +10,16 @@ layout: learningpathall
 
 To follow this Learning Path, you will need to set up an environment to develop with SME2.
 
-As SME2 hardware is not widely deployed at the time of writing, you will require:
+You require:
 
- - A compiler with support for SME2 instructions. [clang](https://www.llvm.org/)
-   version >= 18 or [gcc](https://gcc.gnu.org/) versions >= 14. This Learning
+ - A compiler with support for SME2 instructions. You can use [Clang](https://www.llvm.org/)
+   version 18 or later, or [GCC](https://gcc.gnu.org/), version 14, or later. This Learning
    Path uses ``clang``.
 
  - An emulator to execute code with the SME2 instructions. This Learning
    Path uses [Arm's Fixed Virtual Platform (FVP) model](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms).
 
-You will also require ``git`` and ``docker`` installed on your machine.
+You also require ``git`` and ``docker`` installed on your machine.
 
 ### Set up Git
 
