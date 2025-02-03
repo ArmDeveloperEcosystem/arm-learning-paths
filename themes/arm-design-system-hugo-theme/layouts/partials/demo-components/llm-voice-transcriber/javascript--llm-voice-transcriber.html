@@ -171,12 +171,13 @@ function showPopupPostConnection(message,type,keep_last_message=false) {
     
                 // When the recording stops, create an audio file
                 mediaRecorder.onstop = () => {
-                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
                     const audioUrl = URL.createObjectURL(audioBlob);
                     // Convert and store
                     blobToBase64(audioBlob, (base64) => {
                         localStorage.setItem('audioBase64', base64);
                     });
+                    console.log(audioUrl);
 
                     audio_playback_missing.style.display = 'none';
                     audio_playback_substitute.classList.add('full');
@@ -390,13 +391,16 @@ function showPopupPostConnection(message,type,keep_last_message=false) {
         console.log('Sending audio to server...');
         console.log('--------------------------');
         console.log('Server location: ',atob(server_location_encoded));
-        console.log('Data: ',data);
+        
+        const stripped_data = data.split(",")[1];
+        console.log('Data: ',stripped_data);
+
 
         const server_location_chat = atob(server_location_encoded)+'/whisper'; // decode
         fetch(server_location_chat, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: {'file': data },
+            body: JSON.stringify({ 'file': stripped_data }),
             signal: controller.signal
         })
         .then(response => {
@@ -406,7 +410,7 @@ function showPopupPostConnection(message,type,keep_last_message=false) {
                     console.log('status: ',data.status, ' time_taken: ',data.time_taken);
                     // show transcription
                     const transcription_div=document.getElementById('transcription-div');
-                    transcription_div.textContent = sentence;
+                    transcription_div.textContent = data.transcript;
                 });
             } else {
                 console.error('Error sending message to the server');
