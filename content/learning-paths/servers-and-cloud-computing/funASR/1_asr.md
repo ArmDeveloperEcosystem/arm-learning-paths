@@ -10,9 +10,9 @@ layout: learningpathall
 
 Automatic Speech Recognition [ASR](https://en.wikipedia.org/wiki/Speech_recognition), also known as speech-to-text, is a rapidly evolving field that empowers computers to understand and transcribe human speech.
 
-This technology has become an integral part of our daily lives, powering a wide range of applications and services.   
+This technology has become deeply integrated into our daily lives, powering a wide range of applications and services we often take for granted, many of which are optimized for and run on Arm CPU architecture.
 
-At its core, ASR involves converting spoken audio into written text. This seemingly simple task is actually quite complex, requiring sophisticated algorithms and models to accurately interpret the nuances of human speech, including variations in pronunciation, accents, and background noise.   
+At its core, ASR involves converting spoken audio into written text. While seemingly simple, this process is quite complex, requiring sophisticated algorithms and models to accurately interpret the nuances of human speech, including variations in pronunciation, accents, and background noise.
 
 ### Key Applications of ASR
 
@@ -47,8 +47,8 @@ ASR is now used in a myriad of applications across various domains:
 
 While the potential applications of ASR are vast and inspiring, it's important to acknowledge the inherent challenges in developing and deploying accurate and reliable ASR systems. These challenges stem from the complexities of human speech, environmental factors, and the intricacies of language itself. These challenges are particularly pronounced for Chinese ASR, which needs to address unique linguistic characteristics such as:
 
-* **Tonal Variations:**
-    Mandarin Chinese is a tonal language, where the meaning of a syllable changes depending on its tone. Accurately recognizing these tonal variations is crucial for understanding spoken Chinese.
+* **Complexities of Chinese Language:** 
+    Mandarin Chinese involves tonal variations where the meaning of a syllable changes depending on its tone, and punctuation is crucial to convey meaning and avoid ambiguity. Accurately recognizing these nuances is essential for understanding spoken Chinese.
 
 * **Noise Robustness:** 
     ASR systems need to be able to filter out background noise to accurately transcribe speech. This is particularly challenging in noisy environments like crowded streets or busy offices.
@@ -59,4 +59,4 @@ While the potential applications of ASR are vast and inspiring, it's important t
 * **Homophones:**
     Chinese has a high prevalence of homophones, words that sound alike but have different meanings. Disambiguating these homophones requires understanding the context and semantics of the spoken words.
 
-Fortunately, advancements in AI and open-source technologies are paving the way for innovative solutions to address these challenges. In the following sections, we'll explore one such solution that leverages the power of ModelScope and Arm CPUs to enable efficient and accurate Chinese ASR.
+In the following sections, we'll explore one such solution that leverages the power of ModelScope and Arm CPUs to enable efficient and accurate Chinese ASR.

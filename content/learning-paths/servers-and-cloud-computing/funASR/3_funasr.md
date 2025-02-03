@@ -6,6 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
+## What is FunASR?
 [FunASR](https://github.com/modelscope/FunASR) is an open-source toolkit specifically designed for speech recognition research and development. It provides a comprehensive set of tools and functionalities for building and deploying ASR applications.
 
 
@@ -19,9 +20,9 @@ The following content is based on tests conducted using FunASR version 1.2.3. Va
 {{% /notice %}}
 
 ## Performing Speech Recognition
-FunASR offers a simple interface for performing speech recognition tasks. You can easily transcribe audio files or implement real-time speech recognition using FunASR's functionalities.
+FunASR offers a simple interface for performing speech recognition tasks. You can easily transcribe audio files or implement real-time speech recognition using FunASR's functionalities. In this learning path, you will learn how to leverage FunASR to implement speech recognition application.
 
-!!!! start from english wav
+Let's use a sample English speech voice as an example.
 
 ```python
 from funasr import AutoModel
@@ -35,11 +36,34 @@ res = model.generate(input="https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/Ma
 print(f"\nResult: \n{res[0]['text']}")
 ```
 
-介紹 model, device, hub....
-測試網路上的短語音
+Quick explain of the above Python code: 
+
+AutoModel(): This is a class that provides an interface to load different AI models.
+
+* **model="paraformer":**
+
+    Specifies the which model you'd like to load. 
+    In this example you will load Paraformer model, which is an end-to-end automatic speech recognition (ASR) model designed for real-time transcription.
+    
+* **device="cpu":** 
+
+    Specify the model runs on the CPU (instead of a GPU).
+
+* **hub="ms":** 
+
+    Indicates that the model is sourced from the "ms" (ModelScope) hub.
+
+model.generate(): This function processes an audio file and generates a transcribed text output.
+* **input="...":** 
+
+    The input is an audio file URL, which is a .wav file containing spoken content.
 
 
-This code will use paraformer model to infleune the wave file, the result will looks like:
+Since the result contains a lot of information, to make it sample, we will only list the content of res[0]['text'].
+
+In this initial test, a two-second English audio clip from the internet will be used for paraformer model to infleune the wave file.
+
+Copy the Python code and execute in your Arm Neoverse, the result will looks like:
 
 ```output
 python funasr_test1.py
@@ -68,7 +92,8 @@ he tried to think how it could be
 ```
 
 The output shows "he tried to think how it could be" as expected. 
-Now, we can further test on Chinese model.
+
+After understanding the basic usage, let's use a Chinese model.
 
 ```python
 import os
@@ -87,8 +112,15 @@ text_content = res[0]['text'].replace(" ","")
 print(f"Result: \n{text_content}")
 
 pring(res)
-~                                    
 ```
+
+You can see that the executed model has been replaced with a model that has a 'zh' suffix. 
+
+FunASR will recognise each sound in the speech with appropriate character recognition.
+
+We'd like to slightly modify the output format. In addition to recognizing Chinese characters, we'll also add timestamps indicating the start and end times of each character. This will facilitate applications such as subtitle generation and sentiment analysis.
+
+The output should be looks like:
 
 ```output
 Downloading Model to directory: /home/ubuntu/.cache/modelscope/hub/iic/speech_seaco_paraformer_large_asr_nat-zh-cn-16k-common-vocab8404-pytorch
@@ -103,9 +135,11 @@ Result:
 [{'key': 'asr_example', 'text': '欢 迎 大 家 来 到 么 哒 社 区 进 行 体 验', 'timestamp': [[990, 1230], [1290, 1530], [1610, 1830], [1830, 2010], [2010, 2170], [2170, 2410], [2430, 2570], [2570, 2810], [2850, 3050], [3050, 3290], [3390, 3570], [3570, 3810], [3910, 4110], [4110, 4345]]}]
 ```
 
-The output shows "欢迎大家来到达摩社区进行体验" as expected, FunAsr also 記錄每個字的 timestamp, 協助之後字幕的需求。 
+The output shows "欢迎大家来到达摩社区进行体验" as expected.
 
-延伸這個範例與前一節的分割結合，
+You can also observe that the spacing between the third and sixth characters is very short. This is because they are combined with other characters, as discussed in the previous session.
+
+The speech processing pipeline can be conceptualized as follows: the output of the speech recognition module serves as the input for the semantic segmentation model, enabling us to validate the accuracy of the recognized results.
 
 ```python
 from funasr import AutoModel
@@ -131,6 +165,7 @@ seg_result = word_segmentation(text_content)
 print(f"Result: \n{seg_result}")
 ```
 
+The output will be looks like:
 
 ```output
 Downloading Model to directory: /home/ubuntu/.cache/modelscope/hub/iic/speech_seaco_paraformer_large_asr_nat-zh-cn-16k-common-vocab8404-pytorch
@@ -161,78 +196,20 @@ Result:
 {'output': ['欢迎', '大家', '来到', '达摩', '社区', '进行', '体验']}
 ```
 
+Good, the result exactly what we were looking for.
 
-延伸成為即時辨識
+## Paraformer: Fast and Accurate Parallel Transformer for Non-autoregressive End-to-End Speech Recognition
 
-```python
-from funasr import AutoModel
-import soundfile
-import os
-chunk_size = [0, 10, 5] #[0, 10, 5] 600ms, [0, 8, 4] 480ms
-encoder_chunk_look_back = 4 #number of chunks to lookback for encoder self-attention
-decoder_chunk_look_back = 1 #number of encoder chunks to lookback for decoder cross-attention
+Now, I'd like to introduce more advance speech recognition model, [Paraformer](https://aclanthology.org/2020.wnut-1.18/).
 
-model = AutoModel(
-    model="paraformer-zh-streaming", model_revision="v2.0.4",
-    device="cpu",
-    hub="ms"
-)
+Paraformer is a novel architecture for automatic speech recognition (ASR) that offers both enhanced speed and accuracy compared to traditional models. Its key innovation lies in its parallel transformer design, enabling simultaneous processing of multiple parts of the input speech. This parallel processing capability leads to significantly faster inference, making Paraformer well-suited for real-time ASR applications where responsiveness is crucial.  
 
+Furthermore, Paraformer has demonstrated state-of-the-art accuracy on several benchmark datasets, showcasing its effectiveness in accurately transcribing speech. This combination of speed and accuracy makes Paraformer a promising advancement in the field of ASR, opening up new possibilities for high-performance speech recognition systems.
 
-wav_file = os.path.join(model.model_path, "example/asr_example.wav")
-#wav_file = os.path.join(model.model_path, "example/taiwanese_slow.wav")
+Paraformer has been fully integrated into FunASR. Here is a sample program.
 
-speech, sample_rate = soundfile.read(wav_file)
-chunk_stride = chunk_size[1] * 960 # 600ms
+This example uses PyTorch-optimized Paraformer model from ModelScope, the program will first check if the test audio file has been downloaded.
 
-cache = {}
-total_chunk_num = int(len((speech)-1)/chunk_stride+1)
-
-for i in range(total_chunk_num):
-    speech_chunk = speech[i*chunk_stride:(i+1)*chunk_stride]
-    is_final = i == total_chunk_num - 1
-    res = model.generate(
-        input=speech_chunk,
-        cache=cache,
-        is_final=is_final,
-        chunk_size=chunk_size,
-        encoder_chunk_look_back=encoder_chunk_look_back,
-        decoder_chunk_look_back=decoder_chunk_look_back
-    )
-    print(res)
-```
-
-```output
-Downloading Model to directory: /home/ubuntu/.cache/modelscope/hub/iic/speech_paraformer-large_asr_nat-zh-cn-16k-common-vocab8404-online
-2025-01-28 02:09:50,438 - modelscope - INFO - Use user-specified model revision: v2.0.4
-ckpt: /home/ubuntu/.cache/modelscope/hub/iic/speech_paraformer-large_asr_nat-zh-cn-16k-common-vocab8404-online/model.pt
-/home/ubuntu/venv/lib/python3.10/site-packages/funasr/train_utils/load_pretrained_model.py:68: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
-  src_state = torch.load(path, map_location=map_location)
-  0%|                                                                                                                       | 0/1 [00:00<?, ?it/s]/home/ubuntu/venv/lib/python3.10/site-packages/funasr/models/paraformer_streaming/model.py:168: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
-  with autocast(False):
-rtf_avg: 0.254: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  6.53it/s]
-[{'key': 'rand_key_2yW4Acq9GFz6Y', 'text': ''}]
-rtf_avg: 0.253: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  6.56it/s]
-[{'key': 'rand_key_1t9EwL56nGisi', 'text': ''}]
-rtf_avg: 0.297: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.60it/s]
-[{'key': 'rand_key_WgNZq6ITZM5jt', 'text': '欢迎大'}]
-rtf_avg: 0.305: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.45it/s]
-[{'key': 'rand_key_gUe52RvEJgwBu', 'text': '家来'}]
-rtf_avg: 0.310: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.37it/s]
-[{'key': 'rand_key_NO6n9JEC3HqdZ', 'text': '体验达'}]
-rtf_avg: 0.318: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.23it/s]
-[{'key': 'rand_key_6J6afU1zT0YQO', 'text': '摩院推'}]
-rtf_avg: 0.313: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.31it/s]
-[{'key': 'rand_key_aNF03vpUuT3em', 'text': '出的语'}]
-rtf_avg: 0.302: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.49it/s]
-[{'key': 'rand_key_6KopZ9jZICffu', 'text': '音识'}]
-rtf_avg: 0.310: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.37it/s]
-[{'key': 'rand_key_4G7FgtJsThJv0', 'text': '别模型'}]
-rtf_avg: 0.613: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  9.02it/s]
-[{'key': 'rand_key_7In9ZMJLsCfMZ', 'text': ''}]
-```
-
-## Paraformer
 
 ```python
 import os
@@ -264,6 +241,8 @@ rec_result = inference_pipeline(input=filename)
 print(f"\nResult: \n{rec_result[0]['text']}")
 ```
 
+When you execute the code, the output will looks like:
+
 ```output
 2025-01-28 00:03:24,373 - modelscope - INFO - Use user-specified model revision: v2.0.4
 Downloading Model to directory: /home/ubuntu/.cache/modelscope/hub/iic/speech_paraformer-large_asr_nat-zh-cn-16k-common-vocab8404-pytorch
@@ -289,11 +268,23 @@ Result:
 飞机穿过云层眼下一片云海有时透过稀薄的云雾依稀可见南国葱绿的群山大地
 ```
 
-The output shows "飞机穿过云层眼下一片云海有时透过稀薄的云雾依稀可见南国葱绿的群山大地" as expected, FunAsr also 記錄每個字的 timestamp, 協助之後字幕的需求
+The output shows "飞机穿过云层眼下一片云海有时透过稀薄的云雾依稀可见南国葱绿的群山大地" as expected.
 
 
+## Punctuation Restoration
 
-## 標點符號
+In the previous example, the speech of each word was correctly recognized, but the lack of punctuation hindered understanding the speaker's intended expression.
+
+Therefore, we can add a [Punctuation Restoration model](https://aclanthology.org/2020.wnut-1.18/) responsible for punctuation as the next stage in the audio workload.
+
+In the example above, we continue to use the Paraformer model from the previous example and add two ModelScope's model:
+- VAD ([Voice Activity Detection](https://modelscope.cn/models/iic/speech_fsmn_vad_zh-cn-16k-common-pytorch/summary)) and 
+- PUNC ([Punctuation Restoration](https://modelscope.cn/models/iic/punc_ct-transformer_zh-cn-common-vocab272727-pytorch/files)) 
+
+by add `vad_model` and `punc_model` parameters in the later stages. 
+
+This way, we can obtain punctuation that matches the semantics of the speech recognition.
+
 ```python
 import os
 import requests
@@ -302,7 +293,10 @@ from modelscope.utils.constant import Tasks
 
 inference_pipeline = pipeline(
     task=Tasks.auto_speech_recognition,
-    model='iic/speech_paraformer-large_asr_nat-zh-cn-16k-common-vocab8404-pytorch', model_revision="v2.0.4", device="cpu", hub="ms",
+    model='iic/speech_paraformer-large_asr_nat-zh-cn-16k-common-vocab8404-pytorch', 
+    model_revision="v2.0.4", 
+    device="cpu", 
+    hub="ms",
     vad_model='iic/speech_fsmn_vad_zh-cn-16k-common-pytorch', vad_model_revision="v2.0.4",
     punc_model='iic/punc_ct-transformer_zh-cn-common-vocab272727-pytorch', punc_model_revision="v2.0.4",
     # spk_model="iic/speech_campplus_sv_zh-cn_16k-common",
@@ -325,6 +319,13 @@ rec_result = inference_pipeline(input=filename)
 print(f"\nResult: \n{rec_result[0]['text']}")
 ```
 
+{{% notice Note %}}
+vad_model_revision & punc_model_revision are not a required parameter. In most cases, it can work smoothly without specifying the version.
+{{% /notice %}}
+
+
+The entire speech is correctly segmented into four parts based on semantics.
+
 ```output
 rtf_avg: 0.047: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  2.45it/s]
 rtf_avg: -0.026: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 37.57it/s]
@@ -334,9 +335,32 @@ Result:
 飞机穿过云层，眼下一片云海，有时透过稀薄的云雾，依稀可见南国葱绿的群山大地。
 ```
 
+Simply translate this recognized result, and you can easily see that the four sentences represent different meanings.
+
+"飞机穿过云层" means: The airplane passed through the clouds.
+
+"眼下一片云海" means: beneath the eyes was a sea of clouds.
+
+"有时透过稀薄的云雾" means: sometimes, through the thin clouds.
+
+"依稀可见南国葱绿的群山大地" means: "one could vaguely see the green mountains and land of the southern country.
+
+
 
 ## Sentiment Analysis
-FunASR also supports sentiment analysis of speech, allowing you to determine the emotional tone of spoken language. This can be valuable for applications like customer service and social media monitoring.
+FunASR also supports sentiment analysis of speech, allowing you to determine the emotional tone of spoken language. 
+
+This can be valuable for applications like customer service and social media monitoring.
+
+We use a mature speech emotion recognition model [emotion2vec+](https://modelscope.cn/models/iic/emotion2vec_plus_large) on ModelScope as an example.
+
+The model will identify which of the following emotions is the closest match for the emotion expressed in the speech:
+- Neutral
+- Happy
+- Sad
+- Angry
+- Unknow
+
 
 ```python
 from modelscope.pipelines import pipeline
@@ -344,7 +368,9 @@ from modelscope.utils.constant import Tasks
 
 inference_pipeline = pipeline(
     task=Tasks.emotion_recognition,
-    model="iic/emotion2vec_plus_large", device="cpu", hub="ms"
+    model="iic/emotion2vec_plus_large", 
+    device="cpu", 
+    hub="ms"
 )
 
 # Define a function to process the audio file and print the results
@@ -386,6 +412,9 @@ process_audio_file(
 
 ```
 
+Without a model that understands semantics, emotion2vec+ can still correctly recognize the speaker's emotions through changes in intonation.
+
+
 ```output
 Neutral Chinese Speech
 rtf_avg: 0.100: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  1.80it/s]
@@ -398,18 +427,9 @@ rtf_avg: 1.444: 100%|███████████████████�
 Result: ['生气/angry (1.00)', '中立/neutral (0.00)', '开心/happy (0.00)', '难过/sad (0.00)', '<unk> (0.00)']
 ```
 
-
-## Keyword Enhancement
-FunASR allows you to enhance the recognition accuracy of specific keywords. This is particularly useful for applications that require high accuracy for certain terms or phrases.
-
-
-
-
-## Combining Arm CPUs with ModelScope
-Arm CPUs, with their high performance and low power consumption, provide an ideal platform for running ModelScope's AI models, especially in edge computing scenarios. Arm's comprehensive software ecosystem supports the development and deployment of ModelScope models, enabling developers to create innovative and efficient applications.
-
-
-https://community.arm.com/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/neoverse-n2-delivers-leading-price-performance-on-asr
+## Best Price-Performance for ASR on Arm Neoverse N2
+Arm CPUs, with their high performance and low power consumption, provide an ideal platform for running ModelScope's AI models, especially in edge computing scenarios. Arm's comprehensive software ecosystem supports the development and deployment of ModelScope models, enabling developers to create innovative and efficient applications. 
+You can learn more about [Kleidi Technology Delivers Best Price-Performance for ASR on Arm Neoverse N2](https://community.arm.com/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/neoverse-n2-delivers-leading-price-performance-on-asr) from the Arm community blog.
 
 ## Conclusion
 ModelScope and FunASR empower developers to build robust Chinese ASR applications. By leveraging the strengths of Arm CPUs and the optimized software ecosystem, developers can create innovative and efficient solutions for various use cases. Explore the capabilities of ModelScope and FunASR, and unlock the potential of Arm technology for your next Chinese ASR project.
