@@ -2,7 +2,7 @@
 
 further_reading:
     - resource:
-        title: GitHub Marketplace for Copilot extensions
+        title: GitHub Marketplace for Copilot Extensions
         link: https://github.com/marketplace?type=apps&copilot_app=true/
         type: website
     - resource:

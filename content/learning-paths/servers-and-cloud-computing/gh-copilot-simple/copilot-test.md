@@ -8,23 +8,25 @@ layout: learningpathall
 
 You are now ready to test your GitHub Copilot extension. 
 
-Go to any of the Copilot chat interfaces you are currently using, such as browser or VS Code. 
+Go to any of the Copilot Chat interfaces you are currently using, such as your browser or VS Code. 
 
-Enter `@your-extension` and a test prompt such as:
+Enter `@your-extension` and a test prompt, such as:
 
 ```console
 tell me about Java vs Python
 ```
 
-On the first prompt, you get an authorization dialog to enable your extension. 
+The first time you enter a prompt, you receive an authorization dialog asking you to enable your extension. 
 
-Confirming the authorization takes you to an ngrok page in the browser, click the button and you will see the message from the GET request from your Python server in the browser:
+Confirming the authorization takes you to an ngrok page in the browser. 
+
+Click the button and in the browser you will see the following message from the GET request from your Python server:
 
 ```output
 Hello! Welcome to the example GitHub Copilot Extension in Python!
 ```
 
-You see the extension invoked in the terminal where Python is running and information about the chat printed:
+You will see the extension invoked in the terminal where Python is running and information about the chat printed:
 
 ```output
 127.0.0.1 - - [31/Jan/2025 23:33:18] "POST / HTTP/1.1" 200 -
@@ -39,8 +41,12 @@ You also see HTTP requests on the terminal where ngrok is running.
 23:33:00.991 UTC GET  /                         200 OK
 ```
 
-Lastly, the chat output from your extension is printed. Here it is in VS Code:
+Lastly, the chat output from your extension is printed. 
+
+Here it is in VS Code:
 
 ![#Copilot output](_images/output.png)
 
-Your GitHub Copilot Extension is now responding to chat prompts. You have the basic structure to build more interesting Copilot Extensions.
+Your GitHub Copilot Extension is now responding to chat prompts. 
+
+You can now use what you have learned to build different, and more complex, Copilot Extensions.
