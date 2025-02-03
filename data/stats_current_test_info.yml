@@ -1,7 +1,7 @@
 summary:
-  content_total: 323
+  content_total: 324
   content_with_all_tests_passing: 31
-  content_with_tests_enabled: 33
+  content_with_tests_enabled: 57
 sw_categories:
   automotive: {}
   cross-platform:
@@ -31,28 +31,23 @@ sw_categories:
       - fedora:latest: passed
     ambaviz:
       readable_title: Arm AMBA Viz
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     ams:
       readable_title: Arm Performance Studio
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     anaconda:
       readable_title: Anaconda
       tests_and_status:
-      - ubuntu:latest: failed
+      - ubuntu:latest: passed
     ansible:
       readable_title: Ansible
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     aperf:
       readable_title: AWS Perf (APerf)
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     arduino-pico:
       readable_title: Arduino core for the Raspberry Pi Pico
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     arm-gnu:
       readable_title: Arm GNU Toolchain
       tests_and_status:
@@ -60,36 +55,29 @@ sw_categories:
       - fedora:latest: passed
     armclang:
       readable_title: Arm Compiler for Embedded
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     armds:
       readable_title: Arm Development Studio
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     armie:
-      readable_title: Arm Instruction Emulator
-      tests_and_status:
-      - ubuntu:latest: passed
+      readable_title: Arm Instruction Emulator (armie)
+      tests_and_status: []
     armpl:
       readable_title: Arm Performance Libraries
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     aws-cli:
       readable_title: AWS CLI
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     aws-copilot:
       readable_title: AWS Copilot CLI
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     azure-cli:
       readable_title: Azure CLI
       tests_and_status:
       - ubuntu:latest: passed
     bolt:
       readable_title: BOLT
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     cross:
       readable_title: Cross-compiler
       tests_and_status:
@@ -109,8 +97,7 @@ sw_categories:
       - ubuntu:latest: passed
     gcloud:
       readable_title: Google Cloud Platform (GCP) CLI
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     gfortran:
       readable_title: GFortran
       tests_and_status:
@@ -124,8 +111,7 @@ sw_categories:
       - ubuntu:latest: passed
     multipass:
       readable_title: Multipass
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     native:
       readable_title: Native compiler
       tests_and_status:
@@ -137,55 +123,45 @@ sw_categories:
       - ubuntu:latest: passed
     papi:
       readable_title: Performance API (PAPI)
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     perf:
       readable_title: Perf for Linux on Arm (LinuxPerf)
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     pulumi:
       readable_title: Pulumi
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     pytorch:
       readable_title: PyTorch
       tests_and_status:
       - ubuntu:latest: passed
     rust:
       readable_title: Rust for Linux Applications
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     rust_embedded:
       readable_title: Rust for Embedded Applications
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     ssh:
       readable_title: SSH
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     streamline-cli:
       readable_title: Streamline CLI Tools
-      tests_and_status:
-      - ubuntu:latest: passed
-    sysbox:
-      readable_title: Sysbox
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     swift:
       readable_title: Swift
+      tests_and_status: []
+    sysbox:
+      readable_title: Sysbox
       tests_and_status: []
     terraform:
       readable_title: Terraform
       tests_and_status:
       - ubuntu:latest: passed
-    vnc:
-      readable_title: VNC on Arm Linux
-      tests_and_status:
-      - ubuntu:latest: passed
     topdown-tool:
       readable_title: Telemetry Solution (Topdown Methodology)
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
+    vnc:
+      readable_title: VNC on Arm Linux
+      tests_and_status: []
   iot: {}
   laptops-and-desktops: {}
   mobile-graphics-and-gaming: {}
