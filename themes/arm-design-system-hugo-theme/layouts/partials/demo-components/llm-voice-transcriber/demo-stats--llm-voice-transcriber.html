@@ -19,6 +19,8 @@
             <!-- Left - Demo -->
             <div class="c-col u-display-block md:c-col-12 lg:c-col-8 ">
                 <h2>{{.Params.title_chatbot_area}}</h2>
+
+
                 <!-- action and recording -->
                 <div class="c-row" id="audio-buttion-total-row">
                     <div class="c-row" id="actions-row">
@@ -54,14 +56,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="c-row" id="status-div">
-                        <!--<ads-button>Transcribe via LLM</ads-button>-->
-                        <div class="c-col"> <!-- style="min-height:50px;"-->
-                            <p id="status"></p>
-                        </div>
-                    </div>
+
                     <div class="c-row" id="server-btn-div">
-                        <!--<ads-button>Transcribe via LLM</ads-button>-->
                         <div class="c-col" style="display:flex; justify-content: center;">
                             <ads-button level="primary" id="send-to-server-btn" disabled>Transcribe audio</ads-button>
                         </div>
@@ -70,13 +66,58 @@
 
 
                 <!-- Transcription -->
-                <h2>Transcription</h2> 
-                <div id="demo-container">
+                <div id="demo-container" style="margin-top: 32px;">             
+
                     <!-- Transcribed text goes here -->
-                    <div class="c-row" id="transcription-div" style="display:none;">
-                        <ads-loader style="float:left;" label="Transcription in progress" size="xl" id="transcription-loader"></ads-loader>
-                        <p id="transcription-p"></p>
+                    <div class="c-row" id="transcription-div">
+                        <p id="transcription-p" class="placeholder">Your transcription will appear here...</p>
                     </div>
+
+
+                    <!-- Status updates go here -->
+                    <div class="c-row" id="demo-actions">
+                        <div class="c-row">
+                            <div class="c-col" id="input-and-submit">
+                                <div id="notification-popup" class="audio show-popup"><span id="initial-message-span">Pinging LLM server <ads-loader></ads-loader></span></div>
+                            </div>
+                        </div>
+                        <div class="c-row u-margin-top-1/2">
+                            <div class="c-col xs:c-col-12 xl:c-col-7" style="text-align: left;">
+                                <ads-modal id="modal-custom-trigger" modal-title="Chatbot Demo Terms and Conditions">
+                                    <div slot="body">
+                                        {{ $ts_and_cs_file := printf "%s%s" (replaceRE "/[^/]+/?$" "/" .RelPermalink) .Params.terms_and_conditions }}
+                                        {{ $ts_and_cs := readFile $ts_and_cs_file }}
+                                        {{ $ts_and_cs_final := replace $ts_and_cs "[URL]" .Permalink }} <!-- Replace [URL] with the current page URL -->
+                                        <div style="white-space: pre-wrap; word-wrap: break-word; text-align: left;">{{ $ts_and_cs_final }}</div>
+                                    </div>
+                                    <div slot="trigger" style="cursor: pointer;">
+                                        <span id="terms-of-use">Your use of this demo is subject to the <u>Terms of Use.</u></span>
+                                    </div>
+                                </ads-modal>
+                                <script>
+                                    (() => {
+                                    const modal = document.getElementById('modal-custom-trigger');
+                                    modal.querySelectorAll('.js-modal-button').forEach((button) => {
+                                        button.addEventListener('click', function() {
+                                        modal.close();
+                                        });
+                                    });
+                                    })();
+                                </script>
+                            </div>
+                            
+                            <div class="c-col xs:c-col-12 xl:c-col-3" style="min-height: 24px;">
+                                <span id="traffic-info"></span>
+                            </div>
+                            {{/* 
+                            <div class="c-col xs:c-col-12 xl:c-col-4" style="min-height: 24px;">
+                                <span id="ping-info"></span>
+                            </div>
+                            */}}
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
             <!-- Right - Stats -->

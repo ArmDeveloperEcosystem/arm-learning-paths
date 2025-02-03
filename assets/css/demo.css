@@ -5,7 +5,7 @@
     margin-top: 16px;
 
     min-width: 200px;
-    min-height: 200px;
+    min-height: 150px;
     text-align: center;
 }
 
@@ -270,8 +270,6 @@
 
 #notification-popup {
     position: absolute;
-    /*top: -34px;*/
-    bottom: 46px; /* 66 at 2 lines....86 at 3 lines....106px at 4 lines */
 
     left: 0;
     width: calc(100% - 32px); /* Subtract gutter space from width */
@@ -294,6 +292,13 @@
     transition: opacity 1s ease-in-out; /* Fade-in effect */
     visibility: hidden;
 }
+#notification-popup.chatbot {
+    bottom: 46px; /* 66 at 2 lines....86 at 3 lines....106px at 4 lines */
+}
+#notification-popup.audio {
+    bottom: -8px; /* 66 at 2 lines....86 at 3 lines....106px at 4 lines */
+}
+
 #initial-message-span {
     font-size: 16px;
 }
@@ -408,8 +413,13 @@
 
 #transcription-p {
     font-size: 24px!important;
+    margin-left: 8px;
 }
-
+#transcription-p.placeholder {
+    color: #ccc;
+    font-style: italic;
+    margin-bottom: 64px;
+}
 /**************************************************/
 
 

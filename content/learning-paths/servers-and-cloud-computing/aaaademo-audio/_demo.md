@@ -15,7 +15,7 @@ demo_steps:
   - Get transcription and view stats.
 
 
-title_chatbot_area: Whisper Voice transcription
+title_chatbot_area: Whisper Voice Demo
 
 diagram: kubernetes_diagram.png
 diagram_blowup: kubernetes_diagram.png

@@ -13,9 +13,66 @@
     */}}
     
     
+<script>
+
+
+    // Global variable to track state changes on site
+    var connectionStatus = {
+        isActive: false
+    };
+
+
+
+function showPopupPostConnection(message,type,keep_last_message=false) {
+
+    // Connection is done, enable people to submit new entry
+    connectionStatus.isActive = false;
+    toggleButton();
+
+
+    // Show popup
+    var popup_div = document.getElementById('notification-popup');
+    var popup_span = popup_div.querySelector('#initial-message-span');
+    popup_span.textContent = message;
+    if (type == "info") {
+        popup_div.style.backgroundColor = 'black'; 
+        popup_div.style.color = 'white';             
+    }
+    else if (type == "error") {
+        popup_div.style.backgroundColor = '#f8d7da'; // Light red
+        popup_div.style.color = 'black';             // #721c24 was this dark red, black better
+    }
+    else if (type == "success") {
+        popup_div.style.backgroundColor = 'var(--arm-green)'; 
+        popup_div.style.color = 'black';                      
+    }
+    else if (type == 'warning') {
+        popup_div.style.backgroundColor = 'var(--arm-yellow)'; 
+        popup_div.style.color = 'black';             
+    }
+
+    popup_div.classList.remove('hide-popup');
+    popup_div.classList.add('show-popup');
+    }
+
+
+    function hidePopup() {
+        var popup_div = document.getElementById('notification-popup');
+
+        // fade it out
+        popup_div.classList.remove('show-popup');
+        popup_div.classList.add('hide-popup');
+    }
+
     
-    <script>
-    
+
+    function blobToBase64(blob, callback) {
+        const reader = new FileReader();
+        reader.onloadend = () => callback(reader.result);
+        reader.readAsDataURL(blob);
+    }
+
+
         let mediaRecorder;
         let audioChunks = [];
         let audioBlob = null;
@@ -84,7 +141,7 @@
                 // Cap recording at set time
                 audio_cap_timeout = setTimeout(() => {
                     stopRecording();
-                    showStatus(status_msg__recording_timeout);
+                    showPopupPostConnection(status_msg__recording_timeout,"warning");
                 }, audio_cap_timeout_value); 
                 
                 // Indicate recording on UI
@@ -116,6 +173,11 @@
                 mediaRecorder.onstop = () => {
                     const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
                     const audioUrl = URL.createObjectURL(audioBlob);
+                    // Convert and store
+                    blobToBase64(audioBlob, (base64) => {
+                        localStorage.setItem('audioBase64', base64);
+                    });
+
                     audio_playback_missing.style.display = 'none';
                     audio_playback_substitute.classList.add('full');
                     audio_playback_substitute.classList.remove('empty');
@@ -129,7 +191,7 @@
                 };
             } catch (error) {
                 console.error('Error accessing microphone:', error);
-                showStatus(status_msg__mic_permission_error);
+                showPopupPostConnection(status_msg__mic_permission_error,"error");
             }
         }
     
@@ -150,7 +212,7 @@
     
         // Send audio to server on button click
         submit_btn.addEventListener('click', () => {
-            sendAudioToServer(audioBlob);
+            sendAudioToServer();
         });
     
     
@@ -179,42 +241,211 @@
             return sentence
     
         }
+
+
     
-        // Function to send the audio to the spoof server
-        function sendAudioToServer(audioBlob) {
-            const transcription_div=document.getElementById('transcription-div');
+        function sendAudioToServer() {
             const transcription_p = document.getElementById('transcription-p');
-            const transcription_loader = document.getElementById('transcription-loader');
     
             // Update UI components
             submit_btn.disabled = 'true';
-            icon_div.classList.add('disabled');      
-            transcription_div.style.display = 'block';
-            transcription_loader.style.display = 'block';
+            icon_div.classList.add('disabled');   
+            showPopupPostConnection("Transcription in progress...","warning");
+   
             transcription_p.textContent = ''; // reset if there are some present
     
             // Send to server
-            insertRandomSentenceWithDelay(transcription_p)
-    
-            /*
-            const formData = new FormData();
-            formData.append('audio', audioBlob, 'recording.webm');
-            
-            fetch('https://example.com/upload', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                status.textContent = 'Audio uploaded successfully.';
-            })
-            .catch((error) => {
-                console.error('Error uploading audio:', error);
-                status.textContent = 'Error uploading audio.';
-            });
-            */
+            //PLACEHOLDER FOR TESTING: insertRandomSentenceWithDelay(transcription_p)
+            const base64Audio = localStorage.getItem('audioBase64');
+            sendToServer(base64Audio);
+
         }
     
+
+    // Check connection status, update action icon based on that.
+    function toggleButton() {
+        const audio_icon_div = document.getElementById('audio-icon-div');
+
+        if (connectionStatus.isActive) {
+            console.log('Connection is not active');
+            // Disable icon from being clicked
+            audio_icon_div.style.pointerEvents = 'none';
+            audio_icon_div.style.opacity = '0.5';
+
+        }
+        else {
+            console.log('Connection is active');
+            // Enable icon from being clicked
+            audio_icon_div.style.pointerEvents = 'auto';
+            audio_icon_div.style.opacity = '1';
+        }
+    }
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Start the ping check
+        startPingCheck();
+    });
+
+
+
+
+(function() {
+
+    {{/* Get server location from GH Secrets */}}
+    {{ $server_location := "" }};
+
+    {{ if eq .Params.demo_template_name "whisper_audio_demo" }}
+        {{ $server_location = getenv "HUGO_AUDIO_API" | base64Encode }}
+        console.log('Using Whisper audio API.');
+    {{ else }}
+        console.log('No server location provided.');
+    {{ end }}
+
+    const server_location_encoded = '{{ $server_location }}';
+
+
+    function startPingCheck() {
+        var entry_div = document.getElementById('user-input-for-demo');
+        var submit_btn= document.getElementById('submit-button');
+        var ping_txt  = document.getElementById('ping-info');
+        var traffic_txt  = document.getElementById('traffic-info');
+
+        connectionStatus.isActive = true;       // reset button status
+        toggleButton();                         // Initial check in case the textarea has content on page load
+
+        const server_location_ping = atob(server_location_encoded)+'/ping'; // decode
+        const startTime = Date.now();
+
+
+        // Set timeout for fetch request
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 seconds timeout
+
+        fetch(server_location_ping, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            signal: controller.signal
+        })
+        .then(response => {
+            if (response.ok) {
+                connectionStatus.isActive = false;      // reset button status
+                toggleButton();                    
+                return response.json();
+            } else {
+                throw new Error('Ping failed');
+            }
+        })
+        .then(data => {
+            const endTime = Date.now();
+            var ping = (endTime - startTime);
+            if (ping < 300) {
+            ping = `${ping} ms`; 
+            }
+            else {
+                ping = ping/1000;
+                ping = ping.toFixed(2);
+                ping = `${ping} seconds`; 
+            }
+
+            // Update ping & popup status
+            if (data.cluster_utilization == 'normal') {
+                showPopupPostConnection('Connected to Arm Neoverse V2 based LLM! Start chatting now.',"success");
+                //ping_txt.textContent = `Ping: ${ping}`
+                traffic_txt.textContent = 'Server traffic: Low'
+            }
+            else if (data.cluster_utilization == 'high') {
+                showPopupPostConnection('Connected to Arm Neoverse V2 based LLM! Traffic is high, delays may occur. Start chatting now.',"success");
+                //ping_txt.textContent = `Ping: ${ping}`
+                traffic_txt.textContent = `Server traffic: High`   
+            }
+            else if (data.cluster_utilization == 'at-limit') {
+                showPopupPostConnection('Connected to Arm Neoverse V2 based LLM! Traffic is high, delays may occur. Start chatting now.',"warning");
+                //ping_txt.textContent = `Ping: ${ping}`
+                traffic_txt.textContent = `Server traffic: High`   
+            }
+        })
+        .catch(error => {       // Errors after 5 seconds timeout
+            showPopupPostConnection('Unable to connect to the server; try refreshing the page or returning later.',"error");
+        });
+    }
+
+
+
+    function sendToServer(data) {
+        hidePopup();    // Hide previous messages, to make room for others or clear for responses
+
+        
+        connectionStatus.isActive = true; // set connectionStatus to active
+        toggleButton(); 
+
+
+        // Set timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 seconds timeout
+        
+        console.log('Sending audio to server...');
+        console.log('--------------------------');
+        console.log('Server location: ',atob(server_location_encoded));
+        console.log('Data: ',data);
+
+        const server_location_chat = atob(server_location_encoded)+'/whisper'; // decode
+        fetch(server_location_chat, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: {'file': data },
+            signal: controller.signal
+        })
+        .then(response => {
+            if (response.ok) {
+                // read in the response that has 'status', 'transcript', 'time_taken'
+                response.json().then(data => {
+                    console.log('status: ',data.status, ' time_taken: ',data.time_taken);
+                    // show transcription
+                    const transcription_div=document.getElementById('transcription-div');
+                    transcription_div.textContent = sentence;
+                });
+            } else {
+                console.error('Error sending message to the server');
+                console.log(response);
+                showPopupPostConnection("Problem sending message - try sending a new message.","error");                                      
+            }
+        })
+        .catch(error => { 
+            if (error.name === 'AbortError') { 
+                console.error('Timeout error: Please check your internet connection and try again.',error);
+                showPopupPostConnection('Server timeout - please try again.',"error");
+            }
+            else if (error.name === 'NetworkError') {
+                console.error('Network error: Please check your internet connection and try again.',error);
+                showPopupPostConnection('Network error - please try again.',"error");
+            }
+            else if (error.name === 'TypeError') {
+                console.error('Input stream error: There was a problem with the data stream.',error);
+                showPopupPostConnection('Stream interrupted - try sending a new message.',"warning");
+            }
+            else {
+                console.error('An unexpected error occurred:', error);
+                showPopupPostConnection('Server error - try sending a new message.',"error");
+            }
+        });
+    }
+
+
+    // Expose functions globally
+    window.sendToServer = sendToServer;
+    window.startPingCheck = startPingCheck;
+})();
+
+
+
+
+
+
+
+
     </script>
     
