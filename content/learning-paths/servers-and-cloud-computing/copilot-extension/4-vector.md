@@ -20,35 +20,25 @@ Embeddings are vectors generated through an AI model. We can convert "tokens" (s
 
 Then for any given vector, like the embedded token input of a user, we can querying our vector database to find embedded data that is most similar. 
 
-For example, for our use case let's say we want to know which Arm learning path is most relavent to a question a user asks.
+For example, for our use case let's say we want to know which Arm learning path is most relevant to a question a user asks.
 
-First, ahead of time, we have to convert the raw data (Arm learning path content) into more comsumable "chunks". In our case, small `yaml` files. Then we run those chunks through our LLM model and embed the content into a vector database.
+First, ahead of time, we have to convert the raw data (Arm learning path content) into more consumable "chunks". In our case, small `yaml` files. Then we run those chunks through our LLM model and embed the content into a vector database.
 
-Now in our application, we can take the input from the user and embed it using the same model. Now we have a database of vectors representing our data, and a new vector based on user input. We find the closest (meaning, most similar) vector in the database, and that connects us to the original chunk file that vector came from. Using the data from that `chunk.yaml`, we can retrive the Arm resource(s) most relavent for that user's question.
+Now in our application, we can take the input from the user and embed it using the same model. Now we have a database of vectors representing our data, and a new vector based on user input. We find the closest (meaning, most similar) vector in the database, and that connects us to the original chunk file that vector came from. Using the data from that `chunk.yaml`, we can retrieve the Arm resource(s) most relevant for that user's question.
 
 The retrieved resources are then used to augment the context for the LLM, which generates a final response that is both contextually relevant and contains accurate information.
 
 ## Collecting Data into Chunks
 
-To convert data into `chunk.yaml` files, we used...
+We have provided chunk files for you in this example repo.
 
-### TODO: Write how to generate yaml files? Explanation of how we made example chunks?
+To access it...
 
-To use our example data, you can download our example from S3 using the AWS CLI.
-
-```bash
-aws s3 cp s3://arm-github-copilot-extension/yaml_data.zip .
-```
-
-Unzip the contents:
-
-```bash
-unzip yaml_data.zip
-```
+### TODO: Finish this section once we have example data.
 
 ## Combine Chunks into FAISS index
 
-Once you have a folder full of yaml files, copy the vectorstore creation script to that yaml directory.
+Once you have a folder full of yaml files, copy the vector store creation script to that yaml directory.
 
 The file is located in the root of the example repo.
 
