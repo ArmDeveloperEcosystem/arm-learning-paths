@@ -46,19 +46,35 @@ git clone https://github.com/pytorch/benchmark.git
 cd benchmark
 git checkout 9a5e4137299741e1b6fb7aa7f5a6a853e5dd2295
 ```
-Install the PyTorch models you would like to benchmark. Lets install a variety of NLP, computer vision and recommender models:
+Install the PyTorch models you would like to benchmark. Let's install a variety of NLP, computer vision and recommender models:
 
 ```bash
-python3 install.py alexnet BERT_pytorch dlrm hf_Albert hf_Bart hf_Bert hf_Bert_large hf_BigBird hf_DistilBert hf_GPT2 hf_Longformer hf_Reformer hf_T5 mobilenet_v2 mobilenet_v3_large resnet152 resnet18 resnet50 timm_vision_transformer
+python3 install.py alexnet BERT_pytorch dlrm hf_Albert hf_Bart hf_Bert hf_Bert_large hf_BigBird \
+hf_DistilBert hf_GPT2 hf_Longformer hf_Reformer hf_T5 mobilenet_v2 mobilenet_v3_large resnet152 \
+resnet18 resnet50 timm_vision_transformer
 ```
+
+{{% notice Note %}}
+If you are using Python 3.12, the install script may fail with the following error:
+```output
+AttributeError: module 'pkgutil' has no attribute 'ImpImporter'.
+Did you mean: 'zipimporter'
+```
+
+This may be because the `requirements.txt` installs a version of `numpy` which is not compatible with Python 3.12. To fix the issue, change the pinned `numpy` version in `requirements.txt`.
+
+```
+numpy~=1.26.4
+```
+{{% /notice %}}
 
 If you don't provide a model list to `install.py`, the script will download all the models included in the benchmark suite.
 
 Before running the benchmarks, configure your running AWS Graviton3 instance to take advantage of the optimizations available to optimize PyTorch inference performance. This includes settings to:
-	* Enable bfloat16 GEMM kernel support to accelerate fp32 inference.
-	* Set LRU cache capacity to an optimal value to avoid redundant primitive creation latency overhead.
-	* Enable Linux Transparent Huge Page (THP) allocations, reducing the latency for tensor memory allocation.
-	* Set the number of threads to use to match the number of cores on your system
+* Enable bfloat16 GEMM kernel support to accelerate fp32 inference.
+* Set LRU cache capacity to an optimal value to avoid redundant primitive creation latency overhead.
+* Enable Linux Transparent Huge Page (THP) allocations, reducing the latency for tensor memory allocation.
+* Set the number of threads to use to match the number of cores on your system
 
 ```bash
 export DNNL_DEFAULT_FPMATH_MODE=BF16
@@ -69,7 +85,7 @@ export OMP_NUM_THREADS=16
 
 With the environment set up and models installed, you can now run the benchmarks to measure your model inference performance.
 
-Starting from PyTorch 2.0, there are 2 main execution modes - eager mode and `torch.compile` mode. The default mode of execution in PyTorch is eager mode. In this mode the operations are executed immediately as they are defined. With `torch.compile` the PyTorch code is transformed into graphs which can be executed more efficiently. This mode can offer improved model inferencing performance, especially for models with repetitive computations. 
+Starting from PyTorch 2.0, there are 2 main execution modes - eager mode and `torch.compile` mode. The default mode of execution in PyTorch is eager mode. In this mode the operations are executed immediately as they are defined. With `torch.compile` the PyTorch code is transformed into graphs which can be executed more efficiently. This mode can offer improved model inferencing performance, especially for models with repetitive computations.
 
 Using the scripts included in the PyTorch Benchmark suite, you will now measure the model inference latencies with both eager and torch.compile modes to compare their performance.
 
@@ -78,7 +94,8 @@ Using the scripts included in the PyTorch Benchmark suite, you will now measure 
 Run the following command to collect performance data in eager mode for the suite of models you downloaded:
 
 ```bash
-python3 run_benchmark.py cpu --model alexnet,BERT_pytorch,dlrm,hf_Albert,hf_Bart,hf_Bert,hf_Bert_large,hf_BigBird,hf_DistilBert,hf_GPT2,hf_Longformer,hf_Reformer,hf_T5,mobilenet_v2,mobilenet_v3_large,resnet152,resnet18,resnet50,timm_vision_transformer --test eval --metrics="latencies"
+python3 run_benchmark.py cpu --model alexnet,BERT_pytorch,dlrm,hf_Albert,hf_Bart,hf_Bert,hf_Bert_large,hf_BigBird,hf_DistilBert,hf_GPT2,hf_Longformer,hf_Reformer,hf_T5,mobilenet_v2,mobilenet_v3_large,resnet152,resnet18,resnet50,timm_vision_transformer \
+--test eval --metrics="latencies"
 ```
 The results for all the models run will be stored in the `.userbenchmark/cpu/` directory. The `cpu` user benchmark creates a folder `cpu-YYmmddHHMMSS` for the test, and aggregates all test results into a JSON file `metrics-YYmmddHHMMSS.json`.`YYmmddHHMMSS` is the time you started the test. The metrics file shows the model inference latency, in milliseconds (msec) for each model you downloaded and ran. The results with eager mode should look like:
 
@@ -113,10 +130,11 @@ The results for all the models run will be stored in the `.userbenchmark/cpu/` d
 ```
 ### Measure torch.compile Mode Performance
 
-The `torch.compile` mode in PyTorch uses inductor as its default backend. For execution on the cpu, the inductor backend leverages C++/OpenMP to generate highly optimized kernels for your model. Run the following command to collect performance data in `torch.compile` mode for the suite of models you downloaded. 
+The `torch.compile` mode in PyTorch uses inductor as its default backend. For execution on the cpu, the inductor backend leverages C++/OpenMP to generate highly optimized kernels for your model. Run the following command to collect performance data in `torch.compile` mode for the suite of models you downloaded.
 
 ```bash
-python3 run_benchmark.py cpu --model alexnet,BERT_pytorch,dlrm,hf_Albert,hf_Bart,hf_Bert,hf_Bert_large,hf_BigBird,hf_DistilBert,hf_GPT2,hf_Longformer,hf_Reformer,hf_T5,mobilenet_v2,mobilenet_v3_large,resnet152,resnet18,resnet50,timm_vision_transformer --test eval --torchdynamo inductor --metrics="latencies"
+python3 run_benchmark.py cpu --model alexnet,BERT_pytorch,dlrm,hf_Albert,hf_Bart,hf_Bert,hf_Bert_large,hf_BigBird,hf_DistilBert,hf_GPT2,hf_Longformer,hf_Reformer,hf_T5,mobilenet_v2,mobilenet_v3_large,resnet152,resnet18,resnet50,timm_vision_transformer \
+--test eval --torchdynamo inductor --metrics="latencies"
 ```
 
 The results for all the models run will be stored in the `.userbenchmark/cpu/` directory. The `cpu` user benchmark creates a folder `cpu-YYmmddHHMMSS` for the test, and aggregates all test results into a JSON file `metrics-YYmmddHHMMSS.json`.`YYmmddHHMMSS` is the time you started the test. The metrics file show the model inference latency, in milliseconds (msec) for each model you downloaded and ran. The results with `torch.compile` mode should look like:
