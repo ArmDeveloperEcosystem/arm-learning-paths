@@ -8,7 +8,7 @@ layout: learningpathall
 
 You are now ready to test your GitHub Copilot extension. 
 
-Go to any of the Copilot Chat interfaces you are currently using, such as your browser or VS Code. 
+Go to any of the Copilot Chat interfaces that you are currently using, such as your browser or VS Code. 
 
 Enter `@your-extension` and a test prompt, such as:
 
@@ -16,7 +16,7 @@ Enter `@your-extension` and a test prompt, such as:
 tell me about Java vs Python
 ```
 
-The first time you enter a prompt, you receive an authorization dialog asking you to enable your extension. 
+The first time you enter a prompt, you will receive an authorization dialog asking you if you wish to enable your extension. 
 
 Confirming the authorization takes you to an ngrok page in the browser. 
 

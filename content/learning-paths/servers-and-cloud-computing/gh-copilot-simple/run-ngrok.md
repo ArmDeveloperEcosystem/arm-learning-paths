@@ -22,7 +22,7 @@ If required, create a new account.
 
 Refer to the [Setup & installation](https://dashboard.ngrok.com/get-started/setup/linux) section for installation details.
 
-If you are using a Debian based Linux system, run the command:
+If you are using a Debian-based Linux system, run the command:
 
 ```console
 curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
@@ -35,11 +35,13 @@ curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
 
 ### Configure your ngrok account
 
-Before starting the ngrok server, you need an Authtoken. If you don't currently have one, create a new Authtoken from the [Authtoken](https://dashboard.ngrok.com/get-started/your-authtoken) settings. 
+Before you can start the ngrok server, you need an Authtoken. 
+
+If you don't currently have one, create a new Authtoken from the [Authtoken Get Started section](https://dashboard.ngrok.com/get-started/your-authtoken). 
 
 Once you have the token, add it to the Linux computer where you are running your Python extension. 
 
-Substitute your token in the command below:
+Substitute your token in the command below where it states **\<your-authtoken\>**:
 
 ```console
 ngrok config add-authtoken <your-authtoken>

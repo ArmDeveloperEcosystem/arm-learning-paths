@@ -56,7 +56,7 @@ Click the `Save` button when the information is entered.
 
 ### Install your GitHub App
 
-When the GitHub App has been configured and save, install it into your account using the `Install App` tab on the left site and the `Install` button.
+When the GitHub App has been configured and saved, install it into your account using the `Install App` tab on the left side and click the `Install` button.
 
 You might need to agree to install the GitHub App in your account. 
 

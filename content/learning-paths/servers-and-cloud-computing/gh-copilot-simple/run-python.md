@@ -108,4 +108,6 @@ WARNING: This is a development server. Do not use it in a production deployment.
 Press CTRL+C to quit
 ```
 
-Your extension is running, but it needs to be connected to Copilot. Continue to learn how to share your extension with Copilot.
+Your extension is running, but it needs to be connected to Copilot. 
+
+Continue to learn how to share your extension with Copilot.
