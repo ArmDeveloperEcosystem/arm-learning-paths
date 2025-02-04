@@ -17,8 +17,8 @@ demo_steps:
 
 title_chatbot_area: Whisper Voice Demo
 
-diagram: kubernetes_diagram.png
-diagram_blowup: kubernetes_diagram.png
+diagram: audio-pic-clearer.png
+diagram_blowup: audio-pic.png
 
 terms_and_conditions: demo-terms-and-conditions.txt
 

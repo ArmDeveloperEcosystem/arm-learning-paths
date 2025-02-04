@@ -23,10 +23,10 @@
 
 
 
-function showPopupPostConnection(message,type,keep_last_message=false) {
+function showPopupPostConnection(message,type,connection_status=false) {
 
     // Connection is done, enable people to submit new entry
-    connectionStatus.isActive = false;
+    connectionStatus.isActive = connection_status;
     toggleButton();
 
 
@@ -77,7 +77,7 @@ function showPopupPostConnection(message,type,keep_last_message=false) {
         let audioChunks = [];
         let audioBlob = null;
         let audio_cap_timeout; 
-        let audio_cap_timeout_value = 3000;
+        let audio_cap_timeout_value = 15000;
         let isRecording = false;
     
         const audio_playback = document.getElementById('audio-playback');
@@ -96,27 +96,6 @@ function showPopupPostConnection(message,type,keep_last_message=false) {
         const status_msg__mic_permission_error = "Error accessing microphone. Please ensure you have granted permissions in your browser."
         const status_msg__transcription_show = "Transcription complete." // move 
     
-    
-    
-
-        // Function to show the message
-        function showStatus(text) {
-            text_status.textContent = text; 
-            text_status.classList.add('visible'); 
-            text_status.classList.remove('hidden', 'removed'); 
-
-            // Hide the message after 5 seconds
-            setTimeout(() => {
-                text_status.classList.add('hidden'); // Fade it out
-                text_status.classList.remove('visible');
-                // Remove it from the DOM flow after the fade-out transition (1s)
-                setTimeout(() => {
-                    text_status.classList.add('removed');
-                }, 1000); // Match the duration of the fade-out transition
-            }, 5000); // 5 seconds delay
-        }
-
-            
     
         icon_div.addEventListener('click', () => {
             if (!icon_div.classList.contains('disabled')) {
@@ -218,39 +197,11 @@ function showPopupPostConnection(message,type,keep_last_message=false) {
     
     
     
-        function insertRandomSentenceWithDelay(div) {
-            const sentences = [
-                "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.",
-                "A journey of a thousand miles begins with a single step.\nThe quick brown fox jumps over the lazy dog.\nTo be or not to be, that is the question.\nTo be or not to be, that is the question. To be or not to be, that is the question.\n\nTo be or not to be, that is the question.",
-            ];
-            const randomIndex = Math.floor(Math.random() * sentences.length);
-            const randomDelay = Math.floor(Math.random() * 4 + 1) * 1000; // Random delay between 1 and 4 seconds
-            const sentence = sentences[randomIndex];
-    
-            setTimeout(() => {
-                const transcription_loader = document.getElementById('transcription-loader');
-                transcription_loader.style.display = 'none';
-                // show transcription
-                div.textContent = sentence;
-    
-                // remove disabled tag on rerun
-                icon_div.classList.remove('disabled');
-    
-            }, randomDelay);
-    
-            // Return last message
-            return sentence
-    
-        }
-
-
-    
         function sendAudioToServer() {
             const transcription_p = document.getElementById('transcription-p');
     
             // Update UI components
             submit_btn.disabled = 'true';
-            icon_div.classList.add('disabled');   
             showPopupPostConnection("Transcription in progress...","warning");
    
             transcription_p.textContent = ''; // reset if there are some present
@@ -370,7 +321,7 @@ function showPopupPostConnection(message,type,keep_last_message=false) {
             }
         })
         .catch(error => {       // Errors after 5 seconds timeout
-            showPopupPostConnection('Unable to connect to the server; try refreshing the page or returning later.',"error");
+            showPopupPostConnection('Unable to connect to the server; try refreshing the page or returning later.',"error",true);
         });
     }
 
@@ -421,19 +372,19 @@ function showPopupPostConnection(message,type,keep_last_message=false) {
         .catch(error => { 
             if (error.name === 'AbortError') { 
                 console.error('Timeout error: Please check your internet connection and try again.',error);
-                showPopupPostConnection('Server timeout - please try again.',"error");
+                showPopupPostConnection('Server timeout - refresh the page and try again.',"error",true);
             }
             else if (error.name === 'NetworkError') {
                 console.error('Network error: Please check your internet connection and try again.',error);
-                showPopupPostConnection('Network error - please try again.',"error");
+                showPopupPostConnection('Network error - refresh the page and try again.',"error",true);
             }
             else if (error.name === 'TypeError') {
                 console.error('Input stream error: There was a problem with the data stream.',error);
-                showPopupPostConnection('Stream interrupted - try sending a new message.',"warning");
+                showPopupPostConnection('Stream interrupted - try sending your audio again.',"warning");
             }
             else {
                 console.error('An unexpected error occurred:', error);
-                showPopupPostConnection('Server error - try sending a new message.',"error");
+                showPopupPostConnection('Server error - try sending your audio again.',"error");
             }
         });
     }
