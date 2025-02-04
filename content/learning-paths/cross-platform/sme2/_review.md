@@ -27,15 +27,12 @@ review:
         question: >
             What are predicates?
         answers:
-            - Parts of a sentence or clause containing a verb and stating something about the subject
+            - Parts of a sentence or clause containing a verb and stating something about the subject.
             - Predicates select the active lanes in a vector operation.
             - Predicates are another word for flags from the Processor Status Register (PSR).
         correct_answer: 2
         explanation: >
-            SVE is a predicate centric architecture. Predicates allow Vector Length Agnosticism (VLA),
-            they support complex nested conditions and loops and reduce vector loop management
-            overhead by allowing lane predication in vector operations. Predicates have their own
-            dedicated registers.
+            SVE is a predicate-centric architecture. Predicates allow Vector Length Agnosticism (VLA), they support complex nested conditions and loops and reduce vector loop management overhead by allowing lane predication in vector operations. Predicates have their own dedicated registers.
 
 
 

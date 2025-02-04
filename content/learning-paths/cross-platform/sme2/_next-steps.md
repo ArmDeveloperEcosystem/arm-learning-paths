@@ -6,7 +6,7 @@ recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH
 further_reading:
 
     - resource:
-        title: SVE programming examples
+        title: SVE Programming Examples
         link: https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://developer.arm.com/documentation/dai0548/latest/&ved=2ahUKEwisi76m-f2GAxUDSKQEHfyWClAQFnoECA4QAQ&usg=AOvVaw1YPQ-aQsHmumnZykaFxM0b
         type: documentation
 
@@ -36,17 +36,17 @@ further_reading:
         type: documentation
 
     - resource:
-        title: Matrix multiplication
+        title: Matrix Multiplication
         link: https://en.wikipedia.org/wiki/Matrix_multiplication
         type: website
 
     - resource:
-        title: Compiler intrinsics
+        title: Compiler Intrinsics
         link: https://en.wikipedia.org/wiki/Intrinsic_function
         type: website
 
     - resource:
-        title: ACLE --- Arm C language extension
+        title: ACLE --- Arm C Language Extension
         link: https://github.com/ARM-software/acle
         type: website
 

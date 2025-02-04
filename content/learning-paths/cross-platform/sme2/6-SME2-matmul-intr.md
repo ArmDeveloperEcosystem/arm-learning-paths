@@ -5,30 +5,24 @@ weight: 8
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
-In this chapter, you will write an SME2 optimized matrix multiplication in C
-using the intrinsics provided by the compiler.
-
 ## Matrix multiplication with SME2 intrinsics
 
-*Intrinsics*, also know known as *compiler intrinsics* or *intrinsic functions*
-are functions available to application developers that the compiler has an
-intimate knowledge of. This enables the compiler to either translate that
-function to a very specific instruction and/or to perform specific
-optimizations.
+In this section, you will write an SME2 optimized matrix multiplication in C
+using the intrinsics that the compiler provides.
 
-You can lean more about intrinsics in this [wikipedia
-article](https://en.wikipedia.org/wiki/Intrinsic_function).
+*Intrinsics*, also know known as *compiler intrinsics* or *intrinsic functions*, and they are functions available to application developers that the compiler has an
+intimate knowledge of. This enables the compiler to either translate the function to a very specific instruction or to perform specific optimizations, or both.
+
+You can lean more about intrinsics in this [Wikipedia
+Article on Intrinsic Function](https://en.wikipedia.org/wiki/Intrinsic_function).
 
 Using intrinsics allows the programmer to use the very specific instructions
-needed to achieve the required performance while writing in C all the mundane
-code (loops, ...). This gives performance close to what can be reached with hand
-written assembly whilst being significantly more maintainable and portable !
+required to achieve the required performance while writing in C all the typically-required standard code, such as loops. This produces performance close to what can be reached with hand-written assembly whilst being significantly more maintainable and portable.
 
-All Arm specific intrinsics are specified in the
-[ACLE](https://github.com/ARM-software/acle) --- Arm C language extension. ACLE
+All Arm-specific intrinsics are specified in the
+[ACLE](https://github.com/ARM-software/acle), which is the Arm C Language Extension. ACLE
 is supported by the main compilers, most notably [GCC](https://gcc.gnu.org/) and
-[clang](https://clang.llvm.org).
+[Clang](https://clang.llvm.org).
 
 ## Streaming mode
 
@@ -210,7 +204,7 @@ The core of ``preprocess_l_intr`` is made of two parts:
   (lines 24-27). But this goes much further because as SME2 has multi-vectors
   operations (hence the ``svld1_x2`` intrinsic to load 2 rows in 2 vector
   registers), this allows the function to load the consecutive row, which
-  happens to be the row from the neighbouring tile on the right : this means 2
+  happens to be the row from the neighboring tile on the right : this means 2
   tiles are processed at once. At line 29-32, the pairs of vector registers are
   rearranged on quads of vector registers so they can be stored horizontally in
   the 2 tiles' ZA storage at lines 33-36 with the ``svwrite_hor_za32_f32_vg4``
@@ -331,9 +325,9 @@ The core of the multiplication is done in 2 parts:
   destination matrix ``matResult``.
 
 Once again you will note that the usage of the intrinsics made it easy to take
-advantage of the full power of SME2 --- once there is a good undestanding of the
+advantage of the full power of SME2 --- once there is a good understanding of the
 available SME2 instructions. The predicates deal elegantly with the corner
-cases. And most importanly, our code will deal with different SVL from different
+cases. And most importantly, our code will deal with different SVL from different
 hardware implementations without having to be recompiled. It's the important
 concept of *compile-once* / *run-everywhere*, plus the implementations that have
 larger SVL will perform the computation faster (for the same binary).

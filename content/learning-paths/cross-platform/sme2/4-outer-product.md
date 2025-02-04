@@ -5,18 +5,17 @@ weight: 6
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Matrix multiplication with the outer product
 
 In this section, you will learn how you can use the outer product with the SME engine to improve matrix multiplication.
 
-## Matrix multiplication with the outer product
-
-In this textbook matrix multiplication example, the core of the computation:
+In this textbook matrix multiplication example, the core of the computation can be represented as:
 
 ```C
                 acc += matLeft[m * K + k] * matRight[k * N + n];
 ```
 
-is 1 multiply-accumulate (a.k.a ``macc``) for 2 loads (``matLeft[m * K + k]``
+Which translates to 1 multiply-accumulate, which is also known as ``macc``, for two loads (``matLeft[m * K + k]``
 and ``matRight[k *N + n]``): it thus has 1:2 ``macc``  to ``load`` ratio. From a
 memory system perspective, this is not effective especially since this
 computation is done within a triple nested loop, repeatedly loading data from
@@ -29,7 +28,7 @@ Figure 3 below shows how the matrix multiplication of ``matLeft`` (3 rows, 2
 columns) by ``matRight`` (2 rows, 3 columns) can be decomposed as the sum of the
 outer products:
 
-![example image alt-text#center](outer_product.png "Figure 3. Outer product based matrix multiplication")
+![example image alt-text#center](outer_product.png "Figure 3. Outer Product-based Matrix Multiplication.")
 
 The SME engine builds on the
 [outer product](https://en.wikipedia.org/wiki/Outer_product) as matrix

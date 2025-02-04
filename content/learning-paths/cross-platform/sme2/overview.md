@@ -18,11 +18,11 @@ Additional architectural features of SME2 include:
 
 * Multi-vector multiply-accumulate instructions, with Z vectors as multiplier and multiplicand inputs and accumulating results into ZA array vectors, including widening multiplies that accumulate into more vectors than they read.
 
-* Multi-vector load, store, move, permute, and convert instructions, that use multiple SVE Z vectors as source and destination registers to pre-process inputs and post-process outputs of the ZA-targeting SME2 instructions
+* Multi-vector load, store, move, permute, and convert instructions, that use multiple SVE Z vectors as source and destination registers to pre-process inputs and post-process outputs of the ZA-targeting SME2 instructions.
 
-* “Predicate-as-counter”, an alternative predication mechanism is added to the original SVE predication mechanism, to control operations performed on multiple vector registers
+* *Predicate-as-counter*, which is an alternative predication mechanism that is added to the original SVE predication mechanism, to control operations performed on multiple vector registers.
 
-* Compressed neural network capability using dedicated lookup table instructions and outer product instructions that support binary neural networks
+* Compressed neural network capability using dedicated lookup table instructions and outer product instructions that support binary neural networks.
 
 * A 512-bit architectural register ZT0, that supports the lookup table feature.
 
@@ -30,7 +30,7 @@ Additional architectural features of SME2 include:
 
 If you are not familiar with matrix multiplication, or would benefit from refreshing your knowledge, this [Wikipedia article on Matrix multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication) is a good start.
 
-This Learning Path assumes some basic understanding of SVE and SME. If you are not familiar with SVE or SME, these are some useful resources that you should first read: 
+This Learning Path assumes some basic understanding of SVE and SME. If you are not familiar with SVE or SME, these are some useful resources that you can read first: 
 
  - [Introducing the Scalable Matrix Extension for the Armv9-A
    Architecture](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/scalable-matrix-extension-armv9-a-architecture).
