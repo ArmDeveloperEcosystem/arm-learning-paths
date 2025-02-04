@@ -124,38 +124,19 @@
             <div class="c-col u-display-block c-col-12 lg:c-col-4">
                 <h2>Stats</h2>
                 <div id="stats-initial">
-                    <p>Type a message to the chatbot to view metrics.</p> 
+                    <p>Record your audio to see transcription metrics.</p> 
                 </div>
                 <div id="stats-populated" hidden>
-                    <div id="tps-average-container" data-tps-array=""></div>
-                    <h5>Avg Tokens per Second (TPS)</h5>
-                    <div id="chart-container" class="chart-container">
-                        <div id="bar" class="bar"></div>
-    
-                            {{/* Automatically calculate low, mid, and great lines 
-                                    <div class="context-line" style="left: 20%;"></div> <!-- 10 / 50 --> 
-                            */}}
-                            {{range .Params.tps_ranges}}
-                                {{ if lt .max $.Params.tps_max }}
-                                    {{ $fraction := div (float .max) $.Params.tps_max }}  <!-- Divide .max by tps_max -->
-                                    {{ $percentage := mul $fraction 100 }}        <!-- Multiply by 100 to get percentage -->
-                                    <div class="context-line" style='left: {{ printf "%.0f%%" $percentage }};'>
-                                        <div class="context-line-axis">{{.max}}</div>
-                                    </div>
-                                {{end}}
-                            {{end}}
-                            <div class="context-line inline" style='left: 100%;'>
-                                <div class="context-line-axis inline">{{ $.Params.tps_max }}</div>
-                            </div>
-                      </div>
-                    <p id="overall-context-metric-p"><span id="overall-context-metric"></span></p>
-                    <br>
-                    <div id='last-message-metrics'>
-                    <h5>Last Message:</h5>
-                    <p> <b><span id="total-time-metric">#</span></b> seconds to display 
-                        <b><span id="num-tokens-metric">#</span></b> tokens at a rate of 
-                        <b><span id="tps-metric">#</span></b>        tokens per second.</p>
+                    <div id="total-time-div" class="c-row" style="margin-bottom:-16px;">
+                        <span id="total-time-metric" style="color: var(--arm-green); font-size: 72px;"></span>
                     </div>
+                    <div class="c-row">
+                        <p style="color: var(--arm-green);">seconds to complete transcription.</p>
+                    </div>
+                    <br>
+                    <p>
+                        {{.Params.stats_description}}
+                    </p>
                 </div>
     
                   

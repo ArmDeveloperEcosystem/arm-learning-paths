@@ -23,6 +23,16 @@
 
 
 
+
+    function updateStats(time_taken) {
+        // Show stats if they are not already shown
+        document.getElementById('stats-populated').hidden = false;
+        document.getElementById('stats-initial').hidden = true;
+        // Update time taken
+        document.getElementById('total-time-metric').textContent = time_taken;   
+    }
+
+
 function showPopupPostConnection(message,type,connection_status=false) {
 
     // Connection is done, enable people to submit new entry
@@ -328,9 +338,7 @@ function showPopupPostConnection(message,type,connection_status=false) {
 
 
     function sendToServer(data) {
-        hidePopup();    // Hide previous messages, to make room for others or clear for responses
-
-        
+               
         connectionStatus.isActive = true; // set connectionStatus to active
         toggleButton(); 
 
@@ -359,9 +367,20 @@ function showPopupPostConnection(message,type,connection_status=false) {
                 // read in the response that has 'status', 'transcript', 'time_taken'
                 response.json().then(data => {
                     console.log('status: ',data.status, ' time_taken: ',data.time_taken);
+                    // remove popup
+                    hidePopup();    
+
                     // show transcription
-                    const transcription_div=document.getElementById('transcription-div');
-                    transcription_div.textContent = data.transcript;
+                    const transcription_p = document.getElementById('transcription-p');
+                    transcription_p.classList.remove('placeholder');
+                    transcription_p.textContent = data.transcript;
+                    
+                    // update stats
+                    updateStats(data.time_taken.toFixed(2));
+
+                    // enable rerecording
+                    connectionStatus.isActive = false;
+                    toggleButton();
                 });
             } else {
                 console.error('Error sending message to the server');

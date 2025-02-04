@@ -25,20 +25,7 @@ terms_and_conditions: demo-terms-and-conditions.txt
 
 ### Specific details to this demo
 # ================================================================================
-tps_max: 30   # sets stat visuals for tps
-tps_ranges:
-  - name: Low
-    context: Around the average human reading rate of 3-5 words per second.
-    color: var(--arm-green)
-    min: 0
-    max: 5
-  - name: High
-    context: This is significantly higher than the average human reading rate of 5 words per second, delivering a stable and usable user chatbot experience from the Llama-3.1-8B LLM.
-    color: var(--arm-green)
-    min: 5
-    max: 1000
-
-
+stats_description: The 'total time' for a whisper voice-to-text process refers to the complete duration taken from the moment the audio input is received until the final text output is generated. This includes several related times such as the 'pre-processing time', which is the time taken to prepare the audio data for transcription, the 'transcription time', which is the actual time spent converting the audio to text, and the 'post-processing time', which involves refining and formatting the transcribed text. Each of these stages contributes to the overall 'total time' and can vary depending on factors such as audio quality, length of the audio, and the efficiency of the transcription algorithm.
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
