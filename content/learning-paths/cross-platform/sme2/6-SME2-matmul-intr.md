@@ -10,13 +10,13 @@ layout: learningpathall
 In this section, you will write an SME2 optimized matrix multiplication in C
 using the intrinsics that the compiler provides.
 
-*Intrinsics*, also know known as *compiler intrinsics* or *intrinsic functions*, and they are functions available to application developers that the compiler has an
+*Intrinsics*, also know known as *compiler intrinsics* or *intrinsic functions*, are the functions available to application developers that the compiler has an
 intimate knowledge of. This enables the compiler to either translate the function to a very specific instruction or to perform specific optimizations, or both.
 
-You can lean more about intrinsics in this [Wikipedia
+You can learn more about intrinsics in this [Wikipedia
 Article on Intrinsic Function](https://en.wikipedia.org/wiki/Intrinsic_function).
 
-Using intrinsics allows the programmer to use the very specific instructions
+Using intrinsics allows the programmer to use the specific instructions
 required to achieve the required performance while writing in C all the typically-required standard code, such as loops. This produces performance close to what can be reached with hand-written assembly whilst being significantly more maintainable and portable.
 
 All Arm-specific intrinsics are specified in the
@@ -27,19 +27,15 @@ is supported by the main compilers, most notably [GCC](https://gcc.gnu.org/) and
 ## Streaming mode
 
 In the previous page, the assembly language gave the programmer full access to
-the processor features. However, this comes at a cost in complexity and
-maintenance especially when one has to manage large code bases with deeply
-nested function calls. The assembly version is very low level, and does not deal
-properly with the SME state. In real world large scale software, the program
-will move back and forth from streaming mode, and some streaming mode routines
-will call other streaming mode routines, which means that some state (including
-the ZA storage) needs to be saved and restored. This is defined in the ACLE and
+the processor features. However, this comes at a cost in terms of complexity and
+maintenance, especially when one has to manage large code bases with deeply-nested function calls. The assembly version is very low level, and does not deal
+fully with the SME state. 
+
+In real-world large-scale software, the program moves back and forth from streaming mode, and some streaming mode routines call other streaming mode routines, which means that some state needs to be saved and restored. This includes the ZA storage. This is defined in the ACLE and
 supported by the compiler: the programmer *just* has to annotate the function
 with some keywords and set up some registers (see function ``setup_sme`` in
-``misc.c`` for an example). See
-[Introduction to streaming and non-streaming mode](https://arm-software.github.io/acle/main/acle.html#controlling-the-use-of-streaming-mode)
-for further details. The rest of this section quotes parts from the ACLE as there is no better way to
-restate the same.
+``misc.c`` for an example). See [Introduction to streaming and non-streaming mode](https://arm-software.github.io/acle/main/acle.html#controlling-the-use-of-streaming-mode)
+for further information. The rest of this section references information from the ACLE.
 
 The AArch64 architecture defines a concept called “streaming mode”, controlled
 by a processor state bit called ``PSTATE.SM``. At any given point in time, the
