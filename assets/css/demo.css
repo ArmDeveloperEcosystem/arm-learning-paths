@@ -5,7 +5,7 @@
     margin-top: 16px;
 
     min-width: 200px;
-    min-height: 200px;
+    min-height: 150px;
     text-align: center;
 }
 
@@ -277,8 +277,6 @@
 
 #notification-popup {
     position: absolute;
-    /*top: -34px;*/
-    bottom: 46px; /* 66 at 2 lines....86 at 3 lines....106px at 4 lines */
 
     left: 0;
     width: calc(100% - 32px); /* Subtract gutter space from width */
@@ -301,6 +299,13 @@
     transition: opacity 1s ease-in-out; /* Fade-in effect */
     visibility: hidden;
 }
+#notification-popup.chatbot {
+    bottom: 46px; /* 66 at 2 lines....86 at 3 lines....106px at 4 lines */
+}
+#notification-popup.audio {
+    bottom: -8px; /* 66 at 2 lines....86 at 3 lines....106px at 4 lines */
+}
+
 #initial-message-span {
     font-size: 16px;
 }
@@ -339,9 +344,73 @@
 
 
 
+/**************************************************/
+/*      Whisper audio demo components */
+#audio-icon-div {
+    cursor: pointer;
+}
+#audio-action-icon {
+    font-size: 65px;
+}
+#audio-playback {
+}
+
+#audio-playback-substitute {
+    margin: 8px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Push content to the bottom */
+}
+#audio-playback-substitute.empty {
+    border: 1px solid var(--arm-dark-grey);
+}
+#audio-playback-substitute.full {
+    border: none;
+}
+
+#audio-action-icon {
+    color: var(--arm-light-blue);
+}
+#audio-action-icon.pulse {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        color: red;
+    }
+    50% {
+        color: #ffcccc; /* Even lighter shade of red */
+    }
+    100% {
+        color: red;
+    }
+}
+
+#audio-action-icon.pulse {
+    animation: pulse 2s infinite; /* Slower and more natural pulse */
+}
 
 
 
+
+#transcription-div {
+    text-align: left;
+    margin: 8px;
+    width: 95%;
+}
+
+#transcription-p {
+    font-size: 24px!important;
+    margin-left: 8px;
+}
+#transcription-p.placeholder {
+    color: #ccc;
+    font-style: italic;
+    margin-bottom: 64px;
+}
+/**************************************************/
 
 
 
