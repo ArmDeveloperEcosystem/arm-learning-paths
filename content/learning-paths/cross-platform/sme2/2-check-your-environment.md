@@ -52,7 +52,7 @@ $ docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-envi
 The very first program that you should run is the famous "Hello, world !" example that
 will tell you if your environment is set up correctly. 
 
-The source code is contained in ``hello.c`` and looks like:
+The source code is contained in ``hello.c`` and looks like this:
 
 ```C
 #include <stdio.h>
@@ -138,13 +138,12 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-The ``sme2_check`` program displays the SVE (respectively SME) fields of the
-``ID_AA64PFR0_EL1`` (respectively ``ID_AA64PFR1_EL1``) system registers from the CPU
-and then checks if SVE and SME are available, and finally switches into
-streaming mode and back from streaming mode. The ``__ARM_FEATURE_SME2`` macro
-is provided by the compiler when it targets an SME capable target, which is
-specified with the ``-march=armv9.4-a+sme2`` command line option to ``clang`` in
-file ``Makefile``. The ``arm_sme.h`` include file is part of the Arm C Library
+The ``sme2_check`` program displays the SVE field of the ``ID_AA64PFR0_EL1`` system register and the SME field of the ``ID_AA64PFR1_EL1`` system register and will then check if SVE and SME are available, and finally will switch into streaming mode and back from streaming mode.  
+
+The ``__ARM_FEATURE_SME2`` macro is provided by the compiler when it targets an SME-capable target, which is specified with the ``-march=armv9.4-a+sme2`` command line option to ``clang`` in
+file ``Makefile``. 
+
+The ``arm_sme.h`` include file is part of the Arm C Library
 Extension ([ACLE](https://arm-software.github.io/acle/main/)). 
 
 The ACLE provides types and function declarations to enable C/C++ programmers to make best possible use of the Arm architecture. You can use the SME-related part of the library, but it does also provide support for Neon or other Arm architectural extensions.
@@ -171,4 +170,4 @@ Checking in_streaming_mode: 0
 Info: /OSCI/SystemC: Simulation stopped by user.
 ```
 
-You have now checked that the code can be compiled and run with full SME2 support, so you are now all set to move to the next section.
+You have now checked that the code can be compiled and run with full SME2 support and are all set to move to the next section.

@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Vanilla matrix multiplication
 
-In this section, you will learn about a textbook example of matrix multiplication in C.
+In this section, you will learn about an example of standard matrix multiplication in C.
 
 ### Algorithm description
 
-The vanilla matrix multiplication operation takes two input matrices, A [Al
-rows x Ac columns] and B [Bl rows x Bc columns], to produce an output matrix C
-[Cl rows x Cc columns]. The operation consists of iterating on each row of A
+The vanilla matrix multiplication operation takes two input matrices, A [Ar
+rows x Ac columns] and B [Br rows x Bc columns], to produce an output matrix C
+[Cr rows x Cc columns]. The operation consists of iterating on each row of A
 and each column of B, multiplying each element of the A row with its corresponding
 element in the B column then summing all these products, as Figure 2 shows.
 
@@ -23,12 +23,12 @@ element in the B column then summing all these products, as Figure 2 shows.
 This implies that the A, B, and C matrices have some constraints on their
 dimensions:
 
-- A's number of columns must match B's number of lines: Ac == Bl.
-- C has the ll have dimensions Cl == Al and Cc == Bc
+- A's number of columns must match B's number of rows: Ac == Br.
+- C has the dimensions Cr == Ar and Cc == Bc.
 
 You can learn more about matrix multiplication, including its history,
-properties and use, with this [wikipedia
-article](https://en.wikipedia.org/wiki/Matrix_multiplication)
+properties and use, by reading this [Wikipedia
+article on Matrix Multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication).
 
 In this Learning Path, you will see the following variable names:
 
@@ -67,8 +67,9 @@ void matmul(uint64_t M, uint64_t K, uint64_t N,
 In this Learning Path, the matrices are laid out in memory as contiguous
 sequences of elements, in [Row-Major
 Order](https://en.wikipedia.org/wiki/Row-_and_column-major_order). The
-``matmul`` function performs the algorithm described above. The
-pointers to ``matLeft``, ``matRight`` and ``matResult`` have been annotated as
+``matmul`` function performs the algorithm described above. 
+
+The pointers to ``matLeft``, ``matRight`` and ``matResult`` have been annotated as
 ``restrict``, which informs the compiler that the memory areas designated by
 those pointers do not alias. This means that they do not overlap in any way, so that the
 compiler does not need to insert extra instructions to deal with these cases.

@@ -10,16 +10,16 @@ layout: learningpathall
 
 To follow this Learning Path, you will need to set up an environment to develop with SME2.
 
-You require:
+You will require:
 
  - A compiler with support for SME2 instructions. You can use [Clang](https://www.llvm.org/)
-   version 18 or later, or [GCC](https://gcc.gnu.org/), version 14, or later. This Learning
-   Path uses ``clang``.
+   version 18 or later, or [GCC](https://gcc.gnu.org/) version 14, or later. This Learning
+   Path uses ``Clang``.
 
  - An emulator to execute code with the SME2 instructions. This Learning
    Path uses [Arm's Fixed Virtual Platform (FVP) model](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms).
 
-You also require Git and Docker installed on your machine.
+You will also require Git and Docker installed on your machine.
 
 ### Set up Git
 
@@ -30,20 +30,20 @@ git --version
 git version 2.47.1
 ```
 
-If the above command line fails with a message similar to "``git: command not found``", then install Git following the steps for the OS of your machine:
+If the above command line fails with a message similar to "``git: command not found``", then install Git following the steps for your machine's OS.
 
 {{< tabpane code=true >}}
   {{< tab header="Linux/Ubuntu" language="bash">}}
 sudo apt install git
   {{< /tab >}}
-  {{< tab header="MacOS" language="bash">}}
+  {{< tab header="macOS" language="bash">}}
 brew install git
   {{< /tab >}}
 {{< /tabpane >}}
 
 ### Docker
 
-To enable you to get started easily and with the tools that you need, you can fetch a Docker container with the required compiler and FVP to get started straight away. Alternatively, if you do wish to build the container yourself, the ``Dockerfile`` is also available.
+To enable you to get started easily and with the tools that you need, you can fetch a Docker container with the required compiler and FVP. Alternatively, if you do wish to build the container yourself, the ``Dockerfile`` is also available.
 
 
 {{% notice Note %}}
@@ -110,7 +110,7 @@ named ``SME2.git``:
 git clone  https://gitlab.arm.com/learning-code-examples/TODO_SOME_PATH SME2-learning-path.git
 ```
 
-This repository content looks like:
+This list of content in the repository should look like this :
 
 ```TXT
 SME2-learning-path.git/
@@ -145,37 +145,37 @@ It contains:
 - Code examples.
 - A ``Makefile`` that builds the code examples.
 - A shell script called ``run-fvp.sh`` that runs the FVP.
-- A directory called ``docker`` that contains materials related to Docker:
+- A directory called ``docker`` that contains materials related to Docker, which are:
   - A script called ``assets.source_me`` that provides the FVP and compiler toolchain references.
-  - A docker recipe called ``sme2-environment.docker`` to build the container that
+  - A Docker recipe called ``sme2-environment.docker`` to build the container that
   you will use.
-  - A shell script called ``build-my-container.sh`` that you can use if you want to build the docker container. This is not essential however, as ready-made
-  images are made available for you ). 
-  - The ``build-all-containers.sh`` is the script that was used to create the image for multi-architecture support, for both x86_64 and AArch64, for you to download.
+  - A shell script called ``build-my-container.sh`` that you can use if you want to build the Docker container. This is not essential however, as ready-made images are made available for you. 
+  - A script called ``build-all-containers.sh`` that was used to create the image for you to download to provide multi-architecture support for both x86_64 and AArch64.
 - A configuration script for VSCode to be able to use the container from the IDE called ``.devcontainer/devcontainer.json``.
 
-Now change directory to your checkout:
+The next step is to change directory to your checkout:
 
 ```BASH
 cd SME2-learning-path.git
 ```
+{{% notice Note %}}
+From this point in the Learning Path, all instructions assume that your current
+directory is ``SME2-learning-path.git``.{{% /notice %}}
 
-From this point in the Learning Path, all instructions assume your current
-directory is ``SME2-learning-path.git``.
 
 ## Using the environment
 
-Docker provides you with the functionality of being able to execute commands in an isolated environment, where you have all the necessary tools that you require without having to clutter your machine. Docker containers runs independently, which means that they do not interfere with other containers on the same machine or server.  
+Docker containers provide you with the functionality to execute commands in an isolated environment, where you have all the necessary tools that you require without having to clutter your machine. The containers runs independently, which means that they do not interfere with other containers on the same machine or server.  
 
-You can use docker in the following ways:
-- Directly from the command line, for example when you are working from a terminal.
-- In the container, once you have used Docker to configure VSCode to run all the commands within the Docker environment.
+You can use Docker in the following ways:
+- Directly from the command line. For example, when you are working from a terminal.
+- In the container. Once you have used Docker to configure VSCode to run all the commands within the Docker environment, you can work from within it.
 
 ### Working from a terminal
 
-When a command is executed in the docker container environment, you must prepend it with instructions on the command line so that your shell executes them in the container. 
+When a command is executed in the Docker container environment, you must prepend it with instructions on the command line so that your shell executes it within the container. 
 
-For example, to execute ``COMMAND ARGUMENTS`` in the SME2 docker container, the command line looks like this:
+For example, to execute ``COMMAND ARGUMENTS`` in the SME2 Docker container, the command line looks like this:
 
 ```SH
 docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v1 COMMAND ARGUMENTS
@@ -187,7 +187,7 @@ image, and mounts the current working directory (the ``SME2-learning-path.git``)
 inside the container to ``/work``, then sets ``/work`` as the
 working directory and runs ``COMMAND ARGUMENTS`` in this environment.
 
-For example, to run ``make``, you need to type:
+For example, to run ``make``, you need to enter:
 
 ```SH
 docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v1 make
@@ -195,20 +195,20 @@ docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-enviro
 
 ### Working from within the Docker container
 
-Make sure you have the [Dev
+Make sure you have the [Microsoft Dev
 Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 extension installed. 
 
-It should then be as easy as using the **Reopen in
-Container** menu entry as Figure 1 shows. 
+Then select the **Reopen in Container** menu entry as Figure 1 shows. 
 
 It automatically finds and uses ``.devcontainer/devcontainer.json``:
 
-![example image alt-text#center](VSCode.png "Figure 1. Setting up the Docker Container.")
+![example image alt-text#center](VSCode.png "Figure 1: Setting up the Docker Container.")
 
-All your commands will now take place in the container, so no need to prepend
-them with a docker invocation, VSCode handles all this transparently for you.
+All your commands now take place in the container, so no need to prepend
+them with a Docker invocation, as VSCode handles all this transparently for you.
 
-In the remainder of this learning path, the shell commands show the docker
+{{% notice Note %}}
+In the remainder of this learning path, the shell commands show the Docker
 invocation so that those who do not use VSCode can copy the full command line, but if you do use VSCode, you should only use the ``COMMAND ARGUMENTS`` part.
-
+{{% /notice %}}
