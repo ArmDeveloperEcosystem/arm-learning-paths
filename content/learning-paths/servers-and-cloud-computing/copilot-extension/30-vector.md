@@ -1,6 +1,6 @@
 ---
 title: Vector Database
-weight: 5
+weight: 30
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -24,15 +24,15 @@ Then for any given vector, like the embedded token input of a user, we can query
 
 For example, for our use case let's say we want to know which Arm learning path is most relevant to a question a user asks.
 
-First, ahead of time, we have to convert the raw data (Arm learning path content) into more consumable "chunks". In our case, small `yaml` files. Then we run those chunks through our LLM model and embed the content into a vector database.
-
-Now in our application, we can take the input from the user and embed it using the same model. Now we have a database of vectors representing our data, and a new vector based on user input. We find the closest (meaning, most similar) vector in the database, and that connects us to the original chunk file that vector came from. Using the data from that `chunk.yaml`, we can retrieve the Arm resource(s) most relevant for that user's question.
-
-The retrieved resources are then used to augment the context for the LLM, which generates a final response that is both contextually relevant and contains accurate information.
+First, ahead of time, we have to convert the raw data (Arm learning path content) into more consumable "chunks". In our case, small `yaml` files. Then we run those chunks through our LLM model and embed the content into our FAISS vector database.
 
 ### FAISS
 
-#### TODO: Write about FAISS
+FAISS (Facebook AI Similarity Search) is a library developed by Facebook AI Research that is designed to efficiently search for similar vectors in large datasets. FAISS is highly optimized for both memory usage and speed, and best in class nearest neighbor search.
+
+Now in our application, we can take the input from the user and embed it using the same model we used for our database. We then use FAISS nearest neighbor search to compare the user input to the nearest vectors in the database. We then look at the original chunk files for those closest vector. Using the data from those `chunk.yaml` files, we can retrieve the Arm resource(s) most relevant for that user's question.
+
+The retrieved resources are then used to augment the context for the LLM, which generates a final response that is both contextually relevant and contains accurate information.
 
 ## Collecting Data into Chunks
 
