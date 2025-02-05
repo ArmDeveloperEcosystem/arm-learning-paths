@@ -25,8 +25,24 @@
     - Install needed developer tools / SDKs 
         - Python (version?)
         - Python local environment + package install
+<<<<<<< HEAD
     - Ensure have the example repo cloned 
 - 10 Creating GitHub App
+=======
+    - Clone the example repo 
+- Flask webapp / API
+    - oauth2 implementation
+    - agent endpoint
+    - marketplace endpoint
+- Vector database
+    - What is a vector database
+    - bin file generation
+- Deployment (AWS only)
+    - Disclaimers "There are a lot of ways to run a flask app"
+    - CDK Setup / Install
+    - Run CDK code
+- Configuring with GitHub
+>>>>>>> c395e57567411ffbb1a9d52a6820515a62a97683
     - Creating the extension in UI
     - Getting application ID and client secret for Flask web app
 - 20 Flask webapp / API

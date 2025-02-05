@@ -1,0 +1,10 @@
+---
+title: PLACEHOLDER STEP TITLE 1
+weight: 6
+
+### FIXED, DO NOT MODIFY
+layout: learningpathall
+---
+
+## PLACEHOLDER HEADER 
+YOUR CONTENT GOES HERE
