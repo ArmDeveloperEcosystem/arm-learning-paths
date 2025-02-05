@@ -40,22 +40,17 @@ multiplication can be expressed as the
 
 From the previous page, you will recall that matrices are laid out in row-major
 order. This means that loading row-data from memory is efficient as the memory
-system operates efficiently with contiguous data, e.g. caches are loaded line by
-line, data prefetching is extremely simple (just load the data from
-``current address + sizeof(data)``), ... This is not the case for loading column-data from
-memory though, as it requires more work from the memory system.
+system operates efficiently with contiguous data. An example of this is where caches are loaded row by row, and data prefetching is simple - just load the data from ``current address + sizeof(data)``. This is not the case for loading column-data from memory though, as it requires more work from the memory system.
 
 In order to further improve the effectiveness of the matrix multiplication, it
-is thus desirable to change the layout in memory of the left hand side matrix
-(``matLeft`` in our code examples), essentially performing a matrix
-transposition so that instead of load column-data one loads row-data from
-memory.
+is therefore desirable to change the layout in memory of the left-hand side matrix, which is called ``matLeft`` in the code examples in this Learning Path, which essentially performs a matrix
+transposition so that instead of loading column-data from memory, one loads row-data.
 
 {{% notice Important %}}
-It's important to note here that this reorganizes the layout of the matrix in
+It is important to note here that this reorganizes the layout of the matrix in
 memory in order for the algorithm implementation to be more efficient. The
-transposition affects only the memory layout: ``matLeft`` will be transformed to
-be in column-major order --- from a mathematical perspective, ``matleft`` is
+transposition affects only the memory layout. ``matLeft`` is transformed to
+column-major order, but from a mathematical perspective, ``matleft`` is
 *not* transposed.
 {{% /notice %}}
 

@@ -75,9 +75,9 @@ one implied by the source code.
 
 ACLE provides attributes that specify whether the abstract machine executes statements:
 
-- in non-streaming mode, in which case they are called “non-streaming statements”
-- in streaming mode, in which case they are called “streaming statements”
-- in either mode, in which case they are called “streaming-compatible statements”
+- In non-streaming mode, in which case they are called “non-streaming statements”.
+- In streaming mode, in which case they are called “streaming statements”.
+- In either mode, in which case they are called “streaming-compatible statements”.
 
 SME provides an area of storage called ZA, of size ``SVL.B`` x ``SVL.B`` bytes. It
 also provides a processor state bit called ``PSTATE.ZA`` to control whether ZA
