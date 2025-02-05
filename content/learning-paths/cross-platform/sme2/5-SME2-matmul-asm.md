@@ -5,23 +5,24 @@ weight: 7
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
-In this chapter, you will use an SME2 optimized matrix multiplication written
-directly in assembly.
-
 ## Matrix multiplication with SME2 in assembly
+
+In this chapter, you will use an SME2-optimized matrix multiplication written
+directly in assembly.
 
 ### Description
 
-This learning path reuse the assembly version provided in the [SME programmer's
-guide](https://developer.arm.com/documentation/109246/0100/matmul-fp32--Single-precision-matrix-by-matrix-multiplication)
-where you will find a high level and an in-depth description of the 2 steps
-performed. The assembly versions have been modified so they coexist nicely with
-the intrinsic versions. In this learning path, the ``preprocess`` function is
-defined in ``preprocess_l_asm.S`` and the outer-product based matrix
-multiplication is in ``matmul_asm_impl.S``. Those 2 functions have been stitched
-together in ``matmul_asm.c`` with the same prototype as the reference
-implementation of matrix multiplication, so that a top-level ``matmul_asm`` can
+This Learning Path reuses the assembly version provided in the [SME Programmer's
+Guide](https://developer.arm.com/documentation/109246/0100/matmul-fp32--Single-precision-matrix-by-matrix-multiplication)
+where you will find a high-level and an in-depth description of the two steps
+performed. 
+
+The assembly versions have been modified so they coexist nicely with
+the intrinsic versions. In this Learning Path, the ``preprocess`` function is
+defined in ``preprocess_l_asm.S`` and the outer product-based matrix
+multiplication is found in ``matmul_asm_impl.S``. 
+
+These two functions have been stitched together in ``matmul_asm.c`` with the same prototype as the reference implementation of matrix multiplication, so that a top-level ``matmul_asm`` can
 be called from the ``main`` function:
 
 ```C
@@ -53,7 +54,7 @@ void matmul_asm(uint64_t M, uint64_t K, uint64_t N,
 }
 ```
 
-Note the use of the ``__asm`` statement forcing the compiler to save the SVE/SME registers.
+Note here the use of the ``__asm`` statement forcing the compiler to save the SVE/SME registers.
 
 The high-level ``matmul_asm`` function is called from ``main.c``:
 
@@ -156,21 +157,18 @@ int main(int argc, char **argv) {
 }
 ```
 
-The same ``main.c`` file is used for the assembly and intrinsic based versions
-of the matrix multiplication. It will first set the ``M``, ``K`` and ``N``
-parameters, to either the arguments supplied on the command line or use default
-value. Depending on the ``M``, ``K``, ``N`` dimension parameters, ``main`` will
-allocate memory for all the matrices and initialize  ``matLeft`` and
-``matRight`` with random data. The actual matrix multiplication implementation
-is provided through the ``IMPL`` macro. It will then run the matrix multiplication
-from ``IMPL`` and compute the reference values for the preprocessed matrix as
-well as the result matrix. It then compares the actual values to the reference
-values and reports errors (if any). Last, all the memory is de-allocated before
-exiting the program with a success or failure return code.
+The same ``main.c`` file is used for the assembly and intrinsic-based versions
+of the matrix multiplication. It first sets the ``M``, ``K`` and ``N``
+parameters, to either the arguments supplied on the command line or uses the default
+value. 
+
+Depending on the ``M``, ``K``, ``N`` dimension parameters, ``main`` allocates memory for all the matrices and initializes ``matLeft`` and ``matRight`` with random data. The actual matrix multiplication implementation is provided through the ``IMPL`` macro. 
+
+It then runs the matrix multiplication from ``IMPL`` and computes the reference values for the preprocessed matrix as well as the result matrix. It then compares the actual values to the reference values and reports errors, if there are any. Finally, all the memory is deallocated before exiting the program with a success or failure return code.
 
 ### Compile and run it
 
-First, make sure that the ``sme2_matmul_asm`` executable is up to date:
+First, make sure that the ``sme2_matmul_asm`` executable is up-to-date:
 
 ```BASH
 docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v1 make sme2_matmul_asm
@@ -182,7 +180,7 @@ Then execute ``sme2_matmul_asm`` on the FVP:
 docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v1 ./run-fvp.sh sme2_matmul_asm
 ```
 
-which should output something similar to:
+The output should be something similar to:
 
 ```TXT
 SME2 Matrix Multiply fp32 *asm* example with args 125 35 70
@@ -193,13 +191,12 @@ Info: /OSCI/SystemC: Simulation stopped by user.
 ```
 
 {{% notice Tip %}}
-The example above uses the default values for the ``M``, ``K`` and ``N``
-parameters (resp. 125, 25 and 70). You can override this and provide your own
-values on the command line:
+The example above uses the default values for the ``M`` (125), ``K``(25) and ``N``(70)
+parameters. You can override this and provide your own values on the command line:
 
 ```BASH
 docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v1 ./run-fvp.sh sme2_matmul_asm 7 8 9
 ```
 
-if you wish to execute the same code with ``M=7``, ``K=8`` and ``N=9`` instead.
+Here the values ``M=7``, ``K=8`` and ``N=9`` are used instead.
 {{% /notice %}}
