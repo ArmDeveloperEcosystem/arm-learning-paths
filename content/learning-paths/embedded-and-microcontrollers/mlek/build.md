@@ -58,7 +58,7 @@ cd ml-embedded-evaluation-kit
 git submodule update --init
 ```
 
-### Run the build sscript
+### Run the build script
 
 The default build is Ethos-U55  and Corstone-300. The default build for Ethos-U85 is Corstone-320. Use the `npu-config-name` flag to set Ethos-U85.
 

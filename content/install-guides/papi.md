@@ -8,6 +8,7 @@ additional_search_terms:
 
 test_images:
 - ubuntu:latest
+test_maintenance: true
 
 ### FIXED, DO NOT MODIFY
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -19,7 +20,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 Performance Application Programming Interface (PAPI) provides a consistent library of functions for accessing performance counters from an application.
 
-You can use PAPI in your source code to access performance counters and profile specific sections of your application. 
+You can use PAPI in your source code to access performance counters and profile specific sections of your application.
 
 PAPI is available as source code on GitHub.
 
@@ -43,7 +44,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 You need `gcc` and `make` to build PAPI.
 
-Use the Linux package manager to install the required software packages on your Linux distribution. 
+Use the Linux package manager to install the required software packages on your Linux distribution.
 
 For Debian based distributions (including Ubuntu) run:
 
@@ -58,24 +59,27 @@ sudo apt install -y make gcc
 
 ```bash { target="ubuntu:latest" }
 git clone https://github.com/icl-utk-edu/papi/
-cd papi/src
 ```
 
 2. Configure and compile the source code:
 
 ```bash { target="ubuntu:latest" }
-./configure && make
+cd papi/src
+chmod +x configure
+./configure
+make
 ```
 
 3. Configure and compile the source code:
 
 ```bash { target="ubuntu:latest" }
+cd papi/src
 sudo make install
 ```
 
 4. Copy the test program below and paste it into a text file named `papi-test.c``:
 
-```C
+```C { file_name="papi-test.c" }
 #include <papi.h>
 #include <stdio.h>
 #include <stdlib.h>

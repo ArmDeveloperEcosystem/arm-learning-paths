@@ -186,6 +186,12 @@ Calls to:
     }
 
     function updateLLMMetrics(metrics_object) {
+
+        if (metrics_object['tps'] == 0) {
+            // No metrics to show
+            return;
+        }
+        
         // Show stats if they are not already shown
         document.getElementById('stats-populated').hidden = false;
         document.getElementById('stats-initial').hidden = true;
@@ -428,10 +434,16 @@ Calls to:
         }
 
 
+
+        {{ if eq .Params.demo_template_name "llm_chatbot_rag_demo" }}
+            while (all_messages_div.firstChild) {
+                all_messages_div.removeChild(all_messages_div.firstChild);
+            }
+        {{ else if eq .Params.demo_template_name "llm_chatbot_first_demo" }}
+        {{ else }}
+        {{ end }}
+
         all_messages_div.insertBefore(user_div, all_messages_div.firstChild);
-
-
-
 
         const chatbot_div = document.createElement('div');
         chatbot_div.classList.add('chatbot-message');
@@ -453,6 +465,8 @@ Calls to:
         chatbot_div.appendChild(chatbot_span_for_message);
         all_messages_div.insertBefore(chatbot_div, all_messages_div.firstChild);
 
+
+    
     }
 
     // Check textarea content and enable/disable the button

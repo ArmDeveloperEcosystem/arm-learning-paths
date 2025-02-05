@@ -6,12 +6,12 @@ weight: 2
 layout: learningpathall
 ---
 
-This Learning Path is about TinyML. It serves as a starting point for learning how cutting-edge AI technologies may be put on even the smallest of devices, making Edge AI more accessible and efficient. You will learn how to setup on your host machine and target device to facilitate compilation and ensure smooth integration across all devices.
+This Learning Path is about TinyML. It serves as a starting point for learning how cutting-edge AI technologies may be used on even the smallest devices, making Edge AI more accessible and efficient. You will learn how to set up your host machine and target device to facilitate compilation and ensure smooth integration across devices.
 
 In this section, you get an overview of the domain with real-life use-cases and available devices.
 
 ## Overview
-TinyML represents a significant shift in machine learning deployment. Unlike traditional machine learning, which typically depends on cloud-based servers or high-powered hardware, TinyML is tailored to function on devices with limited resources, constrained memory, low power, and less processing capabilities. TinyML has gained popularity because it enables AI applications to operate in real-time, directly on the device, with minimal latency, enhanced privacy, and the ability to work offline. This shift opens up new possibilities for creating smarter and more efficient embedded systems.
+TinyML represents a significant shift in machine learning deployment. Unlike traditional machine learning, which typically depends on cloud-based servers or high-performance hardware, TinyML is tailored to function on devices with limited resources, constrained memory, low power, and less processing capabilities. TinyML has gained popularity because it enables AI applications to operate in real-time, directly on the device, with minimal latency, enhanced privacy, and the ability to work offline. This shift opens up new possibilities for creating smarter and more efficient embedded systems.
 
 ### Benefits and applications
 
@@ -42,7 +42,7 @@ TinyML is being deployed across multiple industries, enhancing everyday experien
 
 ### Examples of Arm-based devices
 
-There are many Arm-based off-the-shelf devices you can use for TinyML projects. Some of them are listed below, but the list is not exhaustive.
+There are many Arm-based devices you can use for TinyML projects. Some of them are listed below, but the list is not exhaustive.
 
 #### Raspberry Pi 4 and 5
 
@@ -64,6 +64,6 @@ The Arduino Nano, equipped with a suite of sensors, supports TinyML and is ideal
 
 In addition to hardware, there are software platforms that can help you build TinyML applications.
 
-Edge Impulse platform offers a suite of tools for developers to build and deploy TinyML applications on Arm-based devices. It supports devices like Raspberry Pi, Arduino, and STMicroelectronics boards.
+Edge Impulse offers a suite of tools for developers to build and deploy TinyML applications on Arm-based devices. It supports devices like Raspberry Pi, Arduino, and STMicroelectronics boards.
 
 Now that you have an overview of the subject, move on to the next section where you will set up an environment on your host machine.

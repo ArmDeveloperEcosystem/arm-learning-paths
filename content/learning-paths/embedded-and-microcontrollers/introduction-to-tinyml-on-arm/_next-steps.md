@@ -9,6 +9,14 @@ further_reading:
         title: TinyML Brings AI to Smallest Arm Devices 
         link: https://newsroom.arm.com/blog/tinyml
         type: blog
+    - resource:
+        title: Arm Compiler for Embedded
+        link: https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded
+        type: documentation
+    - resource:
+        title: Arm GNU Toolchain
+        link: https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain
+        type: documentation
     
 
 

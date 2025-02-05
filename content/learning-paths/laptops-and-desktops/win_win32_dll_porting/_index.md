@@ -11,7 +11,7 @@ learning_objectives:
     - Learn how to port the C/C++ Win32 DLL to Arm64
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).    
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).    
     - Refer to [Visual Studio 2022 with Arm build tools](/install-guides/vs-woa).
     
 author_primary: Dawid Borycki
