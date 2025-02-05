@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -30,6 +30,17 @@ tools_software_languages:
     - Arm Compiler for Embedded
     - Arm Fast Models
     - Coding
+
+
+further_reading:
+    - resource:
+        title: Docker documentation
+        link: https://docs.docker.com
+        type: documentation
+    - resource:
+        title: Learn how to use Docker
+        link: /learning-paths/cross-platform/docker/
+        type: website
 
 
 ### FIXED, DO NOT MODIFY

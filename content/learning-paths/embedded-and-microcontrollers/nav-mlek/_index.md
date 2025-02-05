@@ -6,7 +6,7 @@ armips:
 - Ethos-U
 - Corstone
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 learning_objectives:
 - Understand and select physical and virtual hardware targets for ML application development with Cortex-M and Ethos-U
@@ -35,6 +35,21 @@ tools_software_languages:
     - GCC
     - Arm Compiler for Embedded
     - MPS3
+
+further_reading:
+    - resource:
+        title: Arm Tech Talks
+        link: https://www.arm.com/partners/tech-talks
+        type: website
+    - resource:
+        title: CMSIS-NN documentation
+        link: https://www.keil.com/pack/doc/CMSIS/NN/html/index.html
+        type: documentation
+    - resource:
+        title: Machine Learning on Arm Cortex-M Microcontrollers
+        link: https://armkeil.blob.core.windows.net/developer/Files/pdf/ethos/Arm_ML_on_Cortex-M_Microcontrollers_v2.pdf
+        type: documentation
+
 
 weight: 1
 

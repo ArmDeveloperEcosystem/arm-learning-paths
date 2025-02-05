@@ -13,7 +13,7 @@ prerequisites:
     - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/.'
     - 'Complete the [first](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part1) and [second](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part2) learning paths of this series.'
   
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -30,6 +30,22 @@ tools_software_languages:
 
 operatingsystems:
     - Linux
+
+further_reading:
+    - resource:
+        title: Kubernetes
+        link: https://kubernetes.io
+        type: Documentation
+    - resource:
+        title: Azure Kubernetes Service
+        link: https://azure.microsoft.com/en-us/products/kubernetes-service#overview
+        type: Documentation
+    - resource:
+        title: kubectl Cheat Sheet
+        link: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+        type: Documentation
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

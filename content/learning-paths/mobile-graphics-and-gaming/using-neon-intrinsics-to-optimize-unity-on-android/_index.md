@@ -16,7 +16,7 @@ prerequisites:
     - Desktop computer capable of running Unity
     - Unity version compatible with Unity Burst compiler 1.5 or later
 
-author_primary: Arm
+author: Arm
 
 ### Tags
 skilllevels: Intermediate
@@ -33,6 +33,18 @@ tools_software_languages:
     - C#
 operatingsystems:
     - Android
+
+
+further_reading:
+    - resource:
+        title: Arm Neon documentation
+        link: https://developer.arm.com/Architectures/Neon
+        type: documentation
+    - resource:
+        title: Unity Burst compiler documentation
+        link: https://docs.unity3d.com/Manual/com.unity.burst.html
+        type: documentation
+
 
 
 ### FIXED, DO NOT MODIFY

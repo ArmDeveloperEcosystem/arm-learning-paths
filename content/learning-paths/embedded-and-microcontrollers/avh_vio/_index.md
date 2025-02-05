@@ -12,7 +12,7 @@ prerequisites:
     - A valid [AWS](https://aws.amazon.com/) account
     - Some familiarity with Python 
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -24,6 +24,15 @@ operatingsystems:
     - Baremetal
 tools_software_languages:
     - Arm Virtual Hardware
+
+
+further_reading:
+    - resource:
+        title: AVH Virtual Interfaces
+        link: https://arm-software.github.io/AVH/main/simulation/html/group__arm__cmvp.html
+        type: documentation
+
+
 
 
 ### FIXED, DO NOT MODIFY

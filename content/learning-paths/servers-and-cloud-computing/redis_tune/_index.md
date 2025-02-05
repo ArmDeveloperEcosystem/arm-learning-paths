@@ -14,7 +14,7 @@ prerequisites:
     - Cloud or bare-metal installation of an Redis file server
     - Review [Learn how to deploy Redis](/learning-paths/servers-and-cloud-computing/redis/) if you do not already have Redis setup
 
-author_primary: Elham Harirpoush
+author: Elham Harirpoush
 
 ### Tags
 skilllevels: Advanced
@@ -26,6 +26,14 @@ tools_software_languages:
     - Redis    
 operatingsystems:
     - Linux
+
+further_reading:
+    - resource:
+        title: Redis Documentation
+        link: https://redis.io/docs/
+        type: documentation
+    
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -16,7 +16,7 @@ prerequisites:
     - Be comfortable with SSH/Linux terminal and basic system administration tasks.
     - To install both [Nginx](/learning-paths/servers-and-cloud-computing/nginx/) and [PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql/)
 
-author_primary: Diego Russo
+author: Diego Russo
 
 ### Tags
 skilllevels: Introductory
@@ -30,6 +30,22 @@ tools_software_languages:
     - PostgreSQL
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: PostgreSQL Documentation
+        link: https://www.postgresql.org/docs/
+        type: documentation
+    - resource:
+        title: Nginx Documentation
+        link: https://nginx.org/en/docs/
+        type: documentation
+    - resource:
+        title: Django Documentation
+        link: https://docs.djangoproject.com/
+        type: documentation
+
 
 
 ### FIXED, DO NOT MODIFY

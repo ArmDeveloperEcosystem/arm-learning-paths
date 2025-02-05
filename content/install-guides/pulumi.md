@@ -2,7 +2,7 @@
 title: Pulumi
 minutes_to_complete: 5
 official_docs: https://www.pulumi.com/docs/
-author_primary: Jason Andrews
+author: Jason Andrews
 
 test_maintenance: true
 test_images:

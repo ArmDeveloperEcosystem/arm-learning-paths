@@ -15,7 +15,7 @@ prerequisites:
    - An Android smartphone.
    - Familiarity with OpenCV, review [Create Computer Vision Applications with OpenCV on Android Devices](/learning-paths/mobile-graphics-and-gaming/android_opencv_camera/) before starting.
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -29,6 +29,21 @@ tools_software_languages:
     - Android
     - Android Studio
     - Kotlin
+
+further_reading:
+    - resource:
+        title: OpenCV
+        link: https://opencv.org
+        type: documentation
+    - resource:
+        title: OpenCV on Android
+        link: https://opencv.org/android/
+        type: documentation
+    - resource:
+        title: Enhanced OpenCV For Android Support & ARM Performance Gains
+        link: https://opencv.org/blog/enhanced-opencv-for-android-support-arm-performance-gains/
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

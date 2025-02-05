@@ -14,7 +14,7 @@ prerequisites:
     - General knowledge about SIMD processing, vectorization or Arm NEON.
     - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
-author_primary: Florent Lebeau
+author: Florent Lebeau
 
 ### Tags
 skilllevels: Introductory
@@ -31,6 +31,34 @@ tools_software_languages:
     - armie
     - GCC
     - armclang
+
+further_reading:
+    - resource:
+        title: Introduction to SVE
+        link: https://developer.arm.com/documentation/102476/latest/
+        type: website
+    - resource:
+        title: SVE Optimization Guide
+        link: https://developer.arm.com/documentation/102699/0100/?lang=en
+        type: documentation
+    - resource:
+        title: Tutorials - Introduction to SVE2
+        link: https://developer.arm.com/documentation/102340/0001/?lang=en
+        type: documentation
+    - resource:
+        title: Arm Instruction Emulator user guide
+        link: https://developer.arm.com/documentation/102190/22-0/Get-started/Get-started-with-Arm-Instruction-Emulator
+        type: documentation
+    - resource:
+        title: Accelerating DSP functions with dot product instructions
+        link: https://developer.arm.com/documentation/102651/a/?lang=en
+        type: documentation
+    - resource:
+        title: Optimizing HPCG for Arm SVE
+        link: https://community.arm.com/arm-community-blogs/b/high-performance-computing-blog/posts/optimizing-hpcg-for-arm-sve
+        type: blog
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

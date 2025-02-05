@@ -14,7 +14,7 @@ learning_objectives:
 prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -28,6 +28,29 @@ tools_software_languages:
     - Neon
     - SVE
     - Go
+
+further_reading:
+    - resource:
+        title: AWS Graviton Getting Started
+        link: https://github.com/aws/aws-graviton-getting-started
+        type: documentation
+    - resource:
+        title: AWS Graviton Processors
+        link: https://dev.to/aws-builders/aws-graviton-processors-3nk3
+        type: blog
+    - resource:
+        title: NVIDIA Getting Started with HPC on Arm64
+        link: https://github.com/arm-hpc-devkit/nvidia-arm-hpc-devkit-users-guide
+        type: blog
+    - resource:
+        title: Data points you need to know about ARM for your application code migration
+        link: https://dev.to/aws-builders/data-points-you-need-to-know-about-arm-for-your-application-code-migration-5c0f
+        type: blog
+    - resource:
+        title: Making your Go workloads up to 20% faster with Go 1.18 and AWS Graviton
+        link: https://aws.amazon.com/blogs/compute/making-your-go-workloads-up-to-20-faster-with-go-1-18-and-aws-graviton/
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

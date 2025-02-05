@@ -14,7 +14,7 @@ prerequisites:
     - A development machine with [Android Studio](https://developer.android.com/studio) installed. 
     - An Android smartphone.
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -28,6 +28,20 @@ tools_software_languages:
     - Android Studio
     - Kotlin
     - Java
+
+further_reading:
+    - resource:
+        title: OpenCV
+        link: https://opencv.org
+        type: documentation
+    - resource:
+        title: OpenCV on Android
+        link: https://opencv.org/android/
+        type: documentation
+    - resource:
+        title: KleidiCV
+        link: https://gitlab.arm.com/kleidi/kleidicv
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

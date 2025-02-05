@@ -13,7 +13,7 @@ learning_objectives:
 prerequisites:
     - Viewing the demo!
 
-author_primary: Zach Lasiuk
+author: Zach Lasiuk
 
 
 
@@ -26,6 +26,17 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Kubernetes
+
+
+further_reading:
+    - resource:
+        title: Getting started with Llama
+        link: https://llama.meta.com/get-started
+        type: documentation
+    - resource:
+        title: Hugging Face Documentation
+        link: https://huggingface.co/docs
+        type: documentation
 
 
 ### FIXED, DO NOT MODIFY

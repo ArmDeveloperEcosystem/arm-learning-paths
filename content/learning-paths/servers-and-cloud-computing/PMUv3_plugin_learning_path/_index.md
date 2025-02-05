@@ -16,7 +16,7 @@ prerequisites:
     - An Arm-based computer running Linux.
     - Some familiarity with Linux application performance analysis.
 
-author_primary: Gayathri Narayana Yegna Narayanan
+author: Gayathri Narayana Yegna Narayanan
 
 ### Tags
 skilllevels: Advanced
@@ -29,6 +29,21 @@ tools_software_languages:
     - Python
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: Arm Neoverse N2 PMU Guide
+        link: https://developer.arm.com/documentation/PJDOC-466751330-590448/2-0/?lang=en
+        type: documentation
+    - resource:
+        title: Arm CPU Telemetry Solution Topdown Methodology Specification
+        link: https://developer.arm.com/documentation/109542/0100/?lang=en
+        type: documentation
+    - resource:
+        title: Arm Neoverse N2 Core Telemetry Specification
+        link: https://developer.arm.com/documentation/109215/0200/?lang=en
+        type: documentation
 
 
 ### FIXED, DO NOT MODIFY

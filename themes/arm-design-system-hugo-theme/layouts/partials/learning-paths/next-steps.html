@@ -219,7 +219,7 @@ Called from:
                 <h4>Read related resources</h4>
                 <p>Find more information about the topics in this Learning Path:</p>
                 <ul class="fa-ul u-margin-left-0">
-                {{ range $index, $r := .context.Params.further_reading }}
+                {{ range $index, $r := (index .learningpathfiles 0).Params.further_reading }} {{/* obtain from index.md */}}
                     {{ with $r.resource}}
                         <li class="u-margin-bottom-1/2"><i class='u-margin-right-1/2 fa-solid 
                                     {{if eq .type "blog" }}

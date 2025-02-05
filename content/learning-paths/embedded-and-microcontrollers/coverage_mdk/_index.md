@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - Basic familiarity with Keil MDK
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -28,6 +28,21 @@ tools_software_languages:
     - MDK
     - Fixed Virtual Platform
     - FVP
+
+further_reading:
+    - resource:
+        title: MDK Code Coverage overview
+        link: https://www2.keil.com/mdk5/debug/coverage
+        type: website
+    - resource:
+        title: ULINKpro Debug and Trace Unit
+        link: https://www2.keil.com/mdk5/ulink/ulinkpro
+        type: website
+    - resource:
+        title: Trace tutorial for Arm Cortex-M
+        link: https://www.youtube.com/watch?v=XGmSCVgb6EM
+        type: video
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

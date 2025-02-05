@@ -14,7 +14,7 @@ prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
     - A computer with [Terraform](/install-guides/terraform) installed
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Advanced
@@ -27,6 +27,18 @@ operatingsystems:
 tools_software_languages:
     - Terraform
     - Bastion
+
+further_reading:
+    - resource:
+        title: Terraform docs for AWS
+        link: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+        type: documentation
+    - resource:
+        title: Amazon EC2 C7g Instances, Powered by AWS Graviton3 Processors
+        link: https://aws.amazon.com/blogs/aws/new-amazon-ec2-c7g-instances-powered-by-aws-graviton3-processors/
+        type: Blog
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

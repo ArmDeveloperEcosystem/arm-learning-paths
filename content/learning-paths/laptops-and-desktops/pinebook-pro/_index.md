@@ -14,7 +14,7 @@ prerequisites:
     - A Pinebook Pro laptop
     - A microSD card (8GB or greater; class 10 or faster)
 
-author_primary: Gabriel Peterson
+author: Gabriel Peterson
 
 ### Tags
 skilllevels: Advanced
@@ -28,6 +28,21 @@ tools_software_languages:
     - i3
     - Alacritty
     - Neovim
+
+further_reading:
+    - resource:
+        title: Arch Linux ARM
+        link: https://archlinuxarm.org/
+        type: documentation
+    - resource:
+        title: i3 windows manager documentation
+        link: https://i3wm.org/docs/
+        type: documentation
+    - resource:
+        title: Pinebook Pro Wiki
+        link: https://wiki.pine64.org/wiki/Pinebook_Pro
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

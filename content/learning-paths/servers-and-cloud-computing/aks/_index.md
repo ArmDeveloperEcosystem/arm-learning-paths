@@ -13,7 +13,7 @@ prerequisites:
     - An Azure account
     - A machine with [Terraform](/install-guides/terraform/), [Azure CLI](/install-guides/azure-cli), and [Kubectl](/install-guides/kubectl/) installed
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Advanced
@@ -31,6 +31,30 @@ tools_software_languages:
 
 operatingsystems:
     - Linux
+
+further_reading:
+    - resource:
+        title: Azure Kubernetes Service on Arm based Ampere Altra processors
+        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/aks-on-arm-based-ampere
+        type: blog
+    - resource:
+        title: AKS documentation
+        link: https://docs.microsoft.com/en-us/azure/aks/
+        type: documentation
+    - resource:
+        title: Azure Developer documentation
+        link: https://docs.microsoft.com/en-us/azure/developer/
+        type: documentation
+    - resource:
+        title: Kubernetes documentation
+        link:  https://kubernetes.io/docs/home/
+        type: documentation
+    - resource:
+        title: Terraform Azure Providers documentation
+        link: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/
+        type: documentation
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
