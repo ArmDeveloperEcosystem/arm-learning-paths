@@ -14,7 +14,7 @@ Traditional databases store data in tables or objects with defined attributes. H
 
 Vector databases, on the other hand, are designed to store a large numbers of vectors (arrays of numbers), and provide algorithms to be able to search through those stored vectors. That makes it much easier to identify similarities by comparing the vector locations in N dimensional space. This is typically done using distance metrics like cosine similarity or Euclidean distance.
 
-How can we take complex ideas, like words, and translate them into number based vector? We do so using a process called embedding.
+How can we convert complex ideas, like the semantic meaning of a series of words, into a series of of number based vectors? We do so using a process called embedding.
 
 ### Embeddings
 
