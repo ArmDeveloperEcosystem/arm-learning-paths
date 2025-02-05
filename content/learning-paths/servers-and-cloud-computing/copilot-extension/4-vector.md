@@ -8,15 +8,17 @@ layout: learningpathall
 
 ## What is a Vector Database?
 
-A vector database is a specialized database designed to store and query vector representations of data. They are a crucial component of many AI applications. But what exactly are they, and how do they work?
+A vector databases are a specialized database designed to store and query vector representations of data. They are a crucial component of many AI applications. But what exactly are they, and how do they work?
 
-Traditional databases store data in tables or objects with defined attributes. However, they struggle to recognize similarities between data points that aren't explicitly defined. Vector databases, on the other hand, is simply an array of numbers. That makes it much easier to identify similarities by comparing the vector locations in Nth dimensional space. This is typically done using distance metrics like cosine similarity or Euclidean distance.
+Traditional databases store data in tables or objects with defined attributes. However, they struggle to recognize similarities between data points that aren't explicitly defined.
+
+Vector databases, on the other hand, are designed to store a large numbers of vectors (arrays of numbers), and provide algorithms to be able to search through those stored vectors. That makes it much easier to identify similarities by comparing the vector locations in N dimensional space. This is typically done using distance metrics like cosine similarity or Euclidean distance.
 
 How can we take complex ideas, like words, and translate them into number based vector? We do so using a process called embedding.
 
-## Embeddings
+### Embeddings
 
-Embeddings are vectors generated through an AI model. We can convert "tokens" (sections of text) into a point in Nth dimensional space. 
+Embeddings are vectors generated through an AI model. We can convert "tokens" (sections of text) into a point in N dimensional space. 
 
 Then for any given vector, like the embedded token input of a user, we can querying our vector database to find embedded data that is most similar. 
 
@@ -28,6 +30,10 @@ Now in our application, we can take the input from the user and embed it using t
 
 The retrieved resources are then used to augment the context for the LLM, which generates a final response that is both contextually relevant and contains accurate information.
 
+### FAISS
+
+#### TODO: Write about FAISS
+
 ## Collecting Data into Chunks
 
 We have provided chunk files for you in this example repo.
@@ -36,7 +42,7 @@ To access it...
 
 ### TODO: Finish this section once we have example data.
 
-## Combine Chunks into FAISS index
+### Combine Chunks into FAISS index
 
 Once you have a folder full of yaml files, copy the vector store creation script to that yaml directory.
 
