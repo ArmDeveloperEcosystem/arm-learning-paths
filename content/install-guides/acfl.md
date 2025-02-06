@@ -177,7 +177,7 @@ Arm Compiler for Linux is available to install with either the `dnf` or `yum` sy
 
 Install ACfL and prerequisites from the Amazon Linux 2023 `rpm` package repository with `dnf`:
 
-```bash
+```bash { target="fedora:latest" }
 sudo dnf update
 sudo dnf install 'dnf-command(config-manager)' procps psmisc make environment-modules
 sudo dnf config-manager --add-repo https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
@@ -186,7 +186,7 @@ sudo dnf install acfl
 
 Or using the equivalent `yum` commands:
 
-```bash
+```bash { target="fedora:latest" }
 sudo yum update
 sudo yum install 'dnf-command(config-manager)' procps psmisc make environment-modules
 sudo yum config-manager --add-repo https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
@@ -195,7 +195,7 @@ sudo yum install acfl
 
 The ACfL tools are now ready to use.
 
-### Red Hat Enterprise Linux (RHEL) 9 
+### Red Hat Enterprise Linux (RHEL) 9
 
 Arm Compiler for Linux is available to install with either the `dnf` or `yum` system package manager.
 
@@ -203,7 +203,7 @@ Arm Compiler for Linux is available to install with either the `dnf` or `yum` sy
 
 Install ACfL and prerequisites from the RHEL 9 `rpm` package repository with `dnf`:
 
-```bash
+```bash { target="fedora:latest" }
 sudo dnf update
 sudo dnf install 'dnf-command(config-manager)' procps psmisc make environment-modules
 sudo dnf config-manager --add-repo https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
@@ -212,7 +212,7 @@ sudo dnf install acfl
 
 Or using the equivalent `yum` commands:
 
-```bash
+```bash { target="fedora:latest" }
 sudo yum update
 sudo yum install 'dnf-command(config-manager)' procps psmisc make environment-modules
 sudo yum config-manager --add-repo https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
