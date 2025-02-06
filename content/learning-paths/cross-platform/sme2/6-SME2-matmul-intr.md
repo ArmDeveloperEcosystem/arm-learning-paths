@@ -323,7 +323,7 @@ advantage of the full power of SME2 --- once there is a good understanding of th
 available SME2 instructions. The predicates deal elegantly with the corner
 cases. And most importantly, our code will deal with different SVL from different
 hardware implementations without having to be recompiled. It's the important
-concept of *compile-once* / *run-everywhere*, plus the implementations that have
+concept of *compile-once*/*run-everywhere*, plus the implementations that have
 larger SVL will perform the computation faster (for the same binary).
 
 ### Compile and run
