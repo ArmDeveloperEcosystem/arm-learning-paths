@@ -166,7 +166,7 @@ def check(json_file, start, stop, md_article):
                     logging.info(f"Error getting test from JSON file, skipping")
                     continue
 
-                test_target = test.get("target")
+                test_target = test.get("target") or ""
                 if test_target and test_target != test_image:
                     bar(skipped=True)
                     continue
@@ -301,8 +301,11 @@ def check(json_file, start, stop, md_article):
         logging.info(f"Removing files that were created during testing from repository")
         for path in paths_to_remove:
             if os.path.isfile(path) or os.path.islink(path):
-                os.chmod(path, 0o777)
-                os.remove(path)
+                try:
+                    os.chmod(path, 0o777)
+                    os.remove(path)
+                except PermissionError as e:
+                    logging.debug(f"Failed to remove {path} with error: {e}")
 
             elif os.path.isdir(path):
                 shutil.rmtree(path)
