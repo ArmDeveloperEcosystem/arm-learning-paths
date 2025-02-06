@@ -43,11 +43,8 @@ We have provided a script in the [python-rag-extension github repo](https://gith
 It is recommended to use a virtual environment to manage dependencies. You can set up a virtual environment using `virtualenv`:
 
 ```sh
-# Install virtualenv if you haven't already
-pip install virtualenv
-
 # Create a virtual environment
-virtualenv venv
+python -m venv venv
 
 # Activate the virtual environment
 # On Windows
@@ -96,8 +93,10 @@ Ensure your local environment has your `AZURE_OPENAI_KEY` and `AZURE_OPENAI_ENDP
 
 Run the python script to create the FAISS index `.bin` and `.json` files.
 
+#### TODO: Confirm package installation - Need to install openai?
+
 ```bash
-python local_vectorstore_creation.py
+python chunks/local_vectorstore_creation.py
 ```
 
 Place those generated files in the root directory of your Flask application.
