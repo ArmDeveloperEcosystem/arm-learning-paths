@@ -300,16 +300,18 @@ def check(json_file, start, stop, md_article):
     if paths_to_remove:
         logging.info(f"Removing files that were created during testing from repository")
         for path in paths_to_remove:
-            if os.path.isfile(path) or os.path.islink(path):
-                try:
-                    os.chmod(path, 0o777)
-                    os.remove(path)
-                except PermissionError as e:
-                    logging.debug(f"Failed to remove {path} with error: {e}")
+            try:
 
-            elif os.path.isdir(path):
-                shutil.rmtree(path)
-            logging.debug(f"Removed {path}")
+                if os.path.isfile(path) or os.path.islink(path):
+                        os.chmod(path, 0o777)
+                        os.remove(path)
+
+
+                elif os.path.isdir(path):
+                    shutil.rmtree(path)
+                logging.debug(f"Removed {path}")
+            except PermissionError as e:
+                    logging.debug(f"Failed to remove {path} with error: {e}")
 
     # Stop instance
     if stop:
