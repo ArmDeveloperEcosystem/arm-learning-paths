@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 With the development environment ready, you can create a simple PyTorch model to test the setup.
 
-This example defines a small feedforward neural network for a classification task. The model consists of 2 linear layers with ReLU activation in between.
+This example defines a small feedforward neural network for a classification task. The model consists of two linear layers with ReLU activation in between.
 
 Use a text editor to create a file named `simple_nn.py` with the following code:
 
@@ -71,7 +71,7 @@ python -m examples.arm.aot_arm_compiler --model_name=examples/arm/simple_nn.py \
 --system_config=Ethos_U85_SYS_DRAM_Mid --memory_mode=Sram_Only
 ```
 
-From the Arm Examples directory, you build an embedded Arm runner with the `.pte` included. This allows you to get the most performance out of your model, and ensures compatibility with the CPU kernels on the FVP. Finally, generate the executable `arm_executor_runner`.
+From the Arm Examples directory, you can build an embedded Arm runner with the `.pte` included. This allows you to optimize the performance of your model, and ensures compatibility with the CPU kernels on the FVP. Finally, generate the executable `arm_executor_runner`.
 
 ```bash
 cd $HOME/executorch/examples/arm/executor_runner
@@ -93,7 +93,7 @@ cmake --build $ET_HOME/examples/arm/executor_runner/cmake-out --parallel -- arm_
 
 ```
 
-Now run the model on the Corstone-320 with the following command.
+Now run the model on the Corstone-320 with the following command:
 
 ```bash
 FVP_Corstone_SSE-320 \
@@ -124,4 +124,4 @@ I [executorch:arm_executor_runner.cpp:412] Model in 0x70000000 $
 I [executorch:arm_executor_runner.cpp:414] Model PTE file loaded. Size: 3360 bytes.
 ```
 
-You've now set up your environment for TinyML development on Arm, and tested a small PyTorch and ExecuTorch Neural Network.
+You have now set up your environment for TinyML development on Arm, and tested a small PyTorch and ExecuTorch Neural Network.
