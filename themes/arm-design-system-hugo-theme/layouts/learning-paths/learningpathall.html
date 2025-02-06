@@ -38,7 +38,8 @@ Calls to:
             {{ with .Site.GetPage $thisdir}}
                 <h6 id="learning-path-title" class="u-margin-top-1/2" style="font-size:1em; font-weight: normal;">{{ .Params.Title }}</h6>
                 <!-- Author name hidden but availible for analytics -->
-                <div hidden id="learning-path-author" data-author="{{.Params.author_primary}}"></div>
+                <div hidden id="learning-path-author" 
+                data-author='{{ if reflect.IsSlice .Params.author }}{{ delimit .Params.author ", " }}{{ else }}{{ .Params.author }}{{ end }}'></div>
             {{ end }}
 
 
