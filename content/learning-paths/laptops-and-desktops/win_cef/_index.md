@@ -10,7 +10,7 @@ learning_objectives:
     - Modify and style the application
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm[virtual machine](/learning-paths/cross-platform/woa_azure/).
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Visual Studio 2022.
 
 author_primary: Dawid Borycki

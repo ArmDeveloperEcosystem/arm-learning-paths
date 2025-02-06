@@ -41,13 +41,13 @@ The WindowsPerf GUI extension is composed of several key features, each designed
 - **Output Logging**: All commands executed through the GUI are logged, ensuring transparency and supporting performance analysis.
 - **Sampling UI**: Customize your sampling experience by selecting events, setting frequency and duration, choosing programs for sampling, and comprehensively analyzing results. See screenshot below.
 
-![Sampling preview #center](../_images/wperf-vs-extension-sampling-preview.png "Sampling settings UI Overview")
+![Sampling preview #center](/install_guides/_images/wperf-vs-extension-sampling-preview.png "Sampling settings UI Overview")
 
 
 - **Counting Settings UI**: Build a `wperf stat` command from scratch using the configuration interface, then view the output in the IDE or open it with Windows Performance Analyzer (WPA). See screenshot below.
 
 
-![Counting preview #center](../_images/wperf-vs-extension-counting-preview.png "Counting settings UI Overview")
+![Counting preview #center](/install_guides/_images/wperf-vs-extension-counting-preview.png "Counting settings UI Overview")
 
 ## Before you begin
 
@@ -69,7 +69,7 @@ To install the WindowsPerf Visual Studio Extension from Visual Studio:
 4. Click on the search bar (Ctrl+L) and type `WindowsPerf`.
 5. Click on the **Install** button and restart Visual Studio.
 
-![WindowsPerf install page #center](../_images/wperf-vs-extension-install-page.png)
+![WindowsPerf install page #center](/install_guides/_images/wperf-vs-extension-install-page.png)
 
 ### Installation from GitHub
 

@@ -62,7 +62,8 @@ The framework will check the return code. If not 0, an error will be reported.
 If a specific return code is expected, it can be specified as follows:
 
 ```markdown
-    The file myfile.txt doesn't exist yet and this command returns 1:
+    The file myfile.txt doesn't exist yet
+    and this command should return 1:
 
     ```bash { ret_code="1" }
     test -f myfile.txt
@@ -71,15 +72,20 @@ If a specific return code is expected, it can be specified as follows:
 
 #### Command output
 
-When a command output is displayed in the instructions:
+You can visualize the shell by specifying the `command_line` option. You can also test for expected output in the instructions by specifying the line(s) where the expected output should be displayed. This is done by adding the pipe symbol (`|`). Since the first line should contain the command itself, the indexing of the expected output lines starts at 2. You can specify a span (if the expected output is more than one line) with the dash symbol, for example `"| 2-10"`.
 
 ```markdown
     Let's check is this command return the expected output:
 
-    ```bash { command_line="root@localhost | 2 }
+    ```bash { command_line="root@localhost | 2" }
     echo "hello world"
     hello world
     ```
+```
+The code above renders to display the shell identity to the reader:
+```bash { command_line="root@localhost | 2" }
+echo "hello world"
+hello world
 ```
 
 The framework will check if the command returns the same output and report an error otherwise.
@@ -115,7 +121,7 @@ It is important to note that the framework does run each code block as a separat
 
     This command will fail:
 
-    ```bash { ret_code="1" }
+    ```bash
     test -f myfile.txt
     ```
 
@@ -210,14 +216,14 @@ test_images:
 
 The `test_maintenance` field is a boolean that enables the framework.
 
-The `test_images` field is a list of Docker container images the framework can pull to test the Learning Path instructions. Check [Docker Hub](https://hub.docker.com/) to explore available images. 
+The `test_images` field is a list of Docker container images the framework can pull to test the Learning Path instructions. Check [Docker Hub](https://hub.docker.com/) to explore available images.
 
 ## Run the framework
 
 From the project root folder, run:
 
 ```bash
-./tools/maintenance.py -i content/learning-paths/servers-and-cloud-computing/mynewlearningpath
+./tools/maintenance.py -i content/learning-paths/microcontrollers/my-new-learning-path
 ```
 
 If the Learning Path contains sub-articles, the framework will run their instructions in order, depending on the sub-articles weight.
@@ -228,48 +234,54 @@ Specify the `.md` file directly for single file tool install articles.
 ./tools/maintenance.py -i content/install-guides/mytool.md
 ```
 
-## Result summary
+If the tests are successful, that will be communicated through the console.
 
-The framework patches the metadata in the Learning Path's `_index.md` file or the .md file of the tool install to add a summary of the test status.
+### Investigating failures
+
+The framework will print information about any errors to the console. To display additional output, run with the `--debug` flag.
+
+```bash
+./tools/maintenance.py -i content/install-guides/mytool.md --debug
+```
+
+
+### Saving the results
+
+If you want the results to be saved, add the `--stats-report` flag to the command. This will update a statistics file `stats_current_test_info.yml`, which publishes the result to the website. In order to do that, the Learning Path or Install Guide needs to exist as an entry in the statistics file. Find the category for your content. If it's an Install Guide, the name will be that of the .md file without the extension. If it's a Learning Path, you will use the name of the directory. For example:
+
+```
+install-guides:
+    mytool:
+      readable_title: My Tool
+      tests_and_status:
+      - ubuntu:latest: passed
+microcontrollers:
+    my-new-learning-path:
+      readable_title: My new Learning Path
+      tests_and_status:
+      - ubuntu:latest: passed
+```
+
+```bash
+./tools/maintenance.py -i content/install-guides/mytool.md --stats-report
+```
 
 ```yaml
-test_maintenance: true
-test_images:
-- ubuntu:latest
-- fedora:latest
-test_status:
-- passed
-- failed
+tests_and_status:
+  - ubuntu:latest: passed
+  - fedora:latest: failed
 ```
 
-The field `test_status` is a list that indicated whether all tests passed for a corresponding Docker container image or if at least one test failed. 
+The field `tests_and_status` is a list that indicated whether all tests passed for a corresponding Docker container image or if at least one test failed.
 
-In the example above, the summary indicates that for this Learning Path all tests passed for the image `ubuntu:latest` but at least one test failed for the image `fedora:latest`. More information about the failures are stored in Junit XML files.
-
-## Visualize results
-
-Test results are stored in XML Junit files. One XML file is created by Learning Path sub-article.
-
-It is possible to visualize the results in a web browser. The XML files can be converted with [xunit-viewer](https://www.npmjs.com/package/xunit-viewer). 
-
-If not already installed, install [Node.js](https://nodejs.org/en/) and run:
-
-```
-npm i -g xunit-viewer
-```
-
-Then, launch the web server (e.g. on port 5050) on the folder where the XML Junit files have been created:
-
-```
-xunit-viewer -r content/learning-paths/servers-and-cloud-computing/mynewlearningpath/ -s -p 5050
-```
+In the example above, the summary indicates that for this Learning Path all tests passed for the image `ubuntu:latest` but at least one test failed for the image `fedora:latest`. More information about the failures can be found in the console.
 
 ## Advanced usage for embedded development
-#### Using the Corstone-300 FVP
+### Using the Corstone-300 FVP
 
-By default, the framework runs instructions on the Docker images specified by the [metadata](#edit-metadata). For embedded development, it is possible to build software in a container instance and then check its behaviour on the Corstone-300 FVP. 
+By default, the framework runs instructions on the Docker images specified by the [metadata](#edit-metadata). For embedded development, it is possible to build software in a container instance and then check its behaviour on the Corstone-300 FVP.
 
-For this, all container instances used by the test framework mount a volume in `/shared`. This is where software for the target FVP can be stored. To check the execution, the FVP commands just need to be identified as a `fvp` section for the framework. 
+For this, all container instances used by the test framework mount a volume in `/shared`. This is where software for the target FVP can be stored. To check the execution, the FVP commands just need to be identified as a `fvp` section for the framework.
 
 For example:
 

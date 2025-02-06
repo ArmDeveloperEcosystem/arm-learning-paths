@@ -28,6 +28,9 @@ tool_install: true              # Set to true to be listed in main selection pag
 multi_install: false            # Set to true if first page of multi-page article, else false
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
+test_maintenance: true
+test_images:
+  - ubuntu:latest
 ---
 [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio%20for%20Mobile) (formally known as `Arm Mobile Studio`) is a performance analysis tool suite for various application developers:
 
@@ -57,7 +60,7 @@ Run the supplied `Arm_Performance_Studio_<version>_windows_x86-64.exe` installer
 ### Linux
 
 Unpack the supplied `Arm Performance Studio` bundle to the desired location. For example:
-```command
+```console
 tar -xf Arm_Performance_Studio_2024.3_linux_x86-64.tgz
 ```
 ### macOS

@@ -93,6 +93,7 @@ def content_parser(directory, period):
 
     return [art_list, count, auth_list]
 
+
 """
 Initialize Plotly data structure for stats
 1 graph on the left with data for install tool guides
