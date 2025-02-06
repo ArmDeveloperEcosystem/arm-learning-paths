@@ -36,28 +36,70 @@ The retrieved resources are then used to augment the context for the LLM, which 
 
 ## Collecting Data into Chunks
 
-We have provided chunk files for you in this example repo.
+We have provided a script in the [python-rag-extension github repo](https://github.com/ArmDeveloperEcosystem/python-rag-extension/) we used before to convert an Arm learning path into a series of `chunk.yaml` files for use in our RAG application.
 
-To access it...
+### Chunk Creation Script Set p
 
-### TODO: Finish this section once we have example data.
+It is recommended to use a virtual environment to manage dependencies. You can set up a virtual environment using `virtualenv`:
 
-### Combine Chunks into FAISS index
+```sh
+# Install virtualenv if you haven't already
+pip install virtualenv
 
-Once you have a folder full of yaml files, copy the vector store creation script to that yaml directory.
+# Create a virtual environment
+virtualenv venv
+
+# Activate the virtual environment
+# On Windows
+venv\Scripts\activate
+# On macOS/Linux
+source venv/bin/activate
+```
+
+Once your virtual environment is set up, install the requirements from the [single_lp_chunker/requirements.txt](https://github.com/ArmDeveloperEcosystem/python-rag-extension/blob/main/single_lp_chunker/requirements.txt) file.
+
+```sh
+pip install -r single_lp_chunker/requirements.txt
+```
+
+### Generate Chunk Files
+
+To generate chunks, use the following command:
+
+```sh
+python single_lp_chunker/chunk_a_learning_path.py --url <LEARNING_PATH_URL>
+```
+
+Replace `<LEARNING_PATH_URL>` with the URL of the learning path you want to process. If no URL is provided, the script will default to a [known learning path URL](https://learn.arm.com/learning-paths/cross-platform/kleidiai-explainer).
+
+The script will process the specified learning path and save the chunks as YAML files in a `./chunks/` directory.
+
+## Combine Chunks into FAISS index
+
+Once you have a `./chunks/` directory full of yaml files, we now need to use FAISS to create our vector database.
+
+### Database Creation Script Set Up
+
+copy the vector store creation script to that yaml directory.
 
 The file is located in the root of the example repo.
 
 ```bash
-cp local_vectorstore_creation.py yaml_data
+cp local_vectorstore_creation.py chunks
 ```
-
-### Run the script:
 
 Ensure your local environment has your `AZURE_OPENAI_KEY` and `AZURE_OPENAI_ENDPOINT` set.
 
-Then run the python script to create the FAISS index bin file.
+#### TODO: Guidance to how to get these keys.
+
+### Generate Vector Database Files
+
+Run the python script to create the FAISS index `.bin` and `.json` files.
 
 ```bash
 python local_vectorstore_creation.py
 ```
+
+Place those generated files in the root directory of your Flask application.
+
+Your flask application is now ready for deployment.
