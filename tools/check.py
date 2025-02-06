@@ -154,7 +154,7 @@ def check(json_file, start, stop, md_article):
     for n_image, test_image in zip(range(0, len(test_images)), test_images):
         logging.info(f"--- Testing on {test_image} ---")
 
-        if test_image != "ubuntu":
+        if "ubuntu" not in test_image:
             container_name = init_container(i_img=n_image, img=test_image)
             logging.info(f"{container_name} initialized")
 
