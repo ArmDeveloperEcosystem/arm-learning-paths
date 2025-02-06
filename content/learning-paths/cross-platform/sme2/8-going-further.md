@@ -11,7 +11,7 @@ layout: learningpathall
 In this Learning Path, in order to show how to use SME2 for matrix
 multiplication, only floating point multiplication was covered.
 In practice, a library or framework that supports matrix multiplication should
-cover all kinds of integers, such as 8-bit and 16-bit.
+cover all kinds of integers.
 
 You can see that the algorithm structure for matrix preprocessing as well
 as multiplication with the outer product does not change at all for other data
@@ -26,32 +26,27 @@ This enables the library writer to focus on the algorithm, testing, and other op
 
 ## Unroll further
 
-You might have noticed that ``matmul_intr_impl`` computes only one tile at a
-time, for the sake of simplicity. 
+You might have noticed that ``matmul_intr_impl`` computes only one tile at a time, for the sake of simplicity. 
 
 SME2 does support multi-vector instructions, and some were used in ``preprocess_l_intr``, for example, ``svld1_x2``. 
 
-Loading two vectors at a time enables the simultaneous computing of more tiles, and as the
-input matrices have been laid out in memory in a neat way, the consecutive
+Loading two vectors at a time enables the simultaneous computing of more tiles, and as the input matrices have been laid out in memory in a neat way, the consecutive
 loading of the data is efficient. Implementing this approach can make improvements to the ``macc`` to load ``ratio``.
 
-In order to check your understanding of SME2, you can try to implement this unrolling yourself. You also have an easy way to check your work, as your results can be compared to the expected
+In order to check your understanding of SME2, you can try to implement this unrolling yourself. You can check your work by comparing your results to the expected
 reference values.
 
 ## Apply strategies
 
-An avenue for optimization is to use strategies that are flexible depending on the matrices'
-dimensions. This is especially easy to set up when working at the C or C++ level,
+One method for optimization is to use strategies that are flexible depending on the matrices' dimensions. This is especially easy to set up when working in C or C++,
 rather than directly in assembly language. 
 
 By playing with the mathematical properties of matrix multiplication and the outer product, it is possible to minimize data movement as well as reduce the overall number of operations to perform.
 
-For example, it is a common that one of the matrices is actually a vector, in that it has a single row or column, and then it becomes very advantageous to transpose it. Can you see why? 
+For example, it is common that one of the matrices is actually a vector, meaning that it has a single row or column, and then it becomes advantageous to transpose it. Can you see why? 
 
-The answer is that as the elements are stored contiguously in memory, an ``Nx1`` and ``1xN`` matrices have the exact same memory layout. The transposition becomes a no-op, and the matrix elements stay at the same place in memory.
+The answer is that as the elements are stored contiguously in memory, an ``Nx1`` and ``1xN`` matrices have the exact same memory layout. The transposition becomes a no-op, and the matrix elements stay in the same place in memory.
 
-An even more *degenerated* case that is easy to manage is when one of
-the matrices is essentially a scalar, which means that it is a matrix with one row and one column.
+An even more *degenerated* case that is easy to manage is when one of the matrices is essentially a scalar, which means that it is a matrix with one row and one column.
 
-Although our current code handles it correctly from a results point of view, a
-different algorithm and use of instructions might be more efficient. Can you think of an implementation?
+Although our current code handles it correctly from a results point of view, a different algorithm and use of instructions might be more efficient. Can you think of another way?

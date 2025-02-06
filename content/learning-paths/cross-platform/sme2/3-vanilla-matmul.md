@@ -18,7 +18,7 @@ rows x Ac columns] and B [Br rows x Bc columns], to produce an output matrix C
 and each column of B, multiplying each element of the A row with its corresponding
 element in the B column then summing all these products, as Figure 2 shows.
 
-![example image alt-text#center](matmul.png "Figure 2. Standard Matrix Multiplication.")
+![example image alt-text#center](matmul.png "Figure 2: Standard Matrix Multiplication.")
 
 This implies that the A, B, and C matrices have some constraints on their
 dimensions:

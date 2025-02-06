@@ -7,11 +7,10 @@ layout: learningpathall
 ---
 ## Matrix multiplication with SME2 intrinsics
 
-In this section, you will write an SME2 optimized matrix multiplication in C
-using the intrinsics that the compiler provides.
+In this section, you will write an SME2 optimized matrix multiplication in C using the intrinsics that the compiler provides.
 
 *Intrinsics*, also know known as *compiler intrinsics* or *intrinsic functions*, are the functions available to application developers that the compiler has an
-intimate knowledge of. This enables the compiler to either translate the function to a very specific instruction or to perform specific optimizations, or both.
+intimate knowledge of. This enables the compiler to either translate the function to a specific instruction or to perform specific optimizations, or both.
 
 You can learn more about intrinsics in this [Wikipedia
 Article on Intrinsic Function](https://en.wikipedia.org/wiki/Intrinsic_function).
@@ -26,18 +25,17 @@ is supported by the main compilers, most notably [GCC](https://gcc.gnu.org/) and
 
 ## Streaming mode
 
-In the previous page, the assembly language gave the programmer full access to
-the processor features. However, this comes at a cost in terms of complexity and
+In the previous page, the assembly language gave the programmer full access to the processor features. However, this comes at a cost in terms of complexity and
 maintenance, especially when one has to manage large code bases with deeply-nested function calls. The assembly version is very low level, and does not deal
 fully with the SME state. 
 
 In real-world large-scale software, the program moves back and forth from streaming mode, and some streaming mode routines call other streaming mode routines, which means that some state needs to be saved and restored. This includes the ZA storage. This is defined in the ACLE and
-supported by the compiler: the programmer *just* has to annotate the function
+supported by the compiler: the programmer *just* has to annotate the function 
 with some keywords and set up some registers (see function ``setup_sme`` in
 ``misc.c`` for an example). See [Introduction to streaming and non-streaming mode](https://arm-software.github.io/acle/main/acle.html#controlling-the-use-of-streaming-mode)
 for further information. The rest of this section references information from the ACLE.
 
-The AArch64 architecture defines a concept called “streaming mode”, controlled
+The AArch64 architecture defines a concept called *streaming mode*, controlled
 by a processor state bit called ``PSTATE.SM``. At any given point in time, the
 processor is either in streaming mode (``PSTATE.SM==1``) or in non-streaming mode
 (``PSTATE.SM==0``). There is an instruction called ``SMSTART`` to enter streaming mode
@@ -57,14 +55,14 @@ Streaming mode has three main effects on C and C++ code:
   means that their associated ACLE intrinsics can only be used in non-streaming
   mode. These intrinsics are called “non-streaming intrinsics”.
 
-The C and C++ standards define the behavior of programs in terms of an “abstract
-machine”. As an extension, the ACLE specification applies the distinction
+The C and C++ standards define the behavior of programs in terms of an *abstract
+machine*. As an extension, the ACLE specification applies the distinction
 between streaming mode and non-streaming mode to this abstract machine: at any
 given point in time, the abstract machine is either in streaming mode or in
 non-streaming mode.
 
 This distinction between processor mode and abstract machine mode is mostly just
-a dry specification detail. However, the usual “as if” rule applies: the
+a specification detail. However, the usual “as if” rule applies: the
 processor's actual mode at runtime can be different from the abstract machine's
 mode, provided that this does not alter the behavior of the program. One
 practical consequence of this is that C and C++ code does not specify the exact
@@ -75,9 +73,9 @@ one implied by the source code.
 
 ACLE provides attributes that specify whether the abstract machine executes statements:
 
-- In non-streaming mode, in which case they are called “non-streaming statements”.
-- In streaming mode, in which case they are called “streaming statements”.
-- In either mode, in which case they are called “streaming-compatible statements”.
+- In non-streaming mode, in which case they are called *non-streaming statements*.
+- In streaming mode, in which case they are called *streaming statements*.
+- In either mode, in which case they are called *streaming-compatible statements*.
 
 SME provides an area of storage called ZA, of size ``SVL.B`` x ``SVL.B`` bytes. It
 also provides a processor state bit called ``PSTATE.ZA`` to control whether ZA
@@ -190,27 +188,27 @@ The matrix preprocessing is performed in a double nested loop, over the ``M``
 have an ``SVL`` step increment, which corresponds to the horizontal and vertical
 dimensions of the ZA storage that will be used. The dimensions of ``a`` may not
 be perfect multiples of ``SVL`` though... which is why the predicates ``pMDim``
-(line 9) and ``pKDim`` (line 14) are computed in order to know which rows (resp.
+(line 9) and ``pKDim`` (line 14) are computed in order to know which rows (respectively
 columns) are valid.
 
 The core of ``preprocess_l_intr`` is made of two parts:
 
-- lines 17 - 37: load matrix tile as rows. In this part, loop unrolling has been
+- Lines 17 - 37: load matrix tile as rows. In this part, loop unrolling has been
   used at 2 different levels. At the lowest level, 4 rows are loaded at a time
   (lines 24-27). But this goes much further because as SME2 has multi-vectors
   operations (hence the ``svld1_x2`` intrinsic to load 2 rows in 2 vector
   registers), this allows the function to load the consecutive row, which
-  happens to be the row from the neighboring tile on the right : this means 2
+  happens to be the row from the neighboring tile on the right: this means two
   tiles are processed at once. At line 29-32, the pairs of vector registers are
   rearranged on quads of vector registers so they can be stored horizontally in
-  the 2 tiles' ZA storage at lines 33-36 with the ``svwrite_hor_za32_f32_vg4``
+  the two tiles' ZA storage at lines 33-36 with the ``svwrite_hor_za32_f32_vg4``
   intrinsic. Of course, as the input matrix may not have dimensions that are
   perfect multiples of ``SVL``, the ``p0``, ``p1``, ``p2`` and ``p3`` predicates
   are computed with the ``svpsel_lane_c32`` intrinsic (lines 18-21) so that
   elements outside of the input matrix are set to 0 when they are loaded at
   lines 24-27.
 
-- lines 39 - 51: read the matrix tile as columns and store them. Now that the 2
+- Lines 39 - 51: read the matrix tile as columns and store them. Now that the 2
   tiles have been loaded *horizontally*, they will be read *vertically* with the
   ``svread_ver_za32_f32_vg4`` intrinsic to quad-registers of vectors (``zq0``
   and ``zq1``) at lines 45-48 and then stored with the ``svst1`` intrinsic to
@@ -286,18 +284,18 @@ Note again that ``matmul_intr_impl`` function has been annotated at line 4 with:
 
 - ``__arm_inout("za")``, because the function reuses the ZA storage from its caller.
 
-The multiplication with the outer product is performed in a double nested loop,
+The multiplication with the outer product is performed in a double-nested loop,
 over the ``M`` (line 7) and ``N`` (line 11) dimensions of the input matrices
 ``matLeft_mod`` and ``matRight``. Both loops have an ``SVL`` step increment,
 which corresponds to the horizontal and vertical dimensions of the ZA storage
 that will be used as one tile at a time will be processed. The ``M`` and ``N``
 dimensions of the inputs may not be perfect multiples of ``SVL`` so the
-predicates ``pMDim`` (line 9) (resp. ``pNDim`` at line 13) are computed in order
-to know which rows (resp. columns) are valid.
+predicates ``pMDim`` (line 9) (respectively ``pNDim`` at line 13) are computed in order
+to know which rows (respectively columns) are valid.
 
 The core of the multiplication is done in 2 parts:
 
-- outer-product and accumulation at lines 15-25. As ``matLeft`` has been
+- Outer-product and accumulation at lines 15-25. As ``matLeft`` has been
   laid-out perfectly in memory with ``preprocess_l_intr``, this part becomes
   straightforward. First, the tile is zeroed with the ``svzero_za`` intrinsics
   at line 16 so the outer products can be accumulated in the tile. The outer
@@ -310,7 +308,7 @@ The core of the multiplication is done in 2 parts:
   Note again the usage of the ``pMDim`` and ``pNDim`` predicates to deal
   correctly with the rows and columns respectively which are out of bounds.
 
-- storing of the result matrix at lines 27-46. The previous part has computed
+- Storing of the result matrix at lines 27-46. The previous part has computed
   the result of the matrix multiplication for the current tile, which now needs
   to be written back to memory. This is done with the loop at line 29 which will
   iterate over all rows of the tile: the ``svst1_hor_za32`` intrinsic at lines
@@ -333,7 +331,7 @@ larger SVL will perform the computation faster (for the same binary).
 The main function is exactly the same that was used for the assembly version,
 with the ``IMPL`` macro defined to be ``intr`` in the ``Makefile``.
 
-First, make sure that the ``sme2_matmul_intr`` executable is up to date:
+First, make sure that the ``sme2_matmul_intr`` executable is up-to-date:
 
 ```BASH
 docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v1 make sme2_matmul_intr
@@ -345,7 +343,7 @@ Then execute ``sme2_matmul_intr`` on the FVP:
 docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v1 ./run-fvp.sh sme2_matmul_intr
 ```
 
-which should output something similar to:
+This should output something similar to:
 
 ```TXT
 SME2 Matrix Multiply fp32 *intr* example with args 125 35 70
