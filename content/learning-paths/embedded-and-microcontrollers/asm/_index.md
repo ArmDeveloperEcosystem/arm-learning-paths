@@ -3,7 +3,7 @@ title: Write Arm Assembler functions
 
 minutes_to_complete: 60
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 who_is_this_for: This is an introductory topic for software developers who are interested in programming microcontrollers with C/Assembly.
 
@@ -27,6 +27,12 @@ operatingsystems:
 tools_software_languages:
     - Coding
     - Keil
+
+further_reading:
+    - resource:
+        title: Efficient Embedded Education Kit
+        link: https://github.com/arm-university/Efficient-Embedded-Systems-Design-Education-Kit
+        type: website
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

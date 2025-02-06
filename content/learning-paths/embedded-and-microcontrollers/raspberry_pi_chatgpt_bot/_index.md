@@ -18,7 +18,7 @@ prerequisites:
     - A microSD card with at least 16GB of storage
     - A Linux compatible USB microphone and USB speakers or a USB audio device with a microphone and speakers
 
-author_primary: Gabriel Peterson
+author: Gabriel Peterson
 
 ### Tags
 skilllevels: Introductory
@@ -35,6 +35,18 @@ tools_software_languages:
     - ChatGPT
     - Porcupine
     - Python
+
+
+further_reading:
+    - resource:
+        title: OpenAI Documentation
+        link: https://github.com/dusty-nv/jetson-inference
+        type: documentation
+    - resource:
+        title: Picovoice's Porcupine Documentation
+        link: https://picovoice.ai/docs/porcupine/
+        type: documentation
+
 
 
 ### FIXED, DO NOT MODIFY

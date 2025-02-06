@@ -13,7 +13,10 @@ learning_objectives:
 prerequisites:
     - An AWS Graviton4 r8g.16xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
 
-author_primary: Pareena Verma, Jason Andrews, and Zach Lasiuk
+author:
+    - Pareena Verma
+    - Jason Andrews
+    - Zach Lasiuk
 
 ### Tags
 skilllevels: Introductory
@@ -26,6 +29,26 @@ tools_software_languages:
     - LLM
     - GenAI
     - Python
+
+
+further_reading:
+    - resource:
+        title: Getting started with Llama
+        link: https://llama.meta.com/get-started
+        type: documentation
+    - resource:
+        title: Hugging Face Documentation
+        link: https://huggingface.co/docs
+        type: documentation
+    - resource:
+        title: Democratizing Generative AI with CPU-based inference 
+        link: https://blogs.oracle.com/ai-and-datascience/post/democratizing-generative-ai-with-cpu-based-inference
+        type: blog
+    - resource: 
+        title: Llama-2-7B-Chat-GGUF
+        link: https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY

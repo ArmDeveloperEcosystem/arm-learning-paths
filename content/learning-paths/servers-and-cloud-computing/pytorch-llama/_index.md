@@ -15,7 +15,12 @@ learning_objectives:
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) with at least 16 CPUs from a cloud service provider or an on-premise Arm server.
 
-author_primary: Nikhil Gupta, Pareena Verma, Nobel Chowdary Mandepudi, Ravi Malhotra
+author:
+    - Nikhil Gupta
+    - Pareena Verma
+    - Nobel Chowdary Mandepudi
+    - Ravi Malhotra
+    - Konstantinos Margaritis
 
 ### Tags
 skilllevels: Introductory
@@ -29,6 +34,26 @@ tools_software_languages:
     - GenAI
     - Python
     - PyTorch
+
+
+further_reading:
+    - resource:
+        title: Hugging Face Documentation
+        link: https://huggingface.co/docs
+        type: documentation
+    - resource:
+        title: PyTorch Inference Performance Tuning on AWS Graviton Processors
+        link: https://pytorch.org/tutorials/recipes/inference_tuning_on_aws_graviton.html
+        type: documentation
+    - resource:
+        title: ML inference on Graviton CPUs with PyTorch
+        link: https://github.com/aws/aws-graviton-getting-started/blob/main/machinelearning/pytorch.md
+        type: documentation
+    - resource:
+        title: PyTorch Documentation
+        link: https://pytorch.org/docs/stable/index.html
+        type: documentation
+
 
 
 ### FIXED, DO NOT MODIFY

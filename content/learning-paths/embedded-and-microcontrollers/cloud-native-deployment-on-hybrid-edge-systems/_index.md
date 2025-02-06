@@ -15,7 +15,7 @@ prerequisites:
     - A valid account with [Arm Virtual Hardware](https://app.avh.arm.com/login)
     - An Arm Linux host machine (if you want to build your own runtime and container image)
 
-author_primary: Basma El Gaabouri
+author: Basma El Gaabouri
 
 ### Tags
 skilllevels: Introductory
@@ -30,6 +30,22 @@ tools_software_languages:
     - Containerd
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: K3s Quick start Guide 
+        link: https://docs.k3s.io/quick-start
+        type: documentation
+    - resource:
+        title: Smarter Project GitHub page
+        link: https://github.com/smarter-project/
+        type: website
+    - resource:
+        title: Hybrid-runtime GitHub page 
+        link: https://github.com/smarter-project/hybrid-runtime/tree/main
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY

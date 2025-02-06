@@ -11,7 +11,7 @@ learning_objectives:
 prerequisites:
     - A computer with [Terraform](/install-guides/terraform/) and the [AWS CLI](/install-guides/aws-cli/) installed. 
     
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -27,6 +27,22 @@ tools_software_languages:
 
 operatingsystems:
     - Linux
+
+further_reading:
+    - resource:
+        title: AWS Lambda Function Manual
+        link: https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
+        type: documentation
+    - resource:
+        title: AWS Lambda Getting Started
+        link: https://aws.amazon.com/lambda/getting-started/
+        type: documentation
+    - resource:
+        title: AWS Lambda performance with Java 21
+        link: https://community.aws/content/2juXXgrDDaUdmi902LHwilBhvNU/aws-lambda-performance-with-java-21-x86-vs-arm64-part-1-initial-measurements-and-comparisons?lang=en
+        type: blog
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -10,7 +10,7 @@ minutes_to_complete: 10
 
 official_docs: https://github.com/arm-developer-tools/windowsperf-vs-extension
 
-author_primary: Nader Zouaoui
+author: Nader Zouaoui
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

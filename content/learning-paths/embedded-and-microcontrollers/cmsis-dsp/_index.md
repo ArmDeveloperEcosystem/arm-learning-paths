@@ -14,7 +14,7 @@ prerequisites:
     - Some familiarity with embedded programming
     - A host machine to run Keil MDK development tools
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -31,6 +31,12 @@ tools_software_languages:
     - Keil
     - MDK
     - Arm Development Studio
+
+further_reading:
+    - resource:
+        title: CMSIS-DSP Documentation
+        link: https://arm-software.github.io/CMSIS_5/DSP/html/modules.html
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

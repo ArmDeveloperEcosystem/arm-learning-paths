@@ -15,7 +15,7 @@ prerequisites:
     - Knowledge about building workflows
     - Access to an aarch64 or x86_64 machine running Linux
 
-author_primary: Kasper Mecklenburg
+author: Kasper Mecklenburg
 
 ### Tags
 skilllevels: Advanced
@@ -30,6 +30,24 @@ tools_software_languages:
     - Arm Compiler for Linux
     - Docker
     - Neon
+
+further_reading:
+    - resource:
+        title: Porting architecture specific intrinsics
+        link: /learning-paths/cross-platform/intrinsics/
+        type: blog
+    - resource:
+        title: SIMD-everywhere repository
+        link: https://github.com/simd-everywhere/simde
+        type: website
+    - resource:
+        title: Migrating applications to Arm servers
+        link: /learning-paths/servers-and-cloud-computing/migration
+        type: blog
+    - resource:
+        title: Port Code to Arm Scalable Vector Extension (SVE)
+        link: /learning-paths/servers-and-cloud-computing/sve/
+        type: blog
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

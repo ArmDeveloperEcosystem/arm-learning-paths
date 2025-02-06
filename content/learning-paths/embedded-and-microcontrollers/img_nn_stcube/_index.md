@@ -16,7 +16,7 @@ prerequisites:
     - Familiarity with C programming on microcontrollers
     - STM32 B-L475E-IOT01A2 board
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Advanced
@@ -29,6 +29,17 @@ tools_software_languages:
     - Coding
     - TensorFlow
     - STM32
+
+further_reading:
+    - resource:
+        title: Jupyter documentation
+        link: https://docs.jupyter.org/en/latest/
+        type: documentation
+    - resource:
+        title: Getting started with STM32 MCU Discovery Kits software development tools
+        link: https://www.st.com/resource/en/user_manual/um2052-getting-started-with-stm32-mcu-discovery-kits-software-development-tools-stmicroelectronics.pdf
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

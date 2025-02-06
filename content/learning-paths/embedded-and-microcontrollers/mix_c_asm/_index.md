@@ -3,7 +3,7 @@ title: Processing Text in Mixed C/Assembly Language
 
 minutes_to_complete: 20
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 who_is_this_for: This is an introductory topic for software developers interested in efficiently programming microcontrollers with C/Assembly.
 
@@ -37,6 +37,13 @@ tools_software_languages:
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================
+further_reading:
+    - resource:
+        title: Nucleo F401RE Documentation
+        link: https://www.st.com/en/evaluation-tools/nucleo-f401re.html
+        type: documentation
+
+
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # Indicates this should be surfaced when looking for related content. Only set for _index.md of learning path content.

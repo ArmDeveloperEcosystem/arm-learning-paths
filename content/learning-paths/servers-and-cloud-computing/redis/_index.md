@@ -14,7 +14,7 @@ prerequisites:
     - An Arm based instance from a cloud service provider, or an on-premise Arm server.
     - If you do not have an Arm node, the next section discusses some options.
 
-author_primary: Elham Harirpoush
+author: Elham Harirpoush
 ### Tags
 skilllevels: Introductory
 subjects: Databases
@@ -25,6 +25,14 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Redis
+
+further_reading:
+    - resource:
+        title: Redis documentation
+        link: https://redis.io/docs/
+        type: documentation
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

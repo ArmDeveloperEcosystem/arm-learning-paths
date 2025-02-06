@@ -14,7 +14,7 @@ prerequisites:
     - Any code editor, we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).
     - Visual Studio 2022 with Arm build tools. [Refer to this guide for the installation steps](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio)
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -26,6 +26,17 @@ operatingsystems:
 tools_software_languages:
     - Python
     - Visual Studio Code
+
+further_reading:
+    - resource:
+        title: CPython
+        link: https://github.com/python/cpython/
+        type: documentation
+    - resource:
+        title: Windows on Arm now supported in Python 3.11
+        link: https://old.linaro.org/blog/windows-on-arm-now-supported-in-python-3-11-release/
+        type: blog    
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

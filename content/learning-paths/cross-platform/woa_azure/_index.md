@@ -11,7 +11,7 @@ learning_objectives:
 prerequisites:
     - Valid Azure Cloud account
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -29,6 +29,13 @@ shared_path: true
 shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
+
+further_reading:
+    - resource:
+        title: Azure Virtual Machines with Ampere Altra Arm–based processors
+        link: https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - Nothing
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 
 ### Tags
@@ -24,6 +24,13 @@ operatingsystems:
     - Windows
     - ChromeOS
 tools_software_languages:
+
+
+further_reading:
+    - resource:
+        title: All Chromebooks with Arm Processors 
+        link: https://www.linuxmadesimple.info/2019/08/all-chromebooks-with-arm-processors-in.html
+        type: website
 
 
 ### FIXED, DO NOT MODIFY

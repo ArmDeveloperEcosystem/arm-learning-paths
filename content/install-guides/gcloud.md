@@ -8,7 +8,7 @@ additional_search_terms:
 
 layout: installtoolsall
 minutes_to_complete: 5
-author_primary: Jason Andrews
+author: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://cloud.google.com/sdk/docs/install-sdk#deb

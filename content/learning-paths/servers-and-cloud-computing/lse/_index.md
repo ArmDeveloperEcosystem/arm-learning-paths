@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) to access instance types with different AWS Graviton processors. If you don't have an AWS account, you can substitute other Arm Linux computers.
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -24,6 +24,18 @@ operatingsystems:
 tools_software_languages:
     - GCC
     
+further_reading:
+    - resource:
+        title: Improving Java performance on Neoverse N1 systems
+        link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/java-performance-on-neoverse-n1
+        type: blog
+    - resource:
+        title: Arm's LSE for atomics and MySQL
+        link: https://mysqlonarm.github.io/ARM-LSE-and-MySQL/
+        type: blog
+
+
+
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly

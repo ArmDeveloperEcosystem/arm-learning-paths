@@ -219,7 +219,7 @@ Called from:
                 <h4>Read related resources</h4>
                 <p>Find more information about the topics in this Learning Path:</p>
                 <ul class="fa-ul u-margin-left-0">
-                {{ range $index, $r := .context.Params.further_reading }}
+                {{ range $index, $r := (index .learningpathfiles 0).Params.further_reading }} {{/* obtain from index.md */}}
                     {{ with $r.resource}}
                         <li class="u-margin-bottom-1/2"><i class='u-margin-right-1/2 fa-solid 
                                     {{if eq .type "blog" }}
@@ -292,12 +292,20 @@ Called from:
                     {{ $event_categories := split (index $row 9) "; " }}
 
                     {{ if in $event_categories $lp_category_title }}
-                        {{/* If event has a higher priority than the previous one, update the event_i */}}
-                        {{ if or (eq $event_i "") (gt $event_priority (int (index $row 1))) }}
-                            {{ $event_priority = (int (index $row 1)) }}
-                            {{ $event_i = $i}}
+
+                        {{ $startDate := (index $row 2) | time.AsTime }}
+                        {{ $tenDaysLater := now.AddDate 0 0 10 }} {{/* give 10 days buffer to hide */}}
+                        {{ if ge $startDate $tenDaysLater }}
+                            {{/* If event has a higher priority than the previous one, update the event_i */}}
+                            {{ if or (eq $event_i "") (gt $event_priority (int (index $row 1))) }}
+                                {{ $event_priority = int (index $row 1) }}
+                                {{ $event_i = $i }}
+                            {{ end }}
                         {{ end }}
                     {{ end }}
+
+
+
                 {{ end }}
             
                 {{ if $event_i }}

@@ -14,7 +14,7 @@ prerequisites:
     - A CMSIS v5 based project.
     - A basic understanding of the CMSIS-Pack system.
 
-author_primary: Christopher Seidl
+author: Christopher Seidl
 
 ### Tags
 skilllevels: Advanced
@@ -28,6 +28,20 @@ operatingsystems:
     - Baremetal
     - RTOS
 
+
+further_reading:
+    - resource:
+        title: Keil Studio User's Guide
+        link: https://developer.arm.com/documentation/108029/latest/
+        type: documentation
+    - resource:
+        title: Introducing Keil MDK Version 6
+        link: https://community.arm.com/arm-community-blogs/b/internet-of-things-blog/posts/keil-mdk-version-6
+        type: blog
+    - resource:
+        title: keil.arm.com
+        link: https://keil.arm.com
+        type: website
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

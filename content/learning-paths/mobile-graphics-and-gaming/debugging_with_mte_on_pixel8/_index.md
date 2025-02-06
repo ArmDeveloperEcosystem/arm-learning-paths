@@ -18,7 +18,7 @@ prerequisites:
     - A USB cable to connect your computer to your Google Pixel 8.
     - Android Debug Bridge (adb) installed on your device. If needed, follow the steps in the [Android Debug Bridge](https://developer.android.com/tools/adb) documentation.
 
-author_primary: Roberto Lopez Mendez
+author: Roberto Lopez Mendez
 
 ### Tags
 skilllevels: Advanced
@@ -30,6 +30,26 @@ tools_software_languages:
     - Memory Tagging Extension
 operatingsystems:
     - Android
+
+
+further_reading:
+    - resource:
+        title: MTE User Guide for Android OS
+        link: https://developer.arm.com/documentation/108035/latest/
+        type: documentation
+    - resource:
+        title: Arm Memory Tagging Extension
+        link: https://developer.android.com/ndk/guides/arm-mte
+        type: website
+    - resource:
+        title: AArch64 TAGGED ADDRESS ABI
+        link: https://www.kernel.org/doc/Documentation/arm64/tagged-address-abi.rst
+        type: documentation
+    - resource:
+        title: Enhanced Security Through MTE
+        link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/enhanced-security-through-mte
+        type: documentation
+
 
 
 ### FIXED, DO NOT MODIFY

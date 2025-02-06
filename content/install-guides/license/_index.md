@@ -1,6 +1,6 @@
 ---
 title: Arm Software Licensing
-author_primary: Ronan Synnott
+author: Ronan Synnott
 additional_search_terms:
 - success kits
 - ssk

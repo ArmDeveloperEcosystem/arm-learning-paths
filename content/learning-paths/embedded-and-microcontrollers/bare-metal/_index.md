@@ -15,7 +15,7 @@ learning_objectives:
 prerequisites:
     - Some familiarity with embedded programming is assumed
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -29,6 +29,17 @@ tools_software_languages:
     - Arm Development Studio
     - Arm Compiler for Embedded
     - Arm Fast Models
+
+further_reading:
+    - resource:
+        title: Arm Cortex-A Series Programmer's Guide for ARMv8-A
+        link: https://developer.arm.com/documentation/den0024
+        type: documentation
+    - resource:
+        title: Arm Compiler for Embedded User Guide
+        link: https://developer.arm.com/documentation/100748
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

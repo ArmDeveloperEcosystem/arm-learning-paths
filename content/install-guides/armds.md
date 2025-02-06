@@ -18,7 +18,7 @@ test_maintenance: true
 test_images:
   - ubuntu:latest
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/101469

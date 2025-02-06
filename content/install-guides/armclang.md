@@ -7,7 +7,7 @@ additional_search_terms:
 
 layout: installtoolsall
 minutes_to_complete: 15
-author_primary: Ronan Synnott
+author: Ronan Synnott
 multi_install: false
 multitool_install_part: false
 official_docs: https://developer.arm.com/documentation/100748

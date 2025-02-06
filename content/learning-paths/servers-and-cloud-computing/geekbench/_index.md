@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
 - An Arm computer running Linux. You can use a cloud instance, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/).
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 skilllevels: Introductory
 
@@ -29,6 +29,21 @@ test_status:
     - passed
 tools_software_languages:
     - Geekbench
+
+further_reading:
+    - resource:
+        title: Performance Analysis for Arm vs x86 CPUs in the Cloud
+        link: https://www.infoq.com/articles/arm-vs-x86-cloud-performance/
+        type: blog
+    - resource:
+        title: GCP, AWS, and Azure ARM-based server performance comparison
+        link: https://apisix.apache.org/blog/2022/08/12/arm-performance-google-aws-azure-with-apisix/
+        type: blog
+    - resource:
+        title: Geekbench How it actually works
+        link: https://www.xda-developers.com/geekbench/
+        type: website
+
 
 weight: 1
 layout: learningpathall

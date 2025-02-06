@@ -17,7 +17,7 @@ prerequisites:
     - A Windows, macOS, or Linux computer with Docker installed, any architecture can be used
     - An Arm Linux server with Docker installed 
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -37,6 +37,25 @@ shared_between:
     - laptops-and-desktops
     - embedded-and-microcontrollers
     - iot
+
+further_reading:
+    - resource:
+        title: Docker Documentation
+        link: https://docs.docker.com
+        type: documentation
+    - resource:
+        title: Docker buildx documentation
+        link: https://docs.docker.com/engine/reference/commandline/buildx
+        type: documentation
+    - resource:
+        title: Docker mainfest documentation
+        link: https://docs.docker.com/engine/reference/commandline/manifest
+        type: documentation
+    - resource:
+        title: Blog by Docker on buildx
+        link: https://www.docker.com/blog/how-to-rapidly-build-multi-architecture-images-with-buildx
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

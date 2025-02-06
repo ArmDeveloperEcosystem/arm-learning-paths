@@ -1,6 +1,6 @@
 ---
 title: AWS IoT Greengrass
-author_primary: Michael Hall
+author: Michael Hall
 additional_search_terms:
 - iot
 - AWS

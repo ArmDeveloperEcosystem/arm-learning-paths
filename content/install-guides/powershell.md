@@ -2,7 +2,7 @@
 title: PowerShell
 minutes_to_complete: 10
 official_docs: https://learn.microsoft.com/en-us/powershell/
-author_primary: Jason Andrews
+author: Jason Andrews
 additional_search_terms:
 - pwsh
 - linux

@@ -13,7 +13,7 @@ prerequisites:
     - An installation of [Arm Keil MDK](/install-guides/mdk) or [Arm Development Studio](/install-guides/armds) (MDK recommended)
     - Some familiarity with CMSIS is assumed
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -27,6 +27,17 @@ tools_software_languages:
     - RTX
     - Keil MDK
     - Arm Development Studio
+
+further_reading:
+    - resource:
+        title: CMSIS-RTOS2 Documentation
+        link: https://www.keil.com/pack/doc/CMSIS/RTOS2/html/index.html
+        type: documentation
+    - resource:
+        title: Event Recorder and Component Viewer
+        link: https://www.keil.com/pack/doc/compiler/EventRecorder/html/index.html
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

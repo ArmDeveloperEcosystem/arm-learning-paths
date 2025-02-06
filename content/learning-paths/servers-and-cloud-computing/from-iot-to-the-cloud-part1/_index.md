@@ -20,7 +20,7 @@ prerequisites:
     - 'C# Extension for Visual Studio Code: https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp'
     - 'Install Docker on Arm64: https://learn.arm.com/install-guides/docker/docker-woa/'
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -36,6 +36,22 @@ tools_software_languages:
 
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: Terraform on Azure
+        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/azure-terraform/
+        type: Tutorial
+    - resource:
+        title: Azure Virtual Machines with Ampere Altra Arm–based processors—generally available
+        link: https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/
+        type: Blog
+    - resource:
+        title: About Azure bastion
+        link: https://learn.microsoft.com/en-us/azure/bastion/bastion-overview
+        type: Documentation
+
 
 
 ### FIXED, DO NOT MODIFY
