@@ -292,12 +292,20 @@ Called from:
                     {{ $event_categories := split (index $row 9) "; " }}
 
                     {{ if in $event_categories $lp_category_title }}
-                        {{/* If event has a higher priority than the previous one, update the event_i */}}
-                        {{ if or (eq $event_i "") (gt $event_priority (int (index $row 1))) }}
-                            {{ $event_priority = (int (index $row 1)) }}
-                            {{ $event_i = $i}}
+
+                        {{ $startDate := (index $row 2) | time.AsTime }}
+                        {{ $tenDaysLater := now.AddDate 0 0 10 }} {{/* give 10 days buffer to hide */}}
+                        {{ if ge $startDate $tenDaysLater }}
+                            {{/* If event has a higher priority than the previous one, update the event_i */}}
+                            {{ if or (eq $event_i "") (gt $event_priority (int (index $row 1))) }}
+                                {{ $event_priority = int (index $row 1) }}
+                                {{ $event_i = $i }}
+                            {{ end }}
                         {{ end }}
                     {{ end }}
+
+
+
                 {{ end }}
             
                 {{ if $event_i }}
