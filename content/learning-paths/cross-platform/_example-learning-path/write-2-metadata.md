@@ -12,10 +12,7 @@ layout: "learningpathall"
 
 Each Learning Path contains metadata which is used to create the Learning Path pages. The metadata is used by the website so all Learning Paths have the same information and are consistent. 
 
-This section explains how to add Learning Path metadata in two files:
-
-1. Metadata and Tagging information in `_index.md`
-2. Next Steps for readers in `_next-steps.md`
+This section explains how to add Learning Path metadata in the `_index.md` file:
 
 ## Metadata and tagging 
 
@@ -28,7 +25,7 @@ The following metadata is defined in the `_index.md` file:
 | who_is_this_for       | One sentence indicating the target audience (developers using tools or software to accomplish tasks). |
 | learning_objectives   | 2-5 bullet points, one sentence each, describing what a reader will learn. Should start with a verb (deploy, measure). |
 | prerequisites         | Everything needed before this Learning Path can be started. Can include online service accounts, prior knowledge, previous Learning Paths, or specific tools and software. Offers explanatory links when possible. |
-| author_primary      | The name of the person who wrote the Learning Path in case there are questions about the material. |
+| author      | The name of the person or people who wrote the Learning Path. |
 
 Look at other Learning Paths for inspiration about how to write a good title, learning objectives, and prerequisites. 
 
@@ -42,13 +39,19 @@ Note the absolute path of `/learning-paths/cross-platform/docker/`
 
 ### Author information
 
-If you provide your name in the `author_primary` metadata it will be listed on the top of the Learning Path in the `Author` field.
+Adding yourself as an author by populating the `author` metadata is slightly different if there is one or multiple authors.
+**One author:**
+```
+author: Zach Lasiuk
+```
 
-Displaying your name on the content you contributed is a great way to promote your work. 
-
-If you do not want your name to be displayed leave `author_primary` blank. 
-
-You can share additional information about yourself by editing the file [`contributors.csv`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/assets/contributors.csv) at the top of the repository. This file collects your company name, GitHub username, LinkedIn profile, Twitter handle, and your website. All fields are optional, but any you add to `contributors.csv` will appear next to your name in the `Author` field.
+**Multiple authors:**
+```
+author:
+    - Zach Lasiuk
+    - Pareena Verma
+```
+In either case, ensure all named authors are listed in the [.\assets\contributors.csv](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/assets/contributors.csv) file. You *must* list your name, and optionally include info to display along your name in the Learning Path. This includes your company name, LinkedIn profile, Twitter handle, and your/your company's website.
 
 ## Tags
 Tagging metadata is also expected to increase visibility through filtering. Some tags are closed (you must select from a pre-defined list) and some are open (enter anything). The tags are:
@@ -64,17 +67,19 @@ Indicates the skill level needed as a developer to complete this Learning Path.
 ### subjects (closed)
 Specifies the primary subject the Learning Path covers. Can only be one subject per Learning Path; if it spans multiple, pick the primary one. Select from the allowed list for each category, as defined here:
 
-| Server and Cloud | Desktop and Laptop | Embedded | Mobile | Microcontroller |
-|---------|---------|---------|---------|---------|
-| CI-CD | CI-CD | CI-CD| CI-CD | CI-CD |
-| Performance and Architecture | Performance and Architecture | Performance and Architecture | Performance and Architecture | Performance and Architecture |
-| ML | Migration to Arm | ML | ML | ML |
-| Containers and Virtualization | Containers and Virtualization | Containers and Virtualization | Gaming | Security |
-| Storage | | Storage | AR-VR | Virtual Hardware |
-| Databases | | Automotive | Graphics | RTOS  |
-| Libraries | | Embedded Linux | | Libraries |
-| Web | | | | |
-| Networking | | | | |
+
+| Embedded and Microcontrollers | IoT | Servers and Cloud Computing | Laptops and Desktops | Mobile, Graphics, and Gaming | Automotive |
+|---------|---------|---------|---------|---------|------|
+| CI-CD | CI-CD | CI-CD | CI-CD | CI-CD | CI-CD |
+| Performance and Architecture | Performance and Architecture | Performance and Architecture | Performance and Architecture | Performance and Architecture | Performance and Architecture |
+| ML | ML | ML | ML | ML | ML |
+| Containers and Virtualization | Containers and Virtualization | Containers and Virtualization | Containers and Virtualization | Gaming | Containers and Virtualization |
+| Libraries | Libraries | Libraries | Migration to Arm  | Libraries | |
+| Virtual Hardware | Virtual Hardware | Storage | | Graphics | |
+| Security | Security | Databases | | AR-VR | |
+| Embedded Linux | Embedded Linux | Web | | | |
+| RTOS Fundamentals | | | | | |
+
 
 
 ### operatingsystems (closed)
@@ -119,14 +124,12 @@ Specifies the Arm IP this Learning Path involves, providing a quick link to IP i
 | Group of IP | The Learning Path applies to a wider class of Arm IP | Cortex-M, Cortex-A, Cortex-R, Neoverse, Mali |
 
 
-## Next Steps
+## Further Reading
 
-This is where you provide a specific next step for a reader, and provide further reading resources to dive deeper into the topics covered. The following metadata is defined in the _next-steps.md file:
+This is where you provide further reading resources to dive deeper into the topics covered. 
 
-| Next Steps Metadata   | Explanation |
+| Further Reading metadata   | Explanation |
 |-----------------------|-------------|
-| next_step_guidance    | A 1-3 sentence description of how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.   |
-| recommended_path      | Link to the next learning path being recommended (For example, this could be [Learn How to Use Docker](/learning-paths/cross-platform/docker/)) |
 | further_reading       | Links to references related to information covered |
 | resource > title      | The displayed title of the provided further_reading resource |
 | resource > link       | The website link to the specific resource |

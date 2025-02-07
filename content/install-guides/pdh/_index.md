@@ -1,6 +1,6 @@
 ---
 title: Arm Product Download Hub
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 additional_search_terms:
     - pdh

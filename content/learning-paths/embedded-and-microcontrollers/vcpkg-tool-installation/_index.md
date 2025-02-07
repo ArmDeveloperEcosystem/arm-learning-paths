@@ -17,7 +17,7 @@ prerequisites:
     - A basic understanding of the [development tools for Arm Cortex-M](https://developer.arm.com/Tools%20and%20Software/)
     - Command line access to your machine
 
-author_primary: Christopher Seidl
+author: Christopher Seidl
 
 ### Tags
 skilllevels: Advanced
@@ -33,6 +33,22 @@ operatingsystems:
     - Linux
     - Windows
     - macOS
+
+
+further_reading:
+    - resource:
+        title: vcpkg documentation
+        link: https://learn.microsoft.com/en-gb/vcpkg/
+        type: documentation
+    - resource:
+        title: User-based Licensing User Guide
+        link: https://developer.arm.com/documentation/102516/latest/User-based-licensing-overview
+        type: documentation
+    - resource:
+        title: Example projects for CMSIS-Toolbox 2.0.0
+        link: https://github.com/Arm-Examples#cmsis-toolbox-2.0.0-examples
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY

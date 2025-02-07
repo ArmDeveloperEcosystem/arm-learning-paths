@@ -13,7 +13,7 @@ prerequisites:
     - Some familiarity with embedded programming
     - A Linux host machine running Ubuntu
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### RS: Learning Path hidden until AWS instance updated
 draft: false
@@ -36,6 +36,17 @@ tools_software_languages:
     - Fixed Virtual Platform
     - GCC
     - Arm Compiler for Embedded
+
+further_reading:
+    - resource:
+        title: ML Evaluation Kit Quick Start Guide
+        link: https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit/+/HEAD/docs/quick_start.md
+        type: documentation
+    - resource:
+        title: Creating ML applications for embedded devices on Arm Virtual Hardware
+        link: https://devsummit.arm.com/flow/arm/devsummit22/sessions-catalog/page/sessions/session/1656589322296001Tbrk
+        type: website
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

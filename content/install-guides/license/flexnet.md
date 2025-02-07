@@ -2,7 +2,7 @@
 title: FlexNet Publisher Floating license setup
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/dui0209
-author_primary: Ronan Synnott
+author: Ronan Synnott
 weight: 5
 
 ### FIXED, DO NOT MODIFY

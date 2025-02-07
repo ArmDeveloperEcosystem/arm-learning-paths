@@ -14,7 +14,7 @@ prerequisites:
     - Node.js for Arm64. You can find the installer [here](https://nodejs.org/dist/v20.10.0/node-v20.10.0-arm64.msi)
     - Any code editor; we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -27,6 +27,21 @@ tools_software_languages:
     - JavaScript
     - HTML    
     - Visual Studio Code
+
+further_reading:
+    - resource:
+        title: Electron
+        link: https://www.electronjs.org/blog/electron-doumentation
+        type: documentation
+    - resource:
+        title: Awesome Electron
+        link: https://github.com/sindresorhus/awesome-electron
+        type: website
+    - resource:
+        title: Electron support for Windows on Arm
+        link: https://www.electronjs.org/docs/latest/tutorial/windows-arm
+        type: documentation    
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

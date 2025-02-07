@@ -17,7 +17,7 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Link to official documentation
 official_docs: https://github.com/Open-CMSIS-Pack/cmsis-toolbox/blob/main/docs/README.md

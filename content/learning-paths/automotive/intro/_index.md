@@ -16,7 +16,7 @@ draft: true
 cascade:
     draft: true
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -30,9 +30,18 @@ operatingsystems:
 tools_software_languages:
 
 
-### FIXED, DO NOT MODIFY
-# ================================================================================
-weight: 1                       # _index.md always has weight of 1 to order correctly
+further_reading:
+    - resource:
+        title: Raspberry Pi Pico
+        link: https://www.raspberrypi.com/products/raspberry-pi-pico/
+        type: website
+    - resource:
+        title: BBC micro:bit
+        link: https://microbit.org/
+        type: website
+
+
+weight: 1
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---

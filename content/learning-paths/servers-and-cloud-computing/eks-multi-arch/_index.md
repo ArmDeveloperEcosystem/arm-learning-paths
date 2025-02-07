@@ -15,7 +15,7 @@ prerequisites:
     - A computer with [Amazon eksctl CLI](/install-guides/eksctl) and [kubectl](/install-guides/kubectl/)installed.
     - Docker installed on local computer [Docker](/install-guides/docker)
 
-author_primary: Pranay Bakre
+author: Pranay Bakre
 
 ### Tags
 skilllevels: Advanced
@@ -28,6 +28,19 @@ tools_software_languages:
     - AWS Elastic Kubernetes Service (EKS)
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: EKS documentation
+        link: https://aws.amazon.com/eks/
+        type: documentation
+    - resource:
+        title: Amazon Elastic Container Registry
+        link: https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html?pg=ln&sec=hs
+        type: documentation
+
+
 
 
 ### FIXED, DO NOT MODIFY

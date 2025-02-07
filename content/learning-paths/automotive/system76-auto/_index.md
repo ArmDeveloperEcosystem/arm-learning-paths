@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - A System76 Thelio Astra desktop computer running Ubuntu 24.04. 
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -23,6 +23,17 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Automotive
+
+further_reading:
+    - resource:
+        title: Arm Automotive Solutions Documentation
+        link: https://arm-auto-solutions.docs.arm.com/en/v1.1/index.html
+        type: documentation
+    - resource:
+        title: Parsec 
+        link: https://parsec.community/
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

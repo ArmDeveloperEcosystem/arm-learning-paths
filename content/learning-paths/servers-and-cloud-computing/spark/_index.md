@@ -13,7 +13,7 @@ prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
     - A machine with [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli/), [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html), and [Ansible](/install-guides/ansible/) installed 
 
-author_primary: Jason Andrews
+author: Jason Andrews
 ### Tags
 skilllevels: Introductory
 subjects: Databases
@@ -25,6 +25,18 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Terraform
+
+further_reading:
+    - resource:
+        title: Optimize Spark on AWS Graviton2
+        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/optimize-spark-on-aws-graviton2-best-practices-k-means-clustering
+        type: blog
+
+    - resource:
+        title: Achieve better performance for Spark workloads
+        link: https://aws.amazon.com/blogs/big-data/achieve-up-to-27-better-price-performance-for-spark-workloads-with-aws-graviton2-on-amazon-emr-serverless/
+        type: blog 
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -15,7 +15,7 @@ prerequisites:
     - To create a reverse proxy or API gateway you will need at least three Arm based instances from a cloud service provider or at least three on-premises Arm servers.
     - Network settings (firewalls and security groups) which allow communication on port 22 (SSH) and port 443 (HTTPS).
 
-author_primary: Julio Suarez
+author: Julio Suarez
 
 ### Tags
 skilllevels: Introductory
@@ -33,6 +33,21 @@ test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4
 test_maintenance: true
 test_status:
 - passed
+
+further_reading:
+    - resource:
+        title: Guidelines for Deploying Nginx Plus on Amazon Web Services
+        link: https://armkeil.blob.core.windows.net/developer/Files/pdf/white-paper/guidelines-for-deploying-nginx-plus-on-aws.pdf
+        type: documentation
+    - resource:
+        title: Optimize Your Nginx Plus Deployment with Arm-Based Amazon EC2 M6g Instances
+        link: https://www.nginx.com/blog/optimize-nginx-plus-deployment-arm-based-amazon-ec2-m6g-instances/
+        type: blog
+    - resource:
+        title: Deploying NGINX as an API Gateway
+        link: https://www.nginx.com/blog/deploying-nginx-plus-as-an-api-gateway-part-1/
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

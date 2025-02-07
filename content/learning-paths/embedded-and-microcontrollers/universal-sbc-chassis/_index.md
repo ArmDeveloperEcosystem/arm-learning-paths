@@ -23,7 +23,7 @@ prerequisites:
     - PETG filament. Others can work, but PETG allows some flex without the risk of snapping
     
 
-author_primary: Gabriel Peterson
+author: Gabriel Peterson
 
 ### Tags
 skilllevels: Introductory
@@ -39,6 +39,18 @@ operatingsystems:
 tools_software_languages:
     - Slicing software
     - Fusion 360
+
+further_reading:
+    - resource:
+        title: Self-paced learning for Fusion 360
+        link: https://help.autodesk.com/view/fusion360/ENU/courses/
+        type: training
+    - resource:
+        title: 3D Printing for Beginners - How to Get Started with FDM 
+        link: https://all3dp.com/2/3d-printing-for-beginners-all-you-need-to-know-to-get-started/
+        type: blog
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

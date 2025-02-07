@@ -14,7 +14,7 @@ learning_objectives:
 prerequisites:
     - A running Kubernetes cluster accessible with `kubectl`.
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -25,6 +25,25 @@ tools_software_languages:
     - Kubernetes
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: Kubernetes documentation
+        link: https://kubernetes.io/docs/home/
+        type: documentation
+    - resource:
+        title: Amazon Elastic Kubernetes Service
+        link: https://aws.amazon.com/eks/
+        type: documentation
+    - resource:
+        title: Azure Kubernetes Service (AKS)
+        link: https://learn.microsoft.com/en-us/azure/aks/
+        type: documentation
+    - resource:
+        title: Arm workloads on GKE
+        link: https://cloud.google.com/kubernetes-engine/docs/concepts/arm-on-gke
+        type: documentation
 
 
 ### FIXED, DO NOT MODIFY

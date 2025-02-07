@@ -21,7 +21,9 @@ prerequisites:
     - Java 17 JDK. Follow the steps in [Java 17 JDK](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download and install JDK for host.
     - Python 3.10.
 
-author_primary: Varun Chari, Pareena Verma
+author: 
+    - Varun Chari
+    - Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -36,6 +38,22 @@ tools_software_languages:
 operatingsystems:
     - macOS
     - Android
+
+
+further_reading:
+    - resource:
+        title: ExecuTorch Overview
+        link: https://pytorch.org/executorch-overview
+        type: website
+    - resource:
+        title: ExecuTorch Documentation
+        link: https://pytorch.org/executorch/stable/index.html
+        type: documentation
+    - resource:
+        title: ExecuTorch Examples
+        link: https://github.com/pytorch/executorch/blob/main/examples/README.md
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY

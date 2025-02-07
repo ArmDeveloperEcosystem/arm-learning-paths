@@ -1,6 +1,6 @@
 ---
 armips: null
-author_primary: David Spickett
+author: David Spickett
 layout: learningpathall
 learning_objectives:
 - Explain how dynamic memory allocation and the C heap works
@@ -28,6 +28,17 @@ title: Write a Dynamic Memory Allocator
 tools_software_languages:
 - C 
 - Coding
+further_reading:
+    - resource:
+        title: C Dynamic Memory Management Functions
+        link: https://en.cppreference.com/w/c/memory
+        type: documentation
+    - resource:
+        title: LLSoftSecBook chapter on Memory Vulnerabilities
+        link: https://llsoftsec.github.io/llsoftsecbook/#memory-vulnerability-based-attacks
+        type: website
+
+
 weight: 1
 who_is_this_for: This is an introductory topic for software developers learning about dynamic memory allocation for the first time,
   and who may have used malloc and free in C programming. It also provides a starting point to explore more advanced memory allocation topics.

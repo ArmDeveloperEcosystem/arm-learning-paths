@@ -13,7 +13,7 @@ prerequisites:
     - An Arm based instance from a cloud service provider, or an on-premise Arm server.
     - If you do not have an Arm node, the next section discusses some options.
 
-author_primary: Jason Andrews
+author: Jason Andrews
 ### Tags
 skilllevels: Introductory
 subjects: Databases
@@ -24,6 +24,18 @@ operatingsystems:
 tools_software_languages:
     - SQL
     - PostgreSQL
+
+further_reading:
+    - resource:
+        title: PostgreSQL Manual
+        link: https://www.postgresql.org/docs/current/tutorial-install.html
+        type: documentation
+
+    - resource:
+        title: Ansible
+        link: https://docs.ansible.com/
+        type: documentation 
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

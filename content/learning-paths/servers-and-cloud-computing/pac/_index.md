@@ -15,7 +15,7 @@ prerequisites:
     - If needed, review [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) to learn how to deploy Arm in the cloud. These learning paths also point to more advanced learning paths that show how to automate the deployment of Arm instances at different cloud providers.
     
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Advanced
@@ -26,6 +26,28 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Coding
+
+further_reading:
+    - resource:
+        title: Learn the architecture - Providing protection for complex software
+        link: https://developer.arm.com/documentation/102433
+        type: documentation
+    - resource:
+        title: Code reuse attacks - the compiler story
+        link: https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/code-reuse-attacks-the-compiler-story
+        type: blog
+    - resource:
+        title: Arm A-profile Instruction Set Architecture
+        link: https://developer.arm.com/documentation/ddi0602
+        type: documentation
+    - resource:
+        title: pwntools Documentation
+        link: https://docs.pwntools.com/en/stable/
+        type: documentation
+    - resource:
+        title: -mbranch-protection (armclang)
+        link: https://developer.arm.com/documentation/101754/0620/armclang-Reference/armclang-Command-line-Options/-mbranch-protection
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

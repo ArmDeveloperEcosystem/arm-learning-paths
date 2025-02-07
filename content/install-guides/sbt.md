@@ -1,7 +1,7 @@
 ---
 title: sbt
 
-author_primary: Jason Andrews
+author: Jason Andrews
 minutes_to_complete: 10
 
 additional_search_terms:

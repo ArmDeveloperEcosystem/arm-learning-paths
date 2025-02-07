@@ -17,7 +17,7 @@ prerequisites:
     - 'Node.js (details provided in this learning path)'
     - 'Azure CLI (details provided in this learning path)'
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -33,6 +33,22 @@ tools_software_languages:
 
 operatingsystems:
     - Windows
+
+further_reading:
+    - resource:
+        title: Infrastructure as code
+        link: https://learn.microsoft.com/en-us/devops/deliver/what-is-infrastructure-as-code
+        type: Documentation
+    - resource:
+        title: Pulumi
+        link: https://www.pulumi.com
+        type: Documentation
+    - resource:
+        title: Terraform
+        link: https://www.terraform.io
+        type: Documentation
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

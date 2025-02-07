@@ -9,7 +9,7 @@ additional_search_terms:
 
 minutes_to_complete: 10
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 official_docs: https://cmake.org/documentation/
 

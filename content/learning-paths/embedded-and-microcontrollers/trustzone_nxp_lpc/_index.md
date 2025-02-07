@@ -16,7 +16,7 @@ prerequisites:
     - Comfortable with Windows 
     - NXP LPCXpresso55S69 board
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -30,6 +30,17 @@ tools_software_languages:
     - Arm Compiler for Embedded
     - Keil
     - Coding
+
+further_reading:
+    - resource:
+        title: Secure software guidelines for Armv8-M
+        link: https://developer.arm.com/documentation/100720/0100
+        type: documentation
+    - resource:
+        title: Using LPC55S69 SDK TrustZone examples with MCUXpresso IDE
+        link: https://community.nxp.com/t5/Blogs/Using-LPC55S69-SDK-TrustZone-examples-with-MCUXpresso-IDE-v11-0/ba-p/1131075
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

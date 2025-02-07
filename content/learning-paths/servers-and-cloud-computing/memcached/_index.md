@@ -1,7 +1,7 @@
 ---
 armips:
 - Neoverse
-author_primary: Pareena Verma
+author: Pareena Verma
 layout: learningpathall
 learning_objectives:
 - Install and run memcached on your Arm-based cloud server
@@ -23,6 +23,18 @@ test_status:
 title: Run memcached on Arm servers and measure its performance
 tools_software_languages:
 - Memcached
+further_reading:
+    - resource:
+        title: Memcached Wiki
+        link: https://github.com/memcached/memcached/wiki
+        type: documentation
+    - resource:
+        title: Benchmarking memcached performance on AWS Graviton2 servers
+        link: https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/memcached-benchmarking-aws-graviton2-50-p-p-gains
+        type: blog
+
+
+
 weight: 1
 who_is_this_for: This is an introductory topic for developers who want to use memcached as their in-memory key-value store.
 
