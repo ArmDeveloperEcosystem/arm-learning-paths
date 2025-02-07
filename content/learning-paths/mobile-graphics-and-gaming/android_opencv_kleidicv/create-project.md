@@ -7,16 +7,16 @@ weight: 3
 layout: "learningpathall"
 ---
 ## Create a project
-You will need a development computer with [Android Studio](https://developer.android.com/studio) installed (this examples uses Android Studio Ladybug | 2024.2.1 Patch 3)
+You will need a development computer with [Android Studio](https://developer.android.com/studio) installed. This examples uses Android Studio Ladybug 2024.2.1, Patch 3.
 
 Follow these steps to create a project and add OpenCV with KleidiCV support:
 
-1. Open Android Studio on your development machine and then click the **+ New Project** icon:
-2. In the New Project window, select **Empty Views Activity**:
+1. Open Android Studio on your development machine, and then click the **+ New Project** icon.
+2. In the **New Project** window, select **Empty Views Activity**:
 
-![img1](Figures/01.png)
+![img1 alt-text#center](Figures/01.png "Figure 1. Creating a new project.")
 
-3. Configure the project as follows (see figure below):
+3. Figure 2 shows you how to configure the project:
 - Name: **Arm64.KleidiCV.Demo**.
 - Package name: **com.arm.arm64kleidicvdemo**.
 - Save location: *Select relevant file location*.
@@ -24,11 +24,11 @@ Follow these steps to create a project and add OpenCV with KleidiCV support:
 - Minimum SDK: **API 24**.
 - Build configuration language: **Kotlin DSL**.
 
-![img2](Figures/02.png)
+![img2 alt-text#center](Figures/02.png "Figure 2. Configuring your new project.")
 
 4. Click the **Finish** button. 
 
-The project will be ready in a few moments. Afterward you can configure the project.
+It takes a few moments and then the project is ready. You will be able to configure the project further later on.
 
 ## Add OpenCV support
 To add OpenCV for Arm64, open the *build.gradle.ts (Module: app)*, and add the following line under the dependencies:
@@ -37,7 +37,7 @@ To add OpenCV for Arm64, open the *build.gradle.ts (Module: app)*, and add the f
 implementation("org.opencv:opencv:4.11.0")
 ```
 
-Also, make sure that compileSdk is set to 35. The contents of the file should look something like this:
+Make sure that compileSdk is set to 35. The contents of the file should look like this:
 
 ```JSON
 plugins {
@@ -90,6 +90,6 @@ dependencies {
 }
 ```
 
-Then, click the **Sync Now** link in the top pane that appears. From here on, you can use OpenCV with KleidiCV support in your application. 
+Now click the **Sync Now** link in the top pane that appears. From here on, you can use OpenCV with KleidiCV support in your application. 
 
 Save the file. In the next step, you will define the application UI.

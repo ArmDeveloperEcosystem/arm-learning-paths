@@ -3,7 +3,7 @@ title: Accelerate OpenCV-based Android Applications with KleidiCV
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for developers who are interested in creating Computer Vision Applications with OpenCV and KleidiCV on Android Devices.
+who_is_this_for: This is an introductory topic for developers who are interested in creating Computer Vision applications with OpenCV and KleidiCV on Android Devices.
 
 learning_objectives:
    - Describe what KleidiCV is, and what it can offer.

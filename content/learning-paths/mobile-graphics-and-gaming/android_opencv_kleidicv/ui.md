@@ -6,10 +6,11 @@ weight: 4
 
 layout: "learningpathall"
 ---
+## Modify the application view
+
 You will now define the application UI. 
 
-## Modify the application view
-To modify the application view, open `app/src/main/res/layout/activity_main.xmlactivity_main.xml` and replace the file contents with the following code:
+To modify the application view, open `app/src/main/res/layout/activity_main.xml` and replace the file contents with the following code:
 
 ```XML
 <?xml version="1.0" encoding="utf-8"?>
@@ -86,10 +87,10 @@ To modify the application view, open `app/src/main/res/layout/activity_main.xmla
 This XML layout defines the user interface (UI) for an Android application. The root layout is a ConstraintLayout. Within the ConstraintLayout, a LinearLayout is embedded as the primary container for the UI components. This LinearLayout is oriented vertically, ensuring that its child elements are stacked one below the other. 
 
 Inside the LinearLayout, the following components are defined:
-1.	ImageView for Displaying Images. We will use it to display an original and processed image.
-2.	Load Image Button. We use this button to load an image.
+1.	ImageView for Displaying Images. You will use this component to display an original and processed image.
+2.	Load Image Button. This button is for loading an image.
 3.	Spinner for Selecting Image Processing Options.	
-4.	Process Button. Another Button, which will trigger the image processing.	
+4.	Process Button. You can use this button for triggering image processing.	
 5.	TextView to display computation time.
 
 In the next step, you will implement the application logic.

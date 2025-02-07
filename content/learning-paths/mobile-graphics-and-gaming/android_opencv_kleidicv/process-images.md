@@ -10,9 +10,9 @@ layout: "learningpathall"
 ## Process images
 In this final step, you will implement the application logic to process the images. 
 
-Start by adding a `assets` folder under `src/main`. Then, under `assets` folder add a `img.png` image. This image can be any kind of image as it converted to the right type by the app. We will use this image for processing. Here, we use the [cameraman image](https://github.com/antimatter15/cameraman).
+Start by adding an `assets` folder under `src/main`. Then, under the `assets` folder add an `img.png` image. This image can be any kind of image as it converted to the right type by the app. We will use this image for processing. Here, we use the [cameraman image](https://github.com/antimatter15/cameraman).
 
-To make navigation betwee files easier in Android Studio, select "Project" from the project browser pane.
+To make navigation between files easier in Android Studio, select **Project** from the project browser pane.
 
 ## ImageOperation
 You will now create an enumeration (enum class) for a set of image processing operations in an  application that uses the OpenCV library. Under the `src/main/java/com/arm/arm64kleidicvdemo` add the `ImageOperation.kt` file and modify it as follows:
@@ -62,7 +62,7 @@ enum class ImageOperation(val displayName: String) {
 }
 ```
 
-The ImageOperation enum represents a collection of predefined image processing operations. Each enum constant is associated with a displayName (a user-friendly string describing the operation) and a unique implementation of the apply method to perform the operation on an image (Mat). The processing result is will be available in the dst parameter of the apply method.
+The ImageOperation enum represents a collection of predefined image processing operations. Each enum constant is associated with a displayName, which is a user-friendly string describing the operation) and a unique implementation of the apply method to perform the operation on an image (Mat). The processing result is will be available in the dst parameter of the apply method.
 
 Here we have four constants:
 1. GAUSSIAN_BLUR. Applies a Gaussian blur to the image using a 7x7 kernel and a standard deviation of 0.0.
@@ -387,24 +387,26 @@ You can launch the application in emulator or on the actual device. When you do 
 ![img6](Figures/06.jpg)
 
 ## Performance uplift
-To appreciate the performance uplift oferred by KleidiCV you can now switch to one of the earliest OpenCV versions, which do not have KleidiCV, e.g. 4.9.0, and re-run the application. To do so open the build.gradle.kts, and modify this line
+To appreciate the performance uplift offered by KleidiCV, now switch to one of the earliest OpenCV versions, which does not have KleidiCV. Version 4.9.0 is an example of one to try. 
+
+To rerun the application open build.gradle.kts, and modify this line, from:
 ```XML
 implementation("org.opencv:opencv:4.11.0")
 ```
 
-to 
+to: 
 ```XML
 implementation("org.opencv:opencv:4.9.0")
 ```
 
-Then, click the Sync Now button, and deploy the app to the Android device (here we used Samsung Galaxy S22):
+Now click the **Sync Now** button, and deploy the app to the Android device. This example used a Samsung Galaxy S22:
 
 ![img7](Figures/07.jpg)
 ![img8](Figures/08.jpg)
 ![img9](Figures/09.jpg)
 ![img10](Figures/10.jpg)
 
-We achieved the following performance uplift:
+This achieved the following performance uplift:
 
 | Operation | Average computation time [ms]       | Performance Uplift  |
 |-----------|------------------|------------------|---------------------|
