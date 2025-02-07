@@ -123,8 +123,8 @@ You see output similar to:
 ```output
         Component     Version  GitVer    FeatureString
         =========     =======  ======    =============
-        wperf         4.0.0    6d15ddfc  +etw-app
-        wperf-driver  4.0.0    6d15ddfc  +etw-drv
+        wperf         4.0.0    b18197bd  +etw-app
+        wperf-driver  4.0.0    b18197bd  +etw-drv
 
 ```
 ## Uninstall wperf driver
