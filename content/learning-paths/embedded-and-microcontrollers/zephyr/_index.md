@@ -1,7 +1,7 @@
 ---
 armips:
 - Cortex-M
-author_primary: Pareena Verma
+author: Pareena Verma
 layout: learningpathall
 learning_objectives:
 - Build and run Zephyr applications on the Corstone-300
@@ -26,6 +26,21 @@ tools_software_languages:
 - Arm Virtual Hardware
 - Fixed Virtual Platform
 - Coding
+
+further_reading:
+    - resource:
+        title: Zephyr Project Documentation
+        link: https://docs.zephyrproject.org/latest/index.html
+        type: documentation
+    - resource:
+        title: Zephyr Sample applications and Demo
+        link: https://docs.zephyrproject.org/latest/samples/index.html
+        type: documentation
+    - resource:
+        title: List of Arm boards and platforms supported by Zephyr
+        link: https://docs.zephyrproject.org/latest/boards/arm/index.html
+        type: website
+
 
 weight: 1
 who_is_this_for: This is an introductory topic for software developers getting started

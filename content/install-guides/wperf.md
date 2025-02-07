@@ -20,7 +20,7 @@ minutes_to_complete: 15
 ### Link to official documentation
 official_docs: https://github.com/arm-developer-tools/windowsperf/blob/main/INSTALL.md
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.

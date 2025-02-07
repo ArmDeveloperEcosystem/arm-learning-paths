@@ -16,7 +16,7 @@ prerequisites:
     - A cloud or bare-metal installation of a Nginx file server or load balancer.
     - If you do not already have a Nginx setup, a review of [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/).
 
-author_primary: Julio Suarez
+author: Julio Suarez
 
 ### Tags
 skilllevels: Advanced
@@ -27,6 +27,18 @@ tools_software_languages:
     - Nginx    
 operatingsystems:
     - Linux
+
+further_reading:
+    - resource:
+        title: Nginx Documentation
+        link: https://nginx.org/en/docs/
+        type: documentation
+    - resource:
+        title: Nginx Admin Guide
+        link: https://docs.nginx.com/nginx/admin-guide/
+        type: documentation
+    
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

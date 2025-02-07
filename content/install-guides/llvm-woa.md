@@ -19,7 +19,7 @@ minutes_to_complete: 10
 ### Link to official documentation
 official_docs: 
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.

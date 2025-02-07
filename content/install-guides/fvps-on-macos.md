@@ -13,7 +13,7 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
 
-author_primary: Christopher Seidl
+author: Christopher Seidl
 
 ### Link to official documentation
 official_docs: https://github.com/Arm-Examples/FVPs-on-Mac/blob/main/README.md

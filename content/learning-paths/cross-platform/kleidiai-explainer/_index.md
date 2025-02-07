@@ -14,7 +14,7 @@ prerequisites:
     - An Arm-based Linux machine that implements the Int8 Matrix Multiplication (*i8mm*) architecture feature. The example in this Learning Path is run on an AWS Graviton 3 instance. Instructions on setting up an Arm-based server are [found here](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/aws/).
     - A basic understanding of linear algebra terminology, such as dot product and matrix multiplication.
 
-author_primary: Zach Lasiuk
+author: Zach Lasiuk
 ### Tags
 skilllevels: Introductory 
 subjects: ML
@@ -35,6 +35,19 @@ shared_path: true
 shared_between:
     - servers-and-cloud-computing
     - mobile-graphics-and-gaming
+
+
+
+further_reading:
+    - resource:
+        title: KleidiAI documentation
+        link: https://gitlab.arm.com/kleidi/kleidiai/-/blob/main/docs/matmul_qsi4cx/README.md?ref_type=heads
+        type: documentation
+    - resource:
+        title: KleidiAI visualized
+        link: https://community.arm.com/arm-community-blogs/b/ai-and-ml-blog/posts/kleidiai
+        type: blog
+
 
 
 

@@ -20,7 +20,7 @@ prerequisites:
     - For the OS, you can use Windows, Linux, or macOS.
   
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Advanced
@@ -41,6 +41,22 @@ shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
     - mobile-graphics-and-gaming
+
+further_reading:
+    - resource:
+        title: PyTorch
+        link: https://pytorch.org
+        type: documentation    
+    - resource:
+        title: MNIST
+        link: https://en.wikipedia.org/wiki/MNIST_database
+        type: website
+    - resource:
+        title: Visual Studio Code
+        link: https://code.visualstudio.com
+        type: website
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

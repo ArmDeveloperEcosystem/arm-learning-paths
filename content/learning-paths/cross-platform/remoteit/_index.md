@@ -15,7 +15,7 @@ prerequisites:
     - A device/computer to which you would like remote access. A device can be a Windows, Mac, or Linux computer including development kits such as Raspberry Pi or cloud-hosted such as within Arm Virtual Hardware or within AWS. You will need a method to control this device before Remote.It is deployed which can be local access or access via another remote connectivity solution (Remote Desktop, VPN, etc.)
     - Determine if your device that you would like to access remotely also needs to make connections to other Remote.It devices.
 
-author_primary: Brenda Strech
+author: Brenda Strech
 
 ### Tags
 skilllevels: Introductory

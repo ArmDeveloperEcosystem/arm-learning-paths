@@ -13,7 +13,7 @@ prerequisites:
     - An [Amazon Web Services account](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/aws/).
     - A GitHub account (personal or organizational).
 
-author_primary: Cyril Rohr
+author: Cyril Rohr
 
 ##### Tags
 skilllevels: Introductory
@@ -34,6 +34,23 @@ operatingsystems:
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================
+further_reading:
+    - resource:
+        title: RunsOn official website and documentation
+        link: https://runs-on.com/
+        type: documentation
+
+    - resource:
+        title: RunsOn installation guide
+        link: https://runs-on.com/guides/install/
+        type: documentation
+
+    - resource:
+        title: GitHub Actions runners benchmark for Arm
+        link: https://runs-on.com/benchmarks/github-actions-runners/#arm64-runners
+        type: website
+
+
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # Indicates this should be surfaced when looking for related content. Only set for _index.md of learning path content.

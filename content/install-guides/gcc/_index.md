@@ -1,6 +1,6 @@
 ---
 title: GNU Compiler
-author_primary: Jason Andrews
+author: Jason Andrews
 additional_search_terms:
 - compiler
 - GCC

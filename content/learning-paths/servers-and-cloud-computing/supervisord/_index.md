@@ -14,7 +14,7 @@ prerequisites:
     - An AWS account
     - A Remote.It account
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -29,6 +29,22 @@ tools_software_languages:
     - Remote.It
     - Supervisor
     
+further_reading:
+    - resource:
+        title: Run multiple processes in a container
+        link: https://docs.docker.com/config/containers/multi-service_container/
+        type: documentation
+    - resource:
+        title: Supervisor with Docker Lessons learned
+        link: https://advancedweb.hu/supervisor-with-docker-lessons-learned/
+        type: blog
+    - resource:
+        title: Multiple services in a Docker container with supervisord
+        link: https://dev.to/pratapkute/multiple-services-in-a-docker-container-with-supervisord-2g13
+        type: blog
+
+
+
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly

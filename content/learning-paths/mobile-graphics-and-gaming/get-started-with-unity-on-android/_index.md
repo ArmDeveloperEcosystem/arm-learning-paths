@@ -15,7 +15,7 @@ prerequisites:
     - Recent Android device, such as a mobile phone or tablet
     - Desktop computer capable of running Unity
 
-author_primary: visualSilicon
+author: visualSilicon
 
 ### Tags
 skilllevels: Beginner
@@ -28,6 +28,14 @@ tools_software_languages:
     - C#
 operatingsystems:
     - Android
+
+
+further_reading:
+    - resource:
+        title: Profiler overview 
+        link: https://docs.unity3d.com/Manual/Profiler.html
+        type: documentation
+
 
 
 ### FIXED, DO NOT MODIFY

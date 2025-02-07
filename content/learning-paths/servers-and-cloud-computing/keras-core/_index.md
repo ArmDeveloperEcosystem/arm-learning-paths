@@ -15,7 +15,9 @@ prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, an on-premises Arm server, or a Linux virtual machine on your Arm device. 
     - Familiarity with SSH, the Linux command line, and basic system administration tasks.
 
-author_primary: Diego Russo and Leandro Nunes
+author: 
+    - Diego Russo
+    - Leandro Nunes
 
 ### Tags
 skilllevels: Introductory
@@ -30,6 +32,26 @@ tools_software_languages:
     - JAX
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: Keras Documentation
+        link: https://keras.io/guides/
+        type: documentation
+    - resource:
+        title: TensorFlow Documentation
+        link: https://www.tensorflow.org/api_docs
+        type: documentation
+    - resource:
+        title: PyTorch Documentation
+        link: https://pytorch.org/docs/stable/index.html
+        type: documentation
+    - resource:
+        title: JAX Documentation
+        link: https://jax.readthedocs.io/en/latest/index.html
+        type: documentation
+
 
 
 ### FIXED, DO NOT MODIFY

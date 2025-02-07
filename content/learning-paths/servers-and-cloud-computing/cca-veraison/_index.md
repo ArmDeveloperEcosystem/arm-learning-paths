@@ -18,7 +18,7 @@ prerequisites:
     - An Arm-based or x86 computer running Ubuntu. You can use a server instance from a cloud service provider of your choice.
 
 
-author_primary: Paul Howard
+author: Paul Howard
 
 ### Tags
 skilllevels: Introductory
@@ -29,6 +29,22 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - CCA
+
+
+
+further_reading:
+    - resource:
+        title: RATS architecture (RFC 9334) 
+        link: https://datatracker.ietf.org/doc/rfc9334/
+        type: documentation
+    - resource:
+        title: The Realm Management Monitor Specification
+        link: https://developer.arm.com/documentation/den0137/latest/
+        type: documentation
+    - resource:
+        title: The Attestation Results for Secure Interactions (AR4SI) 
+        link: https://datatracker.ietf.org/doc/draft-ietf-rats-ar4si/
+        type: documentation
 
 
 

@@ -14,7 +14,7 @@ learning_objectives:
 prerequisites:
     - A Raspberry Pi 5 running Raspberry Pi OS.
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -28,6 +28,22 @@ tools_software_languages:
     - GenAI
     - Raspberry Pi
     - Python
+
+
+further_reading:
+    - resource:
+        title: Practical AI for the Raspberry Pi
+        link: https://github.com/ee292d/labs
+        type: website
+    - resource:
+        title: Hugging Face Documentation
+        link: https://huggingface.co/docs
+        type: documentation
+    - resource: 
+        title: Python Bindings for llama.cpp
+        link: https://github.com/abetlen/llama-cpp-python
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY

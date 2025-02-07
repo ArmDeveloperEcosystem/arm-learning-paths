@@ -16,7 +16,7 @@ prerequisites:
     - One or more Arm-based computers running Windows, macOS, or a Linux computer with Docker installed.
     - Optionally, an AWS account to create cloud development environments.
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 armips:
     - Neoverse
@@ -37,6 +37,17 @@ shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
     - embedded-systems
+
+further_reading:
+    - resource:
+        title: Daytona Documentation
+        link: https://www.daytona.io/docs/
+        type: documentation
+    - resource:
+        title: Daytona Blogs 
+        link: https://www.daytona.io/dotfiles/
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

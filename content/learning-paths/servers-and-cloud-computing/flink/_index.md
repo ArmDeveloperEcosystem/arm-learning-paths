@@ -13,7 +13,7 @@ learning_objectives:
 prerequisites:
 - An Arm based instance server from a cloud service provider.
 
-author_primary: Ying Yu
+author: Ying Yu
 
 ### Tags
 skilllevels: Introductory
@@ -34,6 +34,17 @@ tools_software_languages:
 - Flink
 - Java
 - Nexmark
+
+
+further_reading:
+    - resource:
+        title: Flink Manual
+        link: https://nightlies.apache.org/flink/flink-docs-stable/
+        type: documentation
+    - resource:
+        title: Flink Performance Tool
+        link: https://github.com/nexmark/nexmark#readme
+        type: documentation
 
 
 ### FIXED, DO NOT MODIFY

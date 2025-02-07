@@ -1,7 +1,7 @@
 ---
 armips:
 - Neoverse
-author_primary: Jason Andrews
+author: Jason Andrews
 layout: learningpathall
 learning_objectives:
 - Build zlib-cloudflare on an Arm server
@@ -24,6 +24,18 @@ test_status:
 title: Learn how to build and use Cloudflare zlib on Arm servers
 tools_software_languages:
 - zlib
+further_reading:
+    - resource:
+        title: Cloudflare zlib on GitHub
+        link: https://github.com/cloudflare/zlib
+        type: documentation
+    - resource:
+        title: Improving zlib-cloudflare and comparing performance with other zlib forks
+        link: https://aws.amazon.com/blogs/opensource/improving-zlib-cloudflare-and-comparing-performance-with-other-zlib-forks/
+        type: blog
+
+
+
 weight: 1
 who_is_this_for: This is an introductory topic for software developers to learn how
   to to build and use Cloudflare zlib on Arm servers.

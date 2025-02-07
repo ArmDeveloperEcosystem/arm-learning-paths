@@ -5,7 +5,7 @@ minutes_to_complete: 15
 
 official_docs: https://github.com/arm-developer-tools/windowsperf-wpa-plugin
 
-author_primary: Alaaeddine Chakroun 
+author: Alaaeddine Chakroun 
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

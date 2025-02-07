@@ -5,7 +5,7 @@ additional_search_terms:
 - map
 - performance reports
 - allinea
-author_primary: Florent Lebeau
+author: Florent Lebeau
 layout: installtoolsall
 minutes_to_complete: 15
 multi_install: false

@@ -2,7 +2,7 @@
 title: Rust for Linux Applications
 minutes_to_complete: 10
 official_docs: https://www.rust-lang.org/tools/install
-author_primary: Mathias Brossard
+author: Mathias Brossard
 additional_search_terms:
 - compiler
 - linux

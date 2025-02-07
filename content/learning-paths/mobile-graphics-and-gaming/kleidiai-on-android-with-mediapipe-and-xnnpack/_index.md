@@ -14,7 +14,10 @@ prerequisites:
     - An x86_64 Linux machine running Ubuntu with approximately 500 MB of free space, or a docker daemon that can build and run a provided x86_64 Dockerfile.
     - An Android phone with support for i8mm (tested on Google Pixel 8 Pro).
 
-author_primary: Pareena Verma, Joe Stech, Adnan AlSinan
+author: 
+    - Pareena Verma
+    - Joe Stech
+    - Adnan AlSinan
 
 ### Tags
 skilllevels: Advanced
@@ -31,6 +34,22 @@ tools_software_languages:
     - XNNPACK
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: MediaPipe Solutions Guide 
+        link: https://ai.google.dev/edge/mediapipe/solutions/guide
+        type: documentation
+    - resource:
+        title: Accelerating AI Developer Innovation Everywhere with New Arm Kleidi
+        link: https://newsroom.arm.com/blog/arm-kleidi
+        type: blog
+    - resource:
+        title: Faster Dynamically Quantized Inference with XNNPack 
+        link: https://blog.tensorflow.org/2024/04/faster-dynamically-quantized-inference-with-xnnpack.html
+        type: blog
+
 
 
 ### FIXED, DO NOT MODIFY

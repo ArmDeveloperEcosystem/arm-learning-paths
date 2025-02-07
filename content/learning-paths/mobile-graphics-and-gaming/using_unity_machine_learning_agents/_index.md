@@ -14,7 +14,7 @@ prerequisites:
 - An Android mobile device that has a 64-bit processor and supports at least Android 8.
 - A USB cable to connect the mobile device to your computer.
 
-author_primary: Arm
+author: Arm
 
 ### Tags
 skilllevels: Advanced
@@ -25,6 +25,22 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Unity
+
+
+further_reading:
+    - resource:
+        title: Using Unity's Machine Learning Agents on Arm on YouTube
+        link: https://www.youtube.com/watch?v=ZZa0faTjwFA
+        type: video
+    - resource:
+        title: Tackling profiling for mobile games with Unity and Arm
+        link: https://blog.unity.com/games/tackling-profiling-for-mobile-games-with-unity-and-arm
+        type: blog
+    - resource:
+        title: Arm Mobile Studio 
+        link: https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY
