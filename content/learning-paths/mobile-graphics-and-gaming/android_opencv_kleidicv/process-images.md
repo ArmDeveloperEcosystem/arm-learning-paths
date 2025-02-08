@@ -62,7 +62,7 @@ enum class ImageOperation(val displayName: String) {
 }
 ```
 
-The ImageOperation enum represents a collection of predefined image processing operations. Each enum constant is associated with a displayName, which is a user-friendly string describing the operation) and a unique implementation of the apply method to perform the operation on an image (Mat). The processing result is will be available in the dst parameter of the apply method.
+The ImageOperation enum represents a collection of predefined image processing operations. Each enum constant is associated with a displayName, which is a user-friendly string describing the operation) and a unique implementation of the apply method to perform the operation on an image (Mat). The processing result is available in the dst parameter of the apply method.
 
 Here we have four constants:
 1. GAUSSIAN_BLUR. Applies a Gaussian blur to the image using a 7x7 kernel and a standard deviation of 0.0.
@@ -137,10 +137,10 @@ The above code defines a PerformanceMetrics class that calculates and represents
 
 The PerformanceMetrics class is designed to analyze and summarize performance measurements, such as execution times or latency values. It accepts a list of durations in nanoseconds, computes key metrics like average, minimum, maximum, and standard deviation, and presents them in milliseconds.
 
-By encapsulating the raw data (durationsNano) and exposing only meaningful metrics through computed properties, the class ensures clear separation of data and functionality. The overridden toString method makes it easy to generate a human-readable summary for reporting or debugging purposes. Specifically, we will use this method to report the performance metrics to the user.
+By encapsulating the raw data (durationsNano) and exposing only meaningful metrics through computed properties, the class ensures clear separation of data and functionality. The overridden toString method makes it easy to generate a human-readable summary for reporting or debugging purposes. Specifically, you will use this method to report the performance metrics to the user.
 
 ## MainActivity
-Finally, we modify the MainActivity.kt as follows:
+Finally, now modify the MainActivity.kt as follows:
 
 ```Kotlin
 package com.arm.arm64kleidicvdemo
@@ -295,32 +295,32 @@ class MainActivity : AppCompatActivity() {
 The above Kotlin code defines the main activity for our application that demonstrates image processing using OpenCV. The MainActivity class extends AppCompatActivity, serving as the entry point for the app’s user interface. It manages the lifecycle of the activity and orchestrates the image processing logic.
 
 There are several members of this class:
-1. viewBinding - manages UI components via the ActivityMainBinding class, simplifying access to views in the layout.
+1. viewBinding - manages UI components through the ActivityMainBinding class, simplifying access to views in the layout.
 2. imageProcessor - an instance of the ImageProcessor class that applies selected image operations.
 3. originalMat - a Mat object representing the original image loaded from the app’s assets.
 4. currentBitmap - stores the current image as a Bitmap for display.
 5. REPETITIONS - number of times each operation is performed for performance measurement.
 6. TEST_IMAGE - name of the test image located in the app’s assets.
 
-When the activity starts, it sets up the user interface, initializes OpenCV and sets up UI listeners:
+When the activity starts, it sets up the user interface, initializes OpenCV, and sets up UI listeners:
 
 The activity also implements several helper methods:
 1. setupSpinner - populates the spinner with the names of available ImageOperation enums.
 2. showToast - displays a short toast message for user feedback.
-3. loadImage - loads the test image (img.png) from the app’s assets. Then, the method converts the image into a Bitmap and stores it for display. The bitmap is also converted to an OpenCV Mat object and changed its color format to grayscale (used in OpenCV).
+3. loadImage - loads the test image (img.png) from the app’s assets. Then, the method converts the image into a Bitmap and stores it for display. The bitmap is also converted to an OpenCV Mat object and changed its color format to grayscale, which is used in OpenCV.
 4. displayAndStoreBitmap - updates the app’s ImageView to display the loaded image.
 5. convertBitmapToMat - converts the Bitmap to a Mat using OpenCV utilities.
 6. processImage - this method performs the following:
 	•	Validates if an image is loaded.
 	•	Retrieves the selected operation from the spinner.
 	•	Repeats the processing operation multiple times (REPETITIONS) to measure performance.
-	•	Calculates statistical metrics (average, min, max, standard deviation) using PerformanceMetrics.
+	•	Calculates statistical metrics (average, min, max, and standard deviation) using PerformanceMetrics.
 	•	Updates the UI with the processed image and metrics.
 7. measureOperationTime - Measures the execution time of an operation in nanoseconds using System.nanoTime().
 8. displayProcessedImage. This method converts the processed Mat back to a Bitmap for display and updates the ImageView with the processed image.
 
 ## Databinding
-Finally, modify the build.gradle.kts by adding the databinding (under build features):
+Finally, modify the build.gradle.kts by adding the databinding under build features:
 
 ```JSON
 plugins {
@@ -379,7 +379,9 @@ dependencies {
 ```
 
 ## Running the application
-You can launch the application in emulator or on the actual device. When you do so, click the Load image button, select the image processing operation, and then click Process. You will see the processing results and a detailed performance analysis as shown in the following figures (we used Samsung Galaxy S22):
+You can launch the application in an emulator or on the actual device. 
+
+When you do so, click the **Load image** button, select the image processing operation, and then click **Process**. You will see the processing results and a detailed performance analysis as Figures 3-6 show. NOTE: This Learning Path used a Samsung Galaxy S22.
 
 ![img3](Figures/03.jpg)
 ![img4](Figures/04.jpg)
@@ -399,7 +401,7 @@ to:
 implementation("org.opencv:opencv:4.9.0")
 ```
 
-Now click the **Sync Now** button, and deploy the app to the Android device. This example used a Samsung Galaxy S22:
+Now click the **Sync Now** button, and deploy the app to the Android device. 
 
 ![img7](Figures/07.jpg)
 ![img8](Figures/08.jpg)

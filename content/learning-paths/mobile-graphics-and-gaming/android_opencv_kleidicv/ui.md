@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 You will now define the application UI. 
 
-To modify the application view, open `app/src/main/res/layout/activity_main.xml` and replace the file contents with the following code:
+To modify the application view, open `app/src/main/res/layout/activity_main.xml` and replace the file contents with the following:
 
 ```XML
 <?xml version="1.0" encoding="utf-8"?>
