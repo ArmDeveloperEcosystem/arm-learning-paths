@@ -12,6 +12,7 @@ learning_objectives:
 
 prerequisites:
     - A development machine with [Android Studio](https://developer.android.com/studio) installed. 
+    - Familiarity with Android development concepts.
     - An Android smartphone.
 
 author: Dawid Borycki
@@ -22,7 +23,7 @@ subjects: Graphics
 armips:
     - Cortex-A
 operatingsystems:
-    - Windows
+    - Android
 tools_software_languages:
     - Android
     - Android Studio
