@@ -8,7 +8,7 @@ who_is_this_for: This is an introductory topic for developers who are interested
 learning_objectives:
    - Describe what KleidiCV is, and what it can offer.
    - Create and configure a project to add OpenCV support.
-   - Process images using various OpenCV functions.
+   - Process images using OpenCV functionality.
 
 prerequisites:
     - A development machine with [Android Studio](https://developer.android.com/studio) installed. 

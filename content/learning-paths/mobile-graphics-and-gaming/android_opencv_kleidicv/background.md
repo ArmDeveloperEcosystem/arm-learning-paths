@@ -10,15 +10,17 @@ layout: "learningpathall"
 ## OpenCV Overview with HAL and KleidiCV
 
 ### OpenCV in Computer Vision
-Open Source Computer Vision Library (OpenCV)) is a framework for real-time computer vision, that you can use across different platforms, including mobile devices. Modern smartphones equipped with advanced cameras and powerful processors can efficiently handle complex computer vision tasks, making OpenCV a go-to choice for developers. Its cross-platform compatibility allows the creation of versatile applications that work across multiple devices without extensive code modifications.
+Open Source Computer Vision Library (OpenCV)) is a framework for real-time computer vision, that you can use across different platforms, including mobile devices. Modern smartphones equipped with advanced cameras and powerful processors can efficiently handle complex computer vision tasks, and OpenCV is a go-to choice for developers. Its cross-platform compatibility allows the creation of versatile applications that work across multiple devices without extensive code modifications.
 
 ### Integration with Android and Kotlin
-OpenCV integrates with Android development, leveraging Kotlin’s concise syntax and Java's interoperability to simplify implementation. You can use OpenCV’s diverse set of functionalities, such as image and video capture, filtering, transformations, feature detection, object recognition, and machine learning integration, to build efficient and maintainable applications.
+OpenCV integrates with Android development, leveraging Kotlin’s concise syntax and Java's interoperability, to simplify implementation. 
+
+You can use OpenCV’s diverse set of functionalities, such as image and video capture, filtering, transformations, feature detection, object recognition, and machine learning integration, to build efficient and maintainable applications.
 
 ### Performance Optimization and HAL
-OpenCV is optimized for performance, utilizing native C++ code for efficient processing. This ensures real-time performance, particularly on mobile devices where computational resources might be limited. 
+OpenCV is optimized for performance, utilizing native C++ code for efficient processing. This ensures optimized real-time performance, particularly on mobile devices where computational resources might be limited. 
 
-A critical component enabling these optimizations is the Hardware Acceleration Layer (HAL). HAL serves as an abstraction layer that enables hardware-specific acceleration by utilizing device-specific optimizations. This significantly boosts the performance of OpenCV functions on supported hardware, reducing processing time and power consumption. HAL makes OpenCV adaptable to modern multi-core processors and GPU architectures, which are essential for computationally-intensive tasks such as object detection and image recognition.
+A critical component enabling these optimizations is the Hardware Acceleration Layer (HAL). HAL serves as an abstraction layer that enables hardware-specific acceleration by utilizing device-specific optimizations. This significantly boosts the performance of OpenCV functions on supported hardware, which reduces processing time and power consumption. HAL makes OpenCV adaptable to modern multi-core processors and GPU architectures, which are essential for computationally-intensive tasks, such as object detection and image recognition.
 
 ### Arm and KleidiCV
 Arm developed KleidiCV, a specialized library that leverages OpenCV’s HAL for hardware acceleration. KleidiCV is an Arm Kleidi Library, a suite of highly performant open-source Arm routines. KleidiCV focuses on optimizing various OpenCV functions specifically for Arm processors, ensuring faster execution and lower power consumption. This integration is particularly beneficial for mobile and embedded systems where performance efficiency is critical. By utilizing HAL, KleidiCV allows developers to harness the full potential of Arm hardware, making it an ideal solution for applications requiring high-performance computer vision on Arm-based devices.
