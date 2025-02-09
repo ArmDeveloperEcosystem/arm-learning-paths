@@ -70,19 +70,19 @@ The `ImageOperation` enum represents a collection of predefined image processing
 
 Here we have four constants:
 
-* GAUSSIAN_BLUR. This applies a Gaussian blur to the image using a 7x7 kernel and a standard deviation of 0.0.
-* SOBEL. This applies the Sobel filter to detect edges in the image. It computes the gradient in both x and y directions with an 8-bit unsigned data type (CvType.CV_16S).
-* RESIZE. This resizes the image to half its original width and height.
-* ROTATE_90. This rotates the image 90 degrees clockwise.
+* GAUSSIAN_BLUR. This constant applies a Gaussian blur to the image using a 7x7 kernel and a standard deviation of 0.0.
+* SOBEL. This constant applies the Sobel filter to detect edges in the image. It computes the gradient in both x and y directions with an 8-bit unsigned data type (CvType.CV_16S).
+* RESIZE. This constant resizes the image to half its original width and height.
+* ROTATE_90. This constant rotates the image 90 degrees clockwise.
 
-Each enum constant must override the abstract method applied to define its specific image processing logic. 
+To define its specific image processing logic, each enum constant must override the abstract method applied. 
 
-We configured processing operations to align with current KleidiCV restrictions. Specifically, in-place changes are not supported, so the source and destination must be different images. In general, only single-channel images are supported (Gaussian blur is an exception). Sobel’s output type must be 16SC1; dx and dy must be either (1,0) or (0,1); and the border mode must be replicate. Gaussian blur supports a non-zero sigma, but its performance is best with sigma 0.0. Its uplift is most noticeable with a kernel size of 7×7.
+You have configured processing operations to align with current KleidiCV restrictions. Specifically, in-place changes are not supported, so the source and destination must be different images. Generally, only single-channel images are supported (Gaussian blur is an exception). Sobel’s output type must be 16SC1; dx and dy must be either (1,0) or (0,1); and the border mode must be replicated. Gaussian blur supports a non-zero sigma, but its performance is best with sigma 0.0. Its uplift is most noticeable with a kernel size of 7×7.
 
-There is also the companion object provides a utility method fromDisplayName. This function maps a string (displayName) to its corresponding enum constant by iterating through the list of all enum values and returns null if no match is found.
+There is also the companion object that provides a utility method fromDisplayName. This function maps a string (displayName) to its corresponding enum constant by iterating through the list of all enum values, and returns null if no match is found.
 
 ## ImageProcessor
-Similarly, add the ImageProcessor.kt:
+Now add the ImageProcessor.kt:
 
 ```Kotlin
 package com.arm.arm64kleidicvdemo
@@ -96,14 +96,14 @@ class ImageProcessor {
 }
 ```
 
-This Kotlin code defines a simple utility class, ImageProcessor, designed to apply a specified image processing operation on an OpenCV Mat object. The ImageProcessor class is a utility class that provides a method to process images. It does not store any state or have additional properties, making it lightweight and focused on its single responsibility: applying operations to images.
+The Kotlin code defines a simple utility class, ImageProcessor, which applies a specified image processing operation on an OpenCV Mat object. The ImageProcessor class is a utility class that provides a method to process images. It does not store any state or have additional properties, making it lightweight and efficient.
 
 The ImageProcessor class acts as a simple orchestrator for image processing tasks. It delegates the actual processing logic to the ImageOperation enum, which encapsulates various image processing techniques. This separation of concerns keeps the ImageProcessor class focused and makes it easy to extend or modify operations by updating the ImageOperation enum.
 
-This design is clean and modular, allowing developers to easily add new processing operations or reuse the ImageProcessor in different parts of an application. It aligns with object-oriented principles by promoting encapsulation and reducing the complexity of the processing logic.
+This design is clean and modular, allowing developers to easily add new processing operations or reuse the ImageProcessor in different parts of an application. It aligns with object-oriented principles by promoting encapsulation and reducing processing logic complexity.
 
 ## PerformanceMetrics
-Then, supplement the project by the `PerformanceMetrics.kt` file:
+Now supplement the project with the `PerformanceMetrics.kt` file:
 
 ```Kotlin
 package com.arm.arm64kleidicvdemo
@@ -138,9 +138,9 @@ data class PerformanceMetrics(private val durationsNano: List<Long>) {
 }
 ```
 
-The above code defines a PerformanceMetrics class that calculates and represents various statistical metrics for performance measurements, such as average, minimum, maximum, and standard deviation of durations.
+This code defines a PerformanceMetrics class that calculates and represents various statistical metrics for performance measurements, such as average, minimum, maximum, and standard deviation of durations.
 
-The PerformanceMetrics class is designed to analyze and summarize performance measurements, such as execution times or latency values. It accepts a list of durations in nanoseconds, computes key metrics like average, minimum, maximum, and standard deviation, and presents them in milliseconds.
+The PerformanceMetrics class analyzes and summarizes performance measurements, such as execution times or latency values. It accepts a list of durations in nanoseconds, computes key metrics like average, minimum, maximum, and standard deviation, and presents them in milliseconds.
 
 By encapsulating the raw data (durationsNano) and exposing only meaningful metrics through computed properties, the class ensures clear separation of data and functionality. The overridden toString method makes it easy to generate a human-readable summary for reporting or debugging purposes. Specifically, you will use this method to report the performance metrics to the user.
 
@@ -300,12 +300,12 @@ class MainActivity : AppCompatActivity() {
 The above Kotlin code defines the main activity for our application that demonstrates image processing using OpenCV. The MainActivity class extends AppCompatActivity, serving as the entry point for the app’s user interface. It manages the lifecycle of the activity and orchestrates the image processing logic.
 
 There are several members of this class:
-1. viewBinding - manages UI components through the ActivityMainBinding class, simplifying access to views in the layout.
-2. imageProcessor - an instance of the ImageProcessor class that applies selected image operations.
-3. originalMat - a Mat object representing the original image loaded from the app’s assets.
-4. currentBitmap - stores the current image as a Bitmap for display.
-5. REPETITIONS - number of times each operation is performed for performance measurement.
-6. TEST_IMAGE - name of the test image located in the app’s assets.
+* viewBinding - manages UI components through the ActivityMainBinding class, simplifying access to views in the layout.
+* imageProcessor - an instance of the ImageProcessor class that applies selected image operations.
+* originalMat - a Mat object representing the original image loaded from the app’s assets.
+* currentBitmap - stores the current image as a Bitmap for display.
+* REPETITIONS - number of times each operation is performed for performance measurement.
+* TEST_IMAGE - name of the test image located in the app’s assets.
 
 When the activity starts, it sets up the user interface, initializes OpenCV, and sets up UI listeners:
 
@@ -384,7 +384,7 @@ dependencies {
 ```
 
 ## Running the application
-You can launch the application in an emulator or on the actual device. 
+You can now launch the application in an emulator, or on the actual device. 
 
 When you do so, click the **Load image** button, select the image processing operation, and then click **Process**. You will see the processing results and a detailed performance analysis as Figures 3-6 show. NOTE: This Learning Path used a Samsung Galaxy S22.
 
@@ -413,7 +413,7 @@ Now click the **Sync Now** button, and deploy the app to the Android device.
 ![img9](Figures/09.jpg)
 ![img10](Figures/10.jpg)
 
-This achieved the following performance uplift:
+This particular example achieves the following performance uplift:
 
 | Operation | Average computation time [ms]       | Performance Uplift  |
 |-----------|------------------|------------------|---------------------|
@@ -422,4 +422,4 @@ This achieved the following performance uplift:
 | Resize    | 0,02             | 0,04             | 2x                  |
 | Rotate    | 0,02             | 0,06             | 3x                  |
 
-As shown above, you achieved 4× faster computations for Gaussian blur and the Sobel filter, 3× faster for rotation, and 2× faster for resizing. Note that his numbers are noise (large standard deviation), and measurements for another device can vary.
+As shown above, this has achieved a performance uplift of 4× faster computations for the Gaussian blur and the Sobel filter, 3× faster for rotation, and 2× faster for resizing. Note that these numbers are noise (large standard deviation), and measurements for another device might vary.
