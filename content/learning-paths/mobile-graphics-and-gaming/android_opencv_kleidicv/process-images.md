@@ -62,15 +62,16 @@ enum class ImageOperation(val displayName: String) {
 }
 ```
 
-The ImageOperation enum represents a collection of predefined image processing operations. Each enum constant is associated with a displayName, which is a user-friendly string describing the operation) and a unique implementation of the apply method to perform the operation on an image (Mat). The processing result is available in the dst parameter of the apply method.
+The ImageOperation enum represents a collection of predefined image processing operations. Each enum constant is associated with a displayName, which is a user-friendly string describing the operation and a unique implementation of the apply method to perform the operation on an image (Mat). The processing result is available in the dst parameter of the apply method.
 
 Here we have four constants:
-1. GAUSSIAN_BLUR. Applies a Gaussian blur to the image using a 7x7 kernel and a standard deviation of 0.0.
-2. SOBEL. Applies the Sobel filter to detect edges in the image. It computes the gradient in both x and y directions with an 8-bit unsigned data type (CvType.CV_16S).
-3. RESIZE. Resizes the image to half its original width and height.
-4. ROTATE_90. Rotates the image 90 degrees clockwise.
 
-Each enum constant must override the abstract method apply to define its specific image processing logic. 
+* GAUSSIAN_BLUR. This applies a Gaussian blur to the image using a 7x7 kernel and a standard deviation of 0.0.
+* SOBEL. This applies the Sobel filter to detect edges in the image. It computes the gradient in both x and y directions with an 8-bit unsigned data type (CvType.CV_16S).
+* RESIZE. This resizes the image to half its original width and height.
+* ROTATE_90. This rotates the image 90 degrees clockwise.
+
+Each enum constant must override the abstract method applied to define its specific image processing logic. 
 
 We configured processing operations to align with current KleidiCV restrictions. Specifically, in-place changes are not supported, so the source and destination must be different images. In general, only single-channel images are supported (Gaussian blur is an exception). Sobel’s output type must be 16SC1; dx and dy must be either (1,0) or (0,1); and the border mode must be replicate. Gaussian blur supports a non-zero sigma, but its performance is best with sigma 0.0. Its uplift is most noticeable with a kernel size of 7×7.
 
@@ -91,7 +92,7 @@ class ImageProcessor {
 }
 ```
 
-This Kotlin code defines a simple utility class, ImageProcessor, designed to apply a specified image processing operation on an OpenCV Mat object. The ImageProcessor class is a utility class that provides a method to process images. It doesn’t store any state or have additional properties, making it lightweight and focused on its single responsibility: applying operations to images.
+This Kotlin code defines a simple utility class, ImageProcessor, designed to apply a specified image processing operation on an OpenCV Mat object. The ImageProcessor class is a utility class that provides a method to process images. It does not store any state or have additional properties, making it lightweight and focused on its single responsibility: applying operations to images.
 
 The ImageProcessor class acts as a simple orchestrator for image processing tasks. It delegates the actual processing logic to the ImageOperation enum, which encapsulates various image processing techniques. This separation of concerns keeps the ImageProcessor class focused and makes it easy to extend or modify operations by updating the ImageOperation enum.
 
@@ -417,4 +418,4 @@ This achieved the following performance uplift:
 | Resize    | 0,02             | 0,04             | 2x                  |
 | Rotate    | 0,02             | 0,06             | 3x                  |
 
-As shown above, we achieved 4× faster computations for Gaussian blur and the Sobel filter, 3× faster for rotation, and 2× faster for resizing. Note that his numbers are noise (large standard deviation), and measurements for another device can vary.
+As shown above, you achieved 4× faster computations for Gaussian blur and the Sobel filter, 3× faster for rotation, and 2× faster for resizing. Note that his numbers are noise (large standard deviation), and measurements for another device can vary.

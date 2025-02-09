@@ -1,5 +1,5 @@
 ---
-title: Accelerate OpenCV-based Android Applications with KleidiCV
+title: Accelerate an OpenCV-based Android Application with KleidiCV
 
 minutes_to_complete: 45
 
