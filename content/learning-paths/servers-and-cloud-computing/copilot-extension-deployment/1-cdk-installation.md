@@ -6,13 +6,13 @@ weight: 2
 layout: learningpathall
 ---
 
-## Infrastructure as Code
+## What is AWS CDK?
 
 AWS CDK is an AWS-native Infrastructure as Code tool that allows cloud engineers to write IaC templates in many different languages. Regardless of the language used, all CDK code eventually transpiles to TypeScript, and the TypeScript generates CloudFormation templates, which then deploy the specified resources.
 
 This Learning Path will use the Python flavor of AWS CDK, because the Copilot Extension that will be deployed is also written in Python. Writing both IaC and application code in the same language is helpful for certain teams, especially those without dedicated platform engineers.
 
-## Installing AWS CDK
+## How do I install AWS CDK?
 
 To install the required packages, you will need npm and Python installed. Next, run
 
@@ -31,6 +31,8 @@ You should see a version number returned, signifying success.
 After the cdk cli is installed, you can use it to create a new python cdk environment:
 
 ```bash
+mkdir copilot-extension-deployment
+cd copilot-extension-deployment
 cdk init app --language python
 ```
 
@@ -40,6 +42,8 @@ This will set up convenient file stubs, as well as create a requirements.txt fil
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
+
+For more information, see Amazon's [Working with the AWS CDK in Python](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-python.html) documentation.
 
 Now you are ready to specify the AWS services needed for your GitHub Copilot Extension.
 

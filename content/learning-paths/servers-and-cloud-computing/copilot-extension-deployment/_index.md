@@ -1,9 +1,5 @@
 ---
-title: Infrastructure Deployment for a GitHub Copilot Extension on Graviton
-
-draft: true
-cascade:
-    draft: true
+title: Graviton Infrastructure for GitHub Copilot Extensions
 
 minutes_to_complete: 20
 
@@ -20,7 +16,7 @@ prerequisites:
     - A GitHub account
     - A linux-based computer with npm and Python installed
 
-author_primary: Joe Stech
+author: Joe Stech
 
 ### Tags
 skilllevels: Intermediate
@@ -33,6 +29,23 @@ tools_software_languages:
     - GitHub
 operatingsystems:
     - Linux
+
+
+
+further_reading:
+    - resource:
+        title: PLACEHOLDER MANUAL 
+        link: PLACEHOLDER MANUAL LINK
+        type: documentation
+    - resource:
+        title: PLACEHOLDER BLOG 
+        link: PLACEHOLDER BLOG LINK
+        type: blog
+    - resource:
+        title: PLACEHOLDER GENERAL WEBSITE 
+        link: PLACEHOLDER GENERAL WEBSITE LINK
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY
