@@ -1,12 +1,14 @@
 ---
-title: PLACEHOLDER STEP TITLE 2
+title: Deployment services
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## PLACEHOLDER HEADER OF SECOND STEP
+In [the first GitHub Copilot Extension Learning Path]() you used 
+
+## VPC
 YOUR CONTENT GOES HERE
 
 IMAGE HERE:

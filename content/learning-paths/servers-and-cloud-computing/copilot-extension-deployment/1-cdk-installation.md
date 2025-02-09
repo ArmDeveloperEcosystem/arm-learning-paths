@@ -14,8 +14,32 @@ This Learning Path will use the Python flavor of AWS CDK, because the Copilot Ex
 
 ## Installing AWS CDK
 
-To install the required packages, you will first need npm and Python installed.
+To install the required packages, you will need npm and Python installed. Next, run
 
+```bash
+npm install -g aws-cdk
+```
 
+To verify that the installation was successful, run
 
+```bash
+cdk --version
+```
+
+You should see a version number returned, signifying success.
+
+After the cdk cli is installed, you can use it to create a new python cdk environment:
+
+```bash
+cdk init app --language python
+```
+
+This will set up convenient file stubs, as well as create a requirements.txt file with the Python CDK libraries required. Install these:
+
+```bash
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Now you are ready to specify the AWS services needed for your GitHub Copilot Extension.
 
