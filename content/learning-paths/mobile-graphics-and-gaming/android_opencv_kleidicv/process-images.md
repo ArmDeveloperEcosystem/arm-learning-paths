@@ -1,21 +1,25 @@
 ---
 # User change
-title: "Process Images"
+title: "Processing the Images"
 
 weight: 5
 
 layout: "learningpathall"
 ---
 
-## Process images
-In this final step, you will implement the application logic to process the images. 
+## Set up
+In this final step, you will learn how to implement the application logic to process the images. 
 
-Start by adding an `assets` folder under `src/main`. Then, under the `assets` folder add an `img.png` image. This image can be any kind of image as it converted to the right type by the app. We will use this image for processing. Here, we use the [cameraman image](https://github.com/antimatter15/cameraman).
+Start by adding an `assets` folder under `src/main`. Then, under the `assets` folder, add an `img.png` image file. This image can be any kind of image file, as the app will convert it to the correct type through the image processing stage. 
 
-To make navigation between files easier in Android Studio, select **Project** from the project browser pane.
+In this example, the image file is a [cameraman image](https://github.com/antimatter15/cameraman).
+
+To facilitate easier navigation between files in Android Studio, use the **Project** menu option from the project browser pane.
 
 ## ImageOperation
-You will now create an enumeration (enum class) for a set of image processing operations in an  application that uses the OpenCV library. Under the `src/main/java/com/arm/arm64kleidicvdemo` add the `ImageOperation.kt` file and modify it as follows:
+You will now create an enumeration, an enum class, for a set of image processing operations in an application that uses the OpenCV library. 
+
+In the `src/main/java/com/arm/arm64kleidicvdemo` file directory, add the `ImageOperation.kt` file, and modify it as follows:
 
 ```Kotlin
 package com.arm.arm64kleidicvdemo
@@ -62,7 +66,7 @@ enum class ImageOperation(val displayName: String) {
 }
 ```
 
-The ImageOperation enum represents a collection of predefined image processing operations. Each enum constant is associated with a displayName, which is a user-friendly string describing the operation and a unique implementation of the apply method to perform the operation on an image (Mat). The processing result is available in the dst parameter of the apply method.
+The `ImageOperation` enum represents a collection of predefined image processing operations. Each enum constant is associated with a displayName, which is a user-friendly string describing the operation and a unique implementation of the apply method to perform the operation on an image (Mat). The processing results are available in the `dst` parameter of the apply method.
 
 Here we have four constants:
 
