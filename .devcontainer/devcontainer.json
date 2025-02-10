@@ -8,9 +8,4 @@
     "remoteUser": "ubuntu",
 
     "postStartCommand": "nohup bash -c 'hugo ; bin/pagefind --site public --output-subdir ../static/pagefind ; hugo server --baseUrl=/ --liveReloadPort=443 --appendPort=false --bind=0.0.0.0 &' ",
-
-    // This line is for including ssh key path in order to be able to do commit signing via ssh within devcontainer
-    "mounts": [
-        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,type=bind,consistency=cached"
-    ]
 }
