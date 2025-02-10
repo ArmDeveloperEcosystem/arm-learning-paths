@@ -36,29 +36,36 @@ The retrieved resources are then used to augment the context for the LLM, which 
 
 ## Collecting Data into Chunks
 
-We have provided a script in the [python-rag-extension github repo](https://github.com/ArmDeveloperEcosystem/python-rag-extension/) we used before to convert an Arm learning path into a series of `chunk.yaml` files for use in our RAG application.
+We have provided scripts in the [python-rag-extension github repo](https://github.com/ArmDeveloperEcosystem/python-rag-extension/) to convert an Arm learning path into a series of `chunk.yaml` files for use in our RAG application.
 
-### Chunk Creation Script Set p
+### Chunk Creation Script Set up
 
-#### TODO: Change this to a local conda
+Navigate to the `vectorstore` folder in the [python-rag-extension github repo](https://github.com/ArmDeveloperEcosystem/python-rag-extension/).
 
-It is recommended to use a virtual environment to manage dependencies. You can set up a virtual environment using `virtualenv`:
-
-```sh
-# Create a virtual environment
-python -m venv venv
-
-# Activate the virtual environment
-# On Windows
-venv\Scripts\activate
-# On macOS/Linux
-source venv/bin/activate
+```bash
+cd vectorstore
 ```
 
-Once your virtual environment is set up, install the requirements from the [single_lp_chunker/requirements.txt](https://github.com/ArmDeveloperEcosystem/python-rag-extension/blob/main/single_lp_chunker/requirements.txt) file.
+It is recommended to use a virtual environment to manage dependencies.
+
+Ensure you have `conda` set up in your development environment. If you aren't sure how, you can follow this [Installation Guide](https://learn.arm.com/install-guides/anaconda/).
+
+To create a new conda environment, use the following command:
 
 ```sh
-pip install -r single_lp_chunker/requirements.txt
+conda create --name vectorstore python=3.11
+```
+
+Once set up is complete, activate the new environment:
+
+```sh
+conda activate vectorstore
+```
+
+Install the required packages:
+
+```sh
+conda install --file vectorstore-requirements.txt
 ```
 
 ### Generate Chunk Files
@@ -66,7 +73,7 @@ pip install -r single_lp_chunker/requirements.txt
 To generate chunks, use the following command:
 
 ```sh
-python single_lp_chunker/chunk_a_learning_path.py --url <LEARNING_PATH_URL>
+python chunk_a_learning_path.py --url <LEARNING_PATH_URL>
 ```
 
 Replace `<LEARNING_PATH_URL>` with the URL of the learning path you want to process. If no URL is provided, the script will default to a [known learning path URL](https://learn.arm.com/learning-paths/cross-platform/kleidiai-explainer).
@@ -77,19 +84,11 @@ The script will process the specified learning path and save the chunks as YAML 
 
 Once you have a `./chunks/` directory full of yaml files, we now need to use FAISS to create our vector database.
 
-### Database Creation Script Set Up
-
-copy the vector store creation script to that yaml directory.
-
-The file is located in the root of the example repo.
-
-```bash
-cp local_vectorstore_creation.py chunks
-```
+### OpenAI Key and Endpoint
 
 Ensure your local environment has your `AZURE_OPENAI_KEY` and `AZURE_OPENAI_ENDPOINT` set.
 
-### If needed, generate Azure OpenAI keys and deployment 
+#### If needed, generate Azure OpenAI keys and deployment 
 
 1. **Create an OpenAI Resource**:
     - Go to the [Azure Portal](https://portal.azure.com/).
@@ -121,16 +120,19 @@ Ensure your local environment has your `AZURE_OPENAI_KEY` and `AZURE_OPENAI_ENDP
 
 Run the python script to create the FAISS index `.bin` and `.json` files.
 
+**NOTE:** This assumes the chunk files are located in a `chunks` subfolder, as they should automatically be.
+
 ```bash
-cd chunks
 python local_vectorstore_creation.py
 ```
 
-Copy those generated files in the root directory of your Flask application.
+Copy the generated `bin` and `json` files to the root directory of your Flask application.
+
+THey should be in the `vectorstore/chunks` folder. Since you are likely still in the `vectorstore` folder, run this command to copy:
 
 ```bash
-cp faiss_index.bin ../
-cp metadata.json ../
+cp chunks/faiss_index.bin ../
+cp chunks/metadata.json ../
 ```
 
 Your flask application is now ready for deployment.
