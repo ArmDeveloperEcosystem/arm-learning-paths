@@ -12,3 +12,4 @@ package-lock.json
 nohup.out
 
 venv/
+contributor_private.csv
