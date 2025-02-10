@@ -16,7 +16,7 @@ prerequisites:
     - A Fixed Virtual Platform (FVP).
     - A basic understanding of Neoverse Reference Design (RD) platform boot.
 
-author_primary: Daniel Nguyen
+author: Daniel Nguyen
 
 ### Tags
 skilllevels: Advanced
@@ -27,6 +27,14 @@ tools_software_languages:
     - Arm Development Studio
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: Neoverse Reference Design Platform Software Documentation
+        link: https://neoverse-reference-design.docs.arm.com/en/latest/index.html
+        type: documentation
+
 
 
 ### FIXED, DO NOT MODIFY

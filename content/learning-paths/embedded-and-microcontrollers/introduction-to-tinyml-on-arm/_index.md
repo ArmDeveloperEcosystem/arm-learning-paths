@@ -21,7 +21,7 @@ prerequisites:
     - A [Grove Vision AI Module](https://wiki.seeedstudio.com/Grove-Vision-AI-Module/) or an Arm license to run the Corstone-300 Fixed Virtual Platform (FVP).
 
 
-author_primary: Dominica Abena O. Amanfo
+author: Dominica Abena O. Amanfo
 
 ### Tags
 skilllevels: Introductory
@@ -43,6 +43,23 @@ tools_software_languages:
     - GCC
     - Edge Impulse
     - Node.js
+
+further_reading:
+    - resource:
+        title: TinyML Brings AI to Smallest Arm Devices 
+        link: https://newsroom.arm.com/blog/tinyml
+        type: blog
+    - resource:
+        title: Arm Compiler for Embedded
+        link: https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded
+        type: documentation
+    - resource:
+        title: Arm GNU Toolchain
+        link: https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain
+        type: documentation
+    
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -11,7 +11,7 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux OS and a recent version of compiler (Clang or GCC) installed
 
-author_primary: Konstantinos Margaritis
+author: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
@@ -33,6 +33,19 @@ shared_between:
     - servers-and-cloud-computing
     - mobile-graphics-and-gaming
    
+
+further_reading:
+    - resource:
+        title: How to use the restrict qualifier in C
+        link: https://www.oracle.com/solaris/technologies/solaris10-cc-restrict.html
+        type: blog
+       
+    - resource:
+        title: Explore the usage of restrict with Godbolt
+        link: https://godbolt.org/z/PxWxjc1oh
+        type: website
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -17,7 +17,7 @@ prerequisites:
     - A computer with Arm DS installed
     - Some understanding of the Arm Architecture
 
-author_primary: Stephen Theobald
+author: Stephen Theobald
 
 ### Tags
 skilllevels: Introductory
@@ -38,6 +38,18 @@ shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
     - embedded-and-microcontrollers
+
+further_reading:
+    - resource:
+        title: Introducing the Scalable Matrix Extension for the Armv9-A Architecture
+        link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/scalable-matrix-extension-armv9-a-architecture
+        type: blog
+    - resource:
+        title: The Scalable Matrix Extension (SME), for Armv9-A.  Arm Architecture Reference Manual Supplement
+        link: https://developer.arm.com/documentation/ddi0616
+        type: documentation
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

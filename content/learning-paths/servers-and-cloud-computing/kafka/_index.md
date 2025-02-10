@@ -15,7 +15,7 @@ learning_objectives:
 prerequisites:
     - Seven physical Arm machines or cloud instances with either Ubuntu or Debian installed. 
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Advanced
@@ -27,6 +27,25 @@ operatingsystems:
 tools_software_languages:
     - Kafka
     - Zookeeper
+
+
+further_reading:
+    - resource:
+        title: Kafka Manual
+        link: https://kafka.apache.org/documentation/
+        type: documentation
+    - resource:
+        title: Benchmarking Apache Kafka
+        link: https://armkeil.blob.core.windows.net/developer/Files/pdf/white-paper/benchmarking-apache-kafka.pdf
+        type: documentation
+    - resource: 
+        title: Zookeeper Documentation
+        link: https://zookeeper.apache.org/documentation.html
+        type: documentation
+    - resource:
+        title: Apache Kafka Benchmarks on AWS Graviton2
+        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/apache-kafka-benchmarks-on-aws-graviton2
+        type: blog
 
 
 ### FIXED, DO NOT MODIFY

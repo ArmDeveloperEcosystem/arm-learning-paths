@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux with recent versions of Clang or GCC installed.
 
-author_primary: Konstantinos Margaritis
+author: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
@@ -33,6 +33,25 @@ shared_between:
     - laptops-and-desktops
     - embedded-and-microcontrollers
     - mobile-graphics-and-gaming
+
+further_reading:
+    - resource:
+        title: Write a Dynamic Memory Allocator
+        link: https://learn.arm.com/learning-paths/cross-platform/dynamic-memory-allocator/
+        type: website
+    - resource:
+        title: Memory Latency
+        link: https://en.algorithmica.org/hpc/cpu-cache/latency/
+        type: website
+    - resource:
+        title: Latency Numbers Every Programmer Should Know
+        link: https://gist.github.com/jboner/2841832?permalink_comment_id=4123064#gistcomment-4123064
+        type: website
+    - resource:
+        title: Colin Scott's Interactive latencies page
+        link: https://colin-scott.github.io/personal_website/research/interactive_latency.html
+        type: website
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

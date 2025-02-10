@@ -2,7 +2,7 @@
 title: UBL Cloud server setup
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/107573
-author_primary: Ronan Synnott
+author: Ronan Synnott
 weight: 4
 
 ### FIXED, DO NOT MODIFY

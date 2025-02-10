@@ -17,7 +17,9 @@ prerequisites:
     - A Docker Hub account for storing container images.
     - Familiarity with the concepts of ML and continuous integration and deployment (CI/CD).
 
-author_primary: Pareena Verma, Annie Tallund
+author:
+    - Pareena Verma
+    - Annie Tallund
 
 ### Tags
 skilllevels: Introductory
@@ -31,6 +33,22 @@ tools_software_languages:
     - GitHub
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: Arm64 on GitHub Actions - Powering faster, more efficient build systems
+        link: https://github.blog/news-insights/product-news/arm64-on-github-actions-powering-faster-more-efficient-build-systems/
+        type: blog
+    - resource:
+        title: Arm Compute Library
+        link: https://github.com/ARM-software/ComputeLibrary
+        type: website
+    - resource:
+        title: Streamlining your MLOps pipeline with GitHub Actions and Arm64 runners
+        link: https://github.blog/enterprise-software/ci-cd/streamlining-your-mlops-pipeline-with-github-actions-and-arm64-runners/
+        type: blog
+
 
 
 ### FIXED, DO NOT MODIFY

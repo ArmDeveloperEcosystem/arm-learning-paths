@@ -14,7 +14,7 @@ learning_objectives:
 prerequisites:
 - An Arm Linux computer or an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider running Ubuntu 20.04 or Ubuntu 22.04.
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 test_images:
 - ubuntu:latest
@@ -31,10 +31,19 @@ operatingsystems:
 tools_software_languages:
 - zlib
 
+further_reading:
+    - resource:
+        title: Cloudflare zlib on GitHub
+        link: https://github.com/cloudflare/zlib
+        type: documentation
+    - resource:
+        title: Improving zlib-cloudflare and comparing performance with other zlib forks
+        link: https://aws.amazon.com/blogs/opensource/improving-zlib-cloudflare-and-comparing-performance-with-other-zlib-forks/
+        type: blog
+
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
-layout: learningpathall
 ---

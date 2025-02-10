@@ -6,6 +6,7 @@ minutes_to_complete: 15
 who_is_this_for: This is an introductory topic for software developers new to the
   Arm RAN Acceleration Library (ArmRAL).
 
+
 learning_objectives:
 - Build and install the Arm RAN Acceleration Library
 - Test the capabilities of your platform
@@ -14,7 +15,7 @@ prerequisites:
 - An Arm computer running Linux. Cloud instances can be used, refer to the list of
   [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 test_images:
 - ubuntu:latest
@@ -32,6 +33,25 @@ tools_software_languages:
 - ArmRAL
 - 5G
 - GCC
+
+further_reading:
+    - resource:
+        title: 5G Infrastructure
+        link: https://www.arm.com/en/markets/5g/infrastructure
+        type: website
+    - resource:
+        title: Arm RAN Acceleration Library Reference Guide
+        link: https://developer.arm.com/documentation/102249
+        type: documentation
+    - resource:
+        title: 5G RAN for Dummies
+        link: https://www.arm.com/resources/dummies-guide/5g-ran
+        type: documentation
+    - resource:
+        title: The next chapter for Arm RAN Acceleration Library Open-sourcing the code base & accelerating adoption
+        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/arm-ral-is-now-open-source
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

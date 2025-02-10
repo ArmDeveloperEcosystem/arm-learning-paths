@@ -3,9 +3,9 @@ title: Windows Performance Analyzer (WPA) plugin
 
 minutes_to_complete: 15
 
-official_docs: https://github.com/arm-developer-tools/windowsperf-wpa-plugin
+official_docs: https://gitlab.com/Linaro/WindowsPerf/wpa-plugin
 
-author_primary: Alaaeddine Chakroun 
+author: Alaaeddine Chakroun 
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -83,14 +83,14 @@ Close Windows Performance Analyzer.
 
 You are now ready to install the WPA plugin, which is a single `.dll` file.
 
-Download the `.zip` file from the [Windows Perf WPA plugin GitHub releases page](https://github.com/arm-developer-tools/windowsperf-wpa-plugin/releases) on GitHub.
+Download the `.zip` file from the [Windows Perf WPA plugin releases page](https://gitlab.com/Linaro/WindowsPerf/wpa-plugin/-/releases).
 
 Alternatively, you can download the `.zip` file from a command prompt:
 
 ```console
 mkdir wpa-plugin
 cd wpa-plugin
-curl -L -O https://github.com/arm-developer-tools/windowsperf-wpa-plugin/releases/download/1.0.3/wpa-plugin-1.0.3.zip
+curl -L -O https://gitlab.com/api/v4/projects/50944937/packages/generic/wperf-wpa-plugin/1.0.3/wpa-plugin-1.0.3.zip
 ```
 
 Extract the `.dll` file from the downloaded `.zip` file. 
@@ -140,4 +140,3 @@ wpa -addsearchdir %USERPROFILE%\Downloads\wpa-plugin-1.0.3 -i %USERPROFILE%\Down
 ## How do I uninstall the WPA plugin?
 
 To uninstall the plugin, simply delete the `WPAPlugin.dll` file.
-

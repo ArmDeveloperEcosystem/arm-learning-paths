@@ -15,7 +15,7 @@ prerequisites:
     - A basic understanding of Snort's operation and configuration.
     
 
-author_primary: Preema Merlin Dsouza
+author: Preema Merlin Dsouza
 
 ### Tags
 skilllevels: Introductory
@@ -29,6 +29,17 @@ tools_software_languages:
     - GCC
 operatingsystems:
     - Linux
+
+further_reading:
+    - resource:
+        title: Snort3 Documentation
+        link: https://docs.snort.org/start/
+        type: documentation
+    - resource:
+        title: Performance Optimization for NGFW Whitepaper 
+        link: https://files.techmahindra.com/static/img/pdf/next-generation-firewall.pdf
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -19,7 +19,7 @@ prerequisites:
     - Basic knowledge of vector databases.
     - Understanding of LLM fundamentals.
 
-author_primary: Nobel Chowdary Mandepudi
+author: Nobel Chowdary Mandepudi
 
 ### Tags
 skilllevels: Advanced
@@ -32,6 +32,22 @@ tools_software_languages:
     - Python
     - Streamlit
     - Google Axion
+
+further_reading:
+    - resource:
+        title: Getting started with Llama
+        link: https://llama.meta.com/get-started
+        type: documentation
+    - resource:
+        title: Hugging Face Documentation
+        link: https://huggingface.co/docs
+        type: documentation
+    - resource:
+        title: Democratizing Generative AI with CPU-based inference 
+        link: https://blogs.oracle.com/ai-and-datascience/post/democratizing-generative-ai-with-cpu-based-inference
+        type: blog
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

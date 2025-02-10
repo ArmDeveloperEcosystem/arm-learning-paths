@@ -2,7 +2,7 @@
 additional_search_terms:
 - cloud
 - azure
-author_primary: Jason Andrews
+author: Jason Andrews
 layout: installtoolsall
 minutes_to_complete: 15
 multi_install: false

@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - None
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -24,6 +24,17 @@ operatingsystems:
     - Baremetal
     - RTOS
 tools_software_languages:
+
+
+further_reading:
+    - resource:
+        title: Raspberry Pi Pico
+        link: https://www.raspberrypi.com/products/raspberry-pi-pico/
+        type: website
+    - resource:
+        title: BBC micro:bit
+        link: https://microbit.org/
+        type: website
 
 
 ### FIXED, DO NOT MODIFY

@@ -2,7 +2,7 @@
 title: Arm Ecosystem FVPs and Architecture Envelope Models
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/100966
-author_primary: Ronan Synnott
+author: Ronan Synnott
 weight: 4
 
 ### FIXED, DO NOT MODIFY

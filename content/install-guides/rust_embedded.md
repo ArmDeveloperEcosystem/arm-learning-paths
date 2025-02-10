@@ -2,7 +2,7 @@
 title: Rust for Embedded Applications
 minutes_to_complete: 10
 official_docs: https://docs.rust-embedded.org/
-author_primary: Ronan Synnott
+author: Ronan Synnott
 additional_search_terms:
 - compiler
 - rust

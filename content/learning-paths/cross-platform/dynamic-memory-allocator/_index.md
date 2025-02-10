@@ -5,6 +5,7 @@ minutes_to_complete: 120
 
 who_is_this_for: This is an introductory topic for software developers learning about dynamic memory allocation for the first time, and who may have used malloc and free in C programming. It also provides a starting point to explore more advanced memory allocation topics.
 
+layout: learningpathall
 learning_objectives:
 - Explain how dynamic memory allocation and the C heap works
 - Write a simple dynamic memory allocator
@@ -14,12 +15,22 @@ prerequisites:
 - Familiarity with C programming, with a good understanding of pointers.
 - A Linux machine to run the example code.
 
-author_primary: David Spickett
+author: David Spickett
 
 test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
+
+further_reading:
+    - resource:
+        title: C Dynamic Memory Management Functions
+        link: https://en.cppreference.com/w/c/memory
+        type: documentation
+    - resource:
+        title: LLSoftSecBook chapter on Memory Vulnerabilities
+        link: https://llsoftsec.github.io/llsoftsecbook/#memory-vulnerability-based-attacks
+        type: website
 
 ### Tags
 skilllevels: Introductory

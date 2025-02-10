@@ -18,7 +18,10 @@ prerequisites:
     - A USB-C cable.
     - An x86 Linux machine, or a Mac running macOS.
 
-author_primary: Chaodong Gong, Alex Su, Kieran Hejmadi
+author:
+    - Chaodong Gong
+    - Alex Su
+    - Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
@@ -34,6 +37,17 @@ operatingsystems:
     - macOS
 
 
+
+
+further_reading:
+    - resource:
+        title: Grove Vision AI Module V2 User Documentation
+        link: https://wiki.seeedstudio.com/grove_vision_ai_v2/
+        type: documentation
+    - resource:
+        title: WiseEye2 HX6538 processor blog (SoC powering Grove Vision AI Module V2) 
+        link: https://www.himax.com.tw/products/wiseeye-ai-sensing/wiseeye2-ai-processor/
+        type: blog
 
 
 ### FIXED, DO NOT MODIFY

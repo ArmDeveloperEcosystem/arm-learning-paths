@@ -7,7 +7,7 @@ additional_search_terms:
 
 layout: installtoolsall
 minutes_to_complete: 10
-author_primary: Daniel Gubay
+author: Daniel Gubay
 multi_install: false
 multitool_install_part: false
 official_docs: https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm

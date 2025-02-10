@@ -13,7 +13,7 @@ learning_objectives:
 prerequisites:
     - An Arm-based system (bare metal server, cloud instance, developer board) running Linux 
 
-author_primary: James Whitaker, Arm
+author: James Whitaker
 
 ### Tags
 skilllevels: Introductory
@@ -25,6 +25,21 @@ tools_software_languages:
     - Python
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: Perf for Linux on Arm (LinuxPerf)
+        link: https://learn.arm.com/install-guides/perf/
+        type: website
+    - resource:
+        title: AWS Perf (APerf) 
+        link: https://learn.arm.com/install-guides/aperf/
+        type: website
+    - resource:
+        title: Arm Performance Studio
+        link: https://learn.arm.com/install-guides/ams/
+        type: website
 
 
 ### FIXED, DO NOT MODIFY

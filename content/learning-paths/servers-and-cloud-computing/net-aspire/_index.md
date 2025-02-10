@@ -15,7 +15,7 @@ prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from AWS or GCP.
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is an example of a suitable editor.    
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -33,6 +33,22 @@ tools_software_languages:
 operatingsystems:
     - Windows
     - Linux
+
+
+further_reading:
+    - resource:
+        title: .NET Aspire Overview
+        link: https://learn.microsoft.com/en-us/dotnet/aspire/get-started/aspire-overview
+        type: Documentation
+    - resource:
+        title: Compute Service - Amazon EC2
+        link: https://aws.amazon.com/pm/ec2
+        type: Documentation
+    - resource:
+        title: Compute Service - Google GCP
+        link: https://cloud.google.com/products/compute/
+        type: Documentation
+
 
 
 ### FIXED, DO NOT MODIFY

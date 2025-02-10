@@ -4,7 +4,7 @@ additional_search_terms:
 - EKS
 - AWS
 - infrastructure
-author_primary: Jason Andrews
+author: Jason Andrews
 layout: installtoolsall
 minutes_to_complete: 5
 multi_install: false

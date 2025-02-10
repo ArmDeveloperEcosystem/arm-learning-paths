@@ -15,7 +15,7 @@ prerequisites:
     - Basic understanding of Java.
     - An [installation of Java](/install-guides/java/) on your machine.
 
-author_primary: Kieran Hejmadi
+author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
@@ -26,6 +26,18 @@ tools_software_languages:
     - Java
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: OpenJDK Wiki 
+        link: https://wiki.openjdk.org/
+        type: documentation
+    - resource:
+        title: G1GC Tuning 
+        link: https://www.oracle.com/technical-resources/articles/java/g1gc.html
+        type: documentation
+
 
 
 ### FIXED, DO NOT MODIFY

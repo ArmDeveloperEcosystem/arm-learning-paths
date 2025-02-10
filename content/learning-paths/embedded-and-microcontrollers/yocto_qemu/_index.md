@@ -15,7 +15,7 @@ prerequisites:
     - Some familiarity with embedded Linux.
     - A linux machine running Ubuntu 22.04 with at least 60 GB of disk space.
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -27,6 +27,24 @@ operatingsystems:
 tools_software_languages:
     - Yocto Linux
     - QEMU
+
+further_reading:
+    - resource:
+        title: Yocto Project Reference Manual
+        link: https://docs.yoctoproject.org/ref-manual/index.html
+        type: documentation
+
+    - resource:
+        title: Poky Reference Manual
+        link: https://docs.yoctoproject.org/1.0/poky-ref-manual/poky-ref-manual.html
+        type: documentation
+
+    - resource:
+        title: QEMU documentation
+        link: https://www.qemu.org/docs/master/
+        type: documentation
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -8,9 +8,9 @@ cascade:
 
 minutes_to_complete: 10
 
-official_docs: https://github.com/arm-developer-tools/windowsperf-vs-extension
+official_docs: https://gitlab.com/Linaro/WindowsPerf/vs-extension
 
-author_primary: Nader Zouaoui
+author: Nader Zouaoui
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -71,11 +71,11 @@ To install the WindowsPerf Visual Studio Extension from Visual Studio:
 
 ![WindowsPerf install page #center](/install_guides/_images/wperf-vs-extension-install-page.png)
 
-### Installation from GitHub
+### Installation from GitLab
 
-You can also install the WindowsPerf Visual Studio Extension from GitHub. 
+You can also install the WindowsPerf Visual Studio Extension from GitLab. 
 
-Download the installation file directly from the [GitHub release page](https://github.com/arm-developer-tools/windowsperf-vs-extension/releases).
+Download the installation file directly from the [release page](https://gitlab.com/Linaro/WindowsPerf/vs-extension/-/releases).
 
 Unzip the downloaded file and double click on the `WindowsPerfGUI.vsix` file.
 
@@ -85,7 +85,7 @@ Make sure that any previous version of the extension is uninstalled and that Vis
 
 ### Build from source
 
-To build the source code, clone [the repository](https://github.com/arm-developer-tools/windowsperf-vs-extension) and build the `WindowsPerfGUI` solution using the default configuration in Visual Studio. 
+To build the source code, clone [the repository](https://gitlab.com/Linaro/WindowsPerf/vs-extension.git) and build the `WindowsPerfGUI` solution using the default configuration in Visual Studio. 
 
 Building the source is not required, but offered as an alternative installation method if you want to customize the extension. 
 

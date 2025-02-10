@@ -12,7 +12,9 @@ prerequisites:
     - A basic understanding of SIMD.
     - Access to an Arm platform with a SIMD-supported engine, installed with recent versions of a C compiler such as Clang or GCC.
 
-author_primary: Georgios Mermigkis and Konstantinos Margaritis, VectorCamp
+author: 
+    - Georgios Mermigkis
+    - Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
@@ -33,6 +35,14 @@ shared_between:
     - laptops-and-desktops
     - servers-and-cloud-computing
     - mobile-graphics-and-gaming
+
+further_reading:
+    - resource:
+        title: SIMD.info
+        link: https://simd.info
+        type: website
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
