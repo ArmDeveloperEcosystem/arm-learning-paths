@@ -87,7 +87,7 @@ function showPopupPostConnection(message,type,connection_status=false) {
         let audioChunks = [];
         let audioBlob = null;
         let audio_cap_timeout; 
-        let audio_cap_timeout_value = 15000;
+        let audio_cap_timeout_value =60000;
         let isRecording = false;
     
         const audio_playback = document.getElementById('audio-playback');
@@ -345,7 +345,7 @@ function showPopupPostConnection(message,type,connection_status=false) {
 
         // Set timeout
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 seconds timeout
+        const timeoutId = setTimeout(() => controller.abort(), 2000); // 20 seconds timeout
         
         console.log('Sending audio to server...');
         console.log('--------------------------');
