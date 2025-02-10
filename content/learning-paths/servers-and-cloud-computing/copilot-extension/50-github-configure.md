@@ -26,6 +26,8 @@ In the "Callback URL" field, put the callback URL of your agent that you deploye
 
 Under "Account permissions", grant read-only permissions to "GitHub Copilot Chat".
 
+![Account Permissions](images/githubconfig-permissions.png)
+
 ### In the "Copilot" settings
 
 Set your app type to "Agent," then fill out the remaining fields.
@@ -43,6 +45,8 @@ After you update your GitHub App settings, you can start chatting with your exte
 If you would like to make your extension public so that anyone can use it, go into your GitHub App advanced settings. 
 
 You will see one of two options:
+
+![GitHub App Advanced Settings](images/githubconfig-makepublic.png)
 
 ### Make public
 
