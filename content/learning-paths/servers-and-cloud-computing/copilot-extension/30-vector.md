@@ -40,6 +40,8 @@ We have provided a script in the [python-rag-extension github repo](https://gith
 
 ### Chunk Creation Script Set p
 
+#### TODO: Change this to a local conda
+
 It is recommended to use a virtual environment to manage dependencies. You can set up a virtual environment using `virtualenv`:
 
 ```sh
@@ -87,18 +89,48 @@ cp local_vectorstore_creation.py chunks
 
 Ensure your local environment has your `AZURE_OPENAI_KEY` and `AZURE_OPENAI_ENDPOINT` set.
 
-#### TODO: Guidance to how to get these keys.
+### If needed, generate Azure OpenAI keys and deployment 
+
+1. **Create an OpenAI Resource**:
+    - Go to the [Azure Portal](https://portal.azure.com/).
+    - Click on "Create a resource".
+    - Search for "OpenAI" and select "Azure OpenAI Service".
+    - Click "Create".
+
+1. **Configure the OpenAI Resource**:
+    - Fill in the required details such as Subscription, Resource Group, Region, and Name.
+    - Click "Review + create" and then "Create" to deploy the resource.
+
+1. **Generate API Key and Endpoint**:
+    - Once the resource is created, navigate to the resource page.
+    - Under the "Resource Management->Keys and Endpoint" section, you will find the key and endpoint values.
+    - Copy these values and set them in your local environment.
+
+    ```sh
+    export AZURE_OPENAI_KEY="<your_openai_key>"
+    export AZURE_OPENAI_ENDPOINT="https://<your_openai_endpoint>.openai.azure.com/"
+    ```
+
+    You now have the necessary keys to use Azure OpenAI in your application.
+
+1. **Deploy text-embedding-ada-002 model**
+    - Go inside Azure AI Foundry for your new deployment
+    - Under "Deployments", ensure you have a deployment for "text-embedding-ada-002"
 
 ### Generate Vector Database Files
 
 Run the python script to create the FAISS index `.bin` and `.json` files.
 
-#### TODO: Confirm package installation - Need to install openai?
-
 ```bash
-python chunks/local_vectorstore_creation.py
+cd chunks
+python local_vectorstore_creation.py
 ```
 
-Place those generated files in the root directory of your Flask application.
+Copy those generated files in the root directory of your Flask application.
+
+```bash
+cp faiss_index.bin ../
+cp metadata.json ../
+```
 
 Your flask application is now ready for deployment.
