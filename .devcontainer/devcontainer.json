@@ -8,5 +8,5 @@
     "remoteUser": "ubuntu",
 
     "postStartCommand": "nohup bash -c 'hugo ; bin/pagefind --site public --output-subdir ../static/pagefind ; hugo server --baseUrl=/ --liveReloadPort=443 --appendPort=false --bind=0.0.0.0 &' "
-    
+
 }
