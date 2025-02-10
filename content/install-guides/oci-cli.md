@@ -70,7 +70,7 @@ source $HOME/.bashrc
 
 Verify OCI CLI is installed using the `--version` option:
 
-```bash { target="ubuntu:latest", env_source="~/.bashrc" }
+```bash { target="ubuntu:latest", env_source="$HOME/.bashrc" }
 oci --version
 ```
 

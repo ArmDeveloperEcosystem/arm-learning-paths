@@ -76,7 +76,7 @@ You are now ready to install ACfL [manually](#manual) or with [Spack](#spack).
 
 Use an Arm recommended script to select, download, and install your preferred ACfL package.
 
-```bash
+```console
 bash <(curl -L https://developer.arm.com/-/cdn-downloads/permalink/Arm-Compiler-for-Linux/Package/install.sh)
 ```
 
@@ -181,7 +181,7 @@ Install ACfL and prerequisites from the Amazon Linux 2023 `rpm` package reposito
 sudo dnf update
 sudo dnf install 'dnf-command(config-manager)' procps psmisc make environment-modules
 sudo dnf config-manager --add-repo https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
-sudo dnf install acfl
+sudo dnf -y install acfl
 ```
 
 Or using the equivalent `yum` commands:
@@ -190,7 +190,7 @@ Or using the equivalent `yum` commands:
 sudo yum update
 sudo yum install 'dnf-command(config-manager)' procps psmisc make environment-modules
 sudo yum config-manager --add-repo https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
-sudo yum install acfl
+sudo yum -y install acfl
 ```
 
 The ACfL tools are now ready to use.
@@ -207,7 +207,7 @@ Install ACfL and prerequisites from the RHEL 9 `rpm` package repository with `dn
 sudo dnf update
 sudo dnf install 'dnf-command(config-manager)' procps psmisc make environment-modules
 sudo dnf config-manager --add-repo https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
-sudo dnf install acfl
+sudo dnf -y install acfl
 ```
 
 Or using the equivalent `yum` commands:
@@ -216,7 +216,7 @@ Or using the equivalent `yum` commands:
 sudo yum update
 sudo yum install 'dnf-command(config-manager)' procps psmisc make environment-modules
 sudo yum config-manager --add-repo https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
-sudo yum install acfl
+sudo yum -y install acfl
 ```
 
 The ACfL tools are now ready to use.
@@ -316,7 +316,7 @@ ACfL is now [ready to use](#armclang).
 To get started with the Arm C/C++ Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
 armclang --version
 ```
 
@@ -340,7 +340,7 @@ armclang hello.c -o hello
 
 Run the application with:
 
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
 ./hello
 ```
 
@@ -354,7 +354,7 @@ Hello, C World!
 To get started with the Arm Fortran Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
 armflang --version
 ```
 
@@ -368,12 +368,12 @@ end program hello
 ```
 
 Build the application with:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
 armflang hello.f90 -o hello
 ```
 
 Run the application with:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
 ./hello
 ```
 

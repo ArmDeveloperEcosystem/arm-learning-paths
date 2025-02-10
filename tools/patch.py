@@ -19,7 +19,7 @@ def patch(article_path: str, results: dict, link: str):
         content_type, sw_category, content_title = article_path_parts
         article_path = PurePath(article_path, "_index.md")
     elif "install-guides" in article_path_parts:
-        content_type, content_title = article_path_parts
+        content_type, content_title, _ = article_path_parts
         content_title = content_title.strip(".md")
         sw_category = content_type
     else:
