@@ -1,37 +1,26 @@
 ---
-title: Configuring with GitHub
-weight: 7
+title: Configure GitHub Application
+weight: 50
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Now we need to create a Copilot extension on GitHub to connect to our deployed application.
-
-## Creating a GitHub app
-
-> For the most up to date instructions, follow the [official documentation for creating a GitHub App for Copilot Extension](https://docs.github.com/en/copilot/building-copilot-extensions/creating-a-copilot-extension/creating-a-github-app-for-your-copilot-extension#creating-a-github-app).
-
-On any page of [GitHub](https://github.com/), click your profile picture and go to Settings. Scroll down to developer settings, and create a GitHub App.
-
-Your GitHub App must have:
-    - A name
-    - A homepage URL
-    - Webhooks deselected
-
-After you create your app, click **Install App** in the sidebar, then install your app on your account.
+Now we need to configure the GitHub Application we created before to connect to our deployed Copilot extension application.
 
 ## Configure GitHub App for Copilot Extension
 
 > For the most up to date instructions, follow the [official documentation for configuring your GitHub App for Copilot Extension](https://docs.github.com/en/copilot/building-copilot-extensions/creating-a-copilot-extension/configuring-your-github-app-for-your-copilot-extension#configuring-your-github-app).
 
-Make the following changes to your GitHub App settings:
+On any page of [GitHub](https://github.com/), click your profile picture and go to Settings. Scroll down to developer settings, and open the GitHub App we made previously.
+
+Make the following changes:
 
 ### In the "General" settings
 
-In the "Callback URL" field, put the URL of your agent you deployed in the previous step.
+In the "Callback URL" field, put the URL of your agent that you deployed in the previous step.
 
-If you want to test locally and use an ephemeral domain in ngrok, you will need to update this URL every time you restart your ngrok server.
+**Note:** If you are not using a deployed application and you want to test locally, you can use an ephemeral domain in ngrok. However you will need to update this URL every time you restart your ngrok server.
 
 ### In the "Permissions & events" settings
 
