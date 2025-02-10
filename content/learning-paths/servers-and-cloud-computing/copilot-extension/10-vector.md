@@ -1,6 +1,6 @@
 ---
 title: Vector Database
-weight: 30
+weight: 10
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
