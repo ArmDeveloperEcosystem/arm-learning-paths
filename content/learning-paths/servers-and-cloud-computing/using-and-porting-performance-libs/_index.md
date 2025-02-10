@@ -9,7 +9,8 @@ learning_objectives:
     - Learn how to incorporate optimised libraries
     - Learn how to port a basic application from x86 to AArch64
 prerequisites:
-    - Understanding of C++, Linux and the GCC/G++ compiler
+    - Access to an Arm / x86-based cloud instance
+    - Intermediate understanding of C++, Linux and compilation
 
 author_primary: Kieran Hejmadi
 
