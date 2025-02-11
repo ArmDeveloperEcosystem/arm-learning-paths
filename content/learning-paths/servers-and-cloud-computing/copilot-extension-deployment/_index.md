@@ -14,7 +14,7 @@ prerequisites:
     - Information in the Build a GitHub Copilot Extension in Python Learning Path
     - Basic knowledge of Infrastructure as Code
     - A GitHub account
-    - A linux-based computer with npm and Python installed
+    - A linux-based computer with npm, Python, and the AWS CLI installed
 
 author: Joe Stech
 

@@ -206,3 +206,29 @@ listener.add_targets("ASGTarget",
 
 ## Route 53
 
+The final step in setting up your AWS services is to add an ALB-linked A record to the hosted zone for your domain. This makes sure that when GitHub invokes your API, the DNS is pointed to the IP of your ALB. You will need to replace `HOSTED_ZONE_DOMAIN_NAME` with your hosted zone domain, and replace `SUBDOMAIN_NAME` with the subdomain that maps to the ACM certificate that you generated and used in your ALB.
+
+```Python
+hosted_zone = route53.HostedZone.from_lookup(self, "HostedZone",
+                                                domain_name=os.environ["HOSTED_ZONE_DOMAIN_NAME"],
+                                                )
+
+# Create an A record for the subdomain
+route53.ARecord(self, "ALBDnsRecord",
+                zone=hosted_zone,
+                record_name=os.environ["SUBDOMAIN_NAME"],
+                target=route53.RecordTarget.from_alias(targets.LoadBalancerTarget(alb))
+                )
+```
+
+## How do I deploy?
+
+Once you have added all of the sections above to your `copilot_extension_deployment_stack.py` file, you can deploy your services to AWS. You must first ensure that your CDK environment in AWS is 'bootstrapped', which means that the AWS CDK has created all the resources it needs to use when deploying (IAM roles, an ECR repo for images, and buckets for artifacts). The bootstrap process is a one-time deal, but if you haven't yet bootstrapped, please see the AWS guide "[Bootstrap your environment for use with the AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping-env.html)". In general it's as easy as running `cdk bootstrap`, but if your organization has governance rules in place regarding naming conventions you'll need a custom bootstrap yaml.
+
+Once your environment has been bootstrapped, you can run
+
+```bash
+cdk deploy
+```
+
+from within the directory that includes your stack file. This deployment will take a few minutes, as CloudFormation deploys your resources.
