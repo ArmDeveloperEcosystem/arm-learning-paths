@@ -8,6 +8,12 @@ layout: learningpathall
 
 ## Introduction
 
+- WindowsPerf installed [(Installation guide)](/install-guides/wperf/)
+- Visual Studio 2022 Community Edition installed [(Installation guide)](/install-guides/vs-woa/)
+- WindowsPerf Visual Studio extension installed [(Installation guide)](/install-guides/windows-perf-vs-extension/)
+- (Optional) WindowsPerf WPA plugin installed
+
+
 The Counting feature in the WindowsPerf GUI extension is a powerful tool for analyzing and optimizing your code's performance.
 This tutorial guides you through the entire process, from setting up your counting preferences to analyzing the results and interfacing with the WindowsPerf Windows
 Performance Analyzer (WPA) Plugin.
