@@ -16,7 +16,7 @@ Scroll to the bottom left and select `Developer settings`.
 
 ### Create a new GitHub App
 
-Select the `GitHub Apps` on the left slide and click `New GitHub App`.
+Select the `GitHub Apps` on the left side and click `New GitHub App`.
 
 ![#New GitHub App](_images/gh-cp1.png)
 
@@ -28,14 +28,12 @@ The important fields to complete or modify are listed below.
 | Homepage URL | This needs to be filled in but is not used for a private extension, any URL can be entered such as https://learn.arm.com |
 | Callback URL | Enter the URL of your ngrok domain such as `https://your-domain.ngrok-free.app` (substitute your domain). |
 | Webhook | Uncheck the `Active` box. |
-| Permissions | Select `Account permissions` and set the `GitHub Copilot Chat` and `GitHub Copilot Chat` to `Read-only`. |
+| Permissions | Select `Account permissions` and set the `GitHub Copilot Chat` to `Read-only`. |
 | Where can this GitHub App be installed? | Confirm `Only this account` is selected to make the GitHub App only for your use. |
 
 Click the `Create GitHub App` to save the configuration. 
 
 ![#Create GitHub App](_images/gh-cp2.png)
-
-### Configure the Copilot settings
 
 ### Configure the Copilot settings
 
@@ -58,10 +56,10 @@ Click the `Save` button when the information is entered.
 
 ### Install your GitHub App
 
-When the GitHub App has been configured and save, install it into your account using the `Install App` tab on the left site and the `Install` button.
+When the GitHub App has been configured and saved, install it into your account using the `Install App` tab on the left side and click the `Install` button.
 
-You may need to agree to install the GitHub App in your account. 
+You might need to agree to install the GitHub App in your account. 
 
-Once installed, you see the App in your account's [Applications](https://github.com/settings/installations)
+Once installed, you see the App in your account's [Applications](https://github.com/settings/installations).
 
 Your GitHub App is now ready to use with Copilot. 
