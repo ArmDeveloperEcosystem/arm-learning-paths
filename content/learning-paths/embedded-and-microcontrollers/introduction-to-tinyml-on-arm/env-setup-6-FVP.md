@@ -17,7 +17,7 @@ cd $HOME/executorch/examples/arm
 ./setup.sh --i-agree-to-the-contained-eula
 ```
 
-After the script has finished running, it prints a command to run to finalize the installation. This will add the FVP executables to your path.
+After the script has finished running, it prints a command to run to finalize the installation. This step adds the FVP executables to your system path.
 
 ```bash
 source $HOME/executorch/examples/arm/ethos-u-scratch/setup_path.sh

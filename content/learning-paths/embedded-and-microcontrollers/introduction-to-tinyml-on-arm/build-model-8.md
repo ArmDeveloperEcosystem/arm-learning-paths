@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Define a small neural network using Python
 
-With the development environment ready, you can create a simple PyTorch model to test the setup.
+With your development environment set up, you can create a simple PyTorch model to test the setup.
 
 This example defines a small feedforward neural network for a classification task. The model consists of two linear layers with ReLU activation in between.
 

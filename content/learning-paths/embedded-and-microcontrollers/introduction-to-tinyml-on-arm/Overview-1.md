@@ -13,7 +13,7 @@ This Learning Path is about TinyML. It is a starting point for learning how inno
 
 This section provides an overview of the domain with real-life use cases and available devices.
 
-TinyML represents a significant shift in Machine Learning deployment. Unlike traditional Machine Learning, which typically depends on cloud-based servers or high-performance hardware, TinyML is tailored to function on devices with limited resources, constrained memory, low power, and less processing capabilities. 
+TinyML represents a significant shift in Machine Learning deployment. Unlike traditional Machine Learning, which typically depends on cloud-based servers or high-performance hardware, TinyML is tailored to function on devices with limited resources, constrained memory, low power, and fewer processing capabilities. 
 
 TinyML has gained popularity because it enables AI applications to operate in real-time, directly on the device, with minimal latency, enhanced privacy, and the ability to work offline. This shift opens up new possibilities for creating smarter and more efficient embedded systems.
 
@@ -34,7 +34,7 @@ Here are some of the key benefits of TinyML on Arm:
 
 - **Scalability**: With billions of Arm devices in the market, TinyML is well-suited for scaling across industries, enabling widespread adoption of AI at the edge.
 
-TinyML is being deployed across multiple industries, enhancing everyday experiences and enabling groundbreaking solutions. The table below contains a few examples of TinyML applications.
+TinyML is being deployed across multiple industries, enhancing everyday experiences and enabling groundbreaking solutions. The table below shows some examples of TinyML applications.
 
 | Area                  |  Device, Arm IP             | Description                                                                                                |
 | ------                | -------                     | ------------                                                                                               |
@@ -46,7 +46,7 @@ TinyML is being deployed across multiple industries, enhancing everyday experien
 
 ### Examples of Arm-based devices
 
-There are many Arm-based devices that you can use for TinyML projects. Some of these are listed below, but the list is not exhaustive.
+There are many Arm-based devices that you can use for TinyML projects. Some of these are detailed below, but the list is not exhaustive.
 
 #### Raspberry Pi 4 and 5
 

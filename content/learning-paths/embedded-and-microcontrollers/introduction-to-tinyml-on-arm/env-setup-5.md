@@ -74,4 +74,4 @@ Your next steps depend on your hardware.
 
 If you have the Grove Vision AI Module, proceed to [Set up the Grove Vision AI Module V2 Learning Path](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/setup-7-grove/).
 
-If you do not have the Grove Vision AI Module, you can use the Corstone-300 FVP instead. See the Learning Path [Set up the Corstone-300 FVP](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/env-setup-6-fvp/).
+If you do not have the Grove Vision AI Module, you can use the Corstone-320 FVP instead. See the Learning Path [Set up the Corstone-320 FVP](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/env-setup-6-fvp/).
