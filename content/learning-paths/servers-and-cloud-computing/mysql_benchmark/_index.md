@@ -13,7 +13,7 @@ prerequisites:
     - Basic knowledge of [MySQL databases](https://www.mysql.com/)
     - Two Arm servers running Ubuntu 22.04, one for the MySQL server and the other for the Sysbench client
 
-author_primary: Bolt Liu
+author: Bolt Liu
 
 skilllevels: introductory
 subjects: Databases
@@ -31,6 +31,21 @@ test_link: null
 test_maintenance: false
 test_status:
     - passed
+
+further_reading:
+    - resource:
+        title: MySQL documentation
+        link: https://www.mysql.com/
+        type: documentation
+    - resource:
+        title: Running MySQL on ARM
+        link: https://mysqlonarm.github.io/Running-MySQL-on-ARM/
+        type: documentation
+    - resource:
+        title: Learn how to deploy MySQL
+        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/mysql/
+        type: documentation
+
 
 weight: 1
 layout: learningpathall

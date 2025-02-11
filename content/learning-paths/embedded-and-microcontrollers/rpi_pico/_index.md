@@ -17,7 +17,7 @@ prerequisites:
     - Raspberry Pi Pico board.
     - Raspberry Pi 3, 4, 400, or 5 as a development computer.
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -29,6 +29,17 @@ operatingsystems:
 tools_software_languages:
     - Raspberry Pi
     - Coding
+
+further_reading:
+    - resource:
+        title: Raspberry Pi Pico SDK documentation
+        link: https://raspberrypi.github.io/pico-sdk-doxygen/ 
+        type: documentation
+    - resource:
+        title: Raspberry Pi Pico documentation
+        link: https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

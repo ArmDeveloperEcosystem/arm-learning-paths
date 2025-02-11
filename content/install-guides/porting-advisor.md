@@ -17,12 +17,10 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://github.com/aws/porting-advisor-for-graviton/
-
-author_primary: Jason Andrews
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.

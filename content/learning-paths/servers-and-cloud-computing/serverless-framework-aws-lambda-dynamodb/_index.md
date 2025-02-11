@@ -14,7 +14,7 @@ prerequisites:
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.
     - Completion of this [Learning Path](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-intro/).
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -32,6 +32,22 @@ operatingsystems:
     - Linux
     - Windows
     - macOS
+
+
+further_reading:
+    - resource:
+        title: Terraform on Azure
+        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/azure-terraform/
+        type: Tutorial
+    - resource:
+        title: Azure Virtual Machines with Ampere Altra Arm–based processors—generally available
+        link: https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/
+        type: Blog
+    - resource:
+        title: About Azure bastion
+        link: https://learn.microsoft.com/en-us/azure/bastion/bastion-overview
+        type: Documentation
+
 
 
 ### FIXED, DO NOT MODIFY

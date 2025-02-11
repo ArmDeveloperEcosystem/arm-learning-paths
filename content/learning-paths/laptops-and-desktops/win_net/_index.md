@@ -11,7 +11,7 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -23,6 +23,17 @@ operatingsystems:
 tools_software_languages:
     - .NET
     - Visual Studio
+
+further_reading:
+    - resource:
+        title: Announcing .NET 6
+        link: https://devblogs.microsoft.com/dotnet/announcing-net-6/
+        type: blog
+    - resource:
+        title: Deploy .NET apps on Arm single-board computers
+        link: https://learn.microsoft.com/en-us/dotnet/iot/deployment
+        type: website
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

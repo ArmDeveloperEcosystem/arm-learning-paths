@@ -14,7 +14,7 @@ prerequisites:
     - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/.'
     - 'Complete the [first learning path](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part1) of this series.'  
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -30,6 +30,22 @@ tools_software_languages:
 operatingsystems:
     - Linux
     - Windows
+
+further_reading:
+    - resource:
+        title: Docker
+        link: https://www.docker.com
+        type: Documentation
+    - resource:
+        title: Azure Container Registry
+        link: https://learn.microsoft.com/en-GB/azure/container-registry/container-registry-concepts
+        type: Documentation
+    - resource:
+        title: Azure Container Instances
+        link: https://learn.microsoft.com/en-us/azure/container-instances/
+        type: Documentation
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

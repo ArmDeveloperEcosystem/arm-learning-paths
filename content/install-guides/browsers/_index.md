@@ -1,6 +1,6 @@
 ---
 title: Browsers on Arm
-author_primary: Jason Andrews
+author: Jason Andrews
 additional_search_terms:
 - browser
 - brave

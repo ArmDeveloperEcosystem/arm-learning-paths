@@ -17,7 +17,7 @@ minutes_to_complete: 10
 ### Link to official documentation
 official_docs: https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.

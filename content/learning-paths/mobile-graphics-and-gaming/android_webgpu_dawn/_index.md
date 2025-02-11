@@ -24,7 +24,9 @@ prerequisites:
     - Arm Performance Studio.
     - Python 3.10 or later.
 
-author_primary: Varun Chari, Albin Bernhardsson
+author:
+    - Varun Chari
+    - Albin Bernhardsson
 
 ### Tags
 skilllevels: Advanced
@@ -42,6 +44,38 @@ operatingsystems:
     - Linux
     - Windows
     - Android
+
+
+further_reading:
+    - resource:
+        title: WebGPU example application
+        link: https://github.com/varunchariArm/Android_DawnWebGPU
+        type: website
+    - resource:
+        title: WebGPU working draft
+        link: https://www.w3.org/TR/webgpu/
+        type: website
+    - resource:
+        title: Dawn Github repository
+        link: https://github.com/google/dawn
+        type: website
+    - resource:
+        title: WebGPU API
+        link: https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API
+        type: website
+    - resource:
+        title: WebGPU fundamentals 2
+        link: https://webgpufundamentals.org/
+        type: website
+    - resource:
+        title: Learn WebGPU 
+        link: https://eliemichel.github.io/LearnWebGPU/index.html
+        type: website
+    - resource:
+        title: WebGPU examples 2
+        link: https://github.com/samdauwe/webgpu-native-examples
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY

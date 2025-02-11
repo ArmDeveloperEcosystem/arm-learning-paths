@@ -14,7 +14,7 @@ learning_objectives:
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, or a local Arm Linux computer with at least 8 CPUs and 16 GB RAM.
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -28,6 +28,22 @@ tools_software_languages:
     - LLM
     - GenAI
     - Python
+
+
+further_reading:
+    - resource:
+        title: vLLM Documentation
+        link: https://docs.vllm.ai/
+        type: documentation
+    - resource:
+        title: vLLM GitHub Repository
+        link: https://github.com/vllm-project/vllm
+        type: github
+    - resource:
+        title: Hugging Face Model Hub
+        link: https://huggingface.co/models
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY

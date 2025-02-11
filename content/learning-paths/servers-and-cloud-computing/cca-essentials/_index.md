@@ -15,7 +15,10 @@ prerequisites:
     - Completion of [Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison) Learning Path.
     - Completion of the [Run an application in a Realm using the Arm Confidential Computing Architecture (CCA)](/learning-paths/servers-and-cloud-computing/cca-container/) Learning Path.
 
-author_primary: Arnaud de Grandmaison, Paul Howard, and Pareena Verma
+author: 
+    - Arnaud de Grandmaison
+    - Paul Howard
+    - Pareena Verma
 
 ### Tags
 skilllevels: Advanced
@@ -32,6 +35,25 @@ tools_software_languages:
     - Docker
     - Veraison
     
+further_reading:
+    - resource:
+        title: Arm Confidential Compute Architecture
+        link: https://www.arm.com/architecture/security-features/arm-confidential-compute-architecture
+        type: website
+    - resource:
+        title: Arm Confidential Compute Architecture open source enablement
+        link: https://www.youtube.com/watch?v=JXrNkYysuXw
+        type: video
+    - resource:
+        title: Learn the architecture - Realm Management Extension
+        link: https://developer.arm.com/documentation/den0126
+        type: documentation
+    - resource:
+        title: Realm Management Monitor specification
+        link: https://developer.arm.com/documentation/den0137/latest/
+        type: documentation
+
+
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly

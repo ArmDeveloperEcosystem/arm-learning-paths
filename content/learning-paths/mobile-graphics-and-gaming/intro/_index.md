@@ -11,7 +11,7 @@ learning_objectives:
 prerequisites:
     - None
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -23,6 +23,13 @@ armips:
 operatingsystems:
     - Android
 tools_software_languages:
+
+
+further_reading:
+    - resource:
+        title: Android for Developers
+        link: https://developer.android.com/ 
+        type: website
 
 
 ### FIXED, DO NOT MODIFY

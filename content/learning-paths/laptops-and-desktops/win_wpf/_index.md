@@ -13,7 +13,7 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Visual Studio 2022 with .NET desktop development installed.
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -28,6 +28,17 @@ tools_software_languages:
     - .NET
     - Visual Studio
     
+further_reading:
+    - resource:
+        title: Windows Presentation Foundation
+        link: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/?view=netdesktop-8.0
+        type: documentation
+    - resource:
+        title: Syncfusion UI controls
+        link: https://www.syncfusion.com
+        type: website
+
+
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly

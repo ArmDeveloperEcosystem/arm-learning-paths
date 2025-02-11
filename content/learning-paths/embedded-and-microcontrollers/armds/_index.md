@@ -13,7 +13,7 @@ learning_objectives:
 prerequisites:
     - Some familiarity with embedded programming is assumed
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -31,6 +31,22 @@ tools_software_languages:
     - Arm Fast Models
     - DSTREAM
     - Coding
+
+further_reading:
+    - resource:
+        title: Arm Development Studio
+        link: https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio
+        type: website
+    - resource:
+        title: DSTREAM-ST
+        link: https://developer.arm.com/Tools%20and%20Software/DSTREAM-ST
+        type: website
+    - resource:
+        title: DSTREAM-PT
+        link: https://developer.arm.com/Tools%20and%20Software/DSTREAM-PT
+        type: website
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

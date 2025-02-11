@@ -12,7 +12,7 @@ prerequisites:
     - A Google Cloud account
     - A computer with the following tools installed`:` Terraform, Google Cloud CLI (gcloud), Kubernetes CLI (kubectl)
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ##### Tags
 skilllevels: Advanced
@@ -32,6 +32,21 @@ operatingsystems:
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================
+further_reading:
+    - resource:
+        title: Create Arm based clusters and node pools 
+        link: https://cloud.google.com/kubernetes-engine/docs/how-to/create-arm-clusters-nodes
+        type: documentation
+    - resource:
+        title: Configure cluster access to use kubectl
+        link: https://cloud.google.com/kubernetes-engine/docs
+        type: documentation
+    - resource:
+        title: GKE documentation
+        link: https://cloud.google.com/kubernetes-engine/docs
+        type: documentation
+
+
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # Indicates this should be surfaced when looking for related content. Only set for _index.md of learning path content.

@@ -15,7 +15,7 @@ prerequisites:
     - Some familiarity with AI/ML software development 
     - An Amazon Web Services(AWS) [account](https://aws.amazon.com/) to subscribe [Arm Virtual Hardware](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g) Amazon Machine Image(AMI). 
 
-author_primary: Liliya Wu
+author: Liliya Wu
 
 ### Tags
 skilllevels: Introductory
@@ -31,6 +31,26 @@ tools_software_languages:
     - GCC
     - Paddle
     - TVMC
+
+further_reading:
+    - resource:
+        title: AVH Product Overview
+        link: https://arm-software.github.io/AVH/main/overview/html/index.html
+        type: documentation
+    - resource:
+        title: PaddleOCR
+        link: https://github.com/PaddlePaddle/PaddleOCR
+        type: website
+    - resource:
+        title: Paddle examples for AVH
+        link: https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/tree/main/Object-Detection-example
+        type: website
+    - resource:
+        title: Arm and Baidu PaddlePaddle blog
+        link: https://www.arm.com/blogs/blueprint/baidu-paddlepaddle
+        type: blog
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

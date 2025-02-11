@@ -1,7 +1,7 @@
 ---
 armips:
 - Neoverse
-author_primary: Pareena Verma
+author: Pareena Verma
 layout: learningpathall
 learning_objectives:
 - Install and run lzbench with snappy and zstd
@@ -24,6 +24,18 @@ test_status:
 title: Measure performance of compression libraries on Arm servers
 tools_software_languages:
 - snappy
+further_reading:
+    - resource:
+        title: Lzbench source
+        link: https://github.com/inikep/lzbench
+        type: documentation
+    - resource:
+        title: Comparing data compression algorithm performance on Arm servers
+        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/comparing-data-compression-algorithm-performance-on-aws-graviton2-342166113
+        type: blog
+
+
+
 weight: 1
 who_is_this_for: This is an introductory topic for software developers using compression
   libraries on Arm servers.

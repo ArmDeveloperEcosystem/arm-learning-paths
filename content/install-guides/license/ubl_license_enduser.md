@@ -2,7 +2,7 @@
 title: UBL LLS End-user setup
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/102516
-author_primary: Ronan Synnott
+author: Ronan Synnott
 weight: 3
 
 ### FIXED, DO NOT MODIFY

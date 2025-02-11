@@ -14,7 +14,7 @@ prerequisites:
     - An Amazon Web Services (AWS) account
     - A local computer with Docker, AWS CLI, and AWS Copilot CLI installed
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -26,6 +26,22 @@ operatingsystems:
     - Linux 
 tools_software_languages:
     - Docker
+
+
+further_reading:
+    - resource:
+        title: Introducing AWS Copilot
+        link: https://aws.amazon.com/blogs/containers/introducing-aws-copilot/
+        type: blog
+    - resource:
+        title: Developing an application based on multiple microservices using AWS Copilot and AWS Fargate
+        link: https://aws.amazon.com/blogs/containers/developing-an-application-based-on-multiple-microservices-using-the-aws-copilot-and-aws-fargate/
+        type: blog
+    - resource:
+        title: AWS Copilot Getting started with containers on AWS
+        link: https://youtu.be/hBHf241-D2Y?si=ySm0e4VwbgFSoy3s
+        type: video
+
 
 
 ### FIXED, DO NOT MODIFY

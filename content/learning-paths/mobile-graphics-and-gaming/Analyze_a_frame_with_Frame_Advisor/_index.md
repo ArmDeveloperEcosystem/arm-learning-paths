@@ -16,7 +16,7 @@ prerequisites:
     - Download and install Arm Performance Studio from [Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0). It is supported on Windows, Linux, and macOS host platforms.
     - Download and install [Android SDK Platform tools](https://developer.android.com/studio/releases/platform-tools.html). Required for [Android Debug bridge (adb)](https://developer.android.com/studio/command-line/adb).
 
-author_primary: Julie Gaskin
+author: Julie Gaskin
 
 ### Tags
 skilllevels: Introductory
@@ -29,6 +29,22 @@ tools_software_languages:
 operatingsystems:
     - Android
    
+
+
+further_reading:
+    - resource:
+        title: Frame Advisor user guide 
+        link: https://developer.arm.com/documentation/102693/latest/
+        type: documentation
+    - resource:
+        title: Introducing Arm Frame Advisor 
+        link: https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/arm-mobile-studio-2023-5
+        type: blog
+    - resource:
+        title: Arm Performance Studio for Mobile 
+        link: https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio%20for%20Mobile
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY

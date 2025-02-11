@@ -16,7 +16,7 @@ prerequisites:
     - Knowledge of [Neon](https://developer.arm.com/documentation/102474/latest)
     - Knowledge of [Scalable Vector Extension (SVE)](https://developer.arm.com/documentation/101726/4-0)
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -29,6 +29,27 @@ operatingsystems:
 tools_software_languages:
     - Android Studio
     - Coding
+
+further_reading:
+    - resource:
+        title: Learn the architecture - Introducing SVE2 guide 
+        link: https://developer.arm.com/documentation/102340/0100
+        type: documentation
+    - resource:
+        title: Exploring the SVE intrinsics
+        link: https://developer.arm.com/documentation/102699/0100/Optimizing-with-intrinsics
+        type: documentation
+    - resource:
+        title: Kotlin Programming Language
+        link: https://kotlinlang.org
+        type: website
+    - resource:
+        title: Android Studio
+        link: https://developer.android.com/studio
+        type: website
+
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

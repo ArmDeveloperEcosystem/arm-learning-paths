@@ -18,7 +18,7 @@ prerequisites:
     - An Arm Linux machine or an [Arm cloud instance](/learning-paths/servers-and-cloud-computing/csp/).
     - A Raspberry Pi 5.
 
-author_primary: Annie Tallund
+author: Annie Tallund
 
 ### Tags
 skilllevels: Introductory
@@ -32,6 +32,23 @@ tools_software_languages:
     - GenAI
     - Raspberry Pi
     
+
+
+further_reading:
+    - resource:
+        title: Practical AI for the Raspberry Pi
+        link: https://github.com/ee292d/labs
+        type: website
+    - resource:
+        title: ExecuTorch Overview
+        link: https://pytorch.org/executorch-overview
+        type: website
+    - resource:
+        title: ExecuTorch Examples
+        link: https://github.com/pytorch/executorch/blob/main/examples/README.md
+        type: website
+
+
 
 
 ### FIXED, DO NOT MODIFY

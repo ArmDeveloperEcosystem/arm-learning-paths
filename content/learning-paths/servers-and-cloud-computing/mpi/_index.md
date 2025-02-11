@@ -15,7 +15,7 @@ prerequisites:
     - Some understanding of C, Python, and Linux commands
     - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
-author_primary: Florent Lebeau
+author: Florent Lebeau
 
 ### Tags
 skilllevels: Advanced
@@ -31,6 +31,14 @@ tools_software_languages:
     - Linaro Forge
     - gdb
     - mpi
+
+
+further_reading:
+    - resource:
+        title: Parallel Programming for Science Engineering by Victor Eijkhout
+        link: https://theartofhpc.com/pcse/
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY

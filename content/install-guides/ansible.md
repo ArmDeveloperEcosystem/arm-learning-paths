@@ -2,7 +2,7 @@
 additional_search_terms:
 - linux
 - deploy
-author_primary: Jason Andrews
+author: Jason Andrews
 layout: installtoolsall
 minutes_to_complete: 10
 multi_install: false

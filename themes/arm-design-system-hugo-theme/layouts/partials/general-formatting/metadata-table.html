@@ -12,9 +12,6 @@ Called from:
 
 
 <!-- Hugo processing -->
-{{$author := .Params.author_primary}}
-{{$authors_multiple := slice}}
-{{$author_company := ""}}
 {{$github_url := ""}}
 {{$linkedin_url := ""}}
 {{$twitter_url := ""}}
@@ -31,13 +28,6 @@ Called from:
 {{ $main_tool_title := .Params.Title }}
 
 
-<!-- Split authors by ';' if multiple -->
-{{$authors_multiple := slice}}
-{{ if in $author ";" }}
-    {{ $authors_multiple = split $author ";" }}
-{{end}}
-
-
 <!-- Differentiate between learning paths and install guide formatting -->
 {{if eq .Section "learning-paths"}}
     {{$is_learning_path = true}}
@@ -45,35 +35,43 @@ Called from:
 {{end}}
 
 
-
-<!-- Get metadata of author from CSV file -->
+{{/* Get metadata of author from CSV file */}}
 {{ $csv := resources.Get "contributors.csv" }}
 {{ $csv_content := $csv | transform.Unmarshal (dict "delimiter" ",") }}
-{{ range $i, $row := $csv_content }}
+{{ $author_data := dict }}
 
-{{/*  
-    {{ if gt (len $authors_multiple) 0 }}
-            <!-- Multiple authors! -->        
 
-    {{else}}*/}}
-        {{if eq $author (index $row 0)}}
-            <!-- Fill out one author info -->        
-            {{$author_company = index $row 1}}
-            {{if (index $row 2)}}
-                {{$github_url = printf "https://github.com/%s" (index $row 2)}}
-            {{end}}
-            {{if (index $row 3)}}
-                {{$linkedin_url = printf "https://linkedin.com/in/%s" (index $row 3)}}
-            {{end}}
-            {{if (index $row 4)}}
-                {{$twitter_url = printf "https://twitter.com/%s" (index $row 4)}}
-            {{end}}
-            {{if (index $row 5)}}
-                {{$website_url = index $row 5}}
-            {{end}}
-        {{end}}
+{{/* Populate dictionary with author metadata */}}
+{{ range $index, $row := $csv_content }}
+    {{ $name := index $row 0 }}
     
+    {{ $metadata := dict 
+        "company"   (cond (and (gt (len $row) 1) (ne (index $row 1) "")) (index $row 1) nil)
+        "github"    (cond (and (gt (len $row) 2) (ne (index $row 2) "")) (printf "https://github.com/%s" (index $row 2)) nil)
+        "linkedin"  (cond (and (gt (len $row) 3) (ne (index $row 3) "")) (printf "https://linkedin.com/in/%s" (index $row 3)) nil)
+        "twitter"   (cond (and (gt (len $row) 4) (ne (index $row 4) "")) (printf "https://twitter.com/%s" (index $row 4)) nil)
+        "website"   (cond (and (gt (len $row) 5) (ne (index $row 5) "")) (index $row 5) nil)
+    }}
+
+    {{ $author_data = merge $author_data (dict $name $metadata) }}
 {{ end }}
+
+
+{{/* Get author(s) from front matter */}}
+{{ $authors := .Params.author }}
+{{ if not (reflect.IsSlice $authors) }}
+    {{ $authors = slice $authors }}
+{{ end }}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -231,16 +229,35 @@ Called from:
                 <table class="width-max-content">
                     <tr>
                         <td class="td-metadata-key width-max-content nowrap">
-                            Author:
+                            {{if eq (len $authors) 1}}Author:{{else}}Authors:{{end}}
                         </td>
                         <td id="author" class="td-metadata-value">
-                            <span>
-                                {{$author}}{{if $author_company}}, <span class="u-margin-right-1">{{$author_company}}</span>{{end}}
-                                {{- if $github_url -}}      <a href="{{$github_url}}"   target="_blank" aria-label="github"><i class="author-social-icon fab fa-github"></i></a>    {{- end -}}
-                                {{- if $linkedin_url -}}    <a href="{{$linkedin_url}}" target="_blank" aria-label="linkedin"><i class="author-social-icon fab fa-linkedin"></i></a>  {{- end -}}
-                                {{- if $twitter_url -}}     <a href="{{$twitter_url}}"  target="_blank" aria-label="twitter"><i class="author-social-icon fab fa-twitter"></i></a>   {{- end -}}
-                                {{- if $website_url -}}     <a href='{{if in $website_url "http"}}{{$website_url | safeURL}}{{else}}https://{{$website_url | safeURL}}{{end}}'  target="_blank"  aria-label="author-social"><i class="author-social-icon fa  fa-blog"></i></a>      {{- end -}}
-                            </span>
+                            {{- range $authors -}}
+                                {{ $metadata := index $author_data . | default dict }}
+                                <span>
+                                    {{.}}
+                                    {{- range $key, $value := $metadata -}}
+                                        {{- with $value -}} {{/* if value exists */}}
+                                            {{- if eq $key "company" -}}
+                                                <span class="u-margin-right-1/2">, {{$value}}</span>
+                                            {{- end -}}
+                                            {{ if eq $key "github" }}
+                                                <a href="{{ . }}" target="_blank" aria-label="github"><i class="author-social-icon fab fa-github"></i></a>
+                                            {{end}}
+                                            {{ if eq $key "linkedin" }}
+                                                <a href="{{ . }}" target="_blank" aria-label="linkedin"><i class="author-social-icon fab fa-linkedin"></i></a>
+                                            {{end}}
+                                            {{ if eq $key "twitter" }}
+                                                <a href="{{ . }}" target="_blank" aria-label="twitter"><i class="author-social-icon fab fa-twitter"></i></a>
+                                            {{end}}
+                                            {{ if eq $key "website" }}
+                                                <a href='{{if in . "http"}}{{. | safeURL}}{{else}}https://{{. | safeURL}}{{end}}' target="_blank" aria-label="author-social"><i class="author-social-icon fa  fa-blog"></i></a>
+                                            {{end}}
+                                        {{ end }}
+                                    {{ end }}
+                                </span>
+                                <br>
+                            {{- end -}}
                         </td>                        
                     </tr>
                     <!-- Arm IP if learning path. Official Docs if tool -->
@@ -331,20 +348,39 @@ Called from:
                 <table>
                     <tr>
                         <td class="td-metadata-key width-max-content">
-                            Author:
+                            {{if eq (len $authors) 1}}Author:{{else}}Authors:{{end}}
                         </td>
                     </tr>
                     <tr>
                         <td id="author" class="td-metadata-value margin-l-24">
-                                {{$author}}{{if $author_company}}, {{$author_company}}{{end}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td-metadata-value margin-l-12">
-                                {{- if $github_url -}}      <a href="{{$github_url}}"   target="_blank" aria-label="github"><i class="author-social-icon fab fa-github"></i></a>    {{- end -}}
-                                {{- if $linkedin_url -}}    <a href="{{$linkedin_url}}" target="_blank" aria-label="linkedin"><i class="author-social-icon fab fa-linkedin"></i></a>  {{- end -}}
-                                {{- if $twitter_url -}}     <a href="{{$twitter_url}}"  target="_blank" aria-label="twitter"><i class="author-social-icon fab fa-twitter"></i></a>   {{- end -}}
-                                {{- if $website_url -}}     <a href='{{if in $website_url "http"}}{{$website_url | safeURL}}{{else}}https://{{$website_url | safeURL}}{{end}}'  target="_blank"aria-label="social account" ><i class="author-social-icon fa  fa-blog"></i></a>      {{- end -}}
+                            <ul>
+                                {{- range $authors -}}
+                                    {{/* {{if eq (len $authors) 1}} */}}
+                                    {{ $metadata := index $author_data . | default dict }}
+                                    <li>
+                                        {{.}}
+                                        {{- range $key, $value := $metadata -}}
+                                            {{- with $value -}} {{/* if value exists */}}
+                                                {{- if eq $key "company" -}}
+                                                    <span class="u-margin-right-1/2">, {{$value}}</span>
+                                                {{- end -}}
+                                                {{ if eq $key "github" }}
+                                                    <a href="{{ . }}" target="_blank" aria-label="github"><i class="author-social-icon fab fa-github"></i></a>
+                                                {{end}}
+                                                {{ if eq $key "linkedin" }}
+                                                    <a href="{{ . }}" target="_blank" aria-label="linkedin"><i class="author-social-icon fab fa-linkedin"></i></a>
+                                                {{end}}
+                                                {{ if eq $key "twitter" }}
+                                                    <a href="{{ . }}" target="_blank" aria-label="twitter"><i class="author-social-icon fab fa-twitter"></i></a>
+                                                {{end}}
+                                                {{ if eq $key "website" }}
+                                                    <a href='{{if in . "http"}}{{. | safeURL}}{{else}}https://{{. | safeURL}}{{end}}' target="_blank" aria-label="author-social"><i class="author-social-icon fa  fa-blog"></i></a>
+                                                {{end}}
+                                            {{ end }}
+                                        {{ end }}
+                                    </li>
+                                {{- end -}}
+                            </ul>
                         </td>
                     </tr>
                     {{if $is_learning_path}}

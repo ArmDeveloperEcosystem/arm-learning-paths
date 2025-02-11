@@ -13,7 +13,7 @@ prerequisites:
     - A Windows x86_64 development machine with at least 16GB of RAM.
     - An Android phone with at least 8GB of RAM. This learning path was tested on Samsung Galaxy S24.
 
-author_primary: Koki Mitsunami
+author: Koki Mitsunami
 
 ### Tags
 skilllevels: Advanced
@@ -30,6 +30,22 @@ tools_software_languages:
 operatingsystems:
     - Windows
     - Android
+
+
+further_reading:
+    - resource:
+        title: ONNX Runtime
+        link: https://onnxruntime.ai/docs/
+        type: documentation
+    - resource:
+        title: ONNX Runtime generate() API
+        link: https://onnxruntime.ai/docs/genai/
+        type: documentation
+    - resource:
+        title: Accelerating AI Developer Innovation Everywhere with New Arm Kleidi
+        link: https://newsroom.arm.com/blog/arm-kleidi
+        type: blog
+
 
 
 ### FIXED, DO NOT MODIFY

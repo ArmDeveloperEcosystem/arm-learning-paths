@@ -16,7 +16,7 @@ prerequisites:
     - A Raspberry Pi 3 or 4 board
 
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Advanced
@@ -29,6 +29,13 @@ operatingsystems:
 tools_software_languages:
     - Raspberry Pi
     - MXNet
+
+further_reading:
+    - resource:
+        title: MXNet tutorials
+        link: https://mxnet.apache.org/versions/1.2.1/tutorials/index.html 
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

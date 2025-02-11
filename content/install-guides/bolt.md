@@ -8,7 +8,7 @@ additional_search_terms:
 
 minutes_to_complete: 20
 
-author_primary: Jonathan Davies
+author: Jonathan Davies
 
 official_docs: https://github.com/llvm/llvm-project/tree/main/bolt
 
