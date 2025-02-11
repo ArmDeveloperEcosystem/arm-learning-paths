@@ -8,10 +8,9 @@ layout: learningpathall
 
 ## Generalize the algorithms
 
-In this Learning Path, in order to show how to use SME2 for matrix
-multiplication, only floating point multiplication was covered.
-In practice, a library or framework that supports matrix multiplication should
-cover all kinds of integers.
+In this Learning Path, you focused on using SME2 for matrix
+multiplication with floating point numbers. However in practice, any library or framework supporting matrix multiplication should
+also handle various integer types.
 
 You can see that the algorithm structure for matrix preprocessing as well
 as multiplication with the outer product does not change at all for other data
@@ -22,7 +21,7 @@ programming](https://en.wikipedia.org/wiki/Generic_programming) like C++ with
 templates. You can even make the template manage a case where the value
 accumulated during the product uses a larger type than the input matrices. SME2 has the instructions to deal efficiently with this common case scenario.
 
-This enables the library writer to focus on the algorithm, testing, and other optimizations, while allowing the compiler to generate the many variants.
+This enables the library developer to focus on the algorithm, testing, and optimizations, while allowing the compiler to generate multiple variants.
 
 ## Unroll further
 

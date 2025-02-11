@@ -16,7 +16,7 @@ further_reading:
         type: website
 
     - resource:
-        title: Arm Scalable Matrix Extension (SME) Introduction (part 1)
+        title: Arm Scalable Matrix Extension (SME) Introduction (Part 1)
         link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction
         type: blog
 
@@ -26,7 +26,7 @@ further_reading:
         type: website
 
     - resource:
-        title: Arm Scalable Matrix Extension (SME) Introduction (part 2)
+        title: Arm Scalable Matrix Extension (SME) Introduction (Part 2)
         link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2
         type: blog
 

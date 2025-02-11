@@ -205,10 +205,8 @@ It automatically finds and uses ``.devcontainer/devcontainer.json``:
 
 ![example image alt-text#center](VSCode.png "Figure 1: Setting up the Docker Container.")
 
-All your commands now take place in the container, so no need to prepend
-them with a Docker invocation, as VS Code handles all this transparently for you.
+All your commands now run within the container, so there is no need to prepend them with a Docker invocation, as VS Code handles all this seamlessly for you.
 
 {{% notice Note %}}
-In the remainder of this learning path, the shell commands show the Docker
-invocation so that those who do not use VS Code can copy the full command line, but if you do use VS Code, you should only use the ``COMMAND ARGUMENTS`` part.
+For the rest of this Learning Path, shell commands include the full Docker invocation so that users not using VS Code can copy the complete command line. However, if you are using VS Code, you only need to use the `COMMAND ARGUMENTS` part. 
 {{% /notice %}}
