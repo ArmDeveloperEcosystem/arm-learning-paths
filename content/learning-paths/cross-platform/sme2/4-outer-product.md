@@ -43,8 +43,11 @@ order. This means that loading row-data from memory is efficient as the memory
 system operates efficiently with contiguous data. An example of this is where caches are loaded row by row, and data prefetching is simple - just load the data from ``current address + sizeof(data)``. This is not the case for loading column-data from memory though, as it requires more work from the memory system.
 
 In order to further improve the effectiveness of the matrix multiplication, it
-is therefore desirable to change the layout in memory of the left-hand side matrix, which is called ``matLeft`` in the code examples in this Learning Path, which essentially performs a matrix
-transposition so that instead of loading column-data from memory, one loads row-data.
+is therefore desirable to change the layout in memory of the left-hand side
+matrix, which is called ``matLeft`` in the code examples in this Learning Path. 
+The improved layout would ensure that elements from the same column are located
+next to each other in memory. This is essentially a matrix transposition,
+which changes ``matLeft`` from row-major order to column-major order.
 
 {{% notice Important %}}
 It is important to note here that this reorganizes the layout of the matrix in
@@ -98,3 +101,12 @@ void preprocess_l(uint64_t nbr, uint64_t nbc, uint64_t SVL,
 ``preprocess_l`` will be used to check the assembly and intrinsic versions of
 the matrix multiplication perform the preprocessing step correctly. This code is
 located in file ``preprocess_vanilla.c``.
+
+{{% notice Note %}}
+In a real-world application, it may be possible to arrange for ``matLeft`` to
+be stored in column-major order, in which case no further transposition would
+be needed, and the preprocess step would be unncessary. Matrix processing
+frameworks / libraries often have some attributes with the Matrix object to
+track if it is row- or column-major order, and / or if it has been transposed
+to avoid unncessary computations.
+{{% /notice %}}
