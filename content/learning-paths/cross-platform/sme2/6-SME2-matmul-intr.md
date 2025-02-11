@@ -25,9 +25,7 @@ is supported by the main compilers, most notably [GCC](https://gcc.gnu.org/) and
 
 ## Streaming mode
 
-In the previous page, the assembly language gave the programmer full access to the processor features. However, this comes at a cost in terms of complexity and
-maintenance, especially when one has to manage large code bases with deeply-nested function calls. The assembly version is very low level, and does not deal
-fully with the SME state. 
+On the previous page, assembly language provided the programmer with full access to processor features. However, this comes at the cost of increased complexity and maintenance, particularly when managing large codebases with deeply nested function calls. Additionally, the assembly version operates at a very low level and does not fully handle the SME state.
 
 In real-world large-scale software, the program moves back and forth from streaming mode, and some streaming mode routines call other streaming mode routines, which means that some state needs to be saved and restored. This includes the ZA storage. This is defined in the ACLE and
 supported by the compiler: the programmer *just* has to annotate the function 
@@ -216,12 +214,9 @@ The core of ``preprocess_l_intr`` is made of two parts:
   again the usage of predicates ``p0`` and ``p1`` (computed at lines 43-44) to
   ``svst1`` to prevent writing out of the matrix bounds.
 
-As you can see, the usage of intrinsics greatly simplifies the writing of a
-function once one has a good understanding of the available instructions in the
-SME2 instruction set. The usage of predicates, which are at the core of SVE and
-SME and allows to express an algorithm almost naturally and deal elegantly with
-the corner cases (you will note that there is no explicit testing in the loops
-for the cases where the rows or columns are outside of the matrix bounds).
+Using intrinsics simplifies function development significantly, provided one has a good understanding of the SME2 instruction set. 
+Predicates, which are fundamental to SVE and SME, enable a natural expression of algorithms while handling corner cases efficiently. 
+Notably, there is no explicit condition checking within the loops to account for rows or columns extending beyond matrix bounds. 
 
 ### Outer-product multiplication
 
@@ -304,12 +299,11 @@ The core of the multiplication is done in 2 parts:
   are loaded with the ``svld1`` intrinsics at line 20-23 to vector registers
   ``zL`` and ``zR``, which are then used at line 24 with the ``svmopa_za32_m``
   intrinsic to perform the outer product and accumulation (to tile 0). This
-  corresponds exactly to what you saw in figure 2 earlier in the learning path.
+  is exactly what was shown in Figure 2 earlier in the Learning Path.
   Note again the usage of the ``pMDim`` and ``pNDim`` predicates to deal
   correctly with the rows and columns respectively which are out of bounds.
 
-- Storing of the result matrix at lines 27-46. The previous part has computed
-  the result of the matrix multiplication for the current tile, which now needs
+- Storing of the result matrix at lines 27-46. The previous section computed the matrix multiplication result for the current tile, which now needs
   to be written back to memory. This is done with the loop at line 29 which will
   iterate over all rows of the tile: the ``svst1_hor_za32`` intrinsic at lines
   35-46 stores directly from the tile to memory. Note that the loop has been
@@ -318,13 +312,9 @@ The core of the multiplication is done in 2 parts:
   gracefully with the parts of the tile which are out-of-bound for the
   destination matrix ``matResult``.
 
-Once again you will note that the usage of the intrinsics made it easy to take
-advantage of the full power of SME2 --- once there is a good understanding of the
-available SME2 instructions. The predicates deal elegantly with the corner
-cases. And most importantly, our code will deal with different SVL from different
-hardware implementations without having to be recompiled. It's the important
-concept of *compile-once*/*run-everywhere*, plus the implementations that have
-larger SVL will perform the computation faster (for the same binary).
+Once again, intrinsics makes it easy to fully leverage SME2, provided you have a solid understanding of its available instructions. 
+Predicates handle corner cases elegantly, ensuring robust execution. Most importantly, the code adapts to different SVL values across various hardware implementations without requiring recompilation.
+This follows the key principle of compile-once, run-everywhere, allowing systems with larger SVL to execute computations more efficiently while using the same binary. 
 
 ### Compile and run
 
