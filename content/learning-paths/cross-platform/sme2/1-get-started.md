@@ -151,7 +151,7 @@ It contains:
   you will use.
   - A shell script called ``build-my-container.sh`` that you can use if you want to build the Docker container. This is not essential however, as ready-made images are made available for you. 
   - A script called ``build-all-containers.sh`` that was used to create the image for you to download to provide multi-architecture support for both x86_64 and AArch64.
-- A configuration script for VSCode to be able to use the container from the IDE called ``.devcontainer/devcontainer.json``.
+- A configuration script for VS Code to be able to use the container from the IDE called ``.devcontainer/devcontainer.json``.
 
 The next step is to change directory to your checkout:
 
@@ -168,8 +168,8 @@ directory is ``SME2-learning-path.git``.{{% /notice %}}
 Docker containers provide you with the functionality to execute commands in an isolated environment, where you have all the necessary tools that you require without having to clutter your machine. The containers runs independently, which means that they do not interfere with other containers on the same machine or server.  
 
 You can use Docker in the following ways:
-- Directly from the command line. For example, when you are working from a terminal.
-- In the container. Once you have used Docker to configure VSCode to run all the commands within the Docker environment, you can work from within it.
+- Directly from the command line. For example, when you are working from a terminal on your local machine.
+- Within a containerized environment. Configure VS Code to execute run all the commands inside a Docker container, allowing you to work seamlessly within the Docker environment.
 
 ### Working from a terminal
 
@@ -206,9 +206,9 @@ It automatically finds and uses ``.devcontainer/devcontainer.json``:
 ![example image alt-text#center](VSCode.png "Figure 1: Setting up the Docker Container.")
 
 All your commands now take place in the container, so no need to prepend
-them with a Docker invocation, as VSCode handles all this transparently for you.
+them with a Docker invocation, as VS Code handles all this transparently for you.
 
 {{% notice Note %}}
 In the remainder of this learning path, the shell commands show the Docker
-invocation so that those who do not use VSCode can copy the full command line, but if you do use VSCode, you should only use the ``COMMAND ARGUMENTS`` part.
+invocation so that those who do not use VS Code can copy the full command line, but if you do use VS Code, you should only use the ``COMMAND ARGUMENTS`` part.
 {{% /notice %}}
