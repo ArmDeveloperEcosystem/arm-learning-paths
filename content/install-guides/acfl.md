@@ -150,13 +150,14 @@ Arm Compiler for Linux is available to install with the Ubuntu system package ma
 Add the ACfL `apt` package repository to your system. These instructions apply for Ubuntu 22.04. You can check the [available versions](https://developer.arm.com/packages/) for other releases.
 
 ```bash { target="ubuntu:latest" }
-export
 sudo apt update
-sudo apt install -y wget gpg environment-modules python3 libc6-dev
+sudo apt install -y wge gnupg gpg environment-modules python3 libc6-dev
 . /etc/os-release
 wget -qO - https://developer.arm.com/packages/ACfL%3AUbuntu-22/jammy/ | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc
-echo "deb https://developer.arm.com/packages/ACfL%3AUbuntu-22/jammy/ ./" >> /etc/apt/sources.list.d/developer-arm-com.list
+echo "deb https://developer.arm.com/packages/ACfL%3AUbuntu-22/jammy/ ./" > /etc/apt/sources.list.d/developer-arm-com.list
 sudo apt update
+sudo apt install acfl
+
 ```
 
 The ACfL Ubuntu package repository is now ready to use.
