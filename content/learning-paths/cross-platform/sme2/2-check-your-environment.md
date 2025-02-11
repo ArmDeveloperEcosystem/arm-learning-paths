@@ -40,7 +40,7 @@ llvm-objdump --demangle -d sme2_matmul_intr > sme2_matmul_intr.lst
 - It creates the assembly listings for the four executables: ``hello.lst``, ``sme2_check.lst``, ``sme2_matmul_asm.lst``, and ``sme2_matmul_intr.lst``.
 
 {{% notice Note %}}
-At any point, you can clean the directory of all the files that have been built by invoking the ``make clean`` target:
+At any point, you can clean the directory of all the files that have been built by invoking ``make clean``:
 
 ```BASH
 $ docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v1 make clean
