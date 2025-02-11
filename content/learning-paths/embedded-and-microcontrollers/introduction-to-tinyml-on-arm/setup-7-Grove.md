@@ -41,5 +41,10 @@ Ensure the board is properly connected and recognized by your computer.
    ```console
    ./flash_linux.sh
    ```
+You have now set up the board successfully. In the next section, you will learn how to use the functionality in the ExecuTorch repository for TinyML, using a hardware emulator.
+
+{{% notice Note %}}
+In the next Learning Path in this series, you will incorporate the board into the workflow, running workloads on real hardware.
+{{% /notice %}}
 
 Continue to the next page to build a simple PyTorch model.
