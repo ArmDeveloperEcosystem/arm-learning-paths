@@ -1,29 +1,30 @@
 ---
-title: PLACEHOLDER TITLE
+title: Learn about language and Arm architecture memory models
 
-minutes_to_complete: 10
+minutes_to_complete: 45
 
-who_is_this_for: PLACEHOLDER SENTENCE
+who_is_this_for: Introductory
 
 learning_objectives: 
-    - PLACEHOLDER OBJECTIVE 1
-    - PLACEHOLDER OBJECTIVE 2
+    - Learn about the C++ memory model
+    - Learn about the differences between the Arm and x86 memory model
+    - Learn best practices for writing C++ on Arm 
 
 prerequisites:
-    - PLACEHOLDER PREREQ 1
-    - PLACEHOLDER PREREQ 2
+    - Access to an x86 and AArch64 cloud instance
+    - Intermediate understanding of C++
 
-author_primary: PLACEHOLDER NAME
+author_primary: Kieran Hejmadi
 
 ### Tags
-skilllevels: PLACEHOLDER SKILLLEVEL
-subjects: PLACEHOLDER SUBJECT
+skilllevels: Introductory
+subjects: C++, Linux
 armips:
-    - PLACEHOLDER IP A
-    - PLACEHOLDER IP B
+    - Neoverse
 tools_software_languages:
-    - PLACEHOLDER TOOL OR SOFTWARE C
-    - PLACEHOLDER TOOL OR SOFTWARE D
+    - C++
+    - Linux
+    - ThreadSantizer (TSan)
 operatingsystems:
     - PLACEHOLDER OS G
 
