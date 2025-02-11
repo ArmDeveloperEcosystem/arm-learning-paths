@@ -10,7 +10,7 @@ layout: learningpathall
 
 GitHub Copilot Extensions provide an integration point to expand the functionality of GitHub Copilot Chat, allowing developers to introduce external tools, services, and custom behaviors into the chat experience. 
 
-You can use Copilot Extensions to customize the capabilities of Copilot in a variety of ways. For example, you can target the needs of a specific type of user, such as an Arm software developer, by querying specific documentation or prioritizing responses related to that specific developer's environment. Copilot Extensions also benefit users by facilitating the integration of additional LLMs, and offering different APIs and AI tools, which broadens the reach of the resources. In short, a Copilot Extension allows you to build a more curated experience. 
+You can use Copilot Extensions to customize the capabilities of Copilot in multiple ways. For example, you can target the needs of a specific type of user, such as an Arm software developer, by querying specific documentation or prioritizing responses related to that specific developer's environment. Copilot Extensions also benefit users by facilitating the integration of additional LLMs, and offering different APIs and AI tools, which broadens the reach of the resources. In short, a Copilot Extension allows you to build a more curated experience. 
 
 Think about what you want to offer, or build for yourself, that is beyond or better than what Copilot can already do. If you have ideas, you can try them using a Copilot Extension. 
 
