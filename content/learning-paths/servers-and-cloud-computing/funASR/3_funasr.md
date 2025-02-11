@@ -118,7 +118,7 @@ print(f"Result: \n{text_content}")
 print(res)
 ```
 
-You can see that the loaded model has been replaced with a Chinese speech recognition model that has a `-zh` suffix. 
+This example uses an audio file from the FunASR package for speech recognition, you can see that the loaded model has been replaced with a Chinese speech recognition model that has a `-zh` suffix. 
 
 FunASR will process each sound in the audio with appropriate character recognition.
 
@@ -145,7 +145,7 @@ Result:
 [{'key': 'asr_example', 'text': '欢 迎 大 家 来 到 么 哒 社 区 进 行 体 验', 'timestamp': [[990, 1230], [1290, 1530], [1610, 1830], [1830, 2010], [2010, 2170], [2170, 2410], [2430, 2570], [2570, 2810], [2850, 3050], [3050, 3290], [3390, 3570], [3570, 3810], [3910, 4110], [4110, 4345]]}]
 ```
 
-The output shows "欢迎大家来到达摩社区进行体验" as expected.
+The output shows "欢迎大家来到达摩社区进行体验" which means "Welcome everyone to the Dharma community to explore and experience!" as expected.
 
 You can also observe that the spacing between the third and sixth characters is very short. This is because they are combined with other characters, as discussed in the previous section.
 
@@ -211,6 +211,13 @@ rtf_avg: 0.180: 100%|███████████████████�
 Result: 
 {'output': ['欢迎', '大家', '来到', '达摩', '社区', '进行', '体验']}
 ```
+
+The segmentation of the sentence “欢迎大家来到达摩社区进行体验” into ‘欢迎’, ‘大家’, ‘来到’, ‘达摩’, ‘社区’, ‘进行’, ‘体验’. 
+
+Each segment represents a meaningful unit in the sentence, preserving the grammatical structure and readability.
+- “欢迎” (welcome) and “大家” (everyone) form a natural greeting.
+- “来到” (come to) introduces the location “达摩社区” (Damo Community) as a whole.
+- “进行” (carry out) and “体验” (experience) together indicate the purpose of visiting.
 
 Good, the result is exactly what you are looking for.
 
@@ -386,6 +393,8 @@ The model will identify which of the following emotions is the closest match for
 - Angry
 - Unknow
 
+This script recognizes three different speech samples in various languages and emotions as examples.
+
 Copy the code shown below in a file named `sentiment.py`:
 
 ```python
@@ -458,6 +467,206 @@ Angry Older English Voice
 rtf_avg: 1.444: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:02<00:00,  2.18s/it]
 Result: ['生气/angry (1.00)', '中立/neutral (0.00)', '开心/happy (0.00)', '难过/sad (0.00)', '<unk> (0.00)']
 ```
+
+You can notice that the emotions of all three speech samples are correctly recognized:
+- [Neutral Chinese Speech](https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_zh.wav)
+- [Happy English Speech](https://utoronto.scholaris.ca/bitstreams/05a3e499-7129-4a04-9efc-893f7af21d94/download)
+- [Angry English Speech](https://utoronto.scholaris.ca/bitstreams/5ce257a3-be71-41a8-8d88-d097ca15af4e/download)
+
+
+## Enhance PyTorch Inference Performance on Arm Neoverse
+
+In addition to FunASR providing comprehensive models that unlock numerous speech application possibilities, optimizing the computing platform is equally crucial.
+
+Thanks to the Arm Neoverse SMMLA and FMMLA instruction set and deep optimizations in PyTorch, we have further reduced the execution time of the original model on the CPU.
+
+You can learn more about [Accelerating popular Hugging Face models using Arm Neoverse
+](https://community.arm.com/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/accelerating-sentiment-analysis-on-arm-neoverse-cpus) from the Arm community blog.
+
+Let's re-test the same example based on fully optimized PyTorch package again.
+
+### Ensure Python 3.10 is installed
+First, make sure you are using Python 3.10. 
+
+If your current Python environment is below version 3.10, please upgrade to Python 3.10.
+
+```bash
+sudo apt install python3.10 -y
+```
+
+Conversely, if your current version is above 3.10, please proceed with the installation as well.
+
+```bash
+sudo apt install python3.10 -y
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 2
+sudo update-alternatives --config python3
+python --version
+```
+
+{{% notice Note %}}
+The update-alternatives command is a Debian-based Linux utility (used in Ubuntu, Debian, etc.) for managing symbolic links to different versions of software alternatives. It allows you to easily switch between multiple installed versions of the same program.
+{{% /notice %}}
+
+The Python version should be 3.10 now.
+
+```output
+Python 3.10.16
+```
+
+### Install PyTorch and Optimized Libraries
+
+Now, you can install PyTorch and optimized libraries by following instructions:
+
+```bash
+git clone --recursive https://github.com/pytorch/ao.git
+cd ao
+git checkout 174e630af2be8cd18bc47c5e530765a82e97f45b
+wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/PyTorch-arm-patches/main/0001-Feat-Add-support-for-kleidiai-quantization-schemes.patch
+git apply --whitespace=nowarn 0001-Feat-Add-support-for-kleidiai-quantization-schemes.patch
+cd ../
+
+git clone --recursive https://github.com/pytorch/torchchat.git
+cd torchchat
+git checkout 925b7bd73f110dd1fb378ef80d17f0c6a47031a6
+wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/PyTorch-arm-patches/main/0001-modified-generate.py-for-cli-and-browser.patch
+wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/PyTorch-arm-patches/main/0001-Feat-Enable-int4-quantized-models-to-work-with-pytor.patch
+git apply 0001-Feat-Enable-int4-quantized-models-to-work-with-pytor.patch
+git apply --whitespace=nowarn 0001-modified-generate.py-for-cli-and-browser.patch
+pip install -r requirements.txt
+
+wget https://github.com/ArmDeveloperEcosystem/PyTorch-arm-patches/raw/main/torch-2.5.0.dev20240828+cpu-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
+pip install --force-reinstall torch-2.5.0.dev20240828+cpu-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
+cd ..
+pip uninstall torchao && cd ao/ && rm -rf build && python setup.py install
+```
+
+{{% notice Note %}}
+Please reference this [link](https://learn.arm.com/learning-paths/servers-and-cloud-computing/pytorch-llama/pytorch-llama/) to learn more the detail description of those instructions.
+{{% /notice %}}
+
+Once you have installed the optimized PyTorch, we can enabled bfloat16 fast math kernels by setting DNNL_DEFAULT_FPMATH_MODE.
+
+On AWS Graviton3 as example, this enables GEMM kernels that use bfloat16 MMLA instructions available in the hardware.
+
+
+### Update the FunASR application with benchmark function
+
+Now we can test FunASR model again.
+
+By re-use the previously paraformer-2.py and add benchmark function, please copy the updated code shown below in a file named `paraformer-3.py`:
+
+```python
+import os
+import time
+import numpy as np
+import requests
+from modelscope.pipelines import pipeline
+from modelscope.utils.constant import Tasks
+
+# Initialize the ASR pipeline
+def load_pipeline(device="cpu"):
+    return pipeline(
+        task=Tasks.auto_speech_recognition,
+        model="iic/speech_paraformer-large_asr_nat-zh-cn-16k-common-vocab8404-pytorch",
+        model_revision="v2.0.4",
+        device=device,
+        hub="ms",
+        vad_model="iic/speech_fsmn_vad_zh-cn-16k-common-pytorch",
+        vad_model_revision="v2.0.4",
+        punc_model="iic/punc_ct-transformer_zh-cn-common-vocab272727-pytorch",
+        punc_model_revision="v2.0.4",
+    )
+
+# Benchmark function to measure execution time
+def benchmark(pipe, audio_path, runs=10):
+    """Measures inference time (mean & P99 percentile)."""
+    # Warmup (5 runs to stabilize performance)
+    for _ in range(5):
+        _ = pipe(input=audio_path)
+
+    # Benchmark runs
+    times = []
+    for _ in range(runs):
+        start = time.perf_counter()
+        _ = pipe(input=audio_path)
+        end = time.perf_counter()
+        times.append(end - start)
+
+    # Compute statistics
+    mean_time = np.mean(times) * 1000  # Convert to milliseconds
+    p99_time = np.percentile(times, 99) * 1000
+    return f"{mean_time:.2f} ms (Mean), {p99_time:.2f} ms (P99)"
+
+# Function to download the audio file if not exists
+def download_audio(url, filename):
+    if not os.path.exists(filename):
+        print(f" Downloading {filename}...")
+        r = requests.get(url, allow_redirects=True)
+        with open(filename, 'wb') as f:
+            f.write(r.content)
+        print(f" File {filename} downloaded.")
+    else:
+        print(f" File {filename} already exists.")
+
+# Define audio file URL & local filename
+audio_url = "https://github.com/liangstein/Chinese-speech-to-text/blob/master/3.wav?raw=true"
+audio_filename = "paraformer1.wav"
+
+# Download the audio file if needed
+download_audio(audio_url, audio_filename)
+
+# Initialize the pipeline
+device = "cpu"  # Change to "cuda" if using GPU
+inference_pipeline = load_pipeline(device)
+
+# Run inference
+print("\n Running Speech-to-Text Inference...")
+rec_result = inference_pipeline(input=audio_filename)
+print(f"\n Transcription Result: \n{rec_result[0]['text']}")
+
+# Measure execution time
+exec_time = benchmark(inference_pipeline, audio_filename)
+print(f"\n Execution Time: {exec_time}")
+```
+
+The `benchmark()` function measures inference performance, calculating the mean execution time and the 99th percentile latency (P99).
+
+Run the updated Python script:
+
+```bash
+python3 paraformer-3.py
+```
+
+The output should look like:
+
+```output
+ Transcription Result: 
+飞机穿过云层，眼下一片云海，有时透过稀薄的云雾，依稀可见南国葱绿的群山大地。
+rtf_avg: 0.010: 100%|
+ Execution Time: 816.62 ms (Mean), 798.76 ms (P99)
+```
+
+The model took 0.816 seconds to complete execution.
+
+### Enable bfloat16 Fast Math Kernels
+
+Now we enable bfloat16 and run Python script again:
+
+```bash
+export DNNL_DEFAULT_FPMATH_MODE=BF16
+python3 paraformer-3.py
+```
+
+The output should look like:
+```output
+ Transcription Result: 
+飞机穿过云层，眼下一片云海，有时透过稀薄的云雾，依稀可见南国葱绿的群山大地。
+rtf_avg: 0.010: 100%|
+ Execution Time: 738.04 ms (Mean), 747.57 ms (P99)
+```
+
+You can notice that the execution time is now 0.7 seconds, reflecting an improvement compared to earlier results.
 
 ## Conclusion
 ModelScope and FunASR empower developers to build robust Chinese ASR applications. By leveraging the strengths of Arm CPUs and the optimized software ecosystem, developers can create innovative and efficient solutions for various use cases. Explore the capabilities of ModelScope and FunASR, and unlock the potential of Arm technology for your next Chinese ASR project.
