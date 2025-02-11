@@ -135,4 +135,4 @@ cp chunks/faiss_index.bin ../
 cp chunks/metadata.json ../
 ```
 
-Your flask application is now ready for deployment.
+Your vector database is now ready for your flask application.
