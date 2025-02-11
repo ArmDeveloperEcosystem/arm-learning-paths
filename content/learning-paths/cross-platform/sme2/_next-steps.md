@@ -1,8 +1,4 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
-
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
-
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================
