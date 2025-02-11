@@ -25,14 +25,27 @@ Then for any given vector, like the embedded token input of a user, we can query
 For example, for our use case let's say we want to know which Arm learning path is most relevant to a question a user asks.
 
 First, ahead of time, we have to convert the raw data (Arm learning path content) into more consumable "chunks". In our case, small `yaml` files. Then we run those chunks through our LLM model and embed the content into our FAISS vector database.
-
 ### FAISS
 
-FAISS (Facebook AI Similarity Search) is a library developed by Facebook AI Research that is designed to efficiently search for similar vectors in large datasets. FAISS is highly optimized for both memory usage and speed, and best in class nearest neighbor search.
+FAISS (Facebook AI Similarity Search) is a library developed by Facebook AI Research that is designed to efficiently search for similar vectors in large datasets. FAISS is highly optimized for both memory usage and speed, making it the fastest similarity search algorithm available.
 
-Now in our application, we can take the input from the user and embed it using the same model we used for our database. We then use FAISS nearest neighbor search to compare the user input to the nearest vectors in the database. We then look at the original chunk files for those closest vector. Using the data from those `chunk.yaml` files, we can retrieve the Arm resource(s) most relevant for that user's question.
+One of the key reasons FAISS is so fast is its implementation of efficient Approximate Nearest Neighbor (ANN) search algorithms. ANN algorithms allow FAISS to quickly find vectors that are close to a given query vector without having to compare it to every single vector in the database. This significantly reduces the search time, especially in large datasets.
+
+Additionally, FAISS performs all searches in-memory, which means that it can leverage the full speed of the system's RAM. This in-memory search capability ensures that the search operations are extremely fast, as they avoid the latency associated with disk I/O operations.
+
+In our application, we can take the input from the user and embed it using the same model we used for our database. We then use FAISS nearest neighbor search to compare the user input to the nearest vectors in the database. We then look at the original chunk files for those closest vectors. Using the data from those `chunk.yaml` files, we can retrieve the Arm resource(s) most relevant for that user's question.
 
 The retrieved resources are then used to augment the context for the LLM, which generates a final response that is both contextually relevant and contains accurate information.
+
+### In Memory Deployment
+
+To ensure that our application scales efficiently, we will copy the FAISS database into every deployment instance. By deploying a static in-memory vector store in each instance, we eliminate the need for a centralized database, which can become a bottleneck as the number of requests increases.
+
+When each instance has its own copy of the FAISS database, it can perform vector searches locally, leveraging the full speed of the system's RAM. This approach ensures that the search operations are extremely fast and reduces the latency associated with network calls to a centralized database.
+
+Moreover, this method enhances the reliability and fault tolerance of our application. If one instance fails, others can continue to operate independently without being affected by the failure. This decentralized approach also simplifies the deployment process, as each instance is self-contained and does not rely on external resources for vector searches.
+
+By copying the FAISS database into every deployment, we achieve a scalable, high-performance solution that can handle a large number of requests efficiently.
 
 ## Collecting Data into Chunks
 
