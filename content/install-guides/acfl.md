@@ -152,12 +152,9 @@ Add the ACfL `apt` package repository to your system. These instructions apply f
 ```bash { target="ubuntu:latest" }
 sudo apt update
 sudo apt install -y wge gnupg gpg environment-modules python3 libc6-dev
-. /etc/os-release
 wget -qO - https://developer.arm.com/packages/ACfL%3AUbuntu-22/jammy/ | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc
-echo "deb https://developer.arm.com/packages/ACfL%3AUbuntu-22/jammy/ ./" > /etc/apt/sources.list.d/developer-arm-com.list
+echo "deb https://developer.arm.com/packages/ACfL%3AUbuntu-22/jammy/ ./" | sudo tee etc/apt/sources.list.d/developer-arm-com.list
 sudo apt update
-sudo apt install acfl
-
 ```
 
 The ACfL Ubuntu package repository is now ready to use.
