@@ -1,6 +1,6 @@
 ---
 title: Vector Database
-weight: 10
+weight: 1
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -25,6 +25,7 @@ Then for any given vector, like the embedded token input of a user, we can query
 For example, for our use case let's say we want to know which Arm learning path is most relevant to a question a user asks.
 
 First, ahead of time, we have to convert the raw data (Arm learning path content) into more consumable "chunks". In our case, small `yaml` files. Then we run those chunks through our LLM model and embed the content into our FAISS vector database.
+
 ### FAISS
 
 FAISS (Facebook AI Similarity Search) is a library developed by Facebook AI Research that is designed to efficiently search for similar vectors in large datasets. FAISS is highly optimized for both memory usage and speed, making it the fastest similarity search algorithm available.

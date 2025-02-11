@@ -1,6 +1,6 @@
 ---
 title: Configure GitHub Application
-weight: 50
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
