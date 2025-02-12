@@ -7,16 +7,18 @@ layout: learningpathall
 ---
 
 ## What is FunASR?
+
 [FunASR](https://github.com/modelscope/FunASR) is an open-source toolkit specifically designed for speech recognition research and development. It provides a comprehensive set of tools and functionalities for building and deploying ASR applications.
 
 
 ## Installing FunASR
 Install FunASR using pip:
+
 ```bash
 pip3 install funasr==1.2.3
 ```
 {{% notice Note %}}
-The learning path examples use FunASR version 1.2.3. You may notice minor differences in results with other versions.
+The examples in this Learning Path use FunASR version 1.2.3. You might notice minor differences in results with other versions.
 {{% /notice %}}
 
 ## Speech Recognition
