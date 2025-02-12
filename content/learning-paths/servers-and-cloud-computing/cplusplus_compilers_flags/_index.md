@@ -1,5 +1,8 @@
 ---
 title: Learn Basic C++ Optimisation Techniques using the G++ Compiler
+draft: true
+cascade:
+    draft: true
 
 minutes_to_complete: 60
 
@@ -13,7 +16,7 @@ prerequisites:
     - Basic understanding of C++
     - Basic understanding of compilers
 
-author_primary: Kieran Hejmadi
+author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
@@ -25,6 +28,12 @@ tools_software_languages:
     - C++
 operatingsystems:
     - Linux
+
+further_reading:
+    - resource:
+        title: Runtime Detection of CPU features 
+        link: https://community.arm.com/arm-community-blogs/b/operating-systems-blog/posts/runtime-detection-of-cpu-features-on-an-armv8-a-cpu
+        type: blog
 
 
 ### FIXED, DO NOT MODIFY
