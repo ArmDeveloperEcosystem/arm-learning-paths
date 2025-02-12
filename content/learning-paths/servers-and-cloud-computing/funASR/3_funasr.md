@@ -18,13 +18,13 @@ Install FunASR using pip:
 pip3 install funasr==1.2.3
 ```
 {{% notice Note %}}
-The examples in this Learning Path use FunASR version 1.2.3. You might notice minor differences in results with other versions.
+The examples in this Learning Path use FunASR version 1.2.3. Results might vary with other versions.
 {{% /notice %}}
 
 ## Speech Recognition
-FunASR offers a simple interface for performing speech recognition tasks. You can easily transcribe audio files or implement real-time speech recognition using FunASR's functionalities. In this learning path, you will learn how to leverage FunASR to implement a speech recognition application.
+FunASR offers a simple interface for performing speech recognition tasks. You can easily transcribe audio files or implement real-time speech recognition using FunASR's functionalities. In this Learning Path, you will learn how to leverage FunASR to implement a speech recognition application.
 
-Let's use an English speech voice sample as an example to run audio transcription on. Copy the code shown below into a file named `funasr_test1.py`
+To get started, let's use an English speech sample for audio transcription. Copy the code shown below into a file named `funasr_test1.py`.
 
 ```python
 from funasr import AutoModel
@@ -38,31 +38,32 @@ res = model.generate(input="https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/Ma
 print(f"\nResult: \n{res[0]['text']}")
 ```
 
-Before you run this script, lets look at what the Python code is doing:
+Before you run this script, let's look at what the Python code does:
 
-The imported `AutoModel()` class provides an interface to load different AI models.
+The imported `AutoModel()` class serves as an interface for loading various AI models.
 
 * **model="paraformer":**
 
-    Specifies the model you would like to load. 
-    In this example you will load the Paraformer model, which is an end-to-end automatic speech recognition (ASR) model designed for real-time transcription.
+    Specifies the model you want to load. 
+    In this example you will load the Paraformer model, which is an end-to-end automatic speech recognition (ASR) model optimized for real-time transcription.
     
 * **device="cpu":** 
 
-    Specify the model runs on the CPU. It does not require a GPU.
+    Specifies that the model runs on the CPU. It does not require a GPU.
 
 * **hub="ms":** 
 
     Indicates that the model is sourced from the "ms" (ModelScope) hub.
 
 The `model.generate()` function processes an audio file and generates a transcribed text output.
+
 * **input="...":** 
 
     The input is an audio file URL, which is a .wav file containing an English audio sample.
 
-The result contains a lot of information. To keep the example simple, you  will only list the transcribed text contained in res[0]['text'].
+The result contains a lot of information. To keep the example simple, you  will extract and display only list the transcribed text contained in res[0]['text'].
 
-In this initial test, a two-second English audio clip from the internet will be used for paraformer model to infleune the wave file.
+In this initial test, a two-second English audio clip from the internet will be used for Paraformer model to process the wave file.
 
 Run this Python script on your Arm based server:
 
