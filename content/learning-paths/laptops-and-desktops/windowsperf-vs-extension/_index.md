@@ -1,5 +1,5 @@
 ---
-title: WindowsPerf Visual Studio extension
+title: Learn how to use the Visual Studio extension for WindowsPerf
 draft: true
 cascade:
     draft: true
@@ -13,7 +13,6 @@ learning_objectives:
   - Generate a counting report and explore the data.
   - Review the report in Windows Performance Analyzer (WPA). 
   - Generate a sample report and explore the data.
-  - Generate a sample SPE report and explore the data.
 
 prerequisites:
   - A desktop or laptop running Windows on Arm.
@@ -21,7 +20,6 @@ prerequisites:
 
 author: 
   - Nader Zouaoui
-  - Jason Andrews
 
 ### Tags
 skilllevels: Introductory
