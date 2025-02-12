@@ -1,5 +1,5 @@
 ---
-title: Accelerate and measure PyTorch Inference on Arm servers
+title: Measure and accelerate PyTorch Inference on Arm servers
 
 minutes_to_complete: 20
 
@@ -7,8 +7,8 @@ who_is_this_for: This is an introductory topic for software developers who want 
 
 learning_objectives:
     - Download and install the PyTorch Benchmarks suite.
-    - Evaluate the performance of PyTorch model inference running on your Arm based server using the PyTorch Benchmark suite.
-    - Measure the performance of these models using eager and `torch.compile` modes in PyTorch.
+    - Evaluate PyTorch model inference performance on an Arm-based server using the PyTorch Benchmark suite.
+    - Compare the model inference performance using eager mode and `torch.compile` mode in PyTorch.
 
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
