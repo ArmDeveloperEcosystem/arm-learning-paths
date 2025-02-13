@@ -36,7 +36,6 @@ shared_path: true
 shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
-    - embedded-systems
 
 further_reading:
     - resource:
