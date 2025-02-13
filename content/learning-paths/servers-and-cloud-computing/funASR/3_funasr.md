@@ -1,4 +1,4 @@
----
+to instain---
 title: Building ASR Applications with ModelScope
 weight: 4
 
@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## What is FunASR?
 
-[FunASR](https://github.com/modelscope/FunASR) is an open-source toolkit specifically designed for speech recognition research and development. It provides a comprehensive set of tools and functionalities for building and deploying ASR applications.
+[FunASR](https://github.com/modelscope/FunASR) is an open-source toolkit designed for speech recognition research and application development. It provides a comprehensive set of tools and functionalities for building and deploying ASR applications.
 
 
 ## Installing FunASR
-Install FunASR using pip:
+Install FunASR using the following pip command:
 
 ```bash
 pip3 install funasr==1.2.3
@@ -24,7 +24,7 @@ The examples in this Learning Path use FunASR version 1.2.3. Results might vary 
 ## Speech Recognition
 FunASR offers a simple interface for performing speech recognition tasks. You can easily transcribe audio files or implement real-time speech recognition using FunASR's functionalities. In this Learning Path, you will learn how to leverage FunASR to implement a speech recognition application.
 
-To get started, let's use an English speech sample for audio transcription. Copy the code shown below into a file named `funasr_test1.py`.
+To get started, let's use an English speech sample for audio transcription. Create a file named `funasr_test1.py` and add the following code:
 
 ```python
 from funasr import AutoModel
@@ -38,34 +38,31 @@ res = model.generate(input="https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/Ma
 print(f"\nResult: \n{res[0]['text']}")
 ```
 
-Before you run this script, let's look at what the Python code does:
+### Code Breakdown
+
+Before running this script, you can break it down:
 
 The imported `AutoModel()` class serves as an interface for loading various AI models.
 
-* **model="paraformer":**
+#### Key Parameters
 
-    Specifies the model you want to load. 
-    In this example you will load the Paraformer model, which is an end-to-end automatic speech recognition (ASR) model optimized for real-time transcription.
+* `model="paraformer"`: Specifies the model you want to load. In this example you will load the Paraformer model, which is an end-to-end automatic speech recognition (ASR) model optimized for real-time transcription.
     
-* **device="cpu":** 
+* `device="cpu"`: Specifies that the model runs on the CPU. It does not require a GPU.
 
-    Specifies that the model runs on the CPU. It does not require a GPU.
+* `hub="ms"`: Indicates that the model is sourced from the "ms" (ModelScope) hub.
 
-* **hub="ms":** 
+#### Processing the Audio
 
-    Indicates that the model is sourced from the "ms" (ModelScope) hub.
+* `model.generate()`: function processes an audio file and generates a transcribed text output.
 
-The `model.generate()` function processes an audio file and generates a transcribed text output.
+* `input="..."`: The input is a `.wav` audio file URL, which is a .wav file containing an English audio sample.
 
-* **input="...":** 
+Since the output contains extensive data, this example focuses on extracting and displaying only the transcribed text found in res[0]['text'].
 
-    The input is an audio file URL, which is a .wav file containing an English audio sample.
+For this initial test, a two-second English audio clip from the internet will be used for Paraformer model to process the `.wav` file.
 
-The result contains a lot of information. To keep the example simple, you  will extract and display only list the transcribed text contained in res[0]['text'].
-
-In this initial test, a two-second English audio clip from the internet will be used for Paraformer model to process the wave file.
-
-Run this Python script on your Arm based server:
+Run this Python script on your Arm-based server:
 
 ```bash
 python funasr_test1.py
@@ -100,7 +97,7 @@ he tried to think how it could be
 
 The transcribed test shows "he tried to think how it could be". This is the expected result for the audio sample.
 
-Now lets try an example that uses a Chinese speech recognition model. Copy the code shown below in a file named `funasr_test2.py`:
+Now you can try an example that uses a Chinese speech recognition model. Copy the code shown below in a file named `funasr_test2.py`:
 
 ```python
 import os
@@ -125,7 +122,7 @@ You can see that the loaded model has been replaced with a Chinese speech recogn
 
 FunASR will process each sound in the audio with appropriate character recognition.
 
-You have also modified the output format from the previous example. In addition to recognising the Chinese characters, you will add timestamps indicating the start and end times of each character. This is used for applications like subtitle generation and sentiment analysis.
+You have also modified the output format from the previous example. In addition to recognizing the Chinese characters, you will add timestamps indicating the start and end times of each character. This is used for applications like subtitle generation and sentiment analysis.
 
 Run the Python script:
 
@@ -219,15 +216,15 @@ Good, the result is exactly what you are looking for.
 
 ## Paraformer: Fast and Accurate Parallel Transformer for Non-autoregressive End-to-End Speech Recognition
 
-Lets now look at a more advanced speech recognition model, [Paraformer](https://aclanthology.org/2020.wnut-1.18/).
+Now you can look at a more advanced speech recognition model, [Paraformer](https://aclanthology.org/2020.wnut-1.18/).
 
-Paraformer is a novel architecture for automatic speech recognition (ASR) that offers both enhanced speed and accuracy compared to traditional models. Its key innovation lies in its parallel transformer design, enabling simultaneous processing of multiple parts of the input speech. This parallel processing capability leads to significantly faster inference, making Paraformer well-suited for real-time ASR applications where responsiveness is crucial.  
+Paraformer is a novel architecture for automatic speech recognition (ASR) designed for both speed and accuracy. Unlike traditional models, it leverages a parallel transformer architecture, enabling simultaneous processing of multiple parts of the input speech. This parallel processing capability leads to significantly faster inference, making Paraformer well-suited for real-time ASR applications where responsiveness is crucial.  
 
 Furthermore, Paraformer has demonstrated state-of-the-art accuracy on several benchmark datasets, showcasing its effectiveness in accurately transcribing speech. This combination of speed and accuracy makes Paraformer a promising advancement in the field of ASR, opening up new possibilities for high-performance speech recognition systems.
 
 Paraformer has been fully integrated into FunASR. Copy the sample program shown below into a file named `paraformer.py`.
 
-This example uses PyTorch-optimized Paraformer model from ModelScope, the program will first check if the test audio file has been downloaded.
+This example uses a PyTorch-optimized Paraformer model from ModelScope. The program first checks if the test audio file has been downloaded.
 
 
 ```python
@@ -305,7 +302,7 @@ In addition to using the Paraformer model, you will add two more ModelScope mode
 - VAD ([Voice Activity Detection](https://modelscope.cn/models/iic/speech_fsmn_vad_zh-cn-16k-common-pytorch/summary)) and 
 - PUNC ([Punctuation Restoration](https://modelscope.cn/models/iic/punc_ct-transformer_zh-cn-common-vocab272727-pytorch/files)) 
 
-This way, you can obtain punctuation that matches the semantics of the speech recognition. Copy the updated code shown below in a file named `paraformer-2.py`:
+This ensures the punctuation aligns with the semantics of the speech recognition. Copy the updated code shown below in a file named `paraformer-2.py`:
 
 ```python
 import os
@@ -363,7 +360,7 @@ Result:
 飞机穿过云层，眼下一片云海，有时透过稀薄的云雾，依稀可见南国葱绿的群山大地。
 ```
 
-Lets translate this recognized result, and you can easily see that the four sentences represent different meanings.
+Now you can translate this recognized result, and you can easily see that the four sentences represent different meanings.
 
 "飞机穿过云层" means: The airplane passed through the clouds.
 
@@ -374,7 +371,6 @@ Lets translate this recognized result, and you can easily see that the four sent
 "依稀可见南国葱绿的群山大地" means: "one could vaguely see the green mountains and land of the southern country.
 
 
-
 ## Sentiment Analysis
 FunASR also supports sentiment analysis of speech, allowing you to determine the emotional tone of the spoken language. 
 
@@ -382,12 +378,12 @@ This can be valuable for applications like customer service and social media mon
 
 You can use a mature speech emotion recognition model [emotion2vec+](https://modelscope.cn/models/iic/emotion2vec_plus_large) from ModelScope as an example.
 
-The model will identify which of the following emotions is the closest match for the emotion expressed in the speech:
-- Neutral
-- Happy
-- Sad
-- Angry
-- Unknow
+The model identifies which of the following emotions is the closest match for the emotion expressed in the speech:
+* Neutral.
+* Happy.
+* Sad.
+* Angry.
+* Unknown.
 
 Copy the code shown below in a file named `sentiment.py`:
 
@@ -446,7 +442,7 @@ Run this script:
 python3 sentiment.py
 ```
 
-Without a model that understands semantics, `emotion2vec+` can still correctly recognize the speaker's emotions through changes in intonation.
+`emotion2vec+` accurately detects emotions through intonation, even without semantic understanding.
 
 The output should look like:
 
@@ -463,4 +459,4 @@ Result: ['生气/angry (1.00)', '中立/neutral (0.00)', '开心/happy (0.00)', 
 ```
 
 ## Conclusion
-ModelScope and FunASR empower developers to build robust Chinese ASR applications. By leveraging the strengths of Arm CPUs and the optimized software ecosystem, developers can create innovative and efficient solutions for various use cases. Explore the capabilities of ModelScope and FunASR, and unlock the potential of Arm technology for your next Chinese ASR project.
+Arm CPUs and an optimized software ecosystem enable developers to build innovative, efficient ASR solutions. Explore the capabilities of ModelScope and FunASR, and unlock the potential of Arm technology for your next Chinese ASR project.
