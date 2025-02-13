@@ -1,7 +1,7 @@
 ---
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
-title: Visual Studio extension for WindowsPerf
+title: Visual Studio Extension for WindowsPerf
 
 minutes_to_complete: 10
 
@@ -26,31 +26,31 @@ multitool_install_part: false # Set to true if a sub-page of a multi-page articl
 layout: installtoolsall # DO NOT MODIFY. Always true for tool install articles
 ---
 
-WindowsPerf is a lightweight performance profiling tool inspired by Linux Perf, and specifically tailored for Windows on Arm. 
+WindowsPerf is a lightweight performance profiling tool inspired by Linux Perf, and designed specifically for Windows on Arm. 
 
-The WindowsPerf GUI is a Visual Studio 2022 extension created to provide a more intuitive experience within the Visual Studio integrated development environment (IDE). The extension enables developers to interact with WindowsPerf, adjust settings, and visualize performance data seamlessly in Visual Studio.
+The WindowsPerf GUI is a Visual Studio 2022 extension that provides an intuitive, integrated experience within the Visual Studio Integrated Development Environment (IDE). The extension enables developers to interact with WindowsPerf, adjust settings, and visualize performance data seamlessly in Visual Studio.
 
 ## Before you begin
 
-Before installing the Visual Studio Extension for WindowsPerf, perform the following steps:
+Before installing the Visual Studio Extension for WindowsPerf, complete the following steps:
 
 1. Install [Visual Studio 2022](/install-guides/vs-woa/) on your Windows on Arm device.
 2. Install WindowsPerf using the [WindowsPerf install guide](/install-guides/wperf/).
 3. Install the LLVM toolchain using the [LLVM toolchain for Windows on Arm install guide](/install-guides/llvm-woa/).
 
 {{% notice llvm-objdump %}}
-The disassembly feature needs to have `llvm-objdump` available in the search path to work properly. Check your `%PATH%` variable to confirm it includes the location of `llvm-objdump`. 
+The disassembly feature requires `llvm-objdump` in the search path. Verify that your `%PATH%` variable includes the location of `llvm-objdump` to ensure proper functionality. 
 {{% /notice %}}
 
 ### Install using the Visual Studio Extension Manager
 
-To install the Visual Studio extension for WindowsPerf from Visual Studio use the extension manager:
+To install the Visual Studio extension for WindowsPerf from Visual Studio, use the Extension Manager:
 
-1. Open Visual Studio 2022
-2. Use the `Extensions` menu to select `Manage Extensions`
-3. Click on the `Search (Ctrl+L)` bar and type `WindowsPerf`
-4. Click on the `Install` button 
-5. Restart Visual Studio
+1. Open Visual Studio 2022.
+2. Navigate to the `Extensions` menu, and select `Manage Extensions`.
+3. Select the `Search (Ctrl+L)` bar, and type `WindowsPerf`.
+4. Select the `Install` button. 
+5. Restart Visual Studio to complete installation.
 
 ![Install #center](/install-guides/_images/wperf-vs-extension-install-page.png)
 
@@ -67,7 +67,7 @@ Follow the prompts to install the Visual Studio extension.
 ![VSIX Install #center](/install-guides/_images/vs-ext-install.png)
 
 {{% notice Note %}}
-Make sure that any previous version of the extension is uninstalled and that Visual Studio is closed before installing the extension.
+Ensure that any previous version of the extension is uninstalled and that Visual Studio is closed before installing the extension.
 {{% /notice %}}
 
 ### Build and install from source code
@@ -102,23 +102,24 @@ This step is crucial for utilizing the extension, and the extension will not wor
 
 The WindowsPerf extension is composed of several key features, each designed to streamline the user experience:
 
-- **WindowsPerf Configuration**: Connect directly to `wperf.exe` for a seamless integration. 
-- **Host Data**: Understand your environment by selecting `Tools` then `WindowsPerf Host Data`. 
-- **Output Logging**: All commands executed through the GUI are logged, ensuring transparency and aiding with performance analysis.
-- **Sampling UI**: Customize your sampling experience by selecting events, setting frequency and duration, choosing programs for sampling, and comprehensively analyzing results. 
+* WindowsPerf Configuration: Connect directly to `wperf.exe` for a seamless integration. 
+* Host Data: Understand your environment by selecting `Tools` then `WindowsPerf Host Data`. 
+* Output Logging: All commands executed through the GUI are logged, ensuring transparency and aiding with performance analysis.
+* Sampling UI: Customize your sampling experience by selecting events, setting frequency and duration, choosing programs for sampling, and comprehensively analyzing results. 
 
 The sampling interface is shown below:
 
 ![Sampling preview #center](/install-guides/_images/wperf-vs-extension-sampling-preview.png)
 
-- **Counting Settings UI**: Build a `wperf stat` command from scratch using the configuration interface, then view the output in VS Code or open it with Windows Performance Analyzer (WPA). 
-
+* Counting Settings UI: Build a `wperf stat` command from scratch using the configuration interface, then view the output in VS Code or open it with Windows Performance Analyzer (WPA). 
 The interface to configure counting is shown below:
 
 ![Counting preview #center](/install-guides/_images/wperf-vs-extension-counting-preview.png)
 
 ## Uninstall the WindowsPerf extension
 
-To uninstall the extension in Visual Studio go to `Extensions > Manage Extensions > Installed > All > WindowsPerfGUI` and select `Uninstall`. 
+To uninstall the extension in Visual Studio:
 
-The uninstall will be scheduled by Visual Studio, so you need to close Visual Studio and follow the uninstall dialog to remove the extension.
+Go to `Extensions > Manage Extensions > Installed > All > WindowsPerfGUI` and select `Uninstall`. 
+
+Visual Studio will schedule the uninstallation. To complete the process, close Visual Studio and follow the uninstall dialog prompts.
