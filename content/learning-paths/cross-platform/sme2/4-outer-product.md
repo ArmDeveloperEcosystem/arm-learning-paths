@@ -103,10 +103,6 @@ the matrix multiplication perform the preprocessing step correctly. This code is
 located in file ``preprocess_vanilla.c``.
 
 {{% notice Note %}}
-In a real-world application, it may be possible to arrange for ``matLeft`` to
-be stored in column-major order, in which case no further transposition would
-be needed, and the preprocess step would be unncessary. Matrix processing
-frameworks / libraries often have some attributes with the Matrix object to
-track if it is row- or column-major order, and / or if it has been transposed
-to avoid unncessary computations.
+In real-world applications, it might be possible to arrange for ``matLeft`` to
+be stored in column-major order, eliminating the need for transposition, and making the preprocessing step unnecessary. Matrix processing frameworks and libraries often have attributes within the matrix object to track if it is row- or column-major order, and whether it has been transposed to avoid unnecessary computations.
 {{% /notice %}}
