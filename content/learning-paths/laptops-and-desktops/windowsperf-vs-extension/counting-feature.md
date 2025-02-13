@@ -1,91 +1,53 @@
 ---
-title: The Counting Feature
-weight: 2
+title: Use the counting feature
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Introduction
+The Counting feature in the Visual Studio extension for WindowsPerf is a powerful tool for analyzing and optimizing your code's performance.
 
-- WindowsPerf installed [(Installation guide)](/install-guides/wperf/)
-- Visual Studio 2022 Community Edition installed [(Installation guide)](/install-guides/vs-woa/)
-- WindowsPerf Visual Studio extension installed [(Installation guide)](/install-guides/windows-perf-vs-extension/)
-- (Optional) WindowsPerf WPA plugin installed
-
-
-The Counting feature in the WindowsPerf GUI extension is a powerful tool for analyzing and optimizing your code's performance.
-This tutorial guides you through the entire process, from setting up your counting preferences to analyzing the results and interfacing with the WindowsPerf Windows
+This section guides you through the entire process, from setting up your counting preferences to analyzing the results and interfacing with the WindowsPerf Windows
 Performance Analyzer (WPA) Plugin.
 
-## How to Open Counting Settings
+## How do I access the counting settings? 
 
-**Accessing Counting Settings**:
+Open the `View` menu in Visual Studio 2022 and select `Counting Settings` from the dropdown. This opens the `Counting Settings` dialog.
 
-- In Visual Studio 2022, go to the `View` menu.
-- Select `Counting Settings` from the dropdown.
-- This action will open the Counting Settings Dialog.
+## How do I configure the counting parameters?
 
-## Configuring the Counting Parameters
+The counting settings dialog presents multiple fields for configuration. 
 
-1. **Filling in Necessary Fields**:
+Essential fields to fill in include:
 
-   - The dialog presents multiple fields for configuration. Essential fields to fill in include:
-     - CPU core selection
-       > Note: if no target is selected, the CPU core selection allows for multiple
-       > cores to be selected.
-     - Event or Metric choice
-       > Note: Events can be grouped by selecting the events to group, then clicking on
-       > the `Group events` button.
-   - Fill these in according to the specifics of the counting you wish to perform.
+- CPU core selection: you can select a subset of the CPU cores or all of them.
+- Event List and Metric List: you can select events such as `cpu_cycles` and metrics such as `dcache`.
 
-2. **Optional Parameters**:
+{{% notice Note %}}
+Events can be grouped by selecting the events to group, then clicking on the `Group events` button.
+{{% /notice %}}
 
-   - You can also set other parameters as per your requirements.
+You can also set other parameters as per your requirements.
 
-3. **Command Preview**:
+As you configure the settings, the dialog provides the `WindowsPerf command preview`. This the command that will be executed.
+     
+Check the `Timeline` check box create a timeline view.  Choose the number of iterations to run the timeline (defaults to 1) and the interval between each iteration (defaults to 0.5 second).
 
-   - As you configure the settings, the dialog provides a real-time preview of the
-     WindowsPerf command that will be executed.
+## How do I initiate counting?
 
-4. **Timeline Parameters**:
+To start the counting process click on the `Start` button. 
 
-The option to create a timeline is available by toggling the `Timeline` checkbox.
-You then have the option to:
-
-- Choose the number of iterations to run the timeline (defaults to 1).
-- Choose the interval between each iteration (defaults to 0.5 second).
-
-## Initiating the Counting Process
-
-1. **Starting the Counting Process**:
-
-   - Click on the `Start` button to kickstart the sampling.
-
-     > Note: The `Build and start` button is also available to build the solution
-     > before starting the counting process if the current project target is selected.
-
-   - If you’ve set a timeout, the process will run for the specified duration.
-     Otherwise, you have the flexibility to end the counting manually using the `Stop` button.
-
-   - The `Stop` button can also be used to interrupt the process even if the timeout
-     hasn’t lapsed and the collected counts will be shown in the table below.
+If you’ve set a timeout, the process will run for the specified duration. Otherwise, you have the flexibility to end the counting manually using the `Stop` button.
+     
+For the current code example, you will see the counted events in the `Counting Output` located in the lower section of the dialog. 
 
 ![Start Counting](./start-counting.png)
-_Counting Settings UI_
 
-## Delving into the Counting Results
+## How can I analyze the results? 
 
-1. **Analyzing the Results**:
+You can click the `Open in WPA` button to open the collected counts in the Windows Performance Analyzer (WPA). The WindowsPerf WPA Plugin provides in-depth visualization and analysis of the results.
 
-   - Post-counting, you’ll notice the table in the `Counting Output` located at the
-     lower section of the Counting Settings dialog displaying the collected counts.
-
-(**Optional**)
-
-- The option to **Open in WPA** is available to open the collected counts in the
-  Windows Performance Analyzer (WPA) using the WindowsPerf WPA Plugin for a more
-  in-depth visualization and analysis of the results.
+A screenshot of WPA is below:
 
 ![Open in WPA #center](./open-in-wpa.png)
-_WPA UI_
