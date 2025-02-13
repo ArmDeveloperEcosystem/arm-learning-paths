@@ -104,16 +104,18 @@ For more examples and ideas, visit:
 ## Environment
 
 Now, using Git, clone the environment for experimenting with SME2 to a directory
-named ``SME2.git``:
+named ``code-examples.git`` and change your current directory to
+``code-examples.git/learning-paths/cross-platform/sme2`` :
 
 ```BASH
-git clone  https://gitlab.arm.com/learning-code-examples/TODO_SOME_PATH SME2-learning-path.git
+git clone  https://gitlab.arm.com/learning-code-examples/code-examples code-examples.git
+cd code-examples.git/learning-paths/cross-platform/sme2
 ```
 
-This list of content in the repository should look like this :
+This list of content in this directory should look like this :
 
 ```TXT
-SME2-learning-path.git/
+code-examples.git/learning-paths/cross-platform/sme2/
 ├── .clang-format
 ├── .devcontainer/
 │   └── devcontainer.json
@@ -153,14 +155,9 @@ It contains:
   - A script called ``build-all-containers.sh`` that was used to create the image for you to download to provide multi-architecture support for both x86_64 and AArch64.
 - A configuration script for VS Code to be able to use the container from the IDE called ``.devcontainer/devcontainer.json``.
 
-The next step is to change directory to your checkout:
-
-```BASH
-cd SME2-learning-path.git
-```
 {{% notice Note %}}
 From this point in the Learning Path, all instructions assume that your current
-directory is ``SME2-learning-path.git``.{{% /notice %}}
+directory is ``code-examples.git/learning-paths/cross-platform/sme2``.{{% /notice %}}
 
 
 ## Using the environment
@@ -183,7 +180,7 @@ docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-enviro
 
 This invokes Docker, using the
 ``armswdev/sme2-learning-path:sme2-environment-v1``container
-image, and mounts the current working directory (the ``SME2-learning-path.git``)
+image, and mounts the current working directory (the ``code-examples.git/learning-paths/cross-platform/sme2``)
 inside the container to ``/work``, then sets ``/work`` as the
 working directory and runs ``COMMAND ARGUMENTS`` in this environment.
 

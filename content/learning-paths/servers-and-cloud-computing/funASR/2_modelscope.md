@@ -84,12 +84,18 @@ Using a file editor of your choice, copy the code shown below into a file named 
 ```python
 from modelscope.pipelines import pipeline
 
-word_segmentation = pipeline('word-segmentation',model='damo/nlp_structbert_word-segmentation_chinese-base')
+word_segmentation = pipeline (
+    'word-segmentation',
+    model='damo/nlp_structbert_word-segmentation_chinese-base'
+)
 text = '一段新年祝福的文字跟所有人分享'
 result = word_segmentation(text)
 
 print(result)
 ```
+
+This piece of code specifies a model and provides a Chinese sentence for the model to segment.
+"A New Year’s greeting message to share with everyone."
 
 Run the model inference on the sample text:
 
@@ -140,5 +146,5 @@ The segmentation model has correctly identified the following words:
 
 - 分享 (share): This is a verb meaning "to share."
 
+The segmentation model has successfully identified the word boundaries and separated the sentence into meaningful units, which is essential for further natural language processing tasks like machine translation or sentiment analysis.
 
-The segmentation model has accurately identified word boundaries and separated the sentence into meaningful units. This step is essential for downstream natural language processing tasks such as machine translation or sentiment analysis.
