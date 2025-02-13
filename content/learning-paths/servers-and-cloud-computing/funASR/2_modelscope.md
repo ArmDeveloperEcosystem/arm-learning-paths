@@ -1,4 +1,4 @@
----
+compute---
 title: ModelScope - Open-Source Pre-trained AI models hub
 weight: 3
 
@@ -8,35 +8,31 @@ layout: learningpathall
 
 ## Before you begin
 
-To follow the instructions for this Learning Path, you will need an Arm based server running Ubuntu 22.04 LTS or later version with at least 8 cores, 16GB of RAM, and 30GB of disk storage.
+To follow the instructions for this Learning Path, you will need an Arm-based server running Ubuntu 22.04 LTS or later, with at least 8 cores, 16GB of RAM, and 30GB of disk storage.
 
-## Introduce ModelScope
-[ModelScope](https://github.com/modelscope/modelscope/) is an open-source platform that makes it easy to use AI models in your applications. 
-It provides a wide variety of pre-trained models for tasks like image recognition, natural language processing, and audio analysis. With ModelScope, you can easily integrate these models into your projects with just a few lines of code.
+## What is ModelScope?
+[ModelScope](https://github.com/modelscope/modelscope/) is an open-source platform designed to simplify the integration of AI models into applications. It offers a wide variety of pre-trained models for tasks such as image recognition, natural language processing, and audio analysis. With ModelScope, you can seamlessly integrate these models into your projects using just a few lines of code.
 
-Key benefits of ModelScope include:
+Key benefits of ModelScope:
 
-* **Model Diversity:** 
-    Access a wide range of models for various tasks, including ASR, natural language processing, and computer vision.
+* Model Diversity - Access a wide range of models for various tasks, including Automatic Speech Recognition (ASR), natural language processing (NLP), and computer vision.
 
-* **Ease of Use:** 
-    ModelScope provides a user-friendly interface and APIs for seamless model integration.
+* Ease of Use - ModelScope provides a user-friendly interface and APIs that enable seamless model integration.
 
-* **Community Support:** 
-    Benefit from a vibrant community of developers and researchers contributing to and supporting ModelScope.
+* Community Support - Benefit from a vibrant community of developers and researchers who actively contribute to and support ModelScope.
 
 
 ## Arm CPU Acceleration
-ModelScope fully supports Pytorch 1.8+ and other machine learning frameworks, which can be efficiently deployed on Arm Neoverse CPUs, taking advantage of Arm's performance and power-efficiency characteristics.
+ModelScope fully supports PyTorch 1.8+ and other machine learning frameworks, enabling efficient deployment on Arm Neoverse CPUs. These CPUs leverage Arm's performance and power efficiency advantages for optimized AI workloads.
 
-Arm provides optimized software and tools, such as Kleidi, to accelerate AI inference on Arm-based platforms. This makes Arm Neoverse CPUs an ideal choice for running ModelScope models in edge devices and other resource-constrained environments.
+Arm offers optimized software and tools, such as Kleidi, to accelerate AI model inference on Arm-based platforms. These enhancements make Arm Neoverse CPUs a powerful choice for deploying ModelScope models on edge devices and other resource-constrained environments.
 
-You can learn more about [Faster PyTorch Inference using Kleidi on Arm Neoverse](https://community.arm.com/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/faster-pytorch-inference-kleidi-arm-neoverse) from Arm community website.
+You can learn more about [Faster PyTorch Inference using Kleidi on Arm Neoverse](https://community.arm.com/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/faster-pytorch-inference-kleidi-arm-neoverse) on the Arm community website.
 
 
 ## Install ModelScope and PyTorch
 
-First, ensure your system is up-to-date and install the required tools and libraries:
+First, ensure your system is up to date and install the necessary tools and libraries:
 
 ```bash
 sudo apt-get update -y
@@ -49,36 +45,39 @@ python -m venv venv
 source venv/bin/activate
 ```
 
-In your active virtual environment, install modelscope:
+In your active virtual environment, install ModelScope:
 
 ```bash
 pip3 install modelscope
 ```
 
-Install PyTorch and related python dependencies: 
+Install PyTorch and related dependencies: 
 ```bash
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 pip3 install numpy packaging addict datasets simplejson sortedcontainers transformers ffmpeg
 
 ```
 {{% notice Note %}}
-In this learning path you will execute models on the Arm Neoverse CPU, so you will only need to install the PyTorch CPU package.
+In this Learning Path you will execute models on the Arm Neoverse CPU, so you will only need to install the PyTorch CPU package.
 {{% /notice %}}
 
-## Create a sample example
+## Create a simple example
 
 You can now run an example to understand how to use ModelScope for understanding Chinese semantics.
 
-There is a fundamental difference between Chinese and English writing. 
-The relationship between Chinese characters and their meanings is somewhat analogous to the difference between words and phrases in English. 
-Some Chinese characters, like English words, have clear meanings on their own, such as “人” (person), “山” (mountain), and “水” (water).
+Chinese writing differs fundamentally from English writing. In Chinese, the relationship between characters and their meanings is somewhat analogous to the distinction between words and phrases in English. Some Chinese characters, like English words, have clear meanings on their own, such as “人” (person), “山” (mountain), and “水” (water).
 
-However, more often, Chinese characters need to be combined with other characters to express more complete meanings, just like phrases in English. 
-For example, “祝福” (blessing) can be broken down into “祝” (wish) and “福” (good fortune); “分享” (share) can be broken down into “分” (divide) and “享” (enjoy); “生成” (generate) is composed of “生” (produce) and “成” (become).
+However, more often, Chinese characters need to be combined with other characters to express more complete meanings, much like phrases in English. 
 
-For computers to understand Chinese sentences, you will need to understand the rules of Chinese characters, vocabulary, and grammar to accurately understand and express meaning.
+For example:
 
-In this simple example, you will use a general-domain Chinese [word segmentation model](https://www.modelscope.cn/models/iic/nlp_structbert_word-segmentation_chinese-base) to break down Chinese sentences into individual words, facilitating analysis and understanding by computers.
+* “祝福” (blessing) can be broken down into “祝” (wish) and “福” (good fortune).
+* “分享” (share) can be broken down into “分” (divide) and “享” (enjoy).
+* “生成” (generate) can be broken down into “生” (produce) and “成” (become).
+
+For computers to process Chinese sentences accurately, they must understand the rules governing Chinese characters, vocabulary, and grammar to interpret and express meaning correctly.
+
+In this example, you will use a general-domain Chinese [word segmentation model](https://www.modelscope.cn/models/iic/nlp_structbert_word-segmentation_chinese-base) to break down Chinese sentences into individual words. This segmentation process helps computers analyze and understand Chinese text more effectively by identifying distinct words within a continuous string of characters.
 
 Using a file editor of your choice, copy the code shown below into a file named `segmentation.py`:
 
@@ -148,3 +147,4 @@ The segmentation model has correctly identified the following words:
 - 分享 (share): This is a verb meaning "to share."
 
 The segmentation model has successfully identified the word boundaries and separated the sentence into meaningful units, which is essential for further natural language processing tasks like machine translation or sentiment analysis.
+
