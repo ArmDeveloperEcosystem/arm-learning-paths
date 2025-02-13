@@ -18,11 +18,11 @@ Follow the steps below to set up ngrok.
 
 ### Download and install ngrok 
 
-If needed, create a new account. 
+If required, create a new account. 
 
 Refer to the [Setup & installation](https://dashboard.ngrok.com/get-started/setup/linux) section for installation details.
 
-If you are using a Debian based Linux system, run the command:
+If you are using a Debian-based Linux system, run the command:
 
 ```console
 curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
@@ -35,17 +35,19 @@ curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
 
 ### Configure your ngrok account
 
-Before starting the ngrok server, you need an Authtoken. If you don't currently have one, create a new Authtoken from the [Authtoken](https://dashboard.ngrok.com/get-started/your-authtoken) settings. 
+Before you can start the ngrok server, you need an Authtoken. 
+
+If you don't currently have one, create a new Authtoken from the [Authtoken Get Started section](https://dashboard.ngrok.com/get-started/your-authtoken). 
 
 Once you have the token, add it to the Linux computer where you are running your Python extension. 
 
-Substitute your token in the command below:
+Substitute your token in the command below where it states **\<your-authtoken\>**:
 
 ```console
 ngrok config add-authtoken <your-authtoken>
 ```
 
-ngrok is easier to use if you create a domain name. Go to the [Domains](https://dashboard.ngrok.com/domains) section and add a new randomly generated domain name. You can create 1 domain name in a free account. 
+ngrok is easier to use if you create a domain name. Go to the [Domains](https://dashboard.ngrok.com/domains) section and add a new randomly generated domain name. You can create one domain name in a free account. 
 
 Use the domain name in the next section to start the server.
 

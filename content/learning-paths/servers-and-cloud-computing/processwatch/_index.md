@@ -13,7 +13,7 @@ prerequisites:
     - An Arm-based system (bare metal server, cloud instance, or developer board) running Linux with kernel version 5.8.0 or later.
     - Root access, or the ability to run the sudo command.
 
-author_primary: Graham Woodward
+author: Graham Woodward
 
 ### Tags
 skilllevels: Introductory
@@ -28,6 +28,17 @@ tools_software_languages:
     - C/C++
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: Perf for Linux on Arm (LinuxPerf)
+        link: https://learn.arm.com/install-guides/perf/
+        type: website
+    - resource:
+        title: Capstone 
+        link: https://github.com/capstone-engine/capstone
+        type: website
 
 
 ### FIXED, DO NOT MODIFY

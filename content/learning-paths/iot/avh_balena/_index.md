@@ -16,7 +16,7 @@ prerequisites:
     - A Linux machine with root access
     - Some familiarity with embedded Linux
 
-author_primary: Michael Hall
+author: Michael Hall
 
 ### Tags
 skilllevels: Introductory
@@ -34,6 +34,22 @@ tools_software_languages:
     - Balena Cloud
     - Raspberry Pi
     - Balena OS
+
+further_reading:
+    - resource:
+        title: Balena OS 
+        link: https://www.balena.io/os
+        type: website
+    - resource:
+        title: Package Custom U-Boot Firmware for AVH
+        link: https://intercom.help/arm-avh/en/articles/7851972-package-custom-u-boot-firmware-for-avh
+        type: blog
+    - resource:
+        title: Balena Hub 
+        link: https://hub.balena.io/
+        type: website
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

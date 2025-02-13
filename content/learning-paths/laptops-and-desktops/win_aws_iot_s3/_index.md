@@ -14,7 +14,7 @@ prerequisites:
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.    
     - Completion of the [Use AWS Lambda for IoT applications](/learning-paths/laptops-and-desktops/win_aws_iot_lambda/) Learning Path.
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Advanced
@@ -26,6 +26,21 @@ operatingsystems:
 tools_software_languages:
     - Node.js    
     - Visual Studio Code
+
+further_reading:
+    - resource:
+        title: Amazon S3
+        link: https://aws.amazon.com/s3/
+        type: documentation
+    - resource:
+        title: Hosting a static website using Amazon S3
+        link: https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html
+        type: documentation
+    - resource:
+        title: Developing with Amazon S3
+        link: https://docs.aws.amazon.com/AmazonS3/latest/userguide/developing-s3.html
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

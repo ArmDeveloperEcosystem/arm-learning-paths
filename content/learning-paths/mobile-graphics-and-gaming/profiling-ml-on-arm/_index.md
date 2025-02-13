@@ -17,7 +17,7 @@ prerequisites:
     - Android Studio Profiler.
   
 
-author_primary: Ben Clark
+author: Ben Clark
 
 ### Tags
 skilllevels: Introductory
@@ -33,6 +33,15 @@ tools_software_languages:
 operatingsystems:
     - Android
     - Linux
+
+
+further_reading:
+    - resource:
+        title: Arm Streamline User Guide  
+        link: https://developer.arm.com/documentation/101816/latest/
+        type: documentation
+
+
 
 
 ### FIXED, DO NOT MODIFY

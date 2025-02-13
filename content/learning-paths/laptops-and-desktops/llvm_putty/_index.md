@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -25,6 +25,17 @@ tools_software_languages:
     - LLVM
     - VS Code
     - Coding
+
+further_reading:
+    - resource:
+        title: How to setup Windows on Arm for LLVM development
+        link: https://old.linaro.org/blog/how-to-set-up-windows-on-arm-for-llvm-development/
+        type: blog
+    - resource:
+        title: LLVM - Windows on Arm
+        link: https://linaro.atlassian.net/wiki/spaces/LLVM/overview/
+        type: website
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -15,7 +15,7 @@ prerequisites:
     - A GitHub account.
     - A machine with [Terraform](/install-guides/terraform/),[Azure CLI](/install-guides/azure-cli), and [Kubectl](/install-guides/kubectl/) installed.
 
-author_primary: Pranay Bakre
+author: Pranay Bakre
 
 ### Tags
 skilllevels: Advanced
@@ -32,6 +32,26 @@ tools_software_languages:
 
 operatingsystems:
     - Linux
+
+further_reading:
+    - resource:
+        title: Developing Cloud-native Applications with New Arm Neoverse CSS-based Microsoft Azure Cobalt 100 Virtual Machines 
+        link: https://newsroom.arm.com/blog/microsoft-azure-cobalt-100-vm
+        type: blog
+    - resource:
+        title: AKS documentation
+        link: https://docs.microsoft.com/en-us/azure/aks/
+        type: documentation
+    - resource:
+        title: Azure Developer documentation
+        link: https://docs.microsoft.com/en-us/azure/developer/
+        type: documentation
+    - resource:
+        title: Kubernetes documentation
+        link:  https://kubernetes.io/docs/home/
+        type: documentation
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

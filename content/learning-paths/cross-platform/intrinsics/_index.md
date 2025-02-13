@@ -2,7 +2,7 @@
 armips:
 - Neoverse
 - Cortex-A
-author_primary: Jason Andrews
+author: Jason Andrews
 description: Learn how to port architecture-specific intrinsics to Arm processors.
 layout: learningpathall
 learning_objectives:
@@ -33,6 +33,26 @@ tools_software_languages:
   - SVE
   - Coding
   - Intrinsics
+
+further_reading:
+    - resource:
+        title: Port with SSE2Neon and SIMDe
+        link: https://developer.arm.com/documentation/102581/0200/Port-with-SSE2Neon-and-SIMDe
+        type: documentation
+    - resource:
+        title: Neon Programmer's Guide
+        link: https://developer.arm.com/documentation/den0018
+        type: documentation
+    - resource:
+        title: Porting SSE to Neon, Are libraries the way forward?
+        link: https://community.arm.com/arm-community-blogs/b/ai-and-ml-blog/posts/porting-sse-to-neon-are-libraries-the-way-forward
+        type: blog
+    - resource:
+        title: Porting Advisor for Graviton, AWS Online Tech Talks
+        link: https://youtu.be/Ya9Co04fszI
+        type: video
+
+
 
 weight: 1
 who_is_this_for: This is an advanced topic for software developers interested in porting

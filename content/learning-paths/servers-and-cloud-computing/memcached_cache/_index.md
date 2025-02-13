@@ -1,7 +1,7 @@
 ---
 armips:
 - Neoverse
-author_primary: Pareena Verma
+author: Pareena Verma
 description: Deploy Memcached as a cache for MySQL and PostgreSQL on Arm servers
 layout: learningpathall
 learning_objectives:
@@ -30,6 +30,14 @@ tools_software_languages:
 - SQL
 - MySQL
 - PostgreSQL
+
+further_reading:
+    - resource:
+        title: Memcached Wiki
+        link: https://github.com/memcached/memcached/wiki
+        type: documentation    
+
+
 
 weight: 1
 who_is_this_for: This is an advanced topic for developers who want to use memcached as their in-memory key-value store.

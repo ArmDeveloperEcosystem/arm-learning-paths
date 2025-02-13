@@ -18,7 +18,7 @@ prerequisites:
     - A x86_64 or Apple M1 development machine with Android Studio installed.
     - A 64-bit Arm powered smartphone running Android.
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -31,6 +31,23 @@ operatingsystems:
 tools_software_languages:
     - Android Studio
     - Coding
+
+further_reading:
+    - resource:
+        title: Exploring the Arm dot product instructions
+        link: https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/exploring-the-arm-dot-product-instructions
+        type: blog
+    - resource:
+        title: Using Neon Intrinsics
+        link: https://developer.arm.com/documentation/den0018/a/NEON-Intrinsics/Using-NEON-intrinsics
+        type: documentation
+    - resource:
+        title: Intrinsics
+        link: https://developer.arm.com/architectures/instruction-sets/intrinsics/
+        type: website
+
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

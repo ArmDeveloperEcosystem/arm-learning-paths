@@ -17,7 +17,7 @@ prerequisites:
     - An ethernet connection
     - A mouse and keyboard connected to the Orange Pi
 
-author_primary: Gabriel Peterson
+author: Gabriel Peterson
 
 ### Tags
 skilllevels: Introductory
@@ -31,6 +31,23 @@ tools_software_languages:
     - Unity
     - 7-Zip
     - SDDiskTool
+
+further_reading:
+    - resource:
+        title: Build your application for Android
+        link: https://docs.unity3d.com/2022.2/Documentation/Manual/android-BuildProcess.html
+        type: documentation
+    - resource:
+        title: Orange Pi OS Droid
+        link: http://www.orangepi.org/html/softWare/orangePiOS/droid.html
+        type: website
+    - resource:
+        title: Unity Learn
+        link: https://learn.unity.com/
+        type: website
+
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

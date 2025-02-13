@@ -15,7 +15,7 @@ prerequisites:
     - .NET 8 SDK for [arm64](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.100-windows-arm64-installer).
     - Any code editor, we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Advanced
@@ -27,6 +27,21 @@ operatingsystems:
 tools_software_languages:
     - .NET    
     - Visual Studio Code
+
+further_reading:
+    - resource:
+        title: Cross-Platform IoT Programming with .NET Core 3.0
+        link: https://learn.microsoft.com/en-us/archive/msdn-magazine/2019/august/net-core-cross-platform-iot-programming-with-net-core-3-0
+        type: article
+    - resource:
+        title: Deploy .NET apps on Arm single-board computers
+        link: https://learn.microsoft.com/en-us/dotnet/iot/deployment
+        type: documentation
+    - resource:
+        title: ASP.NET Core
+        link: https://dotnet.microsoft.com/en-us/apps/aspnet
+        type: website
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

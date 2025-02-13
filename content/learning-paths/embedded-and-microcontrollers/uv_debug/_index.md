@@ -5,7 +5,7 @@ title: "Start Debugging with µVision"
 minutes_to_complete: 90
 # Always measured in minutes. Should be an integer, to complete the learning path (not just read it).
 
-author_primary: Christopher Seidl
+author: Christopher Seidl
 
 who_is_this_for: >
     This is an advanced topic for software developers who want to debug microcontrollers using µVision.
@@ -43,6 +43,31 @@ tools_software_languages:
     - Coding
     - Keil
     - Fixed Virtual Platform
+
+
+
+further_reading:
+    - resource:
+        title: Keil MDK
+        link: https://developer.arm.com/Tools%20and%20Software/Keil%20MDK
+        type: website
+    - resource:
+        title: µVision User's guide
+        link: https://developer.arm.com/documentation/101407/latest
+        type: documentation
+    - resource:
+        title: ULINKplus User's guide
+        link: https://developer.arm.com/documentation/101636/latest
+        type: documentation
+    - resource:
+        title: Arm CoreSight basics for Keil tools
+        link: https://developer.arm.com/documentation/kan339/latest
+        type: documentation
+    - resource:
+        title: List of supported boards
+        link: https://keil.arm.com/boards
+        type: website
+
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

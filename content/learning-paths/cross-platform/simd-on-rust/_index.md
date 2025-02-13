@@ -11,7 +11,7 @@ learning_objectives:
 prerequisites:
     - An Arm-based computer with recent versions of a C compiler (Clang or GCC) and a Rust compiler installed.
 
-author_primary: Konstantinos Margaritis
+author: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
@@ -31,6 +31,25 @@ shared_between:
     - laptops-and-desktops
     - servers-and-cloud-computing
     - mobile-graphics-and-gaming
+
+
+further_reading:
+    - resource:
+        title: Rust std::arch documentation
+        link: https://doc.rust-lang.org/core/arch/aarch64/index.html
+        type: documentation
+    - resource:
+        title: Rust std::simd documentation
+        link: https://rust-lang.github.io/portable-simd/core_simd/index.html
+        type: documentation
+    - resource:
+        title: Neon Intrinsics in Rust
+        link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/rust-neon-intrinsics
+        type: blog
+    - resource:
+        title: Testing SIMD instructions on ARM with Rust on Android
+        link: https://gendignoux.com/blog/2023/01/05/rust-arm-simd-android.html#implicit-feature-detection-beware-of-target-feature
+        type: blog
 
 
 ### FIXED, DO NOT MODIFY

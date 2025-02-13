@@ -11,7 +11,7 @@ learning_objectives:
 prerequisites:
     - An Arm-based computer running Linux and a recent version of a C++ compiler (Clang or GCC).
 
-author_primary: Konstantinos Margaritis
+author: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
@@ -30,6 +30,21 @@ shared_between:
     - laptops-and-desktops
     - servers-and-cloud-computing
     - mobile-graphics-and-gaming
+
+
+further_reading:
+    - resource:
+        title: Eigen official Tutorial on Matrix class
+        link: https://libeigen.gitlab.io/docs/group__TutorialMatrixClass.html
+        type: documentation
+    - resource:
+        title: Eigen Webinar from Linaro
+        link: https://static.linaro.org/connect/webinars/presentations/Eigen_Webinar_3.pdf
+        type: documentation
+    - resource:
+        title: TensorFlow Install from Source instructions
+        link: https://www.tensorflow.org/install/source
+        type: documentation
 
 
 ### FIXED, DO NOT MODIFY

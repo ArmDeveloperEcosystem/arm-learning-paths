@@ -1,5 +1,5 @@
 ---
-title: Accelerate and measure PyTorch Inference on Arm servers
+title: Measure and accelerate PyTorch Inference on Arm servers
 
 minutes_to_complete: 20
 
@@ -7,13 +7,13 @@ who_is_this_for: This is an introductory topic for software developers who want 
 
 learning_objectives:
     - Download and install the PyTorch Benchmarks suite.
-    - Evaluate the performance of PyTorch model inference running on your Arm based server using the PyTorch Benchmark suite.
-    - Measure the performance of these models using eager and `torch.compile` modes in PyTorch.
+    - Evaluate PyTorch model inference performance on an Arm-based server using the PyTorch Benchmark suite.
+    - Compare the model inference performance using eager mode and `torch.compile` mode in PyTorch.
 
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -25,6 +25,26 @@ operatingsystems:
 tools_software_languages:
     - Python
     - PyTorch
+
+further_reading:
+    - resource:
+        title: PyTorch Benchmarks
+        link: https://github.com/pytorch/benchmark
+        type: website
+    - resource:
+        title: PyTorch Inference Performance Tuning on AWS Graviton Processors
+        link: https://pytorch.org/tutorials/recipes/inference_tuning_on_aws_graviton.html
+        type: documentation
+    - resource:
+        title: ML inference on Graviton CPUs with PyTorch
+        link: https://github.com/aws/aws-graviton-getting-started/blob/main/machinelearning/pytorch.md
+        type: documentation
+    - resource:
+        title: PyTorch Documentation
+        link: https://pytorch.org/docs/stable/index.html
+        type: documentation
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

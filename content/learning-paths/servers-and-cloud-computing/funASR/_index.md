@@ -13,7 +13,7 @@ learning_objectives:
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, or a local Arm Linux computer with at least 8 CPUs and 16 GB RAM.
 
-author_primary: Odin Shen
+author: Odin Shen
 
 ### Tags
 skilllevels: Introductory
@@ -28,6 +28,26 @@ tools_software_languages:
     - LLM
     - GenAI
     - Python
+
+
+further_reading:
+    - resource:
+        title: ModelScope GitHub Repositoy
+        link: https://github.com/modelscope/modelscope
+        type: github
+    - resource:
+        title: FunASR GitHub Repository
+        link: https://github.com/modelscope/FunASR
+        type: github
+    - resource:
+        title: FunASR tutorial
+        link: https://modelscope.cn/models/iic/speech_paraformer-large_asr_nat-zh-cn-16k-common-vocab8404-pytorch
+        type: documentation
+    - resource:
+        title: Kleidi improves ASR on Arm Neoverse N2
+        link: https://community.arm.com/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/neoverse-n2-delivers-leading-price-performance-on-asr
+        type: blog
+
 
 
 ### FIXED, DO NOT MODIFY

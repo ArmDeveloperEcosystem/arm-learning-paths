@@ -16,7 +16,7 @@ learning_objectives:
 prerequisites:
     - Some familiarity with embedded programming is assumed
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -29,6 +29,21 @@ tools_software_languages:
     - Matter
     - Arm Virtual Hardware
     - GitHub
+
+further_reading:
+    - resource:
+        title: Matter GitHub repository
+        link: https://github.com/project-chip/connectedhomeip/
+        type: website
+    - resource:
+        title: Welcome to the Virtual Raspberry Pi 4 running on AWS Graviton processors
+        link: https://dev.to/aws-builders/welcome-to-the-virtual-raspberry-pi-4-running-on-aws-graviton-processors-2o8e
+        type: blog
+    - resource:
+        title: Matter
+        link: https://buildwithmatter.com
+        type: website
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

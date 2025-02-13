@@ -1,7 +1,7 @@
 ---
 title: AWS SAM CLI
 
-author_primary: Jason Andrews
+author: Jason Andrews
 minutes_to_complete: 15
 
 official_docs: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html

@@ -14,7 +14,7 @@ learning_objectives:
 prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an Arm server with Ubuntu 20.04 or Ubuntu 22.04 installed.
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -32,6 +32,18 @@ test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4
 test_maintenance: true
 test_status:
 - passed
+
+further_reading:
+    - resource:
+        title: Snort documentation
+        link: https://www.snort.org/documents
+        type: documentation
+    - resource:
+        title: Accelerate Deep Packet Inspection with Neon on Arm
+        link: https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/accelerating-deep-packet-inspection-with-neon-on-arm-neoverse
+        type: blog
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

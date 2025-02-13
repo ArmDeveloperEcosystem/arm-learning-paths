@@ -10,20 +10,20 @@ layout: "learningpathall"
 
 ## Corstone-320 FVP Setup for ExecuTorch
 
-Navigate to the Arm examples directory in the ExecuTorch repository.
+Navigate to the Arm examples directory in the ExecuTorch repository:
 
 ```bash
 cd $HOME/executorch/examples/arm
 ./setup.sh --i-agree-to-the-contained-eula
 ```
 
-After the script has finished running, it prints a command to run to finalize the installation. This will add the FVP executable's to your path.
+After the script has finished running, it prints a command to run to finalize the installation. This step adds the FVP executables to your system path.
 
 ```bash
 source $HOME/executorch/examples/arm/ethos-u-scratch/setup_path.sh
 ```
 
-Test that the setup was successful by running the `run.sh` script for Ethos-U85, which is the target device for Corstone-320.
+Test that the setup was successful by running the `run.sh` script for Ethos-U85, which is the target device for Corstone-320:
 
 ```bash
  ./examples/arm/run.sh --target=ethos-u85-256
@@ -31,4 +31,4 @@ Test that the setup was successful by running the `run.sh` script for Ethos-U85,
 
 You will see a number of examples run on the FVP. 
 
-This confirms the installation, and you can proceed to the next section [Build a Simple PyTorch Model](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/build-model-8/).
+This confirms the installation, so you can now proceed to the Learning Path [Build a Simple PyTorch Model](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/build-model-8/).
