@@ -1,7 +1,7 @@
 ---
-title: Learn about language and Arm architecture memory models
+title: Learn about the C++ Memory Model when Porting to Arm
 
-minutes_to_complete: 45
+minutes_to_complete: 30
 
 who_is_this_for: Introductory
 
@@ -18,15 +18,14 @@ author_primary: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
-subjects: C++, Linux
+subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
     - C++
-    - Linux
     - ThreadSantizer (TSan)
 operatingsystems:
-    - PLACEHOLDER OS G
+    - Linux
 
 
 ### FIXED, DO NOT MODIFY
