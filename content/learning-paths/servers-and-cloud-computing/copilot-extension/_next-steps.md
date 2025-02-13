@@ -1,14 +1,18 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
-
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
 
 further_reading:
     - resource:
-        title: GitHub Copilot Extension Documentation 
-        link: https://docs.github.com/en/copilot/building-copilot-extensions/about-building-copilot-extensions
+        title: GitHub Marketplace for Copilot extensions
+        link: https://github.com/marketplace?type=apps&copilot_app=true/
+        type: website
+    - resource:
+        title: About building Copilot Extensions
+        link: https://docs.github.com/en/copilot/building-copilot-extensions/about-building-copilot-extensions/
         type: documentation
-
+    - resource:
+        title: Copilot Extensions repository
+        link: https://github.com/copilot-extensions/
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

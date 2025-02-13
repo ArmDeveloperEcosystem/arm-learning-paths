@@ -1,6 +1,6 @@
 ---
 title: Configure GitHub Application
-weight: 5
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -34,26 +34,8 @@ Set your app type to "Agent," then fill out the remaining fields.
 
 Under "URL," enter your server's hostname (aka forwarding endpoint) that you deployed in the previous step.
 
-## Test it out
+### Optional: add your marketplace endpoint
 
-After you update your GitHub App settings, you can start chatting with your extension by typing @YOUR-EXTENSION-NAME in the Copilot Chat window, then sending a prompt as normal.
+If you would like to get install/uninstall events when users interact with your marketplace posting, set up a webhook. Under the 'general' tab of your application settings, activate the webhook and add your marketplace endpoint:
 
-## OPTIONAL: Publish your extension on the marketplace
-
-> For the most up to date instructions, follow the [official documentation for listing your extension on the marketplace](https://docs.github.com/en/copilot/building-copilot-extensions/managing-the-availability-of-your-copilot-extension#listing-your-copilot-extension-on-the-github-marketplace).
-
-If you would like to make your extension public so that anyone can use it, go into your GitHub App advanced settings. 
-
-You will see one of two options:
-
-![GitHub App Advanced Settings](images/githubconfig-makepublic.png)
-
-### Make public
-
-If you see the Make public option, your extension is currently private. It can only be installed by your organization (or the user) that created the app. You can click Make public to allow any other account to install your Copilot Extension, or leave your settings as they are to keep your app private.
-
-### Make private
-
-If you see the Make private option, your extension is currently public. The extension can be installed by any account. You can click Make private to only allow your organization (or user) that created the app to install it, or leave your settings as they are to keep your app public.
-
-
+![Webhook setup](images/marketplace.png)

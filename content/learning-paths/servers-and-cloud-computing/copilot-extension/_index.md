@@ -1,31 +1,38 @@
 ---
-title: PLACEHOLDER TITLE
+title: Create a RAG-based GitHub Copilot Extension in Python
 
-minutes_to_complete: 10
+minutes_to_complete: 30
 
-who_is_this_for: PLACEHOLDER SENTENCE
+who_is_this_for: This is an advanced topic for software developers who want to learn how to build a RAG-based GitHub Copilot Extension. 
 
 learning_objectives: 
-    - PLACEHOLDER OBJECTIVE 1
-    - PLACEHOLDER OBJECTIVE 2
+    - Explain what a RAG system is.
+    - Create vector embeddings for a RAG knowledge base.
+    - Implement RAG in a Copilot Extension.
+    - Configure a GitHub Copilot Extension for your RAG application.
 
 prerequisites:
-    - PLACEHOLDER PREREQ 1
-    - PLACEHOLDER PREREQ 2
+    - The "[Build a GitHub Copilot Extension in Python](../gh-copilot-simple/)" Learning Path.
+    - The "[Graviton Infrastructure for GitHub Copilot Extensions](../copilot-extension-deployment/)" Learning Path.
+    - A GitHub account.
+    - A Linux-based computer with Python installed.
 
-author_primary: PLACEHOLDER NAME
+author_primary: Avin Zarlez, Joe Stech
 
 ### Tags
-skilllevels: PLACEHOLDER SKILLLEVEL
-subjects: PLACEHOLDER SUBJECT
+cloud_service_providers: AWS
+skilllevels: Advanced
+subjects: ML
 armips:
-    - PLACEHOLDER IP A
-    - PLACEHOLDER IP B
+    - Neoverse
 tools_software_languages:
-    - PLACEHOLDER TOOL OR SOFTWARE C
-    - PLACEHOLDER TOOL OR SOFTWARE D
+    - Python
+    - FAISS
+    - GitHub
+    - conda
+    - AWS CDK
 operatingsystems:
-    - PLACEHOLDER OS G
+    - Linux, MacOS
 
 
 ### FIXED, DO NOT MODIFY

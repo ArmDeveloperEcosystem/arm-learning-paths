@@ -1,6 +1,6 @@
 ---
 title: Vector Database
-weight: 1
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## What is a Vector Database?
 
-A vector databases are a specialized database designed to store and query vector representations of data. They are a crucial component of many AI applications. But what exactly are they, and how do they work?
+A vector database is a specialized database designed to store and query vector representations of data. They are a crucial component of many AI applications. But what exactly are they, and how do they work?
 
 Traditional databases store data in tables or objects with defined attributes. However, they struggle to recognize similarities between data points that aren't explicitly defined.
 
@@ -18,9 +18,9 @@ How can we convert complex ideas, like the semantic meaning of a series of words
 
 ### Embeddings
 
-Embeddings are vectors generated through an AI model. We can convert "tokens" (sections of text) into a point in N dimensional space. 
+Embeddings are vectors generated through an AI model. We can convert collections of "tokens" (word fragments) into a point in N dimensional space. 
 
-Then for any given vector, like the embedded token input of a user, we can querying our vector database to find embedded data that is most similar. 
+Then for any given vector (like the embedding of a question asked by a user) we can query our vector database to find embedded data that is most similar. 
 
 For example, for our use case let's say we want to know which Arm learning path is most relevant to a question a user asks.
 
@@ -62,7 +62,7 @@ cd vectorstore
 
 It is recommended to use a virtual environment to manage dependencies.
 
-Ensure you have `conda` set up in your development environment. If you aren't sure how, you can follow this [Installation Guide](https://learn.arm.com/install-guides/anaconda/).
+Ensure you have `conda` set up in your development environment. If you aren't sure how, you can follow this [Installation Guide](https://docs.anaconda.com/miniconda/install/).
 
 To create a new conda environment, use the following command:
 

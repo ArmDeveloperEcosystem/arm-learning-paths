@@ -1,6 +1,6 @@
 ---
 title: Create GitHub Application
-weight: 2
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
