@@ -8,13 +8,13 @@ additional_search_terms:
 
 minutes_to_complete: 20
 
-author_primary: Jonathan Davies
+author: Jonathan Davies
 
 official_docs: https://github.com/llvm/llvm-project/tree/main/bolt
 
 test_images:
 - ubuntu:latest
-test_maintenance: false
+test_maintenance: true
 
 layout: installtoolsall
 tool_install: true
@@ -33,7 +33,7 @@ This article provides quick instructions to download and install BOLT. The instr
 
 [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) using the documentation for your operating system.
 
-Many Linux distributions include Git so you may not need to install it.  
+Many Linux distributions include Git so you may not need to install it.
 
 2. Install CMake
 
@@ -96,26 +96,34 @@ Thread model: posix
 InstalledDir: /usr/bin
 ```
 
+5. Install xz-utils
+
+```bash
+sudo apt-get install xz-utils -y
+```
+
 ## Install BOLT
 
-You can install BOLT in 2 different ways, by building the source code or by downloading a binary release from GitHub. 
+You can install BOLT in 2 different ways, by building the source code or by downloading a binary release from GitHub.
 
 ### Option 1: Download, build, and install BOLT from source code
 
 1. Clone the repository
 
-```console
-cd $HOME
+```bash
 git clone https://github.com/llvm/llvm-project.git
 ```
 
-2. Build BOLT
+2. Build BOLT and run it.
 
-```console
+```bash
 cd llvm-project
 mkdir build
 cd build
-cmake -G Ninja ../llvm -DLLVM_TARGETS_TO_BUILD="X86;AArch64" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_PROJECTS="bolt"
+cmake -G Ninja ../llvm -DLLVM_TARGETS_TO_BUILD="X86;AArch64" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_PROJECTS="bolt;clang;lld"
+```
+
+```console
 ninja bolt
 ```
 
@@ -123,12 +131,12 @@ Build time depends on your machine configuration, and it may take several minute
 
 3. Add the path to BOLT in your `.bashrc` file
 
-```console
+```bash
 echo 'export PATH="$PATH:$HOME/llvm-project/build/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-You are now ready to [verify BOLT is installed](#verify). 
+You are now ready to [verify BOLT is installed](#verify).
 
 ### Option 2: Download and install BOLT using a binary release
 
@@ -136,20 +144,19 @@ You are now ready to [verify BOLT is installed](#verify).
 
 For Arm Linux use the file with `aarch64` in the name:
 
-```bash { target="ubuntu:latest" }
-cd $HOME
+```bash
 wget https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.5/clang+llvm-17.0.5-aarch64-linux-gnu.tar.xz
 ```
 
 2. Extract the downloaded file
 
-```bash { target="ubuntu:latest" }
-tar xvf clang+llvm-17.0.5-aarch64-linux-gnu.tar.xz
+```bash
+tar -xvf clang+llvm-17.0.5-aarch64-linux-gnu.tar.xz
 ```
 
 3. Add the path to BOLT in your `.bashrc` file
 
-```bash { target="ubuntu:latest" }
+```bash
 echo 'export PATH="$PATH:$HOME/clang+llvm-17.0.5-aarch64-linux-gnu/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
@@ -160,7 +167,7 @@ source ~/.bashrc
 
 Check the `perf2bolt` command:
 
-```bash { target="ubuntu:latest" } 
+```console
 perf2bolt
 ```
 
@@ -173,7 +180,7 @@ Must specify at least 1 positional argument: See: perf2bolt --help
 
 Check the `llvm-bolt` command:
 
-```bash { target="ubuntu:latest" } 
+```console
 llvm-bolt
 ```
 
@@ -186,7 +193,7 @@ Must specify at least 1 positional argument: See: llvm-bolt --help
 
 2. Print the BOLT version
 
-```bash { target="ubuntu:latest" } 
+```console
 llvm-bolt --version
 ```
 
@@ -208,6 +215,6 @@ BOLT revision 99c15eb49ba0b607314b3bd221f0760049130d97
     x86-64     - 64-bit X86: EM64T and AMD64
 ```
 
-You will see additional Registered Targets if you downloaded a binary release. 
+You will see additional Registered Targets if you downloaded a binary release.
 
 You are ready to use BOLT on your Linux machine.

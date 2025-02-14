@@ -7,9 +7,9 @@ layout: learningpathall
 ---
 ## What is KleidiAI?
 
-KleidiAI is a set of micro-kernels that integrates into machine learning frameworks, accelerating AI inference on Arm-based platforms. KleidiAI's micro-kernels are hand-optimized in Arm assembly code to leverage modern architecture instructions that greatly speed up AI inference on Arm CPUs. 
+KleidiAI is a set of micro-kernels that integrate into machine learning frameworks, accelerating AI inference on Arm-based platforms. KleidiAI's micro-kernels are hand-optimized in Arm assembly code to leverage modern architecture instructions that greatly speed up AI inference on Arm CPUs. 
 
-If both of the following two conditions are met, you can benefit from KleidiAI automatically, without any further action:
+If both of the following two conditions are met, you will benefit from KleidiAI automatically, without any further action:
 * Your ML Framework integrates KleidiAI.
 * Your hardware platform supports the required Arm instructions for your inference.
 
@@ -40,11 +40,11 @@ KleidiAI uses modern Arm CPU instructions to accelerate matrix multiplication an
 ## What Arm features does KleidiAI leverage?
 Each KleidiAI matrix multiplication micro-kernel uses a specific Arm architecture feature to enhance AI inference. In this section you can read a description of each architecture feature that KleidiAI uses to accelerate matrix multiplication.
 
-* **Dot Product**: KleidiAI uses the `vdotq_s32` intrinsic, which is a vector dot product, introduced as part of SIMD. It computes the dot product of two vector 8-bit integers and accumulates the result into a 32-bit integer. View the `vdot` documentation [here](https://developer.arm.com/documentation/ddi0597/2024-03/SIMD-FP-Instructions/VDOT--by-element---BFloat16-floating-point-indexed-dot-product--vector--by-element--).
+* **Dot Product**: KleidiAI uses the `vdotq_s32` intrinsic, which is a vector dot product, introduced as part of SIMD. It computes the dot product of two vector 8-bit integers, and accumulates the result into a 32-bit integer. View the `vdot` documentation [here](https://developer.arm.com/documentation/ddi0597/2024-03/SIMD-FP-Instructions/VDOT--by-element---BFloat16-floating-point-indexed-dot-product--vector--by-element--).
 
-* **SMMLA**: KleidiAI also makes use of the Int8 Matrix Multiplication (i8mm) feature including the `SMMLA` instruction,  which stands for *Signed 8-bit integer matrix multiply-accumulate*. It multiplies a 2x8 matrix of 8-bit integers by a 8x2 matrix of 8-bit integers, which is accumulated into a 2x2 matrix of 32-bit integers. For more information, view the *SMMLA* and *i8mm* documentation [here](https://developer.arm.com/documentation/ddi0602/latest/SIMD-FP-Instructions/SMMLA--vector---Signed-8-bit-integer-matrix-multiply-accumulate--vector--).
+* **SMMLA**: KleidiAI also makes use of the Int8 Matrix Multiplication (i8mm) feature including the `SMMLA` instruction (*Signed 8-bit integer matrix multiply-accumulate*). It multiplies a 2x8 matrix of 8-bit integers by a 8x2 matrix of 8-bit integers, which is accumulated into a 2x2 matrix of 32-bit integers. For more information, view the *SMMLA* and *i8mm* documentation [here](https://developer.arm.com/documentation/ddi0602/latest/SIMD-FP-Instructions/SMMLA--vector---Signed-8-bit-integer-matrix-multiply-accumulate--vector--).
 
-* **FMLA**: This instruction, which stands for *Floating-point Multiply Accumulate*, is for 16-bit operations. It is included as part of the Advanced SIMD extension, multiplying and accumulating two vectors together, each containing eight 16-bit numbers. View the `FMLA` documentation [here](https://developer.arm.com/documentation/ddi0602/2024-03/SIMD-FP-Instructions/FMLA--vector---Floating-point-fused-Multiply-Add-to-accumulator--vector--).
+* **FMLA**: This instruction, *Floating-point Multiply Accumulate*, is for 16-bit operations. It is included as part of the Advanced SIMD extension, multiplying and accumulating two vectors together, each containing eight 16-bit numbers. View the `FMLA` documentation [here](https://developer.arm.com/documentation/ddi0602/2024-03/SIMD-FP-Instructions/FMLA--vector---Floating-point-fused-Multiply-Add-to-accumulator--vector--).
 
 * **FMOPA**: This instruction stands for *Floating-point outer product and accumulate*. It is included in the Arm Scalable Matrix Extension (SME). The single precision `FMOPA` variant enables optimized matrix multiplication on 32-bit numbers. View the `FMOPA` documentation [here](https://developer.arm.com/documentation/ddi0602/2023-12/SME-Instructions/FMOPA--non-widening---Floating-point-outer-product-and-accumulate-?lang=en).
 

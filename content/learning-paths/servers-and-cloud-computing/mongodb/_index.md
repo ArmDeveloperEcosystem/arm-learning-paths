@@ -1,7 +1,7 @@
 ---
 title: Analyze the performance of MongoDB on Arm servers
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 minutes_to_complete: 30
 
@@ -27,6 +27,25 @@ test_maintenance: false
 tools_software_languages:
 - MongoDB
 - GCC
+
+further_reading:
+    - resource:
+        title: MongoDB Manual
+        link: https://www.mongodb.com/docs/manual/
+        type: documentation
+    - resource:
+        title: MongoDB Performance Tool
+        link: https://github.com/idealo/mongodb-performance-test#readme
+        type: documentation
+    - resource:
+        title: YCSB
+        link: https://github.com/brianfrankcooper/YCSB/wiki/
+        type: documentation
+    - resource:
+        title: Compare performance of MongoDB on Arm vs Intel
+        link: https://community.arm.com/arm-community-blogs/b/operating-systems-blog/posts/mongodb-performance-on-aws-with-the-arm-graviton2
+        type: blog
+
 
 weight: 1
 who_is_this_for: This is an introductory topic for software developers using MongoDB

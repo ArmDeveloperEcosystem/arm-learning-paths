@@ -14,7 +14,7 @@ prerequisites:
     - Familiarity with Unity and the Unity Profiler
     - Familiarity with Arm Performance Studio tools
 
-author_primary: Julie Gaskin
+author: Julie Gaskin
 
 ### Tags
 skilllevels: Introductory
@@ -29,6 +29,30 @@ operatingsystems:
     - Windows
     - macOS
     - Linux
+
+
+further_reading:
+    - resource:
+        title: Get started with Streamline 
+        link: https://developer.arm.com/documentation/102477/latest/
+        type: documentation
+    - resource:
+        title: Android performance triage with Streamline 
+        link: https://developer.arm.com/documentation/102540/latest/
+        type: documentation
+    - resource:
+        title: Get started with Performance Advisor 
+        link: https://developer.arm.com/documentation/102478/latest/
+        type: documentation
+    - resource:
+        title: Tackling profiling for mobile games with Unity and Arm
+        link: https://blog.unity.com/games/tackling-profiling-for-mobile-games-with-unity-and-arm
+        type: blog
+    - resource:
+        title: Arm Performance Studio 
+        link: https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY

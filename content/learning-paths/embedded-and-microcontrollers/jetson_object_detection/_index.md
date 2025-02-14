@@ -14,7 +14,7 @@ prerequisites:
     - A microSD card (64GB UHS-1 or larger is recommended)
     - A MIPI CSI-2 camera, with a 22 pin connector on at least one end
 
-author_primary: Gabriel Peterson
+author: Gabriel Peterson
 
 ### Tags
 skilllevels: Introductory
@@ -31,6 +31,22 @@ tools_software_languages:
     - DetectNet
     - TensorRT
     - Docker
+
+
+further_reading:
+    - resource:
+        title: Jetson Inference
+        link: https://github.com/dusty-nv/jetson-inference
+        type: documentation
+    - resource:
+        title: Jetson Orin Nano Developer Kit User Guide
+        link: https://developer.nvidia.com/embedded/learn/jetson-orin-nano-devkit-user-guide/index.html
+        type: website
+    - resource:
+        title: Jetson Orin Modules and Developer Kits
+        link: https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY

@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11.
 
-author_primary: Odin Shen
+author: Odin Shen
 
 ### Tags
 skilllevels: Introductory
@@ -25,6 +25,15 @@ tools_software_languages:
     - .NET
 operatingsystems:
     - Windows
+
+
+further_reading:
+    - resource:
+        title: Arm Performance Libraries Reference Guide  
+        link: https://developer.arm.com/documentation/101004/latest/
+        type: documentation
+
+
 
 
 ### FIXED, DO NOT MODIFY

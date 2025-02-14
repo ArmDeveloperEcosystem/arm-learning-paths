@@ -14,10 +14,14 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://gitlab.arm.com/telemetry-solution/telemetry-solution
+
+test_images:
+- ubuntu:latest
+test_maintenance: true
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -41,7 +45,7 @@ Follow the instructions below to install the Telemetry Solution on an Arm Linux 
 
 1. Confirm you are using an Arm machine by running:
 
-```console
+```bash
 uname -m
 ```
 
@@ -67,7 +71,7 @@ For Debian based distributions (including Ubuntu) run:
 
 ```bash { target="ubuntu:latest" }
 sudo apt update
-sudo apt install python3-pip python-is-python3 -y
+sudo apt install python-is-python3 python3-pip python3-venv python3-packaging linux-tools-generic linux-tools-$(uname -r) -y
 ```
 
 ## Install the Telemetry Solution
@@ -76,30 +80,27 @@ sudo apt install python3-pip python-is-python3 -y
 
 ```bash { target="ubuntu:latest" }
 git clone https://git.gitlab.arm.com/telemetry-solution/telemetry-solution.git
-cd telemetry-solution/tools/topdown_tool
 ```
 
 2. Install the `topdown-tool` executable:
 
-Install `topdown-tool` in `/usr/local/bin` using:
+Create a virtual environment for the installation.
 
-```console
-sudo pip3 install -e .
-```
-
-{{% notice Note %}}
-If you are getting errors on the environment being externally managed, try creating a virtual environment.
-```
-sudo apt install python3-venv -y
-python3 -m venv topdown-venv
+```bash
+python -m venv topdown-venv
 source topdown-venv/bin/activate
-pip3 install -e .
 ```
-{{% /notice %}}
+
+Install `topdown-tool` in `/usr/local/bin`:
+
+```bash
+cd telemetry-solution/tools/topdown_tool
+sudo pip install -e .
+```
 
 3. Confirm you can run `top-down` using the `version` command:
 
-```bash { target="ubuntu:latest" }
+```bash
 topdown-tool --help
 ```
 

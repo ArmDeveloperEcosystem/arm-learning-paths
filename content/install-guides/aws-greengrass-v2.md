@@ -1,6 +1,6 @@
 ---
 title: AWS IoT Greengrass
-author_primary: Michael Hall
+author: Michael Hall
 additional_search_terms:
 - iot
 - AWS
@@ -10,6 +10,7 @@ layout: installtoolsall
 minutes_to_complete: 15
 official_docs: https://docs.aws.amazon.com/greengrass/v2/developerguide/quick-installation.html
 prerequisites: AWS Account with IAM use role
+test_maintenance: false
 test_images:
 - ubuntu:latest
 tool_install: true
@@ -31,7 +32,7 @@ The instructions provide the fastest and simplest configuration for deploying AW
 
 Before installing AWS IoT Greengrass on your device you first need to create an AWS IAM role with sufficient permissions to create Greengrass Things, Groups, and Roles.
 
-You will also create and save an access key and secret access key for AWS CLI access. 
+You will also create and save an access key and secret access key for AWS CLI access.
 
 ### Before you begin
 
@@ -110,13 +111,13 @@ Log in to the AWS console, set the AWS region you want to use in upper right cor
 
 5. Replace  `account-id` on lines 16 and 17 with your AWS account ID
 
-You can find your account ID by clicking on your user name in the top-right corner of the AWS console. 
+You can find your account ID by clicking on your user name in the top-right corner of the AWS console.
 
 ![Role Permissions Editor #center](/install-guides/_images/gg-role-permissions.png)
 
 6. Name the new policy `GGDeploymentAccess`
 
-7. Back on the group creation page, click the refresh button then search for and select `GGDeploymentAccess` 
+7. Back on the group creation page, click the refresh button then search for and select `GGDeploymentAccess`
 
 ![Group Policy Selection #center](/install-guides/_images/gg-group-policy.png)
 
@@ -130,11 +131,11 @@ You can find your account ID by clicking on your user name in the top-right corn
 
 12. Select `Command Line Interface (CLI)` for your key type, ignoring the warnings for now (you should delete they keys when you're done testing).
 
-13. Copy your `Access key` and `Secret access key`. 
+13. Copy your `Access key` and `Secret access key`.
 
 ![Access Keys #center](/install-guides/_images/gg-access-keys.png)
 
-You will use the credentials in the next section. 
+You will use the credentials in the next section.
 
 ## Download and install AWS IoT Greengrass
 
@@ -160,7 +161,7 @@ export AWS_REGION="us-east-1"
 Replace `us-east-1` with the AWS region you want to use.
 {{% /notice %}}
 
-Download the zip file with `curl`, extract the installer, and run it.  
+Download the zip file with `curl`, extract the installer, and run it.
 
 This will install the AWS IoT Greengrass v2 software on your device, and and register the device with the Greengrass service.
 
@@ -204,12 +205,12 @@ systemctl status greengrass
 
 ## View your device in the AWS console
 
-In your browser, go to the AWS console and navigate to the IoT Greengrass console. 
+In your browser, go to the AWS console and navigate to the IoT Greengrass console.
 
 You will see the new device listed in the Greengrass core devices.
 
-Click on the device name to see more device details. 
+Click on the device name to see more device details.
 
 ![Greengrass Devices #center](/install-guides/_images/greengrass-devices.png)
 
-You are now ready to use AWS IoT Greengrass v2 on your device. 
+You are now ready to use AWS IoT Greengrass v2 on your device.

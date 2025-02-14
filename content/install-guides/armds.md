@@ -14,7 +14,11 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10
 
-author_primary: Ronan Synnott
+test_maintenance: true
+test_images:
+  - ubuntu:latest
+
+author: Ronan Synnott
 
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/101469
@@ -36,7 +40,7 @@ Full host platform requirements are given in the [Getting Started Guide](https:/
 
 ## Download installer packages
 
-The installer will depend on the [edition](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio#Editions) of Development Studio that you are entitled to. 
+The installer will depend on the [edition](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio#Editions) of Development Studio that you are entitled to.
 
 The version is denoted by `year.index`, where `index` is a number (for example `2023.1`). You can also generate an Evaluation license from this installation (`Help` > `Arm License Manager`), with capabilities broadly similar to the UBL Gold Edition.
 

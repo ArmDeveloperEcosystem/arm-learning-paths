@@ -13,7 +13,7 @@ prerequisites:
     - An Arm based instance from a cloud service provider, or an on-premise Arm server.
     - If you do not have an Arm node, the next section discusses some options.
 
-author_primary: Jason Andrews
+author: Jason Andrews
 ### Tags
 skilllevels: Introductory
 subjects: Databases
@@ -25,6 +25,21 @@ operatingsystems:
 tools_software_languages:
     - SQL
     - MySQL
+
+further_reading:
+    - resource:
+        title: MySQL Manual
+        link: https://dev.mysql.com/doc/refman/8.0/en/installing.html
+        type: documentation
+    - resource:
+        title: RDS
+        link: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html
+        type: documentation
+    - resource:
+        title: Ansible
+        link: https://docs.ansible.com/
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

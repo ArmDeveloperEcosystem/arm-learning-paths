@@ -16,7 +16,7 @@ minutes_to_complete: 15
 ### Link to official documentation
 official_docs: https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-overview
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.

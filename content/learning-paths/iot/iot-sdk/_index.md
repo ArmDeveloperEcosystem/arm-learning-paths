@@ -13,7 +13,7 @@ prerequisites:
     - Some familiarity with embedded programming
     - An AWS account (required for Arm Virtual Hardware)
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -30,6 +30,21 @@ tools_software_languages:
     - Coding
     - Fixed Virtual Platform
     - Arm Compiler for Embedded
+
+
+further_reading:
+    - resource:
+        title: Open-IoT-SDK
+        link: https://github.com/ARM-software/open-iot-sdk
+        type: website
+    - resource:
+        title: Arm Speech Recognition Total Solution example video, using the Arm Open IoT SDK, Corstone-310 and AVH
+        link: https://devsummit.arm.com/flow/arm/devsummit22/sessions-catalog/page/sessions/session/16600464346670018mPQ
+        type: website
+    - resource:
+        title: Learn more about the Corstone reference systems
+        link: https://www.arm.com/products/silicon-ip-subsystems/
+        type: website
 
 
 ### FIXED, DO NOT MODIFY

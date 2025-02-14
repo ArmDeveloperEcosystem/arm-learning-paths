@@ -18,7 +18,7 @@ prerequisites:
     - Download and install Arm Performance Studio from [Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0). It is supported on Windows, Linux, and macOS host platforms.
     - Download and install [Android SDK Platform tools](https://developer.android.com/studio/releases/platform-tools.html). Required for [Android Debug bridge (adb)](https://developer.android.com/studio/command-line/adb).
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -33,6 +33,45 @@ tools_software_languages:
     - Arm Performance Studio
     - Arm Mobile Studio
     - Coding
+
+further_reading:
+    - resource:
+        title: Get started with Streamline Tutorial
+        link: https://developer.arm.com/documentation/102477
+        type: documentation
+    - resource:
+        title: Arm Streamline Performance Advisor Tutorial
+        link: https://developer.arm.com/documentation/102478
+        type: documentation
+    - resource:
+        title: Graphics Analyzer video tutorial
+        link: https://www.youtube.com/watch?v=6j68rtcTYRc
+        type: website
+    - resource:
+        title: Get started with Mali Offline Compiler Tutorial
+        link: https://developer.arm.com/documentation/102468
+        type: documentation
+    - resource:
+        title: Mali Offline Compiler video tutorial
+        link: https://www.youtube.com/watch?v=zEybNlwd7SI
+        type: website
+    - resource:
+        title: Optimization advice for graphics content on mobile devices
+        link: https://developer.arm.com/documentation/102643
+        type: documentation
+    - resource:
+        title: Android performance triage with Streamline
+        link: https://developer.arm.com/documentation/102540
+        type: documentation
+    - resource:
+        title: Arm GPU Best Practices Developer Guide
+        link: https://developer.arm.com/documentation/101897
+        type: documentation
+    - resource:
+        title: Integrate Arm Performance Studio into a CI workflow
+        link: https://developer.arm.com/documentation/102543
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

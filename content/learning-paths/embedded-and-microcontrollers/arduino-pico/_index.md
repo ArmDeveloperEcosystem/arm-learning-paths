@@ -19,7 +19,7 @@ prerequisites:
     - A [PIR sensor](https://www.amazon.com/HiLetgo-HC-SR501-Infrared-Sensor-Arduino/dp/B07KZW86YR/ref=sr_1_3?keywords=pir+sensor&qid=1698432931&sr=8-3) for detecting motion
     - A [peizo-electric buzzer](https://www.amazon.com/mxuteuk-Electronic-Computers-Printers-Components/dp/B07VK1GJ9X/ref=sr_1_4?crid=2FAXYI17HZKDB&keywords=piezo+buzzer&qid=1698432968&sprefix=peizo%2Caps%2C148&sr=8-4) for signaling motion
 
-author_primary: Michael Hall
+author: Michael Hall
 
 ### Tags
 skilllevels: Introductory
@@ -30,6 +30,17 @@ operatingsystems:
     - Baremetal
 tools_software_languages:
     - Arduino
+
+further_reading:
+    - resource:
+        title: Arduino-Pico
+        link: https://arduino-pico.readthedocs.io/en/latest/index.html
+        type: documentation
+    - resource:
+        title: Raspberry Pi Pico documentation
+        link: https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -1,6 +1,6 @@
 ---
 differentiating_info:
-- Bare-metal 
+- Bare-metal
 - Storage
 - tinyML
 key_ip:
@@ -16,8 +16,8 @@ operatingsystems_filter:
 - RTOS: 9
 - Windows: 3
 subjects_filter:
-- CI-CD: 4
-- Containers and Virtualization: 7
+- CI-CD: 5
+- Containers and Virtualization: 6
 - Embedded Linux: 3
 - Libraries: 3
 - ML: 11

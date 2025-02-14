@@ -14,9 +14,13 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10
 
+test_maintenance: true
+test_images:
+  - ubuntu:latest
+
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/101004
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -115,21 +119,20 @@ The instructions shown below are for deb based installers for GCC users.
 
 In a terminal, run the command shown below to download the debian package:
 
-```console
-wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-performance-libraries/24-10/linux/arm-performance-libraries_24.10_deb_gcc.tar
+```bash
+wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_24.10/arm-performance-libraries_24.10_deb_gcc.tar
 ```
 
 Use `tar` to extract the file and then change directory:
 
-```console
+```bash
 tar -xf arm-performance-libraries_24.10_deb_gcc.tar
-cd arm-performance-libraries_24.10_deb/
 ```
 
 Run the installation script as a super user:
 
-```console
-sudo ./arm-performance-libraries_24.10_deb.sh --accept
+```bash
+sudo ./arm-performance-libraries_24.10_deb/arm-performance-libraries_24.10_deb.sh --accept
 ```
 
 Using the `--accept` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.

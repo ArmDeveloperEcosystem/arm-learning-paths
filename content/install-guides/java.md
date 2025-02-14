@@ -1,6 +1,6 @@
 ---
 title: Java
-author_primary: Jason Andrews
+author: Jason Andrews
 minutes_to_complete: 15
 official_docs: https://docs.oracle.com/en/java/
 

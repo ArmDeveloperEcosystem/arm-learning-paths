@@ -2,7 +2,7 @@
 additional_search_terms:
 - cloud
 - azure
-author_primary: Jason Andrews
+author: Jason Andrews
 layout: installtoolsall
 minutes_to_complete: 15
 multi_install: false
@@ -10,7 +10,6 @@ multitool_install_part: false
 official_docs: https://learn.microsoft.com/en-us/cli/azure
 test_images:
 - ubuntu:latest
-test_link: null
 test_maintenance: true
 test_status:
 - passed
@@ -19,9 +18,9 @@ tool_install: true
 weight: 1
 ---
 
-[Azure CLI](https://learn.microsoft.com/en-us/cli/azure/) is a cross-platform command-line tool that can be installed locally on development computers. Azure CLI is used to connect to Azure and execute administrative commands on Azure resources. 
+[Azure CLI](https://learn.microsoft.com/en-us/cli/azure/) is a cross-platform command-line tool that can be installed locally on development computers. Azure CLI is used to connect to Azure and execute administrative commands on Azure resources.
 
-It is available for a variety of operating systems and Linux distributions and has multiple ways to install it. 
+It is available for a variety of operating systems and Linux distributions and has multiple ways to install it.
 
 ## Before you begin
 
@@ -74,17 +73,20 @@ If you prefer installing the Azure CLI using Python3, follow the instructions be
 
 ## Download and Install using pip
 
-Another way to install Azure CLI for Ubuntu on Arm is to use Python pip. 
+Another way to install Azure CLI for Ubuntu on Arm is to use Python pip.
 
-Install Python pip. 
+Install Python pip and create a virtual environment.
 
-```bash { target="ubuntu:latest" }
-sudo apt install python3-pip python-is-python3 -y
+```bash
+sudo apt update
+sudo apt install python3-pip python-is-python3 python3-venv -y
+python -m venv azure-cli-venv
 ```
 
-Download and install Azure CLI.
+Activate it and install Azure CLI.
 
-```bash { target="ubuntu:latest" }
+```bash
+source azure-cli-venv/bin/activate
 pip install azure-cli
 ```
 

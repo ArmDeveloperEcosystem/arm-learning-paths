@@ -13,7 +13,7 @@ prerequisites:
     - A development machine running Ubuntu or Debian Linux with `x86_64` architecture
     - An Android device with an Arm GPU
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ##### Tags
 
@@ -28,6 +28,23 @@ operatingsystems:
 tools_software_languages:
     - NDK
     - adb
+
+further_reading:
+    - resource:
+        title: Arm Total Compute
+        link: https://www.arm.com/solutions/mobile-computing/total-compute
+        type: website
+    - resource:
+        title: Arm Total Compute (Developer)
+        link: https://developer.arm.com/Tools%20and%20Software/Total%20Compute
+        type: website
+    - resource:
+        title: Arm Reference Solutions
+        link: https://gitlab.arm.com/arm-reference-solutions/arm-reference-solutions-docs/-/tree/master/docs/totalcompute
+        type: documentation
+
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

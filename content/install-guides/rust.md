@@ -2,7 +2,7 @@
 title: Rust for Linux Applications
 minutes_to_complete: 10
 official_docs: https://www.rust-lang.org/tools/install
-author_primary: Mathias Brossard
+author: Mathias Brossard
 additional_search_terms:
 - compiler
 - linux
@@ -10,6 +10,7 @@ additional_search_terms:
 
 test_images:
 - ubuntu:latest
+test_maintenance: true
 
 ### FIXED, DO NOT MODIFY
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -19,9 +20,9 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Rust](https://www.rust-lang.org/) is an open source programming language. 
+[Rust](https://www.rust-lang.org/) is an open source programming language.
 
-This install guide is for Linux application developers wishing to use Rust. 
+This install guide is for Linux application developers wishing to use Rust.
 
 If you wish to use Rust to build embedded applications for Arm, refer to [Rust for Embedded Applications](/install-guides/rust_embedded/) instead.
 
@@ -52,7 +53,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 Use the `apt` command to install the required software packages on any Debian-based Linux distribution, including Ubuntu.
 
 ```bash { target="ubuntu:latest" }
-sudo apt update 
+sudo apt update
 sudo apt install -y curl gcc
 ```
 
@@ -62,7 +63,7 @@ These Linux distributions use `yum` as the package manager.
 
 Use the `yum` command to install the required software packages. If the machine has `sudo` you can use it.
 
-```bash { target="fedora:latest" }
+```console
 sudo yum update -y
 sudo yum install -y curl gcc
 ```
@@ -113,7 +114,7 @@ To configure your current shell, run:
 source "$HOME/.cargo/env"
 ```
 
-The latest version of Rust is now installed. 
+The latest version of Rust is now installed.
 
 The installer updates `$HOME/.bashrc` and `SHOME/.profile` to set up the environment. Start a new shell or run the following command to continue:
 
@@ -139,7 +140,7 @@ You are ready to use the Rust programming language on your Arm Linux machine.
 
 To compile an example program, run the following commands:
 
-```bash { env_source="~/.bashrc" }
+```console
 cargo new hello
 cd hello
 cargo run

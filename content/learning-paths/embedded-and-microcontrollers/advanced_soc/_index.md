@@ -15,7 +15,7 @@ prerequisites:
     - Basic understanding of System on Chip design
     - A 'Zybo Z7-10' development board 
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -26,6 +26,12 @@ operatingsystems:
     - Baremetal
 tools_software_languages:
     - FPGA
+
+further_reading:
+    - resource:
+        title: Zybo Z7 10 Documentation
+        link: https://digilent.com/shop/zybo-z7-zynq-7000-arm-fpga-soc-development-board/
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

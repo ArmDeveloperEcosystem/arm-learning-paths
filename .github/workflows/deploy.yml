@@ -19,6 +19,8 @@ on:
         required: true
       HUGO_RAG_API:
         required: true
+      HUGO_AUDIO_API:
+        required: true
 
 env:
   HUGO_VERSION: 0.130.0
@@ -43,7 +45,10 @@ jobs:
         with:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
-
+          
+      - name: Clear npm cache
+        run: npm cache clean --force
+          
       # Installs Post-CSS
       - name: Install Post-CSS
         run: npm install postcss-cli
@@ -63,6 +68,7 @@ jobs:
         env:
           HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
           HUGO_RAG_API: ${{ secrets.HUGO_RAG_API }}
+          HUGO_AUDIO_API: ${{ secrets.HUGO_AUDIO_API }}
 
       # Deploys website to AWS S3 and invalidate CloudFront Cache
       - name: Deploy to S3

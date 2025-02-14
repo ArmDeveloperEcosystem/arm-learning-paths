@@ -6,7 +6,7 @@ additional_search_terms:
 
 layout: installtoolsall
 minutes_to_complete: 15
-author_primary: Jason Andrews
+author: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://pytorch.org/docs/stable/index.html
@@ -45,11 +45,12 @@ aarch64
 
 If you see a different result, then you are not using an Arm computer running 64-bit Linux.
 
-PyTorch requires Python 3, and this can be installed with `pip`. 
+
+PyTorch requires Python 3, and this can be installed with `pip`.
 
 For Ubuntu, run:
 
-```console
+```bash
 sudo apt install python-is-python3 python3-pip python3-venv -y
 ```
 
@@ -64,7 +65,7 @@ alias python=python3
 
 It is recommended that you install PyTorch in your own Python virtual environment. Set up your virtual environment:
 
-```bash 
+```bash
 python -m venv venv
 source venv/bin/activate
 ```
@@ -72,7 +73,7 @@ source venv/bin/activate
  In your active virtual environment, install PyTorch:
 
 ```bash
-pip install torch torchvision torchaudio 
+sudo pip install torch torchvision torchaudio
 ```
 
 ## Get started
@@ -81,7 +82,7 @@ Test PyTorch:
 
 Use a text editor to copy and paste the code below into a text file named `pytorch.py`:
 
-```console
+```python { file_name="pytorch.py" }
 import torch
 print(torch.__version__)
 x = torch.rand(5,3)
@@ -91,8 +92,8 @@ exit()
 
 Run the example code:
 
-```console
-python ./pytorch.py
+```bash
+python pytorch.py
 ```
 
 The expected output is similar to:
@@ -108,7 +109,7 @@ tensor([[0.1334, 0.7932, 0.4396],
 
 To get more information about the build options for PyTorch, run:
 
-```console
+```python
 python -c "import torch; print(*torch.__config__.show().split(\"\n\"), sep=\"\n\")"
 ```
 
@@ -123,13 +124,14 @@ PyTorch built with:
   - LAPACK is enabled (usually provided by MKL)
   - NNPACK is enabled
   - CPU capability usage: NO AVX
+
   - Build settings: BLAS_INFO=open, BUILD_TYPE=Release, CXX_COMPILER=/opt/rh/devtoolset-10/root/usr/bin/c++, CXX_FLAGS=-ffunction-sections -fdata-sections -D_GLIBCXX_USE_CXX11_ABI=0 -fabi-version=11 -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -Wno-missing-braces -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, LAPACK_INFO=open, TORCH_VERSION=2.5.1, USE_CUDA=OFF, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF,
 ```
-The configuration output is an advanced option to check the tools and structure used to build PyTorch. 
+The configuration output is an advanced option to check the tools and structure used to build PyTorch.
 
 ## BFloat16 floating-point number format
 
-Recent Arm processors support the BFloat16 (BF16) number format in PyTorch. For example, AWS Graviton3 processors support BFloat16. 
+Recent Arm processors support the BFloat16 (BF16) number format in PyTorch. For example, AWS Graviton3 processors support BFloat16.
 
 To check if your system includes BFloat16, use the `lscpu` command:
 
@@ -145,7 +147,7 @@ Flags: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asi
 
 If the result is blank, you do not have a processor with BFloat16.
 
-BFloat16 provides improved performance and smaller memory footprint with the same dynamic range. You might experience a drop in model inference accuracy with BFloat16, but the impact is acceptable for the majority of applications. 
+BFloat16 provides improved performance and smaller memory footprint with the same dynamic range. You might experience a drop in model inference accuracy with BFloat16, but the impact is acceptable for the majority of applications.
 
 You can use an environment variable to enable BFloat16:
 
@@ -157,11 +159,11 @@ export DNNL_DEFAULT_FPMATH_MODE=BF16
 
 LRU cache capacity is used to avoid redundant primitive creation latency overhead.
 
-This caching feature increases memory usage. If needed, you can lower the value to reduce memory usage. 
+This caching feature increases memory usage. If needed, you can lower the value to reduce memory usage.
 
 You should tune the capacity to an optimal value for your use case.
 
-Use an environment variable to set the value. The recommended starting value is: 
+Use an environment variable to set the value. The recommended starting value is:
 
 ```console
 export LRU_CACHE_CAPACITY=1024
@@ -169,15 +171,15 @@ export LRU_CACHE_CAPACITY=1024
 
 ## Transparent huge pages
 
-Transparent huge pages (THP) provide an alternative method of utilizing huge pages for virtual memory. Enabling THP might result in improved performance because it reduces the overhead of Translation Lookaside Buffer (TLB) lookups by using a larger virtual memory page size. 
+Transparent huge pages (THP) provide an alternative method of utilizing huge pages for virtual memory. Enabling THP might result in improved performance because it reduces the overhead of Translation Lookaside Buffer (TLB) lookups by using a larger virtual memory page size.
 
 To check if THP is available on your system, run:
 
-```console
+```bash
 cat /sys/kernel/mm/transparent_hugepage/enabled
 ```
 
-The setting in brackets is your current setting. 
+The setting in brackets is your current setting.
 
 The most common output, `madvise`, is shown below:
 
@@ -187,7 +189,7 @@ always [madvise] never
 
 If the setting is `never`, you can change to `madvise` by running:
 
-```console
+```bash
 echo madvise | sudo tee /sys/kernel/mm/transparent_hugepage/enabled
 ```
 
@@ -195,7 +197,7 @@ With `madvise` you can use an environment variable to check performance with and
 
 To enable THP for PyTorch:
 
-```console
+```bash
 export THP_MEM_ALLOC_ENABLE=1
 ```
 
@@ -203,13 +205,13 @@ export THP_MEM_ALLOC_ENABLE=1
 
 To profile a [Vision Transformer (ViT) model](https://huggingface.co/google/vit-base-patch16-224), first download the transformers and datasets libraries:
 
-```
+```bash
 pip install transformers datasets
-``` 
+```
 
 Use a text editor to save the code below as `profile-vit.py`:
 
-```python
+```python { file_name="profile-vit.py" }
 import torch
 from transformers import ViTFeatureExtractor, ViTForImageClassification
 from datasets import load_dataset
@@ -245,7 +247,7 @@ print(prof.key_averages().table(sort_by="self_cpu_time_total"))
 
 Run the example and check the performance information printed:
 
-```console
+```bash
 python ./profile-vit.py
 ```
 
@@ -295,9 +297,10 @@ Predicted class: Egyptian cat
 Self CPU time total: 786.880ms
 ```
 
-Experiment with the two environment variables for BFloat16 and THP and observe the performance differences. 
 
-You can set each variable and run the test again and observe the new profile data and run time. 
+Experiment with the two environment variables for BFloat16 and THP and observe the performance differences.
+
+You can set each variable and run the test again and observe the new profile data and run time.
 
 ## Profiling example with dynamic quantization
 
@@ -394,7 +397,7 @@ The output will be similar to:
 Self CPU time total: 633.541ms
 ```
 
-You should see the `quantized::linear_dynamic` layer being profiled. You can see the improvement in the model inference performance using dynamic quantization. 
+You should see the `quantized::linear_dynamic` layer being profiled. You can see the improvement in the model inference performance using dynamic quantization.
 
 You are now ready to use PyTorch on Arm Linux.
 

@@ -22,7 +22,7 @@ Make sure you can connect to your Kubernetes cluster using `kubectl`.
 For Arm Linux, download the KubeArchInspect package from GitHub:
 
 ```console
-wget https://github.com/ArmDeveloperEcosystem/kubearchinspect/releases/download/v0.2.0/kubearchinspect_Linux_arm64.tar.gz
+wget https://github.com/ArmDeveloperEcosystem/kubearchinspect/releases/download/v0.4.0/kubearchinspect_Linux_arm64.tar.gz
 ```
 
 Extract the files from the release package:
@@ -48,14 +48,22 @@ Confirm KubeArchInspect works correctly by running the `kubearchinspect` command
 If KubeArchInspect is working correctly, the usage message is displayed:
 
 ```output
-Check which images in your cluster support arm64.
+Check how ready your Kubernetes cluster is to run on Arm.
 
 Usage:
-  kubearchinspect images [flags]
+  kubearchinspect [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  images      Check which images in your cluster support arm64.
 
 Flags:
-  -d, --debug   Enable debug mode
-  -h, --help    help for images
+  -d, --debug        Enable debug mode
+  -h, --help         help for kubearchinspect
+  -l, --log string   Enable logging
+
+Use "kubearchinspect [command] --help" for more information about a command.
 ```
 
 You are now ready to use KubeArchInspect.

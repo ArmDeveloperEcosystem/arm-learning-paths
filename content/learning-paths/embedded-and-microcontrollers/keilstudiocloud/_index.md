@@ -15,7 +15,7 @@ prerequisites:
     - Some familiarity with embedded programming is assumed
     - An [Arm Account](https://developer.arm.com/register) is required
 
-author_primary: Christopher Seidl 
+author: Christopher Seidl 
 
 
 ##### Tags
@@ -32,6 +32,26 @@ tools_software_languages:
     - Arm Virtual Hardware
     - CMSIS
     - Coding
+
+further_reading:
+    - resource:
+        title: Keil Studio
+        link: https://keil.arm.com
+        type: website
+    - resource:
+        title: List of supported boards
+        link: https://keil.arm.com/boards
+        type: website
+    - resource:
+        title: Keil Studio documentation
+        link: https://developer.arm.com/documentation/102497/latest/Arm-Keil-Studio
+        type: website
+    - resource:
+        title: Which Keil tool should I care about?
+        link: https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/which-keil-tool-should-i-care-about
+        type: blog
+
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

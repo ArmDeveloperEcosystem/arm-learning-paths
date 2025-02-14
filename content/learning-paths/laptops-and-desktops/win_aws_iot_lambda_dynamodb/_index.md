@@ -14,7 +14,7 @@ prerequisites:
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.
     - Completion of the [Create IoT applications with Windows on Arm and AWS IoT Core](/learning-paths/laptops-and-desktops/win_aws_iot/) Learning Path.
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Advanced
@@ -26,6 +26,21 @@ operatingsystems:
 tools_software_languages:
     - Node.js    
     - Visual Studio Code
+
+further_reading:
+    - resource:
+        title: AWS Lambda
+        link: https://aws.amazon.com/lambda/
+        type: website
+    - resource:
+        title: Amazon DynamoDB
+        link: https://aws.amazon.com/dynamodb/
+        type: website
+    - resource:
+        title: Overview of Amazon Web Services
+        link: https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

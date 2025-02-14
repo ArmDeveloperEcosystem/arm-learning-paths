@@ -8,7 +8,7 @@ additional_search_terms:
 
 layout: installtoolsall
 minutes_to_complete: 30
-author_primary: Jason Andrews
+author: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://developer.hashicorp.com/terraform/docs
@@ -23,13 +23,13 @@ tool_install: true
 weight: 1
 ---
 
-[Terraform](https://www.terraform.io/) automates cloud infrastructure. It is an infrastructure as code tool. 
+[Terraform](https://www.terraform.io/) automates cloud infrastructure. It is an infrastructure as code tool.
 
-Terraform is available for Windows, macOS, Linux and supports the Arm architecture. 
+Terraform is available for Windows, macOS, Linux and supports the Arm architecture.
 
 ## Before you begin
 
-[General installation information](https://developer.hashicorp.com/terraform/downloads) is available which covers all supported operating systems. 
+[General installation information](https://developer.hashicorp.com/terraform/downloads) is available which covers all supported operating systems.
 
 This article provides a quick solution to install Terraform for Ubuntu on Arm.
 
@@ -46,9 +46,9 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## Download and Install
 
-The easiest way to install Terraform for Ubuntu on Arm is to use the zip file and copy the executable. 
+The easiest way to install Terraform for Ubuntu on Arm is to use the zip file and copy the executable.
 
-The installation options with the Ubuntu package manager at time of writing do not work well, but please try them as they may improve. 
+The installation options with the Ubuntu package manager at time of writing do not work well, but please try them as they may improve.
 
 Make sure `unzip`, `curl`, and `wget` are available.
 
