@@ -85,7 +85,7 @@ To define its specific image processing logic, each enum constant must override 
 
 The processing operations defined here are written to align with the current KleidiCV specification. Specifically, in-place changes are not currently supported, so the source and destination images must be different. 
 
-Generally, only single-channel images are supported; with Gaussian blur being an exception. Sobel’s output type must be 16SC1; dx and dy must be either (1,0) or (0,1); and the border mode must be replicated. Gaussian blur supports a non-zero sigma, but its performance is best with sigma 0.0. Its uplift is most noticeable with a kernel size of 7×7.
+Generally, only single-channel images are supported; with Gaussian blur being an exception. Sobel's output type must be 16SC1; dx and dy must be either (1,0) or (0,1); and the border mode must be replicated. Gaussian blur supports a non-zero sigma, but its performance is best with sigma 0.0. Its uplift is most noticeable with a kernel size of 7×7.
 
 There is also the companion object that provides a utility method `fromDisplayName`. This function maps the string `displayName` to its corresponding enum constant by iterating through the list of all enum values, and returns null if no match is found.
 

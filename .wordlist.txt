@@ -3603,7 +3603,7 @@ ProfilerActivity
 QAQ
 RemoteImage
 STT
-Sobel’s
+Sobel's
 SystemC
 VAD
 VER
