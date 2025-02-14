@@ -35,7 +35,7 @@ SPE provides hardware configuration options to filter the data of interest from 
 
 1. You need to install WindowsPerf and WindowsPerf driver with SPE flag enabled. To do so you can download WindowsPerf from the release page and install the version under the SPE folder.
 2. Your arm CPU must have a Statistical Profiling Extension wich has been available since the introduction of the Neoverse N1 CPU platform in 2019.
-3. You need to be runing Windows On arm in Test Mode
+3. You need to be running Windows On arm in Test Mode
 
 ## How to check if you have SPE enabled on your machine
 
@@ -43,7 +43,7 @@ First step is to go to the extension's settings page, available at `Tools -> Opt
 
 ![Extension settings page #center](./settings-page.png)
 
-This step will let you know wether or not you have installed the version of `WindowsPerf` that supports the SPE feature.
+This step will let you know whether or not you have installed the version of `WindowsPerf` that supports the SPE feature.
 
 The second step is to verify if your CPU supports ARM SPE.
 

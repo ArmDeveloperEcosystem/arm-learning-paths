@@ -78,7 +78,7 @@ In order to force the release of the lock, a new --force-lock command argument i
 
 However, interrupting a running `wperf` process results in loss of collected data. 
 
-If interrupted, WidowsPerf will show the following error message:
+If interrupted, WindowsPerf will show the following error message:
 
 ```output
 warning: other WindowsPerf process hijacked (forced lock) the wperf-driver, see --force-lock.
