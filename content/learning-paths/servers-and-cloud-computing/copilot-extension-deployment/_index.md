@@ -3,7 +3,7 @@ title: Graviton Infrastructure for GitHub Copilot Extensions
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an intermediate-level topic for software developers who want to learn how to deploy all necessary infrastructure on AWS for a GitHub Copilot Extension.
+who_is_this_for: This is an advanced topic for software developers who want to learn how to deploy all necessary infrastructure on AWS for a GitHub Copilot Extension.
 
 learning_objectives: 
     - Understand the AWS services needed to host a GitHub Copilot Extension
@@ -11,15 +11,15 @@ learning_objectives:
     - Add your newly generated endpoints to the GitHub app you previously created
 
 prerequisites:
-    - Information in the Build a GitHub Copilot Extension in Python Learning Path
-    - Basic knowledge of Infrastructure as Code
+    - The "[Build a GitHub Copilot Extension in Python](../gh-copilot-simple/)" Learning Path.
+    - Understanding of Infrastructure as Code
     - A GitHub account
     - A linux-based computer with npm, Python, and the AWS CLI installed
 
 author: Joe Stech
 
 ### Tags
-skilllevels: Intermediate
+skilllevels: Advanced
 subjects: ML
 armips:
     - Neoverse
@@ -34,17 +34,13 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: About building Copilot Extensions
+        link: https://docs.github.com/en/copilot/building-copilot-extensions/about-building-copilot-extensions/
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
+        title: Copilot Extensions repository
+        link: https://github.com/copilot-extensions/
+        type: documentation
 
 
 

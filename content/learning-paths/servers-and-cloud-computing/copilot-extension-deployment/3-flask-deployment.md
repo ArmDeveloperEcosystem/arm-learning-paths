@@ -63,6 +63,4 @@ You should now be able to navigate to your API subdomain from any browser and se
 "Hello! Welcome to the example GitHub Copilot Extension in Python!"
 ```
 
-
-## VPC
-YOUR CONTENT GOES HERE
+Your API is now complete and ready to be configured in your GitHub Application.
