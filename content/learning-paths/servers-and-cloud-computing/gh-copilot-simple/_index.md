@@ -12,7 +12,7 @@ who_is_this_for: This is an introductory topic for software developers who want 
 learning_objectives:
     - Create a simple GitHub Copilot Extension in Python.
     - Use ngrok to expose the extension to Copilot.
-    - Add a GitHub App to your GitHub account and use your Copilot Extension.
+    - Add a GitHub App to your GitHub account and deploy the Copilot Extension.
 
 prerequisites:
     - A GitHub account.

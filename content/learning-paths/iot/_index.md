@@ -13,11 +13,12 @@ subjects_filter:
 - Containers and Virtualization: 2
 - Embedded Linux: 2
 - ML: 1
+- Performance and Architecture: 1
 operatingsystems_filter:
-- Baremetal: 3
+- Baremetal: 4
 - Linux: 6
 - macOS: 1
-- RTOS: 1
+- RTOS: 2
 - Windows: 1
 tools_software_languages_filter:
 - Arm Compiler for Embedded: 1

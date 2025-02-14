@@ -12,8 +12,11 @@ title: Automotive
 weight: 4
 subjects_filter:
 - Containers and Virtualization: 1
+- Performance and Architecture: 1
 operatingsystems_filter:
+- Baremetal: 1
 - Linux: 1
+- RTOS: 1
 tools_software_languages_filter:
 - Automotive: 1
 ---

@@ -1,4 +1,4 @@
----
+to instain---
 title: Building ASR Applications with ModelScope
 weight: 4
 
@@ -7,22 +7,24 @@ layout: learningpathall
 ---
 
 ## What is FunASR?
-[FunASR](https://github.com/modelscope/FunASR) is an open-source toolkit specifically designed for speech recognition research and development. It provides a comprehensive set of tools and functionalities for building and deploying ASR applications.
+
+[FunASR](https://github.com/modelscope/FunASR) is an open-source toolkit designed for speech recognition research and application development. It provides a comprehensive set of tools and functionalities for building and deploying ASR applications.
 
 
 ## Installing FunASR
-Install FunASR using pip:
+Install FunASR using the following pip command:
+
 ```bash
 pip3 install funasr==1.2.3
 ```
 {{% notice Note %}}
-The learning path examples use FunASR version 1.2.3. You may notice minor differences in results with other versions.
+The examples in this Learning Path use FunASR version 1.2.3. Results might vary with other versions.
 {{% /notice %}}
 
 ## Speech Recognition
-FunASR offers a simple interface for performing speech recognition tasks. You can easily transcribe audio files or implement real-time speech recognition using FunASR's functionalities. In this learning path, you will learn how to leverage FunASR to implement a speech recognition application.
+FunASR offers a simple interface for performing speech recognition tasks. You can easily transcribe audio files or implement real-time speech recognition using FunASR's functionalities. In this Learning Path, you will learn how to leverage FunASR to implement a speech recognition application.
 
-Let's use an English speech voice sample as an example to run audio transcription on. Copy the code shown below into a file named `funasr_test1.py`
+To get started, let's use an English speech sample for audio transcription. Create a file named `funasr_test1.py` and add the following code:
 
 ```python
 from funasr import AutoModel
@@ -36,33 +38,31 @@ res = model.generate(input="https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/Ma
 print(f"\nResult: \n{res[0]['text']}")
 ```
 
-Before you run this script, lets look at what the Python code is doing:
+### Code Breakdown
 
-The imported `AutoModel()` class provides an interface to load different AI models.
+Before running this script, you can break it down:
 
-* **model="paraformer":**
+The imported `AutoModel()` class serves as an interface for loading various AI models.
 
-    Specifies the model you would like to load. 
-    In this example you will load the Paraformer model, which is an end-to-end automatic speech recognition (ASR) model designed for real-time transcription.
+#### Key Parameters
+
+* `model="paraformer"`: Specifies the model you want to load. In this example you will load the Paraformer model, which is an end-to-end automatic speech recognition (ASR) model optimized for real-time transcription.
     
-* **device="cpu":** 
+* `device="cpu"`: Specifies that the model runs on the CPU. It does not require a GPU.
 
-    Specify the model runs on the CPU. It does not require a GPU.
+* `hub="ms"`: Indicates that the model is sourced from the "ms" (ModelScope) hub.
 
-* **hub="ms":** 
+#### Processing the Audio
 
-    Indicates that the model is sourced from the "ms" (ModelScope) hub.
+* `model.generate()`: function processes an audio file and generates a transcribed text output.
 
-The `model.generate()` function processes an audio file and generates a transcribed text output.
-* **input="...":** 
+* `input="..."`: The input is a `.wav` audio file URL, which is a .wav file containing an English audio sample.
 
-    The input is an audio file URL, which is a .wav file containing an English audio sample.
+Since the output contains extensive data, this example focuses on extracting and displaying only the transcribed text found in res[0]['text'].
 
-The result contains a lot of information. To keep the example simple, you  will only list the transcribed text contained in res[0]['text'].
+For this initial test, a two-second English audio clip from the internet will be used for Paraformer model to process the `.wav` file.
 
-In this initial test, a two-second English audio clip from the internet will be used for paraformer model to infleune the wave file.
-
-Run this Python script on your Arm based server:
+Run this Python script on your Arm-based server:
 
 ```bash
 python funasr_test1.py
@@ -97,7 +97,7 @@ he tried to think how it could be
 
 The transcribed test shows "he tried to think how it could be". This is the expected result for the audio sample.
 
-Now lets try an example that uses a Chinese speech recognition model. Copy the code shown below in a file named `funasr_test2.py`:
+Now you can try an example that uses a Chinese speech recognition model. Copy the code shown below in a file named `funasr_test2.py`:
 
 ```python
 import os
@@ -118,11 +118,11 @@ print(f"Result: \n{text_content}")
 print(res)
 ```
 
-You can see that the loaded model has been replaced with a Chinese speech recognition model that has a `-zh` suffix. 
+This example uses an audio file from the FunASR package for speech recognition, you can see that the loaded model has been replaced with a Chinese speech recognition model that has a `-zh` suffix. 
 
 FunASR will process each sound in the audio with appropriate character recognition.
 
-You have also modified the output format from the previous example. In addition to recognising the Chinese characters, you will add timestamps indicating the start and end times of each character. This is used for applications like subtitle generation and sentiment analysis.
+You have also modified the output format from the previous example. In addition to recognizing the Chinese characters, you will add timestamps indicating the start and end times of each character. This is used for applications like subtitle generation and sentiment analysis.
 
 Run the Python script:
 
@@ -145,7 +145,7 @@ Result:
 [{'key': 'asr_example', 'text': '欢 迎 大 家 来 到 么 哒 社 区 进 行 体 验', 'timestamp': [[990, 1230], [1290, 1530], [1610, 1830], [1830, 2010], [2010, 2170], [2170, 2410], [2430, 2570], [2570, 2810], [2850, 3050], [3050, 3290], [3390, 3570], [3570, 3810], [3910, 4110], [4110, 4345]]}]
 ```
 
-The output shows "欢迎大家来到达摩社区进行体验" as expected.
+The output shows "欢迎大家来到达摩社区进行体验" which means "Welcome everyone to the Dharma community to explore and experience!" as expected.
 
 You can also observe that the spacing between the third and sixth characters is very short. This is because they are combined with other characters, as discussed in the previous section.
 
@@ -212,19 +212,26 @@ Result:
 {'output': ['欢迎', '大家', '来到', '达摩', '社区', '进行', '体验']}
 ```
 
+The segmentation of the sentence “欢迎大家来到达摩社区进行体验” into ‘欢迎’, ‘大家’, ‘来到’, ‘达摩’, ‘社区’, ‘进行’, ‘体验’. 
+
+Each segment represents a meaningful unit in the sentence, preserving the grammatical structure and readability.
+- “欢迎” (welcome) and “大家” (everyone) form a natural greeting.
+- “来到” (come to) introduces the location “达摩社区” (Damo Community) as a whole.
+- “进行” (carry out) and “体验” (experience) together indicate the purpose of visiting.
+
 Good, the result is exactly what you are looking for.
 
 ## Paraformer: Fast and Accurate Parallel Transformer for Non-autoregressive End-to-End Speech Recognition
 
-Lets now look at a more advanced speech recognition model, [Paraformer](https://aclanthology.org/2020.wnut-1.18/).
+Now you can look at a more advanced speech recognition model, [Paraformer](https://aclanthology.org/2020.wnut-1.18/).
 
-Paraformer is a novel architecture for automatic speech recognition (ASR) that offers both enhanced speed and accuracy compared to traditional models. Its key innovation lies in its parallel transformer design, enabling simultaneous processing of multiple parts of the input speech. This parallel processing capability leads to significantly faster inference, making Paraformer well-suited for real-time ASR applications where responsiveness is crucial.  
+Paraformer is a novel architecture for automatic speech recognition (ASR) designed for both speed and accuracy. Unlike traditional models, it leverages a parallel transformer architecture, enabling simultaneous processing of multiple parts of the input speech. This parallel processing capability leads to significantly faster inference, making Paraformer well-suited for real-time ASR applications where responsiveness is crucial.  
 
 Furthermore, Paraformer has demonstrated state-of-the-art accuracy on several benchmark datasets, showcasing its effectiveness in accurately transcribing speech. This combination of speed and accuracy makes Paraformer a promising advancement in the field of ASR, opening up new possibilities for high-performance speech recognition systems.
 
 Paraformer has been fully integrated into FunASR. Copy the sample program shown below into a file named `paraformer.py`.
 
-This example uses PyTorch-optimized Paraformer model from ModelScope, the program will first check if the test audio file has been downloaded.
+This example uses a PyTorch-optimized Paraformer model from ModelScope. The program first checks if the test audio file has been downloaded.
 
 
 ```python
@@ -302,7 +309,7 @@ In addition to using the Paraformer model, you will add two more ModelScope mode
 - VAD ([Voice Activity Detection](https://modelscope.cn/models/iic/speech_fsmn_vad_zh-cn-16k-common-pytorch/summary)) and 
 - PUNC ([Punctuation Restoration](https://modelscope.cn/models/iic/punc_ct-transformer_zh-cn-common-vocab272727-pytorch/files)) 
 
-This way, you can obtain punctuation that matches the semantics of the speech recognition. Copy the updated code shown below in a file named `paraformer-2.py`:
+This ensures the punctuation aligns with the semantics of the speech recognition. Copy the updated code shown below in a file named `paraformer-2.py`:
 
 ```python
 import os
@@ -360,7 +367,7 @@ Result:
 飞机穿过云层，眼下一片云海，有时透过稀薄的云雾，依稀可见南国葱绿的群山大地。
 ```
 
-Lets translate this recognized result, and you can easily see that the four sentences represent different meanings.
+Now you can translate this recognized result, and you can easily see that the four sentences represent different meanings.
 
 "飞机穿过云层" means: The airplane passed through the clouds.
 
@@ -371,7 +378,6 @@ Lets translate this recognized result, and you can easily see that the four sent
 "依稀可见南国葱绿的群山大地" means: "one could vaguely see the green mountains and land of the southern country.
 
 
-
 ## Sentiment Analysis
 FunASR also supports sentiment analysis of speech, allowing you to determine the emotional tone of the spoken language. 
 
@@ -379,12 +385,14 @@ This can be valuable for applications like customer service and social media mon
 
 You can use a mature speech emotion recognition model [emotion2vec+](https://modelscope.cn/models/iic/emotion2vec_plus_large) from ModelScope as an example.
 
-The model will identify which of the following emotions is the closest match for the emotion expressed in the speech:
-- Neutral
-- Happy
-- Sad
-- Angry
-- Unknow
+The model identifies which of the following emotions is the closest match for the emotion expressed in the speech:
+* Neutral.
+* Happy.
+* Sad.
+* Angry.
+* Unknown.
+
+This script recognizes three different speech samples in various languages and emotions as examples.
 
 Copy the code shown below in a file named `sentiment.py`:
 
@@ -443,7 +451,7 @@ Run this script:
 python3 sentiment.py
 ```
 
-Without a model that understands semantics, `emotion2vec+` can still correctly recognize the speaker's emotions through changes in intonation.
+`emotion2vec+` accurately detects emotions through intonation, even without semantic understanding.
 
 The output should look like:
 
@@ -459,5 +467,205 @@ rtf_avg: 1.444: 100%|███████████████████�
 Result: ['生气/angry (1.00)', '中立/neutral (0.00)', '开心/happy (0.00)', '难过/sad (0.00)', '<unk> (0.00)']
 ```
 
+You can notice that the emotions of all three speech samples are correctly recognized:
+- [Neutral Chinese Speech](https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_zh.wav)
+- [Happy English Speech](https://utoronto.scholaris.ca/bitstreams/05a3e499-7129-4a04-9efc-893f7af21d94/download)
+- [Angry English Speech](https://utoronto.scholaris.ca/bitstreams/5ce257a3-be71-41a8-8d88-d097ca15af4e/download)
+
+
+## Enhance PyTorch Inference Performance on Arm Neoverse
+
+In addition to FunASR providing comprehensive models that unlock numerous speech application possibilities, optimizing the computing platform is equally crucial.
+
+Thanks to the Arm Neoverse SMMLA and FMMLA instruction set and deep optimizations in PyTorch, we have further reduced the execution time of the original model on the CPU.
+
+You can learn more about [Accelerating popular Hugging Face models using Arm Neoverse
+](https://community.arm.com/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/accelerating-sentiment-analysis-on-arm-neoverse-cpus) from the Arm community blog.
+
+Let's re-test the same example based on fully optimized PyTorch package again.
+
+### Ensure Python 3.10 is installed
+First, make sure you are using Python 3.10. 
+
+If your current Python environment is below version 3.10, please upgrade to Python 3.10.
+
+```bash
+sudo apt install python3.10 -y
+```
+
+Conversely, if your current version is above 3.10, please proceed with the installation as well.
+
+```bash
+sudo apt install python3.10 -y
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 2
+sudo update-alternatives --config python3
+python --version
+```
+
+{{% notice Note %}}
+The update-alternatives command is a Debian-based Linux utility (used in Ubuntu, Debian, etc.) for managing symbolic links to different versions of software alternatives. It allows you to easily switch between multiple installed versions of the same program.
+{{% /notice %}}
+
+The Python version should be 3.10 now.
+
+```output
+Python 3.10.16
+```
+
+### Install PyTorch and Optimized Libraries
+
+Now, you can install PyTorch and optimized libraries by following instructions:
+
+```bash
+git clone --recursive https://github.com/pytorch/ao.git
+cd ao
+git checkout 174e630af2be8cd18bc47c5e530765a82e97f45b
+wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/PyTorch-arm-patches/main/0001-Feat-Add-support-for-kleidiai-quantization-schemes.patch
+git apply --whitespace=nowarn 0001-Feat-Add-support-for-kleidiai-quantization-schemes.patch
+cd ../
+
+git clone --recursive https://github.com/pytorch/torchchat.git
+cd torchchat
+git checkout 925b7bd73f110dd1fb378ef80d17f0c6a47031a6
+wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/PyTorch-arm-patches/main/0001-modified-generate.py-for-cli-and-browser.patch
+wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/PyTorch-arm-patches/main/0001-Feat-Enable-int4-quantized-models-to-work-with-pytor.patch
+git apply 0001-Feat-Enable-int4-quantized-models-to-work-with-pytor.patch
+git apply --whitespace=nowarn 0001-modified-generate.py-for-cli-and-browser.patch
+pip install -r requirements.txt
+
+wget https://github.com/ArmDeveloperEcosystem/PyTorch-arm-patches/raw/main/torch-2.5.0.dev20240828+cpu-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
+pip install --force-reinstall torch-2.5.0.dev20240828+cpu-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
+cd ..
+pip uninstall torchao && cd ao/ && rm -rf build && python setup.py install
+```
+
+{{% notice Note %}}
+Please reference this [link](https://learn.arm.com/learning-paths/servers-and-cloud-computing/pytorch-llama/pytorch-llama/) to learn more the detail description of those instructions.
+{{% /notice %}}
+
+Once you have installed the optimized PyTorch, we can enabled bfloat16 fast math kernels by setting DNNL_DEFAULT_FPMATH_MODE.
+
+On AWS Graviton3 as example, this enables GEMM kernels that use bfloat16 MMLA instructions available in the hardware.
+
+
+### Update the FunASR application with benchmark function
+
+Now we can test FunASR model again.
+
+By re-use the previously paraformer-2.py and add benchmark function, please copy the updated code shown below in a file named `paraformer-3.py`:
+
+```python
+import os
+import time
+import numpy as np
+import requests
+from modelscope.pipelines import pipeline
+from modelscope.utils.constant import Tasks
+
+# Initialize the ASR pipeline
+def load_pipeline(device="cpu"):
+    return pipeline(
+        task=Tasks.auto_speech_recognition,
+        model="iic/speech_paraformer-large_asr_nat-zh-cn-16k-common-vocab8404-pytorch",
+        model_revision="v2.0.4",
+        device=device,
+        hub="ms",
+        vad_model="iic/speech_fsmn_vad_zh-cn-16k-common-pytorch",
+        vad_model_revision="v2.0.4",
+        punc_model="iic/punc_ct-transformer_zh-cn-common-vocab272727-pytorch",
+        punc_model_revision="v2.0.4",
+    )
+
+# Benchmark function to measure execution time
+def benchmark(pipe, audio_path, runs=10):
+    """Measures inference time (mean & P99 percentile)."""
+    # Warmup (5 runs to stabilize performance)
+    for _ in range(5):
+        _ = pipe(input=audio_path)
+
+    # Benchmark runs
+    times = []
+    for _ in range(runs):
+        start = time.perf_counter()
+        _ = pipe(input=audio_path)
+        end = time.perf_counter()
+        times.append(end - start)
+
+    # Compute statistics
+    mean_time = np.mean(times) * 1000  # Convert to milliseconds
+    p99_time = np.percentile(times, 99) * 1000
+    return f"{mean_time:.2f} ms (Mean), {p99_time:.2f} ms (P99)"
+
+# Function to download the audio file if not exists
+def download_audio(url, filename):
+    if not os.path.exists(filename):
+        print(f" Downloading {filename}...")
+        r = requests.get(url, allow_redirects=True)
+        with open(filename, 'wb') as f:
+            f.write(r.content)
+        print(f" File {filename} downloaded.")
+    else:
+        print(f" File {filename} already exists.")
+
+# Define audio file URL & local filename
+audio_url = "https://github.com/liangstein/Chinese-speech-to-text/blob/master/3.wav?raw=true"
+audio_filename = "paraformer1.wav"
+
+# Download the audio file if needed
+download_audio(audio_url, audio_filename)
+
+# Initialize the pipeline
+device = "cpu"  # Change to "cuda" if using GPU
+inference_pipeline = load_pipeline(device)
+
+# Run inference
+print("\n Running Speech-to-Text Inference...")
+rec_result = inference_pipeline(input=audio_filename)
+print(f"\n Transcription Result: \n{rec_result[0]['text']}")
+
+# Measure execution time
+exec_time = benchmark(inference_pipeline, audio_filename)
+print(f"\n Execution Time: {exec_time}")
+```
+
+The `benchmark()` function measures inference performance, calculating the mean execution time and the 99th percentile latency (P99).
+
+Run the updated Python script:
+
+```bash
+python3 paraformer-3.py
+```
+
+The output should look like:
+
+```output
+ Transcription Result: 
+飞机穿过云层，眼下一片云海，有时透过稀薄的云雾，依稀可见南国葱绿的群山大地。
+rtf_avg: 0.010: 100%|
+ Execution Time: 816.62 ms (Mean), 798.76 ms (P99)
+```
+
+The model took 0.816 seconds to complete execution.
+
+### Enable bfloat16 Fast Math Kernels
+
+Now we enable bfloat16 and run Python script again:
+
+```bash
+export DNNL_DEFAULT_FPMATH_MODE=BF16
+python3 paraformer-3.py
+```
+
+The output should look like:
+```output
+ Transcription Result: 
+飞机穿过云层，眼下一片云海，有时透过稀薄的云雾，依稀可见南国葱绿的群山大地。
+rtf_avg: 0.010: 100%|
+ Execution Time: 738.04 ms (Mean), 747.57 ms (P99)
+```
+
+You can notice that the execution time is now 0.7 seconds, reflecting an improvement compared to earlier results.
+
 ## Conclusion
-ModelScope and FunASR empower developers to build robust Chinese ASR applications. By leveraging the strengths of Arm CPUs and the optimized software ecosystem, developers can create innovative and efficient solutions for various use cases. Explore the capabilities of ModelScope and FunASR, and unlock the potential of Arm technology for your next Chinese ASR project.
+Arm CPUs and an optimized software ecosystem enable developers to build innovative, efficient ASR solutions. Explore the capabilities of ModelScope and FunASR, and unlock the potential of Arm technology for your next Chinese ASR project.
