@@ -7,9 +7,10 @@ layout: learningpathall
 ---
 
 ## Overview 
-#TODO: Add intro on Distil
+In this course, you will learn how to train and run inference using a Tiny Sentiment Classifier. You'll deploy the model on the Arm Corstone-320 FVP and optionally on a Raspberry Pi 5 for sentiment analysis. You'll gain hands-on experience with PyTorch, ExecuTorch, and Edge Impulse to bring AI-powered sentiment analysis to embedded systems.
 
-In this course, you will learn how to train and run inference using DistilBERT. You'll deploy the model on the Arm Corstone-320 FVP and optionally on a Raspberry Pi 5 for sentiment analysis.
+We will train a lightweight convolutional neural network (CNN)-based sentiment classifier using synthetic text data. This model is optimized for small devices, using embedding layers and 1D convolutions for efficient text classification.
+
 
 ## Environment Setup
 Setup your development environment for TinyML by following the first 3 chapters of the [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm) Learning Path (LP).
@@ -25,8 +26,8 @@ The prompt of your terminal now has `(executorch)` as a prefix to indicate the v
 Run the commands below to install the dependencies.
 
 ```bash
-pip install transformers datasets torch
+pip install argparse json
 ```
-You are now ready to fine-tune the model
+You are now ready to build the model
 
 

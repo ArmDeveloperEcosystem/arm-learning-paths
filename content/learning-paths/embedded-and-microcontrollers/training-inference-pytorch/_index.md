@@ -1,15 +1,14 @@
 ---
-title: Deploying DistilBERT on Arm - Training and Inference with PyTorch and ExecuTorch
+title: Deploy a Tiny Sentiment Classifier on Arm - Training and Inference with PyTorch and ExecuTorch
 
 minutes_to_complete: 120
 
 who_is_this_for: This topic is for machine learning engineers, embedded AI developers, and researchers interested in deploying TinyML models for NLP on Arm-based edge devices using PyTorch and ExecuTorch. 
 
 learning_objectives: 
-    - Fine-tune a DistilBERT model for sentiment analysis using PyTorch.
+    - Train a custom CNN-based sentiment classifier for TinyML.
     - Optimize and convert the model using ExecuTorch for Arm-based edge devices.
     - Deploy and run inference on the Corstone-320 FVP and Raspberry Pi 5.
-
 
 prerequisites:
    - Basic knowledge of machine learning concepts. 
@@ -28,7 +27,7 @@ armips:
     - Cortex-A
 tools_software_languages:
     - tinyML 
-    - Transformers 
+    - CNN 
     - PyTorch
     - ExecuTorch
     - Raspberry Pi
