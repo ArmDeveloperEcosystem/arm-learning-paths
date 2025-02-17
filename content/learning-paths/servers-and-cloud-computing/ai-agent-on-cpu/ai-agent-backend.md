@@ -12,18 +12,19 @@ Once you set up the environment, create a Python script which will execute the A
 ### Option A
 - Clone the repository 
 ```bash
+cd ~
 git clone https://github.com/jc2409/ai-agent.git
 ```
 
 ### Option B
 - Creat a Python file:
 ```bash
+cd ~
 touch agent.py
 ```
 
 - Copy and paste the following code:
 ```bash
-import os
 from enum import Enum
 from typing import Union
 from pydantic import BaseModel, Field
@@ -36,16 +37,17 @@ from llama_cpp_agent import MessagesFormatterType
 from llama_cpp_agent import LlamaCppAgent
 from llama_cpp_agent.providers import LlamaCppPythonProvider
 from llama_cpp import Llama
-# from langchain_community.tools import TavilySearchResults // Uncomment this to enable search function
-from dotenv import load_dotenv
+# import os
+# from dotenv import load_dotenv
+# from langchain_community.tools import TavilySearchResults # Uncomment this to enable search function
 
 
-load_dotenv()
+# load_dotenv()
 
-os.environ.get("TAVILY_API_KEY")
+# os.environ.get("TAVILY_API_KEY")
 
 llama_model = Llama(
-    model_path="./models/llama3.1-8b-instruct.Q4_0_arm.gguf", // make sure you use the correct path for the quantized model
+    model_path="./models/llama3.1-8b-instruct.Q4_0_arm.gguf", # make sure you use the correct path for the quantized model
     n_batch=2048,
     n_ctx=10000,
     n_threads=64,
@@ -112,7 +114,7 @@ def calculator(
     else:
         raise ValueError("Unknown operation.")
 
-// Uncomment the following function to enable web search functionality (You will need to install langchain-community)
+# Uncomment the following function to enable web search functionality (You will need to install langchain-community)
 # def search_from_the_web(content: str):
 #     """
 #     Search useful information from the web to answer User's question
@@ -175,3 +177,9 @@ You are now ready to test the AI Agent. Use the following command in a terminal 
 ```bash
 python3 agent.py
 ```
+
+{{% notice Note %}}
+
+If it takes too long to process, try to terminate the application and try again. 
+
+{{% /notice %}}

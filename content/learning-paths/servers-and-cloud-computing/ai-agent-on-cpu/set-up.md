@@ -1,6 +1,6 @@
 ---
 title: Set up the Environment to Run an AI Application Locally
-weight: 2
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -15,6 +15,15 @@ This Learning Path demonstrates how to build an AI Agent Application using open-
 In this Learning Path, you learn how to build an AI Agent application using llama-cpp-python and llama-cpp-agent. llama-cpp-python is a Python binding from llama.cpp that enables efficient LLM inference on Arm CPUs and llama-cpp-agent provides an interface for processing text using agentic chains with tools.
 
 ## Installation
+
+Set up the virtual environment and install dependencies:
+```bash
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install python3-pip python3-venv cmake -y
+python3 -m venv ai-agent
+source ai-agent/bin/activate
+```
 
 Install the `llama-cpp-python` package using pip:
 
