@@ -28,8 +28,6 @@ tools_software_languages:
     - Docker
     - Remote.It
     - Supervisor
-    - Arm Total Performance
-
     
 further_reading:
     - resource:
