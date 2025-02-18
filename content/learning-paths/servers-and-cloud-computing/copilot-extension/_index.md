@@ -12,8 +12,8 @@ learning_objectives:
     - Configure a GitHub Copilot Extension for your RAG application.
 
 prerequisites:
-    - The "[Build a GitHub Copilot Extension in Python](../gh-copilot-simple/)" Learning Path.
-    - The "[Graviton Infrastructure for GitHub Copilot Extensions](../copilot-extension-deployment/)" Learning Path.
+    - The [Build a GitHub Copilot Extension in Python](../gh-copilot-simple/) Learning Path.
+    - The [Graviton Infrastructure for GitHub Copilot Extensions](../copilot-extension-deployment/) Learning Path.
     - A GitHub account.
     - A Linux-based computer with Python installed.
 
