@@ -17,7 +17,9 @@ prerequisites:
     - A GitHub account.
     - A Linux-based computer with Python installed.
 
-author_primary: Avin Zarlez, Joe Stech
+author:
+    - Avin Zarlez
+    - Joe Stech
 
 ### Tags
 cloud_service_providers: AWS
