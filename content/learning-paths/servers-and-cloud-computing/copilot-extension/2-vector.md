@@ -18,11 +18,11 @@ How can we convert complex ideas, like the semantic meaning of a series of words
 
 ### Embeddings
 
-Embeddings are vectors generated through an AI model. We can convert collections of "tokens" (word fragments) into a point in N dimensional space. 
+Embeddings are vectors generated through an AI model. We can convert collections of "tokens" (word fragments) into a point in N dimensional space.
 
-Then for any given vector (like the embedding of a question asked by a user) we can query our vector database to find embedded data that is most similar. 
+Then for any given vector (like the embedding of a question asked by a user) we can query our vector database to find embedded data that is most similar.
 
-For example, for our use case let's say we want to know which Arm learning path is most relevant to a question a user asks.
+For our use case, we want to know which Arm learning path is most relevant to a question a user asks.
 
 First, ahead of time, we have to convert the raw data (Arm learning path content) into more consumable "chunks". In our case, small `yaml` files. Then we run those chunks through our LLM model and embed the content into our FAISS vector database.
 
@@ -50,14 +50,22 @@ By copying the FAISS database into every deployment, we achieve a scalable, high
 
 ## Collecting Data into Chunks
 
-We have provided scripts in the [python-rag-extension github repo](https://github.com/ArmDeveloperEcosystem/python-rag-extension/) to convert an Arm learning path into a series of `chunk.yaml` files for use in our RAG application.
+Arm has provided a [companion GitHub repo](https://github.com/ArmDeveloperEcosystem/python-rag-extension/) for this Learning Path that serves as a Python-based Copilot RAG Extension example. In this repo, we have provided scripts to convert an Arm learning path into a series of `chunk.yaml` files for use in our RAG application.
+
+### Clone the GitHub repository
+
+To clone the repo, run
+
+```bash
+git clone https://github.com/ArmDeveloperEcosystem/python-rag-extension.git
+```
 
 ### Chunk Creation Script Set up
 
-Navigate to the `vectorstore` folder in the [python-rag-extension github repo](https://github.com/ArmDeveloperEcosystem/python-rag-extension/).
+Navigate to the `vectorstore` folder in the [python-rag-extension github repo](https://github.com/ArmDeveloperEcosystem/python-rag-extension/) you just cloned.
 
 ```bash
-cd vectorstore
+cd python-rag-extension/vectorstore
 ```
 
 It is recommended to use a virtual environment to manage dependencies.
@@ -142,7 +150,7 @@ python local_vectorstore_creation.py
 
 Copy the generated `bin` and `json` files to the root directory of your Flask application.
 
-THey should be in the `vectorstore/chunks` folder. Since you are likely still in the `vectorstore` folder, run this command to copy:
+They should be in the `vectorstore/chunks` folder. Since you are likely still in the `vectorstore` folder, run this command to copy:
 
 ```bash
 cp chunks/faiss_index.bin ../

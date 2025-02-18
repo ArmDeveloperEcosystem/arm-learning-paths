@@ -19,13 +19,3 @@ The basic flow of a RAG system looks like this:
 The benefits of a RAG system revolve around improved factual accuracy of responses. It also allows a system to understand more up-to-date information, since you can add additional knowledge to the knowledge base much more easily than you could retrain the model.
 
 Most importantly, RAG lets you provide reference links to the user, showing the user where the system is getting its information.
-
-## The GitHub repository
-
-Arm has provided a companion GitHub repo for this Learning Path that serves as a Python-based Copilot RAG Extension example.
-
-To clone the repo for later reference, run
-
-```bash
-git clone https://github.com/ArmDeveloperEcosystem/python-rag-extension.git
-```
