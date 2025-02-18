@@ -3,7 +3,7 @@ title: Create a RAG-based GitHub Copilot Extension in Python
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for software developers who want to learn how to build a RAG-based GitHub Copilot Extension. 
+who_is_this_for: This is an advanced topic for software developers who want to learn how to build a Retrieval Augmented Generation (RAG) based GitHub Copilot Extension. 
 
 learning_objectives: 
     - Explain what a RAG system is.
