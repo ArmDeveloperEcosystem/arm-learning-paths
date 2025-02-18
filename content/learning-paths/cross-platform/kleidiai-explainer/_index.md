@@ -27,6 +27,8 @@ tools_software_languages:
     - GenAI
     - Coding
     - NEON
+    - Arm Total Performance
+
 operatingsystems:
     - Linux
 

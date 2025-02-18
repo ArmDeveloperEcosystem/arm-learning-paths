@@ -28,6 +28,8 @@ tools_software_languages:
     - Ansible
     - MariaDB
     - Docker
+    - Arm Total Performance
+
 
 further_reading:
     - resource:

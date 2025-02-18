@@ -33,6 +33,8 @@ tools_software_languages:
     - Clang
     - CMake
     - GoogleTest
+    - Arm Total Performance
+
 operatingsystems:
     - Linux
     - macOS

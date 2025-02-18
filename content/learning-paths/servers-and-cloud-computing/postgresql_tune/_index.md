@@ -30,6 +30,8 @@ tools_software_languages:
     - SQL
     - PostgreSQL
     - HammerDB
+    - Arm Total Performance
+
 
 further_reading:
     - resource:

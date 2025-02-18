@@ -29,6 +29,8 @@ tools_software_languages:
     - RME
     - CCA
     - Docker
+    - Arm Total Performance
+
     
 further_reading:
     - resource:

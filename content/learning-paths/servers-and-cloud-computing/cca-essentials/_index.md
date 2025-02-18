@@ -34,6 +34,8 @@ tools_software_languages:
     - CCA
     - Docker
     - Veraison
+    - Arm Total Performance
+
     
 further_reading:
     - resource:

@@ -25,6 +25,8 @@ tools_software_languages:
     - Clang
     - SVE2
     - Coding
+    - Arm Total Performance
+
 operatingsystems:
     - Linux
 shared_path: true

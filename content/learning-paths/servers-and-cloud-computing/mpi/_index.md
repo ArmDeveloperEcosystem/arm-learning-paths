@@ -31,6 +31,8 @@ tools_software_languages:
     - Linaro Forge
     - gdb
     - mpi
+    - Arm Total Performance
+
 
 
 further_reading:

@@ -26,6 +26,8 @@ tools_software_languages:
 - ArmRAL
 - 5G
 - GCC
+- Arm Total Performance
+
 further_reading:
     - resource:
         title: 5G Infrastructure

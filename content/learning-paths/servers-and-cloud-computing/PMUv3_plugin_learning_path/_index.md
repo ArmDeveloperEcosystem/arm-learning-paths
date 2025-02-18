@@ -27,6 +27,8 @@ tools_software_languages:
     - C
     - C++
     - Python
+    - Arm Total Performance
+
 operatingsystems:
     - Linux
 

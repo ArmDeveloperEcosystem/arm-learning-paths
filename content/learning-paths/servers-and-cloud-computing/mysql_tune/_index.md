@@ -24,6 +24,8 @@ tools_software_languages:
     - SQL
     - MySQL
     - InnoDB
+    - Arm Total Performance
+
 
 test_images:
     - ubuntu:latest

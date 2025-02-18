@@ -34,6 +34,8 @@ tools_software_languages:
 - Glibc
 - LSE
 - MongoDB
+- Arm Total Performance
+
 
 
 further_reading:

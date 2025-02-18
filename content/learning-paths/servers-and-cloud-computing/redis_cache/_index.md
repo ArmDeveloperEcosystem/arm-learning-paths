@@ -29,6 +29,8 @@ tools_software_languages:
     - Redis
     - SQL
     - MySQL
+    - Arm Total Performance
+
 
 further_reading:
     - resource:

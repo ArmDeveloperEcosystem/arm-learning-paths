@@ -23,6 +23,8 @@ operatingsystems:
     - Linux 
 tools_software_languages:
     - GCC
+    - Arm Total Performance
+
     
 further_reading:
     - resource:

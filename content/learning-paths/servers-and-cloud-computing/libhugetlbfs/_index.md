@@ -24,6 +24,8 @@ operatingsystems:
 tools_software_languages:
     - MySQL
     - GCC
+    - Arm Total Performance
+
 
 test_images:
     - ubuntu:latest

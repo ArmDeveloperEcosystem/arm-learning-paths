@@ -37,6 +37,7 @@ tools_software_languages_filter:
 - Android Studio: 1
 - Ansible: 2
 - Arm Development Studio: 4
+- Arm Total Performance: 60
 - armclang: 1
 - armie: 1
 - ArmRAL: 1

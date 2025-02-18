@@ -24,6 +24,8 @@ armips:
     - Neoverse
 tools_software_languages:
     - Java
+    - Arm Total Performance
+
 operatingsystems:
     - Linux
 

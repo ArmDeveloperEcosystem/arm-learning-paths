@@ -26,6 +26,8 @@ tools_software_languages:
     - libbpf
     - Capstone
     - C/C++
+    - Arm Total Performance
+
 operatingsystems:
     - Linux
 

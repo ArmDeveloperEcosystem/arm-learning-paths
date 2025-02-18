@@ -34,6 +34,8 @@ tools_software_languages:
 - Flink
 - Java
 - Nexmark
+- Arm Total Performance
+
 
 
 further_reading:

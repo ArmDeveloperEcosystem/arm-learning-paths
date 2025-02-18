@@ -28,6 +28,7 @@ tools_software_languages:
     - Neon
     - SVE
     - Go
+    - Arm Total Performance
 
 further_reading:
     - resource:

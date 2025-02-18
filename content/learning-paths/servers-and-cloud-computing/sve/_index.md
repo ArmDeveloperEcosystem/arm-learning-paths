@@ -31,6 +31,7 @@ tools_software_languages:
     - armie
     - GCC
     - armclang
+    - Arm Total Performance
 
 further_reading:
     - resource:

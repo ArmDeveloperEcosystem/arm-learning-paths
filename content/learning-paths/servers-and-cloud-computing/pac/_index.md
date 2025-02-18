@@ -26,6 +26,8 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Coding
+    - Arm Total Performance
+
 
 further_reading:
     - resource:

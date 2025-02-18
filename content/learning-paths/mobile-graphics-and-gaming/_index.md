@@ -31,6 +31,7 @@ tools_software_languages_filter:
 - Arm Development Studio: 1
 - Arm Mobile Studio: 1
 - Arm Performance Studio: 2
+- Arm Total Performance: 14
 - assembly: 1
 - Bazel: 1
 - C: 1

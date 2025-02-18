@@ -29,6 +29,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - C/C++
+    - Arm Total Performance
 operatingsystems:
     - Linux
     - Android

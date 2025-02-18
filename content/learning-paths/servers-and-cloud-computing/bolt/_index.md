@@ -25,6 +25,8 @@ armips:
 tools_software_languages:
     - BOLT
     - perf
+    - Arm Total Performance
+
 operatingsystems:
     - Linux
 

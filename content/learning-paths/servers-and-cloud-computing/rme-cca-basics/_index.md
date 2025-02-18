@@ -28,6 +28,8 @@ tools_software_languages:
     - FVP
     - RME
     - CCA
+    - Arm Total Performance
+
     
 further_reading:
     - resource:

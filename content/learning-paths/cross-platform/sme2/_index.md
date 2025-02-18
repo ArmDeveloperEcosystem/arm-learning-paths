@@ -32,6 +32,8 @@ armips:
 tools_software_languages:
     - C
     - Clang
+    - Arm Total Performance
+
 operatingsystems:
     - Linux
     - macOS

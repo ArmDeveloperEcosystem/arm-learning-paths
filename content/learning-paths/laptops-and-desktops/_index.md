@@ -27,6 +27,7 @@ tools_software_languages_filter:
 - Alacritty: 1
 - Android Studio: 1
 - Arm Development Studio: 2
+- Arm Total Performance: 16
 - Arm64EC: 1
 - assembly: 1
 - C: 3

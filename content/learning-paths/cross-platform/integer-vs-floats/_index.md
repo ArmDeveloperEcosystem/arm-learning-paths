@@ -24,6 +24,8 @@ tools_software_languages:
     - GCC
     - Clang
     - Coding
+    - Arm Total Performance
+
 operatingsystems:
     - Linux
 shared_path: true

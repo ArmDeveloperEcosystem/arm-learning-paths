@@ -33,6 +33,7 @@ tools_software_languages:
   - SVE
   - Coding
   - Intrinsics
+  - Arm Total Performance
 
 further_reading:
     - resource:

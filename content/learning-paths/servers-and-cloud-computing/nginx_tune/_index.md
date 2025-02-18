@@ -25,6 +25,8 @@ armips:
     - Neoverse
 tools_software_languages:
     - Nginx    
+    - Arm Total Performance
+
 operatingsystems:
     - Linux
 

@@ -34,6 +34,8 @@ tools_software_languages:
     - Arm Development Studio
     - RME
     - CCA
+    - Arm Total Performance
+
 
 ### Cross-platform metadata only
 shared_path: true

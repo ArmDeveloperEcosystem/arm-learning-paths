@@ -24,6 +24,8 @@ armips:
 tools_software_languages:
     - perf
     - Telemetry
+    - Arm Total Performance
+
 
 operatingsystems:
     - Linux

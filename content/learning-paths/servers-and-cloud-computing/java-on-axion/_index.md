@@ -24,6 +24,8 @@ armips:
 tools_software_languages:
     - Java
     - Google Axion
+    - Arm Total Performance
+
 operatingsystems:
     - Linux
 

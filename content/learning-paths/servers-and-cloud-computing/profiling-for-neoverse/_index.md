@@ -22,6 +22,8 @@ armips:
     - Neoverse
 tools_software_languages:
     - Streamline CLI
+    - Arm Total Performance
+
 operatingsystems:
     - Linux
 

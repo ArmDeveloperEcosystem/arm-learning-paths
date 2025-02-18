@@ -32,6 +32,8 @@ tools_software_languages:
     - Trusted Firmware
     - Fixed Virtual Platform
     - GCC
+    - Arm Total Performance
+
 
 ### Cross-platform metadata only
 shared_path: true

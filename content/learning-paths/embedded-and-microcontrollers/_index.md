@@ -34,6 +34,7 @@ tools_software_languages_filter:
 - Arm Compute Library: 1
 - Arm Development Studio: 9
 - Arm Fast Models: 4
+- Arm Total Performance: 6
 - Arm Virtual Hardware: 11
 - AVH: 1
 - C: 1
