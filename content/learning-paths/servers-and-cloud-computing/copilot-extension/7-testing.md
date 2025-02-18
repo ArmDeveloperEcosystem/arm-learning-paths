@@ -24,3 +24,7 @@ There are many enhancements you can make to your extension, including inserting 
 Another possibility is adding another copilot invocation to rephrase the previous conversation prior to your main copilot invocation. This yields more robust results, if users reference previous elements of the conversation in their question.
 
 You can precisely tailor your RAG extension to your use case, to make your extension as useful as possible.
+
+## Conclusion
+
+Congratulations on completing this learning path! By following the steps and processes you learned here, you can now create your own powerful and customized Copilot extensions to enhance your development workflow.
