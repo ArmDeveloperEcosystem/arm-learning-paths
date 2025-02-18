@@ -34,7 +34,8 @@ tools_software_languages:
     - conda
     - AWS CDK
 operatingsystems:
-    - Linux, MacOS
+    - Linux
+    - MacOS
 
 
 ### FIXED, DO NOT MODIFY
