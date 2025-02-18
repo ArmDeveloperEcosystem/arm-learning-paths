@@ -6,7 +6,7 @@ weight: 8
 layout: learningpathall
 ---
 
-## Test it out
+## Chat with your extension
 
 After you update your GitHub App settings, you can start chatting with your extension by typing @YOUR-EXTENSION-NAME in the Copilot Chat window, followed by your prompt:
 
