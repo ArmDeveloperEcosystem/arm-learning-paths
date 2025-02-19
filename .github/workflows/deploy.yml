@@ -23,7 +23,7 @@ on:
         required: true
 
 env:
-  HUGO_VERSION: 0.130.0
+  HUGO_VERSION: 0.144.0
 
 jobs:
   build_and_deploy:
