@@ -27,7 +27,6 @@ tools_software_languages_filter:
 - Alacritty: 1
 - Android Studio: 1
 - Arm Development Studio: 2
-- Arm Total Performance: 16
 - Arm64EC: 1
 - assembly: 1
 - C: 3
@@ -64,6 +63,7 @@ tools_software_languages_filter:
 - Qt: 2
 - Remote.It: 1
 - RME: 1
+- Runbook: 16
 - Rust: 2
 - SVE: 1
 - SVE2: 1

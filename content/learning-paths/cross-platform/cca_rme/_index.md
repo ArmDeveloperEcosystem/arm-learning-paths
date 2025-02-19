@@ -34,7 +34,7 @@ tools_software_languages:
     - Arm Development Studio
     - RME
     - CCA
-    - Arm Total Performance
+    - Runbook
 
 
 ### Cross-platform metadata only

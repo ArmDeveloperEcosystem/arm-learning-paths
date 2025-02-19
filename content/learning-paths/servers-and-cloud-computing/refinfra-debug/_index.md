@@ -25,7 +25,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - Arm Development Studio
-    - Arm Total Performance
+    - Runbook
 
 operatingsystems:
     - Linux

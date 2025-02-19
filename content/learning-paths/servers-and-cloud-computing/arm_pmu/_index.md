@@ -25,7 +25,7 @@ tools_software_languages:
     - perf
     - Assembly
     - GCC
-    - Arm Total Performance
+    - Runbook
 
 operatingsystems:
     - Linux

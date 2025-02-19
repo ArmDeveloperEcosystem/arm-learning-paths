@@ -34,7 +34,6 @@ tools_software_languages_filter:
 - Arm Compute Library: 1
 - Arm Development Studio: 9
 - Arm Fast Models: 4
-- Arm Total Performance: 6
 - Arm Virtual Hardware: 11
 - AVH: 1
 - C: 1
@@ -78,6 +77,7 @@ tools_software_languages_filter:
 - Raspberry Pi: 5
 - Remote.It: 1
 - RTX: 2
+- Runbook: 4
 - Slicing software: 1
 - STM32: 2
 - TensorFlow: 3

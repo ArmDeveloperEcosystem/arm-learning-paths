@@ -25,7 +25,7 @@ tools_software_languages:
     - Clang
     - SVE2
     - Coding
-    - Arm Total Performance
+    - Runbook
 
 operatingsystems:
     - Linux

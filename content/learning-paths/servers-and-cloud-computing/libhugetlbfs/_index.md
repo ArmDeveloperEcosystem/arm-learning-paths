@@ -24,7 +24,7 @@ operatingsystems:
 tools_software_languages:
     - MySQL
     - GCC
-    - Arm Total Performance
+    - Runbook
 
 
 test_images:

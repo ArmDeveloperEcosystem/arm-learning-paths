@@ -31,7 +31,6 @@ tools_software_languages_filter:
 - Arm Development Studio: 1
 - Arm Mobile Studio: 1
 - Arm Performance Studio: 2
-- Arm Total Performance: 14
 - assembly: 1
 - Bazel: 1
 - C: 1
@@ -62,6 +61,7 @@ tools_software_languages_filter:
 - Python: 2
 - QEMU: 1
 - RME: 1
+- Runbook: 14
 - Rust: 2
 - SDDiskTool: 1
 - SVE2: 1

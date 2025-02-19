@@ -29,7 +29,7 @@ test_status:
     - passed
 tools_software_languages:
     - Geekbench
-    - Arm Total Performance
+    - Runbook
 
 
 further_reading:

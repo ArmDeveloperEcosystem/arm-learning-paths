@@ -26,7 +26,7 @@ tools_software_languages:
 - ArmRAL
 - 5G
 - GCC
-- Arm Total Performance
+- Runbook
 
 further_reading:
     - resource:

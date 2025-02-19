@@ -24,7 +24,7 @@ test_status:
 title: Measure performance of compression libraries on Arm servers
 tools_software_languages:
 - snappy
-- Arm Total Performance
+- Runbook
 
 further_reading:
     - resource:
