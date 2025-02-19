@@ -103,19 +103,19 @@ For more examples and ideas, visit:
 
 ## Environment
 
-Now, using Git, clone the environment for experimenting with SME2 to a directory
-named ``code-examples.git`` and change your current directory to
-``code-examples.git/learning-paths/cross-platform/sme2`` :
+Now, [download the code examples](https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/sme2)
+for this learning path, expand the archive and change your current directory to
+``code-examples/learning-paths/cross-platform/sme2`` :
 
 ```BASH
-git clone  https://gitlab.arm.com/learning-code-examples/code-examples code-examples.git
-cd code-examples.git/learning-paths/cross-platform/sme2
+tar xfz code-examples-main-learning-paths-cross-platform-sme2.tar.gz -s /code-examples-main-learning-paths-cross-platform-sme2/code-examples/
+cd code-examples/learning-paths/cross-platform/sme2
 ```
 
 This list of content in this directory should look like this :
 
 ```TXT
-code-examples.git/learning-paths/cross-platform/sme2/
+code-examples/learning-paths/cross-platform/sme2/
 ├── .clang-format
 ├── .devcontainer/
 │   └── devcontainer.json
@@ -157,7 +157,7 @@ It contains:
 
 {{% notice Note %}}
 From this point in the Learning Path, all instructions assume that your current
-directory is ``code-examples.git/learning-paths/cross-platform/sme2``.{{% /notice %}}
+directory is ``code-examples/learning-paths/cross-platform/sme2``.{{% /notice %}}
 
 
 ## Using the environment
