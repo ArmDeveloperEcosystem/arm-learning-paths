@@ -77,6 +77,7 @@ tools_software_languages_filter:
 - Raspberry Pi: 5
 - Remote.It: 1
 - RTX: 2
+- Runbook: 4
 - Slicing software: 1
 - STM32: 2
 - TensorFlow: 3

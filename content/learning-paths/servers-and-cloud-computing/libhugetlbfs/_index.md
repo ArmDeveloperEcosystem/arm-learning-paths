@@ -24,6 +24,8 @@ operatingsystems:
 tools_software_languages:
     - MySQL
     - GCC
+    - Runbook
+
 
 test_images:
     - ubuntu:latest
