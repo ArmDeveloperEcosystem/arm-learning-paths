@@ -61,6 +61,7 @@ tools_software_languages_filter:
 - Python: 2
 - QEMU: 1
 - RME: 1
+- Runbook: 14
 - Rust: 2
 - SDDiskTool: 1
 - SVE2: 1

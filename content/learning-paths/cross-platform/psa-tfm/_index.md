@@ -33,6 +33,7 @@ tools_software_languages:
     - Fixed Virtual Platform
     - GCC
 
+
 ### Cross-platform metadata only
 shared_path: true
 shared_between:

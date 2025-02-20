@@ -25,6 +25,7 @@ test_status:
 title: Measure Machine Learning Inference Performance on Arm servers
 tools_software_languages:
 - TensorFlow
+- Runbook
 further_reading:
     - resource:
         title: MLPerf Inference Suite Source repo 
