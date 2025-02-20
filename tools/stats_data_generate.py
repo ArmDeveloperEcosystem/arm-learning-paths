@@ -144,31 +144,38 @@ def mdToMetadata(md_file_path):
     metadata_dic = yaml.safe_load(metadata_text)
     return metadata_dic
 
-def authorAdd(author_name,tracking_dic):
+def authorAdd(author_names,tracking_dic):
     ### Update 'individual_authors' area, raw number by each author.
-    # Check if author already exists as key. If not, add new key
-    author_urlized = urlize(author_name)
-    if author_urlized in tracking_dic['individual_authors']:
-        # Update number for this author
-        tracking_dic['individual_authors'][author_urlized] = tracking_dic['individual_authors'][author_urlized] + 1
-    else:
-        # Add key to dic with 1 to their name
-        tracking_dic['individual_authors'][author_urlized] = 1
 
-    ### Update 'contributions' area, internal vs external contributions
-    
-    # open the contributors CSV file
-    with open('../assets/contributors.csv', mode ='r')as file:
-        csvFile = csv.reader(file)
-        for line in csvFile:
-            company = line[1]
-            # If author in the line, check if they work at Arm or not, and increment contributions number for internal or external
-            if author_name in line:
-                if company == 'Arm':
-                    tracking_dic['contributions']['internal'] = tracking_dic['contributions']['internal'] + 1
-                else:
-                    tracking_dic['contributions']['external'] = tracking_dic['contributions']['external'] + 1
-    
+    # Support multiple authors by iterating through a list. 
+    # First, check if author_name is a list or not. If not, make it a list
+    if not isinstance(author_names, list):
+        author_names = [author_names]
+    for author_name in author_names:
+
+        # Check if author already exists as key. If not, add new key
+        author_urlized = urlize(author_name)
+        if author_urlized in tracking_dic['individual_authors']:
+            # Update number for this author
+            tracking_dic['individual_authors'][author_urlized] = tracking_dic['individual_authors'][author_urlized] + 1
+        else:
+            # Add key to dic with 1 to their name
+            tracking_dic['individual_authors'][author_urlized] = 1
+
+        ### Update 'contributions' area, internal vs external contributions
+        
+        # open the contributors CSV file
+        with open('../assets/contributors.csv', mode ='r')as file:
+            csvFile = csv.reader(file)
+            for line in csvFile:
+                company = line[1]
+                # If author in the line, check if they work at Arm or not, and increment contributions number for internal or external
+                if author_name in line:
+                    if company == 'Arm':
+                        tracking_dic['contributions']['internal'] = tracking_dic['contributions']['internal'] + 1
+                    else:
+                        tracking_dic['contributions']['external'] = tracking_dic['contributions']['external'] + 1
+        
     return tracking_dic
 
 def iterateContentIndexMdFiles():
@@ -233,7 +240,7 @@ def iterateContentIndexMdFiles():
             weekly_count_dic[category] = weekly_count_dic[category] + 1
 
             ######### AUTHOR info
-            weekly_authors_contributions_dic = authorAdd(content_metadic['author_primary'],weekly_authors_contributions_dic)
+            weekly_authors_contributions_dic = authorAdd(content_metadic['author'],weekly_authors_contributions_dic)
             
 
             # Record entry in test file

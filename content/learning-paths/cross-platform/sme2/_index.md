@@ -32,6 +32,8 @@ armips:
 tools_software_languages:
     - C
     - Clang
+    - Runbook
+
 operatingsystems:
     - Linux
     - macOS

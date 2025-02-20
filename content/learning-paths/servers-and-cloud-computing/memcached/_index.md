@@ -23,6 +23,8 @@ test_status:
 title: Run memcached on Arm servers and measure its performance
 tools_software_languages:
 - Memcached
+- Runbook
+
 further_reading:
     - resource:
         title: Memcached Wiki
