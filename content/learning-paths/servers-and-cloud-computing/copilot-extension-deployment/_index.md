@@ -1,7 +1,7 @@
 ---
 title: Graviton Infrastructure for GitHub Copilot Extensions
 
-minutes_to_complete: 20
+minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for software developers who want to learn how to deploy all necessary infrastructure on AWS for a GitHub Copilot Extension.
 
