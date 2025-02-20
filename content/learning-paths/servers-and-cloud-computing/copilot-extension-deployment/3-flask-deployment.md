@@ -26,7 +26,7 @@ You should now be able to go through the steps in "[How can I create my own priv
 
 The only two changes you'll make are to add a health check endpoint (for the ALB health check), and to run your app on 0.0.0.0 port 8080, which the ALB is listening for.
 
-First, add the following endpoint:
+First, add the following endpoint to your main flask file:
 
 ```Python
 @app.route('/health')
@@ -34,15 +34,7 @@ def health():
     return Response(status=200)
 ```
 
-Next, replace the final lines of your flask app. Find:
-
-```Python
-port = int(os.environ.get("PORT", 3000))
-if __name__ == "__main__":
-    app.run(port=port)
-```
-
-and replace with:
+Next, add the `host` argument to the `app.run` call at the end of the file and update the port number. The final result should look like this:
 
 ```Python
 if __name__ == '__main__':
@@ -51,7 +43,7 @@ if __name__ == '__main__':
 
 This will expose your app to the port that you set up your ALB listener to listen on.
 
-Now, when you run:
+Run the simple extension:
 
 ```Python
 python ./simple-extension.py

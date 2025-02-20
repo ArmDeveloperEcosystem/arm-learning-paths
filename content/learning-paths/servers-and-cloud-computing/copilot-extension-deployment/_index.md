@@ -7,12 +7,12 @@ who_is_this_for: This is an advanced topic for software developers who want to l
 
 learning_objectives: 
     - Understand the AWS services needed to host a GitHub Copilot Extension
-    - Create a CDK deployment for the required AWS services 
+    - Create an AWS CDK (Cloud Development Kit) deployment for the required AWS services 
     - Add your newly generated endpoints to the GitHub app you previously created
 
 prerequisites:
-    - The "[Build a GitHub Copilot Extension in Python](../gh-copilot-simple/)" Learning Path.
-    - Understanding of Infrastructure as Code
+    - The [Build a GitHub Copilot Extension in Python](../gh-copilot-simple/) Learning Path.
+    - Understanding of IoC (Infrastructure as Code)
     - A GitHub account
     - A linux-based computer with npm, Python, and the AWS CLI installed
 

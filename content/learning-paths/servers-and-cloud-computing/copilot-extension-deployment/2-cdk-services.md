@@ -37,11 +37,11 @@ from aws_cdk import (
 )
 ```
 
-Then, within the generated class, add the services denoted in the sections below.
+Then, within the generated class (`class CopilotExtensionDeploymentStack(Stack):`) in the same file, add all the AWS services needed for your Extension deployment as described in the following sections.
 
 ## Virtual Private Cloud (VPC)
 
-This will create a VPC with a public and private subnet. These subnets have a CIDR mask of 24, which means you'll get 256 total IPs in each subnet. If you need more than this, adjust accordingly.
+The code below will create a VPC with a public and private subnet. These subnets have a CIDR mask of 24, which means you'll get 256 total IPs in each subnet. If you need more than this, adjust accordingly.
 
 ```python
 vpc = ec2.Vpc(self, "FlaskStackVPC",
@@ -61,7 +61,7 @@ vpc = ec2.Vpc(self, "FlaskStackVPC",
             )
 ```
 
-You'll also need a security group for the EC2 instances, along with egress on port 5000:
+You'll also need a security group for the EC2 instances:
 
 ```python
 security_group = ec2.SecurityGroup(self, "EC2SecurityGroup",
@@ -69,7 +69,6 @@ security_group = ec2.SecurityGroup(self, "EC2SecurityGroup",
                                            allow_all_outbound=True,
                                            description="Security group for EC2 instances"
                                            )
-security_group.add_ingress_rule(ec2.Peer.any_ipv4(), ec2.Port.tcp(5000), "Allow incoming traffic on port 5000")
 ```
 
 ## EC2
@@ -204,7 +203,7 @@ listener.add_targets("ASGTarget",
                         ))
 ```
 
-## Route 53
+## Custom domain setup in Route 53
 
 The final step in setting up your AWS services is to add an ALB-linked A record to the hosted zone for your domain. This makes sure that when GitHub invokes your API, the DNS is pointed to the IP of your ALB. You will need to replace `HOSTED_ZONE_DOMAIN_NAME` with your hosted zone domain, and replace `SUBDOMAIN_NAME` with the subdomain that maps to the ACM certificate that you generated and used in your ALB.
 
@@ -223,9 +222,19 @@ route53.ARecord(self, "ALBDnsRecord",
 
 ## How do I deploy?
 
-Once you have added all of the sections above to your `copilot_extension_deployment_stack.py` file, you can deploy your services to AWS. You must first ensure that your CDK environment in AWS is 'bootstrapped', which means that the AWS CDK has created all the resources it needs to use when deploying (IAM roles, an ECR repo for images, and buckets for artifacts). The bootstrap process is a one-time deal, but if you haven't yet bootstrapped, please see the AWS guide "[Bootstrap your environment for use with the AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping-env.html)". In general it's as easy as running `cdk bootstrap`, but if your organization has governance rules in place regarding naming conventions you'll need a custom bootstrap yaml.
+Once you have added all of the sections above to your `copilot_extension_deployment_stack.py` file, you can deploy your services to AWS. You must first ensure that your CDK environment in AWS is 'bootstrapped', which means that the AWS CDK has created all the resources it needs to use when deploying (IAM roles, an ECR repo for images, and buckets for artifacts). The bootstrap process is a one-time deal, and can generally be done by running:
 
-Once your environment has been bootstrapped, you can run
+```bash
+cdk bootstrap aws://123456789012/us-east-1
+```
+
+Replace the AWS account and region with your account and region.
+
+{{% notice Note %}}
+if your organization has governance rules in place regarding naming conventions you'll need a custom bootstrap yaml. To learn more about custom bootstrapping, see the [AWS guide  on Bootstrapping your environment for use with the AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping-env.html).
+{{% /notice %}}
+
+Once your environment has been bootstrapped, you can run:
 
 ```bash
 cdk deploy

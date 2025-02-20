@@ -28,7 +28,7 @@ cdk --version
 
 You should see a version number returned, signifying success.
 
-After the cdk cli is installed, you can use it to create a new python cdk environment:
+After the CDK CLI is installed, you can use it to create a new Python CDK environment:
 
 ```bash
 mkdir copilot-extension-deployment
@@ -36,14 +36,12 @@ cd copilot-extension-deployment
 cdk init app --language python
 ```
 
-This will set up convenient file stubs, as well as create a requirements.txt file with the Python CDK libraries required. Install these:
+This will set up convenient file stubs, as well as create a `requirements.txt` file with the Python CDK libraries required. The `init` command uses the name of the project folder to name various elements of the project. Hyphens in the folder name are converted to underscores. Install the packages in the `requirements.txt`:
 
 ```bash
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
-
-For more information, see Amazon's [Working with the AWS CDK in Python](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-python.html) documentation.
 
 Now you are ready to specify the AWS services needed for your GitHub Copilot Extension.
 
