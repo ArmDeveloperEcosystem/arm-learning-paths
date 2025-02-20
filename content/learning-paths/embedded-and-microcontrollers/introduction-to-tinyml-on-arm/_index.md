@@ -1,10 +1,6 @@
 ---
 title: Introduction to TinyML on Arm using PyTorch and ExecuTorch
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 40
 
 who_is_this_for: This is an introductory topic for developers and data scientists new to Tiny Machine Learning (TinyML) who want to explore its potential using PyTorch and ExecuTorch.
