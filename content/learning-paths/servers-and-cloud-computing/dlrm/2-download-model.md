@@ -51,20 +51,20 @@ Once it finishes, you should see that the `model` and `data` directories are pop
 
 ## Build DLRM image
 
-A repository is set up to run the next steps. Start by cloning it.
+You will use a branch of the the `Tool-Solutions` repository. This branch includes releases of PyTorch which enhance the performance of ML frameworks.
 
 ```bash
-git clone https://github.com/ArmDeveloperEcosystem/TODO-REPO.git
+cd $HOME
+git clone https://github.com/ARM-software/Tool-Solutions.git
+cd $HOME/Tool-Solutions/
+git checkout ${1:-"pytorch-aarch64--r24.12"}
 ```
 
 A setup script runs which installs docker and builds a PyTorch image for a specific commit hash. Finally, it runs the MLPerf container which is used for the benchmark in the next section. This script takes around 20 minutes to finish.
 
 ```bash
-cd TODO-REPO
-./setup_dlrm_image.sh 3a643da5bf21dcc34d71819fbae4556b37c32cce
+cd ML-Frameworks/pytorch-aarch64/
+./build.sh
 ```
 
-You have finished setting up everything needed to analyze the performance. Proceed to the next section to have a look at what that entails.
-* Cloning the DLRM Repository (zip in guide)
-* Building DLRM with Arm Optimizations
-* Key Compiler Flags and Performance Optimizations
+You now have everything set up to analyze the performance. Proceed to the next section to run the benchmark and inspect the results.

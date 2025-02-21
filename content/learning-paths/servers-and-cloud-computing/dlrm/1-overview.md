@@ -24,6 +24,7 @@ Before you can run the benchmark, you will need an Arm-based Cloud Service Provi
 | Amazon Web Services   | r8g.16xlarge   |
 | Microsoft Azure       | TODO           |
 
+### Verify Python installation
 Make sure Python is installed by running the following and making sure a version is printed.
 
 ```bash
@@ -34,4 +35,29 @@ python --version
 Python 3.12.6
 ```
 
-## Install dependencies?
+## Install Docker
+
+```bash
+sudo apt-get update
+sudo apt-get install ca-certificates curl docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin make -y
+```
+
+```bash
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+```
+
+```bash
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+{{ % notice Note % }}
+If you run into permission issues with Docker, try running the following
+
+```bash
+sudo usermod -aG docker $USER
+sudo chmod 666 /var/run/docker.sock
+```
+{{ % /notice % }}
