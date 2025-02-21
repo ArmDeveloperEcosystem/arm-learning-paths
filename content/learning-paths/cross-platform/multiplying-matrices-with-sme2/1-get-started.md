@@ -103,19 +103,19 @@ For more examples and ideas, visit:
 
 ## Environment
 
-Now, [download the code examples](https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/sme2)
+Now, [download the code examples](https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2)
 for this learning path, expand the archive and change your current directory to
 ``code-examples/learning-paths/cross-platform/sme2`` :
 
 ```BASH
-tar xfz code-examples-main-learning-paths-cross-platform-sme2.tar.gz -s /code-examples-main-learning-paths-cross-platform-sme2/code-examples/
-cd code-examples/learning-paths/cross-platform/sme2
+tar xfz code-examples-main-learning-paths-cross-platform-multiplying-matrices-with-sme2.tar.gz -s /code-examples-main-learning-paths-cross-platform-multiplying-matrices-with-sme2/code-examples/
+cd code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2
 ```
 
 This list of content in this directory should look like this :
 
 ```TXT
-code-examples/learning-paths/cross-platform/sme2/
+code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2/
 ├── .clang-format
 ├── .devcontainer/
 │   └── devcontainer.json
@@ -157,7 +157,7 @@ It contains:
 
 {{% notice Note %}}
 From this point in the Learning Path, all instructions assume that your current
-directory is ``code-examples/learning-paths/cross-platform/sme2``.{{% /notice %}}
+directory is ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2``.{{% /notice %}}
 
 
 ## Using the environment
@@ -180,7 +180,7 @@ docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-enviro
 
 This invokes Docker, using the
 ``armswdev/sme2-learning-path:sme2-environment-v1``container
-image, and mounts the current working directory (the ``code-examples.git/learning-paths/cross-platform/sme2``)
+image, and mounts the current working directory (the ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2``)
 inside the container to ``/work``, then sets ``/work`` as the
 working directory and runs ``COMMAND ARGUMENTS`` in this environment.
 
