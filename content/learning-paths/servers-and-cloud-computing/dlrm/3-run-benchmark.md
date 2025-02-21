@@ -172,7 +172,7 @@ MLPerf Results Summary
 SUT name : PyFastSUT
 Scenario : Offline
 Mode     : PerformanceOnly
-Samples per second: 1434.8
+Samples per second: 1434.8 # Each sample tells probability of the user clicking a certain ad. Can be used by Amazon to pick the top 5 ads to recommend to a user
 Result is : VALID
   Min duration satisfied : Yes
   Min queries satisfied : Yes
@@ -214,3 +214,4 @@ performance_issue_same : 0
 performance_issue_same_index : 0
 performance_sample_count : 204800
 ```
+
