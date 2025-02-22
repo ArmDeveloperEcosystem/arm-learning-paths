@@ -73,10 +73,13 @@ The easiest way to download Hugo on Linux (Debian/Ubuntu) is using the package m
 ```bash
 sudo apt install hugo
 ```
+To install Hugo on macOS, first install Homebrew if it's not already installed, then use Homebrew to install Hugo:
 
-You can also download Hugo for other operating systems from the [releases page](https://github.com/gohugoio/hugo/releases). Hugo works on all major operating systems and architectures. 
+```bash
+brew install hugo
+```
 
-Recent versions of Hugo between v0.81.0 to v0.111.3 will work. 
+You can also download the latest version of Hugo for other operating systems from the [releases page](https://github.com/gohugoio/hugo/releases). Hugo works on all major operating systems and architectures. 
 
 For even more ways to install Hugo [check the documentation](https://gohugo.io/getting-started/installing).
 
