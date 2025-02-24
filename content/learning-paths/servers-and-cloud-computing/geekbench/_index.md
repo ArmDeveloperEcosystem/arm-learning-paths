@@ -27,6 +27,8 @@ test_images:
     - ubuntu:latest
 tools_software_languages:
     - Geekbench
+    - Runbook
+
 
 further_reading:
     - resource:

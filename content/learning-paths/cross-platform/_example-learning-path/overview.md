@@ -58,8 +58,6 @@ Learning Paths are about software development on Arm. Content is segmented into 
 
 Learning Paths include only public information. Do not include confidential information, trade secrets, unannounced products, or any other information which should not be on a public website. 
 
-Do not use an AI tool to generate either content or code when creating a Learning Path or Install Guide.
-
 ## Is there a way to ask about my Learning Path idea?
 
 You can use [GitHub Discussions](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/discussions) to ask questions about your Learning Path idea. You may want to do this if you are unsure about the usefulness of your concept or think it might already be covered by other content. You can also use it to determine the best category for your Learning Path. It is possible that a Learning Path belongs to multiple categories, so use GitHub discussions to ask. 

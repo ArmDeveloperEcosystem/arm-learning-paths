@@ -13,7 +13,7 @@ learning_objectives:
 prerequisites:
     - Install [Keil Studio](/install-guides/keilstudio_vs/) on your machine.
     - Install [µVision](/install-guides/mdk/) on your machine.
-    - Install [vcpkg](https://vcpkg.io/en/getting-started.html) for the command line flow.
+    - Install [uv2csolution](https://arm-software.github.io/MDK-Toolbox/01_installation/) for the command line flow.
     - The &micro;Vision project must use Arm Compiler 6 as the default toolchain. Arm Compiler 5 is not supported.
 
 author: Christopher Seidl

@@ -9,9 +9,9 @@ maintopic: true
 operatingsystems_filter:
 - Android: 2
 - Baremetal: 1
-- Linux: 116
-- macOS: 8
-- Windows: 13
+- Linux: 123
+- macOS: 9
+- Windows: 14
 pinned_modules:
 - module:
     name: Recommended getting started learning paths
@@ -19,12 +19,12 @@ pinned_modules:
     - providers
     - migration
 subjects_filter:
-- CI-CD: 4
+- CI-CD: 5
 - Containers and Virtualization: 28
 - Databases: 15
 - Libraries: 8
-- ML: 13
-- Performance and Architecture: 42
+- ML: 17
+- Performance and Architecture: 43
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -51,14 +51,14 @@ tools_software_languages_filter:
 - Bastion: 3
 - BOLT: 1
 - bpftool: 1
-- C: 4
+- C: 5
 - C#: 2
-- C++: 3
+- C++: 4
 - C/C++: 2
 - Capstone: 1
 - CCA: 5
 - Clair: 1
-- Clang: 10
+- Clang: 11
 - ClickBench: 1
 - ClickHouse: 1
 - CloudFormation: 1
@@ -70,16 +70,18 @@ tools_software_languages_filter:
 - Envoy: 2
 - Flink: 1
 - Fortran: 1
+- FunASR: 1
 - FVP: 4
+- G++: 1
 - GCC: 20
 - gdb: 1
 - Geekbench: 1
 - GenAI: 7
-- GitHub: 3
+- GitHub: 4
 - GitLab: 1
 - Glibc: 1
 - Go: 2
-- Google Axion: 1
+- Google Axion: 2
 - GoogleTest: 1
 - HammerDB: 1
 - InnoDB: 1
@@ -88,7 +90,7 @@ tools_software_languages_filter:
 - JAX: 1
 - Kafka: 1
 - Keras: 1
-- Kubernetes: 11
+- Kubernetes: 12
 - Lambda: 1
 - libbpf: 1
 - Linaro Forge: 1
@@ -97,6 +99,7 @@ tools_software_languages_filter:
 - LSE: 1
 - MariaDB: 1
 - Memcached: 2
+- ModelScope: 1
 - MongoDB: 2
 - mpi: 1
 - MySQL: 9
@@ -108,17 +111,19 @@ tools_software_languages_filter:
 - PAPI: 1
 - perf: 4
 - PostgreSQL: 4
-- Python: 15
-- PyTorch: 5
+- Python: 18
+- PyTorch: 6
 - RAG: 1
 - Redis: 3
 - Remote.It: 2
 - RME: 4
+- Runbook: 59
 - Rust: 2
 - snappy: 1
 - Snort3: 1
 - SQL: 7
 - Streamline CLI: 1
+- Streamlit: 1
 - Supervisor: 1
 - SVE: 3
 - SVE2: 1

@@ -31,6 +31,7 @@ operatingsystems:
 - Linux
 tools_software_languages:
 - snappy
+- Runbook
 
 further_reading:
     - resource:

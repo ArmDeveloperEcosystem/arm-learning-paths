@@ -39,6 +39,7 @@ tools_software_languages:
   - SVE
   - Coding
   - Intrinsics
+  - Runbook
 
 further_reading:
     - resource:
