@@ -117,3 +117,18 @@ msg = f'\nInferencing elapsed time: {seconds:4.2f} seconds\n'
 print(msg)
 
 ```
+
+## Use the Arm specific flags:
+
+Use the following flags to enable fast math GEMM kernels, Linux Transparent Huge Page (THP) allocations, logs to confirm kernel and set LRU cache capacity and OMP_NUM_THREADS to run the Whisper efficiently on Arm machines.
+
+```bash
+    export DNNL_DEFAULT_FPMATH_MODE=BF16
+    export THP_MEM_ALLOC_ENABLE=1
+    export LRU_CACHE_CAPACITY=1024
+    export OMP_NUM_THREADS=32
+    export DNNL_VERBOSE=1
+```
+{{% notice Note %}}
+BF16 support is merged into PyTorch versions greater than 2.3.0.
+{{% /notice %}}
