@@ -17,7 +17,7 @@ benefits:
 - They offer an opportunity to catch regressions.
 - They demonstrate how to use the library in practice.
 - They create opportunities for those new to the project to easily check their patches, and verify that the introduction of the new code has not created unintended negative changes.
-  
+
 You will notice that setting up testing precedes library code development.
 
 There are many unit testing frameworks available, and C++ is not short of them. See this [wikipedia
@@ -38,7 +38,38 @@ all external dependencies. It will be used by the main `CMakeLists.txt`.
 
 Create the file `external/CMakeLists.txt` with the following content:
 
-{{< include-code TXT "content/learning-paths/cross-platform/matrix/projects/chapter-2/external/CMakeLists.txt" >}}
+```TXT
+cmake_minimum_required(VERSION 3.6)
+
+project(external LANGUAGES CXX)
+
+# Get the functionality to configure, build and install external project
+# from CMake module 'ExternalProject'.
+include(ExternalProject)
+
+# Use the same compiler, build type and instalation directory than those
+# from our caller.
+set(EXTERNAL_PROJECT_CMAKE_ARGS
+      -DCMAKE_CXX_COMPILER:PATH=${CMAKE_CXX_COMPILER}
+      -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
+      -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX})
+
+# Add 'googletext' as an external project, that will be cloned with git,
+# from the official googletest repository, at version v1.14.
+# We ask for a shallow clone, which is a clone with only the revision
+# we are interested in rather than googletest's full history ---
+# this makes the clone much faster (less data traffic), and uses much
+# less disk space ; furthermore, as we are not developping googletest
+# but just merely using it, we don't need thre full history. It will be
+# built and installed with our build configuration passed with CMAKE_ARGS.
+ExternalProject_Add(googletest
+    PREFIX "external"
+    GIT_REPOSITORY "https://github.com/google/googletest"
+    GIT_TAG "v1.14.0"
+    GIT_SHALLOW TRUE
+    CMAKE_ARGS ${EXTERNAL_PROJECT_CMAKE_ARGS}
+)
+```
 
 You might notice a new CMake feature: variables. Variables start with the `$` character and have a name inserted between curly braces. A CMake variable can be set by the CMake itself, or by the user, and they can be modified or used as they are.
 
@@ -235,11 +266,33 @@ several files inside the `tests/` directory.
 
 Create the top-level test in `tests/main.cpp` and paste the following code into the file:
 
-{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-2/tests/main.cpp" >}}
+```CPP
+#include "gtest/gtest.h"
+
+using namespace testing;
+
+int main(int argc, char **argv) {
+    InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
+```
 
 Create `tests/Version.cpp` and add the `getVersion` unit test into the file:
 
-{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-2/tests/Version.cpp" >}}
+```CPP
+#include "Matrix/Matrix.h"
+
+#include "gtest/gtest.h"
+
+using namespace MatComp;
+
+TEST(Matrix, getVersion) {
+    const Version &version = getVersion();
+    EXPECT_EQ(version.major, 0);
+    EXPECT_EQ(version.minor, 1);
+    EXPECT_EQ(version.patch, 0);
+}
+```
 
 This test invokes `getVersion` and checks that the `major`, `minor` and `patch` levels match the expected values.
 
@@ -325,3 +378,7 @@ Matrix/
 CMake makes it easy to use GoogleTest as an external project. Adding unit tests as you go is now easy.
 
 You have created the unit testing environment for your Matrix library and added a test. The infrastructure is now in place to implement the core of the Matrix processing library.
+
+You can refer to this chapter source code in
+`code-examples/learning-paths/cross-platform/matrix/chapter-2` in the archive that
+you have downloaded earlier.
