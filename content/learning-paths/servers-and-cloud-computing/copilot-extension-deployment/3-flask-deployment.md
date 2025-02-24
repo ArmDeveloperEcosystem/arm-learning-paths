@@ -49,7 +49,7 @@ Run the simple extension:
 python ./simple-extension.py
 ```
 
-You should now be able to navigate to your API subdomain from any browser and see
+You should now be able to navigate to your API subdomain from any browser and see:
 
 ```text
 "Hello! Welcome to the example GitHub Copilot Extension in Python!"
