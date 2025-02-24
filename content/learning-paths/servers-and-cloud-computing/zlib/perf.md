@@ -29,7 +29,7 @@ The previous section explained how to run a Python program to compress large fil
 Continue with the same `zip.py` program as the previous section. Make sure to start with `zip.py` and `largefile` available. Confirm the application is working and `largefile.gz` is created when it is run.
 
 ```bash
-python ./zip.py
+python zip.py
 ```
 
 ## Run the example with perf using the default zlib
@@ -40,7 +40,7 @@ Run with the default `zlib` and time the execution.
 perf stat python ./zip.py
 ```
 
-The `perf stat` command will display counts of a few selected PMU events. 
+The `perf stat` command will display counts of a few selected PMU events.
 
 ## Use perf record and generate the flame graph
 
@@ -50,7 +50,7 @@ You can also record the application activity with `perf record`. `-F` specifies 
 perf record -F 99 -g python ./zip.py
 ```
 
-To visualize the results, you can generate an image with `FlameGraph`. Install it with: 
+To visualize the results, you can generate an image with `FlameGraph`. Install it with:
 
 ```bash
 sudo apt install git -y
@@ -77,9 +77,9 @@ Note that the `zlib` and the `deflate` function are taking significant time.
 
 ## Run the example again with perf stat and zlib-cloudflare
 
-This time use `LD_PRELOAD` to change to `zlib-cloudflare` instead and check the performance difference. 
+This time use `LD_PRELOAD` to change to `zlib-cloudflare` instead and check the performance difference.
 
-Adjust the path to the Cloudflare `libz.so` as needed. 
+Adjust the path to the Cloudflare `libz.so` as needed.
 
 ```console
 LD_PRELOAD=/usr/local/lib/libz.so  perf stat python ./zip.py

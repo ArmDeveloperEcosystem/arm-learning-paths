@@ -5,7 +5,7 @@ title: "Measure ML Inference Performance on Arm servers"
 weight: 2
 
 layout: "learningpathall"
- 
+
 
 ---
 
@@ -34,11 +34,12 @@ sudo pip install pybind11
 ```
 ## Clone the MLPerf Inference Benchmarks Repo for Image Classification and Object Detection
 
-You will use the MLPerf Inference benchmark suite from MLCommons to benchmark models for a widely-used ML use-case such as Image Classification and Object Detection. 
+You will use the MLPerf Inference benchmark suite from MLCommons to benchmark models for a widely-used ML use-case such as Image Classification and Object Detection.
 
 Start by cloning the repository below:
 
 ```bash
+cd $HOME
 git clone --recurse-submodules https://github.com/mlcommons/inference.git mlperf_inference
 ```
 
@@ -72,7 +73,7 @@ export ONEDNN_DEFAULT_FPMATH_MODE=BF16
 ```
 AWS Graviton3 instances are the first instances with BF16 support.
 
-## Download the ML Model 
+## Download the ML Model
 
 Next, download the ML model you want to run the benchmark with. In this example, download the `resnet50-v1.5` model.
 
@@ -80,7 +81,7 @@ Next, download the ML model you want to run the benchmark with. In this example,
 wget -q https://zenodo.org/record/2535873/files/resnet50_v1.pb
 ```
 
-## Download the dataset 
+## Download the dataset
 
 You need to download a dataset for the ML model you want to benchmark. The imagenet2012 validation dataset is best used with this ML model. You can [download the dataset](http://image-net.org/challenges/LSVRC/2012/) after you register.
 
@@ -101,7 +102,7 @@ export DATA_DIR=`pwd`/fake_imagenet
 
 ## Now run the benchmark on your Arm machine
 
-You can now launch the benchmark on your Arm machine, using the command below: 
+You can now launch the benchmark on your Arm machine, using the command below:
 
 ```bash { env="TF_ENABLE_ONEDNN_OPTS=1;ONEDNN_DEFAULT_FPMATH_MODE=BF16;MODEL_DIR=~/mlperf_inference/vision/classification_and_detection/;DATA_DIR=~/mlperf_inference/vision/classification_and_detection/fake_imagenet", cwd="~/mlperf_inference/vision/classification_and_detection/" }
 ./run_local.sh tf resnet50 cpu
@@ -121,7 +122,7 @@ device is one of [cpu|gpu]
 
 For all other options, run help as shown below:
 
-```bash { env="TF_ENABLE_ONEDNN_OPTS=1;ONEDNN_DEFAULT_FPMATH_MODE=BF16;MODEL_DIR=~/mlperf_inference/vision/classification_and_detection/;DATA_DIR=~/mlperf_inference/vision/classification_and_detection/fake_imagenet", cwd="~/mlperf_inference/vision/classification_and_detection/" }
+```console
 ./run_local.sh --help
 ```
 
