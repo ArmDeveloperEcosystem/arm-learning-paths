@@ -65,6 +65,7 @@ bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scrip
 Run the command below to add the `oci` command to your search path:
 
 ```bash { target="ubuntu:latest" }
+echo 'export PATH=$HOME/bin:$PATH' >> $HOME/.bashrc
 source $HOME/.bashrc
 ```
 

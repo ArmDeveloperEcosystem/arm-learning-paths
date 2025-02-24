@@ -65,12 +65,12 @@ To install the most common development tools use the commands below. If the mach
 
 ```bash { target="fedora:latest" }
 sudo dnf update -y
-sudo dnf group install 'Development Tools' -y
+sudo dnf group install "development-tools" -y
 ```
 If `sudo` is not available become _root_ and omit the `sudo`.
 ```console
 dnf update -y
-dnf group install 'Development Tools' -y
+sudo dnf group install "development-tools" -y
 ```
 ## Setting up product license
 

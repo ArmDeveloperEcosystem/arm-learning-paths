@@ -28,7 +28,7 @@ The previous section explained how to run a Python program to compress large fil
 
 Continue with the same `zip.py` program as the previous section. Make sure to start with `zip.py` and `largefile` available. Confirm the application is working and `largefile.gz` is created when it is run.
 
-```bash
+```console
 python zip.py
 ```
 

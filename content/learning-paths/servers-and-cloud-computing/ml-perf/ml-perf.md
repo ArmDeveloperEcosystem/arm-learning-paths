@@ -48,8 +48,10 @@ git clone --recurse-submodules https://github.com/mlcommons/inference.git mlperf
 Next, build and install the MLPerf Inference Benchmark for the Image Classification and Object Detection use case using the steps below:
 
 ```bash
-cd mlperf_inference/loadgen/
+cd $HOME/mlperf_inference/loadgen/
 CFLAGS="-std=c++14" sudo python3 setup.py develop --user
+```
+```console
 cd ../vision/classification_and_detection/
 sudo python3 setup.py develop
 ```
@@ -77,7 +79,7 @@ AWS Graviton3 instances are the first instances with BF16 support.
 
 Next, download the ML model you want to run the benchmark with. In this example, download the `resnet50-v1.5` model.
 
-```bash { cwd="~/mlperf_inference/vision/classification_and_detection/" }
+```bash { cwd="$HOME/mlperf_inference/vision/classification_and_detection/" }
 wget -q https://zenodo.org/record/2535873/files/resnet50_v1.pb
 ```
 
@@ -87,7 +89,7 @@ You need to download a dataset for the ML model you want to benchmark. The image
 
 For this example, you generate a fake image dataset using the tooling included in the repo. Use the command below:
 
-```bash { cwd="~/mlperf_inference/vision/classification_and_detection/" }
+```bash { cwd="$HOME/mlperf_inference/vision/classification_and_detection/" }
 tools/make_fake_imagenet.sh
 ```
 
@@ -104,7 +106,7 @@ export DATA_DIR=`pwd`/fake_imagenet
 
 You can now launch the benchmark on your Arm machine, using the command below:
 
-```bash { env="TF_ENABLE_ONEDNN_OPTS=1;ONEDNN_DEFAULT_FPMATH_MODE=BF16;MODEL_DIR=~/mlperf_inference/vision/classification_and_detection/;DATA_DIR=~/mlperf_inference/vision/classification_and_detection/fake_imagenet", cwd="~/mlperf_inference/vision/classification_and_detection/" }
+```bash { env="TF_ENABLE_ONEDNN_OPTS=1;ONEDNN_DEFAULT_FPMATH_MODE=BF16;MODEL_DIR=$HOME/mlperf_inference/vision/classification_and_detection/;DATA_DIR=$HOME/mlperf_inference/vision/classification_and_detection/fake_imagenet", cwd="$HOME/mlperf_inference/vision/classification_and_detection/" }
 ./run_local.sh tf resnet50 cpu
 ```
 
@@ -122,7 +124,7 @@ device is one of [cpu|gpu]
 
 For all other options, run help as shown below:
 
-```console
+```bash { env="TF_ENABLE_ONEDNN_OPTS=1;ONEDNN_DEFAULT_FPMATH_MODE=BF16;MODEL_DIR=$HOME/mlperf_inference/vision/classification_and_detection/;DATA_DIR=$HOME/mlperf_inference/vision/classification_and_detection/fake_imagenet", cwd="$HOME/mlperf_inference/vision/classification_and_detection/" }
 ./run_local.sh --help
 ```
 
