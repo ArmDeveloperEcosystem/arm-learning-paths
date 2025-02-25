@@ -160,7 +160,7 @@ function showPopupPostConnection(message,type,connection_status=false) {
     
                 // When the recording stops, create an audio file
                 mediaRecorder.onstop = () => {
-                    const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
                     const audioUrl = URL.createObjectURL(audioBlob);
                     // Convert and store
                     blobToBase64(audioBlob, (base64) => {
