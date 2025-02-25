@@ -62,7 +62,28 @@ Open `lib/Matrix/Matrix.cpp` and include at the top of the file:
 
 Add `die`'s body as shown below:
 
-{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-3/lib/Matrix/Matrix.cpp" >}}
+```CPP
+#include "Matrix/Matrix.h"
+
+#include <cstdlib>
+#include <iostream>
+
+namespace {
+const MatComp::Version version = {.major = 0, .minor = 1, .patch = 0};
+}
+
+namespace MatComp {
+
+const Version &getVersion() { return version; }
+
+void die(const char *fileName, size_t lineNumber, const char *reason) {
+    std::cerr << "Fatal: " << reason << " from " << fileName << ':'
+              << lineNumber << '\n';
+    exit(EXIT_FAILURE);
+}
+
+} // namespace MatComp
+```
 
 At this stage, the project should still build and compile, try it to confirm:
 
@@ -1045,3 +1066,7 @@ After this rather long exercise, you have a minimalistic, yet fully-functional c
 Modern C++ enables you to express move and copy semantics, and to use smart pointers to make memory management easy.
 
 The compiler also catch a large number of type or misuse errors. With this core functionality in place, you have all you need to implement matrix operations in the next section.
+
+You can refer to this chapter source code in
+`code-examples/learning-paths/cross-platform/matrix/chapter-3` in the archive that
+you have downloaded earlier.
