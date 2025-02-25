@@ -5,7 +5,7 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## What AWS Services do I need?
+## Which AWS Services do I need?
 
 In [the first GitHub Copilot Extension Learning Path](learning-paths/servers-and-cloud-computing/gh-copilot-simple) you ran a GitHub Copilot Extension on a single Linux computer, with the public URL provided by an ngrok tunnel to your localhost.
 
@@ -21,7 +21,9 @@ The following sections walk you through setting up all these services in AWS CDK
 
 ## Imports
 
-You will have an auto-generated folder called `copilot_extension_deployment` within the `copilot-extension-deployment` that you previously created. It will contain a file called `copilot_extension_deployment_stack.py`. Open this file, and add the following import lines:
+Inside the `copilot-extension-deployment` directory, there is an auto-generated folder named `copilot_extension_deployment` that contains a file called `copilot_extension_deployment_stack.py`.
+
+Open this file, and add the following import lines:
 
 ```python
 from aws_cdk import (
@@ -37,11 +39,13 @@ from aws_cdk import (
 )
 ```
 
-Then, within the generated class (`class CopilotExtensionDeploymentStack(Stack):`) in the same file, add all the AWS services needed for your Extension deployment as described in the following sections.
+Then, within the generated class (`class CopilotExtensionDeploymentStack(Stack):`), incorporate all the AWS services you need for your Extension deployment as described below.
 
 ## Virtual Private Cloud (VPC)
 
-The code below will create a VPC with a public and private subnet. These subnets have a CIDR mask of 24, which means you'll get 256 total IPs in each subnet. If you need more than this, adjust accordingly.
+The code below creates a VPC with one public subnet and one private subnet. Each subnet has a CIDR mask of 24, which means you will get 256 total IPs in each subnet. 
+
+If you need more than this, adjust accordingly:
 
 ```python
 vpc = ec2.Vpc(self, "FlaskStackVPC",
@@ -61,7 +65,7 @@ vpc = ec2.Vpc(self, "FlaskStackVPC",
             )
 ```
 
-You'll also need a security group for the EC2 instances:
+You also need a security group for your EC2 instances:
 
 ```python
 security_group = ec2.SecurityGroup(self, "EC2SecurityGroup",
@@ -73,9 +77,11 @@ security_group = ec2.SecurityGroup(self, "EC2SecurityGroup",
 
 ## EC2
 
-Once you have your VPC templates set up, you can use them in your EC2 templates.
+Once you have set up your VPC templates, you can use them in your EC2 templates.
 
-First, create a User Data script for all the EC2 templates that will launch in your auto-scaling group. This will install an SSM agent and the AWS CLI, for later convenience:
+First, create a User Data script for all the EC2 templates that will launch in your auto-scaling group. 
+
+This installs an SSM agent and the AWS CLI, for future convenience:
 
 ```python
 user_data = ec2.UserData.for_linux()
@@ -94,7 +100,7 @@ user_data.add_commands(
 )
 ```
 
-After the launch template, you'll want to get the latest Ubuntu 24.04 Arm AMI:
+After the launch template, get the latest Ubuntu 24.04 Arm AMI:
 
 ```python
 ubuntu_arm_ami = ec2.MachineImage.lookup(
@@ -104,7 +110,7 @@ ubuntu_arm_ami = ec2.MachineImage.lookup(
 )
 ```
 
-Next create an IAM role that will allow your EC2 instances to use the SSM agent, write logs to CloudWatch, and access AWS S3:
+Next, create an IAM role that allows your EC2 instances to use the SSM agent, write logs to CloudWatch, and access AWS S3:
 
 ```Python
 ec2_role_name = "Proj-Flask-LLM-ALB-EC2-Role"
@@ -157,11 +163,11 @@ asg = autoscaling.AutoScalingGroup(self, "ASG",
                                     )
 ```
 
-As you can see, you'll want the instances inside your private subnet for security, and you only need one instance to begin with. You can scale manually later on, or create an autoscaling function, depending on your needs.
+Use a private subnet for security, and start with a single instance. You can scale manually later on, or create an autoscaling function, depending on your needs.
 
 ## Application Load Balancer (ALB)
 
-First, create an ALB using the VPC resources you previously specified, within the PUBLIC subnet:
+First, create an ALB using the VPC resources that you previously specified, within the `PUBLIC` subnet:
 
 ```Python
 alb = elbv2.ApplicationLoadBalancer(self, "ALB",
@@ -171,9 +177,11 @@ alb = elbv2.ApplicationLoadBalancer(self, "ALB",
                                 )
 ```
 
-Next add a custom certificate. You'll need to generate this certificate beforehand. If you want to do this from the AWS console, see [Getting Started with AWS Certificate Manager](https://aws.amazon.com/certificate-manager/getting-started/).
+Next, add a custom certificate. Make sure you generate the certificate in advance. 
 
-Replace `ACM_CERTIFICATE_ARN` with the ARN of your newly created certificate:
+If you want to do this from the AWS console, see [Getting Started with AWS Certificate Manager](https://aws.amazon.com/certificate-manager/getting-started/).
+
+Then replace `ACM_CERTIFICATE_ARN` with the ARN of your newly-created certificate:
 
 ```Python
 certificate = acm.Certificate.from_certificate_arn(
@@ -183,7 +191,9 @@ certificate = acm.Certificate.from_certificate_arn(
 )
 ```
 
-Next configure a listener for the ALB that uses the certificate and adds the ASG as a target, listening on port 8080 (this is where you'll serve your Flask app):
+Next, configure a listener for the ALB that uses the certificate and adds the ASG as a target, listening on port 8080. 
+
+This is where you will serve your Flask app:
 
 ```Python
 # Add a listener to the ALB with HTTPS
@@ -222,7 +232,11 @@ route53.ARecord(self, "ALBDnsRecord",
 
 ## How do I deploy?
 
-Once you have added all of the sections above to your `copilot_extension_deployment_stack.py` file, you can deploy your services to AWS. You must first ensure that your CDK environment in AWS is 'bootstrapped', which means that the AWS CDK has created all the resources it needs to use when deploying (IAM roles, an ECR repo for images, and buckets for artifacts). The bootstrap process is a one-time deal, and can generally be done by running:
+After you have added all the required sections to your `copilot_extension_deployment_stack.py` file, you can deploy your services to AWS. 
+
+Before you do, make sure your AWS environment is *bootstrapped*, meaning that the AWS CDK has created all necessary resources, such as IAM roles, an ECR repository, and artifact buckets.
+
+This bootstrap process is typically a one-time setup, and can be run by entering:
 
 ```bash
 cdk bootstrap aws://123456789012/us-east-1
@@ -231,13 +245,13 @@ cdk bootstrap aws://123456789012/us-east-1
 Replace the AWS account and region with your account and region.
 
 {{% notice Note %}}
-if your organization has governance rules in place regarding naming conventions you'll need a custom bootstrap yaml. To learn more about custom bootstrapping, see the [AWS guide  on Bootstrapping your environment for use with the AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping-env.html).
+If your organization has governance rules in place regarding naming conventions you'll need a custom bootstrap yaml. To learn more about custom bootstrapping, see the [AWS guide  on Bootstrapping your environment for use with the AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping-env.html).
 {{% /notice %}}
 
-Once your environment has been bootstrapped, you can run:
+After bootstrapping your environment, navigate to the directory containing your stack file and run:
 
 ```bash
 cdk deploy
 ```
 
-from within the directory that includes your stack file. This deployment will take a few minutes, as CloudFormation deploys your resources.
+This deployment might take a few minutes as CloudFormation deploys your resources.

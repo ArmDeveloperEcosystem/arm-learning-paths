@@ -26,12 +26,12 @@ aws ssm start-session --target [your instance ID]
 
 You can now follow the steps in "[How can I create my own private GitHub Copilot Extension?](http://localhost:1313/learning-paths/servers-and-cloud-computing/gh-copilot-simple/run-python/)" to create your Flask app, set up a Python virtual environment, and install the necessary packages.
 
-The only two changes that you need to make are the following:
+The only two changes that you need to make are:
 
 * Add a health check endpoint for the Application Load Balancer (ALB).
 * Run your app on `0.0.0.0` port `8080`, which the ALB is configured to listen on.
 
-First, add the following endpoint to your main flask file:
+First, add the following endpoint to your main Flask file:
 
 ```Python
 @app.route('/health')
