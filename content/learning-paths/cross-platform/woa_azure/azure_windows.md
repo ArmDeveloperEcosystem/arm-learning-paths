@@ -6,30 +6,58 @@ weight: 2 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
+
 ---
-You will learn how to create a Windows on Arm virtual machine in the Azure cloud.
+Upon completing this learning path, you will learn how to create a Windows on Arm virtual machine in the Azure cloud.
 
 {{% notice Note %}}
 These same instructions can be used to deploy a Linux image on the Arm Virtual Machine. Simply select a Linux distribution instead of Windows.
 {{% /notice %}}
 
-## Create Windows on Arm virtual machine
+## Create a Windows on Arm Virtual Machine
 
-[Microsoft Azure](https://portal.azure.com/#home) is a cloud computing platform. You can log into Azure using either your personal subsciption or your organization's subscription.
+[Microsoft Azure](https://portal.azure.com/#home) is Microsoft's cloud computing platform. You can log into Azure using either your personal subscription or your organization's subscription.
 
-Start by locating [Virtual Machines](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Compute%2FVirtualMachines) from the list of `Azure Services`, then click `Create` > `Azure virtual machine`.
+To begin:
 
-You will be presented with the `Create a virtual machine` dialog. On this dialog, first select your `Subscription` and `Resource group`. Then, enter a `Virtual Machine name` and select the `Region` in which you want to create your Windows on Arm Virtual machine.  
+1. Login to your Azure account.
+2. From the Azure search bar, begin typing the word "virtual machines" until the [Virtual Machines](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Compute%2FVirtualMachines) service appears as a selection. 
+
+![Search and Select VMs](Images/search_and_click_vm.png)
+
+3. Click on Virtual Machines.
+
+The Virtual Machines page appears.
+
+4. Click `Create` > `Azure virtual machine`.
+
+![Create an Azure VM](Images/click_create_vm.png)
+
+The `Create a virtual machine` page appears.
+
+5. Select a valid `Subscription`.
+6. Select a `Resource group` - Optional; you may leave blank.
+7. Enter a `Virtual Machine name` - We'll call it armtest-0 for this example.
+8. Select a `Region` - For best performance, select the region closest to you.
+9. Select `Standard` for `Security Type`.
+10. Select `See all images` - You can find this under the `Image` dropdown.
+
+![Config the VM Part 1](Images/config-vm-1.png)
+
+The `Marketplace` page appears.
+
+11. Enter `windows 11` into the search bar and press enter.
+12. Click the `Image Type` filter and select `Arm64`.
+
+![Select ARM images](Images/image_type.png)
+
+You are  presented with all available Arm VM images.
+
+13. From the drop-down at the bottom of the `Microsoft Windows 11 Preview arm64` tile, select `Windows 11 Professional 24H2 - Arm64`.
+
+![img2](Images/select_24h2.png)
 
 Next, for `VM Architecture` select `Arm64`.
-
-Then click on `See all images` (under `Image`) and filter `Image Type` for `Arm64` as show in the image below:
-
-![img1](Images/azure1.png)
-
-You will be presented with all the VM images that are available for Arm. Select `Windows 11 Professional - Arm64` from the drop-down menu under `Microsoft Windows 11` as shown below.
-
-![img2](Images/azure2.png)
 
 You will then be returned to the `Create a virtual machine` dialog screen with your selections. Change the `Security type` setting to `Standard`. 
 
