@@ -49,37 +49,73 @@ The `Marketplace` page appears.
 11. Enter `windows 11` into the search bar and press enter.
 12. Click the `Image Type` filter and select `Arm64`.
 
-![Select ARM images](Images/image_type.png)
+![Select Arm images](Images/image_type.png)
 
 You are  presented with all available Arm VM images.
+
+{{% notice Note%}}
+Note all the different Arm images (Windows and others) Azure provides; feel free to experiment with different Arm images from the Azure Marketplace upon completion of this learning path.
+{{% /notice %}}
 
 13. From the drop-down at the bottom of the `Microsoft Windows 11 Preview arm64` tile, select `Windows 11 Professional 24H2 - Arm64`.
 
 ![img2](Images/select_24h2.png)
 
-Next, for `VM Architecture` select `Arm64`.
+Upon selection, you are returned to the `Create a virtual machine` screen with your architecture set to `Arm64` and your image set to `Windows 11 Professional, version 24H2 - ARM64 Gen2`.
 
-You will then be returned to the `Create a virtual machine` dialog screen with your selections. Change the `Security type` setting to `Standard`. 
+14. For `Size`, select `Standard_D2ps_v5 - 2 vcpus, 8 GiB memory`.
 
-Under the `Administrator account` section enter a `Username` and `Password` in the fields provided. You will use these credentials to access your Windows virtual machine.
+{{% notice Note%}}
+The VM size suggested for this learning path is enough to demonstrate installing and connecting to Windows on Arm in the Azure cloud, but may need to be adjusted for your specific workload.  For more information rightsizing your VM instances, please see [Rightsize to maximize your cloud investment with Microsoft Azure](https://azure.microsoft.com/en-us/blog/rightsize-to-maximize-your-cloud-investment-with-microsoft-azure/).   
+{{% /notice %}}
 
-In the `Inbound port rules` section of the dialog, select `Allow selected ports` and choose `RDP (3389)` from the drop-down menu.
+15. For `Username` and `Password`, provide values which will be used to login to the Windows virtual machine.
 
-Finally, under the `Licensing` section you will need to confirm that you have an eligible Windows 10/11 license with multi-tenant hosting rights. To learn more about the licensing before you select this checkbox read this [documentation](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/windows-desktop-multitenant-hosting-deployment).
+16. For `Inbound port rules` > `Public inbound ports`, select `Allow selected ports` and choose `RDP (3389)` from the drop-down menu.
 
-Leaving other settings as default, click `Review + create`.
+17. For `Licensing` confirm that you have an eligible Windows 10/11 license with multi-tenant hosting rights. To learn more about this checkbox, please visit [documentation](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/windows-desktop-multitenant-hosting-deployment).
 
-All your selections will be validated and you can click `Create` to launch your Windows on Arm virtual machine.
+18. Leave all other settings as default.
 
-Once the deployment of your virtual machine is complete, click on `Go to Resource`. From here you will be able to view the `Public IP address` of your virtual machine which you will use in the next step to connect to your VM instance. 
+19. Click `Review + create`.
+
+![Review and Create](Images/review_create.png)
+
+The validation and confirmation page appears.
+
+20. Upon review and validation of your settings, select `Create` to launch your Windows on Arm virtual machine.
+
+![Create](Images/create.png)
+
+At this point, Azure will deploy your new Windows on Arm instance to the Azure cloud.  This may take a few moments to complete.
+
+![Deploy](Images/deploying.png)
+
+Upon completions, your screen will look similar to:
+
+![Deploy Complete](Images/deploy_complete.png)
+
+
+21. Click `Go to Resource`.
+
+From this resource page, note the `Public IP address` of your virtual machine, as you will use in the next step to connect to your VM instance. 
+
+
+![Public IP](Images/public_ip.png)
 
 ## Connect to your Windows on Arm VM
 
-On your local host PC, launch the `Remote Desktop Connection` application.
+1. On your local host PC, launch your RDP client application.
 
-Enter the `Public IP Address` of the Windows VM as the `Computer` to be connected to.
+{{% notice Note%}}
+In our example, we use the `Remote Desktop Connection` as our RDP client, but you may choose any RDP client to use.   
+{{% /notice %}}
 
-Next, username (set earlier while creating the VM instance), and when prompted the password, and you will connect.
+2. Enter the `Public IP Address` you wrote down earlier as the `Computer` or remote host/IP to connect to.
+
+3. Enter the username and password you set earlier while creating the VM instance.
+
+4. Click connect.
 
 ![RDP #center](Images/rdp.png)
 
