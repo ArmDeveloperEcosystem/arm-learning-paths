@@ -1150,3 +1150,7 @@ built and used.
 The testing could - and *should* - go much deeper, as a number of corner cases have not been covered.
 
 You can continue to add more functions, and more tests.
+
+You can refer to this chapter source code in
+`code-examples/learning-paths/cross-platform/matrix/chapter-4` in the archive that
+you have downloaded earlier.
