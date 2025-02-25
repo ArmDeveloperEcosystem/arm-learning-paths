@@ -126,7 +126,7 @@ ec2_role = iam.Role(self, "EC2Role",
                     )
 ```
 
-Now pull all these elements together in the launch template that the ASG will use:
+Now pull all these elements together in the launch template that the ASG uses:
 
 ```Python
 launch_template = ec2.LaunchTemplate(self, "LaunchTemplate",
