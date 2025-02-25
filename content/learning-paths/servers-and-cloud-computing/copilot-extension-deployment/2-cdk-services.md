@@ -245,7 +245,7 @@ cdk bootstrap aws://123456789012/us-east-1
 Replace the AWS account and region with your account and region.
 
 {{% notice Note %}}
-If your organization has governance rules in place regarding naming conventions you'll need a custom bootstrap yaml. To learn more about custom bootstrapping, see the [AWS guide  on Bootstrapping your environment for use with the AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping-env.html).
+If your organization has governance rules in place regarding naming conventions you will need a custom bootstrap yaml. To learn more about custom bootstrapping, see the [AWS guide  on Bootstrapping your environment for use with the AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping-env.html).
 {{% /notice %}}
 
 After bootstrapping your environment, navigate to the directory containing your stack file and run:
