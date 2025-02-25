@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 ## Which AWS Services do I need?
 
-In the first GitHub Copilot Extension Learning Path, [Build a GitHub Copilot Extension in Python] (learning-paths/servers-and-cloud-computing/gh-copilot-simple) you ran a GitHub Copilot Extension on a single Linux computer, with the public URL provided by an ngrok tunnel to your localhost.
+In the first GitHub Copilot Extension Learning Path, [Build a GitHub Copilot Extension in Python](learning-paths/servers-and-cloud-computing/gh-copilot-simple) you ran a GitHub Copilot Extension on a single Linux computer, with the public URL provided by an ngrok tunnel to your localhost.
 
 For a production environment, you require:
 
