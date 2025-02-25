@@ -9,7 +9,7 @@ layout: learningpathall
 ## What is AWS CDK?
 
 AWS CDK is an AWS-native Infrastructure-as-Code (IaC) tool that supports cloud engineers writing IaC templates in multiple programming languages.
-Regardless of the language you choose, your CDK code eventually transpiles to TypeScript, which generates the CloudFormation templates required to deploy the specified resources.
+Regardless of the language that you choose, your CDK code eventually transpiles to TypeScript, which generates the CloudFormation templates required to deploy the specified resources.
 
 This Learning Path uses the Python flavor of AWS CDK, because the accompanying Copilot Extension  is also written in Python. Writing both IaC and application code in the same language can be especially helpful for teams without dedicated platform engineers.
 
