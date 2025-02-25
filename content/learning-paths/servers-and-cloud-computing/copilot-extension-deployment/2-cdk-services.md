@@ -5,11 +5,11 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## What AWS services do I need?
+## What AWS Services do I need?
 
-In [the first GitHub Copilot Extension Learning Path](learning-paths/servers-and-cloud-computing/gh-copilot-simple) you ran a GitHub Copilot Extension from a single Linux computer, with the public URL being provided by an ngrok tunnel to your localhost.
+In [the first GitHub Copilot Extension Learning Path](learning-paths/servers-and-cloud-computing/gh-copilot-simple) you ran a GitHub Copilot Extension on a single Linux computer, with the public URL provided by an ngrok tunnel to your localhost.
 
-In a production environment, you require:
+For a production environment, you require:
 
 * A domain that you own with DNS settings under your management, for example, through AWS Route 53.
 * A load balancer (AWS ALB).
