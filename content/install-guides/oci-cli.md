@@ -54,6 +54,7 @@ To run an an automated install with default values run:
 ```bash { target="ubuntu:latest" }
 curl -o install.sh https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
 bash ./install.sh --accept-all-defaults
+echo 'export PATH=$HOME/bin:$PATH' >> $HOME/.bashrc
 ```
 
 To run an interactive install that allows you to change default values run:
@@ -65,7 +66,6 @@ bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scrip
 Run the command below to add the `oci` command to your search path:
 
 ```bash { target="ubuntu:latest" }
-echo 'export PATH=$HOME/bin:$PATH' >> $HOME/.bashrc
 source $HOME/.bashrc
 ```
 

@@ -50,8 +50,6 @@ Next, build and install the MLPerf Inference Benchmark for the Image Classificat
 ```bash
 cd $HOME/mlperf_inference/loadgen/
 CFLAGS="-std=c++14" sudo python3 setup.py develop --user
-```
-```console
 cd ../vision/classification_and_detection/
 sudo python3 setup.py develop
 ```
