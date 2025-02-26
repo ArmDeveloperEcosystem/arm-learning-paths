@@ -29,6 +29,8 @@ test_status:
     - passed
 tools_software_languages:
     - Geekbench
+    - Runbook
+
 
 further_reading:
     - resource:

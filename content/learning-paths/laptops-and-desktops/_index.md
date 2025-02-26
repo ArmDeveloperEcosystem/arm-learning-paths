@@ -63,6 +63,7 @@ tools_software_languages_filter:
 - Qt: 2
 - Remote.It: 1
 - RME: 1
+- Runbook: 16
 - Rust: 2
 - SVE: 1
 - SVE2: 1
