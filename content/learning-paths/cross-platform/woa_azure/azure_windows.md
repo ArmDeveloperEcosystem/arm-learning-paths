@@ -25,7 +25,7 @@ To begin:
 
 ![Search and Select VMs](Images/search_and_click_vm.png)
 
-3. Click on Virtual Machines.
+3. Select `Virtual Machines`.
 
 The Virtual Machines page appears.
 
@@ -66,7 +66,7 @@ Upon selection, you are returned to the `Create a virtual machine` screen with y
 14. For `Size`, select `Standard_D2ps_v5 - 2 vcpus, 8 GiB memory`.
 
 {{% notice Note%}}
-The VM size suggested for this learning path is enough to demonstrate installing and connecting to Windows on Arm in the Azure cloud, but may need to be adjusted for your specific workload.  For more information rightsizing your VM instances, please see [Rightsize to maximize your cloud investment with Microsoft Azure](https://azure.microsoft.com/en-us/blog/rightsize-to-maximize-your-cloud-investment-with-microsoft-azure/).   
+The VM size suggested for this learning path is enough to demonstrate Windows on Arm in the Azure cloud, but may need to be adjusted to support other workloads.  For more information rightsizing your VM instances, please see [Rightsize to maximize your cloud investment with Microsoft Azure](https://azure.microsoft.com/en-us/blog/rightsize-to-maximize-your-cloud-investment-with-microsoft-azure/).   
 {{% /notice %}}
 
 15. For `Username` and `Password`, provide values which will be used to login to the Windows virtual machine.
@@ -91,7 +91,7 @@ At this point, Azure will deploy your new Windows on Arm instance to the Azure c
 
 ![Deploy](Images/deploying.png)
 
-Upon completions, your screen will look similar to:
+Upon completion, your screen will look similar to:
 
 ![Deploy Complete](Images/deploy_complete.png)
 
@@ -108,7 +108,7 @@ From this resource page, note the `Public IP address` of your virtual machine, a
 1. On your local host PC, launch your RDP client application.
 
 {{% notice Note%}}
-In our example, we use the `Remote Desktop Connection` as our RDP client, but you may choose any RDP client to use.   
+In our example, we use the `Remote Desktop Connection` app as our RDP client, but you may choose any RDP client to use.   
 {{% /notice %}}
 
 2. Enter the `Public IP Address` you wrote down earlier as the `Computer` or remote host/IP to connect to.
