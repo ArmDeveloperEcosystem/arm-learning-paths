@@ -10,7 +10,7 @@ To follow this learning path, you need Arm Development Studio installed, and an 
 
 You also need the Neoverse RD-N2 Reference Design Software Stack set up, and an associated FVP (Fixed Virtual Platform). For further information, see [Get started with the Neoverse Reference Design Software Stack](/learning-paths/servers-and-cloud-computing/refinfra-quick-start/). 
 
-## Modify the run script
+## SCP/LCP/RSE debug
 
 Modify this run script:
 
@@ -31,6 +31,12 @@ Run the script to launch the model:
 ```bash
 ./run_model.sh
 ```
+
+## AP debug
+
+If you remove the -R flag, RSE CPU wait is on hold and the APs will be powered off. You will have to kick-off the run, then it starts booting from RSE to AP cores. In this case, do *not* remove the -R flag.
+
+This will be explained further in BL1, BL31, and BL33 chapters.
 
 {{% notice FVP Accuracy %}}
 FVPS do not completely model the `IMP DEF` behavior that RTL does.
