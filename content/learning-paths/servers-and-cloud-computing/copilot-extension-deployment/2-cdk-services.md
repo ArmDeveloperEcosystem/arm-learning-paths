@@ -11,9 +11,9 @@ In [the first GitHub Copilot Extension Learning Path](learning-paths/servers-and
 
 In an actual production environment, you'll want:
 
-* A domain that you own with DNS settings that you control (you can get this through AWS Route 53)
-* A load balancer (AWS ALB)
-* An auto-scaling cluster (AWS ASG) in a private virtual cloud subnet (AWS VPC) that you can adjust the size of based on load
+* A domain that you own with DNS settings that you control (you can get this through AWS Route 53).
+* A load balancer (AWS ALB).
+* An auto-scaling cluster (AWS ASG) in a private virtual cloud subnet (AWS VPC) that you can adjust the size of based on load.
 
 In order to use your custom domain with your ALB, you'll also need a custom TLS certificate in order to allow the ALB to do TLS termination before the ALB forwards the packets to your ASG instances.
 
