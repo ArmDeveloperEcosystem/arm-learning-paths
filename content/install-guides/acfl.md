@@ -202,7 +202,7 @@ Arm Compiler for Linux is available to install with either the `dnf` or `yum` sy
 Install ACfL and prerequisites from the RHEL 9 `rpm` package repository with `dnf`:
 
 ```bash { target="fedora:latest" }
-sudo dnf update
+sudo dnf update -y
 sudo dnf -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
 sudo dnf config-manager --add-repo https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
 sudo dnf -y install acfl
@@ -211,7 +211,7 @@ sudo dnf -y install acfl
 Or using the equivalent `yum` commands:
 
 ```bash { target="fedora:latest" }
-sudo yum update
+sudo yum update -y
 sudo yum -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
 sudo yum config-manager --add-repo https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
 sudo yum -y install acfl
@@ -243,19 +243,19 @@ echo "module use /opt/arm/modulefiles" >> ~/.bashrc
 
 To list available modules:
 
-```bash { env_source="~/.bashrc" }
+```console
 module avail
 ```
 
 To configure Arm Compiler for Linux:
 
-```bash { env_source="~/.bashrc" }
+```console
 module load acfl/24.10.1
 ```
 
 To configure GCC:
 
-```bash { env_source="~/.bashrc" }
+```console
 module load gnu/14.2.0
 ```
 
@@ -314,7 +314,7 @@ ACfL is now [ready to use](#armclang).
 To get started with the Arm C/C++ Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console
 armclang --version
 ```
 
@@ -352,7 +352,7 @@ Hello, C World!
 To get started with the Arm Fortran Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console
 armflang --version
 ```
 
@@ -366,12 +366,12 @@ end program hello
 ```
 
 Build the application with:
-```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console
 armflang hello.f90 -o hello
 ```
 
 Run the application with:
-```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console
 ./hello
 ```
 
