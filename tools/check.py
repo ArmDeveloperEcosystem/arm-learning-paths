@@ -87,7 +87,7 @@ def write_commands_to_file(test_cmd_filename, test):
     cmd_args = {
                 "env_source":".",
                 "cwd":"cd ",
-                "env":"export"
+                "env=":"export"
                 }
     for cmd_arg in cmd_args.keys():
         if cmd_arg in test:

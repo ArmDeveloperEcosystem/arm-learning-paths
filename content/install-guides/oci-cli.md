@@ -66,7 +66,7 @@ bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scrip
 Run the command below to add the `oci` command to your search path:
 
 ```bash { target="ubuntu:latest" }
-source $HOME/.bashrc
+. $HOME/.bashrc
 ```
 
 Verify OCI CLI is installed using the `--version` option:

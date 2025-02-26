@@ -176,7 +176,7 @@ Arm Compiler for Linux is available to install with either the `dnf` or `yum` sy
 Install ACfL and prerequisites from the Amazon Linux 2023 `rpm` package repository with `dnf`:
 
 ```bash { target="fedora:latest" }
-sudo dnf update
+sudo dnf update -y
 sudo dnf -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
 sudo dnf config-manager --add-repo https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
 sudo dnf -y install acfl
@@ -185,7 +185,7 @@ sudo dnf -y install acfl
 Or using the equivalent `yum` commands:
 
 ```bash { target="fedora:latest" }
-sudo yum update
+sudo yum update -y
 sudo yum -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
 sudo yum config-manager --add-repo https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
 sudo yum -y install acfl
@@ -332,13 +332,13 @@ int main()
 
 Build the application with:
 
-```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console
 armclang hello.c -o hello
 ```
 
 Run the application with:
 
-```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console
 ./hello
 ```
 
