@@ -10,11 +10,15 @@ layout: "learningpathall"
 
 ## Before you begin
 
-This Learning Path demonstrates how to run the whisper-large-v3-turbo model as an application that takes the audio input and computes out the text transcript of it. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 24.04 LTS. You need an Arm server instance with 32 cores, atleast 8GB of RAM and 32GB disk to run this example. The instructions have been tested on a AWS c8g.8xlarge instance.
+This Learning Path demonstrates how to run the whisper-large-v3-turbo model as an application that takes the audio input and computes the text transcript of it. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 24.04 LTS. You need an Arm server instance with 32 cores, atleast 8GB of RAM and 32GB disk to run this example. The instructions have been tested on a AWS c8g.8xlarge instance.
 
 ## Overview
 
-OpenAI Whisper is an open-source Automatic Speech Recognition (ASR) model trained on the multilingual and multitask data, which enables the transcript generation in multiple languages and translations from different languages to English. We will explore the foundational aspects of speech-to-text transcription applications, specifically focusing on running OpenAI’s Whisper on an Arm CPU. We will discuss the implementation and performance considerations required to efficiently deploy Whisper using Hugging Face Transformers framework.
+OpenAI Whisper is an open-source Automatic Speech Recognition (ASR) model trained on the multilingual and multitask data, which enables the transcript generation in multiple languages and translations from different languages to English. You will learn about the foundational aspects of speech-to-text transcription applications, specifically focusing on running OpenAI’s Whisper on an Arm CPU. Lastly, you will explore the implementation and performance considerations required to efficiently deploy Whisper using Hugging Face Transformers framework.
+
+### Speech-to-text ML applications
+
+Speech-to-text (STT) transcription applications transform spoken language into written text, enabling voice-driven interfaces, accessibility tools, and real-time communication services. Audio is first cleaned and converted into a format suitable for processing, then passed through a deep learning model trained to recognize speech patterns. Advanced language models help refine the output, improving accuracy by predicting likely word sequences based on context. Whether running on cloud servers, STT applications must balance accuracy, latency, and computational efficiency to meet the needs of diverse use cases.
 
 ## Install dependencies
 
@@ -22,7 +26,7 @@ Install the following packages on your Arm based server instance:
 
 ```bash
 sudo apt update
-sudo apt install python3-pip python3-venv ffmpeg -y
+sudo apt install python3-pip python3-venv ffmpeg wget -y
 ```
 
 ## Install Python Dependencies
@@ -47,21 +51,23 @@ pip install torch transformers accelerate
 
 ## Download the sample audio file
 
-Download a sample audio file, which is about 33sec audio in .wav format or use your own audio file:
+Download a sample audio file, which is about 33 second audio in .wav format. You can use any .wav sound file if you'd like to try some other examples.
 ```bash
-    wget https://www.voiptroubleshooter.com/open_speech/american/OSR_us_000_0010_8k.wav
+wget https://www.voiptroubleshooter.com/open_speech/american/OSR_us_000_0010_8k.wav
 ```
 
 ## Create a python script for audio to text transcription
 
+You will use the Hugging Face `transformers` framework to help process the audio. It contains classes that configures the model, and prepares it for inference. `pipeline` is an end-to-end function for NLP tasks. In the code below, it's configured to do pre- and post-processing of the sample in this example, as well as running the actual inference.
+
 Create a python file:
 
 ```bash
-    vim whisper-application.py
+vim whisper-application.py
 ```
 
 Write the following code in the `whisper-application.py` file:
-```python
+```python { file_name="whisper-application.py" }
 import torch
 from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
 import time
@@ -115,20 +121,18 @@ seconds = (duration - ((hours * 3600) + (minutes * 60)))
 msg = f'\nInferencing elapsed time: {seconds:4.2f} seconds\n'
 
 print(msg)
-
 ```
 
-## Use the Arm specific flags:
-
-Use the following flags to enable fast math GEMM kernels, Linux Transparent Huge Page (THP) allocations, logs to confirm kernel and set LRU cache capacity and OMP_NUM_THREADS to run the Whisper efficiently on Arm machines.
+Enable verbose mode for the output and run the script.
 
 ```bash
-    export DNNL_DEFAULT_FPMATH_MODE=BF16
-    export THP_MEM_ALLOC_ENABLE=1
-    export LRU_CACHE_CAPACITY=1024
-    export OMP_NUM_THREADS=32
-    export DNNL_VERBOSE=1
+export DNNL_VERBOSE=1
+python3 whisper-application.py
 ```
-{{% notice Note %}}
-BF16 support is merged into PyTorch versions greater than 2.3.0.
-{{% /notice %}}
+
+You should see output similar to the image below with the log since we enabled verbose, transcript of the audio and the `Inference elapsed time`.
+
+![frontend](whisper_output_no_flags.png)
+
+
+You've now run a benchmark on the Whisper model. Continue to the next section to configure flags to learn about performance-enhancing features.
