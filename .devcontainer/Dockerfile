@@ -6,10 +6,10 @@ RUN apt-get update && \
     apt-get -y install vim wget sudo git 
 
 RUN case ${TARGETPLATFORM} in \
-         "linux/amd64")  HUGO=hugo_0.111.2_linux-amd64 ;; \
-         "linux/arm64")  HUGO=hugo_0.111.2_linux-arm64 ;; \
+         "linux/amd64")  HUGO=hugo_0.130.0_linux-amd64 ;; \
+         "linux/arm64")  HUGO=hugo_0.130.0_linux-arm64 ;; \
     esac \
-    && HUGO_VER=v0.111.2 \
+    && HUGO_VER=v0.130.0 \
     &&  wget https://github.com/gohugoio/hugo/releases/download/${HUGO_VER}/${HUGO}.deb && apt-get -y install ./${HUGO}.deb
 
 # User account
