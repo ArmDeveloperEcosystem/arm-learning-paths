@@ -1,17 +1,13 @@
 ---
 title: Demo - Audio transcription on Arm
 overview: | 
-  This Arm Kleidi learning path shows how to use a single AWS Graviton instance -- powered by an Arm Neoverse CPU -- to build a simple “Token as a Service” server, used below to provide a chat-bot to serve a small number of concurrent users. 
-  
-  This architecture would be suitable for businesses looking to deploy the latest Generative AI technologies using their existing CPU compute capacity and deployment pipelines. The demo uses the open source llama.cpp framework, which Arm has enhanced by contributing the latest Arm Kleidi Technologies. Further optimizations are achieved by using the smaller 8 billion parameter Llama 3.1 model, which has been quantized to optimize memory usage. 
-  
-  Chat with the Llama-3.1-8B LLM below to see the performance for yourself, then follow the learning path to build your own Generative AI service on Arm Neoverse.
+  Insert helpful overview here.
 
 
 
 demo_steps:
   - Record your voice (giving mic permissions to your browser).
-  - Review and send to the LLM.
+  - Review and send to _________________insert technical thing here_____________.
   - Get transcription and view stats.
 
 
