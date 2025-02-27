@@ -76,7 +76,7 @@ sudo cp terraform /usr/local/bin/
 
 If you have [brew](https://brew.sh/) installed, installing Terraform for macOS is simple as:
 
-```bash
+```console
 brew tap hashicorp/tap
 brew install hashicorp/tap/terraform
 ```
