@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-This Learning Path demonstrates how to run the whisper-large-v3-turbo model as an application that takes the audio input and computes the text transcript of it. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 24.04 LTS. You need an Arm server instance with 32 cores, atleast 8GB of RAM and 32GB disk to run this example. The instructions have been tested on a AWS c8g.8xlarge instance.
+This Learning Path demonstrates how to run the [whisper-large-v3-turbo model](https://huggingface.co/openai/whisper-large-v3-turbo) as an application that takes an audio input and computes the text transcript of it. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 24.04 LTS. You need an Arm server instance with 32 cores, atleast 8GB of RAM and 32GB disk to run this example. The instructions have been tested on a AWS Graviton4 `c8g.8xlarge` instance.
 
 ## Overview
 
@@ -60,13 +60,8 @@ wget https://www.voiptroubleshooter.com/open_speech/american/OSR_us_000_0010_8k.
 
 You will use the Hugging Face `transformers` framework to help process the audio. It contains classes that configures the model, and prepares it for inference. `pipeline` is an end-to-end function for NLP tasks. In the code below, it's configured to do pre- and post-processing of the sample in this example, as well as running the actual inference.
 
-Create a python file:
+Using a file editor of your choice, create a python file named `whisper-application.py` with the content shown below:
 
-```bash
-vim whisper-application.py
-```
-
-Write the following code in the `whisper-application.py` file:
 ```python { file_name="whisper-application.py" }
 import torch
 from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
@@ -123,16 +118,16 @@ msg = f'\nInferencing elapsed time: {seconds:4.2f} seconds\n'
 print(msg)
 ```
 
-Enable verbose mode for the output and run the script.
+Enable verbose mode for the output and run the script:
 
 ```bash
 export DNNL_VERBOSE=1
 python3 whisper-application.py
 ```
 
-You should see output similar to the image below with the log since we enabled verbose, transcript of the audio and the `Inference elapsed time`.
+You should see output similar to the image below with a log output, transcript of the audio and the `Inference elapsed time`.
 
 ![frontend](whisper_output_no_flags.png)
 
 
-You've now run a benchmark on the Whisper model. Continue to the next section to configure flags to learn about performance-enhancing features.
+You've now run the Whisper model successfully on your Arm-based CPU. Continue to the next section to configure flags that can increase the performance your running model.
