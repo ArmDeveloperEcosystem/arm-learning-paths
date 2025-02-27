@@ -31,20 +31,27 @@ Terraform is available for Windows, macOS, Linux and supports the Arm architectu
 
 [General installation information](https://developer.hashicorp.com/terraform/downloads) is available which covers all supported operating systems.
 
-This article provides a quick solution to install Terraform for Ubuntu or macOS on Arm.
+This guide provides a quick solution to install Terraform for Ubuntu on Arm and macOS on Apple Silicon.
 
 Confirm you are using an Arm machine by running:
+
 ```bash
 uname -m
 ```
-The output should be:
+
+For Linux, the output should be:
+
 ```output
 aarch64
 ```
 
-If you see a different result, you are not using an Arm computer running 64-bit Linux.
+For macOS, the output should be:
 
-### Download and Install for Ubuntu
+```output
+arm64
+```
+
+## Download and install Terraform for Ubuntu
 
 The easiest way to install Terraform for Ubuntu on Arm is to use the zip file and copy the executable.
 
@@ -65,7 +72,7 @@ unzip terraform_${TER_VER}_linux_arm64.zip
 sudo cp terraform /usr/local/bin/
 ```
 
-### Download and Install for macOS
+## Download and install Terraform for macOS
 
 If you have [brew](https://brew.sh/) installed, installing Terraform for macOS is simple as:
 
@@ -74,20 +81,30 @@ brew tap hashicorp/tap
 brew install hashicorp/tap/terraform
 ```
 
-If you don't have brew installed or prefer to directly install via binary, [Download Terraform for Arm64](https://developer.hashicorp.com/terraform/install#darwin) directly from the Terraform website.
+If you don't have brew installed or prefer to directly install via binary, you can download [Terraform for ARM64](https://developer.hashicorp.com/terraform/install#darwin) directly from the Terraform website.
 
-## Confirm proper executable install.
+## Run the Terraform executable and print the version
 
-Upon completing install, from the command line, you can enter the following to verify proper installation.
+After installing, you can enter the following command to verify the installation:
+
 ```bash { target="ubuntu:latest" }
 terraform version
 ```
 
-Running this command should return something similar to:
+The output will be similar to the output shown below.
 
-```bash
+For Linux:
+
+```output
+Terraform v1.10.5
+on linux_arm64
+```
+
+For macOS:
+
+```output
 Terraform v1.10.5
 on darwin_arm64
 ```
 
-If you instead receive an error, please try to reinstall again.
+You are now ready to use Terraform. 
