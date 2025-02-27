@@ -7,13 +7,13 @@ who_is_this_for: This Learning Path is for software developers looking to run th
 
 learning_objectives:
     - Install the dependencies to run the Whisper Model
-    - Run the OpenAI Whisper model using Hugging Face Transformers framework.
-    - Enable performance-enhancing features for Arm CPUs.
+    - Run the OpenAI Whisper model using Hugging Face Transformers.
+    - Enable performance-enhancing features for running the model on Arm CPUs.
     - Compare the total time taken to generate transcript with Whisper.
 
 
 prerequisites:
-    - And [Arm-based compute instance](/learning-paths/servers-and-cloud-computing/intro/) with 32 cores, 8GB of RAM, and 32GB disk space running Ubuntu.
+    - An [Arm-based compute instance](/learning-paths/servers-and-cloud-computing/intro/) with 32 cores, 8GB of RAM, and 32GB disk space running Ubuntu.
     - Basic understanding of Python and ML concepts.
     - Understanding of Whisper ASR Model fundamentals.
 
@@ -29,7 +29,8 @@ operatingsystems:
 tools_software_languages:
     - Python
     - Whisper
-    - AWS Graviton
+cloud_service_providers: AWS
+    
 
 further_reading:
     - resource:
