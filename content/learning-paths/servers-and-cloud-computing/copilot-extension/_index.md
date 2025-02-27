@@ -10,10 +10,10 @@ minutes_to_complete: 30
 who_is_this_for: This is an advanced topic for software developers who want to learn how to build a RAG-based (Retrieval Augmented Generation) GitHub Copilot Extension. 
 
 learning_objectives: 
-    - Describe what a RAG system is.
+    - Explain the core concepts and benefits of a RAG system.
     - Create vector embeddings for a RAG knowledge base.
-    - Implement RAG in a Copilot Extension.
-    - Configure a GitHub Copilot Extension for a RAG application.
+    - Integrate a RAG system within a Copilot Extension.
+    - Configure a GitHub Copilot Extension to effectively support a RAG application.
 
 prerequisites:
     - Completion of the [Build a GitHub Copilot Extension in Python](../gh-copilot-simple/) Learning Path.

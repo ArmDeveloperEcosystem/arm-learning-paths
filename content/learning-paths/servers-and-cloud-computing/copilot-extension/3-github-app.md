@@ -5,12 +5,11 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
-Now we need to create a Copilot extension on GitHub to connect to our deployed application.
-
 ## Create a GitHub app
 
-> For the most up to date instructions, follow the [official documentation for creating a GitHub App for Copilot Extension](https://docs.github.com/en/copilot/building-copilot-extensions/creating-a-copilot-extension/creating-a-github-app-for-your-copilot-extension#creating-a-github-app).
+Now you need to create a Copilot extension on GitHub to connect to the deployed application.
+
+For the most up to date instructions, follow the [official documentation for creating a GitHub App for Copilot Extension](https://docs.github.com/en/copilot/building-copilot-extensions/creating-a-copilot-extension/creating-a-github-app-for-your-copilot-extension#creating-a-github-app).
 
 On any page of [GitHub](https://github.com/), click your profile picture and go to Settings. Scroll down to developer settings, and go to [create a GitHub App](https://github.com/settings/apps).
 
