@@ -6,11 +6,11 @@ minutes_to_complete: 15
 who_is_this_for: This is an introductory topic for software developers interested using Windows on Arm in the Azure cloud.
 
 learning_objectives: 
-    - Start a Windows on Arm virtual machine in Azure cloud
-    - Discover all Arm-based image offerings in the Azure Image Marketplace
+    - Start a Windows on Arm virtual machine in Azure cloud.
+    - Discover all Arm-based image offerings in the Azure Image Marketplace. 
 
 prerequisites:
-    - An Azure Cloud account
+    - An Azure Cloud account.
     - An RDP client to connect to your Windows on Arm instance.  For more info on RDP clients, see [Remote Desktop clients for Remote Desktop Services and remote PCs](https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-clients) to get started.
 
 author: Pareena Verma
