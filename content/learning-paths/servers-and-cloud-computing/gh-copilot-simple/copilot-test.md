@@ -50,3 +50,7 @@ Here it is in VS Code:
 Your GitHub Copilot Extension is now responding to chat prompts. 
 
 You can now use what you have learned to build different, and more complex, Copilot Extensions.
+
+## Next Steps
+
+You are now ready to learn IaC deployment techniques for your Extension in [Deploy Graviton Infrastructure for GitHub Copilot Extensions](../../copilot-extension-deployment).
