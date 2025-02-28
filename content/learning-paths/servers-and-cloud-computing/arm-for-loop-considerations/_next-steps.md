@@ -10,7 +10,7 @@ further_reading:
         type: documentation
     - resource:
         title: Thread Santiser Manual 
-        link: Phttps://github.com/google/sanitizers/wiki/threadsanitizercppmanual
+        link: https://github.com/google/sanitizers/wiki/threadsanitizercppmanual
         type: documentation
 
 
