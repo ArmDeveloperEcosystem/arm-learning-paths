@@ -29,6 +29,7 @@ Arm Compiler for Linux runs on 64-bit Arm machines, it is not a cross-compiler.
 
 You do not require any additional license to use Arm Compiler for Linux.
 
+
 ## Arm-based hardware
 
 Arm Compiler for Linux supports all 64-bit Arm based [server-class hardware](/learning-paths/servers-and-cloud-computing/intro/).
@@ -197,7 +198,7 @@ sudo yum install acfl
 
 The ACfL tools are now ready to use.
 
-### Red Hat Enterprise Linux (RHEL) 9 
+### Red Hat Enterprise Linux (RHEL) 9
 
 Arm Compiler for Linux is available to install with either the `dnf` or `yum` system package manager.
 
