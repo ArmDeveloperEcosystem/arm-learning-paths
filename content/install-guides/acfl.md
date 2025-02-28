@@ -29,7 +29,6 @@ Arm Compiler for Linux runs on 64-bit Arm machines, it is not a cross-compiler.
 
 You do not require any additional license to use Arm Compiler for Linux.
 
-
 ## Arm-based hardware
 
 Arm Compiler for Linux supports all 64-bit Arm based [server-class hardware](/learning-paths/servers-and-cloud-computing/intro/).
