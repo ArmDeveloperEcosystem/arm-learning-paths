@@ -22,7 +22,6 @@ Before you can run the benchmark, you will need an Arm-based Cloud Service Provi
 | --------------------- | -------------- |
 | Google Cloud Platform | c4a-highmem-72 |
 | Amazon Web Services   | r8g.16xlarge   |
-| Microsoft Azure       | TODO           |
 
 ### Verify Python installation
 Make sure Python is installed by running the following and making sure a version is printed.
@@ -37,10 +36,7 @@ Python 3.12.6
 
 ## Install Docker
 
-```bash
-sudo apt-get update
-sudo apt-get install ca-certificates curl docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin make -y
-```
+Start by adding the official Docker GPG key to your system’s APT keyrings directory:
 
 ```bash
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -48,16 +44,27 @@ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyring
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 ```
 
+Next, install some additional dependencies dependencies:
+
+```bash
+sudo apt-get update
+sudo apt-get install ca-certificates curl docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin make -y
+```
+
+Finally, the following commands will finalize the Docker installation:
+
 ```bash
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
-{{ % notice Note % }}
-If you run into permission issues with Docker, try running the following
+{{% notice Note %}}
+If you run into permission issues with Docker, try running the following:
 
 ```bash
 sudo usermod -aG docker $USER
 sudo chmod 666 /var/run/docker.sock
 ```
-{{ % /notice % }}
+{{% /notice %}}
+
+With your development environment set up, you can move on to download the model.

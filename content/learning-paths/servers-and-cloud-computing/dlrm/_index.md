@@ -3,11 +3,10 @@ title: MLPerf Benchmarking on Arm Neoverse V2
 
 minutes_to_complete: 10
 
-who_is_this_for: This is an introductory topic for software developers who want to set up a pipeline in the cloud for recommendation models. You will . Then, you’ll build and run the benchmark using MLPerf, analyzing key performance metrics along the way.
-
+who_is_this_for: This is an introductory topic for software developers who want to set up a pipeline in the cloud for recommendation models. You will build and run the benchmark using MLPerf and PyTorch.
 
 learning_objectives:
-    - build the Deep Learning Recommendation Model (DLRM)
+    - build the Deep Learning Recommendation Model (DLRM) using a Docker image
     - run a modified performant DLRMv2 benchmark and inspect the results
 
 prerequisites:
@@ -22,9 +21,10 @@ armips:
     - Neoverse
 tools_software_languages:
     - Docker
-    - TODO
+    - MLPerf
 operatingsystems:
     - Linux
+cloud_service_providers: AWS
 
 further_reading:
     - resource:

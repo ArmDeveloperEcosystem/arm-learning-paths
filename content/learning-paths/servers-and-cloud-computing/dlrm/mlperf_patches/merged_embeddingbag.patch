@@ -1,0 +1,252 @@
+--- merged_embeddingbag.py	2025-02-04 19:06:56.641676747 +0000
++++ dlrm_docker_setup/mlperf_patches/merged_embeddingbag.py	2025-02-04 03:54:18.382281512 +0000
+@@ -5,18 +5,15 @@
+ from itertools import accumulate
+ import enum
+ 
+-
+ class PoolingMode(enum.IntEnum):
+     SUM = 0
+     MEAN = 1
+ 
+-
+ class SGDArgs(NamedTuple):
+     bf16_trail: List[Optional[torch.Tensor]]
+     weight_decay: float
+     lr: float
+ 
+-
+ class EmbeddingSpec(NamedTuple):
+     num_of_features: int
+     feature_size: int
+@@ -25,7 +22,6 @@
+     weight: Optional[torch.Tensor]
+     sparse: bool
+ 
+-
+ def merged_embeddingbag(
+     indices, offsets, indices_with_row_offsets, row_offsets, pooling_modes, *weights
+ ):
+@@ -38,24 +34,24 @@
+             pooling_modes,
+             *weights
+         )
+-    return torch.ops.torch_ipex.merged_embeddingbag_forward(
+-        indices, offsets, weights, pooling_modes
+-    )
++    include_last_offset = False
++    return torch.nn.functional.embedding_bag(
++        weights, indices, offsets, mode=pooling_modes, include_last_offset=include_last_offset )
+ 
+ 
+ def merged_embeddingbag_with_cat(
+     weights,
+     indices,
+-    offsets,
++    #offsets,
+     dense_feature,
+ ):
+     if torch.is_grad_enabled():
+         raise NotImplementedError(
+             "do not support training for merged_embeddingbag_with_cat not"
+         )
+-    return torch.ops.torch_ipex.merged_embeddingbag_cat_forward(
+-        weights, indices, offsets, dense_feature
+-    )
++    embedding_output = torch.nn.functional.embedding_bag(input=indices, weight=weights, mode='sum')
++    return torch.cat((
++        embedding_output, dense_feature), dim=1)
+ 
+ 
+ def merged_embeddingbag_sgd(
+@@ -77,10 +73,7 @@
+             sgd_args,
+             *weights
+         )
+-    return torch.ops.torch_ipex.merged_embeddingbag_forward(
+-        indices, offsets, weights, pooling_modes
+-    )
+-
++    return torch.nn.functional.embedding_bag(input=indices, weight=weights, offset=offset, pooling_modes=pooling_modes)
+ 
+ class MergedEmbeddingBagFunc(Function):
+     @staticmethod
+@@ -97,8 +90,12 @@
+         pooling_modes,
+         *weights
+     ):
+-        output = torch.ops.torch_ipex.merged_embeddingbag_forward(
+-            indices, offsets, weights, pooling_modes
++
++        output = torch.nn.functional.embedding_bag(
++        input=indices,
++        weight=weights,
++        offsets=offsets,
++        mode=pooling_modes
+         )
+         ctx.offsets = offsets
+         ctx.weights = weights
+@@ -114,20 +111,18 @@
+         indices_with_row_offsets = ctx.indices_with_row_offsets
+         row_offsets = ctx.row_offsets
+         pooling_modes = ctx.pooling_modes
+-        grad_list = torch.ops.torch_ipex.merged_embeddingbag_backward_cpu(
+-            grad_out,
+-            offsets,
+-            weights,
+-            indices_with_row_offsets,
+-            row_offsets,
+-            pooling_modes,
+-        )
++
++        embedding_bag = torch.nn.EmbeddingBag(weights.size(0), weights.size(1), mode='sum')
++        output = embedding_bag(indices_with_row_offsets, offsets)
++        loss = (output - grad_out).pow(2).mean()
++        loss.backward()
++        grad_list = embedding_bag.weight.grad
++
+         n_tables = len(weights)
+         output = [None for i in range(5)]
+         for grad in grad_list:
+             output.append(grad)
+-        return MergedEmbeddingBagFunc.unpack(*output)
+-
++        return output
+ 
+ class MergedEmbeddingBagSGDFunc(Function):
+     @staticmethod
+@@ -145,9 +140,7 @@
+         sgd_args,
+         *weights
+     ):
+-        output = torch.ops.torch_ipex.merged_embeddingbag_forward(
+-            indices, offsets, weights, pooling_modes
+-        )
++        output = torch.nn.functional.embedding_bag(input=indices, weight=weights, offsets=offsets, mode=pooling_modes)
+         ctx.indices = indices
+         ctx.offsets = offsets
+         ctx.weights = weights
+@@ -169,23 +162,25 @@
+         bf16_trail = sgd_args.bf16_trail
+         weight_decay = sgd_args.weight_decay
+         lr = sgd_args.lr
+-        torch.ops.torch_ipex.merged_embeddingbag_backward_sgd(
+-            grad_out,
+-            indices,
+-            offsets,
+-            weights,
+-            indices_with_row_offsets,
+-            row_offsets,
+-            pooling_modes,
+-            bf16_trail,
+-            weight_decay,
+-            lr,
+-        )
++
++        grad_weights = torch.zeros_like(weights)
++        for i, offset in enumerate(offsets[:-1]):
++            grad_slice = grad_out[offsets[i]:offsets[i+1]]
++            index_slice = indices[offsets[i]:offsets[i+1]]
++            if pooling_modes == 'sum':
++                grad_weights.index_add_(0, index_slice, grad_slice)
++            elif pooling_modes == 'mean':
++                grad_weights.index_add_(0, index_slice, grad_slice / (offsets[i+1] - offsets[i]))
++            elif pooling_modes == 'max':
++                pass
++
++        grad_weights.add_(weights, alpha=weight_decay)
++        weights.sub_(grad_weights, alpha=lr)
++        ctx.weights = weights
+         n_tables = len(weights)
+         output = [None for i in range(n_tables + 6)]
+         return MergedEmbeddingBagSGDFunc.unpack(*output)
+ 
+-
+ class MergedEmbeddingBag(nn.Module):
+     r"""
+     Merge multiple Pytorch `EmbeddingBag <https://pytorch.org/docs/stable/generated/torch.nn.EmbeddingBag.html
+@@ -227,8 +222,6 @@
+     Now `MergedEmbeddingBagWithSGD` is the only option running with an optimizer. We plan to add more optimizer support
+     in the future. Visit `MergedEmbeddingBagWithSGD` for introduction of `MergedEmbeddingBagWith[Optimizer]`.
+     """
+-    embedding_specs: List[EmbeddingSpec]
+-
+     def __init__(
+         self,
+         embedding_specs: List[EmbeddingSpec],
+@@ -418,7 +411,6 @@
+             *self.weights
+         )
+ 
+-
+ class MergedEmbeddingBagWithSGD(MergedEmbeddingBag):
+     r"""
+     To support training with `MergedEmbeddingBag` for good performance, optimizer step is fused with backward function.
+@@ -498,16 +490,15 @@
+         trails = []
+         for i in range(len(self.weights)):
+             if self.weights[i].dtype == torch.float:
+-                bf16_w, trail = torch.ops.torch_ipex.split_float_bfloat16(
+-                    self.weights[i]
+-                )
++                bf16_w = self.weights[i].to(torch.bfloat16)
++                trail = self.weights[i] - bf16_w.to(torch.float)
+             elif self.weights[i].dtype == torch.bfloat16:
+                 bf16_w = self.weights[i]
+                 trail = torch.zeros_like(bf16_w, dtype=torch.bfloat16)
+             elif self.weights[i].dtype == torch.double:
+-                bf16_w, trail = torch.ops.torch_ipex.split_float_bfloat16(
+-                    self.weights[i].float()
+-                )
++                float_w = self.weights[i].float()
++                bf16_w = float_w.to(torch.bfloat16)
++                trail = float_w - bf16_w.to(torch.float)
+             else:
+                 AssertionError(
+                     False
+@@ -570,7 +561,6 @@
+             )
+         return cls(embedding_specs, lr, weight_decay)
+ 
+-
+ class MergedEmbeddingBagWithCat(MergedEmbeddingBag):
+     r"""
+     To support `MergedEmbeddingBag` with cat all outputs with an given input.
+@@ -618,3 +608,36 @@
+             offsets,
+             dense_feature,
+         )
++
++class MergedEmbWithCat(nn.Module):
++    def __init__(self, embedding_dim: int, num_embeddings_pool: List[int]):
++        super().__init__()
++        self._multi_hot = [3, 2, 1, 2, 6, 1, 1, 1, 1, 7, 3, 8, 1, 6, 9, 5, 1, 1, 1, 12, 100, 27, 10, 3, 1, 1]
++        self._embedding_dim = embedding_dim
++        self._num_embeddings = len(num_embeddings_pool)
++
++        self.embedding_bags: nn.ModuleList = nn.ModuleList()
++        for num_embeddings in num_embeddings_pool:
++            W = torch.empty(num_embeddings, embedding_dim)
++            EE = torch.nn.EmbeddingBag(
++                num_embeddings=num_embeddings,
++                embedding_dim=embedding_dim,
++                _weight=W,
++                include_last_offset=True,
++                mode="sum")
++            self.embedding_bags.append(EE)
++
++    def forward(self, index: List[torch.Tensor], dense: torch.Tensor) -> torch.Tensor:
++        no_of_batch = dense.size(0)
++        embedded_features = []
++        for i, ind in enumerate(index):
++            EB = self.embedding_bags[i]
++            offsets = torch.tensor(range(0,no_of_batch*self._multi_hot[i]+1,self._multi_hot[i]))
++            embedding = EB(ind, offsets=offsets)
++            embedded_features.append(embedding)
++
++        embeddings_concat = torch.cat(embedded_features, dim=1)
++        result = torch.cat((dense, embeddings_concat), dim=1
++        )
++
++        return result
+\ No newline at end of file
