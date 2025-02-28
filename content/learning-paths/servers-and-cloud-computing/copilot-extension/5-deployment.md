@@ -14,7 +14,7 @@ You can deploy on whatever cloud infrastructure you'd like to use. These are the
 2. A load balancer
 3. An auto-scaling cluster in a private virtual cloud subnet that you can adjust the size of based on load
 
-Arm has provided a Copilot Extension deployment Learning Path for AWS, called [Graviton Infrastructure for GitHub Copilot Extensions](../copilot-extension-deployment/).
+Arm has provided a Copilot Extension deployment Learning Path for AWS, called [Graviton Infrastructure for GitHub Copilot Extensions](../../copilot-extension-deployment/).
 
 Whatever method you use to deploy your Extension, make note of the final endpoint URLs, specifically
 
