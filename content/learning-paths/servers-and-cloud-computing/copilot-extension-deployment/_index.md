@@ -1,5 +1,5 @@
 ---
-title: Graviton Infrastructure for GitHub Copilot Extensions
+title: Deploy Graviton Infrastructure for GitHub Copilot Extensions
 
 draft: true
 cascade:
@@ -7,18 +7,17 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for software developers who want to learn how to deploy all necessary infrastructure on AWS for a GitHub Copilot Extension.
+who_is_this_for: This is an advanced topic for developers seeking to deploy the Graviton infrastructure on Amazon Web Services (AWS) for a GitHub Copilot Extension.
 
 learning_objectives: 
-    - Understand the AWS services needed to host a GitHub Copilot Extension
-    - Create an AWS CDK (Cloud Development Kit) deployment for the required AWS services 
-    - Add your newly generated endpoints to the GitHub app you previously created
-
+    - Identify the AWS services required to host a GitHub Copilot Extension.
+    - Create an AWS CDK (Cloud Development Kit) deployment for AWS services. 
+    - Integrate newly-generated endpoints into your existing GitHub app.
 prerequisites:
-    - The [Build a GitHub Copilot Extension in Python](../gh-copilot-simple/) Learning Path.
-    - Understanding of IoC (Infrastructure as Code)
-    - A GitHub account
-    - A linux-based computer with npm, Python, and the AWS CLI installed
+    - Completion of the [Build a GitHub Copilot Extension in Python](../gh-copilot-simple/) Learning Path.
+    - Familiarity with the concept of IoC (Infrastructure as Code).
+    - A GitHub account.
+    - A Linux-based computer with npm, Python, and the AWS CLI installed.
 
 author: Joe Stech
 
