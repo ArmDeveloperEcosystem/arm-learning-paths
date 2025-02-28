@@ -28,7 +28,7 @@ rclone v1.69.1 has successfully installed.
 Now run "rclone config" for setup. Check https://rclone.org/docs/ for more details.
 ```
 
-Configure the credentials as instructed.
+Configure the following credentials for rclone:
 
 ```bash
 rclone config create mlc-inference s3 provider=Cloudflare \
@@ -38,16 +38,13 @@ rclone config create mlc-inference s3 provider=Cloudflare \
 ```
 
 You will now download the data and model weights. This process takes an hour or more depending on your internet connection.
+
 ```bash
 rclone copy mlc-inference:mlcommons-inference-wg-public/dlrm_preprocessed $HOME/data  -P
 rclone copy mlc-inference:mlcommons-inference-wg-public/model_weights $HOME/model/model_weights -P
 ```
 
 Once it finishes, you should see that the `model` and `data` directories are populated.
-
-* Overview of Dataset Used in MLPerf DLRM
-* Steps to Download and Prepare the Data
-* Preprocessing Data for Training and Inference
 
 ## Build DLRM image
 
@@ -60,7 +57,7 @@ cd $HOME/Tool-Solutions/
 git checkout ${1:-"pytorch-aarch64--r24.12"}
 ```
 
-A setup script runs which installs docker and builds a PyTorch image for a specific commit hash. Finally, it runs the MLPerf container which is used for the benchmark in the next section. This script takes around 20 minutes to finish.
+The `build.sh` script builds a wheel and a Docker image containing PyTorch and dependencies. It then runs the MLPerf container which is used for the benchmark in the next section.
 
 ```bash
 cd ML-Frameworks/pytorch-aarch64/
