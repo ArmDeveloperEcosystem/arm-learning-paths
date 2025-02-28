@@ -12,13 +12,13 @@ Retrieval Augmented Generation (RAG) is an AI framework that combines informatio
 
 The basic flow of a RAG system includes:
 
-1. Retrieval: the system searches a knowledge base using a combination of vector and/or text search. Vector and text search can work together; dense embeddings capture semantic similarities, while traditional keyword-based methods ensure precision, effectively covering edge cases.
-2. Augmentation: the retrieved information is added as context to a generative AI model to provide additional context for the user's query.
-3. Generation: the AI model uses both the retrieved knowledge and its internal understanding to generate a more useful response to the user.
+* Retrieval: the system searches a knowledge base using a combination of vector and text search. Dense embeddings capture semantic similarities, while traditional keyword-based methods ensure precision, effectively covering edge cases.
+* Augmentation: the retrieved information is added as context to a generative AI model to provide additional context for the user's query.
+* Generation: the AI model uses both the retrieved knowledge and its internal understanding to generate a more useful response to the user.
 
 The benefits of a RAG system center around improved factual accuracy of responses and the ability to integrate up-to-date information, as you can update the knowledge base without retraining the model. 
 
-Most importantly, RAG lets you provide reference links to the user, showing the user where the information originates. This not only build trust with users but also serve as a pathway for further exploration of the source material.
+Most importantly, RAG lets you provide reference links to the user, showing the user where the information originates. This not only build trust with users but also serves as a pathway for further exploration of the source material.
 
 ## What are the challenges of building a RAG system?
 
