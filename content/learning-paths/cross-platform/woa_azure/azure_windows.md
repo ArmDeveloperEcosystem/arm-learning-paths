@@ -8,7 +8,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 
 ---
-Upon completing this learning path, you will learn how to create a Windows on Arm virtual machine in the Azure cloud.
+If you don't have access to a Windows on Arm device, you can create a Windows on Arm virtual machine in the Azure cloud.
 
 {{% notice Note %}}
 These same instructions can be used to deploy a Linux image on the Arm Virtual Machine. Simply select a Linux distribution instead of Windows.
