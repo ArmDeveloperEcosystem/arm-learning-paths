@@ -197,7 +197,7 @@ sudo yum install acfl
 
 The ACfL tools are now ready to use.
 
-### Red Hat Enterprise Linux (RHEL) 9
+### Red Hat Enterprise Linux (RHEL) 9 
 
 Arm Compiler for Linux is available to install with either the `dnf` or `yum` system package manager.
 
