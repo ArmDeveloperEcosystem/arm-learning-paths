@@ -160,7 +160,7 @@ function showPopupPostConnection(message,type,connection_status=false) {
     
                 // When the recording stops, create an audio file
                 mediaRecorder.onstop = () => {
-                    const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
                     const audioUrl = URL.createObjectURL(audioBlob);
                     // Convert and store
                     blobToBase64(audioBlob, (base64) => {
@@ -345,12 +345,10 @@ function showPopupPostConnection(message,type,connection_status=false) {
 
         // Set timeout
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 2000); // 20 seconds timeout
+        const timeoutId = setTimeout(() => controller.abort(), 20000); // 20 seconds timeout
         
         console.log('Sending audio to server...');
-        console.log('--------------------------');
-        console.log('Server location: ',atob(server_location_encoded));
-        
+        console.log('--------------------------');        
         const stripped_data = data.split(",")[1];
         console.log('Data: ',stripped_data);
 
@@ -392,18 +390,22 @@ function showPopupPostConnection(message,type,connection_status=false) {
             if (error.name === 'AbortError') { 
                 console.error('Timeout error: Please check your internet connection and try again.',error);
                 showPopupPostConnection('Server timeout - refresh the page and try again.',"error",true);
+                submit_btn.disabled = 'false';
             }
             else if (error.name === 'NetworkError') {
                 console.error('Network error: Please check your internet connection and try again.',error);
                 showPopupPostConnection('Network error - refresh the page and try again.',"error",true);
+                submit_btn.disabled = 'false';
             }
             else if (error.name === 'TypeError') {
                 console.error('Input stream error: There was a problem with the data stream.',error);
                 showPopupPostConnection('Stream interrupted - try sending your audio again.',"warning");
+                submit_btn.disabled = 'false';
             }
             else {
                 console.error('An unexpected error occurred:', error);
                 showPopupPostConnection('Server error - try sending your audio again.',"error");
+                submit_btn.disabled = 'false';
             }
         });
     }
