@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## How do I deploy my Copilot Extension Flask app to my newly created EC2 instance?
 
-In the first GitHub Copilot Extension Learning Path, you created a Flask app in the section titled "[How can I create my own private GitHub Copilot Extension?](http://localhost:1313/learning-paths/servers-and-cloud-computing/gh-copilot-simple/run-python/)".
+In the first GitHub Copilot Extension Learning Path, you created a Flask app in the section titled "[How can I create my own private GitHub Copilot Extension?](../../gh-copilot-simple/run-python/)".
 
 You will now deploy this Flask app on your newly created EC2 instance. First, retrieve your EC2 instance ID:
 
@@ -24,7 +24,7 @@ The SSM agent running on the instance creates a secure tunnel that lets you SSH 
 aws ssm start-session --target [your instance ID]
 ```
 
-You can now follow the steps in "[How can I create my own private GitHub Copilot Extension?](http://localhost:1313/learning-paths/servers-and-cloud-computing/gh-copilot-simple/run-python/)" to create your Flask app, set up a Python virtual environment, and install the necessary packages.
+You can now follow the steps in "[How can I create my own private GitHub Copilot Extension?](../../gh-copilot-simple/run-python/)" to create your Flask app, set up a Python virtual environment, and install the necessary packages.
 
 The only two changes that you need to make are:
 

@@ -7,7 +7,7 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for developers seeking to deploy the infrastructure on Amazon Web Services (AWS) for a GitHub Copilot Extension.
+who_is_this_for: This is an advanced topic for developers seeking to deploy the Graviton infrastructure on Amazon Web Services (AWS) for a GitHub Copilot Extension.
 
 learning_objectives: 
     - Identify the AWS services required to host a GitHub Copilot Extension.
