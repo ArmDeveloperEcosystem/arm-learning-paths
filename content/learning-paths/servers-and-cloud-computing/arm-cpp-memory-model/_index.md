@@ -1,23 +1,23 @@
 ---
-title: Learn about the C++ Memory Model when Porting to Arm
+title: Learn about the C++ memory model for porting applications to Arm
 
 minutes_to_complete: 45
 
-who_is_this_for: Intermediate C++ developers who are looking to port and optimise their application from x86 to AArch64.
+who_is_this_for: This is an advanced topic for C++ developers porting applications from x86 to Arm and optimizing performance.
 
 learning_objectives: 
-    - Learn about the C++ memory model
-    - Learn about the differences between the Arm and x86 memory model
-    - Learn best practices for writing C++ on Arm to avoid race conditions
+    - Learn about the C++ memory model.
+    - Learn about the differences between the Arm and x86 memory model.
+    - Learn best practices for writing C++ on Arm to avoid race conditions.
 
 prerequisites:
-    - Access to an x86 and AArch64 cloud instance
-    - Intermediate understanding of C++
+    - Access to an x86 and Arm cloud instance (virtual machine).
+    - Proficiency in C++ programming.
 
 author: Kieran Hejmadi
 
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
     - Neoverse
