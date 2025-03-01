@@ -1,16 +1,16 @@
 ---
-title: Get Started with Migrating Applications that use Performance Libraries 
+title: Start migrating applications that use performance libraries 
 
 minutes_to_complete: 60
 
-who_is_this_for: C/C++ developers who are looking to migrate and optimize applications that rely on optimized performance libraries.
+who_is_this_for: C/C++ developers who are looking to migrate applications that rely on optimized performance libraries.
 
 learning_objectives: 
-    - Learn how to incorporate optimized libraries
-    - Learn how to port a basic application from x86 to AArch64
+    - Learn how to incorporate optimized libraries. 
+    - Learn how to port a basic application from x86 to AArch64. 
 prerequisites:
-    - Access to an Arm / x86-based cloud instance
-    - Intermediate understanding of C++, Linux and compilation
+    - Access to an Arm and an x86-based cloud instance.
+    - Intermediate understanding of C++, compilers, and Linux. 
 
 author: Kieran Hejmadi
 
@@ -25,6 +25,15 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
+further_reading:
+    - resource:
+        title: Arm Performance Library Reference Guide
+        link: https://developer.arm.com/documentation/101004/latest/
+        type: documentation
+    - resource:
+        title: Software Ecosystem Dashboard for Arm
+        link: https://www.arm.com/developer-hub/ecosystem-dashboard
+        type: website
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
