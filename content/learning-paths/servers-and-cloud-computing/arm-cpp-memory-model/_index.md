@@ -14,7 +14,7 @@ prerequisites:
     - Access to an x86 and AArch64 cloud instance
     - Intermediate understanding of C++
 
-author_primary: Kieran Hejmadi
+author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
@@ -26,6 +26,17 @@ tools_software_languages:
     - ThreadSantizer (TSan)
 operatingsystems:
     - Linux
+    - Runbook
+
+further_reading:
+    - resource:
+        title: C++ Memory Order Reference Manual 
+        link: https://en.cppreference.com/w/cpp/atomic/memory_order
+        type: documentation
+    - resource:
+        title: Thread Santiser Manual 
+        link: Phttps://github.com/google/sanitizers/wiki/threadsanitizercppmanual
+        type: documentation
 
 
 ### FIXED, DO NOT MODIFY
