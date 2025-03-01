@@ -106,8 +106,6 @@ FVP_Corstone_SSE-320 \
 -a "$ET_HOME/examples/arm/executor_runner/cmake-out/arm_executor_runner"
 ```
 
-
-
 {{% notice Note %}}
 
 The argument `mps4_board.visualisation.disable-visualisation=1` disables the FVP GUI. This can speed up launch time for the FVP.
@@ -124,4 +122,4 @@ I [executorch:arm_executor_runner.cpp:412] Model in 0x70000000 $
 I [executorch:arm_executor_runner.cpp:414] Model PTE file loaded. Size: 3360 bytes.
 ```
 
-You have now set up your environment for TinyML development on Arm, and tested a small PyTorch and ExecuTorch Neural Network.
+You have now set up your environment for TinyML development on Arm, and tested a small PyTorch and ExecuTorch Neural Network. In the next Learning Path of this series, you will learn about optimizing neural networks to run on Arm.

@@ -9,12 +9,11 @@ learning_objectives:
     - Describe what differentiates TinyML from other AI domains.
     - Describe the benefits of deploying AI models on Arm-based edge devices.
     - Identify suitable Arm-based devices for TinyML applications.
-    - Set up and configure a TinyML development environment using ExecuTorch and Corstone-320 FVP.
+    - Set up and configure a TinyML development environment using ExecuTorch and Corstone-320 Fixed Virtual Platform (FVP).
 
 prerequisites:
-    - Basic knowledge of Machine Learning concepts.
-    - A Linux host machine or VM running Ubuntu 22.04 or higher.
-    - A [Grove Vision AI Module](https://wiki.seeedstudio.com/Grove-Vision-AI-Module/) or an Arm license to run the Corstone-320 Fixed Virtual Platform (FVP).
+    - Basic knowledge of Machine Learning concepts
+    - A Linux computer
 
 
 author: Dominica Abena O. Amanfo
@@ -37,23 +36,21 @@ tools_software_languages:
     - ExecuTorch
     - Arm Compute Library
     - GCC
-    - Edge Impulse
-    - Node.js
 
 further_reading:
     - resource:
-        title: TinyML Brings AI to Smallest Arm Devices 
+        title: TinyML Brings AI to Smallest Arm Devices
         link: https://newsroom.arm.com/blog/tinyml
         type: blog
     - resource:
-        title: Arm Compiler for Embedded
-        link: https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded
+        title: Arm Machine Learning Resources
+        link: https://www.arm.com/developer-hub/embedded-and-microcontrollers/ml-solutions/getting-started
         type: documentation
     - resource:
-        title: Arm GNU Toolchain
-        link: https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain
+        title: Arm Developers Guide for Cortex-M Processors and Ethos-U NPU
+        link: https://developer.arm.com/documentation/109267/0101
         type: documentation
-    
+
 
 
 
