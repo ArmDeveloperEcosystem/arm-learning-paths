@@ -1,19 +1,4 @@
 ---
-next_step_guidance: Learn about Thread Santiser and more Memory ordering options
-
-recommended_path: /learning-paths/cross-platform/intrinsics
-
-further_reading:
-    - resource:
-        title: C++ Memory Order Reference Manual 
-        link: https://en.cppreference.com/w/cpp/atomic/memory_order
-        type: documentation
-    - resource:
-        title: Thread Santiser Manual 
-        link: Phttps://github.com/google/sanitizers/wiki/threadsanitizercppmanual
-        type: documentation
-
-
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================
