@@ -1,5 +1,5 @@
 ---
-title: Fine Tuning Large Language Model - Setup Environment
+title: Fine Tuning Large Language Model - Setup Environment 
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -7,6 +7,9 @@ layout: learningpathall
 ---
 
 ## Fine Tuning Large Language Model - Setup Environment
+
+#### Plartform Required 
+Laptop or Cloud
 
 #### Set Up Required Libraries
 The following commands install the necessary libraries for the task, including Hugging Face Transformers, Datasets, and fine-tuning methods. These libraries facilitate model loading, training, and fine-tuning
