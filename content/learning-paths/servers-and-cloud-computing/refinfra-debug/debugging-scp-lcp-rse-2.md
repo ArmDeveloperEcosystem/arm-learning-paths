@@ -1,12 +1,12 @@
 ---
-title: Debugging SCP
+title: Debugging SCP/LCP/RSE
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Debugging SCP
+## Setting up a connection
 {{% notice %}}
 SCP firmware debug uses the `-Og` argument. This optimizes some variables that make debugging difficult. To replace `-Og` with `-O0`, do the following:
 
@@ -46,16 +46,38 @@ In the **Edit configuration and launch** panel, in the **Connection** tab, selec
 
 For the `SCP` code, select **ARM_Cortex-M7_1**.
 
+{{% notice Selecting the correct core %}}
+For different platforms (e.g., RD-N2, RD-V3, etc.), you will see a list of numbered M7 and M55 cores. Typically, even-numbered M7 cores correspond to the MCP, while odd-numbered cores are assigned to the SCP. Additionally:
+
+- `ARM_Cortex-M55_0` to `ARM_Cortex-M55_(N-1)` represent LCP cores.
+- `ARM_Cortex-M55_N` represents the RSE.
+
+To verify core assignments, you can set up alerts (e.g., print statements or store variables), connect to a debugger, and test the configuration.
+{{% /notice %}}
+
 ![select target alt-text#center](images/select_cortexm7.png "Figure 5. Select target")
 
 In the **Files** panel, select **Load Symbols from file**, **File System**, and select the **SCP RAMFW ELF** file, located at:
 
 ``rd-infra/scp/output/rdn2/0/scp_ramfw/bin/rdn2-bl2.elf``.
 
+RSE debug symbol file location:
+```command
+rd-infra/tf-m/cmake_build/<plat>/<cfg>/bin/bl1_1.elf
+rd-infra/tf-m/cmake_build/<plat>/<cfg>/bin/bl1_2.elf
+rd-infra/tf-m/cmake_build/<plat>/<cfg>/bin/bl2.elf
+```
+
+LCP debug symbol file location:
+```command
+rd-infra/scp/output/<plat>/<cfg>/lcp_ramfw/rdv3-lcp-bl2.elf
+```
+
 ![scp symbols alt-text#center](images/scp_symbols.png "Figure 6. Load SCP symbols")
 
 Select **Apply** then **Debug**. The debugger now connects to the model.
 
+## Setting breakpoints
 Once connected, you can set breakpoints in the source code. This can be done by searching for the function in the **Functions** tab, double-clicking next to the line number, or in the **Command** view.
 
 Set a breakpoint at ``cmn700_discovery()``. Continue execution and the code stops at the breakpoint you specify.
