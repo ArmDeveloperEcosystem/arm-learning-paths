@@ -221,9 +221,11 @@ The context for this code can be found in the [flask_app.py](https://github.com/
 
 Once these elements are in place, you are ready to deploy your app.
 
-### Security enhancements (optional, but important for production deployments)
+### Security enhancements 
 
-GitHub recommends payload validation for the messages received from GitHub, to ensure that payloads recieved actually come from GitHub.
+This section is optional, but important for production deployments.
+
+GitHub recommends payload validation for the messages received from GitHub, to ensure that payloads received actually come from GitHub.
 
 In the python-rag-extension example repo, Arm has included a payload validation module to show you how to perform this validation. The file where this is implemented is [payload_validation.py](https://github.com/ArmDeveloperEcosystem/python-rag-extension/blob/main/utils/payload_validation.py).
 
