@@ -6,36 +6,40 @@ weight: 7
 layout: learningpathall
 ---
 
-Now we need to configure the GitHub Application we created before to connect to our deployed Copilot extension application.
-
 ## Configure GitHub App for Copilot Extension
 
-> For the most up to date instructions, follow the [official documentation for configuring your GitHub App for Copilot Extension](https://docs.github.com/en/copilot/building-copilot-extensions/creating-a-copilot-extension/configuring-your-github-app-for-your-copilot-extension#configuring-your-github-app).
+Now, configure the GitHub Application you created earlier to connect to your deployed Copilot extension.
 
-On any page of [GitHub](https://github.com/), click your profile picture and go to Settings. Scroll down to developer settings, and open the GitHub App we made previously.
+For the most up-to-date instructions, follow the [official documentation for configuring your GitHub App for Copilot Extension](https://docs.github.com/en/copilot/building-copilot-extensions/creating-a-copilot-extension/configuring-your-github-app-for-your-copilot-extension#configuring-your-github-app).
+
+On any page of [GitHub](https://github.com/), click your profile picture and go to Settings. Scroll down to **Developer Settings**, and open the GitHub App we made previously.
 
 Make the following changes:
 
-### In the "General" settings
+### **General** settings
 
-In the "Callback URL" field, put the callback URL of your agent that you deployed in the previous step.
+In the **Callback URL** field, put the callback URL of your agent that you deployed in the previous step.
 
-**Note:** If you are not using a deployed application and you want to test locally, you can use an ephemeral domain in ngrok. However you will need to update this URL every time you restart your ngrok server.
+{{% notice Note %}}
+If you are not using a deployed application and you want to test locally, you can use an ephemeral domain with ngrok. However you will need to update the callback URL each time you restart your ngrok server.
+{{% /notice %}}
 
-### In the "Permissions & events" settings
+### **Permissions & events** settings
 
-Under "Account permissions", grant read-only permissions to "GitHub Copilot Chat".
+Under **Account permissions**, grant read-only permissions to `GitHub Copilot Chat`.
 
 ![Account Permissions](images/githubconfig-permissions.png)
 
-### In the "Copilot" settings
+### **Copilot** settings
 
-Set your app type to "Agent," then fill out the remaining fields.
+Set your app type to `Agent`, then fill out the remaining fields.
 
-Under "URL," enter your server's hostname (aka forwarding endpoint) that you deployed in the previous step.
+Under **URL**, enter your server's hostname, which is also known as the forwarding endpoint, that you deployed in the previous step.
 
-### Optional: add your marketplace endpoint
+### Optional: add your Marketplace Endpoint
 
-If you would like to get install/uninstall events when users interact with your marketplace posting, set up a webhook. Under the 'general' tab of your application settings, activate the webhook and add your marketplace endpoint:
+If you would like to get install/uninstall events when users interact with your marketplace posting, set up a webhook. 
+
+Under the **General** tab of your application settings, activate the webhook and add your marketplace endpoint:
 
 ![Webhook setup](images/marketplace.png)
