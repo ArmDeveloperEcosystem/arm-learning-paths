@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Setup the Whisper Model"
+title: "Set up the Whisper Model"
 
 weight: 2
 
