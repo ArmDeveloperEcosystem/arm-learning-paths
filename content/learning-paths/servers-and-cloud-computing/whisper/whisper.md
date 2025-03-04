@@ -10,11 +10,15 @@ layout: "learningpathall"
 
 ## Before you begin
 
-This Learning Path demonstrates how to run the [whisper-large-v3-turbo model](https://huggingface.co/openai/whisper-large-v3-turbo) as an application that accepts an audio input and computes its text transcript. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 24.04 LTS. You will need an Arm server instance with 32 cores, at least 8GB of RAM, and 32GB disk. These steps have been tested on an AWS Graviton4 `c8g.8xlarge` instance.
+This Learning Path demonstrates how to run the [whisper-large-v3-turbo model](https://huggingface.co/openai/whisper-large-v3-turbo) as an application that accepts an audio input and computes its text transcript. 
+
+The instructions in this Learning Path have been designed for Arm servers running Ubuntu 24.04 LTS. You will need an Arm server instance with 32 cores, at least 8GB of RAM, and 32GB of disk space. These steps have been tested on an AWS Graviton4 `c8g.8xlarge` instance.
 
 ## Overview
 
-OpenAI Whisper is an open-source Automatic Speech Recognition (ASR) model trained on multilingual, multitask data. It can generate transcripts in multiple languages and translate various languages into English. In this Learning Path, you will learn about the foundational aspects of speech-to-text transcription applications, with a focus on running OpenAI’s Whisper on an Arm CPU. Finally, you will explore the implementation and performance considerations required to efficiently deploy Whisper using the Hugging Face Transformers framework.
+OpenAI Whisper is an open-source Automatic Speech Recognition (ASR) model trained on multilingual, multitask data. It can generate transcripts in multiple languages and translate various languages into English. 
+
+In this Learning Path, you will learn about the foundational aspects of speech-to-text transcription applications, with a focus on running OpenAI’s Whisper on an Arm CPU. Finally, you will explore the implementation and performance considerations required to efficiently deploy Whisper using the Hugging Face Transformers framework.
 
 ### Speech-to-Text ML applications
 
@@ -51,14 +55,16 @@ pip install torch transformers accelerate
 
 ## Download the Sample Audio File
 
-Download a sample audio file, which is about 33 second audio in .wav format. You can use any .wav file to try different examples:
+Download this sample audio file, which is about 33 seconds in .wav format. 
+
+You can use any .wav file to try different examples:
 ```bash
 wget https://www.voiptroubleshooter.com/open_speech/american/OSR_us_000_0010_8k.wav
 ```
 
 ## Create a Python Script for Audio-To-Text Transcription
 
-Use the Hugging Face `transformers` framework to help process the audio. It provides classes that configure the model, and prepare it for inference. 
+Use the Hugging Face `Transformers` framework to process the audio. It provides classes to configure the model and prepare it for inference. 
 
 The `pipeline` function is an end-to-end solution for NLP tasks. In the code below, it is configured to do pre- and post-processing of the sample in this example, as well as running inference.
 
@@ -127,9 +133,11 @@ export DNNL_VERBOSE=1
 python3 whisper-application.py
 ```
 
-You should see output similar to the image below with a log output, transcript of the audio and the `Inference elapsed time`.
+You should see output similar to the image below, which includes the log output, the audio transcript, and the `Inference elapsed time`.
 
 ![frontend](whisper_output_no_flags.png)
 
 
-You've now run the Whisper model successfully on your Arm-based CPU. Continue to the next section to configure flags that can increase the performance your running model.
+You've now run the Whisper model successfully on your Arm-based CPU. 
+
+Continue to the next section to configure flags that can boost your model's performance.

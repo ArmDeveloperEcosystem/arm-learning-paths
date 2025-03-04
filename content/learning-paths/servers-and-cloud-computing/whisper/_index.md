@@ -1,5 +1,5 @@
 ---
-title: Accelerate OpenAI Whisper on Arm with Hugging Face Transformers
+title: Accelerate Whisper on Arm with Hugging Face Transformers
 
 minutes_to_complete: 30
 
