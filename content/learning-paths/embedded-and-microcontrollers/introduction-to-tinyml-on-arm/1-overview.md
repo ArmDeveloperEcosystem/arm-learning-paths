@@ -8,12 +8,11 @@ layout: learningpathall
 
 ## TinyML
 
-
-This Learning Path is about TinyML. It is a starting point for learning how innovative AI technologies can be used on even the smallest of devices, making Edge AI more accessible and efficient. You will learn how to set up your host machine and target device to facilitate compilation and ensure smooth integration across devices.
+This Learning Path is about TinyML. It is a starting point for learning how innovative AI technologies can be used on even the smallest of devices, making Edge AI more accessible and efficient. You will learn how to set up your host machine to facilitate compilation and ensure smooth integration across devices.
 
 This section provides an overview of the domain with real-life use cases and available devices.
 
-TinyML represents a significant shift in Machine Learning deployment. Unlike traditional Machine Learning, which typically depends on cloud-based servers or high-performance hardware, TinyML is tailored to function on devices with limited resources, constrained memory, low power, and fewer processing capabilities. 
+TinyML represents a significant shift in Machine Learning deployment. Unlike traditional Machine Learning, which typically depends on cloud-based servers or high-performance hardware, TinyML is tailored to function on devices with limited resources, constrained memory, low power, and fewer processing capabilities.
 
 TinyML has gained popularity because it enables AI applications to operate in real-time, directly on the device, with minimal latency, enhanced privacy, and the ability to work offline. This shift opens up new possibilities for creating smarter and more efficient embedded systems.
 
@@ -36,7 +35,7 @@ Here are some of the key benefits of TinyML on Arm:
 
 TinyML is being deployed across multiple industries, enhancing everyday experiences and enabling groundbreaking solutions. The table below shows some examples of TinyML applications.
 
-| Area                  |  Device, Arm IP             | Description                                                                                                |
+| Area                  |  Example, Arm IP            | Description                                                                                                |
 | ------                | -------                     | ------------                                                                                               |
 | Healthcare            | Fitbit Charge 5, Cortex-M   | To monitor vital signs such as heart rate, detect arrhythmias, and provide real-time feedback.             |
 | Agriculture           | OpenAg, Cortex-M            | To monitor soil moisture and optimize water usage.                                                         |
@@ -70,4 +69,4 @@ In addition to hardware, there are software platforms that can help you build Ti
 
 Edge Impulse offers a suite of tools for developers to build and deploy TinyML applications on Arm-based devices. It supports devices like Raspberry Pi, Arduino, and STMicroelectronics boards.
 
-Now that you have an overview of the subject, you can move on to the next section where you will set up an environment on your host machine.
+Now that you have an overview of the subject, you can move on to the next section where you will set up a development environment.
