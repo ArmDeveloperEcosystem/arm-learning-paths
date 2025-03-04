@@ -2,7 +2,7 @@
 # User change
 title: "Set up the Whisper Model"
 
-weight: 2
+weight: 3
 
 # Do not modify these elements
 layout: "learningpathall"
