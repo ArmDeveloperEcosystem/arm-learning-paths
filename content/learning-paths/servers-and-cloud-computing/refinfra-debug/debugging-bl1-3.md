@@ -53,13 +53,13 @@ If you would like to add platform-specific debug files, the memory locations are
 
 These commands load the symbol files and specify the memory address location, updating **workspace** to include the path to your own workspace directory.
 
-The `EL` (Exception Level) and number at the end of each command, for example, `EL3:0`, ensure the symbols are loaded into the correct virtual address space and at the correct memory offset. ATF uses absolute addresses for its symbols so we use an offset of 0.
+The `EL` (Exception Level) and number at the end of each command, for example, `EL3:0`, ensure the symbols are loaded into the correct virtual address space and at the correct memory offset. ATF uses absolute addresses for its symbols so you can use an offset of 0.
 
 When you connect the debugger, the primary CPU will be "spinning" on a ``b .`` instruction from the one you manually added to the ``bl1_entrypoint`` function.
 
 In this debug panel, you can find common debugging functions like stepping and skipping.
 
-Set a breakpoint in the function you would like to debug. In this example, we set a breakpoint at ``bl1_main()``.
+Set a breakpoint in the function you would like to debug. In this example, you can set a breakpoint at ``bl1_main()``.
 
 Simply interrupt the CPU and enter debug command `set $pc += 4'; you can now step through and debug the TF-A boot flow.
 

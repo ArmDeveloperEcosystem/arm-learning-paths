@@ -19,7 +19,7 @@ The log files are stored in:
 <workspace>/rd-infra/model-scripts/rdinfra/platforms/rdn2/rdn2
 ```
 
-Following the previous chapter, we should still be in TF-A. In the Commands window, execute the following command to break at the start of UEFI: ``break EL2N:0xE0000000``. Execute until we are in EL2N address space. This is because the script depends on the current address space when loading in symbols.
+Following the previous section, you should still be in TF-A. In the Commands window, execute the following command to break at the start of UEFI: ``break EL2N:0xE0000000``. Execute until we are in EL2N address space. This is because the script depends on the current address space when loading in symbols.
 
 In Arm DS, go to the scripts tab and hit "Import a script or directory" then "Import a DS or Jython script"
 
