@@ -27,7 +27,7 @@ Before you can run the benchmark, you will need an Arm-based Cloud Service Provi
 Make sure Python is installed by running the following and making sure a version is printed.
 
 ```bash
-python --version
+python3 --version
 ```
 
 ```output
@@ -44,26 +44,31 @@ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyring
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 ```
 
-Next, install some additional dependencies dependencies:
-
-```bash
-sudo apt-get update
-sudo apt-get install ca-certificates curl docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin make -y
-```
-
-Finally, the following commands will finalize the Docker installation:
+Run the following command to add the official Docker repository to your system’s APT sources list:
 
 ```bash
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
+After adding the repository, refresh the package index to ensure the latest versions are available:
+
+```bash
+sudo apt-get update
+```
+Now, install the necessary dependencies, including Docker and related components:
+```bash
+sudo apt-get install ca-certificates curl docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin make -y
+```
+
+This ensures that Docker and its dependencies are correctly set up on your system.
+
 {{% notice Note %}}
 If you run into permission issues with Docker, try running the following:
 
 ```bash
 sudo usermod -aG docker $USER
-sudo chmod 666 /var/run/docker.sock
+newgrp docker
 ```
 {{% /notice %}}
 
