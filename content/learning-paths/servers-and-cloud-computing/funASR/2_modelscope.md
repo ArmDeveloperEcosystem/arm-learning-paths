@@ -1,4 +1,4 @@
-compute---
+---
 title: ModelScope - Open-Source Pre-trained AI models hub
 weight: 3
 
