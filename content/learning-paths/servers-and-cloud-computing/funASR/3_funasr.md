@@ -147,7 +147,7 @@ Result:
 
 The output shows "欢迎大家来到达摩社区进行体验" which means "Welcome everyone to the Dharma community to explore and experience!" as expected.
 
-You can also observe that the spacing between the third and sixth characters is very short. This is because they are combined with other characters, as discussed in the previous section.
+You can also see that the spacing between the third and sixth characters is short. This is because they are combined with other characters, as discussed in the previous section.
 
 You can now build a speech processing pipeline. The output of the speech recognition module serves as the input for the semantic segmentation model, enabling you to validate the accuracy of the recognized results. Copy the code shown below in a file named `funasr_test3.py`:
 
@@ -223,9 +223,7 @@ Good, the result is exactly what you are looking for.
 
 ## Paraformer: Fast and Accurate Parallel Transformer for Non-autoregressive End-to-End Speech Recognition
 
-Now you can look at a more advanced speech recognition model, [Paraformer](https://aclanthology.org/2020.wnut-1.18/).
-
-Paraformer is a novel architecture for automatic speech recognition (ASR) designed for both speed and accuracy. Unlike traditional models, it leverages a parallel transformer architecture, enabling simultaneous processing of multiple parts of the input speech. This parallel processing capability leads to significantly faster inference, making Paraformer well-suited for real-time ASR applications where responsiveness is crucial.  
+[Paraformer](https://aclanthology.org/2020.wnut-1.18/) is a novel architecture for automatic speech recognition (ASR) designed for both speed and accuracy. Unlike traditional models, it leverages a parallel transformer architecture, enabling simultaneous processing of multiple parts of the input speech. This parallel processing capability leads to significantly faster inference, making Paraformer well-suited for real-time ASR applications where responsiveness is crucial.  
 
 Furthermore, Paraformer has demonstrated state-of-the-art accuracy on several benchmark datasets, showcasing its effectiveness in accurately transcribing speech. This combination of speed and accuracy makes Paraformer a promising advancement in the field of ASR, opening up new possibilities for high-performance speech recognition systems.
 
