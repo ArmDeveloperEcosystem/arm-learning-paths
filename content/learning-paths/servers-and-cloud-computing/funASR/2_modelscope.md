@@ -1,5 +1,5 @@
 ---
-title: ModelScope - Open-Source Pre-trained AI models hub
+title: ModelScope - an Open Source Pre-trained AI Models Hub
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,18 +8,18 @@ layout: learningpathall
 
 ## Before you begin
 
-To follow the instructions for this Learning Path, you will need an Arm-based server running Ubuntu 22.04 LTS or later, with at least 8 cores, 16GB of RAM, and 30GB of disk storage.
+Before you begin following the instructions for this Learning Path, make sure you have an Arm-based server running Ubuntu 22.04 LTS or later, with at least 8 cores, 16GB of RAM, and 30GB of disk storage.
 
 ## What is ModelScope?
 [ModelScope](https://github.com/modelscope/modelscope/) is an open-source platform designed to simplify the integration of AI models into applications. It offers a wide variety of pre-trained models for tasks such as image recognition, natural language processing, and audio analysis. With ModelScope, you can seamlessly integrate these models into your projects using just a few lines of code.
 
 Key benefits of ModelScope:
 
-* Model Diversity - Access a wide range of models for various tasks, including Automatic Speech Recognition (ASR), natural language processing (NLP), and computer vision.
+* Model Diversity - access a wide range of models for various tasks, including Automatic Speech Recognition (ASR), natural language processing (NLP), and computer vision.
 
 * Ease of Use - ModelScope provides a user-friendly interface and APIs that enable seamless model integration.
 
-* Community Support - Benefit from a vibrant community of developers and researchers who actively contribute to and support ModelScope.
+* Community Support - benefit from a vibrant community of developers and researchers who actively contribute to and support ModelScope.
 
 
 ## Arm CPU Acceleration
@@ -94,7 +94,7 @@ result = word_segmentation(text)
 print(result)
 ```
 
-This piece of code specifies a model and provides a Chinese sentence for the model to segment.
+This piece of code specifies a model and provides a Chinese sentence for the model to segment;
 "A New Year’s greeting message to share with everyone."
 
 Run the model inference on the sample text:

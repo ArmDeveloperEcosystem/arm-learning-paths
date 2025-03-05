@@ -504,10 +504,10 @@ python --version
 ```
 
 {{% notice Note %}}
-The update-alternatives command is a Debian-based Linux utility (used in Ubuntu, Debian, etc.) for managing symbolic links to different versions of software alternatives. It allows you to easily switch between multiple installed versions of the same program.
+The `update-alternatives` command is a utility in Debian-based Linux distributions, such as Ubuntu and Debian, that manages symbolic links for different software versions. It simplifies the process of switching between multiple installed versions of the same program.
 {{% /notice %}}
 
-The Python version should be 3.10 now.
+The Python version should now be 3.10.
 
 ```output
 Python 3.10.16
@@ -541,19 +541,19 @@ pip uninstall torchao && cd ao/ && rm -rf build && python setup.py install
 ```
 
 {{% notice Note %}}
-Please reference this [link](https://learn.arm.com/learning-paths/servers-and-cloud-computing/pytorch-llama/pytorch-llama/) to learn more the detail description of those instructions.
+See this Learning Path [Run a Large Language Model Chatbot on Arm servers](https://learn.arm.com/learning-paths/servers-and-cloud-computing/pytorch-llama/pytorch-llama/) for further information.
 {{% /notice %}}
 
-Once you have installed the optimized PyTorch, we can enabled bfloat16 fast math kernels by setting DNNL_DEFAULT_FPMATH_MODE.
+Once you have installed the optimized PyTorch, enable bfloat16 fast math kernels by setting DNNL_DEFAULT_FPMATH_MODE.
 
-On AWS Graviton3 as example, this enables GEMM kernels that use bfloat16 MMLA instructions available in the hardware.
+Using AWS Graviton3 as an example, this enables GEMM kernels that use bfloat16 MMLA instructions available in the hardware.
 
 
 ### Update the FunASR application with benchmark function
 
-Now we can test FunASR model again.
+Now you can test the FunASR model again.
 
-By re-use the previously paraformer-2.py and add benchmark function, please copy the updated code shown below in a file named `paraformer-3.py`:
+By reusing the previously-named `paraformer-2.py` file and add benchmark function, copy the updated code shown below in a file named `paraformer-3.py`:
 
 ```python
 import os
@@ -650,7 +650,7 @@ The model took 0.816 seconds to complete execution.
 
 ### Enable bfloat16 Fast Math Kernels
 
-Now we enable bfloat16 and run Python script again:
+Now enable bfloat16 and run Python script again:
 
 ```bash
 export DNNL_DEFAULT_FPMATH_MODE=BF16
@@ -665,7 +665,7 @@ rtf_avg: 0.010: 100%|
  Execution Time: 738.04 ms (Mean), 747.57 ms (P99)
 ```
 
-You can notice that the execution time is now 0.7 seconds, reflecting an improvement compared to earlier results.
+Here you can see that the execution time is now 0.7 seconds, reflecting an improvement compared to earlier results.
 
 ## Conclusion
-Arm CPUs and an optimized software ecosystem enable developers to build innovative, efficient ASR solutions. Explore the capabilities of ModelScope and FunASR, and unlock the potential of Arm technology for your next Chinese ASR project.
+Arm CPUs paired with an optimized software ecosystem enable developers to build innovative, efficient ASR solutions. Discover the potential of ModelScope and FunASR, and harness Arm technology for your next Chinese ASR project.
