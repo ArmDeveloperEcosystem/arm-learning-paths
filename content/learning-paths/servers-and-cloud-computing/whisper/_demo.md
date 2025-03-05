@@ -1,14 +1,14 @@
 ---
-title: Demo - Audio transcription on Arm
+title: Demo - Whisper Voice Audio transcription on Arm
 overview: | 
   Insert helpful overview here.
 
 
 
 demo_steps:
-  - Record your voice (giving mic permissions to your browser).
-  - Review and send to _________________insert technical thing here_____________.
-  - Get transcription and view stats.
+  - Record your voice, ensuring that your browser has microphone permissions enabled.
+  - Review your recording and send to _________________insert technical thing here_____________.
+  - Receive the transcription and view your statistics.
 
 
 title_chatbot_area: Whisper Voice Demo
@@ -21,7 +21,7 @@ terms_and_conditions: demo-terms-and-conditions.txt
 
 ### Specific details to this demo
 # ================================================================================
-stats_description: The 'total time' for a whisper voice-to-text process refers to the complete duration taken from the moment the audio input is received until the final text output is generated. This includes several related times such as the 'pre-processing time', which is the time taken to prepare the audio data for transcription, the 'transcription time', which is the actual time spent converting the audio to text, and the 'post-processing time', which involves refining and formatting the transcribed text. Each of these stages contributes to the overall 'total time' and can vary depending on factors such as audio quality, length of the audio, and the efficiency of the transcription algorithm.
+stats_description: The 'total time' for a Whisper voice-to-text process is the full duration from when the audio input is received until the final text output is generated. This includes 'pre-processing time' - the time taken to prepare the audio data for transcription; transcription time' - the actual time spent converting the audio to text; and Post-processing time' - the time spent refining and formatting the transcribed text. Each of these stages contributes to the overall 'total time' and can vary depending on factors such as audio quality, length of the audio, and the efficiency of the transcription algorithm.
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
