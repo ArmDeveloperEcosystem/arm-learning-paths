@@ -23,12 +23,13 @@ In the Matrix processing library, you implement two types of checks:
 
 The idea here is to make the program fail in a noticeable way. Of course, in a real world application, the error should be caught and dealt with by the application, if it can. Error handling, and especially recovering from errors, can be a complex topic.
 
-At the top of file `include/Matrix/Matrix.h`, include `<cassert>` to get the C-style assertions declarations for checks in `Debug` mode only:
+At the top of file `include/Matrix/Matrix.h`, include `<cassert>` to get the C-style assertions declarations for checks in `Debug` mode only, as well as `<cstddef>` which provides standard C declaration like `size_t`:
 
 ```CPP
 #pragma once
 
 #include <cassert>
+#include <cstddef>
 
 namespace MatComp {
 ```
@@ -44,7 +45,7 @@ const Version &getVersion();
 /// and the EXIT_FAILURE error code. It will also print the file name (\p
 /// fileName) and line number (\p lineNumber) that caused that application to
 /// exit.
-[[noreturn]] void die(const char *fileName, std::size_t lineNumber,
+[[noreturn]] void die(const char *fileName, size_t lineNumber,
                       const char *reason);
 
 ```
@@ -109,10 +110,11 @@ The Matrix data structure has the following private data members:
 Modern C++ offers constructs in the language to deal safely with memory; you will use `std::unique_ptr` which guaranties that the Matrix class will be safe from a whole range of memory management errors.
 
 Add the following includes at the top of `include/Matrix/Matrix.h`, right under
-the '<cassert>' include:
+the `<cstddef>` include:
 
 ```CPP
 #include <cassert>
+#include <cstddef>
 #include <cstring>
 #include <initializer_list>
 #include <iostream>
@@ -229,12 +231,6 @@ TEST(Matrix, defaultConstruct) {
 TEST(Matrix, booleanConversion) {
     EXPECT_FALSE(Matrix<int8_t>());
     EXPECT_FALSE(Matrix<double>());
-
-    EXPECT_TRUE(Matrix<int8_t>(1, 1));
-    EXPECT_TRUE(Matrix<double>(1, 1));
-
-    EXPECT_TRUE(Matrix<int8_t>(1, 1, 1));
-    EXPECT_TRUE(Matrix<double>(1, 1, 2.0));
 }
 ```
 
@@ -320,9 +316,9 @@ The tests should still pass, check for yourself.
 The next step is to be able to construct valid matrices, so add this constructor to the public section of class `Matrix` in `include/Matrix/Matrix.h`:
 
 ```CPP
-    /// Construct a \p numRows x \p numColumns uninitialized Matrix
-    Matrix(size_t numRows, size_t numColumns)
-        : numRows(numRows), numColumns(numColumns), data() {
+    /// Construct a \p numRows x \p numCols uninitialized Matrix
+    Matrix(size_t numRows, size_t numCols)
+        : numRows(numRows), numColumns(numCmns), data() {
         allocate(getNumElements());
     }
 ```
@@ -348,6 +344,17 @@ TEST(Matrix, uninitializedConstruct) {
 ```
 
 This constructs a valid `Matrix` if it contains elements), and the `uninitializedConstruct` test checks that two valid matrices of different types and dimensions can be constructed.
+You should also update the `booleanConversion` test in this file to check for boolean conversion for valid matrices so it now looks like:
+
+```CPP
+TEST(Matrix, booleanConversion) {
+    EXPECT_FALSE(Matrix<int8_t>());
+    EXPECT_FALSE(Matrix<double>());
+
+    EXPECT_TRUE(Matrix<int8_t>(1, 1));
+    EXPECT_TRUE(Matrix<double>(1, 1));
+}
+```
 
 Compile and test again, all should pass:
 
@@ -374,6 +381,35 @@ ninja check
 [  PASSED  ] 4 tests.
 ```
 
+Another constructor that is missing is one that will create and initialize matrices to a known value. Let's add it to `Matrix` in `include/Matrix/Matrix.h`:
+
+```CPP
+    /// Construct a \p numRows x \p numCols Matrix with all elements
+    /// initialized to value \p val.
+    Matrix(size_t numRows, size_t numCols, Ty val) : Matrix(numRows, numCols) {
+        allocate(getNumElements());
+        for (size_t i = 0; i < getNumElements(); i++)
+            data[i] = val;
+    }
+```
+
+Add boolean conversion tests for this new constructor by modifying `booleanConversion` in `tests/Matrix.cpp` so it looks like:
+
+```CPP
+TEST(Matrix, booleanConversion) {
+    EXPECT_FALSE(Matrix<int8_t>());
+    EXPECT_FALSE(Matrix<double>());
+
+    EXPECT_TRUE(Matrix<int8_t>(1, 1));
+    EXPECT_TRUE(Matrix<double>(1, 1));
+
+    EXPECT_TRUE(Matrix<int8_t>(1, 1, 1));
+    EXPECT_TRUE(Matrix<double>(1, 1, 2.0));
+}
+```
+
+You should be getting the pattern now: each new feature or method comes with tests.
+
 The `Matrix` class is missing two important methods:
 - A *getter*, to read the matrix element at (row, col).
 - A *setter*, to modify the matrix element at (row, col).
@@ -396,20 +432,6 @@ Add them now in the public section of `Matrix` in `include/Matrix/Matrix.h`:
         return data[row * numColumns + col];
     }
 ```
-
-Another constructor that is missing is one that will create and initialize matrices to a known value. Let's add it to `Matrix` in `include/Matrix/Matrix.h`:
-
-```CPP
-    /// Construct a \p numRows x \p numColumns Matrix with all elements
-    /// initialized to value \p val.
-    Matrix(size_t numRows, size_t numCols, Ty val) : Matrix(numRows, numCols) {
-        allocate(getNumElements());
-        for (size_t i = 0; i < getNumElements(); i++)
-            data[i] = val;
-    }
-```
-
-You should be getting the pattern now.
 
 Add tests for those 3 methods in `tests/Matrix.cpp`:
 
@@ -503,7 +525,7 @@ The C++ `std::initializer_list`  enables users to provide a list of literal
 values (in row major order) to use to initialize the matrix with:
 
 ```CPP
-    /// Construct a \p numRows x \p numColumns Matrix with elements
+    /// Construct a \p numRows x \p numCols Matrix with elements
     /// initialized from the values from \p il in row-major order.
     Matrix(size_t numRows, size_t numCols, std::initializer_list<Ty> il)
         : Matrix(numRows, numCols) {
@@ -862,7 +884,7 @@ ninja check
 [----------] 16 tests from Matrix (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 16 tests from 3 test suites ran. (0 ms total)
+[==========] 16 tests from 1 test suite ran. (0 ms total)
 [  PASSED  ] 16 tests.
 ```
 
@@ -941,6 +963,7 @@ Add these to the public section of `Matrix` in `include/Matrix/Matrix.h`:
                 return false;
         return true;
     }
+
     /// Returns true iff matrices do not compare equal.
     bool operator!=(const Matrix &rhs) const { return !(*this == rhs); }
 ```
