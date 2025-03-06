@@ -1,5 +1,5 @@
 ---
-title: Start migrating applications that use performance libraries 
+title: Start Migrating Applications That Use Performance Libraries 
 
 minutes_to_complete: 60
 
