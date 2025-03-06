@@ -18,7 +18,7 @@ The basic flow of a RAG system includes:
 
 The benefits of a RAG system center around improved factual accuracy of responses and the ability to integrate up-to-date information, as you can update the knowledge base without retraining the model. 
 
-Most importantly, RAG lets you provide reference links to the user, showing the user where the information originates. This not only build trust with users but also serves as a pathway for further exploration of the source material.
+Most importantly, RAG lets you provide reference links to the user, showing the user where the information originates. This not only builds trust with users but also serves as a pathway for further exploration of the source material.
 
 ## What are the challenges of building a RAG system?
 
