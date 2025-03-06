@@ -1,20 +1,17 @@
 ---
-title: Deploy ModelScope FunASR Chinese Speech Recognition Model on Arm Servers
-draft: true
-cascade:
-    draft: true
+title: Deploy ModelScope FunASR Model on Arm Servers
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for software developers and AI engineers interested in learning how to run Chinese Automatic Speech Recognition (ASR) applications on Arm servers.
+who_is_this_for: This is an introductory topic for developers interested in learning how to deploy the ModelScope FunASR Chinese Automatic Speech Recognition (ASR) model on Arm-based servers.
 
 learning_objectives:
     - Leverage open-source large language models and tools to build Chinese ASR applications.
-    - Deploy real-time Chinese speech recognition, punctuation restoration, and sentiment analysis with FunASR.
-    - Describe how to accelerate ModelScope models on Arm-based servers for performance and efficiency.
+    - Deploy real-time Chinese speech recognition, punctuation restoration, and sentiment analysis using FunASR.
+    - Describe how to accelerate ModelScope models on Arm-based servers for enhanced performance and efficiency.
 
 prerequisites:
-    - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, or a local Arm Linux computer with at least 8 CPUs and 16GB RAM.
+    - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, or a local Arm Linux computer with at least 8 CPUs and 16GB of RAM.
 
 author: Odin Shen
 

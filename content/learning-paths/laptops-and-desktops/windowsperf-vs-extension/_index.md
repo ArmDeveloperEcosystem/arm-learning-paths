@@ -1,8 +1,5 @@
 ---
 title: Learn how to use the Visual Studio extension for WindowsPerf
-draft: true
-cascade:
-    draft: true
 
 minutes_to_complete: 30
 

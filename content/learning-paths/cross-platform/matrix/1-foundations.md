@@ -32,6 +32,16 @@ Emacs](https://www.gnu.org/software/emacs/), or [Sublime
 Text](https://www.sublimetext.com/), which are also popular and they all
 support extensions that make C++ development easy.
 
+## Source code
+
+In case you want to, you can [download the source code](https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/matrix) for this learning path. This will download a `.tar.gz` archive that you will need to expand:
+
+```BASH
+tar xfz code-examples-main-learning-paths-cross-platform-matrix.tar.gz
+mv code-examples-main-learning-paths-cross-platform-matrix code-examples
+```
+
+The source code for this learning path will be available in `code-examples/learning-paths/cross-platform/matrix/`.
 
 ## What are the differences between configuring the project and building the code?
 
@@ -64,7 +74,7 @@ projects like [LLVM](https://www.llvm.org) or [Qt](https://www.qt.io/).
 
 Organizing the files in a project is important because it allows you to:
 
-- Easily navigate the structure and find information.  
+- Easily navigate the structure and find information.
 - Organize information for the tools, such as compilers and linkers.
 - Make a distinction between information that is exported or installed, and what is
   only relevant for building the project.
@@ -117,7 +127,18 @@ There is nothing like creating the canonical `Hello, World!` application!
 Use your favorite text editor or IDE to
 create the file `src/howdy.cpp` and add the following content:
 
-{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-1/src/howdy.cpp" >}}
+```CPP
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+
+int main(int argc, char *argv[]) {
+    cout << "Hello, World !\n";
+
+    return EXIT_SUCCESS;
+}
+```
 
 ## Setup CMake
 
@@ -226,21 +247,89 @@ library version.
 Add the `Matrix.h` header file, declaring the `Version` object
 and the `getVersion` function and save the file as `include/Matrix/Matrix.h`:
 
-{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-1/include/Matrix/Matrix.h" >}}
+```CPP
+#pragma once
+
+namespace MatComp {
+
+/// The Version struct is used to carry around the major, minor and patch level.
+struct Version {
+    unsigned major; //< The major version level.
+    unsigned minor; //< The minor version level.
+    unsigned patch; //< The patch level.
+};
+
+/// Get the Matrix library version information.
+const Version &getVersion();
+
+} // namespace MatComp
+```
 
 With those declarations in place, create and add the following lines to
 `lib/Matrix/Matrix.cpp` to provide an implementation to `getVersion`:
 
-{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-1/lib/Matrix/Matrix.cpp" >}}
+```CPP
+#include "Matrix/Matrix.h"
+
+namespace {
+const MatComp::Version version = {.major = 0, .minor = 1, .patch = 0};
+}
+
+namespace MatComp {
+
+const Version &getVersion() { return version; }
+
+} // namespace MatComp
+```
 
 Now, you can create a program that will make use of the
 ``getVersion`` function. Use your editor to save the code below as `src/getVersion.cpp`:
 
-{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-1/src/getVersion.cpp" >}}
+```CPP
+#include "Matrix/Matrix.h"
+
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+using namespace MatComp;
+
+int main(int argc, char *argv[]) {
+    const Version &version = getVersion();
+    cout << "Using Matrix version: " << version.major << '.' << version.minor
+         << '.' << version.patch << '\n';
+
+    return EXIT_SUCCESS;
+}
+```
 
 Finally, add the instructions below in the top-level `CMakeLists.txt`:
 
-{{< include-code TXT "content/learning-paths/cross-platform/matrix/projects/chapter-1/CMakeLists.txt" >}}
+```TXT
+# Set the minimum CMake version we require. In our case, it is intentionnally
+# very old as we are not making use of recent CMake features.
+cmake_minimum_required(VERSION 3.5)
+
+# Give a name to our project ('Matrix') and inform CMake about the language used.
+project(Matrix LANGUAGES CXX)
+
+# Add 'howdy', a standalone executable with no dependency to any library that
+# has to be built from the sources in 'src/howdy.cpp'.
+add_executable(howdy src/howdy.cpp)
+
+# Add our 'Matrix' library, that is built as a static library, from source file
+# 'lib/Matrix/Matrix.cpp'. CMake is instruction that C++17 is used, and that
+# the library headers can be found in ${CMAKE_SOURCE_DIR}/include.
+add_library(Matrix STATIC lib/Matrix/Matrix.cpp)
+target_compile_features(Matrix PUBLIC cxx_std_17)
+target_include_directories(Matrix
+  PUBLIC ${CMAKE_SOURCE_DIR}/include)
+
+# Add 'matrix-getVersion', an executable that depends on the Matrix library,
+# that has to be built from source file 'src/getVersion.cpp'.
+add_executable(matrix-getVersion src/getVersion.cpp)
+target_link_libraries(matrix-getVersion Matrix)
+```
 
 The `add_library` instructs CMake how to build the Matrix library. The
 `target_include_directories` specifies where the Matrix library header is located, and the `target_compile_features` specifies that C++17 is the version
@@ -301,3 +390,7 @@ For example, Visual Studio Code can work seamlessly with CMake with plugins, and
 generate project files for several popular IDEs, such as Xcode, Sublime Text, Eclipse,
 CodeBlocks, and CodeLite. You can run `cmake --help` to get a
 list of supported *generators* (in CMake terminology) for your platform.
+
+You can refer to this chapter source code in
+`code-examples/learning-paths/cross-platform/matrix/chapter-1` in the archive that
+you have downloaded earlier.
