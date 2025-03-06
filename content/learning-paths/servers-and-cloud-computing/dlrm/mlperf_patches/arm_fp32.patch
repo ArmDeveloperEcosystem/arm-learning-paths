@@ -1,0 +1,326 @@
+diff --git a/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/backend_pytorch_native.py b/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/backend_pytorch_native.py
+index 5d753b55a..ebeafaf72 100755
+--- a/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/backend_pytorch_native.py
++++ b/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/backend_pytorch_native.py
+@@ -12,7 +12,7 @@ from typing import List, Optional, Union, Callable
+ from dataset import Dataset
+ from model.dlrm_model import DLRMMLPerf
+ from torch import nn
+-import intel_extension_for_pytorch as ipex
++# import intel_extension_for_pytorch as ipex
+ 
+ # Modules for distributed running
+ import torch.multiprocessing as mp
+@@ -140,10 +140,10 @@ class BackendPytorchNative(backend.Backend):
+ 
+     def load_state_dict(self, model_path):
+         state_dict = torch.load(model_path)
+-        for key in list(state_dict.keys()):
+-            if 'embedding_bags' in key:
+-                newkey = key.replace('.weight', '').replace('embedding_bags.', 'weights.')
+-                state_dict[newkey] = state_dict.pop(key)
++        # for key in list(state_dict.keys()):
++        #     if 'embedding_bags' in key:
++        #         newkey = key.replace('.weight', '').replace('embedding_bags.', 'weights.')
++        #         state_dict[newkey] = state_dict.pop(key)
+         return state_dict
+ 
+     def load(self, args, dataset):
+@@ -178,7 +178,7 @@ class BackendPytorchNative(backend.Backend):
+                 print("Loading model weights...")
+                 model.load_state_dict(self.load_state_dict(model_path))
+             model.training = False
+-            self.model = ipex.optimize(model, torch.bfloat16, None, inplace=True)
++            # self.model = ipex.optimize(model, torch.bfloat16, None, inplace=True)
+             self.model.sparse_arch.embedding_bag_collection.embedding_bags.bfloat16()
+             print('bf16 model ready...')
+         elif args.use_int8:
+diff --git a/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/calibration.py b/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/calibration.py
+index bc022bf46..f5140255f 100644
+--- a/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/calibration.py
++++ b/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/calibration.py
+@@ -24,7 +24,7 @@ import torch
+ import dataset
+ import multihot_criteo
+ from backend_pytorch_native import get_backend
+-import intel_extension_for_pytorch as ipex
++# import intel_extension_for_pytorch as ipex
+ 
+ logging.basicConfig(level=logging.INFO)
+ log = logging.getLogger("main")
+@@ -275,7 +275,7 @@ def main():
+         # targets.append(batch.labels.detach().cpu().float().numpy())
+         res_np = results[0:sample_e].copy()
+         tgt_np = targets[0:sample_e].copy()
+-        roc_auc = ipex._C.roc_auc_score(torch.tensor(tgt_np).reshape(-1), torch.tensor(res_np).reshape(-1))
++        roc_auc = "" # ipex._C.roc_auc_score(torch.tensor(tgt_np).reshape(-1), torch.tensor(res_np).reshape(-1))
+         print(f'roc_auc of {roc_auc[0]} dur {inft} ms')
+         # if i >= batchsize *2:
+         #    sys.exit(0)
+diff --git a/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/consumer.py b/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/consumer.py
+index e05093ce8..b6fa6f060 100644
+--- a/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/consumer.py
++++ b/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/consumer.py
+@@ -9,12 +9,13 @@ import multiprocessing
+ import time
+ import torch
+ import torch.multiprocessing as mp
+-import intel_extension_for_pytorch as ipex
++# import intel_extension_for_pytorch as ipex
+ from items import OItem
+ from torch.ao.quantization import MinMaxObserver, PerChannelMinMaxObserver, QConfig
+-from intel_extension_for_pytorch.quantization import prepare, convert
++# from intel_extension_for_pytorch.quantization import prepare, convert
+ from backend_pytorch_native import get_backend
+ from criteo import get_dataset
++import psutil
+ 
+ class Consumer(multiprocessing.Process):
+     def __init__(self, task_queue, result_queue, ds_queue, lock, init_counter, proc_num, args,
+@@ -88,9 +89,17 @@ class Consumer(multiprocessing.Process):
+         socket_id = self.inst_start_idx[0] // self.cpus_per_sockets
+         core_id = self.inst_start_idx[i] - socket_id * self.cpus_per_sockets
+         # ipex._C.thread_bind(socket_id, self.cpus_per_sockets, core_id, self.cpus_per_instance) syk need to confirm with haozhe
+-        cpu_pool = ipex.cpu.runtime.CPUPool(
+-            [socket_id * self.cpus_per_sockets + core_id + i
+-             for i in range(self.cpus_per_instance)])
++        # cpu_pool = ipex.cpu.runtime.CPUPool(
++        #     [socket_id * self.cpus_per_sockets + core_id + i
++        #      for i in range(self.cpus_per_instance)])
++        cpu_pool = [socket_id * self.cpus_per_sockets + core_id + i
++            for i in range(self.cpus_per_instance)]
++
++        torch.set_num_threads(self.cpus_per_instance)
++        p = psutil.Process()
++        # pin the process to specific cores
++        p.cpu_affinity(cpu_pool)
++
+         instance_name = str(pid) + "-" + str(i)
+         #print(instance_name, " : Start handle_tasks")
+         if args.enable_profiling:
+@@ -100,61 +109,61 @@ class Consumer(multiprocessing.Process):
+         self.init_counter.value += 1
+         self.lock.release()
+ 
+-        with ipex.cpu.runtime.pin(cpu_pool):
+-            with torch.autograd.profiler.profile(args.enable_profiling) as prof:
+-                while True:
+-                    qitem = task_queue.get()
+-                    if qitem is None:
+-                        if args.enable_profiling:
+-                            with open(filename, "w") as prof_f:
+-                                prof_f.write(prof.key_averages().table(sort_by="self_cpu_time_total"))
+-                        #print(instance_name, " : Exit")
+-                        break
+-                    #get_sample_start = time.time()
+-                    batch_dense_X, batch_lS_i, batch_T = self.get_samples(qitem.content_id)
+-                    idx_offsets = qitem.idx_offsets
+-                    #get_sample_timing = time.time() - get_sample_start
+-                    #print("DS get_samples elapsed time:{} ms ".format(get_sample_timing * 1000))
+-                    presults = []
+-                    try:
+-                        # predict_start = time.time()
+-                        if args.use_bf16:
+-                            batch_dense_X = batch_dense_X.bfloat16()
+-                        if args.use_int8:
+-                            batch_lS_i = [i.long() for i in batch_lS_i]
+-                        results = model.batch_predict(batch_dense_X, batch_lS_i)
+-                        # predict_timing = time.time() - predict_start
+-                        # print("batch size = {}, predict elapsed time:{} ms".format(len(batch_dense_X), predict_timing * 1000))
+-                        # post_process
+-                        results = results.detach().cpu()
+-                        presults = torch.cat((results.view(-1, 1), batch_T.view(-1, 1)), dim=1)
+-
+-                        if args.accuracy:
+-                            total = len(results)
+-                            good = (results.round() == batch_T).nonzero(as_tuple=False).size(0)
+-                            result_timing = time.time() - qitem.start
+-
+-                    except Exception as ex:  # pylint: disable=broad-except
+-                        print("instance ", instance_name, " failed ", ex)
+-                        presults = [[]] * len(qitem.query_id)
+-                    finally:
+-                        response_array_refs = []
+-                        query_list = qitem.query_id
+-                        prev_off = 0
+-                        for idx, query_id in enumerate(query_list):
+-                            cur_off = prev_off + idx_offsets[idx]
+-                            response_array = array.array("B", np.array(presults[prev_off:cur_off], np.float32).tobytes())
+-                            response_array_refs.append(response_array)
+-                            prev_off = cur_off
+-                        if args.accuracy:
+-                            result_queue.put(OItem(np.array(presults, np.float32), query_list, response_array_refs, good, total, result_timing))
+-                        else:
+-                            result_queue.put(OItem([], query_list, response_array_refs))
++        # with ipex.cpu.runtime.pin(cpu_pool):
++        with torch.autograd.profiler.profile(args.enable_profiling) as prof:
++            while True:
++                qitem = task_queue.get()
++                if qitem is None:
++                    if args.enable_profiling:
++                        with open(filename, "w") as prof_f:
++                            prof_f.write(prof.key_averages().table(sort_by="self_cpu_time_total"))
++                    #print(instance_name, " : Exit")
++                    break
++                #get_sample_start = time.time()
++                batch_dense_X, batch_lS_i, batch_T = self.get_samples(qitem.content_id)
++                idx_offsets = qitem.idx_offsets
++                #get_sample_timing = time.time() - get_sample_start
++                #print("DS get_samples elapsed time:{} ms ".format(get_sample_timing * 1000))
++                presults = []
++                try:
++                    # predict_start = time.time()
++                    if args.use_bf16:
++                        batch_dense_X = batch_dense_X.bfloat16()
++                    if args.use_int8:
++                        batch_lS_i = [i.long() for i in batch_lS_i]
++                    results = model.batch_predict(batch_dense_X, batch_lS_i)
++                    # predict_timing = time.time() - predict_start
++                    # print("batch size = {}, predict elapsed time:{} ms".format(len(batch_dense_X), predict_timing * 1000))
++                    # post_process
++                    results = results.detach().cpu()
++                    presults = torch.cat((results.view(-1, 1), batch_T.view(-1, 1)), dim=1)
++
++                    if args.accuracy:
++                        total = len(results)
++                        good = (results.round() == batch_T).nonzero(as_tuple=False).size(0)
++                        result_timing = time.time() - qitem.start
++
++                except Exception as ex:  # pylint: disable=broad-except
++                    print("instance ", instance_name, " failed ", ex)
++                    presults = [[]] * len(qitem.query_id)
++                finally:
++                    response_array_refs = []
++                    query_list = qitem.query_id
++                    prev_off = 0
++                    for idx, query_id in enumerate(query_list):
++                        cur_off = prev_off + idx_offsets[idx]
++                        response_array = array.array("B", np.array(presults[prev_off:cur_off], np.float32).tobytes())
++                        response_array_refs.append(response_array)
++                        prev_off = cur_off
++                    if args.accuracy:
++                        result_queue.put(OItem(np.array(presults, np.float32), query_list, response_array_refs, good, total, result_timing))
++                    else:
++                        result_queue.put(OItem([], query_list, response_array_refs))
+ 
+     def run(self):
+         os.sched_setaffinity(self.pid, range(self.inst_start_idx[0], self.inst_start_idx[-1] + self.cpus_per_instance))
+         # Why set num threads of torch here? (Wang,JingYu **Now keep same with origin code**)
+-        torch.set_num_threads(len(self.inst_start_idx) * self.cpus_per_instance)
++        # torch.set_num_threads(len(self.inst_start_idx) * self.cpus_per_instance)
+ 
+         backend = get_backend(self.args.backend, self.args.dataset, self.args.use_gpu, False)
+         self.model = backend.load(self.args, None)
+@@ -172,11 +181,11 @@ class Consumer(multiprocessing.Process):
+         ds.load_query_samples(sample_list)
+         self.items_in_memory = ds.items_in_memory
+         print(str(self.pid), " : Complete load query samples !!")
+-        
++
+         self.lock.acquire()
+         self.init_counter.value += 1
+         self.lock.release()
+-        
++
+         if len(self.inst_start_idx) > 1 :
+             for i in range(len(self.inst_start_idx)):
+                 if self.rqnum == 1:
+diff --git a/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/model/data_loader_terabyte.py b/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/model/data_loader_terabyte.py
+index eb46701bd..b084a7d80 100644
+--- a/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/model/data_loader_terabyte.py
++++ b/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/model/data_loader_terabyte.py
+@@ -42,7 +42,7 @@ class DataLoader:
+             data_directory,
+             data_filename + "_day_count_v2.npz"
+         )
+-        
++
+         with np.load(total_file) as data:
+             total_per_file = data["total_per_file"][np.array(days)]
+ 
+@@ -77,16 +77,16 @@ def _transform_features(
+     select_index = []
+     for i in range(26+1):
+         select_index.append(sum(multi_hot_sizes[:i]))
+-   
++
+     if flag_input_torch_tensor:
+         dense = x_int_batch.type(torch.float32).clone().detach()
+         labels = y_batch.type(torch.int32).clone().detach()
+         # sparse = x_cat_batch.detach().clone().type(torch.int32)
+         for i in range(26):
+-            sparse.append(x_cat_batch[:,select_index[i]:select_index[i+1]].type(torch.int32).clone().flatten().detach())
++            sparse.append(x_cat_batch[:,select_index[i]:select_index[i+1]].type(torch.int64).clone().flatten().detach())
+     else:
+         dense = torch.tensor(x_int_batch, dtype=torch.float32)
+-        sparse = torch.tensor(x_cat_batch, dtype=torch.int32)
++        sparse = torch.tensor(x_cat_batch, dtype=torch.int64)
+         labels = torch.tensor(y_batch, dtype=torch.int32)
+ 
+     return dense, tuple(sparse), labels.view(-1, 1)
+@@ -242,7 +242,7 @@ class CriteoBinDataset(Dataset):
+         dense = self.arr_dense[idx:idx+bs,:].copy()
+         sparse = self.arr_label_sparse[idx:idx+bs,1:].copy()
+         label = self.arr_label_sparse[idx:idx+bs,0:1].copy()
+-         
++
+         return _transform_features(torch.from_numpy(dense).type(torch.float32),
+                                    torch.from_numpy(sparse).type(torch.int32),
+                                    torch.from_numpy(label).type(torch.int32),
+@@ -257,7 +257,7 @@ class CriteoBinDataset(Dataset):
+ def numpy_to_binary(input_files, output_file_path, split='train'):
+     output_file_path_label_sparse = output_file_path + "/terabyte_processed_test_v2_label_sparse.bin"
+     output_file_path_dense = output_file_path + "/terabyte_processed_test_v2_dense.bin"
+-    
++
+     with open(output_file_path_label_sparse, 'wb') as output_file:
+         if split == 'train':
+             for input_file in input_files:
+@@ -292,10 +292,10 @@ def numpy_to_binary(input_files, output_file_path, split='train'):
+                 end = samples_in_file
+             else:
+                 raise ValueError('Unknown split value: ', split)
+-            
++
+             print("writing output to file")
+             output_file.write(np_data[begin:end].tobytes())
+-    
++
+     with open(output_file_path_dense, 'wb') as output_file:
+         assert len(input_files) == 3
+         np_dense_data = np.load(input_files[1])
+diff --git a/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/model/dlrm_model.py b/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/model/dlrm_model.py
+index 01dc3124b..3cd1d6c58 100644
+--- a/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/model/dlrm_model.py
++++ b/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/python/model/dlrm_model.py
+@@ -3,8 +3,9 @@ from typing import List, Optional, Union, Callable
+ import numpy as np
+ import torch
+ from torch import nn
+-import intel_extension_for_pytorch as ipex
+-from intel_extension_for_pytorch.nn.modules import MergedEmbWithCat as MergedEmbWithCat
++# import intel_extension_for_pytorch as ipex
++# from intel_extension_for_pytorch.nn.modules import MergedEmbWithCat as MergedEmbWithCat
++from model.merged_embeddingbag import MergedEmbWithCat as MergedEmbWithCat
+ 
+ from torch.autograd.profiler import record_function
+ from functools import partial
+diff --git a/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/run_dump_torch_model.sh b/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/run_dump_torch_model.sh
+old mode 100644
+new mode 100755
+diff --git a/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/run_main.sh b/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/run_main.sh
+index 3b2afc5be..f7a77d841 100755
+--- a/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/run_main.sh
++++ b/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8/run_main.sh
+@@ -17,10 +17,10 @@ else
+ fi
+ 
+ export KMP_BLOCKTIME=1
+ export OMP_NUM_THREADS=$CPUS_PER_INSTANCE
+ export KMP_AFFINITY="granularity=fine,compact,1,0"
+ export DNNL_PRIMITIVE_CACHE_CAPACITY=20971520
+-export LD_PRELOAD="${CONDA_PREFIX}/lib/libtcmalloc.so:${CONDA_PREFIX}/lib/libiomp5.so"
++export LD_PRELOAD="${CONDA_PREFIX}/lib/libtcmalloc.so:${CONDA_PREFIX}/lib/libgomp.so"  #  "/usr/lib/gcc/aarch64-linux-gnu/12/libgomp.so"
+ export DLRM_DIR=$PWD/python/model
+ export TCMALLOC_LARGE_ALLOC_REPORT_THRESHOLD=30469645312
+ 
