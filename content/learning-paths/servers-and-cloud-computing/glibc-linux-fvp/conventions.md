@@ -29,8 +29,8 @@ Table 1. Directory layout
 | `/home/user/workspace/linux`         | Folder with the Linux kernel sources       |
 | `/home/user/workspace/linux-headers` | Directory for installing kernel headers    |
 | `/home/user/workspace/linux-build`   | Folder for the Linux kernel build output   |
-| `/home/user/workspace/glibc`         | Foldr for the Glibc sources                |
-| `/home/user/workspace/glibc-build`   | Directory foir the Glibc build output      |
+| `/home/user/workspace/glibc`         | Folder for the Glibc sources               |
+| `/home/user/workspace/glibc-build`   | Directory for the Glibc build output       |
 
 
 
