@@ -3701,7 +3701,6 @@ Dropbear
 DxeCore
 EFI
 FFTW
-Foldr
 HMMER
 ILP
 IoC
@@ -3725,7 +3724,7 @@ Shrinkwrap
 Shrinkwrap's
 TSO
 TSan
-TSan’s
+TSan's
 ThreadSanitizer
 Toolkits
 ULP
