@@ -1,10 +1,6 @@
 ---
 title: Deploy Graviton Infrastructure for GitHub Copilot Extensions
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for developers seeking to deploy the Graviton infrastructure on Amazon Web Services (AWS) for a GitHub Copilot Extension.
