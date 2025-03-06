@@ -1,8 +1,5 @@
 ---
 title: Deploy ModelScope FunASR Model on Arm Servers
-draft: true
-cascade:
-    draft: true
 
 minutes_to_complete: 60
 
