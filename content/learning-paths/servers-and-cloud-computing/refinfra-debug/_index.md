@@ -1,7 +1,7 @@
 ---
 title: Debug Neoverse N2 Reference Design with Arm Development Studio
 
-minutes_to_complete: 20
+minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for software developers who are interested in debugging the Arm Neoverse N2 Reference Firmware Stack.
 
@@ -25,19 +25,15 @@ armips:
     - Neoverse
 tools_software_languages:
     - Arm Development Studio
-    - Runbook
 
 operatingsystems:
     - Linux
-
 
 further_reading:
     - resource:
         title: Neoverse Reference Design Platform Software Documentation
         link: https://neoverse-reference-design.docs.arm.com/en/latest/index.html
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
