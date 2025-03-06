@@ -6,6 +6,8 @@ node_modules/
 package-lock.json
 .hugo_build.lock
 .vscode
+.env
+startup.sh
 
 # macOS files
 *.DS_Store
