@@ -1,6 +1,10 @@
 ---
 title: Run OpenAI Whisper Audio Model efficiently on Arm with Hugging Face Transformers
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 15
 
 who_is_this_for: This Learning Path is for software developers looking to run the Whisper automatic speech recognition (ASR) model efficiently. You will use an Arm-based cloud instance to run and build speech transcription based applications.
