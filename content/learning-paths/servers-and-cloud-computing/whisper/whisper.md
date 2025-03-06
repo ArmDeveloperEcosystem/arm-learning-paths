@@ -110,10 +110,7 @@ print(f'\n{result["text"]}\n')
 
 # Calculate and print the duration of the inference
 duration = end_time - start_time
-hours = duration // 3600
-minutes = (duration - (hours * 3600)) // 60
-seconds = (duration - ((hours * 3600) + (minutes * 60)))
-msg = f'\nInferencing elapsed time: {seconds:4.2f} seconds\n'
+msg = f'\nInferencing elapsed time: {duration:4.2f} seconds\n'
 
 print(msg)
 ```
