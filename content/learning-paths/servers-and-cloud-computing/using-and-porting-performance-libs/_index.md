@@ -1,15 +1,15 @@
 ---
-title: Start migrating applications that use performance libraries 
+title: Migrate applications that leverage performance libraries 
 
 minutes_to_complete: 60
 
-who_is_this_for: C/C++ developers who are looking to migrate applications that rely on optimized performance libraries.
+who_is_this_for: C/C++ developers who want to migrate applications that rely on optimized performance libraries.
 
 learning_objectives: 
-    - Learn how to incorporate optimized libraries. 
-    - Learn how to port a basic application from x86 to AArch64. 
+    - Incorporate optimized libraries. 
+    - Port a basic application from x86 to AArch64. 
 prerequisites:
-    - Access to an Arm and an x86-based cloud instance.
+    - Access to both an Arm and an x86-based cloud instance.
     - Intermediate understanding of C++, compilers, and Linux. 
 
 author: Kieran Hejmadi
