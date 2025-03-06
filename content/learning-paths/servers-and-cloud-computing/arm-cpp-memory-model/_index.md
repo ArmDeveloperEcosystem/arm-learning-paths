@@ -1,6 +1,10 @@
 ---
 title: Learn about the C++ memory model for porting applications to Arm
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for C++ developers porting applications from x86 to Arm and optimizing performance.
