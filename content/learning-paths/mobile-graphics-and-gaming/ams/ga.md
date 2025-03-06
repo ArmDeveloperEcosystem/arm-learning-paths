@@ -11,6 +11,8 @@ Graphics Analyzer is a tool to help `OpenGL ES` and `Vulkan` developers get the 
 
 The tool allows you to observe API call arguments and return values, and interact with a running target application to investigate the effect of individual API calls. It highlights attempted misuse of the API, and gives recommendations for improvements.
 
+**Note:** Graphics Analyzer is no longer in active development. You can still get Graphics Analyzer as part of [Arm Performance Studio 2024.2](https://artifacts.tools.arm.com/arm-performance-studio/2024.2/), but it is no longer available in later versions of the suite. For a more lightweight tool, try [Frame Advisor](https://developer.arm.com/Tools%20and%20Software/Frame%20Advisor), which enables you to capture and analyze rendering and geometry data for a single frame. For graphics debugging, we recommend RenderDoc for Arm GPUs. Both tools are available for free as part of [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio).
+
 ## Prerequisites
 
 Build your application, and setup your Android device as described in [Setup tasks](/learning-paths/mobile-graphics-and-gaming/ams/setup_tasks/).
