@@ -1,5 +1,5 @@
 ---
-title: Learn about the C++ memory model for porting applications to Arm
+title: Learn About the C++ Memory Model for Porting Applications to Arm
 
 draft: true
 cascade:
@@ -38,8 +38,8 @@ further_reading:
         link: https://en.cppreference.com/w/cpp/atomic/memory_order
         type: documentation
     - resource:
-        title: Thread Santiser Manual 
-        link: Phttps://github.com/google/sanitizers/wiki/threadsanitizercppmanual
+        title: Thread Santizer Manual 
+        link: https://github.com/google/sanitizers/wiki/threadsanitizercppmanual
         type: documentation
 
 
