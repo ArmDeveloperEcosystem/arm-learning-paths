@@ -18,8 +18,6 @@ test_images:
 - fedora:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
 title: GFortran
 tool_install: true
 weight: 1
@@ -47,7 +45,7 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## Download 
+## Download
 
 The Linux package manager downloads the required files so there are no special instructions.
 
@@ -64,7 +62,7 @@ sudo apt install gfortran -y
 
 ### Installing on Red Hat / Fedora / Amazon Linux
 
-These Linux distributions use `yum` as the package manager. 
+These Linux distributions use `yum` as the package manager.
 
 To install the most common development tools use the commands below. If the machine has `sudo` you can use it.
 

@@ -16,8 +16,6 @@ test_images:
 - ubuntu:latest
 test_link: false
 test_maintenance: true
-test_status:
-- passed
 title: Terraform
 tool_install: true
 weight: 1
