@@ -1,12 +1,12 @@
 ---
-title: Configure your development tools
+title: How to Configure Your Development Tools
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Which development tools do I need to use WindowsPerf with Visual Studio?
+## Which Development Tools Do I Need to Use WindowsPerf With Visual Studio?
 
 Four development tools are recommended if you want to use WindowsPerf for performance analysis on a Windows on Arm computer. 
 
@@ -20,7 +20,7 @@ Use the install guides to install and configure each tool before getting started
 - [Windows Performance Analyzer (WPA) plugin](/install-guides/windows-perf-wpa-plugin/)
 
 
-## How can I try out the WindowsPerf features in Visual Studio?
+## How Can I Try Out the WindowsPerf Features in Visual Studio?
 
 You can use the code example below to demonstrate WindowsPerf features in Visual Studio.
 
@@ -74,9 +74,9 @@ int main() {
 }
 ```
 
-The example code shows the difference between filling a matrix in a different order. You will see that column-wise traversal is much slower than row-wise traversal. This happens because:
-- Row-wise access follows how memory is stored in contiguous blocks.
-- Column-wise access jumps across rows, causing frequent cache misses.
+The example code shows the difference between filling a matrix in different orders. You will see that column-wise traversal is much slower than row-wise traversal. This happens because:
+- row-wise access follows how memory is stored in contiguous blocks; and
+- column-wise access jumps across rows, causing frequent cache misses.
 
 On the `Build` menu select `Build Solution` to generate `App1.exe`. 
 
@@ -84,7 +84,7 @@ Run the program by opening the `Debug` menu and select `Start Without Debugging`
 
 This will run the debug build for the program. 
 
-The console output is shown below:
+The console output will look like this:
 
 ![Run Debug](./debug.png)
 

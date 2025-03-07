@@ -1,5 +1,5 @@
 ---
-title: Learn how to use the Visual Studio extension for WindowsPerf
+title: Learn How to use The Visual Studio Extension for WindowsPerf
 
 minutes_to_complete: 30
 
