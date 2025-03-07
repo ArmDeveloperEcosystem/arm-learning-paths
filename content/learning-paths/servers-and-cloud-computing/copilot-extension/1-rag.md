@@ -18,7 +18,7 @@ The basic flow of a RAG system includes:
 
 The benefits of a RAG system center around improved factual accuracy of responses and the ability to integrate up-to-date information, as you can update the knowledge base without retraining the model. 
 
-Most importantly, RAG lets you provide reference links to the user, showing the user where the information originates. This not only build trust with users but also serves as a pathway for further exploration of the source material.
+Most importantly, RAG lets you provide reference links to the user, showing the user where the information originates. This not only builds trust with users but also serves as a pathway for further exploration of the source material.
 
 ## What are the challenges of building a RAG system?
 
@@ -28,6 +28,6 @@ While RAG systems improve AI-generated content, they also introduce several chal
 * Context Length Limitations: all models, including the GitHub Copilot API, have limitations on the amount of information they can process at once, requiring careful selection and ranking of retrieved data.
 * Handling Conflicting Information: if your knowledge base has contradictory information, the system may struggle to reconcile them and generate a coherent response.
 * Scalability and Latency: querying large knowledge bases and integrating retrieval with generation can increase response time. This is another place where the choice of similarity search algorithm has an impact.
-* Data Freshness and Maintenance: The knowledge base must be regularly updated to ensure the system remains accurate and relevant.
+* Data Freshness and Maintenance: the knowledge base must be regularly updated to ensure the system remains accurate and relevant.
 
 For an example of a production RAG GitHub Copilot Extension, you can check out [Arm for GitHub Copilot](https://github.com/marketplace/arm-for-github-copilot) in the GitHub Marketplace.

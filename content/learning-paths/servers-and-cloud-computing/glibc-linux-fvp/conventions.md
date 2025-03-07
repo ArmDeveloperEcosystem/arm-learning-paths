@@ -54,9 +54,8 @@ Table 1. Directory layout
 | `/home/user/linux`         | Folder with the Linux kernel sources       |
 | `/home/user/linux-headers` | Directory for installing kernel headers    |
 | `/home/user/linux-build`   | Folder for the Linux kernel build output   |
-| `/home/user/glibc`         | Foldr for the Glibc sources                |
-| `/home/user/glibc-build`   | Directory foir the Glibc build output      |
-
+| `/home/user/glibc`         | Folder for the Glibc sources                |
+| `/home/user/glibc-build`   | Directory for the Glibc build output      |
 
 
 We presume that the GCC cross toolchain installation directory contains everything a

@@ -27,7 +27,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - C++
-    - ThreadSantizer (TSan)
+    - ThreadSanitizer (TSan)
 operatingsystems:
     - Linux
     - Runbook
@@ -38,7 +38,7 @@ further_reading:
         link: https://en.cppreference.com/w/cpp/atomic/memory_order
         type: documentation
     - resource:
-        title: Thread Santiser Manual 
+        title: Thread Sanitizer Manual 
         link: Phttps://github.com/google/sanitizers/wiki/threadsanitizercppmanual
         type: documentation
 
