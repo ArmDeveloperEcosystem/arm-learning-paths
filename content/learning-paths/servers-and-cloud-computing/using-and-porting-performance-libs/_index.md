@@ -3,7 +3,7 @@ title: Migrate applications that leverage performance libraries
 
 minutes_to_complete: 60
 
-who_is_this_for: C/C++ developers who want to migrate applications that rely on optimized performance libraries.
+who_is_this_for: This Learning Path is for both C and C++ developers who want to migrate applications that rely on optimized performance libraries.
 
 learning_objectives: 
     - Incorporate optimized libraries. 
