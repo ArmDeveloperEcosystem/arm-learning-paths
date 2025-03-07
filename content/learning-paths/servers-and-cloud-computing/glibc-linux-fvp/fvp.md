@@ -1,5 +1,5 @@
 ---
-title: Boot Linux on FVP
+title: Boot Linux on the FVP
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -27,11 +27,12 @@ dependencies are of the right version and are installed correctly.
 
 ## Install Shrinkwrap
 
-First, we install prerequisites in a Python virtual environment using Python 3.x:
+First, install prerequisites in a Python virtual environment using Python 3.x:
 
 ```bash
-python -m venv ~/workspace/venv
-source ~/workspace/venv/bin/activate
+cd $HOME
+python -m venv $HOME/shrinkwrap-venv
+source $HOME/shrinkwrap-venv/bin/activate
 pip install -U pip setuptools wheel
 pip install pyyaml termcolor tuxmake
 ```
@@ -41,7 +42,7 @@ repository. Run this command in the workspace directory:
 
 ```bash
 git clone https://git.gitlab.arm.com/tooling/shrinkwrap.git
-export PATH=${PATH}:$(pwd)/shrinkwrap/shrinkwrap
+export PATH=${PATH}:${HOME}/shrinkwrap/shrinkwrap
 ```
 
 Putting Shrinkwrap's main executable on your `PATH` is all you need to install the tool.
@@ -52,7 +53,13 @@ is activated, then run this command:
 shrinkwrap --version
 ```
 
-## Build firmware for FVP
+You should see a version printed.
+
+```output
+shrinkwrap v1.0.0
+```
+
+## Build firmware for the FVP
 
 Before proceeding, ensure that Docker is installed and usable. Follow the installation
 instructions for your distro [here][4].
@@ -64,6 +71,16 @@ want to rebuild the firmware:
 ```bash
 shrinkwrap build --overlay=arch/v9.4.yaml ns-edk2.yaml
 ```
+
+{{% notice Note %}}
+
+If you are running into permission issues with docker, try running the following.
+
+```bash
+sudo usermod -aG docker $USER
+newgrp docker
+```
+{{% /notice %}}
 
 This command uses the `arch/v9.4.yaml` config that enables Armv9.4 hardware features.
 This config is included with the Shrinkwrap installation. We also use the `ns-edk2.yaml`
@@ -78,17 +95,17 @@ the components including the device tree for the FVP.
 At this point, we have everything required to boot our system. Shrinkwrap uses so called overlay
 configuration files. The following file instructs Shrinkwrap to connect all the pieces together
 and locate the kernel image, and rootfs. It can also be used to tweak any of the FVP
-parameters. Save this file as `~/workspace/aarch64.yaml`:
+parameters. Save this file as `aarch64.yaml` using a text editor of your choice.
 
 ```yaml
 run:
   rtvars:
     ROOTFS:
-      value: /home/user/workspace/rootfs.img
+      value: ~/rootfs.img
     CMDLINE:
       value: ip=dhcp kpti=off root=/dev/vda2 console=ttyAMA0
     KERNEL:
-      value: /home/user/workspace/linux-build/arch/arm64/boot/Image
+      value: ~/linux-build/arch/arm64/boot/Image
   params:
     -C bp.hostbridge.userNetworking: 1
     -C bp.hostbridge.userNetPorts: 8022=22,8123=8123
@@ -116,7 +133,7 @@ for more details.
 To run the FVP using Docker, execute the following command:
 
 ```bash
-shrinkwrap run ns-edk2.yaml --overlay ~/workspace/aarch64.yaml
+shrinkwrap run ns-edk2.yaml --overlay $HOME/aarch64.yaml
 ```
 
 At first, Shrinkwrap starts a Docker container and runs the FVP in it. At the beginning
@@ -156,9 +173,6 @@ uname -a
 cat /proc/cpuinfo
 ```
 
-We will do more setup during the next step. This additional setup is optional but it
-helps prepare our guest system for running Glibc tests and doing other complex tasks.
-
 ## Powering down
 
 You can always press `Ctrl+]` to stop Shrinkwrap in the terminal where Shrinkwrap is
@@ -170,6 +184,9 @@ from the root console of your guest system, for example:
 ```bash
 ssh root@172.17.0.2 -p 8022 poweroff
 ```
+
+Continue to the next section for additional setup. The remaining steps are optional but it
+helps prepare our guest system for running Glibc tests and doing other complex tasks.
 
 [1]: https://developer.arm.com/downloads/-/arm-ecosystem-fvps
 [2]: https://gitlab.arm.com/tooling/shrinkwrap
