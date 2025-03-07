@@ -1,12 +1,12 @@
 ---
-title: Root file system
+title: Set up Void Linux image
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Download and unpack rootfs
+## Download and unpack root file system
 
 The root file system (or rootfs for short) is the second essential component
 that we need. The root file system is a collection of files that are essential

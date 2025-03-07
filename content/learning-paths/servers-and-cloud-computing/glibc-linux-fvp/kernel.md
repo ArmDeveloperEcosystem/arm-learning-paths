@@ -31,25 +31,24 @@ interested in.
 
 ## Configure and build kernel
 
-The following commands will configure and build the Linux kernel image. All the
-build output, including the binary that we intend to use later, will be put in
+Before moving on, export some environment variables, pointing out some key directories and options.
+All the build output, including the binary that we intend to use later, will be put in
 the `linux-build` subfolder. Run the following commands in the workspace directory:
 
 
 ```bash
-# Make sure that cross GCC is on the PATH
 export PATH=/path/to/cross/gcc/bin:${PATH}
- 
-# Use out-of-tree build for kernel
 export KBUILD_OUTPUT="$(pwd)/linux-build"
-
-# Specify target architecture
 export ARCH=arm64
-
-# Specify cross compiler
 export CROSS_COMPILE=aarch64-none-linux-gnu-
+````
 
-# Build kernel image
+{{% notice %}}
+If you are running an Aarch64 host, the `CROSS_COMPILE` flag can be left empty.
+{{% /notice %}}
+
+Next, build the kernel image:
+```bash
 make -C linux mrproper
 make -C linux defconfig
 make -C linux Image -j $(nproc)
