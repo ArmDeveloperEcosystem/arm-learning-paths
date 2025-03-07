@@ -19,10 +19,6 @@ sudo apt update && sudo apt install -y \
     python3 python3-pip python-is-python3 python3-venv wget xz-utils coreutils
 ```
 
-You also need to install the right toolchain for your setup. Go to the downloads page on Developer Hub.
-
-https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
-
 ```bash
 sudo systemctl enable --now docker
 ```
