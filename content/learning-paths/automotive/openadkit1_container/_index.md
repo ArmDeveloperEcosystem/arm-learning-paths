@@ -1,5 +1,5 @@
 ---
-title: Deploying mixed-criticality autonomous driving software using Arm containers.
+title: Deploying Mixed-Criticality Autonomous Driving software using Arm containers
 
 minutes_to_complete: 60
 

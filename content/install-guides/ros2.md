@@ -43,6 +43,16 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## How do I Install ROS2 for Ubuntu on Arm?
 
+We will install ROS 2 using APT.
+By default, the Ubuntu package lists do not include ROS 2, so you need to manually execute the setup first.
+
+```bash
+sudo apt update
+sudo apt install curl -y
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+```
+
 There are two of distros (Jazzy Jalisco and Humble Hawksbill) can be installed depended on your Ubuntu version.
 For Ubuntu Linux 24.04, you should use Jazzy Jalisco.
 For Ubuntu Linux 22.04, you should use Humble Hawksbill.
