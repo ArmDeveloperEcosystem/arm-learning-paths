@@ -6,7 +6,7 @@ minutes_to_complete: 60
 who_is_this_for: This Learning Path is for both C and C++ developers who want to migrate applications that rely on optimized performance libraries.
 
 learning_objectives: 
-    - Desribe the differences between standard and performance libraries.
+    - Describe the differences between standard and performance libraries.
     - Incorporate optimized libraries. 
     - Port a basic application from x86 to AArch64. 
 prerequisites:
