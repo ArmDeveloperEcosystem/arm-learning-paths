@@ -16,6 +16,8 @@ The core idea of SDV is to make software the primary differentiating factor of a
 
 However, this transition introduces new challenges, particularly in software development and validation. The traditional V-model development process struggles to meet SDV demands since defects are often detected late in development, leading to costly fixes. As a result, Shift-Left has become a crucial strategy to address these challenges.
 
+One useful Arm Automotive [landing page](https://www.arm.com/markets/automotive/software-defined-vehicles) that you can read.
+
 ## Shift-Left: Detecting Issues Early to Enhance Development Efficiency
 
 Shift-Left refers to moving testing, validation, and security assessments earlier in the development process to reduce costs and improve reliability. In the SDV context, this means incorporating software architecture design, virtual testing, and automated validation in the early stages to ensure the final product meets safety and performance requirements.
@@ -29,6 +31,8 @@ The key benefits of Shift-Left include:
 - Improved System Reliability: Simulation and virtual testing enhance software quality and safety.
 
 However, Shift-Left requires appropriate tools and frameworks to support its implementation; otherwise, it can increase testing complexity. This is where SOAFEE (Scalable Open Architecture for Embedded Edge) plays a critical role.
+
+Check this [blog](https://newsroom.arm.com/blog/automotive-virtual-platforms) understand how to use virtual platforms enable the automotive industry to accelerate the silicon and software development process through virtual prototyping.
 
 ## SOAFEE: A Standardized Solution for SDV Development
 
@@ -48,9 +52,6 @@ As the Software-Defined Vehicle paradigm gains traction, the automotive industry
 
 With the adoption of SOAFEE, automotive software development will become more standardized and efficient, enabling companies to realize the vision of SDVs faster while delivering a safer, smarter, and more flexible vehicle experience.
 
-You can learn more about [SOAFEE](https://community.arm.com/search?q=soafee) from the Arm blog.
-
-!!! Insert the appropriate blog link !!!
+Visit [SOAFEE](https://www.soafee.io/) website to find more detail.
 
 In the following sections, you will explore a Shift-Left demonstration example that leverages SOAFEE to enable early deployment of autonomous driving software before the hardware is ready.
-

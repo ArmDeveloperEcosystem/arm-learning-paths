@@ -3,15 +3,15 @@ title: Deploying Mixed-Criticality Autonomous Driving software using Arm contain
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for automotive developers, aimed at helping them accelerate autonomous driving software development before the automotive computing platform is fully ready.
+who_is_this_for: This is an introductory topic for automotive developers, aimed at helping them accelerate autonomous driving software development before the automotive computing hardware board is fully ready.
 
 learning_objectives: 
     - Introduction to the SOAFEE architecture and its role in supporting Shift-Left software development strategies to optimize the autonomous driving development process.
     - Overview of the Autoware OpenADKit simulation environment.
-    - Running containerized workloads on Arm Neoverse with Docker, comparing the differences between cloud-based and on-premise execution.
+    - Running containerized workloads on Arm Neoverse with Docker, supporting execution on both cloud-based and on-premise servers.
     - Exploring advanced configurations and future development prospects.
 prerequisites:
-    - An Arm-based instance from a cloud service provider, or a local Arm Linux computer with at least 16 CPUs and 32GB of RAM.
+    - An Arm-based Neoverse cloud instance, or a local Arm Neoverse Linux computer with at least 16 CPUs and 32GB of RAM.
     - Familiarity with Docker operation.
 
 author: Odin Shen
