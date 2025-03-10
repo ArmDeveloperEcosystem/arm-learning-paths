@@ -1,18 +1,18 @@
 ---
-title: How to run AI Agent Application on CPU with llama.cpp and llama-cpp-agent using KleidiAI
+title: Run an AI Agent Application with llama.cpp and llama-cpp-agent using KleidiAI on Arm servers.
 
 minutes_to_complete: 45
 
-who_is_this_for: This Learning Path is for software developers, ML engineers, and those looking to run AI Agent Application locally.
+who_is_this_for: This is an introductory topic for software developers and ML engineers looking to run an AI Agent Application.
 
 learning_objectives:
     - Set up llama-cpp-python optimised for Arm servers.
-    - Learn how to optimise LLM models to run locally.
-    - Learn how to create custom tools for ML models.
+    - Learn how to run optimized LLM models.
+    - Learn how to create custom functions for LLMs.
     - Learn how to use AI Agents for applications.
 
 prerequisites:
-    - An AWS Gravition instance (m7g.xlarge)
+    - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
     - Basic understanding of Python and Prompt Engineering
     - Understanding of LLM fundamentals.
 
@@ -25,7 +25,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - Python
-    - AWS Gravition
+    - AWS Graviton
 operatingsystems:
     - Linux
 
