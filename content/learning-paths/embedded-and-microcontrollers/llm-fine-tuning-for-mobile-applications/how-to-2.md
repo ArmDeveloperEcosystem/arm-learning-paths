@@ -9,7 +9,9 @@ layout: learningpathall
 ## Fine Tuning Large Language Model - Setup Environment
 
 #### Plartform Required 
-An AWS Graviton4 r8g.16xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server or Arm based laptop.
+- An AWS Graviton4 r8g.16xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server or Arm based laptop.
+- An Arm-powered smartphone with the i8mm feature running Android, with 16GB of RAM.
+- A USB cable to connect your smartphone to your development machine.
 
 #### Set Up Required Libraries
 The following commands install the necessary libraries for the task, including Hugging Face Transformers, Datasets, and fine-tuning methods. These libraries facilitate model loading, training, and fine-tuning
