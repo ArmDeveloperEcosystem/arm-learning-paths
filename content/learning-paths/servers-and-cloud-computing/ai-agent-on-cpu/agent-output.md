@@ -1,19 +1,21 @@
 ---
-title: AI Agent Overview and Test Results
+title: Understand and test the AI Agent
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Explain how LLM which function to use
+## AI Agent Function Calls
 
-Below is a brief explanation of how LLM can be configured and used to execute Agent tasks.
+An AI agent, powered by a Large Language Model (LLM), decides which function to use by analyzing the prompt or input it receives, identifying the relevant intent or task, and then matching that intent to the most appropriate function from a pre-defined set of available functions based on its understanding of the language and context.
 
-- This code creates an instance of the quantized `llama3.1` model for more efficient inference on Arm-based systems.
-```
+Lets look at how this is implemented in the python script `agent.py`.
+
+- This code section of `agent.py` shown below creates an instance of the quantized `llama3.1 8B` model for more efficient inference on Arm-based systems.
+```output
 llama_model = Llama(
-    model_path="./models/llama3.1-8b-instruct.Q4_0_arm.gguf",
+    model_path="./models/dolphin-2.9.4-llama3.1-8b-Q4_0.gguf",
     n_batch=2048,
     n_ctx=10000,
     n_threads=64,
@@ -21,34 +23,79 @@ llama_model = Llama(
 )
 ```
 
-- Here, you define a provider that leverages the llama.cpp Python bindings.
-```
+- Next, you define a provider that leverages the `llama.cpp` Python bindings.
+```output
 provider = LlamaCppPythonProvider(llama_model)
 ```
 
-- The function’s docstring guides the LLM on when and how to invoke it.
-```
-def function(a,b): 
-    """ 
-    Description about when the function should be called
+- The LLM has access to certain tools or functions and can take a general user input and decide which functions to call. The function’s docstring guides the LLM on when and how to invoke it. In `agent.py` three such tools or functions are defined `open_webpage`, `get_current_time` and `calculator` 
+
+```output
+def open_webpage():
+    """
+    Open Learning Path Website when user asks the agent regarding Arm Learning Path
+    """
+    import webbrowser
+
+    url = "https://learn.arm.com/"
+    webbrowser.open(url, new=0, autoraise=True)
+
+
+def get_current_time():
+    """
+    Returns the current time in H:MM AM/PM format.
+    """
+    import datetime  # Import datetime module to get current time
+
+    now = datetime.datetime.now()  # Get current time
+    return now.strftime("%I:%M %p")  # Format time in H:MM AM/PM format
+
+
+class MathOperation(Enum):
+    ADD = "add"
+    SUBTRACT = "subtract"
+    MULTIPLY = "multiply"
+    DIVIDE = "divide"
+def calculator(
+    number_one: Union[int, float],
+    number_two: Union[int, float],
+    operation: MathOperation,
+) -> Union[int, float]:
+    """
+    Perform a math operation on two numbers.
 
     Args:
-        a: description of the argument a
-        b: description of the argument b
+        number_one: First number
+        number_two: Second number
+        operation: Math operation to perform
 
     Returns:
-        Description about the function's output
-    """
+        Result of the mathematical operation
 
-    # ... body of your function goes here
+    Raises:
+        ValueError: If the operation is not recognized
+    """
+    if operation == MathOperation.ADD:
+        return number_one + number_two
+    elif operation == MathOperation.SUBTRACT:
+        return number_one - number_two
+    elif operation == MathOperation.MULTIPLY:
+        return number_one * number_two
+    elif operation == MathOperation.DIVIDE:
+        return number_one / number_two
+    else:
+        raise ValueError("Unknown operation.")
 ```
 
 - `from_functions` creates an instance of `LlmStructuredOutputSettings` by passing in a list of callable Python functions. The LLM can then decide if and when to use these functions based on user queries.
-```
-LlmStructuredOutputSettings.from_functions([function1, function2, etc])
-```
 
-- With this, the user’s prompt is collected and processed through `LlamaCppAgent`. The agent decides whether to call any defined functions based on the request.
+```output
+output_settings = LlmStructuredOutputSettings.from_functions(
+    [get_current_time, open_webpage, calculator], allow_parallel_function_calling=True
+)
+
+```
+- The user's prompt is then collected and processed through `LlamaCppAgent`. The agent decides whether to call any defined functions based on the request.
 ```
 user = input("Please write your prompt here: ")
 
@@ -64,27 +111,95 @@ result = llama_cpp_agent.get_chat_response(
 )
 ```
 
+## Test the AI Agent
 
-## Example
+You are now ready to test and execute the AI Agent python script. Start the application:
 
-- If the user asks, “What is the current time?”, the AI Agent will choose to call the `get_current_time()` function, returning a result in **H:MM AM/PM** format.
+```bash
+python3 agent.py
+```
 
-![Prompt asking for the current time](test_prompt.png)
+You will see lots of interesting statistics being printed from `llama.cpp` about the model and the system, followed by the prompt as shown:
+
+```output
+llama_kv_cache_init:        CPU KV buffer size =  1252.00 MiB
+llama_init_from_model: KV self size  = 1252.00 MiB, K (f16):  626.00 MiB, V (f16):  626.00 MiB
+llama_init_from_model:        CPU  output buffer size =     0.49 MiB
+llama_init_from_model:        CPU compute buffer size =   677.57 MiB
+llama_init_from_model: graph nodes  = 1030
+llama_init_from_model: graph splits = 1
+CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | MATMUL_INT8 = 1 | SVE = 1 | DOTPROD = 1 | MATMUL_INT8 = 1 | SVE_CNT = 32 | OPENMP = 1 | AARCH64_REPACK = 1 |
+Model metadata: {'tokenizer.chat_template': "{% if not add_generation_prompt is defined %}{% set add_generation_prompt = false %}{% endif %}{% for message in messages %}{{'<|im_start|>' + message['role'] + '\n' + message['content'] + '<|im_end|>' + '\n'}}{% endfor %}{% if add_generation_prompt %}{{ '<|im_start|>assistant\n' }}{% endif %}", 'tokenizer.ggml.eos_token_id': '128256', 'general.quantization_version': '2', 'tokenizer.ggml.model': 'gpt2', 'llama.vocab_size': '128258', 'general.file_type': '2', 'llama.attention.layer_norm_rms_epsilon': '0.000010', 'llama.rope.freq_base': '500000.000000', 'tokenizer.ggml.bos_token_id': '128000', 'llama.attention.head_count': '32', 'llama.feed_forward_length': '14336', 'general.architecture': 'llama', 'llama.attention.head_count_kv': '8', 'llama.block_count': '32', 'tokenizer.ggml.padding_token_id': '128004', 'general.basename': 'Meta-Llama-3.1', 'llama.embedding_length': '4096', 'general.base_model.0.organization': 'Meta Llama', 'tokenizer.ggml.pre': 'llama-bpe', 'llama.context_length': '131072', 'general.name': 'Meta Llama 3.1 8B', 'llama.rope.dimension_count': '128', 'general.base_model.0.name': 'Meta Llama 3.1 8B', 'general.organization': 'Meta Llama', 'general.type': 'model', 'general.size_label': '8B', 'general.base_model.0.repo_url': 'https://huggingface.co/meta-llama/Meta-Llama-3.1-8B', 'general.license': 'llama3.1', 'general.base_model.count': '1'}
+Available chat formats from metadata: chat_template.default
+Using gguf chat template: {% if not add_generation_prompt is defined %}{% set add_generation_prompt = false %}{% endif %}{% for message in messages %}{{'<|im_start|>' + message['role'] + '
+' + message['content'] + '<|im_end|>' + '
+'}}{% endfor %}{% if add_generation_prompt %}{{ '<|im_start|>assistant
+' }}{% endif %}
+Using chat eos_token: <|im_end|>
+Using chat bos_token: <|begin_of_text|>
+Please write your prompt here:
+```
+
+## Test the AI agent
+
+When you are presented with "Please write your prompt here:" test it with an input prompt. Enter "What is the current time?"
 
 - As part of the prompt, a list of executable functions is sent to the LLM, allowing the agent to select the appropriate function:
 
-![Display of available functions in the terminal](test_functions.png)
+```output
+Read and follow the instructions below:
 
-- After the user prompt, the AI Agent decides to invoke the function and return thre result:
-
-![get_current_time function execution](test_output.png)
-
-
+<system_instructions>
+You're a helpful assistant to answer User query.
+</system_instructions>
 
 
-## Next Steps
-- You can ask different questions to trigger and execute other functions.
-- Extend your AI agent by defining custom functions so it can handle specific tasks. You can also re-enable the `TaviliySearchResults` function to unlock search capabilities within your environment.
+You can call functions to help you with your tasks and user queries. The available functions are:
+
+<function_list>
+Function: get_current_time
+  Description: Returns the current time in H:MM AM/PM format.
+  Parameters:
+    none
+
+Function: open_webpage
+  Description: Open Learning Path Website when user asks the agent regarding Arm Learning Path
+  Parameters:
+    none
+
+Function: calculator
+  Description: Perform a math operation on two numbers.
+  Parameters:
+    number_one (int or float): First number
+    number_two (int or float): Second number
+    operation (enum): Math operation to perform Can be one of the following values: 'add' or 'subtract' or 'multiply' or 'divide'
+</function_list>
+
+To call a function, respond with a JSON object (to call one function) or a list of JSON objects (to call multiple functions), with each object containing these fields:
+
+- "function": Put the name of the function to call here.
+- "arguments": Put the arguments to pass to the function here.
+```
+
+The AI Agent then decides to invoke the appropriate function and return the result as shown:
+
+```output
+[
+  {
+    "function":
+      "get_current_time",
+    "arguments": {}
+  }
+]
+----------------------------------------------------------------
+Response from AI Agent:
+[{'function': 'get_current_time', 'arguments': {}, 'return_value': '07:58 PM'}]
+----------------------------------------------------------------
+```
+
+You have now tested when you enter, "What is the current time?", the AI Agent will choose to call the `get_current_time()` function, and return a result in **H:MM AM/PM** format.
+
+You have successfully run an AI agent. You can ask different questions to trigger and execute other functions. You can extend your AI agent by defining custom functions so it can handle specific tasks. 
 
 
 

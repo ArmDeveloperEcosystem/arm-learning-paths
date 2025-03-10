@@ -1,29 +1,15 @@
 ---
-title: Python Script to Execute the AI Agent Application
+title: AI Agent Application
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Python Script for AI Agent Application
-Once you set up the environment, create a Python script which will execute the AI Agent Applicaion:
+## Python Script for executing an AI Agent application
+With `llama.cpp` built and the Llama3.1 8B model downloaded, you are now ready to create a Python script to execute an AI Agent Application:
 
-### Option A
-- Clone the repository 
-```bash
-cd ~
-git clone https://github.com/jc2409/ai-agent.git
-```
-
-### Option B
-- Creat a Python file:
-```bash
-cd ~
-touch agent.py
-```
-
-- Copy and paste the following code:
+Create a Python file named `agent.py` with the content shown below:
 ```bash
 from enum import Enum
 from typing import Union
@@ -47,7 +33,7 @@ from llama_cpp import Llama
 # os.environ.get("TAVILY_API_KEY")
 
 llama_model = Llama(
-    model_path="./models/llama3.1-8b-instruct.Q4_0_arm.gguf", # make sure you use the correct path for the quantized model
+    model_path="./models/dolphin-2.9.4-llama3.1-8b-Q4_0.gguf", # make sure you use the correct path for the quantized model
     n_batch=2048,
     n_ctx=10000,
     n_threads=64,
@@ -170,16 +156,5 @@ def run_web_search_agent():
 if __name__ == '__main__':
     run_web_search_agent()
 ```
+In the next section, you will inspect this script to understand how the LLM is configured and used to execute Agent tasks using this script. You will then proceed to executing and testing the AI Agent.
 
-## Run the Python Script
-
-You are now ready to test the AI Agent. Use the following command in a terminal to start the application:
-```bash
-python3 agent.py
-```
-
-{{% notice Note %}}
-
-If it takes too long to process, try to terminate the application and try again. 
-
-{{% /notice %}}
