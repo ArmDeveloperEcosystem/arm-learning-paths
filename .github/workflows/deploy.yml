@@ -21,6 +21,10 @@ on:
         required: true
       HUGO_AUDIO_API:
         required: true
+      HUGO_DEV_PROG_SIGNIUP_FORM_MUNCHKIN_ID:
+        required: true
+      HUGO_DEV_PROG_SIGNIUP_FORM_ID:
+        required: true
 
 env:
   HUGO_VERSION: 0.130.0
@@ -69,6 +73,8 @@ jobs:
           HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
           HUGO_RAG_API: ${{ secrets.HUGO_RAG_API }}
           HUGO_AUDIO_API: ${{ secrets.HUGO_AUDIO_API }}
+          HUGO_DEV_PROG_SIGNIUP_FORM_MUNCHKIN_ID: ${{ secrets.HUGO_DEV_PROG_SIGNIUP_FORM_MUNCHKIN_ID }}
+          HUGO_DEV_PROG_SIGNIUP_FORM_ID: ${{ secrets.HUGO_DEV_PROG_SIGNIUP_FORM_MUNCHKIN_ID }}
 
       # Deploys website to AWS S3 and invalidate CloudFront Cache
       - name: Deploy to S3
