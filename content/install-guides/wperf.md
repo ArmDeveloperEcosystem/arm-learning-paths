@@ -64,7 +64,7 @@ Successfully installed
 
 ![Winget installation video](/install-guides/_images/wperf-winget-installation.gif)
 
-It will install the lastest available WindowsPerf along with the [WPA plugins](/learning-paths/laptops-and-desktops/windowsperf_wpa_plugin/). To check that the installation was done correctly open a new terminal tab or window and follow the instructions under the [verify installation section](#verify_install)
+It will install the lastest available WindowsPerf along with the [WPA plugins](/learning-paths/laptops-and-desktops/windowsperf_wpa_plugin/). To check that the installation was done correctly open a new terminal tab or window and follow the instructions under the [verify installation section](#verify-install)
 
 ### Uninstall 
 If you need to uninstall WindowsPerf, open an `Administrator` terminal on PowerShell and run:
@@ -143,7 +143,7 @@ Install requested.
 Device installed successfully
 ```
 
-## Verify install {#verify_install}
+## Verify install 
 
 You can check everything is working by running the `wperf` executable.
 
