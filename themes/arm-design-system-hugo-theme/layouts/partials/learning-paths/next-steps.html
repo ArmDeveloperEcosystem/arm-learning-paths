@@ -50,10 +50,10 @@ Called from:
   </style>
 
 
-<div class="c-row">
+<div class="c-row u-margin-bottom-0">
     <div class="c-col">
         <h2>Share</h2>
-        <p>Share what you've learned.</p>
+        <p>Bring your insights to the conversation.</p>
         <div class="social-sharing">
             <div id="social-share-icon-div" class="social-icons">
                 <a id="linkedin-link" class="share-button" name="LinkedIn"
@@ -102,6 +102,12 @@ Called from:
 
             </div>
         </div>
+    </div>
+    <div class="c-col">
+        <!-- Feedback -->
+        {{partial "general-formatting/feedback.html" (dict "context" .context "learningpath_or_toolinstall" "Learning Path")  }}
+
+
     </div>
 </div>
 
@@ -196,18 +202,11 @@ Called from:
         window.open(linkedinShareUrl, '_blank', 'width=900,height=650');
     });
 
-  </script>
-  
-<br>
-
-<!-- Feedback -->
-{{partial "general-formatting/feedback.html" (dict "context" .context "learningpath_or_toolinstall" "Learning Path")  }}
+</script>
 
 
 
-
-
-<div class="c-row">
+<div class="c-row u-margin-top-0">
     <div class="c-col">
         <!-- Main CTA for next learning path: -->
         <h2>Continue Learning</h2>
@@ -254,19 +253,23 @@ Called from:
                 </script>
             -->
 
-                <h4>Join Developer Program</h4>
-                <p>Join the Arm Developer Program to share ideas, ask questions, and explore solutions with the support of the developer community.</p>
+                <h4>Join the Arm Developer Program</h4>
+                <p>
+                    Connect, upskill, and build with the Arm Developer Community. Join today for hands-on technical resources and education materials, along with the support of Arm engineers and the broader ecosystem.
+                </p>
                 
                 <ads-modal id="modal-custom-trigger">
                         <div slot="body">
                             <div id="form-display">
-                                <h2 class="modal-title u-margin-right-1/2" style="margin-top: 0px; margin-bottom: 16px;">Join Arm Developer Program</h2>
+                                <h2 class="modal-title u-margin-right-1/2" style="margin-top: 0px; margin-bottom: 16px;">Join the Arm Developer Program</h2>
                                 <div class="c-row" style="max-width: 650px;">
                                     <p>By signing up, you will receive member news and email updates on topics that interest you. You can manage your subscription preferences anytime.</p>
                                 </div>
+                                 
                                 <div class="c-row lg:u-display-block u-hide u-margin-bottom-1 u-margin-right-1/2">
-                                    <img src="/img/arm_dev_program_half.jpg" alt="Developer Program" style="width: 98%; max-width: 650px;  display: block;">
-                                </div>                
+                                    <img src="/img/dev_prog.png" alt="Developer Program" style="width: 98%; max-width: 650px;  display: block;">
+                                </div>
+                                   
                                 <hr class="u-margin-right-1/2">
                                 <div id="marketo-form-container"></div>
                             </div>
@@ -388,6 +391,12 @@ formScript.onload = function() {
         }
         .mktoField {
             
+        }
+        .mktoFormCol {
+            width:100%;
+        }
+        .mktoFieldWrap {
+            width:90%;
         }
 
 
