@@ -43,13 +43,13 @@ You cannot use WindowsPerf on virtual machines, such as cloud instances.
 
 ### Installing 
 
-You can now install WindowsPerf directly from [winget](https://learn.microsoft.com/en-us/windows/package-manager/). All you need to do is open an `Administrator` terminal on PowerShell and type
+You can now install WindowsPerf directly from [winget](https://learn.microsoft.com/en-us/windows/package-manager/). Open an `Administrator` terminal on PowerShell and type
 
 ```console
 winget install WindowsPerf
 ```
 
-You should see an output like
+The output should look like:
 
 ```output
 Found WindowsPerf [Arm.WindowsPerf] Version 4.3.1.0
