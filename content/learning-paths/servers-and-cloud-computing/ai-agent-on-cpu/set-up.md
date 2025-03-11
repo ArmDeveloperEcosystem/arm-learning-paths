@@ -8,19 +8,24 @@ layout: learningpathall
 
 ## Before you begin
 
-This Learning Path demonstrates how to build an AI Agent Application using open-source Large Language Models (LLMs) optimized for Arm architecture. The AI Agent can use Large Language Models (LLMs) to perform actions by accessing tools and knowledge. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 22.04 LTS. You need an Arm server instance with at least 4 cores and 16GB of memory to run this example. The instructions have been tested on an AWS EC2 `m7g.xlarge instance`.
+This Learning Path demonstrates how to build an AI Agent Application using open-source Large Language Models (LLMs) optimized for Arm architecture. The AI Agent can use Large Language Models (LLMs) to perform actions by accessing tools and knowledge. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 22.04 LTS. You need an Arm server instance with at least 4 cores and 16GB of memory to run this example. Configure disk storage up to at least 32 GB. The instructions have been tested on an AWS EC2 Graviton3 `m7g.xlarge instance`.
 
 ## Overview
 
-In this Learning Path, you learn how to build an AI Agent application using llama-cpp-python and llama-cpp-agent. llama-cpp-python is a Python binding from llama.cpp that enables efficient LLM inference on Arm CPUs and llama-cpp-agent provides an interface for processing text using agentic chains with tools.
+In this Learning Path, you learn how to build an AI Agent application using `llama-cpp-python` and `llama-cpp-agent`. `llama-cpp-python` is a Python binding for `llama.cpp` that enables efficient LLM inference on Arm CPUs and `llama-cpp-agent` provides an interface for processing text using agentic chains with tools.
 
-## Installation
+## Install dependencies
 
-Set up the virtual environment and install dependencies:
+Install the following packages on your Arm based server instance:
+
 ```bash
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt install python3-pip python3-venv cmake -y
+```
+
+Create and activate a Python virtual environment:
+```bash
 python3 -m venv ai-agent
 source ai-agent/bin/activate
 ```
@@ -38,37 +43,48 @@ pip install llama-cpp-agent pydantic
 ```
 
 
+## Download the pre-quantized Llama-3.1-8B LLM model from Hugging Face
 
-## Model Download
+You are now ready to download the LLM.
 
-1. Create and navigate to a models directory:
+Create and navigate to the models directory:
 
 ```bash
 mkdir models
 cd models
 ```
-2. Download the Hugging Face model:
+Install the `huggingface_hub` python library using `pip`:
 
 ```bash
-wget https://huggingface.co/chatpdflocal/llama3.1-8b-gguf/resolve/main/ggml-model-Q4_K_M.gguf
+pip install huggingface_hub
+```
+You can now download the [pre-quantized Llama3.1 8B model](https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf) using the huggingface cli:
+
+```bash
+huggingface-cli download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir . --local-dir-use-symlinks False
 ```
 
-## Building llama.cpp
+`Q4_0` in the model name refers to the quantization method the model uses. The goal of quantization is to reduce the size of the model (to reduce the memory space required) and faster (to reduce memory bandwidth bottlenecks transferring large amounts of data from memory to a processor). The primary trade-off to keep in mind when reducing a model’s size is maintaining quality of performance. Ideally, a model is quantized to meet size and speed requirements while not having a negative impact on performance.
 
-1. Navigate to your home directory:
+The main thing to note in the quantization format is the number of bits per parameter, which is denoted by ‘Q4’ in this case or 4-bit integer. 
+
+## Build llama.cpp
+
+As of [llama.cpp commit 0f1a39f3](https://github.com/ggerganov/llama.cpp/commit/0f1a39f3), Arm has contributed code for performance optimization with KleidiAI kernels. You can take advantage of these kernels by running your models using the `llama.cpp` framework. 
+
+Navigate to your home directory:
 
 ```bash
 cd ~
 ```
 
-2. Clone the llama.cpp repository:
+Clone the `llama.cpp` repository:
 
 ```bash
 git clone https://github.com/ggerganov/llama.cpp
 ```
 
-3. Build llama.cpp:
-   > Note: By default, `llama.cpp` builds for CPU only on Linux and Windows. No extra switches are needed for Arm CPU builds.
+Build llama.cpp:
 
 ```bash
 cd llama.cpp
@@ -77,14 +93,41 @@ cd build
 cmake .. -DCMAKE_CXX_FLAGS="-mcpu=native" -DCMAKE_C_FLAGS="-mcpu=native"
 cmake --build . -v --config Release -j `nproc`
 ```
-
-## Model Quantization
-
-After building, quantize the model using the following command:
+`llama.cpp` is now built in the `bin` directory.
+Check that `llama.cpp` has built correctly by running the help command:
 
 ```bash
 cd bin
-./llama-quantize --allow-requantize ../../../models/ggml-model-Q4_K_M.gguf ../../../models/llama3.1-8b-instruct.Q4_0_arm.gguf Q4_0
+./llama-cli -h
 ```
 
-This process will create a quantized version of the model optimized for your system.
+If `llama.cpp` has built correctly on your machine, you will see the help options being displayed. A snippet of the output is shown below:
+
+```output
+usage: ./llama-cli [options]
+
+general:
+
+  -h,    --help, --usage          print usage and exit
+         --version                show version and build info
+  -v,    --verbose                print verbose information
+         --verbosity N            set specific verbosity level (default: 0)
+         --verbose-prompt         print a verbose prompt before generation (default: false)
+         --no-display-prompt      don't print prompt at generation (default: false)
+  -co,   --color                  colorise output to distinguish prompt and user input from generations (default: false)
+  -s,    --seed SEED              RNG seed (default: -1, use random seed for < 0)
+  -t,    --threads N              number of threads to use during generation (default: 4)
+  -tb,   --threads-batch N        number of threads to use during batch and prompt processing (default: same as --threads)
+  -td,   --threads-draft N        number of threads to use during generation (default: same as --threads)
+  -tbd,  --threads-batch-draft N  number of threads to use during batch and prompt processing (default: same as --threads-draft)
+         --draft N                number of tokens to draft for speculative decoding (default: 5)
+  -ps,   --p-split N              speculative decoding split probability (default: 0.1)
+  -lcs,  --lookup-cache-static FNAME
+                                  path to static lookup cache to use for lookup decoding (not updated by generation)
+  -lcd,  --lookup-cache-dynamic FNAME
+                                  path to dynamic lookup cache to use for lookup decoding (updated by generation)
+  -c,    --ctx-size N             size of the prompt context (default: 0, 0 = loaded from model)
+  -n,    --predict N              number of tokens to predict (default: -1, -1 = infinity, -2 = until context filled)
+  -b,    --batch-size N           logical maximum batch size (default: 2048)
+```
+In the next section you will create a python script to execute an AI Agent powered by the model you downloaded.
