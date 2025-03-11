@@ -1,6 +1,10 @@
 ---
 title: LLM Fine-Tuning for Web Applications
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 60
 
 who_is_this_for: This learning path provides an introduction for developers and data scientists new to fine-tuning large language models (LLMs) and looking to develop a fine-tuned LLM for web applications. Fine-tuning involves adapting a pre-trained LLM to specific tasks or domains by training it on domain-specific data and optimizing its responses for accuracy and relevance. For web applications, fine-tuning enables personalized interactions, enhanced query handling, and improved contextual understanding, making AI-driven features more effective. This session will cover key concepts, techniques, tools, and best practices, ensuring a structured approach to building a fine-tuned LLM that aligns with real-world web application requirements.
