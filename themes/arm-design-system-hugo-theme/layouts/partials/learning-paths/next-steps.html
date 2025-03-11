@@ -50,10 +50,10 @@ Called from:
   </style>
 
 
-<div class="c-row">
+<div class="c-row u-margin-bottom-0">
     <div class="c-col">
         <h2>Share</h2>
-        <p>Share what you've learned.</p>
+        <p>Bring your insights to the conversation.</p>
         <div class="social-sharing">
             <div id="social-share-icon-div" class="social-icons">
                 <a id="linkedin-link" class="share-button" name="LinkedIn"
@@ -102,6 +102,12 @@ Called from:
 
             </div>
         </div>
+    </div>
+    <div class="c-col">
+        <!-- Feedback -->
+        {{partial "general-formatting/feedback.html" (dict "context" .context "learningpath_or_toolinstall" "Learning Path")  }}
+
+
     </div>
 </div>
 
@@ -196,18 +202,11 @@ Called from:
         window.open(linkedinShareUrl, '_blank', 'width=900,height=650');
     });
 
-  </script>
-  
-<br>
-
-<!-- Feedback -->
-{{partial "general-formatting/feedback.html" (dict "context" .context "learningpath_or_toolinstall" "Learning Path")  }}
+</script>
 
 
 
-
-
-<div class="c-row">
+<div class="c-row u-margin-top-0">
     <div class="c-col">
         <!-- Main CTA for next learning path: -->
         <h2>Continue Learning</h2>
@@ -242,14 +241,177 @@ Called from:
 
 
             <div id="arm-dev-program-div" class="content-box">
+                <!-- 
                 <h4>Talk with Arm Experts</h4>
                 <p>Join the Arm Developer Program to share ideas, ask questions, and explore solutions with the support of the developer community.</p>
+                
                 <ads-cta-button id="join-dev-program" level="primary" sr-label="primary button" class="next-step-cta" name="DevProgram">Join now</ads-cta-button>    
                 <script>
                     document.getElementById("join-dev-program").onclick = function () {
                     window.open("https://www.arm.com/resources/developer-program?#register","_blank");
                     };
                 </script>
+            -->
+
+                <h4>Join the Arm Developer Program</h4>
+                <p>
+                    Connect, upskill, and build with the Arm Developer Community. Join today for hands-on technical resources and education materials, along with the support of Arm engineers and the broader ecosystem.
+                </p>
+                
+                <ads-modal id="modal-custom-trigger">
+                        <div slot="body">
+                            <div id="form-display">
+                                <h2 class="modal-title u-margin-right-1/2" style="margin-top: 0px; margin-bottom: 16px;">Join the Arm Developer Program</h2>
+                                <div class="c-row" style="max-width: 650px;">
+                                    <p>By signing up, you will receive member news and email updates on topics that interest you. You can manage your subscription preferences anytime.</p>
+                                </div>
+                                 
+                                <div class="c-row lg:u-display-block u-hide u-margin-bottom-1 u-margin-right-1/2">
+                                    <img src="/img/dev_prog.png" alt="Developer Program" style="width: 98%; max-width: 650px;  display: block;">
+                                </div>
+                                   
+                                <hr class="u-margin-right-1/2">
+                                <div id="marketo-form-container"></div>
+                            </div>
+                            <div id="form-completed" hidden>
+                                <h2 class="modal-title">Program Registration Success</h2>
+                                <p class="success-message">You're almost there! To complete your membership registration, please click 'confirm membership' in the email we have just sent you.</p>
+                                <p class="success-message">Please check your spam folder if you do not see any email in your inbox within 10 minutes.</p>      
+                            </div>
+                        </div>
+                        <div slot="actions" class="u-flex u-flex-direction-column md:u-flex-direction-row u-gap-1" style="justify-content: flex-start;">
+                            <ads-cta-button id="devprog-cta-submit" level="primary" class="devprog-modal-button" type="submit" sr-label="submit">Submit</ads-cta-button>
+                            <ads-cta-button level="secondary" class="devprog-cta-close devprog-modal-button" type="button" sr-label="close">Close</ads-cta-button>
+                        </div>
+                        <div slot="trigger">
+                            <ads-cta-button id="dev-program-show-form" level="primary" class="next-step-cta" name="DevProgram">Join now</ads-cta-button>    
+                        </div>
+                </ads-modal>
+                <script>
+                    (() => {
+                        const modal = document.getElementById('modal-custom-trigger');
+
+                        // Close model button
+                        document.querySelectorAll('.devprog-cta-close').forEach((button) => {
+                            button.addEventListener('click', function() {
+                              modal.close();
+                            });
+                          });
+
+                        
+
+
+// SECTION 5: Marketo Developer Program Form Embed
+const formScript = document.createElement('script');
+formScript.src = '//engaged.arm.com/js/forms2/js/forms2.min.js';
+formScript.onload = function() {
+  MktoForms2.loadForm(
+    '//engaged.arm.com',
+    '{{getenv "HUGO_DEV_PROG_SIGNIUP_FORM_MUNCHKIN_ID"}}',
+    '{{getenv "HUGO_FORM_ID_FOR_PROGRAM_SIGNUP"}}',           
+    
+    function(form) {
+      const formContainer = document.getElementById('marketo-form-container');
+      formContainer.appendChild(form.getFormElem()[0]);
+      formContainer.querySelector('form').style.display = 'block';
+
+      // Handle successful form submission
+      form.onSuccess(function() {
+        // Hide 'form-display' and devprog submit button and show 'form-completed'
+        document.getElementById('form-completed').hidden = false;
+        document.getElementById('form-display').hidden = true;
+        document.getElementById('devprog-cta-submit').style.display = 'none';
+        return false;
+      });
+
+      // Form submit handler
+      const registerButton = modal.querySelector('#devprog-cta-submit');
+      registerButton.addEventListener('click', () => {
+        form.submit();
+      });
+
+      // SECTION 6: Apply Form Styles - full css in css reference file
+      const formStyles = document.createElement('style');
+      formStyles.textContent = `
+        /* Marketo Form Style Overrides */
+        
+        /* Hide unnecessary Marketo elements */
+        .mktoPlaceholder,
+        .mktoPlaceholderHtmlText_2024-07-02717_8762,
+        .mktoPlaceholderdataTransferConsent,
+        div[class*="mktoPlaceholder"],
+        .mktoFormRow:has(input[type="hidden"]:only-child),
+        .mktoFormRow:has(.mktoFieldDescriptor:only-child input[type="hidden"]),
+        .mktoFormRow:has(.mktoPlaceholder:only-child),
+        .mktoFormRow:not(:has(select, input[type="text"], input[type="email"])),
+        .mktoFormRow:empty,
+        .mktoButtonRow {
+          display: none !important;
+          height: 0 !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          min-height: 0 !important;
+          opacity: 0 !important;
+          position: absolute !important;
+          pointer-events: none !important;
+        }
+
+        /* Base form layout */
+        .mktoForm {
+          width: 100% !important;
+          font-family: Lato, Helvetica, Arial, sans-serif !important;
+          color: #333e48 !important;
+          margin-bottom: 0 !important;
+        }
+
+        /* Form field styling */
+        .mktoForm input[type="text"],
+        .mktoForm input[type="email"],
+        .mktoForm select {
+          width: 100% !important;
+          height: 40px !important;
+          padding: 0 16px !important;
+          border: 1px solid #ccc !important;
+          border-radius: 4px !important;
+          font-family: Lato, Helvetica, Arial, sans-serif !important;
+          font-size: 16px !important;
+          color: #333e48 !important;
+          box-sizing: border-box !important;
+          background-color: #ffffff !important;
+        }
+
+        /* Label width override */
+        .mktoLabel {
+            
+        }
+        .mktoAsterix {
+            float:left!important;
+            margin-right: 4px!important;
+            
+        }
+        .mktoField {
+            
+        }
+        .mktoFormCol {
+            width:100%;
+        }
+        .mktoFieldWrap {
+            width:90%;
+        }
+
+
+      `;
+      document.head.appendChild(formStyles);
+    }
+  );
+};
+document.body.appendChild(formScript);
+
+
+
+                    })();
+                </script>
+
             </div>
 
 
