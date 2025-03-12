@@ -1,21 +1,21 @@
 ---
-title: Deploy a Tiny Sentiment Classifier on Arm - Training and Inference with PyTorch and ExecuTorch
+title: Edge AI with PyTorch & ExecuTorch - Tiny Sentiment Analysis on Arm
 
-minutes_to_complete: 120
+minutes_to_complete: 90
 
 who_is_this_for: This topic is for machine learning engineers, embedded AI developers, and researchers interested in deploying TinyML models for NLP on Arm-based edge devices using PyTorch and ExecuTorch. 
 
 learning_objectives: 
-    - Train a custom CNN-based sentiment classifier for TinyML.
+    - Train a custom CNN-based sentiment classification model implemented in PyTorch.
     - Optimize and convert the model using ExecuTorch for Arm-based edge devices.
-    - Deploy and run inference on the Corstone-320 FVP and Raspberry Pi 5.
+    - Deploy and run inference on the Corstone-320 FVP.
 
 prerequisites:
    - Basic knowledge of machine learning concepts. 
-   - It is advised to complete The Learning Path [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm) before starting this learning path. 
+   - It is advised to complete The Learning Path, [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm) before starting this learning path. 
    - Familiarity with Python and PyTorch.
    - A Linux host machine or VM running Ubuntu 22.04 or higher.
-   - (Optional) Raspberry Pi 5 or an Arm license to run the Corstone-320 Fixed Virtual Platform (FVP), for hands-on deployment.  
+   - An Arm license to run the examples on the Corstone-320 Fixed Virtual Platform (FVP), for hands-on deployment.  
 
 
 author: Dominica Abena O. Amanfo
@@ -30,11 +30,9 @@ tools_software_languages:
     - CNN 
     - PyTorch
     - ExecuTorch
-    - Raspberry Pi
     
 operatingsystems:
     - Linux
-    - Raspberry Pi OS
 
 
 further_reading:

@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Overview 
-In this course, you will learn how to train and run inference using a Tiny Sentiment Classifier. You'll deploy the model on the Arm Corstone-320 FVP and optionally on a Raspberry Pi 5 for sentiment analysis. You'll gain hands-on experience with PyTorch, ExecuTorch, and Edge Impulse to bring AI-powered sentiment analysis to embedded systems.
+In this course, you will learn how to train and run inference using a Tiny Sentiment Classifier. You'll deploy the model on the Arm Corstone-320 FVP for sentiment analysis. 
 
 We will train a lightweight convolutional neural network (CNN)-based sentiment classifier using synthetic text data. This model is optimized for small devices, using embedding layers and 1D convolutions for efficient text classification.
 
@@ -21,7 +21,7 @@ If you just followed the LP above, you should already have your virtual environm
 ```console
 source $HOME/executorch-venv/bin/activate
 ```
-The prompt of your terminal now has `(executorch)` as a prefix to indicate the virtual environment is active.
+The prompt of your terminal now has `(executorch-venv)` as a prefix to indicate the virtual environment is active.
 
 Run the commands below to install the dependencies.
 
