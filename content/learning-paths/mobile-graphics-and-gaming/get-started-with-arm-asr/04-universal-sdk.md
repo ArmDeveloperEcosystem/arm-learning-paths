@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Introduction
 
-Use the following steps to implement **Arm Accuracy Super-Resolution** in your own custome engine. Arm ASR is an optimized version of [Fidelity Super Resolution 2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md) that has been heavily modified to included many mobile-oriented optimizations to make the technique suited for mobile.
+Use the following steps to implement **Arm Accuracy Super-Resolution** in your own custome engine. Arm ASR is an optimized version of [Fidelity Super Resolution 2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md) that has been heavily modified to include many mobile-oriented optimizations to make the technique suited for mobile.
 
 There are two ways you can integrate Arm ASR into your custom engine:
 
@@ -24,37 +24,37 @@ To quickly integrate Arm ASR, which means the built-in standalone backend is use
     ```
     git clone https://github.com/arm/accuracy-super-resolution-universal-sdk
     ```
-1. For the purposes of this tutorial, we will set a variable to identify the location of the Arm ASR package. This path will be used to refer to files in the repository throughout this learning path.
+2. For the purposes of this tutorial, we will set a variable to identify the location of the Arm ASR package. This path will be used to refer to files in the repository throughout this learning path.
 
     ```
     export $ARMASR_DIR=$(pwd)
     ```
 
-1. Copy the **Arm_ASR** directory into your project, and add **Arm_ASR/src/backends/shared/blob_accessors/prebuilt_shaders** in the incude path if you want to use prebuilt shaders.
+3. Copy the **Arm_ASR** directory into your project, and add **Arm_ASR/src/backends/shared/blob_accessors/prebuilt_shaders** in the include path if you want to use prebuilt shaders.
 
-1. Include the following header files in your codebase where you wish to interact with the technique:
-    
+4. Include the following header files in your codebase where you wish to interact with the technique:
+
     - `$ARMASR_DIR/include/host/ffxm_fsr2.h#L1`
     - `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h#L1`
 
-1. Create a Vulkan backend.
+5. Create a Vulkan backend.
     - Allocate a Vulkan scratch buffer of the size returned by `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h#L65`.
     - Create `FfxmDevice` via `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h#L65`.
     - Create `FfxmInterface` by calling `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h#L99`.
 
-1. Create a context by calling `ffxmFsr2ContextCreate` accessed via `$ARMASR_DIR/include/host/ffxm_fsr2.h#L296`. The parameters structure should be filled out matching the configuration of your application.
+6. Create a context by calling `ffxmFsr2ContextCreate` accessed via `$ARMASR_DIR/include/host/ffxm_fsr2.h#L296`. The parameters structure should be filled out matching the configuration of your application.
 
-1. Each frame call `ffxmFsr2ContextDispatch` via `$ARMASR_DIR/include/host/ffxm_fsr2.h#L337' to record/execute the technique's workloads. The parameters structure should be filled out matching the configuration of your application.
+7. Each frame call `ffxmFsr2ContextDispatch` via `$ARMASR_DIR/include/host/ffxm_fsr2.h#L337' to record/execute the technique's workloads. The parameters structure should be filled out matching the configuration of your application.
 
-1. When your application is terminating (or you wish to destroy the context for another reason) you should call `ffxmFsr2ContextDestroy` accessed via `$ARMASR_DIR/include/host/ffxm_fsr2.h#L360`. The GPU should be idle before calling this function.
+8. When your application is terminating (or you wish to destroy the context for another reason) you should call `ffxmFsr2ContextDestroy` accessed via `$ARMASR_DIR/include/host/ffxm_fsr2.h#L360`. The GPU should be idle before calling this function.
 
-1. Sub-pixel jittering should be applied to your application's projection matrix. This should be done when performing the main rendering of your application. You should use the `ffxmFsr2GetJitterOffset` function accessed via `$ARMASR_DIR/include/host/ffxm_fsr2.h#L504` to compute the precise jitter offsets.
+9. Sub-pixel jittering should be applied to your application's projection matrix. This should be done when performing the main rendering of your application. You should use the `ffxmFsr2GetJitterOffset` function accessed via `$ARMASR_DIR/include/host/ffxm_fsr2.h#L504` to compute the precise jitter offsets.
 
-1. A global mip bias should be applied when texturing.
+10. A global mip bias should be applied when texturing.
 
-1. For the best upscaling quality it is strongly advised that you populate the Reactive mask according to our guidelines. You can also use `ffxmFsr2ContextGenerateReactiveMask` accessed via `$ARMASR_DIR/include/host/ffxm_fsr2.h#L348` as a starting point.
+11. For the best upscaling quality it is strongly advised that you populate the Reactive mask according to our guidelines. You can also use `ffxmFsr2ContextGenerateReactiveMask` accessed via `$ARMASR_DIR/include/host/ffxm_fsr2.h#L348` as a starting point.
 
-1. Finally, link the two built libraries (**Arm_ASR_api** and **Arm_ASR_backend**).
+12. Finally, link the two built libraries (**Arm_ASR_api** and **Arm_ASR_backend**).
 
 ## Tight integration
 
@@ -64,11 +64,11 @@ In this approach the shaders are expected to be built by the engine. Arm ASR's s
 
 1. Include the `ffxm_interface.h` header file from `$ARMASR_DIR/include/host/ffxm_interface.h#L1` in your codebase.
 
-1. Implement your own functions (assume the names are `xxxGetInterfacexxx`, `xxxGetScratchMemorySizexxx`) and callbacks in `FfxmInterface` accessed via `$ARMASR_DIR/include/host/ffxm_interface.h#L438` to link Arm ASR with the engine's renderer.
+2. Implement your own functions (assume the names are `xxxGetInterfacexxx`, `xxxGetScratchMemorySizexxx`) and callbacks in `FfxmInterface` accessed via `$ARMASR_DIR/include/host/ffxm_interface.h#L438` to link Arm ASR with the engine's renderer.
 
-1. Create your own backend by calling `xxxGetInterfacexxx`. A scratch buffer should be allocated of the size returned by calling `xxxGetScratchMemorySizexxx` and the pointer to that buffer passed to `xxxGetInterfacexxx`.
+3. Create your own backend by calling `xxxGetInterfacexxx`. A scratch buffer should be allocated of the size returned by calling `xxxGetScratchMemorySizexxx` and the pointer to that buffer passed to `xxxGetInterfacexxx`.
 
-1. Now, you can follow the same steps from quick integration above, starting from step 6, creating a Arm ASR context. In the final step it is only necessary to link the **Arm_ASR_api** library.
+4. Now, you can follow the same steps from quick integration above, starting from step 6, creating a Arm ASR context. In the final step it is only necessary to link the **Arm_ASR_api** library.
 
 ### HLSL-based workflows
 
@@ -81,3 +81,7 @@ In an HLSL-based workflow using DirectX Shader Compiler to cross-compile to SPIR
     ```
 
 - The extension **VK_KHR_shader_float16_int8** should be used at runtime.
+
+(...)
+
+You are now ready to use Arm ASR in your game engine projects. Go to the next section to explore more resources on Arm ASR.

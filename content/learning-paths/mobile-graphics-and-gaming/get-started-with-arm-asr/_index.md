@@ -5,25 +5,24 @@ minutes_to_complete: 20
 
 who_is_this_for: Mobile gaming and graphics developers who want to install and configure Arm Accuracy Super Resolution (ASR) in their projects, to improve performance on highly complex game content without compromising on image quality.
 
-learning_objectives: 
+learning_objectives:
     - Understand Arm Accuracy Super Resolution
     - Integrate Arm ASR into your game project
-    - Control how Arm ASR upscales your content 
+    - Control how Arm ASR upscales your content
 
 prerequisites:
     - A game project that uses high-quality rendering features (such as hardware ray tracing) that stretch the performance capabilities of everyday smartphones.
+    - A development machine with Git set up.
 
 author: Julie Gaskin
 
 ### Tags
-skilllevels: Beginner
-subjects: Graphics performance
+skilllevels: Advanced
+subjects: Graphics
 armips:
-    - Arm CPUs
-    - Arm GPUs
+    - Mali
 tools_software_languages:
     - Unreal Engine
-    - Unity
 operatingsystems:
     - Android
 
@@ -31,17 +30,25 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
-        type: documentation
+        title: Arm ASR on Arm Developer Hub
+        link: https://www.arm.com/developer-hub/mobile-graphics-and-gaming/accuracy-super-resolution
+        type: website
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
+        title: Arm ASR Manga Comic
+        link: https://developer.arm.com/Mobile%20Graphics%20and%20Gaming/FeaturedContent/Mali%20Manga/FeaturedContent-MaliManga-Volume4
+        type: website
+    - resource:
+        title: Arm Community Blog
+        link: https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/introducing-arm-accuracy-super-resolution
         type: blog
     - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
+        title: Arm Accuracy Super Resolution for Unreal Engine Tutorial
+        link: https://developer.arm.com/documentation/109993/latest/
+        type: documentation
+    - resource:
+        title: Arm Accuracy Super Resolution for Universal SDK Tutorial
+        link: https://developer.arm.com/documentation/110404/latest/
+        type: documentation
 
 
 

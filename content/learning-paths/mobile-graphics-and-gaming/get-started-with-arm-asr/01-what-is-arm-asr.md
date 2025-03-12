@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Introduction
 
-[Arm&reg; Accuracy Super Resolution™ (ASR)](https://www.arm.com/developer-hub/mobile-graphics-and-gaming/accuracy-super-resolution) is a mobile-optimized temporal upscaling technique derived from [AMD's Fidelity Super Resolution 2 v2.2.2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md). Arm ASR extends this technnology with multiple optimizations to make the technique suited for the more resource-constrained environment of mobile gaming.
+[Arm&reg; Accuracy Super Resolution™ (ASR)](https://www.arm.com/developer-hub/mobile-graphics-and-gaming/accuracy-super-resolution) is a mobile-optimized temporal upscaling technique derived from [AMD's Fidelity Super Resolution 2 v2.2.2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md). Arm ASR extends this technology with multiple optimizations to make the technique suited for the more resource-constrained environment of mobile gaming.
 
 With an Unreal Engine plug-in available now, open-source library code to integrate into your customized engines, and Unity and Godot plug-ins coming later in the year, you can easily improve frames per second, enhance visual quality, and prevent thermal throttling for smoother, longer gameplay.
 
@@ -29,19 +29,19 @@ You can control a range of different settings for Arm ASR:
 - Use a Robust Contrast Adaptive Sharpening (RCAS) filter to sharpen the output image.
 - The shader quality preset: 1 - Quality, 2 - Balanced, 3 - Performance.
 
-## How to get Arm ASR
+## Overview of Arm ASR
 
-The Arm ASR experience kit is a combination of materials that provide access to the technology, to help you evaluate it and make the best use of it. It includes:
+The [Arm ASR experience kit](https://github.com/arm/accuracy-super-resolution) is a combination of materials that provide access to the technology, to help you evaluate it and make the best use of it. It includes:
 
 - The Arm ASR source code so developers can access it fully and even evolve the technology for their needs.
 - Tutorials and sample materials to help developers with the integration of the technology and how to use it.
-- Plugin for Unreal Engine
+- Plugins for multiple game engines
 
-[Get Arm ASR on GitHub](https://github.com/arm/accuracy-super-resolution)
+Specific repositories for each game engine integration is also available. The following sections will cover those currently available.
 
 ## Unreal Engine Plugin
 
-We provide an Unreal Engine 5 plugin that you can install into your project in a matter of minutes. Once installed, simply enable temporal upscaling on your project and the plugin will automatically handle the upscaling of all frames.
+The Unreal Engine 5 plugin can be integrated into your project in a matter of minutes. Once installed, simply enable temporal upscaling on your project and the plugin will automatically handle the upscaling of all frames.
 
 [Using Arm ASR in Unreal Engine](../03-ue)
 
