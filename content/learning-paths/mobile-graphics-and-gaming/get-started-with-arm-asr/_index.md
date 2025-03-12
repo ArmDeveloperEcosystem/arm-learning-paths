@@ -3,6 +3,10 @@ title: Get started with Arm Accuracy Super Resolution (Arm ASR)
 
 minutes_to_complete: 20
 
+draft: true
+cascade:
+    draft: true
+
 who_is_this_for: Mobile gaming and graphics developers who want to install and configure Arm Accuracy Super Resolution (ASR) in their projects, to improve performance on highly complex game content without compromising on image quality.
 
 learning_objectives:
