@@ -8,22 +8,20 @@ layout: learningpathall
 
 ## Introduction
 
-During this step, we set up everything for the FVP to run and then boot the Linux system
-using the kernel and the root file system that we prepared earlier.
+During this step, you will set up everything for the FVP to run and then boot the Linux system
+using the kernel and the root file system that you prepared earlier in the earlier sections.
 
-Arm [Fixed Virtual Platform (FVP)][1] is a model that allows you to access functionality
-of Armv8.x or v9.x hardware. We use the Armv-A Base Rev C Architecture Envelope Model (AEM).
+Arm [Fixed Virtual Platform (FVP)](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) is a model that allows you to access functionality
+of Armv8.x or v9.x hardware. You will use the Armv-A Base Rev C Architecture Envelope Model (AEM).
 
 In addition to the model itself, you also need the device tree and the firmware. To simplify
-building these components, we use a tool called [Shrinkwrap][2].
+building these components, you will use a tool called [Shrinkwrap](https://gitlab.arm.com/tooling/shrinkwrap).
 
-This tool comes with a detailed [user guide][3] that covers all of its features and
-configuration options. Here, we provide a short quick-start guide.
+This tool comes with a detailed [user guide](https://shrinkwrap.docs.arm.com/en/latest/) that covers all of its features and
+configuration options. You will also leverage this tool to run and boot the images you prepared on the FVP.
 
-We also rely on a Docker container to facilitate the building of the firmware and
+Shrinkwrap can be used in a few different ways. One of the ways is to use a Docker container to facilitate the building of the firmware and
 running the FVP. This helps avoid installing all the dependencies on your host system.
-Shrinkwrap can be used without Docker but it requires extra steps to ensure that all
-dependencies are of the right version and are installed correctly.
 
 ## Install Shrinkwrap
 
@@ -31,10 +29,11 @@ First, install prerequisites in a Python virtual environment using Python 3.x:
 
 ```bash
 cd $HOME
-python -m venv $HOME/shrinkwrap-venv
-source $HOME/shrinkwrap-venv/bin/activate
+python -m venv $HOME/workspace/venv
+source $HOME/workspace/venv/bin/activate
 pip install -U pip setuptools wheel
 pip install pyyaml termcolor tuxmake
+```
 ```
 
 Shrinkwrap can be used directly from the source, which can be checked out from its Git
@@ -42,7 +41,7 @@ repository. Run this command in the workspace directory:
 
 ```bash
 git clone https://git.gitlab.arm.com/tooling/shrinkwrap.git
-export PATH=${PATH}:${HOME}/shrinkwrap/shrinkwrap
+export PATH=${PATH}:${HOME}/workspace/shrinkwrap/shrinkwrap
 ```
 
 Putting Shrinkwrap's main executable on your `PATH` is all you need to install the tool.
@@ -61,26 +60,13 @@ shrinkwrap v1.0.0
 
 ## Build firmware for the FVP
 
-Before proceeding, ensure that Docker is installed and usable. Follow the installation
-instructions for your distro [here][4].
-
-Now, we use the Shrinkwrap tool to build the firmware, the third essential ingredient in our
+Now, you can use the Shrinkwrap tool to build the firmware, the third essential ingredient in our
 setup. The following step needs to be done once although you will need to repeat it if you
 want to rebuild the firmware:
 
 ```bash
 shrinkwrap build --overlay=arch/v9.4.yaml ns-edk2.yaml
 ```
-
-{{% notice Note %}}
-
-If you are running into permission issues with docker, try running the following.
-
-```bash
-sudo usermod -aG docker $USER
-newgrp docker
-```
-{{% /notice %}}
 
 This command uses the `arch/v9.4.yaml` config that enables Armv9.4 hardware features.
 This config is included with the Shrinkwrap installation. We also use the `ns-edk2.yaml`
@@ -95,17 +81,17 @@ the components including the device tree for the FVP.
 At this point, we have everything required to boot our system. Shrinkwrap uses so called overlay
 configuration files. The following file instructs Shrinkwrap to connect all the pieces together
 and locate the kernel image, and rootfs. It can also be used to tweak any of the FVP
-parameters. Save this file as `aarch64.yaml` using a text editor of your choice.
+parameters. Create a file in $HOME/workspace directory called `aarch64.yaml` using a text editor of your choice. Copy the contents shown below into the file:
 
 ```yaml
 run:
   rtvars:
     ROOTFS:
-      value: ~/rootfs.img
+      value: ~/workspace/rootfs.img
     CMDLINE:
       value: ip=dhcp kpti=off root=/dev/vda2 console=ttyAMA0
     KERNEL:
-      value: ~/linux-build/arch/arm64/boot/Image
+      value: ~/workspace/linux-build/arch/arm64/boot/Image
   params:
     -C bp.hostbridge.userNetworking: 1
     -C bp.hostbridge.userNetPorts: 8022=22,8123=8123
@@ -125,7 +111,7 @@ The most important parts in this configuration file are:
    You can add more ports as needed.
 
 The FVP has many parameters that can be tweaked in this config by adding a `-C param: value`
-line to the `params` section. Refer to the [Fast Models Fixed Virtual Platforms Reference Guide][5]
+line to the `params` section. Refer to the [Fast Models Fixed Virtual Platforms Reference Guide](https://developer.arm.com/documentation/100966/latest/Getting-Started-with-Fixed-Virtual-Platforms/Configuring-the-model).
 for more details.
 
 ## Run FVP with Shrinkwrap
@@ -133,7 +119,7 @@ for more details.
 To run the FVP using Docker, execute the following command:
 
 ```bash
-shrinkwrap run ns-edk2.yaml --overlay $HOME/aarch64.yaml
+shrinkwrap run ns-edk2.yaml --overlay $HOME/workspace/aarch64.yaml
 ```
 
 At first, Shrinkwrap starts a Docker container and runs the FVP in it. At the beginning
@@ -188,8 +174,3 @@ ssh root@172.17.0.2 -p 8022 poweroff
 Continue to the next section for additional setup. The remaining steps are optional but it
 helps prepare our guest system for running Glibc tests and doing other complex tasks.
 
-[1]: https://developer.arm.com/downloads/-/arm-ecosystem-fvps
-[2]: https://gitlab.arm.com/tooling/shrinkwrap
-[3]: https://shrinkwrap.docs.arm.com/en/latest/
-[4]: https://docs.docker.com/engine/install/
-[5]: https://developer.arm.com/documentation/100966/latest/Getting-Started-with-Fixed-Virtual-Platforms/Configuring-the-model
