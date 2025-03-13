@@ -19,7 +19,7 @@ learning_objectives:
   - Build Glibc and run tests on the system running on the FVP.
 
 prerequisites:
-  - An AArch64 or x86 machine running a Linux system. The instructions in this Learning Path have been tested on AArch64 Linux machine running Ubuntu 24.04.
+  - An AArch64 or x86_64 Linux machine. The instructions in this Learning Path have been tested on AArch64 Linux machine running Ubuntu 24.04.
 
 author: Yury Khrustalev
 
