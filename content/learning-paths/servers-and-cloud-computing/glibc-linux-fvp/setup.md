@@ -10,7 +10,7 @@ In this section, you will configure the guest system to make it easier running m
 
 ## Void Linux basics
 
-For a detailed guide on Void Linux, refer to the [documentation][1].
+For a detailed guide on Void Linux, refer to the [documentation](https://docs.voidlinux.org/).
 
 Commands in this section are executed on the guest system.
 
@@ -58,7 +58,7 @@ for p in "${unused[@]}"; do
 done
 ```
 
-Here, we also mask these packages to prevent them from being installed automatically
+Here, you also mask these packages to prevent them from being installed automatically
 during system updates, saving time in the process.
 
 The last two code snippets are written so that you can re-run them multiple times.
@@ -77,7 +77,7 @@ Commands in this section are executed on the guest system.
 Our main interaction with the guest system will be via SSH. Running software on an
 FVP is slower than on real hardware, so we want to reduce the overhead. One way to
 do this is by replacing the preinstalled OpenSSH server with a more lightweight
-alternative, such as [Dropbear][2].
+alternative, such as [Dropbear](https://matt.ucc.asn.au/dropbear/dropbear.html).
 
 First, install Dropbear and enable corresponding service:
 
@@ -288,9 +288,5 @@ test -f /etc/sysctl.d/02-disable-vm-overcommit.conf || {
 }
 ```
 
-You are now ready to do put your Void Linux system to the test. Let's
-build the Glibc from source and run its tests on the FVP.
+You are now ready to do put your Void Linux system to the test. Let'sbuild the Glibc from source and run its tests on the FVP.
 
-
-[1]: https://docs.voidlinux.org/
-[2]: https://matt.ucc.asn.au/dropbear/dropbear.html
