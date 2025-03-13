@@ -7,7 +7,7 @@ draft: true
 cascade:
     draft: true
 
-who_is_this_for: Mobile gaming and graphics developers who want to install and configure Arm Accuracy Super Resolution (ASR) in their projects, to improve performance on highly complex game content without compromising on image quality.
+who_is_this_for: Mobile gaming and graphics developers who want to install and configure Arm Accuracy Super Resolution (Arm ASR) in their projects, to improve performance on highly complex game content without compromising on image quality.
 
 learning_objectives:
     - Understand Arm Accuracy Super Resolution
@@ -50,7 +50,7 @@ further_reading:
         link: https://developer.arm.com/documentation/109993/latest/
         type: documentation
     - resource:
-        title: Arm Accuracy Super Resolution for Universal SDK Tutorial
+        title: Arm Accuracy Super Resolution for the Generic Library Tutorial
         link: https://developer.arm.com/documentation/110404/latest/
         type: documentation
 

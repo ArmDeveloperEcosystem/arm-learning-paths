@@ -1,5 +1,5 @@
 ---
-title: What is Arm Accuracy Super Resolution?
+title: What is Arm Accuracy Super Resolution (Arm ASR)?
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Introduction
 
-[Arm&reg; Accuracy Super Resolution™ (ASR)](https://www.arm.com/developer-hub/mobile-graphics-and-gaming/accuracy-super-resolution) is a mobile-optimized temporal upscaling technique derived from [AMD's Fidelity Super Resolution 2 v2.2.2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md). Arm ASR extends this technology with multiple optimizations to make the technique suited for the more resource-constrained environment of mobile gaming.
+[Arm&reg; Accuracy Super Resolution™ (Arm ASR)](https://www.arm.com/developer-hub/mobile-graphics-and-gaming/accuracy-super-resolution) is a mobile-optimized temporal upscaling technique derived from [AMD's Fidelity Super Resolution 2 v2.2.2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md). Arm ASR extends this technology with multiple optimizations to make the technique suited for the more resource-constrained environment of mobile gaming.
 
-With an Unreal Engine plug-in available now, open-source library code to integrate into your customized engines, and Unity and Godot plug-ins coming later in the year, you can easily improve frames per second, enhance visual quality, and prevent thermal throttling for smoother, longer gameplay.
+Available as an easy plug-in for Unreal Engine 5.3, 5,4, and 5.5, a Unity plugin coming soon, or as a generic library that you can integrate into other engines, you can easily improve frames per second, enhance visual quality, and prevent thermal throttling for smoother, longer gameplay.
 
 ## What is Super Resolution?
 
@@ -35,9 +35,7 @@ The [Arm ASR experience kit](https://github.com/arm/accuracy-super-resolution) i
 
 - The Arm ASR source code so developers can access it fully and even evolve the technology for their needs.
 - Tutorials and sample materials to help developers with the integration of the technology and how to use it.
-- Plugins for multiple game engines
-
-Specific repositories for each game engine integration is also available. The following sections will cover those currently available.
+- Plugin for Unreal Engine.
 
 ## Unreal Engine Plugin
 
@@ -47,6 +45,6 @@ The Unreal Engine 5 plugin can be integrated into your project in a matter of mi
 
 ## Custom engine usage
 
-If you are using your own custom engine, you can still integrate Arm ASR using our open-source reference library.
+If you are using your own custom engine, you can still integrate Arm ASR using our generic library.
 
-[Using Arm ASR in a custom engine with the Universal SDK](../04-universal-sdk)
+[Using Arm ASR in a custom engine](../04-generic_library)
