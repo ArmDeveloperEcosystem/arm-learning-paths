@@ -14,7 +14,7 @@ Run the following commands to make sure the necessary dependencies are installed
 
 ```bash
 sudo apt update && sudo apt install -y \
-    gcc-aarch64-linux-gnu git make bash \
+    git make bash \
     flex bison build-essential libssl-dev bc libelf-dev libncurses-dev \
     python3 python3-pip python-is-python3 python3-venv wget xz-utils coreutils
 ```
