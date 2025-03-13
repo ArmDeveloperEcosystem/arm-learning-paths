@@ -171,7 +171,7 @@ Commands in this section are executed on the guest system.
 Creating a non-root user in the guest system can be practical. Additionally, we will
 copy the same SSH key used for the root user to avoid setting up different key pair
 and having to alternate between them. For a non-root user in the guest system we
-will use the same username `user` as on your host system.
+will use the username `user`.
 
 SSH as root into the guest system running on FVP and execute these commands:
 
