@@ -1,5 +1,5 @@
 ---
-title: Build a Void Linux image on an FVP
+title: Build and test a custom Linux image on an FVP
 
 draft: true
 cascade:
