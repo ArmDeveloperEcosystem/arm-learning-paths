@@ -28,10 +28,10 @@ armips:
 tools_software_languages:
     - C++
     - ThreadSanitizer (TSan)
+    - Runbook
 operatingsystems:
     - Linux
-    - Runbook
-
+   
 further_reading:
     - resource:
         title: C++ Memory Order Reference Manual 
