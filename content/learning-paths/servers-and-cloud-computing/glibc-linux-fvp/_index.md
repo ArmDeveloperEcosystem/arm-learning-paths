@@ -8,25 +8,24 @@ cascade:
 minutes_to_complete: 60
 
 who_is_this_for: >
-  Developers who wish to run a Linux system (optionally using a custom kernel and
-  a C library) on an Arm Fixed Virtual Platform (FVP) model. For example, this
-  guide might be useful if you want to test patches for the Linux kernel or Glibc.
+  This is an advanced topic for developers who wish to run a Linux system (optionally using a custom kernel and
+  a C library) on an Arm Fixed Virtual Platform (FVP) model. This learning path might be useful to follow if you want to test patches for the Linux kernel or Glibc prior to having hardware available.
 
 learning_objectives:
   - Build the Linux kernel.
   - Install the Shrinkwrap tool, build firmware for the FVP and run it.
   - Configure and boot a Linux system on the FVP.
-  - Configure guest OS to make running Glibc tests easier.
+  - Configure guest OS and run Glibc tests.
   - Build Glibc and run tests on the system running on the FVP.
 
 prerequisites:
-  - An AArch64 or x86 machine running a Linux system. The instructions in this Learning Path have been tested on AArch64 running Ubuntu 24.02 and Debian 12.
+  - An AArch64 or x86 machine running a Linux system. The instructions in this Learning Path have been tested on AArch64 Linux machine running Ubuntu 24.04.
 
 author: Yury Khrustalev
 
 ### Tags
 skilllevels: Advanced
-subjects: Containers and Virtualization
+subjects: Performance and Architecture
 armips:
     - AArch64
 tools_software_languages:
