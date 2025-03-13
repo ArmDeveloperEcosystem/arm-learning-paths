@@ -34,7 +34,6 @@ source $HOME/workspace/venv/bin/activate
 pip install -U pip setuptools wheel
 pip install pyyaml termcolor tuxmake
 ```
-```
 
 Shrinkwrap can be used directly from the source, which can be checked out from its Git
 repository. Run this command in the workspace directory:
