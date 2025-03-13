@@ -50,7 +50,7 @@ at the end):
 export CROSS=/usr/bin/aarch64-linux-gnu-
 ```
 
-Now configure the cross-build for the `aarch64-none-linux-gnu` target:
+Now configure the cross-build for the `aarch64-linux-gnu` target:
 
 ```bash
 mkdir glibc-build
@@ -63,7 +63,7 @@ AR=${CROSS}ar GPROF=${CROSS}gprof \
 OBJDUMP=${CROSS}objdump OBJCOPY=${CROSS}objcopy \
 RANLIB=${CROSS}ranlib \
 ../glibc/configure --prefix=/usr \
-  --host=aarch64-none-linux-gnu \
+  --host=aarch64-linux-gnu \
   --enable-hardcoded-path-in-tests \
   --with-headers=$HOME/workspace/linux-headers/include
 ```
