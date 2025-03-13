@@ -6,60 +6,44 @@ weight: 2
 layout: learningpathall
 ---
 
-In this section, you will install packages and review some naming conventions used throughout the learning path.
+In this section, you will install packages and review the directory structure used throughout the learning path.
 
-## Before you begin
+## Install dependencies
 
 Run the following commands to make sure the necessary dependencies are installed on your host machine:
 
 ```bash
 sudo apt update && sudo apt install -y \
-    gcc-aarch64-linux-gnu docker.io git make bash \
+    gcc-aarch64-linux-gnu git make bash \
     flex bison build-essential libssl-dev bc libelf-dev libncurses-dev \
     python3 python3-pip python-is-python3 python3-venv wget xz-utils coreutils
 ```
 
+Install GCC to cross compile Linux applications:
 ```bash
-sudo systemctl enable --now docker
+sudo apt install gcc-aarch64-linux-gnu -y
 ```
 
-Verify that docker is running. You should see the output below as a result of this command:
-```bash
-sudo systemctl status docker
-```
+{{% notice Note%}}
+The GCC cross toolchain installation directory contains everything a cross toolchain would need, for example, the path to the `gcc` tool would be `/usr/bin/aarch64-linux-gnu-gcc`. 
+{{% /notice %}}
 
-```output
-Active: active (running)
-```
+Install Docker, refer to the [Docker install guide](/install-guides/docker/).
 
-## Naming conventions
 
-For a few things you may need root access on your host system to do minimal setup and
-install packages that are described in the following sections.
+## Directory Structure
 
-In the following sections we use host system to checkout sources and build various
-tools and we also make configuration changes to the guest system that will run on
-the Arm [Fixed Virtual Platform (FVP)][1] model.
-
-Before we begin, it's important to describe the specifics of our setup making it easier
-to write commands and code examples. Wherever possible we use generic commands and code
-examples but in certain places we have to use hardcoded values and absolute paths.
+In the following sections you will checkout sources and build various tools on your Linux host machine. Before you begin, lets look at the directory structure of where you will build the different parts of software stack needed to run this learning path.
 
 Table 1. Directory layout
 
-| Path                       | Description                                |
-|----------------------------|--------------------------------------------|
-| `/path/to/cross/gcc`       | GCC cross toolchain installation directory |
-| `/home/user` or `$HOME`    | Home directory of your host non-root user  |
-| `/home/user/linux`         | Folder with the Linux kernel sources       |
-| `/home/user/linux-headers` | Directory for installing kernel headers    |
-| `/home/user/linux-build`   | Folder for the Linux kernel build output   |
-| `/home/user/glibc`         | Folder for the Glibc sources                |
-| `/home/user/glibc-build`   | Directory for the Glibc build output      |
+| Path                                 | Description                           |
+|--------------------------------------|---------------------------------------|
+| `$HOME`                         | Home directory of your host non-root user  |
+| `$HOME/workspace`               | Workspace directory                        |
+| `$HOME/workspace/linux`         | Folder with the Linux kernel sources       |
+| `$HOME/workspace/linux-headers` | Directory for installing kernel headers    |
+| `$HOME/workspace/linux-build`   | Folder for the Linux kernel build output   |
+| `$HOME/workspace/glibc`         | Folder for the Glibc sources               |
+| `$HOME/workspace/glibc-build`   | Directory for the Glibc build output       |
 
-
-We presume that the GCC cross toolchain installation directory contains everything a
-cross toolchain would need, for example, the path to the `gcc` tool would be
-`/path/to/cross/gcc/bin/aarch64-none-linux-gnu-gcc`.
-
-[1]: https://developer.arm.com/downloads/-/arm-ecosystem-fvps
