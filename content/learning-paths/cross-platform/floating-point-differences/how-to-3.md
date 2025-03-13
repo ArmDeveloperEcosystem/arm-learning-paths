@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## 
 
-Loss in precision can arise from the ordering of operations. Consider the example below. Function 1, `f1` and 2, `f2` are mathematically equivalent. Hence they shuold return the same value given the same input. If we input a very small number, `1e-8`, the error is different due to the loss in precision caused by different operations. Amplifying this result leads to a difference. 
+Loss in precision can arise from the ordering of operations. Consider the example below. Function 1, `f1` and 2, `f2` are mathematically equivalent. Hence they should return the same value given the same input. If we input a very small number, `1e-8`, the error is different due to the loss in precision caused by different operations. Amplifying this result leads to a difference. 
 
 
 ```cpp

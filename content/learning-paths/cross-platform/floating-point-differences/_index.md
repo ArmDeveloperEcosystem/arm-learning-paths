@@ -1,23 +1,25 @@
 ---
-title: Floating Point Differences Between x86 and Arm64
+title: Learn the basic differences between floating point conversion on x86 and Arm
 
-minutes_to_complete: 45
+minutes_to_complete: 30
 
-who_is_this_for: PLACEHOLDER SENTENCE
+who_is_this_for: Developers porting applications from x86 to AArch64 who observe different results on each platform.
 
 learning_objectives: 
-    - PLACEHOLDER OBJECTIVE 1
-    - PLACEHOLDER OBJECTIVE 2
+    - Understand the differences between converting floating point numbers on x86 and Arm. 
+    - Understand factors that affect floating point behaviour
+    - Basic compiler techniques to produce predictable behaviour
 
 prerequisites:
-    - PLACEHOLDER PREREQ 1
-    - PLACEHOLDER PREREQ 2
+    - Access to an x86 and Arm-based machine
+    - Basic understanding of floating point numbers
+    - A C++/C compiler
 
-author: PLACEHOLDER NAME
+author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
-subjects: PLACEHOLDER SUBJECT
+subjects: ML
 armips:
     - PLACEHOLDER IP A
     - PLACEHOLDER IP B

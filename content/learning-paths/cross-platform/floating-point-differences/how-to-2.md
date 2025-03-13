@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Differences in behaviour between x86 and Arm. 
 
-The C++ code snippet below type casts floating point numbers to various data types. Copy and paste into a new file called `converting-float.cpp`. 
+The C++ code snippet below casting floating point numbers to various data types. Copy and paste into a new file called `converting-float.cpp`. 
 
 ```cpp
 #include <iostream>
@@ -61,3 +61,33 @@ To demonstrate we will compile `converting-float.cpp` on an Arm64 and x86 machin
 For easy visualisation, the image below shows the x86 output (left) and Arm output (right). The  highlighted lines show the difference in output. 
 
 ![differences](./differences.png)
+
+## Best Practice
+
+Clearly the above differences show that explictly checking for specific values will lead to unportable code. For example, consider the naively implemented function below. This checks if the value is 0, the value an x86 machine will convert a floating point number that exceeds the maximum 32-bit float value. This is different to AArch64 behaviour leading to unportable code. 
+
+```cpp
+void checkFloatToUint32(float num) {
+    uint32_t castedNum = static_cast<uint32_t>(num);
+    if (castedNum == 0) {
+        std::cout << "The casted number is 0, indicating the float was out of bounds for uint32_t." << std::endl;
+    } else {
+        std::cout << "The casted number is: " << castedNum << std::endl;
+    }
+}
+```
+
+This can simply be corrected by using the macro, `UINT32_MAX`. 
+{{% notice Note %}} To find out all the available compiler-defined macros, the `echo | <clang|gcc etc.> -dM -` will output them to the terminal{{% /notice %}}
+
+```cpp
+void checkFloatToUint32(float num) {
+    uint32_t castedNum = static_cast<uint32_t>(num);
+    if (castedNum == UINT32_MAX) {
+        std::cout << "The casted number is " << UINT32_MAX <<  " indicating the float was out of bounds for uint32_t." << std::endl;
+    } else {
+        std::cout << "The casted number is: " << castedNum << std::endl;
+    }
+}
+```
+

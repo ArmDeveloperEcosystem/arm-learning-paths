@@ -72,3 +72,42 @@ f2(1.000000e-08) = 0.0000000050
 Difference (f1 - f2) = -1.7887354748e-17
 Final result after magnification: 0.0000999982
 ```
+
+## Rounding Differences due to x86 and Arm microarchitectures
+
+```cpp
+#include <iostream>
+#include <iomanip>
+
+double fma(double a, double b, double c) {
+    return (a * b) + c;  // May use FMA (fused multiply-add) on x86
+}
+
+double no_fma(double a, double b, double c) {
+    volatile double temp = a * b;  // Prevents FMA by forcing intermediate storage
+    return temp + c;
+}
+
+int main() {
+    double a = 1.0000000000000002;
+    double b = 1.0000000000000002;
+    double c = -1.0000000000000004;
+
+    double result_a = fma(a, b, c);
+    double result_b = no_fma(a, b, c);
+
+    std::cout << std::setprecision(17);
+    std::cout << "Result with potential FMA use): " << result_a << std::endl;
+    std::cout << "Result without FMA: " << result_b << std::endl;
+
+    if (result_a != result_b) {
+        std::cout << "Floating-point inconsistency due to microarchitecture differences!\n";
+    }
+
+    return 0;
+}
+```
+
+``bash
+-ffp-contract=on // seems to fix FMA accuracy issues somehow.
+```
