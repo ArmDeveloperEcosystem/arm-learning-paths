@@ -1,5 +1,5 @@
 ---
-title: Demo - Audio transcription on Arm
+title: Demo - Whisper Voice Audio transcription on Arm
 overview: | 
   This Learning Path shows you how to use a c8g.8xlarge AWS Graviton4 instance, powered by an Arm Neoverse CPU, to build a simple Transcription-as-a-Service server.
 
@@ -14,6 +14,7 @@ demo_steps:
   - Record your voice (grant microphone permissions to your browser).
   - Review and send the audio file to the sever for transcription.
   - Receive the transcribed output and view stats.
+
 
 
 title_chatbot_area: Whisper Voice Demo

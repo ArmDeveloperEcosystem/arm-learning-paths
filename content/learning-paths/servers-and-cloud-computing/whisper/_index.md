@@ -1,25 +1,22 @@
 ---
-title: Run OpenAI Whisper Audio Model efficiently on Arm with Hugging Face Transformers
-
-draft: true
-cascade:
-    draft: true
+title: Accelerate Whisper on Arm with Hugging Face Transformers
 
 minutes_to_complete: 15
 
-who_is_this_for: This Learning Path is for software developers looking to run the Whisper automatic speech recognition (ASR) model efficiently. You will use an Arm-based cloud instance to run and build speech transcription based applications.
+who_is_this_for: This Learning Path is for software developers familiar with basic machine learning concepts and looking to run the OpenAI Whisper Automatic Speech Recognition (ASR) model efficiently, using an Arm-based cloud instance.
 
 learning_objectives:
-    - Install the dependencies to run the Whisper Model
-    - Run the OpenAI Whisper model using Hugging Face Transformers.
+    - Install the dependencies for the Whisper ASR Model.
+    - Run the Whisper model using Hugging Face Transformers.
     - Enable performance-enhancing features for running the model on Arm CPUs.
-    - Compare the total time taken to generate transcript with Whisper.
+    - Evaluate transcript generation times using Whisper.
 
 
 prerequisites:
-    - An [Arm-based compute instance](/learning-paths/servers-and-cloud-computing/intro/) with 32 cores, 8GB of RAM, and 32GB disk space running Ubuntu.
-    - Basic understanding of Python and ML concepts.
-    - Understanding of Whisper ASR Model fundamentals.
+    - An [Arm-based compute instance](/learning-paths/servers-and-cloud-computing/intro/) running Ubuntu with 32 cores, 8GB of RAM, and 32GB of disk space.
+    - Basic knowledge of Python.
+    - Familiarity with machine learning concepts.
+    - Familiarity with the fundamentals of the Whisper ASR Model.
 
 author: Nobel Chowdary Mandepudi
 
