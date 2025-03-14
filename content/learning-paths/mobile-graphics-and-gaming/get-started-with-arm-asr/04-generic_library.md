@@ -260,9 +260,9 @@ Arm ASR provides two values which control the exposure used when performing upsc
 
 The exposure value should match that which the application uses during any subsequent tonemapping passes performed by the application. This means Arm ASR will operate consistently with what is likely to be visible in the final tonemapped image.
 
-{{% notice %}}
+{{%notice%}}
 In various stages of the algorithm, the technique will compute its own exposure value for internal use. It is worth noting that all outputs will have this internal tonemapping reversed before the final output is written. Meaning that Arm ASR returns results in the same domain as the original input signal.
-{{% /notice %}}
+{{%/notice%}}
 
 Poorly selected exposure values can have a drastic impact on the final quality of Arm ASR's upscaling. Therefore, it is recommended that `FFXM_FSR2_ENABLE_AUTO_EXPOSURE` (`$ARMASR_DIR/include/host/ffxm_fsr2.h#L147`) is used by the application, unless there is a particular reason not to. When `FFXM_FSR2_ENABLE_AUTO_EXPOSURE` (`$ARMASR_DIR/include/host/ffxm_fsr2.h#L147`) is set in the `flags` (`$ARMASR_DIR/include/host/ffxm_fsr2.h#L183`) field of the `FfxmFsr2ContextDescription` (`$ARMASR_DIR/include/host/ffxm_fsr2.h#L181`) structure, the exposure calculation in `ComputeAutoExposureFromLavg` (`$ARMASR_DIR/include/gpu/fsr2/ffxm_fsr2_common.h#L412`) is used to compute the exposure value, which matches the exposure response of ISO 100 film stock.
 
