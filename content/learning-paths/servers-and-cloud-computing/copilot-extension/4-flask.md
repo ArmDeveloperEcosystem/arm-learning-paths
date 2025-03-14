@@ -147,6 +147,10 @@ system_message = [{
 }]
 ```
 
+{{% notice Note %}}
+You'll notice that system_message is lowercase, compared to the uppercase SYSTEM_MESSAGE above. This is because the [agent_flow](https://github.com/ArmDeveloperEcosystem/python-rag-extension/blob/main/utils/agent_functions.py#L28) function where this code resides defines system_message as a parameter, so that if you want to write a test harness to dynamically test many different system prompts you can.
+{{% /notice %}}
+
 Once the system message is built, add it to the original message to create `full_prompt_messages` and invoke the copilot endpoint:
 
 ```Python

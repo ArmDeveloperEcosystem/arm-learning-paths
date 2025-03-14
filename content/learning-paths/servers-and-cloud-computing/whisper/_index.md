@@ -1,7 +1,7 @@
 ---
 title: Accelerate Whisper on Arm with Hugging Face Transformers
 
-minutes_to_complete: 30
+minutes_to_complete: 15
 
 who_is_this_for: This Learning Path is for software developers familiar with basic machine learning concepts and looking to run the OpenAI Whisper Automatic Speech Recognition (ASR) model efficiently, using an Arm-based cloud instance.
 

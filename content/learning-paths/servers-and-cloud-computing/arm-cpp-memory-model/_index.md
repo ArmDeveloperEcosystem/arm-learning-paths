@@ -1,6 +1,10 @@
 ---
 title: Learn about the C++ memory model for porting applications to Arm
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for C++ developers porting applications from x86 to Arm and optimizing performance.
@@ -23,7 +27,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - C++
-    - ThreadSantizer (TSan)
+    - ThreadSanitizer (TSan)
 operatingsystems:
     - Linux
     - Runbook
@@ -34,7 +38,7 @@ further_reading:
         link: https://en.cppreference.com/w/cpp/atomic/memory_order
         type: documentation
     - resource:
-        title: Thread Santiser Manual 
+        title: Thread Sanitizer Manual 
         link: Phttps://github.com/google/sanitizers/wiki/threadsanitizercppmanual
         type: documentation
 

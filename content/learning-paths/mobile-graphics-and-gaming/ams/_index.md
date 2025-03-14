@@ -71,6 +71,10 @@ further_reading:
         title: Integrate Arm Performance Studio into a CI workflow
         link: https://developer.arm.com/documentation/102543
         type: documentation
+    - resource:
+        title: RenderDoc Reference Guide
+        link: https://renderdoc.org/docs/index.html
+        type: documentation
 
 
 ### FIXED, DO NOT MODIFY
