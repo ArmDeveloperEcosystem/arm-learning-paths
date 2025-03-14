@@ -18,7 +18,7 @@ Using ASR, you can improve frames per second (FPS), enhance visual quality, and 
 
 ## What is Super Resolution?
 
-Super resolution techniques render frames at a lower resolution and apply shader upscaling to reconstruct how the frames should look at native resolution. This approach significantly improves performance and battery life on mobile devices.
+Super Resolution techniques render frames at a lower resolution and apply shader-based upscaling to reconstruct how the frames should look at native resolution. This approach significantly improves performance and extends battery life on mobile devices.
 
 Arm ASR outperforms spatial upscalers when reconstructing fine details, such as:
 
@@ -35,7 +35,9 @@ You have control over a range of different settings, including:
 
 ## Overview of Arm ASR
 
-The [Arm ASR Experience Kit](https://github.com/arm/accuracy-super-resolution) provides resources to help you evaluate and effectively utilize this technology. It includes:
+The [Arm ASR Experience Kit](https://github.com/arm/accuracy-super-resolution) provides resources to help you evaluate and effectively utilize this technology. 
+
+It includes:
 
 - Arm ASR source code, which provides developers with the full access and the flexibility to evolve the technology for their needs.
 - Tutorials and sample materials to simplify integration and usage.
@@ -45,10 +47,10 @@ The [Arm ASR Experience Kit](https://github.com/arm/accuracy-super-resolution) p
 
 The Arm ASR plugin for Unreal Engine 5 integrates into your project within minutes. Once installed, simply enable temporal upscaling, and the plugin automatically handles frame upscaling.
 
-[Using Arm ASR in Unreal Engine](../03-ue).
+See [Using Arm ASR in Unreal Engine](../03-ue).
 
-## Custom engine usage
+## Custom Engine Usage
 
 If you are using your own custom engine, integrate Arm ASR using our generic library.
 
-[Using Arm ASR in a custom engine](../04-generic_library).
+See [Using Arm ASR in a custom engine](../04-generic_library).
