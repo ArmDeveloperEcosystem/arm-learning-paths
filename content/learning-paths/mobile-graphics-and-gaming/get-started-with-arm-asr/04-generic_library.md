@@ -8,7 +8,9 @@ layout: learningpathall
 
 ## Introduction
 
-Use the following steps to implement **Arm Accuracy Super Resolution (Arm ASR)** in your own custom engine. Arm ASR is an optimized version of [Fidelity Super Resolution 2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md) (FSR2) that has been heavily modified to include many mobile-oriented optimizations to make the technique suited for mobile.
+Use the following steps to implement **Arm Accuracy Super Resolution (Arm ASR)** in your own custom engine. 
+
+Arm ASR is an optimized version of [Fidelity Super Resolution 2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md) (FSR2) that has been heavily modified to include many mobile-oriented optimizations to make the technique suitable for mobile.
 
 There are two ways you can integrate Arm ASR into your custom engine:
 
@@ -17,22 +19,22 @@ There are two ways you can integrate Arm ASR into your custom engine:
 
 Then refer to the following sections to learn how to configure Arm ASR:
 
-- [Quality presets](#quality-presets)
-- [Performance](#performance)
-- [Shader variants and Extensions](#shader-variants-and-extensions)
-- [Input resources](#input-resources)
-- [Providing motion vectors](#providing-motion-vectors)
-- [Reactive mask](#reactive-mask)
-- [Automatically generating reactivity](#automatically-generating-reactivity)
-- [Modular backend](#modular-backend)
-- [Camera jitter](#camera-jitter)
-- [Camera jump cuts](#camera-jump-cuts)
-- [Mipmap biasing](#mipmap-biasing)
-- [Frame Time Delta Input](#frame-time-delta-input)
-- [HDR support](#hdr-support)
-- [API Debug Checker](#debug-checker)
-- [Extended ffx_shader_compiler](#extended-ffx_shader_compiler)
-- [Generate prebuilt shaders](#generate-prebuilt-shaders)
+- [Quality presets](#quality-presets).
+- [Performance](#performance).
+- [Shader variants and Extensions](#shader-variants-and-extensions).
+- [Input resources](#input-resources).
+- [Providing motion vectors](#providing-motion-vectors).
+- [Reactive mask](#reactive-mask).
+- [Automatically generating reactivity](#automatically-generating-reactivity).
+- [Modular backend](#modular-backend).
+- [Camera jitter](#camera-jitter).
+- [Camera jump cuts](#camera-jump-cuts).
+- [Mipmap biasing](#mipmap-biasing).
+- [Frame Time Delta Input](#frame-time-delta-input).
+- [HDR support](#hdr-support).
+- [API Debug Checker](#debug-checker).
+- [Extended ffx_shader_compiler](#extended-ffx_shader_compiler).
+- [Generate prebuilt shaders](#generate-prebuilt-shaders).
 
 ## Get the Arm ASR package
 
@@ -42,7 +44,7 @@ Then refer to the following sections to learn how to configure Arm ASR:
     git clone https://github.com/arm/accuracy-super-resolution-generic-library
     ```
 
-2. For the purposes of this tutorial, we will set a variable to identify the location of the Arm ASR package. This path will be used to refer to files in the repository throughout this learning path.
+2. For the purposes of this Learning Path, set a variable to identify the location of the Arm ASR package. You will use this path to refer to files in the repository throughout this learning path.
 
     ```
     export $ARMASR_DIR=$(pwd)
