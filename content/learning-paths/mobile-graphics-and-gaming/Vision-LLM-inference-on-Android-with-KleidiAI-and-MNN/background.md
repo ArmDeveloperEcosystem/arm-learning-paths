@@ -7,15 +7,16 @@ layout: learningpathall
 ---
 
 ## MNN Introduction
-MNN is a highly efficient and lightweight deep learning framework. It supports inference and training of deep learning models and has industry-leading performance for inference and training on-device. At present, MNN has been integrated into more than 30 apps of Alibaba Inc, such as Taobao, Tmall, Youku, DingTalk, Xianyu, etc., covering more than 70 usage scenarios such as live broadcast, short video capture, search recommendation, product searching by image, interactive marketing, equity distribution, security risk control. In addition, MNN is also used on embedded devices, such as IoT.
 
-MNN-LLM is a large language model runtime solution developed based on the MNN engine. The mission of this project is to deploy LLM models locally on everyone's platforms(Mobile Phone/PC/IOT). It supports popular large language models such as Qianwen, Baichuan, Zhipu, LLAMA, and others. 
+MNN is a high-performance, lightweight deep learning framework designed for both inference and training. Optimized for on-device deployment, it delivers industry-leading efficiency across various applications. Currently, MNN is integrated into over 30 Alibaba Inc. apps, including Taobao, Tmall, Youku, DingTalk, and Xianyu. It powers more than 70 real-world scenarios, such as live streaming, short video processing, search recommendations, image-based product searches, interactive marketing, security risk control, and more. Additionally, MNN extends its capabilities to embedded systems, including IoT devices.
 
-KleidiAI is currently integrated into the MNN framework, enhancing the inference performance of large language models (LLMs) within MNN. The Android app on this page demonstrates Vision Transformer inference using the MNN framework, accelerated by KleidiAI.
+**MNN-LLM** is a large language model (LLM) runtime solution built on the MNN engine, designed to enable local deployment of LLMs across diverse platforms, including mobile devices, PCs, and IoT systems. It supports leading models such as Qianwen, Baichuan, Zhipu, and LLAMA, ensuring efficient and accessible AI-powered experiences.
+
+KleidiAI, a collection of optimized AI operators, is integrated into the MNN framework, enhancing the inference performance of large language models (LLMs) within MNN. The Android app in this learning path demonstrates Vision Transformer inference using the MNN framework, accelerated by KleidiAI.
 
 ## Vision Transformer（ViT）
-The Vision Transformer (ViT) is a deep learning model designed for image recognition tasks. Unlike traditional convolutional neural networks (CNNs), which process images using convolutional layers, ViT leverages the transformer architecture originally developed for natural language processing (NLP).
-The Vit workflow contains:
+The ViT is a deep learning model designed for image recognition tasks. Unlike traditional convolutional neural networks (CNNs), which process images using convolutional layers, ViT leverages the transformer architecture originally developed for natural language processing (NLP).
+The ViT workflow contains:
 
 - **Image Patching** : The input image is divided into fixed-size patches, similar to how text is tokenized in NLP tasks.
 - **Linear Embedding** : Each image patch is flattened and linearly embedded into a vector.
