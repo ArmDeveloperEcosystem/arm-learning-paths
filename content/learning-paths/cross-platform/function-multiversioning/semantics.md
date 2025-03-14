@@ -18,9 +18,8 @@ A hardware platform is able to support multiple architectural features from the 
 
 Function multiversioning provides a convenient way to select the most appropriate version of a function at runtime. The selection is permanent for the lifetime of the process and works as follows:
 
-1. Select the most specific version (the one with most features), else
-2. Select the version with the highest priority, as indicated by the [mapping table](https://arm-software.github.io/acle/main/acle.html#mapping), else
-3. Select a default version if no other versions are suitable.
+1. Select the version with the highest priority, as indicated by the [selection rules](https://arm-software.github.io/acle/main/acle.html#selection), else
+2. Select a default version if no other versions are suitable.
 
 The `default` version is the version of the function that is generated without these attributes.
 
