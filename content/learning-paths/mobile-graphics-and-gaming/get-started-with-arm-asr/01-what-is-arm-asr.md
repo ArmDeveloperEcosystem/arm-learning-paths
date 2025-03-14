@@ -35,7 +35,7 @@ The [Arm ASR Experience Kit](https://github.com/arm/accuracy-super-resolution) p
 
 - Arm ASR source code - enabling developers full access and the flexibility to evolve the technology for their needs.
 - Tutorials and sample materials to simplify integration and usage.
-- Plugin for Unreal Engine.
+- Plugin support for Unreal Engine.
 
 ## Unreal Engine Plugin
 
