@@ -20,7 +20,7 @@
     var connectionStatus = {
         isActive: false
     };
-
+    var sample_rate = 0;
 
 
 
@@ -30,6 +30,8 @@
         document.getElementById('stats-initial').hidden = true;
         // Update time taken
         document.getElementById('total-time-metric').textContent = time_taken;   
+
+        document.getElementById('sample-rate-metric').textContent = sample_rate;
     }
 
 
@@ -126,6 +128,15 @@ function showPopupPostConnection(message,type,connection_status=false) {
                 mediaRecorder.start();
                 isRecording = true;
     
+                // Create an AudioContext to get the sample rate
+                const audioContext = new AudioContext();
+                sample_rate = audioContext.sampleRate; // update global var
+                sample_rate = 48000;
+                sample_rate = (sample_rate / 1000).toFixed(1).replace(/\.0$/, '');
+
+                console.log('Recording audio at: ', sample_rate, 'kHz');
+
+
     
                 // Cap recording at set time
                 audio_cap_timeout = setTimeout(() => {
