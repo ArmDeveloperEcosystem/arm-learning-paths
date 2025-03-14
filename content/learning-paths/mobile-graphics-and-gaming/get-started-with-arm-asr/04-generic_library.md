@@ -66,7 +66,7 @@ To quickly integrate Arm ASR, which means the built-in standalone backend is use
 
 4. Create a context by calling `ffxmFsr2ContextCreate` in `$ARMASR_DIR/include/host/ffxm_fsr2.h`. The parameters structure should be filled out matching the configuration of your application.
 
-5. Each frame call `ffxmFsr2ContextDispatch` via `$ARMASR_DIR/include/host/ffxm_fsr2.h' to record/execute the technique's workloads. The parameters structure should be filled out matching the configuration of your application.
+5. Each frame calls `ffxmFsr2ContextDispatch` via `$ARMASR_DIR/include/host/ffxm_fsr2.h` to record/execute the technique's workloads. The parameters structure should be filled out matching the configuration of your application.
 
 6. When your application is terminating (or you wish to destroy the context for another reason) you should call `ffxmFsr2ContextDestroy` accessed via `$ARMASR_DIR/include/host/ffxm_fsr2.h`. The GPU should be idle before calling this function.
 
@@ -86,14 +86,13 @@ To quickly integrate Arm ASR, which means the built-in standalone backend is use
 
 If you wish to use your own backend/renderer, a tight integration with your engine is required. For this, a similar process to the [quick integration](#quick-integration) described above is required, but with the added requirement to fill the `FfxmInterface` accessed via `$ARMASR_DIR/include/host/ffxm_interface.h` with functions implemented on your end.
 
-In this approach the shaders are expected to be built by the engine. Arm ASR's shaders have been micro-optimized to use explicit 16-bit floating-point types so it is advisable that the shaders are built using such types. For example,  `min16float` is used in High-level shader languag (HLSL) and `float16_t` in OpenGL Shading Language (GLSL). For this you should define the following symbols enabled with a value of `1`:
+In this approach the shaders are expected to be built by the engine. Arm ASR's shaders have been micro-optimized to use explicit 16-bit floating-point types. It is therefore advisable that the shaders are built using such types. For example,  `min16float` is used in High-level shader languag (HLSL) and `float16_t` in OpenGL Shading Language (GLSL). If you are using HLSL, define the following symbol with a value of `1`:
 
 ```cpp
 #define FFXM_HLSL_6_2 1
-#define FFXM_HALF 1
 ```
 
-`FFXM_HALF` is already defined in the provided shader sources.
+The `FFXM_HALF` symbol is enabled by default in the provided shader sources.
 
 1. Include the following header in your codebase:
 
@@ -215,9 +214,9 @@ The resolution column indicates if the data should be at 'rendered' resolution o
 | Name            | Resolution                   |  Format                            | Type      | Notes                                          |
 | ----------------|------------------------------|------------------------------------|-----------|------------------------------------------------|
 | Color buffer    | Render                       | `APPLICATION SPECIFIED`            | Texture   | The current frame’s color data for the current frame. If HDR, enable `FFXM_FSR2_ENABLE_HIGH_DYNAMIC_RANGE` in `FfxmFsr2ContextDescription`. |
-| Depth buffer    | Render                       | `APPLICATION SPECIFIED (1x FLOAT)` | Texture   | The depth buffer for the current frame. The data should be provided as a single floating point value, the precision of which is under the application's control. Configure the depth throguh the `FfxmFsr2ContextDescription` when creating the `FfxmFsr2Context`. If the buffer is inverted, set `FFXM_FSR2_ENABLE_DEPTH_INVERTED` flag ([1..0] range). If the buffer has an infinite far plane, set the `FFXM_FSR2_ENABLE_DEPTH_INFINITE`. If the application provides the depth buffer in `D32S8` format, then it will ignore the stencil component of the buffer, and create an `R32_FLOAT` resource to address the depth buffer. |
+| Depth buffer    | Render                       | `APPLICATION SPECIFIED (1x FLOAT)` | Texture   | The depth buffer for the current frame. The data should be provided as a single floating point value, the precision of which is under the application's control. Configure the depth through the `FfxmFsr2ContextDescription` when creating the `FfxmFsr2Context`. If the buffer is inverted, set `FFXM_FSR2_ENABLE_DEPTH_INVERTED` flag ([1..0] range). If the buffer has an infinite far plane, set the `FFXM_FSR2_ENABLE_DEPTH_INFINITE`. If the application provides the depth buffer in `D32S8` format, then it will ignore the stencil component of the buffer, and create an `R32_FLOAT` resource to address the depth buffer. |
 | Motion vectors  | Render or presentation       | `APPLICATION SPECIFIED (2x FLOAT)` | Texture   | The 2D motion vectors for the current frame, in **[<-width, -height> ... <width, height>]** range. If your application renders motion vectors with a different range, you may use the `motionVectorScale` field of the `FfxmFsr2DispatchDescription` structure to adjust them to match the expected range for Arm ASR. Internally, Arm ASR uses 16-bit quantities to represent motion vectors in many cases, which means that while motion vectors with greater precision can be provided, Arm ASR will not benefit from the increased precision. The resolution of the motion vector buffer should be equal to the render resolution, unless the `FFXM_FSR2_ENABLE_DISPLAY_RESOLUTION_MOTION_VECTORS` flag is set when creating the `FfxmFsr2Context`, in which case it should be equal to the presentation resolution. |
-| Reactive mask   | Render                       | `R8_UNORM`                         | Texture   | As some areas of a rendered image do not leave a footprint in the depth buffer or include motion vectors, Arm ASR provides support for a reactive mask texture which can be used to indicate to the technique where such areas are. Good examples of these are particles, or alpha-blended objects which do not write depth or motion vectors. If this resource is not set, then Arm ASR's shading change detection logic will handle these cases as best it can, but for optimal results, this resource should be set. For more information on the reactive mask please refer to the [Reactive mask](#reactive-mask) section.  |
+| Reactive mask   | Render                       | `R8_UNORM`                         | Texture   | As some areas of a rendered image do not leave a footprint in the depth buffer or include motion vectors, Arm ASR provides support for a reactive mask texture.  This can be used to indicate to the technique where such areas are. Good examples of these are particles, or alpha-blended objects which do not write depth or motion vectors. If this resource is not set, then Arm ASR's shading change detection logic will handle these cases as best it can, but for optimal results, this resource should be set. For more information on the reactive mask please refer to the [Reactive mask](#reactive-mask) section.  |
 | Exposure        | 1x1                          | `R32_FLOAT/ R16_FLOAT`                        | Texture   | The exposure value computed for the current frame. This resource may be omitted if the `FFXM_FSR2_ENABLE_AUTO_EXPOSURE` flag in the `FfxmFsr2ContextDescription` structure when creating `FfxmFsr2Context`.  |
 
 All inputs that are provided at Render Resolution, except for motion vectors, should be rendered with jitter. By default, Motion vectors are expected to be unjittered unless the `FFXM_FSR2_ENABLE_MOTION_VECTORS_JITTER_CANCELLATION` flag is present.
