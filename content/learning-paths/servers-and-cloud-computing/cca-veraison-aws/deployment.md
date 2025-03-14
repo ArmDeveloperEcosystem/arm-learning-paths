@@ -1,6 +1,6 @@
 ---
 title: Create the Veraison Deployment
-weight: 3
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

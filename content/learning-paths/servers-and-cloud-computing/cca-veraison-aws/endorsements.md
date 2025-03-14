@@ -1,6 +1,6 @@
 ---
 title: Add CCA Platform Endorsements to Veraison
-weight: 4
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
