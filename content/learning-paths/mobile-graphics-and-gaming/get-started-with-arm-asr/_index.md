@@ -7,16 +7,16 @@ draft: true
 cascade:
     draft: true
 
-who_is_this_for: Mobile gaming and graphics developers who want to install and configure Arm Accuracy Super Resolution (Arm ASR) in their projects, to improve performance on highly complex game content without compromising on image quality.
+who_is_this_for: This Learning Path is for mobile, gaming, and graphics developers who want to install and configure Arm Accuracy Super Resolution (Arm ASR) to enhance performance on complex game content without sacrificing image quality.
 
 learning_objectives:
-    - Understand Arm Accuracy Super Resolution
-    - Integrate Arm ASR into your game project
-    - Control how Arm ASR upscales your content
+    - Understand Arm Accuracy Super Resolution.
+    - Integrate Arm ASR into your game project.
+    - Manage how Arm ASR upscales content.
 
 prerequisites:
-    - A game project that uses high-quality rendering features (such as hardware ray tracing) that stretch the performance capabilities of everyday smartphones.
-    - A development machine with Git set up.
+    - A game project that uses advanced rendering features (such as hardware ray tracing) that stretch the performance capabilities of everyday smartphones.
+    - A development machine with Git installed.
 
 author: Julie Gaskin
 
