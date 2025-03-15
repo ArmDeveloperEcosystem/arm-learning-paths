@@ -8,20 +8,20 @@ layout: learningpathall
 
 ## Introduction
 
-Use the following steps to implement **Arm Accuracy Super Resolution (Arm ASR)** in your own custom engine. 
+Follow these steps to implement **Arm Accuracy Super Resolution (Arm ASR)** in your custom engine. 
 
-Arm ASR is an optimized version of [Fidelity Super Resolution 2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md) (FSR2) that has been heavily modified to include many mobile-oriented optimizations to make the technique suitable for mobile.
+Arm ASR is an optimized variant of [Fidelity Super Resolution 2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md) (FSR2) that includes extensive mobile-specific optimizations, ensuring high performance on mobile devices.
 
-There are two ways you can integrate Arm ASR into your custom engine:
+You can integrate Arm ASR into your custom engine using one of two methods:
 
-- [Quick integration](#quick-integration) - using the built-in standalone backend.
-- [Tight integration](#tight-integration) - using your own backend/renderer.
+1. [Quick integration](#quick-integration) - use the built-in standalone backend.
+2. [Tight integration](#tight-integration) - use your engine's backend/renderer.
 
-Then refer to the following sections to learn how to configure Arm ASR:
+See the following sections to learn how to configure Arm ASR:
 
 - [Quality presets](#quality-presets).
 - [Performance](#performance).
-- [Shader variants and Extensions](#shader-variants-and-extensions).
+- [Shader variants and extensions](#shader-variants-and-extensions).
 - [Input resources](#input-resources).
 - [Providing motion vectors](#providing-motion-vectors).
 - [Reactive mask](#reactive-mask).
@@ -30,9 +30,9 @@ Then refer to the following sections to learn how to configure Arm ASR:
 - [Camera jitter](#camera-jitter).
 - [Camera jump cuts](#camera-jump-cuts).
 - [Mipmap biasing](#mipmap-biasing).
-- [Frame Time Delta Input](#frame-time-delta-input).
+- [Frame time delta input](#frame-time-delta-input).
 - [HDR support](#hdr-support).
-- [API Debug Checker](#debug-checker).
+- [API debug checker](#debug-checker).
 - [Extended ffx_shader_compiler](#extended-ffx_shader_compiler).
 - [Generate prebuilt shaders](#generate-prebuilt-shaders).
 
@@ -44,17 +44,19 @@ Then refer to the following sections to learn how to configure Arm ASR:
     git clone https://github.com/arm/accuracy-super-resolution-generic-library
     ```
 
-2. For the purposes of this Learning Path, set a variable to identify the location of the Arm ASR package. You will use this path to refer to files in the repository throughout this learning path.
+2. Set a variable for the package location for easy reference. 
+
+    You will use this path to refer to files in the repository.
 
     ```
     export $ARMASR_DIR=$(pwd)
     ```
 
-## Quick integration
+## 1. Quick Integration
 
-To quickly integrate Arm ASR, which means the built-in standalone backend is used, follow the steps below:
+To quickly integrate Arm ASR, which means the built-in standalone backend is used, follow these steps below:
 
-1. Copy the **Arm_ASR** directory into your project, and add **Arm_ASR/src/backends/shared/blob_accessors/prebuilt_shaders** in the include path if you want to use prebuilt shaders.
+1. Copy the **Arm_ASR** directory into your project, and add **Arm_ASR/src/backends/shared/blob_accessors/prebuilt_shaders** to your inlude path to use prebuilt shaders.
 
 2. Include the following header files in your codebase where you wish to interact with the technique:
 
@@ -84,7 +86,7 @@ To quickly integrate Arm ASR, which means the built-in standalone backend is use
 
 10. Finally, link the two built libraries (**Arm_ASR_api** and **Arm_ASR_backend**).
 
-## Tight integration
+## 2. Tight Integration
 
 If you wish to use your own backend/renderer, a tight integration with your engine is required. For this, a similar process to the [quick integration](#quick-integration) described above is required, but with the added requirement to fill the `FfxmInterface` accessed via `$ARMASR_DIR/include/host/ffxm_interface.h` with functions implemented on your end.
 

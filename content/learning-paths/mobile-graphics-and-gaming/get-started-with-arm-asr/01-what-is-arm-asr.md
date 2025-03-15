@@ -1,5 +1,5 @@
 ---
-title: What is Arm Accuracy Super Resolution (Arm ASR)?
+title: What is Arm Accuracy Super Resolution?
 weight: 2
 
 ### FIXED, DO NOT MODIFY
