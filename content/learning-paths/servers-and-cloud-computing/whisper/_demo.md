@@ -1,19 +1,20 @@
 ---
-title: Demo - Audio transcription on Arm
+title: Demo - Whisper Voice Audio transcription on Arm
 overview: | 
-  This Learning Path shows you how to use a c8g.8xlarge AWS Graviton4 instance powered by an Arm Neoverse CPU to build a simple Transcription-as-a-Service server.
+  This Learning Path shows you how to use a c8g.8xlarge AWS Graviton4 instance, powered by an Arm Neoverse CPU, to build a simple Transcription-as-a-Service server.
 
   This architecture is suitable for businesses looking to deploy the latest Generative AI technologies with audio transcription capabilities using their existing CPU compute capacity and deployment pipelines. This demo provides speech recognition using the `whisper-large-v3-turbo model`, deployed using the Hugging Face Transformers framework.
 
-  Record audio from your browser to interact with the Whisper model and send it to be transcribed to see the performance for yourself. Note that no recorded audio is saved on our servers at any point. 
+  Record audio from your browser to interact with the Whisper model and send it to be transcribed, so you csn see the performance for yourself. Note that no recorded audio is ever saved on our servers. 
   
-  After running the demo you can follow the Learning Path to build your own Generative AI service on Arm Neoverse.
+  After running the demo, you can follow the Learning Path to build your own Generative AI service on Arm Neoverse.
 
 
 demo_steps:
-  - Record your voice (give microphone permissions to your browser).
+  - Record your voice (grant microphone permissions to your browser).
   - Review and send the audio file to the sever for transcription.
-  - Recieve transcribed output and view stats.
+  - Receive the transcribed output and view stats.
+
 
 
 title_chatbot_area: Whisper Voice Demo

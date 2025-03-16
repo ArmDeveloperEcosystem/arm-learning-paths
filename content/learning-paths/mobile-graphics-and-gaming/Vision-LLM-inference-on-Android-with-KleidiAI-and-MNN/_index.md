@@ -1,6 +1,10 @@
 ---
 title: Vision LLM inference on Android with KleidiAI and MNN
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for Android developers who want to efficiently run Vision-Transformer(ViT) on android device.
