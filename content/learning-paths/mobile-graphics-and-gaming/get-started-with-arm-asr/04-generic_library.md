@@ -49,7 +49,7 @@ See the following sections to learn how to configure Arm ASR:
     You will use this path to refer to files in the repository.
 
     ```
-    export $ARMASR_DIR=$(pwd)
+    export ARMASR_DIR=$(pwd)
     ```
 
 ## 1. Quick Integration
