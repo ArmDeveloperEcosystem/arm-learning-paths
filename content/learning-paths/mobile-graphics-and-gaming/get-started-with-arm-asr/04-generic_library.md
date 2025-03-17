@@ -249,7 +249,7 @@ dispatchParameters.motionVectorScale.x = (float)renderWidth;
 dispatchParameters.motionVectorScale.y = (float)renderHeight;
 ```
 
-### Precision & resolution
+### Precision and Resolution
 
 Internally, Arm ASR uses 16-bit quantities to represent motion vectors in many cases, which means that while motion vectors with greater precision can be provided, it will not currently benefit from the increased precision. The resolution of the motion vector buffer should be equal to the render resolution. If the `FFXM_FSR2_ENABLE_DISPLAY_RESOLUTION_MOTION_VECTORS` flag is set in `FfxmFsr2ContextDescription` when creating the `FfxmFsr2Context`, it should be equal to the presentation resolution.
 
