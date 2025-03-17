@@ -1,18 +1,20 @@
 ---
-title: Run a llama.cpp chatbot powered by Arm Kleidi technology
+title: Run ollama in a multi-architecture nodes and containers environment with on GKE.
 
 overview: | 
-  This Arm Kleidi learning path shows how to use a single AWS Graviton instance -- powered by an Arm Neoverse CPU -- to build a simple “Token as a Service” server, used below to provide a chat-bot to serve a small number of concurrent users. 
   
-  This architecture would be suitable for businesses looking to deploy the latest Generative AI technologies using their existing CPU compute capacity and deployment pipelines. The demo uses the open source llama.cpp framework, which Arm has enhanced by contributing the latest Arm Kleidi Technologies. Further optimizations are achieved by using the smaller 8 billion parameter Llama 3.1 model, which has been quantized to optimize memory usage. 
-  
-  Chat with the Llama-3.1-8B LLM below to see the performance for yourself, then follow the learning path to build your own Generative AI service on Arm Neoverse.
+In this learning path, you will learn how to setup a GKE cluster with both x86 and Arm-based nodes. With nodes running both architectures, you'll next deploy a popular free, open source tool called Ollama which makes it easy to run popular AIML models on any platform (on-prem, locally on your laptop, and on a cloud provider).
+
+Once you are running a multi-architecture cluster, you can take it to the next level to see price performance advantages of running your workloads on Arm vs x86.  Experiment further by researching which existing, and upcoming workloads could benefit most from single, or multi-architectural clusters.
 
 
 demo_steps:
-  - Type & send a message to the chatbot.
-  - Receive the chatbot's reply.
-  - View stats showing how well AWS Graviton runs LLMs. 
+  - Spin up a GKE cluster with an x86 node.
+  - Apply an ollama-x86-based Deployment and Service.
+  - Add a new, Arm-based node to the cluster.
+  - Apply an ollama-arm-based Deployment to the existing Service.
+  - Observe how both nodes on both platforms can be run alongside each other.
+
 
 diagram: config-diagram-dark.png
 diagram_blowup: config-diagram.png
