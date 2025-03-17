@@ -6,24 +6,11 @@ weight: 3
 layout: learningpathall
 ---
 
-## Before you begin
-The instructions in this Learning Path are for any Arm server running Ubuntu 24.04 LTS. You need an Arm server instance with at least four cores and 8GB of RAM to run this example. Configure disk storage up to at least 32 GB. The instructions have been tested on an AWS Graviton4 r8g.16xlarge instance.
-
 ## Overview
 
-Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you learn how to run generative AI inference-based use cases like a LLM chatbot on Arm-based CPUs. You do this by deploying the [Llama-3.1-8B model](https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf) on your Arm-based CPU using `llama.cpp`. 
+Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you learn how to run [ollama](https://ollama.com/) on Arm-based CPUs in a hybrid architecture (x86 and Arm) K8s cluster.
 
-[llama.cpp](https://github.com/ggerganov/llama.cpp) is an open source C/C++ project developed by Georgi Gerganov that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. 
-
-## About the Llama 3.1 model and GGUF model format
-
-The [Llama-3.1-8B model](https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf) from Meta belongs to the Llama 3.1 model family and is free to use for research and commercial purposes. Before you use the model, visit the Llama [website](https://llama.meta.com/llama-downloads/) and fill in the form to request access.
-
-
-The [Meta Llama 3.1 collection of models](https://github.com/meta-llama/llama-models/blob/main/models/llama3_1/MODEL_CARD.md) perform general natural language processing (NLP) tasks such as text generation.
-The Llama 3.1 family of models range in size from 8 billion to 405 billion parameters. The greater the number of parameters, the more information the model can store. This directly affects how well the model understands language and the model's general capabilities. LLMs that run efficiently on CPUs typically have lower numbers of parameters. For this example, the 8 billion (8B) model is ideal for retaining quality chatbot capability while also running efficiently on your Arm-based CPU. 
-
-Traditionally, the training and inference of LLMs has been done on GPUs using full-precision 32-bit (FP32) or half-precision 16-bit (FP16) data type formats for the model parameter and weights. Recently, a new binary model format called GGUF was introduced by the `llama.cpp` team. This new GGUF model format uses compression and quantization techniques that remove the dependency on using FP32 and FP16 data type formats. For example, GGUF supports quantization where model weights that are generally stored as FP16 data types are scaled down to 4-bit integers. This significantly reduces the need for computational resources and the amount of RAM required. These advancements made in the model format and the data types used make Arm CPUs a great fit for running LLM inferences.   
+##  
  
 ## Install dependencies 
 

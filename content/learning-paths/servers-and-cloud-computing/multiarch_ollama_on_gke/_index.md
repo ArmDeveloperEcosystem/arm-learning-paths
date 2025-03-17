@@ -1,24 +1,41 @@
 ---
-title: Deploy a Large Language Model (LLM) chatbot with llama.cpp using KleidiAI on Arm servers
+title: Run ollama in a multi-architecture nodes and containers environment with on GKE.
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers interested in running LLMs on Arm-based servers. 
+who_is_this_for: |
+  This learning path is for those interested in learning how to easily migrate from a single platform (x86) Kubernetes cluster to a hybrid (Arm and x86) cluster with multi-architectural images on GKE, specifically with ollama.
+  
+    Although tutorial will be GKE-specific with ollama, the provided YAML will work with any deployment on any on any cloud. 
+
+  In this learning path, you will learn how to setup a GKE cluster with both x86 and Arm-based nodes. With nodes running both architectures, you'll next deploy a popular free, open source tool called Ollama which makes it easy to run popular AIML models on any platform (on-prem, locally on your laptop, and on a cloud provider).
+  
+  Once you are running a multi-architecture cluster, you can take it to the next level to see price performance advantages of running your workloads on Arm vs x86.  Experiment further by researching which existing, and upcoming workloads could benefit most from single, or multi-architectural clusters.
+ 
 
 learning_objectives:
-    - Download and build llama.cpp on your Arm server.
-    - Download a pre-quantized Llama 3.1 model from Hugging Face.
-    - Run the pre-quantized model on your Arm CPU and measure the performance.
+  - Spin up a GKE cluster with an x86 node.
+  - Apply an ollama-x86-based Deployment and Service.
+  - Add a new, Arm-based Axion node to the cluster.
+  - Apply an ollama-arm-based Deployment to the existing Service.
+  - Learn how to use taints and tolerations on GKE clusters to schedule application pods on architecture-specific nodes
+  - Benchmark price/performance advantages of running your workloads on Arm vs x86.
+  - Experiment further by researching which existing, and upcoming workloads could benefit most from single, or multi-architectural clusters.
 
 prerequisites:
-    - An AWS Graviton4 r8g.16xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
+    - A [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
+    - A computer with [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/)installed.
 
 author:
     - Geremy Cohen
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+
+subjects: Containers and Virtualization
+cloud_service_providers: Google Cloud
+
+    
 armips:
     - Neoverse
 
