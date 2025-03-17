@@ -60,14 +60,17 @@ To quickly integrate Arm ASR using the built-in standalone backend, follow these
 1. Copy the **Arm_ASR** directory into your project, and add `Arm_ASR/src/backends/shared/blob_accessors/prebuilt_shaders` to your include path to use prebuilt shaders.
 
 2. Include the following header files in your code:
-
     - `$ARMASR_DIR/include/host/ffxm_fsr2.h`
     - `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h`
 
+
+
 3. Create a Vulkan backend by:
+
     - Allocating a Vulkan scratch buffer of the size returned by `ffxmGetScratchMemorySizeVK` (defined in `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h`).
     - Creating a `FfxmDevice` using `ffxmGetDeviceVK`.
     - Creating a `FfxmInterface` using `ffxmGetInterfaceVK`.
+
 
 4. Create a context by calling `ffxmFsr2ContextCreate` from `$ARMASR_DIR/include/host/ffxm_fsr2.h`. Ensure the parameters structure match the configuration of your application.
 
@@ -91,7 +94,7 @@ To quickly integrate Arm ASR using the built-in standalone backend, follow these
 
 If you wish to use your own backend/renderer, a tight integration with your engine is required. For this, a similar process to the [quick integration](#quick-integration) described above is required, but with the added requirement to fill the `FfxmInterface` accessed via `$ARMASR_DIR/include/host/ffxm_interface.h` with functions implemented on your end.
 
-In this approach the shaders are expected to be built by the engine. Arm ASR's shaders have been micro-optimized to use explicit 16-bit floating-point types. It is therefore advisable that the shaders are built using such types. For example,  `min16float` is used in High-level shader languag (HLSL) and `float16_t` in OpenGL Shading Language (GLSL). If you are using HLSL, define the following symbol with a value of `1`:
+In this approach the shaders are expected to be built by the engine. Arm ASR's shaders have been micro-optimized to use explicit 16-bit floating-point types. It is therefore advisable that the shaders are built using such types. For example,  `min16float` is used in High-level shader language (HLSL) and `float16_t` in OpenGL Shading Language (GLSL). If you are using HLSL, define the following symbol with a value of `1`:
 
 ```cpp
 #define FFXM_HLSL_6_2 1
@@ -357,7 +360,7 @@ The context description structure can be provided with a callback function for p
 
 ## Extended ffx_shader_compiler
 
-Most of the workloads in the upscalers have been converted to fragment shaders. Since the workflow using the standalone VK backend relies in reflection data generated with [`AMD's Shader Compiler`](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/tools/ffx-sc.md), it become necessary to do an ad-hoc extension of the tool to provide reflection data for the RenderTargets so resources could be resolved automatically in the backend. Users might want to evolve the algorithm potentially changing the RenderTargets in the process. Thus, a diff file is provided with the changes that were applied locally `ffx_shader_compiler` (`$ARMASR_DIR/tools/ffx_shader_compiler.diff`) for the latest version of the technique.
+Most of the workloads in the upscalers have been converted to fragment shaders. Since the workflow using the standalone VK backend relies on reflection data generated with [`AMD's Shader Compiler`](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/tools/ffx-sc.md), it become necessary to do an ad-hoc extension of the tool to provide reflection data for the RenderTargets so resources could be resolved automatically in the backend. Users might want to evolve the algorithm potentially changing the RenderTargets in the process. Thus, a diff file is provided with the changes that were applied locally `ffx_shader_compiler` (`$ARMASR_DIR/tools/ffx_shader_compiler.diff`) for the latest version of the technique.
 
 ## Generate prebuilt shaders
 
