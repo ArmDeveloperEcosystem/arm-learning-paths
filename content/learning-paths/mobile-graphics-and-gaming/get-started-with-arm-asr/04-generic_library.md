@@ -46,7 +46,7 @@ See the following sections to learn how to configure Arm ASR:
 
 2. Set a variable for the package location for easy reference. 
 
-    You will use this path to refer to files in the repository.
+    You will use this path to refer to files in the repository:
 
     ```
     export ARMASR_DIR=$(pwd)
