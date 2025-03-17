@@ -59,7 +59,7 @@ int main() {
 }
 ```
 
-Compile with the following command. In addition, we pass the C++ flag, `-frounding-math`. You should use use when your program dynamically changes the floating-point rounding mode or needs to run correctly under different rounding modes. For more information, please refer to the [G++ documentation](https://gcc.gnu.org/onlinedocs/gcc-13.3.0/gcc/Optimize-Options.html)
+Compile with the following command. In addition, we pass the C++ flag, `-frounding-math`. You should use use when your program dynamically changes the floating-point rounding mode or needs to run correctly under different rounding modes. In our example, it results in a predictable rounding mode on function `f1` across x86 and Arm64. For more information, please refer to the [G++ documentation](https://gcc.gnu.org/onlinedocs/gcc-13.3.0/gcc/Optimize-Options.html)
 
 ```bash
 g++ -o error-propagation-min error-propagation-min.cpp -frounding-math

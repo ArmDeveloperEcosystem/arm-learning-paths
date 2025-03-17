@@ -56,11 +56,10 @@ Compile the source code on both x86 and Arm64 with the following command.
 g++ -g error-propagation.cpp -o error-propagation
 ```
 
-Running the 2 binaries shows that the second function, f2, has a small rounding error on both architectures. Additionally, there is a further rounding difference when run on x86 and Arm.
+Running the 2 binaries shows that the second function, f2, has a small rounding error on both architectures. Additionally, there is a further rounding difference when run on x86 compared to Arm.
 
 on x86:
 ```output
-./err
 f1(1.000000e-08) = 0.0000000000
 f2(1.000000e-08) = 0.0000000050
 Difference (f1 - f2) = -4.9999999696e-09
@@ -68,7 +67,6 @@ Final result after magnification: -0.4999000132
 ```
 on Arm:
 ```output
-./err
 f1(1.000000e-08) = 0.0000000000
 f2(1.000000e-08) = 0.0000000050
 Difference (f1 - f2) = -4.9999999696e-09
