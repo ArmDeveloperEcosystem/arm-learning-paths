@@ -14,7 +14,7 @@ Arm ASR is an optimized variant of [Fidelity Super Resolution 2](https://github.
 
 You can integrate Arm ASR into your custom engine using one of two methods:
 
-1. [Quick integration](#quick-integration) - use the built-in standalone backend.
+1. [Quick integration](#quick-integration) - use the standalone backend.
 2. [Tight integration](#tight-integration) - use your engine's backend/renderer.
 
 See the following sections to learn how to configure Arm ASR:
@@ -55,7 +55,7 @@ See the following sections to learn how to configure Arm ASR:
 
 ## 1. Quick Integration
 
-To quickly integrate Arm ASR using the built-in standalone backend, follow these steps below:
+To quickly integrate Arm ASR using the standalone backend, follow these steps below:
 
 1. Copy the **Arm_ASR** directory into your project, and add `Arm_ASR/src/backends/shared/blob_accessors/prebuilt_shaders` to your include path to use prebuilt shaders.
 
@@ -72,7 +72,7 @@ To quickly integrate Arm ASR using the built-in standalone backend, follow these
     - Creating a `FfxmInterface` using `ffxmGetInterfaceVK`.
 
 
-4. Create a context by calling `ffxmFsr2ContextCreate` from `$ARMASR_DIR/include/host/ffxm_fsr2.h`. Ensure the parameters structure match the configuration of your application.
+4. Create a context by calling `ffxmFsr2ContextCreate` from `$ARMASR_DIR/include/host/ffxm_fsr2.h`. Ensure the parameters structure matches the configuration of your application.
 
 5. Call `ffxmFsr2ContextDispatch` every frame to record and execute workloads. Again, the parameters structure should match the configuration of your application.
 
@@ -191,7 +191,7 @@ table {
 |           |             | 1.7x | <span style="color: #8fff00;">3.7 ms</span> | <span style="color: #55ff00;">2.1 ms</span> |
 |           |             | 2x   | <span style="color: #8fff00;">3.6 ms</span> | <span style="color: #55ff00;">2 ms  </span> |
 
-## Shader variants and Extensions
+## Shader Variants and Extensions
 
 **Unless you are using the prebuilt shaders with the standalone VK backend**, be aware of the following definitions when integrating Arm ASR shaders:
 
@@ -374,11 +374,11 @@ You will find the output from the script in `$ARMASR_DIR/src/backends/shared/blo
 
 ## Targeting GLES 3.2
 
-Running Arm ASR on GLES is possible when using the [tight integration](#tight-integration) approach. In this scenario, you will have to apply two changes:
+Running Arm ASR on GLES is possible when using the [tight integration](#tight-integration) approach. In this scenario, you have to apply two changes:
 
-1. When creating the context, the user will have to specify the flag `FFXM_FSR2_OPENGL_ES_3_2` in the `FfxmFsr2ContextDescription`. This will trigger changes internally so that Arm ASR adapts to a GLES friendly approach.
+1. When creating the context, the user has to specify the flag `FFXM_FSR2_OPENGL_ES_3_2` in the `FfxmFsr2ContextDescription`. This triggers changes internally so that Arm ASR adapts to a GLES- friendly approach.
 
-1. The `permutationOptions` (`$ARMASR_DIR/include/host/ffxm_interface.h`) provided when creating the pipelines will now include the new permutation option `FSR2_SHADER_PERMUTATION_PLATFORM_GLES_3_2` (`$ARMASR_DIR/src/components/fsr2/ffxm_fsr2_private.h`). This is a hint to the user that they will need to use the shader variants for the technique with the following symbol defined:
+2. The `permutationOptions` (`$ARMASR_DIR/include/host/ffxm_interface.h`) provided when creating the pipelines now includes the new permutation option `FSR2_SHADER_PERMUTATION_PLATFORM_GLES_3_2` (`$ARMASR_DIR/src/components/fsr2/ffxm_fsr2_private.h`). This is a hint that you need to use the shader variants for the technique with the following symbol defined:
 
     ```
     #define FFXM_SHADER_PLATFORM_GLES_3_2 1
@@ -386,4 +386,4 @@ Running Arm ASR on GLES is possible when using the [tight integration](#tight-in
 
 ## Next steps
 
-You are now ready to use Arm ASR in your game engine projects. Go to the next section to explore more resources on Arm ASR.
+You are now ready to use Arm ASR in your game engine projects. Go to the next section to explore further resources on Arm ASR.
