@@ -1,12 +1,7 @@
 ---
 title: Run ollama in a multi-architecture nodes and containers environment with on GKE.
 
-overview: | 
-  
-In this learning path, you will learn how to setup a GKE cluster with both x86 and Arm-based nodes. With nodes running both architectures, you'll next deploy a popular free, open source tool called Ollama which makes it easy to run popular AIML models on any platform (on-prem, locally on your laptop, and on a cloud provider).
-
-Once you are running a multi-architecture cluster, you can take it to the next level to see price performance advantages of running your workloads on Arm vs x86.  Experiment further by researching which existing, and upcoming workloads could benefit most from single, or multi-architectural clusters.
-
+overview: In this learning path, you will learn how to setup a GKE cluster with both x86 and Arm-based nodes. With nodes running both architectures, you'll next deploy a popular free, open source tool called Ollama which makes it easy to run popular AIML models on any platform (on-prem, locally on your laptop, and on a cloud provider).\ Once you are running a multi-architecture cluster, you can take it to the next level to see price performance advantages of running your workloads on Arm vs x86.  Experiment further by researching which existing, and upcoming workloads could benefit most from single, or multi-architectural clusters.
 
 demo_steps:
   - Spin up a GKE cluster with an x86 node.

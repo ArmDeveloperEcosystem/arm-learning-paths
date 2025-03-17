@@ -14,22 +14,21 @@ prerequisites:
     - An AWS Graviton4 r8g.16xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
 
 author:
-    - Pareena Verma
-    - Jason Andrews
-    - Zach Lasiuk
+    - Geremy Cohen
 
 ### Tags
 skilllevels: Introductory
 subjects: ML
 armips:
     - Neoverse
+
 operatingsystems:
     - Linux
+
 tools_software_languages:
     - LLM
+    - ollama
     - GenAI
-    - Python
-
 
 further_reading:
     - resource:
