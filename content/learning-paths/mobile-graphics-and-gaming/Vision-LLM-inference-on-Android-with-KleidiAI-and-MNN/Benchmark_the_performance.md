@@ -1,5 +1,5 @@
 ---
-title: Build the MNN Command-line ViT Demo
+title: Benchmark the Vision Transformer performance with KleidiAI
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -35,12 +35,16 @@ $ git clone https://github.com/alibaba/MNN.git
 $ mkdir build_64 && cd build_64
 $ ../build_64.sh "-DMNN_LOW_MEMORY=true -DLLM_SUPPORT_VISION=true -DMNN_KLEIDIAI=true  -DMNN_CPU_WEIGHT_DEQUANT_GEMM=true -DMNN_BUILD_LLM=true -DMNN_SUPPORT_TRANSFORMER_FUSE=true -DMNN_ARM82=true -DMNN_OPENCL=true -DMNN_USE_LOGCAT=true -DMNN_IMGCODECS=true -DMNN_BUILD_OPENCV=true"
 $ adb push *so llm_demo tools/cv/*so /data/local/tmp/
-$ adb shell
 ```
+
+The Build parameter above ```-DMNN_KLEIDIAI ```is to enable the kleidiAI on the MNN, it can be set to false to disable the KleidiAi.
+
+## Test the performance within/without kleidiAi
 
 Here switch to android adb shell environment.
 
 ```shell
+$ adb shell
 $ cd /data/local/tmp/
 $ chmod +x llm_demo
 $ export LD_LIBRARY_PATH=./   
@@ -73,3 +77,10 @@ prefill speed = 135.29 tok/s
 ##################################
 ```
 
+Here is my performance comparation within/without kleidiAI
+
+| | KleidiAI OFF | KleidiAi ON |
+|----------|----------|----------|
+| Vision Process Time | 5.45s | 5.43 s |
+| Prefill Speed | 132.35 tok/s | 148.30 tok/s |
+| Decode Speed |  21.61 tok/s | 33.26 tok/s |
