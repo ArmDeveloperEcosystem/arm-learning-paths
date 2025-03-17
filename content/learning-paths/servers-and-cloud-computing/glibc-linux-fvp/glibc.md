@@ -1,5 +1,5 @@
 ---
-title: Glibc tests on FVP
+title: Glibc tests on the FVP
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -8,8 +8,8 @@ layout: learningpathall
 
 ## Prepare kernel headers
 
-For this step you need the GCC cross-toolchain for the `aarch64-none-linux-gnu` target.
-We can use the same toolchain as we used for building the kernel.
+For this step you need the GCC cross-toolchain for the `aarch64-linux-gnu` target.
+You can use the same toolchain as we used for building the kernel.
 
 Since we are going to use our Glibc on a system running a specific version of the kernel,
 we should build the Glibc using the kernel headers of the same version. The Glibc build
@@ -18,31 +18,28 @@ headers from a specific directory. To ensure that we use correct headers for the
 we need to install them from source.
 
 We presume that the kernel source is in the `linux` subfolder, and we will install the
-headers in the `linux-headers` subfolder. To do this, run the following commands in the
-workspace directory:
+headers in the `linux-headers` subfolder. First, you have to set a few environment variables.
+To do this, run the following commands:
 
 ```bash
-# Make sure that cross GCC is on the PATH
-export PATH=/path/to/cross/gcc/bin:${PATH}
-
-# Specify target architecture
+cd $HOME/workspace
 export ARCH=arm64
-
-# Specify cross compiler
-export CROSS_COMPILE=aarch64-none-linux-gnu-
-
-# Install headers
 make -C linux headers_install INSTALL_HDR_PATH=$(pwd)/linux-headers
 ```
 
-You should see kernel headers in the `/home/user/workspace/linux-headers/include` folder now.
+{{% notice %}}
+If you are running an x86_64 Linux host, the `CROSS_COMPILE` flag needs to be set. Example: export CROSS_COMPILE=aarch64-none-linux-gnu-
+{{% /notice %}}
+
+You should see kernel headers in the `$HOME/workspace/linux-headers/include` folder now.
 We will use this path during the next step.
 
 ## Get Glibc sources and build for AArch64 target
 
-In the workspace directory, clone the Glibc Git repository:
+Clone the Glibc Git repository:
 
 ```bash
+cd $HOME/workspace
 git clone git://sourceware.org/git/glibc.git
 ```
 
@@ -50,17 +47,15 @@ To make the following command simpler, let's introduce the `CROSS` variable (not
 at the end):
 
 ```bash
-CROSS=/path/to/cross/gcc/bin/aarch64-none-linux-gnu-
+export CROSS=/usr/bin/aarch64-linux-gnu-
 ```
 
-Now configure the cross-build for the `aarch64-none-linux-gnu` target:
+Now configure the cross-build for the `aarch64-linux-gnu` target:
 
 ```bash
-# Create build folder:
 mkdir glibc-build
 cd glibc-build
 
-# Configure Glibc:
 LC_ALL=C BUILD_CC=gcc \
 CC=${CROSS}gcc CXX=${CROSS}g++ \
 NM=${CROSS}nm READELF=${CROSS}readelf \
@@ -68,9 +63,9 @@ AR=${CROSS}ar GPROF=${CROSS}gprof \
 OBJDUMP=${CROSS}objdump OBJCOPY=${CROSS}objcopy \
 RANLIB=${CROSS}ranlib \
 ../glibc/configure --prefix=/usr \
-  --host=aarch64-none-linux-gnu \
+  --host=aarch64-linux-gnu \
   --enable-hardcoded-path-in-tests \
-  --with-headers=/home/user/workspace/linux-headers/include
+  --with-headers=$HOME/workspace/linux-headers/include
 ```
 
 Notice the path to the kernel headers in the last parameter in the `configure` command and
@@ -84,7 +79,7 @@ make -j$(nproc)
 
 ## Run tests on FVP
 
-If you are using an AArch64 host, you can run Glibc tests both on your host and on the FVP
+As you are using an AArch64 host, you can run Glibc tests both on your host and on the FVP
 from the same build tree. Before we run some tests, we need to make sure that we have two
 important prerequisites in place.
 
@@ -139,14 +134,17 @@ the easiest way to proceed is as follows:
 dbclient -p 8022 "$@"
 ```
 
- * Make it executable using the `chmod u+x` command
- * Save this script in one of the directories in your `PATH`.
+ Make it executable using the `chmod u+x` command, and save this script in one of the directories in your `PATH`, for example `/usr/bin`:
+
+```bash
+chmod u+x ussh && sudo mv ussh /usr/bin/ussh
+```
 
 To run a single test, use this command:
 
 ```bash
 make test t=misc/tst-aarch64-pkey \
-  test-wrapper="/home/user/workspace/glibc/scripts/cross-test-ssh.sh --ssh ussh fvp"
+  test-wrapper="/home/user/glibc/scripts/cross-test-ssh.sh --ssh ussh fvp"
 ```
 
 Let's see what we have here. The `test` target will build (or rebuild) one test and all
@@ -182,9 +180,9 @@ original exit status 0
 To run a group of tests, use the following command with the `check` target:
 
 ```bash
-make check -C /home/user/workspace/glibc/argp \
+make check -C $HOME/workspace/glibc/argp \
   objdir=`pwd` \
-  test-wrapper="/home/user/workspace/glibc/scripts/cross-test-ssh.sh --ssh ussh fvp"
+  test-wrapper="$HOME/workspace/glibc/scripts/cross-test-ssh.sh --ssh ussh fvp"
 ```
 
 In this instance, we are building and running tests from the `argp` folder. We use the `-C`
@@ -196,10 +194,12 @@ To run all the tests, simply do:
 
 ```bash
 make check \
-  test-wrapper="/home/user/workspace/glibc/scripts/cross-test-ssh.sh --ssh ussh fvp"
+  test-wrapper="$HOME/workspace/glibc/scripts/cross-test-ssh.sh --ssh ussh fvp"
 ```
 
 Note that this will take a considerable amount of time. Also, notice that we are not using
 a parallel `make` command for running tests on the FVP. The reason is that the Fast Models
 simulation code runs primarily on a single thread, and running tests in parallel would not
 speed up the execution.
+
+By reaching the end of this learning path, you have completed setting up a Linux system on the FVP, and used it to run Glibc tests.

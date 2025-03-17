@@ -6,9 +6,11 @@ weight: 6
 layout: learningpathall
 ---
 
-## A few tips about Void Linux
+In this section, you will configure the guest system to make it easier running more complex tasks.
 
-For a detailed guide on Void Linux, refer to the [documentation][1].
+## Void Linux basics
+
+For a detailed guide on Void Linux, refer to the [documentation](https://docs.voidlinux.org/).
 
 Commands in this section are executed on the guest system.
 
@@ -19,20 +21,16 @@ the default shell for a user, run this command:
 chsh -s /bin/bash root
 ```
 
-If you need to install some package, use the following commands:
+You install packages using `xbps-install`. The `-S` option updates the repository cache. You need to run this once before installing additional packages. For example, install `vim` with the following commands:
 
 ```bash
-# Update repository cache (you need to run this once)
 xbps-install -y -S
-
-# Install vim package (for example):
 xbps-install -y vim
 ```
 
-We can add a bit of automation to speed up configuring your system from scratch:
+You can add a bit of automation to speed up configuring your system from scratch:
 
 ```bash
-# Install packages: required and optional
 required=(nfs-utils sv-netmount rpcbind)
 optional=(vim binutils make strace python3)
 for p in "${required[@]}" "${optional[@]}"; do
@@ -51,7 +49,6 @@ to free up some space. Since we use our own kernel and firmware, we can safely
 delete the following packages:
 
 ```bash
-# Remove unused packages:
 unused=(rpi-firmware rpi-kernel)
 for p in "${unused[@]}"; do
   test -f "/etc/xbps.d/disable-${p}.conf" || {
@@ -61,7 +58,7 @@ for p in "${unused[@]}"; do
 done
 ```
 
-Here, we also mask these packages to prevent them from being installed automatically
+Here, you also mask these packages to prevent them from being installed automatically
 during system updates, saving time in the process.
 
 The last two code snippets are written so that you can re-run them multiple times.
@@ -80,17 +77,15 @@ Commands in this section are executed on the guest system.
 Our main interaction with the guest system will be via SSH. Running software on an
 FVP is slower than on real hardware, so we want to reduce the overhead. One way to
 do this is by replacing the preinstalled OpenSSH server with a more lightweight
-alternative, such as [Dropbear][2].
+alternative, such as [Dropbear](https://matt.ucc.asn.au/dropbear/dropbear.html).
 
 First, install Dropbear and enable corresponding service:
 
 ```bash
-# Install Dropbear server
 xbps-query -l | grep -w dropbear > /dev/null || {
   xbps-install -y dropbear
 }
 
-# Enable Dropbear SSH server service
 test -h /var/service/dropbear || {
   ln -s /etc/sv/dropbear /var/service/
 }
@@ -99,7 +94,6 @@ test -h /var/service/dropbear || {
 Now, disable the OpenSSH server:
 
 ```bash
-# Disable OpenSSH server service
 test -h /var/service/sshd && {
   sv stop sshd
   rm -vf /var/service/sshd
@@ -110,7 +104,6 @@ Finally, create a simple service that prints a message to the system log when th
 system is ready for incoming SSH connections:
 
 ```bash
-# Create service to indicate SSH readiness
 test -h /var/service/hello || {
   mkdir -p /etc/sv/hello
   cat <<EOF > /etc/sv/hello/run
@@ -146,7 +139,7 @@ to use the Dropbear client and configure SSH keys for it.
 First, install the Dropbear client:
 
 ```bash
-sudo apt install dropbear-bin
+sudo apt -y install dropbear-bin
 ```
 
 To avoid typing the guest system's IP address every time, add it to `/etc/hosts`:
@@ -171,29 +164,30 @@ entering a password:
 dbclient -l root -p 8022 fvp
 ```
 
-## Non-root user
+## Set up a non-root user
 
 Commands in this section are executed on the guest system.
 
 Creating a non-root user in the guest system can be practical. Additionally, we will
 copy the same SSH key used for the root user to avoid setting up different key pair
 and having to alternate between them. For a non-root user in the guest system we
-will use the same username `user` as on your host system.
+will use the username `user`.
+
+SSH as root into the guest system running on FVP and execute these commands:
 
 ```bash
-# Create user
-id -u user 2> /dev/null || {
-  useradd -m -s /bin/bash user
-  test -d /home/user/.ssh || {
-    mkdir -p /home/user/.ssh
-    chown user:user /home/user/.ssh
-    chmod 0700 /home/user/.ssh
-  }
-  test -f /root/.ssh/authorized_keys && {
-    cp /root/.ssh/authorized_keys /home/user/.ssh/authorized_keys
-    chown user:user /home/user/.ssh/authorized_keys
-    chmod 0600 /home/user/.ssh/authorized_keys
-  }
+id -u user 2> /dev/null || useradd -m -s /bin/bash user
+
+test -d /home/user/.ssh || {
+  mkdir -p /home/user/.ssh
+  chown user:user /home/user/.ssh
+  chmod 0700 /home/user/.ssh
+}
+
+test -f /root/.ssh/authorized_keys && {
+  cp /root/.ssh/authorized_keys /home/user/.ssh/authorized_keys
+  chown user:user /home/user/.ssh/authorized_keys
+  chmod 0600 /home/user/.ssh/authorized_keys
 }
 ```
 
@@ -204,7 +198,7 @@ without having to enter a password:
 dbclient -p 8022 fvp
 ```
 
-## Shared workspace
+## Configure a shared workspace
 
 Commands in this section are executed first on the host system and then on the guest.
 
@@ -219,7 +213,7 @@ for example, by the Glibc tests, so it is not suitable for our use case.
 On your host, install the NFS server (this example is for Debian or Ubuntu):
 
 ```bash
-sudo apt install nfs-kernel-server
+sudo apt -y install nfs-kernel-server
 sudo systemctl disable nfs-kernel-server
 ```
 
@@ -275,18 +269,16 @@ and the host systems.
 
 ## More configuration
 
-The following changes to the guest system configuration help reduce host memory usage by the
-FVP:
+Disabling Address Space Layout Randomization (ASLR) in the guest system helps reducing host memory usage by the FVP:
 
 ```bash
-# Disable ASLR (helps reduce host memory usage by the FVP process):
 mkdir -p /etc/sysctl.d
 test -f /etc/sysctl.d/01-disable-aslr.conf || {
   echo "kernel.randomize_va_space = 0" > /etc/sysctl.d/01-disable-aslr.conf
 }
 ```
 
-These changes also help prevent the OOM (Out of Memory) killer from unnecessarily terminating
+These changes help prevent the OOM (Out of Memory) killer from unnecessarily terminating
 processes on the guest system when they consume too much memory:
 
 ```bash
@@ -296,9 +288,5 @@ test -f /etc/sysctl.d/02-disable-vm-overcommit.conf || {
 }
 ```
 
-We are now ready to do something substantial with our Linux system running on the FVP. Let's
-build the Glibc from source and run its tests on the FVP.
+You are now ready to do put your Void Linux system to the test. Let'sbuild the Glibc from source and run its tests on the FVP.
 
-
-[1]: https://docs.voidlinux.org/
-[2]: https://matt.ucc.asn.au/dropbear/dropbear.html

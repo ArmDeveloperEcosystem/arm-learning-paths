@@ -130,7 +130,11 @@ Calls to:
         {{if not .Params.multi_install}}
             <br>
             <div style="min-height: 350px;">
-                {{partial "general-formatting/feedback.html" (dict "context" . "learningpath_or_toolinstall" "tool quick-install guide")  }}
+                <div class="c-row">
+                    <div class="c-col">
+                        {{partial "general-formatting/feedback.html" (dict "context" . "learningpath_or_toolinstall" "tool quick-install guide")  }}        
+                    </div>
+                </div>
             </div>   
         {{end}}         
     </div>
