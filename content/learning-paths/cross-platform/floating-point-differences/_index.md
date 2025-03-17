@@ -8,7 +8,7 @@ who_is_this_for: Developers porting applications from x86 to AArch64 who observe
 learning_objectives: 
     - Understand the differences between converting floating point numbers on x86 and Arm. 
     - Understand factors that affect floating point behaviour
-    - Basic compiler techniques to produce predictable behaviour
+    - How to use basic compiler flags to produce predictable behaviour
 
 prerequisites:
     - Access to an x86 and Arm-based machine
@@ -25,8 +25,6 @@ armips:
     - Neoverse
 tools_software_languages:
     - C++
-
-
 
 further_reading:
     - resource:

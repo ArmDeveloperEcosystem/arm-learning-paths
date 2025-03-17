@@ -12,7 +12,7 @@ The line `#pragma STDC FENV_ACCESS ON` is a directive that informs the compiler 
 
 In the context below, enabling floating-point environment access is crucial because the functions you are working with involve floating-point arithmetic, which can be prone to precision errors and exceptions such as overflow, underflow, division by zero, and invalid operations. However, in our example since we are hardcoding the inputs this is not strictly necessary but is included as it may be relevant for your own application. 
 
-This directive is particularly important when performing operations that require high numerical stability and precision, such as the square root calculations in your functions. It allows the program to manage the floating-point state and handle any anomalies that might occur during these calculations, thereby improving the robustness and reliability of your numerical computations.
+This directive is particularly important when performing operations that require high numerical stability and precision, such as the square root calculations in functions below. It allows the program to manage the floating-point state and handle any anomalies that might occur during these calculations, thereby improving the robustness and reliability of your numerical computations.
 
 Save the C++ file below as `error-propagation-min.cpp`. 
 
