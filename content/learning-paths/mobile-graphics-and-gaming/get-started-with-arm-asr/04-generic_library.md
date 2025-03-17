@@ -332,7 +332,7 @@ Whether you decide whether to use the recommended `ffxmFsr2GetJitterOffset` func
 
 ## Camera jump cuts
 
-Most applications with real-time rendering have a large degree of temporal consistency between any two consecutive frames. However, there are cases where a change to a camera's transformation might cause an abrupt change in what is rendered. In such cases, Arm ASR is unlikely to be able to reuse any data it has accumulated from previous frames, and should clear this data such to exclude it from consideration in the compositing process. In order to indicate that a jump cut has occurred with the camera you should set the `reset` field of the `FfxmFsr2DispatchDescription` structure to `true` for the first frame of the discontinuous camera transformation.
+Most applications with real-time rendering have a large degree of temporal consistency between any two consecutive frames. However, there are cases where a change to a camera's transformation might cause an abrupt change in what is rendered. In such cases, Arm ASR is unlikely to be able to reuse any data it has accumulated from previous frames, and should clear this data in order to exclude it from consideration in the compositing process. In order to indicate that a jump cut has occurred with the camera you should set the `reset` field of the `FfxmFsr2DispatchDescription` structure to `true` for the first frame of the discontinuous camera transformation.
 
 Rendering performance may be slightly less than typical frame-to-frame operation when using the reset flag, as Arm ASR will clear some additional internal resources.
 
