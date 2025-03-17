@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Minimising Variability across platforms
 
-The line `#pragma STDC FENV_ACCESS ON` is a directive that informs the compiler to enable access to the floating-point environment. This is part of the C99 standard and is used to ensure that the program can properly handle floating-point exceptions and rounding modes.
+The line `#pragma STDC FENV_ACCESS ON` is a directive that informs the compiler to enable access to the floating-point environment. This is part of the C++11 standard and is used to ensure that the program can properly handle floating-point exceptions and rounding modes enabling your program to continue running if an exception is thrown. For more information, refer to the [documentation in the C++11 standard](https://en.cppreference.com/w/cpp/numeric/fenv).
 
-In the context belo, enabling floating-point environment access is crucial because the functions you are working with involve floating-point arithmetic, which can be prone to precision errors and exceptions such as overflow, underflow, division by zero, and invalid operations. By enabling this pragma, you ensure that the program can detect and respond to these exceptions appropriately.
+In the context below, enabling floating-point environment access is crucial because the functions you are working with involve floating-point arithmetic, which can be prone to precision errors and exceptions such as overflow, underflow, division by zero, and invalid operations. However, in our example since we are hardcoding the inputs this is not strictly necessary but is included as it may be relevant for your own application. 
 
 This directive is particularly important when performing operations that require high numerical stability and precision, such as the square root calculations in your functions. It allows the program to manage the floating-point state and handle any anomalies that might occur during these calculations, thereby improving the robustness and reliability of your numerical computations.
 
@@ -59,11 +59,13 @@ int main() {
 }
 ```
 
-Compile with the following command. 
+Compile with the following command. In addition, we pass the C++ flag, `-frounding-math`. You should use use when your program dynamically changes the floating-point rounding mode or needs to run correctly under different rounding modes. For more information, please refer to the [G++ documentation](https://gcc.gnu.org/onlinedocs/gcc-13.3.0/gcc/Optimize-Options.html)
 
 ```bash
 g++ -o error-propagation-min error-propagation-min.cpp -frounding-math
 ```
+
+Running the new binary on both platforms leads to function, `f1` having a similar value to `f2`. Further the difference is now identical across both Arm64 and x86. 
 
 ```output
 ./error-propagation-min 
@@ -73,41 +75,5 @@ Difference (f1 - f2) = -1.7887354748e-17
 Final result after magnification: 0.0000999982
 ```
 
-## Rounding Differences due to x86 and Arm microarchitectures
+{{% notice Note %}} G++ provides several compiler flags to help balance accuracy and performance such as`-ffp-contract` which is useful when lossy, fused operations are used, for example, fused-multiple. As another example `-ffloat-store` which prevent floating point variables from being stored in registers which can have different levels of precision and rounding. **Please refer to your compiler documentation for more information on the available flags**{{% /notice %}}
 
-```cpp
-#include <iostream>
-#include <iomanip>
-
-double fma(double a, double b, double c) {
-    return (a * b) + c;  // May use FMA (fused multiply-add) on x86
-}
-
-double no_fma(double a, double b, double c) {
-    volatile double temp = a * b;  // Prevents FMA by forcing intermediate storage
-    return temp + c;
-}
-
-int main() {
-    double a = 1.0000000000000002;
-    double b = 1.0000000000000002;
-    double c = -1.0000000000000004;
-
-    double result_a = fma(a, b, c);
-    double result_b = no_fma(a, b, c);
-
-    std::cout << std::setprecision(17);
-    std::cout << "Result with potential FMA use): " << result_a << std::endl;
-    std::cout << "Result without FMA: " << result_b << std::endl;
-
-    if (result_a != result_b) {
-        std::cout << "Floating-point inconsistency due to microarchitecture differences!\n";
-    }
-
-    return 0;
-}
-```
-
-``bash
--ffp-contract=on // seems to fix FMA accuracy issues somehow.
-```

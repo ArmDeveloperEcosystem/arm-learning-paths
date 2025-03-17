@@ -6,9 +6,13 @@ weight: 3
 layout: learningpathall
 ---
 
-## 
+## Error Propagation
 
-Loss in precision can arise from the ordering of operations. Consider the example below. Function 1, `f1` and 2, `f2` are mathematically equivalent. Hence they should return the same value given the same input. If we input a very small number, `1e-8`, the error is different due to the loss in precision caused by different operations. Amplifying this result leads to a difference. 
+One cause of different outputs between x86 and Arm stems from the order of instructions and how errors are propagated. As a hypothetical example, an Arm architecture may decide to reorder the instructions that each has a different rounding error (described in the unit in last place section) so that subtle changes are observed. Alternatively, 2 functions that are mathematically equivalent will propagate errors differently on a computer. 
+
+Consider the example below. Function 1, `f1` and 2, `f2` are mathematically equivalent. Hence they should return the same value given the same input. If we input a very small number, `1e-8`, the error is different due to the loss in precision caused by different operations. Specifically, function `f2` avoids the subtraction of nearly equal number. The full reasoning is out of scope but for those interested should look into the topic of [numerical stability](https://en.wikipedia.org/wiki/Numerical_stability). 
+
+Copy and paste the C++ snippet below into a file named `error-propagation.cpp`. 
 
 
 ```cpp
@@ -46,13 +50,15 @@ int main() {
 }
 ```
 
-x86 and Arm-based machines may perform the computations in different orders so this is another variable. 
+Compile the source code on both x86 and Arm64 with the following command.
 
-Compiling the source code on both x86 and Arm64 with the following command. 
 ```bash
 g++ -g error-propagation.cpp -o error-propagation
 ```
 
+Running the 2 binaries shows that the second function, f2, has a small rounding error on both architectures. Additionally, there is a further rounding difference when run on x86 and Arm.
+
+on x86:
 ```output
 ./err
 f1(1.000000e-08) = 0.0000000000
@@ -60,7 +66,7 @@ f2(1.000000e-08) = 0.0000000050
 Difference (f1 - f2) = -4.9999999696e-09
 Final result after magnification: -0.4999000132
 ```
-
+on Arm:
 ```output
 ./err
 f1(1.000000e-08) = 0.0000000000

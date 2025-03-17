@@ -1,5 +1,5 @@
 ---
-title: Learn the basic differences between floating point conversion on x86 and Arm
+title: Learn about floating point rounding errors on Arm and x86
 
 minutes_to_complete: 30
 
@@ -19,31 +19,20 @@ author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: Performance and Architecture
 armips:
-    - PLACEHOLDER IP A
-    - PLACEHOLDER IP B
+    - Cortex-A
+    - Neoverse
 tools_software_languages:
-    - PLACEHOLDER TOOL OR SOFTWARE C
-    - PLACEHOLDER TOOL OR SOFTWARE D
-operatingsystems:
-    - PLACEHOLDER OS G
+    - C++
 
 
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: G++ Optimisation Flags 
+        link: https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
         type: documentation
-    - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
 
 
 
