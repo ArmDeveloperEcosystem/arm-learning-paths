@@ -23,7 +23,7 @@ ROS 2 is the latest version, designed to enhance security, improve distributed s
 
 ## Before you begin
 
-ROS2 is available for Ubuntu Linux 22.04, 24.04 and Windows 110. 
+ROS2 is available for Ubuntu Linux 22.04, 24.04 and Windows 11. 
 
 This article provides a quick solution to install ROS2 for Ubuntu on Arm.
 
