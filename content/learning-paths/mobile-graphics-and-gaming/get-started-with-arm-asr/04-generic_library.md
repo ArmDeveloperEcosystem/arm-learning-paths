@@ -42,6 +42,7 @@ See the following sections to learn how to configure Arm ASR:
 
     ```
     git clone https://github.com/arm/accuracy-super-resolution-generic-library
+    cd accuracy-super-resolution-generic-library
     ```
 
 2. Set a variable for the package location for easy reference. 
