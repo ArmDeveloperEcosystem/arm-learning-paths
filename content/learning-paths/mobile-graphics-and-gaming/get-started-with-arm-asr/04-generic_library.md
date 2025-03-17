@@ -55,23 +55,23 @@ See the following sections to learn how to configure Arm ASR:
 
 ## 1. Quick Integration
 
-To quickly integrate Arm ASR, which means the built-in standalone backend is used, follow these steps below:
+To quickly integrate Arm ASR using the built-in standalone backend, follow these steps below:
 
-1. Copy the **Arm_ASR** directory into your project, and add **Arm_ASR/src/backends/shared/blob_accessors/prebuilt_shaders** to your inlude path to use prebuilt shaders.
+1. Copy the **Arm_ASR** directory into your project, and add `Arm_ASR/src/backends/shared/blob_accessors/prebuilt_shaders` to your include path to use prebuilt shaders.
 
-2. Include the following header files in your codebase where you wish to interact with the technique:
+2. Include the following header files in your code:
 
     - `$ARMASR_DIR/include/host/ffxm_fsr2.h`
     - `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h`
 
-3. Create a Vulkan backend.
-    - Allocate a Vulkan scratch buffer of the size returned by `ffxmGetScratchMemorySizeVK` in `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h`.
-    - Create `FfxmDevice` via `ffxmGetDeviceVK` in `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h`.
-    - Create `FfxmInterface` by calling `ffxmGetInterfaceVK` in `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h`.
+3. Create a Vulkan backend by:
+    - Allocating a Vulkan scratch buffer of the size returned by `ffxmGetScratchMemorySizeVK` (defined in `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h`).
+    - Creating a `FfxmDevice` using `ffxmGetDeviceVK`.
+    - Creating a `FfxmInterface` using `ffxmGetInterfaceVK`.
 
-4. Create a context by calling `ffxmFsr2ContextCreate` in `$ARMASR_DIR/include/host/ffxm_fsr2.h`. The parameters structure should be filled out matching the configuration of your application.
+4. Create a context by calling `ffxmFsr2ContextCreate` from `$ARMASR_DIR/include/host/ffxm_fsr2.h`. Ensure the parameters structure match the configuration of your application.
 
-5. Each frame calls `ffxmFsr2ContextDispatch` via `$ARMASR_DIR/include/host/ffxm_fsr2.h` to record/execute the technique's workloads. The parameters structure should be filled out matching the configuration of your application.
+5. Call `ffxmFsr2ContextDispatch` every frame to record and execute workloads. Again, the parameters structure should match the configuration of your application.
 
 6. When your application is terminating (or you wish to destroy the context for another reason) you should call `ffxmFsr2ContextDestroy` accessed via `$ARMASR_DIR/include/host/ffxm_fsr2.h`. The GPU should be idle before calling this function.
 

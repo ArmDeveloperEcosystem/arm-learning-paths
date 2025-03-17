@@ -1,7 +1,7 @@
 ---
 title: Get started with Arm Accuracy Super Resolution (Arm ASR)
 
-minutes_to_complete: 20
+minutes_to_complete: 40
 
 draft: true
 cascade:
