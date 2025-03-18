@@ -3,15 +3,18 @@ title: Vision LLM inference on Android with KleidiAI and MNN
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for Android developers who want to efficiently run Vision-Transformer (ViT) on an Android device.
+who_is_this_for: This learning path is for developers who want to run Vision-Transformer (ViT) efficiently on an Android device.
 
 learning_objectives:
-    - Run ViT inference on an Android device with the [Qwen Vision 2B](https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct) model using the MNN inference framework.
-    - Download and Convert a Qwen Vision model from Hugging Face.
+    - Download the a Vision Large Language Model (LLM) from Hugging Face.
+    - Convert the model to the Mobile Neural Network (MNN) framework.
+    - Install an Android demo app with the model to run inference.
+    - Compare performance benchmark with and without KleidiAI Arm optimized micro-kernels.
+
 
 prerequisites:
-    - A x86_64 development machine with [Android Studio](https://developer.android.com/studio) installed.
-    - A 64-bit Arm powered smartphone running Android with i8mm/dotprod supported.
+    - A development machine with [Android Studio](https://developer.android.com/studio) installed.
+    - A 64-bit Arm powered smartphone running Android with `i8mm` and `dotprod` supported.
 
 author: Shuheng Deng,Arm
 
