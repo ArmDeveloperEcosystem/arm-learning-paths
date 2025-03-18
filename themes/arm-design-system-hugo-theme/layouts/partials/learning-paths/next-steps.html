@@ -47,6 +47,22 @@ Called from:
         font-size: 16px;
     }
 
+
+    #privacy-information {
+        margin-left: 16px;
+        margin-right: 24px;
+    }
+    .devprog-privacy-text {
+        color: var(--arm-light-grey);
+    }
+
+    #nonchina-information {
+        display: block;
+    }
+    #china-information {
+        display: none;
+    }
+
   </style>
 
 
@@ -272,11 +288,29 @@ Called from:
                                    
                                 <hr class="u-margin-right-1/2">
                                 <div id="marketo-form-container"></div>
+                                <div id="privacy-information">
+                                    <p class="devprog-privacy-text">
+                                        This data is not linked your email address or name.  It is aggregated and reported internally as part of Arm's DEI program
+                                        By signing up, you'll receive member news and email updates. You can update your subscription preferences at any time.
+                                    </p>
+                                    <p id="nonchina-information" class="devprog-privacy-text">
+                                        Arm will process your information in accordance with our <a href="https://www.arm.com/company/policies/privacy" target="_blank">Privacy Policy</a>.
+                                    </p>
+                                    <div id="china-information">
+                                        <p class="devprog-privacy-text">
+                                        Arm will process your information in accordance with our <a href="https://www.arm.com/company/policies/privacy" target="_blank">Arm</a> and <a href="https://www.armchina.com/privacy" target="_blank">Arm China</a> Privacy Policies.
+                                        </p>
+                                        <ads-checkbox id="china-checkbox" class="is-small" name="ChinaOK" onclick="chinaCheckboxHandler(this)" tabindex="0">
+                                            I consent to have my data transferred outside of China.
+                                        </ads-checkbox>    
+                                    </div>
+
+                                    </p>
+                                </div>
                             </div>
                             <div id="form-completed" hidden>
                                 <h2 class="modal-title">Program Registration Success</h2>
-                                <p class="success-message">You're almost there! To complete your membership registration, please click 'confirm membership' in the email we have just sent you.</p>
-                                <p class="success-message">Please check your spam folder if you do not see any email in your inbox within 10 minutes.</p>      
+                                <p class="success-message">Thank you for joining the community! Be sure to check your inbox to see if you need to confirm your registration and start enjoying all your member benefits.</p>
                             </div>
                         </div>
                         <div slot="actions" class="u-flex u-flex-direction-column md:u-flex-direction-row u-gap-1" style="justify-content: flex-start;">
@@ -288,6 +322,21 @@ Called from:
                         </div>
                 </ads-modal>
                 <script>
+
+                    function chinaCheckboxHandler(checkbox) {
+                        checkbox.value().then((value) => {
+                            if (value === true) {
+                                console.log('china checkbox selected. Value: ', value);
+                                document.getElementById('devprog-cta-submit').disabled = false;
+                            }
+                            else {
+                                console.log('china checkbox not selected. Value: ', value);
+                                document.getElementById('devprog-cta-submit').disabled = true;
+                            }
+                        });
+            
+                    }
+
                     (() => {
                         const modal = document.getElementById('modal-custom-trigger');
 
@@ -299,6 +348,32 @@ Called from:
                           });
 
                         
+
+
+                        // Attach China Processing
+                        const countrySelectHandler = () => {
+
+                            // Handle country select change for dynamic China data processing
+                            const countrySelect = document.getElementById('Country');
+                            if (countrySelect) {
+                                countrySelect.addEventListener('change', function() {
+                                    const countryValue = countrySelect.options[countrySelect.selectedIndex].value;
+                                    // If country is China, show hidden fields agreeing to data processing
+                                    console.log('country select selected. Value: ', countryValue);
+                                    if (countryValue === 'China') {
+                                        document.getElementById('china-information').style.display = 'block';
+                                        document.getElementById('nonchina-information').style.display = 'none';
+                                        document.getElementById('devprog-cta-submit').disabled = true;
+                                    } 
+                                    else {
+                                        document.getElementById('china-information').style.display = 'none';
+                                        document.getElementById('nonchina-information').style.display = 'block';
+                                        document.getElementById('devprog-cta-submit').disabled = false;
+                                    }
+                                });
+                            }
+
+                        };
 
 
 // SECTION 5: Marketo Developer Program Form Embed
@@ -314,6 +389,9 @@ formScript.onload = function() {
       const formContainer = document.getElementById('marketo-form-container');
       formContainer.appendChild(form.getFormElem()[0]);
       formContainer.querySelector('form').style.display = 'block';
+
+        // Handle country select change for dynamic China data processing
+      countrySelectHandler();
 
       // Handle successful form submission
       form.onSuccess(function() {
