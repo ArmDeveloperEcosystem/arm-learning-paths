@@ -196,10 +196,10 @@ table {
 **Unless you are using the prebuilt shaders with the standalone VK backend**, be aware of the following definitions when integrating Arm ASR shaders:
 
 - **FFXM_GPU**. Needs to be defined globally when including the shader headers.
-- **FFXM_HLSL**. If defined, the logic will fallback to use the **HLSL** specific syntax (i.e types, resource declaration ...).
-- **FFXM_GLSL**. If defined, the logic will fallback to use the **GLSL** specific syntax (i.e types, resource declaration ...).
+- **FFXM_HLSL**. If defined, the logic falls back to use the **HLSL**-specific syntax, such as types and resource declaration.
+- **FFXM_GLSL**. If defined, the logic falls back to use the **GLSL**-specific syntax.
 
-The following table shows the list of the different shader mutators that can be used. All of them must be defined with a value of 0 or 1. Which shader variant to use is guided internally by **getPipelinePermutationFlags(...)** based on things like the user's flags and shader quality.
+The following table shows the list of the different shader mutators that can be used. All of these must be defined with a value of 0 or 1. The shader variant to use is guided internally by the **getPipelinePermutationFlags(...)** function, based on user-defined flags and shader quality settings.
 
 | Define | Description |
 | -------- | ------- |
