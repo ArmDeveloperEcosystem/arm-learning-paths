@@ -47,7 +47,7 @@ It includes:
 
 The Arm ASR plugin for Unreal Engine 5 integrates into your project within minutes. Once installed, simply enable temporal upscaling, and the plugin automatically handles frame upscaling.
 
-See [Using Arm ASR in Unreal Engine](../03-ue).
+See [Using Arm ASR in Unreal Engine](../02-ue).
 
 ## Custom Engine Usage
 
