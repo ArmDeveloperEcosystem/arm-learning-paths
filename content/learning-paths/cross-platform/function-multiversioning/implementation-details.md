@@ -101,6 +101,6 @@ When compiling `file2.c` a resolver is emitted for `func1` due to the presence o
 
 Normally the called symbol is resolved at runtime (dynamically), however it may be possible to determine which function version to call at compile time (statically).
 
-This may be possible when the caller function is compiled with a sufficiently high set of architecture features (explicitly by using the `target` attribute as an optimization hint, or the multiversioning attributes `target_version`/`target_clones`, and implicitly via command line options). Refer the the example in the next section for details. 
+This may be possible when the caller function is compiled with a sufficiently high set of architecture features (explicitly by using the `target` attribute as an optimization hint, or the multiversioning attributes `target_version`/`target_clones`, and implicitly via command line options). Refer to the example in the next section for details. 
 
 The compiler optimizes calls to versioned functions which can be statically resolved into direct calls. As a result the versioned function may be inlined into the call site.
