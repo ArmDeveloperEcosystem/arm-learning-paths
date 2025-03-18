@@ -34,7 +34,7 @@ This command should help resolve it:
 ```bash
 gcloud components install gke-gcloud-auth-plugin
 ```
-Test the connection to the cluster with this command:
+Finally, test the connection to the cluster with this command:
 
 ```commandline
 kubectl cluster-info

@@ -27,6 +27,8 @@ The *Cluster basics* tab appears.
 3. For *Name*, enter *ollama-on-arm*
 4. For *Region*, enter *us-central1*.
 
+![Select and Configure Cluster Type](images/cluster_basics.png)
+
 {{% notice Note %}}
 Although this will work in all regions and zones where C4 and C4a instance types are supported, for this demo, we use *us-central1* and *us-central1-1a* regions and zones.  In addition, with simplicity and cost savings in mind, only one node per architecture is used.. 
 {{% /notice %}}
