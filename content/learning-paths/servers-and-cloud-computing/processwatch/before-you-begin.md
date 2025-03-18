@@ -39,7 +39,7 @@ For the Arm build, Process Watch is dependent on two submodules. These are:
 ## Building Process Watch
 You are now ready to build Process Watch. Use the `build.sh` shell script included in the repository to build it:
 ```console
-./build.sh -b
+./build.sh 
 ```
 
 You should see the following output:
