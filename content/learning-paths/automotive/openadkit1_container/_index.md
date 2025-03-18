@@ -8,7 +8,7 @@ who_is_this_for: This is an introductory topic for automotive developers, aimed 
 learning_objectives: 
     - Introduction to the SOAFEE architecture and its role in supporting Shift-Left software development strategies to optimize the autonomous driving development process.
     - Overview of the Autoware OpenADKit simulation environment.
-    - Running containerized workloads on Arm Neoverse with Docker, supporting execution on both cloud-based and on-premise servers.
+    - Running containerized workloads on Arm Neoverse V3AE with Docker, supporting execution on both cloud-based and on-premise servers.
     - Exploring advanced configurations and future development prospects.
 prerequisites:
     - An Arm-based Neoverse cloud instance, or a local Arm Neoverse Linux computer with at least 16 CPUs and 32GB of RAM.
@@ -32,7 +32,7 @@ operatingsystems:
 further_reading:
     - resource:
         title: ROS2 installation
-        link: https://docs.github.com/en/copilot/building-copilot-extensions/about-building-copilot-extensions/
+        link: https://learn.arm.com/install-guides/ros2/
         type: documentation
     - resource:
         title: AutoWare OpenAD Kit deom project

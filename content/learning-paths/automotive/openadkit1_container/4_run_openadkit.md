@@ -20,8 +20,21 @@ The script first starts the Visualizer service in detached mode, followed by the
 Similar to the example in the previous session, this Docker Compose service configures and runs a visualization tool (Visualizer) within a Docker container. It renders real-time simulation data using RViz and allows remote access via VNC and Ngrok.
 
 The `visualizer` service maps:
-- **Port `6080:6080`** → Enables VNC-based remote visualization. Open in a browser: `http://localhost:6080`
-- **Port `5999:5999`** → Used for additional debugging or communication.
+
+- **volume `./etc/simulation:/autoware/scenario-sim`**
+
+  The volume mapping `./etc/simulation:/autoware/scenario-sim` mounts a local directory (./etc/simulation) to a specific path inside the container (/autoware/scenario-sim). This means that files stored in the ./etc/simulation directory on the host machine will be accessible from inside the container at /autoware/scenario-sim.
+
+- **Port `6080:6080`**
+
+  In the Autoware visualization environment, the 6080:6080 port mapping is used to enable web-based VNC remote desktop access, allowing users to interact with tools like Rviz directly from their browser without needing an external VNC client.
+  
+  Inside the container, VNC is enabled via the `VNC_ENABLED=true` environment variable, ensuring that the VNC server is running. The VNC server listens on port 6080, making it accessible through a web-based interface, which simplifies remote monitoring and control of autonomous driving simulations, improving development and testing efficiency.
+
+  Enable VNC-based remote visualization to interact with the Autoware environment remotely.
+  To access the visualization interface:
+	-	On the same machine, open: `http://localhost:6080`
+	-	From another device, use: `http://<VISUALIZER_IP_ADDRESS>:6080`
 
 ```yml
   visualizer:
@@ -144,7 +157,9 @@ To access the visualizer:
 
 You are now entered the OpenAD Kit simulation environment.
 
-This demo will continuously repeat the same scenario.
+This demo will continuously repeat the two scenarios.
+- **fail_static_obstacle_avoidance.param.yaml**: In the first scenario, the vehicle remains stationary behind the obstacle. 
+- **pass_static_obstacle_avoidance.param.yaml**: In the second scenario, the vehicle is permitted to change lanes to maneuver around the obstacle.
 
 The vehicle starts from a stationary position, moves along the road, and stops when there is a vehicle ahead, waiting for the obstruction to clear before proceeding.
 
