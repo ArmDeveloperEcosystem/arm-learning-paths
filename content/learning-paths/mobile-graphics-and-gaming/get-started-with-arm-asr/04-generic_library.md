@@ -1,5 +1,5 @@
 ---
-title: Using Arm ASR in a custom engine using the Generic Library
+title: Using Arm ASR in a Custom Engine using the Generic Library
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -14,8 +14,8 @@ Arm ASR is an optimized variant of [Fidelity Super Resolution 2](https://github.
 
 You can integrate Arm ASR into your custom engine using one of two methods:
 
-1. [Quick integration](#quick-integration) - use the standalone backend.
-2. [Tight integration](#tight-integration) - use your engine's backend/renderer.
+1. [Quick Integration](#quick-integration) - use the standalone backend.
+2. [Tight Integration](#tight-integration) - use your engine's backend/renderer.
 
 See the following sections to learn how to configure Arm ASR:
 
@@ -120,7 +120,7 @@ In the following section, additional details for integrating Arm ASR are listed.
 The `FfxmFsr2ContextDescription` from `$ARMASR_DIR/include/host/ffxm_fsr2.h` is referenced multiple times throughout the Integration Guidelines. You should configure the `flags` field of this structure when modifying those bits, by setting the variables in `FfxmFsr2InitializationFlagBits`.
 {{% /notice %}}
 
-### HLSL-based workflows
+### HLSL-Based Workflows
 
 In an HLSL-based workflow using DirectX Shader Compiler to cross-compile to SPIR-V do the following:
 
@@ -132,7 +132,7 @@ In an HLSL-based workflow using DirectX Shader Compiler to cross-compile to SPIR
 
 - The extension **VK_KHR_shader_float16_int8** should be used at runtime.
 
-## Quality presets
+## Quality Presets
 
 The Arm ASR API provides a set of shader quality presets, to select a version of the technique that balances  quality and performance:
 
@@ -144,7 +144,7 @@ The Arm ASR API provides a set of shader quality presets, to select a version of
 
 When creating a context, a `FfxmFsr2ShaderQualityMode` accessed via `$ARMASR_DIR/include/host/ffxm_fsr2.h` needs to be provided as part of the input settings in `FfxmFsr2ContextDescription`.
 
-## Upscaling ratios
+## Upscaling Ratios
 
 To enhance flexibility when using the technique, developers can specify both a shader quality preset and an upscaling ratio. They can select any combination of **FfxmFsr2ShaderQualityMode** and **FfxmFsr2UpscalingRatio** according to their requirements to adjust the balance between quality and performance of the application.
 
@@ -213,7 +213,7 @@ The following table shows the list of the different shader mutators that can be 
 
 Lastly, when using an HLSL-based workflow, we also have the **FFXM_HLSL_6_2** global define. If defined with a value of **1**, this will enable the use of explicit 16-bit types instead of relying on **half** (RelaxedPrecision). The **VK_KHR_shader_float16_int8** extension is required on Vulkan.
 
-## Input resources
+## Input Resources
 
 Arm ASR is a temporal algorithm, and therefore requires access to data from both the current and previous frame. The following table enumerates all external inputs required by it, with most function names available in `$ARMASR_DIR/include/host/ffxm_fsr2.h`.
 
@@ -229,7 +229,7 @@ The resolution column indicates if the data should be at 'rendered' resolution o
 
 All inputs that are provided at Render Resolution, except for motion vectors, should be rendered with jitter. By default, Motion vectors are expected to be unjittered unless the `FFXM_FSR2_ENABLE_MOTION_VECTORS_JITTER_CANCELLATION` flag is present.
 
-## Providing motion vectors
+## Providing Motion Vectors
 
 ### Space
 
@@ -257,7 +257,7 @@ Internally, Arm ASR uses 16-bit quantities to represent motion vectors in many c
 
 Arm ASR will perform better quality upscaling when more objects provide their motion vectors. It is therefore advised that all opaque, alpha-tested and alpha-blended objects should write their motion vectors for all covered pixels. If vertex shader effects are applied, such as scrolling UVs, these calculations should also be factored into the calculation of motion for the best results. For alpha-blended objects it is also strongly advised that the alpha value of each covered pixel is stored to the corresponding pixel in the [reactive mask](#reactive-mask). This will allow the technique to perform better handling of alpha-blended objects during upscaling. The reactive mask is especially important for alpha-blended objects where writing motion vectors might be prohibitive, such as particles.
 
-## Reactive mask
+## Reactive Mask
 
 In the context of Arm ASR, the term "reactivity" means how much influence the samples rendered for the current frame have over the production of the final upscaled image. Typically, samples rendered for the current frame contribute a relatively modest amount to the result computed by the algorithm; however, there are exceptions. As there is no good way to determine from either color, depth or motion vectors which pixels have been rendered using alpha blending, Arm ASR performs best when applications explicitly mark such areas.
 
