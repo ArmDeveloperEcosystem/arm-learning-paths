@@ -1,5 +1,5 @@
 ---
-title: Acknowledgements, Licensing, and Support
+title: Acknowledgements, Licensing, and Additional Resources
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -20,7 +20,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Additional Resources
 
-The following links provide additional information about Arm ASR.
+The following links provide additional information about Arm ASR:
 
 * [Arm ASR on Arm Developer Hub](https://www.arm.com/developer-hub/mobile-graphics-and-gaming/accuracy-super-resolution).
 * [Arm ASR Manga Comic](https://developer.arm.com/Mobile%20Graphics%20and%20Gaming/FeaturedContent/Mali%20Manga/FeaturedContent-MaliManga-Volume4).
