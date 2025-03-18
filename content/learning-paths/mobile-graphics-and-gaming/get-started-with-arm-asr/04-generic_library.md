@@ -199,7 +199,7 @@ table {
 - **FFXM_HLSL**. If defined, the logic falls back to use the **HLSL**-specific syntax, such as types and resource declaration.
 - **FFXM_GLSL**. If defined, the logic falls back to use the **GLSL**-specific syntax.
 
-The following table shows the list of the different shader mutators that can be used. All of these must be defined with a value of 0 or 1. The shader variant to use is guided internally by the **getPipelinePermutationFlags(...)** function, based on user-defined flags and shader quality settings.
+The following table shows the list of the different shader mutators that you can use. All of these must be defined with a value of 0 or 1. The shader variant to use is determined internally by the **getPipelinePermutationFlags(...)** function, based on factors such as user-defined flags and shader quality settings.
 
 | Define | Description |
 | -------- | ------- |
