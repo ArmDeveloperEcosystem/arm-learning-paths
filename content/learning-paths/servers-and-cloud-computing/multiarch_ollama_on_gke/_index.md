@@ -23,8 +23,10 @@ learning_objectives:
   - Experiment further by researching which existing, and upcoming workloads could benefit most from single, or multi-architectural clusters.
 
 prerequisites:
-    - A [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
-    - A computer with [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/)installed.
+    - A [Google Cloud account](https://console.cloud.google.com/).
+    - A computer with [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/) installed.
+    - The [GKE Cloud Plugin](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#gcloud)
+
 
 author:
     - Geremy Cohen

@@ -43,13 +43,13 @@ Although this will work in all regions and zones where C4 and C4a instance types
 9. For *Series*, select *C4*
 10. For *Machine Type*, select *c4-standard-4*
 
-![Configure x86 node type](images/configure-x86-note-type.png)
-
-11. *Click* the *Create* button at the bottom of the screen.
-
 {{% notice Note %}}
 We've chosen node types that will support one pod per node.  If you wish to run multiple pods per mode, assume each node should provide ~10GB per pod. 
 {{% /notice %}}
+
+![Configure x86 node type](images/configure-x86-note-type.png)
+
+11. *Click* the *Create* button at the bottom of the screen.
 
 It will take a few moments, but when the green checkmark is showing next to the ollama-on-arm cluster, you're ready to continue to the next lesson!
 
