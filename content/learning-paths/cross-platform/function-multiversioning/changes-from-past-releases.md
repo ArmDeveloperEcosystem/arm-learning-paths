@@ -15,7 +15,9 @@ layout: learningpathall
 
 #### Semantic changes between LLVM 19 and LLVM 20
 
-With LLVM 19 at least one more version other than the default is needed to trigger function multiversioning. With LLVM 20 a header file declaration:
+With LLVM 19 at least one more version other than the default is needed to trigger function multiversioning. 
+
+With LLVM 20 a header file declaration:
 
 ```c
 __attribute__((target_version("default"))) void f(void);

@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-Function Multi Versioning is compatible with Arm streaming mode as long as the same calling convention is used across all function versions.
+Function multiversioning is compatible with Arm streaming mode as long as the same calling convention is used across all function versions.
 
 Use a text editor to create a file named `streaming.c` with the code below:
 
