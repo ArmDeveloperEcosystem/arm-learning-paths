@@ -203,15 +203,15 @@ The following table shows the list of the different shader mutators that can be 
 
 | Define | Description |
 | -------- | ------- |
-| FFXM_FSR2_OPTION_HDR_COLOR_INPUT | If **1**, will assume that the input color is in linear RGB. |
-| FFXM_FSR2_OPTION_LOW_RESOLUTION_MOTION_VECTORS | If **1**, will assume the input motion vectors texture is in low resolution |
-| FFXM_FSR2_OPTION_JITTERED_MOTION_VECTORS | If **1**, will assume jittered motion vectors using the same jitter offsets as the input color and depth. |
-| FFXM_FSR2_OPTION_INVERTED_DEPTH | If **1**, it will assume the input depth containing reversed depth values (far == 0.0f) |
+| FFXM_FSR2_OPTION_HDR_COLOR_INPUT | If **1**, assumes that the input color is in linear RGB. |
+| FFXM_FSR2_OPTION_LOW_RESOLUTION_MOTION_VECTORS | If **1**, assumes the input motion vectors texture is in low resolution |
+| FFXM_FSR2_OPTION_JITTERED_MOTION_VECTORS | If **1**, assumes jittered motion vectors using the same jitter offsets as the input color and depth. |
+| FFXM_FSR2_OPTION_INVERTED_DEPTH | If **1**, assumes the input depth containing reversed depth values (far == 0.0f) |
 | FFXM_FSR2_OPTION_APPLY_SHARPENING | If **1**, informs the shaders that RCAS (sharpening) pass will be used. |
 | FFXM_FSR2_OPTION_SHADER_OPT_BALANCED | If **1**, enables a batch of optimizations when the **Balanced** quality preset is selected. |
-| FFXM_FSR2_OPTION_SHADER_OPT_PERFORMANCE | If **1**,  enables a batch of optimizations when the **Performance** quality preset is selected. When this is enabled then **FFXM_FSR2_OPTION_SHADER_OPT_BALANCED** will be enabled too. |
+| FFXM_FSR2_OPTION_SHADER_OPT_PERFORMANCE | If **1**,  enables a batch of optimizations when the **Performance** quality preset is selected. When this is enabled, then **FFXM_FSR2_OPTION_SHADER_OPT_BALANCED** is enabled too. |
 
-Lastly, when using an HLSL-based workflow, we also have the **FFXM_HLSL_6_2** global define. If defined with a value of **1**, this will enable the use of explicit 16-bit types instead of relying on **half** (RelaxedPrecision). The **VK_KHR_shader_float16_int8** extension is required on Vulkan.
+Lastly, when using an HLSL-based workflow, you also have the **FFXM_HLSL_6_2** global define. If defined with a value of **1**, this will enable the use of explicit 16-bit types instead of relying on **half** (RelaxedPrecision). The **VK_KHR_shader_float16_int8** extension is required on Vulkan.
 
 ## Input Resources
 
@@ -271,7 +271,7 @@ If a reactive mask is not provided then an internally generated `1x1` texture wi
 
 ## Automatically generating reactivity
 
-To help applications generate the reactive mask, we provide an optional utility pass. Under the hood, the API launches a fragment shader which computes these values for each pixel using a luminance-based heuristic.
+To help applications generate the reactive mask, there is an optional utility pass. Under the hood, the API launches a fragment shader which computes these values for each pixel using a luminance-based heuristic.
 
 To do this, the applications can call the `ffxmFsr2ContextGenerateReactiveMask` (`$ARMASR_DIR/include/host/ffxm_fsr2.h`) function and should pass two versions of the color buffer: one containing opaque only geometry, and the other containing both opaque and alpha-blended objects.
 
@@ -279,7 +279,7 @@ To do this, the applications can call the `ffxmFsr2ContextGenerateReactiveMask` 
 
 Arm ASR provides two values which control the exposure used when performing upscaling:
 
-1. **Pre-exposure**: a value by which we divide the input signal to get back to the original signal produced by the game before any packing into lower precision render targets.
+1. **Pre-exposure**: a value by which you can divide the input signal to get back to the original signal produced by the game before any packing into lower precision render targets.
 
 2. **Exposure**: a value which is multiplied against the result of the pre-exposed color value.
 
@@ -338,7 +338,7 @@ Rendering performance may be slightly less than typical frame-to-frame operation
 
 ## Mipmap biasing
 
-Applying a negative mipmap biasing will typically generate an upscaled image with better texture detail. We recommend applying the following formula to your Mipmap bias:
+Applying a negative mipmap biasing will typically generate an upscaled image with better texture detail. It is recommended that you apply the following formula to your Mipmap bias:
 
 ``` CPP
 mipBias = log2(renderResolution/displayResolution) - 1.0;
@@ -364,7 +364,7 @@ Most of the workloads in the upscalers have been converted to fragment shaders. 
 
 ## Generate prebuilt shaders
 
-We provide a helper script to generate prebuilt shaders which are used for standalone backend. Make sure python is installed, and run it with the following command:
+There is a helper script provided to generate prebuilt shaders which are used for standalone backend. Make sure python is installed, and run it with the following command:
 
 ```bash
 python $ARMASR_DIR/tools/generate_prebuilt_shaders.py
