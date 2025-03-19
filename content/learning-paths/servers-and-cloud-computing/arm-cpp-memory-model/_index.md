@@ -10,9 +10,9 @@ minutes_to_complete: 45
 who_is_this_for: This is an advanced topic for C++ developers porting applications from x86 to Arm and optimizing performance.
 
 learning_objectives: 
-    - Learn about the C++ memory model.
-    - Learn about the differences between the Arm and x86 memory model.
-    - Learn best practices for writing C++ on Arm to avoid race conditions.
+    - Describe at a high level what a memory model does, and the types of memory ordering.
+    - Describe the differences between the Arm and x86 memory model.
+    - Employ best practices for writing C++ on Arm to avoid race conditions.
 
 prerequisites:
     - Access to an x86 and Arm cloud instance (virtual machine).
