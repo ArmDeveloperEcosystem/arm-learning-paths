@@ -61,7 +61,7 @@ git clone https://github.com/wangzhaode/llm-export
 cd llm-export && pip install .
 ```
 
-You can use the `llm-export` repository to convert the model with the following options:
+You can use the `llm-export` repository to quantize the model with the following options:
 
 ```bash
 llmexport --path ../Qwen2-VL-2B-Instruct/ --export mnn --quant_bit 4 \
