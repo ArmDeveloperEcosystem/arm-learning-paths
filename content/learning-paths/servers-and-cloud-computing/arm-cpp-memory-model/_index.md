@@ -27,7 +27,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - C++
-    - ThreadSanitizer (TSan)
+    - TSan
     - Runbook
 operatingsystems:
     - Linux
@@ -39,7 +39,7 @@ further_reading:
         type: documentation
     - resource:
         title: Thread Sanitizer Manual 
-        link: Phttps://github.com/google/sanitizers/wiki/threadsanitizercppmanual
+        link: https://github.com/google/sanitizers/wiki/threadsanitizercppmanual
         type: documentation
 
 
