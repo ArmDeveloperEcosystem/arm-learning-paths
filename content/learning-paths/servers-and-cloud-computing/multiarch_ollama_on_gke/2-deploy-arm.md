@@ -1,22 +1,48 @@
 ---
-title: Deploy ollama x86 to the cluster
-weight: 2
+title: Deploy ollama Arm to the cluster
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
 ## Overview
+At this point we have a what many people in their K8s Arm journey start with -- a workload running on an x86 cluster!  As mentioned earlier, the easiest way to experiment with Arm in your K8s cluster is to run both architectures simultaneously, so you'll be shown how to do that next.
 
-Any easy way to experiment with Arm nodes in your K8s cluster is to deploy Arm nodes and pods alongside your existing x86 node and pods. In this section of the tutorial, you'll bootstrap the cluster with ollama on x86, which prepares you for the next section of the tutorial, where you'll add Arm nodes and pods to the mix.
+### Adding arm-pool
+To add Arm nodes to the cluster:
 
-### Connect to the cluster
+1. From the Clusters menu, select *ollama-on-arm*
+2. Select *Add node pool*
+3. For *Name*, enter *arm-pool*
+4. For *Size*, enter *1*
+5. Check *Specify node locations* and select *us-central1-a*
 
-{{% notice Note %}}
-The following assumes you have gcloud and kubectl already installed.  If not, please follow the instructions on the first page under "Prerequisites". 
-{{% /notice %}}
+![YAML Overview](images/arm_node_config-1.png)
 
-You'll first setup your newly created K8s cluster credentials using the gcloud utility.  Enter the following in your command prompt (or cloud shell), and make sure to replace "YOUR_PROJECT_ID" with the ID of your GCP project:
+6. Select the *Nodes* tab to navigate to the *Configure node settings* screen
+7. Select *C4A* : *c4a-standard-4* for Machine *Configuration/Type*.
+
+![YAML Overview](images/arm_node_config-2.png)
+
+8. Select *Create*
+9. After provisioning completes, select the newly created *arm-pool* from the *Clusters* screen to take you to the *Node pool details* page.
+
+Note the taint applied by default to the Arm Node of *NoSchedule* (if arch=arm64):
+
+![arm node taint](images/taint_on_arm_node.png)
+
+The nodeSelector in both Deplopyments not only defines which node to run on, [but in the arm64 use case](https://cloud.google.com/kubernetes-engine/docs/how-to/prepare-arm-workloads-for-deployment#schedule-with-node-selector-arm), it also adds the required toleration automatically.
+
+
+```yaml
+nodeSelector:
+    kubernetes.io/arch: arm64 # or amd64
+```
+
+
+
+10. 
 
 ```bash
 export ZONE=us-central1

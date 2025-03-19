@@ -10,6 +10,12 @@ layout: learningpathall
 
 Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you learn how to run [ollama](https://ollama.com/) on Arm-based CPUs in a hybrid architecture (x86 and Arm) K8s cluster.
 
+To demonstrate this in a real life scenario, you're going to bring up a Kubernetes cluster with an x86 node, and add an Arm node.  Each node will be running a single ollama pod, so we'll have two pods total (one running x86, and one running Arm).  You'll run three services, one that only targets x86 pods, one that only targets Arm pods, and one that targets both x86 and Arm pods.
+
+TODO:  IMAGE
+
+Once you have all three services running, you'll be empowered to experiment with migration options, price/performance, applying the knowledge to other workloads in your environment as you see fit. 
+
 ## Cost to Run
 
 TODO
