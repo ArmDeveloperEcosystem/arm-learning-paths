@@ -14,6 +14,7 @@ prerequisites:
     - A 64-bit Arm powered smartphone running Android with i8mm/dotprod supported.
 
 author: Shuheng Deng,Arm
+        Yiyang Fan,Arm
 
 ### Tags
 skilllevels: Introductory

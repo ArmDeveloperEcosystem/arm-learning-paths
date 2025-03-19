@@ -18,11 +18,17 @@ The first step is to prepare a development environment with the required softwar
 - Git
 
 ## Build and run command-line demo
+Download the model
+
+```shell
+$ git lfs install
+$ git clone https://www.modelscope.cn/MNN/Qwen2-VL-2B-Instruct-MNN.git
+```
 
 Push the Model to device, how to obtain model is mention on last page.
 ```shell
 $ adb shell mkdir /data/local/tmp/models/
-$ adb push <path to the model folder> /data/local/tmp/models
+$ adb push Qwen2-VL-2B-Instruct-MNN/ /data/local/tmp/models
 ``` 
 
 ```shell
@@ -50,7 +56,7 @@ $ chmod +x llm_demo
 $ export LD_LIBRARY_PATH=./   
 # <img>./example.png</img> get your image here
 $ echo " <img>./example.png</img>Describe the content of the image." >prompt  
-$ ./llm_demo models/Qwen-VL-2B-convert-4bit-per_channel/config.json prompt  
+$ ./llm_demo models/Qwen2-VL-2B-Instruct-MNN//config.json prompt  
 ```
 
 Here is an example image: 
@@ -81,6 +87,6 @@ Here is my performance comparation within/without kleidiAI
 
 | | KleidiAI OFF | KleidiAi ON |
 |----------|----------|----------|
-| Vision Process Time | 5.45s | 5.43 s |
-| Prefill Speed | 132.35 tok/s | 148.30 tok/s |
-| Decode Speed |  21.61 tok/s | 33.26 tok/s |
+| Vision Process Time | 5.74s | 5.43 s |
+| Prefill Speed | 128.27 tok/s | 148.30 tok/s |
+| Decode Speed |  28.45 tok/s | 33.26 tok/s |

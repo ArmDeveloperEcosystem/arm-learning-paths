@@ -24,7 +24,7 @@ Open up a Windows PowerShell or Git Bash and checkout the source tree:
 cd C:\Users\$env:USERNAME
 git clone https://github.com/HenryDen/MNN.git
 cd MNN
-git checkout origin/MNN_commit
+git checkout origin/llm_android_demo
 ```
 
 {{% notice Note %}}
@@ -44,9 +44,14 @@ Open Android Studio
 
 
 ## Prepare the model
-You can download the model from ModelScope : https://www.modelscope.cn/models/qwen/qwen2-vl-2b-instruct
+You can download the model from ModelScope : https://modelscope.cn/models/MNN/Qwen2-VL-2B-Instruct-MNN
 
-Or Hugging Face : https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct
+Or Hugging Face : https://huggingface.co/taobao-mnn/Qwen2-VL-2B-Instruct-MNN
+
+```shell
+$ git lfs install
+$ git clone https://www.modelscope.cn/MNN/Qwen2-VL-2B-Instruct-MNN.git
+```
 
 If you need to test other vision transformer models, you can download models from  https://modelscope.cn/organization/qwen?tab=model and convert them to MNN format.
 
