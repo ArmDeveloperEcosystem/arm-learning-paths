@@ -16,7 +16,7 @@ prerequisites:
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
     - A 64-bit Arm powered smartphone running Android with `i8mm` and `dotprod` supported.
 
-author: Shuheng Deng,Arm
+author: Shuheng Deng
 
 ### Tags
 skilllevels: Introductory
@@ -45,6 +45,10 @@ further_reading:
         title: Vision transformer
         link: https://en.wikipedia.org/wiki/Vision_transformer
         type: website
+    - resource:
+        title: KleidiAI repository
+        link: https://github.com/ARM-software/kleidiai
+        type: documentation
 
 
 

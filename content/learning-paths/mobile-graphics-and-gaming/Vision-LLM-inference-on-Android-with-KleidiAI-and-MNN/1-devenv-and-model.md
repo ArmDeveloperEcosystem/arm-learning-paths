@@ -19,7 +19,11 @@ sudo apt update
 sudo apt install cmake git-lfs -y
 ```
 
-You can use Android Studio to obtain the NDK. Refer to [Install NDK and CMake](https://developer.android.com/studio/projects/install-ndk).
+You can use Android Studio to obtain the NDK. Click **Tools > SDK Manager**, and navigate to the the SDK Tools tab. Select the NDK (Side by side) and CMake checkboxes, as shown below:
+
+![Install NDK](./install_ndk.png)
+
+Refer to [Install NDK and CMake](https://developer.android.com/studio/projects/install-ndk) for other installation methods.
 
 Make sure Python and pip is installed by verifying a version is printed on running this command:
 
@@ -34,7 +38,7 @@ The above commands may fail when Python is installed if Python 3.x is not the de
 
 ## Set up phone connection
 
-You will need to set up an authorized connection with your phone. The Android SDK Platform Tools package, included in Android Studio, comes with Android Debug Bridge (adb). You will use this tool to transfer files later on.
+You will need to set up an authorized connection with your phone. The Android SDK Platform Tools package, included in Android Studio, comes with Android Debug Bridge (ADB). You will use this tool to transfer files later on.
 
 Connect your phone to the computer using a USB cable. You will need to activate USB debugging on your phone. Find the **Build Number** in your **Settings** app and tap it 7 times. Then, enable **USB debugging** in **Developer Options**.
 

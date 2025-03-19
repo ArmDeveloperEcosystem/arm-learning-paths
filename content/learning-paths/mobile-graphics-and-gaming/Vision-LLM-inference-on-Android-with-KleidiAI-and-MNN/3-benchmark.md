@@ -14,7 +14,7 @@ You will use an image to run a command-line prompt. In this learning path, the t
 
 ![example image](example.png)
 
-Use adb to load the image onto your phone:
+Use ADB to load the image onto your phone:
 
 ```bash
 adb push example.png /data/local/tmp/
@@ -37,7 +37,7 @@ mkdir build_64 && cd build_64
 If your NDK toolchain isn't set up correctly, you may run into issues with the above script. Make note of where the NDK was installed - this will be a directory named after the version you downloaded earlier. Try exporting the following environment variables before re-running `build_64.sh`.
 
 ```bash
-export ANDROID_NDK_HOME=<path-to>/ndk/25.2.9519653
+export ANDROID_NDK_HOME=<path-to>/ndk/28.0.12916984
 
 export CMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake
 export ANDROID_NDK=$ANDROID_NDK_HOME
@@ -121,6 +121,6 @@ This time, you should see an improvement in the benchmark. Below is an example t
 | Prefill Speed       | 132.35 tok/s     | 148.30 tok/s  |
 | Decode Speed        | 21.61 tok/s      | 33.26 tok/s   |
 
-The prefill speed describes how fast the model processes the input prompt. The decode speed corresponds to the rate at which the model generates new tokens one at a time after the input is processed
+The prefill speed describes how fast the model processes the input prompt. The decode speed corresponds to the rate at which the model generates new tokens after the input is processed
 
 This shows the advantages of using Arm optimized kernels for your ViT use-cases.
