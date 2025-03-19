@@ -1,5 +1,5 @@
 ---
-title: Deploy ollama Arm to the cluster
+title: Deploy ollama Arm64 to the cluster
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -28,11 +28,11 @@ To add Arm nodes to the cluster:
 8. Select *Create*
 9. After provisioning completes, select the newly created *arm-pool* from the *Clusters* screen to take you to the *Node pool details* page.
 
-Note the taint applied by default to the Arm Node of *NoSchedule* (if arch=arm64):
+Note the taint GKE applies by default to the Arm Node of *NoSchedule* (if arch=arm64):
 
 ![arm node taint](images/taint_on_arm_node.png)
 
-The nodeSelector in both Deplopyments not only defines which node to run on, [but in the arm64 use case](https://cloud.google.com/kubernetes-engine/docs/how-to/prepare-arm-workloads-for-deployment#schedule-with-node-selector-arm), it also adds the required toleration automatically.
+The nodeSelector in both Deplopyment YAMLs not only defines which architectures to run on, [but in the arm64 use case](https://cloud.google.com/kubernetes-engine/docs/how-to/prepare-arm-workloads-for-deployment#schedule-with-node-selector-arm), it also adds the required toleration automatically.
 
 
 ```yaml
@@ -40,34 +40,8 @@ nodeSelector:
     kubernetes.io/arch: arm64 # or amd64
 ```
 
-
-
-10. 
-
-```bash
-export ZONE=us-central1
-export CLUSTER_NAME=ollama-on-arm
-export PROJECT_ID=YOUR_PROJECT_ID
-gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
-```
-If you get the error:
-
-```commandline
-CRITICAL: ACTION REQUIRED: gke-gcloud-auth-plugin, which is needed for continued use of kubectl, was not found or is not executable. Install gke-gcloud-auth-plugin for use with kubectl by following https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#install_plugin
-```
-This command should help resolve it:
-
-```bash
-gcloud components install gke-gcloud-auth-plugin
-```
-Finally, test the connection to the cluster with this command:
-
-```commandline
-kubectl cluster-info
-```
-If you receive a non-error response, you're successfully connected to the k8s cluster!
-
 ### Deployment and Service
+We can now deploy the arm-based deployment.
 
 1. Copy the following YAML, and save it to a file called x86_ollama.yaml:
 

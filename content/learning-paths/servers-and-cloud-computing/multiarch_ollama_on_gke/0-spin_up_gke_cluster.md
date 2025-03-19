@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Overview
 
-Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you learn how to run [ollama](https://ollama.com/) on Arm-based CPUs in a hybrid architecture (x86 and Arm) K8s cluster.
+Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you learn how to run [ollama](https://ollama.com/) on Arm-based CPUs in a hybrid architecture (amd64 and Arm) K8s cluster.
 
-To demonstrate this in a real life scenario, you're going to bring up a Kubernetes cluster with an x86 node, and add an Arm node.  Each node will be running a single ollama pod, so we'll have two pods total (one running x86, and one running Arm).  You'll run three services, one that only targets x86 pods, one that only targets Arm pods, and one that targets both x86 and Arm pods.
+To demonstrate this in a real life scenario, you're going to bring up a Kubernetes cluster with an amd64 node, and add an Arm node.  Each node will be running the same container image via a single ollama pod, so we'll have two pods total (one running amd64, and one running Arm).  You'll run three services, one that only targets amd64 pods, one that only targets Arm pods, and one that targets both amd64 and Arm pods.
 
 TODO:  IMAGE
 
@@ -40,11 +40,11 @@ Although this will work in all regions and zones where C4 and C4a instance types
 {{% /notice %}}
 
 5. Click on *NODE POOLS*->*default-pool*
-6. For *Name*, enter *x86-pool*
+6. For *Name*, enter *amd64-pool*
 7. For size, enter *1*
 8. Select *Specify node locations*, and select *us-central1-a*
 
-![Configure x86 Node pool](images/x86-node-pool.png)
+![Configure amd64 Node pool](images/x86-node-pool.png)
 
 
 8. Click on *NODE POOLS*->*Nodes*
@@ -55,7 +55,7 @@ Although this will work in all regions and zones where C4 and C4a instance types
 We've chosen node types that will support one pod per node.  If you wish to run multiple pods per mode, assume each node should provide ~10GB per pod. 
 {{% /notice %}}
 
-![Configure x86 node type](images/configure-x86-note-type.png)
+![Configure amd64 node type](images/configure-x86-note-type.png)
 
 11. *Click* the *Create* button at the bottom of the screen.
 
