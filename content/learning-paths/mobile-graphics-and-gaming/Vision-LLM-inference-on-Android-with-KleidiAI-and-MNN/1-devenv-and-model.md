@@ -68,17 +68,19 @@ llmexport --path ../Qwen2-VL-2B-Instruct/ --export mnn --quant_bit 4 \
     --quant_block 0 --dst_path Qwen2-VL-2B-Instruct-convert-4bit-per_channel --sym
 ```
 
+The table below gives you an explanation of the different arguments:
+
 | Parameter        | Description | Explanation |
 |------------------|-------------|--------------|
-| `--quant_bit`    | mnn quant bit, 4 or 8, default is 4 | `4` represents q4 quantization. |
-| `--quant_block`  | mnn quant block, default is 0 | `0` represents per-channel quantization, `128` represents 128 per-block quantization. |
-| `--sym`          | symmetric quantization (without zeropoint), defualt is False.| The quantization parameter that enables symmetrical quantization. |
+| `--quant_bit` | mnn quant bit, 4 or 8, default is 4 | `4` represents q4 quantization. |
+| `--quant_block` | mnn quant block, default is 0 | `0` represents per-channel quantization, `128` represents 128 per-block quantization. |
+| `--sym` | symmetric quantization (without zeropoint), defualt is False. | The quantization parameter that enables symmetrical quantization. |
 
 To learn more about the parameters, refer to the [transformers README.md](https://github.com/alibaba/MNN/tree/master/transformers).
 
-Verify the build was correct by checking the size of the resulting model. The `Qwen2-VL-2B-Instruct-convert-4bit-per_channel` directory should total to at lest 1 GB.
+Verify the model is built correct by checking the size of the resulting model. The `Qwen2-VL-2B-Instruct-convert-4bit-per_channel` directory should be atleast 1 GB in size.
 
-Push the model onto the device.
+Push the model onto the device:
 
 ```shell
 adb shell mkdir /data/local/tmp/models/
