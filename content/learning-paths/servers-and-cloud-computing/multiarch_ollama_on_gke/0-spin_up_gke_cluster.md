@@ -59,6 +59,35 @@ We've chosen node types that will support one pod per node.  If you wish to run 
 
 11. *Click* the *Create* button at the bottom of the screen.
 
-It will take a few moments, but when the green checkmark is showing next to the ollama-on-arm cluster, you're ready to continue to the next lesson!
+It will take a few moments, but when the green checkmark is showing next to the ollama-on-arm cluster, you're ready to continue to test your connection to the cluster.
 
+### Connect to the cluster
 
+{{% notice Note %}}
+The following assumes you have gcloud and kubectl already installed.  If not, please follow the instructions on the first page under "Prerequisites". 
+{{% /notice %}}
+
+You'll first setup your newly created K8s cluster credentials using the gcloud utility.  Enter the following in your command prompt (or cloud shell), and make sure to replace "YOUR_PROJECT_ID" with the ID of your GCP project:
+
+```bash
+export ZONE=us-central1
+export CLUSTER_NAME=ollama-on-Arm64
+export PROJECT_ID=YOUR_PROJECT_ID
+gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
+```
+If you get the message:
+
+```commandline
+CRITICAL: ACTION REQUIRED: gke-gcloud-auth-plugin, which is needed for continued use of kubectl, was not found or is not executable. Install gke-gcloud-auth-plugin for use with kubectl by following https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#install_plugin
+```
+This command should help resolve it:
+
+```bash
+gcloud components install gke-gcloud-auth-plugin
+```
+Finally, test the connection to the cluster with this command:
+
+```commandline
+kubectl cluster-info
+```
+If you receive a non-error response, you're successfully connected to the k8s cluster!

@@ -48,12 +48,5 @@ We can now deploy the arm-based deployment.
 ```yaml
 foo
 ```
-Before we run it, lets dive a bit deeper into what its doing.
-
-1. First, you create a new Namespace called *ollama*.  This is where all your objects will live.
-2. Next, you will create the x86 Deployment.  The Pods of this deployment will run a multiarch (either x86 or Arm) container, based on the architecture of the node its running on.
-3. You will then create a Service, *ollama-x86-svc*, whose endpoints are of only x86 type.
-4. Finally, we create another Service, *ollama-multiarch*, whose endpoints will be of any (x86 or Arm) architecture type.
 
 
-![YAML Overview](images/x86_deply_yaml.png)
