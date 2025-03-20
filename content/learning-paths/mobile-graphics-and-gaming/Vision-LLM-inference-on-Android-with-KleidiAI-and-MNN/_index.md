@@ -16,7 +16,9 @@ prerequisites:
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
     - A 64-bit Arm powered smartphone running Android with `i8mm` and `dotprod` supported.
 
-author: Shuheng Deng
+author:
+    - Shuheng Deng
+    - Yiyang Fan
 
 ### Tags
 skilllevels: Introductory
