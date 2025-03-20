@@ -1,5 +1,5 @@
 ---
-title: Using Arm ASR in a custom engine using the Generic Library
+title: Using Arm ASR in a Custom Engine using the Generic Library
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,31 +8,33 @@ layout: learningpathall
 
 ## Introduction
 
-Use the following steps to implement **Arm Accuracy Super Resolution (Arm ASR)** in your own custom engine. Arm ASR is an optimized version of [Fidelity Super Resolution 2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md) (FSR2) that has been heavily modified to include many mobile-oriented optimizations to make the technique suited for mobile.
+Follow these steps to implement **Arm Accuracy Super Resolution (Arm ASR)** in your custom engine. 
 
-There are two ways you can integrate Arm ASR into your custom engine:
+Arm ASR is an optimized variant of [Fidelity Super Resolution 2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md) (FSR2) that includes extensive mobile-specific optimizations, ensuring high performance on mobile devices.
 
-- [Quick integration](#quick-integration) - using the built-in standalone backend.
-- [Tight integration](#tight-integration) - using your own backend/renderer.
+You can integrate Arm ASR into your custom engine using one of two methods:
 
-Then refer to the following sections to learn how to configure Arm ASR:
+1. [Quick Integration](#quick-integration) - use the standalone backend.
+2. [Tight Integration](#tight-integration) - use your engine's backend/renderer.
 
-- [Quality presets](#quality-presets)
-- [Performance](#performance)
-- [Shader variants and Extensions](#shader-variants-and-extensions)
-- [Input resources](#input-resources)
-- [Providing motion vectors](#providing-motion-vectors)
-- [Reactive mask](#reactive-mask)
-- [Automatically generating reactivity](#automatically-generating-reactivity)
-- [Modular backend](#modular-backend)
-- [Camera jitter](#camera-jitter)
-- [Camera jump cuts](#camera-jump-cuts)
-- [Mipmap biasing](#mipmap-biasing)
-- [Frame Time Delta Input](#frame-time-delta-input)
-- [HDR support](#hdr-support)
-- [API Debug Checker](#debug-checker)
-- [Extended ffx_shader_compiler](#extended-ffx_shader_compiler)
-- [Generate prebuilt shaders](#generate-prebuilt-shaders)
+See the following sections to learn how to configure Arm ASR:
+
+- [Quality presets](#quality-presets).
+- [Performance](#performance).
+- [Shader variants and extensions](#shader-variants-and-extensions).
+- [Input resources](#input-resources).
+- [Providing motion vectors](#providing-motion-vectors).
+- [Reactive mask](#reactive-mask).
+- [Automatically generating reactivity](#automatically-generating-reactivity).
+- [Modular backend](#modular-backend).
+- [Camera jitter](#camera-jitter).
+- [Camera jump cuts](#camera-jump-cuts).
+- [Mipmap biasing](#mipmap-biasing).
+- [Frame time delta input](#frame-time-delta-input).
+- [HDR support](#hdr-support).
+- [API debug checker](#debug-checker).
+- [Extended ffx_shader_compiler](#extended-ffx_shader_compiler).
+- [Generate prebuilt shaders](#generate-prebuilt-shaders).
 
 ## Get the Arm ASR package
 
@@ -40,33 +42,39 @@ Then refer to the following sections to learn how to configure Arm ASR:
 
     ```
     git clone https://github.com/arm/accuracy-super-resolution-generic-library
+    cd accuracy-super-resolution-generic-library
     ```
 
-2. For the purposes of this tutorial, we will set a variable to identify the location of the Arm ASR package. This path will be used to refer to files in the repository throughout this learning path.
+2. Set a variable for the package location for easy reference. 
+
+    You will use this path to refer to files in the repository:
 
     ```
-    export $ARMASR_DIR=$(pwd)
+    export ARMASR_DIR=$(pwd)
     ```
 
-## Quick integration
+## 1. Quick Integration
 
-To quickly integrate Arm ASR, which means the built-in standalone backend is used, follow the steps below:
+To quickly integrate Arm ASR using the standalone backend, follow these steps below:
 
-1. Copy the **Arm_ASR** directory into your project, and add **Arm_ASR/src/backends/shared/blob_accessors/prebuilt_shaders** in the include path if you want to use prebuilt shaders.
+1. Copy the **Arm_ASR** directory into your project, and add `Arm_ASR/src/backends/shared/blob_accessors/prebuilt_shaders` to your include path to use prebuilt shaders.
 
-2. Include the following header files in your codebase where you wish to interact with the technique:
-
+2. Include the following header files in your code:
     - `$ARMASR_DIR/include/host/ffxm_fsr2.h`
     - `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h`
 
-3. Create a Vulkan backend.
-    - Allocate a Vulkan scratch buffer of the size returned by `ffxmGetScratchMemorySizeVK` in `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h`.
-    - Create `FfxmDevice` via `ffxmGetDeviceVK` in `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h`.
-    - Create `FfxmInterface` by calling `ffxmGetInterfaceVK` in `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h`.
 
-4. Create a context by calling `ffxmFsr2ContextCreate` in `$ARMASR_DIR/include/host/ffxm_fsr2.h`. The parameters structure should be filled out matching the configuration of your application.
 
-5. Each frame calls `ffxmFsr2ContextDispatch` via `$ARMASR_DIR/include/host/ffxm_fsr2.h` to record/execute the technique's workloads. The parameters structure should be filled out matching the configuration of your application.
+3. Create a Vulkan backend by:
+
+    - Allocating a Vulkan scratch buffer of the size returned by `ffxmGetScratchMemorySizeVK` (defined in `$ARMASR_DIR/include/host/backends/vk/ffxm_vk.h`).
+    - Creating a `FfxmDevice` using `ffxmGetDeviceVK`.
+    - Creating a `FfxmInterface` using `ffxmGetInterfaceVK`.
+
+
+4. Create a context by calling `ffxmFsr2ContextCreate` from `$ARMASR_DIR/include/host/ffxm_fsr2.h`. Ensure the parameters structure matches the configuration of your application.
+
+5. Call `ffxmFsr2ContextDispatch` every frame to record and execute workloads. Again, the parameters structure should match the configuration of your application.
 
 6. When your application is terminating (or you wish to destroy the context for another reason) you should call `ffxmFsr2ContextDestroy` accessed via `$ARMASR_DIR/include/host/ffxm_fsr2.h`. The GPU should be idle before calling this function.
 
@@ -82,11 +90,11 @@ To quickly integrate Arm ASR, which means the built-in standalone backend is use
 
 10. Finally, link the two built libraries (**Arm_ASR_api** and **Arm_ASR_backend**).
 
-## Tight integration
+## 2. Tight Integration
 
-If you wish to use your own backend/renderer, a tight integration with your engine is required. For this, a similar process to the [quick integration](#quick-integration) described above is required, but with the added requirement to fill the `FfxmInterface` accessed via `$ARMASR_DIR/include/host/ffxm_interface.h` with functions implemented on your end.
+If you wish to use your own backend/renderer, a tight integration with your engine is required. For this, a similar process to the [Quick Integration](#quick-integration) described above is required, but with the added requirement to fill the `FfxmInterface` accessed via `$ARMASR_DIR/include/host/ffxm_interface.h` with functions implemented on your end.
 
-In this approach the shaders are expected to be built by the engine. Arm ASR's shaders have been micro-optimized to use explicit 16-bit floating-point types. It is therefore advisable that the shaders are built using such types. For example,  `min16float` is used in High-level shader languag (HLSL) and `float16_t` in OpenGL Shading Language (GLSL). If you are using HLSL, define the following symbol with a value of `1`:
+In this approach the shaders are expected to be built by the engine. Arm ASR's shaders have been micro-optimized to use explicit 16-bit floating-point types. It is therefore advisable that the shaders are built using such types. For example,  `min16float` is used in High-level shader language (HLSL) and `float16_t` in OpenGL Shading Language (GLSL). If you are using HLSL, define the following symbol with a value of `1`:
 
 ```cpp
 #define FFXM_HLSL_6_2 1
@@ -112,7 +120,7 @@ In the following section, additional details for integrating Arm ASR are listed.
 The `FfxmFsr2ContextDescription` from `$ARMASR_DIR/include/host/ffxm_fsr2.h` is referenced multiple times throughout the Integration Guidelines. You should configure the `flags` field of this structure when modifying those bits, by setting the variables in `FfxmFsr2InitializationFlagBits`.
 {{% /notice %}}
 
-### HLSL-based workflows
+### HLSL-Based Workflows
 
 In an HLSL-based workflow using DirectX Shader Compiler to cross-compile to SPIR-V do the following:
 
@@ -124,7 +132,7 @@ In an HLSL-based workflow using DirectX Shader Compiler to cross-compile to SPIR
 
 - The extension **VK_KHR_shader_float16_int8** should be used at runtime.
 
-## Quality presets
+## Quality Presets
 
 The Arm ASR API provides a set of shader quality presets, to select a version of the technique that balances  quality and performance:
 
@@ -136,7 +144,7 @@ The Arm ASR API provides a set of shader quality presets, to select a version of
 
 When creating a context, a `FfxmFsr2ShaderQualityMode` accessed via `$ARMASR_DIR/include/host/ffxm_fsr2.h` needs to be provided as part of the input settings in `FfxmFsr2ContextDescription`.
 
-## Upscaling ratios
+## Upscaling Ratios
 
 To enhance flexibility when using the technique, developers can specify both a shader quality preset and an upscaling ratio. They can select any combination of **FfxmFsr2ShaderQualityMode** and **FfxmFsr2UpscalingRatio** according to their requirements to adjust the balance between quality and performance of the application.
 
@@ -183,29 +191,29 @@ table {
 |           |             | 1.7x | <span style="color: #8fff00;">3.7 ms</span> | <span style="color: #55ff00;">2.1 ms</span> |
 |           |             | 2x   | <span style="color: #8fff00;">3.6 ms</span> | <span style="color: #55ff00;">2 ms  </span> |
 
-## Shader variants and Extensions
+## Shader Variants and Extensions
 
 **Unless you are using the prebuilt shaders with the standalone VK backend**, be aware of the following definitions when integrating Arm ASR shaders:
 
 - **FFXM_GPU**. Needs to be defined globally when including the shader headers.
-- **FFXM_HLSL**. If defined, the logic will fallback to use the **HLSL** specific syntax (i.e types, resource declaration ...).
-- **FFXM_GLSL**. If defined, the logic will fallback to use the **GLSL** specific syntax (i.e types, resource declaration ...).
+- **FFXM_HLSL**. If defined, the logic falls back to use the **HLSL**-specific syntax, such as types and resource declaration.
+- **FFXM_GLSL**. If defined, the logic falls back to use the **GLSL**-specific syntax.
 
-The following table shows the list of the different shader mutators that can be used. All of them must be defined with a value of 0 or 1. Which shader variant to use is guided internally by **getPipelinePermutationFlags(...)** based on things like the user's flags and shader quality.
+The following table shows the list of the different shader mutators that you can use. All of these must be defined with a value of 0 or 1. The shader variant to use is determined internally by the **getPipelinePermutationFlags(...)** function, based on factors such as user-defined flags and shader quality settings.
 
 | Define | Description |
 | -------- | ------- |
-| FFXM_FSR2_OPTION_HDR_COLOR_INPUT | If **1**, will assume that the input color is in linear RGB. |
-| FFXM_FSR2_OPTION_LOW_RESOLUTION_MOTION_VECTORS | If **1**, will assume the input motion vectors texture is in low resolution |
-| FFXM_FSR2_OPTION_JITTERED_MOTION_VECTORS | If **1**, will assume jittered motion vectors using the same jitter offsets as the input color and depth. |
-| FFXM_FSR2_OPTION_INVERTED_DEPTH | If **1**, it will assume the input depth containing reversed depth values (far == 0.0f) |
+| FFXM_FSR2_OPTION_HDR_COLOR_INPUT | If **1**, assumes that the input color is in linear RGB. |
+| FFXM_FSR2_OPTION_LOW_RESOLUTION_MOTION_VECTORS | If **1**, assumes the input motion vectors texture is in low resolution |
+| FFXM_FSR2_OPTION_JITTERED_MOTION_VECTORS | If **1**, assumes jittered motion vectors using the same jitter offsets as the input color and depth. |
+| FFXM_FSR2_OPTION_INVERTED_DEPTH | If **1**, assumes the input depth containing reversed depth values (far == 0.0f) |
 | FFXM_FSR2_OPTION_APPLY_SHARPENING | If **1**, informs the shaders that RCAS (sharpening) pass will be used. |
 | FFXM_FSR2_OPTION_SHADER_OPT_BALANCED | If **1**, enables a batch of optimizations when the **Balanced** quality preset is selected. |
-| FFXM_FSR2_OPTION_SHADER_OPT_PERFORMANCE | If **1**,  enables a batch of optimizations when the **Performance** quality preset is selected. When this is enabled then **FFXM_FSR2_OPTION_SHADER_OPT_BALANCED** will be enabled too. |
+| FFXM_FSR2_OPTION_SHADER_OPT_PERFORMANCE | If **1**,  enables a batch of optimizations when the **Performance** quality preset is selected. When this is enabled, then **FFXM_FSR2_OPTION_SHADER_OPT_BALANCED** is enabled too. |
 
-Lastly, when using an HLSL-based workflow, we also have the **FFXM_HLSL_6_2** global define. If defined with a value of **1**, this will enable the use of explicit 16-bit types instead of relying on **half** (RelaxedPrecision). The **VK_KHR_shader_float16_int8** extension is required on Vulkan.
+Lastly, when using an HLSL-based workflow, you also have the **FFXM_HLSL_6_2** global define. If defined with a value of **1**, this will enable the use of explicit 16-bit types instead of relying on **half** (RelaxedPrecision). The **VK_KHR_shader_float16_int8** extension is required on Vulkan.
 
-## Input resources
+## Input Resources
 
 Arm ASR is a temporal algorithm, and therefore requires access to data from both the current and previous frame. The following table enumerates all external inputs required by it, with most function names available in `$ARMASR_DIR/include/host/ffxm_fsr2.h`.
 
@@ -213,7 +221,7 @@ The resolution column indicates if the data should be at 'rendered' resolution o
 
 | Name            | Resolution                   |  Format                            | Type      | Notes                                          |
 | ----------------|------------------------------|------------------------------------|-----------|------------------------------------------------|
-| Color buffer    | Render                       | `APPLICATION SPECIFIED`            | Texture   | The current frame’s color data for the current frame. If HDR, enable `FFXM_FSR2_ENABLE_HIGH_DYNAMIC_RANGE` in `FfxmFsr2ContextDescription`. |
+| Color buffer    | Render                       | `APPLICATION SPECIFIED`            | Texture   | The current frame’s color data. If HDR, enable `FFXM_FSR2_ENABLE_HIGH_DYNAMIC_RANGE` in `FfxmFsr2ContextDescription`. |
 | Depth buffer    | Render                       | `APPLICATION SPECIFIED (1x FLOAT)` | Texture   | The depth buffer for the current frame. The data should be provided as a single floating point value, the precision of which is under the application's control. Configure the depth through the `FfxmFsr2ContextDescription` when creating the `FfxmFsr2Context`. If the buffer is inverted, set `FFXM_FSR2_ENABLE_DEPTH_INVERTED` flag ([1..0] range). If the buffer has an infinite far plane, set the `FFXM_FSR2_ENABLE_DEPTH_INFINITE`. If the application provides the depth buffer in `D32S8` format, then it will ignore the stencil component of the buffer, and create an `R32_FLOAT` resource to address the depth buffer. |
 | Motion vectors  | Render or presentation       | `APPLICATION SPECIFIED (2x FLOAT)` | Texture   | The 2D motion vectors for the current frame, in **[<-width, -height> ... <width, height>]** range. If your application renders motion vectors with a different range, you may use the `motionVectorScale` field of the `FfxmFsr2DispatchDescription` structure to adjust them to match the expected range for Arm ASR. Internally, Arm ASR uses 16-bit quantities to represent motion vectors in many cases, which means that while motion vectors with greater precision can be provided, Arm ASR will not benefit from the increased precision. The resolution of the motion vector buffer should be equal to the render resolution, unless the `FFXM_FSR2_ENABLE_DISPLAY_RESOLUTION_MOTION_VECTORS` flag is set when creating the `FfxmFsr2Context`, in which case it should be equal to the presentation resolution. |
 | Reactive mask   | Render                       | `R8_UNORM`                         | Texture   | As some areas of a rendered image do not leave a footprint in the depth buffer or include motion vectors, Arm ASR provides support for a reactive mask texture.  This can be used to indicate to the technique where such areas are. Good examples of these are particles, or alpha-blended objects which do not write depth or motion vectors. If this resource is not set, then Arm ASR's shading change detection logic will handle these cases as best it can, but for optimal results, this resource should be set. For more information on the reactive mask please refer to the [Reactive mask](#reactive-mask) section.  |
@@ -221,7 +229,7 @@ The resolution column indicates if the data should be at 'rendered' resolution o
 
 All inputs that are provided at Render Resolution, except for motion vectors, should be rendered with jitter. By default, Motion vectors are expected to be unjittered unless the `FFXM_FSR2_ENABLE_MOTION_VECTORS_JITTER_CANCELLATION` flag is present.
 
-## Providing motion vectors
+## Providing Motion Vectors
 
 ### Space
 
@@ -241,7 +249,7 @@ dispatchParameters.motionVectorScale.x = (float)renderWidth;
 dispatchParameters.motionVectorScale.y = (float)renderHeight;
 ```
 
-### Precision & resolution
+### Precision and Resolution
 
 Internally, Arm ASR uses 16-bit quantities to represent motion vectors in many cases, which means that while motion vectors with greater precision can be provided, it will not currently benefit from the increased precision. The resolution of the motion vector buffer should be equal to the render resolution. If the `FFXM_FSR2_ENABLE_DISPLAY_RESOLUTION_MOTION_VECTORS` flag is set in `FfxmFsr2ContextDescription` when creating the `FfxmFsr2Context`, it should be equal to the presentation resolution.
 
@@ -249,7 +257,7 @@ Internally, Arm ASR uses 16-bit quantities to represent motion vectors in many c
 
 Arm ASR will perform better quality upscaling when more objects provide their motion vectors. It is therefore advised that all opaque, alpha-tested and alpha-blended objects should write their motion vectors for all covered pixels. If vertex shader effects are applied, such as scrolling UVs, these calculations should also be factored into the calculation of motion for the best results. For alpha-blended objects it is also strongly advised that the alpha value of each covered pixel is stored to the corresponding pixel in the [reactive mask](#reactive-mask). This will allow the technique to perform better handling of alpha-blended objects during upscaling. The reactive mask is especially important for alpha-blended objects where writing motion vectors might be prohibitive, such as particles.
 
-## Reactive mask
+## Reactive Mask
 
 In the context of Arm ASR, the term "reactivity" means how much influence the samples rendered for the current frame have over the production of the final upscaled image. Typically, samples rendered for the current frame contribute a relatively modest amount to the result computed by the algorithm; however, there are exceptions. As there is no good way to determine from either color, depth or motion vectors which pixels have been rendered using alpha blending, Arm ASR performs best when applications explicitly mark such areas.
 
@@ -263,7 +271,7 @@ If a reactive mask is not provided then an internally generated `1x1` texture wi
 
 ## Automatically generating reactivity
 
-To help applications generate the reactive mask, we provide an optional utility pass. Under the hood, the API launches a fragment shader which computes these values for each pixel using a luminance-based heuristic.
+To help applications generate the reactive mask, there is an optional utility pass. Under the hood, the API launches a fragment shader which computes these values for each pixel using a luminance-based heuristic.
 
 To do this, the applications can call the `ffxmFsr2ContextGenerateReactiveMask` (`$ARMASR_DIR/include/host/ffxm_fsr2.h`) function and should pass two versions of the color buffer: one containing opaque only geometry, and the other containing both opaque and alpha-blended objects.
 
@@ -271,15 +279,15 @@ To do this, the applications can call the `ffxmFsr2ContextGenerateReactiveMask` 
 
 Arm ASR provides two values which control the exposure used when performing upscaling:
 
-1. **Pre-exposure**: a value by which we divide the input signal to get back to the original signal produced by the game before any packing into lower precision render targets.
+1. **Pre-exposure**: a value by which you can divide the input signal to get back to the original signal produced by the game before any packing into lower precision render targets.
 
 2. **Exposure**: a value which is multiplied against the result of the pre-exposed color value.
 
 The exposure value should match that which the application uses during any subsequent tonemapping passes performed by the application. This means Arm ASR will operate consistently with what is likely to be visible in the final tonemapped image.
 
-{{% notice %}}
+{{%notice%}}
 In various stages of the algorithm, the technique will compute its own exposure value for internal use. It is worth noting that all outputs will have this internal tonemapping reversed before the final output is written. Meaning that Arm ASR returns results in the same domain as the original input signal.
-{{% /notice %}}
+{{%/notice%}}
 
 Poorly selected exposure values can have a drastic impact on the final quality of Arm ASR's upscaling. Therefore, it is recommended that `FFXM_FSR2_ENABLE_AUTO_EXPOSURE` is used by the application, unless there is a particular reason not to. When `FFXM_FSR2_ENABLE_AUTO_EXPOSURE` is set in the `FfxmFsr2ContextDescription` structure, the exposure calculation in `ComputeAutoExposureFromLavg` (`$ARMASR_DIR/include/gpu/fsr2/ffxm_fsr2_common.h`) is used to compute the exposure value, which matches the exposure response of ISO 100 film stock.
 
@@ -324,13 +332,13 @@ Whether you decide whether to use the recommended `ffxmFsr2GetJitterOffset` func
 
 ## Camera jump cuts
 
-Most applications with real-time rendering have a large degree of temporal consistency between any two consecutive frames. However, there are cases where a change to a camera's transformation might cause an abrupt change in what is rendered. In such cases, Arm ASR is unlikely to be able to reuse any data it has accumulated from previous frames, and should clear this data such to exclude it from consideration in the compositing process. In order to indicate that a jump cut has occurred with the camera you should set the `reset` field of the `FfxmFsr2DispatchDescription` structure to `true` for the first frame of the discontinuous camera transformation.
+Most applications with real-time rendering have a large degree of temporal consistency between any two consecutive frames. However, there are cases where a change to a camera's transformation might cause an abrupt change in what is rendered. In such cases, Arm ASR is unlikely to be able to reuse any data it has accumulated from previous frames, and should clear this data in order to exclude it from consideration in the compositing process. In order to indicate that a jump cut has occurred with the camera you should set the `reset` field of the `FfxmFsr2DispatchDescription` structure to `true` for the first frame of the discontinuous camera transformation.
 
 Rendering performance may be slightly less than typical frame-to-frame operation when using the reset flag, as Arm ASR will clear some additional internal resources.
 
 ## Mipmap biasing
 
-Applying a negative mipmap biasing will typically generate an upscaled image with better texture detail. We recommend applying the following formula to your Mipmap bias:
+Applying a negative mipmap biasing will typically generate an upscaled image with better texture detail. It is recommended that you apply the following formula to your Mipmap bias:
 
 ``` CPP
 mipBias = log2(renderResolution/displayResolution) - 1.0;
@@ -352,11 +360,11 @@ The context description structure can be provided with a callback function for p
 
 ## Extended ffx_shader_compiler
 
-Most of the workloads in the upscalers have been converted to fragment shaders. Since the workflow using the standalone VK backend relies in reflection data generated with [`AMD's Shader Compiler`](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/tools/ffx-sc.md), it become necessary to do an ad-hoc extension of the tool to provide reflection data for the RenderTargets so resources could be resolved automatically in the backend. Users might want to evolve the algorithm potentially changing the RenderTargets in the process. Thus, a diff file is provided with the changes that were applied locally `ffx_shader_compiler` (`$ARMASR_DIR/tools/ffx_shader_compiler.diff`) for the latest version of the technique.
+Most of the workloads in the upscalers have been converted to fragment shaders. Since the workflow using the standalone VK backend relies on reflection data generated with [`AMD's Shader Compiler`](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/tools/ffx-sc.md), it becomes necessary to do an improvised extension of the tool to provide reflection data for the RenderTargets so resources could be resolved automatically in the backend. Users might want to evolve the algorithm potentially changing the RenderTargets in the process. Thus, a diff file is provided with the changes that were applied locally `ffx_shader_compiler` (`$ARMASR_DIR/tools/ffx_shader_compiler.diff`) for the latest version of the technique.
 
 ## Generate prebuilt shaders
 
-We provide a helper script to generate prebuilt shaders which are used for standalone backend. Make sure python is installed, and run it with the following command:
+There is a helper script provided to generate prebuilt shaders which are used for standalone backend. Make sure python is installed, and run it with the following command:
 
 ```bash
 python $ARMASR_DIR/tools/generate_prebuilt_shaders.py
@@ -366,11 +374,11 @@ You will find the output from the script in `$ARMASR_DIR/src/backends/shared/blo
 
 ## Targeting GLES 3.2
 
-Running Arm ASR on GLES is possible when using the [tight integration](#tight-integration) approach. In this scenario, you will have to apply two changes:
+Running Arm ASR on GLES is possible when using the [Tight Integration](#tight-integration) approach. In this scenario, you have to apply two changes:
 
-1. When creating the context, the user will have to specify the flag `FFXM_FSR2_OPENGL_ES_3_2` in the `FfxmFsr2ContextDescription`. This will trigger changes internally so that Arm ASR adapts to a GLES friendly approach.
+1. When creating the context, the user has to specify the flag `FFXM_FSR2_OPENGL_ES_3_2` in the `FfxmFsr2ContextDescription`. This triggers changes internally so that Arm ASR adapts to a GLES- friendly approach.
 
-1. The `permutationOptions` (`$ARMASR_DIR/include/host/ffxm_interface.h`) provided when creating the pipelines will now include the new permutation option `FSR2_SHADER_PERMUTATION_PLATFORM_GLES_3_2` (`$ARMASR_DIR/src/components/fsr2/ffxm_fsr2_private.h`). This is a hint to the user that they will need to use the shader variants for the technique with the following symbol defined:
+2. The `permutationOptions` (`$ARMASR_DIR/include/host/ffxm_interface.h`) provided when creating the pipelines now includes the new permutation option `FSR2_SHADER_PERMUTATION_PLATFORM_GLES_3_2` (`$ARMASR_DIR/src/components/fsr2/ffxm_fsr2_private.h`). This is a hint that you need to use the shader variants for the technique with the following symbol defined:
 
     ```
     #define FFXM_SHADER_PLATFORM_GLES_3_2 1
@@ -378,4 +386,4 @@ Running Arm ASR on GLES is possible when using the [tight integration](#tight-in
 
 ## Next steps
 
-You are now ready to use Arm ASR in your game engine projects. Go to the next section to explore more resources on Arm ASR.
+You are now ready to use Arm ASR in your game engine projects. Go to the next section to explore further resources on Arm ASR.
