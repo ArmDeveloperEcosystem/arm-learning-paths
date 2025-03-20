@@ -72,7 +72,7 @@ Make sure to replace 'x' with the version number of Python that you have install
 
 After running the code, you will see output similar to Figure 5:
 
-![image alt-text#center](Figures/01.png "Figure 5. Output".)
+![image alt-text#center](Figures/01.png "Figure 5. Output")
 
 ## Train the Model
 

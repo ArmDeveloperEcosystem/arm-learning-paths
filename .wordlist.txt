@@ -3705,7 +3705,6 @@ HMMER
 ILP
 IoC
 Jython
-Khrustalev
 LCP
 Maranget
 Minimap
