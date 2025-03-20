@@ -92,7 +92,7 @@ To quickly integrate Arm ASR using the standalone backend, follow these steps be
 
 ## 2. Tight Integration
 
-If you wish to use your own backend/renderer, a tight integration with your engine is required. For this, a similar process to the [quick integration](#quick-integration) described above is required, but with the added requirement to fill the `FfxmInterface` accessed via `$ARMASR_DIR/include/host/ffxm_interface.h` with functions implemented on your end.
+If you wish to use your own backend/renderer, a tight integration with your engine is required. For this, a similar process to the [Quick Integration](#quick-integration) described above is required, but with the added requirement to fill the `FfxmInterface` accessed via `$ARMASR_DIR/include/host/ffxm_interface.h` with functions implemented on your end.
 
 In this approach the shaders are expected to be built by the engine. Arm ASR's shaders have been micro-optimized to use explicit 16-bit floating-point types. It is therefore advisable that the shaders are built using such types. For example,  `min16float` is used in High-level shader language (HLSL) and `float16_t` in OpenGL Shading Language (GLSL). If you are using HLSL, define the following symbol with a value of `1`:
 
@@ -360,7 +360,7 @@ The context description structure can be provided with a callback function for p
 
 ## Extended ffx_shader_compiler
 
-Most of the workloads in the upscalers have been converted to fragment shaders. Since the workflow using the standalone VK backend relies on reflection data generated with [`AMD's Shader Compiler`](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/tools/ffx-sc.md), it become necessary to do an ad-hoc extension of the tool to provide reflection data for the RenderTargets so resources could be resolved automatically in the backend. Users might want to evolve the algorithm potentially changing the RenderTargets in the process. Thus, a diff file is provided with the changes that were applied locally `ffx_shader_compiler` (`$ARMASR_DIR/tools/ffx_shader_compiler.diff`) for the latest version of the technique.
+Most of the workloads in the upscalers have been converted to fragment shaders. Since the workflow using the standalone VK backend relies on reflection data generated with [`AMD's Shader Compiler`](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/tools/ffx-sc.md), it becomes necessary to do an improvised extension of the tool to provide reflection data for the RenderTargets so resources could be resolved automatically in the backend. Users might want to evolve the algorithm potentially changing the RenderTargets in the process. Thus, a diff file is provided with the changes that were applied locally `ffx_shader_compiler` (`$ARMASR_DIR/tools/ffx_shader_compiler.diff`) for the latest version of the technique.
 
 ## Generate prebuilt shaders
 
@@ -374,7 +374,7 @@ You will find the output from the script in `$ARMASR_DIR/src/backends/shared/blo
 
 ## Targeting GLES 3.2
 
-Running Arm ASR on GLES is possible when using the [tight integration](#tight-integration) approach. In this scenario, you have to apply two changes:
+Running Arm ASR on GLES is possible when using the [Tight Integration](#tight-integration) approach. In this scenario, you have to apply two changes:
 
 1. When creating the context, the user has to specify the flag `FFXM_FSR2_OPENGL_ES_3_2` in the `FfxmFsr2ContextDescription`. This triggers changes internally so that Arm ASR adapts to a GLES- friendly approach.
 
