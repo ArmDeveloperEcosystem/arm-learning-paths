@@ -24,7 +24,7 @@ Open up a Windows PowerShell or Git Bash and checkout the source tree:
 cd C:\Users\$env:USERNAME
 git clone https://github.com/HenryDen/MNN.git
 cd MNN
-git checkout 83b650fc8888d7ccd38dbc68330a87d048b9fe7a
+git checkout origin/MNN_commit
 ```
 
 {{% notice Note %}}
@@ -33,28 +33,15 @@ The app code is currently not merged into the MNN repo. The repo above is a fork
 
 ## Build the app using Android Studio
 
-Create a signing.gradle file at android/app with the following template: 
-```shell
-ext{
-    signingConfigs = [
-        release: [
-            storeFile: file('PATH_TO_jks_file'),
-            storePassword: "****",
-            keyAlias: "****",
-            keyPassword: "****"
-        ]
-    ]
-}
-```
+Open Android Studio
 
-If you don't need to compile a release version of the app, you can skip the following step of creating a sign file and write anything in the signing.gradle.
+- Navigate to **Open**.
+- Browse the folder to the MNN/transformers/llm/engine/android, it will be android icon as picture show,
+- Press **OK** to load the android project
+- Wait for a while till the Gradle sync finish
 
-- Navigate to **Build -> Generate Signed App Bundle or APK**.
-- Select **APK** and click **next**.
-- Press **Create new** and  fill in the information..
-- Fill in the information of the newly generated JKS file in the template above.
+![Loading screenshot](open_project.png)
 
-Open the MNN/transformers/llm/engine/android directory with Android Studio and wait for the Gradle project sync to finish.
 
 ## Prepare the model
 You can download the model from ModelScope : https://www.modelscope.cn/models/qwen/qwen2-vl-2b-instruct
@@ -79,7 +66,7 @@ $ llmexport --path /path/to/mnn-llm/Qwen2-VL-2B-Instruct/ --export mnn --quant_b
 - --sym: the quantization parameter, means symmetrical quantization.
 
 ## Build and run the app
-Before launching the app, you need to push the model into the device manually:
+Before launching the app, you need to push the model into the device manually, connect the android device with the host PC with usb, and make sure the USB debugging is enable in the android device:
 
 ```shell
 $ adb shell mkdir /data/local/tmp/models/
