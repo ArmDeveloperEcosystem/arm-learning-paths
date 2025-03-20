@@ -80,7 +80,7 @@ Before writing the code make sure you have the following tools installed:
 1. Python (≥3.8 recommended) ([download](https://www.python.org/downloads/))
 2. Azure Functions Core Tools ([installation guide](https://learn.microsoft.com/en-gb/azure/azure-functions/functions-run-local?tabs=macos%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-python))
 3. Azure CLI ([installation guide](https://learn.microsoft.com/en-gb/cli/azure/install-azure-cli))
-4. A code editor, such as Visual Studio Code.
+4. Visual Studio Code.
 
 Ensure Azure Functions Core Tools are properly installed by running:
 ```console
@@ -93,54 +93,91 @@ func --version
 4.0.6821
 ```
 
+Ensure you also see a v4.x.x output, indicating compatibility with Python v2 model.
+
 ## Create Azure Function to Read Cosmos DB Data 
+Follow these steps to create an Azure Function locally using Visual Studio Code:
+1. In Visual Studio Cod, click View->Command Palette... 
+2. Type "Create Function":
+![img27 alt-text#center](Figures/27.png)
+3. Select Azure Functions: Create Function...
+4. Select folder for your new function. For example create a new folder Arm.AzureIoT.AzureFunctions
+5. Visual Studio Code will display the wizard, which enables you to configure your function:
+![img28 alt-text#center](Figures/28.png)
+6. Use this wizard to configure the function:
+* Select a language: pick Python
+* Select a Python programming model: Model V2 (Recommended)
+* Select a Python interpreter to create a virtual environment: select python3
+* Select a template for your project's first function: CosmosDB trigger
+* Name of the function you want to create: keep default (cosmosdb_trigger)
+* Name of the container to be monitored: SensorReadings (or the one you created during Azure Cosmos DB provisioning)
+* Name of the Cosmos DB database that includes the container to be monitored: IoTDatabaee (or the one you created during Azure Cosmos DB provisioning)
+* Select the app setting with your Cosmos DB account connection string from "local.settings.json: Select + Create new local app setting
+* Select your Azure subscription, and then select a database account (armiotcosmosdb or the one you used during Azure Cosmos DB provisioning)
+* Select how you would like to open your project: Open in current window
 
-1. Open a terminal and run these commands:
+Visual Studio Code will create the following files:
+* function_app.py - this primary function code file. In the Azure Functions Python V2 programming model, bindings and triggers are defined using Python decorators directly within this file
+* local.settings.json - this file is specifically used for local development, storing connection strings, app settings, and environment variables. It’s not deployed to Azure, so it’s safe to include sensitive data (like connection strings) locally for testing purpose.
+* host.json - defines global configuration settings that affect the behavior of your entire Azure Functions application. Examples include function timeout limits, logging levels, and concurrency settings
+* requirements.txt - this file lists all Python packages and dependencies required by your function app. Azure Functions uses this file to automatically install the necessary Python packages when deploying the function to Azure
+
+### Modify Function Code
+You will now modify the function code to check whether the temperature of the new sensor readings is above a threshold. To do so, open the function_app.py and modify it as follows:
+
+```Python
+import azure.functions as func
+import logging
+
+app = func.FunctionApp()
+
+TEMPERATURE_THRESHOLD = 28.0 
+
+@app.cosmos_db_trigger(arg_name="azcosmosdb", container_name="SensorReadings",
+                        database_name="IoTDatabase", connection="armiotcosmosdb_DOCUMENTDB")  
+def cosmosdb_trigger(azcosmosdb: func.DocumentList):
+    logging.info('Python CosmosDB triggered.')
+    if azcosmosdb:
+        for doc in azcosmosdb:
+            device_id = doc.get("deviceId")
+            temperature = float(doc.get("temperature", 0))
+            timestamp = doc.get("timestamp")
+
+            if temperature > TEMPERATURE_THRESHOLD:
+                logging.warning(
+                    f"High temperature detected! Device: {device_id}, "
+                    f"Temperature: {temperature}°C at {timestamp}"
+                )
+            else:
+                logging.info(
+                    f"Temperature within limits. Device: {device_id}, "
+                    f"Temperature: {temperature}°C at {timestamp}"
+                )
+```
+
+This Azure Function is designed to automatically process and monitor sensor data stored in Azure Cosmos DB. It begins by importing the required Azure Functions libraries and Python’s built-in logging module. Then, it initializes a function app object, which serves as a container for defining and managing Azure Functions.
+
+Next, the code defines a global temperature threshold (TEMPERATURE_THRESHOLD) of 28.0°C, which is used to determine whether incoming sensor readings require attention.
+
+The core of the function is triggered automatically by Azure Cosmos DB whenever new sensor readings are added or updated in the specified database (IoTDatabase) and container (SensorReadings). When triggered, the function receives these new documents (items) as a list of sensor readings, represented by azcosmosdb. For each document in this list, the function extracts deviceId, temperature, and timestamp.
+
+After extracting these values, the function compares each sensor’s temperature reading against the predefined threshold. If the temperature exceeds the threshold, a warning is logged. If the temperature remains within safe limits, an informational log message is recorded instead, confirming normal operating conditions for the device.
+
+### Run and Test Your Function Locally
+To run your function locally proceed as follows:
+1. In the Terminal navigate to the folder, in which you saved the function (here that is Arm.AzureIoT.AzureFunctions).
+2. Type the following command:
+
 ```console
-func init Arm64.IoTFunctionProject --python
+func start
 ```
 
-The output should look as follows:
-```output
-Found Python version 3.10.11 (python3).
-The new Python programming model is generally available. Learn more at https://aka.ms/pythonprogrammingmodel
-Writing requirements.txt
-Writing function_app.py
-Writing .gitignore
-Writing host.json
-Writing local.settings.json
-Writing /Users/db/Repos/Arm64.IoTFunctionProject/.vscode/extensions.json
-```
+3. Run the iot_simulator.py in a separate terminal window.
 
-2. Navigate to the newly created folder
-```console
-cd Arm64.IoTFunctionProject
-```
+You should then see the following logs, depending on the generated temperature values:
 
-3. Add a Cosmos DB triggered function that will automatically run whenever new data arrives:
-```
-func new --name CheckTemperature --template "Azure Cosmos DB trigger"
-```
+![img29 alt-text#center](Figures/29.png)
 
-Select python, when prompted:
+### Monitoring
 
-```output
-Select a number for worker runtime:
-1. dotnet (isolated worker model)
-2. dotnet (in-process model)
-3. node
-4. python
-5. powershell
-6. custom
-Choose option: 4
-python
-Found Python version 3.10.11 (python3).
-The new Python programming model is generally available. Learn more at https://aka.ms/pythonprogrammingmodel
-Writing requirements.txt
-Writing function_app.py
-Writing .gitignore
-Writing host.json
-Writing local.settings.json
-Writing /Users/db/Repos/.vscode/extensions.json
-```
 ## Summary and Next Steps
