@@ -15,6 +15,9 @@ This example has been tested on [AWS EC2](https://aws.amazon.com/ec2/) and [Ampe
 
 ## Installation
 
+This learning path requires Docker to run OpenAD Kit.
+You can refer to [here](https://learn.arm.com/install-guides/docker/) to learn how to install Docker on an Arm platform.
+
 First, verify whether Docker is installed on your development environment by running:
 
 ```bash
@@ -26,8 +29,6 @@ If Docker is installed, it will display version information similar to the outpu
 ```output
 Docker version 27.2.0, build 3ab4256
 ```
-
-This example requires Docker to run OpenAD Kit. You can refer to [here](https://learn.arm.com/install-guides/docker/) to learn how to install Docker on an Arm platform.
 
 Clone the demo repository using:
 
