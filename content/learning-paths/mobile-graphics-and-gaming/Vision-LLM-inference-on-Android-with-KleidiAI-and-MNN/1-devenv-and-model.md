@@ -78,7 +78,7 @@ The table below gives you an explanation of the different arguments:
 
 To learn more about the parameters, refer to the [transformers README.md](https://github.com/alibaba/MNN/tree/master/transformers).
 
-Verify the model is built correct by checking the size of the resulting model. The `Qwen2-VL-2B-Instruct-convert-4bit-per_channel` directory should be atleast 1 GB in size.
+Verify the model is built correct by checking the size of the resulting model. The `Qwen2-VL-2B-Instruct-convert-4bit-per_channel` directory should be at least 1 GB in size.
 
 Push the model onto the device:
 

@@ -77,12 +77,12 @@ The image features a tiger standing in a grassy field, with its front paws raise
 #################################
 prompt tokens num = 243
 decode tokens num = 70
- vision time = 5.96 s
+ vision time = 5.76 s
   audio time = 0.00 s
-prefill time = 1.80 s
- decode time = 2.09 s
-prefill speed = 135.29 tok/s
- decode speed = 33.53 tok/s
+prefill time = 1.26 s
+ decode time = 2.02 s
+prefill speed = 192.28 tok/s
+ decode speed = 34.73 tok/s
 ##################################
 ```
 
@@ -113,13 +113,27 @@ export LD_LIBRARY_PATH=$PWD
 ./llm_demo models/Qwen-VL-2B-convert-4bit-per_channel/config.json prompt
 ```
 
+The same output should be displayed, with the benchmark printed at the end:
+```output
+#################################
+prompt tokens num = 243
+decode tokens num = 70
+ vision time = 2.91 s
+  audio time = 0.00 s
+prefill time = 0.91 s
+ decode time = 1.56 s
+prefill speed = 266.13 tok/s
+ decode speed = 44.96 tok/s
+##################################
+```
+
 This time, you should see an improvement in the benchmark. Below is an example table showing the uplift on three relevant metrics after enabling the KleidiAI kernels.
 
 | Benchmark           | Without KleidiAI | With KleidiAI |
 |---------------------|------------------|---------------|
-| Vision Process Time | 5.45s            | 5.43 s        |
-| Prefill Speed       | 132.35 tok/s     | 148.30 tok/s  |
-| Decode Speed        | 21.61 tok/s      | 33.26 tok/s   |
+| Vision Process Time | 5.76 s           | 2.91 s        |
+| Prefill Speed       | 192.28 tok/s     | 266.13 tok/s  |
+| Decode Speed        | 34.73 tok/s      | 44.96 tok/s   |
 
 The prefill speed describes how fast the model processes the input prompt. The decode speed corresponds to the rate at which the model generates new tokens after the input is processed
 
