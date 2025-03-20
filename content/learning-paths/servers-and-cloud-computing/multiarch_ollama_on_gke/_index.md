@@ -1,32 +1,27 @@
 ---
-title: Run ollama in a multi-architecture nodes and containers environment with on GKE.
+title: Run ollama on both arm64 and amd64 nodes, using the same multi-architecture container image on GKE.
 
 minutes_to_complete: 30
 
-who_is_this_for: |
-  This learning path is for those interested in learning how to easily migrate from a single platform (amd64) Kubernetes cluster to a hybrid (Arm and amd64) cluster with multi-architectural images on GKE, specifically with ollama.
-  
-    Although tutorial will be GKE-specific with ollama, the provided YAML will work with any deployment on any on any cloud. 
+who_is_this_for:  Ever considered running your Kubernetes (k8s) workloads on arm64, but didn't know what was involved?  If so, this learning path will show you how easy it is to run arm64 alone, or alongside amd64 node types.  You'll see how easy it is to migrate from homogenous amd64 k8s clusters, to a hybrid (arm64 and amd64) cluster with multi-architectural container images on GKE, specifically with the ollama application.  Once you see for yourself the price/performance advantages of running on arm64, the same knowledge can be applied to spinning up homogenous arm64 clusters, or migrating your clusters from amd64 to arm64. Although tutorial will be GKE-specific with ollama, the provided YAML will work with any deployment on any on any cloud.
 
-  In this learning path, you will learn how to setup a GKE cluster with both amd64 and Arm-based nodes. With nodes running both architectures, you'll next deploy a popular free, open source tool called Ollama which makes it easy to run popular AIML models on any platform (on-prem, locally on your laptop, and on a cloud provider).
-  
-  Once you are running a multi-architecture cluster, you can take it to the next level to see price performance advantages of running your workloads on Arm vs amd64.  Experiment further by researching which existing, and upcoming workloads could benefit most from single, or multi-architectural clusters.
- 
 
 learning_objectives:
-  - Spin up a GKE cluster with an amd64 node.
-  - Apply an ollama-amd64-based Deployment and Service.
+  - Spin up a GKE cluster with an amd64.
+  - Apply an ollama amd64-based Deployment and Service.
   - Add a new, Arm-based Axion node to the cluster.
-  - Apply an ollama-arm-based Deployment to the existing Service.
-  - Learn how to use taints and tolerations on GKE clusters to schedule application pods on architecture-specific nodes
-  - Benchmark price/performance advantages of running your workloads on Arm vs amd64.
-  - Experiment further by researching which existing, and upcoming workloads could benefit most from single, or multi-architectural clusters.
+  - Apply an ollama-arm64-based Deployment to the existing Service.
+  - Issue queries to the arm64 and amd64 endpoints to witness performance first-hand.
+  - Analyze price/performance advantages of running your workloads on Arm vs amd64.
+  - Experiment further on your own by researching which existing, and future workloads could benefit most from single, or multi-architectural clusters.
 
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/).
     - A computer with [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/) installed.
     - The [GKE Cloud Plugin](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#gcloud)
-
+    - The [curl](https://curl.se/) utility
+    - The [jq](https://jqlang.org/) utility
+    - The [stdbuf](https://www.gnu.org/software/coreutils/manual/html_node/stdbuf-invocation.html) utility
 
 author:
     - Geremy Cohen
@@ -43,29 +38,49 @@ armips:
 
 operatingsystems:
     - Linux
+    - MacOs
 
 tools_software_languages:
-    - LLM
-    - ollama
-    - GenAI
+  - LLM
+      - ollama
+      - GenAI
 
 further_reading:
-    - resource:
-        title: Getting started with Llama
-        link: https://llama.meta.com/get-started
-        type: documentation
-    - resource:
-        title: Hugging Face Documentation
-        link: https://huggingface.co/docs
-        type: documentation
-    - resource:
-        title: Democratizing Generative AI with CPU-based inference 
-        link: https://blogs.oracle.com/ai-and-datascience/post/democratizing-generative-ai-with-cpu-based-inference
-        type: blog
-    - resource: 
-        title: Llama-2-7B-Chat-GGUF
-        link: https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF
-        type: website
+  - resource:
+      title: ollama - Get up and running with large language models
+      link: https://ollama.com/
+      type: documentation
+  - resource:
+      title: ollama API calls
+      link: https://github.com/ollama/ollama/blob/main/docs/api.md
+      type: documentation
+  - resource:
+      title: Dockerhub for Ollama
+      link: https://hub.docker.com/r/ollama/ollama
+      type: documentation
+  - resource:
+      title: ollama build docs
+      link: https://github.com/ollama/ollama/blob/main/docs/development.md
+      type: documentation
+  - resource:
+      title: Getting started with Llama
+      link: https://llama.meta.com/get-started
+      type: documentation
+  - resource:
+      title: Prepare to deploy an Arm workload in a Standard cluster
+      link: https://cloud.google.com/kubernetes-engine/docs/how-to/prepare-arm-workloads-for-deployment
+      type: documentation
+  - resource:
+      title: Create an External Load Balancer 
+      link: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/
+      type: documentation
+  - resource:
+      title: Install kubectl and configure cluster access on GKE
+      link: https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl
+      type: documentation
+
+    
+
 
 
 

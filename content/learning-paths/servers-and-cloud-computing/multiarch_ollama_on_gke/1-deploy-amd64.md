@@ -1,6 +1,6 @@
 ---
 title: Deploy ollama amd64 to the cluster
-weight: 2
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

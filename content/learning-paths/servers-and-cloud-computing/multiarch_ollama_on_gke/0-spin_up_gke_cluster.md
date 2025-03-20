@@ -1,6 +1,6 @@
 ---
 title: Spin up the GKE Cluster
-weight: 1
+weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

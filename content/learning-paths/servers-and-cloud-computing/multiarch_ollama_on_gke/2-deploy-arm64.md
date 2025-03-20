@@ -1,6 +1,6 @@
 ---
 title: Deploy ollama Arm64 to the cluster
-weight: 3
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
