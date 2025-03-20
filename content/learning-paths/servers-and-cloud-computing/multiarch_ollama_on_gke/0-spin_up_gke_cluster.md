@@ -30,7 +30,7 @@ TODO
 
 The *Cluster basics* tab appears.
 
-3. For *Name*, enter *ollama-on-arm*
+3. For *Name*, enter *ollama-on-multiarch*
 4. For *Region*, enter *us-central1*.
 
 ![Select and Configure Cluster Type](images/cluster_basics.png)
@@ -59,7 +59,7 @@ We've chosen node types that will support one pod per node.  If you wish to run 
 
 11. *Click* the *Create* button at the bottom of the screen.
 
-It will take a few moments, but when the green checkmark is showing next to the ollama-on-arm cluster, you're ready to continue to test your connection to the cluster.
+It will take a few moments, but when the green checkmark is showing next to the ollama-on-multiarch cluster, you're ready to continue to test your connection to the cluster.
 
 ### Connect to the cluster
 
@@ -71,7 +71,7 @@ You'll first setup your newly created K8s cluster credentials using the gcloud u
 
 ```bash
 export ZONE=us-central1
-export CLUSTER_NAME=ollama-on-Arm64
+export CLUSTER_NAME=ollama-on-multiarch
 export PROJECT_ID=YOUR_PROJECT_ID
 gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
 ```

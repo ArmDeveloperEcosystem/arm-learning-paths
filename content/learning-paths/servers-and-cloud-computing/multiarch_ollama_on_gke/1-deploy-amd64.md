@@ -86,7 +86,7 @@ Of particular interest is the *nodeSelector* *kubernetes.io/arch*, with the valu
 
 * A new load balancer Service *ollama-amd64-svc* is created, which targets all pods with the *arch: amd64* label (our amd64 deployment creates these pods.)
 
-A *sessionAffinity* tag was added to this Service to remove sticky connections to the target pods, so we can see each request hit a valid Pod in the service.
+A *sessionAffinity* tag was added to this Service to remove sticky connections to the target pods; this removes persistent connections to the same pod on each request.
 
 ### Apply the amd64 Deployment and Service
 
@@ -115,6 +115,19 @@ config set-context --current --namespace=ollama
 ```commandline
 kubectl get pods,svc -nollama 
 ```
+
+Your output should be similar to the following, showing three total services, and two total pods:
+
+```commandline
+$ kubectl get pods,svc -nollama
+
+NAME                                           READY   STATUS    RESTARTS   AGE
+pod/ollama-amd64-deployment-cbfc4b865-rf4p9    1/1     Running   0          86m
+
+NAME                           TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)        AGE
+service/ollama-amd64-svc       LoadBalancer   1.2.3.4          104.154.81.229   80:30668/TCP   86m
+```
+
 When the pods show *Running* and the service shows a valid *External IP*, we're ready to test the ollama amd64 service!
 
 ### Test the ollama on amd64 web service 
