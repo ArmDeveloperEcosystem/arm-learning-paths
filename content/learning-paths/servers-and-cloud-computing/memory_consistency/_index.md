@@ -29,13 +29,6 @@ tools_software_languages:
     - Litmus7
     - Arm ISA
 
-test_images:
-    - ubuntu:latest
-test_link: null
-test_maintenance: false
-test_status:
-    - passed
-
 further_reading:
     - resource:
         title: Arm Architecture Reference Manual for A-profile architecture

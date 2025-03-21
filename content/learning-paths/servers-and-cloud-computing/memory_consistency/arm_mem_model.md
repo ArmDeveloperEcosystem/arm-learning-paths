@@ -6,46 +6,79 @@ layout: "learningpathall"
 
 ## CPU Memory Model vs Language/Runtime Memory Models
 
-It's important to understand that the majority of developers will not need to concern themselves with the memory consistency model of the CPU their code will execute on. This is because programming languages and runtime engines abstract away the CPUs memory model by presenting the programmer with a language/runtime memory model. This abstraction is achieved by providing developers with a set of language/runtime specific memory ordering rules, synchronization constructs, and supporting libraries. So long as the developer uses these correctly, language compilers and runtime engines will make sure the code executes correctly on any CPU regardless of how strong or weakly ordered it is.
+Majority of developers will not need to be deeply familiar with the memory consistency model of the CPU their code will execute on. This is because programming languages and runtime engines abstract away the CPUs memory model by presenting the programmer with a language/runtime memory model. This abstraction is achieved by providing developers with a set of language/runtime specific memory ordering rules, synchronization constructs, and supporting libraries. As long as the developer uses these correctly, language compilers and runtime engines will make sure the code executes correctly on any CPU regardless of how strong or weakly ordered it is.
 
 That said, developers may want to dig deeper into this topic for various reasons including:
 
-- Extract more performance from weakly ordered CPUs (like Arm).
-  - Keep in mind that compilers and runtimes will do a good job of maximizing performance. Only in well understood niche cases will there be a potential for performance gain by going beyond what the compiler/runtime would do to higher level code. For most cases, all it takes to get more performance is to use the latest compilers, compiler switches, and runtimes.
+- Extract more performance from weakly ordered CPUs (like Arm CPUs).
+  - Compilers and runtimes will do a good job of maximizing performance. Only in well understood niche cases will there be a potential for performance gain by going beyond what the compiler/runtime would do to higher level code. For most cases, all it takes to get more performance is to use the latest compilers, compiler switches, and runtimes.
 - Develop confidence in the correctness of synchronization constructs.
 - Develop an understanding of how compilers and runtimes select different machine instructions while still honoring the memory ordering rules of the language/runtime and CPU.
-- General learning.
 
-## What We Will Do
-
-In this Learning Path, we will use publicly available tools to explore thread synchronization on Arm CPUs. This will provide the reader with enough working knowledge of the tools to be able to explore on their own. At the end of this Learning Path, we will provide more information on where readers can find a more formal (and complex) treatment of this subject.
+In this Learning Path, you will use publicly available tools to explore thread synchronization on Arm CPUs. You will gain enough working knowledge of the tools to be able to explore thread synchronization concepts. At the end of this Learning Path, you will be able access more information to get a deeper understanding of this subject.
 
 ##  The Formal Definition of the Arm Memory Model
 
-The formal definition of the Arm memory model is in the [Arm Architecture Reference Manual for A-profile architecture](https://developer.arm.com/documentation/ddi0487/la) (Arm ARM) under the section called `The AArch64 Application Level Memory Model`. The ordering requirements defined in the Arm ARM is a transliteration of the `aarch64.cat` file hosted on the Arm [herd7 simulator tool](https://developer.arm.com/herd7). In fact, this `aarch64.cat` file is the authoritative definition of the Arm memory model. Since it is a formal definition, it is complex.
+The formal definition of the Arm memory model is in the [Arm Architecture Reference Manual for A-profile architecture](https://developer.arm.com/documentation/ddi0487/la) (Arm ARM) under the section called `The AArch64 Application Level Memory Model`. The ordering requirements defined in the Arm ARM is a transliteration of the `aarch64.cat` file hosted on the Arm [herd7 simulator tool](https://developer.arm.com/herd7). In fact, this `aarch64.cat` file is the authoritative definition of the Arm memory model. As it is a formal definition, it is complex.
 
 ##  Herd7 Simulator & Litmus7 Tool
 
-The herd7 simulator provides a way to test snippets of Arm assembly against the formal definition of the Arm memory model (the `aarch64.cat` file mentioned above). The litmus7 tool can take the same snippets of assembly that run on herd7 and run them on actual Arm HW. This allows for comparing the formal memory model to the memory model of an actual Arm CPU. These snippets of assembly are called litmus tests.
+The herd7 simulator provides a way to test snippets of Arm assembly against the formal definition of the Arm memory model (the `aarch64.cat` file mentioned above). The litmus7 tool can take the same snippets of assembly that run on herd7 and run them on actual Arm hardware. This allows for comparing the formal memory model to the memory model of an actual Arm CPU. These snippets of assembly are called litmus tests.
 
 It's important to understand that it is possible for an implementation of an Arm CPU to be more strongly ordered than the formally defined Arm memory model. This case is not a violation of the memory model because it will still execute code in a way that is compliant with the memory ordering rules.
 
-## Installing the Tools
+## Install the Tools
 
-Herd7 and Litmus7 are part of the [diy7](http://diy.inria.fr/) tool suite. The diy7 tool suite can be installed by following the [installation instructions](http://diy.inria.fr/sources/index.html). We suggest installing this on an Arm system so that both herd7 and litmus7 can be compared side by side on the same system.
+Herd7 and Litmus7 are part of the [diy7](http://diy.inria.fr/) tool suite. The diy7 tool suite can be installed by following the [installation instructions](http://diy.inria.fr/sources/index.html). You will install the tools on an Arm Linux system so that both herd7 and litmus7 can be compared side by side on the same system.
+
+Start an Arm-based cloud instance. This example uses a `t4g.xlarge` AWS instance running Ubuntu 22.04 LTS, but other instances types are possible. 
+
+If you are new to cloud-based virtual machines, refer to [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro/). 
+
+First confirm you are using a Arm-based instance with the following command.
+
+```bash
+uname -m
+```
+You should see the following output.
+
+```output
+aarch64
+```
+
+Next, install OCaml Package Manager (opam). You will need `opam` to install the `herdtools7` tool suite:
+```bash
+sudo apt update
+sudo apt install opam -y
+```
+
+Setup `opam` to install the tools:
+```bash
+opam init
+opam update
+eval $(opam env)
+```
+
+Now install the `herdtool7` tool suite which include both `litmus7` and `herd7`:
+
+```bash
+opam install herdtools7
+```
 
 
-## Running Herd7 and Litmus7 Example Commands
+## Herd7 and Litmus7 Example Commands
 
-The test file is assumed to be called `test.litmus` and is in the current directory.
-
-The help menu shows all options.
+You can run `--help` on both the tools to review all the options available.
 ```
 herd7 --help
 ```
 ```
 litmus7 --help
 ```
+
+The input to both `herd7` and `litmus7` tools are snippets of assembly code, called litmus tests.
+
+Shown below are some example of running the tools with a litmus test. In the next section, you will go through an actual litmus test example.
 
 Example of running herd7.
 ```
