@@ -178,6 +178,122 @@ You should then see the following logs, depending on the generated temperature v
 
 ![img29 alt-text#center](Figures/29.png)
 
-### Monitoring
+## Monitoring and Notifications
+In this section, you'll extend your existing Azure Function to send email notifications using SendGrid whenever the temperature exceeds the defined threshold
+
+### Create a SendGrid Account in Azure
+Follow these steps to create a SendGrid account:
+1. Sign in to the Azure Portal.
+2. Click “Create a resource” and search for SendGrid.
+![img30 alt-text#center](Figures/30.png)
+3. Select Twilio SendGrid, choose the Free 100 (2022) plan, and then click Subscribe.
+4. Provide the following details:
+* Subscription: Select your Azure subscription.
+* Resource group: Choose your existing IoT project resource group.
+* Name: Enter a descriptive name (e.g., iot-alerts-sendgrid).
+![img31 alt-text#center](Figures/31.png)
+5. Click Review + subscribe and then Subscribe.
+6. On the next screen, click Configure account now:
+![img32 alt-text#center](Figures/32.png)
+7. Accept any permissions required by SendGrid, and then enter your details to create a sender identity:
+![img33 alt-text#center](Figures/33.png)
+8. Fill out the required details, such as your name and email address.
+9. After the sender identity is verified, click API Keys in the left menu:
+![img34 alt-text#center](Figures/34.png)
+10. Click Create API Key. In the popup window, enter a key name (e.g., iot-api-key), and select Full Access.
+![img35 alt-text#center](Figures/35.png)
+11. Copy the generated API key securely. You will not be able to retrieve it later.
+
+### Configure SendGrid API Key in your Azure Function
+Update your local.settings.json file to include the SendGrid API key:
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "armiotcosmosdb_DOCUMENTDB": "<____>",
+    "SENDGRID_API_KEY": "<YOUR_KEY_GOES_HERE>"
+  }
+}
+
+Replace <YOUR_SENDGRID_API_KEY> with the actual key obtained earlier
+
+### Install SendGrid Python Library
+Update your project's requirements.txt to include the SendGrid Python SDK:
+```console
+azure-functions
+sendgrid
+```
+
+Then, install these dependencies locally:
+```console
+pip install -r requirements.txt
+```
+
+### Extend Your Azure Function to Send Email Notifications
+Modify your existing function_app.py file as follows:
+```python
+import azure.functions as func
+import logging
+import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
+app = func.FunctionApp()
+
+TEMPERATURE_THRESHOLD = 28.0 
+
+def send_email_alert(device_id, temperature, timestamp):
+    message = Mail(
+        from_email='dawid@borycki.com.pl', # Use your actual email
+        to_emails='dawid@borycki.com.pl',  # Use your actual email
+        subject=f'⚠️ High Temperature Alert: Device {device_id}',
+        html_content=f"""
+            <strong>Temperature Alert!</strong><br>
+            Device ID: {device_id}<br>
+            Temperature: {temperature}°C<br>
+            Timestamp: {timestamp}
+        """
+    )
+
+    try:
+        sg = SendGridAPIClient(os.environ["SENDGRID_API_KEY"])
+        response = sg.send(message)
+        logging.info(f"SendGrid email sent, status: {response.status_code}")
+    except Exception as e:
+        logging.error(f"SendGrid email failed: {e}")
+
+@app.cosmos_db_trigger(arg_name="azcosmosdb", container_name="SensorReadings",
+                        database_name="IoTDatabase", connection="armiotcosmosdb_DOCUMENTDB")  
+def cosmosdb_trigger(azcosmosdb: func.DocumentList):
+    logging.info('Python CosmosDB triggered.')
+    if azcosmosdb:
+        for doc in azcosmosdb:
+            device_id = doc.get("deviceId")
+            temperature = float(doc.get("temperature", 0))
+            timestamp = doc.get("timestamp")
+
+            if temperature > TEMPERATURE_THRESHOLD:
+                logging.warning(
+                    f"High temperature detected! Device: {device_id}, "
+                    f"Temperature: {temperature}°C at {timestamp}"
+                )
+                send_email_alert(device_id, temperature, timestamp)
+            else:
+                logging.info(
+                    f"Temperature within limits. Device: {device_id}, "
+                    f"Temperature: {temperature}°C at {timestamp}"
+                )
+```
+
+The send_email_alert function is responsible for sending an email notification through SendGrid whenever a sensor reading exceeds the specified temperature threshold. It constructs an email message using details about the IoT device, including the device_id, current temperature, and the event timestamp. The function utilizes SendGrid’s Python SDK (SendGridAPIClient) to send the email message. If the email is successfully sent, it logs a confirmation with the status code. If the email fails, it captures and logs the error details, ensuring that any issues with email delivery can be easily identified and resolved. This function enables proactive monitoring by immediately alerting the user when potentially critical temperature conditions are detected, significantly enhancing the reliability and responsiveness of the IoT system
+
+Now, start your function:
+```console
+func start
+```
+
+Then run the iot_simulator.py to send telemetry data, and wait for alert notifications.
 
 ## Summary and Next Steps
+You have now successfully configured real-time monitoring with email notifications. You can proceed to enhance your IoT solution by aggregating data and creating dashboards or visualizations.
