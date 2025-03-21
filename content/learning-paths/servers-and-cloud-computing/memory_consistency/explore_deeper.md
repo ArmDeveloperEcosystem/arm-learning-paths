@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Exploring More Deeply"
+title: "Additional Resources"
 
 weight: 5
 
@@ -8,18 +8,18 @@ weight: 5
 layout: "learningpathall"
 ---
 
-## Exploring the Memory Model More Deeply
+## Exploring the Memory Model In Depth
 
-In this Learning Path we took a practical approach to exploring the Arm memory model and thread synchronization. If the reader would like to explore this topic more deeply and more formally, we recommend reading through the following blog series.
+In this Learning Path you took a practical approach to exploring the Arm memory model and thread synchronization. If you would like to explore this topic further and more formally, you should read through the following blog series.
 
 - [A working example of how to use the herd7 Memory Model Tool](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/how-to-use-the-memory-model-tool)
 - [How to generate litmus tests automatically with the diy7 tool](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/generate-litmus-tests-automatically-diy7-tool)
 - [Running litmus tests on hardware using litmus7](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/running-litmus-tests-on-hardware-litmus7)
 - [Expanding the Memory Model Tools to System-level architecture](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/expanding-memory-model-tools-system-level-architecture)
 
-Also, the [diy7 documentation](https://diy.inria.fr/doc/index.html) links to a few papers that explore memory models more formally.
+Also, the [diy7 documentation](https://diy.inria.fr/doc/index.html) provides links to a few papers that explore memory models more formally.
 
-## Docs on Barriers
+## Documentation on Barriers
 
 - [Barriers on Armv8](https://developer.arm.com/documentation/100941/0101/Barriers).
 - [Load-Acquire and Store-Release on Armv8](https://developer.arm.com/documentation/102336/0100/Load-Acquire-and-Store-Release-instructions).
