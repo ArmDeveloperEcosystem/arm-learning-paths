@@ -8,23 +8,25 @@ layout: learningpathall
 
 ## Overview of AI Agents
 
-An AI Agent is best understood as an integrated system that goes beyond standard text generation by equipping Large Language Models (LLMs) with tools and domain knowledge. Here’s a closer look at the underlying elements:
+You can best understand an AI Agent as an integrated system that goes beyond basic text generation by augmenting Large Language Models (LLMs) with tools and domain knowledge. 
 
-- **System**: Each AI Agent functions as an interconnected ecosystem of components.  
+Here’s a closer look at the underlying elements:
+
+- **System**: Each AI Agent functions as an interconnected ecosystem of components:  
   - **Environment**: The domain in which the AI Agent operates. For instance, in a system that books travel itineraries, the relevant environment might include airline reservation systems and hotel booking tools.  
-  - **Sensors**: Methods the AI Agent uses to observe its surroundings. For a travel agent, these could be APIs that inform the agent about seat availability on flights or room occupancy in hotels.  
-  - **Actuators**: Ways the AI Agent exerts influence within that environment. In the example of a travel agent, placing a booking or modifying an existing reservation serves as the agent’s “actuators.”  
+  - **Sensors**: Methods the AI Agent uses to observe its surroundings. For a travel agent, these might be APIs that inform the agent about seat availability on flights or room occupancy in hotels.  
+  - **Actuators**: Ways the AI Agent exerts influence within the environment. In the example of a travel agent, placing a booking or modifying an existing reservation illustrates how actuators function to enact changes within the environment.  
 
-- **Large Language Models**: While the notion of agents is not new, LLMs bring powerful language comprehension and data-processing capabilities to agent setups.  
-- **Performing Actions**: Rather than just produce text, LLMs within an agent context interpret user instructions and interact with tools to achieve specific objectives.  
+- **Large Language Models**: While agents have long existed, LLMs enhance these systems with powerful language comprehension and data-processing capabilities.  
+- **Action Execution**: Rather than just produce text, LLMs within an agent context interpret user instructions and interact with tools to achieve specific objectives.  
 - **Tools**: The agent’s available toolkit depends on the software environment and developer-defined boundaries. In the travel agent example, these tools might be limited to flight and hotel reservation APIs.  
-- **Knowledge**: Beyond immediate data sources, the agent can fetch additional details—perhaps from databases or web services—to enhance decision making.
+- **Knowledge**: Beyond immediate data sources, the agent can fetch additional details - perhaps from databases or web services - for enhanced decision making.
 
 
 
 ## Types of AI Agents
 
-AI Agents come in multiple forms. The table below provides an overview of some agent types and examples illustrating their roles in a travel booking system:
+AI Agents come in multiple forms. The table below provides an overview of some agent types and examples of their roles in a travel booking system:
 
 | **Agent Category**       | **Key Characteristics**                                                             | **Example usage in a Travel system**                                                                                                                   |
 |--------------------------|--------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
@@ -39,7 +41,7 @@ AI Agents come in multiple forms. The table below provides an overview of some a
 
 ## Ideal Applications for AI Agents
 
-While the travel scenario illustrates different categories of AI Agents, there are broader circumstances where agents truly excel:
+AI agents come in multiple forms. The table below provides an overview of common agent types and examples of their roles in a travel booking system.illustrates different categories of AI Agents, there are broader circumstances where agents truly excel:
 
 - **Open-Ended Challenges**: Complex tasks with no predetermined procedure, requiring the agent to determine the necessary steps.  
 - **Procedural or Multi-Step Tasks**: Endeavors requiring numerous phases or tool integrations, allowing the agent to switch between resources.  
