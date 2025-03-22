@@ -41,7 +41,7 @@ AI Agents come in multiple forms. The table below provides an overview of some a
 
 ## Ideal Applications for AI Agents
 
-AI agents come in multiple forms. The table below provides an overview of common agent types and examples of their roles in a travel booking system.illustrates different categories of AI Agents, there are broader circumstances where agents truly excel:
+AI agents come in multiple forms. They can be grouped into various categories and excel in a wide range of applications:
 
 - **Open-Ended Challenges**: Complex tasks with no predetermined procedure, requiring the agent to determine the necessary steps.  
 - **Procedural or Multi-Step Tasks**: Endeavors requiring numerous phases or tool integrations, allowing the agent to switch between resources.  
