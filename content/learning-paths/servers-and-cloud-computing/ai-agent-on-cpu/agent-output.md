@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## AI Agent Function Calls
 
-An AI agent, powered by a Large Language Model (LLM), decides which function to use by analyzing the prompt or input it receives, identifying the relevant intent or task, and then matching that intent to the most appropriate function from a pre-defined set of available functions based on its understanding of the language and context.
+An AI agent, powered by a Large Language Model (LLM), decides which function to use by analyzing the prompt or input it receives, identifying the relevant intent or task, and then matching the intent to the most appropriate function from a pre-defined set of available functions based on its understanding of the language and context.
 
-Lets look at how this is implemented in the python script `agent.py`.
+Have a look at how this is implemented in the python script `agent.py`:
 
 - This code section of `agent.py` shown below creates an instance of the quantized `llama3.1 8B` model for more efficient inference on Arm-based systems.
 ```output
@@ -23,12 +23,12 @@ llama_model = Llama(
 )
 ```
 
-- Next, you define a provider that leverages the `llama.cpp` Python bindings.
+- Next, you define a provider that leverages the `llama.cpp` Python bindings:
 ```output
 provider = LlamaCppPythonProvider(llama_model)
 ```
 
-- The LLM has access to certain tools or functions and can take a general user input and decide which functions to call. The function’s docstring guides the LLM on when and how to invoke it. In `agent.py` three such tools or functions are defined `open_webpage`, `get_current_time` and `calculator` 
+- The LLM has access to certain tools or functions and can take a general user input and decide which functions to call. The function’s docstring guides the LLM on when and how to invoke it. In `agent.py` three such tools or functions are defined; `open_webpage`, `get_current_time`, and `calculator`: 
 
 ```output
 def open_webpage():
@@ -87,7 +87,7 @@ def calculator(
         raise ValueError("Unknown operation.")
 ```
 
-- `from_functions` creates an instance of `LlmStructuredOutputSettings` by passing in a list of callable Python functions. The LLM can then decide if and when to use these functions based on user queries.
+- `from_functions` creates an instance of `LlmStructuredOutputSettings` by passing in a list of callable Python functions. The LLM can then decide if and when to use these functions based on user queries:
 
 ```output
 output_settings = LlmStructuredOutputSettings.from_functions(
@@ -95,7 +95,7 @@ output_settings = LlmStructuredOutputSettings.from_functions(
 )
 
 ```
-- The user's prompt is then collected and processed through `LlamaCppAgent`. The agent decides whether to call any defined functions based on the request.
+- The user's prompt is then collected and processed through `LlamaCppAgent`. The agent decides whether to call any defined functions based on the request:
 ```
 user = input("Please write your prompt here: ")
 
@@ -113,7 +113,7 @@ result = llama_cpp_agent.get_chat_response(
 
 ## Test the AI Agent
 
-You are now ready to test and execute the AI Agent python script. Start the application:
+You are now ready to test and execute the AI agent python script. Start the application:
 
 ```bash
 python3 agent.py

@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Python Script for executing an AI Agent application
-With `llama.cpp` built and the Llama3.1 8B model downloaded, you are now ready to create a Python script to execute an AI Agent Application:
+With `llama.cpp` built and the Llama3.1 8B model downloaded, you are now ready to create a Python script to execute an AI agent Application:
 
 Create a Python file named `agent.py` with the content shown below:
 ```bash
@@ -156,5 +156,5 @@ def run_web_search_agent():
 if __name__ == '__main__':
     run_web_search_agent()
 ```
-In the next section, you will inspect this script to understand how the LLM is configured and used to execute Agent tasks using this script. You will then proceed to executing and testing the AI Agent.
+In the next section, you will inspect this script to understand how the LLM is configured and used to execute Agent tasks using this script. You will then proceed to executing and testing the AI agent.
 
