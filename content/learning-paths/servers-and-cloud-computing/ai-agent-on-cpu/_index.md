@@ -30,6 +30,7 @@ armips:
 tools_software_languages:
     - Python
     - AWS Graviton
+    - AI
 operatingsystems:
     - Linux
 

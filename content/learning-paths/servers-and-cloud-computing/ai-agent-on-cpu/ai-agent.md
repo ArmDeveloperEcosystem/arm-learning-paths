@@ -13,20 +13,20 @@ An AI agent is an integrated system that extends beyond basic text generation by
 Here’s a closer look at the underlying elements:
 
 - **System**: Each AI agent functions as an interconnected ecosystem of components. Below is a list of key factors and components that affect system performance:   
-  - **Environment**: The domain in which the AI Agent operates. For instance, in a system that books travel itineraries, this might include airline reservation systems and hotel booking tools.  
+  - **Environment**: The domain in which the AI agent operates. For instance, in a system that books travel itineraries, this might include airline reservation systems and hotel booking tools.  
   - **Sensors**: The methods the AI agent uses to observe its environment. For a travel agent, these might be APIs that inform the agent about seat availability on flights or room occupancy in hotels.  
   - **Actuators**: Ways the AI agent exerts influence within the environment. In the example of a travel agent, placing a booking or modifying an existing reservation illustrates how actuators function to enact changes within the environment.  
 
 - **Large Language Models**: While agents have long existed, LLMs enhance these systems with powerful language comprehension and data-processing capabilities.  
 - **Action Execution**: Rather than just produce text, LLMs within an agent context interpret user instructions and interact with tools to achieve specific objectives.  
 - **Tools**: The agent’s available toolkit depends on the software environment and developer-defined boundaries. In the travel agent example in this Learning Path, these tools might be limited to flight and hotel reservation APIs.  
-- **Knowledge**: Beyond immediate data sources, the agent can fetch additional details - perhaps from databases or web services - for enhanced decision making.
+- **Knowledge**: Beyond immediate data sources, the agent can fetch additional details - perhaps from databases or web services - for enhanced decision-making.
 
 
 
 ## Types of AI Agents
 
-AI Agents come in multiple forms. The table below provides an overview of some agent types and examples of their roles in a travel booking system:
+AI agents come in multiple forms. The table below provides an overview of some agent types and examples of their roles in a travel booking system:
 
 | **Agent Category**       | **Key Characteristics**                                                             | **Example Usage in a Travel Booking System**                                                                                                                   |
 |--------------------------|--------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|

@@ -14,7 +14,7 @@ The instructions in this Learning Path have been designed for Arm servers runnin
 
 ## Overview
 
-In this Learning Path, you will learn how to build an AI agent application using `llama-cpp-python`, and `llama-cpp-agent`. `llama-cpp-python` is a Python binding for `llama.cpp` that enables efficient LLM inference on Arm CPUs and `llama-cpp-agent` provides an interface for processing text using agentic chains with tools.
+In this Learning Path, you will learn how to build an AI agent application using `llama-cpp-python` and `llama-cpp-agent`. `llama-cpp-python` is a Python binding for `llama.cpp` that enables efficient LLM inference on Arm CPUs and `llama-cpp-agent` provides an interface for processing text using agentic chains with tools.
 
 ## Install Dependencies
 

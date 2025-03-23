@@ -1,5 +1,5 @@
 ---
-title: Understand and Test the AI Agent
+title: Explore and Test Your AI Agent
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,11 +8,13 @@ layout: learningpathall
 
 ## AI Agent Function Calls
 
-An AI agent, powered by a LLM, selects the most appropriate function by analyzing the prompt or input it receives, identifying the relevant intent or task, and then matching the intent to the most appropriate function from a pre-defined set of available functions based on its understanding of the language and context.
+An AI agent, powered by an LLM, selects the most appropriate function by analyzing the input, identifying the relevant intent, and matching it to predefined functions based on its understanding of the language and context.
 
-Have a look at how this is implemented in the python script `agent.py`:
+You will now walk through how this is implemented in the excerpt from a Python script called `agent.py`.
 
-- This code section of `agent.py` shown below creates an instance of the quantized `llama3.1 8B` model for more efficient inference on Arm-based systems.
+#### Initialize the Quantized Model 
+
+This code section of `agent.py` shown below creates an instance of the quantized `llama3.1 8B` model for more efficient inference on Arm-based systems:
 ```output
 llama_model = Llama(
     model_path="./models/dolphin-2.9.4-llama3.1-8b-Q4_0.gguf",
@@ -22,13 +24,17 @@ llama_model = Llama(
     n_threads_batch=64,
 )
 ```
+#### Define a Provider
 
-- Next, you define a provider that leverages the `llama.cpp` Python bindings:
+Now define a provider that leverages the `llama.cpp` Python bindings:
 ```output
 provider = LlamaCppPythonProvider(llama_model)
 ```
+#### Define Functions
 
-- The LLM has access to certain tools or functions and can take a general user input and decide which functions to call. The function’s docstring guides the LLM on when and how to invoke it. In `agent.py` three such tools or functions are defined; `open_webpage`, `get_current_time`, and `calculator`: 
+The LLM has access to certain tools or functions and can take a general user input and decide which functions to call. The function’s docstring guides the LLM on when and how to invoke it. 
+
+In `agent.py` three such tools or functions are defined; `open_webpage`, `get_current_time`, and `calculator`: 
 
 ```output
 def open_webpage():
@@ -86,8 +92,9 @@ def calculator(
     else:
         raise ValueError("Unknown operation.")
 ```
+#### Create Output Settings to Enable Function Calls
 
-- `from_functions` creates an instance of `LlmStructuredOutputSettings` by passing in a list of callable Python functions. The LLM can then decide if and when to use these functions based on user queries:
+`from_functions` creates an instance of `LlmStructuredOutputSettings` by passing in a list of callable Python functions. The LLM can then decide if and when to use these functions based on user queries:
 
 ```output
 output_settings = LlmStructuredOutputSettings.from_functions(
@@ -95,7 +102,9 @@ output_settings = LlmStructuredOutputSettings.from_functions(
 )
 
 ```
-- The user's prompt is then collected and processed through `LlamaCppAgent`. The agent decides whether to call any defined functions based on the request:
+#### Collect and Process User Input 
+
+The user's prompt is then collected and processed through `LlamaCppAgent`. The agent decides whether to call any defined functions based on the request:
 ```
 user = input("Please write your prompt here: ")
 
@@ -111,15 +120,15 @@ result = llama_cpp_agent.get_chat_response(
 )
 ```
 
-## Test the AI Agent
+## Test and Run the AI Agent
 
-You are now ready to test and execute the AI agent python script. Start the application:
+You're now ready to test and run the AI agent Python script. Start the application:
 
 ```bash
 python3 agent.py
 ```
 
-You will see lots of interesting statistics being printed from `llama.cpp` about the model and the system, followed by the prompt as shown:
+You will see lots of interesting statistics being printed from `llama.cpp` about the model and the system, followed by the prompt for input, as shown:
 
 ```output
 llama_kv_cache_init:        CPU KV buffer size =  1252.00 MiB
@@ -142,9 +151,11 @@ Please write your prompt here:
 
 ## Test the AI agent
 
-When you are presented with "Please write your prompt here:" test it with an input prompt. Enter "What is the current time?"
+When you are presented with `Please write your prompt here:` test it with an input prompt. 
 
-- As part of the prompt, a list of executable functions is sent to the LLM, allowing the agent to select the appropriate function:
+Enter `What is the current time?`
+
+As part of the prompt, a list of executable functions is sent to the LLM, allowing the agent to select the appropriate function:
 
 ```output
 Read and follow the instructions below:
@@ -181,7 +192,7 @@ To call a function, respond with a JSON object (to call one function) or a list 
 - "arguments": Put the arguments to pass to the function here.
 ```
 
-The AI Agent then decides to invoke the appropriate function and return the result as shown:
+The AI agent then decides to invoke the appropriate function and returns the result as shown:
 
 ```output
 [
@@ -197,9 +208,9 @@ Response from AI Agent:
 ----------------------------------------------------------------
 ```
 
-You have now tested when you enter, "What is the current time?", the AI Agent will choose to call the `get_current_time()` function, and return a result in **H:MM AM/PM** format.
+You have now tested the `What is the current time?` question. The AI agent evaluates the query and calls the `get_current_time()` function, and returns a result in **H:MM AM/PM** format.
 
-You have successfully run an AI agent. You can ask different questions to trigger and execute other functions. You can extend your AI agent by defining custom functions so it can handle specific tasks. 
+You have successfully run and tested your AI agent. Experiment with different prompts or define custom functions to expand your AI agent's capabilities. 
 
 
 
