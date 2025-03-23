@@ -1,5 +1,5 @@
 ---
-title: Set up the Environment to Run an AI Application Locally
+title: Set Up Your Local Environment to Run an AI Application
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,15 +8,15 @@ layout: learningpathall
 
 ## Before you begin
 
-This Learning Path demonstrates how to build an AI Agent Application using open-source Large Language Models (LLMs) optimized for Arm architecture. The AI Agent can use Large Language Models (LLMs) to perform actions by accessing tools and knowledge. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 22.04 LTS. You need an Arm server instance with at least 4 cores and 16GB of memory to run this example. Configure disk storage up to at least 32 GB. The instructions have been tested on an AWS EC2 Graviton3 `m7g.xlarge instance`.
+This Learning Path demonstrates how to build an AI Agent Application using open-source Large Language Models (LLMs) optimized for Arm architecture. The AI Agent can use Large Language Models (LLMs) to perform actions by accessing tools and knowledge. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 22.04 LTS. You need an Arm server instance with at least 4 cores and 16GB of memory to run this example. Configure disk storage up to at least 32 GB. The instructions have been tested on an AWS EC2 Graviton3 `m7g.xlarge` instance.
 
 ## Overview
 
 In this Learning Path, you learn how to build an AI Agent application using `llama-cpp-python` and `llama-cpp-agent`. `llama-cpp-python` is a Python binding for `llama.cpp` that enables efficient LLM inference on Arm CPUs and `llama-cpp-agent` provides an interface for processing text using agentic chains with tools.
 
-## Install dependencies
+## Install Dependencies
 
-Install the following packages on your Arm based server instance:
+Install the following packages on your Arm-based server instance:
 
 ```bash
 sudo apt-get update
@@ -53,7 +53,7 @@ Create and navigate to the models directory:
 mkdir models
 cd models
 ```
-Install the `huggingface_hub` python library using `pip`:
+Install the `huggingface_hub` Python library using `pip`:
 
 ```bash
 pip install huggingface_hub
@@ -64,9 +64,9 @@ You can now download the [pre-quantized Llama3.1 8B model](https://huggingface.c
 huggingface-cli download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir . --local-dir-use-symlinks False
 ```
 
-`Q4_0` in the model name refers to the quantization method the model uses. The goal of quantization is to reduce the size of the model (to reduce the memory space required) and faster (to reduce memory bandwidth bottlenecks transferring large amounts of data from memory to a processor). The primary trade-off to keep in mind when reducing a model’s size is maintaining quality of performance. Ideally, a model is quantized to meet size and speed requirements while not having a negative impact on performance.
+`Q4_0` in the model name refers to the quantization method the model uses. Quantization aims to reduce the model's size (decreasing memory requirements) and increase execution speed (reducing memory bandwidth bottlenecks when transferring large amounts of data from memory to the processor). The primary trade-off when reducing a model’s size is balancing speed and size improvements against maintaining the quality of performance. Ideally, a model is quantized to meet size and speed requirements while not having a negative impact on performance.
 
-The main thing to note in the quantization format is the number of bits per parameter, which is denoted by ‘Q4’ in this case or 4-bit integer. 
+The key aspect of quantization format is the number of bits per parameter, denoted as ‘Q4’ in this case, which represents 4-bit integers. 
 
 ## Build llama.cpp
 
@@ -94,6 +94,7 @@ cmake .. -DCMAKE_CXX_FLAGS="-mcpu=native" -DCMAKE_C_FLAGS="-mcpu=native"
 cmake --build . -v --config Release -j `nproc`
 ```
 `llama.cpp` is now built in the `bin` directory.
+
 Check that `llama.cpp` has built correctly by running the help command:
 
 ```bash
@@ -101,7 +102,9 @@ cd bin
 ./llama-cli -h
 ```
 
-If `llama.cpp` has built correctly on your machine, you will see the help options being displayed. A snippet of the output is shown below:
+If `llama.cpp` has built correctly, you will see the help options displayed. 
+
+A snippet of the output is shown below:
 
 ```output
 usage: ./llama-cli [options]
@@ -130,4 +133,4 @@ general:
   -n,    --predict N              number of tokens to predict (default: -1, -1 = infinity, -2 = until context filled)
   -b,    --batch-size N           logical maximum batch size (default: 2048)
 ```
-In the next section you will create a python script to execute an AI Agent powered by the model you downloaded.
+In the next section, you will create a Python script to execute an AI agent powered by the downloaded model.

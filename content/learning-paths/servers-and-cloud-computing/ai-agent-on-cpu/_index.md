@@ -7,7 +7,7 @@ cascade:
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for software developers and ML engineers looking to run an AI agent Application.
+who_is_this_for: This is an introductory topic for software developers and ML engineers looking to run an AI agent application.
 
 learning_objectives:
     - Set up llama-cpp-python optimized for Arm servers.
