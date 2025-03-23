@@ -70,7 +70,9 @@ The key aspect of quantization format is the number of bits per parameter, denot
 
 ## Build llama.cpp
 
-As of [llama.cpp commit 0f1a39f3](https://github.com/ggerganov/llama.cpp/commit/0f1a39f3), Arm has contributed code for performance optimization with KleidiAI kernels. You can take advantage of these kernels by running your models using the `llama.cpp` framework. 
+As of [llama.cpp commit 0f1a39f3](https://github.com/ggerganov/llama.cpp/commit/0f1a39f3), Arm has contributed code for performance optimization with KleidiAI kernels. 
+
+You can leverage these kernels to enhance model performance when running your model using the `llama.cpp` framework. 
 
 Navigate to your home directory:
 
@@ -93,7 +95,7 @@ cd build
 cmake .. -DCMAKE_CXX_FLAGS="-mcpu=native" -DCMAKE_C_FLAGS="-mcpu=native"
 cmake --build . -v --config Release -j `nproc`
 ```
-`llama.cpp` is now built in the `bin` directory.
+The build outputs binaries to the `bin` directory, and you will see that `llama.cpp` is now built there.
 
 Check that `llama.cpp` has built correctly by running the help command:
 
