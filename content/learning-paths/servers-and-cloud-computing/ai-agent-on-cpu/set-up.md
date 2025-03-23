@@ -8,11 +8,13 @@ layout: learningpathall
 
 ## Before you begin
 
-This Learning Path demonstrates how to build an AI Agent Application using open-source Large Language Models (LLMs) optimized for Arm architecture. The AI Agent can use Large Language Models (LLMs) to perform actions by accessing tools and knowledge. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 22.04 LTS. You need an Arm server instance with at least 4 cores and 16GB of memory to run this example. Configure disk storage up to at least 32 GB. The instructions have been tested on an AWS EC2 Graviton3 `m7g.xlarge` instance.
+This Learning Path demonstrates how to build an AI Agent Application using open-source LLMs optimized for Arm architecture. The AI Agent can use Large Language Models (LLMs) to perform actions by accessing tools and knowledge. 
+
+The instructions in this Learning Path have been designed for Arm servers running Ubuntu 22.04 LTS. You require an Arm server instance with at least 4 cores and 16GB of memory to run this example. Configure disk storage up to at least 32 GB. The instructions have been tested on an AWS EC2 Graviton3 `m7g.xlarge` instance.
 
 ## Overview
 
-In this Learning Path, you learn how to build an AI Agent application using `llama-cpp-python` and `llama-cpp-agent`. `llama-cpp-python` is a Python binding for `llama.cpp` that enables efficient LLM inference on Arm CPUs and `llama-cpp-agent` provides an interface for processing text using agentic chains with tools.
+In this Learning Path, you will learn how to build an AI agent application using `llama-cpp-python`, and `llama-cpp-agent`. `llama-cpp-python` is a Python binding for `llama.cpp` that enables efficient LLM inference on Arm CPUs and `llama-cpp-agent` provides an interface for processing text using agentic chains with tools.
 
 ## Install Dependencies
 
@@ -43,7 +45,7 @@ pip install llama-cpp-agent pydantic
 ```
 
 
-## Download the pre-quantized Llama-3.1-8B LLM model from Hugging Face
+## Download the Pre-quantized Llama-3.1-8B LLM Model from Hugging Face
 
 You are now ready to download the LLM.
 
@@ -58,7 +60,7 @@ Install the `huggingface_hub` Python library using `pip`:
 ```bash
 pip install huggingface_hub
 ```
-You can now download the [pre-quantized Llama3.1 8B model](https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf) using the huggingface cli:
+You can now download the [pre-quantized Llama3.1 8B model](https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf) using the `huggingface-cli`:
 
 ```bash
 huggingface-cli download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir . --local-dir-use-symlinks False

@@ -1,5 +1,5 @@
 ---
-title: Understand and test the AI Agent
+title: Understand and Test the AI Agent
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## AI Agent Function Calls
 
-An AI agent, powered by a Large Language Model (LLM), decides which function to use by analyzing the prompt or input it receives, identifying the relevant intent or task, and then matching the intent to the most appropriate function from a pre-defined set of available functions based on its understanding of the language and context.
+An AI agent, powered by a LLM, selects the most appropriate function by analyzing the prompt or input it receives, identifying the relevant intent or task, and then matching the intent to the most appropriate function from a pre-defined set of available functions based on its understanding of the language and context.
 
 Have a look at how this is implemented in the python script `agent.py`:
 
