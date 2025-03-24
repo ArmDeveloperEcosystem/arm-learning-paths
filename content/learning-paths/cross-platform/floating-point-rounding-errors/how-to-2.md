@@ -6,12 +6,16 @@ weight: 3
 layout: learningpathall
 ---
 
-## Differences in behaviour between x86 and Arm. 
+## What are the differences in behavior between x86 and Arm floating point?
 
-Architecture and standards define dealing with floating point overflows and truncations in difference ways. First, connect to a x86 and Arm-based machine. In this example I am connecting to an AWS `t2.2xlarge` and `t4g.xlarge` running Ubuntu 22.04 LTS. 
+Architecture and standards define floating point overflows and truncations in different ways. 
 
+You can see this by comparing an example application on an x86 and an Arm Linux system. 
 
-To demonstrate this, the C++ code snippet below casts floating point numbers to various data types. Copy and paste into a new file called `converting-float.cpp`. 
+You can use any Linux systems for this example. If you are using AWS, you can use EC2 instance types
+`t3.micro` and `t4g.small` running Ubuntu 24.04.
+
+To learn about floating point differences, use an editor to copy and paste the C++ code below into a new file named `converting-float.cpp`.
 
 ```cpp
 #include <iostream>
@@ -57,15 +61,16 @@ int main() {
 }
 ```
 
-To demonstrate we will compile `converting-float.cpp` on an Arm64 and x86 machine. Install the `g++` compiler with the following command. I am using `G++` version 13.3 at the time of writing. 
+If you need to install the `g++` compiler, run the commands below. 
 
 ```bash
 sudo apt update
-sudo apt install g++ gcc
+sudo apt install g++  -y
 ```
 
+Compile `converting-float.cpp` on an Arm and x86 machine. 
 
- Run the command below on both an Arm-based and x86-based system. 
+The compile command is the same on both systems.
 
 ```bash
 g++ converting-float.cpp -o converting-float 
@@ -75,11 +80,13 @@ For easy comparison, the image below shows the x86 output (left) and Arm output 
 
 ![differences](./differences.png)
 
-As you can see, there are several cases where different behaviour is observed. For example when trying to convert a signed number to a unsigned number or dealing with out-of-bounds numbers. 
+As you can see, there are several cases where different behavior is observed. For example when trying to convert a signed number to a unsigned number or dealing with out-of-bounds numbers. 
 
-## Removing Hardcoded values with Macros
+## Removing hardcoded values with macros
 
-Clearly the above differences show that explictly checking for specific values will lead to unportable code. For example, consider the naively implemented function below. This checks if the value is 0, the value an x86 machine will convert a floating point number that exceeds the maximum 32-bit float value. This is different to AArch64 behaviour leading to unportable code. 
+The above differences show that explicitly checking for specific values will lead to unportable code. 
+
+For example, consider the function below. The code checks if the value is 0. The value an x86 machine will convert a floating point number that exceeds the maximum 32-bit float value. This is different from Arm behavior leading to unportable code. 
 
 ```cpp
 void checkFloatToUint32(float num) {
@@ -93,7 +100,15 @@ void checkFloatToUint32(float num) {
 ```
 
 This can simply be corrected by using the macro, `UINT32_MAX`. 
-{{% notice Note %}} To find out all the available compiler-defined macros, the `echo | <clang|gcc etc.> -dM -` will output them to the terminal{{% /notice %}}
+
+{{% notice Note %}} 
+To find out all the available compiler-defined macros, you can output them using:
+```bash
+echo "" | g++ -dM -E -
+```
+{{% /notice %}}
+
+A portable version of the code is:
 
 ```cpp
 void checkFloatToUint32(float num) {
