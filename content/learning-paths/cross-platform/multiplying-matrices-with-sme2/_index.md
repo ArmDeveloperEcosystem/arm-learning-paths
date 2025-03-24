@@ -40,7 +40,6 @@ operatingsystems:
     - Windows
 shared_path: true
 shared_between:
-    - servers-and-cloud-computing
     - laptops-and-desktops
     - mobile-graphics-and-gaming
 
