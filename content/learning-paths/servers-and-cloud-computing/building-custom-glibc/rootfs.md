@@ -8,24 +8,15 @@ layout: learningpathall
 
 ## Download and unpack root file system
 
-The root file system (or rootfs for short) is the second essential component
-that you will need. The root file system is a collection of files that are essential
-for a Linux system to function. Usually, it also includes various tools that
-make using your system more convenient.
+The root file system (or rootfs for short) is the second essential component that you will need. The root file system is a collection of files that are essential for a Linux system to function. Usually, it also includes various tools that make using your system more convenient.
 
-Since you are providing your own kernel, there isn't much that is required from a
-rootfs. All you need is for it to be built for the AArch64 target and contain
-the tools that you require.
+Since you are providing your own kernel, there isn't much that is required from a rootfs. All you need is for it to be built for the AArch64 target and contain the tools that you require.
 
-To speed things up for this learning path, you will use a readily available rootfs
-for the [Void Linux](https://voidlinux.org/) distro. There are other options for obtaining a working
-root file system, but the rest of this learning path assumes that you are using
-the Void Linux distribution.
+To speed things up for this learning path, you will use a readily available rootfs for the [Void Linux](https://voidlinux.org/) distro. There are other options for obtaining a working root file system, but the rest of this learning path assumes that you are using the Void Linux distribution.
 
-Download the image:
+Download the image (make sure you download into the directory detailed in the 'Naming Conventions' section)
 
 ```bash
-cd $HOME/workspace
 wget https://repo-default.voidlinux.org/live/20250202/void-rpi-aarch64-20250202.img.xz
 ```
 

@@ -39,26 +39,23 @@ repository. Run this command in the workspace directory:
 
 ```bash
 git clone https://git.gitlab.arm.com/tooling/shrinkwrap.git
-export PATH=${PATH}:${HOME}/workspace/shrinkwrap/shrinkwrap
+export PATH=${PATH}:$(pwd)/shrinkwrap/shrinkwrap
 ```
 
 Putting Shrinkwrap's main executable on your `PATH` is all you need to install the tool.
 To check that it works, ensure that the Python virtual environment we created earlier
-is activated, then run this command:
+is activated, then run this command to confirm shrinkwrap has been correctly installed.
 
 ```bash
 shrinkwrap --version
 ```
 
-You should see a version printed.
 
-```output
-shrinkwrap v1.0.0
-```
 
 ## Build firmware for the FVP
 
-Now, you can use the Shrinkwrap tool to build the firmware, the third essential ingredient in our
+Before proceeding, ensure that Docker is installed and usable. Follow the installation
+instructions for your distro. Now, you can use the Shrinkwrap tool to build the firmware, the third essential ingredient in our
 setup. The following step needs to be done once although you will need to repeat it if you
 want to rebuild the firmware:
 
@@ -79,17 +76,17 @@ the components including the device tree for the FVP.
 At this point, we have everything required to boot our system. Shrinkwrap uses so called overlay
 configuration files. The following file instructs Shrinkwrap to connect all the pieces together
 and locate the kernel image, and rootfs. It can also be used to tweak any of the FVP
-parameters. Create a file in $HOME/workspace directory called `aarch64.yaml` using a text editor of your choice. Copy the contents shown below into the file:
+parameters. Create a file in $HOME/workspace directory called `aarch64.yaml` using a text editor of your choice. Copy the contents shown below into the file. Under the ROOTFS and KERNEL values, replace `user` with the the appropriate value (e.g., ubuntu).
 
 ```yaml
 run:
   rtvars:
     ROOTFS:
-      value: ~/workspace/rootfs.img
+      value: /home/user/workspace/rootfs.img
     CMDLINE:
       value: ip=dhcp kpti=off root=/dev/vda2 console=ttyAMA0
     KERNEL:
-      value: ~/workspace/linux-build/arch/arm64/boot/Image
+      value: /home/user/workspace/linux-build/arch/arm64/boot/Image
   params:
     -C bp.hostbridge.userNetworking: 1
     -C bp.hostbridge.userNetPorts: 8022=22,8123=8123
@@ -117,7 +114,7 @@ for more details.
 To run the FVP using Docker, execute the following command:
 
 ```bash
-shrinkwrap run ns-edk2.yaml --overlay $HOME/workspace/aarch64.yaml
+shrinkwrap run ns-edk2.yaml --overlay ~/workspace/aarch64.yaml
 ```
 
 At first, Shrinkwrap starts a Docker container and runs the FVP in it. At the beginning
@@ -155,6 +152,12 @@ When you have logged in, check the properties of your guest system, for example:
 ```bash
 uname -a
 cat /proc/cpuinfo
+```
+
+For example, the following terminal output is observed.
+
+```output
+cat /proc/cpuinfoLinux void-live 6.13.0 #1 SMP PREEMPT Fri Mar 21 10:16:33 UTC 2025 aarch64 GNU/Linux
 ```
 
 ## Powering down
