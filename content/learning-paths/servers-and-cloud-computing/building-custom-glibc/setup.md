@@ -25,10 +25,12 @@ You install packages using `xbps-install`. The `-S` option updates the repositor
 
 ```bash
 xbps-install -y -S
+```
+```bash
 xbps-install -y vim
 ```
 
-You can add a bit of automation to speed up configuring your system from scratch:
+You can add a bit of automation to speed up configuring your system from scratch. Paste the bash script below into a file and run. 
 
 ```bash
 required=(nfs-utils sv-netmount rpcbind)
