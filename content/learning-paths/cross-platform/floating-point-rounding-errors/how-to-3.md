@@ -1,19 +1,22 @@
 ---
-title: Example
-weight: 3
+title: Error propagation
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Error Propagation
+## What is error propagation in x86 and Arm systems?
 
-One cause of different outputs between x86 and Arm stems from the order of instructions and how errors are propagated. As a hypothetical example, an Arm architecture may decide to reorder the instructions that each has a different rounding error (described in the unit in last place section) so that subtle changes are observed. Alternatively, 2 functions that are mathematically equivalent will propagate errors differently on a computer. 
+One cause of different outputs between x86 and Arm stems from the order of instructions and how errors are propagated. As a hypothetical example, an Arm system may decide to reorder the instructions that each have a different rounding error so that subtle changes are observed. 
 
-Consider the example below. Function 1, `f1` and 2, `f2` are mathematically equivalent. Hence they should return the same value given the same input. If we input a very small number, `1e-8`, the error is different due to the loss in precision caused by different operations. Specifically, function `f2` avoids the subtraction of nearly equal number. The full reasoning is out of scope but for those interested should look into the topic of [numerical stability](https://en.wikipedia.org/wiki/Numerical_stability). 
+It is possible that 2 functions that are mathematically equivalent will propagate errors differently on a computer. 
 
-Copy and paste the C++ snippet below into a file named `error-propagation.cpp`. 
+ Functions `f1` and `f2` are mathematically equivalent. You would expect them to return the same value given the same input. 
+ 
+ If the input is a very small number, `1e-8`, the error is different due to the loss in precision caused by different operations. Specifically, `f2` avoids the subtraction of nearly equal number. For a full description look into the topic of [numerical stability](https://en.wikipedia.org/wiki/Numerical_stability). 
 
+Use an editor to copy and paste the C++ code below into a file named `error-propagation.cpp`. 
 
 ```cpp
 #include <stdio.h>
@@ -50,22 +53,24 @@ int main() {
 }
 ```
 
-Compile the source code on both x86 and Arm64 with the following command.
+Compile the code on both x86 and Arm with the following command.
 
 ```bash
 g++ -g error-propagation.cpp -o error-propagation
 ```
 
-Running the 2 binaries shows that the second function, f2, has a small rounding error on both architectures. Additionally, there is a further rounding difference when run on x86 compared to Arm.
+Running the 2 binaries shows that the second function, `f2`, has a small rounding error on both architectures. Additionally, there is a further rounding difference when run on x86 compared to Arm.
 
-on x86:
+Running on x86:
+
 ```output
 f1(1.000000e-08) = 0.0000000000
 f2(1.000000e-08) = 0.0000000050
 Difference (f1 - f2) = -4.9999999696e-09
 Final result after magnification: -0.4999000132
 ```
-on Arm:
+
+Running on Arm:
 ```output
 f1(1.000000e-08) = 0.0000000000
 f2(1.000000e-08) = 0.0000000050
