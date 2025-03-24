@@ -5,12 +5,11 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Prepare an Example Image
 
 In this section, you will use the model to benchmark performance with and without KleidiAI kernels. You will need to compile library files to run the optimized inference.
 
-## Prepare an example image
-
-You will use an image to run a command-line prompt. In this learning path, the tiger below will be used as an example. You can save this image or provide one of your own. Re-name the image to `example.png` in order to use the commands in the following sections.
+You will use an image to run a command-line prompt. In this Learning Path, the tiger below is used as an example. You can save this image or provide one of your own. Rename the image to `example.png` to use the commands in the following sections.
 
 ![example image](example.png)
 
@@ -20,7 +19,7 @@ Use ADB to load the image onto your phone:
 adb push example.png /data/local/tmp/
 ```
 
-## Build binaries for command-line inference
+## Build Binaries for Command-line Inference
 
 Navigate to the MNN project you cloned in the previous section. Create a build directory and run the script. The first time, you will build the binaries with the `-DMNN_KLEIDIAI` flag set to `FALSE`.
 
@@ -44,7 +43,7 @@ export ANDROID_NDK=$ANDROID_NDK_HOME
 ```
 {{% /notice %}}
 
-Push the files to your mobile device. Then, enter a shell on the phone using ADB.
+Push the files to your mobile device, then enter a shell on the phone using ADB:
 
 ```bash
 adb push *so llm_demo tools/cv/*so /data/local/tmp/

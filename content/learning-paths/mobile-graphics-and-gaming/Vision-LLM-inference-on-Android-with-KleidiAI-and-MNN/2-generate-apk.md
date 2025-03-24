@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-In this section, you will try the Qwen model in action using a demo application using a Android Package Kit (APK)
-
 ## Clone MNN repo
+
+In this section, you will try the Qwen model in action using a demo application using a Android Package Kit (APK)
 
 A fork of the upstream MNN repository is set up to enable building the app as an Android Studio project. Run the following to clone the repository and checkout the source tree:
 

@@ -5,27 +5,26 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Install Required Software
 
-In this section, you will set up a development environment by installing dependencies and preparing the Qwen vision model.
+In this section, you will set up your development environment by installing dependencies and preparing the Qwen vision model.
 
-## Install required software
+Install the Android NDK (Native Development Kit) and git-lfs. This Learning Path was tested with NDK version `28.0.12916984` and CMake version `4.0.0-rc1`.
 
-Install the Android NDK (Native Development Kit) and git-lfs. This learning path was tested with NDK version `28.0.12916984` and CMake version `4.0.0-rc1`.
-
-For Ubuntu or Debian systems, you can install CMake and git-lfs with the following command:
+For Ubuntu or Debian systems, install CMake and git-lfs with the following commands:
 
 ```bash
 sudo apt update
 sudo apt install cmake git-lfs -y
 ```
 
-You can use Android Studio to obtain the NDK. Click **Tools > SDK Manager**, and navigate to the the SDK Tools tab. Select the NDK (Side by side) and CMake checkboxes, as shown below:
+Alternatively, you can use Android Studio to obtain the NDK. Click **Tools > SDK Manager** and navigate to the SDK Tools tab. Select the **NDK (Side by side)** and **CMake** checkboxes, as shown below:
 
 ![Install NDK](./install_ndk.png)
 
-Refer to [Install NDK and CMake](https://developer.android.com/studio/projects/install-ndk) for other installation methods.
+See [Install NDK and CMake](https://developer.android.com/studio/projects/install-ndk) for other installation methods.
 
-Make sure Python and pip is installed by verifying a version is printed on running this command:
+Ensure that Python and pip are installed by verifying the version with these commands:
 
 ```bash
 python --version
@@ -33,25 +32,26 @@ pip --version
 ```
 
 {{% notice Note %}}
-The above commands may fail when Python is installed if Python 3.x is not the default version. You can try running `python3 --version` and `pip3 --version` to be sure.
+If Python 3.x is not the default version, try running `python3 --version` and `pip3 --version`.
 {{% /notice %}}
 
-## Set up phone connection
+## Set up Phone Connection
 
-You will need to set up an authorized connection with your phone. The Android SDK Platform Tools package, included in Android Studio, comes with Android Debug Bridge (ADB). You will use this tool to transfer files later on.
+You need to set up an authorized connection with your phone. The Android SDK Platform Tools package, included with Android Studio, provides Android Debug Bridge (ADB) for transferring files. 
 
-Connect your phone to the computer using a USB cable. You will need to activate USB debugging on your phone. Find the **Build Number** in your **Settings** app and tap it 7 times. Then, enable **USB debugging** in **Developer Options**.
+Connect your phone to your computer using a USB cable, and enable USB debugging on your phone. To do this, tap the **Build Number** in your **Settings** app 7 times, then enable **USB debugging** in **Developer Options**.
 
-You should now see your device listed upon running `adb devices`:
+Verify the connection by running You should now see your device listed upon running `adb devices`:
 
 ```output
 List of devices attached
 <DEVICE ID>     device
 ```
+You should see your device listed.
 
-## Download and convert the model
+## Download and Convert the Model
 
-The following commands download the model from Hugging Face, and clones a tool for exporting LLM model to the MNN framework.
+The following commands download the model from Hugging Face, and clone a tool for exporting LLM model to the MNN framework.
 
 ```bash
 cd $HOME
