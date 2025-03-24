@@ -105,6 +105,7 @@ export DATA_DIR=`pwd`/fake_imagenet
 You can now launch the benchmark on your Arm machine, using the command below:
 
 ```bash { env="TF_ENABLE_ONEDNN_OPTS=1;ONEDNN_DEFAULT_FPMATH_MODE=BF16;MODEL_DIR=$HOME/mlperf_inference/vision/classification_and_detection/;DATA_DIR=$HOME/mlperf_inference/vision/classification_and_detection/fake_imagenet", cwd="$HOME/mlperf_inference/vision/classification_and_detection/" }
+export DATA_DIR=`pwd`/fake_imagenet
 ./run_local.sh tf resnet50 cpu
 ```
 

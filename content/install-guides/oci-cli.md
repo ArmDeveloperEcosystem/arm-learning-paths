@@ -67,6 +67,7 @@ Run the command below to add the `oci` command to your search path:
 
 ```bash { target="ubuntu:latest" }
 . $HOME/.bashrc
+cat $HOME/.bashrc
 ```
 
 Verify OCI CLI is installed using the `--version` option:

@@ -75,6 +75,8 @@ Use the features available on your hardware when you run `cmake` in the next sec
 If your platform supports only Neon (`asimd`), set up the build with:
 
 ```bash
+pwd
+ls ..
 cmake -DBUILD_TESTING=On -DARMRAL_ARCH=NEON  ..
 ```
 
