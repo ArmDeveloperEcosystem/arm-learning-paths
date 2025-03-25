@@ -8,21 +8,21 @@ layout: learningpathall
 
 ## Overview
 
-Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you learn how to run [ollama](https://ollama.com/) on Arm-based CPUs in a hybrid architecture (amd64 and Arm) K8s cluster.
+Arm CPUs are widely used in traditional AI/ML use cases. In this Learning Path, you learn how to run [Ollama](https://ollama.com/) on Arm-based CPUs in a hybrid architecture (amd64 and arm64) K8s cluster.
 
-To demonstrate this in a real life scenario, you're going to bring up a Kubernetes cluster with an amd64 node, and add an Arm node.  Each node will be running the same container image via a single ollama pod, so we'll have two pods total (one running amd64, and one running Arm).  You'll run three services, one that only targets amd64 pods, one that only targets Arm pods, and one that targets both amd64 and Arm pods.
+To demonstrate this as a real life scenario, you're going to bring up an initial Kubernetes cluster (depicted as "*1. Inital Cluster (amd64)*" in the image below) with an amd64 node running an Ollama Deployment and Service.
 
-TODO:  IMAGE
+Next, as depicted by "*2. Hybrid Cluster amd64/arm64*", you'll add the arm64 node, and apply an arm64 Deployment and Service to it, so that you can now test both architectures together, and separately, to investigate performance. 
 
-Once you have all three services running, you'll be empowered to experiment with migration options, price/performance, applying the knowledge to other workloads in your environment as you see fit. 
+When satisfied with the arm64 performance over amd64, its easy to delete the amd64-specific node, deployment, and service, to complete the migration, as depicted in "*3. Migrated Cluster (arm64)*".
 
-## Cost to Run
+![Project Overview](images/general_flow.png)
 
-TODO
+Once you've seen how easy it is to add an arm64 to an existing cluster, you can apply the knowledge to experiment with the value arm64 brings to other workloads in your environment as you see fit.
  
 ### Create the cluster
 
-1. From within GCP Console, navigate to [Google Kubernetes Engine](https://console.cloud.google.com/kubernetes/list/overview) and click *Create*.
+1. From within the GCP Console, navigate to [Google Kubernetes Engine](https://console.cloud.google.com/kubernetes/list/overview) and click *Create*.
 
 2. Select *Standard*->*Configure*
 
@@ -36,7 +36,7 @@ The *Cluster basics* tab appears.
 ![Select and Configure Cluster Type](images/cluster_basics.png)
 
 {{% notice Note %}}
-Although this will work in all regions and zones where C4 and C4a instance types are supported, for this demo, we use *us-central1* and *us-central1-1a* regions and zones.  In addition, with simplicity and cost savings in mind, only one node per architecture is used.. 
+Although this will work in all regions and zones where C4 and C4a instance types are supported, for this demo, we use *us-central1* and *us-central1-1a* regions and zones.  In addition, with simplicity and cost savings in mind, only one node per architecture is used. 
 {{% /notice %}}
 
 5. Click on *NODE POOLS*->*default-pool*
@@ -59,7 +59,7 @@ We've chosen node types that will support one pod per node.  If you wish to run 
 
 11. *Click* the *Create* button at the bottom of the screen.
 
-It will take a few moments, but when the green checkmark is showing next to the ollama-on-multiarch cluster, you're ready to continue to test your connection to the cluster.
+It will take a few moments, but when the green checkmark is showing next to the *ollama-on-multiarch* cluster, you're ready to continue to test your connection to the cluster.
 
 ### Connect to the cluster
 
