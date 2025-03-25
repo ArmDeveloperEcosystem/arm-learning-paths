@@ -148,6 +148,10 @@ You can then use your browser to monitor the simulation data in real-time.
 Now you can use the browser to access visualization at the above's URLs:
 In this example is http://34.244.98.151:6080/vnc.html
 
+{{% notice Note %}}
+Ensure that the server allows your IP address and port 6080 to connect.
+{{% /notice %}}
+
 To access the visualizer:
 1. Open a web browser and go to: `http://<server-ip>:6080/vnc.html`
 2. Click **Connect** on the VNC login screen.
