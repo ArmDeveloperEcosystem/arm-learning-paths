@@ -71,7 +71,7 @@ exec -l $SHELL
 Verify OCI CLI is installed using the `--version` option:
 
 ```bash { target="ubuntu:latest", env_source="$HOME/.bashrc" }
-oci --version
+cat $HOME/.bashrc && oci --version
 ```
 
 Configure OCI CLI using the `setup config` command:
