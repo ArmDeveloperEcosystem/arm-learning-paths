@@ -178,7 +178,7 @@ Install ACfL and prerequisites from the Amazon Linux 2023 `rpm` package reposito
 ```bash { target="fedora:latest" }
 sudo dnf update -y
 sudo dnf -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
-sudo dnf config-manager --add-repo https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
+sudo dnf config-manager addrepo --from-repofile=https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
 sudo dnf -y install acfl
 ```
 
@@ -187,7 +187,7 @@ Or using the equivalent `yum` commands:
 ```bash { target="fedora:latest" }
 sudo yum update -y
 sudo yum -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
-sudo yum config-manager --add-repo https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
+sudo yum config-manager addrepo --from-repofile=https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
 sudo yum -y install acfl
 ```
 
@@ -204,7 +204,7 @@ Install ACfL and prerequisites from the RHEL 9 `rpm` package repository with `dn
 ```bash { target="fedora:latest" }
 sudo dnf update -y
 sudo dnf -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
-sudo dnf config-manager --add-repo https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
+sudo dnf config-manager addrepo --from-repofile=https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
 sudo dnf -y install acfl
 ```
 
@@ -213,7 +213,7 @@ Or using the equivalent `yum` commands:
 ```bash { target="fedora:latest" }
 sudo yum update -y
 sudo yum -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
-sudo yum config-manager --add-repo https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
+sudo yum config-manager addrepo --from-repofile=https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
 sudo yum -y install acfl
 ```
 
