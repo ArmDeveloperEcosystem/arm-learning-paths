@@ -9,18 +9,18 @@ key_ip:
 - Ethos-U
 maintopic: true
 operatingsystems_filter:
-- Android: 1
+- Android: 2
 - Baremetal: 32
-- Linux: 24
+- Linux: 26
 - macOS: 5
 - RTOS: 9
-- Windows: 3
+- Windows: 4
 subjects_filter:
 - CI-CD: 5
 - Containers and Virtualization: 6
 - Embedded Linux: 3
 - Libraries: 3
-- ML: 11
+- ML: 12
 - Performance and Architecture: 23
 - RTOS Fundamentals: 4
 - Security: 2
@@ -42,19 +42,19 @@ tools_software_languages_filter:
 - Clang: 1
 - CMSIS: 5
 - CMSIS-Toolbox: 3
+- CNN: 1
 - Coding: 29
 - Containerd: 1
 - DetectNet: 1
 - Docker: 9
 - DSTREAM: 2
-- Edge Impulse: 1
-- ExecuTorch: 1
+- ExecuTorch: 3
 - Fixed Virtual Platform: 9
 - FPGA: 1
 - Fusion 360: 1
 - FVP: 1
 - GCC: 8
-- GenAI: 2
+- GenAI: 3
 - GitHub: 3
 - GitLab: 1
 - Himax SDK: 1
@@ -63,16 +63,15 @@ tools_software_languages_filter:
 - Keil: 7
 - Keil MDK: 3
 - Kubernetes: 1
-- LLM: 2
+- LLM: 3
 - MDK: 2
 - MPS3: 1
 - MXNet: 1
 - Neon: 1
-- Node.js: 1
 - Paddle: 1
 - Porcupine: 1
-- Python: 4
-- PyTorch: 1
+- Python: 5
+- PyTorch: 3
 - QEMU: 1
 - Raspberry Pi: 5
 - Remote.It: 1
@@ -82,6 +81,7 @@ tools_software_languages_filter:
 - STM32: 2
 - TensorFlow: 3
 - TensorRT: 1
+- tinyML: 1
 - Trusted Firmware: 3
 - TrustZone: 2
 - TVMC: 1
