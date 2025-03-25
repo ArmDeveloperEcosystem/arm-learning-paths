@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 ## Install Required Software
 
-In this section, you will set up your development environment by installing dependencies and preparing the Qwen vision model.
+In this section, you'll set up your development environment by installing dependencies and preparing the Qwen vision model.
 
 Install the Android NDK (Native Development Kit) and git-lfs. This Learning Path was tested with NDK version `28.0.12916984` and CMake version `4.0.0-rc1`.
 

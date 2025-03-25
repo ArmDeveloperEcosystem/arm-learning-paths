@@ -7,9 +7,11 @@ layout: learningpathall
 ---
 ## Prepare an Example Image
 
-In this section, you will use the model to benchmark performance with and without KleidiAI kernels. You will need to compile library files to run the optimized inference.
+In this section, you'll benchmark model performance with and without KleidiAI kernels. To run optimized inference, you'll first need to compile the required library files. You'll also need an example image to run command-line prompts. 
 
-You will use an image to run a command-line prompt. In this Learning Path, the tiger below is used as an example. You can save this image or provide one of your own. Rename the image to `example.png` to use the commands in the following sections.
+You can use the provided image of the tiger below that this Learning Path uses, or choose your own. 
+
+Whichever you select, rename the image to `example.png` to use the commands in the following sections.
 
 ![example image](example.png)
 
@@ -21,7 +23,11 @@ adb push example.png /data/local/tmp/
 
 ## Build Binaries for Command-line Inference
 
-Navigate to the MNN project you cloned in the previous section. Create a build directory and run the script. The first time, you will build the binaries with the `-DMNN_KLEIDIAI` flag set to `FALSE`.
+Navigate to the MNN project that you cloned in the previous section. 
+
+Create a build directory and run the build script. 
+
+The first time that you do this, build the binaries with the `-DMNN_KLEIDIAI` flag set to `FALSE`.
 
 ```bash
 cd $HOME/MNN/project/android
@@ -33,7 +39,7 @@ mkdir build_64 && cd build_64
   -DMNN_USE_LOGCAT=true -DMNN_IMGCODECS=true -DMNN_BUILD_OPENCV=true"
 ```
 {{% notice Note %}}
-If your NDK toolchain isn't set up correctly, you may run into issues with the above script. Make note of where the NDK was installed - this will be a directory named after the version you downloaded earlier. Try exporting the following environment variables before re-running `build_64.sh`.
+If your NDK toolchain isn't set up correctly, you might run into issues with the above script. Make a note of where the NDK was installed - this will be a directory named after the version you downloaded earlier. Try exporting the following environment variables before re-running `build_64.sh`:
 
 ```bash
 export ANDROID_NDK_HOME=<path-to>/ndk/28.0.12916984
@@ -43,14 +49,16 @@ export ANDROID_NDK=$ANDROID_NDK_HOME
 ```
 {{% /notice %}}
 
-Push the files to your mobile device, then enter a shell on the phone using ADB:
+## Push Files and Run Inference via ADB
+
+Push the required files to your Android device, then enter a shell on the device using ADB:
 
 ```bash
 adb push *so llm_demo tools/cv/*so /data/local/tmp/
 adb shell
 ```
 
-The following commands should be run in the ADB shell. Navigate to the directory you pushed the files to, add executable permissions to the `llm_demo` file and export an environment variable for it to run properly. After this, use the example image you transferred earlier to create a file containing the text content for the prompt.
+Run the following commands in the ADB shell. Navigate to the directory you pushed the files to, add executable permissions to the `llm_demo` file and export an environment variable for it to run properly. After this, use the example image you transferred earlier to create a file containing the text content for the prompt.
 
 ```bash
 cd /data/local/tmp/
@@ -59,13 +67,13 @@ export LD_LIBRARY_PATH=$PWD
 echo "<img>./example.png</img>Describe the content of the image." > prompt
 ```
 
-Finally, run an inference on the model with the following command.
+Finally, run an inference on the model with the following command:
 
 ```bash
 ./llm_demo models/Qwen-VL-2B-convert-4bit-per_channel/config.json prompt
 ```
 
-If the launch is successful, you should see the following output, with the performance benchmark at the end.
+If the launch is successful, you should see the following output, with the performance benchmark at the end:
 
 ```output
 config path is models/Qwen-VL-2B-convert-4bit-per_channel/config.json
@@ -85,17 +93,20 @@ prefill speed = 192.28 tok/s
 ##################################
 ```
 
-## Enable KleidiAI and re-run inference
+## Enable KleidiAI and Re-run Inference
 
-The next step is to re-generate the binaries with KleidiAI activated. This is done by updating the flag `-DMNN_KLEIDIAI` to `TRUE`. From the `build_64` directory, run:
+The next step is to re-generate the binaries with KleidiAI activated. This is done by updating the flag `-DMNN_KLEIDIAI` to `TRUE`. 
+
+From the `build_64` directory, run:
 ```bash
 ../build_64.sh "-DMNN_LOW_MEMORY=true -DLLM_SUPPORT_VISION=true -DMNN_KLEIDIAI=TRUE \
 -DMNN_CPU_WEIGHT_DEQUANT_GEMM=true -DMNN_BUILD_LLM=true \
 -DMNN_SUPPORT_TRANSFORMER_FUSE=true -DMNN_ARM82=true -DMNN_OPENCL=true \
 -DMNN_USE_LOGCAT=true -DMNN_IMGCODECS=true -DMNN_BUILD_OPENCV=true"
 ```
+## Update Files on the Device
 
-The next step is to update the files on your phone. Start by removing the ones used in the previous step. Then, push the new ones with the same command as before.
+First, remove existing binaries from your Android device, then push the updated files:
 
 ```bash
 adb shell "cd /data/local/tmp; rm -rf *so llm_demo tools/cv/*so"
@@ -103,7 +114,7 @@ adb push *so llm_demo tools/cv/*so /data/local/tmp/
 adb shell
 ```
 
-In the new ADB shell, preform the same steps as in the previous section.
+With the new ADB shell, run the following commands:
 
 ```bash
 cd /data/local/tmp/
@@ -111,8 +122,10 @@ chmod +x llm_demo
 export LD_LIBRARY_PATH=$PWD
 ./llm_demo models/Qwen-VL-2B-convert-4bit-per_channel/config.json prompt
 ```
+## Benchmark Results
 
-The same output should be displayed, with the benchmark printed at the end:
+After running with KleidiAI enabled, you should see improved benchmarks. Example results:
+
 ```output
 #################################
 prompt tokens num = 243
@@ -126,7 +139,7 @@ prefill speed = 266.13 tok/s
 ##################################
 ```
 
-This time, you should see an improvement in the benchmark. Below is an example table showing the uplift on three relevant metrics after enabling the KleidiAI kernels.
+This time, you should see an improvement in the benchmark. Below is an example table showing the uplift on three relevant metrics after enabling the KleidiAI kernels:
 
 | Benchmark           | Without KleidiAI | With KleidiAI |
 |---------------------|------------------|---------------|
@@ -134,6 +147,8 @@ This time, you should see an improvement in the benchmark. Below is an example t
 | Prefill Speed       | 192.28 tok/s     | 266.13 tok/s  |
 | Decode Speed        | 34.73 tok/s      | 44.96 tok/s   |
 
-The prefill speed describes how fast the model processes the input prompt. The decode speed corresponds to the rate at which the model generates new tokens after the input is processed
+**Prefill speed** describes how fast the model processes the input prompt. 
 
-This shows the advantages of using Arm optimized kernels for your ViT use-cases.
+**Decode Speed** indicates how quickly the model generates new tokens after the input is processed.
+
+These benchmarks clearly demonstrate the performance advantages of using Arm-optimized KleidiAI kernels for vision transformer (ViT) workloads.
