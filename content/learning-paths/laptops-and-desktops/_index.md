@@ -11,7 +11,7 @@ operatingsystems_filter:
 - Android: 2
 - Baremetal: 1
 - ChromeOS: 1
-- Linux: 28
+- Linux: 29
 - macOS: 7
 - Windows: 40
 subjects_filter:
@@ -19,7 +19,7 @@ subjects_filter:
 - Containers and Virtualization: 5
 - Migration to Arm: 27
 - ML: 1
-- Performance and Architecture: 23
+- Performance and Architecture: 24
 subtitle: Create and migrate apps for power efficient performance
 title: Laptops and Desktops
 tools_software_languages_filter:
@@ -31,7 +31,7 @@ tools_software_languages_filter:
 - assembly: 1
 - C: 3
 - C#: 6
-- C++: 3
+- C++: 4
 - C/C++: 4
 - CCA: 1
 - Clang: 11
