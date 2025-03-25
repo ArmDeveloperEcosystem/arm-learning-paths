@@ -133,7 +133,7 @@ experience an improvement in SSH connection speed:
 ## Configure SSH on host
 
 Commands in this section should be run on the host system.
-
+nano
 Using a password for SSH can be inconvenient when automating tasks. The solution is
 to set up authentication via SSH keys. Since we are using the Dropbear server, we need
 to use the Dropbear client and configure SSH keys for it.
@@ -178,18 +178,19 @@ will use the username `user`.
 SSH as root into the guest system running on FVP and execute these commands:
 
 ```bash
-id -u user 2> /dev/null || useradd -m -s /bin/bash user
-
-test -d /home/user/.ssh || {
-  mkdir -p /home/user/.ssh
-  chown user:user /home/user/.ssh
-  chmod 0700 /home/user/.ssh
-}
-
-test -f /root/.ssh/authorized_keys && {
-  cp /root/.ssh/authorized_keys /home/user/.ssh/authorized_keys
-  chown user:user /home/user/.ssh/authorized_keys
-  chmod 0600 /home/user/.ssh/authorized_keys
+# Create user
+id -u user 2> /dev/null || {
+  useradd -m -s /bin/bash user
+  test -d /home/user/.ssh || {
+    mkdir -p /home/user/.ssh
+    chown user:user /home/user/.ssh
+    chmod 0700 /home/user/.ssh
+  }
+  test -f /root/.ssh/authorized_keys && {
+    cp /root/.ssh/authorized_keys /home/user/.ssh/authorized_keys
+    chown user:user /home/user/.ssh/authorized_keys
+    chmod 0600 /home/user/.ssh/authorized_keys
+  }
 }
 ```
 
@@ -197,7 +198,7 @@ Now, you should be able to SSH into the guest system running on the FVP as a non
 without having to enter a password:
 
 ```bash
-dbclient -p 8022 fvp
+dbclient -l user -p 8022 fvp
 ```
 
 ## Configure a shared workspace
