@@ -177,8 +177,37 @@ Now that your Azure Function is fully tested and ready, it's time to deploy it t
 ![img39 alt-text#center](Figures/39.png)
 3. Wait for the deployment to complete. This process typically takes a few moments. Once deployed, your Azure Function is hosted in Azure and ready for use.
 4. Open the Azure Portal, and go to your function app (in this example, "IoTTemperatureAlertFunc"). You will see the deployed functions:
-![img34 alt-text#center](Figures/40.png)
+![img40 alt-text#center](Figures/40.png)
 
-## Configure Functions
+## Configure Function App Settings
+We have just deployed the functions to Azure. Previously, when testing the functions locally, we used the local.settings.json file to store the Cosmos DB connection string. However, this local configuration file is not deployed to Azure. Therefore, we need to update the corresponding settings directly within the Azure portal.
 
-## Testing
+Azure Function App settings, which are also known as application settings or environment variables, are designed to securely store sensitive configuration information, such as database connection strings, API keys, and other confidential details. Storing the Cosmos DB connection string as an app setting in Azure ensures secure management of your database credentials, allowing your function to safely access Cosmos DB without exposing sensitive information within your source code.
+
+Follow these steps to configure the Cosmos DB connection string
+1. In the Azure Portal navigate to Azure Function App.
+2. Click Environmental variables (under Settings)
+3. Click the + Add button
+4. Enter the name you used in your code (e.g., armiotcosmosdb_DOCUMENTDB).
+5. Paste the Cosmos DB connection string into the Value field:
+![img41 alt-text#center](Figures/41.png)
+6. Click Apply to add the setting.
+7. Press Apply at the bottom to apply changes. Then, confirm to save changes
+
+## Testing the Azure Function
+Once you've configured the connection string, test your deployed Azure Function as follows:
+1. Return to the Overview page of your Azure Function App.
+2. Click on your HTTP-triggered function (GetAverageTemperature).
+3. Click Get function URL and copy the displayed URL (under default):
+![img42 alt-text#center](Figures/42.png)
+4. Open this URL in your web browser.
+5. Start your IoT simulator to begin streaming telemetry data to Cosmos DB.
+6. Refresh or access the function URL again, and you should see the calculated average temperature displayed:
+![img43 alt-text#center](Figures/43.png)
+
+This confirms your Azure Function successfully connects to Cosmos DB, retrieves real-time data, and calculates the average temperature as intended
+
+## Summary and next steps
+In this section, you created an HTTP-triggered Azure Function that retrieves and aggregates records from Cosmos DB. You then deployed your Azure Function to Azure, configured secure application settings to safely store the Cosmos DB connection string, and verified the functionality. You also learned that the local configuration file (local.settings.json) is not automatically deployed to Azure, making it necessary to manually set up these sensitive settings within the Azure portal. Securely managing these application settings in Azure ensures that your functions can reliably connect to Cosmos DB, facilitating the accurate retrieval and processing of IoT telemetry data.
+
+In the next step, you’ll create a static website that leverages this HTTP-triggered function to display the average temperature in a web-based portal, thus completing your IoT solution.
