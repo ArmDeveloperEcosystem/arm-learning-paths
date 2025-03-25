@@ -1,5 +1,5 @@
 ---
-title: Split into cloud container instances and RD-1AE FVP
+title: Split into cloud container instances and RD-1AE Corellium
 weight: 5
 
 ### FIXED, DO NOT MODIFY

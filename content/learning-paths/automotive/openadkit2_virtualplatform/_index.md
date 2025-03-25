@@ -12,9 +12,12 @@ learning_objectives:
 
 prerequisites:
     - Two Arm-based Neoverse cloud instances or a local Arm Neoverse Linux computer with at least 16 CPUs and 32GB of RAM.
-    - Corellium virtual platform account (Sign up here).
+    - Completion of the previous learning path. http://learn.arm.com/learning-paths/automotive/openadkit1_container/
+    - A Corellium virtual platform account. https://www.corellium.com/
     - Basic knowledge of Docker operations.
-author: Odin Shen
+author: 
+    - Odin Shen
+    - Julien Jayat
 
 ### Tags
 skilllevels: Advanced
