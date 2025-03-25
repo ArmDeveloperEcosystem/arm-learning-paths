@@ -122,7 +122,7 @@ device is one of [cpu|gpu]
 
 For all other options, run help as shown below:
 
-```bash { env="TF_ENABLE_ONEDNN_OPTS=1 ONEDNN_DEFAULT_FPMATH_MODE=BF16 MODEL_DIR=$HOME/mlperf_inference/vision/classification_and_detection/ DATA_DIR=$HOME/mlperf_inference/vision/classification_and_detection/fake_imagenet", cwd="$HOME/mlperf_inference/vision/classification_and_detection/" }
+```bash { env="TF_ENABLE_ONEDNN_OPTS=1 ONEDNN_DEFAULT_FPMATH_MODE=BF16 MODEL_DIR=$HOME/mlperf_inference/vision/classification_and_detection DATA_DIR=$HOME/mlperf_inference/vision/classification_and_detection/fake_imagenet", cwd="$HOME/mlperf_inference/vision/classification_and_detection" }
 ./run_local.sh --help
 ```
 

@@ -114,7 +114,7 @@ Each command sequence includes accepting the license agreement to automate the i
 
 #### Ubuntu Linux:
 
-```bash { target="ubuntu:latest", env="DEBIAN_FRONTEND=noninteractive" }
+```bash { target="ubuntu:latest" }
 sudo -E apt-get -y install environment-modules python3 libc6-dev
 tar -xvf arm-compiler-for-linux_24.10.1_Ubuntu-22.04_aarch64.tar
 cd ./arm-compiler-for-linux_24.10.1_Ubuntu-22.04
@@ -163,7 +163,7 @@ The ACfL Ubuntu package repository is now ready to use.
 
 Download and install Arm Compiler for Linux with:
 
-```console
+```bash { target="ubuntu:latest" }
 sudo apt install acfl -y
 ```
 
