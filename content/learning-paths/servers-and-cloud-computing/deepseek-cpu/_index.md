@@ -1,22 +1,20 @@
 ---
-title: Deploy a Large Language Model (LLM) chatbot with llama.cpp using KleidiAI on Arm servers
+title: Deploy DeepSeek R1 on Arm servers
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers interested in running LLMs on Arm-based servers. 
+who_is_this_for: This is an introductory topic for developers interested in running DeepSeek-R1 on Arm-based servers. 
 
 learning_objectives:
     - Download and build llama.cpp on your Arm server.
-    - Download a pre-quantized Llama 3.1 model from Hugging Face.
+    - Download a pre-quantized DeepSeek-R1 model from Hugging Face.
     - Run the pre-quantized model on your Arm CPU and measure the performance.
 
 prerequisites:
     - An AWS Graviton4 r8g.16xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
 
 author:
-    - Pareena Verma
-    - Jason Andrews
-    - Zach Lasiuk
+    - Tianyu Li
 
 ### Tags
 skilllevels: Introductory
@@ -29,13 +27,12 @@ tools_software_languages:
     - LLM
     - GenAI
     - Python
-    - Demo
 
 
 further_reading:
     - resource:
-        title: Getting started with Llama
-        link: https://llama.meta.com/get-started
+        title: Getting started with DeepSeek-R1
+        link: https://huggingface.co/deepseek-ai/DeepSeek-R1
         type: documentation
     - resource:
         title: Hugging Face Documentation
@@ -46,8 +43,8 @@ further_reading:
         link: https://blogs.oracle.com/ai-and-datascience/post/democratizing-generative-ai-with-cpu-based-inference
         type: blog
     - resource: 
-        title: Llama-2-7B-Chat-GGUF
-        link: https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF
+        title: DeepSeek-R1-GGUF
+        link: https://huggingface.co/bartowski/DeepSeek-R1-GGUF 
         type: website
 
 

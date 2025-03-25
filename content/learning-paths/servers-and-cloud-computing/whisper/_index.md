@@ -30,6 +30,7 @@ operatingsystems:
 tools_software_languages:
     - Python
     - Whisper
+    - Demo
 cloud_service_providers: AWS
     
 

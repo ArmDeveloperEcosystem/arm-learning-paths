@@ -28,7 +28,8 @@ armips:
     - Neoverse
 tools_software_languages:
     - C++
-
+operatingsystems:
+    - Linux
 shared_path: true
 shared_between:
     - servers-and-cloud-computing
