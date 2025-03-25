@@ -44,7 +44,10 @@ operatingsystems:
     - Linux
     - Windows
 
-
+shared_path: true
+shared_between:
+    - servers-and-cloud-computing
+    - mobile-graphics-and-gaming
 
 further_reading:
      - resource:
