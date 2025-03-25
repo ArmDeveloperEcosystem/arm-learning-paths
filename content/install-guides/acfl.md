@@ -163,7 +163,7 @@ The ACfL Ubuntu package repository is now ready to use.
 
 Download and install Arm Compiler for Linux with:
 
-```bash { target="ubuntu:latest" }
+```console
 sudo apt install acfl -y
 ```
 
@@ -201,7 +201,7 @@ Arm Compiler for Linux is available to install with either the `dnf` or `yum` sy
 
 Install ACfL and prerequisites from the RHEL 9 `rpm` package repository with `dnf`:
 
-```bash { target="fedora:latest" }
+```console
 sudo dnf update -y
 sudo dnf -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
 sudo dnf config-manager addrepo --from-repofile=https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
@@ -210,7 +210,7 @@ sudo dnf -y install acfl
 
 Or using the equivalent `yum` commands:
 
-```bash { target="fedora:latest" }
+```console
 sudo yum update -y
 sudo yum -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
 sudo yum config-manager addrepo --from-repofile=https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
@@ -223,7 +223,7 @@ The ACfL tools are now ready to use.
 
 Arm Compiler for Linux uses environment modules to dynamically modify your user environment. Refer to the [Environment Modules documentation](https://lmod.readthedocs.io/en/latest/#id) for more information.
 
-Set up the environment, for example, in your `.bashrc` and add module files.
+Set up the environment, for example, in your `.bashrc` and add module files. Then, list the available modules:
 
 #### Ubuntu Linux:
 
@@ -231,6 +231,7 @@ Set up the environment, for example, in your `.bashrc` and add module files.
 echo ". /usr/share/modules/init/bash" >> ~/.bashrc
 echo "module use /opt/arm/modulefiles" >> ~/.bashrc
 . ~/.bashrc
+module avail
 ```
 
 #### Red Hat or Amazon Linux:
@@ -239,11 +240,6 @@ echo "module use /opt/arm/modulefiles" >> ~/.bashrc
 echo ". /usr/share/Modules/init/bash" >> ~/.bashrc
 echo "module use /opt/arm/modulefiles" >> ~/.bashrc
 . ~/.bashrc
-```
-
-To list available modules:
-
-```bash
 module avail
 ```
 
