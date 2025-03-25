@@ -128,7 +128,7 @@ The executables from the build are created in the `bin` directory.
 Run a check to validate that `Vectorscan` is built and running correctly:
 
 ```bash { cwd="./vectorscan/build" }
-ls bin && ./bin/unit-vectorscan
+ls bin && ./bin/unit-hyperscan
 ```
 
 All the unit tests should run successfully. At the end of execution you will see output similar to:

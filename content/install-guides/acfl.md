@@ -86,7 +86,7 @@ bash <(curl -L https://developer.arm.com/-/cdn-downloads/permalink/Arm-Compiler-
 
 Download releases from the command line using `wget`. Install `wget` if not present.
 
-```console
+```bash
 sudo apt install wget
 ```
 
@@ -126,7 +126,7 @@ sudo ./arm-compiler-for-linux_24.10.1_Ubuntu-22.04.sh --accept
 ```bash { target="fedora:latest" }
 sudo yum -y install environment-modules python3 glibc-devel
 tar -xvf arm-compiler-for-linux_24.10.1_RHEL-9_aarch64.tar
-cd arm-compiler-for-linux_24.10.1_RHEL-9
+cd ./arm-compiler-for-linux_24.10.1_RHEL-9
 sudo ./arm-compiler-for-linux_24.10.1_RHEL-9.sh --accept
 ```
 
@@ -163,7 +163,7 @@ The ACfL Ubuntu package repository is now ready to use.
 
 Download and install Arm Compiler for Linux with:
 
-```console
+```bash { target="ubuntu:latest" }
 sudo apt install acfl
 ```
 
@@ -243,7 +243,7 @@ echo "module use /opt/arm/modulefiles" >> ~/.bashrc
 
 To list available modules:
 
-```console
+```bash
 module avail
 ```
 
@@ -314,7 +314,7 @@ ACfL is now [ready to use](#armclang).
 To get started with the Arm C/C++ Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```console
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
 armclang --version
 ```
 
@@ -352,7 +352,7 @@ Hello, C World!
 To get started with the Arm Fortran Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```console
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
 armflang --version
 ```
 

@@ -74,7 +74,7 @@ Use the features available on your hardware when you run `cmake` in the next sec
 
 If your platform supports only Neon (`asimd`), set up the build with:
 
-```bash { cwd="$HOME/ral/build"}
+```bash { pre_cmd="cd $HOME/ral && mkdir build && cd build"}
 cmake -DBUILD_TESTING=On -DARMRAL_ARCH=NEON  ..
 ```
 
@@ -102,7 +102,7 @@ cmake -DBUILD_TESTING=On -DARMRAL_ARCH=SVE -DCMAKE_INSTALL_PREFIX=/home/ubuntu/a
 
 Build the library using `make`:
 
-```bash { cwd="$HOME/ral/build"}
+```bash { pre_cmd="cd $HOME/ral && mkdir build && cd build"}
 make
 ```
 
@@ -110,7 +110,7 @@ make
 
 Install the library:
 
-```bash { cwd="$HOME/ral/build"}
+```bash { pre_cmd="cd $HOME/ral && mkdir build && cd build"}
 sudo make install
 ```
 
