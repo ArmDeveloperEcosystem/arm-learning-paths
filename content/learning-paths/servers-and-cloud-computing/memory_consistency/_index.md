@@ -1,5 +1,5 @@
 ---
-title: Explore The Arm Memory Model & Thread Synchronization
+title: Explore The Arm Memory Model and Thread Synchronization
 
 minutes_to_complete: 150
 
@@ -35,7 +35,7 @@ further_reading:
         link: https://developer.arm.com/documentation/ddi0487/la
         type: documentation
     - resource:
-        title: Armv8 Barriers
+        title: "Barriers, Learn the Architecture: Armv8-A Memory Systems."
         link: https://developer.arm.com/documentation/100941/0101/Barriers
         type: documentation
     - resource:
