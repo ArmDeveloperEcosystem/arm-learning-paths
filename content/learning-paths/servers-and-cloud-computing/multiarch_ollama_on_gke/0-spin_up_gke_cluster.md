@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Project overview
 
-Arm CPUs are widely used in traditional AI/ML use cases. In this Learning Path, you learn how to run [Ollama](https://ollama.com/) on Arm-based CPUs in a hybrid architecture (amd64 and arm64) K8s cluster.
+Arm CPUs are widely used in AI/ML use cases. In this Learning Path, you will learn how to run [Ollama](https://ollama.com/) on Arm-based CPUs in a hybrid architecture (amd64 and arm64) K8s cluster.
 
 To demonstrate this, you can bring up an initial Kubernetes cluster (depicted as "*1. Initial Cluster (amd64)*" in the image below) with an amd64 node running an Ollama Deployment and Service.
 
-Next, as depicted by "*2. Hybrid Cluster amd64/arm64*", you'll add the arm64 node, and apply an arm64 Deployment and Service to it, so that you can now test both architectures together, and separately, to investigate performance. 
+Next, as depicted by "*2. Hybrid Cluster amd64/arm64*", you'll add the arm64 node, and apply an arm64 deployment and service to it, so that you can now test both architectures together, and separately, to investigate performance. 
 
 When you are satisfied with the arm64 performance over amd64, its easy to delete the amd64-specific node, deployment, and service, to complete the migration, as depicted in "*3. Migrated Cluster (arm64)*".
 
@@ -52,14 +52,14 @@ Although this will work in all regions and zones where C4 and C4a instance types
 10. For *Machine Type*, select *c4-standard-4*
 
 {{% notice Note %}}
-The chosen node types support only one pod per node. If you wish to run multiple pods per node, assume each node should provide about 10GB memory per pod. 
+The chosen node types support only one pod per node. If you wish to run multiple pods per node, each node should provide about 10GB memory per pod. 
 {{% /notice %}}
 
 ![Configure amd64 node type](images/configure-x86-note-type.png)
 
 11. *Click* the *Create* button at the bottom of the screen.
 
-It will take a few moments, but when the green checkmark is showing next to the *ollama-on-multiarch* cluster, you're ready to continue to test your connection to the cluster.
+It will take a few moments, but when the green checkmark is showing next to the `ollama-on-multiarch` cluster, you're ready to continue to test your connection to the cluster.
 
 ### Connect to the cluster
 
@@ -75,19 +75,23 @@ export CLUSTER_NAME=ollama-on-multiarch
 export PROJECT_ID=YOUR_PROJECT_ID
 gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
 ```
+
 If you get the message:
 
-```commandline
+```output
 CRITICAL: ACTION REQUIRED: gke-gcloud-auth-plugin, which is needed for continued use of kubectl, was not found or is not executable. Install gke-gcloud-auth-plugin for use with kubectl by following https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#install_plugin
 ```
+
 This command should help resolve it:
 
 ```bash
 gcloud components install gke-gcloud-auth-plugin
 ```
+
 Finally, test the connection to the cluster with this command:
 
 ```commandline
 kubectl cluster-info
 ```
-If you receive a non-error response, you're successfully connected to the k8s cluster!
+
+If you receive a non-error response, you're successfully connected to the K8s cluster.
