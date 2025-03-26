@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Example
 
-The following `C++` snippet takes user input as the loop size so that the loop size, `max_loop_size`, is only known at runtime. This initialises an array of size, , `max_loop_size` with the value for each element corresponding to the index position. The function, `foo`, loops of each element to print out the sum of all elements. 
+The following `C++` snippet takes user input as the loop size so that the loop size, `max_loop_size`, is only known at runtime. This initialises an array of size, , `max_loop_size` with the value for each element corresponding to the index position. The function, `foo`, loops through each element to print out the sum of all elements. 
 
 Copy the snippet below into a file named, `no-context.cpp`. 
 
@@ -51,10 +51,10 @@ int main() {
 Compiling using the following command. 
 
 ```bash
-g++ -O3 -march=armv8-a+simd -o no_context
+g++ -O3 -march=armv8-a+simd no_context.cpp -o no_context
 ```
 
-Running the example with the number 4000 leads to the following results. Naturally you will see variability depending on which platform you run this on. 
+Running the example with the number 4000 leads to the following results. You will see runtime variability depending on which platform you run this on. 
 
 ```output
 ./no_context 

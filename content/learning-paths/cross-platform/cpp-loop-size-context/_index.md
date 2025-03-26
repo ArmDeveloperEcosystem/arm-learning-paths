@@ -1,9 +1,9 @@
 ---
-title: Learn to improve for loop run time with loop size context
+title: Learn to Optimize C++ Loops with Size Context
 
 minutes_to_complete: 15
 
-who_is_this_for: C++ developers
+who_is_this_for: C++ developer who want to improve the runtime of for loops with basic insider knowledge of the loop size
 
 learning_objectives: 
     - Learn how to add preexisting knowledge of loop sizes to for loops
@@ -16,7 +16,7 @@ author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
-subjects: C++
+subjects: ML
 armips:
     - Neoverse
 tools_software_languages:

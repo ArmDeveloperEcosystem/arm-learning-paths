@@ -8,21 +8,23 @@ layout: learningpathall
 
 ## Adding Inside Knowledge
 
-To make the compiler aware that the input will be a multiple of 4 we will rewrite our loop size as the following. 
+To explicitly inform the compiler that our input will always be a multiple of 4, we can rewrite the loop size calculation as follows:
 
 ```output
 ((max_loop_size/4)*4)
 ```
 
-Mathematically this may seem redundant. However since `(max_loop_size/4)` will be truncated to an integer this guarantees `(max_loop_size/4)*4` is a multiple of 4. 
+At first glance, this calculation might seem mathematically redundant. However, since the expression `(max_loop_size/4)` is an integer division, it truncates the result, effectively guaranteeing that `(max_loop_size/4)*4` will always yield a number divisible by 4. The compiler can pick up on this information and optimise accordingly. 
 
-As slightly easier to read method that avoids confusion when arguments are passed in is dividing the variable before passing it in. For example.
+As slightly easier to read method that avoids confusion when passing arguments is to divide the variable and rename before it is passed in. For example.
 
 ```output
 (max_loop_size_div_4 * 4)
 ```
 
-## Adding Insider Knowledge
+## Improved Example
+
+Copy the snippet below and paste into a file named `context.cpp`.
 
 ```cpp
 #include <iostream>
@@ -64,7 +66,7 @@ int main() {
 Again compile with the same compiler flags. 
 
 ```bash
-g++ -O3 -march=armv8-a+simd  -o context
+g++ -O3 -march=armv8-a+simd context.cpp -o context
 ```
 
 ```output
@@ -73,17 +75,11 @@ Enter a value for max_loop_size (must be a multiple of 4): 40000
 Sum: 799980000
 Time taken by foo: 24650 nanoseconds
 ```
+In this particular run, the time taken has significantly reduced compared to our previous example. 
 
 ## Comparison
 
-To compare we will use compiler explorer to see the assembly. 
+To compare we will use compiler explorer to see the assembly [here](https://godbolt.org/z/nvx4j1vTK). 
 
-First, looking at the example without context [here](https://godbolt.org/z/qPaW5Kjxa).
-Second, looking at the example with context [here](https://godbolt.org/z/rhj65Pe4v).
-
-
-[Here](https://godbolt.org/z/nvx4j1vTK). 
-
-As the assembly shows we have fewer lines of assembly corresponding to the function `foo` as there is less setup code to account given the insider knowledge. 
-
+As the assembly shows we have fewer lines of assembly corresponding to the function `foo` when context is added. This is because the compiler can optimise the conditional checking and any clean up code given the context. 
 
