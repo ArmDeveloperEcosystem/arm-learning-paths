@@ -220,11 +220,11 @@ sudo apt -y install nfs-kernel-server
 sudo systemctl disable nfs-kernel-server
 ```
 
-Add this line to the `/etc/exports` file (we presume that host user ID is `1000` and group ID
-is `1000`, amend according to your actual setup):
+Add this line to the `/etc/exports` file (we presume that host user ID is `1000`, group ID
+is `1000` and user is called user, amend according to your actual setup). 
 
 ```
-/home/user/workspace 172.17.0.0/24(rw,sync,no_subtree_check,all_squash,anonuid=1000,anongid=1000,insecure)
+/home/<user>/workspace 172.17.0.0/24(rw,sync,no_subtree_check,all_squash,anonuid=1000,anongid=1000,insecure)
 ```
 
 We allow access only from clients within the Docker network (`172.17.0.0/24`) and use the `insecure`
@@ -246,12 +246,12 @@ chown user:user /home/user/workspace
 ```
 
 Edit the guest system's `/etc/fstab` to mount the NFS share automatically when the system running
-on the FVP boots:
+on the FVP boots. Make sure to correctly replace use the name of the user on the host if it is different (e.g., ubuntu):
 
 ```bash
 grep "FVP NFS shared folder" /etc/fstab > /dev/null || {
   echo "# FVP NFS shared folder" >> /etc/fstab
-  echo "172.17.0.1:/home/user/workspace /home/user/workspace nfs4 defaults,_netdev 0 0" >> /etc/fstab
+  echo "172.17.0.1:/home/<user>/workspace /home/user/workspace nfs4 defaults,_netdev 0 0" >> /etc/fstab
 }
 ```
 
@@ -267,7 +267,7 @@ done
 ```
 
 At the next boot, you should be able to SSH into the guest system as a non-root user and
-access files in the workspace directory, which should be synchronized between the guest
+access files in the `/home/user/workspace` directory, which should be synchronized between the guest
 and the host systems.
 
 ## More configuration
