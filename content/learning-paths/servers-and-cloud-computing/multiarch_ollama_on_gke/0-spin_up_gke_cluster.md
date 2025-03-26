@@ -6,19 +6,19 @@ weight: 2
 layout: learningpathall
 ---
 
-## Overview
+## Project overview
 
 Arm CPUs are widely used in traditional AI/ML use cases. In this Learning Path, you learn how to run [Ollama](https://ollama.com/) on Arm-based CPUs in a hybrid architecture (amd64 and arm64) K8s cluster.
 
-To demonstrate this as a real life scenario, you're going to bring up an initial Kubernetes cluster (depicted as "*1. Inital Cluster (amd64)*" in the image below) with an amd64 node running an Ollama Deployment and Service.
+To demonstrate this, you can bring up an initial Kubernetes cluster (depicted as "*1. Initial Cluster (amd64)*" in the image below) with an amd64 node running an Ollama Deployment and Service.
 
 Next, as depicted by "*2. Hybrid Cluster amd64/arm64*", you'll add the arm64 node, and apply an arm64 Deployment and Service to it, so that you can now test both architectures together, and separately, to investigate performance. 
 
-When satisfied with the arm64 performance over amd64, its easy to delete the amd64-specific node, deployment, and service, to complete the migration, as depicted in "*3. Migrated Cluster (arm64)*".
+When you are satisfied with the arm64 performance over amd64, its easy to delete the amd64-specific node, deployment, and service, to complete the migration, as depicted in "*3. Migrated Cluster (arm64)*".
 
 ![Project Overview](images/general_flow.png)
 
-Once you've seen how easy it is to add an arm64 to an existing cluster, you can apply the knowledge to experiment with the value arm64 brings to other workloads in your environment as you see fit.
+Once you've seen how easy it is to add arm64 nodes to an existing cluster, you can apply the knowledge to experiment with arm64 nodes on other workloads in your environment.
  
 ### Create the cluster
 
@@ -36,7 +36,7 @@ The *Cluster basics* tab appears.
 ![Select and Configure Cluster Type](images/cluster_basics.png)
 
 {{% notice Note %}}
-Although this will work in all regions and zones where C4 and C4a instance types are supported, for this demo, we use *us-central1* and *us-central1-1a* regions and zones.  In addition, with simplicity and cost savings in mind, only one node per architecture is used. 
+Although this will work in all regions and zones where C4 and C4a instance types are supported, the `us-central1` and `us-central1-1a` regions and zones are used. For simplicity and cost savings, only one node per architecture is used. 
 {{% /notice %}}
 
 5. Click on *NODE POOLS*->*default-pool*
@@ -52,7 +52,7 @@ Although this will work in all regions and zones where C4 and C4a instance types
 10. For *Machine Type*, select *c4-standard-4*
 
 {{% notice Note %}}
-We've chosen node types that will support one pod per node.  If you wish to run multiple pods per mode, assume each node should provide ~10GB per pod. 
+The chosen node types support only one pod per node. If you wish to run multiple pods per node, assume each node should provide about 10GB memory per pod. 
 {{% /notice %}}
 
 ![Configure amd64 node type](images/configure-x86-note-type.png)
