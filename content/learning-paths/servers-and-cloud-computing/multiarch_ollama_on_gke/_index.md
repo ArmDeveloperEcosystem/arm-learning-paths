@@ -1,20 +1,19 @@
 ---
-title: Run ollama on both arm64 and amd64 nodes, using the same multi-architecture container image on GKE.
+title: Use GKE to run Ollama on arm64 and amd64 nodes using a multi-architecture container image
 
 minutes_to_complete: 30
 
-who_is_this_for:  This learning path will show you how easy it is to migrate from homogenous amd64 k8s clusters, to a hybrid (arm64 and amd64) cluster with multi-architectural container images on GKE.  Demonstrated with the ollama application, you'll see for yourself the price/performance advantages of running on arm64. Although tutorial will be GKE-specific with ollama, the provided YAML can act as a template for deployment on any on any multi-architectural application and cloud.
+who_is_this_for: This topic explains how migrate a homogenous amd64 k8s cluster to a hybrid (arm64 and amd64) cluster using a multi-architecture container image on GKE. Ollama is the application used to demonstrate the migration. 
 
 
 learning_objectives:
   - Spin up a GKE cluster with amd64 and arm64 nodes.
-  - Apply ollama amd64-based and arm64-based Deployments and Services using the same container image.
-  - Ping, pull models, and make inferences to experience each architectures' performance first-hand.
-  - Experiment further on your own by researching which existing, and future workloads could benefit most from single, or multi-architectural clusters.
+  - Apply Ollama amd64-based and arm64-based deployments and services using the same container image.
+  - Ping, pull models, and make inferences to experience the performance of each architecture.
 
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/).
-    - A computer with [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/) installed.
+    - A local computer with the [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/) installed.
     - The [GKE Cloud Plugin](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#gcloud)
    
 
@@ -26,27 +25,26 @@ skilllevels: Introductory
 
 subjects: Containers and Virtualization
 cloud_service_providers: Google Cloud
-
     
 armips:
     - Neoverse
 
 operatingsystems:
     - Linux
-    - MacOs
+    - macOS
 
 tools_software_languages:
-  - LLM
-      - ollama
-      - GenAI
+    - LLM
+    - Ollama
+    - GenAI
 
 further_reading:
   - resource:
-      title: ollama - Get up and running with large language models
+      title: Ollama - Get up and running with large language models
       link: https://ollama.com/
       type: documentation
   - resource:
-      title: ollama API calls
+      title: Ollama API calls
       link: https://github.com/ollama/ollama/blob/main/docs/api.md
       type: documentation
   - resource:
@@ -54,7 +52,7 @@ further_reading:
       link: https://hub.docker.com/r/ollama/ollama
       type: documentation
   - resource:
-      title: ollama build docs
+      title: Ollama build docs
       link: https://github.com/ollama/ollama/blob/main/docs/development.md
       type: documentation
   - resource:
