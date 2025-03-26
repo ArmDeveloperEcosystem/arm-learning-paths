@@ -61,6 +61,18 @@ For more details, you can check this video: [What is Functional Safety?](https:/
 
 ### Safety Island
 
+In automotive systems, a **General ECU (Electronic Control Unit)** typically runs non-critical tasks such as infotainment or navigation, whereas a **Safety Island** is dedicated to executing safety-critical control logic (e.g., braking, steering) with strong isolation, redundancy, and determinism.
+
+| Feature               | General ECU                | Safety Island                        |
+|------------------------|----------------------------|--------------------------------------|
+| Purpose               | Comfort / non-safety logic | Safety-critical decision making      |
+| OS/Runtime            | Linux, Android             | RTOS, Hypervisor, or bare-metal      |
+| Isolation             | Soft partitioning          | Hard isolation (hardware-enforced)   |
+| Functional Safety Req | None to moderate           | ISO 26262 ASIL-B to ASIL-D compliant |
+| Fault Handling        | Best-effort recovery       | Deterministic safe-state response    |
+
+This contrast highlights why safety-focused software needs a dedicated hardware domain with certified execution behavior.
+
 **Safety Island** is an independent safety subsystem separate from the main processor. It is responsible for monitoring and managing system safety. If the main processor fails or becomes inoperable, Safety Island can take over critical safety functions such as **deceleration, stopping, and fault handling** to prevent catastrophic system failures.
 
 Key Functions of Safety Island
@@ -72,6 +84,8 @@ Key Functions of Safety Island
    - Even if the main system crashes, Safety Island can still execute minimal safety operations, such as:
    - Autonomous Vehicles → Safe stopping (Fail-Safe Mode)
    - Industrial Equipment → Emergency power cutoff or speed reduction
+
+
 
 
 ### Integration of Safety Island and Functional Safety

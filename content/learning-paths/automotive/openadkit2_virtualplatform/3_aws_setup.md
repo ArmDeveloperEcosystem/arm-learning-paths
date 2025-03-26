@@ -24,6 +24,9 @@ This architecture brings several practical benefits:
 
 - Supports modular development and CI/CD: Teams can develop, test, and iterate on components independently, enabling better DevOps practices for autonomous systems.
 
+
+!!! Consider a simple network diagram showing the two EC2s, DDS, and container roles. !!!
+
 ### Networking Setting 
 
 First, launch two Arm instances (either cloud instances or on-premise servers).

@@ -35,6 +35,7 @@ For instance, a LiDAR sensor generates millions of data points per second, which
 
 This real-time data flow must occur within milliseconds to enable safe autonomous driving. DDS ensures minimal transmission delay, enabling rapid response to dynamic road conditions. In emergency scenarios, such as detecting a pedestrian or sudden braking by a nearby vehicle, DDS facilitates instant data propagation, allowing the system to take immediate corrective action.
 
+For example: [Autoware](https://www.autoware.org/)—an open-source autonomous driving software stack—uses DDS to handle high-throughput communication across its modules. For example, the **Perception** stack publishes detected objects from LiDAR and camera sensors to a shared topic, which is then consumed by the **Planning** module in real-time. Using DDS allows each subsystem to scale independently while preserving low-latency and deterministic communication.
 
 ### Publish-Subscribe Model and Data Transmission
 Traditional client-server communication requires a centralized server to manage data exchange. This architecture introduces several drawbacks, including increased latency and network congestion, which can be problematic in real-time automotive applications.
