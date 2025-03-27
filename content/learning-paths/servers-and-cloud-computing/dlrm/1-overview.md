@@ -10,13 +10,19 @@ layout: learningpathall
 
 DLRM is a machine learning model designed for recommendation systems, like the ones used by streaming services or online stores. It helps predict what a user might like using embedding layers that turn categories into useful numerical representations, and multilayer perceptrons (MLPs) that process continuous data. The real magic happens in the feature interaction step, where DLRM figures out which factors matter most when making recommendations.
 
+### Arm Neoverse
+
 Arm Neoverse V2 is built for high-performance computing, making it a great fit for machine learning workloads. Unlike traditional CPUs, it's designed with energy efficiency and scalability in mind, which means it can handle AI tasks without consuming excessive power. It also includes advanced vector processing and memory optimizations, which help speed up AI model training and inference. Another advantage? Many cloud providers, like AWS and GCP, now offer Arm-based instances, making it easier to deploy ML models at a lower cost. Whether you’re training a deep learning model or running large-scale inference workloads, Neoverse V2 is optimized to deliver solid performance while keeping costs under control.
 
-Running MLPerf benchmarks on Arm’s Neoverse V2 platform assesses how well models like DLRM perform on this architecture.
+### About the benchmark
+
+The benchmark run in this learning path evaluates the performance of the DLRM using the MLPerf Inference suite in the _Offline_ scenario. The Offline scenario is a test scenario where large batches of data are processed all at once, rather than in real-time. It simulates large-scale, batch-style inference tasks commonly found in recommendation systems for e-commerce, streaming, and social platforms.
+
+The test measures throughput (samples per second) and latency, providing insights into how efficiently the model runs on the target system. By using MLPerf’s standardized methodology, the results offer a reliable comparison point for evaluating performance across different hardware and software configurations—highlighting the system’s ability to handle real-world, data-intensive AI workloads.
 
 ## Configure developer environment
 
-Before you can run the benchmark, you will need an Arm-based Cloud Service Provider (CSP) instance. See examples in the table below. These instructions have been tested on Ubuntu 22.04.
+Before you can run the benchmark, you will need an Arm-based Cloud Service Provider (CSP) instance. See examples of instance types in the table below. These instructions have been tested on Ubuntu 22.04.
 
 |         CSP           |  Instance type |
 | --------------------- | -------------- |

@@ -1,7 +1,7 @@
 ---
 title: MLPerf Benchmarking on Arm Neoverse V2
 
-minutes_to_complete: 10
+minutes_to_complete: 90
 
 who_is_this_for: This is an introductory topic for software developers who want to set up a pipeline in the cloud for recommendation models. You will build and run the benchmark using MLPerf and PyTorch.
 
@@ -10,7 +10,7 @@ learning_objectives:
     - run a modified performant DLRMv2 benchmark and inspect the results
 
 prerequisites:
-    - An Arm-based cloud instance with at lest 250GB of RAM and 500 GB of disk space
+    - An Arm-based cloud instance with at lest 400GB of RAM and 800 GB of disk space
 
 author: Annie Tallund
 

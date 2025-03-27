@@ -6,130 +6,58 @@ weight: 5
 layout: learningpathall
 ---
 
-The final step is to run the benchmark.
+In this section, you will run the benchmark and inspect the results.
 
-## Download patches
+## Build PyTorch
 
-Start by downloading the patches which will be applied during setup.
-
-```bash
-wget -r --no-parent https://github.com/ArmDeveloperEcosystem/arm-learning-paths/tree/main/content/learning-paths/servers-and-cloud-computing/dlrm/mlpef_patches $HOME/mlperf_patches
-```
-
-## Benchmark script
-
-You will now create a script that automates the setup, configuration, and execution of MLPerf benchmarking for the DLRM (Deep Learning Recommendation Model) inside a Docker container. It simplifies the process by handling dependency installation, model preparation, and benchmarking in a single run. Create a new file called `run_dlrm_benchmark.sh`. Paste the code below.
+You will use a commit hash of the the `Tool-Solutions` repository to set up a Docker container with PyTorch. It will includes releases of PyTorch which enhance the performance of ML frameworks on Arm.
 
 ```bash
-#!/bin/bash
-
-set -ex
-yellow="\e[33m"
-reset="\e[0m"
-
-data_type=${1:-"int8"}
-
-echo -e "${yellow}Data type chosen for the setup is $data_type${reset}"
-
-# Setup directories
-data_dir=$HOME/data/
-model_dir=$HOME/model/
-results_dir=$HOME/results/
-dlrm_container="benchmark_dlrm"
-
-mkdir -p $results_dir/$data_type
-
-###### Run the dlrm container and setup MLPerf #######
-
-echo -e "${yellow}Checking if the container '$dlrm_container' exists...${reset}"
-container_exists=$(docker ps -aqf "name=^$dlrm_container$")
-
-if [ -n "$container_exists" ]; then
-    echo "${yellow}Container '$dlrm_container' already exists.${reset}"
-else
-    echo "Creating a new '$dlrm_container' container..."
-    docker run -td --shm-size=200G --privileged \
-        -v $data_dir:$data_dir \
-        -v $model_dir:$model_dir \
-        -v $results_dir:$results_dir \
-        -e DATA_DIR=$data_dir \
-        -e MODEL_DIR=$model_dir \
-        -e PATH=/opt/conda/bin:$PATH \
-        --name=$dlrm_container \
-        toolsolutions-pytorch:latest
-fi
-
-echo -e "${yellow}Setting up MLPerf inside the container...${reset}"
-docker cp $HOME/mlperf_patches $dlrm_container:$HOME/
-docker exec -it $dlrm_container bash -c "
-    set -ex
-    sudo apt update && sudo apt install -y \
-        software-properties-common lsb-release scons \
-        build-essential libtool autoconf unzip git vim wget \
-        numactl cmake gcc-12 g++-12 python3-pip python-is-python3
-    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 12 --slave /usr/bin/g++ g++ /usr/bin/g++-12
-
-    if [ ! -d \"/opt/conda\" ]; then
-        wget -O \"$HOME/miniconda.sh\" https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh
-        chmod +x \"$HOME/miniconda.sh\"
-        sudo bash \"$HOME/miniconda.sh\" -b -p /opt/conda
-        rm \"$HOME/miniconda.sh\"
-    fi
-    export PATH=\"/opt/conda/bin:$PATH\"
-    /opt/conda/bin/conda install -y python=3.10.12
-    /opt/conda/bin/conda install -y -c conda-forge cmake gperftools numpy==1.23.0 ninja pyyaml setuptools
-
-    git clone --recurse-submodules https://github.com/mlcommons/inference.git inference || (cd inference ; git pull)
-    cd inference && git submodule update --init --recursive && cd loadgen
-    CFLAGS=\"-std=c++14\" python setup.py bdist_wheel
-    pip install dist/*.whl
-
-    rm -rf inference_results_v4.0
-    git clone https://github.com/mlcommons/inference_results_v4.0.git
-    cd inference_results_v4.0 && git checkout ceef1ea
-
-    if [ \"$data_type\" = \"fp32\" ]; then
-        git apply $HOME/mlperf_patches/arm_fp32.patch
-    else
-        git apply $HOME/mlperf_patches/arm_int8.patch
-    fi
-"
-
-echo -e "${yellow}Checking for dumped FP32 model...${reset}"
-dumped_fp32_model="dlrm-multihot-pytorch.pt"
-int8_model="aarch64_dlrm_int8.pt"
-dlrm_test_path="$HOME/inference_results_v4.0/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8"
-
-if [ ! -f "$HOME/model/$dumped_fp32_model" ]; then
-    echo -e "${yellow}Dumping model weights...${reset}"
-    docker exec -it "$dlrm_container" bash -c "
-        pip install -r --extra-index-url https://download.pytorch.org/whl/nightly/cpu tensordict==0.1.2 torchsnapshot==0.1.0 fbgemm_gpu==2025.1.22+cpu torchrec==1.1.0.dev20250127+cpu
-    "
-    docker exec -it "$dlrm_container" bash -c "
-        cd $dlrm_test_path && python python/dump_torch_model.py --model-path=$model_dir/model_weights --dataset-path=$data_dir
-    "
-fi
-
-echo -e "${yellow}Checking if INT8 model calibration is required...${reset}"
-if [ "$data_type" == "int8" ] && [ ! -f "$HOME/model/$int8_model" ]; then
-    echo -e "${yellow}Running INT8 calibration...${reset}"
-    docker exec -it "$dlrm_container" bash -c "cd $dlrm_test_path && ./run_calibration.sh"
-fi
-
-echo -e "${yellow}Running offline test...${reset}"
-docker exec -it "$dlrm_container" bash -c "cd $dlrm_test_path && bash run_main.sh offline $data_type"
-
-echo -e "${yellow}Copying results to host...${reset}"
-docker exec -it "$dlrm_container" bash -c "cd $dlrm_test_path && cp -r output/pytorch-cpu/dlrm/Offline/performance/run_1/* $results_dir/$data_type/"
-
-cat $results_dir/$data_type/mlperf_log_summary.txt
+cd $HOME
+git clone https://github.com/ARM-software/Tool-Solutions.git
+cd $HOME/Tool-Solutions/
+git checkout f606cb6276be38bbb264b5ea64809c34837959c4
 ```
 
-With the script ready, it's time to run the benchmark:
+The `build.sh` script builds a wheel and a Docker image containing a PyTorch wheel and dependencies. It then runs the MLPerf container which is used for the benchmark in the next section. This script takes around 20 minutes to finish.
 
 ```bash
-./run_dlrm_benchmark.sh
+cd ML-Frameworks/pytorch-aarch64/
+./build.sh
 ```
+
+You now have everything set up to analyze the performance. Proceed to the next section to run the benchmark and inspect the results.
+
+## Run the benchmark
+
+ A repository is set up to run the next steps. This collection of scripts streamlines the process of building and running the DLRM (Deep Learning Recommendation Model) benchmark from the MLPerf suite inside a Docker container, tailored for Arm-based systems.
+
+Start by cloning it.
+
+ ```bash
+ cd $HOME
+ git clone https://github.com/ArmDeveloperEcosystem/dlrm-mlperf-lp.git
+ ```
+
+The main script is the `run_dlrm_benchmark.sh`. At a glance, it automates the full workflow of executing the MLPerf DLRM benchmark by performing the following steps:
+
+* Initializes and configures MLPerf repositories within the container.
+* Applies necessary patches (from `mlperf_patches/`) and compiles the MLPerf codebase inside the container.
+* Converts pretrained weights into a usable model format.
+* Performs INT8 calibration if needed.
+* Executes the offline benchmark test, generating large-scale binary data during runtime.
+
+```bash
+cd dlrm-mlperf-lp
+./run_dlrm_benchmark.sh int8
+```
+
+The script can take an hour or more to run.
+
+{{% notice Note %}}
+
+To run the `fp32` offline test, it's recommended to use the pre-generated binary data files from the int8 tests. You will need a CSP instance with enough RAM. For this purpose, the AWS `r8g.24xlarge` is recommended. After running the `int8` test, save the files in the `model` and `data` directories, and copy them to the instance intended for the `fp32` benchmark.
+{{% /notice %}}
 
 ## Understanding the results
 
@@ -192,3 +120,5 @@ performance_issue_same : 0
 performance_issue_same_index : 0
 performance_sample_count : 204800
 ```
+
+On successfully running the benchmark, you’ve gained practical experience in evaluating large-scale AI recommendation systems in a reproducible and efficient manner—an essential skill for deploying and optimizing AI workloads on modern platforms.

@@ -37,31 +37,12 @@ rclone config create mlc-inference s3 provider=Cloudflare \
     endpoint=https://c2686074cb2caf5cbaf6d134bdba8b47.r2.cloudflarestorage.com
 ```
 
-You will now download the data and model weights. This process takes an hour or more depending on your internet connection.
+Run the commands below to download the data and model weights. This process takes 30 minutes or more depending on the internet connection in your cloud instance.
 
 ```bash
 rclone copy mlc-inference:mlcommons-inference-wg-public/dlrm_preprocessed $HOME/data  -P
 rclone copy mlc-inference:mlcommons-inference-wg-public/model_weights $HOME/model/model_weights -P
 ```
 
-Once it finishes, you should see that the `model` and `data` directories are populated.
+Once it finishes, you should see that the `model` and `data` directories are populated. Now that the data is in place, you can proceed to the next section to set up a Docker image which will be used to run the benchmark.
 
-## Build DLRM image
-
-You will use a branch of the the `Tool-Solutions` repository. This branch includes releases of PyTorch which enhance the performance of ML frameworks.
-
-```bash
-cd $HOME
-git clone https://github.com/ARM-software/Tool-Solutions.git
-cd $HOME/Tool-Solutions/
-git checkout ${1:-"pytorch-aarch64--r24.12"}
-```
-
-The `build.sh` script builds a wheel and a Docker image containing PyTorch and dependencies. It then runs the MLPerf container which is used for the benchmark in the next section.
-
-```bash
-cd ML-Frameworks/pytorch-aarch64/
-./build.sh
-```
-
-You now have everything set up to analyze the performance. Proceed to the next section to run the benchmark and inspect the results.
