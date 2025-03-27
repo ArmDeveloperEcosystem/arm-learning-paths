@@ -1,7 +1,7 @@
 ---
 title: Creating IoT Solutions in Azure for Arm64-Powered Devices
 
-minutes_to_complete: 160
+minutes_to_complete: 320
 
 who_is_this_for: This is an advanced topic for software developers interested in learning how to build a comprehensive IoT solution in Azure that streams, stores, monitors, aggregates, and visualizes data from Arm64-powered IoT devices.
 
@@ -11,7 +11,7 @@ learning_objectives:
 	- Stream IoT data into Azure services using Azure Stream Analytics.
 	- Store and persist streamed IoT data in Azure Cosmos DB by configuring a Stream Analytics job.
 	- Implement data monitoring and alerts by creating an Azure Function that checks sensor data from Cosmos DB and sends notifications when thresholds are exceeded.
-	- Aggregate sensor readings by developing an Azure Function that periodically calculates average, minimum, and maximum values from data stored in Cosmos DB.
+	- Aggregate sensor readings by developing an Azure Function that calculates average values from data stored in Cosmos DB.
 	- Publish aggregated IoT data to a public-facing web portal, by deploying a Static Web App hosted on Azure Blob Storage
 
 prerequisites:

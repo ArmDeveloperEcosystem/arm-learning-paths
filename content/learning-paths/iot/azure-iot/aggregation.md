@@ -123,7 +123,8 @@ def get_average_temperature(req: func.HttpRequest) -> func.HttpResponse:
     return func.HttpResponse(
         json.dumps(response_body),
         status_code=200,
-        mimetype="application/json"
+        mimetype="application/json",
+        headers={"Access-Control-Allow-Origin": "*"}
     )
 ```
 
@@ -135,11 +136,11 @@ Next, it initializes the Cosmos DB client using the provided connection string. 
 
 To determine the relevant data points, the function calculates a timestamp representing exactly one minute before the current UTC time. It then constructs and executes a query against Cosmos DB to retrieve temperature readings (temperature values) with a timestamp (_ts) greater than or equal to this calculated value, effectively fetching all recent temperature data from the last minute.
 
-If no recent temperature data is found, the function returns a JSON response stating that no readings are available for that period, along with a 200 OK status.
+If no recent temperature data is found, the function returns a JSON response stating that no readings are available for that period, along with a 200 OK status and appropriate CORS headers. The CORS header, set as {"Access-Control-Allow-Origin": "*"}, is essential for allowing cross-origin requests from the portal, ensuring that the client-side application can access the response without any browser security issues.
 
-When data points are available, the function computes the average temperature from the retrieved readings. In case of unexpected errors during calculation, it logs the issue and responds with a 500 Internal Server Error.
+When data points are available, the function computes the average temperature from the retrieved readings. In case of unexpected errors during calculation, it logs the issue and responds with a 500 Internal Server Error, while still including the necessary CORS headers so that the portal receives the error response correctly.
 
-Finally, if the average calculation succeeds, the function constructs a JSON response containing the calculated average temperature (rounded to two decimal places) along with a success message. It then sends this response back to the caller with a status code of 200 OK.
+Finally, if the average calculation succeeds, the function constructs a JSON response containing the calculated average temperature (rounded to two decimal places) along with a success message. It then sends this response back to the caller with a status code of 200 OK and the configured CORS header {"Access-Control-Allow-Origin": "*"}, which is required to ensure that the portal can successfully retrieve and display the data from the function.
 
 Before running the function, dependencies need to be added and installed. Open the requirements.txt file and include the following lines:
 
