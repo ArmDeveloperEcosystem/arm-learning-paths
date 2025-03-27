@@ -98,7 +98,8 @@ Pod log output:
 
 [pod/ollama-arm64-deployment-678dc8556f-md222/ollama-multiarch] 2025-03-27T00:26:30
 ```
-This shows more than a 15% performance increase of arm64 over amd64 on this workload!
+
+The output shows more than a 15% performance increase of arm64 over amd64.
 
 ### Notes on Evaluating Price/Performance
 
