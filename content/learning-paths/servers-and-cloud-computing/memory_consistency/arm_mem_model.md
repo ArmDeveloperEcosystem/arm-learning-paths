@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ## CPU Memory Model vs Language/Runtime Memory Models
 
-Majority of developers will not need to be deeply familiar with the memory consistency model of the CPU their code will execute on. This is because programming languages and runtime engines abstract away the CPUs memory model by presenting the programmer with a language/runtime memory model. This abstraction is achieved by providing developers with a set of language/runtime specific memory ordering rules, synchronization constructs, and supporting libraries. As long as the developer uses these correctly, language compilers and runtime engines will make sure the code executes correctly on any CPU regardless of how strong or weakly ordered it is.
+The majority of developers do not need deep familiarity with the memory consistency model of the CPU. This is because programming languages and runtime engines abstract away the CPU's memory model by providing the programmer with a language/runtime memory model. This abstraction is achieved by providing developers with a set of language/runtime specific memory ordering rules, synchronization constructs, and supporting libraries. As long as the developer uses these correctly, language compilers and runtime engines will make sure the code executes correctly on any CPU regardless of how strong or weakly ordered it is.
 
 That said, developers may want to dig deeper into this topic for various reasons including:
 

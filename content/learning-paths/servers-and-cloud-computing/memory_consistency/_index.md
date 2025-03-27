@@ -7,13 +7,15 @@ who_is_this_for: This is an advanced topic for engineers seeking practical ways 
 
 learning_objectives:
     - Test thread synchronization assembly snippets against the formal definition of the Arm Memory Model.
-    - Test thread synchronization assembly snippets on Arm hardware to compare against the formal Arm Memory Model, and compare the results. 
+    - Test thread synchronization assembly snippets on Arm hardware.
+    - Compare the results of thread synchronization approaches. 
 
 prerequisites:
     - An understanding of memory consistency models (such as Sequential Consistency, Weak Ordering, Relaxed Consistency, and Processor Consistency).
     - An understanding of thread synchronization.
-    - An understanding of Arm assembly, general-purpose registers, and how to find information on Arm assembly instructions.
-    - An understanding of memory barriers including acquire-release semantics.
+    - Familiarity with Arm Assembly Language, and the ability to find relevant information on Arm assembly instructions.
+    - Familiarity with general-purpose registers.
+    - Familiarity with memory barriers, including acquire-release semantics.
 
 author: Julio Suarez
 
