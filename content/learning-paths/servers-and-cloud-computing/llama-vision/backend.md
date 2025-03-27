@@ -24,6 +24,28 @@ app = Flask(__name__)
 # Load model and processor
 model_id = "meta-llama/Llama-3.2-11B-Vision-Instruct"
 model = MllamaForConditionalGeneration.from_pretrained(model_id, torch_dtype=torch.float32)
+
+# Apply torchao quantization
+from torchao.dtypes import PlainLayout
+from torchao.experimental.packed_linear_int8_dynamic_activation_intx_weight_layout import (
+    PackedLinearInt8DynamicActivationIntxWeightLayout,
+)
+from torchao.experimental.quant_api import int8_dynamic_activation_intx_weight
+from torchao.quantization.granularity import PerGroup
+from torchao.quantization.quant_api import quantize_
+from torchao.quantization.quant_primitives import MappingType
+
+quantize_(
+    model,
+    int8_dynamic_activation_intx_weight(
+        weight_dtype=torch.int4,
+        granularity=PerGroup(32),
+        has_weight_zeros=True,
+        weight_mapping_type=MappingType.SYMMETRIC_NO_CLIPPING_ERR,
+        layout=PackedLinearInt8DynamicActivationIntxWeightLayout(target="aten"),
+    ),
+)
+
 processor = AutoProcessor.from_pretrained(model_id)
 model.eval()
 
