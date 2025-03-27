@@ -14,7 +14,7 @@ To demonstrate this, you can bring up an initial Kubernetes cluster (depicted as
 
 Next, as depicted by "*2. Hybrid Cluster amd64/arm64*", you'll add the arm64 node, and apply an arm64 deployment and service to it, so that you can now test both architectures together, and separately, to investigate performance. 
 
-When satisfied with the arm64 performance over amd64, its easy to delete the amd64-specific node, deployment, and service, to complete the migration, as depicted in "*3. Migrated Cluster (arm64)*".
+When you are satisfied with the arm64 performance over amd64, its easy to delete the amd64-specific node, deployment, and service, to complete the migration, as depicted in "*3. Migrated Cluster (arm64)*".
 
 ![Project Overview](images/general_flow.png)
 
@@ -61,17 +61,17 @@ It will take a few moments, but when the green checkmark is showing next to the 
 
 Before continuing, make sure you have *kubectl* and *gcloud* installed.  You can verify by running each command, for example, entering *gcloud* and enter:
 
-```commandline
+```bash
 gcloud
 ```
 should return
-```commandline
+```output
 ERROR: (gcloud) Command name argument expected.
 ... 
 ```
 and entering *kubectl* and enter should return:
 
-```commandline
+```output
 kubectl controls the Kubernetes cluster manager.
 
  Find more information at: https://kubernetes.io/docs/reference/kubectl/
@@ -79,7 +79,7 @@ kubectl controls the Kubernetes cluster manager.
 ```
 If you get something similar to:
 
-```commandline
+```output
 command not found
 ```
 
