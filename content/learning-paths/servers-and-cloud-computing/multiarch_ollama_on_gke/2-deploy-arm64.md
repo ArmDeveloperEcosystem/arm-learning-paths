@@ -146,7 +146,7 @@ service/ollama-arm64-svc created
 service/ollama-multiarch-svc created
 ```
 
-2. Get the status of the pods and the services by running the following:
+2. Get the status of the nodes, pods, and services by running the following:
 
 ```bash
 kubectl get nodes,pods,svc -nollama 

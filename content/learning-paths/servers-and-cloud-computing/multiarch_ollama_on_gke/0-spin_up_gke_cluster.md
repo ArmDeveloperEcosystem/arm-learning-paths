@@ -99,7 +99,6 @@ If you get the message:
 ```output
 CRITICAL: ACTION REQUIRED: gke-gcloud-auth-plugin, which is needed for continued use of kubectl, was not found or is not executable. Install gke-gcloud-auth-plugin for use with kubectl by following https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#install_plugin
 ```
-
 This command will resolve it:
 
 ```bash
