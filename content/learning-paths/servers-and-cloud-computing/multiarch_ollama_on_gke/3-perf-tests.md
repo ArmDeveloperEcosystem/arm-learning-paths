@@ -100,7 +100,7 @@ This shows more than a 15% performance increase of arm64 over amd64 on this work
 
 ### Notes on Evaluating Price/Performance
 
-We chose GKE amd64-based c4-standard-8, and arm64-based c4a-standard-4 instances so we could compare apples to apples core-wise (each has four cores).  Often compared similarly for memory and vCPU performance, pricing for arm64 vs other architectures is generally less expensive than that of its arm64 counterparts.  If you're interested in learning more, browse your cloud providers' VM Instance price pages for more information on the price/performance benefits of Arm CPUs for your workloads.
+GKE amd64-based c4-standard-8, and arm64-based c4a-standard-4 instances are chosen to better compare apples to apples (core-wise; each has four cores).  Often compared similarly for memory and vCPU performance, pricing for arm64 vs other architectures is generally less expensive than that of its arm64 counterparts.  If you're interested in learning more, browse your cloud providers' VM Instance price pages for more information on the price/performance benefits of Arm CPUs for your workloads.
 
 ### Conclusion
 
