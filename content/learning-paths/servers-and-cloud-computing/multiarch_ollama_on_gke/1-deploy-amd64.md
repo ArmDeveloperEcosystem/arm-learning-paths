@@ -77,13 +77,13 @@ spec:
 
 When the above is applied:
 
-* A new Deployment called `ollama-amd64-deployment` is created.  This deployment pulls a multi-architecture [Ollama image](https://hub.docker.com/layers/ollama/ollama/0.6.1/images/sha256-28b909914d4e77c96b1c57dea199c60ec12c5050d08ed764d9c234ba2944be63) from DockerHub. 
+* A new deployment called `ollama-amd64-deployment` is created.  This deployment pulls a multi-architecture [Ollama image](https://hub.docker.com/layers/ollama/ollama/0.6.1/images/sha256-28b909914d4e77c96b1c57dea199c60ec12c5050d08ed764d9c234ba2944be63) from DockerHub. 
 
 Of particular interest is the `nodeSelector` `kubernetes.io/arch`, with the value of `amd64`.  This ensures that the deployment only runs on amd64 nodes, utilizing the amd64 version of the Ollama container image. 
 
-* A new load balancer Service `ollama-amd64-svc` is created, which targets all pods with the `arch: amd64` label (the amd64 deployment creates these pods).
+* A new load balancer service `ollama-amd64-svc` is created, which targets all pods with the `arch: amd64` label (the amd64 deployment creates these pods).
 
-A `sessionAffinity` tag is added to this Service to remove sticky connections to the target pods. This removes persistent connections to the same pod on each request.
+A `sessionAffinity` tag is added to this service to remove sticky connections to the target pods. This removes persistent connections to the same pod on each request.
 
 ### Apply the amd64 deployment and service
 
@@ -134,7 +134,7 @@ When the pods show `Running` and the service shows a valid `External IP`, you ar
 {{% notice Note %}}
 The following utility `modelUtil.sh` is provided for convenience. 
 
-It's a wrapper for kubectl, utilizing the utilities [curl](https://curl.se/), [jq](https://jqlang.org/), [bc](https://www.gnu.org/software/bc/), and [stdbuf](https://www.gnu.org/software/coreutils/manual/html_node/stdbuf-invocation.html).  
+It's a wrapper for kubectl, utilizing [curl](https://curl.se/), [jq](https://jqlang.org/), [bc](https://www.gnu.org/software/bc/), and [stdbuf](https://www.gnu.org/software/coreutils/manual/html_node/stdbuf-invocation.html).  
 
 Make sure you have these shell utilities installed before running.
 {{% /notice %}}
@@ -248,7 +248,7 @@ The script conveniently bundles many test and logging commands into a single pla
 ./model_util.sh amd64 hello
 ```
 
-You get back the HTTP response, as well as the logline from the pod that served it:
+You get back the HTTP response, as well as the log line from the pod that served it:
 
 ```output
 Server response:
@@ -260,6 +260,6 @@ Pod log output:
 [pod/ollama-amd64-deployment-cbfc4b865-msftf/ollama-multiarch] 2025-03-25T21:13:49.022522588Z
 ```
 
-If you see the output `Ollama is running` you have successfully bootstrapped your GKE cluster with an amd64 node, running a deployment with the Ollama multi-architecture container instance!
+If you see the output `Ollama is running` you have successfully bootstrapped your GKE cluster with an amd64 node, running a deployment with the Ollama multi-architecture container instance.
 
 Continue to the next section to do the same thing, but with an Arm node. 
