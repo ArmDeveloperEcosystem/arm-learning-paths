@@ -1,5 +1,5 @@
 ---
-title: Run a DeepSeek R1 chatbot on Arm servers
+title: Run a DeepSeek-R1 chatbot on Arm servers
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -7,7 +7,8 @@ layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this Learning Path are for any Arm server running Ubuntu 24.04 LTS. You need an Arm server instance with at least 64 cores and 512GB of RAM to run this example. Configure disk storage up to at least 400 GB. The instructions have been tested on an AWS Graviton4 r8g.16xlarge instance.
+The instructions in this Learning Path are for any Arm server running Ubuntu 24.04 LTS. You need an Arm server instance with at least 64 cores and 512GB of RAM to run this example. Configure disk storage up to at least 400 GB. The instructions have been tested on an AWS Graviton4 r8g.24xlarge instance.
+
 
 ## Overview
 
@@ -17,9 +18,9 @@ Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Pa
 
 ## About the DeepSeek-R1 model and GGUF model format
 
-The [DeepSeek-R1 model](https://huggingface.co/deepseek-ai/DeepSeek-R1) from DeepSeek-AI is free to use for research and commercial purposes. 
+The [DeepSeek-R1 model](https://huggingface.co/deepseek-ai/DeepSeek-R1) from DeepSeek-AI available on Hugging Face, is released under the [MIT License](https://github.com/deepseek-ai/DeepSeek-R1/blob/main/LICENSE) and free to use for research and commercial purposes. 
 
-The DeepSeek-R1 model has 671 billion parameters, based on Mixture of Experts(MoE) architecture. This improve inference speed and keep good quality result. For this example, the full 671 billion (671B) model is used for retaining quality chatbot capability while also running efficiently on your Arm-based CPU. 
+The DeepSeek-R1 model has 671 billion parameters, based on Mixture of Experts(MoE) architecture. This improves inference speed and maintains model quality. For this example, the full 671 billion (671B) model is used for retaining quality chatbot capability while also running efficiently on your Arm-based CPU. 
 
 Traditionally, the training and inference of LLMs has been done on GPUs using full-precision 32-bit (FP32) or half-precision 16-bit (FP16) data type formats for the model parameter and weights. Recently, a new binary model format called GGUF was introduced by the `llama.cpp` team. This new GGUF model format uses compression and quantization techniques that remove the dependency on using FP32 and FP16 data type formats. For example, GGUF supports quantization where model weights that are generally stored as FP16 data types are scaled down to 4-bit integers. This significantly reduces the need for computational resources and the amount of RAM required. These advancements made in the model format and the data types used make Arm CPUs a great fit for running LLM inferences.   
  
@@ -49,7 +50,7 @@ Clone the source repository for llama.cpp:
 git clone https://github.com/ggerganov/llama.cpp
 ```
 
-By default, `llama.cpp` builds for CPU only on Linux and Windows. You don't need to provide any extra switches to build it for the Arm CPU that you run it on.
+By default, `llama.cpp` builds for CPU only. You don't need to provide any extra switches to build it for the Arm CPU that you run it on.
 
 Run `cmake` to build it:
 
@@ -155,89 +156,220 @@ With the latest commits in `llama.cpp` you will see improvements for these Arm o
 Run the pre-quantized DeepSeek-R1 model exactly as the weights were downloaded from huggingface:
 
 ```bash
-./llama-cli -m DeepSeek-R1-Q4_0-00001-of-00010.gguf -no-cnv --temp 0.6 -t 64 --prompt "<|User|>Building a visually appealing website can be done in ten simple steps:<｜Assistant｜>" -n 512
+./llama-cli -m DeepSeek-R1-Q4_0/DeepSeek-R1-Q4_0/DeepSeek-R1-Q4_0-00001-of-00010.gguf -no-cnv --temp 0.6 -t 64 --prompt "<|User|>Building a visually appealing website can be done in ten simple steps:<｜Assistant｜>" -n 512
 ```
 
 This command will use the downloaded model (`-m` flag), disable conversation mode explicitly (`-no-cnv` flag), adjust the randomness of the generated text (`--temp` flag),  with the specified prompt (`-p` flag), and target a 512 token completion (`-n` flag), using 64 threads (`-t` flag).
 
 You may notice there are many gguf files downloaded, llama.cpp can load all series of files by passing the first one with `-m` flag.
 
-You will see lots of interesting statistics being printed from llama.cpp about the model and the system, followed by the prompt and completion. The tail of the output from running this model on an AWS Graviton4 r8g.16xlarge instance is shown below:
+You will see lots of interesting statistics being printed from llama.cpp about the model and the system, followed by the prompt and completion. The tail of the output from running this model on an AWS Graviton4 r8g.24xlarge instance is shown below:
 
 ```output
-build: 4879 (f08f4b31) with cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0 for aarch64-linux-gnu
-...
+build: 4963 (02082f15) with cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0 for aarch64-linux-gnu
+main: llama backend init
+main: load the model and apply lora adapter, if any
+llama_model_loader: additional 9 GGUFs metadata loaded.
+llama_model_loader: loaded meta data with 51 key-value pairs and 1025 tensors from /home/ubuntu/DeepSeek-R1-Q4_0/DeepSeek-R1-Q4_0/DeepSeek-R1-Q4_0-00001-of-00010.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = deepseek2
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = DeepSeek R1
+llama_model_loader: - kv   3:                         general.size_label str              = 256x20B
+llama_model_loader: - kv   4:                               general.tags arr[str,1]       = ["text-generation"]
+llama_model_loader: - kv   5:                      deepseek2.block_count u32              = 61
+llama_model_loader: - kv   6:                   deepseek2.context_length u32              = 163840
+llama_model_loader: - kv   7:                 deepseek2.embedding_length u32              = 7168
+llama_model_loader: - kv   8:              deepseek2.feed_forward_length u32              = 18432
+llama_model_loader: - kv   9:             deepseek2.attention.head_count u32              = 128
+llama_model_loader: - kv  10:          deepseek2.attention.head_count_kv u32              = 128
+llama_model_loader: - kv  11:                   deepseek2.rope.freq_base f32              = 10000.000000
+llama_model_loader: - kv  12: deepseek2.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  13:                deepseek2.expert_used_count u32              = 8
+llama_model_loader: - kv  14:        deepseek2.leading_dense_block_count u32              = 3
+llama_model_loader: - kv  15:                       deepseek2.vocab_size u32              = 129280
+llama_model_loader: - kv  16:            deepseek2.attention.q_lora_rank u32              = 1536
+llama_model_loader: - kv  17:           deepseek2.attention.kv_lora_rank u32              = 512
+llama_model_loader: - kv  18:             deepseek2.attention.key_length u32              = 192
+llama_model_loader: - kv  19:           deepseek2.attention.value_length u32              = 128
+llama_model_loader: - kv  20:       deepseek2.expert_feed_forward_length u32              = 2048
+llama_model_loader: - kv  21:                     deepseek2.expert_count u32              = 256
+llama_model_loader: - kv  22:              deepseek2.expert_shared_count u32              = 1
+llama_model_loader: - kv  23:             deepseek2.expert_weights_scale f32              = 2.500000
+llama_model_loader: - kv  24:              deepseek2.expert_weights_norm bool             = true
+llama_model_loader: - kv  25:               deepseek2.expert_gating_func u32              = 2
+llama_model_loader: - kv  26:             deepseek2.rope.dimension_count u32              = 64
+llama_model_loader: - kv  27:                deepseek2.rope.scaling.type str              = yarn
+llama_model_loader: - kv  28:              deepseek2.rope.scaling.factor f32              = 40.000000
+llama_model_loader: - kv  29: deepseek2.rope.scaling.original_context_length u32              = 4096
+llama_model_loader: - kv  30: deepseek2.rope.scaling.yarn_log_multiplier f32              = 0.100000
+llama_model_loader: - kv  31:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  32:                         tokenizer.ggml.pre str              = deepseek-v3
+llama_model_loader: - kv  33:                      tokenizer.ggml.tokens arr[str,129280]  = ["<｜begin▁of▁sentence｜>", "<�...
+llama_model_loader: - kv  34:                  tokenizer.ggml.token_type arr[i32,129280]  = [3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  35:                      tokenizer.ggml.merges arr[str,127741]  = ["Ġ t", "Ġ a", "i n", "Ġ Ġ", "h e...
+llama_model_loader: - kv  36:                tokenizer.ggml.bos_token_id u32              = 0
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 1
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 1
+llama_model_loader: - kv  39:               tokenizer.ggml.add_bos_token bool             = true
+llama_model_loader: - kv  40:               tokenizer.ggml.add_eos_token bool             = false
+llama_model_loader: - kv  41:                    tokenizer.chat_template str              = {% if not add_generation_prompt is de...
+llama_model_loader: - kv  42:               general.quantization_version u32              = 2
+llama_model_loader: - kv  43:                          general.file_type u32              = 2
+llama_model_loader: - kv  44:                      quantize.imatrix.file str              = /models_out/DeepSeek-R1-GGUF/DeepSeek...
+llama_model_loader: - kv  45:                   quantize.imatrix.dataset str              = /training_data/calibration_datav3.txt
+llama_model_loader: - kv  46:             quantize.imatrix.entries_count i32              = 720
+llama_model_loader: - kv  47:              quantize.imatrix.chunks_count i32              = 124
+llama_model_loader: - kv  48:                                   split.no u16              = 0
+llama_model_loader: - kv  49:                        split.tensors.count i32              = 1025
+llama_model_loader: - kv  50:                                split.count u16              = 10
+llama_model_loader: - type  f32:  361 tensors
+llama_model_loader: - type q4_0:  652 tensors
+llama_model_loader: - type q4_1:   11 tensors
+llama_model_loader: - type q6_K:    1 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_0
+print_info: file size   = 353.00 GiB (4.52 BPW) 
+load: special_eos_id is not in special_eog_ids - the tokenizer config may be incorrect
+load: special tokens cache size = 818
+load: token to piece cache size = 0.8223 MB
+print_info: arch             = deepseek2
+print_info: vocab_only       = 0
+print_info: n_ctx_train      = 163840
+print_info: n_embd           = 7168
+print_info: n_layer          = 61
+print_info: n_head           = 128
+print_info: n_head_kv        = 128
+print_info: n_rot            = 64
+print_info: n_swa            = 0
+print_info: n_swa_pattern    = 1
+print_info: n_embd_head_k    = 192
+print_info: n_embd_head_v    = 128
+print_info: n_gqa            = 1
+print_info: n_embd_k_gqa     = 24576
+print_info: n_embd_v_gqa     = 16384
+print_info: f_norm_eps       = 0.0e+00
+print_info: f_norm_rms_eps   = 1.0e-06
+print_info: f_clamp_kqv      = 0.0e+00
+print_info: f_max_alibi_bias = 0.0e+00
+print_info: f_logit_scale    = 0.0e+00
+print_info: f_attn_scale     = 0.0e+00
+print_info: n_ff             = 18432
+print_info: n_expert         = 256
+print_info: n_expert_used    = 8
+print_info: causal attn      = 1
+print_info: pooling type     = 0
+print_info: rope type        = 0
+print_info: rope scaling     = yarn
+print_info: freq_base_train  = 10000.0
+print_info: freq_scale_train = 0.025
+print_info: n_ctx_orig_yarn  = 4096
+print_info: rope_finetuned   = unknown
+print_info: ssm_d_conv       = 0
+print_info: ssm_d_inner      = 0
+print_info: ssm_d_state      = 0
+print_info: ssm_dt_rank      = 0
+print_info: ssm_dt_b_c_rms   = 0
+print_info: model type       = 671B
+print_info: model params     = 671.03 B
+print_info: general.name     = DeepSeek R1
+print_info: n_layer_dense_lead   = 3
+print_info: n_lora_q             = 1536
+print_info: n_lora_kv            = 512
+print_info: n_ff_exp             = 2048
+print_info: n_expert_shared      = 1
+print_info: expert_weights_scale = 2.5
+print_info: expert_weights_norm  = 1
+print_info: expert_gating_func   = sigmoid
+print_info: rope_yarn_log_mul    = 0.1000
+print_info: vocab type       = BPE
+print_info: n_vocab          = 129280
+print_info: n_merges         = 127741
+print_info: BOS token        = 0 '<｜begin▁of▁sentence｜>'
+print_info: EOS token        = 1 '<｜end▁of▁sentence｜>'
+print_info: EOT token        = 1 '<｜end▁of▁sentence｜>'
+print_info: PAD token        = 1 '<｜end▁of▁sentence｜>'
+print_info: LF token         = 201 'Ċ'
+print_info: FIM PRE token    = 128801 '<｜fim▁begin｜>'
+print_info: FIM SUF token    = 128800 '<｜fim▁hole｜>'
+print_info: FIM MID token    = 128802 '<｜fim▁end｜>'
+print_info: EOG token        = 1 '<｜end▁of▁sentence｜>'
+print_info: max token length = 256
+load_tensors: loading model tensors, this can take a while... (mmap = true)
+load_tensors:  CPU_AARCH64 model buffer size = 350606.64 MiB
+load_tensors:   CPU_Mapped model buffer size = 38134.87 MiB
+load_tensors:   CPU_Mapped model buffer size = 35048.27 MiB
+load_tensors:   CPU_Mapped model buffer size = 35048.27 MiB
+load_tensors:   CPU_Mapped model buffer size = 35048.27 MiB
+load_tensors:   CPU_Mapped model buffer size = 35048.27 MiB
+load_tensors:   CPU_Mapped model buffer size = 35048.27 MiB
+load_tensors:   CPU_Mapped model buffer size = 35048.27 MiB
+load_tensors:   CPU_Mapped model buffer size = 35048.27 MiB
 load_tensors:   CPU_Mapped model buffer size = 35048.27 MiB
 load_tensors:   CPU_Mapped model buffer size = 22690.15 MiB
 ....................................................................................................
-llama_init_from_model: n_seq_max     = 1
-llama_init_from_model: n_ctx         = 4096
-llama_init_from_model: n_ctx_per_seq = 4096
-llama_init_from_model: n_batch       = 2048
-llama_init_from_model: n_ubatch      = 512
-llama_init_from_model: flash_attn    = 0
-llama_init_from_model: freq_base     = 10000.0
-llama_init_from_model: freq_scale    = 0.025
-llama_init_from_model: n_ctx_per_seq (4096) < n_ctx_train (163840) -- the full capacity of the model will not be utilized
-llama_kv_cache_init: kv_size = 4096, offload = 1, type_k = 'f16', type_v = 'f16', n_layer = 61, can_shift = 0
-llama_kv_cache_init:        CPU KV buffer size = 19520.00 MiB
-llama_init_from_model: KV self size  = 19520.00 MiB, K (f16): 11712.00 MiB, V (f16): 7808.00 MiB
-llama_init_from_model:        CPU  output buffer size =     0.49 MiB
-llama_init_from_model:        CPU compute buffer size =  1186.01 MiB
-llama_init_from_model: graph nodes  = 5025
-llama_init_from_model: graph splits = 1
-common_init_from_params: KV cache shifting is not supported for this model, disabling KV cache shifting
+llama_context: constructing llama_context
+llama_context: n_seq_max     = 1
+llama_context: n_ctx         = 4096
+llama_context: n_ctx_per_seq = 4096
+llama_context: n_batch       = 2048
+llama_context: n_ubatch      = 512
+llama_context: causal_attn   = 1
+llama_context: flash_attn    = 0
+llama_context: freq_base     = 10000.0
+llama_context: freq_scale    = 0.025
+llama_context: n_ctx_per_seq (4096) < n_ctx_train (163840) -- the full capacity of the model will not be utilized
+llama_context:        CPU  output buffer size =     0.49 MiB
+init: kv_size = 4096, offload = 1, type_k = 'f16', type_v = 'f16', n_layer = 61, can_shift = 0
+init:        CPU KV buffer size = 19520.00 MiB
+llama_context: KV self size  = 19520.00 MiB, K (f16): 11712.00 MiB, V (f16): 7808.00 MiB
+llama_context:        CPU compute buffer size =  1186.01 MiB
+llama_context: graph nodes  = 5086
+llama_context: graph splits = 1
+common_init_from_params: KV cache shifting is not supported for this context, disabling KV cache shifting
 common_init_from_params: setting dry_penalty_last_n to ctx_size = 4096
 common_init_from_params: warming up the model with an empty run - please wait ... (--no-warmup to disable)
 main: llama threadpool init, n_threads = 64
 
-system_info: n_threads = 64 (n_threads_batch = 64) / 64 | CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | MATMUL_INT8 = 1 | SVE = 1 | DOTPROD = 1 | SVE_CNT = 16 | OPENMP = 1 | AARCH64_REPACK = 1 |
+system_info: n_threads = 64 (n_threads_batch = 64) / 96 | CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | MATMUL_INT8 = 1 | SVE = 1 | DOTPROD = 1 | SVE_CNT = 16 | OPENMP = 1 | AARCH64_REPACK = 1 | 
 
-sampler seed: 3199001937
-sampler params:
-	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
-	dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 4096
-	top_k = 40, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.600
-	mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000
-sampler chain: logits -> logit-bias -> penalties -> dry -> top-k -> typical -> top-p -> min-p -> xtc -> temp-ext -> dist
+sampler seed: 1356072442
+sampler params: 
+        repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+        dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 4096
+        top_k = 40, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.600
+        mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000
+sampler chain: logits -> logit-bias -> penalties -> dry -> top-k -> typical -> top-p -> min-p -> xtc -> temp-ext -> dist 
 generate: n_ctx = 4096, n_batch = 2048, n_predict = 512, n_keep = 1
 
 <|User|>Building a visually appealing website can be done in ten simple steps:<think>
-Okay, the user wants to build a visually appealing website in ten simple steps. Let me think about how to break this down. First, I need to outline the key stages of web design without getting too technical. Starting with defining the purpose and audience makes sense because that sets the foundation. Then, choosing the right tools like website builders or coding from scratch. Maybe mention popular platforms like WordPress or Wix as examples.
+Okay, so I need to figure out how to build a visually appealing website in ten simple steps. Let me start by brainstorming what I know about web design. First, I remember that a website's purpose is important. You need to know if it's for a business, a blog, or a portfolio. Without knowing the purpose, the design might not be effective. So maybe the first step is defining the website's goal and target audience. That makes sense.
 
-Next, planning the site structure. Sitemaps and user flow are important here. I should emphasize the importance of clear navigation to avoid confusion. Then, selecting a color scheme and typography. Maybe explain how colors affect user emotions and the importance of readability with fonts. Don't forget accessibility here, like contrast ratios and font sizes.
+Next, planning the structure. I think this involves creating a sitemap or wireframes. Wireframes are like blueprints for the website, right? They outline where each section goes without any design elements. So the second step could be planning the layout and structure with wireframes.
 
-Responsive design is a must these days, so I need to stress mobile optimization. Maybe mention frameworks like Bootstrap or media queries if coding. Visual hierarchy comes next – using size, spacing, and contrast to guide users. High-quality visuals are crucial, so suggest using stock photos or custom graphics, and optimizing for web to keep load times down.
+Choosing a color scheme and typography. Colors and fonts are crucial for visual appeal. They should align with the brand. Maybe using tools like Adobe Color or Coolors could help pick a cohesive palette. Typography should be readable and match the site's tone. So step three might be selecting colors and fonts.
 
-Whitespace is often overlooked but important for a clean look. Then, call-to-action buttons – their placement and design. Testing across devices and browsers is a key step before launch. Finally, ongoing maintenance and SEO basics. Wait, the user mentioned ten steps. Let me count again.
+Responsive design is a must nowadays. The website has to look good on all devices. Bootstrap or CSS frameworks can help with that. So step four could be ensuring responsive design.
 
-1. Define purpose and audience
-2. Choose tools
-3. Plan structure
-4. Select colors and fonts
-5. Responsive design
-6. Visual hierarchy
-7. High-quality visuals
-8. Whitespace
-9. CTAs
-10. Test and optimize
+High-quality visuals. Using good images and icons can make a site look professional. Maybe using stock photos from Unsplash or icons from Font Awesome. Also, optimizing images for fast loading times. So step five is about visuals and media.
 
-That's ten. But maybe step 10 should include maintenance and SEO. Hmm. Maybe combine testing with ongoing SEO as part of the final step. Also, should I mention content creation? Maybe under high-quality visuals. Need to keep each step concise. Also, check if any steps can be merged or rephrased for clarity. Let me make sure each step is actionable and not too vague. Add examples where possible, like suggesting tools or resources. Accessibility should be mentioned in color contrast and typography. Alright, that should cover it without overwhelming the user.
-</think>
+Navigation should be intuitive. Menus and links need to be easy to find. Maybe a sticky header or a hamburger menu for mobile. Step six: user-friendly navigation.
 
-Here’s a streamlined 10-step guide to building a visually appealing and functional website:
+Whitespace and balance. Cluttered websites are hard to look at. Using whitespace effectively to let content breathe. Aligning elements properly for visual harmony. Step seven: balance and spacing.
 
----
+Consistency in design elements like buttons, headings, and CTAs. Keeping the same style throughout. Step eight: consistent UI elements.
 
-### **1. Define Purpose & Audience**
-- **Goal:** Clarify the site’s objective (e.g., portfolio, e-commerce, blog).
-- **Audience
+Speed and performance. Even a beautiful site is bad if it's slow. Optimizing images, minifying CSS/JS, using a CDN. Step nine: optimizing performance.
 
-llama_perf_sampler_print:    sampling time =      38.85 ms /   532 runs   (    0.07 ms per token, 13694.75 tokens per second)
-llama_perf_context_print:        load time = 1061927.81 ms
-llama_perf_context_print: prompt eval time =    6585.21 ms /    20 tokens (  329.26 ms per token,     3.04 tokens per second)
-llama_perf_context_print:        eval time =   47463.45 ms /   511 runs   (   92.88 ms per token,    10.77 tokens per second)
-llama_perf_context_print:       total time =   54172.15 ms /   531 tokens
+Testing and iterating. Checking across browsers and devices, getting feedback, making adjustments. Step ten: testing and refining.
+
+Wait, does that cover all ten steps? Let me count. 1. Define purpose, 2. Plan structure, 3. Colors and typography, 4. Responsive design, 5. Visuals, 6. Navigation, 7
+
+llama_perf_sampler_print:    sampling time =      39.05 ms /   532 runs   (    0.07 ms per token, 13622.86 tokens per second)
+llama_perf_context_print:        load time =  169556.41 ms
+llama_perf_context_print: prompt eval time =     477.65 ms /    20 tokens (   23.88 ms per token,    41.87 tokens per second)
+llama_perf_context_print:        eval time =   41756.98 ms /   511 runs   (   81.72 ms per token,    12.24 tokens per second)
+llama_perf_context_print:       total time =   42340.53 ms /   531 tokens
 ```
 
 The `system_info` printed from llama.cpp highlights important architectural features present on your hardware that improve the performance of the model execution. In the output shown above from running on an AWS Graviton4 instance, you will see:

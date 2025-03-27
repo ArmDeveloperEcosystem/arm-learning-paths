@@ -72,14 +72,15 @@ The output is similar to:
 
 ```output
 ...
-1023,13],"total_duration":15341522988,"load_duration":16209080,"prompt_eval_count":32,"prompt_eval_duration":164000000,"eval_count":93,"eval_duration":15159000000}
-Tokens per second:  6.13
+"prompt_eval_duration":79000000,"eval_count":72,"eval_duration":5484000000}
+Tokens per second:  13.12
 
 Pod log output:
-[pod/ollama-arm64-deployment-678dc8556f-mj7gm/ollama-multiarch] 06:29:14
+
+[pod/ollama-amd64-deployment-cbfc4b865-k2gc4/ollama-multiarch] 2025-03-27T00:25:21
 ```
 
-You can see tokens per second rate measured at 6.13 (from the log output example, your actual value may vary a bit).
+You can see tokens per second rate measured at 13.12 (from the log output example, your actual value may vary a bit).
 
 Next, run the same inference on the arm64 node with the following command:
 
@@ -94,10 +95,13 @@ Visually, you see the output streaming out faster on arm64 than on amd64. Look a
 Tokens per second:  14.47
 
 Pod log output:
-[pod/ollama-arm64-deployment-678dc8556f-mj7gm/ollama-multiarch] 06:46:35
+
+[pod/ollama-arm64-deployment-678dc8556f-md222/ollama-multiarch] 2025-03-27T00:26:30
 ```
 
-The output shows a more than a 2X performance increase between arm64 and amd64.
+The output shows more than a 15% performance increase of arm64 over amd64.
+
+### Notes on Evaluating Price/Performance
 
 ### Price performance notes
 

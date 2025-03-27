@@ -1,5 +1,5 @@
 ---
-title: Deploy DeepSeek R1 on Arm servers
+title: Deploy DeepSeek-R1 models on Arm servers
 
 minutes_to_complete: 30
 
@@ -11,7 +11,7 @@ learning_objectives:
     - Run the pre-quantized model on your Arm CPU and measure the performance.
 
 prerequisites:
-    - An AWS Graviton4 r8g.16xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
+    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server. This Learning Path was tested on an AWS Graviton4 r8g.24xlarge instance.
 
 author:
     - Tianyu Li

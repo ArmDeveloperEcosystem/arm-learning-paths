@@ -1,5 +1,5 @@
 ---
-title: Use GKE to run Ollama on arm64 and amd64 nodes using a multi-architecture container image
+title: Run Ollama's multi-arch container image on GKE with arm64 and amd64 nodes. 
 
 minutes_to_complete: 30
 
