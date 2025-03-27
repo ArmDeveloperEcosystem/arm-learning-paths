@@ -26,7 +26,7 @@ To add Arm nodes to the cluster:
 7. Select *C4A* : *c4a-standard-4* for Machine *Configuration/Type*.
 
 {{% notice Note %}}
-To compare amd64 and arm64 performance, the c4a-standard-4 is used as the arm64 equivalent of the previously deployed c4-standard-4 in the amd64 node pool.
+To compare amd64 and arm64 performance, the c4a-standard-4 is used as the arm64 equivalent of the previously deployed c4-standard-8 in the amd64 node pool.
 {{% /notice %}}
 
 ![YAML Overview](images/arm_node_config-2.png)
@@ -146,7 +146,7 @@ service/ollama-arm64-svc created
 service/ollama-multiarch-svc created
 ```
 
-2. Get the status of the pods and the services by running the following:
+2. Get the status of the nodes, pods, and services by running the following:
 
 ```bash
 kubectl get nodes,pods,svc -nollama 
