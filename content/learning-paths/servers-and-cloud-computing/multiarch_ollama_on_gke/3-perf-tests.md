@@ -52,11 +52,11 @@ Ollama will host and run models, but you need to first load the model (llama3.2 
 # for arm64
 ./model_util.sh arm64 pull
 ```
-If the output ends with ```{"status":"success"}``` for each command, the model was pulled successfuly.
+If the output ends with ```{"status":"success"}``` for each command, the model was pulled successfully.
 
 ### Seeing is believing!
 
-Once the models have loaded into both pods, you can perform inference regardless of node architecture (multiarch), or individually by architecture type (amd64 or arm64).
+Once the models have loaded into both pods, you can perform inference regardless of node architecture (multi-arch), or individually by architecture type (amd64 or arm64).
 
 By default, the prompt hardcoded into the modelUtil.sh script is *Create a sentence that makes sense in the English language, with as many palindromes in it as possible*, but feel free to edit that if you wish.
 
@@ -69,11 +69,12 @@ should output something similar to:
 
 ```commandline
 ...
-1023,13],"total_duration":15341522988,"load_duration":16209080,"prompt_eval_count":32,"prompt_eval_duration":164000000,"eval_count":93,"eval_duration":15159000000}
-Tokens per second:  6.13
+"prompt_eval_duration":79000000,"eval_count":72,"eval_duration":5484000000}
+Tokens per second:  13.12
 
 Pod log output:
-[pod/ollama-arm64-deployment-678dc8556f-mj7gm/ollama-multiarch] 06:29:14
+
+[pod/ollama-amd64-deployment-cbfc4b865-k2gc4/ollama-multiarch] 2025-03-27T00:25:21
 ```
 
 Objectively, you can see tokens per second rate measured at 6.13 (from my log output example, your actual value may vary a bit).
@@ -87,25 +88,27 @@ Next, run the same inference, but on the arm64 node, with the following command:
 Visually, you should see the output streaming out a lot faster on arm64 than on amd64.  To be more objective, taking a look at the output can help us verify it was indeed faster on arm64 vs amd64:
 
 ```commandline
-4202,72,426,13],"total_duration":13259950101,"load_duration":1257990283,"prompt_eval_count":32,"prompt_eval_duration":1431000000,"eval_count":153,"eval_duration":10570000000}
-Tokens per second:  14.47
+...
+"prompt_eval_duration":70000000,"eval_count":144,"eval_duration":9861000000}
+Tokens per second:  14.60
 
 Pod log output:
-[pod/ollama-arm64-deployment-678dc8556f-mj7gm/ollama-multiarch] 06:46:35
+
+[pod/ollama-arm64-deployment-678dc8556f-md222/ollama-multiarch] 2025-03-27T00:26:30
 ```
-This shows more than a 2X performance increase of arm64 vs amd64!
+This shows more than a 15% performance increase of arm64 over amd64 on this workload!
 
 ### Notes on Evaluating Price/Performance
 
-We chose GKE amd64-based c4 and arm64-based c4a instances so we could compare apples to apples.  Advertised similarly for memory and vCPU performance, pricing for arm64 vs other architectures is generally less expensive than that of its arm64 counterparts.  If you're interested in learning more, browse your cloud providers' VM Instance price pages for more information on the price/performance benefits of Arm CPUs for your workloads.
+We chose GKE amd64-based c4-standard-8, and arm64-based c4a-standard-4 instances so we could compare apples to apples core-wise (each has four cores).  Often compared similarly for memory and vCPU performance, pricing for arm64 vs other architectures is generally less expensive than that of its arm64 counterparts.  If you're interested in learning more, browse your cloud providers' VM Instance price pages for more information on the price/performance benefits of Arm CPUs for your workloads.
 
 ### Conclusion
 
 In this learning path, you learned how to:
 
 1. Bring up a GKE cluster with amd64 and arm64 nodes.
-2. Use the same multi-architecture container image for both amd64 and arm64 ollama deployments.
-3. See how inference on arm64 is faster than that of amd64.
+2. Use the same multi-architecture container image for both amd64 and arm64 Ollama deployments.
+3. See inference on an arm64 node occur faster than that of a comparable amd64 node.
 
 What's next?  You can:
 

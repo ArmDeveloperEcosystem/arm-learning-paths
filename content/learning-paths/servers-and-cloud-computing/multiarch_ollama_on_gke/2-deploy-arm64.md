@@ -27,7 +27,7 @@ To add Arm nodes to the cluster:
 7. Select *C4A* : *c4a-standard-4* for Machine *Configuration/Type*.
 
 {{% notice Note %}}
-To make an apples-to-apples comparison of amd64 and arm64 performance, the c4a-standard-4 is spun up as the arm64 "equivalent" of the previously deployed c4-standard-4 in the amd64 node pool.
+To make an apples-to-apples comparison of amd64 and arm64 performance, the c4a-standard-4 is spun up as the arm64 "equivalent in cores" to the previously deployed c4-standard-8 in the amd64 node pool.
 {{% /notice %}}
 
 ![YAML Overview](images/arm_node_config-2.png)

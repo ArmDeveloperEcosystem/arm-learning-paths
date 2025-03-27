@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-Arm CPUs are widely used in traditional AI/ML use cases. In this Learning Path, you learn how to run [Ollama](https://ollama.com/) on Arm-based CPUs in a hybrid architecture (amd64 and arm64) K8s cluster.
+Arm CPUs are widely used in Kubernetes AI/ML use cases. In this Learning Path, you learn how to run [Ollama](https://ollama.com/) on Arm-based CPUs in a hybrid architecture (amd64 and arm64) K8s cluster.
 
 To demonstrate this as a real life scenario, you're going to bring up an initial Kubernetes cluster (depicted as "*1. Inital Cluster (amd64)*" in the image below) with an amd64 node running an Ollama Deployment and Service.
 
@@ -49,11 +49,7 @@ Although this will work in all regions and zones where C4 and C4a instance types
 
 8. Click on *NODE POOLS*->*Nodes*
 9. For *Series*, select *C4*
-10. For *Machine Type*, select *c4-standard-4*
-
-{{% notice Note %}}
-We've chosen node types that will support one pod per node.  If you wish to run multiple pods per mode, assume each node should provide ~10GB per pod. 
-{{% /notice %}}
+10. For *Machine Type*, select *c4-standard-8*
 
 ![Configure amd64 node type](images/configure-x86-note-type.png)
 
@@ -63,11 +59,33 @@ It will take a few moments, but when the green checkmark is showing next to the 
 
 ### Connect to the cluster
 
-{{% notice Note %}}
-The following assumes you have gcloud and kubectl already installed.  If not, please follow the instructions on the first page under "Prerequisites". 
-{{% /notice %}}
+Before continuing, make sure you have *kubectl* and *gcloud* installed.  You can verify by running each command, for example, entering *gcloud* and enter:
 
-You'll first setup your newly created K8s cluster credentials using the gcloud utility.  Enter the following in your command prompt (or cloud shell), and make sure to replace "YOUR_PROJECT_ID" with the ID of your GCP project:
+```commandline
+gcloud
+```
+should return
+```commandline
+ERROR: (gcloud) Command name argument expected.
+... 
+```
+and entering *kubectl* and enter should return:
+
+```commandline
+kubectl controls the Kubernetes cluster manager.
+
+ Find more information at: https://kubernetes.io/docs/reference/kubectl/
+...
+```
+If you get something similar to:
+
+```commandline
+command not found
+```
+
+Please follow prerequisite instructions on the first page to install the missing utilities.
+
+With prerequisites out of the way, you will next setup your newly created K8s cluster credentials using the gcloud utility.  Enter the following in your command prompt (or cloud shell), and make sure to replace "YOUR_PROJECT_ID" with the ID of your GCP project:
 
 ```bash
 export ZONE=us-central1
@@ -80,7 +98,7 @@ If you get the message:
 ```commandline
 CRITICAL: ACTION REQUIRED: gke-gcloud-auth-plugin, which is needed for continued use of kubectl, was not found or is not executable. Install gke-gcloud-auth-plugin for use with kubectl by following https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#install_plugin
 ```
-This command should help resolve it:
+This command will resolve it:
 
 ```bash
 gcloud components install gke-gcloud-auth-plugin
