@@ -1,10 +1,6 @@
 ---
 title: Learn about the C++ memory model for porting applications to Arm
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for C++ developers porting applications from x86 to Arm and optimizing performance.
@@ -15,7 +11,7 @@ learning_objectives:
     - Employ best practices for writing C++ on Arm to avoid race conditions.
 
 prerequisites:
-    - Access to an x86 and Arm cloud instance (virtual machine).
+    - Access to an x86 and an Arm cloud instance (virtual machine).
     - Proficiency in C++ programming.
 
 author: Kieran Hejmadi
