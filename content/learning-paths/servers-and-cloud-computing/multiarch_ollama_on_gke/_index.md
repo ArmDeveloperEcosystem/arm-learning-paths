@@ -1,6 +1,10 @@
 ---
 title: Run Ollama's multi-arch container image on GKE with arm64 and amd64 nodes. 
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: This topic explains how developers can migrate a homogeneous amd64 K8s cluster to a hybrid (arm64 and amd64) cluster using a multi-architecture container image on GKE. Ollama is the application used to demonstrate the migration. 
