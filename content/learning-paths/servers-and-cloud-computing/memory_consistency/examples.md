@@ -8,18 +8,27 @@ weight: 4 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Arm Instructions with Acquire-Release Ordering
+## Arm Instructions that Support Acquire-Release Ordering
 
-Most of the examples shown in this section use the instructions `LDAR` and `STLR` which are load-acquire and store-release respectively. However, there are other instructions that support acquire-release ordering. More specifically, these include the various atomic instructions that were made mandatory in version Armv8.1 of the Arm architecture. These include Compare and Swap (`CAS`), Swap (`SWP`), Load-Add (`LDADD`), Store-ADD (`STADD`), and more. These are left as an exercise to explore outside this Learning Path.
+This section focuses on examples that use the instructions `LDAR` (load-acquire) and `STLR` (store-release). However, these are not the only instructions that support acquire-release ordering. 
+
+Starting with Armv8.1 of the Armv8-A architecture profile, several atomic instructions became mandatory. Examples include Compare and Swap (`CAS`), Swap (`SWP`), Load-Add (`LDADD`), and Store-Add (`STADD`). 
+
+{{% notice Learning Tip %}}
+Though these other atomic instructions are outside the scope of this Learning Path, you can go on to investigate these further yourself. See the Additional Resources section at the end.
+{{% /notice %}}
 
 ## Litmus7 Switches
 
-As `litmus7` executes code on the machine, it needs to build the assembly snippets into executable code. `litmus7` compiles with GCC, however, GCC uses default options. When you run on an Arm Neoverse platform, it is strongly recommend to use the `-ccopts="-mcpu=native"` switch. This is the easiest way to avoid all possible run time failures. For example, if the Compare and Swap example below is executed without this switch, it will fail to run because by default, GCC will not emit the Compare and Swap instruction (`CAS`). This instruction is supported in Armv8.1 of the Arm architecture, but GCC by default builds for Armv8.0. If in the future, the GCC default is updated to build for a newer version of the Arm architecture (e.g. Armv9.0), the `-ccopts` switch will not be needed to run tests that use atomic instructions like Compare and Swap (`CAS`).
+As `litmus7` executes code on a machine, it first needs to build the assembly snippets into executable code. By default, `litmus7` compiles with GCC's standard options. When you run on an Arm Neoverse platform however, it is strongly recommended that you use the switch `-ccopts="-mcpu=native"`. This is the simplest way to avoid all possible runtime failures. 
 
-## Example 1: Message passing without barriers
+For example, if you execute the Compare and Swap example below without this switch, it will fail to run because GCC by default, does not emit the Compare and Swap (`CAS`) instruction. Although `CAS` is supported in Armv8.1 of the Arm architecture, GCC still defaults to Armv8.0. In the future, if  GCC updates its default to target a newer version of the Arm architecture (for example, Armv9.0), the `-ccopts` switch will no longer be necessary for tests that use atomic instructions like `CAS`.
 
-The first example highlights one of the pitfalls that may occur under a relaxed memory model.
-Create a litmus file with the content shown below in a file named `test1.litmus`:
+## Example 1: Message Passing without Barriers
+
+The first example highlights one of the pitfalls that can occur under a relaxed memory model.
+
+To try it out, create a litmus file named `test1.litmus` with the content shown below:
 
 ```
 AArch64 MP+Loop
@@ -35,15 +44,15 @@ AArch64 MP+Loop
 exists
 (1:X0=1 /\ 1:X2=0)
 ```
-This example is similar to what you saw in the previous section, except this time there is a loop to check for the message ready flag. If you think about this assembly in a Sequentially Consistent way, you can convince yourself that the only valid outcome of these two threads executing will be `(1,1)`. 
+This example is similar to what you saw in the previous section, except now there is a loop to check for the "message ready" flag. If you think about this assembly in a Sequentially Consistent way, you might conclude that the only valid outcome of these two threads executing will be `(1,1)`. 
 
-Run this with `herd7`:
+Run the following command to test this with `herd7`:
 
 ```bash
 herd7 ./test1.litmus
 ```
 
-The output will look like:
+The output should look like:
 
 ```output
 Test MP+Loop Allowed
@@ -53,15 +62,13 @@ States 2
 ```
 You should see the outcome of `(1,0)`. 
 
-Now let's try to run this same test with `litmus7` on your running Arm Neoverse instance to check if you get the same outcomes.
-
-Run the following command:
+Now try to run this same test with `litmus7` on your Arm Neoverse instance to see if you get the same outcomes:
 
 ```bash
 litmus7 ./test1.litmus
 ```
 
-The output should look like:
+The output should look like this:
 
 ```output
 Test MP+Loop Allowed
@@ -69,14 +76,14 @@ Histogram (2 states)
 458   *>1:X0=1; 1:X2=0;
 999542:>1:X0=1; 1:X2=1;
 ```
-`litmus7` shows that most of the time you see the outcome `(1,1)`, but occasionally you see `(1,0)`. This result also highlights why you might want to increase the number of test iterations with `litmus7`. Increasing the number of test iterations will increase the probability that we see all outcomes, including those that are rare.
+Here `(1,1)` is by far the most common result, but `(1,0)` still appears occasionally. This highlights the benefit of increasing the number of test iterations when using `litmus7`:doing so increases the probability of observing all outcomes, including those that happen rarely.
 
-You will see the outcome of `(1,0)` because `LDR` and `STR` are ordinary memory accesses. This means that if there are no dependencies between them (there aren't in this case), they can be reordered by the CPU. Both `herd7` and `litmus7` confirm that this can and will happen. The result of `(1,0)` is not desired because it represents reading the payload of a message before the ready flag is set. This is likely not what the programmer intended.
+You will see the `(1,0)` outcome because `LDR` and `STR` are ordinary memory accesses. When there are no dependencies between them, as in this example, the CPU can reorder these operations. Both `herd7` and `litmus7` confirm that this reordering can, and will, happen. The `(1,0)` result is undesirable because it indicates the message payload is read before the ready flag is set. This is likely not what the programmer intended.
 
-## Example 2: Message passing with two-way barriers
+## Example 2: Message Passing With Two-Way Barriers
 
-Let's fix the message passing by adding two-way barriers. The instruction you will add is a data memory barrier `DMB.
-Create a litmus file called `test2.litmus` with the contents shown below:
+You can fix the message passing by adding two-way barriers through a data memory barrier (`DMB`).
+Create a litmus file called `test2.litmus` with the following contents:
 
 ```
 AArch64 MP+Loop+DMB
@@ -93,7 +100,7 @@ AArch64 MP+Loop+DMB
 exists
 (1:X0=1 /\ 1:X2=0)
 ```
-In this example you added the `DMB` instruction between the `STR` instructions in `P0`, and between the `LDR` instructions in `P1`. The `DMB` prevents the reordering of memory accesses across it. Note that non-memory access instructions can still be reordered across the `DMB`. For example, it's possible for the second `MOV` in `P0` to be executed before the `DMB` because it's not a memory access instruction. Also, on Arm, `DMB` instructions are Sequentially Consistent with respect to other `DMB` instructions.
+In this example you added the `DMB` instruction between the `STR` instructions in `P0`, and between the `LDR` instructions in `P1`. The `DMB` prevents memory accesses from reordering across it. Note that non-memory access instructions can still be reordered across the `DMB`. For example, it's possible for the second `MOV` in `P0` to be executed before the `DMB` because it's not a memory access instruction. Also, on Arm, `DMB` instructions are Sequentially Consistent with respect to other `DMB` instructions.
 
 Run this test with `herd7`:
 ```bash
@@ -109,28 +116,28 @@ States 1
 ...
 Warning: File "test.litmus": unrolling limit exceeded at L1, legal outcomes may be missing.
 ```
-Now that you have the memory barriers in place, you only see the outcome `(1,1)` which is what is desired for message passing between threads. When you run tests that contain loops with `herd7`, a warning will be shown. This warning appears because `herd7` is a simulator that interleaves instructions to figure out all possible outcomes. A consequence of it working this way means that it will unroll loops first, then test against the unrolled loops. By default, it unrolls loops two times. It is possible to increase this with with `-unroll` switch. That said, it doesn't seem useful to increase the number of unrolls unless there is some very specific and unusual sequencing occurring between the threads being tested. Overall, it is strongly recommend that complex scenarios be broken into smaller and more primitive tests.
+Now that you have the memory barriers in place, you only see the outcome `(1,1)` which is what you want for message passing between threads. When you run tests that contain loops with `herd7`, a warning will be shown. This warning appears because `herd7` is a simulator that interleaves instructions to figure out all possible outcomes. A consequence of it working this way means that it will unroll loops first, then test against the unrolled loops. By default, it unrolls loops twice. You can increase this with the `-unroll` switch. That said, it doesn't seem useful to increase the number of unrolls unless there is some very specific and unusual sequencing to explore. In general, it is strongly recommended to break down complex scenarios into smaller and more primitive tests.
 
-Now lets run the same litmus file with `litmus7`:
+Now run the same litmus file with `litmus7` on an Arm Neoverse-based machine:
 
 ```bash
 litmus7 test2.litmus
 ```
 
-The output on your Arm Neoverse CPU based machine will looks like:
+The output will look like:
 
 ```output
 Test MP+Loop+DMB Allowed
 Histogram (1 states)
 1000000:>1:X0=1; 1:X2=1;
 ```
-100% of the test runs observed `(1,1)`. This builds confidence that our barriers are working.
+Here, 100% of the runs observed `(1,1)`, which builds confidence that the barriers are working.
 
-A last point is that the `DMB` in `P1` can be relaxed by changing it to `DMB ISHLD`. This relaxation could potentially yield performance improvements in real applications. However, doing the same relaxation to the `DMB` in `P0` will break the message passing. You can try this experiment and also read the Arm documentation on the differences between `DMB ISH`, `DMB ISHLD`, and `DMB ISHST`.
+A final point is that the `DMB` in `P1` can be relaxed by changing it to `DMB ISHLD`. This relaxation might potentially yield performance improvements in real applications. However, if you do the same relaxation to the `DMB` in `P0`, it breaks the message passing. You can try this experiment and also read the Arm documentation on the differences between `DMB ISH`, `DMB ISHLD`, and `DMB ISHST`.
 
-## Example 3: Message passing with One-Way Barriers
+## Example 3: Message Passing With One-Way Barriers
 
-Let's test message passing with one-way barriers next. This is done by using instructions that support acquire-release ordering.
+Now you can move on to test message passing with one-way barriers. This is done by using instructions that support acquire-release ordering.
 
 Create a litmus file called `test3.litmus` with the contents shown below:
 
@@ -180,11 +187,11 @@ Histogram (1 states)
 
 `litmus7` shows the same result as `herd7`.
 
-## Example 4: Compare and Swap with One-Way Barriers
+## Example 4: Compare and Swap With One-Way Barriers
 
-Atomic instructions support acquire-release semantics. In this example you will look at Compare and Swap with acquire ordering (`CASA`).
+Atomic instructions support acquire-release semantics. In this example, you will examine a Compare and Swap instruction with acquire ordering (`CASA`).
 
-Create a litmus file `test4.litmus` with the content shown below:
+Create a litmus file named `test4.litmus` with the content shown below:
 
 ```
 AArch64 Lock+Loop+CAS+ACQ_REL
@@ -205,7 +212,9 @@ exists
 (1:X0=1 /\ 1:X2=0)
 ```
 
-This test is a representation of a basic spin lock. The lock variable is in address `y`. When it is set to 1, it's locked, when it's set to 0, it's available. This test starts with the lock variable at address `y` set to 1, which means it's locked. `P0` is assumed to be the owner of the lock at the start of the test. `P0` will write to address `x` (the payload), then release the lock by writing a 0 to address `y`. The store to address `y` is a `STLR` (store-release), this ensures that the write to the payload is visible before the release of the lock at address `y`. On `P1`, you spin on address `y` (the lock) with a `CASA`. At each loop iteration, `CASA` checks the value at address `y`. If it's 0 (available), then it will write a 1 to take ownership. If it's 1, the `CASA` fails and loops back to try the `CASA` again. It will continue to loop until it successfully takes the lock. The `CASA` instruction does this operation atomically, and with acquire ordering to ensure that the later `LDR` of address `x` (the payload) is not ordered before the `CASA`.
+This test represents a basic spin lock. The lock variable resides at address `y`. When `y` is set to 1, it's locked, when it's set to 0, it's available. 
+
+The test starts with the lock variable at address `y` set to 1, which means it's locked. `P0` is assumed to be the owner of the lock at the start of the test. `P0` writes to address `x` (the payload), then releases the lock by writing a 0 to address `y`. The store to address `y` is a `STLR` (store-release), this ensures that the write to the payload is visible before the release of the lock at address `y`. On `P1`, you spin on address `y` (the lock) with a `CASA`. At each loop iteration, `CASA` checks the value at address `y`. If it's 0 (available), then it will write a 1 to take ownership. If it's 1, the `CASA` fails and loops back to try the `CASA` again. It will continue to loop until it successfully takes the lock. The `CASA` instruction does this operation atomically, and with acquire ordering to ensure that the later `LDR` of address `x` (the payload) is not ordered before the `CASA`.
 
 Run this test with `herd7`:
 
@@ -235,7 +244,7 @@ Histogram (1 states)
 ```
 Only an outcome of `(1,1)` has been observed. More test iterations can be executed to build confidence that this is the only possible result.
 
- Note that when we you ran `litmus7`, you used the switch `-ccopts="-mcpu=native"`. If you didn't, `litmus7` would fail with a message saying that the `CASA` instruction cannot be emitted by the compiler.
+ Note that when you ran `litmus7`, you used the switch `-ccopts="-mcpu=native"`. If you didn't, `litmus7` would fail with a message saying that the `CASA` instruction cannot be emitted by the compiler.
 
 Try changing the `CASA` to a `CAS` (Compare and Swap with no ordering) to see what happens.
 
@@ -263,7 +272,7 @@ AArch64 MP+Loop+ACQ_REL2
 exists
 (1:X0=1 /\ (1:X2=0 \/ 1:X5=0))
 ```
-On `P0`, you are writing to both `w` and `x` before the store-release on address `y`. This ensures that the writes to both `x` and `w` (the payloads) will be ordered before the write to address `y` (the flag). On `P1`, you loop with a load-acquire on address `y` (the flag). Once it is observed to be set, you load the two payload addresses. The load-acquire ensures that you do not read the payload addresses `w` and `x` until the flag is observe to be set. The condition at the bottom has been updated to check for any cases where either `w` or `x` are 0. Either of these being observed as 0 will be an indication of reading the payload before the ready flag is observed to be set (not what we want). Overall, this code should result in only the outcome `(1,1,1)`.
+On `P0`, you are writing to both `w` and `x` before the store-release on address `y`. This ensures that the writes to both `x` and `w` (the payloads) will be ordered before the write to address `y` (the flag). On `P1`, you loop with a load-acquire on address `y` (the flag). Once it is observed to be set, you load the two payload addresses. The load-acquire ensures that you do not read the payload addresses `w` and `x` until the flag is observe to be set. The condition at the bottom has been updated to check for any cases where either `w` or `x` are 0. Either of these being observed as 0 will be an indication of reading the payload before the ready flag is observed to be set (not what you want). Overall, this code should result in only the outcome `(1,1,1)`.
 
 Run this test with `herd7`:
 

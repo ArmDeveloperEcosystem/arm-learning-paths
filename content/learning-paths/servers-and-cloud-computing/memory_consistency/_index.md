@@ -1,19 +1,21 @@
 ---
-title: Explore The Arm Memory Model & Thread Synchronization
+title: Explore Thread Synchronization in the Arm Memory Model
 
 minutes_to_complete: 150
 
-who_is_this_for: This is an advanced topic for engineers looking for a practical way to test different thread synchronization approaches within the context of the Arm memory model.
+who_is_this_for: This is an advanced topic for developers seeking practical ways to test thread synchronization approaches in the Arm memory model.
 
 learning_objectives:
-    - Test snippets of thread synchronization assembly against the formal definition of the Arm Memory Model
-    - Test snippets of thread synchronization assembly on Arm hardware to compare against the formal Arm Memory Model
+    - Test thread synchronization assembly snippets against the formal definition of the Arm Memory Model.
+    - Test thread synchronization assembly snippets on Arm hardware.
+    - Compare the results of different thread synchronization approaches. 
 
 prerequisites:
-    - An understanding of different memory consistency models like Sequential Consistency, Weak Ordering, Relaxed Consistency, Processor Consistency, etc.
+    - An understanding of memory consistency models (such as Sequential Consistency, Weak Ordering, Relaxed Consistency, and Processor Consistency).
     - An understanding of thread synchronization.
-    - An understanding of Arm assembly, general-purpose registers, and how to find information on Arm assembly instructions.
-    - An understanding of memory barriers including acquire-release semantics.
+    - Familiarity with Arm Assembly Language, and the ability to find relevant information on Arm assembly instructions.
+    - Familiarity with general-purpose registers.
+    - Familiarity with memory barriers, including Acquire-Release Semantics.
 
 author: Julio Suarez
 
@@ -35,7 +37,7 @@ further_reading:
         link: https://developer.arm.com/documentation/ddi0487/la
         type: documentation
     - resource:
-        title: Armv8 Barriers
+        title: "Barriers, Learn the Architecture: Armv8-A Memory Systems."
         link: https://developer.arm.com/documentation/100941/0101/Barriers
         type: documentation
     - resource:
