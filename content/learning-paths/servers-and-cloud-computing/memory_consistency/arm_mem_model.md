@@ -6,16 +6,16 @@ layout: "learningpathall"
 
 ## CPU Memory Model vs Language/Runtime Memory Models
 
-The majority of developers do not need deep familiarity with the memory consistency model of the CPU. This is because programming languages and runtime engines abstract away the CPU's memory model by providing the programmer with a language/runtime memory model. This abstraction is achieved by providing developers with a set of language/runtime specific memory ordering rules, synchronization constructs, and supporting libraries. As long as the developer uses these correctly, language compilers and runtime engines will make sure the code executes correctly on any CPU regardless of how strong or weakly ordered it is.
+Most developers don't need deep knowledge of a CPU's memory consistency model. Programming languages and runtimes abstract the CPU’s model by providing their own memory ordering rules, synchronization constructs, and libraries. As long as the developer uses these correctly, compilers and runtime engines ensure that the code executes correctly on any CPU - whether its memory ordering is strong or weak.
 
-That said, developers may want to dig deeper into this topic for various reasons including:
+That said, developers might want to dig deeper into this topic for various reasons including:
 
-- Extract more performance from weakly ordered CPUs (like Arm CPUs).
-  - Compilers and runtimes will do a good job of maximizing performance. Only in well understood niche cases will there be a potential for performance gain by going beyond what the compiler/runtime would do to higher level code. For most cases, all it takes to get more performance is to use the latest compilers, compiler switches, and runtimes.
-- Develop confidence in the correctness of synchronization constructs.
-- Develop an understanding of how compilers and runtimes select different machine instructions while still honoring the memory ordering rules of the language/runtime and CPU.
+- Extracting additional performance from weakly-ordered CPUs, such as Arm CPUs:
+  - Although compilers and runtimes typically do a good job of maximizing performance, manual-tuning in well understood niche cases might provide further improvements. In most cases, all it takes to improve performance is using latest compilers, compiler switches, and runtimes.
+- Gaining confidence in the correctness of synchronization constructs.
+- Understanding how compilers and runtimes select machine instructions while still honoring the memory ordering rules.
 
-In this Learning Path, you will use publicly available tools to explore thread synchronization on Arm CPUs. You will gain enough working knowledge of the tools to be able to explore thread synchronization concepts. At the end of this Learning Path, you will be able access more information to get a deeper understanding of this subject.
+In this Learning Path, you will use publicly-available tools to explore thread synchronization on Arm CPUs. You will gain enough working knowledge of these tools to explore thread synchronization concepts. At the end of this Learning Path, you will find details of further resources that you can consult to gain a deeper understanding of this subject.
 
 ##  The Formal Definition of the Arm Memory Model
 
