@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Herd7 & Litmus7 Test Primer"
+title: "Herd7 and Litmus7 Test Primer"
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -8,7 +8,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Herd7 & Litmus7 Test Primer
+## Herd7 and Litmus7 Test Primer
 
 In this section you will get an overview of the syntax of litmus tests and learn how to run them. More comprehensive information on developing and running litmus tests can be found in the [diy7 documentation](https://diy.inria.fr/doc/index.html)
 

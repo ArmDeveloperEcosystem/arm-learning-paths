@@ -8,18 +8,23 @@ weight: 4 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Arm Instructions with Acquire-Release Ordering
+## Arm Instructions that Support Acquire-Release Ordering
 
-Most of the examples shown in this section use the instructions `LDAR` and `STLR` which are load-acquire and store-release respectively. However, there are other instructions that support acquire-release ordering. More specifically, these include the various atomic instructions that were made mandatory in version Armv8.1 of the Arm architecture. These include Compare and Swap (`CAS`), Swap (`SWP`), Load-Add (`LDADD`), Store-ADD (`STADD`), and more. These are left as an exercise to explore outside this Learning Path.
+This section focuses on examples that use the instructions `LDAR` (load-acquire) and `STLR` (store-release). However, these are not the only instructions that support acquire-release ordering. 
+
+Starting with Armv8.1 of the Armv8-A architecture profile, several atomic instructions became mandatory. Examples include Compare and Swap (`CAS`), Swap (`SWP`), Load-Add (`LDADD`), and Store-ADD (`STADD`). You can go on to investigate these further, but they are outside the scope of this Learning Path.
 
 ## Litmus7 Switches
 
-As `litmus7` executes code on the machine, it needs to build the assembly snippets into executable code. `litmus7` compiles with GCC, however, GCC uses default options. When you run on an Arm Neoverse platform, it is strongly recommend to use the `-ccopts="-mcpu=native"` switch. This is the easiest way to avoid all possible run time failures. For example, if the Compare and Swap example below is executed without this switch, it will fail to run because by default, GCC will not emit the Compare and Swap instruction (`CAS`). This instruction is supported in Armv8.1 of the Arm architecture, but GCC by default builds for Armv8.0. If in the future, the GCC default is updated to build for a newer version of the Arm architecture (e.g. Armv9.0), the `-ccopts` switch will not be needed to run tests that use atomic instructions like Compare and Swap (`CAS`).
+As `litmus7` executes code on a machine, it first needs to build the assembly snippets into executable code. By default, `litmus7` compiles with GCC's standard options. When you run on an Arm Neoverse platform however, it is strongly recommend that you use the switch `-ccopts="-mcpu=native"`. This is the simplest way to avoid all possible runtime failures. 
+
+For example, if you execute the Compare and Swap example below without this switch, it will fail to run because GCC by default, does not emit the Compare and Swap (`CAS`) instruction. Although `CAS` is supported in Armv8.1 of the Arm architecture, GCC still defaults to Armv8.0. In the future, if  GCC updates its default to target a newer version of the Arm architecture (for example, Armv9.0), the `-ccopts` switch will no longer be necessary for tests that use atomic instructions like `CAS`.
 
 ## Example 1: Message passing without barriers
 
-The first example highlights one of the pitfalls that may occur under a relaxed memory model.
-Create a litmus file with the content shown below in a file named `test1.litmus`:
+The first example highlights one of the pitfalls that can occur under a relaxed memory model.
+
+To try it out, create a litmus file named `test1.litmus` with the content shown below:
 
 ```
 AArch64 MP+Loop
@@ -35,15 +40,15 @@ AArch64 MP+Loop
 exists
 (1:X0=1 /\ 1:X2=0)
 ```
-This example is similar to what you saw in the previous section, except this time there is a loop to check for the message ready flag. If you think about this assembly in a Sequentially Consistent way, you can convince yourself that the only valid outcome of these two threads executing will be `(1,1)`. 
+This example is similar to what you saw in the previous section, except now there is a loop to check for the "message ready" flag. If you think about this assembly in a Sequentially Consistent way, you might conclude that the only valid outcome of these two threads executing will be `(1,1)`. 
 
-Run this with `herd7`:
+Run the following command to test this with `herd7`:
 
 ```bash
 herd7 ./test1.litmus
 ```
 
-The output will look like:
+The output should look like:
 
 ```output
 Test MP+Loop Allowed
@@ -53,15 +58,13 @@ States 2
 ```
 You should see the outcome of `(1,0)`. 
 
-Now let's try to run this same test with `litmus7` on your running Arm Neoverse instance to check if you get the same outcomes.
-
-Run the following command:
+Now let's try to run this same test with `litmus7` on your Arm Neoverse instance to see if you get the same outcomes:
 
 ```bash
 litmus7 ./test1.litmus
 ```
 
-The output should look like:
+The output should look like this:
 
 ```output
 Test MP+Loop Allowed
