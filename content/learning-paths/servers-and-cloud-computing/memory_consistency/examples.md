@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 This section focuses on examples that use the instructions `LDAR` (load-acquire) and `STLR` (store-release). However, these are not the only instructions that support acquire-release ordering. 
 
-Starting with Armv8.1 of the Armv8-A architecture profile, several atomic instructions became mandatory. Examples include Compare and Swap (`CAS`), Swap (`SWP`), Load-Add (`LDADD`), and Store-ADD (`STADD`). You can go on to investigate these further, but they are outside the scope of this Learning Path.
+Starting with Armv8.1 of the Armv8-A architecture profile, several atomic instructions became mandatory. Examples include Compare and Swap (`CAS`), Swap (`SWP`), Load-Add (`LDADD`), and Store-Add (`STADD`). You can go on to investigate these further, but they are outside the scope of this Learning Path.
 
 ## Litmus7 Switches
 
@@ -72,14 +72,14 @@ Histogram (2 states)
 458   *>1:X0=1; 1:X2=0;
 999542:>1:X0=1; 1:X2=1;
 ```
-`litmus7` shows that most of the time you see the outcome `(1,1)`, but occasionally you see `(1,0)`. This result also highlights why you might want to increase the number of test iterations with `litmus7`. Increasing the number of test iterations will increase the probability that we see all outcomes, including those that are rare.
+Here `(1,1)` is by far the most common result, but `(1,0)` still appears occasionally. This highlights the benefit of increasing the number of test iterations when using `litmus7`:doing so increases the probability of observing all outcomes, including those that happen rarely.
 
-You will see the outcome of `(1,0)` because `LDR` and `STR` are ordinary memory accesses. This means that if there are no dependencies between them (there aren't in this case), they can be reordered by the CPU. Both `herd7` and `litmus7` confirm that this can and will happen. The result of `(1,0)` is not desired because it represents reading the payload of a message before the ready flag is set. This is likely not what the programmer intended.
+You will see the `(1,0)` outcome because `LDR` and `STR` are ordinary memory accesses. When there are no dependencies between them, as in this example, the CPU can reorder these operations. Both `herd7` and `litmus7` confirm that this reordering can, and will, happen. The `(1,0)` result is undesirable because it indicates the message payload is read before the ready flag is set. This is likely not what the programmer intended.
 
 ## Example 2: Message passing with two-way barriers
 
-Let's fix the message passing by adding two-way barriers. The instruction you will add is a data memory barrier `DMB.
-Create a litmus file called `test2.litmus` with the contents shown below:
+You can fix the message passing by adding two-way barriers through a data memory barrier (`DMB`).
+Create a litmus file called `test2.litmus` with the following contents:
 
 ```
 AArch64 MP+Loop+DMB
@@ -96,7 +96,7 @@ AArch64 MP+Loop+DMB
 exists
 (1:X0=1 /\ 1:X2=0)
 ```
-In this example you added the `DMB` instruction between the `STR` instructions in `P0`, and between the `LDR` instructions in `P1`. The `DMB` prevents the reordering of memory accesses across it. Note that non-memory access instructions can still be reordered across the `DMB`. For example, it's possible for the second `MOV` in `P0` to be executed before the `DMB` because it's not a memory access instruction. Also, on Arm, `DMB` instructions are Sequentially Consistent with respect to other `DMB` instructions.
+In this example you added the `DMB` instruction between the `STR` instructions in `P0`, and between the `LDR` instructions in `P1`. The `DMB` prevents memory accesses from reordering across it. Note that non-memory access instructions can still be reordered across the `DMB`. For example, it's possible for the second `MOV` in `P0` to be executed before the `DMB` because it's not a memory access instruction. Also, on Arm, `DMB` instructions are Sequentially Consistent with respect to other `DMB` instructions.
 
 Run this test with `herd7`:
 ```bash
@@ -112,28 +112,28 @@ States 1
 ...
 Warning: File "test.litmus": unrolling limit exceeded at L1, legal outcomes may be missing.
 ```
-Now that you have the memory barriers in place, you only see the outcome `(1,1)` which is what is desired for message passing between threads. When you run tests that contain loops with `herd7`, a warning will be shown. This warning appears because `herd7` is a simulator that interleaves instructions to figure out all possible outcomes. A consequence of it working this way means that it will unroll loops first, then test against the unrolled loops. By default, it unrolls loops two times. It is possible to increase this with with `-unroll` switch. That said, it doesn't seem useful to increase the number of unrolls unless there is some very specific and unusual sequencing occurring between the threads being tested. Overall, it is strongly recommend that complex scenarios be broken into smaller and more primitive tests.
+Now that you have the memory barriers in place, you only see the outcome `(1,1)` which is what you want for message passing between threads. When you run tests that contain loops with `herd7`, a warning will be shown. This warning appears because `herd7` is a simulator that interleaves instructions to figure out all possible outcomes. A consequence of it working this way means that it will unroll loops first, then test against the unrolled loops. By default, it unrolls loops twice. You can increase this with the `-unroll` switch. That said, it doesn't seem useful to increase the number of unrolls unless there is some very specific and unusual sequencing to explore. In general, it is strongly recommended to break down complex scenarios into smaller and more primitive tests.
 
-Now lets run the same litmus file with `litmus7`:
+Now run the same litmus file with `litmus7` on an Arm Neoverse-based machine:
 
 ```bash
 litmus7 test2.litmus
 ```
 
-The output on your Arm Neoverse CPU based machine will looks like:
+The output will look like:
 
 ```output
 Test MP+Loop+DMB Allowed
 Histogram (1 states)
 1000000:>1:X0=1; 1:X2=1;
 ```
-100% of the test runs observed `(1,1)`. This builds confidence that our barriers are working.
+Here, 100% of the runs observed `(1,1)`, which builds confidence that the barriers are working.
 
-A last point is that the `DMB` in `P1` can be relaxed by changing it to `DMB ISHLD`. This relaxation could potentially yield performance improvements in real applications. However, doing the same relaxation to the `DMB` in `P0` will break the message passing. You can try this experiment and also read the Arm documentation on the differences between `DMB ISH`, `DMB ISHLD`, and `DMB ISHST`.
+A final point is that the `DMB` in `P1` can be relaxed by changing it to `DMB ISHLD`. This relaxation might potentially yield performance improvements in real applications. However, if you do the same relaxation to the `DMB` in `P0`, it breaks the message passing. You can try this experiment and also read the Arm documentation on the differences between `DMB ISH`, `DMB ISHLD`, and `DMB ISHST`.
 
 ## Example 3: Message passing with One-Way Barriers
 
-Let's test message passing with one-way barriers next. This is done by using instructions that support acquire-release ordering.
+Now you can move on to test message passing with one-way barriers. This is done by using instructions that support acquire-release ordering.
 
 Create a litmus file called `test3.litmus` with the contents shown below:
 
