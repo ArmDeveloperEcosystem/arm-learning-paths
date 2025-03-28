@@ -15,8 +15,6 @@ test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
 title: Anaconda
 tool_install: true
 weight: 1
