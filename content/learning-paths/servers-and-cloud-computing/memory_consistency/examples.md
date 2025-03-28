@@ -302,7 +302,7 @@ Histogram (1 states)
 
 Both `herd7` and `litmus7` show the expected result. It might be worth increasing the number of iterations on `litmus7` to build more confidence in the result.
 
-Now lets remove the load-acquire in `P1` and use a dependency as a barrier. Create a new litmus file `test6.litmus` with the contents shown below:
+Now remove the load-acquire in `P1` and use a dependency as a barrier. Create a new litmus file `test6.litmus` with the contents shown below:
 
 ```
 AArch64 MP+Loop+Dep

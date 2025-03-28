@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 Most developers don't need deep knowledge of a CPU's memory consistency model. Programming languages and runtimes abstract the CPU’s model by providing their own memory ordering rules, synchronization constructs, and libraries. As long as the developer uses these correctly, compilers and runtime engines ensure that the code executes correctly on any CPU - whether its memory ordering is strong or weak.
 
-That said, developers might want to dig deeper into this topic for various reasons including:
+Developers might want to dig deeper into this topic for various reasons including:
 
 - Extracting additional performance from weakly-ordered CPUs, such as Arm CPUs:
   - Although compilers and runtimes typically do a good job of maximizing performance, manual tuning in well understood niche cases might provide further improvements. In most cases, all it takes to improve performance is using latest compilers, compiler switches, and runtimes.
@@ -81,7 +81,7 @@ litmus7 --help
 
 The input to both `herd7` and `litmus7` tools are snippets of assembly code, called litmus tests.
 
-Shown below are some example of running the tools with a litmus test. In the next section, you will go through an actual litmus test example.
+Shown below are some example of running the tools with a litmus test. 
 
 Run herd7 with a litmus test:
 ```
@@ -107,3 +107,5 @@ Run litmus7 with GCC emitting atomic instructions as required by the litmus test
 ```
 litmus7 ./test.litmus -ccopts="-mcpu=native"
 ```
+
+Continue to the next section to learn about a litmus test example. 
