@@ -6,10 +6,12 @@ weight: 4
 layout: learningpathall
 ---
 
-## Python Script for executing an AI Agent application
-With `llama.cpp` built and the Llama3.1 8B model downloaded, you are now ready to create a Python script to execute an AI agent application:
+## Python script for executing an AI Agent application
 
-Create a Python file named `agent.py` with the content shown below:
+With `llama.cpp` built and the Llama3.1 8B model downloaded, you are now ready to create a Python script to execute an AI agent application.
+
+Use a text editor to create a Python file named `agent.py` with the content shown below:
+
 ```bash
 from enum import Enum
 from typing import Union

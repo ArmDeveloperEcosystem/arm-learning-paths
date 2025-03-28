@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Before you begin
 
-This Learning Path demonstrates how to build an AI Agent Application using open-source LLMs optimized for Arm architecture. The AI Agent can use Large Language Models (LLMs) to perform actions by accessing tools and knowledge. 
+This Learning Path demonstrates how to build an AI Agent Application using open-source LLMs optimized for the Arm architecture. The AI Agent can use Large Language Models (LLMs) to perform actions by accessing tools and knowledge. 
 
-The instructions in this Learning Path have been designed for Arm servers running Ubuntu 22.04 LTS. You require an Arm server instance with at least 4 cores and 16GB of memory to run this example. Configure disk storage up to at least 32 GB. The instructions have been tested on an AWS EC2 Graviton3 `m7g.xlarge` instance.
+The instructions in this Learning Path have been designed for Arm servers running Ubuntu 22.04 LTS. You will need an Arm server instance with at least 4 cores and 16GB of memory. Configure disk storage for 32 GB or more. The instructions have been tested on an AWS EC2 Graviton3 `m7g.xlarge` instance.
 
 ## Overview
 
