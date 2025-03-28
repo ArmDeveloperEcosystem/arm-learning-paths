@@ -12,7 +12,11 @@ layout: "learningpathall"
 
 This section focuses on examples that use the instructions `LDAR` (load-acquire) and `STLR` (store-release). However, these are not the only instructions that support acquire-release ordering. 
 
-Starting with Armv8.1 of the Armv8-A architecture profile, several atomic instructions became mandatory. Examples include Compare and Swap (`CAS`), Swap (`SWP`), Load-Add (`LDADD`), and Store-Add (`STADD`). You can go on to investigate these further, but they are outside the scope of this Learning Path.
+Starting with Armv8.1 of the Armv8-A architecture profile, several atomic instructions became mandatory. Examples include Compare and Swap (`CAS`), Swap (`SWP`), Load-Add (`LDADD`), and Store-Add (`STADD`). 
+
+{{% notice Learning Tip %}}
+Though these other atomic instructions are outside the scope of this Learning Path, you can go on to investigate these further yourself. See the Additional Resources section at the end.
+{{% /notice %}}
 
 ## Litmus7 Switches
 
@@ -20,7 +24,7 @@ As `litmus7` executes code on a machine, it first needs to build the assembly sn
 
 For example, if you execute the Compare and Swap example below without this switch, it will fail to run because GCC by default, does not emit the Compare and Swap (`CAS`) instruction. Although `CAS` is supported in Armv8.1 of the Arm architecture, GCC still defaults to Armv8.0. In the future, if  GCC updates its default to target a newer version of the Arm architecture (for example, Armv9.0), the `-ccopts` switch will no longer be necessary for tests that use atomic instructions like `CAS`.
 
-## Example 1: Message passing without barriers
+## Example 1: Message Passing without Barriers
 
 The first example highlights one of the pitfalls that can occur under a relaxed memory model.
 
@@ -76,7 +80,7 @@ Here `(1,1)` is by far the most common result, but `(1,0)` still appears occasio
 
 You will see the `(1,0)` outcome because `LDR` and `STR` are ordinary memory accesses. When there are no dependencies between them, as in this example, the CPU can reorder these operations. Both `herd7` and `litmus7` confirm that this reordering can, and will, happen. The `(1,0)` result is undesirable because it indicates the message payload is read before the ready flag is set. This is likely not what the programmer intended.
 
-## Example 2: Message passing with two-way barriers
+## Example 2: Message Passing With Two-Way Barriers
 
 You can fix the message passing by adding two-way barriers through a data memory barrier (`DMB`).
 Create a litmus file called `test2.litmus` with the following contents:
@@ -131,7 +135,7 @@ Here, 100% of the runs observed `(1,1)`, which builds confidence that the barrie
 
 A final point is that the `DMB` in `P1` can be relaxed by changing it to `DMB ISHLD`. This relaxation might potentially yield performance improvements in real applications. However, if you do the same relaxation to the `DMB` in `P0`, it breaks the message passing. You can try this experiment and also read the Arm documentation on the differences between `DMB ISH`, `DMB ISHLD`, and `DMB ISHST`.
 
-## Example 3: Message passing with One-Way Barriers
+## Example 3: Message Passing With One-Way Barriers
 
 Now you can move on to test message passing with one-way barriers. This is done by using instructions that support acquire-release ordering.
 
@@ -183,11 +187,11 @@ Histogram (1 states)
 
 `litmus7` shows the same result as `herd7`.
 
-## Example 4: Compare and Swap with One-Way Barriers
+## Example 4: Compare and Swap With One-Way Barriers
 
-Atomic instructions support acquire-release semantics. In this example you will look at Compare and Swap with acquire ordering (`CASA`).
+Atomic instructions support acquire-release semantics. In this example, you will examine a Compare and Swap instruction with acquire ordering (`CASA`).
 
-Create a litmus file `test4.litmus` with the content shown below:
+Create a litmus file named `test4.litmus` with the content shown below:
 
 ```
 AArch64 Lock+Loop+CAS+ACQ_REL
@@ -208,7 +212,9 @@ exists
 (1:X0=1 /\ 1:X2=0)
 ```
 
-This test is a representation of a basic spin lock. The lock variable is in address `y`. When it is set to 1, it's locked, when it's set to 0, it's available. This test starts with the lock variable at address `y` set to 1, which means it's locked. `P0` is assumed to be the owner of the lock at the start of the test. `P0` will write to address `x` (the payload), then release the lock by writing a 0 to address `y`. The store to address `y` is a `STLR` (store-release), this ensures that the write to the payload is visible before the release of the lock at address `y`. On `P1`, you spin on address `y` (the lock) with a `CASA`. At each loop iteration, `CASA` checks the value at address `y`. If it's 0 (available), then it will write a 1 to take ownership. If it's 1, the `CASA` fails and loops back to try the `CASA` again. It will continue to loop until it successfully takes the lock. The `CASA` instruction does this operation atomically, and with acquire ordering to ensure that the later `LDR` of address `x` (the payload) is not ordered before the `CASA`.
+This test represents a basic spin lock. The lock variable resides at address `y`. When `y` is set to 1, it's locked, when it's set to 0, it's available. 
+
+The test starts with the lock variable at address `y` set to 1, which means it's locked. `P0` is assumed to be the owner of the lock at the start of the test. `P0` writes to address `x` (the payload), then releases the lock by writing a 0 to address `y`. The store to address `y` is a `STLR` (store-release), this ensures that the write to the payload is visible before the release of the lock at address `y`. On `P1`, you spin on address `y` (the lock) with a `CASA`. At each loop iteration, `CASA` checks the value at address `y`. If it's 0 (available), then it will write a 1 to take ownership. If it's 1, the `CASA` fails and loops back to try the `CASA` again. It will continue to loop until it successfully takes the lock. The `CASA` instruction does this operation atomically, and with acquire ordering to ensure that the later `LDR` of address `x` (the payload) is not ordered before the `CASA`.
 
 Run this test with `herd7`:
 

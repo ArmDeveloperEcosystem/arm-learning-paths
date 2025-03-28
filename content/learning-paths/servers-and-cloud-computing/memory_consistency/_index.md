@@ -3,7 +3,7 @@ title: Explore Thread Synchronization in the Arm Memory Model
 
 minutes_to_complete: 150
 
-who_is_this_for: This is an advanced topic for engineers seeking practical ways to test thread synchronization approaches in the Arm memory model.
+who_is_this_for: This is an advanced topic for developers seeking practical ways to test thread synchronization approaches in the Arm memory model.
 
 learning_objectives:
     - Test thread synchronization assembly snippets against the formal definition of the Arm Memory Model.
