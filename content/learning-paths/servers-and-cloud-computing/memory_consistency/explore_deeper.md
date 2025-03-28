@@ -25,7 +25,7 @@ The [diy7 documentation](https://diy.inria.fr/doc/index.html) also provides link
 
 - [Barriers on Armv8](https://developer.arm.com/documentation/100941/0101/Barriers).
 - [Load-Acquire and Store-Release on Armv8](https://developer.arm.com/documentation/102336/0100/Load-Acquire-and-Store-Release-instructions).
-- [Barrier Litmus Tests and Cookbook](https://developer.arm.com/documentation/genc007826/latest). This was written during the Armv7 days, but it still has relevance.
+- [Barrier Litmus Tests and Cookbook](https://developer.arm.com/documentation/genc007826/latest). This was written in 2009, but is still relevant.
 
 ## More Tests to Explore
 

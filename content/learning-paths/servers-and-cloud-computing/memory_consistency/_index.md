@@ -1,19 +1,19 @@
 ---
-title: Explore Thread Synchronization in the Arm Memory Model
+title: Explore Thread Synchronization in the Arm memory model
 
 minutes_to_complete: 150
 
 who_is_this_for: This is an advanced topic for developers seeking practical ways to test thread synchronization approaches in the Arm memory model.
 
 learning_objectives:
-    - Test thread synchronization assembly snippets against the formal definition of the Arm Memory Model.
+    - Test thread synchronization assembly snippets against the formal definition of the Arm memory model.
     - Test thread synchronization assembly snippets on Arm hardware.
     - Compare the results of different thread synchronization approaches. 
 
 prerequisites:
     - An understanding of memory consistency models (such as Sequential Consistency, Weak Ordering, Relaxed Consistency, and Processor Consistency).
     - An understanding of thread synchronization.
-    - Familiarity with Arm Assembly Language, and the ability to find relevant information on Arm assembly instructions.
+    - Familiarity with Arm assembly language, and the ability to find relevant information on Arm assembly instructions.
     - Familiarity with general-purpose registers.
     - Familiarity with memory barriers, including Acquire-Release Semantics.
 
@@ -27,6 +27,7 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
+    - Runbook
     - Herd7
     - Litmus7
     - Arm ISA
