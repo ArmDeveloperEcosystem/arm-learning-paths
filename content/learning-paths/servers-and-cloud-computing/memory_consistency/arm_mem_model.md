@@ -15,17 +15,17 @@ That said, developers might want to dig deeper into this topic for various reaso
 - Gaining confidence in the correctness of synchronization constructs.
 - Understanding how compilers and runtimes select machine instructions while still honoring the memory ordering rules.
 
-In this Learning Path, you will use publicly-available tools to explore thread synchronization on Arm CPUs. You will gain enough working knowledge of these tools to explore thread synchronization concepts. At the end of this Learning Path, you will find details of further resources that you can consult to gain a deeper understanding of this subject.
+In this Learning Path, you will use publicly-available tools to explore thread synchronization on Arm CPUs. You will gain enough working knowledge of these tools to explore thread synchronization concepts. At the end of this Learning Path, you can find details of further resources that you can consult to gain a deeper understanding of this subject.
 
 ##  The Formal Definition of the Arm Memory Model
 
-The formal definition of the Arm memory model is in the [Arm Architecture Reference Manual for A-profile architecture](https://developer.arm.com/documentation/ddi0487/la) (Arm ARM) under the section called `The AArch64 Application Level Memory Model`. The ordering requirements defined in the Arm ARM is a transliteration of the `aarch64.cat` file hosted on the Arm [herd7 simulator tool](https://developer.arm.com/herd7). In fact, this `aarch64.cat` file is the authoritative definition of the Arm memory model. As it is a formal definition, it is complex.
+The formal definition of the Arm memory model is described in the [Arm Architecture Reference Manual for A-profile architecture](https://developer.arm.com/documentation/ddi0487/la) (often referred to as "the Arm ARM") under the section called `The AArch64 Application Level Memory Model`. The ordering requirements defined in the Arm ARM is a transliteration of the `aarch64.cat` file hosted on the Arm [herd7 simulator tool](https://developer.arm.com/herd7). In fact, the `aarch64.cat` file is the authoritative definition of the Arm memory model. As a formal definition, it is inherently complex.
 
-##  Herd7 Simulator & Litmus7 Tool
+##  Herd7 Simulator and Litmus7 Tool
 
-The herd7 simulator provides a way to test snippets of Arm assembly against the formal definition of the Arm memory model (the `aarch64.cat` file mentioned above). The litmus7 tool can take the same snippets of assembly that run on herd7 and run them on actual Arm hardware. This allows for comparing the formal memory model to the memory model of an actual Arm CPU. These snippets of assembly are called litmus tests.
+The herd7 simulator tests snippets of Arm assembly against the formal definition of the Arm memory model (the `aarch64.cat` file mentioned above). The litmus7 tool can take the same snippets of assembly on actual Arm hardware, enabling a direct comparison between the formal model and the real-world behavior of an actual Arm CPU. These snippets of assembly are called litmus tests.
 
-It's important to understand that it is possible for an implementation of an Arm CPU to be more strongly ordered than the formally defined Arm memory model. This case is not a violation of the memory model because it will still execute code in a way that is compliant with the memory ordering rules.
+It's important to note that an Arm CPU implementation might exhibit stronger ordering than the formal memory model. This is not a violation; the CPU still executes code in a way that is compliant with the memory ordering rules.
 
 ## Install the Tools
 
