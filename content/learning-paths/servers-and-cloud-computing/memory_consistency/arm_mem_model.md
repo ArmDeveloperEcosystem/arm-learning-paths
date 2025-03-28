@@ -81,7 +81,7 @@ litmus7 --help
 
 The input to both `herd7` and `litmus7` tools are snippets of assembly code, called litmus tests.
 
-Shown below are some example of running the tools with a litmus test. 
+Shown below are some examples of running the tools with a litmus test. 
 
 Run herd7 with a litmus test:
 ```
