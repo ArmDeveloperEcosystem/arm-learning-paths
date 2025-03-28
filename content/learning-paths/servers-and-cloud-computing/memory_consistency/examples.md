@@ -20,7 +20,7 @@ Though these other atomic instructions are outside the scope of this Learning Pa
 
 ## Litmus7 Switches
 
-As `litmus7` executes code on a machine, it first needs to build the assembly snippets into executable code. By default, `litmus7` compiles with GCC's standard options. When you run on an Arm Neoverse platform however, it is strongly recommend that you use the switch `-ccopts="-mcpu=native"`. This is the simplest way to avoid all possible runtime failures. 
+As `litmus7` executes code on a machine, it first needs to build the assembly snippets into executable code. By default, `litmus7` compiles with GCC's standard options. When you run on an Arm Neoverse platform however, it is strongly recommended that you use the switch `-ccopts="-mcpu=native"`. This is the simplest way to avoid all possible runtime failures. 
 
 For example, if you execute the Compare and Swap example below without this switch, it will fail to run because GCC by default, does not emit the Compare and Swap (`CAS`) instruction. Although `CAS` is supported in Armv8.1 of the Arm architecture, GCC still defaults to Armv8.0. In the future, if  GCC updates its default to target a newer version of the Arm architecture (for example, Armv9.0), the `-ccopts` switch will no longer be necessary for tests that use atomic instructions like `CAS`.
 
@@ -62,7 +62,7 @@ States 2
 ```
 You should see the outcome of `(1,0)`. 
 
-Now let's try to run this same test with `litmus7` on your Arm Neoverse instance to see if you get the same outcomes:
+Now try to run this same test with `litmus7` on your Arm Neoverse instance to see if you get the same outcomes:
 
 ```bash
 litmus7 ./test1.litmus
@@ -244,7 +244,7 @@ Histogram (1 states)
 ```
 Only an outcome of `(1,1)` has been observed. More test iterations can be executed to build confidence that this is the only possible result.
 
- Note that when we you ran `litmus7`, you used the switch `-ccopts="-mcpu=native"`. If you didn't, `litmus7` would fail with a message saying that the `CASA` instruction cannot be emitted by the compiler.
+ Note that when you ran `litmus7`, you used the switch `-ccopts="-mcpu=native"`. If you didn't, `litmus7` would fail with a message saying that the `CASA` instruction cannot be emitted by the compiler.
 
 Try changing the `CASA` to a `CAS` (Compare and Swap with no ordering) to see what happens.
 
@@ -272,7 +272,7 @@ AArch64 MP+Loop+ACQ_REL2
 exists
 (1:X0=1 /\ (1:X2=0 \/ 1:X5=0))
 ```
-On `P0`, you are writing to both `w` and `x` before the store-release on address `y`. This ensures that the writes to both `x` and `w` (the payloads) will be ordered before the write to address `y` (the flag). On `P1`, you loop with a load-acquire on address `y` (the flag). Once it is observed to be set, you load the two payload addresses. The load-acquire ensures that you do not read the payload addresses `w` and `x` until the flag is observe to be set. The condition at the bottom has been updated to check for any cases where either `w` or `x` are 0. Either of these being observed as 0 will be an indication of reading the payload before the ready flag is observed to be set (not what we want). Overall, this code should result in only the outcome `(1,1,1)`.
+On `P0`, you are writing to both `w` and `x` before the store-release on address `y`. This ensures that the writes to both `x` and `w` (the payloads) will be ordered before the write to address `y` (the flag). On `P1`, you loop with a load-acquire on address `y` (the flag). Once it is observed to be set, you load the two payload addresses. The load-acquire ensures that you do not read the payload addresses `w` and `x` until the flag is observe to be set. The condition at the bottom has been updated to check for any cases where either `w` or `x` are 0. Either of these being observed as 0 will be an indication of reading the payload before the ready flag is observed to be set (not what you want). Overall, this code should result in only the outcome `(1,1,1)`.
 
 Run this test with `herd7`:
 
