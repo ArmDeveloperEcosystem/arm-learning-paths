@@ -35,7 +35,7 @@ Now inspect this litmus file to gain a better understanding of the assembly code
 #### Architecture and Test Code
 
 - The first line sets the target architecture of this test, which is `AArch64`. This is required because the diy7 tool supports architectures other than Arm. After the architecture label is `MP` which is a label that gives this test its name. `MP` stands for "Message Passing".
-  - In short, the first line states: "This is a test for AAarch64 called `MP`".
+  - In short, the first line states: "This is a test for AArch64 called `MP`".
 
 #### Thread Definitions
 
@@ -43,7 +43,7 @@ Now inspect this litmus file to gain a better understanding of the assembly code
 
 #### Initial State Setup
 
-- The lines between the brackets ( `{..}` ) determines the initial state of the CPU registers for this test.
+- The lines between the brackets ( `{..}` ) determine the initial state of the CPU registers for this test.
   - `0:X1=x; 0:X3=y;` defines the initial state for `P0`.
     - Register X1 holds memory address `x`.
     - Register X3 holds memory address `y`.
@@ -81,9 +81,9 @@ Before you run this test with `herd7` and `litmus7`, you can hypothesize on what
 (P1)  LDR  W0,  [X1]  # P1 reads flag, gets 0
 (P1)  LDR  W2,  [X3]  # P1 reads payload, gets 0
 (P0)  MOV  W0,  #1
-(P0)  STR  W0,  [X1]  # P2 writes payload, sets 1
+(P0)  STR  W0,  [X1]  # P0 writes payload, sets 1
 (P0)  MOV  W2,  #1
-(P0)  STR  W2,  [X3]  # P2 writes flag, sets 1
+(P0)  STR  W2,  [X3]  # P0 writes flag, sets 1
 ```
 In this permutation of the test execution, `P1` runs to completion before `P0` even starts its execution. For this reason, `P1` observes the initial values of 0 for both the flag and payload.
 
