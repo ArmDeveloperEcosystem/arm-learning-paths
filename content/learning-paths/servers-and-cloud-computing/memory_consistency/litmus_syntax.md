@@ -136,7 +136,7 @@ Positive: 1 Negative: 3
 ```
 Outcome `(1,0)` is observed when testing against the Arm memory model, as indicated by the positive witness on the test condition. This result demonstrates that the Arm memory model violates Sequential Consistency. 
 
-The Arm memory model tends to be considered a Relaxed Consistency model, which means that it is possible for an Arm CPU in the real world to use ordering rules that are stronger than Relaxed Consistency. Going stronger on the memory model will not violate the Arm ordering rules. A stronger memory model means that there might be less opportunity for hardware based optimizations, it will not affect the correctness of code execution - assuming there are no bugs in the code. That said, you can think of all Arm Neoverse CPUs as following a Relaxed Consistency model, which means that acquire-release ordering is supported.
+The Arm memory model tends to be considered a Relaxed Consistency model, which means that it is possible for an Arm CPU in the real world to use ordering rules that are stronger than Relaxed Consistency. Going stronger on the memory model will not violate the Arm ordering rules. A stronger memory model means that there might be less opportunity for hardware-based optimizations, it will not affect the correctness of code execution - assuming there are no bugs in the code. That said, you can think of all Arm Neoverse CPUs as following a Relaxed Consistency model, which means that acquire-release ordering is supported.
 
 In a Release Consistency model, ordinary memory accesses like `STR` and `LDR` do not need to follow program order. This relaxation in the ordering rules expands the list of instruction permutations in the litmus test above. It is these additional instruction permutations allowed by the Relaxed Consistency model that yield at least one permutation that results in `(1,0)`. Below is one such example of a permutation. For this permutation, the `LDR` instructions in `P1` are reordered.
 
@@ -158,7 +158,7 @@ Instead, you have to run numerous iterations of the test to increase the probabi
 
 You will now run the same `test.litmus` file 1,000,000 times with `litmus7`. One million is the default number of iterations, but this can be adjusted with the `-s` switch. It is also possible to run the test on more than one CPU in parallel with the `-a` switch. The more test iterations you run, the more confidence you can have that all possible outcomes have been captured. 
 
-Run the following command on your Arm Neoverse CPU based instance:
+Run the following command on your Arm Neoverse CPU-based instance:
  
 ```bash
 litmus7 ./test.litmus
