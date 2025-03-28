@@ -14,7 +14,7 @@ learning_objectives:
 
 prerequisites:
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
-    - A 64-bit Arm-powered smartphone running Android with support for `i8mm` and `dotprod`. supported.
+    - A smartphone running Android with support for `i8mm` and `dotprod` instructions.
 
 author:
     - Shuheng Deng
@@ -25,7 +25,6 @@ skilllevels: Introductory
 subjects: ML
 armips:
     - Cortex-A
-    - Cortex-X
 tools_software_languages:
     - Android Studio
     - KleidiAI

@@ -18,7 +18,7 @@ sudo apt update
 sudo apt install cmake git-lfs -y
 ```
 
-Alternatively, you can use Android Studio to obtain the NDK. 
+You can use Android Studio to obtain the NDK. 
 
 Click **Tools > SDK Manager** and navigate to the **SDK Tools** tab. 
 
@@ -35,6 +35,13 @@ python --version
 pip --version
 ```
 
+You see the versions printed:
+
+```output
+Python 3.12.3
+pip 24.0 from /usr/lib/python3/dist-packages/pip (python 3.12)
+```
+
 {{% notice Note %}}
 If Python 3.x is not the default version, try running `python3 --version` and `pip3 --version`.
 {{% /notice %}}
@@ -45,13 +52,18 @@ You need to set up an authorized connection with your phone. The Android SDK Pla
 
 Connect your phone to your computer using a USB cable, and enable USB debugging on your phone. To do this, tap the **Build Number** in your **Settings** app 7 times, then enable **USB debugging** in **Developer Options**.
 
-Verify the connection by running `adb devices`:
+Verify the connection by running:
+
+```console
+adb devices
+```
+
+If your device is connected you see it listed with your device id:
 
 ```output
 List of devices attached
 <DEVICE ID>     device
 ```
-You should see your device listed.
 
 ## Download and Convert the Model
 
