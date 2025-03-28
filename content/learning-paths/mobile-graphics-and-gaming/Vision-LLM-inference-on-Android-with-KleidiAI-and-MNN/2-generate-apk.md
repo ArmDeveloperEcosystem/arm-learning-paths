@@ -23,6 +23,8 @@ git checkout origin/llm_android_demo
 
 ## Build the App Using Android Studio
 
+You can use Android Studio to build the app and create an APK.
+
 ### Open project and build
 
 Open Android Studio. 
