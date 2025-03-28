@@ -29,6 +29,7 @@ tools_software_languages:
     - LLM
     - GenAI
     - Python
+    - Demo
 
 
 further_reading:

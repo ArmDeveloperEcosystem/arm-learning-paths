@@ -1,5 +1,5 @@
 ---
-title: Learn about Integer and floating-point conversions
+title: Learn about integer and floating-point conversions
 
 minutes_to_complete: 30
 

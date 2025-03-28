@@ -32,6 +32,7 @@ tools_software_languages:
     - Python
     - Streamlit
     - Google Axion
+    - Demo
 
 further_reading:
     - resource:
