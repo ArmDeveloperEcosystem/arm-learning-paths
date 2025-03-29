@@ -6,23 +6,23 @@ weight: 2
 layout: learningpathall
 ---
 
-## MNN Introduction
-MNN is a highly efficient and lightweight deep learning framework. It supports inference and training of deep learning models and has industry-leading performance for inference and training on-device. At present, MNN has been integrated into more than 30 apps of Alibaba Inc, such as Taobao, Tmall, Youku, DingTalk, Xianyu, etc., covering more than 70 usage scenarios such as live broadcast, short video capture, search recommendation, product searching by image, interactive marketing, equity distribution, security risk control. In addition, MNN is also used on embedded devices, such as IoT.
+## Mobile Neural Network (MNN)
 
-MNN-LLM is a large language model runtime solution developed based on the MNN engine. The mission of this project is to deploy LLM models locally on everyone's platforms(Mobile Phone/PC/IOT). It supports popular large language models such as Qianwen, Baichuan, Zhipu, LLAMA, and others. 
+MNN is a high-performance, lightweight deep learning framework designed for both inference and training. Optimized for on-device deployment, it delivers industry-leading efficiency across various applications. Currently, MNN is integrated into more than 30 Alibaba Inc. apps - including Taobao, Tmall, Youku, DingTalk, and Xianyu - and powers over 70 real-world scenarios such as live streaming, short video processing, search recommendations, and image-based product searches.
 
-KleidiAI is currently integrated into the MNN framework, enhancing the inference performance of large language models (LLMs) within MNN. The Android app on this page demonstrates Vision Transformer inference using the MNN framework, accelerated by KleidiAI.
+**MNN-LLM** is a large language model (LLM) runtime solution built on the MNN engine. It enables local deployment of LLMs across diverse platforms, including mobile devices, PCs, and IoT systems, and supports leading models such as Qianwen, Baichuan, Zhipu, and Llama for efficient, accessible AI-powered experiences.
 
-## Vision Transformer（ViT）
-The Vision Transformer (ViT) is a deep learning model designed for image recognition tasks. Unlike traditional convolutional neural networks (CNNs), which process images using convolutional layers, ViT leverages the transformer architecture originally developed for natural language processing (NLP).
-The Vit workflow contains:
+KleidiAI, a collection of optimized AI micro-kernels, is integrated into the MNN framework to enhance the inference performance of LLMs. In this Learning Path, the Android app demonstrates Vision Transformer inference using the MNN framework. You will use KleidiAI to speed up inference for the [Qwen Vision 2B](https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct) model.
 
-- **Image Patching** : The input image is divided into fixed-size patches, similar to how text is tokenized in NLP tasks.
-- **Linear Embedding** : Each image patch is flattened and linearly embedded into a vector.
-- **Position Encoding** : Positional information is added to the patch embeddings to retain spatial information.
-- **Transformer Encoder** : The embedded patches are fed into a standard transformer encoder, which uses self-attention mechanisms to process the patches and capture relationships between them.
-- **Classification** : The output of the transformer encoder is used for image classification or other vision tasks.
+## Vision Transformer (ViT)
+The Vision Transformer (ViT) is a deep learning model designed for image recognition tasks. Unlike traditional convolutional neural networks (CNNs) that use convolutional layers, ViT leverages the transformer architecture originally developed for natural language processing (NLP).
 
-ViT has shown competitive performance on various image classification benchmarks and has been widely adopted in computer vision research
+Its workflow includes:
 
+- **Image Patching**: Dividing the input image into fixed-size patches, similar to tokenizing text in NLP.
+- **Linear Embedding**: Flattening each image patch and linearly embedding it into a vector.
+- **Position Encoding**: Adding positional information to the patch embeddings to preserve spatial details.
+- **Transformer Encoder**: Processing the embedded patches using a standard transformer encoder with self-attention mechanisms to capture relationships.
+- **Classification**: Using the encoder's output for image classification or other vision tasks. 
 
+ViT has demonstrated competitive performance on various image classification benchmarks and is widely adopted in computer vision research.

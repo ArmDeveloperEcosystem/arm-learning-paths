@@ -11,7 +11,7 @@ maintopic: true
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 32
-- Linux: 24
+- Linux: 25
 - macOS: 5
 - RTOS: 9
 - Windows: 3
@@ -20,7 +20,7 @@ subjects_filter:
 - Containers and Virtualization: 6
 - Embedded Linux: 3
 - Libraries: 3
-- ML: 11
+- ML: 12
 - Performance and Architecture: 23
 - RTOS Fundamentals: 4
 - Security: 2
@@ -42,13 +42,13 @@ tools_software_languages_filter:
 - Clang: 1
 - CMSIS: 5
 - CMSIS-Toolbox: 3
+- CNN: 1
 - Coding: 29
 - Containerd: 1
 - DetectNet: 1
 - Docker: 9
 - DSTREAM: 2
-- Edge Impulse: 1
-- ExecuTorch: 1
+- ExecuTorch: 2
 - Fixed Virtual Platform: 9
 - FPGA: 1
 - Fusion 360: 1
@@ -68,11 +68,10 @@ tools_software_languages_filter:
 - MPS3: 1
 - MXNet: 1
 - Neon: 1
-- Node.js: 1
 - Paddle: 1
 - Porcupine: 1
 - Python: 4
-- PyTorch: 1
+- PyTorch: 2
 - QEMU: 1
 - Raspberry Pi: 5
 - Remote.It: 1
@@ -82,6 +81,7 @@ tools_software_languages_filter:
 - STM32: 2
 - TensorFlow: 3
 - TensorRT: 1
+- tinyML: 1
 - Trusted Firmware: 3
 - TrustZone: 2
 - TVMC: 1

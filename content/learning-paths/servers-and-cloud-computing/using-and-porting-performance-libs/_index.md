@@ -23,9 +23,9 @@ armips:
 tools_software_languages:
     - Arm Compiler for Linux
     - C++
+    - Runbook
 operatingsystems:
     - Linux
-    - Runbook
 
 further_reading:
     - resource:

@@ -33,7 +33,7 @@ operatingsystems:
 further_reading:
     - resource:
         title: Arm ASR on Arm Developer Hub
-        link: https://www.arm.com/developer-hub/mobile-graphics-and-gaming/accuracy-super-resolution
+        link: https://www.arm.com/developer-hub/mobile-graphics-and-gaming/arm-accuracy-super-resolution
         type: website
     - resource:
         title: Arm ASR Manga Comic
