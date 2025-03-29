@@ -9,12 +9,12 @@ key_ip:
 - Ethos-U
 maintopic: true
 operatingsystems_filter:
-- Android: 2
+- Android: 1
 - Baremetal: 32
-- Linux: 26
+- Linux: 25
 - macOS: 5
 - RTOS: 9
-- Windows: 4
+- Windows: 3
 subjects_filter:
 - CI-CD: 5
 - Containers and Virtualization: 6
@@ -48,13 +48,13 @@ tools_software_languages_filter:
 - DetectNet: 1
 - Docker: 9
 - DSTREAM: 2
-- ExecuTorch: 3
+- ExecuTorch: 2
 - Fixed Virtual Platform: 9
 - FPGA: 1
 - Fusion 360: 1
 - FVP: 1
 - GCC: 8
-- GenAI: 3
+- GenAI: 2
 - GitHub: 3
 - GitLab: 1
 - Himax SDK: 1
@@ -63,15 +63,15 @@ tools_software_languages_filter:
 - Keil: 7
 - Keil MDK: 3
 - Kubernetes: 1
-- LLM: 3
+- LLM: 2
 - MDK: 2
 - MPS3: 1
 - MXNet: 1
 - Neon: 1
 - Paddle: 1
 - Porcupine: 1
-- Python: 5
-- PyTorch: 3
+- Python: 4
+- PyTorch: 2
 - QEMU: 1
 - Raspberry Pi: 5
 - Remote.It: 1

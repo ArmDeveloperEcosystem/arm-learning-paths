@@ -11,13 +11,13 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 28
-- Linux: 22
+- Linux: 23
 - macOS: 9
-- Windows: 9
+- Windows: 10
 subjects_filter:
 - Gaming: 6
 - Graphics: 6
-- ML: 9
+- ML: 10
 - Performance and Architecture: 26
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech
 title: Mobile, Graphics, and Gaming
@@ -41,15 +41,17 @@ tools_software_languages_filter:
 - Clang: 10
 - CMake: 1
 - Coding: 16
+- ExecuTorch: 1
 - Fixed Virtual Platform: 1
 - Frame Advisor: 1
 - GCC: 10
-- GenAI: 1
+- GenAI: 2
 - GoogleTest: 1
 - Java: 5
 - KleidiAI: 1
 - Kotlin: 6
 - LiteRT: 1
+- LLM: 1
 - llvm-mca: 1
 - MediaPipe: 2
 - Memory Bug Report: 1
@@ -59,7 +61,8 @@ tools_software_languages_filter:
 - NDK: 1
 - NEON: 1
 - ONNX Runtime: 1
-- Python: 2
+- Python: 3
+- PyTorch: 1
 - QEMU: 1
 - RME: 1
 - Runbook: 14
