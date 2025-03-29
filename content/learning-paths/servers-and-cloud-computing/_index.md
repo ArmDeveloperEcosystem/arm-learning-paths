@@ -9,8 +9,8 @@ maintopic: true
 operatingsystems_filter:
 - Android: 2
 - Baremetal: 1
-- Linux: 129
-- macOS: 9
+- Linux: 132
+- macOS: 10
 - Windows: 14
 pinned_modules:
 - module:
@@ -20,11 +20,11 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 5
-- Containers and Virtualization: 26
+- Containers and Virtualization: 27
 - Databases: 15
 - Libraries: 8
-- ML: 22
-- Performance and Architecture: 47
+- ML: 23
+- Performance and Architecture: 48
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -73,7 +73,7 @@ tools_software_languages_filter:
 - Daytona: 1
 - Demo: 3
 - Django: 1
-- Docker: 16
+- Docker: 17
 - Envoy: 2
 - ExecuTorch: 1
 - FAISS: 1
@@ -84,7 +84,7 @@ tools_software_languages_filter:
 - GCC: 20
 - gdb: 1
 - Geekbench: 1
-- GenAI: 8
+- GenAI: 10
 - GitHub: 6
 - GitLab: 1
 - Glibc: 1
@@ -104,11 +104,12 @@ tools_software_languages_filter:
 - libbpf: 1
 - Linaro Forge: 1
 - Litmus7: 1
-- LLM: 6
+- LLM: 8
 - llvm-mca: 1
 - LSE: 1
 - MariaDB: 1
 - Memcached: 2
+- MLPerf: 1
 - ModelScope: 1
 - MongoDB: 2
 - mpi: 1
@@ -118,16 +119,17 @@ tools_software_languages_filter:
 - Nexmark: 1
 - Nginx: 3
 - Node.js: 3
+- Ollama: 1
 - PAPI: 1
 - perf: 4
 - PostgreSQL: 4
-- Python: 23
+- Python: 24
 - PyTorch: 7
 - RAG: 1
 - Redis: 3
 - Remote.It: 2
 - RME: 4
-- Runbook: 58
+- Runbook: 61
 - Rust: 2
 - snappy: 1
 - Snort3: 1
@@ -142,8 +144,8 @@ tools_software_languages_filter:
 - TensorFlow: 2
 - Terraform: 11
 - ThirdAI: 1
-- ThreadSanitizer (TSan): 1
 - Trusted Firmware: 1
+- TSan: 1
 - TypeScript: 1
 - Vectorscan: 1
 - Veraison: 1
@@ -159,8 +161,8 @@ tools_software_languages_filter:
 - Zookeeper: 1
 weight: 1
 cloud_service_providers_filter:
-- AWS: 16
-- Google Cloud: 9
+- AWS: 17
+- Google Cloud: 10
 - Microsoft Azure: 8
 - Oracle: 2
 ---
