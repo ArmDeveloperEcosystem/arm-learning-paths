@@ -1,5 +1,5 @@
 ---
-title: Run Ollama's multi-arch container image on GKE with arm64 and amd64 nodes. 
+title: Run Ollama's multi-arch container image on GKE with arm64 and amd64 nodes
 
 draft: true
 cascade:
@@ -11,7 +11,7 @@ who_is_this_for: This topic explains how developers can migrate a homogeneous am
 
 
 learning_objectives:
-  - Spin up a GKE cluster with amd64 and arm64 nodes.
+  - Spin up a hybrid GKE cluster using both amd64 and arm64 nodes.
   - Apply Ollama amd64-based and arm64-based deployments and services using the same container image.
   - Ping, pull models, and make inferences to experience the performance of each architecture.
 

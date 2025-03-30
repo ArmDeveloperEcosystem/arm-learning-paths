@@ -1,5 +1,5 @@
 ---
-title: Testing functionality and performance
+title: Test functionality and performance
 weight: 5
 
 ### FIXED, DO NOT MODIFY
