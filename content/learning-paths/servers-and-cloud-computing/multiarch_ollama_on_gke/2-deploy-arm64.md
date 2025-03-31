@@ -5,20 +5,19 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Adding the arm64-pool node pool
 
 You have reached the point from which most projects start investigating migration to Arm. You have a workload running on an amd64 cluster and you want to evaluate the benefits of Arm.
 
 In this section, you will add an Arm-based node pool to the cluster, and apply an Ollama Arm deployment and service to mimic what you did in the previous section.
 
-### Adding the arm64-pool node pool
-
 To add Arm nodes to the cluster:
 
-1. From the Clusters menu, select *ollama-on-multiarch*
-2. Select *Add node pool*
-3. For *Name*, enter *arm64-pool*
-4. For *Size*, enter *1*
-5. Check *Specify node locations* and select *us-central1-a*
+1. From the Clusters menu, select *ollama-on-multiarch*.
+2. Select *Add node pool*.
+3. For **Name**, enter `arm64-pool`.
+4. For **Size**, enter `1`.
+5. Check **Specify node locations** and select **us-central1-a**.
 
 ![YAML Overview](images/arm_node_config-1.png)
 
@@ -34,7 +33,7 @@ To compare amd64 and arm64 performance, the c4a-standard-4 is used as the arm64 
 8. Select *Create*
 9. After provisioning completes, select the newly created *arm64-pool* from the *Clusters* screen to take you to the *Node pool details* page.
 
-Notice the taint below that GKE applies by default to the Arm node of `NoSchedule` if `arch=arm64`:
+Notice the default `NoSchedule` taint applied by GKE to Arm nodes with `arch=arm64`:
 
 ![arm node taint](images/taint_on_arm_node.png)
 
@@ -175,9 +174,9 @@ When the pods show `Running` and the service shows a valid `External IP`, you ar
 
 To test the service, use the previously created `model_util.sh` from the previous section.
 
-Instead of the `amd64` parameter, replace it with `arm64`:
+Replace the `amd64` parameter with `arm64`:
 
-3. Run the following to make an HTTP request to the amd64 ollama service on port 80:
+3. Run the following to make an HTTP request to the arm64 ollama service on port 80:
 
 ```bash
 ./model_util.sh arm64 hello
@@ -195,6 +194,6 @@ Pod log output:
 [pod/ollama-arm64-deployment-678dc8556f-956d6/ollama-multiarch] 2025-03-25T21:25:21.547384356Z
 ```
 
-Once again, if you see "Ollama is running" then you have successfully setup your GKE cluster with both amd64 and arm64 nodes and pods running a deployment with the Ollama multi-architecture container.
+If you see the message "Ollama is running," you have successfully set up your GKE cluster with both amd64 and arm64 nodes, each running a deployment using the Ollama multi-architecture container.
 
 Continue to the next section to analyze the performance. 
