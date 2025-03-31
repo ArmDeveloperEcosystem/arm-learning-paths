@@ -9,7 +9,7 @@ maintopic: true
 operatingsystems_filter:
 - Android: 2
 - Baremetal: 1
-- Linux: 132
+- Linux: 133
 - macOS: 10
 - Windows: 14
 pinned_modules:
@@ -23,7 +23,7 @@ subjects_filter:
 - Containers and Virtualization: 27
 - Databases: 15
 - Libraries: 8
-- ML: 23
+- ML: 24
 - Performance and Architecture: 48
 - Storage: 1
 - Web: 10
@@ -71,7 +71,7 @@ tools_software_languages_filter:
 - Coding: 18
 - conda: 1
 - Daytona: 1
-- Demo: 3
+- Demo: 4
 - Django: 1
 - Docker: 17
 - Envoy: 2
@@ -89,7 +89,7 @@ tools_software_languages_filter:
 - GitLab: 1
 - Glibc: 1
 - Go: 2
-- Google Axion: 2
+- Google Axion: 3
 - GoogleTest: 1
 - HammerDB: 1
 - Herd7: 1
@@ -123,8 +123,8 @@ tools_software_languages_filter:
 - PAPI: 1
 - perf: 4
 - PostgreSQL: 4
-- Python: 24
-- PyTorch: 7
+- Python: 25
+- PyTorch: 8
 - RAG: 1
 - Redis: 3
 - Remote.It: 2
@@ -135,7 +135,7 @@ tools_software_languages_filter:
 - Snort3: 1
 - SQL: 7
 - Streamline CLI: 1
-- Streamlit: 1
+- Streamlit: 2
 - Supervisor: 1
 - SVE: 3
 - SVE2: 1
