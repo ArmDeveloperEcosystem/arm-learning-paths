@@ -1,5 +1,5 @@
 ---
-title: Spin up the GKE Cluster
+title: Create the GKE Cluster
 weight: 2
 
 ### FIXED, DO NOT MODIFY
