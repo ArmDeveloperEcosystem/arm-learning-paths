@@ -1,5 +1,5 @@
 ---
-title: Building and Running a custom glibc on an FVP
+title: Building and Running a custom Linux System on FVP for Architecture Exploration
 
 minutes_to_complete: 60
 
