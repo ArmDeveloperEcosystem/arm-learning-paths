@@ -1,5 +1,5 @@
 ---
-title: Run Ollama's multi-arch container image on GKE with arm64 and amd64 nodes
+title: Migrate an amd64 cluster to a hybrid arm64 and amd64 cluster using a multi-architecture container image on GKE using Ollama
 
 draft: true
 cascade:
