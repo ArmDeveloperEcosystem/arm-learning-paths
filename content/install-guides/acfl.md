@@ -164,7 +164,7 @@ The ACfL Ubuntu package repository is now ready to use.
 Download and install Arm Compiler for Linux with:
 
 ```bash { target="ubuntu:latest" }
-sudo apt install acfl -y
+sudo apt-get install acfl -y
 ```
 
 ### Amazon Linux 2023
