@@ -11,7 +11,7 @@ With your hybrid cluster running Ollama, you can now explore the advantages of r
 
 You may wish to access Ollama without regard to architecture.
 
-To send a request to either based on availability, run:
+To send a request to either architecture, based on availability, run:
 
 ```bash
 ./model_util.sh multiarch hello
@@ -41,7 +41,7 @@ With both architectures responding, you can now load an LLM to compare performan
 The llama3.2 model is used in this demonstration. [Ollama supports multiple different models](https://ollama-operator.ayaka.io/pages/en/guide/supported-models); you can modify the `model_util.sh` script to test others.
 {{% /notice %}}
 
-Ollama hosts and runs models, but first you need to load model before performing inference.  
+Ollama hosts and runs models, but you need to load a model before performing inference.  
 
 To do this, run:
 
@@ -101,7 +101,7 @@ In this example, the output shows more than a 15% performance increase of arm64 
 
 ## Evaluating Price and Performance
 
-This Learning Path compared GKE amd64-based c4 against arm64-based c4a instances, both similarly specified for vCPU and memory. Typically, arm64 instances provide better cost efficiency. Check your cloud provider's pricing to confirm potential cost-performance advantages for your workloads.
+This Learning Path compared GKE amd64-based c4 against arm64-based c4a instances, both similarly specified for vCPU and memory. Typically, arm64 instances provide better cost efficiency. Check your cloud provider's pricing to confirm potential price performance advantages for your workloads.
 
 ## Summary
 
@@ -113,5 +113,5 @@ In this Learning Path, you learned how to:
 
 You can use these insights to evaluate Arm's potential advantages for your workloads.
 
-Make sure to shutdown the test cluster and delete all resources after use. 
+Make sure to shutdown the test cluster and delete all resources.
 

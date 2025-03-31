@@ -1,13 +1,9 @@
 ---
-title: Migrate an amd64 cluster to a hybrid arm64 and amd64 cluster using a multi-arch container image on GKE using Ollama
-
-draft: true
-cascade:
-    draft: true
+title: Add Arm nodes to your GKE cluster using a multi-architecture Ollama container image 
 
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is for developers interested in migrating a homogeneous (amd64 K8s) cluster to a hybrid (arm64 and amd64) cluster using a multi-architecture container image on GKE. This Learning Path demonstrates the migration using Ollama. 
+who_is_this_for: This Learning Path is for developers interested in migrating a homogeneous (amd64 K8s) cluster to a hybrid (arm64 and amd64) cluster on Google Kubernetes Engine (GKE) using a multi-architecture container image. This Learning Path demonstrates the migration using Ollama. 
 
 
 learning_objectives:
@@ -17,7 +13,7 @@ learning_objectives:
 
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/).
-    - A local machine with [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/) installed.
+    - A local machine with [Google Cloud CLI](/install-guides/gcloud/) and [kubectl](/install-guides/kubectl/) installed.
     - The [GKE Cloud Plugin](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#gcloud) installed.
    
 

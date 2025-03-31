@@ -61,31 +61,25 @@ Wait until the cluster shows a green checkmark next to the `ollama-on-multiarch`
 
 Ensure you have `kubectl` and `gcloud` installed. 
 
-You can verify by running each command, for example, enter `gcloud`, and run:
+You can verify each command by printing the version.
+
+Verify `gcloud` by running:
 
 ```bash
-gcloud
-```
-This should return:
-```output
-ERROR: (gcloud) Command name argument expected.
-... 
-```
-Then enter `kubectl` and run it, which should return:
-
-```output
-kubectl controls the Kubernetes cluster manager.
-
- Find more information at: https://kubernetes.io/docs/reference/kubectl/
-...
-```
-Otherwise, it might return a message like this:
-
-```output
-command not found
+gcloud -v
 ```
 
-If you see this, follow the prerequisite instructions on the first page to install the missing utilities.
+If `gcloud` is installed the version information is printed. 
+
+Verify `kubectl` by running:
+
+```bash
+kubectl version -o json --client
+```
+
+If `kubectl` is installed the version information is printed. 
+
+If you don't see the version information printed refer to the [gcloud](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/) install guides.
 
 Now you can set up your newly-created K8s cluster credentials using the gcloud utility.  
 
@@ -103,7 +97,8 @@ If you get the message:
 ```output
 CRITICAL: ACTION REQUIRED: gke-gcloud-auth-plugin, which is needed for continued use of kubectl, was not found or is not executable. Install gke-gcloud-auth-plugin for use with kubectl by following https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#install_plugin
 ```
-This command will resolve it:
+
+You can resolve the issue by running: 
 
 ```bash
 gcloud components install gke-gcloud-auth-plugin
