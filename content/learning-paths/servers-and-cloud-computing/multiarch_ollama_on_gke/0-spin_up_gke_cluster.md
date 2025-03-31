@@ -10,11 +10,11 @@ layout: learningpathall
 
 Arm CPUs are widely used in  AI/ML workloads on Kubernetes. In this Learning Path, you'll learn how to deploy [Ollama](https://ollama.com/) on Arm-based CPUs within a hybrid architecture (amd64 and arm64) K8s cluster.
 
-First, you'll bring up an initial Kubernetes cluster with an amd64 node running an Ollama Deployment and Service ("*1. Initial Cluster (amd64)*" in the image below).
+First, you'll bring up an initial Kubernetes cluster with an amd64 node running an Ollama Deployment and Service (see **1:  Initial Cluster (amd64)** in the image below).
 
-Next, you'll expand the cluster by adding an arm64 deployment and service to it, forming a hybrid cluster ("*2. Hybrid Cluster amd64/arm64*"). This allows you to test both architectures together, and separately, to investigate performance. 
+Next, you'll expand the cluster by adding an arm64 deployment and service to it, forming a hybrid cluster (**2: Hybrid Cluster amd64/arm64**). This allows you to test both architectures together, and separately, to investigate performance. 
 
-Once satisfied with arm64 performance, you can remove the amd64-specific node, deployment, and service, which then completes your migration to an arm64-only cluster ("*3. Migrated Cluster (arm64)*").
+Once satisfied with arm64 performance, you can remove the amd64-specific node, deployment, and service, which then completes your migration to an arm64-only cluster (**3: Migrated Cluster (arm64)**.
 
 ![Project Overview](images/general_flow.png)
 
@@ -24,14 +24,14 @@ Once you've seen how easy it is to add arm64 nodes to an existing cluster, you w
 
 * In the GCP Console, navigate to [Google Kubernetes Engine](https://console.cloud.google.com/kubernetes/list/overview), then select **Create**.
 
-* Select **Standard: You manage your cluster**->**Configure**.
+* Select **Standard: You manage your cluster**, then **Configure**.
 
 ![Select and Configure Cluster Type](images/select_standard.png)
 
 On the **Cluster basics** tab:
 
-* For **Name**, enter `ollama-on-arm`.
-* For **Region**, enter `us-central1`.
+* For **Name**, enter `ollama-on-arm` (see **1**).
+* For **Region**, enter `us-central1` (see **2**).
 
 ![Select and Configure Cluster Type](images/cluster_basics.png)
 
@@ -40,16 +40,16 @@ Whilst this procedure works in all regions and zones supporting C4 and C4a insta
 {{% /notice %}}
 
 * Under **NODE POOLS**, select **default-pool**.
-* For **Name**, enter `amd64-pool`.
-* For **Size**, enter **1**.
-* Select **Specify node locations**, and select **us-central1-a**.
+* For **Name**, enter `amd64-pool`(see **1** below).
+* For **Size**, enter **1** (see **2** below).
+* Select **Specify node locations** (**3**), and select **us-central1-a** (**4**).
 
 ![Configure amd64 Node pool](images/x86-node-pool.png)
 
 
 * Click on **NODE POOLS**->**Nodes**
-* For **Series**, select **C4**.
-* For **Machine Type**, select **c4-standard-8**.
+* For **Series**, select **C4** (see **1** below).
+* For **Machine Type**, select **c4-standard-8** (see **2**).
 
 ![Configure amd64 node type](images/configure-x86-note-type.png)
 
@@ -79,13 +79,13 @@ kubectl controls the Kubernetes cluster manager.
  Find more information at: https://kubernetes.io/docs/reference/kubectl/
 ...
 ```
-If you get something similar to:
+Otherwise, it might return a message like this:
 
 ```output
 command not found
 ```
 
-Then follow the prerequisite instructions on the first page to install the missing utilities.
+If you see this, follow the prerequisite instructions on the first page to install the missing utilities.
 
 Now you can set up your newly-created K8s cluster credentials using the gcloud utility.  
 

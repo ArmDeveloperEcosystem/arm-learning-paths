@@ -5,20 +5,19 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Adding the arm64-pool node pool
 
 You have reached the point from which most projects start investigating migration to Arm. You have a workload running on an amd64 cluster and you want to evaluate the benefits of Arm.
 
 In this section, you will add an Arm-based node pool to the cluster, and apply an Ollama Arm deployment and service to mimic what you did in the previous section.
 
-### Adding the arm64-pool node pool
-
 To add Arm nodes to the cluster:
 
-1. From the Clusters menu, select *ollama-on-multiarch*
-2. Select *Add node pool*
-3. For *Name*, enter *arm64-pool*
-4. For *Size*, enter *1*
-5. Check *Specify node locations* and select *us-central1-a*
+1. From the Clusters menu, select *ollama-on-multiarch*.
+2. Select *Add node pool*.
+3. For **Name**, enter `arm64-pool`.
+4. For **Size**, enter `1`.
+5. Check **Specify node locations** and select **us-central1-a**.
 
 ![YAML Overview](images/arm_node_config-1.png)
 
