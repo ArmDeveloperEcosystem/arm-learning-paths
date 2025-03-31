@@ -76,7 +76,7 @@ the components including the device tree for the FVP.
 At this point, we have everything required to boot our system. Shrinkwrap uses so called overlay
 configuration files. The following file instructs Shrinkwrap to connect all the pieces together
 and locate the kernel image, and rootfs. It can also be used to tweak any of the FVP
-parameters. Create a file in $HOME/workspace directory called `aarch64.yaml` using a text editor of your choice. Copy the contents shown below into the file. Under the ROOTFS and KERNEL values, replace `user` with the the appropriate value (e.g., ubuntu).
+parameters. Create a file in $HOME/workspace directory called `aarch64.yaml` using a text editor of your choice. Copy the contents shown below into the file. Under the ROOTFS and KERNEL values. If needed, replace `user` with the the appropriate name for your system (e.g., ubuntu).
 
 ```yaml
 run:
