@@ -13,7 +13,7 @@ learning_objectives:
     - Monitor and analyze inference on Arm CPUs.
 
 prerequisites:
-    - A Google Cloud Axion (or other Arm) compute instance with at least 32 cores
+    - A Google Cloud Axion compute instance or [any Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider with atleast 32 cores.
     - Basic understanding of Python and ML concepts.
     - Familiarity with REST APIs and web services.
     - Basic knowledge on Streamlit.

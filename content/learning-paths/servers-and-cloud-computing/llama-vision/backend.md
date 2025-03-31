@@ -146,5 +146,15 @@ Use the following command in a terminal to start the backend server:
 LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libtcmalloc.so.4 TORCHINDUCTOR_CPP_WRAPPER=1 TORCHINDUCTOR_FREEZING=1 OMP_NUM_THREADS=16 python3 backend.py
 ```
 
-You should see output similar to the image below when the backend server starts successfully:
-![backend](backend_output.png)
+You should see output similar to:
+
+```output
+* Serving Flask app 'backend'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running oserver has started successfully.
+ * Running o//127.0.0.1:5000
+ * Running on http://10.0.0.10:5000
+Press CTRL+C to quit
+```
+The backend server has started successfully. 

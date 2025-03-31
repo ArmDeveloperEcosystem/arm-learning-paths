@@ -84,5 +84,16 @@ Use the following command in a new terminal to start the Streamlit frontend serv
 python3 -m streamlit run frontend.py
 ```
 
-You should see output similar to the image below when the frontend server starts successfully:
-![frontend](frontend_output.png)
+You should see output similar to what is shown below as the frontend server starts successfully:
+
+```output
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
+
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://10.0.0.10:8501
+  External URL: http://35.223.133.103:8501
+```
+In the next section you will view your running application within your local browser.
