@@ -3,7 +3,7 @@ title: Add Arm nodes to your GKE cluster using a multi-architecture Ollama conta
 
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is for developers interested in migrating a homogeneous (amd64 K8s) cluster to a hybrid (arm64 and amd64) cluster on Google Kubernetes Engine (GKE) using a multi-architecture container image. This Learning Path demonstrates the migration using Ollama. 
+who_is_this_for: This Learning Path is for developers who want to compare the performance of amd64 and arm64 deployments by running inferences on a hybrid GKE cluster using an Ollama multi-architecture container image.
 
 
 learning_objectives:
