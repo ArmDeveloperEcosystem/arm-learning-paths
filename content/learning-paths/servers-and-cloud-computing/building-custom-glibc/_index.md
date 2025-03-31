@@ -1,5 +1,5 @@
 ---
-title: Building and Running a custom Linux System on FVP for Architecture Exploration
+title: Build and Run a custom Linux System on a FVP for Architecture Exploration
 
 minutes_to_complete: 60
 
