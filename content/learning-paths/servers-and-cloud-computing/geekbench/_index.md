@@ -4,9 +4,9 @@ title: Get started with Geekbench on Arm
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers interested in comparing the performance of Arm Linux computers using Geekbench.
-  
+
 learning_objectives:
-- Learn how to install and run Geekbench 
+- Learn how to install and run Geekbench
 - Use Geekbench to help determine the appropriate hardware configuration for your workload
 
 prerequisites:
@@ -25,8 +25,6 @@ operatingsystems:
 test_maintenance: true
 test_images:
     - ubuntu:latest
-test_status:
-    - passed
 tools_software_languages:
     - Geekbench
     - Runbook
@@ -46,7 +44,8 @@ further_reading:
         link: https://www.xda-developers.com/geekbench/
         type: website
 
-
+### FIXED, DO NOT MODIFY
+# ================================================================================
 weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'

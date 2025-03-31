@@ -102,6 +102,7 @@ sw_categories:
       readable_title: GFortran
       tests_and_status:
       - ubuntu:latest: passed
+      - fedora:latest: passed
     go:
       readable_title: Go
       tests_and_status: []

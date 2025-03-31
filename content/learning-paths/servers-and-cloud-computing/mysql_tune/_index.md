@@ -10,7 +10,7 @@ learning_objectives:
 
 prerequisites:
     - Bare-metal or cloud [installation of MySQL](/learning-paths//servers-and-cloud-computing/mysql)
-    
+
 author: Julio Suarez
 
 skilllevels: Advanced
@@ -31,8 +31,6 @@ test_images:
     - ubuntu:latest
 test_link: null
 test_maintenance: true
-test_status:
-    - passed
 
 further_reading:
     - resource:
@@ -44,7 +42,8 @@ further_reading:
         link: https://mysqlonarm.github.io/Running-MySQL-on-ARM/
         type: documentation
 
-
+### FIXED, DO NOT MODIFY
+# ================================================================================
 weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'
