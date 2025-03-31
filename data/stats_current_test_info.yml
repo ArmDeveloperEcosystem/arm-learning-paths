@@ -1,5 +1,5 @@
 summary:
-  content_total: 341
+  content_total: 342
   content_with_all_tests_passing: 31
   content_with_tests_enabled: 57
 sw_categories:
@@ -71,6 +71,10 @@ sw_categories:
     aws-copilot:
       readable_title: AWS Copilot CLI
       tests_and_status: []
+    aws-q-cli:
+      readable_title: Amazon Q Developer CLI
+      tests_and_status:
+      - ubuntu:latest: passed
     azure-cli:
       readable_title: Azure CLI
       tests_and_status:
