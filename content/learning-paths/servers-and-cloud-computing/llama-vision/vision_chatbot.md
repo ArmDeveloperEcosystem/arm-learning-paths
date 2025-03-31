@@ -92,8 +92,10 @@ Install Torch AO:
 
 ## Hugging Face Cli Login
 
-Hugging Face authentication:
+To use the [Llama 3.2 11B Vision Model](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct) from Hugging Face, you need to request access or accept the terms. You need to log in to Hugging Face using a token.
 ```bash
     huggingface-cli login
-    Input_token             # when prompted to enter
 ```
+Enter your Hugging Face token. You can generate a token from [Hugging Face Hub](https://huggingface.co/) by clicking your profile on the top right corner and selecting **Access Tokens**. 
+
+You also need to visit the Hugging Face link printed in the login output and accept the terms by clicking the **Agree and access repository** button or filling out the request-for-access form, depending on the model.
