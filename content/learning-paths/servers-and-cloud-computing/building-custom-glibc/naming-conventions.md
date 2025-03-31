@@ -15,8 +15,10 @@ tools and we also make configuration changes to the guest system that will run o
 the Arm [Fixed Virtual Platform (FVP)][1] model.
 
 {{%notice  Note %}}
-The explicit path of where tools should be installed is listed below. It is important to follow this structure.
-{{%/notice%}}
+Tools must be installed in the specified paths for clarity and best practices. The GCC cross toolchain directory should include all necessary tools. For example, the `gcc` tool path would be `/path/to/cross/gcc/bin/aarch64-none-linux-gnu-gcc`. Note: This may differ from the cross compiler provided by your distribution's package manager.
+{{%/notice%}}. 
+
+[This resource](https://wiki.osdev.org/GCC_Cross-Compiler#Using_the_new_Compiler) may be useful for creating a GCC cross compiler. 
 
 Table 1. Directory layout
 
@@ -34,9 +36,7 @@ Table 1. Directory layout
 
 
 
-We presume that the GCC cross toolchain installation directory contains everything a
-cross toolchain would need, for example, the path to the `gcc` tool would be
-`/path/to/cross/gcc/bin/aarch64-none-linux-gnu-gcc`.
+
 
 In the next steps we create a Python virtual environment. It doesn't matter where
 it is located, but to avoid ambiguity let's presume it is in `~/workspace/venv`.

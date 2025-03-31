@@ -5,7 +5,7 @@ minutes_to_complete: 60
 
 who_is_this_for: >
   Developers who wish to run a Linux system (optionally using a custom kernel and a C library) on an Arm Fixed Virtual Platform (FVP) model. For example, this
-  guide might be useful if you want to test patches related to new architectural features for the Linux kernel or Glibc.
+  guide might be useful if you want to test patches related to new architectural features for the Linux kernel or Glibc. 
 
 learning_objectives: 
   - Build the Linux kernel.

@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Prepare kernel headers
 
-For this step you need the GCC cross-toolchain for the `aarch64-linux-gnu` target.
+For this step you need the GCC cross-toolchain for the `aarch64-none-linux-gnu` target.
 You can use the same toolchain as we used for building the kernel.
 
 Since we are going to use our Glibc on a system running a specific version of the kernel,
@@ -22,14 +22,15 @@ headers in the `linux-headers` subfolder. First, you have to set a few environme
 To do this, run the following commands:
 
 ```bash
-cd $HOME/workspace
+# Make sure that cross GCC is on the PATH
+export PATH=/path/to/cross/gcc/bin:${PATH}
+# Specify target architecture
 export ARCH=arm64
+# Specify cross compiler
+export CROSS_COMPILE=aarch64-none-linux-gnu-
+# Install headers
 make -C linux headers_install INSTALL_HDR_PATH=$(pwd)/linux-headers
 ```
-
-{{% notice %}}
-If you are running an x86_64 Linux host, the `CROSS_COMPILE` flag needs to be set. Example: export CROSS_COMPILE=aarch64-none-linux-gnu-
-{{% /notice %}}
 
 You should see kernel headers in the `$HOME/workspace/linux-headers/include` folder now.
 We will use this path during the next step.
@@ -47,15 +48,16 @@ To make the following command simpler, let's introduce the `CROSS` variable (not
 at the end):
 
 ```bash
-export CROSS=/usr/bin/aarch64-linux-gnu-
+CROSS=/path/to/cross/gcc/bin/aarch64-none-linux-gnu-
 ```
 
-Now configure the cross-build for the `aarch64-linux-gnu` target:
+Now configure the cross-build for the `aarch64-none-linux-gnu` target:
 
 ```bash
 mkdir glibc-build
 cd glibc-build
 
+# Configure Glibc:
 LC_ALL=C BUILD_CC=gcc \
 CC=${CROSS}gcc CXX=${CROSS}g++ \
 NM=${CROSS}nm READELF=${CROSS}readelf \
@@ -63,9 +65,9 @@ AR=${CROSS}ar GPROF=${CROSS}gprof \
 OBJDUMP=${CROSS}objdump OBJCOPY=${CROSS}objcopy \
 RANLIB=${CROSS}ranlib \
 ../glibc/configure --prefix=/usr \
-  --host=aarch64-linux-gnu \
+  --host=aarch64-none-linux-gnu \
   --enable-hardcoded-path-in-tests \
-  --with-headers=$HOME/workspace/linux-headers/include
+  --with-headers=/home/user/workspace/linux-headers/include
 ```
 
 Notice the path to the kernel headers in the last parameter in the `configure` command and

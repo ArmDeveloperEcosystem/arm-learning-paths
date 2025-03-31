@@ -37,11 +37,9 @@ the `linux-build` subfolder. Run the following commands in the workspace directo
 ```bash
 export KBUILD_OUTPUT="$(pwd)/linux-build"
 export ARCH=arm64
+# Specify cross compiler
+export CROSS_COMPILE=aarch64-none-linux-gnu-
 ````
-
-{{% notice %}}
-If you are running an x86_64 host, you will need to set the `CROSS_COMPILE` environment variable to point to your GCC cross compile toolchain. For example: export CROSS_COMPILE=aarch64-none-linux-gnu-
-{{% /notice %}}
 
 Next, build the kernel image:
 ```bash
