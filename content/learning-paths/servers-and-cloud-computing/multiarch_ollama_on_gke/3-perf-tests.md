@@ -5,9 +5,9 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Use the multiarch service to run the application on any platform
+## Use the multiarch service 
 
-Now that you have a hybrid cluster running Ollama, you can investigate the advantages of running on Arm.
+With your hybrid cluster running Ollama, you can now explore the advantages of running on Arm.
 
 You may wish to access Ollama without regard to architecture.
 
@@ -41,7 +41,7 @@ With both architectures responding, you can now load an LLM to compare performan
 The llama3.2 model is used in this demonstration. [Ollama supports multiple different models](https://ollama-operator.ayaka.io/pages/en/guide/supported-models); you can modify the `model_util.sh` script to test others.
 {{% /notice %}}
 
-Ollama will host and run models, but you need to first load the model before performing inference.  
+Ollama hosts and runs models, but first you need to load model before performing inference.  
 
 To do this, run:
 
@@ -50,11 +50,11 @@ To do this, run:
 ./model_util.sh arm64 pull
 ```
 
-If each model returns ```{"status":"success"}``` for each command, the model was pulled successfully.
+If each model returns ```{"status":"success"}``` for each command, the models loaded successfully.
 
 ### Perform inference
 
-Once the models are loaded into both pods, you can perform inference regardless of node architecture or individually, by architecture type (amd64 or arm64).
+Once the models are loaded into both pods, you can perform inference either regardless of node architecture or individually, by architecture type (amd64 or arm64).
 
 By default, the prompt hardcoded into the `model_util.sh` script is `Create a sentence that makes sense in the English language, with as many palindromes in it as possible`.
 
@@ -66,7 +66,7 @@ Test inference on the amd64 pod:
 ./model_util.sh amd64 infer
 ```
 
-The output is similar to: 
+Example output: 
 
 ```output
 ...
@@ -86,7 +86,7 @@ Next, run the same inference on the arm64 node with the following command:
 ./model_util.sh arm64 infer
 ```
 
-Visually, you see the output streaming out faster on arm64 than on amd64. Look at the output to verify it is indeed faster.
+You will notice the output streams faster on arm64 compared to amd64. Review the tokens-per-second metric to verify the performance difference.
 
 ```output
 4202,72,426,13],"total_duration":13259950101,"load_duration":1257990283,"prompt_eval_count":32,"prompt_eval_duration":1431000000,"eval_count":153,"eval_duration":10570000000}
@@ -99,13 +99,11 @@ Pod log output:
 
 In this example, the output shows more than a 15% performance increase of arm64 over amd64.
 
-## Notes on Evaluating Price/Performance
-
-### Price performance notes
+## Evaluating Price and Performance
 
 This Learning Path compared GKE amd64-based c4 against arm64-based c4a instances, both similarly specified for vCPU and memory. Typically, arm64 instances provide better cost efficiency. Check your cloud provider's pricing to confirm potential cost-performance advantages for your workloads.
 
-### Summary
+## Summary
 
 In this Learning Path, you learned how to:
 
@@ -115,5 +113,5 @@ In this Learning Path, you learned how to:
 
 You can use these insights to evaluate Arm's potential advantages for your workloads.
 
-Make sure to shutdown the test cluster and delete the resources you used. 
+Make sure to shutdown the test cluster and delete all resources after use. 
 
