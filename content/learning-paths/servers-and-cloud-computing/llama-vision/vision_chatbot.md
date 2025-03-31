@@ -72,6 +72,7 @@ pip install torch==2.7.0.dev20250307 --extra-index-url https://download.pytorch.
 {{% notice Note %}}
 
 If the specified PyTorch version fails to install, you can try installing any PyTorch nightly build from [PyTorch Nightly Builds](https://download.pytorch.org/whl/nightly/cpu/) released after version 2.7.0.dev20250307.
+{{% /notice %}}
 
 ## Install Torch AO
 
