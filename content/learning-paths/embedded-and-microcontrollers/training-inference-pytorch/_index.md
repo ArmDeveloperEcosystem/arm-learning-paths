@@ -1,6 +1,10 @@
 ---
 title: Edge AI with PyTorch & ExecuTorch - Tiny Sentiment Analysis on Arm
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 90
 
 who_is_this_for: This topic is for machine learning engineers, embedded AI developers, and researchers interested in deploying TinyML models for NLP on Arm-based edge devices using PyTorch and ExecuTorch. 

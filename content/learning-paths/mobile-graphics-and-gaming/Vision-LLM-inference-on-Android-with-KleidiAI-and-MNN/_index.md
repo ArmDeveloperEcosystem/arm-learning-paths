@@ -3,18 +3,18 @@ title: Vision LLM inference on Android with KleidiAI and MNN
 
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is for developers who want to run Vision Transformers (ViT) efficiently on an Android device.
+who_is_this_for: This Learning Path is for developers who want to run Vision Transformers (ViT) efficiently on Android.
 
 learning_objectives:
-    - Download the a Vision Large Language Model (LLM) from Hugging Face.
+    - Download a Vision Large Language Model (LLM) from Hugging Face.
     - Convert the model to the Mobile Neural Network (MNN) framework.
-    - Install an Android demo application with the model to run an inference.
-    - Compare model inference performance with and without KleidiAI Arm optimized micro-kernels.
+    - Install an Android demo application using the model to run an inference.
+    - Compare inference performance with and without KleidiAI Arm-optimized micro-kernels.
 
 
 prerequisites:
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
-    - A 64-bit Arm powered smartphone running Android with `i8mm` and `dotprod` supported.
+    - A smartphone running Android with support for `i8mm` and `dotprod` instructions.
 
 author:
     - Shuheng Deng
@@ -25,7 +25,6 @@ skilllevels: Introductory
 subjects: ML
 armips:
     - Cortex-A
-    - Cortex-X
 tools_software_languages:
     - Android Studio
     - KleidiAI
@@ -36,7 +35,7 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: "MNN : A UNIVERSAL AND EFFICIENT INFERENCE ENGINE"
+        title: "MNN: A Universal and Efficient Inference Engine"
         link: https://arxiv.org/pdf/2002.12418
         type: documentation
     - resource:

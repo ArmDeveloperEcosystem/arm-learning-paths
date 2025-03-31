@@ -1,5 +1,5 @@
 ---
-title: Mobile Plartform for Fine Tuning Large Language Model 
+title: Mobile Platform for Fine Tuning Large Language Model 
 weight: 9 
 
 ### FIXED, DO NOT MODIFY

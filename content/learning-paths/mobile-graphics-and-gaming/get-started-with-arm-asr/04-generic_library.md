@@ -53,7 +53,7 @@ See the following sections to learn how to configure Arm ASR:
     export ARMASR_DIR=$(pwd)
     ```
 
-## 1. Quick Integration
+## Quick Integration
 
 To quickly integrate Arm ASR using the standalone backend, follow these steps below:
 
@@ -90,7 +90,7 @@ To quickly integrate Arm ASR using the standalone backend, follow these steps be
 
 10. Finally, link the two built libraries (**Arm_ASR_api** and **Arm_ASR_backend**).
 
-## 2. Tight Integration
+## Tight Integration
 
 If you wish to use your own backend/renderer, a tight integration with your engine is required. For this, a similar process to the [Quick Integration](#quick-integration) described above is required, but with the added requirement to fill the `FfxmInterface` accessed via `$ARMASR_DIR/include/host/ffxm_interface.h` with functions implemented on your end.
 
