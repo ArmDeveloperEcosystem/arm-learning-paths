@@ -14,11 +14,14 @@ In the following sections we use host system to checkout sources and build vario
 tools and we also make configuration changes to the guest system that will run on
 the Arm [Fixed Virtual Platform (FVP)][1] model.
 
-{{%notice  Note %}}
-Tools must be installed in the specified paths for clarity and best practices. The GCC cross toolchain directory should include all necessary tools. For example, the `gcc` tool path would be `/path/to/cross/gcc/bin/aarch64-none-linux-gnu-gcc`. Note: This may differ from the cross compiler provided by your distribution's package manager.
-{{%/notice%}}. 
 
-[This resource](https://wiki.osdev.org/GCC_Cross-Compiler#Using_the_new_Compiler) may be useful for creating a GCC cross compiler. 
+The GCC cross toolchain directory should include all necessary tools. For example, the `gcc` tool path would be `/path/to/cross/gcc/bin/aarch64-none-linux-gnu-gcc`. 
+
+**Please Note**: The cross compiler available from your distribution through a package manager is not suitable to explore architectural features and user needs to build your own custom GNU cross compiler. Please read [this resource ](https://wiki.osdev.org/GCC_Cross-Compiler#Using_the_new_Compiler) for further explanation. 
+
+
+Tools must be installed in the specified paths for clarity and best practices. 
+
 
 Table 1. Directory layout
 
