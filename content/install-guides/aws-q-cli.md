@@ -55,10 +55,15 @@ sudo apt update
 sudo apt install curl unzip -y
 ```
 
-Download the zip file with `curl`, extract the installer, and run it.
+Download the zip file with `curl`:
 
 ```bash { target="ubuntu:latest" }
 curl --proto '=https' --tlsv1.2 -sSf "https://desktop-release.codewhisperer.us-east-1.amazonaws.com/latest/q-aarch64-linux.zip" -o "q.zip"
+```
+
+Extract the installer and run it:
+
+```console
 unzip q.zip
 bash ./q/install.sh
 ```
@@ -69,12 +74,14 @@ Answer the question about updating your shell config.
 ✔ Do you want q to modify your shell config (you will have to manually do this otherwise)? 
 ```
 
+To automate the install add the `--no-confirm` flag to the `install.sh` command. 
+
 {{% notice Note %}}
 If you have a Linux distribution with an older version of the GNU C Library or one which does not use the GNU C Library such as Alpine Linux, you can download an alternative package which uses the musl C library and has no external dependencies. 
 
 Substitute the `curl` command above with this one and use the same install instructions:
 
-```console
+```bash { target="ubuntu:latest" }
 curl "https://desktop-release.codewhisperer.us-east-1.amazonaws.com/latest/q-aarch64-linux-musl.zip" -o "q.zip"
 ```
 
@@ -86,7 +93,7 @@ You now have the latest version of the Amazon Q Developer CLI installed.
 
 Confirm the CLI is available by invoking the `q` command to print the version.
 
-```bash { target="ubuntu:latest" }
+```console
 q version
 ```
 
