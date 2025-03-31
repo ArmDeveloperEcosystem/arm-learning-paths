@@ -24,7 +24,7 @@ Once you've seen how easy it is to add arm64 nodes to an existing cluster, you w
 
 * In the GCP Console, navigate to [Google Kubernetes Engine](https://console.cloud.google.com/kubernetes/list/overview), then select **Create**.
 
-* Select **Standard: You manage your cluster**, then **Configure**.
+* Select **Standard: You manage your cluster**, then select **Configure**.
 
 ![Select and Configure Cluster Type](images/select_standard.png)
 

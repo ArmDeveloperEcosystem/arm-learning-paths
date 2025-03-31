@@ -56,7 +56,9 @@ If each model returns ```{"status":"success"}``` for each command, the models lo
 
 Once the models are loaded into both pods, you can perform inference either regardless of node architecture or individually, by architecture type (amd64 or arm64).
 
-By default, the prompt hardcoded into the `model_util.sh` script is `Create a sentence that makes sense in the English language, with as many palindromes in it as possible`.
+By default, the prompt hardcoded into the `model_util.sh` script is:
+
+`Create a sentence that makes sense in the English language, with as many palindromes in it as possible`.
 
 You can modify the prompt as desired.
 
@@ -78,7 +80,7 @@ Pod log output:
 [pod/ollama-amd64-deployment-cbfc4b865-k2gc4/ollama-multiarch] 2025-03-27T00:25:21
 ```
 
-You can see tokens per second rate measured at 13.12 (from the log output example, your actual value might vary).
+You can see the tokens-per-second rate measured at 13.12 (from the log output example, your actual value might vary).
 
 Next, run the same inference on the arm64 node with the following command:
 
@@ -99,7 +101,7 @@ Pod log output:
 
 In this example, the output shows more than a 15% performance increase of arm64 over amd64.
 
-## Evaluating Price and Performance
+## Evaluating price and performance
 
 This Learning Path compared GKE amd64-based c4 against arm64-based c4a instances, both similarly specified for vCPU and memory. Typically, arm64 instances provide better cost efficiency. Check your cloud provider's pricing to confirm potential price performance advantages for your workloads.
 
@@ -113,5 +115,5 @@ In this Learning Path, you learned how to:
 
 You can use these insights to evaluate Arm's potential advantages for your workloads.
 
-Make sure to shutdown the test cluster and delete all resources.
+Make sure to shut down the test cluster and delete all resources.
 
