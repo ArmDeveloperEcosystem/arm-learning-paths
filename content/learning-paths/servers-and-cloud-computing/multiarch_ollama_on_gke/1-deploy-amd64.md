@@ -6,9 +6,9 @@ weight: 3
 layout: learningpathall
 ---
 
-In this section, you'll bootstrap the cluster with Ollama on amd64, to simulate an "existing" K8s cluster running Ollama. In the next section you will add arm64 nodes alongside the amd64 nodes so you can compare them. 
+## Deployment and service
 
-### Deployment and service
+In this section, you'll bootstrap the cluster with Ollama on amd64, simulating an existing Kubernetes (K8s) cluster running Ollama. In the next section, you'll add arm64 nodes alongside the amd64 nodes for performance comparison. 
 
 1. Use a text editor to copy the following YAML and save it to a file called `namespace.yaml`:
 
@@ -19,7 +19,7 @@ metadata:
   name: ollama
 ```
 
-When the above is applied, a new K8s namespace named `ollama` is created.  This is where all the K8s objects will live.
+Applying this YAML creates a new namespace called `ollama`, which contains all subsequent K8s objects.
 
 2. Use a text editor to copy the following YAML and save it to a file called `amd64_ollama.yaml`:
 
@@ -81,7 +81,7 @@ When the above is applied:
 
 Of particular interest is the `nodeSelector` `kubernetes.io/arch`, with the value of `amd64`.  This ensures that the deployment only runs on amd64 nodes, utilizing the amd64 version of the Ollama container image. 
 
-* A new load balancer service `ollama-amd64-svc` is created, which targets all pods with the `arch: amd64` label (the amd64 deployment creates these pods).
+* A new load balancer service `ollama-amd64-svc` is created, targeting all pods with the `arch: amd64` label (the amd64 deployment creates these pods).
 
 A `sessionAffinity` tag is added to this service to remove sticky connections to the target pods. This removes persistent connections to the same pod on each request.
 
@@ -102,19 +102,19 @@ deployment.apps/ollama-amd64-deployment created
 service/ollama-amd64-svc created
 ```
 
-2. Optionally, set the `default Namespace` to `ollama` so you don't need to specify the namespace each time, by entering the following:
+2. Optionally, set the `default Namespace` to `ollama` to simplify future commands:
 
 ```bash
 config set-context --current --namespace=ollama
 ```
 
-3. Get the status of the pods and the services by running the following:
+3. Get the status of nodes, pods and services by running:
 
 ```bash
 kubectl get nodes,pods,svc -nollama 
 ```
 
-Your output is similar to the following, showing one node, one pod, and one service:
+Your output should be similar to the following, showing one node, one pod, and one service:
 
 ```output
 NAME                                              STATUS   ROLES    AGE   VERSION
@@ -127,12 +127,12 @@ NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)
 service/ollama-amd64-svc   LoadBalancer   1.2.2.3         1.2.3.4        80:30668/TCP   16m
 ```
 
-When the pods show `Running` and the service shows a valid `External IP`, you are ready to test the Ollama amd64 service!
+When the pods show `Running` and the service shows a valid `External IP`, you're ready to test the Ollama amd64 service.
 
 ### Test the Ollama web service on amd64
 
 {{% notice Note %}}
-The following utility `modelUtil.sh` is provided for convenience. 
+The following utility `model_util.sh` is provided for convenience. 
 
 It's a wrapper for kubectl, utilizing [curl](https://curl.se/), [jq](https://jqlang.org/), [bc](https://www.gnu.org/software/bc/), and [stdbuf](https://www.gnu.org/software/coreutils/manual/html_node/stdbuf-invocation.html).  
 
