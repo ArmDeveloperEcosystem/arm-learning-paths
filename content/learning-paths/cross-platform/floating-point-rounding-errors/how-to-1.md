@@ -5,6 +5,9 @@ weight: 2
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+When porting applications from x86 to Arm, developers often run into unexpected floating point differences. These aren’t bugs — they’re side effects of platform-specific optimizations, precision handling, and compiler behavior. In this Learning Path, you’ll learn why this happens and how to control it using compiler flags and best practices.
+
+
 
 ## Review of floating point numbers
 

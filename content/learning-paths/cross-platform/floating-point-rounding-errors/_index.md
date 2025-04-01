@@ -1,5 +1,5 @@
 ---
-title: Learn about floating point rounding on Arm
+title: Debugging floating point differences between x86 and Arm
 
 draft: true
 cascade:
@@ -10,9 +10,9 @@ minutes_to_complete: 30
 who_is_this_for: Developers porting applications from x86 to Arm who observe different floating point values on each platform.
 
 learning_objectives: 
-    - Understand the differences between floating point numbers on x86 and Arm. 
-    - Understand factors that affect floating point behavior.
-    - How to use compiler flags to produce predictable behavior.
+    - Identify the key differences in floating point behavior between x86 and Arm. 
+    - Recognize the impact of compiler optimizations and instruction sets on floating point results.
+    - Add compiler flags to make floating point behavior more predictable across platforms.
 
 prerequisites:
     - Access to an x86 and an Arm Linux machine.
