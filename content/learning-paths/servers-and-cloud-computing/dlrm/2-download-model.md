@@ -8,13 +8,14 @@ layout: learningpathall
 
 Before building the model, you need to obtain the data and model weights. Start by creating directories for the two in your cloud instance.
 
-## Install rclone and
-
 ```bash
 cd $HOME
 mkdir data
 mkdir model
 ```
+## Install rclone
+
+You will use `rclone` to [download the data and model weights](https://github.com/mlcommons/inference/tree/master/recommendation/dlrm_v2/pytorch#download-preprocessed-dataset).
 
 Install `rclone` using the bash script.
 
@@ -37,12 +38,12 @@ rclone config create mlc-inference s3 provider=Cloudflare \
     endpoint=https://c2686074cb2caf5cbaf6d134bdba8b47.r2.cloudflarestorage.com
 ```
 
-Run the commands below to download the data and model weights. This process takes 30 minutes or more depending on the internet connection in your cloud instance.
+Run the commands below to download the data and model weights. This process can take 30 minutes or more depending on the internet connection in your cloud instance.
 
 ```bash
 rclone copy mlc-inference:mlcommons-inference-wg-public/dlrm_preprocessed $HOME/data  -P
 rclone copy mlc-inference:mlcommons-inference-wg-public/model_weights $HOME/model/model_weights -P
 ```
 
-Once it finishes, you should see that the `model` and `data` directories are populated. Now that the data is in place, you can proceed to the next section to set up a Docker image which will be used to run the benchmark.
+Once it finishes, you should see that the `model` and `data` directories are populated. Now that the data is in place, you can proceed to run the benchmark in order to measure the performance of the downloaded DLRM model.
 
