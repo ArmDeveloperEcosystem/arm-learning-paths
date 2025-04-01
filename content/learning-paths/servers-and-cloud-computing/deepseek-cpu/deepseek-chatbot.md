@@ -10,9 +10,15 @@ layout: learningpathall
 The instructions in this Learning Path are for any Arm server running Ubuntu 24.04 LTS. You need an Arm server instance with at least 64 cores and 512GB of RAM to run this example. Configure disk storage up to at least 400 GB. The instructions have been tested on an AWS Graviton4 r8g.24xlarge instance.
 
 
-## Overview
+## Background and what you'll build
 
-Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you learn how to run generative AI inference-based use cases like a LLM chatbot on Arm-based CPUs. You do this by deploying the [DeepSeek-R1 GGUF models](https://huggingface.co/bartowski/DeepSeek-R1-GGUF) on your Arm-based CPU using `llama.cpp`.
+Arm CPUs are widely used in ML and AI use cases. In this Learning Path, you will learn how to run a generative AI inference-based use case of a LLM chatbot on Arm-based CPUs by deploying the [DeepSeek-R1 671B LLM](https://huggingface.co/bartowski/DeepSeek-R1-GGUF) on your Arm-based CPU using `llama.cpp`, optimized for Arm hardware. You'll:
+
+- Build and run `llama.cpp` with Arm-specific performance improvements.
+- Download a quantized GGUF model from Hugging Face.
+- Run and measure performance on a large Arm instance (e.g., AWS Graviton4).
+
+
 
 [llama.cpp](https://github.com/ggerganov/llama.cpp) is an open source C/C++ project developed by Georgi Gerganov that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. 
 
