@@ -8,12 +8,11 @@ layout: learningpathall
 
 ## Review of floating-point numbers
 
-If you are unfamiliar with floating-point number representation, you can review [Learn about integer and floating-point conversions](/learning-paths/cross-platform/integer-vs-floats/introduction-integer-float-types/). It covers different data types and explains data type conversions.
+If you are unfamiliar with floating-point number representation, you can review [Learn about integer and floating-point conversions](/learning-paths/cross-platform/integer-vs-floats/introduction-integer-float-types/). It covers data types and conversions.
 
 Floating-point numbers represent real numbers in computer systems, enabling efficient storage and computation of decimal values with varying degrees of precision. In C/C++, floating-point variables are created with keywords such as  `float` or `double`. The IEEE 754 standard, established in 1985, is the most widely used format for floating-point arithmetic, ensuring consistency across different hardware and software implementations.
 
 IEEE 754 defines two primary formats: single-precision (32-bit) and double-precision (64-bit). 
-
 Each floating-point number consists of three components: 
 
 - **Sign bit**: Determines the sign (positive or negative).
@@ -28,7 +27,7 @@ The graphic below illustrates various forms of floating-point representation sup
 
 ## Rounding errors 
 
-Since computers use a finite number of bits to store a continuous range of numbers, rounding errors are introduced. The unit in last place (ULP) is the smallest difference between two consecutive floating-point numbers. It measures floating-point rounding error, which arises because not all real numbers can be exactly represented. 
+Because computers use a finite number of bits to store a continuous range of numbers, rounding errors are introduced. The unit in last place (ULP) is the smallest difference between two consecutive floating-point numbers. It measures floating-point rounding error, which arises because not all real numbers can be exactly represented. 
 
 When an operation is performed, the result is rounded to the nearest representable value, introducing a small error. This rounding error, often measured in ULPs, reflects how far the computed value may deviate from the exact mathematical result. For a simple example, if a floating-point schema with 3 bits for the mantissa (precision) and an exponent in the range of -1 to 2 is used, the possible values are represented in the graph below. 
 
@@ -42,7 +41,7 @@ Key takeaways:
 - ULP behavior impacts numerical stability and precision in computations.
 
 {{% notice Learning Tip %}}
-Keep in mind that rounding and representation issues aren't bugs — they’re a consequence of how floating-point math works at the hardware level. Understanding these fundamentals is critical when porting numerical code across architectures like x86-64 and AArch64.
+Keep in mind that rounding and representation issues aren't bugs — they’re a consequence of how floating-point math works at the hardware level. Understanding these fundamentals is critical when porting numerical code across architectures like x86 and Arm.
 {{% /notice %}}
 
 

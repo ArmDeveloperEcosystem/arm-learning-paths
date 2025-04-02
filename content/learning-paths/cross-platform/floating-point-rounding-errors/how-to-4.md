@@ -1,12 +1,12 @@
 ---
-title: Minimizing variability across platforms
+title: Minimizing floating-point variability across platforms
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## How can I minimize variability across x86 and Arm?
+## How can I minimize floating-point variability across x86 and Arm?
 
 The line `#pragma STDC FENV_ACCESS ON` is a directive that informs the compiler to enable access to the floating-point environment. 
 

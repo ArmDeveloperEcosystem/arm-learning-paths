@@ -85,7 +85,9 @@ As you can see, there are several cases where different behavior is observed. Fo
 
 The above differences show that explicitly checking for specific values will lead to unportable code. 
 
-For example, consider the function below. The code checks if the value is 0. The value an x86 machine will convert a floating-point number that exceeds the maximum 32-bit float value. This is different from Arm behavior leading to unportable code. 
+For example, consider the function below. In the example below, the code checks whether the casted result is `0`. This can be misleading — on x86, casting an out-of-range floating-point value to `uint32_t` may wrap to `0`, while on Arm it may behave differently. Relying on these results makes the code unportable.
+
+  
 
 ```cpp
 void checkFloatToUint32(float num) {
