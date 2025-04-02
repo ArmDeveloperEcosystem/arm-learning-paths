@@ -8,14 +8,14 @@ layout: learningpathall
 
 ## What are the differences in behavior between x86 and Arm floating point?
 
-Architecture and standards define floating point overflows and truncations in different ways. 
+Architecture and standards define floating-point overflows and truncations in different ways. 
 
 You can see this by comparing an example application on an x86 and an Arm Linux system. 
 
 You can use any Linux systems for this example. If you are using AWS, you can use EC2 instance types
 `t3.micro` and `t4g.small` running Ubuntu 24.04.
 
-To learn about floating point differences, use an editor to copy and paste the C++ code below into a new file named `converting-float.cpp`.
+To learn about floating-point differences, use an editor to copy and paste the C++ code below into a new file named `converting-float.cpp`.
 
 ```cpp
 #include <iostream>
@@ -86,7 +86,7 @@ As you can see, there are several cases where different behavior is observed. Fo
 
 The above differences show that explicitly checking for specific values will lead to unportable code. 
 
-For example, consider the function below. The code checks if the value is 0. The value an x86 machine will convert a floating point number that exceeds the maximum 32-bit float value. This is different from Arm behavior leading to unportable code. 
+For example, consider the function below. The code checks if the value is 0. The value an x86 machine will convert a floating-point number that exceeds the maximum 32-bit float value. This is different from Arm behavior leading to unportable code. 
 
 ```cpp
 void checkFloatToUint32(float num) {

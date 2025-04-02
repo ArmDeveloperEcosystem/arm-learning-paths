@@ -83,7 +83,7 @@ Final result after magnification: 0.0000999982
 
 G++ provides several compiler flags to help balance accuracy and performance such as`-ffp-contract` which is useful when lossy, fused operations are used, such as fused-multiple. 
 
-Another example is `-ffloat-store` which prevents floating point variables from being stored in registers which can have different levels of precision and rounding. 
+Another example is `-ffloat-store` which prevents floating-point variables from being stored in registers which can have different levels of precision and rounding. 
 
 You can refer to compiler documentation for more information about the available flags.
 
