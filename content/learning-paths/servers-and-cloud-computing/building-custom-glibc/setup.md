@@ -133,7 +133,7 @@ experience an improvement in SSH connection speed:
 ## Configure SSH on host
 
 Commands in this section should be run on the host system.
-nano
+
 Using a password for SSH can be inconvenient when automating tasks. The solution is
 to set up authentication via SSH keys. Since we are using the Dropbear server, we need
 to use the Dropbear client and configure SSH keys for it.
@@ -291,5 +291,5 @@ test -f /etc/sysctl.d/02-disable-vm-overcommit.conf || {
 }
 ```
 
-You are now ready to do put your Void Linux system to the test. Let'sbuild the Glibc from source and run its tests on the FVP.
+You are now ready to do put your Void Linux system to the test. Let's build the Glibc from source and run its tests on the FVP.
 
