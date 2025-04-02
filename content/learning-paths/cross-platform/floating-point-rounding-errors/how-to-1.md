@@ -1,13 +1,14 @@
 ---
-title: Floating Point Representations
+title: Floating Point Representation
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Key summary: Understand the basics of IEEE 754 floating-point formats and rounding behavior to avoid surprises when moving code between architectures.
-
+{{% notice Key Summary%}}
+Learn the basics of IEEE 754 floating-point formats and rounding behavior to avoid surprises when moving code between architectures.
+{{% /notice %}}
 
 When porting applications from x86 to Arm, developers often run into unexpected floating point differences. These aren’t bugs — they’re side effects of platform-specific optimizations, precision handling, and compiler behavior. In this Learning Path, you’ll learn why this happens and how to control it using compiler flags and best practices.
 

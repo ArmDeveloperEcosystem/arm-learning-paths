@@ -7,7 +7,7 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers who are porting applications from x86-64 (also known as "x86") to AArch64 (also known as "Arm64; the Arm 64-bit architecture) and want to understand how floating-point behavior can differ between these architectures — particularly in the context of numerical consistency, performance, and debugging subtle bugs.
+who_is_this_for: This is an introductory topic for developers who are porting applications from x86-64 (also known as "x86") to AArch64 (also known as "Arm64; the Arm 64-bit architecture) and want to understand how floating-point behavior can differ between these architectures - particularly in the context of numerical consistency, performance, and debugging subtle bugs.
 
 learning_objectives: 
     - Identify key differences in floating-point behavior between x86-64 and AArch64. 
