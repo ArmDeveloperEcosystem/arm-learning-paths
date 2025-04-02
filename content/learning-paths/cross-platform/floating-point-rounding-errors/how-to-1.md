@@ -5,6 +5,10 @@ weight: 2
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+Key summary: Understand the basics of IEEE 754 floating-point formats and rounding behavior to avoid surprises when moving code between architectures.
+
+
 When porting applications from x86 to Arm, developers often run into unexpected floating point differences. These aren’t bugs — they’re side effects of platform-specific optimizations, precision handling, and compiler behavior. In this Learning Path, you’ll learn why this happens and how to control it using compiler flags and best practices.
 
 
@@ -42,3 +46,5 @@ Key takeaways:
 - Larger numbers have bigger ULPs due to wider spacing between values.
 - Smaller numbers have smaller ULPs, reducing quantization error.
 - ULP behavior impacts numerical stability and precision in computations.
+
+In the next section, you will explore how x86 and Arm differ in how they implement and optimize floating-point operations — and why this matters for portable, accurate software.
