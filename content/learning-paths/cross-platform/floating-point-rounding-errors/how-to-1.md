@@ -1,5 +1,5 @@
 ---
-title: Floating Point Representation
+title: "Floating Point Representation"
 weight: 2
 
 ### FIXED, DO NOT MODIFY
