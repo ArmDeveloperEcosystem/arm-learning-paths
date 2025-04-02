@@ -19,13 +19,13 @@ weight: 1
 
 Ansible is an open source, command-line automation used to configure systems and deploy software.
 
-Ansible command-line tools can be installed on a variety of Linux distributions.
+Ansible command-line tools can be installed on a variety of Linux and Unix distributions.
 
 [General installation information](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html) is available which covers all supported operating systems, but it doesn't talk about Arm-based hosts.
 
 ## What should I do before I start installing the Ansible command line tools?
 
-This article provides a quick solution to install the Ansible command line tools, such as `ansible-playbook` for Ubuntu on Arm.
+This article provides a quick solution to install the Ansible command line tools, such as `ansible-playbook` for macOS and Ubuntu running Arm.
 
 Confirm you are using an Arm machine by running:
 
@@ -33,15 +33,22 @@ Confirm you are using an Arm machine by running:
 uname -m
 ```
 
-The output should be:
+The output on Ubuntu should be:
 
 ```output
 aarch64
 ```
 
+And for macOS:
+
+```output
+arm64
+```
+
+
 If you see a different result, you are not using an Arm-based machine running 64-bit Linux.
 
-## How do I download and install Ansible for Ubuntu on Arm?
+## Install Ansible for Ubuntu on Arm
 
 The easiest way to install the latest version of Ansible for Ubuntu on Arm is to use the PPA (Personal Package Archive).
 
@@ -53,6 +60,16 @@ sudo apt install software-properties-common -y
 sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible -y
 ```
+
+## Install Ansible for macOS
+
+You can use the `brew` package manager to install on `arm64`:
+
+```console
+brew install ansible
+```
+
+## Confirm installation
 
 Confirm the Ansible command line tools are installed by running:
 

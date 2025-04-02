@@ -8,22 +8,22 @@ weight: 6 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-##  Install MariaDB in a Docker container 
+##  Install MariaDB in a Docker container
 
-You can deploy [MariaDB](https://mariadb.org/) in a Docker container using Ansible. 
+You can deploy [MariaDB](https://mariadb.org/) in a Docker container using Ansible.
 
 ## Before you begin
 
 For this section you will need a computer which has [Ansible](/install-guides/ansible/) installed. You can use the same SSH key pair. You also need a cloud instance or VM, or a physical machine with Ubuntu installed, running and ready to deploy MariaDB.
- 
- 
+
+
 ## Deploy a MariaDB container using Ansible
 
 Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. If you are new to Docker, consider reviewing [Learn how to use Docker](/learning-paths/cross-platform/docker/).
 
 To run Ansible, you can use an Ansible playbook. The playbook uses the `community.docker` collection to deploy MariaDB in a container.
 
-The playbook maps the container port to the host port, which is `3306`. 
+The playbook maps the container port to the host port, which is `3306`.
 
 1. Use a text editor to add the contents below to a new file named `playbook.yml`.
 
@@ -37,8 +37,8 @@ The playbook maps the container port to the host port, which is `3306`.
       shell: |
              apt-get update -y
              apt-get -y install mariadb-client
-             apt-get install docker.io -y
-             usermod -aG docker ubuntu
+             curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
+             usermod -aG docker ubuntu ; newgrp docker
              apt-get -y install python3-pip
              pip3 install PyMySQL
              pip3 install docker
@@ -70,9 +70,9 @@ The playbook maps the container port to the host port, which is `3306`.
 
 ```
 
-2. Edit `playbook.yml` to use your values 
+2. Edit `playbook.yml` to use your values
 
-Replace **{{your_mariadb_password}}** with your own password. 
+Replace **{{your_mariadb_password}}** with your own password.
 
 Also, replace **{{dockerhub_uname}}** and **{{dockerhub_pass}}** with your [Docker Hub](https://hub.docker.com/) credentials.
 
@@ -81,7 +81,7 @@ Also, replace **{{dockerhub_uname}}** and **{{dockerhub_pass}}** with your [Dock
 [all]
 ansible-target1 ansible_connection=ssh ansible_host={{public_ip of VM where MariaDB to be deployed}} ansible_user={{user_of VM where MariaDB to be deployed}}
 ```
-4. Edit `inventory.txt` to use your values 
+4. Edit `inventory.txt` to use your values
 
 Replace **{{public_ip of VM where MariaDB to be deployed}}** and **{{user_of VM where MariaDB to be deployed}}** with your own values.
 
@@ -95,9 +95,9 @@ Replace **{{public_ip of VM where MariaDB to be deployed}}** and **{{user_of VM 
 ansible-playbook playbook.yaml -i {your_inventory_file_location}
 ```
 
-2. Answer `yes` when prompted for the SSH connection. 
+2. Answer `yes` when prompted for the SSH connection.
 
-Deployment may take a few minutes. 
+Deployment may take a few minutes.
 
 The output should be similar to:
 
@@ -128,5 +128,5 @@ ansible-target1            : ok=3    changed=4    unreachable=0    failed=0    s
 
 ## Connect to Database using your local machine
 
-You can use the instructions from the previous topic to [connect to the database](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment#connect-to-database-from-local-machine) and confirm the Docker container deployment is working. 
+You can use the instructions from the previous topic to [connect to the database](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment#connect-to-database-from-local-machine) and confirm the Docker container deployment is working.
 
