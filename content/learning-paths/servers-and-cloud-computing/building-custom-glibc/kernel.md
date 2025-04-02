@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Obtain kernel source
 
-The Linux kernel image is the first essential components that you need to build. You are going to build it from source.
+The Linux kernel image is the first essential component that you need to build. You are going to build it from source.
 
 There are various ways to obtain the sources for a particular version of the Linux kernel that you want to use. Here, as an example, we obtain a stable
 version from the mainline repository.
@@ -31,10 +31,11 @@ interested in running.
 
 Before moving on, export some environment variables, pointing out some key directories and options.
 All the build output, including the binary that you intend to use later, will be put in
-the `linux-build` subfolder. Run the following commands in the workspace directory:
+the `linux-build` subfolder. Substitute the correct path for the commands below and run in the workspace directory.
 
 
 ```bash
+export PATH=/path/to/cross/gcc/bin:${PATH}
 export KBUILD_OUTPUT="$(pwd)/linux-build"
 export ARCH=arm64
 # Specify cross compiler
@@ -42,6 +43,7 @@ export CROSS_COMPILE=aarch64-none-linux-gnu-
 ````
 
 Next, build the kernel image:
+
 ```bash
 make -C linux mrproper
 make -C linux defconfig
