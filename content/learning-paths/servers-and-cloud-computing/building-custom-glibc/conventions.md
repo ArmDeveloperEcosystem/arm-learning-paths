@@ -10,9 +10,7 @@ You may need root access on your host system to do minimal setup and install pac
 
 ## Naming conventions
 
-In the following sections we use host system to checkout sources and build various
-tools and we also make configuration changes to the guest system that will run on
-the Arm [Fixed Virtual Platform (FVP)][1] model.
+In the following sections you use host system to checkout sources and build various tools and make configuration changes to the guest system that will run on the Arm [Fixed Virtual Platform (FVP)][https://developer.arm.com/downloads/-/arm-ecosystem-fvps] model.
 
 
 The GCC cross toolchain directory should include all necessary tools. For example, the `gcc` tool path would be `/path/to/cross/gcc/bin/aarch64-none-linux-gnu-gcc`. 
@@ -20,8 +18,7 @@ The GCC cross toolchain directory should include all necessary tools. For exampl
 **Please Note**: The cross compiler available from your distribution through a package manager is not suitable to explore architectural features and user needs to build your own custom GNU cross compiler. Please read [this resource ](https://wiki.osdev.org/GCC_Cross-Compiler#Using_the_new_Compiler) for further explanation. 
 
 
-Tools must be installed in the specified paths for clarity and best practices. 
-
+This Learning Path assumes the following directory structure. If your structure differs then you will need to substitute the correct paths accordingly.
 
 Table 1. Directory layout
 
@@ -43,5 +40,3 @@ Table 1. Directory layout
 
 In the next steps we create a Python virtual environment. It doesn't matter where
 it is located, but to avoid ambiguity let's presume it is in `~/workspace/venv`.
-
-[1]: https://developer.arm.com/downloads/-/arm-ecosystem-fvps
