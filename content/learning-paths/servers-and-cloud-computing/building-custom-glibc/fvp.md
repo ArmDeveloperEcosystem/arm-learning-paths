@@ -50,12 +50,9 @@ is activated, then run this command to confirm shrinkwrap has been correctly ins
 shrinkwrap --version
 ```
 
-
-
 ## Build firmware for the FVP
 
-Before proceeding, ensure that Docker is installed and usable. Follow the installation
-instructions for your distro. Now, you can use the Shrinkwrap tool to build the firmware, the third essential ingredient in our
+Before proceeding, ensure that Docker is installed and usable. Follow the installation instructions for your distribution [here](https://docs.docker.com/engine/install/). Now, you can use the Shrinkwrap tool to build the firmware, the third essential ingredient in our
 setup. The following step needs to be done once although you will need to repeat it if you
 want to rebuild the firmware:
 
