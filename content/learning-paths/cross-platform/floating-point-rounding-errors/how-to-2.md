@@ -14,7 +14,7 @@ You can see this by comparing an example application on both an x86 and an Arm L
 
 Run this example on any Linux system with x86 and Arm architecture; on AWS, use EC2 instance types `t3.micro` and `t4g.small` with Ubuntu 24.04.
 
-To learn about floating-point differences, use an editor to copy and paste the C++ code below into a new file named `converting-float.cpp`.
+To learn about floating-point differences, use an editor to copy and paste the C++ code below into a new file named `converting-float.cpp`:
 
 ```cpp
 #include <iostream>
@@ -60,7 +60,7 @@ int main() {
 }
 ```
 
-If you need to install the `g++` compiler, run the commands below. 
+If you need to install the `g++` compiler, run the commands below:
 
 ```bash
 sudo apt update
@@ -75,7 +75,7 @@ The compile command is the same on both systems.
 g++ converting-float.cpp -o converting-float 
 ```
 
-For easy comparison, the image below shows the x86 output (left) and Arm output (right). The  highlighted lines show the difference in output. 
+For easy comparison, the image below shows the x86 output (left) and Arm output (right). The  highlighted lines show the difference in output: 
 
 ![differences](./differences.png)
 
