@@ -39,7 +39,7 @@ shared_between:
 
 further_reading:
     - resource:
-        title: G++ Optimisation Flags 
+        title: G++ Optimization Flags 
         link: https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
         type: documentation
     - resource:

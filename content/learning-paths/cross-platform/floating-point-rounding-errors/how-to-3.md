@@ -10,13 +10,13 @@ layout: learningpathall
 
 One cause of different outputs between x86 and Arm stems from the order of instructions and how errors are propagated. As a hypothetical example, an Arm system may decide to reorder the instructions that each have a different rounding error so that subtle changes are observed. 
 
-It is possible that 2 functions that are mathematically equivalent will propagate errors differently on a computer. 
+It is possible that two functions that are mathematically equivalent will propagate errors differently on a computer. 
 
  Functions `f1` and `f2` are mathematically equivalent. You would expect them to return the same value given the same input. 
  
- If the input is a very small number, `1e-8`, the error is different due to the loss in precision caused by different operations. Specifically, `f2` avoids the subtraction of nearly equal number. For a full description look into the topic of [numerical stability](https://en.wikipedia.org/wiki/Numerical_stability). 
+ If the input is a very small number, `1e-8`, the error is different due to the loss in precision caused by different operations. Specifically, `f2` avoids subtracting nearly equal numbers for clarity. For a full description look into the topic of [numerical stability](https://en.wikipedia.org/wiki/Numerical_stability). 
 
-Use an editor to copy and paste the C++ code below into a file named `error-propagation.cpp`. 
+Use an editor to copy and paste the C++ code below into a file named `error-propagation.cpp`: 
 
 ```cpp
 #include <stdio.h>
@@ -53,13 +53,13 @@ int main() {
 }
 ```
 
-Compile the code on both x86 and Arm with the following command.
+Compile the code on both x86 and Arm with the following command:
 
 ```bash
 g++ -g error-propagation.cpp -o error-propagation
 ```
 
-Running the 2 binaries shows that the second function, `f2`, has a small rounding error on both architectures. Additionally, there is a further rounding difference when run on x86 compared to Arm.
+Running the two binaries shows that the second function, `f2`, has a small rounding error on both architectures. Additionally, there is a further rounding difference when run on x86 compared to Arm.
 
 Running on x86:
 

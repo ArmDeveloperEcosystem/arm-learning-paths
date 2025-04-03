@@ -79,7 +79,7 @@ For easy comparison, the image below shows the x86 output (left) and Arm output 
 
 ![differences](./differences.png)
 
-As you can see, there are several cases where different behavior is observed. For example when trying to convert a signed number to a unsigned number or dealing with out-of-bounds numbers. 
+As you can see, there are several cases where different behavior is observed. For example when trying to convert a signed number to an unsigned number or dealing with out-of-bounds numbers. 
 
 ## Removing hardcoded values with macros
 
@@ -93,7 +93,7 @@ For example, the function below checks if the casted result is `0`. This can be 
 void checkFloatToUint32(float num) {
     uint32_t castedNum = static_cast<uint32_t>(num);
     if (castedNum == 0) {
-        std::cout << "The casted number is 0, indicating the float could out of bounds for uint32_t." << std::endl;
+        std::cout << "The casted number is 0, indicating that the float is out of bounds for uint32_t." << std::endl;
     } else {
         std::cout << "The casted number is: " << castedNum << std::endl;
     }
