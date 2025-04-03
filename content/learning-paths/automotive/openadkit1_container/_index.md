@@ -1,6 +1,10 @@
 ---
 title: Deploying Mixed-Criticality Autonomous Driving software using Arm containers
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for automotive developers, aimed at helping them accelerate autonomous driving software development before the automotive computing hardware board is fully ready.

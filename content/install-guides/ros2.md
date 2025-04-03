@@ -1,19 +1,22 @@
 ---
+title: ROS2
+author: Odin Shen
+minutes_to_complete: 30
+official_docs: https://www.ros.org/blog/getting-started/
+
+draft: true
+
+test_images:
+- ubuntu:latest
+test_maintenance: true
+
 additional_search_terms:
 - linux
 - cloud
 
-
 layout: installtoolsall
-minutes_to_complete: 30
-author: Odin Shen
 multi_install: false
 multitool_install_part: false
-official_docs: https://www.ros.org/blog/getting-started/
-test_images:
-- ubuntu:latest
-test_maintenance: true
-title: ROS2
 tool_install: true
 weight: 1
 ---
