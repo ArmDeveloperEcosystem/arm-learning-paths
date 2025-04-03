@@ -1,5 +1,5 @@
 ---
-title: Naming Conventions
+title: Assumptions
 weight: 2
 
 ### FIXED, DO NOT MODIFY
