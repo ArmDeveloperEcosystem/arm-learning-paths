@@ -145,4 +145,54 @@ An example is shown below:
 
 ![Connect #center](/install-guides/_images/q.gif)
 
+## How can I set the Q CLI context to tailor responses? 
+
+The Q CLI reads your context when you start it. If you provide more information about yourself, you will get tailored responses that match your development environment.
+
+There are multiple options to store context.
+
+Use the `/context` command to see the possible locations to store your context.
+
+```console
+/context show
+```
+
+The help information is printed.
+
+```output
+current profile: default
+
+global:
+    .amazonq/rules/**/*.md
+    README.md
+    AmazonQ.md
+```
+
+For example, you can create a new file to store your context.
+
+```console
+mkdir -p ~/.amazonq/rules/context
+echo "I am an Arm Linux developer. I prefer Ubuntu and other Debian based distributions. I don't use any x86 computers so please provide all information assuming I'm working on Arm Linux. Sometimes I use macOS and Windows on Arm, but please only provide information about these operating systems when I ask for it." > ~/.amazonq/rules/context/context.md
+```
+
+When you invoke `q chat` you can confirm your context information was read by asking. 
+
+```console
+did you read my context information?
+```
+
+The response confirms the context file was read:
+
+```output
+Yes, I've read your context information. I understand that you're an Arm Linux developer who prefers 
+Ubuntu and other Debian-based distributions. You don't use x86 computers, so I should provide 
+information assuming you're working on Arm Linux. You sometimes use macOS and Windows on Arm, but I 
+should only provide information about those operating systems when you specifically ask for it.
+
+I'll keep this context in mind when answering your questions, focusing on Arm Linux-specific 
+information and Debian-based distributions by default.
+```
+
+Give it a try by asking questions such as `how do I install the aws cli?` and check that the answers match the provided context. 
+
 You're ready to use the Q CLI. 
