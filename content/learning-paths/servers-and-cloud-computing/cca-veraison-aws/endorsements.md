@@ -13,6 +13,7 @@ Now that your Veraison services are deployed into AWS, the next step is to provi
 The endorsement tool is available on Linaro's Git server. Run the following command to clone the repository into a suitable directory on your machine:
 
 ```bash
+cd $HOME
 git clone https://git.codelinaro.org/linaro/dcap/cca-demos/poc-endorser
 ```
 ## Configure the Endorsement Tool for AWS
@@ -21,11 +22,26 @@ By default, the endorsement tool assumes that your Veraison services are deploye
 In the command shell where you created the AWS deployment of Veraison, run the following command:
 
 ```bash
+cd $HOME/services/deployments/aws
 veraison create-client-config -o /tmp/vconfig
 ```
-Next, use your preferred text editor to edit the file `endorse.sh` in the endorsement tool.
 
-Locate these lines in the script:
+The output should look like:
+```output
+2025-04-03 19:12:21,442 create-client-config INFO: creating Veraison client config(s)...
+2025-04-03 19:12:21,446 create-client-config INFO: generating cocli config...
+2025-04-03 19:12:21,447 create-client-config INFO: done.
+2025-04-03 19:12:21,447 create-client-config INFO: generating evcli config...
+2025-04-03 19:12:21,448 create-client-config INFO: done.
+2025-04-03 19:12:21,448 create-client-config INFO: generating pocli config...
+2025-04-03 19:12:21,449 create-client-config INFO: done.
+```
+Next, change back to the directory where you cloned the endorsement tool.
+
+```bash
+cd $HOME/poc-endorser/
+```
+ Use your preferred text editor to edit the file `endorse.sh` in the endorsement tool. Locate these lines in the script:
 
 ```code
 api_server: https://provisioning-service:8888/endorsement-provisioning/v1/submit
@@ -36,10 +52,12 @@ client_id: veraison-client
 client_secret: YifmabB4cVSPPtFLAmHfq7wKaEHQn10Z
 token_url: https://keycloak-service:11111/realms/veraison/protocol/openid-connect/token
 ```
-Delete these lines, and replace them with the contents of `/tmp/vconfig/cocli.yaml`. You should notice that the URL endpoints now refer to your AWS domain, while some of the other details may remain the same. Exit the text editor, making sure to save your changes.
+Delete these lines, and replace them with the contents of `/tmp/vconfig/cocli/config.yaml`. You should notice that the URL endpoints now refer to your AWS domain, while some of the other details may remain the same. Exit the text editor, making sure to save your changes.
 
 ## Provision the Endorsements to Veraison
-The provisioning tool runs inside a Docker container. In the command shell where you have cloned the endorsement tool, run the following command:
+The provisioning tool runs inside a Docker container. 
+First, make sure you have [installed Docker](/install-guides/docker) on your machine.
+In the command shell where you have cloned the endorsement tool, run the following command:
 
 ```bash
 make build
@@ -67,6 +85,7 @@ docker run --network=host "cca-demo/endorser"
 Next, return to the command shell where you created the Veraison AWS deployment, and run the following command:
 
 ```bash
+cd $HOME/services/deployments/aws
 veraison stores
 ```
 This command will query Veraison's database stores. If the CCA endorsements were provisioned successfully, the output should look something like the example below. (You don't need to be concerned with understanding all of the detail here.)
