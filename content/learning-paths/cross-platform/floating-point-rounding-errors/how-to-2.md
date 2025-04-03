@@ -12,7 +12,7 @@ Although both x86 and Arm generally follow the IEEE 754 standard for floating-po
 
 You can see this by comparing an example application on both an x86-64 and an AArch64 (Arm64) Linux system. 
 
-You can run this example on any Linux system with x86-64 and AArch64 architecture. If you are using AWS, you can use EC2 instance types `t3.micro` and `t4g.small` running Ubuntu 24.04.
+Run this example on any Linux system with x86 and Arm architecture; on AWS, use EC2 instance types `t3.micro` and `t4g.small` with Ubuntu 24.04.
 
 To learn about floating-point differences, use an editor to copy and paste the C++ code below into a new file named `converting-float.cpp`.
 
