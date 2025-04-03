@@ -10,7 +10,7 @@ layout: learningpathall
 
 Although both x86 and Arm generally follow the IEEE 754 standard for floating-point representation, their behavior in edge cases — like overflow and truncation — can differ due to implementation details and instruction sets.
 
-You can see this by comparing an example application on both an x86-64 and an AArch64 (Arm64) Linux system. 
+You can see this by comparing an example application on both an x86 and an Arm Linux system. 
 
 Run this example on any Linux system with x86 and Arm architecture; on AWS, use EC2 instance types `t3.micro` and `t4g.small` with Ubuntu 24.04.
 
@@ -85,7 +85,7 @@ As you can see, there are several cases where different behavior is observed. Fo
 
 The above differences show that explicitly checking for specific values will lead to unportable code. 
 
-For example, consider the function below. In the example below, the code checks whether the casted result is `0`. This can be misleading — on x86, casting an out-of-range floating-point value to `uint32_t` may wrap to `0`, while on Arm it may behave differently. Relying on these results makes the code unportable.
+For example, the function below checks if the casted result is `0`. This can be misleading — on x86, casting an out-of-range floating-point value to `uint32_t` may wrap to `0`, while on Arm it may behave differently. Relying on these results makes the code unportable.
 
   
 

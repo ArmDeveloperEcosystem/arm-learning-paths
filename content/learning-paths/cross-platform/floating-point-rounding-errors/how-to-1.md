@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Review of floating-point numbers
 
-If you are unfamiliar with floating-point number representation, you can review the Learning Path [Learn about integer and floating-point conversions](/learning-paths/cross-platform/integer-vs-floats/introduction-integer-float-types/). It covers data types and conversions.
+If you are new to floating-point numbers, for some background information, see the Learning Path [Learn about integer and floating-point conversions](/learning-paths/cross-platform/integer-vs-floats/introduction-integer-float-types/). It covers data types and conversions.
 
 Floating-point numbers represent real numbers using limited precision, enabling efficient storage and computation of decimal values with varying degrees of precision. In C/C++, floating-point variables are created with keywords such as  `float` or `double`. The IEEE 754 standard, established in 1985, defines the most widely used format for floating-point arithmetic, ensuring consistency across hardware and software.
 
