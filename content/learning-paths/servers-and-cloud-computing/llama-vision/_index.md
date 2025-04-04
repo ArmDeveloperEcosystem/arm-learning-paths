@@ -1,5 +1,5 @@
 ---
-title: Deploy a LLM based Vision Chatbot with PyTorch and Hugging Face Transformers on Google Axion processors
+title: Deploy a LLM-based Vision Chatbot with PyTorch and Hugging Face Transformers on Google Axion processors
 
 draft: true
 cascade:
@@ -7,17 +7,15 @@ cascade:
 
 minutes_to_complete: 45
 
-who_is_this_for: This Learning Path is for software developers, ML engineers, and those who are interested to deploy production-ready vision chatbot for their application with optimized performance on Arm Architecture.
+who_is_this_for: This Learning Path is for software developers and ML engineers who are interested in deploying a production-ready vision chatbot for their application with optimized performance on Arm Architecture.
 
 learning_objectives:
-    - Download PyTorch and Torch AO.
-    - Install required dependencies
-    - Build frontend with Streamlit to input image and prompt.
-    - Build backend to download the Llama 3.2 Vision model, Quantize and run it using PyTorch and Transformers.
+    - Build a frontend with Streamlit to input images and prompts.
+    - Build the backend to download the Llama 3.2 Vision model, quantize it, and run it using PyTorch and Hugging Face Transformers.
     - Monitor and analyze inference on Arm CPUs.
 
 prerequisites:
-    - A Google Cloud Axion compute instance or [any Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider with atleast 32 cores.
+    - A Google Cloud Axion compute instance or [any Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider with at least 32 cores.
     - Basic understanding of Python and ML concepts.
     - Familiarity with REST APIs and web services.
     - Basic knowledge on Streamlit.
