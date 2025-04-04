@@ -22,14 +22,14 @@ weight: 1
 ---
 
 The [Eclipse Cyclone DDS](https://cyclonedds.io/) is an open-source implementation of the Data Distribution Service ([DDS](https://en.wikipedia.org/wiki/Data_Distribution_Service)) standard, designed for high-performance, real-time, and scalable communication in autonomous systems, robotics, industrial IoT, and aerospace applications.
-It is part of the Eclipse Foundation and is widely used in ROS 2 as a key middleware for inter-process communication.
+
+It is part of the Eclipse Foundation and is widely used in Robotic Operating System (ROS) 2 as a key middleware framework for inter-process communication.
 
 ## Before you begin
 
-ROS2 is available for Linux, macOS and Windows.
-This article provides a quick solution to install Cyclone DDS on Linux.
+This article provides a quick solution to install Cyclone DDS on Arm Linux.
 
-Confirm you are using an Arm machine by running:
+Confirm you are using an Arm Linux machine by running:
 
 ```bash
 uname -m
@@ -43,58 +43,72 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-Also, you need install following before building Cyclone DDS:
+You need to install the following before building Cyclone DDS:
 
-- C Compiler (i.e. GCC).
-- GIT.
-- CMAKE (3.7 or later).
-- OpenSSL (1.1 or later)
+- C and C++ compilers (GCC)
+- Git
+- CMake 
+- OpenSSL
 
-## How do I build Cyclone DDS on Arm?
-
-We will install Cyclone DDS from source code.
-Clone the GitHub link and create a build folder.
+For Ubuntu Linux run the commands below. For other Linux distributions, use the package manager to install the above software.
 
 ```bash
+sudo apt update
+sudo apt install -y gcc g++ git cmake libssl-dev
+```
+
+## How do I build Cyclone DDS?
+
+You can install Cyclone DDS by building the source code.
+
+Clone the GitHub repository to create a build folder.
+
+```console
+cd $HOME
 git clone https://github.com/eclipse-cyclonedds/cyclonedds.git
 ```
 
-Once download, you can build and install Cyclone DDS on Linux.
-In order to verify the installation, we enable `BUILD_EXAMPLES` and `BUILD_TESTING` for further testing. 
+Once downloaded, you can build and install Cyclone DDS.
+
+Enable `BUILD_EXAMPLES` and `BUILD_TESTING` so you can run the examples to verify the installation. 
+
+Here are the build and install commands:
 
 ```bash
 cd cyclonedds
-mkdir build
-cmake -DBUILD_EXAMPLES=ON -DBUILD_TESTING=ON -DCMAKE_INSTALL_PREFIX=<install-location> ..
+mkdir build ; cd build
+cmake -DBUILD_EXAMPLES=ON -DBUILD_TESTING=ON ..
 cmake --build .
-cmake --build . --target install
+sudo cmake --build . --target install
 ```
 
+Cyclone DDS is now installed in `/usr/local`
+
 {{% notice Note %}}
-The two cmake --build commands might require being executed with sudo depending on the <install-location>.
+If you don't want to install Cyclone DDS in the default location of `/usr/local` you can specify another location 
+by adding `-DCMAKE_INSTALL_PREFIX=<install-prefix>` to the first `cmake` command with your alternate location.
 {{% /notice %}}
 
+## How can I test Cyclone DDS?
 
-## Quick test on Cyclone DDS
+To verify the installation, you can run the Hello World example from the build directory.
 
-After success build up the code, you are able to use Cyclone DDS now.
-To verify the installation, you can run the Hello World example on cyclonedds/build/bin folder.
+Open two terminals and navigate to the `bin/` directory in each. 
 
-Open two terminals and move to the cyclonedds/build/bin/ directory and in each terminal run:
+Run the commands shown below in each tab in each of your two terminals:
 
 {{< tabpane code=true >}}
   {{< tab header="Publisher" language="bash">}}
-    cd cyclonedds/build/bin/
+    cd $HOME/cyclonedds/build/bin/
     ./HelloworldPublisher
   {{< /tab >}}
   {{< tab header="Subscriber" language="bash">}}
-    cd cyclonedds/build/bin/
+    cd $HOME/cyclonedds/build/bin/
     ./HelloworldSubscriber
   {{< /tab >}}
 {{< /tabpane >}}
 
-If you observe the following message from each of terminal, it's mean Cyclone DDS has been successfully installed on Arm machine.
-You are now ready to use Cyclone DDS. 
+If you observe the following output from each of terminal, Cyclone DDS is running correctly on your Arm Linux machine.
 
 {{< tabpane code=true >}}
   {{< tab header="Publisher" language="log">}}
@@ -106,3 +120,5 @@ You are now ready to use Cyclone DDS.
     === [Subscriber] Received : Message (1, Hello World)
   {{< /tab >}}
 {{< /tabpane >}}
+
+You are now ready to use Cyclone DDS. 
