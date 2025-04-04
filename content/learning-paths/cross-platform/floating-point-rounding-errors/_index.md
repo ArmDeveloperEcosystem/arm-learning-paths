@@ -1,10 +1,6 @@
 ---
 title: Explore floating-point differences between x86 and Arm
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers who are porting applications from x86 to Arm and want to understand how floating-point behavior differs between these architectures - particularly in the context of numerical consistency, performance, and debugging subtle bugs.
