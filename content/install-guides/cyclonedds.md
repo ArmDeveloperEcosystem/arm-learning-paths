@@ -74,7 +74,7 @@ Enable `BUILD_EXAMPLES` and `BUILD_TESTING` so you can run the examples to verif
 
 Here are the build and install commands:
 
-```bash
+```console
 cd cyclonedds
 mkdir build ; cd build
 cmake -DBUILD_EXAMPLES=ON -DBUILD_TESTING=ON ..
