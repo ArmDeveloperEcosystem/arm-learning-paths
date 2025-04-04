@@ -39,7 +39,7 @@ further_reading:
         link: https://learn.arm.com/install-guides/ros2/
         type: documentation
     - resource:
-        title: AutoWare OpenAD Kit deom project
+        title: Autoware OpenAD Kit demo project
         link: https://github.com/autowarefoundation/openadkit_demo.autoware/
         type: documentation
 
