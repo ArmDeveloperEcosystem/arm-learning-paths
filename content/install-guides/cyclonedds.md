@@ -45,12 +45,12 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 You need to install the following before building Cyclone DDS:
 
-- C and C++ compilers (GCC)
-- Git
-- CMake 
-- OpenSSL
+- C and C++ compilers (such as GCC).
+- Git.
+- CMake see [How do I install CMake?](/install-guides/cmake/)). 
+- OpenSSL.
 
-For Ubuntu Linux run the commands below. For other Linux distributions, use the package manager to install the above software.
+For Ubuntu Linux, run the commands below. For other Linux distributions, use the package manager to install the software listed above.
 
 ```bash
 sudo apt update
@@ -61,7 +61,7 @@ sudo apt install -y gcc g++ git cmake libssl-dev
 
 You can install Cyclone DDS by building the source code.
 
-Clone the GitHub repository to create a build folder.
+Clone the GitHub repository to create a build folder:
 
 ```bash
 cd $HOME
@@ -70,28 +70,28 @@ git clone https://github.com/eclipse-cyclonedds/cyclonedds.git
 
 Once downloaded, you can build and install Cyclone DDS.
 
-Enable `BUILD_EXAMPLES` and `BUILD_TESTING` so you can run the examples to verify the installation. 
+Enable the flags `BUILD_EXAMPLES` (to compile the example applications included) and `BUILD_TESTING` (to compile the test suite). 
 
 Here are the build and install commands:
 
 ```console
 cd cyclonedds
-mkdir build ; cd build
+mkdir build && cd build
 cmake -DBUILD_EXAMPLES=ON -DBUILD_TESTING=ON ..
 cmake --build .
 sudo cmake --build . --target install
 ```
 
-Cyclone DDS is now installed in `/usr/local`
+Cyclone DDS is now installed in `/usr/local`.
 
 {{% notice Note %}}
-If you don't want to install Cyclone DDS in the default location of `/usr/local` you can specify another location 
-by adding `-DCMAKE_INSTALL_PREFIX=<install-prefix>` to the first `cmake` command with your alternate location.
+If you don't want to install Cyclone DDS in the default location of `/usr/local`, you can specify another location 
+by adding `-DCMAKE_INSTALL_PREFIX=<install-prefix>` to the first `cmake` command with your alternative location.
 {{% /notice %}}
 
 ## How can I test Cyclone DDS?
 
-To verify the installation, you can run the Hello World example from the build directory.
+To verify the installation, you can run the `Hello World` example from the build directory.
 
 Open two terminals and navigate to the `bin/` directory in each. 
 
@@ -108,7 +108,7 @@ Run the commands shown below in each tab in each of your two terminals:
   {{< /tab >}}
 {{< /tabpane >}}
 
-If you observe the following output from each of terminal, Cyclone DDS is running correctly on your Arm Linux machine.
+If you observe the following output from each of the terminals, Cyclone DDS is running correctly on your Arm Linux machine.
 
 {{< tabpane code=true >}}
   {{< tab header="Publisher" language="log">}}
