@@ -1,8 +1,6 @@
 ---
 title: Amazon Q Developer CLI
 
-draft: true
-
 author: Jason Andrews
 minutes_to_complete: 10
 official_docs: https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line.html
