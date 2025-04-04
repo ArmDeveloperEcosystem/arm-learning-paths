@@ -36,7 +36,10 @@ On your running Arm-based instance, make sure Python is installed by running the
 python3 --version
 ```
 
+The version is printed:
+
 ```output
-Python 3.12.6
+Python 3.10.12
 ```
+
 With your development environment set up, you can move on to downloading and running the model.

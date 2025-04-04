@@ -21,7 +21,9 @@ Start by cloning the repository:
  cd $HOME
  git clone https://github.com/ArmDeveloperEcosystem/dlrm-mlperf-lp.git
  ```
+
 Set the environment variables to point to the downloaded data and model weights:
+
 ```
 export DATA_DIR=$HOME/data
 export MODEL_DIR=$HOME/model
@@ -50,7 +52,7 @@ For the `fp32` offline test, it's recommended to use the pre-generated binary da
 
 ## Reading the results
 
-Once the script completes, have a look at the results to evaluate performance.
+Once the script completes, look at the results to evaluate performance.
 
 The DLRM model optimizes the Click-Through Rate (CTR) prediction. This is a fundamental task in online advertising, recommendation systems, and search engines. Essentially, the model estimates the probability of a user clicking on an ad, product recommendation, or search result. The higher the predicted probability, the more likely the item is to be clicked. In a server context, the goal is to observe a high throughput of these probabilities.
 
