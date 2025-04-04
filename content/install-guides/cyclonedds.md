@@ -4,8 +4,6 @@ author: Odin Shen
 minutes_to_complete: 20
 official_docs: https://cyclonedds.io/
 
-draft: true
-
 additional_search_terms:
 - linux
 - automotive
