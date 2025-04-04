@@ -17,7 +17,7 @@ learning_objectives:
 
 prerequisites:
     - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) for accessing AWS cloud services.
-    - An x86 computer running Ubuntu or Arch Linux, which is authorised to use the AWS account. Other build environments might be possible, but will require the configuration of toolchains for cross-compilation.
+    - An x86 computer running Ubuntu or Arch Linux, which is authorized to use the AWS account. Other build environments might be possible, but will require the configuration of toolchains for cross-compilation.
 
 
 author: Paul Howard

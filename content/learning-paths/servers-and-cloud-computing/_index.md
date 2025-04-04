@@ -9,7 +9,7 @@ maintopic: true
 operatingsystems_filter:
 - Android: 2
 - Baremetal: 1
-- Linux: 133
+- Linux: 134
 - macOS: 10
 - Windows: 14
 pinned_modules:
@@ -24,7 +24,7 @@ subjects_filter:
 - Databases: 15
 - Libraries: 8
 - ML: 24
-- Performance and Architecture: 48
+- Performance and Architecture: 49
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -61,7 +61,7 @@ tools_software_languages_filter:
 - C++: 7
 - C/C++: 2
 - Capstone: 1
-- CCA: 5
+- CCA: 6
 - Clair: 1
 - Clang: 10
 - ClickBench: 1
@@ -90,6 +90,7 @@ tools_software_languages_filter:
 - Glibc: 1
 - Go: 2
 - Google Axion: 3
+- Google Cloud: 1
 - GoogleTest: 1
 - HammerDB: 1
 - Herd7: 1
@@ -129,7 +130,7 @@ tools_software_languages_filter:
 - Redis: 3
 - Remote.It: 2
 - RME: 4
-- Runbook: 61
+- Runbook: 62
 - Rust: 2
 - snappy: 1
 - Snort3: 1
