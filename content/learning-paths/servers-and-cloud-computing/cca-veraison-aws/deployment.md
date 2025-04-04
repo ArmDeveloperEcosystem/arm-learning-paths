@@ -11,11 +11,28 @@ Now that your AWS account, internet domain and certificate are prepared, you are
 
 This process is highly automated, but it takes some time, because a number of resources need to be created in AWS. Be prepared for this step to take from 30 to 60 minutes, although there won't be too much for you to do during this time. You will just run a command to kick off the process.
 
-The deployment process is already documented in Veraison's GitHub repository. The instructions below provide links to the parts of that documentation that you will need.
+The deployment process is documented in [Veraison's GitHub repository](https://github.com/veraison/services/blob/main/deployments/aws/README.md). 
+
+You can follow the instructions below to deploy the Veraison services into AWS:
 
 Use the [Bootstrap](https://github.com/veraison/services/tree/main/deployments/aws#bootstrap) process first to clone the Veraison source code from GitHub and set up your build environment. This will take care of installing the dependencies that you need on your development machine.
 
-Once your build environment is bootstrapped, use the [Quickstart](https://github.com/veraison/services/tree/main/deployments/aws#quickstart) procedure to provide some AWS configuration and create the deployment.
+```bash
+git clone https://github.com/veraison/services.git
+cd services/deployments/aws
+make bootstrap
+```
+Once your build environment is bootstrapped, you will use the [Quickstart](https://github.com/veraison/services/tree/main/deployments/aws#quickstart) procedure to provide some AWS configuration and create the deployment.
+
+You need to provide your AWS account-specific configuration that specifies the IDs of the VPC and subnets that will be used for the deployment as well as the CIDR that will be granted access to the deployment. In this deployment you will use `misc/arm.cfg` file for example. Make sure you update `VERAISON_AWS_REGION` to the same region where you created your AWS Certificate for your new domain.`VERAISON_AWS_DNS_NAME` will need to match the domain name you chose. 
+
+Once the account-specific config file is created, define AWS_ACCOUNT_CFG environment variable to point to it and execute make deploy to create the deployment.
+
+```bash
+source env/env.bash
+export AWS_ACCOUNT_CFG=misc/arm.cfg  # replace with path to your config
+make deploy
+```
 
 You do not need to use the end-to-end flow as described in the document. Later in this learning path, you will perform some additional steps to prepare and use the Veraison services.
 
