@@ -69,10 +69,13 @@ g++ -o error-propagation-min error-propagation-min.cpp -frounding-math
 
 Running the new binary on both systems shows that function `f1` produces a value nearly identical to `f2`, and the difference between them is now identical across both Arm64 and x86. 
 
+```bash
+./error-propagation-min 
+```
+
 Here is the output on both systems:
 
 ```output
-./error-propagation-min 
 f1(1.000000e-08) = 0.0000000050
 f2(1.000000e-08) = 0.0000000050
 Difference (f1 - f2) = -1.7887354748e-17
