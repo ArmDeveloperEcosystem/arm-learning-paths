@@ -6,7 +6,9 @@ weight: 3
 layout: learningpathall
 ---
 
-Before building the model, you'll need to obtain the data and model weights. Start by creating the required directories for the two in your cloud instance.
+Before building the model, you'll need to obtain the data and model weights. 
+
+Start by creating directories for the data and model weights on your cloud instance.
 
 ```bash
 cd $HOME
@@ -24,6 +26,7 @@ curl https://rclone.org/install.sh | sudo bash
 ```
 
 You should see a similar output if the tools installed successfully:
+
 ```output
 rclone v1.69.1 has successfully installed.
 Now run "rclone config" for setup. Check https://rclone.org/docs/ for more details.
