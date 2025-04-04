@@ -75,10 +75,6 @@ sw_categories:
       readable_title: Amazon Q Developer CLI
       tests_and_status:
       - ubuntu:latest: passed
-    cyclonedds:
-      readable_title: Cycleone DDS
-      tests_and_status:
-      - ubuntu:latest: passed
     azure-cli:
       readable_title: Azure CLI
       tests_and_status:
