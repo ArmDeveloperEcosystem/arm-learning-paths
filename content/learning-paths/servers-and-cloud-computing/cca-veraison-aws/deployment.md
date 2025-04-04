@@ -18,6 +18,7 @@ You can follow the instructions below to deploy the Veraison services into AWS:
 Use the [Bootstrap](https://github.com/veraison/services/tree/main/deployments/aws#bootstrap) process first to clone the Veraison source code from GitHub and set up your build environment. This will take care of installing the dependencies that you need on your development machine.
 
 ```bash
+cd $HOME
 git clone https://github.com/veraison/services.git
 cd services/deployments/aws
 make bootstrap
