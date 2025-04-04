@@ -63,7 +63,7 @@ You can install Cyclone DDS by building the source code.
 
 Clone the GitHub repository to create a build folder.
 
-```console
+```bash
 cd $HOME
 git clone https://github.com/eclipse-cyclonedds/cyclonedds.git
 ```
