@@ -76,7 +76,7 @@ Here are the build and install commands:
 
 ```console
 cd cyclonedds
-mkdir build ; cd build
+mkdir build && cd build
 cmake -DBUILD_EXAMPLES=ON -DBUILD_TESTING=ON ..
 cmake --build .
 sudo cmake --build . --target install
@@ -108,7 +108,7 @@ Run the commands shown below in each tab in each of your two terminals:
   {{< /tab >}}
 {{< /tabpane >}}
 
-If you observe the following output from each of terminal, Cyclone DDS is running correctly on your Arm Linux machine.
+If you observe the following output from each of the terminals, Cyclone DDS is running correctly on your Arm Linux machine.
 
 {{< tabpane code=true >}}
   {{< tab header="Publisher" language="log">}}
