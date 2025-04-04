@@ -26,7 +26,7 @@ Once your build environment is bootstrapped, you will use the [Quickstart](https
 
 You need to provide your AWS account-specific configuration that specifies the IDs of the VPC and subnets that will be used for the deployment as well as the CIDR that will be granted access to the deployment. In this deployment you will use `misc/arm.cfg` file for example. Make sure you update `VERAISON_AWS_REGION` to the same region where you created your AWS Certificate for your new domain.`VERAISON_AWS_DNS_NAME` will need to match the domain name you chose. 
 
-Once the account-specific config file is created, define AWS_ACCOUNT_CFG environment variable to point to it and execute make deploy to create the deployment.
+Once the account-specific config file is created, define `AWS_ACCOUNT_CFG` environment variable to point to it and then create the deployment.
 
 ```bash
 source env/env.bash
