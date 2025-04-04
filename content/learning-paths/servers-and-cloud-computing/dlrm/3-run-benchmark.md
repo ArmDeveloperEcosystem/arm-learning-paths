@@ -6,14 +6,14 @@ weight: 5
 layout: learningpathall
 ---
 
-In this section, you will run a modified version of the the [MLPerf benchmark for DLRM](https://github.com/mlcommons/inference_results_v4.0/tree/main/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8) and inspect the results.
+In this section, you'll run a modified version of the [MLPerf benchmark for DLRM](https://github.com/mlcommons/inference_results_v4.0/tree/main/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8) and inspect the results.
 
-You will use a nightly wheel for PyTorch which includes optimizations that improve the performance of recommendation models on Arm.
+You'll use a nightly PyTorch wheel that features optimizations designed to improve the performance of recommendation models on Arm.
 
 
 ## Run the benchmark
 
-The scripts to setup and run the benchmark are included for your convenience in a repository. This collection of scripts streamlines the process of building and running the DLRM (Deep Learning Recommendation Model) benchmark from the MLPerf suite tailored for Arm-based systems.
+The scripts to set up and run the benchmark are included for your convenience in a repository. This collection of scripts streamlines the process of building and running the DLRM (Deep Learning Recommendation Model) benchmark from the MLPerf suite tailored for Arm-based systems.
 
 Start by cloning the repository:
 
@@ -29,9 +29,9 @@ export MODEL_DIR=$HOME/model
 
 You can now run the main script `run_dlrm_benchmark.sh`. This script automates the full workflow of executing the MLPerf DLRM benchmark by performing the following steps:
 
-* Initializes and configures MLPerf repositories.
-* Applies necessary patches (from `mlperf_patches/`) and compiles the MLPerf codebase.
-* Uses PyTorch nighty wheel `torch==2.8.0.dev20250324+cpu` with the Arm performance improvements.
+* Initializes and configures the MLPerf repositories.
+* Applies required patches (from `mlperf_patches/`) and compiles the MLPerf codebase.
+* Leverages PyTorch nightly wheel `torch==2.8.0.dev20250324+cpu` with the Arm performance improvements.
 * Converts pretrained weights into a usable model format.
 * Performs INT8 calibration if needed.
 * Executes the offline benchmark test, generating large-scale binary data during runtime.
@@ -41,20 +41,20 @@ cd dlrm-mlperf-lp
 ./run_dlrm_benchmark.sh int8
 ```
 
-The script can take an hour or more to run.
+The benchmark process can take an hour or more to complete.
 
 {{% notice Note %}}
 
-To run the `fp32` offline test, it's recommended to use the pre-generated binary data files from the int8 tests. You will need a CSP instance with enough RAM. For this purpose, the AWS `r8g.24xlarge` is recommended. After running the `int8` test, save the files in the `model` and `data` directories, and copy them to the instance intended for the `fp32` benchmark.
+For the `fp32` offline test, it's recommended to use the pre-generated binary data files from the int8 tests. You will need a CSP instance with sufficient RAM. For this purpose, the AWS `r8g.24xlarge` is recommended. After running the `int8` test, save the files in the `model` and `data` directories, and copy them to the instance intended for the `fp32` benchmark.
 {{% /notice %}}
 
-## Understanding the results
+## Reading the results
 
-As a final step, have a look at the results generated at the end of the script execution.
+Once the script completes, have a look at the results to evaluate performance.
 
-The DLRM model optimizes the Click-Through Rate (CTR) prediction. It is a fundamental task in online advertising, recommendation systems, and search engines. Essentially, the model estimates the probability that a user will click on a given ad, product recommendation, or search result. The higher the predicted probability, the more likely the item is to be clicked. In a server context, the goal is to observe a high throughput of these probabilities.
+The DLRM model optimizes the Click-Through Rate (CTR) prediction. This is a fundamental task in online advertising, recommendation systems, and search engines. Essentially, the model estimates the probability of a user clicking on an ad, product recommendation, or search result. The higher the predicted probability, the more likely the item is to be clicked. In a server context, the goal is to observe a high throughput of these probabilities.
 
-The output is also saved in a log file.
+The output is also saved in a log file:
 
 ```bash
 cat $HOME/results/int8/mlperf_log_summary.txt
@@ -112,4 +112,4 @@ performance_issue_same_index : 0
 performance_sample_count : 204800
 ```
 
-By successfully running the benchmark, you have gained practical experience in evaluating large-scale AI recommendation systems in a reproducible and efficient manner, an essential skill for deploying and optimizing AI workloads on modern platforms.
+By successfully running the benchmark, you've gained practical experience in evaluating large-scale AI recommendation systems in a reproducible and efficient manner, an essential skill for deploying and optimizing AI workloads on modern platforms.

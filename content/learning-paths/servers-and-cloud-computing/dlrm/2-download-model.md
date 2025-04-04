@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-Before building the model, you need to obtain the data and model weights. Start by creating directories for the two in your cloud instance.
+Before building the model, you'll need to obtain the data and model weights. Start by creating the required directories for the two in your cloud instance.
 
 ```bash
 cd $HOME
@@ -15,15 +15,15 @@ mkdir model
 ```
 ## Install rclone
 
-You will use `rclone` to [download the data and model weights](https://github.com/mlcommons/inference/tree/master/recommendation/dlrm_v2/pytorch#download-preprocessed-dataset).
+You'll use `rclone` to [download the data and model weights](https://github.com/mlcommons/inference/tree/master/recommendation/dlrm_v2/pytorch#download-preprocessed-dataset).
 
-Install `rclone` using the bash script.
+Install `rclone` using the bash script:
 
 ```bash
 curl https://rclone.org/install.sh | sudo bash
 ```
 
-You should see a similar output if the tools installed successfully.
+You should see a similar output if the tools installed successfully:
 ```output
 rclone v1.69.1 has successfully installed.
 Now run "rclone config" for setup. Check https://rclone.org/docs/ for more details.
@@ -45,5 +45,5 @@ rclone copy mlc-inference:mlcommons-inference-wg-public/dlrm_preprocessed $HOME/
 rclone copy mlc-inference:mlcommons-inference-wg-public/model_weights $HOME/model/model_weights -P
 ```
 
-Once it finishes, you should see that the `model` and `data` directories are populated. Now that the data is in place, you can proceed to run the benchmark in order to measure the performance of the downloaded DLRM model.
+Once it finishes, you should see that the `model` and `data` directories are populated. With the data in place, you can proceed to run the benchmark in order to measure the performance of the downloaded DLRM model.
 
