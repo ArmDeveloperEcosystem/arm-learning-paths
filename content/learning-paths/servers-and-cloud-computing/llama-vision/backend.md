@@ -6,7 +6,7 @@ layout: learningpathall
 ---
 
 ## Backend Script for Vision Chatbot LLM Server
-Once the virtual environment is activated, create a `backend.py` script using the following content. This script downloads the Llama 3.2 Vision model from Hugging Face, performs 4-bit quantization on the model and then serves it with PyTorch on Arm:
+Once the virtual environment is activated, create a `backend.py` script with the following content. This script downloads the Llama 3.2 Vision model from Hugging Face, performs 4-bit quantization on the model, and serves it with PyTorch on Arm:
 
 ```python
 from flask import Flask, request, Response, stream_with_context

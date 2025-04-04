@@ -84,7 +84,7 @@ Use the following command in a new terminal to start the Streamlit frontend serv
 python3 -m streamlit run frontend.py
 ```
 
-You should see output similar to what is shown below as the frontend server starts successfully:
+You should see output similar to the following as the frontend server starts successfully:
 
 ```output
 Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.

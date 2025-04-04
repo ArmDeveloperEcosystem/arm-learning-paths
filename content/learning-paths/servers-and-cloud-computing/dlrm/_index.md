@@ -1,22 +1,21 @@
 ---
-title: MLPerf Benchmarking on Arm Neoverse V2
+title: Building and Benchmarking DLRM on Arm Neoverse V2 with MLPerf
 
-draft: true
-cascade:
-    draft: true
 
 minutes_to_complete: 90
 
-who_is_this_for: This is an introductory topic for software developers who want to set up a pipeline in the cloud for recommendation models. You will build and run the benchmark using MLPerf and PyTorch.
+who_is_this_for: This is an introductory topic for software developers who want to set up a pipeline in the cloud for recommendation models. You'll build and run the Deep Learning Recommendation Model (DLRM) and benchmark its performance using MLPerf and PyTorch.
 
 learning_objectives:
-    - build the Deep Learning Recommendation Model (DLRM) using a Docker image
-    - run a modified performant DLRMv2 benchmark and inspect the results
+    - Build the Deep Learning Recommendation Model (DLRM). 
+    - Run a modified performant DLRMv2 benchmark and inspect the results.
 
 prerequisites:
-    - An Arm-based cloud instance with at lest 400GB of RAM and 800 GB of disk space
+    - Any [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider (CSP), or an on-premise Arm server with at least 400GB of RAM and 800 GB of disk space.
 
-author: Annie Tallund
+author: 
+    - Annie Tallund
+    - Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -26,22 +25,19 @@ armips:
 tools_software_languages:
     - Docker
     - MLPerf
+    - Google Cloud
 operatingsystems:
     - Linux
 cloud_service_providers: AWS
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL
-        link: PLACEHOLDER MANUAL LINK
+        title: MLPerf Inference Benchmarks for Recommendation
+        link: https://github.com/mlcommons/inference/tree/master/recommendation/dlrm_v2/pytorch
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG
-        link: PLACEHOLDER BLOG LINK
-        type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE
-        link: PLACEHOLDER GENERAL WEBSITE LINK
+        title: MLPerf Inference Benchmark Suite
+        link: https://github.com/mlcommons/inference/tree/master
         type: website
 
 

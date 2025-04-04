@@ -87,6 +87,10 @@ sw_categories:
       tests_and_status:
       - ubuntu:latest: passed
       - fedora:latest: passed
+    cyclonedds:
+      readable_title: Cycleone DDS
+      tests_and_status:
+      - ubuntu:latest: passed
     dotnet:
       readable_title: .NET SDK
       tests_and_status:

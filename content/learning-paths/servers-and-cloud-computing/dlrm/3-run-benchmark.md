@@ -6,43 +6,34 @@ weight: 5
 layout: learningpathall
 ---
 
-In this section, you will run the benchmark and inspect the results.
+In this section, you'll run a modified version of the [MLPerf benchmark for DLRM](https://github.com/mlcommons/inference_results_v4.0/tree/main/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8) and inspect the results.
 
-## Build PyTorch
+You'll use a nightly PyTorch wheel that features optimizations designed to improve the performance of recommendation models on Arm.
 
-You will use a commit hash of the the `Tool-Solutions` repository to set up a Docker container with PyTorch. It will includes releases of PyTorch which enhance the performance of ML frameworks on Arm.
-
-```bash
-cd $HOME
-git clone https://github.com/ARM-software/Tool-Solutions.git
-cd $HOME/Tool-Solutions/
-git checkout f606cb6276be38bbb264b5ea64809c34837959c4
-```
-
-The `build.sh` script builds a wheel and a Docker image containing a PyTorch wheel and dependencies. It then runs the MLPerf container which is used for the benchmark in the next section. This script takes around 20 minutes to finish.
-
-```bash
-cd ML-Frameworks/pytorch-aarch64/
-./build.sh
-```
-
-You now have everything set up to analyze the performance. Proceed to the next section to run the benchmark and inspect the results.
 
 ## Run the benchmark
 
- A repository is set up to run the next steps. This collection of scripts streamlines the process of building and running the DLRM (Deep Learning Recommendation Model) benchmark from the MLPerf suite inside a Docker container, tailored for Arm-based systems.
+The scripts to set up and run the benchmark are included for your convenience in a repository. This collection of scripts streamlines the process of building and running the DLRM (Deep Learning Recommendation Model) benchmark from the MLPerf suite tailored for Arm-based systems.
 
-Start by cloning it.
+Start by cloning the repository:
 
  ```bash
  cd $HOME
  git clone https://github.com/ArmDeveloperEcosystem/dlrm-mlperf-lp.git
  ```
 
-The main script is the `run_dlrm_benchmark.sh`. At a glance, it automates the full workflow of executing the MLPerf DLRM benchmark by performing the following steps:
+Set the environment variables to point to the downloaded data and model weights:
 
-* Initializes and configures MLPerf repositories within the container.
-* Applies necessary patches (from `mlperf_patches/`) and compiles the MLPerf codebase inside the container.
+```
+export DATA_DIR=$HOME/data
+export MODEL_DIR=$HOME/model
+```
+
+You can now run the main script `run_dlrm_benchmark.sh`. This script automates the full workflow of executing the MLPerf DLRM benchmark by performing the following steps:
+
+* Initializes and configures the MLPerf repositories.
+* Applies required patches (from `mlperf_patches/`) and compiles the MLPerf codebase.
+* Leverages PyTorch nightly wheel `torch==2.8.0.dev20250324+cpu` with the Arm performance improvements.
 * Converts pretrained weights into a usable model format.
 * Performs INT8 calibration if needed.
 * Executes the offline benchmark test, generating large-scale binary data during runtime.
@@ -52,24 +43,26 @@ cd dlrm-mlperf-lp
 ./run_dlrm_benchmark.sh int8
 ```
 
-The script can take an hour or more to run.
+The benchmark process can take an hour or more to complete.
 
 {{% notice Note %}}
 
-To run the `fp32` offline test, it's recommended to use the pre-generated binary data files from the int8 tests. You will need a CSP instance with enough RAM. For this purpose, the AWS `r8g.24xlarge` is recommended. After running the `int8` test, save the files in the `model` and `data` directories, and copy them to the instance intended for the `fp32` benchmark.
+For the `fp32` offline test, it's recommended to use the pre-generated binary data files from the int8 tests. You will need a CSP instance with sufficient RAM. For this purpose, the AWS `r8g.24xlarge` is recommended. After running the `int8` test, save the files in the `model` and `data` directories, and copy them to the instance intended for the `fp32` benchmark.
 {{% /notice %}}
 
-## Understanding the results
+## Reading the results
 
-As a final step, have a look at the results generated in a text file.
+Once the script completes, look at the results to evaluate performance.
 
-The DLRM model optimizes the Click-Through Rate (CTR) prediction. It is a fundamental task in online advertising, recommendation systems, and search engines. Essentially, the model estimates the probability that a user will click on a given ad, product recommendation, or search result. The higher the predicted probability, the more likely the item is to be clicked. In a server context, the goal is to observe a high through-put of these probabilities.
+The DLRM model optimizes the Click-Through Rate (CTR) prediction. This is a fundamental task in online advertising, recommendation systems, and search engines. Essentially, the model estimates the probability of a user clicking on an ad, product recommendation, or search result. The higher the predicted probability, the more likely the item is to be clicked. In a server context, the goal is to observe a high throughput of these probabilities.
+
+The output is also saved in a log file:
 
 ```bash
 cat $HOME/results/int8/mlperf_log_summary.txt
 ```
 
-Your output should contain a `Samples per second`, where each sample tells probability of the user clicking a certain ad.
+Your output should contain a `Samples per second` entry, where each sample tells probability of the user clicking a certain ad.
 
 ```output
 ================================================
@@ -121,4 +114,4 @@ performance_issue_same_index : 0
 performance_sample_count : 204800
 ```
 
-On successfully running the benchmark, you’ve gained practical experience in evaluating large-scale AI recommendation systems in a reproducible and efficient manner—an essential skill for deploying and optimizing AI workloads on modern platforms.
+By successfully running the benchmark, you've gained practical experience in evaluating large-scale AI recommendation systems in a reproducible and efficient manner, an essential skill for deploying and optimizing AI workloads on modern platforms.
