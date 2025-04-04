@@ -1,5 +1,5 @@
 ---
-title: Learn about floating point rounding on Arm
+title: Explore floating-point differences between x86 and Arm
 
 draft: true
 cascade:
@@ -7,16 +7,17 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: Developers porting applications from x86 to Arm who observe different floating point values on each platform.
+who_is_this_for: This is an introductory topic for developers who are porting applications from x86 to Arm and want to understand how floating-point behavior differs between these architectures - particularly in the context of numerical consistency, performance, and debugging subtle bugs.
 
 learning_objectives: 
-    - Understand the differences between floating point numbers on x86 and Arm. 
-    - Understand factors that affect floating point behavior.
-    - How to use compiler flags to produce predictable behavior.
+    - Identify key differences in floating-point behavior between the x86 and Arm architectures. 
+    - Recognize the impact of compiler optimizations and instruction sets on floating-point results.
+    - Apply compiler flags and best practices to ensure consistent floating-point behavior across 
+      platforms.
 
 prerequisites:
     - Access to an x86 and an Arm Linux machine.
-    - Basic understanding of floating point numbers.
+    - Familiarity with floating-point numbers.
 
 author: Kieran Hejmadi
 
@@ -38,7 +39,7 @@ shared_between:
 
 further_reading:
     - resource:
-        title: G++ Optimisation Flags 
+        title: G++ Optimization Flags 
         link: https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
         type: documentation
     - resource:
