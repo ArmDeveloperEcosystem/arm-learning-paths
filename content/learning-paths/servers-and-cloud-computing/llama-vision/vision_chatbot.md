@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Set up a LLM based Vision Chatbot"
+title: "Set up an LLM based Vision Chatbot"
 
 weight: 3
 
@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-This Learning Path demonstrates how to build and deploy a vision chatbot using open-source Large Language Models (LLMs) optimized for Arm architecture. The vision chatbot can take both images and text prompts as input, process both and generate the response as text by taking the image input as context. The instructions in this Learning Path have been designed for Arm servers running Ubuntu 24.04 LTS. You will need an Arm server instance with at least 32 cores to run this example. The instructions have been tested on a GCP `c4a-standard-64` instance.
+This Learning Path demonstrates how to build and deploy a vision chatbot using open-source large language models (LLMs) optimized for Arm architecture. The vision chatbot can take both images and text prompts as input, processes them, and generates a text response using the image as context. The instructions in this Learning Path are designed for Arm servers running Ubuntu 24.04 LTS. You will need an Arm server instance with at least 32 cores to run this example. These instructions have been tested on a GCP `c4a-standard-64` instance.
 
 ## Overview
 
@@ -27,7 +27,7 @@ sudo apt install python3-pip python3-venv -y
 
 ## Create a file with your Python dependencies
 
-Using a file editor of your choice, add the following python dependencies to your `requirements.txt` file:
+Using your preferred text editor, add the following python dependencies to your `requirements.txt` file:
 
 ```python
 streamlit
@@ -41,7 +41,7 @@ huggingface_hub
 
 ## Install Python Dependencies
 
-You can now create a Python virtual environment and install the dependencies.
+Now create a Python virtual environment and install the dependencies.
 
 Create a virtual environment:
 ```bash
@@ -68,7 +68,7 @@ pip install torch==2.7.0.dev20250307 --extra-index-url https://download.pytorch.
 
 {{% notice Note %}}
 
-If the specified PyTorch version fails to install, you can try installing any PyTorch nightly build from [PyTorch Nightly Builds](https://download.pytorch.org/whl/nightly/cpu/) released after version 2.7.0.dev20250307.
+If the specified PyTorch version fails to install, try installing any PyTorch nightly build from [PyTorch Nightly Builds](https://download.pytorch.org/whl/nightly/cpu/) released after version 2.7.0.dev20250307.
 {{% /notice %}}
 
 ## Install Torch AO
@@ -79,7 +79,7 @@ Clone the Torch AO repository:
     cd ao
 ```
 
-Checkout to this branch:
+Checkout the required branch:
 ```bash
     git checkout 24c966cb8931507ef389715bc5f19a11c28b0484
 ```
@@ -98,4 +98,4 @@ To use the [Llama 3.2 11B Vision Model](https://huggingface.co/meta-llama/Llama-
 ```
 Enter your Hugging Face token. You can generate a token from [Hugging Face Hub](https://huggingface.co/) by clicking your profile on the top right corner and selecting **Access Tokens**. 
 
-You also need to visit the Hugging Face link printed in the login output and accept the terms by clicking the **Agree and access repository** button or filling out the request-for-access form, depending on the model.
+You must also visit the Hugging Face link printed in the login output and accept the terms by clicking the **Agree and access repository** button or filling out the request-for-access form, depending on the model.
