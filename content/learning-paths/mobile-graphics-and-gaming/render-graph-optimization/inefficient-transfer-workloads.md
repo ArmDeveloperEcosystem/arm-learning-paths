@@ -28,7 +28,7 @@ To find which API calls your application uses to start transfer workloads:
 - Now move to the API Calls view (labelled “API Calls”)
 - Observe the API calls in use.
 
-## Problem: Inefficient clear routines
+## Problem: inefficient clear routines
 
 `vkCmdClearColorImage()` is an inefficient way to clear an image.
 
@@ -38,6 +38,6 @@ A more efficient way to clear an image attachment is to clear the attachment at 
 - Attach the `VkAttachmentDescription` to a `VkRenderPassCreateInfo`
 - Supply this to API `vkCreateRenderPass()`
 
-## Problem: Inefficient image resolutions
+## Problem: inefficient image resolutions
 
-[In the previous section](../textures-with-excessive-resolution), we looked at an issue where unnecessarily large textures were inputs to a render pass. Similar problems can be seen in the context of transfer operations, which should operate over the smallest practicable area. To achieve this, change the values in the `VkBufferCopy` structure passed to `vkCmdCopyBuffer()`.
+In the previous section, you saw an issue where unnecessarily large textures were inputs to a render pass. Similar problems can be seen in the context of transfer operations, which should operate over the smallest practicable area. To achieve this, change the values in the `VkBufferCopy` structure passed to `vkCmdCopyBuffer()`.

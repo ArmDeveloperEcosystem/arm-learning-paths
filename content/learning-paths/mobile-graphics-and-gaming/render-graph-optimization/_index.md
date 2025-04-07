@@ -7,34 +7,34 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: Application developers who wish to improve graphics performance.
+who_is_this_for: Mobile application developers who wish to improve graphics performance.
 
 learning_objectives:
-    - Understand Frame Advisor's Render Graph view
-    - Use the Render Graph view to identify and resolve performance issues in your application
+    - Understand Frame Advisor's Render Graph view.
+    - Use the Render Graph view to identify and resolve performance issues in your application.
 
 prerequisites:
-    - An installed copy of Frame Advisor, part of Arm Performance Studio. [You can download Arm Performance Studio for free.](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads)
-    - A supported Android device, if you wish to analyze your own applications.
-    - Some basic familiarity with Frame Advisor. To get started, read [“Frame Advisor”](../ams/fa) in _Get started with Arm Performance Studio for Mobile_.
+    - Frame Advisor, part of Arm Performance Studio, installed. Refer to the [Arm Performance Studio](/install-guides/ams/) install guide. 
+    - If you wish to analyze your own applications you will need a supported Android device.
+    - Some basic familiarity with Frame Advisor. Review the [Frame Advisor](/learning-paths/mobile-graphics-and-gaming/ams/fa/) section in [Get started with Arm Performance Studio for mobile](/learning-paths/mobile-graphics-and-gaming/ams/).
 
 author: Mark Thurman
 
 further_reading:
     - resource:
-        title: Frame Advisor user guide
+        title: Frame Advisor User Guide
         link: https://developer.arm.com/documentation/102693/latest/
         type: documentation
     - resource:
-        title: Arm Performance Studio (main site)
+        title: Arm Performance Studio
         link: https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio%20for%20Mobile
         type: website
     - resource:
-        title: Learning path – Get started with Arm Performance Studio for mobile
+        title: Get started with Arm Performance Studio for mobile
         link: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/ams/fa
         type: website
     - resource:
-        title: Learning path – Analyze a frame with Frame Advisor
+        title: Analyze a frame with Frame Advisor
         link: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/analyze_a_frame_with_frame_advisor
         type: website
     - resource:

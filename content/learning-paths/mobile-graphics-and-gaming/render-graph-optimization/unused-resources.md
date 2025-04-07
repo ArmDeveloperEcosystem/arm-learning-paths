@@ -16,9 +16,9 @@ This excerpt shows a render pass (`RP0`) which writes three output resources to 
 
 The texture is fed into another execution node, `Tr2`. This is a transfer node, number 2. From here, the data ultimately makes its way into the swapchain – and is therefore seen by the user.
 
-The renderbuffer nodes `RB1.d` and `RB1.s` are different. They are not sent to another execution node. Instead, they are unused.
+The renderbuffer nodes `RB1.d` and `RB1.s` are different. They are not sent to another execution node, they are unused.
 
-*This wastes both bandwidth and power.*
+This wastes both bandwidth and power.
 
 ## Solution
 
