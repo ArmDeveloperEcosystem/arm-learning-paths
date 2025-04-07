@@ -21,3 +21,5 @@ z_local_saved/
 *.iml
 *.xml
 
+# CTags symbol index
+tags
