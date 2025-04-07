@@ -49,7 +49,7 @@ All features of Arm Performance Studio are available free of charge without any 
 
 ## Installation
 
-Arm Performance Studio is supported on Windows, Linux, and macOS hosts. Download the appropriate installer from the [Arm Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0).
+Arm Performance Studio is supported on Windows, Linux, and macOS hosts. Download the appropriate installer from the [Arm Performance Studio Downloads](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads).
 
 Full installation and application launch instructions are given in the Arm Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
 
