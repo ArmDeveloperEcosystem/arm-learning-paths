@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Run a Phi-3 model on your an ARM Windows Device
+## Run a Phi-3 model on your ARM Windows Device
 
 In this section you will learn how to obtain and run on your ARM Windows device (or virtual device) the Phi3-mini model. To do so you will be using a simple model runner program which provides performance metrics.
 
@@ -44,10 +44,9 @@ huggingface-cli download microsoft/Phi-3-mini-4k-instruct-onnx --include cpu_and
 This command downloads the model into a folder called `cpu_and_mobile`.
 
 ### Build model runner (ONNX Runtime GenAI C Example)
-In the previous section you built ONNX RUntime Geerate() API from source.
-The headers and dynamic linked libraries that are built need to be copied pver to appropriate folders (``lib`` and ``inclue``).
+In the previous section you built ONNX RUntime Generate() API from source.
+The headers and dynamic linked libraries that are built need to be copied over to appropriate folders (``lib`` and ``inclue``).
 Building from source is a better practice because the examples usually are updated to run with the latest changes.
-First, cross-compile the model runner to run on Android using the commands below:
 
 ``` bash
 copy onnxruntime\build\Windows\Release\Release\onnxruntime.* onnxruntime-genai\examples\c\lib
@@ -66,14 +65,14 @@ cd build
 cmake --build . --config Release
 ```
 
-After successful build, a binary program called `phi3` will be created in the ''onnxruntime-genai'' folder.
+After a successful build, a binary program called `phi3` will be created in the ''onnxruntime-genai'' folder.
 ```output
 dir examples\c\build\Release\phi3.exe
 ```
 
 #### Run the model
 
-Use the runner you just built to execute the model with the following command:
+Use the runner you just built to execute the model with the following commands:
 
 ``` bash
 cd C:\Users\%USERNAME%

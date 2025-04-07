@@ -10,7 +10,7 @@ learning_objectives:
     - Run a Phi-3 model using ONNX Runtime on an Arm-based Windows laptop.
 
 prerequisites:
-    - A Windows on Arm computer such as the Lenovo Thinkpad X13 running Windows 11 or a Windows on Arm virtual machine
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13 running Windows 11 or a Windows on Arm [virtual machine](https://learn.arm.com/learning-paths/cross-platform/woa_azure/)
 
 author: Barbara Corriero
 
