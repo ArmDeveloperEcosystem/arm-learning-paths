@@ -1,6 +1,10 @@
 ---
 title: Optimizing graphics using Frame Advisor’s render graphs
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: Application developers who wish to improve graphics performance.
