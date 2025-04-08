@@ -146,6 +146,10 @@ sw_categories:
     rust_embedded:
       readable_title: Rust for Embedded Applications
       tests_and_status: []
+    ros2:
+      readable_title: ROS2
+      tests_and_status:
+      - ubuntu:latest: passed
     ssh:
       readable_title: SSH
       tests_and_status: []
