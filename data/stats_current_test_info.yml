@@ -140,6 +140,10 @@ sw_categories:
       readable_title: PyTorch
       tests_and_status:
       - ubuntu:latest: passed
+    ros2:
+      readable_title: ROS2
+      tests_and_status:
+      - ubuntu:latest: passed
     rust:
       readable_title: Rust for Linux Applications
       tests_and_status: []
