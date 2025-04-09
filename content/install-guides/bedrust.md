@@ -3,6 +3,8 @@ title: Bedrust - invoke models on Amazon Bedrock
 minutes_to_complete: 10
 author: Jason Andrews
 
+draft: true
+
 additional_search_terms:
 - rust
 - aws
