@@ -1,25 +1,28 @@
 name: Update Arm Learning Path Roadmap Project Dates
 
 on:
-  project_item:
+  issues:
     types:
-      - created
-      - edited
+      - edited # Triggered when an issue is edited
 
 jobs:
   update-dates:
     runs-on: ubuntu-latest
     steps:
       - name: Update Start Date
-        if: ${{ github.event.changes.fields['Status'] == 'In Progress' }}
+        if: |
+          contains(github.event.changes.fields['Status'].from, 'To Do') &&
+          contains(github.event.changes.fields['Status'].to, 'In Progress')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh api graphql -f query='
           mutation($id: ID!, $date: String!) {
             updateProjectV2ItemFieldValue(
               input: {
-                projectId: "PVT_kwDOBVR2-M4A2QVf",
+                projectId: "PVT_kwDOBVR2-M4A2QVf", # Replace with your actual project ID
                 itemId: $id,
-                fieldId: "PVTF_lADOBVR2-M4A2QVfzgrvSF4",
+                fieldId: "PVTF_lADOBVR2-M4A2QVfzgrvSF4", # Replace with your Start Date field ID
                 value: $date
               }
             ) {
@@ -27,18 +30,22 @@ jobs:
                 id
               }
             }
-          }' -f id="${{ github.event.project_item.node_id }}" -f date="$(date -u +%Y-%m-%d)"
-          
+          }' -f id="${{ github.event.issue.node_id }}" -f date="$(date -u +%Y-%m-%d)"
+
       - name: Update Publish Date
-        if: ${{ github.event.changes.fields['Status'] == 'Done' }}
+        if: |
+          contains(github.event.changes.fields['Status'].from, 'In Progress') &&
+          contains(github.event.changes.fields['Status'].to, 'Done')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh api graphql -f query='
           mutation($id: ID!, $date: String!) {
             updateProjectV2ItemFieldValue(
               input: {
-                projectId: "PVT_kwDOBVR2-M4A2QVf",
+                projectId: "PVT_kwDOBVR2-M4A2QVf", # Replace with your actual project ID
                 itemId: $id,
-                fieldId: "PVTF_lADOBVR2-M4A2QVfzgrvSMA",
+                fieldId: "PVTF_lADOBVR2-M4A2QVfzgrvSMA", # Replace with your Publish Date (end date) field ID
                 value: $date
               }
             ) {
@@ -46,4 +53,4 @@ jobs:
                 id
               }
             }
-          }' -f id="${{ github.event.project_item.node_id }}" -f date="$(date -u +%Y-%m-%d)"
+          }' -f id="${{ github.event.issue.node_id }}" -f date="$(date -u +%Y-%m-%d)"
