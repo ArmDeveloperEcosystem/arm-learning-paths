@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Set "Start Date" when PR is labeled "In Progress"
+      # Step 1: Set "Start Date" when PR is labeled "awaiting_tech_review"
       - name: Set Start Date
-        if: contains(github.event.label.name, 'In Progress') # Trigger only if the label is "In Progress"
+        if: contains(github.event.label.name, 'awaiting_tech_review') # Trigger only if the label is "awaiting_tech_review"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PROJECT_NUMBER: 4 # Replace with your project number
