@@ -1,7 +1,8 @@
 name: Update Arm Learning Path Roadmap Project Dates
 
 on:
-  issues:
+  workflow_dispatch:
+  pull_request:
     types:
       - edited # Triggered when an issue is edited
 
