@@ -29,23 +29,13 @@ tools_software_languages:
 
 further_reading:
     - resource:
-        title: 
-        link: 
-        type: 
+        title: Halide 19.0.0
+        link: https://halide-lang.org/docs/index.html
+        type: website
     - resource:
-        title: 
-        link: 
-        type: 
-    - resource:
-        title: 
-        link: 
-        type: 
-    - resource:
-        title:
-        link: 
-        type: 
-
-
+        title: Halide GitHub
+        link: https://github.com/halide/Halide
+        type: repository  
 
 
 ### FIXED, DO NOT MODIFY

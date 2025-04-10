@@ -14,6 +14,8 @@ A key advantage of Halide lies in its innovative programming model. By clearly d
 
 In this learning path, you will explore Halide’s foundational concepts, set up your development environment, and create your first functional Halide application. By the conclusion, you will understand what makes Halide uniquely suited to efficient image processing and be ready to build your own optimized pipelines.
 
+The companion code for this Learning Path is available [here](https://github.com/dawidborycki/Arm.Halide.Hello-World.git) and [here](https://github.com/dawidborycki/Arm.Halide.AndroidDemo.git)
+
 ## Key Concepts in Halide
 ### Separation of Algorithm and Schedule
 At the core of Halide’s design philosophy is the principle of clearly separating algorithms from schedules. Traditional image-processing programming tightly couples algorithmic logic with execution strategy, complicating optimization and portability. In contrast, Halide explicitly distinguishes these two components:
@@ -142,6 +144,7 @@ After the pipeline processes the image, the output is realized into another Hali
 ## Compilation Instructions
 Compile the program as follows (replace /path/to/halide accordingly):
 ```console
+export DYLD_LIBRARY_PATH=/path/to/halide/lib/libHalide.19.dylib
 g++ -std=c++17 hello-world.cpp -o hello-world \
     -I/path/to/halide/include -L/path/to/halide/lib -lHalide \
     $(pkg-config --cflags --libs opencv4) -lpthread -ldl \
