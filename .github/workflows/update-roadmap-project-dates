@@ -1,0 +1,49 @@
+name: Update Arm Learning Path Roadmap Project Dates
+
+on:
+  project_item:
+    types:
+      - created
+      - edited
+
+jobs:
+  update-dates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Start Date
+        if: ${{ github.event.changes.fields['Status'] == 'In Progress' }}
+        run: |
+          gh api graphql -f query='
+          mutation($id: ID!, $date: String!) {
+            updateProjectV2ItemFieldValue(
+              input: {
+                projectId: "PVT_kwDOBVR2-M4A2QVf",
+                itemId: $id,
+                fieldId: "PVTF_lADOBVR2-M4A2QVfzgrvSF4",
+                value: $date
+              }
+            ) {
+              projectV2Item {
+                id
+              }
+            }
+          }' -f id="${{ github.event.project_item.node_id }}" -f date="$(date -u +%Y-%m-%d)"
+          
+      - name: Update Publish Date
+        if: ${{ github.event.changes.fields['Status'] == 'Done' }}
+        run: |
+          gh api graphql -f query='
+          mutation($id: ID!, $date: String!) {
+            updateProjectV2ItemFieldValue(
+              input: {
+                projectId: "PVT_kwDOBVR2-M4A2QVf",
+                itemId: $id,
+                fieldId: "PVTF_lADOBVR2-M4A2QVfzgrvSMA",
+                value: $date
+              }
+            ) {
+              projectV2Item {
+                id
+              }
+            }
+          }' -f id="${{ github.event.project_item.node_id }}" -f date="$(date -u +%Y-%m-%d)"
