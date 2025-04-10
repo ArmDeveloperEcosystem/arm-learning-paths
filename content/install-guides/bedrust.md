@@ -3,8 +3,6 @@ title: Bedrust - invoke models on Amazon Bedrock
 minutes_to_complete: 10
 author: Jason Andrews
 
-draft: true
-
 additional_search_terms:
 - rust
 - aws
@@ -21,7 +19,7 @@ tool_install: true
 weight: 1
 ---
 
-Bedrust is a command line program you can use to easily invoke models on Amazon Bedrock, a managed service that makes it easy for developers to build and scale generative AI applications using foundation models (FMs) from leading AI model providers .
+Bedrust is a command-line program you can use to easily invoke models on Amazon Bedrock, a managed service that makes it easy for developers to build and scale generative AI applications using foundation models (FMs) from leading AI model providers.
 
 Bedrust is available as Rust source code, and you can build and run it on an Arm Linux computer. 
 
@@ -140,7 +138,7 @@ Just run `bedrust` to invoke the CLI with the default model.
 bedrust 
 ```
 
-You will see the prompt and can start asking questions like `how do I install the aws cli?` to see how it works.
+You will see the prompt and can start asking questions like `how do I install the AWS CLI?` to see how it works.
 
 ```output
 bedrust
@@ -187,7 +185,7 @@ bedrust --help
 The models are printed in the output:
 
 ```output
-A command line tool to invoke and work with Large Language models on AWS, using Amazon Bedrock
+A command-line tool to invoke and work with Large Language models on AWS, using Amazon Bedrock
 
 Usage: bedrust [OPTIONS]
 
