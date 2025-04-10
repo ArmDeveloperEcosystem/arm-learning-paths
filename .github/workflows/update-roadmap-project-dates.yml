@@ -1,56 +1,156 @@
-name: Update Arm Learning Path Roadmap Project Dates
+name: Update Project Custom Fields
 
 on:
-  issues:
+  pull_request:
     types:
-      - edited # Triggered when an issue is edited
+      - labeled
+      - unlabeled
 
 jobs:
-  update-dates:
+  update-fields:
     runs-on: ubuntu-latest
-    steps:
-      - name: Update Start Date
-        if: |
-          contains(github.event.changes.fields['Status'].from, 'To Do') &&
-          contains(github.event.changes.fields['Status'].to, 'In Progress')
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh api graphql -f query='
-          mutation($id: ID!, $date: String!) {
-            updateProjectV2ItemFieldValue(
-              input: {
-                projectId: "PVT_kwDOBVR2-M4A2QVf", # Replace with your actual project ID
-                itemId: $id,
-                fieldId: "PVTF_lADOBVR2-M4A2QVfzgrvSF4", # Replace with your Start Date field ID
-                value: $date
-              }
-            ) {
-              projectV2Item {
-                id
-              }
-            }
-          }' -f id="${{ github.event.issue.node_id }}" -f date="$(date -u +%Y-%m-%d)"
 
-      - name: Update Publish Date
-        if: |
-          contains(github.event.changes.fields['Status'].from, 'In Progress') &&
-          contains(github.event.changes.fields['Status'].to, 'Done')
+    steps:
+      # Step 1: Set "Start Date" when PR is labeled "awaiting_tech_review"
+      - name: Set Start Date
+        if: contains(github.event.label.name, 'awaiting_tech_review') # Trigger only if the label is "awaiting_tech_review"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROJECT_NUMBER: 4 # Replace with your project number
+          START_DATE_FIELD_NAME: "Start Date"
         run: |
-          gh api graphql -f query='
-          mutation($id: ID!, $date: String!) {
+          # GraphQL Query to find the project item ID and "Start Date" field ID
+          QUERY=$(cat <<EOF
+          query {
+            organization(login: "ArmDeveloperEcosystem") {
+              projectV2(number: $PROJECT_NUMBER) {
+                id
+                items(first: 100) {
+                  nodes {
+                    id
+                    content {
+                      ... on PullRequest {
+                        id
+                        url
+                      }
+                    }
+                  }
+                }
+                fields(first: 20) {
+                  nodes {
+                    id
+                    name
+                  }
+                }
+              }
+            }
+          }
+          EOF
+          )
+
+          # Execute the query
+          RESPONSE=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -X POST -d "{\"query\": \"$QUERY\"}" \
+            https://api.github.com/graphql)
+
+          # Extract the project item ID and field ID for "Start Date"
+          PROJECT_ITEM_ID=$(echo $RESPONSE | jq -r \
+            ".data.organization.projectV2.items.nodes[] | select(.content.url == \"${{ github.event.issue.html_url }}\") | .id")
+          START_DATE_FIELD_ID=$(echo $RESPONSE | jq -r \
+            ".data.organization.projectV2.fields.nodes[] | select(.name == \"$START_DATE_FIELD_NAME\") | .id")
+
+          # Update "Start Date" field with the current date
+          CURRENT_DATE=$(date +%Y-%m-%d)
+          UPDATE_MUTATION=$(cat <<EOF
+          mutation {
             updateProjectV2ItemFieldValue(
               input: {
-                projectId: "PVT_kwDOBVR2-M4A2QVf", # Replace with your actual project ID
-                itemId: $id,
-                fieldId: "PVTF_lADOBVR2-M4A2QVfzgrvSMA", # Replace with your Publish Date (end date) field ID
-                value: $date
+                projectId: "${{ secrets.PROJECT_ID }}"
+                itemId: "$PROJECT_ITEM_ID"
+                fieldId: "$START_DATE_FIELD_ID"
+                value: "$CURRENT_DATE"
               }
             ) {
               projectV2Item {
                 id
               }
             }
-          }' -f id="${{ github.event.issue.node_id }}" -f date="$(date -u +%Y-%m-%d)"
+          }
+          EOF
+          )
+
+          curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -X POST -d "{\"query\": \"$UPDATE_MUTATION\"}" \
+            https://api.github.com/graphql
+
+      # Step 2: Set "Publish Date" when PR is labeled "Done"
+      - name: Set Publish Date
+        if: contains(github.event.label.name, 'Done') # Trigger only if the label is "Done"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROJECT_NUMBER: 4 # Replace with your project number
+          PUBLISH_DATE_FIELD_NAME: "Publish Date"
+        run: |
+          # GraphQL Query to find the project item ID and "Publish Date" field ID
+          QUERY=$(cat <<EOF
+          query {
+            organization(login: "ArmDeveloperEcosystem") {
+              projectV2(number: $PROJECT_NUMBER) {
+                id
+                items(first: 100) {
+                  nodes {
+                    id
+                    content {
+                      ... on PullRequest {
+                        id
+                        url
+                      }
+                    }
+                  }
+                }
+                fields(first: 20) {
+                  nodes {
+                    id
+                    name
+                  }
+                }
+              }
+            }
+          }
+          EOF
+          )
+
+          # Execute the query
+          RESPONSE=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -X POST -d "{\"query\": \"$QUERY\"}" \
+            https://api.github.com/graphql)
+
+          # Extract the project item ID and field ID for "Publish Date"
+          PROJECT_ITEM_ID=$(echo $RESPONSE | jq -r \
+            ".data.organization.projectV2.items.nodes[] | select(.content.url == \"${{ github.event.issue.html_url }}\") | .id")
+          PUBLISH_DATE_FIELD_ID=$(echo $RESPONSE | jq -r \
+            ".data.organization.projectV2.fields.nodes[] | select(.name == \"$PUBLISH_DATE_FIELD_NAME\") | .id")
+
+          # Update "Publish Date" field with the current date
+          CURRENT_DATE=$(date +%Y-%m-%d)
+          UPDATE_MUTATION=$(cat <<EOF
+          mutation {
+            updateProjectV2ItemFieldValue(
+              input: {
+                projectId: "${{ secrets.PROJECT_ID }}"
+                itemId: "$PROJECT_ITEM_ID"
+                fieldId: "$PUBLISH_DATE_FIELD_ID"
+                value: "$CURRENT_DATE"
+              }
+            ) {
+              projectV2Item {
+                id
+              }
+            }
+          }
+          EOF
+          )
+
+          curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -X POST -d "{\"query\": \"$UPDATE_MUTATION\"}" \
+            https://api.github.com/graphql
