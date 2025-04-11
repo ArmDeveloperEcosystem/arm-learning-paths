@@ -86,7 +86,7 @@ You can utilize the `llama.cpp` server program and send requests through an Open
 Start the server from the command line, and it listens on port 8080:
 
 ```bash
-./llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -n 2048 -t 64 -c 65536  --port 8080
+./build/bin/llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -n 2048 -t 64 -c 65536  --port 8080
 ```
 
 The output from this command should look like:
