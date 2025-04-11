@@ -7,7 +7,9 @@ weight: 7 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Now that you have seen an example Performance Advisor report, you can use it with your own application. Performance Advisor runs on a Streamline capture file, so the first step is to take a capture with Streamline. Streamline must capture extra frame data from the device, which Performance Advisor needs to generate a report. To capture the extra frame data, you must first run the provided Python script, `streamline_me.py`.
+Now that you have seen a [Performance Advisor example report](/learning-paths/mobile-graphics-and-gaming/ams/pa_example/), you can use it to capture data from your own application.
+
+Performance Advisor runs on a Streamline capture file, so the first step is to take a capture with Streamline. Streamline must capture extra frame data from the device, which Performance Advisor needs to generate a report. To capture the extra frame data, you must first run the provided Python script, `streamline_me.py`.
 
 This script does the following:
 
@@ -17,10 +19,9 @@ This script does the following:
 
 ## Before you begin
 
-Performance Advisor uses a Python script to connect to your device. You will need `Python 3.6` or later installed on your host machine.
+Performance Advisor uses a Python script to connect to your device. You will need `Python 3.8` or later installed on your host machine.
 
 Build your application, and setup the Android device as described in [Setup tasks](/learning-paths/mobile-graphics-and-gaming/ams/setup_tasks/).
-
 
 ## Connect to the device
 
@@ -31,16 +32,17 @@ Build your application, and setup the Android device as described in [Setup task
     ```
 
 1. Run the script, enabling frame boundaries, with:
+
     ```console
     python3 streamline_me.py --lwi-mode=counters 
     ```
-    To capture the Vulkan API, you also need to include the `--lwi-api=vulkan` option.
 
 {{% notice Tip %}}
 To see all available options, use `python3 streamline_me.py --help`
 {{% /notice %}}
 
 1. The script returns a numbered list of the Android package names for the debuggable applications that are installed on your device. Enter the number of the application you want to profile.
+
     ```python
     Searching for devices:
     RZ8MC03VVEW / SM-A505FN found
@@ -59,6 +61,7 @@ To see all available options, use `python3 streamline_me.py --help`
      5) com.sample.texturedteapot
      0) Exit script
     ```
+
     The script identifies the GPU in the device, installs the daemon application and layer library, then waits for you to complete the capture in Streamline.
 
 1. Leave the terminal window open, as you need to come back to it after the capture is complete, to stop the script. When the script ends, any captured screenshots are saved to the directory you specified, and the daemon application and layer library are uninstalled from the device. Do not unplug the device until the script has ended.
@@ -82,14 +85,22 @@ See the [Get started with Performance Advisor Tutorial](https://developer.arm.co
 1. In the terminal window, navigate to the location where you stored the Streamline capture file (`.apc`).
 
 1. Run Streamline's  `streamline-cli` command with the `-pa` option on the Streamline capture file to generate the report. The default name is `report.html`.
+
     ```console
     streamline-cli -pa <options> my_capture.apc
     ```
+
     The available options are documented in the [Performance Advisor User Guide](https://developer.arm.com/documentation/102009/latest/Command-line-options/The-pa-command), else can be seen with:
+
     ```console
     streamline-cli -pa -h
     ```
-    They can also be passed within an [options file](https://developer.arm.com/documentation/102009/latest/Command-line-options/The-pa-command/pa-command-line-options-file).
+
+    To pass a list of options in a separate file to `Streamline-cli -pa`, use:
+
+    ```
+    Streamline-cli -pa <capture.apc> "@<options-file>"
+    ```
 
 ## Generate a JSON performance report
 
