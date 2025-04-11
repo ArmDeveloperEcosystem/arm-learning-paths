@@ -12,11 +12,11 @@ Arm CPUs are widely used in  AI/ML workloads on Kubernetes. In this Learning Pat
 
 First, you'll bring up an initial Kubernetes cluster with an amd64 node running an Ollama Deployment and Service (see **1:  Initial Cluster (amd64)** in the image below).
 
-Next, you'll expand the cluster by adding an arm64 deployment and service to it, forming a hybrid cluster (**2: Hybrid Cluster amd64/arm64**). This allows you to test both architectures together, and separately, to investigate performance. 
+Next, you'll expand the cluster by adding an arm64 deployment and service to it, forming a hybrid cluster (**2: Hybrid Cluster (amd64/arm64)**). This allows you to test both architectures together, and separately, to investigate performance. 
 
-Once satisfied with arm64 performance, you can remove the amd64-specific node, deployment, and service, which then completes your migration to an arm64-only cluster (**3: Migrated Cluster (arm64)**.
+Once satisfied with arm64 performance, you can remove the amd64-specific node, deployment, and service, which then completes your migration to an arm64-only cluster (**3: Migration to arm64 complete**).
 
-![Project Overview](images/general_flow.png)
+![Project Overview](images/general_flow_v2.png)
 
 Once you've seen how easy it is to add arm64 nodes to an existing cluster, you will be ready to  explore arm64 nodes for other workloads in your environment.
  
