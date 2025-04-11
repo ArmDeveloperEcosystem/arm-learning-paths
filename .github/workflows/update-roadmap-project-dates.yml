@@ -35,22 +35,28 @@ jobs:
               query($owner: String!, $repo: String!, $prNumber: Int!) {
                 repository(owner: $owner, name: $repo) {
                   pullRequest(number: $prNumber) {
-                    projectItems(first: 10) {
-                      nodes {
-                        id
-                        fieldValues(first: 10) {
-                          nodes {
-                            field {
-                              name
-                            }
-                            value
+                   projectItems(first: 10) {
+                    nodes {
+                      id
+                      fieldValues(first: 10) {
+                        nodes {
+                          field {
+                            name
+                          }
+                          ... on ProjectV2ItemFieldDateValue {
+                            date
+                          }
+                          ... on ProjectV2ItemFieldTextValue {
+                            text
+                          }
+                          ... on ProjectV2ItemFieldSingleSelectValue {
+                            name
                           }
                         }
                       }
                     }
-                  }
-                }
-              }
+                  }      
+
             `, {
               owner: context.repo.owner,
               repo: context.repo.repo,
