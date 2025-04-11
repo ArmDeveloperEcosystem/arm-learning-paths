@@ -39,7 +39,8 @@ Run `make` to build it:
 
 ```bash
 cd llama.cpp
-make GGML_NO_LLAMAFILE=1 -j$(nproc)
+cmake -B build
+cmake --build build --config Release
 ```
 
 Check that `llama.cpp` has built correctly by running the help command:
