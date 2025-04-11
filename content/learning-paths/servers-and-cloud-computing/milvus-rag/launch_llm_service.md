@@ -73,7 +73,7 @@ The GGUF model format, introduced by the Llama.cpp team, uses compression and qu
 To requantize the model, run:
 
 ```bash
-./llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0_8_8
+./build/bin/llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0
 ```
 
 This outputs a new file, `dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf`, which contains reconfigured weights that allow `llama-cli` to use SVE 256 and MATMUL_INT8 support.
