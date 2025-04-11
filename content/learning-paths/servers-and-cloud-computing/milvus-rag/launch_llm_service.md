@@ -46,7 +46,7 @@ cmake --build build --config Release
 Check that `llama.cpp` has built correctly by running the help command:
 
 ```bash
-./llama-cli -h
+./build/bin/llama-cli -h
 ```
 
 If `llama.cpp` has been built correctly, you will see the help option displayed. The output snippet looks like this:
