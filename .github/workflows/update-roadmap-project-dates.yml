@@ -16,7 +16,7 @@ jobs:
       - name: Run GitHub Script
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.PROJECT_TOKEN }}  # replace with your token secret name
+          github-token: ${{ secrets.GITHUB_TOKEN }}  # replace with your token secret name
           script: |
             const projectId = "PVT_kwDOBVR2-M4A2QVf"; // Replace with your actual project node ID
             const fieldStartId = "PVTF_lADOBVR2-M4A2QVfzgrvSF4"; // Replace with Start Date field node ID
