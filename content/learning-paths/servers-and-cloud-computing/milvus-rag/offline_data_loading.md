@@ -45,7 +45,7 @@ Now, append the following code to `zilliz-llm-rag.py` and save the contents:
 
 ```python
 collection_name = "my_rag_collection"
-embedding_dim = "384"
+embedding_dim = 384
 
 if milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
