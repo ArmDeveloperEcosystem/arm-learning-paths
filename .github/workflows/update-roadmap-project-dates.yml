@@ -22,7 +22,12 @@ jobs:
             const fieldStartId = "PVTF_lADOBVR2-M4A2QVfzgrvSF4"; // Replace with Start Date field node ID
             const fieldPublishId = "PVTF_lADOBVR2-M4A2QVfzgrvSMA"; // Replace with Publish Date field node ID
 
-            const label = context.payload.label.name;
+            const label = context.payload.label ? context.payload.label.name : null;
+
+            if (!label) {
+            console.log("No label found in the payload.");
+            return;
+            }
             const prNodeId = context.payload.pull_request.node_id;
 
             // Get the project item for this PR
