@@ -150,8 +150,8 @@ Add the Arm Performance Libraries `apt` package repository to your system:
 ```bash
 sudo apt update
 . /etc/os-release
-curl https://developer.arm.com/packages/arm-toolchains:$ID-${VERSION_ID%%.*}/$VERSION_CODENAME/Release.key | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc
-echo "deb https://developer.arm.com/packages/arm-toolchains:$ID-${VERSION_ID%%.*}/$VERSION_CODENAME/ ./" | sudo tee /etc/apt/sources.list.d/developer-arm-com.list
+curl "https://developer.arm.com/packages/arm-toolchains:${NAME,,}-${VERSION_ID/%.*/}/${VERSION_CODENAME}/Release.key" | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc
+echo "deb https://developer.arm.com/packages/arm-toolchains:${NAME,,}-${VERSION_ID/%.*/}/${VERSION_CODENAME}/ ./" | sudo tee /etc/apt/sources.list.d/developer-arm-com.list
 sudo apt update
 ```
 
