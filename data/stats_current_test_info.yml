@@ -1,7 +1,7 @@
 summary:
-  content_total: 342
+  content_total: 350
   content_with_all_tests_passing: 31
-  content_with_tests_enabled: 57
+  content_with_tests_enabled: 61
 sw_categories:
   automotive: {}
   cross-platform:
@@ -73,12 +73,14 @@ sw_categories:
       tests_and_status: []
     aws-q-cli:
       readable_title: Amazon Q Developer CLI
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     azure-cli:
       readable_title: Azure CLI
       tests_and_status:
       - ubuntu:latest: passed
+    bedrust:
+      readable_title: Bedrust - invoke models on Amazon Bedrock
+      tests_and_status: []
     bolt:
       readable_title: BOLT
       tests_and_status: []
@@ -88,9 +90,8 @@ sw_categories:
       - ubuntu:latest: passed
       - fedora:latest: passed
     cyclonedds:
-      readable_title: Cycleone DDS
-      tests_and_status:
-      - ubuntu:latest: passed
+      readable_title: Cyclone DDS
+      tests_and_status: []
     dotnet:
       readable_title: .NET SDK
       tests_and_status:
@@ -142,6 +143,9 @@ sw_categories:
       readable_title: PyTorch
       tests_and_status:
       - ubuntu:latest: passed
+    ros2:
+      readable_title: ROS - Robot Operating System
+      tests_and_status: []
     rust:
       readable_title: Rust for Linux Applications
       tests_and_status: []

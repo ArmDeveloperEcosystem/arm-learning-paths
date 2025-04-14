@@ -12,9 +12,9 @@ To follow the instructions for this Learning Path, you will need an Arm server r
 
 ## What is vLLM?
 
-[vLLM](https://github.com/vllm-project/vllm) stands for Virtual Large Language Model, and is a fast and easy-to-use library for inference and model serving. 
+[vLLM](https://github.com/vllm-project/vllm) stands for Virtual Large Language Model, and is a fast and easy-to-use library for inference and model serving.
 
-You can use vLLM in batch mode, or by running an OpenAI-compatible server. 
+You can use vLLM in batch mode, or by running an OpenAI-compatible server.
 
 In this Learning Path, you will learn how to build vLLM from source and run inference on an Arm-based server, highlighting its effectiveness.
 
@@ -23,8 +23,8 @@ In this Learning Path, you will learn how to build vLLM from source and run infe
 First, ensure your system is up-to-date and install the required tools and libraries:
 
 ```bash
-sudo apt-get update -y 
-sudo apt-get install -y curl ccache git wget vim numactl gcc-12 g++-12 python3 python3-pip python3-venv python-is-python3 libtcmalloc-minimal4 libnuma-dev ffmpeg libsm6 libxext6 libgl1 libssl-dev pkg-config 
+sudo apt-get update -y
+sudo apt-get install -y curl ccache git wget vim numactl gcc-12 g++-12 python3 python3-pip python3-venv python-is-python3 libtcmalloc-minimal4 libnuma-dev ffmpeg libsm6 libxext6 libgl1 libssl-dev pkg-config
 ```
 
 Set the default GCC to version 12:
@@ -58,7 +58,7 @@ python -m venv env
 source env/bin/activate
 ```
 
-Your command-line prompt is prefixed by `(env)`, which indicates that you are in the Python virtual environment. 
+Your command-line prompt is prefixed by `(env)`, which indicates that you are in the Python virtual environment.
 
 Now update Pip and install Python packages:
 
@@ -67,7 +67,7 @@ pip install --upgrade pip
 pip install py-cpuinfo
 ```
 
-### How do I download vLLM and build it? 
+### How do I download vLLM and build it?
 
 First, clone the vLLM repository from GitHub:
 
@@ -78,9 +78,9 @@ git checkout 72ff3a968682e6a3f7620ab59f2baf5e8eb2777b
 ```
 
 {{% notice Note %}}
-The Git checkout specifies a specific hash known to work for this example. 
+The Git checkout specifies a specific hash known to work for this example.
 
-Omit this command to use the latest code on the main branch. 
+Omit this command to use the latest code on the main branch.
 {{% /notice %}}
 
 Install the Python packages for vLLM:
