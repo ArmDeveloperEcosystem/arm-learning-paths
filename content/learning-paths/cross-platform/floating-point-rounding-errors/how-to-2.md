@@ -8,14 +8,13 @@ layout: learningpathall
 
 ## What are the differences in behavior between x86 and Arm floating point?
 
-Architecture and standards define floating point overflows and truncations in different ways. 
+Although both x86 and Arm generally follow the IEEE 754 standard for floating-point representation, their behavior in edge cases — like overflow and truncation — can differ due to implementation details and instruction sets.
 
-You can see this by comparing an example application on an x86 and an Arm Linux system. 
+You can see this by comparing an example application on both an x86 and an Arm Linux system. 
 
-You can use any Linux systems for this example. If you are using AWS, you can use EC2 instance types
-`t3.micro` and `t4g.small` running Ubuntu 24.04.
+Run this example on any Linux system with x86 and Arm architecture; on AWS, use EC2 instance types `t3.micro` and `t4g.small` with Ubuntu 24.04.
 
-To learn about floating point differences, use an editor to copy and paste the C++ code below into a new file named `converting-float.cpp`.
+To learn about floating-point differences, use an editor to copy and paste the C++ code below into a new file named `converting-float.cpp`:
 
 ```cpp
 #include <iostream>
@@ -61,7 +60,7 @@ int main() {
 }
 ```
 
-If you need to install the `g++` compiler, run the commands below. 
+If you need to install the `g++` compiler, run the commands below:
 
 ```bash
 sudo apt update
@@ -76,23 +75,25 @@ The compile command is the same on both systems.
 g++ converting-float.cpp -o converting-float 
 ```
 
-For easy comparison, the image below shows the x86 output (left) and Arm output (right). The  highlighted lines show the difference in output. 
+For easy comparison, the image below shows the x86 output (left) and Arm output (right). The  highlighted lines show the difference in output: 
 
 ![differences](./differences.png)
 
-As you can see, there are several cases where different behavior is observed. For example when trying to convert a signed number to a unsigned number or dealing with out-of-bounds numbers. 
+As you can see, there are several cases where different behavior is observed. For example when trying to convert a signed number to an unsigned number or dealing with out-of-bounds numbers. 
 
 ## Removing hardcoded values with macros
 
 The above differences show that explicitly checking for specific values will lead to unportable code. 
 
-For example, consider the function below. The code checks if the value is 0. The value an x86 machine will convert a floating point number that exceeds the maximum 32-bit float value. This is different from Arm behavior leading to unportable code. 
+For example, the function below checks if the casted result is `0`. This can be misleading — on x86, casting an out-of-range floating-point value to `uint32_t` may wrap to `0`, while on Arm it may behave differently. Relying on these results makes the code unportable.
+
+  
 
 ```cpp
 void checkFloatToUint32(float num) {
     uint32_t castedNum = static_cast<uint32_t>(num);
     if (castedNum == 0) {
-        std::cout << "The casted number is 0, indicating the float could out of bounds for uint32_t." << std::endl;
+        std::cout << "The casted number is 0, indicating that the float is out of bounds for uint32_t." << std::endl;
     } else {
         std::cout << "The casted number is: " << castedNum << std::endl;
     }

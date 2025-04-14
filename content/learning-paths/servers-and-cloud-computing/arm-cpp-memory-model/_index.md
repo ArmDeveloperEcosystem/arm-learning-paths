@@ -1,21 +1,17 @@
 ---
 title: Learn about the C++ memory model for porting applications to Arm
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for C++ developers porting applications from x86 to Arm and optimizing performance.
 
 learning_objectives: 
-    - Learn about the C++ memory model.
-    - Learn about the differences between the Arm and x86 memory model.
-    - Learn best practices for writing C++ on Arm to avoid race conditions.
+    - Describe at a high level what a memory model does, and the types of memory ordering.
+    - Describe the differences between the Arm and x86 memory model.
+    - Employ best practices for writing C++ on Arm to avoid race conditions.
 
 prerequisites:
-    - Access to an x86 and Arm cloud instance (virtual machine).
+    - Access to an x86 and an Arm cloud instance (virtual machine).
     - Proficiency in C++ programming.
 
 author: Kieran Hejmadi
@@ -27,11 +23,11 @@ armips:
     - Neoverse
 tools_software_languages:
     - C++
-    - ThreadSanitizer (TSan)
+    - TSan
+    - Runbook
 operatingsystems:
     - Linux
-    - Runbook
-
+   
 further_reading:
     - resource:
         title: C++ Memory Order Reference Manual 
@@ -39,7 +35,7 @@ further_reading:
         type: documentation
     - resource:
         title: Thread Sanitizer Manual 
-        link: Phttps://github.com/google/sanitizers/wiki/threadsanitizercppmanual
+        link: https://github.com/google/sanitizers/wiki/threadsanitizercppmanual
         type: documentation
 
 

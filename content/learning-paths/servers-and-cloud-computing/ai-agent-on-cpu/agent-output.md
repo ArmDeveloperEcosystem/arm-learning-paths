@@ -153,7 +153,11 @@ Please write your prompt here:
 
 When you are presented with `Please write your prompt here:` test it with an input prompt. 
 
-Enter `What is the current time?`
+Enter:
+
+```console
+What is the current time?
+```
 
 As part of the prompt, a list of executable functions is sent to the LLM, allowing the agent to select the appropriate function:
 

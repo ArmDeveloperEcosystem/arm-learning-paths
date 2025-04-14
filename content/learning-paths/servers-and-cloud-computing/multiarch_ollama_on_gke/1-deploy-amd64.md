@@ -6,14 +6,11 @@ weight: 3
 layout: learningpathall
 ---
 
-## Overview
+## Deployment and service
 
-Any easy way to experiment with Arm64 nodes in your K8s cluster is to deploy Arm64 nodes and pods alongside your existing amd64 node and pods. In this section of the tutorial, you'll bootstrap the cluster with Ollama on amd64, to simulate an "existing" K8s cluster running Ollama.
+In this section, you'll bootstrap the cluster with Ollama on amd64, simulating an existing Kubernetes (K8s) cluster running Ollama. In the next section, you'll add arm64 nodes alongside the amd64 nodes for performance comparison. 
 
-### Deployment and Service
-
-
-1. Copy the following YAML, and save it to a file called *namespace.yaml*:
+1. Use a text editor to copy the following YAML and save it to a file called `namespace.yaml`:
 
 ```yaml
 apiVersion: v1
@@ -22,9 +19,9 @@ metadata:
   name: ollama
 ```
 
-When the above is applied, a new K8s namespace named *ollama* will be created.  This is where all the K8s object created under this tutorial will live.
+Applying this YAML creates a new namespace called `ollama`, which contains all subsequent K8s objects.
 
-2. Copy the following YAML, and save it to a file called *amd64_ollama.yaml*:
+2. Use a text editor to copy the following YAML and save it to a file called `amd64_ollama.yaml`:
 
 ```yaml
 apiVersion: apps/v1
@@ -80,45 +77,46 @@ spec:
 
 When the above is applied:
 
-* A new Deployment called *ollama-amd64-deployment* is created.  This deployment pulls a multi-architectural (both amd64 and arm64) image [ollama image from Dockerhub](https://hub.docker.com/layers/ollama/ollama/0.6.1/images/sha256-28b909914d4e77c96b1c57dea199c60ec12c5050d08ed764d9c234ba2944be63).
+* A new deployment called `ollama-amd64-deployment` is created.  This deployment pulls a multi-architecture [Ollama image](https://hub.docker.com/layers/ollama/ollama/0.6.1/images/sha256-28b909914d4e77c96b1c57dea199c60ec12c5050d08ed764d9c234ba2944be63) from DockerHub. 
 
-Of particular interest is the *nodeSelector* *kubernetes.io/arch*, with the value of *amd64*.  This will ensure that this deployment only runs on amd64-based nodes, utilizing the amd64 version of the Ollama container image. 
+Of particular interest is the `nodeSelector` `kubernetes.io/arch`, with the value of `amd64`.  This ensures that the deployment only runs on amd64 nodes, utilizing the amd64 version of the Ollama container image. 
 
-* A new load balancer Service *ollama-amd64-svc* is created, which targets all pods with the *arch: amd64* label (our amd64 deployment creates these pods.)
+* A new load balancer service `ollama-amd64-svc` is created, targeting all pods with the `arch: amd64` label (the amd64 deployment creates these pods).
 
-A *sessionAffinity* tag was added to this Service to remove sticky connections to the target pods; this removes persistent connections to the same pod on each request.
+A `sessionAffinity` tag is added to this service to remove sticky connections to the target pods. This removes persistent connections to the same pod on each request.
 
-### Apply the amd64 Deployment and Service
+### Apply the amd64 deployment and service
 
-1. Run the following command to apply the namespace, deployment, and service definitions:
+1. Run the following commands to apply the namespace, deployment, and service definitions:
 
 ```bash
 kubectl apply -f namespace.yaml
 kubectl apply -f amd64_ollama.yaml
 ```
 
-You should get the following responses back:
+You see the following responses:
 
-```bash
+```output
 namespace/ollama created
 deployment.apps/ollama-amd64-deployment created
 service/ollama-amd64-svc created
 ```
-2. Optionally, set the *default Namespace* to *ollama* so you don't need to specify the namespace each time, by entering the following:
+
+2. Optionally, set the `default Namespace` to `ollama` to simplify future commands:
 
 ```bash
 config set-context --current --namespace=ollama
 ```
 
-3. Get the status of the pods, and the services, by running the following:
+3. Get the status of nodes, pods and services by running:
 
-```commandline
+```bash
 kubectl get nodes,pods,svc -nollama 
 ```
 
 Your output should be similar to the following, showing one node, one pod, and one service:
 
-```commandline
+```output
 NAME                                              STATUS   ROLES    AGE   VERSION
 node/gke-ollama-on-arm-amd64-pool-62c0835c-93ht   Ready    <none>   77m   v1.31.6-gke.1020000
 
@@ -129,16 +127,19 @@ NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)
 service/ollama-amd64-svc   LoadBalancer   1.2.2.3         1.2.3.4        80:30668/TCP   16m
 ```
 
-When the pods show *Running* and the service shows a valid *External IP*, we're ready to test the Ollama amd64 service!
+When the pods show `Running` and the service shows a valid `External IP`, you're ready to test the Ollama amd64 service.
 
-### Test the Ollama on amd64 web service 
+### Test the Ollama web service on amd64
 
 {{% notice Note %}}
-The following utility, modelUtil.sh, is provided as a convenient utility to accompany this learning path.  It's simply a shell wrapper for kubectl, utilizing the utilities [curl](https://curl.se/), [jq](https://jqlang.org/), [bc](https://www.gnu.org/software/bc/), and [stdbuf](https://www.gnu.org/software/coreutils/manual/html_node/stdbuf-invocation.html).  Make sure you have these shell utilities installed before running.
+The following utility `model_util.sh` is provided for convenience. 
+
+It's a wrapper for kubectl, utilizing [curl](https://curl.se/), [jq](https://jqlang.org/), [bc](https://www.gnu.org/software/bc/), and [stdbuf](https://www.gnu.org/software/coreutils/manual/html_node/stdbuf-invocation.html).  
+
+Make sure you have these shell utilities installed before running.
 {{% /notice %}}
 
-
-4. Copy the following shell script, and save it to a file called *model_util.sh*:
+4. Use a text editor to copy the following shell script and save it to a file called `model_util.sh`:
 
 ```bash
 #!/bin/bash
@@ -233,13 +234,13 @@ echo;kubectl logs --timestamps  -l app=ollama-multiarch -nollama --prefix  | sor
 echo
 ```
 
-5. Make it executable with the following command:
+5. Make the script executable with the following command:
 
 ```bash
 chmod 755 model_util.sh
 ```
 
-This shell script conveniently bundles many test and logging commands into a single place, making it easy to test, troubleshoot, and view the services we expose in this tutorial. 
+The script conveniently bundles many test and logging commands into a single place, making it easy to test, troubleshoot, and view services.
 
 6. Run the following to make an HTTP request to the amd64 Ollama service on port 80:
 
@@ -247,9 +248,9 @@ This shell script conveniently bundles many test and logging commands into a sin
 ./model_util.sh amd64 hello
 ```
 
-You should get back the HTTP response, as well as the logline from the pod that served it:
+You get back the HTTP response, as well as the log line from the pod that served it:
 
-```commandline
+```output
 Server response:
 Using service endpoint 34.55.25.101 for hello on amd64
 Ollama is running
@@ -259,6 +260,6 @@ Pod log output:
 [pod/ollama-amd64-deployment-cbfc4b865-msftf/ollama-multiarch] 2025-03-25T21:13:49.022522588Z
 ```
 
-Success is defined specifically by seeing the words "Ollama is running".  If you see this in your output, then congrats, you've successfully bootstrapped your GKE cluster with an amd64 node, running a Deployment with the Ollama multi-architecture container instance!
+If you see the output `Ollama is running` you have successfully bootstrapped your GKE cluster with an amd64 node, running a deployment with the Ollama multi-architecture container instance.
 
-Next, we'll do the same thing, but with an Arm node. 
+Continue to the next section to do the same thing, but with an Arm node. 

@@ -6,11 +6,13 @@ weight: 4
 layout: learningpathall
 ---
 
-In this section, you will try the Qwen model in action using a demo application using a Android Package Kit (APK)
-
 ## Clone MNN repo
 
-A fork of the upstream MNN repository is set up to enable building the app as an Android Studio project. Run the following to clone the repository and checkout the source tree:
+In this section, you will run the Qwen model in action using a demo application using a Android Package Kit (APK).
+
+A fork of the upstream MNN repository is set up to enable building the app as an Android Studio project. 
+
+Run the following commands to clone the repository and checkout the source tree:
 
 ```bash
 cd $HOME
@@ -19,19 +21,25 @@ cd MNN
 git checkout origin/llm_android_demo
 ```
 
-## Build the app using Android Studio
+## Build the App Using Android Studio
+
+You can use Android Studio to build the app and create an APK.
 
 ### Open project and build
 
-Open Android Studio. Go to **File > Open**. Navigate to the MNN repository you just cloned. Expand the `transformers/llm/engine/` directories, select the `android` one and click `Open`.
+Open Android Studio. 
 
-This will trigger a build of the project, and you should see a similar output on completion:
+Go to **File > Open**. 
+
+Navigate to the cloned MNN repository, expand the `transformers/llm/engine/` directories, select the `android` directory, and click `Open`.
+
+This triggers a build of the project, and you should see output similar to the following on completion:
 
 ```output
 BUILD SUCCESSFUL in 1m 42s
 ```
 
-### Generate and run the APK
+### Generate and Run the APK
 
 Navigate to **Build > Generate App Bundles or APKs**. Select **Generate APKs**.
 
