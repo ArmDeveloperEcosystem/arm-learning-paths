@@ -10,7 +10,7 @@ jobs:
           ref: ${{ steps.vars.outputs.branch-name }}
       - name: Get all changed markdown files
         id: changed-markdown-files
-        uses: tj-actions/changed-files@v44
+        uses: tj-actions/changed-files@v46
         with:
           files: |
              **.md
