@@ -95,7 +95,7 @@ Install `topdown-tool` in `/usr/local/bin`:
 
 ```bash
 cd telemetry-solution/tools/topdown_tool
-sudo pip install -e .
+pip install -e .
 ```
 
 3. Confirm you can run `top-down` using the `version` command:
