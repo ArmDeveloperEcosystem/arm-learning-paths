@@ -1,16 +1,18 @@
 ---
-title: Example
+title: Baseline loop implementation
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Example
+## Understand the baseline loop
 
-The following `C++` snippet takes user input as the loop size so that the loop size, `max_loop_size`, is only known at runtime. This initialises an array of size, , `max_loop_size` with the value for each element corresponding to the index position. The function, `foo`, loops through each element to print out the sum of all elements. 
+The following C++ program takes user input as the loop size so that the loop size `max_loop_size` is only known at runtime. This initializes an array of size `max_loop_size` with the value for each element corresponding to the index position. 
 
-Copy the snippet below into a file named, `no-context.cpp`. 
+The function `foo()` loops through each element to print out the sum of all elements. Without any boundary information provided to the compiler, it must generate conservative code that works for any loop size. 
+
+Use a text editor to copy the code below into a file named `no-context.cpp`. 
 
 ```cpp
 #include <iostream>
@@ -48,18 +50,24 @@ int main() {
 }
 ```
 
-Compiling using the following command. 
+Compile the program using the following command: 
 
 ```bash
-g++ -O3 -march=armv8-a+simd no_context.cpp -o no_context
+g++ -O3 -march=armv8-a+simd no-context.cpp -o no-context
 ```
 
-Running the example with the number 4000 leads to the following results. You will see runtime variability depending on which platform you run this on. 
+Run the example with 40000 as the input:
+
+```bash
+./no-context 
+```
+
+You see the output below, your runtime will vary depending on the computer you are using.
 
 ```output
-./no_context 
 Enter a value for max_loop_size (must be a multiple of 4): 40000
 Sum: 799980000
 Time taken by foo: 138100 nanoseconds
 ```
 
+Continue to the next section to see how to use developer knowledge of loops to improve performance. 
