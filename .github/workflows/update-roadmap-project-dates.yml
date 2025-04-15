@@ -35,7 +35,7 @@ jobs:
 
       - name: Update Project Board Dates
         uses: actions/github-script@v6
-        env:
+        with:
           PROJECT_TOKEN: ${{ secrets.PROJECT_TOKEN }}
           script: |
             const { Octokit } = require('@octokit/rest');
