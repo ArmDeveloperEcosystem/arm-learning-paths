@@ -39,8 +39,8 @@ Check the `Timeline` check box create a timeline view.  Choose the number of ite
 To start the counting process click on the `Start` button. 
 
 If you’ve set a timeout, the process will run for the specified duration. Otherwise, you have the flexibility to end the counting manually using the `Stop` button.
-     
-For the current code example, you will see the counted events in the `Counting Output` located in the lower section of the dialog. 
+
+For the current code example, select `cpu_cycles` in the Event List and select `dache` in the Metrics List then you will see the counted events in the `Counting Output` located in the lower section of the dialog. 
 
 ![Start Counting](./start-counting.png)
 

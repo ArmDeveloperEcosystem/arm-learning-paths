@@ -38,10 +38,10 @@ sudo bash scripts/config_tvm.sh
 Now you can navigate to the text recognition example directory.
 
 ```bash
-cd ./ocr/text_recognition/
+cd ./OCR-example/Text-recognition-example-m85/
 ```
 
-In this directory, there is a script named [run_demo.sh](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/blob/main/OCR-example/run_demo.sh) that automates the entire process described in the End-to-end workflow diagram.
+In this directory, there is a script named [run_demo.sh](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/blob/main/OCR-example/Text-recognition-example-m85/run_demo.sh) that automates the entire process described in the End-to-end workflow diagram.
 
 Update the FVP executable name in the `run_demo.sh` script. The `VHT_Platform` should match what is installed in the system. The executable starts with either `VHT_Corstone_SSE` or `FVP_Corstone_SSE`. Check which one is available in the `$PATH` by typing it out and using the Tab key to autocomplete. Then, using a code editor of your choice or `vim`, you can assign the correct executable:
 

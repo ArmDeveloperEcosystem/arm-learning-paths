@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## How do I implement RAG in Flask?
 
-In the [Build a GitHub Copilot Extension in Python](learning-paths/servers-and-cloud-computing/gh-copilot-simple/) Learning Path, you created a simple Copilot Extension in Python. Here, you'll add RAG functionality to that Flask app.
+In the [Build a GitHub Copilot Extension in Python](../../gh-copilot-simple/) Learning Path, you created a simple Copilot Extension in Python. Here, you'll add RAG functionality to that Flask app.
 
 You already generated a vector store in a previous section, which you will use as the knowledge base for your RAG retrieval.
 
-As you saw in the [Build a GitHub Copilot Extension in Python](learning-paths/servers-and-cloud-computing/gh-copilot-simple/) Learning Path, the `/agent` endpoint is what GitHub will invoke to send a query to your Extension.
+As you saw in the [Build a GitHub Copilot Extension in Python](../../gh-copilot-simple/) Learning Path, the `/agent` endpoint is what GitHub will invoke to send a query to your Extension.
 
 There are a minimum of two things you must add to your existing Extension to obtain RAG functionality:
 
@@ -147,6 +147,10 @@ system_message = [{
 }]
 ```
 
+{{% notice Note %}}
+You'll notice that system_message is lowercase, compared to the uppercase SYSTEM_MESSAGE above. This is because the [agent_flow](https://github.com/ArmDeveloperEcosystem/python-rag-extension/blob/main/utils/agent_functions.py#L28) function where this code resides defines system_message as a parameter, so that if you want to write a test harness to dynamically test many different system prompts you can.
+{{% /notice %}}
+
 Once the system message is built, add it to the original message to create `full_prompt_messages` and invoke the copilot endpoint:
 
 ```Python
@@ -217,6 +221,16 @@ def marketplace():
 
 Before running this function, ensure that the `marketplace_events` directory is created in your root directory (where the main flask file is).
 
-The context for this code can be found in the [flask_app.py](https://github.com/ArmDeveloperEcosystem/arm-gh-copilot-extension/blob/main/flask_app.py) file.
+The context for this code can be found in the [flask_app.py](https://github.com/ArmDeveloperEcosystem/arm-python-rag-extension/blob/main/flask_app.py) file.
 
 Once these elements are in place, you are ready to deploy your app.
+
+### Security enhancements 
+
+This section is optional, but important for production deployments.
+
+GitHub recommends payload validation for the messages received from GitHub, to ensure that payloads received actually come from GitHub.
+
+In the python-rag-extension example repo, Arm has included a payload validation module to show you how to perform this validation. The file where this is implemented is [payload_validation.py](https://github.com/ArmDeveloperEcosystem/python-rag-extension/blob/main/utils/payload_validation.py).
+
+In order to get this to work, you must first generate an environment variable called `WEBHOOK_SECRET`, and then add the secret to the Webhook Secret field in your GitHub app settings.

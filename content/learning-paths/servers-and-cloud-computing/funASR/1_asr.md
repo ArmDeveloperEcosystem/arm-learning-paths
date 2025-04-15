@@ -1,5 +1,5 @@
 ---
-title: Introduction to Automatic Speech Recognition (ASR)
+title: Introduction to Automatic Speech Recognition 
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -19,19 +19,24 @@ At its core, ASR transforms spoken language into written text. Despite seeming s
 ASR is used in myriad applications across various domains:
 
 * Virtual Assistants and Chatbots - ASR enables natural language interactions in chatbots and virtual assistants, enhancing customer support, information retrieval, and even entertainment. 
-Use case: a developer can use ASR to create a voice-controlled chatbot that helps users troubleshoot technical issues or navigate complex software applications.
 
-* Data Analytics and Business Intelligence - Leveraging ASR to analyze customer interactions, such as calls and surveys, to uncover trends and enhance services. 
-Use case: an app that transcribes customer service calls and applies sentiment analysis to pinpoint areas for improving customer satisfaction.
+{{% notice Use case %}}A developer can use ASR to create a voice-controlled chatbot that helps users troubleshoot technical issues or navigate complex software applications.{{% /notice %}}
 
-* ASR-powered Accessibility Tools - Developing ASR-powered tools to enhance accessibility for users with disabilities.  Applications include voice-controlled interfaces, real-time captioning, and text-to-speech conversion. 
-Use case: a developer can create a tool that uses ASR to generate real-time captions for online meetings or presentations, making them accessible to deaf and hard-of-hearing individuals.
+* Data Analytics and Business Intelligence - leveraging ASR to analyze customer interactions, such as calls and surveys, to uncover trends and enhance services.
 
-* Integrating ASR into Software Development Tools - Enhancing efficiency and productivity by incorporating ASR into development environments. This can include voice commands for code editing, debugging, or version control.
-Use case: a developer can build an IDE plugin that enables voice-controlled coding, file navigation, and test execution, streamlining the workflow and reducing reliance on manual input.
+{{% notice Use case %}}An app that transcribes customer service calls and applies sentiment analysis to pinpoint areas for improving customer satisfaction.{{% /notice %}}
 
-* Smart Homes and IoT with ASR - Enhancing convenience with voice control of smart home devices and appliances.
-Use case: a voice-activated home automation system that lets users control lighting, temperature, and entertainment systems with natural language commands.
+* ASR-powered Accessibility Tools - developing ASR-powered tools to enhance accessibility for users with disabilities.  Applications include voice-controlled interfaces, real-time captioning, and text-to-speech conversion.
+
+{{% notice Use case %}}A developer can create a tool that uses ASR to generate real-time captions for online meetings or presentations, making them accessible to deaf and hard-of-hearing individuals.{{% /notice %}}
+
+* Integrating ASR into Software Development Tools - enhancing efficiency and productivity by incorporating ASR into development environments. This can include voice commands for code editing, debugging, or version control.
+
+{{% notice Use case %}}A developer can build an IDE plugin that enables voice-controlled coding, file navigation, and test execution, streamlining the workflow and reducing reliance on manual input.{{% /notice %}}
+
+* Smart Homes and IoT with ASR - enhancing convenience with voice control of smart home devices and appliances.
+
+{{% notice Use case %}}A voice-activated home automation system that lets users control lighting, temperature, and entertainment systems with natural language commands.{{% /notice %}}
 
 ### Challenges in ASR
 

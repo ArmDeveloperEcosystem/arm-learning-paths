@@ -92,7 +92,7 @@ makes them suitable for using in bigger algorithms and is a common pattern used 
 
 One point worth mentioning is related to the `Abs` class: depending on the type
 used at instantiation, the compiler selects an optimized implementation for
-unsigned types, and there is no need to compute the absolute value of an always
+unsigned types, as there is no need to compute the absolute value of an always
 positive value. This optimization is transparent to users.
 
 Those operators are marked as `constexpr` so that the compiler can optimize the
@@ -203,7 +203,7 @@ type traits (from `<numeric_limit>`) such as `max` to get the maximum value
 representable for a given type.
 
 As those tests have been added to a new source file, it needs to be known to the
-build system, so add it now to the matrix-test target in `CMakeLists.txt`:
+build system, so add it now to the `matrix-test` target in `CMakeLists.txt`:
 
 ```TXT
 add_executable(matrix-test tests/main.cpp
@@ -292,7 +292,7 @@ First, create a `applyEltWiseUnaryOp` helper routine in the public section of
  operation as follows:
 
 ```CPP
-    /// Apply element wise unary scalar operator \p uOp to each element.
+    /// Apply element wise unary scalar operator \p op to each element.
     template <template <typename> class uOp>
     Matrix &applyEltWiseUnaryOp(const uOp<Ty> &op) {
         static_assert(std::is_base_of<unaryOperation, uOp<Ty>>::value,
@@ -505,7 +505,7 @@ ninja check
 [----------] 4 tests from unaryOperator (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 27 tests from 3 test suites ran. (0 ms total)
+[==========] 27 tests from 2 test suites ran. (0 ms total)
 [  PASSED  ] 27 tests.
 ```
 
@@ -692,7 +692,7 @@ Add this `applyEltWiseBinaryOp` helper routine to the public section of `Matrix`
 in `include/Matrix/Matrix.h`:
 
 ```CPP
-    /// Apply element wise binary scalar operator \p bOp to each element.
+    /// Apply element wise binary scalar operator \p op to each element.
     template <template <typename> class bOp>
     Matrix &applyEltWiseBinaryOp(const bOp<Ty> &op, const Matrix &rhs) {
         static_assert(std::is_base_of<binaryOperation, bOp<Ty>>::value,
@@ -1116,6 +1116,27 @@ content.
 - Resize: to be able to dynamically change a matrix dimensions.
 - Extract: to be able to extract part of a matrix.
 
+### Optimization
+
+The code written so far is relatively high level and allows the compiler to
+perform a large number of optimizations, from propagating constants to
+unrolling loops to name but a few most basic ones.
+
+The `applyEltWiseUnaryOp` and `applyEltWiseBinaryOp` helper routines
+from the Matrix library process one element at a time. The compiler
+may make use of Arm specific SIMD (Single Instruction, Multiple Data)
+instructions to process several elements at a time with one instruction. This
+is an optimization named vectorization, that can either be done automatically
+by the compiler (this is named *autovectorization*) or it can be done manually by the developper with the use of *intrinsics functions*.
+You can learn more about the compiler's autovectorization capabilities with the
+[Learn about Autovectorization](/learning-paths/cross-platform/loop-reflowing/)
+learning path and about other vectorization tricks with the
+[Optimize SIMD code with vectorization-friendly data layout](/learning-paths/cross-platform/vectorization-friendly-data-layout/)
+learning path.
+
+You can also learn how to
+[Accelerate Matrix Multiplication Performance with SME2](/learning-paths/cross-platform/multiplying-matrices-with-sme2/).
+
 ## What have you achieved so far?
 
 At this stage, the code structure looks like:
@@ -1150,3 +1171,7 @@ built and used.
 The testing could - and *should* - go much deeper, as a number of corner cases have not been covered.
 
 You can continue to add more functions, and more tests.
+
+You can refer to this chapter source code in
+`code-examples/learning-paths/cross-platform/matrix/chapter-4` in the archive that
+you have downloaded earlier.

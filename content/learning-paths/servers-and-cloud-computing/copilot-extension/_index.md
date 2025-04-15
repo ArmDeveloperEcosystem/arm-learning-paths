@@ -1,23 +1,19 @@
 ---
 title: Create a RAG-based GitHub Copilot Extension in Python
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for software developers who want to learn how to build a Retrieval Augmented Generation (RAG) based GitHub Copilot Extension. 
+who_is_this_for: This is an advanced topic for software developers who want to learn how to build a RAG-based (Retrieval Augmented Generation) GitHub Copilot Extension. 
 
 learning_objectives: 
-    - Explain what a RAG system is.
+    - Explain the core concepts and benefits of a RAG system.
     - Create vector embeddings for a RAG knowledge base.
-    - Implement RAG in a Copilot Extension.
-    - Configure a GitHub Copilot Extension for your RAG application.
+    - Integrate a RAG system within a Copilot Extension.
+    - Configure a GitHub Copilot Extension to effectively support a RAG application.
 
 prerequisites:
-    - The [Build a GitHub Copilot Extension in Python](../gh-copilot-simple/) Learning Path.
-    - The [Graviton Infrastructure for GitHub Copilot Extensions](../copilot-extension-deployment/) Learning Path.
+    - Completion of the [Build a GitHub Copilot Extension in Python](../gh-copilot-simple/) Learning Path.
+    - Completion of the [Deploy Graviton Infrastructure for GitHub Copilot Extensions](../copilot-extension-deployment/) Learning Path.
     - A GitHub account.
     - A Linux-based computer with Python installed.
 
@@ -39,7 +35,21 @@ tools_software_languages:
     - AWS CDK
 operatingsystems:
     - Linux
-    - MacOS
+    - macOS
+
+further_reading:
+    - resource:
+        title: GitHub Marketplace for Copilot extensions
+        link: https://github.com/marketplace?type=apps&copilot_app=true/
+        type: website
+    - resource:
+        title: About building Copilot Extensions
+        link: https://docs.github.com/en/copilot/building-copilot-extensions/about-building-copilot-extensions/
+        type: documentation
+    - resource:
+        title: Copilot Extensions repository
+        link: https://github.com/copilot-extensions/
+        type: documentation
 
 
 ### FIXED, DO NOT MODIFY

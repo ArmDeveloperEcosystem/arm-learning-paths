@@ -39,6 +39,46 @@ WindowsPerf consists of a kernel-mode driver and a user-space command-line tool.
 You cannot use WindowsPerf on virtual machines, such as cloud instances.
 {{% /notice %}}
 
+## Using winget (Recommended)
+
+### Install
+
+You can now install WindowsPerf directly from [winget](https://learn.microsoft.com/en-us/windows/package-manager/). Open an `Administrator` terminal on PowerShell and type
+
+```console
+winget install WindowsPerf
+```
+
+The output should look like:
+
+```output
+Found WindowsPerf [Arm.WindowsPerf] Version 4.3.1.0
+This application is licensed to you by its owner.
+Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Downloading https://developer.arm.com/-/cdn-downloads/permalink/WindowsPerf/Installer/windowsperf-4.3.1.msi
+  3.07 MB
+Successfully verified installer hash
+Starting package install...
+Successfully installed
+```
+
+![Winget installation video](/install-guides/_images/wperf-winget-installation.gif)
+
+It will install the latest available WindowsPerf along with the [WPA plugins](/learning-paths/laptops-and-desktops/windowsperf_wpa_plugin/). To check that the installation was done correctly open a new terminal tab or window and follow the instructions under the [verify installation section](/install-guides/wperf/#verify-install)
+
+### Uninstall 
+If you need to uninstall WindowsPerf, open an `Administrator` terminal on PowerShell and run:
+```console
+winget uninstall WindowsPerf
+```
+
+The output from a successful uninstallation will look like:
+```output
+Found WindowsPerf [Arm.WindowsPerf]
+Starting package uninstall...
+Successfully uninstalled
+```
+
 ## Visual Studio and the Windows Driver Kit (WDK)
 
 WindowsPerf relies on `dll` files installed with Visual Studio, from the Community Edition or higher and, optionally, installers from the Windows Driver Kit extension.
@@ -86,7 +126,7 @@ Make sure you are in the `windowsperf-bin-<version>` directory:
 cd windowsperf-bin-4.0.0
 ```
 
-### Install with wperf-devgen {#devgen_install}
+### Install with wperf-devgen 
 
 Navigate to the `wperf-driver` folder and run the installer:
 
@@ -103,7 +143,7 @@ Install requested.
 Device installed successfully
 ```
 
-## Verify install
+## Verify install 
 
 You can check everything is working by running the `wperf` executable.
 

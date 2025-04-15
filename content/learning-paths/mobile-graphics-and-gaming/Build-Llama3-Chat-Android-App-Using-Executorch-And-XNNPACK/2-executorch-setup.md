@@ -41,8 +41,7 @@ git clone https://github.com/pytorch/executorch.git
 cd executorch
 git submodule sync
 git submodule update --init
-./install_requirements.sh
-./install_requirements.sh --pybind xnnpack
+./install_executorch.sh
 ./examples/models/llama/install_requirements.sh
 ```
 

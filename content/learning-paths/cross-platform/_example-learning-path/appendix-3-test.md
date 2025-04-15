@@ -18,9 +18,7 @@ The framework allows you to parse Learning Path articles and generate instructio
 2. [Edit Learning Path pages](#edit-learning-path-pages)
 3. [Edit metadata](#edit-metadata)
 4. [Run the framework](#run-the-framework)
-5. [Result summary](#result-summary)
-6. [Visualize results](#visualize-results)
-
+5. [Advanced usage for embedded development](#advanced-usage-for-embedded-development)
 
 ## Install dependencies
 
@@ -279,7 +277,7 @@ In the example above, the summary indicates that for this Learning Path all test
 ## Advanced usage for embedded development
 ### Using the Corstone-300 FVP
 
-By default, the framework runs instructions on the Docker images specified by the [metadata](#edit-metadata). For embedded development, it is possible to build software in a container instance and then check its behaviour on the Corstone-300 FVP.
+By default, the framework runs instructions on the Docker images specified by the [metadata](#edit-metadata). For embedded development, it is possible to build software in a container instance and then check its behavior on the Corstone-300 FVP.
 
 For this, all container instances used by the test framework mount a volume in `/shared`. This is where software for the target FVP can be stored. To check the execution, the FVP commands just need to be identified as a `fvp` section for the framework.
 

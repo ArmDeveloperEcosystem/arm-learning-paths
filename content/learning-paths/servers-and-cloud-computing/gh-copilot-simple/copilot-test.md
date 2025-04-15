@@ -49,4 +49,4 @@ Here it is in VS Code:
 
 Your GitHub Copilot Extension is now responding to chat prompts. 
 
-You can now use what you have learned to build different, and more complex, Copilot Extensions.
+You can now use what you have learned to build different, and more complex, Copilot Extensions. For example, you could learn about IaC deployment techniques for your Extension in [Deploy Graviton Infrastructure for GitHub Copilot Extensions](/learning-paths/servers-and-cloud-computing/copilot-extension-deployment/).

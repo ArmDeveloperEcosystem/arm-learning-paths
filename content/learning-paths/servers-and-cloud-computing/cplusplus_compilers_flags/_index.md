@@ -1,31 +1,28 @@
 ---
-title: Learn Basic C++ Optimisation Techniques using the G++ Compiler
-draft: true
-cascade:
-    draft: true
+title: Learn about optimization techniques using the g++ compiler
 
 minutes_to_complete: 60
 
-who_is_this_for: Beginner C++ developers who are looking to optimise their workload on Arm-based cloud instances with no source code modifications. 
+who_is_this_for: This Learning Path is for beginner C++ developers who are looking to optimize applications on Arm-based cloud instances using compiler flags. 
 
 learning_objectives: 
-    - Compile a C++ program for a specific Arm target
-    - Use compiler flags to control the optimisation
+    - Compile a C++ program for a specific Arm target.
+    - Use compiler flags to manage optimizations.
 
 prerequisites:
-    - Basic understanding of C++
-    - Basic understanding of compilers
+    - Basic understanding of C++.
+    - Basic understanding of compilers.
 
 author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
-subjects: C++
+subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
-    - G++
     - C++
+    - Runbook
 operatingsystems:
     - Linux
 
