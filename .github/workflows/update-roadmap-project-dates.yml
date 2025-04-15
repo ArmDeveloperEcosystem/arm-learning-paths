@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18.x'
 
       - name: Install Octokit
         run: npm install @octokit/rest
@@ -31,7 +31,7 @@ jobs:
       - name: Update Project Board Dates
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.PROJECT_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { Octokit } = require('@octokit/rest');
             const octokit = new Octokit({ auth:process.env.GITHUB_TOKEN });
