@@ -22,7 +22,6 @@ Now that you have seen an [Arm Streamline example capture](/learning-paths/mobil
 Optionally, you can set a preferred location to store your captures using `Window` > `Preferences` > `Data Locations`. New reports will be created in the topmost folder specified.
 {{% /notice %}}
 
-
 ## Capture data
 
 1. Click `Start capture` to start capturing profile data from the device. Enter a name and location for the capture file.
