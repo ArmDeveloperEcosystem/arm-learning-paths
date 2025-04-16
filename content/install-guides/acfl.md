@@ -152,7 +152,7 @@ Add the ACfL `apt` package repository to your system. These instructions apply f
 After that, the ACfL Ubuntu package repository is now ready to use. Run the commands below to install the dependencies needed.
 
 
-```bash
+```console
 sudo apt update
 sudo apt install -y wget gnupg gpg environment-modules python3 libc6-dev
 wget -qO - https://developer.arm.com/packages/ACfL%3AUbuntu-22/jammy/Release.key | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc

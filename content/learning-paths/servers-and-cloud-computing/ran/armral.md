@@ -38,7 +38,6 @@ The source code is available from the [GitLab repository](https://gitlab.arm.com
 Use `git` to download the code:
 
 ```bash
-cd $HOME
 git clone https://git.gitlab.arm.com/networking/ral.git
 ```
 
@@ -74,7 +73,7 @@ Use the features available on your hardware when you run `cmake` in the next sec
 
 If your platform supports only Neon (`asimd`), set up the build with:
 
-```bash { cwd="$HOME/ral/build" }
+```bash
 cmake -DBUILD_TESTING=On -DARMRAL_ARCH=NEON  ..
 ```
 
@@ -102,7 +101,7 @@ cmake -DBUILD_TESTING=On -DARMRAL_ARCH=SVE -DCMAKE_INSTALL_PREFIX=/home/ubuntu/a
 
 Build the library using `make`:
 
-```bash { cwd="$HOME/ral/build" }
+```bash
 make
 ```
 
@@ -110,7 +109,7 @@ make
 
 Install the library:
 
-```bash { cwd="$HOME/ral/build" }
+```bash
 sudo make install
 ```
 
