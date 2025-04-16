@@ -14,7 +14,7 @@ Runners are the machines that execute jobs in a GitHub Actions workflow. An Arm-
 
 Arm-hosted runners are available for public repositories at no cost, subject to [standard usage limits](https://docs.github.com/en/actions/administering-github-actions/usage-limits-billing-and-administration#usage-limits). 
 
-### How to Use GitHub Arm-hosted Windows Runners
+### How to use GitHub Arm-hosted Windows Runners?
 
 To leverage the GitHub Windows Arm64 hosted runners, you will need to use the following label in your public repository workflow runs:
 
@@ -51,7 +51,7 @@ Select the size of the large runner you need and and click `Save`.
 
 ![specifications #center](_images/size.png)
 
-The `Capacity` section includes the maximum concurrency, which is the number of jobs to run at the same time. Specify at least two for this Learning Path.
+The `Capacity` section includes the maximum concurrency, which is the number of jobs to run at the same time.
 
 You can also set the runner group for this runner. The runner group controls the settings for this runner. Pay attention to the runner group as you may need to return to the runner group settings if any configuration changes are needed.
 
