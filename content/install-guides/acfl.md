@@ -155,16 +155,13 @@ After that, the ACfL Ubuntu package repository is now ready to use. Run the comm
 ```bash { target="ubuntu:latest" }
 sudo apt update
 sudo apt install -y wget gnupg gpg environment-modules python3 libc6-dev
-wget -qO - https://developer.arm.com/packages/ACfL:Ubuntu-22/jammy/Release.key | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc
-echo "deb https://developer.arm.com/packages/ACfL:Ubuntu-22/jammy/ ./" | sudo tee /etc/apt/sources.list.d/developer-arm-com.list
+wget -qO - https://developer.arm.com/packages/arm-toolchains%3Aubuntu-24/linux/Release.key | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc
+echo "deb https://developer.arm.com/packages/arm-toolchains%3Aubuntu-24/linux/ ./" | sudo tee /etc/apt/sources.list.d/developer-arm-com.list
 sudo apt update
+sudo apt install acfl -y
 ```
 
 Install Arm Compiler for Linux with:
-
-```console
-sudo apt install acfl -y
-```
 
 ### Amazon Linux 2023
 
