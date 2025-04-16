@@ -53,7 +53,7 @@ To run an an automated install with default values run:
 
 ```bash { target="ubuntu:latest" }
 curl -o install.sh https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
-bash ./install.sh --accept-all-defaults --update-path-and-enable-tab-completion --rc-file-path="$HOME/.bashrc"
+bash ./install.sh --accept-all-defaults --update-path-and-enable-tab-completion --rc-file-path $HOME/.bashrc
 ```
 
 To run an interactive install that allows you to change default values run:

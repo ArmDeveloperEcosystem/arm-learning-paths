@@ -123,7 +123,7 @@ sudo ./arm-compiler-for-linux_24.10.1_Ubuntu-22.04.sh --accept
 
 #### Red Hat Linux:
 
-```bash { target="fedora:latest" }
+```console
 sudo yum -y install environment-modules python3 glibc-devel
 tar -xvf arm-compiler-for-linux_24.10.1_RHEL-9_aarch64.tar
 cd ./arm-compiler-for-linux_24.10.1_RHEL-9
@@ -226,19 +226,19 @@ Set up the environment, for example, in your `.bashrc` and add module files. The
 
 #### Ubuntu Linux:
 
-```bash { target="ubuntu:latest" }
-echo ". /usr/share/modules/init/bash" >> ~/.bashrc
-echo "module use /opt/arm/modulefiles" >> ~/.bashrc
-. ~/.bashrc
+```bash { target="ubuntu:latest" pre_cmd=". /usr/share/modules/init/bash; module use /opt/arm/modulefiles" }
+echo ". /usr/share/modules/init/bash" >> $HOME/.bashrc
+echo "module use /opt/arm/modulefiles" >> $HOME/.bashrc
+source $HOME/.bashrc
 module avail
 ```
 
 #### Red Hat or Amazon Linux:
 
-```bash { target="fedora:latest" }
-echo ". /usr/share/Modules/init/bash" >> ~/.bashrc
-echo "module use /opt/arm/modulefiles" >> ~/.bashrc
-. ~/.bashrc
+```bash { target="fedora:latest" env_source="/usr/share/modules/init/bash" pre_cmd="module use /opt/arm/modulefiles" }
+echo ". /usr/share/Modules/init/bash" >> $HOME/.bashrc
+echo "module use /opt/arm/modulefiles" >> $HOME/.bashrc
+source $HOME/.bashrc
 module avail
 ```
 
