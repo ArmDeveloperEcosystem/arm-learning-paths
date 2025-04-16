@@ -20,7 +20,9 @@ The characteristics of many real-world workloads will vary over time, for exampl
 
 ## Example Workload
 
-Connect to an Arm-based cloud instance. As an example workload, we will be using the media manipulation tool, FFMPEG on an AWS `t4g.medium` instance, using the default block storage options provided by AWS. 
+Connect to an Arm-based cloud instance. As an example workload, we will be using the media manipulation tool, FFMPEG on an AWS `t4g.medium` instance, with 2 Elastic Block Storage (EBS) volumes as per the image below. 
+
+![ebs](./EBS.png)
 
 
 ```bash

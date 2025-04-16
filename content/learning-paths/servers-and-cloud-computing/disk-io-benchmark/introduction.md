@@ -46,5 +46,4 @@ In benchmarking tools like fio, you might select I/O engines such as sync (synch
 
 ### Typical Storage Types for Cloud Instances
 
-Instance storage = volatile, lost when instance is stopped
-Block storage = e.g., El
+In a cloud environment, you are typically sharing a physical instance of a server with multiple tenants. As such the CPU cores and storage devices may be shared. As such, cloud service providers often provide an IOPS per GB. Where your system's storage performance is proportional to the block device size. See [this example](https://docs.oracle.com/en-us/iaas/Content/Block/Concepts/blockvolumeperformance.htm) for more information. 
