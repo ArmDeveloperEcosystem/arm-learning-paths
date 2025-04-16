@@ -12,7 +12,7 @@ GitHub Arm-hosted runners for Windows are now available in public preview, provi
 
 Runners are the machines that execute jobs in a GitHub Actions workflow. An Arm-hosted runner is managed by GitHub and uses the Arm architecture, meaning you don't need to provide a server to run Actions workflows. GitHub provides the system and runs the Action workflows for you.
 
-Arm-hosted runners are available for public repositories at no cost, subject to [standard usage limits](https://docs.github.com/en/actions/administering-github-actions/usage-limits-billing-and-administration#usage-limits). They are powered by Microsoft Azure Cobalt 100 processors, based on the Arm Neoverse N2, with 4 vCPUs and Armv9-A features, including Scalable Vector Extension 2 (SVE2).
+Arm-hosted runners are available for public repositories at no cost, subject to [standard usage limits](https://docs.github.com/en/actions/administering-github-actions/usage-limits-billing-and-administration#usage-limits). 
 
 ### How to Use GitHub Arm-hosted Windows Runners
 

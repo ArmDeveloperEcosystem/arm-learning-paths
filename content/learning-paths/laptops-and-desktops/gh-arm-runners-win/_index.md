@@ -1,5 +1,5 @@
 ---
-title: Automate Native Windows on Arm Application Builds Using GitHub Arm-hosted Runners
+title: Automate Windows on Arm Builds with GitHub Arm-hosted Runners
 
 minutes_to_complete: 20
 
@@ -35,6 +35,10 @@ further_reading:
         title: GitHub Actions Partner Images Repository
         link: https://github.com/actions/partner-runner-images/
         type: documentation
+    - resource:
+        title: GitHub Actions now supports Windows on Arm runners for all public repos
+        link: https://blogs.windows.com/windowsdeveloper/2025/04/14/github-actions-now-supports-windows-on-arm-runners-for-all-public-repos/
+        type: blog
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
