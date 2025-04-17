@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Setup and Install Fio
 
-I will be using the same `t4g.medium` instance from the previous section with 2 different types of SSD-based block storage devices as per the console screenshot below. Both block devices have the same, 8GiB capacity but the `io1` is geared towards I/O as opposed to the general purpose SSD `gp2`. In this section we want to observe what the real-world performance for our workload is so that it can inform our selection.
+I will be using the same `t4g.medium` instance from the previous section with 2 different types of SSD-based block storage devices as per the console screenshot below. Both block devices have the same, 8GiB capacity but the `io1` is geared towards throughput as opposed to the general purpose SSD `gp2`. In this section we want to observe what the real-world performance for our workload is so that it can inform our selection.
 
 ![EBS](./EBS.png)
 
@@ -31,9 +31,9 @@ fio-3.36
 
 ## Locate Device 
 
-`Fio` allows us to microbenchmark either the block device or a mounted filesystem. The disk free, `df` command to confirm our EBS volumes are not mounted.
+`Fio` allows us to microbenchmark either the block device or a mounted filesystem. The disk free, `df` command to confirm our EBS volumes are not mounted. Writing to drives that hold critical information may cause issues. Hence we are writing to blank, unmounted block storage device.
 
-Using the `lsblk` command to view the EBS volumes attached to the server (`nvme1n1` and `nvme2n1`). The immediate number appended to `nvme`, e.g., `nvme0`, shows it is a physically separate device. `nvme1n1` corresponds to the faster `io2` block device and `nvme2n1` corresponds to the slower `gp3` block device. 
+Using the `lsblk` command to view the EBS volumes attached to the server (`nvme1n1` and `nvme2n1`). The immediate number appended to `nvme`, e.g., `nvme0`, shows it is a physically separate device. `nvme1n1` corresponds to the faster `io2` block device and `nvme2n1` corresponds to the slower `gp2` block device. 
 
 ```bash
 lsblk -e 7
@@ -58,9 +58,9 @@ If you have more than 1 block volumes attached to an instance, the `sudo nvme li
 Let us say we want to simulate a fictional logging application with the following characteristics observed using the tools from the previous section. 
 
 {{% notice Workload%}}
-The logging workload has a light sequential read and write workload. The system write throughput per thread is 5 MB/s with 83% writes. There are infrequent bursts of reads for approximately 5 seconds, operating at 16MB/s per thread. The workload can scale the infrequent reads and writes to use up to 16 threads each. The block size for the writes and reads are 64KiB and 256KiB respectively (as opposed to the standard 4KiB Page size). 
+The logging workload has light sequential read and write characteristics. The system write throughput per thread is 5 MB/s with 83% writes. There are infrequent bursts of reads for approximately 5 seconds, operating at up to 16MB/s per thread. The workload can scale the infrequent reads and writes to use up to 16 threads each. The block size for the writes and reads are 64KiB and 256KiB respectively (as opposed to the standard 4KiB Page size). 
 
-Further, the application is sensitive to latency and since it holds critical information, needs to write directly to non-volatile storage (directIO). 
+Further, the application latency sensitive and given it holds critical information, needs to write directly to non-volatile storage through direct IO. 
 {{% /notice %}}
 
 The fio tool uses simple configuration `jobfiles` to describe the characterisics of your synthetic workload. Parameters under the `[global]` option are shared among jobs. From the example below, we have created 2 jobs to represent the steady write and infrequent reads. Please refer to the official [documentation](https://fio.readthedocs.io/en/latest/fio_doc.html#job-file-format) for more details. 

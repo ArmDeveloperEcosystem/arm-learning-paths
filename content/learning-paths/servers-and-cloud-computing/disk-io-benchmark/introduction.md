@@ -8,15 +8,14 @@ layout: learningpathall
 
 ## Introduction
 
-The ideal storage activity of your system is 0. In this situation all of your applications data and instructions are available in memory or caches and no reads or writes to a spinning hard-disk drive or solid-state SSD are required. However, due to physical capacity limitations, data volatility and need to store large amounts of data, many applications require frequent access to storage media. 
+The ideal storage activity of your system is 0. In this situation all of your application data and instructions are available in memory or caches with no reads or writes to a spinning hard-disk drive or solid-state SSD required. However, due to physical capacity limitations, data volatility and need to store large amounts of data, many applications require frequent access to storage media. 
 
 ## High-Level Flow of Data
 
-The diagram below is a high-level overview of how data can be written or read from a storage device.  This diagram illustrates a multi-disk I/O architecture where each disk (Disk 1 to Disk N) has an I/O queue and optional disk cache, communicating with a central CPU via a disk controller. Memory is not explicitly shown but typically resides between the CPU and storage, offering faster access times than disk but is volatile. File systems, though not depicted, operate at the OS/kernel level to handling file access metadata and offer a familiar way to interact with files and directories. In NVMe-based systems, the disk controller is located on the drive itself, reducing latency and improving parallelism.
+The diagram below is a high-level overview of how data can be written or read from a storage device.  This diagram illustrates a multi-disk I/O architecture where each disk (Disk 1 to Disk N) has an I/O queue and optional disk cache, communicating with a central CPU via a disk controller. Memory is not explicitly shown but resides between the CPU and storage, offering fast access times with the tradeoff of volatile. File systems, though not depicted, operate at the OS/kernel level to handling file access metadata and offer a friendly way to interact through files and directories.
 
 ![disk i/o](./diskio.jpeg)
 
-Many techniques are transparent to a developer. The queue at the operating system level and disk level may reorder I/O requests to improve efficiency (for example an atomic write that increments a value by 1 followed by a minus by 1). 
 
 ## Key Terms
 
@@ -32,7 +31,7 @@ IOPS is a measure of how much random read or write requests your storage system 
 ![iops_hdd](./IOPS.png)
 
 #### Throughput / Bandwidth
-Throughput is the data transfer rate normally in MB/s. IOPS x block size is the bandwidth utilisation of your system. Max throughput is usually reached for sequential access patterns.
+Throughput is the data transfer rate normally in MB/s with bandwidth specifying the maximum amount that a connection can transfer. IOPS x block size can be used to calculate the storage throughput of your application.
 
 #### Queue Depth
 Queue depth refers to the number of simultaneous I/O operations that can be pending on a device. Consumer SSDs might typically have a queue depth in the range of 32 to 64, whereas enterprise-class NVMe drives can support hundreds or even thousands of concurrent requests per queue. This parameter affects how much the device can parallelize operations and therefore influences overall I/O performance.

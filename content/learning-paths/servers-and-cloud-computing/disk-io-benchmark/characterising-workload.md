@@ -16,7 +16,7 @@ The basic attributes of a given workload are the following.
 - Read to Write Ratio
 - Random vs Sequential access
 
-The characteristics of many real-world workloads will vary over time, for example an application that periodically flushes writes to disk. Further, the system-wide and process-specific characteristics may be significantly differently. 
+There are many more characteristics to observe, just as latency but since this is an introductory topic we will mostly stick to the high-level metrics listed above. 
 
 ## Running an Example Workload
 
@@ -38,7 +38,7 @@ cd src
 wget http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
 ```
 
-Run the following command to begin transcoding the video and audio using the `H.264` and `aac` transcoders respectively. We use the `-flush_packets` flag to write each chunk of video back to storage.  
+Run the following command to begin transcoding the video and audio using the `H.264` and `aac` transcoders respectively. We use the `-flush_packets` flag to write each chunk of video back to storage from memory.   
 
 ```bash
 ffmpeg -i BigBuckBunny.mp4 -c:v libx264 -preset fast -crf 23 -c:a aac -b:a 128k -flush_packets 1 output_video.mp4
@@ -51,7 +51,7 @@ Whilst the transcoding is running, we can use the `pidstat` command to see the d
 ```bash
 pidstat -d -p $(pgrep ffmpeg) 1
 ```
-Since this example `151MB` video  fits within memory, we observe no `kB_rd/s` for the storage device. However, since we are flushing to storage we observe ~275 `kB_wr/s` for this specific process.  
+Since this example `151MB` video  fits within memory, we observe no `kB_rd/s` for the storage device after the initial read. However, since we are flushing to storage we observe period ~275 `kB_wr/s`.  
 
 ```output
 Linux 6.8.0-1024-aws (ip-10-248-213-118)        04/15/25        _aarch64_       (2 CPU)
@@ -111,7 +111,7 @@ nvme0n1          0.66     29.64     0.24  26.27    0.73    44.80    2.92    203.
 
 ### Basic Characteristics of our Example Workload
 
-This is a simple transcoding workload with flushed writes, where most data is processed and stored in memory. Disk I/O is minimal, with an IOPS of just 3.81, low throughput (248.71 kB/s), and an average IO depth of 0.01 — all indicating very low disk utilization. The 52% write merge rate and low latencies further suggest sequential, infrequent disk access, reinforcing that the workload is primarily memory-bound.
+This is a simple transcoding workload with flushed writes, where most data is processed and stored in memory. Disk I/O is minimal, with an IOPS of just 3.81, low throughput (248.71 kB/s), and an average IO depth of 0.01 — all summarised in very low disk utilization. The 52% write merge rate and low latencies further suggest sequential, infrequent disk access, reinforcing that the workload is primarily memory-bound.
 
 
 | Metric             | Calculation Explanation                                                                                     | Value         |
