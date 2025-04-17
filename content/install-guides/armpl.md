@@ -122,19 +122,19 @@ The instructions shown below are for deb based installers for GCC users.
 In a terminal, run the command shown below to download the Debian package:
 
 ```bash
-wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_25.04/arm-performance-libraries_25.04_deb_gcc.tar
+wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_25.04.1/arm-performance-libraries_25.04.1_deb_gcc.tar
 ```
 
 Use `tar` to extract the file and then change directory:
 
 ```bash
-tar xf arm-performance-libraries_25.04_deb_gcc.tar
+tar xf arm-performance-libraries_25.04.1_deb_gcc.tar
 ```
 
 Run the installation script as a super user:
 
 ```bash
-sudo ./arm-performance-libraries_25.04_deb/arm-performance-libraries_25.04_deb.sh --accept
+sudo ./arm-performance-libraries_25.04.1_deb/arm-performance-libraries_25.04.1_deb.sh --accept
 ```
 
 Using the `--accept` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.
@@ -190,13 +190,13 @@ module avail
 The output should be similar to:
 
 ```output
-armpl/25.04.0_gcc
+armpl/25.04.1_gcc
 ```
 
 Load the appropriate module:
 
 ```console
-module load armpl/25.04.0_gcc
+module load armpl/25.04.1_gcc
 ```
 
 You can now compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.
