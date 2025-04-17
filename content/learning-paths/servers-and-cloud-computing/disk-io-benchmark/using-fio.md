@@ -12,7 +12,7 @@ I will be using the same `t4g.medium` instance from the previous section with 2 
 
 ![EBS](./EBS.png)
 
-Flexible I/O (fio) is a command-line tool to generate a synthetic workload with specific I/O characteristics.  Fio is available through most Linux distribution packages. Please refer to the [documentation](https://github.com/axboe/fio) for the binary package availability.
+Flexible I/O (fio) is a command-line tool to generate a synthetic workload with specific I/O characteristics. This serves as a simpler alternative to full record and replay testing. Fio is available through most Linux distribution packages, please refer to the [documentation](https://github.com/axboe/fio) for the binary package availability.
 
 ```bash
 sudo apt update
@@ -109,8 +109,9 @@ sudo NUM_JOBS=16 IO_DEPTH=64 fio nvme2.fio
 
 ### Interpreting Results
 
-```output
+The final terminal output from both runs are shown below. 
 
+```output
 nvme1:
 
 Run status group 0 (all jobs):
@@ -134,6 +135,7 @@ Here we can see that the faster `io2` block storage (`nvme1`) is able to meet th
 
 We are told the fictional logging application is sensitive to operation latency. The output belows highlights that over ~35% operations have a latency above 1s on nvme2 compared to ~7% on nvme1. 
 
+
 ```output
 
   nvme2:
@@ -151,4 +153,14 @@ We are told the fictional logging application is sensitive to operation latency.
   lat (msec)   : 2000=3.62%, >=2000=2.38%
 ```
 
+This insights above suggest the SSD designed for throughput, `io2` is more suitable than the general purpose `gp2` storage to meet the requirements of our logging application.
+
+{{% notice Tip%}}
+If the text output is hard to follow, you can use the `fio2gnuplot` package to plot the data graphically or use the visualisations available from the cloud service provider's dashboard. See image below for an example. 
+
+ ![plot](./visualisations.png)
+{{% /notice %}}
+
 The insights gathered by microbenchmarking with fio above can lead to more informed decisions about which block storage to connect to your Arm-based instance. 
+
+
