@@ -7,7 +7,8 @@ who_is_this_for: A cloud developer who wants to optimise storage cost or perform
 
 learning_objectives: 
     - Understand basic data flow for storage devices 
-    - Understand how to run the fio microbenchmark
+    - Use basic observability utilities such as iostat, iotop and pidstat
+    - Understand how to run fio for microbenchmarking a block storage device
 
 prerequisites:
     - Access to an Arm-based server
@@ -17,11 +18,12 @@ author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
-subjects: Runbook, Performance and Architecture
+subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
     - bash
+    - Runbook
 operatingsystems:
     - Linux
 

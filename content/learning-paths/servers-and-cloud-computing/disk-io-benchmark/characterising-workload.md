@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## Characterising your Workload
+## Basic Characteristics
 
 The basic attributes of a given workload are the following. 
 
@@ -18,21 +18,23 @@ The basic attributes of a given workload are the following.
 
 The characteristics of many real-world workloads will vary over time, for example an application that periodically flushes writes to disk. Further, the system-wide and process-specific characteristics may be significantly differently. 
 
-## Example Workload
+## Running an Example Workload
 
-Connect to an Arm-based cloud instance. As an example workload, we will be using the media manipulation tool, FFMPEG on an AWS `t4g.medium` instance, with 2 Elastic Block Storage (EBS) volumes as per the image below. 
+Connect to an Arm-based cloud instance. As an example workload, we will be using the media manipulation tool, FFMPEG on an AWS `t4g.medium` instance. 
 
-![ebs](./EBS.png)
-
+First install the prequistite tools. 
 
 ```bash
 sudo apt update 
 sudo apt install ffmpeg iotop -y
 ```
 
-Download the popular example video, `BigBuckBunny.mp4` to demonstrate a transcoding workload. 
+Download the popular reference video for transcoding, `BigBuckBunny.mp4` which is available under the [Creative Commons 3.0 License](https://creativecommons.org/licenses/by/3.0/).
 
 ```bash
+cd ~
+mkdir src
+cd src
 wget http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
 ```
 
@@ -41,12 +43,15 @@ Run the following command to begin transcoding the video and audio using the `H.
 ```bash
 ffmpeg -i BigBuckBunny.mp4 -c:v libx264 -preset fast -crf 23 -c:a aac -b:a 128k -flush_packets 1 output_video.mp4
 ```
-Whilst the transcoding is running, we can use the `pidstat` command to see the disk statistics. 
+
+### Observing Disk Usage 
+
+Whilst the transcoding is running, we can use the `pidstat` command to see the disk statistics of that specific process. 
 
 ```bash
 pidstat -d -p $(pgrep ffmpeg) 1
 ```
-From the table below, we can observe this process is predominantly writing to disk at ~`300 kB/s`.  
+Since this example `151MB` video  fits within memory, we observe no `kB_rd/s` for the storage device. However, since we are flushing to storage we observe ~275 `kB_wr/s` for this specific process.  
 
 ```output
 Linux 6.8.0-1024-aws (ip-10-248-213-118)        04/15/25        _aarch64_       (2 CPU)
@@ -62,9 +67,11 @@ Linux 6.8.0-1024-aws (ip-10-248-213-118)        04/15/25        _aarch64_       
 10:01:32     1000     24250      0.00    344.00      0.00       0  ffmpeg
 ```
 
-Since this example `151MB` video  fits within memory, we observe no `kB_rd/s` for the storage device. However, since we are flushing to storage we observe ~275 `kB_wr/s` for this specific process. 
+{{% notice Please Note%}}
+In this simple example, since we are interacting with a file on the mounted filesystem, we are also observing the behaviour of the filesystem. 
+{{% /notice %}}
 
-We can use iotop to confirm that our `ffmpeg` process has the greatest disk utilisation. 
+Of course, there may be other processes or background services that are writing to this disk. We can use `iotop` command for inspection. As per the output below, the `ffmpeg` process has the greatest disk utilisation. 
 
 ```bash
 sudo iotop
@@ -91,35 +98,7 @@ Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_w
 nvme0n1           3.81        31.63       217.08         0.00     831846    5709210          0
 ```
 
-The following characteristics are calculated as follows. 
-
-1. IOPS
-
-**Value:** 3.81  
-_This is taken directly from the `tps` (transfers per second) field._
-
-2. Throughput
-
-**Read:** 31.63 kB/s  
-**Write:** 217.08 kB/s  
-**Total:** 248.71 kB/s  
-_Sum of read and write throughput values._
-
-3. Average I/O Size
-
-**Value:** ≈ 65.3 KB  
-_Calculated as total throughput divided by IOPS: 248.71 / 3.81._
-
-
-4. Read/Write Ratio
-
-**Read:** ~13%  
-**Write:** ~87%  
-_Computed as: (read or write throughput) ÷ total throughput._
-
-Finally, to the access pattern of our workload (i.e. random vs. sequential) is slightly more complicated. We can infer the locality of our accesses through our understanding of the program, the cache hit rate (for reads), and merge rate on the dispatch side. Metrics that show high degree of merging, cache hits and low wait times suggest that our accesses are sequential in nature. 
-
-Running the following command. 
+To observe the more detailed metrics we can run `iostat` with the `-x` option.
 
 ```bash
 iostat -xz nvme0n1
@@ -130,4 +109,24 @@ Device            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB
 nvme0n1          0.66     29.64     0.24  26.27    0.73    44.80    2.92    203.88     3.17  52.01    2.16    69.70    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.01   0.15
 ```
 
-The `wrqm/s` column is the number of write requests merged per second before being issued. Calculated the percentage or writes merged compared to writes is one indicator of how sequental the data accesses are. 
+### Basic Characteristics of our Example Workload
+
+This is a simple transcoding workload with flushed writes, where most data is processed and stored in memory. Disk I/O is minimal, with an IOPS of just 3.81, low throughput (248.71 kB/s), and an average IO depth of 0.01 — all indicating very low disk utilization. The 52% write merge rate and low latencies further suggest sequential, infrequent disk access, reinforcing that the workload is primarily memory-bound.
+
+
+| Metric             | Calculation Explanation                                                                                     | Value         |
+|--------------------|-------------------------------------------------------------------------------------------------------------|---------------|
+| IOPS               | Taken directly from the `tps` (transfers per second) field                                                  | 3.81          |
+| Throughput (Read)  | From monitoring tool output                                                                                 | 31.63 kB/s    |
+| Throughput (Write) | From monitoring tool output                                                                                 | 217.08 kB/s   |
+| Throughput (Total) | Sum of read and write throughput                                                                            | 248.71 kB/s   |
+| Avg I/O Size       | Total throughput divided by IOPS: 248.71 / 3.81                                                             | ≈ 65.3 KB     |
+| Read Ratio         | Read throughput ÷ total throughput: 31.63 / 248.71                                                          | ~13%          |
+| Write Ratio        | Write throughput ÷ total throughput: 217.08 / 248.71                                                        | ~87%          |
+| IO Depth           | Taken directly from `aqu-sz` (average number of in-flight I/Os)                                             | 0.01          |
+| Access Pattern | Based on cache hits, merge rates, and low wait times. 52% of writes were merged (`wrqm/s` = 3.17, `w/s` = 2.92) → suggests mostly sequential access | Sequential-ish (52.01% merged) |
+
+
+{{% notice Please Note%}}
+If you have access to the workloads source code, the expected access patterns can more easily be observed. 
+{{% /notice %}}
