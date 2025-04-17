@@ -45,8 +45,3 @@ In benchmarking tools like fio, you might select I/O engines such as sync (synch
 #### I/O Wait
 
 This is the perceived time spent waiting for I/O to return the value from the perspective of the CPU core. 
-
-### Considerations for Cloud Storage
-
-In a cloud environment, you are typically sharing a physical instance of a server with multiple tenants. As such the CPU cores and storage devices may be shared resulting in cloud service providers often provide an IOPS per GB. Where your system's storage performance is proportional to the block device size. See [this example](https://docs.oracle.com/en-us/iaas/Content/Block/Concepts/blockvolumeperformance.htm) for more information. 
-
