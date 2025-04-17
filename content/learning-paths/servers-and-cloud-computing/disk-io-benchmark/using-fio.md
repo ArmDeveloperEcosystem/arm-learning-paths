@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Setup and Install Fio
 
-I will be using the same `t4g.medium` instance from the previous section with 2 different types of SSD-based elastic block storage devices as per the console screenshot below. Both block devices have the same, 8GiB capacity but the `io1` type offers greater IOPS. In this section we want to observe what the real-world performance for our workload is so that it can inform our selection.
+I will be using the same `t4g.medium` instance from the previous section with 2 different types of SSD-based block storage devices as per the console screenshot below. Both block devices have the same, 8GiB capacity but the `io1` is geared towards I/O as opposed to the general purpose SSD `gp2`. In this section we want to observe what the real-world performance for our workload is so that it can inform our selection.
 
 ![EBS](./EBS.png)
 
@@ -33,19 +33,6 @@ fio-3.36
 
 `Fio` allows us to microbenchmark either the block device or a mounted filesystem. The disk free, `df` command to confirm our EBS volumes are not mounted.
 
-```bash
-df -hTx tmpfs
-```
-
-```output
-Filesystem      Type      Size  Used Avail Use% Mounted on
-Filesystem      Type      Size  Used Avail Use% Mounted on
-/dev/root       ext4      6.8G  2.8G  4.0G  41% /
-efivarfs        efivarfs  128K  3.7K  125K   3% /sys/firmware/efi/efivars
-/dev/nvme0n1p16 ext4      891M   57M  772M   7% /boot
-/dev/nvme0n1p15 vfat       98M  6.4M   92M   7% /boot/efi
-```
-
 Using the `lsblk` command to view the EBS volumes attached to the server (`nvme1n1` and `nvme2n1`). The immediate number appended to `nvme`, e.g., `nvme0`, shows it is a physically separate device. `nvme1n1` corresponds to the faster `io2` block device and `nvme2n1` corresponds to the slower `gp3` block device. 
 
 ```bash
@@ -65,8 +52,6 @@ nvme2n1      259:2    0    8G  0 disk
 {{% notice Please Note%}}
 If you have more than 1 block volumes attached to an instance, the `sudo nvme list` command from the `nvme-cli` package and be used to differentiate between volumes
 {{% /notice %}}
-
-We can use the `blkid` command to find the directory for `nvme1n1`. 
 
 ## Generating a Synthetic Workload
 
