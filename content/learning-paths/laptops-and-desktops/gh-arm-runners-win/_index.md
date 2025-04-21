@@ -1,6 +1,10 @@
 ---
 title: Automate Windows on Arm Builds with GitHub Arm-hosted Runners
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory tutorial for software developers interested in automating Windows application builds on Arm architecture using GitHub Actions.
@@ -11,14 +15,14 @@ learning_objectives:
     - Automate the build process of Windows applications using GitHub Actions.
 
 prerequisites:
-    - A GitHub account
-    - Basic knowledge of GitHub Actions
+    - A GitHub account. 
+    - Basic knowledge of GitHub Actions.
 
 author: 
     - Pareena Verma
 
 ### Tags
-skilllevels: Introducory
+skilllevels: Introductory
 subjects: CI-CD
 armips:
     - Cortex-A

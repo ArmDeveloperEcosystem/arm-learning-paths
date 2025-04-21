@@ -6,7 +6,7 @@ weight: 2
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-GitHub Arm-hosted runners for Windows are now available in public preview, providing a powerful and efficient way to build, test and deploy your Windows applications on Arm without the need for virtualization. These runners come with a Windows 11 Desktop image, equipped with many tools to get started with your workflows. 
+GitHub Arm-hosted runners for Windows are now available in public preview, providing a powerful and efficient way to build, test, and deploy your Windows applications on Arm without the need for virtualization. These runners come with a Windows 11 Desktop image, equipped with many tools to get started with your workflows. 
 
 ### What are GitHub Arm-hosted Runners?
 
@@ -16,17 +16,22 @@ Arm-hosted runners are available for public repositories at no cost, subject to 
 
 ### How to use GitHub Arm-hosted Windows Runners?
 
-To leverage the GitHub Windows Arm64 hosted runners, you will need to use the following label in your public repository workflow runs:
+To leverage the GitHub Windows Arm64 hosted runners, you need to use the following label in your public repository workflow runs:
 
 ```yaml
 runs-on: windows-11-arm
 ```
 
-Please note that this label will not work in private repositories, the workflow will fail if you add it. 
+{{% notice Note %}}
+This label will not work in private repositories, the workflow will fail if you use it. 
+{{% /notice %}}
 
-Two types of GitHub-hosted runners are available; standard runners, and larger runners. Larger runners are differentiated from standard runners because users can control the amount of RAM, the number of CPUs, and configure the allocated disk space. You can also use the Windows 11 Desktop Arm Image with larger runners. To use this image on large runners, you will need to create a new runner.
 
-### How can I create an GitHub Arm-hosted Windows large runner?
+### What types of GitHub-hosted runners are available?
+
+Two types of GitHub-hosted runners are available; standard runners and larger runners. Larger runners are differentiated from standard runners because you can control the amount of RAM, the number of CPUs, and configure the allocated disk space. You can also use the Windows 11 Desktop Arm Image with larger runners. To use this image on larger runners, you will need to create a new runner.
+
+### How can I create an GitHub Arm-hosted Windows larger runner?
 
 Arm-hosted runners are created at the organization level.
 
@@ -35,7 +40,6 @@ Navigate to your organization and select the `Settings` tab. On the left pane, s
 On the `Runners` page, select the `New runner` drop-down on the top right, and then select `New GitHub-hosted runner`.
 
 ![new-runner #center](_images/new-runner.png)
-
 
 Specify a name for the runner, this is the `runs-on` field in your workflows so make the name clear for others who use it.
 
@@ -47,7 +51,7 @@ Specify the operating system image for the runner, select `Microsoft Windows 11 
 
 ![image #center](_images/win_image.png)
 
-Select the size of the large runner you need and and click `Save`.
+Select the size of the larger runner you need and click `Save`.
 
 ![specifications #center](_images/size.png)
 
@@ -59,9 +63,10 @@ You can also set the runner group for this runner. The runner group controls the
 
 Finally, click `Create runner`.
 
-Your new Arm-hosted runner Windows large runner is ready to use. You will need to remember the runner name for use in your workflows with the `runs-on` label. 
+Your new Arm-hosted Windows larger runner is ready to use. Remember the runner name so you can use it in your workflows with the `runs-on` label. 
 
-### Check the server hardware used by the Arm-hosted Windows Runners
+### How do I check the server hardware used by the Arm-hosted Windows Runners?
+
 The Arm-hosted runners are powered by Microsoft Azure Cobalt 100 processors, based on the Arm Neoverse N2, with 4 vCPUs and Armv9-A features, including Scalable Vector Extension 2 (SVE2).
 
 The output from running the `wmic` command on the Arm-hosted runner is below.
@@ -69,7 +74,7 @@ The output from running the `wmic` command on the Arm-hosted runner is below.
 ![Arm-hosted runner info #center](_images/cpuinfo.png)
 
 
-### Check Installed Software on the Arm-hosted Windows Runners
+### How can I find the software installed on the Arm-hosted Windows Runners?
 
 To find out more about the software installed on the Arm-hosted runners, visit the [GitHub Actions Partner Images repository](https://github.com/actions/partner-runner-images/). Check the [image documentation](https://github.com/actions/partner-runner-images/blob/main/images/arm-windows-11-image.md) for a list of software packages installed on the Windows 11 by Arm Limited image. You can also use this repository to report issues or request additional software.
 
