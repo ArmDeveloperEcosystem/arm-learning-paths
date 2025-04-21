@@ -23,6 +23,7 @@ tools_software_languages:
     - Visual Studio
     - C#
     - .NET
+    - Arm Performance Libraries
 operatingsystems:
     - Windows
 
