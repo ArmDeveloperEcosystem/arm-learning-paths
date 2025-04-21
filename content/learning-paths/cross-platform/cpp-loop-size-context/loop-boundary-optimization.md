@@ -50,7 +50,7 @@ int main() {
 
     int max_loop_size_div_4 = max_loop_size / 4;
     int x[max_loop_size];
-    // Initialise test data
+    // Initialize test data
     for(int i = 0; i < max_loop_size; ++i) x[i] = i;
  
     // Start timing
