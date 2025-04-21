@@ -21,5 +21,5 @@ tools_software_languages_filter:
 - Automotive: 1
 - Docker: 1
 - Python: 1
-- ROS2: 1
+- ROS 2: 1
 ---

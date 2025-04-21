@@ -9,9 +9,8 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- Baremetal: 1
 - ChromeOS: 1
-- Linux: 29
+- Linux: 30
 - macOS: 7
 - Windows: 40
 subjects_filter:
@@ -26,17 +25,17 @@ tools_software_languages_filter:
 - .NET: 13
 - Alacritty: 1
 - Android Studio: 1
-- Arm Development Studio: 2
+- Arm Development Studio: 1
 - Arm64EC: 1
 - assembly: 1
 - C: 3
 - C#: 6
-- C++: 4
+- C++: 5
 - C/C++: 4
 - CCA: 1
 - Clang: 11
 - CMake: 2
-- Coding: 17
+- Coding: 16
 - CSS: 1
 - Daytona: 1
 - Docker: 4
@@ -63,7 +62,7 @@ tools_software_languages_filter:
 - Qt: 2
 - Remote.It: 1
 - RME: 1
-- Runbook: 16
+- Runbook: 17
 - Rust: 2
 - SVE: 1
 - SVE2: 1

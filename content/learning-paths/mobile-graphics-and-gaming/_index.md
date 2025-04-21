@@ -12,8 +12,8 @@ maintopic: true
 operatingsystems_filter:
 - Android: 28
 - Linux: 23
-- macOS: 9
-- Windows: 10
+- macOS: 10
+- Windows: 11
 subjects_filter:
 - Gaming: 6
 - Graphics: 6
@@ -42,9 +42,8 @@ tools_software_languages_filter:
 - CMake: 1
 - Coding: 16
 - ExecuTorch: 1
-- Fixed Virtual Platform: 1
 - Frame Advisor: 1
-- GCC: 10
+- GCC: 9
 - GenAI: 2
 - GoogleTest: 1
 - Java: 5
@@ -61,6 +60,7 @@ tools_software_languages_filter:
 - NDK: 1
 - NEON: 1
 - ONNX Runtime: 1
+- OpenGL ES: 1
 - Python: 3
 - PyTorch: 1
 - QEMU: 1
@@ -69,12 +69,11 @@ tools_software_languages_filter:
 - Rust: 2
 - SDDiskTool: 1
 - SVE2: 1
-- Total Compute: 1
 - Trusted Firmware: 1
 - Unity: 6
 - Unreal Engine: 3
 - VS Code: 1
-- Vulkan: 2
+- Vulkan: 3
 - XNNPACK: 1
 weight: 3
 ---

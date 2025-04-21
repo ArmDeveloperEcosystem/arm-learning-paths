@@ -10,7 +10,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 1
-- Baremetal: 32
+- Baremetal: 29
 - Linux: 25
 - macOS: 5
 - RTOS: 9
@@ -19,9 +19,9 @@ subjects_filter:
 - CI-CD: 5
 - Containers and Virtualization: 6
 - Embedded Linux: 3
-- Libraries: 3
+- Libraries: 2
 - ML: 12
-- Performance and Architecture: 23
+- Performance and Architecture: 21
 - RTOS Fundamentals: 4
 - Security: 2
 - Virtual Hardware: 2
@@ -32,18 +32,18 @@ tools_software_languages_filter:
 - Arm Compiler for Embedded: 7
 - Arm Compiler for Linux: 1
 - Arm Compute Library: 1
-- Arm Development Studio: 9
+- Arm Development Studio: 7
 - Arm Fast Models: 4
-- Arm Virtual Hardware: 11
+- Arm Virtual Hardware: 10
 - AVH: 1
 - C: 1
 - C/C++: 1
 - ChatGPT: 1
 - Clang: 1
-- CMSIS: 5
+- CMSIS: 4
 - CMSIS-Toolbox: 3
 - CNN: 1
-- Coding: 29
+- Coding: 26
 - Containerd: 1
 - DetectNet: 1
 - Docker: 9
@@ -60,11 +60,11 @@ tools_software_languages_filter:
 - Himax SDK: 1
 - IP Explorer: 4
 - K3s: 1
-- Keil: 7
+- Keil: 5
 - Keil MDK: 3
 - Kubernetes: 1
 - LLM: 2
-- MDK: 2
+- MDK: 1
 - MPS3: 1
 - MXNet: 1
 - Neon: 1
