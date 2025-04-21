@@ -8,8 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- Baremetal: 1
-- Linux: 134
+- Linux: 135
 - macOS: 10
 - Windows: 14
 pinned_modules:
@@ -38,7 +37,7 @@ tools_software_languages_filter:
 - Android Studio: 1
 - Ansible: 2
 - Arm Compiler for Linux: 1
-- Arm Development Studio: 4
+- Arm Development Studio: 3
 - Arm ISA: 1
 - armclang: 1
 - armie: 1
@@ -58,7 +57,7 @@ tools_software_languages_filter:
 - bpftool: 1
 - C: 4
 - C#: 2
-- C++: 7
+- C++: 8
 - C/C++: 2
 - Capstone: 1
 - CCA: 6
@@ -68,7 +67,7 @@ tools_software_languages_filter:
 - ClickHouse: 1
 - CloudFormation: 1
 - CMake: 1
-- Coding: 18
+- Coding: 17
 - conda: 1
 - Daytona: 1
 - Demo: 4
@@ -130,7 +129,7 @@ tools_software_languages_filter:
 - Redis: 3
 - Remote.It: 2
 - RME: 4
-- Runbook: 62
+- Runbook: 63
 - Rust: 2
 - snappy: 1
 - Snort3: 1
