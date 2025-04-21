@@ -23,7 +23,7 @@ To process and analyze the telemetry data we’re streaming to Azure IoT Hub, we
 2. Click “Create a resource”, type “Stream Analytics job” into the search box, and press Enter.
 3. From the search results, select Stream Analytics job, then click Create:
 ![img9 alt-text#center](Figures/09.png)
-4. Provide the necessary informations:
+4. Provide the necessary information:
 * Subscription: Choose the Azure subscription you want to use for this job.
 * Resource group: Select the resource group you previously created (e.g., your IoT project’s resource group).
 * Name: Provide a meaningful, unique name for your Stream Analytics job (e.g., IoTStreamAnalyticsJob).
