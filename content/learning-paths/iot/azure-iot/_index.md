@@ -1,6 +1,10 @@
 ---
 title: Creating IoT Solutions in Azure for Arm64-Powered Devices
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 320
 
 who_is_this_for: This is an advanced topic for software developers interested in learning how to build a comprehensive IoT solution in Azure that streams, stores, monitors, aggregates, and visualizes data from Arm64-powered IoT devices.
