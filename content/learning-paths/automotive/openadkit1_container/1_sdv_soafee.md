@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Introduction to Software-Defined Vehicles
 
-In recent years, the automotive industry has been undergoing a transformation driven by software, with the concept of the Software-Defined Vehicle (SDV) emerging as a key paradigm for the future of intelligent cars. As the number of Electronic Control Units (ECUs) increases and vehicle systems become more complex, the traditional hardware-driven development approach is no longer sufficient. To improve development efficiency and product quality, automotive software development is moving to a Shift-Left approach, accelerating validation and deployment processes.
+In recent years, the automotive industry has been undergoing a transformation driven by software, with the concept of the Software-Defined Vehicle (SDV) emerging as a key paradigm for the future of intelligent cars. As the number of Electronic Control Units (ECUs) increases and vehicle systems become more complex, the traditional hardware-driven development approach is no longer sufficient. To improve development efficiency and product quality, automotive software development is moving to a Shift-Left approach, accelerating validation and deployment.
 
 ## The evolution of Software-Defined Vehicles
 
-The core idea of SDV is to make software the primary differentiating factor of a vehicle, enabling continuous feature updates via Over-The-Air (OTA) technology. This approach allows manufacturers to shorten development cycles while continuously improving safety and performance after a vehicle is released. Moreover, SDV promotes the adoption of Service-Oriented Architecture (SOA), enabling modular and scalable software that integrates seamlessly with cloud services.
+The core idea of SDV is to make software the primary differentiator in a vehicle, enabling continuous feature updates via Over-The-Air (OTA) technology. This approach allows manufacturers to shorten development cycles while continuously improving safety and performance after a vehicle is released. Moreover, SDV promotes the adoption of Service-Oriented Architecture (SOA), enabling modular and scalable software that integrates seamlessly with cloud services.
 
 However, this transition introduces new challenges, particularly in software development and validation. The traditional V-model development process struggles to meet SDV demands since defects are often detected late in development, leading to costly fixes. As a result, Shift-Left has become a crucial strategy to address these challenges.
 

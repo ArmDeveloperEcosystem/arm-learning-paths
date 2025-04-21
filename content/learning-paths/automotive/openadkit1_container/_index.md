@@ -1,10 +1,6 @@
 ---
 title: Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for automotive developers, aimed at helping them accelerate autonomous driving software development before automotive hardware is available.

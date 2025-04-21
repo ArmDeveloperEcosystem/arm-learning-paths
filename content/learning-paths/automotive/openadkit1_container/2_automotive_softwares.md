@@ -46,8 +46,9 @@ Autoware, built on ROS, features a modular AD stack with well-defined interfaces
 Committed to democratizing AD technology, Autoware fosters collaboration among industry, researchers, and developers. By promoting open standards and innovation, the foundation accelerates autonomous driving adoption while ensuring safety, scalability, and real-world usability, driving the future of autonomous mobility through open-source development and ecosystem synergy.
 
 The Open AD Kit Blueprint has evolved through multiple iterations of containerized Autoware software. It supports both cloud and edge deployments in physical and virtual environments, with OTA updates enabling seamless software upgrades.
+
 The Open AD Kit project continues to be developed by the Open AD Kit working group, and the following are the main goals and principles of the collaborative project:
-- Introducing modern cloud-native development and deployment methodologies for the Autoware use
+- Introducing modern cloud-native development and deployment methodologies for Autoware use cases
 - Introducing mixed-critical orchestration, paving the way for safety and certifiability
 - Enabling validation using virtual prototyping platforms to achieve shift-left paradigms
 - Providing a consistent production environment to deploy Autoware using hardware abstraction technologies to enable hardware-agnostic solutions
