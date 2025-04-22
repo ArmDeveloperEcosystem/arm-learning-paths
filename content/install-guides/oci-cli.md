@@ -64,7 +64,7 @@ bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scrip
 
 Verify OCI CLI is installed using the `--version` option:
 
-```bash { target="ubuntu:latest", pre_cmd=". $HOME/.bashrc" }
+```console
 oci --version
 ```
 

@@ -235,7 +235,7 @@ module avail
 
 #### Red Hat or Amazon Linux:
 
-```bash { target="fedora:latest" env_source="/usr/share/Modules/init/bash" pre_cmd="module use /opt/arm/modulefiles" }
+```console
 echo ". /usr/share/Modules/init/bash" >> $HOME/.bashrc
 echo "module use /opt/arm/modulefiles" >> $HOME/.bashrc
 source $HOME/.bashrc
