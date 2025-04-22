@@ -61,45 +61,32 @@ Noise filtering in each band uses a simplified Wiener filter.
 
 A gain is applied to the signal, defined as follow:
 
-```
-H(f) = S(f) / (S(f) + N(f))
+$$H(f) = \frac{S(f)}{S(f) + N(f)}$$
 
-```
-- `S(f)` is the speech spectrum.
-- `N(f)` is the noise spectrum.
+- \(S(f)\) is the speech spectrum.
+- \(N(f)\) is the noise spectrum.
 
-```
-H(f) = 1 / (1 + N(f)/S(f))
-
-```
+$$H(f) = \frac{1}{1 + \frac{N(f)}{S(f)}}$$
 
 For this tutorial, we assume a high SNR. The VAD relies on this assumption: the signal energy is sufficient to detect speech.
 With a high signal-to-noise ratio, the transfer function can be approximated as:
 
-```
-H(f) ~ 1 - N(f)/S(f)
+$$H(f) \approx 1 - \frac{N(f)}{S(f)}$$
 
-```
+You don't have access to \(S(f)\), only to the measured \(S(f) + N(f)\) which will be used under the assumption that the noise is small, making the approximation acceptable:
 
-You don't have access to `S(f)`, only to the measured `S(f) + N(f)` which will be used under the assumption that the noise is small, making the approximation acceptable:
+$$H(f) \approx 1 - \frac{N(f)}{S(f) + N(f)}$$
 
-```
-H(f) ~ 1 - N(f) / (S(f) + N(f))
 
-```
+with \(S(f) + N(f) = E(f)\)
 
-with `S(f) + N(f) = E(f)`
+- \(E(f)\) is the observed energy in a frequency band.
 
 It can be rewritten as:
 
-`H(f)` is approximately:
+$$H(f) \approx \frac{E(f) - N(f)}{E(f)}$$
 
-```
-H(f) ~ (E(f) - N(f)) / E(f)
-```
-
-- `N(f)` is estimated when there is no speech.
-- `E(f)` is the observed energy in a frequency band.
+- \(N(f)\) is estimated when there is no speech.
 
 In the Python code below, you’ll see this formula implemented as:
 
