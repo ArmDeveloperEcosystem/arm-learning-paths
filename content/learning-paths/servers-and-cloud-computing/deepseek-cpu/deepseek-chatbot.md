@@ -6,11 +6,9 @@ weight: 3
 layout: learningpathall
 ---
 
-## Before you begin
-The instructions in this Learning Path are for any Arm server running Ubuntu 24.04 LTS. You need an Arm server instance with at least 64 cores and 512GB of RAM to run this example. Configure disk storage up to at least 400 GB. The instructions have been tested on an AWS Graviton4 r8g.24xlarge instance.
-
-
 ## Background and what you'll build
+
+The instructions in this Learning Path are for any Arm server running Ubuntu 24.04 LTS. You need an Arm server instance with at least 64 cores and 512GB of RAM to run this example. Configure disk storage up to at least 400 GB. The instructions have been tested on an AWS Graviton4 r8g.24xlarge instance.
 
 Arm CPUs are widely used in ML and AI use cases. In this Learning Path, you will learn how to run a generative AI inference-based use case of a LLM chatbot on Arm-based CPUs by deploying the [DeepSeek-R1 671B LLM](https://huggingface.co/bartowski/DeepSeek-R1-GGUF) on your Arm-based CPU using `llama.cpp`, optimized for Arm hardware. You'll:
 
@@ -22,7 +20,7 @@ Arm CPUs are widely used in ML and AI use cases. In this Learning Path, you will
 
 [llama.cpp](https://github.com/ggerganov/llama.cpp) is an open source C/C++ project developed by Georgi Gerganov that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. 
 
-## About the DeepSeek-R1 model and GGUF model format
+## Understanding the DeepSeek-R1 model and GGUF format
 
 The [DeepSeek-R1 model](https://huggingface.co/deepseek-ai/DeepSeek-R1) from DeepSeek-AI available on Hugging Face, is released under the [MIT License](https://github.com/deepseek-ai/DeepSeek-R1/blob/main/LICENSE) and free to use for research and commercial purposes. 
 
@@ -30,9 +28,9 @@ The DeepSeek-R1 model has 671 billion parameters, based on Mixture of Experts(Mo
 
 Traditionally, the training and inference of LLMs has been done on GPUs using full-precision 32-bit (FP32) or half-precision 16-bit (FP16) data type formats for the model parameter and weights. Recently, a new binary model format called GGUF was introduced by the `llama.cpp` team. This new GGUF model format uses compression and quantization techniques that remove the dependency on using FP32 and FP16 data type formats. For example, GGUF supports quantization where model weights that are generally stored as FP16 data types are scaled down to 4-bit integers. This significantly reduces the need for computational resources and the amount of RAM required. These advancements made in the model format and the data types used make Arm CPUs a great fit for running LLM inferences.   
  
-## Install dependencies 
+## Install build dependencies on your Arm-based server
 
-Install the following packages on your Arm based server instance:
+Install the following packages:
 
 ```bash
 sudo apt update
@@ -46,7 +44,7 @@ sudo apt install gcc g++ -y
 sudo apt install build-essential -y
 ```
 
-## Download and build llama.cpp
+## Clone and build llama.cpp
 
 You are now ready to start building `llama.cpp`. 
 
@@ -107,7 +105,7 @@ general:
 ```
 
 
-## Install Hugging Face Hub
+## Set up Hugging Face and download the model
 
 There are a few different ways you can download the DeepSeek-R1 model. In this Learning Path, you download the model from Hugging Face.
 
@@ -143,19 +141,19 @@ huggingface-cli download bartowski/DeepSeek-R1-GGUF --include "*DeepSeek-R1-Q4_0
 ```
 Before you proceed and run this model, take a quick look at what `Q4_0` in the model name denotes.
 
-## Quantization format
+## Understanding the Quantization format
 
 `Q4_0` in the model name refers to the quantization method the model uses. The goal of quantization is to reduce the size of the model (to reduce the memory space required) and faster (to reduce memory bandwidth bottlenecks transferring large amounts of data from memory to a processor). The primary trade-off to keep in mind when reducing a model's size is maintaining quality of performance. Ideally, a model is quantized to meet size and speed requirements while not having a negative impact on performance. 
 
 This model is `DeepSeek-R1-Q4_0-00001-of-00010.gguf`, so what does each component mean in relation to the quantization level? The main thing to note is the number of bits per parameter, which is denoted by 'Q4' in this case or 4-bit integer. As a result, by only using 4 bits per parameter for 671 billion parameters, the model drops to be 354 GB in size.
 
-## Run the pre-quantized DeepSeek-R1 LLM model weights on your Arm-based server
+## Run the DeepSeek-R1 Chatbot on your Arm server
 
 As of [llama.cpp commit 0f1a39f3](https://github.com/ggerganov/llama.cpp/commit/0f1a39f3), Arm has contributed code for performance optimization with three types of GEMV/GEMM kernels corresponding to three processor types:
 
-* AWS Graviton2, where you only have NEON support (you will see less improvement for these GEMV/GEMM kernels),
-* AWS Graviton3, where the GEMV/GEMM kernels exploit both SVE 256 and MATMUL INT8 support, and
-* AWS Graviton4, where the GEMV/GEMM kernels exploit NEON/SVE 128 and MATMUL_INT8 support
+* AWS Graviton2, where you only have NEON support (you will see less improvement for these GEMV/GEMM kernels).
+* AWS Graviton3, where the GEMV/GEMM kernels exploit both SVE 256 and MATMUL INT8 support.
+* AWS Graviton4, where the GEMV/GEMM kernels exploit NEON/SVE 128 and MATMUL_INT8 support.
 
 With the latest commits in `llama.cpp` you will see improvements for these Arm optimized kernels directly on your Arm-based server. You can run the pre-quantized Q4_0 model as is and do not need to re-quantize the model.
 
@@ -167,7 +165,9 @@ Run the pre-quantized DeepSeek-R1 model exactly as the weights were downloaded f
 
 This command will use the downloaded model (`-m` flag), disable conversation mode explicitly (`-no-cnv` flag), adjust the randomness of the generated text (`--temp` flag),  with the specified prompt (`-p` flag), and target a 512 token completion (`-n` flag), using 64 threads (`-t` flag).
 
-You may notice there are many gguf files downloaded, llama.cpp can load all series of files by passing the first one with `-m` flag.
+You might notice there are many gguf files downloaded. Llama.cpp can load all series of files by passing the first one with `-m` flag.
+
+## Analyze the output and performance statistics
 
 You will see lots of interesting statistics being printed from llama.cpp about the model and the system, followed by the prompt and completion. The tail of the output from running this model on an AWS Graviton4 r8g.24xlarge instance is shown below:
 
@@ -380,10 +380,10 @@ llama_perf_context_print:       total time =   42340.53 ms /   531 tokens
 
 The `system_info` printed from llama.cpp highlights important architectural features present on your hardware that improve the performance of the model execution. In the output shown above from running on an AWS Graviton4 instance, you will see:
 
-  * NEON = 1 This flag indicates support for Arm's Neon technology which is an implementation of the Advanced SIMD instructions
-  * ARM_FMA = 1 This flag indicates support for Arm Floating-point Multiply and Accumulate instructions 
-  * MATMUL_INT8 = 1 This flag indicates support for Arm int8 matrix multiplication instructions
-  * SVE = 1 This flag indicates support for the Arm Scalable Vector Extension
+  * NEON = 1 This flag indicates support for Arm's Neon technology which is an implementation of the Advanced SIMD instructions.
+  * ARM_FMA = 1 This flag indicates support for Arm Floating-point Multiply and Accumulate instructions. 
+  * MATMUL_INT8 = 1 This flag indicates support for Arm int8 matrix multiplication instructions.
+  * SVE = 1 This flag indicates support for the Arm Scalable Vector Extension.
 
 
 The end of the output shows several model timings:
@@ -391,6 +391,8 @@ The end of the output shows several model timings:
 * load time refers to the time taken to load the model.
 * prompt eval time refers to the time taken to process the prompt before generating the new text. 
 * eval time refers to the time taken to generate the output. Generally anything above 10 tokens per second is faster than what humans can read.
+
+## What's next?
 
 You have successfully run a LLM chatbot with Arm KleidiAI optimizations, all running on your Arm AArch64 CPU on your server. You can continue experimenting and trying out the model with different prompts.
 
