@@ -11,8 +11,6 @@ official_docs: https://learn.microsoft.com/en-us/cli/azure
 test_images:
 - ubuntu:latest
 test_maintenance: true
-test_status:
-- passed
 title: Azure CLI
 tool_install: true
 weight: 1

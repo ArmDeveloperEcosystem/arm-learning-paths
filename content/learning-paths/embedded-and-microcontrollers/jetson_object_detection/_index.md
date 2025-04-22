@@ -5,12 +5,12 @@ minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for developers interested in integrating object detection into their applications.
 
-learning_objectives: 
+learning_objectives:
     - Set up a Jetson Orin Nano with a MIPI CSI-2 camera for object detection
     - Detect objects from both live video and image files
 
 prerequisites:
-    - A Jetson Orin Nano (https://developer.nvidia.com/embedded/learn/jetson-orin-nano-devkit-user-guide/index.html)
+    - A [Jetson Orin Nano](https://developer.nvidia.com/embedded/learn/jetson-orin-nano-devkit-user-guide/index.html)
     - A microSD card (64GB UHS-1 or larger is recommended)
     - A MIPI CSI-2 camera, with a 22 pin connector on at least one end
 

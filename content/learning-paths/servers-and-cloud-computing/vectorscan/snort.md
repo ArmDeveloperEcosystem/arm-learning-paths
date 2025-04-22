@@ -15,16 +15,16 @@ You can install Snort 3 on an Ubuntu Linux Arm-based server, and run it with Vec
 
 ## Before you begin
 
-You should already have an Arm server running Ubuntu Linux from the previous topic. 
+You should already have an Arm server running Ubuntu Linux from the previous topic.
 
 Install the Snort 3 dependencies:
 
 ```bash
-sudo apt update 
+sudo apt update
 sudo apt-get install -y build-essential autotools-dev libdumbnet-dev libluajit-5.1-dev libpcap-dev \
 zlib1g-dev pkg-config libhwloc-dev cmake liblzma-dev openssl libssl-dev cpputest libsqlite3-dev \
 libtool uuid-dev git autoconf bison flex libcmocka-dev libnetfilter-queue-dev libunwind-dev \
-libmnl-dev ethtool libjemalloc-dev ragel
+libmnl-dev ethtool libjemalloc-dev ragel libfl-dev
 ```
 
 ## Download and install other required software
@@ -75,26 +75,26 @@ Download (but do not build) [Boost C++ Libraries](https://www.boost.org/):
 
 ```bash
 cd ~/snort_src
-wget https://boostorg.jfrog.io/artifactory/main/release/1.85.0/source/boost_1_85_0.tar.gz
-tar -xvzf boost_1_85_0.tar.gz
+wget https://archives.boost.io/release/1.87.0/source/boost_1_87_0.tar.gz
+tar -xvzf boost_1_87_0.tar.gz
 ```
 
 Download Vectorscan:
 
 ```bash
 cd ~/snort_src
-git clone https://github.com/VectorCamp/vectorscan 
-cd vectorscan 
-cd .. 
-mkdir hyperscan-build 
-cd hyperscan-build 
+git clone https://github.com/VectorCamp/vectorscan
+cd vectorscan
+cd ..
+mkdir hyperscan-build
+cd hyperscan-build
 ```
 
 Configure and build Vectorscan:
 
 ```bash { cwd="snort_src/hyperscan-build" }
 cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DBOOST_ROOT=~/snort_src/boost_1_85_0/ ~/snort_src/vectorscan/
-make -j$(nproc) && sudo make install 
+make -j$(nproc) && sudo make install
 ```
 
 Install [FlatBuffers](https://google.github.io/flatbuffers/):
@@ -138,7 +138,7 @@ cd ~/snort_src
 wget https://github.com/snort3/snort3/archive/refs/tags/3.2.2.0.tar.gz -O snort3-3.2.2.0.tar.gz
 tar -xzvf snort3-3.2.2.0.tar.gz
 cd snort3-3.2.2.0
-./configure_cmake.sh --prefix=/usr/local --enable-tcmalloc 
+./configure_cmake.sh --prefix=/usr/local --enable-tcmalloc
 cd build
 make -j$(nproc)
 sudo make install
@@ -146,7 +146,7 @@ sudo make install
 
 ## Confirm Snort 3 is installed and running properly
 
-Snort 3 should be installed in `/usr/local/bin`. 
+Snort 3 should be installed in `/usr/local/bin`.
 
 Verify it is installed and running correctly by printing the version:
 
@@ -178,7 +178,7 @@ You should see output similar to the following:
 
 You can test the performance of Snort 3 with Vectorscan on your Arm instance.
 
-Download a capture file to using for testing: 
+Download a capture file to using for testing:
 
 ```bash
 mkdir ~/snort3_test

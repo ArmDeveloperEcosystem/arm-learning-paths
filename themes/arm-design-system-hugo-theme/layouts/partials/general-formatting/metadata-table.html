@@ -44,8 +44,8 @@ Called from:
 {{/* Populate dictionary with author metadata */}}
 {{ range $index, $row := $csv_content }}
     {{ $name := index $row 0 }}
-    
-    {{ $metadata := dict 
+
+    {{ $metadata := dict
         "company"   (cond (and (gt (len $row) 1) (ne (index $row 1) "")) (index $row 1) nil)
         "github"    (cond (and (gt (len $row) 2) (ne (index $row 2) "")) (printf "https://github.com/%s" (index $row 2)) nil)
         "linkedin"  (cond (and (gt (len $row) 3) (ne (index $row 3) "")) (printf "https://linkedin.com/in/%s" (index $row 3)) nil)
@@ -85,7 +85,7 @@ Called from:
             {{end}}
         {{ end }}
     {{end}}
-{{end}}  
+{{end}}
 
 <!-- Check if there are any matching learning paths to this tool (or the main tool) -->
 {{ if in $tools_software_languages (.Title | urlize)}}
@@ -93,14 +93,6 @@ Called from:
 {{ else if in $tools_software_languages ($main_tool_title | urlize) }}
     {{ $active_tag = $main_tool_title }}
 {{end}}
-
-
-
-
-
-
-
-
 
 
 
@@ -135,22 +127,22 @@ Called from:
                             Reading time:
                         </td>
                         <td id="reading-time" class="td-metadata-value" >
-                            <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "partials/server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
+                            <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
                         </td>
                     </tr>
                     <tr>
                         <td class="td-metadata-key">
                             Last updated:
                         </td>
-                        <td id="last-updated" class="td-metadata-value">                    
+                        <td id="last-updated" class="td-metadata-value">
                             <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp;
-                            {{/* If learning path, obtain last modified date from any LP file; install guide just display from this file. */}} 
+                            {{/* If learning path, obtain last modified date from any LP file; install guide just display from this file. */}}
                             {{ if $is_learning_path}}
                                 {{- $true_last_mod_date := partial "server-side-processing/calculate-last-update.html" . }}
                                 {{$true_last_mod_date.Format "02 Jan 2006"}}
                             {{else}}
                                 {{ .Lastmod.UTC.Format "2 Jan 2006" }}
-                            {{end}} 
+                            {{end}}
                         </td>
                     </tr>
                 {{ if .Params.test_maintenance}}
@@ -163,8 +155,8 @@ Called from:
                         </td>
                     </tr>
                 {{end}}
-                </table>     
-            </div>     
+                </table>
+            </div>
             <!-- RIGHT TABLE, mobile -->
             <div class="md:u-hide u-display-block">
                 <table class="width-max-content">
@@ -187,7 +179,7 @@ Called from:
                     </tr>
                     <tr>
                         <td id="reading-time" class="td-metadata-value margin-l-24" >
-                            <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "partials/server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
+                            <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
                         </td>
                     </tr>
                     <tr>
@@ -196,15 +188,15 @@ Called from:
                         </td>
                     </tr>
                     <tr>
-                        <td id="last-updated" class="td-metadata-value margin-l-24">                    
+                        <td id="last-updated" class="td-metadata-value margin-l-24">
                             <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp;
-                            {{/* If learning path, obtain last modified date from any LP file; install guide just display from this file. */}} 
+                            {{/* If learning path, obtain last modified date from any LP file; install guide just display from this file. */}}
                             {{ if $is_learning_path}}
                                 {{- $true_last_mod_date := partial "server-side-processing/calculate-last-update.html" . }}
                                 {{$true_last_mod_date.Format "02 Jan 2006"}}
                             {{else}}
                                 {{ .Lastmod.UTC.Format "2 Jan 2006" }}
-                            {{end}} 
+                            {{end}}
                         </td>
                     </tr>
                 {{ if .Params.test_maintenance}}
@@ -219,7 +211,7 @@ Called from:
                         </td>
                     </tr>
                 {{end}}
-                </table>   
+                </table>
             </div>
         </div>
         <!-- Second column table-->
@@ -258,7 +250,7 @@ Called from:
                                 </span>
                                 <br>
                             {{- end -}}
-                        </td>                        
+                        </td>
                     </tr>
                     <!-- Arm IP if learning path. Official Docs if tool -->
                     {{if $is_learning_path}}
@@ -267,7 +259,7 @@ Called from:
                                 Arm IP:
                             </td>
                             <td class="td-metadata-value">
-                                {{- range .Params.armips -}}<a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>{{- end -}}    
+                                {{- range .Params.armips -}}<a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>{{- end -}}
                             </td>
                         </tr>
                     {{else}}
@@ -298,7 +290,7 @@ Called from:
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                         <span class="fa-solid fa-tag"></span>
                                         {{ .Params.subjects }}
-                                    </ads-tag> 
+                                    </ads-tag>
                                 {{end}}
                                 {{ if .Params.cloud_service_providers }}
                                     <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.cloud_service_providers | urlize}}' style="margin-bottom: 4px;">
@@ -321,7 +313,7 @@ Called from:
                                         {{ . }}
                                     </ads-tag>
                                 {{ end }}
-                            </span>  
+                            </span>
                         </td>
                     </tr>
                     <!-- tool tags, if present in learning paths -->
@@ -336,14 +328,14 @@ Called from:
                                     <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                     <span class="fa-solid fa-tag"></span>
                                     {{$active_tag}}
-                                </ads-tag></span>                             
+                                </ads-tag></span>
                             </td>
                         </tr>
                         {{end}}
                     {{end}}
-                </table>   
+                </table>
             </div>
-            <!-- Table mobile-sized windows only -->   
+            <!-- Table mobile-sized windows only -->
             <div class="md:u-hide u-display-block">
                 <table>
                     <tr>
@@ -393,7 +385,7 @@ Called from:
                             <td class="td-metadata-value margin-l-24">
                                 {{- range .Params.armips -}}
                                     <a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>
-                                {{- end -}}    
+                                {{- end -}}
                             </td>
                         </tr>
                     {{else}}
@@ -450,7 +442,7 @@ Called from:
                                         {{ . }}
                                     </ads-tag>
                                 {{ end }}
-                                </span>  
+                                </span>
                             </td>
                         </tr>
                     <!-- Tool tag, if present in learning paths -->
@@ -467,18 +459,18 @@ Called from:
                                     <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                     <span class="fa-solid fa-tag"></span>
                                     {{$active_tag}}
-                                </ads-tag></span>                             
+                                </ads-tag></span>
                             </td>
                         </tr>
                         {{end}}
                     {{end}}
 
-                </table>   
+                </table>
 
-            </div>                
+            </div>
         </div>
         {{if not $is_learning_path}}
             <p style="margin-top: 24px;">This guide is intended to get you up and running with this tool quickly with the most common settings. For a thorough review of all options, refer to the official documentation.</p>
         {{end}}
-    </div>            
+    </div>
 </div>
