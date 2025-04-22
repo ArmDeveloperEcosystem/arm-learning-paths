@@ -18,7 +18,7 @@ The CMSIS-DSP Python package is a Python API for CMSIS-DSP. Its goal is to make 
 
 For this reason, the Python API is as close as possible to the C one.
 
-Fixed point arithmetic is not often provided by Python packages which generally focus on floating-point operations. The CMSIS-DSP Python package provides the same fixed point arithmetic functions as the C version : Q31, Q15 and Q7. The package is also providing float functions and in the future will also provide half-precision floats like the C API.
+Fixed-point arithmetic is rarely provided by Python packages, which generally focus on floating-point operations. The CMSIS-DSP Python package provides the same fixed-point arithmetic functions as the C version: Q31, Q15 and Q7. The package also provides floating-point functions and will also support half-precision floats in the future, like the C API.
 
-Finally, the CMSIS-DSP Python package is compatible with NumPy and can be used with all other scientific and AI Python packages such as SciPy or PyTorch.
+Finally, the CMSIS-DSP Python package is compatible with NumPy and can be used with all other scientific and AI Python packages such as SciPy and PyTorch.
 

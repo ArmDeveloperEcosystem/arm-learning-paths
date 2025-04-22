@@ -1,21 +1,21 @@
 ---
-title: Learn how to get started with CMSIS-DSP using Python
+title: Getting Started with CMSIS-DSP Using Python
 
-minutes_to_complete: 10
+minutes_to_complete: 30
 
 who_is_this_for: Developers writing DSP/AI software
 
 learning_objectives: 
     - Understand how to use the CMSIS-DSP Python package
-    - Understand how the Python implementation maps to the C one
-    - Develop a complex application with CMSIS-DSP
+    - Understand how the Python implementation maps to the C implementation
+    - Develop a complex application using CMSIS-DSP
 
 prerequisites:
     - Some familiarity with DSP programming
     - Some familiarity with Python programming
     - Knowledge of C
     - Some familiarity with CMSIS-DSP
-    - Python installed on your computer
+    - Python installed on your system
 
 author: Christophe Favergeon
 

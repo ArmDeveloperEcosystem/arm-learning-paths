@@ -370,7 +370,7 @@ If the Python package has been built with Neon acceleration, it will use the new
 
 If this temporary buffer is not provided, the Python package will allocate it automatically. While you can use the same API, this is less efficient.
 
-It is better to detect than the package have been compiled with Neon acceleration, allocate a temporary buffer and use it in the FFT calls.
+It is better to detect whether  the package has been compiled with Neon acceleration, allocate a temporary buffer and use it in the FFT calls. This approach is closer to how the C API must be used.
 
 ```python
 if dsp.has_neon():

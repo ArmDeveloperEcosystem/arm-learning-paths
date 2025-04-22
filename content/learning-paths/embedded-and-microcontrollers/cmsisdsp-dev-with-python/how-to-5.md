@@ -23,7 +23,7 @@ plt.show()
 
 The slices we created are overlapping. By applying a Hanning window function and summing the slices, you can reconstruct the original signal. 
 
-Indeed, summing two Hanning window shifted by half the width of the sample block:
+Indeed, summing two Hanning windows shifted by half the width of the sample block gives:
 ![summed hanning alt-text#center](sumhanning.png "Figure 5. Summed Hanning Window")
 
 As result, if you multiply the overlapping blocks of samples by Hanning windows and sum the result, you can reconstruct the original signal:
@@ -96,7 +96,7 @@ scaling = (energy - self._noise)/energy
 
 (Don’t evaluate this Python code in your Jupyter notebook—it will be run later as part of the full implementation.)
 
-### NoiseSuppressionReference class
+### NoiseSuppression and NoiseSuppressionReference classes
 
 The entire algorithm will be packaged as a Python class.
 The class functions are explained below using Python code that should not be evaluated in the Jupyter notebook.
@@ -104,18 +104,52 @@ The class functions are explained below using Python code that should not be eva
 You should only evaluate the full class definition in the Jupyter notebook—not the code snippets used for explanation.
 
 
-#### NoiseSuppressionReference constructor
+#### NoiseSuppression constructor
 
+`NoiseSuppression` is a shared class used by both the float reference implementation and the Q15 version.
 
+```python
+class NoiseSuppression():
+    def __init__(self,slices):
+            self._windowLength=len(slices[0])
+            self._fftLen,self._fftShift=fft_length(self._windowLength)
+            
+            self._padding_left=(self._fftLen - self._windowLength)//2 
+            self._padding_right=self._fftLen- self._windowLength-self._padding_left
+             
+            self._signal=[]
+            self._slices=slices
+            self._window=None
+```
 
-The constructor:
+The constructor for `NoiseSuppression`:
 - Uses the audio slices as input
-- Computes the VAD signal for the full audio signal
-- Applies the Hanning window to each slice
 - Computes the FFT length that can be used for each slice
 - Computes the padding needed for the FFT
 
 The FFT length must be a power of 2. The slice length is not necessarily a power of 2. The constructor computes the closest usable power of 2. The audio slices are padded with zeros on both sides to match the required FFT length.
+
+#### NoiseSuppressionReference constructor
+
+```python
+class NoiseSuppressionReference(NoiseSuppression):
+    def __init__(self,slices):
+        # In a better version this could be computed from the signal length by taking the
+        # smaller power of two greater than the signal length.
+        NoiseSuppression.__init__(self,slices)
+        
+        # Compute the vad signal
+        self._vad=clean_vad([signal_vad(w) for w in slices])
+        self._noise=np.zeros(self._fftLen)
+        # The Hann window
+        self._window=dsp.arm_hanning_f32(self._windowLength)
+```
+
+The constructor for `NoiseSuppressionReference`:
+- Uses the audio slices as input
+- Call the constructor for `NoiseSuppression`
+- Computes the VAD signal for the full audio signal
+- Compute the Hanning window
 
 
 #### subnoise
@@ -218,6 +252,9 @@ def overlap_and_add(self):
 ```
 
 ### The final code for the Python class
+
+You can evaluate this code in your Jupyter notebook.
+
 ```python
 def fft_length(length):
     result=2
