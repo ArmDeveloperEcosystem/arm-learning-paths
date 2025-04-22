@@ -33,7 +33,7 @@ int main() {
     std::cin >> max_loop_size;
 
     int x[max_loop_size];
-    // Initialise test data
+    // Initialize test data
     for(int i = 0; i < max_loop_size; ++i) x[i] = i;
  
     // Start timing
