@@ -1,5 +1,5 @@
 ---
-title: Build a CCA Attestation Service in AWS with Veraison
+title: Build a CCA Attestation Service on AWS with Veraison
 
 draft: true
 cascade:
@@ -7,17 +7,17 @@ cascade:
 
 minutes_to_complete: 90
 
-who_is_this_for: This Learning Path is for developers who understand the basics of CCA attestation and the Veraison project, and who wish to progress onto creating a more scalable deployment of a CCA attestation verifier service in the cloud.
+who_is_this_for: This Learning Path is for developers familiar with CCA attestation and the Veraison project. You'll learn how to deploy a scalable CCA attestation verifier service on AWS.
 
 
 learning_objectives:
-    - Create an attestation service in the AWS cloud using components from the Veraison project.
-    - Prepare the Veraison service to act as a verifier for Arm CCA attestation tokens by provisioning CCA platform endorsements.
+    - Build an attestation service on AWS using the Veraison project's components.
+    - Set up Veraison as a verifier for Arm CCA attestation tokens by provisioning CCA platform endorsements.
 
 
 prerequisites:
-    - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) for accessing AWS cloud services.
-    - An x86 computer running Ubuntu or Arch Linux, which is authorized to use the AWS account. Other build environments might be possible, but will require the configuration of toolchains for cross-compilation.
+    - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) with access to AWS services.
+    - An x86 computer running Ubuntu or Arch Linux, authorized for AWS access. If you're using another build environment, you'll need to configure the toolchains for cross-compilation.
 
 
 author: Paul Howard
