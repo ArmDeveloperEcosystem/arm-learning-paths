@@ -12,9 +12,6 @@ test_images:
 - fedora:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
-- passed
 title: Native compiler
 tool_install: false
 weight: 2
@@ -68,16 +65,16 @@ To install the most common development tools use the commands below. If the mach
 
 ```bash { target="fedora:latest" }
 sudo dnf update -y
-sudo dnf groupinstall 'Development Tools' -y
+sudo dnf group install "development-tools" -y
 ```
 If `sudo` is not available become _root_ and omit the `sudo`.
 ```console
 dnf update -y
-dnf groupinstall 'Development Tools' -y
+sudo dnf group install "development-tools" -y
 ```
 ## Setting up product license
 
-GCC is open source and freely available for use. 
+GCC is open source and freely available for use.
 
 ## Get started {#start}
 
