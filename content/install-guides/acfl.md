@@ -162,7 +162,7 @@ sudo apt update
 
 Install Arm Compiler for Linux with:
 
-```consoles
+```console
 sudo apt install acfl -y
 ```
 
@@ -226,7 +226,7 @@ Set up the environment, for example, in your `.bashrc` and add module files. The
 
 #### Ubuntu Linux:
 
-```bash { target="ubuntu:latest" pre_cmd=". /usr/share/modules/init/bash; module use /opt/arm/modulefiles" }
+```bash { target="ubuntu:latest" pre_cmd=". /usr/share/modules/init/bash" pre_cmd="module use /opt/arm/modulefiles" }
 echo ". /usr/share/modules/init/bash" >> $HOME/.bashrc
 echo "module use /opt/arm/modulefiles" >> $HOME/.bashrc
 source $HOME/.bashrc
@@ -235,7 +235,7 @@ module avail
 
 #### Red Hat or Amazon Linux:
 
-```bash { target="fedora:latest" env_source="/usr/share/modules/init/bash" pre_cmd="module use /opt/arm/modulefiles" }
+```bash { target="fedora:latest" env_source="/usr/share/Modules/init/bash" pre_cmd="module use /opt/arm/modulefiles" }
 echo ". /usr/share/Modules/init/bash" >> $HOME/.bashrc
 echo "module use /opt/arm/modulefiles" >> $HOME/.bashrc
 source $HOME/.bashrc
@@ -309,7 +309,7 @@ ACfL is now [ready to use](#armclang).
 To get started with the Arm C/C++ Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```bash { env_source="$HOME/.bashrc", pre_cmd=". /usr/share/modules/init/bash; module use /opt/arm/modulefiles; module load acfl/24.10.1" }
 armclang --version
 ```
 
@@ -347,7 +347,7 @@ Hello, C World!
 To get started with the Arm Fortran Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```bash { env_source="$HOME/.bashrc", pre_cmd=". /usr/share/modules/init/bash; module use /opt/arm/modulefiles; module load acfl/24.10.1" }
 armflang --version
 ```
 

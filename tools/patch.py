@@ -24,7 +24,8 @@ def patch(article_path: str, results: dict, link: str):
             content_type, subdirectory, content_title, *others = article_path_parts
         else:
             content_type, content_title, *others = article_path_parts
-        content_title = content_title.strip(".md")
+        # Remove ".md" from the content title if it exists
+        content_title = content_title[:-3] if content_title.endswith(".md") else content_title
         sw_category = content_type
     else:
         raise SystemExit("Unknown content path, pass learning paths or install guides only")
