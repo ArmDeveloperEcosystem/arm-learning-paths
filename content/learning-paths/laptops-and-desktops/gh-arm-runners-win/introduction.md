@@ -14,7 +14,7 @@ Runners are the machines that execute jobs in a GitHub Actions workflow. An Arm-
 
 Arm-hosted runners are available for public repositories at no cost, subject to [standard usage limits](https://docs.github.com/en/actions/administering-github-actions/usage-limits-billing-and-administration#usage-limits). 
 
-### How to use GitHub Arm-hosted Windows Runners?
+### How do I use GitHub Arm-hosted Windows Runners?
 
 To leverage the GitHub Windows Arm64 hosted runners, you need to use the following label in your public repository workflow runs:
 
@@ -23,15 +23,15 @@ runs-on: windows-11-arm
 ```
 
 {{% notice Note %}}
-This label will not work in private repositories, the workflow will fail if you use it. 
+This label does not work in private repositories - the workflow will fail if you use it. 
 {{% /notice %}}
 
 
 ### What types of GitHub-hosted runners are available?
 
-Two types of GitHub-hosted runners are available; standard runners and larger runners. Larger runners are differentiated from standard runners because you can control the amount of RAM, the number of CPUs, and configure the allocated disk space. You can also use the Windows 11 Desktop Arm Image with larger runners. To use this image on larger runners, you will need to create a new runner.
+GitHub offers two types of hosted runners: standard and larger runners. Larger runners give you more control—you can configure the amount of RAM, number of CPUs, and disk space. You can also use the Windows 11 Desktop Arm Image with larger runners. To use this image on larger runners, you will need to create a new runner.
 
-### How can I create an GitHub Arm-hosted Windows larger runner?
+### How can I create a GitHub Arm-hosted Windows larger runner?
 
 Arm-hosted runners are created at the organization level.
 
@@ -41,7 +41,7 @@ On the `Runners` page, select the `New runner` drop-down on the top right, and t
 
 ![new-runner #center](_images/new-runner.png)
 
-Specify a name for the runner, this is the `runs-on` field in your workflows so make the name clear for others who use it.
+Specify a name for the runner. This name is used in the `runs-on` field in your workflows, so make it clear for others who use it.
 
 Choose Windows ARM64 for the platform and click `Save`.
 
