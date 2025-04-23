@@ -29,8 +29,10 @@ def rescale(self,w):
 ```
 #### C Version
 
-
 ```C
+#include "dsp/basic_math_functions.h"
+#include "dsp/statistics_functions.h"
+
 arm_status rescale(q15_t *w, uint32_t nb,q15_t *the_max)
 {
     uint32_t index;
@@ -46,7 +48,7 @@ arm_status rescale(q15_t *w, uint32_t nb,q15_t *the_max)
        status = arm_divide_q15(0x7FFF,*the_max,&quotient,&the_shift);
        if (status == ARM_MATH_SUCCESS)
        {
-         arm_scale_q15(w,quotient,the_shift,w,nb);
+         arm_scale_q15(w,quotient,(int8_t)the_shift,w,nb);
        }
     }
 
@@ -82,12 +84,16 @@ def signal_energy_q15(window):
 
 #### C version
 ```C
-int16_t signal_energy_q15(q15_t *window,unit32_t nb)
+#include "dsp/basic_math_functions.h"
+#include "dsp/fast_math_functions.h"
+#include "dsp/statistics_functions.h"
+
+int16_t signal_energy_q15(q15_t *window,uint32_t nb)
 {
     q15_t mean,neg_mean;
     arm_mean_q15(window,nb,&mean);
     
-    arm_negate_q15(&mean,&mean,1);
+    arm_negate_q15(&mean,&neg_mean,1);
 
     arm_offset_q15(window,neg_mean,window,nb);
 
@@ -95,7 +101,7 @@ int16_t signal_energy_q15(q15_t *window,unit32_t nb)
     q15_t energy;
     arm_power_q15(window,nb,&energy_q63);
 
-    energy=(q15_t)_SSAT((q31_t)(energy_q63>>20),16);
+    energy=(q15_t)__SSAT((q31_t)(energy_q63>>20),16);
 
     // Fixed point format of result is on 16 bit
     // but the specific format has not been identified
@@ -105,7 +111,7 @@ int16_t signal_energy_q15(q15_t *window,unit32_t nb)
 
     arm_vlog_q15(&energy,&dB,1);
 
-    return(dB)
+    return(dB);
 }
 ```
 

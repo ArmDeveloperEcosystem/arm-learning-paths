@@ -134,8 +134,6 @@ The FFT length must be a power of 2. The slice length is not necessarily a power
 ```python
 class NoiseSuppressionReference(NoiseSuppression):
     def __init__(self,slices):
-        # In a better version this could be computed from the signal length by taking the
-        # smaller power of two greater than the signal length.
         NoiseSuppression.__init__(self,slices)
         
         # Compute the vad signal

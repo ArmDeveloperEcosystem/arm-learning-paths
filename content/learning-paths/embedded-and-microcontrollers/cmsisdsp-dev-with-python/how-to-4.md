@@ -62,10 +62,9 @@ vad = np.array([[w]*(winLength-winOverlap) for w in cleaned]).flatten()
 ax.plot(data)
 ax.plot(vad)
 ```
-The reference implementation works. You can now implement the same version using CMSIS-DSP.
-
 ![vad alt-text#center](vad.png "Figure 3. VAD")
 
+The reference implementation works. You can now implement the same version using CMSIS-DSP.
 
 ### CMSIS-DSP Q15 VAD
 
