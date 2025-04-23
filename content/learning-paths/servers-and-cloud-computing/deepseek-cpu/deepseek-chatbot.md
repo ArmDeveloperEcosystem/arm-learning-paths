@@ -165,7 +165,7 @@ Run the pre-quantized DeepSeek-R1 model exactly as the weights were downloaded f
 
 This command will use the downloaded model (`-m` flag), disable conversation mode explicitly (`-no-cnv` flag), adjust the randomness of the generated text (`--temp` flag),  with the specified prompt (`-p` flag), and target a 512 token completion (`-n` flag), using 64 threads (`-t` flag).
 
-You might notice there are many gguf files downloaded. Llama.cpp can load all series of files by passing the first one with `-m` flag.
+You might notice there are many gguf files. Llama.cpp can load all series of files by passing the first one with `-m` flag.
 
 ## Analyze the output and performance statistics
 
