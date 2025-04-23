@@ -6,7 +6,7 @@ draft: true
 
 minutes_to_complete: 10
 
-official_docs: https://github.com/containerd/nerdctl
+official_docs: https://github.com/containerd/nerdctl/blob/main/docs/command-reference.md 
 
 additional_search_terms:
 - container
@@ -25,15 +25,17 @@ multitool_install_part: false
 weight: 1
 ---
 
-Nerdctl is an open-source command-line interface (CLI) designed to be compatible with the popular Docker CLI, but specifically for interacting with [containerd](https://containerd.io/). It provides a familiar user experience for developers operators who are familiar with Docker, while leveraging the capabilities of containerd as the underlying container runtime.
+[Nerdctl](https://github.com/containerd/nerdctl) is an open-source command-line interface (CLI) designed to be compatible with the Docker CLI, but specifically for interacting with [containerd](https://containerd.io/). It provides a familiar user experience for developers who are familiar with Docker, while leveraging the capabilities of containerd as the underlying container runtime.
 
-Using containerd and nerdctl provides similar functionality to Docker but with a smaller memory and CPU footprint, making it ideal for IoT or edge solutions, especially on Arm devices which balance energy efficiency and performance. Nerdctl also supports running containers in a rootless mode, enhancing security by not requiring elevated privileges.
+Using containerd and nerdctl provides similar functionality to Docker but with a smaller memory footprint, making it ideal for IoT and edge solutions, especially on Arm devices that balance energy efficiency and performance. 
 
-This guide focuses on installing containerd and Nerdctl on Arm Linux. 
+Nerdctl also supports running containers in rootless mode, which helps enhance security by not requiring elevated privileges. Rootless mode is not covered below but you can refer to the [documentation](https://rootlesscontaine.rs/getting-started/containerd/) for information about how to run `containerd-rootless-setuptool.sh install`. 
+
+This guide explains how to install and use containerd and nerdctl on Arm Linux and run with `sudo` 
 
 ## Before you begin
 
-This guide assumes you are using Ubuntu 22.04 or later on an Arm-based system (like a Raspberry Pi or an Arm instance in the cloud).
+This guide assumes you are using a Debian-based Arm Linux distribution, including Ubuntu and Raspberry Pi OS. You can use a local Arm Linux computer or an Arm instance in the cloud.
 
 Confirm you are using an Arm machine by running:
 
@@ -47,7 +49,7 @@ The output should be:
 aarch64
 ```
 
-Ensure `wget` and `tar` are installed:
+Ensure `wget` and `tar` are installed. Most distributions will include them, but if not run:
 
 ```bash
 sudo apt-get update
@@ -59,8 +61,7 @@ sudo apt-get install -y wget tar
 Install the containerd runtime:
 
 ```bash 
-sudo apt-get update
-sudo apt-get install -y containerd
+sudo apt-get install containerd -y
 ```
 
 Start and enable the containerd service:
@@ -70,9 +71,30 @@ sudo systemctl start containerd
 sudo systemctl enable containerd
 ```
 
+Confirm the service is running:
+
+```console
+systemctl status containerd.service
+```
+
+When containerd is running, the output is similar to:
+
+```output
+● containerd.service - containerd container runtime
+     Loaded: loaded (/usr/lib/systemd/system/containerd.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2025-04-22 20:12:03 UTC; 2min 20s ago
+       Docs: https://containerd.io
+   Main PID: 8428 (containerd)
+      Tasks: 9
+     Memory: 13.0M (peak: 13.7M)
+        CPU: 401ms
+     CGroup: /system.slice/containerd.service
+             └─8428 /usr/bin/containerd
+```
+
 ## Install nerdctl and CNI plugins
 
-Install nerdctl and the necessary CNI (Container Network Interface) plugins. Replace version numbers if needed.
+Install nerdctl and the necessary CNI (Container Network Interface) plugins. 
 
 ```bash
 NERDCTL_VERSION=$(curl -s https://api.github.com/repos/containerd/nerdctl/releases/latest | grep tag_name | cut -d '"' -f 4 | sed 's/v//')
@@ -95,25 +117,101 @@ Clean up the downloaded files:
 rm nerdctl-${NERDCTL_VERSION}-linux-arm64.tar.gz cni-plugins-linux-arm64-v${CNI_VERSION}.tgz
 ```
 
-
 {{% notice Note %}}
-The commands above attempt to fetch the latest versions automatically. You can replace `${NERDCTL_VERSION}` and `${CNI_VERSION}` with specific versions if required.*
-{{% /notice %}
+The commands above attempt to fetch the latest versions automatically. If required, you can replace `${NERDCTL_VERSION}` and `${CNI_VERSION}` with specific versions.
+{{% /notice %}}
+
+## Install BuildKit
+
+If you want to build container images with nerdctl, you need to install [BuildKit](https://github.com/moby/buildkit). 
+
+If you only need to run container images you can skip this step. 
+
+```bash
+BUILDKIT_VERSION=$(curl -s https://api.github.com/repos/moby/buildkit/releases/latest | grep tag_name | cut -d '"' -f 4 | sed 's/v//')
+wget https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-arm64.tar.gz
+sudo tar -xzvf buildkit-v${BUILDKIT_VERSION}.linux-arm64.tar.gz -C /usr
+rm buildkit-v${BUILDKIT_VERSION}.linux-arm64.tar.gz
+```
+
+Create a systemd service for BuildKit:
+
+```bash
+sudo tee /etc/systemd/system/buildkit.service > /dev/null << EOF
+[Unit]
+Description=BuildKit
+Documentation=https://github.com/moby/buildkit
+
+[Service]
+ExecStart=/usr/bin/buildkitd --oci-worker=false --containerd-worker=true
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+Start and enable the BuildKit service:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start buildkit
+sudo systemctl enable buildkit
+```
+
+Verify BuildKit is running:
+
+```console
+sudo systemctl status buildkit
+```
+
+When running, the output is similar to:
+
+```output
+ubuntu@m1u:~$ sudo systemctl status buildkit
+● buildkit.service - BuildKit
+     Loaded: loaded (/etc/systemd/system/buildkit.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2025-04-22 22:55:39 CDT; 18min ago
+       Docs: https://github.com/moby/buildkit
+   Main PID: 22280 (buildkitd)
+      Tasks: 10 (limit: 4598)
+     Memory: 14.6M (peak: 42.0M)
+        CPU: 1.144s
+     CGroup: /system.slice/buildkit.service
+             └─22280 /usr/bin/buildkitd --oci-worker=false --containerd-worker=true
+```
+
+Check that buildctl can communicate with the daemon:
+
+```console
+sudo buildctl debug workers
+```
+
+If BuildKit is properly installed, you should see output similar to:
+
+```output
+ID				            PLATFORMS
+jz1h9gb0xq39ob6868cr3ev6r	linux/arm64
+```
 
 ## Verify the installation
 
-Test your installation by running a simple NGINX container:
+You can check the nerdctl version:
+
+```console
+sudo nerdctl version
+```
+
+Test your installation by running a simple container that prints the processor architecture:
 
 ```console 
 sudo nerdctl run --name uname armswdev/uname
 ```
 
-Wait a few seconds for the container to run, and the Architecture is printed: 
+Wait a few seconds for the container to start. The architecture is printed:
 
 ```output
 Architecture is aarch64
 ```
-
 
 Clean up the test container:
 
@@ -121,9 +219,29 @@ Clean up the test container:
 sudo nerdctl rm uname
 ```
 
-You can also check the nerdctl version:
+To build a container image, use a text editor to copy the lines below to a new file named `Dockerfile`.
+
 ```console
-sudo nerdctl version
+FROM ubuntu:latest
+CMD echo -n "Architecture is " && uname -m
+```
+
+Build the container image:
+
+```console
+sudo nerdctl build -t uname -f Dockerfile .
+```
+
+Run the new container image:
+
+```console
+sudo nerdctl run uname
+```
+
+The output is the architecture:
+
+```output
+Architecture is aarch64
 ```
 
 ## Basic nerdctl commands
@@ -176,6 +294,18 @@ Remove a container:
 
 ```console
 sudo nerdctl rm <container_name_or_id>
+```
+
+View container logs:
+
+```console
+sudo nerdctl logs <container_name_or_id>
+```
+
+Execute a command in a running container:
+
+```console
+sudo nerdctl exec -it <container_name_or_id> <command>
 ```
 
 You are now ready to use nerdctl and containerd.
