@@ -54,7 +54,7 @@ for idx, file in enumerate(data_files):
 You can check the extracted features with this code block. These are the extracted features from one data sample.
 Expected output shown below:
 
-![output5](Images/output5.PNG)
+![output5](images/output5.PNG)
 
 ## Feature based model
 

@@ -168,7 +168,7 @@ ML_HEARD_ON
 ...
 ```
 
-![keyword #center](Images/keyword.png)
+![keyword #center](images/keyword.png)
 
 ## Repeat with the speech example
 
@@ -185,6 +185,6 @@ INFO - Complete recognition: turn down the temperature in the bedroom
 134 14506 [ML_MQTT] [INFO] Publish to the MQTT topic <thingname>/ml/inference.
 ```
 
-![speech #center](Images/speech.png)
+![speech #center](images/speech.png)
 
 See the [README.md](https://github.com/ARM-software/open-iot-sdk/blob/main/v8m/README.md#setting-up-aws-connectivity) for full details.

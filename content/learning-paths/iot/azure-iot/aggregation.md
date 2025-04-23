@@ -162,23 +162,23 @@ func start
 ```
 
 Once running, observe the HTTP trigger endpoint, which should appear similar to the following:
-![img36 alt-text#center](Figures/36.png)
+![img36 alt-text#center](figures/36.png)
 
 Next, start the simulator to stream sensor data and open the HTTP trigger endpoint URL in your web browser. You will see the calculated average temperature displayed:
-![img37 alt-text#center](Figures/37.png)
+![img37 alt-text#center](figures/37.png)
 
 ## Deploy to Azure Function App
 Now that your Azure Function is fully tested and ready, it's time to deploy it to Azure, making it accessible online and available for integration with other services and applications. Visual Studio Code provides an easy and efficient way to deploy Azure Functions directly from your local development environment. Follow these steps to deploy your function
 1. In Visual Studio Code, open the Command Palette (Ctrl+Shift+P on Windows/Linux, or Cmd+Shift+P on macOS) and search for "Azure Functions: Deploy to Function App":
-![img38 alt-text#center](Figures/38.png)
+![img38 alt-text#center](figures/38.png)
 2. The deployment wizard will guide you through the following selections:
 * Subscription: choose the Azure subscription you wish to use,
 * Select a function app: Select the Function App that you previously created in Azure (in this example, "IoTTemperatureAlertFunc")
 * Confirm your deployment:
-![img39 alt-text#center](Figures/39.png)
+![img39 alt-text#center](figures/39.png)
 3. Wait for the deployment to complete. This process typically takes a few moments. Once deployed, your Azure Function is hosted in Azure and ready for use.
 4. Open the Azure Portal, and go to your function app (in this example, "IoTTemperatureAlertFunc"). You will see the deployed functions:
-![img40 alt-text#center](Figures/40.png)
+![img40 alt-text#center](figures/40.png)
 
 ## Configure Function App Settings
 We have just deployed the functions to Azure. Previously, when testing the functions locally, we used the local.settings.json file to store the Cosmos DB connection string. However, this local configuration file is not deployed to Azure. Therefore, we need to update the corresponding settings directly within the Azure portal.
@@ -191,7 +191,7 @@ Follow these steps to configure the Cosmos DB connection string
 3. Click the + Add button
 4. Enter the name you used in your code (e.g., armiotcosmosdb_DOCUMENTDB).
 5. Paste the Cosmos DB connection string into the Value field:
-![img41 alt-text#center](Figures/41.png)
+![img41 alt-text#center](figures/41.png)
 6. Click Apply to add the setting.
 7. Press Apply at the bottom to apply changes. Then, confirm to save changes
 
@@ -200,11 +200,11 @@ Once you've configured the connection string, test your deployed Azure Function 
 1. Return to the Overview page of your Azure Function App.
 2. Click on your HTTP-triggered function (GetAverageTemperature).
 3. Click Get function URL and copy the displayed URL (under default):
-![img42 alt-text#center](Figures/42.png)
+![img42 alt-text#center](figures/42.png)
 4. Open this URL in your web browser.
 5. Start your IoT simulator to begin streaming telemetry data to Cosmos DB.
 6. Refresh or access the function URL again, and you should see the calculated average temperature displayed:
-![img43 alt-text#center](Figures/43.png)
+![img43 alt-text#center](figures/43.png)
 
 This confirms your Azure Function successfully connects to Cosmos DB, retrieves real-time data, and calculates the average temperature as intended
 
