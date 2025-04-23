@@ -12,9 +12,6 @@ test_images:
 - fedora:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
-- passed
 title: Arm GNU Toolchain
 tool_install: false
 weight: 4
@@ -30,19 +27,19 @@ However there are reasons you may wish to use earlier compiler versions, so olde
 ## How do I download the Arm GNU Toolchain? {#download}
 
 Arm GNU Toolchain releases consist of cross toolchains for the following host operating systems:
-    
-Linux    
+
+Linux
   * Available for x86_64 and AArch64 host architectures
-  * Available for bare-metal and Linux targets      
-    
-Windows    
+  * Available for bare-metal and Linux targets
+
+Windows
   * Available for x86 host architecture only (compatible with x86_64)
   * Available for bare-metal and Linux targets
-                      
-macOS    
+
+macOS
   * Available for x86_64 and Apple silicon (beta) host architectures
   * Available for bare-metal targets only
-    
+
 Download the correct toolchain variant for your development needs from the [Arm Developer website](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads).
 
 ## How do I install the Arm GNU Toolchain on Linux?
@@ -80,7 +77,7 @@ source ~/.bashrc
 
 ## How do I install the Arm GNU Toolchain on macOS?
 
-Downloads for `macOS` are available as tar files (`.tar.xz`) and package files (`.pkg`). 
+Downloads for `macOS` are available as tar files (`.tar.xz`) and package files (`.pkg`).
 
 ### tar files
 For `.tar.xz` files, unpack the downloaded file to the install directory.
@@ -89,7 +86,7 @@ tar xJf arm-gnu-toolchain-<version>-<host-arch>-<TRIPLE>.tar.xz -C /path/to/inst
 ```
 
 ### pkg files
-For `.pkg` files use the installer. 
+For `.pkg` files use the installer.
 ```console
 sudo installer -pkg arm-gnu-toolchain-<version>-<host-arch>-<TRIPLE>.pkg -target /
 ```
@@ -114,7 +111,7 @@ The `/etc/paths` file is a list of paths to search.
 
 ### Apple Silicon
 
-Here is a specific example for macOS with Apple Silicon and the AArch32 bare-metal target. 
+Here is a specific example for macOS with Apple Silicon and the AArch32 bare-metal target.
 
 ```console
 wget https://developer.arm.com/-/media/Files/downloads/gnu/14.2.rel1/binrel/arm-gnu-toolchain-14.2.rel1-darwin-arm64-arm-none-eabi.pkg
@@ -136,15 +133,15 @@ For example, to install the tools silently, amend users `PATH` and add registry 
 ```console
 gcc-arm-<version>--mingw-w64-i686-arm-none-eabi.exe /S /P /R
 ```
-The zip package is a backup to Windows installer for those who cannot run the installer. You can unzip the package and then invoke the tools directly. 
+The zip package is a backup to Windows installer for those who cannot run the installer. You can unzip the package and then invoke the tools directly.
 
-## Setting up product license 
+## Setting up product license
 
 Arm GNU Toolchain is open sourced and freely available for use. No licenses need to be set up for use.
 
 To use the Arm GNU Toolchain in conjunction with [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio) you must [register the toolchain](https://developer.arm.com/documentation/101469/2022-0/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
 
-## Get started 
+## Get started
 
 To verify the installation is correct enter:
 ```console

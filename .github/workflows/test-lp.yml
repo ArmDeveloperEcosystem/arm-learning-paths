@@ -14,10 +14,22 @@ jobs:
           hugo
       - name: Get all changed markdown files
         id: changed-markdown-files
-        uses: step-security/changed-files@v45
+        uses: tj-actions/changed-files@v46
         with:
           files: |
              **.md
+      - name: Check for capital letters or spaces in content directory
+        run: |
+          echo "Checking for capital letters or spaces in content directory paths..."
+
+          git diff --name-only origin/${{ github.base_ref }}...HEAD |
+            grep '^content/' |
+            grep -E '[A-Z]|[[:space:]]' && {
+              echo "❌ Found invalid file or directory names with capital letters or spaces in 'content/'"
+              exit 1
+            }
+
+          echo "✅ No capital letters or spaces found in 'content/' paths."
       - name: Install dependencies
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         run: pip install -r tools/requirements.txt
@@ -26,7 +38,7 @@ jobs:
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         # Run the test suite
         run: |
-            set -o pipefail; ./tools/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee test-lp-output.txt
+              set -o pipefail; ./tools/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee test-lp-output.txt
       - name: Parse test suite errors
         id: test-suite-state
         if: success()

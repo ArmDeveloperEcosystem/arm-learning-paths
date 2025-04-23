@@ -17,7 +17,7 @@ cd $HOME
 git clone https://git.codelinaro.org/linaro/dcap/cca-demos/poc-endorser
 ```
 ## Configure the Endorsement Tool for AWS
-By default, the endorsement tool assumes that your Veraison services are deployed locally on your machine. This is not the case here, because your Veraison services have been deployed into AWS instead. Therefore, you will need to provide some configuration to the tool, in order to point it at the correct API endpoints with the required authentication.
+By default, the endorsement tool assumes that your Veraison services are deployed locally on your machine. This is not the case here, because your Veraison services have been deployed into AWS instead. You'll need to configure the tool to point it at the correct API endpoints with the required authentication.
 
 In the command shell where you created the AWS deployment of Veraison, run the following command:
 
@@ -69,7 +69,7 @@ Now run the following command to provision the endorsements:
 ```bash
 make endorse
 ```
-This command will run the Docker container and send the CCA endorsements to Veraison. You should see output similar to the following:
+This command runs the Docker container and sends the CCA endorsements to your AWS-hosted Veraison deployment. You should see output similar to the following:
 
 ```output
 docker run --network=host "cca-demo/endorser"
@@ -88,7 +88,7 @@ Next, return to the command shell where you created the Veraison AWS deployment,
 cd $HOME/services/deployments/aws
 veraison stores
 ```
-This command will query Veraison's database stores. If the CCA endorsements were provisioned successfully, the output should look something like the example below. (You don't need to be concerned with understanding all of the detail here.)
+This command will query Veraison's database stores. If the CCA endorsements were provisioned successfully, the output should look something like the example below. (You don't need to understand all of the detail here.)
 
 ```output
 TRUST ANCHORS:
@@ -304,4 +304,4 @@ ARM_CCA://0/f0VMRgIBAQAAAAAAAAAAAAMAPgABAAAAUFgAAAAAAAA=
 POLICIES:
 ---------
 ```
-Your Veraison deployment is now complete and ready to act as an attestation verification service for pre-silicon Arm CCA platforms.
+Your Veraison deployment is now ready to act as an attestation verification service for pre-silicon Arm CCA platforms.

@@ -1,10 +1,6 @@
 ---
 title: Boost C++ performance by optimizing loops with boundary information
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for C++ developers who want to improve the runtime of loops using existing knowledge of the loop size.
