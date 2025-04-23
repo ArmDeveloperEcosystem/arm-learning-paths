@@ -22,8 +22,9 @@ prerequisites:
     - Familiarity with Python and machine learning concepts.
     - An active Hugging Face account with access to the target model.
 
-author: Rani Chowdary Mandepudi
-	Phalani Paladugu
+author: 
+   - Rani Chowdary Mandepudi
+   - Phalani Paladugu
 
 ### Tags
 skilllevels: Introductory

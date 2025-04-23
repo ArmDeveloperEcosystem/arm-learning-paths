@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 You should use an `x86_64` development machine running Windows or Linux for the best experience. 
 
-The [Arm ML Evaluation Kit (MLEK)](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit) is not fully supported on Windows. Some of the required tools work only on Linux. Linux is recommended if you plan to use MLEK extensively. 
+The [Arm ML Evaluation Kit (MLEK)](https://git.mlplatform.org/ml/ethos-u/ml-embedded-evaluation-kit.git/) is not fully supported on Windows. Some of the required tools work only on Linux. Linux is recommended if you plan to use MLEK extensively. 
 
 There are some ML examples which can be developed using Windows tools. 
 
@@ -61,7 +61,7 @@ Use an editor or program such as `more` or `cat` to view the Dockerfile.
 
 ## Machine learning Frameworks
 
-[TensorFlow Lite for Microcontrollers (TFLM)](https://www.tensorflow.org/lite/embedded-and-microcontrollers/) is on of the more common framework for microcontroller ML applications.
+[LiteRT for Microcontrollers](https://ai.google.dev/edge/litert/microcontrollers/overview), formerly known as TensorFlow Lite for Microcontrollers is on of the more common framework for microcontroller ML applications.
 
 TensorFlow uses [`xxd`](https://linux.die.net/man/1/xxd/) to convert TensorFlow Lite models into C data structures. 
 
