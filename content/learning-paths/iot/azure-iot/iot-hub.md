@@ -1,6 +1,6 @@
 ---
 # User change
-title: "IoT Hub"
+title: "Azure IoT Hub"
 
 weight: 3
 
@@ -19,8 +19,8 @@ In the following sections of this tutorial, you’ll learn how to create and con
 ## Create Azure IoT Hub
 Start by creating an Azure IoT Hub
 1. Sign in to the Azure Portal:
-* Open your web browser and go to portal.azure.com.
-* Sign in using your Azure account credentials.
+	* Open your web browser and go to https://portal.azure.com
+	* Sign in using your Azure account credentials.
 
 2. Create a new Azure IoT Hub resource
 * On the Azure Portal home page, select “Create a resource” at the top left as shown below

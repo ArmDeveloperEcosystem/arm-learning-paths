@@ -7,20 +7,19 @@ weight: 6
 layout: "learningpathall"
 ---
 
-## Objective
-In the previous section, you successfully set up an Azure Stream Analytics job and configured Azure IoT Hub as an input source. You implemented a simple query to stream real-time sensor data directly from IoT Hub, establishing a seamless flow of telemetry data into Azure. Now, you’ll take the next step to persist this streaming data in Azure Cosmos DB.
+In the previous section, you successfully set up an Azure Stream Analytics job and configured Azure IoT Hub as an input source. You implemented a simple query to stream real-time sensor data directly from IoT Hub, establishing a seamless flow of telemetry data into Azure. Now, you will take the next step to persist this streaming data in Azure Cosmos DB.
 
 ## Azure Cosmos DB
 Azure Cosmos DB is a fully managed, globally distributed NoSQL database service designed for scalability, reliability, and high availability. Its flexible data schema allows for easy storage of diverse data types from multiple IoT devices without requiring rigid schema definitions. This schema flexibility is especially valuable in IoT scenarios, where sensors and devices may send varied or evolving data structures.
 
-Consider a scenario where your existing IoT devices stream telemetry data (temperature, pressure, humidity) to Azure Cosmos DB via Azure Stream Analytics. Now imagine that you need to integrate a new sensor type—such as an air-quality sensor that provides an additional measurement (e.g., “AirQualityIndex”).
+Consider a scenario where your existing IoT devices stream telemetry data (temperature, pressure, humidity) to Azure Cosmos DB via Azure Stream Analytics. Now imagine that you need to integrate a new sensor type, such as an air-quality sensor that provides an additional measurement (example: AirQualityIndex).
 
-With Azure Cosmos DB’s NoSQL architecture, you don’t have to explicitly modify or migrate database schemas when introducing new data fields. The new sensor data can simply be included in your Stream Analytics query, and Cosmos DB will automatically store the additional field alongside existing data entries without any extra setup.
+With Azure Cosmos DB’s NoSQL architecture, you do not have to explicitly modify or migrate database schemas when introducing new data fields. The new sensor data can simply be included in your Stream Analytics query, and Cosmos DB will automatically store the additional field alongside existing data entries without any extra setup.
 
 ### Partitioning
 Azure Cosmos DB uses partitioning for efficiently managing large-scale data and high-throughput operations. Partitioning distributes data across multiple servers (physical partitions), allowing Cosmos DB to scale seamlessly as data volume and query demands grow.
 
-Cosmos DB uses a partition key—a field chosen by the user—to determine how data is distributed across partitions. The partition key should ideally have a high cardinality (many distinct values) and should evenly distribute read and write workloads. Each unique value of the partition key corresponds to a logical grouping called a logical partition. Documents with the same partition key value reside within the same logical partition.
+Cosmos DB uses a partition key, a field chosen by the user, to determine how data is distributed across partitions. The partition key should ideally have a high cardinality (many distinct values) and should evenly distribute read and write workloads. Each unique value of the partition key corresponds to a logical grouping called a logical partition. Documents with the same partition key value reside within the same logical partition.
 
 When you select a suitable partition key, Cosmos DB ensures that operations (reads and writes) targeting a specific logical partition perform efficiently because queries can quickly locate and retrieve data without scanning the entire dataset. If your data and workload scale significantly, Cosmos DB transparently manages splitting and distributing data across additional physical partitions automatically. Therefore, selecting an effective partition key (such as deviceId for IoT scenarios) can greatly optimize performance, scalability, and cost efficiency.
 
@@ -31,12 +30,12 @@ In Azure Cosmos DB, scaling relies on partitions, allowing the database to handl
 
 When data volume or throughput requirements grow beyond the capacity of a single logical partition, Cosmos DB transparently distributes these logical partitions across multiple physical partitions (servers). As data volume and workload increase, Cosmos DB dynamically creates additional physical partitions, automatically redistributing your logical partitions across them. This horizontal scaling ensures that read and write operations remain fast and efficient, even as the database size and traffic significantly grow.
 
-Efficient scaling is directly linked to choosing a suitable partition key. Selecting a good partition key ensures that your data and workload are evenly balanced across physical partitions. Good partitioning prevents hotspots—scenarios where a single partition disproportionately handles more workload than others—which can lead to performance bottlenecks. Thus, careful selection of partition keys (such as device ID in IoT scenarios) allows Cosmos DB to scale smoothly and maintain high performance and reliability, regardless of how much your data or traffic grows.
+Efficient scaling is directly linked to choosing a suitable partition key. Selecting a good partition key ensures that your data and workload are evenly balanced across physical partitions. Good partitioning prevents hotspot scenarios where a single partition disproportionately handles more workload than others, which can lead to performance bottlenecks. Thus, careful selection of partition keys (such as device ID in IoT scenarios) allows Cosmos DB to scale smoothly and maintain high performance and reliability, regardless of how much your data or traffic grows.
 
 ### Data Operations
-In Azure Cosmos DB, all data operations—such as retrieval, update, insert, and delete—consume units of measure called Request Units (RUs). Request Units represent the resources required to perform operations such as reads, writes, queries, and updates. Each operation consumes a certain number of RUs, and Cosmos DB uses this concept to provide predictable and consistent performance.
+In Azure Cosmos DB, all data operations, such as retrieval, update, insert, and delete, consume units of measure called Request Units (RUs). Request Units represent the resources required to perform operations such as reads, writes, queries, and updates. Each operation consumes a certain number of RUs, and Cosmos DB uses this concept to provide predictable and consistent performance.
 
-When you perform a data operation in Cosmos DB, the request is routed to the appropriate partition based on the partition key provided. If you’re retrieving or updating a single document by specifying its unique id and partition key value, Cosmos DB efficiently locates the data within a single logical partition, resulting in minimal RU consumption. However, cross-partition queries—queries spanning multiple logical partitions—consume more RUs because Cosmos DB must query multiple partitions simultaneously.
+When you perform a data operation in Cosmos DB, the request is routed to the appropriate partition based on the partition key provided. If you are retrieving or updating a single document by specifying its unique id and partition key value, Cosmos DB efficiently locates the data within a single logical partition, resulting in minimal RU consumption. However, cross-partition queries, which are queries spanning multiple logical partitions, consume more RUs because Cosmos DB must query multiple partitions simultaneously.
 
 As your application workload increases, Cosmos DB manages scalability through partitions. Increasing throughput (i.e., RU/s) allocates more resources to your container, automatically distributing the load across existing or newly created physical partitions. Conversely, if your workload decreases, you can scale down to reduce costs. Since Cosmos DB automatically handles partition management behind the scenes, data remains available and responsive with minimal intervention.
 
@@ -80,7 +79,7 @@ Once the deployment completes:
 
 ### Modify Stream Analytics Job
 Now update your query in Stream Analytics to write data from IoT Hub directly into Cosmos DB:
-1. Go to IoTStreamAnalyticsJob.
+1. Go to `IoTStreamAnalyticsJob`.
 2. Under Job topology, select Outputs.
 3. Click Add output, and select Cosmos DB:
 ![img19 alt-text#center](figures/19.png)
@@ -88,7 +87,7 @@ Now update your query in Stream Analytics to write data from IoT Hub directly in
 ![img20 alt-text#center](figures/20.png)
 
 ### Update Your Stream Analytics Query
-Now once, you have the output configured, modify the query. To do so, select Query under Job topology. Then, modify your existing query to explicitly specify your Cosmos DB output alias:
+Now that you have the output configured, lets modify the query. To do so, select Query under Job topology. Then, modify your existing query to explicitly specify your Cosmos DB output alias:
 
 ```SQL
 SELECT
@@ -110,7 +109,7 @@ Afterwards, click Start job, and then Start:
 ![img22 alt-text#center](figures/22.png)
 
 ## Verify data flow in Cosmos DB
-To verify that your data pipeline is working correctly, first start your Python IoT simulator application (iot_simulator.py). Ensure it’s actively sending telemetry data. Next, open the Azure Portal and navigate to your Azure Cosmos DB resource. Under Data Explorer, select your database and then your container (e.g., SensorReadings). Once selected, click Items to view your stored data. Sensor readings streamed from your IoT device will appear on the right-hand side of the Data Explorer interface, similar to the screenshot below:
+To verify that your data pipeline is working correctly, first start your Python IoT simulator application `iot_simulator.py`. Ensure it’s actively sending telemetry data. Next, open the Azure Portal and navigate to your Azure Cosmos DB resource. Under Data Explorer, select your database and then your container (e.g., SensorReadings). Once selected, click Items to view your stored data. Sensor readings streamed from your IoT device will appear on the right-hand side of the Data Explorer interface, similar to the screenshot below:
 
 ![img23 alt-text#center](figures/23.png)
 
@@ -144,7 +143,5 @@ Our defined fields (deviceId, temperature, pressure, humidity, and timestamp) co
 
 When storing data, Cosmos DB uses the provided partition key (such as deviceId) to evenly distribute documents across logical partitions. This optimizes retrieval speed and scalability, especially in IoT scenarios where queries often target specific devices. This approach helps ensure efficient data management and high performance, even as your data volume and throughput requirements increase.
 
-## Summary and Next Steps
-In this section, you successfully configured your Azure Stream Analytics job to persist real-time sensor data from Azure IoT Hub into Azure Cosmos DB. You defined and executed a query that captures and stores streaming telemetry in a flexible, schema-free JSON document structure, taking advantage of Cosmos DB’s powerful and dynamic data-storage capabilities. By completing these steps, you’ve built a data pipeline that streams sensor readings from your simulated IoT devices directly into a scalable, highly performant NoSQL database. You’re now prepared to extend your solution further, enabling data analytics, alerting, monitoring, and visualization.
 
-Now that you’ve successfully configured Azure Stream Analytics to store telemetry data in Azure Cosmos DB, the next step is to implement data monitoring and alerting. You’ll use Azure Functions, serverless compute service, to automatically monitor stored sensor data. Specifically, you’ll create an Azure Function that periodically reads temperature values from Cosmos DB, evaluates them against defined thresholds, and sends notifications whenever these thresholds are exceeded.
+Now that you have successfully configured Azure Stream Analytics to store telemetry data in Azure Cosmos DB, the next step is to implement data monitoring and alerting. You will use Azure Functions, serverless compute service, to automatically monitor stored sensor data. Specifically, you will create an Azure Function that periodically reads temperature values from Cosmos DB, evaluates them against defined thresholds, and sends notifications whenever these thresholds are exceeded.
