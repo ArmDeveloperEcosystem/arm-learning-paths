@@ -1,6 +1,9 @@
 ---
 title: Quantize and Run a Large Language Model using vLLM on Arm Servers
 
+draft: true
+cascade:
+    draft: true
 
 minutes_to_complete: 45
 
@@ -15,11 +18,12 @@ learning_objectives:
 
     
 prerequisites:
-    - An Arm-based server or cloud instance running with at least 32 CPU cores, 64 GB RAM and 80 GB of available disk space.
+    - An Arm-based server or cloud instance running with at least 32 CPU cores, 64 GB RAM and 32 GB of available disk space.
     - Familiarity with Python and machine learning concepts.
     - An active Hugging Face account with access to the target model.
 
 author: Rani Chowdary Mandepudi
+	Phalani Paladugu
 
 ### Tags
 skilllevels: Introductory

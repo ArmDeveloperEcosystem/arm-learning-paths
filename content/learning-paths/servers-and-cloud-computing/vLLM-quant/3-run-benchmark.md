@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Run Single Inference
 
-Once the server is running, start by verifying it with a basic single-prompt request using `curl`. This confirms the server is running correctly and that the OpenAI-compatible /v1/chat/completions API is responding as expected:
+Once the server is running, open another terminal and verify it is running as expected with a basic single-prompt request using `curl`. This confirms the server is running correctly and that the OpenAI-compatible /v1/chat/completions API is responding as expected:
 
 ```bash
 curl http://localhost:8000/v1/chat/completions \
@@ -51,8 +51,8 @@ After confirming single-prompt inference, run batch testing to simulate concurre
 
 Use the following Python script to simulate concurrent user interactions.
 
-Save it as `batch_test.py`:
-```bash
+Save the content shown below in a file named `batch_test.py`:
+```python
 import requests
 import json
 import os
@@ -151,10 +151,10 @@ if __name__ == "__main__":
 Then, run it using:
 
 ```bash
-python batch_test.py localhost 8000 --schema http --batch 16 -m /home/ubuntu/Llama-3.1-8B-Instruct-w8a8-channelwise
+python3 batch_test.py localhost 8000 --schema http --batch 16 -m $HOME/Llama-3.1-8B-Instruct-w8a8-channelwise
 ```
 This simulates multiple users interacting with the model in parallel and helps validate server-side performance under load.
-You can modify the number of requests using the --batch flag or review/edit batch_test.py to customize prompt content and concurrency logic.
+You can modify the number of requests using the --batch flag or review and edit `batch_test.py` to customize prompt content and concurrency logic.
 
 When the test completes, server logs will display a summary including average prompt throughput and generation throughput. This helps benchmark how well the model performs under concurrent load on your Arm-based system.
 
