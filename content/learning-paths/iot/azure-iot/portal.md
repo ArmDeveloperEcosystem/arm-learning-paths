@@ -8,13 +8,19 @@ layout: "learningpathall"
 ---
 
 ## Objective
-We have successfully established the core backend components for our IoT solution. An IoT simulator continuously generates sensor data, streaming it securely to the cloud via Azure IoT Hub. These sensor readings are stored in Cosmos DB, ensuring data persistence and scalability. Additionally, we’ve implemented an Azure Function that can be triggered through HTTP requests to query Cosmos DB and calculate the average temperature from recent sensor data. With these underlying services fully operational, we’re now prepared to build a WWW portal that will visually present real-time temperature information to our end-users.
+You have successfully established the core backend components for our IoT solution. An IoT simulator continuously generates sensor data, streaming it securely to the cloud via Azure IoT Hub. These sensor readings are stored in Cosmos DB, ensuring data persistence and scalability. Additionally, you have implemented an Azure Function that can be triggered through HTTP requests to query Cosmos DB and calculate the average temperature from recent sensor data. With these underlying services fully operational, you can now build a web portal that will visually present real-time temperature information to end users.
 
 ## Website
-Start by creating a new folder named Arm.AzureIoT.Portal, inside which you’ll create three files: index.html, main.js, and styles.css. 	The first file, index.html will define the structure of the webpage, and contain the HTML markup and links to the JavaScript and CSS files. The second file, main.js will include the logic and interactivity of the webpage. In this project, it will handle fetching temperature data from your Azure Function and updating the displayed content dynamically. The last file, styles.css will contain all the styling information, controlling the visual appearance of your webpage. 
+Start by creating a new folder named `Arm.AzureIoT.Portal`, inside which you will create three files: `index.html`, `main.js`, and `styles.css`. 
+
+   *`index.html` will define the structure of the webpage, and contain the HTML markup and links to the JavaScript and CSS files. 
+
+   *`main.js` will include the logic and interactivity of the webpage. In this project, it will handle fetching temperature data from your Azure Function and updating the displayed content dynamically. 
+
+   *`styles.css` will contain all the styling information, controlling the visual appearance of your webpage. 
 
 ### styles.css
-Modify your styles.css file by adding the following CSS:
+Modify your `styles.css` file by adding the following CSS:
 ```css
 body, html {
     margin: 0;
@@ -57,15 +63,16 @@ body, html {
   }
 ```
 
-The provided CSS sets a modern, dark-themed appearance for your IoT portal webpage. Here’s a breakdown of its styling:
-* body and html. The styles remove default margins and paddings, define a dark background color (#121212), set the text color to white for high contrast, and center content both horizontally and vertically using Flexbox.
-* .container - this creates a central container element with padding for spacing, rounded corners (border-radius: 8px) for a softer look, a subtle shadow effect for depth, and a slightly lighter dark background (#1e1e1e) to distinguish the content area from the main page background.
-* h1 - this defines the main title style with increased font size (2.5rem) and additional spacing below to clearly separate the title from other content.
-* button - styles the interactive “Get Temperature” button, giving it a blue color (#1e88e5), white text for readability, rounded corners for a friendly appearance, and smooth color-transition effects when hovered to improve user experience.
-* .result - formats the text area where the temperature reading will appear, adding sufficient margin for clear spacing and slightly larger text size to make the results easily readable.
+The provided CSS sets a modern, dark-themed appearance for your IoT portal webpage. Here is a breakdown of its styling:
+
+   * body and html. The styles remove default margins and paddings, define a dark background color (#121212), set the text color to white for high contrast, and center content both horizontally and vertically using Flexbox.
+   * `.container` - this creates a central container element with padding for spacing, rounded corners (border-radius: 8px) for a softer look, a subtle shadow effect for depth, and a slightly lighter dark background (#1e1e1e) to distinguish the content area from the main page background.
+   * `h1` - this defines the main title style with increased font size (2.5rem) and additional spacing below to clearly separate the title from other content.
+   * `button` - styles the interactive “Get Temperature” button, giving it a blue color (#1e88e5), white text for readability, rounded corners for a friendly appearance, and smooth color-transition effects when hovered to improve user experience.
+   * `.result` - formats the text area where the temperature reading will appear, adding sufficient margin for clear spacing and slightly larger text size to make the results easily readable.
 
 ### main.js
-Now, open your main.js file and update it with the following JavaScript code:
+Now, open your `main.js` file and update it with the following JavaScript code:
 ```JavaScript
 const functionUrl = "<YOUR_FUNCTION_URL_GOES_HERE>";
 
@@ -125,10 +132,10 @@ In the body section we have:
 *  a button (id="getTempBtn") that users click to trigger the JavaScript logic retrieving temperature data from your Azure Function.
 * a placeholder label (div) with the id "result" initially showing "Temperature: -- °C". The JavaScript updates this label dynamically with the actual temperature retrieved from your backend.
 
-Finally, the index.html includes the JavaScript file (main.js) placed at the end of the body to ensure the HTML elements are fully loaded before executing scripts.
+Finally, the `index.html` includes the JavaScript file (main.js) placed at the end of the body to ensure the HTML elements are fully loaded before executing scripts.
 
 ## Testing the Implementation:
-Make sure you’ve saved all three files (index.html, main.js, and styles.css). Next:
+Make sure you have saved all three files (index.html, main.js, and styles.css). Next:
 1. Start the IoT Simulator to begin streaming data to the Azure IoT Hub.
 2. Open the index.html file locally in your web browser.
 3. Click the "Get temperature" button.
@@ -138,7 +145,7 @@ You should now see real-time temperature readings displayed:
 ![img44 alt-text#center](Figures/44.png)
 
 ## Deployment to Azure Blob Storage
-You will now deploy the web portal you’ve created to Azure Blob Storage, making it accessible online.
+You will now deploy the web portal you have created to Azure Blob Storage, making it accessible online.
 
 ### Create and Configure Azure Blob Storage
 1. Sign in to the Azure Portal.
@@ -158,7 +165,7 @@ You will now deploy the web portal you’ve created to Azure Blob Storage, makin
 * Navigate to your newly created storage account.
 * Under Data management, click “Static website”.
 * Select “Enabled”.
-* Set index.html as the index document name.
+* Set `index.html` as the index document name.
 ![img48 alt-text#center](Figures/48.png)
 * Click Save.
 
@@ -166,7 +173,7 @@ After saving, Azure provides you with a URL like: https://<storage-account-name>
 Make sure to save this URL, as it will serve as the public endpoint for your website.
 
 ### Upload Files to Azure Blob Storage
-You can upload your website files directly using the Azure Portal or via Azure Storage Explorer. Here, we’ll use the Azure Portal:
+You can upload your website files directly using the Azure Portal or via Azure Storage Explorer. Here, you will use the Azure Portal:
 1. Navigate to your storage account.
 2. Under Data storage, select “Containers”.
 3. Open the container named ”$web” (created automatically when enabling static websites).
@@ -180,4 +187,4 @@ After uploading your files, open a browser and navigate to https://<storage-acco
 ![img50 alt-text#center](Figures/50.png)
 
 ## Summary
-In this learning path, we successfully built a complete, end-to-end prototype of an IoT solution. Our journey began with a simulator streaming realistic telemetry data to Azure through IoT Hub. We leveraged Azure Stream Analytics to process and route this streaming data directly into Cosmos DB, providing scalable and reliable storage. Additionally, we developed two Azure Functions: the first continuously monitors incoming temperature readings, sending email notifications whenever the temperature exceeds a predefined threshold, ensuring proactive alerts. The second Azure Function aggregates recent temperature data from the last minute and provides this information via an HTTP endpoint. Finally, we utilized this aggregation function within our user-friendly web portal, enabling real-time visualization of temperature data, thus completing our robust and interactive IoT solution.
+In this learning path, you successfully built a complete, end-to-end prototype of an IoT solution. YOu started with a simulator streaming realistic telemetry data to Azure through IoT Hub. You used Azure Stream Analytics to process and route this streaming data directly into Cosmos DB, providing scalable and reliable storage. Additionally, you developed two Azure Functions: the first continuously monitors incoming temperature readings, sending email notifications whenever the temperature exceeds a predefined threshold, ensuring proactive alerts. The second Azure Function aggregates recent temperature data from the last minute and provides this information via an HTTP endpoint. Finally, you utilized this aggregation function within our user-friendly web portal, enabling real-time visualization of temperature data, thus building out a complete IoT solution.
