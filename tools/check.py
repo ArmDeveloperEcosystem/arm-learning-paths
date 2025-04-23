@@ -85,9 +85,9 @@ def write_commands_to_file(test_cmd_filename, test):
     # - Working directory is specified
     # - An environment variable is specified
     cmd_args = {
-                "env_source":"source",
+                "env_source":".",
                 "cwd":"cd ",
-                "env":"export"
+                "env=":"export"
                 }
     for cmd_arg in cmd_args.keys():
         if cmd_arg in test:
@@ -153,6 +153,11 @@ def check(json_file, start, stop, md_article):
     test_images = data["test_images"]
     for n_image, test_image in zip(range(0, len(test_images)), test_images):
         logging.info(f"--- Testing on {test_image} ---")
+
+        if test_image != "ubuntu:latest":
+            container_name = init_container(i_img=n_image, img=test_image)
+            logging.info(f"{container_name} initialized")
+
         with alive_progress.alive_bar(data["ntests"], title=test_image, stats=False) as bar:
             for n_test in range(0, data["ntests"]):
                 if dictionary_lookup(data, f"{n_test}"):
@@ -161,9 +166,10 @@ def check(json_file, start, stop, md_article):
                     logging.info(f"Error getting test from JSON file, skipping")
                     continue
 
-                test_target = test.get("target")
+                test_target = test.get("target") or ""
                 if test_target and test_target != test_image:
-                    pass
+                    bar(skipped=True)
+                    continue
                 elif not test_target:
                     pass
                 elif test_target:
@@ -184,12 +190,23 @@ def check(json_file, start, stop, md_article):
                 test_type = test["type"]
                 # Check type
                 if test_type == "bash":
-                    # chmod cmd file
-                    run_command = [f"chmod +x {test_cmd_filename}"]
-                    subprocess.run(run_command, shell=True, capture_output=True)
-                    logging.debug(run_command)
-                    # execute file as is with bash
-                    run_command = [f"bash ./{test_cmd_filename}"]
+                    if "ubuntu" in test_image:
+                        # chmod cmd file
+                        run_command = [f"chmod +x {test_cmd_filename}"]
+                        subprocess.run(run_command, shell=True, capture_output=True)
+                        logging.debug(run_command)
+                        # execute file as is with bash
+                        run_command = [f"bash ./{test_cmd_filename}"]
+                    elif "fedora" in test_target:
+                        # copy files to docker
+                        docker_cmd = [f"docker cp {test_cmd_filename} test_{n_image}:/home/{username}/"]
+                        subprocess.run(docker_cmd, shell=True, capture_output=True)
+                        logging.debug(docker_cmd)
+                        run_command = [f"docker exec -u {username} -w /home/{username} test_{n_image} bash {test_cmd_filename}"]
+                    else:
+                        logging.debug(f"Image {test_image} not supported for testing. Contact the maintainers if you think this is a mistake.")
+                        bar(skipped=True)
+                        continue
                 elif test_type == "fvp":
                     # Start instance for image
                     if start:
@@ -283,12 +300,18 @@ def check(json_file, start, stop, md_article):
     if paths_to_remove:
         logging.info(f"Removing files that were created during testing from repository")
         for path in paths_to_remove:
-            if os.path.isfile(path) or os.path.islink(path):
-                os.remove(path)
+            try:
 
-            elif os.path.isdir(path):
-                shutil.rmtree(path)
-            logging.debug(f"Removed {path}")
+                if os.path.isfile(path) or os.path.islink(path):
+                        os.chmod(path, 0o777)
+                        os.remove(path)
+
+
+                elif os.path.isdir(path):
+                    shutil.rmtree(path)
+                logging.debug(f"Removed {path}")
+            except PermissionError as e:
+                    logging.debug(f"Failed to remove {path} with error: {e}")
 
     # Stop instance
     if stop:

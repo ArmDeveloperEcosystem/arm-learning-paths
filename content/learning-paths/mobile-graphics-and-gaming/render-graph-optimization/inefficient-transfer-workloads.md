@@ -25,7 +25,7 @@ To find which API calls your application uses to start transfer workloads:
 
 - Open the render graph for your captured frames
 - Click a transfer node
-- Now move to the API Calls view (labelled “API Calls”)
+- Now move to the API Calls view (labeled “API Calls”)
 - Observe the API calls in use.
 
 ## Problem: inefficient clear routines

@@ -35,7 +35,7 @@ conda activate executorch-venv
 
 ## Install Clang
 
-Install Clang, which is required to build ExecuTorch: 
+Install Clang, which is required to build ExecuTorch:
 
 ```bash
 sudo apt install clang -y
@@ -52,7 +52,7 @@ sudo update-alternatives --set c++ /usr/bin/clang++
 
 ## Clone ExecuTorch and install the required dependencies
 
-Continue in your Python virtual environment, and run the commands below to download the ExecuTorch repository and install the required packages. 
+Continue in your Python virtual environment, and run the commands below to download the ExecuTorch repository and install the required packages.
 
 After cloning the repository, the project's submodules are updated, and two scripts install additional dependencies.
 
@@ -61,13 +61,8 @@ git clone https://github.com/pytorch/executorch.git
 cd executorch
 git submodule sync
 git submodule update --init
-./install_requirements.sh --pybind xnnpack
+./install_executorch.sh
 ./examples/models/llama2/install_requirements.sh
 ```
-
-{{% notice Note %}}
-You can safely ignore the following error on failing to import lm_eval running the install_requirements.sh scripts:
-`Failed to import examples.models due to lm_eval conflict`
-{{% /notice %}}
 
 When these scripts finish successfully, ExecuTorch is all set up. That means it's time to dive into the world of Llama models!

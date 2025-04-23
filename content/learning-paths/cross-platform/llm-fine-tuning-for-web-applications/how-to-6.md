@@ -31,7 +31,7 @@ This section runs LLM inference using the fine-tuned model.
 
     Use the command below to:
     - Optimize the model for low-latency inference.
-    - Use Unsloth’s performance improvements to speed up text generation.checkpoints in "outputs" folder.
+    - Use Unsloth's performance improvements to speed up text generation.checkpoints in "outputs" folder.
 
     ```python
     FastLanguageModel.for_inference(model)

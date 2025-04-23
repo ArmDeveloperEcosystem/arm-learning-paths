@@ -4,8 +4,6 @@ author: Odin Shen
 minutes_to_complete: 30
 official_docs: https://www.ros.org/blog/getting-started/
 
-draft: true
-
 test_images:
 - ubuntu:latest
 test_maintenance: true
@@ -73,7 +71,7 @@ sudo apt install -y \
         python3-colcon-common-extensions
 ```
 
-There are two releases of ROS 2, Jazzy Jalisco and Humble Hawksbill, which you can install based on your Ubuntu version.
+There are two LTS releases of ROS 2, Jazzy Jalisco and Humble Hawksbill, which you can install based on your Ubuntu version.
 
 - For Ubuntu Linux 24.04, you should install Jazzy Jalisco.
 - For Ubuntu Linux 22.04, you should install Humble Hawksbill.
@@ -129,7 +127,7 @@ In one terminal run a `talker`:
 ros2 run demo_nodes_cpp talker
 ```
 
-The output will continue to be similar to the one shown below, indicating that ROS 2 is publishing the “hello world” string along with a sequence number.
+The output is similar to the messages shown below, indicating that ROS 2 is publishing the “hello world” string along with a sequence number.
 
 ```output
 [INFO] [1741389626.338343545] [talker]: Publishing: 'Hello World: 1'

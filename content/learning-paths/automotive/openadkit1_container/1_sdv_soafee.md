@@ -1,5 +1,5 @@
 ---
-title: Software-Defined Vehicle (SDV) and SOAFEE
+title: About Software-Defined Vehicles and SOAFEE
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,17 +8,17 @@ layout: learningpathall
 
 ## Introduction to Software-Defined Vehicles
 
-In recent years, the automotive industry has been undergoing a transformation driven by software, with the concept of the Software-Defined Vehicle (SDV) emerging as a key paradigm for the future of intelligent cars. As the number of Electronic Control Units (ECUs) increases and vehicle systems become more complex, the traditional hardware-driven development approach is no longer sufficient. To improve development efficiency and product quality, automotive software development is shifting toward a Shift-Left approach, accelerating validation and deployment processes.
+In recent years, the automotive industry has been undergoing a transformation driven by software, with the concept of the Software-Defined Vehicle (SDV) emerging as a key paradigm for the future of intelligent cars. As the number of Electronic Control Units (ECUs) increases and vehicle systems become more complex, the traditional hardware-driven development approach is no longer sufficient. To improve development efficiency and product quality, automotive software development is moving to a Shift-Left approach, accelerating validation and deployment.
 
-## The Evolution of Software-Defined Vehicles
+## The evolution of Software-Defined Vehicles
 
-The core idea of SDV is to make software the primary differentiating factor of a vehicle, enabling continuous feature updates via Over-The-Air (OTA) technology. This approach allows manufacturers to shorten development cycles while continuously improving safety and performance after a vehicle is released. Moreover, SDV promotes the adoption of Service-Oriented Architecture (SOA), enabling modular and scalable software that integrates seamlessly with cloud services.
+The core idea of SDV is to make software the primary differentiator in a vehicle, enabling continuous feature updates via Over-The-Air (OTA) technology. This approach allows manufacturers to shorten development cycles while continuously improving safety and performance after a vehicle is released. Moreover, SDV promotes the adoption of Service-Oriented Architecture (SOA), enabling modular and scalable software that integrates seamlessly with cloud services.
 
 However, this transition introduces new challenges, particularly in software development and validation. The traditional V-model development process struggles to meet SDV demands since defects are often detected late in development, leading to costly fixes. As a result, Shift-Left has become a crucial strategy to address these challenges.
 
-One useful Arm Automotive [landing page](https://www.arm.com/markets/automotive/software-defined-vehicles) that you can read.
+You can read more about [Software Defined Vehicles](https://www.arm.com/markets/automotive/software-defined-vehicles). 
 
-## Shift-Left: Detecting Issues Early to Enhance Development Efficiency
+## Shift-Left: detecting issues early to enhance development efficiency
 
 Shift-Left refers to moving testing, validation, and security assessments earlier in the development process to reduce costs and improve reliability. In the SDV context, this means incorporating software architecture design, virtual testing, and automated validation in the early stages to ensure the final product meets safety and performance requirements.
 
@@ -32,9 +32,9 @@ The key benefits of Shift-Left include:
 
 However, Shift-Left requires appropriate tools and frameworks to support its implementation; otherwise, it can increase testing complexity. This is where SOAFEE (Scalable Open Architecture for Embedded Edge) plays a critical role.
 
-Check this [blog](https://newsroom.arm.com/blog/automotive-virtual-platforms) understand how to use virtual platforms enable the automotive industry to accelerate the silicon and software development process through virtual prototyping.
+Read [Virtual Platforms from Arm and Partners Available Now to Accelerate and Transform Automotive Development](https://newsroom.arm.com/blog/automotive-virtual-platforms) to understand how virtual platforms enable the automotive industry to accelerate the silicon and software development process through virtual prototyping.
 
-## SOAFEE: A Standardized Solution for SDV Development
+## SOAFEE: a standardized solution for SDV development
 
 SOAFEE, an open architecture initiative led by Arm and industry partners, aims to provide a unified framework for software-defined vehicles. It leverages cloud-native technologies and is optimized for embedded environments, enabling developers to adopt modern DevOps workflows to accelerate software development.
 
@@ -52,6 +52,6 @@ As the Software-Defined Vehicle paradigm gains traction, the automotive industry
 
 With the adoption of SOAFEE, automotive software development will become more standardized and efficient, enabling companies to realize the vision of SDVs faster while delivering a safer, smarter, and more flexible vehicle experience.
 
-Visit [SOAFEE](https://www.soafee.io/) website to find more detail.
+Visit the [SOAFEE](https://www.soafee.io/) website to learn more.
 
 In the following sections, you will explore a Shift-Left demonstration example that leverages SOAFEE to enable early deployment of autonomous driving software before the hardware is ready.

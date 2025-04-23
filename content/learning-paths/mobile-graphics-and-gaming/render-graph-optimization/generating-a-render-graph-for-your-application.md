@@ -47,7 +47,7 @@ Ask Frame Advisor to capture data relating to the problem areas you have observe
 
 ## Viewing the render graph
 
-Observe that part of the Frame Advisor window is labelled “Render Graph”. This contains the render graph relating to the frames you asked Frame Advisor to analyze.
+Observe that part of the Frame Advisor window is labeled “Render Graph”. This contains the render graph relating to the frames you asked Frame Advisor to analyze.
 
 Assume that you've captured the following render graph:
 

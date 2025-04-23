@@ -25,7 +25,7 @@ Ansible command-line tools can be installed on a variety of Linux distributions.
 
 ## What should I do before I start installing the Ansible command line tools?
 
-This article provides a quick solution to install the Ansible command line tools, such as `ansible-playbook` for Ubuntu on Arm.
+This article provides a quick solution to install the Ansible command line tools, such as `ansible-playbook` for macOS and Ubuntu running Arm.
 
 Confirm you are using an Arm machine by running:
 
@@ -33,11 +33,18 @@ Confirm you are using an Arm machine by running:
 uname -m
 ```
 
-The output should be:
+The output on Ubuntu should be:
 
 ```output
 aarch64
 ```
+
+And for macOS:
+
+```output
+arm64
+```
+
 
 If you see a different result, you are not using an Arm-based machine running 64-bit Linux.
 
@@ -53,6 +60,16 @@ sudo apt install software-properties-common -y
 sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible -y
 ```
+
+## Install Ansible for macOS
+
+You can use the `brew` package manager to install on `arm64`:
+
+```console
+brew install ansible
+```
+
+## Confirm installation
 
 Confirm the Ansible command line tools are installed by running:
 
