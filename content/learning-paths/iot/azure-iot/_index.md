@@ -1,11 +1,11 @@
 ---
-title: Creating IoT Solutions in Azure for Arm64-Powered Devices
+title: Create IoT Solutions in Azure for Arm Powered Devices
+
+minutes_to_complete: 180
 
 draft: true
 cascade:
     draft: true
-
-minutes_to_complete: 320
 
 who_is_this_for: This is an advanced topic for software developers interested in learning how to build a comprehensive IoT solution in Azure that streams, stores, monitors, aggregates, and visualizes data from Arm64-powered IoT devices.
 
@@ -21,8 +21,6 @@ learning_objectives:
 prerequisites:
     - A machine that can run Python3, and Visual Studio Code. 
     - Azure Account and Subscription.
-    - Azure CLI (Command Line Interface).
-    - Azure IoT SDK for Python.      
 
 author: Dawid Borycki
 
@@ -37,13 +35,8 @@ operatingsystems:
     - Linux
     - macOS
 tools_software_languages:    
-    - Coding
+    - Azure
     - VS Code
-shared_path: true
-shared_between:
-    - servers-and-cloud-computing
-    - laptops-and-desktops
-    - mobile-graphics-and-gaming
 
 further_reading:
     - resource:
