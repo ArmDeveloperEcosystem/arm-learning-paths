@@ -61,7 +61,7 @@ Use an editor or program such as `more` or `cat` to view the Dockerfile.
 
 ## Machine learning Frameworks
 
-[LiteRT for Microcontrollers](https://ai.google.dev/edge/litert/microcontrollers/overview), formerly known as TensorFlow Lite for Microcontrollers is on of the more common framework for microcontroller ML applications.
+[LiteRT for Microcontrollers](https://ai.google.dev/edge/litert/microcontrollers/overview), formerly known as TensorFlow Lite for Microcontrollers is one of the more common framework for microcontroller ML applications.
 
 TensorFlow uses [`xxd`](https://linux.die.net/man/1/xxd/) to convert TensorFlow Lite models into C data structures. 
 
