@@ -15,7 +15,7 @@ huggingface-cli login --token $hf_token
 ```
 ## Quantization Script Template
 
-Create the `vllm_quantize_model.py` script shown below to quantize the model :
+Using a file editor of your choice, create a file named `vllm_quantize_model.py` and copy the content shown below to quantize the model:
 ```bash
 import argparse
 import os
@@ -153,11 +153,10 @@ if __name__ == "__main__":
 Then run the quantization script using `vllm_quantize_model.py`. This generates an INT8 quantized version of the model using channelwise precision, which reduces memory usage while maintaining model accuracy:
 
 ```bash 
-cd /home/ubuntu/
 python vllm_quantize_model.py meta-llama/Llama-3.1-8B-Instruct --mode int8 --scheme channelwise
 ```
-The output model will be saved locally at:
-`/home/ubuntu/Llama-3.1-8B-Instruct-w8a8-channelwise`.
+The quantized model will be saved at:
+`$HOME/Llama-3.1-8B-Instruct-w8a8-channelwise`.
 
 ## Launch the vLLM server
 
@@ -171,8 +170,20 @@ ONEDNN_DEFAULT_FPMATH_MODE=BF16 \
 VLLM_TARGET_DEVICE=cpu \
 VLLM_CPU_KVCACHE_SPACE=32 \
 VLLM_CPU_OMP_THREADS_BIND="0-$(($(nproc) - 1))" \
-vllm serve /home/ubuntu/Llama-3.1-8B-Instruct-w8a8-channelwise \
+vllm serve $HOME/Llama-3.1-8B-Instruct-w8a8-channelwise \
 --dtype float32 --swap-space 16
 ```
 This command starts the vLLM server using the quantized model. It preloads `tcmalloc` for efficient memory allocation and uses OpenBLAS for accelerated matrix operations. Thread binding is dynamically set based on the number of available cores to maximize parallelism on Arm CPUs.
+
+The output from launching the vLLM server with the quantized model should look like:
+
+```output
+INFO 04-23 21:13:59 launcher.py:31] Route: /rerank, Methods: POST
+INFO 04-23 21:13:59 launcher.py:31] Route: /v1/rerank, Methods: POST
+INFO 04-23 21:13:59 launcher.py:31] Route: /v2/rerank, Methods: POST
+INFO 04-23 21:13:59 launcher.py:31] Route: /invocations, Methods: POST
+INFO:     Started server process [77356]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+```
 
