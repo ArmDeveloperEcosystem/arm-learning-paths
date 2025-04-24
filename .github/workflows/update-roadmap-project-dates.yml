@@ -1,0 +1,191 @@
+name: Update Roadmap Dates
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  update-roadmap-dates:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.label.name == 'awaiting_tech_review' ||
+      github.event.label.name == 'publish'
+
+    permissions:
+      contents: read
+      pull-requests: read
+      repository-projects: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Install Octokit
+        run: npm install @octokit/rest
+
+      - name: Debug Token
+        run: echo "Token is set"
+        env:
+          PROJECT_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+
+      - name: Update Project Board Dates
+        uses: actions/github-script@v6
+        with:
+          PROJECT_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+          script: |
+            const { Octokit } = require('@octokit/rest');
+            const octokit = new Octokit({ auth:process.env.PROJECT_TOKEN });
+
+            const projectNumber = 4; // Your project number
+            const orgName = 'ArmDeveloperEcosystem';
+            const prNumber = context.payload.pull_request.number;
+            const labelName = context.payload.label.name;
+
+            async function getProjectItemForPR() {
+              // Get the project ID
+              const projectQuery = `
+                query {
+                  organization(login:"${orgName}") {
+                    projectV2(number:${projectNumber}) {
+                      id
+                    }
+                  }
+                }
+              `;
+
+              const projectResponse = await octokit.graphql(projectQuery);
+              const projectId = projectResponse.organization.projectV2.id;
+
+              // Find the PR in the project
+              const prQuery = `
+                query {
+                  organization(login:"${orgName}") {
+                    projectV2(number:${projectNumber}) {
+                      items(first:100) {
+                      nodes {
+                          id
+                          content {
+                            ... on PullRequest {
+                              number
+                              repository {
+                                name
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              `;
+
+              const prResponse = await octokit.graphql(prQuery);
+              const items = prResponse.organization.projectV2.items.nodes;
+
+              // Find the item that corresponds to this PR
+              const item = items.find(item =>
+                item.content &&
+                item.content.number === prNumber &&
+                item.content.repository.name === context.repo.repo
+              );
+
+              return { projectId, itemId:item ? item.id:null };
+            }
+
+            async function getFieldId(projectId, fieldName) {
+            const fieldsQuery = `
+                query {
+                  node(id:"${projectId}") {
+                    ... on ProjectV2 {
+                      fields(first:20) {
+                        nodes {
+                          ... on ProjectV2Field {
+                            id
+                            name
+                          }
+                          ... on ProjectV2IterationField {
+                            id
+                            name
+                          }
+                          ... on ProjectV2SingleSelectField {
+                            id
+                            name
+                          }
+                          ... on ProjectV2DateField {
+                            id
+                            name
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              `;
+
+              const fieldsResponse = await octokit.graphql(fieldsQuery);
+              const fields = fieldsResponse.node.fields.nodes;
+              const field = fields.find(f => f.name === fieldName);
+
+              return field ? field.id :null;
+            }
+
+            async function updateDateField(projectId, itemId, fieldId, date) {
+              const mutation = `
+                mutation {
+                  updateProjectV2ItemFieldValue(
+                    input:{
+                      projectId:"${projectId}"
+                      itemId:"${itemId}"
+                      fieldId:"${fieldId}"
+                      value:{
+                        date:"${date}"
+                      }
+                    }
+                  ) {
+                    projectV2Item {
+                      id
+                    }
+                  }
+                }
+              `;
+
+              return await octokit.graphql(mutation);
+            }
+
+            async function main() {
+              try {
+                const { projectId, itemId } = await getProjectItemForPR();
+                if (!itemId) {
+                  console.log('PR not found in project board');
+                  return;
+                }
+
+                const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+
+                if (labelName === 'awaiting_tech_review') {
+                  const startDateFieldId = await getFieldId(projectId, 'Start Date');
+                  if (startDateFieldId) {
+                    await updateDateField(projectId, itemId, startDateFieldId, today);
+                    console.log('Updated Start Date to', today);
+                  } else {
+                    console.log('Start Date field not found');
+                  }
+                } else if (labelName === 'publish') {
+                  const publishDateFieldId = await getFieldId(projectId, 'Publish Date');
+                  if (publishDateFieldId) {
+                    await updateDateField(projectId, itemId, publishDateFieldId, today);
+                    console.log('Updated Publish Date to', today);
+                  } else {
+                    console.log('Publish Date field not found');
+                  }
+                }
+              } catch (error) {
+                console.error('Error updating project board:', error);
+                core.setFailed(`Error updating project board:${error.message}`);
+              }
+            }
