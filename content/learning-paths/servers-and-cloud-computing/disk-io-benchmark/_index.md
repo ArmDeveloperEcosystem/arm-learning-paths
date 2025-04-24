@@ -1,9 +1,13 @@
 ---
 title: Microbenchmark Storage Performance with Fio
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
-who_is_this_for: A cloud developer who wants to optimise storage cost or performance of their application. Developers who want to uncover potential storage-bound bottlenecks or changes when migrating an application to a different platform. 
+who_is_this_for: A cloud developer who wants to optimize storage cost or performance of their application. Developers who want to uncover potential storage-bound bottlenecks or changes when migrating an application to a different platform. 
 
 learning_objectives: 
     - Understand the flow of data for storage devices 
