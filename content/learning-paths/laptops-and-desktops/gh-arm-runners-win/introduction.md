@@ -18,7 +18,7 @@ GitHub Arm-hosted runners for Windows are now available in public preview, provi
 
 Arm-hosted runners are available for public repositories at no cost, subject to [standard usage limits](https://docs.github.com/en/actions/administering-github-actions/usage-limits-billing-and-administration#usage-limits). 
 
-### How do I use GitHub Arm-hosted Windows Runners?
+### How Do I Use GitHub Arm-hosted Windows Runners?
 
 To leverage the GitHub Windows Arm64 hosted runners, you need to use the following label in your public repository workflow runs:
 
@@ -31,7 +31,7 @@ This label does not work in private repositories - the workflow will fail if you
 {{% /notice %}}
 
 
-### What types of GitHub-hosted Runners are available?
+### What Types of GitHub-hosted Runners Are Available?
 
 GitHub offers two types of hosted runners: standard and larger runners. Larger runners give you more control—you can configure the amount of RAM, number of CPUs, and disk space. You can also use the Windows 11 Desktop Arm Image with larger runners. To use this image on larger runners, you will need to create a new runner.
 
@@ -69,7 +69,7 @@ Finally, click **Create runner**.
 
 Your new Arm-hosted Windows larger runner is ready to use. Remember the runner name so you can use it in your workflows with the `runs-on` label. 
 
-### How do I check the server hardware used by the Arm-hosted Windows Runners?
+### How Do I Check the Server Hardware Used by the Arm-hosted Windows Runners?
 
 The Arm-hosted runners are powered by Microsoft Azure Cobalt 100 processors, based on the Arm Neoverse N2, with 4 vCPUs and Armv9-A features, including Scalable Vector Extension 2 (SVE2).
 
@@ -78,7 +78,7 @@ The following output shows the result of running the `wmic` command on the Arm-h
 ![Arm-hosted runner info #center](_images/cpuinfo.png)
 
 
-### How can I find the software installed on the Arm-hosted Windows Runners?
+### How Can I Find the Software Installed on the Arm-hosted Windows Runners?
 
 To find out more about the software installed on the Arm-hosted runners, visit the [GitHub Actions Partner Images repository](https://github.com/actions/partner-runner-images/). Check the [image documentation](https://github.com/actions/partner-runner-images/blob/main/images/arm-windows-11-image.md) for a list of software packages installed on the Windows 11 by Arm Limited image. You can also use this repository to report issues or request additional software.
 
