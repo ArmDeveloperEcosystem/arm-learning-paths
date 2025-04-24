@@ -6,9 +6,12 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-In this section, you will learn how to automate the build process of a Windows application using GitHub Arm-hosted runners. You will use the application in the [Optimize Windows applications using Arm Performance Libraries Learning Path](/learning-paths/laptops-and-desktops/windows_armpl/).
 
-### Overview of the Windows Application
+{{% notice Learning Tip %}}
+In this section, you will learn how to automate the build process of a Windows application using GitHub Arm-hosted runners. You will use the application in the [Optimize Windows applications using Arm Performance Libraries Learning Path](/learning-paths/laptops-and-desktops/windows_armpl/).
+{{% /notice %}}
+
+### About the Windows Application
 
 This section provides a basic overview of the application. For detailed build instructions, see the [Optimize Windows applications using Arm Performance Libraries Learning Path](/learning-paths/laptops-and-desktops/windows_armpl/2-multithreading/).
 
@@ -19,10 +22,10 @@ https://github.com/arm/SpinTheCubeInGDI
 ```
 
 The application implements a spinning cube and consists of four key components:
-- **Shape Generation**: Generates vertices for a sphere using a golden ratio-based algorithm.
-- **Rotation Calculation**: Uses a rotation matrix to rotate the 3D shape around the X, Y, and Z axes.
-- **Drawing**: Draws the transformed vertices of the shapes on the screen using a Windows API.
-- **Performance Measurement**: Measures and displays the number of transforms per second.
+- **Shape Generation**: generates vertices for a sphere using a golden ratio-based algorithm.
+- **Rotation Calculation**: uses a rotation matrix to rotate the 3D shape around the X, Y, and Z axes.
+- **Drawing**: draws the transformed vertices of the shapes on the screen using a Windows API.
+- **Performance Measurement**: measures and displays the number of transforms per second.
 
 The code has two options to calculate the rotation:
 
@@ -38,32 +41,32 @@ The [GitHub Actions workflow `msbuild.yml`](https://github.com/arm/SpinTheCubeIn
 Below is an explanation of the steps in the workflow:
 
 
-   **Trigger Events**: The workflow runs when there is a push or pull request event on the main branch.
+   **Trigger Events**: the workflow runs when there is a push or pull request event on the main branch.
 
-   **Job Definition**: A single job named `build` is defined. It runs on the GitHub Arm-hosted Windows runner (`windows-11-arm`) as shown:
+   **Job Definition**: a single job named `build` is defined. It runs on the GitHub Arm-hosted Windows runner (`windows-11-arm`) as shown:
 
 ```console
 jobs:
   build:
     runs-on: windows-11-arm
 ```
-   **Checkout Repository**: Uses the `actions/checkout@v4` action to fetch the code.
+   **Checkout Repository**: uses the `actions/checkout@v4` action to fetch the code.
 
-   **Add MSBuild to PATH**: Adds MSBuild tools for the build process using `microsoft/setup-msbuild@v1.0.2`.
+   **Add MSBuild to PATH**: adds MSBuild tools for the build process using `microsoft/setup-msbuild@v1.0.2`.
 
-   **Restore Dependencies**: Runs `nuget restore` to restore NuGet packages required by the solution.
+   **Restore Dependencies**: runs `nuget restore` to restore NuGet packages required by the solution.
 
-   **Create Download Directory**: Creates a directory to store downloaded files and verifies the Python version.
+   **Create Download Directory**: creates a directory to store downloaded files and verifies the Python version.
 
-   **Download ARM Performance Libraries**: Downloads the Windows installer for ARM Performance Libraries (APL) and verifies the downloaded files. 
+   **Download ARM Performance Libraries**: downloads the Windows installer for ARM Performance Libraries (APL) and verifies the downloaded files. 
 
-   **Install ARM Performance Libraries**: Installs the downloaded ARM Performance Libraries using `msiexec.exe` with a quiet mode and logs the process.
+   **Install ARM Performance Libraries**: installs the downloaded ARM Performance Libraries using `msiexec.exe` with a quiet mode and logs the process.
 
-   **Check Installation Success**: Verifies the success of the APL installation by checking the exit code and logs.
+   **Check Installation Success**: verifies the success of the APL installation by checking the exit code and logs.
 
-   **Build the Solution**: Runs MSBuild to build the solution with the specified configuration (Debug) and platform (ARM64).
+   **Build the Solution**: runs MSBuild to build the solution with the specified configuration (Debug) and platform (ARM64).
 
-   **Upload Build Artifact**: Uploads the built executable as an artifact using `actions/upload-artifact@v4`.
+   **Upload Build Artifact**: uploads the built executable as an artifact using `actions/upload-artifact@v4`.
 
 This workflow automates dependency management, environment setup, project compilation, and artifact storage - all using a GitHub Arm-hosted Windows runner.
 
