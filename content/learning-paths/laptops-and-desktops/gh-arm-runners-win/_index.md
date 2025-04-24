@@ -1,10 +1,6 @@
 ---
 title: Automate Windows on Arm Builds with GitHub Arm-hosted Runners
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 20
 
 who_is_this_for: This introductory tutorial is for software developers looking to automate Windows application builds on Arm architecture using GitHub Actions.
