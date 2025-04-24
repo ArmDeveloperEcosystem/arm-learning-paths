@@ -40,8 +40,7 @@ These packages are needed to build libraries like OpenBLAS and manage system-lev
 
 ```bash
 sudo apt-get update -y
-sudo apt-get install -y gcc-12 g++-12 libnuma-dev python3-pip
-sudo apt install python-is-python3
+sudo apt-get install -y gcc-12 g++-12 libnuma-dev make
 ```
 Set the system default compilers to version 12:
 
@@ -82,12 +81,12 @@ Once the system libraries are in place, install the Python packages required for
 
 Before proceeding, make sure the following files are downloaded to your home directory:
 ```bash
-
+[PLACEHOLDER]
 ```
 These are required to complete the installation and model quantization steps.
 Now, navigate to your home directory:
 ```bash
-cd /home/ubuntu/
+cd $HOME
 ```
 
 Install the vLLM wheel. This wheel contains the  CPU-optimized version of `vLLM`, built specifically for Arm architecture. Installing it from a local `.whl` file ensures compatibility with the rest of your environment and avoids potential conflicts from nightly or default pip installations.
@@ -101,8 +100,8 @@ pip install llmcompressor
 ```
 Install torchvision (nightly version for CPU):
 ```bash
-pip install --force-reinstall torchvision==0.22.0.dev20250213 --extra-index-url https://download.pytorch.org/whl/nightly/cpu
-```
+pip install --force-reinstall torchvision==0.22.0.dev20250223 --extra-index-url https://download.pytorch.org/whl/nightly/cpu```
+
 Install the custom PyTorch CPU wheel:<br>
 This custom PyTorch wheel is prebuilt for Arm CPU architectures and includes the necessary optimizations for running inference. Installing it locally ensures compatibility with your environment and avoids conflicts with default pip packages.
 ```bash
