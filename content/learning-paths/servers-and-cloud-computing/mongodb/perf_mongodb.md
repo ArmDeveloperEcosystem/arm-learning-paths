@@ -1,7 +1,7 @@
 ---
 # User change
-title: "Measure performance of MongoDB on Arm"
-weight: 3 # 1 is first, 2 is second, etc.
+title: "Alternative performance testing of MongoDB"
+weight: 6 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -53,7 +53,7 @@ Use the following options:
   * `-t` defines the number of threads
   * `-db` defines the database to use
   * `-c` defines how the data is collected.
-  
+
   For example:
 ```bash { cwd="./mongodb-performance-test" }
 export jarfile=./latest-version/mongodb-performance-test.jar

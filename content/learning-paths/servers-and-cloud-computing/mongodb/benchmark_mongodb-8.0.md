@@ -28,7 +28,7 @@ sudo yum install python2
   {{< /tab >}}
 {{< /tabpane >}}
 
-For Ubuntu 22.04 and 24.04, Python 2 is not available using the package manager. 
+For Ubuntu 22.04 and 24.04, Python 2 is not available using the package manager.
 
 You can install Python 2.7 using:
 
@@ -61,16 +61,16 @@ cd ycsb-0.17.0
 ./bin/ycsb
 ```
 
-## Load/Insert Test on MongoDB
+## A simple Load/Insert Test on MongoDB
 
-To load and test the performance of loading data(INSERT) into default database `ycsb` at `localhost:27017` where MongoDB is running using the synchronous driver run the following command:
+To load and test the performance of loading data(INSERT) into default database `ycsb` at `(localhost/Primary Node):27017` where MongoDB is running using the synchronous driver run the following command:
 
 ```console
 ./bin/ycsb load mongodb -s -P workloads/workloada -p mongodb.url=mongodb://localhost:27017/ycsb?w=0 -threads 10
 ```
 The "-P" parameter is used to load property files. In this example, you used it load the workloada parameter file which sets the recordcount to 1000 in addition to other parameters. The "-threads" parameter indicates the number of threads and is set to 1 by default.
 
-## Update/Read/Read Modify Write Test on MongoDB
+## A simple Update/Read/Read Modify Write Test on MongoDB
 
 To test the performance of executing a workload which includes running UPDATE, Read Modify Write(RMW) and/or READ operations on the data using 10 threads for example, use the following command:
 
@@ -115,5 +115,5 @@ At the end of each test, statistics are printed to the console. Shown below is t
 ...
 ```
 
-Continue to the next section to run YCSB on a 3 node cluster. 
+[Continue to the next section to run YCSB on a 3 node cluster.](/learning-paths/servers-and-cloud-computing/mongodb/replica_set_testing)
 

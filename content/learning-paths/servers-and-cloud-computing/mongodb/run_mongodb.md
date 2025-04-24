@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Run MongoDB on Arm"
+title: "Install MongoDB on Arm"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
