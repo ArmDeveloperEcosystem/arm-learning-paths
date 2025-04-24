@@ -16,9 +16,9 @@ Developers recognize that Arm NEON SIMD instructions can significantly boost per
 
 The good news is that AI developer tools such as GitHub Copilot make working with NEON intrinsics much more accessible. By providing intelligent code suggestions, automated vectorization hints, and contextual examples tailored to your specific use case, GitHub Copilot can help bridge the knowledge gap and accelerate the development of NEON-optimized code. This allows developers to harness the full performance potential of Arm processors without the traditional complexity and time-consuming effort.
 
-Writing NEON intrinsics with GitHub Copilot can be demonstrated by creating a complete project from scratch, and comparing the C implementation with the NEON implementation.
+You can demonstrate writing NEON intrinsics with GitHub Copilot by creating a full project from scratch and comparing the C implementation to a NEON-optimized version.
 
-While you may not create complete projects from scratch, and you shouldn't blindly trust the generated code, it's helpful to see what's possible using an example so you can apply the principles to your own projects.
+While you may not create complete projects from scratch - and you shouldn't blindly trust the generated code - it's helpful to see what's possible using an example so you can apply the principles to your own projects.
 
 ## Accelerating Adler32 Checksum with Arm NEON Instructions
 
@@ -34,8 +34,8 @@ Adler32 is a checksum algorithm that was invented by Mark Adler in 1995. It's us
 
 The algorithm works by calculating two 16-bit sums:
 
-- s1: A simple sum of all bytes
-- s2: A sum of all s1 values after each byte
+- s1: A simple sum of all bytes.
+- s2: A sum of all s1 values after each byte.
 - The final checksum is (s2 << 16) | s1.
 
 ## Project Overview
