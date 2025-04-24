@@ -27,11 +27,11 @@ weight: 1
 
 [Nerdctl](https://github.com/containerd/nerdctl) is an open-source command-line interface (CLI) designed to be compatible with the Docker CLI, but specifically for interacting with [containerd](https://containerd.io/). It provides a familiar user experience for developers who are familiar with Docker, while leveraging the capabilities of containerd as the underlying container runtime.
 
-Using containerd and nerdctl provides similar functionality to Docker but with a smaller memory footprint, making it ideal for IoT and edge solutions, especially on Arm devices that balance energy efficiency and performance. 
+Using `containerd` and `nerdctl` provides similar functionality to Docker but with a smaller memory footprint, making it ideal for IoT and edge solutions, especially on Arm devices that balance energy efficiency and performance. 
 
 Nerdctl also supports running containers in rootless mode, which helps enhance security by not requiring elevated privileges. Rootless mode is not covered below but you can refer to the [documentation](https://rootlesscontaine.rs/getting-started/containerd/) for information about how to run `containerd-rootless-setuptool.sh install`. 
 
-This guide explains how to install and use containerd and nerdctl on Arm Linux and run with `sudo` 
+This guide explains how to install and use `containerd` and `nerdctl` on Arm Linux, and how to run commands with `sudo`. 
 
 ## Before you begin
 
@@ -49,7 +49,7 @@ The output should be:
 aarch64
 ```
 
-Ensure `wget` and `tar` are installed. Most distributions will include them, but if not run:
+Ensure `wget` and `tar` are installed. Most distributions will include them, but if not, run:
 
 ```bash
 sudo apt-get update
@@ -58,13 +58,13 @@ sudo apt-get install -y wget tar
 
 ## Install containerd
 
-Install the containerd runtime:
+Install the `containerd` runtime:
 
 ```bash 
 sudo apt-get install containerd -y
 ```
 
-Start and enable the containerd service:
+Start and enable the `containerd` service:
 
 ```bash 
 sudo systemctl start containerd
@@ -77,7 +77,7 @@ Confirm the service is running:
 systemctl status containerd.service
 ```
 
-When containerd is running, the output is similar to:
+When `containerd` is running, the output is similar to:
 
 ```output
 ● containerd.service - containerd container runtime
@@ -94,7 +94,7 @@ When containerd is running, the output is similar to:
 
 ## Install nerdctl and CNI plugins
 
-Install nerdctl and the necessary CNI (Container Network Interface) plugins. 
+Install `nerdctl` and the necessary CNI (Container Network Interface) plugins: 
 
 ```bash
 NERDCTL_VERSION=$(curl -s https://api.github.com/repos/containerd/nerdctl/releases/latest | grep tag_name | cut -d '"' -f 4 | sed 's/v//')
@@ -123,9 +123,9 @@ The commands above attempt to fetch the latest versions automatically. If requir
 
 ## Install BuildKit
 
-If you want to build container images with nerdctl, you need to install [BuildKit](https://github.com/moby/buildkit). 
+If you want to build container images with `nerdctl`, you need to install [BuildKit](https://github.com/moby/buildkit). 
 
-If you only need to run container images you can skip this step. 
+If you only plan to run container images (not build them), you can skip this step. 
 
 ```bash
 BUILDKIT_VERSION=$(curl -s https://api.github.com/repos/moby/buildkit/releases/latest | grep tag_name | cut -d '"' -f 4 | sed 's/v//')
@@ -195,7 +195,7 @@ jz1h9gb0xq39ob6868cr3ev6r	linux/arm64
 
 ## Verify the installation
 
-You can check the nerdctl version:
+You can check the `nerdctl` version:
 
 ```console
 sudo nerdctl version
@@ -207,7 +207,7 @@ Test your installation by running a simple container that prints the processor a
 sudo nerdctl run --name uname armswdev/uname
 ```
 
-Wait a few seconds for the container to start. The architecture is printed:
+Wait a few seconds for the container to start. It will print the system architecture:
 
 ```output
 Architecture is aarch64
@@ -219,7 +219,7 @@ Clean up the test container:
 sudo nerdctl rm uname
 ```
 
-To build a container image, use a text editor to copy the lines below to a new file named `Dockerfile`.
+To build a container image, save the following lines to a file named `Dockerfile`.
 
 ```console
 FROM ubuntu:latest
@@ -308,4 +308,4 @@ Execute a command in a running container:
 sudo nerdctl exec -it <container_name_or_id> <command>
 ```
 
-You are now ready to use nerdctl and containerd.
+You are now ready to use `nerdctl` and `containerd` to manage containers on Arm Linux.
