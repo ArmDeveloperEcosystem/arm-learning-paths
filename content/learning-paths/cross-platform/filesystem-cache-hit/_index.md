@@ -6,8 +6,8 @@ minutes_to_complete: 15
 who_is_this_for: Developers who want to boost performance of applications limited by file system cache misses. 
 
 learning_objectives: 
-    - Learn the high-level operation and purpose of the file system cache
-    - Learn how to measure and intepret cache miss rates
+    - Basic understanding of memory usage in a system
+    - Learn how to measure cache miss rates
     - Learn how to use the posix_fadvise() function to provide hints to the kernel about file access patterns 
 
 prerequisites:
