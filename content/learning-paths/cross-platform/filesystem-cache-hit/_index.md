@@ -1,14 +1,14 @@
 ---
-title: Improve File System Cache hit rate with the posix_fadvise syscall 
+title: Improve File System Cache hit rate with the posix_fadvise function 
 
 minutes_to_complete: 15
 
-who_is_this_for: Developers who observe high-levels of file system cache misses in performance-critical sections of software
+who_is_this_for: Developers who want to boost performance of applications limited by file system cache misses. 
 
 learning_objectives: 
     - Learn the high-level operation and purpose of the file system cache
     - Learn how to measure and intepret cache miss rates
-    - Learn how to use the posix_fadvise syscall provide hints to the kernel about file access patterns 
+    - Learn how to use the posix_fadvise() function to provide hints to the kernel about file access patterns 
 
 prerequisites:
     - Basic understanding of C++ and Linux

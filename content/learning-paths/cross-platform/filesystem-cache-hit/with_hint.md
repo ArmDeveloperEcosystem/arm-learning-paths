@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Providing hints with posix_fadvise
 
-The `posix_fadvise()` system call gives the Linux kernel hints about expected file access patterns to optimize I/O. The function takes the following arguments. 
+The `posix_fadvise()` function is a wrapper around the `fadvise64` linux system call (syscall). This syscall gives the Linux kernel hints about expected file access patterns to optimize I/O, for example preemptively reading ahead for sequential file access. The function takes the following arguments. 
 - `fd`: file descriptor of the file,  
 - `offset`: where the advice starts (0 = beginning),  
 - `len`: how many bytes the advice applies to (0 = to the end),  
@@ -58,7 +58,6 @@ int main() {
     return 0;
 }
 
-
 ```
 
 Compile with the following command.
@@ -83,10 +82,14 @@ sudo perf stat -e cache-references,cache-misses,minor-faults,major-faults -r 9 .
 
 ```
 
+{{% notice Tip%}}
+If you are using `posix_fadvise()` with your own application and you want to observe which system calls are issued. Consider using the system call tracer, `strace` with a command such as `strace -ttT -e trace=<syscall of interest,fadvise64> ./<your workload>` to observe what is causing fewer cache misses.
+{{% /notice %}}
+
 ### Results
 
 Here we observe that on this run with a single line of code we are able to reduce the cache miss rate from ~4.8% to ~3.8%. This can translate to more efficient and performant software, especially if your program is synchronous and has to wait for disk accesses. 
 
 {{% notice Please Note%}}
-Since this is only a hint to the operating system and it depends on other factors such as memory pressure, memory usage, other processes etc. the behaviour on your system may be different
+Since this is advise to the operating system, the operating may not do anything with this. Real-world impact depends on other factors such as memory pressure, memory usage etc. As such, the behaviour on your own system may be different.
 {{% /notice %}}

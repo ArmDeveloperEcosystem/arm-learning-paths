@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Setup
 
-For this demonstration, I have connected to an Arm-based AWS `c7g.xlarge` instance running Ubuntu 24.04. Results may vary depending on which instance and kernel version you are using. At the time of writing, I was using the `6.8.0-1024-aws` kernel version. 
+For this demonstration, connect to an Arm-based AWS `c7g.xlarge` instance running Ubuntu 24.04. Results may vary depending on which instance and kernel version you are using. At the time of writing, kernel version `6.8.0-1024-aws` was used. 
 
 First, you need to install the linux performance measure tool, `perf`. Please follow the [installation guide](https://learn.arm.com/install-guides/perf/) for your system. 
 
@@ -33,7 +33,7 @@ L2 cache:                             4 MiB (4 instances)
 L3 cache:                             32 MiB (1 instance)
 ```
 
-This information will be useful as we want to ensure our working set size cannot all fit within on-CPU cache. 
+This information will be useful to ensure our working set size cannot all fit within on-CPU cache. 
 
 Next, check the current memory usage of an idle system with the `free -h` command. 
 
