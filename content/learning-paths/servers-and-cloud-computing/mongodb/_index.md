@@ -11,7 +11,7 @@ learning_objectives:
 - Measure and compare the performance of MongoDB on Arm versus other architectures with Yahoo Cloud Serving Benchmark (YCSB). 
 
 prerequisites:
-- An Arm based instance from a cloud service provider. 
+- An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
 
 armips:
 - Neoverse

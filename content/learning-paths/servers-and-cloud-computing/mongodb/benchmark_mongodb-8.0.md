@@ -8,7 +8,7 @@ weight: 4 # (intro is 1), 2 is first, 3 is second, etc.
 layout: "learningpathall"
 ---
 
-To further measure the performance of MongoDB, you can run the [Yahoo Cloud Serving Benchmark](http://github.com/brianfrankcooper/YCSB).
+To further measure the performance of MongoDB, you can run the [Yahoo Cloud Serving Benchmark](https://github.com/brianfrankcooper/YCSB).
 
 YCSB is an open source project which provides the framework and common set of workloads to evaluate the performance of different "key-value" and "cloud" serving stores. Use the steps below to run YCSB to evaluate the performance of MongoDB running on 64-bit Arm machine.
 
@@ -22,9 +22,10 @@ Install the additional software:
   {{< tab header="Ubuntu" >}}
 sudo apt install -y maven make gcc
   {{< /tab >}}
-  {{< tab header="RHE/Amazon" >}}
+  {{< tab header="RHEL / Amazon Linux" >}}
 sudo yum check-update
-sudo yum install python2
+# Python 2 may not be available via yum on recent RHEL/Amazon Linux versions.
+# If needed, follow the manual installation steps below.
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -38,7 +39,7 @@ wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz
 tar xvf Python-2.7.18.tgz
 cd Python-2.7.18
 ./configure --enable-optimizations
-make -j $nproc
+make -j $(nproc)
 sudo make altinstall
 sudo ln -s /usr/local/bin/python2.7 /usr/local/bin/python
 ```
@@ -68,14 +69,14 @@ To load and test the performance of loading data(INSERT) into default database `
 ```console
 ./bin/ycsb load mongodb -s -P workloads/workloada -p mongodb.url=mongodb://localhost:27017/ycsb?w=0 -threads 10
 ```
-The "-P" parameter is used to load property files. In this example, you used it load the workloada parameter file which sets the recordcount to 1000 in addition to other parameters. The "-threads" parameter indicates the number of threads and is set to 1 by default.
+The "-P" parameter is used to load property files. In this example, you used it load the workloada parameter file which sets the recordcount to 1000 in addition to other parameters. The "-threads" parameter indicates the number of client threads (default is 1); this example uses 10 threads.
 
 ## A simple Update/Read/Read Modify Write Test on MongoDB
 
 To test the performance of executing a workload which includes running UPDATE, Read Modify Write(RMW) and/or READ operations on the data using 10 threads for example, use the following command:
 
 ```console
-./bin/ycsb load mongodb -s -P workloads/workloada -p mongodb.url=mongodb://localhost:27017/ycsb?w=0
+./bin/ycsb run mongodb -s -P workloads/workloada -p mongodb.url=mongodb://localhost:27017/ycsb?w=0 -threads 10
 ```
 
 The workloads/workloada file in this example sets the following values `readproportion=0.5` and  `updateproportion=0.5` which means there is an even split between the number of READ and UPDATE operations performed. You can change the type of operations and the splits by providing your own workload parameter file.
