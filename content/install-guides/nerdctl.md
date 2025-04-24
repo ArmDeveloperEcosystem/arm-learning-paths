@@ -2,8 +2,6 @@
 title: Nerdctl
 author: Jason Andrews
 
-draft: true
-
 minutes_to_complete: 10
 
 official_docs: https://github.com/containerd/nerdctl/blob/main/docs/command-reference.md 
