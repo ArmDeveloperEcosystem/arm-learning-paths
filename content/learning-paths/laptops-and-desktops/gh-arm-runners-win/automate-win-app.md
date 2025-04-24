@@ -10,9 +10,9 @@ In this section, you will learn how to automate the build process of a Windows a
 
 ### Overview of the Windows Application
 
-A basic overview of the application is provided here but for details on building the application refer to the [Optimize Windows applications using Arm Performance Libraries Learning Path](/learning-paths/laptops-and-desktops/windows_armpl/2-multithreading/).
+This section provides a basic overview of the application. For detailed build instructions, see the [Optimize Windows applications using Arm Performance Libraries Learning Path](/learning-paths/laptops-and-desktops/windows_armpl/2-multithreading/).
 
-The source code for the application that renders a rotating 3D cube to perform the calculations using different programming options is provided in this GitHub repository. 
+The source code for the rotating 3D cube application, which demonstrates multiple programming approaches to performing rotation calculations, is available in this GitHub repository.
 
 ```console
 https://github.com/arm/SpinTheCubeInGDI
@@ -26,8 +26,8 @@ The application implements a spinning cube and consists of four key components:
 
 The code has two options to calculate the rotation:
 
-1. Multithreading: the application uses multithreading to improve performance by distributing the rotation calculations across multiple threads.
-2. Arm Performance Libraries: the application uses optimized math library functions for the rotation calculations.
+1. **Multithreading**: distributes rotation calculations across multiple threads to improve performance.  
+2. **Arm Performance Libraries**: uses Arm-optimized math functions to accelerate rotation calculations.
 
 You will learn how to automate the build process for this application by using GitHub Actions with Arm-hosted Windows runners.
 
@@ -65,17 +65,17 @@ jobs:
 
    **Upload Build Artifact**: Uploads the built executable as an artifact using `actions/upload-artifact@v4`.
 
-This workflow automates the process of dependency management, environment setup, building the project, and storing the final artifact all using a GitHub Arm-hosted Windows runner. 
+This workflow automates dependency management, environment setup, project compilation, and artifact storage - all using a GitHub Arm-hosted Windows runner.
 
-### Fork the repository and run the workflow
+### Fork the Repository and Run the Workflow
 
-To run the workflow, you can fork the repository and run the workflow in your GitHub account.
+To run the workflow in your own GitHub account, start by forking the repository.
 
-To fork the repository, go to the repository page on GitHub and click the `Fork` button in the top right corner. This will create a copy of the repository under your own GitHub account. 
+To fork the repository, go to the repository page on GitHub and click the **Fork** button in the top right corner. This will create a copy of the repository under your own GitHub account. 
 
-You can then run the workflow in your forked repository by navigating to the `Actions` tab and selecting the MSBuild workflow, then clicking `Run workflow`.
+You can then run the workflow in your forked repository by navigating to the **Actions** tab and selecting the MSBuild workflow, then clicking **Run workflow**.
 
-You can view the `Actions` logs in the repository for each step. 
+You can view the **Actions** logs in the repository for each step. 
 ![action #center](_images/actions.png)
 
 You have learned how to build a Windows application and upload the result as an artifact of your workflow using the GitHub Arm-hosted Windows runner.
