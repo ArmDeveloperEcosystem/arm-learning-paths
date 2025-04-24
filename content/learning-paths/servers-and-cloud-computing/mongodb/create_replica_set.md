@@ -8,7 +8,7 @@ weight: 3 # (intro is 1), 2 is first, 3 is second, etc.
 layout: "learningpathall"
 ---
 ## MongoDB test scenarios
-To test Mongodb you need two parts. A instance running the testing software([YCSB](/learning-paths/servers-and-cloud-computing/mongodb/benchmark_mongodb-8.0)). one or more instances running MongoDB in some configuration. The recommended MongoDB test setup is a three node relica set. These three nodes are of equal size with one instance being desigated as the primary node( the target for test traffic ) and the others as secondary nodes.
+To test MongoDB you need two parts. An instance running the testing software ([YCSB](/learning-paths/servers-and-cloud-computing/mongodb/benchmark_mongodb-8.0)). One or more instances running MongoDB in some configuration. The recommended MongoDB test setup is a three node replica set. These three nodes are of equal size with one instance being designated as the primary node (the target for test traffic) and the others as secondary nodes.
 
 ## What is a replica set?
 
@@ -16,25 +16,25 @@ A replica set is a group of instances that maintain the same dataset. A replica 
 
 ## What node size should I use?
 
-The most common size for testing MongoDB is an 8 vCPU instance. You can test with any sized instance, but if you are looking for ideal testing conditions, 8 vCPUs is enough. Each node should have atleast 32GB of RAM.
+The most common size for testing MongoDB is an 8 vCPU instance. You can test with any sized instance, but if you are looking for ideal testing conditions, 8 vCPUs is enough. Each node should have at least 32GB of RAM.
 
-To achieve the best results, its recommended to keep the complete data set in memory. If you see disk access when running tests, increase the RAM size of your instances. Additional details about the recommended configuration are provided below.
+To achieve the best results, it's recommended to keep the complete data set in memory. If you see disk access when running tests, increase the RAM size of your instances. Additional details about the recommended configuration are provided below.
 
 ## Creating replica sets
 
-You can create replica sets of any size(two is the minimum). Three is recemmended but you can add as many as you like.
+You can create replica sets of any size (two is the minimum). Three is recommended but you can add as many as you like.
 
 ## Three node replica sets
 
-To creating a three node replica set, start by launching three [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) of equal size.
+To create a three node replica set, start by launching three Arm-based instances of equal size.
 
-[install](/learning-paths/servers-and-cloud-computing/mongodb/run_mongodb) Mongodb on all three instances.
+[Install](/learning-paths/servers-and-cloud-computing/mongodb/run_mongodb) MongoDB on all three instances.
 
-Once all three instances are up and running. Modify the service and configuration file for all instances.
+Once all three instances are up and running, modify the service and configuration file for all instances.
 
 ## Modify the MongoDB configuration
 
-Use a text editor to edit the file `/etc/mongodb.conf` and replace the contents of the file with the text below.
+Use a text editor to edit the file `/etc/mongod.conf` and replace the contents of the file with the text below.
 
 ```console
 # Configuration Options: https://docs.mongodb.org/manual/reference/configuration-options/
@@ -50,10 +50,10 @@ storage:
   engine: wiredTiger
   wiredTiger:
     engineConfig:
-      configString: "cache_size=16484MB" # 50% of your ram is recommened. Adding more helps depending on dataset.
+      configString: "cache_size=16484MB" # 50% of your ram is recommended. Adding more helps depending on dataset.
 
 replication:
-  replSetName: "rs0" # Name of your replicaset
+  replSetName: "rs0" # Name of your replica set
   oplogSizeMB: 5000
 
 # network interfaces
@@ -70,14 +70,14 @@ setParameter:
   tlsWithholdClientCertificate: true
 ```
 
-**Details of what all these mean is below:**
+**Details of what these mean are below:**
 
 **systemLog:** Contains locations and details of where logging should be contained.
 - **path:** Location for logging
 
-**storage:** Its recommended to run test within memory to get achieve the best performance. This contains details on the engine used and location of storage.
+**storage:** It's recommended to run test within memory to achieve the best performance. This contains details on the engine used and location of storage.
 - **engine:** Wiredtiger is used in this case. Using a disk will add latency.
-- **cache_size:** The minimum if using the recommend instance size is 50% of 32(16gb). But in testing using 18gb produced better results.
+- **cache_size:** The minimum if using the recommended instance size is 50% of 32(16gb). However, testing showed that using 18GB produced better results.
 
 **replication:** This is used for replica set setup.
 - **replSetName:** This is the name of the replica set.
@@ -91,15 +91,15 @@ setParameter:
 - **diagnosticDataCollectionDirectorySizeMB:** 400 is based on the docs.
 - **honorSystemUmask:** Sets read and write permissions only to the owner of new files
 - **lockCodeSegmentsInMemory:** Locks code into memory and prevents it from being swapped.
-- **suppressNoTLSPeerCertificateWarning:** allows clients to connect without a certificate. (Only for testing purposes)
-- **tlsWithholdClientCertificate:** Will not send the certification during communication. (Only for testing purposes)
+- **suppressNoTLSPeerCertificateWarning:** Allows clients to connect without a certificate. (Only for testing purposes)
+- **tlsWithholdClientCertificate:** Will not send the certificate during communication. (Only for testing purposes)
 
 If you want to use encryption you will need to add the security and keyFile to your configuration. As well as change some of the parameters in the `mongod.conf` file.
 
-Run this command to reload the new configurtion.
+Run this command to reload the new configuration.
 
-```
-sudo service mongod restart
+```bash
+sudo systemctl restart mongod
 ```
 
 ## Modify the MongoDB service
@@ -136,15 +136,15 @@ LimitNPROC=64000
 WantedBy=multi-user.target
 ```
 
-details on these can be found here: https://docs.mongodb.com/manual/reference/ulimit/#recommended-ulimit-settings
+Details on these can be found in the [documentation](https://docs.mongodb.com/manual/reference/ulimit/#recommended-ulimit-settings).
 
 Run this command to reload the service.
 
-```
-sudo ystemctl daemon-reload
+```bash
+sudo systemctl daemon-reload
 ```
 
-**Once all three instances are created and have mongodb installed, select one to be your primary node. The remaining instances will be secondary nodes.**
+**Once all three instances are created and have MongoDB installed, select one to be your primary node. The remaining instances will be secondary nodes.**
 
 ## Initialize the replica set
 
@@ -160,7 +160,7 @@ Connect to the primary node and run the following commands below.
 
 2. Initialize the replica set with the following command:
 
-    ```
+    ```bash
     mongosh --host $PRIMARY_NODE_IP:27017 <<EOF
     rs.initiate({
       _id: "rs0",
