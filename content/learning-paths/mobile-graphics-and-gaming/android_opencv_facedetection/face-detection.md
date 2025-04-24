@@ -194,7 +194,7 @@ If at least one face is detected, you retrieve the first detected face, and base
 
 After running the application, click the Start button, and you will see a green rectangle around the detected face as shown below:
 
-![img5](Figures/06.jpg)
+![img5](figures/06.jpg)
 
 ## Summary
 In this Learning Path, you learned how to use the Haar cascade classifier to detect faces in camera images. You added the pre-trained Haar cascade XML file for face detection to the project’s assets directory. You implemented the loadHaarCascade method to load the Haar cascade file from the assets and initialize the CascadeClassifier. You also created the getPath method to convert the Haar cascade asset file into a file path that can be used by OpenCV.

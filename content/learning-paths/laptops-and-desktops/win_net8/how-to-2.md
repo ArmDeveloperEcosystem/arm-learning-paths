@@ -32,7 +32,7 @@ dotnet run -c Release
 
 Wait a few moments for the application to execute all the benchmarks and you will then see the results of the following form:
 
-![fig3](Figures/03.png)
+![fig3](figures/03.png)
 
 You will now compare execution times to x64 architecture (emulator on arm64) by typing:
 
@@ -42,13 +42,13 @@ dotnet run -c Release -a x64
 
 The above command will lead to significantly longer execution times than before:
 
-![fig4](Figures/04.png)
+![fig4](figures/04.png)
 
 The operations all take more time on the emulated x64 than when you execute them natively on Arm64. On average, native execution provides about a 19% performance improvement for list sorting, 11% for matrix multiplication, and 35% for string operations.
 
 The following chart summarizes the mean execution times for x64 and Arm64’s natively executed code.
 
-![fig4](Figures/05.png)
+![fig4](figures/05.png)
 
 ### Summary
 In this learning path you have learned how to benchmark .NET applications using both the default and custom benchmarks. By benchmarking the custom code, we demonstrated the performance boost when you natively execute the .NET code on an Arm64-powered device. 

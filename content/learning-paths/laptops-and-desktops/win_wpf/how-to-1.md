@@ -22,11 +22,11 @@ You can find the complete project code used in this learning path [here](https:/
 ## Create the project
 You will now create the WPF project. Open Visual Studio and click **Create a new project**: 
 
-![fig1](Figures/01.png)
+![fig1](figures/01.png)
 
 In the next window, search for the WPF Application template: 
 
-![fig2](Figures/02.png)
+![fig2](figures/02.png)
 
 This will open the 'Configure your new project' view, in which you should configure the project as follows:
 
@@ -35,11 +35,11 @@ This will open the 'Configure your new project' view, in which you should config
 3. Check the option **Place solution and project in the same directory**
 4. Click the **Next** button
 
-![fig3](Figures/03.png)
+![fig3](figures/03.png)
 
 In the last step, under Additional Information, choose the **.NET 8.0 (Long Term Support)** option. Finally, click the **Create** button. 
 
-![fig4](Figures/04.png)
+![fig4](figures/04.png)
 
 Your project should be now ready. 
 
@@ -56,7 +56,7 @@ Proceed as follows:
 1. Open the Solution Explorer in Visual Studio, right-click on the Arm64.DesktopApp.WPF project, and then select Add -> New Folder. Rename the folder to Helpers.
 2. Right-click the Helpers folder, and select Add -> New Item... This will open the Add New Item window, where you should type PerformanceHelper.cs and click the Add button:
 
-![fig5](Figures/05.png)
+![fig5](figures/05.png)
 
 3. Modify **PerformanceHelper.cs** as follows:
 ```cs
@@ -143,7 +143,7 @@ Before starting the UI design, install the Syncfusion.SfChart.WPF NuGet package 
 2. In Solution Explorer, right-click on Dependencies under the Arm64.DesktopApp.WPF project. From the context menu, select Manage NuGet Packages... to open the NuGet Package Manager.
 3. In the NuGet Package Manager, search for Syncfusion Chart WPF. Then select Syncfusion.SfChart.WPF from the results and click the Install button. Refer to the figure below for guidance:
 
-![fig6](Figures/06.png)
+![fig6](figures/06.png)
 
 4. A Preview Changes window will appear. Click the Apply button to confirm and proceed with the changes to the solution. The installation of the NuGet package will complete.
 
@@ -288,7 +288,7 @@ The chart is configured with two numerical axes. The horizontal (primary) axis d
 
 The complete XAML declaration results in the following view:
  
-![fig7](Figures/07.png)
+![fig7](figures/07.png)
 
 ## Application Logic
 You will now implement the application logic so that the computations will be launched when the user clicks the **Run calculations** button. Follow these steps:
