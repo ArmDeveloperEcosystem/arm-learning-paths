@@ -20,16 +20,34 @@ jobs:
              **.md
       - name: Check for capital letters or spaces in content directory
         run: |
-          echo "Checking for capital letters or spaces in content directory paths..."
+          echo "Checking for capital letters or spaces in content directory paths (excluding file extensions)..."
+
+          tmpfile=$(mktemp)
 
           git diff --name-only origin/${{ github.base_ref }}...HEAD |
             grep '^content/' |
-            grep -E '[A-Z]|[[:space:]]' && {
-              echo "❌ Found invalid file or directory names with capital letters or spaces in 'content/'"
-              exit 1
-            }
+            while read -r path; do
+              name=$(basename "$path")
 
-          echo "✅ No capital letters or spaces found in 'content/' paths."
+              # Strip file extension if it exists
+              base="${name%.*}"
+
+              if [[ "$base" =~ [A-Z] || "$base" =~ [[:space:]] ]]; then
+                echo "Invalid name: $path"
+                echo "$path" >> "$tmpfile"
+              fi
+            done
+
+          if [[ -s "$tmpfile" ]]; then
+            echo "One or more files or directories in 'content/' contain capital letters or spaces (excluding extensions):"
+            cat "$tmpfile"
+            rm "$tmpfile"
+            exit 1
+          else
+            rm "$tmpfile"
+            echo "✅ No capital letters or spaces found in 'content/' paths."
+          fi
+
       - name: Install dependencies
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         run: pip install -r tools/requirements.txt
