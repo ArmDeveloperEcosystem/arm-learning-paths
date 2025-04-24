@@ -39,7 +39,7 @@ jobs:
             done
 
           if [[ -s "$tmpfile" ]]; then
-            echo "One or more files or directories in 'content/' contain capital letters or spaces (excluding extensions):"
+            echo "❌ One or more files or directories in 'content/' contain capital letters or spaces (excluding extensions):"
             cat "$tmpfile"
             rm "$tmpfile"
             exit 1
