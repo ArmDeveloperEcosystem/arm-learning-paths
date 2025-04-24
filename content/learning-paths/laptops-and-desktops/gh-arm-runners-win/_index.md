@@ -7,16 +7,16 @@ cascade:
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an introductory tutorial for software developers interested in automating Windows application builds on Arm architecture using GitHub Actions.
+who_is_this_for: This introductory tutorial is for software developers looking to automate Windows application builds on Arm architecture using GitHub Actions.
 
 learning_objectives:
-    - Learn about GitHub Arm-hosted Windows runners.
-    - Understand how to configure workflows for Arm-hosted runners.
-    - Automate the build process of Windows applications using GitHub Actions.
+    - Describe GitHub Arm-hosted Windows runners.
+    - Configure workflows to run on Arm-hosted runners.
+    - Automate Windows application builds with GitHub Actions.
 
-prerequisites:
+prerequisites: 
     - A GitHub account. 
-    - Basic knowledge of GitHub Actions.
+    - Familiarity with GitHub Actions.
 
 author: 
     - Pareena Verma
