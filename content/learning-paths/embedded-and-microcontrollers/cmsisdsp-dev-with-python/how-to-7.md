@@ -6,19 +6,21 @@ weight: 8
 layout: learningpathall
 ---
 
-## Convert the CMSIS-DSP Python to C
+## Converting functions
 
-Once the Python code is working, writing the C code should be straightforward, since the CMSIS-DSP Python wrapper’s API closely mirrors the C API.
+Now that your Python prototype is verified, it's time to translate the key functions into C using the CMSIS-DSP library. Because the CMSIS-DSP Python API closely mirrors the C API, the conversion is generally straightforward. In this section, you will have a look at two examples to understand how the conversion works.
 
 ### Rescaling
-For example, let’s look at rescaling
+
+Here's the original Python implementation of the rescaling operation, followed immediately by its equivalent in C. Notice that the function signatures and logic remain very similar, with minor differences to account for explicit memory management and types in C.
+
 #### Python version
 
 ```python
 def rescale(self,w):
         the_max,index=dsp.arm_absmax_q15(w)
-        
-        quotient=0x7FFF 
+
+        quotient=0x7FFF
         the_shift=0
         status = -1
         if the_max != 0:
@@ -27,7 +29,8 @@ def rescale(self,w):
                 w=dsp.arm_scale_q15(w,quotient,the_shift)
         return(w,status,the_max)
 ```
-#### C Version
+
+#### C version
 
 ```C
 #include "dsp/basic_math_functions.h"
@@ -53,32 +56,31 @@ arm_status rescale(q15_t *w, uint32_t nb,q15_t *the_max)
     }
 
     return(status);
- 
+
 }
 
 ```
 
 ### Signal energy
 
+As a second example, let's have a look at another critical function: computing the signal energy. This function is essential for tasks like Voice Activity Detection (VAD) and noise suppression.
+
+Below is the Python version for computing signal energy, followed by its corresponding C translation. As before, while the structure of the function stays the same, you’ll see that explicit buffer management and saturation handling are more visible in the C implementation.
+
 #### Python version
+
 ```python
 def signal_energy_q15(window):
+    # Calculate window
     mean=dsp.arm_mean_q15(window)
-    # If we subtract the mean, we won't get saturation.
-    # So we use the CMSIS-DSP negate function on an array containing a single sample.
     neg_mean=dsp.arm_negate_q15([mean])[0]
     window=dsp.arm_offset_q15(window,neg_mean)
+
+    # Energy of the window
     energy=dsp.arm_power_q15(window)
-    # Energy is not in Q15 (refer to CMSIS-DSP documentation).
     energy=dsp.ssat(energy>>20,16)
     dB=dsp.arm_vlog_q15([energy])
-    # The output of the `vlog` is not in Q15
-    # The multiplication by `10` is missing compared to the NumPy
-    # reference implementation.
-    # The result of this function is not equivalent to the float implementation due to the different
-    # formats used in the intermediate computations.
-    # As a consequence, a different threshold will have to be used
-    # to compensate for these differences.
+
     return(dB[0])
 ```
 
@@ -92,7 +94,7 @@ int16_t signal_energy_q15(q15_t *window,uint32_t nb)
 {
     q15_t mean,neg_mean;
     arm_mean_q15(window,nb,&mean);
-    
+
     arm_negate_q15(&mean,&neg_mean,1);
 
     arm_offset_q15(window,neg_mean,window,nb);
@@ -107,7 +109,7 @@ int16_t signal_energy_q15(q15_t *window,uint32_t nb)
     // but the specific format has not been identified
     // to make this tutorial easier.
     // We just know it is not q15
-    int16_t dB; 
+    int16_t dB;
 
     arm_vlog_q15(&energy,&dB,1);
 
@@ -115,4 +117,6 @@ int16_t signal_energy_q15(q15_t *window,uint32_t nb)
 }
 ```
 
-A DSP function written in Python using CMSIS-DSP can be easily converted into a similar C function.
+As you can see, a DSP function written in Python using the CMSIS-DSP Python wrappers can be directly mapped to a very similar C function with only minor adjustments. This makes it easy to prototype quickly in Python and then migrate to efficient, production-ready C code for embedded platforms.
+
+In the final section, you will take part of some additional resources to learn more and start using CMSIS-DSP in your applications.
