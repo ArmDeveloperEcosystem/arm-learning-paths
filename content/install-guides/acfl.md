@@ -16,9 +16,6 @@ test_images:
 - fedora:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
-- passed
 title: Arm Compiler for Linux
 tool_install: true
 weight: 1
@@ -89,7 +86,7 @@ bash <(curl -L https://developer.arm.com/-/cdn-downloads/permalink/Arm-Compiler-
 
 Download releases from the command line using `wget`. Install `wget` if not present.
 
-```console
+```bash
 sudo apt install wget
 ```
 
@@ -117,7 +114,7 @@ Each command sequence includes accepting the license agreement to automate the i
 
 #### Ubuntu Linux:
 
-```bash { target="ubuntu:latest", env="DEBIAN_FRONTEND=noninteractive" }
+```bash { target="ubuntu:latest" }
 sudo -E apt-get -y install environment-modules python3 libc6-dev
 tar -xvf arm-compiler-for-linux_24.10.1_Ubuntu-22.04_aarch64.tar
 cd ./arm-compiler-for-linux_24.10.1_Ubuntu-22.04
@@ -126,10 +123,10 @@ sudo ./arm-compiler-for-linux_24.10.1_Ubuntu-22.04.sh --accept
 
 #### Red Hat Linux:
 
-```bash { target="fedora:latest" }
+```console
 sudo yum -y install environment-modules python3 glibc-devel
 tar -xvf arm-compiler-for-linux_24.10.1_RHEL-9_aarch64.tar
-cd arm-compiler-for-linux_24.10.1_RHEL-9
+cd ./arm-compiler-for-linux_24.10.1_RHEL-9
 sudo ./arm-compiler-for-linux_24.10.1_RHEL-9.sh --accept
 ```
 
@@ -150,25 +147,23 @@ Arm Compiler for Linux is available to install with the Ubuntu system package ma
 
 #### Set up the ACfL package repository
 
-Add the ACfL `apt` package repository to your Ubuntu 20.04 or 22.04 system:
+Add the ACfL `apt` package repository to your system. These instructions apply for Ubuntu 22.04. You can check the [available versions](https://developer.arm.com/packages/) for other releases.
 
-```bash { target="ubuntu:latest" }
+After that, the ACfL Ubuntu package repository is now ready to use. Run the commands below to install the dependencies needed.
+
+
+```console
 sudo apt update
-sudo apt install -y curl environment-modules python3 libc6-dev
-. /etc/os-release
-curl "https://developer.arm.com/packages/ACfL%3A${NAME}-${VERSION_ID/%.*/}/${VERSION_CODENAME}/Release.key" | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc
-echo "deb https://developer.arm.com/packages/ACfL%3A${NAME}-${VERSION_ID/%.*/}/${VERSION_CODENAME}/ ./" | sudo tee /etc/apt/sources.list.d/developer-arm-com.list
+sudo apt install -y wget gnupg gpg environment-modules python3 libc6-dev
+wget -qO - https://developer.arm.com/packages/ACfL%3AUbuntu-22/jammy/Release.key | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc
+echo "deb https://developer.arm.com/packages/ACfL%3AUbuntu-22/jammy/ ./" | sudo tee /etc/apt/sources.list.d/developer-arm-com.list
 sudo apt update
 ```
 
-The ACfL Ubuntu package repository is now ready to use.
+Install Arm Compiler for Linux with:
 
-#### Install ACfL
-
-Download and install Arm Compiler for Linux with:
-
-```bash { target="ubuntu:latest" }
-sudo apt install acfl
+```console
+sudo apt install acfl -y
 ```
 
 ### Amazon Linux 2023
@@ -179,25 +174,25 @@ Arm Compiler for Linux is available to install with either the `dnf` or `yum` sy
 
 Install ACfL and prerequisites from the Amazon Linux 2023 `rpm` package repository with `dnf`:
 
-```bash
-sudo dnf update
-sudo dnf install 'dnf-command(config-manager)' procps psmisc make environment-modules
-sudo dnf config-manager --add-repo https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
-sudo dnf install acfl
+```console
+sudo dnf update -y
+sudo dnf -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
+sudo dnf config-manager addrepo --from-repofile=https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
+sudo dnf -y install acfl
 ```
 
 Or using the equivalent `yum` commands:
 
-```bash
-sudo yum update
-sudo yum install 'dnf-command(config-manager)' procps psmisc make environment-modules
-sudo yum config-manager --add-repo https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
-sudo yum install acfl
+```console
+sudo yum update -y
+sudo yum -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
+sudo yum config-manager addrepo --from-repofile=https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
+sudo yum -y install acfl
 ```
 
 The ACfL tools are now ready to use.
 
-### Red Hat Enterprise Linux (RHEL) 9 
+### Red Hat Enterprise Linux (RHEL) 9
 
 Arm Compiler for Linux is available to install with either the `dnf` or `yum` system package manager.
 
@@ -205,20 +200,20 @@ Arm Compiler for Linux is available to install with either the `dnf` or `yum` sy
 
 Install ACfL and prerequisites from the RHEL 9 `rpm` package repository with `dnf`:
 
-```bash
-sudo dnf update
-sudo dnf install 'dnf-command(config-manager)' procps psmisc make environment-modules
-sudo dnf config-manager --add-repo https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
-sudo dnf install acfl
+```console
+sudo dnf update -y
+sudo dnf -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
+sudo dnf config-manager addrepo --from-repofile=https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
+sudo dnf -y install acfl
 ```
 
 Or using the equivalent `yum` commands:
 
-```bash
-sudo yum update
-sudo yum install 'dnf-command(config-manager)' procps psmisc make environment-modules
-sudo yum config-manager --add-repo https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
-sudo yum install acfl
+```console
+sudo yum update -y
+sudo yum -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
+sudo yum config-manager addrepo --from-repofile=https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
+sudo yum -y install acfl
 ```
 
 The ACfL tools are now ready to use.
@@ -227,39 +222,35 @@ The ACfL tools are now ready to use.
 
 Arm Compiler for Linux uses environment modules to dynamically modify your user environment. Refer to the [Environment Modules documentation](https://lmod.readthedocs.io/en/latest/#id) for more information.
 
-Set up the environment, for example, in your `.bashrc` and add module files.
+Set up the environment, for example, in your `.bashrc` and add module files. Then, list the available modules:
 
 #### Ubuntu Linux:
 
-```bash { target="ubuntu:latest" }
-echo ". /usr/share/modules/init/bash" >> ~/.bashrc
-echo "module use /opt/arm/modulefiles" >> ~/.bashrc
-. ~/.bashrc
+```bash { target="ubuntu:latest" pre_cmd=". /usr/share/modules/init/bash" pre_cmd="module use /opt/arm/modulefiles" }
+echo ". /usr/share/modules/init/bash" >> $HOME/.bashrc
+echo "module use /opt/arm/modulefiles" >> $HOME/.bashrc
+source $HOME/.bashrc
+module avail
 ```
 
 #### Red Hat or Amazon Linux:
 
-```bash { target="fedora:latest" }
-echo ". /usr/share/Modules/init/bash" >> ~/.bashrc
-echo "module use /opt/arm/modulefiles" >> ~/.bashrc
-. ~/.bashrc
-```
-
-To list available modules:
-
-```bash { env_source="~/.bashrc" }
+```console
+echo ". /usr/share/Modules/init/bash" >> $HOME/.bashrc
+echo "module use /opt/arm/modulefiles" >> $HOME/.bashrc
+source $HOME/.bashrc
 module avail
 ```
 
 To configure Arm Compiler for Linux:
 
-```bash { env_source="~/.bashrc" }
+```console
 module load acfl/24.10.1
 ```
 
 To configure GCC:
 
-```bash { env_source="~/.bashrc" }
+```console
 module load gnu/14.2.0
 ```
 
@@ -318,7 +309,7 @@ ACfL is now [ready to use](#armclang).
 To get started with the Arm C/C++ Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```bash { env_source="$HOME/.bashrc", pre_cmd=". /usr/share/modules/init/bash; module use /opt/arm/modulefiles; module load acfl/24.10.1" }
 armclang --version
 ```
 
@@ -336,13 +327,13 @@ int main()
 
 Build the application with:
 
-```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console
 armclang hello.c -o hello
 ```
 
 Run the application with:
 
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console
 ./hello
 ```
 
@@ -356,7 +347,7 @@ Hello, C World!
 To get started with the Arm Fortran Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```bash { env_source="$HOME/.bashrc", pre_cmd=". /usr/share/modules/init/bash; module use /opt/arm/modulefiles; module load acfl/24.10.1" }
 armflang --version
 ```
 
@@ -370,12 +361,12 @@ end program hello
 ```
 
 Build the application with:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console
 armflang hello.f90 -o hello
 ```
 
 Run the application with:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10.1" }
+```console
 ./hello
 ```
 

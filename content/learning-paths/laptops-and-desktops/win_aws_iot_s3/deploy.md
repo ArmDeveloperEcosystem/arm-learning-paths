@@ -85,7 +85,7 @@ aws s3 website s3://<unique-bucket-name>/ --index-document index.html
 
 Finally, access the website by typing **http://<unique-bucket-name>.s3-website-<region>.amazonaws.com**, where <unique-bucket-name> is the name of your bucket and <region> stands for the region you're using (here that is eu-central-1):
 
-![fig5](Figures/05.png)
+![fig5](figures/05.png)
 
 ## Summary
 In this learning path you have learned how to create a simple static website that fetches and displays temperature data from an AWS Lambda function. The website consists of an HTML file (**index.html**), a CSS file (**styles.css**), and a JavaScript file (**index.js**). The JavaScript code within the website sends an HTTP request to an AWS Lambda function, which processes the request and returns the temperature data in a JSON format. This data is then displayed on the webpage.

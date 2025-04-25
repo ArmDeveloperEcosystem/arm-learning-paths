@@ -16,8 +16,6 @@ author: Julio Suarez
 test_images:
     - ubuntu:latest
 test_maintenance: true
-test_status:
-    - passed
 
 ### Tags
 skilllevels: Advanced

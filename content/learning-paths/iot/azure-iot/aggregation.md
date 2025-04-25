@@ -7,8 +7,7 @@ weight: 8
 layout: "learningpathall"
 ---
 
-## Objective
-In the previous section, you configured Azure Stream Analytics to securely store incoming IoT telemetry data in Azure Cosmos DB, making sensor data readily available for further processing. In this section, you’ll enhance your IoT solution by implementing real-time data aggregation capabilities using Azure Functions. Azure Functions is a powerful, event-driven, serverless compute service provided by Azure that allows you to execute custom code in response to scheduled events without managing infrastructure. You’ll create an Azure Function that periodically queries sensor data from Cosmos DB and computes aggregated metrics, such as average, minimum, and maximum values, enabling you to derive actionable insights and monitor sensor performance more effectively.
+In the previous section, you configured Azure Stream Analytics to securely store incoming IoT telemetry data in Azure Cosmos DB, making sensor data readily available for further processing. In this section, you will enhance your IoT solution by implementing real-time data aggregation capabilities using Azure Functions. Azure Functions is a powerful, event-driven, serverless compute service provided by Azure that allows you to execute custom code in response to scheduled events without managing infrastructure. You will create an Azure Function that periodically queries sensor data from Cosmos DB and computes aggregated metrics, such as average, minimum, and maximum values, enabling you to derive actionable insights and monitor sensor performance more effectively.
 
 ## Data Aggregation
 As your IoT solution matures, the volume of sensor data continuously captured and securely stored in Azure Cosmos DB grows rapidly. However, raw telemetry data alone may not effectively communicate actionable insights, especially when quick decision-making and proactive management are required. Transforming this raw sensor data into meaningful, summarized information becomes essential for efficient monitoring, accurate analysis, and rapid response.
@@ -18,9 +17,9 @@ Aggregating sensor readings into various metrics such as average, minimum, and m
 In this section, you will leverage Azure Functions to implement a data aggregation. This Azure Function will respond to the HTTP trigger, and return aggregated sensor data.
 
 ### Azure Function with HTTP Trigger
-Building upon the sensor data aggregation strategy, this section demonstrates how to implement a serverless Azure Function using an HTTP trigger to calculate real-time insights from sensor data stored in Azure Cosmos DB. Specifically, you’ll create an HTTP-triggered function that queries temperature readings from the past minute, computes the average temperature, and returns this aggregated value as a JSON response. This HTTP-triggered approach provides an on-demand method to access up-to-date metrics.
+Building upon the sensor data aggregation strategy, this section demonstrates how to implement a serverless Azure Function using an HTTP trigger to calculate real-time insights from sensor data stored in Azure Cosmos DB. Specifically, you will create an HTTP-triggered function that queries temperature readings from the past minute, computes the average temperature, and returns this aggregated value as a JSON response. This HTTP-triggered approach provides an on-demand method to access up-to-date metrics.
 
-To implement this functionality open the function_app.py and modify it as follows:
+To implement this functionality open the `function_app.py` and modify it as follows:
 1. Add the following import statements:
 ```python
 from azure.cosmos import CosmosClient
@@ -128,7 +127,7 @@ def get_average_temperature(req: func.HttpRequest) -> func.HttpResponse:
     )
 ```
 
-The GetAverageTemperature function is triggered by an HTTP GET request sent to the route /averagetemperature. Upon invocation, it first logs that a request has been received for calculating the average temperature based on data from the last minute.
+The `GetAverageTemperature` function is triggered by an HTTP GET request sent to the route /averagetemperature. Upon invocation, it first logs that a request has been received for calculating the average temperature based on data from the last minute.
 
 The function then retrieves the Cosmos DB connection string from an environment variable. If the connection string is not available, the function logs an error and returns a 500 Internal Server Error response, indicating that essential configuration details are missing.
 
@@ -142,7 +141,7 @@ When data points are available, the function computes the average temperature fr
 
 Finally, if the average calculation succeeds, the function constructs a JSON response containing the calculated average temperature (rounded to two decimal places) along with a success message. It then sends this response back to the caller with a status code of 200 OK and the configured CORS header {"Access-Control-Allow-Origin": "*"}, which is required to ensure that the portal can successfully retrieve and display the data from the function.
 
-Before running the function, dependencies need to be added and installed. Open the requirements.txt file and include the following lines:
+Before running the function, dependencies need to be added and installed. Open the `requirements.txt` file and include the following lines:
 
 ```json
 azure-cosmos
@@ -162,26 +161,26 @@ func start
 ```
 
 Once running, observe the HTTP trigger endpoint, which should appear similar to the following:
-![img36 alt-text#center](Figures/36.png)
+![img36 alt-text#center](figures/36.png)
 
 Next, start the simulator to stream sensor data and open the HTTP trigger endpoint URL in your web browser. You will see the calculated average temperature displayed:
-![img37 alt-text#center](Figures/37.png)
+![img37 alt-text#center](figures/37.png)
 
 ## Deploy to Azure Function App
 Now that your Azure Function is fully tested and ready, it's time to deploy it to Azure, making it accessible online and available for integration with other services and applications. Visual Studio Code provides an easy and efficient way to deploy Azure Functions directly from your local development environment. Follow these steps to deploy your function
 1. In Visual Studio Code, open the Command Palette (Ctrl+Shift+P on Windows/Linux, or Cmd+Shift+P on macOS) and search for "Azure Functions: Deploy to Function App":
-![img38 alt-text#center](Figures/38.png)
+![img38 alt-text#center](figures/38.png)
 2. The deployment wizard will guide you through the following selections:
 * Subscription: choose the Azure subscription you wish to use,
 * Select a function app: Select the Function App that you previously created in Azure (in this example, "IoTTemperatureAlertFunc")
 * Confirm your deployment:
-![img39 alt-text#center](Figures/39.png)
+![img39 alt-text#center](figures/39.png)
 3. Wait for the deployment to complete. This process typically takes a few moments. Once deployed, your Azure Function is hosted in Azure and ready for use.
 4. Open the Azure Portal, and go to your function app (in this example, "IoTTemperatureAlertFunc"). You will see the deployed functions:
-![img40 alt-text#center](Figures/40.png)
+![img40 alt-text#center](figures/40.png)
 
 ## Configure Function App Settings
-We have just deployed the functions to Azure. Previously, when testing the functions locally, we used the local.settings.json file to store the Cosmos DB connection string. However, this local configuration file is not deployed to Azure. Therefore, we need to update the corresponding settings directly within the Azure portal.
+You have just deployed the functions to Azure. Previously, when testing the functions locally, you used the `local.settings.json` file to store the Cosmos DB connection string. However, this local configuration file is not deployed to Azure. Therefore, you need to update the corresponding settings directly within the Azure portal.
 
 Azure Function App settings, which are also known as application settings or environment variables, are designed to securely store sensitive configuration information, such as database connection strings, API keys, and other confidential details. Storing the Cosmos DB connection string as an app setting in Azure ensures secure management of your database credentials, allowing your function to safely access Cosmos DB without exposing sensitive information within your source code.
 
@@ -191,7 +190,7 @@ Follow these steps to configure the Cosmos DB connection string
 3. Click the + Add button
 4. Enter the name you used in your code (e.g., armiotcosmosdb_DOCUMENTDB).
 5. Paste the Cosmos DB connection string into the Value field:
-![img41 alt-text#center](Figures/41.png)
+![img41 alt-text#center](figures/41.png)
 6. Click Apply to add the setting.
 7. Press Apply at the bottom to apply changes. Then, confirm to save changes
 
@@ -200,15 +199,15 @@ Once you've configured the connection string, test your deployed Azure Function 
 1. Return to the Overview page of your Azure Function App.
 2. Click on your HTTP-triggered function (GetAverageTemperature).
 3. Click Get function URL and copy the displayed URL (under default):
-![img42 alt-text#center](Figures/42.png)
+![img42 alt-text#center](figures/42.png)
 4. Open this URL in your web browser.
 5. Start your IoT simulator to begin streaming telemetry data to Cosmos DB.
 6. Refresh or access the function URL again, and you should see the calculated average temperature displayed:
-![img43 alt-text#center](Figures/43.png)
+![img43 alt-text#center](figures/43.png)
 
 This confirms your Azure Function successfully connects to Cosmos DB, retrieves real-time data, and calculates the average temperature as intended
 
-## Summary and next steps
-In this section, you created an HTTP-triggered Azure Function that retrieves and aggregates records from Cosmos DB. You then deployed your Azure Function to Azure, configured secure application settings to safely store the Cosmos DB connection string, and verified the functionality. You also learned that the local configuration file (local.settings.json) is not automatically deployed to Azure, making it necessary to manually set up these sensitive settings within the Azure portal. Securely managing these application settings in Azure ensures that your functions can reliably connect to Cosmos DB, facilitating the accurate retrieval and processing of IoT telemetry data.
+## Next Steps
+In this section, you created an HTTP-triggered Azure Function that retrieves and aggregates records from Cosmos DB. You then deployed your Azure Function to Azure, configured secure application settings to safely store the Cosmos DB connection string, and verified the functionality.
 
-In the next step, you’ll create a static website that leverages this HTTP-triggered function to display the average temperature in a web-based portal, thus completing your IoT solution.
+In the next step, you will create a static website that leverages this HTTP-triggered function to display the average temperature in a web-based portal, thus completing your IoT solution.

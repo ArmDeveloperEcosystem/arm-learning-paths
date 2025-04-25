@@ -20,8 +20,8 @@ subjects: Databases
 armips:
     - Neoverse
 tools_software_languages:
-    - ClickHouse    
-    - ClickBench    
+    - ClickHouse
+    - ClickBench
 operatingsystems:
     - Linux
 
@@ -29,8 +29,6 @@ test_images:
 - ubuntu:latest
 test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
 test_maintenance: true
-test_status:
-- passed
 
 further_reading:
     - resource:

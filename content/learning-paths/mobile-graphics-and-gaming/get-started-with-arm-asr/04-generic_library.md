@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Introduction
 
-Follow these steps to implement **Arm Accuracy Super Resolution (Arm ASR)** in your custom engine. 
+Follow these steps to implement **Arm Accuracy Super Resolution (Arm ASR)** in your custom engine.
 
 Arm ASR is an optimized variant of [Fidelity Super Resolution 2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md) (FSR2) that includes extensive mobile-specific optimizations, ensuring high performance on mobile devices.
 
@@ -20,7 +20,6 @@ You can integrate Arm ASR into your custom engine using one of two methods:
 See the following sections to learn how to configure Arm ASR:
 
 - [Quality presets](#quality-presets).
-- [Performance](#performance).
 - [Shader variants and extensions](#shader-variants-and-extensions).
 - [Input resources](#input-resources).
 - [Providing motion vectors](#providing-motion-vectors).
@@ -45,7 +44,7 @@ See the following sections to learn how to configure Arm ASR:
     cd accuracy-super-resolution-generic-library
     ```
 
-2. Set a variable for the package location for easy reference. 
+2. Set a variable for the package location for easy reference.
 
     You will use this path to refer to files in the repository:
 
@@ -160,36 +159,6 @@ FfxErrorCode ffxmFsr2GetRenderResolutionFromUpscalingRatio(
     uint32_t displayHeight,
     FfxmFsr2UpscalingRatio upscalingRatio)
 ```
-
-## Performance
-Depending on your target hardware and operating configuration, Arm ASR will operate at different performance levels. The table below compares the rendering performance of two Arm GPUs (Immortalis-G715 and Immortalis-G720) when using different upscaling settings at two target resolutions.
-
-<style>
-table {
-  background-color: #454545!important;
-  color: #ffffff!important;
-}
-</style>
-| Target resolution | Quality | Upscaling Ratio | Immortalis-G715 | Immortalis-G720 |
-|-------------------|--------------------|-----------|-----------------|-----------------|
-| 2800x1260 | Quality     | 1.5x | <span style="color: #FF0000;">6.5 ms</span> | <span style="color: #feff00;">4.1 ms</span> |
-|           |             | 1.7x | <span style="color: #FF0000;">6.3 ms</span> | <span style="color: #8fff00;">3.8 ms</span> |
-|           |             | 2x   | <span style="color: #FF0000;">6.1 ms</span> | <span style="color: #8fff00;">3.3 ms</span> |
-|           | Balanced    | 1.5x | <span style="color: #FFAC00;">5.8 ms</span> | <span style="color: #8fff00;">3.3 ms</span> |
-|           |             | 1.7x | <span style="color: #FFAC00;">5.4 ms</span> | <span style="color: #8fff00;">3.1 ms</span> |
-|           |             | 2x   | <span style="color: #feff00;">4.7 ms</span> | <span style="color: #55ff00;">2.8 ms</span> |
-|           | Performance | 1.5x | <span style="color: #FFAC00;">5.4 ms</span> | <span style="color: #8fff00;">3.2 ms</span> |
-|           |             | 1.7x | <span style="color: #FFAC00;">5.3 ms</span> | <span style="color: #55ff00;">2.9 ms</span> |
-|           |             | 2x   | <span style="color: #feff00;">4.6 ms</span> | <span style="color: #55ff00;">2.5 ms</span> |
-| 2400x1080 | Quality     | 1.5x | <span style="color: #FFAC00;">5.3 ms</span> | <span style="color: #55ff00;">2.9 ms</span> |
-|           |             | 1.7x | <span style="color: #feff00;">4.8 ms</span> | <span style="color: #55ff00;">2.7 ms</span> |
-|           |             | 2x   | <span style="color: #feff00;">4.3 ms</span> | <span style="color: #55ff00;">2.5 ms</span> |
-|           | Balanced    | 1.5x | <span style="color: #feff00;">4.2 ms</span> | <span style="color: #55ff00;">2.5 ms</span> |
-|           |             | 1.7x | <span style="color: #feff00;">4.0 ms</span> | <span style="color: #55ff00;">2.3 ms</span> |
-|           |             | 2x   | <span style="color: #8fff00;">3.6 ms</span> | <span style="color: #55ff00;">2.2 ms</span> |
-|           | Performance | 1.5x | <span style="color: #feff00;">4.1 ms</span> | <span style="color: #55ff00;">2.4 ms</span> |
-|           |             | 1.7x | <span style="color: #8fff00;">3.7 ms</span> | <span style="color: #55ff00;">2.1 ms</span> |
-|           |             | 2x   | <span style="color: #8fff00;">3.6 ms</span> | <span style="color: #55ff00;">2 ms  </span> |
 
 ## Shader Variants and Extensions
 

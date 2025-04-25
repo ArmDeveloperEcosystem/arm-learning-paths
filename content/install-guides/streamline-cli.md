@@ -74,7 +74,7 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
 
 ## Using Python scripts
 
-The Python scripts provided with Streamline CLI tools require Python 3.8 or later, and depend on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools.
+The Python scripts provided with Streamline CLI tools require Python 3.8 or later, and depend on several third-party modules. It is recommended to create a Python virtual environment containing these modules to run the tools.
 
 Create a virtual environment:
 
@@ -141,7 +141,7 @@ https://artifacts.tools.arm.com/arm-performance-studio/Streamline_CLI_Tools/
 
 ## Applying the kernel patch
 
-For best results, we provide a Linux kernel patch that modifies the behavior of Linux perf to improve support for capturing function-attributed top-down metrics on Arm systems. This patch provides two new capabilities:
+For best results, a Linux kernel patch is available that modifies the behavior of Linux perf to improve support for capturing function-attributed top-down metrics on Arm systems. This patch provides two new capabilities:
 
 * It allows a new thread to inherit the perf counter group configuration of its parent.
 * It decouples the perf event-based sampling window size from the overall sample rate. This allows strobed mark-space sampling patterns where the tool can capture a small window without using a high sample rate.
