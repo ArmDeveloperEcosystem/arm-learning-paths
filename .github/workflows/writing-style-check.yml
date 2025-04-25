@@ -38,6 +38,13 @@ jobs:
           git fetch origin pull/${PR_NUMBER}/head:pr-${PR_NUMBER}
           git checkout pr-${PR_NUMBER}
           
+      - name: List changed files
+        id: changed-files
+        run: |
+          PR_NUMBER=${{ github.event.inputs.pr_number }}
+          echo "Changed files in PR #${PR_NUMBER}:"
+          git diff --name-only origin/main...pr-${PR_NUMBER} | grep '\.md$' || echo "No markdown files changed"
+          
       - name: Run style guide checker
         id: style-check
         run: |

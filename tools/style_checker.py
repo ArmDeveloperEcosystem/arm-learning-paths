@@ -230,9 +230,28 @@ def get_changed_files(test_path=None):
         else:
             return []
     else:
-        # For manual workflow runs on PRs, check all markdown files
-        # This is simpler than trying to determine which files changed in the PR
-        return glob.glob("**/*.md", recursive=True)
+        # Get PR number from environment variable
+        pr_number = os.environ.get('PR_NUMBER')
+        if not pr_number:
+            print("No PR number provided, checking all markdown files")
+            return glob.glob("**/*.md", recursive=True)
+        
+        # Get list of changed files in the PR
+        try:
+            import subprocess
+            result = subprocess.run(
+                ["git", "diff", "--name-only", f"origin/main...pr-{pr_number}"],
+                capture_output=True, text=True, check=True
+            )
+            changed_files = result.stdout.strip().split('\n')
+            # Filter for only markdown files
+            md_files = [f for f in changed_files if f.endswith('.md') and os.path.exists(f)]
+            print(f"Found {len(md_files)} changed markdown files in PR #{pr_number}")
+            return md_files
+        except Exception as e:
+            print(f"Error getting changed files: {e}")
+            # Fallback to checking all markdown files
+            return glob.glob("**/*.md", recursive=True)
 
 def process_file(file_path):
     suggestions = []
