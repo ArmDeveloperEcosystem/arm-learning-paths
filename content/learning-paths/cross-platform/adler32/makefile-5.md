@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## How can I create a Makefile to build and run the test program?
 
-To create a Makefile, copy and paste the information below to GitHub Copilot. The prompt explains that the Makefile should use `gcc` as the compiler and target the Neoverse N1 processor. 
+Paste the following prompt into GitHub Copilot. It tells Copilot to generate a Makefile that uses `gcc` and targets the Neoverse N1 processor for optimized performance.
 
 ```console
 Read the .c files in my project and 
