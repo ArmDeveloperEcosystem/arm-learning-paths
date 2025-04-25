@@ -1,5 +1,5 @@
 ---
-title: Microbenchmark Storage Performance with Fio
+title: Microbenchmark Storage Performance with fio
 
 draft: true
 cascade:
@@ -7,16 +7,16 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: A cloud developer who wants to optimize storage cost or performance of their application. Developers who want to uncover potential storage-bound bottlenecks or changes when migrating an application to a different platform. 
+who_is_this_for: This is an introductory topic for developers seeking to optimize storage costs and performance, identify bottlenecks, and navigate storage considerations during application migration across platforms.
 
 learning_objectives: 
-    - Understand the flow of data for storage devices 
-    - Use basic observability utilities such as iostat, iotop and pidstat
-    - Understand how to run fio for microbenchmarking a block storage device
+    - Understand the flow of data for storage devices.
+    - Use basic observability utilities such as iostat, iotop and pidstat.
+    - Understand how to run fio for microbenchmarking a block storage device.
 
 prerequisites:
-    - Access to an Arm-based server
-    - Basic understanding of Linux
+    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an Arm Linux server.
+    - Familiarity with Linux.
 
 author: Kieran Hejmadi
 
@@ -30,7 +30,6 @@ tools_software_languages:
     - Runbook
 operatingsystems:
     - Linux
-
 
 further_reading:
     - resource:
