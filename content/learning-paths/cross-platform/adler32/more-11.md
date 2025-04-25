@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## What else can I do with GitHub Copilot on this project?
 
-You can investigate more topics using GitHub Copilot.
+GitHub Copilot can help you explore additional performance and optimization ideas:
 
-- Direct GitHub Copilot to try different compiler flags and use Agent mode to iterate through the options to find the best solution. 
-- Add support for the Clang compiler to the Makefile and compare the results to GCC. Depending on the application code, changing the compiler can result in improved performance.
-- Use GitHub Copilot to generate different data sizes and random data patterns to further investigate correct functionality and performance.
-- Try different algorithm implementations that use compiler autovectorization instead of NEON intrinsics or break down the Adler32 checksum into smaller blocks of data. It may be possible to get even better performance without NEON using the compiler and a better structure for the C code.
+- Test different compiler flags using Agent mode to automate iteration and identify the best combinations.
+- Add Clang support to your Makefile and compare performance against GCC — performance can differ significantly depending on your code structure.
+- Generate a wider range of data sizes and random patterns to stress-test functionality and measure performance under varied conditions.
+- Explore alternative algorithm structures that rely on compiler autovectorization instead of NEON intrinsics — you might discover better performance simply by restructuring the C code.
 
-While AI tools do not create performance code for every programming problem, they can be a big help to get you started in a new area of programming such as performance optimization using NEON intrinsics.
+AI tools won’t always generate high-performance code out of the box, but they can rapidly accelerate your experimentation and learning — especially in new areas of programming like NEON-based performance optimization.
