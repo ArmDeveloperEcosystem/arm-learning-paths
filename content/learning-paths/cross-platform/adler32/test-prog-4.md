@@ -6,9 +6,11 @@ weight: 4
 layout: learningpathall
 ---
 
-## How can I create a test program to verify Adler32 works correctly? 
+## How Do I Prompt Copilot to Generate a Test Program?
 
-You can continue your GitHub Copilot Agent session to create a test program using the prompt below. Copy and paste it into GitHub Copilot to generate a test program. 
+You can continue your GitHub Copilot Agent session to create a test program using the prompt below. 
+
+Copy and paste the prompt into GitHub Copilot to generate a test program: 
 
 ```console
 Create a C file named adler32-test.c which includes a main() function and calls the adler32 function in adler32-simple.c 
