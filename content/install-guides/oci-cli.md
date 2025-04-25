@@ -23,7 +23,7 @@ The Oracle Cloud Infrastructure Command Line Interface (OCI CLI) is a cross-plat
 
 It is available for a variety of operating systems and Linux distributions and has multiple ways to install it.
 
-## Before you begin
+## What should I do before installing OCI CLI?
 
 [General installation information](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm#InstallingCLI__linux_and_unix) is available which covers all supported Linux distributions.
 
@@ -43,7 +43,7 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## Download and Install
+## How do I download and install OCI CLI?
 
 The easiest way to install OCI CLI for Ubuntu on Arm is to use the install script.
 
@@ -62,11 +62,15 @@ To run an interactive install that allows you to change default values run:
 bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
 ```
 
+## How do I verify OCI CLI installation?
+
 Verify OCI CLI is installed using the `--version` option:
 
 ```console
 oci --version
 ```
+
+## How do I configure OCI CLI?
 
 Configure OCI CLI using the `setup config` command:
 

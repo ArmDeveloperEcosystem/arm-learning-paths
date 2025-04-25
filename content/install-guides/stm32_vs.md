@@ -39,13 +39,13 @@ The tools are available as a [VS Code](https://code.visualstudio.com/) extension
 See [STMicroelectronics provides full STM32 support for Microsoft Visual Studio Code](https://newsroom.st.com/media-center/press-item.html/t4536.html) for more information.
 
 
-## Before you begin
+## What should I do before I begin?
 
 [Download](https://code.visualstudio.com/download), install, and start `Visual Studio Code` on your desktop.
 
 Linux, macOS, and Windows are supported. 
 
-## Install STM32 VS Code Extension
+## How do I install the STM32 VS Code Extension?
 
 The `STM32 VS Code Extension` is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=stmicroelectronics.stm32-vscode-extension).
 
@@ -57,7 +57,7 @@ Install the `STM32` extension:
 
 Visual Studio Code will install the extension. `STM32 VS Code Extension` is now available in the `Activity Bar`.
 
-### Install additional dependencies
+### How do I install additional dependencies?
 
 Additional software packages need to be downloaded from STM website. Click `Get Software` on each of the below, to download the appropriate installer for your host.
 
@@ -67,10 +67,10 @@ Additional software packages need to be downloaded from STM website. Click `Get 
 
 Run the installer(s) and follow on-screen instructions.
 
-### Install Git for version control functionality
+### How do I install Git for version control functionality?
 
 You can download the latest version from [here](https://git-scm.com/).
 
-### Keil Studio for VS Code
+### What about Keil Studio for VS Code?
 
 [Keil Studio for VS Code](https://www.keil.arm.com/) is also available. Refer to the [Arm Keil Studio for VS Code install guide](/install-guides/keilstudio_vs/) for more information.

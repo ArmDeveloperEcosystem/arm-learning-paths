@@ -45,7 +45,7 @@ The version of Streamline provided with Performance Studio supports [certain And
 
 For other use cases, use Arm Streamline as provided with Arm Development Studio.
 
-## Download installer packages
+## How do I download Streamline installer packages?
 
 Download the appropriate package from the [Product Download Hub](https://developer.arm.com/downloads).
 
@@ -56,9 +56,9 @@ Arm Performance Studio supports Windows, Linux, and macOS hosts.
 
 Arm Development Studio supports Windows and Linux hosts.
 
-## Installation
+## How do I install Streamline?
 
-### Arm Performance Studio
+### How do I install with Arm Performance Studio?
 
 Full install instructions are given in section 3 of the Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
 
@@ -68,19 +68,19 @@ If working with an Android target, you must also install Android Debug Bridge (`
 
 Add the Android SDK platform tools directory to your `PATH` environment variable.
 
-### Arm Development Studio
+### How do I install with Arm Development Studio?
 
 Install Arm Development Studio using the instructions in the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio).
 
 See also the Arm Development Studio [install guide](/install-guides/armds/).
 
-## Setting up product license
+## How do I set up the product license?
 
 Arm Development Studio is license managed. License setup instructions are available in the Arm Software Licensing [install guide](/install-guides/license/).
 
 Arm Performance Studio is free of charge and is not license managed.
 
-## Get started
+## How do I get started with Streamline?
 
 To configure your target and/or application for Streamline, follow the appropriate instructions below depending on your use case:
 

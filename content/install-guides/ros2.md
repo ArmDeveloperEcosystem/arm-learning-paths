@@ -21,7 +21,7 @@ weight: 1
 The Robot Operating System ([ROS](https://www.ros.org/)) is a set of software libraries and tools for building robot applications.
 ROS 2 is the latest version, designed to enhance security, improve distributed system communication, and support real-time performance, addressing some of the limitations of ROS 1.
 
-## Before you begin
+## What do I need before installing ROS 2?
 
 ROS 2 is available for Ubuntu Linux 22.04, 24.04, and Windows.
 
@@ -127,7 +127,7 @@ In one terminal run a `talker`:
 ros2 run demo_nodes_cpp talker
 ```
 
-The output is similar to the messages shown below, indicating that ROS 2 is publishing the “hello world” string along with a sequence number.
+The output is similar to the messages shown below, indicating that ROS 2 is publishing the "hello world" string along with a sequence number.
 
 ```output
 [INFO] [1741389626.338343545] [talker]: Publishing: 'Hello World: 1'

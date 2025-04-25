@@ -32,11 +32,11 @@ It is available for a variety of operating systems and there are multiple ways t
 
 This article provides quick instructions to install CMake for Arm Linux distributions and for Windows on Arm.
 
-### How do I download and install CMake for Windows on Arm?
+### How do I prepare to install CMake for Windows on Arm?
 
 Confirm you are using a Windows on Arm device such as the Lenovo ThinkPad X13s or Surface Pro 9 with 5G.
 
-### How do I download and install CMake for Arm Linux distributions?
+### How do I prepare to install CMake for Arm Linux distributions?
 
 Confirm you are using an Arm computer with 64-bit Linux by running:
 
@@ -78,7 +78,7 @@ Wait for the installer to complete and click `Finish`:
 
 There are multiple ways to install CMake on Linux. 
 
-### Use the package manager
+### How do I use the package manager?
 
 Use `apt` on Ubuntu and Debian to install:
 
@@ -95,7 +95,7 @@ sudo dnf install cmake -y
 
 Depending on your Linux distribution you may have a version of `cmake` which is too old or too new for your project. 
 
-### Use Snap
+### How do I use Snap?
 
 Installing with `snap` provides the latest version of `cmake`:
 
@@ -105,7 +105,7 @@ sudo snap install cmake --classic
 
 With `snap` the `cmake` executable is installed in `/snap/bin` which should already be in your search path.
 
-### Use a specific release from GitHub
+### How do I use a specific release from GitHub?
 
 If you need a specific version look for it in the [GitHub releases area](https://github.com/Kitware/CMake/releases)
 

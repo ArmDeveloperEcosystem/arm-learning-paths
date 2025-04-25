@@ -139,5 +139,5 @@ The output will be the same:
 Hello from Swift on Arm Linux!
 ```
 
-You are ready to use the Swift programming language on your Arm Linux computer. 
+You are ready to use the Swift programming language on your Arm Linux computer.
 

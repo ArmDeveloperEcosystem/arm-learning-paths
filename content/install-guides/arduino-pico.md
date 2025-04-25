@@ -24,13 +24,13 @@ You can install the Arduino IDE and Arduino core software for the Raspberry Pi P
 
 Arduino core is the software stack that powers Arduino devices and development boards. While the Raspberry Pi Pico isn't an Arduino board, it uses the same RP2040 SoC as the Arduino RP2040 Connect, and therefore can run the same Arduino core software.
 
-## Install Arduino IDE
+## How do I install Arduino IDE?
 
 First, you need to install the Arduino IDE on your laptop or desktop. You can download it for your operating system from [the Arduino Software website](https://www.arduino.cc/en/software). Follow the provided instructions for installing the IDE.
 
 Start the IDE by clicking the Arduino IDE icon.
 
-## Install board support package
+## How do I install the board support package?
 
 The Arduino software is comprised of the core libraries and a Board Support Package that is specific to your device. You need to install the `Arduino Mbed OS RP2040 Boards` package to support the Raspberry Pi Pico.
 
@@ -42,7 +42,7 @@ When the `Boards Manager` opens search for `pico` and the `Arduino Mbed OS RP204
 
 ![Arduino Board Manager](/install-guides/_images/arduino_rp2040_boards.png)
 
-### Raspberry Pi Pico W
+### How do I set up the Raspberry Pi Pico W?
 
 The `Boards Manager` package for for `Arduino Mbed OS RP2040 Boards` does not include the Raspberry Pi Pico W.
 
@@ -54,13 +54,13 @@ https://github.com/earlephilhower/arduino-pico/releases/download/global/package_
 
 Return to `Tools -> Board -> Boards Manager` and search for `pico` and you will see a new entry `Raspberry Pi Pico/RP2040`. Click the `Install` button to add it to the Arduino IDE.
 
-## Select your board
+## How do I select my board?
 
 Once the support package is installed, you need to tell the Arduino IDE which supported board you will be using. From the `Tools -> Board` menu, find and select `Raspberry Pi Pico` or `Raspberry Pi Pico W` depending on your board type.
 
 ![Arduino Board Selection](/install-guides/_images/arduino_rp2040_select.png)
 
-## Upload to your board
+## How do I upload code to my board?
 
 Because the Raspberry Pi Pico doesn't come with the Arduino core software installed, the Arduino IDE won't recognize it.
 

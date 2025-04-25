@@ -12,7 +12,7 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-## Arm license portal
+## How do I access the Arm license portal?
 
 To generate your licenses you need access to the Arm user-based licensing portal, with the account that the licenses were assigned to.
 
@@ -21,7 +21,7 @@ Verify you can access the following and see your assigned licenses before you be
 https://developer.arm.com/support/licensing/user-based
 ```
 
-## License server set up
+## How do I set up the license server?
 
 UBL license server software is supported on a variety of operating systems or virtual machines. 
 
@@ -33,7 +33,7 @@ sudo apt install -y openjdk-11-jre-headless python-is-python3
 ```
 See [Hardware and software requirements](https://developer.arm.com/documentation/107573/latest/Installing-and-populating-the-license-server/Hardware-and-software-requirements) in the [User-based Licensing Administration Guide](https://developer.arm.com/documentation/107573).
 
-### Download and install server software
+### How do I download and install server software?
 
 The local license server (LLS) software can be downloaded from:
 ```url
@@ -54,14 +54,14 @@ Waiting for license server... (up to 120 seconds, or press CTRL-C to stop waitin
 License server running and ready to accept requests at http://<external server name or IP address>:7070
 ```
 
-### Add install directory to PATH
+### How do I add the install directory to PATH?
 
 It is recommended to add the server install directory to the `PATH` so that license server commands can be easily called. For example the default location:
 ```console
 export PATH=/opt/flexnetls-armlmd/bin:$PATH
 ```
 
-### Set administrator password
+### How do I set the administrator password?
 
 You must set an appropriate administrator password to be able to execute subsequent commands. Use the following:
 ```console
@@ -74,7 +74,7 @@ See the [License Server Administrator Guide](https://developer.arm.com/documenta
 {{% /notice %}}
 
 
-### Verify server hostid
+### How do I verify the server hostid?
 
 The default `hostid` was selected by the license server installer. To view the selected hostid use:
 ```console
@@ -103,7 +103,7 @@ If you wish to change the `selected` hostid, edit the `/server/local-configurati
 active-hostid: 445566778899/ETHERNET
 ```
 
-### Register license server with Arm
+### How do I register the license server with Arm?
 
 Create a license server identity file (`identity.bin`) using:
 ```console
@@ -116,7 +116,7 @@ https://developer.arm.com/support/licensing/user-based
 Navigate to `Manage License Servers`, and click on `Register Local License Server`. Upload the identity file.
 
 
-### Add licenses to server {#addlicenses}
+### How do I add licenses to the server? {#addlicenses}
 
 Click on `Add Products` and select the quantity of the available licenses to assign to that server. When satisfied, click on `Add Products` and a license file will be generated.
 
@@ -133,15 +133,15 @@ Licenses have been successfully updated. No confirmation is required.
 The licenses are now ready to use by the [end-users](/install-guides/license/ubl_license_enduser/).
 
 
-## Changing installed licenses per server
+## How do I change installed licenses per server?
 
-### Adding licenses to server
+### How do I add more licenses to the server?
 
 To **add** licenses to the server, update the licenses assigned to the server appropriately in the portal.
 
 Download and install the new license file on the server, as described [above](#addlicenses).
 
-### Deleting licenses from server
+### How do I delete licenses from the server?
 
 To **remove** licenses, first update the licenses assigned to the server appropriately in the portal.
 
@@ -160,9 +160,9 @@ You must delete all licenses from a server before decommissioning.
 If the license server is no longer in use, you can delete it from the portal by clicking `Obsolete server`.
 
 
-## Monitoring license server status and usage
+## How do I monitor license server status and usage?
 
-### Status
+### How do I check server status?
 
 To check the status of the server application, use:
 ```console
@@ -173,7 +173,7 @@ A working server will output:
 License server running and ready to accept requests at http://<external server name or IP address>:7070
 ```
 
-### License usage
+### How do I check license usage?
 
 To list the number of licenses (total and used) use:
 ```console
@@ -186,7 +186,7 @@ Example output:
 Hardware Success Kit (Early Access), HWSKT-EAC0, 2 seats, 1 seat used
     Order Id: 0000000000, valid until: 2023-Dec-31 23:59:59 UTC, 2 seats, 1 seat used
 ```
-### Active users
+### How do I check which users are active?
 
 To list the current active users of the licenses use:
 ```console
