@@ -1,12 +1,12 @@
 ---
-title: Create a C version of Adler32
+title: Create a C Version of Adler32
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## How can I generate a C function for Adler32?
+## How Can I Generate a C Function for Adler32?
 
 You can use GitHub Copilot to generate a simple C version of the Adler32 checksum algorithm.
 
@@ -191,6 +191,6 @@ The Adler-32 algorithm works by calculating two 16-bit sums (A and B) and combin
 As requested, I did not include a main function, so this code can be used as a library for other C files.
 ```
 
-You now have the files `adler32-simple.c` and `adler32-simple.h` in your directory which compute the Adler32 checksum. These will serve as the reference implementations of the algorithm with baseline performance.
+You now have the files `adler32-simple.c` and `adler32-simple.h` in your directory. These serve as the reference implementation of the Adler32 algorithm with baseline performance.
 
 Continue to the next section to create the test application.

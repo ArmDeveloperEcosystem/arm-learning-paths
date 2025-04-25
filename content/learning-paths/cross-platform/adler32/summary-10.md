@@ -6,11 +6,13 @@ weight: 10
 layout: learningpathall
 ---
 
-## How can I summarize the project results?
+## How Can I Summarize the Project Results?
 
 You can use GitHub Copilot to generate a project summary in a README file. 
 
-Copy the prompt below to your GitHub Copilot Agent chat and review the created README file.
+Use the prompt below to collaborate with GitHub Copilot Agent to generate your README. 
+
+Review and refine the results to align them with your project's goals.
 
 ```console
 Review the files in my project.
@@ -20,7 +22,7 @@ Add a note that the performance results recorded on the Neoverse N1 processor.
 Use a table to compare the original version and the NEON version and show the performance improvement factor.
 ```
 
-Below is the created README.md file. The formatting doesn't match the Learning Path template exactly, but you can copy the the README file to a new repository in GitHub for improved results. 
+Below is the created README.md file. The formatting doesn't match the Learning Path template exactly, but you can copy the README file to a new repository in GitHub for improved results. 
 
 ## Adler-32 Checksum Implementation Comparison
 
@@ -93,6 +95,15 @@ The table summarizes the speedup obtained by the NEON version.
 
 Using Agent mode in GitHub Copilot is a significant benefit when you are actively building and running software. Agent mode can create files and modify them to make needed improvements. 
 
-The entire project was done without modifying any of the generated files. While you may not need to do this on a real project, the concept of writing NEON intrinsics to improve performance was demonstrated. You can also use GitHub Copilot to fix issues in NEON code that are difficult to debug for developers who are not experts. 
+### Tips for Using GitHub Copilot Effectively
+
+This project was completed using GitHub Copilot Agent without modifying the generated files. While that might not be practical in every case, the demonstration shows how NEON intrinsics can significantly boost performance. 
+
+GitHub Copilot is especially useful for:
+* Generating vectorized versions of scalar code.
+* Writing and adapting NEON intrinsics.
+* Identifying and fixing bugs in complex low-level code, even for developers who aren’t SIMD experts.
 
 Make sure to try different LLMs with Copilot as the results will vary greatly depending on the model.
+
+

@@ -6,11 +6,11 @@ weight: 7
 layout: learningpathall
 ---
 
-## How can I create a NEON version of Adler32 to improve performance? 
+## How Can I Create a NEON Version of Adler32 To Improve Performance? 
 
 Writing NEON intrinsics is an advanced programming topic which requires time and effort to learn and apply. GitHub Copilot is a good way to get started with NEON, both to write new code and to debug issues during development. 
 
-You can instruct Github Copilot to create a NEON version of Adler32 using the prompt below. 
+You can instruct Github Copilot to create a NEON-optimized version of Adler32 using the prompt below: 
 
 ```console
 Add a second implementation of adler32 that processes data in blocks and uses Arm NEON intrinsics to improve performance.
@@ -553,6 +553,6 @@ Now that I've created the NEON implementation and updated the test code and Make
 
 ```
 
-GitHub Copilot generated a new implementation of Adler32 using NEON intrinsics. It also updated the test program and the Makefile to make it easy to compare the two versions. 
+GitHub Copilot generated a NEON-optimized implementation of Adler32, along with updates to the test program and Makefile. These changes make it easy to compare the performance of both versions.
 
-Continue to the next section to compile and run the NEON version and investigate performance. 
+Continue to the next section to compile and run the NEON version, and to compare its performance against the original implementation. 

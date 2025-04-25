@@ -6,9 +6,9 @@ weight: 9
 layout: learningpathall
 ---
 
-## How can I debug the NEON version Adler32 and compare performance?
+## How Can I Debug the NEON Version Adler32 and Compare Performance?
 
-During the last step, GitHub Copilot revealed that the functional results with NEON do not match the C version.
+In the previous step, GitHub Copilot revealed that the NEON implementation did not produce the same checksum results as the standard C version.
 
 Use the prompt below to instruct GitHub Copilot to try to debug and fix the issue.
 
@@ -17,7 +17,7 @@ Can you modify adler32-neon.c to produce the correct checksum results for the ad
 The NEON version should produce the same checksum as adler32-simple.c but run faster. 
 ```
 
-If the LLM you are using doesn't resolve the NEON functional issues, you can try with another LLM such as Gemini 2.5 Pro. 
+If the LLM you’re using cannot resolve the NEON functional issues, consider trying another model, such as Gemini 2.5 Pro.
 
 The output is:
 
@@ -94,6 +94,6 @@ I then checked for errors in the modified file and rebuilt the project using `ma
 You can now run the test program adler32-test to verify that the NEON implementation produces the same results as the simple implementation.
 ```
 
-GitHub Copilot was able to modify the NEON version to get the correct functional results. 
+GitHub Copilot successfully modified the NEON version to produce correct checksum results matching the standard C implementation.
 
-Continue to the next section to summarize the project, including the performance improvements, and generate a full project description. 
+Continue to the next section to summarize the project, highlight the performance improvements, and generate a full project description.

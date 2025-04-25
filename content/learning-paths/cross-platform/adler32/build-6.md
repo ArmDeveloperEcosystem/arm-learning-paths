@@ -6,14 +6,14 @@ weight: 6
 layout: learningpathall
 ---
 
-## How can I test the build and run? 
+## How Can I Build and Run the Test Program? 
 
-The required files are now complete to test the Adler32 algorithm.
-- Adler32 C function
-- Test program to call the Adler32 function to test for correctness and measure performance
-- Makefile to build and run
+You now have all the required files to test the Adler32 algorithm:
+- A C implementation of the Adler32 function.
+- A test program to verify correctness and measure performance.
+- A Makefile to build and run the project.
 
-Copy the information below to your GitHub Copilot Agent session:
+Paste the following prompt into your GitHub Copilot Agent session:
 
 ```console
 Use the Makefile to build the project and run to make sure the checksum results are correct for all data sizes.
@@ -57,6 +57,6 @@ The results confirm that your Adler-32 checksum implementation is correct for al
 
 ```
 
-The results from GitHub Copilot explain that the Adler32 checksum calculations are correct and give some initial performance results. The results don't mean much yet as there is nothing to compare with. 
+The results from GitHub Copilot confirm that the Adler32 checksum calculations are correct and provide initial performance benchmarks. These results offer a solid baseline, but a meaningful comparison requires an optimized implementation.
 
-Continue to the next section to implement Adler32 using NEON and compare the performance.
+In the next section, you’ll implement Adler32 using NEON intrinsics and compare its performance against this baseline.
