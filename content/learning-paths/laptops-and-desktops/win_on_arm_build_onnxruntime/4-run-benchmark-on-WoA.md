@@ -1,25 +1,25 @@
 ---
-title: Run Phi3 model on an ARM Windows Device
+title: Run Phi3 model on a Windows on Arm machine
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Run a Phi-3 model on your ARM Windows Device
+## Run a Phi-3 model on your Windows on Arm machine
 
-In this section you will learn how to obtain and run on your ARM Windows device (or virtual device) the Phi3-mini model. To do so you will be using a simple model runner program which provides performance metrics.
+In this section, you will learn how to download the Phi3-mini model and run it on your Windows on Arm machine (physical or virtual machine). You will be use a simple model runner program which provides performance metrics.
 
-The Phi-3-mini (3.3B) model has a short (4k) context version and a long (128k) context version. The long context version can accept much longer prompts and produces longer output text, but it does consume more memory.
+The Phi-3-mini (3.3B) model has a short (4k) context version and a long (128k) context version. The long context version can accept much longer prompts and produces longer output text, but it consumes more memory.
 In this learning path, you will use the short context version, which is quantized to 4-bits.
 
 The Phi-3-mini model used here is in an ONNX format.
 
 ### Setup
 
-Phi-3 ONNX models are hosted on HuggingFace.
+[Phi-3 ONNX models](https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-onnx) are hosted on HuggingFace.
 Hugging Face uses Git for version control and to download ONNX model files, which can be quite large.
-You will first need to get and install the Git Large File Storage (LFS) extension.
+You will first need to install the Git Large File Storage (LFS) extension.
 
 ``` bash
 winget install -e --id GitHub.GitLFS
@@ -34,7 +34,7 @@ You then need to install the ``HuggingFace CLI``.
 pip install huggingface-hub[cli]
 ```
 
-### Download the Phi-3-mini (4k) model for CPU and Mobile
+### Download the Phi-3-mini (4k) model
 
 ``` bash
 cd C:\Users\%USERNAME%
@@ -56,7 +56,7 @@ copy src\ort_genai.h examples\c\include\
 copy src\ort_genai_c.h examples\c\include\
 ```
 
-you can now build the model runner executable in the ''onnxruntime-genai'' folder using the commands below:
+You can now build the model runner executable in the ''onnxruntime-genai'' folder using the commands below:
 
 ``` bash
 cd examples/c
@@ -65,9 +65,9 @@ cd build
 cmake --build . --config Release
 ```
 
-After a successful build, a binary program called `phi3` will be created in the ''onnxruntime-genai'' folder.
+After a successful build, a binary program called `phi3` will be created in the ''onnxruntime-genai'' folder:
 ```output
-dir examples\c\build\Release\phi3.exe
+dir Release\phi3.exe
 ```
 
 #### Run the model
@@ -80,10 +80,22 @@ cd repos\lp
 .\onnxruntime-genai\examples\c\build\Release\phi3.exe .\cpu_and_mobile\cpu-int4-rtn-block-32-acc-level-4\ cpu
 ```
 
-This will allow the runner program to load the model. It will then prompt you to input the text prompt to the model. After you enter your input prompt, the text output by the model will be displayed. On completion, performance metrics similar to those shown below should be displayed:
+This will allow the runner program to load the model. It will then prompt you to input the text prompt to the model as shown:
+
+```output
+-------------
+Hello, Phi-3!
+-------------
+C++ API
+Creating config...
+Creating model...
+Creating tokenizer...
+Prompt: (Use quit() to exit) Or (To terminate current output generation, press Ctrl+C)
+``` 
+
+After you enter your input prompt, the text output by the model will be displayed. On completion, performance metrics similar to those shown below should be displayed:
 
 ```
 Prompt length: 64, New tokens: 931, Time to first: 1.79s, Prompt tokens per second: 35.74 tps, New tokens per second: 6.34 tps
 ```
-
-You have successfully run the Phi-3 model on your Windows device powered by ARM.
+You have successfully run the Phi-3 model on your Windows device powered by Arm.
