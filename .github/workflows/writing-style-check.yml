@@ -1,0 +1,91 @@
+name: Writing Style Check
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to check'
+        required: true
+        type: string
+
+jobs:
+  style-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch all history for comparing changes
+          
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install textblob nltk spacy
+          python -m spacy download en_core_web_sm
+          
+      - name: Fetch PR files
+        id: fetch-pr
+        run: |
+          PR_NUMBER=${{ github.event.inputs.pr_number }}
+          echo "Checking PR #${PR_NUMBER}"
+          git fetch origin pull/${PR_NUMBER}/head:pr-${PR_NUMBER}
+          git checkout pr-${PR_NUMBER}
+          
+      - name: Run style guide checker
+        id: style-check
+        run: |
+          python tools/style_checker.py
+        env:
+          PR_NUMBER: ${{ github.event.inputs.pr_number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Create suggestions as comments
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            if (!fs.existsSync('style_suggestions.json')) {
+              console.log('No suggestions found');
+              return;
+            }
+            
+            const suggestions = JSON.parse(fs.readFileSync('style_suggestions.json', 'utf8'));
+            console.log(`Found ${suggestions.length} style suggestions`);
+            
+            const prNumber = process.env.PR_NUMBER || '${{ github.event.inputs.pr_number }}';
+            
+            for (const suggestion of suggestions) {
+              const { file, line, original, suggested, reason } = suggestion;
+              
+              try {
+                await github.rest.pulls.createReviewComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: parseInt(prNumber),
+                  commit_id: context.payload.pull_request?.head.sha || (await github.rest.pulls.get({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: parseInt(prNumber)
+                  })).data.head.sha,
+                  path: file,
+                  body: `**Style Guide Suggestion:**\n\nReason: ${reason}\n\n\`\`\`suggestion
+${suggested}
+\`\`\``,
+                  line: line,
+                  side: 'RIGHT'
+                });
+                console.log(`Created suggestion for ${file}:${line}`);
+              } catch (error) {
+                console.error(`Error creating comment for ${file}:${line}: ${error.message}`);
+              }
+            }
+        env:
+          PR_NUMBER: ${{ github.event.inputs.pr_number }}
