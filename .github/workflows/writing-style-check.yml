@@ -76,9 +76,7 @@ jobs:
                     pull_number: parseInt(prNumber)
                   })).data.head.sha,
                   path: file,
-                  body: `**Style Guide Suggestion:**\n\nReason: ${reason}\n\n\`\`\`suggestion
-${suggested}
-\`\`\``,
+                  body: `**Style Guide Suggestion:**\n\nReason: ${reason}\n\n\`\`\`suggestion ${suggested}\`\`\``,
                   line: line,
                   side: 'RIGHT'
                 });
