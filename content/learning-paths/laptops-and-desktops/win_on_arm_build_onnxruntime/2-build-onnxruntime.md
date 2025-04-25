@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## Compile ONNX Runtime for Windows ARM64 CPU
+## Compile ONNX Runtime for Windows on Arm
 Now that you have your environment set up correctly, you can build the ONNX Runtime inference engine. 
 
 ONNX Runtime is an open-source inference engine designed to accelerate the deployment of machine learning models, particularly those in the Open Neural Network Exchange (ONNX) format. ONNX Runtime is optimized for high performance and low latency, making it popular for production deployment of AI models. You can learn more by reading the [ONNX Runtime Overview](https://onnxruntime.ai/).
@@ -28,10 +28,9 @@ git checkout 4eeefd7260b7fa42a71dd1a08b423d5e7c722050
 You might be able to use a later commit. These steps have been tested with the commit `4eeefd7260b7fa42a71dd1a08b423d5e7c722050`.
 {{% /notice %}}
 
-### Build for Windows CPU
+### Build for Windows
 
-You can build "Release" for a build type that aims to provide an
-a build optimized for performance but without debug information.
+You can build the "Release" configuration for a build optimized for performance but without debug information.
 
 
 ```bash
@@ -39,7 +38,7 @@ a build optimized for performance but without debug information.
 ```
 
 
-As an alternative, you can build  "RelWithDebInfo" for a build type that aims to provide a release-optimized build with debug information.
+As an alternative, you can build with "RelWithDebInfo" configuration for a release-optimized build with debug information.
 
 ```bash
 .\build.bat --config RelWithDebInfo  --build_shared_lib --parallel --compile_no_warning_as_error --skip_submodule_sync  --skip_tests
@@ -47,7 +46,7 @@ As an alternative, you can build  "RelWithDebInfo" for a build type that aims to
 
 
 ### Resulting Dynamic Link Library
-When the build is complete, onnxruntime.dll dynamic linked library can be found in: 
+When the build is complete, the `onnxruntime.dll` dynamic linked library can be found in: 
 
 ```
 dir .\build\Windows\Release\Release\onnxruntime.dll
