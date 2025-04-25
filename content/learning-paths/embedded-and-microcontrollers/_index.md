@@ -11,15 +11,15 @@ maintopic: true
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 29
-- Linux: 25
-- macOS: 5
+- Linux: 26
+- macOS: 6
 - RTOS: 9
-- Windows: 3
+- Windows: 4
 subjects_filter:
 - CI-CD: 5
 - Containers and Virtualization: 6
 - Embedded Linux: 3
-- Libraries: 2
+- Libraries: 3
 - ML: 12
 - Performance and Architecture: 21
 - RTOS Fundamentals: 4
@@ -36,11 +36,12 @@ tools_software_languages_filter:
 - Arm Fast Models: 4
 - Arm Virtual Hardware: 10
 - AVH: 1
-- C: 1
+- C: 2
 - C/C++: 1
 - ChatGPT: 1
 - Clang: 1
 - CMSIS: 4
+- CMSIS-DSP: 1
 - CMSIS-Toolbox: 3
 - CNN: 1
 - Coding: 26
@@ -59,6 +60,7 @@ tools_software_languages_filter:
 - GitLab: 1
 - Himax SDK: 1
 - IP Explorer: 4
+- Jupyter Notebook: 1
 - K3s: 1
 - Keil: 5
 - Keil MDK: 3
@@ -70,7 +72,7 @@ tools_software_languages_filter:
 - Neon: 1
 - Paddle: 1
 - Porcupine: 1
-- Python: 4
+- Python: 5
 - PyTorch: 2
 - QEMU: 1
 - Raspberry Pi: 5
@@ -86,6 +88,7 @@ tools_software_languages_filter:
 - TrustZone: 2
 - TVMC: 1
 - vcpkg: 1
+- VS Code: 1
 - Yocto Linux: 1
 - Zephyr: 1
 weight: 5
