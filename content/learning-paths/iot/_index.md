@@ -24,9 +24,10 @@ tools_software_languages_filter:
 - Arm Compiler for Embedded: 1
 - Arm Virtual Hardware: 6
 - AWS IoT Greengrass: 1
+- Azure: 1
 - Balena Cloud: 1
 - Balena OS: 1
-- Coding: 4
+- Coding: 3
 - Docker: 2
 - Fixed Virtual Platform: 1
 - GitHub: 3
