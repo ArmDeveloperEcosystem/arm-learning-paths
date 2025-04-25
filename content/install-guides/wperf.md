@@ -39,7 +39,7 @@ WindowsPerf consists of a kernel-mode driver and a user-space command-line tool.
 You cannot use WindowsPerf on virtual machines, such as cloud instances.
 {{% /notice %}}
 
-## Using winget (Recommended)
+## Using winget 
 
 ### Install
 
@@ -95,7 +95,6 @@ Once you have installed the driver, you can use `wperf` without `Administrator` 
 For example:
 
 ```command
-cd ..\wperf
 wperf --version
 ```
 
