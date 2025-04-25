@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## How can I build and run the test program? 
+## How Can I Build and Run the Test Program? 
 
 You now have all the required files to test the Adler32 algorithm:
 - A C implementation of the Adler32 function.

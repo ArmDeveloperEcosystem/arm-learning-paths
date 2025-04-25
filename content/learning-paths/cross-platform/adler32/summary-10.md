@@ -6,7 +6,7 @@ weight: 10
 layout: learningpathall
 ---
 
-## How can I summarize the project results?
+## How Can I Summarize the Project Results?
 
 You can use GitHub Copilot to generate a project summary in a README file. 
 

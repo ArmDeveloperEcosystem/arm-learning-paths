@@ -1,12 +1,12 @@
 ---
-title: Create a C version of Adler32
+title: Create a C Version of Adler32
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## How can I generate a C function for Adler32?
+## How Can I Generate a C Function for Adler32?
 
 You can use GitHub Copilot to generate a simple C version of the Adler32 checksum algorithm.
 

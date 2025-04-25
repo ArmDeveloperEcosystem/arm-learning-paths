@@ -6,7 +6,7 @@ weight: 8
 layout: learningpathall
 ---
 
-## How can I run the NEON version of Adler32 and compare performance?
+## How Can I Run the NEON Version of Adler32 and Compare Performance?
 
 Before comparing performance, you need to ensure that the NEON implementation builds, runs, and produces the same results as the standard C version.
 
