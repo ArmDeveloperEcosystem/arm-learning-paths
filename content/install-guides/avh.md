@@ -106,7 +106,7 @@ To do this, add the parameter `se.cryptocell.DISABLE_DEVICE=1` to your launch co
 FVP_Corstone-1000 -C se.cryptocell.DISABLE_DEVICE=1  ...
 ```
 
-## How do I use Arm Virtual Hardware 3rd Party? {#thirdparty}
+## How do I use Arm Virtual Hardware 3rd Party targets? {#thirdparty}
 
 A valid [Arm AVH account](https://www.arm.com/resources/contact-us/virtual-hardware-boards) is required.
 

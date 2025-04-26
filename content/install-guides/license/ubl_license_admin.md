@@ -33,7 +33,7 @@ sudo apt install -y openjdk-11-jre-headless python-is-python3
 ```
 See [Hardware and software requirements](https://developer.arm.com/documentation/107573/latest/Installing-and-populating-the-license-server/Hardware-and-software-requirements) in the [User-based Licensing Administration Guide](https://developer.arm.com/documentation/107573).
 
-### How do I download and install server software?
+### How do I download and install the server software?
 
 The local license server (LLS) software can be downloaded from:
 ```url
@@ -54,7 +54,7 @@ Waiting for license server... (up to 120 seconds, or press CTRL-C to stop waitin
 License server running and ready to accept requests at http://<external server name or IP address>:7070
 ```
 
-### How do I add the install directory to PATH?
+### How do I add the install directory to the search path?
 
 It is recommended to add the server install directory to the `PATH` so that license server commands can be easily called. For example the default location:
 ```console

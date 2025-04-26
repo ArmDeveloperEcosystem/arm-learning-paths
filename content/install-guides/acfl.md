@@ -293,7 +293,7 @@ If you wish to install just the Arm Performance Libraries, use:
 spack install armpl-gcc
 ```
 
-### How do I set up the environment for ACfL with Spack?
+### How do I set up the environment for ACfL using Spack?
 Use the commands below to set up the environment:
 
 ```console
@@ -304,7 +304,7 @@ spack compiler find
 ACfL is now [ready to use](#armclang).
 
 
-## How do I get started with the Arm C/C++ compiler in ACfL? {#armclang}
+## How do I get started with the Arm C/C++ compiler? {#armclang}
 
 To get started with the Arm C/C++ Compiler and compile a simple application follow the steps below.
 

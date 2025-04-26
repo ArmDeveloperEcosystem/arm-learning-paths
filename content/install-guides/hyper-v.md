@@ -92,10 +92,7 @@ The output should include the message:
 The operation completed successfully.
 ```
 
-## Do I need to restart after enabling Hyper-V?
-
 Restart your computer to finish enabling Hyper-V.
-
 
 ## How do I start Hyper-V?
 

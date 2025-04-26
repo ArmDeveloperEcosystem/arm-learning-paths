@@ -39,7 +39,7 @@ The commands can also be used in the Windows Subsystem for Linux 2 (WSL 2) and o
 curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 ```
 
-### How do I add my user to the Docker group?
+### How do I add my username to the Docker group?
 
 Add the user to the docker group. The `newgrp` command avoids the need to logout and back in.
 

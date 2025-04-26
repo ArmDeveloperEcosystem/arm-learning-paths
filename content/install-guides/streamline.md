@@ -45,7 +45,7 @@ The version of Streamline provided with Performance Studio supports [certain And
 
 For other use cases, use Arm Streamline as provided with Arm Development Studio.
 
-## How do I download Streamline installer packages?
+## How do I download Streamline installation packages?
 
 Download the appropriate package from the [Product Download Hub](https://developer.arm.com/downloads).
 
@@ -58,7 +58,7 @@ Arm Development Studio supports Windows and Linux hosts.
 
 ## How do I install Streamline?
 
-### How do I install with Arm Performance Studio?
+### How do I install Streamline with Arm Performance Studio?
 
 Full install instructions are given in section 3 of the Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
 
@@ -68,7 +68,7 @@ If working with an Android target, you must also install Android Debug Bridge (`
 
 Add the Android SDK platform tools directory to your `PATH` environment variable.
 
-### How do I install with Arm Development Studio?
+### How do I install Streamline with Arm Development Studio?
 
 Install Arm Development Studio using the instructions in the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio).
 

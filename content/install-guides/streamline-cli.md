@@ -139,7 +139,7 @@ For manual download, you can find all available releases here:
 https://artifacts.tools.arm.com/arm-performance-studio/Streamline_CLI_Tools/
 ```
 
-## Why and how do I apply the kernel patch?
+## How do I apply the kernel patch?
 
 For best results, a Linux kernel patch is available that modifies the behavior of Linux perf to improve support for capturing function-attributed top-down metrics on Arm systems. This patch provides two new capabilities:
 

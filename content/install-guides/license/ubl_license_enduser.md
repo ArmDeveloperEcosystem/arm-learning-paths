@@ -15,7 +15,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 A [Local License Server (LLS)](/install-guides/license/ubl_license_admin/) must first be set up by your license administration team.
 
-## How do I activate a license on my end user machine?
+## How do I activate a license on my computer?
 
 The user-based license can be activated on the end user machine in different ways. Select the most appropriate for your needs.
 
@@ -23,7 +23,7 @@ The user-based license can be activated on the end user machine in different way
 * [Activate within tools IDE](#ide)
 * [Activate manually](#manual)
 
-## How do I activate via environment variable? {#envvar}
+## How do I activate a license using an environment variable? {#envvar}
 
 Create `ARMLM_ONDEMAND_ACTIVATION` environment variable referencing the product code and your internal license server. Contact your internal license administrators for information on your internal server.
 
@@ -42,7 +42,7 @@ armclang --version
 ```
 You can now [confirm your license has been checked out](#confirm).
 
-## How do I activate within tools IDE? {#ide}
+## How do I activate a license from the tools IDE? {#ide}
 
 The license can also be activated in the various Arm tool IDEs.
 
@@ -50,7 +50,7 @@ For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Sof
 
 Select `Activate with` > `License Server`, and enter the appropriate license server address. Click `Query` to see what license types are available, and select the appropriate one from the pull down. Click `Activate`.
 
-## How do I activate manually? {#manual}
+## How do I activate a license manually? {#manual}
 
 Open a command prompt, and navigate to the bin directory of any user-based licensing enabled product.
 

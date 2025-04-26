@@ -39,7 +39,7 @@ The tools are available as a [VS Code](https://code.visualstudio.com/) extension
 See [STMicroelectronics provides full STM32 support for Microsoft Visual Studio Code](https://newsroom.st.com/media-center/press-item.html/t4536.html) for more information.
 
 
-## What should I do before I begin?
+## Where can I download Visual Studio Code?
 
 [Download](https://code.visualstudio.com/download), install, and start `Visual Studio Code` on your desktop.
 

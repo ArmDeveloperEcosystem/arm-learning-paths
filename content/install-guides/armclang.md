@@ -23,7 +23,7 @@ weight: 1
 
 A safety qualified branch of Arm Compiler for Embedded, known as [Arm Compiler for Embedded FuSa](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded%20FuSa), is available for safety critical applications.
 
-## How can I access Arm Compiler for Embedded through other tools?
+## How can I access Arm Compiler for Embedded from Arm Development Studio?
 
 The easiest way to access the Arm Compiler for Embedded is to use the version provided with [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
 
@@ -39,7 +39,7 @@ Arm Compiler for Embedded FuSa must also be [downloaded separately](#download).
 
 Individual compiler packages for all supported host platforms can be downloaded from the [Arm Product Download Hub](#pdh) or the [Arm Tools Artifactory](#artifactory).
 
-### How do I download from the Product Download Hub? {#pdh}
+### How do I download Arm Compiler for Embedded from the Product Download Hub? {#pdh}
 
 All compiler packages can be downloaded from the [Arm Product Download Hub](https://developer.arm.com/downloads) (requires login).
 
@@ -87,7 +87,7 @@ set path=(/home/$USER/ArmCompilerforEmbedded6.22/bin $path)
 armclang --version
 ```
 
-### How do I download from the Arm Tools Artifactory? {#artifactory}
+### How do I download Arm Compiler for Embedded from the Arm Tools Artifactory? {#artifactory}
 
 The Arm Compiler for Embedded, as well as other tools and utilities are available in the [Arm Tools Artifactory](https://www.keil.arm.com/artifacts/). The Keil Studio VS Code [Extensions](../keilstudio_vs) use the artifactory to fetch and install and the necessary components.
 
