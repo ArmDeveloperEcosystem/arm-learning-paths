@@ -8,7 +8,12 @@ layout: learningpathall
 
 ### Building locally with Make
 
-Since PGO can be used by simple command-line instructions, we can trivially incorporate this into a `make` file, as per the sample Makefile below if building locally. 
+As PGO can be utilized with simple command-line instructions, it can easily be integrated into a `make` file and continuous integration (CI) systems, as demonstrated in the sample Makefile below for local builds.
+
+{{% notice Caution %}}
+PGO requires additional build steps which will inevitably increase compile time which can be an issue for large code bases. As such, PGO is not suitable for all sections of code. We recommend only using PGO only sections of code which are heavily influenced by run-time behaviour and are performance critical. Therefore, PGO might not be ideal for early-stage development or for applications with highly variable or unpredictable usage patterns.
+{{% /notice %}}
+
 
 ```makefile
 # Simple Makefile for building and benchmarking div_bench with and without PGO
@@ -50,7 +55,7 @@ run: div_bench.base div_bench.opt
 
 ### Building with GitHub Actions
 
-The `yaml` file below can serve as an basic example of integrating profile guided optimisation into your CI flow. Further tests could be to check for regressions. 
+As another alternative, the `yaml` file below can serve as an basic example of integrating profile guided optimisation into your CI flow. This barebones example natively compiles on a GitHub hosted Ubuntu 24.04 Arm-based runner. Further tests could automate for regressions. 
 
 ```yaml
 name: PGO Benchmark

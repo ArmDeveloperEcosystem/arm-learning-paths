@@ -1,12 +1,12 @@
 ---
-title: Getting Started with Profile Guided Optimisation and Google Benchmark
+title: Optimizing Performance with Profile-Guided Optimization and Google Benchmark
 
 minutes_to_complete: 15
 
-who_is_this_for: Developers who are looking to optimise the performance of a program using the observed characteristics at runtime.
+who_is_this_for: Developers who are looking to optimise the performance of a program using the characteristics observed at runtime.
 
 learning_objectives: 
-    - Learn how to write a function microbenchmark using Google Benchmark
+    - Learn how to microbenchmark a function using Google Benchmark
     - Learn how to use profile guided optimisation to build binaries optimised for real-world workloads
 
 prerequisites:

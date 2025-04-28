@@ -8,7 +8,7 @@ layout: learningpathall
 
 ### Building binary with PGO
 
-To generate an binary optimised on the runtime profile. First we need to build an instrumented binary that can record the usage. Run the following command, that includes the `-fprofile-generate` flag to build the instrumented binary. 
+To generate an binary optimised on the runtime profile. First we need to build an instrumented binary that can record the usage. Run the following command that includes the `-fprofile-generate` flag to build the instrumented binary. 
 
 ```bash
 g++ -O3 -std=c++17 -fprofile-generate div_bench.cpp -lbenchmark -lpthread -o div_bench.opt
@@ -45,18 +45,18 @@ Benchmark             Time             CPU   Iterations
 baseDiv/1500       2.86 us         2.86 us       244429
 ```
 
-As the terminal output above shows, we have reduced our average execution time from 7.90 to 2.86 microseconds. This is because we are able to provide the context that the profile data shows the input divisor is always 1500 and the compiler is able to incorporate this context. Next, let's understand how it was optimised. 
+As the terminal output above shows, we have reduced our average execution time from 7.90 to 2.86 microseconds. **This is because we are able to provide the context that the profile data shows the input divisor is always 1500 and the compiler is able to incorporate this into the optimisation process**. Next, let's understand how it was optimised. 
 
 ### Inspect Assembly 
 
 
-Run the following command to record `perf` data and create a report that can be viewed in the terminal. 
+As per the previous section, run the following command to record `perf` data and create a report that can be viewed in the terminal. 
 
 ```bash
 sudo perf record -o perf-division-opt ./div_bench.opt
 sudo perf report --input=perf-division-opt
 ```
 
-As the graphic below shows, the profile provided allowed the optimised program to unroll several times and use slightly different instructions.  
+As the graphic below shows, the profile provided allowed the optimised program to unroll several times and use many more cheaper operations (also known as strength reduction) to execute our loop far quicker. 
 
 ![after-pgo](./after-pgo.gif)

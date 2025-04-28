@@ -18,7 +18,7 @@ sudo apt install gcc g++ make libbenchmark-dev -y
 
 ## Division example
 
-Copy and paste the `C++` source code below into a file named `div_bench.cpp`. This example takes in a vector of 4096 32-bit integers and divides each element by a number. Importantly, the `benchmark/benchmark.h` results in indirection so that the value is unknown compile time, although it is visible in our source code as 1500. 
+Copy and paste the `C++` source code below into a file named `div_bench.cpp`. This trivial example takes in a vector of 4096 32-bit integers and divides each element by a number. Importantly, the `benchmark/benchmark.h` causes indirection since the divisor value is unknown compile time, although it is visible in our source code as 1500. 
 
 ```cpp
 #include <benchmark/benchmark.h>
@@ -70,7 +70,7 @@ baseDiv/1500       7.90 us         7.90 us        88512
 To inspect what assembly instructions are being executed the most frequently, we can use the `perf` command. Please install `perf` using the [installation instructions](https://learn.arm.com/install-guides/perf/) before proceeding. 
 
 {{% notice Please Note %}}
-You may need to set the `perf_event_paranoid` value to 0 with the `sudo sysctl kernel.perf_event_paranoid=0` command
+You may need to set the `perf_event_paranoid` value to -1 with the `sudo sysctl kernel.perf_event_paranoid=-1` command
 {{% /notice %}}
 
 
@@ -80,5 +80,8 @@ Run the following command to record `perf` data and create a report in the termi
 sudo perf record -o perf-division-base ./div_bench.base 
 sudo perf report --input=perf-division-base
 ```
+
+As the `perf report` graphic below shows, our program spends a significant amount of time in the short loops with no loop unrolling. There is also the relatively expensive `sdiv` operation and we spend most of the execution time storing the result of that operation.
+
 ![before-pgo](./before-pgo.gif)
 

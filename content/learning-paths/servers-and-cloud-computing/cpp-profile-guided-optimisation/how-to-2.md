@@ -24,7 +24,7 @@ BENCHMARK(BM_StringCreation);
 BENCHMARK_MAIN();
 ```
 
-Filtering and preventing Compiler Optimisations
+### Filtering and preventing Compiler Optimisations
 
 To ensure that the compiler does not optimize away parts of your benchmarked code, Google Benchmark provides the function `benchmark::DoNotOptimize(value);`. This Prevents the compiler from optimizing away a variable or expression by forcing it to be read and stored. 
 
