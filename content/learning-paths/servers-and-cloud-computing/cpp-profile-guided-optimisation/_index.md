@@ -1,0 +1,47 @@
+---
+title: Getting Started with Profile Guided Optimisation and Google Benchmark
+
+minutes_to_complete: 15
+
+who_is_this_for: Developers who are looking to optimise the performance of a program using the observed characteristics at runtime.
+
+learning_objectives: 
+    - Learn how to write a function microbenchmark using Google Benchmark
+    - Learn how to use profile guided optimisation to build binaries optimised for real-world workloads
+
+prerequisites:
+    - Basic C++ understanding
+    - Access to an Arm-based linux machine
+
+author: Kieran Hejmadi
+
+### Tags
+skilllevels: Introductory
+subjects: ML
+armips:
+    - Neoverse
+tools_software_languages:
+    - C++
+    - Google Benchmark
+    - G++
+operatingsystems:
+    - Linux
+
+further_reading:
+    - resource:
+        title: G++ Profile Guided Optimisation Documentation 
+        link: https://gcc.gnu.org/onlinedocs/gcc-13.3.0/gcc/Instrumentation-Options.html
+        type: documentation
+    - resource:
+        title: Google Benchmark Library 
+        link: https://github.com/google/benchmark
+        type: documentation
+
+
+
+### FIXED, DO NOT MODIFY
+# ================================================================================
+weight: 1                       # _index.md always has weight of 1 to order correctly
+layout: "learningpathall"       # All files under learning paths have this same wrapper
+learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
+---
