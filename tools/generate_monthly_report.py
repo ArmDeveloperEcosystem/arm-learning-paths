@@ -6,10 +6,10 @@ from bs4 import BeautifulSoup
 
 # GitHub API settings
 GITHUB_API_URL = "https://api.github.com/graphql"
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+GITHUB_TOKEN = os.getenv("PAT")
 if not GITHUB_TOKEN:
-    # Fallback for GitHub Actions: use secrets.GITHUB_TOKEN if available
-    GITHUB_TOKEN = os.getenv("ACTIONS_GITHUB_TOKEN")
+    # Fallback for GitHub Actions: use secrets.PAT if available
+    GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
 # GitHub project board settings
 ORGANIZATION = "ArmDeveloperEcosystem"
@@ -199,7 +199,7 @@ def generate_report(month_filter=None, month_range=None):
     print(f"## Learning Path Monthly Report for {report_date}\n")
 
     # Planned Learning Paths Table
-    print("## Planned Learning Paths\n| Title | ACM | Created Date |")
+    print("## Planned Learning Paths\n| Title | Program | Created Date |")
     print("|-------|-----|--------------|")
     open_issues = fetch_open_issues()
     planned_count = 0
@@ -212,8 +212,8 @@ def generate_report(month_filter=None, month_range=None):
 
     # Fetch and print Done items for the given month or range
     done_items = fetch_done_items(month_filter=month_filter, month_range=month_range)
-    print("\n\n## Published Learning Paths\n| Title | Published URL | Start Date | Publish Date | Time to Publish (days) | ACM |")
-    print("|-------|--------------|------------|-------------|----------------------|-----|")
+    print("\n\n## Published Learning Paths\n| Title | Start Date | Publish Date | Time to Publish (days) | Program |")
+    print("|-------|--------------|-------------|----------------------|-----|")
     published_count = 0
     time_to_publish_values = []
     for item in done_items:
@@ -245,7 +245,7 @@ def generate_report(month_filter=None, month_range=None):
             except Exception:
                 time_to_publish = ''
         acm_col = "ACM" if item.get('acm_label') else ""
-        print(f"| {title_link} | {html_title} | {formatted_start_date} | {formatted_publish_date} | {time_to_publish} | {acm_col} |")
+        print(f"| {title_link} | {formatted_start_date} | {formatted_publish_date} | {time_to_publish} | {acm_col} |")
         published_count += 1
 
     print("\n| Statistic | Value |\n|-----------|-------|")
