@@ -37,7 +37,7 @@ Perf can be used on a wide variety of Arm Linux systems including laptops, deskt
 
 Perf is best installed using a Linux package manager, but if a suitable package is not available you can build it from source code. Both situations are covered below.
 
-## Before you begin
+## What should I do before installing Perf?
 
 Follow the instructions below to install Perf on an Arm Linux system.
 
@@ -73,7 +73,7 @@ For example:
 
 This indicates kernel version 5.15.
 
-## Install Perf
+## How do I install Perf?
 
 The Perf source code is part of the Linux kernel source tree.
 
@@ -81,7 +81,7 @@ There are two ways to install Perf on Arm Linux machines:
 - Use a [Linux package manager](#packman)
 - Build the [source code](#source)
 
-### Use a Linux package manager {#packman}
+### How do I install Perf using a Linux package manager? {#packman}
 
 If a package exists for your specific kernel version you can install Perf using the package manager.
 
@@ -107,7 +107,7 @@ There are hundreds of packages, and the package name must match the output of `u
 
 If there is no match, you can install Perf using the source code as described in the next [section](#source).
 
-### Build the source code {#source}
+### How do I build Perf from source code? {#source}
 
 If there is no package available for your kernel version you can build Perf from source code.
 
@@ -148,7 +148,7 @@ To copy it use:
 sudo cp tools/perf/perf /usr/local/bin
 ```
 
-## Test Perf {#test}
+## How do I test Perf? {#test}
 
 Regardless of how you installed Perf, run the `version` command:
 
@@ -223,7 +223,7 @@ Error #2:
 E: linux-perf-5.15 is not installed.
 ```
 
-### Generate a test Perf report
+### How do I generate a test Perf report?
 
 Generate a simple Perf report. For example:
 ```console
@@ -251,7 +251,7 @@ Access to performance monitoring and observability operations is limited.
 ```
 You will need to modify the [PMU access permissions](#access).
 
-### PMU access permission {#access}
+### How do I manage PMU access permissions? {#access}
 
 On some systems, using Perf to access hardware counters is restricted by the value of `/proc/sys/kernel/perf_event_paranoid`
 
@@ -279,7 +279,7 @@ To permanently set the paranoid level, add the following line to the file `/etc/
 kernel.perf_event_paranoid=2
 ```
 
-### Additional Perf commands
+### What are some additional Perf commands?
 
 There are five common commands used in performance analysis.
 
@@ -291,7 +291,7 @@ There are five common commands used in performance analysis.
 
 * **annotate** displays the annotated code showing the source and assembly code for the samples
 
-### Arm PMU driver
+### How do I check the Arm PMU driver?
 
 Arm systems use a kernel driver to expose PMU hardware counters. The driver needs to be enabled in the Linux kernel in order to collect the hardware events.
 

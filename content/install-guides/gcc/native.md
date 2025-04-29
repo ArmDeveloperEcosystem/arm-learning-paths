@@ -18,7 +18,7 @@ weight: 2
 ---
 GCC is available on all Linux distributions and can be installed using the package manager.
 
-## Before you begin
+## What do I need before installing GCC?
 
 Follow the instructions below to install GCC on an Arm Linux distribution. This covers `gcc` and `g++` for compiling C and C++ applications.
 
@@ -72,11 +72,11 @@ If `sudo` is not available become _root_ and omit the `sudo`.
 dnf update -y
 sudo dnf group install "development-tools" -y
 ```
-## Setting up product license
+## Does GCC require a license?
 
 GCC is open source and freely available for use.
 
-## Get started {#start}
+## How do I get started with GCC? {#start}
 
 To confirm the installation is complete run:
 

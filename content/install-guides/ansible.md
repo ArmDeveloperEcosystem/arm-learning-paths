@@ -61,7 +61,7 @@ sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible -y
 ```
 
-## Install Ansible for macOS
+## How do I install Ansible for macOS?
 
 You can use the `brew` package manager to install on `arm64`:
 
@@ -69,7 +69,7 @@ You can use the `brew` package manager to install on `arm64`:
 brew install ansible
 ```
 
-## Confirm installation
+## How do I confirm the installation?
 
 Confirm the Ansible command line tools are installed by running:
 

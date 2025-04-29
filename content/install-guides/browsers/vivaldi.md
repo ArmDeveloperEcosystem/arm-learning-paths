@@ -23,7 +23,7 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-## Installing Vivaldi
+## How do I install Vivaldi?
 
 Vivaldi is available for Arm Linux and Windows on Arm. 
 

@@ -24,7 +24,7 @@ weight: 1
 AWS Graviton 3 and Graviton 4 processors are available and recommended for SVE application development.
 {{% /notice %}}
 
-## Before you begin
+## What should I do before installing Arm Instruction Emulator?
 
 Arm Instruction Emulator is an executable that runs on your Linux host. It runs on Red Hat Enterprise Linux (RHEL), SUSE Linux Enterprise Server (SLES), and Ubuntu Linux distributions.
 
@@ -48,7 +48,7 @@ sudo apt-get install build-essential -y
 sudo apt-get install environment-modules -y
 ```
 
-## Download
+## How do I download Arm Instruction Emulator?
 
 You can download the appropriate Arm Instruction Emulator package for your host Linux platform from [Product Downloads section](https://developer.arm.com/downloads/-/arm-instruction-emulator) of the Arm website.
 
@@ -58,7 +58,7 @@ For Ubuntu Linux download the installer package using `wget`
 wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-instruction-emulator/22-0/ARM-Instruction-Emulator_22.0_AArch64_Ubuntu_18.04.tar.gz
 ```
 
-## Install
+## How do I install Arm Instruction Emulator?
 
 To install the Arm Instruction Emulator, extract the downloaded package and run the install script.
 
@@ -100,11 +100,11 @@ To confirm `armie` is installed, print the version.
 armie --version
 ```
 
-## Setting up product license
+## Do I need a license for Arm Instruction Emulator?
 
 Arm Instruction Emulator does not require a license.
 
-## Get started
+## How do I get started with Arm Instruction Emulator?
 
 To verify everything is working after installation refer to [Get started with Arm Instruction Emulator](https://developer.arm.com/documentation/102190/latest/Get-started/Get-started-with-Arm-Instruction-Emulator) for instructions on how to compile and run examples with `armie`.
 
