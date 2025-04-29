@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:coveo="http://www.coveo.com/schemas/metadata">
+  
+
+{{- range where .Site.Pages "Params.sitemap_exclude" "ne" true -}}
+  {{- $pathParts := split .RelPermalink "/" -}}
+  {{- $depth := len (where $pathParts "ne" "") -}}
+
+  {{- if and 
+        (or (.IsPage) (.IsSection))
+        (or (not .File) 
+            (and 
+              (not (in .File.Path "_example-learning-path")) 
+              (not (in .File.Path "_next-steps"))))
+    -}}
+      
+
+  {{- $readingtime := .Params.minutes_to_complete -}}
+  {{- if not $readingtime -}}
+    {{- $readingtime = .Parent.Params.minutes_to_complete -}}
+  {{- end -}}
+  {{- if $readingtime -}}
+    <url>
+      <loc>https://learn.arm.com{{ .Permalink -}}</loc>{{ if not .Lastmod.IsZero -}}
+      <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) -}}</lastmod>{{ end -}}
+      {{ with .Sitemap.ChangeFreq -}}
+        <changefreq>{{ . -}}</changefreq>
+      {{ end -}}
+    <coveo:metadata>
+        <contenttype>Learning Path</contenttype>
+        <authorname>
+            {{- $authors := .Params.author -}}
+            {{- if not $authors -}}
+                {{- $authors = .Parent.Params.author -}}
+            {{- end -}}
+            {{- if $authors -}}
+                {{- if (reflect.IsSlice $authors) -}}
+                    {{- delimit $authors ";" -}}
+                {{- else -}}
+                    {{- $authors -}}
+                {{- end -}}
+            {{- else -}}
+                Arm 
+            {{- end -}}
+        </authorname>
+        <category>
+        {{- if and (.File) (in .File.Path "install-guides") -}}
+        Install Guide
+
+        {{- else if and (.File) (in .File.Path "learning-paths/cross-platform") -}}
+        {{- $titles := slice -}}
+        {{- $shared := .Parent.Params.shared_between -}}
+        {{- if $shared -}}
+            {{- range $shared -}}
+            {{- $sectionPath := printf "learning-paths/%s" . -}}
+            {{- $section := site.GetPage $sectionPath -}}
+            {{- with $section -}}
+                {{- $titles = $titles | append .Title -}}
+            {{- end -}}
+            {{- end -}}
+            {{- delimit $titles ";" -}}
+        {{- else -}}
+            Unknown Shared Path
+        {{ end }}
+
+        {{- else -}}
+        {{- $section := .Parent -}}
+        {{- with $section -}}
+            {{- with .Parent -}}
+            {{- with .Title -}}
+                {{- . -}}
+            {{- else -}}
+                Unknown Section
+            {{- end -}}
+            {{- else -}}
+            Unknown Section
+            {{- end -}}
+        {{- else -}}
+            Unknown Section
+        {{- end -}}
+
+        {{ end }}
+        </category>
+        <readingtime>
+            {{- $readingtime := .Params.minutes_to_complete -}}
+            {{- if not $readingtime -}}
+                {{- $readingtime = .Parent.Params.minutes_to_complete -}}
+            {{- end -}}
+            {{- if $readingtime -}}
+                {{- $readingtime -}}
+            {{- else -}}
+                NO TIME 
+            {{- end -}}
+        </readingtime>
+        <skilllevels>
+            {{- $skilllevel := .Params.skilllevels -}}
+            {{- if not $skilllevel -}}
+                {{- $skilllevel = .Parent.Params.skilllevels -}}
+            {{- end -}}
+            {{- if $skilllevel -}}
+                {{- $skilllevel -}}
+            {{- else -}}
+                Introductory
+            {{- end -}}
+        </skilllevels>
+        <subjects>
+            {{- if and (.File) (in .File.Path "install-guides") -}}
+                Install Guide
+            {{- else -}}
+            {{- $subject := .Params.subjects -}}
+            {{- if not $subject -}}
+                {{- $subject = .Parent.Params.subjects -}}
+            {{- end -}}
+            {{- if $subject -}}
+                {{- $subject -}}
+            {{- else -}}
+                NO SUBJECT
+            {{- end -}}
+            {{- end -}}
+        </subjects>
+        {{- if not (and (.File) (in .File.Path "install-guides")) -}}
+            {{- $armips := .Params.armips -}}
+        {{- if not $armips -}}
+            {{- $armips = .Parent.Params.armips -}}
+        {{- end -}}
+            {{- if $armips -}}
+        <armips>{{ delimit $armips ";" -}}
+        </armips>
+            {{- end -}}
+        {{ end }}      
+
+        {{- if not (and (.File) (in .File.Path "install-guides")) -}}
+            {{- $tools_software_languages := .Params.tools_software_languages -}}
+        {{- if not $tools_software_languages -}}
+            {{- $tools_software_languages = .Parent.Params.tools_software_languages -}}
+        {{- end -}}
+            {{- if $tools_software_languages -}}
+        <toolsoftwarelanguage>{{ delimit $tools_software_languages ";" -}}
+        </toolsoftwarelanguage>
+            {{- end -}}
+        {{ end }}  
+
+
+        {{- if not (and (.File) (in .File.Path "install-guides")) -}}
+            {{- $operatingsystems := .Params.operatingsystems -}}
+        {{- if not $operatingsystems -}}
+            {{- $operatingsystems = .Parent.Params.operatingsystems -}}
+        {{- end -}}
+            {{- if $operatingsystems -}}
+        <operatingsystems>{{ delimit $operatingsystems ";" -}}
+        </operatingsystems>
+        
+            {{- end -}}
+        {{ end }}  
+
+        {{- if and (.File) (in .File.Path "learning-paths") -}}
+        <learningpathid>
+                {{- $title := .Params.title -}}
+                {{- if not $title -}}
+                    {{- $subjetitlect = .Parent.Params.title -}}
+                {{- end -}}
+                {{- if $title -}}
+                    {{- $title -}}
+                {{- end -}}
+        </learningpathid>
+        <parentid>1</parentid>
+        <pageid>{{.Params.weight -}}</pageid>
+        {{- end -}}
+      </coveo:metadata>
+    </url>
+    {{- end -}}
+  {{ end -}}{{ end -}}
+</urlset>
