@@ -27,3 +27,5 @@ This learning path has showed how the package helps to design and translate a DS
 Part of the difficulty in this learning path comes from splitting and recombining the signal. Translating this part of the Python code to C adds further complexity.
 
 [CMSIS-Stream](https://github.com/ARM-software/CMSIS-Stream) may help for this. It is a platform-independent technology designed to simplify the use of block-processing functions with sample streams. If you are planning to deploy your DSP algorithms in streaming, real-time systems, it is worth exploring CMSIS-Stream. It can greatly simplify handling streams of data with block-based processing, offering a clean and efficient way to bridge the gap between theory and deployment.
+
+You should now have a better idea on what the CMSIS-DSP Python packages is capable of, and how it relates to its C equivalent.
