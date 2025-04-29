@@ -23,6 +23,7 @@ author: Nobel Chowdary Mandepudi
 
 ### Tags
 skilllevels: Advanced
+cloud_service_providers: Google Cloud
 armips:
     - Neoverse
 subjects: ML

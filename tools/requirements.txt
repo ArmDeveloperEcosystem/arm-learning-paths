@@ -5,3 +5,5 @@ pyspellchecker
 better-profanity
 setuptools
 alive-progress
+requests
+BeautifulSoup4
