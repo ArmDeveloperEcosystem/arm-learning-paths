@@ -1,5 +1,5 @@
 ---
-title: Development environment
+title: Set up your Environment
 weight: 2
 
 ### FIXED, DO NOT MODIFY

@@ -9,10 +9,10 @@ layout: learningpathall
 ## Compile the ONNX Runtime Generate() API for Windows on Arm
 
 The Generate() API in ONNX Runtime is designed for text generation tasks using models like Phi-3. It implements the generative AI loop for ONNX models, including:
-- pre- and post-processing
-- inference with ONNX Runtime- logits processing
-- search and sampling
-- KV cache management
+- Pre- and post-processing.
+- Inference with ONNX Runtime- logits processing.
+- Search and sampling.
+- KV cache management.
 
 You can learn more by reading the [ONNX Runtime Generate() API page](https://onnxruntime.ai/docs/genai/).
 
