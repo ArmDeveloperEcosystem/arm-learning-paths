@@ -18,8 +18,6 @@ jobs:
         with:
           files: |
              **.md
-          ignore-paths: |
-             reports/**
       - name: Check for capital letters or spaces in content directory
         run: |
           echo "Checking for capital letters or spaces in content directory paths (excluding file extensions)..."
