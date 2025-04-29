@@ -1,8 +1,11 @@
 import requests
 import datetime
-import os
 import json
 from bs4 import BeautifulSoup
+import contextlib
+import argparse
+import sys
+import os  # Add os import for directory handling
 
 # GitHub API settings
 GITHUB_API_URL = "https://api.github.com/graphql"
@@ -293,9 +296,9 @@ def get_html_title(url):
         return None
 
 if __name__ == "__main__":
-    import sys
-    import argparse
-    import contextlib
+    # Ensure the reports directory exists in the current working directory
+    reports_dir = os.path.join(os.getcwd(), "reports")
+    os.makedirs(reports_dir, exist_ok=True)
 
     parser = argparse.ArgumentParser(description="Generate Learning Path monthly report.")
     parser.add_argument("--month", type=str, help="Month to generate report for (format: YYYY-MM). Defaults to current month.")
@@ -332,10 +335,10 @@ if __name__ == "__main__":
         month_filter = datetime.date.today().strftime("%Y-%m")
 
     if month_range:
-        output_filename = f"LP-report-{month_range[0].strftime('%Y-%m')}_to_{month_range[1].strftime('%Y-%m')}.md"
+        output_filename = os.path.join(reports_dir, f"LP-report-{month_range[0].strftime('%Y-%m')}_to_{month_range[1].strftime('%Y-%m')}.md")
     else:
         report_month = datetime.datetime.strptime(month_filter, "%Y-%m")
-        output_filename = f"LP-report-{report_month.strftime('%Y-%m')}.md"
+        output_filename = os.path.join(reports_dir, f"LP-report-{report_month.strftime('%Y-%m')}.md")
 
     with open(output_filename, "w") as f:
         with contextlib.ExitStack() as stack:
