@@ -31,7 +31,7 @@ Nerdctl also supports running containers in rootless mode, which helps enhance s
 
 This guide explains how to install and use `containerd` and `nerdctl` on Arm Linux, and how to run commands with `sudo`. 
 
-## Before you begin
+## What should I do before installing nerdctl?
 
 This guide assumes you are using a Debian-based Arm Linux distribution, including Ubuntu and Raspberry Pi OS. You can use a local Arm Linux computer or an Arm instance in the cloud.
 
@@ -54,7 +54,7 @@ sudo apt-get update
 sudo apt-get install -y wget tar
 ```
 
-## Install containerd
+## How do I install containerd?
 
 Install the `containerd` runtime:
 
@@ -90,7 +90,7 @@ When `containerd` is running, the output is similar to:
              └─8428 /usr/bin/containerd
 ```
 
-## Install nerdctl and CNI plugins
+## How do I install nerdctl and CNI plugins?
 
 Install `nerdctl` and the necessary CNI (Container Network Interface) plugins: 
 
@@ -119,7 +119,7 @@ rm nerdctl-${NERDCTL_VERSION}-linux-arm64.tar.gz cni-plugins-linux-arm64-v${CNI_
 The commands above attempt to fetch the latest versions automatically. If required, you can replace `${NERDCTL_VERSION}` and `${CNI_VERSION}` with specific versions.
 {{% /notice %}}
 
-## Install BuildKit
+## How do I install BuildKit for container image building?
 
 If you want to build container images with `nerdctl`, you need to install [BuildKit](https://github.com/moby/buildkit). 
 
@@ -191,7 +191,7 @@ ID				            PLATFORMS
 jz1h9gb0xq39ob6868cr3ev6r	linux/arm64
 ```
 
-## Verify the installation
+## How do I verify the nerdctl installation?
 
 You can check the `nerdctl` version:
 
@@ -242,7 +242,7 @@ The output is the architecture:
 Architecture is aarch64
 ```
 
-## Basic nerdctl commands
+## What are the basic nerdctl commands?
 
 Here are some common commands to get you started:
 

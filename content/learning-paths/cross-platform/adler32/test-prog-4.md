@@ -6,9 +6,11 @@ weight: 4
 layout: learningpathall
 ---
 
-## How can I create a test program to verify Adler32 works correctly? 
+## How Do I Prompt Copilot to Generate a Test Program?
 
-You can continue your GitHub Copilot Agent session to create a test program using the prompt below. Copy and paste it into GitHub Copilot to generate a test program. 
+You can now move on to create a test program using the prompt below. 
+
+Copy and paste the prompt into GitHub Copilot to generate a test program: 
 
 ```console
 Create a C file named adler32-test.c which includes a main() function and calls the adler32 function in adler32-simple.c 
@@ -19,7 +21,7 @@ Add code to run all test data with different sizes and measure performance.
 Don't create the Makefile yet.
 ```
 
-The output is below:
+The output is shown below:
 
 ```output
 
@@ -241,7 +243,7 @@ If you'd like me to create the Makefile for easier compilation, just let me know
 
 ```
 
-You now have a test program which confirms the Adler32 algorithm is working correctly for various input data and can measure the performance of the previously generated C function. 
+You now have a test program which confirms the Adler32 algorithm is working correctly for various input data and can measure the performance of the previously-generated C function. 
 
-Continue to the next section to run the test program and see the results.
+Now continue to the next section to run the test program and view the results.
 

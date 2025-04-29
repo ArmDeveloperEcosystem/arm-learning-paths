@@ -23,7 +23,7 @@ To begin:
 1. Login to your Azure account.
 2. From the Azure search bar, begin typing the word "virtual machines" until the [Virtual Machines](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Compute%2FVirtualMachines) service appears as a selection. 
 
-![Search and Select VMs](Images/search_and_click_vm.png)
+![Search and Select VMs](images/search_and_click_vm.png)
 
 3. Select `Virtual Machines`.
 
@@ -31,7 +31,7 @@ The Virtual Machines page appears.
 
 4. Click `Create` > `Azure virtual machine`.
 
-![Create an Azure VM](Images/click_create_vm.png)
+![Create an Azure VM](images/click_create_vm.png)
 
 The `Create a virtual machine` page appears.
 
@@ -42,14 +42,14 @@ The `Create a virtual machine` page appears.
 9. Select `Standard` for `Security Type`.
 10. Select `See all images` - You can find this under the `Image` dropdown.
 
-![Config the VM Part 1](Images/config-vm-1.png)
+![Config the VM Part 1](images/config-vm-1.png)
 
 The `Marketplace` page appears.
 
 11. Enter `windows 11` into the search bar and press enter.
 12. Click the `Image Type` filter and select `Arm64`.
 
-![Select Arm images](Images/image_type.png)
+![Select Arm images](images/image_type.png)
 
 You are  presented with all available Arm VM images.
 
@@ -59,7 +59,7 @@ Note all the different Arm images (Windows and others) Azure provides; feel free
 
 13. From the drop-down at the bottom of the `Microsoft Windows 11 Preview arm64` tile, select `Windows 11 Professional 24H2 - Arm64`.
 
-![img2](Images/select_24h2.png)
+![img2](images/select_24h2.png)
 
 Upon selection, you are returned to the `Create a virtual machine` screen with your architecture set to `Arm64` and your image set to `Windows 11 Professional, version 24H2 - ARM64 Gen2`.
 
@@ -79,21 +79,21 @@ The VM size suggested for this learning path is enough to demonstrate Windows on
 
 19. Click `Review + create`.
 
-![Review and Create](Images/review_create.png)
+![Review and Create](images/review_create.png)
 
 The validation and confirmation page appears.
 
 20. Upon review and validation of your settings, select `Create` to launch your Windows on Arm virtual machine.
 
-![Create](Images/create.png)
+![Create](images/create.png)
 
 At this point, Azure will deploy your new Windows on Arm instance to the Azure cloud.  This may take a few moments to complete.
 
-![Deploy](Images/deploying.png)
+![Deploy](images/deploying.png)
 
 Upon completion, your screen will look similar to:
 
-![Deploy Complete](Images/deploy_complete.png)
+![Deploy Complete](images/deploy_complete.png)
 
 
 21. Click `Go to Resource`.
@@ -101,7 +101,7 @@ Upon completion, your screen will look similar to:
 From this resource page, note the `Public IP address` of your virtual machine, as you will use in the next step to connect to your VM instance. 
 
 
-![Public IP](Images/public_ip.png)
+![Public IP](images/public_ip.png)
 
 ## Connect to your Windows on Arm VM
 
@@ -117,7 +117,7 @@ In our example, we use the `Remote Desktop Connection` app as our RDP client, bu
 
 4. Click connect.
 
-![RDP #center](Images/rdp.png)
+![RDP #center](images/rdp.png)
 
 You can now interact with the VM in the same way as you would a local desktop.
 
@@ -128,4 +128,4 @@ If you have issues connecting to your instance, see this Microsoft article:
 
 Open `Control Panel` > `System`, and verify that `Device` > `System Type` identifies as an Arm-based processor.
 
-![System #center](Images/system.png)
+![System #center](images/system.png)

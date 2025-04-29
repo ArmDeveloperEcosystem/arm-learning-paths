@@ -1,20 +1,16 @@
 ---
 title: Write NEON intrinsics using GitHub Copilot to improve Adler32 performance
 
-draft: true
-cascade: 
-    draft: true
-
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for C/C++ developers who are interested in using GitHub Copilot to improve performance using NEON intrinsics.
 
 learning_objectives: 
-    - Use GitHub Copilot to write NEON intrinsics to improve performance of the Adler32 checksum algorithm.
+    - Use GitHub Copilot to write NEON intrinsics that accelerate the Adler32 checksum algorithm.
 
 prerequisites:
     - An Arm computer running Linux with the GNU compiler (gcc) installed.
-    - VS Code with GitHub Copilot installed. 
+    - Visual Studio Code with the GitHub Copilot extension installed. 
 
 author: Jason Andrews
 

@@ -46,7 +46,7 @@ For automation instructions using `vcpkg` see [Install tools on the command line
 `CMSIS-Toolbox` is also installed as part of a Keil MDK installation (Windows only).
 {{% /notice %}}
 
-## Dependencies
+## What dependencies do I need before installing CMSIS-Toolbox?
 
 You will need to install `CMake` and `Ninja`:
 ```command
@@ -64,13 +64,13 @@ You can also download installers for all supported hosts from the below:
 * [CMake](https://cmake.org/download/)
 * [Ninja](https://github.com/ninja-build/ninja/releases)
 
-## Download CMSIS-Toolbox
+## How do I download CMSIS-Toolbox?
 
 Download and unpack the latest version of `CMSIS-Toolbox` from the [Arm Tools Artifactory](https://artifacts.tools.arm.com/cmsis-toolbox/).
 
 Full details of the contents is given in the [Releases area](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases) of the GitHub repository.
 
-### Arm64 hosts
+### How do I download for Arm64 hosts?
 
 {{< tabpane code=true >}}
   {{< tab header="Windows" language="shell">}}
@@ -87,7 +87,7 @@ tar -xf cmsis-toolbox-darwin-arm64.tar.gz
   {{< /tab >}}
 {{< /tabpane >}}
 
-### x86_64 hosts
+### How do I download for x86_64 hosts?
 
 {{< tabpane code=true >}}
   {{< tab header="Windows" language="shell">}}
@@ -104,7 +104,7 @@ tar -xf cmsis-toolbox-darwin-amd64.tar.gz
   {{< /tab >}}
 {{< /tabpane >}}
 
-## Install an appropriate compiler toolchain
+## Which compiler toolchain should I install?
 
 Projects can be built with Arm Compiler for Embedded 6, Arm GNU Toolchain, LLVM Embedded Toolchain, or IAR tools.
 
@@ -115,13 +115,13 @@ For further setup instructions see these Install Guides:
 
 `Arm Compiler for Embedded` is used in the example below.
 
-## Set up environment variables
+## How do I set up environment variables?
 
 Set environment variables as below. Note the exact name of the `TOOLCHAIN` variables will be based on the tool and version installed. In this way, multiple build tools can be registered.
 
 | Variable                                   | Description                           | Notes                                         |
 | ------------------------------------------ | ------------------------------------- | --------------------------------------------- |
-| `<name>_TOOLCHAIN_<major>_<minor>_<patch>` | Path to toolchain binaries            | `<name>` = `AC6`, `GCC`, `IAR`, or `CLANG`    |
+| `<n>_TOOLCHAIN_<major>_<minor>_<patch>` | Path to toolchain binaries            | `<n>` = `AC6`, `GCC`, `IAR`, or `CLANG`    |
 | `CMSIS_PACK_ROOT`                          | Path to CMSIS-Pack root directory     | Use `cpackget init` to initialize             |
 | `PATH`                                     | Add CMSIS-Toolbox `bin` to path       | Also path to `CMake` and `Ninja` if necessary |
 | `CMSIS_COMPILER_ROOT`                      | Path to CMSIS-Toolbox `etc` directory | Optional                                      |
@@ -145,7 +145,7 @@ export CMSIS_COMPILER_ROOT=$HOME/cmsis-toolbox-linux-arm64/etc
 
 Exact paths will depend on tools versions installed and their install locations.
 
-## Initialize CMSIS-Pack directory
+## How do I initialize the CMSIS-Pack directory?
 
 Run the following command to initialize the directory specified by `CMSIS_PACK_ROOT` above.
 ```command
@@ -154,7 +154,7 @@ cpackget init https://www.keil.com/pack/index.pidx
 
 `CMSIS-Toolbox` should now be ready for use.
 
-## Test setup {#test}
+## How can I test my CMSIS-Toolbox setup? {#test}
 
 Example projects are provided on the [GitHub repository](https://github.com/Open-CMSIS-Pack/csolution-examples).
 
@@ -168,7 +168,7 @@ Navigate to the `Hello` example:
 cd csolution-examples/Hello
 ```
 
-### Build the solution
+### How do I build the solution?
 
 Use the [cbuild](https://github.com/Open-CMSIS-Pack/cbuild) utility (a component of `CMSIS-Toolbox`) to build.
 

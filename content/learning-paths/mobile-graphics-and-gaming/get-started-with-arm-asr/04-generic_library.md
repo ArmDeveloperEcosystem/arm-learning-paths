@@ -20,7 +20,6 @@ You can integrate Arm ASR into your custom engine using one of two methods:
 See the following sections to learn how to configure Arm ASR:
 
 - [Quality presets](#quality-presets).
-- [Performance](#performance).
 - [Shader variants and extensions](#shader-variants-and-extensions).
 - [Input resources](#input-resources).
 - [Providing motion vectors](#providing-motion-vectors).

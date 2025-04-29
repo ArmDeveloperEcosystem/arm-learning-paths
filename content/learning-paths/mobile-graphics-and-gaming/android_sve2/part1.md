@@ -28,23 +28,23 @@ The process of creating and configuring this project is similar to that used for
 
 1. Open Android Studio on your development machine and then click the **+ New Project** icon:
 
-![img1](Figures/01.png)
+![img1](figures/01.png)
 
 2. Create a project using the **Native C++ Project** option in the Phone and Tablet section and click Next, as shown below:
 
-![img2](Figures/02.png)
+![img2](figures/02.png)
 
 3. Set the application name to **ARM SVE2**, select `Kotlin` as the language, leave the Minimum SDK selection as `API 24: Android 7.0 (Nougat)`, ensure that the build configuration is set to use Kotlin DSL, and click Next, as shown below:
 
-![img3](Figures/03.png)
+![img3](figures/03.png)
 
 4. Leave the `Toolchain Default` selection for C++ Standard and then click Finish, as shown below:
 
-![img4](Figures/04.png)
+![img4](figures/04.png)
 
 You have just created the Android application project, which comprises a `MainActivity`. The `MainActivity` contains a single TextView control, which displays the Hello from C++ string as shown in the figure below. This string is retrieved by invoking a `stringFromJNI` function from the C++ library, implemented under the `app/cpp/native-lib.cpp` file and built using the NDK and `CMakeLists.txt`.
 
-![img5](Figures/05.png)
+![img5](figures/05.png)
 
 SVE2 support is not enabled by default. To enable it, open the `CMakeLists.txt` (under app/cpp), and modify it by adding the following target_compile_options:
 
@@ -160,7 +160,7 @@ There are two elements of the above code snippet that warrant further discussion
 
 To enable Kotlin code to access the native library, we need to create so-called JNI functions for the `runCalculations` method. To do this, place the cursor on the line where the `runCalculations` method is declared. Then, press Alt+Enter, and select **Create JNI function for runCalculations** from the menu that appears.
 
-![img6](Figures/06.png)
+![img6](figures/06.png)
 
 This action will navigate you to the native-lib.cpp file, which you will implement in the next step.
 

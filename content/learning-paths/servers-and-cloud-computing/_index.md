@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- Linux: 135
+- Linux: 138
 - macOS: 10
 - Windows: 14
 pinned_modules:
@@ -22,8 +22,8 @@ subjects_filter:
 - Containers and Virtualization: 27
 - Databases: 15
 - Libraries: 8
-- ML: 24
-- Performance and Architecture: 49
+- ML: 25
+- Performance and Architecture: 51
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -52,6 +52,7 @@ tools_software_languages_filter:
 - AWS Elastic Kubernetes Service (EKS): 3
 - AWS Graviton: 1
 - Bash: 1
+- bash: 1
 - Bastion: 3
 - BOLT: 1
 - bpftool: 1
@@ -80,10 +81,10 @@ tools_software_languages_filter:
 - Fortran: 1
 - FunASR: 1
 - FVP: 4
-- GCC: 20
+- GCC: 21
 - gdb: 1
 - Geekbench: 1
-- GenAI: 10
+- GenAI: 11
 - GitHub: 6
 - GitLab: 1
 - Glibc: 1
@@ -104,7 +105,7 @@ tools_software_languages_filter:
 - libbpf: 1
 - Linaro Forge: 1
 - Litmus7: 1
-- LLM: 8
+- LLM: 9
 - llvm-mca: 1
 - LSE: 1
 - MariaDB: 1
@@ -123,13 +124,13 @@ tools_software_languages_filter:
 - PAPI: 1
 - perf: 4
 - PostgreSQL: 4
-- Python: 25
+- Python: 26
 - PyTorch: 8
 - RAG: 1
 - Redis: 3
 - Remote.It: 2
 - RME: 4
-- Runbook: 63
+- Runbook: 65
 - Rust: 2
 - snappy: 1
 - Snort3: 1
@@ -150,7 +151,7 @@ tools_software_languages_filter:
 - Vectorscan: 1
 - Veraison: 1
 - Visual Studio Code: 4
-- vLLM: 1
+- vLLM: 2
 - VS Code: 1
 - vvenc: 1
 - Whisper: 1

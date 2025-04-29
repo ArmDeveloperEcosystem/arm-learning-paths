@@ -47,26 +47,26 @@ It comprises of a suite of easy-to-use tools that show you how well your game or
 
 All features of Arm Performance Studio are available free of charge without any additional license as of the `2022.4` release.
 
-## Installation
+## How do I install Arm Performance Studio?
 
 Arm Performance Studio is supported on Windows, Linux, and macOS hosts. Download the appropriate installer from [Arm Performance Studio Downloads](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads).
 
 Full installation and application launch instructions are given in the Arm Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
 
-### Windows
+### How do I install Arm Performance Studio on Windows?
 
 Run the supplied `Arm_Performance_Studio_<version>_windows_x86-64.exe` installer, and follow on-screen instructions.
 
-### Linux
+### How do I install Arm Performance Studio on Linux?
 
 Unpack the supplied `Arm Performance Studio` bundle to the desired location. For example:
 ```console
 tar -xf Arm_Performance_Studio_2024.3_linux_x86-64.tgz
 ```
-### macOS
+### How do I install Arm Performance Studio on macOS?
 
 Run the supplied `Arm_Performance_Studio_<version>_macos_x86-64.dmg` installer, and follow on-screen instructions.
 
-## Get started
+## How do I get started with Arm Performance Studio?
 
 See the [Get started with Arm Performance Studio for Mobile](/learning-paths/mobile-graphics-and-gaming/ams/) learning path for a collection of tutorials for each component of Performance Studio.
