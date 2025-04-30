@@ -33,9 +33,10 @@ test_maintenance: true
 test_images:
   - ubuntu:latest
 ---
-[Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) is a performance analysis tool suite for Android and Linux application developers
+[Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) is a performance analysis tool suite for Android and Linux application developers.
 
-It comprises of a suite of easy-to-use tools that show you how well your game or app performs on production devices, so that you can identify problems that might cause slow performance, overheat the device, or drain the battery.
+It comprises a suite of easy-to-use tools that show you how well your game or app performs on production devices, so that you can identify problems that might cause slow performance, overheat devices, or drain the battery. 
+
 
 | Component | Functionality |
 |----------|-------------|
@@ -56,37 +57,37 @@ Full details about the supported OS and Android versions are given in the Arm Pe
 
 ### How do I install Arm Performance Studio on Windows?
 
-Run the supplied `Arm_Performance_Studio_<version>_windows_x86-64.exe` installer, and follow the on-screen instructions.
+Run the downloaded `Arm_Performance_Studio_<version>_windows_x86-64.exe` installer, and follow the on-screen instructions.
 
 To open Streamline, Frame Advisor or RenderDoc for Arm GPUs, go to the Windows Start menu and search for the name of the tool you want to open.
 
-Performance Advisor is a feature of the Streamline command-line application. To generate a performance report, you must first run the provided Python script to enable Streamline to collect frame data from the device. This process is described in detail in the [Get started with Performance Advisor tutorial](https://developer.arm.com/documentation/102478/latest). After you have captured a profile with Streamline, run the `Streamline-cli -pa` command on the Streamline capture file. This command is added to your `PATH` environment variable during installation, so it can be used from anywhere.
+Performance Advisor is a feature of the Streamline command-line application. To generate a performance report, you must first run the provided Python script to enable Streamline to collect frame data from the device. This process is described in detail in the [Get started with Performance Advisor tutorial](https://developer.arm.com/documentation/102478/latest). After you have captured a profile with Streamline, run `Streamline-cli` on the Streamline capture file. This command is added to your `PATH` environment variable during installation, so it can be used from anywhere.
 
-  ```console
-  Streamline-cli.exe -pa <options> my_capture.apc
-  ```
+```console
+Streamline-cli.exe -pa <options> my_capture.apc
+```
 
-To run Mali Offline Compiler, open a command terminal, navigate to your work directory, and run the `malioc` command on a shader program. The malioc command is added to your `PATH` environment variable during installation, so can be used from anywhere
+To run Mali Offline Compiler, open a command terminal, navigate to your work directory, and run the `malioc` command on a shader program. The malioc command is added to your `PATH` environment variable during installation, so it can be used from anywhere.
 
-  ```console
-  malioc.exe <options> my_shader.frag
-  ```
+```console
+malioc.exe <options> my_shader.frag
+```
 
-### macOS
+### How do I install Arm Performance Studio on macOS?
 
 Arm Performance Studio is provided as a `.dmg` package. To mount it, double-click the `.dmg` package and follow the instructions. The Arm Performance Studio directory tree is copied to the Applications directory on your local file system for easy access.
 
-Arm recommends that you set the permissions for the installation directory to prevent other users from writing to it. This is typically achieved with the `chmod` command. For example,
+You can remove write permission from the installation directory to prevent other users from writing to it. This is done with the `chmod` command. For example:
 
 ```
 chmod go-w <dest_dir>
 ```
 
-Open Streamline, Frame Advisor or RenderDoc for Arm GPUs directly from the Arm Performance Studio directory in your Applications directory. For example, to open Streamline, go to the `<installation_directory>/streamline directory` and open the `Streamline.app` file.
+Open Streamline, Frame Advisor or RenderDoc for Arm GPUs directly from the Arm Performance Studio directory in your Applications directory. For example, to open Streamline, go to the `<installation_directory>/streamline` directory and open the `Streamline.app` file.
 
 To run Performance Advisor, go to the `<installation_directory>/streamline` directory, and double-click the `Streamline-cli-launcher` file. Your computer will ask you to allow Streamline to control the Terminal application. Allow this. The Performance Advisor launcher opens the Terminal application and updates your `PATH` environment variable so you can run Performance Advisor from any directory.
 
-Performance Advisor is a feature of the Streamline command-line application. To generate a performance report, you must first run the provided Python script to enable Streamline to collect frame data from the device. This process is described in detail in the [Get started with Performance Advisor tutorial](https://developer.arm.com/documentation/102478/latest) tutorial. After you have captured a profile with Streamline, run the `Streamline-cli -pa` command on the Streamline capture file to generate a performance report:
+Performance Advisor is a feature of the Streamline command-line application. To generate a performance report, you must first run the provided Python script to enable Streamline to collect frame data from the device. This process is described in detail in the [Get started with Performance Advisor tutorial](https://developer.arm.com/documentation/102478/latest). After you have captured a profile with Streamline, run the `Streamline-cli` command on the Streamline capture file to generate a performance report:
 
 ```
 Streamline-cli -pa <options> my_capture.apc
@@ -102,13 +103,13 @@ On some versions of macOS, you might see a message that Mali Offline Compiler is
 
 ### How do I install Arm Performance Studio on Linux?
 
-Arm Performance Studio is provided as a gzipped tar archive. Extract this tar archive to your preferred location, using a recent version (1.13 or later) of GNU tar:
+Arm Performance Studio is provided as a gzipped tar archive. Extract this tar archive to your preferred location, using version 1.13 or later of GNU tar:
 
 ```
-tar xvzf Arm_Performance_Studio_2025.1_linux.tgz
+tar xvzf Arm_Performance_Studio_<version>_linux.tgz
 ```
 
-Arm recommends that you set the permissions for the installation directory to prevent other users from writing to it. This is typically achieved with the `chmod` command. For example:
+You can remove write permission from the installation directory to prevent other users from writing to it. This is done with the `chmod` command. For example:
 
 ```
 chmod go-w <dest_dir>
@@ -117,33 +118,10 @@ chmod go-w <dest_dir>
 You might find it useful to edit your `PATH` environment variable to add the paths to the `Streamline-cli` and `malioc` executables so that you can run them from any directory. Add the following commands to the .bashrc file in your home directory, so that they are set whenever you initialize a shell session:
 
 ```
-PATH=$PATH:/<installation_directory>/streamline
-PATH=$PATH:/<installation_directory>/mali_offline_compiler
-```
-
-### How do I install Arm Performance Studio on macOS?
-
-To open Streamline, Frame Advisor or RenderDoc for Arm GPUs, go to the installation directory, open the folder for the tool you want to open  and run the application file. For example:
-
-```
-cd <installation_directory>/streamline
-./Streamline
-```
-
-Performance Advisor is a feature of the Streamline command-line application. To use it to generate a performance report, you must first run the provided Python script to enable Streamline to collect frame data from the device. This process is described in detail in the Get started with Performance Advisor tutorial. After you have captured a profile with Streamline, go to the `installation_directory>/streamline` directory and run the `Streamline-cli -pa` command on the Streamline capture file to generate a performance report:
-
-```
-cd <installation_directory>/performance_advisor
-./Streamline-cli -pa <options> my_capture.apc
-```
-
-To run Mali Offline Compiler, go to the `installation_directory>/mali_offline_compiler` directory and run the `malioc` command on a shader program:
-
-```
-cd <installation_directory>/mali_offline_compiler
-./malioc <options> my_shader.frag
+PATH=$PATH:<installation_directory>/streamline
+PATH=$PATH:<installation_directory>/mali_offline_compiler
 ```
 
 ## How do I get started with Arm Performance Studio?
 
-See the [Get started with Arm Performance Studio](/learning-paths/mobile-graphics-and-gaming/ams/) learning path for an overview of how to run each tool in Arm Performance Studio.
+Refer to [Get started with Arm Performance Studio](/learning-paths/mobile-graphics-and-gaming/ams/) for an overview of how to run each tool in Arm Performance Studio.

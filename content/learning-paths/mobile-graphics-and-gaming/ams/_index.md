@@ -17,8 +17,8 @@ prerequisites:
     - For OpenGL ES applications, your device must be running Android 10 or later.
     - For Vulkan applications, your device must be running Android 9 or later.
     - A debuggable build of your application. 
-    - Download [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads) and install it, following the [Install Guide](/install-guides/ams). It is supported on Windows, Linux, and macOS host platforms.
-    - Download and install [Android SDK Platform tools](https://developer.android.com/studio/releases/platform-tools.html). Required for [Android Debug bridge (adb)](https://developer.android.com/studio/command-line/adb).
+    - Arm Performance Studio installed. Follow the [Arm Performance Studio install guide](/install-guides/ams) for instructions.
+    - Android SDK Platform tools installed. Required for the Android Debug bridge (adb).
 
 author: Ronan Synnott
 
