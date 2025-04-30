@@ -41,7 +41,7 @@ To create a tunnel a command-line instance of VS Code is run on the remote machi
 Creating VS Code tunnels requires a [GitHub](https://github.com/) account.
 {{% /notice %}}
 
-## Before you begin
+## What are the prerequisites before installing VS Code Tunnels?
 
 Follow the instructions below to install either the CLI version or the desktop version of VS Code on an Arm Linux machine. This is the remote machine you want to use for development.
 
@@ -65,24 +65,24 @@ For the Armv7-A architecture the output should be:
 armv7l
 ```
 
-## Pick a version to download 
+## Which version of VS Code should I download?
 
 Download either the CLI version or the desktop version of VS Code. The desktop version is the best choice if the machine has a Linux desktop and you want to use both a remote tunnel and do desktop development. The CLI version is best for tunneling only.
 
-### Download CLI version of VS Code (tunnel only)
+### How do I download the CLI version of VS Code for tunneling?
 
 Download a command line (CLI) release of VS Code from the Downloads page. 
 
-### Armv8-A
+### How do I download VS Code for Armv8-A?
 ```console
 wget -O vscode.tgz 'https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-arm64'
 ```
-### Armv7-A
+### How do I download VS Code for Armv7-A?
 ```console
 wget -O vscode.tgz 'https://code.visualstudio.com/sha/download?build=stable&os=cli-linux-armhf'
 ```
 
-### Download desktop version of VS Code (tunnel and desktop)
+### How do I download the desktop version of VS Code for tunneling and desktop development?
 
 VS Code desktop also works for the remote machine. 
 
@@ -96,7 +96,7 @@ wget -O vscode.deb 'https://code.visualstudio.com/sha/download?build=stable&os=l
 The `snap` install is for a non-Arm architecture and does not work.
 {{% /notice %}}
 
-## Install the downloaded version
+## How do I install the downloaded version of VS Code?
 
 For CLI, extract the file. The result is a single executable named `code`. It is placed in the current directory.
 ```console
@@ -106,7 +106,7 @@ For the desktop, install the Debian package.
 ```console
 sudo apt install ./vscode.deb
 ```
-## Start a VS Code Tunnel
+## How do I start a VS Code Tunnel?
 
 On the remote machine start a VS Code tunnel. The `./` is used to indicate the CLI version which was extracted in the current directory.
 
@@ -137,11 +137,11 @@ After the code is entered, the remote device is connected to your GitHub account
 
 ![Device Connect #center](/install-guides/_images/vsc-device-connect.png)
 
-## Connect to remote machine
+## How do I connect to the remote machine using VS Code Tunnels?
 
 The remote machine is now ready to accept client connections. These can be from a [browser](#browser) or [VS Code desktop](#vsdesktop). 
 
-### Connect using a browser {#browser}
+### How do I connect using a browser? {#browser}
 
 The quickest way to connect to the remote machine is using a browser. Even a tablet or phone can be used. 
 
@@ -165,7 +165,7 @@ A list of tunnels attached to your account will be opened. If you are not signed
 
 Select the tunnel to open and VS Code will connect to the remote machine and you are ready to use VS Code on the remote machine.
 
-### Connect using VS Code desktop {#vsdesktop}
+### How do I connect using VS Code Desktop? {#vsdesktop}
 
 Connecting to a tunnel from VS Code Desktop requires the [Remote - Tunnels Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-server).
 
@@ -179,10 +179,10 @@ A list of tunnels attached to your account will be opened. If you are not signed
 
 Select the tunnel to open and VS Code will connect to the remote machine and you are ready to use VS Code on the remote machine.
 
-## Close a tunnel connection
+## How do I close a tunnel connection?
 
 On both browser and desktop, click the lower left (which now shows the name of the connected tunnel) and select `Close Remote Connection` to disconnect from the tunnel server. 
 
-## Summary 
+## What are the key takeaways?
 
 VS Code tunnels and your GitHub account make it easy to connect to Arm machines running Linux for terminal access or to do development on a remote machine with VS Code. This is done without any open ports or SSH port forwarding.

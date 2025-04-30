@@ -46,7 +46,7 @@ Copy the `Access key ID` and `Secret access key`
 ![aws3 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/699c3643-f979-4548-81f9-4300828b6a06 "Copy keys")
 
 
-## Configure the AWS CLI
+## How do I configure the AWS CLI?
 
 Run the following command to set up your AWS CLI:
 

@@ -26,11 +26,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 In this section you will learn how to authenticate to the Azure environment using the Azure CLI. After log in, the CLI allows you to query and interact with Azure cloud resources.
 
-## Before you begin
+## How do I prepare to authenticate using the Azure CLI?
 
 Install the Azure CLI on your machine using the [install guide](/install-guides/azure-cli/).
 
-## Sign in interactively
+## How do I sign in interactively to Azure?
 
 Run the following command to initiate the log in:
 

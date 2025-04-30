@@ -40,15 +40,15 @@ A computer running macOS with Apple Silicon or an Arm Linux computer with KVM en
 
 Multipass provides a clear CLI to easily start virtual machine instances, do development tasks, and clean the VMs from your computer.
 
-## Before you begin
+## What are the prerequisites for running Multipass?
 
 Multipass runs on a variety of platforms and host operating systems. The information below covers running Multipass on macOS with Apple Silicon and Arm Linux with the goal of creating a compatible Ubuntu Linux environment for developers working on cloud instances.
 
 Multipass uses the terms virtual machine and instance synonymously.
 
-## Installation on macOS
+## How do I install Multipass on macOS?
 
-### Download  {#download}
+### How do I download Multipass for macOS? {#download}
 
 Download Multipass for macOS.
 
@@ -56,7 +56,7 @@ Download Multipass for macOS.
 wget https://github.com/canonical/multipass/releases/download/v1.14.1-rc1/multipass-1.14.1-rc1+mac.14+gf2381bfe9.mac-Darwin.pkg
 ```
 
-### Install
+### How do I install Multipass on macOS?
 
 Install the download using the package command.
 
@@ -70,7 +70,7 @@ The getting started instructions below use the command line interface. If you pr
 
 Multipass is now installed. Proceed to [Get Started with Multipass](#getstarted).
 
-## Installation on Arm Linux
+## How do I install Multipass on Arm Linux?
 
 Multipass can be used on Arm Linux computers such as the Raspberry Pi 5.
 
@@ -78,7 +78,7 @@ Running Multipass on Linux requires the KVM hypervisor. KVM does not typically w
 
 The instructions have been tested on a Raspberry Pi 5 running Raspberry Pi OS and Ubuntu.
 
-### Check KVM
+### How do I check if KVM is available?
 
 Install and run the `kvm-ok` command to confirm KVM is available.
 
@@ -112,7 +112,7 @@ HINT:   sudo /usr/sbin/kvm-ok
 
 If KVM is available, proceed with the install.
 
-### Install
+### How do I install the Sanp daemon on Arm Linux?
 
 You may need to install the Snap daemon, `snapd`, before installing Multipass.
 
@@ -145,9 +145,11 @@ Add `--beta` or `--edge` to the install command below to select these more recen
 sudo snap install multipass
 ```
 
-Multipass is now installed.
+## How do I get started with Multipass? {#getstarted}
 
-## Get started with Multipass {#getstarted}
+Multipass is now installed, you can try it out. 
+
+### How do I confirm Multipass is installed?
 
 To confirm multipass is installed run the `version` command.
 
@@ -160,6 +162,8 @@ If the `multipass` command is not found, you can add `/snap/bin` to the Bash sea
 ```bash
 export PATH=$PATH:/snap/bin
 ```
+
+### How do I list available Ubuntu images?
 
 Multipass runs Ubuntu images. The last three LTS (long-term support) versions are available. A Docker environment with Portainer is also available as well as a few other images.
 
@@ -187,7 +191,7 @@ ros-noetic                                    0.1              A development and
 ros2-humble                                   0.1              A development and testing environment for ROS 2 Humble.
 ```
 
-### Launching instances
+### How do I launch a Multipass instance?
 
 The default values for launching instances allocate 1 CPU, create a small disk (5 Gb), and limited memory (1 Gb). By default, the name of the instance is automatically assigned.
 
@@ -201,7 +205,7 @@ multipass launch lts --name m1u --cpus 4 --disk 16G --memory 4G
 
 Once launched, the command prompt returns and the instance is running in the background.
 
-### Connect and use instances
+### How do I connect to a Multipass instance?
 
 Use the `list` command to identify created instances. Make note of the instance names as the name is used in other commands.
 
@@ -215,6 +219,8 @@ To start a command line shell on a running instance use the `shell` command.
 multipass shell m1u
 ```
 
+### How do I execute a command on a Multipass instance?
+
 To run a specific command from the host on the instance use the `exec` command. The command to be run comes after the ``--``
 
 ```console
@@ -227,7 +233,7 @@ The `uname` output will look similar to:
 Linux m1u 6.8.0-36-generic #36-Ubuntu SMP PREEMPT_DYNAMIC Mon Jun 10 13:20:23 UTC 2024 aarch64 aarch64 aarch64 GNU/Linux
 ```
 
-### Print information
+### How do I print instance information with Multipass?
 
 The `info` command prints information about the instance, including the IP address.
 
@@ -251,7 +257,7 @@ Memory usage:   355.3MiB out of 3.8GiB
 Mounts:         --
 ```
 
-### Mount a host directory
+### How do I mount a host directory into a Multipass instance?
 
 To access a large number of files on the host machine without copying or transferring them into the instance use the `mount` command. This command makes a host directory visible in the instance and all files can be accessed. Modifications made from inside the instance will directly change the files on the host.
 
@@ -263,6 +269,8 @@ multipass mount dev m1u:/home/ubuntu/dev
 
 There are also options to adjust the user and group IDs as needed to avoid permission problems.
 
+### How do I unmount a host directory from a Multipass instance?
+
 Use the `umount` command to unmount the directory.
 
 ```console
@@ -271,7 +279,7 @@ multipass umount m1u:/home/ubuntu/dev
 
 Directories can be dynamically mounted and unmounted without stopping the instance.
 
-### Stop and Start
+### How do I stop and start a Multipass instance?
 
 Multipass instances can be stopped and started quickly.
 
@@ -289,7 +297,7 @@ To start the instance.
 multipass start m1u
 ```
 
-### Cleanup
+### How do I clean up Multipass instances?
 
 Multipass instances are easy to delete. There is one extra level of protection to recover deleted instances before they are fully deleted.
 
