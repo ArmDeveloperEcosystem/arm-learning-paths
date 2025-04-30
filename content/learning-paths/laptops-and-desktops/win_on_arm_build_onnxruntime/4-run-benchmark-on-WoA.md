@@ -34,27 +34,29 @@ git lfs install
 ```
 If you don’t have winget, [download the installer manually](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage?platform=windows).
 
-If the extension is already installed for you when you run the above ``git`` command it will say ``Git LFS initialized``.
+If Git LFS is already installed, you'll see ``Git LFS initialized``.
 
-You then need to install the ``HuggingFace CLI``
+### Install Hugging Face CLI
+
+You then need to install the ``HuggingFace CLI``:
 ``` bash
 pip install huggingface-hub[cli]
 ```
 
-### Download the Phi-3-Mini-4K model
+### Download the Phi-3-Mini (4K) model
 
 ``` bash
 cd C:\Users\%USERNAME%
 cd repos\lp
 huggingface-cli download microsoft/Phi-3-mini-4k-instruct-onnx --include cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4/* --local-dir .
 ```
-This command downloads the model into a folder called `cpu_and_mobile`.
+This command downloads the model into a folder named `cpu_and_mobile`.
 
-### Build model runner (ONNX Runtime GenAI C Example)
+### Build the Model Runner (ONNX Runtime GenAI C Example)
 
-In the previous section you built ONNX Runtime Generate() API from source. The headers and dynamic linked libraries that are built need to be copied over to appropriate folders (``lib`` and ``inclue``).
+In the previous step, you built the ONNX Runtime Generate() API from source. Now, copy over the resulting headers and dynamic linked libraries into the appropriate folders (``lib`` and ``include``).
 
-Building from source is a better practice because the examples usually are updated to run with the latest changes.
+Building from source is a better practice because the examples usually are updated to run with the latest changes:
 
 ``` bash
 copy onnxruntime\build\Windows\Release\Release\onnxruntime.* onnxruntime-genai\examples\c\lib
@@ -73,7 +75,7 @@ cd build
 cmake --build . --config Release
 ```
 
-After a successful build, a binary program called `phi3` will be created in the ''onnxruntime-genai'' folder:
+After a successful build, the binary `phi3` will be created in the ''onnxruntime-genai'' folder:
 
 ```output
 dir Release\phi3.exe
@@ -81,7 +83,7 @@ dir Release\phi3.exe
 
 #### Run the model
 
-Use the runner you just built to execute the model with the following commands:
+Execute the model using the following command:
 
 ``` bash
 cd C:\Users\%USERNAME%
