@@ -67,11 +67,11 @@ First, you need to compute the signal energy from audio in Q15 format using CMSI
 
 If you look at the CMSIS-DSP documentation, you'll see that the `power` and `vlog` functions don't produce results in Q15 format. Tracking the fixed-point format throughout all lines of an algorithm can be challenging. In this example, this means that:
 
-* Subtracting the mean to center the signal - as you did in the reference implementation - is handled in CMSIS-DSP by negating the mean and applying it as an offset to the window. Because the mean is small and the shift is minor relative to the Q15 range, this adjustment won't cause saturation.
+* Subtracting the mean to center the signal - as you did in the reference implementation - is handled in CMSIS-DSP by negating the mean and applying it as an offset to the window. Using CMSIS-DSP, `arm_negate_q15` is needed to avoid saturation issues that could prevent the value sign from changing (`0x8000` remaining unchanged as `0x8000`). In practice, the mean should be small, and there should be no difference between `-` and `dsp.arm_negate_q15`. However, it is good practice to avoid using `-` or `+` in a fixed-point algorithm when translating it to CMSIS-DSP function calls.
 * The resulting `energy` and `dB` values are not in Q15 format because the `power` and `vlog` functions are used
 * The multiplication by 10 from the reference implementation is missing
 
-This means that the `signal_energy_q15` will have a different output than the above implementation. Instead of trying to determine the exact fixed-point format of the output and applying the necessary shift to adjust the output's fixed-point format, you will address it in the next step. By tuning the threshold of the detection function, the comparison with the reference VAD can be valid.
+This means that the `signal_energy_q15` will have a different output than the above implementation. Instead of trying to determine the exact fixed-point format of the output and applying the necessary shift to adjust the output's fixed-point format, you will address it in the next step by tuning the threshold of the detection function.
 
 
 ```python

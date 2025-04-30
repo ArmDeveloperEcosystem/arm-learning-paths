@@ -3,9 +3,9 @@ title: Getting Started with CMSIS-DSP Using Python
 
 minutes_to_complete: 30
 
-draft: true
+draft: false
 cascade:
-    draft: true
+    draft: false
 
 who_is_this_for: Developers who want to learn how the CMSIS-DSP package can be integrated into their applications
 
