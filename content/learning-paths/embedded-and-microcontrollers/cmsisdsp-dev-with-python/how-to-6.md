@@ -82,9 +82,9 @@ if status==0:
 3. CMSIS-DSP fixed-point division represents 1 exactly. So in Q31, instead of using `0x7FFFFFFF`, `1` is represented as `0x40000000` with a shift of `1`. This behavior is handled in the algorithm when converting the scaling factor to an approximate Q31 value.
 
 Several safeguards are applied:
-* It is assumed that |energy - noise| ≤ energy. If this condition is violated (i.e., noise is greater than energy), the gain is capped at 1 to prevent overflow.
+* The Wiener gain is capped at 1 to prevent overflow.
 * If the energy is zero, the gain is also set to 1 to avoid divide-by-zero errors.
-* When energy == noise, the result should be exactly 1. In this case, `arm_divide_q31` will return a quotient of 0x40000000 and shiftVal of 1. The algorithm detects this specific representation and overrides it, setting quotient = 0x7FFFFFFF and shiftVal = 0, which is a closer approximation to full-scale gain in Q31 without the need for additional shifts.
+* When energy == noise, the result should be exactly 1. In this case, `arm_divide_q31` will return a quotient of `0x40000000` and shiftVal of 1. The algorithm detects this specific representation and overrides it, setting quotient = `0x7FFFFFFF` and shiftVal = 0, which is a closer approximation to full-scale gain in Q31 without the need for additional shifts.
 
 ```python
 quotient=0x7FFFFFFF
@@ -173,7 +173,7 @@ The noise estimation function performs both noise estimation and noise suppressi
 
 ## The final Q15 implementation
 
-Try the final implementation first, and then we’ll analyze the differences from the reference implementation.
+Try the final implementation:
 
 ```python
 class NoiseSuppressionQ15(NoiseSuppression):
