@@ -18,7 +18,7 @@ The Generate() API in ONNX Runtime is designed for text generation tasks using m
 You can learn more about this area by reading the [ONNX Runtime Generate() API documentation](https://onnxruntime.ai/docs/genai/).
 {{% /notice %}}
 
-In this section, you'll build the Generate API() from source.
+In this section, you'll build the Generate() API from source.
 
 
 ### Clone the onnxruntime-genai repository
@@ -37,7 +37,7 @@ You might be able to use later commits. These steps have been tested with the co
 {{% /notice %}}
 
 ### Build for Windows on Arm
-The build script uses a ---config argument, which supports the following options:
+The build script uses a --config argument, which supports the following options:
 - ```Release``` builds release build.
 - ```Debug``` builds binaries with debug symbols.
 - ```RelWithDebInfo``` builds release binaries with debug info.
@@ -51,7 +51,7 @@ python build.py --config Release --skip_tests
 
 ### Verify the output
 
-When the build is complete, confirm the ONNX Runtime Generate() API Dynamic Link Library has been created:
+When the build is complete, confirm the ONNX Runtime Generate() API Dynamically Linked Library has been created:
 
 ```output
 dir build\Windows\Release\Release\onnxruntime-genai.dll

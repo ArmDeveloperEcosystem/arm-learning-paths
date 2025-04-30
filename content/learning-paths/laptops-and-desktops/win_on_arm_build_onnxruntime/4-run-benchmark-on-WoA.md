@@ -54,7 +54,7 @@ This command downloads the model into a folder named `cpu_and_mobile`.
 
 ### Build the Model Runner (ONNX Runtime GenAI C Example)
 
-In the previous step, you built the ONNX Runtime Generate() API from source. Now, copy over the resulting headers and dynamic linked libraries into the appropriate folders (``lib`` and ``include``).
+In the previous step, you built the ONNX Runtime Generate() API from source. Now, copy over the resulting headers and Dynamically Linked Libraries into the appropriate folders (``lib`` and ``include``).
 
 Building from source is a better practice because the examples usually are updated to run with the latest changes:
 

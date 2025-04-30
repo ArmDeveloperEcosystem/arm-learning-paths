@@ -36,7 +36,7 @@ further_reading:
         link: https://onnxruntime.ai/docs/
         type: documentation
     - resource:
-        title: ONNX Runtime generate() API
+        title: ONNX Runtime Generate() API
         link: https://onnxruntime.ai/docs/genai/
         type: documentation
     - resource:

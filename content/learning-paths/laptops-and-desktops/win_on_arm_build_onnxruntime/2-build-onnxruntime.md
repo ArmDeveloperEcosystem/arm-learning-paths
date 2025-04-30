@@ -54,8 +54,8 @@ To build the ONNX Runtime shared library, use one of the following configuration
 ```
 
 
-### Resulting Dynamic Link Library
-When the build is complete, you'll find the `onnxruntime.dll` dynamic linked library in the following respective directories: 
+### Resulting Dynamically Linked Library
+When the build is complete, you'll find the `onnxruntime.dll` dynamically linked library in the following respective directories: 
 
 * For **Release** build:
 
