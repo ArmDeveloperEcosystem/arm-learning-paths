@@ -7,15 +7,15 @@ weight: 8 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-[Frame Advisor](https://developer.arm.com/Tools%20and%20Software/Frame%20Advisor) is a developer tool designed to offer in-depth frame-based analysis for mobile graphics in Android applications. By capturing the API calls and rendering processes of a specific frame, you can identify potential performance bottlenecks that may be causing slowdowns in your application.
+[Frame Advisor](https://developer.arm.com/Tools%20and%20Software/Frame%20Advisor) offers in-depth frame-based analysis for mobile graphics in Android applications. By capturing the API calls and rendering processes of a specific frame, you can identify potential performance bottlenecks that may be causing slowdowns in your application.
 
 ## Prerequisites
 
-Build your application, and setup the Android device as described in the [Streamline](/learning-paths/mobile-graphics-and-gaming/ams/streamline/) instructions.
+Build your application, and setup the Android device as described in [Setup tasks](/learning-paths/mobile-graphics-and-gaming/ams/setup_tasks/).
 
 ## Connect to the device
 
-1. When Frame Advisor opens, select `New trace` to start a new trace.
+1. Open Frame Advisor and select `New trace` to start a new trace.
 
    ![Frame Advisor launch screen](images/fa_launch_screen.png)
 
