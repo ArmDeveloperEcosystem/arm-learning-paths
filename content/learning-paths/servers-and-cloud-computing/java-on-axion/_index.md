@@ -18,6 +18,7 @@ author: Joe Stech
 
 ### Tags
 skilllevels: Introductory
+cloud_service_providers: Google Cloud
 subjects: Performance and Architecture
 armips:
     - Neoverse V2

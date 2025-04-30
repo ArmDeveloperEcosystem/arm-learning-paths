@@ -27,19 +27,11 @@ jobs:
         run: |
           python tools/generate_monthly_report.py
 
-      - name: Create data directory if not exists
-        run: mkdir -p data/reports
-
-      - name: Move report to data directory
-        run: |
-          REPORT_FILE=$(ls LP-report-*.md | head -n 1)
-          mv "$REPORT_FILE" data/reports
-
       - name: Commit and push report to repository
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add data/reports/
+          git add reports/
           git commit -m "Add monthly learning path report [skip ci]" || echo "No changes to commit"
           git push
         env:

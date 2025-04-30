@@ -36,7 +36,8 @@ The algorithm works by calculating two 16-bit sums:
 
 - s1: A simple sum of all bytes.
 - s2: A sum of all s1 values after each byte.
-- The final checksum is `(s2 << 16) | s1`.
+
+The final checksum is `(s2 << 16) | s1`.
 
 ## What You'll Build
 
