@@ -294,15 +294,15 @@ You can now run the application to demonstrate the performance differences betwe
 
 1. Click on the platform dropdown in Visual Studio and select 'Configuration Manager...'
 
-![fig9](Figures/09.png)
+![fig9](figures/09.png)
 
 2. In the 'Configuration Manager' window, open the 'Active solution platform' dropdown and select <New...>
 
-![fig10](Figures/10.png)
+![fig10](figures/10.png)
 
 3. In the 'New Solution Platform' dialog, choose 'ARM64' from the list and click the 'OK' button
 
-![fig11](Figures/11.png)
+![fig11](figures/11.png)
 
 After setting up both platforms, start by running the application using the x64 platform:
 
@@ -311,7 +311,7 @@ After setting up both platforms, start by running the application using the x64 
 
 Now, launch the application using x64 platform. Click the Run calculations button several times, and then click the Plot results button. You should get the following:
 
-![fig12](Figures/12.png)
+![fig12](figures/12.png)
 
 Next, switch to the ARM64 platform and repeat the process:
 
@@ -320,7 +320,7 @@ Next, switch to the ARM64 platform and repeat the process:
 
 You should notice shorter computation times on the ARM64 platform, demonstrating its performance advantage:
 
-![fig13](Figures/13.png)
+![fig13](figures/13.png)
 
 ## Summary
 In this learning path, you developed an application using Xamarin.Forms, allowing it to run on multiple platforms while sharing the same codebase. The application included functionality to measure and compare computation times, specifically focusing on matrix multiplication performance. By running the application on both x64 and Arm64 platforms, you were able to observe and compare the performance. The results showed a noticeable performance advantage on the Arm64 architecture, highlighting its efficiency in handling computation-intensive tasks.

@@ -6,20 +6,21 @@ weight: 3
 layout: learningpathall
 ---
 
-## Prepare Your AWS Account
-For this learning path, you will need an active AWS account. If you do not have an AWS account, please refer to the [AWS documentation](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html).
+## Prepare your AWS account
+You’ll need an active AWS account for this Learning Path. If you don't have one yet, refer to the [AWS documentation](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html).
 
-This learning path assumes that you have administrator level privileges for your AWS account.
+{{% notice Note %}}
+This Learning Path assumes that you have administrator-level privileges for your AWS account. {{% /notice %}}
 
-## Install the AWS Command-Line Tools
-For this section, you will need the AWS Command-Line (CLI) tools. Please refer to the [AWS documentation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) for the steps needed to install the latest version of the AWS CLI.
+## Install AWS command-line tools
+You’ll need the AWS Command-Line Interface (CLI) installed for this section. Follow the [AWS documentation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) to install the latest version.
 
-## Set Up Authentication
-You will need to configure your local environment to authenticate with the AWS cloud in order to build the Veraison deployment.
+## Set up authentication
+You'll need to set up your local environment to authenticate with AWS before deploying Veraison.
 
-The recommended way to do this is using Single Sign-On (SSO). The steps to do this are documented in Veraison's documentation [here](https://github.com/veraison/services/tree/main/deployments/aws#aws-account).
+The recommended method is Single Sign-On (SSO). Follow the steps in Veraison's documentation [here](https://github.com/veraison/services/tree/main/deployments/aws#aws-account).
 
-It is important to ensure that authentication is configured correctly. The best way to do this is to run a simple command-line operation such as the following:
+To confirm authentication is configured correctly, run a simple command, such as:
 
 ```bash
 aws ec2 describe-availability-zones
@@ -66,4 +67,4 @@ You should see output similar to the following (depending on which AWS region yo
     ]
 }
 ```
-If this operation fails, please do not attempt to proceed with the next steps of this learning path. Refer to [AWS documentation](https://docs.aws.amazon.com/cli/v1/userguide/cli-chap-authentication.html) for help with troubleshooting this step.
+If this operation fails, pause here and troubleshoot using the [AWS documentation](https://docs.aws.amazon.com/cli/v1/userguide/cli-chap-authentication.html) before continuing.

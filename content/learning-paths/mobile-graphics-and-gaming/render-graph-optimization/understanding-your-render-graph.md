@@ -35,7 +35,7 @@ Take a closer look at what can be represented in a node on the render graph.
 
 ### Render passes
 
-Most of the execution nodes in the sample graph above are colored green and labelled “RP…” These are [render passes](https://developer.arm.com/documentation/102479/0100/How-Render-Passes-Work).
+Most of the execution nodes in the sample graph above are colored green and labeled “RP…” These are [render passes](https://developer.arm.com/documentation/102479/0100/How-Render-Passes-Work).
 
 ![A render pass node#center](render-pass-node.png "Figure 2. A render pass node")
 
@@ -53,7 +53,7 @@ When you click an execution node, such as a render pass, Frame Advisor navigates
 
 ### Other types of execution node
 
-The graph also shows a transfer node, colored blue, and labelled ”Tr…”.
+The graph also shows a transfer node, colored blue, and labeled ”Tr…”.
 
 ![A transfer node#center](transfer-node.png "A transfer node")
 

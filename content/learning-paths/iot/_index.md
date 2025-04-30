@@ -16,14 +16,15 @@ subjects_filter:
 - Performance and Architecture: 1
 operatingsystems_filter:
 - Baremetal: 4
-- Linux: 6
-- macOS: 1
+- Linux: 7
+- macOS: 2
 - RTOS: 2
-- Windows: 1
+- Windows: 2
 tools_software_languages_filter:
 - Arm Compiler for Embedded: 1
 - Arm Virtual Hardware: 6
 - AWS IoT Greengrass: 1
+- Azure: 1
 - Balena Cloud: 1
 - Balena OS: 1
 - Coding: 3
@@ -33,4 +34,5 @@ tools_software_languages_filter:
 - Matter: 1
 - Raspberry Pi: 2
 - Remote.It: 1
+- VS Code: 1
 ---

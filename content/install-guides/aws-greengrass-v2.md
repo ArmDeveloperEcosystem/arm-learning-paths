@@ -22,24 +22,24 @@ weight: 1
 
 [AWS IoT Greengrass](https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html) is an open source Internet of Things (IoT) edge runtime and cloud service that helps you build, deploy, and manage IoT applications on your devices.
 
-## Before you begin
+## What do I need before I begin?
 
 Follow the instructions below to install AWS IoT Greengrass on your device and register the device with the AWS IoT Greengrass service.
 
 The instructions provide the fastest and simplest configuration for deploying AWS IoT Greengrass into a development environment, and they may not be suitable for production deployments.
 
-## Prepare your AWS Role
+## How do I prepare my AWS Role?
 
 Before installing AWS IoT Greengrass on your device you first need to create an AWS IAM role with sufficient permissions to create Greengrass Things, Groups, and Roles.
 
 You will also create and save an access key and secret access key for AWS CLI access.
 
-### Before you begin
+### What should I do before creating the IAM role?
 
 Log in to the AWS console, set the AWS region you want to use in upper right corner, and navigate to the Identify and Access Management (IAM) dashboard.
 
 
-### Create an IAM role and access credentials
+### How do I create an IAM role and access credentials?
 
 1. Create a new IAM user named `gguser`
 
@@ -137,7 +137,7 @@ You can find your account ID by clicking on your user name in the top-right corn
 
 You will use the credentials in the next section.
 
-## Download and install AWS IoT Greengrass
+## How do I download and install AWS IoT Greengrass?
 
 Before starting, install `unzip` and `default-jdk`:
 
@@ -203,7 +203,7 @@ systemctl status greengrass
              └─767 java -Dlog.store=FILE -Dlog.store=FILE -Droot=/greengrass/v2>
 ```
 
-## View your device in the AWS console
+## How do I view my device in the AWS console?
 
 In your browser, go to the AWS console and navigate to the IoT Greengrass console.
 

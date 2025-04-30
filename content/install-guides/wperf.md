@@ -39,7 +39,7 @@ WindowsPerf consists of a kernel-mode driver and a user-space command-line tool.
 You cannot use WindowsPerf on virtual machines, such as cloud instances.
 {{% /notice %}}
 
-## Using winget (Recommended)
+## Using winget 
 
 ### Install
 
@@ -79,69 +79,10 @@ Starting package uninstall...
 Successfully uninstalled
 ```
 
-## Visual Studio and the Windows Driver Kit (WDK)
-
-WindowsPerf relies on `dll` files installed with Visual Studio, from the Community Edition or higher and, optionally, installers from the Windows Driver Kit extension.
-
-For information about the WDK installation process, see [Download the Windows Driver Kit (WDK)](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
-
-See also the [Visual Studio for Windows on Arm install guide](/install-guides/vs-woa/).
-
-## Download WindowsPerf
-
-You can download the latest release package, `windowsperf-bin-<version>.zip` from the Linaro GitLab repository:
-```url
-https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/releases
-```
-
-To download directly from command prompt, use:
-
-```console
-mkdir windowsperf-bin-4.0.0
-cd windowsperf-bin-4.0.0
-curl -L -O https://gitlab.com/api/v4/projects/40381146/packages/generic/windowsperf/4.0.0/windowsperf-bin-4.0.0.zip
-```
-
-Unzip the package:
-
-```console
-tar -xmf windowsperf-bin-4.0.0.zip
-```
-
-## Install wperf driver
-
-You can install the kernel driver using the supplied `wperf-devgen` installer.
-
-The [wperf-devgen](https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/tree/main/wperf-devgen/README.md) tool has been designated as the preferred installer and uninstaller for the WindowsPerf Kernel Driver in the latest release. This tool offers a simple process for managing the installation and removal of the driver.
-
 {{% notice  Note%}}
-You must install the driver as `Administrator`.
+WinPerf is an open-source project. If you would like to develop WindowsPerf yourself, you may also need to install the Windows Driver Kit (WDK). Please refer to this link for more details.
+https://learn.microsoft.com/en-us/windows-hardware/drivers/wdk-release-notes
 {{% /notice %}}
-
-Open a **Windows Command Prompt** terminal with **Run as administrator** selected.
-
-Make sure you are in the `windowsperf-bin-<version>` directory:
-
-```command
-cd windowsperf-bin-4.0.0
-```
-
-### Install with wperf-devgen 
-
-Navigate to the `wperf-driver` folder and run the installer:
-
-```command
-cd wperf-driver
-wperf-devgen install
-```
-
-The output should be similar to:
-
-```output 
-Executing command: install.
-Install requested.
-Device installed successfully
-```
 
 ## Verify install 
 
@@ -154,7 +95,6 @@ Once you have installed the driver, you can use `wperf` without `Administrator` 
 For example:
 
 ```command
-cd ..\wperf
 wperf --version
 ```
 
@@ -167,30 +107,7 @@ You see output similar to:
         wperf-driver  4.0.0    b18197bd  +etw-drv
 
 ```
-## Uninstall wperf driver
 
-You can uninstall (or *remove*) the kernel driver using supplied [wperf-devgen](#devgen_uninstall) uninstaller.
-
-{{% notice  Note%}}
-You must uninstall the driver as `Administrator`.
-{{% /notice %}}
-
-### Uninstall with wperf-devgen {#devgen_uninstall}
-
-```command
-cd windowsperf-bin-4.0.0\wperf-driver
-wperf-devgen uninstall
-```
-
-The output is similar to:
-
-```console
-Executing command: uninstall.
-Uninstall requested.
-Root\WPERFDRIVER
-Device found
-Device uninstalled successfully
-```
 
 ## Install WindowsPerf Virtual Studio Extension (optional) {#vs2022}
 

@@ -48,13 +48,13 @@ It comprises of a suite of easy-to-use tools that show you how well your game or
 
 All features of Arm Performance Studio are available free of charge without any additional license.
 
-## Installation
+## How do I install Arm Performance Studio?
 
 Arm Performance Studio is supported on Windows, Linux, and macOS hosts. Download the appropriate installer from [Arm Performance Studio Downloads](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads).
 
 Full details about the supported OS and Android versions are given in the Arm Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
 
-### Windows
+### How do I install Arm Performance Studio on Windows?
 
 Run the supplied `Arm_Performance_Studio_<version>_windows_x86-64.exe` installer, and follow the on-screen instructions.
 
@@ -100,7 +100,7 @@ malioc <options> my_shader.frag
 
 On some versions of macOS, you might see a message that Mali Offline Compiler is not recognized as an application from an identified developer. To enable Mali Offline Compiler, cancel this message, then open **System Preferences > Security and Privacy** and select **Allow Anyway** for the `malioc` application.
 
-### Linux
+### How do I install Arm Performance Studio on Linux?
 
 Arm Performance Studio is provided as a gzipped tar archive. Extract this tar archive to your preferred location, using a recent version (1.13 or later) of GNU tar:
 
@@ -120,6 +120,8 @@ You might find it useful to edit your `PATH` environment variable to add the pat
 PATH=$PATH:/<installation_directory>/streamline
 PATH=$PATH:/<installation_directory>/mali_offline_compiler
 ```
+
+### How do I install Arm Performance Studio on macOS?
 
 To open Streamline, Frame Advisor or RenderDoc for Arm GPUs, go to the installation directory, open the folder for the tool you want to open  and run the application file. For example:
 
@@ -142,6 +144,6 @@ cd <installation_directory>/mali_offline_compiler
 ./malioc <options> my_shader.frag
 ```
 
-## Get started
+## How do I get started with Arm Performance Studio?
 
 See the [Get started with Arm Performance Studio](/learning-paths/mobile-graphics-and-gaming/ams/) learning path for an overview of how to run each tool in Arm Performance Studio.

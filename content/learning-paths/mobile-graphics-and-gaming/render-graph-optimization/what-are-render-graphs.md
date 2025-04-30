@@ -28,7 +28,7 @@ Render graphs can help diagnose:
 
 Both of these issues can lead to an increase in GPU load and/or bandwidth.
 
-## When *not* to use render graphs
+## What are the limitations of render graphs?
 
 Many performance issues cannot be seen in render graphs, or can be better seen elsewhere. For example, render graphs should not be used to diagnose:
 

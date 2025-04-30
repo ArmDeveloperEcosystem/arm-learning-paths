@@ -37,7 +37,7 @@ test_images:
 
 A detailed overview of functionality is described in [Introduction to AMBA Viz](https://community.arm.com/arm-community-blogs/b/soc-design-and-simulation-blog/posts/introduction-to-amba-viz).
 
-## Download installer packages
+## How do I download AMBA Viz?
 
 AMBA Viz is a component of [Arm Hardware Success Kits](https://www.arm.com/products/development-tools/success-kits).
 
@@ -47,7 +47,7 @@ You can download AMBA Viz as an individual component, or you can download comple
 
 For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](/install-guides/pdh/).
 
-## Installation
+## How do I install AMBA Viz?
 
 AMBA Viz requires a Linux host machine with Java 11 or JavaFX.
 
@@ -73,13 +73,13 @@ The AMBA Viz Release Notes provide full installation instructions, located in th
 docs/public/assets/pdfs/ambaviz-release-note.pdf
 ```
 
-## Set up the product license
+## How do I set up the AMBA Viz product license?
 
 AMBA Viz is license-managed. A Hardware Success Kit license is necessary.
 
 License set up instructions are available in the [Arm License install guide](/install-guides/license/).
 
-## Get started
+## How do I get started with AMBA Viz?
 
 Typically, AMBA Viz is launched with a waveform file:
 ```console

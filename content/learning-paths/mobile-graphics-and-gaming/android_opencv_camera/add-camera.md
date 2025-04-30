@@ -88,7 +88,7 @@ To modify the application view, open `activity_main.xml` and replace the file co
 
 After adding this code, re-run the application. The above declarations render the following:
 
-![img8](Figures/08.png)
+![img8](figures/08.png)
 
 The view now contains two buttons: Start and Stop. They will be used to start and stop the camera preview. Below the buttons, there is a checkbox that will enable or disable real-time image processing. Though not visible, below the checkbox there is a `JavaCameraView`.
 
@@ -145,7 +145,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 The above code checks if the app has the CAMERA permission. If the permission is not granted, it requests the permission using `ActivityCompat.requestPermissions`, passing the `Manifest.permission.CAMERA` and the cameraPermissionRequestCode (100). When you re-run the application, you should see the following screen:
 
-![img9](Figures/09.png)
+![img9](figures/09.png)
 
 Click the **While using the app** button to enable camera access. You are now ready to capture images from the camera. 
 
@@ -392,7 +392,7 @@ class MainActivity : AppCompatActivity(), CameraBridgeViewBase.CvCameraViewListe
 
 After re-launching the application and pressing the Start button you will see the application is accessing the camera. However, the images are not yet displayed.
 
-![img10](Figures/10.png)
+![img10](figures/10.png)
 
 ## Display images
 To display images, you need to modify the onCameraFrame method so that the image from the camera is displayed in the ImageView. You will also declare Mat objects to store the image from the camera. 
@@ -458,4 +458,4 @@ To test the code, you will need to run the application on an actual device. Foll
 
 After running the app, remember to grant permissions to the camera. Then, click the Start button, and the application will display images from the camera:
 
-![img11](Figures/11.jpg)
+![img11](figures/11.jpg)

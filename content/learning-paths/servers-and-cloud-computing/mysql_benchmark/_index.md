@@ -29,8 +29,6 @@ test_images:
     - ubuntu:22.04
 test_link: null
 test_maintenance: false
-test_status:
-    - passed
 
 further_reading:
     - resource:
@@ -47,6 +45,8 @@ further_reading:
         type: documentation
 
 
+### FIXED, DO NOT MODIFY
+# ================================================================================
 weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'
