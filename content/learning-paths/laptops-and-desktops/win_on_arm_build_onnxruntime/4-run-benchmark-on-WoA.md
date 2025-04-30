@@ -6,26 +6,29 @@ weight: 5
 layout: learningpathall
 ---
 
-## Run a Phi-3 model on your Windows on Arm machine
+## Run the Phi-3 model on your Windows on Arm machine
 
-In this section, you will learn how to download the Phi3-mini model and run it on your Windows on Arm machine (physical or virtual machine). You will be use a simple model runner program which provides performance metrics.
+In this section, you'll download the Phi-3 Mini model and run it on your Windows on Arm machine, which can be a physical or virtual machine. You'll be use a simple model runner program which provides performance metrics
 
-The Phi-3-mini (3.3B) model has a short (4k) context version and a long (128k) context version. The long context version can accept much longer prompts and produces longer output text, but it consumes more memory.
-In this learning path, you will use the short context version, which is quantized to 4-bits.
+The Phi-3 Mini (3.3B) model has a short (4k) context version and a long (128k) context version. The long context version can accept much longer prompts and produces longer output text, but it consumes more memory.
 
-The Phi-3-mini model used here is in an ONNX format.
+In this learning path, you'll use the short context version, which is quantized to 4-bits.
+
+The Phi-3 Mini model used here is in ONNX format.
 
 ### Setup
 
 [Phi-3 ONNX models](https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-onnx) are hosted on HuggingFace.
-Hugging Face uses Git for version control and to download ONNX model files, which can be quite large.
-You will first need to install the Git Large File Storage (LFS) extension.
+Hugging Face uses Git for both version control and to download the ONNX model files, which can be quite large.
+
+You'll first need to install the Git Large File Storage (LFS) extension:
 
 ``` bash
 winget install -e --id GitHub.GitLFS
 git lfs install
 ```
 If you don’t have winget, download and run the exe from the [official source](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage?platform=windows).
+
 If the extension is already installed for you when you run the above ``git`` command it will say ``Git LFS initialized``.
 
 You then need to install the ``HuggingFace CLI``.
@@ -34,7 +37,7 @@ You then need to install the ``HuggingFace CLI``.
 pip install huggingface-hub[cli]
 ```
 
-### Download the Phi-3-mini (4k) model
+### Download the Phi-3-Mini-4K model
 
 ``` bash
 cd C:\Users\%USERNAME%
@@ -44,8 +47,9 @@ huggingface-cli download microsoft/Phi-3-mini-4k-instruct-onnx --include cpu_and
 This command downloads the model into a folder called `cpu_and_mobile`.
 
 ### Build model runner (ONNX Runtime GenAI C Example)
-In the previous section you built ONNX RUntime Generate() API from source.
-The headers and dynamic linked libraries that are built need to be copied over to appropriate folders (``lib`` and ``inclue``).
+
+In the previous section you built ONNX Runtime Generate() API from source. The headers and dynamic linked libraries that are built need to be copied over to appropriate folders (``lib`` and ``inclue``).
+
 Building from source is a better practice because the examples usually are updated to run with the latest changes.
 
 ``` bash
@@ -66,6 +70,7 @@ cmake --build . --config Release
 ```
 
 After a successful build, a binary program called `phi3` will be created in the ''onnxruntime-genai'' folder:
+
 ```output
 dir Release\phi3.exe
 ```

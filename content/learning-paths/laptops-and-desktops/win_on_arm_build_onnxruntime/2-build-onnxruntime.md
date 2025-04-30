@@ -6,14 +6,20 @@ weight: 3
 layout: learningpathall
 ---
 
-## Compile ONNX Runtime for Windows on Arm
-Now that you have your environment set up correctly, you can build the ONNX Runtime inference engine. 
+## Build ONNX Runtime for Windows on Arm
+Now that your environment is set up, you're ready to build the ONNX Runtime inference engine. 
 
-ONNX Runtime is an open-source inference engine designed to accelerate the deployment of machine learning models, particularly those in the Open Neural Network Exchange (ONNX) format. ONNX Runtime is optimized for high performance and low latency, making it popular for production deployment of AI models. You can learn more by reading the [ONNX Runtime Overview](https://onnxruntime.ai/).
+ONNX Runtime is an open-source inference engine for accelerating the deployment of machine learning models, particularly those in the Open Neural Network Exchange (ONNX) format. ONNX Runtime is optimized for high performance and low latency, widely used in the production deployment of AI models. 
 
-### Clone ONNX Runtime Repo
+{{% notice Learning Tip %}}
+You can learn more about ONNX Runtime by reading the [ONNX Runtime Overview](https://onnxruntime.ai/).
+{{% /notice %}}
 
-Open a Developer Command Prompt for Visual Studio to properly setup the environment including path to compiler, linker, utilities and header files. Create your workspace and check out the source tree:
+### Clone the ONNX Runtime repository
+
+Open a developer command prompt for Visual Studio to set up the environment including path to compiler, linker, utilities and header files. 
+
+Create your workspace and check out the source tree:
 
 ```bash
 cd C:\Users\%USERNAME%
