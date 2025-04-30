@@ -128,7 +128,7 @@ The constructor for `NoiseSuppression`:
 - Computes the FFT length that can be used for each slice
 - Computes the padding needed for the FFT
 
-The FFT length must be a power of 2. The slice length is not necessarily a power of 2. The constructor therefore computes the closest usable power of 2, and the audio slices are padded with zeros on both sides to match the required FFT length. To make the implementation more robust, this could be computed from by taking the smaller power of two greater than the signal length.
+The FFT length must be a power of 2. The slice length is not necessarily a power of 2. The constructor therefore computes the smaller power of two greater than the signal length, and the audio slices are padded with zeros on both sides to match the required FFT length. 
 
 #### NoiseSuppressionReference constructor
 
@@ -153,8 +153,7 @@ The constructor for `NoiseSuppressionReference`:
 
 #### subnoise
 
-Calculates the approximate Wiener gain and is applied to all frequency bands of the FFT. The `v` argument is a vector.
-
+Calculates the approximate Wiener gain and it is applied to all frequency bands of the FFT. The `v` argument is a vector. If the gain is negative, it is set to 0. A small value is added to the energy to avoid division by zero.
 
 ```python
 def subnoise(self,v):
@@ -170,7 +169,6 @@ def subnoise(self,v):
 #### remove_noise
 
 Computes the FFT (with padding) and reduces noise in the frequency bands using the approximate Wiener gain.
-If the gain is negative, it is set to zero. A small value is added to the energy to avoid division by zero.
 
 The function also uses `window_and_pad`, which is implemented in the final code-block later.
 At a glance, this helper method takes care of padding the signal for a basic even-length window, ensuring it runs smoothly with the FFT.
