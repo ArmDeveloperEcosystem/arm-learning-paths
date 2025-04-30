@@ -20,7 +20,7 @@ weight: 1
 
 The Amazon Web Services (AWS) Serverless Application Model (SAM) CLI is an open-source command-line tool that you can use to build, test, and deploy serverless applications. The SAM CLI provides a Lambda-like execution environment that lets you locally build, test and debug applications defined by AWS SAM templates. It is available for a variety of operating systems and Linux distributions, and supports the Arm architecture. 
 
-## How do I prepare to install AWS SAM CLI on Ubuntu?
+## How do I prepare to install the AWS SAM CLI on Ubuntu?
 
 Follow the instructions below to install and try the latest version of the AWS SAM CLI for Ubuntu on Arm.
 
