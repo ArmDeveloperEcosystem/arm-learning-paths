@@ -1,17 +1,21 @@
 ---
 title: How to Use ONNX Runtime with Windows on Arm 
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers who are interested in ONNX.
+who_is_this_for: This is an introductory topic for developers who are interested in running ONNX models on Windows on Arm devices.
 
 learning_objectives:
-   - Use pre-trained ONNX model for inference
-   - Leverage native Arm64 for Python applications   
+   - Use a pre-trained ONNX model for inference on a Windows on Arm machine.
+   - Leverage native Arm64 support for Python applications running on a Windows on Arm device.
 
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/). 
-    - Any code editor, we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).    
+    - Any code editor like [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).    
 
 author: Dawid Borycki
 
@@ -20,6 +24,7 @@ skilllevels: Introductory
 subjects: Migration to Arm
 armips:
     - Cortex-A
+    - Cortex-X
 operatingsystems:
     - Windows
 tools_software_languages:
