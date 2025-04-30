@@ -19,7 +19,7 @@ You can learn more about ONNX Runtime by reading the [ONNX Runtime Overview](htt
 
 ### Clone the ONNX Runtime repository
 
-Open a command prompt for Visual Studio to set up the environment. This includes paths to the compiler, linker, utilities, and header files. 
+Open a command prompt for Visual Studio to set up the environment, which includes paths to the compiler, linker, utilities, and header files. 
 
 Then, create your workspace and clone the repository:
 
@@ -40,14 +40,14 @@ You might be able to use a later commit. These steps have been tested with the c
 
 To build the ONNX Runtime shared library, use one of the following configurations:
 
--**Release** configuration for a build optimized for performance but without debug information:
+* **Release** configuration, for a build optimized for performance but without debug information:
 
 
 ```bash
 .\build.bat --config Release --build_shared_lib --parallel --compile_no_warning_as_error --skip_submodule_sync  --skip_tests
 ```
 
-**RelWithDebInfo** configuration, which includes debug symbols for profiling or inspection:
+* **RelWithDebInfo** configuration, which includes debug symbols for profiling or inspection:
 
 ```bash
 .\build.bat --config RelWithDebInfo  --build_shared_lib --parallel --compile_no_warning_as_error --skip_submodule_sync  --skip_tests
@@ -55,7 +55,7 @@ To build the ONNX Runtime shared library, use one of the following configuration
 
 
 ### Resulting Dynamic Link Library
-When the build is complete, you'll find the `onnxruntime.dll` dynamic linked library in: 
+When the build is complete, you'll find the `onnxruntime.dll` dynamic linked library in the following respective directories: 
 
 * For **Release** build:
 
