@@ -19,7 +19,7 @@ This Learning Path uses the short context version, which is quantized to 4-bits.
 
 The Phi-3 Mini model used here is in ONNX format.
 
-### Setup
+### Set up
 
 [Phi-3 ONNX models](https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-onnx) are hosted on HuggingFace.
 Hugging Face uses Git for both version control and to download the ONNX model files, which are large.
