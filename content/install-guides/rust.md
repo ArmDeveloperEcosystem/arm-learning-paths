@@ -26,7 +26,7 @@ This install guide is for Linux application developers wishing to use Rust.
 
 If you wish to use Rust to build embedded applications for Arm, refer to [Rust for Embedded Applications](/install-guides/rust_embedded/) instead.
 
-## Before you begin
+## What are the prerequisites before installing Rust on Arm Linux?
 
 Rust is available for a variety of operating systems and Linux distributions, and there are multiple ways to install it.
 
@@ -46,9 +46,9 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## Installation {#install}
+## How do I install Rust on an Arm Linux system? {#install}
 
-### Installing dependencies on Debian based distributions such as Ubuntu
+### How do I install dependencies on Debian-based distributions?
 
 Use the `apt` command to install the required software packages on any Debian-based Linux distribution, including Ubuntu.
 
@@ -57,7 +57,7 @@ sudo apt update
 sudo apt install -y curl gcc
 ```
 
-### Installing dependencies on Red Hat / Fedora / Amazon Linux
+### How do I install dependencies on Red Hat, Fedora, or Amazon Linux?
 
 These Linux distributions use `yum` as the package manager.
 
@@ -68,7 +68,7 @@ sudo yum update -y
 sudo yum install -y curl gcc
 ```
 
-### Download and install Rust
+### How do I download and install Rust?
 
 Run the following command to download and install Rust:
 
@@ -136,7 +136,7 @@ cargo 1.74.1 (ecb9851af 2023-10-18)
 
 You are ready to use the Rust programming language on your Arm Linux machine.
 
-## Get started {#start}
+## How do I get started using Rust? {#start}
 
 To compile an example program, run the following commands:
 
