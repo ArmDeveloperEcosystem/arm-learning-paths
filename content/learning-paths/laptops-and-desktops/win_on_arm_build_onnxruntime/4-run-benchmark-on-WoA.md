@@ -8,18 +8,23 @@ layout: learningpathall
 
 ## Run the Phi-3 model on your Windows on Arm machine
 
-In this section, you'll download the Phi-3 Mini model and run it on your Windows on Arm machine, which can be a physical or virtual machine. You'll be use a simple model runner program which provides performance metrics
+In this section, you'll download the Phi-3 Mini model and run it on your WoA machine - either physical or virtual. You'll use a simple model runner that also reports performance metrics.
 
-The Phi-3 Mini (3.3B) model has a short (4k) context version and a long (128k) context version. The long context version can accept much longer prompts and produces longer output text, but it consumes more memory.
+The Phi-3 Mini (3.3B) model is available in two versions: 
 
-In this learning path, you'll use the short context version, which is quantized to 4-bits.
+- Short context (4K) - supports shorter prompts and uses less memory.
+- Long context (128K) - supports longer prompts and outputs but consumes more memory.
+
+This Learning Path uses the short context version, which is quantized to 4-bits.
 
 The Phi-3 Mini model used here is in ONNX format.
 
 ### Setup
 
 [Phi-3 ONNX models](https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-onnx) are hosted on HuggingFace.
-Hugging Face uses Git for both version control and to download the ONNX model files, which can be quite large.
+Hugging Face uses Git for both version control and to download the ONNX model files, which are large.
+
+### Install Git LFS
 
 You'll first need to install the Git Large File Storage (LFS) extension:
 
@@ -27,12 +32,11 @@ You'll first need to install the Git Large File Storage (LFS) extension:
 winget install -e --id GitHub.GitLFS
 git lfs install
 ```
-If you don’t have winget, download and run the exe from the [official source](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage?platform=windows).
+If you don’t have winget, [download the installer manually](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage?platform=windows).
 
 If the extension is already installed for you when you run the above ``git`` command it will say ``Git LFS initialized``.
 
-You then need to install the ``HuggingFace CLI``.
-
+You then need to install the ``HuggingFace CLI``
 ``` bash
 pip install huggingface-hub[cli]
 ```
