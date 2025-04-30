@@ -1,5 +1,5 @@
 ---
-title: Run Phi3 model on a Windows on Arm machine
+title: Run Phi3 Model
 weight: 5
 
 ### FIXED, DO NOT MODIFY

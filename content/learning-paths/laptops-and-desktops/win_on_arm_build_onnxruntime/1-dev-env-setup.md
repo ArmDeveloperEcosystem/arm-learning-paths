@@ -18,7 +18,7 @@ Your first task is to prepare a development environment with the required softwa
 - Python 3.10 or higher
 - CMake 3.28 or higher
 
-The following instructions were tested on an WoA 64-bit Windows machine with at least 16GB of RAM.
+The following instructions were tested on a WoA 64-bit Windows machine with at least 16GB of RAM.
 
 ## Install Visual Studio 2022 IDE
 
@@ -26,9 +26,9 @@ Follow these steps to install and configure Visual Studio 2022 IDE:
 
 1. Download the latest [Visual Studio IDE](https://visualstudio.microsoft.com/downloads/). 
 
-2. Select the **Community Version**. An installer called *VisualStudioSetup.exe* will be downloaded.
+2. Select the **Community** edition. An installer called *VisualStudioSetup.exe* will be downloaded.
 
-3. Run the downloaded installer (*VisualStudioSetup.exe*) from your Downloads folder.
+3. Run the downloaded installer (*VisualStudioSetup.exe*) from your **Downloads** folder.
 
 4. Follow the installation prompts and accept the **License Terms** and **Privacy Statement**.
 
