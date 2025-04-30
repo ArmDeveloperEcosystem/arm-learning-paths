@@ -10,29 +10,39 @@ layout: learningpathall
 
 In this Learning Path, you'll learn build and deploy a large language model (LLM) on a Windows on Arm (WoA) laptop using ONNX Runtime for inference. 
 
-You'll first learn how to build the ONNX Runtime and ONNX Runtime Generate() API library and then how to download the Phi-3 model and run the inference. You'll run the short context (4k) mini (3.3B) variant of Phi 3 model. The short context version accepts a shorter (4K) prompts and produces shorter output text compared to the long (128K) context version. The short version consumes less memory.
+You'll learn how to:
 
-Your first task is to prepare a development environment with the required software:
+* Build ONNX Runtime and the Generate() API library.
+* Download the Phi-3 model and run inference. 
+* Run the short-context (4K) Mini (3.3B) variant of Phi 3 model. 
 
-- Visual Studio 2022 IDE (latest version recommended)
-- Python 3.10 or higher
-- CMake 3.28 or higher
+{{% notice Note %}}
+The short-context version accepts shorter (4K) prompts and generates shorter outputs than the long-context (128K) version. It also consumes less memory.
+{{% /notice %}}
 
-The following instructions were tested on a WoA 64-bit Windows machine with at least 16GB of RAM.
+## Set up your Development Environment 
 
-## Install Visual Studio 2022 IDE
+Your first task is to prepare a development environment with the required software. Start by installing the required tools:
 
-Follow these steps to install and configure Visual Studio 2022 IDE:
+- Visual Studio 2022 IDE (latest version recommended).
+- Python 3.10 or higher.
+- CMake 3.28 or higher.
+
+These instructions were tested on a 64-bit WoA machine with at least 16GB of RAM.
+
+## Install and Configure Visual Studio 2022 
+
+Follow these steps:
 
 1. Download the latest [Visual Studio IDE](https://visualstudio.microsoft.com/downloads/). 
 
-2. Select the **Community** edition. An installer called *VisualStudioSetup.exe* will be downloaded.
+2. Select the **Community** edition. This downloads an installer called *VisualStudioSetup.exe*. 
 
-3. Run the downloaded installer (*VisualStudioSetup.exe*) from your **Downloads** folder.
+3. Run the installer (*VisualStudioSetup.exe*) from your **Downloads** folder.
 
-4. Follow the installation prompts and accept the **License Terms** and **Privacy Statement**.
+4. Follow the prompts and accept the **License Terms** and **Privacy Statement**.
 
-5. When prompted to select your workloads, select **Desktop Development with C++**. This includes **Microsoft Visual Studio Compiler** (**MSVC**).
+5. When prompted to select workloads, select **Desktop Development with C++**. This installs the **Microsoft Visual Studio Compiler** (**MSVC**).
 
 ## Install Python
 
@@ -44,7 +54,7 @@ You'll need Python version 3.10 or higher. This Learning Path was tested with ve
 
 ## Install CMake
 
-CMake is an open-source tool that automates the build process and helps generate platform-specific build configurations.
+CMake is an open-source tool that automates the build process and generates platform-specific build configurations.
 
 Download and install [CMake for Windows on Arm](/install-guides/cmake).
 
@@ -52,4 +62,4 @@ Download and install [CMake for Windows on Arm](/install-guides/cmake).
 The instructions were tested with version 3.30.5.
 {{% /notice %}}
 
-You’re now ready to move on to building the ONNX Runtime and running inference with Phi-3.
+You’re now ready to build ONNX Runtime and run inference using the Phi-3 model.
