@@ -20,7 +20,7 @@ Specifically, you'll learn how to:
 The short-context version accepts shorter (4K) prompts and generates shorter outputs than the long-context (128K) version. It also consumes less memory.
 {{% /notice %}}
 
-## Set up your Development Environment 
+## Set up your development environment 
 
 Your first task is to prepare a development environment with the required software. 
 

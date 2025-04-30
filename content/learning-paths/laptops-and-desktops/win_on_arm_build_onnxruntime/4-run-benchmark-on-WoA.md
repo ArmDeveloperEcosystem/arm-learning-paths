@@ -81,7 +81,7 @@ After a successful build, the binary `phi3` will be created in the ''onnxruntime
 dir Release\phi3.exe
 ```
 
-#### Run the model
+### Run the model
 
 Execute the model using the following command:
 
