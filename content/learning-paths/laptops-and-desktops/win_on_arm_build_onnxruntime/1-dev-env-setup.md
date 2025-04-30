@@ -6,9 +6,9 @@ weight: 2
 layout: learningpathall
 ---
 
-## Set up your development environment
+## Overview
 
-In this learning path, you'll learn how to build and deploy an LLM on a Windows on Arm (WoA) laptop using ONNX Runtime for inference. 
+In this Learning Path, you'll learn build and deploy a large language model (LLM) on a Windows on Arm (WoA) laptop using ONNX Runtime for inference. 
 
 You'll first learn how to build the ONNX Runtime and ONNX Runtime Generate() API library and then how to download the Phi-3 model and run the inference. You'll run the short context (4k) mini (3.3B) variant of Phi 3 model. The short context version accepts a shorter (4K) prompts and produces shorter output text compared to the long (128K) context version. The short version consumes less memory.
 
