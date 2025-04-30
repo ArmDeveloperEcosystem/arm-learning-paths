@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Before You Begin
 
-This Learning Path demonstrates how to run quantized Phi models on the Cobalt 100 servers using ONNX Runtime. Specifically, it focuses on deploying the Phi 3.5 vision model on Arm-based servers running Ubuntu 24.04 LTS. The instructions have been tested on a Azure Dpls_v6 - 16 cores instance.
+This Learning Path demonstrates how to run quantized Phi models on the Cobalt 100 servers using ONNX Runtime. Specifically, it focuses on deploying the Phi 3.5 vision model on Arm-based servers running Ubuntu 24.04 LTS. The instructions have been tested on a Azure Dpls_v6 - 32 cores instance.
 
 ## Overview
 
