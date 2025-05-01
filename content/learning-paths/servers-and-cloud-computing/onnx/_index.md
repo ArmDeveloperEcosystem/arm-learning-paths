@@ -1,6 +1,10 @@
 ---
 title: Run Phi-3.5 Vision Model with ONNX Runtime on Microsoft Azure Cobalt 100 VMs
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for software developers, ML engineers, and cloud practitioners looking to deploy Microsoft's Phi Models on Arm-based servers using ONNX Runtime.
