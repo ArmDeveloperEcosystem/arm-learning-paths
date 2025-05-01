@@ -7,15 +7,15 @@ cascade:
 
 minutes_to_complete: 15
 
-who_is_this_for: Developers who are looking to optimise the performance of a program using the characteristics observed at runtime.
+who_is_this_for: Developers who are looking to optimize C++ performance using characteristics observed at runtime.
 
 learning_objectives: 
-    - Learn how to microbenchmark a function using Google Benchmark
-    - Learn how to use profile guided optimisation to build binaries optimised for real-world workloads
+    - Learn how to microbenchmark a function using Google Benchmark.
+    - Learn how to use profile guided optimization to build binaries optimized for real-world workloads.
 
 prerequisites:
-    - Basic C++ understanding
-    - Access to an Arm-based linux machine
+    - Basic C++ understanding.
+    - Access to an Arm-based Linux machine.
 
 author: Kieran Hejmadi
 
@@ -25,15 +25,14 @@ subjects: ML
 armips:
     - Neoverse
 tools_software_languages:
-    - C++
     - Google Benchmark
-    - G++
+    - Runbook
 operatingsystems:
     - Linux
 
 further_reading:
     - resource:
-        title: G++ Profile Guided Optimisation Documentation 
+        title: G++ Profile Guided Optimization Documentation 
         link: https://gcc.gnu.org/onlinedocs/gcc-13.3.0/gcc/Instrumentation-Options.html
         type: documentation
     - resource:
