@@ -1,54 +1,71 @@
 ---
-title: Development environment
+title: Set up your Environment
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up your development environment
+## Overview
 
-In this Learning Path, you will learn how to build and deploy a LLM on a Windows on Arm (WoA) laptop using ONNX Runtime for inference. 
+In this Learning Path, you'll learn how to build and deploy a large language model (LLM) on a Windows on Arm (WoA) machine using ONNX Runtime for inference. 
 
-You will first learn how to build the ONNX Runtime and ONNX Runtime Generate() API library and then how to download the Phi-3 model and run the inference. You will run the short context (4k) mini (3.3B) variant of Phi 3 model. The short context version accepts a shorter (4K) prompts and produces shorter output text compared to the long (128K) context version. The short version will consume less memory.
+Specifically, you'll learn how to:
 
-Your first task is to prepare a development environment with the required software:
+* Build ONNX Runtime and the Generate() API library.
+* Download the Phi-3 model and run inference. 
+* Run the short-context (4K) Mini (3.3B) variant of Phi 3 model. 
 
-- Visual Studio 2022 (latest version recommended)
-- Python 3.10 or higher
-- CMake 3.28 or higher
+{{% notice Note %}}
+The short-context version accepts shorter (4K) prompts and generates shorter outputs than the long-context (128K) version. It also consumes less memory.
+{{% /notice %}}
 
-The following instructions were tested on an WoA 64-bit Windows machine with at least 16GB of RAM.
+## Set up your development environment 
 
-## Install Visual Studio 2022 
+Your first task is to prepare a development environment with the required software. 
 
-Follow these steps to install and configure Visual Studio 2022:
+Start by installing the required tools:
 
-1. Download and install the latest version of [Visual Studio IDE](https://visualstudio.microsoft.com/downloads/). 
+- Visual Studio 2022 (the latest version available is recommended).
+- Python 3.10 or higher.
+- CMake 3.28 or higher.
 
-2. Select the **Community Version**. An installer called *VisualStudioSetup.exe* will be downloaded.
+{{% notice Note %}}
+These instructions were tested on a 64-bit WoA machine with at least 16GB of RAM.
+{{% /notice %}}
 
-3. From your Downloads folder, double-click the installer to start the installation.
+## Install and Configure Visual Studio 2022 
 
-4. Follow the prompts and acknowledge **License Terms** and **Privacy Statement**.
+Now, to install and configure Visual Studio, follow these steps:
 
-5. Once "Downloaded" and "Installed" complete select your workloads. As a minimum you should select **Desktop Development with C++**. This will install the **Microsoft Visual Studio Compiler** or **MSVC**.
+1. Download the latest [Visual Studio IDE](https://visualstudio.microsoft.com/downloads/). 
+
+2. Select the **Community** edition. This downloads an installer called `VisualStudioSetup.exe`. 
+
+3. Run `VisualStudioSetup.exe` from your **Downloads** folder.
+
+4. Follow the prompts and accept the License Terms and Privacy Statement.
+
+5. When prompted to select workloads, select **Desktop Development with C++**. This installs the **Microsoft Visual Studio Compiler** (**MSVC**).
 
 Refer to [Visual Studio for Windows on Arm](/install-guides/vs-woa/) for more details.
+
 ## Install Python
 
-Download and install [Python for Windows on Arm](/install-guides/py-woa)
+Download and install [Python for Windows on Arm](/install-guides/py-woa).
 
-You will need Python version 3.10 or higher. This learning path was tested with version 3.11.9.
+{{% notice Note %}}
+You'll need Python version 3.10 or higher. This Learning Path was tested with version 3.11.9.
+{{% /notice %}}
 
 ## Install CMake
 
-CMake is an open-source tool that automates the build process for software projects, helping to generate platform-specific build configurations.
+CMake is an open-source tool that automates the build process and generates platform-specific build configurations.
 
-[Download and install CMake](/install-guides/cmake)
+Download and install [CMake for Windows on Arm](/install-guides/cmake).
 
 {{% notice Note %}}
-The instructions were tested with version 3.30.5
+The instructions were tested with version 3.30.5.
 {{% /notice %}}
 
-You now have the required development tools installed to follow this Learning Path.
+You’re now ready to build ONNX Runtime and run inference using the Phi-3 model.

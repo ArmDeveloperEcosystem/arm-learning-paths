@@ -1,16 +1,15 @@
 ---
-title: Run Phi-3 on a Windows on Arm machine with ONNX Runtime
+title: Run Phi-3 on Windows on Arm using ONNX Runtime
 
 minutes_to_complete: 60
 
-who_is_this_for: A deep-dive for advanced developers looking to build ONNX Runtime on Windows on Arm (WoA) and leverage the Generate() API to run Phi-3 inference with KleidiAI acceleration.
+who_is_this_for: This is an advanced topic for developers looking to build ONNX Runtime for Windows on Arm (WoA) and leverage the Generate() API to run Phi-3 inference with KleidiAI acceleration.
 
 learning_objectives: 
-    - Build ONNX Runtime and ONNX Runtime Generate() API for Windows on Arm.
-    - Run a Phi-3 model using ONNX Runtime on a Windows on Arm laptop.
-
+    - Build ONNX Runtime and enable the Generate() API for Windows on Arm.
+    - Run inference with a Phi-3 model using ONNX Runtime with KleidiAI acceleration.
 prerequisites:
-    - A Windows on Arm computer such as the Lenovo Thinkpad X13 running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/)
+    - A Windows on Arm computer such as a Lenovo Thinkpad X13 running Windows 11, or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
 
 author: Barbara Corriero
 
@@ -25,6 +24,7 @@ tools_software_languages:
     - Python
     - Git
     - cmake
+    - ONNX Runtime
 operatingsystems:
     - Windows
 
@@ -34,7 +34,7 @@ further_reading:
         link: https://onnxruntime.ai/docs/
         type: documentation
     - resource:
-        title: ONNX Runtime generate() API
+        title: ONNX Runtime Generate() API
         link: https://onnxruntime.ai/docs/genai/
         type: documentation
     - resource:
