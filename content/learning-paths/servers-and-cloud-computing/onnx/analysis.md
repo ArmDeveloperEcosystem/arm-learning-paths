@@ -1,5 +1,5 @@
 ---
-title: Phi 3.5 Chatbot Performance Analysis
+title: Run the Phi 3.5 Chatbot 
 weight: 4
 
 layout: learningpathall
@@ -10,7 +10,9 @@ layout: learningpathall
 To begin, skip the image prompt and input the text prompt as shown in the example below:
 ![output](output.png)
 
-Next, download a sample image from the internet using the following `wget` command in the main directory:
+Now exit the server.
+
+Next, download a sample image from the internet using the following `wget` command:
 ```bash
 wget https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794__340.jpg
 ```
