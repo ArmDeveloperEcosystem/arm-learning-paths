@@ -9,18 +9,21 @@ Called from:
 */}}
 
 <!-- Hugo processing -->
-{{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}                                       
-{{$is_list := and (not $is_content) (.IsNode) (not .IsHome) }}  
+{{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}
+{{$is_list := and (not $is_content) (.IsNode) (not .IsHome) }}
 
 
 <!-- Feedback is on     _next-steps.md learning path          install tool everything-->
 
 <!-- All pages -->
-<!-- <script src="/js/stored-user-preferences.js"></script> -->      <!-- Include javascript to store local preferences of themes -->
-<script src="/js/globalVarsandPreferences.js" defer></script>          
+<script
+  src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
+  async
+  data-document-language="true"
+  data-domain-script="7d663903-ba9e-4bc2-a2f8-5844edbb5408">
+</script>
+<script src="/js/globalVarsandPreferences.js" defer></script>
 <script src="/js/anonymous-analytics.js" defer></script>          <!-- Include javascript to track custom analytics -->
-<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false" defer></script>
-<script src="/js/cookie-init.js" defer></script>                  <!-- Initialize cookie -->
 
 <!-- Homepage only -->
 {{if .IsHome }}
