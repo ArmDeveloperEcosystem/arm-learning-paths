@@ -16,7 +16,7 @@ additional_search_terms:
 minutes_to_complete: 15
 
 ### Link to official documentation
-official_docs: https://www.python.org/doc/
+official_docs: https://www.pytorch.org/doc/
 
 author: Pareena Verma
 
@@ -36,7 +36,15 @@ Windows on Arm instances are available with Microsoft Azure. For further informa
 
 ## How do I install PyTorch for Windows on Arm?
 
-Before you install PyTorch on your Windows on Arm machine, you will need to install [Python for Windows on Arm](/install-guides/py-woa)
+{{% notice Environment Details %}}
+* PyTorch 2.7.0
+* Python 3.12.9
+* Windows 11 for Arm64
+{{% /notice %}}
+
+Before you install PyTorch on your Windows on Arm machine, you will need to install [Python version 3.12 for Windows on Arm](https://www.python.org/downloads/release/python-3129/). Select the Windows ARM64 installer.
+
+{{% notice Note %}} Make sure to install Python 3.12 as the Arm native builds for PyTorch on Windows are built with Python version 3.12 {{% /notice %}}
 
 Verify your Python installation at a Windows Command prompt or a PowerShell prompt:
 
@@ -76,7 +84,7 @@ pip install --pre torch --index-url https://download.pytorch.org/whl/nightly/cpu
 
 ## How can I run a PyTorch example?
 
-To run a PyTorch example, and confirm that PyTorch is working, use a text editor to save the code below to a file named `pytorch_woa.py`.
+To run a PyTorch example and confirm that PyTorch is working, use a text editor to save the code below to a file named `pytorch_woa.py`:
 
 ```python
 import torch
@@ -118,4 +126,9 @@ CUDA is not available. PyTorch will use the CPU.
 PyTorch is running on Arm: ARM64
 PyTorch is operational. Tensor created: tensor([1., 2., 3.])
 ```
-You are now ready to use Python on your Windows on Arm device. 
+{{% notice Note %}}
+PyTorch builds for Windows on Arm are CPU-only. CUDA (GPU acceleration) is not supported on this platform.
+{{% /notice %}}
+
+
+You are now ready to use PyTorch on your Windows on Arm device. 
