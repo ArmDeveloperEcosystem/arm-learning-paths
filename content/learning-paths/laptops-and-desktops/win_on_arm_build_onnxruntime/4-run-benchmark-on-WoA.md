@@ -70,7 +70,7 @@ After a successful build, a binary program called `phi3` will be created in the 
 dir Release\phi3.exe
 ```
 
-#### Run the model
+### Run the model
 
 Use the runner you just built to execute the model with the following commands:
 
@@ -98,4 +98,4 @@ After you enter your input prompt, the text output by the model will be displaye
 ```
 Prompt length: 64, New tokens: 931, Time to first: 1.79s, Prompt tokens per second: 35.74 tps, New tokens per second: 6.34 tps
 ```
-You have successfully run the Phi-3 model on your Windows device powered by Arm.
+You have successfully run the Phi-3 model on your Windows on Arm device.

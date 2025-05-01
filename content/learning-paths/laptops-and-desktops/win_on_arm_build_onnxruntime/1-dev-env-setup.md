@@ -8,21 +8,21 @@ layout: learningpathall
 
 ## Set up your development environment
 
-In this learning path, you will learn how to build and deploy a LLM on a Windows on Arm (WoA) laptop using ONNX Runtime for inference. 
+In this Learning Path, you will learn how to build and deploy a LLM on a Windows on Arm (WoA) laptop using ONNX Runtime for inference. 
 
 You will first learn how to build the ONNX Runtime and ONNX Runtime Generate() API library and then how to download the Phi-3 model and run the inference. You will run the short context (4k) mini (3.3B) variant of Phi 3 model. The short context version accepts a shorter (4K) prompts and produces shorter output text compared to the long (128K) context version. The short version will consume less memory.
 
 Your first task is to prepare a development environment with the required software:
 
-- Visual Studio 2022 IDE (latest version recommended)
+- Visual Studio 2022 (latest version recommended)
 - Python 3.10 or higher
 - CMake 3.28 or higher
 
 The following instructions were tested on an WoA 64-bit Windows machine with at least 16GB of RAM.
 
-## Install Visual Studio 2022 IDE
+## Install Visual Studio 2022 
 
-Follow these steps to install and configure Visual Studio 2022 IDE:
+Follow these steps to install and configure Visual Studio 2022:
 
 1. Download and install the latest version of [Visual Studio IDE](https://visualstudio.microsoft.com/downloads/). 
 
@@ -34,6 +34,7 @@ Follow these steps to install and configure Visual Studio 2022 IDE:
 
 5. Once "Downloaded" and "Installed" complete select your workloads. As a minimum you should select **Desktop Development with C++**. This will install the **Microsoft Visual Studio Compiler** or **MSVC**.
 
+Refer to [Visual Studio for Windows on Arm](/install-guides/vs-woa/) for more details.
 ## Install Python
 
 Download and install [Python for Windows on Arm](/install-guides/py-woa)
@@ -50,4 +51,4 @@ CMake is an open-source tool that automates the build process for software proje
 The instructions were tested with version 3.30.5
 {{% /notice %}}
 
-You now have the required development tools installed to follow this learning path.
+You now have the required development tools installed to follow this Learning Path.
