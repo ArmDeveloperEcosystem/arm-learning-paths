@@ -42,7 +42,9 @@ Windows on Arm instances are available with Microsoft Azure. For further informa
 * Windows 11 for Arm64
 {{% /notice %}}
 
-Before you install PyTorch on your Windows on Arm machine, you will need to install [Python for Windows on Arm](/install-guides/py-woa).
+Before you install PyTorch on your Windows on Arm machine, you will need to install [Python version 3.12 for Windows on Arm](https://www.python.org/downloads/release/python-3129/). Select the Windows ARM64 installer.
+
+{{% notice Note %}} Make sure to install Python 3.12 as the Arm native builds for PyTorch on Windows are built with Python version 3.12 {{% /notice %}}
 
 Verify your Python installation at a Windows Command prompt or a PowerShell prompt:
 
