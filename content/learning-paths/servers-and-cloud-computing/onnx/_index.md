@@ -1,18 +1,17 @@
 ---
-title: Running Phi-3.5 Vision Model with ONNX Runtime on Cobalt 100
+title: Run Phi-3.5 Vision Model with ONNX Runtime on Microsoft Azure Cobalt 100 VMs
 
 minutes_to_complete: 30
 
-who_is_this_for:
-    - Software developers, ML engineers, and cloud practitioners looking to deploy Microsoft Phi Models on Arm-based servers using ONNX Runtime.
+who_is_this_for: This is an advanced topic for software developers, ML engineers, and cloud practitioners looking to deploy Microsoft's Phi Models on Arm-based servers using ONNX Runtime.
 
 learning_objectives:
     - Install ONNX Runtime, download and quantize the Phi-3.5 vision model.
     - Run the Phi-3.5 model with ONNX Runtime on Azure.
-    - Analyze performance on Neoverse N2-based Cobalt 100 servers.
+    - Analyze performance on Arm Neoverse-N2 based Azure Cobalt 100 VMs.
 
 prerequisites:
-    - Access to an Azure Cobalt 100 (or other Arm-based) compute instance with at least 16 cores, 8GB of RAM, and 32GB of disk space.
+    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate cloud service provider. This Learning Path has been tested on a Microsoft Azure Cobalt 100 virtual machine with 32 cores, 8GB of RAM, and 32GB of disk space.
     - Basic understanding of Python and machine learning concepts.
     - Familiarity with ONNX Runtime and Azure cloud services.
     - Knowledge of LLM (Large Language Model) fundamentals.
@@ -22,9 +21,10 @@ author: Nobel Chowdary Mandepudi
 
 ### Tags
 skilllevels: Advanced
+cloud_service_providers: Microsoft Azure
 armips:
     - Neoverse
-subjects: Machine Learning
+subjects: ML
 operatingsystems:
     - Linux
 tools_software_languages:
@@ -34,8 +34,8 @@ tools_software_languages:
 
 further_reading:
     - resource:
-        title: Getting Started with Llama
-        link: https://llama.meta.com/get-started
+        title: ONNX Runtime Docs
+        link: https://onnxruntime.ai/docs/
         type: documentation
     - resource:
         title: Hugging Face Documentation
