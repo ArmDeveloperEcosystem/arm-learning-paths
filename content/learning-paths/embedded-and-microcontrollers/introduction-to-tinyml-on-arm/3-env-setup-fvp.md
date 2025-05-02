@@ -37,4 +37,4 @@ Test that the setup was successful by running the `run.sh` script for Ethos-U85,
 
 You will see a number of examples run on the FVP.
 
-This confirms the installation, so you can now proceed to the Learning Path [Build a Simple PyTorch Model](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/build-model-8/).
+This confirms the installation, so you can now proceed to the Learning Path [Build a Simple PyTorch Model](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/4-build-model/).

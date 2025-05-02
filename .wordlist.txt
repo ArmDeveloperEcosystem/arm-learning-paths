@@ -4076,3 +4076,8 @@ scikit
 shiftVal
 urllib
 wdk
+DB's
+FFT's
+IoT's
+NumPy's
+SendGrid's
