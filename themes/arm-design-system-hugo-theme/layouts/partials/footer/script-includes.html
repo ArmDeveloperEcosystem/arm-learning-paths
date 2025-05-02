@@ -16,12 +16,14 @@ Called from:
 <!-- Feedback is on     _next-steps.md learning path          install tool everything-->
 
 <!-- All pages -->
-<script
-  src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
-  async
-  data-document-language="true"
-  data-domain-script="7d663903-ba9e-4bc2-a2f8-5844edbb5408">
-</script>
+{{ if not (in .Site.BaseURL "localhost") }}
+    <script
+    src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
+    async
+    data-document-language="true"
+    data-domain-script="7d663903-ba9e-4bc2-a2f8-5844edbb5408">
+    </script>
+{{end}}
 <script src="/js/globalVarsandPreferences.js" defer></script>
 <script src="/js/anonymous-analytics.js" defer></script>          <!-- Include javascript to track custom analytics -->
 
