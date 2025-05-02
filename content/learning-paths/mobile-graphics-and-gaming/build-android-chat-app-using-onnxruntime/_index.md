@@ -20,7 +20,6 @@ skilllevels: Advanced
 subjects: ML
 armips:
     - Cortex-A
-    - Cortex-X
 tools_software_languages:
     - Kotlin
     - C++
