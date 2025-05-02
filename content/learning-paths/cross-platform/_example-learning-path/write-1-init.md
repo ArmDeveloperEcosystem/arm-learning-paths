@@ -10,13 +10,14 @@ layout: "learningpathall"
 
 ## Add a new Learning Path
 
-To add a new Learning Path, first decide the appropriate category. There are 6 categories into which you can contribute content:
-* servers-and-cloud-computing
-* laptops-and-desktops
-* embedded-and-microcontrollers
-* iot
-* mobile-graphics-and-gaming
-* automotive
+To add a new Learning Path, first decide the appropriate category. There are 7 categories for  which you can contribute content:
+* Servers and Cloud Computing.
+* Laptops and Desktops.
+* Mobile, Graphics, and Gaming.
+* Automotive.
+* IoT.
+* Embedded and Microcontrollers.
+* AI.
 
 {{% notice Note%}}
 Place your Learning Path in the category closest to the environment where the software runs. The tags on the [front page of the website](/) help explain the categories. Feel free to ask on GitHub if you are unsure which category best matches your Learning Path. 
@@ -44,7 +45,7 @@ Result: The following markdown files are added to the `my-new-learning-path` dir
 
 ### Order the content within the Learning Path
 
-Each markdown file has a field called `weight`. Use this field to order the way your content is displayed. The content with the lowest weight is displayed first.
+Each markdown file has a field called `weight`. Use this field to order the way your content is displayed. The content with the lowest weight appears first.
  
 The _index.md is first with `weight: 1`. You should start with `weight: 2` for your next page (`how-to-1.md`) and `weight: 3` for the page you want displayed after that. 
 
