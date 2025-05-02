@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 ## Installation
 
-1. Install Arm Performance Studio by follwing the instructions in the [Arm Performance Studio install guide](/install-guides/ams). Details about changes since the last release can be found in the [Release Note](https://developer.arm.com/documentation/107649/latest/).
+1. Install Arm Performance Studio by following the instructions in the [Arm Performance Studio install guide](/install-guides/ams). Details about changes since the last release can be found in the [Release Note](https://developer.arm.com/documentation/107649/latest/).
 1. Ensure you have installed [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb). `adb` is available with the Android SDK platform tools, which are installed as part of Android Studio. Alternatively, you can download them separately as part of the Android SDK platform tools.
 1. Performance Advisor uses a Python script to connect to your device. To run this script, you will need [Python](https://www.python.org/downloads/) 3.8 or later installed.
 
