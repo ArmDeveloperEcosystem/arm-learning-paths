@@ -91,3 +91,15 @@ social_image = '/img/social-image.png'
 twitter_handle = '@ArmSoftwareDev'
 
 math = true
+
+
+# Enabling building of COVEO-specific sitemap in addition to the normal one.
+[outputFormats]
+  [outputFormats.COVEO]
+    mediaType = "application/xml"
+    baseName = "sitemap-COVEO"
+    isPlainText = true
+    notAlternative = true
+
+[outputs]
+  home = ["HTML", "COVEO"]

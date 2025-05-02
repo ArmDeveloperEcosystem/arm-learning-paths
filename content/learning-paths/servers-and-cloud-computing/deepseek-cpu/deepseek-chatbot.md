@@ -6,17 +6,17 @@ weight: 3
 layout: learningpathall
 ---
 
-## Background and what you'll build
+## Overview and what you'll build
 
 The instructions in this Learning Path are for any Arm server running Ubuntu 24.04 LTS. You need an Arm server instance with at least 64 cores and 512GB of RAM to run this example. Configure disk storage up to at least 400 GB. The instructions have been tested on an AWS Graviton4 r8g.24xlarge instance.
 
-Arm CPUs are widely used in ML and AI use cases. In this Learning Path, you will learn how to run a generative AI inference-based use case of a LLM chatbot on Arm-based CPUs by deploying the [DeepSeek-R1 671B LLM](https://huggingface.co/bartowski/DeepSeek-R1-GGUF) on your Arm-based CPU using `llama.cpp`, optimized for Arm hardware. You'll:
+Arm CPUs are increasingly used for machine learning and AI inference workloads due to their efficiency and scalability. In this Learning Path, you'll deploy a generative AI chatbot using the [DeepSeek-R1 671B LLM](https://huggingface.co/bartowski/DeepSeek-R1-GGUF) on your Arm-based CPU, leveraging the `llama.cpp` inference engine optimized for Arm architecture. 
 
-- Build and run `llama.cpp` with Arm-specific performance improvements.
+You'll learn how to do the following:
+
+- Build and run `llama.cpp` with Arm-specific performance optimizations.
 - Download a quantized GGUF model from Hugging Face.
-- Run and measure performance on a large Arm instance (e.g., AWS Graviton4).
-
-
+- Run and benchmark inference performance on a large Arm instance, such as AWS Graviton4.
 
 [llama.cpp](https://github.com/ggerganov/llama.cpp) is an open source C/C++ project developed by Georgi Gerganov that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. 
 
@@ -24,9 +24,9 @@ Arm CPUs are widely used in ML and AI use cases. In this Learning Path, you will
 
 The [DeepSeek-R1 model](https://huggingface.co/deepseek-ai/DeepSeek-R1) from DeepSeek-AI available on Hugging Face, is released under the [MIT License](https://github.com/deepseek-ai/DeepSeek-R1/blob/main/LICENSE) and free to use for research and commercial purposes. 
 
-The DeepSeek-R1 model has 671 billion parameters, based on Mixture of Experts(MoE) architecture. This improves inference speed and maintains model quality. For this example, the full 671 billion (671B) model is used for retaining quality chatbot capability while also running efficiently on your Arm-based CPU. 
+The DeepSeek-R1 model has 671 billion parameters, based on Mixture of Experts (MoE) architecture. This improves inference speed and maintains model quality. For this example, the full 671 billion (671B) model is used for retaining quality chatbot capability while also running efficiently on your Arm-based CPU. 
 
-Traditionally, the training and inference of LLMs has been done on GPUs using full-precision 32-bit (FP32) or half-precision 16-bit (FP16) data type formats for the model parameter and weights. Recently, a new binary model format called GGUF was introduced by the `llama.cpp` team. This new GGUF model format uses compression and quantization techniques that remove the dependency on using FP32 and FP16 data type formats. For example, GGUF supports quantization where model weights that are generally stored as FP16 data types are scaled down to 4-bit integers. This significantly reduces the need for computational resources and the amount of RAM required. These advancements made in the model format and the data types used make Arm CPUs a great fit for running LLM inferences.   
+Traditionally, the training and inference of LLMs has been done on GPUs using full-precision 32-bit (FP32) or half-precision 16-bit (FP16) data type formats for the model parameter and weights. Recently, a new binary model format called GGUF was introduced by the `llama.cpp` team. This new GGUF model format uses compression and quantization techniques that remove the dependency on using FP32 and FP16 data type formats. For example, GGUF supports quantization where model weights that are generally stored as FP16 data types are scaled down to 4-bit integers. This significantly reduces the need for computational resources and the amount of RAM required. These advancements make Arm CPUs a strong fit for running LLM inference workloads.   
  
 ## Install build dependencies on your Arm-based server
 
@@ -63,7 +63,7 @@ cd llama.cpp
 mkdir build
 cd build
 cmake .. -DCMAKE_CXX_FLAGS="-mcpu=native" -DCMAKE_C_FLAGS="-mcpu=native"
-cmake --build . -v --config Release -j `nproc`
+cmake --build . --config Release -v -j $(nproc)
 ```
 
 `llama.cpp` is now built in the `bin` directory.
@@ -388,11 +388,10 @@ The `system_info` printed from llama.cpp highlights important architectural feat
 
 The end of the output shows several model timings:
 
-* load time refers to the time taken to load the model.
-* prompt eval time refers to the time taken to process the prompt before generating the new text. 
-* eval time refers to the time taken to generate the output. Generally anything above 10 tokens per second is faster than what humans can read.
+* Load time refers to the time taken to load the model.
+* Prompt eval time refers to the time taken to process the prompt before generating the new text. 
+* Eval time refers to the time taken to generate the output. Generally anything above 10 tokens per second is faster than what humans can read.
 
 ## What's next?
 
-You have successfully run a LLM chatbot with Arm KleidiAI optimizations, all running on your Arm AArch64 CPU on your server. You can continue experimenting and trying out the model with different prompts.
-
+You’ve successfully run a large-scale LLM chatbot on an Arm server with KleidiAI optimizations. Continue experimenting with different prompts, quantization levels, or deployment methods.

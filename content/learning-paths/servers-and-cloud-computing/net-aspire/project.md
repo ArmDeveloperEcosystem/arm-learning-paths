@@ -52,7 +52,7 @@ This command generates a solution with the following structure:
 * **NetAspire.Arm.ApiService** - the sample REST API service, built with ASP.NET Core, acts as a core component of your application by implementing business logic and managing data access. The default implementation comes preconfigured with essential features, that include:
 
     * A weatherForecast endpoint for demonstration purposes.
-    * Built-in health checks to monitor the service’s status
+    * Built-in health checks to monitor the service's status
     * Telemetry setup to track performance and usage metrics.
 
 * **NetAspire.Arm.Web** - the web frontend application, implemented with Blazor, serves as the user-facing layer of your application. It communicates with the API service to provide an interactive experience. This application includes:

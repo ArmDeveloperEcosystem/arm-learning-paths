@@ -14,7 +14,7 @@ Azure Cosmos DB is a fully managed, globally distributed NoSQL database service 
 
 Consider a scenario where your existing IoT devices stream telemetry data (temperature, pressure, humidity) to Azure Cosmos DB via Azure Stream Analytics. Now imagine that you need to integrate a new sensor type, such as an air-quality sensor that provides an additional measurement (example: AirQualityIndex).
 
-With Azure Cosmos DB’s NoSQL architecture, you do not have to explicitly modify or migrate database schemas when introducing new data fields. The new sensor data can simply be included in your Stream Analytics query, and Cosmos DB will automatically store the additional field alongside existing data entries without any extra setup.
+With Azure Cosmos DB's NoSQL architecture, you do not have to explicitly modify or migrate database schemas when introducing new data fields. The new sensor data can simply be included in your Stream Analytics query, and Cosmos DB will automatically store the additional field alongside existing data entries without any extra setup.
 
 ### Partitioning
 Azure Cosmos DB uses partitioning for efficiently managing large-scale data and high-throughput operations. Partitioning distributes data across multiple servers (physical partitions), allowing Cosmos DB to scale seamlessly as data volume and query demands grow.
@@ -42,7 +42,7 @@ As your application workload increases, Cosmos DB manages scalability through pa
 In IoT scenarios, choosing an optimal partition key (e.g., device ID) helps evenly distribute load across partitions, ensuring consistent and reliable performance as your IoT application scales up and down.
 
 ### Importance in IoT Solutions
-Azure Cosmos DB plays an important role in IoT solutions due to its ability to handle vast volumes of diverse, rapidly streaming sensor data. Its NoSQL architecture allows IoT applications to adapt to schema changes, accommodating new sensor fields or evolving data structures without complex migrations. Moreover, Cosmos DB’s automatic partitioning and elastic scaling enable efficient handling of data at global scale, ensuring low latency, high availability, and predictable performance. With built-in partitioning, Cosmos DB seamlessly manages massive data growth, enabling IoT solutions to scale smoothly and maintain consistent performance. These capabilities make Azure Cosmos DB an essential component for building production-grade IoT solutions.
+Azure Cosmos DB plays an important role in IoT solutions due to its ability to handle vast volumes of diverse, rapidly streaming sensor data. Its NoSQL architecture allows IoT applications to adapt to schema changes, accommodating new sensor fields or evolving data structures without complex migrations. Moreover, Cosmos DB's automatic partitioning and elastic scaling enable efficient handling of data at global scale, ensuring low latency, high availability, and predictable performance. With built-in partitioning, Cosmos DB seamlessly manages massive data growth, enabling IoT solutions to scale smoothly and maintain consistent performance. These capabilities make Azure Cosmos DB an essential component for building production-grade IoT solutions.
 
 ## Configure Stream Analytics to write data into Azure Cosmos DB
 You will now configure the stream analytics job such that the telemetry data will be automatically written to the table in Azure Cosmos DB. 
@@ -109,7 +109,7 @@ Afterwards, click Start job, and then Start:
 ![img22 alt-text#center](figures/22.png)
 
 ## Verify data flow in Cosmos DB
-To verify that your data pipeline is working correctly, first start your Python IoT simulator application `iot_simulator.py`. Ensure it’s actively sending telemetry data. Next, open the Azure Portal and navigate to your Azure Cosmos DB resource. Under Data Explorer, select your database and then your container (e.g., SensorReadings). Once selected, click Items to view your stored data. Sensor readings streamed from your IoT device will appear on the right-hand side of the Data Explorer interface, similar to the screenshot below:
+To verify that your data pipeline is working correctly, first start your Python IoT simulator application `iot_simulator.py`. Ensure it's actively sending telemetry data. Next, open the Azure Portal and navigate to your Azure Cosmos DB resource. Under Data Explorer, select your database and then your container (e.g., SensorReadings). Once selected, click Items to view your stored data. Sensor readings streamed from your IoT device will appear on the right-hand side of the Data Explorer interface, similar to the screenshot below:
 
 ![img23 alt-text#center](figures/23.png)
 

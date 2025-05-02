@@ -21,7 +21,7 @@ Running a machine learning model on Android involves a few key steps.
 
 * You prepare the input data, ensuring it is formatted and preprocessed in the same way as during model training. The input data is passed through the model, and the output predictions are retrieved and interpreted accordingly.
 
-For improved performance, you can leverage hardware acceleration using Android’s Neural Networks API (NNAPI) or use GPU support if available. This process enables the Android app to make real-time predictions and execute complex machine learning tasks directly on the device.
+For improved performance, you can leverage hardware acceleration using Android's Neural Networks API (NNAPI) or use GPU support if available. This process enables the Android app to make real-time predictions and execute complex machine learning tasks directly on the device.
 
 In this Learning Path, you will learn how to perform inference in an Android application using the pre-trained digit classifier from the previous sections. 
 

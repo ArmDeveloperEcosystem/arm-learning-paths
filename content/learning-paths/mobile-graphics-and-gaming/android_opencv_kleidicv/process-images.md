@@ -305,23 +305,23 @@ class MainActivity : AppCompatActivity() {
 
 This Kotlin code defines the main activity for our application. 
 
-The `MainActivity` class extends `AppCompatActivity`, serving as the entry point for the app’s user interface. It manages the lifecycle of the activity and orchestrates the image processing logic.
+The `MainActivity` class extends `AppCompatActivity`, serving as the entry point for the app's user interface. It manages the lifecycle of the activity and orchestrates the image processing logic.
 
 There are several members of this class:
 * `viewBinding` - manages UI components through the `ActivityMainBinding` class, simplifying access to views in the layout.
 * `imageProcessor` - an instance of the `ImageProcessor` class that applies selected image operations.
-* `originalMat` - a Mat object representing the original image loaded from the app’s assets.
+* `originalMat` - a Mat object representing the original image loaded from the app's assets.
 * `currentBitmap` - stores the current image as a Bitmap for display.
 * `REPETITIONS` - number of times each operation is performed for performance measurement.
-* `TEST_IMAGE` - name of the test image located in the app’s assets.
+* `TEST_IMAGE` - name of the test image located in the app's assets.
 
 When the activity starts, it sets up the user interface, initializes OpenCV, and sets up UI listeners:
 
 The activity also implements several helper methods:
 1. `setupSpinner` - populates the spinner with the names of available ImageOperation enums.
 2. `showToast` - displays a short toast message for user feedback.
-3. `loadImage` - loads the test image (img.png) from the app’s assets. Then, the method converts the image into a Bitmap and stores it for display. The bitmap is also converted to an OpenCV Mat object and changed its color format to grayscale, which is used in OpenCV.
-4. `displayAndStoreBitmap` - updates the app’s ImageView to display the loaded image.
+3. `loadImage` - loads the test image (img.png) from the app's assets. Then, the method converts the image into a Bitmap and stores it for display. The bitmap is also converted to an OpenCV Mat object and changed its color format to grayscale, which is used in OpenCV.
+4. `displayAndStoreBitmap` - updates the app's ImageView to display the loaded image.
 5. `convertBitmapToMat` - converts the Bitmap to a Mat using OpenCV utilities.
 6. `processImage` - this method performs the following:
 	•	Validates if an image is loaded.

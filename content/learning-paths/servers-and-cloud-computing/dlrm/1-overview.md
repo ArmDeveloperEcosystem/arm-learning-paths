@@ -18,7 +18,7 @@ The Arm Neoverse V2 CPU is built for high-performance computing, making it ideal
 
 In this Learning Path, you'll learn how to evaluate the performance of the [DLRM using the MLPerf Inference suite](https://github.com/mlcommons/inference/tree/master/recommendation/dlrm_v2/pytorch) in the _Offline_ scenario. The Offline scenario is a test scenario where large batches of data are processed all at once, rather than in real-time. It simulates large-scale, batch-style inference tasks commonly found in recommendation systems for e-commerce, streaming, and social platforms.
 
-You will run tests that measure throughput (samples per second) and latency, providing insights into how efficiently the model runs on the target system. By using MLPerf's standardized methodology, you'll gain reliable insights that help compare performance across different hardware and software configurations — highlighting the system’s ability to handle real-world, data-intensive AI workloads.
+You will run tests that measure throughput (samples per second) and latency, providing insights into how efficiently the model runs on the target system. By using MLPerf's standardized methodology, you'll gain reliable insights that help compare performance across different hardware and software configurations — highlighting the system's ability to handle real-world, data-intensive AI workloads.
 
 ## Configure your environment
 

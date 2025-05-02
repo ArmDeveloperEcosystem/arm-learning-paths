@@ -66,7 +66,7 @@ You can now download the [pre-quantized Llama3.1 8B model](https://huggingface.c
 huggingface-cli download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir . --local-dir-use-symlinks False
 ```
 
-`Q4_0` in the model name refers to the quantization method the model uses. Quantization aims to reduce the model's size (decreasing memory requirements) and increase execution speed (reducing memory bandwidth bottlenecks when transferring large amounts of data from memory to the processor). The primary trade-off when reducing a model’s size is balancing speed and size improvements against maintaining the quality of performance. Ideally, a model is quantized to meet size and speed requirements while not having a negative impact on performance.
+`Q4_0` in the model name refers to the quantization method the model uses. Quantization aims to reduce the model's size (decreasing memory requirements) and increase execution speed (reducing memory bandwidth bottlenecks when transferring large amounts of data from memory to the processor). The primary trade-off when reducing a model's size is balancing speed and size improvements against maintaining the quality of performance. Ideally, a model is quantized to meet size and speed requirements while not having a negative impact on performance.
 
 The key aspect of quantization format is the number of bits per parameter, denoted as ‘Q4’ in this case, which represents 4-bit integers. 
 

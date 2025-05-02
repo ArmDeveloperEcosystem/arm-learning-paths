@@ -24,7 +24,7 @@ import time
 
 The first package is for numerical computations and the second is for measuring the computation time.
 
-Next, define a function that calculates a signal’s fast Fourier transform (FFT). Here, the signal is composed of a single-frequency sine wave with some random noise:
+Next, define a function that calculates a signal's fast Fourier transform (FFT). Here, the signal is composed of a single-frequency sine wave with some random noise:
 
 ```python
 def perform_sin_fft(signal_length, frequency, trial_count):    

@@ -25,7 +25,6 @@ skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-A
-    - Cortex-X
 operatingsystems:
     - Android
 tools_software_languages:

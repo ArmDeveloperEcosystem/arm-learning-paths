@@ -43,7 +43,7 @@ You should end up with the following configuration:
 
 ![Azure#left](figures/03.png)
 
-Now you will need to configure the port mapping. Let’s click the **Next: Networking >** button, and under the Networking tab scroll down to Ports. Then, add an 8080 port for the TCP protocol: 
+Now you will need to configure the port mapping. Let's click the **Next: Networking >** button, and under the Networking tab scroll down to Ports. Then, add an 8080 port for the TCP protocol: 
 
 ![Azure#left](figures/04.png)
 

@@ -3,16 +3,19 @@ title: Getting Started with CMSIS-DSP Using Python
 
 minutes_to_complete: 30
 
-who_is_this_for: Developers writing DSP/AI software
+draft: false
+cascade:
+    draft: false
 
-learning_objectives: 
+who_is_this_for: Developers who want to learn how the CMSIS-DSP package can be integrated into their applications
+
+learning_objectives:
     - Understand how to use the CMSIS-DSP Python package
     - Understand how the Python implementation maps to the C implementation
     - Develop a complex application using CMSIS-DSP
 
 prerequisites:
-    - Some familiarity with DSP programming
-    - Some familiarity with Python programming
+    - Some familiarity with Python and DSP programming
     - Knowledge of C
     - Some familiarity with CMSIS-DSP
     - Python installed on your system
@@ -26,19 +29,15 @@ armips:
     - Cortex-M
     - Cortex-A
 tools_software_languages:
-    - VS Code
     - CMSIS-DSP
     - Python
     - C
     - Jupyter Notebook
+    - numpy
 operatingsystems:
     - Linux
     - Windows
     - macOS
-
-
-
-
 
 further_reading:
     - resource:
@@ -61,7 +60,7 @@ further_reading:
         title: CMSIS-Stream
         link: https://github.com/ARM-software/CMSIS-Stream
         type: Open-source project
-   
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

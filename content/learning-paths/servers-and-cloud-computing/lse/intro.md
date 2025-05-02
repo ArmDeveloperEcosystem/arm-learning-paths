@@ -39,7 +39,7 @@ Because atomic accesses use multiple instructions each processor is required to 
 
 If the number of processors is small, this works fine. Increasing the number of processor combined with increased caching, make it hard to maintain fairness as processors closer to each other have a better chance of completing atomic sequences.
 
-With LSE, atomic instructions provide a non-interruptible read-modify-write sequence in a single instruction. The atomic instructions can perform simple arithmetic or logical operations on the specified memory location, and return the updated value to the processor. Programmers benefit from the atomic instructions because it’s easier to specify a single instruction compared to a sequence of instructions with a loop around them if the sequence fails. 
+With LSE, atomic instructions provide a non-interruptible read-modify-write sequence in a single instruction. The atomic instructions can perform simple arithmetic or logical operations on the specified memory location, and return the updated value to the processor. Programmers benefit from the atomic instructions because it's easier to specify a single instruction compared to a sequence of instructions with a loop around them if the sequence fails. 
 
 Atomic instructions work better in situations such as networking software where many counters are atomically updated from many processors. The atomic instructions result in faster performance and less variability. 
 
@@ -174,7 +174,7 @@ With GCC 10.1 and higher, out-of-line atomics are enabled by default. Refer to [
 
 Refer to the [AWS Graviton Technical Guide](https://github.com/aws/aws-graviton-getting-started/blob/main/c-c++.md) on GitHub AWS for recommendations on GCC flags for Graviton processors. 
 
-It’s generally a good idea to use the latest compiler available on the operating system being used.
+It's generally a good idea to use the latest compiler available on the operating system being used.
 
 **Is LSE built into the C library on my operating system?**
 

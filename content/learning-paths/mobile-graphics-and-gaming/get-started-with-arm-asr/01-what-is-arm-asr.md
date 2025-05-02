@@ -29,7 +29,7 @@ Arm ASR outperforms spatial upscalers when reconstructing fine details, such as:
 You have control over a range of different settings, including:
 
 - **The upscaling ratio**. For example, a value of 50.0 indicates that the plugin upscales frames by a factor of 2.
-- **Auto-exposure**. Use Arm ASR’s own auto-exposure or use your game engine’s auto-exposure value.
+- **Auto-exposure**. Use Arm ASR's own auto-exposure or use your game engine's auto-exposure value.
 - **Sharpening**. Apply Robust Contrast Adaptive Sharpening (RCAS) filters to enhance output image clarity.
 - **Shader quality presets**. Select from: 1 - Quality, 2 - Balanced, or 3 - Performance presets.
 

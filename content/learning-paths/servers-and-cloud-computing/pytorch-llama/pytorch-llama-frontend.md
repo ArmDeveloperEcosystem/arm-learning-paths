@@ -22,6 +22,11 @@ Install the additional packages:
 pip3 install openai==1.45.0
 ```
 
+Roll back httpx to a version before 0.28 to prevent a "proxies" error with Streamlit
+```sh
+pip3 install httpx==0.27.2
+```
+
 ### Running LLM Inference Backend Server
 Start the LLM Inference Backend Server in a new terminal window:
 

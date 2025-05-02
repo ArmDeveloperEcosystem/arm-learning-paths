@@ -1,5 +1,5 @@
 ---
-title: Optimizing graphics using Frame Advisor’s render graphs
+title: Optimizing graphics using Frame Advisor's render graphs
 
 minutes_to_complete: 30
 

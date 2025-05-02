@@ -10,7 +10,7 @@ In this section, you will explore the key differences among commonly-used produc
 
 ### Serial Garbage Collector
 
-The Serial Garbage Collector (Serial GC) is a simple, single-threaded garbage collector, primarily designed for small applications or single-processor environments. As described earlier, Java’s heap is divided into two main generations, the new generation, to manage short-lived objects, and the old generation, to manage long-lived objects. 
+The Serial Garbage Collector (Serial GC) is a simple, single-threaded garbage collector, primarily designed for small applications or single-processor environments. As described earlier, Java's heap is divided into two main generations, the new generation, to manage short-lived objects, and the old generation, to manage long-lived objects. 
 
 In the Serial Garbage Collector, both the young and old generations are collected using a single-threaded, “stop-the-world” approach, where all application threads pause during garbage collection. This design can lead to noticeable application pauses, particularly as the heap size grows, making the Serial GC unsuitable for larger, latency-sensitive applications.
 
@@ -20,7 +20,7 @@ In production deployments, the Serial GC is rarely used in high-throughput or mu
 
 The Parallel Garbage Collector, also called the Throughput Garbage Collector, uses the same generational heap structure as the Serial Garbage Collector, dividing memory into young and old generations to manage short-lived and long-lived objects. Unlike the Serial GC however, the Parallel GC uses multiple threads for Garbage Collection, which improves efficiency on larger heaps. When the young generation fills up, a young collection pause occurs, briefly pausing application threads to clear the young space. As shown in Figure 1, data in the young generation space is mostly freed, with surviving objects moved to the old generation.
 
-Once the old generation is full, a full GC pause blocks all application threads for a longer duration to clean both generations. These full GC pauses can degrade performance in latency-sensitive applications, such as database management systems, where interruptions affect responsiveness. The Parallel GC’s multi-threaded approach helps reduce pause times, making it better-suited to applications that prioritize throughput and can handle occasional longer pauses for full collection.
+Once the old generation is full, a full GC pause blocks all application threads for a longer duration to clean both generations. These full GC pauses can degrade performance in latency-sensitive applications, such as database management systems, where interruptions affect responsiveness. The Parallel GC's multi-threaded approach helps reduce pause times, making it better-suited to applications that prioritize throughput and can handle occasional longer pauses for full collection.
 
 ![throughput_minor_gc  alt-text#center]( ./throughput_gc.jpg "Figure 1: Throughput Garbage Collector")
 

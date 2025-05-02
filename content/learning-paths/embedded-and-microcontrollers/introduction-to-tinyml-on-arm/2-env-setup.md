@@ -12,7 +12,7 @@ In this section, you will prepare a development environment to compile a machine
 
 ## Introduction to ExecuTorch
 
-ExecuTorch is a lightweight runtime designed for efficient execution of PyTorch models on resource-constrained devices. It enables machine learning inference on embedded and edge platforms, making it well-suited for Arm-based hardware. Since Arm processors are widely used in mobile, IoT, and embedded applications, ExecuTorch leverages Arm’s efficient CPU architectures to deliver optimized performance while maintaining low power consumption. By integrating with Arm’s compute libraries, it ensures smooth execution of AI workloads on Arm-powered devices, from Cortex-M microcontrollers to Cortex-A application processors.
+ExecuTorch is a lightweight runtime designed for efficient execution of PyTorch models on resource-constrained devices. It enables machine learning inference on embedded and edge platforms, making it well-suited for Arm-based hardware. Since Arm processors are widely used in mobile, IoT, and embedded applications, ExecuTorch leverages Arm's efficient CPU architectures to deliver optimized performance while maintaining low power consumption. By integrating with Arm's compute libraries, it ensures smooth execution of AI workloads on Arm-powered devices, from Cortex-M microcontrollers to Cortex-A application processors.
 
 ## Install dependencies
 

@@ -1,5 +1,5 @@
 ---
-title: Quantize and Run a Large Language Model using vLLM on Arm Servers
+title: Quantize and Run an LLM using vLLM on Arm Servers
 
 draft: true
 cascade:
@@ -7,19 +7,19 @@ cascade:
 
 minutes_to_complete: 45
 
-who_is_this_for: This learning path is intended for software developers and AI engineers interested in optimizing and deploying large language models using vLLM on Arm-based servers. It’s ideal for those looking to explore CPU-based inference and model quantization techniques.
+who_is_this_for: This learning path is for software developers and AI engineers interested in optimizing and deploying large language models using vLLM on Arm-based servers. It's ideal for developers exploring CPU-based inference workflows and INT8 quantization for LLMs.
 
 learning_objectives:
-    - Build and configure OpenBLAS to optimize LLM performance.
-    - Set up vLLM and PyTorch using builds optimized for Arm CPUs.
-    - Download and quantize a large language model using INT8 techniques.
+    - Build and optimize OpenBLAS for faster LLM inference on Arm CPUs.
+    - Set up Arm-optimized builds of vLLM and PyTorch.
+    - Download and quantize a transformer-based LLM using INT8 techniques.
     - Launch a vLLM server to serve the quantized model.
     - Run single-prompt and batch inference using the vLLM OpenAI-compatible API.
 
     
 prerequisites:
-    - An Arm-based server or cloud instance running with at least 32 CPU cores, 64 GB RAM and 32 GB of available disk space.
-    - Familiarity with Python and machine learning concepts.
+    - An Arm-based server or cloud instance running with at least 32 CPU cores, 64 GB RAM, and 32 GB of available disk space.
+    - Familiarity with Python and basic understanding of transformer models and quantization techniques.
     - An active Hugging Face account with access to the target model.
 
 author: 
@@ -38,6 +38,9 @@ tools_software_languages:
     - LLM
     - GenAI
     - Python
+    - PyTorch
+    - OpenBLAS
+    
 
 
 further_reading:
@@ -52,6 +55,10 @@ further_reading:
     - resource:
         title: Hugging Face Model Hub
         link: https://huggingface.co/models
+        type: website
+    - resource:
+        title: Build and Run vLLM on Arm Servers
+        link: /learning-paths/servers-and-cloud-computing/vllm/
         type: website
 
 

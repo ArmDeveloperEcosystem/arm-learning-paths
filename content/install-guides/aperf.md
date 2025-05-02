@@ -19,7 +19,7 @@ APerf was created by AWS to help with Linux performance analysis.
 
 In addition to the CLI, APerf includes an HTML view to visualize the collected data.
 
-## Before you begin
+## What should I do before I begin installing APerf?
 
 APerf works on Linux, and is available as a single binary.
 
@@ -41,7 +41,7 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## Download and install APerf
+## How do I download and install APerf?
 
 The easiest way to install APerf is to download a release from GitHub, extract it, and setup your `PATH` environment variable or copy the executable to a directory already in your search path.
 
@@ -84,9 +84,9 @@ The output should print the version:
 aperf 0.1.0 (4b910d2)
 ```
 
-## Verify APerf is working
+## How do I verify APerf is working?
 
-### Create and view a report
+### How do I create and view a report?
 
 To confirm APerf is working, start it for 10 seconds and take a sample every 1 second.
 
@@ -120,7 +120,7 @@ You can browse the data and see what has been collected.
 The Kernel Config and Sysctl Data tabs are blank unless you click No.
 {{% /notice %}}
 
-### Create and view a report containing 2 runs
+### How do I create and view a report containing 2 runs?
 
 To demonstrate comparing 2 runs, create a second run with `aperf record`:
 
@@ -144,7 +144,7 @@ A screenshot is shown below:
 
 ![APerf #center](/install-guides/_images/aperf.png)
 
-### Use an HTTP server
+### How do I use an HTTP server to view reports?
 
 If you are doing performance analysis on a remote system or cloud instance without a remote desktop, you can view the APerf reports from your local browser by running a simple web server on the remote machine.
 

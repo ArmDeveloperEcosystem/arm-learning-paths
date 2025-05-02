@@ -34,14 +34,11 @@ WindowsPerf is a Linux Perf-inspired Windows on Arm performance profiling tool. 
 
 WindowsPerf consists of a kernel-mode driver and a user-space command-line tool. You can seamlessly integrate the WindowsPerf command line tool with both the [WindowsPerf Visual Studio Extension](#vs2022) and the [WindowsPerf VS Code Extension](#vscode). These extensions, which you can download from the Visual Studio Marketplace, enhance the functionality of WindowsPerf by providing a user-friendly interface, and additional features for performance analysis and debugging. This integration allows developers to efficiently analyze and optimize their applications directly within their preferred development environment.
 
-
 {{% notice  Note%}}
 You cannot use WindowsPerf on virtual machines, such as cloud instances.
 {{% /notice %}}
 
-## Using winget 
-
-### Install
+## How do I install WindowsPerf using winget?
 
 You can now install WindowsPerf directly from [winget](https://learn.microsoft.com/en-us/windows/package-manager/). Open an `Administrator` terminal on PowerShell and type
 
@@ -64,15 +61,18 @@ Successfully installed
 
 ![Winget installation video](/install-guides/_images/wperf-winget-installation.gif)
 
-It will install the latest available WindowsPerf along with the [WPA plugins](/learning-paths/laptops-and-desktops/windowsperf_wpa_plugin/). To check that the installation was done correctly open a new terminal tab or window and follow the instructions under the [verify installation section](/install-guides/wperf/#verify-install)
+It will install the latest available WindowsPerf along with the [WPA plugins](/learning-paths/laptops-and-desktops/windowsperf_wpa_plugin/). To check that the installation was done correctly open a new terminal tab or window and follow the instructions under the [verify installation section](/install-guides/wperf/#verify-install).
 
-### Uninstall 
+### How do I uninstall WindowsPerf using winget?
+
 If you need to uninstall WindowsPerf, open an `Administrator` terminal on PowerShell and run:
+
 ```console
 winget uninstall WindowsPerf
 ```
 
 The output from a successful uninstallation will look like:
+
 ```output
 Found WindowsPerf [Arm.WindowsPerf]
 Starting package uninstall...
@@ -84,7 +84,7 @@ WinPerf is an open-source project. If you would like to develop WindowsPerf your
 https://learn.microsoft.com/en-us/windows-hardware/drivers/wdk-release-notes
 {{% /notice %}}
 
-## Verify install 
+## How do I verify that WindowsPerf is installed correctly? {#verify-install}
 
 You can check everything is working by running the `wperf` executable.
 
@@ -108,8 +108,7 @@ You see output similar to:
 
 ```
 
-
-## Install WindowsPerf Virtual Studio Extension (optional) {#vs2022}
+## How do I install the WindowsPerf Virtual Studio Extension? {#vs2022}
 
 WindowsPerf GUI (Graphical User Interface) is a Visual Studio 2022 extension designed to bring a seamless UI experience to WindowsPerf, the command-line performance profiling tool for Windows on Arm. It is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.WindowsPerfGUI).
 
@@ -121,7 +120,7 @@ In order to set the path to the `wperf.exe` executable, go to **Tools** -> **Opt
 
 Also, visit WindowsPerf GUI project website on [GitLab](https://gitlab.com/Linaro/WindowsPerf/vs-extension) for more details and latest updates.
 
-## Install WindowsPerf VS Code Extension (optional) {#vscode}
+## How do I install the WindowsPerf VS Code Extension? {#vscode}
 
 In addition to the command-line tools, `WindowsPerf` is available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.windowsperf).
 
@@ -137,7 +136,7 @@ If using a non-Windows on Arm host, you can import and analyze `WindowsPerf` JSO
 You do not need to install `wperf` on non-Windows on Arm devices.
 {{% /notice %}}
 
-## Read related resources
+## What related resources are available for WindowsPerf?
 
 ### WindowsPerf
 
