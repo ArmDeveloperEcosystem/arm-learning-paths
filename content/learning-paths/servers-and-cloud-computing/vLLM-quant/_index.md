@@ -7,7 +7,7 @@ cascade:
 
 minutes_to_complete: 45
 
-who_is_this_for: This learning path is for software developers and AI engineers interested in optimizing and deploying large language models using vLLM on Arm-based servers. It’s ideal for developers exploring CPU-based inference workflows and INT8 quantization for LLMs.
+who_is_this_for: This learning path is for software developers and AI engineers interested in optimizing and deploying large language models using vLLM on Arm-based servers. It's ideal for developers exploring CPU-based inference workflows and INT8 quantization for LLMs.
 
 learning_objectives:
     - Build and optimize OpenBLAS for faster LLM inference on Arm CPUs.

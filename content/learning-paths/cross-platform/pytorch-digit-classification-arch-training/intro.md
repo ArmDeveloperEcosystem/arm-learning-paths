@@ -21,11 +21,11 @@ Prior to PyTorch, many frameworks used static computational graphs that require 
 * Easier debugging.
 * More intuitive code.
 
-PyTorch also seamlessly integrates with Python, which creates a native coding experience. Its deep integration with GPU acceleration also makes it a powerful tool for both research and production environments. This combination of flexibility, usability, and performance has ensured PyTorch’s rapid adoption, particularly in academic research, where experimentation and iteration are crucial activities.
+PyTorch also seamlessly integrates with Python, which creates a native coding experience. Its deep integration with GPU acceleration also makes it a powerful tool for both research and production environments. This combination of flexibility, usability, and performance has ensured PyTorch's rapid adoption, particularly in academic research, where experimentation and iteration are crucial activities.
 
 A typical process for creating a feedforward neural network in PyTorch involves defining a sequential stack of fully-connected layers, which are also known as linear layers. Each layer transforms the input by applying a set of weights and biases, followed by an activation function like ReLU. PyTorch supports this process using the torch.nn module, where layers are easily defined and composed.
 
-To create a model, users subclass the torch.nn.Module class, defining the network architecture in the __init__ method, and implement the forward pass in the forward method. PyTorch’s intuitive API and support for GPU acceleration make it ideal for building efficient feedforward networks, particularly in tasks such as image classification and digit recognition.
+To create a model, users subclass the torch.nn.Module class, defining the network architecture in the __init__ method, and implement the forward pass in the forward method. PyTorch's intuitive API and support for GPU acceleration make it ideal for building efficient feedforward networks, particularly in tasks such as image classification and digit recognition.
 
 In this Learning Path, you will explore how to use PyTorch to create and train a model for digit recognition.
 

@@ -9,7 +9,7 @@ layout: learningpathall
 
 Speech-to-text applications often process large amounts of audio data in real time, requiring efficient computation to balance accuracy and speed. Low-level implementations of neural network kernels can enhance performance by reducing processing overhead. 
 
-When tailored for specific hardware architectures, such as Arm CPUs, these kernels accelerate key tasks such as feature extraction and neural network inference. Optimized kernels ensure that speech models like OpenAI’s Whisper run efficiently, making high-quality transcription more accessible across various server applications.
+When tailored for specific hardware architectures, such as Arm CPUs, these kernels accelerate key tasks such as feature extraction and neural network inference. Optimized kernels ensure that speech models like OpenAI's Whisper run efficiently, making high-quality transcription more accessible across various server applications.
 
 Other factors contribute to more efficient memory usage. For example, allocating additional memory and threads for specific tasks can boost performance. By leveraging these hardware-aware optimizations, applications can achieve lower latency, reduced power consumption, and smoother real-time transcription.
 

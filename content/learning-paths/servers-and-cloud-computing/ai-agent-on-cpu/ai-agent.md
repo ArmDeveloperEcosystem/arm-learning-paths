@@ -10,7 +10,7 @@ layout: learningpathall
 
 An AI agent is an integrated system that extends beyond basic text generation by augmenting Large Language Models (LLMs) with tools and domain knowledge. 
 
-Here’s a closer look at the underlying elements:
+Here's a closer look at the underlying elements:
 
 - **System**: Each AI agent functions as an interconnected ecosystem of components. Below is a list of key factors and components that affect system performance:   
   - **Environment**: The domain in which the AI agent operates. For instance, in a system that books travel itineraries, this might include airline reservation systems and hotel booking tools.  
@@ -19,7 +19,7 @@ Here’s a closer look at the underlying elements:
 
 - **Large Language Models**: While agents have long existed, LLMs enhance these systems with powerful language comprehension and data-processing capabilities.  
 - **Action Execution**: Rather than just produce text, LLMs within an agent context interpret user instructions and interact with tools to achieve specific objectives.  
-- **Tools**: The agent’s available toolkit depends on the software environment and developer-defined boundaries. In the travel agent example in this Learning Path, these tools might be limited to flight and hotel reservation APIs.  
+- **Tools**: The agent's available toolkit depends on the software environment and developer-defined boundaries. In the travel agent example in this Learning Path, these tools might be limited to flight and hotel reservation APIs.  
 - **Knowledge**: Beyond immediate data sources, the agent can fetch additional details - perhaps from databases or web services - for enhanced decision-making.
 
 

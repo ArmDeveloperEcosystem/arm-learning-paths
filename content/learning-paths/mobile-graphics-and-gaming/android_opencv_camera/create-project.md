@@ -131,4 +131,4 @@ You can now launch the application in the simulator. To do so, use the top menu,
 
 ![img7](figures/07.png)
 
-You have successfully added OpenCV to the Android application. In the next step, you will extend the application to get images from the device’s camera and process them in real-time.
+You have successfully added OpenCV to the Android application. In the next step, you will extend the application to get images from the device's camera and process them in real-time.

@@ -147,7 +147,7 @@ The output shows the model achieved around 95% accuracy.
 
 # Save the model
 
-Once the model is trained, you can save it. There are various approaches for this. In PyTorch, you can save both the model’s structure and its weights to the same file using the `torch.save()` function. Alternatively, you can save only the weights of the model, not the model architecture itself. This requires you to have the model’s architecture defined separately when loading. To save the model weights, you can use the following command: 
+Once the model is trained, you can save it. There are various approaches for this. In PyTorch, you can save both the model's structure and its weights to the same file using the `torch.save()` function. Alternatively, you can save only the weights of the model, not the model architecture itself. This requires you to have the model's architecture defined separately when loading. To save the model weights, you can use the following command: 
 
 ```Python
 torch.save(model.state_dict(), "model_weights.pth"). 

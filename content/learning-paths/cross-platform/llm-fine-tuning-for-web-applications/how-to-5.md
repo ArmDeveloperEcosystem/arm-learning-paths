@@ -82,7 +82,7 @@ This section performs fine-tuning using the Supervised Fine-Tuning (SFT) trainer
 
 4. Modify the training approach so that the model learns to focus only on responses rather than both instructions and responses. 
 
-    The code loads the `train_on_responses_only` function from Unsloth’s chat templates.
+    The code loads the `train_on_responses_only` function from Unsloth's chat templates.
 
     ```python
     from unsloth.chat_templates import train_on_responses_only

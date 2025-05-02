@@ -25,7 +25,7 @@ To process and analyze the telemetry data you are streaming to Azure IoT Hub, yo
 ![img9 alt-text#center](figures/09.png)
 4. Provide the necessary information:
 * Subscription: Choose the Azure subscription you want to use for this job.
-* Resource group: Select the resource group you previously created (e.g., your IoT project’s resource group).
+* Resource group: Select the resource group you previously created (e.g., your IoT project's resource group).
 * Name: Provide a meaningful, unique name for your Stream Analytics job (e.g., IoTStreamAnalyticsJob).
 * Region: Choose the same Azure region as your IoT Hub for optimal performance and minimal latency.
 * Hosting environment: Select Cloud for Azure-managed infrastructure.

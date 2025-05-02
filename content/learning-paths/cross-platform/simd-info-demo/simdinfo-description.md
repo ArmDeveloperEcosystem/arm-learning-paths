@@ -60,7 +60,7 @@ With its robust search engine, SIMD.info allows you to either search for a speci
 You can also filter results based on the specific engine you're working with, such as NEON, SSE4.2, AVX, AVX512, or VSX. This functionality streamlines the process of finding the right commands tailored to your needs.
 
 #### Comparison tools
-This feature lets you directly compare SIMD instructions from different, or the same, platforms side by side, offering a clear view of the similarities and differences. It’s a helpful tool for porting code across architectures, as it ensures accuracy and efficiency.
+This feature lets you directly compare SIMD instructions from different, or the same, platforms side by side, offering a clear view of the similarities and differences. It's a helpful tool for porting code across architectures, as it ensures accuracy and efficiency.
 
 #### Discussion forum 
 The integrated discussion forum, powered by **[Disqus](https://disqus.com/)**, allows users to ask questions, share insights, and troubleshoot problems together. This community-driven space ensures that you’re never stuck on a complex issue without support. It fosters collaboration and knowledge-sharing among SIMD developers. Imagine something like **[StackOverflow](https://stackoverflow.com/)** but specific to SIMD intrinsics.

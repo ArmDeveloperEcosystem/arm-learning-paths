@@ -262,6 +262,6 @@ Different ML workloads and models have a varying performance across the KleidiAI
 ## KleidiAI enhances AI workload performance
 You now have an understanding of how KleidiAI accelerates matrix multiplication, and ultimately how GenAI models can run efficiently on Arm CPUs from servers to smartphones.
 
-Integrating KleidiAI to software frameworks is leading to significant performance boosts in real world generative AI workloads. For instance, Meta’s Llama 3 and Microsoft’s Phi-3 LLMs experience a 190 percent faster time-to-first token on the new [Arm Cortex-X925 CPU](https://newsroom.arm.com/blog/arm-kleidi). Additionally, KleidiAI improved the time-to-first token for Gemma 2B on the Google Pixel 8 Pro by 25 percent.
+Integrating KleidiAI to software frameworks is leading to significant performance boosts in real world generative AI workloads. For instance, Meta's Llama 3 and Microsoft's Phi-3 LLMs experience a 190 percent faster time-to-first token on the new [Arm Cortex-X925 CPU](https://newsroom.arm.com/blog/arm-kleidi). Additionally, KleidiAI improved the time-to-first token for Gemma 2B on the Google Pixel 8 Pro by 25 percent.
 
 

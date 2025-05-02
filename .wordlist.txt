@@ -1723,7 +1723,7 @@ fargate
 hBHf
 microservices
 ySm
-Fargate’s
+Fargate's
 LearningPath
 Przemyslaw
 Wirkus
@@ -1782,7 +1782,6 @@ EastUS
 Elo
 FLINK
 FPU
-Fargate’s
 FixedUpdate
 Flink
 Gameplay
@@ -2927,7 +2926,6 @@ MatOfRect
 Multibox
 OpenCV's
 OpenCVLoader
-OpenCV’s
 RGBA
 UC
 YOLO
@@ -3887,7 +3885,7 @@ OCaml
 Ollama
 Ollama's
 Prefill
-Unsloth’s
+Unsloth's
 YAMLs
 Yiyang
 bartowski
@@ -3937,7 +3935,6 @@ SDV
 SDVs
 SOAFEE
 SSO
-Unsloth’s
 Veraison's
 amazonq
 autoware
@@ -4079,3 +4076,8 @@ scikit
 shiftVal
 urllib
 wdk
+DB's
+FFT's
+IoT's
+NumPy's
+SendGrid's

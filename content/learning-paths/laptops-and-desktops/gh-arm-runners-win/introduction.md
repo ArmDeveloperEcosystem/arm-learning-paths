@@ -61,7 +61,7 @@ Select the size of the larger runner you need and click **Save**.
 
 The **Capacity** section includes the maximum concurrency, which is the number of jobs to run at the same time.
 
-You can also set the runner group for this runner. The runner group controls this runner’s settings. You may need to return to the group if configuration changes are required.
+You can also set the runner group for this runner. The runner group controls this runner's settings. You may need to return to the group if configuration changes are required.
 
 ![capacity #center](_images/capacity.png)
 

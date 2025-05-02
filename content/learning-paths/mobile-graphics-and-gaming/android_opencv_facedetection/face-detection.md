@@ -67,7 +67,7 @@ private fun loadHaarCascade() {
 }
 ```
 
-This above code prepares the faceCascade variable to hold the Haar cascade classifier. The loadHaarCascade function loads the Haar cascade XML file from the app’s assets. It initializes the CascadeClassifier with the file and checks if it was loaded successfully, logging appropriate messages for success or failure. If an exception occurs, it is caught and logged.
+This above code prepares the faceCascade variable to hold the Haar cascade classifier. The loadHaarCascade function loads the Haar cascade XML file from the app's assets. It initializes the CascadeClassifier with the file and checks if it was loaded successfully, logging appropriate messages for success or failure. If an exception occurs, it is caught and logged.
 
 In Android, files stored in the assets directory cannot be directly accessed as file paths. Instead, they need to be read as input streams. To get input streams, you can use the getPath method. Its definition (which should be placed in the MainActivity) is shown below:
 
@@ -89,9 +89,9 @@ private fun getPath(file: String, context: Context): String {
 }
 ```
 
-This method takes two parameters: the file name (file) and the context (context). The @Throws(IOException::class) annotation indicates that this method may throw an IOException. The method retrieves the asset manager from the context, which is used to access files in the assets directory. It opens the specified asset file (haarcascade_frontalface_default.xml) as an input stream, creates a new file in the app’s internal storage directory (filesDir) with the same name as the asset file, and opens a file output stream to write to this new file. The method then reads data from the input stream and writes it to the output stream in a loop until the entire file is copied. Finally, it closes both streams and returns the absolute path of the newly created file in the internal storage.
+This method takes two parameters: the file name (file) and the context (context). The @Throws(IOException::class) annotation indicates that this method may throw an IOException. The method retrieves the asset manager from the context, which is used to access files in the assets directory. It opens the specified asset file (haarcascade_frontalface_default.xml) as an input stream, creates a new file in the app's internal storage directory (filesDir) with the same name as the asset file, and opens a file output stream to write to this new file. The method then reads data from the input stream and writes it to the output stream in a loop until the entire file is copied. Finally, it closes both streams and returns the absolute path of the newly created file in the internal storage.
 
-The getPath method is necessary to convert an asset file into a regular file path that can be used by the OpenCV CascadeClassifier. It achieves this by copying the asset file to the app’s internal storage and returning the path to this new file. This allows the classifier to load the cascade file using a standard file path, which is a requirement for its operation.
+The getPath method is necessary to convert an asset file into a regular file path that can be used by the OpenCV CascadeClassifier. It achieves this by copying the asset file to the app's internal storage and returning the path to this new file. This allows the classifier to load the cascade file using a standard file path, which is a requirement for its operation.
 
 Finally, we invoke the loadHaarCascade method within the onCreate event handler:
 
@@ -197,6 +197,6 @@ After running the application, click the Start button, and you will see a green 
 ![img5](figures/06.jpg)
 
 ## Summary
-In this Learning Path, you learned how to use the Haar cascade classifier to detect faces in camera images. You added the pre-trained Haar cascade XML file for face detection to the project’s assets directory. You implemented the loadHaarCascade method to load the Haar cascade file from the assets and initialize the CascadeClassifier. You also created the getPath method to convert the Haar cascade asset file into a file path that can be used by OpenCV.
+In this Learning Path, you learned how to use the Haar cascade classifier to detect faces in camera images. You added the pre-trained Haar cascade XML file for face detection to the project's assets directory. You implemented the loadHaarCascade method to load the Haar cascade file from the assets and initialize the CascadeClassifier. You also created the getPath method to convert the Haar cascade asset file into a file path that can be used by OpenCV.
 
 You modified the onCameraFrame method to process each frame captured by the camera. Specifically, you converted the captured color image to grayscale and applied histogram equalization to enhance the contrast of the grayscale image. After this preprocessing, you used the CascadeClassifier to detect faces in the processed image. Finally, you drew a rectangle around the first detected face on the color image.
