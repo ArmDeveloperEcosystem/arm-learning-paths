@@ -39,16 +39,17 @@ test_images:
 ---
 [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) is a performance analysis tool suite for Android and Linux application developers.
 
-It provides performance analysis tools that analyze how your game or app performs on production devices to identify issues that degrade performance, overheat devices, or drain battery life.
+It helps analyze how your game or app performs on production devices, so you can identify issues that affect performance, cause overheating, or drain battery life.
 
+The following table lists the tools and describes their functions:
 
 | Component | Functionality |
 |----------|-------------|
-| [Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) | Captures a performance profile that shows all the performance counter activity from the device. |
+| [Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) | Captures a performance profile with hardware counter activity from the device. |
 | [Performance Advisor](https://developer.arm.com/Tools%20and%20Software/Performance%20Advisor) | Generates an easy-to-read performance summary from an annotated Streamline capture, and provides actionable optimization suggestions. |
-| [Frame Advisor](https://developer.arm.com/Tools%20and%20Software/Frame%20Advisor) | Captures API calls and rendering details from a specific frame and provides comprehensive geometry metrics to discover what might be slowing down the application. |
+| [Frame Advisor](https://developer.arm.com/Tools%20and%20Software/Frame%20Advisor) | Captures API calls and rendering details from a specific frame and provides detailed geometry metrics to help identify rendering bottlenecks. |
 | [Mali Offline Compiler](https://developer.arm.com/Tools%20and%20Software/Mali%20Offline%20Compiler) | Analyzes how efficiently your shader programs perform on a range of Mali GPUs. |
-| [RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs) | An industry-standard tool for debugging Vulkan graphics applications, including early support for Arm GPU extensions and Android features. |
+| [RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs) | Debugs Vulkan graphics applications with support for Arm GPU extensions and Android features. |
 
 
 All features of Arm Performance Studio are available free of charge without a license.
@@ -103,7 +104,7 @@ To run Mali Offline Compiler, go to the `<installation_directory>/mali_offline_c
 malioc <options> my_shader.frag
 ```
 
-On some versions of macOS, you might see a message that Mali Offline Compiler is not recognized as an application from an identified developer. To enable Mali Offline Compiler, cancel this message, then open **System Preferences > Security and Privacy** and select **Allow Anyway** for the `malioc` application.
+On some versions of macOS, you might see a message that Mali Offline Compiler is not recognized as an application from an identified developer. To enable Mali Offline Compiler, cancel this message, then open **System Preferences > Security & Privacy** and select **Allow Anyway** for the `malioc` application.
 
 ### How do I install Arm Performance Studio on Linux?
 
