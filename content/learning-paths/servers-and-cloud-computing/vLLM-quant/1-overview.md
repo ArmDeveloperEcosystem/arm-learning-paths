@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## Understanding vLLM and INT8 Quantization Workflow
+## vLLM and INT8 Quantization Workflow
 
 [vLLM](https://github.com/vllm-project/vllm) is an open-source, high-throughput inference engine designed to efficiently serve large language models (LLMs). It offers an OpenAI-compatible API, supports dynamic batching, and is optimized for low-latency performance — making it suitable for both real-time and batch inference workloads.
 

@@ -7,12 +7,12 @@ cascade:
 
 minutes_to_complete: 45
 
-who_is_this_for: This learning path is for software developers and AI engineers interested in optimizing and deploying large language models using vLLM on Arm-based servers. It’s ideal for those looking to explore CPU-based inference and model quantization techniques.
+who_is_this_for: This learning path is for software developers and AI engineers interested in optimizing and deploying large language models using vLLM on Arm-based servers. It’s ideal for developers exploring CPU-based inference workflows and INT8 quantization for LLMs.
 
 learning_objectives:
     - Build and optimize OpenBLAS for faster LLM inference on Arm CPUs.
-    - Set up vLLM and PyTorch using Arm-optimized builds.
-    - Download and quantize a large language model using INT8 techniques.
+    - Set up Arm-optimized builds of vLLM and PyTorch.
+    - Download and quantize a transformer-based LLM using INT8 techniques.
     - Launch a vLLM server to serve the quantized model.
     - Run single-prompt and batch inference using the vLLM OpenAI-compatible API.
 
