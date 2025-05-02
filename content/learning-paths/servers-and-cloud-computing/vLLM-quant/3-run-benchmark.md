@@ -24,7 +24,7 @@ curl http://localhost:8000/v1/chat/completions \
 ```
 If the setup is working correctly, you'll receive a streaming response from the vLLM server.
 
-The server logs will show that the request was processed successfully. You'll also see prompt and generation throughput metrics, which provide a lightweight benchmark of the model’s performance in your environment.
+The server logs will show that the request was processed successfully. You'll also see prompt and generation throughput metrics, which provide a lightweight benchmark of the model's performance in your environment.
 
 The following log output was generated from a single-prompt test run using the steps in this learning path:
 

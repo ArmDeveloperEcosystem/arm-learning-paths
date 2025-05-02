@@ -15,7 +15,7 @@ Finally, you will configure your Python application to connect securely to Azure
 ## Azure IoT device SDK
 Begin by installing the Azure IoT Device SDK for Python, which provides essential tools and libraries needed to develop IoT applications that communicate seamlessly with Azure IoT Hub. This SDK enables secure device connectivity, message transmission, and management functionalities directly from Python code.
 
-You can install the SDK easily using Python’s package manager `pip`. Open a terminal or command prompt and run the following command:
+You can install the SDK easily using Python's package manager `pip`. Open a terminal or command prompt and run the following command:
 ```
 pip install azure-iot-device
 ```

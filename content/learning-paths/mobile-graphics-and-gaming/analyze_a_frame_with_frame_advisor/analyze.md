@@ -5,7 +5,7 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-When the analysis completes, you will see Frame Advisor’s `Analysis` screen.
+When the analysis completes, you will see Frame Advisor's `Analysis` screen.
 
 ![Frame Advisor's Analysis screen alt-text#center](fa_analysis.png "Figure 1. Frame Advisor's Analysis screen")
 

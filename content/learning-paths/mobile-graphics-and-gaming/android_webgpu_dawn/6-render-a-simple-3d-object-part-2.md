@@ -143,7 +143,7 @@ desc.nextInChain = &toggles.chain;
 #endif // WEBGPU_BACKEND_DAWN
 ```
 
-Toggles are Dawn’s way of enabling/disabling features at the scale of the whole WebGPU instance. 
+Toggles are Dawn's way of enabling/disabling features at the scale of the whole WebGPU instance. 
 
 See the complete list in [Toggle.cpp](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn/native/Toggles.cpp#33).
 {{% /notice %}}

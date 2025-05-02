@@ -6,7 +6,7 @@ weight: 9
 layout: learningpathall
 ---
 
-Now that you’ve seen how to build and port a complete DSP function using the CMSIS-DSP Python package, it’s a good idea to expand your understanding by looking at more examples. The CMSIS-DSP project provides many resources to help you deepen your knowledge.
+Now that you’ve seen how to build and port a complete DSP function using the CMSIS-DSP Python package, it's a good idea to expand your understanding by looking at more examples. The CMSIS-DSP project provides many resources to help you deepen your knowledge.
 
 ## Study more examples
 
@@ -20,7 +20,7 @@ In addition to the examples themselves, the CMSIS-DSP Python package documentati
 
 ## Remaining issues
 
-While the CMSIS-DSP Python package makes prototyping and conversion to C relatively easy, there are additional challenges when moving toward real-world applications. Let’s discuss a few of the remaining issues you should be aware of.
+While the CMSIS-DSP Python package makes prototyping and conversion to C relatively easy, there are additional challenges when moving toward real-world applications. Let's discuss a few of the remaining issues you should be aware of.
 
 This learning path has showed how the package helps to design and translate a DSP function working on a block of samples from Python to C. But in a real application, you don’t receive blocks of samples, but rather a continuous stream. The stream of samples must be split into blocks before the DSP function can be used. The processed blocks may need to be recombined to reconstruct a signal.
 

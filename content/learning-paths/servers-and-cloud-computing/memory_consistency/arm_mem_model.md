@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ## The Memory Consistency Model
 
-Most developers don't need deep knowledge of a CPU's memory consistency model. Programming languages and runtimes abstract the CPU’s model by providing their own memory ordering rules, synchronization constructs, and libraries. As long as the developer uses these correctly, compilers and runtime engines ensure that the code executes correctly on any CPU - whether its memory ordering is strong or weak.
+Most developers don't need deep knowledge of a CPU's memory consistency model. Programming languages and runtimes abstract the CPU's model by providing their own memory ordering rules, synchronization constructs, and libraries. As long as the developer uses these correctly, compilers and runtime engines ensure that the code executes correctly on any CPU - whether its memory ordering is strong or weak.
 
 Developers might want to dig deeper into this topic for various reasons including:
 

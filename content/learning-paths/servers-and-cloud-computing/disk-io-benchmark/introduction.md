@@ -40,7 +40,7 @@ Queue depth is the number of simultaneous I/O operations that can be pending on 
 
 #### I/O Engine
 
-The I/O engine is the software component in Linux that manages I/O requests between applications and the storage subsystem. For example, the Linux kernel’s block I/O scheduler queues and dispatches requests to device drivers, using multiple queues to optimize disk access. In benchmarking tools like fio, you can select I/O engines such as sync (synchronous I/O), `libaio` (Linux native asynchronous I/O), or `io_uring` (which uses newer Linux kernel features for asynchronous I/O).
+The I/O engine is the software component in Linux that manages I/O requests between applications and the storage subsystem. For example, the Linux kernel's block I/O scheduler queues and dispatches requests to device drivers, using multiple queues to optimize disk access. In benchmarking tools like fio, you can select I/O engines such as sync (synchronous I/O), `libaio` (Linux native asynchronous I/O), or `io_uring` (which uses newer Linux kernel features for asynchronous I/O).
 
 #### I/O Wait
 

@@ -12,7 +12,7 @@ In this section, you will update the code to run with the CMSIS-DSP Python libra
 
 ### Slicing
 
-Since the Q15 representation is less accurate than float and can saturate, it’s a good idea to verify the recombination step. This helps ensure the Q15 windowing and recombination logic is sound before plugging it into the full Q15 noise suppression pipeline. With the following code, you'll check that recombining the windowed block samples works correctly.
+Since the Q15 representation is less accurate than float and can saturate, it's a good idea to verify the recombination step. This helps ensure the Q15 windowing and recombination logic is sound before plugging it into the full Q15 noise suppression pipeline. With the following code, you'll check that recombining the windowed block samples works correctly.
 
 The Hanning window is converted to Q15 format. Then, the slices are multiplied by the Q15 Hanning window and summed. The final result is converted to float.
 
@@ -146,7 +146,7 @@ else:
     resultR = dsp.arm_cfft_q15(self._cfftQ15,signalR,0,1)
 ```
 
-In the Neon version, the FFT’s bit-reversal flag is no longer available. It's not possible to disable bit reversal in the Neon version.
+In the Neon version, the FFT's bit-reversal flag is no longer available. It's not possible to disable bit reversal in the Neon version.
 
 A scaling factor must be applied to the IFFT output:
 
@@ -169,7 +169,7 @@ The noise estimation function performs both noise estimation and noise suppressi
 
 ### donothing
 
-`donothing` is a debug function. You can disable noise reduction and test only slicing, overlap-add, and the FFT/IFFT in between. This function applies scaling and performs the FFT/IFFT. It’s a good way to check for saturation issues (which are common with fixed-point arithmetic) and to ensure proper scaling compensation.
+`donothing` is a debug function. You can disable noise reduction and test only slicing, overlap-add, and the FFT/IFFT in between. This function applies scaling and performs the FFT/IFFT. It's a good way to check for saturation issues (which are common with fixed-point arithmetic) and to ensure proper scaling compensation.
 
 ## The final Q15 implementation
 

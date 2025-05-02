@@ -65,7 +65,7 @@ further_reading:
         link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2
         type: blog
     - resource:
-        title: SME Programmer’s Guide
+        title: SME Programmer's Guide
         link: https://developer.arm.com/documentation/109246/latest
         type: documentation
     - resource:

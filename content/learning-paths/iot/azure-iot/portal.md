@@ -97,7 +97,7 @@ document.getElementById("getTempBtn").addEventListener("click", async () => {
 });
 ```
 
-This JavaScript provides the interactive functionality for the webpage. It connects the portal to the Azure Function previously deployed. Here’s how it works step-by-step. First, replace the placeholder "<YOUR_FUNCTION_URL_GOES_HERE>" with the actual URL of your Azure Function that calculates and returns the average temperature. The code uses event listener for the button. Specifically, it attaches a click event listener to your button (getTempBtn). Each time the button is clicked, it triggers the async JavaScript function that retrieves data.
+This JavaScript provides the interactive functionality for the webpage. It connects the portal to the Azure Function previously deployed. Here's how it works step-by-step. First, replace the placeholder "<YOUR_FUNCTION_URL_GOES_HERE>" with the actual URL of your Azure Function that calculates and returns the average temperature. The code uses event listener for the button. Specifically, it attaches a click event listener to your button (getTempBtn). Each time the button is clicked, it triggers the async JavaScript function that retrieves data.
 
 When the button is clicked, the label (element with id "result") displays a temporary message—“Fetching temperature...”. It is used to inform the user that the request is in progress. The script sends a GET request to your Azure Function URL. If the request succeeds, it parses the JSON response. If the response contains valid temperature data (averageTemperature), it updates the label to show the current temperature. If no data is returned, it notifies the user accordingly.
 
