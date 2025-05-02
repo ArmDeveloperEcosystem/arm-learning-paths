@@ -1,10 +1,6 @@
 ---
 title: Deploy a LLM-based Vision Chatbot with PyTorch and Hugging Face Transformers on Google Axion processors
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 45
 
 who_is_this_for: This Learning Path is for software developers and ML engineers who are interested in deploying a production-ready vision chatbot for their application with optimized performance on the Arm Architecture.
