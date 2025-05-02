@@ -1,10 +1,6 @@
 ---
 title: Deploy DeepSeek-R1 models on Arm servers
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: This Learning Path is for developers who want to run DeepSeek-R1 on Arm-based servers. 
