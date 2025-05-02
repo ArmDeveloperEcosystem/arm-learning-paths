@@ -39,14 +39,14 @@ test_images:
 ---
 [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) is a performance analysis tool suite for Android and Linux application developers.
 
-It provides a suite of performance analysis tools that measure how your game or app performs on production devices, enabling you to identify issues that might slow performance, overheat devices, or drain the battery.
+It provides performance analysis tools that analyze how your game or app performs on production devices to identify issues that degrade performance, overheat devices, or drain battery life.
 
 
 | Component | Functionality |
 |----------|-------------|
 | [Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) | Captures a performance profile that shows all the performance counter activity from the device. |
-| [Performance Advisor](https://developer.arm.com/Tools%20and%20Software/Performance%20Advisor) | Generates an easy-to-read performance summary from an annotated Streamline capture, and get actionable advice about where you should optimize. |
-| [Frame Advisor](https://developer.arm.com/Tools%20and%20Software/Frame%20Advisor) | Captures the API calls and rendering from a problem frame and get comprehensive geometry metrics to discover what might be slowing down your application. |
+| [Performance Advisor](https://developer.arm.com/Tools%20and%20Software/Performance%20Advisor) | Generates an easy-to-read performance summary from an annotated Streamline capture, and provides actionable optimization suggestions. |
+| [Frame Advisor](https://developer.arm.com/Tools%20and%20Software/Frame%20Advisor) | Captures API calls and rendering details from a specific frame and provides comprehensive geometry metrics to discover what might be slowing down the application. |
 | [Mali Offline Compiler](https://developer.arm.com/Tools%20and%20Software/Mali%20Offline%20Compiler) | Analyzes how efficiently your shader programs perform on a range of Mali GPUs. |
 | [RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs) | An industry-standard tool for debugging Vulkan graphics applications, including early support for Arm GPU extensions and Android features. |
 
