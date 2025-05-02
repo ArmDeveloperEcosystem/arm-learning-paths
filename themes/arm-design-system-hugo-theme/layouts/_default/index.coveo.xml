@@ -30,6 +30,26 @@
       {{ end -}}
     <coveo:metadata>
         <contenttype>Learning Path</contenttype>
+        <title>
+            {{-  .Params.title -}}
+        </title>
+        <description>
+        {{- if and (.File) (in .File.Path "learning-paths") -}}
+            {{- $description := .Params.who_is_this_for -}}
+            {{- if not $description -}}
+                {{- $description = .Parent.Params.who_is_this_for -}}
+            {{- end -}}
+            {{- if $description -}}
+                {{- $description -}}
+            {{- else -}}
+                No Learning Path Description
+            {{- end -}}
+        {{- else if and (.File) (in .File.Path "install-guides") -}}            
+            A guide to quickly install {{.Params.title}} on Arm.
+        {{- else -}}
+            Unknown Description
+        {{- end -}}
+        </description>
         <authorname>
             {{- $authors := .Params.author -}}
             {{- if not $authors -}}
@@ -47,41 +67,41 @@
         </authorname>
         <category>
         {{- if and (.File) (in .File.Path "install-guides") -}}
-        Install Guide
-
+            Install Guide
         {{- else if and (.File) (in .File.Path "learning-paths/cross-platform") -}}
-        {{- $titles := slice -}}
-        {{- $shared := .Parent.Params.shared_between -}}
-        {{- if $shared -}}
-            {{- range $shared -}}
-            {{- $sectionPath := printf "learning-paths/%s" . -}}
-            {{- $section := site.GetPage $sectionPath -}}
-            {{- with $section -}}
-                {{- $titles = $titles | append .Title -}}
+            {{- $titles := slice -}}
+            {{- $lpSection := . -}}
+            {{- if not .IsSection -}}
+                {{- $lpSection = .Parent -}}
             {{- end -}}
-            {{- end -}}
-            {{- delimit $titles ";" -}}
-        {{- else -}}
-            Unknown Shared Path
-        {{ end }}
+
+            {{- $shared := $lpSection.Params.shared_between -}}
+            {{- if $shared -}}
+                {{- range $shared -}}
+                {{- $sectionPath := printf "learning-paths/%s" . -}}
+                {{- $section := site.GetPage $sectionPath -}}
+                {{- with $section -}}
+                    {{- $titles = $titles | append .Title -}}
+                {{- end -}}
+                {{- end -}}
+                {{- delimit $titles ";" -}}
+            {{- else -}}
+                Unknown Shared Path
+            {{ end }}
 
         {{- else -}}
-        {{- $section := .Parent -}}
-        {{- with $section -}}
-            {{- with .Parent -}}
-            {{- with .Title -}}
-                {{- . -}}
-            {{- else -}}
-                Unknown Section
+            {{- if .File -}}
+                {{- $lpSection := . -}}
+                {{- if not .IsSection -}}
+                    {{- $lpSection = .Parent -}}
+                {{- end -}}
+                {{- with $lpSection.Parent.Title -}}
+                    {{ . }}
+                {{- else -}}
+                    Unknown Category Title
+                {{- end -}}
             {{- end -}}
-            {{- else -}}
-            Unknown Section
-            {{- end -}}
-        {{- else -}}
-            Unknown Section
         {{- end -}}
-
-        {{ end }}
         </category>
         <readingtime>
             {{- $readingtime := .Params.minutes_to_complete -}}
@@ -120,16 +140,16 @@
             {{- end -}}
             {{- end -}}
         </subjects>
+
         {{- if not (and (.File) (in .File.Path "install-guides")) -}}
             {{- $armips := .Params.armips -}}
         {{- if not $armips -}}
             {{- $armips = .Parent.Params.armips -}}
         {{- end -}}
-            {{- if $armips -}}
-        <armips>{{ delimit $armips ";" -}}
-        </armips>
-            {{- end -}}
-        {{ end }}      
+            {{if $armips}}
+        <armips>{{ delimit $armips ";"}}</armips>
+            {{end}}
+        {{- end -}}      
 
         {{- if not (and (.File) (in .File.Path "install-guides")) -}}
             {{- $tools_software_languages := .Params.tools_software_languages -}}
@@ -137,10 +157,9 @@
             {{- $tools_software_languages = .Parent.Params.tools_software_languages -}}
         {{- end -}}
             {{- if $tools_software_languages -}}
-        <toolsoftwarelanguage>{{ delimit $tools_software_languages ";" -}}
-        </toolsoftwarelanguage>
+        <toolsoftwarelanguage>{{ delimit $tools_software_languages ";" }}</toolsoftwarelanguage>
             {{- end -}}
-        {{ end }}  
+        {{- end -}}  
 
 
         {{- if not (and (.File) (in .File.Path "install-guides")) -}}
@@ -148,22 +167,26 @@
         {{- if not $operatingsystems -}}
             {{- $operatingsystems = .Parent.Params.operatingsystems -}}
         {{- end -}}
-            {{- if $operatingsystems -}}
-        <operatingsystems>{{ delimit $operatingsystems ";" -}}
-        </operatingsystems>
-        
-            {{- end -}}
-        {{ end }}  
+            {{if $operatingsystems}}
+        <operatingsystems>{{ delimit $operatingsystems ";" -}}</operatingsystems>
+            {{ end }}
+        {{- end -}}  
 
         {{- if and (.File) (in .File.Path "learning-paths") -}}
         <learningpathid>
-                {{- $title := .Params.title -}}
-                {{- if not $title -}}
-                    {{- $subjetitlect = .Parent.Params.title -}}
-                {{- end -}}
-                {{- if $title -}}
-                    {{- $title -}}
-                {{- end -}}
+        {{- if .IsSection -}}
+        {{- with .Title -}}
+            {{ . }}
+        {{- else -}}
+            Unknown Section Title
+        {{- end -}}
+        {{- else -}}
+        {{- with .Parent.Title -}}
+            {{ . }}
+        {{- else -}}
+            Unknown Parent Title
+        {{- end -}}
+        {{- end -}}
         </learningpathid>
         <parentid>1</parentid>
         <pageid>{{.Params.weight -}}</pageid>
