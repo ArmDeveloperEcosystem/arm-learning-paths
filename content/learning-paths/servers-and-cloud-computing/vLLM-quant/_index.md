@@ -56,6 +56,10 @@ further_reading:
         title: Hugging Face Model Hub
         link: https://huggingface.co/models
         type: website
+    - resource:
+        title: Build and Run vLLM on Arm Servers
+        link: /learning-paths/servers-and-cloud-computing/vllm/
+        type: website
 
 
 
