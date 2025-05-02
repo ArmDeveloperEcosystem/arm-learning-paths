@@ -39,7 +39,7 @@ You will also create and save an access key and secret access key for AWS CLI ac
 Log in to the AWS console, set the AWS region you want to use in upper right corner, and navigate to the Identify and Access Management (IAM) dashboard.
 
 
-### How do I create an IAM role and access credentials?
+### How do I create an IAM role and access credentials? {#prepare-your-aws-role}
 
 1. Create a new IAM user named `gguser`
 
