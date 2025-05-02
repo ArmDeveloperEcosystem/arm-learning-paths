@@ -4,7 +4,6 @@ differentiating_info:
 - Gaming
 - Graphics
 key_ip:
-- Cortex-X
 - Cortex-A
 - Immortalis
 - Mali

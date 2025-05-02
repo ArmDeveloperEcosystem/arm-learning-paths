@@ -6,15 +6,15 @@ weight: 2
 layout: learningpathall
 ---
 
-## Overview
+## vLLM and INT8 Quantization Workflow
 
-[vLLM](https://github.com/vllm-project/vllm) is an open-source, high-throughput inference engine designed to  efficiently serve large language models (LLMs). It offers an OpenAI-compatible API, supports dynamic batching, and is optimized for low-latency performance — making it suitable for both real-time and batch inference workloads.
+[vLLM](https://github.com/vllm-project/vllm) is an open-source, high-throughput inference engine designed to efficiently serve large language models (LLMs). It offers an OpenAI-compatible API, supports dynamic batching, and is optimized for low-latency performance — making it suitable for both real-time and batch inference workloads.
 
-This learning path walks through how to combine vLLM with INT8 quantization techniques to reduce memory usage and improve inference speed, enabling large models like Llama 3.1 to run effectively on Arm-based CPUs. 
+This Learning Path walks you through how to combine vLLM with INT8 quantization techniques to reduce memory usage and improve inference speed, enabling large models like Llama 3.1 to run effectively on Arm-based CPUs. 
 
 The model featured in this guide — [Llama 3.1 8B Instruct](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct) — is sourced from Hugging Face, quantized using the `llmcompressor`, and deployed using vLLM. 
 
-Testing for this learning path was performed on AWS Graviton instance (c8g.16xlarge). The instructions are intended for Arm-based servers running Ubuntu 24.04 LTS.
+This Learning Path was tested on an AWS Graviton instance (c8g.16xlarge). The instructions are intended for Arm-based servers running Ubuntu 24.04 LTS.
 
 
 ## Learning Path Setup
@@ -32,7 +32,7 @@ python3 -m venv vllm_env
 source vllm_env/bin/activate
 pip install --upgrade pip 
 ```
-This will create a local Python environment named (`vllm_env`) and upgrade pip to the latest version.
+This creates a local Python environment named (`vllm_env`) and upgrade pip to the latest version.
 
 ### Install system dependencies
 
@@ -57,7 +57,9 @@ This library will be preloaded during model serving to reduce latency and improv
 
 ### Install OpenBLAS
 
-OpenBLAS is an optimized linear algebra library that improves performance for matrix-heavy operations, which are common in LLM inference. To get the best performance on Arm CPUs, it's recommended to build OpenBLAS from source.
+OpenBLAS is an optimized linear algebra library that improves performance for matrix-heavy operations, which are common in LLM inference. 
+
+To get the best performance on Arm CPUs, it's recommended to build OpenBLAS from source.
 
 Run these commands to clone and build OpenBLAS:
 ```bash
@@ -66,7 +68,7 @@ cd OpenBLAS
 git checkout ef9e3f715
 ```
 {{% notice Note %}}
-This commit is known to work reliably with Arm CPU optimizations (BF16, OpenMP) and has been tested in this learning path. Using it ensures consistent behavior. You can try `main`, but newer commits may introduce changes that haven't been validated here.
+This commit is known to work reliably with Arm CPU optimizations (BF16, OpenMP) and has been tested in this Learning Path. Using it ensures consistent behavior. You can try `main`, but newer commits may introduce changes that haven't been validated here.
 {{% /notice %}}
 
 ```bash
@@ -109,3 +111,5 @@ pip install torch-2.7.0.dev20250306-cp312-cp312-manylinux_2_28_aarch64.whl --for
 ```
 
 You’re now ready to quantize the model and start serving it with `vLLM` on an Arm-based system.
+
+The next step walks you through quantizing Llama 3.1 using `llmcompressor` and launching the vLLM server to serve it via an OpenAI-compatible API.

@@ -21,7 +21,6 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
     - Cortex-A
-    - Cortex-X
     - Armv9-A
     
 operatingsystems:

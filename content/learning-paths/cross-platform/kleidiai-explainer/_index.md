@@ -19,7 +19,6 @@ author: Zach Lasiuk
 skilllevels: Introductory 
 subjects: ML
 armips:
-    - Cortex-X
     - Cortex-A
     - Neoverse
 tools_software_languages:
