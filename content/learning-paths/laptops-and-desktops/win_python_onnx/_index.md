@@ -24,7 +24,6 @@ skilllevels: Introductory
 subjects: Migration to Arm
 armips:
     - Cortex-A
-    - Cortex-X
 operatingsystems:
     - Windows
 tools_software_languages:
