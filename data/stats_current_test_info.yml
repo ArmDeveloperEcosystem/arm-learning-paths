@@ -34,7 +34,8 @@ sw_categories:
       tests_and_status: []
     ams:
       readable_title: Arm Performance Studio
-      tests_and_status: []
+      tests_and_status:
+      - ubuntu:latest: passed
     anaconda:
       readable_title: Anaconda
       tests_and_status:
