@@ -43,7 +43,7 @@ INFO:     127.0.0.1:45986 - "POST /v1/chat/completions HTTP/1.1" 200 OK
 
 ```
 
-These results confirm that the model is running efficiently on CPU, with stable prompt and generation throughput — a solid baseline before scaling to batch inference.
+These results confirm that the model is running efficiently on the CPU, with stable prompt and generation throughput — a solid baseline before scaling to batch inference.
 
 ## Run Batch Inference
 
