@@ -1,5 +1,5 @@
 ---
-title: Deploy DeepSeek-R1 models on Arm servers
+title: Deploy DeepSeek-R1 on Arm Servers with llama.cpp
 
 minutes_to_complete: 30
 
