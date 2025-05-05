@@ -1,26 +1,32 @@
 name: Dispatch Roadmap Update
 
 on:
-  pull_request_target:
+  pull_request:
     types: [labeled]
+  issue_comment:
+    types: [created]
 
 jobs:
-  call-privileged-update:
-    if: |
-      github.event.label.name == 'awaiting_tech_review' ||
-      github.event.label.name == 'publish'
+  handle-label:
+    if: github.event_name == 'pull_request' && github.event.label.name == 'awaiting_tech_review'
     runs-on: ubuntu-latest
-
     steps:
-      - name: Debug secret
-        run: |
-          if [ -z "${{ secrets.PROJECT_TOKEN }}" ]; then
-            echo "❌ PROJECT_TOKEN is not set"
-            exit 1
-          else
-            echo "✅ PROJECT_TOKEN is present"
-          fi
-      - name: Trigger privileged workflow via repository_dispatch
+      - name: Comment on PR to trigger privileged job
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            @project-bot dispatch update-project-dates label=awaiting_tech_review
+
+  handle-comment-dispatch:
+    if: |
+      github.event_name == 'issue_comment' &&
+      github.event.issue.pull_request &&
+      startsWith(github.event.comment.body, '@project-bot dispatch update-project-dates')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch update-project-dates
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.PROJECT_TOKEN }}
