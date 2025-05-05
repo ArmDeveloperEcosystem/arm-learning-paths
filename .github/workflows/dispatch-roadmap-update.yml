@@ -15,8 +15,9 @@ jobs:
     steps:
       - name: Trigger Roadmap Update workflow
         run: |
-          curl -X POST \
+            curl -L \
+            -X POST \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/roadmap-update.yml/dispatches \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/update-roadmap-project-dates.yml/dispatches \
             -d '{"ref": "${{ github.base_ref }}"}'

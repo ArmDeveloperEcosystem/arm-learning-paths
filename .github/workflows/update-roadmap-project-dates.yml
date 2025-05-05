@@ -1,8 +1,10 @@
 name: Update Roadmap Dates
 
 on:
-  pull_request:
-    types: [labeled]
+  workflow_run:
+    workflows: ["Dispatch Roadmap Update"]
+    types:
+      - completed
 
 jobs:
   update-roadmap-dates:
