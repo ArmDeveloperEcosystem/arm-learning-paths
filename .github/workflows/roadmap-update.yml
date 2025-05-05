@@ -1,8 +1,10 @@
 name: Privileged Update Roadmap Dates
 
 on:
-  repository_dispatch:
-    types: [update-project-dates]
+  workflow_run:
+    workflows: ["Dispatch Roadmap Update"]
+    types:
+      - completed
 
 jobs:
   update-project:
