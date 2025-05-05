@@ -1,7 +1,7 @@
 name: Dispatch Roadmap Update
 
 on:
-  pull_request:
+  pull_request_target:
     types: [labeled]
 
 jobs:
@@ -12,6 +12,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Debug secret
+        run: |
+          if [ -z "${{ secrets.PROJECT_TOKEN }}" ]; then
+            echo "❌ PROJECT_TOKEN is not set"
+            exit 1
+          else
+            echo "✅ PROJECT_TOKEN is present"
+          fi
       - name: Trigger privileged workflow via repository_dispatch
         uses: peter-evans/repository-dispatch@v3
         with:
