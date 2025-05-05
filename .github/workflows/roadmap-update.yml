@@ -20,6 +20,7 @@ jobs:
       - name: Update Project Board Dates
         uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.PROJECT_TOKEN }}
           script: |
             const { Octokit } = require('@octokit/rest');
             const octokit = new Octokit({ auth: github.token });
@@ -172,5 +173,3 @@ jobs:
                 core.setFailed(`Error updating project board:${error.message}`);
               }
             }
-        env:
-          PROJECT_TOKEN: ${{ secrets.PROJECT_TOKEN }}
