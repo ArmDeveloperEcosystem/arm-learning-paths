@@ -36,10 +36,10 @@ jobs:
       - name: Update Project Board Dates
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.PROJECT_TOKEN }}
+          PROJECT_TOKEN: ${{ secrets.PROJECT_TOKEN }}
           script: |
             const { Octokit } = require('@octokit/rest');
-            const octokit = new Octokit({ auth: github.token });
+            const octokit = new Octokit({ auth:process.env.GITHUB_TOKEN });
 
             const projectNumber = 4; // Your project number
             const orgName = 'ArmDeveloperEcosystem';
