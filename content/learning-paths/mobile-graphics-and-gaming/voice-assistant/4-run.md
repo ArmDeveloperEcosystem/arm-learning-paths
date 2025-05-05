@@ -7,7 +7,7 @@ weight: 6
 layout: learningpathall
 ---
 
-In the previous section, we built the Voice Assistant app. Now, we need to install it on the phone. The easiest way to do this is to put the Android phone in developer mode and use a USB cable to upload the application.
+In the previous section, you built the Voice Assistant application. Now, you will install this application on your Android phone. The easiest way to do this is to put your Android phone in developer mode and use a USB cable to upload the application.
 
 ## Switch your phone to developer mode
 
@@ -26,7 +26,7 @@ The Voice Assistant will welcome you with this screen:
 
 ![example image alt-text#center](voice_assistant_view1.png "Figure 6: Welcome Screen")
 
-You can now press the part at the bottom and make your request!
+You can now use the Press to Talk at the bottom and make your request!
 
 ## Voice Assistant Controls
 
