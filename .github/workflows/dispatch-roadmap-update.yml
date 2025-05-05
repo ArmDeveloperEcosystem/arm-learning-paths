@@ -2,7 +2,8 @@ name: Dispatch Roadmap Update
 
 on:
   pull_request_target:
-    types: [synchronize, labeled]
+    types:
+      - labeled
 
 jobs:
   call-privileged-update:
