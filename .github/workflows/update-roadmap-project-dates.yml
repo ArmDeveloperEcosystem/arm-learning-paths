@@ -2,9 +2,11 @@ name: Update Roadmap Dates
 
 on:
   workflow_run:
-    workflows: ["Dispatch Roadmap Update"]
+    workflows:
+      - Dispatch Roadmap Update
     types:
       - completed
+
 
 jobs:
   update-roadmap-dates:
