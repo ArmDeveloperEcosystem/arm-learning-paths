@@ -175,6 +175,8 @@ jobs:
                   } else {
                     console.log('End date field not found');
                   }
+                } else {
+                  console.log('No action taken for label:', labelName);
                 }
               } catch (error) {
                 console.error('Error updating project board:', error);
