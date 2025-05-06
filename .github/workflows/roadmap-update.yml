@@ -34,7 +34,6 @@ jobs:
             const octokit = github;
 
             const projectNumber = 1; // Your project number
-            const orgName = 'annietllnd';
             const prNumber = context.payload.pull_request.number;
             const labelName = context.payload.label.name;
 
@@ -56,7 +55,7 @@ jobs:
               // Find the PR in the project
               const prQuery = `
                 query {
-                  viewer(login:"${orgName}") {
+                  viewer {
                     projectV2(number:${projectNumber}) {
                       items(first:100) {
                       nodes {
