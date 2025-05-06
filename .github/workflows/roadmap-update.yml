@@ -32,6 +32,7 @@ jobs:
           script: |
             const { Octokit } = require('@octokit/rest');
             const octokit = github;
+
             const projectNumber = 1; // Your project number
             const orgName = 'annietllnd';
             const prNumber = context.payload.pull_request.number;
