@@ -90,7 +90,7 @@ jobs:
             }
 
             async function getFieldId(projectId, fieldName) {
-            const fieldsQuery = `
+              const fieldsQuery = `
                 query {
                   node(id:"${projectId}") {
                     ... on ProjectV2 {
@@ -99,18 +99,7 @@ jobs:
                           ... on ProjectV2Field {
                             id
                             name
-                          }
-                          ... on ProjectV2IterationField {
-                            id
-                            name
-                          }
-                          ... on ProjectV2SingleSelectField {
-                            id
-                            name
-                          }
-                          ... on ProjectV2DateField {
-                            id
-                            name
+                            dataType
                           }
                         }
                       }
@@ -121,9 +110,9 @@ jobs:
 
               const fieldsResponse = await octokit.graphql(fieldsQuery);
               const fields = fieldsResponse.node.fields.nodes;
-              const field = fields.find(f => f.name === fieldName);
+              const field = fields.find(f => f.name === fieldName && f.dataType === 'DATE');
 
-              return field ? field.id :null;
+              return field ? field.id : null;
             }
 
             async function updateDateField(projectId, itemId, fieldId, date) {
