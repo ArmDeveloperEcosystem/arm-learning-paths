@@ -7,9 +7,11 @@ on:
 
 jobs:
   call-privileged-update:
-    if: false
+    if: |
+      github.event.label.name == 'awaiting_tech_review' ||
+      github.event.label.name == 'publish'
     runs-on: ubuntu-latest
 
     steps:
       - name: Trigger Roadmap Update workflow
-        run: echo "Hello World"
+        run: echo "Hello world"
