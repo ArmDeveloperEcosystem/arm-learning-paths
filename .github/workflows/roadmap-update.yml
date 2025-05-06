@@ -168,7 +168,7 @@ jobs:
                     await updateDateField(projectId, itemId, startDateFieldId, today);
                     console.log('Updated Start Date to', today);
                   } else {
-                    console.log('⚠️ Start Date field not found');
+                    console.log('Start Date field not found');
                   }
                 } else if (labelName === 'publish') {
                   const endDateFieldId = await getFieldId(projectId, 'Publish Date');
