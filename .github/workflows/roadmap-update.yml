@@ -41,22 +41,22 @@ jobs:
             async function getProjectItemForPR() {
               // Get the project ID
               const projectQuery = `
-                query {
-                  organization(login:"${orgName}") {
-                    projectV2(number:${projectNumber}) {
-                      id
-                    }
+              query {
+                viewer {
+                  projectV2(number:${projectNumber}) {
+                    id
                   }
                 }
-              `;
+              }
+            `;
 
               const projectResponse = await octokit.graphql(projectQuery);
-              const projectId = projectResponse.organization.projectV2.id;
+              const projectId = projectResponse.viewer.projectV2.id;
 
               // Find the PR in the project
               const prQuery = `
                 query {
-                  organization(login:"${orgName}") {
+                  viewer(login:"${orgName}") {
                     projectV2(number:${projectNumber}) {
                       items(first:100) {
                       nodes {
@@ -77,7 +77,7 @@ jobs:
               `;
 
               const prResponse = await octokit.graphql(prQuery);
-              const items = prResponse.organization.projectV2.items.nodes;
+              const items = prResponse.viewer.projectV2.items.nodes;
 
               // Find the item that corresponds to this PR
               const item = items.find(item =>
