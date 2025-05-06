@@ -30,3 +30,15 @@ jobs:
         with:
           name: pr-context
           path: pr-context.yml
+      - name: Dispatch update-project-dates
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PROJECT_TOKEN }}
+          repository: ArmDeveloperEcosystem/arm-learning-paths
+          event-type: update-project-dates
+          client-payload: >-
+            {
+              "pr_number": ${{ github.event.pull_request.number }},
+              "label": "${{ github.event.label.name }}",
+              "repo": "${{ github.repository }}"
+            }
