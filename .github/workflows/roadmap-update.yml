@@ -1,20 +1,25 @@
-name: Privileged Update Roadmap Dates
+name: Update Roadmap Dates
 
 on:
-  workflow_run:
-    workflows: ["Dispatch Roadmap Update"]
-    types:
-      - completed
-
-permissions:
-  actions: read
-  contents: read
+  pull_request_target:
+    types: [labeled]
 
 jobs:
-  update-project:
+  update-roadmap-dates:
     runs-on: ubuntu-latest
+    if: |
+      github.event.label.name == 'awaiting_tech_review' ||
+      github.event.label.name == 'publish'
+
+    permissions:
+      contents: read
+      pull-requests: read
+      repository-projects: write
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -22,26 +27,11 @@ jobs:
 
       - name: Install Octokit
         run: npm install @octokit/rest
-      - name: Download PR context artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: pr-context
-      - name: Load PR context into env vars
-        run: |
-          echo "Loaded PR context:"
-          cat pr-context.yml
 
-          pr_number=$(grep 'pr_number:' pr-context.yml | awk '{print $2}')
-          label=$(grep 'label:' pr-context.yml | awk '{print $2}')
-          repo=$(grep 'repo:' pr-context.yml | awk '{print $2}')
-
-          echo "PR #: $pr_number"
-          echo "Label: $label"
-          echo "Repo: $repo"
-
-          echo "PR_NUMBER=$pr_number" >> $GITHUB_ENV
-          echo "PR_LABEL=$label" >> $GITHUB_ENV
-          echo "REPO_NAME=$repo" >> $GITHUB_ENV
+      - name: Debug Token
+        run: echo "Token is set"
+        env:
+          PROJECT_TOKEN: ${{ secrets.PROJECT_TOKEN }}
 
       - name: Update Project Board Dates
         uses: actions/github-script@v6
@@ -49,12 +39,12 @@ jobs:
           github-token: ${{ secrets.PROJECT_TOKEN }}
           script: |
             const { Octokit } = require('@octokit/rest');
-            const octokit = new Octokit({ auth: github.token });
+            const octokit = new Octokit({ auth:github.token });
 
             const projectNumber = 1; // Your project number
             const orgName = 'annietllnd';
-            const prNumber = ${{ env.PR_NUMBER }}
-            const labelName = ${{ env.PR_LABEL }}
+            const prNumber = context.payload.pull_request.number;
+            const labelName = context.payload.label.name;
 
             async function getProjectItemForPR() {
               // Get the project ID
@@ -101,7 +91,7 @@ jobs:
               const item = items.find(item =>
                 item.content &&
                 item.content.number === prNumber &&
-                item.content.repository.name === ${{ env.REPO_NAME }}
+                item.content.repository.name === context.repo.repo
               );
 
               return { projectId, itemId:item ? item.id:null };

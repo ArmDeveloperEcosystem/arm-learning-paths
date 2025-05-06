@@ -2,8 +2,6 @@ name: Dispatch Roadmap Update
 
 on:
   pull_request_target:
-    types:
-      - labeled
 
 jobs:
   call-privileged-update:
@@ -21,15 +19,6 @@ jobs:
           else
             echo "✅ PROJECT_TOKEN is present"
           fi
-      - name: Generate and upload PR context
-        run: |
-          echo "pr_number: ${{ github.event.pull_request.number }}" > pr-context.yml
-          echo "label: ${{ github.event.label.name }}" >> pr-context.yml
-          echo "repo: ${{ github.repository }}" >> pr-context.yml
-      - uses: actions/upload-artifact@v4
-        with:
-          name: pr-context
-          path: pr-context.yml
       - name: Dispatch update-project-dates
         uses: peter-evans/repository-dispatch@v3
         with:
