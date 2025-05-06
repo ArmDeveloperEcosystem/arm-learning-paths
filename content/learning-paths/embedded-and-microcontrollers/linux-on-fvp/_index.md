@@ -3,6 +3,10 @@ title: Run and Debug Linux Software Stack on Arm Fixed Virtual Platforms
 
 minutes_to_complete: 180
 
+draft: true
+cascade:
+    draft: true
+
 who_is_this_for: This learning path describes necessary steps to get a working Linux system running on the Arm Fixed Virtual Platforms. In addition, the steps to debug the Trusted Firmware-A and Linux Kernel by using the Arm DS.
 
 learning_objectives: 
