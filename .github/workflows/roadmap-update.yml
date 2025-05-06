@@ -1,4 +1,4 @@
-name: Update Roadmap Dates
+name: Update Roadmap Date
 
 on:
   pull_request_target:
@@ -19,6 +19,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -26,76 +27,88 @@ jobs:
 
       - name: Install Octokit
         run: npm install @octokit/rest
+
       - name: Update Project Board Dates
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.PROJECT_TOKEN }}
           script: |
-            const { Octokit } = require('@octokit/rest');
             const octokit = github;
 
-            const projectNumber = 1; // Your project number
+            const projectNumber = 4;
+            const orgLogin = 'ArmDeveloperEcosystem';
             const prNumber = context.payload.pull_request.number;
             const labelName = context.payload.label.name;
 
-
             async function getProjectItemForPR() {
-              // Get the project ID
               const projectQuery = `
-              query {
-                viewer {
-                  projectV2(number:${projectNumber}) {
-                    id
+                query {
+                  organization(login: "${orgLogin}") {
+                    projectV2(number: ${projectNumber}) {
+                      id
+                    }
                   }
                 }
-              }
-            `;
-
+              `;
               const projectResponse = await octokit.graphql(projectQuery);
-              const projectId = projectResponse.viewer.projectV2.id;
+              const project = projectResponse.organization?.projectV2;
+              if (!project) throw new Error("Project not found for organization.");
+              const projectId = project.id;
 
-              // Find the PR in the project
-              const prQuery = `
-                query {
-                  viewer {
-                    projectV2(number:${projectNumber}) {
-                      items(first:100) {
-                      nodes {
-                          id
-                          content {
-                            ... on PullRequest {
-                              number
-                              repository {
-                                name
+              let cursor = null;
+              let itemId = null;
+              do {
+                const prQuery = `
+                  query($after: String) {
+                    organization(login: "${orgLogin}") {
+                      projectV2(number: ${projectNumber}) {
+                        items(first: 100, after: $after) {
+                          nodes {
+                            id
+                            content {
+                              ... on PullRequest {
+                                number
+                                repository {
+                                  name
+                                }
                               }
                             }
+                          }
+                          pageInfo {
+                            hasNextPage
+                            endCursor
                           }
                         }
                       }
                     }
                   }
+                `;
+                const prResponse = await octokit.graphql(prQuery, { after: cursor });
+                const items = prResponse.organization.projectV2.items.nodes;
+
+                const foundItem = items.find(item =>
+                  item.content &&
+                  item.content.number === prNumber &&
+                  item.content.repository.name === context.repo.repo
+                );
+
+                if (foundItem) {
+                  itemId = foundItem.id;
+                  break;
                 }
-              `;
 
-              const prResponse = await octokit.graphql(prQuery);
-              const items = prResponse.viewer.projectV2.items.nodes;
+                cursor = prResponse.organization.projectV2.items.pageInfo.endCursor;
+              } while (cursor);
 
-              // Find the item that corresponds to this PR
-              const item = items.find(item =>
-                item.content &&
-                item.content.number === prNumber &&
-                item.content.repository.name === context.repo.repo
-              );
-
-              return { projectId, itemId:item ? item.id:null };
+              return { projectId, itemId };
             }
 
             async function getFieldId(projectId, fieldName) {
               const fieldsQuery = `
                 query {
-                  node(id:"${projectId}") {
+                  node(id: "${projectId}") {
                     ... on ProjectV2 {
-                      fields(first:20) {
+                      fields(first: 50) {
                         nodes {
                           ... on ProjectV2Field {
                             id
@@ -110,7 +123,7 @@ jobs:
               `;
 
               const fieldsResponse = await octokit.graphql(fieldsQuery);
-              const fields = fieldsResponse.node.fields.nodes;
+              const fields = fieldsResponse.node?.fields?.nodes || [];
               const field = fields.find(f => f.name === fieldName && f.dataType === 'DATE');
 
               return field ? field.id : null;
@@ -120,13 +133,11 @@ jobs:
               const mutation = `
                 mutation {
                   updateProjectV2ItemFieldValue(
-                    input:{
-                      projectId:"${projectId}"
-                      itemId:"${itemId}"
-                      fieldId:"${fieldId}"
-                      value:{
-                        date:"${date}"
-                      }
+                    input: {
+                      projectId: "${projectId}"
+                      itemId: "${itemId}"
+                      fieldId: "${fieldId}"
+                      value: { date: "${date}" }
                     }
                   ) {
                     projectV2Item {
@@ -136,7 +147,9 @@ jobs:
                 }
               `;
 
-              return await octokit.graphql(mutation);
+              const result = await octokit.graphql(mutation);
+              console.log('Mutation result:', result);
+              return result;
             }
 
             async function main() {
@@ -147,30 +160,31 @@ jobs:
                   return;
                 }
 
-                const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+                const today = new Date().toISOString().split('T')[0];
 
                 if (labelName === 'awaiting_tech_review') {
-                  const startDateFieldId = await getFieldId(projectId, 'Start date');
+                  const startDateFieldId = await getFieldId(projectId, 'Start Date');
                   if (startDateFieldId) {
                     await updateDateField(projectId, itemId, startDateFieldId, today);
-                    console.log('Updated Start date to', today);
+                    console.log('Updated Start Date to', today);
                   } else {
-                    console.log('Start date field not found');
+                    console.log('⚠️ Start Date field not found');
                   }
                 } else if (labelName === 'publish') {
-                  const publishDateFieldId = await getFieldId(projectId, 'End date');
-                  if (publishDateFieldId) {
-                    await updateDateField(projectId, itemId, publishDateFieldId, today);
-                    console.log('Updated End date to', today);
+                  const endDateFieldId = await getFieldId(projectId, 'Publish Date');
+                  if (endDateFieldId) {
+                    await updateDateField(projectId, itemId, endDateFieldId, today);
+                    console.log('Updated Publish Date to', today);
                   } else {
-                    console.log('End date field not found');
+                    console.log('Publish Date field not found');
                   }
                 } else {
                   console.log('No action taken for label:', labelName);
                 }
               } catch (error) {
                 console.error('Error updating project board:', error);
-                core.setFailed(`Error updating project board:${error.message}`);
+                core.setFailed(`Error updating project board: ${error.message}`);
               }
             }
+
             main();
