@@ -1,7 +1,7 @@
 name: Dispatch Roadmap Update
 
 on:
-  pull_request:
+  pull_request_target:
     types:
       - labeled
 
@@ -13,6 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check if PROJECT_TOKEN is available
+        run: |
+          if [ -z "${{ secrets.PROJECT_TOKEN }}" ]; then
+            echo "❌ PROJECT_TOKEN is not set or is empty"
+            exit 1
+          else
+            echo "✅ PROJECT_TOKEN is present"
+          fi
       - name: Generate and upload PR context
         run: |
           echo "pr_number: ${{ github.event.pull_request.number }}" > pr-context.yml
