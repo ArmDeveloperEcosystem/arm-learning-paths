@@ -31,7 +31,7 @@ jobs:
           github-token: ${{ secrets.PROJECT_TOKEN }}
           script: |
             const { Octokit } = require('@octokit/rest');
-            //const octokit = new Octokit({ auth:github.token });
+            const octokit = new Octokit();
 
             const projectNumber = 1; // Your project number
             const orgName = 'annietllnd';
