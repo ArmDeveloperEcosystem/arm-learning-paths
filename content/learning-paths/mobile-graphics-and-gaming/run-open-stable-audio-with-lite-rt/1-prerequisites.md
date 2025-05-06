@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Set up your development environment
 
-In this learning path, you will learn how to build and deploy a simple LLM-based chat app to an Android device using ONNX Runtime. You will learn how to build the ONNX Runtime and ONNX Runtime generate() API and how to run the Phi-3 model for the Android application.
+In this learning path, you will learn about Stable Audio Open models, how to convert these to LiteRT format (.tflite). You will then create and build a simple test program to generation audio on a mobile device.
 
 Your first task is to prepare a development environment with the required software:
 
@@ -16,6 +16,7 @@ Your first task is to prepare a development environment with the required softwa
 - Android NDK (tested with - TODO)
 - Python 3.10 or newer
 - CMake (tested with - 3.28.1)
+- [Arm GNU Toolchain](/install-guides/gcc/arm-gnu)
 
 
 ## Install Python 3.10

@@ -15,106 +15,40 @@ TODO: more on LiteRT or links? Reason why we will convert the model or is it cle
 
 ## Build LiteRT libraries
 
-TODO:
-
-https://github.com/google-ai-edge/LiteRT specifies bazel build inside docker container but would be difficult to get libs out?
-
-Some of below is same as in readme in LiteRT, best to point in a link here? Any troubleshooting needed?
-
-
 Clone the repository and get the latest modules
 
-```bash
-git clone https://github.com/google-ai-edge/LiteRT.git
-
-cd LiteRT/
-
-git submodule init && git submodule update --remote
-
+```console
+git clone https://github.com/tensorflow/tensorflow.git tensorflow_src
+cd tensorflow_src
 ```
 
-Docker can then be used to build the needed libraries, firstly ensure that docker is installed
-
-```bash
-
-sudo apt install docker
+Create flatbuffers directory and build
+```console
+mkdir flatc-native-build && cd flatc-native-build
+cmake ../tensorflow/lite/tools/cmake/native_tools/flatbuffers
+cmake --build .
 ```
 
-Add current user to dockergroup
-```
-sudo usermod -aG docker $USER
+You can now create a custom TFLite build for android:
 
-newgrp docker
-
-```
-
-A docker image can be created by pointing to the Dockerfile defined in LiteRT repository
-
-```bash
-
-docker build . -t tflite-builder -f ci/tflite-py3.Dockerfile
-
-# Confirm the container was created with
-docker image ls
-
+```console
+cd ..
+mkdir tflite_build && cd tflite_build
 ```
 
-Run bash inside the container
-
-```
-docker run -it -w /host_dir -v $PWD:/host_dir -v $HOME/.cache/bazel:$PWD/.cache/bazel tflite-builder bash
-
-
-docker run -it -w /host_dir -v $PWD:/host_dir -v /host_dir/bazel-bin:$PWD/bazel-bin tflite-builder bash
+Ensure the NDK_PATH is set to your previously installed Android NDK:
+```console
+export ANDROID_NDK=/home/user/Android/Sdk/ndk/25.1.8937393/
 ```
 
-Configure to use default settings:
-```
-./configure
-
-```
-
-Build needed libraries:
-
-```
-bazel build  //tflite:libtensorflowlite.so
-
-bazel build -c opt --config android_arm64 //tensorflow/lite:libtensorflowlite.so --define tflite_with_xnnpack=true --define=xnn_enable_arm_i8mm=true --define tflite_with_xnnpack_qs8=true --define tflite_with_xnnpack_qu8=true
-
-
-# set output base to custom directory
-bazel --output_base=/host_dir/output-base build //tflite:libtensorflowlite.so
-
-```
-
-{{% notice Note %}}
-This may take a while.. Bazel builds ~1,600 targets
-{{% /notice %}}
-
-Once finished, `exit` out of the docker container and the libraries will be available on host machine in output base directory provided - output-base
-
-```bash
-/LiteRT/output-base$ find . -name libtensorflow*so
-./execroot/litert/bazel-out/k8-opt/bin/tflite/libtensorflowlite.so.runfiles/litert/tflite/libtensorflowlite.so
-./execroot/litert/bazel-out/k8-opt/bin/tflite/libtensorflowlite.so
+Configure the cmake build for Android including the correct android api and path to previously build flatbuffers directory
+```console
+cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DTFLITE_HOST_TOOLS_DIR=../flatc-native-build/ ../tensorflow/lite/
 ```
 
 
-docker ps to show containers, copy generated libs from docker container
-```bash
-ecosys@ip-10-252-24-29:~/nindro01/LiteRT$ docker ps
-
-CONTAINER ID   IMAGE            COMMAND   CREATED              STATUS              PORTS     NAMES
-944466fd5867   tflite-builder   "bash"    About a minute ago   Up About a minute             priceless_williamson
-mlecosys@ip-10-252-24-29:~/nindro01/LiteRT$ 
 
 
- docker cp  944466fd5867:/host_dir/bazel-bin/tflite/ .
- 
- ```
- 
- tflite dir in LiteRT contains libs needed
- 
  
 
 

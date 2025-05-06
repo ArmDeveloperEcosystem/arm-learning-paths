@@ -9,14 +9,11 @@ layout: learningpathall
 ## Stable Audio Open Model
 
 SAO Model is made of submodules:
-* text-conditioner
-* diffusion transformer
-* autoencoder
+* Conditioner
+* Diffusion Transformer
+* AutoEncoder
 
 We use Google AI Edge Torch tools to convert these models from PyTorch format directly to LiteRT (.tflite) format.
-
-
-
 
 ## Convert the model using python script
 
@@ -35,7 +32,6 @@ We will now install the needed python packages for this, including `ai-edge-lite
 
 ```bash
 pip install --no-deps -r requirements.txt
-
 ```
 
 We can now use a python script to convert the model.

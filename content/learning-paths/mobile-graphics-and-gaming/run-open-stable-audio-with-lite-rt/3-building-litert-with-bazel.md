@@ -13,7 +13,7 @@ LiteRT (short for Lite Runtime), formerly known as TensorFlow Lite, is Google's 
 TODO: more on LiteRT or links? Reason why we will convert the model or is it clear?
 
 
-## Build LiteRT libraries with Bazel
+## Build LiteRT libraries with Bazel inside a Docker container
 
 TODO:
 
@@ -112,13 +112,41 @@ mlecosys@ip-10-252-24-29:~/nindro01/LiteRT$
 
 
  docker cp  944466fd5867:/host_dir/bazel-bin/tflite/ .
- 
- ```
+```
  
  tflite dir in LiteRT contains libs needed
  
- 
+## Build LiteRT libraries with Bazel
 
+Clone the needed repository
+
+```console
+git clone https://github.com/tensorflow/tensorflow.git
+```
+
+Next, clone TensorFlow from its Git repository to your system:
+
+```bash
+git clone https://github.com/tensorflow/tensorflow.git
+cd tensorflow
+```
+
+Now you can configure TensorFlow. Here you can set the custom build parameters needed as follows:
+
+```bash { output_lines = "2-14" }
+python3 ./configure.py
+Please specify the location of python. [Default is /home/user/Workspace/tflite/env3_10/bin/python3]:
+Please input the desired Python library path to use. Default is [/home/user/Workspace/tflite/env3_10/lib/python3.10/site-packages]
+Do you wish to build TensorFlow with ROCm support? [y/N]: n
+Do you wish to build TensorFlow with CUDA support? [y/N]: n
+Do you want to use Clang to build TensorFlow? [Y/n]: n
+Would you like to interactively configure ./WORKSPACE for Android builds? [y/N]: y
+Please specify the home path of the Android NDK to use. [Default is /home/user/Android/Sdk/ndk-bundle]: /home/user/Workspace/tools/ndk/android-ndk-r25b
+Please specify the (min) Android NDK API level to use. [Available levels: [16, 17, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 30, 31, 32, 33]] [Default is 21]: 30
+Please specify the home path of the Android SDK to use. [Default is /home/user/Android/Sdk]:
+Please specify the Android SDK API level to use. [Available levels: ['31', '33', '34', '35']] [Default is 35]:
+Please specify an Android build tools version to use. [Available versions: ['30.0.3', '34.0.0', '35.0.0']] [Default is 35.0.0]: 
+```
 
 
 

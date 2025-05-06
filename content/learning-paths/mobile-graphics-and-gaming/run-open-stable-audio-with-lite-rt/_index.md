@@ -12,7 +12,8 @@ learning_objectives:
 
 prerequisites:
     - Python 3.10 or newer version installed
-    - CMake installed
+    - CMake 3.28.1 or newer version installed
+    - Android NDK r25b or newer version installed
 
 author: TODO
 
