@@ -19,20 +19,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-
       - name: Install Octokit
         run: npm install @octokit/rest
-
-      - name: Debug Token
-        run: echo "Token is set"
-        env:
-          PROJECT_TOKEN: ${{ secrets.PROJECT_TOKEN }}
-
       - name: Update Project Board Dates
         uses: actions/github-script@v6
         with:
