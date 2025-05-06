@@ -46,12 +46,7 @@ Use a file editor of your choice and create a `requirements.txt` file with the P
     transformers
     accelerate
     huggingface-hub
-    pyreadline3
 ```
-{{% notice Note %}}
-`pyreadline3` is typically used on Windows systems. You can safely omit it on Linux.
-{{% /notice %}}
-
 
 ## Install Python dependencies
 
@@ -86,7 +81,7 @@ Ensure you're using Python 3.12 to match the cp312 wheel format.
 
 This build includes optimizations from Kleidi AI for efficient inference on Arm CPUs.
 
-## Download and quantize the Model
+## Download and quantize the model
 
 Navigate to your home directory. Now download the quantized model using `huggingface-cli`:
 ```bash

@@ -143,7 +143,7 @@ if __name__ == "__main__":
     run(args)
 ```
 
-## Run the Server
+## Run the server
 
 You’re now ready to run the chatbot server.
 
