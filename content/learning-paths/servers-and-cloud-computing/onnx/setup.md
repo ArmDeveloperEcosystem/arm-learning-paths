@@ -1,27 +1,29 @@
 ---
 # User change
-title: "Build ONNX Runtime and setup Phi-3.5 vision model"
+title: "Build ONNX Runtime and set up the Phi-3.5 Vision Model"
 
 weight: 2
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-
-In this Learning Path you will learn how to run quantized Phi models using ONNX Runtime on Microsoft Azure Cobalt 100 servers using ONNX Runtime. Specifically, you will deploy the Phi 3.5 vision model on Arm-based servers running Ubuntu 24.04 LTS. The instructions have been tested on an Azure `Dpls_v6` 32 core instance.
-
 ## Overview
+
+In this Learning Path, you'll run quantized Phi models with ONNX Runtime on Microsoft Azure Cobalt 100 servers. Specifically, you'll deploy the Phi-3.5 vision model on Arm-based servers running Ubuntu 24.04 LTS. These instructions have been tested on a 32-core Azure `Dpls_v6` instance.
+
+
 
 You will learn how to build and configure ONNX Runtime to enable efficient LLM inference on Arm CPUs.
 
-The tutorial covers the following steps:
-- Building ONNX Runtime, quantizing and converting the Phi 3.5 vision model to the ONNX format.
-- Running the model using a Python script with ONNX Runtime to perform LLM inference on the CPU.
-- Analyzing the performance.
+This Learning Path walks you through the following tasks:
+- Build ONNX Runtime.
+- Quantize and convert the Phi-3.5 vision model to ONNX format.
+- Run the model using a Python script with ONNX Runtime for CPU-based LLM inference.
+- Analyze performance on Arm CPUs.
 
 ## Install dependencies
 
-Install the following packages on your Arm-based server instance:
+On your Arm-based server, install the following packages:
 
 ```bash
     sudo apt update
@@ -30,7 +32,7 @@ Install the following packages on your Arm-based server instance:
 
 ## Create a requirements file
 
-Use a file editor of your choice and create a `requirements.txt` file will the python packages shown below:
+Use a file editor of your choice and create a `requirements.txt` file with the Python packages shown below:
 
 ```python
     requests
@@ -40,8 +42,12 @@ Use a file editor of your choice and create a `requirements.txt` file will the p
     huggingface-hub
     pyreadline3
 ```
+{{% notice optional_title %}}
+`pyreadline3` is typically used on Windows systems. You can safely omit it on Linux.
+{{% /notice %}}
 
-## Install Python Dependencies
+
+## Install Python dependencies
 
 Create a virtual environment:
 ```bash
@@ -68,13 +74,18 @@ Clone and build the `onnxruntime-genai` repository, which includes the Kleidi AI
     cd build/Linux/Release/wheel/
     pip install onnxruntime_genai-0.9.0.dev0-cp312-cp312-linux_aarch64.whl
 ```
+{{% notice optional_title %}}
+Ensure you're using Python 3.12 to match the cp312 wheel format.
+{{% /notice %}}
+
+This build includes optimizations from Kleidi AI for efficient inference on Arm CPUs.
 
 ## Download and Quantize the Model
 
-Navigate to the home directory, download the quantized model using `huggingface-cli`:
+Navigate to your home directory. Now download the quantized model using `huggingface-cli`:
 ```bash
     cd ~
     huggingface-cli download microsoft/Phi-3.5-vision-instruct-onnx --include cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4/* --local-dir .
 ```
 
-The Phi 3.5 vision model has now been successfully quantized into the ONNX format. The next step is to run the model using ONNX Runtime.
+The Phi-3.5 vision model is now downloaded in ONNX format with INT4 quantization and is ready to run with ONNX Runtime.
