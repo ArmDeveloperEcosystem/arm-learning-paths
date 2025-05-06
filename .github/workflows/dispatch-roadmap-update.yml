@@ -5,9 +5,7 @@ on:
 
 jobs:
   call-privileged-update:
-    if: |
-      github.event.label.name == 'awaiting_tech_review' ||
-      github.event.label.name == 'publish'
+    if: false
     runs-on: ubuntu-latest
 
     steps:
