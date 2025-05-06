@@ -122,7 +122,6 @@ jobs:
               const fieldsResponse = await octokit.graphql(fieldsQuery);
               const fields = fieldsResponse.node.fields.nodes;
               const field = fields.find(f => f.name === fieldName);
-              console.log('Project fields:', fields.map(f => f.name));
 
               return field ? field.id :null;
             }
@@ -184,3 +183,4 @@ jobs:
                 core.setFailed(`Error updating project board:${error.message}`);
               }
             }
+            main();
