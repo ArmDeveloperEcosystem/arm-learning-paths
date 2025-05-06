@@ -168,20 +168,20 @@ jobs:
                 const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
 
                 if (labelName === 'awaiting_tech_review') {
-                  const startDateFieldId = await getFieldId(projectId, 'Start Date');
+                  const startDateFieldId = await getFieldId(projectId, 'Start date');
                   if (startDateFieldId) {
                     await updateDateField(projectId, itemId, startDateFieldId, today);
-                    console.log('Updated Start Date to', today);
+                    console.log('Updated Start date to', today);
                   } else {
-                    console.log('Start Date field not found');
+                    console.log('Start date field not found');
                   }
                 } else if (labelName === 'publish') {
-                  const publishDateFieldId = await getFieldId(projectId, 'Publish Date');
+                  const publishDateFieldId = await getFieldId(projectId, 'End date');
                   if (publishDateFieldId) {
                     await updateDateField(projectId, itemId, publishDateFieldId, today);
-                    console.log('Updated Publish Date to', today);
+                    console.log('Updated End date to', today);
                   } else {
-                    console.log('Publish Date field not found');
+                    console.log('End date field not found');
                   }
                 }
               } catch (error) {
