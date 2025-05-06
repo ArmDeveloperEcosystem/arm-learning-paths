@@ -6,20 +6,20 @@ weight: 4
 layout: learningpathall
 ---
 
-The Voice Assistant application demonstrates an example of a complete voice interaction pipeline for Android.
+The Voice Assistant application showcases a complete voice interaction pipeline running on Android.
 
 It generates intelligent responses by utilizing:
-1. Speech-to-Text (STT) to transform the user's audio prompt into a text representation
-2. A Large Language Model (LLM) to respond to the user's prompt in text form
-3. Android Text-to-Speech (TTS) API to produce a voice response.
+1. Speech-to-Text (STT) to transform the user's audio input into text.
+2. A Large Language Model (LLM) to generate a response in text form.
+3. Android Text-to-Speech (TTS) API to produce a spoken reply.
 
 ![example image alt-text#center](overview.png "Figure 1: Overview")
 
 These three steps correspond to specific components used in the Voice Assistant application. A more detailed description of each step is provided.
 
-## Speech to Text Library
+## Speech-to-Text Library
 
-Speech-to-Text is also known as Automatic Speech Recognition. This part of the pipeline focuses on converting spoken language into written text.
+Speech-to-Text also known as automatic speech recognition (ASR), converts spoken language into written text.
 
 Speech recognition is done in the following stages:
 - The device's microphone captures spoken language as an audio waveform.
@@ -31,7 +31,7 @@ Speech recognition is done in the following stages:
 
 Large Language Models (LLMs) are designed for natural language understanding, and in this application, they are used for question-answering.
 
-The text transcription from the previous part of the pipeline is used as input to the neural model. During initialization, the application assigns a persona to the LLM to ensure a friendly and informative voice assistant experience. By default, the application uses an asynchronous flow for this part of the pipeline, meaning that parts of the response are collected as they become available. The application UI is updated with each new token, and these are also used for the final stage of the pipeline.
+The text transcription from the previous part of the pipeline is used as input to the neural model. During initialization, the application assigns a predefined persona to guide the tone and style of responses. By default, the application uses an asynchronous flow for this part of the pipeline, meaning that parts of the response are collected as they become available. The application UI is updated with each new token, and these are also used for the final stage of the pipeline.
 
 ## Text to Speech Component
 
