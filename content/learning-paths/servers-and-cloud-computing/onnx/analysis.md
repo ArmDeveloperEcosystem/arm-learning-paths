@@ -17,16 +17,16 @@ Next, download a sample image from the internet using the following `wget` comma
 wget https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794__340.jpg
 ```
 
-## Try an image and text prompt
+## Try an image + text prompt
 
 After downloading the image, provide the image file name when prompted, followed by the text prompt, as demonstrated in the example below:
 ![image_output](image_output.png)
 
-## Observe Performance Metrics
+## Observe performance metrics
 
 As shown in the example above, the LLM Chatbot performs inference at a speed of **44 tokens/second**, with the time to first token being approximately **1 second**. This highlights the efficiency and responsiveness of the LLM Chatbot in processing queries and generating outputs.
 
-## Further Interaction and Custom Applications
+## Further interaction and custom applications
 
 You can continue interacting with the chatbot by asking follow-up prompts and observing the performance metrics displayed in the terminal.
 

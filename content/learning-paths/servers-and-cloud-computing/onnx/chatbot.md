@@ -5,7 +5,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## Create the Chatbot Server Script
+## Create the chatbot server script
 
 Create a Python script called `phi3v.py` with the following content. 
 

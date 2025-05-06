@@ -9,8 +9,14 @@ layout: "learningpathall"
 ---
 ## Overview
 
-In this Learning Path, you'll run quantized Phi models with ONNX Runtime on Microsoft Azure Cobalt 100 servers. Specifically, you'll deploy the Phi-3.5 vision model on Arm-based servers running Ubuntu 24.04 LTS. These instructions have been tested on a 32-core Azure `Dpls_v6` instance.
+In this Learning Path, you'll run quantized Phi models with ONNX Runtime on Microsoft Azure Cobalt 100 servers. 
 
+Specifically, you'll deploy the Phi-3.5 vision model on Arm-based servers running Ubuntu 24.04 LTS. 
+
+
+{{% notice Note %}}
+These instructions have been tested on a 32-core Azure `Dpls_v6` instance.
+{{% /notice %}}
 
 
 You will learn how to build and configure ONNX Runtime to enable efficient LLM inference on Arm CPUs.
@@ -42,7 +48,7 @@ Use a file editor of your choice and create a `requirements.txt` file with the P
     huggingface-hub
     pyreadline3
 ```
-{{% notice optional_title %}}
+{{% notice Note %}}
 `pyreadline3` is typically used on Windows systems. You can safely omit it on Linux.
 {{% /notice %}}
 
@@ -74,13 +80,13 @@ Clone and build the `onnxruntime-genai` repository, which includes the Kleidi AI
     cd build/Linux/Release/wheel/
     pip install onnxruntime_genai-0.9.0.dev0-cp312-cp312-linux_aarch64.whl
 ```
-{{% notice optional_title %}}
+{{% notice Note %}}
 Ensure you're using Python 3.12 to match the cp312 wheel format.
 {{% /notice %}}
 
 This build includes optimizations from Kleidi AI for efficient inference on Arm CPUs.
 
-## Download and Quantize the Model
+## Download and quantize the Model
 
 Navigate to your home directory. Now download the quantized model using `huggingface-cli`:
 ```bash

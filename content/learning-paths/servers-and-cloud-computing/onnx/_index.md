@@ -19,7 +19,7 @@ prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate cloud service provider. This Learning Path has been tested on a Microsoft Azure Cobalt 100 virtual machine with 32 cores, 8GB of RAM, and 32GB of disk space.
     - Basic understanding of Python and machine learning concepts.
     - Familiarity with ONNX Runtime and Azure cloud services.
-    - Knowledge of LLM (Large Language Model) fundamentals.
+    - Knowledge of Large Language Model (LLM) fundamentals.
 
 
 author: Nobel Chowdary Mandepudi
@@ -35,7 +35,7 @@ operatingsystems:
 tools_software_languages:
     - Python
     - ONNX Runtime
-    - Microsoft Azure
+   
 
 further_reading:
     - resource:
