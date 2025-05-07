@@ -6,8 +6,6 @@ weight: 5
 layout: learningpathall
 ---
 
-In this section you will build the Voice Assistant application to run on your Android phone.
-
 ## Download the Voice Assistant
 
 Start by cloning the repository with the complete example application code:
@@ -18,18 +16,17 @@ git clone https://git.gitlab.arm.com/kleidi/kleidi-examples/real-time-voice-assi
 
 ## Build the Voice Assistant
 
-Open Android Studio and open the project that you downloaded in the previous step:
+Open Android Studio, select **Projects**, then click **Open**, and navigate to the project you just downloaded:
 
-![example image alt-text#center](open_project.png "Figure 2: Open the project in Android Studio.")
+![example image alt-text#center](open_project.png "Open the project in Android Studio.")
 
-Build the application with its default settings by clicking the little hammer
-"Make Module `VoiceAssistant.app`" button in the upper right corner:
+To build the application with the default settings, click the hammer icon labeled 
+**Make Module `VoiceAssistant.app`** in the upper right corner:
 
-![example image alt-text#center](build_project.png "Figure 3: Build the project.")
+![example image alt-text#center](build_project.png "Build the project.")
 
-Android Studio will start the build. The build may take some time if it needs to
-download some dependencies for the Voice Assistant app that are not already installed:
+Android Studio will begin building the app. The first build might take longer if additional dependencies need to be downloaded.
 
-![example image alt-text#center](build_success.png "Figure 4: Successful build!")
+![example image alt-text#center](build_success.png "Successful build!")
 
-Now that you have successfully built the Android application, you will run it in the next step.
+Now that you have successfully built the Android application, you're ready to run the Voice Assistant in the next step.

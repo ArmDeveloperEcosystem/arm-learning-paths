@@ -6,35 +6,43 @@ weight: 4
 layout: learningpathall
 ---
 
-The Voice Assistant application demonstrates an example of a complete voice interaction pipeline for Android.
+## Voice Assistant application workflow
 
-It generates intelligent responses by utilizing:
-1. Speech-to-Text (STT) to transform the user's audio prompt into a text representation
-2. A Large Language Model (LLM) to respond to the user's prompt in text form
-3. Android Text-to-Speech (TTS) API to produce a voice response.
+The Voice Assistant application implements a full voice interaction pipeline on Android, enabling real-time, conversational interactions.
 
-![example image alt-text#center](overview.png "Figure 1: Overview")
 
-These three steps correspond to specific components used in the Voice Assistant application. A more detailed description of each step is provided.
 
-## Speech to Text Library
+![example image alt-text#center](overview.png "The voice interaction pipeline.")
 
-Speech-to-Text is also known as Automatic Speech Recognition. This part of the pipeline focuses on converting spoken language into written text.
+It generates intelligent responses using:
+1. **Speech-to-Text (STT)** to transform the user's audio input into text.
+2. A **Large Language Model (LLM)** to generate a response in text form.
+3. Android **Text-to-Speech (TTS)** API to produce a spoken reply.
 
-Speech recognition is done in the following stages:
+
+The following sections describe how each component works in the application.
+
+## Speech-to-Text 
+
+Speech-to-Text (STT), also known as Automatic Speech Recognition (ASR), converts spoken language into written text.
+
+This process includes the following stages:
 - The device's microphone captures spoken language as an audio waveform.
-- The audio waveform is broken into small time frames, and features are extracted to represent sound.
-- A neural network is used to predict the most likely transcription of audio based on grammar and context.
-- The final recognized text is generated for the next stage of the pipeline.
+- The audio is segmented into short time frames.
+- Features are extracted from each frame.
+- A neural network analyzes these features to predict the most likely transcription based on grammar and context.
+- The recognized text is passed to the next stage of the pipeline.
 
-## Large Language Models Library
+## Large Language Model  
 
-Large Language Models (LLMs) are designed for natural language understanding, and in this application, they are used for question-answering.
+Large Language Models (LLMs) enable natural language understanding and, in this application, are used for question-answering.
 
-The text transcription from the previous part of the pipeline is used as input to the neural model. During initialization, the application assigns a persona to the LLM to ensure a friendly and informative voice assistant experience. By default, the application uses an asynchronous flow for this part of the pipeline, meaning that parts of the response are collected as they become available. The application UI is updated with each new token, and these are also used for the final stage of the pipeline.
+The text transcription from the previous part of the pipeline is used as input to the neural model. At initialization, the app sets a predefined persona that influences the tone, style, and character of the responses. 
 
-## Text to Speech Component
+By default, the LLM runs asynchronously, streaming tokens as they are generated. The UI updates in real time with each token, which is also passed to the final pipeline stage.
 
-This part of the application pipeline uses the Android Text-to-Speech API with some extra functionality to ensure smooth and natural speech output.
+## Text-to-Speech 
 
-In synchronous mode, speech is only generated after the full response from the LLM is received. By default, the application operates in asynchronous mode, where speech synthesis starts as soon as a sufficient portion of the response (such as a half or full sentence) is available. Any additional responses are queued for processing by the Android Text-to-Speech engine.
+This part of the application pipeline uses the Android Text-to-Speech API along with additional logic to produce smooth, natural speech.
+
+In synchronous mode, speech playback begins only after the full LLM response is received. By default, the application operates in asynchronous mode, where speech synthesis starts as soon as a full or partial sentence is ready. Remaining tokens are buffered and processed by the Android Text-to-Speech engine to ensure uninterrupted playback.
