@@ -17,7 +17,7 @@ By default, developer mode is not active on Android phones. You will need to act
 
 Once your phone is in developer mode, plug it into the USB cable: it should appear as a running device in the top bar. Select it and then press the run button (small red circle in figure 4 below). This will transfer the app to the phone and launch it.
 
-In the picture below, a Pixel 6a phone has been connected to the USB cable:
+In the picture below, a Samsung Galaxy Z Flip 6 phone has been connected to the USB cable:
 ![example image alt-text#center](upload.png "Figure 5: Upload the Voice App")
 
 ## Run the Voice Assistant
