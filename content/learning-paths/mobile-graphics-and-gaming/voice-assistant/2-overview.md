@@ -10,16 +10,19 @@ layout: learningpathall
 
 The voice assistant application implements a full voice interaction pipeline on Android, enabling real-time, conversational interactions.
 
+
+
+![example image alt-text#center](overview.png "Figure 1: The voice interaction pipeline.")
+
 It generates intelligent responses using:
 1. **Speech-to-Text (STT)** to transform the user's audio input into text.
 2. A **Large Language Model (LLM)** to generate a response in text form.
 3. Android **Text-to-Speech (TTS)** API to produce a spoken reply.
 
-![example image alt-text#center](overview.png "Figure 1: Overview of the voice interaction pipeline.")
 
 The following sections describe how each component works in the application.
 
-## Speech-to-Text component
+## Speech-to-Text 
 
 Speech-to-Text (STT), also known as Automatic Speech Recognition (ASR), converts spoken language into written text.
 
@@ -30,13 +33,13 @@ This process includes the following stages:
 - A neural network analyzes these features to predict the most likely transcription based on grammar and context.
 - The recognized text is passed to the next stage of the pipeline.
 
-## Large Language Model component 
+## Large Language Model  
 
 Large Language Models (LLMs) enable natural language understanding and, in this application, are used for question-answering.
 
 The text transcription from the previous part of the pipeline is used as input to the neural model. At initialization, the app sets a predefined persona that influences the tone, style, and character of the responses. By default, the LLM runs asynchronously, streaming tokens as they are generated. The UI updates in real time with each token, which is also passed to the final pipeline stage.
 
-## Text-to-Speech component
+## Text-to-Speech 
 
 This part of the application pipeline uses the Android Text-to-Speech API along with additional logic to produce smooth, natural speech.
 

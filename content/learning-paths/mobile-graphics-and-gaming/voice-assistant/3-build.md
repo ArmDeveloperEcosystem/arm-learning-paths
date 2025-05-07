@@ -1,5 +1,5 @@
 ---
-title: Build the Voice Assistant
+title: Build the voice assistant
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 In this section you will build the Voice Assistant application to run on your Android phone.
 
-## Download the Voice Assistant
+## Download the voice assistant
 
 Start by cloning the repository with the complete example application code:
 
@@ -16,7 +16,7 @@ Start by cloning the repository with the complete example application code:
 git clone https://git.gitlab.arm.com/kleidi/kleidi-examples/real-time-voice-assistant.git voice-assistant.git
 ```
 
-## Build the Voice Assistant
+## Build the voice assistant
 
 Open Android Studio and open the project that you downloaded in the previous step:
 

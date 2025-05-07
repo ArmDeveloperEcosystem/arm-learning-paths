@@ -1,5 +1,5 @@
 ---
-title: Accelerate Voice Assistant Performance with KleidiAI and SME2
+title: Accelerate voice assistant performance with KleidiAI and SME2
 
 draft: true
 cascade:
