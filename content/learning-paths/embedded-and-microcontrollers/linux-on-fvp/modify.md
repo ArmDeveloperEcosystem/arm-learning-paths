@@ -1,16 +1,18 @@
 ---
 title: Modify device tree for Linux
-weight: 5
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-### 1. Remove PCI and SMMU nodes
+## Remove PCI and SMMU nodes
 
-If you build the software without modifying the device tree, you might get the following error message after running the software stack:
+CPU FVPs do not include PCI and SMMU support. To run the reference software stack on CPU FVPs remove the PCI and SMMU nodes from the device tree.
 
-```
+If you build the software without modifying the device tree, you get the following error message after running the software stack:
+
+```console
 [    0.563774] pci-host-generic 40000000.pci: host bridge /pci@40000000 ranges:
 [    0.563972] pci-host-generic 40000000.pci:      MEM 0x0050000000..0x005fffffff -> 0x0050000000
 [    0.564233] pci-host-generic 40000000.pci: ECAM at [mem 0x40000000-0x4fffffff] for [bus 00-01]
@@ -71,17 +73,15 @@ If you build the software without modifying the device tree, you might get the f
 [    0.571366] ---[ end Kernel panic - not syncing: Attempted to kill init! exitcode=0x0000000b ]---
 ```
 
-On CPU FVP platforms, PCI and SMMU devices are not supported. To make Linux run successfully, remove the PCI and SMMU nodes from the device tree.
-
 The [Arm reference software stack](https://gitlab.arm.com/arm-reference-solutions/arm-reference-solutions-docs/-/blob/master/docs/aemfvp-a/user-guide.rst) uses the following device tree:
 
-```
+```output
 linux/arch/arm64/boot/dts/arm/fvp-base-revc.dts
 ```
 
-1.1 Delete the following lines from the device tree:
+Use a text editor to delete the following lines from the device tree:
 
-```
+```console
 155         pci: pci@40000000 {
 156                 #address-cells = <0x3>;
 157                 #size-cells = <0x2>;
@@ -116,20 +116,20 @@ linux/arch/arm64/boot/dts/arm/fvp-base-revc.dts
 186         };
 ```
 
-1.2 Rebuild Linux by using the following commands:
+Rebuild Linux using the following commands:
 
-```
+```console
 ./build-scripts/build-linux.sh -p aemfvp-a -f busybox clean
 ./build-scripts/build-linux.sh -p aemfvp-a -f busybox build
 ```
 
-1.3 Package the built Linux to the BusyBox disk image by using the following command:
+Package the built Linux to the BusyBox disk image by using the following command:
 
-```
+```console
 ./build-scripts/aemfvp-a/build-test-busybox.sh -p aemfvp-a package
 ```
 
-### 2. Modify CPU nodes
+### Modify CPU nodes
 
 On Arm64 SMP systems, cores are identified by the MPIDR_EL1 register. The MPIDR_EL1 in the [Arm Architecture Reference Manual](https://developer.arm.com/documentation/ddi0487/latest) does not provide strict enforcement of MPIDR_EL1 layout.
 
@@ -137,13 +137,13 @@ For example, Cortex-A55 has a layout different from the layout of Cortex-A53.
 
 The following two tables compare the MPIDR_EL1 Layout between Cortex-A55 and Cortex-A53.
 
-![Cortex-A55 MPIDR_EL1 Layout](cortex-a55_MPIDR_EL1.png "Figure 1. Cortex-A55 MPIDR_EL1 Layout")
+![Cortex-A55 MPIDR_EL1 Layout #center](cortex-a55_MPIDR_EL1.png)
 
-![Cortex-A53 MPIDR_EL1 Layout](Cortex-a53_MPIDR_EL1.png "Figure 1. Cortex-A55 MPIDR_EL1 Layout")
+![Cortex-A53 MPIDR_EL1 Layout #center](Cortex-a53_MPIDR_EL1.png)
 
 Linux Kernel boots the CPU cores according to the affinity values in the device tree. However, different CPU FVP platforms use different affinity values. If the affinity value in the device tree is not consistent with the CPU FVP platform, you might get the following error:
 
-```
+```output
 [    0.023728] psci: failed to boot CPU2 (-22)
 [    0.023948] CPU2: failed to boot: -22
 [    0.025770] psci: failed to boot CPU3 (-22)
@@ -160,11 +160,11 @@ Linux Kernel boots the CPU cores according to the affinity values in the device 
 
 Affinity values in the device tree must be consistent with the affinity values in the FVP platform. Perform the following steps to modify affinity values:
 
-2.1 Get correct affinity value for the FVP platforms
+### Get correct affinity value for the FVP platforms
 
 The parameter pctl.CPU-affinities in the FVP platform shows the correct affinity values, for example:
 
-```
+```console
 $FVP_Base_Cortex-A55x4 -l |grep pctl.CPU-affinities
 pctl.CPU-affinities=0.0.0.0, 0.0.1.0, 0.0.2.0, 0.0.3.0
 $FVP_Base_Cortex-A57x2-A53x4 -l  |grep pctl.CPU-affinities
@@ -173,26 +173,26 @@ pctl.CPU-affinities=0.0.0.0, 0.0.0.1, 0.0.1.0, 0.0.1.1, 0.0.1.2, 0.0.1.3
 
 The CPU affinity values on the FVP_Base_Cortex-A55x4 are:
 
-```
+```console
 0x0,0x0100,0x0200,0x300
 ```
 The CPU affinity values on the FVP_Base_Cortex-A57x2-A53x4 are:
 
-```
+```console
 0x0,0x1,0x0100,0x0101,0x0102,0x0103
 ```
 
-2.2 Modify the affinity values in the device tree to be consistent with the FVP platform
+### Modify the affinity values in the device tree to be consistent with the FVP platform
 
 You must change the affinity value in the device tree:
 
-```
+```console
 linux/arch/arm64/boot/dts/arm/fvp-base-revc.dts
 ```
 
 Consider FVP_Base_Cortex-A57x2-A53x4 as an example:
 
-```
+```console
 cpu0: cpu@0 {
         device_type = "cpu";
         compatible = "arm,armv8";
@@ -231,16 +231,18 @@ cpu5: cpu@103 {
 };
 ```
 
-2.3 Remove unnecessary CPU nodes from the device tree, according to the CPU numbers of the FVP platform.
+### Remove unnecessary CPU nodes
 
-2.4 Rebuild the Linux by using the following commands:
+Remove unnecessary CPU nodes from the device tree, according to the CPU numbers of the FVP platform.
+
+Rebuild the Linux by using the following commands:
 
 ```
 ./build-scripts/build-linux.sh -p aemfvp-a -f busybox clean
 ./build-scripts/build-linux.sh -p aemfvp-a -f busybox build
 ```
 
-2.5 Package the built Linux to the BusyBox disk image by using the following command:
+Package the built Linux to the BusyBox disk image by using the following command:
 
 ```
 ./build-scripts/aemfvp-a/build-test-busybox.sh -p aemfvp-a package
