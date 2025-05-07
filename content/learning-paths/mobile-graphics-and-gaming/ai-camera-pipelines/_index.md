@@ -1,6 +1,10 @@
 ---
 title: AI Camera Pipelines
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: This Learning Path is an introductory topic on improving the performance of camera pipelines using KleidiAI and KleidiCV.
