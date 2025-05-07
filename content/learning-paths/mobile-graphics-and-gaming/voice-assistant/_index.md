@@ -14,7 +14,7 @@ learning_objectives:
     - Optimize performance using KleidiAI and SME2.
 
 prerequisites:
-    - An Android phone that supports i8mm (int8 matrix multiplication), such as the Google Pixel 8 Pro.
+    - An Android phone that supports i8mm (int8 matrix multiplication). This Learning Path was tested on a Samsung Galaxy Z Flip 6.
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
 
 author: Arnaud de Grandmaison
