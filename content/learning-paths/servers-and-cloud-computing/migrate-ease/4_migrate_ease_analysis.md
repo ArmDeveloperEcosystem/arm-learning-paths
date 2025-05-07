@@ -18,7 +18,7 @@ A json file, `result.json`, will be generated in current directory once the scan
 
 ### How to read the result
 The JSON result is organized as following format:
-```json
+```output
 {
     "arch": "aarch64",
     "branch": "v2.5.0",
