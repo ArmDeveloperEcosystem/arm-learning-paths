@@ -10,9 +10,9 @@ layout: learningpathall
 
 ---
 
-The Voice Assistant application combines local LLM inference and speech recognition - both computationally demanding tasks that have been optimized for Arm platforms using efficient libraries like [Llama.cpp](https://github.com/ggml-org/llama.cpp) and KleidiAI.
+The voice assistant application combines local LLM inference and speech recognition - both computationally demanding tasks that have been optimized for Arm platforms using efficient libraries like [Llama.cpp](https://github.com/ggml-org/llama.cpp) and KleidiAI.
 
-Speech recognition is also a computation-intensive task and has been optimized for Arm processors as well.
+Speech recognition, another compute-intensive process, has also been optimized for Arm processors.
 
 ## KleidiAI
 
@@ -20,7 +20,7 @@ This application uses the [KleidiAI library](https://gitlab.arm.com/kleidi/kleid
 
 [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) is an open-source library of highly tuned micro-kernels for AI workloads on Arm CPUs. These routines are optimized to exploit specific Arm hardware features for maximum performance.
 
-The KleidiAI library has been designed for easy adoption into C or C++ machine learning (ML) and AI frameworks. Developers looking to incorporate specific micro-kernels into their projects can simply include the corresponding `.c` and `.h` files associated with those micro-kernels and a common header file.
+The KleidiAI library is designed for easy integration into C or C++ machine learning (ML) and AI frameworks. Developers looking to incorporate specific micro-kernels into their projects can include the corresponding `.c` and `.h` files associated with those micro-kernels and a common header file.
 
 ### Compare the performance without KleidiAI
 
@@ -29,10 +29,10 @@ By default, the Voice Assistant is built with KleidiAI support on Arm platforms,
 To disable KleidiAI during build:
 
 * Add `-PkleidiAI=false` to your Gradle command:`./gradlew build -PkleidiAI=false`.
-* Or, add this to your top-level `gradle.properties` file: kleidiAI=false.  
+* Or, add this to your top-level `gradle.properties` file: `kleidiAI=false`.  
 
 ### Why use KleidiAI?
 
-A significant benefit of using KleidiAI is that it enables the developer to work at a relatively high level, leaving the KleidiAI library to select the best implementation at runtime to perform the computation in the most efficient way on the current target. This is a great advantage because a significant amount of work has gone into optimizing those micro-kernels.
+A significant benefit of using KleidiAI is its abstraction: developers can work at a high level, leaving the KleidiAI library to select the best implementation at runtime to perform the computation in the most efficient way on the current target. This is a great advantage because a significant amount of work has gone into optimizing those micro-kernels.
 
-It becomes even more powerful when newer versions of the architecture become available: a simple update of the KleidiAI library used by the Voice Assistant will automatically give it access to newer hardware features as they become available. An example of such a feature deployment is happening with SME2, which means in the near future, the Voice Assistant will be able to benefit from improved performance — on devices that have implemented SME2 — with no further effort required from the developer.
+It becomes even more powerful when newer versions of the architecture become available: a simple update of the KleidiAI library used by the voice assistant will automatically give it access to newer hardware features as they become available. As new Arm architecture features roll out - such as SME2, in the future the voice assistant will be able to benefit from improved performance — on devices that have implemented SME2 — with no further effort required from the developer.

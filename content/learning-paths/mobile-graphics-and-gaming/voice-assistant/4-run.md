@@ -15,14 +15,14 @@ By default, Android devices ship with developer mode disabled. To enable it, fol
 
 ## Install the voice assistant
 
-Once developer mode is enabled, connect your phone to your computer via USB. It should appear as a running device in the top toolbar. Select the device and click the Run button (a small red circle, as figure 4 below shows). This transfers the app to your phone and launches it.
+Once developer mode is enabled, connect your phone to your computer via USB. It should appear as a running device in the top toolbar. Select the device and click the Run button (a small green triangle, as shown below). This transfers the app to your phone and launches it.
 
 In the picture below, a Pixel 6a phone is connected to the USB cable:
 ![example image alt-text#center](upload.png "Figure 5: Upload the Voice App")
 
 ## Launch the voice assistant
 
-The Voice Assistant welcomes you with this screen:
+The app starts with this welcome screen:
 
 ![example image alt-text#center](voice_assistant_view1.png "Figure 6: Welcome Screen")
 
@@ -38,12 +38,12 @@ You can toggle performance counters such as:
 - LLM decode tokens per second.
 - Speech generation time.
 
-Click the icon circled in red in the upper left corner to show or hide these metrics:
+Click the icon circled in red in the top left corner to show or hide these metrics:
 
 ![example image alt-text#center](voice_assistant_view2.png "Figure 7: Performance Counters")
 
 ### Reset assistant context
 
-To reset the assistant's conversation history, click the icon circled in red in the upper right:
+To reset the assistant's conversation history, click the icon circled in red in the top right:
 
 ![example image alt-text#center](voice_assistant_view3.png "Figure 8: Reset the Voice Assistant's Context")

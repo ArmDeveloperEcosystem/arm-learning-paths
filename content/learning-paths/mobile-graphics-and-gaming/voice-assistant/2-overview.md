@@ -12,7 +12,7 @@ The voice assistant application implements a full voice interaction pipeline on 
 
 
 
-![example image alt-text#center](overview.png "Figure 1: The voice interaction pipeline.")
+![example image alt-text#center](overview.png "The voice interaction pipeline.")
 
 It generates intelligent responses using:
 1. **Speech-to-Text (STT)** to transform the user's audio input into text.
