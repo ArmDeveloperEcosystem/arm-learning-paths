@@ -24,7 +24,7 @@ In the picture below, a Pixel 6a phone has been connected to the USB cable:
 
 The Voice Assistant will welcome you with this screen:
 
-![example image alt-text#center](voice_assistant_view1.png "Figure 6: Welcome Screen")
+![example image alt-text#center](voice_assistant_view1.jpg "Figure 6: Welcome Screen")
 
 You can now use the Press to Talk at the bottom and make your request!
 
@@ -40,10 +40,10 @@ You can switch on/off the display of some performance counters like:
 
 by clicking on the element circled in red in the upper left:
 
-![example image alt-text#center](voice_assistant_view2.png "Figure 7: Performance Counters")
+![example image alt-text#center](voice_assistant_view2.jpg "Figure 7: Performance Counters")
 
 ### Reset the Voice Assistant's Context
 
 By clicking on the icon circled in red in the upper right corner, you can reset the assistant's context.
 
-![example image alt-text#center](voice_assistant_view3.png "Figure 8: Reset the Voice Assistant's Context")
+![example image alt-text#center](voice_assistant_view3.jpg "Figure 8: Reset the Voice Assistant's Context")

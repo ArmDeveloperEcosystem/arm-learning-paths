@@ -14,7 +14,7 @@ learning_objectives:
     - Use KleidiAI and SME2 to improve the performance of the voice assistant.
 
 prerequisites:
-    - An Android phone with support for i8mm (tested on Google Pixel 8 Pro).
+    - An Android phone with support for i8mm (tested on Samsung Galaxy Z Flip 6).
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
 
 author: Arnaud de Grandmaison
