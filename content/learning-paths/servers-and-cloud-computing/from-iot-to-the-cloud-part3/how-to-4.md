@@ -18,7 +18,7 @@ To deploy an application to the Kubernetes cluster, you typically use the YAML f
 
 To expose the pod to other services and the Internet, we will use a Service of the type Load Balancer. Under the hood, Kubernetes will request a public IP from Azure. We will use this IP to access our application.
 
-Let’s now use this declaration to deploy our People.WebApp to the Azure Kubernetes Cluster. To do so, we proceed as follows:
+Let's now use this declaration to deploy our People.WebApp to the Azure Kubernetes Cluster. To do so, we proceed as follows:
 1.	Open the Cloud Shell
 
 2.	Download the declaration file by typing:

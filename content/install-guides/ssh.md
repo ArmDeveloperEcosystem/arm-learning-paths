@@ -113,7 +113,7 @@ sudo passwd ubuntu
 
 For improved security, set the security group of the cloud instance to allow port 22 traffic (SSH) from a minimal set of IP addresses, not anywhere on the internet. Use password access with caution.
 
-### How do I manage SSH keys?
+### How do I manage SSH keys? {#ssh-keys}
 
 SSH uses a private and a public key. The public key is placed on the remote machine (server) and the private key is kept on the local machine (client). The keys allow the client to connect to the server.
 

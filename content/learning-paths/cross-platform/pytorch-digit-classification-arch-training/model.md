@@ -58,7 +58,7 @@ class NeuralNetwork(nn.Module):
         return logits
 ```
 
-To build the neural network in PyTorch, define a class that inherits from PyTorch’s nn.Module. This approach is similar to TensorFlow’s subclassing API. 
+To build the neural network in PyTorch, define a class that inherits from PyTorch's nn.Module. This approach is similar to TensorFlow's subclassing API. 
 
 Define a class named NeuralNetwork, which consists of two main components:
 
@@ -96,7 +96,7 @@ After running the notebook, you will see the output as shown in Figure 4:
 
 ![img4 alt-text#center](figures/4.png "Figure 4: Notebook Output.")
 
-You will see a detailed summary of the NeuralNetwork model’s architecture, including the following information:
+You will see a detailed summary of the NeuralNetwork model's architecture, including the following information:
 
 1.	Layer Details
 
@@ -126,7 +126,7 @@ This summary provides a clear overview of the model architecture, the dimensiona
 
 Running the model now will produce random outputs, as the network has not been trained to recognize any patterns from the data. The next step is to train the model using a dataset and an optimization process, such as gradient descent, so that it can learn to make accurate predictions.
 
-At this point, the model makes predictions, but since it hasn’t been trained, the predictions are random and unreliable. The network’s weights are initialized randomly, or use the default initialization methods, so the output probabilities from the softmax layer are essentially random.
+At this point, the model makes predictions, but since it hasn’t been trained, the predictions are random and unreliable. The network's weights are initialized randomly, or use the default initialization methods, so the output probabilities from the softmax layer are essentially random.
 
 The output is still a probability distribution over the 10 digit classes (0-9), but the values do not correspond to the images, because the model has not learned the patterns from the MNIST dataset.
 

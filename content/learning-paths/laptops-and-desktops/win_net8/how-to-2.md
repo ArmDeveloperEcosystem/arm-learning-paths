@@ -46,7 +46,7 @@ The above command will lead to significantly longer execution times than before:
 
 The operations all take more time on the emulated x64 than when you execute them natively on Arm64. On average, native execution provides about a 19% performance improvement for list sorting, 11% for matrix multiplication, and 35% for string operations.
 
-The following chart summarizes the mean execution times for x64 and Arm64’s natively executed code.
+The following chart summarizes the mean execution times for x64 and Arm64's natively executed code.
 
 ![fig4](figures/05.png)
 

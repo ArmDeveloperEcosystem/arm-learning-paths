@@ -163,7 +163,7 @@ spec:
         - containerPort: 80
 ```
 
-The `service.yml` file defines a `Service` and uses `LoadBalancer` to expose the service externally on port 8080, directing traffic to the application’s container on port 80.
+The `service.yml` file defines a `Service` and uses `LoadBalancer` to expose the service externally on port 8080, directing traffic to the application's container on port 80.
 
 ```yaml
 apiVersion: v1

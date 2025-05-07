@@ -34,7 +34,7 @@ OpenCV integrates seamlessly with popular machine learning frameworks such as Te
 
 OpenCV has a large, active community of developers and researchers who contribute to its development, provide support, and share knowledge through forums, GitHub, and other platforms. This community support ensures continuous improvements and up-to-date solutions for face detection and other computer vision tasks.
 
-Overall, OpenCV’s importance in face detection lies in its robust, versatile, and accessible tools that enable developers and researchers to implement efficient and effective face detection solutions across various applications and platforms.
+Overall, OpenCV's importance in face detection lies in its robust, versatile, and accessible tools that enable developers and researchers to implement efficient and effective face detection solutions across various applications and platforms.
 
 In this Learning Path, you will learn how to use the Haar classifier from OpenCV to detect human face in the frames acquired from the mobile's device camera.
 

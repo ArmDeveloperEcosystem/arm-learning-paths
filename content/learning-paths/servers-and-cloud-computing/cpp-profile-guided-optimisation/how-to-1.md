@@ -1,25 +1,23 @@
 ---
-title: Introduction to Profile-Guided Optimisation
+title: Introduction to Profile-Guided Optimization
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Introduction to Profile Guided Optimisation
+### What is Profile-Guided Optimization (PGO) and how does it work?
 
-### What is Profile-Guided Optimization (PGO) and How Does It Work?
+Profile-Guided Optimization (PGO) is a compiler optimization technique that enhances program performance by utilizing real-world execution data. In GCC/G++, PGO involves a two-step process: first, compile the program with the `-fprofile-generate` flag to produce an instrumented binary that collects profiling data during execution; and second, recompile the program with the `-fprofile-use` flag, allowing the compiler to leverage the collected data to make informed optimization decisions. This approach identifies frequently executed paths—known as “hot” paths—and optimizes them more aggressively, while potentially reducing emphasis on less critical code paths.
 
-Profile-Guided Optimization (PGO) is a compiler optimization technique that enhances program performance by utilizing real-world execution data. In GCC/G++, PGO involves a two-step process: first, compiling the program with the `-fprofile-generate` flag to produce an instrumented binary that collects profiling data during execution; and second, recompiling the program with the `-fprofile-use` flag, allowing the compiler to leverage the collected data to make informed optimization decisions. This approach enables the compiler to identify frequently executed paths—known as “hot” paths—and optimize them more aggressively, while potentially reducing the emphasis on less critical code paths.
+### When should I use Profile-Guided Optimization?
 
-### When to Use Profile-Guided Optimization
+PGO is particularly beneficial in the later stages of development when real-world workloads are available. It is most effective for applications where performance is critical and runtime behavior is complex or data-dependent. For instance, consider optimizing “hot” functions that execute frequently. Doing so ensures that the most impactful parts of your code are optimized based on actual usage patterns.
 
-PGO is particularly beneficial in the later stages of development when the real-world workload can be applied. It’s most effective for applications where performance is critical and runtime behavior is complex or data-dependent. For instance, optimizing “hot” functions that are executed frequently. By focusing on these critical sections, PGO ensures that the most impactful parts of the code are optimized based on actual usage patterns.
+### What are the limitations of Profile-Guided Optimization and when should I avoid it?
 
-### Limitations of Profile-Guided Optimization and When Not to Use
+While PGO offers substantial performance benefits, it has limitations. The profiling data must accurately represent typical usage scenarios; otherwise, the optimizations may not deliver the desired performance improvements and could even degrade performance.
 
-While PGO offers substantial performance benefits, it has limitations. The profiling data must accurately represent typical usage scenarios; otherwise, the optimizations may not yield the desired performance improvements and could even degrade performance. 
+Additionally, the process requires extra build steps, potentially increasing compile times for large codebases. Therefore, use PGO only on performance-critical sections that are heavily influenced by actual runtime behavior. PGO might not be ideal for early-stage development or applications with highly variable or unpredictable usage patterns.
 
-Additionally, the process requires additional build steps which will inevitably increase compile time which can be an issue for large code bases. As such, PGO is not suitable for all sections of code. We recommend only using PGO only sections of code which are heavily influenced by run-time behaviour and are performance critical. Therefore, PGO might not be ideal for early-stage development or for applications with highly variable or unpredictable usage patterns.
-
-Please refer to the [GCC documentation](https://gcc.gnu.org/onlinedocs/gcc-13.3.0/gcc/Instrumentation-Options.html) for more information. 
+Please refer to the [GCC documentation](https://gcc.gnu.org/onlinedocs/gcc-13.3.0/gcc/Instrumentation-Options.html) for further details on enabling and using PGO.

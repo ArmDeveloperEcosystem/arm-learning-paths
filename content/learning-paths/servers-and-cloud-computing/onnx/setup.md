@@ -8,24 +8,20 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Before You Begin
-
-This Learning Path demonstrates how to run quantized Phi models on the Cobalt 100 servers using ONNX Runtime. Specifically, it focuses on deploying the Phi 3.5 vision model on Arm-based servers running Ubuntu 24.04 LTS. The instructions have been tested on a Azure Dpls_v6 - 32 cores instance.
+In this Learning Path you will learn how to run quantized Phi models using ONNX Runtime on Microsoft Azure Cobalt 100 servers using ONNX Runtime. Specifically, you will deploy the Phi 3.5 vision model on Arm-based servers running Ubuntu 24.04 LTS. The instructions have been tested on an Azure `Dpls_v6` 32 core instance.
 
 ## Overview
 
-In this Learning Path, you will learn how to build and configure ONNX Runtime to enable efficient LLM inference on Arm CPUs.
+You will learn how to build and configure ONNX Runtime to enable efficient LLM inference on Arm CPUs.
 
 The tutorial covers the following steps:
 - Building ONNX Runtime, quantizing and converting the Phi 3.5 vision model to the ONNX format.
 - Running the model using a Python script with ONNX Runtime to perform LLM inference on the CPU.
-- Analyze the performance.
-
-By the end of this Learning Path, you will have a complete workflow for deploying and running quantized vision models on Arm-based servers.
+- Analyzing the performance.
 
 ## Install dependencies
 
-Install the following packages on your Arm based server instance:
+Install the following packages on your Arm-based server instance:
 
 ```bash
     sudo apt update
@@ -34,11 +30,7 @@ Install the following packages on your Arm based server instance:
 
 ## Create a requirements file
 
-```bash
-    vim requirements.txt
-```
-
-Add the following dependencies to your `requirements.txt` file:
+Use a file editor of your choice and create a `requirements.txt` file will the python packages shown below:
 
 ```python
     requests
@@ -74,12 +66,12 @@ Clone and build the `onnxruntime-genai` repository, which includes the Kleidi AI
     cd onnxruntime-genai/
     python3 build.py --config Release
     cd build/Linux/Release/wheel/
-    pip install onnxruntime_genai-0.8.0.dev0-cp312-cp312-linux_aarch64.whl
+    pip install onnxruntime_genai-0.9.0.dev0-cp312-cp312-linux_aarch64.whl
 ```
 
 ## Download and Quantize the Model
 
-Navigate to the home directory, download and quantize model using `huggingface-cli`:
+Navigate to the home directory, download the quantized model using `huggingface-cli`:
 ```bash
     cd ~
     huggingface-cli download microsoft/Phi-3.5-vision-instruct-onnx --include cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4/* --local-dir .

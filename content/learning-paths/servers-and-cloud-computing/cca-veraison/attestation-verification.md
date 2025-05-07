@@ -9,7 +9,7 @@ layout: learningpathall
 ## Attestation Verification Service for Pre-Silicon CCA Platforms
 [Linaro](https://www.linaro.org/) provides an attestation verifier service for pre-silicon CCA platforms, such as the Fixed Virtual Platform (FVP). This service is available publicly and is hosted on Linaro infrastructure. This verification service can be used to verify CCA attestation tokens that come from emulated Arm platforms, including the example token that you have been using in this exercise.
 
-Linaro’s verification service is implemented using components from the open source [Veraison](https://github.com/veraison) project.
+Linaro's verification service is implemented using components from the open source [Veraison](https://github.com/veraison) project.
 
 The URL for reaching this experimental verifier service is https://veraison.test.linaro.org:8443.
 

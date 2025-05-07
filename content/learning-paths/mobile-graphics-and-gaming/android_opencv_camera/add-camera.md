@@ -97,7 +97,7 @@ The view now contains two buttons: Start and Stop. They will be used to start an
 Finally, in the view above, we have an ImageView which will be used to display images from the camera.
 
 ## Request access to the camera
-To be able to record images with the device’s camera, you will first need to request the user’s permission to access the device’s camera. Follow these steps:
+To be able to record images with the device's camera, you will first need to request the user's permission to access the device's camera. Follow these steps:
 1. Open AndroidManifest.xml (app/manifests), and add the following statements before the **application** node:
 
 ```XML

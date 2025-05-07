@@ -20,7 +20,7 @@ These steps have been tested on an AWS Graviton4 `c8g.8xlarge` instance.
 
 OpenAI Whisper is an open-source Automatic Speech Recognition (ASR) model trained on multilingual, multitask data. It can generate transcripts in multiple languages and translate various languages into English. 
 
-In this Learning Path, you will learn about the foundational aspects of speech-to-text transcription applications, with a focus on running OpenAI’s Whisper on an Arm CPU. You will explore the implementation and performance considerations required to efficiently deploy Whisper using the Hugging Face Transformers framework.
+In this Learning Path, you will learn about the foundational aspects of speech-to-text transcription applications, with a focus on running OpenAI's Whisper on an Arm CPU. You will explore the implementation and performance considerations required to efficiently deploy Whisper using the Hugging Face Transformers framework.
 
 ### Speech-to-text ML applications
 

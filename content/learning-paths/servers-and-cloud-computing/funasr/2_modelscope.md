@@ -95,7 +95,7 @@ print(result)
 ```
 
 This piece of code specifies a model and provides a Chinese sentence for the model to segment;
-"A New Year’s greeting message to share with everyone."
+"A New Year's greeting message to share with everyone."
 
 Run the model inference on the sample text:
 

@@ -19,7 +19,7 @@ The `--help` option returns usage instructions and the full list of available op
 Note
 
 {{% notice %}}
-On macOS, Mali Offline Compiler might not be recognised as an application from an identified developer. To enable Mali Offline Compiler, open **System Preferences > Security & Privacy**, and select **Allow Anyway** for the `malioc` item.
+On macOS, Mali Offline Compiler might not be recognized as an application from an identified developer. To enable Mali Offline Compiler, open **System Preferences > Security & Privacy**, and select **Allow Anyway** for the `malioc` item.
 {{% /notice %}}
 
 ## Supported GPUs

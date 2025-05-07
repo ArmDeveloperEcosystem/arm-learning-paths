@@ -222,7 +222,7 @@ javac 21.0.4
 
 ## Which version of Java should I use for Arm Linux systems?
 
-For performance and security, it’s important to ensure that your version of Java is at least 11.0.12. Earlier versions lack significant performance improvements. Java performance has steadily increased over time and newer versions provide improved performance.
+For performance and security, it's important to ensure that your version of Java is at least 11.0.12. Earlier versions lack significant performance improvements. Java performance has steadily increased over time and newer versions provide improved performance.
 
 ## Which flags are available for tuning the JVM?
 

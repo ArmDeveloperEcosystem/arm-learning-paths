@@ -6,21 +6,23 @@ weight: 4
 layout: learningpathall
 ---
 
-## Compile the ONNX Runtime Generate() API for Windows on Arm
+## Build the ONNX Runtime Generate() API for Windows on Arm 
 
 The Generate() API in ONNX Runtime is designed for text generation tasks using models like Phi-3. It implements the generative AI loop for ONNX models, including:
-- pre- and post-processing
-- inference with ONNX Runtime- logits processing
-- search and sampling
-- KV cache management
+- Pre- and post-processing.
+- Inference with ONNX Runtime (including logits processing).
+- Search and sampling.
+- KV cache management.
 
-You can learn more by reading the [ONNX Runtime Generate() API page](https://onnxruntime.ai/docs/genai/).
+{{% notice Learning Tip %}}
+You can learn more about this area by reading the [ONNX Runtime Generate() API documentation](https://onnxruntime.ai/docs/genai/).
+{{% /notice %}}
 
-In this section you will learn how to build the Generate API() from source.
+In this section, you'll build the Generate() API from source.
 
 
-### Clone onnxruntime-genai Repo
-Within your Windows Developer Command Prompt for Visual Studio, checkout the source repo:
+### Clone the onnxruntime-genai repository
+From your **Windows Developer Command Prompt for Visual Studio**, clone the repository and checkout the following tested commit:
 
 ```bash
 cd C:\Users\%USERNAME%
@@ -35,19 +37,21 @@ You might be able to use later commits. These steps have been tested with the co
 {{% /notice %}}
 
 ### Build for Windows on Arm
-The build command below has a ---config argument, which takes the following options:
-- ```Release``` builds release build
-- ```Debug``` builds binaries with debug symbols
-- ```RelWithDebInfo``` builds release binaries with debug info
+The build script uses a --config argument, which supports the following options:
+- ```Release``` builds release build.
+- ```Debug``` builds binaries with debug symbols.
+- ```RelWithDebInfo``` builds release binaries with debug info.
 
-You will build the `Release` variant of the ONNX Runtime Generate() API:
+To build the `Release` variant of the ONNX Runtime Generate() API:
 
 ```bash
 pip install requests
 python build.py --config Release --skip_tests
 ```
 
-When the build is complete, confirm the ONNX Runtime Generate() API Dynamic Link Library has been created:
+### Verify the output
+
+When the build is complete, confirm the ONNX Runtime Generate() API Dynamically Linked Library has been created:
 
 ```output
 dir build\Windows\Release\Release\onnxruntime-genai.dll

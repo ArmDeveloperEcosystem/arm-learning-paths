@@ -34,7 +34,8 @@ sw_categories:
       tests_and_status: []
     ams:
       readable_title: Arm Performance Studio
-      tests_and_status: []
+      tests_and_status:
+      - ubuntu:latest: passed
     anaconda:
       readable_title: Anaconda
       tests_and_status:
@@ -177,7 +178,11 @@ sw_categories:
       tests_and_status: []
   iot: {}
   laptops-and-desktops: {}
-  mobile-graphics-and-gaming: {}
+  mobile-graphics-and-gaming:
+    voice-assistant:
+      readable_title: Accelerate a Voice Assistant with KleidiAI and SME2
+      tests_and_status:
+      - ubuntu:latest: passed
   servers-and-cloud-computing:
     clickhouse:
       readable_title: Measure performance of ClickHouse on Arm servers

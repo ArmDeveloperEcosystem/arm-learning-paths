@@ -35,7 +35,7 @@ Examples of triggers include:
 * Cosmos DB Trigger - runs whenever new data is added or updated in Cosmos DB.
 * IoT Hub/Event Hub Triggers - respond immediately to events like incoming IoT device messages.
 
-In IoT scenarios, triggers tied to Cosmos DB are particularly powerful. For example, an Azure Function can automatically activate when new sensor readings are stored in Cosmos DB, allowing you to implement real-time monitoring, send immediate notifications, or perform analytics. Each function’s event-driven execution ensures your application remains highly responsive, efficient, and scalable, crucial for maintaining performance and cost-effectiveness in IoT solutions
+In IoT scenarios, triggers tied to Cosmos DB are particularly powerful. For example, an Azure Function can automatically activate when new sensor readings are stored in Cosmos DB, allowing you to implement real-time monitoring, send immediate notifications, or perform analytics. Each function's event-driven execution ensures your application remains highly responsive, efficient, and scalable, crucial for maintaining performance and cost-effectiveness in IoT solutions
 
 ### Azure Functions Bindings
 In addition to triggers, Azure Functions provide another powerful feature called bindings. Bindings allow you to effortlessly connect your functions to other Azure services or external resources, simplifying both input and output integration. Using bindings, you can directly access data from services like Azure Cosmos DB, Azure Blob Storage, Azure Queue Storage without the need to write custom integration code or manage connection logic manually.
@@ -47,9 +47,9 @@ Overall, Azure Function bindings simplify and speed up your development workflow
 ### Deployment Options
 When working with Azure Functions, there are two primary deployment approaches: using the Azure Portal directly or developing and deploying locally from your development environment. 
 
-Azure Portal provides a user-friendly interface to quickly create, configure, and manage Azure Functions directly from your web browser. It’s particularly suitable for simple scenarios or quick prototypes, as it requires minimal setup and no installation of additional tools. You can easily define triggers, bindings, environment variables, and monitor function execution directly through the portal interface.
+Azure Portal provides a user-friendly interface to quickly create, configure, and manage Azure Functions directly from your web browser. It's particularly suitable for simple scenarios or quick prototypes, as it requires minimal setup and no installation of additional tools. You can easily define triggers, bindings, environment variables, and monitor function execution directly through the portal interface.
 
-However, there’s an important limitation for Python based Azure Functions. If you choose Python with a Linux-based hosting plan (required for Python functions), the Azure Portal does not support in-portal code editing. In other words, while you can manage and monitor your Python functions in the portal, you can’t directly edit or modify the function’s Python source code there.
+However, there's an important limitation for Python based Azure Functions. If you choose Python with a Linux-based hosting plan (required for Python functions), the Azure Portal does not support in-portal code editing. In other words, while you can manage and monitor your Python functions in the portal, you can’t directly edit or modify the function's Python source code there.
 
 To overcome this limitation, local development is highly recommended for Python-based Azure Functions. Local development involves developing and testing your Azure Functions on your own computer using the Azure Functions Core Tools and a IDE like Visual Studio Code. After development and local testing, you deploy your function to Azure using command-line tools (func CLI), IDE integrations, or continuous integration solutions such as GitHub Actions. 
 
@@ -117,7 +117,7 @@ Follow these steps to create an Azure Function locally using Visual Studio Code:
 
 Visual Studio Code will create the following files:
 * `function_app.py` - this primary function code file. In the Azure Functions Python V2 programming model, bindings and triggers are defined using Python decorators directly within this file
-* `local.settings.json` - this file is specifically used for local development, storing connection strings, app settings, and environment variables. It’s not deployed to Azure, so it’s safe to include sensitive data (like connection strings) locally for testing purpose.
+* `local.settings.json` - this file is specifically used for local development, storing connection strings, app settings, and environment variables. It's not deployed to Azure, so it's safe to include sensitive data (like connection strings) locally for testing purpose.
 * `host.json` - defines global configuration settings that affect the behavior of your entire Azure Functions application. Examples include function timeout limits, logging levels, and concurrency settings
 * `requirements.txt` - this file lists all Python packages and dependencies required by your function app. Azure Functions uses this file to automatically install the necessary Python packages when deploying the function to Azure
 
@@ -154,13 +154,13 @@ def cosmosdb_trigger(azcosmosdb: func.DocumentList):
                 )
 ```
 
-This Azure Function is designed to automatically process and monitor sensor data stored in Azure Cosmos DB. It begins by importing the required Azure Functions libraries and Python’s built-in logging module. Then, it initializes a function app object, which serves as a container for defining and managing Azure Functions.
+This Azure Function is designed to automatically process and monitor sensor data stored in Azure Cosmos DB. It begins by importing the required Azure Functions libraries and Python's built-in logging module. Then, it initializes a function app object, which serves as a container for defining and managing Azure Functions.
 
 Next, the code defines a global temperature threshold (TEMPERATURE_THRESHOLD) of 28.0°C, which is used to determine whether incoming sensor readings require attention.
 
 The core of the function is triggered automatically by Azure Cosmos DB whenever new sensor readings are added or updated in the specified database (IoTDatabase) and container (SensorReadings). When triggered, the function receives these new documents (items) as a list of sensor readings, represented by azcosmosdb. For each document in this list, the function extracts deviceId, temperature, and timestamp.
 
-After extracting these values, the function compares each sensor’s temperature reading against the predefined threshold. If the temperature exceeds the threshold, a warning is logged. If the temperature remains within safe limits, an informational log message is recorded instead, confirming normal operating conditions for the device.
+After extracting these values, the function compares each sensor's temperature reading against the predefined threshold. If the temperature exceeds the threshold, a warning is logged. If the temperature remains within safe limits, an informational log message is recorded instead, confirming normal operating conditions for the device.
 
 ### Run and Test Your Function Locally
 To run your function locally proceed as follows:
@@ -286,7 +286,7 @@ def cosmosdb_trigger(azcosmosdb: func.DocumentList):
                 )
 ```
 
-The `send_email_alert` function is responsible for sending an email notification through SendGrid whenever a sensor reading exceeds the specified temperature threshold. It constructs an email message using details about the IoT device, including the device_id, current temperature, and the event timestamp. The function utilizes SendGrid’s Python SDK (SendGridAPIClient) to send the email message. If the email is successfully sent, it logs a confirmation with the status code. If the email fails, it captures and logs the error details, ensuring that any issues with email delivery can be easily identified and resolved. This function enables proactive monitoring by immediately alerting the user when potentially critical temperature conditions are detected, significantly enhancing the reliability and responsiveness of the IoT system
+The `send_email_alert` function is responsible for sending an email notification through SendGrid whenever a sensor reading exceeds the specified temperature threshold. It constructs an email message using details about the IoT device, including the device_id, current temperature, and the event timestamp. The function utilizes SendGrid's Python SDK (SendGridAPIClient) to send the email message. If the email is successfully sent, it logs a confirmation with the status code. If the email fails, it captures and logs the error details, ensuring that any issues with email delivery can be easily identified and resolved. This function enables proactive monitoring by immediately alerting the user when potentially critical temperature conditions are detected, significantly enhancing the reliability and responsiveness of the IoT system
 
 Now, start your function:
 ```console

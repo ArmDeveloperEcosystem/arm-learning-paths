@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-In this learning path you will learn how to improve the performance of your apps and games by using Unity’s Burst compiler and Neon intrinsics. You will use the Profiler and Analyzer tools to measure and compare performance between unoptimized, Burst compiler and Neon intrinsic versions of the provided sample code.
+In this learning path you will learn how to improve the performance of your apps and games by using Unity's Burst compiler and Neon intrinsics. You will use the Profiler and Analyzer tools to measure and compare performance between unoptimized, Burst compiler and Neon intrinsic versions of the provided sample code.
 
 ## Install Unity with Android build support
 This learning path requires Unity with Android build support. You can either follow the steps on the [Unity download page](https://unity.com/download) or follow the learning path [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android).

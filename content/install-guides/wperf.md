@@ -61,7 +61,7 @@ Successfully installed
 
 ![Winget installation video](/install-guides/_images/wperf-winget-installation.gif)
 
-It will install the latest available WindowsPerf along with the [WPA plugins](/learning-paths/laptops-and-desktops/windowsperf_wpa_plugin/). To check that the installation was done correctly open a new terminal tab or window and follow the instructions under the [verify installation section](/install-guides/wperf/#verify-install)
+It will install the latest available WindowsPerf along with the [WPA plugins](/learning-paths/laptops-and-desktops/windowsperf_wpa_plugin/). To check that the installation was done correctly open a new terminal tab or window and follow the instructions under the [verify installation section](/install-guides/wperf/#verify-install).
 
 ### How do I uninstall WindowsPerf using winget?
 
@@ -84,7 +84,7 @@ WinPerf is an open-source project. If you would like to develop WindowsPerf your
 https://learn.microsoft.com/en-us/windows-hardware/drivers/wdk-release-notes
 {{% /notice %}}
 
-## How do I verify that WindowsPerf is installed correctly?
+## How do I verify that WindowsPerf is installed correctly? {#verify-install}
 
 You can check everything is working by running the `wperf` executable.
 

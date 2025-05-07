@@ -1,19 +1,20 @@
 ---
-title: (Optional) Incorporating PGO into CI system
+title: Incorporating PGO into a GitHub Actions workflow
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-### Building locally with Make
+### Building locally with make
 
-As PGO can be utilized with simple command-line instructions, it can easily be integrated into a `make` file and continuous integration (CI) systems, as demonstrated in the sample Makefile below for local builds.
+PGO can be integrated into a `Makefile` and continuous integration (CI) systems using simple command-line instructions, as shown in the sample `Makefile` below.
 
 {{% notice Caution %}}
-PGO requires additional build steps which will inevitably increase compile time which can be an issue for large code bases. As such, PGO is not suitable for all sections of code. We recommend only using PGO only sections of code which are heavily influenced by run-time behaviour and are performance critical. Therefore, PGO might not be ideal for early-stage development or for applications with highly variable or unpredictable usage patterns.
+PGO requires additional build steps which will inevitably increase compile time which can be an issue for large code bases. As such, PGO is not suitable for all sections of code. You should PGO only for sections of code which are heavily influenced by run-time behavior and are performance critical. Therefore, PGO might not be ideal for early-stage development or for applications with highly variable or unpredictable usage patterns.
 {{% /notice %}}
 
+Use a text editor to create a `Makefile` for the example.
 
 ```makefile
 # Simple Makefile for building and benchmarking div_bench with and without PGO
@@ -24,7 +25,7 @@ CXXFLAGS := -O3 -std=c++17
 LDLIBS := -lbenchmark -lpthread
 
 # Default target: build both binaries
-.PHONY: all clean clean-gcda clean-perf run perf
+.PHONY: all clean clean-gcda clean-perf run
 all: div_bench.base div_bench.opt
 
 # Build the baseline binary (no PGO)
@@ -32,30 +33,45 @@ div_bench.base: div_bench.cpp
 	$(CXX) $(CXXFLAGS) $< $(LDLIBS) -o $@
 
 # Build the PGO-optimized binary:
+# Note: This target depends on the source file and cleans previous profile data first.
+# It runs the instrumented binary to generate new profile data before the final compilation.
 div_bench.opt: div_bench.cpp
-	$(MAKE) clean-gcda
+	$(MAKE) clean-gcda # Ensure no old profile data interferes
 	$(CXX) $(CXXFLAGS) -fprofile-generate $< $(LDLIBS) -o $@
 	@echo "Running instrumented binary to gather profile data..."
-	./div_bench.opt
-	$(CXX) $(CXXFLAGS) -fprofile-use $< $(LDLIBS) -o $@
-	$(MAKE) clean-perf
+	./div_bench.opt # Generate .gcda file
+	$(CXX) $(CXXFLAGS) -fprofile-use $< $(LDLIBS) -o $@ # Compile using the generated profile
+	$(MAKE) clean-perf # Optional: Clean perf data if generated elsewhere
 
-# Remove all generated files
-clean: clean-gcda
-  rm -f div_bench.base div_bench.opt
-  rm -rf ./*.gcda
+# Remove profile data files
+clean-gcda:
+	rm -f ./*.gcda
+
+# Remove perf data files (if applicable)
+clean-perf:
+	rm -f perf-division-*
+
+# Remove all generated files including binaries and profile data
+clean: clean-gcda clean-perf
+	rm -f div_bench.base div_bench.opt
 
 # Run both benchmarks with informative headers
-run: div_bench.base div_bench.opt
+run: all # Ensure binaries are built before running
 	@echo "==================== Without Profile-Guided Optimization ===================="
 	./div_bench.base
 	@echo "==================== With Profile-Guided Optimization ===================="
 	./div_bench.opt
 ```
 
+You can run the following commands in your terminal:
+
+*   `make all` (or simply `make`): Compiles both `div_bench.base` (without PGO) and `div_bench.opt` (with PGO). This includes the steps of generating profile data for the optimized version.
+*   `make run`: Builds both binaries (if they don't exist) and then runs them, displaying the benchmark results for comparison.
+*   `make clean`: Removes the compiled binaries (`div_bench.base`, `div_bench.opt`) and any generated profile data files (`*.gcda`).
+
 ### Building with GitHub Actions
 
-As another alternative, the `yaml` file below can serve as an basic example of integrating profile guided optimisation into your CI flow. This barebones example natively compiles on a GitHub hosted Ubuntu 24.04 Arm-based runner. Further tests could automate for regressions. 
+Alternatively, you can integrate PGO into your Continuous Integration (CI) workflow using GitHub Actions. The YAML file below provides a basic example that compiles and runs the benchmark on a GitHub-hosted Ubuntu 24.04 Arm-based runner. This setup can be extended with automated tests to check for performance regressions.
 
 ```yaml
 name: PGO Benchmark
@@ -100,3 +116,6 @@ jobs:
             ./div_bench.opt
             echo "==================== Benchmarking complete ===================="
 ```
+
+To use this workflow, save the YAML content into a file named `pgo_benchmark.yml` (or any other `.yml` name) inside the `.github/workflows/` directory of your GitHub repository. Ensure your `div_bench.cpp` file is present in the repository root. When you push changes to the `main` branch, GitHub Actions will automatically detect this workflow file and execute the defined steps on an Arm-based runner, compiling both versions of the benchmark and running them.
+

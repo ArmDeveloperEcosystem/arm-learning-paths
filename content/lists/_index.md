@@ -43,7 +43,7 @@ title: "Learn more about Arm Servers and Cloud Computing"
 | [Improving Java performance on Neoverse N1 systems](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/java-performance-on-neoverse-n1) | Blog |
 | [Improving Java performance on OCI Ampere A1 compute instances](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/performance-of-specjbb2015-on-oci-ampere-a1-compute-instances) | Blog |
 | [Java Vector API on AArch64](https://community.arm.com/arm-community-blogs/b/high-performance-computing-blog/posts/java-vector-api-on-aarch64) | Blog |
-| [Optimizing Java Workloads on Azure General Purpose D-series v5 VMs with Microsoft’s Build of OpenJDK](https://techcommunity.microsoft.com/t5/azure-compute-blog/optimizing-java-workloads-on-azure-general-purpose-d-series-v5/ba-p/3827610) | Blog |
+| [Optimizing Java Workloads on Azure General Purpose D-series v5 VMs with Microsoft's Build of OpenJDK](https://techcommunity.microsoft.com/t5/azure-compute-blog/optimizing-java-workloads-on-azure-general-purpose-d-series-v5/ba-p/3827610) | Blog |
 | [Arm64 Performance Improvements in .NET 7](https://devblogs.microsoft.com/dotnet/arm64-performance-improvements-in-dotnet-7/) | Blog |
 | [Improving performance of PHP for Arm64 and impact on AWS Graviton2 based EC2 instances](https://aws.amazon.com/blogs/compute/improving-performance-of-php-for-arm64-and-impact-on-amazon-ec2-m6g-instances/) | Blog |
 | [Improve video encoding price/performance by up to 36% with Arm Neoverse based Amazon EC2 C6g instances](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/thirty-six-percent-better-video-encoding-with-aws-graviton2_2d00_based-c6g) | Blog |

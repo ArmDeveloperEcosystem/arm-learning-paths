@@ -1,5 +1,5 @@
 ---
-title: vLLM Inference Test
+title:  Validate vLLM Inference on Arm
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -24,7 +24,7 @@ curl http://localhost:8000/v1/chat/completions \
 ```
 If the setup is working correctly, you'll receive a streaming response from the vLLM server.
 
-The server logs will show that the request was processed successfully. You'll also see prompt and generation throughput metrics, which provide a lightweight benchmark of the model’s performance in your environment.
+The server logs will show that the request was processed successfully. You'll also see prompt and generation throughput metrics, which provide a lightweight benchmark of the model's performance in your environment.
 
 The following log output was generated from a single-prompt test run using the steps in this learning path:
 
@@ -43,7 +43,9 @@ INFO:     127.0.0.1:45986 - "POST /v1/chat/completions HTTP/1.1" 200 OK
 
 ```
 
-These results confirm that the model is running efficiently on CPU, with stable prompt and generation throughput — a solid baseline before scaling to batch inference.
+These results confirm that the model is running efficiently on the CPU, with stable prompt and generation throughput — a solid baseline before scaling to batch inference.
+
+You can use these metrics to compare inference performance across different CPU configurations, quantization levels, or model sizes.
 
 ## Run Batch Inference
 
@@ -185,7 +187,7 @@ INFO:     127.0.0.1:57718 - "POST /v1/chat/completions HTTP/1.1" 200 OK
 INFO 04-10 18:21:10 metrics.py:455] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 7.7 tokens/s, Running: 0 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 0.0%, CPU KV cache usage: 0.0
 ```
 
-This output confirms the server is handling concurrent requests effectively, with consistent generation throughput across 16 requests — a strong indication of stable multi-request performance on CPU.
+This output confirms the server is handling concurrent requests effectively, with consistent generation throughput across 16 requests — a strong indication of stable concurrent inference performance on Arm-based CPUs.
 
 ### Go Beyond: Power Up Your vLLM Workflow
 Now that you’ve successfully quantized and served a model using vLLM on Arm, here are some further ways to explore:

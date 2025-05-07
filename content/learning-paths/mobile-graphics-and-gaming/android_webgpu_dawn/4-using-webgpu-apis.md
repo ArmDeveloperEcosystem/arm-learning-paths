@@ -54,7 +54,7 @@ Before requesting access to a device, you need to select an adapter.
 
 The same host system might expose multiple adapters if it has access to multiple physical GPUs. It might also have an adapter that represents an emulated/virtual device. Each adapter offers optional features and supported limits that it can handle. 
 
-You can use these features and limits to determine the overall capabilities of the system before requesting the device. The adapter is used to access the capabilities of the user’s hardware, which are used to select the behavior of your application among different code paths. 
+You can use these features and limits to determine the overall capabilities of the system before requesting the device. The adapter is used to access the capabilities of the user's hardware, which are used to select the behavior of your application among different code paths. 
 
 Once a code path is chosen, a device is created with the chosen capabilities. Only the capabilities selected for this device are  allowed in the rest of the application. This way, it is not possible to inadvertently rely on capabilities specific to a device.
 

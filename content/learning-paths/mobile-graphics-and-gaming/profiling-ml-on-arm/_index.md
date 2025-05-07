@@ -23,7 +23,6 @@ author: Ben Clark
 skilllevels: Introductory
 subjects: ML
 armips:
-    - Cortex-X
     - Cortex-A
     - Mali
     - Immortalis
