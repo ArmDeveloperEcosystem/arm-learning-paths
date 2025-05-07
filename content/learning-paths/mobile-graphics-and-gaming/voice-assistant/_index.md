@@ -1,5 +1,5 @@
 ---
-title: Accelerate voice assistant performance with KleidiAI and SME2
+title: Accelerate Voice Assistant performance with KleidiAI and SME2
 
 draft: true
 cascade:
@@ -7,10 +7,10 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers who want to accelerate voice assistant performance on Android devices using KleidiAI and SME2.
+who_is_this_for: This is an introductory topic for developers who want to accelerate Voice Assistant performance on Android devices using KleidiAI and SME2.
 
 learning_objectives:
-    - Compile and run a voice assistant Android application.
+    - Compile and run a Voice Assistant Android application.
     - Optimize performance using KleidiAI and SME2.
 
 prerequisites:

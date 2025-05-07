@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Voice assistant application workflow
+## Voice Assistant application workflow
 
-The voice assistant application implements a full voice interaction pipeline on Android, enabling real-time, conversational interactions.
+The Voice Assistant application implements a full voice interaction pipeline on Android, enabling real-time, conversational interactions.
 
 
 

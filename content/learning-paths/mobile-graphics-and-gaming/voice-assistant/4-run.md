@@ -1,6 +1,6 @@
 ---
 
-title: Run the voice assistant
+title: Run the Voice Assistant
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -13,14 +13,14 @@ In the previous section, you built the Voice Assistant application. Now, you'll 
 
 By default, Android devices ship with developer mode disabled. To enable it, follow [these instructions](https://developer.android.com/studio/debug/dev-options).
 
-## Install the voice assistant
+## Install the Voice Assistant
 
 Once developer mode is enabled, connect your phone to your computer via USB. It should appear as a running device in the top toolbar. Select the device and click the Run button (a small green triangle, as shown below). This transfers the app to your phone and launches it.
 
 In the picture below, a Pixel 6a phone is connected to the USB cable:
 ![example image alt-text#center](upload.png "Figure 5: Upload the Voice App")
 
-## Launch the voice assistant
+## Launch the Voice Assistant
 
 The app starts with this welcome screen:
 
@@ -28,7 +28,7 @@ The app starts with this welcome screen:
 
 Tap **Press to Talk** at the bottom of the screen to begin speaking your request.
 
-## Voice assistant controls
+## Voice Assistant controls
 
 ### View performance counters
 

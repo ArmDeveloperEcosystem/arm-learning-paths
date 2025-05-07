@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Install dependencies
 
-In this Learning Path, you'll compile and run an Android voice assistant application. 
+In this Learning Path, you'll compile and run an Android Voice Assistant application. 
 
 Begin by installing the latest version of [Android Studio](https://developer.android.com/studio) on your development machine.
 
 Next, install the following command-line tools:
 - `cmake`; a cross-platform build system.
-- `git`; a version control system that you use to clone the voice assistant codebase.
+- `git`; a version control system that you use to clone the Voice Assistant codebase.
 - `adb`; Android Debug Bridge, used to communicate with and control Android devices.
 
 Install these tools with the appropriate command for your OS:
