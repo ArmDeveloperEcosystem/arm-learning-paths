@@ -10,7 +10,7 @@ layout: learningpathall
 
 ---
 
-The LLM part of the Voice Assistant uses [Llama.cpp](https://github.com/ggml-org/llama.cpp). LLM inference is a highly computation-intensive task and has been heavily optimized within Llama.cpp for various platforms, including Arm.
+The Voice Assistant application combines local LLM inference and speech recognition - both  computationally demanding tasks that have been optimized for Arm platforms using efficient libraries like [Llama.cpp](https://github.com/ggml-org/llama.cpp) and KleidiAI.
 
 Speech recognition is also a computation-intensive task and has been optimized for Arm processors as well.
 
@@ -18,9 +18,7 @@ Speech recognition is also a computation-intensive task and has been optimized f
 
 This application uses the [KleidiAI library](https://gitlab.arm.com/kleidi/kleidiai) by default for optimized performance on Arm processors.
 
-[KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) is an open-source library that provides optimized performance-critical routines, also known as micro-kernels, for artificial intelligence (AI) workloads tailored for Arm CPUs.
-
-These routines are tuned to exploit the capabilities of specific Arm hardware architectures, aiming to maximize performance.
+[KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) is an open-source library of highly tuned micro-kernels for AI workloads on Arm CPUs. These routines are optimized to exploit specific Arm hardware features for maximum performance.
 
 The KleidiAI library has been designed for easy adoption into C or C++ machine learning (ML) and AI frameworks. Developers looking to incorporate specific micro-kernels into their projects can simply include the corresponding `.c` and `.h` files associated with those micro-kernels and a common header file.
 
@@ -28,7 +26,10 @@ The KleidiAI library has been designed for easy adoption into C or C++ machine l
 
 By default, the Voice Assistant is built with KleidiAI support on Arm platforms, but this can be disabled if you want to compare the performance to a raw implementation.
 
-You can disable KleidiAI support at build time in Android Studio by adding `-PkleidiAI=false` to the Gradle invocation. You can also edit the top-level `gradle.properties` file and add `kleidiAI=false` at the end of it.
+To disable KleidiAI during build:
+
+* Add `-PkleidiAI=false` to your Gradle command:`./gradlew build -PkleidiAI=false`.
+* Or, add this to your top-level `gradle.properties` file: kleidiAI=false.  
 
 ### Why use KleidiAI?
 
