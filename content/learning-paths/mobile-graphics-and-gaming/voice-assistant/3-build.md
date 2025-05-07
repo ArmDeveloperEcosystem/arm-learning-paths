@@ -25,7 +25,7 @@ To build the application with the default settings, click the hammer icon labele
 
 ![example image alt-text#center](build_project.png "Build the project.")
 
-Android Studio will begin building the app. The first build might take longer if additional dependencies need to be downloaded:
+Android Studio will begin building the app. The first build might take longer if additional dependencies need to be downloaded.
 
 ![example image alt-text#center](build_success.png "Successful build!")
 

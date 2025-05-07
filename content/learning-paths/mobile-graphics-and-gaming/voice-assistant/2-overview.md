@@ -37,7 +37,9 @@ This process includes the following stages:
 
 Large Language Models (LLMs) enable natural language understanding and, in this application, are used for question-answering.
 
-The text transcription from the previous part of the pipeline is used as input to the neural model. At initialization, the app sets a predefined persona that influences the tone, style, and character of the responses. By default, the LLM runs asynchronously, streaming tokens as they are generated. The UI updates in real time with each token, which is also passed to the final pipeline stage.
+The text transcription from the previous part of the pipeline is used as input to the neural model. At initialization, the app sets a predefined persona that influences the tone, style, and character of the responses. 
+
+By default, the LLM runs asynchronously, streaming tokens as they are generated. The UI updates in real time with each token, which is also passed to the final pipeline stage.
 
 ## Text-to-Speech 
 
