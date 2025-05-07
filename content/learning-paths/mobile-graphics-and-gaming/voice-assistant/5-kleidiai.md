@@ -10,7 +10,7 @@ layout: learningpathall
 
 ---
 
-The Voice Assistant application combines local LLM inference and speech recognition - both  computationally demanding tasks that have been optimized for Arm platforms using efficient libraries like [Llama.cpp](https://github.com/ggml-org/llama.cpp) and KleidiAI.
+The Voice Assistant application combines local LLM inference and speech recognition - both computationally demanding tasks that have been optimized for Arm platforms using efficient libraries like [Llama.cpp](https://github.com/ggml-org/llama.cpp) and KleidiAI.
 
 Speech recognition is also a computation-intensive task and has been optimized for Arm processors as well.
 
