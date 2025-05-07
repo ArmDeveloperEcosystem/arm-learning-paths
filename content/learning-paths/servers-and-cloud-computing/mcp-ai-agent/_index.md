@@ -24,25 +24,22 @@ armips:
     - Cortex-A76
 tools_software_languages:
     - Python
-    - AWS Graviton
+    - IoT
     - AI
+    - MCP
+
 operatingsystems:
     - Linux
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: fastmcp
+        link: https://github.com/jlowin/fastmcp
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
+        title: OpenAI Agents SDK
+        link: https://openai.github.io/openai-agents-python/
         type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
-
 
 
 ### FIXED, DO NOT MODIFY

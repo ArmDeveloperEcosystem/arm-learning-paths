@@ -1,12 +1,12 @@
 ---
 title: Build & Run an AI Agent on Your Workstation
-weight: 3
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Create an AI Agent and point it at your Pi's MCP Server
+### Create an AI Agent and point it at your Pi's MCP Server
 1. Bootstrap the Agent Project
 ```bash
 # create & enter folder
@@ -25,8 +25,8 @@ uv add openai-agents python-dotenv
 echo -n "OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>" > .env
 ```
 
-## Write the Agent Client (main.py)
-```bash
+### Write the Agent Client (main.py)
+```python
 import asyncio, os
 from dotenv import load_dotenv
 
@@ -69,12 +69,12 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Execute the Agent
+### Execute the Agent
 ```bash
 uv run main.py
 ```
 You should see output like:
-```
+```output
 Running: What is the CPU temperature?
 Response: The current CPU temperature is 48.8°C.
 ```
@@ -83,7 +83,7 @@ Congratulations! Your local AI Agent just called the MCP server on your Raspberr
 
 This lightweight protocol isn’t just a game-changer for LLM developers—it also empowers IoT engineers to transform real-world data streams and give AI direct, reliable control over any connected device.
 
-## Next Steps
+### Next Steps
 - **Expand Your Toolset**  
    - Write additional `@mcp.tool()` functions for Pi peripherals (GPIO pins, camera, I²C sensors, etc.)  
    - Combine multiple MCP servers (e.g. filesystem, web-scraper, vector-store memory) for richer context  
