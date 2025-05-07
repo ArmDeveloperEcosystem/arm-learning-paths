@@ -1,18 +1,20 @@
 ---
 title: Debug Software Stack
-weight: 7
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-### 1. Arm DS and FVP Configuration
+## Debug using Arm Development Studio
 
-To debug the TF-A and Linux kernel, the Arm DS debugger is used as the debugger. You can get the [Arm DS](https://developer.arm.com/downloads/view/DS000B) from the [Arm Developer website](https://developer.arm.com/).
+To debug TF-A and Linux kernel, you can use the Arm Development Studio (Arm DS) debugger. You can get it from the [Arm Development Studio download page](https://developer.arm.com/downloads/view/DS000B).
 
-DWARF 5 is the default option in GCC 11 and Arm DS v2022.2 initial support for DWARF 5 debug information. If your GCC version is later than GCC11, download the latest Arm DS to get support for DWARF 5.
+DWARF 5 is the default option in GCC 11 and Arm Development Studio version v2022.2 includes initial support for DWARF 5 debug information. 
 
-By default, Arm DS provides the following Base FVP models:
+If your GCC version is later than GCC 11, download the latest Arm Development Studio to get support for DWARF 5.
+
+Arm Development Studio includes the following Base FVP models:
 
 * FVP_Base_Cortex-A32x1
 * FVP_Base_Cortex-A35x1
@@ -41,33 +43,37 @@ By default, Arm DS provides the following Base FVP models:
 * FVP_Base_Cortex-X1x2
 * FVP_Base_Cortex-X2x2
 
-Arm FVPs that are not provided by Arm DS installation must be defined in the PATH environment variable of your OS to be available for Arm DS. Otherwise, you might get the following error when starting the debug connection.
+Arm FVPs that are not provided by Arm DS installation must be defined in the PATH environment variable to be available for Arm Development Studio. Otherwise, you might get the following error when starting the debug connection.
 
-![Connection Failed Screen](failed.png "Figure 4. Connection Failed Screen")
+![Connection Failed Screen #center](failed.png")
 
-For Linux, set up the PATH in the appropriate shell configuration file. For example, add the following line in ~/.bashrc,
+For Linux, set up the PATH in the appropriate shell configuration file. 
 
+For example, add the following line in your `~/.bashrc` file: 
+
+```console
+export PATH=<your model path>/bin:$PATH
 ```
-export PATH=<your model path>/bin:$PAT
-```
 
-After changing the PATH environments, you might need to start the Arm DS from the terminal for the PATH to take effect. For example:
+After changing the search PATH, you need to start Arm Development Studio from a terminal with the new PATH. 
 
-```
+Start Development Studio by running the `armds_ide` command:
+
+```console
 /opt/arm/developmentstudio-2022.2/bin/armds_ide
 ```
 
-![Arm DS IDE](armds_ide.png "Figure 5. Arm DS IDE")
+![Arm DS IDE #center](armds_ide.png)
 
-### 2. FVP Debug Connection
+## FVP Debug Connection
 
-The FVP model to connect must be available in the Development Studio configuration database so that you can select it in the Model Connection dialog box.
+Before debugging, the FVP model you want to use must be available in the Arm DS configuration database so that you can select it in the Model Connection dialog box.
 
 If the FVP model is not available, you must import it and create a new model configuration. For details,  see [create a new model](https://developer.arm.com/documentation/101470/2022-2/Platform-Configuration/Model-targets/Create-a-new-model-configuration).
 
 Most CPU FVP models are available for your edition of Arm DS and the FVPs are listed under the Arm FVP (Installed with Arm DS) and Arm FVP as shown in the following figure:
 
-![Debug Configurations screen](debug_config.png "Figure 6. Debug Configurations screen")
+![Debug Configurations screen #center](debug_config.png)
 
 To use Arm DS to connect to an FVP model for bare-metal debugging, perform the following steps:
 
@@ -77,15 +83,13 @@ To use Arm DS to connect to an FVP model for bare-metal debugging, perform the f
 
 3. In the Connection tab, select the target and connection settings:
 
-3.1. In the Select target panel confirm the target selected. For example, select Arm FVP (Installed with Arm DS) Base_A55 x4 > Bare Metal Debug:
+In the Select target panel confirm the target selected. For example, select Arm FVP (Installed with Arm DS) Base_A55 x4 > Bare Metal Debug:
 
-![Select target](Select_target.png "Figure 7. Select target")
+![Select target #center](Select_target.png)
 
-3.2 Specify the Model parameters under the Connections.
+Specify the Model parameters under the Connections. The model parameters are similar to those listed below. These parameters are described at the section Run software stack on FVP. Different CPU FVPs might have different parameters.
 
-3.3 The model parameters are like the following, and these parameters are described at the section Run software stack on FVP. Different CPU FVPs might have different parameters.
-
-```
+```console
 -C pctl.startup=0.0.0.0 \
 -C bp.secure_memory=0  \
 -C cache_state_modelled=0 \
@@ -104,7 +108,7 @@ To use Arm DS to connect to an FVP model for bare-metal debugging, perform the f
 --data cluster0.cpu0=<SRC_PATH>/output/aemfvp-a/aemfvp-a/fvp-base-revc.dtb@0x83000000
 ```
 
-4. Configure debugger settings in the Debugger 
+4. Configure debugger settings in the Debugger
 
 In Run control, choose Connect only to the target.
 
@@ -127,4 +131,4 @@ This step starts the debug connection, loads the application on the model, and l
 
 9. After these steps, you can debug the software stack as shown in the following figure:
 
-![FVP running](Select_target.png "Figure 8. FVP running")
+![FVP running #center](Select_target.png)
