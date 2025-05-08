@@ -14,11 +14,11 @@ learning_objectives:
     - Use KleidiCV and KleidiAI to improve the performance of real-time camera pipelines.
 
 prerequisites:
-    - CMake
-    - Git + Git LFS
-    - Docker
+    - CMake.
+    - Git + Git LFS.
+    - Docker.
 
-author: Arnaud de Grandmaison
+author: Arnaud de Grandmaison.
 
 test_images:
     - ubuntu:latest
