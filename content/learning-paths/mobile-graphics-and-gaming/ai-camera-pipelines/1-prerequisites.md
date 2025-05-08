@@ -8,17 +8,19 @@ layout: learningpathall
 
 ## Host machine requirements
 
-This learning path demonstrates the benefits of using KleidiCV and KleidiAI in applications running on Arm, so you will need an aarch64 machine, preferably running the Ubuntu distribution. The instructions in this learning path assume an Ubuntu distribution.
+This Learning Path demonstrates how to improve the performance of camera pipelines using KleidiAI and KleidiCV in applications running on Arm.
 
-## Install software required for this Learning Path
+You will need an Arm64 (aarch64) machine, preferably running an Ubuntu-based distribution, which this guide assumes.
 
-You need to ensure you have the following tools:
-- `git`, the version control system, for cloning the Voice Assistant codebase
-- `git lfs`, an extension to `git` that helps manage large files by storing references to the files in the repository instead of the actual files themselves
-- `docker`, an open-source containerization platform
-- `libomp`, LLVM's OpenMP runtime library
+## Install required software
 
-### `git` and `git lfs`
+To follow this Learning Path, ensure the following tools are installed:
+- `git`, a version control system, for cloning the Voice Assistant codebase.
+- `git lfs`, an extension to `git` for managing large files by storing lightweight references instead of the files themselves.
+- `docker`, an open-source containerization platform for running applications in isolated environments.
+- `libomp`, LLVM's OpenMP runtime library, required for enabling parallel execution during application performance optimization.
+
+### git and git lfs
 
 These tools can be installed by running the following command (depending on your machine's OS):
 

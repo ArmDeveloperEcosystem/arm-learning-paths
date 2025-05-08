@@ -1,5 +1,5 @@
 ---
-title: AI Camera Pipelines
+title: Accelerate Background Blur and Low-Light Camera Effects on Android
 
 draft: true
 cascade:
@@ -7,11 +7,11 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is an introductory topic on improving the performance of camera pipelines using KleidiAI and KleidiCV.
+who_is_this_for: This Learning Path introduces developers to the benefits of optimizing the performance of camera pipelines using KleidiAI and KleidiCV.
 
 learning_objectives:
-    - Compile and run camera pipeline applications
-    - Use KleidiCV and KleidiAI to boost the performance of camera pipelines
+    - Compile and run AI-powered camera pipeline applications.
+    - Use KleidiCV and KleidiAI to improve the performance of real-time camera pipelines.
 
 prerequisites:
     - CMake

@@ -10,22 +10,26 @@ layout: learningpathall
 
 ## KleidiAI
 
-[KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) is an open-source library that provides optimized performance-critical routines, also known as micro-kernels, for artificial intelligence (AI) workloads tailored for Arm CPUs.
+[KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) is an open-source library that provides optimized, performance-critical routines - also known as micro-kernels - for artificial intelligence (AI) workloads on Arm CPUs.
 
-These routines are tuned to exploit the capabilities of specific Arm hardware architectures, aiming to maximize performance. The [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) library has been designed for ease of adoption into C or C++ machine learning (ML) and AI frameworks. A number of AI frameworks already take advantage of [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) to improve performances on Arm platforms.
+These routines are tuned to take full advantage of the capabilities of specific Arm hardware architectures to maximize performance. The [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) library is designed for easy integration into C or C++ machine learning (ML) and AI frameworks. 
+
+Several popular AI frameworks already take advantage of [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) to improve performances on Arm platforms.
 
 ## KleidiCV
 
-The open-source [KleidiCV](https://gitlab.arm.com/kleidi/kleidicv) library provides high-performance image processing functions for AArch64. It is designed to be simple to integrate into a wide variety of projects and some computer vision frameworks (like OpenCV) take advantage of [KleidiCV](https://gitlab.arm.com/kleidi/kleidicv) to improve performances on Arm platforms.
+The open-source [KleidiCV](https://gitlab.arm.com/kleidi/kleidicv) library that provides high-performance image processing functions for AArch64. 
+
+It is designed to be lightweight and simple to integrate into a wide variety of projects. Some computer vision frameworks, such as OpenCV, leverage [KleidiCV](https://gitlab.arm.com/kleidi/kleidicv) to accelerate image processing on Arm devices.
 
 ## The AI camera pipelines
 
-The AI camera pipelines are 2 example applications, implemented with a combination of AI and CV (Computer Vision) computations:
-- Background Blur
-- Low Light Enhancement
+This Learning Path provides two example applications that combine AI and computer vision (CV) techniques:
+- Background Blur.
+- Low-Light Enhancement.
 
-For both applications:
-- The input and output images are stored in `ppm` (portable pixmap) format, with 3 channels (Red, Green, and Blue) and 256 color levels each (also known as `RGB8`).
+Both applications:
+- Use input and output images are stored in `ppm` (portable pixmap) format, with 3 RGB channels (Red, Green, and Blue) and 256 color levels each (also known as `RGB8`).
 - The images are first converted to the `YUV420` color space, where the background blur or low-light enhancement operations will take place. After the processing is done, the images are converted back to `RGB8` and saved in `ppm` format.
 
 ### Background Blur

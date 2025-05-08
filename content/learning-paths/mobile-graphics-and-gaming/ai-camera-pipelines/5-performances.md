@@ -1,5 +1,5 @@
 ---
-title: Performances
+title: Performance
 weight: 7
 
 ### FIXED, DO NOT MODIFY
