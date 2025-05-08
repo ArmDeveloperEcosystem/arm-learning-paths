@@ -1,9 +1,5 @@
 ---
-title: Accelerate Background Blur and Low-Light Camera Effects on Android
-
-draft: true
-cascade:
-    draft: true
+title: Accelerate Background Blur and Low-Light Camera Effects 
 
 minutes_to_complete: 30
 
@@ -14,15 +10,12 @@ learning_objectives:
     - Use KleidiCV and KleidiAI to improve the performance of real-time camera pipelines.
 
 prerequisites:
-    - CMake.
-    - Git + Git LFS.
-    - Docker.
+    - A computer running Arm Linux or macOS with Docker installed.
 
 author: Arnaud de Grandmaison.
 
 test_images:
     - ubuntu:latest
-test_link: null
 test_maintenance: false
 
 ### Tags
@@ -35,7 +28,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
     - macOS
-    - Windows
 
 further_reading:
 
