@@ -7,9 +7,11 @@ weight: 6
 layout: learningpathall
 ---
 
+## Apply transformations
+
 In the previous section, you built the AI Camera Pipelines. In this section, you'll run them to apply transformations to an input image.
 
-## Background Blur
+### Background Blur
 
 Run the background blur pipeline:
 
@@ -21,7 +23,7 @@ bin/cinematic_mode resources/test_input2.ppm test_output2.ppm resources/depth_an
 ![example image alt-text#center](test_input2.png "Original picture")
 ![example image alt-text#center](test_output2.png "Picture with blur applied")
 
-## Low-Light Enhancement
+### Low-Light Enhancement
 
 ```bash
 cd $HOME/ai-camera-pipelines

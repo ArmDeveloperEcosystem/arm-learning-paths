@@ -6,6 +6,8 @@ weight: 7
 layout: learningpathall
 ---
 
+## Benchmark mode
+
 The application you built earlier includes a *benchmark mode* that runs the core processing loop multiple times in a hot loop:
 
 - `ai-camera-pipelines/bin/cinematic_mode_benchmark`
@@ -66,6 +68,6 @@ As shown, the background blur pipeline (`cinematic_mode_benchmark`) gains only a
 
 A major benefit of using KleidiCV and KleidiAI is that they can automatically leverage new Arm architecture features - such as SME2 (Scalable Matrix Extension v2) - without requiring changes to your application code.
 
-As KleidiCV and KleidiAI operate as performance abstraction layers, any future hardware instruction support — like SME2 — can be utilized by simply rebuilding the application. This enables better performance on newer processors without additional engineering effort.
+As KleidiCV and KleidiAI operate as performance abstraction layers, any future hardware instruction support can be utilized by simply rebuilding the application. This enables better performance on newer processors without additional engineering effort.
 
 

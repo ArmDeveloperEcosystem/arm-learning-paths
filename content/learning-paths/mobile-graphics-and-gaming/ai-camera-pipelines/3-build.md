@@ -71,9 +71,9 @@ tar cfz example/install.tar.gz install
 
 Leave the container by pressing `Ctrl+D`.
 
-## Notes on the `cmake` configuration options
+## Notes on the cmake configuration options
 
-- `-DENABLE_SME2=$ENABLE_SME2` with `ENABLE_SME2=0`: SME2 (Scalable Matrix Extension 2) is disabled in this build (`0`). A Learning Path covering an SME-enabled Android phone coming soon.  
+- `-DENABLE_SME2=$ENABLE_SME2` with `ENABLE_SME2=0`: SME2 (Scalable Matrix Extension 2) is disabled in this build (`0`).  
 - `-DARMNN_TFLITE_PARSER=0`: Configures the `ai-camera-pipelines` repository to use TFLite with XNNPack instead of ArmNN.
 - `-DENABLE_KLEIDICV:BOOL=ON`: Enables KleidiCV for optimized image processing.
 - `-DXNNPACK_ENABLE_KLEIDIAI:BOOL=ON`:  Enables KleidiAI acceleration for TFLite workloads via XNNPack.
