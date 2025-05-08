@@ -7,18 +7,19 @@ draft: true
 cascade:
     draft: true
 
-who_is_this_for: Developers who want to learn how the CMSIS-DSP package can be integrated into their applications
+who_is_this_for: Developers interested in integrating the CMSIS-DSP library into their applications using Python.
+
 
 learning_objectives:
-    - Understand how to use the CMSIS-DSP Python package
-    - Understand how the Python implementation maps to the C implementation
-    - Develop a complex application using CMSIS-DSP
+    - Understand how to use the CMSIS-DSP Python package.
+    - Understand how the Python API maps to the C implementation.
+    - Develop a complex application using CMSIS-DSP.
 
 prerequisites:
-    - Some familiarity with Python and DSP programming
-    - Knowledge of C
-    - Some familiarity with CMSIS-DSP
-    - Python installed on your system
+    - Familiarity with Python and DSP programming.
+    - Working knowledge of C.
+    - Prior exposure to CMSIS-DSP.
+    - Python installed on your machine.
 
 author: Christophe Favergeon
 
