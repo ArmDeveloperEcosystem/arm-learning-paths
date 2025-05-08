@@ -11,7 +11,7 @@ layout: learningpathall
 This guide shows you how to:
 
 1. Install **uv** (the Rust-powered Python manager)  
-2. Bootstrap a simple **MCP** server on your Raspberry Pi that reads the CPU temperature  
+2. Bootstrap a simple **MCP** server on your Raspberry Pi that reads the CPU temperature and searches the weather data
 3. Expose it to the internet with **ngrok**
 
 ### Prerequisites
@@ -20,7 +20,7 @@ This guide shows you how to:
 - Basic familiarity with Python and the terminal  
 
 
-#### 1. Install `uv`
+#### 1. Install uv
 On Raspberry Pi Terminal:
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -40,9 +40,10 @@ cd mcp
 ```bash
 uv init
 ```
-3. Install the FastMCP library:
+3. Install the dependencies:
 ```uv
-uv pip install fastmcp
+uv pip install fastmcp==2.2.10
+uv add requests
 ```
 
 #### 3. Write Your MCP Server (server.py)
@@ -55,7 +56,7 @@ touch server.py
 import subprocess, re
 from mcp.server.fastmcp import FastMCP
 
-mcp = FastMCP("Echo Server")
+mcp = FastMCP("RaspberryPi MCP Server")
 
 @mcp.tool()
 def read_temp():
@@ -63,9 +64,25 @@ def read_temp():
     Description: Raspberry Pi's CPU core temperature
     Return:      Temperature in °C (float)
     """
+    print(f"[debug-server] read_temp()")
+
     out = subprocess.check_output(["vcgencmd", "measure_temp"]).decode()
     temp_c = float(re.search(r"[-\d.]+", out).group())
     return temp_c
+
+@mcp.tool()
+def get_current_weather(city: str) -> str:
+    """
+    Description: Get Current Weather data in the {city}
+    Args:
+        city:    Name of the city
+    Return:      Current weather data of the city
+    """
+    print(f"[debug-server] get_current_weather({city})")
+
+    endpoint = "https://wttr.in"
+    response = requests.get(f"{endpoint}/{city}")
+    return response.text
 
 if __name__ == "__main__":
     mcp.run(transport="sse")
@@ -75,7 +92,7 @@ if __name__ == "__main__":
 ```python
 uv run server.py
 ```
-By default, FastMCP will listen on port **8000** and serve your `read_temp` tool via **Server-Sent Events (SSE)**.
+By default, FastMCP will listen on port **8000** and serve your tools via **Server-Sent Events (SSE)**.
 
 #### 5. Install & Configure ngrok
 1. Add ngrok’s APT repo and install:

@@ -6,10 +6,10 @@ minutes_to_complete: 30
 who_is_this_for: This Learning Path targets LLM and IoT developers who already know their way around Large Language Model (LLM) concepts and networking. It walks you through deploying a lightweight Model Context Protocol (MCP) server on a Raspberry Pi 5 and shows you how to interact with it via the OpenAI-Agent SDK.
 
 learning_objectives: 
-    - Understand how MDeploy a lightweight Model Context Protocol (MCP) server on Raspberry Pi 5
+    - Understand how to Deploy a lightweight Model Context Protocol (MCP) server on Raspberry Pi 5
     - Design and register custom tools for the AI Agent
     - Create custom endpoints
-    - Learn **uv**—a fast, efficient Python package manager
+    - Learn uv — a fast, efficient Python package manager
 
 prerequisites:
     - Rapberry Pi

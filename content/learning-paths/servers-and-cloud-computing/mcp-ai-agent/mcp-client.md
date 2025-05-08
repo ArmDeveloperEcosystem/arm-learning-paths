@@ -38,21 +38,21 @@ from agents import Agent, Runner, set_default_openai_key
 from agents.mcp import MCPServerSse
 from agents.model_settings import ModelSettings
 
-async def run(mcp_server):
+async def run(mcp_server: list[MCPServer]):
     set_default_openai_key(os.getenv("OPENAI_API_KEY"))
 
     agent = Agent(
         model="gpt-4.1-2025-04-14",
         name="Assistant",
         instructions="Use the tools to answer the user's query",
-        mcp_servers=[mcp_server],
+        mcp_servers=mcp_server,
         model_settings=ModelSettings(tool_choice="required"),
     )
 
-    question = "What is the CPU temperature?"
-    print("Running:", question)
-    result = await Runner.run(starting_agent=agent, input=question)
-    print("Response:", result.final_output)
+    for message in ["What is the CPU temperature?", "How is the weather in Cambridge?"]:
+        print(f"Running: {message}")
+        result = await Runner.run(starting_agent=agent, input=message)
+        print(f"Response: {result.final_output}")
 
 async def main():
     # replace URL with your ngrok-generated endpoint
@@ -61,9 +61,9 @@ async def main():
     async with MCPServerSse(
         name="RPI5 MCP Server",
         params={"url": url},
-        client_session_timeout_seconds=30,
-    ) as server:
-        await run(server)
+        client_session_timeout_seconds=60,
+    ) as server1:
+        await run([server1])
 
 if __name__ == "__main__":
     asyncio.run(main())
@@ -77,9 +77,11 @@ You should see output like:
 ```output
 Running: What is the CPU temperature?
 Response: The current CPU temperature is 48.8°C.
+Running: How is the weather in Cambridge?
+The weather in Cambridge is currently partly cloudy with a temperature of around 10°C. The wind is blowing at approximately 17 km/h. Visibility is good at 10 km, and there is no precipitation expected at the moment. The weather should be pleasant throughout the day with temperatures rising to about 15°C by midday.
 ```
 
-Congratulations! Your local AI Agent just called the MCP server on your Raspberry Pi and fetched the CPU temperature.
+Congratulations! Your local AI Agent just called the MCP server on your Raspberry Pi and fetched the CPU temperature and the weather information.
 
 This lightweight protocol isn’t just a game-changer for LLM developers—it also empowers IoT engineers to transform real-world data streams and give AI direct, reliable control over any connected device.
 
