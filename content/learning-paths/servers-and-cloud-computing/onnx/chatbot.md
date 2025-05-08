@@ -7,7 +7,7 @@ layout: learningpathall
 
 ## Create the chatbot server script
 
-Create a Python script called `phi3v.py` with the following content. 
+Create a Python script called `phi3v.py` with the code below.
 
 This script launches a chatbot server using the Phi-3.5 vision model and ONNX Runtime.
 

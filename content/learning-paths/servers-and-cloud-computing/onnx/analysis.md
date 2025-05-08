@@ -7,19 +7,22 @@ layout: learningpathall
 
 ## Try a text-only prompt
 
-To begin, skip the image prompt and input the text prompt as shown in the example below:
+To begin, skip the image prompt by pressing return and then input the text prompt as shown in the example below:
+
 ![output](output.png)
 
 Now exit the server.
 
 Next, download a sample image from the internet using the following `wget` command:
+
 ```bash
 wget https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794__340.jpg
 ```
 
 ## Try an image + text prompt
 
-After downloading the image, provide the image file name when prompted, followed by the text prompt, as demonstrated in the example below:
+After downloading the image, run the server again and provide the image file name when prompted, followed by the text prompt, as demonstrated in the example below:
+
 ![image_output](image_output.png)
 
 ## Observe performance metrics
