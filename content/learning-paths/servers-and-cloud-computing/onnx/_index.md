@@ -1,11 +1,5 @@
 ---
-title: Deploy Phi-3.5 Vision with ONNX Runtime on Azure Cobalt 100 on Arm
-
-
-
-draft: true
-cascade:
-    draft: true
+title: Deploy Phi-3.5 Vision with ONNX Runtime on Azure Cobalt 100 
 
 minutes_to_complete: 30
 
@@ -16,7 +10,7 @@ learning_objectives:
     - Analyze performance on Arm Neoverse-N2 based Azure Cobalt 100 VMs.
 
 prerequisites:
-    - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate cloud service provider. This Learning Path has been tested on a Microsoft Azure Cobalt 100 virtual machine with 32 cores, 8GB of RAM, and 32GB of disk space.
+    - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate cloud service provider. This Learning Path has been tested on an Azure Cobalt 100 virtual machine.
     - Basic understanding of Python and machine learning concepts.
     - Familiarity with ONNX Runtime and Azure cloud services.
     - Knowledge of Large Language Model (LLM) fundamentals.
