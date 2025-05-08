@@ -20,14 +20,32 @@ These benchmarks demonstrate the performance improvements enabled by KleidiCV an
 
 ## Performances with KleidiCV and KleidiAI
 
-By default, the OpenCV library is built with KleidiCV support, and TFLite+xnnpack is built with KleidiAI support. You can run the benchmarks using the applications you built earlier:
+By default, the OpenCV library is built with KleidiCV support, and TFLite+xnnpack is built with KleidiAI support. 
+
+You can run the benchmarks using the applications you built earlier.
+
+Run the first benchmark:
 
 ```bash
-$ bin/cinematic_mode_benchmark 20 resources/depth_and_saliency_v3_2_assortedv2_w_augment_mobilenetv2_int8_only_ptq.tflite
+bin/cinematic_mode_benchmark 20 resources/depth_and_saliency_v3_2_assortedv2_w_augment_mobilenetv2_int8_only_ptq.tflite
+```
+
+The output is similar to:
+
+```output
 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 Total run time over 20 iterations: 2023.39 ms
+```
 
-$ bin/low_light_image_enhancement_benchmark 20 resources/HDRNetLIME_lr_coeffs_v1_1_0_mixed_low_light_perceptual_l2_loss_int8_only_ptq.tflite
+Run the second benchmark:
+
+```bash
+bin/low_light_image_enhancement_benchmark 20 resources/HDRNetLIME_lr_coeffs_v1_1_0_mixed_low_light_perceptual_l2_loss_int8_only_ptq.tflite
+```
+
+The output is similar to:
+
+```output
 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 Total run time over 20 iterations: 54.3546 ms
 ```
@@ -43,14 +61,28 @@ To measure the performance without these optimizations, recompile the pipelines 
 -DENABLE_KLEIDICV:BOOL=OFF -DXNNPACK_ENABLE_KLEIDIAI:BOOL=OFF
 ```
 
-Then rerun the benchmarks:
+Re-run the first benchmark:
 
 ```bash
-$ bin/cinematic_mode_benchmark 20 resources/depth_and_saliency_v3_2_assortedv2_w_augment_mobilenetv2_int8_only_ptq.tflite
+bin/cinematic_mode_benchmark 20 resources/depth_and_saliency_v3_2_assortedv2_w_augment_mobilenetv2_int8_only_ptq.tflite
+```
+
+The new output is similar to:
+
+```output
 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 Total run time over 20 iterations: 2029.25 ms
+```
 
-$ bin/low_light_image_enhancement_benchmark 20 resources/HDRNetLIME_lr_coeffs_v1_1_0_mixed_low_light_perceptual_l2_loss_int8_only_ptq.tflite
+Re-run the second benchmark:
+
+```bash
+bin/low_light_image_enhancement_benchmark 20 resources/HDRNetLIME_lr_coeffs_v1_1_0_mixed_low_light_perceptual_l2_loss_int8_only_ptq.tflite
+```
+
+The new output is similar to:
+
+```output
 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 Total run time over 20 iterations: 79.431 ms
 ```
