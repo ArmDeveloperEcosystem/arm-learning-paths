@@ -121,34 +121,67 @@ The `issue_summary` provides an overview of the types of issues that the current
 For each of programming Languages, the available issue types are:
 {{< tabpane code=true >}}
   {{< tab header="C++, C">}}
-    ArchSpecificLibrary
-    AsmSource
-    Avx256Intrinsic
-    Avx512Intrinsic
-    BuildCommand
-    CompilerSpecific
-    ConfigGuess
-    CrossCompile
-    DefineOtherArch
-    HostCpuDetection
-    InlineAsm
-    Intrinsic
-    NoEquivalent
-    NoEquivalentInlineAsm
-    NoEquivalentIntrinsic
-    OldCrt
-    PragmaSimd
-    PreprocessorError
-  {{< /tab >}}
-  {{< tab header="Go">}}
-  {{< /tab >}}
-  {{< tab header="Python">}}
-  {{< /tab >}}
-  {{< tab header="Rust">}}
+Name                    | Description
+------------------------|-------------------------------------------------------------------------------------------------------------
+ArchSpecificLibrary     | Use of libraries strongly tied to the processor architecture, which may lead to compatibility issues.
+AsmSource               | Potentially architecture-specific assembly code in the source files that requires manual inspection.
+Avx256Intrinsic         | Use of AVX256 instructions on the AArch64 architecture lead to compatibility issues.
+Avx512Intrinsic         | Use of AVX512 instructions on the AArch64 architecture lead to compatibility issues.
+BuildCommand            | Potential compatibility issues related to the compilation build commands.
+CPPLibRecommend         | A better-optimized version of this library may be available.
+CPPLibVersion           | This library version may be incompatible with the AArch64 architecture's compiler.
+CPPStdCodes             | Compatibility issues or optimization opportunities related to Cpp source and memory order on AArch64.
+CompilerSpecific        | Code is strongly tied to a compiler version or type, which may lead to compatibility issues.
+ConfigGuess             | Config.guess file does not contain configurations for AArch64 and may require adaptation.
+CrossCompile            | Cross-compilation compatibility issues.
+DefineOtherArch         | Logic in the code that checks for other processor platform types, which may lead to compatibility issues.
+HostCpuDetection        | Logic for processor platform types in the Makefile, which may lead to platform compatibility issues.
+IncompatibleHeaderFile  | Incompatible header files.
+InlineAsm               | Use of inline assembly may lead to AArch64 architecture compatibility issues.
+Intrinsic               | Use of intrinsics that have compatibility issues with the AArch64 architecture.
+NoEquivalentInlineAsm   | Use of inline assembly code that does not exist on the AArch64 architecture.
+NoEquivalentIntrinsic   | Use of intrinsic functions that do not exist on the AArch64 architecture.
+OldCrt                  | Use of an older version of the C runtime library, which may cause compatibility issues or miss optimizations.
+Pragma                  | This #pragma may be incompatible with the AArch64 architecture's compiler.
+PreprocessorError       | AArch64 architecture may enter the #error preprocessing logic.
+SignedChar              | Compatibility issues with signed char type data.
   {{< /tab >}}
   {{< tab header="Java">}}
+  Name       | Description
+------------ | --------------------------------------------------------------------------------------------
+JavaJar      | Use of JAR package does not support AArch64 architecture.
+JavaPom      | Pom imports java artifact that does not support AArch64 architecture.
+JavaSource   | Java source file contains native call that may need modify/rebuild for AArch64 architecture.
+  {{< /tab >}}
+  {{< tab header="Python">}}
+Name              | Description
+------------------|-----------------------------------------------------------------------------------------
+PythonInlineAsm   | Use of inline assembly in the AArch64 architecture may lead to compatibility issues.
+PythonIntrinsic   | Use of intrinsic functions that have compatibility issues with the AArch64 architecture.
+PythonLinkLibrary | Use of libraries that are incompatible with the AArch64 architecture.
+PythonPackage     | Use of packages that are incompatible with the AArch64 architecture.
+  {{< /tab >}}
+  {{< tab header="Go">}}
+Name              | Description
+------------------|-----------------------------------------------------------------------------------------------------
+Asm               | Potentially architecture-specific assembly code in the source files that requires manual inspection.
+GolangInlineAsm   | Use of inline assembly may lead to AArch64 architecture compatibility issues.
+GolangIntrinsic   | Use of intrinsic functions that have compatibility issues with the AArch64 architecture.
+GolangLinkLibrary | Use of libraries that are incompatible with the AArch64 architecture.
+  {{< /tab >}}
+  {{< tab header="Rust">}}
+Name              | Description
+------------------|-------------------------------------------------------------------------------------
+RustInlineAsm     | Use of inline assembly in the AArch64 architecture may lead to compatibility issues.
+RustIntrinsic     | Use of intrinsics that have compatibility issues with the AArch64 architecture.
+RustLinkLibrary   | Use of libraries that are incompatible with the AArch64 architecture.
   {{< /tab >}}
   {{< tab header="Dockerfile">}}
+Name               | Description
+-------------------|-----------------------------------------------------------------------------------------------------
+ConfigurationInfo  | Configuration parameter used in ENV, ARG or LABEL refer an architecture that could not be supported.
+Image              | A base image is used that might not support AArch64 architecture.
+Plugin             | A package used in RUN, CMD or ENTRYPOINT does not support AArch64 architecture.
   {{< /tab >}}
 {{< /tabpane >}}
 

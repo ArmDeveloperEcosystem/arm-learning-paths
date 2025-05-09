@@ -15,20 +15,19 @@ layout: "learningpathall"
 ## Pre-requisites
 Before you use migrate-ease, certain pre-requesites need to be installed.
 {{< tabpane code=true >}}
-  {{< tab header="Ubuntu/Debian">}}
-sudo apt-get install -y python3 python3-pip unzip
+  {{< tab header="Ubuntu 22.04">}}
+sudo apt-get install -y python3 python3-pip python3-venv unzip libmagic1 git
   {{< /tab >}}
-  {{< tab header="Fedora">}}
-sudo dnf install -y python3 python3-pip unzip
+  {{< tab header="Debian trixie">}}
+sudo apt-get install -y python3 python3-pip python3-venv unzip libmagic1 git
+  {{< /tab >}}
+  {{< tab header="Fedora 42">}}
+sudo dnf install -y python3 python3-pip unzip git
   {{< /tab >}}
 {{< /tabpane >}}
 
 ## Install and setup
 ```bash
-# Make sure you're at the root directory of migrate-ease
-# Enable Python Environment
-python3 -m venv .venv
-source .venv/bin/activate
 
 # Check out the project
 git clone https://github.com/migrate-ease/migrate-ease
@@ -36,9 +35,13 @@ git clone https://github.com/migrate-ease/migrate-ease
 # Check the project folder
 cd migrate-ease 
 
+# Make sure you're at the root directory of migrate-ease
+# Enable Python Environment
+python3 -m venv .venv
+source .venv/bin/activate
+
 # install python packages dependencies
 pip3 install -r requirements.txt
-
 # Setup environment
 export PYTHONPATH=`pwd`
 ```

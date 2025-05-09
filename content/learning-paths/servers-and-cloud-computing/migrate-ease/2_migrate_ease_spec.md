@@ -18,7 +18,7 @@ This tool streamlines the transition, ensuring a smooth and efficient evolution 
 At present, this tool only supports codebase migration to Linux. It can be run on Arm or non-Arm based machines. The tool does not modify any code, it does not provide API level recommendations, and it does not send any data back to OpenAnolis.
 
 {{% notice Note %}}
-Even though Arm software team do our best to identify known incompatibilities, that's still recommend performing appropriate tests on your application before going to Production.
+Even though the [migrate-ease](https://github.com/migrate-ease/) project team does the best to identify known incompatibilities, that's still recommend performing appropriate tests on your application before going to Production.
 {{% /notice %}}
 
 ### List of Supported Programming Languages
