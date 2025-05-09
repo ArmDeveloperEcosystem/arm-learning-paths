@@ -28,7 +28,7 @@ The slices we created are overlapping. By applying a Hanning window function and
 Indeed, summing two Hanning windows shifted by half the width of the sample block gives:
 ![summed hanning alt-text#center](sumhanning.png "Figure 5. Summed Hanning Window")
 
-As result, if you multiply the overlapping blocks of samples by Hanning windows and sum the result, you can reconstruct the original signal:
+As a result, if you multiply the overlapping blocks of samples by Hanning windows and sum the result, you can reconstruct the original signal:
 
 
 ```python
@@ -128,7 +128,7 @@ The constructor for `NoiseSuppression`:
 - Computes the FFT length that can be used for each slice
 - Computes the padding needed for the FFT
 
-The FFT length must be a power of 2. The slice length is not necessarily a power of 2. The constructor therefore computes the smaller power of two greater than the signal length, and the audio slices are padded with zeros on both sides to match the required FFT length. 
+Because FFTs require a power-of-two length, the constructor computes the smallest power of two greater than the window size and pads the signal accordingly.
 
 #### NoiseSuppressionReference constructor
 
@@ -145,10 +145,10 @@ class NoiseSuppressionReference(NoiseSuppression):
 ```
 
 The constructor for `NoiseSuppressionReference`:
-- Uses the audio slices as input
-- Call the constructor for `NoiseSuppression`
-- Computes the VAD signal for the full audio signal
-- Compute the Hanning window
+- Uses the audio slices as input.
+- Calls the constructor for `NoiseSuppression`.
+- Computes the VAD signal for the full audio signal.
+- Compute the Hanning window.
 
 
 #### subnoise
@@ -364,7 +364,7 @@ class NoiseSuppressionReference(NoiseSuppression):
             i=i+1
         return(res)
 ```
-You can now test this algorithm on the original signal:
+Test this algorithm on the original signal:
 
 ```python
 n=NoiseSuppressionReference(slices)
@@ -383,4 +383,4 @@ audioRef=Audio(data=cleaned,rate=samplerate,autoplay=False)
 audioRef
 ```
 
-In the next section, you will write the optimized version using CMSIS-DSP.
+In the next section, you'll write the optimized version using CMSIS-DSP.

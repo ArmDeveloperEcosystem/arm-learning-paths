@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Write a simple voice activity detection
+## Write a simple Voice Activity Detection
 
 To remove the noise between speech segments, you need to detect when voice is present. Voice activity detection (VAD) can be complex, but for this learning path, you'll implement a very simple and naive approach based on _energy_. The idea is that if the environment isn't too noisy, speech should have more energy than the noise.
 
@@ -65,7 +65,9 @@ This plot shows you that the reference implementation works. The next step is to
 #### Energy
 First, you need to compute the signal energy from audio in Q15 format using CMSIS-DSP.
 
-If you look at the CMSIS-DSP documentation, you'll see that the `power` and `vlog` functions don't produce results in Q15 format. Tracking the fixed-point format throughout all lines of an algorithm can be challenging. In this example, this means that:
+If you look at the CMSIS-DSP documentation, you'll see that the `power` and `vlog` functions don't produce results in Q15 format. Tracking the fixed-point format throughout all lines of an algorithm can be challenging. 
+
+In this example, this means that:
 
 * Subtracting the mean to center the signal - as you did in the reference implementation - is handled in CMSIS-DSP by negating the mean and applying it as an offset to the window. Using CMSIS-DSP, `arm_negate_q15` is needed to avoid saturation issues that could prevent the value sign from changing (`0x8000` remaining unchanged as `0x8000`). In practice, the mean should be small, and there should be no difference between `-` and `dsp.arm_negate_q15`. However, it is good practice to avoid using `-` or `+` in a fixed-point algorithm when translating it to CMSIS-DSP function calls.
 * The resulting `energy` and `dB` values are not in Q15 format because the `power` and `vlog` functions are used

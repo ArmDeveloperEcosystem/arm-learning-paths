@@ -12,7 +12,7 @@ Now that your Python prototype is verified, it's time to translate the key funct
 
 ### Rescaling
 
-Here's the original Python implementation of the rescaling operation, followed immediately by its equivalent in C. Notice that the function signatures and logic remain very similar, with minor differences to account for explicit memory management and types in C.
+Here's the original Python implementation of the rescaling operation, followed by its C equivalent. Notice that the function signatures and logic remain very similar, with minor differences to account for explicit memory management and types in C.
 
 #### Python version
 
@@ -65,7 +65,7 @@ arm_status rescale(q15_t *w, uint32_t nb,q15_t *the_max)
 
 As a second example, let's have a look at another critical function: computing the signal energy. This function is essential for tasks like Voice Activity Detection (VAD) and noise suppression.
 
-Below is the Python version for computing signal energy, followed by its corresponding C translation. As before, while the structure of the function stays the same, you’ll see that explicit buffer management and saturation handling are more visible in the C implementation.
+Here’s the Python version of the signal energy function, followed by its corresponding C translation. As before, while the structure of the function stays the same, explicit buffer and saturation handling is more apparent in the C version.
 
 #### Python version
 
@@ -119,4 +119,4 @@ int16_t signal_energy_q15(q15_t *window,uint32_t nb)
 
 As you can see, a DSP function written in Python using the CMSIS-DSP Python wrappers can be directly mapped to a very similar C function with only minor adjustments. This makes it easy to prototype quickly in Python and then migrate to efficient, production-ready C code for embedded platforms.
 
-In the final section, you will take part of some additional resources to learn more and start using CMSIS-DSP in your applications.
+In the final section, you will explore some additional resources to learn more and start using CMSIS-DSP in your applications.

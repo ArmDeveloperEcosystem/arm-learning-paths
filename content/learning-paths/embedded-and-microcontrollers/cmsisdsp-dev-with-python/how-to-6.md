@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Write the CMSIS-DSP Q15 implementation
 
-In this section, you will update the code to run with the CMSIS-DSP Python library. The CMSIS-DSP implementation is very similar to the reference implementation you just tested, but some things will be different.
+In this section, you will update the code to run with the CMSIS-DSP Python library. The CMSIS-DSP implementation is similar to the reference implementation you just tested, but some things will be different.
 
 ### Slicing
 
@@ -389,4 +389,4 @@ audioQ15=Audio(data=fix.Q15toF32(cleaned_q15),rate=samplerate,autoplay=False)
 audioQ15
 ```
 
-By running this, you have gained hands-on experience with the CMSIS-DSP python package, and an idea of what a noise suppression workflow looks like.
+You’ve now built a working noise suppression pipeline using the CMSIS-DSP Python package - and seen how fixed-point DSP algorithms are structured in real-world applications.

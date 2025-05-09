@@ -1,11 +1,7 @@
 ---
 title: Getting Started with CMSIS-DSP Using Python
 
-minutes_to_complete: 30
-
-draft: true
-cascade:
-    draft: true
+minutes_to_complete: 45
 
 who_is_this_for: Developers interested in integrating the CMSIS-DSP library into their applications using Python.
 
