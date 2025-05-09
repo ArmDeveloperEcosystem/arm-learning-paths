@@ -1,5 +1,5 @@
 ---
-title: Division Example
+title: Example operation
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -81,7 +81,7 @@ Benchmark             Time             CPU   Iterations
 baseDiv/1500       7.90 us         7.90 us        88512
 ```
 
-### Inspect Assembly
+### Inspect assembly
 
 To inspect what assembly instructions are being executed most frequently, you can use the `perf` command. This is useful for identifying bottlenecks and understanding the performance characteristics of your code.
 

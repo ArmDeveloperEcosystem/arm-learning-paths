@@ -1,5 +1,5 @@
 ---
-title: Introduction to Google Benchmark
+title: Google Benchmark
 weight: 3
 
 ### FIXED, DO NOT MODIFY

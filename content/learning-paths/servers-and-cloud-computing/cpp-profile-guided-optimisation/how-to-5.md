@@ -11,10 +11,10 @@ layout: learningpathall
 PGO can be integrated into a `Makefile` and continuous integration (CI) systems using simple command-line instructions, as shown in the sample `Makefile` below.
 
 {{% notice Caution %}}
-PGO requires additional build steps which will inevitably increase compile time which can be an issue for large code bases. As such, PGO is not suitable for all sections of code. You should PGO only for sections of code which are heavily influenced by run-time behavior and are performance critical. Therefore, PGO might not be ideal for early-stage development or for applications with highly variable or unpredictable usage patterns.
+PGO adds additional build steps which can increase compile time - especially for large code bases. As such, PGO is not suitable for all sections of code. You should PGO only for sections of code which are heavily influenced by run-time behavior and are performance critical. Therefore, PGO might not be ideal for early-stage development or for applications with highly variable or unpredictable usage patterns.
 {{% /notice %}}
 
-Use a text editor to create a `Makefile` for the example.
+Use a text editor to create a file named `Makefile` containing the following content:
 
 ```makefile
 # Simple Makefile for building and benchmarking div_bench with and without PGO

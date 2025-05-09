@@ -1,5 +1,5 @@
 ---
-title: Introduction to Profile-Guided Optimization
+title: Profile-Guided Optimization
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -23,4 +23,4 @@ While PGO offers substantial performance benefits, it has limitations. The profi
 
 Additionally, the process requires extra build steps, potentially increasing compile times for large codebases. Therefore, use PGO only on performance-critical sections that are heavily influenced by actual runtime behavior. PGO might not be ideal for early-stage development or applications with highly variable or unpredictable usage patterns.
 
-Please refer to the [GCC documentation](https://gcc.gnu.org/onlinedocs/gcc-13.3.0/gcc/Instrumentation-Options.html) for further details on enabling and using PGO.
+For further information, see the [GCC documentation](https://gcc.gnu.org/onlinedocs/gcc-13.3.0/gcc/Instrumentation-Options.html) for further details on enabling and using PGO.

@@ -58,9 +58,9 @@ As the terminal output above shows, the average execution time is reduced from 7
 
 Next, let's examine how the code was optimized at the assembly level.
 
-### Inspect Assembly 
+### Inspect assembly 
 
-RTo explore how the binary was optimized, use perf to inspect the generated assembly:
+Use `perf` to inspect how the compiler optimized the binary:
 
 ```bash
 sudo perf record -o perf-division-opt ./div_bench.opt
