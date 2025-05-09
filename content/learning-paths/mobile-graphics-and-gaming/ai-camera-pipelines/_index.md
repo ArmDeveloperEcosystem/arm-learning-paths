@@ -1,52 +1,54 @@
 ---
-title: Accelerate Voice Assistant performance with KleidiAI and SME2
+title: Accelerate Background Blur and Low-Light Camera Effects 
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers who want to accelerate Voice Assistant performance on Android devices using KleidiAI and SME2.
+who_is_this_for: This Learning Path introduces developers to the benefits of optimizing the performance of camera pipelines using KleidiAI and KleidiCV.
 
 learning_objectives:
-    - Compile and run a Voice Assistant Android application.
-    - Optimize performance using KleidiAI and SME2.
+    - Compile and run AI-powered camera pipeline applications.
+    - Use KleidiCV and KleidiAI to improve the performance of real-time camera pipelines.
 
 prerequisites:
-    - An Android phone that supports the i8mm Arm architecture feature (8-bit integer matrix multiplication). This Learning Path was tested on a Samsung Galaxy Z Flip 6. 
-    - A development machine with [Android Studio](https://developer.android.com/studio) installed.
+    - A computer running Arm Linux or macOS with Docker installed.
 
-author: Arnaud de Grandmaison
+author: Arnaud de Grandmaison.
 
+test_images:
+    - ubuntu:latest
+test_maintenance: false
+
+### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-A
 tools_software_languages:
-    - Java
-    - Kotlin
+    - C++
 operatingsystems:
     - Linux
     - macOS
-    - Android
 
 further_reading:
 
     - resource:
-        title: Accelerate Generative AI workloads using KleidiAI
+        title: Accelerate Generative AI Workloads Using KleidiAI
         link: https://learn.arm.com/learning-paths/cross-platform/kleidiai-explainer
         type: website
 
     - resource:
-        title: LLM inference on Android with KleidiAI, MediaPipe, and XNNPACK
+        title: LLM Inference on Android with KleidiAI, MediaPipe, and XNNPACK
         link: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/kleidiai-on-android-with-mediapipe-and-xnnpack/
         type: website
 
     - resource:
-        title: Vision LLM inference on Android with KleidiAI and MNN
+        title: Vision LLM Inference on Android with KleidiAI and MNN
         link: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/vision-llm-inference-on-android-with-kleidiai-and-mnn/
         type: website
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
-weight: 1                       # _index.md always has weight of 1 to order correctly
+weight: 1                       # _index.md always has a weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---

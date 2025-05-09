@@ -6,44 +6,43 @@ weight: 6
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Switch to developer mode
 
-In the previous section, you built the Voice Assistant application. Now, you will install this application on your Android phone. The easiest way to do this is to put your Android phone in developer mode and use a USB cable to upload the application.
+In the previous section, you built the Voice Assistant application. Now, you'll install it on your Android phone. The easiest way is to enable developer mode and use a USB cable to upload the application.
 
-## Switch your phone to developer mode
+By default, Android devices ship with developer mode disabled. To enable it, follow [these instructions](https://developer.android.com/studio/debug/dev-options).
 
-By default, developer mode is not active on Android phones. You will need to activate it by following [these instructions](https://developer.android.com/studio/debug/dev-options).
+## Install the Voice Assistant
 
-## Upload the Voice Assistant to your phone
+Once developer mode is enabled, connect your phone to your computer with USB. It should appear as a running device in the top toolbar. Select the device and click **Run** (a small green triangle, as shown below). This transfers the app to your phone and launches it.
 
-Once your phone is in developer mode, plug it into the USB cable: it should appear as a running device in the top bar. Select it and then press the run button (small red circle in figure 4 below). This will transfer the app to the phone and launch it.
 
-In the picture below, a Pixel 6a phone has been connected to the USB cable:
-![example image alt-text#center](upload.png "Figure 5: Upload the Voice App")
+In the graphic below, a Samsung Galaxy Z Flip 6 phone is connected to the USB cable:
+![upload image alt-text#center](upload.png "Upload the Voice App")
+=======
+## Launch the Voice Assistant
 
-## Run the Voice Assistant
+The app starts with this welcome screen:
 
-The Voice Assistant will welcome you with this screen:
+![welcome image alt-text#center](voice_assistant_view1.jpg "Welcome Screen")
 
-![example image alt-text#center](voice_assistant_view1.png "Figure 6: Welcome Screen")
+Tap **Press to talk** at the bottom of the screen to begin speaking your request.
 
-You can now use the Press to Talk at the bottom and make your request!
+## Voice Assistant controls
 
-## Voice Assistant Controls
+### View performance counters
 
-### Performance Counters
+You can toggle performance counters such as:
+- Speech recognition time.
+- LLM encode tokens per second.
+- LLM decode tokens per second.
+- Speech generation time.
 
-You can switch on/off the display of some performance counters like:
-- Speech recognition time
-- LLM encode tokens/s
-- LLM decode tokens/s
-- Speech generation time
+Click the icon circled in red in the top left corner to show or hide these metrics:
 
-by clicking on the element circled in red in the upper left:
+![performance image alt-text#center](voice_assistant_view2.jpg "Performance Counters")
 
-![example image alt-text#center](voice_assistant_view2.png "Figure 7: Performance Counters")
+To reset the Voice Assistant's conversation history, click the icon circled in red in the top right:
 
-### Reset the Voice Assistant's Context
+![reset image alt-text#center](voice_assistant_view3.jpg "Reset the Voice Assistant's Context")
 
-By clicking on the icon circled in red in the upper right corner, you can reset the assistant's context.
-
-![example image alt-text#center](voice_assistant_view3.png "Figure 8: Reset the Voice Assistant's Context")

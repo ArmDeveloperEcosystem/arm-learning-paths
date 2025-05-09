@@ -1,5 +1,5 @@
 ---
-title: Development environment
+title: Set up your environment
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,14 +8,16 @@ layout: learningpathall
 
 ## Install dependencies
 
-In this learning path, you will compile an Android application, so you first need to download and install the latest version of [Android Studio](https://developer.android.com/studio) on your development machine.
+In this Learning Path, you'll compile and run an Android Voice Assistant application. 
 
-You then need to install the following tools:
-- `cmake`, the software build system
-- `git`, the version control system for cloning the Voice Assistant codebase
-- `adb`, the Android Debug Bridge, a command-line tool to communicate with a device and perform various commands on it
+Begin by installing the latest version of [Android Studio](https://developer.android.com/studio) on your development machine.
 
-These tools can be installed by running the following command (depending on your machine's OS):
+Next, install the following command-line tools:
+- `cmake`; a cross-platform build system.
+- `git`; a version control system that you use to clone the Voice Assistant codebase.
+- `adb`; Android Debug Bridge, used to communicate with and control Android devices.
+
+Install these tools with the appropriate command for your OS:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux/Ubuntu" language="bash">}}
