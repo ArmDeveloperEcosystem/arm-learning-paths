@@ -1,16 +1,14 @@
 ---
-title: Install the Python packages
+title: Set up environment 
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up your development environment 
+## Create a Python virtual environment 
 
 To follow this Learning Path, you'll need to install a few additional Python packages alongside CMSIS-DSP.
-
-### Create a Python virtual environment 
 
 Start by installing the packages in a Python virtual environment. For example, you can use:
 
@@ -19,7 +17,7 @@ python -m venv cmsis-dsp-venv
 ```
 If required, activate the environment. 
 
-### Install CMSIS-DSP
+## Install CMSIS-DSP
 
 Now install the required packages, starting with CMSIS-DSP:
 
@@ -28,14 +26,14 @@ pip install cmsisdsp
 ```
 This will also install `NumPy`, which is a dependency of the CMSIS-DSP Python package.
 
-### Install Jupyter
+## Install Jupyter
 
 You'll be working with a Jupyter notebook, so install the `jupyter` package:
 
 ```bash
 pip install jupyter
 ```
-### Install additional tools 
+## Install additional tools 
 
 Finally, you'll also need packages for reading sound files, playing sound using widgets, and displaying plots:
 
@@ -43,7 +41,7 @@ Finally, you'll also need packages for reading sound files, playing sound using 
 pip install soundfile ipywidgets matplotlib
 ```
 
-### Launch Jupyter and set up your notebook
+## Launch Jupyter and set up your notebook
 
 You can now launch the Jupyter notebook with the following command:
 
@@ -57,7 +55,7 @@ Create a new Jupyter notebook by clicking **New** and selecting **Python 3 (ipyk
 Now import all the required packages by copying and running the following Python code into your notebook and run the cell (Shift+Enter).
 
 {{% notice Note%}}
-All the Python code blocks in this learning path are intended to be executed in the same Jupyter notebook.
+All the Python code blocks in this Learning Path are intended to be executed in the same Jupyter notebook.
 {{% /notice %}}
 
 

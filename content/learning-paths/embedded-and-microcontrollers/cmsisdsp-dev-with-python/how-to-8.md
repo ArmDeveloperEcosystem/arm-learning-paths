@@ -1,5 +1,5 @@
 ---
-title: Developing your knowledge
+title: Develop your knowledge
 weight: 9
 
 ### FIXED, DO NOT MODIFY

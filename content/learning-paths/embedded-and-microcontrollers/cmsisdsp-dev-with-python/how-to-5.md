@@ -6,9 +6,9 @@ weight: 6
 layout: learningpathall
 ---
 
-## Write a noise suppression algorithm
+## Understand the Math Behind Noise Suppression
 
-In this section, you will learn about the mathematics that serves as a basis for the use-case. Then, you will use those principles to create a reference implementation using NumPy.
+In this section, you will learn about the mathematics that serves as a basis for the use case. Then, you will use those principles to create a reference implementation using NumPy.
 
 ### Overlapping windows
 
@@ -20,13 +20,13 @@ plt.plot(window)
 plt.show()
 ```
 
-![hanning alt-text#center](hanning.png "Figure 4. Hanning Window")
+![hanning alt-text#center](hanning.png "Hanning Window")
 
 
-The slices we created are overlapping. By applying a Hanning window function and summing the slices, you can reconstruct the original signal.
+The slices you created are overlapping. By applying a Hanning window function and summing the slices, you can reconstruct the original signal.
 
 Indeed, summing two Hanning windows shifted by half the width of the sample block gives:
-![summed hanning alt-text#center](sumhanning.png "Figure 5. Summed Hanning Window")
+![summed hanning alt-text#center](sumhanning.png "Summed Hanning Window")
 
 As a result, if you multiply the overlapping blocks of samples by Hanning windows and sum the result, you can reconstruct the original signal:
 
@@ -52,16 +52,11 @@ audio2
 
 This means you can process each slice independently and then recombine them at the end to produce the output signal.
 
-### Principle of the noise reduction
+### How the Noise Reduction Works
 
-The algorithm works in the spectral domain, so a Fast-Fourier Transform (FFT) will be used.
-When there is no speech (as detected with the VAD), the noise level in each frequency band is estimated.
+The algorithm operates in the spectral domain, using a Fast Fourier Transform (FFT) to analyze the signal. When no speech is detected (based on the VAD), the algorithm estimates the noise level in each frequency band. When speech is present, that noise estimate is used to filter the signal.
 
-When speech is detected, the noise estimate is used.
-
-Noise filtering in each band uses a simplified Wiener filter.
-
-A gain is applied to the signal, defined as follow:
+Each band is filtered using a simplified Wiener filter, which applies a gain to the signal defined as:
 
 $$H(f) = \frac{S(f)}{S(f) + N(f)}$$
 
@@ -70,7 +65,7 @@ $$H(f) = \frac{S(f)}{S(f) + N(f)}$$
 
 $$H(f) = \frac{1}{1 + \frac{N(f)}{S(f)}}$$
 
-For this tutorial, we assume a high Signal-to-Noise Ratio (SNR). The VAD relies on this assumption: the signal energy is sufficient to detect speech.
+For this tutorial, you can assume a high Signal-to-Noise Ratio (SNR). The VAD relies on this assumption: the signal energy is sufficient to detect speech.
 With a high SNR, the transfer function can be approximated as:
 
 $$H(f) \approx 1 - \frac{N(f)}{S(f)}$$
@@ -374,7 +369,7 @@ plt.plot(cleaned)
 plt.show()
 ```
 
-![cleaned alt-text#center](cleaned.png "Figure 6. Cleaned signal")
+![cleaned alt-text#center](cleaned.png "Cleaned signal")
 
 You can now listen to the result:
 
