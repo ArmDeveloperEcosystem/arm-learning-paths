@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-### Building locally with make
+### Build locally with make
 
 PGO can be integrated into a `Makefile` and continuous integration (CI) systems using simple command-line instructions, as shown in the sample `Makefile` below.
 
@@ -69,7 +69,7 @@ You can run the following commands in your terminal:
 *   `make run`: Builds both binaries (if they don't exist) and then runs them, displaying the benchmark results for comparison.
 *   `make clean`: Removes the compiled binaries (`div_bench.base`, `div_bench.opt`) and any generated profile data files (`*.gcda`).
 
-### Building with GitHub Actions
+### Build with GitHub Actions
 
 Alternatively, you can integrate PGO into your Continuous Integration (CI) workflow using GitHub Actions. The YAML file below provides a basic example that compiles and runs the benchmark on a GitHub-hosted Ubuntu 24.04 Arm-based runner. This setup can be extended with automated tests to check for performance regressions.
 

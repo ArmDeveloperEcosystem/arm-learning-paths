@@ -8,9 +8,11 @@ layout: learningpathall
 
 ## Google Benchmark
 
-Google Benchmark is a C++ library specifically designed for microbenchmarking – measuring the performance of small code snippets with high accuracy. Microbenchmarking is essential for identifying bottlenecks and optimizing critical sections of code, especially in performance-sensitive applications. Google Benchmark simplifies this process by providing a framework that handles common tasks like managing iterations, timing execution, and performing statistical analysis. This allows you to focus on the code being measured rather than writing boilerplate code for testing scenarios or trying to prevent unwanted compiler optimizations.
+Google Benchmark is a C++ library specifically designed for microbenchmarking – measuring the performance of small code snippets with high accuracy. Microbenchmarking is essential for identifying bottlenecks and optimizing critical sections, especially in performance-sensitive applications. 
 
-To use Google Benchmark, you define a function that contains the code you want to measure. This function should accept a `benchmark::State&` parameter and iterate over it to perform the benchmarking. You then register this function using the `BENCHMARK` macro and include `BENCHMARK_MAIN()` to create the main function for the benchmark executable.
+Google Benchmark simplifies this process by providing a framework that manages iterations, times execution, and performs statistical analysis. This allows you to focus on the code being measured, rather than writing boilerplate or trying to prevent unwanted compiler optimizations manually.
+
+To use Google Benchmark, define a function that accepts a `benchmark::State&` parameter and iterate over it to perform the benchmarking. Register the function using the `BENCHMARK` macro and include `BENCHMARK_MAIN()` to generate the benchmark's entry point.
 
 Here's a basic example:
 
@@ -28,7 +30,7 @@ BENCHMARK_MAIN();
 
 ### Filtering and Preventing Compiler Optimizations
 
-Google Benchmark provides tools to ensure accurate measurements by preventing the compiler from optimizing away parts of your benchmarked code:
+Google Benchmark provides tools to ensure accurate measurements  by preventing unintended compiler optimizations and allowing flexible benchmark selection.
 
 1. **Preventing Optimizations**: Use `benchmark::DoNotOptimize(value);` to force the compiler to read and store a variable or expression, ensuring it is not optimized away.
    
@@ -37,6 +39,7 @@ Google Benchmark provides tools to ensure accurate measurements by preventing th
    ```bash
    ./benchmark_binary --benchmark_filter=BM_String.*
    ```
-   This eliminates the need to repeatedly comment out lines of source code.
+   
+This eliminates the need to repeatedly comment out lines of source code.
 
 For more detailed information and advanced usage, refer to the [official documentation](https://github.com/google/benchmark).

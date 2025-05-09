@@ -6,9 +6,9 @@ weight: 5
 layout: learningpathall
 ---
 
-### Building binary with PGO
+### Build with PGO
 
-To generate a binary optimized using the runtime profile, first build an instrumented binary that records usage data. Run the following command, which includes the `-fprofile-generate` flag, to build the instrumented binary:
+To generate a binary optimized using runtime profile data, first build an instrumented binary that records usage data. Run the following command, which includes the `-fprofile-generate` flag, to build the instrumented binary:
 
 ```bash
 g++ -O3 -std=c++17 -fprofile-generate div_bench.cpp -lbenchmark -lpthread -o div_bench.opt
@@ -20,21 +20,23 @@ Next, run the instrumented binary to generate the profile data:
 ./div_bench.opt
 ```
 
-This execution creates profile data files (typically with a `.gcda` extension) in the same directory. To incorporate this profile data into the compilation, rebuild the program using the `-fprofile-use` flag:
+This execution creates profile data files (typically with a `.gcda` extension) in the same directory. 
+
+Now recompile the program using the `-fprofile-use` flag to apply optimizations based on the collected data: 
 
 ```bash
 g++ -O3 -std=c++17 -fprofile-use div_bench.cpp -lbenchmark -lpthread -o div_bench.opt
 ```
 
-### Running the optimized binary 
+### Run the optimized binary 
 
-Run again with the optimized binary:
+Now run the optimized binary:
 
 ```bash
 ./div_bench.opt
 ```
 
-Running the newly created `div_bench.opt` binary, you observe the following improvement:
+The following output shows the performance improvement:
 
 ```output
 Running ./div_bench.opt
@@ -52,13 +54,13 @@ Benchmark             Time             CPU   Iterations
 baseDiv/1500       2.86 us         2.86 us       244429
 ```
 
-As the terminal output above shows, the average execution time is reduced from 7.90 to 2.86 microseconds. **This improvement occurs because the profile data informed the compiler that the input divisor was consistently 1500 during the profiled runs, allowing it to apply specific optimizations.** 
+As the terminal output above shows, the average execution time is reduced from 7.90 to 2.86 microseconds. This improvement occurs because the profile data informed the compiler that the input divisor was consistently 1500 during the profiled runs, allowing it to apply specific optimizations.
 
 Next, let's examine how the code was optimized at the assembly level.
 
 ### Inspect Assembly 
 
-Run the following commands to record `perf` data for the optimized binary and create a report:
+RTo explore how the binary was optimized, use perf to inspect the generated assembly:
 
 ```bash
 sudo perf record -o perf-division-opt ./div_bench.opt
