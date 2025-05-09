@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Introduction
+## Optimizing costly division operations with Google Benchmark and PGO
 
 In this section, you'll learn how to use Google Benchmark and Profile-Guided Optimization to improve the performance of a simple division operation. This example demonstrates how even seemingly straightforward operations can benefit from optimization techniques.
 
