@@ -61,7 +61,7 @@ In this section, you will walk through the updates needed to transition from flo
 
 The constructor for `NoiseSuppressionQ15` is similar and uses Q15 instead of float. The Hanning window is converted to Q15, and Q15 versions of the CFFT objects are created.
 
-### subnoise
+### Subnoise
 
 The noise reduction function is more complex:
 
@@ -104,7 +104,7 @@ res = dsp.arm_cmplx_mult_real_q31(vq31,scalingQ31)
 resQ15 = dsp.arm_q31_to_q15(res)
 ```
 
-### rescale
+### Rescale
 
 To achieve maximum accuracy in Q15, the signal (and noise) is rescaled before computing the energy.
 This rescaling function did not exist in the float implementation. The signal is divided by its maximum value to bring it to full scale::
@@ -131,7 +131,7 @@ def undo_scale(self,w,the_max):
     return(w)
 ```
 
-### noise suppression
+### Noise suppression
 
 The algorithm closely follows the float implementation. However, there is a small difference because CMSIS-DSP can be built for Cortex-A and Cortex-M. On Cortex-A, there are small differences in the FFT API, as it uses a different implementation.
 
@@ -163,11 +163,11 @@ if status == 0:
    res=self.undo_scale(res,the_max)
 ```
 
-### noise estimation
+### Noise estimation
 
 The noise estimation function performs both noise estimation and noise suppression. Noise energy is computed in Q31 for higher accuracy. The FFT functions detect whether the package was built with Neon support.
 
-### donothing
+### Donothing
 
 `donothing` is a debug function. You can disable noise reduction and test only slicing, overlap-add, and the FFT/IFFT in between. This function applies scaling and performs the FFT/IFFT. It's a good way to check for saturation issues (which are common with fixed-point arithmetic) and to ensure proper scaling compensation.
 

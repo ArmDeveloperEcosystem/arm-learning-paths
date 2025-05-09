@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## Understand the Math Behind Noise Suppression
+## Understand the mathematics behind noise suppression
 
 In this section, you will learn about the mathematics that serves as a basis for the use case. Then, you will use those principles to create a reference implementation using NumPy.
 
@@ -52,7 +52,7 @@ audio2
 
 This means you can process each slice independently and then recombine them at the end to produce the output signal.
 
-### How the Noise Reduction Works
+### How the noise reduction works
 
 The algorithm operates in the spectral domain, using a Fast Fourier Transform (FFT) to analyze the signal. When no speech is detected (based on the VAD), the algorithm estimates the noise level in each frequency band. When speech is present, that noise estimate is used to filter the signal.
 
@@ -119,9 +119,9 @@ class NoiseSuppression():
 ```
 
 The constructor for `NoiseSuppression`:
-- Uses the audio slices as input
-- Computes the FFT length that can be used for each slice
-- Computes the padding needed for the FFT
+- Uses the audio slices as input.
+- Computes the FFT length that can be used for each slice.
+- Computes the padding needed for the FFT.
 
 Because FFTs require a power-of-two length, the constructor computes the smallest power of two greater than the window size and pads the signal accordingly.
 
@@ -146,7 +146,7 @@ The constructor for `NoiseSuppressionReference`:
 - Compute the Hanning window.
 
 
-#### subnoise
+#### Subnoise
 
 Calculates the approximate Wiener gain and it is applied to all frequency bands of the FFT. The `v` argument is a vector. If the gain is negative, it is set to 0. A small value is added to the energy to avoid division by zero.
 
@@ -161,7 +161,7 @@ def subnoise(self,v):
         return(v * scaling)
 ```
 
-#### remove_noise
+#### Remove_noise
 
 Computes the FFT (with padding) and reduces noise in the frequency bands using the approximate Wiener gain.
 
@@ -186,7 +186,7 @@ At a glance, this helper method takes care of padding the signal for a basic eve
 ```
 
 
-#### estimate_noise
+#### Estimate_noise
 
 If no speech detected, this function is called to estimate the noise energy.
 
@@ -209,10 +209,9 @@ def estimate_noise(self,w):
     return(res)
 ```
 
-#### remove_noise_from_slices
+#### Remove_noise_from_slices
 
-The main function: it removes noise from each slice.
-If a slice does not contain speech, the noise estimate is updated before reducing noise in each frequency band.
+This is the main function that removes noise from each slice. If a slice doesn’t contain speech, the noise estimate is updated before applying noise reduction.
 
 ```python
 def remove_noise_from_slices(self):
@@ -228,7 +227,7 @@ def remove_noise_from_slices(self):
 ```
 
 
-#### overlap_and_add
+#### Overlap_and_add
 
 The filtered slices are recombined using the pre-defined window lengths from before:
 

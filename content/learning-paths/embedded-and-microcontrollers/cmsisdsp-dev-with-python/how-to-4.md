@@ -106,7 +106,7 @@ def signal_vad_q15(window):
 ```
 
 {{% notice Note %}}
-In C code, you would hard-code the output of `fix.toQ15(-0.38)`. `fix.toQ15` is a utility of the Python package to convert float to fixed-point, but it is not available in the CMSIS-DSP C implementation. CMSIS-DSP C has functions like `arm_float_to_q15` which work on arrays and are meant to be used at runtime. If you need a pre-computed constant, you can use a utility function like `fix.toQ15` during development and use the resulting value in the C code.
+In C code, you can hard-code the output of `fix.toQ15(-0.38)`. `fix.toQ15` is a utility of the Python package to convert float to fixed-point, but it is not available in the CMSIS-DSP C implementation. CMSIS-DSP C provides functions like `arm_float_to_q15` which operate on arrays and are intended for use at runtime. To define a precomputed constant, use a utility function like `fix.toQ15` during development and copy the resulting value into your C code.
 {{% /notice %}}
 
 #### Plot the Q15 implementation

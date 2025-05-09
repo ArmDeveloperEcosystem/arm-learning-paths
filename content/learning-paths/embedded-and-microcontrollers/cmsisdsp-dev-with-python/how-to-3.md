@@ -29,7 +29,7 @@ An audio widget will appear:
 
 You'll hear a sequence of the words "yes" and "no" with background noise. The goal of this Learning Path is to design an algorithm that removes that noise.
 
-### Convert the Audio to a NumPy Array
+### Convert the Audio to a NumPy array
 
 Convert the audio into a NumPy array so it can be processed with CMSIS-DSP:
 
