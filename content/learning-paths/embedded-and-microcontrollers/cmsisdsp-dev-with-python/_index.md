@@ -13,7 +13,7 @@ who_is_this_for: Developers interested in integrating the CMSIS-DSP library into
 learning_objectives:
     - Understand how to use the CMSIS-DSP Python package.
     - Understand how the Python API maps to the C implementation.
-    - Develop a complex application using CMSIS-DSP.
+    - Build a complex application using CMSIS-DSP.
 
 prerequisites:
     - Familiarity with Python and DSP programming.
@@ -34,7 +34,7 @@ tools_software_languages:
     - Python
     - C
     - Jupyter Notebook
-    - numpy
+    - NumPy
 operatingsystems:
     - Linux
     - Windows
@@ -42,19 +42,19 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: Biquad filters with CMSIS-DSP Python package
+        title: Biquad Filters with CMSIS-DSP Python Package
         link: https://developer.arm.com/documentation/102463/latest/
         type: documentation
     - resource:
-        title: CMSIS-DSP library
+        title: CMSIS-DSP Library (GitHub)
         link: https://github.com/ARM-software/CMSIS-DSP
         type: Open-source project
     - resource:
-        title: CMSIS-DSP python package
+        title: CMSIS-DSP Python Package (PyPi)
         link: https://pypi.org/project/cmsisdsp/
         type: Open-source project
     - resource:
-        title: CMSIS-DSP Python package examples and tests
+        title: CMSIS-DSP Python Package Examples and Tests
         link: https://github.com/ARM-software/CMSIS-DSP/tree/main/PythonWrapper/examples
         type: Open-source project
     - resource:
