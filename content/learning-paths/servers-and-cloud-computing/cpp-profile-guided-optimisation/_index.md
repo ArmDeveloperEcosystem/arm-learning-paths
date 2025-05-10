@@ -1,17 +1,13 @@
 ---
-title: Optimizing Performance with Profile-Guided Optimization and Google Benchmark
-
-draft: true
-cascade:
-    draft: true
+title: Optimize C++ performance with Profile-Guided Optimization and Google Benchmark
 
 minutes_to_complete: 15
 
-who_is_this_for: Developers who are looking to optimize C++ performance using characteristics observed at runtime.
+who_is_this_for: Developers looking to optimize C++ performance based on runtime behavior.
 
 learning_objectives: 
-    - Learn how to microbenchmark a function using Google Benchmark.
-    - Learn how to use profile guided optimization to build binaries optimized for real-world workloads.
+    - Microbenchmark a function using Google Benchmark.
+    - Apply profile-guided optimization to build performance-tuned binaries.
 
 prerequisites:
     - Basic C++ understanding.
@@ -32,7 +28,7 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: G++ Profile Guided Optimization Documentation 
+        title: G++ profile-guided optimization documentation 
         link: https://gcc.gnu.org/onlinedocs/gcc-13.3.0/gcc/Instrumentation-Options.html
         type: documentation
     - resource:

@@ -6,9 +6,9 @@ weight: 6
 layout: learningpathall
 ---
 
-## Write a noise suppression algorithm
+## Understand the mathematics behind noise suppression
 
-In this section, you will learn about the mathematics that serves as a basis for the use-case. Then, you will use those principles to create a reference implementation using NumPy.
+In this section, you will learn about the mathematics that serves as a basis for the use case. Then, you will use those principles to create a reference implementation using NumPy.
 
 ### Overlapping windows
 
@@ -20,15 +20,15 @@ plt.plot(window)
 plt.show()
 ```
 
-![hanning alt-text#center](hanning.png "Figure 4. Hanning Window")
+![hanning alt-text#center](hanning.png "Hanning Window")
 
 
-The slices we created are overlapping. By applying a Hanning window function and summing the slices, you can reconstruct the original signal.
+The slices you created are overlapping. By applying a Hanning window function and summing the slices, you can reconstruct the original signal.
 
 Indeed, summing two Hanning windows shifted by half the width of the sample block gives:
-![summed hanning alt-text#center](sumhanning.png "Figure 5. Summed Hanning Window")
+![summed hanning alt-text#center](sumhanning.png "Summed Hanning Window")
 
-As result, if you multiply the overlapping blocks of samples by Hanning windows and sum the result, you can reconstruct the original signal:
+As a result, if you multiply the overlapping blocks of samples by Hanning windows and sum the result, you can reconstruct the original signal:
 
 
 ```python
@@ -52,16 +52,11 @@ audio2
 
 This means you can process each slice independently and then recombine them at the end to produce the output signal.
 
-### Principle of the noise reduction
+### How the noise reduction works
 
-The algorithm works in the spectral domain, so a Fast-Fourier Transform (FFT) will be used.
-When there is no speech (as detected with the VAD), the noise level in each frequency band is estimated.
+The algorithm operates in the spectral domain, using a Fast Fourier Transform (FFT) to analyze the signal. When no speech is detected (based on the VAD), the algorithm estimates the noise level in each frequency band. When speech is present, that noise estimate is used to filter the signal.
 
-When speech is detected, the noise estimate is used.
-
-Noise filtering in each band uses a simplified Wiener filter.
-
-A gain is applied to the signal, defined as follow:
+Each band is filtered using a simplified Wiener filter, which applies a gain to the signal defined as:
 
 $$H(f) = \frac{S(f)}{S(f) + N(f)}$$
 
@@ -70,7 +65,7 @@ $$H(f) = \frac{S(f)}{S(f) + N(f)}$$
 
 $$H(f) = \frac{1}{1 + \frac{N(f)}{S(f)}}$$
 
-For this tutorial, we assume a high Signal-to-Noise Ratio (SNR). The VAD relies on this assumption: the signal energy is sufficient to detect speech.
+For this tutorial, you can assume a high Signal-to-Noise Ratio (SNR). The VAD relies on this assumption: the signal energy is sufficient to detect speech.
 With a high SNR, the transfer function can be approximated as:
 
 $$H(f) \approx 1 - \frac{N(f)}{S(f)}$$
@@ -124,11 +119,11 @@ class NoiseSuppression():
 ```
 
 The constructor for `NoiseSuppression`:
-- Uses the audio slices as input
-- Computes the FFT length that can be used for each slice
-- Computes the padding needed for the FFT
+- Uses the audio slices as input.
+- Computes the FFT length that can be used for each slice.
+- Computes the padding needed for the FFT.
 
-The FFT length must be a power of 2. The slice length is not necessarily a power of 2. The constructor therefore computes the smaller power of two greater than the signal length, and the audio slices are padded with zeros on both sides to match the required FFT length. 
+Because FFTs require a power-of-two length, the constructor computes the smallest power of two greater than the window size and pads the signal accordingly.
 
 #### NoiseSuppressionReference constructor
 
@@ -145,13 +140,13 @@ class NoiseSuppressionReference(NoiseSuppression):
 ```
 
 The constructor for `NoiseSuppressionReference`:
-- Uses the audio slices as input
-- Call the constructor for `NoiseSuppression`
-- Computes the VAD signal for the full audio signal
-- Compute the Hanning window
+- Uses the audio slices as input.
+- Calls the constructor for `NoiseSuppression`.
+- Computes the VAD signal for the full audio signal.
+- Compute the Hanning window.
 
 
-#### subnoise
+#### Subnoise
 
 Calculates the approximate Wiener gain and it is applied to all frequency bands of the FFT. The `v` argument is a vector. If the gain is negative, it is set to 0. A small value is added to the energy to avoid division by zero.
 
@@ -166,7 +161,7 @@ def subnoise(self,v):
         return(v * scaling)
 ```
 
-#### remove_noise
+#### Remove_noise
 
 Computes the FFT (with padding) and reduces noise in the frequency bands using the approximate Wiener gain.
 
@@ -191,7 +186,7 @@ At a glance, this helper method takes care of padding the signal for a basic eve
 ```
 
 
-#### estimate_noise
+#### Estimate_noise
 
 If no speech detected, this function is called to estimate the noise energy.
 
@@ -214,10 +209,9 @@ def estimate_noise(self,w):
     return(res)
 ```
 
-#### remove_noise_from_slices
+#### Remove_noise_from_slices
 
-The main function: it removes noise from each slice.
-If a slice does not contain speech, the noise estimate is updated before reducing noise in each frequency band.
+This is the main function that removes noise from each slice. If a slice doesn’t contain speech, the noise estimate is updated before applying noise reduction.
 
 ```python
 def remove_noise_from_slices(self):
@@ -233,7 +227,7 @@ def remove_noise_from_slices(self):
 ```
 
 
-#### overlap_and_add
+#### Overlap_and_add
 
 The filtered slices are recombined using the pre-defined window lengths from before:
 
@@ -364,7 +358,7 @@ class NoiseSuppressionReference(NoiseSuppression):
             i=i+1
         return(res)
 ```
-You can now test this algorithm on the original signal:
+Test this algorithm on the original signal:
 
 ```python
 n=NoiseSuppressionReference(slices)
@@ -374,7 +368,7 @@ plt.plot(cleaned)
 plt.show()
 ```
 
-![cleaned alt-text#center](cleaned.png "Figure 6. Cleaned signal")
+![cleaned alt-text#center](cleaned.png "Cleaned signal")
 
 You can now listen to the result:
 
@@ -383,4 +377,4 @@ audioRef=Audio(data=cleaned,rate=samplerate,autoplay=False)
 audioRef
 ```
 
-In the next section, you will write the optimized version using CMSIS-DSP.
+In the next section, you'll write the optimized version using CMSIS-DSP.

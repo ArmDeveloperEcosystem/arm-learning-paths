@@ -5,9 +5,11 @@ weight: 3
 layout: learningpathall
 ---
 
-## Script for ONNX Runtime based LLM Server
-Now create a python script `phi3v.py` with the following content. This script runs the Phi3.5 vision model with ONNX Runtime.
-```
+## Create the chatbot server script
+
+Create a Python script called `phi3v.py` with the code below.
+
+This script launches a chatbot server using the Phi-3.5 vision model and ONNX Runtime.
 
 ```python
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -94,7 +96,7 @@ def run(args: argparse.Namespace):
         params.set_inputs(inputs)
         params.set_search_options(max_length=7680)
         generator = og.Generator(model, params)
-        #start_time = time.time()
+        #start_time = time.time() # commented out and redundant 
         first_token_duration = None
         token_count = 0
         while not generator.is_done():
@@ -141,13 +143,13 @@ if __name__ == "__main__":
     run(args)
 ```
 
-## Run the Server
+## Run the server
 
-You are now ready to run the server to enable chatbot.
+You’re now ready to run the chatbot server.
 
 Use the following command in a terminal to start the server:
 
-```python
+```bash
 python3 phi3v.py -m cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4 -e cpu
 ```
 

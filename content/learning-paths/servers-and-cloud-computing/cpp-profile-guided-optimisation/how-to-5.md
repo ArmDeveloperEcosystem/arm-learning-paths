@@ -6,15 +6,15 @@ weight: 6
 layout: learningpathall
 ---
 
-### Building locally with make
+### Build locally with make
 
 PGO can be integrated into a `Makefile` and continuous integration (CI) systems using simple command-line instructions, as shown in the sample `Makefile` below.
 
 {{% notice Caution %}}
-PGO requires additional build steps which will inevitably increase compile time which can be an issue for large code bases. As such, PGO is not suitable for all sections of code. You should PGO only for sections of code which are heavily influenced by run-time behavior and are performance critical. Therefore, PGO might not be ideal for early-stage development or for applications with highly variable or unpredictable usage patterns.
+PGO adds additional build steps which can increase compile time - especially for large code bases. As such, PGO is not suitable for all sections of code. You should PGO only for sections of code which are heavily influenced by run-time behavior and are performance critical. Therefore, PGO might not be ideal for early-stage development or for applications with highly variable or unpredictable usage patterns.
 {{% /notice %}}
 
-Use a text editor to create a `Makefile` for the example.
+Use a text editor to create a file named `Makefile` containing the following content:
 
 ```makefile
 # Simple Makefile for building and benchmarking div_bench with and without PGO
@@ -69,7 +69,7 @@ You can run the following commands in your terminal:
 *   `make run`: Builds both binaries (if they don't exist) and then runs them, displaying the benchmark results for comparison.
 *   `make clean`: Removes the compiled binaries (`div_bench.base`, `div_bench.opt`) and any generated profile data files (`*.gcda`).
 
-### Building with GitHub Actions
+### Build with GitHub Actions
 
 Alternatively, you can integrate PGO into your Continuous Integration (CI) workflow using GitHub Actions. The YAML file below provides a basic example that compiles and runs the benchmark on a GitHub-hosted Ubuntu 24.04 Arm-based runner. This setup can be extended with automated tests to check for performance regressions.
 
