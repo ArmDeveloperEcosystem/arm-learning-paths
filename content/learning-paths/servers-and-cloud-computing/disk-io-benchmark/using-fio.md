@@ -12,24 +12,24 @@ You can use the same `t4g.medium` instance from the previous section with 2 diff
 
 To add the required EBS volumes to your EC2 instance:
 
-1. In the AWS Console, navigate to EC2 > Volumes > Create Volume
+1. In the AWS Console, navigate to **EC2** > **Volumes** > **Create Volume**.
 2. Create a volume with the following settings:
-   - Volume Type: io2 (Provisioned IOPS SSD)
-   - Size: 8 GiB
-   - IOPS: 400
-   - Availability Zone: Same as your EC2 instance
+   - Volume Type: io2 (Provisioned IOPS SSD).
+   - Size: 8 GiB.
+   - IOPS: 400.
+   - Availability Zone: The same as your EC2 instance
 3. Create another volume with the following settings:
-   - Volume Type: gp2 (General Purpose SSD)
-   - Size: 8 GiB
-   - Availability Zone: Same as your EC2 instance
-4. Once created, select each volume and choose Actions > Attach Volume
+   - Volume Type: gp2 (General Purpose SSD).
+   - Size: 8 GiB.
+   - Availability Zone: The same as your EC2 instance.
+4. Once created, select each volume and choose **Actions** > **Attach Volume**
 5. Select your t4g.medium instance from the dropdown and attach each volume
 
-Both block devices have the same, 8GiB capacity but the `io2` is geared towards throughput as opposed to the general purpose SSD `gp2`. 
+Both block devices have the same 8 GiB capacity, but the `io2` is optimized for throughput, while `gp2` is general-purpose. 
 
 ![EBS](./EBS.png)
 
-In this section you will observe what the real-world performance for your workload is so that it can inform your selection.
+In this section, you’ll measure real-world performance to help guide your storage selection.
 
 Flexible I/O (fio) is a command-line tool to generate a synthetic workload with specific I/O characteristics. This serves as a simpler alternative to full record and replay testing. Fio is available through most Linux distribution packages, please refer to the [documentation](https://github.com/axboe/fio) for the binary package availability.
 
@@ -79,7 +79,7 @@ If you have more than 1 block volumes attached to an instance, the `sudo nvme li
 Suppose you want to simulate a fictional logging application with the following characteristics observed using the tools from the previous section. 
 
 {{% notice Workload%}}
-The logging workload has light sequential read and write characteristics. The system write throughput per thread is 5 MB/s with 83% writes. There are infrequent bursts of reads for approximately 5 seconds, operating at up to 16MB/s per thread. The workload can scale the infrequent reads and writes to use up to 16 threads each. The block size for the writes and reads are 64KiB and 256KiB respectively (as opposed to the standard 4KiB Page size). 
+This workload involves light, sequential reads and writes. The system write throughput per thread is 5 MB/s with 83% writes. There are infrequent bursts of reads for approximately 5 seconds, operating at up to 16MB/s per thread. The workload can scale the infrequent reads and writes to use up to 16 threads each. The block size for the writes and reads are 64KiB and 256KiB respectively (as opposed to the standard 4KiB Page size). 
 
 Further, the application is latency sensitive and given it holds critical information, needs to write directly to non-volatile storage through direct IO. 
 {{% /notice %}}
