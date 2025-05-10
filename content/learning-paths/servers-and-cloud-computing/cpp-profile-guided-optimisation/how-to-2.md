@@ -30,7 +30,7 @@ BENCHMARK_MAIN();
 
 ### Filtering and Preventing Compiler Optimizations
 
-Google Benchmark provides tools to ensure accurate measurements  by preventing unintended compiler optimizations and allowing flexible benchmark selection.
+Google Benchmark provides tools to ensure accurate measurements by preventing unintended compiler optimizations and allowing flexible benchmark selection.
 
 1. **Preventing Optimizations**: Use `benchmark::DoNotOptimize(value);` to force the compiler to read and store a variable or expression, ensuring it is not optimized away.
    
