@@ -10,28 +10,35 @@ layout: learningpathall
 
 You can use the same `t4g.medium` instance from the previous section with two different types of SSD-based block storage devices as shown in the console screenshot below. 
 
+### Attach and Identify Block Devices
 To add the required EBS volumes to your EC2 instance:
 
 1. In the AWS Console, navigate to **EC2** > **Volumes** > **Create Volume**.
+
 2. Create a volume with the following settings:
    - Volume Type: io2 (Provisioned IOPS SSD).
    - Size: 8 GiB.
    - IOPS: 400.
    - Availability Zone: The same as your EC2 instance
+
 3. Create another volume with the following settings:
    - Volume Type: gp2 (General Purpose SSD).
    - Size: 8 GiB.
    - Availability Zone: The same as your EC2 instance.
-4. Once created, select each volume and choose **Actions** > **Attach Volume**
-5. Select your t4g.medium instance from the dropdown and attach each volume
+
+4. Once created, select each volume and choose **Actions** > **Attach Volume**.
+
+5. Select your t4g.medium instance from the dropdown and attach each volume.
 
 Both block devices have the same 8 GiB capacity, but the `io2` is optimized for throughput, while `gp2` is general-purpose. 
 
-![EBS](./EBS.png)
+![EBS alt-text#center](./EBS.png "Multi-volume storage information.")
 
 In this section, you’ll measure real-world performance to help guide your storage selection.
 
-Flexible I/O (fio) is a command-line tool to generate a synthetic workload with specific I/O characteristics. This serves as a simpler alternative to full record and replay testing. Fio is available through most Linux distribution packages, please refer to the [documentation](https://github.com/axboe/fio) for package availability.
+Flexible I/O (fio) is a command-line tool to generate a synthetic workload with specific I/O characteristics. This serves as a simpler alternative to full record and replay testing. 
+
+Fio is available through most Linux distribution packages, see the [documentation](https://github.com/axboe/fio) for package availability.
 
 ```bash
 sudo apt update
@@ -50,7 +57,7 @@ The version is printed:
 fio-3.37
 ```
 
-## Locate device 
+## Identify Device Names for Benchmarking
 
 Fio allows you to microbenchmark either the block device or a mounted filesystem. Use the disk free, `df` command to confirm your EBS volumes are not mounted. Writing to drives containing critical data can result in data loss. In this tutorial, you're writing to blank, unmounted block devices.
 
@@ -76,7 +83,7 @@ If you have more than one block volume attached to an instance, the `sudo nvme l
 
 ## Generating a synthetic workload
 
-Suppose you want to simulate a fictional logging application with the following characteristics observed using the tools from the previous section. 
+Let’s define a synthetic workload that mimics the behavior of a logging application, using metrics observed earlier.
 
 {{% notice Workload%}}
 This workload involves light, sequential reads and writes. The system write throughput per thread is 5 MB/s with 83% writes. There are infrequent bursts of reads for approximately 5 seconds, operating at up to 16MB/s per thread. The workload can scale the infrequent reads and writes to use up to 16 threads each. The block size for the writes and reads are 64KiB and 256KiB respectively (as opposed to the standard 4KiB Page size). 
@@ -84,7 +91,10 @@ This workload involves light, sequential reads and writes. The system write thro
 Further, the application is latency sensitive and given it holds critical information, needs to write directly to non-volatile storage through direct IO. 
 {{% /notice %}}
 
-The fio tool uses simple configuration `jobfiles` to describe the characteristics of your synthetic workload. Parameters under the `[global]` option are shared among jobs. From the example below, you can create 2 jobs to represent the steady write and infrequent reads. Please refer to the official [documentation](https://fio.readthedocs.io/en/latest/fio_doc.html#job-file-format) for more details. 
+The fio tool uses simple configuration files - called `jobfiles` - to describe the characteristics of your synthetic workload. Parameters under the `[global]` option are shared among jobs. From the example below, you can create 2 jobs to represent the steady write and infrequent reads. Please refer to the official [documentation](https://fio.readthedocs.io/en/latest/fio_doc.html#job-file-format) for more details. 
+
+### Create fio Job Files
+
 
 Create two job files, one for each device, by copying the configuration below and adjusting the filename parameter (`/dev/nvme1n1` or `/dev/nvme2n1`):
 
@@ -111,17 +121,20 @@ bs=64k ; Block size of 64KiB (default block size of 4 KiB)
 name=burst_read
 rw=read
 bs=256k ; Block size of 256KiB for reads (default is 4KiB)
-startdelay=25 ; simulate infrequent reads (5 seconds out 30)
+startdelay=25 ; simulate a 5-second read burst at the end of a 30-second window
 runtime=5
 ; -- end job file including.fio --
 ```
+## Run the Benchmarks
 
 
 {{% notice Note %}}
 Running fio directly on block devices requires root privileges (hence the use of `sudo`). Be careful: writing to the wrong device can result in data loss. Always ensure you are targeting a blank, unmounted device.
 {{% /notice %}}
 
-Run the following commands to run each test back to back.  
+
+
+Run the following commands to execute each test sequentially:
 
 ```bash
 sudo NUM_JOBS=16 IO_DEPTH=64 fio nvme1.fio

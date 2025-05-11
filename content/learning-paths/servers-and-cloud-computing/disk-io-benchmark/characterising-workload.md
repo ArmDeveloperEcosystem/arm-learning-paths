@@ -1,12 +1,12 @@
 ---
-title: Characterizing a workload
+title: Analyzing I/O behavior with real workloads
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Basic attributes
+## Workload attributes 
 
 The basic attributes of a given workload are the following: 
 
@@ -16,13 +16,15 @@ The basic attributes of a given workload are the following:
 - Read-to-write ratio.
 - Random vs. sequential access.
 
-While characteristics like latency are important, this section focuses on the high-level metrics listed above. 
+While latency is also an important factor, this section focuses on these high-level metrics to establish a foundational understanding.
 
 ## Run an example workload
 
 Connect to an Arm-based server or cloud instance. 
 
-As an example workload, use the media manipulation tool, FFMPEG on an AWS `t4g.medium` instance. This is an Arm-based (AWS Graviton2) virtual machine with two vCPUs and 4 GiB of memory, designed for general-purpose workloads with a balance of compute, memory, and network resources.
+As an example workload, use the media manipulation tool, FFMPEG on an AWS `t4g.medium` instance. 
+
+This is an Arm-based (AWS Graviton2) virtual machine with two vCPUs and 4 GiB of memory, designed for general-purpose workloads with a balance of compute, memory, and network resources.
 
 First, install the required tools: 
 
@@ -39,7 +41,9 @@ mkdir src && cd src
 wget http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
 ```
 
-Run the following command to begin transcoding the video and audio using the `H.264` and `aac` transcoders respectively. The `-flush_packets` flag forces FFMPEG to write each chunk of video data from memory to storage immediately, rather than buffering it in memory. This reduces the risk of data loss in case of a crash and allows disk write activity to be more observable during monitoring, making it easier to study write behavior in real-time.
+Run the following command to begin transcoding the video and audio using the `H.264` and `aac` transcoders respectively. The `-flush_packets` flag forces FFMPEG to write each chunk of video data from memory to storage immediately, rather than buffering it in memory. 
+
+This reduces the risk of data loss in case of a crash and allows disk write activity to be more observable during monitoring, making it easier to study write behavior in real-time.
 
 ```bash
 ffmpeg -i BigBuckBunny.mp4 -c:v libx264 -preset fast -crf 23 -c:a aac -b:a 128k -flush_packets 1 output_video.mp4
