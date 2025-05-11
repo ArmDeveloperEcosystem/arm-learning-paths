@@ -52,7 +52,7 @@ fio-3.37
 
 ## Locate Device 
 
-Fio allows you to microbenchmark either the block device or a mounted filesystem. Use the disk free, `df` command to confirm your EBS volumes are not mounted. Writing to drives that hold critical information may cause issues. Hence you are writing to blank, unmounted block storage device.
+Fio allows you to microbenchmark either the block device or a mounted filesystem. Use the disk free, `df` command to confirm your EBS volumes are not mounted. Writing to drives with critical data can cause data loss. In this tutorial, you're writing to blank, unmounted block devices.
 
 Use the `lsblk` command to view the EBS volumes attached to the server (`nvme1n1` and `nvme2n1`). The immediate number appended to `nvme`, e.g., `nvme0`, shows it is a physically separate device. `nvme1n1` corresponds to the faster `io2` block device and `nvme2n1` corresponds to the slower `gp2` block device. 
 
