@@ -3,7 +3,7 @@ title: Microbenchmark storage performance with fio on Arm
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers who want to optimize storage performance and costs, identify bottlenecks, and evaluate storage options when migrating applications across platforms.
+who_is_this_for: This is an introductory topic for developers who want to optimize storage performance, reduce costs, identify bottlenecks, and evaluate storage options when migrating applications across platforms.
 
 learning_objectives: 
     - Describe how data flows through storage devices.

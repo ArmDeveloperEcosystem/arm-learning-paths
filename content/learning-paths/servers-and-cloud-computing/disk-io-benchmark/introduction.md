@@ -12,7 +12,7 @@ Performance-sensitive application data - such as frequently-accessed configurati
 
 However, random-access memory (RAM) is volatile (data is lost on power down), limited in capacity, and more expensive per gigabyte than other storage types. Due to these constraints, most applications also rely on solid-state drives (SSDs) or hard disk drives (HDDs).
 
-## High-level data flow
+## High-level view of data flow
 
 The diagram below shows a high-level view of how data moves to and from storage in a multi-disk I/O architecture. Each disk (Disk 1 to Disk N) has its own I/O queue and optional disk cache, communicating with a central CPU through a disk controller. 
 

@@ -6,32 +6,32 @@ weight: 3
 layout: learningpathall
 ---
 
-## Basic Characteristics
+## Basic attributes
 
-The basic attributes of a given workload are the following. 
+The basic attributes of a given workload are the following: 
 
-- IOPS
-- I/O Size
-- Throughput
-- Read to Write Ratio
-- Random vs Sequential access
+- IOPS.
+- I/O size.
+- Throughput.
+- Read-to-write ratio.
+- Random vs. sequential access.
 
-There are many more characteristics to observe, such as latency, but since this is an introductory topic you will mostly stick to the high-level metrics listed above. 
+While characteristics like latency are important, this section focuses on the high-level metrics listed above. 
 
-## Run an Example Workload
+## Run an example workload
 
 Connect to an Arm-based server or cloud instance. 
 
-As an example workload, you can use the media manipulation tool, FFMPEG, on an AWS `t4g.medium` instance. The `t4g.medium` is an Arm-based (AWS Graviton2) virtual machine with 2 vCPUs, 4 GiB of memory, and is designed for general-purpose workloads with a balance of compute, memory, and network resources.
+As an example workload, use the media manipulation tool, FFMPEG on an AWS `t4g.medium` instance. This is an Arm-based (AWS Graviton2) virtual machine with two vCPUs and 4 GiB of memory, designed for general-purpose workloads with a balance of compute, memory, and network resources.
 
-First, install the required tools. 
+First, install the required tools: 
 
 ```bash
 sudo apt update 
 sudo apt install ffmpeg iotop -y
 ```
 
-Download the popular reference video for transcoding, `BigBuckBunny.mp4`, which is available under the [Creative Commons 3.0 License](https://creativecommons.org/licenses/by/3.0/).
+Download the sample video `BigBuckBunny.mp4`, available under the [Creative Commons Attribution 3.0 License](https://creativecommons.org/licenses/by/3.0/).
 
 ```bash
 cd ~
@@ -39,13 +39,13 @@ mkdir src && cd src
 wget http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
 ```
 
-Run the following command to begin transcoding the video and audio using the `H.264` and `aac` transcoders respectively. The `-flush_packets` flag forces FFMPEG to write each chunk of video data from memory to storage immediately, rather than buffering it in memory. This reduces the risk of data loss in case of a crash and allows you to observe more frequent disk writes during the transcoding process.
+Run the following command to begin transcoding the video and audio using the `H.264` and `aac` transcoders respectively. The `-flush_packets` flag forces FFMPEG to write each chunk of video data from memory to storage immediately, rather than buffering it in memory. This reduces the risk of data loss in case of a crash and allows disk write activity to be more observable during monitoring, making it easier to study write behavior in real-time.
 
 ```bash
 ffmpeg -i BigBuckBunny.mp4 -c:v libx264 -preset fast -crf 23 -c:a aac -b:a 128k -flush_packets 1 output_video.mp4
 ```
 
-### Observe Disk Usage 
+### Observe disk usage 
 
 While the transcoding is running, you can use the `pidstat` command to see the disk statistics of that specific process. 
 
@@ -73,7 +73,7 @@ Linux 6.8.0-1024-aws (ip-10-248-213-118)        04/15/25        _aarch64_       
 In this simple example, since you are interacting with a file on the mounted filesystem, you are also observing the behavior of the filesystem. 
 {{% /notice %}}
 
-There may be other processes or background services that are writing to this disk. You can use the `iotop` command for inspection. As shown in the output below, the `ffmpeg` process has the highest disk utilization. 
+There might be other processes or background services that are writing to this disk. You can use the `iotop` command for inspection. As shown in the output below, the `ffmpeg` process has the highest disk utilization. 
 
 ```bash
 sudo iotop
@@ -88,7 +88,13 @@ Current DISK READ:       0.00 B/s | Current DISK WRITE:       0.00 B/s
       2 be/4 root        0.00 B/s    0.00 B/s [kthreadd]
 ```
 
-Using the input/output statistics command (`iostat`), you can observe the system-wide metrics from the `nvme0n1` drive. Please note that you are using a snapshot of this workload; more accurate characteristics can be obtained by measuring the distribution of a workload. 
+Using the input/output statistics command (`iostat`), you can observe the system-wide metrics from the `nvme0n1` drive. 
+
+{{% notice Note%}}
+Be mindful of the fact that you are using a snapshot of this workload; more accurate characteristics can be obtained by measuring the distribution of a workload. 
+{{% /notice %}}
+
+
 
 ```bash
 watch -n 0.1 iostat -z nvme0n1
@@ -113,7 +119,7 @@ Device            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB
 nvme0n1          0.66     29.64     0.24  26.27    0.73    44.80    2.92    203.88     3.17  52.01    2.16    69.70    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.01   0.15
 ```
 
-### Basic Characteristics of the Example Workload
+### Basic attributes of the example workload
 
 This is a simple transcoding workload with flushed writes, where most data is processed and stored in memory. Disk I/O is minimal, with an IOPS of just 3.81, low throughput (248.71 kB/s), and an average IO depth of 0.01 — all summarized in very low disk utilization. The 52% write merge rate and low latencies further suggest sequential, infrequent disk access, reinforcing that the workload is primarily memory-bound.
 

@@ -1,5 +1,5 @@
 ---
-title: Using fio
+title: Benchmarking block storage performance with fio
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Install fio
 
-You can use the same `t4g.medium` instance from the previous section with 2 different types of SSD-based block storage devices as per the console screenshot below. 
+You can use the same `t4g.medium` instance from the previous section with two different types of SSD-based block storage devices as shown in the console screenshot below. 
 
 To add the required EBS volumes to your EC2 instance:
 
@@ -31,14 +31,14 @@ Both block devices have the same 8 GiB capacity, but the `io2` is optimized for 
 
 In this section, you’ll measure real-world performance to help guide your storage selection.
 
-Flexible I/O (fio) is a command-line tool to generate a synthetic workload with specific I/O characteristics. This serves as a simpler alternative to full record and replay testing. Fio is available through most Linux distribution packages, please refer to the [documentation](https://github.com/axboe/fio) for the binary package availability.
+Flexible I/O (fio) is a command-line tool to generate a synthetic workload with specific I/O characteristics. This serves as a simpler alternative to full record and replay testing. Fio is available through most Linux distribution packages, please refer to the [documentation](https://github.com/axboe/fio) for package availability.
 
 ```bash
 sudo apt update
 sudo apt install fio -y
 ```
 
-Confirm installation with the following commands. 
+Confirm installation with the following command: 
 
 ```bash
 fio --version
@@ -50,9 +50,9 @@ The version is printed:
 fio-3.37
 ```
 
-## Locate Device 
+## Locate device 
 
-Fio allows you to microbenchmark either the block device or a mounted filesystem. Use the disk free, `df` command to confirm your EBS volumes are not mounted. Writing to drives with critical data can cause data loss. In this tutorial, you're writing to blank, unmounted block devices.
+Fio allows you to microbenchmark either the block device or a mounted filesystem. Use the disk free, `df` command to confirm your EBS volumes are not mounted. Writing to drives containing critical data can result in data loss. In this tutorial, you're writing to blank, unmounted block devices.
 
 Use the `lsblk` command to view the EBS volumes attached to the server (`nvme1n1` and `nvme2n1`). The immediate number appended to `nvme`, e.g., `nvme0`, shows it is a physically separate device. `nvme1n1` corresponds to the faster `io2` block device and `nvme2n1` corresponds to the slower `gp2` block device. 
 
@@ -70,11 +70,11 @@ nvme0n1      259:1    0    8G  0 disk
 nvme2n1      259:2    0    8G  0 disk 
 ```
 
-{{% notice Please Note%}}
-If you have more than 1 block volumes attached to an instance, the `sudo nvme list` command from the `nvme-cli` package can be used to differentiate between volumes
+{{% notice Note%}}
+If you have more than one block volume attached to an instance, the `sudo nvme list` command from the `nvme-cli` package can be used to differentiate between volumes
 {{% /notice %}}
 
-## Generating a Synthetic Workload
+## Generating a synthetic workload
 
 Suppose you want to simulate a fictional logging application with the following characteristics observed using the tools from the previous section. 
 
@@ -86,7 +86,7 @@ Further, the application is latency sensitive and given it holds critical inform
 
 The fio tool uses simple configuration `jobfiles` to describe the characteristics of your synthetic workload. Parameters under the `[global]` option are shared among jobs. From the example below, you can create 2 jobs to represent the steady write and infrequent reads. Please refer to the official [documentation](https://fio.readthedocs.io/en/latest/fio_doc.html#job-file-format) for more details. 
 
-Copy and paste the configuration file below into 2 files named `nvme<x>.fio`. Replace the `<x>` with the block devices you are comparing and adjust the `filename` parameter accordingly. 
+Create two job files, one for each device, by copying the configuration below and adjusting the filename parameter (`/dev/nvme1n1` or `/dev/nvme2n1`):
 
 ```ini
  ; -- start job file including.fio --
@@ -111,7 +111,7 @@ bs=64k ; Block size of 64KiB (default block size of 4 KiB)
 name=burst_read
 rw=read
 bs=256k ; Block size of 256KiB for reads (default is 4KiB)
-startdelay=10 ; simulate infrequent reads (5 seconds out 30)
+startdelay=25 ; simulate infrequent reads (5 seconds out 30)
 runtime=5
 ; -- end job file including.fio --
 ```
@@ -156,6 +156,10 @@ Run status group 0 (all jobs):
 Disk stats (read/write):
   nvme2n1: ios=1872/28855, sectors=935472/3693440, merge=0/0, ticks=159753/1025104, in_queue=1184857, util=89.83%
 ```
+
+{{% notice Note%}}
+fio reports bandwidth in MiB/s (mebibytes per second). MB/s (megabytes per second) is included for comparison. 1 MiB = 1,048,576 bytes, while 1 MB = 1,000,000 bytes.
+{{% /notice %}}
 
 Here you can see that the faster `io2` block storage (`nvme1`) is able to meet the throughput requirement of 80MB/s for steady writes when all 16 write threads are running (5MB/s per thread). However, `gp2` saturates at 60.3 MiB/s with over 89.8% SSD utilization. 
 
