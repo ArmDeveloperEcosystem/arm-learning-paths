@@ -127,16 +127,29 @@ git clone https://github.com/tensorflow/tensorflow.git
 Next, clone TensorFlow from its Git repository to your system:
 
 ```bash
-git clone https://github.com/tensorflow/tensorflow.git
-cd tensorflow
+git clone https://github.com/google-ai-edge/LiteRT.git
+cd LiteRT/
+git submodule init && git submodule update --remote
+```
+
+## Setup a python virtual environment
+
+To eliminate dependencies issues, create a virtual environment. In this guide, we will use `virtualenv`
+
+```bash
+# Create virtual environment to use Python 3.10
+python3.10 -m venv env
+ 
+# Activate virtual environment
+source env/bin/activate
 ```
 
 Now you can configure TensorFlow. Here you can set the custom build parameters needed as follows:
 
 ```bash { output_lines = "2-14" }
 python3 ./configure.py
-Please specify the location of python. [Default is /home/user/Workspace/tflite/env3_10/bin/python3]:
-Please input the desired Python library path to use. Default is [/home/user/Workspace/tflite/env3_10/lib/python3.10/site-packages]
+Please specify the location of python. [Default is $WORKSPACE/bin/python3]:
+Please input the desired Python library path to use. Default is [$WORKSPACE/lib/python3.10/site-packages]
 Do you wish to build TensorFlow with ROCm support? [y/N]: n
 Do you wish to build TensorFlow with CUDA support? [y/N]: n
 Do you want to use Clang to build TensorFlow? [Y/n]: n
@@ -148,6 +161,12 @@ Please specify the Android SDK API level to use. [Available levels: ['31', '33',
 Please specify an Android build tools version to use. [Available versions: ['30.0.3', '34.0.0', '35.0.0']] [Default is 35.0.0]: 
 ```
 
+Once the bazel configuration is complete, you can build TFLite as follows:
+```console
+bazel build -c opt --config android_arm64 //tensorflow/lite:libtensorflowlite.so --define tflite_with_xnnpack=true --define=xnn_enable_arm_i8mm=true --define tflite_with_xnnpack_qs8=true --define tflite_with_xnnpack_qu8=true
+```
+
+This will produce a `libtensorflowlite.so` shared library for android with XNNPack enabled, which we will use to build the example next.
 
 
 

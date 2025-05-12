@@ -1,6 +1,6 @@
 ---
 title: Convert Open Stable Audio model to LiteRT
-weight: 4
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -15,8 +15,7 @@ SAO Model is made of submodules:
 
 We use Google AI Edge Torch tools to convert these models from PyTorch format directly to LiteRT (.tflite) format.
 
-## Convert the model using python script
-
+## Setup a python virtual environment
 
 To eliminate dependencies issues, create a virtual environment. In this guide, we will use `virtualenv`
 
@@ -34,7 +33,7 @@ We will now install the needed python packages for this, including `ai-edge-lite
 pip install --no-deps -r requirements.txt
 ```
 
-We can now use a python script to convert the model.
+We can now use Google AI Edge Torch tools to convert a PyTorch model to TFLite format.
 
 TODO - where are ckpt and json files stored - need to get from hugging face or point to our repo
 

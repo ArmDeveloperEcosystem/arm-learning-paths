@@ -1,6 +1,6 @@
 ---
 title: Build LiteRT with CMake
-weight: 4
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -38,12 +38,13 @@ mkdir tflite_build && cd tflite_build
 
 Ensure the NDK_PATH is set to your previously installed Android NDK:
 ```console
-export ANDROID_NDK=/home/user/Android/Sdk/ndk/25.1.8937393/
+export ANDROID_NDK=/home/$USER/Android/Sdk/ndk/25.1.8937393/
 ```
 
 Configure the cmake build for Android including the correct android api and path to previously build flatbuffers directory
 ```console
 cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DTFLITE_HOST_TOOLS_DIR=../flatc-native-build/ ../tensorflow/lite/
+cmake --build .
 ```
 
 

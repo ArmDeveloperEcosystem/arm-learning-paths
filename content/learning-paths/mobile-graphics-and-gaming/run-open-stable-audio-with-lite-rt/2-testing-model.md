@@ -69,5 +69,16 @@ Steps = 7, CFG scale = 1
 
 ![example image alt-text#center](generate-audio.png "Figure 1. Generate Audio")
 
+{{% notice Text prompt engineering %}}
+Here are a few ways to structure a text prompt for your audio file.
+A prompt can include mustical parameters:
+* music genre and subgenre
+* musical elements - texture, rhythm and articulation
+* musical atmosphere - mood and emotion
+* tempo using beats per minute (BPM)
+
+The order of prompt parameters matters, for more information check [prompt structure user guide](https://stableaudio.com/user-guide/prompt-structure)
+{{% /notice %}}
+
 
 

@@ -18,6 +18,15 @@ Your first task is to prepare a development environment with the required softwa
 - CMake (tested with - 3.28.1)
 - [Arm GNU Toolchain](/install-guides/gcc/arm-gnu)
 
+## Create workspace directory
+
+We will create a separate directory for all dependencies and repositories used in this learning path, we can export `WORKSPACE` variable to point to this used by next steps
+
+```bash
+mkdir my-workspace
+export WORKSPACE=$PWD/my-workspace
+```
+
 
 ## Install Python 3.10
 
@@ -72,12 +81,28 @@ You can refer to [CMake install tutorial](/install-guides/cmake/) for troublesho
 The instructions were tested with version 3.28.1
 {{% /notice %}}
 
+## Install Bazel
+
+Bazel is an open-source build tool which we will use to build LiteRT and the needed tensorflowlite library. 
+
+{{< tabpane code=true >}}
+  {{< tab header="Linux">}}
+cd $WORKSPACE
+wget https://github.com/bazelbuild/bazel/releases/download/6.1.1/bazel-7.4.1-installer-linux-x86_64.sh
+sudo bash bazel-7.4.1-installer-linux-x86_64.sh
+  {{< /tab >}}
+  {{< tab header="MacOS">}}
+\\TODO
+  {{< /tab >}}
+{{< /tabpane >}}
+
 ## Install Android NDK
 
 To run the model on Android, we need to install Android Native Development Kit (Android NDK).
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
+cd $WORKSPACE
 wget https://dl.google.com/android/repository/android-ndk-r25b-linux.zip
 unzip android-ndk-r25b-linux.zip
   {{< /tab >}}
@@ -90,7 +115,7 @@ For easier access and execution of Android NDK tools, add these to the `PATH`
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
-export $PATH=$PATH:<path-to-android-ndk-r25b-linux>
+export $PATH=$WORKSPACE/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
 
   {{< /tab >}}
   {{< tab header="MacOS">}}
