@@ -1,26 +1,22 @@
 ---
-title: Create IoT Solutions in Azure for Arm Powered Devices
+title: Create IoT Solutions in Azure for Arm-Powered Devices
 
 minutes_to_complete: 180
 
-draft: true
-cascade:
-    draft: true
-
-who_is_this_for: This is an advanced topic for software developers interested in learning how to build a comprehensive IoT solution in Azure that streams, stores, monitors, aggregates, and visualizes data from Arm64-powered IoT devices.
+who_is_this_for: This is an advanced topic for developers who want to build a comprehensive IoT solution in Azure that streams, stores, monitors, aggregates, and visualizes data from Arm64-powered IoT devices.
 
 learning_objectives:
-    - Set up and configure an Azure IoT Hub.
+    - Set up and configure Azure IoT Hub.
     - Register an IoT device and stream data using the Azure IoT SDK.
     - Stream IoT data into Azure services using Azure Stream Analytics.
-    - Store and persist streamed IoT data in Azure Cosmos DB by configuring a Stream Analytics job.
-    - Implement data monitoring and alerts by creating an Azure Function that checks sensor data from Cosmos DB and sends notifications when thresholds are exceeded.
-    - Aggregate sensor readings by developing an Azure Function that calculates average values from data stored in Cosmos DB.
-    - Publish aggregated IoT data to a public-facing web portal, by deploying a Static Web App hosted on Azure Blob Storage
+    - Store and persist streamed data in Azure Cosmos DB through a Stream Analytics job.
+    - Monitor data and send alerts by creating an Azure Function that reads sensor data from Cosmos DB and triggers notifications when thresholds are exceeded.
+    - Aggregate sensor readings using an Azure Function that calculates average values from data stored in Cosmos DB.
+    - Publish aggregated IoT data to a public-facing web portal, by deploying a static web app hosted on Azure Blob Storage.
 
 prerequisites:
-    - A machine that can run Python3, and Visual Studio Code. 
-    - Azure Account and Subscription.
+    - A machine with Python 3, and Visual Studio Code installed. 
+    - An Azure Account and subscription.
 
 author: Dawid Borycki
 
