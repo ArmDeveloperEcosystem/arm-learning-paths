@@ -47,6 +47,8 @@ export PYTHONPATH=`pwd`
 ```
 
 ## Usage
+### As Python script
+
 User can scan a project with a scanner type and the result is sent to console by default.
 ```bash
 python3 -m {scanner_name} --arch {arch} {scan_path}
@@ -78,3 +80,22 @@ There are more parameters for user to control the scan behaviors. To get these i
 ```bash
 python3 -m {scanner_name} -h
 ```
+
+### As Web UI
+Migrate-ease also provides a Web UI that supports scanning a git repo with cpp, docker, go, java, python and rust scanners in one time.
+To start the web server, simply run:
+```
+python3 web/server.py
+```
+
+Once that is successfully done, you can access a web server hosted at http://localhost:8080
+
+The web UI looks as following:
+![example image alt-text#center](web_ui_index.jpg "Figure 1. Web UI to scan a git repo")
+
+A git repo URL is required, and you can specify certain branch name to scan. Once the necessary information is filled, user can click "START SCAN" button to proceed project scanning.
+
+Scanning progress will be shown in the console pane. Once all jobs are done, user will see a web page as following:
+![example image alt-text#center](web_ui_result.jpg "Figure 2. Web UI of scan result")
+
+You can download the result by clicking the "download" icon or view the result by clicking the "eye" icon.
