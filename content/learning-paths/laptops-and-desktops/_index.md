@@ -11,11 +11,11 @@ operatingsystems_filter:
 - ChromeOS: 1
 - Linux: 31
 - macOS: 7
-- Windows: 42
+- Windows: 43
 subjects_filter:
 - CI-CD: 5
 - Containers and Virtualization: 5
-- Migration to Arm: 27
+- Migration to Arm: 28
 - ML: 2
 - Performance and Architecture: 25
 subtitle: Create and migrate apps for power efficient performance
@@ -34,8 +34,8 @@ tools_software_languages_filter:
 - C/C++: 4
 - CCA: 1
 - Clang: 11
-- cmake: 1
 - CMake: 2
+- cmake: 1
 - Coding: 16
 - CSS: 1
 - Daytona: 1
@@ -59,9 +59,10 @@ tools_software_languages_filter:
 - Neon: 1
 - Neovim: 1
 - Node.js: 3
+- ONNX Runtime: 1
 - OpenCV: 1
 - perf: 4
-- Python: 4
+- Python: 5
 - Qt: 2
 - Remote.It: 1
 - RME: 1
@@ -71,7 +72,7 @@ tools_software_languages_filter:
 - SVE2: 1
 - Trusted Firmware: 1
 - Visual Studio: 14
-- Visual Studio Code: 9
+- Visual Studio Code: 10
 - VS Code: 3
 - Windows Forms: 1
 - Windows Performance Analyzer: 1
