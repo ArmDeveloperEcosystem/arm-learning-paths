@@ -1,6 +1,6 @@
 ---
 title: Create a simple program
-weight: 7
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,16 +8,17 @@ layout: learningpathall
 
 ## Create and build a simple program
 
-We can now set up a simple program and build it with CMake. Firstly we will need flatbuffers
+We can now set up a simple program and build it with CMake, clone the repository into your workspace
 
-```console
-git clone https://github.com/google/flatbuffers.git
-cd flatbuffers
-git checkout v24.3.25
+```bash
+cd $WORKSPACE
+git clone https://git.research.arm.com/gen-ai/sai/audio-stale-open-litert/-/tree/main/
+
+cd stable-audio/sao_litert/runner
+mkdir build && cd build
 ```
 
-https://git.research.arm.com/gen-ai/sai/audio-stale-open-litert/-/blob/main/runner/
-
+Ensure the NDK path is set correctly and build with cmake:
 ```
 cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake .. \
       -DANDROID_ABI=arm64-v8a \
@@ -26,11 +27,28 @@ cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake ..
       -DTF_LIB_PATH=/home/$USER/workspace/tflite/tensorflow/bazel-bin/tensorflow/lite \
       -DFLATBUFFER_INCLUDE_PATH=/home/$USER/workspace/tflite/flatbuffers/include
 
- 
 cmake --build .
 
-./build/audiogen_main 
 ```
 
+Once the SAO example built sucessfully, this is a binary file named audiogen_main has been created, we will use adb (Android Debug Bridge) to push the needed example to the device:
 
+```bash
+adb shell
+```
+
+Create a directory for all neded resources:
+```bash
+cd /data/local/tmp
+mkdir audiogen
+```
+Push all necessary files into newly created audiogen folder on Android.
+```bash
+cd sao_litert
+adb push runner/build/audiogen_main AAF
+adb push dit.tflite AAF
+adb push autoencoder.tflite AAF
+adb push conditioners_tflite/conditioners_float32.tflite AAF
+adb push tensorflow_src/bazel-bin/tensorflow/lite/libtensorflowlite.so
+```bash
 

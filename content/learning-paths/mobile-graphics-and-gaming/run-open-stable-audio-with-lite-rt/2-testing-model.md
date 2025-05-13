@@ -17,9 +17,17 @@ TODO - point to new location on huggingFace stable-audio-open-2.0 when available
 
 Training and inference code for audio generation models can be accessed [here](https://github.com/Stability-AI/stable-audio-tools)
 
-To test out trained model, you can clone the stable audio tools repository and install from source:
+To eliminate dependencies issues, create a virtual environment. In this guide, we will use `virtualenv`
 
-TODO: check if this page is still needed and useful, if not it will be deleted and weights updated for other pages to keep ordering.
+```bash
+# Create virtual environment to use Python 3.10
+python3.10 -m venv model_env
+ 
+# Activate virtual environment
+source model_env/bin/activate
+```
+
+To test out trained model, you can clone the stable audio tools repository and install from source:
 
 ```bash
 git clone https://github.com/Stability-AI/stable-audio-tools
@@ -32,7 +40,6 @@ pip install -e .
 
 You can now run the basic Gradio interface to test out the model:
 ```bash
-
 python3 ./run_gradio.py --model-config sao_small_distilled_1_0_config.json --ckpt-path sao_small_distilled_1_0.ckpt
 
 ```
@@ -50,7 +57,7 @@ alias_free_torch transformers
 
 Once model is successfully loaded, a local URL is listed in the script output:
 
-```
+```text
 Loading model checkpoint from ../sao_small_distilled_1_0.ckpt
 Done loading model
 * Running on local URL:  http://127.0.0.1:7860
@@ -75,5 +82,8 @@ A prompt can include mustical parameters:
 The order of prompt parameters matters, for more information check [prompt structure user guide](https://stableaudio.com/user-guide/prompt-structure)
 {{% /notice %}}
 
-
+We can now exit from the virtual environment
+```bash
+deactivate
+```
 

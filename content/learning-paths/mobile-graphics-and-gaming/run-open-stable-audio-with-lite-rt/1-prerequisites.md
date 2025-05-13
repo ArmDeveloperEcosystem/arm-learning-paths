@@ -15,7 +15,7 @@ Your first task is to prepare a development environment with the required softwa
 - Android Studio (latest version recommended)
 - Android NDK r25b or newer
 - Python 3.10 or newer
-- CMake 3.28.1 or newer
+- CMake 3.16.0 or newer
 - [Arm GNU Toolchain](/install-guides/gcc/arm-gnu)
 
 ## Create workspace directory
@@ -101,14 +101,12 @@ For easier access and execution of Android NDK tools, add these to the `PATH`
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
 export $PATH=$WORKSPACE/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
-
   {{< /tab >}}
   {{< tab header="MacOS">}}
 nano ~/.zshrc
 export PATH=$PATH:~/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin
 export PATH=$PATH:~/Library/Android/sdk/cmdline-tools/latest/bin
 source ~/.zshrc
-
   {{< /tab >}}
 {{< /tabpane >}}
 

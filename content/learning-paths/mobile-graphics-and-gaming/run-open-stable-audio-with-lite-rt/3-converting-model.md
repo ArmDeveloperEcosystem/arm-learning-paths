@@ -1,6 +1,6 @@
 ---
 title: Convert Open Stable Audio model to LiteRT
-weight: 6
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -23,6 +23,13 @@ As part of this step, we will covert each of the three submodules into [LiteRT](
 ### Convert Conditioners
 
 The Conditioners submodule is made of the T5Encoder model. We will use the ONNX to TFLite conversion for this submodule.
+
+Clone the examples repository:
+```bash
+cd $WORKSPACE
+git clone https://git.research.arm.com/gen-ai/sai/audio-stale-open-litert/-/tree/main/
+cd audio-stale-open-litert
+```
 
 To eliminate dependencies issues, create a virtual environment. In this guide, we will use `virtualenv`
 
