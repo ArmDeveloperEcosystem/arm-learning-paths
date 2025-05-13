@@ -40,7 +40,7 @@ pip install -e .
 
 You can now run the basic Gradio interface to test out the model:
 ```bash
-python3 ./run_gradio.py --model-config sao_small_distilled_1_0_config.json --ckpt-path sao_small_distilled_1_0.ckpt
+python3 ./run_gradio.py --model-config model_config.json --ckpt-path model.ckpt
 
 ```
 
