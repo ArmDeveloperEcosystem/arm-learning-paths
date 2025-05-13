@@ -19,15 +19,14 @@ mkdir build && cd build
 ```
 
 Ensure the NDK path is set correctly and build with cmake:
-```
-cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake .. \
-      -DANDROID_ABI=arm64-v8a \
-      -DANDROID_PLATFORM=android-26 \
-      -DTF_INCLUDE_PATH=/home/$USER/workspace/tflite/tensorflow \
-      -DTF_LIB_PATH=/home/$USER/workspace/tflite/tensorflow/bazel-bin/tensorflow/lite \
-      -DFLATBUFFER_INCLUDE_PATH=/home/$USER/workspace/tflite/flatbuffers/include
+```bash
+cmake -B build -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
+	       -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-26 \
+ 	       -DTF_INCLUDE_PATH=$WORKSPACE/tensorflow_src \
+ 	       -DTF_LIB_PATH=$WORKSPACE/tensorflow_src/audio-gen-build/tensorflow-lite/ \
+ 	       -DFLATBUFFER_INCLUDE_PATH=$WORKSPACE/tensorflow_src/flatc-native-build/flatbuffers/include
 
-cmake --build .
+cmake --build build
 
 ```
 

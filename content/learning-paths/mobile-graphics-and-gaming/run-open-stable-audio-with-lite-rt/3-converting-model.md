@@ -20,46 +20,72 @@ As part of this step, we will covert each of the three submodules into [LiteRT](
 1. Conditioners submodule - ONNX to TFLite using [onnx2tf](https://github.com/PINTO0309/onnx2tf) tool.
 2. DiT and AutoEncoder submodules - PyTorch to TFLite using Google AI Edge Torch tool. 
 
-### Convert Conditioners
+### Create virtual environment and install dependencies
 
 The Conditioners submodule is made of the T5Encoder model. We will use the ONNX to TFLite conversion for this submodule.
-
-Clone the examples repository:
-```bash
-cd $WORKSPACE
-git clone https://git.research.arm.com/gen-ai/sai/audio-stale-open-litert/-/tree/main/
-cd audio-stale-open-litert
-```
 
 To eliminate dependencies issues, create a virtual environment. In this guide, we will use `virtualenv`
 
 ```bash
-# Create virtual environment to use Python 3.10
-python3.10 -m venv onnxvenv
+cd $WORKSPACE
+python3.10 -m venv env
  
 # Activate virtual environment
-source onnxvenv/bin/activate
+source env/bin/activate
 ```
 
-We will now install the needed python packages for this
+Clone the examples repository:
+```text
+git clone example-repo
+cd example-repo
+```
+
+We now install the needed python packages for this, including *onnx2tf* and *ai_edge_litert*
 
 ```bash
-bash install_requirements_conditioners.sh
+./install_requirements.sh
 ```
 
-Convert the Conditioners submodule first to onnx and then to tflite.
+{{% notice %}}
 
-```python
-# Conversion to ONNX
+If you are using GPU on your machine, you may notice the following error:
+```text
+Traceback (most recent call last):
+  File "$WORKSPACE/env/lib/python3.10/site-packages/torch/_inductor/runtime/hints.py", line 46, in <module>
+    from triton.backends.compiler import AttrsDescriptor
+ImportError: cannot import name 'AttrsDescriptor' from 'triton.backends.compiler' ($WORKSPACE/env/lib/python3.10/site-packages/triton/backends/compiler.py)
+.
+ImportError: cannot import name 'AttrsDescriptor' from 'triton.compiler.compiler' ($WORKSPACE/env/lib/python3.10/site-packages/triton/compiler/compiler.py)
+```
+
+Install the following dependency and rerun the script:
+```bash
+pip install triton==3.2.0
+./install_requirements.sh
+```
+
+{{% /notice %}}
+
+### Convert Conditioners Submodule
+
+The Conditioners submodule is based on the T5Encoder model. We convert it first to ONNX, then to TFLite.
+
+```text
 torch.onnx.export(
         model,
         example_inputs,
         output_path,
-        input_names=[], #Model inputs, a list of input tensors
+        input_names=[],
         output_names=[], #Model outputs, a list of output tensors
         opset_version=15,
     )
 ```
+Where the parameters used for export are:
+* `model` -- PyTorch model to convert
+* `example_inputs` -- a tuple of example input tensors for the model
+* `input_names` -- a list of input tensors for the model
+* `output_names` -- a list of output tensors for the model
+* `opset_version` -- version of the operator set to use in the ONNX model
 
 ```text
 onnx2tf -i "input_onnx_model_path" -o "tflite_folder_path"
@@ -69,7 +95,7 @@ The above commands will create one .onnx model and a tflite_folder_path with a f
 
 Converting the conditioners submodule using the provided python script
 ```bash
-python3 ./scripts/export_conditioners.py --model_config "../sao_small_distilled/sao_small_distilled_1_0_config.json" --ckpt_path "../sao_small_distilled/sao_small_distilled_1_0.ckpt"
+python3 ./scripts/export_conditioners.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
 ```
 
 Once the Conditioners submodule has been converted successfully, deactive the virtual enviroment
@@ -88,13 +114,6 @@ To convert the DiT and AutoEncoder submodules, we use the [Generative API](https
 2. quantization
 3. conversion
 
-Create a new virtual environment and install the requirements:
-```bash
-python3.10 -m venv venv
-source venv/bin/activate
-bash install_requirements_dit_autoencoder.sh
-```
-
 Converting the DiT and AutoEncoder submodules using the provided python script
 ```bash
 CUDA_VISIBLE_DEVICES="" python3 ./scripts/export_audiogen.py --model_config "../sao_small_distilled/sao_small_distilled_1_0_config.json" --ckpt_path "../sao_small_distilled/sao_small_distilled_1_0.ckpt" 
@@ -105,6 +124,8 @@ Once the DiT and AutoEncoder submodules have been converted successfully, deacti
 ```bash
 deactivate
 ```
+
+Now that all the three submodules are converted, we will build LiteRT to enable running these on a mobile device.
 
 
 
