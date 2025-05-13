@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Introduction to Arm Statistical Profiling Extension (SPE)
 
-Traditional performance tracing relies on counting whole instructions, capturing only architectural instructions without revealing the actual memory addresses, pipeline latencies, or micro-operations in flight; moreover, the “skid” phenomenon where events are falsely attributed to later instructions can mislead developers. 
+Standard performance tracing relies on counting whole instructions, capturing only architectural instructions without revealing the actual memory addresses, pipeline latencies, or considering micro-operations in flight. Moreover, the “skid” phenomenon where events are falsely attributed to later instructions can mislead developers. 
 
-The Arm Statistical Profiling Extension (SPE) integrates sampling directly into the CPU pipeline, triggering on individual micro-operations rather than retired instructions, thereby eliminating skid and blind spots. Each SPE sample record includes relevant meta data, such as data addresses, per-µop pipeline latency, triggered PMU event masks, and the memory hierarchy source (L1 cache, last-level cache, or remote socket), enabling fine-grained and precise cache analysis. 
+The Arm Statistical Profiling Extension (SPE) integrates sampling directly into the CPU pipeline, triggering on individual micro-operations rather than retired instructions, thereby eliminating skid and blind spots. Each SPE sample record includes relevant meta data, such as data addresses, per-µop pipeline latency, triggered PMU event masks, and the memory hierarchy source, enabling fine-grained and precise cache analysis. 
 
-This enables software developers to tune user-space software for characteristics such as memory latency, and cache statistics. Importantly, it is the mechanism on Arm to enable cache statistics with the Linux `perf` cache-to-cache utility, referred to as `perf c2c`. Please refer to the [Arm_SPE whitepaper](https://developer.arm.com/documentation/109429/latest/) for more details. 
+This enables software developers to tune user-space software for characteristics such as memory latency and cache accesses. Importantly, it is the mechanism on Arm to enable cache statistics with the Linux `perf` cache-to-cache utility, referred to as `perf c2c`. Please refer to the [Arm_SPE whitepaper](https://developer.arm.com/documentation/109429/latest/) for more details. 
 
 In this learning path we will use the `arm_spe` and `perf c2c` to diagnose a cache issue for an application running on a Neoverse server.
 
@@ -22,7 +22,7 @@ Even when two threads touch entirely separate variables, modern processors move 
 
 ![false_sharing_diagram](./false_sharing_diagram.png)
 
-Because false sharing hides behind ordinary writes, the easiest time to eliminate it is while reading or refactoring the source code—padding or realigning the offending variables before compilation. In large, highly concurrent code-bases, however, data structures are often accessed through several layers of abstraction, and many threads touch memory via indirection, so the subtle cache-line overlap may not surface until profiling or performance counters reveal unexpected coherence misses.
+Because false sharing hides behind ordinary writes, the easiest time to eliminate it is while reading or refactoring the source code padding or realigning the offending variables before compilation. In large, highly concurrent code-bases, however, data structures are often accessed through several layers of abstraction, and many threads touch memory via indirection, so the subtle cache-line overlap may not surface until profiling or performance counters reveal unexpected coherence misses.
 
 From a source-code perspective nothing is “shared,” but at the hardware level both variables are implicitly coupled by their physical colocation.
 
@@ -30,7 +30,7 @@ From a source-code perspective nothing is “shared,” but at the hardware leve
 
 In C++11, we can manually specify the alignment of an object using the `alignas` function. For example, in the C++11 source code below, we manually align the the `struct` every 64 bytes (typical cache line size on a modern processor). This ensures that each instance of `AlignedType` is on a separate cache line. 
 
-```c++
+```cpp
 #include <atomic>
 #include <iostream>
 

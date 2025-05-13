@@ -39,7 +39,7 @@ sudo modprobe arm_spe_pmu
 
 ## Run Sysreport
 
-A handy python script is available to summarise your systems capabilities with regard to performance profiling. Install and run System Report python script ('sysreport`) using the [instructions in the learning path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/).
+A handy python script is available to summarise your systems capabilities with regard to performance profiling. Install and run System Report python script (`sysreport`) using the [instructions in the learning path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/).
 
 To check SPE is available on your system look at the `perf sampling` field. It should read `SPE` highlighted in green.
 

@@ -11,7 +11,6 @@ layout: learningpathall
 Copy and paste the `C++/C` example below into a file named `false_sharing_example.cpp`. The code example below has been adapted from [Joe Mario](https://github.com/joemario/perf-c2c-usage-files) and is discussed thoroughly in the [Arm Statistical Profiling Extension Whitepaper](https://developer.arm.com/documentation/109429/latest/).
 
 
-
 ```cpp
 /*
  * This is an example program to show false sharing between
@@ -285,7 +284,7 @@ int main ( int argc, char *argv[] )
 
 ### Code Explanation
 
-The key data structure that occupies the cache is the `struct Buf`. With our system using a 64-byte cache line, each line can hold 8, 8-byte `long` integers. If we do **not** pass in the `NO_FALSE_SHARING` macro during compilation our `Buf` data structure will have the elements below. Where each structure neatly occupies the entire 64-byte cache line. However, the 4 readers and 2 locks are now on the same cache line. 
+The key data structure that occupies the cache is the `struct Buf`. With our system using a 64-byte cache line, each line can hold 8, 8-byte `long` integers. If we do **not** pass in the `NO_FALSE_SHARING` macro during compilation our `Buf` data structure will contain the elements below. Where each structure neatly occupies the entire 64-byte cache line. However, the 4 readers and 2 locks are now on the same cache line. 
 
 ```output
 typedef struct _buf {
@@ -300,7 +299,7 @@ typedef struct _buf {
 } buf __attribute__((aligned (64)));
 ```
 
-Alternatively if we pass in the `NO_FALSE_SHARING` macro during compilation, our `Buf` structure has a different shape. The `(5*8-byte)` padding pushes the reader variables onto a different cache line. However, notice that this is with the tradeoff that our new `Buf` structures occupies 1 and a half cache lines (12 `long`s). Therefore we have unused cache space of ~25% per `Buf` structure.
+Alternatively if we pass in the `NO_FALSE_SHARING` macro during compilation, our `Buf` structure has a different shape. The `(5*8-byte)` padding pushes the reader variables onto a different cache line. However, notice that this is with the tradeoff that our new `Buf` structures occupies 1 and a half cache lines (12 `long`s). Therefore we have unused cache space of 25% per `Buf` structure.
 
 ```output
 typedef struct _buf {
@@ -322,7 +321,7 @@ gcc -lnuma -pthread false_sharing_example.c -o false_sharing
 gcc -lnuma -pthread false_sharing_example.c -DNO_FALSE_SHARING -o no_false_sharing
 ```
 
-Running both binaries with the command like argument of 1 will show the following, with both binaries successfully return a 0 exit status. 
+Running both binaries with the command like argument of 1 will show the following, with both binaries successfully return a 0 exit status but the `false_sharing` binary runs almost 2x slower!
 
 ```bash
 time ./false_sharing 1

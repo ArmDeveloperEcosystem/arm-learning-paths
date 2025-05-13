@@ -54,7 +54,7 @@ Rerunning with the `no_false_sharing` shows the following.
          6.4942219 +- 0.0000428 seconds time elapsed  ( +-  0.00% )
 ```
 
-Manually comparing we observe the run time is significantly different (13.01s to 6.49s). Additionally, the instructions per cycle (IPC) is notably different, (0.74 and 1.70) and looks commensurate to the run time. 
+Manually comparing we observe the run time is significantly different (13.01s to 6.49s). Additionally, the instructions per cycle (IPC) is notably different, (0.74 and 1.70) and looks to be commensurate to run time. 
 
 ## Understanding the Root Cause
 
@@ -78,7 +78,7 @@ The output below clearly shows there are disproportionately more backend stall c
 
 ### Skid when using Perf Record
 
-The naive approach would be to record the events using the `perf record` subcommand. Running the following commands can be used to demonstrate skid, mentioned in the previous section.
+The naive approach would be to record the events using the `perf record` subcommand. Running the following commands can be used to demonstrate skid, mentioned in the "Introduction to Arm_SPE and False Sharing" section.
 
 ```bash
 # record using canonical counters
@@ -92,14 +92,14 @@ sudo perf c2c record -g ./false_sharing 1
 sudo perf annotate
 ```
  
-The left screenshot shows the canonical `perf record` command, here the `adrp` instruction falsely reports 52% of the time. However, using `perf c2c` that leverages `arm_spe`, we observe 99% of time associated with the `ldr`, load register command. 
+The left screenshot shows the canonical `perf record` command, here the `adrp` instruction falsely reports 52% of the time. However, using `perf c2c` that leverages `arm_spe`, we observe 99% of time associated with the `ldr`, load register command. The standard `perf record` data could be quite misleading for a developer!
 
 ![perf-record-annotate](./perf-record-error-skid.png)
 ![perf-c2c-record-annotate](./perf-c2c-record.png)
 
 ### Using Perf C2C
 
-Clearly `perf c2c` is more accurate. We are able to observe the instructure that is being used most frequently. Now let's find the specific variable so observe what in our source cause is causing this. 
+Clearly `perf c2c` is more accurate. We are able to observe the instructure that is being used most frequently. Now let's find the specific variable to observe what in our source cause is causing this. 
 
 Next, compile a debug version of both applications with the following command. 
 
@@ -108,7 +108,7 @@ gcc -g -lnuma -pthread false_sharing_example.c -o false_sharing_.debug
 gcc -g -lnuma -pthread false_sharing_example.c -DNO_FALSE_SHARING -o no_false_sharing.debug
 ```
 
-Next, we record our application with call stats using the `perf c2c` subcommand. 
+Next, we record our application with call stacks using the `perf c2c` subcommand with the `-g` flag. 
 
 ```bash
 sudo perf c2c record -g ./false_sharing.debug 1
