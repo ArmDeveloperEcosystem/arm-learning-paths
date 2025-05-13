@@ -100,6 +100,13 @@ Converting the DiT and AutoEncoder submodules using the provided python script
 CUDA_VISIBLE_DEVICES="" python3 ./scripts/export_audiogen.py --model_config "../sao_small_distilled/sao_small_distilled_1_0_config.json" --ckpt_path "../sao_small_distilled/sao_small_distilled_1_0.ckpt" 
 ```
 
+Once the DiT and AutoEncoder submodules have been converted successfully, deactive the virtual enviroment
+
+```bash
+deactivate
+```
+
+
 
 
 

@@ -13,6 +13,18 @@ Stable Audio Open is an open-source model optimized for generating short audio s
 Download the model weights from [HuggingFace](https://huggingface.co/stabilityai/stable-audio-open-1.0/tree/main)
 TODO - point to new location on huggingFace stable-audio-open-2.0 when available.
 
+{{% notice Access to HuggingFace models %}}
+You may need to sign up or [log in](https://huggingface.co/login) to HuggingFace first
+{{% /notice %}}
+
+```bash
+cd $WORKSPACE
+wget https://huggingface.co/stabilityai/stable-audio-open-1.0/blob/main/model_config.json
+wget https://huggingface.co/stabilityai/stable-audio-open-1.0/blob/main/model.ckpt
+```
+
+
+
 ## Test the model output
 
 Training and inference code for audio generation models can be accessed [here](https://github.com/Stability-AI/stable-audio-tools)
@@ -40,7 +52,7 @@ pip install -e .
 
 You can now run the basic Gradio interface to test out the model:
 ```bash
-python3 ./run_gradio.py --model-config model_config.json --ckpt-path model.ckpt
+python3 ./run_gradio.py --model-config $WORKSPACE/model_config.json --ckpt-path $WORKSPACE/model.ckpt
 
 ```
 
