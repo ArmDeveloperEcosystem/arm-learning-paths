@@ -1,47 +1,42 @@
 ---
-title: Debug False Sharing Workloads with Perf C2C on Arm
+title: Analyse cache behaviour with Perf C2C on Arm
 
 minutes_to_complete: 15
 
-who_is_this_for: Cloud developers who are looking to debug and optimise memory access patterns on cloud servers. 
+who_is_this_for: Cloud developers who are looking to debug and optimise cache access patterns on cloud servers with perf c2c. 
 
 learning_objectives: 
-    - Learn about the limitations of PMU
+    - Learn basic C++ techniques to avoid false sharing with alignas()
+    - Learn how to enable and use Arm_SPE
     - Learn how to investigate cache line performance with perf c2c
 
 prerequisites:
     - Arm-based cloud instance with Arm Statistical Profiling Extension support
+    - basic understanding on cache hierarchy and how efficient cache accessing impact performance.
+    - Familiarity with the Linux Perf tool
 
 author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
-subjects: PLACEHOLDER SUBJECT
+subjects: Performance
 armips:
     - Neoverse
 tools_software_languages:
     - Perf
-    - 
 operatingsystems:
     - Linux
 
 
-
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: Arm Statistical Profiling Extension Whitepaper
+        link: https://developer.arm.com/documentation/109429/latest/
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
-
-
+        title: Arm Topdown Methodology 
+        link: https://developer.arm.com/documentation/109542/0100/Arm-Topdown-methodology
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
