@@ -45,10 +45,14 @@ mkdir audiogen
 Push all necessary files into newly created audiogen folder on Android.
 ```bash
 cd sao_litert
-adb push runner/build/audiogen_main AAF
-adb push dit.tflite AAF
-adb push autoencoder.tflite AAF
-adb push conditioners_tflite/conditioners_float32.tflite AAF
-adb push tensorflow_src/bazel-bin/tensorflow/lite/libtensorflowlite.so
+adb push runner/build/audiogen_main /data/local/tmp/audiogen
+adb push dit.tflite /data/local/tmp/audiogen
+adb push autoencoder.tflite /data/local/tmp/audiogen
+adb push conditioners_tflite/conditioners_float32.tflite /data/local/tmp/audiogen
 ```bash
+
+Go into the shell again to run the simple program:
+```adb shell
+
+```
 
