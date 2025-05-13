@@ -7,9 +7,9 @@ layout: learningpathall
 ---
 ## Prepare an Example Image
 
-In this section, you'll benchmark model performance with and without KleidiAI kernels. To run optimized inference, you'll first need to compile the required library files. You'll also need an example image to run command-line prompts. 
+In this section, you'll benchmark model performance with and without KleidiAI kernels. To run optimized inference, you'll first need to compile the required library files. You'll also need an example image to run command-line prompts.
 
-You can use the provided image of the tiger below that this Learning Path uses, or choose your own. 
+You can use the provided image of the tiger below that this Learning Path uses, or choose your own.
 
 Whichever you select, rename the image to `example.png` to use the commands in the following sections.
 
@@ -23,23 +23,24 @@ adb push example.png /data/local/tmp/
 
 ## Build Binaries for Command-line Inference
 
-Navigate to the MNN project that you cloned in the previous section. 
-
-Create a build directory and run the build script. 
+Navigate to the Vision Language Models project that you cloned in the previous section.
 
 The first time that you do this, build the binaries with the `-DMNN_KLEIDIAI` flag set to `FALSE`.
 
 ```bash
-cd $HOME/MNN/project/android
-mkdir build_64 && cd build_64
-
-../build_64.sh "-DMNN_LOW_MEMORY=true -DLLM_SUPPORT_VISION=true -DMNN_KLEIDIAI=FALSE  \
-  -DMNN_CPU_WEIGHT_DEQUANT_GEMM=true -DMNN_BUILD_LLM=true \
-  -DMNN_SUPPORT_TRANSFORMER_FUSE=true -DMNN_ARM82=true -DMNN_OPENCL=true \
-  -DMNN_USE_LOGCAT=true -DMNN_IMGCODECS=true -DMNN_BUILD_OPENCV=true"
+cmake  ./vit/ -B build \
+-DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
+-DCMAKE_BUILD_TYPE=Release \
+-DANDROID_ABI="arm64-v8a" \
+-DANDROID_STL=c++_static  \
+-DANDROID_NATIVE_API_LEVEL=android-21  \
+-DMNN_BUILD_OPENCV=true \
+-DMNN_IMGCODECS=true \
+-DMNN_KLEIDIAI=false
+cmake --build ./build
 ```
 {{% notice Note %}}
-If your NDK toolchain isn't set up correctly, you might run into issues with the above script. Make a note of where the NDK was installed - this will be a directory named after the version you downloaded earlier. Try exporting the following environment variables before re-running `build_64.sh`:
+If your NDK toolchain isn't set up correctly, you might run into issues with the above script. Make a note of where the NDK was installed - this will be a directory named after the version you downloaded earlier. Try exporting the following environment variables before re-running above commands:
 
 ```bash
 export ANDROID_NDK_HOME=<path-to>/ndk/28.0.12916984
@@ -54,7 +55,7 @@ export ANDROID_NDK=$ANDROID_NDK_HOME
 Push the required files to your Android device, then enter a shell on the device using ADB:
 
 ```bash
-adb push *so llm_demo tools/cv/*so /data/local/tmp/
+adb push build/bin/vision_llm build/lib/*.so /data/local/tmp
 adb shell
 ```
 
@@ -62,7 +63,7 @@ Run the following commands in the ADB shell. Navigate to the directory you pushe
 
 ```bash
 cd /data/local/tmp/
-chmod +x llm_demo
+chmod +x vision_llm
 export LD_LIBRARY_PATH=$PWD
 echo "<img>./example.png</img>Describe the content of the image." > prompt
 ```
@@ -70,7 +71,7 @@ echo "<img>./example.png</img>Describe the content of the image." > prompt
 Finally, run an inference on the model with the following command:
 
 ```bash
-./llm_demo models/Qwen-VL-2B-convert-4bit-per_channel/config.json prompt
+./vision_llm models/Qwen-VL-2B-convert-4bit-per_channel/config.json prompt
 ```
 
 If the launch is successful, you should see the following output, with the performance benchmark at the end:
@@ -95,22 +96,28 @@ prefill speed = 192.28 tok/s
 
 ## Enable KleidiAI and Re-run Inference
 
-The next step is to re-generate the binaries with KleidiAI activated. This is done by updating the flag `-DMNN_KLEIDIAI` to `TRUE`. 
+The next step is to re-generate the binaries with KleidiAI activated. This is done by updating the flag `-DMNN_KLEIDIAI` to `TRUE`.
 
-From the `build_64` directory, run:
+From the `build` directory, run:
 ```bash
-../build_64.sh "-DMNN_LOW_MEMORY=true -DLLM_SUPPORT_VISION=true -DMNN_KLEIDIAI=TRUE \
--DMNN_CPU_WEIGHT_DEQUANT_GEMM=true -DMNN_BUILD_LLM=true \
--DMNN_SUPPORT_TRANSFORMER_FUSE=true -DMNN_ARM82=true -DMNN_OPENCL=true \
--DMNN_USE_LOGCAT=true -DMNN_IMGCODECS=true -DMNN_BUILD_OPENCV=true"
+cmake  ./vit/ -B build \
+-DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
+-DCMAKE_BUILD_TYPE=Release \
+-DANDROID_ABI="arm64-v8a" \
+-DANDROID_STL=c++_static  \
+-DANDROID_NATIVE_API_LEVEL=android-21  \
+-DMNN_BUILD_OPENCV=true \
+-DMNN_IMGCODECS=true \
+-DMNN_KLEIDIAI=false
+cmake --build ./build
 ```
 ## Update Files on the Device
 
 First, remove existing binaries from your Android device, then push the updated files:
 
 ```bash
-adb shell "cd /data/local/tmp; rm -rf *so llm_demo tools/cv/*so"
-adb push *so llm_demo tools/cv/*so /data/local/tmp/
+adb shell "cd /data/local/tmp; rm -rf *so vision_llm"
+adb push build/bin/vision_llm build/lib/*.so /data/local/tmp
 adb shell
 ```
 
@@ -147,7 +154,7 @@ This time, you should see an improvement in the benchmark. Below is an example t
 | Prefill Speed       | 192.28 tok/s     | 266.13 tok/s  |
 | Decode Speed        | 34.73 tok/s      | 44.96 tok/s   |
 
-**Prefill speed** describes how fast the model processes the input prompt. 
+**Prefill speed** describes how fast the model processes the input prompt.
 
 **Decode Speed** indicates how quickly the model generates new tokens after the input is processed.
 
