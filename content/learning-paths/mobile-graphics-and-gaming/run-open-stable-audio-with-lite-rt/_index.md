@@ -37,8 +37,8 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: Stable Audio Open
-        link: https://arxiv.org/abs/2407.14358
+        title: Introducing Stable Audio 2.0
+        link: https://stability.ai/news/stable-audio-2-0
         type: documentation
     - resource:
         title: Stability AI optimized its audio generation model to run on Arm chips
