@@ -1,6 +1,10 @@
 ---
 title: Accelerating Application Migration to Arm Servers Using Code Scanning Tools
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 45
 
 who_is_this_for: This is an automated tool introductory for software developers and DevOps engineers who are preparing to migrate existing applications to Arm-based server environments. It introduces a static analysis tool (migrate-ease) that simplifies the process by identifying portability challenges early.
