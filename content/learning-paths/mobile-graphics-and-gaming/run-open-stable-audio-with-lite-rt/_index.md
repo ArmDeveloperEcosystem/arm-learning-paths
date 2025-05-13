@@ -15,7 +15,7 @@ prerequisites:
     - CMake 3.28.1 or newer version installed
     - Android NDK r25b or newer version installed
 
-author: TODO
+author: Nina Drozd, TODO - add linkedIn, add more involved in the creation?
 
 ### Tags
 skilllevels: Introductory
@@ -30,7 +30,7 @@ tools_software_languages:
 
 operatingsystems:
     - Linux
-    - MacOS ??
+    - MacOS
     - Android
 
 

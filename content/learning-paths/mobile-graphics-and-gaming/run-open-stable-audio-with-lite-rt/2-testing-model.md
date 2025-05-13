@@ -11,9 +11,7 @@ layout: learningpathall
 Stable Audio Open is an open-source model optimized for generating short audio samples, sound effects, and production elements using text prompts.
 
 Download the model weights from [HuggingFace](https://huggingface.co/stabilityai/stable-audio-open-1.0/tree/main)
-
-TODO - updates, using local copy currently
-
+TODO - point to new location on huggingFace stable-audio-open-2.0 when available.
 
 ## Test the model output
 
@@ -32,10 +30,7 @@ pip install -e .
 
 ```
 
-TODO - maybe extra training of the model here
-
 You can now run the basic Gradio interface to test out the model:
-
 ```bash
 
 python3 ./run_gradio.py --model-config sao_small_distilled_1_0_config.json --ckpt-path sao_small_distilled_1_0.ckpt

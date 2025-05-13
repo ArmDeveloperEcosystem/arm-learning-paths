@@ -13,9 +13,9 @@ In this learning path, you will learn about Stable Audio Open models, how to con
 Your first task is to prepare a development environment with the required software:
 
 - Android Studio (latest version recommended)
-- Android NDK (tested with - TODO)
+- Android NDK r25b or newer
 - Python 3.10 or newer
-- CMake (tested with - 3.28.1)
+- CMake 3.28.1 or newer
 - [Arm GNU Toolchain](/install-guides/gcc/arm-gnu)
 
 ## Create workspace directory
@@ -80,21 +80,6 @@ You can refer to [CMake install tutorial](/install-guides/cmake/) for troublesho
 {{% notice Note %}}
 The instructions were tested with version 3.28.1
 {{% /notice %}}
-
-## Install Bazel
-
-Bazel is an open-source build tool which we will use to build LiteRT and the needed tensorflowlite library. 
-
-{{< tabpane code=true >}}
-  {{< tab header="Linux">}}
-cd $WORKSPACE
-wget https://github.com/bazelbuild/bazel/releases/download/6.1.1/bazel-7.4.1-installer-linux-x86_64.sh
-sudo bash bazel-7.4.1-installer-linux-x86_64.sh
-  {{< /tab >}}
-  {{< tab header="MacOS">}}
-\\TODO
-  {{< /tab >}}
-{{< /tabpane >}}
 
 ## Install Android NDK
 
