@@ -1,23 +1,23 @@
 ---
-title: Generate audio with Open Stable Audio using LiteRT runtime
+title: Generate audio with Stable Audio Open Small on LiteRT 
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic on how to convert the  text-to-audio model Open Stable Audio to LiteRT (Lite Runtime) and deploying it on an Android device.
+who_is_this_for: This is an introductory topic for developers looking to deploy the Stable Audio Open Small text-to-audio model using LiteRT on an Android device.
 
 learning_objectives:
-    - Convert Open Stable Audio to LiteRT
-    - Create a simple program to generate audio
-    - Compile the application and accelerate it on Arm CPU
-    - Run the application on an Android smartphone and generate an audio snippet
+    - Deploy the Stable Audio Open Small model on Android using LiteRT.
+    - Build a simple program to generate audio.
+    - Compile the application and for an Arm CPU.
+    - Run the application on an Android smartphone and generate an audio snippet.
 
 
 prerequisites:
-    - A Linux x86 development machine with at least 8 GB of RAM
-    - A [HuggingFace](https://huggingface.co/) account
-    - An Android phone and a cable to connect it to your development machine
+    - A Linux x86 development machine with at least 8 GB of RAM.
+    - A [HuggingFace](https://huggingface.co/) account.
+    - An Android phone and a cable to connect it to your development machine.
 
-author: Nina Drozd, TODO - add linkedIn, add more involved in the creation?
+authors: Nina Drozd and Annie Tallund
 
 ### Tags
 skilllevels: Introductory
