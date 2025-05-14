@@ -19,7 +19,7 @@ Your first task is to prepare a development environment with the required softwa
 
 ### Create workspace directory
 
-Create a separate directory for all dependencies and repositories that this Learning Path uses. 
+Create a separate directory for all dependencies and repositories that this Learning Path uses.
 
 Export the `WORKSPACE` variable to point to this directory, which you will use in the following steps:
 
@@ -110,11 +110,9 @@ export ANDROID_NDK=$WORKSPACE/android-ndk-r25b/
 export PATH=$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
   {{< /tab >}}
   {{< tab header="MacOS">}}
-nano ~/.zshrc
 export ANDROID_NDK=~/Library/Android/sdk/ndk/27.0.12077973/
 export PATH=$PATH:$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64/bin
 export PATH=$PATH:~/Library/Android/sdk/cmdline-tools/latest/bin
-source ~/.zshrc
   {{< /tab >}}
 {{< /tabpane >}}
 

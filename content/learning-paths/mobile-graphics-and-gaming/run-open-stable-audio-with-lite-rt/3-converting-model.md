@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Stable Audio Open Small Model 
+## Stable Audio Open Small Model
 
 |Submodule|Description|
 |------|------|
@@ -32,7 +32,6 @@ cd $WORKSPACE
 python3.10 -m venv env
 source env/bin/activate
 ```
-
 
 Clone the examples repository:
 
@@ -126,6 +125,15 @@ After successful conversion, you now have `dit_model.tflite` and `autoencoder_mo
 
 ```bash
 deactivate
+```
+
+For easier access, we add all needed models to one directory:
+```bash
+export LITERT_MODELS_PATH=$WORKSPACE/litert-models
+mkdir $LITERT_MODELS_PATH
+cp conditioners.onnx $LITERT_MODELS_PATH
+cp dit_model.tflite $LITERT_MODELS_PATH
+cp autoencoder_model.tflite $LITERT_MODELS_PATH
 ```
 
 With all three submodules converted to LiteRT format, you're ready to build LiteRT and run the model on a mobile device in the next step.
