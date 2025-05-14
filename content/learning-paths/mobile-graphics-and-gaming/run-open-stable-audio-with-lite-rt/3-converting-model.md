@@ -18,12 +18,12 @@ The submodules work together to provide the pipeline as shown below:
 ![Model structure#center](./model.png)
 
 As part of this section, you will covert each of the three submodules into [LiteRT](https://ai.google.dev/edge/litert) format, we will use two separate conversion routes:
-1. Conditioners submodule - ONNX to TFLite using [onnx2tf](https://github.com/PINTO0309/onnx2tf) tool.
-2. DiT and AutoEncoder submodules - PyTorch to TFLite using Google AI Edge Torch tool.
+1. Conditioners submodule - ONNX to LiteRT using [onnx2tf](https://github.com/PINTO0309/onnx2tf) tool.
+2. DiT and AutoEncoder submodules - PyTorch to LiteRT using Google AI Edge Torch tool.
 
 ### Create virtual environment and install dependencies
 
-The Conditioners submodule is made of the T5Encoder model. We will use the ONNX to TFLite conversion for this submodule.
+The Conditioners submodule is made of the T5Encoder model. We will use the ONNX to LiteRT conversion for this submodule.
 
 To eliminate dependencies issues, create a virtual environment. In this guide, we will use `virtualenv`
 
@@ -107,7 +107,7 @@ Converting the conditioners submodule using the provided python script
 python3 ./scripts/export_conditioners.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
 ```
 
-After successfull conversion, you now have a `conditioners.onnx` model in your current directory.
+After successful conversion, you now have a `conditioners.onnx` model in your current directory.
 
 ### Convert DiT and AutoEncoder
 
@@ -132,7 +132,7 @@ For easier access, we add all needed models to one directory:
 ```bash
 export LITERT_MODELS_PATH=$WORKSPACE/litert-models
 mkdir $LITERT_MODELS_PATH
-cp conditioners.onnx $LITERT_MODELS_PATH
+cp conditioners_tflite/conditioners_float32.tflite $LITERT_MODELS_PATH
 cp dit_model.tflite $LITERT_MODELS_PATH
 cp autoencoder_model.tflite $LITERT_MODELS_PATH
 ```

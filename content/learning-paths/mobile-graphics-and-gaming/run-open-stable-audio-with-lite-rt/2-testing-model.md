@@ -26,14 +26,6 @@ Download and copy the configuration file `model_config.json` and the model itsel
 ls $WORKSPACE/model_config.json $WORKSPACE/model.ckpt
 ```
 
-## Test the model
-
-To showcase its capabilities, you can use a website that is set up to experiment with the model:
-
-```bash
-https://stableaudio.com/
-```
-
 Use the UI to enter a prompt. Here are a few ways to structure a text prompt for your audio file.
 A prompt can include:
 * music genre and subgenre
