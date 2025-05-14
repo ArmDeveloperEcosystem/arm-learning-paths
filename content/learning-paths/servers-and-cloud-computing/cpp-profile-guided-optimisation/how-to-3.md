@@ -1,16 +1,16 @@
 ---
-title: Division Example
+title: Example operation
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Introduction
+## Optimizing costly division operations with Google Benchmark and PGO
 
 In this section, you'll learn how to use Google Benchmark and Profile-Guided Optimization to improve the performance of a simple division operation. This example demonstrates how even seemingly straightforward operations can benefit from optimization techniques.
 
-Integer division is an excellent operation to benchmark because it's typically much more expensive than other arithmetic operations like addition, subtraction, or multiplication. On most CPU architectures, including Arm, division instructions have higher latency and lower throughput compared to other arithmetic operations. By applying Profile-Guided Optimization to code containing division operations, we can potentially achieve significant performance improvements.
+Integer division is ideal for benchmarking because it's significantly more expensive than operations like addition, subtraction, or multiplication. On most CPU architectures, including Arm, division instructions have higher latency and lower throughput compared to other arithmetic operations. By applying Profile-Guided Optimization to code containing division operations, we can potentially achieve significant performance improvements.
 
 ## What tools are needed to run a Google Benchmark example?
 
@@ -63,7 +63,7 @@ Run the program:
 ./div_bench.base
 ```
 
-The output is:
+### Example output
 
 ```output
 Running ./div_bench.base
@@ -81,9 +81,9 @@ Benchmark             Time             CPU   Iterations
 baseDiv/1500       7.90 us         7.90 us        88512
 ```
 
-### Inspect Assembly
+### Inspect assembly
 
-To inspect what assembly instructions are being executed the most frequently, you can use the `perf` command. This is useful for identifying bottlenecks and understanding the performance characteristics of your code.
+To inspect what assembly instructions are being executed most frequently, you can use the `perf` command. This is useful for identifying bottlenecks and understanding the performance characteristics of your code.
 
 Install Perf using the [install guide](https://learn.arm.com/install-guides/perf/) before proceeding.
 

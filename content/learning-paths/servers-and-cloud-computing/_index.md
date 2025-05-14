@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- Linux: 138
+- Linux: 141
 - macOS: 10
 - Windows: 14
 pinned_modules:
@@ -22,7 +22,7 @@ subjects_filter:
 - Containers and Virtualization: 27
 - Databases: 15
 - Libraries: 8
-- ML: 25
+- ML: 28
 - Performance and Architecture: 51
 - Storage: 1
 - Web: 10
@@ -33,7 +33,7 @@ tools_software_languages_filter:
 - .NET SDK: 1
 - 5G: 1
 - ACL: 1
-- AI: 1
+- AI: 2
 - Android Studio: 1
 - Ansible: 2
 - Arm Compiler for Linux: 1
@@ -71,7 +71,7 @@ tools_software_languages_filter:
 - Coding: 17
 - conda: 1
 - Daytona: 1
-- Demo: 4
+- Demo: 3
 - Django: 1
 - Docker: 17
 - Envoy: 2
@@ -90,12 +90,14 @@ tools_software_languages_filter:
 - Glibc: 1
 - Go: 2
 - Google Axion: 3
+- Google Benchmark: 1
 - Google Cloud: 1
 - GoogleTest: 1
 - HammerDB: 1
 - Herd7: 1
 - InnoDB: 1
 - Intrinsics: 1
+- IoT: 1
 - Java: 3
 - JAX: 1
 - Kafka: 1
@@ -109,6 +111,7 @@ tools_software_languages_filter:
 - llvm-mca: 1
 - LSE: 1
 - MariaDB: 1
+- MCP: 1
 - Memcached: 2
 - MLPerf: 1
 - ModelScope: 1
@@ -121,16 +124,18 @@ tools_software_languages_filter:
 - Nginx: 3
 - Node.js: 3
 - Ollama: 1
+- ONNX Runtime: 1
+- OpenBLAS: 1
 - PAPI: 1
 - perf: 4
 - PostgreSQL: 4
-- Python: 26
-- PyTorch: 8
+- Python: 28
+- PyTorch: 9
 - RAG: 1
 - Redis: 3
 - Remote.It: 2
 - RME: 4
-- Runbook: 65
+- Runbook: 66
 - Rust: 2
 - snappy: 1
 - Snort3: 1
@@ -163,7 +168,7 @@ tools_software_languages_filter:
 weight: 1
 cloud_service_providers_filter:
 - AWS: 17
-- Google Cloud: 10
-- Microsoft Azure: 8
+- Google Cloud: 12
+- Microsoft Azure: 9
 - Oracle: 2
 ---

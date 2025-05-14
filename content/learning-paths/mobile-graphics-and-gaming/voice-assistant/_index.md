@@ -1,10 +1,6 @@
 ---
 title: Accelerate Voice Assistant performance with KleidiAI and SME2
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers who want to accelerate Voice Assistant performance on Android devices using KleidiAI and SME2.
@@ -14,7 +10,7 @@ learning_objectives:
     - Optimize performance using KleidiAI and SME2.
 
 prerequisites:
-    - An Android phone that supports i8mm (int8 matrix multiplication). This Learning Path was tested on a Samsung Galaxy Z Flip 6.
+    - An Android phone that supports the i8mm Arm architecture feature (8-bit integer matrix multiplication). This Learning Path was tested on a Samsung Galaxy Z Flip 6. 
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
 
 author: Arnaud de Grandmaison
@@ -29,7 +25,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
     - macOS
-    - Windows
     - Android
 
 further_reading:

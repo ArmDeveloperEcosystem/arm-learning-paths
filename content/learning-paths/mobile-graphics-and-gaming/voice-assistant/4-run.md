@@ -18,13 +18,13 @@ Once developer mode is enabled, connect your phone to your computer with USB. It
 
 
 In the graphic below, a Samsung Galaxy Z Flip 6 phone is connected to the USB cable:
-![example image alt-text#center](upload.png "Upload the Voice App")
+![upload image alt-text#center](upload.png "Upload the Voice App")
 =======
 ## Launch the Voice Assistant
 
 The app starts with this welcome screen:
 
-![example image alt-text#center](voice_assistant_view1.png "Welcome Screen")
+![welcome image alt-text#center](voice_assistant_view1.jpg "Welcome Screen")
 
 Tap **Press to talk** at the bottom of the screen to begin speaking your request.
 
@@ -40,9 +40,9 @@ You can toggle performance counters such as:
 
 Click the icon circled in red in the top left corner to show or hide these metrics:
 
-![example image alt-text#center](voice_assistant_view2.png "Performance Counters")
+![performance image alt-text#center](voice_assistant_view2.jpg "Performance Counters")
 
 To reset the Voice Assistant's conversation history, click the icon circled in red in the top right:
 
-![example image alt-text#center](voice_assistant_view3.png "Reset the Voice Assistant's Context")
+![reset image alt-text#center](voice_assistant_view3.jpg "Reset the Voice Assistant's Context")
 
