@@ -71,12 +71,14 @@ Please specify an Android build tools version to use. [Available versions: ['30.
 
 Once the bazel configuration is complete, you can build TFLite as follows:
 ```console
-bazel build -c opt --config android_arm64 //tensorflow/lite:libtensorflowlite.so --define tflite_with_xnnpack=true --define=xnn_enable_arm_i8mm=true --define tflite_with_xnnpack_qs8=true --define tflite_with_xnnpack_qu8=true
+bazel build -c opt --config android_arm64 //tensorflow/lite:libtensorflowlite.so \
+    --define tflite_with_xnnpack=true \
+    --define=xnn_enable_arm_i8mm=true \
+    --define tflite_with_xnnpack_qs8=true \
+    --define tflite_with_xnnpack_qu8=true
 ```
 
 This will produce a `libtensorflowlite.so` shared library for android with XNNPack enabled, which we will use to build the example next.
-
-Now that the LiteRT libraries are built, you can create a simple program to run the converted models on an Android device.
  
 
 
