@@ -78,30 +78,8 @@ For this conversion we include the following steps:
 2. Export the Conditioners submodule to ONNX via *torch.onnx.export()*.
 3. Convert the resulting ONNX file to LiteRT using *onnx2tf*.
 
-```text
-torch.onnx.export(
-        model,
-        example_inputs,
-        output_path,
-        input_names=[],
-        output_names=[], #Model outputs, a list of output tensors
-        opset_version=15,
-    )
-```
-Where the parameters used for export are:
-* `model` -- PyTorch model to convert
-* `example_inputs` -- a tuple of example input tensors for the model
-* `input_names` -- a list of input tensors for the model
-* `output_names` -- a list of output tensors for the model
-* `opset_version` -- version of the operator set to use in the ONNX model
+You can use the provided script to convert the Conditioners submodule:
 
-```text
-onnx2tf -i "input_onnx_model_path" -o "tflite_folder_path"
-```
-
-The above commands will create one .onnx model and a tflite_folder_path with a fp16.tflite and a fp32.tflite model. You will use only one of these models to run the AudioGen inference pipeline on the mobile phone.
-
-Alternatively, you can use the provided script to convert the Conditioners submodule:
 ```bash
 python3 ./scripts/export_conditioners.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
 ```
@@ -128,6 +106,7 @@ deactivate
 ```
 
 For easier access, we add all needed models to one directory:
+
 ```bash
 export LITERT_MODELS_PATH=$WORKSPACE/litert-models
 mkdir $LITERT_MODELS_PATH
