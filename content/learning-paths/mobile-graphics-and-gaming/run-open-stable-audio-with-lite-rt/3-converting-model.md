@@ -25,10 +25,18 @@ As part of this section, you will covert each of the three submodules into [Lite
 
 The Conditioners submodule is made of the T5Encoder model. We will use the ONNX to TFLite conversion for this submodule.
 
-To eliminate dependencies issues, create a virtual environment. In this guide, we will use `virtualenv`
+To eliminate dependencies issues, create a virtual environment. In this guide, we will use `virtualenv`:
+
+```bash
+cd $WORKSPACE
+python3.10 -m venv env
+source env/bin/activate
+```
+
 
 Clone the examples repository:
-```text
+
+```bash
 cd $WORKSPACE
 git clone https://git.research.arm.com/gen-ai/sai/audio-stale-open-litert/-/tree/main/
 cd audio-stale-open-litert
@@ -45,7 +53,7 @@ bash install_requirements.sh
 If you are using GPU on your machine, you may notice the following error:
 ```text
 Traceback (most recent call last):
-  File "$WORKSPACE/env/lib/python3.10/site-packages/torch/_inductor/runtime/hints.py", 
+  File "$WORKSPACE/env/lib/python3.10/site-packages/torch/_inductor/runtime/hints.py",
   line 46, in <module> from triton.backends.compiler import AttrsDescriptor
 ImportError: cannot import name 'AttrsDescriptor' from 'triton.backends.compiler'
 ($WORKSPACE/env/lib/python3.10/site-packages/triton/backends/compiler.py)
@@ -103,7 +111,7 @@ After successfull conversion, you now have a `conditioners.onnx` model in your c
 
 ### Convert DiT and AutoEncoder
 
-To convert the DiT and AutoEncoder submodules, we use the [Generative API](https://github.com/google-ai-edge/ai-edge-torch/tree/main/ai_edge_torch/generative/) provided in by the ai-edge-torch tools. This will help us export a generative pytorch model directly to tflite using three main steps: 
+To convert the DiT and AutoEncoder submodules, we use the [Generative API](https://github.com/google-ai-edge/ai-edge-torch/tree/main/ai_edge_torch/generative/) provided in by the ai-edge-torch tools. This will help us export a generative pytorch model directly to tflite using three main steps:
 
 1. model re-authoring
 2. quantization

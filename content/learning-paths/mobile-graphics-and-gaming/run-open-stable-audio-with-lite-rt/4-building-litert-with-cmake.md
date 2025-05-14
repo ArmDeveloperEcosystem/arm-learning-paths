@@ -34,7 +34,7 @@ Ensure the `ANDROID_NDK` variable is set to your previously installed Android ND
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
 export ANDROID_NDK=$WORKSPACE/android-ndk-r25b/
-export $PATH=$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
+export PATH=$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
   {{< /tab >}}
   {{< tab header="MacOS">}}
 export TF_CXX_FLAGS="-DTF_MAJOR_VERSION=0 -DTF_MINOR_VERSION=0 -DTF_PATCH_VERSION=0 -DTF_VERSION_SUFFIX=''"
@@ -65,7 +65,7 @@ Please specify the home path of the Android NDK to use. [Default is /home/user/A
 Please specify the (min) Android NDK API level to use. [Available levels: [16, 17, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 30, 31, 32, 33]] [Default is 21]: 30
 Please specify the home path of the Android SDK to use. [Default is /home/user/Android/Sdk]:
 Please specify the Android SDK API level to use. [Available levels: ['31', '33', '34', '35']] [Default is 35]:
-Please specify an Android build tools version to use. [Available versions: ['30.0.3', '34.0.0', '35.0.0']] [Default is 35.0.0]: 
+Please specify an Android build tools version to use. [Available versions: ['30.0.3', '34.0.0', '35.0.0']] [Default is 35.0.0]:
 ```
 
 Once the bazel configuration is complete, you can build TFLite as follows:
@@ -78,7 +78,7 @@ bazel build -c opt --config android_arm64 //tensorflow/lite:libtensorflowlite.so
 ```
 
 This will produce a `libtensorflowlite.so` shared library for android with XNNPack enabled, which we will use to build the example next.
- 
+
 
 
 

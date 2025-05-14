@@ -52,22 +52,22 @@ python3.10 --version
 
 CMake is an open-source tool that automates the build process for software projects, helping to generate platform-specific build configurations.
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="Linux">}}
 sudo apt update
 sudo apt install cmake
-```
+  {{< /tab >}}
+  {{< tab header="MacOS">}}
+brew install cmake
+  {{< /tab >}}
+{{< /tabpane >}}
 
-You can verify successful python installation and correct version is being used
+You can verify successful cmake installation and correct version is being used
 ```console
 cmake --version
 ```
 
 You can refer to the[CMake install guide](/install-guides/cmake/) for troubleshooting instructions.
-
-```bash
-sudo apt update
-sudo apt install python3-venv python3-pip g++ unzip protobuf-compiler -y
-```
 
 ## Install Bazel
 
@@ -88,11 +88,16 @@ brew install bazel
 
 To run the model on Android, we need to install Android Native Development Kit (Android NDK).
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="Linux">}}
 cd $WORKSPACE
 wget https://dl.google.com/android/repository/android-ndk-r25b-linux.zip
 unzip android-ndk-r25b-linux.zip
-```
+  {{< /tab >}}
+  {{< tab header="MacOS">}}
+brew install --cask android-studio temurin
+  {{< /tab >}}
+{{< /tabpane >}}
 
 We also set `ANDROID_NDK` variable to allow easier access to Android SDK tools in further steps.
 For easier access and execution of Android NDK tools, add the prebuild toolchains to the `PATH`.
