@@ -1,5 +1,5 @@
 ---
-title: Generate audio with Stable Audio Open Small on LiteRT 
+title: Generate audio with Stable Audio Open Small on LiteRT
 
 minutes_to_complete: 30
 
@@ -17,7 +17,9 @@ prerequisites:
     - A [HuggingFace](https://huggingface.co/) account.
     - An Android phone and a cable to connect it to your development machine.
 
-authors: Nina Drozd and Annie Tallund
+author:
+    - Nina Drozd
+    - Annie Tallund
 
 ### Tags
 skilllevels: Introductory
@@ -44,7 +46,7 @@ further_reading:
         link: https://techcrunch.com/2025/03/03/stability-ai-optimized-its-audio-generation-model-to-run-on-arm-chips/
         type: blog
     - resource:
-        title: Fast Text-to-Audio Generation with Adversarial Post-Training 
+        title: Fast Text-to-Audio Generation with Adversarial Post-Training
         link: https://arxiv.org/abs/2505.08175
         type: website
 
