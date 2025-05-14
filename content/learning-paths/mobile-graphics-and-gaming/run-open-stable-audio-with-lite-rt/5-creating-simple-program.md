@@ -11,7 +11,7 @@ layout: learningpathall
 We now set up a simple program to run the inference on all three submodules on an Android device, this will take in a text prompt and generate an audio file.
 You can clone the needed sample files as follows:
 ```bash
-cd $WORKSPACE/audio-stale-open-litert/runner
+cd $WORKSPACE/audio-stale-open-litert/app
 mkdir build && cd build
 ```
 

@@ -8,18 +8,18 @@ layout: learningpathall
 
 ## Set up your development environment
 
-In this learning path, you will learn about Stable Audio Open models, how to convert these to LiteRT format (.tflite). You will then create and build a simple test program to generation audio on a mobile device.
+In this learning path, you will learn about Stable Audio Open models, how to convert these to LiteRT format (`.tflite`). You will then create and build a simple test program to generation audio on a mobile device.
 
 Your first task is to prepare a development environment with the required software:
 
 - Android NDK r25b or newer
-- Python 3.10 or newer
-- CMake 3.16.0 or newer
+- Python 3.10 or newer. This learning path has been tested with Python 3.10.
+- CMake 3.16.0 or newer. This learning path has been tested with CMake 3.28.1.
 - [Arm GNU Toolchain](/install-guides/gcc/arm-gnu)
 
-### Create workspace directory
+## Create workspace directory
 
-We will create a separate directory for all dependencies and repositories used in this learning path, we can export `WORKSPACE` variable to point to this used by next steps
+You will create a separate directory for all dependencies and repositories used in this learning path. Export the `WORKSPACE` variable to point to this directory, which is used in the next steps.
 
 ```bash
 mkdir my-workspace
@@ -27,13 +27,9 @@ export WORKSPACE=$PWD/my-workspace
 ```
 
 
-### Install Python 3.10
+## Install Python 3.10
 
 Download and install [Python version 3.10](https://www.python.org/downloads/release/python-3100/)
-
-In order to eliminate dependencies issues, It is recommended that you use a virtual environment tool like conda  or virtualenv. In this guide, we will use virtualenv:
-
-to test for mac 
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
@@ -73,7 +69,7 @@ You can verify successful python installation and correct version is being used
 cmake --version
 ```
 
-You can refer to [CMake install tutorial](/install-guides/cmake/) for troubleshooting instructions.
+You can refer to the[CMake install guide](/install-guides/cmake/) for troubleshooting instructions.
 
 
 {{% notice Note %}}
@@ -116,7 +112,7 @@ For easier access and execution of Android NDK tools, add the prebuild toolchain
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
 export ANDROID_NDK=$WORKSPACE/android-ndk-r25b/
-export $PATH=$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
+export PATH=$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
   {{< /tab >}}
   {{< tab header="MacOS">}}
 nano ~/.zshrc

@@ -6,9 +6,11 @@ weight: 3
 layout: learningpathall
 ---
 
-# Stable Audio Open Model 
+## Stable Audio Open Model 
 
 Stable Audio Open is an open-source model optimized for generating short audio samples, sound effects, and production elements using text prompts.
+
+[Log in](https://huggingface.co/login) to HuggingFace and navigate to the model landing page:
 
 Download the model weights from [HuggingFace](https://huggingface.co/stabilityai/stable-audio-open-1.0/tree/main)
 
