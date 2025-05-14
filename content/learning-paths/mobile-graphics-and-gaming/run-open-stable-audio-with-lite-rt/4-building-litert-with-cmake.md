@@ -35,18 +35,11 @@ mkdir tflite_build && cd tflite_build
 ```
 
 Ensure the NDK_PATH is set to your previously installed Android NDK:
-{{< tabpane code=true >}}
-  {{< tab header="Linux">}}
+
+```bash
 export PATH=$WORKSPACE/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
 export ANDROID_NDK=$WORKSPACE/android-ndk-r25b/
-  {{< /tab >}}
-  {{< tab header="MacOS">}}
-nano ~/.zshrc
-export PATH=$PATH:~/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin
-export PATH=$PATH:~/Library/Android/sdk/cmdline-tools/latest/bin
-source ~/.zshrc
-  {{< /tab >}}
-{{< /tabpane >}}
+```
 
 Set the TensorFlow version
 
@@ -56,23 +49,14 @@ export TF_CXX_FLAGS="-DTF_MAJOR_VERSION=0 -DTF_MINOR_VERSION=0 -DTF_PATCH_VERSIO
 
 Configure the cmake build for Android including the correct android api and path to previously build flatbuffers directory:
 
-{{< tabpane code=true >}}
-  {{< tab header="Android">}}
-```console
+```bash
 cmake \
   -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
   -DANDROID_ABI=arm64-v8a \
   -DCMAKE_CXX_STANDARD=20 \
   -DTFLITE_HOST_TOOLS_DIR=../flatc-native-build/ \
   ../tensorflow/lite/
-cmake --build .
 ```
-  {{< /tab >}}
-  {{< tab header="MacOS">}}
-cmake -DCMAKE_C_FLAGS="${TF_CXX_FLAGS}" -DCMAKE_CXX_FLAGS="${TF_CXX_FLAGS}" -DTFLITE_HOST_TOOLS_DIR=../flatc-native-build/ ../tensorflow_src/tensorflow/lite/examples/minimal
-cmake --build .
-  {{< /tab >}}
-{{< /tabpane >}}
 
 Finally, build the cmake project after you have configured it:
 

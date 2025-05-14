@@ -13,7 +13,7 @@ learning_objectives:
 
 
 prerequisites:
-    - A Linux x86 development machine
+    - A Linux x86 development machine with at least 8 GB of RAM
     - A [HuggingFace](https://huggingface.co/) account
     - An Android phone and a cable to connect it to your development machine
 

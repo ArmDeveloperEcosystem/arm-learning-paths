@@ -31,20 +31,11 @@ export WORKSPACE=$PWD/my-workspace
 
 Download and install [Python version 3.10](https://www.python.org/downloads/release/python-3100/)
 
-
-to test for mac
-
-{{< tabpane code=true >}}
-  {{< tab header="Linux">}}
+```bash
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update
 sudo apt install python3.10
-  {{< /tab >}}
-  {{< tab header="MacOS">}}
-brew install python@3.10
-brew link python@3.10 --force
-  {{< /tab >}}
-{{< /tabpane >}}
+```
 
 You can verify successful python installation and correct version is being used
 
@@ -63,16 +54,10 @@ source litert-venv/bin/activate
 
 CMake is an open-source tool that automates the build process for software projects, helping to generate platform-specific build configurations.
 
-{{< tabpane code=true >}}
-  {{< tab header="Linux">}}
+```bash
 sudo apt update
 sudo apt install cmake
-  {{< /tab >}}
-  {{< tab header="MacOS">}}
-brew install cmake
-  {{< /tab >}}
-{{< /tabpane >}}
-
+```
 
 You can verify successful python installation and correct version is being used
 ```console
@@ -83,44 +68,26 @@ You can refer to the [CMake install guide](/install-guides/cmake/) for troublesh
 
 ## Install other dependencies
 
-{{< tabpane code=true >}}
-  {{< tab header="Linux">}}
+```bash
 sudo apt update
 sudo apt install python3-venv python3-pip g++ unzip protobuf-compiler -y
-  {{< /tab >}}
-  {{< tab header="MacOS">}}
-brew install python@3 protobuf unzip
-brew install gcc  # for g++
-  {{< /tab >}}
-{{< /tabpane >}}
+```
 
 ## Install Android NDK
 
 To run the model on Android, we need to install Android Native Development Kit (Android NDK).
 
-{{< tabpane code=true >}}
-  {{< tab header="Linux">}}
+```bash
 cd $WORKSPACE
 wget https://dl.google.com/android/repository/android-ndk-r25b-linux.zip
 unzip android-ndk-r25b-linux.zip
-  {{< /tab >}}
-  {{< tab header="MacOS">}}
-brew install --cask android-studio temurin
-  {{< /tab >}}
-{{< /tabpane >}}
+```
 
 For easier access and execution of Android NDK tools, add these to the `PATH`
 
-{{< tabpane code=true >}}
-  {{< tab header="Linux">}}
+```bash
 export PATH=$WORKSPACE/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
 export ANDROID_NDK=$WORKSPACE/android-ndk-r25b/
-  {{< /tab >}}
-  {{< tab header="MacOS">}}
-export PATH=$PATH:~/Library/Android/sdk/ndk/28.0.12916984/toolchains/llvm/prebuilt/darwin-x86_64/bin
-export ANDROID_NDK=~/Library/Android/sdk/cmdline-tools/latest/bin
-  {{< /tab >}}
-{{< /tabpane >}}
-
+```
 
 
