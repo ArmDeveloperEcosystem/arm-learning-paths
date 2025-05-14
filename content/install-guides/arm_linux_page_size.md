@@ -209,6 +209,92 @@ The output should be:
 ```
 This indicates the current page size is 4KB and you are using the kernel you started with.
 
+## Instructions for CentOS 9+
+
+To install a 64K page size kernel on CentOS 9, follow these steps:
+
+1. Install the kernel-64k package:
+
+   ```bash
+   sudo dnf -y install kernel-64k
+   ```
+
+2. Set the kernel-64k as the default kernel and add necessary kernel arguments:
+
+   ```bash
+   k=$(echo /boot/vmlinuz*64k)
+   sudo grubby --set-default "$k" \
+              --update-kernel "$k" \
+              --args "crashkernel=2G-:640M"
+   ```
+
+
+4. Reboot the system:
+
+   ```bash
+   sudo reboot
+   ```
+
+5. Verify the page size and kernel version:
+
+   ```bash
+   getconf PAGESIZE
+   uname -r
+   ```
+
+   The output should be:
+
+   ```output
+   65536
+   5.14.0-583.el9.aarch64+64k
+   ```
+
+### Reverting back to the original 4K kernel on CentOS
+
+To revert to the original 4K kernel, run:
+
+```bash
+# 1) Get your running kernel (should be something like "5.14.0-583.el9.aarch64+64k")
+curr=$(uname -r)
+
+# 2) Strip the "+64k" suffix
+base=${curr%+64k}
+
+# 3) Build the full path to the 4K kernel image
+k4="/boot/vmlinuz-${base}"
+
+# 4) Sanity‐check that it actually exists
+if [[ ! -e "$k4" ]]; then
+  echo "❌  Cannot find 4K kernel image at $k4"
+  exit 1
+fi
+
+echo "✅  Found 4K kernel: $k4"
+
+# 5) (Optional) remove any crashkernel args if you added them earlier
+sudo grubby --remove-args="crashkernel=2G-:640M" --update-kernel "$k4"
+
+# 6) Finally, set it as the default
+sudo grubby --set-default "$k4"
+
+# Reboot the system
+sudo reboot
+```
+
+Upon reboot, verify:
+
+```bash
+getconf PAGESIZE
+uname -r
+```
+
+The output should be:
+
+```output
+4096
+<original-kernel-version>
+```
+
 ## Conclusion
 You have successfully installed a 64K page size kernel on your Arm-based Linux system. You can now take advantage of the larger page size for improved performance in certain workloads. If you need to revert back to the original 4K kernel, you can do so by following the steps outlined above.
 
