@@ -1,31 +1,31 @@
 ---
-title: Convert Open Stable Audio model to LiteRT
+title: Convert Open Stable Audio Small model to LiteRT
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Stable Audio Open Model
+## Stable Audio Open Small Model 
 
 |Submodule|Description|
 |------|------|
-|Conditioners| Consist of T5-based text encoder for the input prompt and a number conditioner for total seconds input. The conditioners encode the inputs into numerical values to be passed to DiT model.|
-|Diffusion Transformer (DiT)|It takes a random noise, and denoises it through a defined number of steps, to resemble what the conditioners intent.|
-|AutoEncoder|It compresses the input waveforms into a manageable sequence length to be processed by the DiT model. At the end of de-noising step, it decompresses the result into a waveform.|
+|Conditioners| Includes a T5-based text encoder for the input prompt and a numerical duration encoder. These components convert the inputs into embeddings passed to the DiT model. |
+|Diffusion Transformer (DiT)| Denoises random noise over multiple steps to produce structured latent audio, guided by conditioner embeddings. |
+|AutoEncoder| Compresses audio waveforms into a latent representation for processing by the DiT model, and decompresses the output back into audio. |
 
 The submodules work together to provide the pipeline as shown below:
 ![Model structure#center](./model.png)
 
-As part of this section, you will covert each of the three submodules into [LiteRT](https://ai.google.dev/edge/litert) format, we will use two separate conversion routes:
+As part of this section, you will convert each of the three submodules into [LiteRT](https://ai.google.dev/edge/litert) format, using two separate conversion routes:
 1. Conditioners submodule - ONNX to TFLite using [onnx2tf](https://github.com/PINTO0309/onnx2tf) tool.
 2. DiT and AutoEncoder submodules - PyTorch to TFLite using Google AI Edge Torch tool.
 
 ### Create virtual environment and install dependencies
 
-The Conditioners submodule is made of the T5Encoder model. We will use the ONNX to TFLite conversion for this submodule.
+The Conditioners submodule is made of the T5Encoder model. You will use the ONNX to TFLite conversion for this submodule.
 
-To eliminate dependencies issues, create a virtual environment. In this guide, we will use `virtualenv`:
+To avoid dependency issues, create a virtual environment. In this guide, we will use `virtualenv`:
 
 ```bash
 cd $WORKSPACE
@@ -100,35 +100,35 @@ Where the parameters used for export are:
 onnx2tf -i "input_onnx_model_path" -o "tflite_folder_path"
 ```
 
-The above commands will create one .onnx model and a tflite_folder_path with a fp16.tflite and a fp32.tflite model. We will be using only one of these models to run the AudioGen inference pipeline on the mobile phone.
+The above commands will create one .onnx model and a tflite_folder_path with a fp16.tflite and a fp32.tflite model. You will use only one of these models to run the AudioGen inference pipeline on the mobile phone.
 
-Converting the conditioners submodule using the provided python script
+Alternatively, you can use the provided script to convert the Conditioners submodule:
 ```bash
 python3 ./scripts/export_conditioners.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
 ```
 
-After successfull conversion, you now have a `conditioners.onnx` model in your current directory.
+After successful conversion, you now have a `conditioners.onnx` model in your current directory.
 
 ### Convert DiT and AutoEncoder
 
-To convert the DiT and AutoEncoder submodules, we use the [Generative API](https://github.com/google-ai-edge/ai-edge-torch/tree/main/ai_edge_torch/generative/) provided in by the ai-edge-torch tools. This will help us export a generative pytorch model directly to tflite using three main steps:
+To convert the DiT and AutoEncoder submodules, use the [Generative API](https://github.com/google-ai-edge/ai-edge-torch/tree/main/ai_edge_torch/generative/) provided by the ai-edge-torch tools. This enables you to export a generative PyTorch model directly to tflite using three main steps:
 
-1. model re-authoring
-2. quantization
-3. conversion
+1. Model re-authoring.
+2. Quantization.
+3. Conversion.
 
-Converting the DiT and AutoEncoder submodules using the provided python script
+Convert the DiT and AutoEncoder submodules using the provided python script:
 ```bash
 CUDA_VISIBLE_DEVICES="" python3 ./scripts/export_dit_autoencoder.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
 ```
 
-After successful conversion, you now have `dit_model.tflite` and `autoencoder_model.tflite` models in your current directory and can deactive the virtual enviroment
+After successful conversion, you now have `dit_model.tflite` and `autoencoder_model.tflite` models in your current directory and can deactivate the virtual environment:
 
 ```bash
 deactivate
 ```
 
-Now that all the three submodules are converted, we will build LiteRT to enable running these on a mobile device.
+With all three submodules converted to LiteRT format, you're ready to build LiteRT and run the model on a mobile device in the next step.
 
 
 
