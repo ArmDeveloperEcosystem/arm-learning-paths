@@ -1,12 +1,12 @@
 ---
-title: Test Open Stable Audio model
+title: Download and test the model
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Stable Audio Open Model
+## Download the model
 
 Stable Audio Open is an open-source model optimized for generating short audio samples, sound effects, and production elements using text prompts.
 
@@ -28,22 +28,22 @@ ls $WORKSPACE/model_config.json $WORKSPACE/model.ckpt
 
 ## Test the model
 
-To showcase its capabilities, you can use a website that is set up to experiment with the model:
+To test the model, use the Stable Audio demo site, which lets you experiment directly through a web-based interface:
 
 ```bash
 https://stableaudio.com/
 ```
 
-Use the UI to enter a prompt. Here are a few ways to structure a text prompt for your audio file.
-A prompt can include:
-* music genre and subgenre
-* musical elements (texture, rhythm and articulation)
-* musical atmosphere (mood and emotion)
-* tempo using beats per minute (BPM)
+Use the UI to enter a prompt. A good prompt can include:
 
-The order of prompt parameters matters, for more information check [Prompt structure user guide](https://stableaudio.com/user-guide/prompt-structure)
+* Music genre and subgenre.
+* Musical elements (texture, rhythm and articulation).
+* Musical atmosphere (mood and emotion).
+* Tempo, using beats per minute (BPM).
 
-Training and inference code for audio generation models can be accessed through the [Stable Sudio Tools](https://github.com/Stability-AI/stable-audio-tools) repository.
+The order of prompt parameters matters. For more information, see the [Prompt structure user guide](https://stableaudio.com/user-guide/prompt-structure).
 
-Now that you have downloaded and tried out the model, continue to the next section to convert the model to LiteRT.
+You can explore training and inference code for audio generation models in the [Stable Audio Tools repository](https://github.com/Stability-AI/stable-audio-tools).
+
+Now that you've downloaded and tested the model, continue to the next section to convert the model to LiteRT.
 
