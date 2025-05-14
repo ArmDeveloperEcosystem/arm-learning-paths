@@ -13,7 +13,7 @@ learning_objectives:
 
 
 prerequisites:
-    - A Linux x86 development machine with at least 8 GB of RAM.
+    - A Linux-based x86 or macOS development machine with at least 8 GB of RAM (tested on Ubuntu 20.04.4 LTS with x86_64).
     - A [HuggingFace](https://huggingface.co/) account.
     - An Android phone and a cable to connect it to your development machine.
 
@@ -44,9 +44,11 @@ further_reading:
         link: https://techcrunch.com/2025/03/03/stability-ai-optimized-its-audio-generation-model-to-run-on-arm-chips/
         type: blog
     - resource:
-        title: Fast Text-to-Audio Generation with Adversarial Post-Training
+        title: Fast Text-to-Audio Generation with Adversarial Post-Training 
         link: https://arxiv.org/abs/2505.08175
         type: website
+
+
 
 
 ### FIXED, DO NOT MODIFY

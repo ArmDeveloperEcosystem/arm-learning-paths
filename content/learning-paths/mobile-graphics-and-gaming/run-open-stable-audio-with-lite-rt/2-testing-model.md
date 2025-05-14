@@ -13,9 +13,8 @@ Stable Audio Open is an open-source model optimized for generating short audio s
 [Log in](https://huggingface.co/login) to HuggingFace and navigate to the model landing page:
 
 ```bash
-https://huggingface.co/stabilityai/stable-audio-open-1.0/tree/main
+https://huggingface.co/stabilityai/stable-audio-open-small
 ```
-TODO - point to new location on huggingFace stable-audio-open-2.0 when available.
 
 You may need to fill out a form with your contact information to use the model:
 
