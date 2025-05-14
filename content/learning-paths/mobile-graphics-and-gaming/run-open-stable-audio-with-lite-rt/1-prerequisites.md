@@ -81,11 +81,11 @@ Bazel is an open-source build tool which we will use to build LiteRT libraries.
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
 cd $WORKSPACE
-wget https://github.com/bazelbuild/bazel/releases/download/6.1.1/bazel-7.4.1-installer-linux-x86_64.sh
+wget https://github.com/bazelbuild/bazel/releases/download/7.4.1/bazel-7.4.1-installer-linux-x86_64.sh
 sudo bash bazel-7.4.1-installer-linux-x86_64.sh
   {{< /tab >}}
   {{< tab header="MacOS">}}
-brew install bazel
+brew install bazel@7
   {{< /tab >}}
 {{< /tabpane >}}
 

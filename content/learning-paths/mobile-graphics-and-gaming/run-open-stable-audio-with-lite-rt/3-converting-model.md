@@ -128,6 +128,15 @@ After successful conversion, you now have `dit_model.tflite` and `autoencoder_mo
 deactivate
 ```
 
+For easier access, we add all needed models to one directory:
+```bash
+export LITERT_MODELS_PATH=$WORKSPACE/litert-models
+mkdir $LITERT_MODELS_PATH
+cp conditioners.onnx $LITERT_MODELS_PATH
+cp dit_model.tflite $LITERT_MODELS_PATH
+cp autoencoder_model.tflite $LITERT_MODELS_PATH
+```
+
 Now that all the three submodules are converted, we will build LiteRT to enable running these on a mobile device.
 
 
