@@ -37,7 +37,7 @@ Clone the examples repository:
 
 ```bash
 cd $WORKSPACE
-git clone https://git.research.arm.com/gen-ai/sai/audio-stale-open-litert/-/tree/main/
+git clone https://github.com/ARM-software/ML-examples/tree/main/kleidiai-examples/audiogen
 cd audio-stale-open-litert
 ```
 
