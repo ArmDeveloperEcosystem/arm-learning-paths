@@ -27,7 +27,6 @@ cmake -DCMAKE_TOOLCHAIN_FILE=$NDK_PATH/build/cmake/android.toolchain.cmake \
     ..
 
 cmake --build . -j1
-
 ```
 
 Once the SAO example built sucessfully, this is a binary file named audiogen_main has been created, we will use adb (Android Debug Bridge) to push the needed example to the device:
@@ -45,18 +44,20 @@ exit
 Push all necessary files into newly created audiogen folder on Android.
 ```bash
 cd $WORKSPACE/audio-stale-open-litert/app/build
-adb push audiogen /data/local/tmp/audiogen/
-adb push $LITERT_MODELS_PATH/conditioners.onnx /data/local/tmp/audiogen/
-adb push $LITERT_MODELS_PATH/dit_model.tflite /data/local/tmp/audiogen/
-adb push $LITERT_MODELS_PATH/autoencoder_model.tflite /data/local/tmp/audiogen/
+adb shell mkdir -p /data/local/tmp/app
+adb push audiogen /data/local/tmp/app
+adb push $LITERT_MODELS_PATH/conditioners.onnx /data/local/tmp/app
+adb push $LITERT_MODELS_PATH/dit_model.tflite /data/local/tmp/app
+adb push $LITERT_MODELS_PATH/autoencoder_model.tflite /data/local/tmp/app
+adb push ${TF_SRC_PATH}/bazel-bin/tensorflow/lite/libtensorflowlite.so /data/local/tmp/app
 ```bash
 
 Go into the shell again to run the simple program:
 ```bash
 adb shell
-cd /data/local/tmp/audiogen
+cd /data/local/tmp/app
 chmod +x audiogen
-./audiogen "Birds singing in the morning"
+LD_LIBRARY_PATH=. ./audiogen . "warm arpeggios on house beats 120BPM with drums effect" 4
 
 ```
 
