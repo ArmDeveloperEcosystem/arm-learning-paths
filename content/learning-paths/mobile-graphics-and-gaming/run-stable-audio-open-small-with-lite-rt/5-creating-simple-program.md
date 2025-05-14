@@ -29,6 +29,14 @@ cmake -DCMAKE_TOOLCHAIN_FILE=$NDK_PATH/build/cmake/android.toolchain.cmake \
 cmake --build . -j1
 ```
 
+Since the tokenizer used in the audiogen application is based on SentencePiece, you’ll need to download the spiece.model file from:
+```bash
+https://huggingface.co/google-t5/t5-base/tree/main
+```
+we will save this model in `WORKSPACE` for ease of access.
+```text
+cp spiece.moel $WORKSPACE
+```
 After the SAO example builds successfully, a binary file named `audiogen_main` is created.
 
 Now use adb (Android Debug Bridge) to push the necessary files to the device:
@@ -48,9 +56,10 @@ Push all necessary files into the `audiogen` folder on Android:
 cd $WORKSPACE/audio-stale-open-litert/app/build
 adb shell mkdir -p /data/local/tmp/app
 adb push audiogen /data/local/tmp/app
-adb push $LITERT_MODELS_PATH/conditioners.onnx /data/local/tmp/app
+adb push $LITERT_MODELS_PATH/conditioners_float32.tflite /data/local/tmp/app
 adb push $LITERT_MODELS_PATH/dit_model.tflite /data/local/tmp/app
 adb push $LITERT_MODELS_PATH/autoencoder_model.tflite /data/local/tmp/app
+adb push $WORKSPACE/spiece.model /data/local/tmp/app
 adb push ${TF_SRC_PATH}/bazel-bin/tensorflow/lite/libtensorflowlite.so /data/local/tmp/app
 ```
 
@@ -58,6 +67,10 @@ Finally, run the program on your Android device:
 ```
 adb shell
 cd /data/local/tmp/app
-chmod +x audiogen
 LD_LIBRARY_PATH=. ./audiogen . "warm arpeggios on house beats 120BPM with drums effect" 4
+```
+
+The successful execution of the app will create `output.wav` of your chosen audio defined by the prompt, you can pull it back to your host machine and enjoy!
+```bash
+adb pull /data/local/tmp/app/output.wav
 ```

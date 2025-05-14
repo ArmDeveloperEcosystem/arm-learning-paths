@@ -17,9 +17,9 @@ layout: learningpathall
 The submodules work together to provide the pipeline as shown below:
 ![Model structure#center](./model.png)
 
-As part of this section, you will convert each of the three submodules into [LiteRT](https://ai.google.dev/edge/litert) format, using two separate conversion routes:
-1. Conditioners submodule - ONNX to TFLite using [onnx2tf](https://github.com/PINTO0309/onnx2tf) tool.
-2. DiT and AutoEncoder submodules - PyTorch to TFLite using Google AI Edge Torch tool.
+As part of this section, you will covert each of the three submodules into [LiteRT](https://ai.google.dev/edge/litert) format, using two separate conversion routes:
+1. Conditioners submodule - ONNX to LiteRT using [onnx2tf](https://github.com/PINTO0309/onnx2tf) tool.
+2. DiT and AutoEncoder submodules - PyTorch to LiteRT using Google AI Edge Torch tool.
 
 ### Create virtual environment and install dependencies
 
@@ -131,7 +131,7 @@ For easier access, we add all needed models to one directory:
 ```bash
 export LITERT_MODELS_PATH=$WORKSPACE/litert-models
 mkdir $LITERT_MODELS_PATH
-cp conditioners.onnx $LITERT_MODELS_PATH
+cp conditioners_tflite/conditioners_float32.tflite $LITERT_MODELS_PATH
 cp dit_model.tflite $LITERT_MODELS_PATH
 cp autoencoder_model.tflite $LITERT_MODELS_PATH
 ```
