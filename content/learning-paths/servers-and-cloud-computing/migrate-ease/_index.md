@@ -1,5 +1,5 @@
 ---
-title: Accelerating Application Migration to Arm Servers Using Code Scanning Tools
+title: Migrate Applications to Arm based Servers Using migrate-ease
 
 draft: true
 cascade:
@@ -7,12 +7,11 @@ cascade:
     
 minutes_to_complete: 45
 
-who_is_this_for: This is an automated tool introductory for software developers and DevOps engineers who are preparing to migrate existing applications to Arm-based server environments. It introduces a static analysis tool (migrate-ease) that simplifies the process by identifying portability challenges early.
+who_is_this_for: This is an introductory topic for software developers looking to migrate their applications to Arm-based servers using a code analysis tool called migrate-ease. You can leverage this tool to identify  code portability to Arm challenges early in the migration process.
 
 
 learning_objectives:
-    - Set up an Arm development machine
-    - Analyze application source code for architecture-specific dependencies
+    - Analyze your application source code for architecture-specific dependencies
     - Understand common migration challenges and solutions
     - Use migrate-ease to identify and prioritize portability issues
 
