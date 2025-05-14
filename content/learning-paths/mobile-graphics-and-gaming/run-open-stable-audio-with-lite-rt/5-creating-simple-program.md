@@ -15,6 +15,13 @@ cd $WORKSPACE/audio-stale-open-litert/app
 mkdir build && cd build
 ```
 
+Create flatbuffers directory and build
+```console
+mkdir flatc-native-build && cd flatc-native-build
+cmake ../tensorflow/lite/tools/cmake/native_tools/flatbuffers
+cmake --build .
+```
+
 Ensure the NDK path is set correctly and build with cmake:
 ```bash
 cmake -B build -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
