@@ -1,34 +1,36 @@
 ---
-title: Create a development environment
+title: Set up your development environment
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up your development environment
+## Identify software requirements
 
-In this learning path, you will learn about Stable Audio Open models, how to convert these to LiteRT format (`.tflite`). You will then create and build a simple test program to generation audio on a mobile device.
+In this Learning Path, you'll learn how to convert the Stable Audio Open Small model to the LiteRT (.tflite) format, then build a simple test program to generate audio on a mobile device.
 
 Your first task is to prepare a development environment with the required software:
 
-- Android NDK r25b or newer
-- Python 3.10 or newer. This learning path has been tested with Python 3.10.
-- CMake 3.16.0 or newer. This learning path has been tested with CMake 3.28.1.
-- [Arm GNU Toolchain](/install-guides/gcc/arm-gnu)
+- Android NDK: version r25b or newer.
+- Python: version 3.10 or newer (tested with 3.10).
+- CMake: version 3.16.0 or newer (tested with 3.28.1).
+- [Arm GNU Toolchain](/install-guides/gcc/arm-gnu).
 
-## Create workspace directory
+### Create workspace directory
 
-You will create a separate directory for all dependencies and repositories used in this learning path. Export the `WORKSPACE` variable to point to this directory, which is used in the next steps.
+Create a separate directory for all dependencies and repositories that this Learning Path uses. 
+
+Export the `WORKSPACE` variable to point to this directory, which you will use in the following steps:
 
 ```bash
 mkdir my-workspace
 export WORKSPACE=$PWD/my-workspace
 ```
 
-## Install Python 3.10
+### Install Python 3.10
 
-Download and install [Python version 3.10](https://www.python.org/downloads/release/python-3100/)
+Download and install [Python version 3.10](https://www.python.org/downloads/release/python-3100/) using the following commands:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
@@ -42,7 +44,7 @@ brew link python@3.10 --force
   {{< /tab >}}
 {{< /tabpane >}}
 
-You can verify successful python installation and correct version is being used
+You can verify the installation and check the version with:
 
 ```console
 python3.10 --version
@@ -62,31 +64,32 @@ brew install cmake
   {{< /tab >}}
 {{< /tabpane >}}
 
-You can verify successful cmake installation and correct version is being used
+You can verify the installation and check the version with:
+
 ```console
 cmake --version
 ```
 
-You can refer to the[CMake install guide](/install-guides/cmake/) for troubleshooting instructions.
+See the [CMake install guide](/install-guides/cmake/) for troubleshooting instructions.
 
-## Install Bazel
+### Install Bazel
 
 Bazel is an open-source build tool which we will use to build LiteRT libraries.
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
 cd $WORKSPACE
-wget https://github.com/bazelbuild/bazel/releases/download/6.1.1/bazel-7.4.1-installer-linux-x86_64.sh
+wget https://github.com/bazelbuild/bazel/releases/download/7.4.1/bazel-7.4.1-installer-linux-x86_64.sh
 sudo bash bazel-7.4.1-installer-linux-x86_64.sh
   {{< /tab >}}
   {{< tab header="MacOS">}}
-brew install bazel
+brew install bazel@7
   {{< /tab >}}
 {{< /tabpane >}}
 
 ### Install Android NDK
 
-To run the model on Android, we need to install Android Native Development Kit (Android NDK).
+To run the model on Android, install Android Native Development Kit (Android NDK):
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
@@ -99,8 +102,7 @@ brew install --cask android-studio temurin
   {{< /tab >}}
 {{< /tabpane >}}
 
-We also set `ANDROID_NDK` variable to allow easier access to Android SDK tools in further steps.
-For easier access and execution of Android NDK tools, add the prebuild toolchains to the `PATH`.
+For easier access and execution of Android NDK tools, add these to the `PATH` and set the `ANDROID_NDK` variable:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
