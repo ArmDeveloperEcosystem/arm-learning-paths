@@ -66,19 +66,25 @@ sudo update-grub
 sudo reboot 
 ```
 
-4. Upon reboot, check the kernel page size:
+4. Upon reboot, check the kernel page size and name:
 
 ```bash
 getconf PAGESIZE
+uname -r
 ```
 
 The output should be:
 
 ```output
 65536
+6.8.0-59-generic-64k
 ```
 
-This indicates the current page size is 64KB.  To revert back to the original 4K kernel, run the following commands:
+This indicates the current page size is 64K and you are running the new 64K kernel.  
+
+## Reverting back to the original 4K kernel
+
+To revert back to the original 4K kernel, run the following commands:
 
 ```bash
 echo "GRUB_FLAVOUR_ORDER=generic" | sudo tee /etc/default/grub.d/local-order.cfg 
@@ -86,6 +92,22 @@ sudo update-grub
 sudo reboot 
 ```
 
+Upon reboot, check the kernel page size and name again:
+
+4. Upon reboot, check the kernel page size and name:
+
+```bash
+getconf PAGESIZE
+uname -r
+```
+
+The output should be:
+
+```output
+4096
+6.11.0-1013-gcp
+```
+This confirms the current page size is 4KB and you are running the original kernel.
 
 ## Instructions for Debian 11+
 
