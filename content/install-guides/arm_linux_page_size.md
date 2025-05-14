@@ -23,15 +23,22 @@ Most Linux distributions ship with a default kernel page size of 4KB. When runni
 
 ## Common Steps
 
-1. Check the current page size:
+1. Run apt update to ensure you have the latest package information:
+
+```bash
+sudo apt-get -y update
+```
+2. Check the current page size and kernel version:
 
 ```bash
 getconf PAGESIZE
+uname -r
 ```
 The output should be:
 
 ```output
 4096
+6.1.0-34-cloud-arm64
 ```
 
 This indicates the current page size is 4KB. If you see a value that is different, you are already using a page size other than 4096 (4K).  On Arm systems, the valid options are 4K, 16K, and 64K.
@@ -44,7 +51,6 @@ To install a 64K page size kernel on Ubuntu 22.04+, follow these steps:
 1. Install dependencies and 64K kernel:
 
 ```bash
-sudo apt-get -y update 
 sudo apt-get -y install git build-essential autoconf automake libtool gdb wget linux-generic-64k
 ```
 2. Instruct grub to load the 64K kernel by default:
@@ -89,13 +95,19 @@ Unlike Ubuntu, Debian does not provide a 64K kernel via apt, so you will need to
 
 To install a 64K page size kernel via package manager, follow these steps:
 
-1. Download the kernel and cd to its directory:
+1. Install dependencies:
+
+```bash
+sudo apt-get -y install git build-essential autoconf automake libtool libncurses-dev bison flex libssl-dev libelf-dev bc debhelper-compat rsync
+```
+
+2. Download the kernel and cd to its directory:
 ```bash
 
 # Fetch the actual kernel source
 apt source linux
-# Go into the source dir
-cd linux-6.1.*
+# Change to kernel source dir
+cd -- */
 ```
 
 ### Install from kernel.org (Advanced, More Customizable)
@@ -106,11 +118,11 @@ If you already completed the step of installing from a Debian Source Package, yo
 
 1. Visit https://cdn.kernel.org/pub/linux/kernel/v6.x/ and download the .tar.gz of the kernel version you want to install. 
 2. Untar/gzip the file to its own directory.
-3. Cd into the directory.
+3. Cd into the kernel source directory.
 
 ### Common Installer Steps 
 
-Now that you have the kernel source, follow these steps to build and install the kernel. From within the source directory, run the following commands:
+Now that you have the kernel source, follow these steps to build and install the kernel:
 ```bash
 # Use running config as template for new config
 cp /boot/config-$(uname -r) .config 
@@ -124,7 +136,7 @@ echo '# CONFIG_ARM64_16K_PAGES is not set' >> .config
 make ARCH=arm64 olddefconfig
 
 # Set 64 for kernel name suffix
-sed -i 's/^EXTRAVERSION =.*/EXTRAVERSION = -64K/' Makefile
+sed -i 's/^EXTRAVERSION =.*/EXTRAVERSION = -64k/' Makefile
 
 # Build Debian packages
 make -j$(nproc) ARCH=arm64 bindeb-pkg
@@ -141,31 +153,40 @@ sudo reboot
 After reboot, check the kernel page size:
 ```bash
 getconf PAGESIZE
+uname -r
 ```
 The output should be:
 
 ```output
 65536
+6.12.22-64k
 ```
-This indicates the current page size is 64KB.  To revert back to the original 4K kernel, run the following commands:
+This indicates the current page size is 64K, and you are using the new customer made 64k kernel.  
+
+## Reverting back to the original 4K kernel
+
+To revert back to the kernel we started with:
 
 ```bash
-# Revert to original kernel
-sudo apt-get -y install linux-generic
+dpkg-query -W -f='${Package}\n' 'linux-image-*-64k*' 'linux-headers-*-64k*' \
+  | xargs --no-run-if-empty sudo dpkg -r
 sudo update-grub
 sudo reboot
 ```
-The system will now reboot with the original 4K kernel.  To check the page size, run the following command:
+The system will now reboot into the original 4K kernel.  To check the page size, run the following command:
 ```bash
 getconf PAGESIZE
+uname -r
 ``` 
 
 The output should be:
 
 ```output
 4096
+6.1.0-34-cloud-arm64
 ```
-This indicates the current page size is 4KB.
+This indicates the current page size is 4KB and you are using the kernel you started with.
+
 ## Conclusion
 You have successfully installed a 64K page size kernel on your Arm-based Linux system. You can now take advantage of the larger page size for improved performance in certain workloads. If you need to revert back to the original 4K kernel, you can do so by following the steps outlined above.
 
