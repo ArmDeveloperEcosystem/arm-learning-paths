@@ -98,7 +98,9 @@ wget https://dl.google.com/android/repository/android-ndk-r25b-linux.zip
 unzip android-ndk-r25b-linux.zip
   {{< /tab >}}
   {{< tab header="MacOS">}}
-brew install --cask android-studio temurin
+wget https://dl.google.com/android/repository/android-ndk-r25b-darwin.zip
+unzip android-ndk-r25b-darwin
+mv android-ndk-r25b-darwin ~/Library/Android/android-ndk-r25b
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -106,14 +108,14 @@ For easier access and execution of Android NDK tools, add these to the `PATH` an
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
-export ANDROID_NDK=$WORKSPACE/android-ndk-r25b/
-export PATH=$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
+export NDK_PATH=$WORKSPACE/android-ndk-r25b/
+export PATH=$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
   {{< /tab >}}
   {{< tab header="MacOS">}}
-export ANDROID_NDK=~/Library/Android/sdk/ndk/27.0.12077973/
-export PATH=$PATH:$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64/bin
+export NDK_PATH=~/Library/Android/android-ndk-r25b
+export PATH=$PATH:$NDK_PATH/toolchains/llvm/prebuilt/darwin-x86_64/bin
 export PATH=$PATH:~/Library/Android/sdk/cmdline-tools/latest/bin
   {{< /tab >}}
 {{< /tabpane >}}
 
-Now that your development environment is ready and all pre-requisites installed, you can test the Audio Stable Open model.
+Now that your development environment is ready and all pre-requisites installed, you can test the Audio Stable Open Small model.

@@ -12,7 +12,7 @@ You'll now build a simple program that runs inference on all three submodules di
 
 The program takes a text prompt as input and generates an audio file as output.
 ```bash
-cd $WORKSPACE/audio-stale-open-litert/app
+cd $WORKSPACE/ML-examples/kleidiai-examples/audiogen/app
 mkdir build && cd build
 ```
 
@@ -53,7 +53,7 @@ exit
 ```
 Push all necessary files into the `audiogen` folder on Android:
 ```bash
-cd $WORKSPACE/audio-stale-open-litert/app/build
+cd $WORKSPACE/ML-examples/kleidiai-examples/audiogen/app/build
 adb shell mkdir -p /data/local/tmp/app
 adb push audiogen /data/local/tmp/app
 adb push $LITERT_MODELS_PATH/conditioners_float32.tflite /data/local/tmp/app

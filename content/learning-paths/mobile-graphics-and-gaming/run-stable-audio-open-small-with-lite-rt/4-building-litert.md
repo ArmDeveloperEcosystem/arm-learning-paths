@@ -30,26 +30,18 @@ We can use `bazel` to build LiteRT libraries, first we use configure script to c
 
 You can now create a custom TFLite build for android:
 
-Ensure the `ANDROID_NDK` variable is set to your previously installed Android NDK:
+Ensure the `NDK_PATH` variable is set to your previously installed Android NDK:
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
-export ANDROID_NDK=$WORKSPACE/android-ndk-r25b/
-export PATH=$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
+export NDK_PATH=$WORKSPACE/android-ndk-r25b/
+export PATH=$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
   {{< /tab >}}
   {{< tab header="MacOS">}}
-export TF_CXX_FLAGS="-DTF_MAJOR_VERSION=0 -DTF_MINOR_VERSION=0 -DTF_PATCH_VERSION=0 -DTF_VERSION_SUFFIX=''"
-export ANDROID_NDK=~/Library/Android/sdk/ndk/27.0.12077973/
-export PATH=$PATH:$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64/bin
+export NDK_PATH=~/Library/Android/sdk/ndk/27.0.12077973/
+export PATH=$PATH:$NDK_PATH/toolchains/llvm/prebuilt/darwin-x86_64/bin
 export PATH=$PATH:~/Library/Android/sdk/cmdline-tools/latest/bin
   {{< /tab >}}
 {{< /tabpane >}}
-
-Set the TensorFlow version
-
-```bash
-export TF_CXX_FLAGS="-DTF_MAJOR_VERSION=0 -DTF_MINOR_VERSION=0 -DTF_PATCH_VERSION=0 -DTF_VERSION_SUFFIX=''"
-```
-
 
 Now you can configure TensorFlow. Here you can set the custom build parameters needed as follows:
 
@@ -77,7 +69,15 @@ bazel build -c opt --config android_arm64 //tensorflow/lite:libtensorflowlite.so
     --define tflite_with_xnnpack_qu8=true
 ```
 
-This will produce a `libtensorflowlite.so` shared library for android with XNNPack enabled, which we will use to build the example next.
+We also build flatbuffers used by the application in the next steps:
+```
+cd $WORKSPACE/tensorflow_src
+mkdir flatc-native-build && cd flatc-native-build
+cmake ../tensorflow/lite/tools/cmake/native_tools/flatbuffers
+cmake --build .
+```
+
+With flatbuffers and LiteRT built, we can now build our application for Android device.
 
 
 

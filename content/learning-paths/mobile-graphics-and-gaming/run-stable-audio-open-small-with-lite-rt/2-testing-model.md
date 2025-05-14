@@ -13,7 +13,7 @@ Stable Audio Open is an open-source model optimized for generating short audio s
 [Log in](https://huggingface.co/login) to HuggingFace and navigate to the model landing page:
 
 ```bash
-https://huggingface.co/stabilityai/stable-audio-open-small
+https://huggingface.co/stabilityai/stable-audio-open-small/tree/main
 ```
 
 You may need to fill out a form with your contact information to use the model:
@@ -26,15 +26,9 @@ Download and copy the configuration file `model_config.json` and the model itsel
 ls $WORKSPACE/model_config.json $WORKSPACE/model.ckpt
 ```
 
-## Test the model
+You can see more information about this model [here](https://huggingface.co/stabilityai/stable-audio-open-small).
 
-To test the model, use the Stable Audio demo site, which lets you experiment directly through a web-based interface:
-
-```bash
-https://stableaudio.com/
-```
-
-Use the UI to enter a prompt. A good prompt can include:
+A good prompt for this model can include:
 
 * Music genre and subgenre.
 * Musical elements (texture, rhythm and articulation).
@@ -45,5 +39,5 @@ The order of prompt parameters matters. For more information, see the [Prompt st
 
 You can explore training and inference code for audio generation models in the [Stable Audio Tools repository](https://github.com/Stability-AI/stable-audio-tools).
 
-Now that you've downloaded and tested the model, continue to the next section to convert the model to LiteRT.
+Now that you've downloaded the model, continue to the next section to convert the model to LiteRT.
 
