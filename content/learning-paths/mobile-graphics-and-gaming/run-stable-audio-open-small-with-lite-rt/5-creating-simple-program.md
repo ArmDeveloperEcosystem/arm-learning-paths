@@ -30,7 +30,7 @@ make -j
 ```
 After the example application builds successfully, a binary file named `audiogen` is created.
 
-A SentencePiece model is a type of subword tokenizer which is used by the audiogen application, you’ll need to download the spiece.model file from:
+A SentencePiece model is a type of subword tokenizer which is used by the audiogen application, you’ll need to download the *spiece.model* file from:
 ```bash
 https://huggingface.co/google-t5/t5-base/tree/main
 ```

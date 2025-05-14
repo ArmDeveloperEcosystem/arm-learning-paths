@@ -104,7 +104,7 @@ mv android-ndk-r25b-darwin ~/Library/Android/android-ndk-r25b
   {{< /tab >}}
 {{< /tabpane >}}
 
-For easier access and execution of Android NDK tools, add these to the `PATH` and set the `ANDROID_NDK` variable:
+For easier access and execution of Android NDK tools, add these to the `PATH` and set the `NDK_PATH` variable:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
