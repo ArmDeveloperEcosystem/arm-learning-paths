@@ -37,11 +37,10 @@ export ANDROID_NDK=$WORKSPACE/android-ndk-r25b/
 export $PATH=$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
   {{< /tab >}}
   {{< tab header="MacOS">}}
-nanoexport TF_CXX_FLAGS="-DTF_MAJOR_VERSION=0 -DTF_MINOR_VERSION=0 -DTF_PATCH_VERSION=0 -DTF_VERSION_SUFFIX=''" ~/.zshrc
+export TF_CXX_FLAGS="-DTF_MAJOR_VERSION=0 -DTF_MINOR_VERSION=0 -DTF_PATCH_VERSION=0 -DTF_VERSION_SUFFIX=''"
 export ANDROID_NDK=~/Library/Android/sdk/ndk/27.0.12077973/
 export PATH=$PATH:$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64/bin
 export PATH=$PATH:~/Library/Android/sdk/cmdline-tools/latest/bin
-source ~/.zshrc
   {{< /tab >}}
 {{< /tabpane >}}
 

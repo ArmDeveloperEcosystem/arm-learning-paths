@@ -45,7 +45,7 @@ cd audio-stale-open-litert
 We now install the needed python packages for this, including *onnx2tf* and *ai_edge_litert*
 
 ```bash
-./install_requirements.sh
+bash install_requirements.sh
 ```
 
 {{% notice %}}
@@ -65,7 +65,7 @@ ImportError: cannot import name 'AttrsDescriptor' from 'triton.compiler.compiler
 Install the following dependency and rerun the script:
 ```bash
 pip install triton==3.2.0
-./install_requirements.sh
+bash install_requirements.sh
 ```
 
 {{% /notice %}}
@@ -119,7 +119,7 @@ To convert the DiT and AutoEncoder submodules, we use the [Generative API](https
 
 Converting the DiT and AutoEncoder submodules using the provided python script
 ```bash
-CUDA_VISIBLE_DEVICES="" python3 ./scripts/export_audiogen.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
+CUDA_VISIBLE_DEVICES="" python3 ./scripts/export_dit_autoencoder.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
 ```
 
 After successful conversion, you now have `dit_model.tflite` and `autoencoder_model.tflite` models in your current directory and can deactive the virtual enviroment

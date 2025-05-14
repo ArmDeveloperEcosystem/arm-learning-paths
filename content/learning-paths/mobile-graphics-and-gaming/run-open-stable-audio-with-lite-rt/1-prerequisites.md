@@ -85,7 +85,7 @@ wget https://github.com/bazelbuild/bazel/releases/download/6.1.1/bazel-7.4.1-ins
 sudo bash bazel-7.4.1-installer-linux-x86_64.sh
   {{< /tab >}}
   {{< tab header="MacOS">}}
-\\TODO
+brew install bazel
   {{< /tab >}}
 {{< /tabpane >}}
 
