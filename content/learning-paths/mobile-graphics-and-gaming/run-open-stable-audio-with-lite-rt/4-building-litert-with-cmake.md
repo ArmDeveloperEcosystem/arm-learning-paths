@@ -37,7 +37,8 @@ mkdir tflite_build && cd tflite_build
 Ensure the NDK_PATH is set to your previously installed Android NDK:
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
-export $PATH=$WORKSPACE/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
+export PATH=$WORKSPACE/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
+export ANDROID_NDK=$WORKSPACE/android-ndk-r25b/
   {{< /tab >}}
   {{< tab header="MacOS">}}
 nano ~/.zshrc
@@ -58,7 +59,12 @@ Configure the cmake build for Android including the correct android api and path
 {{< tabpane code=true >}}
   {{< tab header="Android">}}
 ```console
-cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DTFLITE_HOST_TOOLS_DIR=../flatc-native-build/ ../tensorflow/lite/
+cmake \
+  -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
+  -DANDROID_ABI=arm64-v8a \
+  -DCMAKE_CXX_STANDARD=20 \
+  -DTFLITE_HOST_TOOLS_DIR=../flatc-native-build/ \
+  ../tensorflow/lite/
 cmake --build .
 ```
   {{< /tab >}}
@@ -76,7 +82,7 @@ cmake --build . -j4
 
 
 
- 
+
 
 
 

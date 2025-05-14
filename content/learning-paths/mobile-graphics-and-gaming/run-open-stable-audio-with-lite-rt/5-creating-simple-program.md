@@ -11,10 +11,7 @@ layout: learningpathall
 We can now set up a simple program and build it with CMake, clone the repository into your workspace
 
 ```bash
-cd $WORKSPACE
-git clone https://git.research.arm.com/gen-ai/sai/audio-stale-open-litert/-/tree/main/
-
-cd stable-audio/sao_litert/runner
+cd $WORKSPACE/example-repo/runner
 mkdir build && cd build
 ```
 
@@ -27,7 +24,6 @@ cmake -B build -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain
  	       -DFLATBUFFER_INCLUDE_PATH=$WORKSPACE/tensorflow_src/flatc-native-build/flatbuffers/include
 
 cmake --build build
-
 ```
 
 Once the SAO example built sucessfully, this is a binary file named audiogen_main has been created, we will use adb (Android Debug Bridge) to push the needed example to the device:
