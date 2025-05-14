@@ -32,11 +32,17 @@ export WORKSPACE=$PWD/my-workspace
 
 Download and install [Python version 3.10](https://www.python.org/downloads/release/python-3100/) using the following commands:
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="Linux">}}
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update
-sudo apt install python3.10
-```
+sudo apt install python3.10 python3.10-venv python3.10-pip
+  {{< /tab >}}
+  {{< tab header="MacOS">}}
+brew install python@3.10
+brew link python@3.10 --force
+  {{< /tab >}}
+{{< /tabpane >}}
 
 You can verify the installation and check the version with:
 
@@ -44,21 +50,19 @@ You can verify the installation and check the version with:
 python3.10 --version
 ```
 
-To avoid dependency issues, it's recommended to use a virtual environment. For example, you can use Python’s built-in `venv`:
-
-```bash
-python3.10 -m venv litert-venv
-source litert-venv/bin/activate
-```
-
 ### Install CMake
 
 CMake is an open-source tool that automates the build process for software projects, helping to generate platform-specific build configurations.
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="Linux">}}
 sudo apt update
 sudo apt install cmake
-```
+  {{< /tab >}}
+  {{< tab header="MacOS">}}
+brew install cmake
+  {{< /tab >}}
+{{< /tabpane >}}
 
 You can verify the installation and check the version with:
 
@@ -68,30 +72,50 @@ cmake --version
 
 See the [CMake install guide](/install-guides/cmake/) for troubleshooting instructions.
 
-### Install other dependencies
+### Install Bazel
 
-These packages include essential tools for Python environments, C++ compilation, file handling, and model conversion support:
+Bazel is an open-source build tool which we will use to build LiteRT libraries.
 
-```bash
-sudo apt update
-sudo apt install python3-venv python3-pip g++ unzip protobuf-compiler -y
-```
+{{< tabpane code=true >}}
+  {{< tab header="Linux">}}
+cd $WORKSPACE
+wget https://github.com/bazelbuild/bazel/releases/download/7.4.1/bazel-7.4.1-installer-linux-x86_64.sh
+sudo bash bazel-7.4.1-installer-linux-x86_64.sh
+  {{< /tab >}}
+  {{< tab header="MacOS">}}
+brew install bazel@7
+  {{< /tab >}}
+{{< /tabpane >}}
 
 ### Install Android NDK
 
 To run the model on Android, install Android Native Development Kit (Android NDK):
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="Linux">}}
 cd $WORKSPACE
 wget https://dl.google.com/android/repository/android-ndk-r25b-linux.zip
 unzip android-ndk-r25b-linux.zip
-```
+  {{< /tab >}}
+  {{< tab header="MacOS">}}
+brew install --cask android-studio temurin
+  {{< /tab >}}
+{{< /tabpane >}}
 
-For easier access and execution of Android NDK tools, add these to the `PATH`:
+For easier access and execution of Android NDK tools, add these to the `PATH` and set the `ANDROID_NDK` variable:
 
-```bash
-export PATH=$WORKSPACE/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
+{{< tabpane code=true >}}
+  {{< tab header="Linux">}}
 export ANDROID_NDK=$WORKSPACE/android-ndk-r25b/
-```
+export PATH=$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
+  {{< /tab >}}
+  {{< tab header="MacOS">}}
+nano ~/.zshrc
+export ANDROID_NDK=~/Library/Android/sdk/ndk/27.0.12077973/
+export PATH=$PATH:$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64/bin
+export PATH=$PATH:~/Library/Android/sdk/cmdline-tools/latest/bin
+source ~/.zshrc
+  {{< /tab >}}
+{{< /tabpane >}}
 
-
+Now that your development environment is ready and all pre-requisites installed, you can test the Audio Stable Open model.
