@@ -26,7 +26,6 @@ mkdir my-workspace
 export WORKSPACE=$PWD/my-workspace
 ```
 
-
 ## Install Python 3.10
 
 Download and install [Python version 3.10](https://www.python.org/downloads/release/python-3100/)
@@ -35,7 +34,7 @@ Download and install [Python version 3.10](https://www.python.org/downloads/rele
   {{< tab header="Linux">}}
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update
-sudo apt install python3.10
+sudo apt install python3.10 python3.10-venv python3.10-pip
   {{< /tab >}}
   {{< tab header="MacOS">}}
 brew install python@3.10
@@ -70,7 +69,6 @@ cmake --version
 ```
 
 You can refer to the[CMake install guide](/install-guides/cmake/) for troubleshooting instructions.
-
 
 {{% notice Note %}}
 The instructions were tested with version 3.28.1

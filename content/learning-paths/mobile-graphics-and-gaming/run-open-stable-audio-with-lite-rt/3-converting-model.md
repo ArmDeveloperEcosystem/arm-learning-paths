@@ -14,6 +14,9 @@ layout: learningpathall
 |Diffusion Transformer (DiT)|It takes a random noise, and denoises it through a defined number of steps, to resemble what the conditioners intent.|
 |AutoEncoder|It compresses the input waveforms into a manageable sequence length to be processed by the DiT model. At the end of de-noising step, it decompresses the result into a waveform.|
 
+The submodules work together to provide the pipeline as shown below:
+![Model structure#center](./model.png)
+
 As part of this section, you will covert each of the three submodules into [LiteRT](https://ai.google.dev/edge/litert) format, we will use two separate conversion routes:
 1. Conditioners submodule - ONNX to TFLite using [onnx2tf](https://github.com/PINTO0309/onnx2tf) tool.
 2. DiT and AutoEncoder submodules - PyTorch to TFLite using Google AI Edge Torch tool.
