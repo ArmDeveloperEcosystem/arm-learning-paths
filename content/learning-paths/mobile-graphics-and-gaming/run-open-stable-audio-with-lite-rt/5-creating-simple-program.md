@@ -8,13 +8,10 @@ layout: learningpathall
 
 ## Create and build a simple program
 
-We can now set up a simple program and build it with CMake, clone the repository into your workspace
-
+We now set up a simple program to run the inference on all three submodules on an Android device, this will take in a text prompt and generate an audio file.
+You can clone the needed sample files as follows:
 ```bash
-cd $WORKSPACE
-git clone https://git.research.arm.com/gen-ai/sai/audio-stale-open-litert/-/tree/main/
-
-cd stable-audio/sao_litert/runner
+cd $WORKSPACE/audio-stale-open-litert/runner
 mkdir build && cd build
 ```
 
@@ -46,7 +43,7 @@ Push all necessary files into newly created audiogen folder on Android.
 cd sao_litert
 adb push runner/build/audiogen_main /data/local/tmp/audiogen
 adb push dit.tflite /data/local/tmp/audiogen
-adb push autoencoder.tflite /data/local/tmp/audiogen
+adb push autoencoder_model.tflite /data/local/tmp/audiogen
 adb push conditioners_tflite/conditioners_float32.tflite /data/local/tmp/audiogen
 ```bash
 

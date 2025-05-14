@@ -36,8 +36,9 @@ source env/bin/activate
 
 Clone the examples repository:
 ```text
-git clone example-repo
-cd example-repo
+cd $WORKSPACE
+git clone https://git.research.arm.com/gen-ai/sai/audio-stale-open-litert/-/tree/main/
+cd audio-stale-open-litert
 ```
 
 We now install the needed python packages for this, including *onnx2tf* and *ai_edge_litert*
@@ -51,11 +52,13 @@ We now install the needed python packages for this, including *onnx2tf* and *ai_
 If you are using GPU on your machine, you may notice the following error:
 ```text
 Traceback (most recent call last):
-  File "$WORKSPACE/env/lib/python3.10/site-packages/torch/_inductor/runtime/hints.py", line 46, in <module>
-    from triton.backends.compiler import AttrsDescriptor
-ImportError: cannot import name 'AttrsDescriptor' from 'triton.backends.compiler' ($WORKSPACE/env/lib/python3.10/site-packages/triton/backends/compiler.py)
+  File "$WORKSPACE/env/lib/python3.10/site-packages/torch/_inductor/runtime/hints.py", 
+  line 46, in <module> from triton.backends.compiler import AttrsDescriptor
+ImportError: cannot import name 'AttrsDescriptor' from 'triton.backends.compiler'
+($WORKSPACE/env/lib/python3.10/site-packages/triton/backends/compiler.py)
 .
-ImportError: cannot import name 'AttrsDescriptor' from 'triton.compiler.compiler' ($WORKSPACE/env/lib/python3.10/site-packages/triton/compiler/compiler.py)
+ImportError: cannot import name 'AttrsDescriptor' from 'triton.compiler.compiler'
+($WORKSPACE/env/lib/python3.10/site-packages/triton/compiler/compiler.py)
 ```
 
 Install the following dependency and rerun the script:
@@ -68,7 +71,12 @@ pip install triton==3.2.0
 
 ### Convert Conditioners Submodule
 
-The Conditioners submodule is based on the T5Encoder model. We convert it first to ONNX, then to TFLite.
+The Conditioners submodule is based on the T5Encoder model. We convert it first to ONNX, then to LiteRT.
+
+For this conversion we include the following steps:
+1. Load the Conditioners submodule from the Stable Audio Open model configuration and checkpoint.
+2. Export the Conditioners submodule to ONNX via *torch.onnx.export()*.
+3. Convert the resulting ONNX file to LiteRT using *onnx2tf*.
 
 ```text
 torch.onnx.export(
@@ -98,15 +106,9 @@ Converting the conditioners submodule using the provided python script
 python3 ./scripts/export_conditioners.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
 ```
 
-Once the Conditioners submodule has been converted successfully, deactive the virtual enviroment
-
-```bash
-deactivate
-```
-
+After successfull conversion, you now have a `conditioners.onnx` model in your current directory.
 
 ### Convert DiT and AutoEncoder
-
 
 To convert the DiT and AutoEncoder submodules, we use the [Generative API](https://github.com/google-ai-edge/ai-edge-torch/tree/main/ai_edge_torch/generative/) provided in by the ai-edge-torch tools. This will help us export a generative pytorch model directly to tflite using three main steps: 
 
@@ -116,10 +118,10 @@ To convert the DiT and AutoEncoder submodules, we use the [Generative API](https
 
 Converting the DiT and AutoEncoder submodules using the provided python script
 ```bash
-CUDA_VISIBLE_DEVICES="" python3 ./scripts/export_audiogen.py --model_config "../sao_small_distilled/sao_small_distilled_1_0_config.json" --ckpt_path "../sao_small_distilled/sao_small_distilled_1_0.ckpt" 
+CUDA_VISIBLE_DEVICES="" python3 ./scripts/export_audiogen.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
 ```
 
-Once the DiT and AutoEncoder submodules have been converted successfully, deactive the virtual enviroment
+After successful conversion, you now have `dit_model.tflite` and `autoencoder_model.tflite` models in your current directory and can deactive the virtual enviroment
 
 ```bash
 deactivate

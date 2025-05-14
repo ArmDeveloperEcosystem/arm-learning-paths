@@ -41,13 +41,14 @@ further_reading:
         link: https://stability.ai/news/stable-audio-2-0
         type: documentation
     - resource:
+        title: Fast Text-to-Audio Generation with Adversarial Post-Training 
+        link: https://arxiv.org/abs/2505.08175
+        type: documentation
+    - resource:
         title: Stability AI optimized its audio generation model to run on Arm chips
         link: https://techcrunch.com/2025/03/03/stability-ai-optimized-its-audio-generation-model-to-run-on-arm-chips/
         type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
+
 
 
 
