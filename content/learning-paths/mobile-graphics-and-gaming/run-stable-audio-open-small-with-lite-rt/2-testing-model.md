@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Download the model
 
-Stable Audio Open is an open-source model optimized for generating short audio samples, sound effects, and production elements using text prompts.
+Stable Audio Open Small is an open-source model optimized for generating short audio samples, sound effects, and production elements using text prompts.
 
 [Log in](https://huggingface.co/login) to HuggingFace and navigate to the model landing page:
 

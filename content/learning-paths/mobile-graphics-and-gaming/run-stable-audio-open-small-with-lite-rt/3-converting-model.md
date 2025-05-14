@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Stable Audio Open Small Model
+## Stable Audio Open Small
 
 |Submodule|Description|
 |------|------|
@@ -76,7 +76,7 @@ bash install_requirements.sh
 The Conditioners submodule is based on the T5Encoder model. We convert it first to ONNX, then to LiteRT.
 
 For this conversion we include the following steps:
-1. Load the Conditioners submodule from the Stable Audio Open model configuration and checkpoint.
+1. Load the Conditioners submodule from the Stable Audio Open Small model configuration and checkpoint.
 2. Export the Conditioners submodule to ONNX via *torch.onnx.export()*.
 3. Convert the resulting ONNX file to LiteRT using *onnx2tf*.
 
