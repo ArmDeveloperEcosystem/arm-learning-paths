@@ -74,7 +74,7 @@ See the [CMake install guide](/install-guides/cmake/) for troubleshooting instru
 
 ### Install Bazel
 
-Bazel is an open-source build tool which we will use to build LiteRT libraries.
+Bazel is an open-source build tool which you will use to build LiteRT libraries.
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
