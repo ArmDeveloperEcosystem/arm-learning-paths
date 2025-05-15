@@ -70,7 +70,6 @@ ImportError: cannot import name 'AttrsDescriptor' from 'triton.compiler.compiler
 Reinstall the following dependency:
 ```bash
 pip install triton==3.2.0
-bash install_requirements.sh
 ```
 
 {{% /notice %}}

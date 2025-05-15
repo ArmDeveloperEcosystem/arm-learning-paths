@@ -38,7 +38,6 @@ export PATH=$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
   {{< tab header="MacOS">}}
 export NDK_PATH=~/Library/Android/android-ndk-r25b
 export PATH=$PATH:$NDK_PATH/toolchains/llvm/prebuilt/darwin-x86_64/bin
-export PATH=$PATH:~/Library/Android/sdk/cmdline-tools/latest/bin
   {{< /tab >}}
 {{< /tabpane >}}
 {{% /notice  %}}
