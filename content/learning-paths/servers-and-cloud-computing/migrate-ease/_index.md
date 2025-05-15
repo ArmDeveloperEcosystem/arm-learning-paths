@@ -1,19 +1,19 @@
 ---
-title: Migrate Applications to Arm based Servers Using migrate-ease
+title: Migrate Applications to Arm Servers using migrate-ease
 
 draft: true
 cascade:
     draft: true
-    
+
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for software developers looking to migrate their applications to Arm-based servers using a code analysis tool called migrate-ease. You can leverage this tool to identify  code portability to Arm challenges early in the migration process.
+who_is_this_for: This is an introductory topic for software developers looking to migrate their applications to Arm-based servers using a code analysis tool called migrate-ease. You can leverage this tool to scan source code repositories to identify porting issues you might encounter before migrating your code to run on Arm-based servers.
 
 
 learning_objectives:
-    - Analyze your application source code for architecture-specific dependencies
-    - Understand common migration challenges and solutions
-    - Use migrate-ease to identify and prioritize portability issues
+    - Examine your application's source code for architecture-specific dependencies
+    - Understand common migration challenges and their corresponding solutions
+    - Use migrate-ease to detect and address AArch64 code portability concerns
 
 prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
@@ -41,10 +41,6 @@ further_reading:
         title: AWS Graviton Getting Started
         link: https://github.com/aws/aws-graviton-getting-started
         type: documentation
-    - resource:
-        title: AWS Graviton Processors
-        link: https://dev.to/aws-builders/aws-graviton-processors-3nk3
-        type: blog
     - resource:
         title: Arm Cloud Migration Program
         link: https://www.arm.com/markets/computing-infrastructure/arm-cloud-migration
