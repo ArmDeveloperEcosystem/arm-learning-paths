@@ -19,7 +19,7 @@ Your first task is to prepare a development environment with the required softwa
 
 ### Create workspace directory
 
-Create a separate directory for all dependencies and repositories that this Learning Path uses.
+Create a separate directory for all the dependencies and repositories that this Learning Path uses.
 
 Export the `WORKSPACE` variable to point to this directory, which you will use in the following steps:
 
@@ -118,4 +118,4 @@ export PATH=$PATH:~/Library/Android/sdk/cmdline-tools/latest/bin
   {{< /tab >}}
 {{< /tabpane >}}
 
-Now that your development environment is ready and all pre-requisites installed, you can test the Audio Stable Open Small model.
+Now that your development environment is ready and all the prerequisites are installed, you can move on to test the Stable Audio Open Small model.

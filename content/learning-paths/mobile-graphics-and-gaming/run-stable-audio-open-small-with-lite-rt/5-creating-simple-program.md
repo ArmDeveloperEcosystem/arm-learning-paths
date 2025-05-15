@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Create and build a simple program
 
-As a final step, you'll now build a simple program that runs inference on all three submodules directly on an Android device.
+As a final step, you’ll build a simple program that runs inference on all three submodules directly on an Android device.
 
 The program takes a text prompt as input and generates an audio file as output.
 
@@ -45,7 +45,9 @@ Verify this model was downloaded to your `WORKSPACE`.
 ls $WORKSPACE/spiece.model
 ```
 
-Connect your Android device to your development machine using a cable. adb (Android Debug Bridge) is available as part of the Android SDK. You should see your device on running the following command.
+Connect your Android device to your development machine using a cable. adb (Android Debug Bridge) is available as part of the Android SDK. 
+
+You should see your device listed when you run the following command:
 
 ```bash
 adb devices
@@ -82,7 +84,7 @@ LD_LIBRARY_PATH=. ./audiogen . "warm arpeggios on house beats 120BPM with drums 
 exit
 ```
 
-The successful execution of the app will create `output.wav` of your chosen audio defined by the prompt, you can pull it back to your host machine and enjoy!
+You can now pull the generated `output.wav` back to your host machine and listen to the result.
 
 ```bash
 adb pull /data/local/tmp/app/output.wav

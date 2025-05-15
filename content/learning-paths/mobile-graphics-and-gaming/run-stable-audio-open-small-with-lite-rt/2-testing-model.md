@@ -30,7 +30,7 @@ You can learn more about this model [here](https://huggingface.co/stabilityai/st
 
 ### Good prompting practices
 
-A good prompt for this audio generation model can include:
+A good prompt for the Stable Audio Open Small model can include the following elements:
 
 * Music genre and subgenre.
 * Musical elements (texture, rhythm and articulation).
@@ -41,5 +41,5 @@ The order of prompt parameters matters. For more information, see the [Prompt st
 
 You can explore training and inference code for audio generation models in the [Stable Audio Tools repository](https://github.com/Stability-AI/stable-audio-tools).
 
-Now that you've downloaded the model, continue to the next section to convert the model to LiteRT.
+Now that you've downloaded the model, you're ready to convert it to LiteRT format in the next step.
 

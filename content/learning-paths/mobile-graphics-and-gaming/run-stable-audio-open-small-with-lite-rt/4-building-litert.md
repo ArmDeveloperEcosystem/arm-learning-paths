@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## LiteRT
 
-LiteRT (short for Lite Runtime), formerly known as TensorFlow Lite, is Google's high-performance runtime for on-device AI. Designed for low-latency, resource-efficient execution, LiteRT is optimized for mobile and embedded environments — making it a natural fit for Arm CPUs running models lite Stable Audio Open Small. You will build the runtime using the framework using the Bazel build tool.
+LiteRT (short for Lite Runtime), formerly known as TensorFlow Lite, is Google's high-performance runtime for on-device AI. Designed for low-latency, resource-efficient execution, LiteRT is optimized for mobile and embedded environments — making it a natural fit for Arm CPUs running models like Stable Audio Open Small. You’ll build the runtime using the Bazel build tool.
 
 ## Build LiteRT libraries
 
@@ -81,7 +81,7 @@ cmake ../tensorflow/lite/tools/cmake/native_tools/flatbuffers
 cmake --build .
 ```
 
-With flatbuffers and LiteRT built, you can now build the application for Android devices.
+Now that LiteRT and FlatBuffers are built, you're ready to compile and deploy the Stable Audio Open Small inference application on your Android device.
 
 
 
