@@ -26,9 +26,11 @@ Download and copy the configuration file `model_config.json` and the model itsel
 ls $WORKSPACE/model_config.json $WORKSPACE/model.ckpt
 ```
 
-You can see more information about this model [here](https://huggingface.co/stabilityai/stable-audio-open-small).
+You can learn more about this model [here](https://huggingface.co/stabilityai/stable-audio-open-small).
 
-A good prompt for this model can include:
+### Good prompting practices
+
+A good prompt for this audio generation model can include:
 
 * Music genre and subgenre.
 * Musical elements (texture, rhythm and articulation).
