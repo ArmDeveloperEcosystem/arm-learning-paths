@@ -1,5 +1,5 @@
 ---
-title: Build the MNN Android Demo with GUI
+title: Environment setup and prepare model
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -9,7 +9,7 @@ layout: learningpathall
 
 In this section, you'll set up your development environment by installing dependencies and preparing the Qwen vision model.
 
-Install the Android NDK (Native Development Kit) and git-lfs. This Learning Path was tested with NDK version `28.0.12916984` and CMake version `3.31.6`.
+Install the Android NDK (Native Development Kit) and git-lfs. This Learning Path was tested with NDK version `28.0.12916984` and CMake version `4.0.0-rc1`.
 
 For Ubuntu or Debian systems, install CMake and git-lfs with the following commands:
 
@@ -18,9 +18,9 @@ sudo apt update
 sudo apt install cmake git-lfs -y
 ```
 
-You can use Android Studio to obtain the NDK.
+You can use Android Studio to obtain the NDK. 
 
-Click **Tools > SDK Manager** and navigate to the **SDK Tools** tab.
+Click **Tools > SDK Manager** and navigate to the **SDK Tools** tab. 
 
 Select the **NDK (Side by side)** and **CMake** checkboxes, as shown below:
 
@@ -48,7 +48,7 @@ If Python 3.x is not the default version, try running `python3 --version` and `p
 
 ## Set up Phone Connection
 
-You need to set up an authorized connection with your phone. The Android SDK Platform Tools package, included with Android Studio, provides Android Debug Bridge (ADB) for transferring files.
+You need to set up an authorized connection with your phone. The Android SDK Platform Tools package, included with Android Studio, provides Android Debug Bridge (ADB) for transferring files. 
 
 Connect your phone to your computer using a USB cable, and enable USB debugging on your phone. To do this, tap the **Build Number** in your **Settings** app 7 times, then enable **USB debugging** in **Developer Options**.
 
@@ -65,9 +65,18 @@ List of devices attached
 <DEVICE ID>     device
 ```
 
-## Download and Convert the Model
+## Download the quantized Model
 
-The following commands download the model from Hugging Face, and clone a tool for exporting the LLM model to the MNN framework.
+The pre-quantized model is available in Hugging Face, you can download with the following command:
+
+```bash
+git lfs install
+git clone https://huggingface.co/taobao-mnn/Qwen2.5-VL-3B-Instruct-MNN
+git checkout 9057334b3f85a7f106826c2fa8e57c1aee727b53
+```
+
+## (Optional) Download and Convert the Model
+If you need to quantize the model with customized parameter, the following commands download the model from Hugging Face, and clone a tool for exporting the LLM model to the MNN framework.
 
 ```bash
 cd $HOME
@@ -95,11 +104,13 @@ To learn more about the parameters, see the [transformers README.md](https://git
 
 Verify that the model was built correctly by checking that the `Qwen2-VL-2B-Instruct-convert-4bit-per_channel` directory is at least 1 GB in size.
 
+## Push the model to Android device
+
 Push the model onto the device:
 
 ```shell
 adb shell mkdir /data/local/tmp/models/
-adb push Qwen2-VL-2B-Instruct-convert-4bit-per_channel /data/local/tmp/models
+adb push Qwen2.5-VL-3B-Instruct-MNN /data/local/tmp/models
 ```
 
-With the model set up, you're ready to use Android Studio to build and run an example application.
+With the model set up, you're ready to build and run an example application.
