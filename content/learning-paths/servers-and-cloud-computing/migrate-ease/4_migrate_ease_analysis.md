@@ -1,23 +1,23 @@
 ---
 # User change
-title: "Interpreting Analysis Results with a Real Example"
+title: "An example of running migrate-ease"
 
 weight: 5
 
 layout: "learningpathall"
 
 ---
-### Example from a real-world case
-[Protobuf](https://github.com/protocolbuffers/protobuf) is a widely used library for serializing structured data. AArch64 support is introduced in version v3.5.0 released in November 2017. Version v2.5.0 is a popular version without AArch64 support.
+### Example use case
+In this section, you will use the tool to scan the source code for [Protobuf](https://github.com/protocolbuffers/protobuf), a widely used library for serializing structured data. AArch64 support was Protobuf was introduced in version `v3.5.0` released in November 2017. For the purposes of demonstrating the usage of this tool, you will use an older version `v2.5.0` of Protobuf which lacks AArch64 support.
 
-Use migrate-ease to scan protobuf v2.5.0 with JSON result output:
-```
+Use `migrate-ease` to scan protobuf v2.5.0 and output the results to a JSON file named `result.json`:
+```bash
 python3 -m cpp --git-repo https://github.com/protocolbuffers/protobuf.git --branch v2.5.0 --output result.json --arch aarch64 protobuf
 ```
-A json file, `result.json`, will be generated in current directory once the scan is successfully executed.
+The output `result.json`, will be generated in your current directory once the scan is successfully executed.
 
-### How to read the result
-The JSON result is organized as following format:
+### How to interpret the results?
+Open the `result.json` file. You will see it is organized in the following format:
 ```output
 {
     "arch": "aarch64",
@@ -113,12 +113,11 @@ The JSON result is organized as following format:
     "total_issue_count": 14
 }
 ```
-The items in result are well self-explained along with their keys.
-User needs to check `issue_summary` and `issues` to uncover what potential problems are and suggested solutions.
+You will need to check `issue_summary` and `issues` for the potential porting to AArch64 problems along with the suggested solutions.
 
-The `issue_summary` provides an overview of the types of issues that the current scanner supports, along with the corresponding number of issues. For `cpp` scanner, the available issue types are:
+The `issue_summary` provides an overview of the types of issues that the current scanner supports, along with the corresponding number of issues found. 
 
-For each of programming Languages, the available issue types are:
+For each of the programming languages, the issue types are listed on the table:
 {{< tabpane code=true >}}
   {{< tab header="C++, C">}}
 Name                    | Description
@@ -185,7 +184,7 @@ Plugin             | A package used in RUN, CMD or ENTRYPOINT does not support A
   {{< /tab >}}
 {{< /tabpane >}}
 
-The `issues` is a list of those detected issues with details for each of them.
+The `issues` is a list of those detected issues with details for each:
 - `checkpoint`: A pattern to identify potential incompatibility.
 - `description`: The description of the detected issue.
 - `filename`: The file in which issue is detected.
@@ -193,4 +192,6 @@ The `issues` is a list of those detected issues with details for each of them.
 - `lineno`: The line number of the problematic code.
 - `snippet`: The block of the problematic code.
 
-For more information about issue type information perf review [migrate-ease github](https://github.com/migrate-ease/migrate-ease/blob/main/README.md).
+For more information about issue types refer to [migrate-ease github](https://github.com/migrate-ease/migrate-ease/blob/main/README.md).
+
+You have successfully learnt how to install and use the `migrate-ease` scanner tools. You can now use it to scan your source code repositories to identify compatibility issues for aarch64 and use the provided recommendations for porting your code to Arm.
