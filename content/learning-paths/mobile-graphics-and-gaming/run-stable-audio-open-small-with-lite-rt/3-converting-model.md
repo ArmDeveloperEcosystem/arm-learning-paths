@@ -5,11 +5,11 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-In this section, you will learn about the audio generation model. You will then clone a repository to run conversion steps, which is needed to generate the inference application.
+In this section, you will learn about the audio generation model. You will then clone a repository that contains the scripts required to convert the model submodules into LiteRT format and generate the inference application.
 
 ## Stable Audio Open Small
 
-The open-sourced model includes three main parts. They are described in the table below, and come together through the pipeline shown in the image.
+The open-source model consists of three main submodules. They are described in the table below, and come together through the pipeline shown in the image.
 
 |Submodule|Description|
 |------|------|
@@ -47,7 +47,7 @@ git clone https://github.com/ARM-software/ML-examples.git
 cd ML-examples/kleidiai-examples/audiogen/
 ```
 
-Install the needed Python packages for this, including *onnx2tf* and *ai_edge_litert*
+Install the required Python packages for this, including *onnx2tf* and *ai_edge_litert*
 
 ```bash
 bash install_requirements.sh
@@ -78,7 +78,7 @@ pip install triton==3.2.0
 
 The Conditioners submodule is based on the T5Encoder model. First, convert it to ONNX, then to LiteRT.
 
-For this conversion, the following steps are needed:
+For this conversion, the following steps are required:
 1. Load the Conditioners submodule from the Stable Audio Open Small model configuration and checkpoint.
 2. Export the Conditioners submodule to ONNX via *torch.onnx.export()*.
 3. Convert the resulting ONNX file to LiteRT using *onnx2tf*.
@@ -109,9 +109,9 @@ python3 ./scripts/export_dit_autoencoder.py --model_config "$WORKSPACE/model_con
 
 After successful conversion, you now have `dit_model.tflite` and `autoencoder_model.tflite` models in your current directory.
 
-A more detailed explanation of the above scripts is available [here](https://github.com/ARM-software/ML-examples/blob/main/kleidiai-examples/audiogen/scripts/README.md)
+A more detailed explanation of the above scripts is available [here](https://github.com/ARM-software/ML-examples/blob/main/kleidiai-examples/audiogen/scripts/README.md).
 
-For easy access, add all needed models to one directory:
+For easy access, add all the required models to one directory:
 
 ```bash
 export LITERT_MODELS_PATH=$WORKSPACE/litert-models
@@ -121,7 +121,7 @@ cp dit_model.tflite $LITERT_MODELS_PATH
 cp autoencoder_model.tflite $LITERT_MODELS_PATH
 ```
 
-With all three submodules converted to LiteRT format, you're ready to build LiteRT and run the model on a mobile device in the next step.
+With all three submodules now converted to LiteRT format, you're ready to build the runtime and run Stable Audio Open Small directly on an Android device in the next step.
 
 
 
