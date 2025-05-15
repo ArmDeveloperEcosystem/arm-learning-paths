@@ -6,9 +6,10 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for developers looking to deploy the Stable Audio Open Small text-to-audio model using LiteRT on an Android device.
 
 learning_objectives:
-    - Download  and learn about the Stable Audio Open Small.
-    - Create a simple application to generate audio.
+    - Download and test the Stable Audio Open Small model. 
+    - Convert the Stable Audio Open Small model to the LiteRT (.tflite) format.
     - Compile the application for an Arm CPU.
+    - Create a simple application that generates audio. 
     - Run the application on an Android smartphone and generate an audio snippet.
 
 prerequisites:

@@ -1,5 +1,5 @@
 ---
-title: Convert Open Stable Audio Small model to LiteRT
+title: Convert Stable Audio Open Small model to LiteRT
 weight: 4
 
 ### FIXED, DO NOT MODIFY
