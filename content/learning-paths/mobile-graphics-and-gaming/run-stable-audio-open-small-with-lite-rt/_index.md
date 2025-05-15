@@ -7,10 +7,9 @@ who_is_this_for: This is an introductory topic for developers looking to deploy 
 
 learning_objectives:
     - Deploy the Stable Audio Open Small model on Android using LiteRT.
-    - Build a simple program to generate audio.
-    - Compile the application and for an Arm CPU.
+    - Create a simple application to generate audio.
+    - Compile the application for an Arm CPU.
     - Run the application on an Android smartphone and generate an audio snippet.
-
 
 prerequisites:
     - A Linux-based x86 or macOS development machine with at least 8 GB of RAM (tested on Ubuntu 20.04.4 LTS with x86_64).
@@ -38,9 +37,9 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: Introducing Stable Audio 2.0
-        link: https://stability.ai/news/stable-audio-2-0
-        type: documentation
+        title: Stability AI and Arm Collaborate to Release Stable Audio Open Small, Enabling Real-World Deployment for On-Device Audio Generation
+        link: https://stability.ai/news/stability-ai-and-arm-release-stable-audio-open-small-enabling-real-world-deployment-for-on-device-audio-control
+        type: blog
     - resource:
         title: Stability AI optimized its audio generation model to run on Arm chips
         link: https://techcrunch.com/2025/03/03/stability-ai-optimized-its-audio-generation-model-to-run-on-arm-chips/

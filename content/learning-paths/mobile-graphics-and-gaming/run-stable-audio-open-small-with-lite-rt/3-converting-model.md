@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Stable Audio Open Small Model
+## Stable Audio Open Small
 
 |Submodule|Description|
 |------|------|
@@ -17,9 +17,11 @@ layout: learningpathall
 The submodules work together to provide the pipeline as shown below:
 ![Model structure#center](./model.png)
 
-As part of this section, you will covert each of the three submodules into [LiteRT](https://ai.google.dev/edge/litert) format, using two separate conversion routes:
-1. Conditioners submodule - ONNX to LiteRT using [onnx2tf](https://github.com/PINTO0309/onnx2tf) tool.
-2. DiT and AutoEncoder submodules - PyTorch to LiteRT using Google AI Edge Torch tool.
+As part of this section, we will explore two different conversion routes, to convert the submodules to [LiteRT](https://ai.google.dev/edge/litert) format.
+
+1. ONNX --> LiteRT using the onnx2tf tool. This is the traditional two-step approach (PyTorch --> ONNX--> LiteRT). We will use it to convert the Conditioners submodule.
+
+2. PyTorch --> LiteRT using the Google AI Edge Torch tool. We will use this tool to convert the DiT and AutoEncoder submodules.
 
 ### Create virtual environment and install dependencies
 
@@ -37,8 +39,8 @@ Clone the examples repository:
 
 ```bash
 cd $WORKSPACE
-git clone https://github.com/ARM-software/ML-examples/tree/main/kleidiai-examples/audiogen
-cd audio-stale-open-litert
+git clone https://github.com/ARM-software/ML-examples.git
+cd ML-examples/kleidiai-examples/audiogen/
 ```
 
 We now install the needed python packages for this, including *onnx2tf* and *ai_edge_litert*
@@ -61,10 +63,9 @@ ImportError: cannot import name 'AttrsDescriptor' from 'triton.compiler.compiler
 ($WORKSPACE/env/lib/python3.10/site-packages/triton/compiler/compiler.py)
 ```
 
-Install the following dependency and rerun the script:
+Reinstall the following dependency:
 ```bash
 pip install triton==3.2.0
-bash install_requirements.sh
 ```
 
 {{% /notice %}}
@@ -74,7 +75,7 @@ bash install_requirements.sh
 The Conditioners submodule is based on the T5Encoder model. We convert it first to ONNX, then to LiteRT.
 
 For this conversion we include the following steps:
-1. Load the Conditioners submodule from the Stable Audio Open model configuration and checkpoint.
+1. Load the Conditioners submodule from the Stable Audio Open Small model configuration and checkpoint.
 2. Export the Conditioners submodule to ONNX via *torch.onnx.export()*.
 3. Convert the resulting ONNX file to LiteRT using *onnx2tf*.
 
@@ -84,7 +85,9 @@ You can use the provided script to convert the Conditioners submodule:
 python3 ./scripts/export_conditioners.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
 ```
 
-After successful conversion, you now have a `conditioners.onnx` model in your current directory.
+After successful conversion, you now have a `tflite_conditioners` directory containing models with different precisions (e.g., float16, float32).
+
+We will be using the float32.tflite model for on-device inference.
 
 ### Convert DiT and AutoEncoder
 
@@ -96,14 +99,12 @@ To convert the DiT and AutoEncoder submodules, use the [Generative API](https://
 
 Convert the DiT and AutoEncoder submodules using the provided python script:
 ```bash
-CUDA_VISIBLE_DEVICES="" python3 ./scripts/export_dit_autoencoder.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
+python3 ./scripts/export_dit_autoencoder.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
 ```
 
-After successful conversion, you now have `dit_model.tflite` and `autoencoder_model.tflite` models in your current directory and can deactivate the virtual environment:
+After successful conversion, you now have `dit_model.tflite` and `autoencoder_model.tflite` models in your current directory.
 
-```bash
-deactivate
-```
+More detailed explanation of the above scripts is available [here](https://github.com/ARM-software/ML-examples/blob/main/kleidiai-examples/audiogen/scripts/README.md)
 
 For easier access, we add all needed models to one directory:
 

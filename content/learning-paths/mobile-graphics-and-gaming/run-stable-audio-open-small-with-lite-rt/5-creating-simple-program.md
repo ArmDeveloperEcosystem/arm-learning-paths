@@ -12,7 +12,7 @@ You'll now build a simple program that runs inference on all three submodules di
 
 The program takes a text prompt as input and generates an audio file as output.
 ```bash
-cd $WORKSPACE/audio-stale-open-litert/app
+cd $WORKSPACE/ML-examples/kleidiai-examples/audiogen/app
 mkdir build && cd build
 ```
 
@@ -26,34 +26,22 @@ cmake -DCMAKE_TOOLCHAIN_FILE=$NDK_PATH/build/cmake/android.toolchain.cmake \
       -DFLATBUFFER_INCLUDE_PATH=$TF_SRC_PATH/flatc-native-build/flatbuffers/include \
     ..
 
-cmake --build . -j1
+make -j
 ```
+After the example application builds successfully, a binary file named `audiogen` is created.
 
-Since the tokenizer used in the audiogen application is based on SentencePiece, you’ll need to download the spiece.model file from:
+A SentencePiece model is a type of subword tokenizer which is used by the audiogen application, you’ll need to download the *spiece.model* file from:
 ```bash
 https://huggingface.co/google-t5/t5-base/tree/main
 ```
-we will save this model in `WORKSPACE` for ease of access.
+we will save this model in `WORKSPACE` for ease of access
 ```text
-cp spiece.moel $WORKSPACE
-```
-After the SAO example builds successfully, a binary file named `audiogen_main` is created.
-
-Now use adb (Android Debug Bridge) to push the necessary files to the device:
-
-```bash
-adb shell
+cp spiece.model $WORKSPACE
 ```
 
-Create a directory for all the required resources:
+Now use adb (Android Debug Bridge) to push all necessary files into the `audiogen` folder on Android device:
 ```bash
-cd /data/local/tmp
-mkdir audiogen
-exit
-```
-Push all necessary files into the `audiogen` folder on Android:
-```bash
-cd $WORKSPACE/audio-stale-open-litert/app/build
+cd $WORKSPACE/ML-examples/kleidiai-examples/audiogen/app/build
 adb shell mkdir -p /data/local/tmp/app
 adb push audiogen /data/local/tmp/app
 adb push $LITERT_MODELS_PATH/conditioners_float32.tflite /data/local/tmp/app
@@ -68,6 +56,7 @@ Finally, run the program on your Android device:
 adb shell
 cd /data/local/tmp/app
 LD_LIBRARY_PATH=. ./audiogen . "warm arpeggios on house beats 120BPM with drums effect" 4
+exit
 ```
 
 The successful execution of the app will create `output.wav` of your chosen audio defined by the prompt, you can pull it back to your host machine and enjoy!
