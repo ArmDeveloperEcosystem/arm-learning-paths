@@ -1,22 +1,19 @@
 ---
-title: Migrate Applications to Arm Servers using migrate-ease
+title: Migrate applications to Arm servers using migrate-ease
 
-draft: true
-cascade:
-    draft: true
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for software developers looking to migrate their applications to Arm-based servers using a code analysis tool called migrate-ease. You can leverage this tool to scan source code repositories to identify porting issues you might encounter before migrating your code to run on Arm-based servers.
+who_is_this_for: This is an introductory topic for developers looking to migrate applications to Arm-based servers. You’ll learn to use migrate-ease, a code analysis tool that scans source code repositories to identify architecture-specific porting issues before migration.
 
 
 learning_objectives:
-    - Examine your application's source code for architecture-specific dependencies
-    - Understand common migration challenges and their corresponding solutions
-    - Use migrate-ease to detect and address AArch64 code portability concerns
+    - Identify architecture-specific dependencies in your application's source code.
+    - Recognize common migration challenges and how to resolve them.
+    - Use migrate-ease to detect and address AArch64 portability issues.
 
 prerequisites:
-    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
+    - Access to an [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) for testing and validation.
 
 author: 
     - Odin Shen
@@ -30,8 +27,7 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - Coding
-    - Neon
+    - NEON
     - SVE
     - Go
     - Runbook
@@ -46,7 +42,7 @@ further_reading:
         link: https://www.arm.com/markets/computing-infrastructure/arm-cloud-migration
         type: website
     - resource:
-        title: Migrating applications to Arm servers
+        title: Migrating Applications to Arm Servers
         link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/migration/
         type: website
 

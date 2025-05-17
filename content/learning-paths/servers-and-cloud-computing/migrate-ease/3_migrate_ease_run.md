@@ -28,19 +28,19 @@ sudo dnf install -y python3 python3-pip unzip git
 
 ## Install and setup
 
-Start by checking out the repository with the tool's source code:
+Clone the repository with the tool's source code:
 ```bash
 git clone https://github.com/migrate-ease/migrate-ease
 cd migrate-ease 
 ```
 
-At the root directory of migrate-ease, create and activate a python virtual environment:
+At the root directory of migrate-ease, create and activate a Python virtual environment:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-Install the python packages dependencies and set the environment variable to point to it:
+Install the Python packages dependencies and set the environment variable to point to it:
 ```bash
 pip3 install -r requirements.txt
 export PYTHONPATH=`pwd`
@@ -68,7 +68,7 @@ Here's an explanation of each of the arguments passed to the scanner tool:
 
 **Parameters**
 
-`{scanner_name}`: The name of the scanner, which can be one of cpp, docker, go, java, python or rust.
+`{scanner_name}`: The name of the scanner, which can be one of cpp, docker, go, java, Python or rust.
 
 `{result_file_name}`: The name of the exported results file (without the extension).
 
@@ -86,16 +86,16 @@ There are more parameters for user to control the scan functionality. To see thi
 ```bash
 python3 -m {scanner_name} -h
 ```
-Replace {scanner_name} with either cpp, docker, go, java, python or rust.
+Replace {scanner_name} with either cpp, docker, go, java, Python or rust.
 
 ### As Web UI
-Migrate-ease also provides a Web UI that supports scanning a git repo with cpp, docker, go, java, python and rust scanners in one time.
+Migrate-ease also provides a Web UI that supports scanning a git repo with cpp, docker, go, java, Python and rust scanners in one time.
 To start the web server, simply run:
 ```
 python3 web/server.py
 ```
 
-Once that is successfully done, you can access a web server hosted at http://localhost:8080
+Once the server is running, you can access a web server hosted at http://localhost:8080
 
 The web UI looks as following:
 ![example image alt-text#center](web_ui_index.jpg "Figure 1. Web UI to scan a git repo")
