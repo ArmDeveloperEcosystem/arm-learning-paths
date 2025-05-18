@@ -13,7 +13,7 @@ layout: "learningpathall"
 [Migrate-ease](https://github.com/migrate-ease/) is a fork of [Porting Advisor](https://github.com/arm-hpc/porting-advisor), an open-source project developed by the Arm High Performance Computing Group. It is maintained by the [OpenAnolis](https://github.com/openanolis) Arm Working Group.
 
 
-Migrate-ease is designed to analyze codebases targeting `x86_64` architectures and offers tailored suggestions to facilitate migration to AArch64. The tool currently only supports migration to Linux-based environments and can be run on either `x86_64` or Arm (AArch64) Linux machines. 
+Migrate-ease is designed to analyze codebases targeting `x86_64` architectures and offers tailored suggestions to facilitate migration to AArch64. The tool currently only supports migration to Linux-based environments and can be run on either `x86_64` or Arm AArch64 Linux machines. 
 
 Migrate-ease is a read-only tool - it does not modify your code. It analyzes your source tree and provides architecture-aware recommendations. It does not provide API-level guidance, and it does not transmit data back to OpenAnolis.
 

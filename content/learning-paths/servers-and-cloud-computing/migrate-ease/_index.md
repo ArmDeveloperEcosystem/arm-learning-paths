@@ -4,7 +4,7 @@ title: Migrate applications to Arm servers using migrate-ease
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for developers looking to migrate applications to Arm-based servers. You’ll learn to use migrate-ease, a code analysis tool that scans source code repositories to identify architecture-specific porting issues before migration.
+who_is_this_for: This is an introductory topic for developers looking to migrate applications to Arm-based servers using migrate-ease, a code analysis tool that scans source code repositories to identify architecture-specific porting issues before migration.
 
 
 learning_objectives:
