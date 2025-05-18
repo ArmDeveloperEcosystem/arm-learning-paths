@@ -14,7 +14,7 @@ Migrating applications to Arm-based architectures is increasingly common across 
 
 However, porting workloads from one CPU architecture to another often requires more than simple recompilation. While many applications transition smoothly, others contain architecture-specific code or dependencies – originally developed for x86 – that can lead to build failures, runtime errors, or performance degradation on Arm systems.
 
-Common challenges include detecting:
+Common challenges include issues with:
 * Hardcoded x86 SIMD intrinsics.
 * Inline assembly.
 * Platform-specific system calls.

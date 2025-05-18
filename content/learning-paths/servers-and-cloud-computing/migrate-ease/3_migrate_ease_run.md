@@ -7,12 +7,7 @@ weight: 4
 layout: "learningpathall"
 
 ---
-
-# Migrate-ease
-
-[migrate-ease](https://github.com/migrate-ease/migrate-ease) is an open-source tool that analyzes `x86_64` codebases and provides targeted suggestions to help you migrate to AArch64. It streamlines the transition, so your software can leverage the benefits of AArch64 architecture.
-
-## Prerequisites
+## Set up your environment
 Before using `migrate-ease`, install the following system dependencies:
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu 22.04">}}
@@ -25,8 +20,6 @@ sudo apt-get install -y python3 python3-pip python3-venv unzip libmagic1 git
 sudo dnf install -y python3 python3-pip unzip git
   {{< /tab >}}
 {{< /tabpane >}}
-
-## Install and set up
 
 Clone the repository:
 ```bash
@@ -52,7 +45,7 @@ You can use `migrate-ease` from the command-line or through a Web GUI.
  
 ### Command-line usage
  
-You can use the tool to scan your local codebases with different programming languages. By default, the result from the code analysis is sent to console.
+You can scan local codebases written in a supported programming languages. By default, scan results from the code analysis are sent to the console.
 
 ```bash
 python3 -m {scanner_name} --arch {arch} {scan_path}
@@ -72,11 +65,11 @@ Here's an explanation of each of the arguments passed to the scanner tool:
 
 `{result_file_name}`: The name of the exported results file (without the extension).
 
-`{arch}`: The architecture type, `aarch64` is the default.
+`{arch}`: The architecture type; `aarch64` is the default.
 
-`{scan_path}`: The path to the code that needs to be scanned.
+`{scan_path}`: The path to the code you want to scan.
 
-You can scan a remote git repository code base as well by passing the URL as shown in the example:
+To scan a remote Git repository:
 ```bash
 python3 -m {scanner_name} --output {result_file_name}.json --arch {arch} --git-repo {repo} {clone_path}
 ```
@@ -88,7 +81,7 @@ python3 -m {scanner_name} -h
 ```
 Replace {scanner_name} with either cpp, docker, go, java, Python or rust.
 
-### As Web UI
+### GUI
 Migrate-ease also provides a Web UI that supports scanning a git repo with cpp, docker, go, java, Python and rust scanners in one time.
 To start the web server, simply run:
 ```
@@ -97,12 +90,12 @@ python3 web/server.py
 
 Once the server is running, you can access a web server hosted at http://localhost:8080
 
-The web UI looks as following:
-![example image alt-text#center](web_ui_index.jpg "Figure 1. Web UI to scan a git repo")
+The web UI looks like this:
+![example image alt-text#center](web_ui_index.jpg "Web UI to scan a git repo")
 
-A git repo URL is required, and you can specify certain branch name to scan. Once the necessary information is filled, user can click "START SCAN" button to proceed project scanning.
+A git repo URL is required, and you can specify certain branch name to scan. Once the necessary information is filled, you can click the **START SCAN** button to proceed project scanning.
 
-Scanning progress will be shown in the console pane. Once all jobs are done, user will see a web page as following:
-![example image alt-text#center](web_ui_result.jpg "Figure 2. Web UI of scan result")
+Scanning progress is then shown in the console pane. Once all the jobs are done, you will see a web page like this:
+![example image alt-text#center](web_ui_result.jpg "Web UI of scan result")
 
-You can download the result by clicking the "download" icon or view the result by clicking the "eye" icon.
+You can download the result by clicking the symbolic download icon button, or view the result by clicking the icon which looks like an eye.

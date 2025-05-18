@@ -1,6 +1,6 @@
 ---
 # User change
-title: "An example of running migrate-ease"
+title: "Try it out"
 
 weight: 5
 
@@ -19,7 +19,7 @@ python3 -m cpp --git-repo https://github.com/protocolbuffers/protobuf.git --bran
 The scan will generate a file called `result.json` in your current directory.
 
 ### How to interpret the results
-Open the `result.json` file. It contains structured output like the following:
+Open the `result.json` file. It contains structured output similar to this:
 ```output
 {
     "arch": "aarch64",
@@ -115,11 +115,13 @@ Open the `result.json` file. It contains structured output like the following:
     "total_issue_count": 14
 }
 ```
-The `issue_summary` section provides a high-level overview of AArch64 compatibility issues found. The `issues` array lists each specific issue found, for each issue, including file name, line number, and a description.
+
+* The `issue_summary` section provides a high-level overview of AArch64 compatibility issues found. 
+* The `issues` array lists each issue, including the file, line number, description, and a code snippet.
 
 ### Issue type definitions
 
-For each of the programming languages, the issue types are listed on the table:
+Each supported language has its own set of issue types. The tables below describe these by category:
 {{< tabpane code=true >}}
   {{< tab header="C++, C">}}
 Name                    | Description
@@ -180,19 +182,21 @@ RustLinkLibrary   | Use of libraries that are incompatible with the AArch64 arch
   {{< tab header="Dockerfile">}}
 Name               | Description
 -------------------|-----------------------------------------------------------------------------------------------------
-ConfigurationInfo  | Configuration parameter used in ENV, ARG or LABEL refer an architecture that could not be supported.
+ConfigurationInfo  | Configuration parameter used in ENV, ARG or LABEL refers to an architecture that could not be supported.
 Image              | A base image is used that might not support AArch64 architecture.
 Plugin             | A package used in RUN, CMD or ENTRYPOINT does not support AArch64 architecture.
   {{< /tab >}}
 {{< /tabpane >}}
 
-The `issues` is a list of those detected issues with details for each:
+Each entry in the `issues` list contains:
 - `checkpoint`: A pattern to identify potential incompatibility.
 - `description`: The description of the detected issue.
 - `filename`: The file in which issue is detected.
-- `issue_type`: The type of issue, including detailed descriptions of the error.
-- `lineno`: The line number of the problematic code.
-- `snippet`: The block of the problematic code.
+- `issue_type`: Classification and explanation.
+- `lineno`:  Line number where the issue appears.
+- `snippet`: A snippet of the relevant code.
+
+### Learn more
 
 For more information about issue types, see [migrate-ease github](https://github.com/migrate-ease/migrate-ease/blob/main/README.md).
 
