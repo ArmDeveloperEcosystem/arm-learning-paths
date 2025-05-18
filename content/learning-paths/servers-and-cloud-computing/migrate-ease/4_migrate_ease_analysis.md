@@ -8,7 +8,9 @@ layout: "learningpathall"
 
 ---
 ### Example use case
-In this section, you will use the tool to scan the source code for [Protobuf](https://github.com/protocolbuffers/protobuf), a widely used library for serializing structured data. AArch64 support was Protobuf was introduced in version `v3.5.0` released in November 2017. For the purposes of demonstrating the usage of this tool, you will use an older version `v2.5.0` of Protobuf which lacks AArch64 support.
+In this section, you'll use migrate-ease to scan the source code of [Protobuf](https://github.com/protocolbuffers/protobuf), a widely used library for serializing structured data. 
+
+Support for AArch64 was added in Protobuf version `v3.5.0` (November 2017). To demonstrate how `migrate-ease` detects compatibility issues, you’ll scan an older version — `v2.5.0` — which lacks AArch64 support. 
 
 Use `migrate-ease` to scan protobuf v2.5.0 and output the results to a JSON file named `result.json`:
 ```bash
@@ -16,8 +18,8 @@ python3 -m cpp --git-repo https://github.com/protocolbuffers/protobuf.git --bran
 ```
 The output `result.json`, will be generated in your current directory once the scan is successfully executed.
 
-### How to interpret the results?
-Open the `result.json` file. You will see it is organized in the following format:
+### How to interpret the results
+Open the `result.json` file. . It contains structured output like the following:
 ```output
 {
     "arch": "aarch64",
@@ -113,9 +115,9 @@ Open the `result.json` file. You will see it is organized in the following forma
     "total_issue_count": 14
 }
 ```
-You will need to check `issue_summary` and `issues` for the potential porting to AArch64 problems along with the suggested solutions.
+The `issue_summary` section gives a high-level overview of potential AArch64 compatibility issues detected in the scan. The `issues` array lists each specific issue found, along with context and location.
 
-The `issue_summary` provides an overview of the types of issues that the current scanner supports, along with the corresponding number of issues found. 
+### Issue type definitions
 
 For each of the programming languages, the issue types are listed on the table:
 {{< tabpane code=true >}}
