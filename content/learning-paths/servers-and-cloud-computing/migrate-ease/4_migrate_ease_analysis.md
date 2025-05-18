@@ -10,16 +10,16 @@ layout: "learningpathall"
 ### Example use case
 In this section, you'll use migrate-ease to scan the source code of [Protobuf](https://github.com/protocolbuffers/protobuf), a widely used library for serializing structured data. 
 
-Support for AArch64 was added in Protobuf version `v3.5.0` (November 2017). To demonstrate how `migrate-ease` detects compatibility issues, you’ll scan an older version — `v2.5.0` — which lacks AArch64 support. 
+Support for AArch64 was added in Protobuf version `v3.5.0` (November 2017). To demonstrate how migrate-ease detects compatibility issues, you’ll scan an older version — `v2.5.0` — which lacks AArch64 support. 
 
 Use `migrate-ease` to scan protobuf v2.5.0 and output the results to a JSON file named `result.json`:
 ```bash
 python3 -m cpp --git-repo https://github.com/protocolbuffers/protobuf.git --branch v2.5.0 --output result.json --arch aarch64 protobuf
 ```
-The output `result.json`, will be generated in your current directory once the scan is successfully executed.
+The scan will generate a file called `result.json` in your current directory.
 
 ### How to interpret the results
-Open the `result.json` file. . It contains structured output like the following:
+Open the `result.json` file. It contains structured output like the following:
 ```output
 {
     "arch": "aarch64",
@@ -115,7 +115,7 @@ Open the `result.json` file. . It contains structured output like the following:
     "total_issue_count": 14
 }
 ```
-The `issue_summary` section gives a high-level overview of potential AArch64 compatibility issues detected in the scan. The `issues` array lists each specific issue found, along with context and location.
+The `issue_summary` section provides a high-level overview of AArch64 compatibility issues found. The `issues` array lists each specific issue found, for each issue, including file name, line number, and a description.
 
 ### Issue type definitions
 
@@ -124,14 +124,14 @@ For each of the programming languages, the issue types are listed on the table:
   {{< tab header="C++, C">}}
 Name                    | Description
 ------------------------|-------------------------------------------------------------------------------------------------------------
-ArchSpecificLibrary     | Use of libraries strongly tied to the processor architecture, which may lead to compatibility issues.
+ArchSpecificLibrary     | Architecture-specific libraries that may cause issues on AArch64.
 AsmSource               | Potentially architecture-specific assembly code in the source files that requires manual inspection.
-Avx256Intrinsic         | Use of AVX256 instructions on the AArch64 architecture lead to compatibility issues.
-Avx512Intrinsic         | Use of AVX512 instructions on the AArch64 architecture lead to compatibility issues.
+Avx256Intrinsic         | AVX256 instructions incompatible with AArch64.
+Avx512Intrinsic         | AVX512 instructions incompatible with AArch64.
 BuildCommand            | Potential compatibility issues related to the compilation build commands.
 CPPLibRecommend         | A better-optimized version of this library may be available.
 CPPLibVersion           | This library version may be incompatible with the AArch64 architecture's compiler.
-CPPStdCodes             | Compatibility issues or optimization opportunities related to Cpp source and memory order on AArch64.
+CPPStdCodes             | Compatibility issues or optimization opportunities related to C++ source and memory order on AArch64.
 CompilerSpecific        | Code is strongly tied to a compiler version or type, which may lead to compatibility issues.
 ConfigGuess             | Config.guess file does not contain configurations for AArch64 and may require adaptation.
 CrossCompile            | Cross-compilation compatibility issues.
@@ -194,6 +194,6 @@ The `issues` is a list of those detected issues with details for each:
 - `lineno`: The line number of the problematic code.
 - `snippet`: The block of the problematic code.
 
-For more information about issue types refer to [migrate-ease github](https://github.com/migrate-ease/migrate-ease/blob/main/README.md).
+For more information about issue types, see [migrate-ease github](https://github.com/migrate-ease/migrate-ease/blob/main/README.md).
 
-You have successfully learnt how to install and use the `migrate-ease` scanner tools. You can now use it to scan your source code repositories to identify compatibility issues for aarch64 and use the provided recommendations for porting your code to Arm.
+You have now learned how to install and use migrate-ease to scan a real-world project. You can now use it to scan your source code repositories to identify compatibility issues for AArch64 and use tool's insights to help port your code to Arm platforms.
