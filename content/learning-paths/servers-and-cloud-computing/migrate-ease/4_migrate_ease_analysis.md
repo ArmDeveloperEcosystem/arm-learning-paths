@@ -10,12 +10,14 @@ layout: "learningpathall"
 ### Example use case
 In this section, you'll use migrate-ease to scan the source code of [Protobuf](https://github.com/protocolbuffers/protobuf), a widely used library for serializing structured data. 
 
-Support for AArch64 was added in Protobuf version `v3.5.0` (November 2017). To demonstrate how migrate-ease detects compatibility issues, you’ll scan an older version — `v2.5.0` — which lacks AArch64 support. 
+Support for AArch64 was added in Protobuf version v3.5.0 (November 2017). To demonstrate how migrate-ease detects compatibility issues, you’ll scan an older version — v2.5.0 — which lacks AArch64 support. 
 
-Use `migrate-ease` to scan protobuf v2.5.0 and output the results to a JSON file named `result.json`:
+Use migrate-ease to scan protobuf v2.5.0 and output the results to a JSON file named `result.json`:
+
 ```bash
 python3 -m cpp --git-repo https://github.com/protocolbuffers/protobuf.git --branch v2.5.0 --output result.json --arch aarch64 protobuf
 ```
+
 The scan will generate a file called `result.json` in your current directory.
 
 ### How to interpret the results
