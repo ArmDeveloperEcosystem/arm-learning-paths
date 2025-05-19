@@ -20,7 +20,7 @@ In the following sections of this Learning Path, you’ll learn how to:
 
 * Create and configure an Azure IoT Hub.
 * Register an Arm64-based IoT device
-* Utilize Python to stream sensor data securely and efficiently into Azure.
+* Use Python to stream sensor data securely and efficiently into Azure.
 
 ## Create Azure IoT Hub
 Start by creating an Azure IoT Hub.
@@ -60,7 +60,7 @@ Start by creating an Azure IoT Hub.
 10. Wait for the configuration to be validated, and click Create.
 11. Verify IoT Hub Deployment:
 * Once deployed, you’ll see a message stating “Your deployment is complete”.
-* Click “Go to resource” to open the newly created Azure IoT Hub.
+* Click **Go to resource** to open the newly-created Azure IoT Hub.
 12. Check IoT Hub Overview and Details. From the IoT Hub overview page, verify important details such as the hub name, region, status, and hostname, which you’ll use to connect devices:
 ![img5 alt-text#center](figures/05.png)
 
