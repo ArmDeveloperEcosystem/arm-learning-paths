@@ -1,12 +1,12 @@
 ---
-title: Deploy Phi-3.5 Vision with ONNX Runtime on Azure Cobalt 100 
+title: Deploy Phi-4-mini model with ONNX Runtime on Azure Cobalt 100
 
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for developers, ML engineers, and cloud practitioners looking to deploy Microsoft's Phi Models on Arm-based servers using ONNX Runtime.
 
 learning_objectives:
-    - Quantize and run the Phi-3.5 vision model with ONNX Runtime on Azure.
+    - Quantize and run the Phi-4-mini model with ONNX Runtime on Azure.
     - Analyze performance on Arm Neoverse-N2 based Azure Cobalt 100 VMs.
 
 prerequisites:
@@ -29,7 +29,7 @@ operatingsystems:
 tools_software_languages:
     - Python
     - ONNX Runtime
-   
+
 
 further_reading:
     - resource:
