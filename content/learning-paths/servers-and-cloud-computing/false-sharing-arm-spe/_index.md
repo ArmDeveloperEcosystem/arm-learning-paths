@@ -7,17 +7,17 @@ cascade:
 
 minutes_to_complete: 15
 
-who_is_this_for: Cloud developers who are looking to debug and optimize cache access patterns on cloud servers with perf c2c. 
+who_is_this_for: This topic is for developers who want to optimize cache access patterns on Arm servers using Perf C2C. 
 
 learning_objectives: 
-    - Learn basic C++ techniques to avoid false sharing with alignas().
-    - Learn how to enable and use Arm_SPE.
-    - Learn how to investigate cache line performance with perf c2c.
+    - Avoid false sharing in C++ using memory alignment.
+    - Enable and use the Arm Statistical Profiling Extension (SPE) on Linux systems.
+    - Investigate cache line performance with Perf C2C.
 
 prerequisites:
-    - Arm-based cloud instance with Arm Statistical Profiling Extension support.
-    - basic understanding on cache hierarchy and how efficient cache accessing impact performance..
-    - Familiarity with the Linux Perf tool.
+    - Access to an Arm-based cloud instance with support for the Arm Statistical Profiling Extension (SPE).
+    - A basic understanding of cache coherency and its impact on performance.
+    - Familiarity with Linux Perf tools.
 
 author: Kieran Hejmadi
 
@@ -28,6 +28,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - Perf
+    - Runbook
 operatingsystems:
     - Linux
 

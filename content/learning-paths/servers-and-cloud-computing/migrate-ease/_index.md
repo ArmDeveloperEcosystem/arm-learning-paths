@@ -1,23 +1,19 @@
 ---
-title: Accelerating Application Migration to Arm Servers Using Code Scanning Tools
+title: Migrate applications to Arm servers using migrate-ease
 
-draft: true
-cascade:
-    draft: true
-    
+
 minutes_to_complete: 45
 
-who_is_this_for: This is an automated tool introductory for software developers and DevOps engineers who are preparing to migrate existing applications to Arm-based server environments. It introduces a static analysis tool (migrate-ease) that simplifies the process by identifying portability challenges early.
+who_is_this_for: This is an introductory topic for developers looking to migrate applications to Arm-based servers using migrate-ease, a code analysis tool that scans source code repositories to identify architecture-specific porting issues before migration.
 
 
 learning_objectives:
-    - Set up an Arm development machine
-    - Analyze application source code for architecture-specific dependencies
-    - Understand common migration challenges and solutions
-    - Use migrate-ease to identify and prioritize portability issues
+    - Identify architecture-specific dependencies in your application's source code.
+    - Recognize common migration challenges and how to resolve them.
+    - Use migrate-ease to detect and address AArch64 portability issues.
 
 prerequisites:
-    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
+    - Access to an [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) for testing and validation.
 
 author: 
     - Odin Shen
@@ -31,8 +27,7 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - Coding
-    - Neon
+    - NEON
     - SVE
     - Go
     - Runbook
@@ -43,15 +38,11 @@ further_reading:
         link: https://github.com/aws/aws-graviton-getting-started
         type: documentation
     - resource:
-        title: AWS Graviton Processors
-        link: https://dev.to/aws-builders/aws-graviton-processors-3nk3
-        type: blog
-    - resource:
         title: Arm Cloud Migration Program
         link: https://www.arm.com/markets/computing-infrastructure/arm-cloud-migration
         type: website
     - resource:
-        title: Migrating applications to Arm servers
+        title: Migrating Applications to Arm Servers
         link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/migration/
         type: website
 
