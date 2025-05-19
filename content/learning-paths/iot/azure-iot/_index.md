@@ -1,22 +1,22 @@
 ---
-title: Create IoT Solutions in Azure for Arm-Powered Devices
+title: Build IoT Solutions in Azure for Arm-Powered Devices
 
 minutes_to_complete: 180
 
-who_is_this_for: This is an advanced topic for developers who want to build a comprehensive IoT solution in Azure that streams, stores, monitors, aggregates, and visualizes data from Arm64-powered IoT devices.
+who_is_this_for: This is an advanced topic for developers who want to build a comprehensive IoT solution in Azure that streams, stores, monitors, aggregates, and visualizes telemetry data from Arm64-powered IoT devices.
 
 learning_objectives:
-    - Set up and configure Azure IoT Hub.
-    - Register an IoT device and stream data using the Azure IoT SDK.
-    - Stream IoT data into Azure services using Azure Stream Analytics.
-    - Store and persist streamed data in Azure Cosmos DB through a Stream Analytics job.
-    - Monitor data and send alerts by creating an Azure Function that reads sensor data from Cosmos DB and triggers notifications when thresholds are exceeded.
-    - Aggregate sensor readings using an Azure Function that calculates average values from data stored in Cosmos DB.
-    - Publish aggregated IoT data to a public-facing web portal, by deploying a static web app hosted on Azure Blob Storage.
+    - Set up and configure Azure IoT Hub for device communication.
+    - Register an IoT device and stream telemetry data using the Azure IoT SDK.
+    - Route IoT data to Azure services using Azure Stream Analytics.
+    - Store incoming data in Azure Cosmos DB through a Stream Analytics job.
+    - Monitor data and send alerts using an Azure Function that reads from Cosmos DB and triggers notifications based on thresholds.
+    - Aggregate sensor readings using an Azure Function that calculates average values from stored data.
+    - Publish aggregated data to a public-facing web app hosted on Azure Blob Storage.
 
 prerequisites:
     - A machine with Python 3, and Visual Studio Code installed. 
-    - An Azure Account and subscription.
+    - An active Azure account with sufficient permissions to create resources (such as IoT Hub, Functions, and Cosmos DB).
 
 author: Dawid Borycki
 
@@ -31,6 +31,7 @@ operatingsystems:
     - Linux
     - macOS
 tools_software_languages:    
+    - Python
     - Azure
     - VS Code
 
