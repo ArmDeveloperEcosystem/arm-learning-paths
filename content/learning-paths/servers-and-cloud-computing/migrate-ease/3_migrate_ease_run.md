@@ -41,7 +41,7 @@ export PYTHONPATH=`pwd`
 
 ## Usage
 
-You can use `migrate-ease` from the command-line or through a Web GUI. 
+You can use migrate-ease from the command-line or through a Web GUI. 
  
 ### Command-line usage
  
