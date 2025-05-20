@@ -185,7 +185,7 @@ The output should be:
 ```
 This indicates the current page size is 64K, and you are using the new customer made 64k kernel.  
 
-## Reverting back to the original 4K kernel
+### Reverting back to the original 4K kernel
 
 To revert back to the kernel we started with:
 
