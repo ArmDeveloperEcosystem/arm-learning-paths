@@ -30,17 +30,20 @@ Think of your computer’s memory like a big sheet of graph paper. Each **page**
 
 ## When to Choose Which
 
-- **4 KB pages** are the safe, default choice. They let you use memory in small slices and keep waste low.  Since they are smaller, you need more of them when handling larger memory footprint applications.
+- **4 KB pages** are the safe, default choice. They let you use memory in small slices and keep waste low.  Since they are smaller, you need more of them when handling larger memory footprint applications.  This creates more overhead for the CPU to manage, but may be worth it for the flexibility.  They are great for applications that need to access small bits of data frequently, like web servers or databases with lots of small transactions.
 
-- **64 KB pages** shine when you work with big, continuous data—like video frames or large database caches—because they cut down on management overhead.  But they can waste more memory if you don’t use the whole page.
+- **64 KB pages** shine when you work with big, continuous data—like video frames or large database caches—because they cut down on management overhead.  They can waste more memory if you don’t use the whole page, but they can also speed up access times for large data sets.
 
 When rightsizing your page size, its important to **try both** under real-world benchmarking conditions, as it will depend on the data size and retrieval patterns of the data you are working with.  In addition, the page size may need to be adjusted over time as the application, usage patterns, and data size changes.  
 
-This learning path will guide you how to change the page size, so you can begin experimenting to see which fits best.
+## Choose the OS to experiment with
 
-## Choose Your OS
+{{% notice Do not test on Production%}}
+Modifying the Linux kernel page size can lead to system instability or failure. Perform testing in a non-production environment before applying to production systems.
+{{% /notice %}}
 
-To begin, select the OS you are using.  The steps to install the 64K page size kernel are different for each OS, so be sure to select the correct one.
+This learning path will guide you how to change (and revert back) the page size, so you can begin experimenting to see which fits best. The steps to install the 64K page size kernel are different for each OS, so be sure to select the correct one.
+
 
 - [Ubuntu](../ubuntu)
 - [Debian](../debian)
