@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Store Data in Azure Cosmos DB with Azure Stream Analytics"
+title: "Store data in Azure Cosmos DB with Azure Stream Analytics"
 
 weight: 6
 
