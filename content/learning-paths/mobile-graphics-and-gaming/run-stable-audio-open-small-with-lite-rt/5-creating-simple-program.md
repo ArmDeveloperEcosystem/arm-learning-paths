@@ -8,15 +8,17 @@ layout: learningpathall
 
 ## Create and build a simple program
 
-You'll now build a simple program that runs inference on all three submodules directly on an Android device.
+As a final step, you’ll build a simple program that runs inference on all three submodules directly on an Android device.
 
 The program takes a text prompt as input and generates an audio file as output.
+
 ```bash
-cd $WORKSPACE/audio-stale-open-litert/app
+cd $WORKSPACE/ML-examples/kleidiai-examples/audiogen/app
 mkdir build && cd build
 ```
 
-Ensure the NDK path is set correctly and build with cmake:
+Ensure the NDK path is set correctly and build with `cmake`:
+
 ```bash
 cmake -DCMAKE_TOOLCHAIN_FILE=$NDK_PATH/build/cmake/android.toolchain.cmake \
       -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
@@ -26,34 +28,39 @@ cmake -DCMAKE_TOOLCHAIN_FILE=$NDK_PATH/build/cmake/android.toolchain.cmake \
       -DFLATBUFFER_INCLUDE_PATH=$TF_SRC_PATH/flatc-native-build/flatbuffers/include \
     ..
 
-cmake --build . -j1
+make -j
+```
+After the example application builds successfully, a binary file named `audiogen` is created.
+
+A SentencePiece model is a type of subword tokenizer which is used by the audiogen application, you’ll need to download the *spiece.model* file from:
+
+```bash
+cd $WORKSPACE
+wget https://huggingface.co/google-t5/t5-base/tree/main
 ```
 
-Since the tokenizer used in the audiogen application is based on SentencePiece, you’ll need to download the spiece.model file from:
-```bash
-https://huggingface.co/google-t5/t5-base/tree/main
-```
-we will save this model in `WORKSPACE` for ease of access.
+Verify this model was downloaded to your `WORKSPACE`.
+
 ```text
-cp spiece.moel $WORKSPACE
-```
-After the SAO example builds successfully, a binary file named `audiogen_main` is created.
-
-Now use adb (Android Debug Bridge) to push the necessary files to the device:
-
-```bash
-adb shell
+ls $WORKSPACE/spiece.model
 ```
 
-Create a directory for all the required resources:
+Connect your Android device to your development machine using a cable. adb (Android Debug Bridge) is available as part of the Android SDK. 
+
+You should see your device listed when you run the following command:
+
 ```bash
-cd /data/local/tmp
-mkdir audiogen
-exit
+adb devices
 ```
-Push all necessary files into the `audiogen` folder on Android:
+
+```output
+<DEVICE ID>     device
+```
+
+Note that you may have to approve the connection on your phone for this to work. Now, use `adb` to push all necessary files into the `audiogen` folder on Android device:
+
 ```bash
-cd $WORKSPACE/audio-stale-open-litert/app/build
+cd $WORKSPACE/ML-examples/kleidiai-examples/audiogen/app/build
 adb shell mkdir -p /data/local/tmp/app
 adb push audiogen /data/local/tmp/app
 adb push $LITERT_MODELS_PATH/conditioners_float32.tflite /data/local/tmp/app
@@ -63,14 +70,24 @@ adb push $WORKSPACE/spiece.model /data/local/tmp/app
 adb push ${TF_SRC_PATH}/bazel-bin/tensorflow/lite/libtensorflowlite.so /data/local/tmp/app
 ```
 
-Finally, run the program on your Android device:
-```
+Start a new shell to access the device's system from your development machine:
+
+```bash
 adb shell
-cd /data/local/tmp/app
-LD_LIBRARY_PATH=. ./audiogen . "warm arpeggios on house beats 120BPM with drums effect" 4
 ```
 
-The successful execution of the app will create `output.wav` of your chosen audio defined by the prompt, you can pull it back to your host machine and enjoy!
+Finally, run the program on your Android device. Play around with the advice from [Download the model](../2-testing-model) section.
+
+```bash
+cd /data/local/tmp/app
+LD_LIBRARY_PATH=. ./audiogen . "warm arpeggios on house beats 120BPM with drums effect" 4
+exit
+```
+
+You can now pull the generated `output.wav` back to your host machine and listen to the result.
+
 ```bash
 adb pull /data/local/tmp/app/output.wav
 ```
+
+You should now have gained hands-on experience running the Stable Audio Open Small model with LiteRT on Arm-based devices. This includes setting up the environment, optimizing the model for on-device inference, and understanding how efficient runtimes like LiteRT make low-latency generative AI possible at the edge. You’re now better equipped to explore and deploy AI-powered audio applications on mobile and embedded platforms.
