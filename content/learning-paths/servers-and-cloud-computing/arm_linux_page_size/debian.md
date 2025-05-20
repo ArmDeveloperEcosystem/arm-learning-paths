@@ -8,29 +8,29 @@ layout: learningpathall
 Debian does not provide a 64K kernel via apt, so you will need to compile it from source.  There are two ways to do this: 1) download the source from the kernel.org website, or 2) use the Debian source package.  This guide will use the Debian source package.
 
 ### Verify current page size
-Verify you’re on a 4 KB pagesize kernel:
+Verify you’re on a 4 KB pagesize kernel by entering the following commands:
 
 ```bash
 getconf PAGESIZE
 uname -r
 ```
-The output should be similar to (the important part is the 4096 value):
+The output should be similar to below -- the full kernel name may vary, but the first line should always be **4096**:
 
 ```output
 4096
 6.1.0-34-cloud-arm64
 ```
 
-This indicates the current page size is 4KB. If you see a value that is different, you are already using a page size other than 4096 (4K).  On Arm systems, the valid options are 4K, 16K, and 64K.
+The 4096 indicates the current page size is 4KB. If you see a value that is different, you are already using a page size other than 4096 (4K).  On Arm systems, the valid options are 4K, 16K, and 64K.
 
-
-### Install from Debian Source Package (Easiest, Not Customizable)
+### Install from Debian Source Package
 
 To install a 64K page size kernel via package manager, follow these steps:
 
-First, install dependencies:
+First, update, and install dependencies:
 
 ```bash
+sudo apt-get -y update
 sudo apt-get -y install git build-essential autoconf automake libtool libncurses-dev bison flex libssl-dev libelf-dev bc debhelper-compat rsync
 ```
 
@@ -40,7 +40,7 @@ Download the kernel and cd to its directory:
 # Fetch the actual kernel source
 apt source linux
 # Change to kernel source dir
-cd -- */
+cd -- linux*/
 ```
 
 ## Build and install the kernel
@@ -61,10 +61,10 @@ make ARCH=arm64 olddefconfig
 # Set 64 for kernel name suffix
 sed -i 's/^EXTRAVERSION =.*/EXTRAVERSION = -64k/' Makefile
 
-# Build Debian packages
+# Build new kernel config as Debian packages
 make -j$(nproc) ARCH=arm64 bindeb-pkg
 
-# 8. Install
+# install the Debian packages
 cd ..
 sudo dpkg -i linux-image-*64k*.deb linux-headers-*64k*.deb
 ```
@@ -73,22 +73,24 @@ The system is now ready to reboot:
 ```bash
 sudo reboot
 ```
-After reboot, check the kernel page size:
+Upon reboot, check the kernel page size and name once again to confirm the changes:
+
 ```bash
 getconf PAGESIZE
 uname -r
 ```
-The output should be:
+
+The output should be similar to below -- like before, the full kernel name may vary, but the first line should always be **65536**:
 
 ```output
 65536
 6.12.22-64k
 ```
-This indicates the current page size is 64K, and you are using the new customer made 64k kernel.  
+This indicates the current page size is 64K, and you are using the new custom made 64k kernel.  
 
 ## Reverting back to the original 4K kernel
 
-To revert back to the kernel we started with:
+To revert back to the kernel we started with, enter:
 
 ```bash
 dpkg-query -W -f='${Package}\n' 'linux-image-*-64k*' 'linux-headers-*-64k*' \
@@ -96,16 +98,18 @@ dpkg-query -W -f='${Package}\n' 'linux-image-*-64k*' 'linux-headers-*-64k*' \
 sudo update-grub
 sudo reboot
 ```
-The system will now reboot into the original 4K kernel.  To check the page size, run the following command:
+
+Upon reboot, verify you’re on a 4 KB pagesize kernel by entering the following commands:
+
 ```bash
 getconf PAGESIZE
 uname -r
-``` 
-
-The output should be:
+```
+The output should be similar to below -- the full kernel name may vary, but the first line should always be **4096**:
 
 ```output
 4096
 6.1.0-34-cloud-arm64
 ```
-This indicates the current page size is 4KB and you are using the kernel you started with.
+
+The 4096 indicates the current page size has been reverted to 4KB. 

@@ -8,28 +8,29 @@ layout: learningpathall
 To install a 64K page size kernel on Ubuntu 22.04+, follow these steps:
 
 ### Verify current page size
-Verify you’re on a 4 KB pagesize kernel:
+Verify you’re on a 4 KB pagesize kernel by entering the following commands:
 
 ```bash
 getconf PAGESIZE
 uname -r
 ```
-The output should be similar to (the important part is the 4096 value):
+The output should be similar to below -- the full kernel name may vary, but the first line should always be **4096**:
 
 ```output
 4096
 6.1.0-34-cloud-arm64
 ```
 
-This indicates the current page size is 4KB. If you see a value that is different, you are already using a page size other than 4096 (4K).  On Arm systems, the valid options are 4K, 16K, and 64K.
+The 4096 indicates the current page size is 4KB. If you see a value that is different, you are already using a page size other than 4096 (4K).  On Arm systems, the valid options are 4K, 16K, and 64K.
 
 ### Install dependencies and 64K kernel
-First, update apt
+Run the below command to update apt:
 
 ```bash
+sudo apt-get -y update
 sudo apt-get -y install git build-essential autoconf automake libtool gdb wget linux-generic-64k
 ```
-Instruct grub to load the 64K kernel by default:
+Then run the following command to have grub to load the 64K kernel by default:
 
 ```bash
 echo "GRUB_FLAVOUR_ORDER=generic-64k" | sudo tee /etc/default/grub.d/local-order.cfg 
@@ -37,19 +38,20 @@ echo "GRUB_FLAVOUR_ORDER=generic-64k" | sudo tee /etc/default/grub.d/local-order
 
 ### Update grub then reboot
 
+Commit your changes to grub, then reboot by entering the following:
 ```bash
 sudo update-grub 
 sudo reboot 
 ```
 
-Upon reboot, check the kernel page size and name:
+Upon reboot, check the kernel page size and name once again to confirm the changes:
 
 ```bash
 getconf PAGESIZE
 uname -r
 ```
 
-The output should be:
+The output should be similar to below -- like before, the full kernel name may vary, but the first line should always be **65536**:
 
 ```output
 65536
@@ -67,18 +69,17 @@ echo "GRUB_FLAVOUR_ORDER=generic" | sudo tee /etc/default/grub.d/local-order.cfg
 sudo update-grub 
 sudo reboot 
 ```
-
-Upon reboot, check the kernel page size and name:
+Upon reboot, verify you’re on a 4 KB pagesize kernel by entering the following commands:
 
 ```bash
 getconf PAGESIZE
 uname -r
 ```
-
-The output should be:
+The output should be similar to below -- the full kernel name may vary, but the first line should always be **4096**:
 
 ```output
 4096
-6.11.0-1013-gcp
+6.1.0-34-cloud-arm64
 ```
-This confirms the current page size is 4KB and you are running the original kernel.
+
+The 4096 indicates the current page size has been reverted to 4KB.
