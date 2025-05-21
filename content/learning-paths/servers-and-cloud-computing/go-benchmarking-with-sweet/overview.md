@@ -1,76 +1,40 @@
 ---
-title: Launching an Axion C4a Instance
+title: Overview
 weight: 10
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Go Benchmarking Learning Path Overview
+## Go Benchmarking Learning Path Overview
 
-Welcome to the **Go Benchmarking** learning path! In this module, you’ll learn how to measure, collect, and compare Go performance data using three key tools:
+Welcome to the **Go Benchmarking** learning path! In this module, you’ll learn how to measure, collect, and compare Go performance data using three key codebases:
 
-- **Golang Benchmark** (the core benchmark harness)  
-- **Sweet** (a multi-node benchmark runner)  
-- **Benchstat** (a statistical comparison tool)  
+- **Go Benchmarks** (a collection of pre-written benchmark definitions)
+- **Sweet** (a benchmark runner)  
+- **Benchstat** (a statistical comparison tool)
 
-By the end of this path, you’ll be able to:
+### What's are Go Benchmarks?
 
-1. Install and configure all three tools  
-2. Run benchmarks across one or more machines with Sweet  
-3. Aggregate and compare benchmark outputs using Benchstat  
+Go has built-in benchmark support built into the standard library, allowing you to create custom benchmarks for your own workloads.  The **Golang Benchmark** suite available at `https://github.com/golang/benchmarks` repo provides pre-written benchmarks for popular Go-based applications, making it easy to run standardized benchmarks across different systems with very little effort.
 
----
+You will have the benchmarks pre-written for you from the github repo, but you will need to install and configure the **Sweet** tool to run them.
 
-## 1. What Is Go Benchmark?
+### What Is Sweet?
 
-Go’s built-in benchmark support lives in the `testing` package (built into the standard library), but the **Golang Benchmark** suite in the `golang.org/x/benchmarks` repo provides additional harnesses and workloads for measuring more complex scenarios:
-
-- **Repo:** [golang.org/x/benchmarks](https://pkg.go.dev/golang.org/x/benchmarks)  
-- **Purpose:**  
-  - Provide reproducible benchmark definitions  
-  - Offer a consistent harness for CPU, memory, and I/O tests  
-  - Include sample benchmarks covering common Go idioms  
-
-You’ll use these harnesses as the basis for your own performance tests.
-
----
-
-## 2. What Is Sweet?
-
-**Sweet** is the command-line orchestrator for running Go benchmarks at scale:
-
-- **Repo:** [golang.org/x/benchmarks/sweet](https://pkg.go.dev/golang.org/x/benchmarks/sweet)  
-- **Purpose:**  
-  - Automate running benchmarks on one or more remote hosts  
-  - Collect and upload results in a structured JSON format  
-  - Support tagging, profiling, and metadata annotations  
+The **Sweet** tool is a command-line orchestrator for running Go benchmarks at scale.  It is designed to automate the process of running benchmarks on one or more remote hosts, collecting results, and writing them in a structured JSON format.
 
 With Sweet, you can easily compare performance across different environments (e.g., Arm-based servers vs. x86 instances).
 
----
+Once you've run the benchmarks, you can use the **Benchstat** tool to analyze the results and identify performance regressions or improvements.
 
-## 3. What Is Benchstat?
+### What Is Benchstat?
 
-**Benchstat** is the statistical comparison tool for Go benchmark outputs:
+**Benchstat** is the statistical comparison tool for Go benchmark outputs.  It parses JSON or text benchmark results, and compares them using statistical methods to identify performance changes.  Benchstat helps you make data-driven decisions by surfacing real performance deltas.
 
-- **Repo:** [golang.org/x/perf/cmd/benchstat](https://pkg.go.dev/golang.org/x/perf/cmd/benchstat)  
-- **Purpose:**  
-  - Parse JSON or text benchmark results  
-  - Compute statistical metrics (mean, median, % change)  
-  - Highlight significant regressions or improvements  
+When you are finished running through this learning path, you'll have:
 
-Benchstat helps you make data-driven decisions by surfacing real performance deltas.
-
----
-
-## 4. Learning Path Workflow
-
-### Step 1: Installation
-
-1. Ensure you have Go 1.20+ installed.  
-2. Install the benchmarks harness and tools:
-   ```bash
-   go install golang.org/x/benchmarks/cmd/benchcmp@latest
-   go install golang.org/x/benchmarks/sweet@latest
-   go install golang.org/x/perf/cmd/benchstat@latest
+1. Brought up Arm and x86 instances of GCP-based VMs
+2. Installed Go, benchmarks, benchstat, and sweet on the two VMs
+3. Used sweet and benchstat to compare performance of Go applications on the two VMs
+4. Extrapolate the knowledge to create Go Benchmarks for your own workloads and systems
