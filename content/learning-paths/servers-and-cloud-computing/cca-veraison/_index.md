@@ -29,6 +29,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - CCA
+    - RME
     - Runbook
 
 
