@@ -1,47 +1,64 @@
 ---
-title: Install the Python packages
+title: Set up environment 
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-The application you will develop requires a few additional Python packages besides CMSIS-DSP. These need to be installed before you start writing code.
+## Create a Python virtual environment 
 
-You should install the packages in a Python virtual environment. For example, you can use:
+To follow this Learning Path, you'll need to install a few additional Python packages alongside CMSIS-DSP.
 
-```
+Start by installing the packages in a Python virtual environment. For example, you can use:
+
+```bash 
 python -m venv cmsis-dsp-venv
 ```
+If required, activate the environment. 
 
-The first package to install is CMSIS-DSP:
+## Install CMSIS-DSP
+
+Now install the required packages, starting with CMSIS-DSP:
 
 ```bash
 pip install cmsisdsp
 ```
-It will also install `NumPy`, which is a dependency of the CMSIS-DSP Python package.
+This will also install `NumPy`, which is a dependency of the CMSIS-DSP Python package.
 
-You'll be working with a Jupyter notebook, so the `jupyter` package must also be installed:
+## Install Jupyter
+
+You'll be working with a Jupyter notebook, so install the `jupyter` package:
 
 ```bash
 pip install jupyter
 ```
+## Install additional tools 
 
-Finally, you'll need packages to read sound files, play sound using widgets, and display plots:
+Finally, you'll also need packages for reading sound files, playing sound using widgets, and displaying plots:
 
 ```bash
 pip install soundfile ipywidgets matplotlib
 ```
+
+## Launch Jupyter and set up your notebook
 
 You can now launch the Jupyter notebook with the following command:
 
 ```bash
 jupyter notebook
 ```
-A browser window should open showing the source tree your terminal launched from. Create a new Jupyter notebook by clicking the `New` dropdown and selecting `Python 3 (ipykernel)`. The new notebook will be named `Untitled`. Rename it to something more descriptive, for example `cmsis-dsp`.
+A browser window should open, displaying the source tree. 
 
-You can now import all the required packages. Copy the following Python code into your notebook and run the cell (Shift+Enter).
-All the Python code blocks in this learning path are intended to be executed in the same Jupyter notebook.
+Create a new Jupyter notebook by clicking **New** and selecting **Python 3 (ipykernel)**. The new notebook is called `Untitled`. Rename it to something descriptive, for example `cmsis-dsp`.
+
+Now import all the required packages by copying and running the following Python code into your notebook and run the cell (Shift+Enter).
+
+{{% notice Note%}}
+All the Python code blocks in this Learning Path are intended to be executed in the same Jupyter notebook.
+{{% /notice %}}
+
+
 
 ```python
 import cmsisdsp as dsp
@@ -65,4 +82,4 @@ import soundfile as sf
 from urllib.request import urlopen
 ```
 
-You're now ready to move on to the next steps, where you will set up some audio files for processing.
+You're now ready to move on and set up the audio files you'll use for processing.

@@ -1,24 +1,21 @@
 ---
-title: Getting Started with CMSIS-DSP Using Python
+title: Getting started with CMSIS-DSP using Python
 
-minutes_to_complete: 30
+minutes_to_complete: 45
 
-draft: true
-cascade:
-    draft: true
+who_is_this_for: This is an advanced topic for developers looking to integrate the CMSIS-DSP library into their applications using Python.
 
-who_is_this_for: Developers who want to learn how the CMSIS-DSP package can be integrated into their applications
 
 learning_objectives:
-    - Understand how to use the CMSIS-DSP Python package
-    - Understand how the Python implementation maps to the C implementation
-    - Develop a complex application using CMSIS-DSP
+    - Use the CMSIS-DSP Python package to prototype DSP algorithms.
+    - Understand how the Python API maps to the C implementation.
+    - Build and port a complex DSP application using CMSIS-DSP.
 
 prerequisites:
-    - Some familiarity with Python and DSP programming
-    - Knowledge of C
-    - Some familiarity with CMSIS-DSP
-    - Python installed on your system
+    - Familiarity with Python and digital signal processing concepts.
+    - Working knowledge of C.
+    - Prior exposure to CMSIS-DSP.
+    - Python installed on your machine.
 
 author: Christophe Favergeon
 
@@ -33,7 +30,7 @@ tools_software_languages:
     - Python
     - C
     - Jupyter Notebook
-    - numpy
+    - NumPy
 operatingsystems:
     - Linux
     - Windows
@@ -41,19 +38,19 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: Biquad filters with CMSIS-DSP Python package
+        title: Biquad Filters with CMSIS-DSP Python Package
         link: https://developer.arm.com/documentation/102463/latest/
         type: documentation
     - resource:
-        title: CMSIS-DSP library
+        title: CMSIS-DSP Library (GitHub)
         link: https://github.com/ARM-software/CMSIS-DSP
         type: Open-source project
     - resource:
-        title: CMSIS-DSP python package
+        title: CMSIS-DSP Python Package (PyPi)
         link: https://pypi.org/project/cmsisdsp/
         type: Open-source project
     - resource:
-        title: CMSIS-DSP Python package examples and tests
+        title: CMSIS-DSP Python Package Examples and Tests
         link: https://github.com/ARM-software/CMSIS-DSP/tree/main/PythonWrapper/examples
         type: Open-source project
     - resource:

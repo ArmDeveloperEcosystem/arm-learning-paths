@@ -9,7 +9,7 @@ layout: learningpathall
 
 In this section, you'll set up your development environment by installing dependencies and preparing the Qwen vision model.
 
-Install the Android NDK (Native Development Kit) and git-lfs. This Learning Path was tested with NDK version `28.0.12916984` and CMake version `4.0.0-rc1`.
+Install the Android NDK (Native Development Kit) and git-lfs. This Learning Path was tested with NDK version `28.0.12916984` and CMake version `3.31.6`.
 
 For Ubuntu or Debian systems, install CMake and git-lfs with the following commands:
 
@@ -18,9 +18,9 @@ sudo apt update
 sudo apt install cmake git-lfs -y
 ```
 
-You can use Android Studio to obtain the NDK. 
+You can use Android Studio to obtain the NDK.
 
-Click **Tools > SDK Manager** and navigate to the **SDK Tools** tab. 
+Click **Tools > SDK Manager** and navigate to the **SDK Tools** tab.
 
 Select the **NDK (Side by side)** and **CMake** checkboxes, as shown below:
 
@@ -48,7 +48,7 @@ If Python 3.x is not the default version, try running `python3 --version` and `p
 
 ## Set up Phone Connection
 
-You need to set up an authorized connection with your phone. The Android SDK Platform Tools package, included with Android Studio, provides Android Debug Bridge (ADB) for transferring files. 
+You need to set up an authorized connection with your phone. The Android SDK Platform Tools package, included with Android Studio, provides Android Debug Bridge (ADB) for transferring files.
 
 Connect your phone to your computer using a USB cable, and enable USB debugging on your phone. To do this, tap the **Build Number** in your **Settings** app 7 times, then enable **USB debugging** in **Developer Options**.
 

@@ -8,40 +8,66 @@ layout: learningpathall
 
 ## Introduction
 
-Ideally, your system's storage activity should be zero—meaning all application data and instructions are available in memory or cache, with no reads or writes to hard disk drives (HDDs) or solid-state drives (SSDs) required. However, due to physical capacity limits, data volatility, and the need to store large amounts of data, most applications frequently access storage media.
+Performance-sensitive application data - such as frequently-accessed configuration files, logs, or transactional state - should ideally reside in system memory (RAM) or CPU cache, where data access latency is measured in nanoseconds to microseconds. These are the fastest tiers in the memory hierarchy, enabling rapid read and write operations that reduce latency and improve throughput. 
 
-## High-Level Flow of Data
+However, random-access memory (RAM) has the following constraints:
 
-The diagram below provides a high-level overview of how data is written to or read from a storage device. It illustrates a multi-disk I/O architecture, where each disk (Disk 1 to Disk N) has its own I/O queue and optional disk cache, communicating with a central CPU via a disk controller. Memory, not explicitly shown, sits between the CPU and storage, offering fast but volatile access. File systems, also not depicted, operate at the OS/kernel level to handle file access metadata and provide a user-friendly interface through files and directories.
+* It is volatile - data is lost on power down.
+* It is limited in capacity.
+* It is more expensive per gigabyte than other storage types. 
 
-![disk i/o](./diskio.jpeg)
+For these reasons, most applications also rely on solid-state drives (SSDs) or hard disk drives (HDDs).
+
+## High-level view of data flow
+
+The diagram below shows a high-level view of how data moves to and from storage in a multi-disk I/O architecture. Each disk (Disk 1 to Disk N) has its own I/O queue and optional disk cache, communicating with a central CPU through a disk controller. 
+
+While memory is not shown, it plays a central role in providing fast temporary access between the CPU and persistent storage. Likewise, file systems (also not depicted) run in the OS kernel and manage metadata, access permissions, and user-friendly file abstractions. 
+
+This architecture has the following benefits:
+
+* It enables parallelism in I/O operations.
+* It improves throughput.
+* It supports scalability across multiple storage devices.
+
+![disk i/o alt-text#center](./diskio.jpeg "A high-level view of data flow in a multi-disk I/O architecture.")
 
 ## Key Terms
 
 #### Sectors and Blocks
 
-Sectors are the basic physical units on a storage device. Traditional hard drives typically use a sector size of 512 bytes, while many modern disks use 4096 bytes (4K sectors) for improved error correction and efficiency.
+* *Sectors* are the smallest physical storage units, typically 512 or 4096 bytes. Many modern drives use 4K sectors for better error correction and efficiency.
 
-Blocks are logical groupings of one or more sectors used by filesystems for data organization. A common filesystem block size is 4096 bytes, meaning each block might consist of eight 512-byte sectors, or map directly to a 4096-byte physical sector if supported by the disk.
+* *Blocks* are logical groupings of one or more sectors used by file systems, typically 4096 bytes in size. A block might span multiple 512-byte sectors or align directly with 4K physical sectors if supported by the device.
+
 
 #### Input/Output Operations per Second (IOPS)
 
-IOPS measures how many random read or write requests your storage system can handle per second. IOPS can vary by block size and storage medium (e.g., flash drives). Traditional HDDs often do not specify IOPS; for example, AWS does not show IOPS values for HDD volumes.
+IOPS measures how many random read/write requests your storage system can perform per second. It depends on the block size or device type. For example, AWS does not show IOPS values for traditional HDD volumes, as shown in the image below:
 
-![iops_hdd](./IOPS.png)
+![iops_hdd alt-text#center](./IOPS.png "Example where IOPS values are not provided.")
 
-#### Throughput and Bandwidth
+#### Throughput and bandwidth
 
-Throughput is the data transfer rate, usually measured in MB/s. Bandwidth specifies the maximum amount of data a connection can transfer. You can calculate storage throughput as IOPS × block size.
+* *Throughput* is the data transfer rate, usually measured in MB/s. 
 
-#### Queue Depth
+* *Bandwidth* is the maximum potential transfer rate of a connection.
 
-Queue depth is the number of simultaneous I/O operations that can be pending on a device. Consumer SSDs typically have a queue depth of 32–64, while enterprise-class NVMe drives can support hundreds or thousands of concurrent requests per queue. Higher queue depth allows more parallelism and can improve I/O performance.
+You can calculate storage `throughput as IOPS × block size`.
 
-#### I/O Engine
+#### Queue depth
 
-The I/O engine is the software component in Linux that manages I/O requests between applications and the storage subsystem. For example, the Linux kernel's block I/O scheduler queues and dispatches requests to device drivers, using multiple queues to optimize disk access. In benchmarking tools like fio, you can select I/O engines such as sync (synchronous I/O), `libaio` (Linux native asynchronous I/O), or `io_uring` (which uses newer Linux kernel features for asynchronous I/O).
+*Queue depth* is the number of I/O operations a device can process concurrently. Consumer SSDs typically support a queue depth of 32–64, while enterprise-class NVMe drives can support hundreds to thousands of concurrent requests per queue. Higher queue depths allow more operations to be handled simultaneously, which can significantly boost throughput on high-performance drives — especially NVMe SSDs with advanced queuing capabilities.
+ 
+#### I/O engine
 
-#### I/O Wait
+The I/O engine is the software layer in Linux that manages I/O requests between applications and storage. For example, the Linux kernel's block I/O scheduler queues and dispatches requests to device drivers, using multiple queues to optimize disk access. Benchmarking tools like `fio` let you choose different I/O engines:
 
-I/O wait is the time a CPU core spends waiting for I/O operations to complete.
+* `sync` – Performs blocking I/O operations using standard system calls. Simple and portable, but less efficient under high concurrency.
+* `libaio` – Uses Linux's native asynchronous I/O interface (`io_submit`/`io_getevents`) for non-blocking operations with lower overhead than `sync`.
+* `io_uring` – A modern, high-performance async I/O API introduced in Linux 5.1. It minimizes syscalls and context switches, and supports advanced features like buffer selection and batched submissions.
+
+ 
+#### I/O wait
+
+I/O wait is the time a CPU core spends waiting for I/O operations to complete. Tools like `pidstat`, `top`, and `iostat` can help identify storage-related CPU bottlenecks.

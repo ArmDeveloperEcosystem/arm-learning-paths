@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Write the CMSIS-DSP Q15 implementation
 
-In this section, you will update the code to run with the CMSIS-DSP Python library. The CMSIS-DSP implementation is very similar to the reference implementation you just tested, but some things will be different.
+In this section, you will update the code to run with the CMSIS-DSP Python library. The CMSIS-DSP implementation is similar to the reference implementation you just tested, but some things will be different.
 
 ### Slicing
 
@@ -61,7 +61,7 @@ In this section, you will walk through the updates needed to transition from flo
 
 The constructor for `NoiseSuppressionQ15` is similar and uses Q15 instead of float. The Hanning window is converted to Q15, and Q15 versions of the CFFT objects are created.
 
-### subnoise
+### Subnoise
 
 The noise reduction function is more complex:
 
@@ -104,7 +104,7 @@ res = dsp.arm_cmplx_mult_real_q31(vq31,scalingQ31)
 resQ15 = dsp.arm_q31_to_q15(res)
 ```
 
-### rescale
+### Rescale
 
 To achieve maximum accuracy in Q15, the signal (and noise) is rescaled before computing the energy.
 This rescaling function did not exist in the float implementation. The signal is divided by its maximum value to bring it to full scale::
@@ -131,7 +131,7 @@ def undo_scale(self,w,the_max):
     return(w)
 ```
 
-### noise suppression
+### Noise suppression
 
 The algorithm closely follows the float implementation. However, there is a small difference because CMSIS-DSP can be built for Cortex-A and Cortex-M. On Cortex-A, there are small differences in the FFT API, as it uses a different implementation.
 
@@ -163,11 +163,11 @@ if status == 0:
    res=self.undo_scale(res,the_max)
 ```
 
-### noise estimation
+### Noise estimation
 
 The noise estimation function performs both noise estimation and noise suppression. Noise energy is computed in Q31 for higher accuracy. The FFT functions detect whether the package was built with Neon support.
 
-### donothing
+### Donothing
 
 `donothing` is a debug function. You can disable noise reduction and test only slicing, overlap-add, and the FFT/IFFT in between. This function applies scaling and performs the FFT/IFFT. It's a good way to check for saturation issues (which are common with fixed-point arithmetic) and to ensure proper scaling compensation.
 
@@ -389,4 +389,4 @@ audioQ15=Audio(data=fix.Q15toF32(cleaned_q15),rate=samplerate,autoplay=False)
 audioQ15
 ```
 
-By running this, you have gained hands-on experience with the CMSIS-DSP python package, and an idea of what a noise suppression workflow looks like.
+You’ve now built a working noise suppression pipeline using the CMSIS-DSP Python package - and seen how fixed-point DSP algorithms are structured in real-world applications.
