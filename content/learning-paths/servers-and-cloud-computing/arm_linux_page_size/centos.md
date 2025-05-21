@@ -1,18 +1,22 @@
 ---
-title: Centos Page Size Modification
+title: Change page size on CentOS 
 weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-### Verify current page size
-Verify you’re on a 4 KB pagesize kernel by entering the following commands:
+Follow the steps below to install a 64K page size kernel on [CentOS 9  or newer](https://www.centos.org/download/).
+
+## Verify the current page size
+
+Verify you’re using a 4 KB pagesize kernel by entering the following commands:
 
 ```bash
 getconf PAGESIZE
 uname -r
 ```
-The output should be similar to below -- the full kernel name may vary, but the first line should always be **4096**:
+
+The output should be similar to below. The kernel flavor (the string after the version number) may vary, but the first line should always be 4096.
 
 ```output
 4096
@@ -21,15 +25,15 @@ The output should be similar to below -- the full kernel name may vary, but the 
 
 The 4096 indicates the current page size is 4KB. If you see a value that is different, you are already using a page size other than 4096 (4K).  On Arm systems, the valid options are 4K, 16K, and 64K.
 
-### Install the kernel-64k package:
+## Install the 64k kernel package:
 
-Enter the below `dnf` command to install the 64k kernel:
+Enter the command below to install the 64k kernel:
 
-   ```bash
-   sudo dnf -y install kernel-64k
-   ```
+```bash
+sudo dnf -y install kernel-64k
+```
 
-You should see a page or so of similar output ending with:
+You should see a page of output ending with:
 
 ```output
 ...
@@ -40,9 +44,7 @@ Installed:
 Complete!
 ```
 
-### Set the kernel-64k as the default kernel and reboot
-
-Enter the following to set the newly installed 64K kernel as default and reboot:
+Enter the following to configure the 64K kernel as default and reboot:
 
 ```bash
 k=$(echo /boot/vmlinuz*64k)
@@ -50,7 +52,8 @@ sudo grubby --set-default "$k" --update-kernel "$k"
 sudo reboot
 ```
 
-### Verify the page size and kernel version:
+## Verify the page size and kernel version:
+
 Upon reboot, check the kernel page size and name once again to confirm the changes:
 
 ```bash
@@ -58,14 +61,14 @@ getconf PAGESIZE
 uname -r
 ```
 
-The output should be similar to below -- like before, the full kernel name may vary, but the first line should always be **65536**:
+The output shows the 64k kernel is running: 
 
 ```output
 65536
 5.14.0-583.el9.aarch64+64k
 ```
 
-## Reverting back to the original 4K kernel on CentOS
+## Revert back to the 4K kernel
 
 To revert to the original 4K kernel, enter the following:
 
@@ -103,7 +106,8 @@ Upon reboot, verify you’re on a 4 KB pagesize kernel by entering the following
 getconf PAGESIZE
 uname -r
 ```
-The output should be similar to below -- the full kernel name may vary, but the first line should always be **4096**:
+
+The output shows the 4k kernel is running: 
 
 ```output
 4096

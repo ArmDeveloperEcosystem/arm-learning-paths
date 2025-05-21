@@ -5,25 +5,32 @@ weight: 2
 layout: learningpathall
 ---
 
-## How the CPU Locates Your Data
+## How does the CPU locate data in memory?
 
 When your program asks for a memory address, the CPU doesn’t directly reach into RAM or swap space for it; that would be slow, unsafe, and inefficient.
  
-Instead, it goes through the **virtual memory** system, where it asks for a specific chunk of memory called a **page**. Pages map virtual memory location to physical memory locations in RAM or swap space.
+Instead, it goes through the virtual memory system, where it asks for a specific chunk of memory called a page. Pages map virtual memory locations to physical memory locations in RAM or swap space.
 
-## What’s a Memory “Page”?
+## What’s a memory page?
 
-Think of your computer’s memory like a big sheet of graph paper. Each **page** is one square on that sheet. The **page table** is the legend that tells the computer which square (virtual address) maps to which spot in real RAM.  On x86, 4K is the only pagesize option, but Arm-based systems allow you to set 4K, 16K, or 64K page sizes to fine tune performance of your applications.  This tutorial only covers switching between 4K and 64K page sizes.
+Think of your computer’s memory like a big sheet of graph paper. Each page is one square on that sheet. The page table is the legend that identifies which square (virtual address) maps to which spot in physical RAM. On x86, 4K is the only page size option, but Arm-based systems allow you to use 4K, 16K, or 64K page sizes to fine tune the performance of your applications. 
+
+This Learning Path explains how to switch between 4K and 64K pages on different Linux distributions.
+
+## How should I select the memory page size?
+
+Points to consider when thinking about page size:
+
+- **4K pages** are the safe, default choice. They let you use memory in small slices and keep waste low. Since they are smaller, you need more of them when handling larger memory footprint applications. This creates more overhead for the operating system to manage, but it may be worth it for the flexibility. They are great for applications that need to access small bits of data frequently, like web servers or databases with lots of small transactions.
+
+- **64K pages** shine when you work with large, continuous data such as video frames or large database caches because they cut down on management overhead. They will use more memory if you don’t use the whole page, but they can also speed up access times for large data sets.
+
+When selecting your page size, it's important to try both options under real-world conditions, as it will depend on the data size and retrieval patterns of the data you are working with.  
+
+In addition, the page size may need to be reviewed over time as the application, memory usage patterns, and data sizes may change.  
 
 
-## When to Choose Which
-
-- **4 KB pages** are the safe, default choice. They let you use memory in small slices and keep waste low.  Since they are smaller, you need more of them when handling larger memory footprint applications.  This creates more overhead for the CPU to manage, but may be worth it for the flexibility.  They are great for applications that need to access small bits of data frequently, like web servers or databases with lots of small transactions.
-
-- **64 KB pages** shine when you work with big, continuous data—like video frames or large database caches—because they cut down on management overhead.  They can waste more memory if you don’t use the whole page, but they can also speed up access times for large data sets.
-
-When rightsizing your page size, its important to **try both** under real-world benchmarking conditions, as it will depend on the data size and retrieval patterns of the data you are working with.  In addition, the page size may need to be adjusted over time as the application, usage patterns, and data size changes.  Althoug this tutorial only covers switching between 4K and 64K page sizes, you can see from the below table that in some cases, you may find a sweet spot in between 4K and 64K at a 16K page size:
-
+### Summary of page size differences
 
 | Aspect          | 4K Pages                             | 64K Pages                              |
 |-----------------|--------------------------------------|----------------------------------------|
@@ -32,18 +39,18 @@ When rightsizing your page size, its important to **try both** under real-world 
 | **Efficiency**  | Needs more entries (more bookkeeping) | Needs fewer entries (less bookkeeping) |
 | **Waste**       | At most 4 KB unused per page         | Up to 64 KB unused if not fully used   |
 
-##### Summary of page size differences
+This Learning Path covers switching between 4K and 64K page sizes because these are supported by most Arm Linux distributions. In some cases, you may find that 16K page size is a sweet spot for your application, but Linux kernel, hardware, and software support is limited. One example of 16k page size is [Asahi Linux](https://asahilinux.org/).
 
 ## Experiment to see which works best for your workload
+
+The best way to determine the impact of page size on application performance is to experiment with both options.
+
 {{% notice Do not test on Production%}}
 Modifying the Linux kernel page size can lead to system instability or failure. Perform testing in a non-production environment before applying to production systems.
 {{% /notice %}}
 
-This learning path will guide you how to change (and revert back) the page size, so you can begin experimenting to see which fits best. The steps to install the 64K page size kernel are different for each OS, so be sure to select the correct one.
+Select the Arm Linux distribution you are using to find out how to install the 64K page size kernel.
 
-
-- [Ubuntu](../ubuntu)
-- [Debian](../debian)
-- [CentOS](../centos)
-
----
+- [Ubuntu](/learning-paths/servers-and-cloud-computing/arm_linux_page_size/ubuntu/)
+- [Debian](/learning-paths/servers-and-cloud-computing/arm_linux_page_size/debian/)
+- [CentOS](/learning-paths/servers-and-cloud-computing/arm_linux_page_size/centos/)
