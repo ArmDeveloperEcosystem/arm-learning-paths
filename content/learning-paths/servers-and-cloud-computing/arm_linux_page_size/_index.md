@@ -1,6 +1,10 @@
 ---
 title: Increasing Linux Kernel Page Size on Arm
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: This Learning Path is for developers who want to modify the Linux kernel page size on Arm-based systems to improve performance for memory-intensive workloads.
