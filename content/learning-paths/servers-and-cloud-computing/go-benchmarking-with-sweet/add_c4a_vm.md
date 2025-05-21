@@ -1,6 +1,6 @@
 ---
-title: Launching an Axion C4a Instance
-weight: 2
+title: Launching an Arm Axion C4a Instance
+weight: 20
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

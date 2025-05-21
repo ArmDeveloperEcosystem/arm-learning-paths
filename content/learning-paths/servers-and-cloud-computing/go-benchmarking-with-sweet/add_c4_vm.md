@@ -1,6 +1,6 @@
 ---
 title: Launching an Intel C4 Instance
-weight: 33
+weight: 30
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

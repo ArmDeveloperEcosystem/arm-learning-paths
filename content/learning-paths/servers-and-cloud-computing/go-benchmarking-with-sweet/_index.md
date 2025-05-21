@@ -3,15 +3,16 @@ title: Go Benchmarks with Sweet and Benchstat
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory guide for developers who want to measure performance of Go applications running on their servers.
+who_is_this_for: This learning path is for developers who are interested in measuring the performance of Go-based applications on their servers.
 
 learning_objectives: 
-    - Install Go, benchmarks, benchstat, and sweet  
-    - Compare sweet benchmarking runs with benchstat across multiple vm or bare metal instances
+    - Bring up two instances of GCP VMs 
+    - Install Go, benchmarks, benchstat, and sweet on the two VMs  
+    - Using sweet and benchstat, compare performance of Go applications on the two VMs
 
 prerequisites:
-    - A [Google Cloud account](https://console.cloud.google.com/).  This learning path can be run on-prem, or on any cloud provider, but specifically documents the process on GCP's Google Axion platform.
-    - A local machine with [Google Cloud CLI](/install-guides/gcloud/)  installed.
+    - A [Google Cloud account](https://console.cloud.google.com/).  This learning path can be run on-prem or on any cloud provider, but specifically documents the process on GCP's Google Axion platform.
+    - A local machine with [Google Cloud CLI](/install-guides/gcloud/) installed.
 
 author: Geremy Cohen
 
