@@ -1,5 +1,5 @@
 ---
-title: Increasing Linux Kernel Page Size on Arm
+title: Explore Performance Gains by Increasing the Linux Kernel Page Size on Arm
 
 draft: true
 cascade:
@@ -7,7 +7,7 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is for developers who want to modify the Linux kernel page size on Arm-based systems to improve performance for memory-intensive workloads.
+who_is_this_for: This is an introductory topic for developers who want to modify the Linux kernel page size on Arm-based systems to improve performance for memory-intensive workloads.
 
 learning_objectives:
   - Verify the current page size on your system.
@@ -16,20 +16,12 @@ learning_objectives:
   - Revert to the default 4K page size kernel (optional).
 
 prerequisites:
-  - Arm-based Linux system  
-  - Ubuntu [20.04 LTS or newer](https://releases.ubuntu.com/20.04/)  
-  - Debian [11 “Bullseye” or newer](https://www.debian.org/releases/bullseye/)  
-  - CentOS [9  or newer](https://www.centos.org/download/)  
+  - An Arm-based Linux system running Ubuntu, Debian, or CentOS.
 
-author:
-    - Geremy Cohen
-    
-layout: learning-path
 author: Geremy Cohen
 
-skill_level: Intermediate
+skill_level: Introductory
 subjects: Performance and Architecture
-cloud_service_providers: Google Cloud
     
 armips:
     - Neoverse
@@ -40,23 +32,27 @@ operatingsystems:
 tools_software_languages:
     - bash
 
-further reading:
-- resource:
-    title: Page (computer memory) – Wikipedia
-    link: https://en.wikipedia.org/wiki/Page_(computer_memory)
-    type: documentation
-- resource:
-    title: Debian Kernel Source Guide
-    link: https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_kernel_source
-    type: documentation
-- resource:
-    title: Ubuntu Kernel Build Docs
-    link: https://wiki.ubuntu.com/Kernel/BuildYourOwnKernel
-    type: documentation
-- resource:
-    title: CentOS Kernel Modules Guide
-    link: https://docs.centos.org/en-US/centos/install-guide/kernel-modules/
-    type: documentation
+further_reading:
+    - resource:
+        title: Understanding Memory Page Sizes on Arm64
+        link: https://amperecomputing.com/tuning-guides/understanding-memory-page-sizes-on-arm64
+        type: documentation
+    - resource:
+        title: Page (computer memory) – Wikipedia
+        link: https://en.wikipedia.org/wiki/Page_(computer_memory)
+        type: documentation
+    - resource:
+        title: Debian Kernel Source Guide
+        link: https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_kernel_source
+        type: documentation
+    - resource:
+        title: Ubuntu Kernel Build Docs
+        link: https://wiki.ubuntu.com/Kernel/BuildYourOwnKernel
+        type: documentation
+    - resource:
+        title: CentOS Documentation
+        link: https://docs.centos.org/
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -1,20 +1,30 @@
 ---
-title: Debian Page Size Modification
+title: Change page size on Debian
 weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Debian does not provide a 64K kernel via apt, so you will need to compile it from source.  There are two ways to do this: 1) download the source from the kernel.org website, or 2) use the Debian source package.  This guide will use the Debian source package.
+Follow the steps below to install a 64K page size kernel on [Debian 11 “Bullseye” or newer](https://www.debian.org/releases/bullseye/).
 
-### Verify current page size
-Verify you’re on a 4 KB pagesize kernel by entering the following commands:
+Debian does not provide a 64K kernel package, so you will need to compile it from source.  
+
+There are two ways to do this: 
+- Download the source from kernel.org.
+- Use the Debian source package.
+
+The instructions below use the Debian source package. 
+
+## Verify the current page size
+
+Verify you’re using a 4 KB pagesize kernel by entering the following commands:
 
 ```bash
 getconf PAGESIZE
 uname -r
 ```
-The output should be similar to below -- the full kernel name may vary, but the first line should always be **4096**:
+
+The output should be similar to below. The kernel flavor (the string after the version number) may vary, but the first line should always be 4096.
 
 ```output
 4096
@@ -23,20 +33,20 @@ The output should be similar to below -- the full kernel name may vary, but the 
 
 The 4096 indicates the current page size is 4KB. If you see a value that is different, you are already using a page size other than 4096 (4K).  On Arm systems, the valid options are 4K, 16K, and 64K.
 
-### Install from Debian Source Package
+## Install the Debian kernel source package
 
-To install a 64K page size kernel via package manager, follow these steps:
+Follow the steps below to install a 64K kernel using the Debian kernel source package.
 
-First, update, and install dependencies:
+First, update, and install the required software:
 
 ```bash
 sudo apt-get -y update
 sudo apt-get -y install git build-essential autoconf automake libtool libncurses-dev bison flex libssl-dev libelf-dev bc debhelper-compat rsync
 ```
 
-Download the kernel and cd to its directory:
-```bash
+Download the kernel source and cd to its directory:
 
+```bash
 # Fetch the actual kernel source
 apt source linux
 # Change to kernel source dir
@@ -46,6 +56,7 @@ cd -- linux*/
 ## Build and install the kernel
 
 Now that you have the kernel source, follow these steps to build and install the kernel:
+
 ```bash
 # Use running config as template for new config
 cp /boot/config-$(uname -r) .config 
@@ -70,9 +81,11 @@ sudo dpkg -i linux-image-*64k*.deb linux-headers-*64k*.deb
 ```
 
 The system is now ready to reboot:
+
 ```bash
 sudo reboot
 ```
+
 Upon reboot, check the kernel page size and name once again to confirm the changes:
 
 ```bash
@@ -80,15 +93,16 @@ getconf PAGESIZE
 uname -r
 ```
 
-The output should be similar to below -- like before, the full kernel name may vary, but the first line should always be **65536**:
+The output shows the 64k kernel is running: 
 
 ```output
 65536
 6.12.22-64k
 ```
+
 This indicates the current page size is 64K, and you are using the new custom made 64k kernel.  
 
-## Reverting back to the original 4K kernel
+## Revert back to the 4K kernel
 
 To revert back to the kernel we started with, enter:
 
@@ -105,6 +119,7 @@ Upon reboot, verify you’re on a 4 KB pagesize kernel by entering the following
 getconf PAGESIZE
 uname -r
 ```
+
 The output should be similar to below -- the full kernel name may vary, but the first line should always be **4096**:
 
 ```output
