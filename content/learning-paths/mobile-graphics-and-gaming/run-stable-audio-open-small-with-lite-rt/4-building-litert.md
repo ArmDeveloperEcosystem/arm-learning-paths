@@ -63,8 +63,10 @@ python3 ./configure.py
 |Please specify an Android build tools version to use.  [Default is 35.0.0]| Enter |
 |Do you wish to build TensorFlow with iOS support? [y/N]:| n |
 
-Once the Bazel configuration is complete, you can build TFLite as follows:
+Once the Bazel configuration is complete, you can build LiteRT for your target platform as follows:
 
+{{< tabpane code=true >}}
+  {{< tab header="Android">}}
 ```console
 bazel build -c opt --config android_arm64 //tensorflow/lite:libtensorflowlite.so \
     --define tflite_with_xnnpack=true \
@@ -72,6 +74,15 @@ bazel build -c opt --config android_arm64 //tensorflow/lite:libtensorflowlite.so
     --define tflite_with_xnnpack_qs8=true \
     --define tflite_with_xnnpack_qu8=true
 ```
+  {{< /tab >}}
+  {{< tab header="MacOS">}}
+bazel build -c opt --config macos //tensorflow/lite:libtensorflowlite.so \
+    --define tflite_with_xnnpack=true \
+    --define xnn_enable_arm_i8mm=true \
+    --define tflite_with_xnnpack_qs8=true \
+    --define tflite_with_xnnpack_qu8=true
+  {{< /tab >}}
+{{< /tabpane >}}
 
 The final step is to build flatbuffers used by the application:
 ```

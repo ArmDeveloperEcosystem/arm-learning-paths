@@ -24,22 +24,20 @@ In this section, you will explore two different conversion routes, to convert th
 
 1. **ONNX to LiteRT**: using the `onnx2tf` tool. This is the traditional two-step approach (PyTorch -> ONNX -> LiteRT). You will use it to convert the Conditioners submodule.
 
-2. **PyTorch to LiteRT**: using the Google AI Edge Torch tool. You will use this tool to convert the DiT and AutoEncoder submodules.
+2. **PyTorch to LiteRT**: using the [Google AI Edge Torch](https://developers.googleblog.com/en/ai-edge-torch-high-performance-inference-of-pytorch-models-on-mobile-devices/) tool. You will use this tool to convert the DiT and AutoEncoder submodules.
 
 
-## Download the sample code
-
-The Conditioners submodule is made of the T5Encoder model. You will use the ONNX to TFLite conversion for this submodule.
+## Create a vritual environment
 
 To avoid dependency issues, create a virtual environment. For example, you can use the following command:
 
 ```bash
 cd $WORKSPACE
-python3.10 -m venv env
-source env/bin/activate
+python3.10 -m venv .venv
+source .venv/bin/activate
 ```
 
-Clone the examples repository:
+## Clone the examples repository
 
 ```bash
 cd $WORKSPACE
@@ -47,7 +45,7 @@ git clone https://github.com/ARM-software/ML-examples.git
 cd ML-examples/kleidiai-examples/audiogen/
 ```
 
-Install the required Python packages for this, including *onnx2tf* and *ai_edge_litert*
+## Install the required dependencies
 
 ```bash
 bash install_requirements.sh
@@ -58,13 +56,13 @@ bash install_requirements.sh
 If you are using GPU on your machine, you may notice the following error:
 ```text
 Traceback (most recent call last):
-  File "$WORKSPACE/env/lib/python3.10/site-packages/torch/_inductor/runtime/hints.py",
+  File "$WORKSPACE/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/hints.py",
   line 46, in <module> from triton.backends.compiler import AttrsDescriptor
 ImportError: cannot import name 'AttrsDescriptor' from 'triton.backends.compiler'
-($WORKSPACE/env/lib/python3.10/site-packages/triton/backends/compiler.py)
+($WORKSPACE/.venv/lib/python3.10/site-packages/triton/backends/compiler.py)
 .
 ImportError: cannot import name 'AttrsDescriptor' from 'triton.compiler.compiler'
-($WORKSPACE/env/lib/python3.10/site-packages/triton/compiler/compiler.py)
+($WORKSPACE/.venv/lib/python3.10/site-packages/triton/compiler/compiler.py)
 ```
 
 Reinstall the following dependency:
@@ -93,9 +91,9 @@ After successful conversion, you now have a `tflite_conditioners` directory cont
 
 You will be using the float32.tflite model for on-device inference.
 
-### Convert DiT and AutoEncoder
+### Convert DiT and AutoEncoder Submodules
 
-To convert the DiT and AutoEncoder submodules, use the [Generative API](https://github.com/google-ai-edge/ai-edge-torch/tree/main/ai_edge_torch/generative/) provided by the ai-edge-torch tools. This enables you to export a generative PyTorch model directly to `.tflite` using three main steps:
+To convert the DiT and AutoEncoder submodules, use the [Generative API](https://github.com/google-ai-edge/ai-edge-torch/tree/main/ai_edge_torch/generative/) provided by the `ai-edge-torch` tools. This enables you to export a generative PyTorch model directly to `.tflite` using three main steps:
 
 1. Model re-authoring.
 2. Quantization.

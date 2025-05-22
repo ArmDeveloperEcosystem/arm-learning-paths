@@ -15,7 +15,6 @@ Your first task is to prepare a development environment with the required softwa
 - Android NDK: version r25b or newer.
 - Python: version 3.10 or newer (tested with 3.10).
 - CMake: version 3.16.0 or newer (tested with 3.28.1).
-- [Arm GNU Toolchain](/install-guides/gcc/arm-gnu).
 
 ### Create workspace directory
 
@@ -83,7 +82,9 @@ wget https://github.com/bazelbuild/bazel/releases/download/7.4.1/bazel-7.4.1-ins
 sudo bash bazel-7.4.1-installer-linux-x86_64.sh
   {{< /tab >}}
   {{< tab header="MacOS">}}
-brew install bazel@7
+cd $WORKSPACE
+export BAZEL_VERSION=7.4.1
+curl -fLO "https://github.com/bazelbuild/bazel/releases/download/{$BAZEL_VERSION}/bazel-{$BAZEL_VERSION}-installer-darwin-arm64.sh"
   {{< /tab >}}
 {{< /tabpane >}}
 
