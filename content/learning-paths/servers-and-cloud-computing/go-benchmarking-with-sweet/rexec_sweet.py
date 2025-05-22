@@ -1,10 +1,18 @@
 #!/usr/bin/env python3
+# ANSI color codes for visual differentiation
+COLORS = ['\033[94m', '\033[92m']  # blue, green
+RESET = '\033[0m'
 import subprocess
 import threading
 import tempfile
 import os
 import sys
 from datetime import datetime
+
+import json
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 # Helper: get running GCP VM instances
 def get_running_instances():
@@ -107,7 +115,7 @@ def prompt(prompt_text, default=None, validator=None):
             return ans
         print("Invalid value, please try again.")
 
-def run_remote(name, zone, remote_dir, sweet_cmd):
+def run_remote(name, zone, remote_dir, sweet_cmd, color):
     """
     SSH to the instance and run the sweet benchmark, streaming output.
     """
@@ -119,7 +127,7 @@ def run_remote(name, zone, remote_dir, sweet_cmd):
     p = subprocess.Popen(ssh_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     def reader():
         for line in iter(p.stdout.readline, b""):
-            sys.stdout.write(f"[{name}] {line.decode()}")
+            sys.stdout.write(f"{color}[{name}]{RESET} {line.decode()}")
     t = threading.Thread(target=reader, daemon=True)
     t.start()
     p.wait()
@@ -164,17 +172,35 @@ def main():
             "cmd": BENCHMARKS[bench]
         })
 
-    # run each benchmark
+    # run each benchmark in parallel
     errors = []
+    codes = {}
+    threads = []
     for syscfg in systems:
-        code = run_remote(
-            syscfg["name"],
-            syscfg["zone"],
-            syscfg["remote_dir"],
-            syscfg["cmd"]
-        )
+        def run_and_store(syscfg=syscfg):
+            idx = systems.index(syscfg)
+            color = COLORS[idx % len(COLORS)]
+            code = run_remote(
+                syscfg["name"],
+                syscfg["zone"],
+                syscfg["remote_dir"],
+                syscfg["cmd"],
+                color
+            )
+            codes[syscfg["name"]] = code
+
+        t = threading.Thread(target=run_and_store, daemon=True)
+        t.start()
+        threads.append(t)
+
+    # wait for all benchmarks to finish
+    for t in threads:
+        t.join()
+
+    # collect any failures
+    for name, code in codes.items():
         if code != 0:
-            errors.append(syscfg["name"])
+            errors.append(name)
 
     if errors:
         print("\n⚠️ Some benchmarks failed. Aborting benchstat step.")
@@ -231,7 +257,7 @@ def main():
         ])
 
     # run benchstat on primary and list results
-    benchstat_cmd = f"benchstat {remote_tmp}/{secondary['name']}.results {remote_tmp}/{primary['name']}.results > {remote_tmp}/benchstat.results"
+    benchstat_cmd = f"benchstat -format csv {remote_tmp}/{secondary['name']}.results {remote_tmp}/{primary['name']}.results > {remote_tmp}/benchstat.results"
     ls_cmd = f"ls -al {remote_tmp}/{secondary['name']}.results {remote_tmp}/{primary['name']}.results {remote_tmp}/benchstat.results"
     ssh_cmd = [
         "gcloud", "compute", "ssh", primary["name"],
