@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Azure Stream Analytics"
+title: "Process IoT telemetry in real time with Azure Stream Analytics"
 
 weight: 5
 
@@ -20,50 +20,50 @@ Azure Stream Analytics organizes real-time data processing through four main arc
 ## Create a Stream Analytics Job
 To process and analyze the telemetry data you are streaming to Azure IoT Hub, you will first create an Azure Stream Analytics job. Follow these steps to set it up:
 1. Sign in to the Azure Portal.
-2. Click “Create a resource”, type “Stream Analytics job” into the search box, and press Enter.
-3. From the search results, select Stream Analytics job, then click Create:
+2. Click **Create a resource**, type “Stream Analytics job” into the search box, and press **Enter**.
+3. From the search results, select **Stream Analytics job**, then click **Create**:
 ![img9 alt-text#center](figures/09.png)
 4. Provide the necessary information:
-* Subscription: Choose the Azure subscription you want to use for this job.
-* Resource group: Select the resource group you previously created (e.g., your IoT project's resource group).
-* Name: Provide a meaningful, unique name for your Stream Analytics job (e.g., IoTStreamAnalyticsJob).
-* Region: Choose the same Azure region as your IoT Hub for optimal performance and minimal latency.
-* Hosting environment: Select Cloud for Azure-managed infrastructure.
-* Streaming units: Set this to 1 (appropriate for initial testing and smaller workloads, you can scale up later).
+* Subscription: choose the Azure subscription you want to use for this job.
+* Resource group: select the resource group you previously created (e.g., your IoT project's resource group).
+* Name: provide a meaningful, unique name for your Stream Analytics job (e.g., IoTStreamAnalyticsJob).
+* Region: choose the same Azure region as your IoT Hub for optimal performance and minimal latency.
+* Hosting environment: select Cloud for Azure-managed infrastructure.
+* Streaming units: set this to 1 (appropriate for initial testing and smaller workloads, you can scale up later).
 
 ![img10 alt-text#center](figures/10.png)
 
-5. After reviewing your settings carefully, click Review + create, confirm that all details are correct, and then click Create to deploy your Azure Stream Analytics job.
+5. After reviewing your settings carefully, click **Review + create**, confirm that all details are correct, and then click **Create** to deploy your Azure Stream Analytics job.
 
 Your Stream Analytics job will deploy within a few minutes. Once the deployment is complete, you’ll be ready to configure inputs, define queries, and set outputs for real-time data processing and analytics.
 
 ## Configure Azure IoT Hub as an Input for Stream Analytics Job
 After successfully creating the Stream Analytics job, you will need to configure your Azure IoT Hub as an input source. This configuration allows Stream Analytics to read real-time telemetry data directly from your IoT devices. Follow these steps:
 1. Navigate to your newly created Stream Analytics job in the Azure Portal.
-2. In the left-hand menu, under the Job topology section, select Inputs.
-3. Click “Add input”, and choose “IoT Hub” as the input type.
+2. On the left-hand menu, under the **Job topology** section, select **Inputs**.
+3. Click **Add input**, and choose **IoT Hub** as the input type.
 ![img11 alt-text#center](figures/11.png)
 4. Enter the following configuration details:
-* Input Alias: Provide a name, such as `IoTHubInput`.
-* IoT Hub: Select the Azure IoT Hub you created earlier.
-* Consumer group: Choose `$Default`, unless you have explicitly created a custom consumer group.
-* Shared access policy name: Select `iothubowner` (provides full access for reading data from IoT Hub).
-* Endpoint: Select Messaging.
+* Input Alias: provide a name, such as `IoTHubInput`.
+* IoT Hub: select the Azure IoT Hub you created earlier.
+* Consumer group: choose `$Default`, unless you have explicitly created a custom consumer group.
+* Shared access policy name: select `iothubowner` (which provides full access for reading data from IoT Hub).
+* Endpoint: select Messaging.
 * Partition key: Type `deviceId` (this helps ensure the data streams are partitioned by device identifiers).
-* Event serialization format: Select `JSON`, as our telemetry data is transmitted in `JSON` format.
-* Encoding: Choose `UTF-8`.
+* Event serialization format: select `JSON`, as our telemetry data is transmitted in `JSON` format.
+* Encoding: Choose **UTF-8**.
 * Event compression type: Set this to None.
 
 ![img12 alt-text#center](figures/12.png)
 
-4. After entering these details, carefully verify them for accuracy and completeness. Click Save to apply the changes and successfully link your Azure IoT Hub as the input source for your Stream Analytics job. 
+5. After entering these details, carefully verify them for accuracy and completeness. Click **Save** to apply the changes and successfully link your Azure IoT Hub as the input source for your Stream Analytics job. 
 
 Your job is now configured to ingest streaming IoT telemetry data in real-time, preparing it for further analysis, storage, and visualization.
 
 ## Define the Stream Analytics Query
 Now that you have configured your Azure IoT Hub as an input source, the next step is to create and run a Stream Analytics query. This query defines how incoming IoT data will be filtered, transformed, or routed for further processing. Follow these steps:
 1. Navigate to your Stream Analytics job in the Azure Portal.
-2. Under the Job topology menu on the left, select Query.
+2. Under the Job topology menu on the left, select **Query**.
 3. In the query editor, enter the following simple `SQL-like` query to stream all incoming data from your IoT device
 ```SQL
 SELECT

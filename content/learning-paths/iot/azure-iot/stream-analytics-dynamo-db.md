@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Store Data in Azure Cosmos DB with Azure Stream Analytics"
+title: "Store data in Azure Cosmos DB with Azure Stream Analytics"
 
 weight: 6
 
@@ -50,40 +50,40 @@ You will now configure the stream analytics job such that the telemetry data wil
 ### Cosmos DB account and database
 Start by creating the Create Cosmos DB account and database:
 1. Log in to the Azure Portal.
-2. Select “Create a resource”, search for “Azure Cosmos DB”, and click Create:
+2. Select **Create a resource**, search for “Azure Cosmos DB”, and click **Create**:
 ![img14 alt-text#center](figures/14.png)
 ![img15 alt-text#center](figures/15.png)
 
-3. Select Azure Cosmos DB for NoSQL, then click Create.
+3. Select Azure Cosmos DB for NoSQL, then click **Create**.
 ![img16 alt-text#center](figures/16.png)
 
 4. Fill in the required details:
-* Subscription: Select your subscription.
-* Resource Group: Use your existing IoT resource group or create a new one.
-* Account Name: Provide a unique name (e.g., armiotcosmosdb).
-* Availability Zones: Disable.
-* Region: Choose the same region as your IoT Hub and Stream Analytics job.
-* Select Servleress as capacity mode.
-* Apply Free Tier Discount: Apply
+* Subscription: select your subscription.
+* Resource Group: use your existing IoT resource group or create a new one.
+* Account Name: provide a unique name (for example, armiotcosmosdb).
+* Availability Zones: disable.
+* Region: choose the same region as your IoT Hub and Stream Analytics job.
+* Select servleress as capacity mode.
+* Apply Free Tier Discount: apply
 * Check Limit total account throughput.
 ![img17 alt-text#center](figures/17.png)
-5. Click Review + create, then click Create.
+5. Click **Review + create**, then click **Create**.
 
 Once the deployment completes:
-* Navigate to your Cosmos DB account and select “Data Explorer”.
-* Click New Container, create a database (e.g., named IoTDatabase), and create a container named SensorReadings.
+* Navigate to your Cosmos DB account and select **Data Explorer**.
+* Click **New Container**, then create a database with a name such as "IoTDatabase", and create a container named "SensorReadings".
 * Select an appropriate partition key (recommended: /deviceId).
 * Enable analytical store capability to perform near real-time analytics on your operational data, without impacting the performance of transactional workloads: Off.
-* Click OK at the bottom.
+* Click **OK**.
 ![img18 alt-text#center](figures/18.png)
 
 ### Modify Stream Analytics Job
 Now update your query in Stream Analytics to write data from IoT Hub directly into Cosmos DB:
 1. Go to `IoTStreamAnalyticsJob`.
-2. Under Job topology, select Outputs.
-3. Click Add output, and select Cosmos DB:
+2. Under Job topology, select **Outputs**.
+3. Click **Add output**, and select **Cosmos DB**:
 ![img19 alt-text#center](figures/19.png)
-4. In the Cosmos DB pane, type CosmosDBOutput for the alias name, leave other fields at their default values, and click the Save button:
+4. In the Cosmos DB pane, type "CosmosDBOutput" for the alias name, leave other fields at their default values, and click the **Save** button:
 ![img20 alt-text#center](figures/20.png)
 
 ### Update Your Stream Analytics Query
@@ -104,12 +104,12 @@ FROM
 
 ![img21 alt-text#center](figures/21.png)
 
-Afterwards, click Start job, and then Start:
+Afterwards, click **Start job**, and then **Start**:
 
 ![img22 alt-text#center](figures/22.png)
 
 ## Verify data flow in Cosmos DB
-To verify that your data pipeline is working correctly, first start your Python IoT simulator application `iot_simulator.py`. Ensure it's actively sending telemetry data. Next, open the Azure Portal and navigate to your Azure Cosmos DB resource. Under Data Explorer, select your database and then your container (e.g., SensorReadings). Once selected, click Items to view your stored data. Sensor readings streamed from your IoT device will appear on the right-hand side of the Data Explorer interface, similar to the screenshot below:
+To verify that your data pipeline is working correctly, first start your Python IoT simulator application `iot_simulator.py`. Ensure it's actively sending telemetry data. Next, open the Azure Portal and navigate to your Azure Cosmos DB resource. Under Data Explorer, select your database and then your container (e.g., SensorReadings). Once selected, click **Items** to view your stored data. Sensor readings streamed from your IoT device will appear on the right-hand side of the Data Explorer interface, similar to the screenshot below:
 
 ![img23 alt-text#center](figures/23.png)
 
