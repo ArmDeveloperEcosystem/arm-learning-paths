@@ -7,14 +7,9 @@ layout: learningpathall
 ---
 
 ## Overview
- In this learning path, you'll learn how to benchmark Go code against two newly created systems.  In this chapter, you bring up the first system, (generically named System A), which is a c4a-standard-4. 
- 
-{{% notice Note %}}
-If you choose to run the benchmark against an existing instance, you can skip this section; refer to it as System A going forward. 
-{{% /notice %}}
+ In this learning path, you'll learn how to benchmark Go code against two newly created systems.  In this chapter, you bring up the first system, an Arm-based Google Axion c4a-standard-4 (c4a for short).  
 
-
-### Creating System A
+### Creating the c4a-standard-4 instance
 
 1\. Navigate to [https://console.cloud.google.com/welcome](https://console.cloud.google.com/welcome)
 
@@ -84,4 +79,5 @@ The Machine configuration page appears.
 
 ![](images/launch_c4a/19.png)
 
-After a few seconds, our System A starts up, and you are ready to continue on to the next section, where you will launch the second system, System B.
+After a few seconds, our c4a starts up, and you are ready to continue on to the next section, where you will launch the second system, an Intel-based Emerald Rapids c4-standard-8 (c4 for short).
+
