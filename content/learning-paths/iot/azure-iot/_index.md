@@ -22,10 +22,9 @@ author: Dawid Borycki
 
 ### Tags
 skilllevels: Advanced
-subjects: Internet of Things
+subjects: Performance and Architecture
 armips:
     - Cortex-A
-    - Neoverse
 operatingsystems:
     - Windows
     - Linux
