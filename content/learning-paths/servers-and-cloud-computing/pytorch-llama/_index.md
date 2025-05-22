@@ -19,8 +19,6 @@ author:
     - Nikhil Gupta
     - Pareena Verma
     - Nobel Chowdary Mandepudi
-    - Ravi Malhotra
-    - Konstantinos Margaritis
 
 ### Tags
 skilllevels: Introductory
