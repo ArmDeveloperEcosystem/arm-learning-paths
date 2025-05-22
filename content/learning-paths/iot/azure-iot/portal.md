@@ -138,7 +138,7 @@ Finally, the `index.html` includes the JavaScript file (main.js) placed at the e
 Make sure you have saved all three files (index.html, main.js, and styles.css). Next:
 1. Start the IoT Simulator to begin streaming data to the Azure IoT Hub.
 2. Open the index.html file locally in your web browser.
-3. Click the "Get temperature" button.
+3. Click the **Get temperature** button.
 
 You should now see real-time temperature readings displayed:
 
