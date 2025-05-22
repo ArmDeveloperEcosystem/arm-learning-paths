@@ -127,7 +127,7 @@ Finally, open the index.html file and replace its content with the following HTM
 
 This HTML file represents the main structure and entry point of your IoT web portal. It is divided into Head and Body sections: The head body defines basic metadata such as character set (UTF-8) and viewport configuration for responsive design. Then, it sets the title of your webpage to "IoT Solution" and links your CSS stylesheet (styles.css), which defines the appearance of the page.
 
-In the body section we have:
+In the body section, you will see:
 * a centered container (div) with a clear heading (h1) labeled "IoT Solution".
 *  a button (id="getTempBtn") that users click to trigger the JavaScript logic retrieving temperature data from your Azure Function.
 * a placeholder label (div) with the id "result" initially showing "Temperature: -- °C". The JavaScript updates this label dynamically with the actual temperature retrieved from your backend.
@@ -150,39 +150,41 @@ You will now deploy the web portal you have created to Azure Blob Storage, makin
 ### Create and Configure Azure Blob Storage
 1. Sign in to the Azure Portal.
 2. Create a Storage Account:
-* Click “Create a resource”
-* Search for “Storage account”
+* Click **Create a resource**.
+* Search for “Storage account”.
 ![img45 alt-text#center](figures/45.png)
-* Click “Create”.
+* Click **Create**.
 ![img46 alt-text#center](figures/46.png)
-3. Provide required details:
-* Subscription, resource group, storage account name (e.g. armiotstorage).
-* For Primary service, choose Azure Blob Storage or Azure Data Lake Storage Gen 2.
-* Select Standard performance and Locally-redundant storage (LRS).
+3. Provide the required details:
+* Subscription, resource group, and storage account name (e.g. armiotstorage).
+* For Primary service, choose **Azure Blob Storage** or **Azure Data Lake Storage Gen 2**.
+* Select **Standard performance** and **Locally-redundant storage (LRS)**.
 ![img47 alt-text#center](figures/47.png)
 * Click "Review + create", then "Create".
 3. Enable Static Website Hosting:
 * Navigate to your newly created storage account.
-* Under Data management, click “Static website”.
-* Select “Enabled”.
+* Under Data management, click **Static website**.
+* Select **Enabled**.
 * Set index.html as the index document name.
 ![img48 alt-text#center](figures/48.png)
-* Click Save.
+* Click **Save**.
 
 After saving, Azure provides you with a URL like: https://<storage-account-name>.z22.web.core.windows.net/. 
-Make sure to save this URL, as it will serve as the public endpoint for your website.
+Save this URL, as it will serve as the public endpoint for your website.
 
 ### Upload Files to Azure Blob Storage
-You can upload your website files directly using the Azure Portal or via Azure Storage Explorer. Here, you will use the Azure Portal:
+You can upload your website files directly using the Azure Portal or via Azure Storage Explorer. Here, use the Azure Portal:
 1. Navigate to your storage account.
-2. Under Data storage, select “Containers”.
+2. Under Data storage, select **Containers**.
 3. Open the container named ”$web” (created automatically when enabling static websites).
-4. Click Upload and select your three website files (index.html, main.js, styles.css), and upload them.
+4. Click **Upload** and select your three website files (index.html, main.js, styles.css), and upload them.
 
 ![img49 alt-text#center](figures/49.png)
 
 ### Verify the Deployment
-After uploading your files, open a browser and navigate to https://<storage-account-name>.z22.web.core.windows.net/. Your static website should load, allowing you to test the “Get temperature” button (to see temperatures make sure to start the IoT simulator):
+After uploading your files, open a browser and navigate to https://<storage-account-name>.z22.web.core.windows.net/. 
+
+Your static website should load, allowing you to test the **Get temperature** button (to see temperatures make sure to start the IoT simulator):
 
 ![img50 alt-text#center](figures/50.png)
 

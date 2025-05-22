@@ -58,9 +58,9 @@ For Python functions on Linux-based plans, local development and deployment repr
 ## Create an Azure Function App
 You will start by creating an Azure Function App, in which you will create an Azure Function that regularly queries temperature data from Cosmos DB. In the next step, you will add the capability to send notifications, whenever the temperature reading exceeds a predefined threshold. Proceed as follows:
 1. Sign in to the Azure Portal.
-2. Click “Create a resource”, type “Function App”, and select it:
+2. Click **Create a resource**, type “Function App”, and select it:
 ![img24 alt-text#center](figures/24.png)
-3. Click Create, then select Consumption as a hosting option:
+3. Click **Create**, then select Consumption as a hosting option:
 ![img25 alt-text#center](figures/25.png)
 4. Provide the required details:
 * Subscription: Your Azure subscription.

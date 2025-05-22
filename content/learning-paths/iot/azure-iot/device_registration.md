@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Device registration"
+title: "Build a Python-based IoT telemetry simulator"
 
 weight: 4
 
@@ -168,18 +168,20 @@ Finally, the conditional check `if __name__ == "__main__":` ensures that the mai
 To connect the Python application you developed earlier to Azure IoT Hub, follow these detailed steps.
 
 1. Register a Device on Azure IoT Hub:
-* Open the Azure Portal, go to your IoT Hub, and click Devices under Device management:
+* Open the Azure Portal, go to your IoT Hub, and click **Devices** under **Device management**:
 ![img6 alt-text#center](figures/06.png)
-* Click “Add Device”, enter a device ID (e.g., arm64Device01), and leave the authentication type as “Symmetric key.”
+* Click **Add Device**, enter a device ID (for example, "arm64Device01"), and leave the authentication type as **Symmetric key**:
 ![img7 alt-text#center](figures/07.png)
-* Click “Save”.
+* Click **Save**.
 
-2. Next, you’ll need to retrieve the connection string to integrate your Python application with Azure IoT Hub: 
-* From the device list, select your newly created device (arm64Device01)
-* Copy the Primary Connection String from the device details page. You’ll need this connection string to authenticate your Python application when connecting and streaming telemetry data
+2. Next, you’ll need to retrieve the connection string to integrate your Python application with Azure IoT Hub.
+* From the device list, select your newly-created device, "arm64Device01".
+* Copy the **Primary connection string** from the device details page. You’ll need this connection string to authenticate your Python application when connecting and streaming telemetry data.
 ![img8 alt-text#center](figures/08.png)
 
-Ensure this connection string is stored securely, as it provides authentication credentials for your device. In the next step, you’ll integrate this connection string into your Python simulator app, enabling secure communication and real-time data streaming to Azure IoT Hub
+Ensure this connection string is stored securely, as it provides authentication credentials for your device. 
+
+In the next step, you’ll integrate this connection string into your Python simulator app, enabling secure communication and real-time data streaming to Azure IoT Hub.
 
 ## Streaming Telemetry Data to Azure IoT Hub
 Now you’re ready to stream telemetry data from your Python application directly to Azure IoT Hub. Follow these steps to configure and run the application:
@@ -240,7 +242,7 @@ Upon successful execution, you should see output similar to what is shown below,
 
 Each telemetry message contains randomized sensor data (temperature, pressure, humidity), device ID, and a timestamp, providing realistic simulated data for IoT applications.
 
-To stop streaming telemetry data, press `Ctrl+C` in the terminal. The application will gracefully disconnect from Azure IoT Hub.
+To stop streaming telemetry data, press **Ctrl+C** in the terminal. The application will gracefully disconnect from Azure IoT Hub.
 
 This step completes the telemetry-streaming component of your Azure IoT application, laying the groundwork for subsequent steps like data processing, monitoring, and visualization
 
