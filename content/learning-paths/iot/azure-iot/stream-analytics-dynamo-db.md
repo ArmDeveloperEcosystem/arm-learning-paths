@@ -63,7 +63,7 @@ Start by creating the Create Cosmos DB account and database:
 * Account Name: provide a unique name (for example, armiotcosmosdb).
 * Availability Zones: disable.
 * Region: choose the same region as your IoT Hub and Stream Analytics job.
-* Select servleress as capacity mode.
+* Select serverless as capacity mode.
 * Apply Free Tier Discount: apply
 * Check Limit total account throughput.
 ![img17 alt-text#center](figures/17.png)
