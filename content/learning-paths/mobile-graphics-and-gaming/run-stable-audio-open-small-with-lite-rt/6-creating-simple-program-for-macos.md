@@ -61,10 +61,6 @@ cd $WORKSPACE
 ./build/audiogen $LITERT_MODELS_PATH "warm arpeggios on house beats 120BPM with drums effect" 4
 ```
 
-You can now pull the generated `output.wav` back to your host machine and listen to the result.
-
-```bash
-adb pull /data/local/tmp/app/output.wav
-```
+You can now check the generated `output.wav` and listen to the result.
 
 You should now have gained hands-on experience running the Stable Audio Open Small model with LiteRT on Arm-based devices. This includes setting up the environment, optimizing the model for on-device inference, and understanding how efficient runtimes like LiteRT make low-latency generative AI possible at the edge. You’re now better equipped to explore and deploy AI-powered audio applications on mobile and embedded platforms.
