@@ -3,7 +3,7 @@ title: Build IoT Solutions in Azure for Arm Devices
 
 minutes_to_complete: 180
 
-who_is_this_for: This is an advanced topic for developers who want to build a comprehensive IoT solution in Azure that streams, stores, monitors, aggregates, and visualizes telemetry data from Arm64-powered IoT devices.
+who_is_this_for: This is an advanced topic for developers who want to build a comprehensive IoT solution in Azure that streams, stores, monitors, aggregates, and visualizes telemetry data from Arm IoT devices.
 
 learning_objectives:
     - Set up and configure Azure IoT Hub for device communication.

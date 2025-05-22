@@ -13,7 +13,7 @@ The Internet of Things (IoT) is a technological landscape where physical devices
 By collecting and analyzing real-time data from interconnected sensors and devices, IoT solutions empower businesses to make informed decisions, predict maintenance needs, optimize resource usage, and deliver innovative user experiences.
 
 ## IoT and Arm Devices
-Arm64-powered devices play a critical role in IoT applications due to their superior performance, efficiency, and energy optimization capabilities. Arm64, also known as AArch64, is a 64-bit architecture widely adopted in mobile devices, embedded systems, edge computing devices, and single-board computers such as Raspberry Pi 4, NVIDIA Jetson, and similar hardware platforms. 
+Arm devices play a critical role in IoT applications due to their superior performance, efficiency, and energy optimization capabilities. Arm64, also known as AArch64, is a 64-bit architecture widely adopted in mobile devices, embedded systems, edge computing devices, and single-board computers such as Raspberry Pi 4, NVIDIA Jetson, and similar hardware platforms. 
 
 These devices are compact, cost-effective, and energy-efficient, making them ideally suited for battery-operated scenarios, remote monitoring systems, edge analytics, and IoT deployments in environments where power and computational efficiency are critical. By leveraging Arm64-based devices, developers can build intelligent, scalable, and energy-efficient IoT solutions that reduce operational costs while maximizing responsiveness and uptime.
 
@@ -28,9 +28,9 @@ Overall, Azure IoT offers an extensive, secure, and highly scalable environment,
 
 ## Learning Path objectives
 
-In this Learning Path, you’ll learn how to effectively leverage the Azure IoT ecosystem by building a complete, end-to-end IoT solution tailored specifically for Arm64-powered devices using Python. 
+In this Learning Path, you’ll learn how to effectively leverage the Azure IoT ecosystem by building a complete, end-to-end IoT solution tailored specifically for Arm devices using Python. 
 
-You’ll start by setting up and configuring an Azure IoT Hub, the central component that facilitates secure communication and device management. Next, You’ll register our Arm64 IoT device and use the Azure IoT Python SDK to stream real-time sensor data to the cloud.
+You’ll start by setting up and configuring an Azure IoT Hub, the central component that facilitates secure communication and device management. Next, You’ll register your Arm IoT device and use the Azure IoT Python SDK to stream real-time sensor data to the cloud.
 
 Once data streaming is established, you’ll explore real-time analytics capabilities with Azure Stream Analytics, enabling immediate processing and transformation of incoming telemetry. You’ll store this streaming IoT data securely and efficiently in Azure Cosmos DB, configuring Stream Analytics to ensure seamless data persistence. To enhance our solution's robustness, you’ll implement a serverless data monitoring and alerting system using Azure Functions, automatically notifying users when sensor data exceeds predefined thresholds. 
 
