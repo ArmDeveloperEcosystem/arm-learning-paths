@@ -1,31 +1,49 @@
 ---
-title: Build & Run an AI Agent on Your Workstation
+title: Build & Run an AI Agent on your development machine
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+In this section you will learn how to setup an AI Agent on your development machine. You will then connect your MCP server running on the Raspberry Pi 5 to it.
+
+These commands were tested on an Linux Arm development machine. 
+
 ### Create an AI Agent and point it at your Pi's MCP Server
-1. Bootstrap the Agent Project
+1. Install `uv` on your development machine:
+
 ```bash
-# create & enter folder
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+2. Create a directory for the Agent:
+```bash
 mkdir mcp-agent && cd mcp-agent
 ```
-2. scaffold with **uv**
+3. Setup the directory to use `uv`:
 ```bash
 uv init
 ```
-3. install **OpenAI Agents SDK** + **dotenv**
+
+This command adds:
+- .venv/ (auto-created virtual environment)
+- pyproject.toml (project metadata & dependencies)
+- .python-version (pinned interpreter)
+- README.md, .gitignore, and a sample main.py
+
+4. Install **OpenAI Agents SDK** + **dotenv**
 ```bash
 uv add openai-agents python-dotenv
 ```
-4. Create a `.env` file with your OpenAI key:
+5. Create a `.env` file with your OpenAI key:
 ```bash
 echo -n "OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>" > .env
 ```
 
-### Write the Agent Client (main.py)
+### Write the Python script for the Agent Client
+
+Use a file editor of your choice and replace the content of the sample `main.py` with the content shown below:
+
 ```python
 import asyncio, os
 from dotenv import load_dotenv
@@ -38,7 +56,7 @@ from agents import Agent, Runner, set_default_openai_key
 from agents.mcp import MCPServerSse
 from agents.model_settings import ModelSettings
 
-async def run(mcp_server: list[MCPServer]):
+async def run(mcp_server: list[MCPServerSse]):
     set_default_openai_key(os.getenv("OPENAI_API_KEY"))
 
     agent = Agent(
@@ -70,10 +88,14 @@ if __name__ == "__main__":
 ```
 
 ### Execute the Agent
+
+You are now ready to the run the agent and test it with your running MCP server:
+
+Run the `main.py` python script:
 ```bash
 uv run main.py
 ```
-You should see output like:
+The output should look like:
 ```output
 Running: What is the CPU temperature?
 Response: The current CPU temperature is 48.8°C.
