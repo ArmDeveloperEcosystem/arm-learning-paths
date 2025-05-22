@@ -1,5 +1,5 @@
 ---
-title: Build IoT Solutions in Azure for Arm-Powered Devices
+title: Build IoT Solutions in Azure for Arm Devices
 
 minutes_to_complete: 180
 
