@@ -2,8 +2,6 @@
 title: Finch
 author: Jason Andrews
 
-draft: true
-
 minutes_to_complete: 10
 
 official_docs: https://runfinch.com/docs/
