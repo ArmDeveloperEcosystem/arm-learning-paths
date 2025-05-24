@@ -1,14 +1,14 @@
 ---
-title: Build & Run an AI Agent on your development machine
+title: Build and run an AI Agent on your development machine
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-In this section you will learn how to setup an AI Agent on your development machine. You will then connect your MCP server running on the Raspberry Pi 5 to it.
+In this section you'll learn how to set up an AI Agent on your development machine. You will then connect your MCP server running on the Raspberry Pi 5 to it.
 
-These commands were tested on an Linux Arm development machine. 
+These commands were tested on a Linux Arm development machine. 
 
 ### Create an AI Agent and point it at your Pi's MCP Server
 1. Install `uv` on your development machine:
@@ -35,7 +35,8 @@ This command adds:
 ```bash
 uv add openai-agents python-dotenv
 ```
-5. Create a `.env` file with your OpenAI key:
+5. Create a `.env` file to securely store your OpenAI API key:
+
 ```bash
 echo -n "OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>" > .env
 ```
@@ -89,13 +90,13 @@ if __name__ == "__main__":
 
 ### Execute the Agent
 
-You are now ready to the run the agent and test it with your running MCP server:
+You’re now ready to run the AI Agent and test its connection to your running MCP server on the Raspberry Pi 5.
 
 Run the `main.py` python script:
 ```bash
 uv run main.py
-```
-The output should look like:
+```md
+The output should look something like this:
 ```output
 Running: What is the CPU temperature?
 Response: The current CPU temperature is 48.8°C.
