@@ -14,13 +14,13 @@ SPE integrates sampling directly into the CPU pipeline, triggering on individual
 
 This enables software developers to tune user-space software for characteristics such as memory latency and cache accesses. Importantly, cache statistics are enabled with the Linux Perf cache-to-cache (C2C) utility.
 
-Please refer to the [Arm SPE whitepaper](https://developer.arm.com/documentation/109429/latest/) for more details. 
+Please refer to the [Arm SPE white paper](https://developer.arm.com/documentation/109429/latest/) for more details. 
 
 In this Learning Path, you will use SPE and Perf C2C to diagnose a cache issue for an application running on a Neoverse server.
 
 ## False sharing within the cache
 
-Even when two threads touch entirely separate variables, modern processors move data in fixed-size cache lines (nominally 64-bytes). If those distinct variables happen to occupy bytes within the same line, every time one thread writes its variable the core’s cache must gain exclusive ownership of the whole line, forcing the other core’s copy to be invalidated. The second thread, still working on its own variable, then triggers a coherence miss to fetch the line back, and the ping-pong pattern repeats. Please see the illustration below, taken from the Arm SPE whitepaper, for a visual explanation.
+Even when two threads touch entirely separate variables, modern processors move data in fixed-size cache lines (nominally 64-bytes). If those distinct variables happen to occupy bytes within the same line, every time one thread writes its variable the core’s cache must gain exclusive ownership of the whole line, forcing the other core’s copy to be invalidated. The second thread, still working on its own variable, then triggers a coherence miss to fetch the line back, and the ping-pong pattern repeats. Please see the illustration below, taken from the Arm SPE white paper, for a visual explanation.
 
 ![false_sharing_diagram](./false_sharing_diagram.png)
 
