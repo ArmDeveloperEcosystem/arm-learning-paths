@@ -1,12 +1,12 @@
 ---
-title: Build and run an AI Agent on your development machine
+title: Build and run an AI agent on your development machine
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-In this section you'll learn how to set up an AI Agent on your development machine. You will then connect your MCP server running on the Raspberry Pi 5 to it.
+In this section, you'll learn how to set up an AI Agent on your development machine. You will then connect your MCP server running on the Raspberry Pi 5 to it.
 
 These commands were tested on a Linux Arm development machine. 
 
@@ -20,18 +20,18 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 ```bash
 mkdir mcp-agent && cd mcp-agent
 ```
-3. Setup the directory to use `uv`:
+3. Set up the directory to use `uv`:
 ```bash
 uv init
 ```
 
 This command adds:
-- .venv/ (auto-created virtual environment)
-- pyproject.toml (project metadata & dependencies)
-- .python-version (pinned interpreter)
-- README.md, .gitignore, and a sample main.py
+- .venv/ (auto-created virtual environment).
+- pyproject.toml (project metadata and dependencies).
+- .python-version (pinned interpreter).
+- README.md, .gitignore, and a sample main.py.
 
-4. Install **OpenAI Agents SDK** + **dotenv**
+4. Install **OpenAI Agents SDK** + **dotenv**:
 ```bash
 uv add openai-agents python-dotenv
 ```
@@ -92,11 +92,14 @@ if __name__ == "__main__":
 
 You’re now ready to run the AI Agent and test its connection to your running MCP server on the Raspberry Pi 5.
 
-Run the `main.py` python script:
+Run the `main.py` Python script:
+
 ```bash
 uv run main.py
-```md
+```
+
 The output should look something like this:
+
 ```output
 Running: What is the CPU temperature?
 Response: The current CPU temperature is 48.8°C.
@@ -110,9 +113,13 @@ This lightweight protocol isn’t just a game-changer for LLM developers—it al
 
 ### Next Steps
 - **Expand Your Toolset**  
-   - Write additional `@mcp.tool()` functions for Pi peripherals (GPIO pins, camera, I²C sensors, etc.)  
-   - Combine multiple MCP servers (e.g. filesystem, web-scraper, vector-store memory) for richer context  
+   - Write additional `@mcp.tool()` functions for Pi peripherals (such as GPIO pins, camera, and I²C sensors).  
+   - Combine multiple MCP servers (for example, filesystem, web-scraper, and vector-store memory) for richer context.  
 
 - **Integrate with IoT Platforms**  
-   - Hook into Home Assistant or Node-RED via MCP  
-   - Trigger real-world actions (turn on LEDs, read environmental sensors, control relays)  
+   - Hook into Home Assistant or Node-RED through MCP.  
+   - Trigger real-world actions (for example, turn on LEDs, read environmental sensors, and control relays).  
+
+   ### Section summary
+You’ve now built and run an AI agent on your development machine that connects to an MCP server on your Raspberry Pi 5. Your agent can now interact with real-world data sources in real time — a complete edge-to-cloud loop powered by OpenAI’s Agent SDK and the MCP protocol.
+

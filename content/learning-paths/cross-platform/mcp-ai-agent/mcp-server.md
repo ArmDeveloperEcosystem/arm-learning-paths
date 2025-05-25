@@ -1,18 +1,18 @@
 ---
-title: Set up an MCP Server on Raspberry Pi 5
+title: Set up an MCP server on Raspberry Pi 5
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up a FastMCP Server on Raspberry Pi 5 with uv and ngrok
+## Set up a FastMCP server on Raspberry Pi 5 with uv and ngrok
 
 In this section you will learn how to:
 
-1. Install uv (the Rust-powered Python package manager)  
-2. Bootstrap a simple MCP server on your Raspberry Pi 5 that reads the CPU temperature and searches the weather data
-3. Expose the local MCP server to the internet using ngrok (HTTPS tunneling service)
+1. Install uv (the Rust-powered Python package manager).  
+2. Bootstrap a simple MCP server on your Raspberry Pi 5 that reads the CPU temperature and searches the weather data.
+3. Expose the local MCP server to the internet using ngrok (HTTPS tunneling service).
 
 You will run all the commands shown below on your Raspberry Pi 5 running Raspberry Pi OS (64-bit). 
 
@@ -22,26 +22,26 @@ In your Raspberry Pi Terminal, install `uv`:
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-**uv** is a next-generation, Rust-based package manager that unifies pip, virtualenv, Poetry, and more — offering 10×–100× faster installs, built-in virtual environment handling, robust lockfiles, and full compatibility with the Python ecosystem.
+`uv` is a Rust-based, next-generation Python package manager that replaces tools like `pip`, `virtualenv`, and Poetry. It delivers 10×–100× faster installs along with built-in virtual environments, lockfile support, and full Python ecosystem compatibility.
 
 {{% notice Note %}}
 After the script finishes, restart your terminal so that the uv command is on your PATH.
 {{% /notice %}}
 
 #### 2. Bootstrap the MCP Project
-1. Create a project directory and enter it:
+1. Create a project directory and navigate to it:
 ```bash
 mkdir mcp
 cd mcp
 ```
-2. Initialize with `uv`:
+2. Initialize `uv`:
 ```bash
 uv init
 ```
 This command adds:
-- .venv/ (auto-created virtual environment)
-- pyproject.toml (project metadata and dependencies)
-- .python-version (pinned interpreter)
+- .venv/ (auto-created virtual environment).
+- pyproject.toml (project metadata and dependencies).
+- .python-version (pinned interpreter).
 - README.md, .gitignore, and a sample main.py
 
 3. Install the dependencies (learn more about [FastMCP](https://github.com/jlowin/fastmcp)):

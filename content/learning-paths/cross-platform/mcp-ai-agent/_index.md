@@ -5,7 +5,7 @@ title: Deploy an MCP Server on Raspberry Pi 5 for AI Agent Interaction using Ope
     
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is for LLM and IoT developers who want to run and interact with AI agents on edge devices like the Raspberry Pi 5. If you're familiar with LLM concepts, basic networking, and Python, you'll learn how to deploy a lightweight Model Context Protocol (MCP) server and use the OpenAI Agent SDK to create and register tools for intelligent local inference.
+who_is_this_for: This Learning Path is for LLM and IoT developers who want to run and interact with AI agents on edge devices like the Raspberry Pi 5. You'll learn how to deploy a lightweight Model Context Protocol (MCP) server and use the OpenAI Agent SDK to create and register tools for intelligent local inference.
 
 learning_objectives: 
     - Deploy a lightweight Model Context Protocol (MCP) server on Raspberry Pi 5 for local AI agent execution.
@@ -17,7 +17,7 @@ prerequisites:
     - A [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) with a Linux-based OS installed.
     - Familiarity with Python programming and prompt engineering techniques.
     - Basic understanding of Large Language Models (LLMs) and how they are used in local inference.
-    - Understanding of AI agents and the OpenAI Agent SDK (or similar frameworks)
+    - Understanding of AI agents and the OpenAI Agent SDK (or similar frameworks).
 
 author: Andrew Choi
 
