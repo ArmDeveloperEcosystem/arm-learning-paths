@@ -33,14 +33,14 @@ After the example application builds successfully, a binary file named `audiogen
 A SentencePiece model is a type of subword tokenizer which is used by the audiogen application, you’ll need to download the *spiece.model* file from:
 
 ```bash
-cd $WORKSPACE
+cd $LITERT_MODELS_PATH
 wget https://huggingface.co/google-t5/t5-base/resolve/main/spiece.model
 ```
 
 Verify this model was downloaded to your `WORKSPACE`.
 
 ```text
-ls $WORKSPACE/spiece.model
+ls $LITERT_MODELS_PATH/spiece.model
 ```
 
 Copy the shared LiteRT dynamic library to the $LITERT_MODELS_PATH.
@@ -57,7 +57,7 @@ From there, you can then run the audiogen application, which requires just three
 Play around with the advice from [Download and test the model](../2-testing-model) section.
 
 ```bash
-cd $WORKSPACE
+cd $WORKSPACE/ML-examples/kleidiai-examples/audiogen/app/
 ./build/audiogen $LITERT_MODELS_PATH "warm arpeggios on house beats 120BPM with drums effect" 4
 ```
 

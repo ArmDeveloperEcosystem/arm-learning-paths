@@ -67,13 +67,11 @@ Once the Bazel configuration is complete, you can build LiteRT for your target p
 
 {{< tabpane code=true >}}
   {{< tab header="Android">}}
-```console
 bazel build -c opt --config android_arm64 //tensorflow/lite:libtensorflowlite.so \
     --define tflite_with_xnnpack=true \
     --define=xnn_enable_arm_i8mm=true \
     --define tflite_with_xnnpack_qs8=true \
     --define tflite_with_xnnpack_qu8=true
-```
   {{< /tab >}}
   {{< tab header="MacOS">}}
 bazel build -c opt --config macos //tensorflow/lite:libtensorflowlite.so \
@@ -92,7 +90,7 @@ cmake ../tensorflow/lite/tools/cmake/native_tools/flatbuffers
 cmake --build .
 ```
 
-Now that LiteRT and FlatBuffers are built, you're ready to compile and deploy the Stable Audio Open Small inference application on your Android device.
+Now that LiteRT and FlatBuffers are built, you're ready to compile and deploy the Stable Audio Open Small inference application on your Android or macOS device.
 
 
 
