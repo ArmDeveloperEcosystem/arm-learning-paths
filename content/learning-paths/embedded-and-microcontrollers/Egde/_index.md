@@ -46,7 +46,7 @@ further_reading:
         link: https://docs.edgeimpulse.com/nordic/concepts/edge-ai/what-is-edge-ai
         type: blog
     - resource:
-        title: Edge Impulse for Begineers 
+        title: Edge Impulse for Beginners 
         link: https://docs.edgeimpulse.com/docs/readme/for-beginners
         type: doc 
 
