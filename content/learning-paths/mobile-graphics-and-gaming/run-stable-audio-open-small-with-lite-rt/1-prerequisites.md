@@ -78,15 +78,25 @@ Bazel is an open-source build tool which you will use to build LiteRT libraries.
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
 cd $WORKSPACE
-wget https://github.com/bazelbuild/bazel/releases/download/7.4.1/bazel-7.4.1-installer-linux-x86_64.sh
+export BAZEL_VERSION=7.4.1
+wget https://github.com/bazelbuild/bazel/releases/download/{$BAZEL_VERSION}/bazel-{$BAZEL_VERSION}-installer-linux-x86_64.sh
 sudo bash bazel-7.4.1-installer-linux-x86_64.sh
+export PATH="/usr/local/bin:$PATH"
   {{< /tab >}}
   {{< tab header="MacOS">}}
 cd $WORKSPACE
 export BAZEL_VERSION=7.4.1
 curl -fLO "https://github.com/bazelbuild/bazel/releases/download/{$BAZEL_VERSION}/bazel-{$BAZEL_VERSION}-installer-darwin-arm64.sh"
+sudo bash bazel-7.4.1-installer-darwin-arm64.sh
+export PATH="/usr/local/bin:$PATH"
   {{< /tab >}}
 {{< /tabpane >}}
+
+You can verify the installation and check the version with:
+
+```console
+bazel --version
+```
 
 ### Install Android NDK
 
@@ -99,9 +109,10 @@ wget https://dl.google.com/android/repository/android-ndk-r25b-linux.zip
 unzip android-ndk-r25b-linux.zip
   {{< /tab >}}
   {{< tab header="MacOS">}}
+cd $WORKSPACE
 wget https://dl.google.com/android/repository/android-ndk-r25b-darwin.zip
-unzip android-ndk-r25b-darwin
-mv android-ndk-r25b-darwin ~/Library/Android/android-ndk-r25b
+unzip android-ndk-r25b-darwin.zip
+mv android-ndk-r25b ~/Library/Android/android-ndk-r25b
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -115,7 +126,6 @@ export PATH=$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
   {{< tab header="MacOS">}}
 export NDK_PATH=~/Library/Android/android-ndk-r25b
 export PATH=$PATH:$NDK_PATH/toolchains/llvm/prebuilt/darwin-x86_64/bin
-export PATH=$PATH:~/Library/Android/sdk/cmdline-tools/latest/bin
   {{< /tab >}}
 {{< /tabpane >}}
 

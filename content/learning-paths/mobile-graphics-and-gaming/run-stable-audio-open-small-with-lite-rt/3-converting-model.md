@@ -87,7 +87,7 @@ You can use the provided script to convert the Conditioners submodule:
 python3 ./scripts/export_conditioners.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
 ```
 
-After successful conversion, you now have a `tflite_conditioners` directory containing models with different precisions (e.g., float16, float32).
+After successful conversion, you now have a `conditioners_tflite` directory containing models with different precisions (e.g., float16, float32).
 
 You will be using the float32.tflite model for on-device inference.
 
