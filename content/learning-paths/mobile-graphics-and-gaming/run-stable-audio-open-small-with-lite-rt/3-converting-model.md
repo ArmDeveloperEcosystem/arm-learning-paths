@@ -27,7 +27,7 @@ In this section, you will explore two different conversion routes, to convert th
 2. **PyTorch to LiteRT**: using the [Google AI Edge Torch](https://developers.googleblog.com/en/ai-edge-torch-high-performance-inference-of-pytorch-models-on-mobile-devices/) tool. You will use this tool to convert the DiT and AutoEncoder submodules.
 
 
-## Create a vritual environment
+## Create a virtual environment
 
 To avoid dependency issues, create a virtual environment. For example, you can use the following command:
 
