@@ -46,9 +46,9 @@ further_reading:
         link: https://docs.edgeimpulse.com/nordic/concepts/edge-ai/what-is-edge-ai
         type: blog
     - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: post 
+        title: Edge Impulse for Begineers 
+        link: https://docs.edgeimpulse.com/docs/readme/for-beginners
+        type: doc 
 
 
 
