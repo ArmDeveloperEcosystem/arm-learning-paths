@@ -1,24 +1,23 @@
 ---
-title: Deploy an MCP server on a Raspberry Pi 5 and interact with it using an AI agent
+title: Deploy an MCP Server on Raspberry Pi 5 for AI Agent Interaction using OpenAI SDK
 
-draft: true
-cascade:
-    draft: true
+
     
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path targets LLM and IoT developers who are familiar with Large Language Model (LLM) concepts and networking. You will learn how to deploy a lightweight Model Context Protocol (MCP) server on a Raspberry Pi 5 and interact with it via the OpenAI-Agent SDK.
+who_is_this_for: This Learning Path is for LLM and IoT developers who want to run and interact with AI agents on edge devices like the Raspberry Pi 5. You'll learn how to deploy a lightweight Model Context Protocol (MCP) server and use the OpenAI Agent SDK to create and register tools for intelligent local inference.
 
 learning_objectives: 
-    - Deploy a lightweight Model Context Protocol (MCP) server on Raspberry Pi 5
-    - Design and register custom tools for the AI Agent
-    - Create custom endpoints
-    - Learn about uv — a fast, efficient Python package manager
+    - Deploy a lightweight Model Context Protocol (MCP) server on Raspberry Pi 5 for local AI agent execution.
+    - Use the OpenAI Agent SDK to interact with a local AI agent.
+    - Design and register custom tools for the agent tasks.
+    - Learn about uv — a fast, efficient Python package manager for efficient local deployment.
 
 prerequisites:
-    - A [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/)
-    - Basic understanding of Python and prompt engineering.
-    - Understanding of LLM and AI Agent fundamentals
+    - A [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) with a Linux-based OS installed.
+    - Familiarity with Python programming and prompt engineering techniques.
+    - Basic understanding of Large Language Models (LLMs) and how they are used in local inference.
+    - Understanding of AI agents and the OpenAI Agent SDK (or similar frameworks).
 
 author: Andrew Choi
 
