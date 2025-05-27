@@ -138,7 +138,7 @@ ngrok http 8000
 ```
 4. Copy the generated HTTPS URL (e.g. `https://abcd1234.ngrok-free.app`). You’ll use this endpoint to connect external tools or agents to your MCP server. Keep this URL available for the next steps in your workflow.
 
-### Section summary
+## Section summary
 
 You now have a working FastMCP server on your Raspberry Pi 5. It includes tools for reading CPU temperature and retrieving weather data, and it's accessible over the internet via a public HTTPS endpoint using ngrok. This sets the stage for integration with LLM agents or other external tools.
 
