@@ -173,7 +173,7 @@
         {{- end -}}  
 
         {{- if and (.File) (in .File.Path "learning-paths") -}}
-        <learningpathid>
+        <document_id>
         {{- if .IsSection -}}
         {{- with .Title -}}
             {{ . }}
@@ -187,9 +187,9 @@
             Unknown Parent Title
         {{- end -}}
         {{- end -}}
-        </learningpathid>
-        <parentid>1</parentid>
-        <pageid>{{.Params.weight -}}</pageid>
+        </document_id>
+        <parentitem>1</parentitem>
+        <itemid>{{.Params.weight -}}</itemid>
         {{- end -}}
       </coveo:metadata>
     </url>
