@@ -32,11 +32,10 @@ tools_software_languages_filter:
 - Docker: 2
 - Fixed Virtual Platform: 1
 - GitHub: 3
-- IoT: 1
 - Matter: 1
 - MCP: 1
 - Python: 2
-- Raspberry Pi: 2
+- Raspberry Pi: 3
 - Remote.It: 1
 - VS Code: 1
 ---
