@@ -186,13 +186,13 @@ Azure Function App settings, which are also known as application settings or env
 
 Follow these steps to configure the Cosmos DB connection string
 1. In the Azure Portal navigate to Azure Function App.
-2. Click Environmental variables (under Settings)
-3. Click the + Add button
-4. Enter the name you used in your code (e.g., armiotcosmosdb_DOCUMENTDB).
+2. Click **Environmental variables** (under **Settings**).
+3. Click the **+ Add** button.
+4. Enter the name you used in your code (such as "armiotcosmosdb_DOCUMENTDB").
 5. Paste the Cosmos DB connection string into the Value field:
 ![img41 alt-text#center](figures/41.png)
-6. Click Apply to add the setting.
-7. Press Apply at the bottom to apply changes. Then, confirm to save changes
+6. Click **Apply** to add the setting.
+7. Click **Apply** at the bottom to apply changes. Then, confirm to save changes
 
 ## Testing the Azure Function
 Once you've configured the connection string, test your deployed Azure Function as follows:
