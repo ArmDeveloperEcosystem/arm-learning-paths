@@ -61,7 +61,6 @@ tools_software_languages_filter:
 - GitHub: 3
 - GitLab: 1
 - Himax SDK: 1
-- IoT: 1
 - IP Explorer: 4
 - Jupyter Notebook: 1
 - K3s: 1
@@ -80,7 +79,7 @@ tools_software_languages_filter:
 - Python: 6
 - PyTorch: 2
 - QEMU: 1
-- Raspberry Pi: 5
+- Raspberry Pi: 6
 - Remote.It: 1
 - RTX: 2
 - Runbook: 4

@@ -1,62 +1,62 @@
 ---
-title: Set Up an MCP Server on Your Raspberry Pi
+title: Set up an MCP server on Raspberry Pi 5
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Setup an MCP Server on Raspberry Pi 5
+## Set up a FastMCP server on Raspberry Pi 5 with uv and ngrok
 
 In this section you will learn how to:
 
-1. Install uv (the Rust-powered Python package manager)  
-2. Bootstrap a simple MCP server on your Raspberry Pi 5 that reads the CPU temperature and searches the weather data
-3. Expose the MCP server to the internet with **ngrok**
+1. Install uv (the Rust-powered Python package manager).  
+2. Bootstrap a simple MCP server on your Raspberry Pi 5 that reads the CPU temperature and searches the weather data.
+3. Expose the local MCP server to the internet using ngrok (HTTPS tunneling service).
 
-You will run all the commands shown below on your Raspberry Pi 5 running Raspberry Pi OS (64-bit)  
+You will run all the commands shown below on your Raspberry Pi 5 running Raspberry Pi OS (64-bit). 
 
 #### 1. Install uv
-On Raspberry Pi Terminal, install `uv`:
+In your Raspberry Pi Terminal, install `uv`:
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-**uv** is a next-generation, Rust-based package manager that unifies pip, virtualenv, Poetry, and more—offering 10×–100× faste
-r installs, built-in virtual environment handling, robust lockfiles, and full compatibility with the Python ecosystem.
+`uv` is a Rust-based, next-generation Python package manager that replaces tools like `pip`, `virtualenv`, and Poetry. It delivers 10×–100× faster installs along with built-in virtual environments, lockfile support, and full Python ecosystem compatibility.
 
 {{% notice Note %}}
 After the script finishes, restart your terminal so that the uv command is on your PATH.
 {{% /notice %}}
 
 #### 2. Bootstrap the MCP Project
-1. Create a project directory and enter it:
+1. Create a project directory and navigate to it:
 ```bash
 mkdir mcp
 cd mcp
 ```
-2. Initialize with `uv`:
+2. Initialize `uv`:
 ```bash
 uv init
 ```
 This command adds:
-- .venv/ (auto-created virtual environment)
-- pyproject.toml (project metadata & dependencies)
-- .python-version (pinned interpreter)
+- .venv/ (auto-created virtual environment).
+- pyproject.toml (project metadata and dependencies).
+- .python-version (pinned interpreter).
 - README.md, .gitignore, and a sample main.py
 
-3. Install the dependencies:
+3. Install the dependencies (learn more about [FastMCP](https://github.com/jlowin/fastmcp)):
+
 ```bash
 uv pip install fastmcp==2.2.10
 uv add requests
 ```
 
 #### 3. Build your MCP Server 
-1. Create a python file for your MCP server named `server.py`:
+1. Create a Python file for your MCP server named `server.py`:
 ```bash
 touch server.py
 ```
-2. Use a file editor of your choice and copy the following content into `server.py`:
+2. Open server.py in your preferred text editor and paste in the following code:
 ```bash
 import subprocess, re
 from mcp.server.fastmcp import FastMCP
@@ -95,12 +95,12 @@ if __name__ == "__main__":
 
 #### 4. Run the MCP Server
 
-Run the python script to deploy the MCP server:
+Run the Python script to deploy the MCP server:
 
 ```python
 uv run server.py
 ```
-By default, FastMCP will listen on port 8000 and serve your tools via Server-Sent Events (SSE).
+By default, FastMCP listens on port 8000 and exposes your registered tools over HTTP using Server-Sent Events (SSE).
 
 The output should look like:
 
@@ -111,7 +111,7 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 ```
 
-#### 5. Install & Configure ngrok
+#### 5. Install and configure ngrok
 
 You will now use ngrok to expose your locally running MCP server to the public internet over HTTPS.
 
@@ -136,4 +136,9 @@ Replace `YOUR_NGROK_AUTHTOKEN` with your token from the ngrok dashboard.
 ```bash
 ngrok http 8000
 ```
-4. Copy the generated HTTPS URL (e.g. `https://abcd1234.ngrok-free.app`)—you’ll use this as your MCP endpoint.
+4. Copy the generated HTTPS URL (e.g. `https://abcd1234.ngrok-free.app`). You’ll use this endpoint to connect external tools or agents to your MCP server. Keep this URL available for the next steps in your workflow.
+
+## Section summary
+
+You now have a working FastMCP server on your Raspberry Pi 5. It includes tools for reading CPU temperature and retrieving weather data, and it's accessible over the internet via a public HTTPS endpoint using ngrok. This sets the stage for integration with LLM agents or other external tools.
+
