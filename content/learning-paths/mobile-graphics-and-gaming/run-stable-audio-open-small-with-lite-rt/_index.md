@@ -19,6 +19,9 @@ prerequisites:
 
 author:
     - Nina Drozd
+    - Gian Marco Iodice
+    - Adnan AlSinan
+    - Aude Vuilliomenet
     - Annie Tallund
 
 ### Tags
