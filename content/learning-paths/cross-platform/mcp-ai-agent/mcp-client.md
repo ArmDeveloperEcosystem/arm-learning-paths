@@ -10,7 +10,8 @@ In this section, you'll learn how to set up an AI Agent on your development mach
 
 These commands were tested on a Linux Arm development machine. 
 
-### Create an AI Agent and point it at your Pi's MCP Server
+## Create an AI Agent and point it at your Pi's MCP Server
+
 1. Install `uv` on your development machine:
 
 ```bash
@@ -41,7 +42,7 @@ uv add openai-agents python-dotenv
 echo -n "OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>" > .env
 ```
 
-### Write the Python script for the Agent Client
+## Write the Python script for the Agent Client
 
 Use a file editor of your choice and replace the content of the sample `main.py` with the content shown below:
 
@@ -88,7 +89,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### Execute the Agent
+## Execute the Agent
 
 You’re now ready to run the AI Agent and test its connection to your running MCP server on the Raspberry Pi 5.
 
@@ -111,7 +112,8 @@ Congratulations! Your local AI Agent just called the MCP server on your Raspberr
 
 This lightweight protocol isn’t just a game-changer for LLM developers—it also empowers IoT engineers to transform real-world data streams and give AI direct, reliable control over any connected device.
 
-### Next Steps
+## Next Steps
+
 - **Expand Your Toolset**  
    - Write additional `@mcp.tool()` functions for Pi peripherals (such as GPIO pins, camera, and I²C sensors).  
    - Combine multiple MCP servers (for example, filesystem, web-scraper, and vector-store memory) for richer context.  
@@ -120,6 +122,7 @@ This lightweight protocol isn’t just a game-changer for LLM developers—it al
    - Hook into Home Assistant or Node-RED through MCP.  
    - Trigger real-world actions (for example, turn on LEDs, read environmental sensors, and control relays).  
 
-   ### Section summary
+## Section summary
+
 You’ve now built and run an AI agent on your development machine that connects to an MCP server on your Raspberry Pi 5. Your agent can now interact with real-world data sources in real time — a complete edge-to-cloud loop powered by OpenAI’s Agent SDK and the MCP protocol.
 

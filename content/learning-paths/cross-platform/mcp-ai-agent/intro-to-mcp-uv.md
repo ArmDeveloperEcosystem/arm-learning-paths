@@ -31,7 +31,7 @@ Some key features:
 For further information on `uv`, see: [https://github.com/astral-sh/uv](https://github.com/astral-sh/uv).
 
 
-### A high-level view of the architecture
+## A high-level view of the architecture
 
  ![Diagram of Model Context Protocol (MCP) architecture showing the interaction between MCP Host (LLM-powered app), MCP Client (runtime shim), and MCP Server, which connects to local data sources (files, sensors, databases) and remote APIs for AI agent context retrieval.](./mcp.png)
 
@@ -49,7 +49,7 @@ Each component in the diagram plays a distinct role in enabling AI agents to int
 Learn more about AI Agents in the Learning Path [Deploy an AI Agent on Arm with llama.cpp and llama-cpp-agent using KleidiAI](https://learn.arm.com/learning-paths/servers-and-cloud-computing/ai-agent-on-cpu/).
 {{% /notice %}}
 
-### Section summary
+## Section summary
 
 This page introduces MCP and `uv` as foundational tools for building fast, secure, and modular AI agents that run efficiently on edge devices like the Raspberry Pi 5.
 
