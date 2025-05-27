@@ -33,11 +33,13 @@ Ensure the `NDK_PATH` variable is set to your previously installed Android NDK:
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
 export NDK_PATH=$WORKSPACE/android-ndk-r25b/
+export ANDROID_NDK_HOME=$NDK_PATH
 export PATH=$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
   {{< /tab >}}
   {{< tab header="MacOS">}}
-export NDK_PATH=~/Library/Android/android-ndk-r25b
-export PATH=$PATH:$NDK_PATH/toolchains/llvm/prebuilt/darwin-x86_64/bin
+export NDK_PATH=$WORKSPACE/android-ndk-r25b/
+export ANDROID_NDK_HOME=$NDK_PATH
+export PATH=$NDK_PATH/toolchains/llvm/prebuilt/darwin-x86_64/bin/:$PATH
   {{< /tab >}}
 {{< /tabpane >}}
 {{% /notice  %}}
@@ -54,6 +56,7 @@ python3 ./configure.py
 |Please input the desired Python library path to use[$WORKSPACE/lib/python3.10/site-packages] | Enter |
 |Do you wish to build TensorFlow with ROCm support? [y/N]|N (No)|
 |Do you wish to build TensorFlow with CUDA support?|N|
+|Please specify optimization flags to use during compilation when bazel option "--config=opt" is specified [Default is -Wno-sign-compare]:| Enter |
 |Do you want to use Clang to build TensorFlow? [Y/n]|N|
 |Would you like to interactively configure ./WORKSPACE for Android builds? [y/N]|y (Yes) |
 |Please specify the home path of the Android NDK to use. [Default is /home/user/Android/Sdk/ndk-bundle]| Enter |

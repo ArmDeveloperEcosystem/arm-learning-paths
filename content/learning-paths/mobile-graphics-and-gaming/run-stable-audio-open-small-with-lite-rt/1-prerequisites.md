@@ -112,7 +112,6 @@ unzip android-ndk-r25b-linux.zip
 cd $WORKSPACE
 wget https://dl.google.com/android/repository/android-ndk-r25b-darwin.zip
 unzip android-ndk-r25b-darwin.zip
-mv android-ndk-r25b ~/Library/Android/android-ndk-r25b
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -121,11 +120,13 @@ For easier access and execution of Android NDK tools, add these to the `PATH` an
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
 export NDK_PATH=$WORKSPACE/android-ndk-r25b/
+export ANDROID_NDK_HOME=$NDK_PATH
 export PATH=$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
   {{< /tab >}}
   {{< tab header="MacOS">}}
-export NDK_PATH=~/Library/Android/android-ndk-r25b
-export PATH=$PATH:$NDK_PATH/toolchains/llvm/prebuilt/darwin-x86_64/bin
+export NDK_PATH=$WORKSPACE/android-ndk-r25b/
+export ANDROID_NDK_HOME=$NDK_PATH
+export PATH=$NDK_PATH/toolchains/llvm/prebuilt/darwin-x86_64/bin/:$PATH
   {{< /tab >}}
 {{< /tabpane >}}
 
