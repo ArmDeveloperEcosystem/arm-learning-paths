@@ -130,7 +130,7 @@ Sweet requires a TOML config to know what and where to run. Create a minimal con
 ```bash
 cat <<EOF > config.toml
 [[config]]
-  name = "go-time-config"
+  name = "arm-benchmark-tool"
   goroot = "/usr/local/go"
 EOF
 ```
