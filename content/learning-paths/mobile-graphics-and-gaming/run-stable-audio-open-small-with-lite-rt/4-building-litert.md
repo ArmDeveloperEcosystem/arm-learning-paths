@@ -33,11 +33,13 @@ Ensure the `NDK_PATH` variable is set to your previously installed Android NDK:
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
 export NDK_PATH=$WORKSPACE/android-ndk-r25b/
+export ANDROID_NDK_HOME=$NDK_PATH
 export PATH=$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
   {{< /tab >}}
   {{< tab header="MacOS">}}
-export NDK_PATH=~/Library/Android/android-ndk-r25b
-export PATH=$PATH:$NDK_PATH/toolchains/llvm/prebuilt/darwin-x86_64/bin
+export NDK_PATH=$WORKSPACE/android-ndk-r25b/
+export ANDROID_NDK_HOME=$NDK_PATH
+export PATH=$NDK_PATH/toolchains/llvm/prebuilt/darwin-x86_64/bin/:$PATH
   {{< /tab >}}
 {{< /tabpane >}}
 {{% /notice  %}}
@@ -54,6 +56,7 @@ python3 ./configure.py
 |Please input the desired Python library path to use[$WORKSPACE/lib/python3.10/site-packages] | Enter |
 |Do you wish to build TensorFlow with ROCm support? [y/N]|N (No)|
 |Do you wish to build TensorFlow with CUDA support?|N|
+|Please specify optimization flags to use during compilation when bazel option "--config=opt" is specified [Default is -Wno-sign-compare]:| Enter |
 |Do you want to use Clang to build TensorFlow? [Y/n]|N|
 |Would you like to interactively configure ./WORKSPACE for Android builds? [y/N]|y (Yes) |
 |Please specify the home path of the Android NDK to use. [Default is /home/user/Android/Sdk/ndk-bundle]| Enter |
@@ -63,15 +66,24 @@ python3 ./configure.py
 |Please specify an Android build tools version to use.  [Default is 35.0.0]| Enter |
 |Do you wish to build TensorFlow with iOS support? [y/N]:| n |
 
-Once the Bazel configuration is complete, you can build TFLite as follows:
+Once the Bazel configuration is complete, you can build LiteRT for your target platform as follows:
 
-```console
+{{< tabpane code=true >}}
+  {{< tab header="Android">}}
 bazel build -c opt --config android_arm64 //tensorflow/lite:libtensorflowlite.so \
     --define tflite_with_xnnpack=true \
     --define=xnn_enable_arm_i8mm=true \
     --define tflite_with_xnnpack_qs8=true \
     --define tflite_with_xnnpack_qu8=true
-```
+  {{< /tab >}}
+  {{< tab header="MacOS">}}
+bazel build -c opt --config macos //tensorflow/lite:libtensorflowlite.so \
+    --define tflite_with_xnnpack=true \
+    --define xnn_enable_arm_i8mm=true \
+    --define tflite_with_xnnpack_qs8=true \
+    --define tflite_with_xnnpack_qu8=true
+  {{< /tab >}}
+{{< /tabpane >}}
 
 The final step is to build flatbuffers used by the application:
 ```
@@ -81,7 +93,7 @@ cmake ../tensorflow/lite/tools/cmake/native_tools/flatbuffers
 cmake --build .
 ```
 
-Now that LiteRT and FlatBuffers are built, you're ready to compile and deploy the Stable Audio Open Small inference application on your Android device.
+Now that LiteRT and FlatBuffers are built, you're ready to compile and deploy the Stable Audio Open Small inference application on your Android or macOS device.
 
 
 
