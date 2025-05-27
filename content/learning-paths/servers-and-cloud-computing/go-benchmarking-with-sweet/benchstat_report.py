@@ -18,6 +18,8 @@ def parse_benchstat(file_path):
         # First line contains instance file paths
         header_line = lines[0]
         parts = header_line.split(',')
+        if len(parts) < 4:
+            raise ValueError(f"Unexpected header format: {header_line}")
         inst_a = parts[1]
         inst_b = parts[3] if len(parts) > 3 else 'Unknown'
         # Second line names the metric
@@ -44,16 +46,29 @@ def plot_metric_group(inst_a, inst_b, metric_name, df, out_dir, idx):
     values_a = grouped_data[baseline_col].values
     values_b = grouped_data[compare_col].values
 
+    custom_labels = []
+    for i, label in enumerate(x):
+        a = values_a[i]
+        b = values_b[i]
+        if a == 0:
+            comparison = "undefined"
+        else:
+            pct_diff = ((b - a) / a) * 100
+            direction = ">" if pct_diff > 0 else "<"
+            comparison = f"{abs(pct_diff):.1f}% {direction}"
+        custom_label = f"{label}<br><span style='font-size:0.8em'>Instance 2: {comparison} Instance 1</span>"
+        custom_labels.append(custom_label)
+
     fig = go.Figure()
     fig.add_trace(go.Bar(
-        x=x,
+        x=custom_labels,
         y=values_a,
         name=f'Instance 1 ({inst_a})',
         marker_color='blue',
         hovertemplate='%{x}<br>Instance 1: %{y:.4g}<extra></extra>'
     ))
     fig.add_trace(go.Bar(
-        x=x,
+        x=custom_labels,
         y=values_b,
         name=f'Instance 2 ({inst_b})',
         marker_color='orange',
@@ -65,9 +80,15 @@ def plot_metric_group(inst_a, inst_b, metric_name, df, out_dir, idx):
         xaxis_title="Benchmark",
         yaxis_title=metric_name,
         barmode='group',
-        xaxis_tickangle=45,
+        xaxis_tickfont=dict(size=16),
+        xaxis_tickangle=0,
+        xaxis_tickmode='array',
+        xaxis_tickvals=list(range(len(custom_labels))),
+        xaxis_ticktext=custom_labels,
+        xaxis_tickfont_family='monospace',
+        xaxis_automargin=True,
         template='plotly_white',
-        margin=dict(t=50, b=150)
+        margin=dict(t=50, b=200, l=100, r=100)
     )
 
     html_filename = f"{metric_name}_{idx}.html".replace('/', '_').replace(' ', '_')
