@@ -1,19 +1,26 @@
 ---
-title: Introduction to Arm SPE and false sharing
+title: Arm Statistical Profiling Extension and false sharing
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Introduction to the Arm Statistical Profiling Extension (SPE)
 
-Traditional Linux performance profiling tools often rely on retired instruction counts, which lack visibility into memory addresses, cache latencies, and micro-operation behavior. Moreover, the “skid” phenomenon where events are falsely attributed to later instructions can mislead developers. 
+## What is the Arm Statistical Profiling Extension (SPE), and what does it do?
 
-SPE integrates sampling directly into the CPU pipeline, triggering on individual micro-operations rather than retired instructions, thereby eliminating skid and blind spots. Each SPE sample record includes relevant metadata, such as data addresses, per-µop pipeline latency, triggered PMU event masks, and the memory hierarchy source, enabling fine-grained and precise cache analysis. 
+{{% notice Learning goal%}}
+In this section, you will learn how the Arm Statistical Profiling Extension (SPE) gives you deeper visibility into how your applications interact with the CPU. It covers how to detect and fix false sharing, which is a hidden performance problem in multithreaded code, by using cache line alignment in C++ and tools like Perf C2C.
+{{% /notice %}}
+
+Arm’s Statistical Profiling Extension (SPE) gives you a powerful way to understand what’s really happening inside your applications at the microarchitecture level. Introduced in Armv8.2, SPE captures a statistical view of how instructions move through the CPU, which allows you to dig into issues like memory access latency, cache misses, and pipeline behavior.
+
+Most Linux profiling tools focus on retired instruction counts, which means they miss key details like memory addresses, cache latency, and micro-operation behavior. This can lead to misleading results — especially due to a phenomenon called “skid,” where events are falsely attributed to later instructions.
+
+SPE integrates sampling directly into the CPU pipeline, triggering on individual micro-operations instead of retired instructions. This approach eliminates skid and blind spots. Each SPE sample record includes relevant metadata, such as data addresses, per-µop pipeline latency, triggered PMU event masks, and the memory hierarchy source, enabling fine-grained, precise cache analysis. 
 
 SPE helps developers optimize user-space applications by showing where cache latency or memory access delays are happening. Importantly, cache statistics are enabled with the Linux Perf cache-to-cache (C2C) utility.
 
-To learn more, check out the [Arm SPE white paper](https://developer.arm.com/documentation/109429/latest/) for more information. 
+For more information, see the [*Arm Statistical Profiling Extension: Performance Analysis Methodology White Paper*](https://developer.arm.com/documentation/109429/latest/). 
 
 In this Learning Path, you will use SPE and Perf C2C to diagnose a cache issue for an application running on a Neoverse server.
 
@@ -21,9 +28,11 @@ In this Learning Path, you will use SPE and Perf C2C to diagnose a cache issue f
 
 In large-scale, multithreaded applications, false sharing can degrade performance by introducing hundreds of unnecessary cache line invalidations per second - often with no visible red flags in the source code.
 
-Even when two threads touch entirely separate variables, modern processors move data in fixed-size cache lines (nominally 64-bytes). If those distinct variables happen to occupy bytes within the same line, every time one thread writes its variable the core’s cache must gain exclusive ownership of the whole line, forcing the other core’s copy to be invalidated. 
+Even when two threads touch entirely separate variables, modern processors move data in fixed-size cache lines, which is typically 64 bytes. If those distinct variables happen to occupy bytes within the same line, every time one thread writes its variable the core’s cache must gain exclusive ownership of the whole line, forcing the other core’s copy to be invalidated. 
 
-The second thread, still working on its own variable, then triggers a coherence miss to fetch the line back, and the ping-pong pattern repeats. See the illustration below, taken from the Arm SPE white paper, for a visual explanation.
+The second thread, still working on its own variable, then triggers a coherence miss to fetch the line back, and the ping-pong pattern repeats. 
+
+The diagram below, taken from the Arm SPE white paper, provides a visual representation of two threads on separate cores alternately gaining exclusive access to the same cache line.
 
 ![false_sharing_diagram alt-text#center](./false_sharing_diagram.png "Two threads on separate cores alternately gain exclusive access to the same cache line.")
 
@@ -77,9 +86,9 @@ int main() {
 }
 ```
 
-The example output below shows the variables e, f, g and h occur at least 64 bytes apart in the byte-addressable architecture. Whereas variables a, b, c, and d occur 8 bytes apart, occupying the same cache line. 
+The output below shows that the variables e, f, g and h occur at least 64 bytes apart in the byte-addressable architecture. Whereas variables a, b, c, and d occur 8 bytes apart, occupying the same cache line. 
 
-Although this is a contrived example, in a production workload there might be several layers of indirection that unintentionally result in false sharing. For these complex cases, to understand the root cause you will use Perf C2C.
+Although this is a contrived example, in a production workload there might be several layers of indirection that unintentionally result in false sharing. For these complex cases, to understand the root cause, you can use Perf C2C.
 
 ```output
 Without Alignment can occupy same cache line
@@ -101,7 +110,8 @@ Address of AlignedType h - 0xffffeb6c6080
 
 ## Summary
 
-In this section, you learned what Arm SPE is and why it’s a game-changer for performance profiling. You also saw how a subtle issue like false sharing can slow down multithreaded code — and how to avoid it using alignment in C++.
+In this section, you explored what Arm SPE is and why it offers a deeper, more accurate view of application performance. You also examined how a subtle issue like false sharing can impact multithreaded code, and how to mitigate it using data alignment techniques in C++.
 
-Next up: you’ll set up your environment and get ready to run Perf C2C on a real application. 
+Next, you'll set up your environment and use Perf C2C to capture and analyze real cache behavior on an Arm Neoverse system.
+
 

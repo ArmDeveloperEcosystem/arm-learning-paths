@@ -1,9 +1,6 @@
 ---
 title: Analyze cache behavior with Perf C2C on Arm
 
-
-
-
 minutes_to_complete: 15
 
 who_is_this_for: This topic is for performance-oriented developers working on Arm-based cloud or server systems who want to optimize memory access patterns and investigate cache inefficiencies using Perf C2C and Arm SPE.
