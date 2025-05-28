@@ -3,7 +3,7 @@ title: Generate audio with Stable Audio Open Small on LiteRT
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers looking to deploy the Stable Audio Open Small text-to-audio model using LiteRT on an Android device.
+who_is_this_for: This is an introductory topic for developers looking to deploy the Stable Audio Open Small text-to-audio model using LiteRT on an Android™ device or on a reasonably modern platform with macOS®.
 
 learning_objectives:
     - Download and test the Stable Audio Open Small model. 
@@ -19,6 +19,9 @@ prerequisites:
 
 author:
     - Nina Drozd
+    - Gian Marco Iodice
+    - Adnan AlSinan
+    - Aude Vuilliomenet
     - Annie Tallund
 
 ### Tags
@@ -42,8 +45,8 @@ further_reading:
         link: https://stability.ai/news/stability-ai-and-arm-release-stable-audio-open-small-enabling-real-world-deployment-for-on-device-audio-control
         type: blog
     - resource:
-        title: Stability AI optimized its audio generation model to run on Arm chips
-        link: https://techcrunch.com/2025/03/03/stability-ai-optimized-its-audio-generation-model-to-run-on-arm-chips/
+        title: "Unlocking audio generation on Arm CPUs to all: Running Stable Audio Open Small with KleidiAI"
+        link: https://community.arm.com/arm-community-blogs/b/ai-blog/posts/audio-generation-arm-cpus-stable-audio-open-small-kleidiai
         type: blog
     - resource:
         title: Fast Text-to-Audio Generation with Adversarial Post-Training
