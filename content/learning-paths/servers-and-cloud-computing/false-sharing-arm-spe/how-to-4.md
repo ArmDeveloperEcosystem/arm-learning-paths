@@ -114,7 +114,7 @@ sudo perf c2c record -g ./false_sharing 1
 sudo perf annotate
 ```
  
-The left screenshot shows the canonical `perf record` command, here the `adrp` instruction falsely reports 52% of the time. However, using `perf c2c` that leverages `arm_spe`, we observe 99% of time associated with the `ldr`, load register command. The standard `perf record` data can be quite misleading!
+The left screenshot shows the canonical `perf record` command, here the `adrp` instruction falsely reports 52% of the time. However, using `perf c2c` that leverages `arm_spe`, you can see 99% of time associated with the `ldr`, load register command. The standard `perf record` data can be quite misleading!
 
 ![perf-record-annotate](./perf-record-error-skid.png)
 ![perf-c2c-record-annotate](./perf-c2c-record.png)
@@ -148,7 +148,7 @@ Next, press `d` character to display the cache line details. The last `Source:Li
 
 ![perf-c2c-gif](./perf-c2c.gif)
 
-Looking at the corresponding source code, we observe the following. 
+Looking at the corresponding source code, you can see the following:
 
 ```output
 ...
