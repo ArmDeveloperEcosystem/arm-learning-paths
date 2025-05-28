@@ -23,7 +23,7 @@ uname -r
 
 The output includes the CPU type and kernel release version:
 
-```ouput
+```output
 Model name:                           Neoverse-N1
 6.1.134-152.225.amzn2023.aarch64
 ```
@@ -43,7 +43,7 @@ Run the following command to confirm if the SPE kernel module is loaded:
 sudo modprobe arm_spe_pmu
 ```
 
-If the module is not loaded (blank output), SPE may still be available.
+If the module is not loaded (blank output), SPE might still be available.
 
 Run this command to check if SPE is included in the kernel:
 
@@ -63,11 +63,11 @@ If the output is blank then SPE is not available.
 
 You can install and run a Python script named Sysreport to summarize your system's performance profiling capabilities.
 
-Refer to [Get ready for performance analysis with Sysreport](https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/) to learn how to install and run it.
+See [Get ready for performance analysis with Sysreport](https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/) to learn how to install and run it.
 
 Look at the Sysreport output and confirm SPE is available by checking the `perf sampling` field. 
 
-If the printed value is SPE then SPE is available.
+If the printed value is SPE, then SPE is available.
 
 ```output
 ...
@@ -105,9 +105,9 @@ Assign capabilities to Perf by running:
 sudo setcap cap_perfmon,cap_sys_ptrace,cap_sys_admin+ep $(which perf)
 ```
 
-If `arm_spe` is not available because of your system configuration or if you don't have PMU permission, the `perf c2c` command will fail. 
+If `arm_spe` is not available because of your system configuration or if you don't have PMU permission, the `perf c2c` command fails. 
 
-To confirm Perf can access SPE run:
+To confirm Perf can access SPE, run:
 
 ```bash
 perf c2c record
@@ -120,7 +120,7 @@ failed: memory events not supported
 ```
 
 {{% notice Note %}}
-If you are unable to use SPE it may be a restriction based on your cloud instance size or operating system.
+If you are unable to use SPE it might be a restriction based on your cloud instance size or operating system.
 
 Generally, access to a full server (also known as metal instances) with a relatively new kernel is needed for Arm SPE support. 
 
