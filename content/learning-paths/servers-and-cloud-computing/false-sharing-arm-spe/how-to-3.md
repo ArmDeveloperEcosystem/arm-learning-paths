@@ -1,5 +1,5 @@
 ---
-title: False Sharing Example
+title: False sharing example
 weight: 4
 
 ### FIXED, DO NOT MODIFY
