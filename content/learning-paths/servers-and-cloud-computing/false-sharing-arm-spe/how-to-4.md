@@ -9,10 +9,10 @@ layout: learningpathall
 ## Compare Performance with perf stat
 
 {{% notice Learning goal %}}
-In this section, you’ll learn how to use Linux Perf tools and Arm SPE to identify performance bottlenecks in multithreaded applications. You’ll compare aligned and unaligned workloads, detect cache-related slowdowns like false sharing, and trace memory contention down to the source code using Perf C2C.
+In this section, you’ll learn how to use Linux Perf tools and Arm SPE to identify performance bottlenecks in multithreaded applications. You’ll compare aligned and unaligned workloads, detect cache-related slowdowns such as false sharing, and trace memory contention down to the source code using Perf C2C.
 {{% /notice %}}
 
-A straightforward method to observe the performance characteristics of both binaries would be to use the `perf stat` command. 
+A simple way to observe the performance difference of both binaries is to use the `perf stat` command. 
 
 For example, run the false sharing version using:
 
