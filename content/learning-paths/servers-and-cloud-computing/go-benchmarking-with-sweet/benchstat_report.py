@@ -2,6 +2,7 @@
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
+import textwrap
 from io import StringIO
 import mplcursors
 import plotly.graph_objs as go
@@ -46,18 +47,26 @@ def plot_metric_group(inst_a, inst_b, metric_name, df, out_dir, idx):
     values_a = grouped_data[baseline_col].values
     values_b = grouped_data[compare_col].values
 
+    # wrap long benchmark names at ~20 characters
+    wrapped_names = [
+        '<br>'.join(textwrap.wrap(lbl, width=20))
+        for lbl in x
+    ]
+
     custom_labels = []
-    for i, label in enumerate(x):
+    for i, name in enumerate(wrapped_names):
         a = values_a[i]
         b = values_b[i]
         if a == 0:
             comparison = "undefined"
         else:
             pct_diff = ((b - a) / a) * 100
-            direction = ">" if pct_diff > 0 else "<"
-            comparison = f"{abs(pct_diff):.1f}% {direction}"
-        custom_label = f"{label}<br><span style='font-size:0.8em'>Instance 2: {comparison} Instance 1</span>"
-        custom_labels.append(custom_label)
+            dir_sym = ">" if pct_diff > 0 else "<"
+            comparison = f"{abs(pct_diff):.1f}% {dir_sym}"
+        custom_labels.append(
+            f"{name}<br><span style='font-size:0.8em'>"
+            f"Instance 2: {comparison} Instance 1</span>"
+        )
 
     fig = go.Figure()
     fig.add_trace(go.Bar(
@@ -80,15 +89,14 @@ def plot_metric_group(inst_a, inst_b, metric_name, df, out_dir, idx):
         xaxis_title="Benchmark",
         yaxis_title=metric_name,
         barmode='group',
-        xaxis_tickfont=dict(size=16),
-        xaxis_tickangle=0,
+        xaxis_tickfont=dict(size=12),    # smaller font
+        xaxis_tickangle=-45,             # rotate labels
         xaxis_tickmode='array',
         xaxis_tickvals=list(range(len(custom_labels))),
         xaxis_ticktext=custom_labels,
-        xaxis_tickfont_family='monospace',
-        xaxis_automargin=True,
+        xaxis_automargin=True,           # auto-expand margins
         template='plotly_white',
-        margin=dict(t=50, b=200, l=100, r=100)
+        margin=dict(t=50, b=250, l=100, r=100)
     )
 
     html_filename = f"{metric_name}_{idx}.html".replace('/', '_').replace(' ', '_')
@@ -115,16 +123,22 @@ def plot_overall_metrics(groups, out_dir):
         values_a.append(val_a)
         values_b.append(val_b)
 
+    # wrap & rotate the overall-metric labels too
+    wrapped = [
+        '<br>'.join(textwrap.wrap(m, width=15))
+        for m in metric_names
+    ]
+
     fig = go.Figure()
     fig.add_trace(go.Bar(
-        x=metric_names,
+        x=wrapped,
         y=values_a,
         name=inst_a,
         marker_color='blue',
         hovertemplate='%{x}<br>' + inst_a + ': %{y:.4g}<extra></extra>'
     ))
     fig.add_trace(go.Bar(
-        x=metric_names,
+        x=wrapped,
         y=values_b,
         name=inst_b,
         marker_color='orange',
@@ -136,9 +150,14 @@ def plot_overall_metrics(groups, out_dir):
         xaxis_title='Metric',
         yaxis_title='Value',
         barmode='group',
-        xaxis_tickangle=45,
+        xaxis_tickfont=dict(size=12),
+        xaxis_tickangle=-45,
+        xaxis_tickmode='array',
+        xaxis_tickvals=list(range(len(wrapped))),
+        xaxis_ticktext=wrapped,
+        xaxis_automargin=True,
         template='plotly_white',
-        margin=dict(t=50, b=150)
+        margin=dict(t=50, b=200)
     )
 
     out_filename = 'overall_metrics.html'
@@ -163,7 +182,7 @@ def generate_html(images, out_dir):
     print(f'Generated report at {html_path}')
 
 def main():
-    benchstat_file = '/tmp/benchstat.out'
+    benchstat_file = '/tmp/benchstat.csv'
     out_dir = '/tmp'
     groups = parse_benchstat(benchstat_file)
     # Create combined geomean metrics chart
