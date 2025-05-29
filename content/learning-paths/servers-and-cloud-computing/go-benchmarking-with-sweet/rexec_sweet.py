@@ -9,11 +9,6 @@ import os
 import sys
 from datetime import datetime
 
-import json
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
 # Helper: get running GCP VM instances
 def get_running_instances():
     """Return a list of names of GCP VMs that are currently RUNNING."""

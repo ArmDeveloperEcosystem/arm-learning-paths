@@ -37,6 +37,10 @@ def parse_benchstat(file_path):
 
 def plot_metric_group(inst_a, inst_b, metric_name, df, out_dir, idx):
     benchmarks = df['Benchmark'].unique()
+    # Wrap long benchmark names for display
+    wrapped_names = [lbl.replace('/', '\n') for lbl in benchmarks]
+
+    # Identify value columns (every odd column after 'Benchmark')
     cols = df.columns.tolist()
     baseline_col = cols[1]
     compare_col = cols[3]
@@ -125,7 +129,7 @@ def plot_overall_metrics(groups, out_dir):
 
     # wrap & rotate the overall-metric labels too
     wrapped = [
-        '<br>'.join(textwrap.wrap(m, width=15))
+        m.replace('/', '\n')
         for m in metric_names
     ]
 
