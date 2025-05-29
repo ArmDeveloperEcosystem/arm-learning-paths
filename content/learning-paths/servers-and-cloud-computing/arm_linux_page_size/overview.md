@@ -7,13 +7,13 @@ layout: learningpathall
 
 ## How does the CPU locate data in memory?
 
-When your program asks for a memory address, the CPU doesn’t directly reach into RAM or swap space for it; that would be slow, unsafe, and inefficient.
+When your program accesses a memory address, the CPU doesn’t directly fetch data from RAM or swap space for it. That would be slow, unsafe, and inefficient.
  
 Instead, it goes through the virtual memory system, where it asks for a specific chunk of memory called a page. Pages map virtual memory locations to physical memory locations in RAM or swap space.
 
 ## What’s a memory page?
 
-Think of your computer’s memory like a big sheet of graph paper. Each page is one square on that sheet. The page table is the legend that identifies which square (virtual address) maps to which spot in physical RAM. On x86, 4K is the only page size option, but Arm-based systems allow you to use 4K, 16K, or 64K page sizes to fine tune the performance of your applications. 
+Think of your computer’s memory like a big sheet of graph paper. Each page is one square on that sheet. The page table is the legend that identifies which square (virtual address) maps to which spot in physical RAM. On x86 systems, 4K pages are the standard, while Arm-based systems support multiple page sizes - typically 4K, 16K, or 64K. This flexibility allows developers to fine tune performance for specific workloads. 
 
 This Learning Path explains how to switch between 4K and 64K pages on different Linux distributions.
 
@@ -25,7 +25,7 @@ Points to consider when thinking about page size:
 
 - **64K pages** shine when you work with large, continuous data such as video frames or large database caches because they cut down on management overhead. They will use more memory if you don’t use the whole page, but they can also speed up access times for large data sets.
 
-When selecting your page size, it's important to try both options under real-world conditions, as it will depend on the data size and retrieval patterns of the data you are working with.  
+Choosing the right page size depends on how your application uses memory, as both the data size and retrieval patterns of the data you are working with are influencing factors. Benchmark different options under real-world workloads to determine which delivers better performance.
 
 In addition, the page size may need to be reviewed over time as the application, memory usage patterns, and data sizes may change.  
 
