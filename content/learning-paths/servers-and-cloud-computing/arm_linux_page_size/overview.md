@@ -1,9 +1,11 @@
 ---
-title: Page Size Overview
+title: Why does page size matter?
 weight: 2
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+Before you modify the Linux kernel page size on an Arm system, it's essential to understand what a memory page is - and why its size affects performance.
+
 
 ## How does the CPU locate data in memory?
 

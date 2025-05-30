@@ -9,12 +9,12 @@ learning_objectives:
   - Explain the differences in page size configuration between Arm64 and x86 architectures.
   - Understand how page size affects memory efficiency and system performance.
   - Check the current memory page size on an Arm-based Linux system.
-  - Install and switch to a Linux kernel configured with 64K page size support.
+  - Install and boot into a Linux kernel configured with 64K page size support.
   - Confirm that the 64K page size is active.
   - Optionally revert to the default 4K page size kernel.
 
 prerequisites:
-  - An Arm-based Linux system running Ubuntu, Debian, or CentOS.
+  - Access to an Arm-based Linux system running Ubuntu, Debian, or CentOS.
 
 author: Geremy Cohen
 
