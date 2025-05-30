@@ -6,10 +6,12 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for developers who want to modify the Linux kernel page size on Arm-based systems to improve performance for memory-intensive workloads.
 
 learning_objectives:
-  - Verify the current memory page size on your Arm-based system.
-  - Install and switch to a Linux kernel with 64K page size support.
-  - Verify that the new 64K page size is active.
-  - Optionally, revert to the default 4K page size kernel.
+  - Explain the differences in page size configuration between Arm64 and x86 architectures.
+  - Understand how page size affects memory efficiency and system performance.
+  - Check the current memory page size on an Arm-based Linux system.
+  - Install and switch to a Linux kernel configured with 64K page size support.
+  - Confirm that the 64K page size is active.
+  - Optionally revert to the default 4K page size kernel.
 
 prerequisites:
   - An Arm-based Linux system running Ubuntu, Debian, or CentOS.
