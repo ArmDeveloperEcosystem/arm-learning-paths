@@ -20,8 +20,11 @@ def parse_benchstat(file_path):
         parts = header_line.split(',')
         if len(parts) < 4:
             raise ValueError(f"Unexpected header format: {header_line}")
-        inst_a = parts[1]
-        inst_b = parts[3] if len(parts) > 3 else 'Unknown'
+        # Derive hostname from result filenames by taking first token before '-'
+        raw_a = parts[1]
+        raw_b = parts[3] if len(parts) > 3 else 'Unknown'
+        inst_a = raw_a.split('-')[0]
+        inst_b = raw_b.split('-')[0]
         # Second line names the metric
         metric_name = lines[1].split(',')[1]
         # Build CSV text from header+data lines
@@ -36,8 +39,6 @@ def parse_benchstat(file_path):
 
 def plot_metric_group(inst_a, inst_b, metric_name, df, out_dir, idx):
     benchmarks = df['Benchmark'].unique()
-    # Wrap long benchmark names for display
-    wrapped_names = [lbl.replace('/', '\n') for lbl in benchmarks]
 
     # Identify value columns (every odd column after 'Benchmark')
     cols = df.columns.tolist()
@@ -50,11 +51,19 @@ def plot_metric_group(inst_a, inst_b, metric_name, df, out_dir, idx):
     values_a = grouped_data[baseline_col].values
     values_b = grouped_data[compare_col].values
 
-    # wrap long benchmark names at ~20 characters
-    wrapped_names = [
-        '<br>'.join(textwrap.wrap(lbl, width=20))
-        for lbl in x
-    ]
+    # Break at '/' then wrap each segment at ~20 characters
+    wrapped_names = []
+    for lbl in x:
+        # insert HTML line breaks at slashes
+        lbl_slash = lbl.replace('/', '<br>')
+        # wrap each part separately
+        parts = lbl_slash.split('<br>')
+        wrapped_parts = []
+        for part in parts:
+            # textwrap.wrap returns list of strings
+            wrapped_parts.extend(textwrap.wrap(part, width=20) or [''])
+        # join all wrapped lines with <br>
+        wrapped_names.append('<br>'.join(wrapped_parts))
 
     custom_labels = []
     for i, name in enumerate(wrapped_names):
@@ -68,23 +77,23 @@ def plot_metric_group(inst_a, inst_b, metric_name, df, out_dir, idx):
             comparison = f"{abs(pct_diff):.1f}% {dir_sym}"
         custom_labels.append(
             f"{name}<br><span style='font-size:0.8em'>"
-            f"Instance 2: {comparison} Instance 1</span>"
+            f"{inst_b} is {comparison} {inst_a}</span>"
         )
 
     fig = go.Figure()
     fig.add_trace(go.Bar(
         x=custom_labels,
         y=values_a,
-        name=f'Instance 1 ({inst_a})',
+        name=inst_a,
         marker_color='blue',
-        hovertemplate='%{x}<br>Instance 1: %{y:.4g}<extra></extra>'
+        hovertemplate='%{x}<br>' + inst_a + ': %{y:.4g}<extra></extra>'
     ))
     fig.add_trace(go.Bar(
         x=custom_labels,
         y=values_b,
-        name=f'Instance 2 ({inst_b})',
+        name=inst_b,
         marker_color='orange',
-        hovertemplate='%{x}<br>Instance 2: %{y:.4g}<extra></extra>'
+        hovertemplate='%{x}<br>' + inst_b + ': %{y:.4g}<extra></extra>'
     ))
 
     fig.update_layout(
@@ -126,11 +135,8 @@ def plot_overall_metrics(groups, out_dir):
         values_a.append(val_a)
         values_b.append(val_b)
 
-    # wrap & rotate the overall-metric labels too
-    wrapped = [
-        m.replace('/', '\n')
-        for m in metric_names
-    ]
+    # insert HTML line breaks at slashes for metric names
+    wrapped = [m.replace('/', '<br>') for m in metric_names]
 
     fig = go.Figure()
     fig.add_trace(go.Bar(
@@ -174,7 +180,7 @@ def generate_html(images, out_dir):
         html.write('<html><head><meta charset="utf-8"><title>Benchmark Report</title></head><body>\n')
         html.write('<h1>Benchmark Comparison Report</h1>\n')
         for img_path, metric_name, inst_a, inst_b in images:
-            html.write(f'<h2>{metric_name} comparison between {inst_a} and {inst_b}</h2>\n')
+            html.write(f'<h2>{metric_name} comparison between hosts {inst_a} and {inst_b}</h2>\n')
             html.write(f'<iframe src="{os.path.basename(img_path)}" width="100%" height="600" frameborder="0"></iframe>\n')
             html.write(
                 f'<p>This visualization compares <strong>{metric_name}</strong> for benchmark cases '
