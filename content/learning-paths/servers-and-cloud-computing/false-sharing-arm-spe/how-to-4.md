@@ -6,9 +6,13 @@ weight: 5
 layout: learningpathall
 ---
 
-## Measuring Performance
+## Compare Performance with perf stat
 
-A straight forward method to observe the performance characteristics of both binaries would be to use the `perf stat` command. 
+{{% notice Learning goal %}}
+In this section, you’ll learn how to use Linux Perf tools and Arm SPE to identify performance bottlenecks in multithreaded applications. You’ll compare aligned and unaligned workloads, detect cache-related slowdowns such as false sharing, and trace memory contention down to the source code using Perf C2C.
+{{% /notice %}}
+
+A simple way to observe the performance difference of both binaries is to use the `perf stat` command. 
 
 For example, run the false sharing version using:
 
@@ -66,13 +70,13 @@ The output is similar to:
 
 Comparing the results you can see the run time is significantly different (13.01 s vs. 6.49 s). 
 
-Additionally, the instructions per cycle (IPC) is notably different, (0.74 vs. 1.70) and looks to be commensurate to run time. 
+The instructions per cycle (IPC) are also notably different, (0.74 vs. 1.70) and look to be commensurate to run time. 
 
-## Understanding the root cause
+## Pinpoint pipeline bottlenecks with top-down analysis
 
 There are many root causes of variations in IPC. 
 
-To identify an area to focus on we will start off using the [top-down methodology](https://developer.arm.com/documentation/109542/0100/Arm-Topdown-methodology). Install the python script using the [install guide](https://learn.arm.com/install-guides/topdown-tool/).
+To identify where the bottleneck occurs, we’ll start by using the [Arm Topdown methodology](https://developer.arm.com/documentation/109542/0100/Arm-Topdown-methodology). Install the python script using the [Telemetry Solution Install Guide](https://learn.arm.com/install-guides/topdown-tool/).
 
 Run the following command to observe the ratio of frontend to backend stall cycles. These indicate which section of the CPU pipeline is waiting on resources and causing slower performance. 
 
@@ -92,7 +96,7 @@ Backend Stalled Cycles. 75.24% cycles
 
 The output shows there are disproportionately more backend stall cycles. This indicates the CPU is waiting for data. You could follow the top-down methodology further looking at the stage 2 microarchitecture analysis, but for sake of brevity you can jump to recording events with SPE.
 
-## Skid when using Perf Record
+## Skid: When perf record misleads
 
 The naive approach would be to record the events using the `perf record` subcommand. Running the following commands can be used to demonstrate skid, inaccuracy or "slippage" in the instruction location recorded by the Performance Monitoring Unit (PMU) when a performance event is sampled. 
 
@@ -110,7 +114,7 @@ sudo perf c2c record -g ./false_sharing 1
 sudo perf annotate
 ```
  
-The left screenshot shows the canonical `perf record` command, here the `adrp` instruction falsely reports 52% of the time. However, using `perf c2c` that leverages `arm_spe`, we observe 99% of time associated with the `ldr`, load register command. The standard `perf record` data can be quite misleading!
+The left screenshot shows the canonical `perf record` command, here the `adrp` instruction falsely reports 52% of the time. However, using `perf c2c` that leverages `arm_spe`, you can see 99% of time associated with the `ldr`, load register command. The standard `perf record` data can be quite misleading!
 
 ![perf-record-annotate](./perf-record-error-skid.png)
 ![perf-c2c-record-annotate](./perf-c2c-record.png)
@@ -144,7 +148,7 @@ Next, press `d` character to display the cache line details. The last `Source:Li
 
 ![perf-c2c-gif](./perf-c2c.gif)
 
-Looking at the corresponding source code, we observe the following. 
+Looking at the corresponding source code, you can see the following:
 
 ```output
 ...
@@ -156,3 +160,7 @@ Looking at the corresponding source code, we observe the following.
 The output from SPE-based profiling with Perf C2C shows that attempting to access and increment the `lock0` and `reader1` variable, is causing the bottleneck. 
 
 The insight generated from Perf C2C indicates to reorganize the layout of the data structure.
+
+## Summary
+
+In this section, you used multiple tools to analyze and diagnose a real performance issue caused by false sharing. You compared performance between aligned and unaligned code using perf stat, investigated backend stalls with topdown-tool, and saw how standard perf record can mislead due to instruction skid. Finally, you used Perf C2C with Arm SPE to pinpoint the exact variables and code lines causing contention, giving you actionable insight into how to reorganize your data layout for better performance.

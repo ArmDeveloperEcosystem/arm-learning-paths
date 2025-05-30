@@ -1,5 +1,5 @@
 ---
-title: False Sharing Example
+title: False sharing example
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -7,6 +7,10 @@ layout: learningpathall
 ---
 
 ## Example code
+
+{{% notice Learning Goal%}}
+The example code in this section demonstrates how false sharing affects performance by comparing two multithreaded programs; one with cache-aligned data structures, and one without. You’ll compile and run both versions, observe the runtime difference, and learn how memory layout affects cache behavior. This sets the stage for analyzing performance with `perf c2c` in the next section.
+{{% /notice %}}
 
 Use a text editor to copy and paste the C example code below into a file named `false_sharing_example.c`
 
@@ -285,7 +289,7 @@ int main ( int argc, char *argv[] )
 
 ### Code explanation
 
-The key data structure that occupies the cache is `struct Buf`. With a 64-byte cache line size, each line can hold 8, 8-byte `long` integers. 
+The key data structure that occupies the cache is `struct _buf`. With a 64-byte cache line size, each line can hold 8, 8-byte `long` integers. 
 
 If you do not pass in the `NO_FALSE_SHARING` macro during compilation the `Buf` data structure will contain the elements below. Each structure neatly occupies the entire 64-byte cache line. 
 
@@ -306,7 +310,7 @@ typedef struct _buf {
 
 Alternatively if you pass in the `NO_FALSE_SHARING` macro during compilation, the `Buf` structure has a different shape. 
 
-The 40 bytes of padding pushes the reader variables onto a different cache line. However, notice that this is with the tradeoff the new `Buf` structures occupies multiple cache lines (12 long integers). Therefore it leaves unused cache space of 25% per `Buf` structure.
+The 40 bytes of padding pushes the reader variables onto a different cache line. However, notice that this is with the tradeoff the new `Buf` structures occupies multiple cache lines (12 long integers). Therefore it leaves unused cache space of 25% per `Buf` structure. This trade-off uses more memory but eliminates false sharing, improving performance by reducing cache line contention.
 
 ```output
 typedef struct _buf {
@@ -345,5 +349,6 @@ user    0m8.869s
 sys     0m0.000s
 ```
 
-Continue to the next section to learn how to use Perf C2C to analyze the example code.
+## Summary
+In this section, you ran a hands-on C example to see how false sharing can significantly degrade performance in multithreaded applications. By comparing two versions of the same program, one with aligned memory access and one without, you saw how something as subtle as cache line layout can result in a 2x difference in runtime. This practical example sets the foundation for using Perf C2C to capture and analyze real cache line sharing behavior in the next section.
 
