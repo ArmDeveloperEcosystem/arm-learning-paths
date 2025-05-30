@@ -10,7 +10,7 @@ layout: learningpathall
 
 For this demonstration I will be using instances available from AWS within a virtual private cloud (VPC)
 
-Create 2 Arm-based linux instances, 1 to act as the server and the other to act as the client. In this tutorial I will be using an `t4g.xlarge` instance running Ubuntu 22.04 LTS. 
+Create 2 Arm-based linux instances, 1 to act as the server and the other to act as the client. In this tutorial I will be using two `t4g.xlarge` instance running Ubuntu 22.04 LTS. 
 
 
 ### Install dependencies
@@ -25,14 +25,19 @@ sudo apt install iperf3 -y
 
 ### Update Security Rules 
 
-Next, we need to update the default security rules to enable specific inbound and outbound protocols. From the AWS console, navigate to the security tab. Edit the inbound rules to enable `ICMP`, `UDP` and `TCP` traffic. Please note: for security we recommend updating the source to be the IP addresses of the client and server respectively. 
+Next, we need to update the default security rules to enable specific inbound and outbound protocols. From the AWS console, navigate to the security tab. Edit the inbound rules to enable `ICMP`, `UDP` and `TCP` traffic to enable communication between the client and server
+
 
 ![example_traffic](./example_traffic_rules.png)
+
+{{% notice Note %}}
+For security set the source and port ranges to those that are being used
+{{% /notice %}}
 
 
 ### Update local DNS
 
-For readability, we will add the server IP address and an alias name to the local DNS cache in `/etc/hosts`. 
+For readability, we will add the server IP address and an alias to the local DNS cache in `/etc/hosts`. The local IP address of the server and client can be found in the AWS dashboard. 
 
 On the client, add the IP address of the server to the `/etc/hosts` file. Likewise on the server add the IP address of the client to the `/etc/hosts` file. 
 
@@ -40,7 +45,7 @@ On the client, add the IP address of the server to the `/etc/hosts` file. Likewi
 
 ### Confirm server is reachable
 
-Finally, confirm the client can reach the server with the ping command below.
+Finally, confirm the client can reach the server with the ping command below. As a reference we also ping the localhost. 
 
 ```bash
 ping SERVER -c 3 && ping 127.0.0.1 -c 3

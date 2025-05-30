@@ -3,7 +3,7 @@ title: Get started with network microbenchmarking and tuning with iperf3
 
 minutes_to_complete: 30
 
-who_is_this_for: Network engineers, sys admins or application developers
+who_is_this_for: Performance Engineers, Linux system administrators or application developers looking to microbenchmark, simulate or tune the networking performance of distributed systems.
 
 learning_objectives: 
     - Understand how to use the iperf3 tool to microbenchmark different network conditions
@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - Foundational understanding on networking principles such as TCP/IP and UDP.
-    - Access to change inbound and outbound security rules or access to physical hardware
+    - Access to Arm-based cloud instances or access to physical hardware
 
 author: Kieran Hejmadi
 

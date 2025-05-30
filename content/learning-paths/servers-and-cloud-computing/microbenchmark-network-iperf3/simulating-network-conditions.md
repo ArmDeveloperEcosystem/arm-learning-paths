@@ -1,5 +1,5 @@
 ---
-title: Simulating Different Scenarios
+title: Simulating Different Network Conditions
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Adding a delay to a TCP connection
 
-The linux `tc` utility can be used to manipulate traffic control settings. First, find the name of connections with the following command. 
+The linux `tc` utility can be used to manipulate traffic control settings. First, find the name of interface with the following command. 
 
 ```bash
 ip addr show
@@ -38,7 +38,7 @@ Run the following command to add an emulated delay of 10ms on `ens5`.
 sudo tc qdisc add dev ens5 root netem delay 10ms
 ```
 
-Rerunning the basic TCP test with a delay we observe the `Cwnd` size has grew larger to compensate for the longer response time. Additionally, the bitrate has dropped from ~4.9 to ~2.3 `Gbit/sec`.
+Rerunning the basic TCP test (`iperf3 -c SERVER -V`) with a delay we observe the `Cwnd` size has grew larger to compensate for the longer response time. Additionally, the bitrate has dropped from ~4.9 to ~2.3 `Gbit/sec`.
 
 
 ```output
@@ -76,7 +76,7 @@ sudo tc qdisc del dev ens5 root
 sudo tc qdisc add dev ens5 root netem loss 1%
 ```
 
-Rerunning the basic TCP test we no observe a significant number of retries (`Retr`) and a corresponding drop in bitrate. 
+Rerunning the basic TCP test we observe an increased number of retries (`Retr`) and a corresponding drop in bitrate. 
 
 ```bash
 iperf3 -c SERVER -V
@@ -88,3 +88,4 @@ Test Complete. Summary Results:
 [  5]   0.00-10.00  sec  4.40 GBytes  3.78 Gbits/sec                  receiver
 ```
 
+Please see the `tc` [user documentation](https://man7.org/linux/man-pages/man8/tc.8.html) for the different ways to simulate different perturbation and your systems resiliency to such events.
