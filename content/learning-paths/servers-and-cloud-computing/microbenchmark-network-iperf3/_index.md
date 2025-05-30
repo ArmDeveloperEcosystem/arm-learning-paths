@@ -1,48 +1,38 @@
 ---
-title: PLACEHOLDER TITLE
+title: Get started with network microbenchmarking and tuning with iperf3
 
-minutes_to_complete: 10
+minutes_to_complete: 30
 
-who_is_this_for: PLACEHOLDER SENTENCE
+who_is_this_for: Network engineers, sys admins or application developers
 
 learning_objectives: 
-    - PLACEHOLDER OBJECTIVE 1
-    - PLACEHOLDER OBJECTIVE 2
+    - Understand how to use the iperf3 tool to microbenchmark different network conditions
+    - Understand how to use the tc tool to simulate different network environments
+    - Understand basic runtime parameters to tune performance for your application
 
 prerequisites:
-    - PLACEHOLDER PREREQ 1
-    - PLACEHOLDER PREREQ 2
+    - Foundational understanding on networking principles such as TCP/IP and UDP.
+    - Access to change inbound and outbound security rules or access to physical hardware
 
-author: PLACEHOLDER NAME
+author: Kieran Hejmadi
 
 ### Tags
-skilllevels: PLACEHOLDER SKILLLEVEL
-subjects: PLACEHOLDER SUBJECT
+skilllevels: Introductory
+subjects: Performance and Optimization
 armips:
-    - PLACEHOLDER IP A
-    - PLACEHOLDER IP B
+    - Neoverse
 tools_software_languages:
-    - PLACEHOLDER TOOL OR SOFTWARE C
-    - PLACEHOLDER TOOL OR SOFTWARE D
+    - iperf3
 operatingsystems:
-    - PLACEHOLDER OS G
+    - Linux
 
 
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: iperf3 user manual 
+        link: https://iperf.fr/iperf-doc.php
         type: documentation
-    - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
-
 
 
 ### FIXED, DO NOT MODIFY
