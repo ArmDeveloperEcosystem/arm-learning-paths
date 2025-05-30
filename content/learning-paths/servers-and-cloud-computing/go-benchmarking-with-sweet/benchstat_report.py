@@ -5,7 +5,15 @@ import textwrap
 from io import StringIO
 import plotly.graph_objs as go
 
+
 import argparse
+import sys
+
+class CustomArgumentParser(argparse.ArgumentParser):
+    def error(self, message):
+        # On error, print full help and exit
+        self.print_help()
+        sys.exit(2)
 
 def parse_benchstat(file_path):
     with open(file_path, 'r') as f:
@@ -191,7 +199,11 @@ def generate_html(images, out_dir):
     print(f'Generated report at {html_path}')
 
 def main():
-    parser = argparse.ArgumentParser(description='Generate benchmark comparison report')
+    parser = CustomArgumentParser(description='Generate benchmark comparison report', add_help=False)
+    # Add custom help flags
+    parser.add_argument('-h', '--help', '-help',
+                        action='help',
+                        help='Show this help message and exit')
     parser.add_argument('--benchstat-file', '-f',
                         default='/tmp/benchstat.csv',
                         help='Path to the benchstat CSV input file')
