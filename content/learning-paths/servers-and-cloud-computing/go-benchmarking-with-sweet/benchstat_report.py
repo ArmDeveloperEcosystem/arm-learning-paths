@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
 import os
 import pandas as pd
-import matplotlib.pyplot as plt
 import textwrap
 from io import StringIO
-import mplcursors
 import plotly.graph_objs as go
-import plotly.io as pio
 
 import argparse
 
@@ -199,10 +196,7 @@ def main():
     benchstat_file = args.benchstat_file
     out_dir = args.out_dir
     groups = parse_benchstat(benchstat_file)
-    # Create combined geomean metrics chart
-    overall_img = plot_overall_metrics(groups, out_dir)
-    # Initialize images list with overall chart first
-    images = [(overall_img, 'Overall (geomean)', groups[0][0], groups[0][1])]
+    images = []
     for idx, (inst_a, inst_b, metric_name, df) in enumerate(groups):
         img_path = plot_metric_group(inst_a, inst_b, metric_name, df, out_dir, idx)
         images.append((img_path, metric_name, inst_a, inst_b))
