@@ -1,0 +1,4 @@
+pandas>=1.2
+matplotlib>=3.3
+mplcursors>=0.5
+plotly>=5.0

@@ -8,6 +8,8 @@ import mplcursors
 import plotly.graph_objs as go
 import plotly.io as pio
 
+import argparse
+
 def parse_benchstat(file_path):
     with open(file_path, 'r') as f:
         content = f.read()
@@ -186,8 +188,16 @@ def generate_html(images, out_dir):
     print(f'Generated report at {html_path}')
 
 def main():
-    benchstat_file = '/tmp/benchstat.csv'
-    out_dir = '/tmp'
+    parser = argparse.ArgumentParser(description='Generate benchmark comparison report')
+    parser.add_argument('--benchstat-file', '-f',
+                        default='/tmp/benchstat.csv',
+                        help='Path to the benchstat CSV input file')
+    parser.add_argument('--out-dir', '-o',
+                        default='/tmp',
+                        help='Directory where HTML reports will be written')
+    args = parser.parse_args()
+    benchstat_file = args.benchstat_file
+    out_dir = args.out_dir
     groups = parse_benchstat(benchstat_file)
     # Create combined geomean metrics chart
     overall_img = plot_overall_metrics(groups, out_dir)
