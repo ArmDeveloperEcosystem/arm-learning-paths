@@ -1,16 +1,12 @@
 ---
-title: Analyze cache behavior with Perf C2C on Arm
-
-draft: true
-cascade:
-    draft: true
+title: Analyze cache behavior with perf c2c on Arm
 
 minutes_to_complete: 15
 
-who_is_this_for: This topic is for developers who want to optimize cache access patterns on Arm servers using Perf C2C. 
+who_is_this_for: This topic is for performance-oriented developers working on Arm-based cloud or server systems who want to optimize memory access patterns and investigate cache inefficiencies using Perf C2C and Arm SPE.
 
 learning_objectives: 
-    - Avoid false sharing in C++ using memory alignment.
+    - Identify and fix false sharing issues using Perf C2C, a cache line analysis tool.
     - Enable and use the Arm Statistical Profiling Extension (SPE) on Linux systems.
     - Investigate cache line performance with Perf C2C.
 
