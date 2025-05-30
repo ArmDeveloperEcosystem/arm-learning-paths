@@ -7,7 +7,7 @@ cascade:
 
 minutes_to_complete: 10
 
-who_is_this_for: Android graphics application developers
+who_is_this_for: This is an advanced topic for Android graphics application developers.
 
 learning_objectives:
     - Optimize vertex representations on Arm GPUs
@@ -22,8 +22,8 @@ author:
     - Peter Harris
 
 ### Tags
-skilllevels: Intermediate
-subjects: Performance
+skilllevels: Advanced
+subjects: Performance and Architecture
 armips:
     - Immortalis
     - Mali
@@ -39,7 +39,7 @@ further_reading:
         link:  https://developer.arm.com/documentation/101897/0304/Vertex-shading/Attribute-layout
         type:  documentation
     - resource:
-        title: Frame Advisor user guide
+        title: Frame Advisor User Guide
         link: https://developer.arm.com/documentation/102693/latest/
         type: documentation
     - resource:
