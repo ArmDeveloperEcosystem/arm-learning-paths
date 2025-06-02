@@ -4185,3 +4185,15 @@ submodule
 subword
 techcrunch
 transformative
+Aude
+Gian
+Iodice
+SmolLM
+VME
+Vuilliomenet
+cpus
+fLO
+invalidations
+libtensorflowlite
+macos
+multithreaded

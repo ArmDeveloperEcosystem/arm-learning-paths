@@ -115,7 +115,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 
 You will now use ngrok to expose your locally running MCP server to the public internet over HTTPS.
 
-1. Add ngrok’s repo to the apt package manager and install:
+1. Add ngrok's repo to the apt package manager and install:
 ```bash
 curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
   | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \

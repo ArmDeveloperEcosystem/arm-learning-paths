@@ -17,7 +17,7 @@ The Model Context Protocol (MCP) is an open specification designed to connect La
 
 - **Security by design:** MCP encourages running servers inside your own infrastructure, so sensitive data stays within your infrastructure unless explicitly shared.
 
-- **Cross-ecosystem momentum:** recent roll-outs from an official C# SDK to Wix’s production MCP server and Microsoft’s Azure support show the MCP spec is gathering real-world traction.
+- **Cross-ecosystem momentum:** recent roll-outs from an official C# SDK to Wix's production MCP server and Microsoft’s Azure support show the MCP spec is gathering real-world traction.
 
 ## What is uv?
 
