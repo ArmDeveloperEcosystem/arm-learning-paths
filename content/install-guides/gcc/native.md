@@ -3,7 +3,7 @@ additional_search_terms:
 - compiler
 layout: installtoolsall
 minutes_to_complete: 15
-author_primary: Jason Andrews
+author: Jason Andrews
 multi_install: false
 multitool_install_part: true
 official_docs: https://gcc.gnu.org/onlinedocs/
@@ -12,16 +12,13 @@ test_images:
 - fedora:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
-- passed
 title: Native compiler
 tool_install: false
 weight: 2
 ---
 GCC is available on all Linux distributions and can be installed using the package manager.
 
-## Before you begin
+## What do I need before installing GCC?
 
 Follow the instructions below to install GCC on an Arm Linux distribution. This covers `gcc` and `g++` for compiling C and C++ applications.
 
@@ -39,11 +36,11 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## Download 
+## How do I download a native GCC compiler on Linux?
 
 The Linux package manager downloads the required files so there are no special instructions.
 
-## Installation
+## How do I install a native GCC compiler on Linux?
 
 ### Installing on Debian based distributions such as Ubuntu
 
@@ -54,7 +51,7 @@ sudo apt update
 sudo apt install gcc g++ -y
 ```
 
-Another meta-package on Ubuntu is ``build-essential``. This will install the most common tools libraries with a single command.
+Another meta-package on Ubuntu is ``build-essential``. This will install the most common tools and libraries with a single command.
 
 ```bash { target="ubuntu:latest" }
 sudo apt install build-essential -y
@@ -62,24 +59,24 @@ sudo apt install build-essential -y
 
 ### Installing on Red Hat / Fedora / Amazon Linux
 
-These Linux distributions use `yum` as the package manager. 
+These Linux distributions use `dnf` as the package manager.
 
 To install the most common development tools use the commands below. If the machine has `sudo` you can use it.
 
 ```bash { target="fedora:latest" }
-sudo yum update -y
-sudo yum groupinstall 'Development Tools' -y
+sudo dnf update -y
+sudo dnf group install "development-tools" -y
 ```
 If `sudo` is not available become _root_ and omit the `sudo`.
 ```console
-yum update
-yum groupinstall 'Development Tools' -y
+dnf update -y
+sudo dnf group install "development-tools" -y
 ```
-## Setting up product license
+## Does GCC require a license?
 
-GCC is open source and freely available for use. 
+GCC is open source and freely available for use.
 
-## Get started {#start}
+## How do I get started with GCC? {#start}
 
 To confirm the installation is complete run:
 

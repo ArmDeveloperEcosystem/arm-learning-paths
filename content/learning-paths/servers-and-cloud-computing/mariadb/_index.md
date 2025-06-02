@@ -15,7 +15,7 @@ prerequisites:
     - Cloud service provider accounts for each service you want to use including AWS, Azure, and GCP
     - A local computer with [Docker](/install-guides/docker/), [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli/), [Azure CLI](/install-guides/azure-cli/), [Google Cloud CLI](/install-guides/gcloud/), and [Ansible](/install-guides/ansible/) installed
 
-author_primary: Jason Andrews
+author: Jason Andrews
 ### Tags
 skilllevels: Introductory
 subjects: Databases
@@ -28,6 +28,27 @@ tools_software_languages:
     - Ansible
     - MariaDB
     - Docker
+    - Runbook
+
+
+further_reading:
+    - resource:
+        title: MariaDB Manual
+        link: https://mariadb.org/documentation/ 
+        type: documentation
+    - resource:
+        title: RDS
+        link: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MariaDB.html 
+        type: documentation
+    - resource:
+        title: Ansible
+        link: https://docs.ansible.com/
+        type: documentation
+    - resource:
+        title: Key considerations in moving to Graviton2 for Amazon RDS and Amazon Aurora databases
+        link: https://aws.amazon.com/blogs/database/key-considerations-in-moving-to-graviton2-for-amazon-rds-and-amazon-aurora-databases/
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

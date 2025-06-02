@@ -13,7 +13,7 @@ prerequisites:
     - Some understanding of the Arm architecture
     - Arm Development Studio, 2023.0 or later
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -21,7 +21,6 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
     - Cortex-A
-    - Cortex-X
     - Armv9-A
     
 operatingsystems:
@@ -32,13 +31,32 @@ tools_software_languages:
     - Coding
     - Trusted Firmware
     - Arm Development Studio
+    - RME
+    - CCA
+    - Runbook
+
 
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
-    - smartphones-and-mobile
+    - mobile-graphics-and-gaming
+
+further_reading:
+    - resource:
+        title: Arm Confidential Compute Architecture
+        link: https://www.arm.com/architecture/security-features/arm-confidential-compute-architecture
+        type: website
+    - resource:
+        title: Arm Confidential Compute Architecture open source enablement
+        link: https://www.youtube.com/watch?v=JXrNkYysuXw
+        type: video
+    - resource:
+        title: Learn the architecture - Realm Management Extension
+        link: https://developer.arm.com/documentation/den0126
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

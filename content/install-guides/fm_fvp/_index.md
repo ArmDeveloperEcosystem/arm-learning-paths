@@ -1,6 +1,6 @@
 ---
 title: Arm Fast Models and FVPs
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 additional_search_terms:
     - virtual platform

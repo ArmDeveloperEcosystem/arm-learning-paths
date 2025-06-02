@@ -10,10 +10,10 @@ learning_objectives:
     - Measure code execution performance on Arm64    
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm[virtual machine](/learning-paths/cross-platform/woa_azure/).
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Visual Studio 2022 with .NET desktop development and Universal Windows Platform development installed.
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -28,6 +28,17 @@ tools_software_languages:
     - .NET
     - Visual Studio
     
+further_reading:
+    - resource:
+        title: Microsoft's Official WinUI 3 Documentation
+        link: https://learn.microsoft.com/en-us/windows/apps/winui/winui3/
+        type: documentation  
+    - resource:
+        title: Example Applications and Code for WinUI
+        link: https://github.com/Microsoft/WinUI-Gallery
+        type: website
+
+
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly

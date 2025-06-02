@@ -130,4 +130,4 @@ This method of using a custom allocator is popular in performance-critical appli
 
 A linear allocator like the one used here is one of the simplest memory allocators, and is popular in systems with known fixed size objects or known constrained size limits. 
 
-There are many more memory allocators for different sizes and quite a few of them are much faster than the default `malloc()`.
+There are many more memory allocators for different sizes and quite a few of them are much faster than the default `malloc()`. To learn more about how a memory allocator works and write one yourself, please have a look at the [dynamic memory allocator learning path](/learning-paths/cross-platform/dynamic-memory-allocator/).

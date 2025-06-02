@@ -5,7 +5,21 @@ resources/
 node_modules/
 package-lock.json
 .hugo_build.lock
+.vscode
+.env
+startup.sh
 
 # macOS files
 *.DS_Store
 nohup.out
+
+venv/
+z_local_saved/
+/.idea/
+/tools/.python-version
+/.python-version
+*.iml
+*.xml
+
+# CTags symbol index
+tags

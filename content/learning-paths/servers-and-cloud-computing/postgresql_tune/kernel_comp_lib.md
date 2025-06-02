@@ -134,22 +134,24 @@ More information on the different parameters that affect the configuration of hu
 
 `PostgreSQL` writes data to files like any Linux process does. The behavior of the page cache can affect performance. There are two sysctl that parameters control how often the kernel flushes the page cache data to disk.
 
-- `vm.dirty_background_ratio`
-- `vm.dirty_ratio`
+- `vm.dirty_background_ratio=5`
+- `vm.dirty_ratio=80`
 
 The `vm.dirty_background_ratio` sets the percentage of the page cache that needs to be dirty in order for a flush to disk to start in the background. 
 
 Setting this value to lower than the default (typically 10) helps write heavy workloads. This is because by lowering this threshold, you are spreading writes to storage over time. This reduces the probability of saturating storage.
 
+Setting this value to 5 can improve performance.
+
 The `vm.dirty_ratio` sets the percentage of the page cache that needs to be dirty in order for threads that are writing to storage to be paused to allow flushing to catch up. 
 
 Setting this value higher than default (typically 10-20) helps performance when disk writes are bursty. A higher value gives the background flusher (controlled by `vm.dirty_background_ratio`) more time to catch up. 
 
-Setting this as high as 80 can help performance.
+Setting this as high as 80 can improve performance.
 
 ##  Compiler Considerations
 
-The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flags `-mcpu` and `-flto` can be used to potentially gain additional performance. Usage of these flags is explained in the [Migrating C/C++ applications](/learning-paths/servers-and-cloud-computing/migration/c-c++) section of the [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) learning path.
+The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flags `-mcpu` and `-flto` can be used to potentially gain additional performance. Usage of these flags is explained in the [Migrating C/C++ applications](/learning-paths/servers-and-cloud-computing/migration/c/) section of the [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) learning path.
 
 ##  OpenSSL Considerations
 

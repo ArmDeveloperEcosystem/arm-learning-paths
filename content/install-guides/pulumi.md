@@ -2,8 +2,9 @@
 title: Pulumi
 minutes_to_complete: 5
 official_docs: https://www.pulumi.com/docs/
-author_primary: Jason Andrews
+author: Jason Andrews
 
+test_maintenance: true
 test_images:
 - ubuntu:latest
 
@@ -17,13 +18,13 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [Pulumi](https://www.pulumi.com/) is a multi-language infrastructure as code tool. Pulumi is [open source](https://github.com/pulumi/pulumi) and makes it easy to deploy cloud infrastructure.
 
-## Before you begin
+## What do I need before installing Pulumi?
 
 Pulumi is available for a variety of operating systems and Linux distributions and has multiple ways to install it.
 
 This article provides a quick solution to install Pulumi on Linux.
 
-## Installation {#install}
+## How do I install Pulumi? {#install}
 
 Run the following command to download and install Pulumi on Linux:
 
@@ -56,50 +57,56 @@ source $HOME/.bashrc
 
 Confirm `pulumi` is now in the search path:
 
-```bash { env_source="~/.bashrc" output_lines = "2"}
+```bash
 which pulumi
-/home/ubuntu/.pulumi/bin/pulumi
+```
+
+```output
+/usr/local/bin/pulumi
 ```
 
 Print the version:
 
-```bash { env_source="~/.bashrc" output_lines = "2"}
+```bash
 pulumi version
-v3.78.0
+```
+
+```output
+v3.135.1
 ```
 
 You are ready to use Pulumi on your Linux machine.
 
-## Get started {#start}
+## How do I get started with Pulumi? {#start}
 
-Pulumi keeps your projects and state information in Pulumi Cloud, making it easy to access them from anywhere. If you want to use Pulumi Cloud visit [app.pulumi.com](https://app.pulumi.com/) and sign up. 
+Pulumi keeps your projects and state information in Pulumi Cloud, making it easy to access them from anywhere. If you want to use Pulumi Cloud visit [app.pulumi.com](https://app.pulumi.com/) and sign up.
 
-It's not necessary to use Pulumi Cloud to get started, you can store project information on your local computer. 
+It's not necessary to use Pulumi Cloud to get started, you can store project information on your local computer.
 
 Below is a simple example to try out Pulumi.
 
-The example demonstrates using Docker to pull a container image from Docker Hub to your local machine using Python. 
+The example demonstrates using Docker to pull a container image from Docker Hub to your local machine using Python.
 
-To run the example, you need to install Docker. Refer to the [Docker install guide](/install-guides/docker/) for instructions. 
+To run the example, you need to install Docker. Refer to the [Docker install guide](/install-guides/docker/) for instructions.
 
-You also need Python. Make sure you have `python` and `pip` installed. 
+You also need Python. Make sure you have `python` and `pip` installed.
 
 For `Ubuntu 22.04` on Arm you can run the commands below to install:
 
-```bash { env_source="~/.bashrc" }
+```bash
 sudo apt install python-is-python3 -y
 sudo apt install python3-pip -y
 ```
 
 Create a new directory for the example:
 
-```bash { env_source="~/.bashrc" }
+```bash
 mkdir pulumi-test ; cd pulumi-test
 ```
 
-Log in to your local machine, a shortcut to use `~/.pulumi` to store project data. 
+Log in to your local machine, a shortcut to use `~/.pulumi` to store project data.
 
-```bash { env_source="~/.bashrc" }
+```bash
 pulumi login --local
 ```
 
@@ -110,14 +117,14 @@ For the example you need to create 3 files:
 
 Use a text editor to copy the code below to a file named `requirements.txt`.
 
-```python
+```output { file_name="requirements.txt" }
 pulumi>=3.0.0
 pulumi-docker>=4.0.0
 ```
 
 Use a text editor to copy the lines below to a file named `Pulumi.yaml`
 
-```yaml
+```yaml { file_name="Pulumi.yaml" }
 name: alpine-pull
 runtime: python
 description: A pulumi application pull the alpine image
@@ -125,7 +132,7 @@ description: A pulumi application pull the alpine image
 
 Use a text editor to copy the lines below to a file named `__main__.py`
 
-```python
+```python { file_name="__main.py__" }
 import pulumi
 import pulumi_docker as docker
 
@@ -138,13 +145,13 @@ pulumi.export('digest', image.repo_digest)
 
 With the three files created, install the required Python packages:
 
-```bash { env_source="~/.bashrc" }
+```bash
 pip install -r requirements.txt
 ```
 
 Run the Python script to pull the container image:
 
-```bash { env_source="~/.bashrc" }
+```console
 pulumi up
 ```
 
@@ -154,9 +161,9 @@ There are 4 prompts to respond to:
 
 2. Enter a name for the stack.
 
-3. When prompted, enter a passphrase for the stack (twice). 
+3. When prompted, enter a passphrase for the stack (twice).
 
-4. Answer `yes` to the final question to create the stack. 
+4. Answer `yes` to the final question to create the stack.
 
 An example output for `pulumi up` is shown below:
 
@@ -164,12 +171,12 @@ An example output for `pulumi up` is shown below:
 Please choose a stack, or create a new one:  [Use arrows to move, type to filterPlease choose a stack, or create a new one: <create a new stack>
 Please enter your desired stack name: test1
 Created stack 'test1'
-Enter your passphrase to protect config/secrets: 
-Re-enter your passphrase to confirm: 
+Enter your passphrase to protect config/secrets:
+Re-enter your passphrase to confirm:
 Previewing update (test1):
-     Type                         Name               Plan       
- +   pulumi:pulumi:Stack          alpine-pull-test1  create     
- +   └─ docker:index:RemoteImage  alpineImage        create     
+     Type                         Name               Plan
+ +   pulumi:pulumi:Stack          alpine-pull-test1  create
+ +   └─ docker:index:RemoteImage  alpineImage        create
 
 
 Outputs:
@@ -180,9 +187,9 @@ Resources:
 
 Do you want to perform this update? yes
 Updating (test1):
-     Type                         Name               Status              
- +   pulumi:pulumi:Stack          alpine-pull-test1  created (0.07s)     
- +   └─ docker:index:RemoteImage  alpineImage        created (0.03s)     
+     Type                         Name               Status
+ +   pulumi:pulumi:Stack          alpine-pull-test1  created (0.07s)
+ +   └─ docker:index:RemoteImage  alpineImage        created (0.03s)
 
 
 Outputs:
@@ -197,7 +204,7 @@ Duration: 1s
 
 After the Python script runs you have the container on your machine. Confirm this using the `docker images` command:
 
-```bash
+```console
 docker images
 ```
 
@@ -207,4 +214,5 @@ The output will be similar to:
 REPOSITORY   TAG       IMAGE ID       CREATED      SIZE
 alpine       latest    f6648c04cd6c   2 days ago   7.66MB
 ```
+
 

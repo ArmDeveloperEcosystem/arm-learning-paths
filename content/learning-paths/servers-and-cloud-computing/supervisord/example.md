@@ -19,7 +19,7 @@ Here are the changes:
 Use a text editor to replace your `Dockerfile` with the new file below:
 
 ```console
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 RUN apt-get update && apt-get install -y curl iproute2 sudo openssh-server sudo vim apache2 supervisor procps uuid-runtime
 

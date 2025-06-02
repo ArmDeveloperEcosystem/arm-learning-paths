@@ -3,7 +3,7 @@ additional_search_terms:
 - compiler
 layout: installtoolsall
 minutes_to_complete: 15
-author_primary: Jason Andrews
+author: Jason Andrews
 multi_install: false
 multitool_install_part: true
 official_docs: https://gcc.gnu.org/onlinedocs/
@@ -12,14 +12,11 @@ test_images:
 - fedora:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
-- passed
 title: Cross-compiler
 tool_install: false
 weight: 3
 ---
-GCC is available on all Linux distributions and can be installed using the package manager. 
+GCC is available on all Linux distributions and can be installed using the package manager.
 
 This covers `gcc` and `g++` for compiling C and C++ as a cross-compiler targeting the Arm architecture.
 
@@ -27,19 +24,21 @@ This covers `gcc` and `g++` for compiling C and C++ as a cross-compiler targetin
 
 GCC is often used to cross-compile software for Arm microcontrollers and embedded devices which have firmware and other low-level software. The executables are `arm-none-eabi-gcc` and `arm-none-eabi-g++`.
 
-GCC is also used to cross compile Linux applications. Applications can be compiled for 32-bit or 64-bit Linux systems. 
+GCC is also used to cross compile Linux applications. Applications can be compiled for 32-bit or 64-bit Linux systems.
 
-The executables for 32-bit are `arm-linux-gnueabihf-gcc` and `arm-linux-gnueabihf-g++`. 
+The executables for 32-bit are `arm-linux-gnueabihf-gcc` and `arm-linux-gnueabihf-g++`.
 
 The executables for 64-bit are `aarch64-linux-gnu-gcc` and `aarch64-linux-gnu-g++`.
 
 Software can be compiled on an `x86` or `Arm` host machine.
 
-## Download 
+## How do I download a GCC cross compiler targeting Arm?
 
 The Linux package manager will download the required files so there are no special download instructions.
 
-## Installation
+## How do I install a GCC cross compiler on Linux?
+
+You can install a GCC cross compiler with Arm as a target architecture using Linux package managers.
 
 ### Installing on Debian based distributions such as Ubuntu
 
@@ -52,33 +51,43 @@ sudo apt install gcc-arm-linux-gnueabihf -y
 sudo apt install gcc-aarch64-linux-gnu -y
 ```
 
-### Installing on Red Hat / Fedora / Amazon Linux
+### Installing on Fedora
 
-These Linux distributions use `yum` as the package manager. 
+Fedora uses the `dnf` package manager.
 
-To install the most common development tools use the commands below. If the machine has `sudo` you can use it or run `yum` as _root_.
+To install the most common development tools use the commands below.
 
-```bash { target="fedora:latest" }
-sudo yum update -y
-sudo yum install arm-none-eabi-gcc-cs -y
-sudo yum install arm-none-eabi-newlib -y
-sudo yum install gcc-aarch64-linux-gnu -y
-sudo yum install gcc-arm-linux-gnu -y
-```
+- If the machine has `sudo` you can use it:
 
-If `sudo` is not available become _root_ and omit the `sudo`.
+  ```bash { target="fedora:latest" }
+  sudo dnf update -y
+  sudo dnf install arm-none-eabi-gcc-cs -y
+  sudo dnf install arm-none-eabi-newlib -y
+  sudo dnf install gcc-aarch64-linux-gnu -y
+  sudo dnf install gcc-arm-linux-gnu -y
+  ```
+
+- If `sudo` is not available become _root_ and omit the `sudo` from the above commands:
+
+  ```console
+  dnf update -y
+  dnf install arm-none-eabi-gcc-cs -y
+  dnf install arm-none-eabi-newlib -y
+  dnf install gcc-aarch64-linux-gnu -y
+  dnf install gcc-arm-linux-gnu -y
+  ```
+
+## How do I install a GCC cross compiler on macOS?
+
+You can install a GCC cross compiler with Arm as a target architecture using Homebrew, a package manager for macOS (and Linux).
 
 ```console
-yum update
-yum install arm-none-eabi-gcc-cs -y
-yum install arm-none-eabi-newlib -y
-yum install gcc-aarch64-linux-gnu -y
-yum install gcc-arm-linux-gnu -y
+brew install arm-none-eabi-gcc
 ```
 
 ## Setting up product license {#license}
 
-GCC is open source and freely available for use. 
+GCC is open source and freely available for use.
 
 ## Get started {#start}
 

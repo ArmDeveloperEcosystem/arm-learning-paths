@@ -6,7 +6,9 @@ Only used by 'tabpane' shortcode to process code in tabs.
 <!-- Make sure that we are enclosed within a tabpane shortcode block -->
 {{ with $.Parent }}
 {{- if ne $.Parent.Name "tabpane" -}}
-{{- errorf "tab must be used within a tabpane block" -}}
+     {{- if ne $.Parent.Name "tabpane-normal" -}}
+          {{- errorf "tab must be used within a tabpane block" -}}
+     {{- end -}}
 {{- end -}}
 {{- end -}}
 
@@ -15,6 +17,14 @@ Only used by 'tabpane' shortcode to process code in tabs.
 
 <!-- store all tab info in dict tab -->
 {{ $tab := dict "header" $header }}
+{{ with $.Get "img_src" }}
+{{ $tab = merge $tab (dict "img_src" ($.Get "img_src")) }}
+{{ with $.Get "title" }}    
+{{ $tab = merge $tab (dict "title" ($.Get "title")) }}
+{{ else }}
+{{ $tab = merge $tab (dict "title" ($header)) }}
+{{ end }}
+{{ else }}
 {{ with $.Get "language" }}        {{ $tab = merge $tab (dict "language" ($.Get "language")) }}               {{ end }}
 {{ with $.Get "line_numbers" }}    {{ $tab = merge $tab (dict "line_numbers" ($.Get "line_numbers")) }}       {{ end }}
 {{ with $.Get "output_lines" }}    {{ $tab = merge $tab (dict "output_lines" ($.Get "output_lines")) }}       {{ end }}
@@ -24,6 +34,7 @@ Only used by 'tabpane' shortcode to process code in tabs.
      spurious lines during syntax highlighting 
 {{ $tab = merge $tab (dict "content" (trim $.Inner "\n")) }}-->
 {{ $tab = merge $tab (dict "content" ($.Inner)) }}
+{{ end }}
 {{ end }}
 
 <!-- add dict tab to parent's scratchpad -->

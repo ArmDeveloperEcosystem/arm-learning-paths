@@ -1,12 +1,12 @@
 ---
-title: Learn how to migrate an x86 application to multi-architecture with Arm on Google Kubernetes Engine (GKE)
+title: Learn how to migrate an x86 application to multi-architecture with Arm-based on Google Axion Processor on GKE
 
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for software developers who are looking to migrate their existing x86 containerized applications to Arm
 
 learning_objectives: 
-    - Add Arm-based nodes to an existing x86-based GKE cluster
+    - Add Arm-based nodes (Google Axion) to an existing x86-based GKE cluster
     - Rebuild an x86-based application to make it multi-arch and run on Arm
     - Learn how to add taints and tolerations to GKE clusters to schedule application pods on architecture specific nodes
     - Run a multi-arch application across multiple architectures on a single GKE cluster
@@ -16,7 +16,7 @@ prerequisites:
     - A computer with [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/)installed.
     - An existing Google Kubernetes Engine (GKE) cluster with x86-based nodes
 
-author_primary: Pranay Bakre
+author: Pranay Bakre
 
 ### Tags
 skilllevels: Advanced
@@ -28,9 +28,26 @@ armips:
 
 tools_software_languages:
     - Kubernetes
+    - Runbook
 
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: Create Arm based clusters and node pools 
+        link: https://cloud.google.com/kubernetes-engine/docs/how-to/create-arm-clusters-nodes
+        type: documentation
+    - resource:
+        title: Configure cluster access to use kubectl
+        link: https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl
+        type: documentation
+    - resource:
+        title: GKE documentation
+        link: https://cloud.google.com/kubernetes-engine/docs
+        type: documentation
+
 
 
 ### FIXED, DO NOT MODIFY

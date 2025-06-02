@@ -1,0 +1,98 @@
+---
+differentiating_info:
+- Bare-metal
+- Storage
+- tinyML
+key_ip:
+- Cortex-R
+- Cortex-M
+- Ethos-U
+maintopic: true
+operatingsystems_filter:
+- Android: 1
+- Baremetal: 29
+- Linux: 28
+- macOS: 6
+- RTOS: 9
+- Windows: 4
+subjects_filter:
+- CI-CD: 5
+- Containers and Virtualization: 6
+- Embedded Linux: 4
+- Libraries: 3
+- ML: 13
+- Performance and Architecture: 21
+- RTOS Fundamentals: 4
+- Security: 2
+- Virtual Hardware: 2
+subtitle: Learn best practices for microcontroller development
+title: Embedded and Microcontrollers
+tools_software_languages_filter:
+- AI: 1
+- Arduino: 1
+- Arm Compiler for Embedded: 7
+- Arm Compiler for Linux: 1
+- Arm Compute Library: 1
+- Arm Development Studio: 8
+- Arm Fast Models: 4
+- Arm Virtual Hardware: 10
+- Assembly: 1
+- AVH: 1
+- C: 3
+- C/C++: 1
+- ChatGPT: 1
+- Clang: 1
+- CMSIS: 4
+- CMSIS-DSP: 1
+- CMSIS-Toolbox: 3
+- CNN: 1
+- Coding: 26
+- Containerd: 1
+- DetectNet: 1
+- Docker: 9
+- DSTREAM: 2
+- ExecuTorch: 2
+- Fixed Virtual Platform: 9
+- FPGA: 1
+- Fusion 360: 1
+- FVP: 1
+- GCC: 8
+- GenAI: 2
+- GitHub: 3
+- GitLab: 1
+- Himax SDK: 1
+- IP Explorer: 4
+- Jupyter Notebook: 1
+- K3s: 1
+- Keil: 5
+- Keil MDK: 3
+- Kubernetes: 1
+- LLM: 2
+- MCP: 1
+- MDK: 1
+- MPS3: 1
+- MXNet: 1
+- Neon: 1
+- NumPy: 1
+- Paddle: 1
+- Porcupine: 1
+- Python: 6
+- PyTorch: 2
+- QEMU: 1
+- Raspberry Pi: 6
+- Remote.It: 1
+- RTX: 2
+- Runbook: 4
+- Slicing software: 1
+- STM32: 2
+- TensorFlow: 3
+- TensorRT: 1
+- tinyML: 1
+- Trusted Firmware: 3
+- TrustZone: 2
+- TVMC: 1
+- vcpkg: 1
+- Yocto Linux: 1
+- Zephyr: 1
+weight: 5
+---

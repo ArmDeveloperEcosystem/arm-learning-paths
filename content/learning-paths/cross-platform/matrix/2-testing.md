@@ -9,48 +9,69 @@ layout: learningpathall
 ## Learn about unit testing
 
 It's common practice when developing software to create unit tests. While it
-might appear unnecessary in the beginning, tests provide significant
-advantages:
+might appear unnecessary at the outset, tests provide significant
+benefits:
 
-- Confidence for developers, when adding new functionality, or when porting
-  to a new platform
-- Confidence for the users that the quality is good
-- Ability to catch regressions
-- Show how to use the library in practice
-- Welcome new people to the project, as this allows them to check their patches
-  and make sure they did not inadvertently brake anything
+- When adding new functionality, or porting to a new platform, the tests allow developers to feel confident in the process.
+- They also inspire confidence in users that the software is at the appropriate level of quality.
+- They offer an opportunity to catch regressions.
+- They demonstrate how to use the library in practice.
+- They create opportunities for those new to the project to easily check their patches, and verify that the introduction of the new code has not created unintended negative changes.
 
-You'll notice that setting up testing comes before the actual library code development.
+You will notice that setting up testing precedes library code development.
 
-Many unit testing frameworks exist in general, and C++ is not short of them as
-you can notice in this [wikipedia
-article](https://en.wikipedia.org/wiki/List_of_unit_testing_frameworks#C++).
-This project uses [GoogleTest](https://github.com/google/googletest) as the testing framework.
+There are many unit testing frameworks available, and C++ is not short of them. See this [wikipedia
+article](https://en.wikipedia.org/wiki/List_of_unit_testing_frameworks#C++). This particular Learning Path uses [GoogleTest](https://github.com/google/googletest) as the testing framework.
 
-## Setup GoogleTest
+## Set up GoogleTest
 
-You could rely on the operating system platform to provide GoogleTest, then
-ask developers to install it on each computer they use, but this feels like an
-unnecessary step.
+One method you can use is to rely on the operating system platform to provide GoogleTest, then
+ask developers to install it on each machine they use, but this is an unnecessary step.
 
-As testing is a corner stone of your Matrix library
-development, GoogleTest should be installed automatically as a dependency in the
-build tree of your project.
+As testing is a cornerstone of your Matrix library development, GoogleTest should be installed automatically as a dependency in the build tree of your project.
 
 One great feature of GoogleTest is that it provides a seamless integration with CMake.
 
 Adding external dependencies is easily done with CMake. This is done with a
 separate `CMakeLists.txt` file, placed in the `external/` directory. This file covers
-all external dependencies. It will be used by the main
-`CMakeLists.txt`.
+all external dependencies. It will be used by the main `CMakeLists.txt`.
 
 Create the file `external/CMakeLists.txt` with the following content:
 
-{{< include-code TXT "content/learning-paths/cross-platform/matrix/projects/chapter-2/external/CMakeLists.txt" >}}
+```TXT
+cmake_minimum_required(VERSION 3.6)
 
-You may notice a new CMake feature: variables. Variables start with the `$`
-character and have a name in between curly braces. A CMake variable can be set by
-the CMake itself, or by the user, and they can be modified or used.
+project(external LANGUAGES CXX)
+
+# Get the functionality to configure, build and install external project
+# from CMake module 'ExternalProject'.
+include(ExternalProject)
+
+# Use the same compiler, build type and instalation directory than those
+# from our caller.
+set(EXTERNAL_PROJECT_CMAKE_ARGS
+      -DCMAKE_CXX_COMPILER:PATH=${CMAKE_CXX_COMPILER}
+      -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
+      -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX})
+
+# Add 'googletext' as an external project, that will be cloned with git,
+# from the official googletest repository, at version v1.14.
+# We ask for a shallow clone, which is a clone with only the revision
+# we are interested in rather than googletest's full history ---
+# this makes the clone much faster (less data traffic), and uses much
+# less disk space ; furthermore, as we are not developping googletest
+# but just merely using it, we don't need thre full history. It will be
+# built and installed with our build configuration passed with CMAKE_ARGS.
+ExternalProject_Add(googletest
+    PREFIX "external"
+    GIT_REPOSITORY "https://github.com/google/googletest"
+    GIT_TAG "v1.14.0"
+    GIT_SHALLOW TRUE
+    CMAKE_ARGS ${EXTERNAL_PROJECT_CMAKE_ARGS}
+)
+```
+
+You might notice a new CMake feature: variables. Variables start with the `$` character and have a name inserted between curly braces. A CMake variable can be set by the CMake itself, or by the user, and they can be modified or used as they are.
 
 In this case, the variable `${EXTERNAL_PROJECT_CMAKE_ARGS}` is set with the options to
 pass to CMake for installing the external dependencies:
@@ -116,7 +137,7 @@ execute_process(
   COMMAND ${CMAKE_COMMAND} --install ${CMAKE_BINARY_DIR}/external
 )
 
-# Import googletest package information (library names, paths, dependencies, ...)
+# Import googletest package information (library names, paths, dependencies...)
 set(GTest_DIR "${CMAKE_BINARY_DIR}/lib/cmake/GTest"
     CACHE PATH "Path to the googletest package configuration files")
 find_package(GTest REQUIRED
@@ -130,18 +151,14 @@ find_package(GTest REQUIRED
 The variable `${CMAKE_GENERATOR}` is what CMake uses to perform the build, usually GNU
 Make or Ninja, but it can be an IDE specific project file as well.
 
-The variable `${CMAKE_SOURCE_DIR}` is the path to the top level directory of your project
-(where the main `CMakeLists.txt` is located) and `${CMAKE_BINARY_DIR}` is the
-build directory.
+The variable `${CMAKE_SOURCE_DIR}` is the path to the top level directory of your project where the main `CMakeLists.txt` is located, and `${CMAKE_BINARY_DIR}` is the build directory.
 
-At configuration time, CMake will download, build and install GoogleTest and
-make it available to your project using `find_package`.
+At configuration time, CMake downloads, builds and installs GoogleTest and
+makes it available to your project using `find_package`.
 
-Now if you build the project, CMake notices it has been updated and will
-perform all necessary steps.
+Now if you build the project, CMake notices it has been updated and will perform all necessary steps.
 
-The output belows shows that besides the
-executable, CMake has configured, built, and installed GoogleTest.
+The output below shows that besides the executable, CMake has configured, built, and installed GoogleTest.
 
 Copy and paste the commands to run the build yourself to see the output:
 
@@ -244,23 +261,42 @@ In order to keep the project clean, all tests go inside a `tests/`
 directory. One file, `tests/main.cpp`, contains the top level directions for
 testing.
 
-As a project may contain many tests, it's good to split them across
+As a project might contain many tests, it's good to split them across
 several files inside the `tests/` directory.
 
 Create the top-level test in `tests/main.cpp` and paste the following code into the file:
 
-{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-2/tests/main.cpp" >}}
+```CPP
+#include "gtest/gtest.h"
+
+using namespace testing;
+
+int main(int argc, char **argv) {
+    InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
+```
 
 Create `tests/Version.cpp` and add the `getVersion` unit test into the file:
 
-{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-2/tests/Version.cpp" >}}
+```CPP
+#include "Matrix/Matrix.h"
 
-This test invokes `getVersion` and checks that the
-`major`, `minor` and `patch` level match the expected values.
+#include "gtest/gtest.h"
 
-The last step is to tell CMake about the tests. All tests will
-linked together in a single `matrix-test` executable (linking with the Matrix
-library and GoogleTest), and you will add a convenience `check` target so the
+using namespace MatComp;
+
+TEST(Matrix, getVersion) {
+    const Version &version = getVersion();
+    EXPECT_EQ(version.major, 0);
+    EXPECT_EQ(version.minor, 1);
+    EXPECT_EQ(version.patch, 0);
+}
+```
+
+This test invokes `getVersion` and checks that the `major`, `minor` and `patch` levels match the expected values.
+
+The last step is to tell CMake about the tests. All tests are linked together in a single `matrix-test` executable (linking with the Matrix library and GoogleTest), and you add a convenience `check` target so the
 tests can be run easily.
 
 Add the following at the bottom of the top-level `CMakeLists.txt`:
@@ -339,12 +375,10 @@ Matrix/
     └── main.cpp
 ```
 
-You can download the [archive](/artifacts/matrix/chapter-2.tar.xz) of the
-project in its current state to experiment on your computer.
+CMake makes it easy to use GoogleTest as an external project. Adding unit tests as you go is now easy.
 
-CMake makes it easy to use GoogleTest as an external project. Adding unit
-tests as you go is now very easy.
+You have created the unit testing environment for your Matrix library and added a test. The infrastructure is now in place to implement the core of the Matrix processing library.
 
-You have created the unit testing environment for your Matrix library and
-added a test. The infrastructure is now in place to
-implement the core of the Matrix processing library.
+You can refer to this chapter source code in
+`code-examples/learning-paths/cross-platform/matrix/chapter-2` in the archive that
+you have downloaded earlier.

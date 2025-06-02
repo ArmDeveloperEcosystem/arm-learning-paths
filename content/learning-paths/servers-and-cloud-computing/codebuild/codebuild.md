@@ -70,11 +70,9 @@ The Project configuration section has the project name and description.
 
 The Source section is where the GitHub project information is entered. To connect to GitHub use either OAuth or a personal access token. If OAuth is selected a dialog will open to login to GitHub and if a personal access token is selected it can be pasted into a box. 
 
-![Source provider](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/pypw0obhcr4lzi1p6k4f.png)
-
 After the GitHub connection is made enter the GitHub URL for the project. Enter the link to the `hello-world` project in GitHub.
 
-![Source provider](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dh14k17dk9y8f9561a8q.png)
+![alt-text #center](images/codebuild_source.png)
 
 The Environment section contains the information about the Docker image to use for the build. This is NOT the Docker image you are building, it is the image used to build the image. CodeBuild runs a container to build the image and you need to make sure all of the tools needed are contained in the Docker image used to run the build. This is sometimes referred to as Docker-in-Docker.
  
@@ -86,7 +84,7 @@ Make sure to check the Privileged box. This is required for running Docker-in-Do
 
 The trickiest part of the setup is the Service role. By default a new role is created which grants the needed permissions. The additions needed to the IAM role for CodeBuild to work are in the next section. For now, take note of the role name so you can extend it in IAM after the CodeBuild project is created.
 
-![Environment](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/vq24z9yhiaqooskwk5qh.png)
+![alt-text #center](images/codebuild_envir.png)
 
 The Buildspec section tells CodeBuild where to find the `buildspec.yml`. The default will be in the top directory of the GitHub repository, but the name and location can be changed here. The second option is to create the `buildspec.yml` file right in the CodeBuild project. With this option there is no need to modify the GitHub repository, but it will live in this CodeBuild project. 
 

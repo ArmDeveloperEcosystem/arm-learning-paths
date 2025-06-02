@@ -10,11 +10,11 @@ learning_objectives:
     - Learn how to create a multi platform build of the application
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm[virtual machine](/learning-paths/cross-platform/woa_azure/).
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Node.js for Arm64. You can find the installer [here](https://nodejs.org/dist/v20.10.0/node-v20.10.0-arm64.msi)
     - Any code editor; we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -27,6 +27,21 @@ tools_software_languages:
     - JavaScript
     - HTML    
     - Visual Studio Code
+
+further_reading:
+    - resource:
+        title: Electron
+        link: https://www.electronjs.org/blog/electron-doumentation
+        type: documentation
+    - resource:
+        title: Awesome Electron
+        link: https://github.com/sindresorhus/awesome-electron
+        type: website
+    - resource:
+        title: Electron support for Windows on Arm
+        link: https://www.electronjs.org/docs/latest/tutorial/windows-arm
+        type: documentation    
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

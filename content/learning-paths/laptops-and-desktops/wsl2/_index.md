@@ -15,9 +15,9 @@ learning_objectives:
     - Export the WSL file system as a backup
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit) or Lenovo Thinkpad X13s running Windows 11. 
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11. 
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Advanced
@@ -30,6 +30,17 @@ operatingsystems:
 tools_software_languages:
     - WSL
     - VS Code
+
+further_reading:
+    - resource:
+        title: Learn about Windows on Arm
+        link: https://learn.microsoft.com/en-us/windows/arm/overview
+        type: documentation
+    - resource:
+        title: Arm64 Visual Studio
+        link: https://devblogs.microsoft.com/visualstudio/arm64-visual-studio/
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

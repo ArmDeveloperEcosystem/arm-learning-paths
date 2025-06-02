@@ -11,7 +11,7 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://support.mozilla.org/en-US/products/firefox/
@@ -23,7 +23,7 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-## Installing Firefox
+## How do I install Firefox?
 
 The Firefox browser runs on Windows on Arm as a native ARM64 application, and is available on Arm Linux distributions. 
 

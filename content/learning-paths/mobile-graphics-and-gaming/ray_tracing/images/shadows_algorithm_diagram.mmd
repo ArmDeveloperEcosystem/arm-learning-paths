@@ -1,0 +1,20 @@
+graph TD;
+    gbuffer[Retrieve G-Buffer info]
+    generate[Use PBR data to generate the ray]
+    dotProduct[Use the dot product <br> to check if we are facing the light]
+    check{Behind light?}
+    trace[Trace ray <br> using RT pipeline or ray query]
+    Hit{Ray Hit?}
+    illuminate[Illuminate object]
+    shadow[Object is in shadow]
+    no_ray[No facing light. <br> Avoid launching ray]
+
+    gbuffer-->generate;
+    generate-->dotProduct;
+    dotProduct-->check;
+    check-->|Behind| no_ray;
+    check-->|Facing light| trace;
+    trace-->Hit;
+    no_ray-->shadow;
+    Hit-->|Ray Miss| illuminate;
+    Hit-->|Ray Hit| shadow;

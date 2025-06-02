@@ -2,10 +2,14 @@
 title: Rust for Embedded Applications
 minutes_to_complete: 10
 official_docs: https://docs.rust-embedded.org/
-author_primary: Ronan Synnott
+author: Ronan Synnott
 additional_search_terms:
 - compiler
 - rust
+
+test_images:
+- ubuntu:latest
+test_maintenance: true
 
 ### FIXED, DO NOT MODIFY
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -15,24 +19,24 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Rust](https://www.rust-lang.org/) is an open source programming language. 
+[Rust](https://www.rust-lang.org/) is an open source programming language.
 
-This install guide is for developers using Rust for their embedded applications. 
+This install guide is for developers using Rust for their embedded applications.
 
-If you are using Rust to build Linux applications on an Arm Linux platform, refer to [Rust for Linux Applications](../rust) instead.
+If you are using Rust to build Linux applications on an Arm Linux platform, refer to [Rust for Linux Applications](/install-guides/rust/) instead.
 
 This install guide describes a setup using an Ubuntu Linux host.
 
 For a thorough review of all options, refer to the official documentation. See [The Embedded Rust Book](https://docs.rust-embedded.org/book/).
 
-## Installation {#install}
+## How do I install Rust for Embedded Applications? {#install}
 
-### Download and install Rust
+### How do I download and install Rust?
 
 Run the following command to download and install Rust:
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
 ```
 
 Start a new shell or run the following command to continue:
@@ -52,30 +56,32 @@ The output is similar to:
 rustc 1.78.0 (9b00956e5 2024-04-29)
 cargo 1.78.0 (54d8815d0 2024-03-26)
 ```
-### Add Arm cross-compilation support
+
+### How do I add Arm cross-compilation support?
 
 Add cross compilation support for the required Arm Architectures. For example, to add support for Armv7-M architecture, you can use:
-```command
+```bash
 rustup target add thumbv7m-none-eabi
 ```
 For a full list of supported architectures, use:
-```command
+```bash
 rustup target list
 ```
 
-### Install cargo-generate
+### How do I install cargo-generate?
 
 To generate a project from a template, you need `cargo-generate`. To install and rebuild use:
 
-```command
+```bash
 sudo apt install -y libssl-dev pkg-config
 sudo apt install -y build-essential
 cargo install cargo-generate
 ```
 
-### Install cargo-binutils (optional)
+### How do I install cargo-binutils? (optional)
 
 Other utilities are also available. For completeness, they can be installed with:
+
 ```command
 cargo install cargo-binutils
 rustup component add llvm-tools-preview

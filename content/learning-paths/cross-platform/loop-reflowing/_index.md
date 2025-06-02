@@ -11,7 +11,7 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux and a recent version of Clang or the GNU compiler (gcc) installed.
 
-author_primary: Konstantinos Margaritis
+author: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
@@ -23,13 +23,35 @@ tools_software_languages:
     - GCC
     - Clang
     - Coding
+    - Runbook
+
 operatingsystems:
     - Linux
 shared_path: true
 shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
-    - smartphones-and-mobile
+    - mobile-graphics-and-gaming
+
+
+further_reading:
+    - resource:
+        title: An update on GNU performance
+        link: https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/update-on-gnu-performance
+        type: blog
+    - resource:
+        title: Auto-Vectorization in LLVM
+        link: https://llvm.org/docs/Vectorizers.html
+        type: website
+    - resource:
+        title: GCC Autovectorization
+        link: https://hpac.cs.umu.se/teaching/sem-accg-16/slides/08.Schmitz-GGC_Autovec.pdf
+        type: documentation
+    - resource:
+        title: Auto-vectorization in GCC
+        link: https://gcc.gnu.org/projects/tree-ssa/vectorization.html
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY

@@ -13,7 +13,7 @@ prerequisites:
     - An Arm account that can access IP Explorer
     - (Optional) A Linux machine with the desired compilers installed
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -31,8 +31,19 @@ tools_software_languages:
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
-    - embedded-systems
-    - microcontrollers
+    - embedded-and-microcontrollers
+    - embedded-and-microcontrollers
+
+further_reading:
+    - resource:
+        title: Arm IP Explorer
+        link: https://www.arm.com/products/ip-explorer
+        type: website
+    - resource:
+        title: Login to Arm IP Explorer
+        link: https://ipexplorer.arm.com/
+        type: website
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

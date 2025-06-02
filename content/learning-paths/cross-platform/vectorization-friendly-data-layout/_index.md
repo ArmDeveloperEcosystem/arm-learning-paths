@@ -11,7 +11,7 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux and a recent version of Clang or the GNU compiler (gcc) installed.
 
-author_primary: Konstantinos Margaritis
+author: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
@@ -23,13 +23,31 @@ tools_software_languages:
     - GCC
     - Clang
     - Coding
+    - Runbook
+
 operatingsystems:
     - Linux
 shared_path: true
 shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
-    - smartphones-and-mobile
+    - mobile-graphics-and-gaming
+
+
+further_reading:
+    - resource:
+        title: Array of Structures (AoS), Structure of Arrays (SoA)
+        link: https://en.wikipedia.org/wiki/AoS_and_SoA
+        type: documentation
+    - resource:
+        title: Intrinsics
+        link: https://developer.arm.com/architectures/instruction-sets/intrinsics/
+        type: documentation
+    - resource:
+        title: Arm Neon Intrinsics Reference
+        link: https://arm-software.github.io/acle/neon_intrinsics/advsimd.html 
+        type: documentation
+
 
 
 ### FIXED, DO NOT MODIFY

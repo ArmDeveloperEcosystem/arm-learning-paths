@@ -8,9 +8,9 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Setup a computer
+## Set up a computer
 
-There are multiple ways to setup a computer for Learning Path creation. 
+There are multiple ways to set up a computer for Learning Path creation. 
 
 Three tools are mandatory:
 - A text editor to create and modify markdown files
@@ -30,12 +30,12 @@ This provides your own copy for you to make changes without impacting the main r
 
 ## Set up a development machine 
 
-Three possible ways to setup a development machine are covered below. 
+Three possible ways to set up a development machine are covered below. 
 
 Select **one** that works for you. Please share other ways that work for you
 
 - A [local computer (Linux, macOS, or Windows)](#option-1-set-up-a-local-computer)
-- A [Gitpod instance](#option-2-set-up-gitpod) with tools pre-installed (easiest to setup and manage)
+- A [Gitpod instance](#option-2-set-up-gitpod) with tools pre-installed (easiest to set up and manage)
 - A [remote Linux server](#option-3-set-up-a-remote-linux-server) via SSH (on your local network or from a Cloud Service Provider)
 
 ## Option 1: Set up a local computer
@@ -73,10 +73,13 @@ The easiest way to download Hugo on Linux (Debian/Ubuntu) is using the package m
 ```bash
 sudo apt install hugo
 ```
+To install Hugo on macOS, first install Homebrew if it's not already installed, then use Homebrew to install Hugo:
 
-You can also download Hugo for other operating systems from the [releases page](https://github.com/gohugoio/hugo/releases). Hugo works on all major operating systems and architectures. 
+```bash
+brew install hugo
+```
 
-Recent versions of Hugo between v0.81.0 to v0.111.3 will work. 
+You can also download the latest version of Hugo for other operating systems from the [releases page](https://github.com/gohugoio/hugo/releases). Hugo works on all major operating systems and architectures. 
 
 For even more ways to install Hugo [check the documentation](https://gohugo.io/getting-started/installing).
 

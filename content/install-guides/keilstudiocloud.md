@@ -16,7 +16,7 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 5
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/102497
@@ -32,12 +32,12 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 Keil Studio Cloud does not require any installation. To run the browser-based IDE, you need to use a [Chromium](https://www.chromium.org/)-based browser (Chromium, Chrome, Edge, Brave, or Vivaldi).
 
-## Open Keil Studio Cloud
+## How do I access Keil Studio Cloud?
 
 1. Open your browser.
 
 1. Go to [Keil Studio Cloud](https://studio.keil.arm.com) (Arm account required).
 
-## Get started
+## How do I get started with Keil Studio Cloud?
 
 [Get started with an Mbed OS Blinky example](https://developer.arm.com/documentation/102497/latest/Tutorials/Get-started-with-an-Mbed-OS-Blinky-example) is a great way to start.

@@ -1,5 +1,5 @@
 ---
-title: Learn about Integer and floating-point conversions
+title: Learn about integer and floating-point conversions
 
 minutes_to_complete: 30
 
@@ -11,7 +11,7 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux and a recent version of a C++ compiler (Clang or GCC) installed
 
-author_primary: Konstantinos Margaritis
+author: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
@@ -24,13 +24,39 @@ tools_software_languages:
     - GCC
     - Clang
     - Coding
+    - Runbook
+
 operatingsystems:
     - Linux
 shared_path: true
 shared_between:
     - laptops-and-desktops
     - servers-and-cloud-computing
-    - smartphones-and-mobile
+    - mobile-graphics-and-gaming
+
+
+further_reading:
+    - resource:
+        title: Arm Neoverse™ N1 Software Optimization Guide
+        link: https://developer.arm.com/documentation/PJDOC-466751330-9707/r4p1/?lang=en
+        type: documentation
+    - resource:
+        title: Arm Neoverse N2 Software Optimization Guide
+        link: https://developer.arm.com/documentation/PJDOC-466751330-18256/0003/?lang=en
+        type: documentation
+    - resource:
+        title: Data Types in C - Integer, Floating Point, and Void Explained
+        link: https://www.freecodecamp.org/news/data-types-in-c-integer-floating-point-and-void-explained/
+        type: website
+    - resource:
+        title: Half-precision floating-point format
+        link: https://en.wikipedia.org/wiki/Half-precision_floating-point_format
+        type: website
+    - resource:
+        title: bfloat16 floating-point format
+        link: https://en.wikipedia.org/wiki/Bfloat16_floating-point_format
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY

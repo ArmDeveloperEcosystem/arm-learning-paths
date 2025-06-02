@@ -20,7 +20,7 @@ minutes_to_complete: 30
 ### Link to official documentation
 official_docs: 
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -32,7 +32,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [Visual Studio 2022 17.4](https://learn.microsoft.com/en-us/visualstudio/install/visual-studio-on-arm-devices) (and higher) natively supports Windows on Arm.
 
-## Download and Install
+## How do I download and install Visual Studio for Windows on Arm?
 
 [Download the Visual Studio Installer](https://visualstudio.microsoft.com/vs/) to get started.
 
@@ -44,12 +44,12 @@ Choose the appropriate version for your usage.
 
 Once downloaded, run the `VisualStudioSetup.exe` file on a Windows on Arm machine. This is the installer.
 
-# Install C and C++ support in Visual Studio
+## How do I install C and C++ support in Visual Studio?
 During the installation process, you will be asked to choose the workloads you want and customize your installation. At a minimum, select `Desktop development with C++`.
 
 ![img1 #center](/install-guides/_images/vs-woa.png)
 
-# Install LLVM support in Visual Studio
+## How do I install LLVM support in Visual Studio? {#install-llvm-support-in-visual-studio}
 
 To build native Windows Applications using the LLVM toolchain in Visual Studio, you need to install additional components.
 
@@ -62,14 +62,14 @@ Two results are displayed: The LLVM compiler and MSBuild support for LLVM. Selec
 {{% notice  Note%}}
 Different versions of Visual Studio include different LLVM toolchain versions.
 
-For example, Visual Studio 2022 Version `17.5.3` installs `LLVM 15.0.1`.
+For example, Visual Studio 2022 Version `17.11.5` installs `LLVM 17.0.3`.
 {{% /notice %}}
 
 LLVM supports `clang-cl`, a compatibility layer for Microsoft Visual C++ (MSVC). This means that most developers can use `clang-cl` to compile their C/C++ applications on Visual Studio/MSBuild on the Windows on Arm device, without needing to change the command line. This allows you to easily modify legacy projects that use MSVC to use native compilation.
 
 You can now proceed with `Install`. The installation process can take several minutes to complete. A reboot of your machine is required before you launch Visual Studio.
 
-## Modify your installation
+## How do I modify my Visual Studio installation?
 The workload and individual component selection can also be made at any time after you complete the installation of Visual Studio. To modify your installation, run `VisualStudioSetup.exe`, select `Continue` to accept the installation conditions and then choose `Modify`.
 
 You can choose additional workloads and individual components to further customize your installation.

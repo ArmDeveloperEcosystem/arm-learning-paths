@@ -9,18 +9,23 @@ Called from:
 */}}
 
 <!-- Hugo processing -->
-{{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}                                       
-{{$is_list := and (not $is_content) (.IsNode) (not .IsHome) }}  
+{{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}
+{{$is_list := and (not $is_content) (.IsNode) (not .IsHome) }}
 
 
 <!-- Feedback is on     _next-steps.md learning path          install tool everything-->
 
 <!-- All pages -->
-<!-- <script src="/js/stored-user-preferences.js"></script> -->      <!-- Include javascript to store local preferences of themes -->
-<script src="/js/globalVarsandPreferences.js" defer></script>          
+{{ if not (in .Site.BaseURL "localhost") }}
+    <script
+    src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
+    async
+    data-document-language="true"
+    data-domain-script="7d663903-ba9e-4bc2-a2f8-5844edbb5408">
+    </script>
+{{end}}
+<script src="/js/globalVarsandPreferences.js" defer></script>
 <script src="/js/anonymous-analytics.js" defer></script>          <!-- Include javascript to track custom analytics -->
-<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false" defer></script>
-<script src="/js/cookie-init.js" defer></script>                  <!-- Initialize cookie -->
 
 <!-- Homepage only -->
 {{if .IsHome }}
@@ -35,6 +40,17 @@ Called from:
 
 <!-- Content pages only that are not _index, _next-steps, or _review -->
 {{if and $is_content (not (hasPrefix .File.TranslationBaseName "_"))}}
+    <script src="/js/prism.js" defer></script>                        <!-- Include code highlighting javascript, Prism-->
+    <script src="/js/prism_post_output_formating.js" defer></script>  <!-- must be called after prism.js to modify it once rendered -->
+{{end}}
+
+<!-- Demo page only -->
+{{ if and $is_content (hasPrefix .File.TranslationBaseName "_demo")}}
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+{{end}}
+
+<!-- Also add prism to any _demo page that needs it, set as a 'prismjs' variable -->
+{{ if and $is_content (hasPrefix .File.TranslationBaseName "_demo") .Params.prismjs }}
     <script src="/js/prism.js" defer></script>                        <!-- Include code highlighting javascript, Prism-->
     <script src="/js/prism_post_output_formating.js" defer></script>  <!-- must be called after prism.js to modify it once rendered -->
 {{end}}

@@ -53,13 +53,12 @@ Give your instance a meaningful, but arbitrary, name. This is particularly usefu
 
 There are 1000s of [Amazon Machine Images (AMIs)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) available on the [AWS Marketplace](https://aws.amazon.com/marketplace), providing pre-configured setups.
 
-For now, select `Ubuntu` images from the `Quick Start` list of available images, and version (e.g. `Ubuntu Server 22.04 LTS`) from the pull-down menu.
-
-![alt-text #center](https://user-images.githubusercontent.com/87687468/192594550-95c51ac9-d1cd-4f0d-98f2-a1fce1a78b2d.png "Select a Ubuntu AMI")
+For now, select `Ubuntu` images from the `Quick Start` list of available images, and version (e.g. `Ubuntu Server 24.04 LTS`) from the pull-down menu.
+![alt-text #center](./images/image_selection.png "Select a Ubuntu AMI")
 
 In the `Architecture` pull-down menu, select `64-bit (Arm)` to ensure an Arm-based instance type is used.
 
-![alt-text #center](https://user-images.githubusercontent.com/87687468/192595418-c96ad1e5-8a74-43f8-83c7-d5c19f14ff4a.png "Select '64-bit (Arm)' Architecture")
+![alt-text #center](./images/ArmArch.png "Select '64-bit (Arm)' Architecture")
 
 ### Select instance type
 

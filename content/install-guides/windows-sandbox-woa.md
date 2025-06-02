@@ -16,7 +16,7 @@ minutes_to_complete: 15
 ### Link to official documentation
 official_docs: https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-overview
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -30,9 +30,9 @@ Windows Sandbox is a lightweight, desktop environment from Microsoft that enable
 
 You can install Windows Sandbox on an Arm device running Windows 11, version 22H2, and later. 
 
-A number of developer-ready [Windows on Arm devices](../../learning-paths/laptops-and-desktops/intro/find-hardware/) are available.
+A number of developer-ready [Windows on Arm devices](/learning-paths/laptops-and-desktops/intro/find-hardware/) are available.
 
-## Enable Virtualization
+## How do I enable virtualization for Windows Sandbox?
 
 To run Windows Sandbox, you need to make sure that virtualization is enabled on your device.
 
@@ -75,7 +75,7 @@ The BIOS settings for Virtualization vary depending on your device, but are gene
 
 With virtualization now enabled, you can install Windows Sandbox.
 
-## Install Windows Sandbox
+## How do I install Windows Sandbox on Windows on Arm?
 
 {{% notice Note %}}
 You must enable Windows Sandbox on a physical Windows on Arm device. It cannot be enabled on a virtual machine such as an Azure Arm instance running Windows 11. 

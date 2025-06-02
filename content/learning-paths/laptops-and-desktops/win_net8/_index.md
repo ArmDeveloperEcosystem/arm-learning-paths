@@ -11,11 +11,11 @@ learning_objectives:
     - Implement custom performance benchmarks
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm[virtual machine](/learning-paths/cross-platform/woa_azure/).
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - .NET 8 SDK for [x64](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.100-windows-x64-installer) and [arm64](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.100-windows-arm64-installer).
     - Any code editor, we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -28,6 +28,29 @@ tools_software_languages:
     - .NET
     - Visual Studio
     - Visual Studio Code
+
+further_reading:
+    - resource:
+        title: Announcing .NET 8
+        link: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/
+        type: blog
+    - resource:
+        title: Deploy .NET apps on Arm single-board computers
+        link: https://learn.microsoft.com/en-us/dotnet/iot/deployment
+        type: documentation
+    - resource:
+        title: .NET CLI
+        link: https://learn.microsoft.com/en-us/dotnet/core/tools/
+        type: documentation
+    - resource:
+        title: Performance improvements in .NET 8
+        link: https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-8/
+        type: blog
+    - resource:
+        title: .NET Performance on arm64
+        link: https://www.codeproject.com/Articles/5367981/NET-Performance-on-Arm64
+        type: article
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

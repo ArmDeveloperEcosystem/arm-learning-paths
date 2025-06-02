@@ -19,7 +19,7 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/108029
@@ -33,15 +33,15 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 [Arm Keil Studio](https://keil.arm.com/) is the next generation software development environment for Arm Cortex-M based microcontroller devices. The desktop version is available as a set of [Visual Studio Code](https://code.visualstudio.com/) extensions.
 
-Alternatively, [Keil Studio Cloud](/install-guides/keilstudiocloud/) provides the same functionality, but runs in a browser and requires no installation. 
+Alternatively, [Keil Studio Cloud](/install-guides/keilstudiocloud/) provides similar functionality, but runs in a browser and requires no installation. 
 
-## Before you begin
+## Where can I download Visual Studio Code?
 
 [Download](https://code.visualstudio.com/download), install, and start `Visual Studio Code` on your desktop.
 
 Linux, macOS, and Windows are supported. 
 
-## Install the Keil Studio extensions
+## How do I install the Keil Studio extensions?
 
 The `Keil Studio Pack` extensions is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack).
 
@@ -53,15 +53,15 @@ Install the Keil Studio extensions:
 
 Visual Studio Code installs the extensions. The extensions are now available in the `Activity Bar`.
 
-You will be prompted to enable an [MDK Community License](https://www.keil.arm.com/community/) for non-commercial use. Accept this option if you do not have a license and agree to non-commercial use.
+You will be prompted to enable an [MDK Community License](https://www.keil.arm.com/mdk-community/) for non-commercial use. Accept this option if you do not have a license and agree to non-commercial use.
 
 If you have a commercial license for `Keil MDK` installed, decline this option.
 
-## Get started
+## How do I get started?
 
 Follow the [Getting started with an example project](https://developer.arm.com/documentation/108029/latest/Get-started-with-an-example-project) tutorial to verify the extensions are installed correctly.
 
-## Extension information
+## Where can I find more information about the Keil Studio extensions?
 
 Use the table below to find additional information about the VS Code extensions.
 

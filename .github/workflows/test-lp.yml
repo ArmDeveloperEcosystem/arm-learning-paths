@@ -1,0 +1,88 @@
+name: Test Learning Path
+on: pull_request
+jobs:
+  Test-Pull-Request:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.vars.outputs.branch-name }}
+      - name: Run hugo command to test site builds
+        run: |
+          sudo apt-get install -y hugo
+          hugo
+      - name: Get all changed markdown files
+        id: changed-markdown-files
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+             **.md
+      - name: Check for capital letters or spaces in content directory
+        run: |
+          echo "Checking for capital letters or spaces in content directory paths (excluding file extensions)..."
+
+          tmpfile=$(mktemp)
+
+          git diff --name-only origin/${{ github.base_ref }}...HEAD |
+            grep '^content/' |
+            while read -r path; do
+              name=$(basename "$path")
+
+              # Strip file extension if it exists
+              base="${name%.*}"
+
+              if [[ "$base" =~ [A-Z] || "$base" =~ [[:space:]] ]]; then
+                echo "Invalid name: $path"
+                echo "$path" >> "$tmpfile"
+              fi
+            done
+
+          if [[ -s "$tmpfile" ]]; then
+            echo "❌ One or more files or directories in 'content/' contain capital letters or spaces (excluding extensions):"
+            cat "$tmpfile"
+            rm "$tmpfile"
+            exit 1
+          else
+            rm "$tmpfile"
+            echo "✅ No capital letters or spaces found in 'content/' paths."
+          fi
+
+      - name: Install dependencies
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        run: pip install -r tools/requirements.txt
+      - name: Run test suite for all changed .md files
+        id: run-suite
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        # Run the test suite
+        run: |
+              set -o pipefail; ./tools/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee test-lp-output.txt
+      - name: Parse test suite errors
+        id: test-suite-state
+        if: success()
+        # Catch any missed errors if running multiple tests
+        run: |
+            cat test-lp-output.txt | grep -q 'Tests failed in test suite' && echo "TEST_SUITE_ERRORS=true" >> "$GITHUB_ENV" \
+            || echo "TEST_SUITE_ERRORS=false" >> "$GITHUB_ENV"
+      - name: Check for errors in test suite
+        if: env.TEST_SUITE_ERRORS == 'true' && success()
+        run: |
+          echo "Test failures detected in test suite, check the output in earlier steps"
+          exit 1
+      - name: Parse test maintenance off
+        id: maintenance-state
+        if: success()
+        # Check if maintenance is turned off
+        run: |
+            cat test-lp-output.txt | grep -q 'maintenance is turned off' && echo "MAINTENANCE=off" >> "$GITHUB_ENV" \
+            || echo "MAINTENANCE=on" >> "$GITHUB_ENV"
+      - name: Check if maintenance is turned off
+        if: env.MAINTENANCE == 'off' && success()
+        run: echo "Maintenance is turned off for one or more files"
+      # Only upload artifact if maintenance is on
+      - name: Upload stats artifact
+        uses: actions/upload-artifact@v4
+        if: success() && env.MAINTENANCE == 'on'
+        with:
+          name: stats_current_test_info
+          path: data/stats_current_test_info.yml

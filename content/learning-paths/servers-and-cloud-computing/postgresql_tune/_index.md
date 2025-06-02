@@ -11,13 +11,11 @@ learning_objectives:
 prerequisites:
     - Bare-metal or cloud [installation of PostgreSQL](/learning-paths//servers-and-cloud-computing/postgresql)
 
-author_primary: Julio Suarez
+author: Julio Suarez
 
 test_images:
     - ubuntu:latest
 test_maintenance: true
-test_status:
-    - passed
 
 ### Tags
 skilllevels: Advanced
@@ -30,6 +28,19 @@ tools_software_languages:
     - SQL
     - PostgreSQL
     - HammerDB
+    - Runbook
+
+
+further_reading:
+    - resource:
+        title: PostgreSQL documentation
+        link: https://www.postgresql.org/
+        type: documentation
+    - resource:
+        title: "PostgreSQL on ARM: default page size matters"
+        link: https://dev.to/aws-heroes/postgresql-on-arm-default-page-size-matters-2n7a
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

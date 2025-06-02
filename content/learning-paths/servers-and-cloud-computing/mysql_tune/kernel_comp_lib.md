@@ -1,6 +1,6 @@
 ---
 # User change
-title: "System, Kernel, compiler, and Libraries"
+title: "System, Kernel, Compiler, and Libraries"
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -8,68 +8,45 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-##  Storage technology and file system format
+##   Storage technology, file system format, and disk scheduling
 
-The underlying storage technology and the file system format can impact performance significantly. In general, locally attached SSD storage will perform best. However, network based storage systems can perform well. As always, performance is dependent on the request profile coming from clients. You should spend some time studying and experimenting with different storage technologies and configuration options.
+The underlying storage technology and the file system format can impact performance. In general, locally attached SSD storage will perform best. However, network based storage systems can perform well. You should spend some time studying and experimenting with different storage technologies and configuration options.
 
-Aside from the storage technology, the file system format used with `MySQL` can impact performance. The `xfs` file system is a good starting point. The `ext4` file system is another good alternative.
+Aside from the storage technology, the file system format used with `MySQL` can impact performance. The `xfs` file system is a good starting point. The `ext4` file system is another good alternative. Last, it is recommended to use storage drives that are dedicated to the database (i.e. not shared with the OS or other applications).
+
+When running in the cloud, the disk scheduling algorithm is typically set to `noop` or a similar "dumb" algorithm. This is typically optimal for `MySQL` in the cloud, so no adjustment is needed. However, if running `MySQL` on an on-prem server, it's a good idea to double check what the disk scheduling algorithm is, and possibly change it. According to the [Optimizing InnoDB Disk I/O documentation](https://dev.mysql.com/doc/refman/en/optimizing-innodb-diskio.html), `noop` or `deadline` might be better options. It's worth testing this with on-prem systems.
 
 ##  MySQL storage engines
 
-There are different storage engines available for `MySQL`. The default storage engine is `InnoDB`. `InnoDB` is good for performance testing and tuning.
+There are different storage engines available for `MySQL`. The default storage engine is `InnoDB`. `InnoDB` is the default storage engine because it performs the best in the broadest set of use cases.
 
-Information on alternative storage engines can be found in the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/storage-engines.html).
+Information on alternative storage engines can be found in the [MySQL documentation](https://dev.mysql.com/doc/refman/en/storage-engines.html).
 
 ##  Kernel configuration
 
 `MySQL` can benefit from adjustments to kernel parameters. Below is a list of kernel related settings that can have a positive impact on performance.
 
-### Linux-PAM limits
-
-Linux-PAM limits can be changed in the `/etc/security/limits.conf` file, or by using the `ulimit` command. 
-
-If you want more information about how to display and modify parameters check the documentation of the `ulimit` command. 
-
-To display all limits:
-```bash
-ulimit -a
-```
-
-To display the `memlock` (Max locked-in-memory address space) limit only:
-```bash
-ulimit -l
-```
-
-`memlock` is the only PAM limit which is useful to adjust for `MySQL`. 
-
-The suggested value for `memlock` is `unlimited` when using huge pages with `MySQL`. 
-
-Enabling huge pages can result in significant performance gains (discussed below).
-
-The suggestion to set `memlock` when huge pages are enabled can be found in the [MySQL documentation](https://dev.mysql.com/doc/refman/8.1/en/large-page-support.html).
-
-
 ### Linux virtual memory subsystem
 
-Making changes to the Linux Virtual Memory subsystem can also improve performance. 
+Making changes to the Linux Virtual Memory subsystem can improve performance. 
 
 These settings can be changed in the `/etc/sysctl.conf` file, or by using the `sysctl` command. 
 
-If you want more information about how to display and modify virtual memory parameters check the documentation of the `sysctl` command. 
+Documentation on the virtual memory subsystem parameters can be found in the [admin-guide for sysctl in the Linux source code](https://github.com/torvalds/linux/blob/master/Documentation/admin-guide/sysctl/vm.rst).
 
-Documentation on each of these parameters can be found in the [admin-guide for sysctl in the Linux source code](https://github.com/torvalds/linux/blob/master/Documentation/admin-guide/sysctl/vm.rst).
-
-To list all kernel parameters available:
+To list all sysctl parameters available:
 
 ```bash
 sudo sysctl -a
 ```
 
+See the `sysctl` command documentation for more.
+
 ### Huge memory pages
 
  `MySQL` benefits from using huge memory pages. Huge pages reduce how often virtual memory pages are mapped to physical memory. 
  
-To see the current memory page configuration, run the following command on the host:
+To see the current huge memory page configuration, run the following command on the host:
 
 ```bash
 cat /proc/meminfo | grep ^Huge
@@ -86,11 +63,11 @@ Hugepagesize:       2048 kB
 Hugetlb:               0 kB
 ```
 
-Huge pages are not being used if `HugePages_Total` is 0 (this is the default). 
+Huge pages are not being used if `HugePages_Total` is 0 (this is typically the default). 
 
-Also note that `Hugepagesize` is 2MB which is the typical default for huge pages on Linux. 
+Also note that `Hugepagesize` is 2MiB which is the typical default for huge pages on Linux. 
 
-The kernel parameter that enables huge pages is shown below:
+The sysctl parameter that enables huge pages is shown below:
 
 ```output
 vm.nr_hugepages
@@ -114,15 +91,13 @@ sudo sh -c 'echo "vm.nr_hugepages=500" >> /etc/sysctl.conf'
 
 ### Selecting the number of huge pages to use
 
-You should set `vm.nr_hugepages` to a value that gives a total huge page space slightly larger than the `MySQL` buffer pool size (discussed later). 
+You should set `vm.nr_hugepages` to a value that gives a total huge page space equal to or slightly larger than the `MySQL` buffer pool size. Selecting the buffer pool size is discussed in the [Tuning MySQL](/learning-paths/servers-and-cloud-computing/mysql_tune/tuning) section.
 
-It should be slightly larger than the buffer pool because `MySQL` will use additional memory for things like connection management.
-
-More information on the different parameters that affect the configuration of huge pages can be found in the [admin-guide for hugetlbpage in the Linux source code](https://github.com/torvalds/linux/blob/master/Documentation/admin-guide/mm/hugetlbpage.rst).
+Typically, only the number of huge pages needs to be configured. However, for more information on the different parameters that affect the configuration of huge pages, review the [admin-guide for hugetlbpage in the Linux source code](https://github.com/torvalds/linux/blob/master/Documentation/admin-guide/mm/hugetlbpage.rst).
 
 ##  Compiler Considerations
 
-The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flags `-mcpu` and `-flto` can be used to potentially gain additional performance. Usage of these flags is explained in the [Migrating C/C++ applications](/learning-paths/servers-and-cloud-computing/migration/c-c++) section of the [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) learning path.
+The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flags `-mcpu` and `-flto` can be used to potentially gain additional performance. Usage of these flags is explained in the [Migrating C/C++ applications](/learning-paths/servers-and-cloud-computing/migration/c/) section of the [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) learning path.
 
 ##  OpenSSL Considerations
 

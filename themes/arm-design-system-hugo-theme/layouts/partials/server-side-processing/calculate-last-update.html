@@ -1,0 +1,33 @@
+{{/*
+Presents correct 'last modified date' for content by taking the most recent Lastmod date from 
+    all files in a Learning Path / Install Guide, not just the _index.md file.
+
+Where it is used:
+    - List pages for Learning Path & Install Guides
+    - learning path _intro
+    - Install guide _intro
+
+Called from:
+    - partials learning-paths/list.html
+    - partials general-formatting/metadata-table.html
+*/}}
+
+{{- $index_file_path := (print .File.Dir) -}}
+
+{{- $most_recent := time "0001-01-01T00:00:00Z" }}
+{{- range  site.Pages }}
+    {{- if .File -}}
+        {{- if hasPrefix .File.Dir $index_file_path }}
+            {{ $page_date := .Lastmod.UTC }}
+            {{- if gt $page_date $most_recent }}
+                {{- $most_recent = $page_date }}
+            {{- end }}
+        {{end}}
+    {{end}}
+{{end}}
+
+
+{{/* {{ $most_recent_formatted := dateFormat "02 Jan 2006" $most_recent }} */}}
+{{ return $most_recent }}
+
+

@@ -1,53 +1,28 @@
-# This is a basic workflow to help you get started with Actions
+# This workflow will be triggered on a push to the 'main' branch automatically or when called manually.
+# Upon running this workflow, the website will be built and deployed to the internal instance.
+name: Build and Deploy Internal Website
 
-name: build-and-deploy
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
+  # Runs on pushes to the 'main' branch
   push:
-    branches: [ main ]
+    branches: [main]
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Allows to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build_and_deploy_s3:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-        with:
-          submodules: true  # Fetch Hugo Themes
-          fetch-depth: 0 
-
-      # Sets Up Hugo
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-            hugo-version: '0.98.0'
-            extended: true
-            
-      # Post-CSS install
-      - name: Install Post-CSS
-        run: npm install postcss-cli
-
-      # Builds arm-software-developer repo
-      - name: Build
-        run: |
-          hugo --minify
-          cp learn-image-sitemap.xml public/learn-image-sitemap.xml
-          bin/pagefind --site "public"
-
-      # Deploys website to AWS S3
-      - name: Deploy to S3
-        run: hugo deploy --force --maxDeletes -1 --invalidateCDN
-        env:
-         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          
+  build_and_deploy_internal:
+    name: Build and Deploy Internal
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      id-token: write
+      contents: read
+    with:
+      target: internal
+    secrets:
+      AWS_OIDC_ROLE: ${{ secrets.AWS_OIDC_ROLE_INTERNAL }}
+      HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
+      HUGO_RAG_API: ${{ secrets.HUGO_RAG_API }}
+      HUGO_AUDIO_API: ${{ secrets.HUGO_AUDIO_API }}
+      HUGO_DEV_PROG_SIGNIUP_FORM_MUNCHKIN_ID: ${{ secrets.HUGO_DEV_PROG_SIGNIUP_FORM_MUNCHKIN_ID }}
+      HUGO_FORM_ID_FOR_PROGRAM_SIGNUP: ${{ secrets.HUGO_FORM_ID_FOR_PROGRAM_SIGNUP }}

@@ -2,7 +2,7 @@
 # User change
 title: "Automate MongoDB Performance Benchmarking Infrastructure Setup with Pulumi"
 
-weight: 5 # (intro is 1), 2 is first, 3 is second, etc.
+weight: 8 # (intro is 1), 2 is first, 3 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -20,7 +20,7 @@ Install the python dependencies on your Ubuntu 22.04 machine:
 sudo apt update
 sudo apt install python-is-python3 -y
 sudo apt install python3-pip -y
-sudo apt install python3.10-venv
+sudo apt install python3.10-venv -y
 ```
 
 ## Install Pulumi 
@@ -41,7 +41,7 @@ git clone https://github.com/pbk8s/pulumi-ec2.git
 ```
 
 ## Build gatord
-You would also need the gatord binary for performance analysis. [gator](https://github.com/ARM-software/gator) is a target agent (daemon), part of Arm Streamline, a set of performance analysis tools. Use the following commands to build it from source.
+You will also need the gatord binary for performance analysis. [gator](https://github.com/ARM-software/gator) is a target agent (daemon), part of Arm Streamline, a set of performance analysis tools. Use the following commands to build it from source.
 
 ```bash
 git clone https://github.com/ARM-software/gator.git
@@ -65,14 +65,14 @@ cp build-native-gcc-rel/gatord ~/pulumi-ec2/
 ## Install awscli and set environment variables
 Use the [awscli](https://learn.arm.com/install-guides/aws-cli/) learning path to install the awscli. 
 
-Set the following environment variables on your local computer to connect to your AWS account
-```console
+Set the following environment variables on your local computer to connect to your AWS account:
+```bash
 export AWS_ACCESS_KEY_ID=<access-key-id>
 export AWS_SECRET_ACCESS_KEY=<secret-access-key>
 export AWS_SESSION_TOKEN=<session-token>
 ```
-Execute the following command to validate the credentials
-```console
+Execute the following command to validate the credentials:
+```bash
 aws sts get-caller-identity
 ```
 
@@ -134,7 +134,7 @@ subnet = aws.ec2.Subnet("p1-subnet",
     })
 ```
 
-Note: The security groups created by this script are lot less restrictive, to simplify the deployment process and to remove additional complexities. Please modify the ingress/egress rules as per your organizations' policy.
+Note: The security groups created by this script are a lot less restrictive, to simplify the deployment process and to remove additional complexities. Please modify the ingress/egress rules as per your organization's policy.
 
 ```python
 group = aws.ec2.SecurityGroup('p1-security-grouup',

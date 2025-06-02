@@ -14,7 +14,7 @@ prerequisites:
     - A GitHub account
     - A Docker Hub account
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -31,7 +31,19 @@ shared_path: true
 shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
-    - embedded-systems
+    - embedded-and-microcontrollers
+    - iot
+
+further_reading:
+    - resource:
+        title: Docker Build Cloud
+        link: https://docs.docker.com/build/cloud/
+        type: documentation
+    - resource:
+        title: Introducing Docker Build Cloud - A New Solution to Speed Up Build Times and Improve Developer Productivity
+        link: https://www.docker.com/blog/introducing-docker-build-cloud/
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

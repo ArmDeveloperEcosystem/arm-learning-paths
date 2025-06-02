@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - None
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -22,6 +22,14 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
+    - Runbook
+
+
+further_reading:
+    - resource:
+        title: Ampere Computing
+        link: https://amperecomputing.com/developers/
+        type: website
 
 
 ### FIXED, DO NOT MODIFY

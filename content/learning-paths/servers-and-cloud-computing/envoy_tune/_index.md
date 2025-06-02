@@ -15,7 +15,7 @@ prerequisites:
     - Cloud or bare-metal installation of an Envoy service
     - Review [Learn how to deploy Envoy](/learning-paths/servers-and-cloud-computing/envoy/) if you do not already have an Envoy setup
 
-author_primary: Zhengjun Xing
+author: Zhengjun Xing
 
 ### Tags
 skilllevels: Advanced
@@ -23,9 +23,19 @@ subjects: Web
 armips:
     - Neoverse
 tools_software_languages:
-    - Envoy    
+    - Envoy  
+    - Runbook
+  
 operatingsystems:
     - Linux
+
+further_reading:
+    - resource:
+        title: Envoy Documentation
+        link: https://www.envoyproxy.io/docs/envoy/latest
+        type: documentation
+    
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

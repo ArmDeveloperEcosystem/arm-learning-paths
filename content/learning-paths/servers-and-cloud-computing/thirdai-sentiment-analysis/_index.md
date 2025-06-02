@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
 
-author_primary: ThirdAI
+author: ThirdAI
 
 ### Tags
 skilllevels: Introductory
@@ -24,6 +24,18 @@ tools_software_languages:
     - ThirdAI
 operatingsystems:
     - Linux
+
+
+further_reading:
+    - resource:
+        title: ThirdAI Demos Repository
+        link: https://github.com/ThirdAILabs/Demos
+        type: documentation
+    - resource:
+        title: ThirdAI Website
+        link: https://www.thirdai.com
+        type: blog
+
 
 
 ### FIXED, DO NOT MODIFY

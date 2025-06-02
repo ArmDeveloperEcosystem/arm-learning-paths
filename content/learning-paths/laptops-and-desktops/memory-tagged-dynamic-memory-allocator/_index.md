@@ -11,10 +11,10 @@ learning_objectives:
 
 prerequisites:
 - A Linux computer.
-- Basic knowledge of how MTE works. Refer to the [Learn about Memory Tagging Extension Learning Path](/learning-paths/smartphones-and-mobile/mte/)
+- Basic knowledge of how MTE works. Refer to the [Learn about Memory Tagging Extension Learning Path](/learning-paths/mobile-graphics-and-gaming/mte/)
 - Knowledge of how a dynamic memory allocator can be implemented. Refer to [Write a Dynamic Memory Allocator Learning Path](/learning-paths/cross-platform/dynamic-memory-allocator/).
 
-author_primary: David Spickett
+author: David Spickett
 
 ### Tags
 skilllevels: Advanced
@@ -28,6 +28,13 @@ tools_software_languages:
 - Coding
 operatingsystems:
 - Linux
+
+
+further_reading:
+    - resource:
+        title: LLSoftSecBook Chapter on Stack Buffer Overflows
+        link: https://llsoftsec.github.io/llsoftsecbook/#stack-buffer-overflows
+        type: website
 
 
 ### FIXED, DO NOT MODIFY

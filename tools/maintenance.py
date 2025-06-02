@@ -3,9 +3,11 @@
 import argparse
 import logging
 import os
+import sys
 # Local import
 import report
 import parse
+import patch
 import check
 import filter_checker
 
@@ -16,9 +18,9 @@ verbosity = logging.INFO
 level = { 10: "DEBUG",  20: "INFO",  30: "WARNING",  40: "ERROR" }
 
 
-'''
+"""
 Test Learning Path
-'''
+"""
 def check_lp(lp_path, link, debug):
     if not os.path.isdir(lp_path):
         lp_path = os.path.dirname(lp_path)
@@ -27,8 +29,8 @@ def check_lp(lp_path, link, debug):
 
     if os.path.exists(lp_path+"/_index.md"):
         # check _index.md for maintenance options
-        idx_header = parse.header(lp_path+"/_index.md")                    
-        if idx_header["maintain"]:
+        idx_header = parse.header(lp_path+"/_index.md")
+        if idx_header["test_maintenance"]:
             # Parse all articles in folder to check them
             for k in os.listdir(lp_path):
                 # Don't parse _index, _next-steps or _review
@@ -37,17 +39,17 @@ def check_lp(lp_path, link, debug):
                     logging.info("Parsing " + _k)
                     cmd = parse.parse(_k)
                     # Generate _cmd.json file with instructions
-                    parse.save(_k, cmd, idx_header["maintain"], idx_header["img"])
-            
-            
+                    parse.save_commands_to_json(_k, cmd, idx_header["test_maintenance"], idx_header["test_images"])
+
             logging.info("Checking Learning Path " + lp_path)
             # Look for _cmd.json
             l = [i for i in os.listdir(lp_path) if i.endswith("_cmd.json")]
             # Build dict with weight value for each article
-            d = { i: parse.header(lp_path + "/" + i.replace("_cmd.json",""))["wght"] for i in l }
+            article_per_weight = { i: parse.header(lp_path + "/" + i.replace("_cmd.json",""))["weight"] for i in l }
             # Sort dict by value
-            res = []
-            for idx, i in enumerate(sorted(d.items(), key=lambda item: item[1])):
+            test_image_results_list = []
+            # sort LP by weight value to have it run sequentially
+            for idx, i in enumerate(sorted(article_per_weight.items(), key=lambda item: item[1])):
                 logging.info("Checking " + i[0].replace("_cmd.json",""))
                 # We want all the articles from the learning path to run in the same container
                 # Launch the instance at the beginning, and terminate it at the end
@@ -55,26 +57,26 @@ def check_lp(lp_path, link, debug):
                 terminate = True
                 if i[1] != -1 and idx != 0:
                     launch = False
-                if i[1] != -1 and idx != len(d.keys())-1:
+                if i[1] != -1 and idx != len(article_per_weight.keys())-1:
                     terminate = False
-                res.append(check.check(lp_path + "/" + i[0], start=launch, stop=terminate))
-
-            logging.info("Patching " + lp_path + "/_index.md with test results")
-            check.patch(lp_path + "/_index.md", res, link)
+                test_image_results = check.check(lp_path + "/" + i[0], start=launch, stop=terminate, md_article=lp_path)
+                test_image_results_list.append(test_image_results)
 
             if not debug:
                 for i in os.listdir(lp_path):
                     if i.endswith("_cmd.json"):
                         os.remove(lp_path+"/"+i)
         else:
-           logging.warning("Learning Path {} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.".format(lp_path))
+           logging.warning(f"Learning Path {lp_path} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.")
+           exit(0)
     else:
         logging.warning("No _index.md found in Learning Path")
+    return test_image_results
 
 
-'''
+"""
 Main function
-'''
+"""
 def main():
     global verbosity, level
 
@@ -84,6 +86,7 @@ def main():
     arg_parser.add_argument('-l', '--link', metavar='URL', action='store', type=str, help='Specify URL to github actions report. Added when patching sources files with --instructions')
     arg_parser.add_argument('-p', '--patch', action='store_true', help='Patch categories _index.md with results when using --filter-checker')
     arg_parser.add_argument('-t', '--type', metavar='REPORT', action='store', default='all', type=str, help='Specify report type detailing the closed filter status when using --filter-checker. Can be either \'all\', \'subjects\', \'softwares\', \'oses\', \'tools\'')
+    arg_parser.add_argument('-sr', '--stats-report', action='store_true', help='Added when patching statistics file with --instructions')
 
     arg_group = arg_parser.add_mutually_exclusive_group()
     arg_group.add_argument('-f', '--filter-checker', action='store_true', help='Validates the correct closed schema filters are being used, reports any errors, and optionally updates _index.md files for each learning path category to reflect the currently supported filters.')
@@ -101,8 +104,12 @@ def main():
     logging.debug("Verbosity level is set to " + level[verbosity])
 
     if args.instructions:
+        if not os.path.exists(args.instructions):
+            raise SystemExit(f"No such file or directory: {args.instructions}")
+        results_dict = {}
         # check if article is a csv file corresponding to a file list
         if args.instructions.endswith(".csv"):
+            # TODO idea: separate parsing of CSV into list, run in same way as a single one passed
             logging.info("Parsing CSV " + args.instructions)
             with open(args.instructions) as f:
                 next(f) # skip header
@@ -110,48 +117,53 @@ def main():
                     fn = line.split(",")[0]
                     # Check if this article is a learning path
                     if "/learning-paths/" in os.path.abspath(fn):
-                        check_lp(fn, args.link, args.debug)
+                        results_dict = check_lp(fn, args.link, args.debug)
                     elif fn.endswith(".md"):
                         logging.info("Parsing " + fn)
                         # check if maintenance if enabled
-                        if parse.header(fn)["maintain"]:
+                        if parse.header(fn)["test_maintenance"]:
                             cmd = parse.parse(fn)
-                            parse.save(fn, cmd)
+                            parse.save_commands_to_json(fn, cmd)
                             logging.info("Checking " + fn)
-                            res = check.check(fn+"_cmd.json", start=True, stop=True)
-                            logging.info("Patching " + fn + " with test results")
-                            check.patch(fn, res, args.link)
+                            results_dict = check.check(fn+"_cmd.json", start=True, stop=True, md_article=fn)
                             if not args.debug:
                                 os.remove(fn+"_cmd.json")
                         else:
-                            logging.warning("{} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.".format(fn))
+                            logging.warning(f"{fn} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.")
+                            sys.exit(0)
                     else:
                         logging.error("Unknown type " + fn)
         elif args.instructions.endswith(".md"):
             # Check if this article is a learning path
             if "/learning-paths/" in os.path.abspath(args.instructions):
-                check_lp(args.instructions, args.link, args.debug)
+                results_dict = check_lp(args.instructions, args.link, args.debug)
             else:
                 logging.info("Parsing " + args.instructions)
                 # check if maintenance if enabled
-                if parse.header(args.instructions)["maintain"]:
+                if parse.header(args.instructions)["test_maintenance"]:
                     cmd = parse.parse(args.instructions)
-                    parse.save(args.instructions, cmd)
-                    res = check.check(args.instructions+"_cmd.json", start=True, stop=True)
-                    logging.info("Patching " + args.instructions + " with test results")
-                    check.patch(args.instructions, res, args.link)
+                    parse.save_commands_to_json(args.instructions, cmd)
+                    results_dict = check.check(args.instructions+"_cmd.json", start=True, stop=True, md_article=args.instructions)
                     if not args.debug:
                         os.remove(args.instructions+"_cmd.json")
                 else:
-                    logging.warning("{} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.".format(args.instructions))
+                    logging.warning(f"{args.instructions} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.")
+                    sys.exit(0)
         elif os.path.isdir(args.instructions) and "/learning-paths/" in os.path.abspath(args.instructions):
-            check_lp(args.instructions, args.link, args.debug)
+            results_dict = check_lp(args.instructions, args.link, args.debug)
         else:
             logging.error("-i/--instructions expects a .md file, a CSV with a list of files or a Learning Path directory")
+        if args.stats_report:
+            # If all test results are zero, all tests have passed
+            patch.patch(args.instructions, results_dict, args.link)
+        if all(results_dict.get(k) for k in results_dict):
+            # Errors exist
+            logging.info("Tests failed in test suite")
+            sys.exit(1)
     elif args.spelling:
-        logging.info("Checking spelling of {}".format(args.spelling))
+        logging.info(f"Checking spelling of {args.spelling}")
         output = parse.spelling(args.spelling)
-        logging.info("Highlighing mispelling in {}".format(args.spelling))
+        logging.info(f"Highlighing mispelling in {args.spelling}")
         f = open(args.spelling, "w")
         f.write(output)
         f.close()
@@ -159,11 +171,11 @@ def main():
         logging.info("Filter-check")
         filter_checker.checker(args.type, args.patch)
     elif args.query:
-        logging.info("Querying data and generating stats...")
+        logging.info("Querying data and generating stats")
         report.stats()
         logging.info("Stats updated in content/stats/data.json")
     elif args.report:
-        logging.info("Creating report of articles older than {} days".format(args.report))
+        logging.info(f"Creating report of articles older than {args.report} days")
         report.report(args.report)
 
 

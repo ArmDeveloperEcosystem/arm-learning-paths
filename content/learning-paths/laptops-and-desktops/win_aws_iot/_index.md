@@ -11,10 +11,10 @@ learning_objectives:
     - Send data from a device to AWS IoT Core.
 
 prerequisites:
-    - A Windows-on-Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11, or a Windows-on-Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
+    - A Windows-on-Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows-on-Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Any code editor. Visual Studio Code is suitable.
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Advanced
@@ -27,6 +27,17 @@ tools_software_languages:
     - Node.js    
     - Visual Studio
     
+further_reading:
+    - resource:
+        title: AWS IoT Core Developer Guide
+        link: https://docs.aws.amazon.com/iot/latest/developerguide
+        type: documentation
+    - resource:
+        title: Connecting a device to AWS IoT Core by using the AWS IoT Device SDK
+        link: https://docs.aws.amazon.com/iot/latest/developerguide/sdk-tutorials.html
+        type: documentation
+
+
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly

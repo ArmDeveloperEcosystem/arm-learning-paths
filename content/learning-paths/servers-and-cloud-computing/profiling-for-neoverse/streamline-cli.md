@@ -18,33 +18,31 @@ Profiling with the Streamline CLI tools is a three-step process:
 
 ![Streamline CLI tools workflow](images/streamline-cli-workflow.svg)
 
-### Procedure
+### Before you begin {.section}
 
-1. Download and extract the Streamline CLI tools on your Arm server:
+Before you can capture a software profile you must build your application with debug information. This enables the profiler to map instruction addresses back to specific functions in your source code. For C and C++ you do this by passing the `-g` option to the compiler.
 
-    ```sh
-    wget https://artifacts.tools.arm.com/arm-performance-studio/2024.2/Arm_Streamline_CLI_Tools_9.2.0_linux_arm64.tgz 
-    tar -xzf Arm_Streamline_CLI_Tools_9.2.0_linux_arm64.tgz 
-    ```
-    
-    Follow the instructions in the [Install Guide](/install-guides/streamline-cli/) to ensure you have everything set up correctly.
+Arm recommends that you profile an optimized release build of your application, as this ensures you are profiling a realistic code workload. For C and C++ you do this by passing the `-O2` or `-O3` option to the compiler. However, it is also recommended that you disable invasive optimization techniques, such as link-time optimization (LTO), because they heavily restructure the code and make the profile difficult to understand.
 
-1. The `sl-format.py` Python script requires Python 3.8 or later, and depends on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. For example:
+### Procedure {.section}
+
+1. Use the download utility script to download the latest version of the tool and extract it to the current working directory on your Arm server:
 
     ```sh
-    # From Bash
-    python3 -m venv sl-venv
-    source ./sl-venv/bin/activate
+    wget https://artifacts.tools.arm.com/arm-performance-studio/Streamline_CLI_Tools/get-streamline-cli.py
 
-    # From inside the virtual environment
-    python3 -m pip install -r ./streamline_cli_tools/bin/requirements.txt
+    python3 get-streamline-cli.py install
     ```
 
-   {{% notice Note%}}
-  The instructions in this guide assume you have added the `<install>/bin/` directory to your `PATH` environment variable, and that you run all Python commands from inside the virtual environment.
-  {{% /notice %}}
+    The script can also be used to download a specific version, or install to a user-specified directory. Refer to the [Install Guide](/install-guides/streamline-cli/) for details on all the script options.
+
+    {{% notice %}}
+    Follow the instructions in the [Install Guide](/install-guides/streamline-cli/) to ensure you have everything set up correctly. Arm recommends that you apply the kernel patch as described in this guide, to improve support for capturing function-attributed top-down metrics on Arm systems.
+    {{% /notice %}}
 
 1. Use `sl-record` to capture a raw profile of your application and save the data to a directory on the filesystem.
+
+    Arm recommends making a profile of at least 20 seconds in duration, which ensures that the profiler can capture a statistically significant number of samples for all of the metrics.
 
     ```sh
     sl-record -C workflow_topdown_basic -o <output.apc> -A <your app command-line>
@@ -55,10 +53,6 @@ Profiling with the Streamline CLI tools is a three-step process:
     * The `-o` option provides the output directory for the capture data. The directory must not already exist because it is created by the tool when profiling starts.
   
     * The `-A` option provides the command-line for the user application. This option must be the last option provided to `sl-record` because all subsequent arguments are passed to the user application.
-
-      * Your application should be a release build, but needs to include symbol information. Build your application with the `-g` option to include symbol information. Arm recommends that you disable link-time-optimization to make the profile easier to understand.
-
-      * If you are using the `workflow_topdown_basic option`, ensure that your application workload is at least 20 seconds long, in order to give the core time to capture all of the metrics needed. This time increases linearly as you add more metrics to capture.
 
     * Optionally, to enable SPE, add the `-X workflow_spe` option. Enabling SPE significantly increases the amount of data captured and the `sl-analyze` processing time, so only use this option if you need this data.
 
@@ -106,7 +100,7 @@ Profiling with the Streamline CLI tools is a three-step process:
 
 ## Capturing a system-wide profile
 
-To capture a system-wide profile, which captures all processes and threads, run `sl-record` with the `-S yes` option and omit the `-A ` application-specific option and following arguments.
+To capture a system-wide profile, which captures all processes and threads, run `sl-record` with the `-S yes` option and omit the `-A` application-specific option and following arguments.
 
 In systems without the kernel patches, system-wide profiles can capture the top-down metrics. To keep the captures to a usable size, it may be necessary to limit the duration of the profiles to less than 5 minutes.
 
@@ -114,7 +108,7 @@ In systems without the kernel patches, system-wide profiles can capture the top-
 
 To capture top-down metrics in a system without the kernel patches, there are three options available:
 
-* To capture a system-wide profile, which captures all processes and threads, run with the `-S yes` option and omit the `-A ` application-specific option and following arguments. To keep the captures to a usable size, it may be necessary to limit the duration of the profiles to less than 5 minutes.
+* To capture a system-wide profile, which captures all processes and threads, run with the `-S yes` option and omit the `-A` application-specific option and following arguments. To keep the captures to a usable size, it may be necessary to limit the duration of the profiles to less than 5 minutes.
 
 * To reliably capture single-threaded application profile, add the `--inherit no` option to the command line. However, in this mode metrics are only captured for the first thread in the application process and any child threads or processes are ignored.
 

@@ -9,14 +9,14 @@ who_is_this_for: This is an introductory topic for software developers intereste
 
 learning_objectives: 
     - Setup a CI/CD flow with GitHub Actions to use Windows on Arm as the self-hosted runner host
-    - Run a simple workflow
+    - Run a simple GitHub Actions workflow
 
 prerequisites:
     - Some familiarity with CI/CD concepts is assumed
     - Valid GitHub account
     - Microsoft Azure account (if using virtual machine)
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -28,6 +28,21 @@ operatingsystems:
 tools_software_languages:
     - Coding
     - GitHub
+
+further_reading:
+    - resource:
+        title: GitHub Actions
+        link: https://docs.github.com/en/actions
+        type: documentation
+    - resource:
+        title: GitHub Actions self-hosted runners
+        link: https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners
+        type: documentation
+    - resource:
+        title: Continuous Integration for Windows on Arm
+        link: https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

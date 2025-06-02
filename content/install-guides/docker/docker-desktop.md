@@ -11,7 +11,7 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://docs.docker.com/desktop/
@@ -34,7 +34,14 @@ All of the download files are available on the
 | [Linux](https://docs.docker.com/desktop/install/linux-install/) |
 | [macOS](https://docs.docker.com/desktop/install/mac-install) |
 
-All of the Docker Desktop products use the `x86_64` / `amd64` architecture except macOS on Apple Silicon.
+
+{{% notice Note %}}
+Docker Desktop for Windows on Arm is available as a Beta release. It is fully documented and works the same as the x86 platform.
+
+For information about Docker Desktop on Arm Linux refer to [Docker Desktop on Arm Linux](/install-guides/docker/docker-desktop-arm-linux/).
+{{% /notice %}}
+
+
 
 On any platform, confirm the Docker Desktop installation is successful with:
 ```console
@@ -71,6 +78,6 @@ uname -m
 
 Apple Silicon is reported as `arm64`.
 
-Docker Engine is now ready to use. You can explore [Docker related Learning Paths](/tag/docker/).
+Docker Desktop is now ready to use. You can explore [Docker related Learning Paths](/tag/docker/).
 
 You may want to create an account on [Docker Hub](https://hub.docker.com) to share images and automate workflows.

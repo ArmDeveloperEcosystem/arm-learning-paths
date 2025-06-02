@@ -14,9 +14,13 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10
 
+test_maintenance: true
+test_images:
+  - ubuntu:latest
+
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/101004
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -33,7 +37,7 @@ These libraries are free to use and do not require a license. They can be instal
 
 Arm Performance Libraries are available for use on [Windows 11 on Arm](#windows), [macOS](#macos) (Apple Silicon), and [Linux](#linux) (AArch64) hosts.
 
-## Windows {#windows}
+## How do I install Arm Performance Libraries on Windows? {#windows}
 
 On your Windows 11 Arm machine, go to the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries).
 Click on the Download Windows section and download the Windows Installer:
@@ -64,79 +68,100 @@ You can now start linking your application to the Arm Performance libraries on y
 For more information refer to [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/109361).
 
 
-## macOS {#macos}
+## How do I install Arm Performance Libraries on macOS? {#macos}
 
 [Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your macOS distribution.
 
 In a terminal, run the command shown below to download the macOS package:
 ```console
-wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-performance-libraries/24-04/macos/arm-performance-libraries_24.04_macOS.tgz
+wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_25.04/arm-performance-libraries_25.04_macOS.tgz
 ```
 
 Use tar to extract the file:
 ```console
-tar zxvf arm-performance-libraries_24.04_macOS.tgz
+tar zxvf arm-performance-libraries_25.04_macOS.tgz
 ```
 
 Output of above command:
 ```console
-armpl_24.04_flang-new_clang_18.dmg
+armpl_25.04_flang-new_clang_19.dmg
 ```
 
 Mount the disk image by running from a terminal:
 ```console
-hdiutil attach armpl_24.04_flang-new_clang_18.dmg
+hdiutil attach armpl_25.04_flang-new_clang_19.dmg
 ```
 
 Now run the installation script as a superuser:
 
 ```console
-/Volumes/armpl_24.04_flang-new_clang_18_installer/armpl_24.04_flang-new_clang_18_install.sh -y
+/Volumes/armpl_25.04_flang-new_clang_19_installer/armpl_25.04_flang-new_clang_19_install.sh -y
 ```
 
-Using this command you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory. If you want to change the installation directory location use the `--install_dir` option with the script and provide the desired directory location.
+Using this command you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory. If you want to change the installation directory location use the `--install_dir=` option with the script and provide the desired directory location.
 
 To get started, compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.
 
 For more information refer to [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/109362).
 
 
-## Linux {#linux}
+## How do I install Arm Performance Libraries on Linux? {#linux}
 
-Arm Performance Libraries are supported on most Linux Distributions like Ubuntu, RHEL, SLES and Amazon Linux on an `AArch64` host and compatible with various versions of GCC and NVHPC. The GCC compatible releases are built with GCC 13 and tested with GCC versions 7 to 13. The NVHPC compatible releases are built and tested with NVHPC 24.1.
+Arm Performance Libraries are supported on most Linux distributions like Ubuntu, RHEL, SLES and Amazon Linux on an `AArch64` host and compatible with various versions of GCC, LLVM, and NVHPC. The GCC compatible releases are built with GCC 14 and tested with GCC versions 7 to 14. The LLVM compatible releases are tested with LLVM 19.1. The NVHPC compatible releases are tested with NVHPC 24.7.
+
+### How do I manually download and install Arm Performance Libraries on Linux?
 
 [Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your Linux distribution. The deb based installers can be used on Ubuntu 20 and Ubuntu 22. The RPM based installers can be used on the following supported distributions:
 
 - Amazon Linux 2, Amazon Linux 2023
-- RHEL-7, RHEL-8, RHEL-9
-- SLES-15
+- RHEL-8, RHEL-9
+- SLES-15 Service Packs 5 and 6
 
 The instructions shown below are for deb based installers for GCC users.
 
-In a terminal, run the command shown below to download the debian package:
+In a terminal, run the command shown below to download the Debian package:
 
-```console
-wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-performance-libraries/24-04/linux/arm-performance-libraries_24.04_deb_gcc.tar
+```bash
+wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_25.04.1/arm-performance-libraries_25.04.1_deb_gcc.tar
 ```
 
 Use `tar` to extract the file and then change directory:
 
-```console
-tar -xf arm-performance-libraries_24.04_deb_gcc.tar
-cd arm-performance-libraries_24.04_deb/
+```bash
+tar xf arm-performance-libraries_25.04.1_deb_gcc.tar
 ```
 
 Run the installation script as a super user:
 
-```console
-sudo ./arm-performance-libraries_24.04_deb.sh --accept
+```bash
+sudo ./arm-performance-libraries_25.04.1_deb/arm-performance-libraries_25.04.1_deb.sh --accept
 ```
 
 Using the `--accept` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.
 
 If you want to change the installation directory location use the `--install-to` option with the script and provide the desired directory location.
 
-### Setup your environment
+## How do I download and install Arm Performance Libraries using system packages on Linux?
+
+Arm Performance Libraries are available to install using Linux system package managers. The instructions shown below are for the Ubuntu system package manager `apt` command.
+
+Add the Arm Performance Libraries `apt` package repository to your system:
+
+```bash
+sudo apt update
+. /etc/os-release
+curl "https://developer.arm.com/packages/arm-toolchains:${NAME,,}-${VERSION_ID/%.*/}/${VERSION_CODENAME}/Release.key" | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc
+echo "deb https://developer.arm.com/packages/arm-toolchains:${NAME,,}-${VERSION_ID/%.*/}/${VERSION_CODENAME}/ ./" | sudo tee /etc/apt/sources.list.d/developer-arm-com.list
+sudo apt update
+```
+
+Download and install Arm Performance Libraries with:
+
+```bash
+sudo apt install arm-performance-libraries
+```
+
+### How do I set up the environment for Arm Performance Libraries on Linux?
 
 Install environment modules on your machine:
 
@@ -165,13 +190,13 @@ module avail
 The output should be similar to:
 
 ```output
-armpl/24.04.0_gcc
+armpl/25.04.1_gcc
 ```
 
 Load the appropriate module:
 
 ```console
-module load armpl/24.04.0_gcc
+module load armpl/25.04.1_gcc
 ```
 
 You can now compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.

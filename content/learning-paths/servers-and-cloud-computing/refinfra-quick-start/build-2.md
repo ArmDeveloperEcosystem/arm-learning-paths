@@ -12,7 +12,7 @@ Test that the firmware implementation builds and boots on a FVP. The firmware st
 
 Launch the container:
 ```bash 
-./container-scrits/container.sh -v /home/ubuntu/rd-infra/ run
+./container-scripts/container.sh -v /home/ubuntu/rd-infra/ run
 ```
 
 Perform a build inside the container:
@@ -79,5 +79,5 @@ lrwxrwxrwx 1 ubuntu ubuntu      30 Jan 12 15:35 tf-bl31.bin -> ../components/rdn
 lrwxrwxrwx 1 ubuntu ubuntu      33 Jan 12 15:35 uefi.bin -> ../components/css-common/uefi.bin
 ```
 
-The `fip-uefi.bin` firmware image will contain the `TF-A BL2` boot loader image which is responsible for unpacking the rest of the firmware as well as the firmware that TF-A BL2 unpacks. This includes the `SCP BL2` (`scp_ramfw.bin`) image that is unpacked by the AP firmware and transferred over to the SCP TCMs using the SCP shared data store module. Along with the FIP image, the FVP also needs the `TF-A BL1` image and the `SCP BL1` (`scp_romfw.bin`) image files.
+The `fip-uefi.bin` [firmware image package](https://trustedfirmware-a.readthedocs.io/en/v2.5/getting_started/tools-build.html) will contain the `TF-A BL2` boot loader image which is responsible for unpacking the rest of the firmware as well as the firmware that TF-A BL2 unpacks. This includes the `SCP BL2` (`scp_ramfw.bin`) image that is unpacked by the AP firmware and transferred over to the SCP TCMs using the SCP shared data store module. Along with the FIP image, the FVP also needs the `TF-A BL1` image and the `SCP BL1` (`scp_romfw.bin`) image files.
 

@@ -13,7 +13,7 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
 
-author_primary: Christopher Seidl
+author: Christopher Seidl
 
 ### Link to official documentation
 official_docs: https://github.com/Arm-Examples/FVPs-on-Mac/blob/main/README.md
@@ -28,13 +28,13 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 This guide is intended to get you up and running with the [Arm Virtual Hardware (AVH) Fixed Virtual Platforms (FVPs)](https://www.arm.com/products/development-tools/simulation/virtual-hardware) on macOS. For a thorough review of all options, refer to the official documentation.
 
-## Prerequisites
+## What are the prerequisites for running AVH FVPs on macOS?
 
 [Install Docker Desktop on Mac](https://docs.docker.com/desktop/install/mac-install/).
 
 If this is for commercial use, you might require a paid subscription.
 
-## Clone the repo
+## How do I clone the repository?
 
 Open a terminal and set the working directory to the location in which you would like to store the Fast Model. Then run:
 
@@ -44,7 +44,7 @@ git clone https://github.com/Arm-Examples/FVPs-on-Mac.git
 
 This creates the subdirectory `FVPs-on-Mac` in the current working directory.
 
-## Build the Docker wrapper
+## How do I build the Docker wrapper for AVH FVPs?
 
 Run the build script to create the Docker image and populate the `bin` folder with model wrappers:
 
@@ -60,7 +60,7 @@ These wrappers can be used exactly like any native model executable:
 ./bin/FVP_MPS2_Cortex-M3 --version
 ```
 
-## Expose models to local environment
+## How do I expose the models to my local environment?
 
 Add `$(pwd)/FVPs-on-Mac/bin` to `PATH` environment:
 

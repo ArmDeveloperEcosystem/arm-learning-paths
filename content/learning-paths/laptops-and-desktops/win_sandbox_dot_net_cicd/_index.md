@@ -10,11 +10,11 @@ learning_objectives:
     - Build and run a .NET 8 Windows Presentation Foundation (WPF) application using a self-hosted GitHub Actions runner in your CI/CD workflow. 
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit) or Lenovo Thinkpad X13s running Windows 11 Version 22H2 which has [Windows Sandbox enabled](/install-guides/windows-sandbox-woa).
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 Version 22H2 which has [Windows Sandbox enabled](/install-guides/windows-sandbox-woa).
     - A valid [GitHub account](https://github.com/) to complete this Learning Path.
     
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -27,6 +27,17 @@ tools_software_languages:
     - .NET
     - Visual Studio
     - Windows Sandbox
+
+further_reading:
+    - resource:
+        title: Windows Sandbox Documentation
+        link: https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-overview
+        type: documentation
+    - resource:
+        title: GitHub Actions support Windows Arm Hardware
+        link: https://github.blog/changelog/2022-09-28-github-actions-self-hosted-runners-now-support-windows-arm-hardware/
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

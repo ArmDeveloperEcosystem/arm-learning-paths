@@ -28,16 +28,7 @@ Calls to:
 {{ $tools_software_languages := slice}}
 {{ $main_tool_title := .Params.Title }}
 {{ $active_tag := "" }}
-{{$author := ""}}
-{{$author_company := ""}}
 
-    <!-- get author metadata -->
-    {{if .Params.author}}
-        {{range .Params.author}}
-            {{if .name}}            {{$author = .name}}                     {{end}}
-            {{if .company_name}}    {{$author_company = .company_name}}     {{end}}
-        {{end}}
-    {{end}}
 
     <!-- get all subpages in a multi-tool install -->
     {{if or (.Params.multi_install) (.Params.multitool_install_part)}}
@@ -139,7 +130,11 @@ Calls to:
         {{if not .Params.multi_install}}
             <br>
             <div style="min-height: 350px;">
-                {{partial "general-formatting/feedback.html" (dict "context" . "learningpath_or_toolinstall" "tool quick-install guide")  }}
+                <div class="c-row">
+                    <div class="c-col">
+                        {{partial "general-formatting/feedback.html" (dict "context" . "learningpath_or_toolinstall" "tool quick-install guide")  }}        
+                    </div>
+                </div>
             </div>   
         {{end}}         
     </div>

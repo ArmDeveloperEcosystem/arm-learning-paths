@@ -12,7 +12,7 @@ ASP.NET Core is a cross-platform framework for building web applications that le
 
 Windows 11 can run directly on Arm64-powered devices, so you can use it similarly to Windows 10 IoT Core to develop IoT apps. For example, you can use ASP.NET Core to build a web API that your headless IoT device exposes to communicate with users or other devices.
 
-This learning path demonstrates how you can use ASP.NET Core with Windows 11 to build a web server for a headless IoT application. This learning path uses Windows Dev Kit 2023 as a development PC. The kit does not contain any real sensors, so you will implement a temperature sensor emulator.
+This Learning Path demonstrates how you can use ASP.NET Core with Windows 11 to build a web server for a headless IoT application and implement a temperature sensor emulator.
 
 ## Before you begin
 Make sure that .NET is correctly installed on your machine. To do this, open the command prompt and type:
@@ -259,9 +259,9 @@ public SensorReading Get()
 }
 ```
 
-This method returns the temperature sensor emulator’s current reading.
+This method returns the temperature sensor emulator's current reading.
 
-Finally, implement the POST handler, which enables a user to change the sensor emulator’s `IsActive` property:
+Finally, implement the POST handler, which enables a user to change the sensor emulator's `IsActive` property:
 
 ```cs
 [HttpPost]

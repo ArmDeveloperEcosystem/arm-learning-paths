@@ -14,7 +14,7 @@ learning_objectives:
 prerequisites:
     - An AArch64 or x86_64 computer running Linux. You can use cloud instances, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -29,7 +29,28 @@ tools_software_languages:
     - RME
     - CCA
     - Docker
+    - Runbook
+
     
+further_reading:
+    - resource:
+        title: Arm Confidential Compute Architecture
+        link: https://www.arm.com/architecture/security-features/arm-confidential-compute-architecture
+        type: website
+    - resource:
+        title: Arm Confidential Compute Architecture open source enablement
+        link: https://www.youtube.com/watch?v=JXrNkYysuXw
+        type: video
+    - resource:
+        title: Learn the architecture - Realm Management Extension
+        link: https://developer.arm.com/documentation/den0126
+        type: documentation
+    - resource:
+        title: Realm Management Monitor specification
+        link: https://developer.arm.com/documentation/den0137/latest/
+        type: documentation
+
+
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly

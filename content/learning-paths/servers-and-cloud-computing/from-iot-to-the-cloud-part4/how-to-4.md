@@ -55,7 +55,7 @@ The above code will create two resources: a resource group and the Azure Contain
 The last statement of the index.ts will instruct Pulumi to display the public IP address of the created Azure Container Instance. 
 
 ## Resource deployment
-Let’s now deploy the Azure resource using this declaration. To do so, you open the Command Prompt, go to the azure-aci folder, and then type 
+Let's now deploy the Azure resource using this declaration. To do so, you open the Command Prompt, go to the azure-aci folder, and then type 
 
 ```console
 pulumi up

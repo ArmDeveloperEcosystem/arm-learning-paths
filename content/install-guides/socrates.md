@@ -16,7 +16,7 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 30
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/101400
@@ -31,17 +31,17 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [Arm Socrates](https://developer.arm.com/Tools%20and%20Software/Socrates) is a tool used to select, configure and create Arm IP for easy and error free integration into a System on Chip(SoC).
 
-## Download installer packages
+## How do I download Arm Socrates?
 
 Socrates is a component of [Arm Hardware Success Kits](https://www.arm.com/products/development-tools/success-kits).
 
-It is available to download via the [Arm Product Download Hub](https://developer.arm.com/downloads/view/HWSKT-KS-0002).
+It is available to download via the [Arm Product Download Hub](https://developer.arm.com/downloads/).
 
-You can download Socrates as an individual standalone component, or you can download the complete success kits.
+You can download Socrates as an individual component, or you can download the complete success kits.
 
-For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](../pdh).
+For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](/install-guides/pdh/).
 
-## Installation
+## How do I install Arm Socrates?
 
 Arm Socrates requires a Linux machine running Red Hat Enterprise Linux. 
 
@@ -61,16 +61,15 @@ See also the output of:
 ./ARM-Socrates-1.8.0.1-Linux-x86-64-Install --help
 ```
 
-## Set up the product license
+## How do I set up the product license?
 
-Arm Socrates is license managed. License setup instructions are available in the [Arm License install guide](../license/).
+Arm Socrates is license managed. License setup instructions are available in the [Arm License install guide](/install-guides/license/).
 
 Configuration of some Arm IP products require a corresponding license for that IP.
 
 Full details are provided in the [Installation Guide](https://developer.arm.com/documentation/101400/latest/Setting-up-licensing), as well as the Release Notes provided within the downloaded tarball.
 
-
-## Update IP Catalog
+## How do I update the IP Catalog?
 
 You will need to update the `IP Catalog` within the IDE for the first usage.
 
@@ -80,8 +79,7 @@ Click `Install IP Catalog Updates` if needed.
 
 Click `Apply and Close` when complete.
 
-
-## Get started
+## How do I get started with Arm Socrates?
 
 To check Socrates has installed correctly, use the `socrates.sh` command or double‑click the Socrates icon.
 

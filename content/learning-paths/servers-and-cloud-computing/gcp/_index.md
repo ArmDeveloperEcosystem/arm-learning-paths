@@ -15,7 +15,7 @@ prerequisites:
     - A computer with [Terraform](/install-guides/terraform) installed.
     - A computer with [Google Cloud CLI](/install-guides/gcloud) installed.
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ##### Tags
 skilllevels: Introductory
@@ -33,6 +33,21 @@ tools_software_languages:
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================
+further_reading:
+    - resource:
+        title: Create an Arm VM instance
+        link: https://cloud.google.com/compute/docs/instances/create-arm-vm-instance#startinstanceconsole
+        type: documentation
+    - resource:
+        title: Connect to Linux VMs 
+        link: https://cloud.google.com/compute/docs/instances/connecting-to-instance#console
+        type: documentation
+    - resource:
+        title: About bastion hosts
+        link: https://cloud.google.com/solutions/connecting-securely#bastion
+        type: documentation
+
+
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # Indicates this should be surfaced when looking for related content. Only set for _index.md of learning path content.

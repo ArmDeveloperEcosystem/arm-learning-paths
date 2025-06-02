@@ -17,12 +17,10 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://github.com/aws/porting-advisor-for-graviton/
-
-author_primary: Jason Andrews
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -40,7 +38,7 @@ Supported operating systems include Linux, Windows, and macOS.
 
 Porting Advisor analyzes C/C++, Python, Java, Fortran, and Go applications. 
 
-## Before you begin
+## What prerequisites do I need before using Porting Advisor?
 
 Follow the instructions below to install and use Porting Advisor on Ubuntu or [Amazon Linux 2023](https://aws.amazon.com/linux/amazon-linux-2023/). 
 
@@ -97,7 +95,7 @@ sudo dnf install maven -y
   {{< /tab >}}
 {{< /tabpane >}}
 
-## Installation
+## How do I install Porting Advisor?
 
 Download Porting Advisor from GitHub:
 
@@ -108,7 +106,7 @@ cd porting-advisor-for-graviton
 
 Porting Advisor can be run as a Python script or as an executable. If you want to run the executable, you should still complete the run as a script section to confirm your environment is setup correctly.
 
-### Run as a script
+### How do I run Porting Advisor as a Python script?
 
 To setup to run as a python script, create a Python virtual environment:
 
@@ -145,7 +143,7 @@ usage: porting-advisor [-h] [--issue-types ISSUE_TYPES] [--no-filter] [--no-prog
 ```
 
 
-### Run as an executable
+### How do I run Porting Advisor as an executable?
 
 Running Porting Advisor as an executable requires a build step. 
 
@@ -177,7 +175,7 @@ The output will be the same help message printed by the Python invocation.
 
 You can copy the executable from the `dist` folder to any another machine (with the same operating system and architecture) and use Porting Advisor immediately. There is no need to install anything related to Python.
 
-### Test a sample project
+### How do I test Porting Advisor with a sample project?
 
 The Porting Advisor includes some small examples in the `sample-projects` directory of the GitHub repository. 
 

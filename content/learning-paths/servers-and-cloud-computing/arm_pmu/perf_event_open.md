@@ -30,7 +30,7 @@ void code_to_measure(){
     }
 }
 
-// Executes perf_event_open syscall and makes sure it is succesful or exit
+// Executes perf_event_open syscall and makes sure it is successful or exit
 static long perf_event_open(struct perf_event_attr *hw_event, pid_t pid, int cpu, int group_fd, unsigned long flags){
   int fd;
   fd = syscall(SYS_perf_event_open, hw_event, pid, cpu, group_fd, flags);
@@ -135,7 +135,7 @@ void code_to_measure(){
   }
 }
 
-// Executes perf_event_open syscall and makes sure it is succesful or exit
+// Executes perf_event_open syscall and makes sure it is successful or exit
 static long perf_event_open(struct perf_event_attr *hw_event, pid_t pid, int cpu, int group_fd, unsigned long flags){
   int fd;
   fd = syscall(SYS_perf_event_open, hw_event, pid, cpu, group_fd, flags);

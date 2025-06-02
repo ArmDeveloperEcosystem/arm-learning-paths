@@ -1,4 +1,4 @@
-{{/* 
+{{/*
 Codeblock formatting for prismjs
 
 Where it is used:
@@ -34,18 +34,18 @@ Called from:
         {{else}}
                 {{$lines_to_mark_output = $lines_to_mark_output | append (int .)}}
         {{end}}
-    {{end}}    
+    {{end}}
 {{end}}
 
 {{$output_present := false}}
-{{if or (.output_lines) (.command_line) (eq .language "output")}} 
+{{if or (.output_lines) (.command_line) (eq .language "output")}}
     {{$output_present = true}}
 {{end}}
 
 
 <!-- Start with the 'pre' element, then 'code' element, then the code content -->
 <pre
-    {{if .command_line}} 
+    {{if .command_line}}
         class="command-line"
         data-user= {{ trim (index (split (index (split .command_line "|") 0) "@") 0 ) " "}}
         data-host= {{ trim (index (split (index (split .command_line "|") 0) "@") 1 ) " "}}
@@ -73,7 +73,13 @@ Called from:
             {{- end -}}
         <!-- Functionally the same as above on linux, but this makes it easier for Windows reading of non-output code blocks as Windows doesn't like the line-break character -->
         {{else}}
-            {{.code}}
+            {{- with .code -}}
+                {{- $inner := split . "\n" -}}
+                &#10;
+                {{- range $inner -}}
+                    {{- . -}}&#10;
+                {{- end -}}
+            {{- end -}}
         {{end}}
     </code>
 </pre>

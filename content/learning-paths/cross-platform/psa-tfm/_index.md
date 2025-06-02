@@ -1,6 +1,10 @@
 ---
 title: Build and run Arm Trusted Firmware examples on Corstone-1000
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 120
 
 who_is_this_for: This an introductory topic is for software developers new to Platform Security Architecture (PSA) and Arm Trusted Firmware components
@@ -13,11 +17,11 @@ prerequisites:
     - Ubuntu host or access to AWS
     - Optional MPS3 FPGA prototyping board
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
-subjects: Security
+subjects: Performance and Architecture
 armips:
     - Cortex-A
     - Cortex-M
@@ -29,11 +33,26 @@ tools_software_languages:
     - Fixed Virtual Platform
     - GCC
 
+
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
-    - embedded-systems
-    - microcontrollers
+    - embedded-and-microcontrollers
+    - embedded-and-microcontrollers
+
+further_reading:
+    - resource:
+        title: Arm Architecture Security Features
+        link: https://www.arm.com/architecture/security-features
+        type: website
+    - resource:
+        title: Trusted Firmware Getting Started Guide
+        link: https://tf-m-user-guide.trustedfirmware.org/getting_started/index.html
+        type: documentation
+    - resource:
+        title: Corstone-1000 software stack User Guide
+        link: https://corstone1000.docs.arm.com/en/latest/user-guide.html
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

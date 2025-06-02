@@ -178,4 +178,4 @@ sys     0m0.000s
 
 Interestingly, SVE performs about the same as the other versions.
 
-You are now ready to build one of the high profile applications that use Eigen with SVE enabled. This application is Tensorflow!
+You are now ready to build one of the high profile applications that use Eigen with SVE enabled. This application is TensorFlow!

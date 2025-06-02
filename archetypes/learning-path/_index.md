@@ -13,7 +13,7 @@ prerequisites:
     - PLACEHOLDER PREREQ 1
     - PLACEHOLDER PREREQ 2
 
-author_primary: PLACEHOLDER NAME
+author: PLACEHOLDER NAME
 
 ### Tags
 skilllevels: PLACEHOLDER SKILLLEVEL
@@ -26,6 +26,23 @@ tools_software_languages:
     - PLACEHOLDER TOOL OR SOFTWARE D
 operatingsystems:
     - PLACEHOLDER OS G
+
+
+
+further_reading:
+    - resource:
+        title: PLACEHOLDER MANUAL 
+        link: PLACEHOLDER MANUAL LINK
+        type: documentation
+    - resource:
+        title: PLACEHOLDER BLOG 
+        link: PLACEHOLDER BLOG LINK
+        type: blog
+    - resource:
+        title: PLACEHOLDER GENERAL WEBSITE 
+        link: PLACEHOLDER GENERAL WEBSITE LINK
+        type: website
+
 
 
 ### FIXED, DO NOT MODIFY

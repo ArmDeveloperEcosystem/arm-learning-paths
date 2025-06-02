@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 [Arm Confidential Compute Architecture ](https://www.arm.com/architecture/security-features/arm-confidential-compute-architecture) (CCA) is a system solution consisting of hardware and software components to maximize the security of your data on devices and cloud.
 
-CCA enhances the virtualization capabilities of your platform by separating the management of resources from access to those resources. It does this by extending the Trustzone for Cortex-A concepts of Normal world and Secure world, adding a Realm world, and an underlying Root world. A secure monitor runs in Root world and manages the transitions between these security states.
+CCA enhances the virtualization capabilities of your platform by separating the management of resources from access to those resources. It does this by extending the TrustZone for Cortex-A concepts of Normal world and Secure world, adding a Realm world, and an underlying Root world. A secure monitor runs in Root world and manages the transitions between these security states.
 
 ![Architecture #center](_images/realms.png)
 

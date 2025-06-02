@@ -6,18 +6,18 @@ weight: 5
 layout: learningpathall
 ---
 
-In the previous section, you created the core (or the boiler plate) needed for
+In the previous section, you created the core, or the boilerplate, needed for
 `Matrix` objects. They can now be constructed, assigned to/from, and dumped to
 the screen, but the library is still missing actual matrix operations: add,
 subtract, and multiply.
 
-In this section, you will add the missing operations.
+In this section, you add the missing operations.
 
 ## Operations architecture
 
-When designing matrix processing, it's desirable to separate 2 concerns:
-- the traversal of the matrices
-- the actual data processing
+When designing matrix processing, it's desirable to separate two concerns:
+- The traversal of the matrices.
+- The actual data processing.
 
 This allows you to develop the independent parts and then compose them, allowing for
 easy testing and extension of the library.
@@ -27,12 +27,12 @@ easy testing and extension of the library.
 Unary operations are operations that take a single `Matrix` as argument.
 The very first unary operations to consider when processing a `Matrix`
 are:
-- `Neg` to negate a value
-- `Abs` to get the absolute value
-- `Sqrt` to get the square root of a value
-- `Log` to get the natural logarithm of a value
+- `Neg` to negate a value.
+- `Abs` to get the absolute value.
+- `Sqrt` to get the square root of a value.
+- `Log` to get the natural logarithm of a value.
 
-You will add these unary scalar operations, in the `MatComp` namespace, but in a
+You add these unary scalar operations, in the `MatComp` namespace, but in a
 separate file.
 
 Add the code below to a new file `include/Matrix/Operators.h`:
@@ -84,22 +84,21 @@ template <typename Ty> class Log : public unaryOperation {
 ```
 
 All these unary operations derive from the empty `unaryOperation` `struct`,
-which enable code bases to type / group those operations. This essentially
+which enable code bases to type/group those operations. This essentially
 *tags* these operations. They are all implemented as templates, in order for
-them to be type generic. Although none of them carries a state, they have been
+them to be type-generic. Although none of these carry a state, they have been
 implemented as classes with the function operator (`operator()`) defined. This
-makes them suitable for using in bigger algorithms and is a common pattern used
-for example in the C++ standard library.
+makes them suitable for using in bigger algorithms and is a common pattern used in the C++ standard library.
 
 One point worth mentioning is related to the `Abs` class: depending on the type
-used at instantiation, the compiler will select an optimized implementation for
-unsigned types, and there is no need to compute the absolute value of an always
+used at instantiation, the compiler selects an optimized implementation for
+unsigned types, as there is no need to compute the absolute value of an always
 positive value. This optimization is transparent to users.
 
 Those operators are marked as `constexpr` so that the compiler can optimize the
 computation by performing them at compile time rather than runtime if the actual
 values are known at compile time. They are marked `const`, because the operator
-will not modify the object state (as these objects don't have a state).
+does not modify the object state - as these objects don't have a state.
 
 The new operations must have tests, so add those into
 a separate `tests/Operators.cpp` file:
@@ -204,7 +203,7 @@ type traits (from `<numeric_limit>`) such as `max` to get the maximum value
 representable for a given type.
 
 As those tests have been added to a new source file, it needs to be known to the
-build system, so add it now to the matrix-test target in `CMakeLists.txt`:
+build system, so add it now to the `matrix-test` target in `CMakeLists.txt`:
 
 ```TXT
 add_executable(matrix-test tests/main.cpp
@@ -286,14 +285,14 @@ All the whole matrix operations have the same pattern of operation: each element
 in the matrix needs to be transformed with the unary scalar operation, the order
 in which the element are modified does not matter, so there is no need to apply
 the scalar operations taking into account rows and columns. Giving the compiler
-one simple big loop will give it the most optimization opportunities.
+one simple big loop gives it the most optimization opportunities.
 
 First, create a `applyEltWiseUnaryOp` helper routine in the public section of
  `Matrix` in `include/Matrix/Matrix.h` which is templated on the desired scalar
  operation as follows:
 
 ```CPP
-    /// Apply element wise unary scalar operator \p uOp to each element.
+    /// Apply element wise unary scalar operator \p op to each element.
     template <template <typename> class uOp>
     Matrix &applyEltWiseUnaryOp(const uOp<Ty> &op) {
         static_assert(std::is_base_of<unaryOperation, uOp<Ty>>::value,
@@ -329,11 +328,10 @@ public section in `include/Matrix/Matrix.h`, add the `neg`, `abs`, `sqrt` and
     Matrix &log() { return applyEltWiseUnaryOp(Log<Ty>()); }
 ```
 
-Those member operations are modifying the object in place, which might not be
-desirable, so you will also provide a functional version of these
-operators, that is to say a version that will modify a copy of the object
-instead. This is achieved by providing functions outside of the `Matrix` class
-(but still in the `MatComp` namespace). Add these after the `Matrix` class
+Those member operations modify the object in place, which might not be
+desirable, so you also provide a functional version of these
+operators, which is a version that modifies a copy of the object
+instead. This is achieved by providing functions outside of the `Matrix` class - but still in the `MatComp` namespace. Add these after the `Matrix` class
 closing `};` in `include/Matrix/Matrix.h`:
 
 ```CPP
@@ -359,9 +357,9 @@ template <typename Ty> Matrix<Ty> log(const Matrix<Ty> &m) {
 ```
 
 Users can now write either:
- - `m.abs()` which will modify matrix `m` *in-place* so that it contains the
+ - `m.abs()` which modifies matrix `m` *in-place* so that it contains the
  absolute value of each of its elements
- - `abs(m)` which will return a copy of `m` with the absolute value of each of
+ - `abs(m)` which returns a copy of `m` with the absolute value of each of
  `m` elements, leaving `m` untouched.
 
 Of course, each of these function needs to have tests.
@@ -507,13 +505,13 @@ ninja check
 [----------] 4 tests from unaryOperator (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 27 tests from 3 test suites ran. (0 ms total)
+[==========] 27 tests from 2 test suites ran. (0 ms total)
 [  PASSED  ] 27 tests.
 ```
 
 ## Binary scalar operations
 
-Users also need to have binary operations, that is operations that have 2
+Users also need to have binary operations; operations that have two
 inputs: addition, subtraction, and multiplication are the most popular
 representatives of binary operations. Using the same pattern than for unary
 operations, add those binary operations to `include/Matrix/Operators.h` in
@@ -684,17 +682,17 @@ ninja check
 
 Now that scalar binary operators are implemented, you can add `Matrix` level
 binary operators. The pattern is very similar to the one used for unary
-operators: you will add a helper routine that will traverse the matrices and
-apply the scalar operator, but with an extra step. Although the element wise
+operators: you add a helper routine that traverses the matrices and
+applies the scalar operator, but with an extra step. Although the element wise
 processing of matrices does not require a specific order for the rows or
 columns, the matrices must have the same dimensions; if not, this is an error
-and the program should be terminated.
+and the program must be terminated.
 
 Add this `applyEltWiseBinaryOp` helper routine to the public section of `Matrix`
 in `include/Matrix/Matrix.h`:
 
 ```CPP
-    /// Apply element wise binary scalar operator \p bOp to each element.
+    /// Apply element wise binary scalar operator \p op to each element.
     template <template <typename> class bOp>
     Matrix &applyEltWiseBinaryOp(const bOp<Ty> &op, const Matrix &rhs) {
         static_assert(std::is_base_of<binaryOperation, bOp<Ty>>::value,
@@ -728,8 +726,8 @@ Add to the public section of `Matrix` in `include/Matrix/Matrix.h` the
     }
 ```
 
-These operators do modify the objects in-place, thus the `+=`, `-=` and `*=`, so
-you will now add functional versions of these operations. Outside of the
+These operators do modify the objects in-place, which explains the `+=`, `-=` and `*=`, so
+you now add functional versions of these operations. Outside of the
 `Matrix` class in `include/Matrix/Operators.h`, but in the `MatComp` namespace,
 add:
 
@@ -944,13 +942,13 @@ ninja check
 
 ### Matrix x Matrix multiplication
 
-Last, but not least, the `Matrix` class still needs the most important operation:
+Last, but not least, the `Matrix` class still requires the most important operation:
 matrix multiplication.
 
 Add the `multiply` function, outside of the `Matrix` class, but in the
-`MatComp` namespace in `include/Matrix/Matrix.h`. `multiply` will check that
+`MatComp` namespace in `include/Matrix/Matrix.h`. `multiply` checks that
 the arguments have compatible dimensions, then create an uninitialized
-matrix that will hold the multiplication result and eventually perform the
+matrix that holds the multiplication result and eventually perform the
 multiplication to fill it.
 
 ```CPP
@@ -1100,23 +1098,44 @@ ninja check
 
 ### Other useful operations
 
-A  complete matrix processing library would need some other important
+A complete matrix processing library requires some other important
 operations:
-- type conversion: the library only supports operations with the same type for
+- Type conversion: the library only supports operations with the same type for
 now, and this is enforced by the compiler. Avoiding silent conversions is
 desirable, but there are cases where data have different types and *explicit*
-conversion will be necessary.
-- transposition (i.e. swapping the rows / columns) is another important
+conversion is necessary.
+- Transposition, that is swapping the rows and columns, is another important
 operation, with some room for optimization in the implementation. Can you think
-of different ways to implement the `transpose` operator for the `Matrix` class ?
-- broadcasting: these are useful shortcuts for the `Matrix` users, as they allow
-to transform a scalar or a row-vector / column-vector by replicating it to make
+of different ways to implement the `transpose` operator for the `Matrix` class?
+- Broadcasting: these are useful shortcuts for the `Matrix` users, as they allow
+to transform a scalar or a row-vector/column-vector by replicating it to make
 it look like a 2-D matrix. Again, on top of syntactic sugar for the users, this
 provides a large performance improvement, especially in memory usage, as one can
 play with how the elements are accessed rather than duplicating the matrix
 content.
-- resize: to be able to dynamically change a matrix dimensions
-- extract: to be able to extract part of a matrix
+- Resize: to be able to dynamically change a matrix dimensions.
+- Extract: to be able to extract part of a matrix.
+
+### Optimization
+
+The code written so far is relatively high level and allows the compiler to
+perform a large number of optimizations, from propagating constants to
+unrolling loops to name but a few most basic ones.
+
+The `applyEltWiseUnaryOp` and `applyEltWiseBinaryOp` helper routines
+from the Matrix library process one element at a time. The compiler
+may make use of Arm specific SIMD (Single Instruction, Multiple Data)
+instructions to process several elements at a time with one instruction. This
+is an optimization named vectorization, that can either be done automatically
+by the compiler (this is named *autovectorization*) or it can be done manually by the developper with the use of *intrinsics functions*.
+You can learn more about the compiler's autovectorization capabilities with the
+[Learn about Autovectorization](/learning-paths/cross-platform/loop-reflowing/)
+learning path and about other vectorization tricks with the
+[Optimize SIMD code with vectorization-friendly data layout](/learning-paths/cross-platform/vectorization-friendly-data-layout/)
+learning path.
+
+You can also learn how to
+[Accelerate Matrix Multiplication Performance with SME2](/learning-paths/cross-platform/multiplying-matrices-with-sme2/).
 
 ## What have you achieved so far?
 
@@ -1146,14 +1165,13 @@ Matrix/
     └── main.cpp
 ```
 
-You can download the [archive](/artifacts/matrix/chapter-4.tar.xz) of the
-project in its current state to experiment locally on your machine.
-
-Congratulations, you now have a minimalistic yet fully functional matrix
-processing library, with some level of regression testing, that can be easily
+Congratulations, you now have a minimalistic, yet fully-functional, matrix processing library, with some level of regression testing, that can be easily
 built and used.
 
-The testing could (and should) go much deeper, as a number of
-corner cases have not been covered.
+The testing could - and *should* - go much deeper, as a number of corner cases have not been covered.
 
-You can continue to add more functions (and more tests).
+You can continue to add more functions, and more tests.
+
+You can refer to this chapter source code in
+`code-examples/learning-paths/cross-platform/matrix/chapter-4` in the archive that
+you have downloaded earlier.

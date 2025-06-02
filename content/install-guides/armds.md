@@ -14,7 +14,11 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10
 
-author_primary: Ronan Synnott
+test_maintenance: true
+test_images:
+  - ubuntu:latest
+
+author: Ronan Synnott
 
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/101469
@@ -28,15 +32,15 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio) is the most comprehensive embedded C/C++ dedicated software development solution. It is used for validation of SoC debug through emulation, simulation, FPGA, and silicon bring-up design and verification stages. It has the earliest support for all Arm processors and interconnects.
 
-## Before you begin
+## What should I know before installing Arm Development Studio?
 
 Arm Development Studio can be installed on Windows and Linux hosts.
 
 Full host platform requirements are given in the [Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Hardware-and-host-platform-requirements).
 
-## Download installer packages
+## How do I download the installer packages?
 
-The installer will depend on the [edition](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio#Editions) of Development Studio that you are entitled to. 
+The installer will depend on the [edition](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio#Editions) of Development Studio that you are entitled to.
 
 The version is denoted by `year.index`, where `index` is a number (for example `2023.1`). You can also generate an Evaluation license from this installation (`Help` > `Arm License Manager`), with capabilities broadly similar to the UBL Gold Edition.
 
@@ -44,11 +48,11 @@ You can download the Development Studio installer from the [Product Download Hub
 
 Versions of Arm Development Studio denoted by `year.index`, where `index` is a letter (for example `2023.a`) are only available to certain Arm licensees, as they contain support for non publicly announced IP (at time of release).
 
-For more information about the Product Download Hub, refer to the [Product Download Hub guide](../pdh).
+For more information about the Product Download Hub, refer to the [Product Download Hub guide](/install-guides/pdh/).
 
-## Install Arm Development Studio
+## How do I install Arm Development Studio?
 
-### Windows
+### How do I install on Windows?
 
 Unzip the downloaded installation archive.
 
@@ -66,7 +70,7 @@ Full installation instructions are provided in the [Arm Development Studio Getti
 * [Install Arm Development Studio on Windows using the command line](https://developer.arm.com/documentation/101469/2024-0/Installing-and-configuring-Arm-Development-Studio/Install-Arm-Development-Studio-on-Windows-using-the-command-line)
 * [Install Arm Development Studio on Windows using the installation wizard](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Install-Arm-Development-Studio-on-Windows-using-the-installation-wizard)
 
-### Linux
+### How do I install on Linux?
 
 Extract the downloaded package:
 ```command
@@ -83,9 +87,9 @@ The install may report that additional [libraries](https://developer.arm.com/doc
 
 Full installation instructions are provided in the Linux section of the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Installing-on-Linux).
 
-## Configure command line
+## How do I configure the command line?
 
-### Windows
+### How do I configure the Windows command line?
 
 You will see `Arm DS <version> Command Prompt` installed. This configures all necessary environment variables for use with the tools. You can select an appropriate toolchain with:
 ```command
@@ -99,7 +103,7 @@ select_default_toolchain
 By default, only the supplied `Arm Compiler for Embedded 6` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
 {{% /notice %}}
 
-### Linux
+### How do I configure the Linux command line?
 
 Navigate to `bin` directory of your install, for example:
 ```command
@@ -121,7 +125,7 @@ and select the desired toolchain. You can then configure with simply:
 By default, only the supplied `Arm Compiler for Embedded 6` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
 {{% /notice %}}
 
-## Arm Development Studio IDE
+## How do I use the Arm Development Studio IDE?
 
 Arm Development Studio is provided with a fully featured Eclipse based IDE and integrated debugger.
 
@@ -130,18 +134,18 @@ Launch the IDE from your desktop, or from the above prompt using:
 ./armds_ide
 ```
 
-## Set up the product license
+## How do I set up the product license?
 
 Arm Development Studio is license managed. When you launch the IDE for the first time, you should be prompted to set up your license if necessary. You can return to this view from `Help` > `Arm License Manager`.
 
 A free 30 day evaluation license for Arm Development Studio is also available. You can generate this in `Arm License Manager`. Click on `Add`, and follow instructions therein to obtain the evaluation license (requires Arm login).
 
-Full license setup instructions are available in the [Arm Software Licensing install guide](../license/).
+Full license setup instructions are available in the [Arm Software Licensing install guide](/install-guides/license/).
 
-## Get started
+## How do I get started with Arm Development Studio?
 
 To verify everything is working OK, run the compiler from your command prompt:
 ```command
 armclang --version
 ```
-You should now be ready to use Arm Development Studio. See the [Get started with Arm Development Studio](/learning-paths/embedded-systems/armds/) learning path for more information.
+You should now be ready to use Arm Development Studio. See the [Get started with Arm Development Studio](/learning-paths/embedded-and-microcontrollers/armds/) learning path for more information.

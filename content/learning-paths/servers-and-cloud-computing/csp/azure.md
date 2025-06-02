@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 As with most cloud service providers, Azure offers a pay-as-you-use [pricing policy](https://azure.microsoft.com/en-us/pricing/), including a number of [free](https://azure.microsoft.com/en-us/free/) services.
 
-This guide is to help you get started with [Virtual Machines](https://azure.microsoft.com/en-us/products/virtual-machines/), using Arm-based [Ampere](https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/) processors. This is a general-purpose compute platform, essentially your own personal computer in the cloud.
+This guide is to help you get started with [Virtual Machines](https://azure.microsoft.com/en-us/products/virtual-machines/), using Arm-based VMs available in Azure. Microsoft Azure offers two generations of Arm-based VMs. The latest generation is based on [Azure Cobalt 100 processors](https://azure.microsoft.com/en-us/blog/azure-cobalt-100-based-virtual-machines-are-now-generally-available/). The previous generation VMs are based on [Ampere](https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/) processors. This is a general-purpose compute platform, essentially your own personal computer in the cloud.
 
 Full [documentation and quickstart guides](https://learn.microsoft.com/en-us/azure/virtual-machines/) are available.
 
@@ -59,17 +59,13 @@ This is the location of the server where your VM will reside. While it is genera
 
 These are reliability and security settings. They can generally be left as default.
 
-![az5 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/a3b6181b-c15a-4015-a5ee-b6c299c0c214 "Select Availability options and Security type if necessary")
+![az5 #center](images/AzureAvailability.png "Select Availability options and Security type if necessary")
 
 ### Image
 
 This is the operating system that will run on your VM. Select the appropriate one from the pull-down. Some will have additional pricing associated with them. 
 
-![az6 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/2ba2a2bc-cace-440c-80d0-f5050f30ad49 "Select an image available for Arm VMs")
-
-Not all are available for Arm VMs. To filter, click on `See all images`, then select `Arm64` from the `Image Type` filter.
-
-![alt-text #center](https://user-images.githubusercontent.com/97123064/243472645-f5dbb211-43c3-4573-afbd-067e388ad7b4.png "Select the 'Arm64' image type")
+![az6 #center](images/AzureImage.png "Select an image available for Arm VMs")
 
 You can then select a particular version of your preferred OS from the `Select` pull-down of that OS tab.
 
@@ -103,7 +99,7 @@ This section defines how users [connect](https://learn.microsoft.com/en-us/azure
 
  `SSH public key` is the most common and recommended choice.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235617790-2493ec4d-0448-43cf-ae0a-39a405b863db.PNG "Select the 'SSH public key' authentication type")
+![alt-text #center](images/AzureKey.png "Select the 'SSH public key' authentication type")
 
  ### Username
 

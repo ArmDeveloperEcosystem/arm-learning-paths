@@ -6,12 +6,12 @@ who_is_this_for: This is an advanced topic for C/C++ developers who want to crea
 
 learning_objectives: 
     - Describe how to use Eigen on Arm systems.
-    - Build Tensorflow with SVE on Arm systems.
+    - Build TensorFlow with SVE on Arm systems.
 
 prerequisites:
     - An Arm-based computer running Linux and a recent version of a C++ compiler (Clang or GCC).
 
-author_primary: Konstantinos Margaritis
+author: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
@@ -23,13 +23,30 @@ tools_software_languages:
     - GCC
     - Clang
     - Coding
+    - Runbook
+
 operatingsystems:
     - Linux
 shared_path: true
 shared_between:
     - laptops-and-desktops
     - servers-and-cloud-computing
-    - smartphones-and-mobile
+    - mobile-graphics-and-gaming
+
+
+further_reading:
+    - resource:
+        title: Eigen official Tutorial on Matrix class
+        link: https://libeigen.gitlab.io/docs/group__TutorialMatrixClass.html
+        type: documentation
+    - resource:
+        title: Eigen Webinar from Linaro
+        link: https://static.linaro.org/connect/webinars/presentations/Eigen_Webinar_3.pdf
+        type: documentation
+    - resource:
+        title: TensorFlow Install from Source instructions
+        link: https://www.tensorflow.org/install/source
+        type: documentation
 
 
 ### FIXED, DO NOT MODIFY

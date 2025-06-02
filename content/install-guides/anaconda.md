@@ -7,7 +7,7 @@ additional_search_terms:
 
 layout: installtoolsall
 minutes_to_complete: 15
-author_primary: Jason Andrews
+author: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://docs.anaconda.com/
@@ -15,18 +15,16 @@ test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
 title: Anaconda
 tool_install: true
 weight: 1
 ---
 
-[Anaconda Distribution](https://www.anaconda.com/products/distribution) is a popular open-source Python distribution. 
+[Anaconda Distribution](https://www.anaconda.com/products/distribution) is a popular open-source Python distribution.
 
 It includes access to a repository with over 8,000 open-source data science and machine learning packages.
 
-The `conda` command can be used to quickly install and use Python packages. 
+The `conda` command can be used to quickly install and use Python packages.
 
 Follow the instructions below to install and use Anaconda Distribution on an Arm server.
 
@@ -46,11 +44,12 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-The installer requires some desktop related libraries. The dependencies can be met by installing a desktop environment. 
+The installer requires some desktop related libraries. The dependencies can be met by installing a desktop environment.
 
 For Ubuntu/Debian, run the command:
 
 ```console
+sudo apt update
 sudo apt install xfce4 -y
 ```
 
@@ -60,15 +59,15 @@ For Amazon Linux, run the command:
 sudo amazon-linux-extras install mate-desktop1.x
 ```
 
-## How do I download the latest Anaconda distribution? 
+## How do I download the latest Anaconda distribution?
 
 To download the latest Anaconda distribution, run:
 
 ```bash
-curl -O https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-aarch64.sh
+curl -O https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-aarch64.sh
 ```
 
-Depending on the version, the downloaded filename will be of the form `Anaconda3-20XX.YY-Linux-x86_64.sh` where the `XX` and `YY` values represent the year and month of the latest release.
+Depending on the version, the downloaded filename will be of the form `Anaconda3-20XX.YY-Linux-aarch64.sh` where the `XX` and `YY` values represent the year and month of the latest release.
 
 ## What are the steps to install the downloaded Anaconda distribution?
 
@@ -79,12 +78,12 @@ The default installation directory is `$HOME/anaconda3`. Change the installation
 If you wish to review the license terms before accepting, remove `-b`.
 
 ```bash
-sh ./Anaconda3-2023.09-0-Linux-aarch64.sh -b
+sh ./Anaconda3-2024.10-1-Linux-aarch64.sh -b
 ```
 
 The install takes a couple of minutes to complete.
 
-The batch installation will not set up the shell. 
+The batch installation will not set up the shell.
 
 To set up the shell, run:
 
@@ -96,7 +95,7 @@ eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
 
 Test Anaconda Distribution by running simple TensorFlow and PyTorch examples.
 
-### TensorFlow
+### How do I use TensorFlow with Anaconda?
 
 Create a new conda environment named tf, install TensorFlow, and activate the new environment.
 
@@ -133,14 +132,14 @@ Run the example code:
 python ./tf.py
 ```
 
-The expected output format is below. Your version may be slightly different. 
+The expected output format is below. Your version may be slightly different.
 
 ```output
 2.12.0
 tf.Tensor(342.34387, shape=(), dtype=float32)
 ```
 
-### PyTorch
+### How do I use PyTorch with Anaconda?
 
 Create a new conda environment named torch, install PyTorch, and activate the new environment.
 
@@ -180,6 +179,6 @@ tensor([[0.9287, 0.5931, 0.0239],
 ```
 
 
-You are ready to use Anaconda Distribution. 
+You are ready to use Anaconda Distribution.
 
 Explore the many machine learning articles and examples using TensorFlow and PyTorch.

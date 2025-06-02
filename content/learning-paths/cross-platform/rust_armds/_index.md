@@ -13,7 +13,7 @@ prerequisites:
     - An installation of Arm Development Studio.
     - A basic understanding of Rust programming.
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 
 ### Tags
@@ -32,8 +32,22 @@ tools_software_languages:
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
-    - embedded-systems
-    - microcontrollers
+    - embedded-and-microcontrollers
+    - embedded-and-microcontrollers
+
+further_reading:
+    - resource:
+        title: The Embedded Rust Book
+        link: https://docs.rust-embedded.org/book/
+        type: documentation
+    - resource:
+        title: Cortex-M Quickstart (Github)
+        link: https://github.com/rust-embedded/cortex-m-quickstart
+        type: website
+    - resource:
+        title: Arm Development Studio
+        link: https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio
+        type: website
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

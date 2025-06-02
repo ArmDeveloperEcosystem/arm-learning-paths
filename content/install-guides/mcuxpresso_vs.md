@@ -20,7 +20,7 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
 
-author_primary: Ronan Synnott
+author: Ronan Synnott
 
 ### Link to official documentation
 official_docs: https://github.com/nxp-mcuxpresso/vscode-for-mcux/wiki
@@ -39,13 +39,13 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 See [The New Era of MCUXpresso Starts Today with VS Code and Open-CMSIS-Packs](https://www.nxp.com/company/blog/the-new-era-of-mcuxpresso-starts-today-with-vs-code-and-open-cmsis-packs:BL-THE-NEW-ERA-OF-MCUXPRESSO) for more information.
 
 
-## Before you begin
+## What do I need before installing MCUXpresso for VS Code?
 
 [Download](https://code.visualstudio.com/download), install, and start `Visual Studio Code` on your desktop.
 
 Linux, macOS, and Windows are supported. 
 
-## Install MCUXpresso for VS Code
+## How do I install MCUXpresso for VS Code?
 
 `MCUXpresso for VS Code` is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=NXPSemiconductors.mcuxpresso).
 
@@ -57,7 +57,7 @@ Install the `MCUXpresso` extension:
 
 Visual Studio Code will install the extension. `MCUXpresso` is now available in the `Activity Bar`.
 
-### Install additional dependencies
+### How do I install additional dependencies?
 
 Additional software packages can be installed with the [MCUXpresso Installer](https://github.com/nxp-mcuxpresso/vscode-for-mcux/wiki/Dependency-Installation) for your host operating system.
 
@@ -67,7 +67,7 @@ Select one or more packages and click `Install`.
 
 ![MCUXpresso Installer #center](/install-guides/_images/MCUXpresso_Installer.png)
 
-### Keil Studio for VS Code
+### Are there other embedded development extensions for VS Code?
 
 [Keil Studio for VS Code](https://www.keil.arm.com/) is also available. Refer to the [Arm Keil Studio for VS Code install guide](/install-guides/keilstudio_vs/) for more information.
 

@@ -40,9 +40,9 @@ sudo systemctl start memcached
 
 If you prefer to build from source code, use:
 ```bash
-wget https://memcached.org/files/memcached-1.6.19.tar.gz
-tar -zxvf memcached-1.6.19.tar.gz
-cd memcached-1.6.19
+wget https://memcached.org/files/memcached-1.6.27.tar.gz
+tar -zxvf memcached-1.6.27.tar.gz
+cd memcached-1.6.27
 ./configure && make && make test && sudo make install
 ```
 You can verify the latest available version on the [downloads page](https://memcached.org/downloads).

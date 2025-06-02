@@ -1,22 +1,22 @@
 ---
-title: Build and Run Tensorflow with SVE
+title: Build and Run TensorFlow with SVE
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Build Tensorflow with SVE enabled
+## Build TensorFlow with SVE enabled
 
-Now that you have seen that you can use Eigen with SVE enabled, it's time to build your own SVE-enabled Tensorflow.
+Now that you have seen that you can use Eigen with SVE enabled, it's time to build your own SVE-enabled TensorFlow.
 
-Tensorflow is a complex application, and building it requires significant effort. However, following the instructions below, you should be able to build and run it. 
+TensorFlow is a complex application, and building it requires significant effort. However, following the instructions below, you should be able to build and run it. 
 
-### Install Build Requirements for Tensorflow
+### Install Build Requirements for TensorFlow
 
-You are going to follow the [Tensorflow Instructions to build from source](https://www.tensorflow.org/install/source) with some slight modifications.
+You are going to follow the [TensorFlow Instructions to build from source](https://www.tensorflow.org/install/source) with some slight modifications.
 
-Before you build Tensorflow, you need to install the build dependencies first.
+Before you build TensorFlow, you need to install the build dependencies first.
 
 The following packages are required for the recent Debian/Ubuntu distribution used here. You might have to change the packages if you're using a different Linux distribution:
 
@@ -48,14 +48,14 @@ Your shell prompt now shows the virtual environment, which should look like this
 (python-venv) $
 ```
 
-Next, clone Tensorflow from its Git repository to your system:
+Next, clone TensorFlow from its Git repository to your system:
 
 ```bash
 git clone https://github.com/tensorflow/tensorflow.git
 cd tensorflow
 ```
 
-Now you can configure Tensorflow. Configuration requires you to answer some questions, but you can select the defaults.
+Now you can configure TensorFlow. Configuration requires you to answer some questions, but you can select the defaults.
 
 You need to pass the relevant SVE flags as you did before to make sure that Eigen selects the SVE backend.
 
@@ -111,13 +111,13 @@ When the build is complete, you should have `tensorflow` `pip` package in this d
 tensorflow_cpu-2.17.0-cp311-cp311-linux_aarch64.whl
 ```
 
-You are finally able to install your custom Tensorflow build to your system, using `pip install`:
+You are finally able to install your custom TensorFlow build to your system, using `pip install`:
 
 ```bash
 pip install
 ```
 
-Installing it will take a while as it will install all dependencies but when it finishes you should have Tensorflow ready to use! 
+Installing it will take a while as it will install all dependencies but when it finishes you should have TensorFlow ready to use! 
 
 You can test it to see if it works by running:
 
@@ -126,5 +126,5 @@ python3 -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000,
 tf.Tensor(492.89847, shape=(), dtype=float32)
 ```
 
-If you get the above response then your Tensorflow installation was successful.
+If you get the above response then your TensorFlow installation was successful.
 

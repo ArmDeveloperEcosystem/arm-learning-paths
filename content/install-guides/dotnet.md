@@ -1,7 +1,7 @@
 ---
 layout: installtoolsall
 minutes_to_complete: 10
-author_primary: Jason Andrews
+author: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://learn.microsoft.com/en-us/dotnet/
@@ -11,8 +11,6 @@ test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
 title: .NET SDK
 tool_install: true
 weight: 1
@@ -20,7 +18,7 @@ weight: 1
 
 The [.NET SDK](https://dotnet.microsoft.com/en-us/) is a free, open-source, and cross-platform development environment that provides a broad set of tools and libraries for building applications. You can use it to create a variety of applications including web apps, mobile apps, desktop apps, and cloud services.
 
-The .NET SDK is available for Linux distributions on Arm-based systems. 
+The .NET SDK is available for Linux distributions on Arm-based systems.
 
 ## What should I do before installing the .NET SDK on Arm Linux?
 
@@ -44,7 +42,7 @@ There are two ways to install the .NET SDK on your computer:
 - Using the Linux package manager.
 - Using the install script.
 
-Select the one that works best for you. 
+Select the one that works best for you.
 
 ### How can I install .NET SDK using the Linux package manager?
 
@@ -68,11 +66,11 @@ To install the .NET SDK using a script, follow the instructions below:
 
 1.	Download the install script:
 
-```bash 
+```bash
 wget https://dot.net/v1/dotnet-install.sh
 ```
 
-2.	Run the script (it will install .NET SDK 8 under the folder .dotnet): 
+2.	Run the script (it will install .NET SDK 8 under the folder .dotnet):
 
 You have some options to specify the version you want to install.
 
@@ -104,9 +102,9 @@ You can also add the search path to your `$HOME/.bashrc` so it is set for all ne
 
 ## How do I verify the .NET SDK installation?
 
-To check that the installation was successful, type: 
+To check that the installation was successful, type:
 
-```bash 
+```bash
 dotnet --list-sdks
 ```
 
@@ -190,7 +188,7 @@ The expected output in the console is:
 Hello World!
 ```
 
-You are ready to use the .NET SDK on Arm Linux. 
+You are ready to use the .NET SDK on Arm Linux.
 
 You can find more information about .NET on Arm in the [AWS Graviton Technical Guide](https://github.com/aws/aws-graviton-getting-started/blob/main/dotnet.md).
 

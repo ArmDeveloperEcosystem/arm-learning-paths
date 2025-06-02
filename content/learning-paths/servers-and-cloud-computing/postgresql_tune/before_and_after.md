@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ##  About database performance tuning
 
-Deployment configurations and the profile of SQL requests made by client will differ based on the use case. This means there is no one size fits all set of tuning parameters for `PostgreSQL`.  Use the information in this learning path to help you tune `PostgreSQL` for your use case.
+Deployment configurations and the profile of SQL requests made by clients will differ based on the use case. This means there is no one size fits all set of tuning parameters for `PostgreSQL`.  Use the information in this learning path as guidance to help you tune `PostgreSQL` for your use case. Make sure to test any changes made to tuning parameters.
 
 ##  Importance of tuning
 

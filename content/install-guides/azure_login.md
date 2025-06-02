@@ -11,7 +11,7 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://learn.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login
@@ -26,11 +26,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 In this section you will learn how to authenticate to the Azure environment using the Azure CLI. After log in, the CLI allows you to query and interact with Azure cloud resources.
 
-## Before you begin
+## How do I prepare to authenticate using the Azure CLI?
 
 Install the Azure CLI on your machine using the [install guide](/install-guides/azure-cli/).
 
-## Sign in interactively
+## How do I sign in interactively to Azure?
 
 Run the following command to initiate the log in:
 
@@ -51,4 +51,4 @@ You will see the command line details as shown below after you log in.
 
 ![azure #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/1b11ecbe-0e70-48c3-a9bf-6712ad2fba4a)
 
-After a successful log in, you will be able to use the [Azure CLI](../azure-cli) and automation tools like [Terraform](../terraform) from the terminal.
+After a successful log in, you will be able to use the [Azure CLI](/install-guides/azure-cli/) and automation tools like [Terraform](/install-guides/terraform/) from the terminal.

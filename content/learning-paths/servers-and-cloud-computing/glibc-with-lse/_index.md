@@ -14,7 +14,7 @@ prerequisites:
 - An Arm based instance from a cloud service provider.
 - Review the learning path on [LSE](/learning-paths/servers-and-cloud-computing/lse/)
 
-author_primary: Ying Yu, Arm
+author: Ying Yu
 
 ### Tags
 skilllevels: Advanced
@@ -34,6 +34,19 @@ tools_software_languages:
 - Glibc
 - LSE
 - MongoDB
+- Runbook
+
+
+
+further_reading:
+    - resource:
+        title: Arm's LSE for atomics and MySQL
+        link: https://mysqlonarm.github.io/ARM-LSE-and-MySQL/
+        type: blog
+    - resource:
+        title: MongoDB documentation
+        link: https://www.mongodb.com/docs/
+        type: documentation
 
 
 ### FIXED, DO NOT MODIFY

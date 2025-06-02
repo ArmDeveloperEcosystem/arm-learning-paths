@@ -11,9 +11,9 @@ learning_objectives:
     - Use PAPI to instrument event counters in code
     - Use the Linux perf_event_open system call to instrument event counters in code
 prerequisites:
-    - An Arm computer running Linux. A bare metal or cloud metal instance is best because they expose more counters. You can use a virtual machine (VM), but fewer counters may be available.
+    - An Arm computer running Linux. A bare metal or cloud metal instance is best because they expose more counters. You can use a virtual machine (VM), but fewer counters may be available. These instructions have been tested on the `a1.metal` instance type.
 
-author_primary: Julio Suarez
+author: Julio Suarez
 
 ### Tags
 skilllevels: Advanced
@@ -25,8 +25,25 @@ tools_software_languages:
     - perf
     - Assembly
     - GCC
+    - Runbook
+
 operatingsystems:
     - Linux
+
+further_reading:
+    - resource:
+        title: Linux perf_events documentation
+        link: https://www.man7.org/linux/man-pages/man2/perf_event_open.2.html
+        type: documentation
+    - resource:
+        title: PAPI documentation
+        link: https://github.com/icl-utk-edu/papi/wiki
+        type: documentation
+    - resource:
+        title: Perf
+        link: https://en.wikipedia.org/wiki/Perf_%28Linux%29
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

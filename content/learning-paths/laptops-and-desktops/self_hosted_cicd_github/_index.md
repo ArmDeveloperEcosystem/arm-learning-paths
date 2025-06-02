@@ -15,7 +15,7 @@ prerequisites:
     - A DockerHub account. You can set up a free account [here](https://hub.docker.com/signup).
     - A GitHub account. You can sign up [here](https://github.com/signup).
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Intermediate
@@ -27,6 +27,20 @@ operatingsystems:
 tools_software_languages:
     - .NET
     - Visual Studio Code
+
+further_reading:
+    - resource:
+        title: GitHub Actions
+        link: https://docs.github.com/en/actions
+        type: documentation
+    - resource:
+        title: Docker Hub
+        link: https://hub.docker.com
+        type: website
+    - resource:
+        title: Self-hosted runners
+        link: https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners
+        type: website
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

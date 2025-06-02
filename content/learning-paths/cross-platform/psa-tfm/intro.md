@@ -17,7 +17,7 @@ The software stack can be executed on the Corstone-1000 Fixed Virtual Platform (
 
 You can access the FVP with [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware). Setup instructions are given in the [Arm Virtual Hardware install guide](/install-guides/avh#corstone).
 
-The Corstone-1000 FVP is also available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. Setup instructions are given in the [install guide](/install-guides/fm_fvp). Use this for a local (Linux) development environment.
+The Corstone-1000 FVP is also available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. Setup instructions are given in the [install guide](/install-guides/fm_fvp). Use this for a local development environment. Linux (AArch64 and x86) and Windows (x86 only) hosts are supported.
 
 
 ## MPS3 FPGA prototyping board

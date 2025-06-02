@@ -5,21 +5,15 @@ weight: 2
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## How do I get started on setting up my development platform?
 
-In this section you will setup the structure for the Matrix processing library.
-At the end, you will be able to build the library and an application that uses the library on
-all supported platforms: macOS, Linux, and Windows.
+To begin, make sure you have the following tools available on your development platform:
 
-## Before you begin
-
-You will need the following tools, make sure they are available on your development platform:
-
-- A C++ compiler with C++17 support. Any recent version of Clang or the GNU compiler
-  (gcc) will work.
-- [CMake](/install-guides/cmake/) build tool
-- A build system: [GNU Make](https://www.gnu.org/software/make/) or
-  [Ninja](https://ninja-build.org/)
-- A documentation generator: [Doxygen](https://www.doxygen.nl/)
+- A C++ compiler with C++17 support. Clang or the GNU compiler (gcc) both work.
+- [CMake](/install-guides/cmake/) build tool.
+- A build system. You can use [GNU Make](https://www.gnu.org/software/make/) or
+  [Ninja](https://ninja-build.org/).
+- A documentation generator. You can use [Doxygen](https://www.doxygen.nl/).
 
 On a Ubuntu machine, they can be installed with:
 
@@ -27,49 +21,52 @@ On a Ubuntu machine, they can be installed with:
 sudo apt-get install build-essential clang ninja-build cmake doxygen -y
 ```
 
-On top of those tools, you will also need an IDE (Integrated Development
-Environment). [Visual Studio Code](https://code.visualstudio.com/) is a popular
-choice, and you can install it by following the
+In addition to these tools, you also need an IDE (Integrated Development
+Environment).
+
+[Visual Studio Code](https://code.visualstudio.com/) is a popular
+choice, and you can install it by following these
 [instructions](https://code.visualstudio.com/docs/setup/linux). Alternatively,
 you can use a text editor like [Vim](https://www.vim.org/), [GNU
-Emacs](https://www.gnu.org/software/emacs/) or [Sublime
-Text](https://www.sublimetext.com/) which are also popular choices and all
+Emacs](https://www.gnu.org/software/emacs/), or [Sublime
+Text](https://www.sublimetext.com/), which are also popular and they all
 support extensions that make C++ development easy.
 
+## Source code
 
-## About configuring vs. building
+In case you want to, you can [download the source code](https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/matrix) for this learning path. This will download a `.tar.gz` archive that you will need to expand:
 
-When developing software, two separate but linked aspects must be
-considered:
-- How to configure the project
-- How to build the source code
+```BASH
+tar xfz code-examples-main-learning-paths-cross-platform-matrix.tar.gz
+mv code-examples-main-learning-paths-cross-platform-matrix code-examples
+```
 
-The first aspect is about configuring the project, which covers:
-- The platform itself (Windows, macOS, Linux): each platform has specific
+The source code for this learning path will be available in `code-examples/learning-paths/cross-platform/matrix/`.
+
+## What are the differences between configuring the project and building the code?
+
+When developing software, there are two separate, but linked, stages:
+
+- Configuring the project.
+- Building the source code.
+
+**Configuring the project** includes making decisions and preparatory work around:
+- Selecting a platform, such as Windows, macOS, or Linux - each platform has its own specific
   requirements and usage.
-- Discovering what is available on the platform. For example, `libpng` might be
-  required by the project to process images in the PNG format, and it may or may
-  not be available on the platform. Alternatively, it might be available, but
-  not with a suitable configuration for the project needs. You may need to
-  maintain a custom version of required dependencies.
-- Selecting project features: in some cases, projects might offer some degree of
-  configuration, for example to disable support for PNG format images when a
-  user knows that a feature will never be used. This is done to avoid bloating
-  the application with never used code and functionality.
+- Discovering what is available on the platform - for example, `libpng` might be
+  required by the project to process images in PNG format, but it might not be available on the platform. Alternatively, it might be available, but not with a suitable configuration for the project requirements. You may need to maintain a customized version of required dependencies.
+- Selecting project features - in some cases, projects might offer some degree of configuration, for example, disabling support for a feature that will never be used. This is done to avoid bloating the application with never-used code and functionality.
 
-The second aspect is about building the project, which covers:
-- Compiling the human readable source code to produce binaries (executables and
-  libraries) that can be run. This involves invoking tools
-  like compilers and linkers.
-- Managing dependencies: this ensures the different parts of the project are built
-  in the proper order, and that when a rebuild is necessary (because a file has
-  changed for example), only the required parts of the project are re-built. It
-  is an important optimization to save build time, especially for developers as
-  they spend most of their time in an edit-compile-run loop.
 
-These two aspects are so common that tools are available to ease development and
-cover all situations and platforms. The tool used for this project is
-CMake. CMake is available on all platforms and used by
+**Building the source code** includes:
+- Compiling the human-readable source code to produce binaries (executables and
+  libraries) that can be run. This involves invoking tools like compilers and linkers.
+- Managing dependencies - this ensures that the different parts of the project are built
+  in the correct order, and that when a rebuild is necessary, such as when a file changes, only the required parts of the project are rebuilt. It is an important optimization to save build time, especially for developers who spend most of their time in an edit-compile-run loop.
+
+These two considerations are fundamental to the process of getting set up. Accordingly, tools are available to ease development and
+cover a wide variety of situations and platforms. The tool used for this project is
+**CMake**. CMake is available on all platforms and used by
 numerous projects, from very small projects to large
 projects like [LLVM](https://www.llvm.org) or [Qt](https://www.qt.io/).
 
@@ -77,14 +74,13 @@ projects like [LLVM](https://www.llvm.org) or [Qt](https://www.qt.io/).
 
 Organizing the files in a project is important because it allows you to:
 
-- Easily navigate and find information for new people as well as experienced
-  developers
-- Organize the information for the tools, such as compilers and linkers
-- Organize the information of what will be exported or installed and what is
-  only relevant for building the project
-- Accommodate for future growth: over time, features will be added to the
-  project, which usually translates to more source files. Having the proper
-  directory structure in place will help to keep the project tidy
+- Easily navigate the structure and find information.
+- Organize information for the tools, such as compilers and linkers.
+- Make a distinction between information that is exported or installed, and what is
+  only relevant for building the project.
+- Accommodate for future growth - over time, features are added to the
+  project, which usually translates to more source files. Having an organized
+  directory structure improves the efficiency of the project.
 
 The directory structure of this project is:
 
@@ -98,20 +94,17 @@ Matrix/
 └── src/
 ```
 
-It's a common practice, and CMake recommends it, to build projects outside of
-the source tree as this provides several advantages:
+CMake recommends that you build projects outside of the source tree for the following reasons:
 
-- Keeps clutter out of the source tree, which is often under version control
-- Provides an easy way to remove the build artifacts (object files, libraries,
-  executables, libraries)
-- Allows several build trees to co-exist at the same time, to have for example
-  debug and optimized builds, or builds with different configuration options
+- Reduces clutter in the source tree, which is often under version control.
+- Provides an easy way to remove the build artifacts, such as object files, libraries, and executables.
+- Allows several build trees to co-exist. For example, to have debug and optimized builds, or builds with differing configuration options.
 
-In this case, the project will be built in the `build/` directory.
+In this case, the project is built in the `build/` directory.
 
 {{% notice Note%}}
 If the project is under version control, then the `build/` directory can be
-ignored because the contents can always be regenerated. If you are using `git`,
+ignored as the contents can always be regenerated. If you are using `git`,
 the way to configure `git` to ignore the `build/` directory is to add it to a
 `.gitignore` file. Other revision control systems have a similar way to ignore
 files and directories.
@@ -121,7 +114,7 @@ You will also note that the Matrix library headers are located in a `Matrix/`
 directory. It is highly probable that some of the header files (`Matrix.h` for
 example) will collide with some other file for some users. In order to be sure
 that compilers pick the right files, all the headers are placed in a `Matrix/`
-directory, effectively giving some form of namespace to the include file look-up
+directory, effectively providing some form of namespace to the include file look-up
 by the tools.
 
 The source code for the Matrix library will live in `lib/Matrix` and the
@@ -129,12 +122,23 @@ applications' source code will be located in `src/`.
 
 ## Add a demo application
 
-There is nothing like creating the canonical `Hello, World!` application.
+There is nothing like creating the canonical `Hello, World!` application!
 
 Use your favorite text editor or IDE to
-create the file `src/howdy.cpp` and add the following content to it:
+create the file `src/howdy.cpp` and add the following content:
 
-{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-1/src/howdy.cpp" >}}
+```CPP
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+
+int main(int argc, char *argv[]) {
+    cout << "Hello, World !\n";
+
+    return EXIT_SUCCESS;
+}
+```
 
 ## Setup CMake
 
@@ -142,7 +146,7 @@ CMake reads a file named `CMakeLists.txt` to get the project description
 and all of its instructions.
 
 At the top of your project, create file `CMakeLists.txt` and add the following
-content to it with your text editor:
+content to it, using your text editor:
 
 ```TXT
 cmake_minimum_required(VERSION 3.5)
@@ -153,7 +157,7 @@ add_executable(howdy src/howdy.cpp)
 ```
 
 The `cmake_minimum_required` command at the first line tells CMake that the
-project wants it to be at least version 3.5. This is a very old version because
+project requires at least version 3.5. This is an old version because
 your Matrix project is not using any new commands or options from CMake.
 `cmake_minimum_required` is required, as it helps diagnose version
 mismatches.
@@ -217,8 +221,8 @@ Execute the `howdy` application with:
 Hello, World !
 ```
 
-Depending on your platform, the application may be named slightly differently,
-On Windows it would be `howdy.exe`, so to execute it you would instead
+Depending on your platform, the application might be named slightly differently.
+On Windows, it would be `howdy.exe`, so to execute it you would instead
 have to type:
 
 ```BASH { output_lines = "2" }
@@ -228,14 +232,13 @@ Hello, World !
 
 {{% notice Note%}}
 You can remove the `build` directory at any point without any fear of losing
-important data, as you can always recreate those files with the above configure
-and build steps.
+important data, as you can always recreate those files with the configure-and-build steps described above.
 {{% /notice %}}
 
 ## Add the Matrix library foundations
 
 You will now add the Matrix library foundations: a header file, source code,
-build instructions, and another example program using the library to check
+build instructions, and another example program using the library to check that
 everything is working.
 
 The simplest function you can add at this stage is one that will return the
@@ -244,25 +247,92 @@ library version.
 Add the `Matrix.h` header file, declaring the `Version` object
 and the `getVersion` function and save the file as `include/Matrix/Matrix.h`:
 
-{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-1/include/Matrix/Matrix.h" >}}
+```CPP
+#pragma once
+
+namespace MatComp {
+
+/// The Version struct is used to carry around the major, minor and patch level.
+struct Version {
+    unsigned major; //< The major version level.
+    unsigned minor; //< The minor version level.
+    unsigned patch; //< The patch level.
+};
+
+/// Get the Matrix library version information.
+const Version &getVersion();
+
+} // namespace MatComp
+```
 
 With those declarations in place, create and add the following lines to
 `lib/Matrix/Matrix.cpp` to provide an implementation to `getVersion`:
 
-{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-1/lib/Matrix/Matrix.cpp" >}}
+```CPP
+#include "Matrix/Matrix.h"
+
+namespace {
+const MatComp::Version version = {.major = 0, .minor = 1, .patch = 0};
+}
+
+namespace MatComp {
+
+const Version &getVersion() { return version; }
+
+} // namespace MatComp
+```
 
 Now, you can create a program that will make use of the
 ``getVersion`` function. Use your editor to save the code below as `src/getVersion.cpp`:
 
-{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-1/src/getVersion.cpp" >}}
+```CPP
+#include "Matrix/Matrix.h"
+
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+using namespace MatComp;
+
+int main(int argc, char *argv[]) {
+    const Version &version = getVersion();
+    cout << "Using Matrix version: " << version.major << '.' << version.minor
+         << '.' << version.patch << '\n';
+
+    return EXIT_SUCCESS;
+}
+```
 
 Finally, add the instructions below in the top-level `CMakeLists.txt`:
 
-{{< include-code TXT "content/learning-paths/cross-platform/matrix/projects/chapter-1/CMakeLists.txt" >}}
+```TXT
+# Set the minimum CMake version we require. In our case, it is intentionnally
+# very old as we are not making use of recent CMake features.
+cmake_minimum_required(VERSION 3.5)
+
+# Give a name to our project ('Matrix') and inform CMake about the language used.
+project(Matrix LANGUAGES CXX)
+
+# Add 'howdy', a standalone executable with no dependency to any library that
+# has to be built from the sources in 'src/howdy.cpp'.
+add_executable(howdy src/howdy.cpp)
+
+# Add our 'Matrix' library, that is built as a static library, from source file
+# 'lib/Matrix/Matrix.cpp'. CMake is instruction that C++17 is used, and that
+# the library headers can be found in ${CMAKE_SOURCE_DIR}/include.
+add_library(Matrix STATIC lib/Matrix/Matrix.cpp)
+target_compile_features(Matrix PUBLIC cxx_std_17)
+target_include_directories(Matrix
+  PUBLIC ${CMAKE_SOURCE_DIR}/include)
+
+# Add 'matrix-getVersion', an executable that depends on the Matrix library,
+# that has to be built from source file 'src/getVersion.cpp'.
+add_executable(matrix-getVersion src/getVersion.cpp)
+target_link_libraries(matrix-getVersion Matrix)
+```
 
 The `add_library` instructs CMake how to build the Matrix library. The
-`target_include_directories` specifies where the Matrix library header are
-located, and the `target_compile_features` specifies that C++17 is the version
+`target_include_directories` specifies where the Matrix library header is located, and the `target_compile_features` specifies that C++17 is the version
 of the C++ language that is used by the Matrix library. The `matrix-getVersion`
 executable is compiled from the `src/getVersion.cpp` source file with the
 `add_executable` command and has to be linked with our Matrix library with the
@@ -282,12 +352,11 @@ and run it with:
 Using Matrix version: 0.1.0
 ```
 
-Congratulations, you have constructed a library and a program to test it.
+Congratulations, you have constructed a library and a program to test it!
 
 ## What have you achieved so far ?
 
-At this stage, your Matrix project has the following directory structure:
-slightly different on Windows or Linux):
+At this stage, your Matrix project has the following directory structure, which is slightly different depending on whether it is Windows or Linux:
 
 ```TXT
 Matrix/
@@ -309,19 +378,19 @@ Matrix/
     └── howdy.cpp
 ```
 
-You can download the [archive](/artifacts/matrix/chapter-1.tar.xz) of the
-project in its current state to experiment locally on your machine.
-
 You have created the foundation for developing and evolving your Matrix
-library in a platform agnostic way, meaning it can be easily developed and used
+library in a platform-agnostic way, meaning that it can be easily developed and used
 on macOS, Linux, and Windows. This was done *almost* effortlessly thanks to
-CMake, which shields developers from all the platform specific details like how
+CMake, which shields developers from all the platform-specific details such as how
 to invoke the compiler, build libraries, and link with those libraries on each of
 those platforms.
 
-On top of hiding the platform specific details, CMake also does not force a
-development environment onto project developers as you can use your favorite editor or IDE.
-For example, Visual Studio Code can work seamlessly with CMake thanks to some plugins, and CMake can
+In addition to concealing the platform-specific details, CMake also does not restrict project developers to one specific development environment. You can use your favorite editor or IDE.
+For example, Visual Studio Code can work seamlessly with CMake with plugins, and CMake can
 generate project files for several popular IDEs, such as Xcode, Sublime Text, Eclipse,
 CodeBlocks, and CodeLite. You can run `cmake --help` to get a
 list of supported *generators* (in CMake terminology) for your platform.
+
+You can refer to this chapter source code in
+`code-examples/learning-paths/cross-platform/matrix/chapter-1` in the archive that
+you have downloaded earlier.

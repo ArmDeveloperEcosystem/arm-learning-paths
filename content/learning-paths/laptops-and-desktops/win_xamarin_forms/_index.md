@@ -11,10 +11,10 @@ learning_objectives:
     - Learn how to use the Model-View-ViewModel (MVVM) architectural pattern
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm[virtual machine](/learning-paths/cross-platform/woa_azure/).
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Visual Studio 2022 with .NET desktop development and Universal Windows Platform development installed.
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -29,6 +29,17 @@ tools_software_languages:
     - .NET
     - Visual Studio
     
+further_reading:
+    - resource:
+        title: Xamarin Forms
+        link: https://dotnet.microsoft.com/en-us/apps/xamarin/xamarin-forms
+        type: website
+    - resource:
+        title: The Model-View-ViewModel Pattern
+        link: https://learn.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/mvvm
+        type: documentation   
+
+
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly

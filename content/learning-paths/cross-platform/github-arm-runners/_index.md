@@ -10,14 +10,14 @@ learning_objectives:
     - Use GitHub Actions to automate image builds.
 
 prerequisites:
-    - A GitHub account with a Team or Enterprise Cloud plan.
+    - A GitHub account (a Team or Enterprise Cloud plan is required for private repositories).
     - A Docker Hub account.
 
-author_primary: Jason Andrews
+author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
-subjects: Containers and Virtualization
+subjects: CI-CD
 armips:
     - Neoverse
 operatingsystems:
@@ -25,13 +25,28 @@ operatingsystems:
 tools_software_languages:
     - GitHub
     - Docker
-
+    - Runbook
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
-    - embedded-systems
+    - embedded-and-microcontrollers
+
+further_reading:
+    - resource:
+        title: Linux arm64 hosted runners now available for free in public repositories
+        link: https://github.blog/changelog/2025-01-16-linux-arm64-hosted-runners-now-available-for-free-in-public-repositories-public-preview/
+        type: documentation
+    - resource:
+        title: Using GitHub-hosted runners
+        link: https://docs.github.com/en/actions/using-github-hosted-runners
+        type: documentation
+    - resource:
+        title: Arm64 on GitHub Actions Powering faster, more efficient build systems
+        link: https://github.blog/2024-06-03-arm64-on-github-actions-powering-faster-more-efficient-build-systems/
+        type: blog
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

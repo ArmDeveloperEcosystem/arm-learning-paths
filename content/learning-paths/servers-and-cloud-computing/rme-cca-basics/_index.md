@@ -14,7 +14,7 @@ prerequisites:
     - An aarch64 or x86_64 computer running Ubuntu 22.04. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
     - If you use a client application to access your computer running Ubuntu, make sure that X11 forwarding is enabled.
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -28,7 +28,24 @@ tools_software_languages:
     - FVP
     - RME
     - CCA
+    - Runbook
+
     
+further_reading:
+    - resource:
+        title: Arm Confidential Compute Architecture
+        link: https://www.arm.com/architecture/security-features/arm-confidential-compute-architecture
+        type: website
+    - resource:
+        title: Arm Confidential Compute Architecture open source enablement
+        link: https://www.youtube.com/watch?v=JXrNkYysuXw
+        type: video
+    - resource:
+        title: Learn the architecture - Realm Management Extension
+        link: https://developer.arm.com/documentation/den0126
+        type: documentation
+
+
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly

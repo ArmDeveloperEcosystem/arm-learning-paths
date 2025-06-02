@@ -6,7 +6,7 @@ additional_search_terms:
 
 layout: installtoolsall
 minutes_to_complete: 10
-author_primary: Jason Andrews
+author: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://go.dev/doc/
@@ -20,7 +20,7 @@ weight: 1
 
 [Go](https://go.dev/) is an open source programming language. 
 
-## Before you begin
+## What should I do before installing Go?
 
 Go is available for a variety of operating systems and Linux distributions and has multiple ways to install it. 
 
@@ -40,20 +40,20 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## Download and install
+## How do I download and install Go?
 
 The easiest way to install Go for Ubuntu on Arm is to download a release, extract it, and setup your `PATH` environment variable. 
 
 Download a Go release:
 
 ```bash { target="ubuntu:latest" }
-wget https://go.dev/dl/go1.20.5.linux-arm64.tar.gz
+wget https://go.dev/dl/go1.23.1.linux-arm64.tar.gz
 ```
 
 Extract the release to `/usr/local/go`:
 
 ```bash { target="ubuntu:latest" }
-sudo tar -C /usr/local -xzf ./go1.20.5.linux-arm64.tar.gz
+sudo tar -C /usr/local -xzf ./go1.23.1.linux-arm64.tar.gz
 ```
 
 Add the path to `go` in your `.bashrc` file. 
@@ -62,6 +62,8 @@ Add the path to `go` in your `.bashrc` file.
 echo 'export PATH="$PATH:/usr/local/go/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
+
+## How do I verify Go is working?
 
 Confirm `go` is installed by printing the version:
 
@@ -72,7 +74,7 @@ go version
 The output should print the version:
 
 ```output
-go version go1.20.5 linux/arm64
+go version go1.23.1 linux/arm64
 ```
 
 You are ready to use the Go programming language on your Arm machine running Ubuntu.

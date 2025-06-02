@@ -10,10 +10,10 @@ learning_objectives:
     - Investigate performance improvements gained by running on Arm64
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - '[Qt framework](https://www.qt.io/) or [Qt for Open Source Development](https://www.qt.io/download-open-source)'
 
-author_primary: Dawid Borycki
+author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -25,6 +25,17 @@ operatingsystems:
 tools_software_languages:
     - C/C++
     - Qt    
+
+further_reading:
+    - resource:
+        title: Qt for Windows on ARM
+        link: https://www.qt.io/blog/qt-for-windows-on-arm
+        type: blog
+    - resource:
+        title: Qt Examples And Tutorials
+        link: https://doc.qt.io/qt-6/qtexamplesandtutorials.html
+        type: documentation    
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

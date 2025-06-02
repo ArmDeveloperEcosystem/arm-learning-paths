@@ -9,7 +9,7 @@ additional_search_terms:
 
 layout: installtoolsall
 minutes_to_complete: 15
-author_primary: Jason Andrews
+author: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://kubernetes.io/docs/reference/kubectl
@@ -17,8 +17,6 @@ test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
 title: Kubectl
 tool_install: true
 weight: 1
@@ -30,7 +28,7 @@ The Kubernetes command-line tool, [kubectl](https://kubernetes.io/docs/reference
 
 ## What should I consider before installing kubectl for Ubuntu on Arm?
 
-[General installation information](https://kubernetes.io/docs/tasks/tools/) is available which covers all supported operating systems, but it doesn't talk about Arm. 
+[General installation information](https://kubernetes.io/docs/tasks/tools/) is available which covers all supported operating systems, but it doesn't talk about Arm.
 
 This article provides a quick solution to install `kubectl` for Ubuntu on Arm.
 
@@ -48,7 +46,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## How do I download and Install kubectl for Ubuntu on Arm?
 
-The easiest way to install `kubectl` for Ubuntu on Arm is to use curl and copy the executable to a common location. 
+The easiest way to install `kubectl` for Ubuntu on Arm is to use curl and copy the executable to a common location.
 
 To install curl, for example on ubuntu:
 
@@ -62,7 +60,7 @@ Download and install the latest version of `kubctl`. There is just 1 executable 
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
 ```
 
-If you have sudo or root access, install the executable in a common location for all users. 
+If you have sudo or root access, install the executable in a common location for all users.
 
 ```bash { target="ubuntu:latest" }
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl

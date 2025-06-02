@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - Some familiarity with CI/CD concepts is assumed
 
-author_primary: Pareena Verma
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -29,8 +29,19 @@ tools_software_languages:
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
-    - embedded-systems
-    - microcontrollers
+    - embedded-and-microcontrollers
+    - iot
+
+further_reading:
+    - resource:
+        title: GitHub Actions
+        link: https://docs.github.com/en/actions
+        type: documentation
+    - resource:
+        title: Arm Virtual Hardware
+        link: https://arm-software.github.io/AVH/main/examples/html/GetStarted.html
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

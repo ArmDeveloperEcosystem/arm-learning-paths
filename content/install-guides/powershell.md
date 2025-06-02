@@ -2,7 +2,7 @@
 title: PowerShell
 minutes_to_complete: 10
 official_docs: https://learn.microsoft.com/en-us/powershell/
-author_primary: Jason Andrews
+author: Jason Andrews
 additional_search_terms:
 - pwsh
 - linux
@@ -20,7 +20,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 PowerShell is a cross-platform task automation solution made up of a command-line shell, a scripting language, and a configuration management framework. It runs on a variety of operating systems, including Windows, Linux, and macOS.
 
-## Before you begin
+## What do I need before installing PowerShell?
 
 PowerShell is available for a variety of operating systems and Linux distributions and there are multiple ways to install it.
 
@@ -40,7 +40,7 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## Installation
+## How do I install PowerShell on Arm Linux?
 
 {{% notice Note %}}
 The PowerShell installation documentation for Linux package managers does not work for the Arm architecture because there is no Arm support in the repositories. This may change for future versions of PowerShell.
@@ -93,7 +93,7 @@ PowerShell 7.4.1
 
 You are now ready to use PowerShell on your Arm Linux computer.
 
-## Get started
+## How do I get started with PowerShell?
 
 To print a hello world message using `pwsh` run the following commands:
 

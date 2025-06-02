@@ -13,7 +13,7 @@ prerequisites:
     - An Arm server or virtual machine instance from a cloud service provider with Ubuntu installed
     - Knowledge of how to build a MySQL server and run the sysbench benchmark test
 
-author_primary: Bolt Liu
+author: Bolt Liu
 
 skilllevels: Advanced
 subjects: Databases
@@ -24,11 +24,24 @@ operatingsystems:
 tools_software_languages:
     - MySQL
     - GCC
+    - Runbook
+
 
 test_images:
     - ubuntu:latest
 test_link: null
 test_maintenance: false
+
+further_reading:
+    - resource:
+        title: libhugetlbfs manual page
+        link: https://linux.die.net/man/7/libhugetlbfs
+        type: documentation
+    - resource:
+        title: libhugetlbfs HOW TO
+        link: https://github.com/libhugetlbfs/libhugetlbfs/blob/master/HOWTO
+        type: documentation
+
 
 weight: 1
 layout: learningpathall
