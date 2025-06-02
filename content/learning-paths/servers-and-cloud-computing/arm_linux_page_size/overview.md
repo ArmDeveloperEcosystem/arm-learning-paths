@@ -1,19 +1,19 @@
 ---
-title: Why does page size matter?
+title: Overview
 weight: 2
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Background
+## Page size fundamentals
 
-Before you modify the Linux kernel page size on an Arm system, you need to know what a page is, why page size matters, and how page size directly affects performance.
+Before you modify the Linux kernel page size on an Arm system, you need to know what a page is, why size matters, and how size affects performance.
 
 ## What’s a memory page?
 
 Think of your computer’s memory like a big sheet of graph paper. Each page is one square on that sheet. 
 
-The page table is the legend that identifies which square, the *virtual address*, maps to which corresponding spot in physical RAM. Each page represents a fixed-size block of virtual memory that maps to physical memory through the page table. This mapping is managed by the operating system and the CPU’s Memory Management Unit (MMU).
+The page table acts like a legend on the map, showing which virtual address square corresponds to a specific location in physical RAM. This mapping is managed by the operating system and the CPU’s Memory Management Unit (MMU).
 
 To keep track of these mappings efficiently, CPUs use a fast lookup cache called the Translation Lookaside Buffer (TLB). Every access first attempts a TLB hit; a miss forces a page table lookup. If the page isn't already in the TLB, the CPU must fetch the mapping from memory—a process that adds latency and stalls execution.
 
@@ -66,7 +66,7 @@ In addition, the page size might need to be reviewed over time as the applicatio
 The best way to determine the impact of page size on application performance is to experiment with both options.
 
 {{% notice Warning%}}
-Do not test in a production environment - modifying the Linux kernel page size can lead to system instability or failure. Perform testing in a non-production environment before applying to production systems.
+Do not modify the Linux kernel page size in a production environment. It can lead to system instability or failure. Perform testing in a non-production environment before applying to production systems.
 {{% /notice %}}
 
 Select the Arm Linux distribution you are using to find out how to install the 64K page size kernel.

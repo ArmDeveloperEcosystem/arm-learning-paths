@@ -5,7 +5,7 @@ weight: 4
 layout: learningpathall
 ---
 
-Follow the steps below to install a 64K page size kernel on [Debian 11 “Bullseye” or newer](https://www.debian.org/releases/bullseye/).
+Follow the steps below to install a 64K page size kernel on [Debian 11 “Bullseye” or later](https://www.debian.org/releases/bullseye/).
 
 Debian does not provide a 64K kernel package, so you will need to compile it from source.  
 
@@ -17,7 +17,7 @@ The instructions below use the Debian source package.
 
 ## Verify the current page size
 
-Verify you’re using a 4 KB pagesize kernel by entering the following commands:
+Verify you’re using a 4KB pagesize kernel by entering the following commands:
 
 ```bash
 getconf PAGESIZE
@@ -100,11 +100,11 @@ The output shows the 64k kernel is running:
 6.12.22-64k
 ```
 
-This indicates the current page size is 64K, and you are using the new custom made 64k kernel.  
+This indicates the current page size is 64K, and you are using the new custom-built 64k kernel.  
 
-## Revert back to the 4K kernel
+## Revert to the 4K kernel
 
-To revert back to the kernel we started with, enter:
+To revert to the kernel we started with, enter:
 
 ```bash
 dpkg-query -W -f='${Package}\n' 'linux-image-*-64k*' 'linux-headers-*-64k*' \
@@ -127,4 +127,4 @@ The output should be similar to below -- the full kernel name may vary, but the 
 6.1.0-34-cloud-arm64
 ```
 
-The 4096 indicates the current page size has been reverted to 4KB. 
+The 4096 indicates the current page size has been reverted to 4 KB. 

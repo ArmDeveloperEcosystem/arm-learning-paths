@@ -5,11 +5,11 @@ weight: 5
 layout: learningpathall
 ---
 
-Follow the steps below to install a 64K page size kernel on [CentOS 9  or newer](https://www.centos.org/download/).
+Follow the steps below to install a 64K page size kernel on [CentOS 9  or later](https://www.centos.org/download/).
 
 ## Verify the current page size
 
-Verify you’re using a 4 KB pagesize kernel by entering the following commands:
+Verify you’re using a 4KB pagesize kernel by entering the following commands:
 
 ```bash
 getconf PAGESIZE
@@ -25,9 +25,9 @@ The output should be similar to below. The kernel flavor (the string after the v
 
 The 4096 indicates the current page size is 4KB. If you see a value that is different, you are already using a page size other than 4096 (4K).  On Arm systems, the valid options are 4K, 16K, and 64K.
 
-## Install the 64k kernel package:
+## Install the 64K kernel package:
 
-Enter the command below to install the 64k kernel:
+Enter the command below to install the 64K kernel:
 
 ```bash
 sudo dnf -y install kernel-64k
@@ -68,7 +68,7 @@ The output shows the 64k kernel is running:
 5.14.0-583.el9.aarch64+64k
 ```
 
-## Revert back to the 4K kernel
+## Revert to the 4K kernel
 
 To revert to the original 4K kernel, enter the following:
 
@@ -100,7 +100,7 @@ sudo grubby --set-default "$k4"
 sudo reboot
 ```
 
-Upon reboot, verify you’re on a 4 KB pagesize kernel by entering the following commands:
+Upon reboot, verify you’re on a 4KB pagesize kernel by entering the following commands:
 
 ```bash
 getconf PAGESIZE
