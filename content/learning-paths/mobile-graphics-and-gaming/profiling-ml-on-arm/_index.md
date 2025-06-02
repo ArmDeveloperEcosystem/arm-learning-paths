@@ -29,6 +29,8 @@ armips:
 tools_software_languages:
     - Android Studio
     - LiteRT
+    - Hugging Face
+
 operatingsystems:
     - Android
     - Linux

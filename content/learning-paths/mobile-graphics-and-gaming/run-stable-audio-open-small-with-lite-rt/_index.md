@@ -34,6 +34,7 @@ armips:
 tools_software_languages:
     - C++
     - Python
+    - Hugging Face
 
 operatingsystems:
     - Linux

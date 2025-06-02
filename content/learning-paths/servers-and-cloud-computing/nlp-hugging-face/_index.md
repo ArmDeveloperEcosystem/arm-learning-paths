@@ -24,6 +24,7 @@ operatingsystems:
 tools_software_languages:
     - Python
     - PyTorch
+    - Hugging Face
     
 further_reading:
     - resource:
