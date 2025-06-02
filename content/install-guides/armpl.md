@@ -32,8 +32,8 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-performance-libraries#documentation) provides developers with optimized math libraries for high performance computing applications on Arm Neoverse based hardware.
 
-These libraries include highly optimized functions for BLAS, LAPACK, FFT, sparse linear algebra, libamath and libastring.
-These libraries are free to use and do not require a license. They can be installed either standalone or with your installation of [Arm Compiler for Linux](/install-guides/acfl). This install guide covers the standalone installation.
+These libraries include highly optimized functions for BLAS, LAPACK, FFT, sparse linear algebra, random number generation, libamath and libastring.
+These libraries are free to use and do not require a license.
 
 Arm Performance Libraries are available for use on [Windows 11 on Arm](#windows), [macOS](#macos) (Apple Silicon), and [Linux](#linux) (AArch64) hosts.
 
@@ -63,6 +63,16 @@ Click 'Install' and then 'Finish' to complete the installation.
 
 ![win_wizard04 #left](/install-guides/_images/armpl_wizard04.png)
 
+To install Arm Performance Libraries from a command prompt and automatically accept the End User License Agreement use:
+```console
+msiexec.exe /i arm-performance-libraries_<version>_Windows.msi /quiet ACCEPT_EULA=1
+```
+
+To install Arm Performance Libraries using the `winget` package manager and automatically accept the End User License Agreement use:
+```console
+winget install --accept-package-agreements Arm.ArmPerformanceLibraries
+```
+
 You can now start linking your application to the Arm Performance libraries on your Windows on Arm device. Follow the examples in the included `RELEASE_NOTES` file of your extracted installation directory to get started.
 
 For more information refer to [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/109361).
@@ -74,28 +84,28 @@ For more information refer to [Get started with Arm Performance Libraries](https
 
 In a terminal, run the command shown below to download the macOS package:
 ```console
-wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_25.04/arm-performance-libraries_25.04_macOS.tgz
+wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_25.07/arm-performance-libraries_25.07_macOS.tgz
 ```
 
 Use tar to extract the file:
 ```console
-tar zxvf arm-performance-libraries_25.04_macOS.tgz
+tar zxvf arm-performance-libraries_25.07_macOS.tgz
 ```
 
 Output of above command:
 ```console
-armpl_25.04_flang-new_clang_19.dmg
+armpl_25.07_flang-20.dmg
 ```
 
 Mount the disk image by running from a terminal:
 ```console
-hdiutil attach armpl_25.04_flang-new_clang_19.dmg
+hdiutil attach armpl_25.07_flang-20.dmg
 ```
 
 Now run the installation script as a superuser:
 
 ```console
-/Volumes/armpl_25.04_flang-new_clang_19_installer/armpl_25.04_flang-new_clang_19_install.sh -y
+/Volumes/armpl_25.07_flang-20_installer/armpl_25.07_flang-20_install.sh -y
 ```
 
 Using this command you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory. If you want to change the installation directory location use the `--install_dir=` option with the script and provide the desired directory location.
@@ -107,7 +117,7 @@ For more information refer to [Get started with Arm Performance Libraries](https
 
 ## Linux {#linux}
 
-Arm Performance Libraries are supported on most Linux distributions like Ubuntu, RHEL, SLES and Amazon Linux on an `AArch64` host and compatible with various versions of GCC, LLVM, and NVHPC. The GCC compatible releases are built with GCC 14 and tested with GCC versions 7 to 14. The LLVM compatible releases are tested with LLVM 19.1. The NVHPC compatible releases are tested with NVHPC 24.7.
+Arm Performance Libraries are supported on most Linux distributions like Ubuntu, RHEL, SLES and Amazon Linux on an `AArch64` host and compatible with various versions of GCC, LLVM, and NVHPC. The GCC compatible releases are built with GCC 14 and tested with GCC versions 7 to 14. The LLVM compatible releases are tested with LLVM 20.1. The NVHPC compatible releases are tested with NVHPC 25.5.
 
 ### Manual download and installation
 
@@ -122,26 +132,26 @@ The instructions shown below are for deb based installers for GCC users.
 In a terminal, run the command shown below to download the Debian package:
 
 ```bash
-wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_25.04.1/arm-performance-libraries_25.04.1_deb_gcc.tar
+wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_25.07/arm-performance-libraries_25.07_deb_gcc.tar
 ```
 
 Use `tar` to extract the file and then change directory:
 
 ```bash
-tar xf arm-performance-libraries_25.04.1_deb_gcc.tar
+tar xf arm-performance-libraries_25.07_deb_gcc.tar
 ```
 
 Run the installation script as a super user:
 
 ```bash
-sudo ./arm-performance-libraries_25.04.1_deb/arm-performance-libraries_25.04.1_deb.sh --accept
+sudo ./arm-performance-libraries_25.07_deb/arm-performance-libraries_25.07_deb.sh --accept
 ```
 
 Using the `--accept` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.
 
 If you want to change the installation directory location use the `--install-to` option with the script and provide the desired directory location.
 
-## Download and installation using system packages
+### Download and installation using system packages
 
 Arm Performance Libraries are available to install using Linux system package managers. The instructions shown below are for the Ubuntu system package manager `apt` command.
 
@@ -190,13 +200,13 @@ module avail
 The output should be similar to:
 
 ```output
-armpl/25.04.1_gcc
+armpl/25.07_gcc
 ```
 
 Load the appropriate module:
 
 ```console
-module load armpl/25.04.1_gcc
+module load armpl/25.07_gcc
 ```
 
 You can now compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.
