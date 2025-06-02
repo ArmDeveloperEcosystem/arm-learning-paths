@@ -189,7 +189,7 @@ def generate_html(images, out_dir):
         html.write('</body></html>')
     print(f'Generated report at {html_path}')
 
-def main(benchstat_file: str = '/tmp/benchstat.csv', out_dir: str = '/tmp'):
+def main(benchstat_file, out_dir):
     groups = parse_benchstat(benchstat_file)
     images = []
     for idx, (inst_a, inst_b, metric_name, df) in enumerate(groups):

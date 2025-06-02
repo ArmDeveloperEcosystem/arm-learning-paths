@@ -179,8 +179,23 @@ def main():
             name = available[0]
             print(f"Only one instance available: {name}. Selecting it by default.")
         else:
-            # Prompt user to choose from the available instances
-            name = choose_instance(available)
+            # Prompt user to choose from the available instances (default first)
+            print("Select an instance:")
+            default_idx = 0
+            for idx, inst in enumerate(available):
+                default_marker = " (default)" if idx == default_idx else ""
+                print(f"  {idx+1}. {inst}{default_marker}")
+            while True:
+                choice = input(f"Enter number (1-{len(available)}) [{default_idx+1}]: ").strip()
+                if choice == "":
+                    name = available[default_idx]
+                    break
+                if choice.isdigit():
+                    num = int(choice)
+                    if 1 <= num <= len(available):
+                        name = available[num-1]
+                        break
+                print("Invalid selection, try again.")
 
         zone = get_instance_zone(name)
         remote_dir = prompt("Remote directory", default="~/benchmarks/sweet")
@@ -192,6 +207,7 @@ def main():
             "cmd": BENCHMARKS[bench]
         })
 
+    print("\nRunning benchmarks on the selected instances...")
     # run each benchmark in parallel
     errors = []
     codes = {}
@@ -315,6 +331,55 @@ def main():
         f"{primary['name']}:{remote_tmp}/benchstat.results",
         local_dir, "--zone", primary["zone"]
     ])
+    # ─── After copying benchstat.results locally, prompt for visualization ───
+    results_root = os.path.join(os.getcwd(), "results")
+    try:
+        dirs = [
+            d for d in os.listdir(results_root)
+            if os.path.isdir(os.path.join(results_root, d))
+        ]
+    except FileNotFoundError:
+        print("No results directory found.")
+        return
+    if not dirs:
+        print("No benchmark runs found in results directory.")
+        return
+
+    # Sort directories by last‐modified time, newest first
+    dirs.sort(
+        key=lambda d: os.path.getmtime(os.path.join(results_root, d)),
+        reverse=True
+    )
+
+    print("\nSelect a benchmark run to visualize:")
+    default_idx = 0
+    for idx, dirname in enumerate(dirs):
+        default_marker = " (default)" if idx == default_idx else ""
+        print(f"  {idx+1}. {dirname}{default_marker}")
+
+    # Prompt the user, default = newest (index 0)
+    while True:
+        choice = input(f"Enter number (1-{len(dirs)}) [{default_idx+1}]: ").strip()
+        if choice == "":
+            selection = dirs[default_idx]
+            break
+        if choice.isdigit():
+            num = int(choice)
+            if 1 <= num <= len(dirs):
+                selection = dirs[num-1]
+                break
+        print("Invalid selection, try again.")
+
+    selected_dir = os.path.join(results_root, selection)
+    benchstat_file = os.path.join(selected_dir, "benchstat.results")
+    if not os.path.isfile(benchstat_file):
+        print(f"No benchstat.results file found in {selected_dir}")
+        return
+
+    # Invoke benchstat_report.py on that benchstat.results file:
+    print(f"Generating report for {benchstat_file}…")
+    subprocess.call(["python3", "benchstat_report.py", benchstat_file, selected_dir])
+    print(f"Report generated in {selected_dir}")
 
 if __name__ == "__main__":
     main()
