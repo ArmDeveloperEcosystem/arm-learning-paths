@@ -40,7 +40,7 @@ def make_bar_chart(x_labels, y1, y2, name1, name2, title, xaxis_title, yaxis_tit
         title=title,
         xaxis_title=xaxis_title,
         yaxis_title=yaxis_title,
-        barmode='stack',
+        barmode='group',
         xaxis_tickfont=dict(size=12),
         xaxis_tickangle=-45,
         xaxis_tickmode='array',
