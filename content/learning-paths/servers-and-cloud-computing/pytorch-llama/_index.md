@@ -32,7 +32,7 @@ tools_software_languages:
     - GenAI
     - Python
     - PyTorch
-
+    - Hugging Face
 
 further_reading:
     - resource:

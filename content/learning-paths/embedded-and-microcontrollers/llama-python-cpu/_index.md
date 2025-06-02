@@ -28,7 +28,7 @@ tools_software_languages:
     - GenAI
     - Raspberry Pi
     - Python
-
+    - Hugging Face
 
 further_reading:
     - resource:

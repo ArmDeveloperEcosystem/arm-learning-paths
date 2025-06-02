@@ -95,6 +95,7 @@ tools_software_languages_filter:
 - GoogleTest: 1
 - HammerDB: 1
 - Herd7: 1
+- Hugging Face: 9
 - InnoDB: 1
 - Intrinsics: 1
 - Java: 3
