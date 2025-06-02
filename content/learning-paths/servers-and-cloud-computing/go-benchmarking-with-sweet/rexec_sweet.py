@@ -7,7 +7,11 @@ import threading
 import tempfile
 import os
 import sys
+
 from datetime import datetime
+
+# Cache for GCP instances list during runtime
+cached_instances = None
 
 # Helper: get running GCP VM instances
 def get_running_instances():
@@ -149,14 +153,35 @@ def scp_results(name, zone, remote_dir, local_out):
     subprocess.check_call(scp_cmd)
 
 def main():
+    global cached_instances
     print("\n=== Benchmark Runner ===\n")
     # Prompt once for benchmark to run on both systems
     bench = choose_benchmark()
     systems = []
     for i in (1,2):
         print(f"\n--- System {i} ---")
-        instances = get_running_instances()
-        name = choose_instance(instances)
+
+        # If we haven't fetched instances yet, do so and cache the result.
+        if cached_instances is None:
+            print("Please wait while fetching the instances list...")
+            cached_instances = get_running_instances()
+        # Use cached list
+        available = list(cached_instances)
+
+        # If this is the second iteration, remove the first chosen instance
+        if i == 2:
+            first_choice = systems[0]["name"]
+            if first_choice in available:
+                available.remove(first_choice)
+
+        # If only one instance remains, select it by default.
+        if len(available) == 1:
+            name = available[0]
+            print(f"Only one instance available: {name}. Selecting it by default.")
+        else:
+            # Prompt user to choose from the available instances
+            name = choose_instance(available)
+
         zone = get_instance_zone(name)
         remote_dir = prompt("Remote directory", default="~/benchmarks/sweet")
         systems.append({
