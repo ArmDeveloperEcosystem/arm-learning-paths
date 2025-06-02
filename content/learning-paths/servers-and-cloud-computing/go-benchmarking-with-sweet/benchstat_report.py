@@ -5,15 +5,60 @@ import textwrap
 from io import StringIO
 import plotly.graph_objs as go
 
+import typer
 
-import argparse
-import sys
+# Central hover template
+HOVER_TMPL = "%{{x}}<br>{name}: %{{y:.4g}}<extra></extra>"
 
-class CustomArgumentParser(argparse.ArgumentParser):
-    def error(self, message):
-        # On error, print full help and exit
-        self.print_help()
-        sys.exit(2)
+# Unified label wrapping
+def wrap_label(lbl, width=20):
+    parts = lbl.split('/')
+    wrapped = []
+    for part in parts:
+        wrapped.extend(textwrap.wrap(part, width=width) or [''])
+    return '<br>'.join(wrapped)
+
+
+# Helper function for bar chart creation
+def make_bar_chart(x_labels, y1, y2, name1, name2, title, xaxis_title, yaxis_title, out_path):
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=x_labels,
+        y=y1,
+        name=name1,
+        marker_color='blue',
+        hovertemplate=HOVER_TMPL.format(name=name1)
+    ))
+    fig.add_trace(go.Bar(
+        x=x_labels,
+        y=y2,
+        name=name2,
+        marker_color='orange',
+        hovertemplate=HOVER_TMPL.format(name=name2)
+    ))
+    fig.update_layout(
+        title=title,
+        xaxis_title=xaxis_title,
+        yaxis_title=yaxis_title,
+        barmode='stack',
+        xaxis_tickfont=dict(size=12),
+        xaxis_tickangle=-45,
+        xaxis_tickmode='array',
+        xaxis_tickvals=list(range(len(x_labels))),
+        xaxis_ticktext=x_labels,
+        xaxis_automargin=True,
+        template='plotly_white',
+        margin=dict(
+            t=50,
+            b=250 if xaxis_title == 'Benchmark' else 200,
+            l=100,
+            r=100
+        )
+    )
+    fig.write_html(out_path)
+    return out_path
+
+
 
 def parse_benchstat(file_path):
     with open(file_path, 'r') as f:
@@ -59,20 +104,10 @@ def plot_metric_group(inst_a, inst_b, metric_name, df, out_dir, idx):
     values_a = grouped_data[baseline_col].values
     values_b = grouped_data[compare_col].values
 
-    # Break at '/' then wrap each segment at ~20 characters
-    wrapped_names = []
-    for lbl in x:
-        # insert HTML line breaks at slashes
-        lbl_slash = lbl.replace('/', '<br>')
-        # wrap each part separately
-        parts = lbl_slash.split('<br>')
-        wrapped_parts = []
-        for part in parts:
-            # textwrap.wrap returns list of strings
-            wrapped_parts.extend(textwrap.wrap(part, width=20) or [''])
-        # join all wrapped lines with <br>
-        wrapped_names.append('<br>'.join(wrapped_parts))
+    # Wrap benchmark names
+    wrapped_names = [wrap_label(lbl) for lbl in x]
 
+    # Build comparison labels
     custom_labels = []
     for i, name in enumerate(wrapped_names):
         a = values_a[i]
@@ -88,41 +123,19 @@ def plot_metric_group(inst_a, inst_b, metric_name, df, out_dir, idx):
             f"{inst_b} is {comparison} {inst_a}</span>"
         )
 
-    fig = go.Figure()
-    fig.add_trace(go.Bar(
-        x=custom_labels,
-        y=values_a,
-        name=inst_a,
-        marker_color='blue',
-        hovertemplate='%{x}<br>' + inst_a + ': %{y:.4g}<extra></extra>'
-    ))
-    fig.add_trace(go.Bar(
-        x=custom_labels,
-        y=values_b,
-        name=inst_b,
-        marker_color='orange',
-        hovertemplate='%{x}<br>' + inst_b + ': %{y:.4g}<extra></extra>'
-    ))
-
-    fig.update_layout(
-        title=f"{metric_name} comparison",
-        xaxis_title="Benchmark",
-        yaxis_title=metric_name,
-        barmode='group',
-        xaxis_tickfont=dict(size=12),    # smaller font
-        xaxis_tickangle=-45,             # rotate labels
-        xaxis_tickmode='array',
-        xaxis_tickvals=list(range(len(custom_labels))),
-        xaxis_ticktext=custom_labels,
-        xaxis_automargin=True,           # auto-expand margins
-        template='plotly_white',
-        margin=dict(t=50, b=250, l=100, r=100)
-    )
-
     html_filename = f"{metric_name}_{idx}.html".replace('/', '_').replace(' ', '_')
     html_path = os.path.join(out_dir, html_filename)
-    fig.write_html(html_path)
-    return html_path
+    return make_bar_chart(
+        custom_labels,
+        values_a,
+        values_b,
+        inst_a,
+        inst_b,
+        f"{metric_name} comparison",
+        "Benchmark",
+        metric_name,
+        html_path
+    )
 
 def plot_overall_metrics(groups, out_dir):
     """
@@ -144,43 +157,21 @@ def plot_overall_metrics(groups, out_dir):
         values_b.append(val_b)
 
     # insert HTML line breaks at slashes for metric names
-    wrapped = [m.replace('/', '<br>') for m in metric_names]
-
-    fig = go.Figure()
-    fig.add_trace(go.Bar(
-        x=wrapped,
-        y=values_a,
-        name=inst_a,
-        marker_color='blue',
-        hovertemplate='%{x}<br>' + inst_a + ': %{y:.4g}<extra></extra>'
-    ))
-    fig.add_trace(go.Bar(
-        x=wrapped,
-        y=values_b,
-        name=inst_b,
-        marker_color='orange',
-        hovertemplate='%{x}<br>' + inst_b + ': %{y:.4g}<extra></extra>'
-    ))
-
-    fig.update_layout(
-        title='Overall Metrics Geomean Comparison',
-        xaxis_title='Metric',
-        yaxis_title='Value',
-        barmode='group',
-        xaxis_tickfont=dict(size=12),
-        xaxis_tickangle=-45,
-        xaxis_tickmode='array',
-        xaxis_tickvals=list(range(len(wrapped))),
-        xaxis_ticktext=wrapped,
-        xaxis_automargin=True,
-        template='plotly_white',
-        margin=dict(t=50, b=200)
-    )
+    wrapped = [wrap_label(m) for m in metric_names]
 
     out_filename = 'overall_metrics.html'
     out_path = os.path.join(out_dir, out_filename)
-    fig.write_html(out_path)
-    return out_path
+    return make_bar_chart(
+        wrapped,
+        values_a,
+        values_b,
+        inst_a,
+        inst_b,
+        'Overall Metrics Geomean Comparison',
+        'Metric',
+        'Value',
+        out_path
+    )
 
 def generate_html(images, out_dir):
     html_path = os.path.join(out_dir, 'report.html')
@@ -198,21 +189,7 @@ def generate_html(images, out_dir):
         html.write('</body></html>')
     print(f'Generated report at {html_path}')
 
-def main():
-    parser = CustomArgumentParser(description='Generate benchmark comparison report', add_help=False)
-    # Add custom help flags
-    parser.add_argument('-h', '--help', '-help',
-                        action='help',
-                        help='Show this help message and exit')
-    parser.add_argument('--benchstat-file', '-f',
-                        default='/tmp/benchstat.csv',
-                        help='Path to the benchstat CSV input file')
-    parser.add_argument('--out-dir', '-o',
-                        default='/tmp',
-                        help='Directory where HTML reports will be written')
-    args = parser.parse_args()
-    benchstat_file = args.benchstat_file
-    out_dir = args.out_dir
+def main(benchstat_file: str = '/tmp/benchstat.csv', out_dir: str = '/tmp'):
     groups = parse_benchstat(benchstat_file)
     images = []
     for idx, (inst_a, inst_b, metric_name, df) in enumerate(groups):
@@ -221,4 +198,4 @@ def main():
     generate_html(images, out_dir)
 
 if __name__ == '__main__':
-    main()
+    typer.run(main)
