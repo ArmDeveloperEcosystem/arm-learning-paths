@@ -6,10 +6,15 @@ weight: 40
 layout: learningpathall
 ---
 
-## Installing dependencies
+## Installing Go and Sweet
+Now that you have your GCP VMs set up, it’s time to install Go, Sweet, and the Benchstat comparison tool on **both** VMs.
+
+Copy and paste this script to **both** of your GCP VMs to automatically install all the needed Go and benchmarking dependencies: 
+
 ```bash
+cat <<'EOF' > install_go_and_sweet.sh
+
 #!/usr/bin/env bash
-set -euo pipefail
 
 sudo apt-get -y update
 sudo apt-get -y install git build-essential
@@ -55,146 +60,41 @@ cd benchmarks/sweet
 sweet get -force # to get assets
 
 # Create a configuration file
-
-cat <<EOF > config.toml
+    
+cat <<CONFFILE > config.toml
 [[config]]
-  name = "go-time-config"
+  name = "arm-benchmarks"
   goroot = "/usr/local/go"
+
+CONFFILE
 
 EOF
 
+chmod 755 install_go_and_sweet.sh
+./install_go_and_sweet.sh
+
+```
+
+To test that everything is installed correctly, run the following command on each VM post-script execution:
+
+
+
+```bash
 # Run the benchmarks
-sweet run -count 10 -run="etcd" config.toml # run one, 1X
-
-```
-
-Before we can run the benchmarks, we need to install the required packages and runtimes:
-1. Install apt packages
-2. Install Go
-3. Set up the Go environment
-4. Install the Sweet CLI
-5. clone Benchmarks
-6. Create a configuration file
-7. Run the benchmarks
-8. Compare the results
-9. 
-
-# Go Benchmarking Learning Path: Automated Setup with Bash
-
-In this learning path, you’ll walk through a Bash script that automates the installation of Go 1.24.2, the Sweet multi-node benchmark runner, and the Benchstat comparison tool. Each section corresponds to a phase in the script, from detecting architecture to running your first benchmark run.
-
----
-
-## Step 1: Detect Architecture
-
-The script begins by determining your machine’s CPU architecture:
-
-```bash
-ARCH=$(uname -m)
-case "$ARCH" in
-  arm64|aarch64)  GO_PKG="go1.24.2.linux-arm64.tar.gz"  ;;
-  x86_64|amd64)   GO_PKG="go1.24.2.linux-amd64.tar.gz" ;;
-  *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
-esac
-```
-
-## Download and set arch-specific Go and environment
-
-```bash
-URL="https://go.dev/dl/${GO_PKG}"
-wget -q --show-progress "$URL"
-sudo tar -C /usr/local -xzf "$GO_PKG"
-
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN:/usr/local/go/bin
-```
-
-## Install Sweet, Benchmarks, and Benchstat Tools
-
-With Go in place, install the performance tools:
-
-```bash
-go install golang.org/x/benchmarks/sweet/cmd/sweet@latest
-go install golang.org/x/perf/cmd/benchstat@latest
-
-git clone https://github.com/golang/benchmarks
 cd benchmarks/sweet
-sweet get -force
+sweet run -count 10 -run="markdown" config.toml # run one, 1X
 ```
 
-## Create a Configuration File
+You should see output similar to the following:
 
-Sweet requires a TOML config to know what and where to run. Create a minimal config file:
-
-```bash
-cat <<EOF > config.toml
-[[config]]
-  name = "arm-benchmark-tool"
-  goroot = "/usr/local/go"
-EOF
-```
-
-
-
-
-# All at once
-
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-sudo apt-get -y update
-sudo apt-get -y install git build-essential
-
-# Detect architecture
-ARCH=$(uname -m)
-case "$ARCH" in
-  arm64|aarch64)
-    GO_PKG="go1.24.2.linux-arm64.tar.gz"
-    ;;
-  x86_64|amd64)
-    GO_PKG="go1.24.2.linux-amd64.tar.gz"
-    ;;
-  *)
-    echo "Unsupported architecture: $ARCH"
-    exit 1
-    ;;
-esac
-
-# Download and install architecture-specific Go environments
-
-URL="https://go.dev/dl/${GO_PKG}"
-echo "Downloading $URL..."
-wget -q --show-progress "$URL"
-
-echo "Extracting $GO_PKG to /usr/local..."
-sudo tar -C /usr/local -xzf "$GO_PKG"
-
-echo "Go 1.24.2 installed successfully for $ARCH."
-
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN:/usr/local/go/bin
-
-# Install Sweet, benchmarks, and benchstat tools
-go install golang.org/x/benchmarks/sweet/cmd/sweet@latest
-go install golang.org/x/perf/cmd/benchstat@latest
-
-git clone https://github.com/golang/benchmarks
-cd benchmarks/sweet
-sweet get -force # to get assets
-
-# Create a configuration file
-
-cat <<EOF > config.toml
-[[config]]
-  name = "go-time-config"
-  goroot = "/usr/local/go"
-
-EOF
-
-# Run the benchmarks
-sweet run -count 10 -run="etcd" config.toml # run one, 1X
-
+```output
+[sweet] Work directory: /tmp/gosweet3444550660
+[sweet] Benchmarks: markdown (10 runs)
+[sweet] Setting up benchmark: markdown
+[sweet] Running benchmark markdown for arm-benchmarks: run 1
+...
+[sweet] Running benchmark markdown for arm-benchmarks: run 10
 ```
