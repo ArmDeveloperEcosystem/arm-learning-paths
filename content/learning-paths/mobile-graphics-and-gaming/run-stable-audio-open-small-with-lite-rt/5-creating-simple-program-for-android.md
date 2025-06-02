@@ -1,5 +1,5 @@
 ---
-title: Create a simple program
+title: Create a simple program for Android target
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -36,7 +36,7 @@ A SentencePiece model is a type of subword tokenizer which is used by the audiog
 
 ```bash
 cd $WORKSPACE
-wget https://huggingface.co/google-t5/t5-base/tree/main
+wget https://huggingface.co/google-t5/t5-base/resolve/main/spiece.model
 ```
 
 Verify this model was downloaded to your `WORKSPACE`.
@@ -76,7 +76,13 @@ Start a new shell to access the device's system from your development machine:
 adb shell
 ```
 
-Finally, run the program on your Android device. Play around with the advice from [Download the model](../2-testing-model) section.
+From there, you can then run the audiogen application, which requires just three input arguments:
+
+* **Model Path:** The directory containing your LiteRT models and spiece.model files
+* **Prompt:** A text description of the desired audio (e.g., warm arpeggios on house beats 120BPM with drums effect)
+* **CPU Threads:** The number of CPU threads to use (e.g., 4)
+
+Play around with the advice from [Download and test the model](../2-testing-model) section.
 
 ```bash
 cd /data/local/tmp/app

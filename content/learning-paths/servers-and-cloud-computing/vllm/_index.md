@@ -28,7 +28,7 @@ tools_software_languages:
     - LLM
     - GenAI
     - Python
-
+    - Hugging Face
 
 further_reading:
     - resource:

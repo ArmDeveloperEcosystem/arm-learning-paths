@@ -61,6 +61,7 @@ tools_software_languages_filter:
 - GitHub: 3
 - GitLab: 1
 - Himax SDK: 1
+- Hugging Face: 3
 - IP Explorer: 4
 - Jupyter Notebook: 1
 - K3s: 1

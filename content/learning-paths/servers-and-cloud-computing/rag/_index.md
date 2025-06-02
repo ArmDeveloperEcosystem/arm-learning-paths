@@ -34,6 +34,7 @@ tools_software_languages:
     - Streamlit
     - Google Axion
     - Demo
+    - Hugging Face
 
 further_reading:
     - resource:

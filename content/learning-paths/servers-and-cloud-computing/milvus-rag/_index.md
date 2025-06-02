@@ -25,6 +25,8 @@ tools_software_languages:
     - Python
     - GenAI
     - RAG
+    - Hugging Face
+
 operatingsystems:
     - Linux
 

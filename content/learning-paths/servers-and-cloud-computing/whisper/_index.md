@@ -31,6 +31,8 @@ tools_software_languages:
     - Python
     - Whisper
     - Demo
+    - Hugging Face
+
 cloud_service_providers: AWS
     
 
