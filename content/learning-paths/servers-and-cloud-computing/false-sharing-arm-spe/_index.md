@@ -1,5 +1,5 @@
 ---
-title: Analyze cache behavior with perf c2c on Arm
+title: Analyze cache behavior with Perf C2C on Arm
 
 minutes_to_complete: 15
 
