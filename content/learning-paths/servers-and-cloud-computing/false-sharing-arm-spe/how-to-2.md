@@ -1,5 +1,5 @@
 ---
-title: Set up your environment for Arm SPE and perf c2c profiling
+title: Set up your environment for Arm SPE and Perf C2C profiling
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 ## Select a system with SPE support
 
 {{% notice Learning goal%}}
-Before you can start profiling cache behavior with Arm SPE and `perf c2c`, your system needs to meet a few requirements. In this section, you’ll learn how to check whether your hardware and kernel support Arm SPE, install the necessary tools, and validate that Linux perf can access the correct performance monitoring events. By the end, your environment will be ready to record and analyze memory access patterns using `perf c2c` on an Arm Neoverse system.
+Before you can start profiling cache behavior with Arm SPE and Perf C2C, your system needs to meet a few requirements. In this section, you’ll learn how to check whether your hardware and kernel support Arm SPE, install the necessary tools, and validate that Linux Perf can access the correct performance monitoring events. By the end, your environment will be ready to record and analyze memory access patterns using `perf c2c` on an Arm Neoverse system.
 {{% /notice %}}
 
 SPE requires support from both your hardware and the operating system. Many cloud instances running Linux do not enable SPE-based profiling.
@@ -38,7 +38,7 @@ sudo dnf update -y
 sudo dnf install perf git gcc cmake numactl-devel -y
 ```
 
-Linux perf is a userspace process and SPE is a hardware feature. The Linux kernel must be compiled with SPE support or the kernel module named `arm_spe_pmu` must be loaded.
+Linux Perf is a userspace process and SPE is a hardware feature. The Linux kernel must be compiled with SPE support or the kernel module named `arm_spe_pmu` must be loaded.
 
 Run the following command to confirm if the SPE kernel module is loaded:
 
@@ -86,7 +86,7 @@ Performance features:
   perf in userspace:   disabled
 ```
 
-## Confirm Arm SPE is available to perf
+## Confirm Arm SPE is available to Perf
 
 Run the following command to confirm SPE is available to `perf`: 
 
@@ -132,4 +132,4 @@ For more information about enabling SPE, see the [perf-arm-spe manual page](http
 
 ## Summary
 
-You've confirmed that your system supports Arm SPE, installed the necessary tools, and verified that `perf` can access SPE events. You're now ready to start collecting detailed performance data using `perf c2c`. In the next section, you’ll run a real application and use `perf c2c` to capture cache sharing behavior and uncover memory performance issues.
+You've confirmed that your system supports Arm SPE, installed the necessary tools, and verified that Perf C2C can access SPE events. You're now ready to start collecting detailed performance data using Perf C2C. In the next section, you’ll run a real application and use Perf C2C to capture cache sharing behavior and uncover memory performance issues.
