@@ -36,11 +36,11 @@ further_reading:
         link: https://amperecomputing.com/tuning-guides/understanding-memory-page-sizes-on-arm64
         type: documentation
     - resource:
-        title: Page (computer memory) – Wikipedia
+        title: Computer Memory, Wikipedia page
         link: https://en.wikipedia.org/wiki/Page_(computer_memory)
         type: documentation
     - resource:
-        title: Debian Kernel Source Guide
+        title: Network setup, Debian Kernel Source Guide
         link: https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_kernel_source
         type: documentation
     - resource:
