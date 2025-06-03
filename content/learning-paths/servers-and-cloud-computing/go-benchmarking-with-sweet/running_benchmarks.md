@@ -1,21 +1,23 @@
 ---
-title: Running the benchmarks
+title: How to run the benchmarks
 weight: 50
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Run the Benchmarks
+With setup complete, you can now run and analyze the benchmarks. 
 
-With setup complete, you can run the benchmarks. You'll use the `sweet` tool to run benchmarks and generate reports.  
-
-{{% notice Note %}}
-Make sure you are in 'benchmarks/sweet' directory when running sweet.  The config.toml should already exist in this directory per the install.
-{{% /notice %}} 
+## Overview of the benchmarking process
 
 
-## Choosing a benchmark to run
+`sweet` runs the benchmarks, and `benchstat` is used to analyze and compare two or more results against each other.  For example, if you are interested in seeing performance differences between an Arm and an x86 VM, you would run the benchmarks on each VM to get a benchmark for each instance, and then use `benchstat` to analyze and compare the results of the two.
+
+Benchstat output formats include text (default) or CSV.  When using text format, you get a tabular view of the results. Alternatively, CSV provides you with a format you can use with any tool of your choice that supports it.
+
+To get started, you'll run a benchmark by hand to get a feel for how sweet and benchstat work together.
+
+### Choosing a benchmark to run
 
 Sweet comes ready to run with the following benchmarks:  
 
@@ -34,13 +36,4 @@ Sweet comes ready to run with the following benchmarks:
 | **tile38**        | Stress-tests a Tile38 geospatial database with WITHIN, INTERSECTS, and NEARBY queries to measure spatial query performance.              | `sweet run -count 10 -run="tile38" config.toml`               |
 
 
-It is suggested to run each benchmark at least 10-times (specified via the `count` parameter) to handle outlier/errant runs.
- 
-For example, to run the `markdown` benchmark, you would use:
-
-```bash
-sweet run -count 10 -run="markdown" config.toml
-```
-{{% notice Note %}}
-If you get an error about sweet not being found, re-run the export commands found in the install section: `export GOPATH=$HOME/go;export GOBIN=$GOPATH/bin;export PATH=$PATH:$GOBIN:/usr/local/go/bin`
-{{% /notice %}} 
+When testing, its suggested to run each benchmark at least 10-times (specified via the `count` parameter) to handle outlier/errant runs.
