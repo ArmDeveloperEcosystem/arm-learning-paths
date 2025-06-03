@@ -4,6 +4,7 @@ COLORS = ['\033[94m', '\033[92m']  # blue, green
 RESET = '\033[0m'
 
 import os
+import webbrowser
 import subprocess
 import threading
 import tempfile
@@ -140,7 +141,9 @@ def generate_html(images, out_dir):
                 'Each bar represents the metric for a specific benchmark test.</p>\n'
             )
         html.write('</body></html>')
-    print(f'Generated report at {html_path}')
+    # Only print the path relative to CWD (no /tmp/tmp... prefix)
+    rel_html = os.path.relpath(html_path, start=os.getcwd())
+    print(f'Generated report at {rel_html}')
 
 class BenchstatReport:
     """
@@ -280,10 +283,17 @@ def run_benchstat_report(benchstat_file, selected_dir):
     """
     Run benchstat report generation for the given benchstat_file into selected_dir.
     """
-    print(f"Generating report for {benchstat_file}…")
+    # Strip any '/tmp/tmp...' prefix from filenames when printing
+    short_input = os.path.basename(benchstat_file)
+    short_outdir = os.path.relpath(selected_dir, start=os.getcwd())
+    print(f"Generating report for {short_input}…")
     reporter = BenchstatReport()
     reporter.generate_report(benchstat_file, selected_dir)
-    print(f"Report generated in {selected_dir}")
+    print(f"Report generated in {short_outdir}")
+    # Automatically open the generated report in the default web browser
+    html_path = os.path.join(selected_dir, 'report.html')
+    abs_path = os.path.abspath(html_path)
+    webbrowser.open(f"file://{abs_path}")
 
 # == Main Execution ==
 
