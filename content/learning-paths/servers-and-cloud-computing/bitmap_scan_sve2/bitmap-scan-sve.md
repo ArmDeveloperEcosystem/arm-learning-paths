@@ -13,7 +13,7 @@ layout: "learningpathall"
 
 Bitmap scanning is a fundamental operation in database systems, particularly for analytical workloads. It's used in bitmap indexes, bloom filters, and column filtering operations. The performance of bitmap scanning can significantly impact query execution times, especially for large datasets.
 
-In this learning path, you will explore how to use the SVE2 MATCH instruction available on Arm Neoverse V2 based servers like AWS Graviton4 to optimize bitmap scanning operations. You will compare the performance of scalar, NEON, and SVE2 implementations to demonstrate the significant performance benefits of using specialized vector instructions.
+In this learning path, you will explore how to use SVE instructions available on Arm Neoverse V2 based servers like AWS Graviton4 to optimize bitmap scanning operations. You will compare the performance of scalar, NEON, and SVE implementations to demonstrate the significant performance benefits of using specialized vector instructions.
 
 ## What is Bitmap Scanning?
 
@@ -32,14 +32,14 @@ Let's look at how vector processing has evolved for bitmap scanning:
 1. **Generic Scalar Processing**: Traditional bit-by-bit processing with conditional branches
 2. **Optimized Scalar Processing**: Byte-level skipping to avoid processing empty bytes
 3. **NEON**: Fixed-length 128-bit SIMD processing with vector operations
-4. **SVE/SVE2**: Scalable vector processing with predication and specialized instructions like MATCH
+4. **SVE**: Scalable vector processing with predication and specialized instructions
 
 ## Set Up Your Environment
 
 To follow this learning path, you will need:
 
 1. An AWS Graviton4 instance running `Ubuntu 24.04`. 
-2. GCC compiler with SVE2 support
+2. GCC compiler with SVE support
 
 Let's start by setting up our environment:
 
@@ -264,152 +264,74 @@ size_t scan_bitvector_neon(bitvector_t* bv, uint32_t* result_positions) {
 ```
 This NEON implementation processes 16 bytes at a time with vector instructions. For sparse bitmaps, entire 16-byte chunks can be skipped at once, providing a significant speedup over byte-level skipping. After vector processing, it falls back to scalar code for any remaining bytes that don't fill a complete 16-byte chunk.
 
-### 4. SVE2 MATCH Implementation
+### 4. SVE Implementation
 
-This implementation uses SVE2 instructions which are available in the Arm Neoverse V2 based AWS Graviton 4 processor. It uses the SVE2 MATCH instruction in particular, which is specifically designed for pattern matching operations to efficiently find set bits:
+This implementation uses SVE instructions which are available in the Arm Neoverse V2 based AWS Graviton 4 processor. Copy this SVE implementation into the same file:
 
 ```c
-// Optimized SVE2 MATCH implementation for bit vector scanning
-size_t scan_bitvector_sve2_match(bitvector_t* bv, uint32_t* result_positions) {
+// SVE implementation using svcmp_u8, PNEXT, and LASTB
+size_t scan_bitvector_sve2_pnext(bitvector_t* bv, uint32_t* result_positions) {
     size_t result_count = 0;
     size_t sve_len = svcntb();
+    svuint8_t zero = svdup_n_u8(0);
 
-    // Create pattern vectors for each bit position
-    svuint8_t bit0 = svdup_n_u8(1);   // 00000001
-    svuint8_t bit1 = svdup_n_u8(2);   // 00000010
-    svuint8_t bit2 = svdup_n_u8(4);   // 00000100
-    svuint8_t bit3 = svdup_n_u8(8);   // 00001000
-    svuint8_t bit4 = svdup_n_u8(16);  // 00010000
-    svuint8_t bit5 = svdup_n_u8(32);  // 00100000
-    svuint8_t bit6 = svdup_n_u8(64);  // 01000000
-    svuint8_t bit7 = svdup_n_u8(128); // 10000000
-
-    // Fast path for checking if there are any matches at all
-    bool any_matches = false;
+    // Process the bitvector to find all set bits	
     for (size_t offset = 0; offset < bv->size_bytes; offset += sve_len) {
         svbool_t pg = svwhilelt_b8((uint64_t)offset, (uint64_t)bv->size_bytes);
         svuint8_t data = svld1_u8(pg, bv->data + offset);
-
+        
         // Prefetch next chunk
         if (offset + sve_len < bv->size_bytes) {
             __builtin_prefetch(bv->data + offset + sve_len, 0, 0);
         }
-     // Check if any non-zero bytes in this chunk
-        svuint8_t zero = svdup_n_u8(0);
-        svbool_t is_zero = svcmpeq_u8(pg, data, zero);
-        svbool_t non_zero = svnot_b_z(pg, is_zero);
+        
+        // Find non-zero bytes
+        svbool_t non_zero = svcmpne_u8(pg, data, zero);
+        
+        // Skip if all bytes are zero
+        if (!svptest_any(pg, non_zero)) {
+            continue;
+        }
+        
+        // Create an index vector for byte positions
+        svuint8_t indexes = svindex_u8(0, 1); // 0, 1, 2, 3, ...
+        
+        // Initialize next with false predicate
+        svbool_t next = svpfalse_b();
+        
+        // Find the first non-zero byte
+        next = svpnext_b8(non_zero, next);
+        
+        // Process each non-zero byte using PNEXT
+        while (svptest_any(pg, next)) {
+            // Get the index of this byte
+            uint8_t byte_idx = svlastb_u8(next, indexes);
+            
+            // Get the actual byte value
+            uint8_t byte_value = svlastb_u8(next, data);
 
-        if (svptest_any(pg, non_zero)) {
-            any_matches = true;
-            break;
+            // Calculate the global byte position
+            size_t global_byte_pos = offset + byte_idx;
+            
+            // Process each bit in the byte using scalar code
+            for (int bit_pos = 0; bit_pos < 8; bit_pos++) {
+                if (byte_value & (1 << bit_pos)) {
+                    size_t global_bit_pos = global_byte_pos * 8 + bit_pos;
+                    if (global_bit_pos < bv->size_bits) {
+                        result_positions[result_count++] = global_bit_pos;
+                    }
+                }
+            }
+            
+            // Find the next non-zero byte
+            next = svpnext_b8(non_zero, next);
         }
     }
-
-    // If no matches found in the entire bitvector, return early
-    if (!any_matches) {
-        return 0;  // No matches found
-    }
-
-    // Process the bitvector to find all set bits
-    for (size_t offset = 0; offset < bv->size_bytes; offset += sve_len) {
-        svbool_t pg = svwhilelt_b8((uint64_t)offset, (uint64_t)bv->size_bytes);
-        svuint8_t data = svld1_u8(pg, bv->data + offset);
-
-// Check for each bit position using MATCH
-        // Bit 0
-        svbool_t matches = svmatch_u8(pg, svand_u8_z(pg, data, bit0), bit0);
-        while (svptest_any(pg, matches)) {
-            uint64_t match_idx = svlasta_u64(matches, svindex_u64(0, 1));
-            size_t global_pos = (offset + match_idx) * 8 + 0;
-            if (global_pos < bv->size_bits) {
-                result_positions[result_count++] = global_pos;
-            }
-            matches = svbic_b_z(pg, matches, svbrka_b_z(pg, matches));
-        }
-
-        // Repeat for bits 1-7...
-        // Bit 1
-        matches = svmatch_u8(pg, svand_u8_z(pg, data, bit1), bit1);
-        while (svptest_any(pg, matches)) {
-            uint64_t match_idx = svlasta_u64(matches, svindex_u64(0, 1));
-            size_t global_pos = (offset + match_idx) * 8 + 1;
-            if (global_pos < bv->size_bits) {
-                result_positions[result_count++] = global_pos;
-            }
-            matches = svbic_b_z(pg, matches, svbrka_b_z(pg, matches));
-        }
-
-        // Bit 2
-        matches = svmatch_u8(pg, svand_u8_z(pg, data, bit2), bit2);
-        while (svptest_any(pg, matches)) {
-            uint64_t match_idx = svlasta_u64(matches, svindex_u64(0, 1));
-            size_t global_pos = (offset + match_idx) * 8 + 2;
-            if (global_pos < bv->size_bits) {
-                result_positions[result_count++] = global_pos;
-            }
-            matches = svbic_b_z(pg, matches, svbrka_b_z(pg, matches));
-        }
-
-	// Bit 3
-        matches = svmatch_u8(pg, svand_u8_z(pg, data, bit3), bit3);
-        while (svptest_any(pg, matches)) {
-            uint64_t match_idx = svlasta_u64(matches, svindex_u64(0, 1));
-            size_t global_pos = (offset + match_idx) * 8 + 3;
-            if (global_pos < bv->size_bits) {
-                result_positions[result_count++] = global_pos;
-            }
-            matches = svbic_b_z(pg, matches, svbrka_b_z(pg, matches));
-        }
-
-        // Bit 4
-        matches = svmatch_u8(pg, svand_u8_z(pg, data, bit4), bit4);
-        while (svptest_any(pg, matches)) {
-            uint64_t match_idx = svlasta_u64(matches, svindex_u64(0, 1));
-            size_t global_pos = (offset + match_idx) * 8 + 4;
-            if (global_pos < bv->size_bits) {
-                result_positions[result_count++] = global_pos;
-            }
-            matches = svbic_b_z(pg, matches, svbrka_b_z(pg, matches));
-        }
-	
-	// Bit 5
-        matches = svmatch_u8(pg, svand_u8_z(pg, data, bit5), bit5);
-        while (svptest_any(pg, matches)) {
-            uint64_t match_idx = svlasta_u64(matches, svindex_u64(0, 1));
-            size_t global_pos = (offset + match_idx) * 8 + 5;
-            if (global_pos < bv->size_bits) {
-                result_positions[result_count++] = global_pos;
-            }
-            matches = svbic_b_z(pg, matches, svbrka_b_z(pg, matches));
-        }
-
-        // Bit 6
-        matches = svmatch_u8(pg, svand_u8_z(pg, data, bit6), bit6);
-        while (svptest_any(pg, matches)) {
-            uint64_t match_idx = svlasta_u64(matches, svindex_u64(0, 1));
-            size_t global_pos = (offset + match_idx) * 8 + 6;
-            if (global_pos < bv->size_bits) {
-                result_positions[result_count++] = global_pos;
-            }
-            matches = svbic_b_z(pg, matches, svbrka_b_z(pg, matches));
-        }
-	
-	// Bit 7
-        matches = svmatch_u8(pg, svand_u8_z(pg, data, bit7), bit7);
-        while (svptest_any(pg, matches)) {
-            uint64_t match_idx = svlasta_u64(matches, svindex_u64(0, 1));
-            size_t global_pos = (offset + match_idx) * 8 + 7;
-            if (global_pos < bv->size_bits) {
-                result_positions[result_count++] = global_pos;
-            }
-            matches = svbic_b_z(pg, matches, svbrka_b_z(pg, matches));
-        }
-    }
-
+    
     return result_count;
 }
 ```
-The SVE2 implementation processes all occurences of a specific bit position in parallel across the entire vector. On Graviton4, SVE vectors are 128 bits (16 bytes), allowing processing of 16 bytes at once. It uses the MATCH instruction (`svmatch_u8`) to compare each element in a vector against a specific pattern and sets corresponding bits in a predicate register if they match. 
+The SVE implementation efficiently scans bitmaps by using `svcmpne_u8` to identify non-zero bytes and `svpnext_b8` to iterate through them sequentially. It extracts byte indices and values with `svlastb_u8`, then processes individual bits using scalar code. This hybrid vector-scalar approach maintains great performance across various bitmap densities. On Graviton4, SVE vectors are 128 bits (16 bytes), allowing processing of 16 bytes at once. 
 
 ## Benchmarking Code
 
@@ -465,7 +387,7 @@ int main() {
     uint32_t* result_positions = (uint32_t*)malloc(bitvector_size * sizeof(uint32_t));
 
     printf("%-10s %-15s %-15s %-15s %-15s %-15s\n",
-           "Density", "Set Bits", "Scalar Gen (ms)", "Scalar Opt (ms)", "NEON (ms)", "SVE2 MATCH (ms)");
+           "Density", "Set Bits", "Scalar Gen (ms)", "Scalar Opt (ms)", "NEON (ms)", "SVE (ms)");
     printf("%-10s %-15s %-15s %-15s %-15s %-15s\n",
            "-------", "--------", "--------------", "--------------", "--------", "---------------");
 
@@ -490,7 +412,7 @@ int main() {
         double neon_time = benchmark_scan(scan_bitvector_neon, bv, result_positions,
                                         iterations, &found_neon);
 
-        double sve2_time = benchmark_scan(scan_bitvector_sve2_match, bv, result_positions,
+        double sve2_time = benchmark_scan(scan_bitvector_sve2_pnext, bv, result_positions,
                                         iterations, &found_sve2);
 
         // Print results
@@ -501,10 +423,10 @@ int main() {
         printf("Speedups at %.4f density:\n", density);
         printf("  Scalar Opt vs Scalar Gen: %.2fx\n", scalar_gen_time / scalar_time);
         printf("  NEON vs Scalar Gen: %.2fx\n", scalar_gen_time / neon_time);
-        printf("  SVE2 MATCH vs Scalar Gen: %.2fx\n", scalar_gen_time / sve2_time);
+        printf("  SVE vs Scalar Gen: %.2fx\n", scalar_gen_time / sve2_time);
         printf("  NEON vs Scalar Opt: %.2fx\n", scalar_time / neon_time);
-        printf("  SVE2 MATCH vs Scalar Opt: %.2fx\n", scalar_time / sve2_time);
-        printf("  SVE2 MATCH vs NEON: %.2fx\n\n", neon_time / sve2_time);
+        printf("  SVE vs Scalar Opt: %.2fx\n", scalar_time / sve2_time);
+        printf("  SVE vs NEON: %.2fx\n\n", neon_time / sve2_time);
 
         // Verify results match
         if (found_scalar_gen != found_scalar || found_scalar_gen != found_neon || found_scalar_gen != found_sve2) {
@@ -512,7 +434,7 @@ int main() {
             printf("  Scalar Gen found %zu bits\n", found_scalar_gen);
             printf("  Scalar Opt found %zu bits\n", found_scalar);
             printf("  NEON found %zu bits\n", found_neon);
-            printf("  SVE2 MATCH found %zu bits\n\n", found_sve2);
+            printf("  SVE found %zu bits\n\n", found_sve2);
         }
 
         // Clean up
@@ -537,27 +459,27 @@ gcc -O3 -march=armv9-a+sve2 -o bitvector_scan_benchmark bitvector_scan_benchmark
 
 ## Performance Results
 
-When running on a Graviton4 c8g.4xlarge instance with Ubuntu 24.04, the results should look similar to:
+When running on a Graviton4 c8g.large instance with Ubuntu 24.04, the results should look similar to:
 
 ### Execution Time (ms)
 
-| Density | Set Bits | Scalar Generic | Scalar Optimized | NEON  | SVE2 MATCH |
+| Density | Set Bits | Scalar Generic | Scalar Optimized | NEON  | SVE	      |
 |---------|----------|----------------|------------------|-------|------------|
-| 0.0000  | 0        | 7.169          | 0.456            | 0.056 | 0.087      |
-| 0.0001  | 1,000    | 7.176          | 0.477            | 0.090 | 0.263      |
-| 0.0010  | 9,996    | 7.236          | 0.591            | 0.377 | 0.351      |
-| 0.0100  | 99,511   | 7.821          | 1.570            | 2.252 | 0.924      |
-| 0.1000  | 951,491  | 12.817         | 8.336            | 9.106 | 4.846      |
+| 0.0000  | 0        | 7.169          | 0.456            | 0.056 | 0.093      |
+| 0.0001  | 1,000    | 7.176          | 0.477            | 0.090 | 0.109      |
+| 0.0010  | 9,996    | 7.236          | 0.591            | 0.377 | 0.249      |
+| 0.0100  | 99,511   | 7.821          | 1.570            | 2.252 | 1.353      |
+| 0.1000  | 951,491  | 12.817         | 8.336            | 9.106 | 6.770      |
 
 ### Speedup vs Generic Scalar
 
-| Density | Scalar Optimized | NEON    | SVE2 MATCH |
+| Density | Scalar Optimized | NEON    | SVE        |
 |---------|------------------|---------|------------|
-| 0.0000  | 15.71x           | 127.75x | 82.68x     |
-| 0.0001  | 15.04x           | 80.09x  | 27.26x     |
-| 0.0010  | 12.24x           | 19.21x  | 20.59x     |
-| 0.0100  | 4.98x            | 3.47x   | 8.46x      |
-| 0.1000  | 1.54x            | 1.41x   | 2.64x      |
+| 0.0000  | 15.72x           | 127.41x | 77.70x     |
+| 0.0001  | 15.05x           | 80.12x  | 65.86x     |
+| 0.0010  | 12.26x           | 19.35x  | 29.07x     |
+| 0.0100  | 5.02x            | 3.49x   | 5.78x      |
+| 0.1000  | 1.54x            | 1.40x   | 1.90x      |
 
 ## Understanding the Performance Results
 
@@ -577,29 +499,34 @@ The NEON implementation shows further improvements over the optimized scalar imp
 2. **Vectorized Comparison**: Checking multiple bytes in parallel
 3. **Early Termination**: Quickly determining if a chunk contains any set bits
 
-### NEON vs SVE2 MATCH
+### NEON vs SVE
 
-The performance comparison between NEON and SVE2 MATCH depends on the bit density:
+The performance comparison between NEON and SVE depends on the bit density:
 
 1. **Very Sparse Bit Vectors (0% - 0.01% density)**:
-   - NEON performs better due to lower overhead
-   - NEON achieves up to 127.75x speedup over generic scalar
+   - NEON performs better for empty bitvectors due to lower overhead
+   - NEON achieves up to 127.41x speedup over generic scalar
+   - SVE performs better for very sparse bitvectors (0.001% density)
+   - SVE achieves up to 29.07x speedup over generic scalar at 0.001% density
 
 2. **Higher Density Bit Vectors (0.1% - 10% density)**:
-   - SVE2 MATCH performs better due to more efficient bit pattern matching
-   - SVE2 MATCH achieves up to 2.44x speedup over NEON at 1% density
+   - SVE consistently outperforms NEON
+   - SVE achieves up to 1.66x speedup over NEON at 0.01% density
 
-# Key Optimizations in SVE2 MATCH Implementation
+# Key Optimizations in SVE Implementation
 
-The SVE2 MATCH implementation includes several key optimizations:
+The SVE implementation includes several key optimizations:
 
-1. **Early Termination**: A fast path that quickly checks if there are any non-zero bytes in the bit vector, allowing early termination for the no-hits case.
+1. **Efficient Non-Zero Byte Detection**: Using `svcmpne_u8` to quickly identify non-zero bytes in the bitvector.
 
-2. **Prefetching**: Using `__builtin_prefetch` to reduce memory latency by prefetching the next chunk of data.
+2. **Byte-Level Processing**: Using `svpnext_b8` to efficiently find the next non-zero byte without processing zero bytes.
 
-3. **Bit-Position-Specific Processing**: Using separate MATCH operations for each bit position (0-7) to efficiently find all set bits.
+3. **Value Extraction**: Using `svlastb_u8` to extract both the index and value of non-zero bytes.
 
-4. **Efficient Match Extraction**: Using SVE instructions like `svlasta_u64` and `svbrka_b_z` to efficiently extract match positions.
+4. **Hybrid Vector-Scalar Approach**: Combining vector operations for finding non-zero bytes with scalar operations for processing individual bits.
+
+5. **Prefetching**: Using `__builtin_prefetch` to reduce memory latency by prefetching the next chunk of data.
+
 
 ## Application to Database Systems
 
@@ -607,23 +534,24 @@ These bitmap scanning optimizations can be applied to various database operation
 
 ### 1. Bitmap Index Scans
 
-Bitmap indexes are commonly used in analytical databases to accelerate queries with multiple filter conditions. The SVE2 MATCH implementation can significantly speed up the scanning of these bitmap indexes, especially for queries with low selectivity.
+Bitmap indexes are commonly used in analytical databases to accelerate queries with multiple filter conditions. The NEON and SVE implementations can significantly speed up the scanning of these bitmap indexes, especially for queries with low selectivity.
 
 ### 2. Bloom Filter Checks
 
-Bloom filters are probabilistic data structures used to test set membership. They are often used in database systems to quickly filter out rows that don't match certain conditions. The SVE2 MATCH implementation can accelerate these bloom filter checks.
+Bloom filters are probabilistic data structures used to test set membership. They are often used in database systems to quickly filter out rows that don't match certain conditions. The NEON and SVE implementations can accelerate these bloom filter checks.
 
 ### 3. Column Filtering
 
-In column-oriented databases, bitmap filters are often used to represent which rows match certain predicates. The SVE2 MATCH implementation can speed up the scanning of these bitmap filters, improving query performance.
+In column-oriented databases, bitmap filters are often used to represent which rows match certain predicates. The NEON and SVE implementation can speed up the scanning of these bitmap filters, improving query performance.
 
 ## Best Practices
 
 Based on our benchmark results, here are some best practices for optimizing bitmap scanning operations:
 
 1. **Choose the Right Implementation**: Select the appropriate implementation based on the expected bit density:
-   - For very sparse bit vectors (< 0.1% density): NEON is optimal
-   - For higher densities (≥ 0.1% density): SVE2 MATCH is optimal
+   - For empty bit vectors: NEON is optimal
+   - For very sparse bit vectors (0.001% - 0.1% density): SVE is optimal
+   - For higher densities (> 0.1% density): SVE still outperforms NEON
 
 2. **Implement Early Termination**: Always include a fast path for the no-hits case, as this can provide dramatic performance improvements.
 
@@ -631,12 +559,12 @@ Based on our benchmark results, here are some best practices for optimizing bitm
 
 4. **Consider Memory Access Patterns**: Optimize memory access patterns to improve cache utilization.
 
-5. **Leverage Vector Instructions**: Use NEON or SVE2 instructions to process multiple bytes in parallel.
+5. **Leverage Vector Instructions**: Use NEON or SVE/SVE2 instructions to process multiple bytes in parallel.
 
 ## Conclusion
 
-The SVE2 MATCH instruction provides a powerful way to accelerate bitmap scanning operations in database systems. By implementing these optimizations on Graviton4 instances, you can achieve significant performance improvements for your database workloads.
+The SVE instructions provides a powerful way to accelerate bitmap scanning operations in database systems. By implementing these optimizations on Graviton4 instances, you can achieve significant performance improvements for your database workloads.
 
-The most dramatic speedups are observed for the no-hits case, where early termination optimizations allow the vector implementations to quickly determine that no bits are set without processing the entire bit vector. For higher bit densities, the SVE2 MATCH implementation continues to show significant performance advantages over both scalar and NEON implementations.
+The SVE implementation shows particularly impressive performance for sparse bitvectors (0.001% - 0.1% density), where it outperforms both scalar and NEON implementations. For higher densities, it continues to provide substantial speedups over traditional approaches.
 
 These performance improvements can translate directly to faster query execution times, especially for analytical workloads that involve multiple bitmap operations.
