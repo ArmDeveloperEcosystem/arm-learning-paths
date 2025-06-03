@@ -9,7 +9,6 @@ import threading
 import tempfile
 import sys
 from datetime import datetime
-
 import pandas as pd
 import textwrap
 from io import StringIO
@@ -75,8 +74,12 @@ def parse_benchstat(file_path):
             raise ValueError(f"Unexpected header format: {header_line}")
         raw_a = parts[1]
         raw_b = parts[3] if len(parts) > 3 else 'Unknown'
-        inst_a = raw_a.split('-')[0]
-        inst_b = raw_b.split('-')[0]
+        # Strip any directory prefix so we only keep the basename
+        base_a = os.path.basename(raw_a)
+        base_b = os.path.basename(raw_b)
+        # Now split on '-' to get just the instance name (e.g. 'c4' from 'c4-96.results')
+        inst_a = base_a.split('-')[0]
+        inst_b = base_b.split('-')[0]
         metric_name = lines[1].split(',')[1]
         csv_text = '\n'.join(lines[1:])
         df = pd.read_csv(StringIO(csv_text), engine='python')
