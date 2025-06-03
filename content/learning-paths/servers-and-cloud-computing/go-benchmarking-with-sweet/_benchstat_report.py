@@ -7,6 +7,20 @@ import plotly.graph_objs as go
 
 import typer
 
+class BenchstatReport:
+    """
+    Encapsulate benchstat report generation logic.
+    """
+    def generate_report(self, benchstat_file: str, out_dir: str):
+        # Parse the benchstat file into metric groups
+        groups = parse_benchstat(benchstat_file)
+        images = []
+        for idx, (inst_a, inst_b, metric_name, df) in enumerate(groups):
+            img_path = plot_metric_group(inst_a, inst_b, metric_name, df, out_dir, idx)
+            images.append((img_path, metric_name, inst_a, inst_b))
+        generate_html(images, out_dir)
+
+
 # Central hover template
 HOVER_TMPL = "%{{x}}<br>{name}: %{{y:.4g}}<extra></extra>"
 
@@ -190,12 +204,8 @@ def generate_html(images, out_dir):
     print(f'Generated report at {html_path}')
 
 def main(benchstat_file, out_dir):
-    groups = parse_benchstat(benchstat_file)
-    images = []
-    for idx, (inst_a, inst_b, metric_name, df) in enumerate(groups):
-        img_path = plot_metric_group(inst_a, inst_b, metric_name, df, out_dir, idx)
-        images.append((img_path, metric_name, inst_a, inst_b))
-    generate_html(images, out_dir)
+    reporter = BenchstatReport()
+    reporter.generate_report(benchstat_file, out_dir)
 
 if __name__ == '__main__':
     typer.run(main)
