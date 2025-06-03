@@ -227,57 +227,7 @@ def scp_results(name, zone, remote_dir, local_out):
 # Cache for GCP instances list during runtime
 cached_instances = None
 
-def select_run_directory():
-    """
-    Prompt the user to select a benchmark-run subdirectory under ./results
-    Returns (selected_dir, benchstat_file), or (None, None) if invalid.
-    """
-    results_root = os.path.join(os.getcwd(), "results")
-    try:
-        dirs = [
-            d for d in os.listdir(results_root)
-            if os.path.isdir(os.path.join(results_root, d))
-        ]
-    except FileNotFoundError:
-        print("No results directory found.")
-        return None, None
 
-    if not dirs:
-        print("No benchmark runs found in results directory.")
-        return None, None
-
-    # Sort directories by last‐modified time, newest first
-    dirs.sort(
-        key=lambda d: os.path.getmtime(os.path.join(results_root, d)),
-        reverse=True
-    )
-
-    print("\nSelect a benchmark run to visualize:")
-    default_idx = 0
-    for idx, dirname in enumerate(dirs):
-        default_marker = " (default)" if idx == default_idx else ""
-        print(f"  {idx+1}. {dirname}{default_marker}")
-
-    # Prompt the user, default = newest (index 0)
-    while True:
-        choice = input(f"Enter number (1-{len(dirs)}) [{default_idx+1}]: ").strip()
-        if choice == "":
-            selection = dirs[default_idx]
-            break
-        if choice.isdigit():
-            num = int(choice)
-            if 1 <= num <= len(dirs):
-                selection = dirs[num-1]
-                break
-        print("Invalid selection, try again.")
-
-    selected_dir = os.path.join(results_root, selection)
-    benchstat_file = os.path.join(selected_dir, "benchstat.results")
-    if not os.path.isfile(benchstat_file):
-        print(f"No benchstat.results file found in {selected_dir}")
-        return None, None
-
-    return selected_dir, benchstat_file
 
 def run_benchstat_report(benchstat_file, selected_dir):
     """
@@ -540,7 +490,7 @@ def main():
     subdir = f"{secondary['name']}-{primary['name']}-{bench}-{timestamp}"
     local_dir = os.path.join(local_root, subdir)
     os.makedirs(local_dir, exist_ok=True)
-    print(f"Copying all result files to local directory: {local_dir}")
+    print(f"Please wait, copying over result files to local directory: {local_dir}")
 
     for fname in [
         f"{secondary['name']}.results",
@@ -554,9 +504,34 @@ def main():
         ])
 
     # After copying benchstat.results locally, use helper to select and generate report
-    selected_dir, benchstat_file = select_run_directory()
-    if selected_dir and benchstat_file:
-        run_benchstat_report(benchstat_file, selected_dir)
+    # Automatically select the newest run directory under ./results
+    results_root = os.path.join(os.getcwd(), "results")
+    try:
+        dirs = [
+            d for d in os.listdir(results_root)
+            if os.path.isdir(os.path.join(results_root, d))
+        ]
+    except FileNotFoundError:
+        print("No results directory found.")
+        return
+    if not dirs:
+        print("No benchmark runs found in results directory.")
+        return
+
+    # Sort directories by last-modified time, newest first
+    dirs.sort(
+        key=lambda d: os.path.getmtime(os.path.join(results_root, d)),
+        reverse=True
+    )
+
+    # Take the first (newest) directory
+    selected_dir = os.path.join(results_root, dirs[0])
+    benchstat_file = os.path.join(selected_dir, "benchstat.results")
+    if not os.path.isfile(benchstat_file):
+        print(f"No benchstat.results file found in {selected_dir}")
+        return
+
+    run_benchstat_report(benchstat_file, selected_dir)
 
 
 if __name__ == "__main__":
