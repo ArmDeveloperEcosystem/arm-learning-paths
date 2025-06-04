@@ -6,19 +6,19 @@ weight: 5
 layout: learningpathall
 ---
 
-# Optimizing graphics vertex efficiency for Arm GPUs
+## Diagnosing Poor Vertex Efficiency with Frame Advisor
 
-You are writing a graphics application targeting an Arm Immortalis
-GPU, and not hitting your desired performance. When running the Arm
-Frame Advisor tool, you spot that the draw calls in your shadow map
-creation pass have poor Vertex Memory Efficiency (VME) scores. How
-should you go about improving this?
+Imagine that you’re developing a graphics application targeting an Arm Immortalis GPU, but the performance isn’t where you want it. 
 
-![Frame Advisor screenshot](fa-found-bad-vme-in-content-metrics.png)
+After profiling with **Arm Frame Advisor**, you notice poor **Vertex Memory Efficiency (VME)** in your shadow map draw calls. What’s going wrong, and how can you fix it?
 
-In this Learning Path, you will learn about a common source of rendering
-inefficiency, how to spot the issue using Arm Frame Advisor, and how
-to rectify it.
+
+![Frame Advisor screenshot#center](fa-found-bad-vme-in-content-metrics.png "Arm Frame Advisor showing poor Vertex Memory Efficiency (VME) in shadow map draw calls.")
+
+In this Learning Path, you will learn:
+
+* Common sources of rendering inefficiencies.
+* How to identify and rectify issues using Arm Frame Advisor.
 
 
 ## Shadow mapping
@@ -44,7 +44,7 @@ array structure, which is a commonly used layout in many applications:
 ``` C++
 struct Vertex {
    float position[3];
-   float color[3].
+   float color[3];
    float normal[3];
 };
 
@@ -114,7 +114,7 @@ struct VertexPart1 {
 };
 
 struct VertexPart2 {
-   float color[3].
+   float color[3];
    float normal[3];
 };
 
@@ -152,7 +152,7 @@ vertex memory bandwidth, indicating what proportion of the input
 data is actually used by the shader program. VME can be improved by
 changing vertex memory layout to separate the different streams of
 data such that only the data needed for type of computation is packed
-together. Try not to mix data in that a computation would not use.
+together. Avoid mixing in data that the computation does not use.
 
 # Other links
 
