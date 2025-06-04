@@ -60,6 +60,15 @@ Let's implement three versions of our search function:
 Create a generic implementation in C, checking each element individually against each key. Open a editor of your choice and copy the code shown into a file named `sve2_match_demo.c`:
 
 ```c
+#include <arm_sve.h>
+#include <inttypes.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
 int search_generic_u8(const uint8_t *hay, size_t n, const uint8_t *keys,
                       size_t nkeys) {
   for (size_t i = 0; i < n; ++i) {
@@ -186,6 +195,54 @@ int search_sve2_match_u8_unrolled(const uint8_t *hay, size_t n, const uint8_t *k
   }
   return 0;
 }
+
+// Optimized 16-bit version with unrolling
+int search_sve2_match_u16_unrolled(const uint16_t *hay, size_t n, const uint16_t *keys,
+                                  size_t nkeys) {
+  if (nkeys == 0) return 0; 
+  const size_t VL = svcnth();
+  svbool_t pg = svptrue_b16();
+    
+  // Prepare key vector
+  uint16_t tmp[128] __attribute__((aligned(64)));
+  for (size_t i = 0; i < VL; ++i) tmp[i] = keys[i % nkeys];
+  svuint16_t keyvec = svld1(pg, tmp);
+    
+  size_t i = 0;
+  // Process 4 vectors per iteration
+  for (; i + 4*VL <= n; i += 4*VL) {
+    // Prefetch data ahead
+    __builtin_prefetch(&hay[i + 16*VL], 0, 0);
+
+    svuint16_t block1 = svld1(pg, &hay[i]);
+    svuint16_t block2 = svld1(pg, &hay[i + VL]);
+    svuint16_t block3 = svld1(pg, &hay[i + 2*VL]);
+    svuint16_t block4 = svld1(pg, &hay[i + 3*VL]);
+
+    svbool_t match1 = svmatch_u16(pg, block1, keyvec);
+    svbool_t match2 = svmatch_u16(pg, block2, keyvec);
+    svbool_t match3 = svmatch_u16(pg, block3, keyvec);
+    svbool_t match4 = svmatch_u16(pg, block4, keyvec);
+
+if (svptest_any(pg, match1) || svptest_any(pg, match2) ||
+        svptest_any(pg, match3) || svptest_any(pg, match4))
+      return 1;
+  }
+
+  // Process remaining vectors one at a time
+  for (; i + VL <= n; i += VL) {
+    svuint16_t block = svld1(pg, &hay[i]);
+    if (svptest_any(pg, svmatch_u16(pg, block, keyvec))) return 1;
+  }
+
+  // Handle remainder
+  for (; i < n; ++i) {
+    uint16_t v = hay[i];
+    for (size_t k = 0; k < nkeys; ++k)
+      if (v == keys[k]) return 1;
+  }
+  return 0;
+}
 ```
 The main highlights of this implementation are:
    - Processes 4 vectors per iteration instead of just one
@@ -195,7 +252,7 @@ The main highlights of this implementation are:
 
 ## Benchmarking Framework
 
-To compare the performance of the three implementations, you will use a benchmarking framework that measures the execution time of each implementation:
+To compare the performance of the three implementations, you will use a benchmarking framework that measures the execution time of each implementation. You will also add helper functions for membership testing that are needed to setup the test data with controlled hit rates:
 
 ```c
 // Timing function
@@ -209,6 +266,44 @@ static inline uint64_t nsec_now(void) {
   return (uint64_t)ts.tv_sec * 1000000000ULL + ts.tv_nsec;
 }
 
+// ---------------- helper: membership test for RNG fill ----------------------
+static int key_in_set_u8(uint8_t v, const uint8_t *keys, size_t nkeys) {
+  for (size_t k = 0; k < nkeys; ++k)
+    if (v == keys[k]) return 1;
+  return 0;
+}
+static int key_in_set_u16(uint16_t v, const uint16_t *keys, size_t nkeys) {
+  for (size_t k = 0; k < nkeys; ++k)
+    if (v == keys[k]) return 1;
+  return 0;
+}
+
+// Fill such that P(match) ~= p.
+static void fill_bytes_lowhit(uint8_t *buf, size_t n, const uint8_t *keys,
+                              size_t nkeys, double p) {
+  for (size_t i = 0; i < n; ++i) {
+    if (drand48() < p) {
+      buf[i] = keys[rand() % nkeys];
+    } else {
+      uint8_t v;
+      do { v = (uint8_t)rand(); } while (key_in_set_u8(v, keys, nkeys));
+      buf[i] = v;
+    }
+  }
+}
+static void fill_u16_lowhit(uint16_t *buf, size_t n, const uint16_t *keys,
+                            size_t nkeys, double p) {
+  for (size_t i = 0; i < n; ++i) {
+    if (drand48() < p) {
+      buf[i] = keys[rand() % nkeys];
+    } else {
+      uint16_t v;
+      do { v = (uint16_t)rand(); } while (key_in_set_u16(v, keys, nkeys));
+      buf[i] = v;
+    }
+  }
+}
+
 // Main benchmarking function
 int main(int argc, char **argv) {
   const size_t len        = (argc > 1) ? strtoull(argv[1], NULL, 0) : (1ull << 26);
@@ -220,7 +315,106 @@ int main(int argc, char **argv) {
   printf("Hit probability : %.6f (%.4f %% )\n\n", hit_prob, hit_prob * 100.0);
 
   // Initialize data and run benchmarks...
-}
+  srand48(42);
+  srand(42);
+    
+  // Align memory to 64-byte boundary for better performance
+  uint8_t  *hay8  = aligned_alloc(64, len);
+  uint16_t *hay16 = aligned_alloc(64, len * sizeof(uint16_t));
+  
+  const uint8_t keys8[]   = {0x13, 0x7F, 0xA5, 0xEE, 0x4C, 0x42, 0x01, 0x9B};
+  const uint16_t keys16[] = {0x1234, 0x7F7F, 0xA5A5, 0xEEEE, 0x4C4C, 0x4242};
+  const size_t NKEYS8  = sizeof(keys8)  / sizeof(keys8[0]);
+  const size_t NKEYS16 = sizeof(keys16) / sizeof(keys16[0]);
+
+  fill_bytes_lowhit(hay8,  len, keys8,  NKEYS8,  hit_prob); 
+  fill_u16_lowhit(hay16, len, keys16, NKEYS16, hit_prob);
+
+  uint64_t t_gen8 = 0, t_sve8 = 0, t_sve8_unrolled = 0;
+  uint64_t t_gen16 = 0, t_sve16 = 0, t_sve16_unrolled = 0;
+    
+  for (int it = 0; it < iterations; ++it) {
+    uint64_t t0;
+      
+    t0 = nsec_now();
+    volatile int r = search_generic_u8(hay8, len, keys8, NKEYS8); (void)r;
+    t_gen8 += nsec_now() - t0;
+  
+   #if defined(__ARM_FEATURE_SVE2)
+    t0 = nsec_now();
+    r = search_sve2_match_u8(hay8, len, keys8, NKEYS8); (void)r;
+    t_sve8 += nsec_now() - t0;
+
+    t0 = nsec_now();
+    r = search_sve2_match_u8_unrolled(hay8, len, keys8, NKEYS8); (void)r;
+    t_sve8_unrolled += nsec_now() - t0;
+#endif
+
+t0 = nsec_now();
+    r = search_generic_u16(hay16, len, keys16, NKEYS16); (void)r;
+    t_gen16 += nsec_now() - t0;
+
+#if defined(__ARM_FEATURE_SVE2)
+    t0 = nsec_now();
+    r = search_sve2_match_u16(hay16, len, keys16, NKEYS16); (void)r;
+    t_sve16 += nsec_now() - t0;
+
+    t0 = nsec_now();
+    r = search_sve2_match_u16_unrolled(hay16, len, keys16, NKEYS16); (void)r;
+    t_sve16_unrolled += nsec_now() - t0;
+#endif
+  }
+// ---------- latency results ----------
+  printf("Average latency over %d iterations (ns):\n", iterations);
+  printf("  generic_u8       : %.2f\n", (double)t_gen8 / iterations);
+#if defined(__ARM_FEATURE_SVE2)
+  printf("  sve2_u8          : %.2f\n", (double)t_sve8 / iterations);
+  printf("  sve2_u8_unrolled : %.2f\n", (double)t_sve8_unrolled / iterations);
+  printf("  speed‑up (orig)  : %.2fx\n", (double)t_gen8 / t_sve8);
+  printf("  speed‑up (unroll): %.2fx\n\n", (double)t_gen8 / t_sve8_unrolled);
+#else
+  printf("  (SVE2 path not built)\n\n");
+#endif
+  printf("  generic_u16      : %.2f\n", (double)t_gen16 / iterations);
+#if defined(__ARM_FEATURE_SVE2)
+  printf("  sve2_u16         : %.2f\n", (double)t_sve16 / iterations);
+  printf("  sve2_u16_unrolled: %.2f\n", (double)t_sve16_unrolled / iterations);
+  printf("  speed‑up (orig)  : %.2fx\n", (double)t_gen16 / t_sve16);
+  printf("  speed‑up (unroll): %.2fx\n", (double)t_gen16 / t_sve16_unrolled);
+#else
+  printf("  (SVE2 path not built)\n");
+#endif
+// ---------- throughput results ----------
+  const double elems_total = (double)len * iterations;
+  printf("\nThroughput (million items/second):\n");
+  double tp_gen8  = elems_total / (t_gen8 / 1e9) / 1e6;
+  printf("  generic_u8       : %.2f Mi/s\n", tp_gen8);
+#if defined(__ARM_FEATURE_SVE2)
+  double tp_sve8 = elems_total / (t_sve8 / 1e9) / 1e6;
+  double tp_sve8_unrolled = elems_total / (t_sve8_unrolled / 1e9) / 1e6;
+  printf("  sve2_u8          : %.2f Mi/s\n", tp_sve8);
+  printf("  sve2_u8_unrolled : %.2f Mi/s\n", tp_sve8_unrolled);
+  printf("  speed‑up (orig)  : %.2fx\n", tp_sve8 / tp_gen8);
+  printf("  speed‑up (unroll): %.2fx\n\n", tp_sve8_unrolled / tp_gen8);
+#else
+  printf("  (SVE2 path not built)\n\n");
+#endif
+  double tp_gen16 = elems_total / (t_gen16 / 1e9) / 1e6;
+  printf("  generic_u16      : %.2f Mi/s\n", tp_gen16);
+#if defined(__ARM_FEATURE_SVE2)
+  double tp_sve16 = elems_total / (t_sve16 / 1e9) / 1e6;
+  double tp_sve16_unrolled = elems_total / (t_sve16_unrolled / 1e9) / 1e6;
+  printf("  sve2_u16         : %.2f Mi/s\n", tp_sve16);
+  printf("  sve2_u16_unrolled: %.2f Mi/s\n", tp_sve16_unrolled);
+  printf("  speed‑up (orig)  : %.2fx\n", tp_sve16 / tp_gen16);
+  printf("  speed‑up (unroll): %.2fx\n", tp_sve16_unrolled / tp_gen16);
+#else
+  printf("  (SVE2 path not built)\n");
+#endif
+
+  free(hay8);
+  free(hay16);
+  return 0;
 ```
 ## Compiling and Running
 
@@ -234,7 +428,7 @@ Now run the benchmark on a dataset of 65,536 elements (2^16) with a 0.001% hit r
 
 ```bash
 ./sve2_match_demo $((1<<16)) 3 0.00001
-
+```
 The output will look like:
 
 ```output
@@ -299,13 +493,9 @@ When running on a Graviton4 instance with Ubuntu 24.04 and a dataset of 65,536 e
 | 0.01%    | 21.00x     | 27.08x              |
 | 0.1%     | 17.25x     | 20.97x              |
 
-# Understanding the Performance Results
-
-The benchmark results reveal several important insights about the performance characteristics of SVE2 MATCH instructions:
 
 ### Impact of Hit Rate on Performance
-
-The most striking observation is how the performance advantage of SVE2 MATCH varies with the hit rate:
+The benchmark results reveal several important insights about the performance characteristics of SVE2 MATCH instructions. The most striking observation is how the performance advantage of SVE2 MATCH varies with the hit rate:
 
 1. **Very Low Hit Rates (0% - 0.001%)**: 
    - For 8-bit data, SVE2 MATCH Unrolled achieves an impressive 90-95x speedup
@@ -338,32 +528,32 @@ The unrolled implementation consistently outperforms the basic SVE2 MATCH implem
 
 This demonstrates the value of combining algorithmic optimizations (loop unrolling, prefetching) with hardware-specific instructions for maximum performance.
 
-## Applications of SVE2 MATCH
+### Applications of SVE2 MATCH
 
-The SVE2 MATCH instruction can be applied to various real-world scenarios:
+The SVE2 MATCH instruction can be applied to various real-world scenarios such as:
 
-### 1. Database Systems
+**Database Systems**
 
 In database systems, MATCH can accelerate:
 - String pattern matching in text columns
 - Value existence checks in arrays
 - Filtering operations in columnar databases
 
-### 2. Text Processing
+**Text Processing**
 
 For text processing applications, MATCH can speed up:
 - Character set membership tests
 - Word boundary detection
 - Special character identification
 
-### 3. Network Packet Inspection
+**Network Packet Inspection**
 
 In network applications, MATCH can improve:
 - Protocol header inspection
 - Pattern matching in packet payloads
 - Signature-based intrusion detection
 
-### 4. Image Processing
+**Image Processing**
 
 For image processing, MATCH can accelerate:
 - Color palette lookups
