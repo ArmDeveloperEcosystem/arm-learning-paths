@@ -89,6 +89,7 @@ int search_generic_u16(const uint16_t *hay, size_t n, const uint16_t *keys,
   return 0;
 }
 ```
+The `search_generic_u8()` and `search_generic_u16()` functions both return 1 immediately when a match is found in the inner loop.
 
 ### 2. SVE2 MATCH Implementation
 
@@ -137,11 +138,11 @@ int search_sve2_match_u16(const uint16_t *hay, size_t n, const uint16_t *keys,
   return 0;
 }
 ```
-The SVE2 MATCH implementation provides an efficient vectorized search approach with these key technical aspects:
+The SVE MATCH implementation with the `search_sve2_match_u8()` and `search_sve2_match_u16()` functions provide an efficient vectorized search approach with these key technical aspects:
    - Uses SVE2's specialized MATCH instruction to compare multiple elements against multiple keys in parallel
    - Leverages hardware-specific vector length through svcntb() for scalability
    - Prepares a vector of search keys that's compared against blocks of data
-   - Processes data in vector-sized chunks with early termination when matches are found
+   - Processes data in vector-sized chunks with early termination when matches are found. Stops immediately when any element in the vector matches.
    - Falls back to scalar code for remainder elements
 
 ### 3. Optimized SVE2 MATCH Implementation
@@ -245,7 +246,7 @@ if (svptest_any(pg, match1) || svptest_any(pg, match2) ||
 }
 ```
 The main highlights of this implementation are:
-   - Processes 4 vectors per iteration instead of just one
+   - Processes 4 vectors per iteration instead of just one and stops immediately when any match is found in any of the 4 vectors.
    - Uses prefetching (__builtin_prefetch) to reduce memory latency
    - Leverages the svmatch_u8/u16 instruction to efficiently compare each element against multiple keys in a single operation
    - Aligns memory to 64-byte boundaries for better memory access performance
