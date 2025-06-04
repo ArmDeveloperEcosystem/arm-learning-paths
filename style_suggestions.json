@@ -1,0 +1,9 @@
+[
+  {
+    "file": "content/learning-paths/mobile-graphics-and-gaming/optimizing-vertex-efficiency/vme-learning-path.md",
+    "line": 148,
+    "original": "specific inefficiencies in your application to optimize.",
+    "suggested": "specific inefficiencies in your application to improve.",
+    "reason": "Simplify language by replacing 'optimize' with 'improve'."
+  }
+]
