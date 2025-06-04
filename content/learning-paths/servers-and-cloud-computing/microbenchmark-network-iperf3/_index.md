@@ -1,24 +1,27 @@
 ---
 title: Get started with network microbenchmarking and tuning with iperf3
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
-who_is_this_for: Performance Engineers, Linux system administrators or application developers looking to microbenchmark, simulate or tune the networking performance of distributed systems.
+who_is_this_for: This is an introductory topic for performance engineers, Linux system administrators, or application developers who want to microbenchmark, simulate, or tune the networking performance of distributed systems.
 
 learning_objectives: 
-    - Understand how to use the iperf3 tool to microbenchmark different network conditions
-    - Understand how to use the tc tool to simulate different network environments
-    - Understand basic runtime parameters to tune performance for your application
+    - Understand how to use iperf3 and tc for network performance testing and traffic control to microbenchmark different network conditions.
+    - Identify and apply basic runtime parameters to tune application performance.
 
 prerequisites:
-    - Foundational understanding on networking principles such as TCP/IP and UDP.
-    - Access to Arm-based cloud instances or access to physical hardware
+    - Foundational understanding of networking principles such as TCP/IP and UDP.
+    - Access to two Arm-based cloud instances or local Arm Linux systems. 
 
 author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
-subjects: Performance and Optimization
+subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
@@ -26,14 +29,11 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
-
 further_reading:
     - resource:
         title: iperf3 user manual 
         link: https://iperf.fr/iperf-doc.php
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
