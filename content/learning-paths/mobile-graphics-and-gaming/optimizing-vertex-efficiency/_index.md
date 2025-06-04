@@ -1,10 +1,6 @@
 ---
 title: Optimizing graphics vertex efficiency for Arm GPUs
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 10
 
 who_is_this_for: This is an advanced topic for Android graphics application developers.
