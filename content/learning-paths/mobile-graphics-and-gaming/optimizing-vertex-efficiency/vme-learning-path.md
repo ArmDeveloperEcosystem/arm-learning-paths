@@ -10,29 +10,22 @@ layout: learningpathall
 
 Imagine that you’re developing a graphics application targeting an Arm Immortalis GPU, but the performance isn’t where you want it. 
 
-After profiling with **Arm Frame Advisor**, you notice poor **Vertex Memory Efficiency (VME)** in your shadow map draw calls. What’s going wrong, and how can you fix it?
-
+After profiling with Arm Frame Advisor, you might see something similar to the image below, where you have poor Vertex Memory Efficiency (VME) in your shadow map draw calls. You might wonder what’s going wrong, and how can you fix it.
 
 ![Frame Advisor screenshot#center](fa-found-bad-vme-in-content-metrics.png "Arm Frame Advisor showing poor Vertex Memory Efficiency (VME) in shadow map draw calls.")
 
-In this Learning Path, you will learn:
+This Learning Path shows you approaches to addressing this problem, by demonstrating:
 
 * Common sources of rendering inefficiencies.
-* How to identify and rectify issues using Arm Frame Advisor.
-
+* How to identify and rectify issues using Arm Frame Advisor. 
 
 ## Shadow mapping
 
-In this scenario, draw calls in the shadow map render pass are the
-source of our poor VME scores. Let's start by reviewing exactly what
-these draws are doing.
+In this scenario, draw calls in the shadow map render pass are responsible for the low Vertex Memory Efficiency (VME) scores. To understand why, let's begin by reviewing what these draws are doing.
 
-Shadow mapping is the mechanism that decides, for every visible pixel,
-whether it is lit or in shadow. A shadow map is a texture that is
-created as the first part of this process. It is rendered from the
-point of view of the light source, and stores the distance to all of
-the objects that light can see. Parts of a surface that are visible
-to the light are lit, and any part that is occluded must be in shadow.
+*Shadow mapping* is the mechanism that decides whether each visible pixel is lit or in shadow. The process begins by rendering a shadow map - a texture rendered from the point of view of the light source. This texture stores the distance to the nearest surfaces visible to the light. 
+
+During the final render pass, the GPU compares the depth of each pixel from the camera’s viewpoint to the corresponding value in the shadow map. If the pixel is farther away than what the light "sees," it’s considered occluded and rendered in shadow. Otherwise, it is lit.
 
 ## Mesh layout
 
@@ -142,7 +135,7 @@ memory bandwidth fetching non-position data for primitives that are
 ultimately discarded by primitive culling tests.
 
 
-# Conclusion
+## Conclusion
 
 Arm Frame Advisor can give you actionable metrics that can identify
 specific inefficiencies in your application to optimize.
@@ -154,7 +147,7 @@ changing vertex memory layout to separate the different streams of
 data such that only the data needed for type of computation is packed
 together. Avoid mixing in data that the computation does not use.
 
-# Other links
+## Other links
 
 Arm's advice on [attribute layouts][2]
 
