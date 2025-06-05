@@ -1,28 +1,31 @@
 ---
-title: Microbenchmark Existing Network Connection
+title: Microbenchmark the network connection
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Microbenchmark TCP Connection
+## Microbenchmark the TCP connection
 
+You can microbenchmark the bandwidth between the client and server. 
 
-First we will microbenchmark the bandwidth between the client and server. First start the `iperf` server on the server node with the following command. 
+First, start `iperf` in server mode on the server system with the following command: 
 
 ```bash
 iperf3 -s
 ```
+
+You see the output, indicating the server is ready:
 
 ```output
 -----------------------------------------------------------
 Server listening on 5201 (test #1)
 -----------------------------------------------------------
 
-
 ```
-By default, the server listens on port 5201. Use the `-p` flag to specify another port if it is in use.
+
+The default server port is 5201. Use the `-p` flag to specify another port if it is in use.
 
 {{% notice Tip %}}
 If you already have an `iperf3` server running, you can manually kill the process with the following command. 
@@ -31,12 +34,13 @@ If you already have an `iperf3` server running, you can manually kill the proces
  ```
 {{% /notice %}}
 
-
 Next, on the client node, run the following command to run a simple 10-second microbenchmark using the TCP protocol. 
 
 ```bash
 iperf3 -c SERVER -V
 ```
+
+The output is similar to:
 
 ```output
 ...
@@ -65,19 +69,19 @@ rcv_tcp_congestion cubic
 iperf Done.
 ```
 
-- The`Cwnd` stands for the control window size and corresponds to the allowed number of TCP transactions inflight before receiving an acknowledgment `ACK` from the server. This adjusts dynamically to not overwhelm the receiver and adjust for variable link connection strengths. 
+- The`Cwnd` column prints the control window size and corresponds to the allowed number of TCP transactions inflight before receiving an acknowledgment `ACK` from the server. This adjusts dynamically to not overwhelm the receiver and adjust for variable link connection strengths. 
 
-- The `CPU Utilization` row shows both the usage on the sender and receiver. If you are migrating your workload to a different platform, such as from `x86` to `AArch64`, there may be subtle variations. 
+- The `CPU Utilization` row shows both the usage on the sender and receiver. If you are migrating your workload to a different platform, such as from x86 to Arm, there may be variations. 
 
 - The `snd_tcp_congestion cubic` abd `rcv_tcp_congestion cubic` variables show the congestion control algorithm used.
 
-- This `bitrate` shows the throughput achieved under this microbenchmark. As we can see from the above, we have saturated the 5 Gbps bandwidth available to our `t4g.xlarge` AWS instance. 
+- This `bitrate` shows the throughput achieved under this microbenchmark. As you can see, the 5 Gbps bandwidth available to the `t4g.xlarge` AWS instance is saturated. 
 
 ![instance-network-size](./instance-network-size.png)
 
 ### Microbenchmark UDP connection
 
-We can also microbenchmark the `UDP` protocol with the `-u` flag. As a reminder, UDP does not guarantee packet delivery with some packets being lost. As such we need to observe the statistics on the server side to see the % of packet lost and the variation in packet arrival time (jitter). The UDP protocol is widely used in applications that need timely packet delivery, such as online gaming on video calls. 
+You can also microbenchmark the `UDP` protocol with the `-u` flag. As a reminder, UDP does not guarantee packet delivery with some packets being lost. As such you need to observe the statistics on the server side to see the percent of packets lost and the variation in packet arrival time (jitter). The UDP protocol is widely used in applications that need timely packet delivery, such as online gaming and video calls. 
 
 Run the following command from the client to send 2 parallel UDP streams with the `-P 2` option.
 
@@ -85,7 +89,7 @@ Run the following command from the client to send 2 parallel UDP streams with th
 iperf3 -c SERVER -V -u -P 2
 ```
 
-Looking at the server output we can observe 0% of packets where lost for our short test. 
+Looking at the server output you observe 0% of packets where lost for the short test. 
 
 ```output
 [ ID] Interval           Transfer     Bitrate         Jitter    Lost/Total Datagrams
@@ -94,7 +98,7 @@ Looking at the server output we can observe 0% of packets where lost for our sho
 [SUM]   0.00-10.00  sec  2.51 MBytes  2.10 Mbits/sec  0.015 ms  0/294 (0%)  receiver
 ```
 
-Additionally on the client side, our 2 streams saturated 2 of our 4 cores in the local node. 
+Additionally on the client side, the 2 streams saturated 2 of the 4 cores in the system. 
 
 ```output
 CPU Utilization: local/sender 200.3% (200.3%u/0.0%s), remote/receiver 0.2% (0.0%u/0.2%s)
