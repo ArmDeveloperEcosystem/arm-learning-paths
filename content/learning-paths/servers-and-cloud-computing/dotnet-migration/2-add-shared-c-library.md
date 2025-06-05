@@ -106,16 +106,12 @@ in the logging output.
 
 ## Compiling for Arm
 
-If you are compiling for Arm, and you need specific Arm optimizations in your C native code, add the flags here:
+If you are compiling for Arm directly on Azure Cobalt, the compiler understands what default processor optimizations it should use, and you can compile as done in Step 1 above. However, if you are cross-compiling in your build pipeline, you should specify `-mcpu=neoverse-n2 -O3` when running the cross-compiler:
 
 ```bash
-    gcc -shared -o libmylib.so -fPIC mylib.c
+aarch64-linux-gnu-gcc -mcpu=neoverse-n2 -O3 -shared -o libmylib.so -fPIC mylib.c
 ```
 
-Also, if you are cross-compiling from an x86 machine, you will want to use this compiler command instead:
-
-```bash
-aarch64-linux-gnu-gcc -shared -o libmylib.so -fPIC mylib.c
-```
+The `-mcpu=neoverse-n2` flag specifies the Cobalt architecture, and `-O3` ensures that maximum optimizations are completed (including SIMD opimizations).
 
 In the next section, you will explore the tradeoffs of building native AOT arm64 binaries.
