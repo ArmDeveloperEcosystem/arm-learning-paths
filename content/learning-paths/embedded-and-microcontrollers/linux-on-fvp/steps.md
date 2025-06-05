@@ -23,9 +23,7 @@ lib/cpus/aarch64/cortex_a53.S
 ... etc.
 ```
 
-## Why you need this
-
-If the firmware is built without proper cpu_ops, you’ll hit an assertion failure like:
+If the firmware is built without proper `cpu_ops`, you’ll hit an assertion failure like:
 
 ```output
 ASSERT: File lib/cpus/aarch64/cpu_helpers.S Line 00035
@@ -33,22 +31,17 @@ ASSERT: File lib/cpus/aarch64/cpu_helpers.S Line 00035
 
 This means the required CPU operation routines are missing from the build.
 
-## Step-by-Step: Add TF-A Build Flags
+## Add TF-A Build Flags
 
 To include the correct `cpu_ops`, you need to set TF-A build options depending on the CPU.
 
-### Example: A55 CPU FVP
 
-Add the following line to your TF-A build script:
+Add the following line to your TF-A build script to update the options for the the AEMv8-A Base Platform RevC:
 
-```output
+```bash
 ARM_TF_BUILD_FLAGS="$ARM_TF_BUILD_FLAGS HW_ASSISTED_COHERENCY=1 USE_COHERENT_MEM=0"
 ```
 
-### Example: A78 CPU FVP
-```output
-ARM_TF_BUILD_FLAGS="$ARM_TF_BUILD_FLAGS HW_ASSISTED_COHERENCY=1 USE_COHERENT_MEM=0 CTX_INCLUDE_AARCH32_REGS=0"
-```
 {{% notice Note %}}
 USE_COHERENT_MEM=1 cannot be used with HW_ASSISTED_COHERENCY=1.
 {{% /notice %}}

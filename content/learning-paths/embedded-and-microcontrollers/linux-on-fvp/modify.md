@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Modify the Device Tree for CPU FVPs
 
-To run Linux on Arm CPU FVPs, you need to adjust the device tree to match the hardware features of these platforms. This involves removing unsupported nodes (like SMMU (System Memory Management Unit)and PCI (Peripheral Component Interconnect)) and ensuring CPU affinity values are set correctly.
+To run Linux on Arm CPU FVPs, you need to adjust the device tree to match the hardware features of these platforms. This involves removing unsupported nodes - like SMMU (System Memory Management Unit) and PCI (Peripheral Component Interconnect) - and ensuring CPU affinity values are set correctly.
 
 ### Step 1: Remove PCI and SMMU Nodes
 
@@ -35,7 +35,7 @@ Kernel panic - not syncing: Attempted to kill init! exitcode=0x0000000b
 Each FVP model uses specific CPU affinity values. If these don’t match what’s in the device tree, some CPU cores won’t boot.
 1.	Find the correct affinities:
 ```bash
-FVP_Base_Cortex-A55x4 -l | grep pctl.CPU-affinities
+FVP_Base_RevC-2xAEMvA -l | grep pctl.CPU-affinities
 ```
 Example output:
 
