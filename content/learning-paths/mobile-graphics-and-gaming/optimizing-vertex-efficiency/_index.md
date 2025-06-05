@@ -46,6 +46,10 @@ further_reading:
         title: Arm Performance Studio
         link: https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio%20for%20Mobile
         type: website
+    - resource:
+        title: Attribute Layouts
+        link: https://developer.arm.com/documentation/101897/0304/Vertex-shading/Attribute-layout
+        type: website
 
 
 
