@@ -1,14 +1,16 @@
 ---
-title: Simulating Different Network Conditions
+title: Simulating different network conditions
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Adding a delay to a TCP connection
+## Add a delay to the TCP connection
 
-The linux `tc` utility can be used to manipulate traffic control settings. First, find the name of interface with the following command. 
+The Linux `tc` utility can be used to manipulate traffic control settings. 
+
+First, on the client system, find the name of network interface with the following command: 
 
 ```bash
 ip addr show
@@ -32,14 +34,21 @@ The output below shows the `ens5` network interface device (NIC) is the device w
 
 ```
 
-Run the following command to add an emulated delay of 10ms on `ens5`. 
+Run the following command on the client system to add an emulated delay of 10ms on `ens5`. 
 
 ```bash
 sudo tc qdisc add dev ens5 root netem delay 10ms
 ```
 
-Rerunning the basic TCP test (`iperf3 -c SERVER -V`) with a delay we observe the `Cwnd` size has grew larger to compensate for the longer response time. Additionally, the bitrate has dropped from ~4.9 to ~2.3 `Gbit/sec`.
+Rerun the basic TCP test as before on the client:
 
+```bash
+iperf3 -c SERVER -V
+```
+
+Observe that the `Cwnd` size has grew larger to compensate for the longer response time. 
+
+Additionally, the bitrate has dropped from ~4.9 to ~2.3 `Gbit/sec`.
 
 ```output
 [  5] local 10.248.213.97 port 43170 connected to 10.248.213.104 port 5201
@@ -67,20 +76,25 @@ rcv_tcp_congestion cubic
 iperf Done.
 ```
 
-### Simulating Packet Loss
+### Simulate packet loss
 
-To test the resiliency of a distributed application we can add a simulated packet loss of 1%. As opposed to a 10ms delay, this will result in no acknowledgment being received for 1% of packets. Given TCP is a lossless protocol a retry must be sent. 
+To test the resiliency of a distributed application you can add a simulated packet loss of 1%. As opposed to a 10ms delay, this will result in no acknowledgment being received for 1% of packets. Given TCP is a lossless protocol a retry must be sent. 
+
+Run these commands on the client system:
 
 ```bash
 sudo tc qdisc del dev ens5 root
 sudo tc qdisc add dev ens5 root netem loss 1%
 ```
 
-Rerunning the basic TCP test we observe an increased number of retries (`Retr`) and a corresponding drop in bitrate. 
+Rerunning the basic TCP test you see an increased number of retries (`Retr`) and a corresponding drop in bitrate. 
 
 ```bash
 iperf3 -c SERVER -V
 ```
+
+The output is now:
+
 ```output
 Test Complete. Summary Results:
 [ ID] Interval           Transfer     Bitrate         Retr
@@ -88,4 +102,4 @@ Test Complete. Summary Results:
 [  5]   0.00-10.00  sec  4.40 GBytes  3.78 Gbits/sec                  receiver
 ```
 
-Please see the `tc` [user documentation](https://man7.org/linux/man-pages/man8/tc.8.html) for the different ways to simulate different perturbation and your systems resiliency to such events.
+Refer to the `tc` [user documentation](https://man7.org/linux/man-pages/man8/tc.8.html) for the different ways to simulate perturbation and check resiliency.

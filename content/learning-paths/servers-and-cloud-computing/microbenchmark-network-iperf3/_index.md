@@ -15,7 +15,7 @@ learning_objectives:
 
 prerequisites:
     - Foundational understanding of networking principles such as TCP/IP and UDP.
-    - Access to two Arm-based cloud instances or local Arm Linux systems. 
+    - Access to two [Arm-based cloud instances](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/).
 
 author: Kieran Hejmadi
 
