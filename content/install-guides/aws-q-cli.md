@@ -206,6 +206,33 @@ based distributions like Ubuntu, which is your preference.
 
 Give it a try by asking questions like "How do I install the AWS CLI?" and verify that the answers match the provided context.
 
+## How do I change the model Amazon Q uses?
+
+When you start `q chat` the model is printed:
+
+```output
+🤖 You are chatting with claude-3.7-sonnet
+```
+
+You can use the `/model` command to list other available models.
+
+```console
+/model
+```
+
+The model options are displayed:
+
+```output
+? Select a model for this chat session ›
+❯ claude-4-sonnet
+  claude-3.7-sonnet (active)
+  claude-3.5-sonnet
+```
+
+Use the arrow keys and select the model you want to use. 
+
+You can ask Amazon Q to set the default model for future sessions.
+
 ## Install an MCP server
 
 As an example of using MCP with Amazon Q, you can configure the Github MCP server. 
