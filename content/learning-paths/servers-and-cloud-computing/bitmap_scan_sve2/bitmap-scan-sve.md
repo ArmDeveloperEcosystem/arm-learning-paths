@@ -363,7 +363,7 @@ double benchmark_scan(size_t (*scan_func)(bitvector_t*, uint32_t*),
 ```
 
 ## Main Function
-The main function of your program is reposible for setting up the test environment, running the benchmarking code for the four different implementations across various bit densities, and reporting the results. In the context of bitmap scanning, bit density refers to the percentage or proportion of bits that are set (have a value of 1) in the bitmap. Copy the main function code below into `bitvector_scan_benchmark.c`:
+The main function of your program is responsible for setting up the test environment, running the benchmarking code for the four different implementations across various bit densities, and reporting the results. In the context of bitmap scanning, bit density refers to the percentage or proportion of bits that are set (have a value of 1) in the bitmap. Copy the main function code below into `bitvector_scan_benchmark.c`:
 
 ```C
 int main() {
