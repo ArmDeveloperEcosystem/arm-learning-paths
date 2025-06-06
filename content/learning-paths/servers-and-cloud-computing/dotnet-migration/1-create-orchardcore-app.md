@@ -12,14 +12,18 @@ In this section, you will learn how to create and compile a basic OrchardCore CM
 
 ## Step 1: Set up your development environment
 
-1. **Install .NET SDK**: Follow the instructions on the [.NET download page](https://dotnet.microsoft.com/download) to install the SDK for your operating system.
+1. Launch an Azure Cobalt instance running Ubuntu 24.04, and open port 8080 to the internet (link to instructions here)
 
-2. **Verify installations**: Open a terminal and run the following commands to verify the installations:
+2. **Install .NET SDK**: Follow the instructions on the [.NET download page](https://dotnet.microsoft.com/download) to install the SDK for your operating system.
+
+3. **Verify installations**: Open a terminal and run the following commands to verify the installations:
 
    ```bash
    dotnet --version
    node --version
    ```
+
+
 
 ## Step 2: Install the OrchardCore Templates
 

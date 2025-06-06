@@ -14,7 +14,7 @@ learning_objectives:
     - .NET optimizations for huge core counts
 
 prerequisites:
-    - An Azure Cobalt instance running Ubuntu 24.04
+    - An Azure account
     - Installation of .NET 10
     - gcc installed
 
