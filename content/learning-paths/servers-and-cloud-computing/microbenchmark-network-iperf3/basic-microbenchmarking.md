@@ -69,7 +69,7 @@ rcv_tcp_congestion cubic
 iperf Done.
 ```
 
-- The`Cwnd` column prints the control window size and corresponds to the allowed number of TCP transactions inflight before receiving an acknowledgment `ACK` from the server. This adjusts dynamically to not overwhelm the receiver and adjust for variable link connection strengths. 
+- The`Cwnd` column prints the control window size and corresponds to the allowed number of TCP transactions in flight before receiving an acknowledgment `ACK` from the server. This adjusts dynamically to not overwhelm the receiver and adjust for variable link connection strengths. 
 
 - The `CPU Utilization` row shows both the usage on the sender and receiver. If you are migrating your workload to a different platform, such as from x86 to Arm, there may be variations. 
 

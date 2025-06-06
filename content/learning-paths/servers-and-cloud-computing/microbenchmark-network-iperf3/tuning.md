@@ -37,7 +37,7 @@ Test Complete. Summary Results:
 
 On the server, your can configure Linux kernel runtime parameters with the `sysctl` command. 
 
-There are a plenthora of values to tune that relate to performance and security. The following command can be used to list all available options. The [Linux kernel documentation](https://docs.kernel.org/networking/ip-sysctl.html#ip-sysctl) provides a more detailed description of each parameter. 
+There are a plethora of values to tune that relate to performance and security. The following command can be used to list all available options. The [Linux kernel documentation](https://docs.kernel.org/networking/ip-sysctl.html#ip-sysctl) provides a more detailed description of each parameter. 
 
 ```bash
 sysctl -a | grep tcp

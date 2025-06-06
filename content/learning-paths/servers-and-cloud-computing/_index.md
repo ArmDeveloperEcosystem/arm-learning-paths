@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- Linux: 143
+- Linux: 146
 - macOS: 10
 - Windows: 14
 pinned_modules:
@@ -23,7 +23,7 @@ subjects_filter:
 - Databases: 15
 - Libraries: 9
 - ML: 27
-- Performance and Architecture: 53
+- Performance and Architecture: 56
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -98,6 +98,7 @@ tools_software_languages_filter:
 - Hugging Face: 9
 - InnoDB: 1
 - Intrinsics: 1
+- iperf3: 1
 - Java: 3
 - JAX: 1
 - Kafka: 1
@@ -117,8 +118,8 @@ tools_software_languages_filter:
 - MongoDB: 2
 - mpi: 1
 - MySQL: 9
+- NEON: 4
 - Neon: 3
-- NEON: 2
 - Nexmark: 1
 - Nginx: 3
 - Node.js: 3
@@ -135,7 +136,7 @@ tools_software_languages_filter:
 - Redis: 3
 - Remote.It: 2
 - RME: 6
-- Runbook: 68
+- Runbook: 70
 - Rust: 2
 - snappy: 1
 - Snort3: 1
@@ -143,8 +144,8 @@ tools_software_languages_filter:
 - Streamline CLI: 1
 - Streamlit: 2
 - Supervisor: 1
-- SVE: 4
-- SVE2: 1
+- SVE: 5
+- SVE2: 2
 - Sysbench: 1
 - Telemetry: 1
 - TensorFlow: 2
