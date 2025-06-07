@@ -1,5 +1,5 @@
 ---
-title: Simulating different network conditions
+title: Simulate different network conditions
 weight: 4
 
 ### FIXED, DO NOT MODIFY

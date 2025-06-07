@@ -1,5 +1,5 @@
 ---
-title: Tuning kernel parameters
+title: Tune kernel parameters
 weight: 5
 
 ### FIXED, DO NOT MODIFY

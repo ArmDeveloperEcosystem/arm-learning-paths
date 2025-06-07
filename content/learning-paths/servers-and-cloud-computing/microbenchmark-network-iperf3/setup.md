@@ -8,19 +8,27 @@ layout: learningpathall
 
 ## Configure two Arm-based Linux computers
 
-To perform network performance testing you need two Linux computers. You can use AWS EC2 instances with Graviton processors or any other Linux virtual machines from another cloud service provider.
+To perform network performance testing, you'll need access to two Arm-based Linux systems. You can use AWS EC2 instances with Graviton processors, or Linux virtual machines from any other cloud service provider.
 
-You will also experiment with a local computer and a cloud instance to learn the networking performance differences compared to two cloud instances. 
+This tutorial also walks you through a local-to-cloud test to compare performance between:
 
-The instructions below use EC2 instances from AWS connected in a virtual private cloud (VPC).
+* Two cloud-based instances
+* One local system and one cloud instance
 
-To get started, create two Arm-based Linux instances, one system to act as the server and the other to act as the client. The instructions below use two `t4g.xlarge` instances running Ubuntu 24.04 LTS. 
+The setup instructions below use AWS EC2 instances connected within a Virtual Private Cloud (VPC).
 
-### Install software dependencies
+To get started, create two Arm-based Linux instances, each instance will serve one role:
 
-Use the commands below to install `iperf3`, a powerful and flexible open-source command-line tool used for network performance measurement and tuning. It allows network administrators and engineers to actively measure the maximum achievable bandwidth on IP networks.
+* One acts as a server
+* One acts as a client
 
-Run the following on both systems:
+The instructions below use two `t4g.xlarge` instances running Ubuntu 24.04 LTS. 
+
+## Install software dependencies
+
+Use the commands below to install `iperf3`, a powerful open-source CLI tool for measuring maximum achievable network bandwidth. 
+
+Install `iperf3` on both the client and server systems:
 
 ```bash
 sudo apt update
@@ -28,35 +36,61 @@ sudo apt install iperf3 -y
 ```
 
 {{% notice Note %}}
-If you are prompted to start `iperf3` as a daemon you can answer no.
+If you're prompted to run `iperf3` as a daemon, you can safely answer "no".
 {{% /notice %}}
 
 ## Update Security Rules 
 
-If you are working in a cloud environment like AWS, you need to update the default security rules to enable specific inbound and outbound protocols. 
+If you're working in a cloud environment like AWS, you must update the default security rules to enable specific inbound and outbound protocols. 
 
-From the AWS console, navigate to the security tab. Edit the inbound rules to enable `ICMP`, `UDP` and `TCP` traffic to enable communication between the client and server systems. 
+From the AWS console:
 
-![example_traffic](./example_traffic_rules.png)
+* Navigate to the **Security** tab for each instance. 
+* Edit the **Inbound rules** to allow the following protocols:
+    * `ICMP` (for ping)
+    * All UDP ports (for UDP tests)
+    * TCP port 5201 (for traffic to enable communication between the client and server systems) 
+
+![example_traffic#center](./example_traffic_rules.png "Example traffic")
 
 {{% notice Note %}}
-For additional security set the source and port ranges to the values being used. A good solution is to open TCP port 5201 and all UDP ports and use your security group as the source. This doesn't open any traffic from outside AWS.
+For secure internal communication, set the source to your instance’s security group. This avoids exposing traffic to the internet while allowing traffic between your systems.
+You can restrict the range further by:
+
+* Opening only TCP port 5201
+
+* Allowing all UDP ports (or a specific range)
 {{% /notice %}}
 
 ## Update the local DNS
 
-To avoid using IP addresses directly, add the IP address of the other system to the `/etc/hosts` file.
+To avoid using IP addresses directly, add the other system's IP address to the `/etc/hosts` file.
 
-The local IP address of the server and client can be found in the AWS dashboard. You can also use commands like `ifconfig`,  `hostname -I`, or `ip address` to find your local IP address.
+You can find private IPs in the AWS dashboard or by running:
 
-On the client, add the IP address of the server to the `/etc/hosts` file with name `SERVER`. 
+```bash
+hostname -I
+ip address
+ifconfig
+```
+
+### On the client
+
+Add the server's IP address and assign it with name `SERVER`:
 
 ```output
 127.0.0.1       localhost
 10.248.213.104  SERVER
 ```
 
-Repeat the same thing on the server and add the IP address of the client to the `/etc/hosts` file with the name `CLIENT`. 
+### On the server
+
+Add the client's IP address and assign it the name `CLIENT`:
+
+```output
+127.0.0.1       localhost
+10.248.213.105  CLIENT
+```
 
 ## Confirm server is reachable
 
