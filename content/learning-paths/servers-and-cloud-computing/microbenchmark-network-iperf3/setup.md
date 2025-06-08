@@ -1,5 +1,5 @@
 ---
-title: Set up Arm-Based Linux systems for network performance testing with iPerf3
+title: Set up Arm-based Linux systems for network performance testing with iPerf3
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -19,8 +19,8 @@ The setup instructions below use AWS EC2 instances connected within a Virtual Pr
 
 To get started, create two Arm-based Linux instances, with each instance serving one role:
 
-* One acts as a server
-* One acts as a client
+* One acting as a server
+* One acting as a client
 
 The instructions below use two `t4g.xlarge` instances running Ubuntu 24.04 LTS. 
 
@@ -28,7 +28,7 @@ The instructions below use two `t4g.xlarge` instances running Ubuntu 24.04 LTS.
 
 Use the commands below to install iPerf3, which is a powerful open-source CLI tool for measuring maximum achievable network bandwidth. 
 
-Install `iperf3` on both the client and server systems:
+Begin by installing iPerf3 on both the client and server systems:
 
 ```bash
 sudo apt update
@@ -43,7 +43,7 @@ If you're prompted to run `iperf3` as a daemon, answer "no".
 
 If you're working in a cloud environment like AWS, you must update the default security rules to enable specific inbound and outbound protocols. 
 
-From the AWS console:
+Using the AWS console, follow these instructions:
 
 * Navigate to the **Security** tab for each instance. 
 * Edit the **Inbound rules** to allow the following protocols:
@@ -77,7 +77,7 @@ ifconfig
 
 ### On the client
 
-Add the server's IP address and assign it with name `SERVER`:
+Add the server's IP address and assign it the name `SERVER`:
 
 ```output
 127.0.0.1       localhost
@@ -103,7 +103,7 @@ Add the client's IP address and assign it the name `CLIENT`:
 
 ## Confirm server is reachable
 
-Finally, confirm the client can reach the server with the ping command below. As a reference you can also ping the localhost. 
+Finally, confirm the client can reach the server by using the ping command below. As a reference, you can also ping the localhost. 
 
 ```bash
 ping SERVER -c 3 && ping 127.0.0.1 -c 3
@@ -111,7 +111,7 @@ ping SERVER -c 3 && ping 127.0.0.1 -c 3
 
 The output below shows that both SERVER and localhost (127.0.0.1) are reachable. 
 
-Localhost response times are typically ~10× faster than remote systems. Actual values will vary based on system location and network conditions.
+Localhost response times are typically ~10× faster than remote systems, though actual values will vary based on system location and network conditions.
 
 ```output
 PING SERVER (10.248.213.104) 56(84) bytes of data.
@@ -132,4 +132,4 @@ PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.022/0.027/0.032/0.004 ms
 ```
 
-Continue to the next section to learn how to measure the network bandwidth between the systems.
+Now that your systems are configured, you can move on to the next section to learn how to measure the network bandwidth between the systems.

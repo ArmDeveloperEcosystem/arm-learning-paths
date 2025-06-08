@@ -6,17 +6,17 @@ weight: 3
 layout: learningpathall
 ---
 
+With your systems configured and reachable, you can now use iPerf3 to microbenchmark TCP and UDP performance between your Arm-based systems
+
 ## Microbenchmark the TCP connection
 
-You can microbenchmark the bandwidth between the client and server. 
-
-First, start `iperf` in server mode on the server system with the following command: 
+First, start by running `iperf` in server mode on the `SERVER` system with the following command: 
 
 ```bash
 iperf3 -s
 ```
 
-You see the output, indicating the server is ready:
+This starts the server on the default TCP port 5201. You should see:
 
 ```output
 -----------------------------------------------------------
@@ -28,17 +28,20 @@ Server listening on 5201 (test #1)
 The default server port is 5201. Use the `-p` flag to specify another port if it is in use.
 
 {{% notice Tip %}}
-If you already have an `iperf3` server running, you can manually kill the process with the following command. 
+If you already have an `iperf3` server running, you can kill the process with the following command: 
  ```bash
  sudo kill $(pgrep iperf3)
  ```
 {{% /notice %}}
 
-Next, on the client node, run the following command to run a simple 10-second microbenchmark using the TCP protocol. 
+## Run a TCP test from the client
+
+Next, on the client node, run the following command to run a simple 10-second microbenchmark using the TCP protocol: 
 
 ```bash
 iperf3 -c SERVER -V
 ```
+Replace `SERVER` with your server’s IP address or hostname. The -V flag enables verbose output. 
 
 The output is similar to:
 
@@ -68,18 +71,19 @@ rcv_tcp_congestion cubic
 
 iperf Done.
 ```
+## TCP result highlights
 
-- The`Cwnd` column prints the control window size and corresponds to the allowed number of TCP transactions in flight before receiving an acknowledgment `ACK` from the server. This adjusts dynamically to not overwhelm the receiver and adjust for variable link connection strengths. 
+- The`Cwnd` column prints the control window size and corresponds to the allowed number of TCP transactions in flight before receiving an acknowledgment `ACK` from the server. This value grows as the connection stabilizes and adapts to link quality.
 
-- The `CPU Utilization` row shows both the usage on the sender and receiver. If you are migrating your workload to a different platform, such as from x86 to Arm, there may be variations. 
+- The `CPU Utilization` row shows both the usage on the sender and receiver. If you are migrating your workload to a different platform, such as from x86 to Arm, this is a useful metric. 
 
-- The `snd_tcp_congestion cubic` abd `rcv_tcp_congestion cubic` variables show the congestion control algorithm used.
+- The `snd_tcp_congestion cubic` and `rcv_tcp_congestion cubic` variables show the congestion control algorithm used.
 
-- This `bitrate` shows the throughput achieved under this microbenchmark. As you can see, the 5 Gbps bandwidth available to the `t4g.xlarge` AWS instance is saturated. 
+- `Bitrate` shows the throughput achieved. In this example, the the `t4g.xlarge` AWS instance saturates its 5 Gbps bandwidth available. 
 
-![instance-network-size](./instance-network-size.png)
+![instance-network-size#center](./instance-network-size.png "Instance network size")
 
-### Microbenchmark UDP connection
+## UDP result highlights
 
 You can also microbenchmark the `UDP` protocol with the `-u` flag. As a reminder, UDP does not guarantee packet delivery with some packets being lost. As such you need to observe the statistics on the server side to see the percent of packets lost and the variation in packet arrival time (jitter). The UDP protocol is widely used in applications that need timely packet delivery, such as online gaming and video calls. 
 
