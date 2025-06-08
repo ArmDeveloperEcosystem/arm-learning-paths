@@ -1,13 +1,13 @@
 ---
-title: Microbenchmark and tune network performance with iperf3 and Linux traffic control
+title: Microbenchmark and tune network performance with iPerf3 and Linux traffic control
 
 whminutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for performance engineers, Linux system administrators, or application developers who want to microbenchmark, simulate, or tune the networking performance of distributed systems.
 
 learning_objectives: 
-    - Understand how to use iperf3 for network microbenchmarking.
-    - Use Linux traffic control (tc) to simulate different network conditions.
+    - Understand how to use iPerf3 for network microbenchmarking.
+    - Use Linux Traffic Control (TC) to simulate different network conditions.
     - Identify and apply basic runtime parameters to tune performance.
 
 prerequisites:
@@ -22,13 +22,13 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
-    - iperf3
+    - iPerf3
 operatingsystems:
     - Linux
 
 further_reading:
     - resource:
-        title: iperf3 user manual 
+        title: iPerf3 user manual 
         link: https://iperf.fr/iperf-doc.php
         type: documentation
 

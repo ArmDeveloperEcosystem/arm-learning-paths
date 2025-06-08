@@ -1,5 +1,5 @@
 ---
-title: Prepare for network performance testing
+title: Set up Arm-Based Linux systems for network performance testing with iPerf3
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Configure two Arm-based Linux computers
 
-To perform network performance testing, you'll need access to two Arm-based Linux systems. You can use AWS EC2 instances with Graviton processors, or Linux virtual machines from any other cloud service provider.
+To benchmark bandwidth and latency between Arm-based systems, you'll need to configure two Linux machines running on Arm. You can use AWS EC2 instances with Graviton processors, or Linux virtual machines from any other cloud service provider.
 
 This tutorial also walks you through a local-to-cloud test to compare performance between:
 
@@ -17,7 +17,7 @@ This tutorial also walks you through a local-to-cloud test to compare performanc
 
 The setup instructions below use AWS EC2 instances connected within a Virtual Private Cloud (VPC).
 
-To get started, create two Arm-based Linux instances, each instance will serve one role:
+To get started, create two Arm-based Linux instances, with each instance serving one role:
 
 * One acts as a server
 * One acts as a client
@@ -26,7 +26,7 @@ The instructions below use two `t4g.xlarge` instances running Ubuntu 24.04 LTS.
 
 ## Install software dependencies
 
-Use the commands below to install `iperf3`, a powerful open-source CLI tool for measuring maximum achievable network bandwidth. 
+Use the commands below to install iPerf3, which is a powerful open-source CLI tool for measuring maximum achievable network bandwidth. 
 
 Install `iperf3` on both the client and server systems:
 
@@ -36,10 +36,10 @@ sudo apt install iperf3 -y
 ```
 
 {{% notice Note %}}
-If you're prompted to run `iperf3` as a daemon, you can safely answer "no".
+If you're prompted to run `iperf3` as a daemon, answer "no".
 {{% /notice %}}
 
-## Update Security Rules 
+## Update security rules 
 
 If you're working in a cloud environment like AWS, you must update the default security rules to enable specific inbound and outbound protocols. 
 
@@ -53,8 +53,9 @@ From the AWS console:
 
 ![example_traffic#center](./example_traffic_rules.png "Example traffic")
 
-{{% notice Note %}}
+{{% notice Warning %}}
 For secure internal communication, set the source to your instance’s security group. This avoids exposing traffic to the internet while allowing traffic between your systems.
+
 You can restrict the range further by:
 
 * Opening only TCP port 5201
@@ -92,6 +93,14 @@ Add the client's IP address and assign it the name `CLIENT`:
 10.248.213.105  CLIENT
 ```
 
+| Instance Name | Role   | Description                        |
+|---------------|--------|------------------------------------|
+| SERVER        | Server | Runs `iperf3` in listen mode       |
+| CLIENT        | Client | Initiates performance tests        |
+
+
+
+
 ## Confirm server is reachable
 
 Finally, confirm the client can reach the server with the ping command below. As a reference you can also ping the localhost. 
@@ -100,7 +109,9 @@ Finally, confirm the client can reach the server with the ping command below. As
 ping SERVER -c 3 && ping 127.0.0.1 -c 3
 ```
 
-The output below shows that both SERVER and localhost (127.0.0.1) are reachable. Naturally, the local host response time is ~10x faster than the server. Your results will vary depending on geographic location of the systems and other networking factors. 
+The output below shows that both SERVER and localhost (127.0.0.1) are reachable. 
+
+Localhost response times are typically ~10× faster than remote systems. Actual values will vary based on system location and network conditions.
 
 ```output
 PING SERVER (10.248.213.104) 56(84) bytes of data.

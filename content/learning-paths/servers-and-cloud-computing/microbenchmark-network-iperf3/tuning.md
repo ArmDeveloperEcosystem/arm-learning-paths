@@ -10,11 +10,11 @@ layout: learningpathall
 
 You can look at ways to mitigate performance degradation due to events such as packet loss. 
 
-In this example, you will connect to the server node a local machine to demonstrate a longer response time. Check the `iperf3` [installation guide](https://iperf.fr/iperf-download.php) to install `iperf3` on other operating systems. 
+In this example, you will connect to the server node a local machine to demonstrate a longer response time. Check the iPerf3 [installation guide](https://iperf.fr/iperf-download.php) to install iPerf3 on other operating systems. 
 
 Make sure to set the server security group to accept the TCP connection from your local computer IP address. You will also need to use the public IP for the cloud instance.
 
-Running `iperf3` on the local machine and connecting to the cloud server shows a longer round trip time, in this example more than 40ms. 
+Running iPerf3 on the local machine and connecting to the cloud server shows a longer round trip time, in this example more than 40ms. 
 
 On your local computer run:
 
@@ -22,7 +22,7 @@ On your local computer run:
 iperf3 -c <server-public-IP> -V
 ```
 
-Running a standard TCP client connection with `iperf3` shows an average bitrate of 157 Mbps compared to over 2 Gbps when the client and server are both in AWS.
+Running a standard TCP client connection with iPerf3 shows an average bitrate of 157 Mbps compared to over 2 Gbps when the client and server are both in AWS.
 
 ```output
 Starting Test: protocol: TCP, 1 streams, 131072 byte blocks, omitting 0 seconds, 10 second test, tos 0
@@ -59,7 +59,7 @@ sudo sysctl net.core.rmem_max=134217728 # default = 212992
 sudo sysctl net.core.wmem_max=134217728 # default = 212992
 ```
 
-Restart the `iperf3` server.  
+Restart the iPerf3 server:  
 
 ```bash
 iperf3 -s
