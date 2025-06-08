@@ -6,17 +6,19 @@ weight: 4
 layout: learningpathall
 ---
 
-## Add a delay to the TCP connection
+You can simulate latency and packet loss to test how your application performs under adverse network conditions. This is especially useful when evaluating the impact of congestion, jitter, or unreliable connections in distributed systems.
 
-The Linux `tc` utility can be used to manipulate traffic control settings. 
+## Add delay to the TCP connection
 
-First, on the client system, find the name of network interface with the following command: 
+The Linux `tc` (traffic control) lets you manipulate network interface behavior such as delay, loss, or reordering. 
+
+First, on the client system, identify the name of your network interface: 
 
 ```bash
 ip addr show
 ```
 
-The output below shows the `ens5` network interface device (NIC) is the device we want to manipulate.
+The output below shows that the `ens5` network interface device (NIC) is the device that you want to manipulate.
 
 ```output
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
@@ -34,7 +36,7 @@ The output below shows the `ens5` network interface device (NIC) is the device w
 
 ```
 
-Run the following command on the client system to add an emulated delay of 10ms on `ens5`. 
+Run the following command on the client system to add an emulated delay of 10ms on `ens5`: 
 
 ```bash
 sudo tc qdisc add dev ens5 root netem delay 10ms
@@ -45,10 +47,6 @@ Rerun the basic TCP test as before on the client:
 ```bash
 iperf3 -c SERVER -V
 ```
-
-Observe that the `Cwnd` size has grew larger to compensate for the longer response time. 
-
-Additionally, the bitrate has dropped from ~4.9 to ~2.3 `Gbit/sec`.
 
 ```output
 [  5] local 10.248.213.97 port 43170 connected to 10.248.213.104 port 5201
@@ -75,19 +73,26 @@ rcv_tcp_congestion cubic
 
 iperf Done.
 ```
+### Observations
+
+* The `Cwnd` size has grown larger to compensate for the longer response time. 
+
+* The bitrate has dropped from ~4.9 to ~2.3 `Gbit/sec` - demonstrating how even modest latency impacts throughput.
 
 ### Simulate packet loss
 
-To test the resiliency of a distributed application you can add a simulated packet loss of 1%. As opposed to a 10ms delay, this will result in no acknowledgment being received for 1% of packets. Given TCP is a lossless protocol a retry must be sent. 
+To test the resiliency of a distributed application, you can add a simulated packet loss of 1%. As opposed to a 10ms delay, this will result in no acknowledgment being received for 1% of packets. 
 
-Run these commands on the client system:
+Given TCP is a lossless protocol, a retry must be sent. 
+
+Run these commands on the client system. The first removes the delay configuration, and the second command introduces a 1% packet loss:
 
 ```bash
 sudo tc qdisc del dev ens5 root
 sudo tc qdisc add dev ens5 root netem loss 1%
 ```
 
-Rerunning the basic TCP test you see an increased number of retries (`Retr`) and a corresponding drop in bitrate. 
+Now rerunning the basic TCP test, and you will see an increased number of retries (`Retr`) and a corresponding drop in bitrate: 
 
 ```bash
 iperf3 -c SERVER -V
@@ -102,4 +107,14 @@ Test Complete. Summary Results:
 [  5]   0.00-10.00  sec  4.40 GBytes  3.78 Gbits/sec                  receiver
 ```
 
-Refer to the `tc` [user documentation](https://man7.org/linux/man-pages/man8/tc.8.html) for the different ways to simulate perturbation and check resiliency.
+## Explore further with tc
+
+The tc tool can simulate:
+
+* Variable latency and jitter
+
+* Packet duplication or reordering
+
+* Bandwidth throttling
+
+For advanced options, refer to Refer to the [tc man page](https://man7.org/linux/man-pages/man8/tc.8.html).
