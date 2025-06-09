@@ -15,4 +15,10 @@ setup(
         ],
     },
     python_requires=">=3.8",
+    extras_require={
+        "dev": [
+            "pytest>=7.0.0",
+            "pytest-cov>=4.0.0",
+        ],
+    },
 )

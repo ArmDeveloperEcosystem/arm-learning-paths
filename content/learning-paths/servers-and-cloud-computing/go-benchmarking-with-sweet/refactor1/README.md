@@ -33,6 +33,21 @@ rexec_sweet/
 ├── config.py            # Configuration management
 ├── gcp_utils.py         # GCP interaction utilities
 └── visualization.py     # Data visualization
+
+tests/                   # Test suite
+```
+
+## Development
+
+```bash
+# Install development dependencies
+make dev
+
+# Run tests
+make test
+
+# Run tests with coverage
+make test-cov
 ```
 
 ## Requirements
