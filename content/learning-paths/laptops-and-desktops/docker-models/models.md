@@ -4,11 +4,13 @@ weight: 2
 layout: "learningpathall"
 ---
 
-Docker Model Runner is an official Docker extension that allows you to run Large Language Models (LLMs) on your local computer. It provides a convenient way to deploy and use AI models across different environments, including Arm-based systems, without complex setup or cloud dependencies.
+## Simplified Local LLM Inference 
+
+Docker Model Runner is an official Docker extension that allows you to run Large Language Models (LLMs) directly on your local computer. It provides a convenient way to deploy and use AI models across different environments, including Arm-based systems, without complex framework setup or cloud dependencies.
 
 Docker uses [llama.cpp](https://github.com/ggml-org/llama.cpp), an open source C/C++ project developed by Georgi Gerganov that enables efficient LLM inference on a variety of hardware, but you do not need to download, build, or install any LLM frameworks. 
 
-Docker Model Runner provides a easy to use CLI that is familiar to Docker users. 
+Docker Model Runner provides a easy-to-use CLI interface that is familiar to Docker users. 
 
 ## Before you begin
 
@@ -18,21 +20,21 @@ Verify Docker is running with:
 docker version
 ```
 
-You should see output showing your Docker version. 
+You should see your Docker version shown in the output. 
 
-Confirm the Docker Desktop version is 4.40 or above, for example:
+Confirm that Docker Desktop is version 4.40 or above, for example:
 
 ```output
 Server: Docker Desktop 4.41.2 (191736)
 ```
 
-Make sure the Docker Model Runner is enabled.
+Make sure the Docker Model Runner is enabled:
 
 ```console
 docker model --help
 ```
 
-You should see the usage message:
+You should see this output:
 
 ```output
 Usage:  docker model COMMAND
@@ -52,27 +54,28 @@ Commands:
   version     Show the Docker Model Runner version
 ```
 
-If Docker Model Runner is not enabled, enable it using the [Docker Model Runner documentation](https://docs.docker.com/model-runner/).
+If Docker Model Runner is not enabled, enable it by following the [Docker Model Runner documentation](https://docs.docker.com/model-runner/).
 
-You should also see the Models icon in your Docker Desktop sidebar.
+You should also see the **Models** tab and icon appear in your Docker Desktop sidebar.
  
-![Models #center](models-tab.png)
+![Models #center](models-tab.png "Docker Models UI")
 
-## Running your first AI model with Docker Model Runner
+## Run your first AI model with Docker Model Runner
 
 Docker Model Runner is an extension for Docker Desktop that simplifies running AI models locally. 
 
 Docker Model Runner automatically selects compatible model versions and optimizes performance for the Arm architecture.
 
-You can try Docker Model Runner by using an LLM from Docker Hub. 
+You can try Model Runner by downloading and running a model from Docker Hub. 
 
-The example below uses the [SmolLM2 model](https://hub.docker.com/r/ai/smollm2), a compact language model with 360 million parameters, designed to run efficiently on-device while performing a wide range of language tasks. You can explore additional [models in Docker Hub](https://hub.docker.com/u/ai).
+The example below uses the [SmolLM2 model](https://hub.docker.com/r/ai/smollm2), a compact LLM with ~360 million parameters, designed for efficient on-device inference while performing a wide range of language tasks. You can explore further models in [Docker Hub](https://hub.docker.com/u/ai).
 
-Download the model using:
+1. Download the model 
 
 ```console
 docker model pull ai/smollm2
 ```
+2. Run the model interactively 
 
 For a simple chat interface, run the model:
 
@@ -96,10 +99,9 @@ int main() {
     return 0;
 }
 ```
+To exit the chat, use the `/bye` command.
 
-You can ask more questions and continue to chat.
-
-To exit the chat use the `/bye` command.
+3. View downloaded models
 
 You can print the list of models on your computer using:
 
@@ -119,7 +121,9 @@ ai/llama3.2  3.21 B      IQ2_XXS/Q4_K_M  llama         436bb282b419  2 months ag
 
 ## Use the OpenAI endpoint to call the model
 
-From your host computer you can access the model using the OpenAI endpoint and a TCP port. 
+Docker Model Runner exposes a REST endpoint compatible with OpenAI's API spec.
+
+From your host computer, you can access the model using the OpenAI endpoint and a TCP port. 
 
 First, enable the TCP port to connect with the model:
 
@@ -155,7 +159,7 @@ Run the shell script:
 bash ./curl-test.sh | jq
 ```
 
-If you don't have `jq` installed, you eliminate piping the output.
+If you don't have `jq` installed, you can eliminate piping the output.
 
 The output, including the performance information, is shown below:
 
@@ -193,5 +197,14 @@ The output, including the performance information, is shown below:
   }
 }
 ```
+You now have a fully functioning OpenAI-compatible inference endpoint running locally.
 
-In this section you learned how to run AI models using Docker Model Runner. Continue to see how to use Docker Compose to build an application with a built-in AI model. 
+## What you've learned
+
+In this section, you learned:
+
+* How to verify and use Docker Model Runner on Docker Desktop
+* How to run a model interactively from the CLI
+* How to connect to a model using a local OpenAI-compatible API
+
+In the next section, you'll use Docker Compose to deploy a web-based AI chat interface powered by Docker Model Runner.
