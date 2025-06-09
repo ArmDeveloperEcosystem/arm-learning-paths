@@ -38,7 +38,7 @@ Test Complete. Summary Results:
 [  8]   0.00-10.03  sec   187 MBytes   156 Mbits/sec                  receiver
 ```
 
-### Modify kernel parameters on the server
+## Modify kernel parameters on the server
 
 On the server, you can configure Linux kernel runtime parameters with the `sysctl` command. 
 

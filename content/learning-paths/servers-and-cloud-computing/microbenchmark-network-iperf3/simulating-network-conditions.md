@@ -73,13 +73,13 @@ rcv_tcp_congestion cubic
 
 iperf Done.
 ```
-### Observations
+## Observations
 
 * The `Cwnd` size has grown larger to compensate for the longer response time. 
 
 * The bitrate has dropped from ~4.9 to ~2.3 `Gbit/sec` - demonstrating how even modest latency impacts throughput.
 
-### Simulate packet loss
+## Simulate packet loss
 
 To test the resiliency of a distributed application, you can add a simulated packet loss of 1%. As opposed to a 10ms delay, this will result in no acknowledgment being received for 1% of packets. 
 

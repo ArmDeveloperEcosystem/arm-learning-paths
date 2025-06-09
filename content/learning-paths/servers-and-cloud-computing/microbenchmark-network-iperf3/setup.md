@@ -76,8 +76,7 @@ hostname -I
 ip address
 ifconfig
 ```
-
-### On the client
+## On the client
 
 Add the server's IP address, and assign it the name `SERVER`:
 
@@ -86,7 +85,7 @@ Add the server's IP address, and assign it the name `SERVER`:
 10.248.213.104  SERVER
 ```
 
-### On the server
+## On the server
 
 Add the client's IP address, and assign it the name `CLIENT`:
 
