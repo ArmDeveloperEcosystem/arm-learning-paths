@@ -1,21 +1,18 @@
 ---
-title: Learn how to use Docker Model Runner in AI applications
+title: Use Docker Model Runner in AI Model Inference
 
-draft: true
-cascade:
-    draft: true
 
 minutes_to_complete: 45
 
-who_is_this_for: This is for software developers and AI enthusiasts who want to run AI models using Docker Model Runner.
+who_is_this_for: This is for software developers and AI enthusiasts who want to run pre-trained AI models locally using Docker Model Runner.
 
 learning_objectives:
     - Run AI models locally using Docker Model Runner.
-    - Easily build containerized applications with LLMs.
+    - Build containerized applications that integrate large language models (LLMs).
 
 prerequisites:
-    - A computer with at least 16GB of RAM (recommended) and Docker Desktop installed (version 4.40 or later).
-    - Basic understanding of Docker.
+    - Docker Desktop (version 4.40 or later) installed on a system with at least 16GB of RAM (recommended).
+    - Basic understanding of Docker CLI and concepts.
     - Familiarity with Large Language Model (LLM) concepts.
 
 author: Jason Andrews
