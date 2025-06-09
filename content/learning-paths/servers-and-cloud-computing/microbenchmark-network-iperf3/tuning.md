@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-You can further optimize network performance by adjusting Linux kernel parameters and testing across different environments—including local-to-cloud scenarios.
+You can further optimize network performance by adjusting Linux kernel parameters and testing across different environments, including local-to-cloud scenarios.
 
 ## Connect from a local machine
 
@@ -24,7 +24,7 @@ Running iPerf3 on the local machine and connecting to the cloud server shows a l
 Run this command on your local computer:
 
 ```bash
-iperf3 -c <server-public-IP> -V
+iperf3 -c <server-public-IP> -v
 ```
 
 Compared to over 2 Gbit/sec within AWS, this test shows a reduced bitrate (~157 Mbit/sec) due to longer round-trip times (for example, >40ms).
@@ -75,7 +75,7 @@ iperf3 -s
 Now rerun iPerf3 again on your local machine:
 
 ```bash
-iperf3 -c <server-public-IP> -V
+iperf3 -c <server-public-IP> -v
 ```
 
 Without changing anything on the client, the throughput improved by over 60%.
@@ -91,9 +91,7 @@ Test Complete. Summary Results:
 You’ve now completed a guided introduction to:
 
 * Network performance microbenchmarking
-
 * Simulating real-world network conditions
-
 * Tuning kernel parameters for high-latency links
 
-* Explore further by testing other parameters, tuning for specific congestion control algorithms, or integrating these benchmarks into CI pipelines for continuous performance evaluation.
+You can now explore this area further by testing other parameters, tuning for specific congestion control algorithms, or integrating these benchmarks into CI pipelines for continuous performance evaluation.

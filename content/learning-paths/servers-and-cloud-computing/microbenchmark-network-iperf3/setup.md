@@ -6,21 +6,23 @@ weight: 2
 layout: learningpathall
 ---
 
-## Configure two Arm-based Linux computers
+## Environment setup and Learning Path focus
 
-To benchmark bandwidth and latency between Arm-based systems, you'll need to configure two Linux machines running on Arm. You can use AWS EC2 instances with Graviton processors, or Linux virtual machines from any other cloud service provider.
+To benchmark bandwidth and latency between Arm-based systems, you'll need to configure two Linux machines running on Arm. 
 
-This tutorial also walks you through a local-to-cloud test to compare performance between:
+You can use AWS EC2 instances with Graviton processors, or Linux virtual machines from any other cloud service provider.
+
+This tutorial walks you through a local-to-cloud test to compare performance between:
 
 * Two cloud-based instances
 * One local system and one cloud instance
 
 The setup instructions below use AWS EC2 instances connected within a Virtual Private Cloud (VPC).
 
-To get started, create two Arm-based Linux instances, with each instance serving one role:
+To get started, create two Arm-based Linux instances, with each instance serving a distinct role:
 
-* One acting as a server
 * One acting as a client
+* One acting as a server
 
 The instructions below use two `t4g.xlarge` instances running Ubuntu 24.04 LTS. 
 
@@ -43,15 +45,15 @@ If you're prompted to run `iperf3` as a daemon, answer "no".
 
 If you're working in a cloud environment like AWS, you must update the default security rules to enable specific inbound and outbound protocols. 
 
-Using the AWS console, follow these instructions:
+To do this, follow these instructions below using the AWS console:
 
 * Navigate to the **Security** tab for each instance. 
-* Edit the **Inbound rules** to allow the following protocols:
+* Configure the **Inbound rules** to allow the following protocols:
     * `ICMP` (for ping)
     * All UDP ports (for UDP tests)
     * TCP port 5201 (for traffic to enable communication between the client and server systems) 
 
-![example_traffic#center](./example_traffic_rules.png "Example traffic")
+![example_traffic#center](./example_traffic_rules.png "AWS console view")
 
 {{% notice Warning %}}
 For secure internal communication, set the source to your instance’s security group. This avoids exposing traffic to the internet while allowing traffic between your systems.
@@ -67,7 +69,7 @@ You can restrict the range further by:
 
 To avoid using IP addresses directly, add the other system's IP address to the `/etc/hosts` file.
 
-You can find private IPs in the AWS dashboard or by running:
+You can find private IPs in the AWS dashboard, or by running:
 
 ```bash
 hostname -I
@@ -77,7 +79,7 @@ ifconfig
 
 ### On the client
 
-Add the server's IP address and assign it the name `SERVER`:
+Add the server's IP address, and assign it the name `SERVER`:
 
 ```output
 127.0.0.1       localhost
@@ -86,7 +88,7 @@ Add the server's IP address and assign it the name `SERVER`:
 
 ### On the server
 
-Add the client's IP address and assign it the name `CLIENT`:
+Add the client's IP address, and assign it the name `CLIENT`:
 
 ```output
 127.0.0.1       localhost
@@ -101,9 +103,9 @@ Add the client's IP address and assign it the name `CLIENT`:
 
 
 
-## Confirm server is reachable
+## Confirm the server is reachable
 
-Finally, confirm the client can reach the server by using the ping command below. As a reference, you can also ping the localhost. 
+Finally, confirm the client can reach the server by using the ping command below. If required, you can also ping the localhost: 
 
 ```bash
 ping SERVER -c 3 && ping 127.0.0.1 -c 3
@@ -111,7 +113,7 @@ ping SERVER -c 3 && ping 127.0.0.1 -c 3
 
 The output below shows that both SERVER and localhost (127.0.0.1) are reachable. 
 
-Localhost response times are typically ~10× faster than remote systems, though actual values will vary based on system location and network conditions.
+Localhost response times are typically ~10× faster than remote systems, though actual values vary based on system location and network conditions.
 
 ```output
 PING SERVER (10.248.213.104) 56(84) bytes of data.
@@ -132,4 +134,4 @@ PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.022/0.027/0.032/0.004 ms
 ```
 
-Now that your systems are configured, you can move on to the next section to learn how to measure the network bandwidth between the systems.
+Now that your systems are configured, the next step is to measure the available network bandwidth between them.

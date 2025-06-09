@@ -6,17 +6,19 @@ weight: 3
 layout: learningpathall
 ---
 
-With your systems configured and reachable, you can now use iPerf3 to microbenchmark TCP and UDP performance between your Arm-based systems
+With your systems configured and reachable, you can now use iPerf3 to microbenchmark TCP and UDP performance between your Arm-based systems.
 
 ## Microbenchmark the TCP connection
 
-First, start by running `iperf` in server mode on the `SERVER` system with the following command: 
+Start by running `iperf` in server mode on the `SERVER` system: 
 
 ```bash
 iperf3 -s
 ```
 
-This starts the server on the default TCP port 5201. You should see:
+This starts the server on the default TCP port 5201. 
+
+You should see:
 
 ```output
 -----------------------------------------------------------
@@ -25,10 +27,10 @@ Server listening on 5201 (test #1)
 
 ```
 
-The default server port is 5201. Use the `-p` flag to specify another port if it is in use.
+The default server port is 5201. If it is already in use, use the `-p` flag to specify another.
 
 {{% notice Tip %}}
-If you already have an `iperf3` server running, you can kill the process with the following command: 
+If you already have an `iperf3` server running, terminate it with: 
  ```bash
  sudo kill $(pgrep iperf3)
  ```
@@ -36,12 +38,12 @@ If you already have an `iperf3` server running, you can kill the process with th
 
 ## Run a TCP test from the client
 
-Next, on the client node, run the following command to run a simple 10-second microbenchmark using the TCP protocol: 
+On the client node, run the following command to run a simple 10-second microbenchmark using the TCP protocol: 
 
 ```bash
-iperf3 -c SERVER -V
+iperf3 -c SERVER -v
 ```
-Replace `SERVER` with your server’s IP address or hostname. The -V flag enables verbose output. 
+Replace `SERVER` with your server’s hostname or private IP address. The `-v` flag enables verbose output. 
 
 The output is similar to:
 
@@ -85,15 +87,33 @@ iperf Done.
 
 ## UDP result highlights
 
-You can also microbenchmark the `UDP` protocol with the `-u` flag. As a reminder, UDP does not guarantee packet delivery with some packets being lost. As such you need to observe the statistics on the server side to see the percent of packets lost and the variation in packet arrival time (jitter). The UDP protocol is widely used in applications that need timely packet delivery, such as online gaming and video calls. 
+You can also microbenchmark the `UDP` protocol using the `-u` flag with iPerf3. Unlike TCP, UDP does not guarantee packet delivery which means some packets might be lost in transit. 
 
-Run the following command from the client to send 2 parallel UDP streams with the `-P 2` option.
+To evaluate UDP performance, focus on the server-side statistics, particularly:
+
+* Packet loss percentage
+
+* Jitter (variation in packet arrival time)
+
+These metrics help assess reliability and responsiveness under real-time conditions.
+
+UDP is commonly used in latency-sensitive applications such as:
+
+* Online gaming
+
+* Voice over IP (VoIP)
+
+* Video conferencing and streaming
+
+Because it avoids the overhead of retransmission and ordering, UDP is ideal for scenarios where timely delivery matters more than perfect accuracy.
+
+Run the following command from the client to send two parallel UDP streams with the `-P 2` option:
 
 ```bash
-iperf3 -c SERVER -V -u -P 2
+iperf3 -c SERVER -v -u -P 2
 ```
 
-Looking at the server output you observe 0% of packets where lost for the short test. 
+Look at the server output and you can see that none (0%) of packets were lost for the short test: 
 
 ```output
 [ ID] Interval           Transfer     Bitrate         Jitter    Lost/Total Datagrams
@@ -102,8 +122,10 @@ Looking at the server output you observe 0% of packets where lost for the short 
 [SUM]   0.00-10.00  sec  2.51 MBytes  2.10 Mbits/sec  0.015 ms  0/294 (0%)  receiver
 ```
 
-Additionally on the client side, the 2 streams saturated 2 of the 4 cores in the system. 
+Additionally on the client side, the two streams saturated two of the four cores in the system: 
 
 ```output
 CPU Utilization: local/sender 200.3% (200.3%u/0.0%s), remote/receiver 0.2% (0.0%u/0.2%s)
 ```
+
+This demonstrates that UDP throughput is CPU-bound when pushing multiple streams.

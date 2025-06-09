@@ -45,7 +45,7 @@ sudo tc qdisc add dev ens5 root netem delay 10ms
 Rerun the basic TCP test as before on the client:
 
 ```bash
-iperf3 -c SERVER -V
+iperf3 -c SERVER -v
 ```
 
 ```output
@@ -95,7 +95,7 @@ sudo tc qdisc add dev ens5 root netem loss 1%
 Now rerunning the basic TCP test, and you will see an increased number of retries (`Retr`) and a corresponding drop in bitrate: 
 
 ```bash
-iperf3 -c SERVER -V
+iperf3 -c SERVER -v
 ```
 
 The output is now:
@@ -112,9 +112,7 @@ Test Complete. Summary Results:
 The tc tool can simulate:
 
 * Variable latency and jitter
-
 * Packet duplication or reordering
-
 * Bandwidth throttling
 
 For advanced options, refer to Refer to the [tc man page](https://man7.org/linux/man-pages/man8/tc.8.html).
