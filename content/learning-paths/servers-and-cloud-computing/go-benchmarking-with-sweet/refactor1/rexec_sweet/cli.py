@@ -77,6 +77,29 @@ def select_instance(prompt_text: str, instance_name: Optional[str] = None) -> Tu
     
     return instance_name, zone, remote_path
 
+def use_default_instances() -> bool:
+    """Ask if user wants to use the first two instances with default directories."""
+    choice = input("\nDo you want to run the first two instances found with default install directories? [Y/n]: ").strip().lower()
+    return choice == "" or choice == "y"
+
+def get_default_instances() -> List[Tuple[str, str, str]]:
+    """Get the first two instances with default directories."""
+    instances = get_running_instances()
+    if len(instances) < 2:
+        print("Error: Need at least two running instances.")
+        sys.exit(1)
+        
+    default_path = "~/benchmarks/sweet"
+    result = []
+    
+    for i in range(2):
+        instance_name = instances[i]
+        zone = get_instance_zone(instance_name)
+        result.append((instance_name, zone, default_path))
+        
+    print(f"\nUsing instances: {instances[0]} and {instances[1]} with default path: {default_path}")
+    return result
+
 def run_benchmarks_parallel(runner: BenchmarkRunner, systems: List[Dict]) -> List[str]:
     """
     Run benchmarks in parallel on multiple systems.
@@ -137,31 +160,44 @@ def main():
         # Setup systems for benchmarking
         systems = []
         
-        # Get first instance
-        instance1_name, zone1, remote_path1 = select_instance(
-            "Select FIRST instance", args.instance1)
-        
-        systems.append({
-            "name": instance1_name,
-            "zone": zone1,
-            "bench": benchmark_name,
-            "remote_dir": remote_path1
-        })
-        
-        # Get second instance
-        instance2_name, zone2, remote_path2 = select_instance(
-            "Select SECOND instance", args.instance2)
-        
-        systems.append({
-            "name": instance2_name,
-            "zone": zone2,
-            "bench": benchmark_name,
-            "remote_dir": remote_path2
-        })
+        # Check if user wants to use default instances
+        if not args.instance1 and not args.instance2 and use_default_instances():
+            # Get the first two instances with default directories
+            instance_configs = get_default_instances()
+            
+            for instance_name, zone, remote_path in instance_configs:
+                systems.append({
+                    "name": instance_name,
+                    "zone": zone,
+                    "bench": benchmark_name,
+                    "remote_dir": remote_path
+                })
+        else:
+            # Get first instance
+            instance1_name, zone1, remote_path1 = select_instance(
+                "Select FIRST instance", args.instance1)
+            
+            systems.append({
+                "name": instance1_name,
+                "zone": zone1,
+                "bench": benchmark_name,
+                "remote_dir": remote_path1
+            })
+            
+            # Get second instance
+            instance2_name, zone2, remote_path2 = select_instance(
+                "Select SECOND instance", args.instance2)
+            
+            systems.append({
+                "name": instance2_name,
+                "zone": zone2,
+                "bench": benchmark_name,
+                "remote_dir": remote_path2
+            })
         
         # Create output directory
         timestamp = datetime.now().strftime('%Y%m%dT%H%M%S')
-        local_dir = config.get_results_dir(instance1_name, instance2_name, benchmark_name, timestamp)
+        local_dir = config.get_results_dir(systems[0]["name"], systems[1]["name"], benchmark_name, timestamp)
         print(f"Output directory: {local_dir}")
         
         # Run benchmarks in parallel
