@@ -32,7 +32,7 @@ Docker version 28.0.4, build b8034c0
 Clone the demo repository using:
 
 ```bash
-git clone https://github.com/autowarefoundation/openadkit_demo.autoware.git
+git clone https://github.com/odincodeshen/openadkit_demo.autoware
 ```
 
 The project is containerized in three Docker images, so you do not need to install any additional software.
