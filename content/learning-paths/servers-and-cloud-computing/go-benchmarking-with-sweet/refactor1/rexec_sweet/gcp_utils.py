@@ -3,7 +3,23 @@ Utilities for interacting with Google Cloud Platform.
 """
 import subprocess
 import sys
-from typing import List, Optional
+import time
+import threading
+from typing import List, Optional, Dict
+
+# Cache for instance zones to avoid redundant API calls
+_zone_cache: Dict[str, str] = {}
+
+def show_spinner(stop_event, message="Fetching instances"):
+    """Display a simple spinner while a task is running."""
+    spinner = ['|', '/', '-', '\\']
+    i = 0
+    while not stop_event.is_set():
+        sys.stdout.write(f"\r{message}... {spinner[i % len(spinner)]}")
+        sys.stdout.flush()
+        i += 1
+        time.sleep(0.1)
+    sys.stdout.write("\r                                \r")  # Clear the spinner line
 
 def get_running_instances() -> List[str]:
     """
@@ -12,6 +28,11 @@ def get_running_instances() -> List[str]:
     Returns:
         List of instance names
     """
+    stop_event = threading.Event()
+    spinner_thread = threading.Thread(target=show_spinner, args=(stop_event, "Fetching instances"))
+    spinner_thread.daemon = True
+    spinner_thread.start()
+    
     try:
         output = subprocess.check_output(
             ["gcloud", "compute", "instances", "list",
@@ -24,6 +45,9 @@ def get_running_instances() -> List[str]:
     except subprocess.CalledProcessError as e:
         print(f"Error fetching running instances: {e}", file=sys.stderr)
         return []
+    finally:
+        stop_event.set()
+        spinner_thread.join(timeout=0.5)
 
 def choose_instance(instances: List[str]) -> str:
     """
@@ -61,6 +85,15 @@ def get_instance_zone(name: str) -> str:
     Returns:
         Zone name
     """
+    # Check cache first
+    if name in _zone_cache:
+        return _zone_cache[name]
+    
+    stop_event = threading.Event()
+    spinner_thread = threading.Thread(target=show_spinner, args=(stop_event, f"Fetching zone for {name}"))
+    spinner_thread.daemon = True
+    spinner_thread.start()
+    
     try:
         output = subprocess.check_output(
             ["gcloud", "compute", "instances", "list",
@@ -71,10 +104,16 @@ def get_instance_zone(name: str) -> str:
         zone = output.strip()
         if not zone:
             raise ValueError(f"No zone found for instance {name}")
+        
+        # Cache the result
+        _zone_cache[name] = zone
         return zone
     except (subprocess.CalledProcessError, ValueError) as e:
         print(f"Error fetching zone for instance {name}: {e}", file=sys.stderr)
         sys.exit(1)
+    finally:
+        stop_event.set()
+        spinner_thread.join(timeout=0.5)
 
 def scp_results(name: str, zone: str, remote_pattern: str, local_out: str) -> bool:
     """

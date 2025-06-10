@@ -23,7 +23,6 @@ DEFAULT_BENCHMARKS: Dict[str, str] = {
     "etcd":          'sweet run -count 10 -run="etcd" config.toml',
     "go-build":      'sweet run -count 10 -run="go-build" config.toml',
     "gopher-lua":    'sweet run -count 10 -run="gopher-lua" config.toml',
-    "gvisor":        'sweet run -count 10 -run="gvisor" config.toml',
     "markdown":      'sweet run -count 10 -run="markdown" config.toml',
     "tile38":        'sweet run -count 10 -run="tile38" config.toml',
 }

@@ -11,7 +11,7 @@ from typing import Dict, List, Optional, Tuple
 
 from .gcp_utils import get_running_instances, choose_instance, get_instance_zone
 from .benchmark_runner import BenchmarkRunner
-from .config import Config
+from .config import Config, COLORS
 
 def parse_args():
     """Parse command line arguments."""
@@ -52,12 +52,13 @@ def select_benchmark(config: Config) -> str:
                 return benchmark_names[idx-1]
         print("Invalid selection, try again.")
 
-def select_instance(prompt_text: str, instance_name: Optional[str] = None) -> Tuple[str, str, str]:
+def select_instance(prompt_text: str, instances: List[str], instance_name: Optional[str] = None) -> Tuple[str, str, str]:
     """
     Select an instance and get its zone and remote path.
     
     Args:
         prompt_text: Text to display when prompting for instance selection
+        instances: List of available instances
         instance_name: Optional pre-selected instance name
         
     Returns:
@@ -65,7 +66,6 @@ def select_instance(prompt_text: str, instance_name: Optional[str] = None) -> Tu
     """
     if not instance_name:
         print(f"\n{prompt_text}:")
-        instances = get_running_instances()
         if not instances:
             print("Error: No running instances found.")
             sys.exit(1)
@@ -77,14 +77,30 @@ def select_instance(prompt_text: str, instance_name: Optional[str] = None) -> Tu
     
     return instance_name, zone, remote_path
 
-def use_default_instances() -> bool:
-    """Ask if user wants to use the first two instances with default directories."""
-    choice = input("\nDo you want to run the first two instances found with default install directories? [Y/n]: ").strip().lower()
+def display_instances_and_prompt(instances: List[str]) -> bool:
+    """Display instance list with first two highlighted and ask if user wants to use them."""
+    if len(instances) < 2:
+        print("Error: Need at least two running instances.")
+        sys.exit(1)
+        
+    print("\nAvailable instances:")
+    blue = COLORS['blue']
+    green = COLORS['green']
+    reset = COLORS['reset']
+    
+    for i, name in enumerate(instances):
+        if i == 0:
+            print(f"{blue}1. {name} (will be used as first instance){reset}")
+        elif i == 1:
+            print(f"{green}2. {name} (will be used as second instance){reset}")
+        else:
+            print(f"{i+1}. {name}")
+    
+    choice = input(f"\nDo you want to run the first two instances found with default install directories? [Y/n]: ").strip().lower()
     return choice == "" or choice == "y"
 
-def get_default_instances() -> List[Tuple[str, str, str]]:
+def get_default_instances(instances: List[str]) -> List[Tuple[str, str, str]]:
     """Get the first two instances with default directories."""
-    instances = get_running_instances()
     if len(instances) < 2:
         print("Error: Need at least two running instances.")
         sys.exit(1)
@@ -92,10 +108,14 @@ def get_default_instances() -> List[Tuple[str, str, str]]:
     default_path = "~/benchmarks/sweet"
     result = []
     
+    # Cache zones to avoid multiple API calls
+    zones = {}
+    
     for i in range(2):
         instance_name = instances[i]
-        zone = get_instance_zone(instance_name)
-        result.append((instance_name, zone, default_path))
+        if instance_name not in zones:
+            zones[instance_name] = get_instance_zone(instance_name)
+        result.append((instance_name, zones[instance_name], default_path))
         
     print(f"\nUsing instances: {instances[0]} and {instances[1]} with default path: {default_path}")
     return result
@@ -160,10 +180,13 @@ def main():
         # Setup systems for benchmarking
         systems = []
         
+        # Get instances only once
+        instances = get_running_instances() if not args.instance1 and not args.instance2 else []
+        
         # Check if user wants to use default instances
-        if not args.instance1 and not args.instance2 and use_default_instances():
+        if instances and display_instances_and_prompt(instances):
             # Get the first two instances with default directories
-            instance_configs = get_default_instances()
+            instance_configs = get_default_instances(instances)
             
             for instance_name, zone, remote_path in instance_configs:
                 systems.append({
@@ -175,7 +198,7 @@ def main():
         else:
             # Get first instance
             instance1_name, zone1, remote_path1 = select_instance(
-                "Select FIRST instance", args.instance1)
+                "Select FIRST instance", instances, args.instance1)
             
             systems.append({
                 "name": instance1_name,
@@ -186,7 +209,7 @@ def main():
             
             # Get second instance
             instance2_name, zone2, remote_path2 = select_instance(
-                "Select SECOND instance", args.instance2)
+                "Select SECOND instance", instances, args.instance2)
             
             systems.append({
                 "name": instance2_name,

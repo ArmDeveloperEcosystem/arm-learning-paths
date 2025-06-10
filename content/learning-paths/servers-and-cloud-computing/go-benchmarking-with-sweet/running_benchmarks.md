@@ -31,7 +31,6 @@ Sweet comes ready to run with the following benchmarks:
 | **etcd**          | Uses the official etcd benchmarking tool to stress-test an etcd cluster, measuring request latency and throughput for key-value operations. | `sweet run -count 10 -run="etcd" config.toml`                 |
 | **go-build**      | Compiles a representative Go module (or the Go toolchain) to measure compilation time and memory (RSS) usage on supported platforms.     | `sweet run -count 10 -run="go-build" config.toml`             |
 | **gopher-lua**    | Executes Lua scripts using the GopherLua VM to benchmark the performance of a pure-Go Lua interpreter.                                   | `sweet run -count 10 -run="gopher-lua" config.toml`           |
-| **gvisor**        | Benchmarks gVisor by measuring raw syscall overhead and HTTP server performance within the sandboxed container.                          | `sweet run -count 10 -run="gvisor" config.toml`               |
 | **markdown**      | Parses and renders Markdown documents to HTML using a Go-based markdown library to evaluate parsing and rendering throughput.            | `sweet run -count 10 -run="markdown" config.toml`             |
 | **tile38**        | Stress-tests a Tile38 geospatial database with WITHIN, INTERSECTS, and NEARBY queries to measure spatial query performance.              | `sweet run -count 10 -run="tile38" config.toml`               |
 
