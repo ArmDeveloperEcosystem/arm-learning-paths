@@ -38,7 +38,7 @@ Create a directory for your implementations:
 mkdir -p sve2_match_demo
 cd sve2_match_demo
 ```
-## Understanding the Problem
+## Understanding the problem
 
 Your goal is to implement a function that searches for any occurrence of a set of keys in an array. The function should return true if any element in the array matches any of the keys, and false otherwise.
 
@@ -89,7 +89,7 @@ int search_generic_u16(const uint16_t *hay, size_t n, const uint16_t *keys,
 ```
 The `search_generic_u8()` and `search_generic_u16()` functions both return 1 immediately when a match is found in the inner loop.
 
-### 2. SVE2 MATCH Implementation
+### 2. SVE2 MATCH implementation
 
 Now create an implementation that uses SVE2 MATCH instructions to process multiple elements in parallel. Copy the code shown into the same file:
 
@@ -143,7 +143,7 @@ The SVE MATCH implementation with the `search_sve2_match_u8()` and `search_sve2_
    - Processes data in vector-sized chunks with early termination when matches are found. Stops immediately when any element in the vector matches.
    - Falls back to scalar code for remainder elements
 
-### 3. Optimized SVE2 MATCH Implementation
+### 3. Optimized SVE2 MATCH implementation
 
 In this next SVE2 implementation you will add loop unrolling and prefetching to further improve performance. Copy the code shown into the same source file:
 
@@ -249,9 +249,9 @@ The main highlights of this implementation are:
    - Leverages the svmatch_u8/u16 instruction to efficiently compare each element against multiple keys in a single operation
    - Aligns memory to 64-byte boundaries for better memory access performance
 
-## Benchmarking Framework
+## Benchmarking framework
 
-To compare the performance of the three implementations, you will use a benchmarking framework that measures the execution time of each implementation. You will also add helper functions for membership testing that are needed to setup the test data with controlled hit rates:
+To compare the performance of the three implementations, use a benchmarking framework that measures the execution time of each implementation. You will also add helper functions for membership testing that are needed to setup the test data with controlled hit rates:
 
 ```c
 // Timing function
@@ -423,7 +423,7 @@ You can now compile the different search implementations:
 gcc -O3 -march=armv9-a+sve2 -mcpu=neoverse-v2 sve2_match_demo.c -o sve2_match_demo
 ```
 
-Now run the benchmark on a dataset of 65,536 elements (2^16) with a 0.001% hit rate:
+Run the benchmark on a dataset of 65,536 elements (2^16) with a 0.001% hit rate:
 
 ```bash
 ./sve2_match_demo $((1<<16)) 3 0.00001
@@ -455,7 +455,7 @@ You can experiment with different haystack lengths, iterations and hit probabili
 ```
 ## Performance Results
 
-When running on a Graviton4 instance with Ubuntu 24.04 and a dataset of 65,536 elements (2^16), you will observe the following results for different hit probabilities:
+When running on a Graviton4 instance with Ubuntu 24.04 and a dataset of 65,536 elements (2^16), you will see different hit probabilities, as shown in the following results:
 
 ### Latency (ns per iteration) for Different Hit Rates (8-bit)
 
