@@ -11,19 +11,32 @@ A tool for running Go benchmarks using Sweet on remote GCP instances and compari
 ```bash
 # macOS (using Homebrew)
 brew update
-brew install pyenv
+
+# Check if pyenv is already installed (via PATH or Homebrew), install if not
+if which pyenv &>/dev/null || brew list pyenv &>/dev/null; then
+  echo "pyenv is already installed"
+else
+  echo "Installing pyenv..."
+  brew install pyenv
+fi
 
 # Linux
 sudo apt-get -y update
 
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev
 
-curl https://pyenv.run | bash
+# Check if pyenv is already installed
+if which pyenv &>/dev/null; then
+  echo "pyenv is already installed"
+else
+  echo "Installing pyenv..."
+  curl https://pyenv.run | bash
 
-# Add to your shell configuration (.bashrc, .zshrc, etc.)
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+  # Add to your shell configuration (.bashrc, .zshrc, etc.)
+  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+  echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+  echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+fi
 ```
 
 Restart your shell or run `source ~/.bashrc` (or your appropriate shell config file).
