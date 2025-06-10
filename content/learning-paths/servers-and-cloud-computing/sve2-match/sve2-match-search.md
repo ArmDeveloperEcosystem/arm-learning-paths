@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Compare performance of different Search implementations"
+title: "Compare Search Performance Using Scalar and SVE2 MATCH on Arm Servers"
 
 weight: 2
 
@@ -10,39 +10,37 @@ layout: "learningpathall"
 ---
 ## Introduction
 
-Searching for specific values in large arrays is a fundamental operation in many applications, from databases to text processing. The performance of these search operations can significantly impact overall application performance, especially when dealing with large datasets.
+Searching for specific values in large arrays is a fundamental operation in many applications, from databases to text processing. The performance of these search operations can significantly affect overall application performance, especially when dealing with large datasets.
 
-In this learning path, you will learn how to use the SVE2 MATCH instructions available on Arm Neoverse V2 based AWS Graviton4 processors to optimize search operations in byte and half word arrays. You will compare the performance of scalar and SVE2 MATCH implementations to demonstrate the significant performance benefits of using specialized vector instructions.
+In this Learning Path, you will learn how to use the SVE2 MATCH instructions available on Arm Neoverse V2 based AWS Graviton4 processors to optimize search operations in byte and half word arrays. You will compare the performance of scalar and SVE2 MATCH implementations to demonstrate the significant performance benefits of using specialized vector instructions.
 
 ## What is SVE2 MATCH?
 
 SVE2 (Scalable Vector Extension 2) is an extension to the Arm architecture that provides vector processing capabilities with a length-agnostic programming model. The MATCH instruction is a specialized SVE2 instruction that efficiently searches for elements in a vector that match any element in another vector.
 
-## Set Up Your Environment
+## Set up your environment
 
 To follow this learning path, you will need:
 
-1. An AWS Graviton4 instance running `Ubuntu 24.04`. 
+1. An AWS Graviton4 instance running `Ubuntu 24.04`
 2. GCC compiler with SVE support
 
-Let's start by setting up our environment:
+Start by setting up your environment:
 
 ```bash
 sudo apt-get update
 sudo apt-get install -y build-essential gcc g++
 ```
-An effective way to achieve optimal performance on Arm is not only through optimal flag usage, but also by using the most 
-recent compiler version. This Learning path was tested with GCC 13 which is the default version on `Ubuntu 24.04` but you 
-can run it with newer versions of GCC as well.
+An effective way to achieve optimal performance on Arm is not only through optimal flag usage, but also by using the most recent compiler version. This Learning path was tested with GCC 13 which is the default version on `Ubuntu 24.04` but you can run it with newer versions of GCC as well.
 
-Create a directory for our implementations:
+Create a directory for your implementations:
 ```bash
 mkdir -p sve2_match_demo
 cd sve2_match_demo
 ```
 ## Understanding the Problem
 
-Our goal is to implement a function that searches for any occurrence of a set of keys in an array. The function should return true if any element in the array matches any of the keys, and false otherwise.
+Your goal is to implement a function that searches for any occurrence of a set of keys in an array. The function should return true if any element in the array matches any of the keys, and false otherwise.
 
 This type of search operation is common in many applications:
 
@@ -51,13 +49,13 @@ This type of search operation is common in many applications:
 3. **Network Packet Inspection**: Looking for specific byte patterns
 4. **Image Processing**: Finding specific pixel values
 
-## Implementing Search Algorithms
+## Implementing search algorithms
 
 Let's implement three versions of our search function:
 
-### 1. Generic Scalar Implementation
+### 1. Generic scalar implementation
 
-Create a generic implementation in C, checking each element individually against each key. Open a editor of your choice and copy the code shown into a file named `sve2_match_demo.c`:
+Create a generic implementation in C that checks each element individually against each key. Open a editor of your choice and copy the code shown into a file named `sve2_match_demo.c`:
 
 ```c
 #include <arm_sve.h>
@@ -246,7 +244,7 @@ if (svptest_any(pg, match1) || svptest_any(pg, match2) ||
 }
 ```
 The main highlights of this implementation are:
-   - Processes 4 vectors per iteration instead of just one and stops immediately when any match is found in any of the 4 vectors.
+   - Processes four vectors per iteration instead of just one and stops immediately when any match is found in any of the four vectors.
    - Uses prefetching (__builtin_prefetch) to reduce memory latency
    - Leverages the svmatch_u8/u16 instruction to efficiently compare each element against multiple keys in a single operation
    - Aligns memory to 64-byte boundaries for better memory access performance
@@ -564,5 +562,4 @@ For image processing, MATCH can accelerate:
 ## Conclusion
 
 The SVE2 MATCH instruction provides a powerful way to accelerate search operations in byte and half word arrays. By implementing these optimizations on Graviton4 instances, you can achieve significant performance improvements for your applications.
-
 
