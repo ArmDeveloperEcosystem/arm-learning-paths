@@ -7,80 +7,27 @@ layout: learningpathall
 ---
 
 ## Overview
- In the previous section, you setup System A, which is a c4a-standard-4. In this section, you will setup the second system used for benchmarking in this learning path, our System B, which will be a c4-standard-8.
- 
-{{% notice Note %}}
-If you choose to run the benchmark against one or more existing instances, you can skip this section; just refer to the system created in this section as System B going forward. 
-{{% /notice %}}
+ In the previous section, you setup a c4a-standard-4. In this section, you will setup the second system used for benchmarking in this learning path, a c4-standard-8.
 
 
-### Creating System B
+### Creating the instance
 
-1\. Navigate to [https://console.cloud.google.com/welcome](https://console.cloud.google.com/welcome)
-
-
-2\. Click into the Search field.
+To create the second system, follow the previous lesson's c4a install instructions, but make the following changes:
 
 
-3\. Start typing `vm` until the UI auto-completes `VM Instances`, then click it.
+1. For the `Name` field, and enter "c4".
 
-![](images/launch_c4a/3.png)
-
-The VM Instances page appears.
-
-5\. Click `Create instance`
-
-![](images/launch_c4a/4.png)
-
-The Machine configuration page appears.
-
-6\. Click the `Name` field, and enter "c4" for the `Name`.
-
-
-![](images/launch_c4a/5.png)
-
-
-
-8\. Scroll down to the Machine series section, and select the C4 radio button.
+2. Scroll down to the Machine series section, and select the C4 radio button.
 
 ![](images/launch_c4/3.png)
 
-
-
-9\. Scroll down to the Machine type dropdown, and click it to show all available options.
+3. Scroll down to the Machine type dropdown, and click it to show all available options.
 
 ![](images/launch_c4/4.png)
 
-
-
-10\. Select "c4-standard-8" under the Standard tab.
+4. Select "c4-standard-8" under the Standard tab.
 
 ![](images/launch_c4/5.png)
 
 
-
-11\. Click the "OS and Storage" tab.
-
-![](images/launch_c4/11.png)
-
-
-
-12\. Click "Change"
-
-![](images/launch_c4/12.png)
-
-
-
-13\. Click the "Size (GB)" field, then enter "1000" for the value.
-
-![](images/launch_c4/13.png)
-
-15\. Click "Select" to continue.
-
-![](images/launch_c4/15.png)
-
-16\. Click "Create" to bring up the instance.
-
-![](images/launch_c4/16.png)
-
-After a few seconds, our System A starts up, and you are ready to continue on to the next section, where you will launch the second system, System B.
+After the c4 starts up, and you are ready to continue on to the next section, where you'll install the benchmarking software.
