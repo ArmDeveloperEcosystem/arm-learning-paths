@@ -1,5 +1,5 @@
 ---
-title: Migrating a .NET OrchardCore CMS application to Azure Cobalt
+title: Migrating a .NET application to Azure Cobalt
 
 minutes_to_complete: 25
 

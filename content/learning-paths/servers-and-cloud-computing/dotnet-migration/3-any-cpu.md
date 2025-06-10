@@ -48,4 +48,4 @@ By configuring your application to be architecture agnostic, you gain several be
 - **Efficiency**: Reduce the need for maintaining separate builds for different architectures.
 - **Scalability**: Easily scale your application across different hardware platforms.
 
-This approach ensures that your OrchardCore application can run seamlessly on both Arm and x86 architectures, as well as 64 bit or 32 bit processors.
+This approach ensures that your OrchardCore application can run seamlessly on both Arm and x86 architectures.

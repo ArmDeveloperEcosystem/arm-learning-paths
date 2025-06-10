@@ -91,6 +91,7 @@ Now that you have a shared library, you can use it in your .NET application.
 3. Ensure that dotnet can find your shared library:
 
 ```bash
+export LD_LIBRARY_PATH=$(pwd):$LD_LIBRARY_PATH
 ```
 
 ## Step 3: Run your application
