@@ -1,31 +1,51 @@
 ---
-title: Build & Run an AI Agent on Your Workstation
+title: Build and run an AI agent on your development machine
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-### Create an AI Agent and point it at your Pi's MCP Server
-1. Bootstrap the Agent Project
+In this section, you'll learn how to set up an AI Agent on your development machine. You will then connect your MCP server running on the Raspberry Pi 5 to it.
+
+These commands were tested on a Linux Arm development machine. 
+
+## Create an AI Agent and point it at your Pi's MCP Server
+
+1. Install `uv` on your development machine:
+
 ```bash
-# create & enter folder
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+2. Create a directory for the Agent:
+```bash
 mkdir mcp-agent && cd mcp-agent
 ```
-2. scaffold with **uv**
+3. Set up the directory to use `uv`:
 ```bash
 uv init
 ```
-3. install **OpenAI Agents SDK** + **dotenv**
+
+This command adds:
+- .venv/ (auto-created virtual environment).
+- pyproject.toml (project metadata and dependencies).
+- .python-version (pinned interpreter).
+- README.md, .gitignore, and a sample main.py.
+
+4. Install **OpenAI Agents SDK** + **dotenv**:
 ```bash
 uv add openai-agents python-dotenv
 ```
-4. Create a `.env` file with your OpenAI key:
+5. Create a `.env` file to securely store your OpenAI API key:
+
 ```bash
 echo -n "OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>" > .env
 ```
 
-### Write the Agent Client (main.py)
+## Write the Python script for the Agent Client
+
+Use a file editor of your choice and replace the content of the sample `main.py` with the content shown below:
+
 ```python
 import asyncio, os
 from dotenv import load_dotenv
@@ -38,7 +58,7 @@ from agents import Agent, Runner, set_default_openai_key
 from agents.mcp import MCPServerSse
 from agents.model_settings import ModelSettings
 
-async def run(mcp_server: list[MCPServer]):
+async def run(mcp_server: list[MCPServerSse]):
     set_default_openai_key(os.getenv("OPENAI_API_KEY"))
 
     agent = Agent(
@@ -69,11 +89,18 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### Execute the Agent
+## Execute the Agent
+
+You’re now ready to run the AI Agent and test its connection to your running MCP server on the Raspberry Pi 5.
+
+Run the `main.py` Python script:
+
 ```bash
 uv run main.py
 ```
-You should see output like:
+
+The output should look something like this:
+
 ```output
 Running: What is the CPU temperature?
 Response: The current CPU temperature is 48.8°C.
@@ -85,11 +112,17 @@ Congratulations! Your local AI Agent just called the MCP server on your Raspberr
 
 This lightweight protocol isn’t just a game-changer for LLM developers—it also empowers IoT engineers to transform real-world data streams and give AI direct, reliable control over any connected device.
 
-### Next Steps
+## Next Steps
+
 - **Expand Your Toolset**  
-   - Write additional `@mcp.tool()` functions for Pi peripherals (GPIO pins, camera, I²C sensors, etc.)  
-   - Combine multiple MCP servers (e.g. filesystem, web-scraper, vector-store memory) for richer context  
+   - Write additional `@mcp.tool()` functions for Pi peripherals (such as GPIO pins, camera, and I²C sensors).  
+   - Combine multiple MCP servers (for example, filesystem, web-scraper, and vector-store memory) for richer context.  
 
 - **Integrate with IoT Platforms**  
-   - Hook into Home Assistant or Node-RED via MCP  
-   - Trigger real-world actions (turn on LEDs, read environmental sensors, control relays)  
+   - Hook into Home Assistant or Node-RED through MCP.  
+   - Trigger real-world actions (for example, turn on LEDs, read environmental sensors, and control relays).  
+
+## Section summary
+
+You’ve now built and run an AI agent on your development machine that connects to an MCP server on your Raspberry Pi 5. Your agent can now interact with real-world data sources in real time — a complete edge-to-cloud loop powered by OpenAI’s Agent SDK and the MCP protocol.
+

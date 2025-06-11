@@ -5908,15 +5908,15 @@
     automotive: 2
     cross-platform: 32
     embedded-and-microcontrollers: 41
-    install-guides: 100
-    iot: 5
+    install-guides: 101
+    iot: 6
     laptops-and-desktops: 37
     mobile-graphics-and-gaming: 33
-    servers-and-cloud-computing: 116
-    total: 366
+    servers-and-cloud-computing: 117
+    total: 369
   contributions:
-    external: 95
-    internal: 480
+    external: 94
+    internal: 482
   github_engagement:
     num_forks: 30
     num_prs: 6
@@ -5945,7 +5945,7 @@
     daniel-gubay: 1
     daniel-nguyen: 2
     david-spickett: 2
-    dawid-borycki: 32
+    dawid-borycki: 33
     diego-russo: 2
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
@@ -5959,17 +5959,18 @@
     han-yin: 1
     iago-calvo-lista: 1
     james-whitaker: 1
-    jason-andrews: 101
+    jason-andrews: 102
     joe-stech: 4
     johanna-skinnider: 2
     jonathan-davies: 2
     jose-emilio-munoz-lopez: 1
     julie-gaskin: 5
     julio-suarez: 6
+    jun-he: 1
     kasper-mecklenburg: 1
     kieran-hejmadi: 9
     koki-mitsunami: 2
-    konstantinos-margaritis: 9
+    konstantinos-margaritis: 8
     kristof-beyls: 1
     leandro-nunes: 1
     liliya-wu: 1
@@ -5982,14 +5983,13 @@
     nikhil-gupta: 1
     nina-drozd: 1
     nobel-chowdary-mandepudi: 6
-    odin-shen: 6
+    odin-shen: 7
     owen-wu: 2
     pareena-verma: 44
     paul-howard: 3
     pranay-bakre: 5
     preema-merlin-dsouza: 1
     przemyslaw-wirkus: 2
-    ravi-malhotra: 1
     rin-dobrescu: 1
     roberto-lopez-mendez: 2
     ronan-synnott: 45
@@ -6012,31 +6012,32 @@
 - a_date: '2025-06-02'
   content:
     automotive: 2
-    cross-platform: 32
+    cross-platform: 33
     embedded-and-microcontrollers: 41
-    install-guides: 100
-    iot: 5
+    install-guides: 101
+    iot: 6
     laptops-and-desktops: 37
     mobile-graphics-and-gaming: 33
-    servers-and-cloud-computing: 116
-    total: 366
+    servers-and-cloud-computing: 118
+    total: 371
   contributions:
     external: 95
-    internal: 480
+    internal: 497
   github_engagement:
     num_forks: 30
     num_prs: 7
   individual_authors:
-    adnan-alsinan: 1
+    adnan-alsinan: 2
     alaaeddine-chakroun: 2
     albin-bernhardsson: 1
     alex-su: 1
     alexandros-lamprineas: 1
-    andrew-choi: 1
+    andrew-choi: 2
     annie-tallund: 4
     arm: 3
     arnaud-de-grandmaison: 4
     arnaud-de-grandmaison.: 1
+    aude-vuilliomenet: 1
     avin-zarlez: 1
     barbara-corriero: 1
     basma-el-gaabouri: 1
@@ -6051,7 +6052,7 @@
     daniel-gubay: 1
     daniel-nguyen: 2
     david-spickett: 2
-    dawid-borycki: 32
+    dawid-borycki: 33
     diego-russo: 2
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
@@ -6061,21 +6062,23 @@
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
     geremy-cohen: 1
+    gian-marco-iodice: 1
     graham-woodward: 1
     han-yin: 1
     iago-calvo-lista: 1
     james-whitaker: 1
-    jason-andrews: 101
+    jason-andrews: 102
     joe-stech: 4
     johanna-skinnider: 2
     jonathan-davies: 2
     jose-emilio-munoz-lopez: 1
     julie-gaskin: 5
     julio-suarez: 6
+    jun-he: 1
     kasper-mecklenburg: 1
-    kieran-hejmadi: 9
+    kieran-hejmadi: 10
     koki-mitsunami: 2
-    konstantinos-margaritis: 9
+    konstantinos-margaritis: 8
     kristof-beyls: 1
     leandro-nunes: 1
     liliya-wu: 1
@@ -6088,14 +6091,13 @@
     nikhil-gupta: 1
     nina-drozd: 1
     nobel-chowdary-mandepudi: 6
-    odin-shen: 6
+    odin-shen: 7
     owen-wu: 2
     pareena-verma: 44
     paul-howard: 3
     pranay-bakre: 5
     preema-merlin-dsouza: 1
     przemyslaw-wirkus: 2
-    ravi-malhotra: 1
     rin-dobrescu: 1
     roberto-lopez-mendez: 2
     ronan-synnott: 45
@@ -6118,31 +6120,33 @@
 - a_date: '2025-06-09'
   content:
     automotive: 2
-    cross-platform: 32
+    cross-platform: 33
     embedded-and-microcontrollers: 41
-    install-guides: 100
-    iot: 5
+    install-guides: 101
+    iot: 6
     laptops-and-desktops: 37
-    mobile-graphics-and-gaming: 33
-    servers-and-cloud-computing: 116
-    total: 366
+    mobile-graphics-and-gaming: 34
+    servers-and-cloud-computing: 119
+    total: 373
   contributions:
     external: 95
-    internal: 480
+    internal: 500
   github_engagement:
     num_forks: 30
     num_prs: 8
   individual_authors:
-    adnan-alsinan: 1
+    adnan-alsinan: 2
     alaaeddine-chakroun: 2
     albin-bernhardsson: 1
     alex-su: 1
     alexandros-lamprineas: 1
-    andrew-choi: 1
+    andrew-choi: 2
+    andrew-kilroy: 1
     annie-tallund: 4
     arm: 3
     arnaud-de-grandmaison: 4
     arnaud-de-grandmaison.: 1
+    aude-vuilliomenet: 1
     avin-zarlez: 1
     barbara-corriero: 1
     basma-el-gaabouri: 1
@@ -6157,7 +6161,7 @@
     daniel-gubay: 1
     daniel-nguyen: 2
     david-spickett: 2
-    dawid-borycki: 32
+    dawid-borycki: 33
     diego-russo: 2
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
@@ -6166,22 +6170,24 @@
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
-    geremy-cohen: 1
+    geremy-cohen: 2
+    gian-marco-iodice: 1
     graham-woodward: 1
     han-yin: 1
     iago-calvo-lista: 1
     james-whitaker: 1
-    jason-andrews: 101
+    jason-andrews: 102
     joe-stech: 4
     johanna-skinnider: 2
     jonathan-davies: 2
     jose-emilio-munoz-lopez: 1
     julie-gaskin: 5
     julio-suarez: 6
+    jun-he: 1
     kasper-mecklenburg: 1
-    kieran-hejmadi: 9
+    kieran-hejmadi: 10
     koki-mitsunami: 2
-    konstantinos-margaritis: 9
+    konstantinos-margaritis: 8
     kristof-beyls: 1
     leandro-nunes: 1
     liliya-wu: 1
@@ -6194,14 +6200,14 @@
     nikhil-gupta: 1
     nina-drozd: 1
     nobel-chowdary-mandepudi: 6
-    odin-shen: 6
+    odin-shen: 7
     owen-wu: 2
     pareena-verma: 44
     paul-howard: 3
+    peter-harris: 1
     pranay-bakre: 5
     preema-merlin-dsouza: 1
     przemyslaw-wirkus: 2
-    ravi-malhotra: 1
     rin-dobrescu: 1
     roberto-lopez-mendez: 2
     ronan-synnott: 45

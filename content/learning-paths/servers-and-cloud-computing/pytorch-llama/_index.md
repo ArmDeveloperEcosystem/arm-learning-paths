@@ -19,8 +19,6 @@ author:
     - Nikhil Gupta
     - Pareena Verma
     - Nobel Chowdary Mandepudi
-    - Ravi Malhotra
-    - Konstantinos Margaritis
 
 ### Tags
 skilllevels: Introductory
@@ -34,7 +32,7 @@ tools_software_languages:
     - GenAI
     - Python
     - PyTorch
-
+    - Hugging Face
 
 further_reading:
     - resource:

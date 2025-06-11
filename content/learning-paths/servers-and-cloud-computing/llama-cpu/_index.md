@@ -30,7 +30,7 @@ tools_software_languages:
     - GenAI
     - Python
     - Demo
-
+    - Hugging Face
 
 further_reading:
     - resource:

@@ -10,11 +10,11 @@ operatingsystems_filter:
 - Android: 2
 - ChromeOS: 1
 - Linux: 31
-- macOS: 7
-- Windows: 43
+- macOS: 8
+- Windows: 44
 subjects_filter:
 - CI-CD: 5
-- Containers and Virtualization: 5
+- Containers and Virtualization: 6
 - Migration to Arm: 28
 - ML: 2
 - Performance and Architecture: 25
@@ -34,12 +34,12 @@ tools_software_languages_filter:
 - C/C++: 4
 - CCA: 1
 - Clang: 11
-- CMake: 2
 - cmake: 1
+- CMake: 2
 - Coding: 16
 - CSS: 1
 - Daytona: 1
-- Docker: 4
+- Docker: 5
 - GCC: 10
 - Git: 1
 - GitHub: 3
@@ -52,6 +52,7 @@ tools_software_languages_filter:
 - JavaScript: 2
 - Kubernetes: 1
 - Linux: 1
+- LLM: 1
 - LLVM: 1
 - llvm-mca: 1
 - MSBuild: 1
@@ -62,7 +63,7 @@ tools_software_languages_filter:
 - ONNX Runtime: 1
 - OpenCV: 1
 - perf: 4
-- Python: 5
+- Python: 6
 - Qt: 2
 - Remote.It: 1
 - RME: 1

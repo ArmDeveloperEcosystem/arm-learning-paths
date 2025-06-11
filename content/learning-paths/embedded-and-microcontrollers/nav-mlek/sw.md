@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 You should use an `x86_64` development machine running Windows or Linux for the best experience. 
 
-The [Arm ML Evaluation Kit (MLEK)](https://git.mlplatform.org/ml/ethos-u/ml-embedded-evaluation-kit.git/) is not fully supported on Windows. Some of the required tools work only on Linux. Linux is recommended if you plan to use MLEK extensively. 
+The [Arm ML Evaluation Kit (MLEK)](https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit) is not fully supported on Windows. Some of the required tools work only on Linux. Linux is recommended if you plan to use MLEK extensively. 
 
 There are some ML examples which can be developed using Windows tools. 
 
@@ -52,7 +52,7 @@ You may want to use [Docker](/install-guides/docker) to simplify ML development 
 As an example, clone the MLEK repository and look at the `Dockerfile` at the top of the repository to see one way to use Docker in ML application development:
 
 ```console
-git clone "https://review.mlplatform.org/ml/ethos-u/ml-embedded-evaluation-kit"
+git clone "https://git.gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit.git"
 cd ml-embedded-evaluation-kit
 git submodule update --init
 ```
@@ -96,9 +96,9 @@ Resources for learning about ML applications are listed below for you to investi
 
 ### Arm ML Evaluation Kit (MLEK)
 
-The [MLEK](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit) provides a number of example ML applications.
+The [MLEK](https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit) provides a number of example ML applications.
 
-[The Quick Start Guide](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit/+/HEAD/docs/quick_start.md) guides you through running an example application.
+[The Quick Start Guide](https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit/-/blob/main/docs/quick_start.md) guides you through running an example application.
 
 ### Micro speech
 

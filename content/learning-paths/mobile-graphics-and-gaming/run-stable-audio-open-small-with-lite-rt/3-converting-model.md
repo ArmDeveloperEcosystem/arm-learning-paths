@@ -1,12 +1,15 @@
 ---
-title: Convert Open Stable Audio Small model to LiteRT
+title: Convert Stable Audio Open Small model to LiteRT
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+In this section, you will learn about the audio generation model. You will then clone a repository that contains the scripts required to convert the model submodules into LiteRT format and generate the inference application.
 
-## Stable Audio Open Small Model
+## Stable Audio Open Small
+
+The open-source model consists of three main submodules. They are described in the table below, and come together through the pipeline shown in the image.
 
 |Submodule|Description|
 |------|------|
@@ -14,34 +17,35 @@ layout: learningpathall
 |Diffusion Transformer (DiT)| Denoises random noise over multiple steps to produce structured latent audio, guided by conditioner embeddings. |
 |AutoEncoder| Compresses audio waveforms into a latent representation for processing by the DiT model, and decompresses the output back into audio. |
 
-The submodules work together to provide the pipeline as shown below:
+
 ![Model structure#center](./model.png)
 
-As part of this section, you will covert each of the three submodules into [LiteRT](https://ai.google.dev/edge/litert) format, using two separate conversion routes:
-1. Conditioners submodule - ONNX to LiteRT using [onnx2tf](https://github.com/PINTO0309/onnx2tf) tool.
-2. DiT and AutoEncoder submodules - PyTorch to LiteRT using Google AI Edge Torch tool.
+In this section, you will explore two different conversion routes, to convert the submodules to [LiteRT](https://ai.google.dev/edge/litert) format. Both methods will be run using Python wrapper scripts from the examples repository.
 
-### Create virtual environment and install dependencies
+1. **ONNX to LiteRT**: using the `onnx2tf` tool. This is the traditional two-step approach (PyTorch -> ONNX -> LiteRT). You will use it to convert the Conditioners submodule.
 
-The Conditioners submodule is made of the T5Encoder model. You will use the ONNX to TFLite conversion for this submodule.
+2. **PyTorch to LiteRT**: using the [Google AI Edge Torch](https://developers.googleblog.com/en/ai-edge-torch-high-performance-inference-of-pytorch-models-on-mobile-devices/) tool. You will use this tool to convert the DiT and AutoEncoder submodules.
 
-To avoid dependency issues, create a virtual environment. In this guide, we will use `virtualenv`:
 
-```bash
-cd $WORKSPACE
-python3.10 -m venv env
-source env/bin/activate
-```
+## Create a virtual environment
 
-Clone the examples repository:
+To avoid dependency issues, create a virtual environment. For example, you can use the following command:
 
 ```bash
 cd $WORKSPACE
-git clone https://github.com/ARM-software/ML-examples/tree/main/kleidiai-examples/audiogen
-cd audio-stale-open-litert
+python3.10 -m venv .venv
+source .venv/bin/activate
 ```
 
-We now install the needed python packages for this, including *onnx2tf* and *ai_edge_litert*
+## Clone the examples repository
+
+```bash
+cd $WORKSPACE
+git clone https://github.com/ARM-software/ML-examples.git
+cd ML-examples/kleidiai-examples/audiogen/
+```
+
+## Install the required dependencies
 
 ```bash
 bash install_requirements.sh
@@ -52,29 +56,28 @@ bash install_requirements.sh
 If you are using GPU on your machine, you may notice the following error:
 ```text
 Traceback (most recent call last):
-  File "$WORKSPACE/env/lib/python3.10/site-packages/torch/_inductor/runtime/hints.py",
+  File "$WORKSPACE/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/hints.py",
   line 46, in <module> from triton.backends.compiler import AttrsDescriptor
 ImportError: cannot import name 'AttrsDescriptor' from 'triton.backends.compiler'
-($WORKSPACE/env/lib/python3.10/site-packages/triton/backends/compiler.py)
+($WORKSPACE/.venv/lib/python3.10/site-packages/triton/backends/compiler.py)
 .
 ImportError: cannot import name 'AttrsDescriptor' from 'triton.compiler.compiler'
-($WORKSPACE/env/lib/python3.10/site-packages/triton/compiler/compiler.py)
+($WORKSPACE/.venv/lib/python3.10/site-packages/triton/compiler/compiler.py)
 ```
 
-Install the following dependency and rerun the script:
+Reinstall the following dependency:
 ```bash
 pip install triton==3.2.0
-bash install_requirements.sh
 ```
 
 {{% /notice %}}
 
 ### Convert Conditioners Submodule
 
-The Conditioners submodule is based on the T5Encoder model. We convert it first to ONNX, then to LiteRT.
+The Conditioners submodule is based on the T5Encoder model. First, convert it to ONNX, then to LiteRT.
 
-For this conversion we include the following steps:
-1. Load the Conditioners submodule from the Stable Audio Open model configuration and checkpoint.
+For this conversion, the following steps are required:
+1. Load the Conditioners submodule from the Stable Audio Open Small model configuration and checkpoint.
 2. Export the Conditioners submodule to ONNX via *torch.onnx.export()*.
 3. Convert the resulting ONNX file to LiteRT using *onnx2tf*.
 
@@ -84,28 +87,30 @@ You can use the provided script to convert the Conditioners submodule:
 python3 ./scripts/export_conditioners.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
 ```
 
-After successful conversion, you now have a `conditioners.onnx` model in your current directory.
 
-### Convert DiT and AutoEncoder
+After successful conversion, you now have a `conditioners_tflite` directory containing models with different precision (e.g., float16, float32).
 
-To convert the DiT and AutoEncoder submodules, use the [Generative API](https://github.com/google-ai-edge/ai-edge-torch/tree/main/ai_edge_torch/generative/) provided by the ai-edge-torch tools. This enables you to export a generative PyTorch model directly to tflite using three main steps:
+You will be using the float32.tflite model for on-device inference.
+
+### Convert DiT and AutoEncoder Submodules
+
+To convert the DiT and AutoEncoder submodules, use the [Generative API](https://github.com/google-ai-edge/ai-edge-torch/tree/main/ai_edge_torch/generative/) provided by the `ai-edge-torch` tools. This enables you to export a generative PyTorch model directly to `.tflite` using three main steps:
 
 1. Model re-authoring.
 2. Quantization.
 3. Conversion.
 
-Convert the DiT and AutoEncoder submodules using the provided python script:
-```bash
-CUDA_VISIBLE_DEVICES="" python3 ./scripts/export_dit_autoencoder.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
-```
-
-After successful conversion, you now have `dit_model.tflite` and `autoencoder_model.tflite` models in your current directory and can deactivate the virtual environment:
+Convert the DiT and AutoEncoder submodules using the provided Python script:
 
 ```bash
-deactivate
+python3 ./scripts/export_dit_autoencoder.py --model_config "$WORKSPACE/model_config.json" --ckpt_path "$WORKSPACE/model.ckpt"
 ```
 
-For easier access, we add all needed models to one directory:
+After successful conversion, you now have `dit_model.tflite` and `autoencoder_model.tflite` models in your current directory.
+
+A more detailed explanation of the above scripts is available [here](https://github.com/ARM-software/ML-examples/blob/main/kleidiai-examples/audiogen/scripts/README.md).
+
+For easy access, add all the required models to one directory:
 
 ```bash
 export LITERT_MODELS_PATH=$WORKSPACE/litert-models
@@ -115,7 +120,7 @@ cp dit_model.tflite $LITERT_MODELS_PATH
 cp autoencoder_model.tflite $LITERT_MODELS_PATH
 ```
 
-With all three submodules converted to LiteRT format, you're ready to build LiteRT and run the model on a mobile device in the next step.
+With all three submodules now converted to LiteRT format, you're ready to build the runtime and run Stable Audio Open Small directly on an Android device in the next step.
 
 
 

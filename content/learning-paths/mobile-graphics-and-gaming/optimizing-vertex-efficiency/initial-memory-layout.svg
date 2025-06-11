@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="132.28287mm"
+   height="164.55644mm"
+   viewBox="0 0 132.28287 164.55644"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="initial-memory-layout.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="1"
+     inkscape:pagecheckerboard="1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1"
+     inkscape:cx="171.5"
+     inkscape:cy="285.5"
+     inkscape:window-width="1970"
+     inkscape:window-height="970"
+     inkscape:window-x="413"
+     inkscape:window-y="208"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer2"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path86764" />
+    </marker>
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="background"
+     transform="translate(-39.0451,-31.790488)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.267398"
+       id="rect941"
+       width="132.01547"
+       height="164.28905"
+       x="39.178799"
+       y="31.924187" />
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-39.0451,-31.790488)">
+    <g
+       id="g34344">
+      <g
+         id="g45140">
+        <rect
+           style="fill:#e8e8e8;fill-opacity:1;stroke:#000000;stroke-width:0.238212"
+           id="rect2454"
+           width="74.501976"
+           height="14.274522"
+           x="85.002083"
+           y="41.801659" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="89.065254"
+           y="50.748531"
+           id="text22511"><tspan
+             sodipodi:role="line"
+             id="tspan22509"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             x="89.065254"
+             y="50.748531">mesh[0].position</tspan></text>
+      </g>
+      <g
+         id="g45140-3"
+         transform="translate(0,14.274521)">
+        <rect
+           style="fill:#e8e8e8;fill-opacity:1;stroke:#000000;stroke-width:0.238212"
+           id="rect2454-8"
+           width="74.501976"
+           height="14.274522"
+           x="85.002083"
+           y="41.801659" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="89.065254"
+           y="50.748531"
+           id="text22511-0"><tspan
+             sodipodi:role="line"
+             id="tspan22509-4"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             x="89.065254"
+             y="50.748531">mesh[0].color</tspan></text>
+      </g>
+      <g
+         id="g45140-0"
+         transform="translate(0,28.549042)">
+        <rect
+           style="fill:#e8e8e8;fill-opacity:1;stroke:#000000;stroke-width:0.238212"
+           id="rect2454-9"
+           width="74.501976"
+           height="14.274522"
+           x="85.002083"
+           y="41.801659" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="89.065254"
+           y="50.748531"
+           id="text22511-1"><tspan
+             sodipodi:role="line"
+             id="tspan22509-9"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             x="89.065254"
+             y="50.748531">mesh[0].normal</tspan></text>
+      </g>
+      <g
+         id="g45140-2"
+         transform="translate(0,85.647126)">
+        <rect
+           style="fill:#e8e8e8;fill-opacity:1;stroke:#000000;stroke-width:0.238212"
+           id="rect2454-88"
+           width="74.501976"
+           height="14.274522"
+           x="85.002083"
+           y="41.801659" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="89.065254"
+           y="50.748531"
+           id="text22511-8"><tspan
+             sodipodi:role="line"
+             id="tspan22509-6"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             x="89.065254"
+             y="50.748531">mesh[2].position</tspan></text>
+      </g>
+      <g
+         id="g45140-3-8"
+         transform="translate(0,99.921651)">
+        <rect
+           style="fill:#e8e8e8;fill-opacity:1;stroke:#000000;stroke-width:0.238212"
+           id="rect2454-8-3"
+           width="74.501976"
+           height="14.274522"
+           x="85.002083"
+           y="41.801659" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="89.065254"
+           y="50.748531"
+           id="text22511-0-8"><tspan
+             sodipodi:role="line"
+             id="tspan22509-4-3"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             x="89.065254"
+             y="50.748531">mesh[2].color</tspan></text>
+      </g>
+      <g
+         id="g45140-0-3"
+         transform="translate(0,114.19617)">
+        <rect
+           style="fill:#e8e8e8;fill-opacity:1;stroke:#000000;stroke-width:0.238212"
+           id="rect2454-9-3"
+           width="74.501976"
+           height="14.274522"
+           x="85.002083"
+           y="41.801659" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="89.065254"
+           y="50.748531"
+           id="text22511-1-8"><tspan
+             sodipodi:role="line"
+             id="tspan22509-9-0"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             x="89.065254"
+             y="50.748531">mesh[2].normal</tspan></text>
+        <rect
+           style="fill:#e8e8e8;fill-opacity:1;stroke:#000000;stroke-width:0.238212"
+           id="rect2454-9-3-8"
+           width="74.501976"
+           height="14.274522"
+           x="85.002083"
+           y="56.07618" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="89.065254"
+           y="65.023056"
+           id="text22511-1-8-8"><tspan
+             sodipodi:role="line"
+             id="tspan22509-9-0-3"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             x="89.065254"
+             y="65.023056">...</tspan></text>
+      </g>
+      <g
+         id="g45140-6"
+         transform="translate(0,42.823563)">
+        <rect
+           style="fill:#e8e8e8;fill-opacity:1;stroke:#000000;stroke-width:0.238212"
+           id="rect2454-2"
+           width="74.501976"
+           height="14.274522"
+           x="85.002083"
+           y="41.801659" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="89.065254"
+           y="50.748531"
+           id="text22511-5"><tspan
+             sodipodi:role="line"
+             id="tspan22509-44"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             x="89.065254"
+             y="50.748531">mesh[1].position</tspan></text>
+      </g>
+      <g
+         id="g45140-9"
+         transform="translate(0,57.098084)">
+        <rect
+           style="fill:#e8e8e8;fill-opacity:1;stroke:#000000;stroke-width:0.238212"
+           id="rect2454-93"
+           width="74.501976"
+           height="14.274522"
+           x="85.002083"
+           y="41.801659" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="89.065254"
+           y="50.748531"
+           id="text22511-6"><tspan
+             sodipodi:role="line"
+             id="tspan22509-0"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             x="89.065254"
+             y="50.748531">mesh[1].color</tspan></text>
+      </g>
+      <g
+         id="g45140-5"
+         transform="translate(0,71.372605)">
+        <rect
+           style="fill:#e8e8e8;fill-opacity:1;stroke:#000000;stroke-width:0.238212"
+           id="rect2454-0"
+           width="74.501976"
+           height="14.274522"
+           x="85.002083"
+           y="41.801659" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="89.065254"
+           y="50.748531"
+           id="text22511-2"><tspan
+             sodipodi:role="line"
+             id="tspan22509-94"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             x="89.065254"
+             y="50.748531">mesh[1].normal</tspan></text>
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="52.736732"
+       y="50.925953"
+       id="text82444"><tspan
+         sodipodi:role="line"
+         id="tspan82442"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="52.736732"
+         y="50.925953">Increasing</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="52.736732"
+         y="56.217613"
+         id="tspan82446">memory</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="52.736732"
+         y="61.509277"
+         id="tspan82448">address</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
+       d="m 62.221039,66.034963 0.105,27.44769"
+       id="path86661" />
+  </g>
+</svg>

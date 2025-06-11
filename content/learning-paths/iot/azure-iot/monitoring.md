@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Set Up Data Monitoring and Alerts with Azure Functions"
+title: "Set up data monitoring and alerts with Azure Functions"
 
 weight: 7
 
@@ -9,10 +9,10 @@ layout: "learningpathall"
 
 In the previous section, you successfully configured Azure Stream Analytics to store incoming IoT telemetry data securely in Azure Cosmos DB. The stored sensor data is now readily accessible for further analysis, monitoring, and action. In this section, you will enhance your IoT solution by implementing real-time data monitoring and alerting capabilities using Azure Functions.
 
-Azure Functions is a powerful, event-driven, serverless compute service provided by Azure, enabling you to execute custom code in response to specific events or triggers without the need to manage infrastructure. You will create an Azure Function that regularly queries temperature data from Cosmos DB, evaluates sensor readings against predefined thresholds, and sends notifications when critical values are exceeded,such as detecting overheating or environmental anomalies. By adding this functionality, you will build proactive monitoring into your IoT pipeline, ensuring timely responses to sensor data events and improving overall operational reliability.
+Azure Functions is a lightweight, serverless compute platform provided by Azure, enabling you to execute custom code in response to specific events or triggers without the need to manage infrastructure. You'll will create an Azure Function that regularly queries temperature data from Cosmos DB, evaluates sensor readings against predefined thresholds, and sends notifications when critical values are exceeded, such as detecting overheating or environmental anomalies. By adding this functionality, you will build proactive monitoring into your IoT pipeline, ensuring timely responses to sensor data events and improving overall operational reliability.
 
 ## Azure Functions
-Azure Functions is a serverless computing platform provided by Microsoft Azure, designed to enable developers to run event-driven code without having to provision or manage infrastructure. With Azure Functions, you can easily create small, focused applications or services that automatically respond to events, such as database updates, HTTP requests, IoT sensor data events, or scheduled tasks. Because Azure Functions is serverless, it automatically scales based on workload, providing elasticity, rapid deployment, and simplified maintenance, developers only pay for resources actually consumed during execution.
+Azure Functions is a serverless computing platform provided by Microsoft Azure, designed to enable developers to run event-driven code without having to provision or manage infrastructure. With Azure Functions, you easily create small, focused applications or services that automatically respond to events, such as database updates, HTTP requests, IoT sensor data events, or scheduled tasks. Because Azure Functions is serverless, it automatically scales based on workload, providing elasticity, rapid deployment, and simplified maintenance, developers only pay for resources actually consumed during execution.
 
 In IoT, Azure Functions are particularly valuable for responding to real-time data events, such as sensor readings exceeding specific thresholds. You can integrate Azure Functions seamlessly with services like Azure Cosmos DB, Azure IoT Hub, or Azure Notification Hubs, enabling functions to trigger automatically when new data is received or when certain conditions are met. This flexibility allows you to build responsive, cost-effective, and efficient IoT applications that require minimal setup yet offer highly scalable, real-time processing capabilities.
 
@@ -56,11 +56,11 @@ To overcome this limitation, local development is highly recommended for Python-
 For Python functions on Linux-based plans, local development and deployment represent the best-practice approach, enabling you to efficiently create, debug, test, and manage more sophisticated IoT solutions. Therefore, in this section you will use local development.
 
 ## Create an Azure Function App
-You will start by creating an Azure Function App, in which you will create an Azure Function that regularly queries temperature data from Cosmos DB. In the next step, upi will add the capability to send notifications, whenever the temperature reading exceeds a predefined threshold. Proceed as follows:
+You will start by creating an Azure Function App, in which you will create an Azure Function that regularly queries temperature data from Cosmos DB. In the next step, you will add the capability to send notifications, whenever the temperature reading exceeds a predefined threshold. Proceed as follows:
 1. Sign in to the Azure Portal.
-2. Click “Create a resource”, type “Function App”, and select it:
+2. Click **Create a resource**, type “Function App”, and select it:
 ![img24 alt-text#center](figures/24.png)
-3. Click Create, then select Consumption as a hosting option:
+3. Click **Create**, then select Consumption as a hosting option:
 ![img25 alt-text#center](figures/25.png)
 4. Provide the required details:
 * Subscription: Your Azure subscription.
@@ -96,7 +96,7 @@ Ensure you also see a v4.x.x output, indicating compatibility with Python v2 mod
 
 ## Create Azure Function to Read Cosmos DB Data 
 Follow these steps to create an Azure Function locally using Visual Studio Code:
-1. In Visual Studio Cod, click View->Command Palette... 
+1. In Visual Studio Code, click View->Command Palette... 
 2. Type "Create Function":
 ![img27 alt-text#center](figures/27.png)
 3. Select Azure Functions: Create Function...
@@ -286,7 +286,7 @@ def cosmosdb_trigger(azcosmosdb: func.DocumentList):
                 )
 ```
 
-The `send_email_alert` function is responsible for sending an email notification through SendGrid whenever a sensor reading exceeds the specified temperature threshold. It constructs an email message using details about the IoT device, including the device_id, current temperature, and the event timestamp. The function utilizes SendGrid's Python SDK (SendGridAPIClient) to send the email message. If the email is successfully sent, it logs a confirmation with the status code. If the email fails, it captures and logs the error details, ensuring that any issues with email delivery can be easily identified and resolved. This function enables proactive monitoring by immediately alerting the user when potentially critical temperature conditions are detected, significantly enhancing the reliability and responsiveness of the IoT system
+The `send_email_alert` function is responsible for sending an email notification through SendGrid whenever a sensor reading exceeds the specified temperature threshold. It constructs an email message using details about the IoT device, including the device_id, current temperature, and the event timestamp. The function utilizes SendGrid's Python SDK (SendGridAPIClient) to send the email message. If the email is successfully sent, it logs a confirmation with the status code. If the email fails, it captures and logs the error details, ensuring that any issues with email delivery can be easily identified and resolved. This function enables proactive monitoring by alerting users immediately when potentially critical temperature conditions are detected, significantly enhancing the reliability and responsiveness of the IoT system
 
 Now, start your function:
 ```console
