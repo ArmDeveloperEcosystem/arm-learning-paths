@@ -1,61 +1,64 @@
 ---
-title: Installing the Automated benchmark and benchstat runner
+title: Installing the Automated Benchmark and Benchstat Runner
 weight: 53
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-In the last section, you learned how to run benchmarks and benchstat manually.  In this section, you'll learn how to run them automatically, with enhanced visualization of the results.
+## Section Overview
 
+In the last section, you learned how to run benchmarks and benchstat manually. Now you'll learn how to run them automatically, with enhanced visualization of the results.
 
 ## Introducing rexec_sweet.py
 
-To make running benchmarks and `benchstat` easier, you can use the `rexec_sweet.py` script.  This script automates the process of running benchmarks on both your Arm-based and x86-based VMs, and then running `benchstat` to compare the results.
+The `rexec_sweet.py` script is a powerful automation tool that simplifies the benchmarking workflow.  This tool connects to your GCP instances, runs the benchmarks, collects the results, and generates comprehensive reports—all in one seamless operation. It provides several key benefits:
 
-### Setting up the script
+- **Automation**: Runs benchmarks on multiple VMs without manual SSH connections
+- **Consistency**: Ensures benchmarks are executed with identical parameters
+- **Visualization**: Generates HTML reports with interactive charts for easier analysis
 
-1. On your local machine, open a terminal, and create a directory to store the `rexec_sweet.py` script and related files. For example, you can create a directory called `rexec_sweet`:
+The only dependency you are responsible for satisfying before the script runs is completion of the "Installing Go and Sweet" sections of this learning path.  Additional dependencies are dynamically loaded at install time by the install script.
 
-```bash
-mkdir rexec_sweet
-cd rexec_sweet
-```
+## Setting up rexec_sweet
+
+1. **Create a working directory:** On your local machine, open a terminal, then create and cd into a directory to store the `rexec_sweet.py` script and related files:
+
+   ```bash
+   mkdir rexec_sweet
+   cd rexec_sweet
+   ```
    
-2. Clone the `rexec_sweet.py` script from the GitHub repository:
+2. **Clone the repository inside the directory:** Get the `rexec_sweet.py` script from the GitHub repository:
 
-```bash
-git clone https://github.com/geremyCohen/go_benchmarks.git
-cd go_benchmarks
-```
+   ```bash
+   git clone https://github.com/geremyCohen/go_benchmarks.git
+   cd go_benchmarks
+   ```
 
-3. Copy and paste this code into your terminal to run the installer for `rexec_sweet.py`:
+3. **Run the installer:** Copy and paste this command into your terminal to run the installer:
 
-```bash
-./install.sh
-```
+   ```bash
+   ./install.sh
+   ```
 
-If the install.sh script detects that you already have dependencies installed, it may ask you if you wish to reinstall them with the following prompt:
+   If the install.sh script detects that you already have dependencies installed, it may ask you if you wish to reinstall them with the following prompt:
 
-```output
-$ ./install.sh
-...
-pyenv is already installed
-virtualenv is already installed
-pyenv-virtualenv is already installed
-pyenv: /Users/gercoh01/.pyenv/versions/3.9.22 already exists
-continue with installation? (y/N)
-```
+   ```bash
+   # Example output:
+   $ ./install.sh
+   ...
+   pyenv: /Users/gercoh01/.pyenv/versions/3.9.22 already exists
+   continue with installation? (y/N)
+   ```
 
-If you see this prompt, enter `N` (not `Y`!) to continue with the installation without modifying the existing installed dependencies.
+   If you see this prompt, enter `N` (not `Y`!) to continue with the installation without modifying the existing installed dependencies.
 
-
-
-4. Make sure the GCP VM instances you created in the previous section are running.  If not, start them now.
+4. **Verify VM status:** Make sure the GCP VM instances you created in the previous section are running. If not, start them now, and give them a few minutes to come up.
 
 {{% notice Note %}}
 The install script will prompt you to authenticate with Google Cloud Platform (GCP) using the gcloud command-line tool at the end of install. If after installing you have issues running the script and/or get GCP authentication errors, you can manually authenticate with GCP by running the following command: `gcloud auth login`
-{{% /notice %}} 
+{{% /notice %}}   
 
 
-Continue on to the next section to run the script.
+Continue on to the next section to run the script and see how it simplifies the benchmarking process.

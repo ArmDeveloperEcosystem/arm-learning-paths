@@ -6,21 +6,35 @@ weight: 40
 layout: learningpathall
 ---
 
-## Installing Go and Sweet
-Now that you have your GCP VMs set up, it’s time to install Go, Sweet, and the Benchstat comparison tool on **both** VMs.
+## Section Overview
 
-Copy and paste this script to **both** of your GCP VMs to automatically install all the needed Go and benchmarking dependencies: 
+In this section, you'll install Go, Sweet, and the Benchstat comparison tool on both VMs.
+
+## Installation Script
+
+Sweet is a Go benchmarking tool that provides a standardized way to run performance tests across different systems. Benchstat is a companion tool that analyzes and compares benchmark results, helping you understand performance differences between systems. Together, these tools will allow us to accurately measure and compare Go performance on Arm and x86 architectures.
+
+
+{{% notice Note %}}
+Subsequent steps in the learning path assume you are running this script (installing) from your home directory (`~`), resulting in the creation of a `~/benchmarks/sweet` final install path. If you decide to install elsewhere, adjust the path accordingly when prompted to run the benchmark logic later in the learning path.
+{{% /notice %}}
+
+
+Copy and paste this script to **both** of your GCP VMs.  
+
+**You don't need to run it after pasting**, just paste it into your home directory and press enter to install all needed dependencies: 
 
 ```bash
-cat <<'EOF' > install_go_and_sweet.sh
-
 #!/usr/bin/env bash
+
+# Write the script to filesystem using a HEREDOC
+cat <<'EOF' > install_go_and_sweet.sh
 
 sudo apt-get -y update
 sudo apt-get -y install git build-essential
 
-
-# Detect architecture
+# Detect architecture - this allows the same script to work on both
+# our Arm (c4a) and x86 (c4) VMs without modification
 ARCH=$(uname -m)
 case "$ARCH" in
   arm64|aarch64)
@@ -70,14 +84,19 @@ CONFFILE
 
 EOF
 
+# Make the script executable
 chmod 755 install_go_and_sweet.sh
+
+# Run the script
 ./install_go_and_sweet.sh
 
 ```
 
-To test that everything is installed correctly, run the following command on each VM post-script execution:
 
 
+## Verify Installation
+
+To test that everything is installed correctly, run the following command on each VM after the script completes:
 
 ```bash
 # Run the benchmarks
@@ -90,7 +109,8 @@ sweet run -count 10 -run="markdown" config.toml # run one, 1X
 
 You should see output similar to the following:
 
-```output
+```bash
+# Example output:
 [sweet] Work directory: /tmp/gosweet3444550660
 [sweet] Benchmarks: markdown (10 runs)
 [sweet] Setting up benchmark: markdown
