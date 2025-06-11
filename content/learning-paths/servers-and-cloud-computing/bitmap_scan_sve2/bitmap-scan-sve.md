@@ -1,8 +1,8 @@
 ---
 # User change
-title: "Compare performance of different Bitmap Scanning implementations"
+title: "Accelerate Bitmap Scanning on Arm Servers with NEON and SVE"
 
-weight: 2
+weight: 0
 
 layout: "learningpathall"
 
@@ -11,15 +11,15 @@ layout: "learningpathall"
 
 ## Introduction
 
-Bitmap scanning is a fundamental operation in database systems, particularly for analytical workloads. It's used in bitmap indexes, bloom filters, and column filtering operations. The performance of bitmap scanning can significantly impact query execution times, especially for large datasets.
+Bitmap scanning is a fundamental operation in database systems, particularly for analytical workloads. It's used in bitmap indexes, bloom filters, and column filtering operations. The performance of bitmap scanning can significantly affect query execution times, especially for large datasets.
 
-In this learning path, you will explore how to use SVE instructions available on Arm Neoverse V2 based servers like AWS Graviton4 to optimize bitmap scanning operations. You will compare the performance of scalar, NEON, and SVE implementations to demonstrate the significant performance benefits of using specialized vector instructions.
+In this Learning Path, you will explore how to use SVE instructions available on Arm Neoverse V2 based servers like AWS Graviton4 to optimize bitmap scanning operations. You will compare the performance of scalar, NEON, and SVE implementations to demonstrate the significant performance benefits of using specialized vector instructions.
 
 ## What is Bitmap Scanning?
 
 Bitmap scanning involves searching through a bit vector to find positions where bits are set (1) or unset (0). In database systems, bitmaps are commonly used to represent:
 
-1. **Bitmap Indexes**: Where each bit represents whether a row satisfies a particular condition
+1. **Bitmap Indexes**: Each bit represents whether a row satisfies a particular condition
 2. **Bloom Filters**: Probabilistic data structures used to test set membership
 3. **Column Filters**: Bit vectors indicating which rows match certain predicates
 
@@ -34,7 +34,7 @@ Let's look at how vector processing has evolved for bitmap scanning:
 3. **NEON**: Fixed-length 128-bit SIMD processing with vector operations
 4. **SVE**: Scalable vector processing with predication and specialized instructions
 
-## Set Up Your Environment
+## Set up your environment
 
 To follow this learning path, you will need:
 
@@ -57,12 +57,12 @@ cd bitmap_scan
 
 ## Bitmap Data Structure
 
-First, let's define a simple bitmap data structure that will serve as the foundation for the different implementations. The bitmap implementation uses a simple structure with three key components:
+Now let's define a simple bitmap data structure that serves as the foundation for the different implementations. The bitmap implementation uses a simple structure with three key components:
    - A byte array to store the actual bits
    - Tracking of the physical size(bytes)
    - Tracking of the logical size(bits)
 
-For testing the different implementations in this Learning Path, you will also need functions to generate and analyze the bitmaps.
+For testing the different implementations in this Learning Path, you also need functions to generate and analyze the bitmaps.
 
 Use a file editor of your choice and the copy the code below into `bitvector_scan_benchmark.c`:
 
@@ -131,7 +131,7 @@ size_t bitvector_count_scalar(bitvector_t* bv) {
 }
 ```
 
-## Bitmap Scanning Implementations
+## Bitmap scanning implementations
 
 Now, let's implement four versions of a bitmap scanning operation that finds all positions where a bit is set:
 

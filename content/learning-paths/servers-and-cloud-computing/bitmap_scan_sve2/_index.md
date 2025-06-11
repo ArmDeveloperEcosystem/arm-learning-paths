@@ -1,10 +1,6 @@
 ---
 title: Accelerate Bitmap Scanning with NEON and SVE Instructions on Arm servers
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for database developers, performance engineers, and anyone optimizing data processing workloads on Arm-based cloud instances.
