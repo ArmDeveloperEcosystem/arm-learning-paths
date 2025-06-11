@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Compare Search Performance Using Scalar and SVE2 MATCH on Arm Servers"
+title: "Compare search performance using scalar and SVE2 MATCH on Arm Servers"
 
 weight: 2
 
@@ -10,9 +10,7 @@ layout: "learningpathall"
 ---
 ## Introduction
 
-Searching for specific values in large arrays is a fundamental operation in many applications, from databases to text processing. The performance of these search operations can significantly affect overall application performance, especially when dealing with large datasets.
-
-In this Learning Path, you will learn how to use the SVE2 MATCH instructions available on Arm Neoverse V2 based AWS Graviton4 processors to optimize search operations in byte and half word arrays. You will compare the performance of scalar and SVE2 MATCH implementations to demonstrate the significant performance benefits of using specialized vector instructions.
+Searching large arrays for specific values is a core task in performance-sensitive applications—from filtering records in a database to detecting patterns in text or images. On Arm Neoverse-based servers, SVE2 MATCH instructions unlock massive performance gains by vectorizing these operations. In this Learning Path, you’ll implement and benchmark both scalar and vectorized versions of search functions to see just how much faster your workloads can run.
 
 ## What is SVE2 MATCH?
 
@@ -20,10 +18,10 @@ SVE2 (Scalable Vector Extension 2) is an extension to the Arm architecture that 
 
 ## Set up your environment
 
-To follow this learning path, you will need:
+To work through these examples, you require:
 
-1. An AWS Graviton4 instance running `Ubuntu 24.04`
-2. GCC compiler with SVE support
+* An AWS Graviton4 instance running `Ubuntu 24.04`
+* GCC compiler with SVE support
 
 Start by setting up your environment:
 
@@ -31,9 +29,10 @@ Start by setting up your environment:
 sudo apt-get update
 sudo apt-get install -y build-essential gcc g++
 ```
-An effective way to achieve optimal performance on Arm is not only through optimal flag usage, but also by using the most recent compiler version. This Learning path was tested with GCC 13 which is the default version on `Ubuntu 24.04` but you can run it with newer versions of GCC as well.
+An effective way to achieve optimal performance on Arm is not only through optimal flag usage, but also by using the most recent compiler version. This Learning path was tested with GCC 13 which is the default version on `Ubuntu 24.04`, but you can run it with newer versions of GCC as well.
 
 Create a directory for your implementations:
+
 ```bash
 mkdir -p sve2_match_demo
 cd sve2_match_demo
@@ -44,10 +43,10 @@ Your goal is to implement a function that searches for any occurrence of a set o
 
 This type of search operation is common in many applications:
 
-1. **Database Systems**: Checking if a value exists in a column
-2. **Text Processing**: Finding specific characters in a text
-3. **Network Packet Inspection**: Looking for specific byte patterns
-4. **Image Processing**: Finding specific pixel values
+* **Database systems**: checking if a value exists in a column
+* **Text processing**: finding specific characters in a text
+* **Network packet inspection**: looking for specific byte patterns
+* **Image processing**: finding specific pixel values
 
 ## Implementing search algorithms
 
@@ -55,7 +54,7 @@ Let's implement three versions of our search function:
 
 ### 1. Generic scalar implementation
 
-Create a generic implementation in C that checks each element individually against each key. Open a editor of your choice and copy the code shown into a file named `sve2_match_demo.c`:
+Create a generic implementation in C that checks each element individually against each key. Open an editor of your choice and copy the code shown into a file named `sve2_match_demo.c`:
 
 ```c
 #include <arm_sve.h>
@@ -145,7 +144,9 @@ The SVE MATCH implementation with the `search_sve2_match_u8()` and `search_sve2_
 
 ### 3. Optimized SVE2 MATCH implementation
 
-In this next SVE2 implementation you will add loop unrolling and prefetching to further improve performance. Copy the code shown into the same source file:
+In this next SVE2 implementation you will add loop unrolling and prefetching to further improve performance. 
+
+Copy the code shown into the same source file:
 
 ```c
 int search_sve2_match_u8_unrolled(const uint8_t *hay, size_t n, const uint8_t *keys,
@@ -522,8 +523,8 @@ This pattern makes SVE2 MATCH particularly well-suited for applications where ma
 
 The unrolled implementation consistently outperforms the basic SVE2 MATCH implementation:
 
-1. **Low Hit Rates**: Up to 30% additional speedup
-2. **Higher Hit Rates**: 5-20% additional speedup
+* **Low Hit Rates**: Up to 30% additional speedup
+* **Higher Hit Rates**: 5-20% additional speedup
 
 This demonstrates the value of combining algorithmic optimizations (loop unrolling, prefetching) with hardware-specific instructions for maximum performance.
 
