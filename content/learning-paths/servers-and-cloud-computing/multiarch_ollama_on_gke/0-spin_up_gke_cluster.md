@@ -87,7 +87,7 @@ Enter the following in your command prompt (or cloud shell), and make sure to re
 
 ```bash
 export ZONE=us-central1
-export CLUSTER_NAME=ollama-on-multiarch
+export CLUSTER_NAME=ollama-on-arm
 export PROJECT_ID=YOUR_PROJECT_ID
 gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
 ```
