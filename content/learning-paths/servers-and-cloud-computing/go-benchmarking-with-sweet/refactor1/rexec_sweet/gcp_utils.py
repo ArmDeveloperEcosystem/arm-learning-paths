@@ -62,8 +62,7 @@ def choose_instance(instances: List[str]) -> str:
     if not instances:
         print("No running instances found.", file=sys.stderr)
         sys.exit(1)
-        
-    print("Select an instance:")
+
     for idx, name in enumerate(instances, 1):
         print(f"{idx}. {name}")
         
