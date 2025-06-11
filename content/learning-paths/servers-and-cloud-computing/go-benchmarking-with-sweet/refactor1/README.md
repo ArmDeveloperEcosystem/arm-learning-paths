@@ -9,33 +9,48 @@ A tool for running Go benchmarks using Sweet on remote GCP instances and compari
 #### Installing pyenv
 
 ```bash
-# macOS (using Homebrew)
-brew update
+# Detect OS
+OS=$(uname -s)
 
-# Check if pyenv is already installed (via PATH or Homebrew), install if not
-if which pyenv &>/dev/null || brew list pyenv &>/dev/null; then
-  echo "pyenv is already installed"
+if [ "$OS" = "Darwin" ]; then
+  echo "Detected macOS, installing with Homebrew..."
+  
+  # macOS (using Homebrew)
+  brew update
+
+  # Check if pyenv is already installed (via PATH or Homebrew), install if not
+  if which pyenv &>/dev/null || brew list pyenv &>/dev/null; then
+    echo "pyenv is already installed"
+  else
+    echo "Installing pyenv..."
+    brew install pyenv
+  fi
+  
+elif [ "$OS" = "Linux" ]; then
+  echo "Detected Linux, installing with apt-get..."
+  
+  # Linux
+  sudo apt-get -y update
+
+  sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev
+
+  # Check if pyenv is already installed
+  if which pyenv &>/dev/null; then
+    echo "pyenv is already installed"
+  else
+    echo "Installing pyenv..."
+    curl https://pyenv.run | bash
+
+    # Add to your shell configuration (.bashrc, .zshrc, etc.)
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+    echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+  fi
+  
 else
-  echo "Installing pyenv..."
-  brew install pyenv
-fi
-
-# Linux
-sudo apt-get -y update
-
-sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev
-
-# Check if pyenv is already installed
-if which pyenv &>/dev/null; then
-  echo "pyenv is already installed"
-else
-  echo "Installing pyenv..."
-  curl https://pyenv.run | bash
-
-  # Add to your shell configuration (.bashrc, .zshrc, etc.)
-  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-  echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-  echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+  echo "Unsupported operating system: $OS"
+  echo "Please install pyenv manually for your system."
+  exit 1
 fi
 ```
 
