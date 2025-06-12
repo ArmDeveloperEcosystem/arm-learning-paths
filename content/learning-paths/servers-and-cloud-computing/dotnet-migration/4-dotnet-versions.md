@@ -14,54 +14,62 @@ Understanding which versions perform best and the features they offer can help y
 
 ## .NET Core 3.1 (end-of-life 2022)
 
-.NET Core 3.1 was a significant release that introduced better support for Arm64, making it a viable option for developing applications on Arm-based systems. Key features include:
+.NET Core 3.1 was the first LTS with meaningful Arm64 support. Highlights were:
 
-- Improved JIT (Just-In-Time) compilation for Arm64.
-- Enhanced garbage collection performance.
-- Support for hardware intrinsics, allowing for optimized low-level operations.
+- Initial JIT (Just-In-Time) optimizations for Arm64 (but the bulk of Arm throughput work arrived in .NET 5).
+- Faster garbage collection thanks to refinements to the background GC mode.
+- Initial set of Arm64 hardware intrinsics (AdvSIMD, AES, CRC32) exposed in `System.Runtime.Intrinsics`.
 
 ## .NET 5 (end-of-life 2022)
 
-.NET 5 marked the unification of the .NET platform, bringing together .NET Core, .NET Framework, and Xamarin. It continued to build on the performance improvements of .NET Core 3.1, with additional enhancements:
+With .NET 5 Microsoft started the “one .NET” unification. Even though it had only 18 months of support, it delivered notable Arm gains:
 
-- Improved cross-platform performance, including Arm64.
-- Introduction of single-file applications, reducing deployment complexity.
-- Enhanced support for containerized applications, which is beneficial for cloud deployments on Arm servers.
+- Cross-gen2 shipped, delivering better Arm64 code quality (but only became the default in .NET 6).
+- Single-file application publishing (with optional IL-trimming) simplified deployment to Arm edge devices.
+- Major ASP.NET Core throughput wins on Arm64 (Kestrel & gRPC) compared with .NET Core 3.1.
 
 ## .NET 6 (end-of-life 2024)
 
-.NET 6 is a Long-Term Support (LTS) release that further optimizes performance for Arm architecture. It includes:
+.NET 6 laid the foundation for the modern performance story on Arm64:
 
-- TieredPGO (Profile Guided Optimization). TieredPGO is a feature in .NET that allows the runtime to optimize code execution based on the actual usage patterns observed during the application's execution. It combines the benefits of both Tiered Compilation and Profile Guided Optimization to improve performance.
-- Improved support for high core counts, making it ideal for modern Arm servers with many cores.
+- Tiered PGO entered preview, combining tiered compilation with profile-guided optimisation.
+- Better scalability on many-core Arm servers thanks to the new ThreadPool implementation.
+- First-class support for Apple M1, enabling full .NET development on Arm-based macOS, as well as for Windows Arm64.
 
-## .NET 7
 
-.NET 7 continues the trend of performance enhancements, with a focus on:
+## .NET 7 (end-of-life 2024)
 
-- Native AOT (Ahead-Of-Time) compilation, which can significantly improve startup times and reduce memory usage.
-- Enhanced support for cloud-native applications, which are increasingly deployed on Arm-based infrastructure.
-- Continued optimizations for high-performance computing scenarios.
+.NET 7 was an STS (Standard-Term Support) release which is now out of support, but it pushed the performance envelope and is therefore interesting from a historical perspective. Key highlights were:
 
-## .NET 8 (current LTS)
+- General-availability of Native AOT publishing for console applications, producing self-contained, very small binaries with fast start-up on Arm64.
+- Dynamic PGO (Profile-Guided Optimisation) and On-Stack Replacement became the default, letting the JIT optimise the hottest code paths based on real run-time data.
+- New Arm64 hardware intrinsics (e.g. SHA-1/SHA-256, AES, CRC-32) exposed through System.Runtime.Intrinsics, enabling high-performance crypto workloads.
 
-.NET 8, as the current Long-Term Support (LTS) version, builds upon the advancements of its predecessors with a focus on stability and performance. Key features include:
+## .NET 8 (current LTS – support until November 2026)
 
-- Further improvements in Native AOT, enhancing startup times and reducing resource consumption.
-- Optimized performance for cloud-native and microservices architectures on Arm.
-- Enhanced developer productivity features, making it easier to build and deploy applications on Arm-based systems.
+.NET 8 is the current Long-Term Support release and should be your baseline for new production workloads. Important Arm-related improvements include:
+
+- Native AOT support for ASP.NET Core, trimming enhancements and even smaller self-contained binaries, translating into faster cold-start for containerised Arm services.
+- Further JIT tuning for Arm64 delivering single- to low-double-digit percentage throughput wins in real-world benchmarks.
+- Smaller base container images (`mcr.microsoft.com/dotnet/aspnet:8.0` and `…/runtime:8.0`) thanks to a redesigned layering strategy, particularly beneficial on Arm where network bandwidth is often at a premium.
+- Garbage-collector refinements that reduce pause times on highly-threaded, many-core servers.
 
 ## .NET 9
 
-.NET 9 introduces experimental features and performance enhancements aimed at future-proofing applications. While not an LTS release, it offers:
+.NET 9 is still in preview, so features may change, but public builds already show promising Arm-centric updates:
 
-- Cutting-edge performance optimizations for Arm architecture.
-- New language features and runtime improvements.
-- Enhanced support for emerging technologies and platforms.
+- PGO is now enabled for release builds by default and its heuristics have been retuned for Arm workloads, yielding notable throughput improvements with zero developer effort.
+- The JIT has started to exploit Arm v9 instructions such as SVE2 where hardware is available, opening the door to even wider SIMD operations.
+- C# 13 and F# 8 previews ship with the SDK, bringing useful productivity improvements fully supported on Arm devices.
 
-## .NET 10 (preview)
+Although .NET 9 will receive only 18 months of support, it is an excellent choice when you need the very latest performance improvements or want to trial new language/runtime capabilities ahead of the next LTS.
 
+## .NET 10 (preview – next LTS)
 
-## Hands-on performance comparison
+.NET 10 is still in preview and will likely change prior to it's GA release, but it will be the next LTS version of .NET.
 
-Let's do a comparison between OrchardCore running on .NET 8 and the earliest compatible version of .NET
+- Extended SVE2 and new SME (Scalable Matrix Extension) intrinsics to unlock efficient implementation of large-scale numerical algorithms and on-device AI inference on Arm v9.
+- C# 14 is expected to ship alongside .NET 10, bringing additional compile-time metaprogramming features that can reduce boilerplate on resource-constrained Arm edge devices.
+
+Because .NET 10 is still in preview, you should validate any assumptions about feature availability against the latest preview builds and roadmap updates.
+
