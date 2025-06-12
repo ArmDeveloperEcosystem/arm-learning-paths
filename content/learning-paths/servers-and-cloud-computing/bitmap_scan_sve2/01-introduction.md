@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Introduction to Bitmap Scanning and Vectorization on Arm"
+title: "Bitmap Scanning and Vectorization on Arm"
 
 weight: 2
 
@@ -51,3 +51,5 @@ Create a directory for your implementations:
 mkdir -p bitmap_scan
 cd bitmap_scan
 ```
+## Next Steps
+In the next section, you’ll define the core bitmap data structure and utility functions for setting, clearing, and inspecting bits.
