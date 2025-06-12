@@ -1,22 +1,22 @@
 ---
 # User change
-title: "Build and manage the bit vector Structure"
+title: "Build and manage a bit vector in C"
 
 weight: 3
 
 layout: "learningpathall"
 
 ---
-## Bitmap Data Structure
+## Bitmap data structure
 
 Now let's define a simple bitmap data structure that serves as the foundation for the different implementations. The bitmap implementation uses a simple structure with three key components:
    - A byte array to store the actual bits
-   - Tracking of the physical size(bytes)
-   - Tracking of the logical size(bits)
+   - Tracking of the physical size (bytes)
+   - Tracking of the logical size (bits)
 
 For testing the different implementations in this Learning Path, you also need functions to generate and analyze the bitmaps.
 
-Use a file editor of your choice and the copy the code below into `bitvector_scan_benchmark.c`:
+Use a file editor of your choice and then copy the code below into `bitvector_scan_benchmark.c`:
 
 ```c
 // Define a simple bit vector structure
@@ -82,3 +82,5 @@ size_t bitvector_count_scalar(bitvector_t* bv) {
     return count;
 }
 ```
+
+You now have a functional, compact bit vector in C for testing bitmap scanning performance. Next, you'll implement scalar, NEON, and SVE-based scanning routines that operate on this structure.

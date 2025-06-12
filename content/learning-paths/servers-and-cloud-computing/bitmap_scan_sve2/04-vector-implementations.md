@@ -8,7 +8,9 @@ layout: "learningpathall"
 
 
 ---
-### 3. NEON Implementation
+Modern Arm CPUs like Neoverse V2 support SIMD (Single Instruction, Multiple Data) extensions that allow processing multiple bytes in parallel. In this section, you'll explore how NEON and SVE vector instructions can dramatically accelerate bitmap scanning by skipping over large regions of unset data and reducing per-bit processing overhead.
+
+## NEON Implementation
 
 This implementation uses NEON SIMD (Single Instruction, Multiple Data) instructions to process 16 bytes (128 bits) at a time, significantly accelerating the scanning process. Copy the NEON implementation shown below into the same file:
 ```c
@@ -81,7 +83,7 @@ size_t scan_bitvector_neon(bitvector_t* bv, uint32_t* result_positions) {
 ```
 This NEON implementation processes 16 bytes at a time with vector instructions. For sparse bitmaps, entire 16-byte chunks can be skipped at once, providing a significant speedup over byte-level skipping. After vector processing, it falls back to scalar code for any remaining bytes that don't fill a complete 16-byte chunk.
 
-### 4. SVE Implementation
+## SVE Implementation
 
 This implementation uses SVE instructions which are available in the Arm Neoverse V2 based AWS Graviton 4 processor. Copy this SVE implementation into the same file:
 

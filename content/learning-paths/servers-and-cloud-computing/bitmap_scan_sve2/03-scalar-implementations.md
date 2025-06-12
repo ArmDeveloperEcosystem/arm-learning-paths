@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Scalar Implementations of Bitmap Scanning"
+title: "Implement Scalar Bitmap Scanning in C"
 
 weight: 4
 
@@ -10,11 +10,17 @@ layout: "learningpathall"
 ---
 ## Bitmap scanning implementations
 
-Now, let's implement four versions of a bitmap scanning operation that finds all positions where a bit is set:
+Bitmap scanning is a fundamental operation in performance-critical systems such as databases, search engines, and filtering pipelines. It involves identifying the positions of set bits (`1`s) in a bit vector, which is often used to represent filtered rows, bitmap indexes, or membership flags. 
 
-### 1. Generic Scalar Implementation
+In this section, you'll implement multiple scalar approaches to bitmap scanning in C, starting with a simple per-bit baseline, followed by an optimized version that reduces overhead for sparse data.
 
-This is the most straightforward implementation, checking each bit individually. It serves as our baseline for comparison against the other implementations to follow. Copy the code below into the same file:
+Now, let’s walk through the scalar versions of this operation that locate all set bit positions.
+
+### Generic scalar implementation
+
+This is the most straightforward implementation, checking each bit individually. It serves as the baseline for comparison against the other implementations to follow. 
+
+Copy the code below into the same file:
 
 ```c
 // Generic scalar implementation of bit vector scanning (bit-by-bit)
@@ -31,13 +37,15 @@ size_t scan_bitvector_scalar_generic(bitvector_t* bv, uint32_t* result_positions
 }
 ```
 
-You will notice this generic C implementation processes every bit, even when most bits are not set. It has high function call overhead and does not advantage of vector instructions.
+You might notice that this generic C implementation processes every bit, even when most bits are not set. It has high per-bit function call overhead and does not take advantage of any vector instructions.
 
-In the following implementations, you will address these inefficiencies with more optimized techniques.
+In the following implementations, you can address these inefficiencies with more optimized techniques.
 
-### 2. Optimized Scalar Implementation
+### Optimized scalar implementation
 
-This implementation adds byte-level skipping to avoid processing empty bytes. Copy this optimized C scalar implementation code into the same file:
+This implementation adds byte-level skipping to avoid processing empty bytes. 
+
+Copy this optimized C scalar implementation code into the same file:
 
 ```c
 // Optimized scalar implementation of bit vector scanning (byte-level)
@@ -66,5 +74,9 @@ size_t result_count = 0;
     return result_count;
 }
 ```
-Instead of iterating through each bit, this implementation processes one byte(8 bits) at a time. The main optimization over the previous scalar implementation is checking if an entire byte is zero and skipping it entirely, For sparse bitmaps, this can dramatically reduce the number of bit checks.
+Instead of iterating through each bit individually, this implementation processes one byte (8 bits) at a time. The main optimization over the previous scalar implementation is checking if an entire byte is zero and skipping it entirely. For sparse bitmaps, this can dramatically reduce the number of bit checks.
+
+## Next steps
+
+Next, you’ll explore how to accelerate bitmap scanning using NEON and SVE SIMD instructions on Arm Neoverse platforms like Graviton4, comparing them directly to these scalar baselines.
 

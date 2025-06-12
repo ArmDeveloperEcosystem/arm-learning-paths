@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Benchmarking Bitmap Scanning Across Implementations"
+title: "Benchmarking bitmap scanning across implementations"
 
 weight: 6
 
@@ -8,9 +8,11 @@ layout: "learningpathall"
 
 
 ---
-## Benchmarking Code
+## Benchmarking code
 
-Now, that you have created four different implementations of a bitmap scanning algorithm, let's create a benchmarking framework to compare the performance of our implementations. Copy the code shown below into `bitvector_scan_benchmark.c` :
+Now that you've created four different bitmap scanning implementations, let’s build a benchmarking framework to compare their performance.
+
+Copy the code shown below into `bitvector_scan_benchmark.c` :
 
 ```c
 // Timing function for bit vector scanning
@@ -37,7 +39,7 @@ double benchmark_scan(size_t (*scan_func)(bitvector_t*, uint32_t*),
 }
 ```
 
-## Main Function
+## Main function
 The main function of your program is responsible for setting up the test environment, running the benchmarking code for the four different implementations across various bit densities, and reporting the results. In the context of bitmap scanning, bit density refers to the percentage or proportion of bits that are set (have a value of 1) in the bitmap. Copy the main function code below into `bitvector_scan_benchmark.c`:
 
 ```C
@@ -122,7 +124,7 @@ int main() {
 }
 ```
 
-## Compiling and Running
+## Compiling and running
 
 You are now ready to compile and run your bitmap scanning implementations.
 
@@ -132,11 +134,11 @@ To compile our bitmap scanning implementations with the appropriate flags, run:
 gcc -O3 -march=armv9-a+sve2 -o bitvector_scan_benchmark bitvector_scan_benchmark.c -lm
 ```
 
-## Performance Results
+## Performance results
 
 When running on a Graviton4 c8g.large instance with Ubuntu 24.04, the results should look similar to:
 
-### Execution Time (ms)
+### Execution time (ms)
 
 | Density | Set Bits | Scalar Generic | Scalar Optimized | NEON  | SVE	      |
 |---------|----------|----------------|------------------|-------|------------|
@@ -146,7 +148,7 @@ When running on a Graviton4 c8g.large instance with Ubuntu 24.04, the results sh
 | 0.0100  | 99,511   | 7.821          | 1.570            | 2.252 | 1.353      |
 | 0.1000  | 951,491  | 12.817         | 8.336            | 9.106 | 6.770      |
 
-### Speedup vs Generic Scalar
+### Speed-up vs generic Scalar
 
 | Density | Scalar Optimized | NEON    | SVE        |
 |---------|------------------|---------|------------|
@@ -156,9 +158,9 @@ When running on a Graviton4 c8g.large instance with Ubuntu 24.04, the results sh
 | 0.0100  | 5.02x            | 3.49x   | 5.78x      |
 | 0.1000  | 1.54x            | 1.40x   | 1.90x      |
 
-## Understanding the Performance Results
+## Understanding the results
 
-### Generic Scalar vs Optimized Scalar
+## Generic Scalar vs Optimized Scalar
 
 The optimized scalar implementation shows significant improvements over the generic scalar implementation due to:
 
@@ -166,7 +168,7 @@ The optimized scalar implementation shows significant improvements over the gene
 2. **Reduced Function Calls**: Accessing bits directly rather than through function calls
 3. **Better Cache Utilization**: More sequential memory access patterns
 
-### Optimized Scalar vs NEON
+## Optimized Scalar vs NEON
 
 The NEON implementation shows further improvements over the optimized scalar implementation for sparse bit vectors due to:
 
@@ -174,7 +176,7 @@ The NEON implementation shows further improvements over the optimized scalar imp
 2. **Vectorized Comparison**: Checking multiple bytes in parallel
 3. **Early Termination**: Quickly determining if a chunk contains any set bits
 
-### NEON vs SVE
+## NEON vs SVE
 
 The performance comparison between NEON and SVE depends on the bit density:
 
@@ -188,7 +190,7 @@ The performance comparison between NEON and SVE depends on the bit density:
    - SVE consistently outperforms NEON
    - SVE achieves up to 1.66x speedup over NEON at 0.01% density
 
-# Key Optimizations in SVE Implementation
+## Key Optimizations in SVE Implementation
 
 The SVE implementation includes several key optimizations:
 

@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Optimize Bitmap Scanning with SVE and NEON on Arm Servers"
+title: "Optimize bitmap scanning with SVE and NEON on Arm servers"
 
 weight: 2
 
@@ -58,5 +58,6 @@ Create a directory for your implementations:
 mkdir -p bitmap_scan
 cd bitmap_scan
 ```
-## Next Steps
+## Next steps
+
 In the next section, you’ll define the core bitmap data structure and utility functions for setting, clearing, and inspecting bits.

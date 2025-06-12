@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Applications and Optimization Best Practices"
+title: "Applications and optimization best practices"
 
 weight: 7
 
@@ -10,21 +10,20 @@ layout: "learningpathall"
 
 These bitmap scanning optimizations can be applied to various database operations:
 
-### 1. Bitmap Index Scans
-
+### Bitmap Index Scans
 Bitmap indexes are commonly used in analytical databases to accelerate queries with multiple filter conditions. The NEON and SVE implementations can significantly speed up the scanning of these bitmap indexes, especially for queries with low selectivity.
 
-### 2. Bloom Filter Checks
+### Bloom Filter Checks
 
 Bloom filters are probabilistic data structures used to test set membership. They are often used in database systems to quickly filter out rows that don't match certain conditions. The NEON and SVE implementations can accelerate these bloom filter checks.
 
-### 3. Column Filtering
+### Column Filtering
 
 In column-oriented databases, bitmap filters are often used to represent which rows match certain predicates. The NEON and SVE implementation can speed up the scanning of these bitmap filters, improving query performance.
 
 ## Best Practices
 
-Based on our benchmark results, here are some best practices for optimizing bitmap scanning operations:
+Based on the benchmark results, here are some best practices for optimizing bitmap scanning operations:
 
 1. **Choose the Right Implementation**: Select the appropriate implementation based on the expected bit density:
    - For empty bit vectors: NEON is optimal
