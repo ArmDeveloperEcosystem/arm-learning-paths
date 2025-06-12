@@ -25,9 +25,9 @@ sudo apt-get install -y dotnet-sdk-8.0
 
 3. **Verify installations**:
 
-   ```bash
-   dotnet --version
-   ```
+```bash
+dotnet --version
+```
 
 ## Step 2: Install the OrchardCore Templates
 
@@ -43,31 +43,31 @@ This command installs the OrchardCore project templates, which you will use to c
 
 1. **Create a new project**: Use the `dotnet` CLI to create a new OrchardCore application.
 
-   ```bash
-   dotnet new occms -n MyOrchardCoreApp
-   ```
+```bash
+dotnet new occms -n MyOrchardCoreApp
+```
 
    This command creates a new OrchardCore CMS application in a directory named `MyOrchardCoreApp`.
 
 2. **Navigate to the project directory**:
 
-   ```bash
-   cd MyOrchardCoreApp
-   ```
+```bash
+cd MyOrchardCoreApp
+```
 
 ## Step 4: Run the OrchardCore application
 
 1. **Build the application**: Compile the application using the following command:
 
-   ```bash
-   dotnet build
-   ```
+```bash
+dotnet build
+```
 
 2. **Run the application**: Start the application with:
 
-   ```bash
-   dotnet run --urls http://0.0.0.0:8080
-   ```
+```bash
+dotnet run --urls http://0.0.0.0:8080
+```
 
 3. **Access the application**: Open a web browser and navigate to `http://[instance IP]:8080` to see your OrchardCore application in action, where `[instance IP]` is the public IP of your Azure Cobalt instance.
 

@@ -8,14 +8,12 @@ who_is_this_for: .NET developers who want to take advantage of the cost and perf
 learning_objectives: 
     - Create and compile a basic OrchardCore CMS application
     - Add a simple C shared library to your .NET application
-    - Understand the tradeoffs of building native AOT (ahead-of-time) arm64 binaries
-    - Learn about TieredPGO (Profile Guided Optimization) for .NET
+    - Learn about anyCPU hardware agnostic builds
     - Gain intuition about performance of different .NET versions
-    - .NET optimizations for huge core counts
 
 prerequisites:
     - An Azure account
-    - Installation of .NET 10
+    - Installation of .NET 8
     - gcc installed
 
 author: Joe Stech

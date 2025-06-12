@@ -17,19 +17,19 @@ First, you need to create a simple C shared library. This library will contain a
 
 1. Create a new file named `mylib.c` with the following content:
 
-    ```c
-    #include <stdio.h>
+```c
+#include <stdio.h>
 
-    void greet() {
-        printf("Hello from the C library!\n");
-    }
-    ```
+void greet() {
+    printf("Hello from the C library!\n");
+}
+```
 
 2. Compile the C file into a shared library:
 
-    ```bash
-    gcc -shared -o libmylib.so -fPIC mylib.c
-    ```
+```bash
+gcc -shared -o libmylib.so -fPIC mylib.c
+```
 
    This will generate a shared library file (`libmylib.so`).
 
@@ -39,54 +39,54 @@ Now that you have a shared library, you can use it in your .NET application.
 
 1. In your OrchardCore application, create a new class file named `NativeMethods.cs`:
 
-    ```csharp
-    using System;
-    using System.Runtime.InteropServices;
+```csharp
+using System;
+using System.Runtime.InteropServices;
 
-    public static class NativeMethods
-    {
-        [DllImport("mylib", EntryPoint = "greet")]
-        public static extern void Greet();
-    }
-    ```
+public static class NativeMethods
+{
+    [DllImport("mylib", EntryPoint = "greet")]
+    public static extern void Greet();
+}
+```
 
 2. Call the `Greet` method from your application. For example, you can add the following code to your main program or a controller:
 
-    ```csharp
-    using OrchardCore.Logging;
+```csharp
+using OrchardCore.Logging;
 
-    var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
-    builder.Host.UseNLogHost();
+builder.Host.UseNLogHost();
 
-    builder.Services
-        .AddOrchardCms()
-        // // Orchard Specific Pipeline
-        // .ConfigureServices( services => {
-        // })
-        // .Configure( (app, routes, services) => {
-        // })
-    ;
+builder.Services
+    .AddOrchardCms()
+    // // Orchard Specific Pipeline
+    // .ConfigureServices( services => {
+    // })
+    // .Configure( (app, routes, services) => {
+    // })
+;
 
-    var app = builder.Build();
+var app = builder.Build();
 
-    Console.WriteLine("Calling native greet..."); // NEW INTEROP LINE
-    NativeMethods.Greet();                        // NEW INTEROP LINE
+Console.WriteLine("Calling native greet..."); // NEW INTEROP LINE
+NativeMethods.Greet();                        // NEW INTEROP LINE
 
-    if (!app.Environment.IsDevelopment())
-    {
-        app.UseExceptionHandler("/Error");
-        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-        app.UseHsts();
-    }
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
 
-    app.UseHttpsRedirection();
-    app.UseStaticFiles();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 
-    app.UseOrchardCore();
+app.UseOrchardCore();
 
-    app.Run();
-    ```
+app.Run();
+```
 
 3. Ensure that dotnet can find your shared library:
 
@@ -115,4 +115,4 @@ aarch64-linux-gnu-gcc -mcpu=neoverse-n2 -O3 -shared -o libmylib.so -fPIC mylib.c
 
 The `-mcpu=neoverse-n2` flag specifies the Cobalt architecture, and `-O3` ensures that maximum optimizations are completed (including SIMD opimizations).
 
-In the next section, you will explore the tradeoffs of building native AOT arm64 binaries.
+In the next section, you will explore how to make your build architecture agnostic with the anyCPU feature.

@@ -20,25 +20,25 @@ To make your OrchardCore application architecture agnostic, you need to configur
 2. Locate the `.csproj` file for your project.
 3. Modify the `<PlatformTarget>` element to `AnyCPU`:
 
-   ```xml
-   <PropertyGroup>
-     <PlatformTarget>AnyCPU</PlatformTarget>
-   </PropertyGroup>
-   ```
+```xml
+<PropertyGroup>
+  <PlatformTarget>AnyCPU</PlatformTarget>
+</PropertyGroup>
+```
 
 4. Save the changes to the `.csproj` file.
 
 ## Build once, run anywhere
 
-   ```bash
-   dotnet build -c Release
-   ```
+```bash
+dotnet build -c Release
+```
 
 4. Run the application:
 
-   ```bash
-   dotnet run --urls http://0.0.0.0:8080
-   ```
+```bash
+dotnet run --urls http://0.0.0.0:8080
+```
 
 Your application should now be runnable on any architecture. All you have to do is copy the `MyOrchardCoreApp` directory to any computer with the .NET 8 Framework installed and run
 
