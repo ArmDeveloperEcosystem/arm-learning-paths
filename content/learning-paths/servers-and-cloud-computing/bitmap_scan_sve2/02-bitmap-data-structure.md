@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Building and Managing the Bit Vector Structure"
+title: "Build and manage the bit vector Structure"
 
 weight: 3
 

@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Optimizing Bitmap Scanning with SVE and NEON on Arm Servers"
+title: "Optimize Bitmap Scanning with SVE and NEON on Arm Servers"
 
 weight: 2
 
@@ -8,14 +8,14 @@ layout: "learningpathall"
 ---
 ## Introduction
 
-Bitmap scanning is a fundamental operation in database systems, particularly for analytical workloads. It's used in bitmap indexes, bloom filters, and column filtering operations. The performance of bitmap scanning can significantly affect query execution times, especially for large datasets.
+Bitmap scanning is a fundamental operation in database systems — used in bitmap indexes, bloom filters, and column filters — but it can bottleneck complex analytical queries. In this Learning Path, you'll learn how to speed up these operations using Arm's SVE and NEON vector instructions, especially on Neoverse V2–based servers like AWS Graviton4. 
 
 In this Learning Path, you will:
 
 * Explore how to use SVE instructions on Arm Neoverse V2–based servers like AWS Graviton4 to optimize bitmap scanning
 * Compare scalar, NEON, and SVE implementations to demonstrate the performance benefits of specialized vector instructions
 
-## What is bitmap scanning?
+## What is bitmap scanning in databases?
 
 Bitmap scanning involves searching through a bit vector to find positions where bits are set (1) or unset (0). In database systems, bitmaps are commonly used to represent:
 
@@ -34,7 +34,7 @@ Here's how vector processing has evolved to improve bitmap scanning performance:
 * **NEON**: fixed-length 128-bit SIMD processing with vector operations
 * **SVE**: scalable vector processing with predication and specialized instructions like MATCH 
 
-## Set up your environment
+## Set up your Arm development environment
 
 To follow this Learning Path, you will need:
 
