@@ -8,9 +8,7 @@ layout: learningpathall
 
 # Evaluate .NET versions for performance on Arm
 
-In this section, we will explore the performance characteristics of different .NET versions on Arm architecture. Understanding which versions perform best and the features they offer can help you make informed decisions when developing applications for Arm-based systems.
-
-## .NET versions overview
+Understanding which versions perform best and the features they offer can help you make informed decisions when developing applications for Arm-based systems.
 
 .NET has evolved significantly over the years, with each version introducing new features and performance improvements. Here, we will focus on the key versions that have notable performance implications for Arm architecture.
 

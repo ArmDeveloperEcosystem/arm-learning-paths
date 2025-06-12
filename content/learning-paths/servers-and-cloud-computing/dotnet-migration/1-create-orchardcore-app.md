@@ -14,13 +14,19 @@ In this section, you will learn how to create and compile a basic [OrchardCore](
 
 1. Launch an Azure Cobalt instance running Ubuntu 24.04, and open port 8080 to the internet. For instructions on how to do this, see the [Create an Azure Cobalt 100 VM](../../cobalt) Learning Path.
 
-2. **Install .NET SDK**: Follow the instructions on the [.NET download page](https://dotnet.microsoft.com/download) to install the SDK for your operating system.
+2. **Install .NET SDK**:
 
-3. **Verify installations**: Open a terminal and run the following commands to verify the installations:
+```bash
+wget https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+sudo apt-get update
+sudo apt-get install -y dotnet-sdk-8.0
+```
+
+3. **Verify installations**:
 
    ```bash
    dotnet --version
-   node --version
    ```
 
 ## Step 2: Install the OrchardCore Templates
