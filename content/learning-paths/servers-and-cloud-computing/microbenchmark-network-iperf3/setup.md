@@ -1,26 +1,36 @@
 ---
-title: Prepare for network performance testing
+title: Set up Arm-based Linux systems for network performance testing with iPerf3
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Configure two Arm-based Linux computers
+## Environment setup and Learning Path focus
 
-To perform network performance testing you need two Linux computers. You can use AWS EC2 instances with Graviton processors or any other Linux virtual machines from another cloud service provider.
+To benchmark bandwidth and latency between Arm-based systems, you'll need to configure two Linux machines running on Arm. 
 
-You will also experiment with a local computer and a cloud instance to learn the networking performance differences compared to two cloud instances. 
+You can use AWS EC2 instances with Graviton processors, or Linux virtual machines from any other cloud service provider.
 
-The instructions below use EC2 instances from AWS connected in a virtual private cloud (VPC).
+This tutorial walks you through a local-to-cloud test to compare performance between:
 
-To get started, create two Arm-based Linux instances, one system to act as the server and the other to act as the client. The instructions below use two `t4g.xlarge` instances running Ubuntu 24.04 LTS. 
+* Two cloud-based instances
+* One local system and one cloud instance
 
-### Install software dependencies
+The setup instructions below use AWS EC2 instances connected within a Virtual Private Cloud (VPC).
 
-Use the commands below to install `iperf3`, a powerful and flexible open-source command-line tool used for network performance measurement and tuning. It allows network administrators and engineers to actively measure the maximum achievable bandwidth on IP networks.
+To get started, create two Arm-based Linux instances, with each instance serving a distinct role:
 
-Run the following on both systems:
+* One acting as a client
+* One acting as a server
+
+The instructions below use two `t4g.xlarge` instances running Ubuntu 24.04 LTS. 
+
+## Install software dependencies
+
+Use the commands below to install iPerf3, which is a powerful open-source CLI tool for measuring maximum achievable network bandwidth. 
+
+Begin by installing iPerf3 on both the client and server systems:
 
 ```bash
 sudo apt update
@@ -28,45 +38,81 @@ sudo apt install iperf3 -y
 ```
 
 {{% notice Note %}}
-If you are prompted to start `iperf3` as a daemon you can answer no.
+If you're prompted to run `iperf3` as a daemon, answer "no".
 {{% /notice %}}
 
-## Update Security Rules 
+## Update security rules 
 
-If you are working in a cloud environment like AWS, you need to update the default security rules to enable specific inbound and outbound protocols. 
+If you're working in a cloud environment like AWS, you must update the default security rules to enable specific inbound and outbound protocols. 
 
-From the AWS console, navigate to the security tab. Edit the inbound rules to enable `ICMP`, `UDP` and `TCP` traffic to enable communication between the client and server systems. 
+To do this, follow these instructions below using the AWS console:
 
-![example_traffic](./example_traffic_rules.png)
+* Navigate to the **Security** tab for each instance. 
+* Configure the **Inbound rules** to allow the following protocols:
+    * `ICMP` (for ping)
+    * All UDP ports (for UDP tests)
+    * TCP port 5201 (for traffic to enable communication between the client and server systems) 
 
-{{% notice Note %}}
-For additional security set the source and port ranges to the values being used. A good solution is to open TCP port 5201 and all UDP ports and use your security group as the source. This doesn't open any traffic from outside AWS.
+![example_traffic#center](./example_traffic_rules.png "AWS console view")
+
+{{% notice Warning %}}
+For secure internal communication, set the source to your instance’s security group. This avoids exposing traffic to the internet while allowing traffic between your systems.
+
+You can restrict the range further by:
+
+* Opening only TCP port 5201
+
+* Allowing all UDP ports (or a specific range)
 {{% /notice %}}
 
 ## Update the local DNS
 
-To avoid using IP addresses directly, add the IP address of the other system to the `/etc/hosts` file.
+To avoid using IP addresses directly, add the other system's IP address to the `/etc/hosts` file.
 
-The local IP address of the server and client can be found in the AWS dashboard. You can also use commands like `ifconfig`,  `hostname -I`, or `ip address` to find your local IP address.
+You can find private IPs in the AWS dashboard, or by running:
 
-On the client, add the IP address of the server to the `/etc/hosts` file with name `SERVER`. 
+```bash
+hostname -I
+ip address
+ifconfig
+```
+## On the client
+
+Add the server's IP address, and assign it the name `SERVER`:
 
 ```output
 127.0.0.1       localhost
 10.248.213.104  SERVER
 ```
 
-Repeat the same thing on the server and add the IP address of the client to the `/etc/hosts` file with the name `CLIENT`. 
+## On the server
 
-## Confirm server is reachable
+Add the client's IP address, and assign it the name `CLIENT`:
 
-Finally, confirm the client can reach the server with the ping command below. As a reference you can also ping the localhost. 
+```output
+127.0.0.1       localhost
+10.248.213.105  CLIENT
+```
+
+| Instance Name | Role   | Description                        |
+|---------------|--------|------------------------------------|
+| SERVER        | Server | Runs `iperf3` in listen mode       |
+| CLIENT        | Client | Initiates performance tests        |
+
+
+
+
+## Confirm the server is reachable
+
+Finally, confirm the client can reach the server by using the ping command below. If required, you can also ping the localhost: 
 
 ```bash
 ping SERVER -c 3 && ping 127.0.0.1 -c 3
 ```
 
-The output below shows that both SERVER and localhost (127.0.0.1) are reachable. Naturally, the local host response time is ~10x faster than the server. Your results will vary depending on geographic location of the systems and other networking factors. 
+The output below shows that both SERVER and localhost (127.0.0.1) are reachable. 
+
+Localhost response times are typically ~10× faster than remote systems, though actual values vary based on system location and network conditions.
 
 ```output
 PING SERVER (10.248.213.104) 56(84) bytes of data.
@@ -87,4 +133,4 @@ PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.022/0.027/0.032/0.004 ms
 ```
 
-Continue to the next section to learn how to measure the network bandwidth between the systems.
+Now that your systems are configured, the next step is to measure the available network bandwidth between them.

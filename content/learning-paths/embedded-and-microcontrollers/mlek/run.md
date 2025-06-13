@@ -72,7 +72,7 @@ The application executes and identifies words spoken within audio files.
 
 Repeat with any of the other built applications.
 
-Full instructions are provided in the evaluation kit [documentation](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit/+/HEAD/docs/quick_start.md).
+Full instructions are provided in the evaluation kit [documentation](https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit/-/blob/main/docs/quick_start.md).
 
 
 ## Addendum: Speed up FVP execution

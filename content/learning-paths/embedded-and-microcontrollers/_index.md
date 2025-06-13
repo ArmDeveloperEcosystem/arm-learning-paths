@@ -10,7 +10,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 1
-- Baremetal: 29
+- Baremetal: 30
 - Linux: 28
 - macOS: 6
 - RTOS: 9
@@ -29,7 +29,7 @@ subtitle: Learn best practices for microcontroller development
 title: Embedded and Microcontrollers
 tools_software_languages_filter:
 - AI: 1
-- Arduino: 1
+- Arduino: 2
 - Arm Compiler for Embedded: 7
 - Arm Compiler for Linux: 1
 - Arm Compute Library: 1
@@ -51,6 +51,8 @@ tools_software_languages_filter:
 - DetectNet: 1
 - Docker: 9
 - DSTREAM: 2
+- Edge AI: 1
+- Edge Impulse: 1
 - ExecuTorch: 2
 - Fixed Virtual Platform: 9
 - FPGA: 1
@@ -88,7 +90,7 @@ tools_software_languages_filter:
 - STM32: 2
 - TensorFlow: 3
 - TensorRT: 1
-- tinyML: 1
+- tinyML: 2
 - Trusted Firmware: 3
 - TrustZone: 2
 - TVMC: 1
