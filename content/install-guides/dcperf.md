@@ -105,7 +105,7 @@ sudo ./benchpress_cli.py run oss_performance_mediawiki_mlp -i '{
 }'
 ```
 
-Whilst the benchmark is running you will be able to observe the various processes occupying the CPU.
+Whilst the benchmark is running you will be able to observe the various processes occupying the CPU with the `top` command.
 
 
 Once the benchmark is complete, within the `DCPerf` directory a `benchmark_metrics_*` directory will be created with a `JSON` file for the system specs and metrics respectively. 
