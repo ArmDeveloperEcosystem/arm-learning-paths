@@ -164,29 +164,29 @@ When running on a Graviton4 c8g.large instance with Ubuntu 24.04, the results sh
 
 The optimized scalar implementation shows significant improvements over the generic scalar implementation due to:
 
-1. **Byte-level Skipping**: Avoiding processing empty bytes
-2. **Reduced Function Calls**: Accessing bits directly rather than through function calls
-3. **Better Cache Utilization**: More sequential memory access patterns
+* **Byte-level Skipping**: Avoiding processing empty bytes
+* **Reduced Function Calls**: Accessing bits directly rather than through function calls
+* **Better Cache Utilization**: More sequential memory access patterns
 
 ## Optimized Scalar vs NEON
 
 The NEON implementation shows further improvements over the optimized scalar implementation for sparse bit vectors due to:
 
-1. **Chunk-level Skipping**: Quickly skipping 16 empty bytes at once
-2. **Vectorized Comparison**: Checking multiple bytes in parallel
-3. **Early Termination**: Quickly determining if a chunk contains any set bits
+* **Chunk-level Skipping**: Quickly skipping 16 empty bytes at once
+* **Vectorized Comparison**: Checking multiple bytes in parallel
+* **Early Termination**: Quickly determining if a chunk contains any set bits
 
 ## NEON vs SVE
 
 The performance comparison between NEON and SVE depends on the bit density:
 
-1. **Very Sparse Bit Vectors (0% - 0.01% density)**:
+*  **Very Sparse Bit Vectors (0% - 0.01% density)**:
    - NEON performs better for empty bitvectors due to lower overhead
    - NEON achieves up to 127.41x speedup over generic scalar
    - SVE performs better for very sparse bitvectors (0.001% density)
    - SVE achieves up to 29.07x speedup over generic scalar at 0.001% density
 
-2. **Higher Density Bit Vectors (0.1% - 10% density)**:
+* **Higher Density Bit Vectors (0.1% - 10% density)**:
    - SVE consistently outperforms NEON
    - SVE achieves up to 1.66x speedup over NEON at 0.01% density
 
@@ -194,15 +194,28 @@ The performance comparison between NEON and SVE depends on the bit density:
 
 The SVE implementation includes several key optimizations:
 
-1. **Efficient Non-Zero Byte Detection**: Using `svcmpne_u8` to quickly identify non-zero bytes in the bitvector.
+* **Efficient Non-Zero Byte Detection**: Using `svcmpne_u8` to quickly identify non-zero bytes in the bitvector.
 
-2. **Byte-Level Processing**: Using `svpnext_b8` to efficiently find the next non-zero byte without processing zero bytes.
+* **Byte-Level Processing**: Using `svpnext_b8` to efficiently find the next non-zero byte without processing zero bytes.
 
-3. **Value Extraction**: Using `svlastb_u8` to extract both the index and value of non-zero bytes.
+* **Value Extraction**: Using `svlastb_u8` to extract both the index and value of non-zero bytes.
 
-4. **Hybrid Vector-Scalar Approach**: Combining vector operations for finding non-zero bytes with scalar operations for processing individual bits.
+* **Hybrid Vector-Scalar Approach**: Combining vector operations for finding non-zero bytes with scalar operations for processing individual bits.
 
-5. **Prefetching**: Using `__builtin_prefetch` to reduce memory latency by prefetching the next chunk of data.
+* **Prefetching**: Using `__builtin_prefetch` to reduce memory latency by prefetching the next chunk of data.
 
+## Next up: Apply what you’ve learned to real-world workloads
+
+Now that you’ve benchmarked all four bitmap scanning implementations—scalar (generic and optimized), NEON, and SVE—you have a data-driven understanding of how vectorization impacts performance across different bitmap densities.
+
+In the next section, you’ll explore how to apply these techniques in real-world database workloads, including:
+
+* Bitmap index scans
+
+* Bloom filter checks
+
+* Column-level filtering in analytical queries
+
+You’ll also learn practical guidelines for choosing the right implementation based on bit density, and discover optimization tips that go beyond the code to help you get the most out of Arm-based systems like Graviton4.
 
 

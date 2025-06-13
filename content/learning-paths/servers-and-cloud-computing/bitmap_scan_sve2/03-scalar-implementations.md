@@ -76,7 +76,14 @@ size_t result_count = 0;
 ```
 Instead of iterating through each bit individually, this implementation processes one byte (8 bits) at a time. The main optimization over the previous scalar implementation is checking if an entire byte is zero and skipping it entirely. For sparse bitmaps, this can dramatically reduce the number of bit checks.
 
-## Next steps
+## Next up: Accelerate bitmap scanning with NEON and SVE
 
-Next, you’ll explore how to accelerate bitmap scanning using NEON and SVE SIMD instructions on Arm Neoverse platforms like Graviton4, comparing them directly to these scalar baselines.
+You’ve now implemented two scalar scanning routines:
 
+* A generic per-bit loop for correctness and simplicity
+
+* An optimized scalar version that improves performance using byte-level skipping
+
+These provide a solid foundation and performance baseline—but scalar methods can only take you so far. To unlock real throughput gains, it’s time to leverage SIMD (Single Instruction, Multiple Data) execution.
+
+In the next section, you’ll explore how to use Arm NEON and SVE vector instructions to accelerate bitmap scanning. These approaches will process multiple bytes at once and significantly outperform scalar loops—especially on modern Arm-based CPUs like AWS Graviton4.

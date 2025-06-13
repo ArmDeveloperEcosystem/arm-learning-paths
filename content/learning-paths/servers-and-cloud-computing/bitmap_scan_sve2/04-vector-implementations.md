@@ -152,3 +152,8 @@ size_t scan_bitvector_sve2_pnext(bitvector_t* bv, uint32_t* result_positions) {
 ```
 The SVE implementation efficiently scans bitmaps by using `svcmpne_u8` to identify non-zero bytes and `svpnext_b8` to iterate through them sequentially. It extracts byte indices and values with `svlastb_u8`, then processes individual bits using scalar code. This hybrid vector-scalar approach maintains great performance across various bitmap densities. On Graviton4, SVE vectors are 128 bits (16 bytes), allowing processing of 16 bytes at once. 
 
+## Next up: Apply vectorized scanning to database workloads
+
+With both NEON and SVE implementations in place, you’ve now unlocked the full power of Arm’s vector processing capabilities for bitmap scanning. These SIMD techniques allow you to process large bitvectors more efficiently—especially when filtering sparse datasets or skipping over large blocks of empty rows.
+
+In the next section, you’ll learn how to apply these optimizations in the context of real database operations like bitmap index scans, Bloom filter probes, and column filtering. You’ll also explore best practices for selecting the right implementation based on bit density, and tuning for maximum performance on AWS Graviton4.

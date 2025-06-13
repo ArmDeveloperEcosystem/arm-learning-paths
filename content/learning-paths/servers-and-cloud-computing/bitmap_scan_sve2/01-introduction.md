@@ -23,9 +23,9 @@ Bitmap scanning involves searching through a bit vector to find positions where 
 
 In database systems, bitmaps are commonly used to represent:
 
-* **Bitmap Indexes**: each bit represents whether a row satisfies a particular condition
-* **Bloom Filters**: probabilistic data structures used to test set membership
-* **Column Filters**: bit vectors indicating which rows match certain predicates
+* **Bitmap indexes**: each bit represents whether a row satisfies a particular condition
+* **Bloom filters**: probabilistic data structures used to test set membership
+* **Column filters**: bit vectors indicating which rows match certain predicates
 
 The operation of scanning a bitmap to find set bits is often in the critical path of query execution, making it a prime candidate for optimization.
 
@@ -33,8 +33,8 @@ The operation of scanning a bitmap to find set bits is often in the critical pat
 
 Here's how vector processing has evolved to improve bitmap scanning performance:
 
-* **Generic Scalar Processing**: traditional bit-by-bit processing with conditional branches
-* **Optimized Scalar Processing**: byte-level skipping to avoid processing empty bytes
+* **Generic scalar processing**: traditional bit-by-bit processing with conditional branches
+* **Optimized scalar processing**: byte-level skipping to avoid processing empty bytes
 * **NEON**: fixed-width 128-bit SIMD processing with vector operations
 * **SVE**: scalable vector processing with predication and specialized instructions like MATCH 
 
@@ -61,6 +61,6 @@ Create a directory for your implementations:
 mkdir -p bitmap_scan
 cd bitmap_scan
 ```
-## Next steps
 
-In the next section, you’ll define the core bitmap data structure and utility functions for setting, clearing, and inspecting bits.
+## Next up: build the bitmap scanning foundation
+With your development environment set up, you're ready to dive into the core of bitmap scanning. In the next section, you’ll define a minimal bitmap data structure and implement utility functions to set, clear, and inspect individual bits.

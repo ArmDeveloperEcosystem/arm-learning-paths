@@ -83,4 +83,6 @@ size_t bitvector_count_scalar(bitvector_t* bv) {
 }
 ```
 
-You now have a functional, compact bit vector in C for testing bitmap scanning performance. Next, you'll implement scalar, NEON, and SVE-based scanning routines that operate on this structure.
+## Next up: Implement and benchmark your first scalar bitmap scan
+
+With your bit vector infrastructure in place, you're now ready to scan it for set bits—the core operation that underpins all bitmap-based filters in database systems.

@@ -25,23 +25,26 @@ Columnar databases frequently use bitmap filters to track which rows satisfy fil
 
 Based on the benchmark results, here are some best practices for optimizing bitmap scanning operations:
 
-1. **Choose the right implementation based on the expected bit density**:
+* Choose the right implementation based on the expected bit density**:
    - For empty bit vectors: NEON is optimal
    - For very sparse bit vectors (0.001% - 0.1% set bits): SVE is optimal due to efficient skipping
    - For medium to high densities (> 0.1% density): SVE still outperforms NEON
 
-2. **Implement Early Termination**: Always include a fast path for the no-hits case, as this can provide dramatic performance improvements.
+* Implement Early Termination**: Always include a fast path for the no-hits case, as this can provide dramatic performance improvements.
 
-3. **Use Byte-level Skipping**: Even in scalar implementations, skipping empty bytes can provide significant performance improvements.
+* Use Byte-level Skipping**: Even in scalar implementations, skipping empty bytes can provide significant performance improvements.
 
-4. **Consider Memory Access Patterns**: Optimize memory access patterns to improve cache utilization.
+* Consider Memory Access Patterns**: Optimize memory access patterns to improve cache utilization.
 
-5. **Leverage Vector Instructions**: Use NEON or SVE/SVE2 instructions to process multiple bytes in parallel.
+* Leverage Vector Instructions**: Use NEON or SVE/SVE2 instructions to process multiple bytes in parallel.
 
 ## Conclusion
 
-The SVE instructions provides a powerful way to accelerate bitmap scanning operations in database systems. By implementing these optimizations on Graviton4 instances, you can achieve significant performance improvements for your database workloads.
+Scalable Vector Extension (SVE) instructions provide a powerful and portable way to accelerate bitmap scanning in modern database systems. When implemented on Arm Neoverse V2–based servers like AWS Graviton4, they deliver substantial performance improvements across a wide range of bit densities.
 
-The SVE implementation shows particularly impressive performance for sparse bitvectors (0.001% - 0.1% density), where it outperforms both scalar and NEON implementations. For higher densities, it continues to provide substantial speedups over traditional approaches.
+The SVE implementation shows particularly impressive performance for sparse bitvectors (0.001% - 0.1% density), where it outperforms both scalar and NEON implementations. For higher densities, it maintains a performance advantage by amortizing scan costs across wider vectors.
 
 These performance improvements can translate directly to faster query execution times, especially for analytical workloads that involve multiple bitmap operations.
+
+
+
