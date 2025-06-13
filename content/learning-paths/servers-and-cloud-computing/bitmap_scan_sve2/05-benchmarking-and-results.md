@@ -168,17 +168,17 @@ The benchmarking results reveal how different bitmap scanning implementations pe
 
 The optimized scalar implementation shows significant improvements over the generic scalar implementation due to:
 
-* **Byte-level Skipping**: Avoiding processing empty bytes
-* **Reduced Function Calls**: Accessing bits directly rather than through function calls
-* **Better Cache Utilization**: More sequential memory access patterns
+* **Byte-level Skipping**: avoiding processing empty bytes
+* **Reduced Function Calls**: accessing bits directly rather than through function calls
+* **Better Cache Utilization**: more sequential memory access patterns
 
 ### Optimized scalar vs NEON
 
 The NEON implementation shows further improvements over the optimized scalar implementation for sparse bit vectors due to:
 
-* **Chunk-level Skipping**: Quickly skipping 16 empty bytes at once
-* **Vectorized Comparison**: Checking multiple bytes in parallel
-* **Early Termination**: Quickly determining if a chunk contains any set bits
+* **Chunk-level Skipping**: quickly skipping 16 empty bytes at once
+* **Vectorized Comparison**: checking multiple bytes in parallel
+* **Early Termination**: quickly determining if a chunk contains any set bits
 
 ### NEON vs SVE
 
@@ -198,13 +198,13 @@ The performance comparison between NEON and SVE depends on the bit density:
 
 The SVE implementation includes several key optimizations:
 
-* **Efficient Non-Zero Byte Detection**: Using `svcmpne_u8` to quickly identify non-zero bytes in the bitvector.
+* **Efficient Non-Zero Byte Detection**: using `svcmpne_u8` to quickly identify non-zero bytes in the bitvector.
 
-* **Byte-Level Processing**: Using `svpnext_b8` to efficiently find the next non-zero byte without processing zero bytes.
+* **Byte-Level Processing**: using `svpnext_b8` to efficiently find the next non-zero byte without processing zero bytes.
 
-* **Value Extraction**: Using `svlastb_u8` to extract both the index and value of non-zero bytes.
+* **Value Extraction**: using `svlastb_u8` to extract both the index and value of non-zero bytes.
 
-* **Hybrid Vector-Scalar Approach**: Combining vector operations for finding non-zero bytes with scalar operations for processing individual bits.
+* **Hybrid Vector-Scalar Approach**: combining vector operations for finding non-zero bytes with scalar operations for processing individual bits.
 
 * **Prefetching**: Using `__builtin_prefetch` to reduce memory latency by prefetching the next chunk of data.
 
