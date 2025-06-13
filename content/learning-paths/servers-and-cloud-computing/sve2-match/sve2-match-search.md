@@ -10,7 +10,7 @@ layout: "learningpathall"
 ---
 ## Introduction
 
-Searching large arrays for specific values is a core task in performance-sensitive applications—from filtering records in a database to detecting patterns in text or images. On Arm Neoverse-based servers, SVE2 MATCH instructions unlock massive performance gains by vectorizing these operations. In this Learning Path, you’ll implement and benchmark both scalar and vectorized versions of search functions to see just how much faster your workloads can run.
+Searching large arrays for specific values is a core task in performance-sensitive applications, from filtering records in a database to detecting patterns in text or images. On Arm Neoverse-based servers, SVE2 MATCH instructions unlock significant performance gains by vectorizing these operations. In this Learning Path, you’ll implement and benchmark both scalar and vectorized versions of search functions to see just how much faster workloads can run.
 
 ## What is SVE2 MATCH?
 
@@ -18,9 +18,9 @@ SVE2 (Scalable Vector Extension 2) is an extension to the Arm architecture that 
 
 ## Set up your environment
 
-To work through these examples, you require:
+To work through these examples, you need:
 
-* An AWS Graviton4 instance running `Ubuntu 24.04`
+* A cloud instance with SVE2 support running Ubuntu 24.04
 * GCC compiler with SVE support
 
 Start by setting up your environment:
@@ -29,7 +29,7 @@ Start by setting up your environment:
 sudo apt-get update
 sudo apt-get install -y build-essential gcc g++
 ```
-An effective way to achieve optimal performance on Arm is not only through optimal flag usage, but also by using the most recent compiler version. This Learning path was tested with GCC 13 which is the default version on `Ubuntu 24.04`, but you can run it with newer versions of GCC as well.
+An effective way to achieve optimal performance on Arm is not only through optimal flag usage, but also by using the most recent compiler version. This Learning path was tested with GCC 13 which is the default version on Ubuntu 24.04, but you can run it with newer versions of GCC as well.
 
 Create a directory for your implementations:
 
@@ -50,7 +50,7 @@ This type of search operation is common in many applications:
 
 ## Implementing search algorithms
 
-Let's implement three versions of our search function:
+To understand the alternatives, you can implement three versions of the search function:
 
 ### 1. Generic scalar implementation
 
@@ -86,11 +86,14 @@ int search_generic_u16(const uint16_t *hay, size_t n, const uint16_t *keys,
   return 0;
 }
 ```
+
 The `search_generic_u8()` and `search_generic_u16()` functions both return 1 immediately when a match is found in the inner loop.
 
 ### 2. SVE2 MATCH implementation
 
-Now create an implementation that uses SVE2 MATCH instructions to process multiple elements in parallel. Copy the code shown into the same file:
+Now create an implementation that uses SVE2 MATCH instructions to process multiple elements in parallel. 
+
+Copy the code shown into the same source file:
 
 ```c
 int search_sve2_match_u8(const uint8_t *hay, size_t n, const uint8_t *keys,
@@ -106,7 +109,7 @@ int search_sve2_match_u8(const uint8_t *hay, size_t n, const uint8_t *keys,
     svuint8_t block = svld1(pg, &hay[i]);
     if (svptest_any(pg, svmatch_u8(pg, block, keyvec))) return 1;
   }
-for (; i < n; ++i) {
+  for (; i < n; ++i) {
     uint8_t v = hay[i];
     for (size_t k = 0; k < nkeys; ++k)
       if (v == keys[k]) return 1;
@@ -135,9 +138,10 @@ int search_sve2_match_u16(const uint16_t *hay, size_t n, const uint16_t *keys,
   return 0;
 }
 ```
+
 The SVE MATCH implementation with the `search_sve2_match_u8()` and `search_sve2_match_u16()` functions provide an efficient vectorized search approach with these key technical aspects:
    - Uses SVE2's specialized MATCH instruction to compare multiple elements against multiple keys in parallel
-   - Leverages hardware-specific vector length through svcntb() for scalability
+   - Leverages hardware-specific vector length through `svcntb()` for scalability
    - Prepares a vector of search keys that's compared against blocks of data
    - Processes data in vector-sized chunks with early termination when matches are found. Stops immediately when any element in the vector matches.
    - Falls back to scalar code for remainder elements
@@ -179,7 +183,7 @@ int search_sve2_match_u8_unrolled(const uint8_t *hay, size_t n, const uint8_t *k
     if (svptest_any(pg, match1) || svptest_any(pg, match2) || 
         svptest_any(pg, match3) || svptest_any(pg, match4))
       return 1;
-}
+  }
   
   // Process remaining vectors one at a time
   for (; i + VL <= n; i += VL) {
@@ -224,7 +228,7 @@ int search_sve2_match_u16_unrolled(const uint16_t *hay, size_t n, const uint16_t
     svbool_t match3 = svmatch_u16(pg, block3, keyvec);
     svbool_t match4 = svmatch_u16(pg, block4, keyvec);
 
-if (svptest_any(pg, match1) || svptest_any(pg, match2) ||
+    if (svptest_any(pg, match1) || svptest_any(pg, match2) ||
         svptest_any(pg, match3) || svptest_any(pg, match4))
       return 1;
   }
@@ -244,15 +248,18 @@ if (svptest_any(pg, match1) || svptest_any(pg, match2) ||
   return 0;
 }
 ```
+
 The main highlights of this implementation are:
    - Processes four vectors per iteration instead of just one and stops immediately when any match is found in any of the four vectors.
-   - Uses prefetching (__builtin_prefetch) to reduce memory latency
-   - Leverages the svmatch_u8/u16 instruction to efficiently compare each element against multiple keys in a single operation
+   - Uses prefetching (`__builtin_prefetch`) to reduce memory latency
+   - Leverages the `svmatch_u8` and `svmatch_u16` instructions to efficiently compare each element against multiple keys in a single operation
    - Aligns memory to 64-byte boundaries for better memory access performance
 
 ## Benchmarking framework
 
-To compare the performance of the three implementations, use a benchmarking framework that measures the execution time of each implementation. You will also add helper functions for membership testing that are needed to setup the test data with controlled hit rates:
+To compare the performance of the three implementations, use a benchmarking framework that measures the execution time of each implementation. You will also add helper functions for membership testing that are needed to setup the test data with controlled hit rates.
+
+Copy the code below into the bottom of the same source code file:
 
 ```c
 // Timing function
@@ -340,7 +347,7 @@ int main(int argc, char **argv) {
     volatile int r = search_generic_u8(hay8, len, keys8, NKEYS8); (void)r;
     t_gen8 += nsec_now() - t0;
   
-   #if defined(__ARM_FEATURE_SVE2)
+#if defined(__ARM_FEATURE_SVE2)
     t0 = nsec_now();
     r = search_sve2_match_u8(hay8, len, keys8, NKEYS8); (void)r;
     t_sve8 += nsec_now() - t0;
@@ -350,7 +357,7 @@ int main(int argc, char **argv) {
     t_sve8_unrolled += nsec_now() - t0;
 #endif
 
-t0 = nsec_now();
+    t0 = nsec_now();
     r = search_generic_u16(hay16, len, keys16, NKEYS16); (void)r;
     t_gen16 += nsec_now() - t0;
 
@@ -415,7 +422,9 @@ t0 = nsec_now();
   free(hay8);
   free(hay16);
   return 0;
+}
 ```
+
 ## Compiling and Running
 
 You can now compile the different search implementations:
@@ -429,7 +438,8 @@ Run the benchmark on a dataset of 65,536 elements (2^16) with a 0.001% hit rate:
 ```bash
 ./sve2_match_demo $((1<<16)) 3 0.00001
 ```
-The output will look like:
+
+The output is similar to:
 
 ```output
 Haystack length : 65536 elements
@@ -449,11 +459,13 @@ Average latency over 3 iterations (ns):
   speed‑up (orig)  : 20.74x
   speed‑up (unroll): 27.23x
 ```
+
 You can experiment with different haystack lengths, iterations and hit probabilities.
 
 ```bash
 ./sve2_match_demo [length] [iterations] [hit_prob]
 ```
+
 ## Performance Results
 
 When running on a Graviton4 instance with Ubuntu 24.04 and a dataset of 65,536 elements (2^16), you will see different hit probabilities, as shown in the following results:
@@ -497,23 +509,24 @@ When running on a Graviton4 instance with Ubuntu 24.04 and a dataset of 65,536 e
 ### Impact of Hit Rate on Performance
 The benchmark results reveal several important insights about the performance characteristics of SVE2 MATCH instructions. The most striking observation is how the performance advantage of SVE2 MATCH varies with the hit rate:
 
-1. **Very Low Hit Rates (0% - 0.001%)**: 
+##### **Very Low Hit Rates (0% - 0.001%)**: 
    - For 8-bit data, SVE2 MATCH Unrolled achieves an impressive 90-95x speedup
    - For 16-bit data, the speedup is around 27-28x
    - This is where SVE2 MATCH truly shines, as it can quickly process large chunks of data with few or no matches
 
-2. **Low Hit Rates (0.01%)**: 
+##### **Low Hit Rates (0.01%)**: 
    - Still excellent performance with 70x speedup for 8-bit and 27x for 16-bit
    - The vectorized approach continues to be highly effective
 
-3. **Medium Hit Rates (0.1%)**: 
+##### **Medium Hit Rates (0.1%)**: 
    - Good performance with 25x speedup for 8-bit and 21x for 16-bit
    - Early termination starts to reduce the advantage somewhat
 
-4. **High Hit Rates (1%)**: 
+##### **High Hit Rates (1%)**: 
    - Moderate speedup of 6x for 8-bit and 2x for 16-bit
    - With frequent matches, early termination limits the benefits of vectorization
 
+##### **Summary**
 This pattern makes SVE2 MATCH particularly well-suited for applications where matches are rare but important to find, such as:
 - Searching for specific patterns in large datasets
 - Filtering operations with high selectivity
@@ -562,5 +575,5 @@ For image processing, MATCH can accelerate:
 
 ## Conclusion
 
-The SVE2 MATCH instruction provides a powerful way to accelerate search operations in byte and half word arrays. By implementing these optimizations on Graviton4 instances, you can achieve significant performance improvements for your applications.
+The SVE2 MATCH instruction provides a powerful way to accelerate search operations in byte and half word arrays. By implementing these optimizations on cloud instances with SVE2, you can achieve significant performance improvements for your applications.
 
