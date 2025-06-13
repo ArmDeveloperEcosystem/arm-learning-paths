@@ -6,29 +6,29 @@ weight: 7
 
 layout: "learningpathall"
 ---
-## Application to Database Systems
+## Applications to database systems
 
-These bitmap scanning optimizations can be applied to various database operations:
+Optimized bitmap scanning can accelerate several core operations in modern database engines, particularly those used for analytical and vectorized workloads.
 
-### Bitmap Index Scans
-Bitmap indexes are commonly used in analytical databases to accelerate queries with multiple filter conditions. The NEON and SVE implementations can significantly speed up the scanning of these bitmap indexes, especially for queries with low selectivity.
+### Bitmap index scans
+Bitmap indexes are widely used in analytical databases to accelerate queries with multiple filter predicates across large datasets. The NEON and SVE implementations can significantly speed up the scanning of these bitmap indexes, especially for queries with low selectivity.
 
-### Bloom Filter Checks
+### Bloom filter checks
 
-Bloom filters are probabilistic data structures used to test set membership. They are often used in database systems to quickly filter out rows that don't match certain conditions. The NEON and SVE implementations can accelerate these bloom filter checks.
+Bloom filters are probabilistic structures used to test set membership, commonly employed in join filters or subquery elimination. Vectorized scanning via NEON or SVE accelerates these checks by quickly rejecting rows that don’t match, reducing the workload on subsequent stages of the query.
 
-### Column Filtering
+### Column filtering
 
-In column-oriented databases, bitmap filters are often used to represent which rows match certain predicates. The NEON and SVE implementation can speed up the scanning of these bitmap filters, improving query performance.
+Columnar databases frequently use bitmap filters to track which rows satisfy filter conditions. These bitmaps can be scanned in a vectorized fashion using NEON or SVE instructions, substantially speeding up predicate evaluation and minimizing CPU cycles spent on row selection.
 
-## Best Practices
+## Best practices
 
 Based on the benchmark results, here are some best practices for optimizing bitmap scanning operations:
 
-1. **Choose the Right Implementation**: Select the appropriate implementation based on the expected bit density:
+1. **Choose the right implementation based on the expected bit density**:
    - For empty bit vectors: NEON is optimal
-   - For very sparse bit vectors (0.001% - 0.1% density): SVE is optimal
-   - For higher densities (> 0.1% density): SVE still outperforms NEON
+   - For very sparse bit vectors (0.001% - 0.1% set bits): SVE is optimal due to efficient skipping
+   - For medium to high densities (> 0.1% density): SVE still outperforms NEON
 
 2. **Implement Early Termination**: Always include a fast path for the no-hits case, as this can provide dramatic performance improvements.
 
