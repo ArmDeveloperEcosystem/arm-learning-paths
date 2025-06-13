@@ -1,23 +1,27 @@
 ---
 # User change
-title: "Optimize bitmap scanning with SVE and NEON on Arm servers"
+title: "Optimize bitmap scanning in databases with SVE and NEON on Arm servers"
 
 weight: 2
 
 layout: "learningpathall"
 ---
-## Introduction
+## Overview
 
-Bitmap scanning is a fundamental operation in database systems — used in bitmap indexes, bloom filters, and column filters — but it can bottleneck complex analytical queries. In this Learning Path, you'll learn how to speed up these operations using Arm's SVE and NEON vector instructions, especially on Neoverse V2–based servers like AWS Graviton4. 
+Bitmap scanning is a core operation in many database systems. It's essential for powering fast filtering in bitmap indexes, Bloom filters, and column filters. However, these scans can become performance bottlenecks in complex analytical queries.
 
-In this Learning Path, you will:
+In this Learning Path, you’ll learn how to accelerate bitmap scanning using Arm’s vector processing technologies - NEON and SVE - on Neoverse V2–based servers like AWS Graviton4. 
+
+Specifically, you will:
 
 * Explore how to use SVE instructions on Arm Neoverse V2–based servers like AWS Graviton4 to optimize bitmap scanning
 * Compare scalar, NEON, and SVE implementations to demonstrate the performance benefits of specialized vector instructions
 
 ## What is bitmap scanning in databases?
 
-Bitmap scanning involves searching through a bit vector to find positions where bits are set (1) or unset (0). In database systems, bitmaps are commonly used to represent:
+Bitmap scanning involves searching through a bit vector to find positions where bits are set (`1`) or unset (`0`). 
+
+In database systems, bitmaps are commonly used to represent:
 
 * **Bitmap Indexes**: each bit represents whether a row satisfies a particular condition
 * **Bloom Filters**: probabilistic data structures used to test set membership
@@ -31,7 +35,7 @@ Here's how vector processing has evolved to improve bitmap scanning performance:
 
 * **Generic Scalar Processing**: traditional bit-by-bit processing with conditional branches
 * **Optimized Scalar Processing**: byte-level skipping to avoid processing empty bytes
-* **NEON**: fixed-length 128-bit SIMD processing with vector operations
+* **NEON**: fixed-width 128-bit SIMD processing with vector operations
 * **SVE**: scalable vector processing with predication and specialized instructions like MATCH 
 
 ## Set up your Arm development environment
@@ -50,7 +54,6 @@ sudo apt-get install -y build-essential gcc g++
 {{% notice Tip %}}
 An effective way to achieve optimal performance on Arm is not only through optimal flag usage, but also by using the most recent compiler version. For best performance, use the latest available GCC version with SVE support. This Learning Path was tested with GCC 13, the default on Ubuntu 24.04. Newer versions should also work.
 {{% /notice %}}
-
 
 
 Create a directory for your implementations:
