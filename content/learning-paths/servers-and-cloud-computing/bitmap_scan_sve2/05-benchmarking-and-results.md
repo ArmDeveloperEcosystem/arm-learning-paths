@@ -130,7 +130,7 @@ int main() {
 
 You are now ready to compile and run your bitmap scanning implementations.
 
-To compile our bitmap scanning implementations with the appropriate flags, run:
+To compile the bitmap scanning implementations with the appropriate flags, run:
 
 ```bash
 gcc -O3 -march=armv9-a+sve2 -o bitvector_scan_benchmark bitvector_scan_benchmark.c -lm
