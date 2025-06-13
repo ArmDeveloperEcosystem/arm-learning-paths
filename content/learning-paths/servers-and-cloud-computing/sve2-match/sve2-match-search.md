@@ -422,6 +422,7 @@ int main(int argc, char **argv) {
   free(hay8);
   free(hay16);
   return 0;
+}
 ```
 
 ## Compiling and Running
