@@ -11,10 +11,10 @@ learning_objectives:
   - Understand the purpose and function of SVE2 MATCH instructions.
   - Implement a search algorithm using both scalar and SVE2-based MATCH approaches.
   - Benchmark and compare performance between scalar and vectorized implementations.
-  - Analyze speedups and efficiency gains on Arm Neoverse-based Graviton4 instances.
+  - Analyze speedups and efficiency gains on Arm Neoverse-based instances with SVE2.
 
 prerequisites:
-- Access to an [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a supported cloud service provider
+- Access to an [AWS Graviton4, Google Axion, or Azure Cobalt 100 virtual machine](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
 
 author: Pareena Verma
 
