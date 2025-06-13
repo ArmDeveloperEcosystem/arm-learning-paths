@@ -59,7 +59,7 @@ Follow the exact settings in the attached snapshot to complete the configuration
 
 With your device configured, the next step is to **add your dataset** to the project. Click on the **"Add existing data"** button and follow the configuration settings shown in the attached snapshot. This allows you to upload pre-recorded data instead of collecting it live, which can save time during the development phase.
 
-The dataset for this project can be downloaded from the following link: [Download Dataset](https://github.com/e-dudzi/Learning-Path.git). The Dataset has already been splitted into **trainig** and **testing**.
+The dataset for this project can be downloaded from the following link: [Download Dataset](https://github.com/e-dudzi/Learning-Path.git). The Dataset has already been split into **training** and **testing**.
 
 ![example image alt-text#center](Images/6.png "Figure 4. Add Existing Data")
 

@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- Linux: 146
+- Linux: 147
 - macOS: 10
 - Windows: 14
 pinned_modules:
@@ -23,7 +23,7 @@ subjects_filter:
 - Databases: 15
 - Libraries: 9
 - ML: 27
-- Performance and Architecture: 56
+- Performance and Architecture: 57
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -54,7 +54,7 @@ tools_software_languages_filter:
 - Bash: 1
 - bash: 2
 - Bastion: 3
-- BOLT: 1
+- BOLT: 2
 - bpftool: 1
 - C: 4
 - C#: 2
@@ -98,7 +98,7 @@ tools_software_languages_filter:
 - Hugging Face: 9
 - InnoDB: 1
 - Intrinsics: 1
-- iperf3: 1
+- iPerf3: 1
 - Java: 3
 - JAX: 1
 - Kafka: 1
@@ -127,7 +127,7 @@ tools_software_languages_filter:
 - ONNX Runtime: 1
 - OpenBLAS: 1
 - PAPI: 1
-- perf: 4
+- perf: 5
 - Perf: 1
 - PostgreSQL: 4
 - Python: 27
@@ -136,7 +136,7 @@ tools_software_languages_filter:
 - Redis: 3
 - Remote.It: 2
 - RME: 6
-- Runbook: 70
+- Runbook: 71
 - Rust: 2
 - snappy: 1
 - Snort3: 1
