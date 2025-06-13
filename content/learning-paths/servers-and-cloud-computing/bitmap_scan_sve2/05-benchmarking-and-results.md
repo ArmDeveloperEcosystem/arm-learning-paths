@@ -40,7 +40,9 @@ double benchmark_scan(size_t (*scan_func)(bitvector_t*, uint32_t*),
 ```
 
 ## Main function
-The main function of your program is responsible for setting up the test environment, running the benchmarking code for the four different implementations across various bit densities, and reporting the results. In the context of bitmap scanning, bit density refers to the percentage or proportion of bits that are set (have a value of 1) in the bitmap. Copy the main function code below into `bitvector_scan_benchmark.c`:
+The main function of your program is responsible for setting up the test environment, running the benchmarking code for the four different implementations across various bit densities, and reporting the results. In the context of bitmap scanning, bit density refers to the percentage or proportion of bits that are set (have a value of 1) in the bitmap. 
+
+Copy the main function code below into `bitvector_scan_benchmark.c`:
 
 ```C
 int main() {
@@ -148,7 +150,7 @@ When running on a Graviton4 c8g.large instance with Ubuntu 24.04, the results sh
 | 0.0100  | 99,511   | 7.821          | 1.570            | 2.252 | 1.353      |
 | 0.1000  | 951,491  | 12.817         | 8.336            | 9.106 | 6.770      |
 
-### Speed-up vs generic Scalar
+### Speed-up vs generic scalar
 
 | Density | Scalar Optimized | NEON    | SVE        |
 |---------|------------------|---------|------------|
@@ -160,7 +162,9 @@ When running on a Graviton4 c8g.large instance with Ubuntu 24.04, the results sh
 
 ## Understanding the results
 
-## Generic Scalar vs Optimized Scalar
+The benchmarking results reveal how different bitmap scanning implementations perform across a range of bit densities—from completely empty vectors to those with millions of set bits. Understanding these trends is key to selecting the most effective approach for your specific use case.
+
+### Generic scalar vs optimized scalar
 
 The optimized scalar implementation shows significant improvements over the generic scalar implementation due to:
 
@@ -168,7 +172,7 @@ The optimized scalar implementation shows significant improvements over the gene
 * **Reduced Function Calls**: Accessing bits directly rather than through function calls
 * **Better Cache Utilization**: More sequential memory access patterns
 
-## Optimized Scalar vs NEON
+### Optimized scalar vs NEON
 
 The NEON implementation shows further improvements over the optimized scalar implementation for sparse bit vectors due to:
 
@@ -176,7 +180,7 @@ The NEON implementation shows further improvements over the optimized scalar imp
 * **Vectorized Comparison**: Checking multiple bytes in parallel
 * **Early Termination**: Quickly determining if a chunk contains any set bits
 
-## NEON vs SVE
+### NEON vs SVE
 
 The performance comparison between NEON and SVE depends on the bit density:
 
@@ -190,7 +194,7 @@ The performance comparison between NEON and SVE depends on the bit density:
    - SVE consistently outperforms NEON
    - SVE achieves up to 1.66x speedup over NEON at 0.01% density
 
-## Key Optimizations in SVE Implementation
+### Key optimizations in SVE implementation
 
 The SVE implementation includes several key optimizations:
 
@@ -204,7 +208,7 @@ The SVE implementation includes several key optimizations:
 
 * **Prefetching**: Using `__builtin_prefetch` to reduce memory latency by prefetching the next chunk of data.
 
-## Next up: Apply what you’ve learned to real-world workloads
+## Next up: apply what you’ve learned to real-world workloads
 
 Now that you’ve benchmarked all four bitmap scanning implementations—scalar (generic and optimized), NEON, and SVE—you have a data-driven understanding of how vectorization impacts performance across different bitmap densities.
 

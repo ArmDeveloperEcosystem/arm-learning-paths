@@ -76,7 +76,7 @@ size_t result_count = 0;
 ```
 Instead of iterating through each bit individually, this implementation processes one byte (8 bits) at a time. The main optimization over the previous scalar implementation is checking if an entire byte is zero and skipping it entirely. For sparse bitmaps, this can dramatically reduce the number of bit checks.
 
-## Next up: Accelerate bitmap scanning with NEON and SVE
+## Next up: accelerate bitmap scanning with NEON and SVE
 
 You’ve now implemented two scalar scanning routines:
 

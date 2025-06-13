@@ -10,9 +10,12 @@ layout: "learningpathall"
 ---
 Modern Arm CPUs like Neoverse V2 support SIMD (Single Instruction, Multiple Data) extensions that allow processing multiple bytes in parallel. In this section, you'll explore how NEON and SVE vector instructions can dramatically accelerate bitmap scanning by skipping over large regions of unset data and reducing per-bit processing overhead.
 
-## NEON Implementation
+## NEON implementation
 
-This implementation uses NEON SIMD (Single Instruction, Multiple Data) instructions to process 16 bytes (128 bits) at a time, significantly accelerating the scanning process. Copy the NEON implementation shown below into the same file:
+This implementation uses NEON SIMD (Single Instruction, Multiple Data) instructions to process 16 bytes (128 bits) at a time, significantly accelerating the scanning process. 
+
+Copy the NEON implementation shown below into the same file:
+
 ```c
 // NEON implementation of bit vector scanning
 size_t scan_bitvector_neon(bitvector_t* bv, uint32_t* result_positions) {
@@ -83,9 +86,11 @@ size_t scan_bitvector_neon(bitvector_t* bv, uint32_t* result_positions) {
 ```
 This NEON implementation processes 16 bytes at a time with vector instructions. For sparse bitmaps, entire 16-byte chunks can be skipped at once, providing a significant speedup over byte-level skipping. After vector processing, it falls back to scalar code for any remaining bytes that don't fill a complete 16-byte chunk.
 
-## SVE Implementation
+## SVE implementation
 
-This implementation uses SVE instructions which are available in the Arm Neoverse V2 based AWS Graviton 4 processor. Copy this SVE implementation into the same file:
+This implementation uses SVE instructions which are available in the Arm Neoverse V2 based AWS Graviton 4 processor. 
+
+Copy this SVE implementation into the same file:
 
 ```c
 // SVE implementation using svcmp_u8, PNEXT, and LASTB
@@ -152,7 +157,7 @@ size_t scan_bitvector_sve2_pnext(bitvector_t* bv, uint32_t* result_positions) {
 ```
 The SVE implementation efficiently scans bitmaps by using `svcmpne_u8` to identify non-zero bytes and `svpnext_b8` to iterate through them sequentially. It extracts byte indices and values with `svlastb_u8`, then processes individual bits using scalar code. This hybrid vector-scalar approach maintains great performance across various bitmap densities. On Graviton4, SVE vectors are 128 bits (16 bytes), allowing processing of 16 bytes at once. 
 
-## Next up: Apply vectorized scanning to database workloads
+## Next up: apply vectorized scanning to database workloads
 
 With both NEON and SVE implementations in place, you’ve now unlocked the full power of Arm’s vector processing capabilities for bitmap scanning. These SIMD techniques allow you to process large bitvectors more efficiently—especially when filtering sparse datasets or skipping over large blocks of empty rows.
 

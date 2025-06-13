@@ -83,6 +83,6 @@ size_t bitvector_count_scalar(bitvector_t* bv) {
 }
 ```
 
-## Next up: Implement and benchmark your first scalar bitmap scan
+## Next up: implement and benchmark your first scalar bitmap scan
 
 With your bit vector infrastructure in place, you're now ready to scan it for set bits—the core operation that underpins all bitmap-based filters in database systems.
