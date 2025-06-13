@@ -16,7 +16,7 @@ learning_objectives:
     - Interface with LEDs to switch them on and off . 
 
 prerequisites:
-    - Explore this [learning path](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/arduino-pico/) if you are an absolute beginer.
+    - Explore this [learning path](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/arduino-pico/) if you are an absolute beginner.
     - An [Edge Impulse](https://edgeimpulse.com/) Studio account. 
     - The [Arduino IDE with the RP2040 board support package](https://learn.arm.com/install-guides/arduino-pico/) installed on your computer 
     - An Arduino Nano RP2040 Connect [board](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers?_gl=1*9t4cti*_up*MQ..*_ga*NTA1NTQwNzgxLjE3NDYwMjIyODk.*_ga_NEXN8H46L5*MTc0NjAyMjI4Ny4xLjEuMTc0NjAyMjMxOC4wLjAuMjA3MjA2NTUzMA..). 
