@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Vectorized Bitmap Scanning with NEON and SVE"
+title: "Vectorized bitmap scanning with NEON and SVE"
 
 weight: 5
 

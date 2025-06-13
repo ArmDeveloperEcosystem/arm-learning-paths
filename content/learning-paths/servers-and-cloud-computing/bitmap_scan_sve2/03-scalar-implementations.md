@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Implement Scalar Bitmap Scanning in C"
+title: "Implement scalar bitmap scanning in C"
 
 weight: 4
 
