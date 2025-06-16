@@ -10,7 +10,7 @@ layout: learningpathall
 
 Understanding which versions perform best and the features they offer can help you make informed decisions when developing applications for Arm-based systems.
 
-.NET has evolved significantly over the years, with each version introducing new features and performance improvements. Here, we will focus on the key versions that have notable performance implications for Arm architecture.
+.NET has evolved significantly over the years, with each version introducing new features and performance improvements. Here, you will learn about key versions that have notable performance implications for Arm architecture.
 
 ## .NET Core 3.1 (end-of-life 2022)
 
@@ -68,7 +68,7 @@ Although .NET 9 will receive only 18 months of support, it is an excellent choic
 
 .NET 10 is still in preview and will likely change prior to it's GA release, but it will be the next LTS version of .NET.
 
-- Extended SVE2 and new SME (Scalable Matrix Extension) intrinsics to unlock efficient implementation of large-scale numerical algorithms and on-device AI inference on Arm v9.
+- [Extended SVE2 intrinsics](https://github.com/dotnet/runtime/issues/109652) to unlock efficient implementation of large-scale numerical algorithms and on-device AI inference on Arm v9.
 - C# 14 is expected to ship alongside .NET 10, bringing additional compile-time metaprogramming features that can reduce boilerplate on resource-constrained Arm edge devices.
 
 Because .NET 10 is still in preview, you should validate any assumptions about feature availability against the latest preview builds and roadmap updates.

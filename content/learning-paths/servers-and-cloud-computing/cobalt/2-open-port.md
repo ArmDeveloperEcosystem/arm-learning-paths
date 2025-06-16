@@ -14,11 +14,10 @@ In this step you will open port 22 for SSH, as well as port 8080 so that a web a
 
 1. In the Azure Portal open the newly created VM resource and click **Networking → Network settings** in the left nav.
 2. Select the **Network security group**.
-3. In the left nav click **Settings → Inbound security rules**
-4. Click **Add** at the top of the screen.
-5. Fill in the form, specifying **My IP address** as the source and 22 as the destination port:
+3. Click on **Create Port Rule** and from the drop-down men select **Inbound port rule**
+4. Fill in the form, specifying **My IP address** as the source and 22 as the destination port:
    ![Add inbound security rule with source of my IP and destination port 22#center](images/create-nsg-rule.png)
-
-To open port 8080, follow steps 4 and 5 again, but instead choose port 8080 for the destination port.
+5. Click **Add**.
+To open port 8080, follow steps 3 through 5 again, but instead choose port 8080 for the destination port.
 
 You have now opened ports 22 and 8080 to your IP. In the next step you will verify connectivity.

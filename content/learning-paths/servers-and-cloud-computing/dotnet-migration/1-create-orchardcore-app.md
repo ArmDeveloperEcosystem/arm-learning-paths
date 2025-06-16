@@ -29,6 +29,18 @@ sudo apt-get install -y dotnet-sdk-8.0
 dotnet --version
 ```
 
+The output should look like:
+
+```output
+8.0.117
+```
+
+4. Install gcc for compiling your application:
+
+```bash
+sudo apt install gcc g++ build-essential -y
+```
+
 ## Step 2: Install the OrchardCore Templates
 
 To start building an OrchardCore application, you need to install the OrchardCore templates. Open your terminal and run the following command:
@@ -38,6 +50,19 @@ dotnet new install OrchardCore.ProjectTemplates::2.1.7
 ```
 
 This command installs the OrchardCore project templates, which you will use to create a new application.
+
+The output will look like:
+
+```output
+Success: OrchardCore.ProjectTemplates::2.1.7 installed the following templates:
+Template Name             Short Name   Language  Tags
+------------------------  -----------  --------  --------------------
+Orchard Core Cms Module   ocmodulecms  [C#]      Web/Orchard Core/CMS
+Orchard Core Cms Web App  occms        [C#]      Web/Orchard Core/CMS
+Orchard Core Mvc Module   ocmodulemvc  [C#]      Web/Orchard Core/Mvc
+Orchard Core Mvc Web App  ocmvc        [C#]      Web/Orchard Core/Mvc
+Orchard Core Theme        octheme      [C#]      Web/Orchard Core/CMS
+```
 
 ## Step 3: Create a new OrchardCore application
 
@@ -63,6 +88,21 @@ cd MyOrchardCoreApp
 dotnet build
 ```
 
+The output will look like:
+
+```output
+MSBuild version 17.8.27+3ab07f0cf for .NET
+  Determining projects to restore...
+  Restored /home/azureuser/MyOrchardCoreApp/MyOrchardCoreApp.csproj (in 28.95 sec).
+  MyOrchardCoreApp -> /home/azureuser/MyOrchardCoreApp/bin/Debug/net8.0/MyOrchardCoreApp.dll
+  Copying translation files: MyOrchardCoreApp
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:38.05
+```
 2. **Run the application**: Start the application with:
 
 ```bash

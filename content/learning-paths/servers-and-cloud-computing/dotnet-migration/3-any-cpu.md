@@ -16,9 +16,8 @@ The AnyCPU feature has been around since .NET 2, but it's current incarnation wa
 
 To make your OrchardCore application architecture agnostic, you need to configure it to use the AnyCPU platform target. This allows the .NET runtime to choose the appropriate architecture at runtime.
 
-1. Open your OrchardCore project in your preferred IDE.
-2. Locate the `.csproj` file for your project.
-3. Modify the `<PlatformTarget>` element to `AnyCPU`:
+1. Open your OrchardCore project `MyOrchardCoreApp.csproj` in your preferred IDE.
+2. Find the `<PropertyGroup>` and add the `<PlatformTarget>` element to `AnyCPU`:
 
 ```xml
 <PropertyGroup>
@@ -30,6 +29,8 @@ To make your OrchardCore application architecture agnostic, you need to configur
 
 ## Build once, run anywhere
 
+You can now build your application on either an x86 or Arm host machine and deploy it on any architecture. 
+
 ```bash
 dotnet build -c Release
 ```
@@ -40,13 +41,11 @@ dotnet build -c Release
 dotnet run --urls http://0.0.0.0:8080
 ```
 
-Your application should now be runnable on any architecture. All you have to do is copy the `MyOrchardCoreApp` directory to any computer with the .NET 8 Framework installed and run
+Your application should now be runnable on any architecture. All you have to do is copy the `MyOrchardCoreApp` directory to any computer with the .NET 8 Framework installed and run the command shown from within the `MyOrchardCoreApp` directory:
 
 ```bash
 dotnet ./bin/Release/net8.0/MyOrchardCoreApp.dll --urls http://0.0.0.0:8080
 ```
-
-From within the `MyOrchardCoreApp` directory.
 
 ## Benefits of architecture agnostic applications
 
