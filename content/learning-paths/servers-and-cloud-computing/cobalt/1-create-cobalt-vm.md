@@ -8,7 +8,14 @@ layout: learningpathall
 
 ## Use the Azure Portal to deploy a Cobalt 100 VM
 
-Azure Cobalt 100 VMs are a part of the ['D' family of Azure VMs](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/d-family). To deploy one, follow these steps:
+Cobalt 100 is Microsoft’s first Arm-based server processor, built using the Armv9 Neoverse-N2 CPU. The Cobalt 100 processor is optimized for the performance of scale-out cloud-based applications.
+
+The Azure Cobalt 100 VM instances include two series:
+
+The general-purpose Dpsv6 and Dplsv6 virtual machine series.
+The memory-optimized Epsv6 virtual machine series.
+
+To create a Cobalt 100 VM, follow these steps:
 
 1. Sign in to the [Azure Portal](https://portal.azure.com/).
 2. Select **Create a resource → Compute → Virtual machine**.

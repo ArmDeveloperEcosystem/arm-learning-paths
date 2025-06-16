@@ -3,7 +3,7 @@ title: Create an Azure Cobalt 100 VM
 
 minutes_to_complete: 10
 
-who_is_this_for: Developers and DevOps engineers who need an Arm-based virtual machine on Azure and want to expose an application port to the internet.
+who_is_this_for: This is an introductory topic for developers and DevOps engineers who need an Arm-based virtual machine on Azure and want to expose an application port to the internet.
 
 learning_objectives:
     - Deploy an Arm-based Cobalt 100 virtual machine (VM) on Microsoft Azure.

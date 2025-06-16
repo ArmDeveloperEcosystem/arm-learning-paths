@@ -1,20 +1,18 @@
 ---
-title: Migrating a .NET application to Azure Cobalt
+title: Migrate a .NET application to Microsoft Azure Cobalt 100
 
 minutes_to_complete: 25
 
-who_is_this_for: .NET developers who want to take advantage of the cost and performance benefits of Azure Cobalt processors.
+who_is_this_for: This is an advanced learning path for .NET developers who want to take advantage of the cost and performance benefits of Azure Cobalt processors.
 
 learning_objectives: 
     - Create and compile a basic OrchardCore CMS application
     - Add a simple C shared library to your .NET application
     - Learn about anyCPU hardware agnostic builds
-    - Gain intuition about performance of different .NET versions
+    - Learn about performance of different .NET versions
 
 prerequisites:
-    - An Azure account
-    - Installation of .NET 8
-    - gcc installed
+    - A Microsoft Azure account
 
 author: Joe Stech
 
