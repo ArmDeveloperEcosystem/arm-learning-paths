@@ -34,7 +34,7 @@ dotnet --version
 To start building an OrchardCore application, you need to install the OrchardCore templates. Open your terminal and run the following command:
 
 ```bash
-dotnet new -i OrchardCore.ProjectTemplates::1.0.0-rc2-13450
+dotnet new install OrchardCore.ProjectTemplates::2.1.7
 ```
 
 This command installs the OrchardCore project templates, which you will use to create a new application.
