@@ -37,13 +37,13 @@ Now that the foundational concepts of TinyML and Edge AI are clear, it's time to
 
 To begin working with TinyML models, visit the **[Edge Impulse](https://edgeimpulse.com)**. You’ll need to create a free account to access the full platform. In the following sections, you will walk through each key page on the Edge Impulse platform using the attached snapshots as guide. These will help you understand what actions to take and how each part of the interface contributes to building and deploying your machine learning model.
 
-![example image alt-text#center](Images/1.png "Figure 1. Home Page of Edge Impulse")
+![example image alt-text#center](images/1.png "Figure 1. Home Page of Edge Impulse")
 
 ### Step 1: Create a New Project
 
 Once you’ve created your account and logged in, the first step is to **create a new project**. Give your project a name that clearly reflects its purpose—this helps with easy identification, especially if you plan to build multiple models later on. For example, if you're building a keyword spotting model, you might name it "Wake Word Detection". You’ll also need to select the appropriate **project type** and **project setting**, as shown in the snapshot below.
 
-![example image alt-text#center](Images/3.png "Figure 2. New Project Setup")
+![example image alt-text#center](images/3.png "Figure 2. New Project Setup")
 
 ### Step 2: Configure the Target Device
 
@@ -53,7 +53,7 @@ The specifications of the Arduino Nano RP2040 Connect board can be found on [Ard
 
 Follow the exact settings in the attached snapshot to complete the configuration.
 
-![example image alt-text#center](Images/4.png "Figure 3. Configure Arduino Nano RP2040")
+![example image alt-text#center](images/4.png "Figure 3. Configure Arduino Nano RP2040")
 
 ### Step 3: Add the Dataset
 
@@ -61,13 +61,13 @@ With your device configured, the next step is to **add your dataset** to the pro
 
 The dataset for this project can be downloaded from the following link: [Download Dataset](https://github.com/e-dudzi/Learning-Path.git). The Dataset has already been split into **training** and **testing**.
 
-![example image alt-text#center](Images/6.png "Figure 4. Add Existing Data")
+![example image alt-text#center](images/6.png "Figure 4. Add Existing Data")
 
 {{% notice Note %}}
 Do **not** check the **Green** highlighted area during upload. The dataset already includes metadata. Enabling that option may result in **much slower upload times** and is unnecessary for this project.
 {{% /notice %}}
 
-![example image alt-text#center](Images/7.png "Figure 5. Dataset Overview")
+![example image alt-text#center](images/7.png "Figure 5. Dataset Overview")
 
 ### Dataset Uploaded Successfully
 
@@ -77,7 +77,7 @@ This is what you should see after the dataset has been successfully uploaded. Th
 This dataset is made up of **four labels**: `on`, `off`, `noise`, and `unknown`.
 {{% /notice %}}
 
-![example image alt-text#center](Images/8.png "Figure 6. Dataset Overview")
+![example image alt-text#center](images/8.png "Figure 6. Dataset Overview")
 
 ### Step 4: Create the Impulse
 
@@ -85,7 +85,7 @@ Now that your data is ready, it's time to create the **impulse**, which defines 
 
 After configuring everything, **don’t forget to save your impulse**.
 
-![example image alt-text#center](Images/9.png "Figure 7. Create Impulse")
+![example image alt-text#center](images/9.png "Figure 7. Create Impulse")
 
 ### Step 5: Configure the MFCC Block
 
@@ -93,7 +93,7 @@ Next, you'll configure the **MFCC (Mel Frequency Cepstral Coefficients)** proces
 
 Set the parameters exactly as shown in the snapshot below. These settings determine how the audio input is broken down and analyzed. Once you're done, be sure to **save the parameters**. These parameters are chosen for this path. Modifications can be made once you are familiar with Edge Impulse.
 
-![example image alt-text#center](Images/10.png "Figure 8. MFCC Block Configuration")
+![example image alt-text#center](images/10.png "Figure 8. MFCC Block Configuration")
 
 {{% notice Note %}}
 The **green highlighted section** on the MFCC configuration page gives an estimate of how the model will perform **on the target device**. This includes information like memory usage (RAM/Flash) and latency, helping you ensure the model fits within the constraints of your hardware.
@@ -105,7 +105,7 @@ After saving the MFCC parameters, the next step is to generate features from you
 
 Once the feature generation is complete, you'll see a **2D visualization plot** that shows how the dataset is distributed across the four labels: `on`, `off`, `noise`, and `unknown`. This helps to visually confirm whether the different classes are well-separated and learnable by the model.
 
-![example image alt-text#center](Images/12.png "Figure 9. Feature Explorer")
+![example image alt-text#center](images/12.png "Figure 9. Feature Explorer")
 
 ### Step 7: Setting Up the Classifier
 
@@ -117,13 +117,13 @@ For this learning path, a learning rate of `0.002` was chosen, although the snap
 
 Once all the parameters are set, click on **"Save and train"** to start training your model.
 
-![example image alt-text#center](Images/13.png "Figure 10. Classifier Settings")
+![example image alt-text#center](images/13.png "Figure 10. Classifier Settings")
 
 ### Step 8: Reviewing Model Performance
 
 After the training process is complete, Edge Impulse will display the **model's performance**, including its overall **accuracy**, **loss**, and a **confusion matrix**.
 
-![example image alt-text#center](Images/14.png "Figure 11. Model Performance")
+![example image alt-text#center](images/14.png "Figure 11. Model Performance")
 
 - **Accuracy** reflects how often the model predicts the correct label.
 - **Loss** indicates how far the model’s predictions are from the actual labels during training — a lower loss generally means better performance.
@@ -139,7 +139,7 @@ Review these metrics to determine if the model is learning effectively. If neede
 | Peak RAM Usage     | 12.5 KB   |
 | Flash Usage        | 49.7 KB   |
 
-![example image alt-text#center](Images/15.png "Figure 12. Model Performance")
+![example image alt-text#center](images/15.png "Figure 12. Model Performance")
 
 You can also [download](https://github.com/e-dudzi/Learning-Path.git) a pre-trained model and continue from here.
 
@@ -152,7 +152,7 @@ To use the trained model on your Arduino Nano RP2040, follow the steps below to 
 3. Select **Arduino library** from the list.
 4. The export process will start automatically, and the model will be downloaded as a `.zip` file.
 
-![example image alt-text#center](Images/16.png "Figure 13. Model Deployment")
+![example image alt-text#center](images/16.png "Figure 13. Model Deployment")
 
 ## Next Steps
 
