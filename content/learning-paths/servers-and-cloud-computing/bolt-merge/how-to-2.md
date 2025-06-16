@@ -6,11 +6,11 @@ weight: 3
 layout: learningpathall
 ---
 
-In this step, you will instrument an application binary (such as `mysqld`) with BOLT to collect runtime profile data for a specific feature — for example, a **read-only workload**.
+In this step, you will use BOLT to instrument the MySQL application binary and to collect profile data for specific workloads. 
 
-The collected profile will later be merged with others and used to optimize the application's code layout.
+The collected profiles will be merged with others and used to optimize the application's code layout.
 
-### Step 1: Build or obtain the uninstrumented binary
+### Build the uninstrumented binary
 
 Make sure your application binary is:
 
@@ -25,8 +25,6 @@ readelf -s /path/to/mysqld | grep main
 ```
 
 If the symbols are missing, rebuild the binary with debug info and no stripping.
-
----
 
 ### Step 2: Instrument the binary with BOLT
 
@@ -83,7 +81,4 @@ ls -lh /path/to/profile-readonly.fdata
 ```
 
 You should see a non-empty file. This file will later be merged with other profiles (e.g., for write-only traffic) to generate a complete merged profile.
-
----
-
 
