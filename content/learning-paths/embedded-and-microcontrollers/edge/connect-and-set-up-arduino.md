@@ -10,7 +10,7 @@ layout: learningpathall
 
 To get started with your first **TinyML project**, a great option is the **Arduino Nano RP2040 Connect**. Built by Arduino, it uses the powerful **RP2040 microcontroller** and is fully supported by the Arduino core package. The board comes with built-in Wi-Fi, Bluetooth, and an onboard IMU—features that make it ideal for deploying machine learning models at the edge.
 
-![example image alt-text#center](Images/nano.png "Arduino Nano RP2040")
+![example image alt-text#center](images/nano.png "Arduino Nano RP2040")
 
 Its compatibility with popular tools like Edge Impulse and the Arduino IDE makes it a beginner-friendly yet powerful choice for TinyML applications. You can learn more about the Arduino Nano RP2040 Connect on the [official Arduino website](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers?_gl=1*1laabar*_up*MQ..*_ga*MTk1Nzk5OTUwMS4xNzQ2NTc2NTI4*_ga_NEXN8H46L5*czE3NDY1NzY1MjUkbzEkZzEkdDE3NDY1NzY5NTkkajAkbDAkaDE1MDk0MDg0ODc.).
 
@@ -32,9 +32,9 @@ To visualize the output of the voice command model, we will use a simple LED cir
 - **Anode (long leg) of the LED** → Connect to **GPIO pin D2** via the 220Ω resistor
 - **Cathode (short leg)** → Connect to **GND**
 
-![example image alt-text#center](Images/LED_Connection.png "Figure 14. Circuit Connection")
+![example image alt-text#center](images/led_connection.png "Figure 14. Circuit Connection")
 
-![example image alt-text#center](Images/LED_Connection_Schematic.png "Figure 15. Circuit Schematic Connection")
+![example image alt-text#center](images/led_connection_schematic.png "Figure 15. Circuit Schematic Connection")
 
 ### Step 2: Set Up the Arduino IDEs
 
