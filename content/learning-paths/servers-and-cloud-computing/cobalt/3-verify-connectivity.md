@@ -8,8 +8,7 @@ layout: learningpathall
 
 ## Connect over SSH and test the open port
 
-1. On the **Overview** page of the VM, copy the **Public IP address**.
-2. Open a terminal on your local machine and SSH to the VM (replace *azureuser* if you chose a different admin username):
+On the **Overview** page of the VM, copy the **Public IP address**. Open a terminal on your local machine, and SSH to the VM (replace *azureuser* if you chose a different admin username):
 
 ```bash
 ssh -i [path to your pem file] azureuser@[public IP]

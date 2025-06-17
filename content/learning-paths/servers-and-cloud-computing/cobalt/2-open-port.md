@@ -18,9 +18,10 @@ In this step, you'll open port 22 for SSH and port 8080 so that a web applicatio
 
 4. Fill in the form with **My IP address** as the source and 22 as the destination port:
 
-   ![Add inbound security rule with source of my IP and destination port 22#center](images/create-nsg-rule.png)
+   ![Add inbound security rule with source of my IP and destination port 22#center](images/create-nsg-rule.png "Create Port Rule form")
 
 5. Select **Add**.
-To open port 8080, repeat steps 3-5 and enter 8080 as the destination port.
 
-You have now opened ports 22 and 8080 to your IP. In the next step, you will verify connectivity from your local machine.
+6. To open port 8080, repeat steps 3-5 and enter 8080 as the destination port.
+
+You have now opened ports 22 and 8080 to your IP. In the next step, you'll verify connectivity from your local machine.
