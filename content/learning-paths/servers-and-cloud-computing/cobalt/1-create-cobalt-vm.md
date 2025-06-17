@@ -20,14 +20,17 @@ To create a Cobalt 100 VM, follow these steps:
 
 1. Sign in to the [Azure Portal](https://portal.azure.com/).
 2. Select **Create a resource → Compute → Virtual machine**.
-3. Complete the **Basics** tab as shown in the figure below:
+3. Complete the fields in the **Basics** tab with the values shown in the figure below:
+
    ![Azure Portal – Basics tab for the VM wizard#center](images/create-cobalt-vm.png "Configuring the Basics tab")
-   Cobalt 100 powers the Dpsv6-series. Selecting **Standard_D4ps_v6** creates a Cobalt VM with four physical cores. You can select a different size if you need more or fewer cores.
+   
+   Cobalt 100 powers the Dpsv6-series. Selecting **Standard_D4ps_v6** creates a Cobalt VM with four physical cores. 
+   You can choose a different size if you need more or fewer cores.
 4. Upload your public SSH key or generate a new one in the wizard.
-5. For **Public inbound ports**, select **None**.
+5. For the **Public inbound ports** field, select **None**.
 6. On the **Disks** tab, accept the default options.
-7. On the **Networking** tab, ensure that a **Public IP** is selected. You will need it to connect later. Leave the NSG settings as **Basic** for now. 
+7. On the **Networking** tab, ensure that a **Public IP** is selected. You will need it to connect to the VM later. Leave the NSG settings as **Basic**. 
 
-Click **Review + create** followed by **Create**. Azure now deploys the VM and the automatically-generated Network Security Group (NSG). Provisioning takes ~2 minutes.
+8. Select **Review + create**, then **Create**. Azure now deploys the VM and the automatically-generated Network Security Group (NSG). Provisioning takes ~2 minutes.
 
-Navigate to the **Deployment in progress** pane or open the **Notifications** panel to track progress. When the deployment succeeds, proceed to the next step to expose an inbound port.
+9. Navigate to the **Deployment in progress** pane or open the **Notifications** panel to track progress. When the deployment succeeds, proceed to the next step to expose an inbound port.

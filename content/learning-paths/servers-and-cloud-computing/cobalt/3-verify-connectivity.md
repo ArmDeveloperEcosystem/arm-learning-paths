@@ -8,20 +8,20 @@ layout: learningpathall
 
 ## Connect over SSH and test the open port
 
-1. On the **Overview** page for the VM copy the **Public IP address**.
+1. On the **Overview** page of the VM, copy the **Public IP address**.
 2. Open a terminal on your local machine and SSH to the VM (replace *azureuser* if you chose a different admin username):
 
 ```bash
 ssh -i [path to your pem file] azureuser@[public IP]
 ```
 
-Where `[public IP]` is your public IP and `[path to your pem file]` is the path to your SSH key file.
+Replace `[public IP]` with your VM's public IP address, and `[path to your pem file]` with the path to your SSH private key file.
 
-Accept the prompt to add the host to *known_hosts* the first time you connect.
+When prompted, confirm the connection to add the VM to your *known_hosts* file.
 
-### Start a simple HTTP server
+### Start a temporary HTTP server
 
-If you do not already have an application listening on TCP 8080 you can start one temporarily:
+If you don't already have an application listening on TCP 8080, you can start one temporarily:
 
 ```bash
 sudo apt update -y && sudo apt install -y python3
@@ -32,16 +32,18 @@ Leave this terminal open – the server runs in the foreground.
 
 ### Test from your local machine
 
-In a second local terminal run `curl` to confirm you can reach the server through the NSG rule you created:
+In a second local terminal run `curl` to confirm that you can reach the server through the NSG rule you created:
 
 ```bash
 curl http://[public IP]:8080
 ```
 
-Where `[public IP]` is your public IP.
+Replace `[public IP]` with your VM's public IP address.
 
-You should see an HTML directory listing (or your application response). Receiving a response verifies that TCP 8080 is open and the VM is reachable from the public internet.
+You should see an HTML directory listing (or your application response). A successful response confirms that TCP port 8080 is open and the VM is reachable from the public internet.
 
-Terminate the Python server when you are finished testing (press `Ctrl + C`).
+To stop the server, press `Ctrl + C`.
 
-You now have an Arm-based Cobalt 100 VM with an exposed port 8080 that you can use to run any test server. To learn about optimizing .NET workloads on Cobalt, check out [Migrating a .NET application to Azure Cobalt](../../dotnet-migration/).
+You now have an Arm-based Cobalt 100 VM with port 8080 open and ready to receive external traffic. You can use it to run any test server or deploy your own application. 
+
+To learn about optimizing .NET workloads on Cobalt, check out [Migrating a .NET application to Azure Cobalt](../../dotnet-migration/).
