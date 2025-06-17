@@ -22,12 +22,12 @@ To create a Cobalt 100 VM, follow these steps:
 2. Select **Create a resource → Compute → Virtual machine**.
 3. Complete the *Basics* tab:
    ![Azure Portal – Basics tab for the VM wizard#center](images/create-cobalt-vm.png)
-   The Dpsv6-series are powered by Cobalt 100. Selecting Standard_D4ps_v6 will give you a Cobalt VM with 4 physical cores. you can change the 4 to another value if you want a different number of cores.
+   Cobalt 100 powers the Dpsv6-series. Selecting **Standard_D4ps_v6** creates a Cobalt VM with four physical cores. You can select a different size if you need more or fewer cores.
 4. Upload your public SSH key or generate a new one in the wizard.
 5. Disallow public inbound ports for now.
-5. Accept the defaults on the *Disks* tab.
-6. On the *Networking* tab ensure that a **Public IP** is selected. You will need it to connect later. Leave the NSG settings as *Basic* for now. 
+6. Accept the defaults on the **Disks** tab.
+7. On the **Networking** tab ensure that a **Public IP** is selected. You will need it to connect later. Leave the NSG settings as **Basic** for now. 
 
 Click **Review + create** followed by **Create**. Azure now deploys the VM and the automatically-generated Network Security Group (NSG). Provisioning takes ~2 minutes.
 
-Navigate to the **Deployment in progress** pane or open the **Notifications** panel to track progress. When the deployment succeeds proceed to the next step to expose an inbound port.
+Navigate to the **Deployment in progress** pane or open the **Notifications** panel to track progress. When the deployment succeeds, proceed to the next step to expose an inbound port.
