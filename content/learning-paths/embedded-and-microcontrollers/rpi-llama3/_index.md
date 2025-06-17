@@ -31,6 +31,7 @@ tools_software_languages:
     - LLM
     - GenAI
     - Raspberry Pi
+    - Hugging Face
 
 
 

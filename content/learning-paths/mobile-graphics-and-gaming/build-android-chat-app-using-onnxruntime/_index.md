@@ -26,6 +26,8 @@ tools_software_languages:
     - ONNX Runtime
     - Android
     - Mobile
+    - Hugging Face
+
 operatingsystems:
     - Windows
     - Android

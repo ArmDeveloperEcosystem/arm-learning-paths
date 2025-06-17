@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- Linux: 143
+- Linux: 147
 - macOS: 10
 - Windows: 14
 pinned_modules:
@@ -23,7 +23,7 @@ subjects_filter:
 - Databases: 15
 - Libraries: 9
 - ML: 27
-- Performance and Architecture: 53
+- Performance and Architecture: 57
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -54,7 +54,7 @@ tools_software_languages_filter:
 - Bash: 1
 - bash: 2
 - Bastion: 3
-- BOLT: 1
+- BOLT: 2
 - bpftool: 1
 - C: 4
 - C#: 2
@@ -95,8 +95,10 @@ tools_software_languages_filter:
 - GoogleTest: 1
 - HammerDB: 1
 - Herd7: 1
+- Hugging Face: 9
 - InnoDB: 1
 - Intrinsics: 1
+- iPerf3: 1
 - Java: 3
 - JAX: 1
 - Kafka: 1
@@ -116,8 +118,8 @@ tools_software_languages_filter:
 - MongoDB: 2
 - mpi: 1
 - MySQL: 9
+- NEON: 4
 - Neon: 3
-- NEON: 2
 - Nexmark: 1
 - Nginx: 3
 - Node.js: 3
@@ -125,7 +127,7 @@ tools_software_languages_filter:
 - ONNX Runtime: 1
 - OpenBLAS: 1
 - PAPI: 1
-- perf: 4
+- perf: 5
 - Perf: 1
 - PostgreSQL: 4
 - Python: 27
@@ -134,7 +136,7 @@ tools_software_languages_filter:
 - Redis: 3
 - Remote.It: 2
 - RME: 6
-- Runbook: 68
+- Runbook: 71
 - Rust: 2
 - snappy: 1
 - Snort3: 1
@@ -142,8 +144,8 @@ tools_software_languages_filter:
 - Streamline CLI: 1
 - Streamlit: 2
 - Supervisor: 1
-- SVE: 4
-- SVE2: 1
+- SVE: 5
+- SVE2: 2
 - Sysbench: 1
 - Telemetry: 1
 - TensorFlow: 2

@@ -31,6 +31,8 @@ tools_software_languages:
     - Android NDK
     - Bazel
     - XNNPACK
+    - Hugging Face
+
 operatingsystems:
     - Linux
 

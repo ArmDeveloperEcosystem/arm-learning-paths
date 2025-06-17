@@ -35,6 +35,8 @@ tools_software_languages:
     - Java
     - C++
     - Python
+    - Hugging Face
+
 operatingsystems:
     - macOS
     - Android

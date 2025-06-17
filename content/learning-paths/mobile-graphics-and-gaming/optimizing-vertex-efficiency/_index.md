@@ -1,21 +1,17 @@
 ---
-title: Optimizing graphics vertex efficiency for Arm GPUs
-
-draft: true
-cascade:
-    draft: true
+title: Optimize graphics vertex efficiency for Arm GPUs
 
 minutes_to_complete: 10
 
-who_is_this_for: This is an advanced topic for Android graphics application developers.
+who_is_this_for: This is an advanced topic for Android graphics application developers aiming to enhance GPU performance through smarter vertex optimization.
 
 learning_objectives:
-    - Optimize vertex representations on Arm GPUs
-    - How to interpret Vertex Memory Efficiency in Arm Frame Advisor
+    - Optimize vertex representations on Arm GPUs.
+    - Analyze Vertex Memory Efficiency using Arm Frame Advisor.
 
 prerequisites:
-    - An understanding of vertex attributes
-    - Familiarity with Arm Frame Advisor, part of Arm Performance Studio
+    - Understanding of vertex attributes.
+    - Familiarity with Arm Frame Advisor (part of Arm Performance Studio).
 
 author:
     - Andrew Kilroy
@@ -43,12 +39,16 @@ further_reading:
         link: https://developer.arm.com/documentation/102693/latest/
         type: documentation
     - resource:
-        title: Analyse a Frame with Frame Advisor
+        title: Analyze a Frame with Frame Advisor
         link: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/analyze_a_frame_with_frame_advisor/
         type: blog
     - resource:
         title: Arm Performance Studio
         link: https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio%20for%20Mobile
+        type: website
+    - resource:
+        title: Attribute Layouts
+        link: https://developer.arm.com/documentation/101897/0304/Vertex-shading/Attribute-layout
         type: website
 
 

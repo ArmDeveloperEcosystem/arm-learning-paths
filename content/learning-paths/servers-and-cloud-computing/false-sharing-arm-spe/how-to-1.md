@@ -9,7 +9,7 @@ layout: learningpathall
 ## What is the Arm Statistical Profiling Extension (SPE), and what does it do?
 
 {{% notice Learning goal%}}
-In this section, you’ll learn how to use SPE to gain low-level insight into how your applications interact with the CPU. You’ll explore how to detect and resolve false sharing. By combining cache line alignment techniques with `perf c2c`, you can identify inefficient memory access patterns and significantly boost CPU performance on Arm-based systems.
+In this section, you’ll learn how to use SPE to gain low-level insight into how your applications interact with the CPU. You’ll explore how to detect and resolve false sharing. By combining cache line alignment techniques with Perf C2C, you can identify inefficient memory access patterns and significantly boost CPU performance on Arm-based systems.
 {{% /notice %}}
 
 Arm’s Statistical Profiling Extension (SPE) gives you a powerful way to understand what’s really happening inside your applications at the microarchitecture level. 
@@ -27,11 +27,11 @@ SPE integrates sampling directly into the CPU pipeline, triggering on individual
 
 This enables fine-grained, precise cache analysis. 
 
-SPE helps developers optimize user-space applications by showing where cache latency or memory access delays are happening. Importantly, cache statistics are enabled with the Linux `perf` cache-to-cache (C2C) utility.
+SPE helps developers optimize user-space applications by showing where cache latency or memory access delays are happening. Importantly, cache statistics are enabled with the Linux Perf Cache-to-Cache (C2C) utility.
 
 For more information, see the [*Arm Statistical Profiling Extension: Performance Analysis Methodology White Paper*](https://developer.arm.com/documentation/109429/latest/). 
 
-In this Learning Path, you will use SPE and `perf c2c` to diagnose a cache issue for an application running on a Neoverse server.
+In this Learning Path, you will use SPE and Perf C2C to diagnose a cache issue for an application running on a Neoverse server.
 
 ## What is false sharing and why should I care about it?
 
@@ -47,7 +47,7 @@ The diagram below, taken from the Arm SPE white paper, provides a visual represe
 
 ## Why false sharing is hard to spot and fix
 
-False sharing often hides behind seemingly ordinary writes, making it tricky to catch without tooling. The best time to eliminate it is early, while reading or refactoring code, by padding or realigning variables before compilation. But in large, highly concurrent C++ codebases, memory is frequently accessed through multiple layers of abstraction. Threads may interact with shared data indirectly, causing subtle cache line overlaps that don’t become obvious until performance profiling reveals unexpected coherence misses. Tools like `perf c2c` can help uncover these issues by tracing cache-to-cache transfers and identifying hot memory locations affected by false sharing.
+False sharing often hides behind seemingly ordinary writes, making it tricky to catch without tooling. The best time to eliminate it is early, while reading or refactoring code, by padding or realigning variables before compilation. But in large, highly concurrent C++ codebases, memory is frequently accessed through multiple layers of abstraction. Threads may interact with shared data indirectly, causing subtle cache line overlaps that don’t become obvious until performance profiling reveals unexpected coherence misses. Tools like Perf C2C can help uncover these issues by tracing cache-to-cache transfers and identifying hot memory locations affected by false sharing.
 
 From a source-code perspective nothing is “shared,” but at the hardware level both variables are implicitly coupled by their physical location.
 
@@ -101,7 +101,7 @@ int main() {
 
 The output below shows that the variables e, f, g and h occur at least 64 bytes apart in the byte-addressable architecture. Whereas variables a, b, c, and d occur 8 bytes apart, occupying the same cache line. 
 
-Although this is a simplified example, in a production workload there might be several layers of indirection that unintentionally result in false sharing. For these complex cases, use `perf c2c` to trace cache line interactions and pinpoint the root cause of performance issues.
+Although this is a simplified example, in a production workload there might be several layers of indirection that unintentionally result in false sharing. For these complex cases, use Perf C2C to trace cache line interactions and pinpoint the root cause of performance issues.
 
 ```output
 Without Alignment can occupy same cache line
@@ -125,6 +125,6 @@ Address of AlignedType h - 0xffffeb6c6080
 
 In this section, you explored what Arm SPE is and why it offers a deeper, more accurate view of application performance. You also examined how a subtle issue like false sharing can impact multithreaded code, and how to mitigate it using data alignment techniques in C++.
 
-Next, you'll set up your environment and use `perf c2c` to capture and analyze real-world cache behavior on an Arm Neoverse system.
+Next, you'll set up your environment and use Perf C2C to capture and analyze real-world cache behavior on an Arm Neoverse system.
 
 

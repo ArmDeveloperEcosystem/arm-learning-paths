@@ -1,5 +1,5 @@
 ---
-title: Overview of BOLT Merge 
+title: Overview of BOLT Merge
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -17,7 +17,7 @@ The diagram below illustrates why merging BOLT profiles and optimizing libraries
 - The **right chart** breaks down that application code into individual features (F1–F5). In any given run, typically only one feature is active — meaning only 20% of the code is exercised and profiled.
 - As a result, a single BOLT pass provides incomplete optimization.
 
-To ensure full optimization, the workflow includes: 
+To ensure full optimization, the workflow includes:
 1. Profiling each workload feature separately
 2. Profiling external libraries independently
 3. Merging profiles for broader code coverage
@@ -33,7 +33,3 @@ While MySQL and sysbench are used as examples, this method applies to **any feat
 - Exhibits multiple runtime paths
 - Uses dynamic libraries
 - Requires full-stack binary optimization for performance-critical deployment
-
-
-
-

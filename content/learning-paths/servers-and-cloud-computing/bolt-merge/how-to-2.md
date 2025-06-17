@@ -85,5 +85,3 @@ ls -lh /path/to/profile-readonly.fdata
 You should see a non-empty file. This file will later be merged with other profiles (e.g., for write-only traffic) to generate a complete merged profile.
 
 ---
-
-

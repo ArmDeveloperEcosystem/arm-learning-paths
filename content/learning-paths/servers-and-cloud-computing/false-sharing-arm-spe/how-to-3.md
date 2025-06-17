@@ -9,7 +9,7 @@ layout: learningpathall
 ## Example code
 
 {{% notice Learning Goal%}}
-The example code in this section demonstrates how false sharing affects performance by comparing two multithreaded programs; one with cache-aligned data structures, and one without. You’ll compile and run both versions, observe the runtime difference, and learn how memory layout affects cache behavior. This sets the stage for analyzing performance with `perf c2c` in the next section.
+The example code in this section demonstrates how false sharing affects performance by comparing two multithreaded programs; one with cache-aligned data structures, and one without. You’ll compile and run both versions, observe the runtime difference, and learn how memory layout affects cache behavior. This sets the stage for analyzing performance with Perf C2C in the next section.
 {{% /notice %}}
 
 Use a text editor to copy and paste the C example code below into a file named `false_sharing_example.c`

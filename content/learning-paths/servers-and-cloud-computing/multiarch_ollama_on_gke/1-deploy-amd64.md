@@ -105,7 +105,7 @@ service/ollama-amd64-svc created
 2. Optionally, set the `default Namespace` to `ollama` to simplify future commands:
 
 ```bash
-config set-context --current --namespace=ollama
+kubectl config set-context --current --namespace=ollama
 ```
 
 3. Get the status of nodes, pods and services by running:

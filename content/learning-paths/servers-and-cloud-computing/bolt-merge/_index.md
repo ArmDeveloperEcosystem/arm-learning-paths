@@ -1,6 +1,5 @@
 ---
 
-
 title: BOLT Merge :Feature-level and Library-level BOLTing with Profile Merging
 
 minutes_to_complete: 30
@@ -15,7 +14,7 @@ who_is_this_for: >
   It demonstrates how to bolt application features and shared libraries independently, then merge the resulting profiles to achieve full code coverage and deploy a fully optimized binary.
 
 
-learning_objectives: 
+learning_objectives:
     - Instrument and optimize binaries for individual workload features using LLVM-BOLT
     - Collect separate BOLT profiles and merge them for comprehensive code coverage
     - Optimize shared libraries independently
@@ -34,6 +33,7 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
     - Cortex-A
+    
 tools_software_languages:
     - BOLT
     - perf
@@ -59,4 +59,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
