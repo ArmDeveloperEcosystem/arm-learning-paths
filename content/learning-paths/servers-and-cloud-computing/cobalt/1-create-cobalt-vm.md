@@ -8,12 +8,13 @@ layout: learningpathall
 
 ## Use the Azure Portal to deploy a Cobalt 100 VM
 
-Cobalt 100 is Microsoft’s first Arm-based server processor, built using the Armv9 Neoverse-N2 CPU. The Cobalt 100 processor is optimized for the performance of scale-out cloud-based applications.
+Cobalt 100 is Microsoft’s first Arm-based server processor, built on the Armv9 Neoverse-N2 CPU architecture. It is optimized for the performance and efficiency of scale-out, cloud-based applications.
 
-The Azure Cobalt 100 VM instances include two series:
+Azure offers Cobalt 100–powered virtual machines in two series:
 
-The general-purpose Dpsv6 and Dplsv6 virtual machine series.
-The memory-optimized Epsv6 virtual machine series.
+- **Dpsv6** and **Dplsv6** (general-purpose)
+- **Epsv6** (memory-optimized)
+
 
 To create a Cobalt 100 VM, follow these steps:
 

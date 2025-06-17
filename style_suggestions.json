@@ -1,0 +1,23 @@
+[
+  {
+    "file": "content/learning-paths/servers-and-cloud-computing/cobalt/1-create-cobalt-vm.md",
+    "line": 11,
+    "original": "Cobalt 100 is Microsoft\u2019s first Arm-based server processor, built using the Armv9 Neoverse-N2 CPU. The Cobalt 100 processor is optimized for the performance of scale-out cloud-based applications.",
+    "suggested": "Cobalt 100 is Microsoft\u2019s first Arm-based server processor, built using the Armv9 Neoverse-N2 CPU. The Cobalt 100 processor is improved for the performance of scale-out cloud-based applications.",
+    "reason": "Simplify language by replacing 'optimized' with 'improved'."
+  },
+  {
+    "file": "content/learning-paths/servers-and-cloud-computing/cobalt/1-create-cobalt-vm.md",
+    "line": 16,
+    "original": "The memory-optimized Epsv6 virtual machine series.",
+    "suggested": "The memory-improved Epsv6 virtual machine series.",
+    "reason": "Simplify language by replacing 'optimized' with 'improved'."
+  },
+  {
+    "file": "content/learning-paths/servers-and-cloud-computing/cobalt/1-create-cobalt-vm.md",
+    "line": 24,
+    "original": "   The Dpsv6-series are powered by Cobalt 100. Selecting Standard_D4ps_v6 will give you a Cobalt VM with 4 physical cores. you can change the 4 to another value if you want a different number of cores.",
+    "suggested": "   The Dpsv6-Cobalt powered series 100. Selecting Standard_D4ps_v6 will give you a Cobalt VM with 4 physical cores. you can change the 4 to another value if you want a different number of cores.",
+    "reason": "Convert passive voice to active voice for clarity and directness."
+  }
+]
