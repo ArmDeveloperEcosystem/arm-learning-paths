@@ -50,7 +50,7 @@ public static class NativeMethods
 }
 ```
 
-2. Call the `Greet` method from your application. For example, you can add the following code to your main program or a controller:
+2. Call the `Greet` method from your application. For example, you can add the following code to your main program `Program.cs` as shown:
 
 ```csharp
 using OrchardCore.Logging;
