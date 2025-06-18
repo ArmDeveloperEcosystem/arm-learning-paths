@@ -1,12 +1,12 @@
 ---
-title: Evaluate .NET versions for performance on Arm
+title: Evaluate .NET performance across versions on Arm
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Evaluate .NET versions for performance on Arm
+## Evaluate .NET versions for performance on Arm
 
 Understanding which versions perform best and the features they offer can help you make informed decisions when developing applications for Arm-based systems.
 

@@ -6,18 +6,19 @@ weight: 4
 layout: learningpathall
 ---
 
-# Run a .NET OrchardCore application on Arm and x86
+## Run a .NET OrchardCore application on Arm and x86
 
-In this section, you will learn how to configure and run your OrchardCore application on both Arm and x86 architectures using the .NET AnyCPU configuration. This approach allows your application to be architecture agnostic, providing flexibility and ease of deployment across different hardware platforms.
+In this section, you will learn how to configure and run your OrchardCore application on both Arm and x86 architectures using the .NET AnyCPU configuration. This approach allows your application to be architecture-agnostic, enabling easier deployment across different hardware platforms.
 
-The AnyCPU feature has been around since .NET 2, but it's current incarnation was released in .NET Framework 4.5.
+The AnyCPU feature has existed since .NET Framework 2.0, but its current behavior (particularly how it handles 32-bit vs. 64-bit execution) was defined in .NET Framework 4.5.
 
 ## Configure the project for AnyCPU
 
-To make your OrchardCore application architecture agnostic, you need to configure it to use the AnyCPU platform target. This allows the .NET runtime to choose the appropriate architecture at runtime.
+To make your OrchardCore application architecture-agnostic, you need to configure it to use the AnyCPU platform target. This allows the .NET runtime to choose the appropriate architecture at runtime.
 
-1. Open your OrchardCore project `MyOrchardCoreApp.csproj` in your preferred IDE.
-2. Find the `<PropertyGroup>` and add the `<PlatformTarget>` element to `AnyCPU`:
+First, open your OrchardCore project `MyOrchardCoreApp.csproj` in your preferred IDE.
+
+Next, find the `<PropertyGroup>` and add the `<PlatformTarget>` element to `AnyCPU`:
 
 ```xml
 <PropertyGroup>
@@ -25,31 +26,31 @@ To make your OrchardCore application architecture agnostic, you need to configur
 </PropertyGroup>
 ```
 
-4. Save the changes to the `.csproj` file.
+Save the `.csproj` file:
 
 ## Build once, run anywhere
 
-You can now build your application on either an x86 or Arm host machine and deploy it on any architecture. 
+You can now build your application on either an x86 or Arm host machine and deploy it on any architecture:
 
 ```bash
 dotnet build -c Release
 ```
 
-4. Run the application:
+Run the application:
 
 ```bash
 dotnet run --urls http://0.0.0.0:8080
 ```
 
-Your application should now be runnable on any architecture. All you have to do is copy the `MyOrchardCoreApp` directory to any computer with the .NET 8 Framework installed and run the command shown from within the `MyOrchardCoreApp` directory:
+Your application should now be runnable on any architecture. All you have to do is copy the `MyOrchardCoreApp` directory to any computer with the .NET 8 runtime installed and run the command shown from within the `MyOrchardCoreApp` directory:
 
 ```bash
 dotnet ./bin/Release/net8.0/MyOrchardCoreApp.dll --urls http://0.0.0.0:8080
 ```
 
-## Benefits of architecture agnostic applications
+## Benefits of architecture-agnostic applications
 
-By configuring your application to be architecture agnostic, you gain several benefits:
+By configuring your application to be architecture-agnostic, you gain several benefits:
 
 - **Flexibility**: Deploy your application on a wide range of devices without modification.
 - **Efficiency**: Reduce the need for maintaining separate builds for different architectures.
