@@ -3,7 +3,7 @@ title: Fixed Virtual Platforms (FVP)
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/100966/
 author: Ronan Synnott
-weight: 3    
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 tool_install: false              # Set to true to be listed in main selection page, else false
@@ -69,3 +69,15 @@ telnetterminal2: Listening for serial connection on port 5002
 A visualization of the FVP will also be displayed.
 
 Terminate the FVP with `Ctrl+C`.
+
+{{% notice %}}
+It can happen that you run into an enablement issue related to the stack:
+```
+cannot enable executable stack as shared object requires: Invalid argument
+```
+This stems from the status of the the exec flag, and you need to clear it as a workaround. Use the `execstack` tool on each of the runtime binaries in the error trace.
+```
+execstack -c <binary>
+```
+{{% /notice %}}
+
