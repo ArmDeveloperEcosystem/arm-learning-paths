@@ -17,7 +17,8 @@ learning_objectives:
 
 prerequisites:
     - A Microsoft Azure account with permissions to deploy virtual machines
-    - Basic knowledge of C and .NET
+    - .NET SDK 8.0 or later 
+    - Basic knowledge of C and C#
     - GCC installed (Linux) or access to a cross-compiler
     - OrchardCore application created using the .NET CLI or Visual Studio
 

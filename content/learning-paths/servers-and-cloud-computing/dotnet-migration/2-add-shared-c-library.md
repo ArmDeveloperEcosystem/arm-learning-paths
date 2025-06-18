@@ -30,7 +30,7 @@ Compile the C file into a shared library:
 gcc -shared -o libmylib.so -fPIC mylib.c
 ```
 
-   This will generate a shared library file (`libmylib.so`).
+This creates a shared object file named `libmylib.so` which your .NET application can call at runtime.
 
 ## Use the C library in your .NET application
 
