@@ -1,18 +1,18 @@
 ---
-title: Create a basic OrchardCore application
+title: Build and Run an OrchardCore CMS App on Azure Cobalt
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Create a basic OrchardCore application
+# Getting started with the OrchardCore App 
 
-In this section, you will learn how to create and compile a basic [OrchardCore](https://github.com/OrchardCMS/OrchardCore) CMS application, as an example of a popular Linux-based .NET workload. OrchardCore is a modular and multi-tenant application framework built with ASP.NET Core, which can be used to create content-driven websites.
+In this section, you'll build and run a basic [OrchardCore](https://github.com/OrchardCMS/OrchardCore) CMS application, which is a popular Linux-based .NET workload. OrchardCore is a modular and multi-tenant application framework built with ASP.NET Core, that's commonly used to create content-driven websites.
 
 ## Step 1: Set up your development environment
 
-1. Launch an Azure Cobalt instance running Ubuntu 24.04, and open port 8080 to the internet. For instructions on how to do this, see the [Create an Azure Cobalt 100 VM](../../cobalt) Learning Path.
+1. Launch an Azure Cobalt 100 instance running Ubuntu 24.04, and open port 8080 to the internet. For setup instructions, see the [Create an Azure Cobalt 100 VM](../../cobalt) Learning Path.
 
 2. **Install .NET SDK**:
 
@@ -23,13 +23,13 @@ sudo apt-get update
 sudo apt-get install -y dotnet-sdk-8.0
 ```
 
-3. **Verify installations**:
+3. Verify the installation:
 
 ```bash
 dotnet --version
 ```
 
-The output should look like:
+You should see output similar to:
 
 ```output
 8.0.117

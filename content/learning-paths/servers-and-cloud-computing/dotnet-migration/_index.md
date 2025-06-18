@@ -1,18 +1,18 @@
 ---
-title: Migrate a .NET application to Microsoft Azure Cobalt 100
+title: Migrate a .NET application to Azure Cobalt 100
 
 minutes_to_complete: 25
 
-who_is_this_for: This is an advanced learning path for .NET developers who want to take advantage of the cost and performance benefits of Azure Cobalt processors.
+who_is_this_for: This is an advanced learning path for .NET developers who want to take advantage of the performance and cost benefits of Azure Cobalt processors.
 
 learning_objectives: 
-    - Create and compile a basic OrchardCore CMS application
-    - Add a simple C shared library to your .NET application
-    - Learn about anyCPU hardware agnostic builds
-    - Learn about performance of different .NET versions
+    - Build and run a basic OrchardCore CMS application
+    - Integrate a simple C shared library into a .NET application
+    - Configure architecture-agnostic builds using AnyCPU
+    - Evaluate the performance of different .NET versions
 
 prerequisites:
-    - A Microsoft Azure account
+    - A Microsoft Azure account with permissions to deploy virtual machines
 
 author: Joe Stech
 
