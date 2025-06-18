@@ -29,7 +29,15 @@ The Brave browser runs on Windows on Arm as a native ARM64 application, and is a
 
 ### Linux
 
-To install Brave on Linux:
+There are two options to install Brave on Linux.
+
+To install Brave with a single command:
+
+```bash
+curl -fsS https://dl.brave.com/install.sh | sh
+```
+
+To install Brave using multiple commands:
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu/Debian" language="bash">}}

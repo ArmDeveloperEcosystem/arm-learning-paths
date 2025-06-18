@@ -3,13 +3,9 @@ title: Run and Debug a Linux Software Stack on Arm Virtual Platforms
 
 minutes_to_complete: 180
 
-draft: true
-cascade:
-    draft: true
-
 who_is_this_for: This introductory topic is designed for developers interested in running Linux on Arm Fixed Virtual Platforms (FVPs) and debugging Trusted Firmware-A and the Linux Kernel using Arm Development Studio.
 
-learning_objectives: 
+learning_objectives:
     - Run a Linux software stack using Arm Fixed Virtual Platforms.
     - Debug the firmware and Linux kernel using Arm Development Studio.
 
@@ -18,6 +14,10 @@ prerequisites:
     - Basic knowledge of Assembly and C language.
 
 author: Qixiang Xu
+
+draft: true
+cascade:
+    draft: true
 
 ### Tags
 skilllevels: Introductory
@@ -33,7 +33,7 @@ tools_software_languages:
 
 further_reading:
     - resource:
-        title: Fast Models Fixed Virtual Platforms Reference Guide 
+        title: Fast Models Fixed Virtual Platforms Reference Guide
         link: https://developer.arm.com/documentation/100966/
         type: documentation
     - resource:
