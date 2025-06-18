@@ -118,4 +118,4 @@ aarch64-linux-gnu-gcc -mcpu=neoverse-n2 -O3 -shared -o libmylib.so -fPIC mylib.c
 
 The `-mcpu=neoverse-n2` flag specifies the Cobalt architecture, and `-O3` ensures that maximum optimizations are completed (including SIMD opimizations).
 
-In the next section, you will explore how to make your build architecture agnostic with the anyCPU feature.
+In the next section, you will explore how to make your native interop architecture-agnostic using the anyCPU feature and runtime dispatch strategies.
