@@ -15,6 +15,10 @@ prerequisites:
 
 author: Qixiang Xu
 
+draft: true
+cascade:
+    draft: true
+
 ### Tags
 skilllevels: Introductory
 subjects: Embedded Linux
