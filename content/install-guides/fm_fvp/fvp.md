@@ -71,11 +71,13 @@ A visualization of the FVP will also be displayed.
 Terminate the FVP with `Ctrl+C`.
 
 {{% notice %}}
-It can happen that you run into an enablement issue related to the stack:
+You might run into an enablement issue related to the stack:
 ```
 cannot enable executable stack as shared object requires: Invalid argument
 ```
-This stems from the status of the the exec flag, and you need to clear it as a workaround. Use the `execstack` tool on each of the runtime binaries in the error trace.
+This stems from the status of the the exec flag, a security feature which helps prevent certain types of buffer overflow attacks. FVPs use just-in-time compilation and require an executable stack to function properly. 
+
+You can a workaround this error using `execstack` on each of the runtime binaries in the error trace.
 ```
 execstack -c <binary>
 ```
