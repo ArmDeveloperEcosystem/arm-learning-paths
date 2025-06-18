@@ -10,11 +10,13 @@ layout: learningpathall
 
 Make sure you have [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed. 
 
-You should use an Arm Linux system with at least 4 CPUs and 16 Gb of RAM. Ubuntu 24.04 is used for testing, but other Linux distributions are possible. 
+You should use an Arm Linux system with at least 8 CPUs and 16 Gb of RAM. Ubuntu 24.04 is used for testing, but other Linux distributions are possible. 
 
 ## What will I do in this Learning Path?
 
-In this Learning Path you learn how to use BOLT to optimize applications and shared libraries. MySQL is used as the applcation and two share libraries which are used by MySQL are also optimized using BOLT.
+In this Learning Path you learn how to use BOLT to optimize applications and shared libraries. MySQL is used as the application and two share libraries which are used by MySQL are also optimized using BOLT.
+
+Here is an outline of the steps:
 
 1. Collect and merge BOLT profiles from multiple workloads, such as read-only and write-only  
 
@@ -36,10 +38,15 @@ In this Learning Path you learn how to use BOLT to optimize applications and sha
 
     After optimizing each component, you combine them to create a deployment where both the application and its libraries benefit from BOLT's enhancements.
 
+## What is BOLT profile merging?
+
+BOLT profile merging is the process of combining profiling from multiple runs into a single profile. This merged profile enables BOLT to optimize binaries for a broader set of real-world behaviors, ensuring that the final optimized application or library performs well across diverse workloads, not just a single use case. By merging profiles, you capture a wider range of code paths and execution patterns, leading to more robust and effective optimizations.
+
+![Why BOLT Profile Merging?](Bolt-merge.png)
 
 ## What are good applications for BOLT?
 
-MySQL and sysbench are used as example applications, but you can use this method for **any feature-rich application** that:
+MySQL and Sysbench are used as example applications, but you can use this method for any feature-rich application that:
 
 1. Exhibits multiple runtime paths  
 
@@ -47,7 +54,7 @@ MySQL and sysbench are used as example applications, but you can use this method
 
 2. Uses dynamic libraries  
 
-    Many modern applications rely on shared libraries for functionality. Optimizing these libraries alongside the main binary ensures consistent performance improvements throughout the application.
+    Most modern applications rely on shared libraries for functionality. Optimizing these libraries alongside the main binary ensures consistent performance improvements throughout the application.
 
 3. Requires full-stack binary optimization for performance-critical deployment  
 

@@ -1,10 +1,6 @@
 ---
 title: Optimize Arm applications and shared libraries with BOLT
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: Performance engineers and software developers working on Arm platforms who want to optimize both application binaries and shared libraries using BOLT.
