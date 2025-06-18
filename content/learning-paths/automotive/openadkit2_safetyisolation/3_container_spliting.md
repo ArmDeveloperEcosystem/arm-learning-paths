@@ -81,6 +81,24 @@ touch docker/cycloneDDS.xml
 
 This will create a duplicate Compose configuration (docker-compose-2ins.yml) and an empty CycloneDDS configuration file to be shared across containers.
 
+To ensure a smooth experience during testing and simulation, it’s a good idea to pull all required container images before moving on.
+
+This avoids interruptions in later steps when you run `docker compose up` or `docker compose run`, especially during the cross-instance DDS validation or full scenario launch.
+
+Run the following command in your project directory:
+
+```bash
+docker compose -f docker-compose.yml pull
+```
+
+{{% notice info %}}
+Each image is around 4–6 GB, so pulling them may vary depending on your network speed.
+{{% /notice %}}
+
+This command will download all images defined in the docker-compose-2ins.yml file, including:
+- ***odinlmshen/autoware-simulator:v1.0***
+- ***odinlmshen/autoware-planning-control:v1.0***
+- ***odinlmshen/autoware-visualizer:v1.0***
 
 #### Step 2: Configure CycloneDDS for Peer-to-Peer Communication
 
@@ -273,60 +291,82 @@ Reference:
  - [ROS2 documentation](https://docs.ros.org/en/humble/How-To-Guides/DDS-tuning.html#cyclone-dds-tuning)
 
 
-#### Step 5: Execution: Launching the Distributed Containers
+#### Step 5: Verifying Cross-Instance DDS Communication with ROS 2
 
-To start the system, you need to configure and run separate launch commands on each machine.
+To confirm that ROS 2 nodes can exchange messages across two separate EC2 instances using DDS, this test will walk you through a minimal publisher–subscriber setup using a custom topic.
 
-On each instance, copy the appropriate launch script into the openadkit_demo.autoware/docker directory.
+##### On Planning-Control Node (Publisher)
 
-{{< tabpane code=true >}}
-  {{< tab header="Planning-Control" language="bash">}}
-    !/bin/bash
-    # Configure the environment variables
-    export SCRIPT_DIR=/home/ubuntu/openadkit_demo.autoware/docker
-    CONF_FILE_PASS=$SCRIPT_DIR/etc/simulation/config/pass_static_obstacle_avoidance.param.yaml
-    CONF_FILE_FAIL=$SCRIPT_DIR/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml
+On the first EC2 instance, you will publish a custom message to the /hello topic using ROS 2. 
+This will simulate outbound DDS traffic from the planning-control container.
 
-    export CONF_FILE=$CONF_FILE_FAIL
-    export COMMON_FILE=$SCRIPT_DIR/etc/simulation/config/common.param.yaml
-    export NGROK_AUTHTOKEN=$NGROK_AUTHTOKEN
-    export NGROK_URL=$NGROK_URL
+Set the required environment variables and launch the planning-control container.
 
-    # Start planning-control
-      echo "Running planning v1.."
-      TIMEOUT=120 CONF_FILE=$CONF_FILE_PASS docker compose -f "$SCRIPT_DIR/docker-compose-2ins.yml" up planning-control --abort-on-container-exit  {{< /tab >}}
-  
-  {{< tab header="Visualizer & Simulator" language="bash">}}
-    #!/bin/bash
-    # Configure the environment variables
-    SCRIPT_DIR=/home/ubuntu/openadkit_demo.autoware/docker
-    export
-    CONF_FILE_FAIL=$SCRIPT_DIR/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml
-    export CONF_FILE=$CONF_FILE_FAIL
-    export COMMON_FILE=$SCRIPT_DIR/etc/simulation/config/common.param.yaml
-    export NGROK_AUTHTOKEN=$NGROK_AUTHTOKEN
-    export NGROK_URL=$NGROK_URL
-    # Start visualizer and show logs
-    docker compose -f "$SCRIPT_DIR/docker-compose-2ins.yml" up visualizer -d
-    echo "Waiting 10 seconds for visualizer to start..."
-    sleep 10
-    docker compose -f "$SCRIPT_DIR/docker-compose-2ins.yml" logs visualizer
-    # Start simulator
-    echo "Running simulator v1.."
-    TIMEOUT=300 CONF_FILE=$CONF_FILE_FAIL docker compose -f "$SCRIPT_DIR/docker-compose-2ins.yml" up simulator --abort-on-container-exit
-    TIMEOUT=300 CONF_FILE=$CONF_FILE_FAIL docker compose -f "$SCRIPT_DIR/docker-compose-2ins.yml" up simulator --abort-on-container-exit
-    TIMEOUT=300 CONF_FILE=$CONF_FILE_FAIL docker compose -f "$SCRIPT_DIR/docker-compose-2ins.yml" up simulator --abort-on-container-exit
-  {{< /tab >}}
-{{< /tabpane >}}
+```bash
+export SCRIPT_DIR=/home/ubuntu/openadkit_demo.autoware/docker
+export CONF_FILE=$SCRIPT_DIR/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml 
+export COMMON_FILE=$SCRIPT_DIR/etc/simulation/config/common.param.yaml
+export NGROK_AUTHTOKEN=""
+export NGROK_URL=""
+export TIMEOUT=300
 
-Once both machines are running their respective launch scripts, the Visualizer will generate a web-accessible interface using the machine’s public IP address. 
-You can open this link in a browser to observe the demo behavior, which will closely resemble the output from the [previous learning path](http://learn.arm.com/learning-paths/automotive/openadkit1_container/4_run_openadkit/). 
+# Launch the container
+docker compose -f docker/docker-compose-2ins.yml run --rm planning-control bash
+```
 
-![img3 alt-text#center](split_aws_run_15.gif "Figure 4: Simulation")
+Once inside the container shell, activate the ROS 2 environment and start publishing to the /hello topic:
 
-Unlike the previous setup, the containers are now distributed across two separate instances, allowing for real-time cross-node communication. 
-Behind the scenes, this setup demonstrates how DDS handles low-latency, peer-to-peer data exchange in a distributed ROS 2 environment.
+```bash
+# Inside the container:
+source /opt/ros/humble/setup.bash
+ros2 topic list
+ros2 topic pub /hello std_msgs/String "data: Hello From Planning" --rate 1
+```
 
-To facilitate demonstration and observation, the simulator is configured to run `three times` sequentially, allowing you to validate the DDS communication across multiple execution cycles.
+##### On Simulator Node (Subscriber) side
 
+On the second EC2 instance, you will listen for the /hello topic using ros2 topic echo. 
+This confirms that DDS communication from the planning node is received on the simulation node.
 
+Same with Publisher side, you need to set the required environment variables and launch the Simulator container.
+
+```bash
+export SCRIPT_DIR=/home/ubuntu/openadkit_demo.autoware/docker
+export CONF_FILE=$SCRIPT_DIR/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml 
+export COMMON_FILE=$SCRIPT_DIR/etc/simulation/config/common.param.yaml
+export NGROK_AUTHTOKEN=""
+export NGROK_URL=""
+export TIMEOUT=300
+
+# Launch the container
+docker compose -f docker/docker-compose-2ins.yml run --rm simulator bash
+```
+
+Once inside the container shell, activate the ROS 2 environment and start publishing to the /hello topic:
+
+```bash
+# Inside the container:
+source /opt/ros/humble/setup.bash
+ros2 topic list
+ros2 topic echo /hello
+```
+
+In the simulator container, you should see repeated outputs like:
+```
+root@ip-172-31-19-5:/autoware# ros2 topic echo /hello
+data: Hello From Planning
+---
+data: Hello From Planning
+---
+data: Hello From Planning
+---
+data: Hello From Planning
+---
+```
+
+This confirms that:
+- DDS peer discovery between the two machines is successful.
+- ROS 2 nodes are able to communicate across EC2 instances via /hello topic.
+- The network settings including host mode, security group, and CycloneDDS peer configuration are correctly applied.
+
+In the next section, you’ll complete the full end-to-end demonstrationa with all of concepts.
