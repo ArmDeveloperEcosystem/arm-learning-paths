@@ -1,9 +1,13 @@
 ---
 title: Prototyping Safety-Critical Isolation for Autonomous Application on Neoverse
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 60
 
-who_is_this_for: This learning path targets advanced automotive software engineers developing safety-critical systems. It demonstrates how to use Arm Neoverse cloud infrastructure to accelerate ISO-26262-compliant software prototyping and testing workflows.
+who_is_this_for: This Learning Path targets advanced automotive software engineers developing safety-critical systems. It demonstrates how to use Arm Neoverse cloud infrastructure to accelerate ISO-26262-compliant software prototyping and testing workflows.
 
 learning_objectives: 
     - Learn the Functional Safety principles—including risk prevention, fault detection, and ASIL compliance—to design robust and certifiable automotive software systems.
@@ -14,6 +18,7 @@ prerequisites:
     - Two Arm-based Neoverse cloud instances or a local Arm Neoverse Linux computer with at least 16 CPUs and 32GB of RAM.
     - Completion of the previous learning path. http://learn.arm.com/learning-paths/automotive/openadkit1_container/
     - Basic knowledge of Docker operations.
+
 author: 
     - Odin Shen
     - Julien Jayat
