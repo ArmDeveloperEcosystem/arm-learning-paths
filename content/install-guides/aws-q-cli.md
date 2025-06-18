@@ -235,7 +235,7 @@ You can ask Amazon Q to set the default model for future sessions.
 
 ## Install an MCP server
 
-As an example of using MCP with Amazon Q, you can configure the Github MCP server. 
+As an example of using MCP with Amazon Q, you can configure a local Github MCP server. 
 
 Go to your GitHub account developer settings and create a personal access token with the following permissions:
 

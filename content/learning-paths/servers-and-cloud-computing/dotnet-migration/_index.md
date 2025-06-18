@@ -1,6 +1,10 @@
 ---
 title: Migrate a .NET application to Azure Cobalt 100
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 25
 
 who_is_this_for: This is an advanced learning path for .NET developers who want to take advantage of the performance and cost benefits of Azure Cobalt processors.
