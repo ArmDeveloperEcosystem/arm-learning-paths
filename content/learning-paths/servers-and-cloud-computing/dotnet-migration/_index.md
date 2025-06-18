@@ -36,7 +36,7 @@ further_reading:
         type: documentation
     - resource:
         title: .NET documentation
-        link: https://docs.microsoft.com/en-us/dotnet/
+        link: https://learn.microsoft.com/en-us/dotnet/
         type: documentation
 
 
