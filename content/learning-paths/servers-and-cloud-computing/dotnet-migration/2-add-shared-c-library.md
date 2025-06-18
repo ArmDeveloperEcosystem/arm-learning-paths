@@ -1,5 +1,5 @@
 ---
-title: Add a simple C shared library to your .NET OrchardCore application
+title: Integrate a C shared library in your .NET OrchardCore app (with Arm Build support)
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -49,6 +49,9 @@ public static class NativeMethods
     public static extern void Greet();
 }
 ```
+{{% notice Note %}}
+On Linux, `mylib` maps to `libmylib.so`. On other platforms, the naming convention differs.
+{{% /notice %}}
 
 2. Call the `Greet` method from your application. For example, you can add the following code to your main program `Program.cs` as shown:
 
