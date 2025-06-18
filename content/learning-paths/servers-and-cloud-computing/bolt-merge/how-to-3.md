@@ -1,38 +1,39 @@
 ---
-title: BOLT Optimization - Second Feature & BOLT Merge to combine 
+title: Run a new workload using BOLT and merge the results
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-In this step, you'll collect profile data for a **write-heavy** workload and also **instrument external libraries** such as `libcrypto.so` and `libssl.so` used by the application (e.g., MySQL).
+Next, you will collect profile data for a **write-heavy** workload and merge the results with the **read-heavy** workload in the previous section. 
 
-
-### Step 1: Run Write-Only Workload for Application Binary
+## Run Write-Only Workload for Application Binary
 
 Use the same BOLT-instrumented MySQL binary and drive it with a write-only workload to capture `profile-writeonly.fdata`:
 
 ```bash
-taskset -c 9 ./src/sysbench \\
-  --db-driver=mysql \\
-  --mysql-host=127.0.0.1 \\
-  --mysql-db=bench \\
-  --mysql-user=bench \\
-  --mysql-password=bench \\
-  --mysql-port=3306 \\
-  --tables=8 \\
-  --table-size=10000 \\
-  --threads=1 \\
-  src/lua/oltp_write_only.lua run
+# On an 8-core system, use available cores (e.g., 7 for sysbench)
+taskset -c 7 sysbench \
+  --db-driver=mysql \
+  --mysql-host=127.0.0.1 \
+  --mysql-db=bench \
+  --mysql-user=bench \
+  --mysql-password=bench \
+  --mysql-port=3306 \
+  --tables=8 \
+  --table-size=10000 \
+  --threads=1 \
+  /usr/share/sysbench/oltp_write_only.lua run
 ```
 
 Make sure that the `--instrumentation-file` is set appropriately to save `profile-writeonly.fdata`.
----
-### Step 2: Verify the Second Profile Was Generated
+
+
+### Verify the Second Profile Was Generated
 
 ```bash
-ls -lh /path/to/profile-writeonly.fdata
+ls -lh $HOME/mysql-server/build/profile-writeonly.fdata
 ```
 
 Both `.fdata` files should now exist and contain valid data:
@@ -40,15 +41,13 @@ Both `.fdata` files should now exist and contain valid data:
 - `profile-readonly.fdata`
 - `profile-writeonly.fdata`
 
----
-
-### Step 3: Merge the Feature Profiles
+### Merge the Feature Profiles
 
 Use `merge-fdata` to combine the feature-specific profiles into one comprehensive `.fdata` file:
 
 ```bash
-merge-fdata /path/to/profile-readonly.fdata /path/to/profile-writeonly.fdata \\
-  -o /path/to/profile-merged.fdata
+merge-fdata $HOME/mysql-server/build/profile-readonly.fdata $HOME/mysql-server/build/profile-writeonly.fdata \
+  -o $HOME/mysql-server/build/profile-merged.fdata
 ```
 
 **Example command from an actual setup:**
@@ -67,18 +66,15 @@ Profile from 2 files merged.
 
 This creates a single merged profile (`profile-merged.fdata`) covering both read-only and write-only workload behaviors.
 
----
-
-### Step 4: Verify the Merged Profile
+### Verify the Merged Profile
 
 Check the merged `.fdata` file:
 
 ```bash
-ls -lh /path/to/profile-merged.fdata
+ls -lh $HOME/mysql-server/build/profile-merged.fdata
 ```
 
----
-### Step 5: Generate the Final Binary with the Merged Profile
+### Generate the Final Binary with the Merged Profile
 
 Use LLVM-BOLT to generate the final optimized binary using the merged `.fdata` file:
 
