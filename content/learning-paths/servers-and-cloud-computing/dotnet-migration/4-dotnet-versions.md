@@ -6,15 +6,26 @@ weight: 5
 layout: learningpathall
 ---
 
-## Evaluate .NET versions for performance on Arm
+## Version-by-version feature and throughput improvements
 
 Understanding which versions perform best and the features they offer can help you make informed decisions when developing applications for Arm-based systems.
 
 .NET has evolved significantly over the years, with each version introducing new features and performance improvements. Here, you will learn about key versions that have notable performance implications for Arm architecture.
 
+{{% notice Support status summary %}}
+
+- .NET 8 – Current LTS (support until Nov 2026)
+- .NET 9 – STS (preview; GA Q4 2025)
+- .NET 10 – Next LTS (preview; expected 2025 Q4–Q1 2026)
+- .NET 3.1, 5, 6, 7 – End of life
+{{% /notice %}}
+
+
 ## .NET Core 3.1 (end-of-life 2022)
 
-.NET Core 3.1 was the first LTS with meaningful Arm64 support. Highlights were:
+.NET Core 3.1 was the first LTS with meaningful Arm64 support. 
+
+Highlights were:
 
 - Initial JIT (Just-In-Time) optimizations for Arm64 (but the bulk of Arm throughput work arrived in .NET 5).
 - Faster garbage collection thanks to refinements to the background GC mode.
@@ -39,7 +50,9 @@ With .NET 5 Microsoft started the “one .NET” unification. Even though it had
 
 ## .NET 7 (end-of-life 2024)
 
-.NET 7 was an STS (Standard-Term Support) release which is now out of support, but it pushed the performance envelope and is therefore interesting from a historical perspective. Key highlights were:
+.NET 7 was an STS (Standard-Term Support) release which is now out of support, but it pushed the performance envelope and is therefore interesting from a historical perspective. 
+
+Key highlights were:
 
 - General-availability of Native AOT publishing for console applications, producing self-contained, very small binaries with fast start-up on Arm64.
 - Dynamic PGO (Profile-Guided Optimisation) and On-Stack Replacement became the default, letting the JIT optimise the hottest code paths based on real run-time data.
@@ -47,10 +60,12 @@ With .NET 5 Microsoft started the “one .NET” unification. Even though it had
 
 ## .NET 8 (current LTS – support until November 2026)
 
-.NET 8 is the current Long-Term Support release and should be your baseline for new production workloads. Important Arm-related improvements include:
+.NET 8 is the current Long-Term Support release and should be your baseline for new production workloads. 
+
+Important Arm-related improvements include:
 
 - Native AOT support for ASP.NET Core, trimming enhancements and even smaller self-contained binaries, translating into faster cold-start for containerised Arm services.
-- Further JIT tuning for Arm64 delivering single- to low-double-digit percentage throughput wins in real-world benchmarks.
+- Further JIT tuning for Arm64 delivering single-digit to low double-digit throughput gains in real-world benchmarks.
 - Smaller base container images (`mcr.microsoft.com/dotnet/aspnet:8.0` and `…/runtime:8.0`) thanks to a redesigned layering strategy, particularly beneficial on Arm where network bandwidth is often at a premium.
 - Garbage-collector refinements that reduce pause times on highly-threaded, many-core servers.
 
@@ -66,10 +81,10 @@ Although .NET 9 will receive only 18 months of support, it is an excellent choic
 
 ## .NET 10 (preview – next LTS)
 
-.NET 10 is still in preview and will likely change prior to it's GA release, but it will be the next LTS version of .NET.
+.NET 10 is still in preview and will likely evolve prior to its GA release, but it will be the next LTS version of .NET, with the following benefits:
 
 - [Extended SVE2 intrinsics](https://github.com/dotnet/runtime/issues/109652) to unlock efficient implementation of large-scale numerical algorithms and on-device AI inference on Arm v9.
 - C# 14 is expected to ship alongside .NET 10, bringing additional compile-time metaprogramming features that can reduce boilerplate on resource-constrained Arm edge devices.
 
-Because .NET 10 is still in preview, you should validate any assumptions about feature availability against the latest preview builds and roadmap updates.
+Developers targeting Arm-based systems should track preview builds and roadmap updates closely to validate feature availability and compatibility with their target platforms.
 

@@ -7,11 +7,15 @@ layout: learningpathall
 ---
 ## Create a C shared library
 
-In this section, you’ll integrate a simple C shared library into your .NET OrchardCore application. You’ll create the library, compile it, and call it from your .NET code. This allows you to reuse existing C code and improve performance by accessing native functionality.
+In this section, you’ll integrate a simple C shared library into your .NET OrchardCore application, by doing the following:
 
-First, create a simple C shared library that defines a function you’ll call from your .NET application.
+- Write a C function
+- Compile it into a shared object (`.so`)
+- Call it from C# using `DllImport`
 
-Create a new file named `mylib.c` with the following content:
+This allows you to reuse existing C code and improve performance by accessing native functionality.
+
+Create a file named `mylib.c` with the following:
 
 ```c
 #include <stdio.h>

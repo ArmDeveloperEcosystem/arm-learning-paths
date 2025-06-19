@@ -6,11 +6,11 @@ weight: 2
 layout: learningpathall
 ---
 
-# Getting started with the OrchardCore app 
+## Getting started with the OrchardCore app 
 
 In this section, you'll build and run a basic [OrchardCore](https://github.com/OrchardCMS/OrchardCore) CMS application, which is a popular Linux-based .NET workload. OrchardCore is a modular and multi-tenant application framework built with ASP.NET Core, that's commonly used to create content-driven websites.
 
-## Set up your development environment
+### Set up your development environment
 
 First, launch an Azure Cobalt 100 instance (Arm-based VM) running Ubuntu 24.04, and open port 8080 to the internet. 
 
@@ -43,7 +43,7 @@ Install gcc for compiling your application:
 sudo apt install gcc g++ build-essential -y
 ```
 
-## Install the OrchardCore templates
+### Install the OrchardCore templates
 
 Install the OrchardCore templates:
 
@@ -66,7 +66,7 @@ Orchard Core Mvc Web App  ocmvc        [C#]      Web/Orchard Core/Mvc
 Orchard Core Theme        octheme      [C#]      Web/Orchard Core/CMS
 ```
 
-## Create a new OrchardCore application
+### Create a new OrchardCore application
 
 First, create a new project using the `dotnet` CLI to create a new OrchardCore application:
 
@@ -82,7 +82,7 @@ Now navigate to the project directory:
 cd MyOrchardCoreApp
 ```
 
-## Run the OrchardCore application
+### Run the OrchardCore application
 
 Build the application: 
 
@@ -115,12 +115,12 @@ Access the application:
 
 * In your browser, navigate to `http://[instance IP]:8080` to see your OrchardCore application in action. 
 
-* Replace `[instance IP]` with your VM’s public IP address. You can find it in the Azure portal under the Networking tab of your virtual machine.
+* Replace `[instance IP]` with your VM’s public IP address. You can find it in the Azure portal under the **Networking** tab of your virtual machine.
 
 Configure the application: 
 
-On the setup screen, choose the Blog recipe and complete the admin credentials and database configuration to finish setup.
+* On the setup screen, choose the Blog recipe and complete the admin credentials and database configuration to finish setup.
 
-## Summary and next steps
+### Summary and next steps
 
 You have successfully created and run a basic OrchardCore CMS application. In the next sections, you will learn how to integrate a C shared library into your .NET application and explore performance optimizations for Arm architecture.

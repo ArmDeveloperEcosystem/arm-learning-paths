@@ -4,7 +4,7 @@ title: Migrate a .NET application to Azure Cobalt 100
   
 minutes_to_complete: 25
 
-who_is_this_for: This is an advanced learning path for .NET developers who want to take advantage of the performance and cost benefits of Azure Cobalt processors.
+who_is_this_for: This is an advanced topic path for .NET developers who want to take advantage of the performance and cost benefits of Azure Cobalt processors.
 
 learning_objectives: 
     - Build and run a basic OrchardCore CMS application
