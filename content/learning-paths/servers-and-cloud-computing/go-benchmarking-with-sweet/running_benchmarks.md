@@ -6,13 +6,11 @@ weight: 50
 layout: learningpathall
 ---
 
-## Section Overview
-
-With setup complete, you can now run and analyze the benchmarks.  Before you do, it's good to understand all the moving pieces in more detail.
+With setup complete, you can now run and analyze the benchmarks.  Before you do, it's good to understand all the different pieces in more detail.
 
 ## Choosing a Benchmark to Run
 
-Whether running manually or automatic, the benchmarking process consists of two main steps:
+Whether running manually or automatically, the benchmarking process consists of two main steps:
 
 1. **Running benchmarks with Sweet**: `sweet` executes the benchmarks on each VM, generating raw performance data
 
@@ -99,7 +97,7 @@ Large gaps between average and peak memory usage suggest opportunities for memor
 
 Here are some general tips to keep in mind as you explore benchmarking across different apps and instance types:
 
-- Unlike Intel and AMD processors that use hyper-threading, Arm processors provide single-threaded cores without hyper-threading. A four-core Arm processor has four independent cores running four threads, while an four-core Intel processor provides eight logical cores through hyper-threading. This means each Arm vCPU represents a full physical core, while each Intel/AMD vCPU represents half a physical core. For fair comparison, this learning path uses a 4-vCPU Arm instance against an 8-vCPU Intel instance.  When scaling up instance sizes during benchmarking, make sure to keep a 2:1 Intel/AMD:Arm VCPU ratio if you wish to keep parity on CPU resources.
+- Unlike Intel and AMD processors that use hyper-threading, Arm processors provide single-threaded cores without hyper-threading. A four-core Arm processor has four independent cores running four threads, while an four-core Intel processor provides eight logical cores through hyper-threading. This means each Arm vCPU represents a full physical core, while each Intel/AMD vCPU represents half a physical core. For fair comparison, this learning path uses a 4-vCPU Arm instance against an 8-vCPU Intel instance.  When scaling up instance sizes during benchmarking, make sure to keep a 2:1 Intel/AMD:Arm vCPU ratio if you wish to keep parity on CPU resources.
 
 - It's suggested to run each benchmark at least 10 times (specified via the `count` parameter) to handle outlier/errant runs and ensure statistical significance.
 
