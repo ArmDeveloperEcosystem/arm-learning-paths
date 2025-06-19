@@ -5,12 +5,9 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
-## Introduction
+## Create a C shared library
 
 In this section, you’ll integrate a simple C shared library into your .NET OrchardCore application. You’ll create the library, compile it, and call it from your .NET code. This allows you to reuse existing C code and improve performance by accessing native functionality.
-
-## Create a C shared library
 
 First, create a simple C shared library that defines a function you’ll call from your .NET application.
 
@@ -115,4 +112,4 @@ aarch64-linux-gnu-gcc -mcpu=neoverse-n2 -O3 -shared -o libmylib.so -fPIC mylib.c
 
 The `-mcpu=neoverse-n2` flag specifies the Cobalt architecture, and `-O3` ensures that maximum optimizations are completed (including SIMD optimizations).
 
-In the next section, you’ll make your native interop cross-platform by using the `anyCPU` feature and runtime dispatch strategies.
+In the next section, you’ll make your native interop cross-platform by using the AnyCPU feature and runtime dispatch strategies.

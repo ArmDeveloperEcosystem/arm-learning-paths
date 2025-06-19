@@ -1,5 +1,5 @@
 ---
-title: Build and run an OrchardCore CMS app on Azure Cobalt
+title: Build and run an OrchardCore CMS app on Azure Cobalt (Arm64)
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -12,7 +12,7 @@ In this section, you'll build and run a basic [OrchardCore](https://github.com/O
 
 ## Set up your development environment
 
-First, launch an Azure Cobalt 100 instance running Ubuntu 24.04, and open port 8080 to the internet. 
+First, launch an Azure Cobalt 100 instance (Arm-based VM) running Ubuntu 24.04, and open port 8080 to the internet. 
 
 For setup instructions, see the [Create an Azure Cobalt 100 VM](../../cobalt) Learning Path.
 
