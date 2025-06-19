@@ -38,6 +38,10 @@ further_reading:
     - resource:
         title: OrchardCore documentation
         link: https://docs.orchardcore.net/
+        type: documentation  
+    - resource:
+        title: OrchardCore GitHub Repository
+        link: https://github.com/OrchardCMS/OrchardCore
         type: documentation
     - resource:
         title: .NET documentation
