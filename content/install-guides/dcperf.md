@@ -21,14 +21,14 @@ weight: 1
 
 ## Introduction
 
-DCPerf is an open source benchmarking and microbenchmarking suite, originally developed by Meta, that faithfully replicates the characteristics of various general purpose data center workloads. DCPerf stands out for its accurate replication of microarchitectural behaviors, such as cache misses and branch mispredictions, that many other benchmarking tools overlook.
+DCPerf is an open source benchmarking and microbenchmarking suite, originally developed by Meta, that faithfully replicates the characteristics of various general-purpose data center workloads. DCPerf stands out for its accurate replication of microarchitectural behaviors, such as cache misses and branch mispredictions, that many other benchmarking tools overlook.
 
 DCPerf generates performance data to inform procurement decisions. You can also use it for regression testing to detect changes in the environment, such as kernel and compiler changes. 
 
 You can install DCPerf on Arm-based servers. The examples below have been tested on an AWS `c7g.metal` instance running Ubuntu 22.04 LTS. 
 
 {{% notice Note %}}
-When running on a server provided by a cloud service, you will have limited access to some parameters, such as UEFI settings, which can affect performance. 
+When running on a server provided by a cloud service, you have limited access to some parameters, such as UEFI settings, which can affect performance. 
 {{% /notice %}}
 
 ## Install Prerequisites
@@ -102,13 +102,15 @@ sudo apt install selinux-utils
 getenforce
 ```
 
-You should see the following response. If you do not see the `Disabled` output, see your Linux distribution documentation for information about how to disable SELinux.
+You should see the following response: 
 
 ```output
 Disabled
 ```
 
-The `install` argument to the `benchpress_cli.py` command line script can be used to automatically install all dependencies for each benchmark.  
+If you do not see the `Disabled` output, see your Linux distribution documentation for information about how to disable SELinux.
+
+You can automatically install all dependencies for each benchmark using the `install` argument with the `benchpress_cli.py` command-line script.   
 
 ```console
 sudo ./benchpress_cli.py install oss_performance_mediawiki_mlp
@@ -118,7 +120,7 @@ This step might take several minutes to complete, depending on your system's dow
 
 ## Run the MediaWiki Benchmark
 
-For the sake of brevity, you can provide the duration and timeout arguments using a `JSON` dictionary with the `-i` argument. 
+For the sake of brevity, you can provide the duration and timeout arguments using a `JSON` dictionary with the `-i` argument:
 
 ```console
 sudo ./benchpress_cli.py run oss_performance_mediawiki_mlp -i '{
@@ -127,7 +129,7 @@ sudo ./benchpress_cli.py run oss_performance_mediawiki_mlp -i '{
 }'
 ```
 
-While the benchmark is running, you can see various processes occupying the CPU with the `top` command.
+While the benchmark is running, you can monitor CPU activity and observe benchmark-related processes using the `top` command.
 
 When the benchmark is complete, a `benchmark_metrics_*` directory is created within the `DCPerf` directory, containing a `JSON` file for the system specs and another for the metrics.
 
