@@ -4,8 +4,6 @@ author: Kieran Hejmadi
 minutes_to_complete: 20
 official_docs: https://github.com/facebookresearch/DCPerf?tab=readme-ov-file#install-and-run-benchmarks
 
-draft: true
-
 additional_search_terms:
 - linux
 - Neoverse
@@ -23,14 +21,14 @@ weight: 1
 
 ## Introduction
 
-DCPerf is an open source benchmarking and microbenchmarking suite, originally developed by Meta, that faithfully replicates the characteristics of various general purpose data center workloads. One of the key differentiators compared to alternative benchmarking software is the fidelity of micro-architectural behavior replicated by DCPerf, for example, cache misses and branch misprediction rate.
+DCPerf is an open source benchmarking and microbenchmarking suite, originally developed by Meta, that faithfully replicates the characteristics of various general purpose data center workloads. DCPerf stands out for its accurate replication of microarchitectural behaviors, such as cache misses and branch mispredictions, that many other benchmarking tools overlook.
 
-DCPerf generates performance data to inform procurement decisions. It can also be used for regression testing to detect changes in the environment, such as kernel and compiler changes. 
+DCPerf generates performance data to inform procurement decisions. You can also use it for regression testing to detect changes in the environment, such as kernel and compiler changes. 
 
 You can install DCPerf on Arm-based servers. The examples below have been tested on an AWS `c7g.metal` instance running Ubuntu 22.04 LTS. 
 
 {{% notice Note %}}
-When running on a server provided by a cloud service, you will have limited access to some parameters, such as UEFI settings, which can impact performance. 
+When running on a server provided by a cloud service, you will have limited access to some parameters, such as UEFI settings, which can affect performance. 
 {{% /notice %}}
 
 ## Install Prerequisites
@@ -47,7 +45,7 @@ It is recommended that you install Python packages in a Python virtual environme
 Set up your virtual environment:
 
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 ```
 If requested, restart the recommended services. 
@@ -67,7 +65,7 @@ cd DCPerf
 
 ## Running the MediaWiki Benchmark
 
-DCPerf offers many benchmarks. Please refer to the official documentation for the benchmark of your choice. 
+DCPerf offers many benchmarks. See the official documentation for the benchmark of your choice. 
 
 One example is the MediaWiki benchmark, designed to faithfully reproduce the workload of the Facebook social networking site. 
 
@@ -85,6 +83,8 @@ Confirm `hhvm` is available. The `hhvm` binary is located in the `DCPerf/hhvm/aa
 
 ```bash
 hhvm --version
+# Return to the DCPerf root directory
+cd ..
 ```
 
 You should see output similar to:
@@ -102,7 +102,7 @@ sudo apt install selinux-utils
 getenforce
 ```
 
-You should see the following response. If you do not see the `Disabled` output, please refer to your Linux distribution documentation for information about how to disable SELinux.
+You should see the following response. If you do not see the `Disabled` output, see your Linux distribution documentation for information about how to disable SELinux.
 
 ```output
 Disabled
@@ -114,7 +114,7 @@ The `install` argument to the `benchpress_cli.py` command line script can be use
 sudo ./benchpress_cli.py install oss_performance_mediawiki_mlp
 ```
 
-Please note this may take several minutes to complete.
+This step might take several minutes to complete, depending on your system's download and setup speed.
 
 ## Run the MediaWiki Benchmark
 
@@ -127,11 +127,11 @@ sudo ./benchpress_cli.py run oss_performance_mediawiki_mlp -i '{
 }'
 ```
 
-While the benchmark is running, you can observe the various processes occupying the CPU with the `top` command.
+While the benchmark is running, you can see various processes occupying the CPU with the `top` command.
 
-Once the benchmark is complete, a `benchmark_metrics_*` directory will be created within the `DCPerf` directory, containing a `JSON` file for the system specs and another for the metrics.
+When the benchmark is complete, a `benchmark_metrics_*` directory is created within the `DCPerf` directory, containing a `JSON` file for the system specs and another for the metrics.
 
-For example, the metrics file will list the following:
+For example, the metrics file lists the following:
 
 ```output
   "metrics": {
