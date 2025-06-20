@@ -7,59 +7,60 @@ layout: learningpathall
 ---
 
 ## BOLT with SPE
-
-{{% notice Important Note %}}
-Currently, BOLT may not generate a faster binary when using Perf SPE due to limitations within `perf` and BOLT itself.
-For more information and the latest updates see: [[AArch64] BOLT does not support SPE branch data](https://github.com/llvm/llvm-project/issues/115333).
-{{% /notice %}}
-
 The steps to use BOLT with Perf SPE are listed below.
 
-### Collect Perf data with SPE 
+### Collect Perf data with SPE
 
-Run your executable in the normal use case and collect a SPE performance profile. This will output a `perf.data` file containing the profile and will be used to optimize the executable.
+First, make sure you are using Linux Perf version v6.14 or later, which supports the 'brstack' field and captures all branch information.
 
-Record samples while running your application. Substitute the actual name of your application for `executable`:
-
-```bash { target="ubuntu:latest" }
-perf record -e arm_spe/branch_filter=1/u -o perf.data-- ./executable
+```bash { output_lines = "2" }
+perf --version
+perf version 6.14
 ```
 
-Perf prints the size of the `perf.data` file:
+Next, run your executable in the normal use case to collect an SPE performance profile. This generates a `perf.data` file containing the profile, which will be used to optimize the executable.
 
-```output
+Record samples while running your application, replacing `executable`  below:
+
+```bash { target="ubuntu:latest" }
+perf record -e 'arm_spe/branch_filter=1/u' -o perf.data -- ./executable
+```
+Once the execution is complete, perf will print a summary that includes the size of the `perf.data` file:
+
+```bash { target="ubuntu:latest" }
 [ perf record: Woken up 79 times to write data ]
 [ perf record: Captured and wrote 4.910 MB perf.data ]
 ```
 
-### Convert the Profile into BOLT format
+The `-jitter=1` flag can help avoid resonance, while `-c`/`--count` controls the sampling period.
 
-`perf2bolt` converts the profile into a BOLT data format. For the given sample data, `perf2bolt` finds all instruction pointers in the profile, maps them back to the assembly instructions, and outputs a count of how many times each assembly instruction was sampled.
+### Convert the Profile to BOLT format
 
-If you application is named `executable`, run the commend below to convert the profile data:
+`perf2bolt` converts the profile into BOLT's data format. It maps branch events from the profile to assembly instructions and outputs branch execution traces with sample counts.
+
+If you application is named `executable`, run the command below to convert the profile data:
 
 ```bash { target="ubuntu:latest" }
-perf2bolt -p perf.data -o perf.fdata -nl ./executable
+perf2bolt -p perf.data -o perf.fdata --spe ./executable
 ```
 
-Below is example output from `perf2bolt`, it has read all samples and created the file `perf.fdata`.
+Below is example output from `perf2bolt`, it has read all samples from `perf.data` and created the converted profile `perf.fdata`.
 
 ```output
 BOLT-INFO: shared object or position-independent executable detected
 PERF2BOLT: Starting data aggregation job for perf.data
-PERF2BOLT: spawning perf job to read events without LBR
+PERF2BOLT: spawning perf job to read SPE brstack events
 PERF2BOLT: spawning perf job to read mem events
 PERF2BOLT: spawning perf job to read process events
 PERF2BOLT: spawning perf job to read task events
 BOLT-INFO: Target architecture: aarch64
-BOLT-INFO: BOLT version: c66c15a76dc7b021c29479a54aa1785928e9d1bf
+BOLT-INFO: BOLT version: b1516a9d688fed835dce5efc614302649c3baf0e
 BOLT-INFO: first alloc address is 0x0
-BOLT-INFO: creating new program header table at address 0x200000, offset 0x200000
+BOLT-INFO: creating new program header table at address 0x4600000, offset 0x4600000
 BOLT-INFO: enabling relocation mode
-BOLT-INFO: disabling -align-macro-fusion on non-x86 platform
 BOLT-INFO: enabling strict relocation mode for aggregation purposes
 BOLT-INFO: pre-processing profile using perf data aggregator
-BOLT-INFO: binary build-id is:     21dbca691155f1e57825e6381d727842f3d43039
+BOLT-INFO: binary build-id is:     8bb7beda9bae10bc546eace62775dd2958a9c940
 PERF2BOLT: spawning perf job to read buildid list
 PERF2BOLT: matched build-id and file name
 PERF2BOLT: waiting for perf mmap events collection to finish...
@@ -68,13 +69,18 @@ PERF2BOLT: waiting for perf task events collection to finish...
 PERF2BOLT: parsing perf-script task events output
 PERF2BOLT: input binary is associated with 1 PID(s)
 PERF2BOLT: waiting for perf events collection to finish...
-PERF2BOLT: parsing basic events (without LBR)...
+PERF2BOLT: SPE branch events in LBR-format...
+PERF2BOLT: read 3592267 samples and 3046129 LBR entries
+PERF2BOLT: ignored samples: 0 (0.0%)
 PERF2BOLT: waiting for perf mem events collection to finish...
 PERF2BOLT: parsing memory events...
-PERF2BOLT: processing basic events (without LBR)...
-PERF2BOLT: read 79 samples
-PERF2BOLT: out of range samples recorded in unknown regions: 5 (6.3%)
-PERF2BOLT: wrote 14 objects and 0 memory objects to perf.fdata
+PERF2BOLT: processing branch events...
+PERF2BOLT: traces mismatching disassembled function contents: 0
+PERF2BOLT: out of range traces involving unknown regions: 0
+PERF2BOLT: wrote 21027 objects and 0 memory objects to perf.fdata
+BOLT-INFO: 2178 out of 72028 functions in the binary (3.0%) have non-empty execution profile
+BOLT-INFO: 12 functions with profile could not be optimized
+BOLT-INFO: Functions with density >= 0.0 account for 99.00% total sample counts
 ```
 
 ### Run BOLT to generate the optimized executable
@@ -155,4 +161,4 @@ BOLT-INFO: setting __hot_end to 0x4002b0
 BOLT-INFO: patched build-id (flipped last bit)
 ```
 
-The optimized executable is now available as `new_executable`. 
+The optimized executable is now available as `new_executable`.
