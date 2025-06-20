@@ -69,7 +69,7 @@ go install golang.org/x/perf/cmd/benchstat@latest
 
 git clone https://github.com/golang/benchmarks
 cd benchmarks/sweet
-sweet get -force # to get assets
+sweet get # to get assets
 
 # Create a configuration file
     
