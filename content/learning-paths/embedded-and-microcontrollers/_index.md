@@ -20,7 +20,7 @@ subjects_filter:
 - Containers and Virtualization: 6
 - Embedded Linux: 4
 - Libraries: 3
-- ML: 13
+- ML: 14
 - Performance and Architecture: 21
 - RTOS Fundamentals: 4
 - Security: 2

@@ -43,7 +43,7 @@ With .NET 5 Microsoft started the “one .NET” unification. Even though it had
 
 .NET 6 laid the foundation for the modern performance story on Arm64:
 
-- Tiered PGO entered preview, combining tiered compilation with profile-guided optimisation.
+- Tiered PGO entered preview, combining tiered compilation with profile-guided optimization.
 - Better scalability on many-core Arm servers thanks to the new ThreadPool implementation.
 - First-class support for Apple M1, enabling full .NET development on Arm-based macOS, as well as for Windows Arm64.
 
@@ -55,7 +55,7 @@ With .NET 5 Microsoft started the “one .NET” unification. Even though it had
 Key highlights were:
 
 - General-availability of Native AOT publishing for console applications, producing self-contained, very small binaries with fast start-up on Arm64.
-- Dynamic PGO (Profile-Guided Optimisation) and On-Stack Replacement became the default, letting the JIT optimise the hottest code paths based on real run-time data.
+- Dynamic PGO (Profile-Guided Optimization) and On-Stack Replacement became the default, letting the JIT optimise the hottest code paths based on real run-time data.
 - New Arm64 hardware intrinsics (e.g. SHA-1/SHA-256, AES, CRC-32) exposed through System.Runtime.Intrinsics, enabling high-performance crypto workloads.
 
 ## .NET 8 (current LTS – support until November 2026)
@@ -64,7 +64,7 @@ Key highlights were:
 
 Important Arm-related improvements include:
 
-- Native AOT support for ASP.NET Core, trimming enhancements and even smaller self-contained binaries, translating into faster cold-start for containerised Arm services.
+- Native AOT support for ASP.NET Core, trimming enhancements and even smaller self-contained binaries, translating into faster cold-start for containerized Arm services.
 - Further JIT tuning for Arm64 delivering single-digit to low double-digit throughput gains in real-world benchmarks.
 - Smaller base container images (`mcr.microsoft.com/dotnet/aspnet:8.0` and `…/runtime:8.0`) thanks to a redesigned layering strategy, particularly beneficial on Arm where network bandwidth is often at a premium.
 - Garbage-collector refinements that reduce pause times on highly-threaded, many-core servers.

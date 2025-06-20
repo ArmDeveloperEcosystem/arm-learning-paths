@@ -34,7 +34,7 @@ Here is an outline of the steps:
 
     With the merged profile, you apply BOLT optimizations separately to each binary and shared library. This step ensures that both your main application and its dependencies are optimized based on real-world usage patterns, resulting in a more efficient and responsive software stack.
 
-5. Link the final optimized binary with the separately bolted libraries to deploy a fully optimized runtime stack  
+5. Link the final optimized binary with the separately optimized libraries to deploy a fully optimized runtime stack  
 
     After optimizing each component, you combine them to create a deployment where both the application and its libraries benefit from BOLT's enhancements.
 

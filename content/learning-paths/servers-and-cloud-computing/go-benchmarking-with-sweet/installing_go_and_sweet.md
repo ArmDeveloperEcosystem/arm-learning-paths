@@ -18,7 +18,7 @@ Subsequent steps in the learning path assume you are running this script (instal
 {{% /notice %}}
 
 
-Start by copying and pasting the script below on **both** of your GCP VMs. This script checks the architecture of your running VM, installs the required Go packge on your VM. It then installs sweet, benchmarks, and the benchstat tools.
+Start by copying and pasting the script below on **both** of your GCP VMs. This script checks the architecture of your running VM, installs the required Go package on your VM. It then installs sweet, benchmarks, and the benchstat tools.
 
 **You don't need to run it after pasting**, just paste it into your home directory and press enter to install all needed dependencies: 
 

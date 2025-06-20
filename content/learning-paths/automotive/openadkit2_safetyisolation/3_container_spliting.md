@@ -161,7 +161,7 @@ Since the planning-control and simulator containers will now run on different ma
 
 ##### Enable Host Networking
 All three containers (visualizer, simulator, planning-control) need access to the host’s network interfaces for DDS-based peer discovery. 
-Replace Docker’s default bridge network with host networking:
+Replace Docker's default bridge network with host networking:
 
 ```YAML
   visualizer:
@@ -369,4 +369,4 @@ This confirms that:
 - ROS 2 nodes are able to communicate across EC2 instances via /hello topic.
 - The network settings including host mode, security group, and CycloneDDS peer configuration are correctly applied.
 
-In the next section, you’ll complete the full end-to-end demonstrationa with all of concepts.
+In the next section, you’ll complete the full end-to-end demonstration with all of the concepts.
