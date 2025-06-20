@@ -21,17 +21,17 @@ weight: 1
 
 ## Introduction
 
-DCPerf is an open source benchmarking and microbenchmarking suite, originally developed by Meta, that faithfully replicates the characteristics of various general-purpose data center workloads. DCPerf stands out for its accurate replication of microarchitectural behaviors, such as cache misses and branch mispredictions, that many other benchmarking tools overlook.
+DCPerf is an open-source benchmarking and microbenchmarking suite originally developed by Meta. It faithfully replicates the characteristics of general-purpose data center workloads, with particular attention to microarchitectural fidelity. DCPerf stands out for accurate simulation of behaviors such as cache misses and branch mispredictions, which are details that many other benchmarking tools overlook.
 
-DCPerf generates performance data to inform procurement decisions. You can also use it for regression testing to detect changes in the environment, such as kernel and compiler changes. 
+You can use DCPerf to generate performance data to inform procurement decisions, and for regression testing to detect changes in the environment, such as kernel and compiler changes. 
 
-You can install DCPerf on Arm-based servers. The examples below have been tested on an AWS `c7g.metal` instance running Ubuntu 22.04 LTS. 
+DCPerf runs on Arm-based servers. The examples below have been tested on an AWS `c7g.metal` instance running Ubuntu 22.04 LTS. 
 
 {{% notice Note %}}
 When running on a server provided by a cloud service, you have limited access to some parameters, such as UEFI settings, which can affect performance. 
 {{% /notice %}}
 
-## Install Prerequisites
+## Install prerequisites
 
 To get started, install the required software:
 
@@ -63,13 +63,13 @@ git clone https://github.com/facebookresearch/DCPerf.git
 cd DCPerf
 ```
 
-## Running the MediaWiki Benchmark
+## Running the MediaWiki benchmark
 
 DCPerf offers many benchmarks. See the official documentation for the benchmark of your choice. 
 
 One example is the MediaWiki benchmark, designed to faithfully reproduce the workload of the Facebook social networking site. 
 
-Install HipHop Virtual Machine (HHVM), a virtual machine used to execute the web application code.
+Install HipHop Virtual Machine (HHVM), a virtual machine used to execute the web application code:
 
 ```bash
 wget https://github.com/facebookresearch/DCPerf/releases/download/hhvm/hhvm-3.30-multplatform-binary-ubuntu.tar.xz
@@ -79,7 +79,7 @@ sudo ./pour-hhvm.sh
 export LD_LIBRARY_PATH="/opt/local/hhvm-3.30/lib:$LD_LIBRARY_PATH"
 ```
 
-Confirm `hhvm` is available. The `hhvm` binary is located in the `DCPerf/hhvm/aarch64-ubuntu22.04/hhvm-3.30/bin` directory. 
+Confirm `hhvm` is available. The `hhvm` binary is located in the `DCPerf/hhvm/aarch64-ubuntu22.04/hhvm-3.30/bin` directory:
 
 ```bash
 hhvm --version
@@ -110,7 +110,7 @@ Disabled
 
 If you do not see the `Disabled` output, see your Linux distribution documentation for information about how to disable SELinux.
 
-You can automatically install all dependencies for each benchmark using the `install` argument with the `benchpress_cli.py` command-line script.   
+You can automatically install all dependencies for each benchmark using the `install` argument with the `benchpress_cli.py` command-line script:
 
 ```console
 sudo ./benchpress_cli.py install oss_performance_mediawiki_mlp
@@ -118,7 +118,7 @@ sudo ./benchpress_cli.py install oss_performance_mediawiki_mlp
 
 This step might take several minutes to complete, depending on your system's download and setup speed.
 
-## Run the MediaWiki Benchmark
+## Run the MediaWiki benchmark
 
 For the sake of brevity, you can provide the duration and timeout arguments using a `JSON` dictionary with the `-i` argument:
 
@@ -158,7 +158,7 @@ For example, the metrics file lists the following:
     "score": 2.4692578125
 ```
 
-## Understanding the Benchmark Results
+## Understanding the benchmark results
 
 The metrics file contains several key performance indicators from the benchmark run:
 
@@ -181,8 +181,12 @@ The metrics file contains several key performance indicators from the benchmark 
 
 These metrics help you evaluate the performance and reliability of the system under test. Higher values for successful requests and RPS, and lower response times, generally indicate better performance. The score provides a single value for easy comparison across runs or systems.
 
-## Next Steps 
+## Next steps 
 
-- Use the results to compare performance across different systems, hardware configurations, or after making system changes (e.g., kernel or compiler updates).
-- Consider tuning system parameters or trying different DCPerf benchmarks to further evaluate your environment.
-- Explore the other DCPerf benchmarks 
+These are some activites you might like to try next:
+
+* Use the results to compare performance across different systems, hardware configurations, or after making system changes, such as kernel, compiler, or driver updates.
+
+* Consider tuning system parameters or trying alternative DCPerf benchmarks to further evaluate your environment.
+
+* Explore additional DCPerf workloads, including those that simulate key-value stores, in-memory caching, or machine learning inference.
