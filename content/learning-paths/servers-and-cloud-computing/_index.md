@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- Linux: 147
+- Linux: 150
 - macOS: 10
 - Windows: 14
 pinned_modules:
@@ -19,17 +19,17 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 5
-- Containers and Virtualization: 27
+- Containers and Virtualization: 28
 - Databases: 15
 - Libraries: 9
 - ML: 27
-- Performance and Architecture: 57
+- Performance and Architecture: 59
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
 title: Servers and Cloud Computing
 tools_software_languages_filter:
-- .NET: 2
+- .NET: 3
 - .NET SDK: 1
 - 5G: 1
 - ACL: 1
@@ -51,12 +51,14 @@ tools_software_languages_filter:
 - AWS Elastic Container Service (ECS): 1
 - AWS Elastic Kubernetes Service (EKS): 3
 - AWS Graviton: 1
-- Bash: 1
+- Azure CLI: 1
+- Azure Portal: 1
 - bash: 2
+- Bash: 1
 - Bastion: 3
 - BOLT: 2
 - bpftool: 1
-- C: 4
+- C: 5
 - C#: 2
 - C++: 8
 - C/C++: 2
@@ -88,7 +90,7 @@ tools_software_languages_filter:
 - GitHub: 6
 - GitLab: 1
 - Glibc: 1
-- Go: 3
+- Go: 4
 - Google Axion: 3
 - Google Benchmark: 1
 - Google Cloud: 1
@@ -126,6 +128,7 @@ tools_software_languages_filter:
 - Ollama: 1
 - ONNX Runtime: 1
 - OpenBLAS: 1
+- OrchardCore: 1
 - PAPI: 1
 - perf: 5
 - Perf: 1
@@ -169,7 +172,7 @@ tools_software_languages_filter:
 weight: 1
 cloud_service_providers_filter:
 - AWS: 17
-- Google Cloud: 12
+- Google Cloud: 13
 - Microsoft Azure: 9
 - Oracle: 2
 ---

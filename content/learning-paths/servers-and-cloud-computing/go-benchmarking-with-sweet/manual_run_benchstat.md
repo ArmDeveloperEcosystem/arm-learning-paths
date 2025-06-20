@@ -26,7 +26,7 @@ The file contains the results of the `markdown` benchmark run on the Arm-based c
 To compare the results, you'll use `benchstat` to analyze the two result files you downloaded. Since all the prerequisites are already installed on the `c4` and `c4a` instances, benchstat will be run from one of those instances.
 
 
-1. **Create working directory:** Make a temporary benchstat directory to hold the results files on either the c4a or c4 isntance, and change directory into it:
+1. **Create working directory:** Make a temporary benchstat directory to hold the results files on either the c4a or c4 instance, and change directory into it:
 
    ```bash
    mkdir benchstat_results
