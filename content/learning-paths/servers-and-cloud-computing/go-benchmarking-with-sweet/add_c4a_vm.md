@@ -1,13 +1,13 @@
 ---
-title: Launching an Arm Axion C4a Instance
+title: Launching a Google Axion Instance
 weight: 20
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Section Overview
-In this section, you'll learn how to spin up the first of two different systems used in our benchmarking tests, an Arm-based Google Axion c4a-standard-4 (c4a for short).
+## Overview
+In this section, you'll learn how to spin up the first of two different VMs used for benchmarking Go tests, an Arm-based Google Axion c4a-standard-4 (c4a for short).
 
 ## Creating the c4a-standard-4 Instance
 
@@ -63,5 +63,5 @@ The Machine configuration page appears.
 
 ![](images/launch_c4a/19.png)
 
-After a few seconds, your c4a instance starts up, and you are ready to continue to the next section. In the next step, you will launch the second system, an Intel-based Emerald Rapids c4-standard-8 (c4 for short), which will serve as the comparison system for our benchmarking tests.
+After a few seconds, your c4a instance starts up, and you are ready to continue to the next section. In the next step, you will launch the second VM, an Intel-based Emerald Rapids c4-standard-8 (c4 for short), which will serve as the comparison system for our benchmarking tests.
 

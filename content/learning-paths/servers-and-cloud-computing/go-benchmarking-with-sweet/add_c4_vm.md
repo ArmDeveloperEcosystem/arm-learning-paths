@@ -1,5 +1,5 @@
 ---
-title: Launching an Intel C4 Instance
+title: Launching a Intel Emerald Rapids Instance
 weight: 30
 
 ### FIXED, DO NOT MODIFY
@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Section Overview
-In this section, you will set up the second benchmarking system, an Intel-based c4-standard-8 instance.
+In this section, you will set up the second benchmarking system, an Intel Emerald Rapids `c4-standard-8` instance.
 
 ## Creating the Instance
 
