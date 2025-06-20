@@ -50,13 +50,6 @@ merge-fdata $HOME/mysql-server/build/profile-readonly.fdata $HOME/mysql-server/b
   -o $HOME/mysql-server/build/profile-merged.fdata
 ```
 
-**Example command from an actual setup:**
-
-```bash
-/home/ubuntu/llvm-latest/build/bin/merge-fdata prof-instrumentation-readonly.fdata prof-instrumentation-writeonly.fdata \\
-  -o prof-instrumentation-readwritemerged.fdata
-```
-
 Output:
 
 ```
@@ -79,15 +72,23 @@ ls -lh $HOME/mysql-server/build/profile-merged.fdata
 Use LLVM-BOLT to generate the final optimized binary using the merged `.fdata` file:
 
 ```bash
-llvm-bolt build/bin/mysqld \\
-  -o build/bin/mysqldreadwrite_merged.bolt_instrumentation \\
-  -data=/home/ubuntu/mysql-server-8.0.33/sysbench/prof-instrumentation-readwritemerged.fdata \\
-  -reorder-blocks=ext-tsp \\
-  -reorder-functions=hfsort \\
-  -split-functions \\
-  -split-all-cold \\
-  -split-eh \\
-  -dyno-stats \\
+llvm-bolt $HOME/mysql-server/build/runtime_output_directory/mysqld \
+  -instrument \
+  -o $HOME/mysql-server/build/runtime_output_directory/mysqld.instrumented \
+  --instrumentation-file=$HOME/mysql-server/build/profile-readonly.fdata \
+  --instrumentation-sleep-time=5 \
+  --instrumentation-no-counters-clear \
+  --instrumentation-wait-forks
+
+llvm-bolt $HOME/mysql-server/build/runtime_output_directory/mysqld \
+  -o $HOME/mysql-server/build/mysqldreadwrite_merged.bolt_instrumentation \
+  -data=$HOME/mysql-server/build/prof-instrumentation-readwritemerged.fdata \
+  -reorder-blocks=ext-tsp \
+  -reorder-functions=hfsort \
+  -split-functions \
+  -split-all-cold \
+  -split-eh \
+  -dyno-stats \
   --print-profile-stats 2>&1 | tee bolt_orig.log
 ```
 

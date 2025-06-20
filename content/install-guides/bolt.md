@@ -145,19 +145,19 @@ You are now ready to [verify BOLT is installed](#verify).
 For Arm Linux use the file with `aarch64` in the name:
 
 ```bash
-wget https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.5/clang+llvm-17.0.5-aarch64-linux-gnu.tar.xz
+wget https://github.com/llvm/llvm-project/releases/download/llvmorg-19.1.7/clang+llvm-19.1.7-aarch64-linux-gnu.tar.xz
 ```
 
 2. Extract the downloaded file
 
 ```bash
-tar -xvf clang+llvm-17.0.5-aarch64-linux-gnu.tar.xz
+tar -xvf clang+llvm-19.1.7-aarch64-linux-gnu.tar.xz
 ```
 
 3. Add the path to BOLT in your `.bashrc` file
 
 ```bash
-echo 'export PATH="$PATH:$HOME/clang+llvm-17.0.5-aarch64-linux-gnu/bin"' >> ~/.bashrc
+echo 'export PATH="$PATH:$HOME/clang+llvm-19.1.7-aarch64-linux-gnu/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -201,9 +201,8 @@ The output is similar to:
 
 ```output
 LLVM (http://llvm.org/):
-  LLVM version 18.0.0git
+  LLVM version 19.1.7
   Optimized build with assertions.
-BOLT revision 99c15eb49ba0b607314b3bd221f0760049130d97
 
   Registered Targets:
     aarch64    - AArch64 (little endian)
