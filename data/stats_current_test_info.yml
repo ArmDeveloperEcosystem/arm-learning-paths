@@ -1,5 +1,5 @@
 summary:
-  content_total: 373
+  content_total: 379
   content_with_all_tests_passing: 0
   content_with_tests_enabled: 61
 sw_categories:
@@ -63,7 +63,8 @@ sw_categories:
       tests_and_status: []
     aws-q-cli:
       readable_title: Amazon Q Developer CLI
-      tests_and_status: []
+      tests_and_status:
+      - ubuntu:latest: passed
     azure-cli:
       readable_title: Azure CLI
       tests_and_status: []

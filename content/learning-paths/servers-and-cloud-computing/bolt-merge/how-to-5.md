@@ -1,5 +1,5 @@
 ---
-title: Performance Results - Baseline, BOLT Merge, and Full Optimization
+title: Review the performance results
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -17,8 +17,6 @@ This step presents the performance comparisons across various BOLT optimization 
 | Latency avg (ms)          | 0.99                 | 0.47                   | 1.54                   |
 | Latency 95th % (ms)       | 1.04                 | 0.83                   | 1.79                   |
 | Total time (s)            | 9.93                 | 4.73                   | 15.40                  |
-
----
 
 ### 2. Performance Comparison: Merged vs Non-Merged Instrumentation
 
@@ -40,8 +38,6 @@ Second run:
 | Latency 95th % (ms)       | 1.39                                        | 1.37                                            |
 | Total time (s)            | 239.9                                       | 239.9                                           |
 
----
-
 ### 3. BOLTed READ, BOLTed WRITE, MERGED BOLT (Read+Write+BOLTed Libraries)
 
 | Metric                     | Bolted Read-Only  | Bolted Write-Only | Merged BOLT (Read+Write+libssl) | Merged BOLT (Read+Write+libcrypto) | Merged BOLT (Read+Write+libssl+libcrypto) |
@@ -52,17 +48,18 @@ Second run:
 | Latency 95th % (ms)       | 0.77                | 0.55              | 1.37                             | 1.34                               | 1.34                                      |
 | Total time (s)            | 239.8               | 239.72            | 239.9                            | 239.9                              | 239.9                                     |
 
----
+{{% notice Note %}}
+All sysbench and .fdata file paths, as well as taskset usage, should match the conventions in previous steps: use sysbench from PATH (no src/), use /usr/share/sysbench/ for Lua scripts, and use $HOME-based paths for all .fdata and library files. On an 8-core system, use taskset -c 7 for sysbench and avoid contention with mysqld.
+{{% /notice %}}
 
-### Key Metrics to Analyze
+### Key metrics to analyze
 
 - **TPS (Transactions Per Second)**: Higher is better.
 - **QPS (Queries Per Second)**: Higher is better.
 - **Latency (Average and 95th Percentile)**: Lower is better.
 
----
-
 ### Conclusion
+
 - BOLT substantially improves performance over non-optimized binaries due to better instruction cache utilization and reduced execution path latency.
 - Merging feature-specific profiles does not negatively affect performance; instead, it captures a broader set of runtime behaviors, making the binary better tuned for varied real-world workloads.
 - Separately optimizing external user-space libraries, even though providing smaller incremental gains, further complements the overall application optimization, delivering a fully optimized execution environment.

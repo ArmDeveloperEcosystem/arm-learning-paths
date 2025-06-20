@@ -1,5 +1,5 @@
 ---
-title: Optimizing Arm binaries and libraries with LLVM-BOLT and profile merging
+title: Optimize Arm applications and shared libraries with BOLT
 
 draft: true
 cascade:
@@ -7,23 +7,22 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: Performance engineers, software developers working on Arm platforms who want to optimize both application binaries and shared libraries using LLVM-BOLT.
+who_is_this_for: Performance engineers and software developers working on Arm platforms who want to optimize both application binaries and shared libraries using BOLT.
 
 learning_objectives: 
-    - Instrument and optimize binaries for individual workload features using LLVM-BOLT.
+    - Instrument and optimize application binaries for individual workload features using BOLT.
     - Collect separate BOLT profiles and merge them for comprehensive code coverage.
     - Optimize shared libraries independently.
     - Integrate optimized shared libraries into applications.
     - Evaluate and compare application and library performance across baseline, isolated, and merged optimization scenarios.
 
 prerequisites:
-    - An Arm based system running Linux with BOLT and Linux Perf installed. The Linux kernel should be version 5.15 or later.
-    - (Optional) A second, more powerful Linux system to build the software executable and run BOLT.
+    - An Arm based system running Linux with [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed. 
 
 author: Gayathri Narayana Yegna Narayanan
 
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
     - Neoverse
