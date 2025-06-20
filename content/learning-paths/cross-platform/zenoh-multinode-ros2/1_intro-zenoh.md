@@ -1,5 +1,5 @@
 ---
-title: Introduction Zenoh
+title: Introduction to Zenoh
 weight: 2
 
 ### FIXED, DO NOT MODIFY
