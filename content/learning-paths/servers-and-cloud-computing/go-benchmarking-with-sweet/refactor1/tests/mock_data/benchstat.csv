@@ -1,0 +1,7 @@
+name,c4-96.results,±,c4-64.results,±
+BenchmarkTest1,100,10%,120,5%
+BenchmarkTest2,200,5%,180,10%
+
+name,c4-96.results,±,c4-64.results,±
+BenchmarkTest1,5,10%,4,5%
+BenchmarkTest2,10,5%,8,10%

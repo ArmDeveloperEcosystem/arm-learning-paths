@@ -1,21 +1,21 @@
 ---
-title: Add a simple C shared library to your .NET OrchardCore application
+title: Integrate a C shared library into your .NET OrchardCore app 
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Create a C shared library
 
-## Introduction
+In this section, you’ll integrate a simple C shared library into your .NET OrchardCore application, by doing the following:
 
-In this section, you will learn how to integrate a simple C shared library into your .NET OrchardCore application. This process involves creating a C library, compiling it, and then using it within your .NET application. This integration can help you leverage existing C code and libraries, enhancing the functionality and performance of your application.
+- Write a C function
+- Compile it into a shared object (`.so`)
+- Call it from C# using `DllImport`
 
+This allows you to reuse existing C code and improve performance by accessing native functionality.
 
-## Step 1: Create a C shared library
-
-First, you need to create a simple C shared library. This library will contain a function that you will call from your .NET application.
-
-1. Create a new file named `mylib.c` with the following content:
+Create a file named `mylib.c` with the following:
 
 ```c
 #include <stdio.h>
@@ -25,19 +25,19 @@ void greet() {
 }
 ```
 
-2. Compile the C file into a shared library:
+Compile the C file into a shared library:
 
 ```bash
 gcc -shared -o libmylib.so -fPIC mylib.c
 ```
 
-   This will generate a shared library file (`libmylib.so`).
+This creates a shared object file named `libmylib.so` which your .NET application can call at runtime.
 
-## Step 2: Use the C library in your .NET application
+## Use the C library in your .NET application
 
 Now that you have a shared library, you can use it in your .NET application.
 
-1. In your OrchardCore application, create a new class file named `NativeMethods.cs`:
+In your OrchardCore application, create a new class file named `NativeMethods.cs`:
 
 ```csharp
 using System;
@@ -49,8 +49,11 @@ public static class NativeMethods
     public static extern void Greet();
 }
 ```
+{{% notice Note %}}
+On Linux, the `DllImport("mylib")` attribute resolves to `libmylib.so`. On Windows, the runtime would look for `mylib.dll`, and on macOS, `libmylib.dylib`.
+{{% /notice %}}
 
-2. Call the `Greet` method from your application. For example, you can add the following code to your main program `Program.cs` as shown:
+Call the `Greet` method from your application. For example, you can add the following code to your main program `Program.cs` as shown:
 
 ```csharp
 using OrchardCore.Logging;
@@ -88,31 +91,31 @@ app.UseOrchardCore();
 app.Run();
 ```
 
-3. Ensure that dotnet can find your shared library:
+Ensure that dotnet can find your shared library:
 
 ```bash
 export LD_LIBRARY_PATH=$(pwd):$LD_LIBRARY_PATH
 ```
 
-## Step 3: Run your application
+## Run your application
 
-Now when you run `dotnet run`, you will see
+When you run `dotnet run`, you’ll see the following output:
 
 ```bash
 Calling native greet...
 Hello from the C library!
 ```
 
-in the logging output.
-
 ## Compiling for Arm
 
-If you are compiling for Arm directly on Azure Cobalt, the compiler understands what default processor optimizations it should use, and you can compile as done in Step 1 above. However, if you are cross-compiling in your build pipeline, you should specify `-mcpu=neoverse-n2 -O3` when running the cross-compiler:
+If you are compiling for Arm directly on Azure Cobalt, the compiler understands the default processor optimizations it should use, and you can compile in the same way as above. 
+
+However, if you are cross-compiling in your build pipeline, you should specify `-mcpu=neoverse-n2 -O3` when running the cross-compiler:
 
 ```bash
 aarch64-linux-gnu-gcc -mcpu=neoverse-n2 -O3 -shared -o libmylib.so -fPIC mylib.c
 ```
 
-The `-mcpu=neoverse-n2` flag specifies the Cobalt architecture, and `-O3` ensures that maximum optimizations are completed (including SIMD opimizations).
+The `-mcpu=neoverse-n2` flag specifies the Cobalt architecture, and `-O3` ensures that maximum optimizations are completed (including SIMD optimizations).
 
-In the next section, you will explore how to make your build architecture agnostic with the anyCPU feature.
+In the next section, you’ll make your native interop cross-platform by using the AnyCPU feature and runtime dispatch strategies.

@@ -1,20 +1,22 @@
 ---
-title: Create a basic OrchardCore application
+title: Build and run an OrchardCore CMS app on Azure Cobalt (Arm64)
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Create a basic OrchardCore application
+## Getting started with the OrchardCore app 
 
-In this section, you will learn how to create and compile a basic [OrchardCore](https://github.com/OrchardCMS/OrchardCore) CMS application, as an example of a popular Linux-based .NET workload. OrchardCore is a modular and multi-tenant application framework built with ASP.NET Core, which can be used to create content-driven websites.
+In this section, you'll build and run a basic [OrchardCore](https://github.com/OrchardCMS/OrchardCore) CMS application, which is a popular Linux-based .NET workload. OrchardCore is a modular and multi-tenant application framework built with ASP.NET Core, that's commonly used to create content-driven websites.
 
-## Step 1: Set up your development environment
+### Set up your development environment
 
-1. Launch an Azure Cobalt instance running Ubuntu 24.04, and open port 8080 to the internet. For instructions on how to do this, see the [Create an Azure Cobalt 100 VM](../../cobalt) Learning Path.
+First, launch an Azure Cobalt 100 instance (Arm-based VM) running Ubuntu 24.04, and open port 8080 to the internet. 
 
-2. **Install .NET SDK**:
+For setup instructions, see the [Create an Azure Cobalt 100 VM](../../cobalt) Learning Path.
+
+Next, install .NET SDK:
 
 ```bash
 wget https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb
@@ -23,35 +25,35 @@ sudo apt-get update
 sudo apt-get install -y dotnet-sdk-8.0
 ```
 
-3. **Verify installations**:
+Verify the installation:
 
 ```bash
 dotnet --version
 ```
 
-The output should look like:
+You should then see output similar to:
 
 ```output
 8.0.117
 ```
 
-4. Install gcc for compiling your application:
+Install gcc for compiling your application:
 
 ```bash
 sudo apt install gcc g++ build-essential -y
 ```
 
-## Step 2: Install the OrchardCore Templates
+### Install the OrchardCore templates
 
-To start building an OrchardCore application, you need to install the OrchardCore templates. Open your terminal and run the following command:
+Install the OrchardCore templates:
 
 ```bash
 dotnet new install OrchardCore.ProjectTemplates::2.1.7
 ```
 
-This command installs the OrchardCore project templates, which you will use to create a new application.
+This command installs the OrchardCore project templates you'll use to create a new OrchardCore application.
 
-The output will look like:
+Expected output:
 
 ```output
 Success: OrchardCore.ProjectTemplates::2.1.7 installed the following templates:
@@ -64,31 +66,31 @@ Orchard Core Mvc Web App  ocmvc        [C#]      Web/Orchard Core/Mvc
 Orchard Core Theme        octheme      [C#]      Web/Orchard Core/CMS
 ```
 
-## Step 3: Create a new OrchardCore application
+### Create a new OrchardCore application
 
-1. **Create a new project**: Use the `dotnet` CLI to create a new OrchardCore application.
+First, create a new project using the `dotnet` CLI to create a new OrchardCore application:
 
 ```bash
 dotnet new occms -n MyOrchardCoreApp
 ```
 
-   This command creates a new OrchardCore CMS application in a directory named `MyOrchardCoreApp`.
+This command creates a new OrchardCore CMS application in a directory named `MyOrchardCoreApp`.
 
-2. **Navigate to the project directory**:
+Now navigate to the project directory:
 
 ```bash
 cd MyOrchardCoreApp
 ```
 
-## Step 4: Run the OrchardCore application
+### Run the OrchardCore application
 
-1. **Build the application**: Compile the application using the following command:
+Build the application: 
 
 ```bash
 dotnet build
 ```
 
-The output will look like:
+The output should look like:
 
 ```output
 MSBuild version 17.8.27+3ab07f0cf for .NET
@@ -103,14 +105,22 @@ Build succeeded.
 
 Time Elapsed 00:00:38.05
 ```
-2. **Run the application**: Start the application with:
+Run the application:
 
 ```bash
 dotnet run --urls http://0.0.0.0:8080
 ```
 
-3. **Access the application**: Open a web browser and navigate to `http://[instance IP]:8080` to see your OrchardCore application in action, where `[instance IP]` is the public IP of your Azure Cobalt instance.
+Access the application:
 
-4. **Configure the application as a blog** In the resulting configuration page, 
+* In your browser, navigate to `http://[instance IP]:8080` to see your OrchardCore application in action. 
+
+* Replace `[instance IP]` with your VM’s public IP address. You can find it in the Azure portal under the **Networking** tab of your virtual machine.
+
+Configure the application: 
+
+* On the setup screen, choose the Blog recipe and complete the admin credentials and database configuration to finish setup.
+
+### Summary and next steps
 
 You have successfully created and run a basic OrchardCore CMS application. In the next sections, you will learn how to integrate a C shared library into your .NET application and explore performance optimizations for Arm architecture.

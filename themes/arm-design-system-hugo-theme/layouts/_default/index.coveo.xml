@@ -173,7 +173,7 @@
         {{- end -}}  
 
         {{- if and (.File) (in .File.Path "learning-paths") -}}
-        <document_id>
+        <foldingcollection>
         {{- if .IsSection -}}
         {{- with .Title -}}
             {{ . }}
@@ -187,7 +187,7 @@
             Unknown Parent Title
         {{- end -}}
         {{- end -}}
-        </document_id>
+        </foldingcollection>
         <parentitem>1</parentitem>
         <itemid>{{.Params.weight -}}</itemid>
         {{- end -}}

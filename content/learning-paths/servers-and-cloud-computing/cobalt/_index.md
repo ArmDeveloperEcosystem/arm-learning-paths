@@ -1,18 +1,18 @@
 ---
-title: Create an Azure Cobalt 100 VM
+title: Deploy a Cobalt 100 Virtual Machine on Azure
 
 minutes_to_complete: 10
 
-who_is_this_for: This is an introductory topic for developers and DevOps engineers who need an Arm-based virtual machine on Azure and want to expose an application port to the internet.
+who_is_this_for: This is an introductory topic for developers and DevOps engineers who want to deploy an Arm-based virtual machine on Azure and expose an application port to the internet.
 
 learning_objectives:
-    - Deploy an Arm-based Cobalt 100 virtual machine (VM) on Microsoft Azure.
-    - Connect to the Cobalt 100 VM using SSH.
-    - Open an inbound TCP port in the associated Network Security Group (NSG).
-    - Verify external connectivity to the newly opened port.
+    - Deploy an Arm-based Cobalt 100 virtual machine (VM) on Microsoft Azure
+    - Connect to the Cobalt 100 VM using SSH
+    - Configure an inbound TCP port in the associated Network Security Group (NSG)
+    - Verify external connectivity to the newly-opened port
 
 prerequisites:
-    - A Microsoft Azure subscription with permission to create resources
+    - A Microsoft Azure subscription with permissions to create virtual machines and networking resources
     - Basic familiarity with SSH
 
 author: Joe Stech
