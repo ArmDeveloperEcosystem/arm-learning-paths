@@ -1,5 +1,5 @@
 ---
-title: Configure and run an architecture-agnostic OrchardCore app on Arm and x86 using .NET AnyCPU
+title: Configure and run an OrchardCore app 
 weight: 4
 
 ### FIXED, DO NOT MODIFY

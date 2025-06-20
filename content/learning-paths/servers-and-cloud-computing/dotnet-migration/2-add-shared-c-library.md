@@ -108,7 +108,9 @@ Hello from the C library!
 
 ## Compiling for Arm
 
-If you are compiling for Arm directly on Azure Cobalt, the compiler understands what default processor optimizations it should use, and you can compile as done above. However, if you are cross-compiling in your build pipeline, you should specify `-mcpu=neoverse-n2 -O3` when running the cross-compiler:
+If you are compiling for Arm directly on Azure Cobalt, the compiler understands the default processor optimizations it should use, and you can compile in the same way as above. 
+
+However, if you are cross-compiling in your build pipeline, you should specify `-mcpu=neoverse-n2 -O3` when running the cross-compiler:
 
 ```bash
 aarch64-linux-gnu-gcc -mcpu=neoverse-n2 -O3 -shared -o libmylib.so -fPIC mylib.c
