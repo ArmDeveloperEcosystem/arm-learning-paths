@@ -1,12 +1,12 @@
 ---
-title: Use TF-A extra build options to build cpu_ops into images
+title: Use Trusted Firmware-A build options to include cpu_ops support
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Build TF-A with CPU Operations Support
+## Build TF-A with cpu_ops support
 
 Some Arm FVPs require CPU-specific initialization routines to boot properly. These routines are part of the TF-A `cpu_ops` framework.
 

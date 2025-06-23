@@ -1,17 +1,16 @@
 ---
-title: Getting started with Linux debugging on Arm Virtual Platforms 
+title: Debug Trusted Firmware-A and Linux kernel on Arm FVP with Arm Development Studio 
 
 minutes_to_complete: 180
 
 who_is_this_for: This topic is for developers who want to run Linux on Arm Fixed Virtual Platforms (FVPs) and debug both Trusted Firmware-A and the Linux Kernel using Arm Development Studio.
 
 learning_objectives:
-    - Run a Linux software stack using Arm Fixed Virtual Platforms.
-    - Debug the firmware and Linux kernel using Arm Development Studio.
-
+    - Boot and run a full Linux software stack on an Arm Fixed Virtual Platform (FVP).
+    - Debug Trusted Firmware-A and the Linux kernel using Arm Development Studio.
 prerequisites:
-    - A Linux computer with Arm Development Studio installed (works only on x86-64).
-    - Basic knowledge of Assembly and C.
+    - A Linux-based x86-64 host computer with Arm Development Studio installed.
+    - Basic understanding of Assembly and C programming.
    
 
 author: Qixiang Xu
