@@ -27,4 +27,6 @@ To create the second system, follow the previous lesson's c4a install instructio
 
 ![](images/launch_c4/5.png)
 
+{{% notice Note %}} Don't forget to set the disk size for this c4 to 1000GB under the "OS and Storage" tab like you did for the c4a.{{% /notice %}}
+
 After the c4 instance starts up, you are ready to continue to the next section, where you'll install the benchmarking software.
