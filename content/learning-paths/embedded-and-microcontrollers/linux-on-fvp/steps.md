@@ -22,7 +22,7 @@ lib/cpus/aarch64/cortex_a55.S
 lib/cpus/aarch64/cortex_a53.S
 ```
 
-## Why you need this
+## Why do I need cpu_ops?
 
 If the firmware is built without proper cpu_ops, you’ll hit an assertion failure like:
 

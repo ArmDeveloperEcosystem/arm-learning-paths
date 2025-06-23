@@ -1,5 +1,5 @@
 ---
-title: Run Software Stack
+title: Run the Linux Software Stack on an FVP
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -7,11 +7,11 @@ layout: learningpathall
 ---
 
 
-## Run the Linux Software Stack on an FVP
+## Run the Linux software stack on an FVP
 
 Once you've built the Linux stack with the correct configuration, you're ready to run it on an Arm CPU Fixed Virtual Platform (FVP).
 
-### Step 1: Verify the Build Output
+### Verify the build output
 
 After building, check the output directory to make sure the expected files were generated:
 
@@ -35,7 +35,7 @@ output/aemfvp-a/aemfvp-a/
 └── uefi.bin -> ../components/aemfvp-a/uefi.bin
 ```
 
-### Step 2: Run the Software Stack
+### Run the software stack
 
 To launch the software stack on the FVP, use a command like the following:
 ```bash

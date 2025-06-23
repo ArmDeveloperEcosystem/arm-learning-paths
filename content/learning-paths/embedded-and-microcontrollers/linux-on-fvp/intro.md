@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-Arm Fixed Virtual Platforms (FVPs) are fast, functional simulation models of Arm hardware. They let you develop, test, and debug full software stacks—including firmware, bootloaders, and operating systems—without needing access to physical Arm silicon. FVPs replicate Arm CPU behavior, memory, and peripherals using fast binary translation.
+Arm Fixed Virtual Platforms (FVPs) are fast, functional simulation models of Arm hardware. They let you develop, test, and debug full software stacks - including firmware, bootloaders, and operating systems - without needing access to physical Arm silicon. FVPs replicate Arm CPU behavior, memory, and peripherals using fast binary translation.
 
 ### Why use FVPs?
 FVPs are ideal for early software development and system debugging. Developers can use them to do the following:
@@ -29,7 +29,7 @@ Available categories include:
 A popular model is the AEMv8-A Base Platform RevC, which simulates generic Armv8.7-A and Armv9-A CPUs and is fully supported by Arm's open-source [reference software stack](https://gitlab.arm.com/arm-reference-solutions/arm-reference-solutions-docs/-/blob/master/docs/aemfvp-a/user-guide.rst).
 
 ### CPU-Specific Arm-based FVPs
-Some FVPs target specific CPU implementations and include fixed core counts. These are known as **CPU FVPs**.
+Some FVPs target specific CPU implementations and include fixed core counts. These are known as CPU FVPs.
 
 Here are some examples:
 - FVP_Base_Cortex-A55x4

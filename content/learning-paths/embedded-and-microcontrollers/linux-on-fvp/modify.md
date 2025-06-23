@@ -23,7 +23,7 @@ vim linux/arch/arm64/boot/dts/arm/fvp-base-revc.dts
 - `iommu@2b400000`
 
 {{% notice warning %}}
-If you skip this step, you’ll might get an error like:
+If you skip this step, you might get an error like:
 
 ```output
 Kernel panic - not syncing: Attempted to kill init! exitcode=0x0000000b
@@ -43,16 +43,16 @@ Example output:
 pctl.CPU-affinities=0.0.0.0, 0.0.1.0, 0.0.2.0, 0.0.3.0
 ```
 
-2.	Convert each to hex for the reg field:
+2.	Convert each to hex for the `reg` field:
 
 ```output
 0x0, 0x0100, 0x0200, 0x0300
 ```
 
-3.	Update the CPU nodes in your device tree file to use these reg values.
+3.	Update the CPU nodes in your device tree file to use these `reg` values.
 
-{{% notice tip %}}
-To avoid boot errors such as psci: failed to boot CPUx (-22), make sure every cpu@xxx entry matches the FVP layout.
+{{% notice Tip %}}
+To avoid boot errors such as `psci: failed to boot CPUx (-22)`, make sure every cpu@xxx entry matches the FVP layout.
 {{% /notice %}}
 
 ### Rebuild Linux
