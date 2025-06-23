@@ -34,7 +34,11 @@
     <coveo:metadata>
         <contenttype>Learning Path</contenttype>
         <title>
-            {{-  .Params.title -}}
+            {{- if and (.File) (in .File.Path "install-guides") -}}
+                {{ .Params.title}} - Install Guide
+            {{- else -}}
+                {{-  .Params.title -}}
+            {{- end -}}
         </title>
         <description>
         {{- if and (.File) (in .File.Path "learning-paths") -}}
