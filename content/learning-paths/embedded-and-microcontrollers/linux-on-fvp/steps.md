@@ -8,19 +8,18 @@ layout: learningpathall
 
 ## Build TF-A with cpu_ops support
 
-Some Arm FVPs require CPU-specific initialization routines to boot properly. These routines are part of the TF-A `cpu_ops` framework.
+Some Arm Fixed Virtual Platforms (FVPs) require CPU-specific initialization routines to boot Linux successfully. These routines are provided by the Trusted Firmware-A `cpu_ops` framework.
 
-### What are cpu_ops?
+## What are cpu_ops?
 The `cpu_ops` framework in Trusted Firmware-A contains functions to:
 - Handle CPU resets
 - Manage power states
 - Apply errata workarounds
 
-Each CPU type has its own implementation, defined in files like:
+Each CPU type has its own implementation, defined in files such as:
 ```output
 lib/cpus/aarch64/cortex_a55.S
 lib/cpus/aarch64/cortex_a53.S
-... etc.
 ```
 
 ## Why you need this
@@ -33,11 +32,11 @@ ASSERT: File lib/cpus/aarch64/cpu_helpers.S Line 00035
 
 This means the required CPU operation routines are missing from the build.
 
-## Step-by-Step: Add TF-A Build Flags
+## Add TF-A build flags
 
 To include the correct `cpu_ops`, you need to set TF-A build options depending on the CPU.
 
-### Example: A55 CPU FVP
+### A55 CPU FVP
 
 Add the following line to your TF-A build script:
 
@@ -45,7 +44,7 @@ Add the following line to your TF-A build script:
 ARM_TF_BUILD_FLAGS="$ARM_TF_BUILD_FLAGS HW_ASSISTED_COHERENCY=1 USE_COHERENT_MEM=0"
 ```
 
-### Example: A78 CPU FVP
+### A78 CPU FVP
 ```output
 ARM_TF_BUILD_FLAGS="$ARM_TF_BUILD_FLAGS HW_ASSISTED_COHERENCY=1 USE_COHERENT_MEM=0 CTX_INCLUDE_AARCH32_REGS=0"
 ```
@@ -53,7 +52,7 @@ ARM_TF_BUILD_FLAGS="$ARM_TF_BUILD_FLAGS HW_ASSISTED_COHERENCY=1 USE_COHERENT_MEM
 USE_COHERENT_MEM=1 cannot be used with HW_ASSISTED_COHERENCY=1.
 {{% /notice %}}
 
-## Rebuild and Package
+## Rebuild and package
 
 Run the following commands to rebuild TF-A and integrate it into the BusyBox image:
 ```bash
@@ -61,3 +60,4 @@ Run the following commands to rebuild TF-A and integrate it into the BusyBox ima
 ./build-scripts/build-arm-tf.sh -p aemfvp-a -f busybox build
 ./build-scripts/aemfvp-a/build-test-busybox.sh -p aemfvp-a package
 ```
+Once the build completes, your firmware will include the correct CPU operation routines, allowing Linux to boot correctly on the target FVP.
