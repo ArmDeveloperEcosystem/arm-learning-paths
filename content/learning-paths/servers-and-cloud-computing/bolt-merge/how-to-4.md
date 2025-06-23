@@ -10,6 +10,7 @@ layout: learningpathall
 If system libraries like `/usr/lib/libssl.so` are stripped, rebuild OpenSSL from source with relocations:
 
 ```bash
+cd $HOME
 git clone https://github.com/openssl/openssl.git
 cd openssl
 ./config -O2 -Wl,--emit-relocs --prefix=$HOME/bolt-libs/openssl
@@ -17,7 +18,7 @@ make -j$(nproc)
 make install
 ```
 
-### BOLT-Instrument libssl.so.3
+### Instrument libssl
 
 Use `llvm-bolt` to instrument `libssl.so.3`:
 
@@ -33,10 +34,9 @@ llvm-bolt $HOME/bolt-libs/openssl/lib/libssl.so.3 \
 
 Then launch MySQL using the **instrumented shared library** and run a **read+write** sysbench test to populate the profile:
 
-### Optimize 'libssl.so' Using Its Profile
+### Optimize libssl using the profile
 
 After running the read+write test, ensure `libssl-readwrite.fdata` is populated.
-
 
 Run BOLT on the uninstrumented `libssl.so` with the collected read-write profile:
 
@@ -53,7 +53,7 @@ llvm-bolt $HOME/bolt-libs/openssl/lib/libssl.so.3 \
   --print-profile-stats
 ```
 
-### Replace the Library at Runtime
+### Replace the library at runtime
 
 Copy the optimized version over the original and export the path:
 
@@ -64,7 +64,7 @@ export LD_LIBRARY_PATH=$HOME/bolt-libs/openssl/lib
 
 This ensures MySQL will dynamically load the optimized `libssl.so`.
 
-### Run Final Workload and Validate Performance
+### Run the final workload and validate performance
 
 Start the BOLT-optimized MySQL binary and link it against the optimized `libssl.so`. Run the combined workload:
 
@@ -86,7 +86,7 @@ taskset -c 7 sysbench \
 
 In the next step, you'll optimize an additional critical external library (`libcrypto.so`) using BOLT, following a similar process as `libssl.so`. Afterward, you'll interpret performance results to validate and compare optimizations across baseline and merged scenarios.
 
-### BOLT optimization for 'libcrypto.so'
+### BOLT optimization for libcrypto
 
 Follow these steps to instrument and optimize `libcrypto.so`:
 

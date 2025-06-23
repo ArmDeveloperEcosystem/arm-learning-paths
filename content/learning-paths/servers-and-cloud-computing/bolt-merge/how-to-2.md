@@ -18,7 +18,8 @@ Install the required dependencies:
 
 ```bash
 sudo apt update
-sudo apt install -y build-essential cmake libncurses5-dev libssl-dev libboost-all-dev bison pkg-config libaio-dev libtirpc-dev git
+sudo apt install -y build-essential cmake libncurses5-dev libssl-dev libboost-all-dev \ 
+                  bison pkg-config libaio-dev libtirpc-dev git ninja-build liblz4-dev
 ```
 
 Download the MySQL source code. You can change to another version in the `checkout` command below if needed. 
@@ -26,23 +27,23 @@ Download the MySQL source code. You can change to another version in the `checko
 ```bash
 git clone https://github.com/mysql/mysql-server.git
 cd mysql-server
-git checkout mysql-8.4.5
+git checkout mysql-8.0.37
 ```
 
 Configure the build for debug:
 
 ```bash
 mkdir build && cd build
-cmake ..  -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWITH_DEBUG=1 -DCMAKE_C_FLAGS="-fno-omit-frame-pointer" \
-  -DCMAKE_CXX_FLAGS="-fno-omit-frame-pointer" -DCMAKE_POSITION_INDEPENDENT_CODE=OFF \
-  -DCMAKE_EXE_LINKER_FLAGS="-Wl,--emit-relocs" \
-  -DCMAKE_EXE_LINKER_FLAGS="-no-pie"
+cmake .. -DCMAKE_C_FLAGS="-O3 -mcpu=neoverse-n2 -Wno-enum-constexpr-conversion -fno-reorder-blocks-and-partition" \
+   -DCMAKE_CXX_FLAGS="-O3 -mcpu=neoverse-n2 -Wno-enum-constexpr-conversion -fno-reorder-blocks-and-partition" \
+   -DCMAKE_CXX_LINK_FLAGS="-Wl,--emit-relocs" -DCMAKE_C_LINK_FLAGS="-Wl,--emit-relocs" -G Ninja \
+   -DWITH_BOOST=$HOME/boost -DDOWNLOAD_BOOST=On -DWITH_ZLIB=bundled -DWITH_LZ4=system -DWITH_SSL=system
 ```
 
-Build mysqld:
+Build MySQL:
 
 ```bash
-make -j$(nproc)
+ninja
 ```
 
 After the build completes, the `mysqld` binary is located at `$HOME/mysql-server/build/runtime_output_directory/mysqld`
@@ -54,10 +55,15 @@ You can run `mysqld` directly from the build directory as shown, or run `make in
 After building mysqld, install MySQL server and client utilities system-wide:
 
 ```bash
-sudo make install
+sudo ninja install
 ```
 
 This will make the `mysql` client and other utilities available in your PATH.
+
+```bash
+echo 'export PATH="$PATH:/usr/local/mysql/bin"' >> ~/.bashrc
+source ~/.bashrc
+```
 
 Ensure the binary is unstripped and includes debug symbols for BOLT instrumentation.
 
@@ -125,6 +131,8 @@ taskset -c 6 $HOME/mysql-server/build/runtime_output_directory/mysqld.instrument
 
 Adjust `--datadir`, `--socket`, and `--port` as needed for your environment. Make sure the server is running and accessible before proceeding.
 
+With the database running, open a second terminal to run the client commands. 
+
 ## Install sysbench
 
 You will need sysbench to generate workloads for MySQL. On most Arm Linux distributions, you can install it using your package manager:
@@ -156,6 +164,22 @@ EXIT;
 
 ## Run the instrumented binary under a feature-specific workload
 
+Run `sysbench` with the `prepare` option:
+
+```bash
+sysbench \
+  --db-driver=mysql \
+  --mysql-host=127.0.0.1 \
+  --mysql-db=bench \
+  --mysql-user=bench \
+  --mysql-password=bench \
+  --mysql-port=3306 \
+  --tables=8 \
+  --table-size=10000 \
+  --threads=1 \
+  /usr/share/sysbench/oltp_read_only.lua prepare
+```
+
 Use a workload generator to stress the binary in a feature-specific way. For example, to simulate **read-only traffic** with sysbench:
 
 ```bash
@@ -175,7 +199,6 @@ taskset -c 7 sysbench \
 {{% notice Note %}}
 On an 8-core system, cores are numbered 0-7. Adjust the `taskset -c` values as needed for your system. Avoid using the same core for both mysqld and sysbench to reduce contention.
 {{% /notice %}} 
-
 
 The `.fdata` file defined in `--instrumentation-file` will be populated with runtime execution data.
 

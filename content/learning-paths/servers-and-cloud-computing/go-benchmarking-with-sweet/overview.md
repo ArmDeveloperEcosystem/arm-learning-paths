@@ -6,9 +6,9 @@ weight: 10
 layout: learningpathall
 ---
 
-# Go Benchmarking Learning Path Overview
+# Go Benchmarking Overview
 
-In this module, you'll learn how to measure, collect, and compare Go performance data across different CPU architectures. This knowledge is essential for developers and system architects who need to make informed decisions about infrastructure choices for their Go applications.
+In this section, you will learn how to measure, collect, and compare Go performance data across different CPU architectures. This knowledge is essential for developers and system architects who need to make informed decisions about infrastructure choices for their Go applications.
 
 You'll gain hands-on experience with:
 
@@ -31,18 +31,4 @@ Arm-based c4a-standard-4 instances and Intel-based c4-standard-8 instances both 
 {{% /notice %}}   
 
 
-## Prerequisites
 
-Before starting this learning path, you should have:
-- A Google Cloud Platform account with permissions to create VMs
-- Basic familiarity with Linux command line
-- Basic understanding of what benchmarking is and why it's useful
-
-## What You'll Accomplish
-
-When you are finished running through this learning path, you'll have:
-
-1. Brought up Arm and x86 instances of GCP-based VMs
-2. Installed Go, benchmarks, benchstat, and sweet on the two VMs
-3. Used sweet and benchstat to compare performance of Go applications on the two VMs
-4. Extrapolated the knowledge to create Go Benchmarks for your own workloads and systems

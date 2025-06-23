@@ -6,8 +6,6 @@ weight: 52
 layout: learningpathall
 ---
 
-## Section Overview
-
 You've successfully run and downloaded the benchmark results from both your Arm-based and x86-based VMs. In this section, you'll compare them to each other using the benchstat tool.
 
 
@@ -27,39 +25,36 @@ The file contains the results of the `markdown` benchmark run on the Arm-based c
 
 To compare the results, you'll use `benchstat` to analyze the two result files you downloaded. Since all the prerequisites are already installed on the `c4` and `c4a` instances, benchstat will be run from one of those instances.
 
-1. **Connect to VM:** As demonstrated in the previous chapter, SSH into the `c4a` instance.
 
-2. **Create working directory:** Make a temporary benchstat directory to hold the results files, and cd into it:
+1. **Create working directory:** Make a temporary benchstat directory to hold the results files on either the c4a or c4 instance, and change directory into it:
 
    ```bash
    mkdir benchstat_results
    cd benchstat_results
    ```
 
-3. **Upload result files:** Click the `UPLOAD FILE` button in the GCP console, and upload the `c4a.results` AND `c4.results` files you downloaded earlier. (This uploads them to your home directory, not to the current directory.)
+2. **Upload result files:** Click the `UPLOAD FILE` button in the GCP console, and upload the `c4a.results` AND `c4.results` files you downloaded earlier. (This uploads them to your home directory, not to the current directory.)
 
    ![](images/run_manually/16.png)
 
-4. **Verify upload:** You'll know it worked correctly via the confirmation dialog in your terminal:
+3. **Verify upload:** You'll know it worked correctly via the confirmation dialog in your terminal:
 
    ![](images/run_manually/17.png)
 
-5. **Move files to working directory:** Move the results files to the `benchstat_results` directory, and confirm their presence:
+4. **Move files to working directory:** Move the results files to the `benchstat_results` directory, and confirm their presence:
 
    ```bash
    mv ~/c4a.results ~/c4.results .
    ls -al
    ```
 
-   You should see both files in the benchstat_results directory:
+   You should see both files in the `benchstat_results` directory:
 
    ```bash
-   # Example output:
-   c4a-48:~/benchstat_results$ ls
    c4.results  c4a.results
    ```
 
-6. **Run benchstat:** Now you can run `benchstat` to compare the two results files:
+5. **Run benchstat:** Now you can run `benchstat` to compare the two results files:
 
    ```bash
    export GOPATH=$HOME/go
@@ -68,7 +63,7 @@ To compare the results, you'll use `benchstat` to analyze the two result files y
    benchstat c4a.results c4.results > c4a_vs_c4.txt
    ```
 
-7. **View comparison results:** Run the `cat` command to view the results:
+6. **View comparison results:** Run the `cat` command to view the results:
 
    ```bash
    cat c4a_vs_c4.txt
@@ -77,8 +72,6 @@ To compare the results, you'll use `benchstat` to analyze the two result files y
    You should see output similar to the following:
 
    ```output
-   # Example output:
-   geremy_cohen_arm_com@c4a-48:~/benchstat_results$ cat c4a_vs_c4.txt 
                           │ c4a.results │     c4.results     │
                           │   sec/op    │   sec/op     vs base   │
    MarkdownRenderXHTML-48   143.9m ± 1%
@@ -125,4 +118,4 @@ To compare the results, you'll use `benchstat` to analyze the two result files y
 
 At this point, you can download the `c4a_vs_c4.txt` for further analysis or reporting. You can also run the same or different benchmarks with the same, or different combinations of VMs, and continue comparing results using `benchstat`.
 
-Continuing on to the next section, you will learn how to automate and gain enhanced visuals with sweet and benchstat.
+In the next section, you will learn how to automate and gain enhanced visuals with sweet and benchstat.

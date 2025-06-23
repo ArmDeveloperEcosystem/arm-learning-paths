@@ -24,7 +24,7 @@ prerequisites:
 author: Bright Edudzi Gershon Kordorwu
 ### Tags
 skilllevels: Introductory
-subjects: tinyML
+subjects: ML
 armips:
     - Cortex-M
    
