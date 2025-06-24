@@ -129,7 +129,7 @@ Which programming languages work on Arm servers? - Nearly all of them.
 
 | Languages | Learning Paths | Other Content (Blogs/Videos) |
 |-----------|----------------|----------------------------------------|
-| C/C++ | [Migrating C/C++ applications](https://learn.arm.com/learning-paths/servers-and-cloud-computing/migration/c-c++/) | [What is new in LLVM 18?](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/p1-whats-new-in-llvm-18) |
+| C/C++ | [Migrating C/C++ applications](https://learn.arm.com/learning-paths/servers-and-cloud-computing/migration/c/) | [What is new in LLVM 18?](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/p1-whats-new-in-llvm-18) |
 | Rust | [Rust Install Guide](https://learn.arm.com/install-guides/rust/) | [Neon Intrinsics in Rust](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/rust-neon-intrinsics) |
 | Java | [Java Install Guide](https://learn.arm.com/install-guides/java/) | [Improving Java performance on Neoverse N1 systems](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/java-performance-on-neoverse-n1) |
 |      | [Migrating Java applications](https://learn.arm.com/learning-paths/servers-and-cloud-computing/migration/java/) | [Java Vector API on AArch64](https://community.arm.com/arm-community-blogs/b/high-performance-computing-blog/posts/java-vector-api-on-aarch64) |
