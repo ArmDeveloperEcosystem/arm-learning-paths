@@ -100,5 +100,15 @@ If you have [Corellium](https://www.corellium.com/) account, you can
 2. Use the [Clone](https://support.corellium.com/features/snapshots) function to duplicate the environment.
 3. Optionally, you may optionally rename the device to avh* for easy device recognition by changing the setting in the `/etc/hostname` file. 
 
+## Run Zenoh in Multi-Node Environment
 
-With your multi-node environment in place, you’re now ready to run and test Zenoh communication flows across distributed edge devices.
+You’re now ready to run and test Zenoh communication flows across distributed edge devices.
+
+The source of the examples written in Rust will be provided, and both are interoperable.  The 
+Rust binaries are already available under: `$ZENOH_LOC/target/release/examples/` directory. 
+
+The following sections illustrate the procedures to run the Zenoh examples so as to demonstrate the primary capabilities of Zenoh
+1. Basic Pub/Sub – for real-time message distribution
+2. Query and Storage – to persist and retrieving historical data
+3. Queryable – to enable on-demand remote computation
+4. Dynamic Queryable with Computation

@@ -1,5 +1,5 @@
 ---
-title: Scalable Industrial Networking for Raspberry Pi Robotics with Zenoh
+title: Scalable Networking for Industrial and Robotics with Zenoh on Raspberry Pi
 
 minutes_to_complete: 45
 
