@@ -13,7 +13,7 @@ Once you've built the Linux stack with the correct configuration, you're ready t
 
 ### Verify the build output
 
-After building, check the output directory to make sure the expected files were generated:
+After building, check the output directory to make sure the expected files have been generated:
 
 ```bash
 tree output/aemfvp-a/aemfvp-a/
@@ -59,7 +59,7 @@ FVP_Base_Cortex-A55x4 \
 ```
 This will boot Trusted Firmware-A, UEFI/U-Boot, Linux, and BusyBox in sequence.
 
-### Step 3: Troubleshoot FVP Launch Issues
+### Troubleshoot FVP Launch Issues
 
 Different FVP models use different CPU instance names. If you see an error like:
 
@@ -86,7 +86,7 @@ Update your --data parameters accordingly:
 --data cluster0.subcluster0.cpu0.thread0=<SRC_PATH>/output/aemfvp-a/aemfvp-a/fvp-base-revc.dtb@0x83000000
 ```
 
-{{% notice tip %}}
+{{% notice Tip %}}
 Always confirm the CPU instance name when switching between different FVP models.
 {{% /notice %}}
 
@@ -94,4 +94,4 @@ Always confirm the CPU instance name when switching between different FVP models
 
 You can also run the FVP using its graphical user interface:
 
-![GUI #center](FVP.png)
+![GUI #center](FVP.png "View of the FVP GUI")

@@ -8,11 +8,13 @@ layout: learningpathall
 
 ## Ensure the device tree matches your FVP model
 
-To run Linux on Arm CPU FVPs, you need to adjust the device tree to match the hardware features of these platforms. This involves removing unsupported nodes - such as the System Memory Management Unit (SMMU) and Peripheral Component Interconnect (PCI) and ensuring that the CPU affinity values are set correctly.
+To run Linux on Arm CPU FVPs, you need to adjust the device tree to match the hardware features of these platforms. This involves removing unsupported nodes, such as the System Memory Management Unit (SMMU) and Peripheral Component Interconnect (PCI), and ensuring that the CPU affinity values are set correctly.
 
 ### Remove PCI and SMMU nodes
 
 CPU FVPs don't support PCI or SMMU. If you leave these nodes in the device tree, Linux will crash at boot with a kernel panic.
+
+So to workaround this, you need to remove PCI and SMMU nodes:
 
 1. Open the device tree file in a text editor:
 ```bash
@@ -22,8 +24,8 @@ vim linux/arch/arm64/boot/dts/arm/fvp-base-revc.dts
 - `pci@40000000`
 - `iommu@2b400000`
 
-{{% notice warning %}}
-If you skip this step, you might get an error like:
+{{% notice Warning %}}
+If you skip this step, you might encounter an error like:
 
 ```output
 Kernel panic - not syncing: Attempted to kill init! exitcode=0x0000000b
@@ -32,7 +34,7 @@ Kernel panic - not syncing: Attempted to kill init! exitcode=0x0000000b
 
 ### Set CPU affinity values
 
-Each FVP model uses specific CPU affinity values. If these don’t match what’s in the device tree, some CPU cores won’t boot.
+Each FVP model uses specific CPU affinity values. If these don’t match the values in the device tree, some of the CPU cores won’t boot.
 1.	Find the correct affinities:
 ```bash
 FVP_Base_Cortex-A55x4 -l | grep pctl.CPU-affinities
@@ -52,7 +54,7 @@ pctl.CPU-affinities=0.0.0.0, 0.0.1.0, 0.0.2.0, 0.0.3.0
 3.	Update the CPU nodes in your device tree file to use these `reg` values.
 
 {{% notice Tip %}}
-To avoid boot errors such as `psci: failed to boot CPUx (-22)`, make sure every cpu@xxx entry matches the FVP layout.
+To avoid boot errors such as `psci: failed to boot CPUx (-22)`, make sure every `cpu@xxx` entry matches the FVP layout.
 {{% /notice %}}
 
 ### Rebuild Linux

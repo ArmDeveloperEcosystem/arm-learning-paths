@@ -8,10 +8,11 @@ layout: learningpathall
 
 ## Build TF-A with cpu_ops support
 
-Some Arm Fixed Virtual Platforms (FVPs) require CPU-specific initialization routines to boot Linux successfully. These routines are provided by the Trusted Firmware-A `cpu_ops` framework.
+Some Arm Fixed Virtual Platforms (FVPs) require CPU-specific initialization routines to boot Linux successfully. The Trusted Firmware-A `cpu_ops` framework provides these routines.
 
 ## What are cpu_ops?
 The `cpu_ops` framework in Trusted Firmware-A contains functions to:
+
 - Handle CPU resets
 - Manage power states
 - Apply errata workarounds
@@ -30,13 +31,13 @@ If the firmware is built without proper cpu_ops, you’ll hit an assertion failu
 ASSERT: File lib/cpus/aarch64/cpu_helpers.S Line 00035
 ```
 
-This means the required CPU operation routines are missing from the build.
+This means that the required CPU operation routines are missing from the build.
 
-## Add TF-A build flags
+## How do I include the correct cpu_ops?
 
-To include the correct `cpu_ops`, you need to set TF-A build options depending on the CPU.
+To include the correct `cpu_ops`, you need to set TF-A build options depending on the CPU, using the build flags.
 
-### A55 CPU FVP
+### For the A55 CPU FVP
 
 Add the following line to your TF-A build script:
 
@@ -44,7 +45,7 @@ Add the following line to your TF-A build script:
 ARM_TF_BUILD_FLAGS="$ARM_TF_BUILD_FLAGS HW_ASSISTED_COHERENCY=1 USE_COHERENT_MEM=0"
 ```
 
-### A78 CPU FVP
+### For the A78 CPU FVP
 ```output
 ARM_TF_BUILD_FLAGS="$ARM_TF_BUILD_FLAGS HW_ASSISTED_COHERENCY=1 USE_COHERENT_MEM=0 CTX_INCLUDE_AARCH32_REGS=0"
 ```
