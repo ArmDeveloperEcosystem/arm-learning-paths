@@ -1,7 +1,7 @@
 ---
 title: Debug Trusted Firmware-A and Linux kernel on Arm FVP with Arm Development Studio 
 
-minutes_to_complete: 180
+minutes_to_complete: 60
 
 who_is_this_for: This topic is for developers who want to run Linux on Arm Fixed Virtual Platforms (FVPs) and debug both Trusted Firmware-A and the Linux kernel using Arm Development Studio.
 
