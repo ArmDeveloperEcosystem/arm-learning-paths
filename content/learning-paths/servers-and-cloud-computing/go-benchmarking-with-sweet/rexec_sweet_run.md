@@ -6,8 +6,6 @@ weight: 54
 layout: learningpathall
 ---
 
-## Section Overview
-
 With `rexec_sweet` installed, your benchmarking instances running, and your localhost authenticated with GCP, you'll now see how to run benchmarks in an automated fashion.
 
 ## Run an Automated Benchmark and Analysis
@@ -21,7 +19,6 @@ rexec_sweet
 2. **Select a benchmark:** The script will prompt you for the name of the benchmark you want to run. Press enter to run the default benchmark, which is `markdown` (this is the recommended benchmark to run the first time.)
 
 ```bash
-# Example output:
 Available benchmarks:
 1. biogo-igor
 2. biogo-krishna
@@ -36,10 +33,9 @@ Available benchmarks:
 Enter number (1-10) [default: markdown]:
 ```
 
-3. **Select instances:** The script will call into GCP to detect all running VMs.
+3. **Select instances:** The script will proceed and call into GCP to detect all running VMs. You should see the script output:
 
-```bash
-# Example output:
+```output
 Available instances:
 1. c4 (will be used as first instance)
 2. c4a (will be used as second instance)
@@ -53,10 +49,9 @@ Do you want to run the first two instances found with default install directorie
 
    - **Custom configuration:** If you are running more than two instances, and the script doesn't suggest the correct two to autorun, or you installed Go and Sweet to non-default folders, select "n" and press Enter. The script will then prompt you to select the instances and runtime paths.
 
-In this example, we'll manually select the instances and paths:
+In this example, we'll manually select the instances and paths as shown below:
 
-```bash
-# Example output:
+```output
 Available instances:
 1. c4 (will be used as first instance)
 2. c4a (will be used as second instance)
@@ -83,8 +78,7 @@ Upon entering instance names and paths for the VMs, the script will automaticall
    - Run `benchstat` to compare the results
    - Push the results to your local machine
 
-```bash
-# Example output:
+```output
 Running benchmarks on the selected instances...
 [c4a] [sweet] Work directory: /tmp/gosweet3216239593
 [c4] [sweet] Work directory: /tmp/gosweet2073316306...

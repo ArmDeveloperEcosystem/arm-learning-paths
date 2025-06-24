@@ -6,21 +6,19 @@ weight: 40
 layout: learningpathall
 ---
 
-## Section Overview
-
 In this section, you'll install Go, Sweet, and the Benchstat comparison tool on both VMs.
 
 ## Installation Script
 
-Sweet is a Go benchmarking tool that provides a standardized way to run performance tests across different systems. Benchstat is a companion tool that analyzes and compares benchmark results, helping you understand performance differences between systems. Together, these tools will allow us to accurately measure and compare Go performance on Arm and x86 architectures.
+Sweet is a Go benchmarking tool that provides a standardized way to run performance tests across different systems. Benchstat is a companion tool that analyzes and compares benchmark results, helping you understand performance differences between systems. Together, these tools will allow you to accurately measure and compare Go performance on Arm and x86 architectures.
 
 
 {{% notice Note %}}
-Subsequent steps in the learning path assume you are running this script (installing) from your home directory (`~`), resulting in the creation of a `~/benchmarks/sweet` final install path. If you decide to install elsewhere, adjust the path accordingly when prompted to run the benchmark logic later in the learning path.
+Subsequent steps in the learning path assume you are running this script (installing) from your home directory (`$HOME`), resulting in the creation of a `$HOME/benchmarks/sweet` final install path. If you decide to install elsewhere, you will need to adjust the path accordingly when prompted to run the benchmark logic later in the learning path.
 {{% /notice %}}
 
 
-Copy and paste this script to **both** of your GCP VMs.  
+Start by copying and pasting the script below on **both** of your GCP VMs. This script checks the architecture of your running VM, installs the required Go package on your VM. It then installs sweet, benchmarks, and the benchstat tools.
 
 **You don't need to run it after pasting**, just paste it into your home directory and press enter to install all needed dependencies: 
 
@@ -71,7 +69,7 @@ go install golang.org/x/perf/cmd/benchstat@latest
 
 git clone https://github.com/golang/benchmarks
 cd benchmarks/sweet
-sweet get -force # to get assets
+sweet get # to get assets
 
 # Create a configuration file
     
@@ -92,18 +90,39 @@ chmod 755 install_go_and_sweet.sh
 
 ```
 
+The end of the output should look like:
+
+```output
+Sweet v0.3.0: Go Benchmarking Suite
+
+Retrieves assets for benchmarks from GCS.
+
+Usage: sweet get [flags]
+  -cache string
+        cache location for assets (default "/home/pareena_verma_arm_com/.cache/go-sweet")
+  -clean
+        delete all cached assets before installing new ones
+  -copy string
+        location to extract assets into, useful for development
+  -version string
+        the version to download assets for (default "v0.3.0")
+```
 
 
 ## Verify Installation
 
-To test that everything is installed correctly, run the following command on each VM after the script completes:
+To test that everything is installed correctly, set the environment variables shown below on each VM:
 
 ```bash
-# Run the benchmarks
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN:/usr/local/go/bin
+```
+Now run the `markdown` benchmark with `sweet` on both VMs as shown:
+
+```bash
 cd benchmarks/sweet
+sweet get
 sweet run -count 10 -run="markdown" config.toml # run one, 1X
 ```
 

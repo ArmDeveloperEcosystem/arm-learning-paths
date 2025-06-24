@@ -6,8 +6,6 @@ weight: 53
 layout: learningpathall
 ---
 
-## Section Overview
-
 In the last section, you learned how to run benchmarks and benchstat manually. Now you'll learn how to run them automatically, with enhanced visualization of the results.
 
 ## Introducing rexec_sweet.py
@@ -22,7 +20,7 @@ The only dependency you are responsible for satisfying before the script runs is
 
 ## Setting up rexec_sweet
 
-1. **Create a working directory:** On your local machine, open a terminal, then create and cd into a directory to store the `rexec_sweet.py` script and related files:
+1. **Create a working directory:** On your local machine, open a terminal, then create and change into a directory to store the `rexec_sweet.py` script and related files:
 
    ```bash
    mkdir rexec_sweet
@@ -42,12 +40,9 @@ The only dependency you are responsible for satisfying before the script runs is
    ./install.sh
    ```
 
-   If the install.sh script detects that you already have dependencies installed, it may ask you if you wish to reinstall them with the following prompt:
+   If the install.sh script detects that you already have dependencies installed, it may ask you if you wish to reinstall them with the following prompt as shown:
 
-   ```bash
-   # Example output:
-   $ ./install.sh
-   ...
+   ```output
    pyenv: /Users/gercoh01/.pyenv/versions/3.9.22 already exists
    continue with installation? (y/N)
    ```
