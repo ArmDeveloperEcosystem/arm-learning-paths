@@ -6,26 +6,26 @@ weight: 2
 layout: learningpathall
 ---
 
-### What are Arm FVPs, and what can they do?
+## What are Arm Fixed Virtual Platforms (FVPs)?
 
 Arm Fixed Virtual Platforms (FVPs) are fast, functional simulation models of Arm hardware. They give you the ability to develop, test, and debug full software stacks. This includes firmware, bootloaders, and operating systems - all without the need for access to physical Arm silicon. FVPs replicate Arm CPU behavior, memory, and peripherals using fast binary translation.
 
-### Why use FVPs?
+## Why use FVPs?
 FVPs are ideal for early software development and system debugging. 
 
-Developers can use them to do the following tasks:
+Developers can use FVPs to do the following tasks:
 
 - Prototype firmware and OS code before silicon is available
-- Debug complex boot sequences and kernel issue
+- Debug complex boot sequences and kernel issues
 - Simulate multi-core systems to analyze performance and thread scheduling
 
 FVPs provide a programmer's view of the hardware, making them ideal for the following:
 
 * System bring-up
 * Kernel porting
-* Low-level debug tasks.
+* Low-level debug tasks
 
-### How can I get access to the Arm FVPs?
+## How can I get access to the Arm FVPs?
 
 You can download prebuilt Armv8-A FVPs at no cost from the [Arm Ecosystem Models](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms#Downloads) page. 
 
@@ -35,9 +35,9 @@ Available categories include:
 - Infrastructure
 - IoT
 
-A popular model is the AEMv8-A Base Platform RevC, which simulates generic Armv8.7-A and Armv9-A CPUs and is fully supported by Arm's open-source [reference software stack](https://gitlab.arm.com/arm-reference-solutions/arm-reference-solutions-docs/-/blob/master/docs/aemfvp-a/user-guide.rst).
+A popular model is AEMv8-A Base Platform RevC, which simulates generic Armv8.7-A and Armv9-A CPUs and is fully supported by Arm's open-source [reference software stack](https://gitlab.arm.com/arm-reference-solutions/arm-reference-solutions-docs/-/blob/master/docs/aemfvp-a/user-guide.rst).
 
-### CPU-Specific Arm-based FVPs
+## CPU-specific Arm-based FVPs
 Some FVPs target specific CPU implementations and include fixed core counts. These are known as CPU FVPs.
 
 Examples include:
@@ -48,7 +48,7 @@ Examples include:
 
 To use these, request access via [support@arm.com](mailto:support@arm.com).
 
-### Set up your environment
+## Set up your environment
 This Learning Path uses the open-source Arm reference software stack, which includes the following:
 
 * Prebuilt Linux images

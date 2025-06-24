@@ -10,11 +10,11 @@ layout: learningpathall
 
 Once your software stack is running on the FVP, you can debug Trusted Firmware-A and the Linux kernel using Arm Development Studio (Arm DS).
 
-### Install Arm Development Studio
+## Install Arm Development Studio
 
 Download and install the latest version from the [Arm Development Studio download page](https://developer.arm.com/downloads/view/DS000B).
 
-DWARF 5 is enabled by default in GCC 11 and later. Arm DS v2022.2 or newer is recommended to support DWARF 5 debug information.
+DWARF 5 is enabled by default in GCC 11 and later. Arm DS v2022.2 or later is recommended to support DWARF 5 debug information.
 
 
 
@@ -24,9 +24,12 @@ Launch Arm DS:
 ```
 
 
-### Create a debug configuration
-1.	Open Arm DS, go to Run > Debug Configurations.
-2.	Select Generic Arm C/C++ Application and create a new configuration.
+## Create a debug configuration
+
+To create a debug configuration, follow these steps:
+
+1.	Open Arm DS, go to **Run** > **Debug Configurations**.
+2.	Select **Generic Arm C/C++ Application** and create a new configuration.
 3.	In the **Connection** tab:
     - Choose your FVP model (for example, Base_A55x4)
     - Enter model parameters:
@@ -50,7 +53,7 @@ Launch Arm DS:
 --data cluster0.cpu0=<SRC_PATH>/output/aemfvp-a/aemfvp-a/fvp-base-revc.dtb@0x83000000
 ```
 
-### Load debug symbols
+## Load debug symbols
 
 In the **Debugger** tab:
 - Select **Connect only to the target**.
@@ -64,7 +67,7 @@ add-symbol-file "~/arm/sw/cpufvp-a/linux/out/aemfvp-a/defconfig/vmlinux" EL2N:0
 
 Select **Apply** and then **Close**.
 
-### Start debugging
+## Start debugging
 
 1.	In the **Debug Control** view, double-click your new configuration.
 2.	Wait for the target to connect and the symbols to load.
@@ -86,4 +89,4 @@ Ensure your FVP instance is running and matches the model and parameters selecte
 
 After these steps, you can debug the software stack as shown in the following figure:
 
-![FVP running #center](Select_target.png "Debug configuration in GUI")
+![FVP running #center](Select_target.png "Debug interface in GUI")

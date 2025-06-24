@@ -16,11 +16,13 @@ CPU FVPs don't support PCI or SMMU. If you leave these nodes in the device tree,
 
 So to workaround this, you need to remove PCI and SMMU nodes:
 
-1. Open the device tree file in a text editor:
+Open the device tree file in a text editor:
+
 ```bash
 vim linux/arch/arm64/boot/dts/arm/fvp-base-revc.dts
 ```
-2. Remove the following nodes:
+Remove the following nodes:
+
 - `pci@40000000`
 - `iommu@2b400000`
 
@@ -35,7 +37,9 @@ Kernel panic - not syncing: Attempted to kill init! exitcode=0x0000000b
 ### Set CPU affinity values
 
 Each FVP model uses specific CPU affinity values. If these don’t match the values in the device tree, some of the CPU cores won’t boot.
-1.	Find the correct affinities:
+
+Find the correct affinities:
+
 ```bash
 FVP_Base_Cortex-A55x4 -l | grep pctl.CPU-affinities
 ```
@@ -45,13 +49,13 @@ Example output:
 pctl.CPU-affinities=0.0.0.0, 0.0.1.0, 0.0.2.0, 0.0.3.0
 ```
 
-2.	Convert each to hex for the `reg` field:
+Convert each to hex for the `reg` field:
 
 ```output
 0x0, 0x0100, 0x0200, 0x0300
 ```
 
-3.	Update the CPU nodes in your device tree file to use these `reg` values.
+Update the CPU nodes in your device tree file to use these `reg` values.
 
 {{% notice Tip %}}
 To avoid boot errors such as `psci: failed to boot CPUx (-22)`, make sure every `cpu@xxx` entry matches the FVP layout.
