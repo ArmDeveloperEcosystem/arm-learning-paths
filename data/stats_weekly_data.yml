@@ -6234,13 +6234,13 @@
     embedded-and-microcontrollers: 41
     install-guides: 101
     iot: 6
-    laptops-and-desktops: 37
+    laptops-and-desktops: 38
     mobile-graphics-and-gaming: 34
-    servers-and-cloud-computing: 120
-    total: 374
+    servers-and-cloud-computing: 124
+    total: 379
   contributions:
-    external: 95
-    internal: 500
+    external: 96
+    internal: 505
   github_engagement:
     num_forks: 30
     num_prs: 9
@@ -6286,9 +6286,8 @@
     han-yin: 1
     iago-calvo-lista: 1
     james-whitaker: 1
-    jason-andrews: 102
-    joana-cruz: 1
-    joe-stech: 4
+    jason-andrews: 103
+    joe-stech: 6
     johanna-skinnider: 2
     jonathan-davies: 2
     jose-emilio-munoz-lopez: 1
@@ -6296,7 +6295,7 @@
     julio-suarez: 6
     jun-he: 1
     kasper-mecklenburg: 1
-    kieran-hejmadi: 10
+    kieran-hejmadi: 11
     koki-mitsunami: 2
     konstantinos-margaritis: 8
     kristof-beyls: 1
@@ -6313,7 +6312,7 @@
     nobel-chowdary-mandepudi: 6
     odin-shen: 7
     owen-wu: 2
-    pareena-verma: 44
+    pareena-verma: 46
     paul-howard: 3
     peter-harris: 1
     pranay-bakre: 5
@@ -6343,15 +6342,15 @@
     automotive: 2
     cross-platform: 33
     embedded-and-microcontrollers: 41
-    install-guides: 101
+    install-guides: 102
     iot: 6
-    laptops-and-desktops: 37
+    laptops-and-desktops: 38
     mobile-graphics-and-gaming: 34
-    servers-and-cloud-computing: 120
-    total: 374
+    servers-and-cloud-computing: 124
+    total: 380
   contributions:
-    external: 95
-    internal: 500
+    external: 97
+    internal: 505
   github_engagement:
     num_forks: 30
     num_prs: 6
@@ -6397,9 +6396,8 @@
     han-yin: 1
     iago-calvo-lista: 1
     james-whitaker: 1
-    jason-andrews: 102
-    joana-cruz: 1
-    joe-stech: 4
+    jason-andrews: 103
+    joe-stech: 6
     johanna-skinnider: 2
     jonathan-davies: 2
     jose-emilio-munoz-lopez: 1
@@ -6407,7 +6405,7 @@
     julio-suarez: 6
     jun-he: 1
     kasper-mecklenburg: 1
-    kieran-hejmadi: 10
+    kieran-hejmadi: 12
     koki-mitsunami: 2
     konstantinos-margaritis: 8
     kristof-beyls: 1
@@ -6424,7 +6422,7 @@
     nobel-chowdary-mandepudi: 6
     odin-shen: 7
     owen-wu: 2
-    pareena-verma: 44
+    pareena-verma: 46
     paul-howard: 3
     peter-harris: 1
     pranay-bakre: 5

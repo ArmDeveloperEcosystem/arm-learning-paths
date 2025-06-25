@@ -1,9 +1,6 @@
 ---
-title: Accelerate Search Operations with SVE2 MATCH Instruction on Arm servers
+title: Accelerate search performance with SVE2 MATCH on Arm servers
 
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 20
 
@@ -11,13 +8,13 @@ who_is_this_for: This is an introductory topic for database developers, performa
 
 
 learning_objectives:
-  - Understand how SVE2 MATCH instructions work
-  - Implement search algorithms using scalar and  SVE2 implementations using the MATCH instruction
-  - Compare performance between different implementations
-  - Measure performance improvements on Graviton4 instances
+  - Understand the purpose and function of SVE2 MATCH instructions.
+  - Implement a search algorithm using both scalar and SVE2-based MATCH approaches.
+  - Benchmark and compare performance between scalar and vectorized implementations.
+  - Analyze speedups and efficiency gains on Arm Neoverse-based instances with SVE2.
+
 prerequisites:
-- An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate
-  cloud service provider.
+- Access to an [AWS Graviton4, Google Axion, or Azure Cobalt 100 virtual machine](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
 
 author: Pareena Verma
 

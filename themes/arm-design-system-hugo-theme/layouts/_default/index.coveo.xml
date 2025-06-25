@@ -3,6 +3,9 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:coveo="http://www.coveo.com/schemas/metadata">
   
+{{- $itemidcounter := 1 -}}
+
+
 
 {{- range where .Site.Pages "Params.sitemap_exclude" "ne" true -}}
   {{- $pathParts := split .RelPermalink "/" -}}
@@ -31,7 +34,11 @@
     <coveo:metadata>
         <contenttype>Learning Path</contenttype>
         <title>
-            {{-  .Params.title -}}
+            {{- if and (.File) (in .File.Path "install-guides") -}}
+                {{ .Params.title}} - Install Guide
+            {{- else -}}
+                {{-  .Params.title -}}
+            {{- end -}}
         </title>
         <description>
         {{- if and (.File) (in .File.Path "learning-paths") -}}
@@ -172,24 +179,28 @@
             {{ end }}
         {{- end -}}  
 
+
+
+
+
         {{- if and (.File) (in .File.Path "learning-paths") -}}
-        <document_id>
-        {{- if .IsSection -}}
-        {{- with .Title -}}
-            {{ . }}
-        {{- else -}}
-            Unknown Section Title
-        {{- end -}}
-        {{- else -}}
-        {{- with .Parent.Title -}}
-            {{ . }}
-        {{- else -}}
-            Unknown Parent Title
-        {{- end -}}
-        {{- end -}}
-        </document_id>
-        <parentitem>1</parentitem>
-        <itemid>{{.Params.weight -}}</itemid>
+
+
+            {{/* Ensure a unique ID for each learning path */}}
+            {{- $itemidcounter = add $itemidcounter 1 -}}
+
+
+
+            <foldingcollection>
+                {{- if .IsSection -}}{{ .Title }}
+                {{- else -}}{{ .Parent.Title }}
+                {{- end -}}
+            </foldingcollection>
+            <itemid>{{ md5 .RelPermalink }}</itemid>
+            {{- if and .Parent (not .IsSection) (not .Parent.IsPage) (or .Parent.IsSection) }}
+            <parentitem>{{ md5 .Parent.RelPermalink }}</parentitem>
+            {{- end -}}
+
         {{- end -}}
       </coveo:metadata>
     </url>
