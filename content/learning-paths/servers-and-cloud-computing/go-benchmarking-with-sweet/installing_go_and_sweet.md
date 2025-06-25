@@ -14,7 +14,7 @@ Sweet is a Go benchmarking tool that provides a standardized way to run performa
 
 
 {{% notice Note %}}
-Subsequent steps in the learning path assume you are running this script (installing) from your home directory (`$HOME`), resulting in the creation of a `$HOME/benchmarks/sweet` final install path. If you decide to install elsewhere, you will need to adjust the path accordingly when prompted to run the benchmark logic later in the learning path.
+Subsequent steps in the learning path assume you are running this script (installing) from your home directory (`$HOME`), resulting in the creation of a `$HOME/benchmarks/sweet` final install path. If you install elsewhere, you need to adjust the path accordingly when prompted to run the benchmark logic later in the Learning Path.
 {{% /notice %}}
 
 
@@ -25,7 +25,7 @@ Start by copying and pasting the script below on **both** of your GCP VMs. This 
 ```bash
 #!/usr/bin/env bash
 
-# Write the script to filesystem using a HEREDOC
+# Write the install script to filesystem using a HEREDOC
 cat <<'EOF' > install_go_and_sweet.sh
 
 sudo apt-get -y update
@@ -90,7 +90,9 @@ chmod 755 install_go_and_sweet.sh
 
 ```
 
-The end of the output should look like:
+## Expected output from `sweet get`
+
+When sweet get completes successfully, you’ll see output similar to:
 
 ```output
 Sweet v0.3.0: Go Benchmarking Suite

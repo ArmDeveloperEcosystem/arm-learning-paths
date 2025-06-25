@@ -1,5 +1,5 @@
 ---
-title: Launching a Google Axion Instance
+title: Launching a Google Axion instance
 weight: 20
 
 ### FIXED, DO NOT MODIFY

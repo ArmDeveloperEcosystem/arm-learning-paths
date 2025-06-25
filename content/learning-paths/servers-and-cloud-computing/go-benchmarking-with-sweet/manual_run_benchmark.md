@@ -8,8 +8,8 @@ layout: learningpathall
 
 In this section, you'll download the results of the benchmark you ran manually in the previous sections from each VM. You will use these results to understand how `sweet` and `benchstat` work together.
 
-## Download Benchmark Results from each VM
-Lets walk through the steps to manually download the sweet benchmark results from your initial run on each VM.
+## Download benchmark results from each VM
+Let's walk through the steps to manually download the sweet benchmark results from your initial run on each VM.
 
 
 1. **Locate results:** Change directory to the `results/markdown` directory and list the files to see the `arm-benchmarks.result` file:
@@ -21,11 +21,11 @@ Lets walk through the steps to manually download the sweet benchmark results fro
 
 2. **Copy result path:** Copy the absolute pathname of `arm-benchmarks.result`.
 
-3. **Download results:** Click `DOWNLOAD FILE`, and paste the **ABSOLUTE PATHNAME** you just copied for the filename, and then click `Download`. This will download the benchmark results to your local machine.
+3. **Download results:** Click `DOWNLOAD FILE`, and paste the **ABSOLUTE PATHNAME** you just copied for the filename, and then click `Download`. This downloads the benchmark results to your local machine.
 
    ![](images/run_manually/6.png)
 
-4. **Rename the file:** Once downloaded, on your local machine, rename this file to `c4a.result` so you can distinguish it from the x86 results you'll download later. This naming convention will help you clearly identify which results came from which architecture. You'll know the file downloaded successfully if you see the file in your Downloads directory with the name `c4a.result`, as well as the confirmation dialog in your browser:
+4. **Rename the file:** Once downloaded, on your local machine, rename this file to `c4a.result` so you can distinguish it from the x86 results you'll download later. This naming convention helps you clearly identify which results came from which architecture. You'll know the file downloaded successfully if you see the file in your Downloads directory with the name `c4a.result`, as well as the confirmation dialog in your browser:
 
    ![](images/run_manually/7.png)
 
