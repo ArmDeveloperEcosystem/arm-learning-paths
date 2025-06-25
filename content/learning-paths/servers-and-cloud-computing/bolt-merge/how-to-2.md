@@ -34,8 +34,8 @@ Configure the build for debug:
 
 ```bash
 mkdir build && cd build
-cmake .. -DCMAKE_C_FLAGS="-O3 -mcpu=neoverse-n2 -Wno-enum-constexpr-conversion -fno-reorder-blocks-and-partition" \
-   -DCMAKE_CXX_FLAGS="-O3 -mcpu=neoverse-n2 -Wno-enum-constexpr-conversion -fno-reorder-blocks-and-partition" \
+cmake .. -DCMAKE_C_FLAGS="-O3 -march=native -Wno-enum-constexpr-conversion -fno-reorder-blocks-and-partition" \
+   -DCMAKE_CXX_FLAGS="-O3 -march=native -Wno-enum-constexpr-conversion -fno-reorder-blocks-and-partition" \
    -DCMAKE_CXX_LINK_FLAGS="-Wl,--emit-relocs" -DCMAKE_C_LINK_FLAGS="-Wl,--emit-relocs" -G Ninja \
    -DWITH_BOOST=$HOME/boost -DDOWNLOAD_BOOST=On -DWITH_ZLIB=bundled -DWITH_LZ4=system -DWITH_SSL=system
 ```
@@ -91,18 +91,152 @@ The partial output is:
 
 If the symbols are missing, rebuild the binary with debug info and no stripping.
 
+
+## Prepare MySQL server before running workloads
+
+Before running the workload, you may need to initialize a new data directory if this is your first run:
+
+```bash
+# Initialize a new data directory 
+# Run this from the root of your MySQL source directory (e.g. $HOME/mysql-server). This creates an empty database in the data/ directory.
+bin/mysqld --initialize-insecure --datadir=data
+```
+
+Start the instrumented server. On an 8-core system, use available cores (e.g., 2 for mysqld, 7 for sysbench). Run the command from build directory.
+
+```bash
+taskset -c 2 ./bin/mysqld \
+  --datadir=data \
+  --max-connections=64 \
+  --back-log=10000 \
+  --innodb-buffer-pool-instances=128 \
+  --innodb-file-per-table \
+  --innodb-sync-array-size=1024 \
+  --innodb-flush-log-at-trx-commit=1 \
+  --innodb-io-capacity=5000 \
+  --innodb-io-capacity-max=10000 \
+  --tmp-table-size=16M \
+  --max-heap-table-size=16M \
+  --log-bin=1 \
+  --sync-binlog=1 \
+  --innodb-stats-persistent \
+  --innodb-read-io-threads=4 \
+  --innodb-write-io-threads=4 \
+  --key-buffer-size=16M \
+  --max-allowed-packet=16M \
+  --max-prepared-stmt-count=2000000 \
+  --innodb-flush-method=fsync \
+  --innodb-log-buffer-size=64M \
+  --read-buffer-size=262144 \
+  --read-rnd-buffer-size=524288 \
+  --binlog-format=MIXED \
+  --innodb-purge-threads=1 \
+  --table-open-cache=8000 \
+  --table-open-cache-instances=16 \
+  --open-files-limit=1048576 \
+  --default-authentication-plugin=mysql_native_password
+```
+
+Adjust `--datadir`, `--socket`, and `--port` as needed for your environment. Make sure the server is running and accessible before proceeding.
+
+With the database running, open a second terminal to create a benchmark User and third terminal to run the client commands. 
+
+## Create Benchmark User and Database 
+Run once after initializing MySQL for the first time:
+```bash
+bin/mysql -u root <<< "
+CREATE USER 'bench'@'localhost' IDENTIFIED BY 'bench';
+CREATE DATABASE bench;
+GRANT ALL PRIVILEGES ON *.* TO 'bench'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;"
+```
+
+This sets up the bench user and the bench database with full privileges. Do not repeat this before every test — it is only required once.
+
+## Reset Benchmark Database Between Runs 
+
+This clears all existing tables and data from the bench database, giving you a clean slate for sysbench prepare without needing to recreate the user or reinitialize the datadir.
+
+```bash
+bin/mysql -u root <<< "DROP DATABASE bench; CREATE DATABASE bench;"
+```
+
+## Install and build sysbench
+
+In the third terminal, do the below if you do not have sysbench already. 
+
+```bash
+git clone https://github.com/akopytov/sysbench.git
+cd sysbench
+./autogen.sh
+./configure
+make -j$(nproc)
+export LD_LIBRARY_PATH=/usr/local/mysql/lib/
+```
+
+Use `./src/sysbench` for running benchmarks unless installed globally.
+
+## Create a dataset with sysbench
+
+Run `sysbench` with the `prepare` option:
+
+```bash
+./src/sysbench \
+  --db-driver=mysql \
+  --mysql-host=127.0.0.1 \
+  --mysql-db=bench \
+  --mysql-user=bench \
+  --mysql-password=bench \
+  --mysql-port=3306 \
+  --tables=8 \
+  --table-size=10000 \
+  --threads=1 \
+  src/lua/oltp_read_write.lua prepare
+```
+
+Navigate out of the `sysbench` directory.
+
+```bash 
+cd ..
+```
+
+## Shutdown MySQL and snapshot dataset for fast reuse 
+
+Do these steps once at the start from MySQL source directory
+
+```bash
+bin/mysqladmin -u root shutdown
+mv data data-orig
+```
+
+This saves the populated dataset before benchmarking.
+
+```bash
+rm -rf /dev/shm/dataset
+cp -R data-orig/ /dev/shm/dataset
+```
+
+From MySQL source directory,
+
+```bash
+ln -s /dev/shm/dataset/ data
+```
+
+This links the MySQL --datadir to a fast in-memory copy, ensuring every test starts from a clean, identical state.
+
 ## Instrument the binary with BOLT
 
 Use `llvm-bolt` to create an instrumented version of the binary:
 
 ```bash
-llvm-bolt $HOME/mysql-server/build/runtime_output_directory/mysqld \
+llvm-bolt $HOME/mysql-server/build/bin/mysqld \
   -instrument \
-  -o $HOME/mysql-server/build/runtime_output_directory/mysqld.instrumented \
+  -o $HOME/mysql-server/build/bin/mysqldreadonly.instrumented \
   --instrumentation-file=$HOME/mysql-server/build/profile-readonly.fdata \
   --instrumentation-sleep-time=5 \
   --instrumentation-no-counters-clear \
-  --instrumentation-wait-forks
+  --instrumentation-wait-forks \
+  2>&1 | tee $HOME/mysql-server/bolt-instrumentation-readonly.log
 ```
 
 ### Explanation of key options
@@ -111,79 +245,14 @@ llvm-bolt $HOME/mysql-server/build/runtime_output_directory/mysqld \
 - `--instrumentation-file`: Path where the profile output will be saved
 - `--instrumentation-wait-forks`: Ensures the instrumentation continues through forks (important for daemon processes)
 
-
-## Start the instrumented MySQL server
-
-Before running the workload, start the instrumented MySQL server in a separate terminal. You may need to initialize a new data directory if this is your first run:
-
-```bash
-# Initialize a new data directory (if needed)
-$HOME/mysql-server/build/runtime_output_directory/mysqld.instrumented --initialize-insecure --datadir=$HOME/mysql-bolt-data
-
-# Start the instrumented server
-# On an 8-core system, use available cores (e.g., 6 for mysqld, 7 for sysbench)
-taskset -c 6 $HOME/mysql-server/build/runtime_output_directory/mysqld.instrumented \
-  --datadir=$HOME/mysql-bolt-data \
-  --socket=$HOME/mysql-bolt.sock \
-  --port=3306 \
-  --user=$(whoami) &
-```
-
-Adjust `--datadir`, `--socket`, and `--port` as needed for your environment. Make sure the server is running and accessible before proceeding.
-
-With the database running, open a second terminal to run the client commands. 
-
-## Install sysbench
-
-You will need sysbench to generate workloads for MySQL. On most Arm Linux distributions, you can install it using your package manager:
-
-```bash
-sudo apt update
-sudo apt install -y sysbench
-```
-
-Alternatively, see the [sysbench GitHub page](https://github.com/akopytov/sysbench) for build-from-source instructions if a package is not available for your platform.
-
-## Create a test database and user
-
-For sysbench to work, you need a test database and user. Connect to the MySQL server as the root user (or another admin user) and run:
-
-```bash
-mysql -u root --socket=$HOME/mysql-bolt.sock
-```
-
-Then, in the MySQL shell:
-
-```sql
-CREATE DATABASE IF NOT EXISTS bench;
-CREATE USER IF NOT EXISTS 'bench'@'localhost' IDENTIFIED BY 'bench';
-GRANT ALL PRIVILEGES ON bench.* TO 'bench'@'localhost';
-FLUSH PRIVILEGES;
-EXIT;
-```
-
 ## Run the instrumented binary under a feature-specific workload
 
-Run `sysbench` with the `prepare` option:
-
-```bash
-sysbench \
-  --db-driver=mysql \
-  --mysql-host=127.0.0.1 \
-  --mysql-db=bench \
-  --mysql-user=bench \
-  --mysql-password=bench \
-  --mysql-port=3306 \
-  --tables=8 \
-  --table-size=10000 \
-  --threads=1 \
-  /usr/share/sysbench/oltp_read_only.lua prepare
-```
+Start the MySQL instrumented binary in first terminal. 
 
 Use a workload generator to stress the binary in a feature-specific way. For example, to simulate **read-only traffic** with sysbench:
 
 ```bash
-taskset -c 7 sysbench \
+taskset -c 7 ./src/sysbench \
   --db-driver=mysql \
   --mysql-host=127.0.0.1 \
   --mysql-db=bench \
@@ -192,15 +261,29 @@ taskset -c 7 sysbench \
   --mysql-port=3306 \
   --tables=8 \
   --table-size=10000 \
+  --forced-shutdown \
+  --report-interval=60 \
+  --rand-type=uniform \
+  --time=5 \
   --threads=1 \
-  /usr/share/sysbench/oltp_read_only.lua run
+  --simple-ranges=1 \
+  --distinct-ranges=1 \
+  --sum-ranges=1 \
+  --order-ranges=1 \
+  --point-selects=10 \
+  src/lua/oltp_read_only.lua run
 ```
 
 {{% notice Note %}}
-On an 8-core system, cores are numbered 0-7. Adjust the `taskset -c` values as needed for your system. Avoid using the same core for both mysqld and sysbench to reduce contention.
+On an 8-core system, cores are numbered 0-7. Adjust the `taskset -c` values as needed for your system. Avoid using the same core for both mysqld and sysbench to reduce contention. You can increase this time (e.g., --time=5 or --time=300) for more statistically meaningful profiling and better .fdata data.
 {{% /notice %}} 
 
 The `.fdata` file defined in `--instrumentation-file` will be populated with runtime execution data.
+
+After completing each benchmark run (e.g. after sysbench run), you must cleanly shut down the MySQL server and reset the dataset to ensure the next test starts from a consistent state.
+```bash
+bin/mysqladmin -u root shutdown ; rm -rf /dev/shm/dataset ; cp -R data-orig/ /dev/shm/dataset
+```
 
 ## Verify the profile was created
 
