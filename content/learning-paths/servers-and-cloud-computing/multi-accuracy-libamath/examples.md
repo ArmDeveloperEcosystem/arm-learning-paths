@@ -1,14 +1,18 @@
 ---
-title: Examples
+title: Arm Performance Libraries example
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Example
+# Arm Performance Libraries example
 
-Here is an example invoking all accuracy modes of the Neon single precision exp function (where `ulp_error.h` is the implementation of ULP error explained in [this section](/learning-paths/servers-and-cloud-computing/multi-accuracy-libamath/ulp-error/)):
+Here is an example invoking all accuracy modes of the Neon single precision exp function. The file `ulp_error.h` is from the previous section. 
+
+Make sure you have [Arm Performance Libraries](https://learn.arm.com/install-guides/armpl/) installed. 
+
+Use a text editor save the code below in a file named `example.c`.
 
 ```C { line_numbers = "true" } 
 #include <amath.h>
@@ -46,14 +50,21 @@ int main(void) {
 }
 ```
 
-You can compile the above program with:
+Compile the program with:
+
 ```bash
 gcc -O2 -o example example.c -lamath -lm
 ```
 
-Running the example returns:
+Run the example:
+
 ```bash
-$ ./example 
+./example 
+```
+
+The output is:
+
+```output
 Libamath example:
 -----------------------------------------------
   // Display worst-case ULP error in expf for each
@@ -78,5 +89,5 @@ armpl_vexpq_f32_umax(-0x1.5b7322p+6) delivers result with half correct bits
     ULP error = 1745.2120
 ```
 
-The inputs we use for each variant correspond to the worst case scenario known to date (ULP Error argmax).
-This means that the ULP error should not be higher than the one we demonstrate here, meaning we stand below the thresholds we define for each accuracy.
+The inputs used for each variant correspond to the worst case scenario known to date (ULP Error argmax).
+This means that the ULP error should not be higher than the one demonstrated here, ensuring the results remain below the defined thresholds for each accuracy.
