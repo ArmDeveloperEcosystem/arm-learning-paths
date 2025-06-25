@@ -1,5 +1,5 @@
 ---
-title: Accuracy Modes in Libamath
+title: Accuracy modes in Libamath
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 
-# The 3 Accuracy Modes of Libamath
+## The 3 accuracy modes of Libamath
 
 Libamath vector functions can come in various accuracy modes for the same mathematical function.
 This means, some of our functions allow users and compilers to choose between:
@@ -16,36 +16,36 @@ This means, some of our functions allow users and compilers to choose between:
 - **Low accuracy / max performance** (approx. ≤ 4096 ULP)
 
 
-# How Accuracy Modes Are Encoded in Libamath
+## How accuracy modes are encoded in Libamath
 
 You can recognize the accuracy mode of a function by inspecting the **suffix** in its symbol:
 
 - **`_u10`** → High accuracy  
-  E.g., `armpl_vcosq_f32_u10`  
+  For instance, `armpl_vcosq_f32_u10`  
   Ensures results stay within **1 Unit in the Last Place (ULP)**.
 
 - *(no suffix)* → Default accuracy  
-  E.g., `armpl_vcosq_f32`  
+  For instance, `armpl_vcosq_f32`  
   Keeps errors within **3.5 ULP** — a sweet spot for many workloads.
 
 - **`_umax`** → Low accuracy  
-  E.g., `armpl_vcosq_f32_umax`  
+  For instance, `armpl_vcosq_f32_umax`  
   Prioritizes speed, tolerating errors up to **4096 ULP**, or roughly **11 correct bits** in single-precision.
 
 
-# Applications
+## Applications
 
 Selecting an appropriate accuracy level helps avoid unnecessary compute cost while preserving output quality where it matters.
 
 
 ### High Accuracy (≤ 1 ULP)
 
-Use when **numerical (almost) correctness** is a priority. These routines involve precise algorithms (e.g., high-degree polynomials, careful range reduction, FMA usage) and are ideal for:
+Use when **numerical (almost) correctness** is a priority. These routines involve precise algorithms (such as high-degree polynomials, careful range reduction, or FMA usage) and are ideal for:
 
 - **Scientific computing**
-  e.g., simulations, finite element analysis
+  such as simulations or finite element analysis
 - **Signal processing pipelines** [1,2]
-  especially recursive filters or transform 
+  particularly recursive filters or transform 
 - **Validation & reference implementations**
 
 While slower, these functions provide **near-bitwise reproducibility** — critical in sensitive domains.
@@ -57,7 +57,7 @@ The default mode strikes a **practical balance** between performance and numeric
 
 - **General-purpose math libraries**
 - **Analytics workloads** [3]
-  e.g., log/sqrt during feature extraction 
+  such as log or sqrt during feature extraction 
 - **Inference pipelines** [4]
   especially on edge devices where latency matters 
 
@@ -69,7 +69,7 @@ Also suitable for many **scientific workloads** that can tolerate modest error i
 This mode trades precision for speed — aggressively. It's designed for:
 
 - **Games, graphics, and shaders** [5]
-  e.g., approximating sin/cos for animation curves
+  such as approximating sin or cos for animation curves
 - **Monte Carlo simulations**  
   where statistical convergence outweighs per-sample accuracy [6]
 - **Genetic algorithms, audio processing, and embedded DSP**
@@ -77,7 +77,7 @@ This mode trades precision for speed — aggressively. It's designed for:
 Avoid in control-flow-critical code or where **errors amplify**.
 
 
-# Summary
+## Summary
 
 | Accuracy Mode | Libamath example          | Approx. Error   | Performance | Typical Applications                                      |
 |---------------|------------------------|------------------|-------------|-----------------------------------------------------------|
@@ -87,7 +87,9 @@ Avoid in control-flow-critical code or where **errors amplify**.
 
 
 
-**Pro tip:** If your workload has mixed precision needs, you can *selectively call different accuracy modes* for different parts of your pipeline. Libamath lets you tailor precision where it matters — and boost performance where it doesn’t.
+{{% notice  Tip %}}
+If your workload has mixed precision needs, you can *selectively call different accuracy modes* for different parts of your pipeline. Libamath lets you tailor precision where it matters — and boost performance where it doesn’t.
+{{% /notice %}}
 
 
 #### References

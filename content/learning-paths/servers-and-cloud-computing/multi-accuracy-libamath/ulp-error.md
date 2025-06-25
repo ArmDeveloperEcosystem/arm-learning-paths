@@ -8,7 +8,7 @@ layout: learningpathall
 
 # ULP Error and Accuracy
 
-In the development of Libamath, we use a metric called ULP error to assess the accuracy of our functions.
+In the development of Libamath, a metric called ULP error is used to assess the accuracy of functions.
 This metric measures the distance between two numbers, a reference (`want`) and an approximation (`got`), relative to how many floating-point “steps” (ULPs) these two numbers are apart.
 
 It can be calculated by:
@@ -17,14 +17,14 @@ It can be calculated by:
 ulp_err = | want - got | / ULP(want)
 ```
 
-Because this is a relative measure in terms of floating-point spacing (ULPs) - i.e. this metric is scale-aware - it is ideal for comparing accuracy across magnitudes. Otherwise, error measure would be very biased by the uneven distribution of the floats.
+Because this is a relative measure in terms of floating-point spacing (ULPs)—that is, this metric is scale-aware—it is ideal for comparing accuracy across magnitudes. Otherwise, error measures would be very biased by the uneven distribution of the floats.
 
 
 # ULP Error Implementation
 
-In practice, however, the above expression may take different forms, to account for sources of error that may happen during the computation of the error itself.
+In practice, however, the above expression may take different forms to account for sources of error that may occur during the computation of the error itself.
 
-In our implementation, this quantity is held by a term called `tail`:
+In the implementation used here, this quantity is held by a term called `tail`:
 
 ```
 ulp_err = | (got - want) / ULP(want) - tail |
@@ -36,8 +36,9 @@ This term takes into account the error introduced by casting `want` from a highe
 tail = | (want_l - want) / ULP(want) |
 ```
 
-Here is a simplified version of our ULP Error (where `ulp.h` is the implementation of ULP in the [previous section](/learning-paths/servers-and-cloud-computing/multi-accuracy-libamath/ulp/)):
+Here is a simplified version of the ULP Error. Use the same `ulp.h` from the previous section.
 
+Use a text editor to opy the code below into a new file `ulp_error.h`.
 
 ```C
 // Defines ulpscale(x)
@@ -69,15 +70,17 @@ double ulp_error(float got, double want_l) {
 ```
 Note that the final scaling is done with respect to the rounded reference.
 
-In this implementation, it is possible to get exactly 0.0 ULP error in this implementation if and only if:
+In this implementation, it is possible to get exactly 0.0 ULP error if and only if:
 
 * The high-precision reference (`want_l`, a double) is exactly representable as a float, and
 * The computed result (`got`) is bitwise equal to that float representation.
 
-Here is a small snippet to check out this implementation in action.
+Below is a small example to check this implementation.
 
+Save the code below into a file named `ulp_error.c`.
 
 ```C
+#include <stdio.h>
 #include "ulp_error.h"
 
 int main() {
@@ -88,9 +91,23 @@ int main() {
     return 0;
 }
 ```
+
+Compile the program with GCC.
+
+```bash
+gcc -O2 ulp_error.c -o ulp_error
+```
+
+Run the program:
+
+```bash
+./ulp_error
+```
+
 The output should be:
+
 ```
 ULP error: 1.0
 ```
-Note that 
-If you are interested in diving into the full implementation of the ulp error we use internally, you can consult the [tester](https://github.com/ARM-software/optimized-routines/tree/master/math/test) tool in [AOR](https://github.com/ARM-software/optimized-routines/tree/master), with particular focus to the [ulp.h](https://github.com/ARM-software/optimized-routines/blob/master/math/test/ulp.h) file. Note this tool also handles special cases and considers the effect of different rounding modes in the ULP error.
+
+If you are interested in diving into the full implementation of the ulp error, you can consult the [tester](https://github.com/ARM-software/optimized-routines/tree/master/math/test) tool in [AOR](https://github.com/ARM-software/optimized-routines/tree/master), with particular focus to the [ulp.h](https://github.com/ARM-software/optimized-routines/blob/master/math/test/ulp.h) file. Note this tool also handles special cases and considers the effect of different rounding modes in the ULP error.

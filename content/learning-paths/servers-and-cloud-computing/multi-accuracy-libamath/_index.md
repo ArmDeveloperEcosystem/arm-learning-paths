@@ -1,20 +1,21 @@
 ---
 title: Understanding Libamath's vector accuracy modes
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 20
 author: Joana Cruz
 
-who_is_this_for: This is an introductory topic for software developers who want to learn how to use the different accuracy modes present in Libamath, a component of ArmPL. This feature was introduced in ArmPL 25.04.
+who_is_this_for: This is an introductory topic for software developers who want to learn how to use the different accuracy modes present in Libamath, a component of Arm Performance Libraries. 
 
 learning_objectives: 
-    - understand how accuracy is defined in Libamath;
-    - pick an accuracy mode depending on your application.
-
-# [libamath](https://developer.arm.com/documentation/101004/2504/, (component of [ArmPL (Arm Performance Libraries)](https://developer.arm.com/documentation/101004/2504/General-information/Arm-Performance-Libraries?lang=en)). Since libamath only provides vector functions on Linux, we assume you are working in a Linux environment where ArmPL is installed (meaning you completed [ArmPL's installation guide](https://learn.arm.com/install-guides/armpl/).)
+    - Understand how accuracy is defined in Libamath.
+    - Pick an appropriate accuracy mode for your application.
 
 prerequisites:
-    - An Arm computer running Linux
-    - Build and install [ArmPL](https://learn.arm.com/install-guides/armpl/)
+    - An Arm computer running Linux with [Arm Performance Libraries](https://learn.arm.com/install-guides/armpl/) version 25.04 or newer installed. 
 
 ### Tags
 skilllevels: Introductory
@@ -22,9 +23,9 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
-- ArmPL
+- Arm Performance Libraries
 - GCC
-- Libamath
+- Libmath
 operatingsystems:
     - Linux
 

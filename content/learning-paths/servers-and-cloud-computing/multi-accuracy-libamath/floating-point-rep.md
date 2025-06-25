@@ -6,13 +6,13 @@ weight: 2
 layout: learningpathall
 ---
 
-# Floating-Point Representation Basics
+## Floating-Point Representation Basics
 
 Floating Point numbers are a finite and discrete approximation of the real numbers, allowing us to implement and compute functions in the continuous domain with an adequate (but limited) resolution.
 
 A Floating Point number is typically expressed as:
 
-```
+```output
 +/-d.dddd...d x B^e
 ```
 
@@ -33,14 +33,13 @@ Fixing `B=2, p=24`
 
 {{% /notice %}}
 
-Usually a Floating Point number has multiple non-normalized representations, but only 1 normalized representation (assuming leading digit is stricly smaller than base), when fixing a base and a precision.
+Usually a Floating Point number has multiple non-normalized representations, but only 1 normalized representation (assuming leading digit is strictly smaller than base), when fixing a base and a precision.
 
-
-## Building a Floating-Point Ruler
+### Building a Floating-Point Ruler
 
 Given a base `B`, a precision `p`, a maximum exponent `emax` and a minimum exponent `emin`, we can create the set of all the normalized values in this system.
 
-{{% notice Example 3 %}}
+{{% notice Example 2 %}}
 `B=2, p=3, emax=2, emin=-1`
 
 | Significand | × 2⁻¹ | × 2⁰ | × 2¹ | × 2² |
@@ -53,13 +52,15 @@ Given a base `B`, a precision `p`, a maximum exponent `emax` and a minimum expon
 
 {{% /notice %}}
 
-Note that, for any given integer n, numbers are evenly spaced between 2ⁿ and 2ⁿ⁺¹. But the gap between them (also called [ULP](/learning-paths/servers-and-cloud-computing/multi-accuracy-libamath/ulp/), which we explain in the more detail in the next section) grows as the exponent increases. So the spacing between floating point numbers gets larger as numbers get bigger.
+Note that, for any given integer n, numbers are evenly spaced between 2ⁿ and 2ⁿ⁺¹. But the gap between them (also called [ULP](/learning-paths/servers-and-cloud-computing/multi-accuracy-libamath/ulp/), which is explained in the more detail in the next section) grows as the exponent increases. So the spacing between floating point numbers gets larger as numbers get bigger.
 
 ### The Floating-Point bitwise representation
-Since there are `B^p` possible mantissas, and `emax-emin+1` possible exponents, then we need `log2(B^p) + log2(emax-emin+1) + 1` (sign) bits to represent a given Floating Point number in a system.
-In Example 3, we need 3+2+1=6 bits.
 
-We can then define Floating Point's bitwise representation in our system to be:
+Since there are `B^p` possible mantissas, and `emax-emin+1` possible exponents, then `log2(B^p) + log2(emax-emin+1) + 1` (sign) bits are needed to represent a given Floating Point number in a system.
+
+In Example 2, 3+2+1=6 bits are needed.
+
+Based on this, the floating point's bitwise representation is defined to be: 
 
 ```
 b0 b1 b2 b3 b4 b5
@@ -67,22 +68,22 @@ b0 b1 b2 b3 b4 b5
 
 where
 
-```
+```output
 b0 -> sign (S)
 b1, b2 -> exponent (E)
 b3, b4, b5 -> mantissa (M)
 ```
 
 However, this is not enough. In this bitwise definition, the possible values of E are 0, 1, 2, 3.
-But in the system we are trying to define, we are only interested in the the integer values in the range [-1, 2].
+But in the system being defined, only the integer values in the range [-1, 2] are of interest.
 
-For this reason, E is called the biased exponent, and in order to retrieve the value it is trying to represent (i.e. the unbiased exponent) we need to add/subtract an offset to it (in this case we subtract 1):
+For this reason, E is called the biased exponent, and in order to retrieve the value it is trying to represent (i.e. the unbiased exponent) an offset must be added or subtracted (in this case, subtract 1):
 
-```
+```output
 x = (-1)^S x M x 2^(E-1)
 ```
 
-# IEEE-754 Single Precision
+## IEEE-754 Single Precision
 
 Single precision (also called float) is a 32-bit format defined by the [IEEE-754 Floating Point Standard](https://ieeexplore.ieee.org/document/8766229)
 
@@ -90,7 +91,7 @@ In this standard the sign is represented using 1 bit, the exponent uses 8 bits a
 
 The value of a (normalized) Floating Point in IEEE-754 can be represented as:
 
-```
+```output
 x=(−1)^S x 1.M x 2^E−127
 ```
 
