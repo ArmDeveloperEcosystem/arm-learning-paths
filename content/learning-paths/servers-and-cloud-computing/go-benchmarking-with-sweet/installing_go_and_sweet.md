@@ -6,21 +6,19 @@ weight: 40
 layout: learningpathall
 ---
 
-In this section, you'll install Go, Sweet, and the Benchstat comparison tool on both VMs.
-
-## Installation Script
+In this section, you'll install Go, Sweet, and Benchstat on both virtual machines.
 
 Sweet is a Go benchmarking tool that provides a standardized way to run performance tests across systems. Benchstat is a companion tool that compares benchmark results to highlight meaningful performance differences. Together, these tools help you evaluate Go performance on both Arm and x86 architectures.
-
 
 {{% notice Note %}}
 Subsequent steps in the learning path assume you are running this script (installing) from your home directory (`$HOME`), resulting in the creation of a `$HOME/benchmarks/sweet` final install path. If you install to a different directory, update the paths in later steps to match your custom location.
 {{% /notice %}}
 
+## Installation script
 
 Start by copying and pasting the script below on both of your GCP VMs. This script automatically detects your system architecture, installs the appropriate Go version, and sets up Sweet, Benchstat, and the Go benchmark suite.
 
-**You don't need to run it after pasting**, just paste it into your home directory and press enter to install all needed dependencies: 
+Paste the full block into your terminal. This creates and runs an installer script directly from your home directory:
 
 ```bash
 #!/usr/bin/env bash
@@ -32,7 +30,7 @@ sudo apt-get -y update
 sudo apt-get -y install git build-essential
 
 # Detect architecture - this allows the same script to work on both
-# our Arm (c4a) and x86 (c4) VMs without modification
+# Arm (c4a) and x86 (c4) VMs without modification
 ARCH=$(uname -m)
 case "$ARCH" in
   arm64|aarch64)
@@ -90,9 +88,9 @@ chmod 755 install_go_and_sweet.sh
 
 ```
 
-## Expected output from `sweet get`
+## Expected output from sweet get
 
-When sweet get completes successfully, you’ll see output similar to:
+When `sweet get` completes successfully, you’ll see output similar to:
 
 ```output
 Sweet v0.3.0: Go Benchmarking Suite
@@ -111,7 +109,7 @@ Usage: sweet get [flags]
 ```
 
 
-## Verify Installation
+## Verify installation
 
 To test that everything is installed correctly, set the environment variables shown below on each VM:
 
