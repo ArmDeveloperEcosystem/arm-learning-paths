@@ -8,6 +8,9 @@ layout: learningpathall
 
 This step presents the performance comparisons across various BOLT optimization scenarios. You'll see how baseline performance compares with BOLT-optimized binaries using merged profiles and bolted external libraries.
 
+For all test cases shown in the table below, sysbench was configured with --time=0 --events=10000.
+This means each test ran until exactly 10,000 requests were completed per thread, rather than running for a fixed duration.
+
 ### 1. Baseline Performance (No BOLT)
 
 | Metric                     | Read-Only (Baseline) | Write-Only (Baseline) | Read+Write (Baseline) |
