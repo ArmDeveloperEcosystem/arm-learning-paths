@@ -1,6 +1,10 @@
 ---
 title: Building Multi-Architecture Applications with Red Hat OpenShift Pipelines on Red Hat OpenShift 4.18 on AWS
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: This learning path is for Openshift administrators interested in migrating their applications to  Arm.
