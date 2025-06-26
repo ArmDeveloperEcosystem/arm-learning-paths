@@ -18,7 +18,7 @@ It provides several key benefits:
 - **Consistency**: Ensures benchmarks are executed with identical parameters
 - **Visualization**: Generates HTML reports with interactive charts for easier analysis
 
-The only dependency you are responsible for satisfying before the script runs is completion of the "Installing Go and Sweet" sections of this Learning Path. Additional dependencies are dynamically loaded at install time by the install script.
+Before running the script, ensure you've completed the "Install Go, Sweet, and Benchstat" step. All other dependencies are installed automatically by the setup script.
 
 ## Setting up rexec_sweet
 

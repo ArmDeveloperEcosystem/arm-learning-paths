@@ -24,7 +24,7 @@ Benchmarking is critical for modern software development because it allows you t
 - Make data-driven decisions about infrastructure
 - Identify optimization opportunities in your application code
 
-In this learning path, you'll compare performance using two four-core GCP instance types: the Intel-based c4-standard-8 and the Arm-based c4a-standard-4.
+In this Learning Path, you'll compare performance using two four-core GCP instance types: the Intel-based c4-standard-8 and the Arm-based c4a-standard-4.
 
 {{% notice Note %}}
 Arm-based c4a-standard-4 instances and Intel-based c4-standard-8 instances both utilize four cores. Both instances are categorized by GCP as members a series that demonstrates consistent high performance; the main difference between the two is that c4a has 16 GB of RAM, while c4 has 30 GB of RAM. This Learning Path uses equivalent core counts to ensure a fair performance comparison.

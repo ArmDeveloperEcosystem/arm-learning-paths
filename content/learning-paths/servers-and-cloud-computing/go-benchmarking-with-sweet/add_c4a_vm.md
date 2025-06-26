@@ -63,5 +63,7 @@ The Machine configuration page appears.
 
 ![](images/launch_c4a/19.png)
 
-After a few seconds, your c4a instance starts up, and you are ready to continue to the next section. In the next section, you will launch the second VM, an Intel-based Emerald Rapids c4-standard-8 (abbreviated to c4), which serves as the comparison system for our benchmarking tests.
+After a few seconds, your c4a instance starts up, and you are ready to continue to the next section. 
+
+In the next section, you will launch the second VM, an Intel-based Emerald Rapids c4-standard-8 (abbreviated to c4), which serves as the comparison system for our benchmarking tests.
 
