@@ -6,11 +6,12 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for developers and engineers who want to deploy the Arcee AFM-4.5B small language model on an AWS Arm-based instance. AFM-4.5B is a 4.5-billion-parameter frontier model that delivers excellent accuracy, strict compliance, and very high cost-efficiency. It was trained on almost 7 trillion tokens of clean, rigorously filtered data, and has been tested across a wide range of languages, including Arabic, English, French, German, Hindi, Italian, Korean, Mandarin, Portuguese, Russian, and Spanish
 
 learning_objectives:
-    - Deploy an Arm-based Graviton4 virtual machine on Amazon Web Services
-    - Connect to the virtual machine using SSH
-    - Download the AFM-4.5B model from Hugging Face
-    - Quantize the model with llama.cpp
+    - Launch and set up an Arm-based Graviton4 virtual machine on Amazon Web Services
+    - Build llama.cpp from source
+    - Download AFM-4.5B from Hugging Face
+    - Quantize AFM-4.5B with llama.cpp
     - Deploy the model and run inference with llama.cpp
+    - Evaluate the quality of quantized models by measuring perplexity
 
 prerequisites:
     - An Amazon Web Services account, with quota for c8g instances

@@ -8,6 +8,8 @@ layout: learningpathall
 
 In this step, we'll build Llama.cpp from source. Llama.cpp is a high-performance C++ implementation of the LLaMA model that's optimized for inference on various hardware platforms, including ARM-based processors like Graviton4.
 
+Even though AFM-4.5B has a custom model architecture, we're able to use the vanilla version of llama.cpp as the Arcee AI team has contributed the appropriate modeling code.
+
 Here are all the steps.
 
 ## Step 1: Clone the Repository
