@@ -24,6 +24,7 @@ subjects: ML
 armips:
     - Cortex-A
     - Cortex-M
+    - Ethos-U
 
 operatingsystems:
     - Linux
