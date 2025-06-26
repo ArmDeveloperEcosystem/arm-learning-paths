@@ -1,5 +1,5 @@
 ---
-title: Installing Go and Sweet
+title: Install Go, Sweet, and Benchstat
 weight: 40
 
 ### FIXED, DO NOT MODIFY
@@ -10,15 +10,15 @@ In this section, you'll install Go, Sweet, and the Benchstat comparison tool on 
 
 ## Installation Script
 
-Sweet is a Go benchmarking tool that provides a standardized way to run performance tests across different systems. Benchstat is a companion tool that analyzes and compares benchmark results, helping you understand performance differences between systems. Together, these tools will allow you to accurately measure and compare Go performance on Arm and x86 architectures.
+Sweet is a Go benchmarking tool that provides a standardized way to run performance tests across systems. Benchstat is a companion tool that compares benchmark results to highlight meaningful performance differences. Together, these tools help you evaluate Go performance on both Arm and x86 architectures.
 
 
 {{% notice Note %}}
-Subsequent steps in the learning path assume you are running this script (installing) from your home directory (`$HOME`), resulting in the creation of a `$HOME/benchmarks/sweet` final install path. If you install elsewhere, you need to adjust the path accordingly when prompted to run the benchmark logic later in the Learning Path.
+Subsequent steps in the learning path assume you are running this script (installing) from your home directory (`$HOME`), resulting in the creation of a `$HOME/benchmarks/sweet` final install path. If you install to a different directory, update the paths in later steps to match your custom location.
 {{% /notice %}}
 
 
-Start by copying and pasting the script below on **both** of your GCP VMs. This script checks the architecture of your running VM, installs the required Go package on your VM. It then installs sweet, benchmarks, and the benchstat tools.
+Start by copying and pasting the script below on both of your GCP VMs. This script automatically detects your system architecture, installs the appropriate Go version, and sets up Sweet, Benchstat, and the Go benchmark suite.
 
 **You don't need to run it after pasting**, just paste it into your home directory and press enter to install all needed dependencies: 
 

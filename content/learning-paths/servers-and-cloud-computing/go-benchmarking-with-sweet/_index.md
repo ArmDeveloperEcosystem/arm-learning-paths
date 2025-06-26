@@ -5,10 +5,10 @@ minutes_to_complete: 60
 
 who_is_this_for: This introductory topic is for developers who want to measure and compare the performance of Go applications on Arm-based servers.
 
-learning_objectives: 
-    - Launch Arm64 and x86_64 instances of GCP VMs 
-    - Install Go, Sweet, and Benchstat on each VM
-    - Use Sweet and Benchstat to compare the performance of Go applications on the two VMs
+learning_objectives:
+    - Provision Arm64 and x86_64 VM instances on Google Cloud 
+    - Install Go, Sweet, and Benchstat on each VM instance
+    - Run benchmarks and use Benchstat to compare Go application performance across architectures
 
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/). This Learning Path can be run on any cloud provider or on-premises, but it focuses on Google Cloud’s Axion Arm64-based instances.
