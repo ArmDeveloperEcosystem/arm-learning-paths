@@ -36,7 +36,7 @@ Sweet comes ready to run with the following benchmarks:
 
 When running benchmarks, several key metrics are collected to evaluate performance.  The following summarizes the most common metrics and their significance:
 
-### Seconds per operation - lower is better
+### Seconds per operation (lower is better)
 
 This metric measures the time taken to complete a single operation, indicating the raw speed of execution. It directly reflects the performance efficiency of a system for a specific task, making it one of the most fundamental benchmarking metrics.
 
@@ -52,7 +52,7 @@ If operations per second is substantially higher while memory usage remains prop
 
 This metric is essentially the inverse of "seconds per operation" and provides a more intuitive way to understand throughput capacity.
 
-### Average RSS bytes - lower is better
+### Average RSS bytes (lower is better)
 
 Resident Set Size (RSS) represents the portion of memory occupied by a process that is held in RAM (not swapped out). It shows the typical memory footprint during operation, indicating memory efficiency and potential for scalability.
 

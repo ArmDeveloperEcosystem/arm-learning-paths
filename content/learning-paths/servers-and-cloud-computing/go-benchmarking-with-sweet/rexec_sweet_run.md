@@ -1,14 +1,13 @@
 ---
-title: Running the Automated Benchmark and Benchstat Runner
+title: Run the automated benchmark and benchstat runner
 weight: 54
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+With `rexec_sweet` installed, your benchmarking instances running, and your local machine authenticated with GCP, you're ready to run automated benchmarks across your configured environments.
 
-With `rexec_sweet` installed, your benchmarking instances running, and your localhost authenticated with GCP, you'll now see how to run benchmarks in an automated fashion.
-
-## Run an Automated Benchmark and Analysis
+## Run an automated benchmark and analysis
 
 1. **Run the script:** Execute the `rexec_sweet` script from your local terminal:
 
@@ -16,7 +15,7 @@ With `rexec_sweet` installed, your benchmarking instances running, and your loca
 rexec_sweet
 ```
 
-2. **Select a benchmark:** The script will prompt you for the name of the benchmark you want to run. Press enter to run the default benchmark, which is `markdown` (this is the recommended benchmark to run the first time.)
+2. **Select a benchmark:** When prompted, press **Enter** to run the default benchmark (markdown), recommended for your first run.
 
 ```bash
 Available benchmarks:
@@ -45,11 +44,11 @@ Do you want to run the first two instances found with default install directorie
 
 4. **Choose your configuration:** You have two options:
 
-   - **Use default settings:** If you want to run benchmarks on the instances labeled with "will be used as nth instance", and you installed Go and Sweet into the default directories as noted in the tutorial, you can press Enter to accept the defaults.
+   - **Use default settings:** If you want to run benchmarks on the instances labeled with "will be used as nth instance", and you installed Go and Sweet into the default path (~/benchmarks/sweet), you can press **Enter** to accept the defaults.
 
-   - **Custom configuration:** If you are running more than two instances, and the script doesn't suggest the correct two to autorun, or you installed Go and Sweet to non-default folders, select "n" and press Enter. The script will then prompt you to select the instances and runtime paths.
+   - **Custom configuration:** If you are running more than two instances, and the script doesn't suggest the correct two to autorun, or you installed Go and Sweet to non-default folders, select "n" and press **Enter**. The script will then prompt you to select the instances and runtime paths.
 
-In this example, we'll manually select the instances and paths as shown below:
+In this example, you'll manually select the instances and paths as shown below:
 
 ```output
 Available instances:
@@ -73,8 +72,8 @@ Output directory: /private/tmp/a/go_benchmarks/results/c4-c4a-markdown-20250610T
 ...
 ```
 
-Upon entering instance names and paths for the VMs, the script will automatically:
-   - Run the benchmark on both VMs
+After selecting instances and paths, the script will:
+   - Run the selected benchmark on both VMs
    - Run `benchstat` to compare the results
    - Push the results to your local machine
 
@@ -90,7 +89,7 @@ Report generated in results/c4-c4a-markdown-20250610T190407
 
 5. **View the report:** Once on your local machine, `rexec_sweet` will generate an HTML report that will open automatically in your web browser.
 
-   If you close the tab or browser, you can always reopen the report by navigating to the `results` subdirectory of the current working directory of the `rexec_sweet.py` script, and opening `report.html`.
+   If you close the report, you can reopen it by navigating to the results subdirectory and opening report.html in your browser.
 
 ![](images/run_auto/2.png)
 

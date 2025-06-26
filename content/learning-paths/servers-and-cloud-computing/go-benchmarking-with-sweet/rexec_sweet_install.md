@@ -1,5 +1,5 @@
 ---
-title: Installing the automated benchmark and Benchstat runner
+title: Install the automated benchmark and benchstat runner
 weight: 53
 
 ### FIXED, DO NOT MODIFY
@@ -10,7 +10,7 @@ In the last section, you learned how to run benchmarks and benchstat manually. N
 
 ## Introducing rexec_sweet.py
 
-The `rexec_sweet.py` script is a powerful automation tool that simplifies the benchmarking workflow.  This tool connects to your GCP instances, runs the benchmarks, collects the results, and generates comprehensive reports - all in one seamless operation. 
+`rexec_sweet.py` is a script that automates the benchmarking workflow: it connects to your GCP instances, runs benchmarks, collects results, and generates HTML reports - all in one step.
 
 It provides several key benefits:
 
@@ -29,7 +29,7 @@ The only dependency you are responsible for satisfying before the script runs is
    cd rexec_sweet
    ```
    
-2. **Clone the repository inside the directory:** Get the `rexec_sweet.py` script from the GitHub repository:
+2. **Clone the repository:** Get the `rexec_sweet.py` script from the GitHub repository:
 
    ```bash
    git clone https://github.com/geremyCohen/go_benchmarks.git
@@ -51,7 +51,7 @@ The only dependency you are responsible for satisfying before the script runs is
 
    If you see this prompt, enter `N` to continue with the installation without modifying the existing installed dependencies.
 
-4. **Verify VM status:** Make sure the GCP VM instances you created in the previous section are running. If not, start them now, and give them a few minutes to come up.
+4. **Verify VM status:** Make sure the GCP VM instances you created in the previous section are running. If not, start them now, and wait a few minutes for them to finish booting.
 
 {{% notice Note %}}
 The install script prompts you to authenticate with Google Cloud Platform (GCP) using the gcloud command-line tool at the end of install. If after installing you have issues running the script and/or get GCP authentication errors, you can manually authenticate with GCP by running the following command: `gcloud auth login`
