@@ -11,7 +11,9 @@ learning_objectives:
     - Integrating Halide into an Android (Kotlin) Project
 
 prerequisites:
-    
+    - Basic C++ knowledge
+    - Basic programming knowledge
+    - Android Studio with Android Emulator
 
 author: Dawid Borycki
 
@@ -36,6 +38,10 @@ further_reading:
         title: Halide GitHub
         link: https://github.com/halide/Halide
         type: repository  
+    - resource:
+        title: Halide Tutorials
+        link: https://halide-lang.org/tutorials/
+        type: website
 
 
 ### FIXED, DO NOT MODIFY

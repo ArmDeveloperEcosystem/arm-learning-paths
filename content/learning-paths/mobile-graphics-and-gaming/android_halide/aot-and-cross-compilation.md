@@ -23,6 +23,8 @@ Create a new file named blur-android.cpp with the following contents:
 ```cpp
 #include "Halide.h"
 #include <iostream>
+#include <string>   // for std::string
+#include <cstdint>  // for fixed-width integer types (e.g., uint8_t)
 using namespace Halide;
 
 int main(int argc, char** argv) {
@@ -85,6 +87,10 @@ int main(int argc, char** argv) {
 }
 ```
 
+In the original implementation constants 128, 255, and 0 were implicitly treated as integers. Here, the threshold value (128) and output values (255, 0) are explicitly cast to uint8_t. This approach removes ambiguity and clearly specifies the types used, ensuring compatibility and clarity. Both approaches result in identical functionality, but explicitly casting helps emphasize the type correctness and may avoid subtle issues during cross-compilation or in certain environments.
+
+Both approaches result in identical functionality, but explicitly casting helps emphasize the type correctness and may avoid subtle issues during cross-compilation or in certain environments.
+
 The program takes at least one command-line argument, the output base name used to generate the files (e.g., “blur_threshold_android”). Here, the target architecture is explicitly set within the code to Android ARM64:
 
 ```cpp
@@ -93,10 +99,23 @@ Halide::Target target;
 target.os = Halide::Target::OS::Android; 
 target.arch = Halide::Target::Arch::ARM;
 target.bits = 64;
+
+// Enable Halide runtime inclusion in the generated library (needed if not linking Halide runtime separately).
 target.set_feature(Target::NoRuntime, false);
+
+// Optionally, enable hardware-specific optimizations to improve performance on ARM devices:
+// - NEON: Advanced SIMD (Single Instruction Multiple Data) instructions for parallel computation.
+// - DotProd: Optimizes matrix multiplication and convolution-like operations on ARM.
+// - SVE or SVE2: Scalable Vector Extension for vectorization on newer ARM architectures (if applicable).
 ```
 
+Notes: 
+* NoRuntime feature: When set to true, Halide excludes its runtime from the generated code, requiring you to link the runtime manually during the linking step. Setting it to false includes the Halide runtime within the generated library, simplifying deployment.
+* NEON, DotProd, and SVE/SVE2 features leverage ARM-specific instruction sets for enhanced performance, especially beneficial on Android mobile devices.
+
 We declare spatial variables (x, y) and an ImageParam named “input” representing the input image data. We use boundary clamping (clamp) to safely handle edge pixels. Then, we apply a 3x3 blur with a reduction domain (RDom). The accumulated sum is divided by 9 (the number of pixels in the neighborhood), producing an average blurred image. Lastly, thresholding is applied, producing a binary output: pixels above a certain brightness threshold (128) become white (255), while others become black (0).
+
+This section intentionally reinforces previous concepts, focusing now primarily on explicitly clarifying integration details, such as type correctness and the handling of runtime features within Halide.
 
 Simple scheduling directives (compute_root) instruct Halide to compute intermediate functions at the pipeline’s root, simplifying debugging and potentially enhancing runtime efficiency.
 
@@ -116,6 +135,8 @@ This will produce:
 * A header file (blur_threshold_android.h) declaring the pipeline function for use in other C++/JNI code.
 
 These generated files are then ready to integrate directly into an Android project via JNI, allowing efficient execution of the optimized pipeline on Android devices. The integration process is covered in the next section.
+
+Note: JNI (Java Native Interface) is a framework that allows Java (or Kotlin) code running in a Java Virtual Machine (JVM), such as on Android, to interact with native applications and libraries written in languages like C or C++. JNI bridges the managed Java/Kotlin environment and the native, platform-specific implementations.
 
 ## Compilation instructions
 To compile the pipeline-generation program on your host system, use the following commands (replace /path/to/halide with your Halide installation directory):

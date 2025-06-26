@@ -10,12 +10,12 @@ layout: "learningpathall"
 ## Objective
 In this lesson, we’ll learn how to integrate a high-performance Halide image-processing pipeline into an Android application using Kotlin.
 
-## Overview of Mobile Integration with Halide
+## Overview of mobile integration with Halide
 Android is the world’s most widely-used mobile operating system, powering billions of devices across diverse markets. This vast user base makes Android an ideal target platform for developers aiming to reach a broad audience, particularly in applications requiring sophisticated image and signal processing, such as augmented reality, photography, video editing, and real-time analytics.
 
 Kotlin, now the preferred programming language for Android development, combines concise syntax with robust language features, enabling developers to write maintainable, expressive, and safe code. It offers seamless interoperability with existing Java codebases and straightforward integration with native code via JNI, simplifying the development of performant mobile applications. 
 
-##  Benefits of Using Halide on Mobile
+##  Benefits of using Halide on mobile
 Integrating Halide into Android applications brings several key advantages:
 1. Performance. Halide enables significant acceleration of complex image processing algorithms, often surpassing the speed of traditional Java or Kotlin implementations by leveraging optimized code generation. By generating highly optimized native code tailored for ARM CPUs or GPUs, Halide can dramatically increase frame rates and responsiveness, essential for real-time or interactive applications.
 2. Efficiency. On mobile devices, resource efficiency translates directly to improved battery life and reduced thermal output. Halide’s scheduling strategies (such as operation fusion, tiling, parallelization, and vectorization) minimize unnecessary memory transfers, CPU usage, and GPU overhead. This optimization substantially reduces overall power consumption, extending battery life and enhancing the user experience by preventing overheating.
@@ -23,26 +23,26 @@ Integrating Halide into Android applications brings several key advantages:
 
 In short, Halide delivers high-performance image processing without sacrificing portability or efficiency, a balance particularly valuable on resource-constrained mobile devices.
 
-### Android Development Ecosystem and Challenges
+### Android development ecosystem and challenges
 While Android presents abundant opportunities for developers, the mobile development ecosystem brings its own set of challenges, especially for performance-intensive applications:
 1. Limited Hardware Resources. Unlike desktop or server environments, mobile devices have significant constraints on processing power, memory capacity, and battery life. Developers must optimize software meticulously to deliver smooth performance while carefully managing hardware resource consumption. Leveraging tools like Halide allows developers to overcome these constraints by optimizing computational workloads, making resource-intensive tasks feasible on constrained hardware.
-2. Cross-Compilation Complexities. Developing native code for Android requires handling multiple hardware architectures (such as ARMv7, ARM64, and sometimes x86/x86_64). Cross-compilation introduces complexities due to different instruction sets, CPU features, and performance characteristics. Managing this complexity involves careful use of the Android NDK, understanding toolchains, and correctly configuring build systems (e.g., Gradle, CMake). Halide helps mitigate these issues by abstracting away many platform-specific optimizations, automatically generating code optimized for target architectures.
+2. Cross-Compilation Complexities. Developing native code for Android requires handling multiple hardware architectures (such as armv8-a, ARM64, and sometimes x86/x86_64). Cross-compilation introduces complexities due to different instruction sets, CPU features, and performance characteristics. Managing this complexity involves careful use of the Android NDK, understanding toolchains, and correctly configuring build systems (e.g., Gradle, CMake). Halide helps mitigate these issues by abstracting away many platform-specific optimizations, automatically generating code optimized for target architectures.
 3. Image-Format Conversions (Bitmap ↔ Halide Buffer). Android typically handles images through the Bitmap class or similar platform-specific constructs, whereas Halide expects image data to be in raw, contiguous buffer formats. Developers must bridge the gap between Android-specific image representations (Bitmaps, YUV images from camera APIs, etc.) and Halide’s native buffer format. Proper management of these conversions—including considerations for pixel formats, stride alignment, and memory copying overhead—can significantly impact performance and correctness, necessitating careful design and efficient implementation of buffer-handling routines.
 
-## Project Requirements
+## Project requirements
 Before integrating Halide into your Android application, ensure you have the necessary tools and libraries.
 
-### Tools and Prerequisites
+### Tools and prerequisites
 1. Android Studio. [Download link](https://developer.android.com/studio).
 2. Android NDK (Native Development Kit). Can be easily installed from Android Studio (Tools → SDK Manager → SDK Tools → Android NDK).
 
-## Setting Up the Android Project
-### Creating the Project:
+## Setting up the Android project
+### Creating the project
 1. Open Android Studio.
 2. Select New Project > Native C++.
 ![img4](Figures/04.png)
 
-### Configure the Project:
+### Configure the project
 1. Set the project Name to Arm.Halide.AndroidDemo.
 2. Choose Kotlin as the language.
 3. Set Minimum SDK to API 24.
@@ -52,7 +52,7 @@ Before integrating Halide into your Android application, ensure you have the nec
 ![img6](Figures/06.png)
 6. Click Finish.
 
-## Configuring the Android Project
+## Configuring the Android project
 Next, configure your Android project to use the files generated in the previous step. First, copy blur_threshold_android.a and blur_threshold_android.h into ArmHalideAndroidDemo/app/src/main/cpp. Ensure your cpp directory contains the following files:
 * native-lib.cpp
 * blur_threshold_android.a
