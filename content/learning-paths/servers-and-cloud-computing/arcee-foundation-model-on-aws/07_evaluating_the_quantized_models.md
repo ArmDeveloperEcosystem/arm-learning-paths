@@ -61,7 +61,7 @@ The results should look like this:
 | llama 8B Q4_0                  |   4.33 GiB |     8.03 B | CPU        |      16 |           pp512 |        190.18 ± 0.03 |
 | llama 8B Q4_0                  |   4.33 GiB |     8.03 B | CPU        |      16 |           tg128 |         40.99 ± 0.36 |
 
-It's pretty amazing to see that with only 4 threads, the 4-bit model can still generate at the very comfortable speed of 15 tokens per second.
+It's pretty amazing to see that with only 4 threads, the 4-bit model can still generate at the very comfortable speed of 15 tokens per second. We could definitely run several copies of the model on the same instance to serve concurrent users or applications.
 
 You could also try [`llama-batched-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/batched-bench) to benchmark performance on batch sizes larger than 1.
 
@@ -89,16 +89,33 @@ bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-Q8_0.gguf -f wikitext-2-raw/wik
 bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-Q4_0.gguf -f wikitext-2-raw/wiki.test.raw
 ```
 
-These commands will run for about 4 hours. You should run them in a shell script to avoid SSH timeouts. For example:
+If you want to speed things up, you can add the `--chunks` option to use a fraction of 564 chunks contained in the test dataset.
+
+On the full dataset, these three commands will take about 5 hours. You should run them in a shell script to avoid SSH timeouts.
+
+For example:
+```bash
+#!/bin/bash
+# ppl.sh
+bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-F16.gguf -f wikitext-2-raw/wiki.test.raw
+bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-Q8_0.gguf -f wikitext-2-raw/wiki.test.raw
+bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-Q4_0.gguf -f wikitext-2-raw/wiki.test.raw
+```
 ```bash
  nohup sh ppl.sh >& ppl.sh.log &
  tail -f ppl.sh.log
  ```
 
-If you want to speed things up, you can add the `--chunks` option to use a fraction of 564 chunks contained in the test dataset.
 
-Here are the full results:
+Here are the full results.
 
-TODO
 
+| Model | Generation Speed (tokens/s, 16 vCPUs) | Memory Usage | Perplexity (Wikitext-2) |
+|:-------:|:----------------------:|:------------:|:----------:|
+| F16     | ~15–16                 | ~15 GB       | TODO     |
+| Q8_0    | ~25                    | ~8 GB        | TODO       |
+| Q4_0    | ~40                    | ~4.4 GB      | TODO       |
+
+
+*Please remember to terminate the instance in the AWS console when you're done testing*
 

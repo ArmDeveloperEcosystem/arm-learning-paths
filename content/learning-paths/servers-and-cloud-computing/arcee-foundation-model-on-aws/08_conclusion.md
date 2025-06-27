@@ -9,7 +9,11 @@ layout: learningpathall
 
 ## Conclusion
 
-Congratulations! You have successfully completed the journey of deploying the Arcee AFM-4.5B foundation model on AWS Graviton4. Let's recap what we accomplished:
+Congratulations! You have successfully completed the journey of deploying the Arcee AFM-4.5B foundation model on AWS Graviton4. 
+
+*Please remember to terminate the instance in the AWS console when you're done testing*
+
+Let's recap what we accomplished.
 
 ### What We Built
 

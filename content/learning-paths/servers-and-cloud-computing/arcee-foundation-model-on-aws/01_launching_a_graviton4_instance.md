@@ -10,9 +10,11 @@ layout: learningpathall
 
   - An AWS account
 
+  - Quota for c8g instances in your preferred region
+
   - A Linux or MacOS host
 
-  - A c8g or r8g instance (4xlarge or larger)
+  - A c8g instance (4xlarge or larger)
 
   - At least 128GB of storage
 

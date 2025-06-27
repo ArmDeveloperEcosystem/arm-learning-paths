@@ -38,7 +38,6 @@ This command uses CMake to configure the build system:
 - `-B .` specifies that the build files should be generated in the current directory
 - CMake will detect your system's compiler, libraries, and hardware capabilities
 - It will generate the appropriate build files (Makefiles on Linux) based on your system configuration
-- This step also enables optimizations for ARM processors like Graviton4
 
 Note: The cmake output should include the information below, indicating that the build process will leverage the Neoverse V2 architecture's specialized instruction sets designed for AI/ML workloads. These optimizations are crucial for achieving optimal performance on Graviton4:
 
