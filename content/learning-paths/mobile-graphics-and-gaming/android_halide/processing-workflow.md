@@ -176,9 +176,44 @@ This expression explicitly assigns:
 * Weight = 2 for direct horizontal and vertical neighbors (r.x=1 or r.y=1 but not both)
 * Weight = 1 for corner pixels (diagonal neighbors)
 
+Given that the Gaussian kernel size is constant and small (3x3), it may be clearer and more maintainable to define the kernel explicitly as a 2D array. This removes conditional logic (select) and simplifies understanding of the code. Here is an example:
+```cpp
+// Define a static Gaussian kernel explicitly.
+const int kernel[3][3] = {
+    {1, 2, 1},
+    {2, 4, 2},
+    {1, 2, 1}
+};
+
+// Reduction domain covering the 3x3 kernel.
+Halide::RDom r(0, 3, 0, 3);
+
+// Directly access kernel values based on reduction domain indices.
+Halide::Expr weight = kernel[r.x][r.y];
+
+// Accumulate weighted sum.
+Halide::Expr val = Halide::cast<int32_t>(inputClamped(x + r.x - 1, y + r.y - 1)) * weight;
+```
+
 After the Gaussian blur stage, a thresholding operation is applied. This step converts the blurred grayscale image into a binary image, assigning a value of 255 to pixels with intensity greater than 128 and 0 otherwise, thus highlighting prominent features against the background.
 
 Finally, the processed image is returned from Halide to an OpenCV matrix and displayed in real-time. The loop continues until a key is pressed, providing a smooth, interactive demonstration of Halide’s ability to accelerate and streamline real-time image processing tasks.
+
+In the above example we used manually clamped coordiantes. An alternative and often recommended approach is to leverage Halide’s built-in function, BoundaryConditions::repeat_edge. Halide internally optimizes loops based on the specified boundary conditions, effectively partitioning loops to separately handle edge pixels, improving vectorization, parallelization, and overall efficiency.
+
+The alternative implementation could look like this:
+
+```cpp
+// Use Halide's built-in boundary handling instead of manual clamping.
+Halide::Func inputClamped = Halide::BoundaryConditions::repeat_edge(input);
+
+// Offsets around the current pixel.
+Halide::Expr offsetX = x + (r.x - 1);
+Halide::Expr offsetY = y + (r.y - 1);
+
+// Directly use clamped function to safely access pixel values.
+Halide::Expr val = Halide::cast<int32_t>(inputClamped(offsetX, offsetY)) * weight;
+```
 
 ## Compilation instructions
 Compile the program as follows (replace /path/to/halide accordingly):
@@ -215,6 +250,33 @@ Recompile your application as before, then run:
 ```console
 ./camera-capture
 ```
+
+The current example applies tiling primarily as a way to facilitate parallel execution rather than explicitly improving cache efficiency through intermediate storage. In Halide, tiling significantly boosts performance when intermediate results between computation stages are stored temporarily (e.g., using compute_at), as these smaller tiles of data fit efficiently into CPU caches.
+
+However, in our current implementation, each operation (Gaussian blur and thresholding) is fused and computed inline, without explicit intermediate storage. Thus, the primary benefit of tiling here is indeed parallelization rather than data locality improvement.
+
+To illustrate tiling specifically for improving cache locality via intermediate storage, one could explicitly store intermediate results in tiles using scheduling like:
+
+```cpp
+// Define variables.
+Halide::Var x("x"), y("y"), x_outer, y_outer, x_inner, y_inner;
+
+// Gaussian blur definition (as previously defined).
+Halide::Func blur("blur");
+Halide::Func thresholded("thresholded");
+
+// Thresholded definition (as previously defined).
+thresholded(x, y) = Halide::select(blur(x, y) > 128, 255, 0);
+
+// Apply tiling explicitly and schedule blur computation per tile.
+thresholded.tile(x, y, x_outer, y_outer, x_inner, y_inner, 64, 64)
+           .parallel(y_outer);
+
+// Store intermediate blur results within each tile to enhance data locality.
+blur.compute_at(thresholded, x_outer);
+```
+
+In this adjusted example the computation of blur is explicitly stored within each tile (compute_at(x_outer)). Moreover, intermediate results (blurred values) become small enough to fit comfortably into CPU cache.
 
 ## Summary
 In this section, we built a complete real-time image processing pipeline using Halide and OpenCV. Initially, we captured live video frames and applied Gaussian blur and thresholding to highlight image features clearly. By incorporating Halide’s tiling optimization, we also improved performance by enhancing cache efficiency and parallelizing computation. Through these steps, we demonstrated Halide’s capability to provide both concise, clear code and high performance, making it an ideal framework for demanding real-time image processing tasks.

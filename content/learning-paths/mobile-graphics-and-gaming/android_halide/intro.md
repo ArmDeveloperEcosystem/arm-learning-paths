@@ -12,7 +12,9 @@ Halide is a powerful, open-source programming language specifically designed to 
 
 A key advantage of Halide lies in its innovative programming model. By clearly distinguishing between algorithmic logic and scheduling decisions—such as parallelism, vectorization, memory management, and hardware-specific optimizations—developers can first focus on ensuring the correctness of their algorithms. Performance tuning can then be handled independently, significantly accelerating development cycles. This approach often yields performance that matches or even surpasses manually optimized code. As a result, Halide has seen widespread adoption across industry and academia, powering image processing systems at technology giants such as Google, Adobe, and Facebook, and enabling advanced computational photography features used by millions daily.
 
-In this learning path, you will explore Halide’s foundational concepts, set up your development environment, and create your first functional Halide application. By the end, you will understand what makes Halide uniquely suited to efficient image processing and be ready to build your own optimized pipelines.
+In this learning path, you will explore Halide’s foundational concepts, set up your development environment, and create your first functional Halide application. By the end, you will understand what makes Halide uniquely suited to efficient image processing, particularly on mobile and Arm-based hardware, and be ready to build your own optimized pipelines.
+
+For broader or more general use cases, please refer to the official Halide documentation and tutorials available at halide-lang.org.
 
 The example code for this Learning Path is available in the following repositories: [here](https://github.com/dawidborycki/Arm.Halide.Hello-World.git) and [here](https://github.com/dawidborycki/Arm.Halide.AndroidDemo.git)
 
@@ -24,13 +26,19 @@ At the core of Halide’s design philosophy is the principle of clearly separati
 
 This separation allows developers to rapidly experiment and optimize their code for different hardware architectures or performance requirements without altering the core algorithmic logic.
 
-### Functions, vars, and pipelines
-Halide introduces several essential concepts to simplify image-processing pipelines:
-* Functions (Func). Represent discrete computational steps or operations applied across pixels in an image. By defining computations declaratively, functions simplify the description of complex image-processing algorithms.
-* Variables (Var). Symbolize spatial coordinates or dimensions of the data (e.g., horizontal position x, vertical position y, and channel c). Vars serve as symbolic indices to define how computations apply across image data.
-* Pipelines. Comprise interconnected Halide functions that collectively form a complete image-processing workflow. Pipelines clearly define data dependencies, facilitating structured and modular image-processing tasks.
+Halide provides three key building blocks, including Functions, Vars, and Pipelines, to simplify and structure image processing algorithms. Consider the following illustrative example:
 
-Beyond manual scheduling strategies, Halide also provides an Autoscheduler, a powerful tool that automatically generates optimized schedules tailored to specific hardware architectures, further simplifying performance optimization.
+```cpp
+Halide::Var x("x"), y("y"), c("c");
+Halide::Func brighter("brighter");
+
+// Define a function to increase image brightness by 50
+brighter(x, y, c) = Halide::cast<uint8_t>(Halide::min(input(x, y, c) + 50, 255));
+```
+
+Functions (Func) represent individual computational steps or image operations. Each Func encapsulates an expression applied to pixels, allowing concise definition of complex image processing tasks. Vars symbolically represent spatial coordinates or dimensions (e.g., horizontal x, vertical y, color channel c). They specify where computations are applied in the image data Pipelines are formed by interconnecting multiple Func objects, structuring a clear workflow where the output of one stage feeds into subsequent stages, enabling modular and structured image processing.
+
+Halide is a domain-specific language (DSL) tailored explicitly for image and signal processing tasks. It provides a concise set of predefined operations and building blocks optimized for expressing complex image processing pipelines. By abstracting common computational patterns into simple yet powerful operators, Halide allows developers to succinctly define their processing logic, facilitating readability, maintainability, and easy optimization for various hardware targets.
 
 ### Scheduling strategies (parallelism, vectorization, tiling)
 Halide offers several powerful scheduling strategies designed for maximum performance:
@@ -40,13 +48,15 @@ Halide offers several powerful scheduling strategies designed for maximum perfor
 
 By combining these scheduling techniques, developers can achieve optimal performance tailored specifically to their target hardware architecture.
 
+Beyond manual scheduling strategies, Halide also provides an Autoscheduler, a powerful tool that automatically generates optimized schedules tailored to specific hardware architectures, further simplifying performance optimization.
+
 ## System requirements and environment setup
 To start developing with Halide, your system must meet several requirements and dependencies.
 
 ### Installation options
 Halide can be set up using one of two main approaches:
-* Installing pre-built binaries - pre-built binaries are convenient, quick to install, and suitable for beginners or standard platforms (Windows, Linux, macOS).
-* Building from source - building Halide from source offers greater flexibility, allowing optimization for your specific hardware or operating system configuration.
+* Installing pre-built binaries - pre-built binaries are convenient, quick to install, and suitable for most beginners or standard platforms (Windows, Linux, macOS). This approach is recommended for typical use cases.
+* Building Halide from source is required when pre-built binaries are unavailable for your specific environment, or if you wish to experiment with the latest Halide features or LLVM versions still under active development. This method typically requires greater familiarity with build systems and may be more suitable for advanced users.
 
 Here, we’ll use pre-built binaries:
 1. Visit the official Halide releases [page](https://github.com/halide/Halide/releases). As of this writing, the latest Halide version is v19.0.0.
@@ -57,8 +67,8 @@ export HALIDE_DIR=/path/to/halide
 export PATH=$HALIDE_DIR/bin:$PATH
 ```
 
-Halide depends on the following key software packages:
-1. LLVM (required for efficient compilation and optimization): 
+To proceed futher, let's make sure to install the following components:
+1. LLVM (Halide requires LLVM to compile and execute pipelines): 
 * Linux (Ubuntu):
 ```console
 sudo apt-get install llvm-19-dev libclang-19-dev clang-19
@@ -165,6 +175,15 @@ changes the loop nesting to process each pixel’s channels together (R, G, B fo
 * Better memory locality and cache performance when interfacing with interleaved libraries like OpenCV.
 * Reduced overhead for subsequent image-handling operations (display, saving, or further processing).
 
+By default, OpenCV stores images in interleaved memory layout, using the HWC (Height, Width, Channel) ordering. To correctly represent this data layout in a Halide buffer, you can also explicitly use the Buffer::make_interleaved() method, which ensures the data layout is properly specified. The code snippet would look like this:
+
+```cpp
+// Wrap the OpenCV Mat data in a Halide buffer with interleaved HWC layout.
+Buffer<uint8_t> inputBuffer = Buffer<uint8_t>::make_interleaved(
+    input.data, input.cols, input.rows, input.channels()
+);
+```
+
 ## Compilation instructions
 Compile the program as follows (replace /path/to/halide accordingly):
 ```console
@@ -191,4 +210,8 @@ You will see two windows displaying the original and inverted images:
 
 ## Summary
 In this lesson, you’ve learned Halide’s foundational concepts, explored the benefits of separating algorithms and schedules, set up your development environment, and created your first functional Halide application integrated with OpenCV. 
+
+While the example introduces the core concepts of Halide pipelines (such as defining computations symbolically and realizing them), it does not yet showcase the substantial benefits of explicitly separating algorithm definition from scheduling strategies.
+
+In subsequent lessons, you’ll explore advanced Halide scheduling techniques, including parallelism, vectorization, tiling, and loop fusion, which will clearly demonstrate the practical advantages of separating algorithm logic from scheduling. These techniques enable fine-grained performance optimization tailored to specific hardware without modifying algorithmic correctness.
 

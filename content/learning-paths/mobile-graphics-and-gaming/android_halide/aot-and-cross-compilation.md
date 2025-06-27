@@ -131,7 +131,7 @@ thresholded.compile_to_static_library(
 ```
 
 This will produce:
-* A static library (blur_threshold_android.a) containing the compiled pipeline.
+* A static library (blur_threshold_android.a) containing the compiled pipeline. This static library also includes Halide’s runtime functions tailored specifically for the targeted architecture (arm-64-android). Thus, no separate Halide runtime needs to be provided on the Android device when linking against this library.
 * A header file (blur_threshold_android.h) declaring the pipeline function for use in other C++/JNI code.
 
 These generated files are then ready to integrate directly into an Android project via JNI, allowing efficient execution of the optimized pipeline on Android devices. The integration process is covered in the next section.

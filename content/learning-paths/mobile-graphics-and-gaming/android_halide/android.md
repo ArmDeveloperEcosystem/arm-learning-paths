@@ -59,7 +59,7 @@ Next, configure your Android project to use the files generated in the previous 
 * blur_threshold_android.h
 * CMakeLists.txt
 
-Open CMakeLists.txt and modify it as follows (replace /path/to/halide with your Halide installation directory)::
+Open CMakeLists.txt and modify it as follows (replace /path/to/halide with your Halide installation directory):
 ```cpp
 cmake_minimum_required(VERSION 3.22.1)
 
@@ -345,6 +345,43 @@ The code defines three utility methods:
 2. extractGrayScaleBytes - converts a Bitmap into a grayscale byte array suitable for native processing.
 3. createBitmapFromGrayBytes - converts a grayscale byte array back into a Bitmap for display purposes.
 
+Note that performing the grayscale conversion in Halide allows us to exploit operator fusion, further improving performance by avoiding intermediate memory accesses. This could be done as follows:
+```cpp
+// Halide variables
+Halide::Var x("x"), y("y"), c("c");
+
+// Original RGB input buffer (interleaved RGB)
+Halide::Buffer<uint8_t> inputBuffer(inputRgbData, width, height, 3);
+
+// Convert RGB to grayscale directly in Halide pipeline
+Halide::Func grayscale("grayscale");
+grayscale(x, y) = Halide::cast<uint8_t>(
+    0.299f * inputBuffer(x, y, 0) +
+    0.587f * inputBuffer(x, y, 1) +
+    0.114f * inputBuffer(x, y, 2)
+);
+
+// Continue pipeline: Gaussian blur (example)
+Halide::Func blur("blur");
+Halide::RDom r(-1, 3, -1, 3);
+Halide::Expr kernel[3][3] = {
+    {1, 2, 1},
+    {2, 4, 2},
+    {1, 2, 1}
+};
+
+Halide::Expr blurSum = 0;
+for (int i = 0; i < 3; ++i) {
+    for (int j = 0; j < 3; ++j) {
+        blurSum += grayscale(x + r.x, y + r.y) * kernel[i][j];
+    }
+}
+blur(x, y) = Halide::cast<uint8_t>(blurSum / 16);
+
+// Fuse grayscale and blur operations
+grayscale.compute_at(blur, x);
+```
+
 The JNI integration occurs through an external method declaration, blurThresholdImage, loaded via the companion object at app startup. The native library (armhalideandroiddemo) containing this function is compiled separately and integrated into the application (native-lib.cpp).
 
 You will now need to create blurThresholdImage function. To do so, in Android Studio put the cursor above blurThresholdImage function, and then click Create JNI function for blurThresholdImage:
@@ -405,6 +442,12 @@ Through this JNI bridge, Kotlin can invoke high-performance native code. You can
 
 ![img9](Figures/09.png)
 ![img10](Figures/10.png)
+
+In the above code we created a new jbyteArray and copying the data explicitly, which can result in an additional overhead. To optimize performance by avoiding unnecessary memory copies, you can directly wrap Halide’s buffer in a Java-accessible ByteBuffer like so
+```java
+// Instead of allocating a new jbyteArray, create a direct ByteBuffer from Halide's buffer data.
+jobject outputBuffer = env->NewDirectByteBuffer(output.data(), width * height);
+```
 
 ## Summary
 In this lesson, we’ve successfully integrated a Halide image-processing pipeline into an Android application using Kotlin. We started by setting up an Android project configured for native development with the Android NDK, employing Kotlin as the primary language. We then integrated Halide-generated static libraries and demonstrated their usage through Java Native Interface (JNI), bridging Kotlin and native code. This equips developers with the skills needed to harness Halide’s capabilities for building sophisticated, performant mobile applications on Android.
