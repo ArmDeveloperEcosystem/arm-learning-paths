@@ -10,17 +10,17 @@ In this section, you'll launch the first of two VMs used for benchmarking Go app
 
 ## Create the c4a-standard-4 instance
 
-To access the Google Cloud console, navigate to [https://console.cloud.google.com/welcome](https://console.cloud.google.com/welcome).
+Go to the Google Cloud console: [https://console.cloud.google.com/welcome](https://console.cloud.google.com/welcome).
 
-In the search bar at the top, start typing `vm`, then select **VM Instances** when it appears.
+In the search bar at the top, start typing `vm`, then select **VM instances** when it appears.
 
-![alt-text#center](images/launch_c4a/3.png)
+![alt-text#center](images/launch_c4a/3.png "Select VM instances")
 
- On the **VM Instances** page, click **Create instance**.
+ On the **VM instances** page, click **Create instance**.
 
 ![alt-text#center](images/launch_c4a/4.png)
 
- In the **Name** field, enter `c4a`.
+ In the **Name** field, enter the name of the instance - here it should be `c4a`.
 
 ![alt-text#center](images/launch_c4a/5.png)
 

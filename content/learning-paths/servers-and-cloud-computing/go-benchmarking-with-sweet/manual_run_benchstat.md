@@ -11,13 +11,11 @@ You've successfully run and downloaded the benchmark results from both your Arm-
 
 ## Inspecting the results files
 
-If you're curious about the format of the results files, you can open them to better understand what `benchstat` is analyzing.
+You can open the result files to see the raw benchmark output that Benchstat analyzes.
 
-1. View raw results
+Open the `c4a.result` file in a text editor. You should see something like this:
 
-Open the `c4a.result` file in a text editor, and you'll see something like this:
-
-   ![](images/run_manually/11.png)
+   ![alt-text#center](images/run_manually/11.png)
 
 The file contains the results of the `markdown` benchmark run on the Arm-based c4a VM, showing time and memory stats taken for each iteration. If you open the `c4.result` file, you'll see similar results for the x86-based c4 VM.
 
@@ -43,13 +41,13 @@ Make a temporary benchstat directory to hold the results files on either the c4a
 
 Click the `UPLOAD FILE` button in the GCP console, and upload the `c4a.results` AND `c4.results` files you downloaded earlier. (This uploads them to your home directory, not to the current directory.)
 
-   ![](images/run_manually/16.png)
+   ![alt-text#center](images/run_manually/16.png)
 
 3. Verify upload
 
 You'll know it worked correctly via the confirmation dialog in your terminal:
 
-   ![](images/run_manually/17.png)
+   ![alt-text#center](images/run_manually/17.png)
 
 4. Move files to working directory
 
