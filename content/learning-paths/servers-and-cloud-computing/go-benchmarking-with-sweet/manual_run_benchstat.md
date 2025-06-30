@@ -9,9 +9,9 @@ layout: learningpathall
 You've successfully run and downloaded the benchmark results from both your Arm-based and x86-based VMs. In this section, you'll use Benchstat to compare performance between the two instances.
 
 
-## Inspecting the results files
+## Inspect the results files
 
-You can open the result files to see the raw benchmark output that Benchstat analyzes.
+To understand what Benchstat analyzes, open the result files to view the raw benchmark output.
 
 Open the `c4a.result` file in a text editor. You should see something like this:
 
@@ -19,16 +19,14 @@ Open the `c4a.result` file in a text editor. You should see something like this:
 
 The file contains the results of the `markdown` benchmark run on the Arm-based c4a VM, showing time and memory stats taken for each iteration. If you open the `c4.result` file, you'll see similar results for the x86-based c4 VM.
 
-2. Close the editor
-
 Close the text editor when done.
 
 ## Run Benchstat to compare results
 
-To compare the results, you'll use `benchstat` to analyze the two result files you downloaded. Since all the prerequisites are already installed on the `c4` and `c4a` instances, benchstat will be run from one of those instances.
+To compare the results, you'll now use Benchstat to analyze the two result files you downloaded. Since all the prerequisites are already installed on the `c4` and `c4a` instances, Benchstat will be run from one of those instances.
 
 
-1. Create working directory
+### Create working directory
 
 Make a temporary benchstat directory to hold the results files on either the c4a or c4 instance, and change directory into it:
 
@@ -37,7 +35,7 @@ Make a temporary benchstat directory to hold the results files on either the c4a
    cd benchstat_results
    ```
 
-2. Upload result files
+### Upload result files
 
 Click the `UPLOAD FILE` button in the GCP console, and upload the `c4a.results` AND `c4.results` files you downloaded earlier. (This uploads them to your home directory, not to the current directory.)
 
@@ -49,7 +47,7 @@ You'll know it worked correctly via the confirmation dialog in your terminal:
 
    ![alt-text#center](images/run_manually/17.png)
 
-4. Move files to working directory
+### Move files to working directory
 
 Move the results files to the `benchstat_results` directory, and confirm their presence:
 
@@ -64,7 +62,7 @@ Move the results files to the `benchstat_results` directory, and confirm their p
    c4.results  c4a.results
    ```
 
-5. Run benchstat
+### Run benchstat
 
 Now you can run `benchstat` to compare the two results files:
 
@@ -75,7 +73,7 @@ Now you can run `benchstat` to compare the two results files:
    benchstat c4a.results c4.results > c4a_vs_c4.txt
    ```
 
-6. View comparison results
+### View comparison results
 
 Run the `cat` command to view the results:
 
@@ -128,7 +126,7 @@ Run the `cat` command to view the results:
    
    In this example, you can see that the c4a (Arm) instance completed the markdown benchmark in 143.9m seconds, while the c4 (x86) instance took 158.3m seconds, indicating better performance on the Arm system for this particular workload.
    
-   If you wanted the results in CSV format, you could run the `benchstat` command with the `-format csv` option instead.
+   If you want the results in CSV format, you can run the `benchstat` command with the `-format csv` option instead.
 
 At this point, you can download the `c4a_vs_c4.txt` for further analysis or reporting. You can also run the same or different benchmarks with the same, or different combinations of VMs, and continue comparing results using `benchstat`.
 
