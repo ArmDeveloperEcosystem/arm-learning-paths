@@ -98,15 +98,15 @@ Large gaps between average and peak memory usage suggest opportunities for memor
 
 Here are some general tips to keep in mind as you explore benchmarking across different apps and instance types:
 
-- Unlike Intel and AMD processors that use hyper-threading, Arm processors provide single-threaded cores without hyper-threading. A four-core Arm processor has four independent cores running four threads, while a four-core Intel processor provides eight logical cores through hyper-threading. This means that each Arm vCPU represents a full physical core, while each Intel/AMD vCPU represents half a physical core. For fair comparison, this Learning Path uses a 4-vCPU Arm instance against an 8-vCPU Intel instance.  When scaling up instance sizes during benchmarking, make sure to keep a 2:1 Intel/AMD:Arm vCPU ratio if you wish to keep parity on CPU resources.
+- On Intel and AMD processors with hyper-threading, each vCPU corresponds to a logical core (hardware thread), and two vCPUs share a single physical core. On Arm processors (which do not use hyper-threading), each vCPU corresponds to a full physical core. For comparison, this Learning Path uses a 4-vCPU Arm instance against an 8-vCPU Intel instance, maintaining a 2:1 Intel:Arm vCPU ratio to keep parity on physical CPU resources.
 
-- Run each benchmark at least 10 times (-count 10) to account for outliers and produce statistically meaningful results.
+- Run each benchmark at least 10 times to account for outliers and produce statistically meaningful results.
 
-- Results can be bound by CPU, memory, or I/O performance.  If you see significant differences in one metric but not others, it might indicate a bottleneck in that area; running the same benchmark with different configurations (for example, using more CPU cores or more memory) can help identify the bottleneck.
+- Results can be bound by CPU, memory, or I/O performance. If you see significant differences in one metric but not others, it might indicate a bottleneck in that area; running the same benchmark with different configurations (for example, using more CPU cores or more memory) can help identify the bottleneck.
 
 
 
-    
+
 
 
 

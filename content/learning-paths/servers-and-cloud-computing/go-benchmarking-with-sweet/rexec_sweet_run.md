@@ -5,6 +5,7 @@ weight: 54
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
 With `rexec_sweet` installed, your benchmarking instances running, and your local machine authenticated with GCP, you're ready to run automated benchmarks across your configured environments.
 
 ## Run an automated benchmark and generate results
@@ -12,9 +13,10 @@ With `rexec_sweet` installed, your benchmarking instances running, and your loca
 To begin, open a terminal on your local machine and run:
 
 ```bash
-rexec_sweet
+rexec-sweet
 ```
-The script will prompt you to choose a benchmark. 
+
+The tool will prompt you to choose a benchmark. 
 
 Press **Enter** to run the default benchmark, markdown, which is a good starting point for your first run.
 
@@ -33,7 +35,7 @@ Available benchmarks:
 Enter number (1-10) [default: markdown]:
 ```
 
-The script then detects your running GCP instances and displays them. You’ll be asked whether you want to use the first two instances it finds and the default install paths.
+The tool then detects your running GCP instances and displays them. You’ll be asked whether you want to use the first two instances it finds and the default install paths.
 
 ```output
 Available instances:
@@ -70,7 +72,7 @@ Output directory: /private/tmp/a/go_benchmarks/results/c4-c4a-markdown-20250610T
 ...
 ```
 
-After selecting instances and paths, the script will:
+After selecting instances and paths, the tool will:
    - Run the selected benchmark on both VMs
    - Use `benchstat` to compare the results
    - Push the results to your local machine
@@ -89,13 +91,13 @@ Report generated in results/c4-c4a-markdown-20250610T190407
 
 Once on your local machine, `rexec_sweet` will generate an HTML report that opens automatically in your web browser.
 
-   If you close the report, you can reopen it by navigating to the `results` subdirectory and opening report.html in your browser.
+If you close the report, you can reopen it by navigating to the `results` subdirectory and opening report.html in your browser.
 
 ![alt-text#center](images/run_auto/2.png "Sample HTML report")
 
 
 {{% notice Note %}}
-If you see output messages from `rexec_sweet.py` similar to "geomeans may not be comparable" or "Dn: ratios must be >0 to compute geomean", this is expected and can be ignored. These warnings typically appear when benchmark sets differ slightly between the two VMs.
+If you see output messages similar to "geomeans may not be comparable" or "Dn: ratios must be >0 to compute geomean", this is expected and can be ignored. These warnings typically appear when benchmark sets differ slightly between the two VMs.
 {{% /notice %}}
 
-Upon completion, the script generates a report in the `results` subdirectory of the current working directory of the `rexec_sweet.py` script, which opens automatically in your web browser to view the benchmark results and comparisons.
+Upon completion, the tool generates a report in the `results` subdirectory of the current working directory, which opens automatically in your web browser to view the benchmark results and comparisons.
