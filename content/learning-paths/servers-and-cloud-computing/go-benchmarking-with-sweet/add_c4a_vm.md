@@ -30,19 +30,19 @@ Now select the machine series by scrolling down to the Machine series section, a
 
 To view machine types, scroll down to the **Machine type** dropdown, and select it to show all available options.
 
-![alt-text#center](images/launch_c4a/8.png)
+![alt-text#center](images/launch_c4a/8.png "Select Machine type dropdown")
 
 Now choose machine size by selecting **c4a-standard-4** under the **Standard** tab.
 
-![alt-text#center](images/launch_c4a/9.png)
+![alt-text#center](images/launch_c4a/9.png "Select machine size")
 
 To configure storage, select the **OS and Storage** tab.
 
-![alt-text#center](images/launch_c4a/10.png)
+![alt-text#center](images/launch_c4a/10.png "Configure storage")
 
 To modify storage settings, select **Change**.
 
-![alt-text#center](images/launch_c4a/11.png)
+![alt-text#center](images/launch_c4a/11.png "Modify storage settings")
 
 To set disk size, select the **Size (GB)** field and enter "1000" for the value.
 
