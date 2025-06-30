@@ -6,9 +6,9 @@ weight: 53
 layout: learningpathall
 ---
 
-In the last section, you learned how to run benchmarks and benchstat manually. Now you'll learn how to run them automatically, with enhanced visualization of the results.
+In the last section, you learned how to run benchmarks and Benchstat manually. Now you'll automate that process and generate visual reports using a script called `rexec_sweet.py`.
 
-## Introducing rexec_sweet.py
+## What is rexec_sweet.py?
 
 `rexec_sweet.py` is a script that automates the benchmarking workflow: it connects to your GCP instances, runs benchmarks, collects results, and generates HTML reports - all in one step.
 
@@ -20,23 +20,29 @@ It provides several key benefits:
 
 Before running the script, ensure you've completed the "Install Go, Sweet, and Benchstat" step. All other dependencies are installed automatically by the setup script.
 
-## Setting up rexec_sweet
+## Set up rexec_sweet
 
-1. **Create a working directory:** On your local machine, open a terminal, then create and change into a directory to store the `rexec_sweet.py` script and related files:
+### Create a working directory
+
+On your local machine, open a terminal, then create and change into a directory to store the `rexec_sweet.py` script and related files:
 
    ```bash
    mkdir rexec_sweet
    cd rexec_sweet
    ```
    
-2. **Clone the repository:** Get the `rexec_sweet.py` script from the GitHub repository:
+### Clone the repository
+
+Get the `rexec_sweet.py` script from the GitHub repository:
 
    ```bash
    git clone https://github.com/geremyCohen/go_benchmarks.git
    cd go_benchmarks
    ```
 
-3. **Run the installer:** Copy and paste this command into your terminal to run the installer:
+### Run the installer
+
+Copy and paste this command into your terminal to run the installer:
 
    ```bash
    ./install.sh
@@ -51,7 +57,9 @@ Before running the script, ensure you've completed the "Install Go, Sweet, and B
 
    If you see this prompt, enter `N` to continue with the installation without modifying the existing installed dependencies.
 
-4. **Verify VM status:** Make sure the GCP VM instances you created in the previous section are running. If not, start them now, and wait a few minutes for them to finish booting.
+### Verify VM status
+
+Make sure the GCP VM instances you created in the previous section are running. If not, start them now, and wait a few minutes for them to finish booting.
 
 {{% notice Note %}}
 The install script prompts you to authenticate with Google Cloud Platform (GCP) using the gcloud command-line tool at the end of install. If after installing you have issues running the script and/or get GCP authentication errors, you can manually authenticate with GCP by running the following command: `gcloud auth login`

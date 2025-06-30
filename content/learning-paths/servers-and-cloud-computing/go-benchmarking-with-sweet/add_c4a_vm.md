@@ -18,15 +18,15 @@ In the search bar at the top, start typing `vm`, then select **VM instances** wh
 
  On the **VM instances** page, click **Create instance**.
 
-![alt-text#center](images/launch_c4a/4.png)
+![alt-text#center](images/launch_c4a/4.png "Select Create instance")
 
  In the **Name** field, enter the name of the instance - here it should be `c4a`.
 
-![alt-text#center](images/launch_c4a/5.png)
+![alt-text#center](images/launch_c4a/5.png "Enter name of the instance")
 
 Now select the machine series by scrolling down to the Machine series section, and selecting the **C4A** radio button.
 
-![alt-text#center](images/launch_c4a/7.png)
+![alt-text#center](images/launch_c4a/7.png "Select C4A radio button")
 
 To view machine types, scroll down to the **Machine type** dropdown, and select it to show all available options.
 

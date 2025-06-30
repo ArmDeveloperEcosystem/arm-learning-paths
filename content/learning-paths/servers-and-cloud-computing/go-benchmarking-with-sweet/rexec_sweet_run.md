@@ -72,7 +72,7 @@ Output directory: /private/tmp/a/go_benchmarks/results/c4-c4a-markdown-20250610T
 
 After selecting instances and paths, the script will:
    - Run the selected benchmark on both VMs
-   - Run `benchstat` to compare the results
+   - Use `benchstat` to compare the results
    - Push the results to your local machine
 
 ```output
@@ -87,7 +87,7 @@ Report generated in results/c4-c4a-markdown-20250610T190407
 
 ### View the report
 
-Once on your local machine, `rexec_sweet` will generate an HTML report that will open automatically in your web browser.
+Once on your local machine, `rexec_sweet` will generate an HTML report that opens automatically in your web browser.
 
    If you close the report, you can reopen it by navigating to the `results` subdirectory and opening report.html in your browser.
 
@@ -95,7 +95,7 @@ Once on your local machine, `rexec_sweet` will generate an HTML report that will
 
 
 {{% notice Note %}}
-If you see output messages from `rexec_sweet.py` similar to "geomeans may not be comparable" or "Dn: ratios must be >0 to compute geomean", this is expected and can be ignored. These messages indicate that the benchmark sets differ between the two VMs, which is common when running benchmarks on different hardware or configurations.
+If you see output messages from `rexec_sweet.py` similar to "geomeans may not be comparable" or "Dn: ratios must be >0 to compute geomean", this is expected and can be ignored. These warnings typically appear when benchmark sets differ slightly between the two VMs.
 {{% /notice %}}
 
 Upon completion, the script generates a report in the `results` subdirectory of the current working directory of the `rexec_sweet.py` script, which opens automatically in your web browser to view the benchmark results and comparisons.
