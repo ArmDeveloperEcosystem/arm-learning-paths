@@ -141,7 +141,14 @@ Adjust `--datadir`, `--socket`, and `--port` as needed for your environment. Mak
 
 With the database running, open a second terminal to create a benchmark User and third terminal to run the client commands. 
 
+In the new terminal, navigate to the build directory:
+
+```bash
+cd $HOME/mysql-server/build
+```
+
 ## Create Benchmark User and Database 
+
 Run once after initializing MySQL for the first time:
 ```bash
 bin/mysql -u root <<< "
@@ -163,7 +170,7 @@ bin/mysql -u root <<< "DROP DATABASE bench; CREATE DATABASE bench;"
 
 ## Install and build sysbench
 
-In the third terminal, do the below if you do not have sysbench already. 
+In a third terminal, run the commands below if you have not run sysbench yet. 
 
 ```bash
 git clone https://github.com/akopytov/sysbench.git
@@ -192,12 +199,6 @@ Run `sysbench` with the `prepare` option:
   --table-size=10000 \
   --threads=1 \
   src/lua/oltp_read_write.lua prepare
-```
-
-Navigate out of the `sysbench` directory.
-
-```bash 
-cd ..
 ```
 
 ## Shutdown MySQL and snapshot dataset for fast reuse 
@@ -282,7 +283,7 @@ The `.fdata` file defined in `--instrumentation-file` will be populated with run
 
 After completing each benchmark run (e.g. after sysbench run), you must cleanly shut down the MySQL server and reset the dataset to ensure the next test starts from a consistent state.
 ```bash
-bin/mysqladmin -u root shutdown ; rm -rf /dev/shm/dataset ; cp -R data-orig/ /dev/shm/dataset
+bin/mysqladmin -u root shutdown ; rm -rf /dev/shm/dataset ; cp -R data/ /dev/shm/dataset
 ```
 
 ## Verify the profile was created
