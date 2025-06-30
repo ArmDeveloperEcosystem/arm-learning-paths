@@ -23,7 +23,7 @@ make install
 Use `llvm-bolt` to instrument `libssl.so.3`:
 
 ```bash
-llvm-bolt $HOME/bolt-libs/openssl/libssl.so.3 \
+llvm-bolt $HOME/bolt-libs/openssl/lib/libssl.so.3 \
   -instrument \
   -o $HOME/bolt-libs/openssl/lib/libssl.so.3.instrumented \
   --instrumentation-file=$HOME/bolt-libs/openssl/lib/libssl-readwrite.fdata \
@@ -65,10 +65,14 @@ cp $HOME/bolt-libs/openssl/libssl.so.optimized $HOME/bolt-libs/openssl/libssl.so
 export LD_LIBRARY_PATH=$HOME/bolt-libs/openssl/lib
 
 # You can confirm that mysqld is loading your optimized library with:
-LD_LIBRARY_PATH=$HOME/bolt-libs/openssl/ ldd build/bin/mysqld | grep libssl
+LD_LIBRARY_PATH=$HOME/bolt-libs/openssl/ 
+ldd build/bin/mysqld | grep libssl
+```
 
 It should show:
-libssl.so.3 => /home/ubuntu/bolt-libs/openssl/libssl.so.3 (...)
+
+```output
+libssl.so.3 => /home/ubuntu/bolt-libs/openssl/libssl.so.3
 ```
 
 This ensures MySQL will dynamically load the optimized `libssl.so`.
@@ -148,9 +152,12 @@ export LD_LIBRARY_PATH=$HOME/bolt-libs/openssl/
 
 # You can confirm that mysqld is loading your optimized library with:
 LD_LIBRARY_PATH=$HOME/bolt-libs/openssl/ ldd build/bin/mysqld | grep libcrypto
+```
 
 It should show:
-libcrypto.so.3 => /home/ubuntu/bolt-libs/openssl/libcrypto.so.3 (...)
+
+```output
+libcrypto.so.3 => /home/ubuntu/bolt-libs/openssl/libcrypto.so.3 
 ```
 
 Run a final validation workload to ensure functionality and measure performance improvements.

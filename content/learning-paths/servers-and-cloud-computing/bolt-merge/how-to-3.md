@@ -24,6 +24,8 @@ llvm-bolt $HOME/mysql-server/build/bin/mysqld \
   2>&1 | tee $HOME/mysql-server/bolt-instrumentation-writeonly.log
 ```
 
+Run sysbench again with the write-only workload:
+
 ```bash
 # On an 8-core system, use available cores (e.g., 7 for sysbench)
 taskset -c 7 ./src/sysbench \
@@ -52,7 +54,7 @@ Make sure that the `--instrumentation-file` is set appropriately to save `profil
 
 After completing each benchmark run (e.g. after sysbench run), you must cleanly shut down the MySQL server and reset the dataset to ensure the next test starts from a consistent state.
 ```bash
-./build/bin/mysqladmin -u root shutdown ; rm -rf /dev/shm/dataset ; cp -R data-orig/ /dev/shm/dataset
+./bin/mysqladmin -u root shutdown ; rm -rf /dev/shm/dataset ; cp -R data/ /dev/shm/dataset
 ```
 ### Verify the Second Profile Was Generated
 
