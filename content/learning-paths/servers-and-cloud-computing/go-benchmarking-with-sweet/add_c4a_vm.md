@@ -1,12 +1,11 @@
 ---
-title: Launch a Google Axion instance
+title: Launch an Arm-based c4a-standard-4 instance
 weight: 20
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Launch an Arm-based c4a-standard-4 instance
 In this section, you'll launch the first of two VMs used for benchmarking Go applications: the Arm-based c4a-standard-4 instance on Google Cloud, (referred to as "c4a").
 
 ## Create the c4a-standard-4 instance
@@ -15,47 +14,47 @@ To access the Google Cloud console, navigate to [https://console.cloud.google.co
 
 In the search bar at the top, start typing `vm`, then select **VM Instances** when it appears.
 
-![](images/launch_c4a/3.png)
+![alt-text#center](images/launch_c4a/3.png)
 
  On the **VM Instances** page, click **Create instance**.
 
-![](images/launch_c4a/4.png)
+![alt-text#center](images/launch_c4a/4.png)
 
  In the **Name** field, enter `c4a`.
 
-![](images/launch_c4a/5.png)
+![alt-text#center](images/launch_c4a/5.png)
 
 Now select machine series by scrolling down to the Machine series section, and selecting the **C4A** radio button.
 
-![](images/launch_c4a/7.png)
+![alt-text#center](images/launch_c4a/7.png)
 
 To view machine types, scroll down to the **Machine type** dropdown, and select it to show all available options.
 
-![](images/launch_c4a/8.png)
+![alt-text#center](images/launch_c4a/8.png)
 
 Now choose machine size by selecting **c4a-standard-4** under the **Standard** tab.
 
-![](images/launch_c4a/9.png)
+![alt-text#center](images/launch_c4a/9.png)
 
 To configure storage, select the **OS and Storage** tab.
 
-![](images/launch_c4a/10.png)
+![alt-text#center](images/launch_c4a/10.png)
 
 To modify storage settings, select **Change**.
 
-![](images/launch_c4a/11.png)
+![alt-text#center](images/launch_c4a/11.png)
 
 To set disk size, select the **Size (GB)** field and enter "1000" for the value.
 
-![](images/launch_c4a/16.png)
+![alt-text#center](images/launch_c4a/16.png)
 
 Now confirm storage settings by selecting **Select** to continue.
 
-![](images/launch_c4a/18.png)
+![alt-text#center](images/launch_c4a/18.png)
 
 To launch the instance, select **Create** to bring up the instance.
 
-![](images/launch_c4a/19.png)
+![alt-text#center](images/launch_c4a/19.png)
 
 After a few seconds, your c4a instance is up and running, and you are ready to continue to the next section. 
 

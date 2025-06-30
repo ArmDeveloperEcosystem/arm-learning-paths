@@ -1,31 +1,28 @@
 ---
-title: Launch an Intel Emerald Rapids instance
+title: Launch an Intel Emerald Rapids c4-standard-8 instance
 weight: 30
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Launch an x86-based `c4-standard-8` instance
-In this section, you will set up the second benchmarking system, an Intel Emerald Rapids `c4-standard-8` instance.
+In this section, you'll set up the second benchmarking system: an Intel-based Emerald Rapids `c4-standard-8` instance on Google Cloud (referred to as **c4**).
 
-## Creating the Instance
+## Create the c4-standard-8 instance
 
 Follow the same steps from the previous section where you launched the c4a instance, but make the following changes for the Intel-based c4-standard-8:
 
-* Where you name the instance, in the **Name** field, enter "c4".
+* In the **Name** field, enter "c4".
+* In the **Machine types for common workloads** section, select the **c4** radio button.
+![alt-text#center](images/launch_c4/3.png "Select the c4 radio button")
 
-* Where you select the machine series, scroll down and select the C4 radio button.
+* In the **Machine configuration** section, open the dropdown select `c4-standard-8`.
 
-![](images/launch_c4/3.png)
+![alt-text#center](images/launch_c4/4.png "Open the dropdown and select `c4-standard-8`")
 
-For the machine types section, scroll down to the **Machine type** dropdown, and click it to show all available options.
+* In the **Machine type** section, open the dropdown and select `c4-standard-8` under the **Standard** tab.
 
-![](images/launch_c4/4.png)
-
-Where you choose machine size, select "c4-standard-8" under the **Standard** tab.
-
-![](images/launch_c4/5.png)
+![alt-text#center](images/launch_c4/5.png "Select `c4-standard-8`")
 
 {{% notice Note %}} 
 Be sure to set the disk size to **1000 GB** in the **OS and Storage** tab, just as you did for the `c4a` instance.
