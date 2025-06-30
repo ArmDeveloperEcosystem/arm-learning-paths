@@ -24,7 +24,7 @@ In the search bar at the top, start typing `vm`, then select **VM instances** wh
 
 ![alt-text#center](images/launch_c4a/5.png)
 
-Now select machine series by scrolling down to the Machine series section, and selecting the **C4A** radio button.
+Now select the machine series by scrolling down to the Machine series section, and selecting the **C4A** radio button.
 
 ![alt-text#center](images/launch_c4a/7.png)
 
@@ -46,15 +46,15 @@ To modify storage settings, select **Change**.
 
 To set disk size, select the **Size (GB)** field and enter "1000" for the value.
 
-![alt-text#center](images/launch_c4a/16.png)
+![alt-text#center](images/launch_c4a/16.png "Enter value in the Size (GB) field")
 
 Now confirm storage settings by selecting **Select** to continue.
 
-![alt-text#center](images/launch_c4a/18.png)
+![alt-text#center](images/launch_c4a/18.png "Confirm the selection of settings with the Select button")
 
 To launch the instance, select **Create** to bring up the instance.
 
-![alt-text#center](images/launch_c4a/19.png)
+![alt-text#center](images/launch_c4a/19.png "Select the Create button to launch the instance")
 
 After a few seconds, your c4a instance is up and running, and you are ready to continue to the next section. 
 

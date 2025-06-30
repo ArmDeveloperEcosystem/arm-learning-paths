@@ -7,15 +7,16 @@ layout: learningpathall
 ---
 With `rexec_sweet` installed, your benchmarking instances running, and your local machine authenticated with GCP, you're ready to run automated benchmarks across your configured environments.
 
-## Run an automated benchmark and analysis
+## Run an automated benchmark and generate results
 
-1. **Run the script:** Execute the `rexec_sweet` script from your local terminal:
+To begin, open a terminal on your local machine and run:
 
 ```bash
 rexec_sweet
 ```
+The script will prompt you to choose a benchmark. 
 
-2. **Select a benchmark:** When prompted, press **Enter** to run the default benchmark (markdown), recommended for your first run.
+Press **Enter** to run the default benchmark, markdown, which is a good starting point for your first run.
 
 ```bash
 Available benchmarks:
@@ -32,7 +33,7 @@ Available benchmarks:
 Enter number (1-10) [default: markdown]:
 ```
 
-3. **Select instances:** The script will proceed and call into GCP to detect all running VMs. You should see the script output:
+The script then detects your running GCP instances and displays them. You’ll be asked whether you want to use the first two instances it finds and the default install paths.
 
 ```output
 Available instances:
@@ -41,12 +42,9 @@ Available instances:
 
 Do you want to run the first two instances found with default install directories? [Y/n]:
 ```
+You can accept the defaults by pressing **Enter**, which uses the instances listed and assumes Go and Sweet were installed to ~/benchmarks/sweet.
 
-4. **Choose your configuration:** You have two options:
-
-   - **Use default settings:** If you want to run benchmarks on the instances labeled with "will be used as nth instance", and you installed Go and Sweet into the default path (~/benchmarks/sweet), you can press **Enter** to accept the defaults.
-
-   - **Custom configuration:** If you are running more than two instances, and the script doesn't suggest the correct two to autorun, or you installed Go and Sweet to non-default folders, select "n" and press **Enter**. The script will then prompt you to select the instances and runtime paths.
+If you're running more than two instances or installed Go and Sweet to a non-default location, enter n and follow the prompts to manually select instances and specify custom install paths.
 
 In this example, you'll manually select the instances and paths as shown below:
 
@@ -87,15 +85,17 @@ Running benchmarks on the selected instances...
 Report generated in results/c4-c4a-markdown-20250610T190407
 ```
 
-5. **View the report:** Once on your local machine, `rexec_sweet` will generate an HTML report that will open automatically in your web browser.
+### View the report
 
-   If you close the report, you can reopen it by navigating to the results subdirectory and opening report.html in your browser.
+Once on your local machine, `rexec_sweet` will generate an HTML report that will open automatically in your web browser.
 
-![](images/run_auto/2.png)
+   If you close the report, you can reopen it by navigating to the `results` subdirectory and opening report.html in your browser.
+
+![alt-text#center](images/run_auto/2.png "Sample HTML report")
 
 
 {{% notice Note %}}
 If you see output messages from `rexec_sweet.py` similar to "geomeans may not be comparable" or "Dn: ratios must be >0 to compute geomean", this is expected and can be ignored. These messages indicate that the benchmark sets differ between the two VMs, which is common when running benchmarks on different hardware or configurations.
 {{% /notice %}}
 
-6. **Analyze results:** Upon completion, the script will generate a report in the `results` subdirectory of the current working directory of the `rexec_sweet.py` script, which opens automatically in your web browser to view the benchmark results and comparisons.
+Upon completion, the script generates a report in the `results` subdirectory of the current working directory of the `rexec_sweet.py` script, which opens automatically in your web browser to view the benchmark results and comparisons.
