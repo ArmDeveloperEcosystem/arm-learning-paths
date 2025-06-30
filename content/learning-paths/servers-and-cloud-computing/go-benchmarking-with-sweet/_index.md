@@ -27,7 +27,15 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
+further_reading:
+    - resource:
+        title: Effective Go
+        link: https://go.dev/doc/effective_go#performance
+        type: blog
+    - resource:
+        title: Benchmark testing in Go
+        link: https://dev.to/stefanalfbo/benchmark-testing-in-go-17dc
+        type: blog
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

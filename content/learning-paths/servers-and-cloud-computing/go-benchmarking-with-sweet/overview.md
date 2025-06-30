@@ -31,7 +31,7 @@ In this Learning Path, you'll compare performance using two four-core GCP instan
 
 {{% notice Note %}}
 Arm-based c4a-standard-4 instances and Intel-based c4-standard-8 instances both utilize four cores. Both instances are categorized by GCP as members a series that demonstrates consistent high performance.
-The main difference between the two is that c4a has 16 GB of RAM, while c4 has 30 GB of RAM. This Learning Path uses equivalent core counts to ensure a fair performance comparison.
+The main difference between the two is that c4a has 16 GB of RAM, while c4 has 30 GB of RAM. This Learning Path uses equivalent core counts as an example of performance comparison.
 {{% /notice %}}   
 
 
