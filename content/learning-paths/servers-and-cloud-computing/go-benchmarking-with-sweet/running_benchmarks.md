@@ -6,13 +6,13 @@ weight: 50
 layout: learningpathall
 ---
 
-Now that setup is complete, it's important to understand the available benchmarks and the performance metrics you'll be analyzing in order to compare system performance effectively.
+Now that setup is complete, it's important to understand the benchmarks you’ll run and the performance metrics you’ll use to evaluate results across systems.
 
 ## Available benchmarks
 
 Whether running manually or automatically, the benchmarking process consists of two main steps:
 
-1. **Running benchmarks with Sweet**: `sweet` executes the benchmarks on each VM, generating raw performance data
+1. **Running benchmarks with Sweet**: `sweet` executes the benchmarks on each VM, generating raw performance data.
 
 2. **Analyzing results with Benchstat**: `benchstat` compares the results from different VMs to identify performance differences.  Benchstat can output results in text format (default) or CSV format. The text format provides a human-readable tabular view, while CSV allows for further processing with other tools.
 
@@ -98,11 +98,11 @@ Large gaps between average and peak memory usage suggest opportunities for memor
 
 Here are some general tips to keep in mind as you explore benchmarking across different apps and instance types:
 
-- Unlike Intel and AMD processors that use hyper-threading, Arm processors provide single-threaded cores without hyper-threading. A four-core Arm processor has four independent cores running four threads, while an four-core Intel processor provides eight logical cores through hyper-threading. This means each Arm vCPU represents a full physical core, while each Intel/AMD vCPU represents half a physical core. For fair comparison, this learning path uses a 4-vCPU Arm instance against an 8-vCPU Intel instance.  When scaling up instance sizes during benchmarking, make sure to keep a 2:1 Intel/AMD:Arm vCPU ratio if you wish to keep parity on CPU resources.
+- Unlike Intel and AMD processors that use hyper-threading, Arm processors provide single-threaded cores without hyper-threading. A four-core Arm processor has four independent cores running four threads, while a four-core Intel processor provides eight logical cores through hyper-threading. This means that each Arm vCPU represents a full physical core, while each Intel/AMD vCPU represents half a physical core. For fair comparison, this Learning Path uses a 4-vCPU Arm instance against an 8-vCPU Intel instance.  When scaling up instance sizes during benchmarking, make sure to keep a 2:1 Intel/AMD:Arm vCPU ratio if you wish to keep parity on CPU resources.
 
-- It's suggested to run each benchmark at least 10 times (specified via the `count` parameter) to handle outlier/errant runs and ensure statistical significance.
+- Run each benchmark at least 10 times (-count 10) to account for outliers and produce statistically meaningful results.
 
-- Results may be bound by CPU, memory, or I/O performance.  If you see significant differences in one metric but not others, it may indicate a bottleneck in that area; running the same benchmark with different configurations (e.g., more CPU cores, more memory) can help identify the bottleneck.
+- Results can be bound by CPU, memory, or I/O performance.  If you see significant differences in one metric but not others, it might indicate a bottleneck in that area; running the same benchmark with different configurations (for example, using more CPU cores or more memory) can help identify the bottleneck.
 
 
 
