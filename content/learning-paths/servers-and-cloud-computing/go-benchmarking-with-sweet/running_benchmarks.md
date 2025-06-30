@@ -1,24 +1,25 @@
 ---
-title: Benchmark Types and Metrics
+title: Benchmark types and metrics
 weight: 50
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-With setup complete, you can now run and analyze the benchmarks.  Before you do, it's good to understand all the different pieces in more detail.
+Now that setup is complete, it's important to understand the benchmarks you’ll run and the performance metrics you’ll use to evaluate results across systems.
 
-## Choosing a Benchmark to Run
+## Available benchmarks
 
 Whether running manually or automatically, the benchmarking process consists of two main steps:
 
-1. **Running benchmarks with Sweet**: `sweet` executes the benchmarks on each VM, generating raw performance data
+1. **Running benchmarks with Sweet**: `sweet` executes the benchmarks on each VM, generating raw performance data.
 
 2. **Analyzing results with Benchstat**: `benchstat` compares the results from different VMs to identify performance differences.  Benchstat can output results in text format (default) or CSV format. The text format provides a human-readable tabular view, while CSV allows for further processing with other tools.
 
 Sweet comes ready to run with the following benchmarks:  
 
-| Benchmark       | Description                                                                                                                               | Command                                                      |
+
+| Benchmark       | Description                                                                                                                               | Example command                                                      |
 |-----------------|-------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | **biogo-igor**    | Processes pairwise alignment data using the biogo library, grouping repeat feature families and outputting results in JSON format.         | `sweet run -count 10 -run="biogo-igor" config.toml`           |
 | **biogo-krishna** | Pure-Go implementation of the PALS algorithm for pairwise sequence alignment, measuring alignment runtime performance.                    | `sweet run -count 10 -run="biogo-krishna" config.toml`        |
@@ -31,18 +32,18 @@ Sweet comes ready to run with the following benchmarks:
 | **markdown**      | Parses and renders Markdown documents to HTML using a Go-based markdown library to evaluate parsing and rendering throughput.            | `sweet run -count 10 -run="markdown" config.toml`             |
 | **tile38**        | Stress-tests a Tile38 geospatial database with WITHIN, INTERSECTS, and NEARBY queries to measure spatial query performance.              | `sweet run -count 10 -run="tile38" config.toml`               |
 
-## Metrics Summary
+## Performance metrics
 
 When running benchmarks, several key metrics are collected to evaluate performance.  The following summarizes the most common metrics and their significance:
 
-### Seconds per Operation - Lower is better
+### Seconds per operation (lower is better)
 
 This metric measures the time taken to complete a single operation, indicating the raw speed of execution. It directly reflects the performance efficiency of a system for a specific task, making it one of the most fundamental benchmarking metrics.
 
 A system with lower seconds per operation completes tasks faster.
  This metric primarily reflects CPU performance but can also be influenced by memory access speeds and I/O operations. If seconds per operation is the only metric showing significant difference while memory metrics are similar, the performance difference is likely CPU-bound.
 
-### Operations per Second - Higher is better
+### Operations per second (higher is better)
 This metric provides a clear measure of system performance capacity, making it essential for understanding raw processing power and scalability potential. A system performing more operations per second has greater processing capacity.
 
 This metric reflects overall system performance including CPU speed, memory access efficiency, and I/O capabilities.
@@ -51,7 +52,7 @@ If operations per second is substantially higher while memory usage remains prop
 
 This metric is essentially the inverse of "seconds per operation" and provides a more intuitive way to understand throughput capacity.
 
-### Average RSS Bytes - Lower is better
+### Average RSS bytes (lower is better)
 
 Resident Set Size (RSS) represents the portion of memory occupied by a process that is held in RAM (not swapped out). It shows the typical memory footprint during operation, indicating memory efficiency and potential for scalability.
 
@@ -59,7 +60,7 @@ Lower average RSS indicates more efficient memory usage. A system with lower ave
 
 If one VM has significantly higher seconds per operation but lower RSS, it may be trading speed for memory efficiency. Systems with similar CPU performance but different RSS values indicate different memory optimization approaches; lower RSS with similar CPU performance suggests better memory management, which is a critical indicator of performance in memory-constrained environments.
 
-### Peak RSS Bytes - Lower is better
+### Peak RSS bytes (lower is better)
 
 Peak RSS bytes is the maximum Resident Set Size reached during execution, representing the worst-case memory usage scenario. The peak RSS metric helps to understand memory requirements and potential for memory-related bottlenecks during intensive operations.
 
@@ -67,7 +68,7 @@ Lower peak RSS indicates better handling of memory-intensive operations. High pe
 
 Large differences between average and peak RSS suggest memory usage volatility. A system with lower peak RSS but similar performance is better suited for memory-constrained environments.
 
-### Peak VM Bytes - Lower is better
+### Peak VM bytes (lower is better)
 
 Peak VM Bytes is the maximum Virtual Memory size used, including both RAM and swap space allocated to the process. 
 
@@ -75,7 +76,7 @@ Lower peak VM indicates more efficient use of the total memory address space. Hi
 
 If peak VM is much higher than peak RSS, the system is relying heavily on virtual memory management.  Systems with similar performance but different VM usage patterns may have different memory allocation strategies. High VM with performance degradation suggests potential memory-bound operations due to excessive paging.
 
-## Summary of Efficiency Indicators
+## Summary of efficiency indicators
 
 When comparing metrics across two systems, keep the following in mind:
 
@@ -84,28 +85,28 @@ A system is likely CPU-bound if seconds per operation differs significantly whil
 
 A system is likely memory-bound if performance degrades as memory metrics increase, especially when peak RSS approaches available physical memory.
 
-### Efficiency Indicators
+### Efficiency indicators
 The ideal system shows lower values across all metrics - faster execution with smaller memory footprint. Systems with similar seconds per operation but significantly different memory metrics indicate different optimization priorities.
 
-### Scalability Potential
+### Scalability potential
 Lower memory metrics (especially peak values) suggest better scalability for concurrent workloads. Systems with lower seconds per operation but higher memory usage may perform well for single tasks but scale poorly.
 
-### Optimization Targets
+### Optimization targets
 Large gaps between average and peak memory usage suggest opportunities for memory optimization.  High seconds per operation with low memory usage suggests CPU optimization potential.
 
-## Best Practices when benchmarking across different instance types
+## Best practices when benchmarking across different instance types
 
 Here are some general tips to keep in mind as you explore benchmarking across different apps and instance types:
 
-- Unlike Intel and AMD processors that use hyper-threading, Arm processors provide single-threaded cores without hyper-threading. A four-core Arm processor has four independent cores running four threads, while an four-core Intel processor provides eight logical cores through hyper-threading. This means each Arm vCPU represents a full physical core, while each Intel/AMD vCPU represents half a physical core. For fair comparison, this learning path uses a 4-vCPU Arm instance against an 8-vCPU Intel instance.  When scaling up instance sizes during benchmarking, make sure to keep a 2:1 Intel/AMD:Arm vCPU ratio if you wish to keep parity on CPU resources.
+- On Intel and AMD processors with hyper-threading, each vCPU corresponds to a logical core (hardware thread), and two vCPUs share a single physical core. On Arm processors (which do not use hyper-threading), each vCPU corresponds to a full physical core. For comparison, this Learning Path uses a 4-vCPU Arm instance against an 8-vCPU Intel instance, maintaining a 2:1 Intel:Arm vCPU ratio to keep parity on physical CPU resources.
 
-- It's suggested to run each benchmark at least 10 times (specified via the `count` parameter) to handle outlier/errant runs and ensure statistical significance.
+- Run each benchmark at least 10 times to account for outliers and produce statistically meaningful results.
 
-- Results may be bound by CPU, memory, or I/O performance.  If you see significant differences in one metric but not others, it may indicate a bottleneck in that area; running the same benchmark with different configurations (e.g., more CPU cores, more memory) can help identify the bottleneck.
+- Results can be bound by CPU, memory, or I/O performance. If you see significant differences in one metric but not others, it might indicate a bottleneck in that area; running the same benchmark with different configurations (for example, using more CPU cores or more memory) can help identify the bottleneck.
 
 
 
-    
+
 
 
 
