@@ -1,32 +1,38 @@
 ---
-title: Manually running benchstat
+title: Manually run Benchstat
 weight: 52
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-You've successfully run and downloaded the benchmark results from both your Arm-based and x86-based VMs. In this section, you'll compare them to each other using the benchstat tool.
+You've successfully run and downloaded the benchmark results from both your Arm-based and x86-based VMs. In this section, you'll use Benchstat to compare performance between the two instances.
 
 
-## Inspecting the Results Files
+## Inspecting the results files
 
-With the results files downloaded to your local machine, if you're curious to what they look like, you can inspect them to understand better what `benchstat` is analyzing.
+If you're curious about the format of the results files, you can open them to better understand what `benchstat` is analyzing.
 
-1. **View raw results:** Open the `c4a.result` file in a text editor, and you'll see something like this:
+1. View raw results
+
+Open the `c4a.result` file in a text editor, and you'll see something like this:
 
    ![](images/run_manually/11.png)
 
 The file contains the results of the `markdown` benchmark run on the Arm-based c4a VM, showing time and memory stats taken for each iteration. If you open the `c4.result` file, you'll see similar results for the x86-based c4 VM.
 
-2. **Close the editor:** Close the text editor when done.
+2. Close the editor
 
-## Running Benchstat to Compare Results
+Close the text editor when done.
+
+## Run Benchstat to compare results
 
 To compare the results, you'll use `benchstat` to analyze the two result files you downloaded. Since all the prerequisites are already installed on the `c4` and `c4a` instances, benchstat will be run from one of those instances.
 
 
-1. **Create working directory:** Make a temporary benchstat directory to hold the results files on either the c4a or c4 instance, and change directory into it:
+1. Create working directory
+
+Make a temporary benchstat directory to hold the results files on either the c4a or c4 instance, and change directory into it:
 
    ```bash
    mkdir benchstat_results

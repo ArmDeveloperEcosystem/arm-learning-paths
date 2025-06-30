@@ -1,5 +1,5 @@
 ---
-title: Launching a Intel Emerald Rapids Instance
+title: Launching an Intel Emerald Rapids Instance
 weight: 30
 
 ### FIXED, DO NOT MODIFY

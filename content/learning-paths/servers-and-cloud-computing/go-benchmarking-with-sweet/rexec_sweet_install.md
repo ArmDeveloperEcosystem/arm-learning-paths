@@ -1,5 +1,5 @@
 ---
-title: Install the automated benchmark and benchstat runner
+title: Install the automated benchmark and Benchstat runner
 weight: 53
 
 ### FIXED, DO NOT MODIFY

@@ -1,5 +1,5 @@
 ---
-title: Run the automated benchmark and benchstat runner
+title: Run the automated benchmark and Benchstat runner
 weight: 54
 
 ### FIXED, DO NOT MODIFY
