@@ -6,12 +6,15 @@ weight: 40
 layout: learningpathall
 ---
 
-In this section, you'll install Go, Sweet, and Benchstat on both virtual machines.
+In this section, you'll install Go, Sweet, and Benchstat on both virtual machines:
 
-Sweet is a Go benchmarking tool that provides a standardized way to run performance tests across systems. Benchstat is a companion tool that compares benchmark results to highlight meaningful performance differences. Together, these tools help you evaluate Go performance on both Arm and x86 architectures.
+* Sweet is a Go benchmarking tool that provides a standardized way to run performance tests across systems. 
+* Benchstat is a companion tool that compares benchmark results to highlight meaningful performance differences. 
+
+Together, these tools help you evaluate Go performance on both Arm and x86 architectures.
 
 {{% notice Note %}}
-Subsequent steps in the learning path assume you are running this script (installing) from your home directory (`$HOME`), resulting in the creation of a `$HOME/benchmarks/sweet` final install path. If you install to a different directory, update the paths in later steps to match your custom location.
+Subsequent steps in this Learning Path assume you are running this script (installing) from your home directory (`$HOME`), resulting in the creation of a `$HOME/benchmarks/sweet` final install path. If you install to a different directory, update the paths in later steps to match your custom location.
 {{% /notice %}}
 
 ## Installation script

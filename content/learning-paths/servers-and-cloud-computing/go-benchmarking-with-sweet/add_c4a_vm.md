@@ -1,5 +1,5 @@
 ---
-title: Launching a Google Axion instance
+title: Launch a Google Axion instance
 weight: 20
 
 ### FIXED, DO NOT MODIFY
@@ -7,59 +7,59 @@ layout: learningpathall
 ---
 
 ## Launch an Arm-based c4a-standard-4 instance
-In this section, you'll launch the first of two VMs used for benchmarking Go applications: the Arm-based c4a-standard-4 instance on Google Cloud, also referred to as c4a.
+In this section, you'll launch the first of the two VMs used for benchmarking Go applications: the Arm-based c4a-standard-4 instance on Google Cloud, also referred to as c4a.
 
-## Creating the c4a-standard-4 instance
+## Create the c4a-standard-4 instance
 
-1. **Access Google Cloud console:** Navigate to [https://console.cloud.google.com/welcome](https://console.cloud.google.com/welcome)
+To access the Google Cloud console, navigate to [https://console.cloud.google.com/welcome](https://console.cloud.google.com/welcome).
 
-2. **Search for VM instances:** Select the search field.
+Now search for VM instances, by using the search field.
 
-3. **Find VM Instances:** Start typing `vm` until the UI auto-completes `VM Instances`, then select it.
+To find VM instances, start typing "vm" until the UI auto-completes `VM Instances`, then select it.
 
 ![](images/launch_c4a/3.png)
 
 The VM Instances page appears.
 
-4. **Create a new instance:** Select **Create instance**
+Now create a new instance, by selecting **Create instance**.
 
 ![](images/launch_c4a/4.png)
 
 The Machine configuration page appears.
 
-5. **Name your instance:** Select the **Name** field, and enter "c4a".
+To name your instance, select the **Name** field, and enter "c4a".
 
 ![](images/launch_c4a/5.png)
 
-6. **Select machine series:** Scroll down to the Machine series section, and select the C4A radio button.
+Now select machine series by scrolling down to the Machine series section, and selecting the C4A radio button.
 
 ![](images/launch_c4a/7.png)
 
-7. **View machine types:** Scroll down to the Machine type dropdown, and select it to show all available options.
+To view machine types, scroll down to the Machine type dropdown, and select it to show all available options.
 
 ![](images/launch_c4a/8.png)
 
-8. **Choose machine size:** Select **c4a-standard-4** under the Standard tab.
+Now choose machine size by selecting **c4a-standard-4** under the Standard tab.
 
 ![](images/launch_c4a/9.png)
 
-9. **Configure storage:** select the **OS and Storage** tab.
+To configure storage, select the **OS and Storage** tab.
 
 ![](images/launch_c4a/10.png)
 
-10. **Modify storage settings:** select **Change**
+To modify storage settings, select **Change**.
 
 ![](images/launch_c4a/11.png)
 
-11. **Set disk size:** Select the **Size (GB)** field, then enter "1000" for the value.
+To set disk size, select the **Size (GB)** field, then enter "1000" for the value.
 
 ![](images/launch_c4a/16.png)
 
-12. **Confirm storage settings:** Select **Select** to continue.
+Now confirm storage settings by selecting **Select** to continue.
 
 ![](images/launch_c4a/18.png)
 
-13. **Launch the instance:** select **Create** to bring up the instance.
+To launch the instance, select **Create** to bring up the instance.
 
 ![](images/launch_c4a/19.png)
 

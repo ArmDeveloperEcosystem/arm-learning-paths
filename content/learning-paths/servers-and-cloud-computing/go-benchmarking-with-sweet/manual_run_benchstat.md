@@ -39,15 +39,21 @@ Make a temporary benchstat directory to hold the results files on either the c4a
    cd benchstat_results
    ```
 
-2. **Upload result files:** Click the `UPLOAD FILE` button in the GCP console, and upload the `c4a.results` AND `c4.results` files you downloaded earlier. (This uploads them to your home directory, not to the current directory.)
+2. Upload result files
+
+Click the `UPLOAD FILE` button in the GCP console, and upload the `c4a.results` AND `c4.results` files you downloaded earlier. (This uploads them to your home directory, not to the current directory.)
 
    ![](images/run_manually/16.png)
 
-3. **Verify upload:** You'll know it worked correctly via the confirmation dialog in your terminal:
+3. Verify upload
+
+You'll know it worked correctly via the confirmation dialog in your terminal:
 
    ![](images/run_manually/17.png)
 
-4. **Move files to working directory:** Move the results files to the `benchstat_results` directory, and confirm their presence:
+4. Move files to working directory
+
+Move the results files to the `benchstat_results` directory, and confirm their presence:
 
    ```bash
    mv ~/c4a.results ~/c4.results .
@@ -60,7 +66,9 @@ Make a temporary benchstat directory to hold the results files on either the c4a
    c4.results  c4a.results
    ```
 
-5. **Run benchstat:** Now you can run `benchstat` to compare the two results files:
+5. Run benchstat
+
+Now you can run `benchstat` to compare the two results files:
 
    ```bash
    export GOPATH=$HOME/go
@@ -69,7 +77,9 @@ Make a temporary benchstat directory to hold the results files on either the c4a
    benchstat c4a.results c4.results > c4a_vs_c4.txt
    ```
 
-6. **View comparison results:** Run the `cat` command to view the results:
+6. View comparison results
+
+Run the `cat` command to view the results:
 
    ```bash
    cat c4a_vs_c4.txt

@@ -1,5 +1,5 @@
 ---
-title: Manually running benchmarks
+title: Manually run benchmarks
 weight: 51
 
 ### FIXED, DO NOT MODIFY

@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/). This Learning Path can be run on any cloud provider or on-premises, but it focuses on Google Cloud’s Axion Arm64-based instances.
-    - A local machine with [Google Cloud CLI](/install-guides/gcloud/) installed.
+    - A local machine with [Google Cloud CLI](/install-guides/gcloud/) installed
 
 author: Geremy Cohen
 
