@@ -22,6 +22,8 @@ Before running the script, ensure you've completed the "Install Go, Sweet, and B
 
 ## Set up rexec_sweet
 
+Follow the steps below to set up rexec_sweet.py.
+
 ### Create a working directory
 
 On your local machine, open a terminal, then create and change into a directory to store the `rexec_sweet.py` script and related files:
