@@ -1,38 +1,39 @@
 ---
-title: Installing Go and Sweet
+title: Install Go, Sweet, and Benchstat
 weight: 40
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-In this section, you'll install Go, Sweet, and the Benchstat comparison tool on both VMs.
+In this section, you'll install Go, Sweet, and Benchstat on both virtual machines:
 
-## Installation Script
+* Sweet is a Go benchmarking tool that provides a standardized way to run performance tests across systems. 
+* Benchstat is a companion tool that compares benchmark results to highlight meaningful performance differences. 
 
-Sweet is a Go benchmarking tool that provides a standardized way to run performance tests across different systems. Benchstat is a companion tool that analyzes and compares benchmark results, helping you understand performance differences between systems. Together, these tools will allow you to accurately measure and compare Go performance on Arm and x86 architectures.
-
+Together, these tools help you evaluate Go performance on both Arm and x86 architectures.
 
 {{% notice Note %}}
-Subsequent steps in the learning path assume you are running this script (installing) from your home directory (`$HOME`), resulting in the creation of a `$HOME/benchmarks/sweet` final install path. If you decide to install elsewhere, you will need to adjust the path accordingly when prompted to run the benchmark logic later in the learning path.
+Subsequent steps in this Learning Path assume you are running this script (installing) from your home directory (`$HOME`), resulting in the creation of a `$HOME/benchmarks/sweet` final install path. If you install to a different directory, update the paths in later steps to match your custom location.
 {{% /notice %}}
 
+## Installation script
 
-Start by copying and pasting the script below on **both** of your GCP VMs. This script checks the architecture of your running VM, installs the required Go package on your VM. It then installs sweet, benchmarks, and the benchstat tools.
+Start by copying and pasting the script below on both of your GCP VMs. This script automatically detects your system architecture, installs the appropriate Go version, and sets up Sweet, Benchstat, and the Go benchmark suite.
 
-**You don't need to run it after pasting**, just paste it into your home directory and press enter to install all needed dependencies: 
+Paste the full block into your terminal. This creates and runs an installer script directly from your home directory:
 
 ```bash
 #!/usr/bin/env bash
 
-# Write the script to filesystem using a HEREDOC
+# Write the install script to filesystem using a HEREDOC
 cat <<'EOF' > install_go_and_sweet.sh
 
 sudo apt-get -y update
 sudo apt-get -y install git build-essential
 
 # Detect architecture - this allows the same script to work on both
-# our Arm (c4a) and x86 (c4) VMs without modification
+# Arm (c4a) and x86 (c4) VMs without modification
 ARCH=$(uname -m)
 case "$ARCH" in
   arm64|aarch64)
@@ -90,7 +91,9 @@ chmod 755 install_go_and_sweet.sh
 
 ```
 
-The end of the output should look like:
+## Expected output from sweet get
+
+When `sweet get` completes successfully, you’ll see output similar to:
 
 ```output
 Sweet v0.3.0: Go Benchmarking Suite
@@ -109,7 +112,7 @@ Usage: sweet get [flags]
 ```
 
 
-## Verify Installation
+## Verify installation
 
 To test that everything is installed correctly, set the environment variables shown below on each VM:
 

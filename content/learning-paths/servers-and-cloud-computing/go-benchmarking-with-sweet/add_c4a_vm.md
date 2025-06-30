@@ -1,67 +1,62 @@
 ---
-title: Launching a Google Axion Instance
+title: Launch an Arm-based c4a-standard-4 instance
 weight: 20
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
-In this section, you'll learn how to spin up the first of two different VMs used for benchmarking Go tests, an Arm-based Google Axion c4a-standard-4 (c4a for short).
+In this section, you'll launch the first of two VMs used for benchmarking Go applications: the Arm-based c4a-standard-4 instance on Google Cloud, (referred to as "c4a").
 
-## Creating the c4a-standard-4 Instance
+## Create the c4a-standard-4 instance
 
-1. **Access Google Cloud Console:** Navigate to [https://console.cloud.google.com/welcome](https://console.cloud.google.com/welcome)
+Go to the Google Cloud console: [https://console.cloud.google.com/welcome](https://console.cloud.google.com/welcome).
 
-2. **Search for VM instances:** Click into the Search field.
+In the search bar at the top, start typing `vm`, then select **VM instances** when it appears.
 
-3. **Find VM Instances:** Start typing `vm` until the UI auto-completes `VM Instances`, then click it.
+![alt-text#center](images/launch_c4a/3.png "Select VM instances")
 
-![](images/launch_c4a/3.png)
+ On the **VM instances** page, click **Create instance**.
 
-The VM Instances page appears.
+![alt-text#center](images/launch_c4a/4.png "Select Create instance")
 
-4. **Create a new instance:** Click `Create instance`
+ In the **Name** field, enter the name of the instance - here it should be `c4a`.
 
-![](images/launch_c4a/4.png)
+![alt-text#center](images/launch_c4a/5.png "Enter name of the instance")
 
-The Machine configuration page appears.
+Now select the machine series by scrolling down to the Machine series section, and selecting the **C4A** radio button.
 
-5. **Name your instance:** Click the `Name` field, and enter "c4a" for the `Name`.
+![alt-text#center](images/launch_c4a/7.png "Select C4A radio button")
 
-![](images/launch_c4a/5.png)
+To view machine types, scroll down to the **Machine type** dropdown, and select it to show all available options.
 
-6. **Select machine series:** Scroll down to the Machine series section, and select the C4A radio button.
+![alt-text#center](images/launch_c4a/8.png "Select Machine type dropdown")
 
-![](images/launch_c4a/7.png)
+Now choose machine size by selecting **c4a-standard-4** under the **Standard** tab.
 
-7. **View machine types:** Scroll down to the Machine type dropdown, and click it to show all available options.
+![alt-text#center](images/launch_c4a/9.png "Select machine size")
 
-![](images/launch_c4a/8.png)
+To configure storage, select the **OS and Storage** tab.
 
-8. **Choose machine size:** Select "c4a-standard-4" under the Standard tab.
+![alt-text#center](images/launch_c4a/10.png "Configure storage")
 
-![](images/launch_c4a/9.png)
+To modify storage settings, select **Change**.
 
-9. **Configure storage:** Click the "OS and Storage" tab.
+![alt-text#center](images/launch_c4a/11.png "Modify storage settings")
 
-![](images/launch_c4a/10.png)
+To set disk size, select the **Size (GB)** field and enter "1000" for the value.
 
-10. **Modify storage settings:** Click "Change"
+![alt-text#center](images/launch_c4a/16.png "Enter value in the Size (GB) field")
 
-![](images/launch_c4a/11.png)
+Now confirm storage settings by selecting **Select** to continue.
 
-11. **Set disk size:** Double-click the "Size (GB)" field, then enter "1000" for the value.
+![alt-text#center](images/launch_c4a/18.png "Confirm the selection of settings with the Select button")
 
-![](images/launch_c4a/16.png)
+To launch the instance, select **Create** to bring up the instance.
 
-12. **Confirm storage settings:** Click "Select" to continue.
+![alt-text#center](images/launch_c4a/19.png "Select the Create button to launch the instance")
 
-![](images/launch_c4a/18.png)
+After a few seconds, your c4a instance is up and running, and you are ready to continue to the next section. 
 
-13. **Launch the instance:** Click "Create" to bring up the instance.
-
-![](images/launch_c4a/19.png)
-
-After a few seconds, your c4a instance starts up, and you are ready to continue to the next section. In the next step, you will launch the second VM, an Intel-based Emerald Rapids c4-standard-8 (c4 for short), which will serve as the comparison system for our benchmarking tests.
+In the next section, you'll launch the second VM, an Intel-based Emerald Rapids c4-standard-8 (referred to as "c4"), which serves as the comparison system for benchmarking.
 
