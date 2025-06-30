@@ -6,7 +6,7 @@ weight: 30
 layout: learningpathall
 ---
 
-## Section Overview
+## Section overview
 In this section, you will set up the second benchmarking system, an Intel Emerald Rapids `c4-standard-8` instance.
 
 ## Creating the Instance

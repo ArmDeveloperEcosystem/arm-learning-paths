@@ -7,39 +7,33 @@ layout: learningpathall
 ---
 
 ## Launch an Arm-based c4a-standard-4 instance
-In this section, you'll launch the first of the two VMs used for benchmarking Go applications: the Arm-based c4a-standard-4 instance on Google Cloud, also referred to as c4a.
+In this section, you'll launch the first of two VMs used for benchmarking Go applications: the Arm-based c4a-standard-4 instance on Google Cloud, (referred to as "c4a").
 
 ## Create the c4a-standard-4 instance
 
 To access the Google Cloud console, navigate to [https://console.cloud.google.com/welcome](https://console.cloud.google.com/welcome).
 
-Now search for VM instances, by using the search field.
-
-To find VM instances, start typing "vm" until the UI auto-completes `VM Instances`, then select it.
+In the search bar at the top, start typing `vm`, then select **VM Instances** when it appears.
 
 ![](images/launch_c4a/3.png)
 
-The VM Instances page appears.
-
-Now create a new instance, by selecting **Create instance**.
+ On the **VM Instances** page, click **Create instance**.
 
 ![](images/launch_c4a/4.png)
 
-The Machine configuration page appears.
-
-To name your instance, select the **Name** field, and enter "c4a".
+ In the **Name** field, enter `c4a`.
 
 ![](images/launch_c4a/5.png)
 
-Now select machine series by scrolling down to the Machine series section, and selecting the C4A radio button.
+Now select machine series by scrolling down to the Machine series section, and selecting the **C4A** radio button.
 
 ![](images/launch_c4a/7.png)
 
-To view machine types, scroll down to the Machine type dropdown, and select it to show all available options.
+To view machine types, scroll down to the **Machine type** dropdown, and select it to show all available options.
 
 ![](images/launch_c4a/8.png)
 
-Now choose machine size by selecting **c4a-standard-4** under the Standard tab.
+Now choose machine size by selecting **c4a-standard-4** under the **Standard** tab.
 
 ![](images/launch_c4a/9.png)
 
@@ -51,7 +45,7 @@ To modify storage settings, select **Change**.
 
 ![](images/launch_c4a/11.png)
 
-To set disk size, select the **Size (GB)** field, then enter "1000" for the value.
+To set disk size, select the **Size (GB)** field and enter "1000" for the value.
 
 ![](images/launch_c4a/16.png)
 
@@ -63,7 +57,7 @@ To launch the instance, select **Create** to bring up the instance.
 
 ![](images/launch_c4a/19.png)
 
-After a few seconds, your c4a instance starts up, and you are ready to continue to the next section. 
+After a few seconds, your c4a instance is up and running, and you are ready to continue to the next section. 
 
-In the next section, you will launch the second VM, an Intel-based Emerald Rapids c4-standard-8 (abbreviated to c4), which serves as the comparison system for our benchmarking tests.
+In the next section, you'll launch the second VM, an Intel-based Emerald Rapids c4-standard-8 (referred to as "c4"), which serves as the comparison system for benchmarking.
 
