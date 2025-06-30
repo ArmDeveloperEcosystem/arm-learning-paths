@@ -1,5 +1,5 @@
 ---
-title: Building Multi-Architecture Applications with Red Hat OpenShift Pipelines on Red Hat OpenShift 4.18 on AWS
+title: Build multi-architecture applications with Red Hat OpenShift Pipelines on AWS
 
 draft: true
 cascade:
@@ -7,19 +7,17 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is for Openshift administrators interested in migrating their applications to  Arm.
+who_is_this_for: This topic is for OpenShift administrators interested in migrating their applications to Arm.
 
 
 learning_objectives: 
-    - Migrate existing applications to Arm.
+    - Migrate existing OpenShift applications to Arm.
 
 prerequisites:
     - An AWS account with an OpenShift 4.18 cluster with x86 nodes installed and configured.
     - Red Hat OpenShift Pipelines (Tekton) operator installed in your cluster.
     - Familiarity with Red Hat OpenShift (oc CLI), container concepts, and basic Tekton principles (Task, Pipeline, PipelineRun).
     - Access to your Red Hat OpenShift cluster with cluster-admin or equivalent privileges for node configuration and pipeline setup.
-    - Your application source code in a Git repository. In this example we assume that you have [pipelines-tutorial](https://www.google.com/url?q=https://github.com/openshift/pipelines-tutorial&sa=D&source=editors&ust=1749822472437927&usg=AOvVaw2P4wUOL5KUV-ePkRiv3jJx) built and running on x86.
-    - Ensure that the Red Hat OpenShift cluster is using the multi-arch release payload.
 
 author: Jeff Young
 
@@ -27,12 +25,34 @@ author: Jeff Young
 skilllevels: Advanced
 subjects: CI-CD
 armips:
-    - Aarch64
+    - Neoverse
 tools_software_languages:
     - Tekton
     - OpenShift
 operatingsystems:
     - Linux
+
+further_reading:
+    - resource:
+        title: Red Hat OpenShift Documentation
+        link: https://docs.openshift.com/container-platform/latest/welcome/index.html
+        type: documentation
+    - resource:
+        title: OpenShift Pipelines (Tekton) Documentation
+        link: https://docs.openshift.com/container-platform/latest/cicd/pipelines/understanding-openshift-pipelines.html
+        type: documentation
+    - resource:
+        title: OpenShift Multi-Architecture Compute Machines
+        link: https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/postinstallation_configuration/configuring-multi-architecture-compute-machines-on-an-openshift-cluster
+        type: documentation
+    - resource:
+        title: OpenShift ImageStreams Documentation
+        link: https://docs.openshift.com/container-platform/latest/openshift_images/image-streams-managing.html
+        type: documentation
+    - resource:
+        title: Migrating to Multi-Architecture Compute Machines
+        link: https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html-single/updating_clusters/#migrating-to-multi-payload
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
