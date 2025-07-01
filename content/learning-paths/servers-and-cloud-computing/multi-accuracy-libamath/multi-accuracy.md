@@ -9,8 +9,9 @@ layout: learningpathall
 
 ## The 3 accuracy modes of Libamath
 
-Libamath vector functions can come in various accuracy modes for the same mathematical function.
-This means, some of our functions allow users and compilers to choose between:
+Libamath provides multiple accuracy modes for the same vectorized mathematical function, enabling developers to choose between speed and precision.
+
+This means, some of the functions allow users and compilers to choose between:
 - **High accuracy** (≤ 1 ULP)
 - **Default accuracy** (≤ 3.5 ULP)
 - **Low accuracy / max performance** (approx. ≤ 4096 ULP)
@@ -59,7 +60,7 @@ The default mode strikes a **practical balance** between performance and numeric
 - **Analytics workloads** [3]
   such as log or sqrt during feature extraction 
 - **Inference pipelines** [4]
-  especially on edge devices where latency matters 
+  especially on edge devices where latency is critical
 
 Also suitable for many **scientific workloads** that can tolerate modest error in exchange for **faster throughput**.
 
@@ -74,7 +75,7 @@ This mode trades precision for speed — aggressively. It's designed for:
   where statistical convergence outweighs per-sample accuracy [6]
 - **Genetic algorithms, audio processing, and embedded DSP**
 
-Avoid in control-flow-critical code or where **errors amplify**.
+Avoid in control-flow-critical code or where errors might compound or affect control flow.
 
 
 ## Summary

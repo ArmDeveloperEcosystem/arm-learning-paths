@@ -1,12 +1,12 @@
 ---
-title: ULP Error and Accuracy
+title: ULP error and accuracy
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# ULP Error and Accuracy
+# ULP error and accuracy
 
 In the development of Libamath, a metric called ULP error is used to assess the accuracy of functions.
 This metric measures the distance between two numbers, a reference (`want`) and an approximation (`got`), relative to how many floating-point “steps” (ULPs) these two numbers are apart.
@@ -20,7 +20,7 @@ ulp_err = | want - got | / ULP(want)
 Because this is a relative measure in terms of floating-point spacing (ULPs)—that is, this metric is scale-aware—it is ideal for comparing accuracy across magnitudes. Otherwise, error measures would be very biased by the uneven distribution of the floats.
 
 
-# ULP Error Implementation
+# ULP error implementation
 
 In practice, however, the above expression may take different forms to account for sources of error that may occur during the computation of the error itself.
 
