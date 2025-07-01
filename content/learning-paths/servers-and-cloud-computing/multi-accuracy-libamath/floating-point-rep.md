@@ -1,16 +1,18 @@
 ---
-title: Floating Point Representation
+title: Understanding floating-point representation
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Floating-Point Representation Basics
+Floating-point numbers are essential for representing real numbers in computing, but they come with limits on precision and range. This Learning Path explains how floating-point values are structured, how bitwise representation works, and what the IEEE-754 standard defines, including special values like NaN and subnormals.
 
-Floating Point numbers are a finite and discrete approximation of the real numbers, allowing us to implement and compute functions in the continuous domain with an adequate (but limited) resolution.
+## What is a floating-point number?
 
-A Floating Point number is typically expressed as:
+Floating-point numbers are a finite and discrete approximation of the real numbers, allowing one to implement and compute functions in the continuous domain with an adequate (but limited) resolution.
+
+A floating-point number is typically expressed as:
 
 ```output
 +/-d.dddd...d x B^e
@@ -21,6 +23,9 @@ where:
 * e is the exponent;
 * d.dddd...d is the mantissa (or significand). It is a p-bit word, where *p* represents the precision;
 * +/- sign which is usually stored separately.
+
+The precision of a floating-point format refers to the number of binary digits used to represent the mantissa. This is denoted by p, and a system with p bits of precision can distinguish between 
+\( 2^p \) different fractional values.
 
 If the leading digit is non-zero then it is a normalized representation/normal number.
 
@@ -35,9 +40,9 @@ Fixing `B=2, p=24`
 
 A floating-point number can have multiple non-normalized representations, but only one normalized form - assuming a fixed base and precision, and that the leading digit is strictly less than the base.
 
-### Building a Floating-Point Ruler
+## How precision and exponents define floating-point values
 
-Given a base `B`, a precision `p`, a maximum exponent `emax` and a minimum exponent `emin`, we can create the set of all the normalized values in this system.
+Given a base `B`, a precision `p`, a maximum exponent `emax` and a minimum exponent `emin`, one can create the set of all the normalized values in this system.
 
 {{% notice Example 2 %}}
 `B=2, p=3, emax=2, emin=-1`
@@ -52,15 +57,15 @@ Given a base `B`, a precision `p`, a maximum exponent `emax` and a minimum expon
 
 {{% /notice %}}
 
-Note that, for any given integer n, numbers are evenly spaced between 2ⁿ and 2ⁿ⁺¹. But the gap between them (also called [ULP](/learning-paths/servers-and-cloud-computing/multi-accuracy-libamath/ulp/), which is explained in the more detail in the next section) grows as the exponent increases. So the spacing between floating point numbers gets larger as numbers get bigger.
+Note that, for any given integer n, numbers are evenly spaced between 2ⁿ and 2ⁿ⁺¹. But the gap between them (also called [ULP](/learning-paths/servers-and-cloud-computing/multi-accuracy-libamath/ulp/), which is explained in the more detail in the next section) grows as the exponent increases. So the spacing between floating-point numbers gets larger as numbers get bigger.
 
-### The Floating-Point bitwise representation
+## Bitwise representation of floating-point numbers
 
 Since there are \( B^p \) possible mantissas, and `emax-emin+1` possible exponents, then `log2(B^p) + log2(emax-emin+1) + 1` (sign) bits are needed to represent a given Floating Point number in a system.
 
 In Example 2, 3+2+1=6 bits are needed.
 
-Based on this, the floating point's bitwise representation is defined to be: 
+Based on this, the floating-point's bitwise representation is defined as: 
 
 ```
 b0 b1 b2 b3 b4 b5
@@ -83,13 +88,13 @@ For this reason, E is called the biased exponent, and in order to retrieve the v
 x = (-1)^S x M x 2^(E-1)
 ```
 
-## IEEE-754 Single Precision
+## IEEE-754 single precision format
 
-Single precision (also called float) is a 32-bit format defined by the [IEEE-754 Floating Point Standard](https://ieeexplore.ieee.org/document/8766229)
+Single precision (also called float) is a 32-bit format defined by the [IEEE-754 Floating-Point Standard](https://ieeexplore.ieee.org/document/8766229)
 
 In this standard the sign is represented using 1 bit, the exponent uses 8 bits and the mantissa uses 23 bits. 
 
-The value of a (normalized) Floating Point in IEEE-754 can be represented as:
+The value of a (normalized) Floating-Point in IEEE-754 can be represented as:
 
 ```output
 x=(−1)^S x 1.M x 2^E−127
@@ -111,7 +116,7 @@ They allow the representation of numbers very close to zero, smaller than what i
 
 Subnormal numbers do not have the a leading 1 in their representation. They also assume exponent is 0.
 
-The interpretation of denormal Floating Point in IEEE-754 can be represented as:
+The interpretation of denormal Floating-Point in IEEE-754 can be represented as:
 
 ```
 x=(−1)^S x 0.M x 2^−126
