@@ -113,7 +113,7 @@ If the exponent E is:
 * 1 to 254 then this is in the normalized range;
 * 255: infinity (if M==0), or NaN (if M!=0).
 
-## Subnormal numbers 
+##### Subnormal numbers 
 
 Subnormal numbers (also called denormal numbers)  allow representation of values closer to zero than is possible with normalized exponents. They are special floating-point values defined by the IEEE-754 standard.
 
@@ -145,5 +145,6 @@ x=(−1)^s x 0.M x 2^−126
 | 11 (1.75)   | 0.375     | 0.875     | 1.75     | 3.5      | 7.0      |  -->
 {{% /notice %}}
 
-If you're interested in diving deeper into this subject, [What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) by David Goldberg is a great place to start.
+## Further information
 
+If you're interested in diving deeper into this subject, [What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) by David Goldberg is a great place to start.

@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-# ULP
+## ULP
 
 Units in the Last Place (ULP) is the distance between two adjacent floating-point numbers at a given value, representing the smallest possible change in that number's representation.
 
@@ -16,9 +16,9 @@ It is a property of a number and can be calculated with the following expression
 ULP(x) = nextafter(x, +inf) - x
 ```
 
-Building on the example shown in the previous section:
+Building on the example from the previous section:
 
-Fixed `B=2, p=3, e^max=2, e^min=-1`
+Fixed `B = 2, p = 3, e^max = 2, e^min = -1`
 
 | Significand | × 2⁻¹ | × 2⁰ | × 2¹ | × 2² |
 |-------------|-------|------|------|------|
@@ -27,7 +27,7 @@ Fixed `B=2, p=3, e^max=2, e^min=-1`
 | 1.10 (1.5)  | 0.75  | 1.5  | 3.0  | 6.0  |
 | 1.11 (1.75) | 0.875 | 1.75 | 3.5  | 7.0  |
 
-Based on the above definition, the ULP value for the numbers in this set can be computed as follows:
+Based on the above definition, you can compute the ULP value for the numbers in this set as follows:
 
 ```
 ULP(0.625) = nextafter(0.625, +inf) - 0.625 = 0.75-0.625 = 0.125
@@ -36,21 +36,23 @@ ULP(0.625) = nextafter(0.625, +inf) - 0.625 = 0.75-0.625 = 0.125
 ULP(4.0) = 1.0
 ```
 
-As the exponent of `x` grows, `ULP(x)` also increases exponentially; that is, the spacing between floating points becomes larger.
+As the exponent of `x` increases, `ULP(x)` increases exponentially. That is, the spacing between floating-point values  grows with the magnitude of x.
 
 Numbers with the same exponent have the same ULP.
 
-For normalized IEEE-754 floats, a similar behavior is observed: the distance between two adjacent representable values — i.e., ULP(x) — is a power of two that depends only on the exponent of x.
+## ULP in IEEE-754
 
-Hence, another expression used to calculate the ULP of normalized Floating Point numbers is:
+For normalized IEEE-754 floating-point numbers, a similar behavior is observed: the distance between two adjacent representable values — that is, ULP(x) — is a power of two that depends only on the exponent of x.
+
+A faster, commonly used expression for ULP is:
 
 ```
 ULP(x) = 2^(e-p+1)
 ```
 
-where:
-* `e` is the exponent (in the IEEE-754 definition of single precision this is `E-127`)
-* `p` is the precision
+Where:
+* `e` is the unbiased exponent (in the IEEE-754 definition of single precision this is `E-127`)
+* `p` is the precision  (23 for IEEE-754 single-precision)
 
 When computing the ULP of IEEE-754 floats, this expression becomes:
 ```
@@ -72,14 +74,12 @@ The second smallest is:
 ```
 second_min_pos_denormal = 2 ^ -22 x 2 ^ -126 = 2^-148 = 2*2^-149
 ```
-and so on...
-
-The denormal numbers are evenly spaced by `2^-149`.
+Thus, all denormal numbers are evenly spaced by `2^-149`.
 
 {{% /notice %}}
 
 
-## ULP implementation
+## ULP implementation in C
 
 Below is an example of an implementation of the ULP function of a number.
 
