@@ -19,14 +19,6 @@ Every individual stage in a processing pipeline typically reads input data, comp
 2. Improving cache utilization. Data is accessed in a contiguous manner, improving CPU cache efficiency.
 3. Reducing scheduling overhead. By executing multiple operations in a single pass, scheduling complexity and overhead are minimized.
 
-## When to use operation fusion
-Operation fusion is most beneficial in scenarios that involve multiple sequential operations or transformations performed on large datasets, particularly when these intermediate results are large or costly to recompute. Typical situations include:
-* Image filtering pipelines (blur, sharpen, threshold sequences)
-* Color transformations followed by thresholding or other pixel-wise operations
-* Complex signal processing operations involving repeated data transformations
-
-Operation fusion is less beneficial (or even detrimental) if intermediate results are frequently reused across multiple subsequent stages or if fusing operations complicates parallelism or vectorization opportunities.
-
 ## Typical scenarios and performance-critical pipelines
 Some performance-critical pipelines where fusion is especially beneficial include:
 * Real-time video processing (e.g., streaming transformations)
@@ -193,6 +185,41 @@ Calling realize() twice separately—first for the intermediate (blur) stage and
 
 The directive thresholded.parallel(y) further enhances efficiency by parallelizing the outer loop across multiple CPU cores, thus accelerating execution.
 
+The original scheduling directive used in our example
+
+```cpp
+blur.compute_at(thresholded, x);
+```
+
+instructs Halide to compute the blur function at each iteration of the innermost loop (over the horizontal coordinate x) of the thresholded function. However, as the reviewer correctly pointed out, scheduling at the innermost loop (x) in Halide often results in behavior similar to the default inline scheduling. Yet, explicitly using compute_at(thresholded, x) can introduce additional overhead, such as repeatedly accessing the same small memory region unnecessarily. This could cause redundant memory access because Halide might write intermediate results to a temporary buffer within this innermost loop.
+
+To demonstrate more efficient fusion explicitly—while avoiding redundant intermediate storage—consider instead scheduling blur at an outer loop (e.g., the vertical coordinate y). Doing so significantly improves performance by:
+* Reducing redundant computations and memory accesses.
+* Explicitly fusing operations at a more cache-efficient granularity.
+
+Here’s how you can update your scheduling:
+```cpp
+Halide::Var x("x"), y("y");
+
+// Existing blur definition.
+Halide::Func blur("blur");
+Halide::Func thresholded("thresholded");
+
+// Thresholding definition remains unchanged.
+thresholded(x, y) = Halide::select(blur(x, y) > 128, 255, 0);
+
+// Improved fusion: compute blur at each iteration of outer loop (y).
+blur.compute_at(thresholded, y);
+
+// Optionally, parallelize across the outer loop for improved multicore utilization.
+thresholded.parallel(y);
+```
+
+In the improved code snippet:
+* blur.compute_at(thresholded, y) explicitly instructs Halide to compute blurred rows just before thresholding each row. This means the intermediate blur results are stored temporarily in a small per-row buffer, significantly reducing redundant computations and repeated memory accesses.
+* By choosing y (the vertical loop) instead of the innermost loop (x), we explicitly balance between complete inlining (which may recompute identical results many times) and storing intermediate results explicitly in memory. This strikes a more effective trade-off, avoiding redundant computations while maintaining good cache locality.
+* The thresholded.parallel(y) directive parallelizes the computation across multiple rows, taking full advantage of multi-core CPUs to further accelerate processing.
+
 The presented code demonstrates operation fusion, combining computational stages via compute_at. Halide also offers a separate optimization technique called loop fusion (via the fuse scheduling directive), which specifically merges two loop indices into a single loop variable. While the use of compute_at sufficiently addresses memory and computational efficiency concerns, explicit loop fusion can be used for additional optimization, especially to enhance cache locality or simplify parallelization.
 
 Below is a snippet explicitly demonstrating how the fuse directive can be applied in the context of the existing pipeline:
@@ -232,7 +259,91 @@ thresholded.parallel(xy);
 blur.compute_at(thresholded, xy);
 ```
 
-This explicit loop-fusion example demonstrates additional optimizations achievable with Halide, clearly differentiating between operation fusion (compute_at) and loop fusion (fuse)
+This explicit loop-fusion example demonstrates additional optimizations achievable with Halide, clearly differentiating between operation fusion (compute_at) and loop fusion (fuse).
+
+## When to use operation fusion
+Operation fusion is especially beneficial for pipelines involving multiple sequential element-wise operations. These operations perform independent transformations on individual pixels without requiring neighboring data. Element-wise operations benefit greatly from fusion since they avoid the overhead associated with repeatedly storing and loading intermediate results, significantly reducing memory bandwidth usage.
+
+Ideal use-cases for fusion are 
+* Pixel intensity normalization (scaling and shifting)
+* Color-space transformations (e.g., RGB to grayscale conversion)
+* Simple arithmetic or logical operations applied pixel-by-pixel
+
+Here’s an illustrative example:
+```cpp
+Halide::Var x("x"), y("y");
+Halide::Func scale("scale"), offset("offset"), clamp_result("clamp_result");
+
+// Element-wise transformations
+scale(x, y) = input(x, y) * 1.5f;
+offset(x, y) = scale(x, y) + 10.0f;
+clamp_result(x, y) = Halide::clamp(offset(x, y), 0.0f, 255.0f);
+
+// Apply fusion for maximum efficiency
+scale.compute_at(clamp_result, x);
+offset.compute_at(clamp_result, x);
+```
+In this scenario, fusion is highly effective, eliminating unnecessary intermediate storage and significantly improving performance.
+
+However, fusion can introduce redundancy and inefficiencies when dealing with spatial operations such as blurs or convolutions, especially if:
+* The intermediate results are used multiple times.
+* The spatial filter has a large kernel (e.g., large Gaussian blur).
+* There are multiple sequential layers of spatial filters (e.g., multiple convolution layers).
+
+Consider a Gaussian blur with a large kernel (e.g., 15×15):
+```cpp
+Halide::Func large_blur("large_blur"), threshold("threshold");
+
+// Large Gaussian blur
+large_blur(x, y) = Halide::sum(input(x + r.x, y + r.y) * weight(r.x, r.y));
+
+// Thresholding based on blurred result
+threshold(x, y) = Halide::select(large_blur(x, y) > 128, 255, 0);
+```
+
+Using aggressive fusion here (large_blur.compute_at(threshold, x)) can result in significant computational redundancy, as each blurred value might be recomputed multiple times for overlapping pixels.
+
+Instead, applying tiling or explicitly storing intermediate results can improve efficiency significantly:
+
+```cpp
+// Use tiling and intermediate storage to reduce redundant computation
+Halide::Var x_outer, y_outer, x_inner, y_inner;
+threshold.tile(x, y, x_outer, y_outer, x_inner, y_inner, 64, 64)
+         .parallel(y_outer);
+         
+// Store blurred results per tile for reuse
+large_blur.compute_at(threshold, x_outer);
+```
+
+Also, operation fusion is less beneficial (or even detrimental) if intermediate results are frequently reused across multiple subsequent stages or if fusing operations complicates parallelism or vectorization opportunities.
+
+Operation fusion generally improves performance by reducing memory usage, eliminating intermediate storage, and enhancing cache locality. However, fusion may be less beneficial (or even detrimental) under certain circumstances:
+* Repeated reuse of intermediate results. If the same intermediate computation is heavily reused across multiple subsequent stages, explicitly storing this intermediate result (using compute_root()) can be more efficient than recomputing it multiple times through fusion.
+* Reduced parallelism or vectorization opportunities. Aggressive fusion can complicate or even restrict parallelization and vectorization opportunities, potentially hurting performance. In such scenarios, explicitly scheduling computations separately might yield better overall efficiency.
+
+For example, consider a scenario where a computationally expensive intermediate result is reused multiple times:
+```cpp
+Halide::Var x("x"), y("y");
+Halide::Func expensive_intermediate("expensive_intermediate");
+Halide::Func stage1("stage1"), stage2("stage2"), final_stage("final_stage");
+
+// Expensive intermediate computation
+expensive_intermediate(x, y) = ...; 
+
+// Multiple stages reusing the intermediate
+stage1(x, y) = expensive_intermediate(x, y) + 1;
+stage2(x, y) = expensive_intermediate(x, y) * 2;
+
+// Final stage using results from previous stages
+final_stage(x, y) = stage1(x, y) + stage2(x, y);
+```
+
+In this case, explicitly storing the intermediate computation at the root level is beneficial:
+```cpp
+expensive_intermediate.compute_root();
+```
+
+This prevents redundant recomputation, resulting in higher efficiency compared to aggressively fusing these stages. In short, fusion is particularly effective in pipelines where intermediate results are not heavily reused or where recomputation costs are minimal compared to memory overhead. Being aware of these considerations helps achieve optimal scheduling decisions tailored to your specific pipeline.
 
 ## Summary
 In this lesson, we learned about operation fusion in Halide, a powerful technique to reduce memory bandwidth and improve computational efficiency. We explored why fusion matters, identified scenarios where fusion is most effective, and demonstrated how Halide’s scheduling constructs (compute_at, store_at, fuse) enable you to apply fusion easily and effectively. By fusing the Gaussian blur and thresholding stages, we improved the performance of our real-time image processing pipeline.

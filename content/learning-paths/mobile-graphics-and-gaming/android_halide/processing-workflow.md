@@ -147,11 +147,9 @@ The kernel chosen here is a 3×3 Gaussian blur kernel, a commonly used convoluti
 
 Specifically, the chosen kernel is:
 
-(1/16) × | 1  2  1 |
+(1/16) × [ 1  2  1; 2  4  2; 1  2  1]
 
-         | 2  4  2 |         
-
-         | 1  2  1 |
+where the semicolon indicates row separation within the 3×3 matrix notation.
 
 Reason for choosing this kernel:
 * It provides effective smoothing by considering the immediate neighbors of each pixel, making it computationally lightweight yet visually effective.
@@ -235,6 +233,9 @@ The output should look as in the figure below:
 ## Tiling
 Tiling is a powerful scheduling optimization provided by Halide, allowing image computations to be executed efficiently by dividing the workload into smaller, cache-friendly blocks called tiles. By processing these smaller regions individually, we significantly improve data locality, reduce memory bandwidth usage, and better leverage CPU caches, ultimately boosting performance for real-time applications.
 
+In Halide, tiling achieves maximum performance gains when intermediate results between computation stages are temporarily stored. This allows smaller intermediate tiles to fit comfortably within CPU caches, greatly improving data locality and minimizing redundant memory accesses. To illustrate this clearly, we’ll revisit our existing pipeline (Gaussian blur followed by thresholding), applying tiling in two ways
+
+### Tiling for parallelization
 We can easily extend our Gaussian blur and thresholding pipeline to leverage Halide’s built-in tiling capabilities. Let’s apply a simple tiling schedule to our existing pipeline. Replace the code segment immediately after defining the thresholded function with the following:
 
 ```cpp
@@ -255,6 +256,7 @@ The current example applies tiling primarily as a way to facilitate parallel exe
 
 However, in our current implementation, each operation (Gaussian blur and thresholding) is fused and computed inline, without explicit intermediate storage. Thus, the primary benefit of tiling here is indeed parallelization rather than data locality improvement.
 
+### Tiling for enhanced cache efficiency (explicit intermediate storage)
 To illustrate tiling specifically for improving cache locality via intermediate storage, one could explicitly store intermediate results in tiles using scheduling like:
 
 ```cpp
@@ -276,7 +278,7 @@ thresholded.tile(x, y, x_outer, y_outer, x_inner, y_inner, 64, 64)
 blur.compute_at(thresholded, x_outer);
 ```
 
-In this adjusted example the computation of blur is explicitly stored within each tile (compute_at(x_outer)). Moreover, intermediate results (blurred values) become small enough to fit comfortably into CPU cache.
+In this improved version, the critical addition is blur.compute_at(thresholded, x_outer);, which instructs Halide to store intermediate blur results within each tile. Because these intermediate blur computations are now confined to smaller tiles (64×64 pixels), they comfortably fit into the CPU’s L1 or L2 cache, greatly improving locality and reducing memory access overhead
 
 ## Summary
 In this section, we built a complete real-time image processing pipeline using Halide and OpenCV. Initially, we captured live video frames and applied Gaussian blur and thresholding to highlight image features clearly. By incorporating Halide’s tiling optimization, we also improved performance by enhancing cache efficiency and parallelizing computation. Through these steps, we demonstrated Halide’s capability to provide both concise, clear code and high performance, making it an ideal framework for demanding real-time image processing tasks.
