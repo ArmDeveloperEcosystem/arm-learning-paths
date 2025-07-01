@@ -19,7 +19,7 @@ A Floating Point number is typically expressed as:
 where:
 * B is the base;
 * e is the exponent;
-* d.dddd...d is the mantissa (or significand). It is p-bit word, where p represents the precision;
+* d.dddd...d is the mantissa (or significand). It is a p-bit word, where *p* represents the precision;
 * +/- sign which is usually stored separately.
 
 If the leading digit is non-zero then it is a normalized representation/normal number.
@@ -33,7 +33,7 @@ Fixing `B=2, p=24`
 
 {{% /notice %}}
 
-Usually a Floating Point number has multiple non-normalized representations, but only 1 normalized representation (assuming leading digit is strictly smaller than base), when fixing a base and a precision.
+A floating-point number can have multiple non-normalized representations, but only one normalized form - assuming a fixed base and precision, and that the leading digit is strictly less than the base.
 
 ### Building a Floating-Point Ruler
 
@@ -56,7 +56,7 @@ Note that, for any given integer n, numbers are evenly spaced between 2ⁿ and 2
 
 ### The Floating-Point bitwise representation
 
-Since there are `B^p` possible mantissas, and `emax-emin+1` possible exponents, then `log2(B^p) + log2(emax-emin+1) + 1` (sign) bits are needed to represent a given Floating Point number in a system.
+Since there are \( B^p \) possible mantissas, and `emax-emin+1` possible exponents, then `log2(B^p) + log2(emax-emin+1) + 1` (sign) bits are needed to represent a given Floating Point number in a system.
 
 In Example 2, 3+2+1=6 bits are needed.
 
