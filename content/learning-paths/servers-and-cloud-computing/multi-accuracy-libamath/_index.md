@@ -1,5 +1,5 @@
 ---
-title: Choosing accuracy modes in Libamath (Arm Performance Libraries)
+title: Select accuracy modes in Libamath (Arm Performance Libraries)
 
 minutes_to_complete: 20
 author: Joana Cruz
