@@ -57,7 +57,7 @@ Given a base `B`, a precision `p`, a maximum exponent `emax` and a minimum expon
 
 {{% /notice %}}
 
-Note that, for any given integer n, numbers are evenly spaced between 2ⁿ and 2ⁿ⁺¹. But the gap between them (also called [ULP](/learning-paths/servers-and-cloud-computing/multi-accuracy-libamath/ulp/), which is explained in the more detail in the next section) grows as the exponent increases. So the spacing between floating-point numbers gets larger as numbers get bigger.
+Note that, for any given integer n, numbers are evenly spaced between 2ⁿ and 2ⁿ⁺¹. But the gap between them (also called [ULP](/learning-paths/servers-and-cloud-computing/multi-accuracy-libamath/ulp/), which is explained in more detail in the next section) grows as the exponent increases. So the spacing between floating-point numbers gets larger as numbers get bigger.
 
 ## Bitwise representation of floating-point numbers
 
