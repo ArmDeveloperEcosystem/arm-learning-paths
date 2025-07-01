@@ -1,6 +1,11 @@
 ---
 title: Deploy Arcee AFM-4.5B on AWS Graviton4
 
+
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers and engineers who want to deploy the Arcee AFM-4.5B small language model on an AWS Arm-based instance. AFM-4.5B is a 4.5-billion-parameter frontier model that delivers excellent accuracy, strict compliance, and very high cost-efficiency. It was trained on almost 7 trillion tokens of clean, rigorously filtered data, and has been tested across a wide range of languages, including Arabic, English, French, German, Hindi, Italian, Korean, Mandarin, Portuguese, Russian, and Spanish
