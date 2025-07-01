@@ -16,6 +16,12 @@ The Corstone reference system is provided free of charge, although you will have
 
 ## Corstone-320 FVP Setup for ExecuTorch
 
+{{% notice macOS %}}
+
+Setting up FVPs on MacOS requires some extra steps, outlined in GitHub repo [VPs-on-Mac](https://github.com/Arm-Examples/FVPs-on-Mac/). macOS users must do this first, before setting up the Corestone-320 FVP.
+
+{{% /notice %}}
+
 Navigate to the Arm examples directory in the ExecuTorch repository. Run the following command.
 
 ```bash
@@ -30,6 +36,12 @@ source $HOME/executorch/examples/arm/ethos-u-scratch/setup_path.sh
 ```
 
 Test that the setup was successful by running the `run.sh` script for Ethos-U85, which is the target device for Corstone-320:
+
+{{% notice macOS %}}
+
+**Start Docker:** on macOS, FVPs run inside a Docker container.
+
+{{% /notice %}}
 
 ```bash
  ./examples/arm/run.sh --target=ethos-u85-256

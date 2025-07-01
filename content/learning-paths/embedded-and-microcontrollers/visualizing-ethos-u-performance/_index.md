@@ -1,5 +1,5 @@
 ---
-title: Vizualizing TinyML Performance on Arm Fixed Virtual Platforms
+title: Visualizing Ethos-U Performance on Arm FVPs
 
 minutes_to_complete: 120
 
@@ -25,6 +25,7 @@ armips:
     - Cortex-A
     - Cortex-M
     - Ethos-U
+    - Ethos-U85
 
 operatingsystems:
     - Linux
