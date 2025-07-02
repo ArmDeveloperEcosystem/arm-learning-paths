@@ -17,7 +17,7 @@ jobs:
         uses: tj-actions/changed-files@v46
         with:
           files: |
-             **.md
+             content/**/**.md
       - name: Check for capital letters or spaces in content directory
         run: |
           echo "Checking for capital letters or spaces in content directory paths (excluding file extensions)..."

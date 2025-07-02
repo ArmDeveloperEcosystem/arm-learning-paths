@@ -1,20 +1,20 @@
 ---
-title: Debug Software Stack
+title: Debug the software stack
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Debug the Software Stack with Arm Development Studio
+## Debug the software stack with Arm Development Studio
 
 Once your software stack is running on the FVP, you can debug Trusted Firmware-A and the Linux kernel using Arm Development Studio (Arm DS).
 
-### Step 1: Install Arm Development Studio
+## Install Arm Development Studio
 
 Download and install the latest version from the [Arm Development Studio download page](https://developer.arm.com/downloads/view/DS000B).
 
-DWARF 5 is enabled by default in GCC 11 and later. Arm DS v2022.2 or newer is recommended to support DWARF 5 debug information.
+DWARF 5 is enabled by default in GCC 11 and later. Arm DS v2022.2 or later is recommended to support DWARF 5 debug information.
 
 
 
@@ -24,11 +24,14 @@ Launch Arm DS:
 ```
 
 
-### Step 2: Create a Debug Configuration
-1.	Open Arm DS, go to Run > Debug Configurations.
-2.	Select Generic Arm C/C++ Application and create a new configuration.
-3.	In the Connection tab:
-    - Choose your FVP model (e.g., Base_A55x4).
+## Create a debug configuration
+
+To create a debug configuration, follow these steps:
+
+1.	Open Arm DS, go to **Run** > **Debug Configurations**.
+2.	Select **Generic Arm C/C++ Application** and create a new configuration.
+3.	In the **Connection** tab:
+    - Choose your FVP model (for example, Base_A55x4)
     - Enter model parameters:
 
 ```output
@@ -50,11 +53,11 @@ Launch Arm DS:
 --data cluster0.cpu0=<SRC_PATH>/output/aemfvp-a/aemfvp-a/fvp-base-revc.dtb@0x83000000
 ```
 
-### Step 3: Load Debug Symbols
+## Load debug symbols
 
-In the Debugger tab:
-- Select “Connect only to the target.”
-- Enable Execute debugger commands and add:
+In the **Debugger** tab:
+- Select **Connect only to the target**.
+- Enable Execute debugger commands, and add:
 ```output
 add-symbol-file "~/arm/sw/cpufvp-a/arm-tf/build/fvp/debug/bl1/bl1.elf" EL3:0
 add-symbol-file "~/arm/sw/cpufvp-a/arm-tf/build/fvp/debug/bl2/bl2.elf" EL1S:0
@@ -62,17 +65,17 @@ add-symbol-file "~/arm/sw/cpufvp-a/arm-tf/build/fvp/debug/bl31/bl31.elf" EL3:0
 add-symbol-file "~/arm/sw/cpufvp-a/linux/out/aemfvp-a/defconfig/vmlinux" EL2N:0
 ```
 
-Click Apply and then Close.
+Select **Apply** and then **Close**.
 
-### Step 4: Start Debugging
+## Start debugging
 
-1.	In the Debug Control view, double-click your new configuration.
-2.	Wait for the target to connect and symbols to load.
+1.	In the **Debug Control** view, double-click your new configuration.
+2.	Wait for the target to connect and the symbols to load.
 3.	Set breakpoints, step through code, and inspect registers or memory.
 
-You might get the following error when starting the debug connection.
+You might get the following error when starting the debug connection:
 
-![Connection Failed Screen #center](failed.png)
+![Connection Failed Screen #center](failed.png "Connection Failed error message")
 
 This means your Arm FVP is not provided by default in the Arm DS installation. Set the `PATH` in this case:
 
@@ -86,4 +89,4 @@ Ensure your FVP instance is running and matches the model and parameters selecte
 
 After these steps, you can debug the software stack as shown in the following figure:
 
-![FVP running #center](Select_target.png)
+![FVP running #center](Select_target.png "Debug interface in GUI")
