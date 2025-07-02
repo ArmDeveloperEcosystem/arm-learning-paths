@@ -6,6 +6,8 @@ weight: 2
 layout: learningpathall
 ---
 
+##  Understanding the Floating-Point Number System and IEEE-754 Format
+
 Floating-point numbers are essential for representing real numbers in computing, but they come with limits on precision and range. 
 
 This Learning Path covers the following:
@@ -21,7 +23,7 @@ Floating-point numbers are a finite, discrete approximation of real numbers. The
 A floating-point number is typically expressed as:
 
 ```output
-+/-d.dddd...d x B^e
+± d.dddd...d × B^e
 ```
 
 where:
@@ -70,7 +72,7 @@ You can create the full set of representable normalized values.
 
 {{% /notice %}}
 
-For any exponent, n, numbers are evenly spaced between 2ⁿ and 2ⁿ⁺¹. However, the gap between them (also called a [ULP](/learning-paths/servers-and-cloud-computing/multi-accuracy-libamath/ulp/), which is explained in more detail in the next section) increases with the magnitude of the exponent.
+For any exponent, *n*, numbers are evenly spaced between 2ⁿ and 2ⁿ⁺¹. However, the gap between them (also called a [ULP](/learning-paths/servers-and-cloud-computing/multi-accuracy-libamath/ulp/), which is explained in more detail in the next section) increases with the magnitude of the exponent.
 
 ## Bitwise representation of floating-point numbers
 
@@ -95,10 +97,10 @@ b3, b4, b5 -> mantissa (M)
 However, this is not enough. In this bitwise definition, the possible values of E are 0, 1, 2, 3.
 But in the system being defined, only the integer values in the range [-1, 2] are of interest.
 
-For this reason, E is called the biased exponent, and in order to retrieve the value it is trying to represent (that is the unbiased exponent) an offset must be added or subtracted (in this case, subtract 1):
+ E is stored as a biased exponent to allow representation of both positive and negative powers of two using only unsigned integers. In this example, a bias of 1 shifts the exponent range from [0, 3] to [−1, 2]:
 
 ```output
-x = (-1)^S x M x 2^(E-1)
+x = (-1)^S × M × 2^(E-1)
 ```
 
 ## IEEE-754 single precision format
@@ -114,7 +116,7 @@ In this format:
 The value of a normalized floating-point number in IEEE-754 can be represented as:
 
 ```output
-x=(−1)^S x 1.M x 2^E−127
+x = (−1)^S × (1.M) × 2^(E−127)
 ```
 
 The exponent bias of 127 allows storage of exponents from -126 to +127. The leading digit is implicit in normalized numbers, giving a total of 24 bits of precision. 
@@ -135,10 +137,10 @@ They allow the representation of numbers very close to zero, smaller than what i
 
 Subnormal numbers do not have a leading 1 in their representation. They also assume an exponent of –126.
 
-The interpretation of denormal floating-point in IEEE-754 can be represented as:
+The interpretation of subnormal floating-point in IEEE-754 can be represented as:
 
 ```
-x=(−1)^S x 0.M x 2^−126
+x = (−1)^S × 0.M × 2^(−126)
 ```
 
 <!-- ### Subnormal numbers
@@ -146,12 +148,13 @@ x=(−1)^S x 0.M x 2^−126
 Subnormal numbers (also called denormal numbers) are special floating-point values defined by the IEEE-754 standard.
 They allow the representation of numbers closer to zero than any normalized float:
 
-* Subnormal numbers do not have the a leading 1 in their representation. 
-* They also assume exponent is 0.
+* Subnormal numbers do not have a leading 1 in their representation. 
+* They assume the exponent is fixed at −126.
+* Interpretation:
 
-x=(−1)^s x 0.M x 2^−126
+x = (−1)^s × 0.M × 2^(−126)
 
-These values fill the underflow gap between 0 and the smallest normal float.
+These values fill the underflow gap between 0 and the smallest normalized float.
 
 -->
 
