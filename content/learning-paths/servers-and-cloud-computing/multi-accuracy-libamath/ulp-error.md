@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## ULP error and accuracy
+## Overview
 
 In the development of Libamath, a metric called ULP error is used to assess the accuracy of floating-point functions. ULP  (Unit in the Last Place) measures the distance between two numbers, a reference (`want`) and an approximation (`got`), relative to how many floating-point steps (ULPs) separate them.
 

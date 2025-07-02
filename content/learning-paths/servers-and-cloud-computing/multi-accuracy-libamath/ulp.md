@@ -16,7 +16,7 @@ ULP is a function of the number's exponent and can be calculated with the follow
 ULP(x) = nextafter(x, +inf) - x
 ```
 
-## ULP Example: Binary Model
+## ULP example: binary model
 
 Building on the example from the previous section:
 

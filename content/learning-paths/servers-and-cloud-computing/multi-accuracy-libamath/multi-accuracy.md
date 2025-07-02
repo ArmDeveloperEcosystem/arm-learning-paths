@@ -93,7 +93,7 @@ If your workload has mixed precision needs, you can *selectively call different 
 
 
 ## References
-1. Higham, N. J. (2002). *Accuracy and Stability of Numerical Algorithms* (2nd ed.). SIAM.
+1. Higham, N. J. (2002). *Accuracy and Stability of Numerical Algorithms* (2nd ed.), SIAM.
 
 2. Texas Instruments. *Overflow Avoidance Techniques in Cascaded IIR Filter Implementations on the TMS320 DSPs*. Application Report SPRA509, 1999.
 https://www.ti.com/lit/pdf/spra509
