@@ -1,16 +1,22 @@
 ---
-title: Understanding floating-point representation
+title: Floating-point representation
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Floating-point numbers are essential for representing real numbers in computing, but they come with limits on precision and range. This Learning Path explains how floating-point values are structured, how bitwise representation works, and what the IEEE-754 standard defines, including special values like NaN and subnormals.
+Floating-point numbers are essential for representing real numbers in computing, but they come with limits on precision and range. 
+
+This Learning Path covers the following:
+
+* How floating-point values are structured
+* How bitwise representation works
+* The IEEE-754 standard definition, including special values such as NaN and subnormals
 
 ## What is a floating-point number?
 
-Floating-point numbers are a finite and discrete approximation of the real numbers, allowing one to implement and compute functions in the continuous domain with an adequate (but limited) resolution.
+Floating-point numbers are a finite, discrete approximation of real numbers. They allow functions in the continuous domain to be computed with adequate, but limited, resolution.
 
 A floating-point number is typically expressed as:
 
@@ -19,17 +25,17 @@ A floating-point number is typically expressed as:
 ```
 
 where:
-* B is the base;
-* e is the exponent;
-* d.dddd...d is the mantissa (or significand);
-* It is a *p*-bit word, where *p* represents the precision;
-* and the +/- sign is usually stored separately.
+* B is the base
+* e is the exponent
+* d.dddd...d is the mantissa (or significand)
+* *p* is the number of bits used for precision
+* the +/- sign is stored separately
 
 The precision of a floating-point format refers to the number of binary digits used to represent the mantissa. This is denoted by *p*, and a system with *p* bits of precision can distinguish between \( 2^p \) different fractional values.
 
-If the leading digit is non-zero, then it is a normalized representation (also called a *normal number*).
+If the leading digit is non-zero, the number is said to be normalized (also called a *normal number*).
 
-{{% notice Example 1 %}}
+{{% notice Example 1%}}
 Fixing `B = 2, p = 24`
 
 `0.1 = 1.10011001100110011001101 ×  2^4` is a normalized representation of 0.1
@@ -38,11 +44,18 @@ Fixing `B = 2, p = 24`
 
 {{% /notice %}}
 
-A floating-point number can have multiple non-normalized representations, but only one normalized form - assuming a fixed base and precision, and that the leading digit is strictly less than the base.
+A floating-point number can have multiple non-normalized forms, but only one normalized representation for a given value - assuming a fixed base and precision, and that the leading digit is strictly less than the base.
 
 ## How precision and exponents define floating-point values
 
-Given a base `B`, a precision `p`, a maximum exponent `emax`, and a minimum exponent `emin`, one can create the set of all the normalized values in this system.
+Given:
+
+* a base `B`
+* a precision `p`
+* a maximum exponent `emax`
+* a minimum exponent `emin`
+
+You can create the full set of representable normalized values.
 
 {{% notice Example 2 %}}
 `B = 2, p = 3, emax = 2, emin = -1`
@@ -57,11 +70,11 @@ Given a base `B`, a precision `p`, a maximum exponent `emax`, and a minimum expo
 
 {{% /notice %}}
 
-For any given integer n, numbers are evenly spaced between 2ⁿ and 2ⁿ⁺¹. However, the gap between them (also called a [ULP](/learning-paths/servers-and-cloud-computing/multi-accuracy-libamath/ulp/), which is explained in more detail in the next section) grows as the exponent increases. So the spacing between floating-point numbers becomes larger as numbers themselves increase in magnitude.
+For any exponent, n, numbers are evenly spaced between 2ⁿ and 2ⁿ⁺¹. However, the gap between them (also called a [ULP](/learning-paths/servers-and-cloud-computing/multi-accuracy-libamath/ulp/), which is explained in more detail in the next section) increases with the magnitude of the exponent.
 
 ## Bitwise representation of floating-point numbers
 
-Since there are \( B^p \) possible mantissas and `emax-emin+1` possible exponents, then `log2(B^p) + log2(emax-emin+1) + 1` (sign) bits are needed to represent a given Floating Point number in a system.
+Since there are \( B^p \) possible mantissas and `emax-emin+1` possible exponents, then `log2(B^p) + log2(emax-emin+1) + 1` (sign) bits are needed to represent a given floating-point number in a system.
 
 In Example 2, 3+2+1=6 bits are needed.
 
@@ -90,7 +103,7 @@ x = (-1)^S x M x 2^(E-1)
 
 ## IEEE-754 single precision format
 
-Single precision (also called float) is a 32-bit format defined by the [IEEE-754 Floating-Point Standard](https://ieeexplore.ieee.org/document/8766229)
+Single precision (also called float) is a 32-bit format defined by the [IEEE-754 Floating-Point Standard](https://ieeexplore.ieee.org/document/8766229).
 
 In this format:
 
@@ -131,10 +144,14 @@ x=(−1)^S x 0.M x 2^−126
 <!-- ### Subnormal numbers
 
 Subnormal numbers (also called denormal numbers) are special floating-point values defined by the IEEE-754 standard.
-They allow the representation of numbers very close to zero, smaller than what is normally possible with the standard exponent range.
-Subnormal numbers do not have the a leading 1 in their representation. They also assume exponent is 0.
+They allow the representation of numbers closer to zero than any normalized float:
+
+* Subnormal numbers do not have the a leading 1 in their representation. 
+* They also assume exponent is 0.
 
 x=(−1)^s x 0.M x 2^−126
+
+These values fill the underflow gap between 0 and the smallest normal float.
 
 -->
 
