@@ -1,6 +1,6 @@
 ---
 title: Run the Chatbot Server
-weight: 3
+weight: 4
 
 layout: learningpathall
 ---

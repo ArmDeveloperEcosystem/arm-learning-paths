@@ -440,6 +440,7 @@ Calls to:
                 all_messages_div.removeChild(all_messages_div.firstChild);
             }
         {{ else if eq .Params.demo_template_name "llm_chatbot_first_demo" }}
+        {{ else if eq .Params.demo_template_name "phi_onnx_chatbot_demo" }}
         {{ else }}
         {{ end }}
 
@@ -629,6 +630,9 @@ Calls to:
     {{ else if eq .Params.demo_template_name "llm_chatbot_first_demo" }}
         {{ $server_location = getenv "HUGO_LLM_API" | base64Encode }}
         console.log('Using LLM API.');
+    {{ else if eq .Params.demo_template_name "phi_onnx_chatbot_demo" }}
+        {{ $server_location = getenv "HUGO_PHI_ONNX_LLM_API" | base64Encode }}
+        console.log('Using HUGO_PHI_ONNX_LLM_API.');
     {{ else }}
         console.log('No server location provided.');
     {{ end }}
