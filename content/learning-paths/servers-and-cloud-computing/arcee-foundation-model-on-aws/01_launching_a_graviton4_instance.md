@@ -6,17 +6,13 @@ weight: 2
 layout: learningpathall
 ---
 
-## System Requirements
+## Requirements
 
   - An AWS account
 
-  - Quota for c8g instances in your preferred region
+  - Access to launch an EC2 instance of type `c8g.4xlarge` (or larger) with at least 128 GB of storage
 
-  - A Linux or MacOS host
-
-  - A c8g instance (4xlarge or larger)
-
-  - At least 128GB of storage
+For more information about creating an EC2 instance using AWS refer to [Getting Started with AWS](/learning-paths/servers-and-cloud-computing/csp/aws/).
 
 ## AWS Console Steps
 
@@ -49,12 +45,14 @@ Follow these steps to launch your EC2 instance using the AWS Management Console:
 3. **Secure the Key File**
 
    - Move the downloaded `.pem` file to the SSH configuration directory
+
      ```bash
      mkdir -p ~/.ssh
      mv arcee-graviton4-key.pem ~/.ssh
      ```
 
-   - Set proper permissions (on Mac/Linux):
+   - Set proper permissions on macOS or Linux:
+
      ```bash
      chmod 400 ~/.ssh/arcee-graviton4-key.pem
      ```
@@ -105,9 +103,12 @@ Follow these steps to launch your EC2 instance using the AWS Management Console:
 
      - In the dropdown list, select "My IP". 
      
-     Note 1: you will only be able to connect to the instance from your current host, which is the safest setting. We don't recommend selecting "Anywhere", which would allow anyone on the Internet to attempt to connect. Use at your own risk.
 
-     Note 2: although this demonstration only requires SSH access, feel free to use one of your existing security groups as long as it allows SSH traffic.
+{{% notice Notes %}}
+You will only be able to connect to the instance from your current host, which is the safest setting. Selecting "Anywhere" allows anyone on the Internet to attempt to connect; use at your own risk.
+
+Although this demonstration only requires SSH access, it is possible to use one of your existing security groups as long as it allows SSH traffic.
+{{% /notice %}}
 
 5. **Configure Storage**
 
@@ -161,7 +162,7 @@ Follow these steps to launch your EC2 instance using the AWS Management Console:
 
 - **AMI Selection**: The Ubuntu 24.04 LTS AMI must be ARM64 compatible for Graviton processors
 
-- **Security**: please think twice about allowing SSH from anywhere (0.0.0.0/0). We strongly recommend restricting access to your IP address
+- **Security**: Think twice about allowing SSH from anywhere (0.0.0.0/0). It is strongly recommended to restrict access to your IP address.
 
 - **Storage**: The 128GB EBS volume is sufficient for the Arcee model and dependencies
 

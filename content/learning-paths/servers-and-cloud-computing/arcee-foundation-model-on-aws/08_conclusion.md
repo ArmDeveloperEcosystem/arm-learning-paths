@@ -11,19 +11,17 @@ layout: learningpathall
 
 Congratulations! You have successfully completed the journey of deploying the Arcee AFM-4.5B foundation model on AWS Graviton4. 
 
-*Please remember to terminate the instance in the AWS console when you're done testing*
+Here is a summary of what you learned.
 
-Let's recap what we accomplished.
+### What you built
 
-### What We Built
-
-Throughout this learning path, you've:
+Using this Learning Path, you have:
 
 1. **Launched a Graviton4-powered EC2 instance** - Set up a c8g.4xlarge instance running Ubuntu 24.04 LTS, leveraging AWS's latest Arm-based processors for optimal performance and cost efficiency.
 
 2. **Configured the development environment** - Installed essential tools and dependencies, including Git, build tools, and Python packages needed for machine learning workloads.
 
-3. **Built llama.cpp from source** - Compiled the optimized inference engine specifically for Arm64 architecture, ensuring maximum performance on Graviton4 processors.
+3. **Built Llama.cpp from source** - Compiled the optimized inference engine specifically for Arm64 architecture, ensuring maximum performance on Graviton4 processors.
 
 4. **Downloaded and optimized AFM-4.5B** - Retrieved the 4.5-billion parameter Arcee Foundation Model and converted it to the efficient GGUF format, then created quantized versions (8-bit and 4-bit) to balance performance and memory usage.
 
@@ -62,7 +60,7 @@ Now that you have a fully functional AFM-4.5B deployment, here are some exciting
 - Develop content generation tools
 - Integrate with existing applications via REST APIs
 
-The combination of Arcee AI's efficient foundation models, llama.cpp's optimized inference engine, and AWS Graviton4's powerful Arm processors creates a compelling platform for deploying production-ready AI applications. Whether you're building chatbots, content generators, or research tools, this stack provides the performance, cost efficiency, and flexibility needed for modern AI workloads.
+The combination of Arcee AI's efficient foundation models, Llama.cpp's optimized inference engine, and AWS Graviton4's powerful Arm processors creates a compelling platform for deploying production-ready AI applications. Whether you're building chatbots, content generators, or research tools, this stack provides the performance, cost efficiency, and flexibility needed for modern AI workloads.
 
 For more information on Arcee AI and how we can help you build high-quality, secure, and cost-efficient AI, solution, please visit [www.arcee.ai](https://www.arcee.ai).
 

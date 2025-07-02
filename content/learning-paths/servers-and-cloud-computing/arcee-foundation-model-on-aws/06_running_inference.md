@@ -6,7 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-Now that we have our AFM-4.5B models in GGUF format, we can run inference using various Llama.cpp tools. In this step, we'll explore different ways to interact with the model for text generation, benchmarking, and evaluation.
+Now that you have the AFM-4.5B models in GGUF format, you can run inference using various Llama.cpp tools. In this step, you'll explore different ways to interact with the model for text generation, benchmarking, and evaluation.
 
 ## Using llama-cli for Interactive Text Generation
 
@@ -19,6 +19,7 @@ bin/llama-cli -m models/afm-4-5b/afm-4-5B-Q8_0.gguf -n 256 --color
 ```
 
 This command starts an interactive session with the model:
+
 - `-m models/afm-4-5b/afm-4-5B-Q8_0.gguf` specifies the model file to load
 - `-n 512` sets the maximum number of tokens to generate per response
 - The tool will prompt you to enter text, and the model will generate a response
@@ -29,7 +30,7 @@ In this example, `llama-cli` uses 16 vCPUs. You can try different values with `-
 
 Once you start the interactive session, you can have conversations like this:
 
-```
+```console
 > Give me a brief explanation of the attention mechnanism in transformer models.
 In transformer models, the attention mechanism allows the model to focus on specific parts of the input sequence when computing the output. Here's a simplified explanation:
 
@@ -50,6 +51,7 @@ The attention mechanism allows transformer models to selectively focus on specif
 To exit the interactive session, type `Ctrl+C` or `/bye`.
 
 This will display performance statistics:
+
 ```bash
 llama_perf_sampler_print:    sampling time =      26.66 ms /   356 runs   (    0.07 ms per token, 13352.84 tokens per second)
 llama_perf_context_print:        load time =     782.72 ms
@@ -62,7 +64,7 @@ In this example, our 8-bit model running on 16 threads generated 355 tokens, at 
 
 ### Example Non-Interactive Session
 
-Now, let's try the 4-bit model in non-interactive mode:
+Now, try the 4-bit model in non-interactive mode:
 
 ```bash
 bin/llama-cli -m models/afm-4-5b/afm-4-5B-Q4_0.gguf -n 256 --color -no-cnv -p "Give me a brief explanation of the attention mechnanism in transformer models."
@@ -116,7 +118,7 @@ curl -X POST http://localhost:8080/v1/chat/completions \
   }'
 ```
 
-You should get an answer similar to this one:
+You get an answer similar to this one:
 
 ```json
 {
@@ -153,4 +155,4 @@ You should get an answer similar to this one:
 }
 ```
 
-You could also interact with the server using Python with the [OpenAI client library](https://github.com/openai/openai-python), enabling streaming responses, and other features.
+You can also interact with the server using Python with the [OpenAI client library](https://github.com/openai/openai-python), enabling streaming responses, and other features.
