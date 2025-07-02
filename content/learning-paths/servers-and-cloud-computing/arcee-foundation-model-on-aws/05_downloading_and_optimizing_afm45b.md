@@ -6,24 +6,24 @@ weight: 6
 layout: learningpathall
 ---
 
-In this step, we'll download the AFM-4.5B model from Hugging Face, convert it to the GGUF format for use with Llama.cpp, and create quantized versions to optimize memory usage and inference speed.
+In this step, you'll download the AFM-4.5B model from Hugging Face, convert it to the GGUF format for use with Llama.cpp, and create quantized versions to optimize memory usage and inference speed.
 
 The first release of the [Arcee Foundation Model](https://www.arcee.ai/blog/announcing-the-arcee-foundation-model-family) family, [AFM-4.5B](https://www.arcee.ai/blog/deep-dive-afm-4-5b-the-first-arcee-foundational-model) is a 4.5-billion-parameter frontier model that delivers excellent accuracy, strict compliance, and very high cost-efficiency. It was trained on almost 7 trillion tokens of clean, rigorously filtered data, and has been tested across a wide range of languages, including Arabic, English, French, German, Hindi, Italian, Korean, Mandarin, Portuguese, Russian, and Spanish
 
-Here are all the steps to download and optimize the model for AWS Graviton4. Make sure to run them in the virtual environment you created at the previous step.
+Here are the steps to download and optimize the model for AWS Graviton4. Make sure to run them in the virtual environment you created at the previous step.
 
 ## Step 1: Install the Hugging Face libraries
 
 ```bash
-(env-llama-cpp) pip install huggingface_hub hf_xet
+pip install huggingface_hub hf_xet
 ```
 
-This command installs the Hugging Face Hub Python library, which provides tools for downloading models and datasets from the Hugging Face platform. The library includes the `huggingface-cli` command-line interface that we'll use to download the AFM-4.5B model. The `hf_xet` library provides additional functionality for efficient data transfer and caching when downloading large models from Hugging Face Hub.
+This command installs the Hugging Face Hub Python library, which provides tools for downloading models and datasets from the Hugging Face platform. The library includes the `huggingface-cli` command-line interface that you can use to download the AFM-4.5B model.
 
 ## Step 2: Download the AFM-4.5B Model
 
 ```bash
-(env-llama-cpp) huggingface-cli download arcee-ai/afm-4.5B --local-dir models/afm-4-5b
+huggingface-cli download arcee-ai/afm-4.5B --local-dir models/afm-4-5b
 ```
 
 This command downloads the AFM-4.5B model from the Hugging Face Hub:
@@ -35,8 +35,8 @@ This command downloads the AFM-4.5B model from the Hugging Face Hub:
 ## Step 3: Convert to GGUF Format
 
 ```bash
-(env-llama-cpp) python3 convert_hf_to_gguf.py models/afm-4-5b
-(env-llama-cpp) deactivate
+python3 convert_hf_to_gguf.py models/afm-4-5b
+deactivate
 ```
 
 The first command converts the downloaded Hugging Face model to the GGUF (GGML Universal Format) format:
@@ -46,7 +46,7 @@ The first command converts the downloaded Hugging Face model to the GGUF (GGML U
 - It outputs a single `afm-4-5B-F16.gguf` ~15GB file in the `models/afm-4-5b/` directory
 - GGUF is the native format used by Llama.cpp and provides efficient loading and inference
 
-Then, we deactivate the Python virtual environment as future commands won't require it.
+Next, deactivate the Python virtual environment as future commands won't require it.
 
 ## Step 4: Create Q4_0 Quantized Version
 
@@ -81,7 +81,7 @@ This command creates an 8-bit quantized version of the model:
 
 **ARM Optimization**: Similar to Q4_0, ARM has contributed optimized kernels for Q8_0 quantization that take advantage of Neoverse v2 instruction sets. These optimizations provide excellent performance for 8-bit operations while maintaining higher accuracy compared to 4-bit quantization.
 
-## What You'll Have
+## What is available now?
 
 After completing these steps, you'll have three versions of the AFM-4.5B model:
 - `afm-4-5B-F16.gguf` - The original full-precision model (~15GB)

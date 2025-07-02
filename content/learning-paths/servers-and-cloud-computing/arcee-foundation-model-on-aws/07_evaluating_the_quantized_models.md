@@ -63,7 +63,7 @@ The results should look like this:
 
 It's pretty amazing to see that with only 4 threads, the 4-bit model can still generate at the very comfortable speed of 15 tokens per second. We could definitely run several copies of the model on the same instance to serve concurrent users or applications.
 
-You could also try [`llama-batched-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/batched-bench) to benchmark performance on batch sizes larger than 1.
+You can also try [`llama-batched-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/batched-bench) to benchmark performance on batch sizes larger than 1.
 
 
 ## Using llama-perplexity for Model Evaluation
@@ -74,7 +74,7 @@ The `llama-perplexity` tool evaluates the model's quality on text datasets by ca
 
 ### Downloading a Test Dataset
 
-First, let's download the Wikitest-2 test dataset.
+First, download the Wikitest-2 test dataset.
 
 ```bash
 sh scripts/get-wikitext-2.sh
@@ -82,7 +82,8 @@ sh scripts/get-wikitext-2.sh
 
 ### Running Perplexity Evaluation
 
-Now, let's measure perplexity on the test dataset
+Next, measure perplexity on the test dataset.
+
 ```bash
 bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-F16.gguf -f wikitext-2-raw/wiki.test.raw
 bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-Q8_0.gguf -f wikitext-2-raw/wiki.test.raw
@@ -106,9 +107,7 @@ bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-Q4_0.gguf -f wikitext-2-raw/wik
  tail -f ppl.sh.log
  ```
 
-
 Here are the full results.
-
 
 | Model | Generation Speed (tokens/s, 16 vCPUs) | Memory Usage | Perplexity (Wikitext-2) |
 |:-------:|:----------------------:|:------------:|:----------:|
@@ -116,6 +115,5 @@ Here are the full results.
 | Q8_0    | ~25                    | ~8 GB        | TODO       |
 | Q4_0    | ~40                    | ~4.4 GB      | TODO       |
 
-
-*Please remember to terminate the instance in the AWS console when you're done testing*
+When you have finished your benchmarking and evaluation, make sure to terminate your AWS EC2 instance in the AWS Management Console to avoid incurring unnecessary charges for unused compute resources.
 
