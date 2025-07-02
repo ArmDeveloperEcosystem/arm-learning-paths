@@ -6,15 +6,17 @@ weight: 3
 layout: learningpathall
 ---
 
-## ULP
+## What is ULP?
 
-Units in the Last Place (ULP) is the distance between two adjacent floating-point numbers at a given value, representing the smallest possible change in that number's representation.
+Units in the Last Place (ULP) is the distance between two adjacent floating-point numbers at a given value. It represents the smallest possible change in a number's representation at that magnitude.
 
-It is a property of a number and can be calculated with the following expression:
+ULP is a function of the number's exponent and can be calculated with the following expression:
 
 ```output
 ULP(x) = nextafter(x, +inf) - x
 ```
+
+## ULP Example: Binary Model
 
 Building on the example from the previous section:
 
@@ -27,7 +29,7 @@ Fixed `B = 2, p = 3, e^max = 2, e^min = -1`
 | 1.10 (1.5)  | 0.75  | 1.5  | 3.0  | 6.0  |
 | 1.11 (1.75) | 0.875 | 1.75 | 3.5  | 7.0  |
 
-Based on the above definition, you can compute the ULP value for the numbers in this set as follows:
+Based on the above definition, you can compute the ULP values for the numbers in this set as follows:
 
 ```
 ULP(0.625) = nextafter(0.625, +inf) - 0.625 = 0.75-0.625 = 0.125
@@ -36,13 +38,15 @@ ULP(0.625) = nextafter(0.625, +inf) - 0.625 = 0.75-0.625 = 0.125
 ULP(4.0) = 1.0
 ```
 
-As the exponent of `x` increases, `ULP(x)` increases exponentially. That is, the spacing between floating-point values  grows with the magnitude of x.
+As the exponent of `x` increases, `ULP(x)` increases exponentially. That is, the spacing between floating-point values grows with the magnitude of x.
 
 Numbers with the same exponent have the same ULP.
 
 ## ULP in IEEE-754
 
 For normalized IEEE-754 floating-point numbers, a similar behavior is observed: the distance between two adjacent representable values — that is, ULP(x) — is a power of two that depends only on the exponent of x.
+
+### Optimized Expression
 
 A faster, commonly used expression for ULP is:
 
