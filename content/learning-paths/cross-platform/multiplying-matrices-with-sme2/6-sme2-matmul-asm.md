@@ -348,7 +348,7 @@ assembly- or intrinsic-based matrix multiplication) `I` times and then compute
 and report the minimum, maximum and average execution times.
 
 {{% notice Note %}}
-Benchmarking and profiling are not simple tasks. The purpose of this learning path
+Benchmarking and profiling are not simple tasks. The purpose of this Learning Path
 is to provide some basic guidelines on the performance improvement that can be
 obtained with SME2.
 {{% /notice %}}

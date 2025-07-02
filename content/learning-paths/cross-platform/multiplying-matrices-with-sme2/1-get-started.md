@@ -7,19 +7,19 @@ layout: learningpathall
 ---
 
 To follow this Learning Path, you will need to set up an environment to develop
-with SME2 and download the code examples. This learning path assumes two
+with SME2 and download the code examples. This Learning Path assumes two
 different ways of working, and you will need to select the one appropriate for
 your machine:
 - Case #1: Your machine has native SME2 support --- check the [list of devices
   with SME2 support](#devices-with-sme2-support).
-- Case #2: Your machine does not have native SME2 support. This learning path
+- Case #2: Your machine does not have native SME2 support. This Learning Path
   supports this use case by enabling you to run code with SME2 instructions in
   an emulator in bare metal mode, i.e., the emulator runs the SME2 code
   *without* an operating system.
 
 ## Code examples
 
-[Download the code examples](https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2) for this learning path, expand the archive, and change your current directory to:
+[Download the code examples](https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2) for this Learning Path, expand the archive, and change your current directory to:
 ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2`` :
 
 ```BASH
@@ -59,7 +59,7 @@ code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2/
 ```
 
 It contains:
-- The code examples that will be used throughout this learning path.
+- The code examples that will be used throughout this Learning Path.
 - A ``Makefile`` that builds the code examples.
 - A shell script called ``run-fvp.sh`` that runs the FVP (used in the emulated
   SME2 case).
@@ -124,7 +124,7 @@ the necessary tools you require without cluttering your machine. The containers
 run independently, meaning they do not interfere with other containers on the
 same machine or server.
 
-This learning path provides a Docker image that has a compiler and [Arm's Fixed
+This Learning Path provides a Docker image that has a compiler and [Arm's Fixed
 Virtual Platform (FVP)
 model](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms)
 for emulating code with SME2 instructions. The Docker image recipe is provided

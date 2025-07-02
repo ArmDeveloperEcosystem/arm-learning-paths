@@ -1,20 +1,16 @@
 ---
 title: Accelerate Matrix Multiplication Performance with SME2
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: This Learning Path is an advanced topic for developers who want to learn about accelerating the performance of matrix multiplication using Arm's Scalable Matrix Extension Version 2 (SME2).
 
 learning_objectives:
-    - Implement a reference matrix multiplication without using SME2.
-    - Use SME2 assembly instructions to improve the matrix multiplication performance.
-    - Use SME2 intrinsics to improve the matrix multiplication performance using the C programming language.
+    - Implement a baseline matrix multiplication kernel in C without SME2.
+    - Use SME2 assembly instructions to accelerate the matrix multiplication performance.
+    - Use SME2 intrinsics to vectorize and optimize matrix multiplication in C.
     - Compile code with SME2 instructions.
-    - Run code with SME2 instructions, on a platform with SME2 support or with an emulator.
+    - Compile and run SME2-enabled code on Arm hardware or in emulation.
 
 prerequisites:
     - Basic knowledge of Arm's Scalable Matrix Extension (SME).
@@ -22,8 +18,8 @@ prerequisites:
     - An intermediate understanding of C programming language and assembly language.
     - A computer running Linux, macOS, or Windows.
     - Installations of Git and Docker.
-    - A platform that support SME2 (see the [list of devices with SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices-with-sme2-support)) or an emulator to run code with SME2 instructions.
-    - A compiler with support for SME2 instructions.
+    - A platform that supports SME2 (see the list of [devices with SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices-with-sme2-support)) or an emulator to run code with SME2 instructions.
+    - A compiler with support for SME2 instructions. 
 
 author: Arnaud de Grandmaison
 

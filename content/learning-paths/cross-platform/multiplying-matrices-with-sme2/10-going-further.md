@@ -11,8 +11,7 @@ available to you.
 
 ## Generalize the algorithms
 
-In this Learning Path, you focused on using SME2 for matrix multiplication with
-floating point numbers. However in practice, any library or framework supporting
+In this Learning Path, you focused on using SME2 for matrix multiplication with floating-point numbers. However in practice, any library or framework supporting
 matrix multiplication should also handle various integer types.
 
 You can see that the algorithm structure for matrix preprocessing as well as

@@ -25,7 +25,7 @@ known to be a poor proxy for execution time comparisons.
 ## Benchmarking on platform with native SME2 support
 
 {{% notice Note %}}
-Benchmarking and profiling are not simple tasks. The purpose of this learning path
+Benchmarking and profiling are not simple tasks. The purpose of this Learning Path
 is to provide some basic guidelines on the performance improvement that can be
 obtained with SME2.
 {{% /notice %}}
@@ -86,7 +86,7 @@ here is far from being an apples-to-apples comparison:
 - Firstly, the assembly version has some requirements on the `K` parameter that
   the intrinsic version does not have.
 - Second, the assembly version has an optimization that the intrinsic version,
-  for the sake of readability in this learning path, does not have (see the
+  for the sake of readability in this Learning Path, does not have (see the
   [Going further
   section](/learning-paths/cross-platform/multiplying-matrices-with-sme2/10-going-further/)
   to know more).
