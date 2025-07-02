@@ -2,7 +2,7 @@
 # User change
 title: "Build ONNX Runtime and set up the Phi-4-mini Model"
 
-weight: 2
+weight: 3
 
 # Do not modify these elements
 layout: "learningpathall"
