@@ -1,5 +1,5 @@
 ---
-title: Set up your Environment
+title: Set up your environment
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -61,8 +61,8 @@ code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2/
 It contains:
 - The code examples that will be used throughout this Learning Path.
 - A ``Makefile`` that builds the code examples.
-- A shell script called ``run-fvp.sh`` that runs the FVP (used in the emulated
-  SME2 case).
+- A shell script called ``run-fvp.sh`` that runs the FVP model (used for emulated
+  SME2 execution).
 - A directory called ``docker`` that contains materials related to Docker, which
   are:
   - A script called ``assets.source_me`` that provides the FVP and compiler
@@ -267,7 +267,7 @@ Then select the **Reopen in Container** menu entry as Figure 1 shows.
 
 It automatically finds and uses ``.devcontainer/devcontainer.json``:
 
-![example image alt-text#center](VSCode.png "Figure 1: Setting up the Docker Container.")
+![VSCode Docker alt-text#center](VSCode.png "Figure 1: Setting up the Docker container.")
 
 All your commands now run within the container, so there is no need to prepend
 them with a Docker invocation, as VS Code handles all this seamlessly for you.

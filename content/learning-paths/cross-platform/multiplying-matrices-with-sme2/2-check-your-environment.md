@@ -1,5 +1,5 @@
 ---
-title: Test your environment
+title: Test your SME2 development environment
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -81,7 +81,7 @@ by invoking `make clean`:
   {{< /tab >}}
 {{< /tabpane >}}
 
-## Basic Checks
+## Run a Hello World program
 
 The very first program that you should run is the famous "Hello, world!" example
 that will tell you if your environment is set up correctly.
@@ -114,15 +114,11 @@ Run the `hello` program with:
   {{< /tab >}}
 {{< /tabpane >}}
 
-In the emulated case, there are extra lines that are printed out by the FVP, but
-the important line here is "Hello, world!": it demonstrates that the generic
-code can be compiled and executed.
+In the emulated case, you may see that the FVP prints out extra lines. The key confirmation is the presence of "Hello, world!" in the output. it demonstrates that the generic code can be compiled and executed.
 
-## SME2 checks
+## Check SME2 availability
 
-You will now run the `sme2_check` program, which verifies that SME2 works as
-expected. This checks both the compiler and the CPU (or the emulated CPU) are
-properly supporting SME2.
+You will now run the `sme2_check` program, which verifies that SME2 works as expected. This checks both the compiler and the CPU (or the emulated CPU) are properly supporting SME2.
 
 The source code is found in `sme2_check.c`:
 
@@ -186,15 +182,15 @@ emulated SME2 support), where no operating system has done the setup of the
 processor for the user land programs, an additional step is required to turn
 SME2 on. This is the purpose of the ``setup_sme_baremetal()`` call at line 21.
 In environments where SME2 is natively supported, nothing needs to be done,
-which is why the execution of this function is condionned by the ``BAREMETAl``
+which is why the execution of this function is conditioned by the ``BAREMETAL``
 macro. ``BAREMETAL`` is set to 1 in the ``Makefile`` when the FVP is targeted,
 and set to 0 otherwise. The body of the ``setup_sme_baremetal`` function is
 defined in ``misc.c``.
 
 The ``sme2_check`` program then displays whether SVE, SME and SME2 are supported
 at line 24. The checking of SVE, SME and SME2 is done differently depending on
-``BAREMETAL``. This platform specific behaviour is abstract by the
-``display_cpu_features()`` :
+``BAREMETAL``. This platform specific behaviour is abstracted by the
+``display_cpu_features()``:
 - In baremetal mode, our program has access to system registers and can thus do
   some low level peek at what the silicon actually supports. The program will
   print the SVE field of the ``ID_AA64PFR0_EL1`` system register and the SME
