@@ -1,16 +1,14 @@
 ---
 title: Vanilla matrix multiplication
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Vanilla matrix multiplication
-
 In this section, you will learn about an example of standard matrix multiplication in C.
 
-### Algorithm description
+## Vanilla matrix multiplication algorithm
 
 The vanilla matrix multiplication operation takes two input matrices, A [Ar
 rows x Ac columns] and B [Br rows x Bc columns], to produce an output matrix C
@@ -22,7 +20,6 @@ element in the B column then summing all these products, as Figure 2 shows.
 
 This implies that the A, B, and C matrices have some constraints on their
 dimensions:
-
 - A's number of columns must match B's number of rows: Ac == Br.
 - C has the dimensions Cr == Ar and Cc == Bc.
 
@@ -31,22 +28,21 @@ properties and use, by reading this [Wikipedia
 article on Matrix Multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication).
 
 In this Learning Path, you will see the following variable names:
-
-- ``matLeft`` corresponds to the left-hand side argument of the matrix
+- `matLeft` corresponds to the left-hand side argument of the matrix
   multiplication.
-- ``matRight``corresponds to the right-hand side of the matrix multiplication.
-- ``M`` is ``matLeft`` number of rows.
-- ``K`` is ``matLeft`` number of columns (and ``matRight`` number of rows).
-- ``N`` is ``matRight`` number of columns.
-- ``matResult``corresponds to the result of the matrix multiplication, with
-  ``M`` rows and ``N`` columns.
+- `matRight`corresponds to the right-hand side of the matrix multiplication.
+- `M` is `matLeft` number of rows.
+- `K` is `matLeft` number of columns (and `matRight` number of rows).
+- `N` is `matRight` number of columns.
+- `matResult`corresponds to the result of the matrix multiplication, with
+  `M` rows and `N` columns.
 
-### C implementation
+## C implementation
 
 A literal implementation of the textbook matrix multiplication algorithm, as
-described above, can be found in file ``matmul_vanilla.c``:
+described above, can be found in file `matmul_vanilla.c`:
 
-```C
+```C { line_numbers="true" }
 void matmul(uint64_t M, uint64_t K, uint64_t N,
             const float *restrict matLeft, const float *restrict matRight,
             float *restrict matResult) {
@@ -65,16 +61,16 @@ void matmul(uint64_t M, uint64_t K, uint64_t N,
 ```
 
 In this Learning Path, the matrices are laid out in memory as contiguous
-sequences of elements, in [Row-Major
-Order](https://en.wikipedia.org/wiki/Row-_and_column-major_order). The
-``matmul`` function performs the algorithm described above. 
+sequences of elements, in [Row-Major Order](https://en.wikipedia.org/wiki/Row-_and_column-major_order).
+The `matmul` function performs the algorithm described above.
 
-The pointers to ``matLeft``, ``matRight`` and ``matResult`` have been annotated as
-``restrict``, which informs the compiler that the memory areas designated by
-those pointers do not alias. This means that they do not overlap in any way, so that the
-compiler does not need to insert extra instructions to deal with these cases.
-The pointers to ``matLeft`` and ``matRight`` are marked as ``const`` as neither of these two matrices are modified by ``matmul``.
+The pointers to `matLeft`, `matRight` and `matResult` have been annotated
+as `restrict`, which informs the compiler that the memory areas designated by
+those pointers do not alias. This means that they do not overlap in any way, so
+that the compiler does not need to insert extra instructions to deal with these
+cases. The pointers to `matLeft` and `matRight` are marked as `const` as
+neither of these two matrices are modified by `matmul`.
 
-You now have a reference standard matrix multiplication function. You will use it later
-on in this Learning Path to ensure that the assembly version and the intrinsics
-version of the multiplication algorithm do not contain errors.
+You now have a reference standard matrix multiplication function. You will use
+it later on in this Learning Path to ensure that the assembly version and the
+intrinsics version of the multiplication algorithm do not contain errors.

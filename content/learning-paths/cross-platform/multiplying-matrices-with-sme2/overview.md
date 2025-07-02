@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-# Overview of Arm's Scalable Matrix Extension Version 2 
+# Overview of Arm's Scalable Matrix Extension Version 2
 
 ### What is SME2?
 
@@ -30,11 +30,9 @@ Additional architectural features of SME2 include:
 
 If you are not familiar with matrix multiplication, or would benefit from refreshing your knowledge, this [Wikipedia article on Matrix multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication) is a good start.
 
-This Learning Path assumes some basic understanding of SVE and SME. If you are not familiar with SVE or SME, these are some useful resources that you can read first: 
-
- - [Introducing the Scalable Matrix Extension for the Armv9-A
-   Architecture](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/scalable-matrix-extension-armv9-a-architecture).
- - [Arm Scalable Matrix Extension (SME) Introduction (Part
-   1)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction).
- - [Arm Scalable Matrix Extension (SME) Introduction (Part
-   2)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2).
+This Learning Path assumes some basic understanding of SVE and SME. If you are not familiar with SVE or SME, these are some useful resources that you can read first:
+- [Introducing the Scalable Matrix Extension for the Armv9-A Architecture](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/scalable-matrix-extension-armv9-a-architecture).
+- [Arm Scalable Matrix Extension (SME) Introduction (Part 1)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction).
+- [Arm Scalable Matrix Extension (SME) Introduction (Part 2)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2).
+- [Part 3: Matrix-matrix multiplication. Neon, SVE, and SME compared](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/matrix-matrix-multiplication-neon-sve-and-sme-compared).
+- [Build adaptive libraries with multiversioning](https://learn.arm.com/learning-paths/cross-platform/function-multiversioning/)
