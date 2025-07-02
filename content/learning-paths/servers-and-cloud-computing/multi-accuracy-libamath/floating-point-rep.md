@@ -21,7 +21,8 @@ A floating-point number is typically expressed as:
 where:
 * B is the base;
 * e is the exponent;
-* d.dddd...d is the mantissa (or significand). It is a *p*-bit word, where *p* represents the precision;
+* d.dddd...d is the mantissa (or significand);
+* It is a *p*-bit word, where *p* represents the precision;
 * and the +/- sign is usually stored separately.
 
 The precision of a floating-point format refers to the number of binary digits used to represent the mantissa. This is denoted by *p*, and a system with *p* bits of precision can distinguish between \( 2^p \) different fractional values.

@@ -7,11 +7,11 @@ layout: learningpathall
 ---
 
 
-## The 3 accuracy modes of Libamath
+## The three accuracy modes of Libamath
 
-Libamath provides multiple accuracy modes for the same vectorized mathematical function, enabling developers to choose between speed and precision.
+Libamath provides multiple accuracy modes for the same vectorized mathematical function, allowing developers to choose between speed and precision depending on workload requirements.
 
-This means, some of the functions allow users and compilers to choose between:
+Some functions offer selectable modes with tradeoffs between:
 - **High accuracy** (≤ 1 ULP)
 - **Default accuracy** (≤ 3.5 ULP)
 - **Low accuracy / max performance** (approx. ≤ 4096 ULP)
@@ -19,22 +19,22 @@ This means, some of the functions allow users and compilers to choose between:
 
 ## How accuracy modes are encoded in Libamath
 
-You can recognize the accuracy mode of a function by inspecting the **suffix** in its symbol:
+You can recognize the accuracy mode of a function by the **suffix** in the function symbol:
 
 - **`_u10`** → High accuracy  
-  For instance, `armpl_vcosq_f32_u10`  
-  Ensures results stay within **1 Unit in the Last Place (ULP)**.
+  Example: `armpl_vcosq_f32_u10`  
+  Ensures results within **1 Unit in the Last Place (ULP)**.
 
 - *(no suffix)* → Default accuracy  
-  For instance, `armpl_vcosq_f32`  
-  Keeps errors within **3.5 ULP** — a sweet spot for many workloads.
+  Example: `armpl_vcosq_f32`  
+  Keeps errors within **3.5 ULP** - balancing precision and performance.
 
-- **`_umax`** → Low accuracy  
-  For instance, `armpl_vcosq_f32_umax`  
+- **`_umax`** → Low accuracy/max spend  
+  Example: `armpl_vcosq_f32_umax`  
   Prioritizes speed, tolerating errors up to **4096 ULP**, or roughly **11 correct bits** in single-precision.
 
 
-## Applications
+## When to use each mode
 
 Selecting an appropriate accuracy level helps avoid unnecessary compute cost while preserving output quality where it matters.
 

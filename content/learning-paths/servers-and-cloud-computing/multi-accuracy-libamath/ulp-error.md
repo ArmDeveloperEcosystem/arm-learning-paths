@@ -6,23 +6,23 @@ weight: 4
 layout: learningpathall
 ---
 
-# ULP error and accuracy
+## ULP error and accuracy
 
-In the development of Libamath, a metric called ULP error is used to assess the accuracy of functions.
-This metric measures the distance between two numbers, a reference (`want`) and an approximation (`got`), relative to how many floating-point “steps” (ULPs) these two numbers are apart.
+In the development of Libamath, a metric called ULP error is used to assess the accuracy of floating-point functions.
+ULP  (Unit in the Last Place) measures the distance between two numbers, a reference (`want`) and an approximation (`got`), relative to how many floating-point steps (ULPs) separate them.
 
-It can be calculated by:
+The formula is:
 
 ```
 ulp_err = | want - got | / ULP(want)
 ```
 
-Because this is a relative measure in terms of floating-point spacing (ULPs)—that is, this metric is scale-aware—it is ideal for comparing accuracy across magnitudes. Otherwise, error measures would be very biased by the uneven distribution of the floats.
+Because ULP error is defined in terms of floating-point spacing, it is inherently scale-aware. In contrast to absolute error, ULP error avoids bias due to the uneven distribution of floating-point numbers across different magnitudes.
 
 
-# ULP error implementation
+## ULP error implementation
 
-In practice, however, the above expression may take different forms to account for sources of error that may occur during the computation of the error itself.
+In practice, the basic expression is modified to account for additional sources of error introduced during the computation itself.
 
 In the implementation used here, this quantity is held by a term called `tail`:
 
@@ -36,9 +36,11 @@ This term takes into account the error introduced by casting `want` from a highe
 tail = | (want_l - want) / ULP(want) |
 ```
 
-Here is a simplified version of the ULP Error. Use the same `ulp.h` from the previous section.
+## A simplified version
 
-Use a text editor to opy the code below into a new file `ulp_error.h`.
+Here is a simplified version of the ULP error. Use the same `ulp.h` header from the previous section.
+
+Use a text editor to copy the code below into a new file called `ulp_error.h`:
 
 ```C
 // Defines ulpscale(x)
@@ -68,7 +70,9 @@ double ulp_error(float got, double want_l) {
     return fabs(scalbn(diff, -ulp_exp) - tail);
 }
 ```
-Note that the final scaling is done with respect to the rounded reference.
+{{% notice Note %}}
+The final scaling is done with respect to the rounded reference.
+{{% /notice %}}
 
 In this implementation, it is possible to get exactly 0.0 ULP error if and only if:
 
