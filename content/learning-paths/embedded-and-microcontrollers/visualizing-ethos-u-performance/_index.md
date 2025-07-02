@@ -1,6 +1,10 @@
 ---
 title: Visualizing Ethos-U Performance on Arm FVPs
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 120
 
 who_is_this_for: This is an introductory topic for developers and data scientists new to Tiny Machine Learning (TinyML), who want to visualize ExecuTorch performance on a virtual device.
@@ -12,8 +16,8 @@ learning_objectives:
     - Observe model execution on the FVP's graphical user interface (GUI).
 
 prerequisites:
-    - Basic knowledge of Machine Learning concepts
-    - A Linux or Mac computer
+    - Basic knowledge of Machine Learning concepts.
+    - A computer running Linux or macOS.
 
 
 author: Waheed Brown
@@ -25,7 +29,6 @@ armips:
     - Cortex-A
     - Cortex-M
     - Ethos-U
-    - Ethos-U85
 
 operatingsystems:
     - Linux
