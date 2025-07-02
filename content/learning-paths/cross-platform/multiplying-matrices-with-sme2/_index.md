@@ -9,17 +9,17 @@ learning_objectives:
     - Implement a reference matrix multiplication without using SME2.
     - Use SME2 assembly instructions to improve the matrix multiplication performance.
     - Use SME2 intrinsics to improve the matrix multiplication performance using the C programming language.
-    - Compile and run code with SME2 instructions.
+    - Compile code with SME2 instructions.
+    - Run code with SME2 instructions, on a platform with SME2 support or with an emulator.
 
 prerequisites:
     - Basic knowledge of Arm's Scalable Matrix Extension (SME).
-    - Basic knowledge of Arm's Scalable Vector Extension (SVE). 
+    - Basic knowledge of Arm's Scalable Vector Extension (SVE).
     - An intermediate understanding of C programming language and assembly language.
-    - A computer running Linux, MacOS, or Windows.
+    - A computer running Linux, macOS, or Windows.
     - Installations of Git and Docker.
-    - An emulator to run code with SME2 instructions.
-    - A compiler with support for SME2 instructions. 
-
+    - A platform that support SME2 (see the [list of devices with SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices-with-sme2-support)) or an emulator to run code with SME2 instructions.
+    - A compiler with support for SME2 instructions.
 
 author: Arnaud de Grandmaison
 
@@ -53,17 +53,25 @@ further_reading:
         link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/sve
         type: website
     - resource:
-        title: Arm Scalable Matrix Extension (SME) Introduction (Part 1)
-        link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction
-        type: blog
-    - resource:
         title: Introducing the Scalable Matrix Extension for the Armv9-A Architecture
         link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/scalable-matrix-extension-armv9-a-architecture
         type: website
     - resource:
+        title: Arm Scalable Matrix Extension (SME) Introduction (Part 1)
+        link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction
+        type: blog
+    - resource:
         title: Arm Scalable Matrix Extension (SME) Introduction (Part 2)
         link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2
         type: blog
+    - resource:
+        title: (Part 3) Matrix-matrix multiplication. Neon, SVE, and SME compared
+        link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/matrix-matrix-multiplication-neon-sve-and-sme-compared
+        type: blog
+    - resource:
+        title: Build adaptive libraries with multiversioning
+        link: https://learn.arm.com/learning-paths/cross-platform/function-multiversioning/
+        type: website
     - resource:
         title: SME Programmer's Guide
         link: https://developer.arm.com/documentation/109246/latest
