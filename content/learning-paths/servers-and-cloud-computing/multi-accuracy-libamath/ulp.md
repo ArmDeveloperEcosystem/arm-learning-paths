@@ -1,5 +1,5 @@
 ---
-title: Units in the Last Place (ULP)
+title: Units in the last place (ULP)
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## What is ULP?
 
-Units in the Last Place (ULP) is the distance between two adjacent floating-point numbers at a given value. It represents the smallest possible change in a number's representation at that magnitude.
+Units in the last place (ULP) is the distance between two adjacent floating-point numbers at a given value. It represents the smallest possible change in a number's representation at that magnitude.
 
 ULP is a function of the number's exponent and can be calculated with the following expression:
 
@@ -71,12 +71,12 @@ Note that for denormal numbers, the latter expression does not apply.
 In single precision as defined in IEEE-754, the smallest positive subnormal is:
 
 ```
-min_pos_denormal = 2 ^ -23 x 2 ^ -126 = 2^-149
+min_pos_denormal = 2⁻²³ × 2⁻¹²⁶ = 2⁻¹⁴⁹
 ```
 
 The second smallest is:
 ```
-second_min_pos_denormal = 2 ^ -22 x 2 ^ -126 = 2^-148 = 2*2^-149
+second_min_pos_denormal = 2⁻²² × 2⁻¹²⁶ = 2⁻¹⁴⁸ = 2 × 2⁻¹⁴⁹
 ```
 Thus, all denormal numbers are evenly spaced by `2^-149`.
 
@@ -103,13 +103,12 @@ static inline uint32_t asuint(float x) {
 
 // Compute exponent of ULP spacing at x
 static inline int ulpscale(float x) {
-    //recover the biased exponent E
+    // Recover the biased exponent E
     int e = asuint(x) >> 23 & 0xff;
     if (e == 0)
         e++;  // handle subnormals
 
-    // get exponent of the ULP
-    // e-p = E - 127 -23
+    // Compute the ULP exponent: e - p = E - 127 - 23
     return e - 127 - 23;
 }
 
@@ -122,10 +121,10 @@ static float ulp(float x) {
 There are three key functions in this implementation:
 * the `asuint(x)` function reinterprets the bit pattern of a float as a 32-bit unsigned integer, allowing the extraction of specific bit fields such as the exponent.
 * the `ulpscale(x)` function returns the base-2 exponent of the ULP spacing at a given float value x, which is the result of `log2(ULP(x))`. The `e` variable in this function corresponds to the quantity E previously mentioned (the bitwise value of the exponent).
-* the `scalbnf(m, n)` function (a standard function declared in math.h) efficiently evaluates `m x 2^n`.
+* the `scalbnf(m, n)` function (a standard function declared in math.h) efficiently evaluates `m × 2^n`.
 
 
-Below is an example which uses the `ulp()` function.
+Here's an example program that calls `ulp()` to compute the spacing near a float value.
 
 Use a text editor to save the code below in a file named `ulp.c`.
 

@@ -29,7 +29,7 @@ In the implementation used here, this quantity is held by a term called `tail`:
 ulp_err = | (got - want) / ULP(want) - tail |
 ```
 
-This term takes into account the error introduced by casting `want` from a higher precision to working precision. This contribution is given in terms of ULP distance:
+This term compensates for the rounding error that occurs when the high-precision reference (`want_l`, a `double`) is cast down to a `float`. This contribution is given in terms of ULP distance:
 
 ```
 tail = | (want_l - want) / ULP(want) |
@@ -37,7 +37,7 @@ tail = | (want_l - want) / ULP(want) |
 
 ## A simplified version
 
-Here is a simplified version of the ULP error. Use the same `ulp.h` header from the previous section.
+ Below is a practical implementation of the ULP error calculation based on the model above. Use the same `ulp.h` header from the previous section.
 
 Use a text editor to copy the code below into a new file called `ulp_error.h`:
 
@@ -53,11 +53,11 @@ double ulp_error(float got, double want_l) {
     float want = (float) want_l;
 
     // Early exit for exact match
-    if (want_l == (double)want && got == want) {
+    if ((want_l == (double) want && got == want)) {
        return 0.0;
     }
 
-    int ulp_exp = ulpscale(want);
+    int ulp_exp = ulpscale(want); // Base-2 exponent for scaling ULP(want)
 
     // Fractional tail from float rounding
     double tail = scalbn(want_l - (double)want, -ulp_exp);
@@ -113,4 +113,4 @@ The output should be:
 ULP error: 1.0
 ```
 
-If you are interested in diving into the full implementation of the ulp error, you can consult the [tester](https://github.com/ARM-software/optimized-routines/tree/master/math/test) tool in [AOR](https://github.com/ARM-software/optimized-routines/tree/master), with particular focus to the [ulp.h](https://github.com/ARM-software/optimized-routines/blob/master/math/test/ulp.h) file. Note this tool also handles special cases and considers the effect of different rounding modes in the ULP error.
+If you are interested in diving into the full implementation of the ULP error, you can consult the [tester](https://github.com/ARM-software/optimized-routines/tree/master/math/test) tool in [AOR](https://github.com/ARM-software/optimized-routines/tree/master), with particular focus to the [ulp.h](https://github.com/ARM-software/optimized-routines/blob/master/math/test/ulp.h) file. Note this tool also handles special cases and considers the effect of different rounding modes in the ULP error.

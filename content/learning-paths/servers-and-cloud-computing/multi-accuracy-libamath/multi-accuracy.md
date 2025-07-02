@@ -88,7 +88,7 @@ Avoid in control-flow-critical code or where errors might compound or affect con
 
 
 {{% notice  Tip %}}
-If your workload has mixed precision needs, you can *selectively call different accuracy modes* for different parts of your pipeline. Libamath lets you tailor precision where it matters — and boost performance where it doesn’t.
+If your workload has mixed precision needs, you can *selectively call different accuracy modes* for different parts of your pipeline. Choose conservatively where correctness matters, and push for speed elsewhere.
 {{% /notice %}}
 
 
