@@ -1,5 +1,6 @@
 ---
-title: Executing the Multi-Instance with DDS-Based Communication
+title: Executing OpenAD Kit in a Distributed ROS 2 Instances
+
 weight: 5
 
 ### FIXED, DO NOT MODIFY
