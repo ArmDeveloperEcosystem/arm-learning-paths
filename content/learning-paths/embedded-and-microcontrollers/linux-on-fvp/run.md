@@ -1,5 +1,5 @@
 ---
-title: Run Software Stack
+title: Run the Linux software stack on an FVP
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -7,18 +7,20 @@ layout: learningpathall
 ---
 
 
-## Run the Linux Software Stack on an FVP
+## Launch the Linux software stack on an FVP
 
 Once you've built the Linux stack with the correct configuration, you're ready to run it on an Arm CPU Fixed Virtual Platform (FVP).
 
-### Step 1: Verify the Build Output
+Replace <SRC_PATH> with the root path to your workspace, and <PATH_TO_LOG> with the location where you want to save the UART output logs.
+
+## Verify the build output
 
 After building, check the output directory to make sure the expected files were generated:
 
 ```bash
 tree output/aemfvp-a/aemfvp-a/
 ```
-Expected output:
+The expected output is:
 
 ```output
 output/aemfvp-a/aemfvp-a/
@@ -35,9 +37,10 @@ output/aemfvp-a/aemfvp-a/
 └── uefi.bin -> ../components/aemfvp-a/uefi.bin
 ```
 
-### Step 2: Run the Software Stack
+## Run the software stack
 
 To launch the software stack on the FVP, use a command like the following:
+
 ```bash
 FVP_Base_Cortex-A55x4 \
 -C pctl.startup=0.0.0.0 \
@@ -59,15 +62,19 @@ FVP_Base_Cortex-A55x4 \
 ```
 This will boot Trusted Firmware-A, UEFI/U-Boot, Linux, and BusyBox in sequence.
 
-### Step 3: Troubleshoot FVP Launch Issues
+## Troubleshoot FVP launch issues
 
-Different FVP models use different CPU instance names. If you see an error like:
+Different FVP models use different CPU instance names. 
+
+If you see an error like:
 
 ```output
-Warning: target instance not found: 'FVP_Base_Cortex_A65AEx4_Cortex_A76AEx4.cluster0.cpu0' (data: 'output/aemfvp-a/aemfvp-a/fvp-base-revc.dtb')
+Warning: target instance not found: 'FVP_Base_Cortex_A65AEx4_Cortex_A76AEx4.cluster0.cpu0' (data: 'output/aemfvp-a/aemfvp-afvp-base-revc.dtb')
 ```
 
-You need to identify the correct instance name for your platform. Run:
+Identify the correct instance name for your platform. 
+
+Run:
 
 ```bash
 FVP_Base_Cortex-A65AEx4+Cortex-A76AEx4 -l | grep RVBARADDR | grep cpu0
@@ -86,12 +93,12 @@ Update your --data parameters accordingly:
 --data cluster0.subcluster0.cpu0.thread0=<SRC_PATH>/output/aemfvp-a/aemfvp-a/fvp-base-revc.dtb@0x83000000
 ```
 
-{{% notice tip %}}
-Always confirm the CPU instance name when switching between different FVP models.
+{{% notice Tip %}}
+Always check the name of the CPU instance when switching between different FVP models.
 {{% /notice %}}
 
-### Optional: Use the GUI
+## Use the GUI (optional)
 
 You can also run the FVP using its graphical user interface:
 
-![GUI #center](FVP.png)
+![GUI #center](FVP.png "View of the FVP GUI")

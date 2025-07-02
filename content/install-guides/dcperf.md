@@ -183,7 +183,7 @@ These metrics help you evaluate the performance and reliability of the system un
 
 ## Next steps 
 
-These are some activites you might like to try next:
+These are some activities you might like to try next:
 
 * Use the results to compare performance across different systems, hardware configurations, or after making system changes, such as kernel, compiler, or driver updates.
 

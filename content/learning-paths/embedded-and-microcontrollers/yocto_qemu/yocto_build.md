@@ -17,19 +17,23 @@ Developers can configure their custom builds of Yocto using a set of recipes. In
 
 Poky is a reference distribution of the Yocto Project. It is a great starting point to build your own custom distribution as it contains both the build system and the the baseline functional distribution. Along with containing recipes for real target boards, it also contains the recipes for building the image, for example 64-bit Arm machines supported in QEMU. The example 64-bit machine emulated by QEMU does not emulate any particular board but is a great starting point to learn and try the basics of running this distribution.
 
-The first step is to install the packages required to build and run Yocto:
+The first step is to install the packages required to build and run Yocto.
+
+For Ubuntu 22.04 and later:
 
 ```bash
 sudo apt update
-sudo apt-get install -y gawk wget git-core diffstat unzip texinfo build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint xterm python3-subunit mesa-common-dev lz4
+sudo apt-get install -y gawk wget git-core diffstat unzip texinfo build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libgl1 libglx-mesa0 libsdl1.2-dev pylint xterm python3-subunit mesa-common-dev lz4
 ```
-Now download the Poky reference distribution and checkout the branch/tag you wish to build. You will build `yocto-4.0.6` in this example.
+
+Now download the Poky reference distribution and checkout the branch/tag you wish to build. You will build `yocto-5.0.10` in this example.
 
 ```bash
 git clone git://git.yoctoproject.org/poky
 cd poky
-git checkout tags/yocto-4.0.6 -b yocto-4.0.6-local
+git checkout tags/yocto-5.0.10 -b yocto-5.0.10-local
 ```
+
 Next source the script as shown below to initialize your build environment for your 64-bit Arm example machine QEMU target:
 
 ```bash
@@ -80,6 +84,14 @@ You will now be in the `build-qemu-arm64` directory which is your build director
 ```bash { cwd="poky" }
 sed -i '/qemuarm64/s/^#//g' conf/local.conf
 ```
+{{% notice Note %}}
+On Ubuntu systems with apparmor you will need to allow unprivileged users to run bitbake.
+{{% /notice %}}
+
+```bash
+echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
+```
+
 With the right machine now selected, proceed to building the minimal core image for your target.
 
 ```bash { cwd="poky",env_source="poky/oe-init-build-env build-qemu-arm64" }

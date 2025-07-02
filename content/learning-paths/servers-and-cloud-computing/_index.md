@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- Linux: 150
+- Linux: 152
 - macOS: 10
 - Windows: 14
 pinned_modules:
@@ -18,12 +18,12 @@ pinned_modules:
     - providers
     - migration
 subjects_filter:
-- CI-CD: 5
+- CI-CD: 6
 - Containers and Virtualization: 28
 - Databases: 15
 - Libraries: 9
 - ML: 27
-- Performance and Architecture: 59
+- Performance and Architecture: 60
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -39,6 +39,7 @@ tools_software_languages_filter:
 - Arm Compiler for Linux: 1
 - Arm Development Studio: 3
 - Arm ISA: 1
+- Arm Performance Libraries: 1
 - armclang: 1
 - armie: 1
 - ArmRAL: 1
@@ -53,8 +54,8 @@ tools_software_languages_filter:
 - AWS Graviton: 1
 - Azure CLI: 1
 - Azure Portal: 1
-- bash: 2
 - Bash: 1
+- bash: 2
 - Bastion: 3
 - BOLT: 2
 - bpftool: 1
@@ -83,7 +84,7 @@ tools_software_languages_filter:
 - Fortran: 1
 - FunASR: 1
 - FVP: 4
-- GCC: 21
+- GCC: 22
 - gdb: 1
 - Geekbench: 1
 - GenAI: 11
@@ -108,6 +109,7 @@ tools_software_languages_filter:
 - Kubernetes: 10
 - Lambda: 1
 - libbpf: 1
+- Libmath: 1
 - Linaro Forge: 1
 - Litmus7: 1
 - LLM: 9
@@ -128,6 +130,7 @@ tools_software_languages_filter:
 - Ollama: 1
 - ONNX Runtime: 1
 - OpenBLAS: 1
+- OpenShift: 1
 - OrchardCore: 1
 - PAPI: 1
 - perf: 5
@@ -150,6 +153,7 @@ tools_software_languages_filter:
 - SVE: 5
 - SVE2: 2
 - Sysbench: 1
+- Tekton: 1
 - Telemetry: 1
 - TensorFlow: 2
 - Terraform: 11

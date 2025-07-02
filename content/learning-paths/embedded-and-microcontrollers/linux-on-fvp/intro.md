@@ -6,29 +6,41 @@ weight: 2
 layout: learningpathall
 ---
 
-Arm Fixed Virtual Platforms (FVPs) are simulation models that let you run and test full software stacks on Arm systems before physical hardware is available. They replicate the behavior of Arm CPUs, memory, and peripherals using fast binary translation.
+## What are Arm Fixed Virtual Platforms (FVPs)?
 
-### Why Use FVPs?
-FVPs are useful for developers who want to:
-- Prototype software before silicon availability
-- Debug firmware and kernel issues
-- Simulate multicore systems
+Arm Fixed Virtual Platforms (FVPs) are fast, functional simulation models of Arm hardware. They give you the ability to develop, test, and debug full software stacks. This includes firmware, bootloaders, and operating systems - all without the need for access to physical Arm silicon. FVPs replicate Arm CPU behavior, memory, and peripherals using fast binary translation.
 
-FVPs provide a programmer's view of the hardware, making them ideal for system bring-up, kernel porting, and low-level debugging.
+## Why use FVPs?
+FVPs are ideal for early software development and system debugging. 
 
-### Freely Available Arm Ecosystem FVPs
-Several pre-built Armv8-A FVPs can be downloaded for free from the [Arm Ecosystem Models](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms#Downloads) page. Categories include:
+Developers can use FVPs to do the following tasks:
+
+- Prototype firmware and OS code before silicon is available
+- Debug complex boot sequences and kernel issues
+- Simulate multi-core systems to analyze performance and thread scheduling
+
+FVPs provide a programmer's view of the hardware, making them ideal for the following:
+
+* System bring-up
+* Kernel porting
+* Low-level debug tasks
+
+## How can I get access to the Arm FVPs?
+
+You can download prebuilt Armv8-A FVPs at no cost from the [Arm Ecosystem Models](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms#Downloads) page. 
+
+Available categories include:
 - Architecture
 - Automotive
 - Infrastructure
 - IoT
 
-A popular model is the **AEMv8-A Base Platform RevC**, which supports Armv8.7 and Armv9-A. The [Arm reference software stack](https://gitlab.arm.com/arm-reference-solutions/arm-reference-solutions-docs/-/blob/master/docs/aemfvp-a/user-guide.rst) is designed for this model.
+A popular model is AEMv8-A Base Platform RevC, which simulates generic Armv8.7-A and Armv9-A CPUs and is fully supported by Arm's open-source [reference software stack](https://gitlab.arm.com/arm-reference-solutions/arm-reference-solutions-docs/-/blob/master/docs/aemfvp-a/user-guide.rst).
 
-### CPU-Specific Arm Base FVPs
-Other FVPs target specific CPU types and come pre-configured with a fixed number of cores. These are often called **CPU FVPs**.
+## CPU-specific Arm-based FVPs
+Some FVPs target specific CPU implementations and include fixed core counts. These are known as CPU FVPs.
 
-Here are some examples:
+Examples include:
 - FVP_Base_Cortex-A55x4
 - FVP_Base_Cortex-A72x4
 - FVP_Base_Cortex-A78x4
@@ -36,11 +48,18 @@ Here are some examples:
 
 To use these, request access via [support@arm.com](mailto:support@arm.com).
 
-### Setting Up Your Environment
-This Learning Path uses the [Arm reference software stack](https://gitlab.arm.com/arm-reference-solutions/arm-reference-solutions-docs/-/blob/master/docs/aemfvp-a/user-guide.rst).
+## Set up your environment
+This Learning Path uses the open-source Arm reference software stack, which includes the following:
+
+* Prebuilt Linux images
+* Firmware
+* Configuration files
 
 To get started:
-1. Follow the software user guide to download the stack.
-2. Set up the required toolchain and environment variables.
 
-Once configured, you’ll be ready to run and debug Linux on your selected Arm FVP model.
+* Follow the [software user guide](https://gitlab.arm.com/arm-reference-solutions/arm-reference-solutions-docs/-/blob/master/docs/aemfvp-a/user-guide.rst) to download the stack.
+* Set up your toolchain
+* Export environment variables
+* Verify your build dependencies
+
+Once setup is complete, you’ll be ready to boot and debug Linux on your selected Arm FVP model.

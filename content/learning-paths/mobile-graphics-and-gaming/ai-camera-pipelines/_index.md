@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - A computer running Arm Linux or macOS with Docker installed.
 
-author: Arnaud de Grandmaison.
+author: Arnaud de Grandmaison
 
 test_images:
     - ubuntu:latest
