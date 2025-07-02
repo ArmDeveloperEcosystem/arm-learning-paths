@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-##  Understanding the Floating-Point Number System and IEEE-754 Format
+##  Understanding the floating-point number system and IEEE-754 format
 
 Floating-point numbers are essential for representing real numbers in computing, but they come with limits on precision and range. 
 

@@ -46,7 +46,7 @@ Numbers with the same exponent have the same ULP.
 
 For normalized IEEE-754 floating-point numbers, a similar behavior is observed: the distance between two adjacent representable values — that is, ULP(x) — is a power of two that depends only on the exponent of x.
 
-### Optimized Expression
+### Optimized expression
 
 A faster, commonly used expression for ULP is:
 
