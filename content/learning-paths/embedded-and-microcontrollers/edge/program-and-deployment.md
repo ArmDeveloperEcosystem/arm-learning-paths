@@ -8,7 +8,7 @@ layout: learningpathall
 
 # Programming your first tinyML device
 
-This Learning Path provides a complete sketch that you can upload onto your Arduino Nano RP2040. Follow the steps below to get started.
+This section helps you create a complete sketch that you can upload onto your Arduino Nano RP2040.
 
 ## Step 1: Create a New Sketch
 

@@ -7,19 +7,25 @@ cascade:
 
 minutes_to_complete: 90
 
-who_is_this_for: This learning path is for beginners in Edge AI and TinyML, including developers, engineers, hobbyists, AI/ML enthusiasts, and researchers working with embedded AI and IoT.  
+who_is_this_for: This learning path is for beginners in Edge AI and TinyML, including developers, engineers, hobbyists, AI/ML enthusiasts, and researchers working with embedded AI and IoT.
 
 learning_objectives:
-    - Understand Edge AI and TinyML basics. 
-    - Collect and preprocess audio data using Edge Impulse. 
-    - Train and deploy an audio classification model on Arduino Nano RP2040 
-    - Interface with LEDs to switch them on and off . 
+    - Understand Edge AI and TinyML basics.
+    - Collect and preprocess audio data using Edge Impulse.
+    - Train and deploy an audio classification model on Arduino Nano RP2040.
+    - Interface with LEDs to switch them on and off.
 
 prerequisites:
     - Explore this [learning path](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/arduino-pico/) if you are an absolute beginner.
-    - An [Edge Impulse](https://edgeimpulse.com/) Studio account. 
-    - The [Arduino IDE with the RP2040 board support package](https://learn.arm.com/install-guides/arduino-pico/) installed on your computer 
-    - An Arduino Nano RP2040 Connect [board](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers?_gl=1*9t4cti*_up*MQ..*_ga*NTA1NTQwNzgxLjE3NDYwMjIyODk.*_ga_NEXN8H46L5*MTc0NjAyMjI4Ny4xLjEuMTc0NjAyMjMxOC4wLjAuMjA3MjA2NTUzMA..). 
+    - An [Edge Impulse](https://edgeimpulse.com/) Studio account.
+    - The [Arduino IDE with the RP2040 board support package](https://learn.arm.com/install-guides/arduino-pico/) installed on your computer
+    - An Arduino Nano RP2040 Connect [board](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers?_gl=1*9t4cti*_up*MQ..*_ga*NTA1NTQwNzgxLjE3NDYwMjIyODk.*_ga_NEXN8H46L5*MTc0NjAyMjI4Ny4xLjEuMTc0NjAyMjMxOC4wLjAuMjA3MjA2NTUzMA..).
+
+further_reading:
+    - resource:
+        title: Edge Impulse website
+        link: https://edgeimpulse.com/
+        type: website
 
 author: Bright Edudzi Gershon Kordorwu
 ### Tags
@@ -27,7 +33,6 @@ skilllevels: Introductory
 subjects: ML
 armips:
     - Cortex-M
-   
 tools_software_languages:
     - Edge Impulse
     - tinyML
@@ -35,24 +40,24 @@ tools_software_languages:
     - Arduino
 operatingsystems:
     - Baremetal
-    
+
 
 
 
 further_reading:
-    
+
     - resource:
-        title: TinyML Brings AI to Smallest Arm Devices 
+        title: TinyML Brings AI to Smallest Arm Devices
         link: https://newsroom.arm.com/blog/tinyml
         type: blog
     - resource:
-        title: What is edge AI? 
+        title: What is edge AI?
         link: https://docs.edgeimpulse.com/nordic/concepts/edge-ai/what-is-edge-ai
         type: blog
     - resource:
-        title: Edge Impulse for Beginners 
+        title: Edge Impulse for Beginners
         link: https://docs.edgeimpulse.com/docs/readme/for-beginners
-        type: doc 
+        type: doc
 
 
 

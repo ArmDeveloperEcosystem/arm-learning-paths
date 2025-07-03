@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 # Using Edge Impulse to Train TinyML Models
 
-Now that the foundational concepts of TinyML and Edge AI are clear, it's time to move from theory to practice. One of the most accessible and easy to use platforms for training TinyML models is **Edge Impulse**. It provides an intuitive, end-to-end pipeline for collecting data, designing features, training models, and deploying them to edge devices. In this section, we will explore how Edge Impulse is used to train models specifically for ultra-low-power microcontrollers, bridging the gap between machine learning and real-world embedded applications.
+Now that the foundational concepts of TinyML and Edge AI are clear, it's time to move from theory to practice. **Edge Impulse** is an easy to use platform for training TinyML models. It provides an end-to-end pipeline for collecting data, designing features, training models, and deploying them to edge devices. In this section, we will explore how Edge Impulse is used to train models specifically for ultra-low-power microcontrollers, bridging the gap between machine learning and real-world embedded applications.
 
 ## What is Edge Impulse?
 
@@ -59,7 +59,9 @@ Follow the exact settings in the attached snapshot to complete the configuration
 
 With your device configured, the next step is to **add your dataset** to the project. Click on the **"Add existing data"** button and follow the configuration settings shown in the attached snapshot. This allows you to upload pre-recorded data instead of collecting it live, which can save time during the development phase.
 
-The dataset for this project can be downloaded from the following link: [Download Dataset](https://github.com/e-dudzi/Learning-Path.git). The Dataset has already been split into **training** and **testing**.
+The dataset for this project can be downloaded from the following link: [Download Dataset](https://github.com/e-dudzi/Learning-Path.git). Download the `Dataset.zip` file and extract it on your local machine.
+
+For convenience, the dataset has already been split into **training** and **testing**.
 
 ![example image alt-text#center](images/6.png "Figure 4. Add Existing Data")
 
@@ -150,7 +152,7 @@ To use the trained model on your Arduino Nano RP2040, follow the steps below to 
 1. Click on the **Deployment** tab from the menu.
 2. In the **search bar**, type **"Arduino"** to filter the export options.
 3. Select **Arduino library** from the list.
-4. The export process will start automatically, and the model will be downloaded as a `.zip` file.
+4. If the export process does not start automatically, click **Build**. The model will be downloaded as a `.zip` file.
 
 ![example image alt-text#center](images/16.png "Figure 13. Model Deployment")
 

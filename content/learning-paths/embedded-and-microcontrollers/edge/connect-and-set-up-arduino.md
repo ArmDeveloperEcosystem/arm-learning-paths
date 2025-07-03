@@ -8,11 +8,11 @@ layout: learningpathall
 
 ### Arduino Nano RP2040
 
-To get started with your first **TinyML project**, a great option is the **Arduino Nano RP2040 Connect**. Built by Arduino, it uses the powerful **RP2040 microcontroller** and is fully supported by the Arduino core package. The board comes with built-in Wi-Fi, Bluetooth, and an onboard IMU—features that make it ideal for deploying machine learning models at the edge.
+To get started with your first **TinyML project**, the **Arduino Nano RP2040 Connect** is a good option. Built by Arduino, it uses the **RP2040 microcontroller** and is fully supported by the Arduino core package. The board comes with built-in Wi-Fi, Bluetooth, and an onboard IMU—features that is useful for deploying machine learning models at the edge.
 
 ![example image alt-text#center](images/nano.png "Arduino Nano RP2040")
 
-Its compatibility with popular tools like Edge Impulse and the Arduino IDE makes it a beginner-friendly yet powerful choice for TinyML applications. You can learn more about the Arduino Nano RP2040 Connect on the [official Arduino website](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers?_gl=1*1laabar*_up*MQ..*_ga*MTk1Nzk5OTUwMS4xNzQ2NTc2NTI4*_ga_NEXN8H46L5*czE3NDY1NzY1MjUkbzEkZzEkdDE3NDY1NzY5NTkkajAkbDAkaDE1MDk0MDg0ODc.).
+Its compatibility with popular tools like Edge Impulse and the Arduino IDE makes it a suitable choice for TinyML applications. You can learn more about the Arduino Nano RP2040 Connect on the [official Arduino website](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers?_gl=1*1laabar*_up*MQ..*_ga*MTk1Nzk5OTUwMS4xNzQ2NTc2NTI4*_ga_NEXN8H46L5*czE3NDY1NzY1MjUkbzEkZzEkdDE3NDY1NzY5NTkkajAkbDAkaDE1MDk0MDg0ODc.).
 
 ## Put everything together
 
@@ -40,9 +40,7 @@ To visualize the output of the voice command model, we will use a simple LED cir
 
 To program and deploy your trained model to the Arduino Nano RP2040, you first need to configure your development environment.
 
-Follow the detailed setup instructions provided in the following learning path:
-
-[Arduino Nano RP2040 Setup Guide](https://learn.arm.com/install-guides/arduino-pico/)
+Follow the detailed setup instructions provided in the [Arduino Nano RP2040 Install Guide](https://learn.arm.com/install-guides/arduino-pico/)
 
 This guide will walk you through:
 
