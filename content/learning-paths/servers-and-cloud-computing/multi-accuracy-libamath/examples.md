@@ -12,7 +12,7 @@ Here is an example invoking all accuracy modes of the Neon single precision exp 
 
 Make sure you have [Arm Performance Libraries](https://learn.arm.com/install-guides/armpl/) installed. 
 
-Use a text editor save the code below in a file named `example.c`.
+Use a text editor to save the code below in a file named `example.c`.
 
 ```C { line_numbers = "true" } 
 #include <amath.h>
@@ -40,7 +40,7 @@ int main(void) {
     printf("Libamath example:\n");
     printf("-----------------------------------------------\n");
     printf("  // Display worst-case ULP error in expf for each\n");
-    printf("  // accuracy mode, along with approximate (`got`) and exact results (`want`)\n\n");
+    printf("  // accuracy mode, along with approximate (\\\"got\\\") and exact results (\\\"want\\\")\n\n");
 
     check_accuracy (armpl_vexpq_f32_u10, 0x1.ab312p+4, "armpl_vexpq_f32_u10(%a) delivers error under 1.0 ULP");
     check_accuracy (armpl_vexpq_f32, 0x1.8163ccp+5, "armpl_vexpq_f32(%a) delivers error under 3.5 ULP");
@@ -89,5 +89,5 @@ armpl_vexpq_f32_umax(-0x1.5b7322p+6) delivers result with half correct bits
     ULP error = 1745.2120
 ```
 
-The inputs used for each variant correspond to the worst case scenario known to date (ULP Error argmax).
+The inputs used for each variant correspond to the current worst-case scenario known to date (ULP Error argmax).
 This means that the ULP error should not be higher than the one demonstrated here, ensuring the results remain below the defined thresholds for each accuracy.

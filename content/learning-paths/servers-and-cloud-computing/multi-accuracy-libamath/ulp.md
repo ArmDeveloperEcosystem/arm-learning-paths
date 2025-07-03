@@ -1,24 +1,26 @@
 ---
-title: Units in the Last Place (ULP)
+title: Units in the last place (ULP)
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# ULP
+## What is ULP?
 
-Units in the Last Place (ULP) is the distance between two adjacent floating-point numbers at a given value, representing the smallest possible change in that number's representation.
+Units in the last place (ULP) is the distance between two adjacent floating-point numbers at a given value. It represents the smallest possible change in a number's representation at that magnitude.
 
-It is a property of a number and can be calculated with the following expression:
+ULP is a function of the number's exponent and can be calculated with the following expression:
 
 ```output
 ULP(x) = nextafter(x, +inf) - x
 ```
 
-Building on the example shown in the previous section:
+## ULP example: binary model
 
-Fixed `B=2, p=3, e^max=2, e^min=-1`
+Building on the example from the previous section:
+
+Fixed `B = 2, p = 3, e^max = 2, e^min = -1`
 
 | Significand | × 2⁻¹ | × 2⁰ | × 2¹ | × 2² |
 |-------------|-------|------|------|------|
@@ -27,7 +29,7 @@ Fixed `B=2, p=3, e^max=2, e^min=-1`
 | 1.10 (1.5)  | 0.75  | 1.5  | 3.0  | 6.0  |
 | 1.11 (1.75) | 0.875 | 1.75 | 3.5  | 7.0  |
 
-Based on the above definition, the ULP value for the numbers in this set can be computed as follows:
+Based on the above definition, you can compute the ULP values for the numbers in this set as follows:
 
 ```
 ULP(0.625) = nextafter(0.625, +inf) - 0.625 = 0.75-0.625 = 0.125
@@ -36,21 +38,25 @@ ULP(0.625) = nextafter(0.625, +inf) - 0.625 = 0.75-0.625 = 0.125
 ULP(4.0) = 1.0
 ```
 
-As the exponent of `x` grows, `ULP(x)` also increases exponentially; that is, the spacing between floating points becomes larger.
+As the exponent of `x` increases, `ULP(x)` increases exponentially. That is, the spacing between floating-point values grows with the magnitude of x.
 
 Numbers with the same exponent have the same ULP.
 
-For normalized IEEE-754 floats, a similar behavior is observed: the distance between two adjacent representable values — i.e., ULP(x) — is a power of two that depends only on the exponent of x.
+## ULP in IEEE-754
 
-Hence, another expression used to calculate the ULP of normalized Floating Point numbers is:
+For normalized IEEE-754 floating-point numbers, a similar behavior is observed: the distance between two adjacent representable values — that is, ULP(x) — is a power of two that depends only on the exponent of x.
+
+### Optimized expression
+
+A faster, commonly used expression for ULP is:
 
 ```
 ULP(x) = 2^(e-p+1)
 ```
 
-where:
-* `e` is the exponent (in the IEEE-754 definition of single precision this is `E-127`)
-* `p` is the precision
+Where:
+* `e` is the unbiased exponent (in the IEEE-754 definition of single precision this is `E-127`)
+* `p` is the precision  (23 for IEEE-754 single-precision)
 
 When computing the ULP of IEEE-754 floats, this expression becomes:
 ```
@@ -65,21 +71,19 @@ Note that for denormal numbers, the latter expression does not apply.
 In single precision as defined in IEEE-754, the smallest positive subnormal is:
 
 ```
-min_pos_denormal = 2 ^ -23 x 2 ^ -126 = 2^-149
+min_pos_denormal = 2⁻²³ × 2⁻¹²⁶ = 2⁻¹⁴⁹
 ```
 
 The second smallest is:
 ```
-second_min_pos_denormal = 2 ^ -22 x 2 ^ -126 = 2^-148 = 2*2^-149
+second_min_pos_denormal = 2⁻²² × 2⁻¹²⁶ = 2⁻¹⁴⁸ = 2 × 2⁻¹⁴⁹
 ```
-and so on...
-
-The denormal numbers are evenly spaced by `2^-149`.
+Thus, all denormal numbers are evenly spaced by `2^-149`.
 
 {{% /notice %}}
 
 
-## ULP implementation
+## ULP implementation in C
 
 Below is an example of an implementation of the ULP function of a number.
 
@@ -99,13 +103,12 @@ static inline uint32_t asuint(float x) {
 
 // Compute exponent of ULP spacing at x
 static inline int ulpscale(float x) {
-    //recover the biased exponent E
+    // Recover the biased exponent E
     int e = asuint(x) >> 23 & 0xff;
     if (e == 0)
         e++;  // handle subnormals
 
-    // get exponent of the ULP
-    // e-p = E - 127 -23
+    // Compute the ULP exponent: e - p = E - 127 - 23
     return e - 127 - 23;
 }
 
@@ -118,10 +121,10 @@ static float ulp(float x) {
 There are three key functions in this implementation:
 * the `asuint(x)` function reinterprets the bit pattern of a float as a 32-bit unsigned integer, allowing the extraction of specific bit fields such as the exponent.
 * the `ulpscale(x)` function returns the base-2 exponent of the ULP spacing at a given float value x, which is the result of `log2(ULP(x))`. The `e` variable in this function corresponds to the quantity E previously mentioned (the bitwise value of the exponent).
-* the `scalbnf(m, n)` function (a standard function declared in math.h) efficiently evaluates `m x 2^n`.
+* the `scalbnf(m, n)` function (a standard function declared in math.h) efficiently evaluates `m × 2^n`.
 
 
-Below is an example which uses the `ulp()` function.
+Here's an example program that calls `ulp()` to compute the spacing near a float value.
 
 Use a text editor to save the code below in a file named `ulp.c`.
 
