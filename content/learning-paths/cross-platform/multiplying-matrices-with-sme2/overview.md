@@ -21,25 +21,30 @@ SME2 introduces multi-vector processing, new memory instructions, and enhanced p
 
 ### Key architectural features of SME2
 
-SME2 adds several capabilities to the original SME architecture::
+SME2 adds several capabilities to the original SME architecture:
 
-* **Multi-vector multiply-accumulate instructions**, with Z vectors as multiplier and multiplicand inputs and accumulating results into ZA array vectors, including widening multiplies that accumulate into more vectors than they read.
+* **Multi-vector multiply-accumulate instructions**, that use Z vectors as multiplier and multiplicand inputs, and accumulate results into ZA array vectors. This includes widening multiplies that write to more vectors than they read from.
 
-* **Multi-vector load, store, move, permute, and convert instructions**, that use multiple SVE Z vectors as source and destination registers to pre-process inputs and post-process outputs of the ZA-targeting SME2 instructions.
+* **Multi-vector load, store, move, permute, and convert instructions**, that use multiple SVE Z vectors as source and destination registers to efficiently pre-process inputs and post-process outputs of the ZA-targeting SME2 instructions.
 
-* **Predicate-as-counter mechanism**, which is an alternative predication mechanism that is added to the original SVE predication mechanism, to control operations performed on multiple vector registers.
+* A **predicate-as-counter mechanism**, which is a new predication mechanism that is added alongside the original SVE approach to enable fine-grained control over operations across multiple vector registers.
 
-* **Compressed neural network support** using dedicated lookup table instructions and outer product instructions that support binary neural networks.
+* **Compressed neural network support** using dedicated lookup table and outer product instructions that support binary neural network workloads.
 
-* **A 512-bit architectural register ZT0**, that supports the lookup table feature.
+* A **512-bit architectural register ZT0**, which is a dedicated register that enables fast, table-driven data transformations.
 
 ### Suggested reading
 
-If you are not familiar with matrix multiplication, or would benefit from refreshing your knowledge, this [Wikipedia article on Matrix multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication) is a good start.
+This Learning Path assumes some basic understanding of SVE, SME, and matrix multiplication. If you do want to refresh or grow your knowledge however, these are some useful resources that you might find helpful: 
 
-This Learning Path assumes some basic understanding of SVE and SME. If you are not familiar with SVE or SME, these are some useful resources that you can read first:
-- [Introducing the Scalable Matrix Extension for the Armv9-A Architecture](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/scalable-matrix-extension-armv9-a-architecture).
-- [Arm Scalable Matrix Extension (SME) Introduction (Part 1)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction).
-- [Arm Scalable Matrix Extension (SME) Introduction (Part 2)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2).
-- [Part 3: Matrix-matrix multiplication. Neon, SVE, and SME compared](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/.matrix-matrix-multiplication-neon-sve-and-sme-compared).
-- [Build adaptive libraries with multiversioning](https://learn.arm.com/learning-paths/cross-platform/function-multiversioning/).
+#### Matrix multiplication 
+
+- This [Wikipedia article on Matrix multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication)
+
+#### SVE and SME
+
+- [Introducing the Scalable Matrix Extension for the Armv9-A Architecture](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/scalable-matrix-extension-armv9-a-architecture)
+- [Arm Scalable Matrix Extension (SME) Introduction (Part 1)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction)
+- [Arm Scalable Matrix Extension (SME) Introduction (Part 2)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2)
+- [Part 3: Matrix-matrix multiplication. Neon, SVE, and SME compared](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/.matrix-matrix-multiplication-neon-sve-and-sme-compared)
+- [Build adaptive libraries with multiversioning](https://learn.arm.com/learning-paths/cross-platform/function-multiversioning/)
