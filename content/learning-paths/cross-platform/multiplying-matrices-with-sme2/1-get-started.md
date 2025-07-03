@@ -68,8 +68,7 @@ It directory structure includes:
   - `sme2-environment.docker`, a Dockerfile to build the image.
   - ``build-my-container.sh`` `sme2-environment.docker`, a Dockerfile to build the image.
   - ``build-all-containers.sh`` used to build multi-architecture images.
-- A configuration script for VS Code to be able to use the container from the
-  IDE called ``.devcontainer/devcontainer.json``.
+- ``.devcontainer/devcontainer.json`` for VS Code container support.
 
 {{% notice Note %}}
 From this point in the Learning Path, all instructions assume that your current
@@ -79,8 +78,7 @@ directory is
 
 ## Set up a system with native SME2 support
 
-If your machine has native support for SME2, then you only need to ensure that
-you have a compiler with support for SME2 instructions.
+To run SME2 code natively, ensure your system includes SME2 hardware and uses a compiler version that supports SME2.
 
 A recent enough version of the compiler is required because SME2 is a recent
 addition to the Arm instruction set. Compiler versions that are too old will
@@ -91,8 +89,9 @@ uses ``clang``.
 
 At the time of writing, the ``clang`` version shipped with macOS is ``17.0.0``,
 which forces us to use the version from ``homebrew`` (which has version
-``20.1.7``). Ensure the ``clang`` compiler you are using is recent enough with
-``clang --version``:
+``20.1.7``). 
+
+To check your compiler version:``clang --version``
 
 {{< tabpane code=true >}}
 
@@ -108,14 +107,9 @@ which forces us to use the version from ``homebrew`` (which has version
 
 You are now all set to start hacking with SME2!
 
-## Set up a system using SME2 emulation
+## Set up a system using SME2 emulation with Docker
 
-If your machine does not have SME2 support or if you want to run SME2 with an
-emulator, you will need to install Docker. Docker containers provide
-functionality to execute commands in an isolated environment, where you have all
-the necessary tools you require without cluttering your machine. The containers
-run independently, meaning they do not interfere with other containers on the
-same machine or server.
+If your machine doesn't support SME2, or you want to emulate it, you can use the Docker-based environment provided in this Learning Path.
 
 This Learning Path provides a Docker image that has a compiler and [Arm's Fixed
 Virtual Platform (FVP)
