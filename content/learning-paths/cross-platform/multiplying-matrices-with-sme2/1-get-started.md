@@ -1,5 +1,5 @@
 ---
-title: Set up your environment
+title: Prepare your development environment for SME2
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -17,7 +17,7 @@ your machine:
   an emulator in bare metal mode, i.e., the emulator runs the SME2 code
   *without* an operating system.
 
-## Code examples
+## Download and inspect the code examples
 
 [Download the code examples](https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2) for this Learning Path, expand the archive, and change your current directory to:
 ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2`` :
@@ -84,7 +84,7 @@ directory is
 ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2``.
 {{% /notice %}}
 
-## Platforms with native SME2 support
+## Setup on a system with native SME2 support
 
 If your machine has native support for SME2, then you only need to ensure that
 you have a compiler with support for SME2 instructions.
@@ -115,7 +115,7 @@ which forces us to use the version from ``homebrew`` (which has version
 
 You are now all set to start hacking with SME2!
 
-## Platforms with emulated SME2 support
+## Setup on a system using SME2 emulation
 
 If your machine does not have SME2 support or if you want to run SME2 with an
 emulator, you will need to install Docker. Docker containers provide
@@ -133,7 +133,7 @@ also decide not to use the Docker image and follow the
 ``sme2-environment.docker`` Docker file instructions to install the tools on
 your machine.
 
-### Docker
+### Install and verify Docker
 
 {{% notice Note %}}
 This Learning Path works without ``docker``, but the compiler and the FVP must
@@ -207,7 +207,7 @@ You can use Docker in the following ways:
   commands inside a Docker container, allowing you to work seamlessly within the
   Docker environment.
 
-### Working with Docker from a terminal
+### Run commands from a terminal using Docker
 
 When a command is executed in the Docker container environment, you must prepend
 it with instructions on the command line so that your shell executes it within
@@ -233,7 +233,7 @@ For example, to run ``make``, you need to enter:
 docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v2 make
 ```
 
-### Working within the Docker container from the terminal
+### Use an interactive Docker shell
 
 The above commands are long and error-prone, so you can instead choose to work
 interactively within the terminal, which would save you from prepending the
@@ -257,7 +257,7 @@ persistent (it was invoked with ``--rm``), so each invocation will use a
 container freshly built from the image. All the files reside outside the
 container, so changes you make to them will be persistent.
 
-### Working within the Docker container with VSCode
+###  Develop with Docker in Visual Studio Code
 
 If you are using Visual Studio Code as your IDE, it can use the container as is.
 
@@ -279,7 +279,7 @@ However, if you are using VS Code, you only need to use the `COMMAND ARGUMENTS`
 part.
 {{% /notice %}}
 
-### Devices with SME2 support
+### Devices with native SME2 support
 
 By chip:
 
