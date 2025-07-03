@@ -1,7 +1,7 @@
 ---
 title: Accelerate Matrix Multiplication Performance with SME2
 
-minutes_to_complete: 30
+minutes_to_complete: 60
 
 who_is_this_for: This Learning Path is an advanced topic for developers who want to accelerate the performance of matrix multiplication using Arm's Scalable Matrix Extension Version 2 (SME2).
 

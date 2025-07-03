@@ -10,17 +10,17 @@ layout: learningpathall
 
 Before you can build or run any SME2-accelerated code, you need to set up your development environment. 
 
-This section walks you through the required tools, code examples, and two supported execution options: 
+This section walks you through the required tools and two supported execution options: 
 
-* **Native SME2 hardware** - build and run directly on a system with SME2 support. For supported devices, se [list of devices](#devices-with-sme2-support). 
+* **Native SME2 hardware** - build and run directly on a system with SME2 support. For supported devices, see [Devices with SME2 support](#devices-with-sme2-support). 
 
 * **Docker-based emulation** - use a container to emulate SME2 in bare metal mode (without an OS).
 
 ## Download and explore the code examples
 
-To get started, [download the code examples](https://gitlab.arm.com/learning-cde-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2).
+To get started, begin by [downloading the code examples](https://gitlab.arm.com/learning-cde-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2).
 
-Now expand the archive, and change your current directory to:
+Extract the archive and change to the target directory:
 ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2.``
 
 ```BASH
@@ -59,10 +59,10 @@ code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2/
 └── sme2_check.c
 ```
 
-It directory structure includes:
+It includes:
 - Code examples.
 - A ``Makefile`` to build the code.
-- A shell script called ``run-fvp.sh`` to run the FVP model.
+- ``run-fvp.sh`` to run the FVP model.
 - A `docker` directory containing:
   - ``assets.source_me`` to provide toolchain paths.
   - `sme2-environment.docker`, a Dockerfile to build the image.
@@ -71,8 +71,7 @@ It directory structure includes:
 - ``.devcontainer/devcontainer.json`` for VS Code container support.
 
 {{% notice Note %}}
-From this point in the Learning Path, all instructions assume that your current
-directory is
+From this point, all instructions assume that your current directory is
 ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2``.
 {{% /notice %}}
 
@@ -80,18 +79,15 @@ directory is
 
 To run SME2 code natively, ensure your system includes SME2 hardware and uses a compiler version that supports SME2.
 
-A recent enough version of the compiler is required because SME2 is a recent
-addition to the Arm instruction set. Compiler versions that are too old will
-have incomplete or no SME2 support, leading to compilation errors or
-non-functional code. You can use [Clang](https://www.llvm.org/) version 18 or
-later, or [GCC](https://gcc.gnu.org/) version 14 or later. This Learning Path
-uses ``clang``.
+Use [Clang](https://www.llvm.org/) version 18 or later, or [GCC](https://gcc.gnu.org/) version 14 or later. This Learning Path uses ``clang``.
 
-At the time of writing, the ``clang`` version shipped with macOS is ``17.0.0``,
-which forces us to use the version from ``homebrew`` (which has version
-``20.1.7``). 
+{{% notice Note %}}
+At the time of writing, macOS ships with `clang` version 17.0.0, which doesn't support SME2. Use a newer version, such as 20.1.7, available through Homebrew.{{% /notice%}}
+
 
 To check your compiler version:``clang --version``
+
+### Install Clang
 
 {{< tabpane code=true >}}
 
@@ -109,22 +105,16 @@ You are now all set to start hacking with SME2!
 
 ## Set up a system using SME2 emulation with Docker
 
-If your machine doesn't support SME2, or you want to emulate it, you can use the Docker-based environment provided in this Learning Path.
+If your machine doesn't support SME2, or you want to emulate it, you can use the Docker-based environment that this Learning Path models.
 
-This Learning Path provides a Docker image that has a compiler and [Arm's Fixed
-Virtual Platform (FVP)
+The Docker container includes a compiler and [Arm's Fixed Virtual Platform (FVP)
 model](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms)
-for emulating code with SME2 instructions. The Docker image recipe is provided
-(with the code examples) so you can study it and build it yourself. You could
-also decide not to use the Docker image and follow the
-``sme2-environment.docker`` Docker file instructions to install the tools on
-your machine.
+for emulating code with SME2 instructions. You can run the provided image or build it using the included Dockerfile.and follow the ``sme2-environment.docker`` Docker file instructions to install the tools on your machine.
 
 ### Install and verify Docker
 
 {{% notice Note %}}
-This Learning Path works without ``docker``, but the compiler and the FVP must
-be available in your search path.
+Docker is optional, but if you don’t use it, you must manually install the compiler and FVP, and ensure they’re in your path.
 {{% /notice %}}
 
 Start by checking that ``docker`` is installed on your machine by typing the
@@ -135,17 +125,15 @@ docker --version
 Docker version 27.3.1, build ce12230
 ```
 
-If the above command fails with a message similar to "``docker: command not
-found``" then follow the steps from the [Docker Install
-Guide](https://learn.arm.com/install-guides/docker/).
+If the above command fails with a message similar to "``docker: command not found``" then follow the steps from the [Docker Install Guide](https://learn.arm.com/install-guides/docker/).
 
 {{% notice Note %}}
-You might need to log in again or restart your machine for the changes to take
+You might need to log out and back in again or restart your machine for the changes to take
 effect.
 {{% /notice %}}
 
 Once you have confirmed that Docker is installed on your machine, you can check
-that it is operating normally with the following:
+that it is working with the following:
 
 ```BASH { output_lines="2-27" }
 docker run hello-world
@@ -222,11 +210,7 @@ docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-enviro
 
 ### Use an interactive Docker shell
 
-The above commands are long and error-prone, so you can instead choose to work
-interactively within the terminal, which would save you from prepending the
-``docker run ...`` magic before each command you want to execute. To work in
-this mode, run Docker without any command (note the ``-it`` command line
-argument to the Docker invocation):
+The above commands are long and error-prone, so you can instead choose to work interactively within the terminal, which would save you from prepending the ``docker run ...`` magic before each command you want to execute. To work in this mode, run Docker without any command (note the ``-it`` command line argument to the Docker invocation). Start an interactive session to avoid repeating the docker run prefix:
 
 ```BASH
 docker run --rm -it -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v2
@@ -239,14 +223,11 @@ example, the ``make`` command can now be simply invoked with:
 make
 ```
 
-To exit the container, simply hit CTRL+D. Note that the container is not
-persistent (it was invoked with ``--rm``), so each invocation will use a
-container freshly built from the image. All the files reside outside the
-container, so changes you make to them will be persistent.
+To exit the container, simply hit CTRL+D. Note that the container is not persistent (it was invoked with ``--rm``), so each invocation will use a container freshly built from the image. All the files reside outside the container, so changes you make to them will be persistent.
 
 ###  Develop with Docker in Visual Studio Code
 
-If you are using Visual Studio Code as your IDE, it can use the container as is.
+If you are using Visual Studio Code as your IDE, the container setup is already configured with `devcontainer/devcontainer.json`.
 
 Make sure you have the [Microsoft Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed.
 
