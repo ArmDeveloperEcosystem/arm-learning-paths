@@ -6,15 +6,17 @@ weight: 2
 layout: learningpathall
 ---
 
-# Overview of Arm's Scalable Matrix Extension Version 2
+## Arm's Scalable Matrix Extension Version 2 (SME2)
 
-### What is SME2?
+## What is SME2?
 
-The Scalable Matrix Extension (SME) is an extension to the Armv9-A architecture. The Scalable Matrix Extension Version 2 (SME2) extends the SME architecture by accelerating vector operations to increase the number of applications that can benefit from the computational efficiency of SME, beyond its initial focus on outer products and matrix-matrix multiplication.
+The Scalable Matrix Extension (SME) is an extension to the Armv9-A architecture designed to accelerate matrix-heavy computations, such as outer products and matrix-matrix multiplications. SME Version 2 (SME2) extends the SME architecture by accelerating vector operations to increase the number of applications that can benefit from the computational efficiency of SME, beyond its initial focus on outer products and matrix-matrix multiplication.
 
 SME2 extends SME by introducing multi-vector data-processing instructions, load to and store from multi-vectors, and a multi-vector predication mechanism.
 
-Additional architectural features of SME2 include:
+## Key architectural features of SME2
+
+The key architectural features of SME2 include:
 
 * Multi-vector multiply-accumulate instructions, with Z vectors as multiplier and multiplicand inputs and accumulating results into ZA array vectors, including widening multiplies that accumulate into more vectors than they read.
 
