@@ -93,6 +93,7 @@ Clone and build the `onnxruntime-genai` repository:
 cd ~
 cp ./onnxruntime/build/Linux/Release/install/include/onnxruntime/onnxruntime_float16.h ./onnxruntime/build/Linux/Release/install/include/onnxruntime_float16.h
 cp ./onnxruntime/build/Linux/Release/install/include/onnxruntime/onnxruntime_c_api.h ./onnxruntime/build/Linux/Release/install/include/onnxruntime_c_api.h
+cp ./onnxruntime/build/Linux/Release/install/include/onnxruntime/onnxruntime_ep_c_api.h ./onnxruntime/build/Linux/Release/install/include/onnxruntime_ep_c_api.h
 git clone https://github.com/microsoft/onnxruntime-genai.git
 cd onnxruntime-genai
 python3 build.py --config Release --update --ort_home ../onnxruntime/build/Linux/Release/install
