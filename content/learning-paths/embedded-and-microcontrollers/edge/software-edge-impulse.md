@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 # Using Edge Impulse to Train TinyML Models
 
-Now that the foundational concepts of TinyML and Edge AI are clear, it's time to move from theory to practice. **Edge Impulse** is an easy to use platform for training TinyML models. It provides an end-to-end pipeline for collecting data, designing features, training models, and deploying them to edge devices. In this section, we will explore how Edge Impulse is used to train models specifically for ultra-low-power microcontrollers, bridging the gap between machine learning and real-world embedded applications.
+Now that the foundational concepts of TinyML and Edge AI are clear, it's time to move from theory to practice. **Edge Impulse** is an easy to use platform for training TinyML models. It provides an end-to-end pipeline for collecting data, designing features, training models, and deploying them to edge devices. In this section, you will explore how Edge Impulse is used to train models specifically for ultra-low-power microcontrollers, bridging the gap between machine learning and real-world embedded applications.
 
 ## What is Edge Impulse?
 
@@ -47,7 +47,7 @@ Once you’ve created your account and logged in, the first step is to **create 
 
 ### Step 2: Configure the Target Device
 
-After creating your project, the next step is to **configure the target device**. Since we are using the **Arduino Nano RP2040 Connect**, click the highlighted button to begin device configuration, as shown in the snapshot below. This ensures that the data collection, model training, and deployment steps are optimized for your specific hardware.
+After creating your project, the next step is to **configure the target device**. Since you are using the **Arduino Nano RP2040 Connect**, click the highlighted button to begin device configuration, as shown in the snapshot below. This ensures that the data collection, model training, and deployment steps are optimized for your specific hardware.
 
 The specifications of the Arduino Nano RP2040 Connect board can be found on [Arduino’s official page](https://store.arduino.cc/products/arduino-nano-rp2040-connect).
 
@@ -158,7 +158,7 @@ To use the trained model on your Arduino Nano RP2040, follow the steps below to 
 
 ## Next Steps
 
-In the following steps, you will move from model training to real-world deployment. Specifically, we will:
+In the following steps, you will move from model training to real-world deployment. Specifically, you will:
 
 - Connect an **LED** to the **Arduino Nano RP2040** board.
 - Set up the **Arduino IDE** for development.

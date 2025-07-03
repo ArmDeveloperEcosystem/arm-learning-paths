@@ -18,7 +18,7 @@ Its compatibility with popular tools like Edge Impulse and the Arduino IDE makes
 
 ### Step 1: Connect the LED to the Arduino Nano RP2040
 
-To visualize the output of the voice command model, we will use a simple LED circuit.
+To visualize the output of the voice command model, you will use a simple LED circuit.
 
 ### Components Needed
 
