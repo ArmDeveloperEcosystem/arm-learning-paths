@@ -21,12 +21,6 @@ prerequisites:
     - The [Arduino IDE with the RP2040 board support package](https://learn.arm.com/install-guides/arduino-pico/) installed on your computer
     - An Arduino Nano RP2040 Connect [board](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers?_gl=1*9t4cti*_up*MQ..*_ga*NTA1NTQwNzgxLjE3NDYwMjIyODk.*_ga_NEXN8H46L5*MTc0NjAyMjI4Ny4xLjEuMTc0NjAyMjMxOC4wLjAuMjA3MjA2NTUzMA..).
 
-further_reading:
-    - resource:
-        title: Edge Impulse website
-        link: https://edgeimpulse.com/
-        type: website
-
 author: Bright Edudzi Gershon Kordorwu
 ### Tags
 skilllevels: Introductory
@@ -42,10 +36,7 @@ operatingsystems:
     - Baremetal
 
 
-
-
 further_reading:
-
     - resource:
         title: TinyML Brings AI to Smallest Arm Devices
         link: https://newsroom.arm.com/blog/tinyml
