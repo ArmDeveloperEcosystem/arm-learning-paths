@@ -35,7 +35,7 @@ The libray should be of the form `Name_of_your_library_inferencing.h`
 
 Before running the code, it’s important to understand what each part does.
 
-Take a few minutes to read through the comments and logic in the sketch before uploading it to your board. The code can be downloaded [here](jkhkjhjk).
+Take a few minutes to read through the comments and logic in the sketch before uploading it to your board. The code can be downloaded [here](https://github.com/e-dudzi/Learning-Path).
 
 ## Include Necessary Libraries and Define Data Structure for Inference
 
