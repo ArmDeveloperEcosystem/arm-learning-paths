@@ -1,25 +1,24 @@
 ---
-title: Prepare your development environment for SME2
+title: Set up your SME2 development environment
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-To follow this Learning Path, you will need to set up an environment to develop
-with SME2 and download the code examples. This Learning Path assumes two
-different ways of working, and you will need to select the one appropriate for
-your machine:
-- Case #1: Your machine has native SME2 support --- check the [list of devices
-  with SME2 support](#devices-with-sme2-support).
-- Case #2: Your machine does not have native SME2 support. This Learning Path
-  supports this use case by enabling you to run code with SME2 instructions in
-  an emulator in bare metal mode, i.e., the emulator runs the SME2 code
-  *without* an operating system.
+## Choose your SME2 setup: native or emulated
+
+Before you can build or run any SME2-accelerated code, you need to set up your development environment. 
+
+This section walks you through the required tools, code examples, and two supported execution options: 
+
+* Running on native SME2-enabled hardware - for further information on devices with SME2 support, see this [list of devices](#devices-with-sme2-support). 
+
+* Emulating SME2 using a Docker-based virtual platform - this Learning Path supports this use case by enabling you to run code with SME2 instructions in an emulator in bare metal mode, that is, the emulator runs the SME2 code *without* an operating system.
 
 ## Download and inspect the code examples
 
-[Download the code examples](https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2) for this Learning Path, expand the archive, and change your current directory to:
+To get started, [download the code examples](https://gitlab.arm.com/learning-cde-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2), expand the archive, and change your current directory to:
 ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2`` :
 
 ```BASH
@@ -59,7 +58,7 @@ code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2/
 ```
 
 It contains:
-- The code examples that will be used throughout this Learning Path.
+- The code examples that you will use.
 - A ``Makefile`` that builds the code examples.
 - A shell script called ``run-fvp.sh`` that runs the FVP model (used for emulated
   SME2 execution).
@@ -70,8 +69,8 @@ It contains:
   - A Docker recipe called ``sme2-environment.docker`` to build the container
     that you will use.
   - A shell script called ``build-my-container.sh`` that you can use if you want
-    to build the Docker container. This is not essential; ready-made images are
-    available for you.
+    to build the Docker container. (This is not essential; ready-made images are
+    available for you).
   - A script called ``build-all-containers.sh`` that was used to create the
     image for you to download to provide multi-architecture support for both
     x86_64 and AArch64.
@@ -274,7 +273,7 @@ them with a Docker invocation, as VS Code handles all this seamlessly for you.
 
 {{% notice Note %}}
 For the rest of this Learning Path, shell commands include the full Docker
-invocation so that users not using VS Code can copy the complete command line.
+invocation so that if you are not using VS Code you can copy the complete command line.
 However, if you are using VS Code, you only need to use the `COMMAND ARGUMENTS`
 part.
 {{% /notice %}}
