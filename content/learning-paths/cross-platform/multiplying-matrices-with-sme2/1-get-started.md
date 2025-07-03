@@ -12,21 +12,23 @@ Before you can build or run any SME2-accelerated code, you need to set up your d
 
 This section walks you through the required tools, code examples, and two supported execution options: 
 
-* Running on native SME2-enabled hardware - for further information on devices with SME2 support, see this [list of devices](#devices-with-sme2-support). 
+* **Native SME2 hardware** - build and run directly on a system with SME2 support. For supported devices, se [list of devices](#devices-with-sme2-support). 
 
-* Emulating SME2 using a Docker-based virtual platform - this Learning Path supports this use case by enabling you to run code with SME2 instructions in an emulator in bare metal mode, that is, the emulator runs the SME2 code *without* an operating system.
+* **Docker-based emulation** - use a container to emulate SME2 in bare metal mode (without an OS).
 
-## Download and inspect the code examples
+## Download and explore the code examples
 
-To get started, [download the code examples](https://gitlab.arm.com/learning-cde-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2), expand the archive, and change your current directory to:
-``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2`` :
+To get started, [download the code examples](https://gitlab.arm.com/learning-cde-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2).
+
+Now expand the archive, and change your current directory to:
+``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2.``
 
 ```BASH
 tar xfz code-examples-main-learning-paths-cross-platform-multiplying-matrices-with-sme2.tar.gz -s /code-examples-main-learning-paths-cross-platform-multiplying-matrices-with-sme2/code-examples/
 cd code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2
 ```
 
-The listing of the content of this directory should look like this:
+The directory structure looks like this:
 
 ```TXT
 code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2/
@@ -57,23 +59,15 @@ code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2/
 └── sme2_check.c
 ```
 
-It contains:
-- The code examples that you will use.
-- A ``Makefile`` that builds the code examples.
-- A shell script called ``run-fvp.sh`` that runs the FVP model (used for emulated
-  SME2 execution).
-- A directory called ``docker`` that contains materials related to Docker, which
-  are:
-  - A script called ``assets.source_me`` that provides the FVP and compiler
-    toolchain references.
-  - A Docker recipe called ``sme2-environment.docker`` to build the container
-    that you will use.
-  - A shell script called ``build-my-container.sh`` that you can use if you want
-    to build the Docker container. (This is not essential; ready-made images are
-    available for you).
-  - A script called ``build-all-containers.sh`` that was used to create the
-    image for you to download to provide multi-architecture support for both
-    x86_64 and AArch64.
+It directory structure includes:
+- Code examples.
+- A ``Makefile`` to build the code.
+- A shell script called ``run-fvp.sh`` to run the FVP model.
+- A `docker` directory containing:
+  - ``assets.source_me`` to provide toolchain paths.
+  - `sme2-environment.docker`, a Dockerfile to build the image.
+  - ``build-my-container.sh`` `sme2-environment.docker`, a Dockerfile to build the image.
+  - ``build-all-containers.sh`` used to build multi-architecture images.
 - A configuration script for VS Code to be able to use the container from the
   IDE called ``.devcontainer/devcontainer.json``.
 
@@ -83,7 +77,7 @@ directory is
 ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2``.
 {{% /notice %}}
 
-## Setup on a system with native SME2 support
+## Set up a system with native SME2 support
 
 If your machine has native support for SME2, then you only need to ensure that
 you have a compiler with support for SME2 instructions.
@@ -114,7 +108,7 @@ which forces us to use the version from ``homebrew`` (which has version
 
 You are now all set to start hacking with SME2!
 
-## Setup on a system using SME2 emulation
+## Set up a system using SME2 emulation
 
 If your machine does not have SME2 support or if you want to run SME2 with an
 emulator, you will need to install Docker. Docker containers provide
