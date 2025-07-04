@@ -9,7 +9,7 @@ layout: learningpathall
 In this chapter, you will use an SME2-optimized matrix multiplication written
 directly in assembly.
 
-## Matrix multiplication with SME2 in assembly
+## About the SME2 assembly implementation
 
 ### Description
 
