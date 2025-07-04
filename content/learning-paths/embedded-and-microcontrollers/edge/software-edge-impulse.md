@@ -59,9 +59,13 @@ Follow the exact settings in the attached snapshot to complete the configuration
 
 With your device configured, the next step is to **add your dataset** to the project. Click on the **"Add existing data"** button and follow the configuration settings shown in the attached snapshot. This allows you to upload pre-recorded data instead of collecting it live, which can save time during the development phase.
 
-The dataset for this project can be downloaded from the following link: [Download Dataset](https://github.com/e-dudzi/Learning-Path.git). Download the `Dataset.zip` file and extract it on your local machine.
+An **example repository** has been set up with some assets to be used throughout this Learning Path. You can clone it with the following command:
 
-For convenience, the dataset has already been split into **training** and **testing**.
+```bash
+git clone https://github.com/e-dudzi/Learning-Path.git
+```
+
+The repository contains a `Dataset.zip` file containing the dataset used in the project. Extract it on your local machine. For convenience, the dataset has already been split into **training** and **testing**.
 
 ![example image alt-text#center](images/6.png "Figure 4. Add Existing Data")
 
@@ -143,7 +147,7 @@ Review these metrics to determine if the model is learning effectively. If neede
 
 ![example image alt-text#center](images/15.png "Figure 12. Model Performance")
 
-You can also [download](https://github.com/e-dudzi/Learning-Path.git) a pre-trained model and continue from here.
+You can also use the pre-trained model from the example repository.
 
 ### Final Step: Deploying the Model
 

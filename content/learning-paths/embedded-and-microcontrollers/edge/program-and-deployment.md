@@ -20,7 +20,7 @@ This section helps you create a complete sketch that you can upload onto your Ar
 ## Step 2: Upload the Arduino Library from Edge Impulse
 
 1. After creating and saving your sketch, go to **Sketch** > **Include Library** > **Add .ZIP Library**.
-2. In the file dialog that opens, navigate to the location of the **ZIP file** you exported from Edge Impulse in [Set up your environment](http://localhost:1313/learning-paths/embedded-and-microcontrollers/egde/software_edge_impulse/)
+2. In the file dialog that opens, navigate to the location of the **ZIP file** you exported from Edge Impulse in [Set up your environment](/learning-paths/embedded-and-microcontrollers/edge/software-edge-impulse/)
 3. Select the **ZIP file** and click **Open**.
 
 ## Step 3: Include the Library in Your Sketch
@@ -33,9 +33,9 @@ The libray should be of the form `Name_of_your_library_inferencing.h`
 
 # Code walk-through
 
-Before running the code, it’s important to understand what each part does.
+In the example repository, you will find a code snippet which is used as a sketch for the project. Before running the code, it’s important to understand what each part does.
 
-Take a few minutes to read through the comments and logic in the sketch before uploading it to your board. The code can be downloaded [here](jkhkjhjk).
+Take a few minutes to read through the comments and logic in the sketch before uploading it to your board. The code is available in the example repository, and below is a walk-through of the steps.
 
 ## Include Necessary Libraries and Define Data Structure for Inference
 
@@ -277,12 +277,12 @@ void print_inference_result(ei_impulse_result_t result) {
 ```
 
 {{% notice Note %}}
-The `ei_printf` command is a custom logging function from the Edge Impulse SDK, used for printing debug or inference-related information to the serial monitor, optimized for embedded systems. It works similarly to `printf` but is tailored for the Edge Impulse environment. You can download the complete [Code_Sample.ino](https://github.com/e-dudzi/Learning-Path.git) and try it out yourself.
+The `ei_printf` command is a custom logging function from the Edge Impulse SDK, used for printing debug or inference-related information to the serial monitor, optimized for embedded systems. It works similarly to `printf` but is tailored for the Edge Impulse environment. You can find the complete `Code_Sample.ino` in the example repository and try it out yourself.
 {{% /notice %}}
 
 # Run Your Code
 
-Now that you have a good understanding of the code, you should run it on your device. With your **Arduino Nano RP2040** plugged into your computer, and the correct [board and port](http://localhost:1313/learning-paths/embedded-and-microcontrollers/egde/connect-and-set-up-arduino/) selected in the Arduino IDE, follow these steps:
+Now that you have a good understanding of the code, you should run it on your device. With your **Arduino Nano RP2040** plugged into your computer, and the correct [board and port](/learning-paths/embedded-and-microcontrollers/egde/connect-and-set-up-arduino/) selected in the Arduino IDE, follow these steps:
 
 #### If you're using the **Upload Button**
 
