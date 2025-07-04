@@ -1,10 +1,12 @@
 ---
-title:  Overview 
+title:  Overview
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+This section introduces the related topics that make out the basis for this learning path. Review it before proceeding to the step-by-step tutorial.
 
 # Edge AI
 Edge AI refers to artificial intelligence models that run directly on edge devices, processing data locally rather than relying on cloud computing. These models are optimized for real-time decision-making on resource-constrained devices, such as microcontrollers, embedded systems, and IoT sensors.
@@ -45,9 +47,9 @@ Wearable devices also benefit from Edge AI. Smartwatches monitor health by detec
 
 In industrial settings, predictive maintenance applications rely on IoT sensors to monitor vibrations and temperatures, helping prevent machinery failures. Smart agriculture systems use soil condition sensors to optimize irrigation and fertilization, while autonomous vehicles process sensor data for real-time navigation and obstacle detection.
 
-## Importance of Edge AI
+## The BLERP mnemonic
 
-To understand the benefits of **Edge AI**, just **BLERP**, BLERP highlights the critical aspects of deploying machine learning models on edge devices, focusing on **Bandwidth, Latency, Economics, Reliability, and Privacy**. These components are key to understanding the advantages of processing data on-device rather than relying on the cloud. The table below provides an overview of each component and its importance in Edge AI applications "Situnayake, 2023"
+To help remember the benefits of **Edge AI**, **BLERP** highlights the critical aspects of deploying machine learning models on edge devices. First used by Situnayake in 2023, the abbreviation expands to **Bandwidth, Latency, Economics, Reliability, and Privacy**. These components are key to understanding the advantages of processing data on-device rather than relying on the cloud. The table below provides an overview of each component and its importance in Edge AI applications.
 
 | Area     | Description                                                                                                                                                         |
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -65,5 +67,5 @@ Edge AI is transforming multiple industries. In healthcare, AI-powered medical d
 
 To build effective TinyML and Edge AI projects, one needs more than just data—**both software and hardware** play a critical role in the development process. While data forms the foundation for training machine learning models, the **software** enables data processing, model development, and deployment, and the **hardware** provides the physical platform for running these models at the edge.
 
-In this learning path, we will build a model that recognize specific voice commands, which will be used to **control LEDs on the Arduino Nano RP2040 Connect**. In the following steps, both software and hardware components will be discussed in detail.
+In this learning path, you will build a model that recognize specific voice commands, which will be used to **control LEDs on the Arduino Nano RP2040 Connect**. In the following steps, both software and hardware components will be discussed in detail.
 
