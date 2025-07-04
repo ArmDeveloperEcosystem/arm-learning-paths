@@ -43,8 +43,8 @@ On matrix multiplication:
 
 On SVE and SME:
 
-- [Introducing the Scalable Matrix Extension for the Armv9-A Architecture](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/scalable-matrix-extension-armv9-a-architecture)
+- [Introducing the Scalable Matrix Extension for the Armv9-A Architecture - Martin Weidmann, Arm](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/scalable-matrix-extension-armv9-a-architecture)
 - [Arm Scalable Matrix Extension (SME) Introduction (Part 1)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction)
 - [Arm Scalable Matrix Extension (SME) Introduction (Part 2)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2)
 - [Part 3: Matrix-matrix multiplication. Neon, SVE, and SME compared](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/.matrix-matrix-multiplication-neon-sve-and-sme-compared)
-- [Learn about function multiversioning, Alexandros Lamprineas, Arm](https://learn.arm.com/learning-paths/cross-platform/function-multiversioning/)
+- [Learn about function multiversioning - Alexandros Lamprineas, Arm](https://learn.arm.com/learning-paths/cross-platform/function-multiversioning/)
