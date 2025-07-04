@@ -6,24 +6,36 @@ weight: 6
 layout: learningpathall
 ---
 
+## Overview
+
 In this section, you'll implement a basic matrix multiplication algorithm in C, using a row-major memory layout. This version serves as a reference implementation for validating optimized versions later in the Learning Path.
 
 ## Vanilla matrix multiplication algorithm
 
-The vanilla matrix multiplication operation takes two input matrices, A [Arrows x Ac columns] and B [Br rows x Bc columns], to produce an output matrix C [Cr rows x Cc columns]. The algorithm consists of iterating on each row of A and each column of B, multiplying each element of the A row with its corresponding element in the B column then summing all these products, as Figure 2 shows.
+The vanilla matrix multiplication operation takes two input matrices:
 
-![Standard Matrix Multiplication alt-text#center](matmul.png "Figure 2: Standard Matrix Multiplication.")
+* Matrix A [`Ar` rows x `Ac` columns] 
+* Matrix B [`Br` rows x `Bc` columns]
+
+It produces an output matrix C [`Cr` rows x `Cc` columns]. 
+
+The algorithm works by iterating over each row of A and each column of B. It multiplies the corresponding elements and sums the products to generate each element of matrix C, as shown in the figure below.
+
+![Standard Matrix Multiplication alt-text#center](matmul.png "Figure 2: Standard matrix multiplication.")
 
 This implies that the A, B, and C matrices have some constraints on their
 dimensions:
-- A's number of columns must match B's number of rows: Ac == Br.
-- C has the dimensions Cr == Ar and Cc == Bc.
 
-You can learn more about matrix multiplication, including its history,
-properties and use, by reading this [Wikipedia
-article on Matrix Multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication).
+- The number of columns in A must equal the number of rows in B: `Ac == Br`.
+- Matrix C must have the dimensions Cr == Ar and Cc == Bc.
 
-In this Learning Path, you will see the following variable names:
+For more information about matrix multiplication, including its history,
+properties and use, see this [Wikipedia article on Matrix Multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication).
+
+## Variable mappings in this Learning Path
+
+In this Learning Path, you'll use the following variable names:
+
 - `matLeft` corresponds to the left-hand side argument of the matrix
   multiplication.
 - `matRight`corresponds to the right-hand side of the matrix multiplication.
@@ -35,8 +47,7 @@ In this Learning Path, you will see the following variable names:
 
 ## C implementation
 
-A literal implementation of the textbook matrix multiplication algorithm, as
-described above, can be found in file `matmul_vanilla.c`:
+The file matmul_vanilla.c contains a reference implementation of the algorithm:
 
 ```C { line_numbers="true" }
 void matmul(uint64_t M, uint64_t K, uint64_t N,
@@ -56,17 +67,10 @@ void matmul(uint64_t M, uint64_t K, uint64_t N,
 }
 ```
 
-In this Learning Path, the matrices are laid out in memory as contiguous
-sequences of elements, in [Row-Major Order](https://en.wikipedia.org/wiki/Row-_and_column-major_order).
-The `matmul` function performs the algorithm described above.
+## Memory layout and pointer annotations
 
-The pointers to `matLeft`, `matRight` and `matResult` have been annotated
-as `restrict`, which informs the compiler that the memory areas designated by
-those pointers do not alias. This means that they do not overlap in any way, so
-that the compiler does not need to insert extra instructions to deal with these
-cases. The pointers to `matLeft` and `matRight` are marked as `const` as
-neither of these two matrices are modified by `matmul`.
+In this Learning Path, the matrices are laid out in memory as contiguous sequences of elements, in [Row-Major Order](https://en.wikipedia.org/wiki/Row-_and_column-major_order). The `matmul` function performs the algorithm described above.
 
-You now have a reference standard matrix multiplication function. You will use
-it later on in this Learning Path to ensure that the assembly version and the
-intrinsics version of the multiplication algorithm do not contain errors.
+The pointers to `matLeft`, `matRight` and `matResult` have been annotated as `restrict`, which informs the compiler that the memory areas designated by those pointers do not alias. This means that they do not overlap in any way, so that the compiler does not need to insert extra instructions to deal with these cases. The pointers to `matLeft` and `matRight` are marked as `const` as neither of these two matrices are modified by `matmul`.
+
+You now have a working baseline for the matrix multiplication function. You'll use it later on in this Learning Path to ensure that the assembly version and the intrinsics version of the multiplication algorithm do not contain errors.
