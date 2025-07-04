@@ -8,7 +8,7 @@ who_is_this_for: This Learning Path is an advanced topic for developers who want
 learning_objectives:
     - Implement a baseline matrix multiplication kernel in C without SME2
     - Use SME2 assembly instructions to accelerate matrix multiplication performance
-    - Use SME2 intrinsics to vectorize and optimize matrix multiplication in C
+    - Use SME2 intrinsics to vectorize and optimize matrix multiplication
     - Compile code with SME2 intrinsics and assembly
     - Benchmark and validate SME2-accelerated matrix multiplication on Arm hardware or in a Linux-based emulation environment
     - Compare performance metrics between baseline and SME2-optimized implementations
