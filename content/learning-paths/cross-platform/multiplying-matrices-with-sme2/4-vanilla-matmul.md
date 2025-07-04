@@ -6,17 +6,13 @@ weight: 6
 layout: learningpathall
 ---
 
-In this section, you will learn about an example of standard matrix multiplication in C.
+In this section, you'll implement a basic matrix multiplication algorithm in C, using a row-major memory layout. This version serves as a reference implementation for validating optimized versions later in the Learning Path.
 
 ## Vanilla matrix multiplication algorithm
 
-The vanilla matrix multiplication operation takes two input matrices, A [Ar
-rows x Ac columns] and B [Br rows x Bc columns], to produce an output matrix C
-[Cr rows x Cc columns]. The operation consists of iterating on each row of A
-and each column of B, multiplying each element of the A row with its corresponding
-element in the B column then summing all these products, as Figure 2 shows.
+The vanilla matrix multiplication operation takes two input matrices, A [Arrows x Ac columns] and B [Br rows x Bc columns], to produce an output matrix C [Cr rows x Cc columns]. The algorithm consists of iterating on each row of A and each column of B, multiplying each element of the A row with its corresponding element in the B column then summing all these products, as Figure 2 shows.
 
-![example image alt-text#center](matmul.png "Figure 2: Standard Matrix Multiplication.")
+![Standard Matrix Multiplication alt-text#center](matmul.png "Figure 2: Standard Matrix Multiplication.")
 
 This implies that the A, B, and C matrices have some constraints on their
 dimensions:
