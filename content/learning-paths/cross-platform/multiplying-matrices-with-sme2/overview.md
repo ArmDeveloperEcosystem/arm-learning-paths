@@ -8,18 +8,16 @@ layout: learningpathall
 
 ## Arm's Scalable Matrix Extension Version 2 (SME2)
 
-Arm’s Scalable Matrix Extension Version 2 (SME2) is a hardware feature designed to accelerate dense linear algebra operations, enabling high-throughput execution of matrix-based workloads. Whether you're building for AI inference, HPC, or scientific computing, SME2 provides fine-grained control and high-performance vector processing on Armv9-A systems.
+Arm’s Scalable Matrix Extension Version 2 (SME2) is a hardware feature designed to accelerate dense linear algebra operations, enabling high-throughput execution of matrix-based workloads. Whether you're building for AI inference, HPC, or scientific computing, SME2 provides fine-grained control and high-performance vector processing.
 
 
-### How SME2 extends the SME Architecture
+## Extending the SME Architecture
 
 The Scalable Matrix Extension (SME) is an extension to the Armv9-A architecture and is designed to accelerate matrix-heavy computations, such as outer products and matrix-matrix multiplications. 
 
 SME2 builds on SME by accelerating vector operations to increase the number of applications that can benefit from the computational efficiency of SME, beyond its initial focus on outer products and matrix-matrix multiplication.
 
-SME2 introduces multi-vector processing, new memory instructions, and enhanced predication to improve throughput and flexibility in compute-intensive applications.
-
-### Key architectural features of SME2
+## Key architectural features of SME2
 
 SME2 adds several capabilities to the original SME architecture:
 
@@ -33,15 +31,15 @@ SME2 adds several capabilities to the original SME architecture:
 
 * A **512-bit architectural register ZT0**, which is a dedicated register that enables fast, table-driven data transformations.
 
-### Suggested reading
+## Further information
 
-This Learning Path assumes some basic understanding of SVE, SME, and matrix multiplication. If you do want to refresh or grow your knowledge however, these are some useful resources that you might find helpful: 
+This Learning Path does assume some basic understanding of SVE, SME, and matrix multiplication, however if you do want to refresh or grow your knowledge, these are some useful resources that you might find helpful: 
 
-#### Matrix multiplication 
+### On matrix multiplication 
 
 - This [Wikipedia article on Matrix multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication)
 
-#### SVE and SME
+### On SVE and SME
 
 - [Introducing the Scalable Matrix Extension for the Armv9-A Architecture](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/scalable-matrix-extension-armv9-a-architecture)
 - [Arm Scalable Matrix Extension (SME) Introduction (Part 1)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction)

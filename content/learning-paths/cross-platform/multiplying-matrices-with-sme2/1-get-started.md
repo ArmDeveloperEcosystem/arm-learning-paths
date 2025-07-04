@@ -20,7 +20,7 @@ This section walks you through the required tools and two supported execution op
 
 To get started, begin by [downloading the code examples](https://gitlab.arm.com/learning-cde-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2).
 
-Extract the archive and change to the target directory:
+Now extract the archive and change to the target directory:
 ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2.``
 
 ```BASH
@@ -28,7 +28,7 @@ tar xfz code-examples-main-learning-paths-cross-platform-multiplying-matrices-wi
 cd code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2
 ```
 
-The directory structure looks like this:
+The directory structure should look like this:
 
 ```TXT
 code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2/
@@ -61,18 +61,18 @@ code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2/
 
 It includes:
 - Code examples.
-- A ``Makefile`` to build the code.
-- ``run-fvp.sh`` to run the FVP model.
+- A `Makefile` to build the code.
+- `run-fvp.sh` to run the FVP model.
 - A `docker` directory containing:
-  - ``assets.source_me`` to provide toolchain paths.
-  - `sme2-environment.docker`, a Dockerfile to build the image.
-  - ``build-my-container.sh`` `sme2-environment.docker`, a Dockerfile to build the image.
-  - ``build-all-containers.sh`` used to build multi-architecture images.
-- ``.devcontainer/devcontainer.json`` for VS Code container support.
+  - `assets.source_me` to provide toolchain paths.
+  - `build-my-container.sh`, a script that automates building the Docker image from the sme2-environment.docker file. It runs the docker build command with the right arguments so you don’t have to remember them. 
+  - `sme2-environment.docker`, a Dockerfile that defines the steps to build the SME2 container image. It installs all necessary dependencies, including the SME2-compatible compiler and Arm FVP emulator.
+  - `build-all-containers.sh` used to build multi-architecture images.
+  - `.devcontainer/devcontainer.json`` for VS Code container support.
 
 {{% notice Note %}}
 From this point, all instructions assume that your current directory is
-``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2``.
+``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2``. So to follow along, ensure that you are in the correct place before proceeding.
 {{% /notice %}}
 
 ## Set up a system with native SME2 support
