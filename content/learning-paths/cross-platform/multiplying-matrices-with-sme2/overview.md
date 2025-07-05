@@ -29,7 +29,7 @@ SME2 adds several capabilities to the original SME architecture:
 
 * A **predicate-as-counter mechanism**, which is a new predication mechanism that is added alongside the original SVE approach to enable fine-grained control over operations across multiple vector registers.
 
-* **Compressed neural network support** using dedicated lookup table and outer product instructions that support binary neural network workloads.
+* **Compressed neural network support**, using dedicated lookup table and outer product instructions that support binary neural network workloads.
 
 * A **512-bit architectural register ZT0**, which is a dedicated register that enables fast, table-driven data transformations.
 
@@ -39,12 +39,12 @@ This Learning Path does assume some basic understanding of SVE, SME, and matrix 
 
 On matrix multiplication: 
 
-- This [Wikipedia article on Matrix multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication)
+- The [Wikipedia article](https://en.wikipedia.org/wiki/Matrix_multiplication)
 
 On SVE and SME:
 
 - [Introducing the Scalable Matrix Extension for the Armv9-A Architecture - Martin Weidmann, Arm](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/scalable-matrix-extension-armv9-a-architecture)
-- [Arm Scalable Matrix Extension (SME) Introduction (Part 1)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction)
-- [Arm Scalable Matrix Extension (SME) Introduction (Part 2)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2)
-- [Part 3: Matrix-matrix multiplication. Neon, SVE, and SME compared](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/.matrix-matrix-multiplication-neon-sve-and-sme-compared)
+- [Arm Scalable Matrix Extension (SME) Introduction (Part 1) - Zenon Xiu](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction)
+- [Arm Scalable Matrix Extension (SME) Introduction (Part 2) - Zenon Xiu](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2)
+- [Matrix-matrix multiplication. Neon, SVE, and SME compared (Part 3)](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/.matrix-matrix-multiplication-neon-sve-and-sme-compared)
 - [Learn about function multiversioning - Alexandros Lamprineas, Arm](https://learn.arm.com/learning-paths/cross-platform/function-multiversioning/)

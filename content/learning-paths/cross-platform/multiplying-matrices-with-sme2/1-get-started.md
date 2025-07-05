@@ -10,17 +10,17 @@ layout: learningpathall
 
 Before you can build or run any SME2-accelerated code, you need to set up your development environment. 
 
-This section walks you through the required tools and two supported execution options: 
+This section walks you through the required tools and the two supported execution options, which are: 
 
-* **Native SME2 hardware** - build and run directly on a system with SME2 support. For supported devices, see [Devices with SME2 support](#devices-with-sme2-support). 
+* [**Native SME2 hardware**](#set-up-a-system-with-native-SME2-support) - build and run directly on a system with SME2 support. For supported devices, see [Devices with SME2 support](#devices-with-sme2-support). 
 
-* **Docker-based emulation** - use a container to emulate SME2 in bare metal mode (without an OS).
+* [**Docker-based emulation**](#set-up-a-system-using-sme2-emulation-with-dockerset-up-a-system-using-SME2-emulation-with-Docker) - use a container to emulate SME2 in bare metal mode (without an OS).
 
 ## Download and explore the code examples
 
 To get started, begin by [downloading the code examples](https://gitlab.arm.com/learning-cde-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2).
 
-Now extract the archive and change to the target directory:
+Now extract the archive, and change to the target directory:
 ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2.``
 
 ```BASH
@@ -65,29 +65,30 @@ It includes:
 - `run-fvp.sh` to run the FVP model.
 - A `docker` directory containing:
   - `assets.source_me` to provide toolchain paths.
-  - `build-my-container.sh`, a script that automates building the Docker image from the sme2-environment.docker file. It runs the docker build command with the right arguments so you don’t have to remember them. 
-  - `sme2-environment.docker`, a Dockerfile that defines the steps to build the SME2 container image. It installs all necessary dependencies, including the SME2-compatible compiler and Arm FVP emulator.
-  - `build-all-containers.sh` used to build multi-architecture images.
+  - `build-my-container.sh`, a script that automates building the Docker image from the `sme2-environment.docker` file. It runs the docker build command with the correct arguments so you don’t have to remember them. 
+  - `sme2-environment.docker`, a Docker file that defines the steps to build the SME2 container image. It installs all the necessary dependencies, including the SME2-compatible compiler and Arm FVP emulator.
+  - `build-all-containers.sh`, a script to build multi-architecture images.
   - `.devcontainer/devcontainer.json`` for VS Code container support.
 
 {{% notice Note %}}
 From this point, all instructions assume that your current directory is
-``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2``. So to follow along, ensure that you are in the correct place before proceeding.
+``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2``. So to follow along, ensure that you are in the correct directory before proceeding.
 {{% /notice %}}
 
 ## Set up a system with native SME2 support
 
 To run SME2 code natively, ensure your system includes SME2 hardware and uses a compiler version that supports SME2.
 
-Use [Clang](https://www.llvm.org/) version 18 or later, or [GCC](https://gcc.gnu.org/) version 14 or later. This Learning Path uses ``clang``.
+For the compiler, you can use [Clang](https://www.llvm.org/) version 18 or later, or [GCC](https://gcc.gnu.org/) version 14 or later. This Learning Path uses ``clang``.
 
 {{% notice Note %}}
 At the time of writing, macOS ships with `clang` version 17.0.0, which doesn't support SME2. Use a newer version, such as 20.1.7, available through Homebrew.{{% /notice%}}
 
-
-To check your compiler version:``clang --version``
+You can check your compiler version using the command:``clang --version``
 
 ### Install Clang
+
+Install Clang using the instructions below, selecting either macOS or Linux/Ubuntu, as appropriate:
 
 {{< tabpane code=true >}}
 
@@ -117,8 +118,7 @@ for emulating code with SME2 instructions. You can run the provided image or bui
 Docker is optional, but if you don’t use it, you must manually install the compiler and FVP, and ensure they’re in your path.
 {{% /notice %}}
 
-Start by checking that ``docker`` is installed on your machine by typing the
-following command line in a terminal:
+Start by checking that ``docker`` is installed on your machine:
 
 ```BASH { output_lines="2" }
 docker --version
@@ -178,6 +178,7 @@ https://docs.docker.com/get-started/
 You can use Docker in the following ways:
 - Directly from the command line. For example, when you are working from a
   terminal on your local machine.
+
 - Within a containerized environment. Configure VS Code to execute all the
   commands inside a Docker container, allowing you to work seamlessly within the
   Docker environment.
