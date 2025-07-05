@@ -6,58 +6,17 @@ weight: 12
 layout: learningpathall
 ---
 
-In this section, you'll explore ways to optimize and extend the matrix multiplication algorithm beyond the current SME2 implementation. These improvements include generalization, loop unrolling, and strategic use of matrix properties.
+This section presents different ways that you can optimize and extend the matrix multiplication algorithm beyond the SME2 implementation that you've explored in this Learning Path. Improvements that you might like to build on include generalization, loop unrolling, and the strategic use of matrix properties.
 
 ## Generalize the algorithm for other data types
 
-So far, this Learning Path has focused on multiplying floating-point matrices. In practice, matrix operations are also performed on various integer types.
+So far, this Learning Path has focused on multiplying floating-point matrices. In practice, matrix operations are performed on various integer types.
 
 The overall structure of the algorithm - preprocessing with tiling and outer product–based multiplication - remains the same across data types. You only need to adapt how the data is loaded, stored, and accumulated.
 
 This pattern works well in languages that support [generic programming](https://en.wikipedia.org/wiki/Generic_programming), such as C++ with templates. Templates can also handle cases where accumulation uses a wider data type than the input matrices, which is a common requirement. SME2 supports this with widening multiply-accumulate instructions.
 
-By expressing the algorithm generically, you let the compiler generate multiple variants while you focus on:
-
-- Algorithm design
-- Testing and verification
-- SME2-specific optimization
-
-## Unroll loops to compute multiple tiles
-
-For clarity, the `matmul_intr_impl` function in this Learning Path processes one tile at a time. But SME2 supports multi-vector operations, and you can take advantage of them to improve performance.
-
-For example, `preprocess_l_intr` uses:
-
-```c
-svld1_x2(...); // Load two vectors at once
-
----
-title: Going further
-weight: 12
-
-### FIXED, DO NOT MODIFY
-layout: learningpathall
----
-
----
-title: Going further
-weight: 12
-
-### FIXED, DO NOT MODIFY
-layout: learningpathall
----
-
-In this section, you'll explore ways to optimize and extend the matrix multiplication algorithm beyond the current SME2 implementation. These improvements include generalization, loop unrolling, and strategic use of matrix properties.
-
-## Generalize the algorithm for other data types
-
-So far, this Learning Path has focused on multiplying floating-point matrices. In practice, matrix operations are also performed on various integer types.
-
-The overall structure of the algorithm - preprocessing with tiling and outer product–based multiplication - remains the same across data types. You only need to adapt how the data is loaded, stored, and accumulated.
-
-This pattern works well in languages that support [generic programming](https://en.wikipedia.org/wiki/Generic_programming), such as C++ with templates. Templates can also handle cases where accumulation uses a wider data type than the input matrices, which is a common requirement. SME2 supports this with widening multiply-accumulate instructions.
-
-By expressing the algorithm generically, you let the compiler generate multiple variants while you focus on:
+By expressing the algorithm generically, you benefit from the compiler generating multiple variants, allowing you the opportunity to focus on:
 
 - Algorithm design
 - Testing and verification
@@ -72,10 +31,7 @@ For example, `preprocess_l_intr` uses:
 ```c
 svld1_x2(...); // Load two vectors at once
 ```
-Loading two vectors at a time enables the simultaneous computing of more tiles,
-and as the input matrices have been laid out in memory in a neat way, the
-consecutive loading of the data is efficient. Implementing this approach can
-make improvements to the ``macc`` to load ``ratio``.
+Loading two vectors at a time enables the simultaneous computing of more tiles, and as the input matrices have been laid out in memory in a neat way, the consecutive loading of the data is efficient. Implementing this approach can make improvements to the ``macc`` to load ``ratio``.
 
 In order to check your understanding of SME2, you can try to implement this
 unrolling yourself in the intrinsic version (the asm version already has this
