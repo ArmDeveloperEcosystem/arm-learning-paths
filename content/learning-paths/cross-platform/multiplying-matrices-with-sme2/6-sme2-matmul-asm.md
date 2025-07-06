@@ -5,31 +5,37 @@ weight: 8
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Overview
 
-In this chapter, you will use an SME2-optimized matrix multiplication written
-directly in assembly.
+In this section, you'll learn how to run an SME2-optimized matrix multiplication implemented directly in assembly.
+
+This implementation is based on the algorithm described in [Arm's SME Programmer's
+Guide](https://developer.arm.com/documentation/109246/0100/matmul-fp32--Single-precision-matrix-by-matrix-multiplication) and has been adapted to integrate with the existing C and intrinsics-based code in this Learning Path. It demonstrates how to apply low-level optimizations for matrix multiplication using the SME2 instruction set, with a focus on preprocessing and outer-product accumulation.
+
+You'll explore how the assembly implementation works in practice, how it interfaces with C wrappers, and how to verify or benchmark its performance. Whether you're validating correctness or measuring execution speed, this example provides a clear, modular foundation for working with SME2 features in your own codebase.
+
+By mastering this assembly implementation, you'll gain deeper insight into SME2 execution patterns and how to integrate low-level optimizations in high-performance workloads.
 
 ## About the SME2 assembly implementation
 
-### Description
-
-This Learning Path reuses the assembly version provided in the [SME Programmer's
+This Learning Path reuses the assembly version described in [The SME Programmer's
 Guide](https://developer.arm.com/documentation/109246/0100/matmul-fp32--Single-precision-matrix-by-matrix-multiplication)
-where you will find a high-level and an in-depth description of the two steps
-performed.
+where you will find both high-level concepts and in-depth descriptions of the two key steps:
+preprocessing and matrix multiplication.
 
-The assembly versions have been modified so they coexist nicely with
-the intrinsic versions. The modifications include:
-- let the compiler manage the switching back and forth from streaming mode,
-- don't use register `x18` which is used as a platform register.
+The assembly code has been modified to work seamlessly alongside the intrinsic version.
 
-In this Learning Path:
-- the `preprocess` function is named `preprocess_l_asm` and is defined in
+The key changes include:
+* Delegating streaming mode control to the compiler
+* Avoiding register `x18`, which is reserved as a platform register
+
+Here:
+- The `preprocess` function is named `preprocess_l_asm` and is defined in
   `preprocess_l_asm.S`
-- the outer product-based matrix multiplication is named `matmul_asm_impl`and
-  is defined in `matmul_asm_impl.S`.
+- The outer product-based matrix multiplication is named `matmul_asm_impl`and
+  is defined in `matmul_asm_impl.S`
 
-Those 2 functions are declared in `matmul.h`:
+Both functions are declared in `matmul.h`:
 
 ```C
 // Matrix preprocessing, in assembly.
@@ -43,10 +49,9 @@ void matmul_asm_impl(
     float *restrict matResult) __arm_streaming __arm_inout("za");
 ```
 
-You will note that they have been marked with 2 attributes: `__arm_streaming`
+You can see that they have been marked with two attributes: `__arm_streaming`
 and `__arm_inout("za")`. This instructs the compiler that these functions
-expect the streaming mode to be active, and that they don't new to save /
-restore the ZA storage.
+expect the streaming mode to be active, and that they don't need to save or restore the ZA storage.
 
 These two functions are stitched together in `matmul_asm.c` with the
 same prototype as the reference implementation of matrix multiplication, so that
@@ -63,13 +68,14 @@ __arm_new("za") __arm_locally_streaming void matmul_asm(
 }
 ```
 
-Note that `matmul_asm` has been annotated with 2 attributes:
-`__arm_new("za")` and `__arm_locally_streaming`. This instructs the compiler
-to swith to streaming mode and save the ZA storage (and restore it when the
-function returns).
+You can see that `matmul_asm` has been annotated with two attributes: `__arm_new("za")` and `__arm_locally_streaming`. These attributes instruct the compiler to enable streaming mode and manage ZA state on entry and return
 
-The high-level `matmul_asm` function is called from `main.c`. This file might look a bit complex at first sight, but fear not, here are some explanations:
-- the same `main.c` is used for the assembly- and intrinsic-based versions of the matrix multiplication --- this is parametrized at compilation time with the `IMPL` macro. This avoids code duplication and improves maintenance.
+## How it integrates with the main function
+
+The same `main.c` file supports both the intrinsic and assembly implementations. The implementation to use is selected at compile time via the `IMPL` macro. This design reduces duplication and simplifies maintenance.
+
+## Execution modes
+
 - on a baremetal platform, the program only works in *verification mode*, where it compares the results of the assembly-based (resp. intrinsic-based) matrix multiplication with the vanilla reference implementation. When targeting a non-baremetal platform, a *benchmarking mode* is also available.
 
 ```C { line_numbers="true" }
