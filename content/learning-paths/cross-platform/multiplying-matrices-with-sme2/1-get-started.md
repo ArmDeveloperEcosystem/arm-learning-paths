@@ -68,7 +68,7 @@ It includes:
   - `build-my-container.sh`, a script that automates building the Docker image from the `sme2-environment.docker` file. It runs the docker build command with the correct arguments so you don’t have to remember them. 
   - `sme2-environment.docker`, a Docker file that defines the steps to build the SME2 container image. It installs all the necessary dependencies, including the SME2-compatible compiler and Arm FVP emulator.
   - `build-all-containers.sh`, a script to build multi-architecture images.
-  - `.devcontainer/devcontainer.json`` for VS Code container support.
+  - `.devcontainer/devcontainer.json` for VS Code container support.
 
 {{% notice Note %}}
 From this point, all instructions assume that your current directory is
@@ -88,7 +88,7 @@ You can check your compiler version using the command:``clang --version``
 
 ### Install Clang
 
-Install Clang using the instructions below, selecting either macOS or Linux/Ubuntu, as appropriate:
+Install Clang using the instructions below, selecting either macOS or Linux/Ubuntu, depending on your setup:
 
 {{< tabpane code=true >}}
 
@@ -102,7 +102,7 @@ Install Clang using the instructions below, selecting either macOS or Linux/Ubun
 
 {{< /tabpane >}}
 
-You are now all set to start hacking with SME2!
+You are now all set to start hacking with SME2.
 
 ## Set up a system using SME2 emulation with Docker
 
@@ -115,17 +115,17 @@ for emulating code with SME2 instructions. You can run the provided image or bui
 ### Install and verify Docker
 
 {{% notice Note %}}
-Docker is optional, but if you don’t use it, you must manually install the compiler and FVP, and ensure they’re in your path.
+Docker is optional, but if you don’t use it, you must manually install the compiler and FVP, and ensure they’re in your `PATH`.
 {{% /notice %}}
 
-Start by checking that ``docker`` is installed on your machine:
+To begin, start by checking that ``docker`` is installed on your machine:
 
 ```BASH { output_lines="2" }
 docker --version
 Docker version 27.3.1, build ce12230
 ```
 
-If the above command fails with a message similar to "``docker: command not found``" then follow the steps from the [Docker Install Guide](https://learn.arm.com/install-guides/docker/).
+If the above command fails with a message similar to "``docker: command not found``", then follow the steps from the [Docker Install Guide](https://learn.arm.com/install-guides/docker/) to install it.
 
 {{% notice Note %}}
 You might need to log out and back in again or restart your machine for the changes to take
@@ -176,12 +176,10 @@ https://docs.docker.com/get-started/
 ```
 
 You can use Docker in the following ways:
-- Directly from the command line. For example, when you are working from a
-  terminal on your local machine.
+- [Directly from the command line](#run-commands-from-a-terminal-using-docker). For example, when you are working from a terminal on your local machine.
 
-- Within a containerized environment. Configure VS Code to execute all the
-  commands inside a Docker container, allowing you to work seamlessly within the
-  Docker environment.
+- [Within a containerized environment](#use-an-interactive-docker-shell). Configure VS Code to execute all the commands inside a Docker container, allowing you to work seamlessly within the
+Docker environment.
 
 ### Run commands from a terminal using Docker
 
