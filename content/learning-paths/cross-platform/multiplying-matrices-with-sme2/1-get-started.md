@@ -248,16 +248,45 @@ part.
 
 ### Devices with native SME2 support
 
-By chip:
+#### Apple devices (by product type)
 
-| Manufacturer | Chip   | Devices |
-|--------------|--------|---------|
-| Apple        | M4     | iPad Pro 11" & 13", iMac, Mac mini, MacBook Air 13" & 15"|
-| Apple        | M4 Pro | Mac mini, MacBook Pro 14" & 16" |
-| Apple        | M4 Max | MacBook Pro 14" & 16", Mac Studio |
+- iPad
 
-By product:
+  - iPad Pro 11"
 
-| Manufacturer | Product family | Models |
-|--------------|----------------|--------|
-| Apple        | iPhone 16      | iPhone 16, iPhone 16 Plus, iPhone 16e, iPhone 16 Pro, iPhone 16 Pro Max |
+  - iPad Pro 13"
+
+- iPhone
+
+  - iPhone 16
+
+  - iPhone 16 Plus
+
+  - iPhone 16e
+
+  - iPhone 16 Pro
+
+  - iPhone 16 Pro Max
+
+- iMac
+
+- MacBook Air
+
+  - MacBook Air 13"
+
+  - MacBook Air 15"
+
+- Mac mini
+
+
+
+- MacBook Pro
+
+  - MacBook Pro 14"
+
+  - MacBook Pro 16"
+
+- Mac Studio
+
+
+
