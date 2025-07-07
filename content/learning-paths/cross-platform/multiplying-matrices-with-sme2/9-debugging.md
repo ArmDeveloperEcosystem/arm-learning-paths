@@ -105,5 +105,5 @@ Tracing is disabled by default because it significantly slows down simulation an
 
 ## Use debug mode for matrix inspection
 
-It can be helpful when debugging to understand where an element in the Tile is coming from. The current code base allows you to do that in `debug` mode, when `-DDEBUG` is passed to the compiler in the `Makefile`. If you look into `main.c`, you will notice that the matrix initialization is no
+It can be helpful when debugging to understand where an element in the tile is coming from. The current code base allows you to do that in `debug` mode, when `-DDEBUG` is passed to the compiler in the `Makefile`. If you look into `main.c`, you will notice that the matrix initialization is no
 longer random, but instead initializes each element with its linear index. This makes it *easier* to find where the matrix elements are loaded in the tile in tarmac trace, for example.

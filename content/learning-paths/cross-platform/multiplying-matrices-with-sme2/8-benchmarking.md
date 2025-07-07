@@ -39,11 +39,7 @@ Reference implementation: min time = 101 us, max time = 438 us, avg time = 139.4
 SME2 implementation *intr*: min time = 1 us, max time = 8 us, avg time = 1.82 us
 ```
 
-The execution time is reported in microseconds. A wide spread between the
-minimum and maximum figures can be noted and is expected as the way of doing the
-benchmarking is simplified for the purpose of simplicity. You will, however,
-note that the intrinsic version of the matrix multiplication brings on average a
-76x execution time reduction.
+The execution time is reported in microseconds. A wide spread between the minimum and maximum figures can be noted and is expected as the way of doing the benchmarking is simplified for the purpose of simplicity. You will, however, note that the intrinsic version of the matrix multiplication brings on average a 76x execution time reduction.
 
 {{% notice Tip %}}
 You can override the default values for `M` (125), `K` (25), and `N` (70) and

@@ -1,12 +1,12 @@
 ---
-title: Beyond this implementation
+title: Going further
 weight: 12
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Going further
+## Beyond this implementation
 
 There are many different ways that you can extend and optimize the matrix multiplication algorithm beyond the specific SME2 implementation that you've explored in this Learning Path. While the current approach is tuned for performance on a specific hardware target, further improvements can make your code more general, more efficient, and better suited to a wider range of applications. 
 
@@ -22,9 +22,9 @@ Some ideas of improvements that you might like to test out include:
 
 ## Generalize the algorithm for different data types
 
-So far, you've focused on multiplying floating-point matrices.  In practice, matrix operations often involve integer types as well.
+So far, you've focused on multiplying floating-point matrices. In practice, matrix operations often involve integer types as well.
 
-The structure of the algorithm remains consistent across data types. It uses preprocessing with tiling and outer product–based multiplication. To adapt it for other data types, you only need to change how values are:
+The structure of the algorithm (The core logic - tiling, outer product, and accumulation) remains consistent across data types. It uses preprocessing with tiling and outer product–based multiplication. To adapt it for other data types, you only need to change how values are:
 
 * Loaded from memory
 * Accumulated (often with widening)
@@ -35,10 +35,10 @@ Languages that support [generic programming](https://en.wikipedia.org/wiki/Gener
 Templates allow you to:
 
 * Swap data types flexibly
-* Handle accumulation in a wider format (a common requirement)
+* Handle accumulation in a wider format when needed
 * Reuse algorithm logic across multiple matrix types
 
-By expressing the algorithm generically, you benefit from the compiler generating multiple variants, allowing you the opportunity to focus on:
+By expressing the algorithm generically, you benefit from the compiler generating multiple optimized variants, allowing you the opportunity to focus on:
 
 - Creating efficient algorithm design
 - Testing and verification
@@ -55,41 +55,23 @@ svld1_x2(...); // Load two vectors at once
 ```
 Loading two vectors at a time enables the simultaneous computing of more tiles.  Since the matrices are already laid out efficiently in memory, consecutive loading is fast. Implementing this approach can make improvements to the ``macc`` to load ``ratio``.
 
-In order to check your understanding of SME2, you can try to implement this
-unrolling yourself in the intrinsic version (the assembly version already has this
-optimization). You can check your work by comparing your results to the expected
-reference values.
+In order to check your understanding of SME2, you can try to implement this unrolling yourself in the intrinsic version (the assembly version already has this optimization). You can check your work by comparing your results to the expected reference values.
 
-## Apply strategies
+## Optimize for special matrix shapes
 
-One method for optimization is to use strategies that are flexible depending on
-the matrices' dimensions. This is especially easy to set up when working in C or
-C++, rather than directly in assembly language.
+One method for optimization is to use strategies that are flexible depending on the matrices' dimensions. This is especially easy to set up when working in C or C++, rather than directly in assembly language.
 
-By playing with the mathematical properties of matrix multiplication and the
-outer product, it is possible to minimize data movement as well as reduce the
-overall number of operations to perform.
+By playing with the mathematical properties of matrix multiplication and the outer product, it is possible to minimize data movement as well as reduce the overall number of operations to perform.
 
-For example, it is common that one of the matrices is actually a vector, meaning
-that it has a single row or column, and then it becomes advantageous to
-transpose it. Can you see why?
+For example, it is common that one of the matrices is actually a vector, meaning that it has a single row or column, and then it becomes advantageous to transpose it. Can you see why?
 
-The answer is that as the elements are stored contiguously in memory, an ``Nx1``
-and ``1xN`` matrices have the exact same memory layout. The transposition
-becomes a no-op, and the matrix elements stay in the same place in memory.
+The answer is that as the elements are stored contiguously in memory, an ``Nx1``and ``1xN`` matrices have the exact same memory layout. The transposition becomes a no-op, and the matrix elements stay in the same place in memory.
 
-An even more *degenerated* case that is easy to manage is when one of the
-matrices is essentially a scalar, which means that it is a matrix with one row
-and one column.
+An even more *degenerated* case that is easy to manage is when one of the matrices is essentially a scalar, which means that it is a matrix with one row and one column.
 
-Although our current code handles it correctly from a results point of view, a
-different algorithm and use of instructions might be more efficient. Can you
-think of another way?
+Although the current code used here handles it correctly from a results point of view, a different algorithm and use of instructions might be more efficient. Can you think of another way?
 
 
-In order to check your understanding of SME2, you can try to implement this
-unrolling yourself in the intrinsic version (the asm version already has this
-optimization). You can check your work by comparing your results to the expected
-reference values.
+In order to check your understanding of SME2, you can try to implement thisunrolling yourself in the intrinsic version (the asm version already has this optimization). You can check your work by comparing your results to the expected reference values. 
 
 
