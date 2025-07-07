@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-In this section, you'll implement a basic matrix multiplication algorithm in C, using a row-major memory layout. This version serves as a reference implementation for validating optimized versions later in the Learning Path.
+In this section, you'll implement a basic matrix multiplication algorithm in C using row-major memory layout. This version acts as a reference implementation that you'll use to validate the correctness of optimized versions later in the Learning Path.
 
 ## Vanilla matrix multiplication algorithm
 
@@ -20,6 +20,8 @@ The vanilla matrix multiplication operation takes two input matrices:
 It produces an output matrix C [`Cr` rows x `Cc` columns]. 
 
 The algorithm works by iterating over each row of A and each column of B. It multiplies the corresponding elements and sums the products to generate each element of matrix C, as shown in the figure below.
+
+The diagram below shows how matrix C is computed by iterating over rows of A and columns of B:
 
 ![Standard Matrix Multiplication alt-text#center](matmul.png "Figure 2: Standard matrix multiplication.")
 
@@ -34,16 +36,14 @@ properties and use, see this [Wikipedia article on Matrix Multiplication](https:
 
 ## Variable mappings in this Learning Path
 
-In this Learning Path, you'll use the following variable names:
+The following variable names are used throughout the Learning Path to represent matrix dimensions and operands:
 
-- `matLeft` corresponds to the left-hand side argument of the matrix
-  multiplication.
+- `matLeft` corresponds to the left-hand side argument of the matrix multiplication.
 - `matRight`corresponds to the right-hand side of the matrix multiplication.
 - `M` is `matLeft` number of rows.
 - `K` is `matLeft` number of columns (and `matRight` number of rows).
 - `N` is `matRight` number of columns.
-- `matResult`corresponds to the result of the matrix multiplication, with
-  `M` rows and `N` columns.
+- `matResult`corresponds to the result of the matrix multiplication, with `M` rows and `N` columns.
 
 ## C implementation
 

@@ -8,13 +8,12 @@ layout: learningpathall
 
 ## Choose your SME2 setup: native or emulated
 
-Before you can build or run any SME2-accelerated code, you need to set up your development environment. 
-
-This section walks you through the required tools and the two supported execution options, which are: 
+To build or run SME2-accelerated code, first set up your development environment.
+This section walks you through the required tools and two supported setup options:
 
 * [**Native SME2 hardware**](#set-up-a-system-with-native-SME2-support) - build and run directly on a system with SME2 support. For supported devices, see [Devices with SME2 support](#devices-with-sme2-support). 
 
-* [**Docker-based emulation**](#set-up-a-system-using-sme2-emulation-with-dockerset-up-a-system-using-SME2-emulation-with-Docker) - use a container to emulate SME2 in bare metal mode (without an OS).
+* [**Docker-based emulation**](#set-up-a-system-using-sme2-emulation-with-docker) - use a container to emulate SME2 in bare metal mode (without an OS).
 
 ## Download and explore the code examples
 
@@ -66,7 +65,7 @@ Amongst other files, it includes:
 - A `docker` directory containing:
   - `assets.source_me` to provide toolchain paths.
   - `build-my-container.sh`, a script that automates building the Docker image from the `sme2-environment.docker` file. It runs the Docker build command with the correct arguments so you don’t have to remember them. 
-  - `sme2-environment.docker`, a Docker file that defines the steps to build the SME2 container image. It installs all the necessary dependencies, including the SME2-compatible compiler and Arm FVP emulator.
+  - `sme2-environment.docker`, a custom Docker file that defines the steps to build the SME2 container image. It installs all the necessary dependencies, including the SME2-compatible compiler and Arm FVP emulator.
   - `build-all-containers.sh`, a script to build multi-architecture images.
 - `.devcontainer/devcontainer.json` for VS Code container support.
 
@@ -234,7 +233,7 @@ If you are using Visual Studio Code as your IDE, the container setup is already 
 
 Make sure you have the [Microsoft Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed.
 
-Then select the **Reopen in Container** menu entry as Figure 1 shows.
+Then select the **Reopen in Container** menu entry as shown below.
 
 It automatically finds and uses ``.devcontainer/devcontainer.json``:
 
@@ -252,7 +251,7 @@ part.
 
 ### Devices with native SME2 support
 
-#### Apple devices (by product type)
+These Apple devices support SME2 natively.
 
 - iPad
 

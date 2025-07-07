@@ -6,13 +6,11 @@ weight: 4
 layout: learningpathall
 ---
 
-In this section, you will verify that your environment is set up and ready to
-develop with SME2. This will be your first hands-on experience with the
-environment.
+In this section, you'll verify that your environment is ready for SME2 development. This is your first hands-on task and confirms that the toolchain, hardware (or emulator), and compiler are set up correctly.
 
-## Compile the examples
+## Build the code examples
 
-First, build the code examples by running `make`:
+Use the `make` command to compile all examples and generate assembly listings:
 
 {{< tabpane code=true >}}
   {{< tab header="Native SME2 support" language="bash" output_lines="2-19">}}
@@ -66,6 +64,8 @@ The `make` command performs the following tasks:
 - It creates the assembly listings for the four executables: `hello.lst`,
   `sme2_check.lst`, `sme2_matmul_asm.lst`, and `sme2_matmul_intr.lst`.
 
+  These targets compile and link all example programs and generate disassembly listings for inspection.
+
 At any point, you can clean the directory of all the files that have been built
 by invoking `make clean`:
 
@@ -114,11 +114,19 @@ Run the `hello` program with:
   {{< /tab >}}
 {{< /tabpane >}}
 
-In the emulated case, you may see that the FVP prints out extra lines. The key confirmation is the presence of "Hello, world!" in the output. it demonstrates that the generic code can be compiled and executed.
+In the emulated case, you may see that the FVP prints out extra lines. The key confirmation is the presence of "Hello, world!" in the output. It demonstrates that the generic code can be compiled and executed.
 
 ## Check SME2 availability
 
 You will now run the `sme2_check` program, which verifies that SME2 works as expected. This checks both the compiler and the CPU (or the emulated CPU) are properly supporting SME2.
+
+The `sme2_check` program verifies that SME2 is available and working. It confirms:
+
+* The compiler supports SME2 (via __ARM_FEATURE_SME2)
+
+* The system or emulator reports SME2 capability
+
+* Streaming mode works as expected
 
 The source code is found in `sme2_check.c`:
 
@@ -191,10 +199,7 @@ The ``sme2_check`` program then displays whether SVE, SME and SME2 are supported
 at line 24. The checking of SVE, SME and SME2 is done differently depending on
 ``BAREMETAL``. This platform specific behaviour is abstracted by the
 ``display_cpu_features()``:
-- In baremetal mode, our program has access to system registers and can thus do
-  some low level peek at what the silicon actually supports. The program will
-  print the SVE field of the ``ID_AA64PFR0_EL1`` system register and the SME
-  field of the ``ID_AA64PFR1_EL1`` system register.
+- In baremetal mode, our program has access to system registers and can inspect system registers for SME2 support. The program will print the SVE field of the ``ID_AA64PFR0_EL1`` system register and the SME field of the ``ID_AA64PFR1_EL1`` system register.
 - In non baremetal mode, on an Apple platform the program needs to use a higher
   level API call.
 
@@ -212,6 +217,8 @@ returning from ``function_in_streaming_mode``). Function
 annotated with the ``__arm_locally_streaming`` attribute, which instructs the
 compiler to automatically switch to streaming mode when invoking this function.
 Streaming mode will be discussed in more depth in the next section.
+
+Look for the following confirmation messages in the output:
 
 {{< tabpane code=true >}}
   {{< tab header="Native SME2 support" language="bash" output_lines="2-9">}}
@@ -243,5 +250,4 @@ Streaming mode will be discussed in more depth in the next section.
   {{< /tab >}}
 {{< /tabpane >}}
 
-You have now checked that the code can be compiled and run with full SME2
-support. You are all set to move to the next section.
+You've now confirmed that your environment can compile and run SME2 code, and that SME2 features like streaming mode are working correctly. You're ready to continue to the next section and start working with SME2 in practice.
