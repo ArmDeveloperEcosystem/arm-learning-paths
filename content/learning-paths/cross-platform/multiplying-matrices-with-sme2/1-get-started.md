@@ -20,7 +20,7 @@ This section walks you through the required tools and the two supported executio
 
 To get started, begin by [downloading the code examples](https://gitlab.arm.com/learning-cde-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2).
 
-Now extract the archive, and change to the target directory:
+Now extract the archive, and change directory to:
 ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2.``
 
 ```BASH
@@ -59,16 +59,16 @@ code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2/
 └── sme2_check.c
 ```
 
-It includes:
+Amongst other files, it includes:
 - Code examples.
 - A `Makefile` to build the code.
 - `run-fvp.sh` to run the FVP model.
 - A `docker` directory containing:
   - `assets.source_me` to provide toolchain paths.
-  - `build-my-container.sh`, a script that automates building the Docker image from the `sme2-environment.docker` file. It runs the docker build command with the correct arguments so you don’t have to remember them. 
+  - `build-my-container.sh`, a script that automates building the Docker image from the `sme2-environment.docker` file. It runs the Docker build command with the correct arguments so you don’t have to remember them. 
   - `sme2-environment.docker`, a Docker file that defines the steps to build the SME2 container image. It installs all the necessary dependencies, including the SME2-compatible compiler and Arm FVP emulator.
   - `build-all-containers.sh`, a script to build multi-architecture images.
-  - `.devcontainer/devcontainer.json` for VS Code container support.
+- `.devcontainer/devcontainer.json` for VS Code container support.
 
 {{% notice Note %}}
 From this point, all instructions assume that your current directory is
@@ -108,9 +108,11 @@ You are now all set to start hacking with SME2.
 
 If your machine doesn't support SME2, or you want to emulate it, you can use the Docker-based environment that this Learning Path models.
 
-The Docker container includes a compiler and [Arm's Fixed Virtual Platform (FVP)
+The Docker container includes both a compiler and [Arm's Fixed Virtual Platform (FVP)
 model](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms)
-for emulating code with SME2 instructions. You can run the provided image or build it using the included Dockerfile.and follow the ``sme2-environment.docker`` Docker file instructions to install the tools on your machine.
+for emulating code that uses SME2 instructions. You can either run the prebuilt container image provided in this Learning Path or build it yourself using the Docker file that is included. 
+
+If building manually, follow the instructions in the ``sme2-environment.docker`` file to install the required tools on your machine.
 
 ### Install and verify Docker
 
@@ -118,14 +120,14 @@ for emulating code with SME2 instructions. You can run the provided image or bui
 Docker is optional, but if you don’t use it, you must manually install the compiler and FVP, and ensure they’re in your `PATH`.
 {{% /notice %}}
 
-To begin, start by checking that ``docker`` is installed on your machine:
+To begin, start by checking that Docker is installed on your machine:
 
 ```BASH { output_lines="2" }
 docker --version
 Docker version 27.3.1, build ce12230
 ```
 
-If the above command fails with a message similar to "``docker: command not found``", then follow the steps from the [Docker Install Guide](https://learn.arm.com/install-guides/docker/) to install it.
+If the above command fails with an error message similar to "``docker: command not found``", then follow the steps from the [Docker Install Guide](https://learn.arm.com/install-guides/docker/) to install Docker.
 
 {{% notice Note %}}
 You might need to log out and back in again or restart your machine for the changes to take
@@ -176,9 +178,9 @@ https://docs.docker.com/get-started/
 ```
 
 You can use Docker in the following ways:
-- [Directly from the command line](#run-commands-from-a-terminal-using-docker). For example, when you are working from a terminal on your local machine.
+- [Directly from the command line](#run-commands-from-a-terminal-using-docker) - for example, when you are working from a terminal on your local machine.
 
-- [Within a containerized environment](#use-an-interactive-docker-shell). Configure VS Code to execute all the commands inside a Docker container, allowing you to work seamlessly within the
+- [Within a containerized environment](#use-an-interactive-docker-shell) - by configuring VS Code to execute all the commands inside a Docker container, allowing you to work seamlessly within the
 Docker environment.
 
 ### Run commands from a terminal using Docker
@@ -209,13 +211,15 @@ docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-enviro
 
 ### Use an interactive Docker shell
 
-The above commands are long and error-prone, so you can instead choose to work interactively within the terminal, which would save you from prepending the ``docker run ...`` magic before each command you want to execute. To work in this mode, run Docker without any command (note the ``-it`` command line argument to the Docker invocation). Start an interactive session to avoid repeating the docker run prefix:
+The standard `docker run` commands can be long and repetitive. To streamline your workflow, you can start an interactive Docker session that allows you to run commands directly - without having to prepend docker run each time.
+
+To launch an interactive shell inside the container, use the `-it` flag:
 
 ```BASH
 docker run --rm -it -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v2
 ```
 
-You are now in the Docker container; you can execute all commands directly. For
+You are now in the Docker container, and you can execute all commands directly. For
 example, the ``make`` command can now be simply invoked with:
 
 ```BASH
