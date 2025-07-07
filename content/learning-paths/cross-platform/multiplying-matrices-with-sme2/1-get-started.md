@@ -71,7 +71,7 @@ Amongst other files, it includes:
 
 {{% notice Note %}}
 From this point, all instructions assume that your current directory is
-``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2``. So to follow along, ensure that you are in the correct directory before proceeding.
+``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2``, so ensure that you are in the correct directory before proceeding.
 {{% /notice %}}
 
 ## Set up a system with native SME2 support

@@ -6,7 +6,11 @@ weight: 7
 layout: learningpathall
 ---
 
+## Overview
+
 In this section, you'll learn how to improve matrix multiplication performance using the SME engine and outer product operations.
+
+This approach increases the number of multiply-accumulate (MACC) operations per memory load, reducing bandwidth pressure and improving overall throughput.
 
 ## Increase MACC efficiency using outer products
 
@@ -16,14 +20,12 @@ In the vanilla implementation, the core multiply-accumulate step looks like this
                 acc += matLeft[m * K + k] * matRight[k * N + n];
 ```
 
-This translates to one multiply-accumulate operation, known as `macc`, for two
-loads (`matLeft[m * K + k]` and `matRight[k * N + n]`). It therefore has a 1:2
-`macc` to `load` ratio of multiply-accumulate operations (MACCs) to memory loads - one multiply-accumulate and two loads per iteration. This ratio limits efficiency, especially in triple-nested loops where memory bandwidth becomes a bottleneck.
+This translates to one multiply-accumulate operation, known as `macc`, for two loads (`matLeft[m * K + k]` and `matRight[k * N + n]`). It therefore has a 1:2 `macc` to `load` ratio of multiply-accumulate operations (MACCs) to memory loads - one multiply-accumulate and two loads per iteration, which is inefficient. This becomes more pronounced in triple-nested loops and when matrices exceed cache capacity. 
 
-To make matters worse, large matrices might not fit in cache. To improve matrix multiplication efficiency, the goal is to increase the `macc` to `load` ratio, which means increasing the number of multiply-accumulate operations per load - you can express matrix multiplication as a sum of column-by-row outer products.
+To improve performance, you want to increase the `macc` to `load` ratio, which means increasing the number of multiply-accumulate operations per load - you can express matrix multiplication as a sum of column-by-row outer products.
 
-Figure 3 below illustrates how the matrix multiplication of `matLeft` (3 rows, 2
-columns) by `matRight` (2 rows, 3 columns) can be decomposed as the sum of outer
+The diagram below illustrates how the matrix multiplication of `matLeft` (3 rows, 2
+columns) by `matRight` (2 rows, 3 columns) can be decomposed into a sum of column-by-row outer
 products:
 
 ![example image alt-text#center](outer_product.png "Figure 3: Outer product-based matrix multiplication.")
@@ -45,17 +47,16 @@ row-major order to column-major order.
 This transformation affects only the memory layout. From a mathematical perspective, `matLeft` is not transposed. It is reorganized for better data locality.
 {{% /notice %}}
 
-### Transposition in the real world
+### Transposition in practice
 
-Just as trees don't reach the sky, the SME engine has physical implementation limits. It operates on *tiles*  - 2D blocks of data stored in the ZA storage. SME has dedicated instructions to load, store, and compute on these tiles efficiently.
-For example, the
-[fmopa](https://developer.arm.com/documentation/ddi0602/latest/SME-Instructions/FMOPA--non-widening---Floating-point-outer-product-and-accumulate-?lang=en)
-instruction takes two vectors as inputs and accumulates all the outer products
-into a 2D tile. The tile in ZA storage allows SME to increase the `macc` to
-`load` ratio by loading all the tile elements to be used with the SME outer
+The SME engine operates on tiles - 2D blocks of data stored in the ZA storage. SME provides dedicated instructions to load, store, and compute on tiles efficiently.
+
+For example, the [FMOPA](https://developer.arm.com/documentation/ddi0602/latest/SME-Instructions/FMOPA--non-widening---Floating-point-outer-product-and-accumulate-?lang=en) instruction takes two vectors as input and accumulates their outer product into a tile. The tile in ZA storage allows SME to increase the `macc` to`load` ratio by loading all the tile elements to be used with the SME outer
 product instructions.
 
-But since ZA storage is finite, you need to you need to preprocess `matLeft` to fit tile dimensions - this includes transposing portions of the matrix and padding where needed.
+But since ZA storage is finite, you need to you need to preprocess `matLeft` to match the tile dimensions - this includes transposing portions of the matrix and padding where needed.
+
+### Preprocessing with preprocess_l
 
 The following function shows how `preprocess_l` transforms the matrix at the algorithmic level:
 

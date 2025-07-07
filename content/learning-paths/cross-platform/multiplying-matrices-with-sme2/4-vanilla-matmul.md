@@ -47,7 +47,7 @@ The following variable names are used throughout the Learning Path to represent 
 
 ## C implementation
 
-The file matmul_vanilla.c contains a reference implementation of the algorithm:
+Here is the full reference implementation from `matmul_vanilla.c`:
 
 ```C { line_numbers="true" }
 void matmul(uint64_t M, uint64_t K, uint64_t N,
@@ -69,8 +69,8 @@ void matmul(uint64_t M, uint64_t K, uint64_t N,
 
 ## Memory layout and pointer annotations
 
-In this Learning Path, the matrices are laid out in memory as contiguous sequences of elements, in [Row-Major Order](https://en.wikipedia.org/wiki/Row-_and_column-major_order). The `matmul` function performs the algorithm described above.
+In this Learning Path, the matrices are laid out in memory as contiguous sequences of elements, in [row-major order](https://en.wikipedia.org/wiki/Row-_and_column-major_order). The `matmul` function performs the algorithm described above.
 
 The pointers to `matLeft`, `matRight` and `matResult` have been annotated as `restrict`, which informs the compiler that the memory areas designated by those pointers do not alias. This means that they do not overlap in any way, so that the compiler does not need to insert extra instructions to deal with these cases. The pointers to `matLeft` and `matRight` are marked as `const` as neither of these two matrices are modified by `matmul`.
 
-You now have a working baseline for the matrix multiplication function. You'll use it later on in this Learning Path to ensure that the assembly version and the intrinsics version of the multiplication algorithm do not contain errors.
+This function gives you a working baseline for matrix multiplication. You'll use it later in the Learning Path to verify the correctness of optimized implementations using SME2 intrinsics and assembly.
