@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 # Using Edge Impulse to Train TinyML Models
 
-Now that the foundational concepts of TinyML and Edge AI are clear, it's time to move from theory to practice. One of the most accessible and easy to use platforms for training TinyML models is **Edge Impulse**. It provides an intuitive, end-to-end pipeline for collecting data, designing features, training models, and deploying them to edge devices. In this section, we will explore how Edge Impulse is used to train models specifically for ultra-low-power microcontrollers, bridging the gap between machine learning and real-world embedded applications.
+Now that the foundational concepts of TinyML and Edge AI are clear, it's time to move from theory to practice. **Edge Impulse** is an easy to use platform for training TinyML models. It provides an end-to-end pipeline for collecting data, designing features, training models, and deploying them to edge devices. In this section, you will explore how Edge Impulse is used to train models specifically for ultra-low-power microcontrollers, bridging the gap between machine learning and real-world embedded applications.
 
 ## What is Edge Impulse?
 
@@ -47,7 +47,7 @@ Once you’ve created your account and logged in, the first step is to **create 
 
 ### Step 2: Configure the Target Device
 
-After creating your project, the next step is to **configure the target device**. Since we are using the **Arduino Nano RP2040 Connect**, click the highlighted button to begin device configuration, as shown in the snapshot below. This ensures that the data collection, model training, and deployment steps are optimized for your specific hardware.
+After creating your project, the next step is to **configure the target device**. Since you are using the **Arduino Nano RP2040 Connect**, click the highlighted button to begin device configuration, as shown in the snapshot below. This ensures that the data collection, model training, and deployment steps are optimized for your specific hardware.
 
 The specifications of the Arduino Nano RP2040 Connect board can be found on [Arduino’s official page](https://store.arduino.cc/products/arduino-nano-rp2040-connect).
 
@@ -59,7 +59,13 @@ Follow the exact settings in the attached snapshot to complete the configuration
 
 With your device configured, the next step is to **add your dataset** to the project. Click on the **"Add existing data"** button and follow the configuration settings shown in the attached snapshot. This allows you to upload pre-recorded data instead of collecting it live, which can save time during the development phase.
 
-The dataset for this project can be downloaded from the following link: [Download Dataset](https://github.com/e-dudzi/Learning-Path.git). The Dataset has already been split into **training** and **testing**.
+An **example repository** has been set up with some assets to be used throughout this Learning Path. You can clone it with the following command:
+
+```bash
+git clone https://github.com/e-dudzi/Learning-Path.git
+```
+
+The repository contains a `Dataset.zip` file containing the dataset used in the project. Extract it on your local machine. For convenience, the dataset has already been split into **training** and **testing**.
 
 ![example image alt-text#center](images/6.png "Figure 4. Add Existing Data")
 
@@ -141,7 +147,7 @@ Review these metrics to determine if the model is learning effectively. If neede
 
 ![example image alt-text#center](images/15.png "Figure 12. Model Performance")
 
-You can also [download](https://github.com/e-dudzi/Learning-Path.git) a pre-trained model and continue from here.
+You can also use the pre-trained model in the `ei-edge-ai-tutorials-arduino-1.0.1.zip` archive, from the example repository.
 
 ### Final Step: Deploying the Model
 
@@ -150,13 +156,13 @@ To use the trained model on your Arduino Nano RP2040, follow the steps below to 
 1. Click on the **Deployment** tab from the menu.
 2. In the **search bar**, type **"Arduino"** to filter the export options.
 3. Select **Arduino library** from the list.
-4. The export process will start automatically, and the model will be downloaded as a `.zip` file.
+4. If the export process does not start automatically, click **Build**. The model will be downloaded as a `.zip` file.
 
 ![example image alt-text#center](images/16.png "Figure 13. Model Deployment")
 
 ## Next Steps
 
-In the following steps, you will move from model training to real-world deployment. Specifically, we will:
+In the following steps, you will move from model training to real-world deployment. Specifically, you will:
 
 - Connect an **LED** to the **Arduino Nano RP2040** board.
 - Set up the **Arduino IDE** for development.
