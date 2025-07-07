@@ -147,7 +147,7 @@ Review these metrics to determine if the model is learning effectively. If neede
 
 ![example image alt-text#center](images/15.png "Figure 12. Model Performance")
 
-You can also use the pre-trained model from the example repository.
+You can also use the pre-trained model in the `ei-edge-ai-tutorials-arduino-1.0.1.zip` archive, from the example repository.
 
 ### Final Step: Deploying the Model
 

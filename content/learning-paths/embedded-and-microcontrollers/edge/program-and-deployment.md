@@ -33,7 +33,7 @@ The libray should be of the form `Name_of_your_library_inferencing.h`
 
 # Code walk-through
 
-In the example repository, you will find a code snippet which is used as a sketch for the project. Before running the code, it’s important to understand what each part does.
+In the example repository, you will find a code snippet `Code_Sample.ino`, which is used as a sketch for the project. Before running the code, it’s important to understand what each part does.
 
 Take a few minutes to read through the comments and logic in the sketch before uploading it to your board. The code is available in the example repository, and below is a walk-through of the steps.
 
