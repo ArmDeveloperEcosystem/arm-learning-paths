@@ -24,10 +24,6 @@ terms_and_conditions: demo-terms-and-conditions.txt
 
 prismjs: true  # enable prismjs rendering of code snippets
 
-example_user_prompts:
-  - Prompt 1?
-  - Prompt 2?
-
 
 rag_data_cutoff_date: 2025/01/17
 
