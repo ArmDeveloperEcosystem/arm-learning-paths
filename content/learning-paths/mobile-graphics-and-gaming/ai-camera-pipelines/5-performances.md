@@ -16,11 +16,11 @@ The application you built earlier includes a *benchmark mode* that runs the core
 These benchmarks demonstrate the performance improvements enabled by KleidiCV and KleidiAI:
 - KleidiCV enhances OpenCV performance with computation kernels optimized for Arm processors.
 
-- KleidiAI accelerates TFLite + XNNPack inference using AI-optimized micro-kernels tailored for Arm CPUs.
+- KleidiAI accelerates LiteRT + XNNPack inference using AI-optimized micro-kernels tailored for Arm CPUs.
 
 ## Performances with KleidiCV and KleidiAI
 
-By default, the OpenCV library is built with KleidiCV support, and TFLite+xnnpack is built with KleidiAI support. 
+By default, the OpenCV library is built with KleidiCV support, and LiteRT+xnnpack is built with KleidiAI support. 
 
 You can run the benchmarks using the applications you built earlier.
 

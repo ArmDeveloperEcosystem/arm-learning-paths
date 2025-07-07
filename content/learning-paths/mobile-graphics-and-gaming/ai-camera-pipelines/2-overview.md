@@ -46,7 +46,7 @@ The low-light enhancement pipeline is adapted from the LiveHDR+ method originall
 
 ![example image alt-text#center](lle_pipeline.png "Low-Light Enhancement Pipeline Diagram")
 
-The Low-Resolution Coefficient Prediction Network (implemented with TFLite) performs computations such as:
+The Low-Resolution Coefficient Prediction Network (implemented with LiteRT) performs computations such as:
 - Strided convolutions.
 - Local feature extraction using convolutional layers.
 - Global feature extraction using convolutional and fully connected layers.
