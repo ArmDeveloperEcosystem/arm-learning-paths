@@ -3,13 +3,13 @@ title: Run a Phi-4-mini chatbot powered by ONNX Runtime
 weight: 2
 
 overview: | 
-  This Learning Path shows you how to use a 32-core Azure Dpls_v6 instance powered by an Arm Neoverse-N2 CPU to build a simple chatbot server that you can then use to provide a chatbot to serve a small number of concurrent users.
+  This Learning Path shows you how to use a 32-core Azure Dpls_v6 instance powered by an Arm Neoverse N2 CPU to build a simple chatbot that you can use to serve a small number of concurrent users.
 
-  This architecture is suitable for businesses looking to deploy the latest Generative AI technologies with RAG capabilities using their existing CPU compute capacity and deployment pipelines. 
+  This architecture is suitable for deploying the latest Generative AI technologies with RAG capabilities using their existing CPU compute capacity and deployment pipelines. 
   
-  The demo uses the ONNX runtime, which Arm has enhanced with its own Kleidi technologies. Further optimizations are achieved by using the smaller Phi-4-mini model, which has been optimized at INT4 quantization to minimize memory usage. 
+  The demo uses the ONNX runtime, which Arm has integrated with KleidiAI. Further optimizations are achieved by using the smaller Phi-4-mini model, which has been optimized at INT4 quantization to minimize memory usage. 
 
-  Chat with the chatbot LLM below to see the performance for yourself, and then follow the Learning Path to build your own Generative AI service on Arm Neoverse.
+  Chat with the LLM below to see the performance for yourself, and then follow the Learning Path to build your own Generative AI service on Arm Neoverse.
 
 
 demo_steps:
