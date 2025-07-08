@@ -1,29 +1,25 @@
 ---
 title: Accelerate Matrix Multiplication Performance with SME2
 
-draft: true
-cascade:
-    draft: true
+minutes_to_complete: 60
 
-minutes_to_complete: 30
-
-who_is_this_for: This Learning Path is an advanced topic for developers who want to learn about accelerating the performance of matrix multiplication using Arm's Scalable Matrix Extension Version 2 (SME2).
+who_is_this_for: This Learning Path is an advanced topic for developers who want to accelerate the performance of matrix multiplication using Arm's Scalable Matrix Extension Version 2 (SME2).
 
 learning_objectives:
-    - Implement a reference matrix multiplication without using SME2.
-    - Use SME2 assembly instructions to improve the matrix multiplication performance.
-    - Use SME2 intrinsics to improve the matrix multiplication performance using the C programming language.
-    - Compile code with SME2 instructions.
-    - Run code with SME2 instructions, on a platform with SME2 support or with an emulator.
+    - Implement a baseline matrix multiplication kernel in C without SME2
+    - Use SME2 assembly instructions to accelerate matrix multiplication performance
+    - Use SME2 intrinsics to vectorize and optimize matrix multiplication
+    - Compile code with SME2 intrinsics and assembly
+    - Benchmark and validate SME2-accelerated matrix multiplication on Arm hardware or in a Linux-based emulation environment
+    - Compare performance metrics between baseline and SME2-optimized implementations
 
 prerequisites:
-    - Basic knowledge of Arm's Scalable Matrix Extension (SME).
-    - Basic knowledge of Arm's Scalable Vector Extension (SVE).
-    - An intermediate understanding of C programming language and assembly language.
-    - A computer running Linux, macOS, or Windows.
-    - Installations of Git and Docker.
-    - A platform that support SME2 (see the [list of devices with SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices-with-sme2-support)) or an emulator to run code with SME2 instructions.
-    - A compiler with support for SME2 instructions.
+    - Working knowledge of Arm’s SVE and SME instruction sets
+    - Intermediate proficiency with the C programming language and the Armv9-A assembly language
+    - A computer running Linux, macOS, or Windows
+    - Installations of Git and Docker for project setup and emulation
+    - A platform that supports SME2 (see the list of [devices with SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices-with-sme2-support)) or an emulator to run code with SME2 instructions
+    - Compiler support for SME2 instructions (for example, LLVM 17+ with SME2 backend support)
 
 author: Arnaud de Grandmaison
 
@@ -37,6 +33,7 @@ tools_software_languages:
     - C
     - Clang
     - Runbook
+    - LLVM
 
 operatingsystems:
     - Linux

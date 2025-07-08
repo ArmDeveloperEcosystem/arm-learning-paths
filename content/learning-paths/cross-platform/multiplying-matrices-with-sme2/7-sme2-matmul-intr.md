@@ -1,30 +1,22 @@
 ---
-title: SME2 intrinsics matrix multiplication
+title: Matrix multiplication using SME2 intrinsics in C
 weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-In this section, you will write an SME2 optimized matrix multiplication in C
-using the intrinsics that the compiler provides.
+In this section, you will write an SME2-optimized matrix multiplication routine in C using the intrinsics that the compiler provides.
 
-## Matrix multiplication with SME2 intrinsics
+## What are instrinsics?
 
-*Intrinsics*, also know known as *compiler intrinsics* or *intrinsic functions*,
-are the functions available to application developers that the compiler has an
-intimate knowledge of. This enables the compiler to either translate the
-function to a specific instruction or to perform specific optimizations, or
-both.
+*Intrinsics*, also known as *compiler intrinsics* or *intrinsic functions*, are the functions available to application developers that the compiler has intimate knowledge of. This enables the compiler to either translate the function to a specific instruction or to perform specific optimizations, or both.
 
 You can learn more about intrinsics in this [Wikipedia
 Article on Intrinsic Function](https://en.wikipedia.org/wiki/Intrinsic_function).
 
 Using intrinsics allows the programmer to use the specific instructions required
-to achieve the required performance while writing in C all the
-typically-required standard code, such as loops. This produces performance close
-to what can be reached with hand-written assembly whilst being significantly
-more maintainable and portable.
+to achieve the required performance while writing in C all the typically-required standard code, such as loops. This produces performance close to what can be reached with hand-written assembly whilst being significantly more maintainable and portable.
 
 All Arm-specific intrinsics are specified in the
 [ACLE](https://github.com/ARM-software/acle), which is the Arm C Language Extension. ACLE
@@ -51,10 +43,7 @@ Note the `__arm_new("za")` and `__arm_locally_streaming` at line 1 that will
 make the compiler save the ZA storage so we can use it without destroying its
 content if it was still in use by one of the callers.
 
-`SVL`, the dimension of the ZA storage, is requested from the underlying
-hardware with the `svcntsw()` function call at line 5, and passed down to the
-`preprocess_l_intr` and `matmul_intr_impl` functions. `svcntsw()` is a
-function provided be the ACLE library.
+`SVL`, the dimension of the ZA storage, is requested from the underlying hardware with the `svcntsw()` function call at line 5, and passed down to the `preprocess_l_intr` and `matmul_intr_impl` functions. `svcntsw()` is a function provided by the ACLE library.
 
 ### Matrix preprocessing
 

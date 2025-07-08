@@ -6,36 +6,28 @@ weight: 10
 layout: learningpathall
 ---
 
-In this section, if your machine supports native execution of SME2 instructions,
-you will perform benchmarking of the matrix multiplication improvement thanks to
-SME2.
+In this section, you'll benchmark matrix multiplication performance using SME2, if your machine supports native execution of SME2 instructions.
 
 ## About benchmarking and emulation
 
 Emulation is generally not the best way to assess the performance of a piece of
-code. Emulation focuses on correctly simulating instructions and leaves out many
-details necessary for precise execution time measurement. For example, as
-explained in the section on the outer product, the goal was to increase the
-`macc` to `load` ratio. Emulators, including the FVP, do not model in detail the
-cache effects or the timing effects of the memory accesses. At best, an emulator
-can provide an instruction count for the vanilla reference implementation versus
-the assembly-/intrinsic-based versions of the matrix multiplication, but this is
-known to be a poor proxy for execution time comparisons.
+code. Emulation focuses on correctly simulating instructions and not accurate execution timing. For example, as explained in the  [outer product section](../5-outer-product/), improving performance involves increasing the `macc`-to-`load` ratio. 
 
-## Benchmarking on platform with native SME2 support
+Emulators, including the FVP, do not model in detail memory bandwidth, cache behavior, or latency. At best, an emulator provides an instruction count for the vanilla reference implementation versus the assembly-/intrinsic-based versions of the matrix multiplication, which is useful for functional validation but not for precise benchmarking.
+
+## Benchmarking on a platform with native SME2 support
 
 {{% notice Note %}}
-Benchmarking and profiling are not simple tasks. The purpose of this learning path
-is to provide some basic guidelines on the performance improvement that can be
-obtained with SME2.
+Benchmarking and profiling are complex tasks. This Learning Path provides a *simplified* framework for observing SME2-related performance improvements.
 {{% /notice %}}
 
-If your machine natively supports SME2, then benchmarking becomes possible. When
+If your machine natively supports SME2, then benchmarking is possible. When
 `sme2_matmul_asm` and `sme2_matmul_intr` were compiled with `BAREMETAL=0`, the
-*benchmarking mode* becomes available.
+*benchmarking mode* is available.
 
-*Benchmarking mode* is enabled by prepending the `M`, `K`, `N` optional
-parameters with an iteration count (`I`).
+*Benchmarking mode* is enabled by prepending the `M`, `K`, `N` optional parameters with an iteration count (`I`).
+
+## Run the intrinsic version
 
 Now measure the execution time of `sme2_matmul_intr` for 1000 multiplications of
 matrices with the default sizes:
@@ -47,11 +39,7 @@ Reference implementation: min time = 101 us, max time = 438 us, avg time = 139.4
 SME2 implementation *intr*: min time = 1 us, max time = 8 us, avg time = 1.82 us
 ```
 
-The execution time is reported in microseconds. A wide spread between the
-minimum and maximum figures can be noted and is expected as the way of doing the
-benchmarking is simplified for the purpose of simplicity. You will, however,
-note that the intrinsic version of the matrix multiplication brings on average a
-76x execution time reduction.
+The execution time is reported in microseconds. A wide spread between the minimum and maximum figures can be noted and is expected as the way of doing the benchmarking is simplified for the purpose of simplicity. You will, however, note that the intrinsic version of the matrix multiplication brings on average a 76x execution time reduction.
 
 {{% notice Tip %}}
 You can override the default values for `M` (125), `K` (25), and `N` (70) and
@@ -86,7 +74,7 @@ here is far from being an apples-to-apples comparison:
 - Firstly, the assembly version has some requirements on the `K` parameter that
   the intrinsic version does not have.
 - Second, the assembly version has an optimization that the intrinsic version,
-  for the sake of readability in this learning path, does not have (see the
+  for the sake of readability in this Learning Path, does not have (see the
   [Going further
   section](/learning-paths/cross-platform/multiplying-matrices-with-sme2/10-going-further/)
   to know more).
