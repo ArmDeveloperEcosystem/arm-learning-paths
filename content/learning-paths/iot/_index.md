@@ -13,10 +13,10 @@ subjects_filter:
 - Containers and Virtualization: 2
 - Embedded Linux: 2
 - ML: 2
-- Performance and Architecture: 2
+- Performance and Architecture: 3
 operatingsystems_filter:
 - Baremetal: 4
-- Linux: 8
+- Linux: 9
 - macOS: 2
 - RTOS: 2
 - Windows: 2
@@ -28,6 +28,7 @@ tools_software_languages_filter:
 - Azure: 1
 - Balena Cloud: 1
 - Balena OS: 1
+- C: 1
 - Coding: 3
 - Docker: 2
 - Fixed Virtual Platform: 1
@@ -35,7 +36,8 @@ tools_software_languages_filter:
 - Matter: 1
 - MCP: 1
 - Python: 2
-- Raspberry Pi: 3
+- Raspberry Pi: 4
 - Remote.It: 1
+- ROS2: 1
 - VS Code: 1
 ---

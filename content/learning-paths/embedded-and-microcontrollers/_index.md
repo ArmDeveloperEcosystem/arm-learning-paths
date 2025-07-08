@@ -11,8 +11,8 @@ maintopic: true
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 30
-- Linux: 28
-- macOS: 6
+- Linux: 29
+- macOS: 7
 - RTOS: 9
 - Windows: 4
 subjects_filter:
@@ -20,7 +20,7 @@ subjects_filter:
 - Containers and Virtualization: 6
 - Embedded Linux: 4
 - Libraries: 3
-- ML: 14
+- ML: 15
 - Performance and Architecture: 21
 - RTOS Fundamentals: 4
 - Security: 2
@@ -32,10 +32,10 @@ tools_software_languages_filter:
 - Arduino: 2
 - Arm Compiler for Embedded: 7
 - Arm Compiler for Linux: 1
-- Arm Compute Library: 1
+- Arm Compute Library: 2
 - Arm Development Studio: 8
 - Arm Fast Models: 4
-- Arm Virtual Hardware: 10
+- Arm Virtual Hardware: 11
 - Assembly: 1
 - AVH: 1
 - C: 3
@@ -53,12 +53,12 @@ tools_software_languages_filter:
 - DSTREAM: 2
 - Edge AI: 1
 - Edge Impulse: 1
-- ExecuTorch: 2
-- Fixed Virtual Platform: 9
+- ExecuTorch: 3
+- Fixed Virtual Platform: 10
 - FPGA: 1
 - Fusion 360: 1
 - FVP: 1
-- GCC: 8
+- GCC: 9
 - GenAI: 2
 - GitHub: 3
 - GitLab: 1
@@ -79,8 +79,8 @@ tools_software_languages_filter:
 - NumPy: 1
 - Paddle: 1
 - Porcupine: 1
-- Python: 6
-- PyTorch: 2
+- Python: 7
+- PyTorch: 3
 - QEMU: 1
 - Raspberry Pi: 6
 - Remote.It: 1

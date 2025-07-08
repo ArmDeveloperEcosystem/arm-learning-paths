@@ -7,7 +7,7 @@ who_is_this_for: This is an advanced topic for developers, ML engineers, and clo
 
 learning_objectives:
     - Quantize and run the Phi-4-mini model with ONNX Runtime on Azure.
-    - Analyze performance on Arm Neoverse-N2 based Azure Cobalt 100 VMs.
+    - Analyze performance on Arm Neoverse N2 based Azure Cobalt 100 VMs.
 
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate cloud service provider. This Learning Path has been tested on an Azure Cobalt 100 virtual machine.

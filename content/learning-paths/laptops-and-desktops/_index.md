@@ -53,7 +53,7 @@ tools_software_languages_filter:
 - Kubernetes: 1
 - Linux: 1
 - LLM: 1
-- LLVM: 1
+- LLVM: 2
 - llvm-mca: 1
 - MSBuild: 1
 - MTE: 1

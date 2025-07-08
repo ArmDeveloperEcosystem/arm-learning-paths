@@ -1,6 +1,6 @@
 ---
 title: Interact with the Phi-4-mini Chatbot
-weight: 4
+weight: 5
 
 layout: learningpathall
 ---
