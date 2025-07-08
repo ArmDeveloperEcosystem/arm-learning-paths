@@ -11,9 +11,9 @@ layout: learningpathall
 To build or run SME2-accelerated code, first set up your development environment.
 This section walks you through the required tools and two supported setup options:
 
-* [**Native SME2 hardware**](#set-up-a-system-with-native-SME2-support) - build and run directly on a system with SME2 support. For supported devices, see [Devices with SME2 support](#devices-with-sme2-support). 
+* [**Native SME2 hardware**](#native-sme2) - build and run directly on a system with SME2 support. For supported devices, see [Devices with native SME2 support](#devices). 
 
-* [**Docker-based emulation**](#set-up-a-system-using-sme2-emulation-with-docker) - use a container to emulate SME2 in bare metal mode (without an OS).
+* [**Docker-based emulation**](#docker-sme2) - use a container to emulate SME2 in bare metal mode (without an OS).
 
 ## Download and explore the code examples
 
@@ -74,7 +74,7 @@ From this point, all instructions assume that your current directory is
 ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2``, so ensure that you are in the correct directory before proceeding.
 {{% /notice %}}
 
-## Set up a system with native SME2 support
+## Set up a system with native SME2 support {#native-sme2}
 
 To run SME2 code natively, ensure your system includes SME2 hardware and uses a compiler version that supports SME2.
 
@@ -103,9 +103,9 @@ Install Clang using the instructions below, selecting either macOS or Linux/Ubun
 
 You are now all set to start hacking with SME2.
 
-## Set up a system using SME2 emulation with Docker
+## Set up a system using SME2 emulation with Docker {#docker-sme2}
 
-If your machine doesn't support SME2, or you want to emulate it, you can use the Docker-based environment that this Learning Path models.
+If your machine doesn't support SME2, or you want to emulate it, you can use the Docker-based environment.
 
 The Docker container includes both a compiler and [Arm's Fixed Virtual Platform (FVP)
 model](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms)
@@ -126,7 +126,7 @@ docker --version
 Docker version 27.3.1, build ce12230
 ```
 
-If the above command fails with an error message similar to "``docker: command not found``", then follow the steps from the [Docker Install Guide](https://learn.arm.com/install-guides/docker/) to install Docker.
+If the above command fails with an error message similar to "``docker: command not found``", then follow the steps from the [Docker install guide](/install-guides/docker/) to install Docker.
 
 {{% notice Note %}}
 You might need to log out and back in again or restart your machine for the changes to take
@@ -140,40 +140,30 @@ that it is working with the following:
 docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
-478afc919002: Pull complete
-Digest: sha256:305243c734571da2d100c8c8b3c3167a098cab6049c9a5b066b6021a60fcb966
+c9c5fd25a1bd: Pull complete 
+Digest: sha256:940c619fbd418f9b2b1b63e25d8861f9cc1b46e3fc8b018ccfe8b78f19b8cc4f
 Status: Downloaded newer image for hello-world:latest
 
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 
-To generate this message, Docker followed these steps:
-
-1. The Docker client contacted the Docker daemon.
-
-2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
-
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
     (arm64v8)
-
-3. The Docker daemon created a new container from that image which runs the
-
+ 3. The Docker daemon created a new container from that image which runs the
     executable that produces the output you are currently reading.
-
-4. The Docker daemon streamed that output to the Docker client, which sent it
-
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
     to your terminal.
 
 To try something more ambitious, you can run an Ubuntu container with:
-
-$ docker run -it ubuntu bash
+ $ docker run -it ubuntu bash
 
 Share images, automate workflows, and more with a free Docker ID:
-
-https://hub.docker.com/
+ https://hub.docker.com/
 
 For more examples and ideas, visit:
-
-https://docs.docker.com/get-started/
+ https://docs.docker.com/get-started/
 ```
 
 You can use Docker in the following ways:
@@ -249,7 +239,7 @@ However, if you are using VS Code, you only need to use the `COMMAND ARGUMENTS`
 part.
 {{% /notice %}}
 
-### Devices with native SME2 support
+### Devices with native SME2 support {#devices}
 
 These Apple devices support SME2 natively.
 
