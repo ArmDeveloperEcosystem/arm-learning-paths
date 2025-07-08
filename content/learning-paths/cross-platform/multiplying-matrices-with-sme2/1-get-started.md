@@ -96,7 +96,7 @@ Install Clang using the instructions below, selecting either macOS or Linux/Ubun
   {{< /tab >}}
 
   {{< tab header="macOS" language="bash">}}
-  brew install clang
+  brew install llvm
   {{< /tab >}}
 
 {{< /tabpane >}}
