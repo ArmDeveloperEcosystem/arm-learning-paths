@@ -72,6 +72,6 @@ An even more *degenerated* case that is easy to manage is when one of the matric
 Although the current code used here handles it correctly from a results point of view, a different algorithm and use of instructions might be more efficient. Can you think of another way?
 
 
-In order to check your understanding of SME2, you can try to implement thisunrolling yourself in the intrinsic version (the asm version already has this optimization). You can check your work by comparing your results to the expected reference values. 
+In order to check your understanding of SME2, you can try to implement this unrolling yourself in the intrinsic version (the asm version already has this optimization). You can check your work by comparing your results to the expected reference values. 
 
 
