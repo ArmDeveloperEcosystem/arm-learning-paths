@@ -51,6 +51,7 @@ tools_software_languages_filter:
 - Kotlin: 7
 - LiteRT: 1
 - LLM: 1
+- LLVM: 1
 - llvm-mca: 1
 - MediaPipe: 2
 - Memory Bug Report: 1

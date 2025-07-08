@@ -14,7 +14,7 @@ In this session, you’ll use Raspberry Pi boards to simulate a scalable, distri
 
 You’ll learn how to use Docker to deploy the environment on physical devices, and how to duplicate virtual instances using snapshot cloning on Arm Virtual Hardware.
 
-This setup lets you simulate `real-world`, `cross-node communication`, making it ideal for validating Zenoh’s performance in robotics and industrial IoT use cases.
+This setup lets you simulate `real-world`, `cross-node communication`, making it ideal for validating Zenoh's performance in robotics and industrial IoT use cases.
 
 ### Install Docker on Raspberry Pi
 

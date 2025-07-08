@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Example 1: Simple Pub/Sub
 
-This first test demonstrates Zenoh’s real-time publish/subscribe model using two Raspberry Pi devices.
+This first test demonstrates  real-time publish/subscribe model using two Raspberry Pi devices.
 
 The following command is to initiate a subscriber for a key expression `demo/example/**`, i.e. a set of topics starting with the path `demo/example`.
 
@@ -36,4 +36,4 @@ The result will look like:
 In the left-side window, I have logged into the device Pi4 and run the z_sub program. 
 It receives values with the key `demo/example/zenoh-rs-pub` continuously published by z_pub running on Pi in the right-side window.
 
-This basic example shows Zenoh’s zero-config discovery and low-latency pub/sub across physical nodes.
+This basic example shows Zenoh's zero-config discovery and low-latency pub/sub across physical nodes.

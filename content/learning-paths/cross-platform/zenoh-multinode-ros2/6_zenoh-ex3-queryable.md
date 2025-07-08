@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Example 3: Computation on Query using Queryable
 
-Next, you’ll explore Zenoh’s queryable capability, which lets a node dynamically respond to data queries by executing a custom computation or data generation function in this example.
+Next, you’ll explore Zenoh's queryable capability, which lets a node dynamically respond to data queries by executing a custom computation or data generation function in this example.
 
 Unlike zenohd which simply returns stored data, a queryable node can register to handle a specific key expression and generate responses at runtime. This is ideal for distributed computing at the edge, where lightweight devices—such as Raspberry Pi nodes—can respond to requests with calculated values (e.g., sensor fusion, AI inference results, or diagnostics).
 
@@ -16,7 +16,7 @@ Unlike zenohd which simply returns stored data, a queryable node can register to
 
 Imagine a robot fleet management system where the central planner queries each robot for its latest battery health score, which is not published continuously but calculated only when queried.
 
-This saves bandwidth and enables edge compute optimization using Zenoh’s Queryable.
+This saves bandwidth and enables edge compute optimization using Zenoh's Queryable.
 
 ### Step 1: Launch a Queryable Node
 
