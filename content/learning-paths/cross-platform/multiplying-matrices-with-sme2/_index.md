@@ -14,7 +14,7 @@ learning_objectives:
     - Compare performance metrics between baseline and SME2-optimized implementations
 
 prerequisites:
-    - Working knowledge of Arm’s SVE and SME instruction sets
+    - Working knowledge of Arm’s SVE and SME2 instruction sets
     - Intermediate proficiency with the C programming language and the Armv9-A assembly language
     - A computer running Linux, macOS, or Windows
     - Installations of Git and Docker for project setup and emulation
