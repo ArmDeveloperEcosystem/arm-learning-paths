@@ -18,7 +18,7 @@ For a learning path focused on creating and deploying your own TinyML models, pl
 
 ## Benefits and applications
 
-New products, like Arm's [Ethos-U85](https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u85) NPU are available on FVPs earlier than on physical devices. FVPs also have a graphical user iterface (GUI), which is useful for for ML performance visualization due to:
+New products, like Arm's [Ethos-U85](https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u85) NPU are available on FVPs earlier than on physical devices. FVPs also have a graphical user interface (GUI), which is useful for for ML performance visualization due to:
 - visual confirmation that your ML model is running on the desired device,
 - clearly indicated instruction counts,
 - confirmation of total execution time and

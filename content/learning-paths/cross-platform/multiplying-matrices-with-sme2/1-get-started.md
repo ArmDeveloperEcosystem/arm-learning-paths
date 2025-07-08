@@ -58,7 +58,7 @@ code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2/
 └── sme2_check.c
 ```
 
-Amongst other files, it includes:
+Among other files, it includes:
 - Code examples.
 - A `Makefile` to build the code.
 - `run-fvp.sh` to run the FVP model.
