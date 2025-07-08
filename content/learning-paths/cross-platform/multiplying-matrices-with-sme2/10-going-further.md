@@ -24,7 +24,7 @@ Some ideas of improvements that you might like to test out include:
 
 So far, you've focused on multiplying floating-point matrices. In practice, matrix operations often involve integer types as well.
 
-The structure of the algorithm (The core logic - tiling, outer product, and accumulation) remains consistent across data types. It uses preprocessing with tiling and outer product–based multiplication. To adapt it for other data types, you only need to change how values are:
+The structure of the algorithm (the core logic - tiling, outer product, and accumulation) remains consistent across data types. It uses preprocessing with tiling and outer product–based multiplication. To adapt it for other data types, you only need to change how values are:
 
 * Loaded from memory
 * Accumulated (often with widening)
