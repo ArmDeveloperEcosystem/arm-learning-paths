@@ -18,7 +18,7 @@ prerequisites:
     - Intermediate proficiency with the C programming language and the Armv9-A assembly language
     - A computer running Linux, macOS, or Windows
     - Installations of Git and Docker for project setup and emulation
-    - A platform that supports SME2 (see the list of [devices with SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices) or an emulator to run code with SME2 instructions
+    - A platform that supports SME2 - see the list of [devices with SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices) or an emulator to run code with SME2 instructions
     - Compiler support for SME2 instructions (for example, LLVM 17+ with SME2 backend support)
 
 author: Arnaud de Grandmaison
