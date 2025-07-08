@@ -8,6 +8,10 @@ layout: learningpathall
 
 ## Choose your SME2 setup: native or emulated
 
+{{< notice Note>}}
+This Learning Path demonstrates how to use SME2 on macOS on a device with an M4 chip. It does not provide instructions for using SME on iPhone or iPad, even though they have SME2 support.
+{{< /notice >}}
+
 To build or run SME2-accelerated code, first set up your development environment.
 This section walks you through the required tools and two supported setup options:
 
