@@ -10,7 +10,7 @@ layout: learningpathall
 
 Finally, you’ll combine pub/sub, storage, and queryable components to simulate a distributed computation flow—demonstrating how Zenoh enables intelligent, coordinated edge systems.
 
-You’ll learn how to use Zenoh’s Queryable API in Rust to build a parameterized query system for estimating battery health at the edge. 
+You’ll learn how to use Zenoh's Queryable API in Rust to build a parameterized query system for estimating battery health at the edge. 
 
 This extends a previous example by supporting runtime query parameters like battery level and temperature.
 
@@ -93,7 +93,7 @@ async fn main() -> zenoh::Result<()> {
 }
 ```
 
-This edge node responds to real-time queries using Zenoh’s Queryable API. It listens for requests on the robot/battery/estimate key and returns a calculated battery health score based on provided input parameters.
+This edge node responds to real-time queries using Zenoh's Queryable API. It listens for requests on the robot/battery/estimate key and returns a calculated battery health score based on provided input parameters.
 
 The program starts by establishing a Zenoh session using open(Config::default()). It then registers a queryable resource on the robot/battery/estimate key. Whenever this key is queried, a callback function is invoked asynchronously using tokio::spawn.
 
@@ -160,7 +160,7 @@ The excepted output will be
 >> Received ('robot/battery/estimate': 'Estimated battery health: 85%')
 ```
 
-You’ve just built a responsive, parameterized edge compute service using Zenoh’s Queryable API in Rust — a lightweight but powerful pattern for real-time intelligence at the edge.
+You’ve just built a responsive, parameterized edge compute service using Zenoh's Queryable API in Rust — a lightweight but powerful pattern for real-time intelligence at the edge.
 
 This approach not only minimizes network overhead but also enables each device to process and respond to context-aware queries on demand. 
 It’s a strong foundation for building scalable, event-driven IoT systems that can adapt dynamically to operational needs.

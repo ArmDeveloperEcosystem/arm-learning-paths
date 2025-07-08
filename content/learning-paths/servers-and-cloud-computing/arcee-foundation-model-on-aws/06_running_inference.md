@@ -75,7 +75,7 @@ This command starts an non-interactive session with the model:
 - `-p` sets the prompt sent to the model
 - The tool will prompt you to enter text, and the model will generate a response
 
-Here, you should see the model generating at about 40 tokens per second. This shows how a more aggressive quantization recipe helps deliver faster perfornmance.
+Here, you should see the model generating at about 40 tokens per second. This shows how a more aggressive quantization recipe helps deliver faster performance.
 
 ## Using llama-server for API Access
 

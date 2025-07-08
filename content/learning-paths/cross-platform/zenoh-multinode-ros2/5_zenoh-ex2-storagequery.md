@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Example 2: Storage and Query
 
-The second example adds Zenoh’s data storage and querying capabilities—enabling nodes to retrieve historical values on demand.
+The second example adds Zenoh's data storage and querying capabilities—enabling nodes to retrieve historical values on demand.
 
 Building on the previous Pub/Sub example, you’ll now explore how Zenoh supports `persistent data storage` and `on-demand querying` -- a powerful feature for robotics and IIoT applications.
 
 In a typical warehouse or factory scenario, autonomous robots may periodically publish sensor data (e.g., position, temperature, battery level), and a central system—or another robot—may later need to query the latest state of each unit. 
 
-Unlike Pub/Sub, which requires live, real-time message exchange, Zenoh’s storage and query model enables asynchronous access to data that was published earlier, even if the original publisher is no longer online.
+Unlike Pub/Sub, which requires live, real-time message exchange, Zenoh's storage and query model enables asynchronous access to data that was published earlier, even if the original publisher is no longer online.
 
 In this example, you’ll run the zenohd daemon with in-memory storage and use z_put to publish data and z_get to retrieve it.
 
@@ -70,5 +70,5 @@ The result will look like:
 If you have more than two Raspberry Pi devices, you can run the z_get command on a third RPi to validate that storage queries work seamlessly across a multi-node setup.
 {{% /notice %}}
 
-This example shows how Zenoh’s Storage + Query model supports asynchronous data access and resilient state-sharing—critical capabilities in robotics and industrial IoT systems where network connectivity may be intermittent or system components loosely coupled.
+This example shows how Zenoh's Storage + Query model supports asynchronous data access and resilient state-sharing—critical capabilities in robotics and industrial IoT systems where network connectivity may be intermittent or system components loosely coupled.
 

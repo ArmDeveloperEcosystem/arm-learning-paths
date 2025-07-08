@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- Linux: 152
+- Linux: 153
 - macOS: 10
 - Windows: 14
 pinned_modules:
@@ -22,7 +22,7 @@ subjects_filter:
 - Containers and Virtualization: 28
 - Databases: 15
 - Libraries: 9
-- ML: 27
+- ML: 28
 - Performance and Architecture: 60
 - Storage: 1
 - Web: 10
@@ -34,6 +34,7 @@ tools_software_languages_filter:
 - 5G: 1
 - ACL: 1
 - AI: 1
+- Amazon Web Services: 1
 - Android Studio: 1
 - Ansible: 2
 - Arm Compiler for Linux: 1
@@ -108,10 +109,12 @@ tools_software_languages_filter:
 - Keras: 1
 - Kubernetes: 10
 - Lambda: 1
+- Libamath: 1
 - libbpf: 1
-- Libmath: 1
 - Linaro Forge: 1
+- Linux: 1
 - Litmus7: 1
+- Llama.cpp: 1
 - LLM: 9
 - llvm-mca: 1
 - LSE: 1
@@ -136,7 +139,7 @@ tools_software_languages_filter:
 - perf: 5
 - Perf: 1
 - PostgreSQL: 4
-- Python: 27
+- Python: 28
 - PyTorch: 9
 - RAG: 1
 - Redis: 3
