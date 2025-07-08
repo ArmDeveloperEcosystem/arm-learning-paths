@@ -11,9 +11,9 @@ layout: learningpathall
 To build or run SME2-accelerated code, first set up your development environment.
 This section walks you through the required tools and two supported setup options:
 
-* [**Native SME2 hardware**](#native-sme2) - build and run directly on a system with SME2 support. For supported devices, see [Devices with native SME2 support](#devices). 
+* [**Native SME2 hardware**](#native-sme2) - build and run directly on a system with SME2 support, see [Devices with native SME2 support](#devices)
 
-* [**Docker-based emulation**](#docker-sme2) - use a container to emulate SME2 in bare metal mode (without an OS).
+* [**Docker-based emulation**](#docker-sme2) - use a container to emulate SME2 in bare metal mode (without an OS)
 
 ## Download and explore the code examples
 
@@ -243,43 +243,13 @@ part.
 
 These Apple devices support SME2 natively.
 
-- iPad
-
-  - iPad Pro 11"
-
-  - iPad Pro 13"
-
-- iPhone
-
-  - iPhone 16
-
-  - iPhone 16 Plus
-
-  - iPhone 16e
-
-  - iPhone 16 Pro
-
-  - iPhone 16 Pro Max
-
-- iMac
-
-- MacBook Air
-
-  - MacBook Air 13"
-
-  - MacBook Air 15"
-
-- Mac mini
 
 
-
-- MacBook Pro
-
-  - MacBook Pro 14"
-
-  - MacBook Pro 16"
-
-- Mac Studio
-
-
-
+| Device                              | Release Date | Chip Options              |
+|-------------------------------------|--------------|---------------------------|
+| iPhone 16                           | 2024         | A18                       |
+| iPad Pro (7th generation)           | 2024         | M4                        |
+| iMac (2024)                         | 2024         | M4                        |
+| Mac Mini (2024)                     | 2024         | M4, M4 Pro, M4 Max        |
+| MacBook Pro (14-inch, 16-inch, 2024)| 2024         | M4 Pro, M4 Max            |
+| MacBook Air (2025)                  | 2025         | M4                        |
