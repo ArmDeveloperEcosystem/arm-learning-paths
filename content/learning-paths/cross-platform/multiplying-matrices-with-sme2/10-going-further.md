@@ -24,7 +24,7 @@ Some ideas of improvements that you might like to test out include:
 
 So far, you've focused on multiplying floating-point matrices. In practice, matrix operations often involve integer types as well.
 
-The structure of the algorithm (The core logic - tiling, outer product, and accumulation) remains consistent across data types. It uses preprocessing with tiling and outer product–based multiplication. To adapt it for other data types, you only need to change how values are:
+The structure of the algorithm (the core logic - tiling, outer product, and accumulation) remains consistent across data types. It uses preprocessing with tiling and outer product–based multiplication. To adapt it for other data types, you only need to change how values are:
 
 * Loaded from memory
 * Accumulated (often with widening)
@@ -72,6 +72,6 @@ An even more *degenerated* case that is easy to manage is when one of the matric
 Although the current code used here handles it correctly from a results point of view, a different algorithm and use of instructions might be more efficient. Can you think of another way?
 
 
-In order to check your understanding of SME2, you can try to implement thisunrolling yourself in the intrinsic version (the asm version already has this optimization). You can check your work by comparing your results to the expected reference values. 
+In order to check your understanding of SME2, you can try to implement this unrolling yourself in the intrinsic version (the asm version already has this optimization). You can check your work by comparing your results to the expected reference values. 
 
 

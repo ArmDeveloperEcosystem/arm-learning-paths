@@ -64,19 +64,11 @@ Reference implementation: min time = 101 us, max time = 373 us, avg time = 136.4
 SME2 implementation *asm*: min time = 1 us, max time = 8 us, avg time = 1.44 us
 ```
 
-You can note that, although the vanilla reference matrix multiplication is the
-same, there is some variability in the execution time.
+You'll notice that although the vanilla reference matrix multiplication is the same, there is some variability in the execution time.
 
-You'll also note that the assembly version of the SME2 matrix multiplication is
-slightly faster (1.44 us compared to 1.82 us for the intrinsic-based version).
-This *must not* convince you that assembly is better though! The comparison done
-here is far from being an apples-to-apples comparison:
-- Firstly, the assembly version has some requirements on the `K` parameter that
-  the intrinsic version does not have.
-- Second, the assembly version has an optimization that the intrinsic version,
-  for the sake of readability in this Learning Path, does not have (see the
-  [Going further
+The assembly version of the SME2 matrix multiplication runs slightly faster (1.44 us compared to 1.82 us for the intrinsic-based version). However, this should not lead you to be convinced that assembly is inherently better. The comparison here is not apples-to-apples:
+- Firstly, the assembly version has specific constraints on the `K` parameter that the intrinsics version does not.
+- Second, the assembly version includes an optimization that the intrinsic version, for the sake of readability in this Learning Path, does not have (see the [Going further
   section](/learning-paths/cross-platform/multiplying-matrices-with-sme2/10-going-further/)
-  to know more).
-- Last, but not least, the intrinsic version is *easily* readable and
-  maintainable.
+  to learn more).
+- Most importantly, the intrinsics version is significantly more readable and maintainable. These are qualities that matter in real-world development. 
