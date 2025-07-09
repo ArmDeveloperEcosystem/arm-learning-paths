@@ -19,13 +19,16 @@ You should use an Arm-based Linux system with at least 8 CPUs and 16 GB of RAM. 
 
 ## What will I do in this Learning Path?
 
-In this Learning Path, you'll learn how to use BOLT to optimize both applications and shared libraries. You'll walk through a real-world example using MySQL and two of its dependent libraries: `libssl.so` and `libcrypto.so`.
+In this Learning Path, you'll learn how to use BOLT to optimize both applications and shared libraries. You'll walk through a real-world example using MySQL and two of its dependent libraries: 
+
+- `libssl.so` 
+- `libcrypto.so`
 
 You will:
 
 - **Collect and merge BOLT profiles from multiple workloads, such as read-only and write-only** - a read-only workload typically involves operations that only retrieve or query data, such as running SELECT statements in a database without modifying any records. In contrast, a write-only workload focuses on operations that modify data, such as INSERT, UPDATE, or DELETE statements. Profiling both types ensures that the optimized binary performs well under different usage patterns.
 
-- **Independently optimize application binaries and external user-space libraries, such as `libssl.so` and `libcrypto.so`** - this means you can apply BOLT optimizations not just to your main application, but also to shared libraries it depends on, resulting  in a more comprehensive performance improvement across your entire stack.
+- **Independently optimize application binaries and external user-space libraries, such as `libssl.so` and `libcrypto.so`** - this means that you can apply BOLT optimizations to not just your main application, but also to shared libraries it depends on, resulting in a more comprehensive performance improvement across your entire stack.
 
 - **Merge profile data for broader code coverage** - by combining the profile data collected from different workloads and libraries, you create a single, comprehensive profile that represents a wide range of application behaviors. This merged profile allows BOLT to optimize code paths that are exercised under different scenarios, leading to better overall performance and coverage than optimizing for a single workload.
 
@@ -37,7 +40,7 @@ You will:
 
 BOLT profile merging combines profiling data from multiple runs into one unified profile. This merged profile enables BOLT to optimize binaries for a broader set of real-world behaviors, ensuring that the final optimized application or library performs well across diverse workloads, not just a single use case. By merging profiles, you capture a wider range of code paths and execution patterns, leading to more robust and effective optimizations.
 
-![Why BOLT Profile Merging?](Bolt-merge.png)
+![Diagram showing how BOLT profile merging combines multiple runtime profiles into a single optimized view#center](bolt-merge.png "Why BOLT profile merging improves optimization coverage")
 
 ## What types of applications benefit from BOLT?
 
