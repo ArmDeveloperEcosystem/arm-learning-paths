@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-In this step, you will use BOLT to instrument the MySQL application binary and to collect profile data for specific workloads. 
+In this step, you'll use BOLT to instrument the MySQL application binary and to collect profile data for specific workloads. 
 
 The collected profiles will be merged with others and used to optimize the application's code layout.
 
