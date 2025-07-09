@@ -6,37 +6,30 @@ weight: 2
 layout: learningpathall
 ---
 
-[BOLT](https://github.com/llvm/llvm-project/blob/main/bolt/README.md) is a post-link binary optimizer that uses Linux Perf data to re-order the executable code layout to reduce memory overhead and improve performance.
+[BOLT](https://github.com/llvm/llvm-project/blob/main/bolt/README.md) is a post-link binary optimizer that uses Linux Perf data to reorder executable code layout. This improves instruction cache locality, reduces memory overhead, and boosts runtime performance.
 
-Make sure you have [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed. 
+Before you begin, ensure that you have the following installed:
 
-You should use an Arm Linux system with at least 8 CPUs and 16 Gb of RAM. Ubuntu 24.04 is used for testing, but other Linux distributions are possible. 
+- [BOLT](/install-guides/bolt/) 
+- [Linux Perf](/install-guides/perf/)
+
+You should use an Arm-based Linux system with at least 8 CPUs and 16 GB of RAM. This Learning Path was tested on Ubuntu 24.04, but other Linux distributions are also supported.
 
 ## What will I do in this Learning Path?
 
-In this Learning Path you learn how to use BOLT to optimize applications and shared libraries. MySQL is used as the application and two share libraries which are used by MySQL are also optimized using BOLT.
+In this Learning Path, you'll learn how to use BOLT to optimize both applications and shared libraries. You'll walk through a real-world example using MySQL and two of its dependent libraries: `libssl.so` and `libcrypto.so`.
 
-Here is an outline of the steps:
+You will:
 
-1. Collect and merge BOLT profiles from multiple workloads, such as read-only and write-only  
+- **Collect and merge BOLT profiles from multiple workloads, such as read-only and write-only** - a read-only workload typically involves operations that only retrieve or query data, such as running SELECT statements in a database without modifying any records. In contrast, a write-only workload focuses on operations that modify data, such as INSERT, UPDATE, or DELETE statements. Profiling both types ensures that the optimized binary performs well under different usage patterns.
 
-    A read-only workload typically involves operations that only retrieve or query data, such as running SELECT statements in a database without modifying any records. In contrast, a write-only workload focuses on operations that modify data, such as INSERT, UPDATE, or DELETE statements. Profiling both types ensures that the optimized binary performs well under different usage patterns.
+- **Independently optimize application binaries and external user-space libraries, such as `libssl.so` and `libcrypto.so`** - this means you can apply BOLT optimizations not just to your main application, but also to shared libraries it depends on, resulting  in a more comprehensive performance improvement across your entire stack.
 
-2. Independently optimize application binaries and external user-space libraries, such as `libssl.so` and `libcrypto.so`
+- **Merge profile data for broader code coverage** - by combining the profile data collected from different workloads and libraries, you create a single, comprehensive profile that represents a wide range of application behaviors. This merged profile allows BOLT to optimize code paths that are exercised under different scenarios, leading to better overall performance and coverage than optimizing for a single workload.
 
-    This means you can apply BOLT optimizations not just to your main application, but also to shared libraries it depends on, resulting in a more comprehensive performance improvement across your entire stack.
+- **Run BOLT on each binary application and library** - with the merged profile, you apply BOLT optimizations separately to each binary and shared library. This step ensures that both your main application and its dependencies are optimized based on real-world usage patterns, resulting in a more efficient and responsive software stack.
 
-3. Merge profile data for broader code coverage
-
-    By combining the profile data collected from different workloads and libraries, you create a single, comprehensive profile that represents a wide range of application behaviors. This merged profile allows BOLT to optimize code paths that are exercised under different scenarios, leading to better overall performance and coverage than optimizing for a single workload.
-
-4. Run BOLT on each binary application and library
-
-    With the merged profile, you apply BOLT optimizations separately to each binary and shared library. This step ensures that both your main application and its dependencies are optimized based on real-world usage patterns, resulting in a more efficient and responsive software stack.
-
-5. Link the final optimized binary with the separately optimized libraries to deploy a fully optimized runtime stack  
-
-    After optimizing each component, you combine them to create a deployment where both the application and its libraries benefit from BOLT's enhancements.
+- **Link the final optimized binary with the separately optimized libraries to deploy a fully optimized runtime stack** - after optimizing each component, you combine them to create a deployment where both the application and its libraries benefit from BOLT's enhancements.
 
 ## What is BOLT profile merging?
 
