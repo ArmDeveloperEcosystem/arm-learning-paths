@@ -6,12 +6,11 @@ weight: 6
 layout: learningpathall
 ---
 
-This step presents the performance comparisons across various BOLT optimization scenarios. You'll see how baseline performance compares with BOLT-optimized binaries using merged profiles and bolted external libraries.
+This section compares the performance of baseline binaries with BOLT-optimized versions. It highlights the impact of merged profile optimizations and shared library enhancements on overall system throughput and latency.
 
-For all test cases shown in the table below, sysbench was configured with --time=0 --events=10000.
-This means each test ran until exactly 10,000 requests were completed per thread, rather than running for a fixed duration.
+All tests used Sysbench with --time=0 --events=10000. This configuration ensures each test runs until exactly 10,000 requests are completed per thread, providing consistent workload duration across runs.
 
-### 1. Baseline Performance (No BOLT)
+### Baseline performance (without BOLT)
 
 | Metric                     | Read-Only (Baseline) | Write-Only (Baseline) | Read+Write (Baseline) |
 |---------------------------|----------------------|------------------------|------------------------|
@@ -21,7 +20,7 @@ This means each test ran until exactly 10,000 requests were completed per thread
 | Latency 95th % (ms)       | 1.04                 | 0.83                   | 1.79                   |
 | Total time (s)            | 9.93                 | 4.73                   | 15.40                  |
 
-### 2. Performance Comparison: Merged vs Non-Merged Instrumentation
+### Performance comparison: merged and non-merged instrumentation
 
 | Metric                     | Regular BOLT R+W (No Merge, system libssl) | Merged BOLT (BOLTed Read+Write + BOLTed libssl) |
 |---------------------------|---------------------------------------------|-------------------------------------------------|
@@ -41,9 +40,9 @@ Second run:
 | Latency 95th % (ms)       | 1.39                                        | 1.37                                            |
 | Total time (s)            | 239.9                                       | 239.9                                           |
 
-### 3. BOLTed READ, BOLTed WRITE, MERGED BOLT (Read+Write+BOLTed Libraries)
+### Performance with read-only, write-only, and merged BOLT optimizations
 
-| Metric                     | Bolted Read-Only  | Bolted Write-Only | Merged BOLT (Read+Write+libssl) | Merged BOLT (Read+Write+libcrypto) | Merged BOLT (Read+Write+libssl+libcrypto) |
+| Metric                     | 	BOLT-optimized read-only workload | Bolted Write-Only | Merged BOLT (Read+Write+libssl) | Merged BOLT (Read+Write+libcrypto) | Merged BOLT (Read+Write+libssl+libcrypto) |
 |---------------------------|---------------------|-------------------|----------------------------------|------------------------------------|-------------------------------------------|
 | Transactions/sec (TPS)    | 1348.47             | 3170.92           | 887.14                           | 896.58                             | 902.98                                    |
 | Queries/sec (QPS)         | 21575.45            | 19025.52          | 17742.89                         | 17931.57                           | 18059.52                                  |
