@@ -1,10 +1,12 @@
 ---
-title: BOLT overview
+title: Overview
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## What is BOLT?
 
 [BOLT](https://github.com/llvm/llvm-project/blob/main/bolt/README.md) is a post-link binary optimizer that uses Linux Perf data to reorder executable code layout. This improves instruction cache locality, reduces memory overhead, and boosts runtime performance.
 
@@ -33,24 +35,18 @@ You will:
 
 ## What is BOLT profile merging?
 
-BOLT profile merging is the process of combining profiling from multiple runs into a single profile. This merged profile enables BOLT to optimize binaries for a broader set of real-world behaviors, ensuring that the final optimized application or library performs well across diverse workloads, not just a single use case. By merging profiles, you capture a wider range of code paths and execution patterns, leading to more robust and effective optimizations.
+BOLT profile merging combines profiling data from multiple runs into one unified profile. This merged profile enables BOLT to optimize binaries for a broader set of real-world behaviors, ensuring that the final optimized application or library performs well across diverse workloads, not just a single use case. By merging profiles, you capture a wider range of code paths and execution patterns, leading to more robust and effective optimizations.
 
 ![Why BOLT Profile Merging?](Bolt-merge.png)
 
-## What are good applications for BOLT?
+## What types of applications benefit from BOLT?
 
-MySQL and Sysbench are used as example applications, but you can use this method for any feature-rich application that:
+While MySQL and Sysbench are used as example applications, you can use this method for any feature-rich application that:
 
-1. Exhibits multiple runtime paths  
+- **Exhibits multiple runtime paths** - applications often have different code paths depending on the workload or user actions. Optimizing for just one path can leave performance gains untapped in others. By profiling and merging data from various workloads, you ensure broader optimization coverage.
 
-    Applications often have different code paths depending on the workload or user actions. Optimizing for just one path can leave performance gains untapped in others. By profiling and merging data from various workloads, you ensure broader optimization coverage.
+- **Uses dynamic libraries** - most modern applications rely on shared libraries for functionality. Optimizing these libraries alongside the main binary ensures consistent performance improvements throughout the application.
 
-2. Uses dynamic libraries  
-
-    Most modern applications rely on shared libraries for functionality. Optimizing these libraries alongside the main binary ensures consistent performance improvements throughout the application.
-
-3. Requires full-stack binary optimization for performance-critical deployment  
-
-    In scenarios where every bit of performance matters, such as high-throughput servers or latency-sensitive applications, optimizing the entire binary stack can yield significant benefits.
+- **Requires full-stack binary optimization for performance-critical deployment** - in scenarios where every bit of performance matters, such as high-throughput servers or latency-sensitive applications, optimizing the entire binary stack can yield significant benefits.
 
 

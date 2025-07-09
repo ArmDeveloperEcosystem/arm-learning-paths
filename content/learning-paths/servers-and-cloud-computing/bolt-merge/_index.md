@@ -3,7 +3,7 @@ title: Optimize Arm applications and shared libraries with BOLT
 
 minutes_to_complete: 30
 
-who_is_this_for: Performance engineers and software developers targeting Arm platforms who want to optimize application binaries and shared libraries using BOLT.
+who_is_this_for: This is an advanced topic for performance engineers and software developers targeting Arm platforms who want to optimize application binaries and shared libraries using BOLT.
 
 learning_objectives: 
   - Instrument and optimize application binaries for individual workload features using BOLT
