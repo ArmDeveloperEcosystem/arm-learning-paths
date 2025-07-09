@@ -5,7 +5,14 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-### Instrument Shared Libraries (e.g., libcrypto, libssl)
+
+## Overview
+
+In this section, you'll learn how to instrument and optimize shared libraries, and specifically, `libssl.so` and `libcrypto.so` using BOLT. These libraries are used by MySQL, and optimizing them can improve overall performance. You'll rebuild OpenSSL from source to include symbol information, then collect profiles and apply BOLT optimizations.
+
+## Instrument Shared Libraries 
+
+### Prepare instrumentable versions
 
 If system libraries like `/usr/lib/libssl.so` are stripped, rebuild OpenSSL from source with relocations:
 
@@ -18,7 +25,7 @@ make -j$(nproc)
 make install
 ```
 
-### Instrument libssl
+### Instrument libssl.so
 
 Use `llvm-bolt` to instrument `libssl.so.3`:
 
@@ -33,13 +40,13 @@ llvm-bolt $HOME/bolt-libs/openssl/lib/libssl.so.3 \
   2>&1 | tee $HOME/mysql-server/bolt-instrumentation-libssl.log
 ```
 
-Then launch MySQL using the **instrumented shared library** and run a **read+write** sysbench test to populate the profile
+Launch MySQL with the instrumented `libssl.so` and run a read+write sysbench test to populate the profile
 
 ### Optimize libssl using the profile
 
 After running the read+write test, ensure `libssl-readwrite.fdata` is populated.
 
-Run BOLT on the uninstrumented `libssl.so` with the collected read-write profile:
+Run BOLT on the uninstrumented `libssl.so` using the collected read+write profile:
 
 ```bash
 llvm-bolt $HOME/bolt-libs/openssl/lib/libssl.so.3 \
@@ -61,13 +68,17 @@ Copy the optimized version over the original and export the path:
 
 ```bash
 # Set LD_LIBRARY_PATH in the terminal before launching mysqld in order for mysqld to pick the optimized library.
-cp $HOME/bolt-libs/openssl/libssl.so.optimized $HOME/bolt-libs/openssl/libssl.so.3
+cp $HOME/bolt-libs/openssl/libssl.so.optimized $HOME/bolt-libs/openssl/lib/libssl.so.3
 export LD_LIBRARY_PATH=$HOME/bolt-libs/openssl/lib
 
 # You can confirm that mysqld is loading your optimized library with:
 LD_LIBRARY_PATH=$HOME/bolt-libs/openssl/ 
 ldd build/bin/mysqld | grep libssl
 ```
+
+{{% notice tip %}}
+Setting `LD_LIBRARY_PATH` ensures that MySQL dynamically links to the optimized shared library at runtime. This does not permanently override system libraries.
+{{% /notice %}}
 
 It should show:
 
@@ -108,11 +119,11 @@ taskset -c 7 ./src/sysbench \
 
 In the next step, you'll optimize an additional critical external library (`libcrypto.so`) using BOLT, following a similar process as `libssl.so`. Afterward, you'll interpret performance results to validate and compare optimizations across baseline and merged scenarios.
 
-### BOLT optimization for libcrypto
+### Optimize libcrypto.so with BOLT
 
 Follow these steps to instrument and optimize `libcrypto.so`:
 
-### Instrument libcrypto
+### Instrument libcrypto.so
 
 ```bash
 llvm-bolt $HOME/bolt-libs/openssl/libcrypto.so.3 \
@@ -124,11 +135,12 @@ llvm-bolt $HOME/bolt-libs/openssl/libcrypto.so.3 \
   --instrumentation-wait-forks \
   2>&1 | tee $HOME/mysql-server/bolt-instrumentation-libcrypto.log
 ```
-Then launch MySQL using the instrumented shared library and run a read+write sysbench test to populate the profile.
+Launch MySQL using the instrumented shared library and run a read+write sysbench test to populate the profile.
+
 ### Optimize libcrypto using the profile
 After running the read+write test, ensure `libcrypto-readwrite.fdata` is populated.
 
-Run BOLT on the uninstrumented libcrypto.so with the collected read-write profile:
+Run BOLT on the uninstrumented libcrypto.so using the collected read+write profile to generate an optimized library:
 ```bash
 llvm-bolt $HOME/bolt-libs/openssl/lib/libcrypto.so.3 \
   -o $HOME/bolt-libs/openssl/lib/libcrypto.so.optimized \
@@ -147,7 +159,7 @@ Replace the original at runtime:
 
 ```bash
 # Set LD_LIBRARY_PATH in the terminal before launching mysqld in order for mysqld to pick the optimized library.
-cp $HOME/bolt-libs/openssl/libcrypto.so.optimized $HOME/bolt-libs/openssl/libcrypto.so.3
+cp $HOME/bolt-libs/openssl/libcrypto.so.optimized $HOME/bolt-libs/openssl/lib/libcrypto.so.3
 export LD_LIBRARY_PATH=$HOME/bolt-libs/openssl/
 
 # You can confirm that mysqld is loading your optimized library with:
