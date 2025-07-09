@@ -54,7 +54,8 @@ sw_categories:
       tests_and_status: []
     armpl:
       readable_title: Arm Performance Libraries
-      tests_and_status: []
+      tests_and_status:
+      - ubuntu:latest: passed
     aws-cli:
       readable_title: AWS CLI
       tests_and_status: []
