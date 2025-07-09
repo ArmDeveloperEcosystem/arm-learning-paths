@@ -21,11 +21,11 @@ Before you begin the implementation, install Visual Studio 2022 with the followi
 ## Create the project
 Open Visual Studio and click 'Create a new project'. 
 
-![fig1](Figures/01.png)
+![fig1](figures/01.png)
 
 In the next window, search for the 'Mobile App (Xamarin.Forms)' template. 
 
-![fig2](Figures/02.png)
+![fig2](figures/02.png)
 
 This will open the 'Configure your new project' view, in which you should configure the project as follows (refer to the figure below):
 
@@ -34,21 +34,21 @@ This will open the 'Configure your new project' view, in which you should config
 3. Check the option **Place solution and project in the same directory**
 4. Click the **Create** button
 
-![fig3](Figures/03.png)
+![fig3](figures/03.png)
 
 In the last step, 'New Mobile App', choose the **Blank** option in the 'Select a template for your app' list. Then, check the Android, iOS and Windows (UWP) boxes under the 'I plan to develop for:'. Finally, click the **Create** button. 
 
-![fig4](Figures/04.png)
+![fig4](figures/04.png)
 
 The project creation process may take a few moments. During this process, you might be prompted to enable Developer Mode for Windows. If so, follow the instructions shown to enable Developer Mode:
 
-![fig5](Figures/05.png)
+![fig5](figures/05.png)
 
 Then, accept any other license terms that appear, including Android SDK - License Agreement. 
 
 Your project should be now ready. Next, open the Solution Explorer (View -> Solution Explorer) to view the created projects:
 
-![fig6](Figures/06.png)
+![fig6](figures/06.png)
 
 There are four projects:
 1. Arm64.MobileApp.XamarinForms - this is the project, containing the shared code. This project is referenced by other projects.
@@ -69,7 +69,7 @@ Before starting the UI design, install the `Syncfusion.SfChart.WPF` NuGet packag
 2. In Solution Explorer, right-click on 'Dependencies' under the Arm64.MobileApp.XamarinForms project. From the context menu, select 'Manage NuGet Packages...' to open the NuGet Package Manager.
 3. In the NuGet Package Manager, search for 'Sf chart.' Then select 'Syncfusion.SfChart.WPF' from the results and click the 'Install' button. Refer to the figure below for guidance:
 
-![fig7](Figures/07.png)
+![fig7](figures/07.png)
 
 4. A 'Preview Changes' window will appear. Click the 'Apply' button to confirm and proceed with the changes to the solution. The installation of the NuGet package will complete.
 5. Finally, in the 'License Acceptance' window that appears, click the 'I Accept' button to agree to the terms and complete the installation process.
@@ -166,7 +166,7 @@ The chart is configured with two numerical axes. The horizontal (primary) axis d
 
 The complete XAML declaration results in the following view:
  
-![fig8](Figures/08.png)
+![fig8](figures/08.png)
 
 To use the chart control on UWP you will also need to make one more modification:
 1. In Solution Explorer go to `Arm64.MobileApp.XamarinForms.UWP` project.

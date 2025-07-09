@@ -23,7 +23,7 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-## Install Docker Engine on Linux
+## How do I install Docker Engine on Linux?
 
 For any Linux machine, the commands below will install Docker.
 
@@ -33,13 +33,13 @@ The commands work on any architecture, and on any system running Linux, from a c
 
 The commands can also be used in the Windows Subsystem for Linux 2 (WSL 2) and on a Chromebook.
 
-### Run installer
+### How do I run the installer?
 
 ```console
 curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 ```
 
-### Add user
+### How do I add my username to the Docker group?
 
 Add the user to the docker group. The `newgrp` command avoids the need to logout and back in.
 
@@ -47,7 +47,7 @@ Add the user to the docker group. The `newgrp` command avoids the need to logout
 sudo usermod -aG docker $USER ; newgrp docker
 ```
 
-### Confirm installation
+### How do I confirm the installation?
 
 To confirm the installation is successful run:
 
@@ -89,7 +89,7 @@ uname -m
 
 Output values can be `aarch64` (Arm 64-bit), `armv7l` (Arm 32-bit) or `x86_64`.
 
-### Docker Engine versions
+### Which Docker Engine versions are available?
 
 The Stable channel (`get.docker.com`) provides the latest releases for general availability.
 
@@ -97,7 +97,7 @@ The Test channel (`test.docker.com`) installs pre-releases that are for testing 
 
 Replace `get.docker.com` with `test.docker.com` above to use the test version.
 
-### Linux distributions where get.docker.com isn't supported
+### What about Linux distributions where get.docker.com isn't supported?
 
 Some Linux distributions are not supported by [get.docker.com](https://get.docker.com)
 
@@ -127,7 +127,7 @@ To confirm the installation is successful run the same hello-world as above.
 docker run hello-world
 ```
 
-### Start and Stop the Docker daemon on Linux distributions with systemd
+### How do I start and stop the Docker daemon on Linux distributions with systemd?
 
 To start the docker daemon.
 

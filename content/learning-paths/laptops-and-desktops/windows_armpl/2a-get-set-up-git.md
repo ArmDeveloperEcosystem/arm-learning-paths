@@ -19,7 +19,7 @@ The example application renders a rotating 3D cube to perform the calculations u
 First, navigate to an empty directory, and clone the repository containing the example from GitHub:
 
 ```cmd
-git clone https://github.com/odincodeshen/SpinTheCubeInGDI.git
+git clone https://github.com/arm/SpinTheCubeInGDI.git
 ```
 
 {{% notice Note %}}

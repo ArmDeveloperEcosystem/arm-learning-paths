@@ -440,6 +440,7 @@ Calls to:
                 all_messages_div.removeChild(all_messages_div.firstChild);
             }
         {{ else if eq .Params.demo_template_name "llm_chatbot_first_demo" }}
+        {{ else if eq .Params.demo_template_name "phi_onnx_chatbot_demo" }}
         {{ else }}
         {{ end }}
 
@@ -629,6 +630,9 @@ Calls to:
     {{ else if eq .Params.demo_template_name "llm_chatbot_first_demo" }}
         {{ $server_location = getenv "HUGO_LLM_API" | base64Encode }}
         console.log('Using LLM API.');
+    {{ else if eq .Params.demo_template_name "phi_onnx_chatbot_demo" }}
+        {{ $server_location = getenv "HUGO_PHI_ONNX_LLM_API" | base64Encode }}
+        console.log('Using HUGO_PHI_ONNX_LLM_API.');
     {{ else }}
         console.log('No server location provided.');
     {{ end }}
@@ -674,17 +678,17 @@ Calls to:
 
             // Update ping & popup status
             if (data.cluster_utilization == 'normal') {
-                showPopupPostConnection('Connected to Arm Neoverse V2 based LLM! Start chatting now.',"success");
+                showPopupPostConnection('Connected to Arm Neoverse based LLM! Start chatting now.',"success");
                 //ping_txt.textContent = `Ping: ${ping}`
                 traffic_txt.textContent = 'Server traffic: Low'
             }
             else if (data.cluster_utilization == 'high') {
-                showPopupPostConnection('Connected to Arm Neoverse V2 based LLM! Traffic is high, delays may occur. Start chatting now.',"success");
+                showPopupPostConnection('Connected to Arm Neoverse based LLM! Traffic is high, delays may occur. Start chatting now.',"success");
                 //ping_txt.textContent = `Ping: ${ping}`
                 traffic_txt.textContent = `Server traffic: High`   
             }
             else if (data.cluster_utilization == 'at-limit') {
-                showPopupPostConnection('Connected to Arm Neoverse V2 based LLM! Traffic is high, delays may occur. Start chatting now.',"warning");
+                showPopupPostConnection('Connected to Arm Neoverse based LLM! Traffic is high, delays may occur. Start chatting now.',"warning");
                 //ping_txt.textContent = `Ping: ${ping}`
                 traffic_txt.textContent = `Server traffic: High`   
             }

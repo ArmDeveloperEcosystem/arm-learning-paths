@@ -23,13 +23,14 @@ author: Ben Clark
 skilllevels: Introductory
 subjects: ML
 armips:
-    - Cortex-X
     - Cortex-A
     - Mali
     - Immortalis
 tools_software_languages:
     - Android Studio
     - LiteRT
+    - Hugging Face
+
 operatingsystems:
     - Android
     - Linux

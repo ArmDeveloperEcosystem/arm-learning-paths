@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Set up an LLM based Vision Chatbot"
+title: "Set up an LLM based-Vision Chatbot"
 
 weight: 3
 
@@ -8,17 +8,17 @@ weight: 3
 layout: "learningpathall"
 ---
 
-## Before you begin
-
-This Learning Path demonstrates how to build and deploy a vision chatbot using open-source large language models (LLMs) optimized for Arm architecture. The vision chatbot can take both images and text prompts as input, processes them, and generates a text response using the image as context. The instructions in this Learning Path are designed for Arm servers running Ubuntu 24.04 LTS. You will need an Arm server instance with at least 32 cores to run this example. These instructions have been tested on a GCP `c4a-standard-64` instance.
-
 ## Overview
 
-In this Learning Path, you will learn how to run a vision chatbot LLM inference using PyTorch and Hugging Face Transformers efficiently on Arm CPUs. You will learn how to perform LLM inference by feeding both text and image inputs, which are then processed to generate a text response.
+This Learning Path demonstrates how to build and deploy a vision-enabled chatbot using open-source large language models (LLMs) optimized for Arm-based servers. 
+
+Vision chatbots accept both images and text as input, then generate text responses using the image as context. The instructions in this Learning Path are tailored for Arm servers running Ubuntu 24.04 LTS and have been tested on a Google Cloud c4a-standard-64 instance. You will need an Arm server instance with at least 32 CPU cores to run this example. 
+
+You'll learn how to run a vision chatbot LLM inference using PyTorch and Hugging Face Transformers, efficiently leveraging Arm CPUs to process image-and-text input and produce relevant, contextual replies.
 
 ## Install dependencies
 
-Install the following packages on your Arm based server instance:
+Install the following packages on your Arm-based server instance:
 
 ```bash
 sudo apt update
@@ -27,7 +27,7 @@ sudo apt install python3-pip python3-venv -y
 
 ## Create a file with your Python dependencies
 
-Using your preferred text editor, add the following python dependencies to your `requirements.txt` file:
+Using your preferred text editor, add the following Python dependencies to your `requirements.txt` file:
 
 ```python
 streamlit
@@ -39,7 +39,7 @@ transformers
 huggingface_hub
 ```
 
-## Install Python Dependencies
+## Install Python dependencies
 
 Now create a Python virtual environment and install the dependencies.
 
@@ -55,7 +55,7 @@ source llama-vision/bin/activate
 
 Install the required libraries using pip:
 ```bash
- pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Install PyTorch
@@ -92,7 +92,7 @@ Install Torch AO:
 
 ## Hugging Face Cli Login
 
-To use the [Llama 3.2 11B Vision Model](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct) from Hugging Face, you need to request access or accept the terms. You need to log in to Hugging Face using a token.
+To use the [Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct) model from Hugging Face, you need to request access or accept the terms. You need to log in to Hugging Face using a token.
 ```bash
     huggingface-cli login
 ```

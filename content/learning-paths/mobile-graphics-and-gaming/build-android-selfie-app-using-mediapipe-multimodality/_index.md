@@ -26,7 +26,6 @@ skilllevels: Advanced
 subjects: ML
 armips:
     - Cortex-A
-    - Cortex-X
     - Mali GPU
 tools_software_languages:
     - mobile

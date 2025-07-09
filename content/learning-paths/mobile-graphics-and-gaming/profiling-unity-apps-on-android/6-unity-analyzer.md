@@ -107,7 +107,7 @@ The CPU and GPU work concurrently to perform their respective tasks. Depending o
 
 If the GPU is left idle waiting for the CPU to give it more work, we are likely to be CPU bound. If the CPU is left waiting for the GPU to finish then we are likely to be GPU bound.
 
-We don’t think the collision sample is GPU bound but here’s how to tell using the Analyzer.
+We don’t think the collision sample is GPU bound but here's how to tell using the Analyzer.
 
 - Type _Gfx.WaitForPresent_ in the _Name Filter_
 

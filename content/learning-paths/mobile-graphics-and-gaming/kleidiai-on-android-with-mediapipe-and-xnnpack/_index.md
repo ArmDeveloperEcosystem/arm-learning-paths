@@ -24,7 +24,6 @@ skilllevels: Advanced
 subjects: ML
 armips:
     - Cortex-A
-    - Cortex-X
 tools_software_languages:
     - Java
     - MediaPipe
@@ -32,6 +31,8 @@ tools_software_languages:
     - Android NDK
     - Bazel
     - XNNPACK
+    - Hugging Face
+
 operatingsystems:
     - Linux
 

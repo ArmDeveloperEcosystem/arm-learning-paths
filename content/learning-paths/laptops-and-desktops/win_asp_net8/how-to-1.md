@@ -259,9 +259,9 @@ public SensorReading Get()
 }
 ```
 
-This method returns the temperature sensor emulator’s current reading.
+This method returns the temperature sensor emulator's current reading.
 
-Finally, implement the POST handler, which enables a user to change the sensor emulator’s `IsActive` property:
+Finally, implement the POST handler, which enables a user to change the sensor emulator's `IsActive` property:
 
 ```cs
 [HttpPost]

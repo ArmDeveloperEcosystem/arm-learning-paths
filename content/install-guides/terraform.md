@@ -16,8 +16,6 @@ test_images:
 - ubuntu:latest
 test_link: false
 test_maintenance: true
-test_status:
-- passed
 title: Terraform
 tool_install: true
 weight: 1
@@ -27,7 +25,7 @@ weight: 1
 
 Terraform is available for Windows, macOS, Linux and supports the Arm architecture.
 
-## Before you begin
+## What do I need before installing Terraform?
 
 [General installation information](https://developer.hashicorp.com/terraform/downloads) is available which covers all supported operating systems.
 
@@ -51,7 +49,7 @@ For macOS, the output should be:
 arm64
 ```
 
-## Download and install Terraform for Ubuntu
+## How do I download and install Terraform for Ubuntu?
 
 The easiest way to install Terraform for Ubuntu on Arm is to use the zip file and copy the executable.
 
@@ -72,7 +70,7 @@ unzip terraform_${TER_VER}_linux_arm64.zip
 sudo cp terraform /usr/local/bin/
 ```
 
-## Download and install Terraform for macOS
+## How do I download and install Terraform for macOS?
 
 If you have [brew](https://brew.sh/) installed, installing Terraform for macOS is simple as:
 
@@ -83,7 +81,7 @@ brew install hashicorp/tap/terraform
 
 If you don't have brew installed or prefer to directly install via binary, you can download [Terraform for ARM64](https://developer.hashicorp.com/terraform/install#darwin) directly from the Terraform website.
 
-## Run the Terraform executable and print the version
+## How do I verify Terraform installation?
 
 After installing, you can enter the following command to verify the installation:
 
@@ -107,4 +105,4 @@ Terraform v1.10.5
 on darwin_arm64
 ```
 
-You are now ready to use Terraform. 
+You are now ready to use Terraform.

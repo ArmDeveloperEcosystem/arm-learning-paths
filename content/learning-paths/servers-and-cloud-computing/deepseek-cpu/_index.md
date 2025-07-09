@@ -1,21 +1,17 @@
 ---
-title: Deploy DeepSeek-R1 models on Arm servers
-
-draft: true
-cascade:
-    draft: true
+title: Deploy DeepSeek-R1 on Arm Servers with llama.cpp
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers interested in running DeepSeek-R1 on Arm-based servers. 
+who_is_this_for: This Learning Path is for developers who want to run DeepSeek-R1 on Arm-based servers. 
 
 learning_objectives:
-    - Download and build llama.cpp on your Arm server.
+    - Clone and build llama.cpp on your Arm-based server.
     - Download a pre-quantized DeepSeek-R1 model from Hugging Face.
-    - Run the pre-quantized model on your Arm CPU and measure the performance.
+    - Run the model on your Arm CPU and benchmark its performance.
 
 prerequisites:
-    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server. This Learning Path was tested on an AWS Graviton4 r8g.24xlarge instance.
+    - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud provider or an on-premise Arm server. This Learning Path was tested on an AWS Graviton4 r8g.24xlarge instance.
 
 author:
     - Tianyu Li

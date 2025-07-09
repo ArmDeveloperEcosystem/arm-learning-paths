@@ -8,8 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- Baremetal: 1
-- Linux: 134
+- Linux: 153
 - macOS: 10
 - Windows: 14
 pinned_modules:
@@ -19,27 +18,29 @@ pinned_modules:
     - providers
     - migration
 subjects_filter:
-- CI-CD: 5
-- Containers and Virtualization: 27
+- CI-CD: 6
+- Containers and Virtualization: 28
 - Databases: 15
-- Libraries: 8
-- ML: 24
-- Performance and Architecture: 49
+- Libraries: 9
+- ML: 28
+- Performance and Architecture: 60
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
 title: Servers and Cloud Computing
 tools_software_languages_filter:
-- .NET: 2
+- .NET: 3
 - .NET SDK: 1
 - 5G: 1
 - ACL: 1
 - AI: 1
+- Amazon Web Services: 1
 - Android Studio: 1
 - Ansible: 2
 - Arm Compiler for Linux: 1
-- Arm Development Studio: 4
+- Arm Development Studio: 3
 - Arm ISA: 1
+- Arm Performance Libraries: 1
 - armclang: 1
 - armie: 1
 - ArmRAL: 1
@@ -52,13 +53,16 @@ tools_software_languages_filter:
 - AWS Elastic Container Service (ECS): 1
 - AWS Elastic Kubernetes Service (EKS): 3
 - AWS Graviton: 1
+- Azure CLI: 1
+- Azure Portal: 1
 - Bash: 1
+- bash: 2
 - Bastion: 3
-- BOLT: 1
+- BOLT: 2
 - bpftool: 1
-- C: 4
+- C: 5
 - C#: 2
-- C++: 7
+- C++: 8
 - C/C++: 2
 - Capstone: 1
 - CCA: 6
@@ -68,10 +72,10 @@ tools_software_languages_filter:
 - ClickHouse: 1
 - CloudFormation: 1
 - CMake: 1
-- Coding: 18
+- Coding: 17
 - conda: 1
 - Daytona: 1
-- Demo: 4
+- Demo: 3
 - Django: 1
 - Docker: 17
 - Envoy: 2
@@ -81,31 +85,37 @@ tools_software_languages_filter:
 - Fortran: 1
 - FunASR: 1
 - FVP: 4
-- GCC: 20
+- GCC: 22
 - gdb: 1
 - Geekbench: 1
-- GenAI: 10
+- GenAI: 11
 - GitHub: 6
 - GitLab: 1
 - Glibc: 1
-- Go: 2
+- Go: 4
 - Google Axion: 3
+- Google Benchmark: 1
 - Google Cloud: 1
 - GoogleTest: 1
 - HammerDB: 1
 - Herd7: 1
+- Hugging Face: 9
 - InnoDB: 1
 - Intrinsics: 1
+- iPerf3: 1
 - Java: 3
 - JAX: 1
 - Kafka: 1
 - Keras: 1
 - Kubernetes: 10
 - Lambda: 1
+- Libamath: 1
 - libbpf: 1
 - Linaro Forge: 1
+- Linux: 1
 - Litmus7: 1
-- LLM: 8
+- Llama.cpp: 1
+- LLM: 9
 - llvm-mca: 1
 - LSE: 1
 - MariaDB: 1
@@ -115,22 +125,27 @@ tools_software_languages_filter:
 - MongoDB: 2
 - mpi: 1
 - MySQL: 9
+- NEON: 4
 - Neon: 3
-- NEON: 1
 - Nexmark: 1
 - Nginx: 3
 - Node.js: 3
 - Ollama: 1
+- ONNX Runtime: 1
+- OpenBLAS: 1
+- OpenShift: 1
+- OrchardCore: 1
 - PAPI: 1
-- perf: 4
+- perf: 5
+- Perf: 1
 - PostgreSQL: 4
-- Python: 25
-- PyTorch: 8
+- Python: 28
+- PyTorch: 9
 - RAG: 1
 - Redis: 3
 - Remote.It: 2
-- RME: 4
-- Runbook: 62
+- RME: 6
+- Runbook: 71
 - Rust: 2
 - snappy: 1
 - Snort3: 1
@@ -138,9 +153,10 @@ tools_software_languages_filter:
 - Streamline CLI: 1
 - Streamlit: 2
 - Supervisor: 1
-- SVE: 3
-- SVE2: 1
+- SVE: 5
+- SVE2: 2
 - Sysbench: 1
+- Tekton: 1
 - Telemetry: 1
 - TensorFlow: 2
 - Terraform: 11
@@ -151,7 +167,7 @@ tools_software_languages_filter:
 - Vectorscan: 1
 - Veraison: 1
 - Visual Studio Code: 4
-- vLLM: 1
+- vLLM: 2
 - VS Code: 1
 - vvenc: 1
 - Whisper: 1
@@ -163,7 +179,7 @@ tools_software_languages_filter:
 weight: 1
 cloud_service_providers_filter:
 - AWS: 17
-- Google Cloud: 10
-- Microsoft Azure: 8
+- Google Cloud: 13
+- Microsoft Azure: 9
 - Oracle: 2
 ---

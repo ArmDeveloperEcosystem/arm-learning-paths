@@ -32,7 +32,7 @@ provider = LlamaCppPythonProvider(llama_model)
 ```
 #### Define Functions
 
-The LLM has access to certain tools or functions and can take a general user input and decide which functions to call. The function’s docstring guides the LLM on when and how to invoke it. 
+The LLM has access to certain tools or functions and can take a general user input and decide which functions to call. The function's docstring guides the LLM on when and how to invoke it. 
 
 In `agent.py` three such tools or functions are defined; `open_webpage`, `get_current_time`, and `calculator`: 
 

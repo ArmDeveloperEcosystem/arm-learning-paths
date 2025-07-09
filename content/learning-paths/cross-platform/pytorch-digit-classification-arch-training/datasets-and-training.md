@@ -72,7 +72,7 @@ Make sure to replace 'x' with the version number of Python that you have install
 
 After running the code, you will see output similar to Figure 5:
 
-![image alt-text#center](Figures/01.png "Figure 5. Output")
+![image alt-text#center](figures/01.png "Figure 5. Output")
 
 ## Train the Model
 
@@ -134,7 +134,7 @@ for t in range(epochs):
 
 After running the code, you see the following output showing the training progress, as displayed in Figure 2.
 
-![image alt-text#center](Figures/02.png "Figure 2. Output 2")
+![image alt-text#center](figures/02.png "Figure 2. Output 2")
 
 Once the training is complete, you see output similar to:
 
@@ -147,7 +147,7 @@ The output shows the model achieved around 95% accuracy.
 
 # Save the model
 
-Once the model is trained, you can save it. There are various approaches for this. In PyTorch, you can save both the model’s structure and its weights to the same file using the `torch.save()` function. Alternatively, you can save only the weights of the model, not the model architecture itself. This requires you to have the model’s architecture defined separately when loading. To save the model weights, you can use the following command: 
+Once the model is trained, you can save it. There are various approaches for this. In PyTorch, you can save both the model's structure and its weights to the same file using the `torch.save()` function. Alternatively, you can save only the weights of the model, not the model architecture itself. This requires you to have the model's architecture defined separately when loading. To save the model weights, you can use the following command: 
 
 ```Python
 torch.save(model.state_dict(), "model_weights.pth"). 

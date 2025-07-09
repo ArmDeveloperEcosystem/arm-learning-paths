@@ -9,13 +9,29 @@ layout: "learningpathall"
 ---
 Mali Offline Compiler is a command-line tool that you can use to compile all shaders and kernels from OpenGL ES and Vulkan, and generate a performance report for the GPU of interest.
 
+In a terminal, test that Mali Offline Compiler is installed correctly, by typing:
+
+```
+malioc --help
+```
+
+The `--help` option returns usage instructions and the full list of available options for the malioc command.
+Note
+
+{{% notice %}}
+On macOS, Mali Offline Compiler might not be recognized as an application from an identified developer. To enable Mali Offline Compiler, open **System Preferences > Security & Privacy**, and select **Allow Anyway** for the `malioc` item.
+{{% /notice %}}
+
 ## Supported GPUs
 
 To see the full list of [supported GPUs](https://developer.arm.com/documentation/101863/latest/Platform-support/GPU-support) use:
+
 ```console
 malioc --list
 ```
+
 To get information on [API support](https://developer.arm.com/documentation/101863/latest/Platform-support/API-support) for a given GPU, use:
+
 ```console
 malioc --info --core <GPU_name>
 ```

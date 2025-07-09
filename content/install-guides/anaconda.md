@@ -15,8 +15,6 @@ test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
 title: Anaconda
 tool_install: true
 weight: 1
@@ -97,7 +95,7 @@ eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
 
 Test Anaconda Distribution by running simple TensorFlow and PyTorch examples.
 
-### TensorFlow
+### How do I use TensorFlow with Anaconda?
 
 Create a new conda environment named tf, install TensorFlow, and activate the new environment.
 
@@ -141,7 +139,7 @@ The expected output format is below. Your version may be slightly different.
 tf.Tensor(342.34387, shape=(), dtype=float32)
 ```
 
-### PyTorch
+### How do I use PyTorch with Anaconda?
 
 Create a new conda environment named torch, install PyTorch, and activate the new environment.
 

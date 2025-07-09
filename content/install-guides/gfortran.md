@@ -18,8 +18,6 @@ test_images:
 - fedora:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
 title: GFortran
 tool_install: true
 weight: 1
@@ -27,11 +25,7 @@ weight: 1
 
 [GNU Fortran](https://gcc.gnu.org/fortran/) is the Fortran compiler front end and run-time libraries for GCC, the GNU Compiler Collection.
 
-GFortran is available on all Linux distributions and can be installed using the package manager.
-
-## Before you begin
-
-Follow the instructions below to install and use `gfortran` on an Arm Linux distribution.
+## How do I prepare to install and use gfortran on an Arm Linux distribution?
 
 Confirm you are using an Arm machine by running:
 
@@ -47,13 +41,11 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## Download 
+## How do I download gfortran using the Linux package manager?
 
 The Linux package manager downloads the required files so there are no special instructions.
 
-## Installation {#install}
-
-### Installing on Debian based distributions such as Ubuntu
+### How do I install gfortran on Debian-based distributions such as Ubuntu?
 
 Use the `apt` command to install software packages on any Debian based Linux distribution, including Ubuntu.
 
@@ -62,9 +54,9 @@ sudo apt update
 sudo apt install gfortran -y
 ```
 
-### Installing on Red Hat / Fedora / Amazon Linux
+### How do I install gfortran on Red Hat, Fedora, or Amazon Linux?
 
-These Linux distributions use `yum` as the package manager. 
+These Linux distributions use `yum` as the package manager.
 
 To install the most common development tools use the commands below. If the machine has `sudo` you can use it.
 
@@ -80,12 +72,11 @@ sudo yum update -y
 sudo yum install gcc-gfortran -y
 ```
 
-
-## Setting up product license {#license}
+## Do I need to set up a product license for gfortran?
 
 Arm GNU Toolchain is open source and freely available for use. No licenses need to be set up for use.
 
-## Get started {#start}
+## How do I verify the gfortran installation and get started?
 
 To confirm the installation is complete run:
 

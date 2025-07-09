@@ -32,6 +32,8 @@ armips:
 tools_software_languages:
     - Himax SDK
     - Python
+    - Hugging Face
+
 operatingsystems:
     - Linux
     - macOS

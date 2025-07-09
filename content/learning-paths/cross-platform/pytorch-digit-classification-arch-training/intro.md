@@ -21,11 +21,11 @@ Prior to PyTorch, many frameworks used static computational graphs that require 
 * Easier debugging.
 * More intuitive code.
 
-PyTorch also seamlessly integrates with Python, which creates a native coding experience. Its deep integration with GPU acceleration also makes it a powerful tool for both research and production environments. This combination of flexibility, usability, and performance has ensured PyTorch’s rapid adoption, particularly in academic research, where experimentation and iteration are crucial activities.
+PyTorch also seamlessly integrates with Python, which creates a native coding experience. Its deep integration with GPU acceleration also makes it a powerful tool for both research and production environments. This combination of flexibility, usability, and performance has ensured PyTorch's rapid adoption, particularly in academic research, where experimentation and iteration are crucial activities.
 
 A typical process for creating a feedforward neural network in PyTorch involves defining a sequential stack of fully-connected layers, which are also known as linear layers. Each layer transforms the input by applying a set of weights and biases, followed by an activation function like ReLU. PyTorch supports this process using the torch.nn module, where layers are easily defined and composed.
 
-To create a model, users subclass the torch.nn.Module class, defining the network architecture in the __init__ method, and implement the forward pass in the forward method. PyTorch’s intuitive API and support for GPU acceleration make it ideal for building efficient feedforward networks, particularly in tasks such as image classification and digit recognition.
+To create a model, users subclass the torch.nn.Module class, defining the network architecture in the __init__ method, and implement the forward pass in the forward method. PyTorch's intuitive API and support for GPU acceleration make it ideal for building efficient feedforward networks, particularly in tasks such as image classification and digit recognition.
 
 In this Learning Path, you will explore how to use PyTorch to create and train a model for digit recognition.
 
@@ -117,7 +117,7 @@ To ensure everything is set up correctly, follow these next steps:
 
 4. Select the Python kernel you created earlier, `pytorch-env`. To do so, click **Kernels** in the top right-hand corner. Then, click **Jupyter Kernel...**, and you will see the Python kernel as shown below:
 
-![img1 alt-text#center](Figures/1.png "Figure 1: Python kernel.")
+![img1 alt-text#center](figures/1.png "Figure 1: Python kernel.")
 
 5. In your Jupyter notebook, run the following code to verify PyTorch is working correctly:
 
@@ -127,6 +127,6 @@ print(torch.__version__)
 ```
 
 It will look as follows:
-![img2 alt-text#center](Figures/2.png "Figure 2: Jupyter Notebook.")
+![img2 alt-text#center](figures/2.png "Figure 2: Jupyter Notebook.")
 
 Now you have set up your development environment, you can move on to creating a PyTorch model.

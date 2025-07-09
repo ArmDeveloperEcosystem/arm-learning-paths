@@ -22,7 +22,7 @@ AWS Copilot CLI is an open source command line interface for running containers 
 
 It is available for a variety of operating systems and Linux distributions and supports the Arm architecture.
 
-## Before you begin
+## What do I need before installing AWS Copilot CLI?
 
 This article provides quick solutions to install the latest version of AWS Copilot CLI for Ubuntu on Arm and macOS.
 
@@ -44,7 +44,7 @@ If you are on macOS with Apple Silicon the output should be:
 arm64
 ```
 
-## Download and install AWS Copilot CLI
+## How do I download and install AWS Copilot CLI?
 
 Copilot requires Docker. Refer to the [Docker](/install-guides/docker/) install guide for installation instructions.
 
@@ -115,6 +115,8 @@ Examples
   Displays the help menu for the "init" command.
   `$ copilot init --help`
 ```
+
+## How do I verify AWS Copilot CLI installation?
 
 Verify Copilot CLI is installed by running:
 

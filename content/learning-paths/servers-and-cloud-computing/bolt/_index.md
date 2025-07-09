@@ -5,13 +5,13 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers who want to learn how to use BOLT on an Arm executable.
 
-learning_objectives: 
-    - Build an application which is ready to be optimized by BOLT 
+learning_objectives:
+    - Build an application which is ready to be optimized by BOLT
     - Profile an application and collect performance information
-    - Run BOLT to create an optimized executable 
+    - Run BOLT to create an optimized executable
 
 prerequisites:
-    - An Arm based system running Linux with [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed. The Linux kernel should be version 5.15 or later. Earlier kernel versions can be used, but some Linux Perf features may be limited or not available. 
+    - An Arm based system running Linux with [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed. The Linux kernel should be version 5.15 or later. Earlier kernel versions can be used, but some Linux Perf features may be limited or not available. For [SPE](./bolt-spe) the version should be 6.14 or later.
     - (Optional) A second, more powerful Linux system to build the software executable and run BOLT.
 
 author: Jonathan Davies

@@ -15,8 +15,6 @@ test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
-test_status:
-- passed
 title: Linaro Forge
 tool_install: true
 weight: 1
@@ -29,13 +27,13 @@ Linaro Forge consists of
 * [Linaro MAP](https://www.linaroforge.com/linaro-map/) for performance profiling and optimization advice, and
 * [Linaro Performance Reports](https://www.linaroforge.com/linaro-performance-reports/) for summarizing and characterizing both scalar and MPI application performance.
 
-## Supported platforms
+## What platforms are supported by Linaro Forge?
 
 Linaro Forge runs on Linux hosts and multiple architectures. See the Linaro Forge [documentation](https://docs.linaroforge.com/latest/html/forge/supported_platforms/reference_table.html) for a full list of supported configurations.
 
 This install guide assumes an Arm AArch64 platform running Ubuntu Linux.
 
-## Download 
+## How do I download Linaro Forge?
 
 Download and extract the appropriate installation package from [Linaro Forge Downloads](https://www.linaroforge.com/downloadForge/).
 
@@ -45,9 +43,9 @@ wget https://downloads.linaroforge.com/24.0.3/linaro-forge-24.0.3-linux-aarch64.
 tar -xf linaro-forge-24.0.3-linux-aarch64.tar
 ```
 
-## Installation
+## How do I install Linaro Forge?
 
-### Linux host
+### How do I install Linaro Forge on a Linux host?
 
 Run the installer from the command line with:
 
@@ -63,24 +61,24 @@ To install to the default directory, non-interactively:
 linaro-forge-24.0.3-linux-aarch64/textinstall.sh --accept-license /home/ubuntu/linaro/forge/24.0.3
 ```
 
-### Install on macOS (remote client only)
+### How do I install Linaro Forge on macOS (remote client only)?
 
 Drag and drop the client application bundle icon into the Applications directory.
 
-### Install on Windows (remote client only)
+### How do I install Linaro Forge on Windows (remote client only)?
 
 Run the Windows file executable to install the Linaro Forge Remote Client.
 
-### Graphical installer
+### How do I run the graphical installer for Linaro Forge?
 
-Optionally, you can run the installer executable with a graphical interface. 
+Optionally, you can run the installer executable with a graphical interface.
 
-```bash 
+```console
 cd linaro-forge-24.0.3-linux-aarch64/
 ./installer
 ```
 
-## Setting up the product license
+## How do I set up the product license for Linaro Forge?
 
 You must install a license file on a machine running Linaro Forge tools to debug or profile.
 
@@ -90,9 +88,9 @@ You do not need to install a license file on a machine running Linaro Forge Remo
 
 [Free trial licenses](https://www.linaroforge.com/freeTrial/) are available for you try out Linaro Forge.
 
-## Get started
+## How do I get started with Linaro Forge?
 
-### Debugging
+### How do I debug using Linaro DDT?
 
 When compiling the program that you want to debug, you must add the debug flag to your compile command. For most compilers this is `-g`.
 
@@ -126,7 +124,7 @@ ddt --connect -n 128 myapp
 
 This mode is called *Reverse Connect*. A window will appear in the GUI when the application runs to notify of the incoming request.
 
-### Profiling
+### How do I profile an application with Linaro MAP?
 
 In most cases, if your program is already compiled with debugging symbols (`-g`), you do not need to recompile your program to profile it with Linaro Forge. However, in some cases it might need to be relinked (see the [Linking](https://developer.arm.com/documentation/101136/latest/MAP/Get-started-with-MAP/Prepare-a-program-for-profiling)).
 
@@ -152,7 +150,7 @@ A *.map file will be created in the current directory with profiling results whe
 map myapp_128p_<timestamp>.map
 ```
 
-### Performance Reports
+### How do I generate performance reports with Linaro Forge?
 
 Linaro Forge's reporting tool Linaro Performance Reports is designed to run on unmodified production executables, so in general no preparation step is necessary. However, there is one important exception: statically linked applications require additional libraries at the linking step (see [user guide](https://developer.arm.com/documentation/101136/latest/Performance-Reports/Run-real-programs)).
 
@@ -171,4 +169,4 @@ perf-report -n 128 myapp
 ```
 Two files `myapp_128p_<timestamp>.html` and `myapp_128p_<timestamp>.txt` will be created in the current directory.
 
-Linaro Forge is now installed and ready to use. 
+Linaro Forge is now installed and ready to use.

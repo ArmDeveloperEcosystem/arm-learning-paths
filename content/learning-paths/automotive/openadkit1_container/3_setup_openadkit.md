@@ -1,24 +1,23 @@
 ---
-title: Setup OpenAD Kit
+title: Set up Open AD Kit
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Execute Autoware Open AD Kit on Arm platform
+## Execute Autoware Open AD Kit on an Arm Neoverse platform
 
-Leveraging the high-performance computing power of Arm Neoverse CPUs and its comprehensive software ecosystem, you can run automotive software simulations on any Neoverse computing platforms.
+Leveraging the high-performance computing power of Arm Neoverse CPUs and their comprehensive software ecosystem, you can run automotive software simulations on any Neoverse computing platforms.
 
-This learning path can be seamlessly deployed in two type of development environments: Arm Cloud Instances and On-Premise servers.
-This example has been tested on [AWS EC2](https://aws.amazon.com/ec2/) and [Ampere Altra workstation](https://www.ipi.wiki/products/ampere-altra-developer-platform), allowing you to choose the most suitable setup based on your needs.
+You can use either an Arm Cloud Instance or on-premise servers to run Open AD Kit.
+The example has been tested on [AWS EC2](https://aws.amazon.com/ec2/) and an [Ampere Altra workstation](https://www.ipi.wiki/products/ampere-altra-developer-platform), allowing you to choose the most suitable setup based on your needs.
 
 ## Installation
 
-This learning path requires Docker to run OpenAD Kit.
-You can refer to [here](https://learn.arm.com/install-guides/docker/) to learn how to install Docker on an Arm platform.
+You need Docker to run Open AD Kit. Refer to the [Docker install guide](https://learn.arm.com/install-guides/docker/) to learn how to install Docker on an Arm platform.
 
-First, verify whether Docker is installed on your development environment by running:
+First, verify Docker is installed on your development computer by running:
 
 ```bash
 docker --version
@@ -27,17 +26,16 @@ docker --version
 If Docker is installed, it will display version information similar to the output below:
 
 ```output
-Docker version 27.2.0, build 3ab4256
+Docker version 28.0.4, build b8034c0
 ```
 
 Clone the demo repository using:
 
 ```bash
-git clone https://github.com/autowarefoundation/openadkit_demo.autoware.git
+git clone https://github.com/odincodeshen/openadkit_demo.autoware.git
 ```
 
-The project is containerized within three Docker images, so you do not need to install additional software.
-
+The project is containerized in three Docker images, so you do not need to install any additional software.
 
 ## Understanding the Open AD Kit Demo Packages
 
@@ -51,15 +49,15 @@ The Key Functions of Simulator are:
 
 - Simulates autonomous driving environments
 - Generates sensor data (LiDAR, cameras, radar, IMU)
-- Publishes vehicle state information (position, speed, heading) via ROS 2 topics for other components to process.
+- Publishes vehicle state information (position, speed, heading) via ROS 2 topics for other components to process
 - Feeds data to planning-control for trajectory planning
 - Acts as a data source for visualizer to render the simulation
 
-Interaction with Other Components
+Interaction with Other Components:
 - Provides vehicle states and sensor data to planning-control
 - Acts as the primary data source for visualizer
 
-It is an example to starts a new Docker container named `simulator`, ensuring it runs in interactive mode with a terminal and is automatically removed upon stopping, while using a predefined Docker image pulled from the GitHub Container Registry.
+The command below starts a new Docker container named `simulator`, ensuring it runs in interactive mode with a terminal and is automatically removed upon stopping, while using a predefined Docker image pulled from the GitHub Container Registry.
 
 ```bash
 docker run --name simulator --rm -it ghcr.io/autowarefoundation/demo-packages:simulator
@@ -72,10 +70,10 @@ The planning-control module is responsible for path planning and vehicle control
 The Key Functions of Planning-Control:
 - Receives sensor data and map information from simulator
 - Computes motion planning and generates optimal trajectories
-- Generates control commands (steering, acceleration, braking) and sends them to the simulator for execution in the virtual environment.
+- Generates control commands (steering, acceleration, braking) and sends them to the simulator for execution in the virtual environment
 - Acts as the decision-making unit for vehicle movement
 
-Interaction with Other Components
+Interaction with Other Components:
 - Receives sensor inputs and vehicle states from simulator
 - Sends planned trajectories and control commands back to simulator
 - Feeds trajectory and control data to visualizer for display
@@ -96,7 +94,7 @@ The Key Functions of Visualizer:
 - Uses RViz & VNC for rendering visual outputs
 - Supports remote access via Ngrok or VNC
 
-Interaction with Other Components
+Interaction with Other Components:
 - Receives sensor and vehicle state data from simulator
 - Receives planned trajectories and control commands from planning-control
 - Presents a visual representation of all ROS 2 topic data
@@ -107,4 +105,4 @@ This command starts a new Docker container named `visualizer`, ensuring it runs 
 docker run --name visualizer --rm -it -p 6080:6080 ghcr.io/autowarefoundation/demo-packages:visualizer
 ```
 
-After gaining a basic understanding of OpenAD Kit, the next section will guide you you through running three containers simultaneously on a single physical machine.
+After gaining a basic understanding of Open AD Kit, the next section will guide you through running three containers simultaneously on a single physical machine.
