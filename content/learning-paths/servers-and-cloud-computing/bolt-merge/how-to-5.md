@@ -6,13 +6,15 @@ weight: 6
 layout: learningpathall
 ---
 
+## Overview
+
 This section compares the performance of baseline binaries with BOLT-optimized versions. It highlights the impact of merged profile optimizations and shared library enhancements on overall system throughput and latency.
 
-All tests used Sysbench with --time=0 --events=10000. This configuration ensures each test runs until exactly 10,000 requests are completed per thread, providing consistent workload duration across runs.
+All tests used Sysbench with the flags `--time=0 --events=10000`. This configuration ensures that each test completes exactly 10,000 requests per thread, delivering consistent workload runtimes  across runs.
 
 ### Baseline performance (without BOLT)
 
-| Metric                     | Read-Only (Baseline) | Write-Only (Baseline) | Read+Write (Baseline) |
+| Metric                     |Read-only  | Write-only  | Read + write  |
 |---------------------------|----------------------|------------------------|------------------------|
 | Transactions/sec (TPS)    | 1006.33              | 2113.03                | 649.15                 |
 | Queries/sec (QPS)         | 16,101.24            | 12,678.18              | 12,983.09              |
@@ -22,7 +24,7 @@ All tests used Sysbench with --time=0 --events=10000. This configuration ensures
 
 ### Performance comparison: merged and non-merged instrumentation
 
-| Metric                     | Regular BOLT R+W (No Merge, system libssl) | Merged BOLT (BOLTed Read+Write + BOLTed libssl) |
+| Metric                     | Regular BOLT (read + write, system libssl) | Merged BOLT (read + write + libssl) |
 |---------------------------|---------------------------------------------|-------------------------------------------------|
 | Transactions/sec (TPS)    | 850.32                                      | 879.18                                          |
 | Queries/sec (QPS)         | 17,006.35                                   | 17,583.60                                       |
@@ -30,9 +32,9 @@ All tests used Sysbench with --time=0 --events=10000. This configuration ensures
 | Latency 95th % (ms)       | 1.52                                        | 1.39                                            |
 | Total time (s)            | 11.76                                       | 11.37                                           |
 
-Second run:
+Second test run:
 
-| Metric                     | Regular BOLT R+W (No Merge, system libssl) | Merged BOLT (BOLTed Read+Write + BOLTed libssl) |
+| Metric                     | Regular BOLT (read + write, system libssl) | Merged BOLT (read + write + libssl) |
 |---------------------------|---------------------------------------------|-------------------------------------------------|
 | Transactions/sec (TPS)    | 853.16                                      | 887.14                                          |
 | Queries/sec (QPS)         | 17,063.22                                   | 17,742.89                                       |
@@ -40,9 +42,9 @@ Second run:
 | Latency 95th % (ms)       | 1.39                                        | 1.37                                            |
 | Total time (s)            | 239.9                                       | 239.9                                           |
 
-### Performance with read-only, write-only, and merged BOLT optimizations
+### Performance across BOLT optimizations
 
-| Metric                     | 	BOLT-optimized read-only workload | Bolted Write-Only | Merged BOLT (Read+Write+libssl) | Merged BOLT (Read+Write+libcrypto) | Merged BOLT (Read+Write+libssl+libcrypto) |
+| Metric                     | 	BOLT read-only | BOLT write-only | Merged BOLT (read + write + libssl) | Merged BOLT (read + write + libcrypto) | Merged BOLT (read + write + libcrypto + libssl) |
 |---------------------------|---------------------|-------------------|----------------------------------|------------------------------------|-------------------------------------------|
 | Transactions/sec (TPS)    | 1348.47             | 3170.92           | 887.14                           | 896.58                             | 902.98                                    |
 | Queries/sec (QPS)         | 21575.45            | 19025.52          | 17742.89                         | 17931.57                           | 18059.52                                  |
@@ -56,12 +58,12 @@ All sysbench and .fdata file paths, as well as taskset usage, should match the c
 
 ### Key metrics to analyze
 
-- **TPS (Transactions Per Second)**: Higher is better.
-- **QPS (Queries Per Second)**: Higher is better.
-- **Latency (Average and 95th Percentile)**: Lower is better.
+- **TPS (transactions per second)** – higher is better  
+- **QPS (queries per second)** – higher is better  
+- **Latency (average and 95th percentile)** – lower is better
 
 ### Conclusion
 
-- BOLT substantially improves performance over non-optimized binaries due to better instruction cache utilization and reduced execution path latency.
-- Merging feature-specific profiles does not negatively affect performance; instead, it captures a broader set of runtime behaviors, making the binary better tuned for varied real-world workloads.
-- Separately optimizing external user-space libraries, even though providing smaller incremental gains, further complements the overall application optimization, delivering a fully optimized execution environment.
+- BOLT-optimized binaries clearly outperform baseline versions by improving instruction cache usage and shortening execution paths.
+- Merging feature-specific profiles does not negatively affect performance. Instead, they allow better tuning for varied real-world workloads by capturing a broader set of runtime behaviors.
+- External library optimizations (for example, `libssl` and `libcrypto`) provide smaller incremental gains, delivering a fully optimized execution environment.
