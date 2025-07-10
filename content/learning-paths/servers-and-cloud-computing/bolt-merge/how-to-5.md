@@ -53,7 +53,7 @@ Second test run:
 | Total time (s)            | 239.8               | 239.72            | 239.9                            | 239.9                              | 239.9                                     |
 
 {{% notice Note %}}
-All sysbench and .fdata file paths, as well as taskset usage, should match the conventions in previous steps: use sysbench from PATH (no src/), use /usr/share/sysbench/ for Lua scripts, and use $HOME-based paths for all .fdata and library files. On an 8-core system, use taskset -c 7 for sysbench and avoid contention with mysqld.
+All Sysbench and .fdata file paths, as well as taskset usage, should match the conventions in previous steps: use Sysbench from PATH (no src/), use /usr/share/sysbench/ for Lua scripts, and use $HOME-based paths for all .fdata and library files. On an 8-core system, use taskset -c 7 for Sysbench and avoid contention with mysqld.
 {{% /notice %}}
 
 ### Key metrics to analyze

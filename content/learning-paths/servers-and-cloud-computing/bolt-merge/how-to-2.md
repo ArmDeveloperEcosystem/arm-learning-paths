@@ -106,7 +106,7 @@ Before running the workload, you might need to initialize a new data directory i
 bin/mysqld --initialize-insecure --datadir=data
 ```
 
-Start the instrumented server. On an 8-core system, use core 2 for mysqld and core 7 for sysbench to avoid contention.
+Start the instrumented server. On an 8-core system, use core 2 for mysqld and core 7 for Sysbench to avoid contention.
 
 Run the command from build directory:
 
@@ -171,7 +171,7 @@ You only need to do this once. Don’t repeat it before each test.
 
 ## Reset the database between runs
 
-This clears all existing tables and data from the bench database, giving you a clean slate for sysbench prepare without needing to recreate the user or reinitialize the datadir.
+This clears all existing tables and data from the bench database, giving you a clean slate for Sysbench prepare without needing to recreate the user or reinitialize the datadir.
 
 ```bash
 bin/mysql -u root <<< "DROP DATABASE bench; CREATE DATABASE bench;"
@@ -179,7 +179,7 @@ bin/mysql -u root <<< "DROP DATABASE bench; CREATE DATABASE bench;"
 
 ## Install and build Sysbench
 
-In a third terminal, run the commands below if you have not run sysbench yet: 
+In a third terminal, run the commands below if you have not run Sysbench yet: 
 
 ```bash
 git clone https://github.com/akopytov/sysbench.git
@@ -192,7 +192,7 @@ export LD_LIBRARY_PATH=/usr/local/mysql/lib/
 
 Use `./src/sysbench` for running benchmarks unless installed globally.
 
-## Prepare the dataset with sysbench
+## Prepare the dataset with Sysbench
 
 Run `sysbench` with the `prepare` option:
 
@@ -263,7 +263,7 @@ Start the MySQL instrumented binary in first terminal.
 
 Use a workload generator to stress the binary in a feature-specific way. 
 
-For example, to simulate **read-only traffic** with sysbench:
+For example, to simulate **read-only traffic** with Sysbench:
 
 ```bash
 taskset -c 7 ./src/sysbench \
@@ -294,7 +294,7 @@ On an 8-core system, cores are numbered 0-7. Adjust the `taskset -c` values as n
 
 The `.fdata` file defined in `--instrumentation-file` will be populated with runtime execution data.
 
-After completing each benchmark run (for example, after sysbench run), you must cleanly shut down the MySQL server and reset the dataset to ensure the next test starts from a consistent state.
+After completing each benchmark run (for example, after Sysbench run), you must cleanly shut down the MySQL server and reset the dataset to ensure the next test starts from a consistent state.
 ```bash
 bin/mysqladmin -u root shutdown ; rm -rf /dev/shm/dataset ; cp -R data/ /dev/shm/dataset
 ```

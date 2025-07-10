@@ -32,7 +32,7 @@ llvm-bolt $HOME/mysql-server/build/bin/mysqld \
 Run Sysbench using the write-only Lua script to generate a workload profile:
 
 ```bash
-# On an 8-core system, use available cores (e.g., 7 for sysbench)
+# On an 8-core system, use available cores (e.g., 7 for Sysbench)
 taskset -c 7 ./src/sysbench \
   --db-driver=mysql \
   --mysql-host=127.0.0.1 \

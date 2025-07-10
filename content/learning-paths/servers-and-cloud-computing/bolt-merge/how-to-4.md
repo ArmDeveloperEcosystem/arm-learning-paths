@@ -40,7 +40,7 @@ llvm-bolt $HOME/bolt-libs/openssl/lib/libssl.so.3 \
   2>&1 | tee $HOME/mysql-server/bolt-instrumentation-libssl.log
 ```
 
-Launch MySQL with the instrumented `libssl.so` and run a read+write sysbench test to populate the profile
+Launch MySQL with the instrumented `libssl.so` and run a read+write Sysbench test to populate the profile
 
 ### Optimize libssl using the profile
 
@@ -135,7 +135,7 @@ llvm-bolt $HOME/bolt-libs/openssl/libcrypto.so.3 \
   --instrumentation-wait-forks \
   2>&1 | tee $HOME/mysql-server/bolt-instrumentation-libcrypto.log
 ```
-Launch MySQL using the instrumented shared library and run a read+write sysbench test to populate the profile.
+Launch MySQL using the instrumented shared library and run a read+write Sysbench test to populate the profile.
 
 ### Optimize libcrypto using the profile
 After running the read+write test, ensure `libcrypto-readwrite.fdata` is populated.
