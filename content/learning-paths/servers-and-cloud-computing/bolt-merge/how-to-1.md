@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## What is BOLT?
 
-[BOLT](https://github.com/llvm/llvm-project/blob/main/bolt/README.md) is a post-link binary optimizer that uses Linux Perf data to reorder executable code layout. This improves instruction cache locality, reduces memory overhead, and boosts runtime performance.
+[BOLT](https://github.com/llvm/llvm-project/blob/main/bolt/README.md) is a post-link binary optimizer that uses Linux Perf data to reorder code layout. This improves instruction cache locality, reduces memory overhead, and improves performance.
 
 Before you begin, ensure that you have the following installed:
 
@@ -44,11 +44,11 @@ BOLT profile merging combines profiling data from multiple runs into one unified
 
 ## What types of applications benefit from BOLT?
 
-While MySQL and Sysbench are used as example applications, you can use this method for any feature-rich application that:
+Although this Learning Path uses MySQL and Sysbench as examples, you can apply the same method to any feature-rich application that:
 
 - **Exhibits multiple runtime paths** - applications often have different code paths depending on the workload or user actions. Optimizing for just one path can leave performance gains untapped in others. By profiling and merging data from various workloads, you ensure broader optimization coverage.
 
-- **Uses dynamic libraries** - most modern applications rely on shared libraries for functionality. Optimizing these libraries alongside the main binary ensures consistent performance improvements throughout the application.
+- **Uses dynamic libraries** - most modern applications rely on shared libraries for functionality. + Optimizing shared libraries alongside the main binary ensures consistent performance across your stack.
 
 - **Requires full-stack binary optimization for performance-critical deployment** - in scenarios where every bit of performance matters, such as high-throughput servers or latency-sensitive applications, optimizing the entire binary stack can yield significant benefits.
 

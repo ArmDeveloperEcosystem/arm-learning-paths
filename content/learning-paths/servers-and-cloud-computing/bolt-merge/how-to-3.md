@@ -6,15 +6,16 @@ weight: 4
 layout: learningpathall
 ---
 
-In this step, you’ll collect profile data for a write-heavy workload and merge it with the read-heavy profile from the previous step. The merged profile captures a broader set of execution behaviors for optimizing the final binary.
+## Overview
+
+In this step, you’ll generate a profile for a write-heavy workload and merge it with the read-heavy profile you created earlier. The merged profile captures a broader set of execution behaviors for optimizing the final binary.
 
 ## Run a write-only workload for the application binary
 
 You can reuse the previously built MySQL binary or generate a new instrumented variant if needed.
 
-Use the same BOLT-instrumented MySQL binary and drive it with a write-only workload to capture `profile-writeonly.fdata`
+Use the BOLT-instrumented MySQL binary to run a write-only workload and generate `profile-writeonly.fdata`. You can reuse the binary from the previous step or create a new one with the command below.
 
-For this you can reuse the existing instrumented binary, rename .fdata appropriately for read and write workloads or run llvm-bolt with new file target. 
 ```bash
 llvm-bolt $HOME/mysql-server/build/bin/mysqld \
   -instrument \
@@ -54,16 +55,16 @@ taskset -c 7 ./src/sysbench \
   src/lua/oltp_write_only.lua run
 ```
 
-Make sure that the `--instrumentation-file` points to `profile-writeonly.fdata` to collect the write-only profile.
+Confirm that `--instrumentation-file` is set to `profile-writeonly.fdata`.
 
 ## Reset the dataset after profiling
 
-After running each benchmark, cleanly shut down the MySQL server reset the in-memory dataset to ensure the next run starts in a consistent state:
+After running each benchmark, cleanly shut down the MySQL server and reset the in-memory dataset to ensure the next run starts in a consistent state:
 
 ```bash
 ./bin/mysqladmin -u root shutdown ; rm -rf /dev/shm/dataset ; cp -R data/ /dev/shm/dataset
 ```
-### Check that both profiles exist
+### Verify that both profiles exist
 
 Verify that the following `.fdata` files have been generated:
 
@@ -78,7 +79,7 @@ Both `.fdata` files should now exist and contain valid data:
 - `profile-readonly.fdata`
 - `profile-writeonly.fdata`
 
-### Merge the Feature Profiles
+### Merge the feature profiles
 
 Use `merge-fdata` to combine the feature-specific profiles into one comprehensive `.fdata` file:
 
@@ -96,7 +97,7 @@ Profile from 2 files merged.
 
 This creates a single merged profile (`profile-merged.fdata`) covering both read-only and write-only workload behaviors.
 
-### Verify the Merged Profile
+### Verify the merged profile
 
 Confirm the merged profile file exists and is non-empty:
 
@@ -104,7 +105,7 @@ Confirm the merged profile file exists and is non-empty:
 ls -lh $HOME/mysql-server/build/profile-merged.fdata
 ```
 
-### Optimize the binary using the merged profile
+### Optimize the binary with the merged profile
 
 Use LLVM-BOLT to generate the final optimized binary using the merged `.fdata` file:
 
@@ -121,6 +122,13 @@ llvm-bolt $HOME/mysql-server/build/bin/mysqld \
   --print-profile-stats \
   2>&1 | tee $HOME/mysql-server/build/bolt-readwritemerged-opt.log
 ```
+
+{{% notice Note %}}
+Key flags explained:
+- `-reorder-blocks=ext-tsp`: Reorders code blocks to improve cache locality  
+- `-split-functions`: Separates hot and cold regions for better performance  
+- `-dyno-stats`: Prints dynamic profile-based statistics during optimization  
+{{% /notice %}}
 
 This command optimizes the binary layout based on the merged workload profile, creating a single binary (`mysqldreadwrite_merged.bolt_instrumentation`) that is optimized across both features.
 

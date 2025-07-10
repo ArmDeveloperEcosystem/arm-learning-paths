@@ -66,4 +66,4 @@ All sysbench and .fdata file paths, as well as taskset usage, should match the c
 
 - BOLT-optimized binaries clearly outperform baseline versions by improving instruction cache usage and shortening execution paths.
 - Merging feature-specific profiles does not negatively affect performance. Instead, they allow better tuning for varied real-world workloads by capturing a broader set of runtime behaviors.
-- External library optimizations (for example, `libssl` and `libcrypto`) provide smaller incremental gains, delivering a fully optimized execution environment.
+- External library optimizations (for example, `libssl` and `libcrypto`) provide smaller incremental gains, delivering a fully-optimized execution environment.

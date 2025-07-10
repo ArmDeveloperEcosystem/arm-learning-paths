@@ -10,11 +10,11 @@ layout: learningpathall
 
 In this step, you'll use BOLT to instrument the MySQL application binary and to collect profile data for specific workloads. The collected profiles will later be merged with others and used to optimize the application's code layout.
 
-## Build mysqld from source 
+## Build mysqld from source
 
-Follow these steps to build the MySQL server (`mysqld`) binary from source:
+Build the MySQL server (`mysqld`) binary from source. 
 
-First, start by installing the required dependencies:
+Start by installing the required dependencies:
 
 ```bash
 sudo apt update
@@ -22,7 +22,7 @@ sudo apt install -y build-essential cmake libncurses5-dev libssl-dev libboost-al
   bison pkg-config libaio-dev libtirpc-dev git ninja-build liblz4-dev
 ```
 
-Now, download the MySQL source code. You can change to another version in the `checkout` command below if needed:
+Clone the MySQL source code. You can change to another version in the `checkout` command below if needed:
 
 ```bash
 git clone https://github.com/mysql/mysql-server.git
@@ -69,11 +69,13 @@ source ~/.bashrc
 
 Ensure the binary is unstripped and includes debug symbols for BOLT instrumentation.
 
-To work with BOLT, your application binary should be:
+Make sure your application binary:
 
-- Built from source
-- Unstripped, with symbol information available
-- Compiled with frame pointers enabled (`-fno-omit-frame-pointer`)
+- Is built from source
+
+ - Includes symbol information (unstripped)
+
+I - s compiled with frame pointers (`-fno-omit-frame-pointer`)
 
 You can verify symbol presence with:
 
@@ -104,7 +106,7 @@ Before running the workload, you might need to initialize a new data directory i
 bin/mysqld --initialize-insecure --datadir=data
 ```
 
-Start the instrumented server. On an 8-core system, use available cores (for example, 2 for mysqld, 7 for sysbench). 
+Start the instrumented server. On an 8-core system, use core 2 for mysqld and core 7 for sysbench to avoid contention.
 
 Run the command from build directory:
 
@@ -164,7 +166,7 @@ FLUSH PRIVILEGES;"
 This sets up the bench user and the bench database with full privileges. 
 
 {{% notice Note %}}
-Do not repeat this before every test. It is only required once.
+You only need to do this once. Don’t repeat it before each test.
 {{% /notice %}}
 
 ## Reset the database between runs
@@ -208,7 +210,7 @@ Run `sysbench` with the `prepare` option:
   src/lua/oltp_read_write.lua prepare
 ```
 
-## Shutdown MySQL and snapshot dataset for fast reuse 
+## Shut down MySQL and snapshot dataset for fast reuse 
 
 Do these steps once at the start from MySQL source directory
 
@@ -251,7 +253,7 @@ llvm-bolt $HOME/mysql-server/build/bin/mysqld \
 
 These flags control how BOLT collects runtime data from the instrumented binary. Understanding them helps ensure accurate and comprehensive profile generation:
 
-- `-instrument`: enables instrumentation mode. BOLT inserts profiling instructions into the binary to record execution behavior at runtime.enables profile generation instrumentation.
+- `-instrument`: enables instrumentation mode. BOLT inserts profiling instructions into the binary to record execution behavior at runtime.
 - `--instrumentation-file=<PATH.`: specifies the output file for the collected profiling data (`.fdata`). This file is later used during optimization. 
 - `--instrumentation-wait-forks`: instructs BOLT to wait for forked child processes to complete, which is important for applications like daemons or servers that spawn subprocesses.
 
