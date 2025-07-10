@@ -12,7 +12,7 @@ This section compares the performance of baseline binaries with BOLT-optimized v
 
 All tests used Sysbench with the flags `--time=0 --events=10000`. This configuration ensures that each test completes exactly 10,000 requests per thread, delivering consistent workload runtimes  across runs.
 
-### Baseline performance (without BOLT)
+## Baseline performance (without BOLT)
 
 | Metric                     |Read-only  | Write-only  | Read + write  |
 |---------------------------|----------------------|------------------------|------------------------|
@@ -22,7 +22,7 @@ All tests used Sysbench with the flags `--time=0 --events=10000`. This configura
 | Latency 95th % (ms)       | 1.04                 | 0.83                   | 1.79                   |
 | Total time (s)            | 9.93                 | 4.73                   | 15.40                  |
 
-### Performance comparison: merged and non-merged instrumentation
+## Performance comparison: merged and non-merged instrumentation
 
 | Metric                     | Regular BOLT (read + write, system libssl) | Merged BOLT (read + write + libssl) |
 |---------------------------|---------------------------------------------|-------------------------------------------------|
@@ -42,7 +42,7 @@ Second test run:
 | Latency 95th % (ms)       | 1.39                                        | 1.37                                            |
 | Total time (s)            | 239.9                                       | 239.9                                           |
 
-### Performance across BOLT optimizations
+## Performance across BOLT optimizations
 
 | Metric                     | 	BOLT read-only | BOLT write-only | Merged BOLT (read + write + libssl) | Merged BOLT (read + write + libcrypto) | Merged BOLT (read + write + libcrypto + libssl) |
 |---------------------------|---------------------|-------------------|----------------------------------|------------------------------------|-------------------------------------------|
@@ -56,13 +56,13 @@ Second test run:
 All Sysbench and .fdata file paths, as well as taskset usage, should match the conventions in previous steps: use Sysbench from PATH (no src/), use /usr/share/sysbench/ for Lua scripts, and use $HOME-based paths for all .fdata and library files. On an 8-core system, use taskset -c 7 for Sysbench and avoid contention with mysqld.
 {{% /notice %}}
 
-### Key metrics to analyze
+## Key metrics to analyze
 
 - **TPS (transactions per second)** – higher is better  
 - **QPS (queries per second)** – higher is better  
 - **Latency (average and 95th percentile)** – lower is better
 
-### Conclusion
+## Conclusion
 
 - BOLT-optimized binaries clearly outperform baseline versions by improving instruction cache usage and shortening execution paths.
 - Merging feature-specific profiles does not negatively affect performance. Instead, they allow better tuning for varied real-world workloads by capturing a broader set of runtime behaviors.

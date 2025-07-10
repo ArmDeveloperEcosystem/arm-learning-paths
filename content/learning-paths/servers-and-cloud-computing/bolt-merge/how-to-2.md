@@ -249,7 +249,7 @@ llvm-bolt $HOME/mysql-server/build/bin/mysqld \
   2>&1 | tee $HOME/mysql-server/bolt-instrumentation-readonly.log
 ```
 
-### Explanation of key options
+## Explanation of key options
 
 These flags control how BOLT collects runtime data from the instrumented binary. Understanding them helps ensure accurate and comprehensive profile generation:
 

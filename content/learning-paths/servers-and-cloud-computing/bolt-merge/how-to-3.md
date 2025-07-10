@@ -64,7 +64,7 @@ After running each benchmark, cleanly shut down the MySQL server and reset the i
 ```bash
 ./bin/mysqladmin -u root shutdown ; rm -rf /dev/shm/dataset ; cp -R data/ /dev/shm/dataset
 ```
-### Verify that both profiles exist
+## Verify that both profiles exist
 
 Verify that the following `.fdata` files have been generated:
 
@@ -72,14 +72,14 @@ Verify that the following `.fdata` files have been generated:
 ls -lh $HOME/mysql-server/build/profile-readonly.fdata
 ls -lh $HOME/mysql-server/build/profile-writeonly.fdata
 ```
-### Merge the read and write profiles
+## Merge the read and write profiles
 
 Both `.fdata` files should now exist and contain valid data:
 
 - `profile-readonly.fdata`
 - `profile-writeonly.fdata`
 
-### Merge the feature profiles
+## Merge the feature profiles
 
 Use `merge-fdata` to combine the feature-specific profiles into one comprehensive `.fdata` file:
 
@@ -97,7 +97,7 @@ Profile from 2 files merged.
 
 This creates a single merged profile (`profile-merged.fdata`) covering both read-only and write-only workload behaviors.
 
-### Verify the merged profile
+## Verify the merged profile
 
 Confirm the merged profile file exists and is non-empty:
 
@@ -105,7 +105,7 @@ Confirm the merged profile file exists and is non-empty:
 ls -lh $HOME/mysql-server/build/profile-merged.fdata
 ```
 
-### Optimize the binary with the merged profile
+## Optimize the binary with the merged profile
 
 Use LLVM-BOLT to generate the final optimized binary using the merged `.fdata` file:
 
