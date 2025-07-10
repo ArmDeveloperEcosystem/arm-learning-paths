@@ -8,7 +8,13 @@ layout: learningpathall
 
 ## What is BOLT?
 
-[BOLT](https://github.com/llvm/llvm-project/blob/main/bolt/README.md) is a post-link binary optimizer that uses Linux Perf data to reorder code layout. This improves instruction cache locality, reduces memory overhead, and improves performance.
+[BOLT](https://github.com/llvm/llvm-project/blob/main/bolt/README.md) is a post-link binary optimizer that uses uses profiling data from [Linux Perf](/install-guides/perf/) to identify frequently executed functions and basic blocks. Based on this data, BOLT reorders code to improve instruction cache locality, reduce branch mispredictions, and shorten critical execution paths.
+
+This often results in faster startup times, lower CPU cycles per instruction (CPI), and improved throughput - especially for large, performance-sensitive applications like databases, web servers, or system daemons.
+
+{{% notice Note %}}
+BOLT complements compile-time optimizations like LTO (Link-Time Optimization) and PGO (Profile-Guided Optimization). It applies after linking, giving it visibility into the final binary layout, which traditional compiler optimizations do not.
+{{% /notice %}}
 
 Before you begin, ensure that you have the following installed:
 
