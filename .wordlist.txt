@@ -4449,3 +4449,7 @@ wlp
 wlx
 xquartz
 zenohd
+Kompanio
+Zenoh's
+instrumentable
+subprocesses

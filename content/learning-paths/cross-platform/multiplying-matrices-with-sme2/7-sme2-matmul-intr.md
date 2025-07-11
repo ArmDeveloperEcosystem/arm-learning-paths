@@ -201,7 +201,7 @@ is exactly what was shown in Figure 2 earlier in the Learning Path. Note again t
 
 Once again, intrinsics makes it easy to fully leverage SME2, provided you have a
 solid understanding of its available instructions. The compiler is automatically
-handling many low-level aspects (saving / restoring of the diferent contexts),
+handling many low-level aspects (saving / restoring of the different contexts),
 as well as not using registers that are reserved on specific platforms (like
 `x18`). Predicates handle corner cases elegantly, ensuring robust execution.
 Most importantly, the code adapts to different SVL values across various
