@@ -16,11 +16,13 @@ Before migrating, confirm that your applications can run on the Arm 64-bit (`arm
 
 Use the following tools to inspect container images for multi-architecture support:
 
-- [KubeArchInspect](https://learn.arm.com/learning-paths/servers-and-cloud-computing/kubearchinspect/): Scans container images in your Kubernetes cluster.
-- [Docker inspect script](https://learn.arm.com/learning-paths/cross-platform/docker/check-images/): Checks local image manifests for platform variants.
+- [KubeArchInspect](https://learn.arm.com/learning-paths/servers-and-cloud-computing/kubearchinspect/): scans container images in your Kubernetes cluster.
+- [Docker inspect script](https://learn.arm.com/learning-paths/cross-platform/docker/check-images/): checks local image manifests for platform variants.
 
-> [!NOTE]
-> The OpenShift Pipelines Tutorial supports `arm64` and has no architecture restrictions.
+{{% notice Note %}}
+The OpenShift Pipelines Tutorial supports `arm64` and has no architecture restrictions.
+{{% /notice %}}
+
 
 ## Enable multi-architecture support in Red Hat OpenShift
 
@@ -50,8 +52,8 @@ To take advantage of Arm-based compute, you need to add new MachineSets to your 
 
 When introducing Arm nodes into your OpenShift cluster, you need to control which workloads are scheduled onto these new nodes. There are two main approaches:
 
-- **Manual scheduling with Taints and Tolerations:** By applying a taint to your Arm nodes, you ensure that only workloads with a matching toleration are scheduled there. This gives you precise control over which applications run on Arm, making it easier to test and migrate workloads incrementally.
-- **Automated scheduling with the Multiarch Tuning Operator:** This operator helps automate the placement of workloads on the appropriate architecture by managing node affinity and tolerations for you. This is useful for larger environments or when you want to simplify multi-architecture workload management.
+- **Manual scheduling with Taints and Tolerations:** by applying a taint to your Arm nodes, you ensure that only workloads with a matching toleration are scheduled there. This gives you precise control over which applications run on Arm, making it easier to test and migrate workloads incrementally.
+- **Automated scheduling with the Multiarch Tuning Operator:** this operator helps automate the placement of workloads on the appropriate architecture by managing node affinity and tolerations for you. This is useful for larger environments or when you want to simplify multi-architecture workload management.
 
 For manual scheduling, add the following taint:
 
@@ -77,15 +79,19 @@ oc import-image php -n openshift --all --confirm --import-mode='PreserveOriginal
 oc import-image python -n openshift --all --confirm --import-mode='PreserveOriginal'
 ```
 
-> [!TIP]
-> This avoids image pull errors when deploying on Arm nodes.
+{{% notice Note %}}
+This avoids image pull errors when deploying on Arm nodes.
+{{% /notice %}}
 
-## 4. Rebuild and verify container images
+
+## Rebuild and verify container images
 
 To build 64-bit Arm compatible images, the OpenShift Pipelines Tutorial has been modified to patch deployments with the Tekton Task's podTemplate information. This will allow you to pass a podTemplate for building and deploying your newly built application on the target architecture. It also makes it easy to revert back to 64-bit x86 by re-running the pipeline without the template.
 
-> [!NOTE]
-> Red Hat OpenShift only supports native builds. Cross-architecture builds are not supported.
+{{% notice Note %}}
+Red Hat OpenShift only supports native builds. Cross-architecture builds are not supported.
+{{% /notice %}}
+
 ## Define a podTemplate
 Create a podTemplate defining a toleration and a node affinity to make the builds deploy on Arm machines.
 
