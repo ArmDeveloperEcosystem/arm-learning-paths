@@ -75,9 +75,7 @@ Start the container system service:
 container system start
 ```
 
-{{% notice note %}}
 You must start the service to use commands like `build`, `run`, or `push`. It may need to be restarted after rebooting.
-{{% /notice %}}
 
 The background server process is now running. 
 
@@ -156,9 +154,7 @@ container registry login docker.io
 
 Enter your Docker Hub username and password.
 
-{{% notice note %}}
 The same command works with other registries such as GitHub Container Registry (ghcr.io) or any OCI-compliant registry. Replace `docker.io` with the appropriate registry hostname.
-{{% /notice %}}
 
 Next, upload the tagged image to Docker Hub:
 
