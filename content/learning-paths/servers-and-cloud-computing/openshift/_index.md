@@ -12,7 +12,7 @@ prerequisites:
   - An AWS account with an OpenShift 4.18 cluster running x86 compute nodes
   - Red Hat OpenShift Pipelines (Tekton) Operator installed in your cluster
   - Familiarity with the `oc` CLI, container fundamentals, and basic Tekton concepts (Task, Pipeline, PipelineRun)
-  - Cluster access with `cluster-admin` or equivalent permissions to configure nodes and pipelines
+  - Cluster access with cluster-admin or equivalent permissions to configure nodes and pipelines
 
 author: Jeff Young
 
