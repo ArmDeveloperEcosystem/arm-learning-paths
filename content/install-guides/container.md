@@ -57,40 +57,41 @@ Go to the [GitHub Releases page](https://github.com/apple/container/releases) an
 
 For example:
 
-   ```bash
-   wget https://github.com/apple/container/releases/download/0.2.0/container-0.2.0-installer-signed.pkg
-   ```
+```bash
+wget https://github.com/apple/container/releases/download/0.2.0/container-0.2.0-installer-signed.pkg
+```
 
 Install the package:
 
-   ```bash
-   sudo installer -pkg container-0.2.0-installer-signed.pkg -target /
-   ```
+```bash
+sudo installer -pkg container-0.2.0-installer-signed.pkg -target /
+```
 
 This installs the Container binary at `/usr/local/bin/container`.
 
 Start the container system service:
 
-   ```bash
-   container system start
-   ```
+```bash
+container system start
+```
 
-{{% notice Note %}}
-The system service must be running to use container operations such as build, run, or push. It may also need to be started again after a reboot, depending on system settings.{{%/notice %}}
+{{% notice note %}}
+You must start the service to use commands like `build`, `run`, or `push`. It may need to be restarted after rebooting.
+{{% /notice %}}
 
 The background server process is now running. 
 
 Verify the CLI version:
 
-   ```bash
-   container --version
-   ```
+```bash
+container --version
+```
 
-   Example output:
+Example output:
 
-   ```output
-   container CLI version 0.2.0
-   ```
+```output
+container CLI version 0.2.0
+```
 
 ## Build and run a container
 
@@ -141,28 +142,30 @@ Once the image is built and tested locally, it can be pushed to a container regi
 
 Tag the image with a registry-compatible name:
 
-   ```bash
-   container images tag uname docker.io/<your-username>/uname:latest
-   ```
+```bash
+container images tag uname docker.io/<your-username>/uname:latest
+```
 
-   Replace `<your-username>` with your Docker Hub username.
+Replace `<your-username>` with your Docker Hub username.
 
 Log in to Docker Hub:
 
-   ```bash
-   container registry login docker.io
-   ```
+```bash
+container registry login docker.io
+```
 
 Enter your Docker Hub username and password.
 
-{{% notice Note %}}
-The same command works with other registries such as GitHub Container Registry (ghcr.io) or any OCI-compliant registry. Replace `docker.io` with the appropriate registry hostname.{{% /notice %}}
+{{% notice note %}}
+The same command works with other registries such as GitHub Container Registry (ghcr.io) or any OCI-compliant registry. Replace `docker.io` with the appropriate registry hostname.
+{{% /notice %}}
 
-Next, upload the tagged image to Docker Hub.
+Next, upload the tagged image to Docker Hub:
 
-   ```bash
-   container images push docker.io/<your-username>/uname:latest
-   ```
+```bash
+container images push docker.io/<your-username>/uname:latest
+```
+
 ## List images and containers
 
 To view images:
