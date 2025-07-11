@@ -50,9 +50,7 @@ int main(int argc, char** argv) {
     ImageParam input(UInt(8), 2, "input");
 
     // Create a clamped function that limits the access to within the image bounds
-    Func clamped("clamped");
-    clamped(x, y) = input(clamp(x, 0, input.width()-1),
-                        clamp(y, 0, input.height()-1));
+    Func clamped = Halide::BoundaryConditions::repeat_edge(input);
 
     // Now use the clamped function in processing
     RDom r(0, 3, 0, 3);
@@ -89,8 +87,6 @@ int main(int argc, char** argv) {
 
 In the original implementation constants 128, 255, and 0 were implicitly treated as integers. Here, the threshold value (128) and output values (255, 0) are explicitly cast to uint8_t. This approach removes ambiguity and clearly specifies the types used, ensuring compatibility and clarity. Both approaches result in identical functionality, but explicitly casting helps emphasize the type correctness and may avoid subtle issues during cross-compilation or in certain environments.
 
-Both approaches result in identical functionality, but explicitly casting helps emphasize the type correctness and may avoid subtle issues during cross-compilation or in certain environments.
-
 The program takes at least one command-line argument, the output base name used to generate the files (e.g., “blur_threshold_android”). Here, the target architecture is explicitly set within the code to Android ARM64:
 
 ```cpp
@@ -104,20 +100,23 @@ target.bits = 64;
 target.set_feature(Target::NoRuntime, false);
 
 // Optionally, enable hardware-specific optimizations to improve performance on ARM devices:
-// - NEON: Advanced SIMD (Single Instruction Multiple Data) instructions for parallel computation.
 // - DotProd: Optimizes matrix multiplication and convolution-like operations on ARM.
-// - SVE or SVE2: Scalable Vector Extension for vectorization on newer ARM architectures (if applicable).
+// - ARMFp16 (half-precision floating-point operations).
 ```
 
 Notes: 
-* NoRuntime feature: When set to true, Halide excludes its runtime from the generated code, requiring you to link the runtime manually during the linking step. Setting it to false includes the Halide runtime within the generated library, simplifying deployment.
-* NEON, DotProd, and SVE/SVE2 features leverage ARM-specific instruction sets for enhanced performance, especially beneficial on Android mobile devices.
+* NoRuntime feature. When set to true, Halide excludes its runtime from the generated code, requiring you to link the runtime manually during the linking step. Setting it to false includes the Halide runtime within the generated library, simplifying deployment.
+* ARMFp16. Leverages ARM’s hardware support for half-precision (16-bit) floating-point computations, significantly accelerating workloads where reduced precision is acceptable, such as neural networks and image processing.
 
 We declare spatial variables (x, y) and an ImageParam named “input” representing the input image data. We use boundary clamping (clamp) to safely handle edge pixels. Then, we apply a 3x3 blur with a reduction domain (RDom). The accumulated sum is divided by 9 (the number of pixels in the neighborhood), producing an average blurred image. Lastly, thresholding is applied, producing a binary output: pixels above a certain brightness threshold (128) become white (255), while others become black (0).
 
 This section intentionally reinforces previous concepts, focusing now primarily on explicitly clarifying integration details, such as type correctness and the handling of runtime features within Halide.
 
 Simple scheduling directives (compute_root) instruct Halide to compute intermediate functions at the pipeline’s root, simplifying debugging and potentially enhancing runtime efficiency.
+
+This strategy can simplify debugging by clearly isolating computational steps and may enhance runtime efficiency by explicitly controlling intermediate storage locations.
+
+By clearly separating algorithm logic from scheduling, developers can easily test and compare different scheduling strategies,such as compute_inline, compute_root, compute_at, and more, without modifying their fundamental algorithmic code. This separation significantly accelerates iterative optimization and debugging processes, ultimately yielding better-performing code with minimal overhead.
 
 We invoke Halide’s AOT compilation function compile_to_static_library, which generates a static library (.a) containing the optimized pipeline and a corresponding header file (.h).
 
@@ -142,7 +141,7 @@ Note: JNI (Java Native Interface) is a framework that allows Java (or Kotlin) co
 To compile the pipeline-generation program on your host system, use the following commands (replace /path/to/halide with your Halide installation directory):
 ```console
 export DYLD_LIBRARY_PATH=/path/to/halide/lib/libHalide.19.dylib
-g++ -std=c++17 camera-capture.cpp -o camera-capture \
+g++ -std=c++17 blud-android.cpp -o blud-android \
     -I/path/to/halide/include -L/path/to/halide/lib -lHalide \
     $(pkg-config --cflags --libs opencv4) -lpthread -ldl \
     -Wl,-rpath,/path/to/halide/lib

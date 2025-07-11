@@ -125,8 +125,8 @@ int main() {
     // x, y - spatial coordinates (width, height)
     // c    - channel coordinate (R, G, B)
     Var x("x"), y("y"), c("c");
-    Func inverted("inverted");
-    inverted(x, y, c) = 255 - inputBuffer(x, y, c);
+    Func invert("inverted");
+    invert(x, y, c) = 255 - inputBuffer(x, y, c);
 
     // Schedule the pipeline so that the channel dimension is the innermost loop,
     // ensuring that the output is interleaved.
@@ -162,9 +162,12 @@ The actual computation occurs when the pipeline is executed with the call to inv
 
 Finally, the processed Halide output buffer is efficiently wrapped in an OpenCV Mat header without copying pixel data. For proper display in OpenCV, which uses BGR channel ordering by default, the code converts the processed image back from RGB to BGR. The program then displays the original and inverted images in separate windows, waiting for a key press before exiting. This approach demonstrates a streamlined integration between Halide for high-performance image processing and OpenCV for convenient input and output operations.
 
-By default, Halide orders loops based on the order of the variables declared. In this case, the original ordering would be (x, y, c). This default ordering means that Halide processes images channel-by-channel (all reds, then all greens, then all blues), which is called planar layout.
+By default, Halide orders loops based on the order of variable declaration. In this example, the original ordering (x, y, c) implies processing the image pixel-by-pixel across all horizontal positions (x), then vertical positions (y), and finally channels (c). This ordering naturally produces a planar memory layout (e.g., processing all red pixels first, then green, then blue).
 
-However, most common image-processing libraries (such as OpenCV) expect image data in an interleaved layout (RGBRGBRGB...). To match this memory layout, it’s beneficial to reorder loops such that the color channel loop (c) becomes the innermost loop.
+However, the optimal loop order depends on your intended memory layout and compatibility with external libraries:
+1. Interleaved Layout (RGBRGBRGB…):
+* Commonly used by libraries such as OpenCV.
+* To achieve this, the color channel (c) should be the innermost loop, followed by horizontal (x) and then vertical (y) loops
 
 Specifically, calling:
 ```cpp
@@ -183,6 +186,27 @@ Buffer<uint8_t> inputBuffer = Buffer<uint8_t>::make_interleaved(
     input.data, input.cols, input.rows, input.channels()
 );
 ```
+
+2. Planar Layout (RRR...GGG...BBB...):
+* Preferred by certain image-processing routines or hardware accelerators (e.g., some GPU kernels or certain ML frameworks).
+* Achieved naturally by Halide’s default loop ordering (x, y, c).
+
+Thus, it is essential to select loop ordering based on your specific data format requirements and integration scenario. Halide provides full flexibility, allowing you to explicitly reorder loops to match the desired memory layout efficiently.
+
+In Halide, two distinct concepts must be distinguished clearly:
+1. Loop execution order (controlled by reorder). Defines the nesting order of loops during computation. For example, to make the channel dimension (c) innermost during computation:
+
+```cpp
+invert.reorder(c, x, y);
+```
+2. Memory storage layout (controlled by reorder_storage). Defines the actual order in which data is stored in memory, such as interleaved or planar:
+
+```cpp
+invert.reorder_storage(c, x, y);
+```
+
+Using only reorder(c, x, y) affects the computational loop order but not necessarily the memory layout. The computed data could still be stored in planar order by default. Using reorder_storage(c, x, y) explicitly defines the memory layout as interleaved.
+
 
 ## Compilation instructions
 Compile the program as follows (replace /path/to/halide accordingly):
