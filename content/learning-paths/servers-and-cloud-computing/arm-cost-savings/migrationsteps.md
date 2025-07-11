@@ -1,64 +1,72 @@
 ---
-title:  Migrate an x86 workload to Arm on AWS
+title: Migrate an x86 workload to Arm on AWS
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Migrating workloads from x86 to Arm on AWS can help reduce costs and improve performance. The steps below explain how to assess your workload compatibility, enable multi-architecture support in Red Hat OpenShift, configure arm64 nodes, rebuild and verify container images, and safely transition your deployments.
+Migrating container workloads from x86 to Arm on AWS can help reduce cloud costs, improve energy efficiency, and enhance performance. This Learning Path shows you how to assess workload compatibility, enable multi-architecture support in Red Hat OpenShift, configure Arm64 nodes, rebuild and verify container images, and transition your deployments safely.
 
-This example assumes you have the [OpenShift Pipelines Tutorial](https://github.com/openshift/pipelines-tutorial) built and running on x86.
+This example uses the [OpenShift Pipelines Tutorial](https://github.com/openshift/pipelines-tutorial) as the baseline and assumes it is running on x86 infrastructure.
 
-### 1. Assess Workload Compatibility
+## Assess workload compatibility
 
-Before migrating, determine whether your applications can run on 64-bit Arm architecture. Most modern applications built with portable runtimes such as Java, Go, Python, or Node.js can run seamlessly on 64-bit Arm with little or no modifications. Check your container images and dependencies for 64-bit Arm compatibility. 
+Before migrating, confirm that your applications can run on the Arm 64-bit (`arm64`) architecture. Most modern applications built with portable runtimes such as Java, Go, Python, or Node.js run on Arm with little or no changes. Check your container images and dependencies for compatibility.
 
-To check if your container images support multiple architectures (such as arm64 and amd64), you can use tools like [KubeArchInspect](https://learn.arm.com/learning-paths/servers-and-cloud-computing/kubearchinspect/) to analyze images in your Kubernetes cluster. 
+Use the following tools to inspect container images for multi-architecture support:
 
-Additionally, you can use the Python script provided in [Learn how to use Docker](https://learn.arm.com/learning-paths/cross-platform/docker/check-images/) to inspect images for multi-architecture support.
+- [KubeArchInspect](https://learn.arm.com/learning-paths/servers-and-cloud-computing/kubearchinspect/): scans container images in your Kubernetes cluster.
+- [Docker inspect script](https://learn.arm.com/learning-paths/cross-platform/docker/check-images/): checks local image manifests for platform variants.
 
-The OpenShift Pipelines Tutorial supports arm64 and doesn't have any architecture restrictions.
+{{% notice Note %}}
+The OpenShift Pipelines Tutorial supports `arm64` and has no architecture restrictions.
+{{% /notice %}}
 
-### 2. Enable Multi-Arch Support in Red Hat OpenShift
 
-Red Hat OpenShift supports multi-architecture workloads, allowing you to run both x86 and Arm based nodes in the same cluster. 
+## Enable multi-architecture support in Red Hat OpenShift
 
-Red Hat OpenShift's [documentation](https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/postinstallation_configuration/configuring-multi-architecture-compute-machines-on-an-openshift-cluster#multi-architecture-verifying-cluster-compatibility_creating-multi-arch-compute-nodes-aws) provides full details for the process. 
+OpenShift supports multi-architecture workloads, allowing you to run x86 and Arm nodes in the same cluster.
 
-To check if your cluster is multi-architecture compatible, use the OpenShift CLI and run:
+To check if your cluster is multi-architecture compatible, run:
 
 ```bash
 oc adm release info -o jsonpath="{ .metadata.metadata }"
 ```
 
-If the output includes `"release.openshift.io/architecture": "multi"`, your cluster supports multi-architecture compute nodes. 
+If the output includes:
+
+```json
+"release.openshift.io/architecture": "multi"
+```
+
+...then your cluster supports multi-architecture nodes.
 
 If your cluster is not multi-architecture compatible, you must migrate it to use the multi-architecture release payload. This involves updating your OpenShift cluster to a version that supports multi-architecture and switching to the multi-architecture payload. For step-by-step instructions, see the OpenShift documentation on [migrating to a cluster with multi-architecture compute machines](https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html-single/updating_clusters/#migrating-to-multi-payload). Once migration is complete, you can add compute nodes with different architectures.
 
-### 3. Add 64-bit Arm MachineSets
+## Add 64-bit Arm MachineSets
 
 To take advantage of Arm-based compute, you need to add new MachineSets to your OpenShift cluster that use Arm (Graviton) EC2 instances. This step enables your cluster to schedule workloads on Arm nodes, allowing you to run and test your applications on the target architecture while maintaining your existing x86 nodes for a smooth migration.
 
-#### Decide on a scheduling strategy
+## Decide on a scheduling strategy
 
 When introducing Arm nodes into your OpenShift cluster, you need to control which workloads are scheduled onto these new nodes. There are two main approaches:
 
-- **Manual scheduling with Taints and Tolerations:** By applying a taint to your Arm nodes, you ensure that only workloads with a matching toleration are scheduled there. This gives you precise control over which applications run on Arm, making it easier to test and migrate workloads incrementally.
-- **Automated scheduling with the Multiarch Tuning Operator:** This operator helps automate the placement of workloads on the appropriate architecture by managing node affinity and tolerations for you. This is useful for larger environments or when you want to simplify multi-architecture workload management.
+- **Manual scheduling with Taints and Tolerations:** by applying a taint to your Arm nodes, you ensure that only workloads with a matching toleration are scheduled there. This gives you precise control over which applications run on Arm, making it easier to test and migrate workloads incrementally.
+- **Automated scheduling with the Multiarch Tuning Operator:** this operator helps automate the placement of workloads on the appropriate architecture by managing node affinity and tolerations for you. This is useful for larger environments or when you want to simplify multi-architecture workload management.
 
-For scenarios with a single workload in the build pipeline, the manual taint and toleration method can be used. The following taint can be added to new Arm machine sets:
+For manual scheduling, add the following taint:
 
-```  
-  taints:
-    - effect: NoSchedule
-        key: newarch
-        value: arm64
+```yaml
+taints:
+  - effect: NoSchedule
+    key: newarch
+    value: arm64
 ```
 
 This prevents existing x86 workloads from being scheduled to the Arm nodes, ensuring only workloads that explicitly tolerate this taint will run on Arm.
 
-#### Reimport needed ImageStreams with import-mode set to PreserveOriginal
+## Reimport needed ImageStreams with import-mode set to PreserveOriginal
 
 When running workloads on Arm nodes, you may need to ensure that the required container images are available for the arm64 architecture. OpenShift uses ImageStreams to manage container images, and by default, these may only include x86 (amd64) images.
 
@@ -71,19 +79,23 @@ oc import-image php -n openshift --all --confirm --import-mode='PreserveOriginal
 oc import-image python -n openshift --all --confirm --import-mode='PreserveOriginal'
 ```
 
-This step is important to avoid image pull errors when deploying workloads to Arm nodes.
+{{% notice Note %}}
+This avoids image pull errors when deploying on Arm nodes.
+{{% /notice %}}
 
-### 4. Rebuild and Verify Container Images
+
+## Rebuild and verify container images
 
 To build 64-bit Arm compatible images, the OpenShift Pipelines Tutorial has been modified to patch deployments with the Tekton Task's podTemplate information. This will allow you to pass a podTemplate for building and deploying your newly built application on the target architecture. It also makes it easy to revert back to 64-bit x86 by re-running the pipeline without the template.
 
 {{% notice Note %}}
-Red Hat OpenShift only supports native architecture container builds. Cross-architecture container builds are not supported.
+Red Hat OpenShift only supports native builds. Cross-architecture builds are not supported.
 {{% /notice %}}
 
+## Define a podTemplate
 Create a podTemplate defining a toleration and a node affinity to make the builds deploy on Arm machines.
 
-Save the code below in a file named `arm64.yaml`
+Save the following as `arm64.yaml`:
 
 ```yaml
 tolerations:
@@ -172,15 +184,15 @@ Finally the `04_pipeline.yaml` needs to be updated to pass the taskrun-name to t
 
 ```yaml
 - name: update-deployment
-    taskRef:
+  taskRef:
     name: update-deployment
-    params:
+  params:
     - name: deployment
-        value: $(params.deployment-name)
+      value: $(params.deployment-name)
     - name: IMAGE
-        value: $(params.IMAGE)
-    - name: taskrun-name //add these
-        value: $(context.taskRun.name) //lines
+      value: $(params.IMAGE)
+    - name: taskrun-name
+      value: $(context.taskRun.name)
 ```
 
 Now the UI and API can be redeployed using the `arm64.yaml` podTemplate. This will force all parts of the build pipeline and deployment to the tainted Arm nodes.
@@ -188,14 +200,7 @@ Now the UI and API can be redeployed using the `arm64.yaml` podTemplate. This wi
 Run the `tkn` command:
 
 ```bash
-tkn pipeline start build-and-deploy \\\\
---prefix-name build-deploy-api-pipelinerun-arm64 \\\\
--w name=shared-workspace,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01\_pipeline/03\_persistent\_volume\_claim.yaml \\\\
--p deployment-name=pipelines-vote-api \\\\
--p git-url=https://github.com/openshift/pipelines-vote-api.git \\\\
--p IMAGE=image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/pipelines-vote-api-arm64
---use-param-defaults \\\\
---pod-template arm64.yaml
+tkn pipeline start build-and-deploy --prefix-name build-deploy-api-pipelinerun-arm64 -w name=shared-workspace,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/03_persistent_volume_claim.yaml -p deployment-name=pipelines-vote-api -p git-url=https://github.com/openshift/pipelines-vote-api.git -p IMAGE=image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/pipelines-vote-api-arm64 --use-param-defaults --pod-template arm64.yaml
 ```
 
 Once the pods are up and running, you can safely remove the x86 worker nodes from the cluster, and remove the taints from the Arm worker nodes (if you choose to do so).
