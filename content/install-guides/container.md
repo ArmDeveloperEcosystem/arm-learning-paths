@@ -32,7 +32,7 @@ Expected output:
 ```output
 arm64
 ```
-{{% notice optional_title %}}
+{{% notice Note %}}
 Container CLI supports only Apple silicon Macs (M1, M2, M3, and M4).
 {{% /notice %}}
 
@@ -48,7 +48,7 @@ Example output:
 15.5
 ```
 
-You must be running **macOS 15.0 or later** to use the Container CLI.
+You must be running macOS 15.0 or later to use the Container CLI.
 
 ## How do I install Container CLI?
 
