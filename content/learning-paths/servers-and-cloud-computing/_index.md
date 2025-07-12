@@ -55,8 +55,8 @@ tools_software_languages_filter:
 - AWS Graviton: 1
 - Azure CLI: 1
 - Azure Portal: 1
-- Bash: 1
 - bash: 2
+- Bash: 1
 - Bastion: 3
 - BOLT: 2
 - bpftool: 1
@@ -125,8 +125,8 @@ tools_software_languages_filter:
 - MongoDB: 2
 - mpi: 1
 - MySQL: 9
-- NEON: 4
 - Neon: 3
+- NEON: 4
 - Nexmark: 1
 - Nginx: 3
 - Node.js: 3
