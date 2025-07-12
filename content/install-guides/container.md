@@ -32,8 +32,9 @@ Expected output:
 ```output
 arm64
 ```
-
+{{% notice optional_title %}}
 Container CLI supports only Apple silicon Macs (M1, M2, M3, and M4).
+{{% /notice %}}
 
 Check your macOS version:
 
@@ -93,7 +94,6 @@ container CLI version 0.2.0
 
 ## Build and run a container
 
-### Create a Dockerfile
 
 In a working directory, create a file named `Dockerfile`:
 
@@ -180,22 +180,18 @@ container ls
 
 The CLI includes an uninstall script. You can choose whether to keep or delete your container data.
 
-To uninstall and **keep** user data (images and containers):
+If you plan to reinstall later and want to keep your local container data. To uninstall and keep user data (images and containers):
 
 ```bash
 uninstall-container.sh -k
 ```
 
-Use this if you plan to reinstall later and want to keep your local container data.
-
-Uninstall and delete all user data:
+Otherwise, to uninstall and delete all user data:
 
 ```bash
 uninstall-container.sh -d
 ```
 
 This will remove the CLI and all related images, logs, and metadata.
-
----
 
 You’ve now installed Container CLI and built your first Arm Linux container on macOS.
