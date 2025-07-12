@@ -10,6 +10,7 @@ layout: installtoolsall
 multi_install: false
 multitool_install_part: false
 test_maintenance: false
+tool_install: true
 weight: 1
 ---
 
