@@ -6,9 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-In this step, we'll set up a Python virtual environment and install the required dependencies for working with Llama.cpp. This ensures we have a clean, isolated Python environment with all the necessary packages for model optimization.
-
-Here are all the steps.
+In this step, you'll set up a Python virtual environment and install the required dependencies for working with Llama.cpp. This ensures you have a clean, isolated Python environment with all the necessary packages for model optimization.
 
 ## Step 1: Create a Python Virtual Environment
 
@@ -30,14 +28,14 @@ source env-llama-cpp/bin/activate
 
 This command activates the virtual environment:
 - The `source` command executes the activation script, which modifies your current shell environment
-- Depending on you sheel, your command prompt may change to show `(env-llama-cpp)` at the beginning, indicating the active environment. We will reflect this in the following commands.
+- Depending on you sheel, your command prompt may change to show `(env-llama-cpp)` at the beginning, indicating the active environment. This will be reflected in the following commands.
 - All subsequent `pip` commands will install packages into this isolated environment
 - The `PATH` environment variable is updated to prioritize the virtual environment's Python interpreter
 
 ## Step 3: Upgrade pip to the Latest Version
 
 ```bash
-(env-llama-cpp) pip install --upgrade pip
+pip install --upgrade pip
 ```
 
 This command ensures you have the latest version of pip:
@@ -49,7 +47,7 @@ This command ensures you have the latest version of pip:
 ## Step 4: Install Project Dependencies
 
 ```bash
-(env-llama-cpp) pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 This command installs all the Python packages specified in the requirements.txt file:
@@ -58,7 +56,7 @@ This command installs all the Python packages specified in the requirements.txt 
 - This ensures everyone working on the project uses the same package versions
 - The installation will include packages needed for model loading, inference, and any Python bindings for Llama.cpp
 
-## What Gets Installed
+## What is installed? 
 
 After successful installation, your virtual environment will contain:
 - **NumPy**: For numerical computations and array operations

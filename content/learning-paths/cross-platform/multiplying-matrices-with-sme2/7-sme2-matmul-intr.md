@@ -1,30 +1,21 @@
 ---
-title: SME2 intrinsics matrix multiplication
+title: Matrix multiplication using SME2 intrinsics in C
 weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-In this section, you will write an SME2 optimized matrix multiplication in C
-using the intrinsics that the compiler provides.
+In this section, you will write an SME2-optimized matrix multiplication routine in C using the intrinsics that the compiler provides.
 
-## Matrix multiplication with SME2 intrinsics
+## What are instrinsics?
 
-*Intrinsics*, also know known as *compiler intrinsics* or *intrinsic functions*,
-are the functions available to application developers that the compiler has an
-intimate knowledge of. This enables the compiler to either translate the
-function to a specific instruction or to perform specific optimizations, or
-both.
+*Intrinsics*, also known as *compiler intrinsics* or *intrinsic functions*, are the functions available to application developers that the compiler has intimate knowledge of. This enables the compiler to either translate the function to a specific instruction or to perform specific optimizations, or both.
 
 You can learn more about intrinsics in this [Wikipedia
 Article on Intrinsic Function](https://en.wikipedia.org/wiki/Intrinsic_function).
 
-Using intrinsics allows the programmer to use the specific instructions required
-to achieve the required performance while writing in C all the
-typically-required standard code, such as loops. This produces performance close
-to what can be reached with hand-written assembly whilst being significantly
-more maintainable and portable.
+Using intrinsics allows you to write performance-critical code in C while still using standard constructs like loops. This produces performance close to what can be reached with hand-written assembly whilst being significantly more maintainable and portable.
 
 All Arm-specific intrinsics are specified in the
 [ACLE](https://github.com/ARM-software/acle), which is the Arm C Language Extension. ACLE
@@ -33,8 +24,7 @@ is supported by the main compilers, most notably [GCC](https://gcc.gnu.org/) and
 
 ## Implementation
 
-Here again, a top level function named `matmul_intr` in `matmul_intr.c`
-will be used to stitch together the preprocessing and the multiplication:
+In this example, a top-level function named `matmul_intr`, defined in `matmul_intr.c`, brings together the preprocessing and matrix multiplication steps:
 
 ```C  "{ line_numbers = true }"
 __arm_new("za") __arm_locally_streaming void matmul_intr(
@@ -47,14 +37,9 @@ __arm_new("za") __arm_locally_streaming void matmul_intr(
 }
 ```
 
-Note the `__arm_new("za")` and `__arm_locally_streaming` at line 1 that will
-make the compiler save the ZA storage so we can use it without destroying its
-content if it was still in use by one of the callers.
+Note the use of `__arm_new("za")` and `__arm_locally_streaming` at line 1. These attributes ensure that the compiler saves the ZA storage, allowing your function to use it safely without destroying its content if it was still in use by one of the callers.
 
-`SVL`, the dimension of the ZA storage, is requested from the underlying
-hardware with the `svcntsw()` function call at line 5, and passed down to the
-`preprocess_l_intr` and `matmul_intr_impl` functions. `svcntsw()` is a
-function provided be the ACLE library.
+`SVL`, the dimension of the ZA storage, is requested from the underlying hardware with the `svcntsw()` function call at line 5, and passed down to the `preprocess_l_intr` and `matmul_intr_impl` functions. `svcntsw()` is a function provided by the ACLE library.
 
 ### Matrix preprocessing
 
@@ -117,50 +102,21 @@ void preprocess_l_intr(
 
 Note that `preprocess_l_intr` has been annotated at line 3 with:
 
-- `__arm_streaming`, because this function is using streaming instructions,
+- `__arm_streaming` - because this function is using streaming instructions
 
-- `__arm_inout("za")`, because `preprocess_l_intr` reuses the ZA storage
-  from its caller.
+- `__arm_inout("za")` - because `preprocess_l_intr` reuses the ZA storage
+  from its caller
 
-The matrix preprocessing is performed in a double nested loop, over the `M`
-(line 7) and `K` (line 12) dimensions of the input matrix `a`. Both loops
-have an `SVL` step increment, which corresponds to the horizontal and vertical
-dimensions of the ZA storage that will be used. The dimensions of `a` may not
-be perfect multiples of `SVL` though... which is why the predicates `pMDim`
-(line 9) and `pKDim` (line 14) are computed in order to know which rows
-(respectively columns) are valid.
+The matrix preprocessing is performed in a double-nested loop, over the `M` (line 7) and `K` (line 12) dimensions of the input matrix `a`. Both loops have an `SVL` step increment, which corresponds to the horizontal and vertical dimensions of the ZA storage that will be used. The dimensions of `a` might not be perfect multiples of `SVL` however, which is why the predicates `pMDim`
+(line 9) and `pKDim` (line 14) are computed in order to know which rows (respectively columns) are valid.
 
 The core of `preprocess_l_intr` is made of two parts:
 
-- Lines 17 - 37: load matrix tile as rows. In this part, loop unrolling has been
-  used at 2 different levels. At the lowest level, 4 rows are loaded at a time
-  (lines 24-27). But this goes much further because as SME2 has multi-vectors
-  operations (hence the `svld1_x2` intrinsic to load 2 rows in 2 vector
-  registers), this allows the function to load the consecutive row, which
-  happens to be the row from the neighboring tile on the right: this means two
-  tiles are processed at once. At line 29-32, the pairs of vector registers are
-  rearranged on quads of vector registers so they can be stored horizontally in
-  the two tiles' ZA storage at lines 33-36 with the `svwrite_hor_za32_f32_vg4`
-  intrinsic. Of course, as the input matrix may not have dimensions that are
-  perfect multiples of `SVL`, the `p0`, `p1`, `p2` and `p3` predicates
-  are computed with the `svpsel_lane_c32` intrinsic (lines 18-21) so that
-  elements outside of the input matrix are set to 0 when they are loaded at
-  lines 24-27.
+- Lines 17 - 37: load matrix tile as rows. In this part, loop unrolling has been used at two different levels. At the lowest level, 4 rows are loaded at a time  (lines 24-27). But this goes much further because as SME2 has multi-vectors operations (hence the `svld1_x2` intrinsic to load 2 rows in 2 vector registers), this allows the function to load the consecutive row, which happens to be the row from the neighboring tile on the right: this means two tiles are processed at once. At lines 29-32, the pairs of vector registers are rearranged on quads of vector registers so they can be stored horizontally in the two tiles' ZA storage at lines 33-36 with the`svwrite_hor_za32_f32_vg4` intrinsic. Of course, as the input matrix might not have dimensions that are perfect multiples of `SVL`, the `p0`, `p1`, `p2` and `p3` predicates are computed with the `svpsel_lane_c32` intrinsic (lines 18-21) so that elements outside of the input matrix are set to 0 when they are loaded at lines 24-27.
 
-- Lines 39 - 51: read the matrix tile as columns and store them. Now that the 2
-  tiles have been loaded *horizontally*, they will be read *vertically* with the
-  `svread_ver_za32_f32_vg4` intrinsic to quad-registers of vectors (`zq0`
-  and `zq1`) at lines 45-48 and then stored with the `svst1` intrinsic to
-  the relevant location in the destination matrix `a_mod` (lines 49-50). Note
-  again the usage of predicates `p0` and `p1` (computed at lines 43-44) to
-  `svst1` to prevent writing out of the matrix bounds.
+- Lines 39 - 51: read the matrix tile as columns and store them. Now that the two tiles have been loaded *horizontally*, they will be read *vertically* with the `svread_ver_za32_f32_vg4` intrinsic to quad-registers of vectors (`zq0` and `zq1`) at lines 45-48 and then stored with the `svst1` intrinsic to the relevant location in the destination matrix `a_mod` (lines 49-50). Note again the usage of predicates `p0` and `p1` (computed at lines 43-44) to `svst1` to prevent writing out of the matrix bounds.
 
-Using intrinsics simplifies function development significantly, provided one has
-a good understanding of the SME2 instruction set. Predicates, which are
-fundamental to SVE and SME, enable a natural expression of algorithms while
-handling corner cases efficiently. Notably, there is no explicit condition
-checking within the loops to account for rows or columns extending beyond matrix
-bounds.
+Using intrinsics simplifies function development, provided you have a good understanding of the SME2 instruction set. Predicates, which are fundamental to both SVE and SME, allow you to express  algorithms cleanly while handling corner cases efficiently. Notably, the loops for include no explicit condition checks for rows or columns that extend beyond matrix bounds.
 
 ### Outer-product multiplication
 
@@ -219,33 +175,19 @@ void matmul_intr_impl(
 
 Note again that `matmul_intr_impl` function has been annotated at line 4 with:
 
-- `__arm_streaming`, because the function is using streaming instructions,
+- `__arm_streaming`, because the function is using streaming instructions
 
-- `__arm_inout("za")`, because the function reuses the ZA storage from its caller.
+- `__arm_inout("za")`, because the function reuses the ZA storage from its caller
 
-The multiplication with the outer product is performed in a double-nested loop,
-over the `M` (line 7) and `N` (line 11) dimensions of the input matrices
-`matLeft_mod` and `matRight`. Both loops have an `SVL` step increment,
-which corresponds to the horizontal and vertical dimensions of the ZA storage
-that will be used as one tile at a time will be processed. The `M` and `N`
-dimensions of the inputs may not be perfect multiples of `SVL` so the
-predicates `pMDim` (line 9) (respectively `pNDim` at line 13) are computed in order
-to know which rows (respectively columns) are valid.
+The multiplication with the outer product is performed in a double-nested loop, over the `M` (line 7) and `N` (line 11) dimensions of the input matrices `matLeft_mod` and `matRight`. Both loops have an `SVL` step increment, which corresponds to the horizontal and vertical dimensions of the ZA storage that will be used as one tile at a time will be processed. 
 
-The core of the multiplication is done in 2 parts:
+The `M` and `N` dimensions of the inputs might not be perfect multiples of `SVL` so the predicates `pMDim` (line 9) (respectively `pNDim` at line 13) are computed in order to know which rows (respectively columns) are valid.
 
-- Outer-product and accumulation at lines 15-25. As `matLeft` has been
-  laid-out perfectly in memory with `preprocess_l_intr`, this part becomes
-  straightforward. First, the tile is zeroed with the `svzero_za` intrinsics
-  at line 16 so the outer products can be accumulated in the tile. The outer
-  products are computed and accumulation over the `K` common dimension with
-  the loop at line 19: the column of `matleft_mod` and the row of `matRight`
-  are loaded with the `svld1` intrinsics at line 20-23 to vector registers
-  `zL` and `zR`, which are then used at line 24 with the `svmopa_za32_m`
-  intrinsic to perform the outer product and accumulation (to tile 0). This
-  is exactly what was shown in Figure 2 earlier in the Learning Path.
-  Note again the usage of the `pMDim` and `pNDim` predicates to deal
-  correctly with the rows and columns respectively which are out of bounds.
+The core of the multiplication is done in two parts:
+
+- Outer-product and accumulation at lines 15-25. As `matLeft` has been laid out perfectly in memory with `preprocess_l_intr`, this part becomes straightforward. First, the tile is zeroed with the `svzero_za` intrinsics at line 16 so the outer products can be accumulated in the tile. The outer
+products are computed and accumulation over the `K` common dimension with the loop at line 19: the column of `matleft_mod` and the row of `matRight` are loaded with the `svld1` intrinsics at line 20-23 to vector registers `zL` and `zR`, which are then used at line 24 with the `svmopa_za32_m` intrinsic to perform the outer product and accumulation (to tile 0). This
+is exactly what was shown in Figure 2 earlier in the Learning Path. Note again the usage of the `pMDim` and `pNDim` predicates to deal correctly with the rows and columns respectively which are out of bounds.
 
 - Storing of the result matrix at lines 27-46. The previous section computed the
   matrix multiplication result for the current tile, which now needs to be
@@ -259,8 +201,8 @@ The core of the multiplication is done in 2 parts:
 
 Once again, intrinsics makes it easy to fully leverage SME2, provided you have a
 solid understanding of its available instructions. The compiler is automatically
-handling many low-level aspects (saving / restoring of the difeerent contexts),
-as well as not using registers that are reserved on specific plaforms (like
+handling many low-level aspects (saving / restoring of the different contexts),
+as well as not using registers that are reserved on specific platforms (like
 `x18`). Predicates handle corner cases elegantly, ensuring robust execution.
 Most importantly, the code adapts to different SVL values across various
 hardware implementations without requiring recompilation. This follows the key

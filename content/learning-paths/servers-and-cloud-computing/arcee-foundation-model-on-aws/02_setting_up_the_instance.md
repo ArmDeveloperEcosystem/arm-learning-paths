@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-In this step, we'll set up the Graviton4 instance with all the necessary tools and dependencies required to build and run the Arcee Foundation Model. This includes installing the build tools and Python environment.
+In this step, you'll set up the Graviton4 instance with all the necessary tools and dependencies required to build and run the Arcee Foundation Model. This includes installing the build tools and Python environment.
 
 ## Step 1: Update Package List
 
@@ -29,7 +29,7 @@ sudo apt-get install cmake gcc g++ git python3 python3-pip python3-virtualenv li
 
 This command installs all the essential development tools and dependencies:
 
-- **cmake**: Cross-platform build system generator that we'll use to compile Llama.cpp
+- **cmake**: Cross-platform build system generator used to compile Llama.cpp
 - **gcc & g++**: GNU C and C++ compilers for building native code
 - **git**: Version control system for cloning repositories
 - **python3**: Python interpreter for running Python-based tools and scripts
@@ -39,9 +39,9 @@ This command installs all the essential development tools and dependencies:
 
 The `-y` flag automatically answers "yes" to prompts, making the installation non-interactive.
 
-## What's Ready Now
+## What's Ready Now?
 
-After completing these steps, your Graviton4 instance will have:
+After completing these steps, your Graviton4 instance has:
 
 - A complete C/C++ development environment for building Llama.cpp
 - Python 3 with pip for managing Python packages

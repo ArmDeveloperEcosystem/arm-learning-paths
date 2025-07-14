@@ -6,11 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-In this step, we'll build Llama.cpp from source. Llama.cpp is a high-performance C++ implementation of the LLaMA model that's optimized for inference on various hardware platforms, including ARM-based processors like Graviton4.
+In this step, you'll build Llama.cpp from source. Llama.cpp is a high-performance C++ implementation of the LLaMA model that's optimized for inference on various hardware platforms, including Arm-based processors like Graviton4.
 
-Even though AFM-4.5B has a custom model architecture, we're able to use the vanilla version of llama.cpp as the Arcee AI team has contributed the appropriate modeling code.
-
-Here are all the steps.
+Even though AFM-4.5B has a custom model architecture, we're able to use the vanilla version of Llama.cpp as the Arcee AI team has contributed the appropriate modeling code.
 
 ## Step 1: Clone the Repository
 
@@ -26,7 +24,7 @@ This command clones the Llama.cpp repository from GitHub to your local machine. 
 cd llama.cpp
 ```
 
-Change into the llama.cpp directory where we'll perform the build process. This directory contains the CMakeLists.txt file and source code structure.
+Change into the llama.cpp directory to run the build process. This directory contains the `CMakeLists.txt` file and source code structure.
 
 ## Step 3: Configure the Build with CMake
 
@@ -35,13 +33,15 @@ cmake -B .
 ```
 
 This command uses CMake to configure the build system:
+
 - `-B .` specifies that the build files should be generated in the current directory
 - CMake will detect your system's compiler, libraries, and hardware capabilities
 - It will generate the appropriate build files (Makefiles on Linux) based on your system configuration
 
-Note: The cmake output should include the information below, indicating that the build process will leverage the Neoverse V2 architecture's specialized instruction sets designed for AI/ML workloads. These optimizations are crucial for achieving optimal performance on Graviton4:
 
-```bash
+The CMake output should include the information below, indicating that the build process will leverage the Neoverse V2 architecture's specialized instruction sets designed for AI/ML workloads. These optimizations are crucial for achieving optimal performance on Graviton4:
+
+```output
 -- ARM feature DOTPROD enabled
 -- ARM feature SVE enabled
 -- ARM feature MATMUL_INT8 enabled
@@ -69,7 +69,7 @@ This command compiles the Llama.cpp project:
 
 The build process will compile the C++ source code into executable binaries optimized for your ARM64 architecture. This should only take a minute.
 
-## What Gets Built
+## What is built? 
 
 After successful compilation, you'll have several key command-line executables in the `bin` directory:
 - `llama-cli` - The main inference executable for running LLaMA models

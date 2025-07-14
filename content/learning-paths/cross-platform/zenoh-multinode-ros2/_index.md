@@ -10,7 +10,7 @@ minutes_to_complete: 45
 who_is_this_for: This learning path is designed for robotics developers, industrial automation engineers, and IoT system architects building distributed, scalable, and low-latency applications. Whether you are using Robot Operating System (ROS), developing autonomous systems, or designing multi-node communication frameworks, this guide will show you how to leverage the Eclipse Zenoh protocol on Arm-based platforms — both in the cloud (AVH or EC2) and on physical devices like Raspberry Pi.
 
 learning_objectives: 
-    - Understand Zenoh’s architecture and its integration of pub/sub, storage, querying, and computation models.
+    - Understand Zenoh's architecture and its integration of pub/sub, storage, querying, and computation models.
     - Build and run Zenoh examples on both Arm servers and Raspberry Pi.
     - Set up and deploy a multi-node Zenoh system using Arm-based hardware or virtual environments.
 

@@ -5,31 +5,35 @@ weight: 8
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Overview
 
-In this chapter, you will use an SME2-optimized matrix multiplication written
-directly in assembly.
+In this section, you'll learn how to run an SME2-optimized matrix multiplication implemented directly in assembly.
 
-## Matrix multiplication with SME2 in assembly
+This implementation is based on the algorithm described in [Arm's SME Programmer's
+Guide](https://developer.arm.com/documentation/109246/0100/matmul-fp32--Single-precision-matrix-by-matrix-multiplication) and has been adapted to integrate with the existing C and intrinsics-based code in this Learning Path. It demonstrates how to apply low-level optimizations for matrix multiplication using the SME2 instruction set, with a focus on preprocessing and outer-product accumulation.
 
-### Description
+You'll explore how the assembly implementation works in practice, how it interfaces with C wrappers, and how to verify or benchmark its performance. Whether you're validating correctness or measuring execution speed, this example provides a clear, modular foundation for working with SME2 features in your own codebase.
 
-This Learning Path reuses the assembly version provided in the [SME Programmer's
+By mastering this assembly implementation, you'll gain deeper insight into SME2 execution patterns and how to integrate low-level optimizations in high-performance workloads.
+
+## About the SME2 assembly implementation
+
+This Learning Path reuses the assembly version described in [The SME Programmer's
 Guide](https://developer.arm.com/documentation/109246/0100/matmul-fp32--Single-precision-matrix-by-matrix-multiplication)
-where you will find a high-level and an in-depth description of the two steps
-performed.
+where you will find both high-level concepts and in-depth descriptions of the two key steps:
+preprocessing and matrix multiplication.
 
-The assembly versions have been modified so they coexist nicely with
-the intrinsic versions. The modifications include:
-- let the compiler manage the switching back and forth from streaming mode,
-- don't use register `x18` which is used as a platform register.
+The assembly code has been modified to work seamlessly alongside the intrinsic version.
 
-In this Learning Path:
-- the `preprocess` function is named `preprocess_l_asm` and is defined in
-  `preprocess_l_asm.S`
-- the outer product-based matrix multiplication is named `matmul_asm_impl`and
-  is defined in `matmul_asm_impl.S`.
+The key changes include:
+* Delegating streaming mode control to the compiler
+* Avoiding register `x18`, which is reserved as a platform register
 
-Those 2 functions are declared in `matmul.h`:
+Here:
+- The `preprocess` function is named `preprocess_l_asm` and is defined in `preprocess_l_asm.S`
+- The outer product-based matrix multiplication is named `matmul_asm_impl` and is defined in `matmul_asm_impl.S`
+
+Both functions are declared in `matmul.h`:
 
 ```C
 // Matrix preprocessing, in assembly.
@@ -43,14 +47,9 @@ void matmul_asm_impl(
     float *restrict matResult) __arm_streaming __arm_inout("za");
 ```
 
-You will note that they have been marked with 2 attributes: `__arm_streaming`
-and `__arm_inout("za")`. This instructs the compiler that these functions
-expect the streaming mode to be active, and that they don't new to save /
-restore the ZA storage.
+Both functions are annotated with the `__arm_streaming` and `__arm_inout("za")` attributes. These indicate that the function expects streaming mode to be active and does not need to save or restore the ZA storage.
 
-These two functions are stitched together in `matmul_asm.c` with the
-same prototype as the reference implementation of matrix multiplication, so that
-a top-level `matmul_asm` can be called from the `main` function:
+These two functions are stitched together in `matmul_asm.c` with the same prototype as the reference implementation of matrix multiplication, so that a top-level `matmul_asm` can be called from the `main` function:
 
 ```C
 __arm_new("za") __arm_locally_streaming void matmul_asm(
@@ -63,14 +62,15 @@ __arm_new("za") __arm_locally_streaming void matmul_asm(
 }
 ```
 
-Note that `matmul_asm` has been annotated with 2 attributes:
-`__arm_new("za")` and `__arm_locally_streaming`. This instructs the compiler
-to swith to streaming mode and save the ZA storage (and restore it when the
-function returns).
+You can see that `matmul_asm` is annotated with two attributes: `__arm_new("za")` and `__arm_locally_streaming`. These attributes instruct the compiler to enable streaming mode and manage ZA state on entry and return.
 
-The high-level `matmul_asm` function is called from `main.c`. This file might look a bit complex at first sight, but fear not, here are some explanations:
-- the same `main.c` is used for the assembly- and intrinsic-based versions of the matrix multiplication --- this is parametrized at compilation time with the `IMPL` macro. This avoids code duplication and improves maintenance.
-- on a baremetal platform, the program only works in *verification mode*, where it compares the results of the assembly-based (resp. intrinsic-based) matrix multiplication with the vanilla reference implementation. When targeting a non-baremetal platform, a *benchmarking mode* is also available.
+## How it integrates with the main function
+
+The same `main.c` file supports both the intrinsic and assembly implementations. The implementation to use is selected at compile time via the `IMPL` macro. This design reduces duplication and simplifies maintenance.
+
+## Execution modes
+
+- On a baremetal platform, the program runs in *verification mode*, where it compares the results of the assembly-based matrix multiplication with the vanilla reference implementation. When targeting a non-baremetal platform, a *benchmarking mode* is also available.
 
 ```C { line_numbers="true" }
 #ifndef __ARM_FEATURE_SME2
@@ -221,8 +221,8 @@ int main(int argc, char **argv) {
     float *matResult_ref = (float *)malloc(M * N * sizeof(float));
 
     // Initialize matrices. Input matrices are initialized with random values in
-    // non debug mode. In debug mode, all matrices are initialized with linear
-    // or known values values for easier debugging.
+    // non-debug mode. In debug mode, all matrices are initialized with linear
+    // or known values for easier debugging.
 #ifdef DEBUG
     initialize_matrix(matLeft, M * K, LINEAR_INIT);
     initialize_matrix(matRight, K * N, LINEAR_INIT);
@@ -321,36 +321,19 @@ int main(int argc, char **argv) {
 }
 ```
 
-The same `main.c` file is used for the assembly and intrinsic-based versions
-of the matrix multiplication. It first sets the `M`, `K` and `N`
-parameters, to either the arguments supplied on the command line (lines 93-95)
-or uses the default value (lines 73-75). In non-baremetal mode, it also accepts
-(lines 82-89 and lines 98-108), as first parameter, an iteration count `I`
+The same `main.c` file is used for the assembly and intrinsic-based versions of the matrix multiplication. It first sets the `M`, `K` and `N` parameters, to either the arguments supplied on the command line (lines 93-95) or uses the default value (lines 73-75). In non-baremetal mode, it also accepts (lines 82-89 and lines 98-108), as first parameter, an iteration count `I`
 used for benchmarking.
 
-Depending on the `M`, `K`, `N` dimension parameters, `main` allocates
-memory for all the matrices and initializes `matLeft` and `matRight` with
-random data. The actual matrix multiplication implementation is provided through
-the `IMPL` macro.
+Depending on the `M`, `K`, `N` dimension parameters, `main` allocates memory for all the matrices and initializes `matLeft` and `matRight` with random data. The actual matrix multiplication implementation is provided through the `IMPL` macro.
 
-In *verification mode*, it then runs the matrix multiplication from `IMPL`
-(line 167) and computes the reference values for the preprocessed matrix as well
-as the result matrix (lines 170 and 171). It then compares the actual values to
-the reference values and reports errors, if there are any (lines 173-177).
-Finally, all the memory is deallocated (lines 236-243) before exiting the
+In *verification mode*, it then runs the matrix multiplication from `IMPL` (line 167) and computes the reference values for the preprocessed matrix as well as the result matrix (lines 170 and 171). It then compares the actual values to the reference values and reports errors, if there are any (lines 173-177). Finally, all the memory is deallocated (lines 236-243) before exiting the
 program with a success or failure return code at line 245.
 
-In *benchmarking mode*, it will first run the vanilla reference matrix
-multiplication (resp. assembly- or intrinsic-based matrix multiplication) 10
-times without measuring elapsed time to warm-up the CPU. It will then measure
-the elapsed execution time of the vanilla reference matrix multiplication (resp.
-assembly- or intrinsic-based matrix multiplication) `I` times and then compute
+In *benchmarking mode*, it will first run the vanilla reference matrix multiplication (resp. assembly- or intrinsic-based matrix multiplication) 10 times without measuring elapsed time to warm-up the CPU. It will then measure the elapsed execution time of the vanilla reference matrix multiplication (resp.assembly- or intrinsic-based matrix multiplication) `I` times and then compute
 and report the minimum, maximum and average execution times.
 
 {{% notice Note %}}
-Benchmarking and profiling are not simple tasks. The purpose of this learning path
-is to provide some basic guidelines on the performance improvement that can be
-obtained with SME2.
+Benchmarking and profiling are not simple tasks. The purpose of this Learning Path is to provide some basic guidelines on the performance improvement that can be obtained with SME2.
 {{% /notice %}}
 
 ### Compile and run it
@@ -395,7 +378,7 @@ whether the preprocessing and matrix multiplication passed (`PASS`) or failed
 (`FAILED`) the comparison the vanilla reference implementation.
 
 {{% notice Tip %}}
-The example above uses the default values for the `M` (125), `K`(25) and `N`(70)
+The example above uses the default values for the `M` (125), `K`(70) and `N`(70)
 parameters. You can override this and provide your own values on the command line:
 
 {{< tabpane code=true >}}
@@ -408,5 +391,5 @@ parameters. You can override this and provide your own values on the command lin
   {{< /tab >}}
 {{< /tabpane >}}
 
-Here the values `M=7`, `K=8` and `N=9` are used instead.
+In this example, `M=7`, `K=8`, and `N=9` are used.
 {{% /notice %}}

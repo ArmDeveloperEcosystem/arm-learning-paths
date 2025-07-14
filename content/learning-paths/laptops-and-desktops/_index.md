@@ -34,8 +34,8 @@ tools_software_languages_filter:
 - C/C++: 4
 - CCA: 1
 - Clang: 11
-- cmake: 1
 - CMake: 2
+- cmake: 1
 - Coding: 16
 - CSS: 1
 - Daytona: 1
@@ -53,7 +53,7 @@ tools_software_languages_filter:
 - Kubernetes: 1
 - Linux: 1
 - LLM: 1
-- LLVM: 1
+- LLVM: 2
 - llvm-mca: 1
 - MSBuild: 1
 - MTE: 1
