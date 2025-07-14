@@ -1,5 +1,5 @@
 summary:
-  content_total: 382
+  content_total: 386
   content_with_all_tests_passing: 0
   content_with_tests_enabled: 61
 sw_categories:
@@ -54,8 +54,7 @@ sw_categories:
       tests_and_status: []
     armpl:
       readable_title: Arm Performance Libraries
-      tests_and_status:
-      - ubuntu:latest: passed
+      tests_and_status: []
     aws-cli:
       readable_title: AWS CLI
       tests_and_status: []
