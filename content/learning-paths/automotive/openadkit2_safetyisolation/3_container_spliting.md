@@ -88,6 +88,12 @@ This avoids interruptions in later steps when you run `docker compose up` or `do
 Run the following command in your project directory:
 
 ```bash
+cd docker
+
+export TIMEOUT=120
+export CONF_FILE=/home/ubuntu/openadkit_demo.autoware/docker/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml
+export COMMON_FILE=/home/ubuntu/openadkit_demo.autoware/docker/etc/simulation/config/common.param.yaml
+
 docker compose -f docker-compose.yml pull
 ```
 
