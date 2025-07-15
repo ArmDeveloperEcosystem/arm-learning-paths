@@ -327,6 +327,5 @@ Your Serial Monitor should look like the image below.
 
 ![example image alt-text#center](images/serial_monitor.png "Figure 16. Circuit Connection")
 
-{{% notice Congratulations %}}
-You’ve successfully programmed your first TinyML microcontroller! You've also built a functional, smart system to control an LED with your voice.
-{{% /notice %}}
+Congratulations, you’ve successfully programmed your first TinyML microcontroller! You've also built a functional, smart system to control an LED with your voice.
+

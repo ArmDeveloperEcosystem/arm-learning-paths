@@ -1,5 +1,5 @@
 ---
-title: Learn how to run AI on edge devices using Arduino Nano RP2040
+title: Learn how to run AI on Edge devices using Arduino Nano RP2040
 
 minutes_to_complete: 90
 

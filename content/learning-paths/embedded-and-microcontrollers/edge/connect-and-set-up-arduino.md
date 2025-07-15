@@ -32,9 +32,9 @@ To visualize the output of the voice command model, you will use a simple LED ci
 - **Anode (long leg) of the LED** → Connect to **GPIO pin D2** via the 220Ω resistor
 - **Cathode (short leg)** → Connect to **GND**
 
-![example image alt-text#center](images/led_connection.png "Figure 14. Circuit Connection")
+![example image alt-text#center](images/led_connection.png "Circuit Connection")
 
-![example image alt-text#center](images/led_connection_schematic.png "Figure 15. Circuit Schematic Connection")
+![example image alt-text#center](images/led_connection_schematic.png "Circuit Schematic Connection")
 
 ### Step 2: Set Up the Arduino IDEs
 
@@ -48,7 +48,7 @@ This guide will walk you through:
 - Adding the board support package for the Nano RP2040
 
 {{% notice Note %}}
-**Note:** Follow every instruction in the guide **except** `How do I set up the Raspberry Pi Pico W?`, as it is not needed for this project.
+Follow every instruction in the guide *except* `How do I set up the Raspberry Pi Pico W?`, as it is not needed for this project.
 {{% /notice %}}
 
 ### Step 3: Select Your Board and Port in the Arduino IDE
