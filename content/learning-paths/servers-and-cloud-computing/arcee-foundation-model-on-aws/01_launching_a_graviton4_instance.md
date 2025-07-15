@@ -1,6 +1,6 @@
 ---
-title: Launching a Graviton4 instance
-weight: 2
+title: Launch a Graviton4 instance
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

@@ -1,6 +1,6 @@
 ---
 title: Running inference with AFM-4.5B
-weight: 7
+weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
