@@ -5,39 +5,48 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-# Using Edge Impulse to Train TinyML Models
+# Using Edge Impulse to Train TinyML models
 
-Now that the foundational concepts of TinyML and Edge AI are clear, it's time to move from theory to practice. **Edge Impulse** is an easy to use platform for training TinyML models. It provides an end-to-end pipeline for collecting data, designing features, training models, and deploying them to edge devices. In this section, you will explore how Edge Impulse is used to train models specifically for ultra-low-power microcontrollers, bridging the gap between machine learning and real-world embedded applications.
+Now that you've learned the foundational concepts of Edge AI and TinyML, it's time to move from theory to practice.
+
+{{< notice Note >}}
+In this section, you'll use Edge Impulse to train a voice-command classification model and prepare it for deployment to the Arduino Nano RP2040 Connect.
+{{< /notice >}}
 
 ## What is Edge Impulse?
 
-**Edge Impulse** is a development platform designed to simplify the process of building, training, and deploying machine learning (ML) models on **embedded systems and edge devices**, such as microcontrollers, sensors, and single-board computers (e.g., Raspberry Pi, Arduino).
+Edge Impulse is a development platform that simplifies building, training, and deploying machine learning (ML) models on embedded systems and edge devices such as microcontrollers, sensors, and single-board computers like the Raspberry Pi or Arduino.
 
 ## Key Features of Edge Impulse
 
 | Feature               | Description                                                                                         |
 |-----------------------|-----------------------------------------------------------------------------------------------------|
-| **Data Collection**   | Collects data from sensors (e.g., accelerometers, microphones, cameras) in real time.              |
+| **Data collection**   | Collects data from sensors, such as accelerometers, microphones, and cameras in real time.              |
 | **Preprocessing**     | Provides tools for signal processing and feature extraction tailored for embedded systems.          |
-| **Model Training**    | Supports built-in ML algorithms and integrates with frameworks like TensorFlow.                     |
-| **Edge Optimization** | Automatically optimizes models to run efficiently on low-power edge hardware.                      |
+| **Model training**    | Supports built-in ML algorithms and integrates with frameworks like TensorFlow.                     |
+| **Edge optimization** | Automatically optimizes models to run efficiently on low-power edge hardware.                      |
 | **Deployment**        | Enables seamless deployment to microcontrollers, RTOS-based boards, and Linux devices.             |
-| **Web-Based Platform**| Fully browser-based interface for managing projects and workflows without needing local setup.     |
+| **Web-based platform**| Fully browser-based interface for managing projects and workflows without needing local setup.     |
 
 ---
 
-## Why It’s Important in Edge AI and TinyML
+## Why it's important in Edge AI and TinyML
 
-- **Bridges the gap** between machine learning and embedded development.
-- **Accelerates prototyping** and deployment of AI features directly on hardware.
-- **Supports TinyML** applications that run on devices with very limited memory and compute power.
-- Works with popular hardware platforms like **Arduino**, **Raspberry Pi**, **Nordic**, **STMicroelectronics**, and more.
+- Bridges the gap between machine learning and embedded development
+- Accelerates prototyping and deployment of AI features directly on hardware
+- Supports TinyML applications that run on devices with very limited memory and compute power
+- Works with popular hardware platforms such as Arduino, Raspberry Pi, Nordic, and STMicroelectronics
 
-## Getting Started with Edge Impulse
+## Get started with Edge Impulse
 
-To begin working with TinyML models, visit the **[Edge Impulse](https://edgeimpulse.com)**. You’ll need to create a free account to access the full platform. In the following sections, you will walk through each key page on the Edge Impulse platform using the attached snapshots as guide. These will help you understand what actions to take and how each part of the interface contributes to building and deploying your machine learning model.
+To begin working with TinyML models, visit [Edge Impulse](https://edgeimpulse.com). You'll need to create a free account to access the full platform.
 
-![example image alt-text#center](images/1.png "Figure 1. Home Page of Edge Impulse")
+In the following sections, you'll walk through each key page on the Edge Impulse platform using snapshots as a guide. These visuals will help you understand what actions to take and how each part of the interface contributes to building and deploying your machine learning model.
+
+
+
+![Screenshot of the Edge Impulse home page showing the main navigation and project dashboard alt-text#center](images/1.png "Figure 1. Home page of Edge Impulse")
+
 
 ### Step 1: Create a New Project
 
