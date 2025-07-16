@@ -68,26 +68,26 @@ sudo apt-get -y install \
 
 ## How do I download and install Swift?
 
-This guide uses Swift version 6.0.1 on Ubuntu 24.04. 
+This guide uses Swift version 6.1.2 on Ubuntu 24.04. 
 
 You can get more information about other versions and platforms from [Download Swift](https://www.swift.org/download/).
 
 Download Swift for Arm Linux:
 
 ```bash
-wget https://download.swift.org/swift-6.0.1-release/ubuntu2404-aarch64/swift-6.0.1-RELEASE/swift-6.0.1-RELEASE-ubuntu24.04-aarch64.tar.gz
+wget https://download.swift.org/swift-6.1.2-release/ubuntu2404-aarch64/swift-6.1.2-RELEASE/swift-6.1.2-RELEASE-ubuntu24.04-aarch64.tar.gz
 ```
 
 Extract the archive:
 
 ```bash
-sudo tar -xf swift-6.0.1-RELEASE-ubuntu24.04-aarch64.tar.gz -C /usr/local
+sudo tar -xf swift-6.1.2-RELEASE-ubuntu24.04-aarch64.tar.gz -C /usr/local
 ```
 
 Add the `bin/` directory to your search path:
 
 ```bash
-echo 'export PATH="$PATH:/usr/local/swift-6.0.1-RELEASE-ubuntu24.04-aarch64/usr/bin"' >> ~/.bashrc
+echo 'export PATH="$PATH:/usr/local/swift-6.1.2-RELEASE-ubuntu24.04-aarch64/usr/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -102,7 +102,7 @@ swift --version
 The expected output is:
 
 ```output
-Swift version 6.0.1 (swift-6.0.1-RELEASE)
+Swift version 6.1.2 (swift-6.1.2-RELEASE)
 Target: aarch64-unknown-linux-gnu
 ```
 
@@ -116,7 +116,7 @@ print("Hello from Swift on Arm Linux!")
 
 Compile and run the program:
 
-```bash
+```console
 swift hello.swift
 ```
 
@@ -128,7 +128,7 @@ Hello from Swift on Arm Linux!
 
 You can also compile and run the program using:
 
-```bash
+```console
 swiftc hello.swift -o hello
 ./hello
 ```
