@@ -31,7 +31,7 @@ Make sure to save it in a location where you can easily find it later, such as y
 ## Upload the Arduino library from Edge Impulse
 
 * After creating and saving your sketch, go to **Sketch** > **Include Library** > **Add .ZIP Library**
-* In the file dialog that opens, navigate to the location of the ZIP file you exported from Edge Impulse in [Set up your environment](/learning-paths/embedded-and-microcontrollers/edge/software-edge-impulse/)
+* In the file dialog that opens, navigate to the location of the ZIP file you exported from Edge Impulse.
 * Select the ZIP file and click **Open**
 * The Arduino IDE will automatically install the library and any dependencies it requires.
 

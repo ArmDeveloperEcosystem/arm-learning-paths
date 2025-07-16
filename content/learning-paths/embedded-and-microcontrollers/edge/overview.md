@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 {{< notice Note >}}
-This section introduces the key concepts that form the foundation of this Learning Path. Review it before starting this Learning Path.
+This section introduces the key concepts that form the foundation of Edge AI. Review it before starting this Learning Path.
 {{< /notice >}}
 
 # Edge AI
