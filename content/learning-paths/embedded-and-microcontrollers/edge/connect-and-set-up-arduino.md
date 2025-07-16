@@ -15,7 +15,7 @@ The board comes with built-in Wi-Fi, Bluetooth, and an onboard IMU. These are fe
 
 ![example image alt-text#center](images/nano.png "Arduino Nano RP2040")
 
-Its compatibility with popular tools like Edge Impulse and the Arduino IDE makes it a suitable choice for TinyML applications. You can learn more about the Arduino Nano RP2040 Connect on the [official Arduino website](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers?_gl=1*1laabar*_up*MQ..*_ga*MTk1Nzk5OTUwMS4xNzQ2NTc2NTI4*_ga_NEXN8H46L5*czE3NDY1NzY1MjUkbzEkZzEkdDE3NDY1NzY5NTkkajAkbDAkaDE1MDk0MDg0ODc.).
+Its compatibility with popular tools like Edge Impulse and the Arduino IDE makes it a suitable choice for TinyML applications. You can learn more about the Arduino Nano RP2040 Connect on the [Arduino website](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers?_gl=1*1laabar*_up*MQ..*_ga*MTk1Nzk5OTUwMS4xNzQ2NTc2NTI4*_ga_NEXN8H46L5*czE3NDY1NzY1MjUkbzEkZzEkdDE3NDY1NzY5NTkkajAkbDAkaDE1MDk0MDg0ODc.).
 
 ## Connect and set up the Arduino Nano RP2040 Connect
 
@@ -45,7 +45,7 @@ You will need the following components:
 
 To program and deploy your trained model to the Arduino Nano RP2040, you first need to configure your development environment.
 
-Follow the steps in the [Arduino Nano RP2040 install guide](https://learn.arm.com/install-guides/arduino-pico/).
+Follow the steps in the [Arduino Nano RP2040 install guide](/install-guides/arduino-pico/).
 
 This guide walks you through:
 
