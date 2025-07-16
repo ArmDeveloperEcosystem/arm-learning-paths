@@ -96,6 +96,13 @@ REPOSITORY              TAG       IMAGE ID       CREATED          SIZE
 zenoh-node              latest    2300ea78d043   30 minutes ago   3.73GB
 ```
 
+Alternatively, if you’d like to skip the build process, a pre-built Docker image is available on Docker Hub.
+You can pull it directly using:
+
+```bash
+docker pull odinlmshen/zenoh-node
+```
+
 ### Transfer the Docker image to the other Raspberry Pi
 
 There are two options to transfer the Docker image to your second device. Choose one of the following methods.
@@ -119,7 +126,7 @@ You can also push the image to Docker Hub or GitHub Container Registry and pull 
 
 ### Run the Docker Image
 
-Once the image is successfully loaded on second device, you can run the container.
+Once the image is successfully loaded on the second device, you can run the container to start the Zenoh environment.
 
 ```bash
 docker run -it --network=host zenoh-node
