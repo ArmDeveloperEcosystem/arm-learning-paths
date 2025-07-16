@@ -8,13 +8,17 @@ layout: learningpathall
 
 ## Deploying Zenoh on Multiple Raspberry Pi Devices
 
-After building Zenoh and its core examples, your next step is to deploy them across multiple Arm-based devices. 
+After building Zenoh and its core examples, the next step is to deploy them across multiple Arm-based devices.
 
-Once you’ve successfully installed Zenoh on an Arm Cortex-A or Neoverse platform in the previous session, you can either transfer the compiled binaries from `~/zenoh/target/release/` to your Raspberry Pi devices, or use Docker to quickly deploy them across multiple RPi nodes.
+If you’ve already installed Zenoh on an Arm Cortex-A or Neoverse platform as shown in the previous section, you can simply copy the compiled binaries from `~/zenoh/target/release/` to each of your Raspberry Pi devices.
 
-In this session, you’ll use Raspberry Pi boards to simulate a scalable, distributed environment—but the same workflow applies to any Arm Linux system, including Arm cloud instances and Arm Virtual Hardware.
+However, to streamline deployment across multiple devices and ensure repeatability, this section demonstrates how to package Zenoh into a Docker image for batch rollout and scalable testing.
 
-This setup lets you simulate real-world, cross-node communication, making it ideal for validating Zenoh's performance in robotics and industrial IoT use cases.
+This containerized approach not only simplifies deployment on Raspberry Pi, but also integrates seamlessly with Arm cloud platforms such as AWS Graviton Arm Cortex-A Linux or Arm Virtual Hardware—enabling a consistent cloud-to-edge development and validation workflow.
+
+In this session, you’ll use Raspberry Pi boards to simulate a scalable distributed environment. The same workflow applies to any Arm Linux system, including cloud instances and virtual hardware.
+
+This setup allows you to simulate real-world, cross-node communication scenarios, making it ideal for evaluating Zenoh’s performance in robotics and industrial IoT applications.
 
 ### Install Docker on Raspberry Pi
 To simplify this process and ensure consistency, you can use Docker to containerize your Zenoh and ROS 2 environment. 
