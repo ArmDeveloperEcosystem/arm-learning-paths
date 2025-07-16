@@ -1,25 +1,22 @@
 ---
-title: Learn How to Run AI on Edge Devices- Arduino Nano RP2040
-
-draft: true
-cascade:
-    draft: true
+title: Learn how to run AI on Edge devices using Arduino Nano RP2040
 
 minutes_to_complete: 90
 
-who_is_this_for: This learning path is for beginners in Edge AI and TinyML, including developers, engineers, hobbyists, AI/ML enthusiasts, and researchers working with embedded AI and IoT.
+who_is_this_for: This Learning Path is for beginners in Edge AI and TinyML, including developers, engineers, hobbyists, AI/ML enthusiasts, and researchers working with embedded AI and IoT.
 
 learning_objectives:
-    - Understand Edge AI and TinyML basics.
-    - Collect and preprocess audio data using Edge Impulse.
-    - Train and deploy an audio classification model on Arduino Nano RP2040.
-    - Interface with LEDs to switch them on and off.
+  - Understand the basics of Edge AI and TinyML.
+  - Collect and preprocess audio data using Edge Impulse.
+  - Train and deploy an audio classification model on the Arduino Nano RP2040.
+  - Control LEDs by turning them on and off based on model predictions.
 
 prerequisites:
-    - Explore this [learning path](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/arduino-pico/) if you are an absolute beginner.
-    - An [Edge Impulse](https://edgeimpulse.com/) Studio account.
-    - The [Arduino IDE with the RP2040 board support package](https://learn.arm.com/install-guides/arduino-pico/) installed on your computer
-    - An Arduino Nano RP2040 Connect [board](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers?_gl=1*9t4cti*_up*MQ..*_ga*NTA1NTQwNzgxLjE3NDYwMjIyODk.*_ga_NEXN8H46L5*MTc0NjAyMjI4Ny4xLjEuMTc0NjAyMjMxOC4wLjAuMjA3MjA2NTUzMA..).
+  - Completion of this [Learning Path](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/arduino-pico/) if you're an absolute beginner.
+  - An [Edge Impulse](https://edgeimpulse.com/) Studio account.
+  - The [Arduino IDE](https://learn.arm.com/install-guides/arduino-pico/) with the RP2040 board support package installed on your computer.
+  - An [Arduino Nano RP2040 Connect board](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers).
+
 
 author: Bright Edudzi Gershon Kordorwu
 ### Tags
@@ -38,15 +35,15 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: TinyML Brings AI to Smallest Arm Devices
+        title: TinyML brings AI to smallest Arm devices
         link: https://newsroom.arm.com/blog/tinyml
         type: blog
     - resource:
-        title: What is edge AI?
+        title: What is Edge AI?
         link: https://docs.edgeimpulse.com/nordic/concepts/edge-ai/what-is-edge-ai
         type: blog
     - resource:
-        title: Edge Impulse for Beginners
+        title: Edge Impulse for beginners
         link: https://docs.edgeimpulse.com/docs/readme/for-beginners
         type: doc
 
