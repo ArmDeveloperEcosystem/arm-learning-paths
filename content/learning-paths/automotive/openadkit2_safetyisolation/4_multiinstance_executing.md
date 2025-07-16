@@ -36,8 +36,8 @@ On each instance, copy the appropriate launch script into the `openadkit_demo.au
     export NGROK_URL=$NGROK_URL
 
     # Start planning-control
-      echo "Running planning v1.."
-      TIMEOUT=120 CONF_FILE=$CONF_FILE_PASS docker compose -f "$SCRIPT_DIR/docker-compose-2ins.yml" up planning-control -d  
+    echo "Running planning v1.."
+    TIMEOUT=120 CONF_FILE=$CONF_FILE_PASS docker compose -f "$SCRIPT_DIR/docker-compose-2ins.yml" up planning-control -d  
   {{< /tab >}}
   
   {{< tab header="Visualizer & Simulator" language="bash">}}
