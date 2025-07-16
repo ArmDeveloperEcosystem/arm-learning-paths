@@ -1,5 +1,5 @@
 ---
-title: Deploy Arcee AFM-4.5B on AWS Graviton4
+title: Deploy Arcee AFM-4.5B on Arm-based AWS Graviton4 with Llama.cpp
 
 draft: true
 cascade:
@@ -7,20 +7,19 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is for developers and engineers who want to deploy the Arcee AFM-4.5B small language model on an Arm-based AWS instance
+who_is_this_for: This Learning Path is for developers and ML engineers who want to deploy Arcee's AFM-4.5B small language model on AWS Graviton4 instances using Llama.cpp.
 
 learning_objectives:
-    - Launch and set up an Arm-based Graviton4 virtual machine on Amazon Web Services
-    - Build Llama.cpp from source
-    - Download AFM-4.5B from Hugging Face
-    - Quantize AFM-4.5B using Llama.cpp
-    - Deploy the model and run inference with Llama.cpp
-    - Evaluate the quality of quantized models by measuring perplexity
+    - Launch an Arm-based EC2 instance on AWS Graviton4
+    - Build and install Llama.cpp from source
+    - Download and quantize the AFM-4.5B model from Hugging Face
+    - Run inference on the quantized model using Llama.cpp
+    - Evaluate model quality by measuring perplexity
 
 prerequisites:
-    - Access to launch an EC2 instance of type c8g.4xlarge (or larger) with 128 GB of storage
-    - An [AWS account](https://aws.amazon.com/) with permission to launch c8g (Graviton4) instances
-    - Basic familiarity with SSH
+    - An [AWS account](https://aws.amazon.com/) with permission to launch Graviton4 (c8g.4xlarge or larger) instances
+    - At least 128 GB of available storage
+    - Basic familiarity with Linux and SSH
 
 author: Julien Simon
 
@@ -32,7 +31,7 @@ arm_ips:
     - Neoverse
 tools_software_languages:
     - Amazon Web Services
-    - Linux
+    - Hugging Face
     - Python
     - Llama.cpp
 operatingsystems:
