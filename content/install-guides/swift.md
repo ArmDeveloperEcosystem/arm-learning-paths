@@ -116,7 +116,7 @@ print("Hello from Swift on Arm Linux!")
 
 Compile and run the program:
 
-```bash
+```console
 swift hello.swift
 ```
 
@@ -128,7 +128,7 @@ Hello from Swift on Arm Linux!
 
 You can also compile and run the program using:
 
-```bash
+```console
 swiftc hello.swift -o hello
 ./hello
 ```
