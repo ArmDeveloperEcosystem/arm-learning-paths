@@ -14,25 +14,27 @@ In this Learning Path, you'll deploy AFM-4.5B using [Llama.cpp](https://github.c
 
 This hands-on guide helps developers build cost-efficient, high-performance LLM applications on modern Arm server infrastructure using open-source tools and real-world deployment practices.
 
-## Deployment workflow: AFM-4.5B with Llama.cpp on AWS Graviton4
+### LLM deployment workflow on Arm Graviton4
 
-The steps below outline the full deployment pipeline you'll follow in this Learning Path:
+1. **Provision compute**  
+   Launch an EC2 instance using a Graviton4-based instance type (for example, `c8g.4xlarge`).
 
-1. Launch Arm-based EC2 instance (Graviton4: c8g)  
-    ↓  
-2. Install build dependencies (such as CMake and Python)  
-    ↓  
-3. Build Llama.cpp from source  
-    ↓  
-4. Download AFM-4.5B model files from Hugging Face  
-    ↓  
-5. Quantize the model using Llama.cpp tools  
-    ↓  
-6. Run inference using the quantized model  
-    ↓  
-7. Evaluate model quality using perplexity
+2. **Set up your environment**  
+   Install required build tools and dependencies (such as CMake, Python, and Git).
 
-{{< notice Tip >}}
+3. **Build the inference engine**  
+   Clone the [Llama.cpp](https://github.com/ggerganov/llama.cpp) repository and compile the project for your Arm-based environment.
+
+4. **Prepare the model**  
+   Download the **AFM-4.5B** model files from Hugging Face and use Llama.cpp's quantization tools to reduce model size and optimize performance.
+
+5. **Run inference**  
+   Load the quantized model and run sample prompts using Llama.cpp.
+
+6. **Evaluate model quality**  
+   Calculate **perplexity** or use other metrics to assess model performance.
+
+{{< notice Note>}}
 You can reuse this deployment flow with other models supported by Llama.cpp by swapping out the model file and adjusting quantization settings.
 {{< /notice >}}
 
