@@ -44,7 +44,7 @@ further_reading:
       link: https://www.arcee.ai
       type: website
   - resource:
-      title: Announcing Arcee Foundation Models
+      title: Announcing the Arcee Foundation Model family
       link: https://www.arcee.ai/blog/announcing-the-arcee-foundation-model-family
       type: blog
   - resource:
@@ -56,7 +56,7 @@ further_reading:
       link: https://aws.amazon.com/ec2/graviton/
       type: documentation
   - resource:
-      title: Amazon EC2 documentation
+      title: Amazon EC2 User Guide
       link: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/
       type: documentation
 
