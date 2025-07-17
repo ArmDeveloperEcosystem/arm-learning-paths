@@ -6,18 +6,21 @@ weight: 4
 layout: learningpathall
 ---
 
-## Deploying Zenoh on Multiple Raspberry Pi Devices Using Docker
+## Deploying Zenoh on Multiple Raspberry Pi Devices
 
-After building Zenoh and its core examples, your next step is to deploy them across multiple Arm-based devices. 
+After building Zenoh and its core examples, the next step is to deploy them across multiple Arm-based devices.
 
-In this section, you’ll use Raspberry Pi boards to simulate a scalable, distributed environment, but the same workflow applies to any Arm Linux system, including Arm cloud instances.
+If you’ve already installed Zenoh on an Arm Cortex-A or Neoverse platform as shown in the previous section, you can simply copy the compiled binaries from `~/zenoh/target/release/` to each of your Raspberry Pi devices.
 
-You’ll learn how to use Docker to deploy the environment on physical devices.
+However, to streamline deployment across multiple devices and ensure repeatability, this section demonstrates how to package Zenoh into a Docker image for batch rollout and scalable testing.
 
-This setup lets you simulate real-world, cross-node communication, making it ideal for validating Zenoh's performance in robotics and industrial IoT use cases.
+This containerized approach not only simplifies deployment on Raspberry Pi, but also integrates seamlessly with Arm cloud platforms such as AWS Graviton Arm Cortex-A Linux or Arm Virtual Hardware—enabling a consistent cloud-to-edge development and validation workflow.
 
-### Install Docker 
+In this session, you’ll use Raspberry Pi boards to simulate a scalable distributed environment. The same workflow applies to any Arm Linux system, including cloud instances and virtual hardware.
 
+This setup allows you to simulate real-world, cross-node communication scenarios, making it ideal for evaluating Zenoh’s performance in robotics and industrial IoT applications.
+
+### Install Docker on Raspberry Pi
 To simplify this process and ensure consistency, you can use Docker to containerize your Zenoh and ROS 2 environment. 
 This lets you quickly replicate the same runtime on any device without needing to rebuild from source.
 
@@ -30,16 +33,54 @@ curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 sudo usermod -aG docker $USER ; newgrp docker
 ```
 
-### Create a ROS 2 + DDS Docker Image
+### Create a ROS2 + Zenoh Docker Image
 
-In a working directory, create a `Dockerfile` with the following content to create the ROS 2 / DDS docker image.
+To ensure compatibility with ROS-related tools, create a `Dockerfile` based on  `ros:galactic `, and use the official Rust installation method to build Zenoh, as shown below.
+
+This Dockerfile uses a multi-stage build process based on the ros:galactic environment.
+In the first stage, it installs Rust and compiles the Zenoh binaries directly from source. 
+In the second stage, it installs essential ROS 2 demo tools and copies the Zenoh executables into the final runtime image.
 
 ```bash
-FROM ros:galactic
-RUN apt-get update 
-RUN apt-get install -y ros-galactic-demo-nodes-cpp ros-galactic-rmw-cyclonedds-cpp ros-galactic-turtlesim
+# Stage 1: Build Zenoh using ROS base with Rust toolchain
+FROM ros:galactic AS builder
+
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    build-essential \
+    pkg-config \
+    clang \
+    libssl-dev \
+    cmake
+
+RUN curl -sSf https://sh.rustup.rs -o rustup-init.sh && \
+    chmod +x rustup-init.sh && \
+    ./rustup-init.sh -y --no-modify-path && \
+    rm rustup-init.sh
+
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+WORKDIR /root
+RUN git clone https://github.com/eclipse-zenoh/zenoh.git
+WORKDIR /root/zenoh
+RUN cargo build --release --all-targets -j $(nproc)
+
+# Stage 2: Runtime with ROS + Zenoh binary only
+FROM ros:galactic AS runtime
+
+RUN apt-get update && apt-get install -y \
+    ros-galactic-demo-nodes-cpp \
+    ros-galactic-rmw-cyclonedds-cpp \
+    ros-galactic-turtlesim
+
+COPY --from=builder /root/zenoh/target/release /root/zenoh/target/release
+
 ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
-CMD bash
+
+WORKDIR /root/zenoh/target/release
+
+CMD ["/bin/bash"]
 ```
 
 Under the directory where the above Dockerfile exists, run the following command to generate the docker image.
@@ -55,7 +96,15 @@ docker images | grep zenoh-node
 ```
 
 ```output
-zenoh-node                           latest             b7a9c27cf8a8   About a minute ago   962MB
+REPOSITORY              TAG       IMAGE ID       CREATED          SIZE
+zenoh-node              latest    2300ea78d043   30 minutes ago   3.73GB
+```
+
+Alternatively, if you’d like to skip the build process, a pre-built Docker image is available on Docker Hub.
+You can pull it directly using:
+
+```bash
+docker pull odinlmshen/zenoh-node
 ```
 
 ### Transfer the Docker image to the other Raspberry Pi
@@ -81,7 +130,7 @@ You can also push the image to Docker Hub or GitHub Container Registry and pull 
 
 ### Run the Docker Image
 
-Once the image is successfully loaded on second device, you can run the container.
+Once the image is successfully loaded on the second device, you can run the container to start the Zenoh environment.
 
 ```bash
 docker run -it --network=host zenoh-node
