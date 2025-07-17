@@ -10,7 +10,7 @@ layout: learningpathall
 
 AFM-4.5B is a 4.5-billion-parameter foundation model that delivers strong accuracy, strict compliance, robust multilingual support, and high cost-efficiency. Trained on nearly 7 trillion tokens of clean, rigorously filtered data, it performs well across a wide range of languages, including Arabic, English, French, German, Hindi, Italian, Korean, Mandarin, Portuguese, Russian, and Spanish.
 
-In this Learning Path, you'll deploy AFM-4.5B using [Llama.cpp](https://github.com/ggerganov/llama.cpp) on an Arm-based AWS Graviton4 instance. You’ll walk through the full workflow, from setting up your environment and compiling the runtime to downloading, quantizing, and running inference on the model. You'll also evaluate model quality using perplexity, a common metric for measuring how well a language model predicts text.
+In this Learning Path, you'll deploy AFM-4.5B using [Llama.cpp](https://github.com/ggerganov/llama.cpp) on an Arm-based AWS Graviton4 instance. You’ll walk through the full workflow, from setting up your environment and compiling the runtime, to downloading, quantizing, and running inference on the model. You'll also evaluate model quality using perplexity, a common metric for measuring how well a language model predicts text.
 
 This hands-on guide helps developers build cost-efficient, high-performance LLM applications on modern Arm server infrastructure using open-source tools and real-world deployment practices.
 
