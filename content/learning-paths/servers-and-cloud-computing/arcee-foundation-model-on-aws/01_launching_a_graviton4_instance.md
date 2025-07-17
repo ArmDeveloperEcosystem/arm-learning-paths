@@ -84,18 +84,19 @@ When you're ready, select **Launch instance** to create your EC2 instance.
 
 ## Monitor the instance launch
 
-After a few seconds, you should see a message like:
+After a few seconds, you should see a confirmation message like the following:
 
 ```
 Successfully initiated launch of instance (i-xxxxxxxxxxxxxxxxx)
 ```
 
-If the launch fails, double-check the instance type, permissions, and network setup.
+If the launch fails, double-check the instance type, permissions, and network settings.
 
-To get connection info:
-- Go to the **Instances** list
-- Click the instance ID
-- In the **Details** tab, copy the **Public DNS** hostname — you’ll use this to connect via SSH
+To retrieve the connection details:
+
+- Go to the **Instances** list in the EC2 dashboard.  
+- Select your instance by selecting **Instance ID**.  
+- In the **Details** tab, copy the **Public DNS** value - you’ll use this to connect through SSH.
 
 ## Connect to your instance
 
