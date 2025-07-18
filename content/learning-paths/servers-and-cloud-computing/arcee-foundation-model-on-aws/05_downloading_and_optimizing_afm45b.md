@@ -12,7 +12,7 @@ The first release of the [Arcee Foundation Model](https://www.arcee.ai/blog/anno
 
 - Excellent accuracy
 - Strict compliance
-- High cost-efficiency in training and inference.
+- High cost-efficiency in training and inference
 
 
 AFM-4.5B was trained on nearly 7 trillion tokens of clean, rigorously filtered data. It has been tested across a wide range of languages, including Arabic, English, French, German, Hindi, Italian, Korean, Mandarin, Portuguese, Russian, and Spanish.
