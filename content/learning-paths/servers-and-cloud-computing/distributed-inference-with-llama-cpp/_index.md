@@ -35,14 +35,6 @@ further_reading:
         title: Llama.cpp rpc-server code
         link: https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc
         type: Code
-    - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
 
 
 

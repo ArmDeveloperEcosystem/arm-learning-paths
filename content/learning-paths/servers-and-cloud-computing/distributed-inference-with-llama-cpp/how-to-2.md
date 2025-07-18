@@ -6,32 +6,33 @@ weight: 3
 layout: learningpathall
 ---
 
-## PLACEHOLDER HEADER OF SECOND STEP
+(continued)<br>
 4. In this learning path, we will use the following three IP addresses for the nodes. 
 
 ```bash
-172.31.110.10 (Master)
-172.31.110.11, 172.31.110.12 (Workers)
+master_ip =" 172.31.110.10"
+worker_ips = "172.31.110.11,172.31.110.12"
 ```
 Note that these IPs may be different in your setup. You can find the IP address of your AWS instance using the command provided below.
 ```bash
 curl http://169.254.169.254/latest/meta-data/local-ipv4
 ```
 
-Now, on the master node, you can verify communication with the worker nodes using the following command:
+Now, on the master node, you can verify communication with the worker nodes using the following command on master node:
 ```bash
 telnet 172.31.110.11 50052
 ```
 If the backend server is set up correctly, the output of the `telnet` command should look like the following:
 ```bash
 Trying 172.31.110.11...
-Connected to localhost.
+Connected to 172.31.110.11.
 Escape character is '^]'.
 ```
 Finally, you can execute the following command, to execute distributed inference:
 ```bash
-bin/llama-cli -m /home/ubuntu/model.gguf -p "Tell me a joke" -n 128 --rpc 172.31.110.11:50052,172.31.110.12:50052 -ngl 99
+bin/llama-cli -m /home/ubuntu/model.gguf -p "Tell me a joke" -n 128 --rpc "$worker_ips" -ngl 99
 ```
+{{% notice Note %}}At the time of publication, llama.cpp only supports up to 16 backend workers.{{% /notice %}} <br>
 The model file for this experiment is hosted on Arm’s private AWS S3 bucket. If you don’t have access to it, you can find a publicly available version of the model on Hugging Face.
 The output: 
 ```output
@@ -201,7 +202,7 @@ That's it! You have sucessfully run the llama-3.1-8B model on CPUs with the powe
 
 Lastly to set up OpenAI compatible API, you can use the `llama-server` functionality. The process of implementing this is described [here](/learning-paths/servers-and-cloud-computing/llama-cpu) under the "Access the chatbot using the OpenAI-compatible API" section. Here is a snippet, for how to set up llama-server for disributed inference:
 ```bash
-bin/llama-server -m /home/ubuntu/model.gguf --port 8080 --rpc 172.31.110.11:50052,172.31.110.12:50052 -ngl 99
+bin/llama-server -m /home/ubuntu/model.gguf --port 8080 --rpc "$worker_ips" -ngl 99
 ```
 At the very end of the output to the above command, you will see somethin like the following: 
 ```output
