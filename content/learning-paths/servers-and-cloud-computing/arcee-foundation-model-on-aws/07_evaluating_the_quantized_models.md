@@ -6,13 +6,13 @@ weight: 9
 layout: learningpathall
 ---
 
-## Use llama-bench for performance benchmarking
+## Benchmark performance using `llama-bench`
 
-The [`llama-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench) tool allows you to measure the performance characteristics of your model, including inference speed and memory usage.
+Use the [`llama-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench) tool to measure model performance, including inference speed and memory usage.
 
-### Basic Benchmarking
+### Run basic benchmarks
 
-You can benchmark multiple model versions to compare their performance:
+Benchmark multiple model versions to compare their performance:
 
 ```bash
 # Benchmark the full precision model
@@ -25,14 +25,16 @@ bin/llama-bench -m models/afm-4-5b/afm-4-5B-Q8_0.gguf
 bin/llama-bench -m models/afm-4-5b/afm-4-5B-Q4_0.gguf
 ```
 
-Running each model on a 16 vCPU instance, you should see results like:
+Typical results on a 16 vCPU instance:
 - **F16 model**: ~15-16 tokens/second, ~15GB memory usage
 - **Q8_0 model**: ~25 tokens/second, ~8GB memory usage  
 - **Q4_0 model**: ~40 tokens/second, ~4.4GB memory usage
 
-The exact performance will depend on your specific instance configuration and load.
+Actual results depend on your specific instance configuration and load.
 
-### Advanced Benchmarking
+## Run advanced benchmarks
+
+Use this command to test prompt sizes and thread counts:
 
 ```bash
 bin/llama-bench -m models/afm-4-5b/afm-4-5B-Q4_0.gguf \
@@ -42,12 +44,12 @@ bin/llama-bench -m models/afm-4-5b/afm-4-5B-Q4_0.gguf \
 ```
 
 This command:
-- Loads the model and runs inference benchmarks
-- `-p`: Evaluates a random prompt of 128, 256, and 512 tokens
+- Loads the 4-bit model and runs inference benchmarks
+- `-p`: Evaluates prompt lengths of 128, 256, and 512 tokens
 - `-n`: Generates 128 tokens
-- `-t`: Run the model on 4, 8, and 16 threads
+- `-t`: Run the model with 4, 8, and 16 threads
 
-The results should look like this:
+Sample results:
 
 | model                          |       size |     params | backend    | threads |            test |                  t/s |
 | ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
@@ -61,28 +63,29 @@ The results should look like this:
 | llama 8B Q4_0                  |   4.33 GiB |     8.03 B | CPU        |      16 |           pp512 |        190.18 ± 0.03 |
 | llama 8B Q4_0                  |   4.33 GiB |     8.03 B | CPU        |      16 |           tg128 |         40.99 ± 0.36 |
 
-It's pretty amazing to see that with only 4 threads, the 4-bit model can still generate at the very comfortable speed of 15 tokens per second. You could run multiple copies of the model on the same instance to support concurrent users or applications.
+With only four threads, the Q4_0 model maintains comfortable generation speeds. For multi-user scenarios, you can run multiple concurrent instances on the same server.
 
-You can also try [`llama-batched-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/batched-bench) to benchmark performance on batch sizes larger than 1.
+To test batch inference, use [`llama-batched-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/batched-bench).
 
 
 ## Using llama-perplexity for Model Evaluation
 
-Perplexity is a measure of how well a language model predicts text. It represents the average number of possible next tokens the model considers when predicting each word. A lower perplexity score indicates the model is more confident in its predictions and generally performs better on the given text. For example, a perplexity of 2.0 means the model typically considers 2 possible tokens when making each prediction, while a perplexity of 10.0 means it considers 10 possible tokens on average.
+Use the llama-perplexity tool to measure how well your model predicts the next token in a sequence. Perplexity is a measure of how well a language model predicts text - it gives you insight into the model’s confidence and predictive ability. It represents the average number of possible next tokens the model considers when predicting each word. A lower perplexity score indicates the model is more confident in its predictions and generally performs better on the given text. For example, a perplexity of 2.0 means the model typically considers two possible tokens when making each prediction, while a perplexity of 10.0 means it considers 10 possible tokens on average. 
 
 The `llama-perplexity` tool evaluates the model's quality on text datasets by calculating perplexity scores. Lower perplexity indicates better quality.
 
-### Downloading a Test Dataset
+### Download a test dataset
 
-First, download the Wikitext-2 test dataset.
+Download the Wikitext-2 test set to use as input for perplexity evaluation:
 
 ```bash
 sh scripts/get-wikitext-2.sh
 ```
+This script downloads and extracts the dataset to a local folder named wikitext-2-raw.
 
-### Running Perplexity Evaluation
+## Run a perplexity evaluation
 
-Next, measure perplexity on the test dataset.
+Run the llama-perplexity tool to evaluate how well each model predicts the Wikitext-2 test set:
 
 ```bash
 bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-F16.gguf -f wikitext-2-raw/wiki.test.raw
@@ -90,9 +93,15 @@ bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-Q8_0.gguf -f wikitext-2-raw/wik
 bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-Q4_0.gguf -f wikitext-2-raw/wiki.test.raw
 ```
 
-If you want to speed things up, you can add the `--chunks` option to use a fraction of 564 chunks contained in the test dataset.
+{{< notice Tip >}}
+To reduce runtime, add the `--chunks` option to run on a subset of the data. For example: `--chunks 50` evaluates only the first 50 chunks.
+{{< /notice >}}
 
-On the full dataset, these three commands will take about 5 hours. You should run them in a shell script to avoid SSH timeouts.
+## Run the evaluation as a background script
+
+Running a full perplexity evaluation on all three models takes about 5 hours. To avoid SSH timeouts and keep the process running after logout, wrap the commands in a shell script and run it in the background.
+
+Create a script named ppl.sh:
 
 For example:
 ```bash
@@ -109,7 +118,7 @@ bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-Q4_0.gguf -f wikitext-2-raw/wik
 
 Here are the full results.
 
-| Model | Generation Speed (tokens/s, 16 vCPUs) | Memory Usage | Perplexity (Wikitext-2) |
+| Model | Generation speed (tokens/s, 16 vCPUs) | Memory Usage | Perplexity (Wikitext-2) |
 |:-------:|:----------------------:|:------------:|:----------:|
 | F16     | ~15–16                 | ~15 GB       | TODO     |
 | Q8_0    | ~25                    | ~8 GB        | TODO       |
