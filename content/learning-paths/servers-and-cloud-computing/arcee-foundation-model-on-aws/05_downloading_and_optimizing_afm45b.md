@@ -1,5 +1,5 @@
 ---
-title: Downloading and optimizing AFM-4.5B
+title: Download and optimize the AFM-4.5B model
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -8,11 +8,18 @@ layout: learningpathall
 
 In this step, you'll download the AFM-4.5B model from Hugging Face, convert it to the GGUF format for use with Llama.cpp, and create quantized versions to optimize memory usage and inference speed.
 
-The first release of the [Arcee Foundation Model](https://www.arcee.ai/blog/announcing-the-arcee-foundation-model-family) family, [AFM-4.5B](https://www.arcee.ai/blog/deep-dive-afm-4-5b-the-first-arcee-foundational-model) is a 4.5-billion-parameter frontier model that delivers excellent accuracy, strict compliance, and very high cost-efficiency. It was trained on almost 7 trillion tokens of clean, rigorously filtered data, and has been tested across a wide range of languages, including Arabic, English, French, German, Hindi, Italian, Korean, Mandarin, Portuguese, Russian, and Spanish
+The first release of the [Arcee Foundation Model](https://www.arcee.ai/blog/announcing-the-arcee-foundation-model-family) family, [AFM-4.5B](https://www.arcee.ai/blog/deep-dive-afm-4-5b-the-first-arcee-foundational-model) is a 4.5-billion-parameter frontier model that offers:
 
-Here are the steps to download and optimize the model for AWS Graviton4. Make sure to run them in the virtual environment you created at the previous step.
+- Excellent accuracy
+- Strict compliance
+- High cost-efficiency in training and inference.
 
-## Step 1: Install the Hugging Face libraries
+
+AFM-4.5B was trained on nearly 7 trillion tokens of clean, rigorously filtered data. It has been tested across a wide range of languages, including Arabic, English, French, German, Hindi, Italian, Korean, Mandarin, Portuguese, Russian, and Spanish.
+
+The following steps show you how to download and optimize the model for use on AWS Graviton4. Be sure to activate the virtual environment you created in the previous step before running any commands.
+
+## Install the Hugging Face libraries
 
 ```bash
 pip install huggingface_hub hf_xet
@@ -20,7 +27,7 @@ pip install huggingface_hub hf_xet
 
 This command installs the Hugging Face Hub Python library, which provides tools for downloading models and datasets from the Hugging Face platform. The library includes the `huggingface-cli` command-line interface that you can use to download the AFM-4.5B model.
 
-## Step 2: Download the AFM-4.5B Model
+## Download the AFM-4.5B Model
 
 ```bash
 huggingface-cli download arcee-ai/afm-4.5B --local-dir models/afm-4-5b
