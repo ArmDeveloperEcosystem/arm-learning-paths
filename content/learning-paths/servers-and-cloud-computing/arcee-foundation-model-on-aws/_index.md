@@ -48,7 +48,7 @@ further_reading:
       link: https://www.arcee.ai/blog/announcing-the-arcee-foundation-model-family
       type: blog
   - resource:
-      title: Deep Dive: AFM-4.5B, the first Arcee Foundation Model
+      title: Deep Dive - AFM-4.5B, the first Arcee Foundation Model
       link: https://www.arcee.ai/blog/deep-dive-afm-4-5b-the-first-arcee-foundational-model
       type: blog
   - resource:
