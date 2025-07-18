@@ -8,9 +8,9 @@ layout: learningpathall
 
 In this step, you'll build Llama.cpp from source. Llama.cpp is a high-performance C++ implementation of the LLaMA model that's optimized for inference on various hardware platforms, including Arm-based processors like Graviton4.
 
-Even though AFM-4.5B has a custom model architecture, we're able to use the vanilla version of Llama.cpp as the Arcee AI team has contributed the appropriate modeling code.
+Even though AFM-4.5B uses a custom model architecture, you can still use the standard Llama.cpp repository - Arcee AI has contributed the necessary modeling code upstream.
 
-## Step 1: Clone the Repository
+## Clone the repository
 
 ```bash
 git clone https://github.com/ggerganov/llama.cpp
@@ -18,15 +18,15 @@ git clone https://github.com/ggerganov/llama.cpp
 
 This command clones the Llama.cpp repository from GitHub to your local machine. The repository contains the source code, build scripts, and documentation needed to compile the inference engine.
 
-## Step 2: Navigate to the Project Directory
+## Navigate to the project directory
 
 ```bash
 cd llama.cpp
 ```
 
-Change into the llama.cpp directory to run the build process. This directory contains the `CMakeLists.txt` file and source code structure.
+Change into the llama.cpp directory to run the build process. This directory contains the `CMakeLists.txt` file and all source code.
 
-## Step 3: Configure the Build with CMake
+## Configure the build with CMake
 
 ```bash
 cmake -B .
@@ -34,12 +34,12 @@ cmake -B .
 
 This command uses CMake to configure the build system:
 
-- `-B .` specifies that the build files should be generated in the current directory
-- CMake will detect your system's compiler, libraries, and hardware capabilities
-- It will generate the appropriate build files (Makefiles on Linux) based on your system configuration
+- `-B .` tells CMake to generate build files in the current directory
+- CMake detects your system's compiler, libraries, and hardware capabilities
+- It produces Makefiles (on Linux) or platform-specific build scripts for compiling the project
 
 
-The CMake output should include the information below, indicating that the build process will leverage the Neoverse V2 architecture's specialized instruction sets designed for AI/ML workloads. These optimizations are crucial for achieving optimal performance on Graviton4:
+If you're running on Graviton4, the CMake output should include hardware-specific optimizations that target the Neoverse V2 architecture. These optimizations are crucial for achieving high performance on Graviton4:
 
 ```output
 -- ARM feature DOTPROD enabled
@@ -50,28 +50,31 @@ The CMake output should include the information below, indicating that the build
 -- Adding CPU backend variant ggml-cpu: -mcpu=neoverse-v2+crc+sve2-aes+sve2-sha3+dotprod+i8mm+sve
 ```
 
-- **DOTPROD: Dot Product** - Hardware-accelerated dot product operations for neural network computations
-- **SVE: Scalable Vector Extension** - Advanced vector processing capabilities that can handle variable-length vectors up to 2048 bits, providing significant performance improvements for matrix operations
-- **MATMUL_INT8: Matrix multiplication units** - Dedicated hardware for efficient matrix operations common in transformer models, accelerating the core computations of large language models
-- **FMA: Fused Multiply-Add - Optimized floating-point operations that combine multiplication and addition in a single instruction
-- **FP16 Vector Arithmetic - Hardware support for 16-bit floating-point vector operations, reducing memory usage while maintaining good numerical precision
+These features enable advanced CPU instructions for faster inference:
 
-## Step 4: Compile the Project
+- **DOTPROD: Dot Product**: hardware-accelerated dot product operations for neural network workloads
+- **SVE: Scalable Vector Extension**: advanced vector processing capabilities that can handle variable-length vectors up to 2048 bits, providing significant performance improvements for matrix operations
+- **MATMUL_INT8**: integer matrix multiplication units optimized for transformers
+- **FMA**: fused multiply-add operations to speed up floating-point math
+- **FP16 vector arithmetic**: 16-bit floating-point vector operations to reduce memory use without compromising precision
+
+## Compile the project
 
 ```bash
 cmake --build . --config Release -j16
 ```
 
-This command compiles the Llama.cpp project:
-- `--build .` tells CMake to build the project using the files in the current directory
-- `--config Release` specifies a Release build configuration, which enables optimizations and removes debug symbols
+This command compiles the Llama.cpp source code:
+
+- `--build .` tells CMake to build the project in the current directory
+- `--config Release` enables optimizations and strips debug symbols
 - `-j16` runs the build with 16 parallel jobs, which speeds up compilation on multi-core systems like Graviton4
 
-The build process will compile the C++ source code into executable binaries optimized for your ARM64 architecture. This should only take a minute.
+The build process compiles the C++ source code into executable binaries optimized for the Arm64 architecture. Compilation typically takes under a minute.
 
 ## What is built? 
 
-After successful compilation, you'll have several key command-line executables in the `bin` directory:
+After compilation, you'll find several key command-line tools in the `bin` directory:
 - `llama-cli` - The main inference executable for running LLaMA models
 - `llama-server` - A web server for serving model inference over HTTP
 - `llama-quantize` - a tool for model quantization to reduce memory usage
