@@ -16,10 +16,10 @@ virtualenv env-llama-cpp
 ```
 
 This command creates a new Python virtual environment named `env-llama-cpp`, which has the following benefits:
-- Provides an isolated Python environment to prevent package conflicts between projects.
-- Creates a local directory containing its own Python interpreter and installation space.
-- Ensures Llama.cpp dependencies don’t interfere with your global Python setup.
-- Supports reproducible and portable development environments.
+- Provides an isolated Python environment to prevent package conflicts between projects
+- Creates a local directory containing its own Python interpreter and installation space
+- Ensures Llama.cpp dependencies don’t interfere with your global Python setup
+- Supports reproducible and portable development environments
 
 ## Activate the virtual environment
 
@@ -29,9 +29,9 @@ source env-llama-cpp/bin/activate
 
 This command activates the virtual environment:
 - The `source` command runs the activation script, which modifies your shell environment.
-- Your shell prompt may update to show `env-llama-cpp`, indicating the environment is active
+- Your shell prompt might update to show `env-llama-cpp`, indicating the environment is active.
 - All pip commands will now install packages into the virtual environment.
-- Updates the `PATH` to prioritize the environment’s Python interpreter.
+- Updates the `PATH` to prioritize the environment’s Python interpreter
 
 ## Upgrade pip to the latest version
 
@@ -70,3 +70,4 @@ Remember to activate the virtual environment before running any Python code:
 
 ```bash
 source env-llama-cpp/bin/activate
+```
