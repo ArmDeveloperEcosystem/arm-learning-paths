@@ -14,22 +14,25 @@ Before you begin, make sure you have the following:
 - Permission to launch a Graviton4 EC2 instance of type `c8g.4xlarge` (or larger)  
 - At least 128 GB of available storage
 
-If you're new to EC2, check out [Getting Started with AWS](/learning-paths/servers-and-cloud-computing/csp/aws/).
+If you're new to EC2, check out the Learning Path [Getting Started with AWS](/learning-paths/servers-and-cloud-computing/csp/aws/).
 
 ## Create an SSH key pair
 
-To deploy the Arcee AFM-4.5B model, you'll first need an EC2 instance running on Arm-based Graviton4 hardware. Start by signing in to the [AWS Management Console](https://console.aws.amazon.com), then navigate to the **EC2** service. From there, you’ll create an SSH key pair that allows you to connect to your instance securely.
+To deploy the Arcee AFM-4.5B model, you need an EC2 instance running on Arm-based Graviton4 hardware:
 
-## Set up secure access with an SSH key pair
+Start by signing in to the [AWS Management Console](https://console.aws.amazon.com), then navigate to the **EC2** service.
 
+From there, you can create an SSH key pair that allows you to connect to your instance securely.
+
+## Set up secure access 
 
 Open the **Key Pairs** section under **Network & Security** in the sidebar, and create a new key pair named `arcee-graviton4-key`. 
 
 Next, select **RSA** as the key type, and **.pem** as the file format. Once you create the key, your browser will download the `.pem` file automatically.
 
-To keep the key secure and usable, move it to your SSH configuration directory, and restrict its permissions.
+To keep the key secure and usable, move the `.pem` file to your SSH configuration directory and update its permissions to restrict access.
 
-To do this, on macOS or Linux, you can run:
+To do this, on macOS or Linux, run:
 
 ```bash
 mkdir -p ~/.ssh
@@ -37,11 +40,9 @@ mv arcee-graviton4-key.pem ~/.ssh/
 chmod 400 ~/.ssh/arcee-graviton4-key.pem
 ```
 
-## Launch the EC2 instance
+## Launch and configure the the EC2 instance
 
-In the left sidebar of the EC2 dashboard, select **Instances** and then **Launch instances**.
-
-### Configure the instance settings
+In the left sidebar of the EC2 dashboard, select **Instances**, and then **Launch instances**.
 
 Use the following settings to configure your instance:
 
@@ -53,18 +54,19 @@ Use the following settings to configure your instance:
 - **Instance type**, select `c8g.4xlarge` or larger  
 - **Key pair name**, select `arcee-graviton4-key` from the list
 
-### Configure network
+## Configure network
 
 Set up your instance networking so that it can be accessed over the internet:
 
-- Choose a VPC that includes at least one public subnet.  
-- Select a public subnet from the list.  
-- Under **Auto-assign public IP**, choose **Enable**.
+Choose a VPC that includes at least one public subnet.  
 
-### Configure firewall
+Select a public subnet from the list.  
 
-- Select **Create security group**.  
-- Choose **Allow SSH traffic from** and select **My IP**.
+Under **Auto-assign public IP**, choose **Enable**.
+
+## Configure firewall
+
+Select **Create security group**. Then select **Allow SSH traffic from** and select **My IP**.
 
 {{% notice note %}}
 You'll only be able to connect to the instance from your current host, which is the most secure setting. Avoid selecting **Anywhere** unless absolutely necessary, as this setting allows anyone on the internet to attempt a connection.
