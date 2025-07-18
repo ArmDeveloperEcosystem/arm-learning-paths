@@ -40,7 +40,7 @@ mv arcee-graviton4-key.pem ~/.ssh/
 chmod 400 ~/.ssh/arcee-graviton4-key.pem
 ```
 
-## Launch and configure the the EC2 instance
+## Launch and configure the EC2 instance
 
 In the left sidebar of the EC2 dashboard, select **Instances**, and then **Launch instances**.
 
@@ -74,12 +74,12 @@ You'll only be able to connect to the instance from your current host, which is 
 This Learning Path only requires SSH access. If you already have a security group that allows inbound SSH traffic, you can reuse it.
 {{% /notice %}}
 
-### Configure storage
+## Configure storage
 
 - Set the **root volume size** to `128` GB . 
 - Choose **gp3** as the volume type.
 
-### Review and launch the instance
+## Review and launch the instance
 
 Review all your configuration settings.  
 When you're ready, select **Launch instance** to create your EC2 instance.
@@ -96,13 +96,15 @@ If the launch fails, double-check the instance type, permissions, and network se
 
 To retrieve the connection details:
 
-- Go to the **Instances** list in the EC2 dashboard.  
-- Select your instance by selecting **Instance ID**.  
-- In the **Details** tab, copy the **Public DNS** value - you’ll use this to connect through SSH.
+Go to the **Instances** list in the EC2 dashboard.  
+
+Select your instance by selecting **Instance ID**.  
+
+In the **Details** tab, copy the **Public DNS** value - you’ll use this to connect through SSH.
 
 ## Connect to your instance
 
-Open a terminal and connect to the instance using the key file:
+Open a terminal and connect to the instance using the SSH key you downloaded earlier:
 
 ```bash
 ssh -i ~/.ssh/arcee-graviton4-key.pem ubuntu@<PUBLIC_DNS_HOSTNAME>
@@ -110,13 +112,13 @@ ssh -i ~/.ssh/arcee-graviton4-key.pem ubuntu@<PUBLIC_DNS_HOSTNAME>
 
 When prompted to verify the host authenticity, type `yes`.
 
-You should now be connected to your Ubuntu instance on Graviton4.
+You should now be connected to your Ubuntu instance running on Graviton4.
 
 {{% notice Note %}}
-**Region**: Make sure you're launching in your preferred AWS region.  
-**AMI**: Confirm that the AMI is ARM64-compatible.  
-**Security**: Restrict SSH access to your own IP for best practice.  
-**Storage**: 128 GB is enough for the AFM-4.5B model and dependencies.  
-**Backup**: Consider creating an AMI or snapshot once your setup is complete.
+**Region**: make sure you're launching in your preferred AWS region.  
+**AMI**: confirm that the selected AMI supports the ARM64 architecture. 
+**Security**: for best practice, restrict SSH access to your own IP.  
+**Storage**: 128 GB is sufficient for the AFM-4.5B model and dependencies.  
+**Backup**: consider creating an AMI or snapshot after setup is complete.
 {{% /notice %}}
 
