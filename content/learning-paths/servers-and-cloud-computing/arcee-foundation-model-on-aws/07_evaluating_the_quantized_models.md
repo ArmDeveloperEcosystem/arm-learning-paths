@@ -1,12 +1,12 @@
 ---
-title: Evaluating the quantized models
+title: Evaluate the quantized models
 weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Using llama-bench for Performance Benchmarking
+## Use llama-bench for performance benchmarking
 
 The [`llama-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench) tool allows you to measure the performance characteristics of your model, including inference speed and memory usage.
 
@@ -25,7 +25,7 @@ bin/llama-bench -m models/afm-4-5b/afm-4-5B-Q8_0.gguf
 bin/llama-bench -m models/afm-4-5b/afm-4-5B-Q4_0.gguf
 ```
 
-Running each model on 16 vCPUs, you should see results like:
+Running each model on a 16 vCPU instance, you should see results like:
 - **F16 model**: ~15-16 tokens/second, ~15GB memory usage
 - **Q8_0 model**: ~25 tokens/second, ~8GB memory usage  
 - **Q4_0 model**: ~40 tokens/second, ~4.4GB memory usage
@@ -43,7 +43,7 @@ bin/llama-bench -m models/afm-4-5b/afm-4-5B-Q4_0.gguf \
 
 This command:
 - Loads the model and runs inference benchmarks
-- `-p`: Evaluates a random prompt of 128, and 512 tokens
+- `-p`: Evaluates a random prompt of 128, 256, and 512 tokens
 - `-n`: Generates 128 tokens
 - `-t`: Run the model on 4, 8, and 16 threads
 
@@ -61,7 +61,7 @@ The results should look like this:
 | llama 8B Q4_0                  |   4.33 GiB |     8.03 B | CPU        |      16 |           pp512 |        190.18 ± 0.03 |
 | llama 8B Q4_0                  |   4.33 GiB |     8.03 B | CPU        |      16 |           tg128 |         40.99 ± 0.36 |
 
-It's pretty amazing to see that with only 4 threads, the 4-bit model can still generate at the very comfortable speed of 15 tokens per second. We could definitely run several copies of the model on the same instance to serve concurrent users or applications.
+It's pretty amazing to see that with only 4 threads, the 4-bit model can still generate at the very comfortable speed of 15 tokens per second. You could run multiple copies of the model on the same instance to support concurrent users or applications.
 
 You can also try [`llama-batched-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/batched-bench) to benchmark performance on batch sizes larger than 1.
 
@@ -74,7 +74,7 @@ The `llama-perplexity` tool evaluates the model's quality on text datasets by ca
 
 ### Downloading a Test Dataset
 
-First, download the Wikitest-2 test dataset.
+First, download the Wikitext-2 test dataset.
 
 ```bash
 sh scripts/get-wikitext-2.sh
