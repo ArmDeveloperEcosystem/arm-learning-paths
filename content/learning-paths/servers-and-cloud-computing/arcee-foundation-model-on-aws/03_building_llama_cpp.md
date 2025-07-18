@@ -1,10 +1,11 @@
 ---
-title: Building Llama.cpp
+title: Build Llama.cpp
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Build the Llama.cpp inference engine
 
 In this step, you'll build Llama.cpp from source. Llama.cpp is a high-performance C++ implementation of the LLaMA model that's optimized for inference on various hardware platforms, including Arm-based processors like Graviton4.
 
@@ -32,14 +33,14 @@ Change into the llama.cpp directory to run the build process. This directory con
 cmake -B .
 ```
 
-This command uses CMake to configure the build system:
+This command configures the build system using CMake:
 
 - `-B .` tells CMake to generate build files in the current directory
 - CMake detects your system's compiler, libraries, and hardware capabilities
 - It produces Makefiles (on Linux) or platform-specific build scripts for compiling the project
 
 
-If you're running on Graviton4, the CMake output should include hardware-specific optimizations that target the Neoverse V2 architecture. These optimizations are crucial for achieving high performance on Graviton4:
+If you're running on Graviton4, the CMake output should include hardware-specific optimizations targeting the Neoverse V2 architecture. These optimizations are crucial for achieving high performance on Graviton4:
 
 ```output
 -- ARM feature DOTPROD enabled
@@ -53,7 +54,7 @@ If you're running on Graviton4, the CMake output should include hardware-specifi
 These features enable advanced CPU instructions for faster inference:
 
 - **DOTPROD: Dot Product**: hardware-accelerated dot product operations for neural network workloads
-- **SVE: Scalable Vector Extension**: advanced vector processing capabilities that can handle variable-length vectors up to 2048 bits, providing significant performance improvements for matrix operations
+- **SVE (Scalable Vector Extension)**: advanced vector processing capabilities that can handle variable-length vectors up to 2048 bits, providing significant performance improvements for matrix operations
 - **MATMUL_INT8**: integer matrix multiplication units optimized for transformers
 - **FMA**: fused multiply-add operations to speed up floating-point math
 - **FP16 vector arithmetic**: 16-bit floating-point vector operations to reduce memory use without compromising precision
@@ -75,11 +76,11 @@ The build process compiles the C++ source code into executable binaries optimize
 ## What is built? 
 
 After compilation, you'll find several key command-line tools in the `bin` directory:
-- `llama-cli` - The main inference executable for running LLaMA models
-- `llama-server` - A web server for serving model inference over HTTP
-- `llama-quantize` - a tool for model quantization to reduce memory usage
-- Various utility programs for model conversion and optimization
+- `llama-cli`: the main inference executable for running LLaMA models
+- `llama-server`: a web server for serving model inference over HTTP
+- `llama-quantize`: a tool for model quantization to reduce memory usage
+- Additional utilities for model conversion and optimization
 
-You can find more information in the llama.cpp [GitHub repository](https://github.com/ggml-org/llama.cpp/tree/master/tools).
+You can more tools and usage details in the llama.cpp [GitHub repository](https://github.com/ggml-org/llama.cpp/tree/master/tools).
 
-These binaries are specifically optimized for ARM64 architecture and will provide excellent performance on your Graviton4 instance.
+These binaries are specifically optimized for Arm64 architecture and will provide excellent performance on your Graviton4 instance.
