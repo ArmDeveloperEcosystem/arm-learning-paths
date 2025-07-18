@@ -8,7 +8,7 @@ layout: learningpathall
 
 In this step, you'll download the AFM-4.5B model from Hugging Face, convert it to the GGUF format for use with Llama.cpp, and create quantized versions to optimize memory usage and inference speed.
 
-The first release of the [Arcee Foundation Model](https://www.arcee.ai/blog/announcing-the-arcee-foundation-model-family) family, [AFM-4.5B](https://www.arcee.ai/blog/deep-dive-afm-4-5b-the-first-arcee-foundational-model) is a 4.5-billion-parameter frontier model that offers:
+The first release of the [Arcee Foundation Model](https://www.arcee.ai/blog/announcing-the-arcee-foundation-model-family) family, [AFM-4.5B](https://www.arcee.ai/blog/deep-dive-afm-4-5b-the-first-arcee-foundational-model), is a 4.5-billion-parameter frontier model that offers:
 
 - Excellent accuracy
 - Strict compliance
