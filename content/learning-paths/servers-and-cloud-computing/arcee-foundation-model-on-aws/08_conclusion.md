@@ -9,23 +9,23 @@ layout: learningpathall
 
 ## Conclusion
 
-Congratulations! You have successfully completed the journey of deploying the Arcee AFM-4.5B foundation model on AWS Graviton4. 
+Congratulations! You've completed the process of deploying the Arcee AFM-4.5B foundation model on AWS Graviton4.
 
-Here is a summary of what you learned.
+Here’s a quick summary of what you accomplished, and how you can build on it.
 
-### What you built
+## What you built
 
-Using this Learning Path, you have:
+Using this Learning Path, you:
 
-1. **Launched a Graviton4-powered EC2 instance** - Set up a c8g.4xlarge instance running Ubuntu 24.04 LTS, leveraging AWS's latest Arm-based processors for optimal performance and cost efficiency.
+1. **Launched a Graviton4-powered EC2 instance.** You set up a `c8g.4xlarge` instance running Ubuntu 24.04 LTS, leveraging AWS's latest Arm-based processors for optimal performance and cost efficiency.
 
-2. **Configured the development environment** - Installed essential tools and dependencies, including Git, build tools, and Python packages needed for machine learning workloads.
+2. **Configured the development environment.** You installed Git, build tools, and Python packages required for machine learning workloads.
 
-3. **Built Llama.cpp from source** - Compiled the optimized inference engine specifically for Arm64 architecture, ensuring maximum performance on Graviton4 processors.
+3. **Built Llama.cpp from source** - You compiled the optimized inference engine specifically for the Arm64 architecture to maximize performance on Graviton4.
 
-4. **Downloaded and optimized AFM-4.5B** - Retrieved the 4.5-billion parameter Arcee Foundation Model and converted it to the efficient GGUF format, then created quantized versions (8-bit and 4-bit) to balance performance and memory usage.
+4. **Downloaded and optimized AFM-4.5B** - you retrieved the 4.5-billion parameter Arcee Foundation Model and converted it to the GGUF format, and created  8-bit and 4-bit quantized versions to reduce memory usage and improve speed.
 
-5. **Ran inference and evaluation** - Tested the model's capabilities through interactive conversations, API endpoints, and comprehensive benchmarking to measure speed, memory usage, and model quality.
+5. **Ran inference and evaluation.** You tested the model through interactive sessions, API endpoints, and benchmarking tools to analyze speed, memory usage, and quality.
 
 ### Key Performance Insights
 
