@@ -6,7 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-In this step, you’ll download the AFM-4.5B model from Hugging Face, convert it to the GGUF format for compatibility with `llama.cpp`, and generate quantized versions to reduce memory usage and improve inference speed.
+In this step, you’ll download the AFM-4.5B model from Hugging Face, convert it to the GGUF format for compatibility with `llama.cpp`, and generate quantized versions to optimize memory usage and improve inference speed.
 
 Make sure to activate your virtual environment before running any commands. The instructions below walk you through downloading and preparing the model for efficient use on AWS Graviton4.
 
@@ -18,8 +18,8 @@ pip install huggingface_hub hf_xet
 
 This command installs:
 
-- `huggingface_hub`: – the official Python client for downloading models and datasets
--  `hf_xet` – a Git extension for fetching large model files stored on Hugging Face
+- `huggingface_hub`: Python client for downloading models and datasets
+-  `hf_xet`: Git extension for fetching large model files stored on Hugging Face
 
 These tools include the `huggingface-cli` command-line interface you'll use next.
 
@@ -64,7 +64,9 @@ This command creates a 4-bit quantized version of the model:
 - The quantized model will use less memory and run faster, though with a small reduction in accuracy.
 - The output file will be `afm-4-5B-Q4_0.gguf`.
 
-Arm Optimization: Arm has contributed optimized kernels for Q4_0 that use Neoverse v2 instruction sets. These low-level routines accelerate math operations, delivering strong performance on Graviton4.
+## Arm optimization 
+
+Arm has contributed optimized kernels for Q4_0 that use Neoverse v2 instruction sets. These low-level routines accelerate math operations, delivering strong performance on Graviton4.
 
 These instruction sets allow Llama.cpp to run quantized operations significantly faster than generic implementations, making Arm processors a competitive choice for inference workloads.
 
@@ -81,13 +83,15 @@ This command creates an 8-bit quantized version of the model:
 - The output file is named `afm-4-5B-Q8_0.gguf`.
 - Commonly used in production scenarios where memory resources are available.
   
-Arm Optimization: Similar to Q4_0, Arm has contributed optimized kernels for Q8_0 quantization that take advantage of Neoverse v2 instruction sets. These optimizations provide excellent performance for 8-bit operations while maintaining higher accuracy compared to 4-bit quantization.
+## Arm optimization
+
+Similar to Q4_0, Arm has contributed optimized kernels for Q8_0 quantization that take advantage of Neoverse v2 instruction sets. These optimizations provide excellent performance for 8-bit operations while maintaining higher accuracy compared to 4-bit quantization.
 
 ## Model files ready for inference
 
 After completing these steps, you'll have three versions of the AFM-4.5B model:
 - `afm-4-5B-F16.gguf` - The original full-precision model (~15GB)
-- `afm-4-5B-Q4_0.gguf` - 4-bit quantized version (~8GB) for memory-constrained environments
-- `afm-4-5B-Q8_0.gguf` - 8-bit quantized version (~4.4GB) for balanced performance and memory usage
+- `afm-4-5B-Q4_0.gguf` - 4-bit quantized version (~4.4GB) for memory-constrained environments
+- `afm-4-5B-Q8_0.gguf` - 8-bit quantized version (~8GB) for balanced performance and memory usage
 
-These models are now ready to be used with the Llama.cpp inference engine for text generation and other language model tasks.
+These models are now ready to be used with the `llama.cpp` inference engine for text generation and other language model tasks.

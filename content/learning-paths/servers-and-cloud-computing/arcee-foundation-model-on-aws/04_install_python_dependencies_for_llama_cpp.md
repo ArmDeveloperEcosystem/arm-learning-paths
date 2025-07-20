@@ -30,9 +30,9 @@ source env-llama-cpp/bin/activate
 ```
 This command does the following:
 
-- The `source` command runs the activation script, which modifies your shell environment.
+- Runs the activation script, which modifies your shell environment
 - Updates your shell prompt to show `env-llama-cpp`, indicating the environment is active
-- Updates `PATH` so the virtual environment’s Python interpreter is used by default
+- Updates `PATH` to use so the environment’s Python interpreter 
 - Ensures all `pip` commands install packages into the isolated environment
 
 ## Upgrade pip to the latest version
@@ -66,17 +66,15 @@ This command does the following:
 
 This step sets up everything you need to run AFM-4.5B in your Python environment.
 
-## What is installed? 
+## What the environment includes
 
 After the installation completes, your virtual environment includes:
 - **NumPy**: for numerical computations and array operations
 - **Requests**: for HTTP operations and API calls
-- **Other dependencies**: required packages for Llama.cpp's Python integration
+- **Other dependencies**: additional packages required by llama.cpp's Python bindings and utilities
+Your environment is now ready to run Python scripts that integrate with the compiled Llama.cpp binaries
 
-Your environment is now ready to run Python scripts that interact with the compiled Llama.cpp binaries.
+{{< notice Tip >}}
+Before running any Python commands, make sure your virtual environment is activated. {{< /notice >}}
 
-Remember to activate the virtual environment before running any Python code:
 
-```bash
-source env-llama-cpp/bin/activate
-```

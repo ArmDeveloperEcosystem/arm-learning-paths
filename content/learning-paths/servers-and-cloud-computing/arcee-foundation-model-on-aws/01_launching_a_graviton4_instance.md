@@ -39,7 +39,7 @@ mkdir -p ~/.ssh
 mv arcee-graviton4-key.pem ~/.ssh/
 chmod 400 ~/.ssh/arcee-graviton4-key.pem
 ```
-
+internet
 ## Launch and configure the EC2 instance
 
 In the left sidebar of the EC2 dashboard, select **Instances**, and then **Launch instances**.
@@ -51,12 +51,12 @@ Use the following settings to configure your instance:
   - Select the **Quick Start** tab  
   - Select **Ubuntu Server 24.04 LTS (HVM), SSD Volume Type**  
   - Ensure the architecture is set to **64-bit (ARM)**  
-- **Instance type**, select `c8g.4xlarge` or larger  
-- **Key pair name**, select `arcee-graviton4-key` from the list
+- **Instance type**: select `c8g.4xlarge` or larger  
+- **Key pair name**: select `arcee-graviton4-key` from the list
 
 ## Configure network
 
-To set up your instance networking so that it can be accessed over the internet, choose a VPC that includes at least one public subnet.  
+To enable internet access, choose a VPC with at least one public subnet.  
 
 Then select a public subnet from the list.
 
@@ -69,7 +69,7 @@ Select **Create security group**. Then select **Allow SSH traffic from** and sel
 {{% notice Note %}}
 You'll only be able to connect to the instance from your current host, which is the most secure setting. Avoid selecting **Anywhere** unless absolutely necessary, as this setting allows anyone on the internet to attempt a connection.
 
-This Learning Path only requires SSH access. If you already have a security group that allows inbound SSH traffic, you can reuse it.
+You only need SSH access for this Learning Path. If you already have a security group that allows inbound SSH traffic, you can reuse it.
 {{% /notice %}}
 
 ## Configure storage
@@ -104,13 +104,13 @@ Open a terminal and connect to the instance using the SSH key you downloaded ear
 ssh -i ~/.ssh/arcee-graviton4-key.pem ubuntu@<PUBLIC_DNS_HOSTNAME>
 ```
 
-When prompted to verify the host authenticity, type `yes`.
+When prompted, type `yes` to confirm the connection.
 
 You should now be connected to your Ubuntu instance running on Graviton4.
 
 {{% notice Note %}}
 **Region**: make sure you're launching in your preferred AWS region.  
-**AMI**: confirm that the selected AMI supports the ARM64 architecture. 
+**AMI**: confirm that the selected AMI supports the Arm64 architecture. 
 **Security**: for best practice, restrict SSH access to your own IP.  
 **Storage**: 128 GB is sufficient for the AFM-4.5B model and dependencies.  
 **Backup**: consider creating an AMI or snapshot after setup is complete.

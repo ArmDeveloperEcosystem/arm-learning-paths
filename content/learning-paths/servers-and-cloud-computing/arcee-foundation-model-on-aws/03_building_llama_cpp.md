@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 ## Build the Llama.cpp inference engine
 
-In this step, you'll build Llama.cpp from source. Llama.cpp is a high-performance C++ implementation of the LLaMA model that's optimized for inference on various hardware platforms, including Arm-based processors like Graviton4.
+In this step, you'll build Llama.cpp from source. Llama.cpp is a high-performance C++ implementation of the LLaMA model, optimized for inference on a range of hardware platforms,including Arm-based processors like AWS Graviton4.
 
 Even though AFM-4.5B uses a custom model architecture, you can still use the standard Llama.cpp repository - Arcee AI has contributed the necessary modeling code upstream.
 
@@ -51,7 +51,7 @@ If you're running on Graviton4, the CMake output should include hardware-specifi
 -- Adding CPU backend variant ggml-cpu: -mcpu=neoverse-v2+crc+sve2-aes+sve2-sha3+dotprod+i8mm+sve
 ```
 
-These features enable advanced CPU instructions for faster inference:
+These features enable advanced CPU instructions that accelerate inference performance on Arm64:
 
 - **DOTPROD: Dot Product**: hardware-accelerated dot product operations for neural network workloads
 
@@ -85,6 +85,6 @@ After compilation, you'll find several key command-line tools in the `bin` direc
 - `llama-quantize`: a tool for model quantization to reduce memory usage
 - Additional utilities for model conversion and optimization
 
-You can more tools and usage details in the llama.cpp [GitHub repository](https://github.com/ggml-org/llama.cpp/tree/master/tools).
+You can find more tools and usage details in the llama.cpp [GitHub repository](https://github.com/ggml-org/llama.cpp/tree/master/tools).
 
 These binaries are specifically optimized for Arm64 architecture and will provide excellent performance on your Graviton4 instance.

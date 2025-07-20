@@ -11,7 +11,7 @@ layout: learningpathall
 
 Congratulations! You have completed the process of deploying the Arcee AFM-4.5B foundation model on AWS Graviton4.
 
-Here’s a summary of what you built and how you can expand on your knowledge.
+Here’s a summary of what you built and how you can take your knowledge forward.
 
 Using this Learning Path, you have:
 
@@ -23,7 +23,7 @@ Using this Learning Path, you have:
 
 - **Downloaded and optimized AFM-4.5B** – you retrieved the 4.5-billion-parameter Arcee Foundation Model, converted it to the GGUF format, and created quantized versions (8-bit and 4-bit) to reduce memory usage and improve speed.
 
-- **Run inference and evaluation** – you tested the model using interactive sessions and API endpoints, and benchmarked speed, memory usage, and model quality.
+- **Ran inference and evaluation** – you tested the model using interactive sessions and API endpoints, and benchmarked speed, memory usage, and model quality.
 
 ## Key performance insights
 
@@ -47,13 +47,13 @@ AWS Graviton4 processors, built on the Arm Neoverse-V2 architecture, provide:
 
 Now that you have a fully functional AFM-4.5B deployment, here are some ways to extend your learning:
 
-Production deployment:
+**Production deployment**:
 - Set up auto-scaling groups for high availability
 - Implement load balancing for multiple model instances
 - Add monitoring and logging with CloudWatch
 - Secure your API endpoints with proper authentication
 
-Application development:
+**Application development**:
 - Build a web application using the `llama-server` API
 - Create a chatbot or virtual assistant
 - Develop content generation tools

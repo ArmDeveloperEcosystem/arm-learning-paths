@@ -48,7 +48,7 @@ The `-y` flag automatically approves the installation of all packages without pr
 
 ## Ready for build and deployment
 
-After completing these steps, your Graviton4 instance has:
+After completing the setup, your instance includes the following tools and environments:
 
 - A complete C/C++ development environment for building Llama.cpp
 - Python 3, pip, and virtualenv for managing Python tools and environments
