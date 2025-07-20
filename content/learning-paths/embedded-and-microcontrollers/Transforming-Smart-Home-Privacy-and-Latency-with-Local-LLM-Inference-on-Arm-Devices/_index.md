@@ -1,7 +1,7 @@
 ---
-title: Build a Local GenAI Smart Home System on Arm SBC
+title: Build a Privacy-First LLM Smart Home on Raspberry Pi 5
 
-minutes_to_complete: 30
+minutes_to_complete: 45
 
 who_is_this_for: Anyone who wants a private, cloud-free smart home powered by GenAI on Arm
 
@@ -10,11 +10,13 @@ learning_objectives:
   - "Integrate natural language processing with GPIO control"
   - "Build and run everything on Arm-based single-board computers (no cloud required)"
   - "Optimize for speed, privacy, and offline operation"
+  - "Create an interactive web dashboard for smart home control"
 prerequisites:
   - "Basic Python knowledge"
   - "A text editor (e.g., VS Code, Sublime, Notepad++)"
-  - "An Arm-based single board computer (e.g., Raspberry Pi, Jetson Xavier AGX)"
-  - "Basic electronic components such as LEDs, sensors (e.g., temperature), and actuators (e.g., relays or DC motors)"
+  - "An Arm-based single board computer (e.g., Raspberry Pi 5 with at least 8GB RAM)"
+  - "Basic electronic components such as LEDs, sensors, and relays"
+  - "Basic understanding of GPIO pins and electronics"
 
 author: "Fidel Makatia Omusilibwa"
 
@@ -26,32 +28,38 @@ armips:
 tools_software_languages:
   - "Python"
   - "Ollama"
+  - "gpiozero"
+  - "lgpio"
+  - "FastAPI"
   - "VS Code or your preferred code editor"
-  - "Jetson SDK (for NVIDIA Jetson SBC users)"
-  - "(Optional) Docker"
+  - "Raspberry Pi OS (64-bit)"
 operatingsystems:
   - "Windows , Linux, MacOS"
 
 further_reading:
   - resource:
-      title: "Advanced Edge AI on Arm with llama.cpp/ONXX"
-      link: "https://github.com/fidel-makatia/EdgeAI_llamacpp"
+      title: "Raspberry Pi 5 Smart Home Assistant with EdgeAI"
+      link: "https://github.com/fidel-makatia/EdgeAI_Raspi5"
       type: "source"
   - resource:
-      title: "llama.cpp docummentation"
-      link: "https://github.com/ggml-org/llama.cpp"
-      type: "documentation"
-  - resource:
-      title: "Ollama documentation"
+      title: "Ollama Python/JavaScript Libraries"
       link: "https://ollama.com/blog/python-javascript-libraries"
       type: "documentation"
   - resource:
-      title: "ONNX  documentation"
-      link: "https://github.com/onnx/tutorials"
+      title: "gpiozero Documentation for Raspberry Pi"
+      link: "https://gpiozero.readthedocs.io/en/stable/"
       type: "documentation"
   - resource:
-      title: "Jetson Xavier AGX  documentation"
-      link: "https://developer.download.nvidia.com/embedded/L4T/r32-3-1_Release_v1.0/jetson_agx_xavier_developer_kit_user_guide.pdf?t=eyJscyI6IndlYnNpdGUiLCJsc2QiOiJkZXZlbG9wZXIubnZpZGlhLmNvbS9zZGstbWFuYWdlciJ9"
+      title: "lgpio Library for Raspberry Pi 5"
+      link: "https://abyz.me.uk/lg/lgpio.html"
+      type: "documentation"
+  - resource:
+      title: "Raspberry Pi 5 Official Documentation"
+      link: "https://www.raspberrypi.org/documentation/computers/raspberry-pi.html"
+      type: "documentation"
+  - resource:
+      title: "Ollama Model Library"
+      link: "https://ollama.com/library"
       type: "documentation"
 
 ### FIXED, DO NOT MODIFY

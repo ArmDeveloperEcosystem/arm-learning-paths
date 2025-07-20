@@ -9,162 +9,159 @@ layout: learningpathall
 # Installation Guide
 
 {{% notice Note %}}
-This guide assumes you have already set up your Raspberry Pi or NVIDIA Jetson board with an operating system and network connectivity.For board setup help, see: [Raspberry Pi Getting Started](https://www.raspberrypi.com/documentation/) or [Jetson Getting Started](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit).
+This guide assumes you have set up your Raspberry Pi with Raspberry Pi OS and network connectivity. For Raspberry Pi 5 setup help, see: [Raspberry Pi Getting Started](https://www.raspberrypi.com/documentation/)
 {{% /notice %}}
 
-### Step 1: Connect to Your Board via SSH
+## Connect to Your Raspberry Pi 5 via SSH
 
-Before proceeding, make sure your SBC is connected to the same network as your host computer. Then, access your device remotely via SSH. You can use the terminal in Visual Studio Code on your host PC, the built-in terminal, Command Prompt, or any other preferred SSH client.
+Ensure your Raspberry Pi 5 connects to the same network as your host computer. Access your device remotely via SSH using the terminal in Visual Studio Code, the built-in terminal, Command Prompt, or any other SSH client.
 
-Replace `<user>` with your device’s username , and `<board-ip>` with your device’s IP address.
-
-**General SSH Command:**
+Replace `<user>` with your Pi's username (typically `pi`), and `<pi-ip>` with your Raspberry Pi 5's IP address.
 
 ```bash
-ssh <user>@<board-ip>
-
+ssh <user>@<pi-ip>
 ```
 
-Create a directory called smart-home in your home directory and navigate into it by running the following commands:
+Create a directory called smart-home in your home directory and navigate into it:
 
 ```bash
 mkdir ~/smart-home
 cd ~/smart-home
 ```
 
-### Step 2: System Preparation
+## Prepare the System
 
-Update your system and ensure Python 3 and pip are installed.
+Update your system and install necessary packages. The Raspberry Pi 5 includes Python 3 pre-installed, but you need additional packages:
 
 ```bash
 sudo apt update && sudo apt upgrade
-sudo apt install python3 python3-pip python3-venv git
+sudo apt install python3 python3-pip python3-venv git curl build-essential gcc python3-lgpio
 ```
 
-### Step 3: Requirements Installation
+## Install Python Dependencies
 
-Create and activate a Python virtual environment using the following commands. This is recommended, as it keeps your project dependencies isolated and prevents conflicts with system-wide packages:
+Create and activate a Python virtual environment. This approach keeps project dependencies isolated and prevents conflicts with system-wide packages:
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-This approach helps ensure that your system’s Python environment remains stable and avoids breaking other projects.
+Install all required libraries and dependencies:
 
-Next, install all the required libraries and dependencies for the project by running the appropriate command for your board:
+```bash
+pip install ollama gpiozero lgpio psutil httpx orjson numpy fastapi uvicorn uvloop
+```
 
-{{< tabpane code=true >}}
-{{< tab header="Jetson (NVIDIA)" language="bash">}}
-pip install flask flask-cors requests schedule ollama adafruit-blinka adafruit-circuitpython-dht Jetson.GPIO
+You can run the pip install commands without creating a virtual environment, but using a virtual environment is recommended for development workflows.
 
-{{< /tab >}}
-{{< tab header="Raspberry Pi" language="bash">}}
-pip install flask flask-cors requests schedule ollama adafruit-blinka adafruit-circuitpython-dht RPi.GPIO
-{{< /tab >}}
-{{< /tabpane >}}
+## Install Ollama
 
-If you prefer, you can also run the above pip install commands directly, without creating a virtual environment. However, using a virtual environment is strongly recommended for most development workflows.
-
-### Step 4: Install Ollama
-
-Run the following command to install **Ollama**
+Install Ollama using the official installation script:
 
 ```bash
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-On most recent Linux distributions (including Raspberry Pi OS and Ubuntu for Jetson), curl is usually pre-installed by default. However, in some minimal installations, it might not be present. If you get a **command not found** error for curl, you can easily install it with:
-
-```bash
-sudo apt update
-sudo apt install curl
-```
-
-After installation, verify it by running the following command:
+Verify the installation:
 
 ```bash
 ollama --version
 ```
 
-### Step 5: Download and Test a Language Model
+## Download and Test a Language Model
 
-Ollama supports a variety of models. This guide uses Deepseek-R1:7B as an example, but you can also use other models such as Mistral or Phi. To pull and run Deepseek-R1:7B:
+Ollama supports various models. This guide uses deepseek-r1:7b as an example, but you can also use tinyllama:1.1b, qwen:0.5b, gemma2:2b, or deepseek-coder:1.3b.
+
+Pull and run deepseek-r1:7b:
 
 ```bash
 ollama run deepseek-r1:7b
 ```
 
-Ollama will automatically download deepseek -r1:7b first before running it. You’ll see download progress in the terminal, followed by the interactive prompt once it’s ready. An example is shown in the image below:
+Ollama automatically downloads deepseek-r1:7b before running it. You will see download progress in the terminal, followed by the interactive prompt when ready.
 
-![deepseek test image alt-text#center](deepseek.png "Figure 1. deepseek test image caption")
+{{% notice Note %}}
+The Raspberry Pi 5 supports up to 16GB of RAM, which is sufficient for running smaller to medium-sized language models. Very large models may require more memory or run slower.
+{{% /notice %}}
 
-### Step 6: Verify GPIO Functionality
+## Verify GPIO Functionality
 
-To test the GPIO functionality, you’ll begin by connecting an LED to your board. For **Jetson Xavier AGX**, connect the anode (the long leg) of an LED, in series with a suitable resistor, to pin 12 . For **Raspberry Pi**, connect the anode of the LED (again, in series with a resistor) to GPIO 17 . In both cases, connect the cathode (the short leg) of the LED to a ground (GND) pin on your SBC. Once your wiring is complete, create a Python script named `testgpio.py` using your favorite editor.
+Test GPIO functionality by connecting an LED. Connect the anode (long leg) of an LED in series with a 220Ω resistor to GPIO 17 (physical pin 11). Connect the cathode (short leg) to a ground (GND) pin.
+
+Create a Python script named `testgpio.py`:
 
 ```bash
-vim testgpio.py
+nano testgpio.py
 ```
 
-Copy the appropriate code below into the testgpio.py file you just created, then save and close the file.
+Copy this code into the file:
 
-{{< tabpane code=true >}}
-{{< tab header="Jetson" language="python" output_lines="8">}}
-import Jetson.GPIO as GPIO
+```python
+#!/usr/bin/env python3
 import time
+from gpiozero import Device, LED
+from gpiozero.pins.lgpio import LGPIOFactory
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(12, GPIO.OUT)
-GPIO.output(12, GPIO.HIGH)
-time.sleep(2)
-GPIO.output(12, GPIO.LOW)
-GPIO.cleanup()
-{{< /tab >}}
-{{< tab header="Raspberry Pi" language="python" output_lines="8">}}
-import RPi.GPIO as GPIO
-import time
+# Set lgpio backend for Raspberry Pi 5
+Device.pin_factory = LGPIOFactory()
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(17, GPIO.OUT)
-GPIO.output(17, GPIO.HIGH)
-time.sleep(2)
-GPIO.output(17, GPIO.LOW)
-GPIO.cleanup()
-{{< /tab >}}
-{{< /tabpane >}}
+# Setup GPIO pin 17
+pin1 = LED(17)
 
-Once you’ve saved your script, run the code using the following command in your terminal:
+try:
+    while True:
+        pin1.toggle()  # Switch pin 17 state
+        time.sleep(2)  # Wait 2 seconds
+except KeyboardInterrupt:  # Ctrl+C pressed
+    pin1.close()  # Clean up pin 17
+```
+
+Run the script:
 
 ```bash
 python testgpio.py
 ```
 
-The LED should blink according to the set timing in your script—turning on for two seconds and then off. If you see this behavior, your GPIO setup is working correctly.
-![Xavier AGX LED image alt-text#center](hardware2.png "Figure 1. Jetson Xavier AGX GPIO Test")
+The LED should blink every two seconds. If you observe this behavior, your GPIO setup works correctly.
 
-### Troubleshooting
+## Raspberry Pi 5 Specific Features
 
-- Missing dependencies?
+**GPIO Compatibility**: The Raspberry Pi 5 maintains GPIO compatibility with previous models. Existing GPIO code works without modification.
 
-  Run the following command to resolve the issue:
+**Performance**: The Raspberry Pi 5 features a quad-core Arm Cortex-A76 CPU running at 2.4 GHz. This processor provides significantly improved performance for AI workloads compared to previous Raspberry Pi models. The Arm Cortex-A76 cores support NEON SIMD (Single Instruction, Multiple Data) extensions, enabling efficient parallel processing and accelerating compute-intensive tasks such as machine learning inference and signal processing.
 
-  ```bash
-  sudo apt-get install -f
-  ```
+**Power Requirements**: Use the official Raspberry Pi 5 power supply (5V/5A USB-C) for optimal performance when running AI models.
 
-- GPIO permission errors?
+## Troubleshooting
 
-  - Run Python scripts with **sudo**.
+**Missing dependencies**
 
-- Model download issues?
+Resolve dependency issues:
 
-  - Confirm you have internet access and sufficient storage space on your device.
+```bash
+sudo apt-get install -f
+```
 
-  - Check the model size before downloading to ensure your SBC has enough space to store and run it.
-  - Try downloading a smaller model
-  - If you encounter errors, clear up storage or try connecting to a more stable network
+**GPIO permission errors**
 
-- Hardware not responding?
+Run Python scripts with sudo or add your user to the gpio group:
 
-  - Double-check wiring and pin numbers.
+```bash
+sudo usermod -a -G gpio $USER
+```
+
+Log out and back in for changes to take effect.
+
+**Model download issues**
+
+- Confirm internet access and sufficient storage space on your microSD card
+- Check model size before downloading to ensure adequate space
+- Try downloading smaller models like `qwen:0.5b` or `tinyllama:1.1b` if you encounter memory issues
+- Clear storage or connect to a more stable network if errors occur
+
+**Hardware not responding**
+
+- Double-check wiring and pin numbers using the Raspberry Pi 5 pinout diagram
+- Ensure proper LED and resistor connections
+- Verify GPIO enablement in `raspi-config` if needed
