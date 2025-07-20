@@ -1,169 +1,200 @@
 ---
-title: Set up your environment
+title: Train and deploy a TinyML audio classifier with Edge Impulse
 weight: 3
 
-### FIXED, DO NOT MODIFY
+# FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-# Using Edge Impulse to Train TinyML Models
 
-Now that the foundational concepts of TinyML and Edge AI are clear, it's time to move from theory to practice. **Edge Impulse** is an easy to use platform for training TinyML models. It provides an end-to-end pipeline for collecting data, designing features, training models, and deploying them to edge devices. In this section, you will explore how Edge Impulse is used to train models specifically for ultra-low-power microcontrollers, bridging the gap between machine learning and real-world embedded applications.
+## Using Edge Impulse
+
+Now that you've learned the foundational concepts of Edge AI and TinyML, it's time to move from theory to practice.
+
+{{< notice Note >}}
+In this section, you'll use Edge Impulse to train a voice-command classification model and prepare it for deployment to the Arduino Nano RP2040 Connect.
+{{< /notice >}}
 
 ## What is Edge Impulse?
 
-**Edge Impulse** is a development platform designed to simplify the process of building, training, and deploying machine learning (ML) models on **embedded systems and edge devices**, such as microcontrollers, sensors, and single-board computers (e.g., Raspberry Pi, Arduino).
+Edge Impulse is a development platform that simplifies building, training, and deploying machine learning (ML) models on embedded systems and edge devices such as microcontrollers, sensors, and single-board computers like the Raspberry Pi or Arduino.
 
 ## Key Features of Edge Impulse
 
 | Feature               | Description                                                                                         |
 |-----------------------|-----------------------------------------------------------------------------------------------------|
-| **Data Collection**   | Collects data from sensors (e.g., accelerometers, microphones, cameras) in real time.              |
-| **Preprocessing**     | Provides tools for signal processing and feature extraction tailored for embedded systems.          |
-| **Model Training**    | Supports built-in ML algorithms and integrates with frameworks like TensorFlow.                     |
-| **Edge Optimization** | Automatically optimizes models to run efficiently on low-power edge hardware.                      |
-| **Deployment**        | Enables seamless deployment to microcontrollers, RTOS-based boards, and Linux devices.             |
-| **Web-Based Platform**| Fully browser-based interface for managing projects and workflows without needing local setup.     |
+| **Data collection**   | collects data from sensors, such as accelerometers, microphones, and cameras in real time              |
+| **Preprocessing**     | provides tools for signal processing and feature extraction tailored for embedded systems          |
+| **Model training**    | supports built-in ML algorithms and integrates with frameworks like TensorFlow                     |
+| **Edge optimization** | automatically optimizes models to run efficiently on low-power edge hardware                      |
+| **Deployment**        | enables seamless deployment to microcontrollers, RTOS-based boards, and Linux devices             |
+| **Web-based platform**| fully browser-based interface for managing projects and workflows without needing local setup     |
 
 ---
 
-## Why It’s Important in Edge AI and TinyML
+## Why it's important in Edge AI and TinyML
 
-- **Bridges the gap** between machine learning and embedded development.
-- **Accelerates prototyping** and deployment of AI features directly on hardware.
-- **Supports TinyML** applications that run on devices with very limited memory and compute power.
-- Works with popular hardware platforms like **Arduino**, **Raspberry Pi**, **Nordic**, **STMicroelectronics**, and more.
+Edge Impulse offers the following benefits:
 
-## Getting Started with Edge Impulse
+- Bridges the gap between machine learning and embedded development
+- Accelerates prototyping and deployment of AI features directly on hardware
+- Supports TinyML applications that run on devices with very limited memory and compute power
+- Works with popular hardware platforms such as Arduino, Raspberry Pi, Nordic, and STMicroelectronics
 
-To begin working with TinyML models, visit the **[Edge Impulse](https://edgeimpulse.com)**. You’ll need to create a free account to access the full platform. In the following sections, you will walk through each key page on the Edge Impulse platform using the attached snapshots as guide. These will help you understand what actions to take and how each part of the interface contributes to building and deploying your machine learning model.
+## Get started with Edge Impulse
 
-![example image alt-text#center](images/1.png "Figure 1. Home Page of Edge Impulse")
+To begin working with TinyML models, visit [Edge Impulse](https://edgeimpulse.com). You'll need to create a free account to access the full platform.
 
-### Step 1: Create a New Project
+In the following sections, you'll walk through each key page on the Edge Impulse platform using snapshots as a guide. These visuals will help you understand what actions to take and how each part of the interface contributes to building and deploying your machine learning model.
 
-Once you’ve created your account and logged in, the first step is to **create a new project**. Give your project a name that clearly reflects its purpose—this helps with easy identification, especially if you plan to build multiple models later on. For example, if you're building a keyword spotting model, you might name it "Wake Word Detection". You’ll also need to select the appropriate **project type** and **project setting**, as shown in the snapshot below.
 
-![example image alt-text#center](images/3.png "Figure 2. New Project Setup")
 
-### Step 2: Configure the Target Device
+![Screenshot of the Edge Impulse home page showing the main navigation and project dashboard alt-text#center](images/1.png "Home page of Edge Impulse website")
 
-After creating your project, the next step is to **configure the target device**. Since you are using the **Arduino Nano RP2040 Connect**, click the highlighted button to begin device configuration, as shown in the snapshot below. This ensures that the data collection, model training, and deployment steps are optimized for your specific hardware.
 
-The specifications of the Arduino Nano RP2040 Connect board can be found on [Arduino’s official page](https://store.arduino.cc/products/arduino-nano-rp2040-connect).
+## Create a new project
 
-Follow the exact settings in the attached snapshot to complete the configuration.
+After you create your account and log in, the first step is to create a new project. Give your project a name that clearly reflects its purpose. This helps with easy identification, especially if you plan to build multiple models.
 
-![example image alt-text#center](images/4.png "Figure 3. Configure Arduino Nano RP2040")
+For example, if you're building a keyword-spotting model, you might name it `Wake word detection`.
 
-### Step 3: Add the Dataset
+You'll also need to select the appropriate **project type** and **project settings**, as shown in the screenshot below.
 
-With your device configured, the next step is to **add your dataset** to the project. Click on the **"Add existing data"** button and follow the configuration settings shown in the attached snapshot. This allows you to upload pre-recorded data instead of collecting it live, which can save time during the development phase.
+![Screenshot showing the new project creation page in Edge Impulse, with fields for project name, type, and target device alt-text#center](images/3.png "New project setup")
 
-An **example repository** has been set up with some assets to be used throughout this Learning Path. You can clone it with the following command:
+## Configure the target device
+
+After creating your project, the next step is to configure the target device. As you're using the **Arduino Nano RP2040 Connect**, click the button highlighted in the screenshot to begin the configuration process. This ensures that data collection, model training, and deployment are optimized for your hardware.
+
+You can find the full specifications for the Arduino Nano RP2040 Connect on [Arduino’s official product page](https://store.arduino.cc/products/arduino-nano-rp2040-connect).
+
+Follow the settings shown in the screenshot to complete the configuration.
+
+![Screenshot showing the Edge Impulse device configuration page with Arduino Nano RP2040 Connect selected alt-text#center](images/4.png "Configure Arduino Nano RP2040")
+
+
+## Add the dataset
+
+With your device configured, the next step is to add your dataset to the project. Click **Add existing data** and follow the configuration settings shown in the screenshot. This lets you upload pre-recorded data instead of collecting it live, which can save time during development.
+
+An example repository has been prepared with assets used throughout this Learning Path. You can clone it with the following command:
 
 ```bash
 git clone https://github.com/e-dudzi/Learning-Path.git
 ```
 
-The repository contains a `Dataset.zip` file containing the dataset used in the project. Extract it on your local machine. For convenience, the dataset has already been split into **training** and **testing**.
+The repository contains a `Dataset.zip` file with the dataset used in this project. Extract the contents to your local machine. For convenience, the dataset is already split into **training** and **testing** sets.
 
-![example image alt-text#center](images/6.png "Figure 4. Add Existing Data")
+![Screenshot showing the Edge Impulse interface with the Add existing data panel open, used to upload pre-recorded datasets alt-text#center](images/6.png "Adding existing data")
 
-{{% notice Note %}}
-Do **not** check the **Green** highlighted area during upload. The dataset already includes metadata. Enabling that option may result in **much slower upload times** and is unnecessary for this project.
-{{% /notice %}}
-
-![example image alt-text#center](images/7.png "Figure 5. Dataset Overview")
-
-### Dataset Uploaded Successfully
-
-This is what you should see after the dataset has been successfully uploaded. The data samples will appear in the **Data acquisition** tab, categorized by their respective labels. You can click on each sample to inspect the raw signal, view metadata, and even **listen to the audio recordings** directly within the Edge Impulse interface. This helps verify that the uploaded data is accurate and usable for training.
 
 {{% notice Note %}}
-This dataset is made up of **four labels**: `on`, `off`, `noise`, and `unknown`.
+Do not check the green highlighted area during upload. The dataset already includes metadata. Enabling that option may result in much slower upload times and is unnecessary for this project.
 {{% /notice %}}
 
-![example image alt-text#center](images/8.png "Figure 6. Dataset Overview")
+![Screenshot showing the Data acquisition tab in Edge Impulse with uploaded samples organized by label alt-text#center](images/7.png "Dataset overview")
 
-### Step 4: Create the Impulse
+## Dataset uploaded successfully
 
-Now that your data is ready, it's time to create the **impulse**, which defines the flow of data from input to output through processing blocks. Click on the **"Create Impulse"** button in the menu and configure it exactly as shown in the snapshot below. This typically includes setting the input data type (e.g., audio), adding a **processing block** (such as MFCC for audio), and a **learning block** (such as a neural network classifier).
+After the dataset is uploaded, you'll see the samples listed in the **Data acquisition** tab, organized by their labels. You can click each sample to inspect the raw signal, view metadata, and even listen to the audio recordings directly within the Edge Impulse interface. This helps confirm that the uploaded data is accurate and ready for training.
 
-After configuring everything, **don’t forget to save your impulse**.
-
-![example image alt-text#center](images/9.png "Figure 7. Create Impulse")
-
-### Step 5: Configure the MFCC Block
-
-Next, you'll configure the **MFCC (Mel Frequency Cepstral Coefficients)** processing block, which transforms the raw audio data into features suitable for model training. Click on **"MFCC"** in the left-hand menu under the **"Impulse Design"** section.
-
-Set the parameters exactly as shown in the snapshot below. These settings determine how the audio input is broken down and analyzed. Once you're done, be sure to **save the parameters**. These parameters are chosen for this path. Modifications can be made once you are familiar with Edge Impulse.
-
-![example image alt-text#center](images/10.png "Figure 8. MFCC Block Configuration")
 
 {{% notice Note %}}
-The **green highlighted section** on the MFCC configuration page gives an estimate of how the model will perform **on the target device**. This includes information like memory usage (RAM/Flash) and latency, helping you ensure the model fits within the constraints of your hardware.
+This dataset is consists of four labels:
+- on
+- off
+- noise
+- unknown
 {{% /notice %}}
 
-### Step 6: Generate Features
+![Screenshot showing the Impulse design interface in Edge Impulse with input, processing, and learning blocks configured alt-text#center](images/8.png "Dataset overview")
 
-After saving the MFCC parameters, the next step is to generate features from your dataset. Click on the **"Generate features"** button highlighted. Edge Impulse will process all your data samples using the MFCC configuration and create a set of features suitable for training a machine learning model.
+## Create the impulse
 
-Once the feature generation is complete, you'll see a **2D visualization plot** that shows how the dataset is distributed across the four labels: `on`, `off`, `noise`, and `unknown`. This helps to visually confirm whether the different classes are well-separated and learnable by the model.
+Now that your data is ready, it's time to create the impulse. An impulse defines the flow of data from input to output using processing and learning blocks.
 
-![example image alt-text#center](images/12.png "Figure 9. Feature Explorer")
+Click **Create impulse** in the menu and configure it as shown in the screenshot. Typically, this includes setting the input data type (such as audio), adding a **processing block** (like MFCC), and a **learning block** (such as a neural network classifier).
 
-### Step 7: Setting Up the Classifier
+After configuring the impulse, make sure to **save your changes**.
 
-Now it's time to configure the **neural network classifier**, which will learn to recognize the different audio commands. Click on the **"Classifier"** button in the left-hand menu under **Impulse Design** and set the parameters exactly as shown in the snapshot below.
 
-{{% notice Note %}}
-For this learning path, a learning rate of `0.002` was chosen, although the snapshot shows a value of `0.005`. You are free to experiment with different values to improve model accuracy. However, using `0.002` is recommended as a good starting point.
-{{% /notice %}}
+![example image alt-text#center](images/9.png "Create Impulse")
 
-Once all the parameters are set, click on **"Save and train"** to start training your model.
+## Configure the MFCC block
 
-![example image alt-text#center](images/13.png "Figure 10. Classifier Settings")
+Next, you'll configure the **MFCC (Mel Frequency Cepstral Coefficients)** processing block. This block transforms raw audio into features suitable for training your model.
 
-### Step 8: Reviewing Model Performance
+Click **MFCC** in the left-hand menu under the **Impulse design** section.
 
-After the training process is complete, Edge Impulse will display the **model's performance**, including its overall **accuracy**, **loss**, and a **confusion matrix**.
+Set the parameters exactly as shown in the screenshot. These settings determine how the audio input is segmented and analyzed. Once complete, make sure to **save the parameters**.
 
-![example image alt-text#center](images/14.png "Figure 11. Model Performance")
+These defaults are chosen for this Learning Path, but you can experiment with different values once you're more familiar with Edge Impulse.
 
-- **Accuracy** reflects how often the model predicts the correct label.
-- **Loss** indicates how far the model’s predictions are from the actual labels during training — a lower loss generally means better performance.
-- The **confusion matrix** shows how well the model predicted each of the four labels (`on`, `off`, `noise`, `unknown`), and can help identify patterns of misclassification.
+![Screenshot showing the MFCC configuration page in Edge Impulse with time and frequency parameters set for feature extraction alt-text#center](images/10.png "MFCC block configuration")
 
-Review these metrics to determine if the model is learning effectively. If needed, adjust the model parameters or revisit earlier steps to improve performance.
+{{< notice Note >}}
+The green-highlighted section on the MFCC configuration page provides an estimate of how the model will perform on the target device. This includes memory usage (RAM and flash) and latency, helping ensure the model fits within hardware constraints.
+{{< /notice >}}
 
-**On-Device Performance (EON Compiler - RAM Optimized):**
+## Generate features
 
-| Metric             | Value     |
-|--------------------|-----------|
-| Inference Time     | 6 ms      |
-| Peak RAM Usage     | 12.5 KB   |
-| Flash Usage        | 49.7 KB   |
+After saving the MFCC parameters, the next step is to generate features from your dataset. Click **Generate features** to begin. Edge Impulse will process your data using the MFCC configuration and create a feature set for training.
 
-![example image alt-text#center](images/15.png "Figure 12. Model Performance")
+When complete, you'll see a **2D feature plot** that shows how the data is distributed across the four labels: `on`, `off`, `noise`, and `unknown`. This helps visually confirm whether the classes are distinct and learnable.
 
-You can also use the pre-trained model in the `ei-edge-ai-tutorials-arduino-1.0.1.zip` archive, from the example repository.
+![Screenshot showing the feature explorer in Edge Impulse with a 2D visualization of four labeled audio classes alt-text#center](images/12.png "Feature explorer")
 
-### Final Step: Deploying the Model
+## Set up the classifier
 
-To use the trained model on your Arduino Nano RP2040, follow the steps below to export it as an Arduino library.
+Now it's time to configure the **neural network classifier**, which learns to recognize different audio commands. Click **Classifier** under **Impulse design** and set the parameters as shown in the screenshot.
 
-1. Click on the **Deployment** tab from the menu.
-2. In the **search bar**, type **"Arduino"** to filter the export options.
-3. Select **Arduino library** from the list.
-4. If the export process does not start automatically, click **Build**. The model will be downloaded as a `.zip` file.
+{{< notice Note >}}
+For this Learning Path, use a learning rate of `0.002` even though the screenshot shows `0.005`. You can experiment later, but `0.002` is a good starting point.
+{{< /notice >}}
 
-![example image alt-text#center](images/16.png "Figure 13. Model Deployment")
+Once all parameters are set, click **Save and train** to begin training your model.
 
-## Next Steps
+![Screenshot showing the classifier configuration screen in Edge Impulse with neural network settings for audio classification alt-text#center](images/13.png)
 
-In the following steps, you will move from model training to real-world deployment. Specifically, you will:
+## Review model performance
 
-- Connect an **LED** to the **Arduino Nano RP2040** board.
-- Set up the **Arduino IDE** for development.
-- Program the board and **deploy the trained model** to recognize voice commands which will be used to turn `ON` and `OFF` the LED
+After training is complete, Edge Impulse displays key performance metrics, including **accuracy**, **loss**, and a **confusion matrix**.
+
+![Screenshot showing training results in Edge Impulse, including a confusion matrix and accuracy/loss graph alt-text#center](images/14.png)
+
+- **Accuracy**: how often the model correctly predicts labels  
+- **Loss**: how far off the predictions are - lower values indicate better performance  
+- **Confusion matrix**: shows how well the model classified each label and where it made errors
+
+Review these results to evaluate how well your model learned. If needed, adjust the configuration or retrain to improve accuracy.
+
+**On-device performance (EON Compiler – RAM optimized):**
+
+| Metric           | Value   |
+|------------------|---------|
+| Inference time   | 6 ms    |
+| Peak RAM usage   | 12.5 KB |
+| Flash usage      | 49.7 KB |
+
+![Screenshot showing on-device model performance stats including RAM, flash, and latency alt-text#center](images/15.png)
+
+You can also use the pre-trained model included in `ei-edge-ai-tutorials-arduino-1.0.1.zip` from the example repository.
+
+## Deploy the model
+
+To run the trained model on your Arduino Nano RP2040 Connect, export it as an Arduino library:
+
+* Click **Deployment** in the left menu  
+* Search for "Arduino" and select **Arduino library**  
+* If the export doesn't start automatically, click **Build**
+
+The model will be downloaded as a `.zip` file, which you can import into the Arduino IDE.
+
+![Screenshot showing the Edge Impulse deployment page with Arduino library export selected alt-text#center](images/16.png)
+
+## Next steps
+
+In the next section, you'll move from model training to real-world deployment. Specifically, you will:
+
+- Connect an LED to the Arduino Nano RP2040 board  
+- Set up the Arduino IDE for development  
+- Deploy the trained model to recognize voice commands and control the LED

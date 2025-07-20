@@ -1,71 +1,95 @@
 ---
-title:  Overview
+title: Overview
 weight: 2
 
-### FIXED, DO NOT MODIFY
+# FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-This section introduces the related topics that make out the basis for this learning path. Review it before proceeding to the step-by-step tutorial.
+{{< notice Note >}}
+This section introduces the key concepts that form the foundation of Edge AI. Review it before starting this Learning Path.
+{{< /notice >}}
 
 # Edge AI
-Edge AI refers to artificial intelligence models that run directly on edge devices, processing data locally rather than relying on cloud computing. These models are optimized for real-time decision-making on resource-constrained devices, such as microcontrollers, embedded systems, and IoT sensors.
 
-**TinyML (Tiny Machine Learning)** is a subset of Edge AI that focuses specifically on deploying machine learning models on ultra-low-power microcontrollers and resource-constrained devices. These microcontrollers typically have limited computational resources — often less than 1 MB of flash memory and only a few hundred kilobytes of RAM — and are designed to run on minimal power, sometimes for years on a single coin-cell battery. Despite these constraints, TinyML enables such devices to perform on-device inference, allowing them to make intelligent decisions in real time without needing to send data to the cloud. This opens the door for smart functionality in low-cost, battery-powered devices used in applications such as environmental monitoring, wearables, smart homes, industrial sensors, and more.
+Edge AI refers to artificial intelligence models that run directly on edge devices, processing data locally rather than relying on cloud computing. These models are optimized for real-time decision-making on resource-constrained devices such as microcontrollers, embedded systems, and IoT sensors.
 
-## Key Characteristics of Edge AI and TinyML
+TinyML (Tiny Machine Learning) is a subset of Edge AI that focuses on deploying machine learning models on ultra-low-power microcontrollers. These devices typically have less than 1 MB of flash memory and a few hundred kilobytes of RAM, and they are designed to run for extended periods on minimal power, which is often for years on a single coin-cell battery.
 
-Key features of Edge AI and TinyML include;
+Despite these constraints, TinyML enables on-device inference, allowing edge devices to make intelligent decisions in real time without sending data to the cloud. This makes smart functionality possible in low-cost, battery-powered devices used in applications such as environmental monitoring, wearables, smart homes, and industrial sensors.
 
-- **Low Power Consumption**: Designed to run on batteries or harvested energy for months or years.
+## Key characteristics of Edge AI and TinyML
 
-- **Small Model Size**: Models are optimized (e.g., quantized or pruned) to fit into a few kilobytes or megabytes.
+Key features of Edge AI and TinyML include:
 
-- **Limited Compute & Memory** : Typically operates with <1MB RAM and very limited storage.
+- **Low power consumption**: designed to run on batteries or harvested energy for months or years  
+- **Small model size**: models are optimized (for example, quantized or pruned) to fit into a few kilobytes or megabytes  
+- **Limited compute and memory**: typically operate with under 1 MB of RAM and very limited storage  
+- **Real-time inference**: immediate local decision-making (for example, wake-word detection)  
+- **Low latency**: no reliance on cloud; inference is performed on-device  
+- **Applications**: often used in audio classification, gesture detection, and anomaly detection  
 
-- **Real-Time Inference** : Enables immediate local decision-making (e.g., wake-word detection).
+Example devices include Arduino Nano 33 BLE Sense, STM32 MCUs, Raspberry Pi Pico, and Arduino Nano RP2040 Connect.
 
-- **Low Latency** : No reliance on cloud – inference is performed on-device.
+## Run AI models on resource-constrained devices
 
-- **Applications** : Often used in audio classification, gesture detection, anomaly detection, etc.
+Running AI on edge devices presents challenges. These devices often lack high-performance CPUs or GPUs, making compute power and memory usage key concerns. Since many edge devices run on batteries, energy efficiency is also critical.
 
-- **Example Devices** : Arduino Nano 33 BLE Sense, STM32 MCUs, Raspberry Pi Pico, Arduino Nano RP2040 Connect, and more.
+To overcome these constraints, models are optimized using techniques such as *quantization*, *pruning*, and *knowledge distillation*. These methods reduce model size and resource requirements while maintaining acceptable accuracy.
 
-## Running AI Models on Resource-Constrained Devices
+## Edge AI workflow
 
-Running AI on edge devices presents several challenges. These devices often lack high-performance CPUs or GPUs, making computational power a limiting factor. Limited RAM and storage require careful memory management, and since many edge devices run on batteries, energy efficiency is a critical concern. To overcome these constraints, models are optimized through techniques such as quantization, pruning, and knowledge distillation, which reduce model size while maintaining accuracy.
+[1] Data collection  
+→ Sensors capture data (such as audio, motion, and vision)  
 
-## Edge AI Implementation Workflow
+[2] Model training  
+→ Use cloud or local compute for training  
 
-The process of implementing Edge AI begins with data collection using sensors, such as cameras, microphones, or motion detectors. This data is then used to train machine learning models on high-performance machines, such as cloud servers or workstations. Once trained, the models undergo optimization to reduce size and computational requirements before being deployed on microcontrollers or Arm-based microprocessors. Finally, inference takes place, where the model processes real-time data directly on the device to make decisions.
+[3] Model optimization  
+→ Apply quantization, pruning, or distillation  
+
+[4] Deployment  
+→ Flash model onto Arm-based edge device  
+
+[5] On-device inference  
+→ Device makes real-time predictions locally
 
 ## Applications of Edge AI
 
-Edge AI is used in a wide range of applications. In smart homes, voice assistants like Amazon Alexa rely on on-device speech recognition to process wake words. Security systems use AI-driven cameras to detect motion and identify anomalies, while energy management systems optimize power usage by analyzing real-time data from HVAC units.
+Edge AI is used in a wide range of real-world applications:
 
-Wearable devices also benefit from Edge AI. Smartwatches monitor health by detecting heart rate irregularities, and fitness trackers use AI-powered motion analysis to improve exercise tracking.
+- **Smart homes**: voice assistants process wake words locally; security systems detect motion and identify anomalies  
+- **Wearables**: smartwatches detect heart rate irregularities; fitness trackers analyze motion patterns  
+- **Industrial systems**: predictive maintenance uses vibration and temperature data; safety sensors shut down equipment automatically  
+- **Agriculture**: AI-powered sensors optimize irrigation and fertilizer use  
+- **Autonomous systems**: onboard AI enables real-time navigation and obstacle avoidance
 
-In industrial settings, predictive maintenance applications rely on IoT sensors to monitor vibrations and temperatures, helping prevent machinery failures. Smart agriculture systems use soil condition sensors to optimize irrigation and fertilization, while autonomous vehicles process sensor data for real-time navigation and obstacle detection.
 
-## The BLERP mnemonic
+## The BLERP framework
 
-To help remember the benefits of **Edge AI**, **BLERP** highlights the critical aspects of deploying machine learning models on edge devices. First used by Situnayake in 2023, the abbreviation expands to **Bandwidth, Latency, Economics, Reliability, and Privacy**. These components are key to understanding the advantages of processing data on-device rather than relying on the cloud. The table below provides an overview of each component and its importance in Edge AI applications.
+To recall the benefits of Edge AI, the **BLERP** mnemonic highlights five critical aspects:
 
-| Area     | Description                                                                                                                                                         |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| B – Bandwidth          | Edge AI reduces the amount of data that needs to be sent to the cloud. This is critical when working with high-volume data like video or sensor streams. Processing locally helps avoid congestion and dependency on internet speed. |
-| L – Latency            | Edge devices can make real-time decisions faster because they don't rely on cloud round trips. One of the significant benefits of Edge AI is low latency - processing occurs on-device without needing to send data to the cloud. This is crucial for applications requiring real-time decision-making, such as self-driving cars or medical monitoring devices. Additionally, Edge AI allows devices to function in offline environments, making it ideal for remote locations with limited connectivity. |
-|  E – Economics          | Running models locally on low-power edge devices is often cheaper in the long run. It reduces cloud compute costs, data transmission costs, and energy consumption. |
-|  R – Reliability        | Edge AI systems can continue functioning even with limited or no internet connection. This makes them more robust in remote areas, mission-critical applications, or offline settings. |
-| P – Privacy            | Data can be processed locally without being transmitted to external servers, reducing the risk of data breaches and complying with privacy regulations like GDPR or HIPAA. |
+| Area       | Description                                                                                                                                                           |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **B – Bandwidth**   | Reduces the need to send large amounts of data to the cloud, which is especially useful for video or sensor streams.                                         |
+| **L – Latency**     | Enables real-time decision-making by processing data locally, with no round trips to the cloud. Crucial for self-driving cars, health monitors, and offline use.   |
+| **E – Economics**   | Running models on-device reduces long-term costs related to cloud compute, data transfer, and power usage.                                                   |
+| **R – Reliability** | Devices remain functional even when disconnected from the internet which is important for mission-critical or remote deployments.                                     |
+| **P – Privacy**     | Data stays on-device, reducing risk and helping meet regulatory requirements like GDPR or HIPAA.                                                             |
 
-## Why Learn Edge AI?
+## Why learn Edge AI?
 
-Edge AI is transforming multiple industries. In healthcare, AI-powered medical diagnostics assist in early disease detection, while remote patient monitoring improves access to care. In agriculture, AI-driven sensors optimize soil conditions and pest control, leading to higher yields and resource efficiency. The manufacturing sector benefits from predictive maintenance and quality inspection, reducing downtime and improving productivity.
+Edge AI is revolutionizing industries by making smart, local decision-making possible at the device level:
 
-## Next Steps
+- **Healthcare**: enables remote diagnostics and patient monitoring  
+- **Agriculture**: improves yield through intelligent irrigation and pest control  
+- **Manufacturing**: reduces downtime through predictive maintenance and quality inspection
 
-To build effective TinyML and Edge AI projects, one needs more than just data—**both software and hardware** play a critical role in the development process. While data forms the foundation for training machine learning models, the **software** enables data processing, model development, and deployment, and the **hardware** provides the physical platform for running these models at the edge.
 
-In this learning path, you will build a model that recognize specific voice commands, which will be used to **control LEDs on the Arduino Nano RP2040 Connect**. In the following steps, both software and hardware components will be discussed in detail.
+By bringing intelligence to the edge, developers can create responsive, efficient, and secure systems that operate independently of constant internet access.
 
+## Next steps
+
+To build effective TinyML and Edge AI solutions, you’ll need both high-quality data and the right combination of software and hardware. In this Learning Path, you’ll train a model to recognize specific voice commands and use those commands to control LEDs on the Arduino Nano RP2040 Connect.
+
+In the next steps, you’ll walk through each part of the process in detail.
