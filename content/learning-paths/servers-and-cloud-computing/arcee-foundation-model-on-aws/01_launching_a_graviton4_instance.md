@@ -1,5 +1,5 @@
 ---
-title: Launch a Graviton4 instance
+title: Provision your Graviton4 environment
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -18,9 +18,9 @@ If you're new to EC2, check out the Learning Path [Getting Started with AWS](/le
 
 ## Create an SSH key pair
 
-To deploy the Arcee AFM-4.5B model, you need an EC2 instance running on Arm-based Graviton4 hardware:
+To deploy the Arcee AFM-4.5B model, you need an EC2 instance running on Arm-based Graviton4 hardware.
 
-Start by signing in to the [AWS Management Console](https://console.aws.amazon.com), then navigate to the **EC2** service.
+To do this, start by signing in to the [AWS Management Console](https://console.aws.amazon.com), then navigate to the **EC2** service.
 
 From there, you can create an SSH key pair that allows you to connect to your instance securely.
 
@@ -30,7 +30,7 @@ Open the **Key Pairs** section under **Network & Security** in the sidebar, and 
 
 Next, select **RSA** as the key type, and **.pem** as the file format. Once you create the key, your browser will download the `.pem` file automatically.
 
-To keep the key secure and usable, move the `.pem` file to your SSH configuration directory and update its permissions to restrict access.
+To ensure the key remains secure and accessible, move the `.pem` file to your SSH configuration directory, and update its permissions to restrict access.
 
 To do this, on macOS or Linux, run:
 
@@ -56,19 +56,17 @@ Use the following settings to configure your instance:
 
 ## Configure network
 
-Set up your instance networking so that it can be accessed over the internet:
+To set up your instance networking so that it can be accessed over the internet, choose a VPC that includes at least one public subnet.  
 
-Choose a VPC that includes at least one public subnet.  
+Then select a public subnet from the list.
 
-Select a public subnet from the list.  
-
-Under **Auto-assign public IP**, choose **Enable**.
+Under **Auto-assign public IP**, select **Enable**.
 
 ## Configure firewall
 
 Select **Create security group**. Then select **Allow SSH traffic from** and select **My IP**.
 
-{{% notice note %}}
+{{% notice Note %}}
 You'll only be able to connect to the instance from your current host, which is the most secure setting. Avoid selecting **Anywhere** unless absolutely necessary, as this setting allows anyone on the internet to attempt a connection.
 
 This Learning Path only requires SSH access. If you already have a security group that allows inbound SSH traffic, you can reuse it.
@@ -76,17 +74,15 @@ This Learning Path only requires SSH access. If you already have a security grou
 
 ## Configure storage
 
-- Set the **root volume size** to `128` GB . 
-- Choose **gp3** as the volume type.
+Set the **root volume size** to `128` GB, then select **gp3** as the volume type.
 
 ## Review and launch the instance
 
-Review all your configuration settings.  
-When you're ready, select **Launch instance** to create your EC2 instance.
+Review all your configuration settings, and when you're ready, select **Launch instance** to create your EC2 instance.
 
 ## Monitor the instance launch
 
-After a few seconds, you should see a confirmation message like the following:
+After a few seconds, you should see a confirmation message like this:
 
 ```
 Successfully initiated launch of instance (i-xxxxxxxxxxxxxxxxx)
@@ -94,11 +90,9 @@ Successfully initiated launch of instance (i-xxxxxxxxxxxxxxxxx)
 
 If the launch fails, double-check the instance type, permissions, and network settings.
 
-To retrieve the connection details:
+To retrieve the connection details, go to the **Instances** list in the EC2 dashboard.  
 
-Go to the **Instances** list in the EC2 dashboard.  
-
-Select your instance by selecting **Instance ID**.  
+Then select your instance by selecting **Instance ID**.  
 
 In the **Details** tab, copy the **Public DNS** value - you’ll use this to connect through SSH.
 

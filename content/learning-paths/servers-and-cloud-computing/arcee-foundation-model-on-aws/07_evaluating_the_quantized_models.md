@@ -6,7 +6,7 @@ weight: 9
 layout: learningpathall
 ---
 
-## Benchmark performance using `llama-bench`
+## Benchmark performance using llama-bench
 
 Use the [`llama-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench) tool to measure model performance, including inference speed and memory usage.
 

@@ -1,5 +1,5 @@
 ---
-title: Running inference with AFM-4.5B
+title: Run inference with AFM-4.5B
 weight: 8
 
 ### FIXED, DO NOT MODIFY
@@ -9,7 +9,7 @@ layout: learningpathall
 Now that you have the AFM-4.5B models in GGUF format, you can run inference using various Llama.cpp tools. In this step, you'll explore how to generate text, benchmark performance, and interact with the model through both command-line and HTTP APIs.
 
 
-## Use `llama-cli` for interactive text generation
+## Use llama-cli for interactive text generation
 
 The `llama-cli` tool provides an interactive command-line interface for text generation. This is ideal for quick testing and hands-on exploration of the model's behavior.
 

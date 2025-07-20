@@ -1,5 +1,5 @@
 ---
-title: Install Python dependencies for llama.cpp
+title: Install Python dependencies 
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -23,39 +23,48 @@ This command creates a new Python virtual environment named `env-llama-cpp`, whi
 
 ## Activate the virtual environment
 
+Run the following command to activate the virtual environment:
+
 ```bash
 source env-llama-cpp/bin/activate
 ```
+This command does the following:
 
-This command activates the virtual environment:
 - The `source` command runs the activation script, which modifies your shell environment.
-- Your shell prompt might update to show `env-llama-cpp`, indicating the environment is active.
-- All pip commands will now install packages into the virtual environment.
-- Updates the `PATH` to prioritize the environment’s Python interpreter
+- Updates your shell prompt to show `env-llama-cpp`, indicating the environment is active
+- Updates `PATH` so the virtual environment’s Python interpreter is used by default
+- Ensures all `pip` commands install packages into the isolated environment
 
 ## Upgrade pip to the latest version
+
+Before installing dependencies, it’s a good idea to upgrade pip:
 
 ```bash
 pip install --upgrade pip
 ```
+This command:
 
-This command ensures you have the latest version of pip:
-- Upgrading pip helps avoid compatibility issues with newer packages
-- The `--upgrade` flag tells pip to install the newest available version
-- This is a best practice before installing project dependencies
-- Newer pip versions often include security fixes and improved package resolution
+- Ensures you have the latest version of pip
+- Helps avoid compatibility issues with modern packages
+- Applies the `--upgrade` flag to fetch and install the newest release
+- Brings in security patches and better dependency resolution logic
 
 ## Install project dependencies
+
+Use the following command to install all required Python packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-This command installs all the Python packages specified in the requirements.txt file:
-- The `-r` flag tells Pip to read the package list from the specified file.
-- `requirements.txt` defines the exact package versions required for the project.
-- Ensures a consistent development environment across systems and contributors.
-- Includes packages needed for model loading, inference, and Python bindings for Llama.cpp.
+This command does the following:
+
+- Uses the `-r` flag to read the list of dependencies from `requirements.txt`
+- Installs the exact package versions required for the project
+- Ensures consistency across development environments and contributors
+- Includes packages for model loading, inference, and Python bindings for `llama.cpp`
+
+This step sets up everything you need to run AFM-4.5B in your Python environment.
 
 ## What is installed? 
 

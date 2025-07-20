@@ -54,9 +54,13 @@ If you're running on Graviton4, the CMake output should include hardware-specifi
 These features enable advanced CPU instructions for faster inference:
 
 - **DOTPROD: Dot Product**: hardware-accelerated dot product operations for neural network workloads
+
 - **SVE (Scalable Vector Extension)**: advanced vector processing capabilities that can handle variable-length vectors up to 2048 bits, providing significant performance improvements for matrix operations
+
 - **MATMUL_INT8**: integer matrix multiplication units optimized for transformers
+
 - **FMA**: fused multiply-add operations to speed up floating-point math
+
 - **FP16 vector arithmetic**: 16-bit floating-point vector operations to reduce memory use without compromising precision
 
 ## Compile the project
@@ -73,7 +77,7 @@ This command compiles the Llama.cpp source code:
 
 The build process compiles the C++ source code into executable binaries optimized for the Arm64 architecture. Compilation typically takes under a minute.
 
-## What is built? 
+## Key binaries after compilation 
 
 After compilation, you'll find several key command-line tools in the `bin` directory:
 - `llama-cli`: the main inference executable for running LLaMA models

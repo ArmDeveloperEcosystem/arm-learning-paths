@@ -1,5 +1,5 @@
 ---
-title: Setting up the instance
+title: Configure your Graviton4 environment
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -29,17 +29,24 @@ sudo apt-get install cmake gcc g++ git python3 python3-pip python3-virtualenv li
 This command installs the following tools and dependencies:
 
 - **CMake**: cross-platform build system generator used to compile and build Llama.cpp
+
 - **GCC and G++**: GNU C and C++ compilers for compiling native code
+
 - **Git**: version control system for cloning repositories
+
 - **Python 3**: Python interpreter for running Python-based tools and scripts
+
 - **Pip**: Python package manager
+
 - **Virtualenv**: tool for creating isolated Python environments
+
 - **libcurl4-openssl-dev**: development files for the curl HTTP library
+
 - **Unzip**: tool to extract `.zip` files (used in some model downloads)
 
 The `-y` flag automatically approves the installation of all packages without prompting.
 
-## What's ready now?
+## Ready for build and deployment
 
 After completing these steps, your Graviton4 instance has:
 

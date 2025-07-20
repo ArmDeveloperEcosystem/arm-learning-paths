@@ -6,18 +6,9 @@ weight: 7
 layout: learningpathall
 ---
 
-In this step, you'll download the AFM-4.5B model from Hugging Face, convert it to the GGUF format for use with Llama.cpp, and create quantized versions to optimize memory usage and inference speed.
+In this step, you’ll download the AFM-4.5B model from Hugging Face, convert it to the GGUF format for compatibility with `llama.cpp`, and generate quantized versions to reduce memory usage and improve inference speed.
 
-The first release of the [Arcee Foundation Model](https://www.arcee.ai/blog/announcing-the-arcee-foundation-model-family) family, [AFM-4.5B](https://www.arcee.ai/blog/deep-dive-afm-4-5b-the-first-arcee-foundational-model), is a 4.5-billion-parameter frontier model that offers:
-
-- Excellent accuracy
-- Strict compliance
-- High cost-efficiency in training and inference
-
-
-AFM-4.5B was trained on nearly 7 trillion tokens of clean, rigorously filtered data. It has been tested across a wide range of languages, including Arabic, English, French, German, Hindi, Italian, Korean, Mandarin, Portuguese, Russian, and Spanish.
-
-The following steps show you how to download and optimize the model for use on AWS Graviton4. Be sure to activate the virtual environment you created in the previous step before running any commands.
+Make sure to activate your virtual environment before running any commands. The instructions below walk you through downloading and preparing the model for efficient use on AWS Graviton4.
 
 ## Install the Hugging Face libraries
 
@@ -92,7 +83,7 @@ This command creates an 8-bit quantized version of the model:
   
 Arm Optimization: Similar to Q4_0, Arm has contributed optimized kernels for Q8_0 quantization that take advantage of Neoverse v2 instruction sets. These optimizations provide excellent performance for 8-bit operations while maintaining higher accuracy compared to 4-bit quantization.
 
-## What is available now?
+## Model files ready for inference
 
 After completing these steps, you'll have three versions of the AFM-4.5B model:
 - `afm-4-5B-F16.gguf` - The original full-precision model (~15GB)
