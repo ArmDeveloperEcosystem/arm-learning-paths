@@ -12,7 +12,7 @@ In this Learning Path, you'll learn how to convert the Stable Audio Open Small m
 
 Your first task is to prepare a development environment with the required software:
 
-- Android NDK: version r25b or newer.
+- Android NDK: version r27b or newer.
 - Python: version 3.10 or newer (tested with 3.10).
 - CMake: version 3.16.0 or newer (tested with 3.28.1).
 
@@ -33,9 +33,7 @@ Download and install [Python version 3.10](https://www.python.org/downloads/rele
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
-sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt update
-sudo apt install python3.10 python3.10-venv python3.10-pip
+sudo apt install -y python3.10 python3.10-venv
   {{< /tab >}}
   {{< tab header="MacOS">}}
 brew install python@3.10
@@ -56,7 +54,7 @@ CMake is an open-source tool that automates the build process for software proje
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
 sudo apt update
-sudo apt install cmake
+sudo apt install cmake g++ git
   {{< /tab >}}
   {{< tab header="MacOS">}}
 brew install cmake
@@ -98,20 +96,44 @@ You can verify the installation and check the version with:
 bazel --version
 ```
 
-### Install Android NDK
+### Install Android SDK and NDK
+
+To build a native Android application you will need to install the Android SDK:
+
+{{< tabpane code=true >}}
+  {{< tab header="Linux">}}
+cd $WORKSPACE
+sudo apt install openjdk-21-jdk openjdk-21-jre unzip
+wget https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip
+unzip -o commandlinetools-linux-13114758_latest.zip
+mkdir -p $WORKSPACE/Android/Sdk
+export ANDROID_HOME=$WORKSPACE/Android
+export ANDROID_SDK_HOME=$ANDROID_HOME/Sdk
+$WORKSPACE/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_HOME --install "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+  {{< /tab >}}
+  {{< tab header="MacOS">}}
+cd $WORKSPACE
+wget https://dl.google.com/android/repository/commandlinetools-mac-13114758_latest.zip
+unzip -o commandlinetools-linux-13114758_latest.zip
+mkdir -p $WORKSPACE/Android/Sdk
+export ANDROID_HOME=$WORKSPACE/Android
+export ANDROID_SDK_HOME=$ANDROID_HOME/Sdk
+$WORKSPACE/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_HOME --install "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+  {{< /tab >}}
+{{< /tabpane >}}
 
 To run the model on Android, install Android Native Development Kit (Android NDK):
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
 cd $WORKSPACE
-wget https://dl.google.com/android/repository/android-ndk-r25b-linux.zip
-unzip android-ndk-r25b-linux.zip
+wget https://dl.google.com/android/repository/android-ndk-r27b-linux.zip
+unzip android-ndk-r27b-linux.zip
   {{< /tab >}}
   {{< tab header="MacOS">}}
 cd $WORKSPACE
-wget https://dl.google.com/android/repository/android-ndk-r25b-darwin.zip
-unzip android-ndk-r25b-darwin.zip
+wget https://dl.google.com/android/repository/android-ndk-r27b-darwin.zip
+unzip android-ndk-r27b-darwin.zip
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -119,12 +141,12 @@ For easier access and execution of Android NDK tools, add these to the `PATH` an
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
-export NDK_PATH=$WORKSPACE/android-ndk-r25b/
+export NDK_PATH=$WORKSPACE/android-ndk-r27b/
 export ANDROID_NDK_HOME=$NDK_PATH
 export PATH=$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
   {{< /tab >}}
   {{< tab header="MacOS">}}
-export NDK_PATH=$WORKSPACE/android-ndk-r25b/
+export NDK_PATH=$WORKSPACE/android-ndk-r27b/
 export ANDROID_NDK_HOME=$NDK_PATH
 export PATH=$NDK_PATH/toolchains/llvm/prebuilt/darwin-x86_64/bin/:$PATH
   {{< /tab >}}
