@@ -13,9 +13,9 @@ learning_objectives:
     - Run the application on an Android smartphone and generate an audio snippet.
 
 prerequisites:
-    - A Linux-based x86 or macOS development machine with at least 8 GB of RAM (tested on Ubuntu 20.04.4 LTS with x86_64).
+    - A Linux-based x86 or macOS development machine with at least 8 GB of RAM and 50 GB of disk space (tested on Ubuntu 22.04 with x86_64).
     - A [HuggingFace](https://huggingface.co/) account.
-    - An Android phone and a cable to connect it to your development machine.
+    - An Android phone in [developer mode](https://developer.android.com/studio/debug/dev-options) and a cable to connect it to your development machine.
 
 author:
     - Nina Drozd
