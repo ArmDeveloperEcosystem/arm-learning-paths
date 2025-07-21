@@ -36,8 +36,8 @@ On each instance, copy the appropriate launch script into the `openadkit_demo.au
     export NGROK_URL=$NGROK_URL
 
     # Start planning-control
-      echo "Running planning v1.."
-      TIMEOUT=120 CONF_FILE=$CONF_FILE_PASS docker compose -f "$SCRIPT_DIR/docker-compose-2ins.yml" up planning-control -d  
+    echo "Running planning v1.."
+    TIMEOUT=120 CONF_FILE=$CONF_FILE_PASS docker compose -f "$SCRIPT_DIR/docker-compose-2ins.yml" up planning-control -d  
   {{< /tab >}}
   
   {{< tab header="Visualizer & Simulator" language="bash">}}
@@ -85,8 +85,12 @@ On the Simulation and Visualization node, execute:
 ./opad_sim_vis.sh
 ```
 
-Once both machines are running their respective launch scripts, the Visualizer will generate a web-accessible interface using the machine’s public IP address. 
-You can open this link in a browser to observe the demo behavior.
+
+Once both machines are running their respective launch scripts, the Visualizer will generate a web-accessible interface on:
+
+http://[Visualizer public IP address]:6080/vnc.html
+
+You can open this link in a browser to observe the demo behavior, which will closely resemble the output from the [previous learning path](http://learn.arm.com/learning-paths/automotive/openadkit1_container/4_run_openadkit/). 
 
 ![img3 alt-text#center](split_aws_run.gif "Figure 4: Simulation")
 

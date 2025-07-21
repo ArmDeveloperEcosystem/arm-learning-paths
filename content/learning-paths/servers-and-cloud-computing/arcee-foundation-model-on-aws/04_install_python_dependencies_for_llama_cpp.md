@@ -1,66 +1,80 @@
 ---
-title: Installing Python dependencies for llama.cpp
-weight: 5
+title: Install Python dependencies 
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Overview
 
 In this step, you'll set up a Python virtual environment and install the required dependencies for working with Llama.cpp. This ensures you have a clean, isolated Python environment with all the necessary packages for model optimization.
 
-## Step 1: Create a Python Virtual Environment
+## Create a Python virtual environment
 
 ```bash
 virtualenv env-llama-cpp
 ```
 
-This command creates a new Python virtual environment named `env-llama-cpp`:
-- Virtual environments provide isolated Python environments that prevent conflicts between different projects
-- The `env-llama-cpp` directory will contain its own Python interpreter and package installation space
-- This isolation ensures that the Llama.cpp dependencies won't interfere with other Python projects on your system
-- Virtual environments are essential for reproducible development environments
+This command creates a new Python virtual environment named `env-llama-cpp`, which has the following benefits:
+- Provides an isolated Python environment to prevent package conflicts between projects
+- Creates a local directory containing its own Python interpreter and installation space
+- Ensures Llama.cpp dependencies don’t interfere with your global Python setup
+- Supports reproducible and portable development environments
 
-## Step 2: Activate the Virtual Environment
+## Activate the virtual environment
+
+Run the following command to activate the virtual environment:
 
 ```bash
 source env-llama-cpp/bin/activate
 ```
+This command does the following:
 
-This command activates the virtual environment:
-- The `source` command executes the activation script, which modifies your current shell environment
-- Depending on you sheel, your command prompt may change to show `(env-llama-cpp)` at the beginning, indicating the active environment. This will be reflected in the following commands.
-- All subsequent `pip` commands will install packages into this isolated environment
-- The `PATH` environment variable is updated to prioritize the virtual environment's Python interpreter
+- Runs the activation script, which modifies your shell environment
+- Updates your shell prompt to show `env-llama-cpp`, indicating the environment is active
+- Updates `PATH` to use so the environment’s Python interpreter 
+- Ensures all `pip` commands install packages into the isolated environment
 
-## Step 3: Upgrade pip to the Latest Version
+## Upgrade pip to the latest version
+
+Before installing dependencies, it’s a good idea to upgrade pip:
 
 ```bash
 pip install --upgrade pip
 ```
+This command:
 
-This command ensures you have the latest version of pip:
-- Upgrading pip helps avoid compatibility issues with newer packages
-- The `--upgrade` flag tells pip to install the newest available version
-- This is a best practice before installing project dependencies
-- Newer pip versions often include security fixes and improved package resolution
+- Ensures you have the latest version of pip
+- Helps avoid compatibility issues with modern packages
+- Applies the `--upgrade` flag to fetch and install the newest release
+- Brings in security patches and better dependency resolution logic
 
-## Step 4: Install Project Dependencies
+## Install project dependencies
+
+Use the following command to install all required Python packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-This command installs all the Python packages specified in the requirements.txt file:
-- The `-r` flag tells pip to read the package list from the specified file
-- `requirements.txt` contains a list of Python packages and their version specifications
-- This ensures everyone working on the project uses the same package versions
-- The installation will include packages needed for model loading, inference, and any Python bindings for Llama.cpp
+This command does the following:
 
-## What is installed? 
+- Uses the `-r` flag to read the list of dependencies from `requirements.txt`
+- Installs the exact package versions required for the project
+- Ensures consistency across development environments and contributors
+- Includes packages for model loading, inference, and Python bindings for `llama.cpp`
 
-After successful installation, your virtual environment will contain:
-- **NumPy**: For numerical computations and array operations
-- **Requests**: For HTTP operations and API calls
-- **Other dependencies**: Specific packages needed for Llama.cpp Python integration
+This step sets up everything you need to run AFM-4.5B in your Python environment.
 
-The virtual environment is now ready for running Python scripts that interact with the compiled Llama.cpp binaries. Remember to always activate the virtual environment (`source env-llama-cpp/bin/activate`) before running any Python code related to this project.
+## What the environment includes
+
+After the installation completes, your virtual environment includes:
+- **NumPy**: for numerical computations and array operations
+- **Requests**: for HTTP operations and API calls
+- **Other dependencies**: additional packages required by llama.cpp's Python bindings and utilities
+Your environment is now ready to run Python scripts that integrate with the compiled Llama.cpp binaries
+
+{{< notice Tip >}}
+Before running any Python commands, make sure your virtual environment is activated. {{< /notice >}}
+
+

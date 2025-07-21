@@ -34,7 +34,7 @@ The attestation result is a JWT file, which stands for JSON Web Token. This mean
 The following command will use the `arc` tool, which you built in the previous step, to verify the cryptographic signature on the attestation result, and display the result in a human-readable format:
 
 ```bash
-./arc verify --pkey $HOME/pkey.json --color $HOME/attestation_result.jwt
+./arc verify --pkey $HOME/pkey.json $HOME/attestation_result.jwt
 ```
 
 This command produces quite a lot of output. However, you will notice that a large amount of the output simply reflects the contents of the CCA attestation token that you inspected earlier with the evcli tool. The most interesting part of the output is towards the bottom, and should look like this:

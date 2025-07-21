@@ -88,6 +88,10 @@ This avoids interruptions in later steps when you run `docker compose up` or `do
 Run the following command in your project directory:
 
 ```bash
+cd docker
+export TIMEOUT=120
+export CONF_FILE=/home/ubuntu/openadkit_demo.autoware/docker/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml
+export COMMON_FILE=/home/ubuntu/openadkit_demo.autoware/docker/etc/simulation/config/common.param.yaml
 docker compose -f docker-compose.yml pull
 ```
 
@@ -309,9 +313,8 @@ export COMMON_FILE=$SCRIPT_DIR/etc/simulation/config/common.param.yaml
 export NGROK_AUTHTOKEN=""
 export NGROK_URL=""
 export TIMEOUT=300
-
 # Launch the container
-docker compose -f docker/docker-compose-2ins.yml run --rm planning-control bash
+docker compose -f docker-compose-2ins.yml run --rm planning-control bash
 ```
 
 Once inside the container shell, activate the ROS 2 environment and start publishing to the /hello topic:
@@ -330,6 +333,14 @@ This confirms that DDS communication from the planning node is received on the s
 
 Same with Publisher side, you need to set the required environment variables and launch the Simulator container.
 
+Navigate to the directory with the Docker Compose file:
+
+```bash
+cd $HOME/openadkit_demo.autoware/docker
+```
+
+Launch the application:
+
 ```bash
 export SCRIPT_DIR=/home/ubuntu/openadkit_demo.autoware/docker
 export CONF_FILE=$SCRIPT_DIR/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml 
@@ -339,7 +350,7 @@ export NGROK_URL=""
 export TIMEOUT=300
 
 # Launch the container
-docker compose -f docker/docker-compose-2ins.yml run --rm simulator bash
+docker compose -f docker-compose-2ins.yml run --rm simulator bash
 ```
 
 Once inside the container shell, activate the ROS 2 environment and start publishing to the /hello topic:

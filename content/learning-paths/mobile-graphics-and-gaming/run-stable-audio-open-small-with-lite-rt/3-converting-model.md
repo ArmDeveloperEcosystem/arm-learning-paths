@@ -35,6 +35,8 @@ To avoid dependency issues, create a virtual environment. For example, you can u
 cd $WORKSPACE
 python3.10 -m venv .venv
 source .venv/bin/activate
+export PYTHON_BIN_PATH=$WORKSPACE/.venv/bin/python3
+export PYTHON_LIB_PATH=$WORKSPACE/.venv/lib/python3.10/site-packages
 ```
 
 ## Clone the examples repository
