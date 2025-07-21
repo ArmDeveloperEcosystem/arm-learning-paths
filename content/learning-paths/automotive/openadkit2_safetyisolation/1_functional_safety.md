@@ -1,31 +1,35 @@
 ---
-title: Functional Safety for automotive software development
+title: Functional safety for automotive software development
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Why Functional Safety Matters in Automotive Software
+## Why functional safety matters 
 
-Functional Safety refers to a system's ability to detect potential faults and respond appropriately to ensure that the system remains in a safe state, preventing harm to individuals or damage to equipment. 
+Functional safety refers to a system's ability to detect potential faults and respond appropriately to ensure that the system remains in a safe state, preventing harm to individuals or damage to equipment. 
 
 This is particularly important in automotive, autonomous driving, medical devices, industrial control, robotics and aerospace applications, where system failures can lead to severe consequences.
 
-In software development, Functional Safety focuses on minimizing risks through software design, testing, and validation to ensure that critical systems operate in a predictable, reliable, and verifiable manner. This means developers must consider:
+In software development, functional safety focuses on minimizing risks through software design, testing, and validation to ensure that critical systems operate in a predictable, reliable, and verifiable manner. 
+
+This means developers must consider:
+
 - Error detection mechanisms
 - Exception handling
 - Redundancy design
 - Development processes compliant with safety standards
 
-### Definition and Importance of Functional Safety
+## Functional safety: purpose and risk management principles
+
 
 The core of Functional Safety lies in risk management, which aims to reduce the impact of system failures.
 
 In autonomous vehicles, Functional Safety ensures that if sensor data is incorrect, the system can enter a safe state, preventing incorrect driving decisions.
 
 The three core objectives of Functional Safety are:
-1. Prevention: Reducing the likelihood of errors through rigorous software development processes and testing. In the electric vehicle, the battery systems monitor temperature to prevent overheating.
+1. Prevention: Reducing the likelihood of errors through rigorous software development processes and testing. In electric vehicles, battery systems monitor temperature to prevent overheating.
 2. Detection: Quickly identifying errors using built-in diagnostic mechanisms, such as built-in self-test.
 3. Mitigation: Controlling the impact of failures to ensure the overall safety of the system.
 
@@ -46,7 +50,7 @@ Key Concepts of ISO 26262:
 
 Typical Application Scenarios:
 - Autonomous Driving Systems: 
-  - Ensures that even if sensors (e.g., LiDAR, radar, cameras) provide faulty data, the vehicle will not make dangerous decisions.
+  - Ensures that even if sensors (for example LiDAR, radar, cameras) provide faulty data, the vehicle will not make dangerous decisions.
 - Powertrain Control: 
   - Prevents braking system failures that could lead to loss of control.
 - Battery Management System (BMS): 
@@ -77,7 +81,7 @@ The table below compares the characteristics of a General ECU and a Safety Islan
 
 | Feature               | General ECU                | Safety Island                        |
 |------------------------|----------------------------|--------------------------------------|
-| Purpose               | Comfort / non-safety logic | Safety-critical decision making      |
+| Purpose               | Comfort/non-safety logic | Safety-critical decision making      |
 | OS/Runtime            | Linux, Android             | RTOS, Hypervisor, or bare-metal      |
 | Isolation             | Soft partitioning          | Hard isolation (hardware-enforced)   |
 | Functional Safety Req | None to moderate           | ISO 26262 ASIL-B to ASIL-D compliant |
@@ -94,7 +98,7 @@ Key Capabilities of Safety Island
    - Independently evaluates and initiates emergency handling if the main processing unit encounters errors, overheating, computational failures, or unresponsiveness.
 - Providing Essential Safety Functions
    - Even if the main system crashes, Safety Island can still execute minimal safety operations, such as:
-   - Autonomous Vehicles → Safe stopping (Fail-Safe Mode)
+   - Autonomous Vehicles → Safe stopping (fail-safe mode)
    - Industrial Equipment → Emergency power cutoff or speed reduction
 
 ### Why Safety Island Matters for Functional Safety

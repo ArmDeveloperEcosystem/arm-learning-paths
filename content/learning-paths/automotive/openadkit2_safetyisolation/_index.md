@@ -10,10 +10,9 @@ minutes_to_complete: 60
 who_is_this_for: This Learning Path targets advanced automotive software engineers developing safety-critical systems. It demonstrates how to use Arm Neoverse cloud infrastructure to accelerate ISO-26262 compliant software prototyping and testing workflows.
 
 learning_objectives: 
-    - Apply Functional Safety principles, including risk prevention, fault detection, and ASIL compliance, to build robust, certifiable automotive systems.
-    - Use DDS for low-latency, scalable, and fault-tolerant communication in autonomous driving systems using a publish-subscribe architecture.
-    - Implement distributed development techniques by splitting the simulation platform into independent, safety-isolated components.
-
+    - Apply functional safety principles, including risk prevention, fault detection, and ASIL compliance, to build robust, certifiable automotive systems.
+    - Use DDS and a publish-subscribe architecture for low-latency, scalable, and fault-tolerant communication in autonomous driving systems.
+    - Implement distributed development by separating the simulation platform into independent,     safety-isolated components.
 
 prerequisites:
     - Access to two Arm-based Neoverse cloud instances, or a local Arm Neoverse Linux system with at least 16 CPUs and 32 GB of RAM.
