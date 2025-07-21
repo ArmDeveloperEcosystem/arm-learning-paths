@@ -1,5 +1,5 @@
 ---
-title: Prototyping Safety-Critical Isolation for Autonomous Application on Neoverse
+title: Prototype safety-critical isolation for autonomous systems on Neoverse
 
 draft: true
 cascade:
@@ -10,14 +10,15 @@ minutes_to_complete: 60
 who_is_this_for: This Learning Path targets advanced automotive software engineers developing safety-critical systems. It demonstrates how to use Arm Neoverse cloud infrastructure to accelerate ISO-26262 compliant software prototyping and testing workflows.
 
 learning_objectives: 
-    - Learn the Functional Safety principles—including risk prevention, fault detection, and ASIL compliance—to design robust and certifiable automotive software systems.
-    - Understand how DDS enables low-latency, scalable, and fault-tolerant data communication for autonomous driving systems using a publish-subscribe architecture.
-    - Distributed Development for Functional Safety. Learn how to split the simulation platform into two independent units and leverage distributed development architecture to ensure functional safety.
+    - Apply Functional Safety principles, including risk prevention, fault detection, and ASIL compliance, to build robust, certifiable automotive systems.
+    - Use DDS for low-latency, scalable, and fault-tolerant communication in autonomous driving systems using a publish-subscribe architecture.
+    - Implement distributed development techniques by splitting the simulation platform into independent, safety-isolated components.
+
 
 prerequisites:
-    - Two Arm-based Neoverse cloud instances or a local Arm Neoverse Linux computer with at least 16 CPUs and 32GB of RAM.
-    - To have completed [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](/learning-paths/automotive/openadkit1_container/).
-    - Basic knowledge of using Docker.
+    - Access to two Arm-based Neoverse cloud instances, or a local Arm Neoverse Linux system with at least 16 CPUs and 32 GB of RAM.
+    - Completion of the [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](/learning-paths/automotive/openadkit1_container/) Learning Path.
+    - Basic familiarity with Docker.
 
 author: 
     - Odin Shen
