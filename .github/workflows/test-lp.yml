@@ -1,8 +1,5 @@
 name: Test Learning Path
-
-on: 
-  workflow_dispatch:
-  
+on: pull_request
 env:
   HUGO_VERSION: 0.130.0
   
