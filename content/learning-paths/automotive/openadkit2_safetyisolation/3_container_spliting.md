@@ -55,7 +55,7 @@ To enable ROS 2 and DDS communication between the two nodes, configure network a
 If you are using AWS EC2, both instances should be assigned to the same Security Group.
 
 Within the EC2 Security Group settings:
-- Add an inbound rule that allows all traffic from the same Security Group by setting he source to the security group itself.
+- Add an inbound rule that allows all traffic from the same Security Group by setting the source to the security group itself.
 - Outbound traffic is typically allowed by default and usually does not require changes.
 
 ![img2 alt-text#center](security_group.jpg "Figure 2: AWS Security Group Setting")
@@ -185,7 +185,7 @@ To ensure that each container uses your custom DDS configuration, mount the curr
 
 Add this to every container definition to ensure consistent behavior across the deployment.
 
-Here is the complete XML file:
+Here is the complete YAML file:
 
 ```YAML
 services:
@@ -353,7 +353,7 @@ export TIMEOUT=300
 docker compose -f docker-compose-2ins.yml run --rm simulator bash
 ```
 
-Once inside the container shell, activate the ROS 2 environment and start publishing to the /hello topic:
+Once inside the container shell, activate the ROS 2 environment and start listening to the /hello topic:
 
 ```bash
 # Inside the container:
