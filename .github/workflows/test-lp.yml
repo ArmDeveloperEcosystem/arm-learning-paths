@@ -1,5 +1,9 @@
 name: Test Learning Path
 on: pull_request
+
+env:
+  HUGO_VERSION: 0.130.0
+  
 jobs:
   Test-Pull-Request:
     runs-on: ubuntu-24.04-arm
@@ -8,9 +12,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ steps.vars.outputs.branch-name }}
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
       - name: Run hugo command to test site builds
         run: |
-          sudo snap install hugo --channel=extended
           hugo
       - name: Get all changed markdown files
         id: changed-markdown-files
