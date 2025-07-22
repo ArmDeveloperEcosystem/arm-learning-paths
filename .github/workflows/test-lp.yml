@@ -10,7 +10,7 @@ jobs:
           ref: ${{ steps.vars.outputs.branch-name }}
       - name: Run hugo command to test site builds
         run: |
-          sudo apt-get install -y hugo
+          sudo snap install hugo --channel=extended
           hugo
       - name: Get all changed markdown files
         id: changed-markdown-files
