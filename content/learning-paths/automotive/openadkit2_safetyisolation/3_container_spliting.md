@@ -353,7 +353,7 @@ export TIMEOUT=300
 docker compose -f docker-compose-2ins.yml run --rm simulator bash
 ```
 
-Once inside the container shell, activate the ROS 2 environment and start publishing to the /hello topic:
+Once inside the container shell, activate the ROS 2 environment and start listening to the /hello topic:
 
 ```bash
 # Inside the container:
