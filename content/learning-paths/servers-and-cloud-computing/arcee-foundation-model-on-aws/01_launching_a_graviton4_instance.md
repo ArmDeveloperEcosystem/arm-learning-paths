@@ -1,6 +1,6 @@
 ---
-title: Launching a Graviton4 instance
-weight: 2
+title: Provision your Graviton4 environment
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,164 +8,111 @@ layout: learningpathall
 
 ## Requirements
 
-  - An AWS account
+Before you begin, make sure you have the following:
 
-  - Access to launch an EC2 instance of type `c8g.4xlarge` (or larger) with at least 128 GB of storage
+- An AWS account  
+- Permission to launch a Graviton4 EC2 instance of type `c8g.4xlarge` (or larger)  
+- At least 128 GB of available storage
 
-For more information about creating an EC2 instance using AWS refer to [Getting Started with AWS](/learning-paths/servers-and-cloud-computing/csp/aws/).
+If you're new to EC2, check out the Learning Path [Getting Started with AWS](/learning-paths/servers-and-cloud-computing/csp/aws/).
 
-## AWS Console Steps
+## Create an SSH key pair
 
-Follow these steps to launch your EC2 instance using the AWS Management Console:
+To deploy the Arcee AFM-4.5B model, you need an EC2 instance running on Arm-based Graviton4 hardware.
 
-### Step 1: Create an SSH Key Pair
+To do this, start by signing in to the [AWS Management Console](https://console.aws.amazon.com), change to your preferred region, and navigate to the **EC2** service.
 
-1. **Navigate to EC2 Console**
+From there, you can create an SSH key pair that allows you to connect to your instance securely.
 
-   - Go to the [AWS Management Console](https://console.aws.amazon.com)
+## Set up secure access 
 
-   - Search for "EC2" and click on "EC2" service
+Open the **Key Pairs** section under **Network & Security** in the sidebar, and create a new key pair named `arcee-graviton4-key`. 
 
-2. **Create Key Pair**
+Next, select **RSA** as the key type, and **.pem** as the file format. Once you create the key, your browser will download the `.pem` file automatically.
 
-   - In the left navigation pane, click "Key Pairs" under "Network & Security"
+To ensure the key remains secure and accessible, move the `.pem` file to your SSH configuration directory, and update its permissions to restrict access.
 
-   - Click "Create key pair"
+To do this, on macOS or Linux, run:
 
-   - Enter name: `arcee-graviton4-key`
+```bash
+mkdir -p ~/.ssh
+mv arcee-graviton4-key.pem ~/.ssh/
+chmod 400 ~/.ssh/arcee-graviton4-key.pem
+```
 
-   - Select "RSA" as the key pair type
+## Launch and configure the EC2 instance
 
-   - Select ".pem" as the private key file format
+In the left sidebar of the EC2 dashboard, select **Instances**, and then **Launch instances**.
 
-   - Click "Create key pair"
+Use the following settings to configure your instance:
 
-   - The private key file will automatically download to your computer
+- **Name**: `Arcee-Graviton4-Instance`  
+- **Application and OS image**:  
+  - Select the **Quick Start** tab  
+  - Select **Ubuntu Server 24.04 LTS (HVM), SSD Volume Type**  
+  - Ensure the architecture is set to **64-bit (ARM)**  
+- **Instance type**: select `c8g.4xlarge` or larger  
+- **Key pair name**: select `arcee-graviton4-key` from the list
 
-3. **Secure the Key File**
+## Configure network
 
-   - Move the downloaded `.pem` file to the SSH configuration directory
+To enable internet access, choose a VPC with at least one public subnet.  
 
-     ```bash
-     mkdir -p ~/.ssh
-     mv arcee-graviton4-key.pem ~/.ssh
-     ```
+Then select a public subnet from the list.
 
-   - Set proper permissions on macOS or Linux:
+Under **Auto-assign public IP**, select **Enable**.
 
-     ```bash
-     chmod 400 ~/.ssh/arcee-graviton4-key.pem
-     ```
+## Configure firewall
 
-### Step 2: Launch EC2 Instance
+Select **Create security group**. Then select **Allow SSH traffic from** and select **My IP**.
 
-1. **Start Instance Launch**
+{{% notice Note %}}
+You'll only be able to connect to the instance from your current host, which is the most secure setting. Avoid selecting **Anywhere** unless absolutely necessary, as this setting allows anyone on the internet to attempt a connection.
 
-   - In the left navigation pane, click "Instances" under "Instances"
-
-   - Click "Launch instances" button
-
-2. **Configure Instance Details**
-
-   - **Name and tags**: Enter `Arcee-Graviton4-Instance` as the instance name
-
-   - **Application and OS Images**: 
-     - Click "Quick Start" tab
-
-     - Select "Ubuntu" 
-
-     - Choose "Ubuntu Server 24.04 LTS (HVM), SSD Volume Type"
-
-     - **Important**: Ensure the architecture shows "64-bit (ARM)" for Graviton compatibility
-
-   - **Instance type**: 
-     - Click on "Select instance type"
-
-     - Select `c8g.4xlarge` or larger
-
-3. **Configure Key Pair**
-
-     In "Key pair name", select the SSH keypair you created earlier (`Arcee-Graviton4-Instance`)
-   
-4. **Configure Network Settings**
-
-   - **Network**: Select a VPC with a least one public subnet. 
-
-   - **Subnet**: Select a public subnet in the VPC
-
-   - **Auto-assign Public IP**: Enable
-
-   - **Firewall (security groups)**
-
-     - Click on "Create security group"
-
-     - Click on "Allow SSH traffic from"
-
-     - In the dropdown list, select "My IP". 
-     
-
-{{% notice Notes %}}
-You will only be able to connect to the instance from your current host, which is the safest setting. Selecting "Anywhere" allows anyone on the Internet to attempt to connect; use at your own risk.
-
-Although this demonstration only requires SSH access, it is possible to use one of your existing security groups as long as it allows SSH traffic.
+You only need SSH access for this Learning Path. If you already have a security group that allows inbound SSH traffic, you can reuse it.
 {{% /notice %}}
 
-5. **Configure Storage**
+## Configure storage
 
-   - **Root volume**: 
-     - Size: `128` GB
+Set the **root volume size** to `128` GB, then select **gp3** as the volume type.
 
-     - Volume type: `gp3`
+## Review and launch the instance
 
-7. **Review and Launch**
+Review all your configuration settings, and when you're ready, select **Launch instance** to create your EC2 instance.
 
-   - Review all settings in the "Summary" section
+## Monitor the instance launch
 
-   - Click "Launch instance"
+After a few seconds, you should see a confirmation message like this:
 
-### Step 3: Monitor Instance Launch
+```
+Successfully initiated launch of instance (i-xxxxxxxxxxxxxxxxx)
+```
 
-1. **View Launch Status**
+If the launch fails, double-check the instance type, permissions, and network settings.
 
-   After a few seconds, you should see a message similar to this one:
+To retrieve the connection details, go to the **Instances** list in the EC2 dashboard.  
 
-   `Successfully initiated launch of instance (i-<unique instance ID>)`
+Then select your instance by selecting **Instance ID**.  
 
-   If instance launch fails, please review your settings and try again.
+In the **Details** tab, copy the **Public DNS** value - you’ll use this to connect through SSH.
 
-2. **Get Connection Information**
+## Connect to your instance
 
-   - Click on the instance id, or look for the instance in the Instances list in the EC2 console.
+Open a terminal and connect to the instance using the SSH key you downloaded earlier:
 
-   - In the "Details" tab of the instance, note the "Public DNS" host name
+```bash
+ssh -i ~/.ssh/arcee-graviton4-key.pem ubuntu@<PUBLIC_DNS_HOSTNAME>
+```
 
-   - This is the host name you'll use to connect via SSH, aka `PUBLIC_DNS_HOSTNAME`
+When prompted, type `yes` to confirm the connection.
 
-### Step 4: Connect to Your Instance
+You should now be connected to your Ubuntu instance running on Graviton4.
 
-1. **Open Terminal/Command Prompt**
-
-2. **Connect via SSH**
-   ```bash
-   ssh -i ~/.ssh/arcee-graviton4-key.pem ubuntu@<PUBLIC_DNS_HOSTNAME>
-   ```
-
-3. **Accept Security Warning**
-
-   - When prompted about authenticity of host, type `yes`
-
-   - You should now be connected to your Ubuntu instance
-
-### Important Notes
-
-- **Region Selection**: Ensure you're in your preferred AWS region before launching
-
-- **AMI Selection**: The Ubuntu 24.04 LTS AMI must be ARM64 compatible for Graviton processors
-
-- **Security**: Think twice about allowing SSH from anywhere (0.0.0.0/0). It is strongly recommended to restrict access to your IP address.
-
-- **Storage**: The 128GB EBS volume is sufficient for the Arcee model and dependencies
-
-- **Backup**: Consider creating AMIs or snapshots for backup purposes
-
+{{% notice Note %}}
+**Region**: make sure you're launching in your preferred AWS region.  
+**AMI**: confirm that the selected AMI supports the Arm64 architecture. 
+**Security**: for best practice, restrict SSH access to your own IP.  
+**Storage**: 128 GB is sufficient for the AFM-4.5B model and dependencies.  
+**Backup**: consider creating an AMI or snapshot after setup is complete.
+{{% /notice %}}
 

@@ -52,7 +52,7 @@ You can download a release file for the Arm architecture from GitHub and install
 
 ```bash { target="ubuntu:latest" }
 # Download the powershell '.tar.gz' archive
-curl -L -o /tmp/powershell.tar.gz https://github.com/PowerShell/PowerShell/releases/download/v7.4.1/powershell-7.4.1-linux-arm64.tar.gz
+curl -L -o /tmp/powershell.tar.gz https://github.com/PowerShell/PowerShell/releases/download/v7.5.2/powershell-7.5.2-linux-arm64.tar.gz
 
 # Create the target folder where powershell will be placed
 sudo mkdir -p /opt/microsoft/powershell/7
@@ -88,7 +88,7 @@ pwsh --version
 The version is printed:
 
 ```output
-PowerShell 7.4.1
+PowerShell 7.5.2
 ```
 
 You are now ready to use PowerShell on your Arm Linux computer.

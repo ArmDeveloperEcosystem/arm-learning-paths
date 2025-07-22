@@ -81,12 +81,13 @@ From there, you can then run the audiogen application, which requires just three
 * **Model Path:** The directory containing your LiteRT models and spiece.model files
 * **Prompt:** A text description of the desired audio (e.g., warm arpeggios on house beats 120BPM with drums effect)
 * **CPU Threads:** The number of CPU threads to use (e.g., 4)
+* **Seed:** A random number to seed the generation (e.g. 1234)
 
 Play around with the advice from [Download and test the model](../2-testing-model) section.
 
 ```bash
 cd /data/local/tmp/app
-LD_LIBRARY_PATH=. ./audiogen . "warm arpeggios on house beats 120BPM with drums effect" 4
+LD_LIBRARY_PATH=. ./audiogen . "warm arpeggios on house beats 120BPM with drums effect" 4 1234
 exit
 ```
 
