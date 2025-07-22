@@ -1,6 +1,6 @@
 ---
 title: Split into multiple cloud container instances
-weight: 4
+weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

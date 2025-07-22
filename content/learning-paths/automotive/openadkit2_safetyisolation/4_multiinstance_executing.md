@@ -1,7 +1,7 @@
 ---
 title: Executing OpenAD Kit in a Distributed ROS 2 Instances
 
-weight: 5
+weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

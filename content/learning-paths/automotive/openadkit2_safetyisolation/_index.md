@@ -1,5 +1,5 @@
 ---
-title: Prototype safety-critical isolation for autonomous application on Neoverse
+title: Prototype safety-critical isolation for autonomous driving systems on Neoverse
 
 draft: true
 cascade:
@@ -7,17 +7,17 @@ cascade:
 
 minutes_to_complete: 60
 
-who_is_this_for: This Learning Path targets advanced automotive software engineers developing safety-critical systems. It demonstrates how to use Arm Neoverse cloud infrastructure to accelerate ISO-26262 compliant software prototyping and testing workflows.
+who_is_this_for: This Learning Path is for experienced automotive engineers developing safety-critical systems. You'll learn how to accelerate ISO 26262-compliant development workflows using Arm-based cloud compute, containerized simulation, and DDS-based communication.
 
 learning_objectives: 
-    - Apply functional safety principles, including risk prevention, fault detection, and ASIL compliance, to build robust, certifiable automotive systems.
-    - Use DDS and a publish-subscribe architecture for low-latency, scalable, and fault-tolerant communication in autonomous driving systems.
-    - Implement distributed development by separating the simulation platform into independent,     safety-isolated components.
+    - Apply functional safety principles, including risk prevention, fault detection, and ASIL compliance, to build robust, certifiable automotive systems
+    - Use DDS and a publish-subscribe architecture for low-latency, scalable, and fault-tolerant communication in autonomous driving systems
+    - Implement distributed development by separating the simulation platform into independent,     safety-isolated components
 
 prerequisites:
-    - Access to two Arm-based Neoverse cloud instances, or a local Arm Neoverse Linux system with at least 16 CPUs and 32 GB of RAM.
-    - Completion of the [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](/learning-paths/automotive/openadkit1_container/) Learning Path.
-    - Basic familiarity with Docker.
+    - Access to two Arm-based Neoverse cloud instances, or a local Arm Neoverse Linux system with at least 16 CPUs and 32 GB of RAM
+    - Completion of the [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](/learning-paths/automotive/openadkit1_container/) Learning Path
+    - Basic familiarity with Docker
 
 author: 
     - Odin Shen
@@ -32,6 +32,7 @@ tools_software_languages:
     - Python
     - Docker
     - ROS2
+    - DDS
 operatingsystems:
     - Linux
 
