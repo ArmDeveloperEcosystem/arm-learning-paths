@@ -1,5 +1,5 @@
 ---
-title: Prototype safety-critical isolation for autonomous systems on Neoverse
+title: Prototype safety-critical isolation for autonomous application on Neoverse
 
 draft: true
 cascade:
