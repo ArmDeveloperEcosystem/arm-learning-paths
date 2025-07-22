@@ -36,7 +36,7 @@ The benchmarking results demonstrate the power of quantization and Arm-based com
 
 ## The AWS Graviton4 advantage
 
-AWS Graviton4 processors, built on the Arm Neoverse-V2 architecture, provide:
+AWS Graviton4 processors, built on the Arm Neoverse V2 architecture, provide:
 
 - Superior performance per watt compared to x86 alternatives
 - Cost savings of 20–40% for compute-intensive workloads
