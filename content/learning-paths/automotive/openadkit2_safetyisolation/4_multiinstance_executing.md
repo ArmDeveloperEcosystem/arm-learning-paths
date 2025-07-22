@@ -27,8 +27,8 @@ On each instance, copy the appropriate launch script into the `openadkit_demo.au
     !/bin/bash
     # Configure the environment variables
     export SCRIPT_DIR=/home/ubuntu/openadkit_demo.autoware/docker
-    CONF_FILE_PASS=$SCRIPT_DIR/etc/simulation/config/pass_static_obstacle_avoidance.param.yaml
-    CONF_FILE_FAIL=$SCRIPT_DIR/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml
+    export CONF_FILE_PASS=$SCRIPT_DIR/etc/simulation/config/pass_static_obstacle_avoidance.param.yaml
+    export CONF_FILE_FAIL=$SCRIPT_DIR/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml
 
     export CONF_FILE=$CONF_FILE_FAIL
     export COMMON_FILE=$SCRIPT_DIR/etc/simulation/config/common.param.yaml
@@ -42,7 +42,7 @@ On each instance, copy the appropriate launch script into the `openadkit_demo.au
   
   {{< tab header="Visualizer & Simulator" language="bash">}}
     #!/bin/bash
-    SCRIPT_DIR=/home/ubuntu/openadkit_demo.autoware/docker
+    export SCRIPT_DIR=/home/ubuntu/openadkit_demo.autoware/docker
 
     export CONF_FILE_FAIL=$SCRIPT_DIR/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml
     export CONF_FILE=$CONF_FILE_FAIL
