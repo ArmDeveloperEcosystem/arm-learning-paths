@@ -2,6 +2,7 @@ name: Test Learning Path
 
 on: 
   workflow_dispatch:
+  
 env:
   HUGO_VERSION: 0.130.0
   
