@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 ## Implement safety-critical isolation with Safety Island architecture
 
-In automotive systems, a General ECU (Electronic Control Unit) typically runs non-critical tasks such as infotainment or navigation, whereas a Safety Island is dedicated to executing safety-critical control logic (e.g., braking, steering) with strong isolation, redundancy, and determinism.
+In automotive systems, a General ECU (Electronic Control Unit) typically runs non-critical tasks such as infotainment or navigation, whereas a Safety Island is dedicated to executing safety-critical control logic (for example, braking and steering) with strong isolation, redundancy, and determinism.
 
 The table below compares the characteristics of a General ECU and a Safety Island in terms of their role in supporting Functional Safety.
 
@@ -25,7 +25,7 @@ Safety Island is an independent safety subsystem separate from the main processo
 
 Key Capabilities of Safety Island
 - System Health Monitoring  
-   - Continuously monitors the operational status of the main processor (e.g., ADAS control unit, ECU) and detects potential errors or anomalies.
+   - Continuously monitors the operational status of the main processor (for example, ADAS control unit, ECU) and detects potential errors or anomalies.
 - Fault Detection and Isolation
    - Independently evaluates and initiates emergency handling if the main processing unit encounters errors, overheating, computational failures, or unresponsiveness.
 - Providing Essential Safety Functions

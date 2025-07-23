@@ -10,7 +10,7 @@ layout: learningpathall
 
 At its core, functional safety is about managing risk and reducing the impact of system failures.
 
-In autonomous vehicles, for example, functional safety ensures that if sensor data is incorrect, the system can enter a safe state and prevent dangerous driving decisions.
+In autonomous vehicles, for example, functional safety ensures that if sensor data is incorrect, the system can transition into a safe state and avoid unsafe driving behavior.
 
 The three core objectives of functional safety are:
 
@@ -20,11 +20,18 @@ The three core objectives of functional safety are:
 
 - **Mitigation** controls the impact of failures to ensure the system stays safe, even when things go wrong.
 
-These three principles form the foundation for building safer, more reliable software systems.
+In practice, these principles might be implemented through:
+
+- Redundant sensor fusion code paths
+- Timeout mechanisms for control loops
+- Watchdog timers that reset components on fault detection
+- Safe-state logic baked into actuator control routines
+
+These three principles of prevention, detection, and mitigation form the foundation for building safer, more reliable software systems.
 
 This approach is critical in systems like autonomous vehicles and medical devices, where failures can have serious consequences.
 
-
+In the next step, you’ll explore how functional safety principles are formalized through safety standards like ISO 26262 and applied to real-world systems.
 
 
 

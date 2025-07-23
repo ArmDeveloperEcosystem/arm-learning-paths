@@ -1,5 +1,5 @@
 ---
-title: Executing OpenAD Kit in a Distributed ROS 2 Instances
+title: Execute OpenAD Kit across distributed ROS 2 instances
 
 weight: 9
 
@@ -7,14 +7,14 @@ weight: 9
 layout: learningpathall
 ---
 
-### Demonstrating the Distributed OpenAD Kit in Action
+## Run OpenAD Kit on distributed ROS 2 instances
 
 In this section, you’ll bring all the previous setup together and execute the full OpenAD Kit demo across two Arm-based instances.
 
 OpenAD Kit is an open-source reference design for autonomous driving workloads on Arm. 
 It demonstrates how Autoware modules can be deployed on scalable infrastructure, whether on a single machine or split across multiple compute nodes.
 
-#### Preparing the Execution Scripts
+## Prepare the execution scripts
 
 This setup separates the simulation/visualization environment from the planning-control logic, allowing you to explore how ROS 2 nodes communicate over a distributed system using DDS (Data Distribution Service).
 
@@ -71,7 +71,7 @@ You can also find the prepared launch scripts `opad_planning.sh` and `opad_sim_v
 
 These scripts encapsulate the required environment variables and container commands for each role.
 
-#### Running the Distributed OpenAD Kit Demo
+#### Run the distributed OpenAD Kit demo
 
 On the Planning-Control node, execute:
 
@@ -92,7 +92,7 @@ http://[Visualizer public IP address]:6080/vnc.html
 
 You can open this link in a browser to observe the demo behavior, which will closely resemble the output from the [previous learning path](http://learn.arm.com/learning-paths/automotive/openadkit1_container/4_run_openadkit/). 
 
-![img3 alt-text#center](split_aws_run.gif "Figure 4: Simulation")
+![Distributed OpenAD Kit simulation running on two Arm-based instances with visualizer and simulator coordination over DDS](split_aws_run.gif "Figure 4: Visualizer output from a distributed OpenAD Kit simulation showing ROS 2 modules running across two cloud instances using DDS communication.")
 
 The containers are now distributed across two separate instances, enabling real-time, cross-node communication.
 Behind the scenes, this architecture demonstrates how DDS manages low-latency, peer-to-peer data exchange in a distributed ROS 2 environment.
