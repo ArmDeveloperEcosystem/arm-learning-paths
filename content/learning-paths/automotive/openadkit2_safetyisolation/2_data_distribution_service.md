@@ -1,12 +1,12 @@
 ---
-title: How to Use Data Distribution Service (DDS)
+title: How to use Data Distribution Service (DDS)
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-### Introduction to DDS
+## Introduction to DDS
 Data Distribution Service (DDS) is a real-time, high-performance middleware designed for distributed systems.
 It is particularly valuable in automotive software development, including applications such as autonomous driving (AD) and advanced driver assistance systems (ADAS). 
 
@@ -16,7 +16,12 @@ In modern vehicles, multiple sensors such as LiDAR, radar, and cameras must cont
 
 DDS ensures these components share data seamlessly and in real time, both within the vehicle and across infrastructure such as V2X systems, including traffic lights and road sensors.
 
-### Why Automotive Software Needs DDS
+{{% notice Tip %}}
+To get started with open-source DDS on Arm platforms, check out the [Installation Guide for CycloneDDS](https://learn.arm.com/install-guides/cyclonedds) on how to install open-source DDS on an Arm platform.
+{{% /notice %}}
+
+
+## Why automotive software needs DDS
 
 Next-generation automotive software architectures, such as SOAFEE, depend on deterministic, distributed communication. Traditional client-server models introduce latency and create single points of failure. In contrast, DDS uses a publish-subscribe model that enables direct, peer-to-peer communication across system components.
 
@@ -26,7 +31,7 @@ Additionally, DDS provides a flexible Quality of Service (QoS) configuration, al
 
 These capabilities make DDS an essential backbone for autonomous vehicle stacks, where real-time sensor fusion and control coordination are critical for safety and performance.
 
-### DDS Architecture and Operation
+## DDS architecture and operation
 
 DDS uses a data-centric publish-subscribe (DCPS) model, allowing producers and consumers of data to communicate without direct dependencies. This modular approach enhances system flexibility and maintainability, making it well suited for complex automotive environments.
 
@@ -41,7 +46,7 @@ Each domain contains multiple topics, representing specific data types such as v
 
 For example, in an autonomous vehicle, LiDAR, radar, and cameras continuously generate large amounts of sensor data. The perception module subscribes to these sensor topics, processes the data, and then publishes detected objects and road conditions to other components like path planning and motion control. Since DDS automatically handles participant discovery and message distribution, engineers do not need to manually configure communication paths, reducing development complexity.
 
-### Real-World Use in Autonomous Driving
+## Real-world use in autonomous driving
 
 DDS is widely used in autonomous driving systems, where real-time data exchange is crucial. A typical use case involves high-frequency sensor data transmission and decision-making coordination between vehicle subsystems.
 
@@ -53,7 +58,7 @@ For example, Autoware, an open-source autonomous driving software stack, uses DD
 
 The Perception stack publishes detected objects from LiDAR and camera sensors to a shared topic, which is then consumed by the Planning module in real-time. Using DDS allows each subsystem to scale independently while preserving low-latency and deterministic communication.
 
-### Publish-Subscribe Model and Data Transmission
+## Publish-subscribe model and data transmission
 
 Let’s explore how DDS’s publish-subscribe model fundamentally differs from traditional communication methods in terms of scalability, latency, and reliability.
 
@@ -68,7 +73,7 @@ DDS supports multiple transport mechanisms to optimize communication efficiency:
 * UDP or TCP/IP is used for inter-device communication, such as V2X applications where vehicles exchange safety-critical messages.
 * Automatic participant discovery eliminates the need for manual configuration, allowing DDS nodes to detect and establish connections dynamically.
 
-#### Comparison of DDS and Traditional Communication Methods
+## Compare DDS with traditional communication models
 
 The following table highlights how DDS improves upon traditional client-server communication patterns in the context of real-time automotive applications:
 
@@ -84,7 +89,6 @@ These features make DDS a highly adaptable solution for automotive software engi
 
 In this section, you learned how DDS enables low-latency, scalable, and fault-tolerant communication for autonomous vehicle systems.
 
-Its data-centric publish-subscribe architecture eliminates the limitations of traditional client-server models and forms the backbone of modern automotive software frameworks such as ROS 2 and SOAFEE.
+Its data-centric publish-subscribe architecture removes the limitations of traditional client-server models and forms the backbone of modern automotive software frameworks like ROS 2 and SOAFEE.
 
-To get started with open-source DDS on Arm platforms, refer to this [installation guide for Cyclonedds](https://learn.arm.com/install-guides/cyclonedds) on how to install open-source DDS on an Arm platform.
 

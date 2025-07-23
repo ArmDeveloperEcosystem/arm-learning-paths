@@ -15,9 +15,7 @@ In autonomous vehicles, for example, functional safety ensures that if sensor da
 The three core objectives of functional safety are:
 
 - **Prevention** reduces the likelihood of errors through rigorous software development processes and testing. For example, electric vehicles monitor battery temperature to prevent overheating.
-
 - **Detection** quickly identifies errors using built-in diagnostic mechanisms, such as built-in self-test routines.
-
 - **Mitigation** controls the impact of failures to ensure the system stays safe, even when things go wrong.
 
 In practice, these principles might be implemented through:
@@ -25,9 +23,9 @@ In practice, these principles might be implemented through:
 - Redundant sensor fusion code paths
 - Timeout mechanisms for control loops
 - Watchdog timers that reset components on fault detection
-- Safe-state logic baked into actuator control routines
+- Safe-state logic embedded in actuator control routines
 
-These three principles of prevention, detection, and mitigation form the foundation for building safer, more reliable software systems.
+Together, prevention, detection, and mitigation form the foundation for building safer, more reliable software systems.
 
 This approach is critical in systems like autonomous vehicles and medical devices, where failures can have serious consequences.
 

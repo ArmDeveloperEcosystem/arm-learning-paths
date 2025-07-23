@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Understand the role of functional safety in software development
 
-Functional safety ensures that systems can detect faults and respond in ways that keep people and equipment safe. It helps prevent harm by ensuring that systems remain in a known, safe state, even when errors occur.
+Functional safety helps systems detect faults and respond in ways that keep people and equipment safe. It helps prevent harm by ensuring that systems remain in a known, safe state, even when errors occur.
 
 This concept is especially critical in domains like automotive, autonomous driving, medical devices, industrial control, robotics, and aerospace. In these systems, failures can have severe real-world consequences.
 
@@ -22,4 +22,4 @@ To design for functional safety, developers must consider:
 - Development processes that align with safety standards
 
 
-In the following sections, you'll explore how to apply these principles throughout the software lifecycle, from early risk assessment and architectural design to runtime isolation and ISO 26262 compliance.
+In the following sections, you'll learn how to apply these principles throughout the software lifecycle, from early risk assessment and architectural design to runtime isolation and ISO 26262 compliance.

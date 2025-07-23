@@ -6,25 +6,30 @@ weight: 6
 layout: learningpathall
 ---
 
-## Functional Safety in the Software Development Lifecycle
+## The software development lifecycle
 
-Functional Safety impacts both hardware and software development, particularly in areas such as requirement changes, version management, and testing validation.  
-For example, in ASIL-D level applications, every code modification requires a complete impact analysis and regression testing to ensure that new changes do not introduce additional risks.
+Functional Safety affects both hardware and software development, particularly in areas such as requirement changes, version control, and test validation. For example, in ASIL-D level applications, every code change must go through a full impact analysis and regression testing to ensure it doesn't introduce new risks.
 
-### Functional Safety Requirements in Software Development
+## Software development practices for functional safety
 
-These practices ensure the software development process meets industry safety standards and can withstand system-level failures:
-- Requirement Specification
-   - Clearly defining safety-critical requirements and conducting risk assessments.
-- Safety-Oriented Programming
-   - Following MISRA C, CERT C/C++ standards and using static analysis tools to detect errors.
-- Fault Handling Mechanisms
-   - Implementing redundancy design and health monitoring to handle anomalies.
-- Testing and Verification  
-   - Using Hardware-in-the-Loop (HIL) testing to ensure software safety in real hardware environments.
-- Version Management and Change Control  
-   - Using Git, JIRA, Polarion to track changes for safety audits.
+These practices ensure that software meets industry standards and can withstand system-level failures:
+- **Define requirements clearly**  
+  - Specify safety-critical requirements and conduct formal risk assessments.
 
-By establishing an ASIL Partitioning software development environment and leveraging SOAFEE technologies, you can enhance software consistency and maintainability in Functional Safety applications.
+- **Follow safety-oriented programming standards**  
+  - Use MISRA C or CERT C/C++ and static analysis tools to detect unsafe behavior.
 
-This Learning Path follows [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](/learning-paths/automotive/openadkit1_container/) and introduces Functional Safety design practices from the earliest development stages.
+- **Implement fault-handling mechanisms**  
+  - Use redundancy, health monitoring, and fail-safe logic to manage faults gracefully.
+
+- **Test and verify rigorously**  
+  - Use Hardware-in-the-Loop (HIL) testing to validate behavior under realistic conditions.
+
+- **Track changes with version control and audits**  
+  - Use tools like Git, JIRA, or Polarion to manage revisions and maintain traceability for audits.
+
+By building an ASIL-partitioned development environment and adopting SOAFEE technologies, you can improve software maintainability and meet functional safety requirements more consistently.
+
+{{% notice Note %}}
+This Learning Path builds on [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](/learning-paths/automotive/openadkit1_container/). It introduces functional safety practices from the earliest stages of software development.
+{{% /notice %}}
