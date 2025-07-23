@@ -1,22 +1,36 @@
 ---
-title: Purpose and risk management principles
+title: Understand functional safety risks
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Functional safety: purpose and risk management principles
+## Manage risk with functional safety principles
+
+At its core, functional safety is about managing risk and reducing the impact of system failures.
+
+In autonomous vehicles, for example, functional safety ensures that if sensor data is incorrect, the system can enter a safe state and prevent dangerous driving decisions.
+
+The three core objectives of functional safety are:
+
+- **Prevention** reduces the likelihood of errors through rigorous software development processes and testing. For example, electric vehicles monitor battery temperature to prevent overheating.
+
+- **Detection** quickly identifies errors using built-in diagnostic mechanisms, such as built-in self-test routines.
+
+- **Mitigation** controls the impact of failures to ensure the system stays safe, even when things go wrong.
+
+These three principles form the foundation for building safer, more reliable software systems.
+
+This approach is critical in systems like autonomous vehicles and medical devices, where failures can have serious consequences.
 
 
-The core of Functional Safety lies in risk management, which aims to reduce the impact of system failures.
 
-In autonomous vehicles, Functional Safety ensures that if sensor data is incorrect, the system can enter a safe state, preventing incorrect driving decisions.
 
-The three core objectives of Functional Safety are:
-1. Prevention: Reducing the likelihood of errors through rigorous software development processes and testing. In electric vehicles, battery systems monitor temperature to prevent overheating.
-2. Detection: Quickly identifying errors using built-in diagnostic mechanisms, such as built-in self-test.
-3. Mitigation: Controlling the impact of failures to ensure the overall safety of the system.
 
-This approach is critical in applications such as autonomous driving, flight control, and medical implants, where failures can result in severe consequences.
+
+
+
+
+
 

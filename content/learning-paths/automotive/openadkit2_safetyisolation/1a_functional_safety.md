@@ -1,25 +1,25 @@
 ---
-title: Functional safety for automotive software development
+title: Why functional safety matters in software systems 
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Why functional safety matters 
+## Understand the role of functional safety in software development
 
-Functional safety refers to a system's ability to detect potential faults and respond appropriately to ensure that the system remains in a safe state, preventing harm to individuals or damage to equipment. 
+Functional safety ensures that systems can detect faults and respond in ways that keep people and equipment safe. It helps prevent harm by ensuring that systems remain in a known, safe state, even when errors occur.
 
-This is particularly important in automotive, autonomous driving, medical devices, industrial control, robotics and aerospace applications, where system failures can lead to severe consequences.
+This concept is especially critical in domains like automotive, autonomous driving, medical devices, industrial control, robotics, and aerospace. In these systems, failures can have severe real-world consequences.
 
-In software development, functional safety focuses on minimizing risks through software design, testing, and validation to ensure that critical systems operate in a predictable, reliable, and verifiable manner. 
+In software development, functional safety focuses on minimizing risks through careful design, rigorous testing, and thorough validation. The goal is to make sure that critical systems behave predictably, reliably, and verifiably, even under fault conditions.
 
-This means developers must consider:
+To design for functional safety, developers must consider:
 
-- Error detection mechanisms
-- Exception handling
-- Redundancy design
-- Development processes compliant with safety standards
+- Error detection mechanisms  
+- Exception handling strategies  
+- Redundant system design  
+- Development processes that align with safety standards
 
-In the following sections, you'll explore how to apply these principles throughout the software lifecycle, which ranges from risk assessment and architectural design to runtime isolation and compliance with ISO 26262.
 
+In the following sections, you'll explore how to apply these principles throughout the software lifecycle, from early risk assessment and architectural design to runtime isolation and ISO 26262 compliance.
