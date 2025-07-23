@@ -85,7 +85,7 @@ The OpenShift CLI (`oc`) is built as a superset of the Kubernetes CLI (`kubectl`
 This means:
 
 - You can use `oc` anywhere you would use `kubectl`
-- OpenShift-specific features such as `oc login`, `oc new-project`, `oc new-app`, are available to manageme OpenShift resources
+- OpenShift-specific features such as `oc login`, `oc new-project`, `oc new-app`, are available to manage OpenShift resources
 
 ## How do I verify the OpenShift CLI installation?
 
