@@ -28,7 +28,7 @@ These practices ensure that software meets industry standards and can withstand 
 - **Track changes with version control and audits**  
   - Use tools like Git, JIRA, or Polarion to manage revisions and maintain traceability for audits.
 
-By building an ASIL-partitioned development environment and adopting SOAFEE technologies, you can improve software maintainability and meet functional safety requirements more consistently.
+Building an ASIL-partitioned development environment and adopting SOAFEE technologies can help improve software maintainability and ensure consistent compliance with functional safety standards.
 
 {{% notice Note %}}
 This Learning Path builds on [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](/learning-paths/automotive/openadkit1_container/). It introduces functional safety practices from the earliest stages of software development.

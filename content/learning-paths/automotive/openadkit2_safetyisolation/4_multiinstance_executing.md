@@ -93,10 +93,10 @@ You can open this link in a browser to observe the demo behavior, which will clo
 
 ![Distributed OpenAD Kit simulation running on two Arm-based instances with visualizer and simulator coordination over DDS](split_aws_run.gif "Figure 4: Visualizer output from a distributed OpenAD Kit simulation showing ROS 2 modules running across two cloud instances using DDS communication.")
 
-You’ve now run the OpenAD Kit across two nodes with separated control and visualization roles. DDS enabled real-time communication between the ROS 2 nodes across the network, with synchronized behavior between the planning and simulation components.
+You’ve now run the OpenAD Kit across two nodes with separated control and visualization roles. DDS enabled real-time, peer-to-peer communication between the ROS 2 nodes, supporting synchronized behavior across the planning and simulation components deployed on two separate instances.
 
 The containers are now distributed across two separate instances, enabling real-time, cross-node communication. Behind the scenes, this architecture demonstrates how DDS manages low-latency, peer-to-peer data exchange in a distributed ROS 2 environment.
 
-To support demonstration and validation, the simulator is configured to run three times sequentially, giving you multiple opportunities to observe how data flows between nodes and verify that communication remains stable across each cycle.
+The simulator runs three times by default, giving you multiple chances to observe data flow and verify stable communication between nodes.
 
-Now that you've seen the distributed system in action, try adjusting QoS settings, simulating network delays, or adding a third node to expand the architecture.
+Now that you’ve seen the distributed system in action, try modifying QoS settings, simulating network conditions, or scaling to a third node to explore more complex configurations.

@@ -10,7 +10,7 @@ layout: learningpathall
 Data Distribution Service (DDS) is a real-time, high-performance middleware designed for distributed systems.
 It is particularly valuable in automotive software development, including applications such as autonomous driving (AD) and advanced driver assistance systems (ADAS). 
 
-DDS offers a decentralized architecture that enables scalable, low-latency, and reliable data exchange, making it ideal for managing high-frequency sensor streams. 
+DDS uses a decentralized architecture that supports scalable, low-latency, and reliable data exchange, which is ideal for managing high-frequency sensor streams.
 
 In modern vehicles, multiple sensors such as LiDAR, radar, and cameras must continuously communicate with compute modules. 
 
@@ -87,8 +87,9 @@ The following table highlights how DDS improves upon traditional client-server c
 
 These features make DDS a highly adaptable solution for automotive software engineers seeking to develop scalable, real-time communication frameworks.
 
-In this section, you learned how DDS enables low-latency, scalable, and fault-tolerant communication for autonomous vehicle systems.
+DDS is a critical building block in distributed automotive systems. By enabling scalable, low-latency communication and fault tolerance, it powers real-time coordination in modern architectures like ROS 2, SOAFEE, and Autoware.
 
 Its data-centric publish-subscribe architecture removes the limitations of traditional client-server models and forms the backbone of modern automotive software frameworks like ROS 2 and SOAFEE.
+
 
 
