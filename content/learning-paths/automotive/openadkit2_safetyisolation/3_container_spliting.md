@@ -1,12 +1,12 @@
 ---
-title: Split into multiple cloud container instances
+title: Deploy OpenAD Kit across multiple cloud instances
 weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-### System Architecture and Component Design
+## Refactor OpenAD Kit for distributed deployment
 
 Now that you’ve explored the concept of a Safety Island, a dedicated subsystem responsible for executing safety-critical control logic, and learned how DDS (Data Distribution Service) enables real-time, distributed communication, you’ll refactor the original OpenAD Kit architecture into a multi-instance deployment.
 
@@ -19,7 +19,7 @@ In this session, you will split the simulation and visualization stack from the 
 
 These nodes communicate using ROS 2 with DDS as the middleware layer, ensuring low-latency and fault-tolerant data exchange between components.
 
-### Architectural Benefits
+## Architectural Benefits
 
 This architecture brings several practical benefits:
 
@@ -37,7 +37,7 @@ With containerized separation, you can build, test, and deploy each module indep
 
 ![img1 alt-text#center](aws_example.jpg "Figure 1: Split instance example in AWS")
 
-### Networking Setting 
+## Configure networking for DDS communication
 
 To begin, launch two Arm-based VM instances. AWS EC2 is used, but you can use any Arm instances.
 
@@ -58,19 +58,19 @@ Within the EC2 Security Group settings:
 - Add an inbound rule that allows all traffic from the same Security Group by setting the source to the security group itself.
 - Outbound traffic is typically allowed by default and usually does not require changes.
 
-![img2 alt-text#center](security_group.jpg "Figure 2: AWS Security Group Setting")
+![img2 alt-text#center](security_group.jpg "AWS Security Group Setting")
 
 This configuration allows automatic discovery and peer-to-peer communication between DDS participants across the two instances.
 
 Once both systems are operational, record the private IP addresses of each instance. You will need them when configuring CycloneDDS peer discovery in the next step.
 
-### New Docker YAML Configuration Setting
+## Update Docker and DDS configuration
 
 Before you begin, ensure that Docker is installed on both of your development instances. Review the [Docker install guide](/install-guides/docker/docker-engine/) if needed.
 
 First, clone the demo repo and create xml file called `cycloneDDS.xml`
 
-#### Step 1: Clone the repository and prepare configuration files
+## Clone the repository and prepare configuration files
 
 ```bash
 git clone https://github.com/odincodeshen/openadkit_demo.autoware.git
@@ -104,7 +104,7 @@ This command will download all images defined in the docker-compose-2ins.yml fil
 - odinlmshen/autoware-planning-control:v1.0
 - odinlmshen/autoware-visualizer:v1.0
 
-#### Step 2: Configure CycloneDDS for Peer-to-Peer Communication
+## Configure CycloneDDS for peer-to-peer communication
 
 The cycloneDDS.xml file is used to customize how CycloneDDS (the middleware used by ROS 2) discovers and communicates between distributed nodes.
 
@@ -146,12 +146,12 @@ Please copy the following configuration into docker/cycloneDDS.xml on both machi
 3. You can find the more detail about CycloneDDS setting [Configuration](https://cyclonedds.io/docs/cyclonedds/latest/config/config_file_reference.html#cyclonedds-domain-internal-socketreceivebuffersize)
 {{% /notice %}}
 
-#### Step 3: Update the Docker Compose Configuration for Multi-Host Deployment
+## Update the Docker Compose Configuration for Multi-Host Deployment
 
 To support running containers across two separate hosts, you’ll need to modify the docker/docker-compose-2ins.yml file. 
 This includes removing inter-container dependencies and updating the network and environment configuration.
 
-##### Remove Cross-Container Dependency
+## Remove cross-container dependency
 
 Since the planning-control and simulator containers will now run on different machines, you must remove any depends_on references between them to prevent Docker from attempting to start them on the same host.
 
@@ -258,7 +258,7 @@ services:
 
 Before moving to the next step, make sure that `docker-compose-2ins.yml` and `cycloneDDS.xml` are already present on both instances.
 
-#### Step 4: Optimize Network Settings for DDS Communication
+## Optimize Network Settings for DDS Communication
 
 In a distributed DDS setup, `high-frequency UDP traffic` between nodes may lead to  `IP packet fragmentation` or  `buffer overflows`, especially under load. 
 These issues can degrade performance or cause unexpected system behavior.
@@ -295,7 +295,7 @@ Links to documentation:
  - [ROS2 documentation](https://docs.ros.org/en/humble/How-To-Guides/DDS-tuning.html#cyclone-dds-tuning)
 
 
-#### Step 5: Verifying Cross-Instance DDS Communication with ROS 2
+## Verify DDS communication between instances using ROS 2
 
 To confirm that ROS 2 nodes can exchange messages across two separate EC2 instances using DDS, this test will walk you through a minimal publisher–subscriber setup using a custom topic.
 
