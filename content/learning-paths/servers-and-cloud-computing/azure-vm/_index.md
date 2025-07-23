@@ -1,9 +1,13 @@
 ---
 title:  Create Azure Linux 3.0 custom Arm VM
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 120  
 
-who_is_this_for: This learning path helps developers create a custom Azure Linux 3.0 VM for Arm and utilize the default software stack provided by the Microsoft team.
+who_is_this_for: This Learning Path helps developers create a custom Azure Linux 3.0 virtual machine for Arm and utilize the default software stack provided by Microsoft.
 
 
 learning_objectives:
@@ -16,16 +20,15 @@ prerequisites:
     - A local Linux machine with [QEMU](https://www.qemu.org/download/) installed to emulate Aarch64.
     - An [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) installed and authenticated on your local machine.
     
-author: Zach Lasiuk
+author: Jason Andrews
 
 ### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
 cloud_service_providers: Microsoft Azure
 
-
 armips:
-    - Neoverse-N2
+    - Neoverse
 
 tools_software_languages:
   - QEMU
