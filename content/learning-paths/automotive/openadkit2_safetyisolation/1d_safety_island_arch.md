@@ -6,9 +6,6 @@ weight: 5
 layout: learningpathall
 ---
 
-
-
-
 ## Functional safety: purpose and risk management principles
 
 
