@@ -124,7 +124,8 @@ Copy the following configuration into docker/cycloneDDS.xml on both machines, an
 			<MaxAutoParticipantIndex>1000</MaxAutoParticipantIndex>
 			<ParticipantIndex>auto</ParticipantIndex>
 			<Peers>
-				<Peer address="192.168.xx.yy"/>
+				<!-- Replace these with the private IP addresses of both EC2 instances -->
+        <Peer address="192.168.xx.yy"/>
 				<Peer address="192.168.aa.bb"/>
 			</Peers>
 		</Discovery>
@@ -304,6 +305,7 @@ This will simulate outbound DDS traffic from the planning-control container.
 Set the required environment variables and launch the planning-control container:
 
 ```bash
+# Replace this path with the location where you cloned the repository, if different
 export SCRIPT_DIR=/home/ubuntu/openadkit_demo.autoware/docker
 export CONF_FILE=$SCRIPT_DIR/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml 
 export COMMON_FILE=$SCRIPT_DIR/etc/simulation/config/common.param.yaml
