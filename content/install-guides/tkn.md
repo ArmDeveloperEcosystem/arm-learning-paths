@@ -1,8 +1,6 @@
 ---
 title: Tekton CLI (tkn)
 
-draft: true
-
 author: Jason Andrews
 official_docs: https://tekton.dev/docs/cli/
 
@@ -53,7 +51,7 @@ arm64
 
 ## How do I download and install the Tekton CLI?
 
-There are multiple ways to install the Tekton CLI. The methods below download the latest stable version directly from the GitHub releases.
+You can install the Tekton CLI in multiple ways. The following methods download the latest stable release directly from GitHub.
 
 ### Install on Arm Linux
 
@@ -64,6 +62,10 @@ TKN_VERSION=$(curl -s https://api.github.com/repos/tektoncd/cli/releases/latest 
 curl -LO https://github.com/tektoncd/cli/releases/download/${TKN_VERSION}/tektoncd-cli-${TKN_VERSION#v}_Linux-ARM64.deb
 sudo apt install ./tektoncd-cli-${TKN_VERSION#v}_Linux-ARM64.deb
 ```
+
+{{% notice Tip %}}
+If the version query fails, you can manually set `TKN_VERSION` to a known stable version like `v0.41.0`.
+{{% /notice %}}
 
 ### Install on macOS
 
