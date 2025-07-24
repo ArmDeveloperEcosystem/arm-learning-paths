@@ -17,7 +17,7 @@ In modern vehicles, multiple sensors such as LiDAR, radar, and cameras must cont
 DDS ensures these components share data seamlessly and in real time, both within the vehicle and across infrastructure such as V2X systems, including traffic lights and road sensors.
 
 {{% notice Tip %}}
-To get started with open-source DDS on Arm platforms, check out the [Installation Guide for CycloneDDS](https://learn.arm.com/install-guides/cyclonedds) on how to install open-source DDS on an Arm platform.
+To get started with open-source DDS on Arm platforms, see the [Installation Guide for CycloneDDS](https://learn.arm.com/install-guides/cyclonedds).
 {{% /notice %}}
 
 

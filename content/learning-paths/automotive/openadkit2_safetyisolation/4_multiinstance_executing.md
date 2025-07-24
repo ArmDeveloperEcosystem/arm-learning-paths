@@ -1,5 +1,5 @@
 ---
-title: Execute OpenAD Kit across distributed ROS 2 instances
+title: Run OpenAD Kit across distributed ROS 2 instances
 
 weight: 9
 
@@ -7,17 +7,17 @@ weight: 9
 layout: learningpathall
 ---
 
-## What this distributed demo shows you
+## What you'll learn in this section
 
-In this section, you’ll bring all the previous setup together and execute the full OpenAD Kit demo across two Arm-based instances.
+In this section, you'll run the full OpenAD Kit demo across two Arm-based cloud instances using the setup from previous steps.
 
-OpenAD Kit is an open-source reference design for autonomous driving workloads on Arm. It demonstrates how Autoware modules can be deployed on scalable infrastructure, either on a single machine or distributed across multiple compute nodes.
+The OpenAD Kit is an open-source reference design for autonomous driving workloads on Arm. It demonstrates how Autoware modules can run on scalable infrastructure, whether on a single machine or distributed across multiple compute nodes using ROS 2 and DDS.
 
-## Prepare launch scripts on both instances
+## Set up launch scripts on both instances
 
-This setup separates the simulation/visualization environment from the planning-control logic, allowing you to explore how ROS 2 nodes communicate over a distributed system using DDS (Data Distribution Service).
+This setup separates the simulation and visualization environment from the planning and control logic, allowing you to explore how ROS 2 nodes communicate over a distributed system using DDS (Data Distribution Service).
 
-To start the system, you need to configure and run separate launch commands on each machine.
+To start the system, run separate launch scripts on each machine.
 
 On each instance, copy the appropriate launch script into the `openadkit_demo.autoware/docker` directory.
 
@@ -66,7 +66,7 @@ On each instance, copy the appropriate launch script into the `openadkit_demo.au
   {{< /tab >}}
 {{< /tabpane >}}
 
-You can also find the prepared launch scripts `opad_planning.sh` and `opad_sim_vis.sh` inside the `openadkit_demo.autoware/docker` directory on both instances.
+You can also find these scripts `opad_planning.sh` and `opad_sim_vis.sh` inside the `openadkit_demo.autoware/docker` directory on both instances.
 
 These scripts encapsulate the required environment variables and container commands for each role.
 
@@ -89,9 +89,9 @@ Once both machines are running their respective launch scripts, the Visualizer w
 
 http://[Visualizer public IP address]:6080/vnc.html
 
-You can open this link in a browser to observe the demo behavior, which will closely resemble the output from the [previous learning path](http://learn.arm.com/learning-paths/automotive/openadkit1_container/4_run_openadkit/). 
+Open this link in your browser to watch the demo, which closely resembles the output in the [previous learning path](http://learn.arm.com/learning-paths/automotive/openadkit1_container/4_run_openadkit/). 
 
-![Distributed OpenAD Kit simulation running on two Arm-based instances with visualizer and simulator coordination over DDS](split_aws_run.gif "Figure 4: Visualizer output from a distributed OpenAD Kit simulation showing ROS 2 modules running across two cloud instances using DDS communication.")
+![Distributed OpenAD Kit simulation running on two Arm-based instances with visualizer and simulator coordination over DDS alt-text#center](split_aws_run.gif "Figure 4: Visualizer output from a distributed OpenAD Kit simulation showing ROS 2 modules running across two cloud instances using DDS communication.")
 
 You’ve now run the OpenAD Kit across two nodes with separated control and visualization roles. DDS enabled real-time, peer-to-peer communication between the ROS 2 nodes, supporting synchronized behavior across the planning and simulation components deployed on two separate instances.
 

@@ -3,7 +3,7 @@ title: Prototype safety-critical isolation for autonomous driving systems on Neo
 
 minutes_to_complete: 60
 
-who_is_this_for: This Learning Path is for experienced automotive engineers developing safety-critical systems. You'll learn how to accelerate ISO 26262-compliant development workflows using Arm-based cloud compute, containerized simulation, and DDS-based communication.
+who_is_this_for: This Learning Path is for automotive engineers developing safety-critical systems. You'll learn how to accelerate ISO 26262-compliant development workflows using Arm-based cloud compute, containerized simulation, and DDS-based communication.
 
 learning_objectives: 
     - Apply functional safety principles, including risk prevention, fault detection, and ASIL compliance, to build robust, certifiable automotive systems
