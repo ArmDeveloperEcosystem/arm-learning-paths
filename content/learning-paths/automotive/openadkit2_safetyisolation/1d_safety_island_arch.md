@@ -5,11 +5,9 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## How safety islands support functional safety in software systems
+## How safety islands support functional safety
 
-In automotive systems, a non-safety ECU (Electronic Control Unit) typically runs non-critical tasks such as infotainment or navigation. 
-
-A safety island, by contrast, is dedicated to executing safety-critical control logic (for example, braking and steering) with strong isolation, redundancy, and determinism.
+In automotive systems, a non-safety ECU (Electronic Control Unit) typically runs non-critical tasks such as infotainment or navigation. A safety island, by contrast, is dedicated to executing safety-critical control logic (for example, braking and steering) with strong isolation, redundancy, and determinism.
 
 The table below compares the characteristics of an ECU and a safety island in terms of their role in supporting functional safety.
 
@@ -38,16 +36,16 @@ Safety islands are often implemented as lockstep cores or separate MCUs that run
 
 ## Why a safety island matters for functional safety
 
-A safety island helps systems respond to high-risk scenarios and reduces the likelihood of catastrophic failures.
+A safety island provides a dedicated environment for executing critical safety functions. Its key characteristics include:
 
-- **Acts as an independent redundant safety layer**  
+- **Acting as an independent redundant safety layer**  
    - Operates safety logic independently of the main processor
 
-- **Supports ASIL-D safety level**  
+- **Supporting the ASIL-D safety level**  
    - Enables the system to meet the highest ISO 26262 requirements for critical operations
 
-- **Provides independent fault detection and recovery mechanisms**  
-  - *Fail-safe*: activates a minimal-risk mode, such as limiting vehicle speed or switching to manual control 
-  - *Fail-operational*: allows high-integrity systems, such as those in aerospace or autonomous driving, to continue functioning under fault conditions
+- **Providing independent fault detection and recovery mechanisms:**  
+  - *Fail-safe*: activating a minimal-risk mode, such as limiting vehicle speed or switching to manual control 
+  - *Fail-operational*: allowing high-integrity systems, such as those in aerospace or autonomous driving, to continue functioning under fault conditions
 
 Safety islands play a key role in enabling ISO 26262 compliance by isolating safety-critical logic from general-purpose processing. They're a proven solution for improving system determinism, fault tolerance, and fallback behavior.
