@@ -325,7 +325,7 @@ These messages indicate that your model is working and processing voice input as
 
 Your Serial Monitor should look like the image below.
 
-![example image alt-text#center](Images/Serial_monitor.png "Figure 16. Circuit Connection")
+![example image alt-text#center](Images/Serial_monitor.png "Figure 16. Serial Monitor Display")
 
 {{% notice Congratulations %}}
 You’ve successfully programmed your first TinyML microcontroller! You've also built a functional, smart system to control an LED with your voice.
