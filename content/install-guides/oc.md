@@ -1,8 +1,6 @@
 ---
 title: OpenShift CLI (oc)
 
-draft: true
-
 author: Jason Andrews
 
 official_docs: https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/cli_tools/openshift-cli-oc#cli-getting-started
@@ -21,7 +19,6 @@ test_maintenance: false
 tool_install: true
 weight: 1
 ---
-
 The OpenShift command-line interface (CLI), `oc`, allows you to work with OpenShift Container Platform projects from a terminal. You can use `oc` to create applications, manage OpenShift Container Platform projects, and perform administrative tasks.
 
 The OpenShift CLI is a superset of the Kubernetes `kubectl` command. When you install `oc`, you get both the OpenShift-specific functionality and all standard Kubernetes `kubectl` commands in a single tool. This means you can use `oc` to manage both OpenShift and standard Kubernetes resources.
@@ -32,7 +29,7 @@ The OpenShift CLI is available for macOS and Linux and supports the Arm architec
 
 This article provides a quick solution to install the latest version of the OpenShift CLI for Ubuntu on Arm and macOS with Apple Silicon.
 
-Confirm you are using an Arm computer by running:
+Confirm that you are using an Arm-based computer by running:
 
 ```bash { target="ubuntu:latest" }
 uname -m
@@ -77,6 +74,11 @@ rm openshift-client-mac-arm64.tar.gz README.md
 ```
 
 Both installations include both `oc` and `kubectl` commands. The `oc` command provides the full OpenShift functionality, while the `kubectl` command gives you compatibility with standard Kubernetes clusters. Since `oc` is a superset of `kubectl`, you can use `oc` for all Kubernetes operations, but having both commands available gives you flexibility in your workflow.
+
+{{% notice Tip %}}
+You can use either `oc` or `kubectl` to manage standard Kubernetes resources. However, `oc` includes OpenShift-specific features and is preferred for working with OpenShift clusters.
+{{% /notice %}}
+
 
 ## Understanding oc and kubectl
 
