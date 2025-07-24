@@ -1,5 +1,5 @@
 ---
-title:  Create Azure Linux 3.0 custom Arm VM
+title: Create an Azure Linux 3.0 virtual machine with Cobalt 100 processors
 
 draft: true
 cascade:
@@ -7,18 +7,17 @@ cascade:
 
 minutes_to_complete: 120  
 
-who_is_this_for: This Learning Path helps developers create a custom Azure Linux 3.0 virtual machine for Arm and utilize the default software stack provided by Microsoft.
+who_is_this_for: This Learning Path explains how to create a virtual machine on Azure running Azure Linux 3.0 on Cobalt 100 processors.
 
 
 learning_objectives:
-    - Use the qemu-img utility to create a raw disk image, boot a VM with Aarch64 ISO to install the OS onto that disk, and convert the raw disk image into VHD
-    - Upload the VHD to Azure and use the Azure Shared Image Gallery to create a custom image.
-    - Use Azure CLI to create Azure Linux 3.0 VM for Arm, using the custom image from Azure SIG.
+    - Use QEMU to create a raw disk image, boot a VM using an Aarch64 ISO, install the OS, and convert the raw disk image to VHD format.
+    - Upload the VHD file to Azure and use the Azure Shared Image Gallery (SIG) to create a custom image.
+    - Use the Azure CLI to create an Azure Linux 3.0 VM for Arm, using the custom image from the Azure SIG.
 
 prerequisites:
-    - A [Microsoft Azure](https://azure.microsoft.com/) account with permission to create resources, including Cobalt 100 (Arm64) instances (Dpsv6).
-    - A local Linux machine with [QEMU](https://www.qemu.org/download/) installed to emulate Aarch64.
-    - An [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) installed and authenticated on your local machine.
+    - A [Microsoft Azure](https://azure.microsoft.com/) account with permission to create resources, including instances using Cobalt 100 processors. 
+    - A local Linux machine with [QEMU](https://www.qemu.org/download/) and the [Azure CLI](/install-guides/azure-cli/) installed and authenticated.
     
 author: Jason Andrews
 
