@@ -8,12 +8,12 @@ layout: learningpathall
 
 ## Refactor OpenAD Kit for distributed deployment
 
-Now that you’ve explored the concept of a Safety Island, a dedicated subsystem responsible for executing safety-critical control logic, and learned how DDS (Data Distribution Service) enables real-time, distributed communication, you’ll refactor the original OpenAD Kit architecture into a multi-instance deployment.
+Now that you’ve explored the concept of a safety island, a dedicated subsystem responsible for executing safety-critical control logic, and learned how DDS (Data Distribution Service) enables real-time, distributed communication, you’ll refactor the original OpenAD Kit architecture into a multi-instance deployment.
 
 In [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](http://learn.arm.com/learning-paths/automotive/openadkit1_container/), you deployed three container components on a single Arm-based instance, handling:
 - Simulation environment
 - Visualization
-- Planning-Control
+- Planning and control
 
 In this session, you will split the simulation and visualization stack from the planning-control logic and deploy them across two independent Arm-based instances. 
 
@@ -141,9 +141,9 @@ Please copy the following configuration into docker/cycloneDDS.xml on both machi
 ```
 
 {{% notice Note %}}
-1. Make sure the network interface name (ens5) matches the one on your EC2 instances. You can verify this using `ip -br a`.
-2. This configuration disables multicast and enables static peer discovery between the two machines using unicast.
-3. You can find the more detail about CycloneDDS setting [Configuration](https://cyclonedds.io/docs/cyclonedds/latest/config/config_file_reference.html#cyclonedds-domain-internal-socketreceivebuffersize)
+- Make sure the network interface name (for example, `ens5`) matches the one used by your EC2 instances. You can verify the instance name by running `ip -br a`.
+- This configuration disables multicast and enables static peer discovery between the two machines using unicast.
+- For more information on CycloneDDS settings, see the [Cyclone DDS Configuration Guide](https://cyclonedds.io/docs/cyclonedds/latest/config/config_file_reference.html#cyclonedds-domain-internal-socketreceivebuffersize).
 {{% /notice %}}
 
 ## Update the Docker Compose Configuration for Multi-Host Deployment
@@ -162,7 +162,7 @@ Since the planning-control and simulator containers will now run on different ma
   #   - simulator
 ```
 
-##### Enable Host Networking
+## Enable host networking
 
 All three containers (visualizer, simulator, planning-control) need access to the host’s network interfaces for DDS-based peer discovery. 
 Replace Docker's default bridge network with host networking:
@@ -172,7 +172,7 @@ Replace Docker's default bridge network with host networking:
     network_mode: host
 ```
 
-##### Use CycloneDDS Configuration via Environment Variable
+## Apply the CycloneDDS configuration using an environment variable
 
 To ensure that each container uses your custom DDS configuration, mount the current working directory and set the CYCLONEDDS_URI environment variable:
 
@@ -299,7 +299,7 @@ Links to documentation:
 
 To confirm that ROS 2 nodes can exchange messages across two separate EC2 instances using DDS, this test will walk you through a minimal publisher–subscriber setup using a custom topic.
 
-##### On Planning-Control Node (Publisher)
+## On the Planning-Control Node (Publisher)
 
 On the first EC2 instance, you will publish a custom message to the /hello topic using ROS 2. 
 This will simulate outbound DDS traffic from the planning-control container.
@@ -363,6 +363,11 @@ ros2 topic echo /hello
 ```
 
 In the simulator container, you should see repeated outputs like:
+
+{{% notice tip %}}
+If the subscriber shows a continuous stream of `/hello` messages, DDS discovery and ROS 2 communication between nodes are working as expected.
+{{% /notice %}}
+
 ```
 root@ip-172-31-19-5:/autoware# ros2 topic echo /hello
 data: Hello From Planning

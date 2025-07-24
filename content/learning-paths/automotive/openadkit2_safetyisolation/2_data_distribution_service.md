@@ -77,7 +77,7 @@ DDS supports multiple transport mechanisms to optimize communication efficiency:
 
 The following table highlights how DDS improves upon traditional client-server communication patterns in the context of real-time automotive applications:
 
-| Feature              | Traditional Client-Server Architecture      | DDS Publish-Subscribe Model       |
+| Feature              | Traditional client-server architecture      | DDS publish-subscribe model       |
 |----------------------|--------------------------------------------|---------------------------        |
 | Data Transmission    | Relies on a central server                 | Direct peer-to-peer communication |
 | Latency              | Higher latency                             | Low latency                       |

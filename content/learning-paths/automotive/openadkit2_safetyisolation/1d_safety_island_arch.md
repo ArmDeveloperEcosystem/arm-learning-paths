@@ -36,7 +36,7 @@ Safety islands are often implemented as lockstep cores or separate MCUs that run
    - Autonomous Vehicles → safe stopping (fail-safe mode)
    - Industrial Equipment → emergency power cutoff or speed reduction
 
-## Why safety island matters for functional safety
+## Why a safety island matters for functional safety
 
 A safety island helps systems respond to high-risk scenarios and reduces the likelihood of catastrophic failures.
 
