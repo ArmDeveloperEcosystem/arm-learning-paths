@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 Note down your computer's IP address:
 ```bash
-ip addr show <YOUR_INTERFACE_NAME>
+ip addr show 
 ```
 To help you, here are some common WiFi interface names on Linux:
 |Interface Name|Meaning / Context|
@@ -34,7 +34,7 @@ ipconfig getifaddr en0 # Returns your Mac's WiFi IP address
 
 ## Enable the FVP's GUI
 
-Edit the following parameters in [run_fvp.sh](https://github.com/pytorch/executorch/blob/d5fe5faadb8a46375d925b18827493cd65ec84ce/backends/arm/scripts/run_fvp.sh#L97-L102), to enable the Mobilenet V2 output on the FVP's GUI:
+Edit the following parameters in your local checked out [executorch/backends/arm/scripts/run_fvp.sh](https://github.com/pytorch/executorch/blob/d5fe5faadb8a46375d925b18827493cd65ec84ce/backends/arm/scripts/run_fvp.sh#L97-L102) file, to enable the Mobilenet V2 output on the FVP's GUI:
 
 ```bash
 -C mps4_board.subsystem.ethosu.num_macs=${num_macs} \
