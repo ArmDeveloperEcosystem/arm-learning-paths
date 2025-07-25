@@ -1,5 +1,6 @@
 ---
-title: Zenoh Example-2 Storage and Query
+title: Run a Zenoh storage and query example
+
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -12,7 +13,8 @@ The second example adds Zenoh's data storage and querying capabilities by enabli
 
 Building on the previous pub/sub example, you’ll now explore how Zenoh supports persistent data storage and on-demand querying, a powerful feature for robotics and IIoT applications.
 
-In a typical warehouse or factory scenario, autonomous robots may periodically publish sensor data such as position, temperature, battery level, and a central system or another robot—may later need to query the latest state of each unit. 
+In a typical warehouse or factory scenario, autonomous robots can periodically publish sensor data,such as position, temperature, or battery level—that a central system or peer robot may later need to query.
+
 
 Unlike Pub/Sub, which requires live, real-time message exchange, Zenoh's storage and query model enables asynchronous access to data that was published earlier, even if the original publisher is no longer online.
 

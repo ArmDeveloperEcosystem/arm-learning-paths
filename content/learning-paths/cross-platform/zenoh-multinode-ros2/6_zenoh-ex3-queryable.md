@@ -1,5 +1,6 @@
 ---
-title: Zenoh Example-3 Computation on Query using Queryable
+title: Run a Zenoh queryable example for edge computation
+
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -56,9 +57,10 @@ Sending Query 'demo/example/zenoh-rs-queryable'...
 
 The result is shown below:
 
-![img3 alt-text#center](zenoh_ex3.gif "Figure 3: Computation on Query using Queryable")
+![img3 Zenoh queryable node responding to on-demand queries from a remote device#center](zenoh_ex3.gif "Figure 3: Computation on Query using Queryable")
 
-The value you receive comes not from storage, but from the computation inside the queryable handler.
+The value you receive is generated in real time by the function defined in the queryable handler, not from pre-stored data.
+
 
 ### Real-world application: distributed inference and computation
 

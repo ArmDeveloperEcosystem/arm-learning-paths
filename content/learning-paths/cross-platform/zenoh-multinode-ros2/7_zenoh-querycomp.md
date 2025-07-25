@@ -1,5 +1,5 @@
 ---
-title: Zenoh Example-4 Dynamic Queryable with Computation
+title: Run a Zenoh queryable with parameterized computation
 weight: 8
 
 ### FIXED, DO NOT MODIFY
