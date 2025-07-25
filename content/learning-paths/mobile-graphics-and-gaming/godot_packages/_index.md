@@ -1,6 +1,10 @@
 ---
 title: Install and Use Arm integration extension in Godot
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for Godot developers who are targeting Android devices and want to get more insight into how their game performs on devices with Arm CPUs and GPUs.
