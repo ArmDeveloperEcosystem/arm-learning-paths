@@ -30,7 +30,7 @@ Safety islands are often implemented as lockstep cores or separate MCUs that run
 ## Key capabilities of a safety island
 - **System health monitoring** continuously monitors the operational status of the main processor (for example, the ADAS control unit) and detects potential errors or anomalies
 - **Fault detection and isolation** independently detects failures and initiates emergency handling for overheating, execution faults, or unresponsiveness
-- **Essential safety functions conitnue to operate**, even if the main system crashes. A safety island can execute fallback operations, such as:
+- **Essential safety functions continue to operate**, even if the main system crashes. A safety island can execute fallback operations, such as:
    - Autonomous Vehicles → safe stopping (fail-safe mode)
    - Industrial Equipment → emergency power cutoff or speed reduction
 

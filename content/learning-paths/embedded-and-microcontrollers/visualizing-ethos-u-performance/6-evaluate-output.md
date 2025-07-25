@@ -162,4 +162,4 @@ I [executorch:arm_perf_monitor.cpp:184] ethosu_pmu_cntr4 : 130
 |ethosu_pmu_cntr3|External DRAM write beats(ETHOSU_PMU_EXT_WR_DATA_BEAT_WRITTEN)|Number of write data beats to external memory.|Helps detect offloading or insufficient SRAM.|
 |ethosu_pmu_cntr4|Idle cycles(ETHOSU_PMU_NPU_IDLE)|Number of cycles where the NPU had no work scheduled (i.e., idle).|High idle count = possible pipeline stalls or bad scheduling.|
 
-In this learning path you have successfully learnt how to deploy a MobileNet V2 Model using ExecuTorch on Arm's Corstone-320 FVP.
+In this learning path you have successfully learned how to deploy a MobileNet V2 Model using ExecuTorch on Arm's Corstone-320 FVP.
