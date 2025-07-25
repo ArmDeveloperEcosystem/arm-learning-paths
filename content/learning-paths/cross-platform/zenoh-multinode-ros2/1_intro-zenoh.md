@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## The Need for Scalable Communication in Robotics and Edge Computing
+## The need for scalable communication in robotics and edge computing
 
 Modern robotics and industrial IoT systems are evolving rapidly, from indoor collaborative arms on assembly lines to fleets of outdoor autonomous delivery robots. 
 These applications must operate in real-time, often across multiple compute nodes, over networks that may span factory LANs, 5G cellular links, or even cloud data centers.
@@ -20,11 +20,9 @@ A modern protocol must be:
 * Decentralized: No reliance on central brokers or fixed infrastructure.
 * Flexible: Able to run on lightweight edge devices, across WANs, or inside cloud-native environments.
 
-Traditional communication stacks such as Data Distribution Service (DDS) serve as the backbone for middleware like ROS 2. However, DDS struggles in multi-network or wireless environments where multicast is unavailable, or NAT traversal is needed.
-These constraints can severely impact deployment and performance at the edge.
+Traditional communication stacks such as Data Distribution Service (DDS) serve as the backbone for middleware like ROS 2. However, DDS struggles in multi-network or wireless environments where multicast is unavailable, or NAT traversal is needed. Zenoh was developed to address these challenges with a unified approach to data movement, storage, and interaction across heterogeneous, distributed systems.
 
-
-## Zenoh: an open-source pub/sub protocol for the Industrial Edge
+## Zenoh: an open-source pub/sub protocol for the industrial edge
 
 [Eclipse Zenoh](https://zenoh.io/) is a modern, open-source, data-centric communication protocol that goes beyond traditional pub/sub. Designed specifically for edge computing, industrial IoT, robotics, and autonomous systems, Zenoh unifies:
 
@@ -44,7 +42,8 @@ In this Learning Path, you’ll use Zenoh to build and validate a multi-node dis
 
 The examples use Raspberry Pi boards, but you’re free to substitute any Cortex-A or Neoverse devices that support network connectivity running Linux.
 
-Upon completion, you will be able to:
+By the end of this Learning Path, you'll be able to:
 - Understand the core architecture and data flow principles behind Eclipse Zenoh, including its support for pub/sub, querying, and queryable edge functions.
 - Build and run distributed Zenoh examples across multiple Arm-based nodes using Raspberry Pi or other Arm Linux devices.
-- Rebuild and extend the Zenoh queryable example to simulate edge-side logic.
+- Rebuild and extend a Zenoh queryable node to simulate edge-side logic.
+

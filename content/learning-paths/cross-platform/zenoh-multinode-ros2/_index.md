@@ -1,16 +1,13 @@
 ---
 title: Scalable Networking for Industrial and Robotics with Zenoh on Raspberry Pi
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 45
 
-who_is_this_for: This Learning Path is for robotics developers, industrial automation engineers, and IoT system architects building distributed, scalable, and low-latency applications. Whether you are using Robot Operating System (ROS), developing autonomous systems, or designing multi-node communication frameworks, you can use Eclipse Zenoh on Arm-based platforms, both in the cloud and on local devices like Raspberry Pi.
+who_is_this_for: This Learning Path is for robotics developers, industrial automation engineers, and IoT system architects building distributed, scalable, and low-latency applications. Whether you're using the Robot Operating System (ROS), developing autonomous systems, or designing multi-node communication frameworks, you can use Eclipse Zenoh on Arm-based platforms, both in the cloud and on local devices like Raspberry Pi.
+
 
 learning_objectives: 
-    - Understand Zenoh's architecture and its integration of pub/sub, storage, querying, and computation models.
+    - Understand Zenoh's architecture and how it integrates pub/sub, storage, querying, and computation models.
     - Build and run Zenoh examples on both Arm servers and Raspberry Pi.
     - Set up and deploy a multi-node Zenoh system.
 
@@ -32,6 +29,7 @@ tools_software_languages:
     - ROS2
     - C
     - Raspberry Pi
+    - Zenoh
 
 operatingsystems:
     - Linux
@@ -50,6 +48,11 @@ further_reading:
         title: Eclipse Zenoh Github
         link: https://github.com/eclipse-zenoh/zenoh
         type: documentation
+    - resource:
+        title: Zenoh and ROS 2 Integration Guide
+        link: https://github.com/eclipse-zenoh/zenoh-plugin-ros2
+        type: documentation
+
 
 
 ### FIXED, DO NOT MODIFY
