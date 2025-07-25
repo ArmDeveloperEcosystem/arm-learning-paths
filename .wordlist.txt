@@ -4470,3 +4470,8 @@ tektoncd
 tkn
 verifiably
 vhd
+AssetLib
+PerformanceStudio
+VkThread
+precompiled
+rollouts
