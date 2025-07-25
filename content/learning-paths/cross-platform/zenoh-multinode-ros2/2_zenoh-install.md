@@ -13,7 +13,7 @@ This section shows you how to install and build the open-source Eclipse Zenoh pr
 
 The following instructions have been verified on Raspberry Pi 4 and 5, but you can use any Arm Linux device. These steps apply to Raspberry Pi and other Arm-based Linux platforms. Before building Zenoh, make sure your system has the necessary development tools and runtime libraries.
 
-### Install the Rust development environment
+## Install the Rust development environment
 
 First, install the [Rust](https://www.rust-lang.org/) environment. The core of Zenoh is developed in Rust for performance and safety. 
 
@@ -36,13 +36,13 @@ source "$HOME/.cargo/env"
 
 For more information, see the [Rust Install Guide](/install-guides/rust/) for Arm Linux.
 
-### Install ROS 2
+## Install ROS 2
 
 [Robot Operating System](https://www.ros.org/) is a set of software libraries and tools that help you build robot applications. ROS provides everything from drivers to state-of-the-art algorithms, as well as developer tools. It is completely open-source.
 
 If you plan to use Zenoh alongside ROS 2, for example, to bridge DDS-based nodes, you should install ROS 2 before proceeding. See the [ROS2 Installation Guide](/install-guides/ros2/) to install ROS 2 on your Arm platforms.
 
-### Download and build the Zenoh source
+## Download and build the Zenoh source
 
 Clone the Zenoh repository:
 

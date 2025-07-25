@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Test Zenoh pub/sub across two devices
 
-This example demonstrates Zenoh's real-time publish/subscribe model across two Raspberry Pi devices.
+This example demonstrates how to use Zenoh’s real-time publish/subscribe model to exchange messages between two Raspberry Pi devices over a local network.
 
-The subscriber listens for all data published under the key expression `demo/example/**`, which matches any topic beginning with `demo/example/`.
+Pub/sub is a core Zenoh communication pattern where data producers (publishers) send values to a key, and data consumers (subscribers) receive updates for matching key expressions. In this case, the subscriber listens for all messages published under the key expression `demo/example/**`, which matches any topic that begins with `demo/example/`. This enables flexible topic filtering and lightweight data dissemination across distributed systems.
 
-### Start the subscriber node
+## Start the subscriber node
 
 Run the subscriber example on one of the Raspberry Pi systems:
 
@@ -21,7 +21,7 @@ cd ~/zenoh/target/release/examples
 ./z_sub
 ```
 
-### Start the publisher node
+## Start the publisher node
 
 Then, log in to the other Raspberry Pi and run the publisher:
 
@@ -34,7 +34,7 @@ cd ~/zenoh/target/release/examples
 You can run both `z_sub` and `z_pub` on the same device for testing, but running them on separate Raspberry Pis demonstrates Zenoh’s distributed discovery and cross-node communication.
 {{% /notice %}}
 
-### Observe the pub/sub data flow
+## Observe the pub/sub data flow
 
 The results are shown below:
 

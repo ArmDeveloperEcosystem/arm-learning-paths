@@ -25,7 +25,7 @@ In this example, you’ll run the `zenohd` daemon with in-memory storage and use
 
 This is especially useful for distributed systems where nodes may intermittently connect or request snapshots of state from peers.
 
-### Start the Zenoh daemon with in-memory storage
+## Start the Zenoh daemon with in-memory storage
 
 On one Raspberry Pi, launch the Zenoh daemon with a configuration that enables in-memory storage for keys in the `demo/example/**` directory.
 
@@ -40,7 +40,7 @@ You should see log messages indicating that the storage_manager plugin is loaded
 
 If port 7447 is already in use, either stop any previous Zenoh processes or configure a custom port using the `listen.endpoints.router` setting.
 
-### Publish a value
+## Publish a value
 
 On 2nd Raspberry Pi device, use `z_put` to send a key-value pair that will be handled by the `zenohd` storage.
 
@@ -51,7 +51,7 @@ cd ~/zenoh/target/release/examples
 
 This command stores the string `Hello from storage!` under the key demo/example/test1.
 
-### Query the stored value
+## Query the stored value
 
 Back on first Raspberry Pi, you can now query the stored data from any Zenoh connected node.
 

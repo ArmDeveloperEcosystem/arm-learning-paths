@@ -15,9 +15,9 @@ If you’ve already installed Zenoh on an Arm Cortex-A or Neoverse platform as s
 
 To simplify and scale deployment across multiple devices, this section shows how to containerize Zenoh with Docker for streamlined distribution and consistent multi-node testing. This containerized approach enables repeatable rollouts and makes it easier to test distributed communication across Raspberry Pi, Arm cloud instances (like AWS Graviton), and Arm Virtual Hardware.
 
-In this session, you’ll use Raspberry Pi boards to simulate a scalable distributed environment. The same workflow applies to any Arm Linux system, including cloud instances and virtual hardware. This setup allows you to simulate real-world, cross-node communication scenarios, making it ideal for evaluating Zenoh’s performance in robotics and industrial IoT applications. Zenoh is ideal for robotics and industrial IoT systems that require fast, decentralized communication. It supports scalable data exchange across devices using pub/sub, storage, and query models.
+In this session, you’ll use Raspberry Pi boards to simulate a scalable distributed environment. The same workflow applies to any Arm Linux system, including cloud instances and virtual hardware. This setup allows you to simulate real-world, cross-node communication scenarios, making it ideal for evaluating Zenoh’s performance in robotics and industrial IoT applications. This setup simulates real-world, cross-node communication scenarios, making it ideal for robotics and industrial IoT applications that require fast, decentralized messaging using pub/sub, storage, and query models.
 
-### Install Docker on Raspberry Pi
+## Install Docker on Raspberry Pi
 To simplify this process and ensure consistency, you can use Docker to containerize your Zenoh and ROS 2 environment. This lets you quickly replicate the same runtime on any device without needing to rebuild from source.
 
 This enables scalable, multi-node testing in realistic distributed environments.
@@ -29,7 +29,7 @@ curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 sudo usermod -aG docker $USER ; newgrp docker
 ```
 
-### Create a ROS 2 + Zenoh Docker image
+## Create a Docker image with ROS 2 and Zenoh
 
 To ensure compatibility with ROS-related tools, create a `Dockerfile` based on  `ros:galactic `, and use the official Rust installation method to build Zenoh, as shown below.
 
@@ -107,11 +107,12 @@ docker pull odinlmshen/zenoh-node
 Once built, you can reuse this Docker image across multiple Arm-based nodes, including Raspberry Pi, AWS Graviton, and Arm Virtual Hardware.
 {{% /notice %}}
 
-### Transfer the Docker image to the other Raspberry Pi
+## Transfer the Docker image to another Raspberry Pi
+
 
 There are two options to transfer the Docker image to your second device. Choose one of the following methods.
 
-Option 1: Save and copy via file 
+1. Save and copy using the file: 
 
 ```bash
 docker save zenoh-node > zenoh-node.tar
@@ -124,14 +125,11 @@ On the target device:
 docker load < zenoh-node.tar
 ```
 
-Option 2: Push the image to a container registry such as Docker Hub
+2. Push the image to a container registry such as Docker Hub:
 
 You can also push the image to Docker Hub or GitHub Container Registry and pull it on the second device.
 
-
-
-
-### Run the Docker image
+## Run the Docker image
 
 Once the image is successfully loaded on the second device, you can run the container to start the Zenoh environment.
 
@@ -154,3 +152,4 @@ The following sections illustrate the procedures to run the Zenoh examples so as
 - Queryable – for enabling on-demand remote computation  
 - Dynamic queryable with computation – for executing dynamic logic across nodes
 
+With your Zenoh examples running across containers, you’re now ready to build and benchmark real-time communication flows across nodes, which is ideal for simulating robotic fleets or industrial systems.
