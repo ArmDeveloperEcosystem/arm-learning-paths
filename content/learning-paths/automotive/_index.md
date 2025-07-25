@@ -20,9 +20,12 @@ operatingsystems_filter:
 tools_software_languages_filter:
 - Automotive: 1
 - C: 1
+- DDS: 1
 - Docker: 2
 - Python: 2
 - Raspberry Pi: 1
 - ROS 2: 1
 - ROS2: 2
+- Rust: 1
+- Zenoh: 1
 ---

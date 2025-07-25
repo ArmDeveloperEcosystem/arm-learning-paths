@@ -7,11 +7,11 @@ cascade:
 
 minutes_to_complete: 120
 
-who_is_this_for: This is an introductory topic for developers and data scientists new to Tiny Machine Learning (TinyML), who want to visualize ExecuTorch performance on a virtual device.
+who_is_this_for: This is an introductory topic for developers and data scientists new to Tiny Machine Learning (TinyML), who want to understand and visualize ExecuTorch performance on a virtual device.
 
 learning_objectives:
     - Identify suitable Arm-based devices for TinyML applications.
-    - Optionally, install Fixed Virtual Platforms (FVPs) on MacOS.
+    - Install Fixed Virtual Platforms (FVPs).
     - Deploy a TinyML ExecuTorch model to a Corstone-320 FVP.
     - Observe model execution on the FVP's graphical user interface (GUI).
 

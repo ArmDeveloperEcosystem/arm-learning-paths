@@ -56,7 +56,7 @@ Execute the following command to verify the Azure CLI is installed correctly
 az version
 ```
 
-You should see an output similar to below
+You should see an output similar to:
 
 ```output
 {
@@ -94,7 +94,7 @@ The pip install updates $HOME/.profile with the path the `az` executable. Check 
 source $HOME/.profile
 az version
 ```
-You should see an output similar to below
+You should see an output similar to:
 
 ```output
 {

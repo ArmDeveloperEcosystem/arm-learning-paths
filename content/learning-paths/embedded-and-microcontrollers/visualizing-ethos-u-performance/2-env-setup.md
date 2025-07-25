@@ -50,7 +50,7 @@ Run the commands below to set up the ExecuTorch internal dependencies:
 
 ```bash
 git submodule sync
-git submodule update --init
+git submodule update --init --recursive
 ./install_executorch.sh
 ```
 
@@ -70,7 +70,7 @@ pip list | grep executorch
 ```
 
 ```output
-executorch         0.6.0a0+3eea1f1
+executorch         0.8.0a0+92fb0cc
 ```
 
 ## Next Steps

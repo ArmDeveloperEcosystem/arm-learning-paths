@@ -1,34 +1,33 @@
 ---
-title: Executing OpenAD Kit in a Distributed ROS 2 Instances
+title: Run OpenAD Kit across distributed ROS 2 instances
 
-weight: 5
+weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-### Demonstrating the Distributed OpenAD Kit in Action
+## What you'll learn in this section
 
-In this section, you’ll bring all the previous setup together and execute the full OpenAD Kit demo across two Arm-based instances.
+The OpenAD Kit is an open-source reference design for autonomous driving workloads on Arm. It demonstrates how Autoware modules can run on scalable infrastructure, whether on a single machine or distributed across multiple compute nodes using ROS 2 and DDS.
 
-OpenAD Kit is an open-source reference design for autonomous driving workloads on Arm. 
-It demonstrates how Autoware modules can be deployed on scalable infrastructure, whether on a single machine or split across multiple compute nodes.
+In this section, you'll run the full OpenAD Kit demo across two Arm-based cloud instances using the setup from previous steps.
 
-#### Preparing the Execution Scripts
+## Set up launch scripts on both instances
 
-This setup separates the simulation/visualization environment from the planning-control logic, allowing you to explore how ROS 2 nodes communicate over a distributed system using DDS (Data Distribution Service).
+This setup separates the simulation and visualization environment from the planning and control logic, allowing you to explore how ROS 2 nodes communicate over a distributed system using DDS (Data Distribution Service).
 
-To start the system, you need to configure and run separate launch commands on each machine.
+To start the system, run separate launch scripts on each machine:
 
 On each instance, copy the appropriate launch script into the `openadkit_demo.autoware/docker` directory.
 
 {{< tabpane code=true >}}
   {{< tab header="Planning-Control" language="bash">}}
-    !/bin/bash
+    #!/bin/bash
     # Configure the environment variables
     export SCRIPT_DIR=/home/ubuntu/openadkit_demo.autoware/docker
-    CONF_FILE_PASS=$SCRIPT_DIR/etc/simulation/config/pass_static_obstacle_avoidance.param.yaml
-    CONF_FILE_FAIL=$SCRIPT_DIR/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml
+    export CONF_FILE_PASS=$SCRIPT_DIR/etc/simulation/config/pass_static_obstacle_avoidance.param.yaml
+    export CONF_FILE_FAIL=$SCRIPT_DIR/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml
 
     export CONF_FILE=$CONF_FILE_FAIL
     export COMMON_FILE=$SCRIPT_DIR/etc/simulation/config/common.param.yaml
@@ -40,9 +39,9 @@ On each instance, copy the appropriate launch script into the `openadkit_demo.au
     TIMEOUT=120 CONF_FILE=$CONF_FILE_PASS docker compose -f "$SCRIPT_DIR/docker-compose-2ins.yml" up planning-control -d  
   {{< /tab >}}
   
-  {{< tab header="Visualizer & Simulator" language="bash">}}
+  {{< tab header="Visualizer and simulator" language="bash">}}
     #!/bin/bash
-    SCRIPT_DIR=/home/ubuntu/openadkit_demo.autoware/docker
+    export SCRIPT_DIR=/home/ubuntu/openadkit_demo.autoware/docker
 
     export CONF_FILE_FAIL=$SCRIPT_DIR/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml
     export CONF_FILE=$CONF_FILE_FAIL
@@ -67,11 +66,11 @@ On each instance, copy the appropriate launch script into the `openadkit_demo.au
   {{< /tab >}}
 {{< /tabpane >}}
 
-You can also find the prepared launch scripts `opad_planning.sh` and `opad_sim_vis.sh` inside the `openadkit_demo.autoware/docker` directory on both instances.
+You can also find these scripts `opad_planning.sh` and `opad_sim_vis.sh` inside the `openadkit_demo.autoware/docker` directory on both instances.
 
 These scripts encapsulate the required environment variables and container commands for each role.
 
-#### Running the Distributed OpenAD Kit Demo
+## Run the distributed OpenAD Kit demo
 
 On the Planning-Control node, execute:
 
@@ -85,18 +84,16 @@ On the Simulation and Visualization node, execute:
 ./opad_sim_vis.sh
 ```
 
+Once both machines are running their launch scripts, the Visualizer container exposes a web-accessible interface at: http://6080/vnc.html.
 
-Once both machines are running their respective launch scripts, the Visualizer will generate a web-accessible interface on:
+Open this link in your browser to observe the simulation in real time. The demo closely resembles the output in the [previous Learning Path, Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](http://learn.arm.com/learning-paths/automotive/openadkit1_container/4_run_openadkit/). 
 
-http://[Visualizer public IP address]:6080/vnc.html
+![Distributed OpenAD Kit simulation running on two Arm-based instances with visualizer and simulator coordination over DDS alt-text#center](split_aws_run.gif "Visualizer output from a distributed OpenAD Kit simulation showing ROS 2 modules running across two cloud instances using DDS communication.")
 
-You can open this link in a browser to observe the demo behavior, which will closely resemble the output from the [previous learning path](http://learn.arm.com/learning-paths/automotive/openadkit1_container/4_run_openadkit/). 
+You’ve now run the OpenAD Kit across two nodes with separated control and visualization roles. DDS enabled real-time, peer-to-peer communication between the ROS 2 nodes, supporting synchronized behavior across the planning and simulation components deployed on two separate instances.
 
-![img3 alt-text#center](split_aws_run.gif "Figure 4: Simulation")
+The containers are now distributed across two separate instances, enabling real-time, cross-node communication. Behind the scenes, this architecture demonstrates how DDS manages low-latency, peer-to-peer data exchange in a distributed ROS 2 environment.
 
-The containers are now distributed across two separate instances, enabling real-time, cross-node communication.
-Behind the scenes, this architecture demonstrates how DDS manages low-latency, peer-to-peer data exchange in a distributed ROS 2 environment.
+The simulator runs three times by default, giving you multiple chances to observe data flow and verify stable communication between nodes.
 
-To support demonstration and validation, the simulator is configured to run three times sequentially, giving you multiple opportunities to observe how data flows between nodes and verify that communication remains stable across each cycle.
-
-Now that you’ve seen the distributed system in action, consider exploring different QoS settings, network conditions, or even adding a third node to expand the architecture further.
+Now that you’ve seen the distributed system in action, try modifying QoS settings, simulating network conditions, or scaling to a third node to explore more complex configurations.

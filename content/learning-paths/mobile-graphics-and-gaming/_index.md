@@ -10,14 +10,14 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 31
-- Linux: 27
-- macOS: 12
-- Windows: 11
+- Linux: 28
+- macOS: 13
+- Windows: 12
 subjects_filter:
 - Gaming: 6
 - Graphics: 6
 - ML: 10
-- Performance and Architecture: 31
+- Performance and Architecture: 32
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech
 title: Mobile, Graphics, and Gaming
 tools_software_languages_filter:
@@ -29,7 +29,7 @@ tools_software_languages_filter:
 - Android Studio: 10
 - Arm Development Studio: 1
 - Arm Mobile Studio: 1
-- Arm Performance Studio: 2
+- Arm Performance Studio: 3
 - assembly: 1
 - Bazel: 1
 - C: 2
@@ -44,6 +44,7 @@ tools_software_languages_filter:
 - Frame Advisor: 1
 - GCC: 10
 - GenAI: 2
+- Godot: 1
 - GoogleTest: 1
 - Hugging Face: 5
 - Java: 6
