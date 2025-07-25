@@ -1,5 +1,5 @@
 ---
-title: Run a Zenoh queryable with parameterized computation
+title: Run a Zenoh queryable with parameterized Rust computation
 weight: 8
 
 ### FIXED, DO NOT MODIFY
@@ -14,7 +14,7 @@ You’ll learn how to use Zenoh's Queryable API in Rust to build a parameterized
 
 This extends a previous example by supporting runtime query parameters like battery level and temperature.
 
-## Use Case: Real-time battery health via computation
+## Use case: real-time battery health through on-demand computation
 
 In robotic fleet management, a central controller may need to assess each robot’s battery health on demand. 
 
@@ -22,7 +22,7 @@ Instead of streaming data continuously, robots expose a queryable endpoint that 
 
 This saves bandwidth and enables lightweight edge-side decision-making.
 
-### Step 1: Create a new Zenoh rust project
+### Create a new Zenoh rust project
 
 On any Raspberry Pi:
 
@@ -40,7 +40,7 @@ tokio = { version = "1", features = ["full"] }
 url = "2"
 ```
 
-### Step 2: Implement the queryable node
+### Implement the queryable node
 
 Next, log in to the other Raspberry Pi.
 
@@ -103,7 +103,13 @@ Inside the callback:
 - A health score is computed from these inputs.
 - The result is sent back to the querying client using query.reply().
 
+{{% notice Tip %}}
+You can extend this queryable pattern to respond to other real-time diagnostics, such as CPU load, camera snapshots, or local ML inference results.
+{{% /notice %}}
+
 This design pattern enables efficient, on-demand data exchange with minimal bandwidth usage. This is ideal for edge computing scenarios where resources and connectivity are constrained.
+
+### Battery health estimation formula
 
 The health score is calculated using the following logic:
 
@@ -115,16 +121,15 @@ This formula estimates battery health as a percentage, considering both battery 
 - battery: Current battery level (default 50%)
 - temp: Current temperature (default 25°C)
 
-The health estimation logic begins with the battery level as the baseline score. 
-If the temperature rises above 25°C, the score is adjusted downward—specifically, for every 2°C above this threshold, the health is reduced by 1%. 
+This logic computes battery health as a percentage, adjusting for elevated temperatures. If temperature exceeds 25°C, the score is reduced by 1% for every 2°C increase.
 
 To ensure the calculation remains safe even when the temperature is below 25°C, the code uses saturating_sub(25), which prevents the result from becoming negative and avoids potential underflow errors.
 
-For example, if battery = 88 and temp = 32, then:
+For example, if `battery = 88` and `temp = 32`, then:
 - Temperature offset = (32 - 25) / 2 = 3
 - Health = 88 - 3 = 85%
 
-### Step 3: Build and run
+### Build and run
 
 ```bash
 cd $HOME/zenoh/zenoh_battery_estimator
@@ -138,7 +143,7 @@ After the build process, you will see:
     Finished `release` profile [optimized] target(s) in 1m 22s
 ```
 
-### Step 4: Query it with parameters
+### Query it with parameters
 
 Run it on the Raspberry Pi you used for the build run: 
 
@@ -156,9 +161,9 @@ cd ~/zenoh/target/release/examples
 
 The result is shown below:
 
-![img4 alt-text#center](zenoh_ex4.gif "Figure 4: Dynamic Queryable with Computation")
+![img4 Estimated battery health query#center](zenoh_ex4.gif "Figure 4: Dynamic Queryable with Computation")
 
-The excepted output is:
+The expected output is:
 
 ```output
 >> Received ('robot/battery/estimate': 'Estimated battery health: 85%')

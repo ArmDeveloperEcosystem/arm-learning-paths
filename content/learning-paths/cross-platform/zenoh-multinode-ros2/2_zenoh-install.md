@@ -9,11 +9,9 @@ layout: learningpathall
 
 ## Set up Zenoh on Arm devices
 
-This section shows how to install and build the open-source Eclipse Zenoh protocol on Arm-based devices like Raspberry Pi.
+This section shows you how to install and build the open-source Eclipse Zenoh protocol on Arm-based devices like Raspberry Pi.
 
-The following instructions have been verified on Raspberry Pi 4 and 5, but you can use any Arm Linux device. These steps apply to Raspberry Pi and other Arm-based Linux platforms.
-
-Before building Zenoh, make sure your system has the necessary development tools and runtime libraries.
+The following instructions have been verified on Raspberry Pi 4 and 5, but you can use any Arm Linux device. These steps apply to Raspberry Pi and other Arm-based Linux platforms. Before building Zenoh, make sure your system has the necessary development tools and runtime libraries.
 
 ### Install the Rust development environment
 

@@ -1,5 +1,5 @@
 ---
-title: Run a Zenoh queryable example for edge computation
+title: Run a Zenoh queryable node for on-demand edge computation
 
 weight: 7
 
@@ -7,19 +7,19 @@ weight: 7
 layout: learningpathall
 ---
 
-## Example 3: Computation on query 
+## Computation on query 
 
-Next, you’ll explore Zenoh's queryable capability, which lets a node dynamically respond to data queries by executing a custom computation or data generation function.
+This example demonstrates Zenoh's queryable capability, which lets a node respond to incoming data requests by computing results in real time, rather than returning previously stored values.
 
 Unlike `zenohd` which simply returns stored data, a queryable node can register to handle a specific key expression and generate responses at runtime. This is ideal for distributed computing at the edge, where lightweight devices, such as Raspberry Pi nodes, can respond to requests with calculated values. This enables sensor fusion, AI inference results, and diagnostics.
 
-### Use Case: On-Demand battery health estimation
+### Use case: estimate battery health on demand
 
 Imagine a robot fleet management system where the central planner queries each robot for its latest battery health score, which is not published continuously but calculated only when queried.
 
-This saves bandwidth and enables edge compute optimization using Zenoh's Queryable.
+This reduces bandwidth usage and enables edge-side optimization using Zenoh's queryable feature.
 
-### Step 1: Launch a queryable node
+### Launch a queryable node
 
 On one Raspberry Pi device, run the `z_queryable` Zenoh example to register a queryable handler.
 
@@ -38,7 +38,7 @@ Press CTRL-C to quit...
 
 The node is now ready to accept queries on the key `demo/example/zenoh-rs-queryable` and respond with a predefined message.
 
-### Step 2: Trigger a query from another node
+### Trigger a query from another node
 
 On the other Raspberry Pi device, run the `z_get` example.
 
@@ -71,4 +71,7 @@ This model enables edge-based intelligence, such as:
 
 Queryable is a key feature for data-in-use scenarios, allowing fine-grained, on-demand compute inside your Zenoh-powered architecture.
 
-Next, you’ll extend this Queryable pattern to perform parameterized computation, simulating edge diagnostics and adaptive inference.
+## What's next
+
+In the next example, you'll extend this queryable pattern to support **runtime parameters**, such as battery level and temperature, allowing each node to return a calculated health score on demand.
+

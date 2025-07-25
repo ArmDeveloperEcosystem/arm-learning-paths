@@ -11,21 +11,16 @@ layout: learningpathall
 
 After building Zenoh and its core examples, the next step is to deploy them across multiple Arm-based devices.
 
-If you’ve already installed Zenoh on an Arm Cortex-A or Neoverse platform as shown in the previous section, you can simply copy the compiled binaries from `~/zenoh/target/release/` to each of your Raspberry Pi devices.
+If you’ve already installed Zenoh on an Arm Cortex-A or Neoverse platform as shown in the previous section, you can copy the compiled binaries from `~/zenoh/target/release/` to each of your Raspberry Pi devices. 
 
-However, to streamline deployment across multiple devices and ensure repeatability, this section demonstrates how to package Zenoh into a Docker image for batch rollout and scalable testing.
+To simplify and scale deployment across multiple devices, this section shows how to containerize Zenoh with Docker for streamlined distribution and consistent multi-node testing. This containerized approach enables repeatable rollouts and makes it easier to test distributed communication across Raspberry Pi, Arm cloud instances (like AWS Graviton), and Arm Virtual Hardware.
 
-This containerized approach not only simplifies deployment on Raspberry Pi, but also integrates seamlessly with Arm cloud platforms such as AWS Graviton Arm Cortex-A Linux or Arm Virtual Hardware, enabling a consistent cloud-to-edge development and validation workflow.
-
-In this session, you’ll use Raspberry Pi boards to simulate a scalable distributed environment. The same workflow applies to any Arm Linux system, including cloud instances and virtual hardware.
-
-This setup allows you to simulate real-world, cross-node communication scenarios, making it ideal for evaluating Zenoh’s performance in robotics and industrial IoT applications.
+In this session, you’ll use Raspberry Pi boards to simulate a scalable distributed environment. The same workflow applies to any Arm Linux system, including cloud instances and virtual hardware. This setup allows you to simulate real-world, cross-node communication scenarios, making it ideal for evaluating Zenoh’s performance in robotics and industrial IoT applications. Zenoh is ideal for robotics and industrial IoT systems that require fast, decentralized communication. It supports scalable data exchange across devices using pub/sub, storage, and query models.
 
 ### Install Docker on Raspberry Pi
-To simplify this process and ensure consistency, you can use Docker to containerize your Zenoh and ROS 2 environment. 
-This lets you quickly replicate the same runtime on any device without needing to rebuild from source.
+To simplify this process and ensure consistency, you can use Docker to containerize your Zenoh and ROS 2 environment. This lets you quickly replicate the same runtime on any device without needing to rebuild from source.
 
-This enables multi-node testing and real-world distributed communication scenarios.
+This enables scalable, multi-node testing in realistic distributed environments.
 
 First, install Docker on each Raspberry Pi device:
 
@@ -146,9 +141,9 @@ docker run -it --network=host zenoh-node
 
 The Zenoh example binaries are now available within this container, allowing you to test pub/sub and query flows across devices.
 
-## Run Zenoh in a multi-node environment
+## Run Zenoh examples in a multi-node environment
 
-You’re now ready to run and test Zenoh communication flows across distributed edge devices.
+With Zenoh running inside containers across devices, you’re now ready to explore real-time communication using prebuilt examples.
 
 The following examples are written in Rust and precompiled in your container image. They're fully interoperable and can be used to demonstrate Zenoh's key capabilities across devices. The Rust binaries are available in the `$ZENOH_LOC/target/release/examples/` directory. If you haven't set `ZENOH_LOC`, they can be found under `~/zenoh/target/release/examples/`.
  
