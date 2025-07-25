@@ -1,14 +1,16 @@
 ---
-title: Setting Up Zenoh on Arm Devices
+title: Install and build Zenoh on Arm devices
+
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Setting Up Zenoh on Arm Devices
+## Set up Zenoh on Arm devices
 
-The following instructions have been verified on both Raspberry Pi 4 and 5 devices, but you can implement them on any Arm Linux device.
+
+The following instructions have been verified on both Raspberry Pi 4 and 5 devices, but you can implement them on any Arm Linux device. These steps show how to install Zenoh on Raspberry Pi and other Arm-based Linux platforms.
 
 Before building Zenoh, make sure your system has the necessary development tools and runtime libraries.
 
@@ -40,7 +42,7 @@ You can learn more using the [Rust install guide](/install-guides/rust/) for Arm
 
 [Robot Operating System](https://www.ros.org/) is a set of software libraries and tools that help you build robot applications. ROS provides everything from drivers to state-of-the-art algorithms, as well as developer tools. It is completely open-source.
 
-Follow the [ROS2 installation guide](/install-guides/ros2/) to install ROS 2 on your Arm platforms.
+If your use case involves ROS 2 integration, you should install ROS 2 before proceeding with Zenoh-related development. Follow the [ROS2 installation guide](/install-guides/ros2/) to install ROS 2 on your Arm platforms.
 
 ### Download and build the Zenoh source
 
@@ -104,7 +106,7 @@ This may become a hard error in the future; see <https://github.com/rust-lang/ca
 After the build process, the binary executables will be stored under the directory of `~/zenoh/target/release/examples/`.
 
 {{% notice Note %}}
-Installation time may vary depending on your device’s performance.
+Installation time can vary depending on your device’s performance.
 {{% /notice %}}
 
 If you get a build error:

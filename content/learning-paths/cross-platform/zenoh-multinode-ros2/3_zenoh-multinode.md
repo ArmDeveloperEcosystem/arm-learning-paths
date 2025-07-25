@@ -1,12 +1,13 @@
 ---
-title: Setting Up a Multi-Node Environment
+title: Set up a multi-node environment
+
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Deploying Zenoh on Multiple Raspberry Pi Devices
+## Deploy Zenoh on multiple Raspberry Pi devices
 
 After building Zenoh and its core examples, the next step is to deploy them across multiple Arm-based devices.
 
@@ -26,14 +27,14 @@ This lets you quickly replicate the same runtime on any device without needing t
 
 This enables multi-node testing and real-world distributed communication scenarios.
 
-First, install Docker on each of Raspberry Pi.
+First, install Docker on each Raspberry Pi device:
 
 ```bash
 curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 sudo usermod -aG docker $USER ; newgrp docker
 ```
 
-### Create a ROS2 + Zenoh Docker Image
+### Create a ROS 2 + Zenoh Docker image
 
 To ensure compatibility with ROS-related tools, create a `Dockerfile` based on  `ros:galactic `, and use the official Rust installation method to build Zenoh, as shown below.
 
@@ -83,7 +84,8 @@ WORKDIR /root/zenoh/target/release
 CMD ["/bin/bash"]
 ```
 
-Under the directory where the above Dockerfile exists, run the following command to generate the docker image.
+From the directory containing the above Dockerfile, run the following command to generate the docker image:
+
 
 ```bash
 docker build -t zenoh-node .
@@ -138,15 +140,16 @@ docker run -it --network=host zenoh-node
 
 The Zenoh example binaries are now available within this container, allowing you to test pub/sub and query flows across devices.
 
-## Run Zenoh in Multi-Node Environment
+## Run Zenoh in a multi-node environment
 
 You’re now ready to run and test Zenoh communication flows across distributed edge devices.
 
-The source of the examples written in Rust will be provided, and both are interoperable.  The 
+The following examples are written in Rust and precompiled in your container image. They're fully interoperable and can be used to demonstrate Zenoh's key capabilities across devices. The
 Rust binaries are already available under: `$ZENOH_LOC/target/release/examples/` directory. 
 
-The following sections illustrate the procedures to run the Zenoh examples so as to demonstrate the primary capabilities of Zenoh
-1. Basic Pub/Sub – for real-time message distribution
-2. Query and Storage – to persist and retrieving historical data
-3. Queryable – to enable on-demand remote computation
-4. Dynamic Queryable with Computation
+The following sections illustrate the procedures to run the Zenoh examples so as to demonstrate the primary capabilities of Zenoh:
+- Basic pub/sub – for real-time message distribution  
+- Query and storage – for persisting and retrieving historical data  
+- Queryable – for enabling on-demand remote computation  
+- Dynamic queryable with computation – for executing dynamic logic across nodes
+

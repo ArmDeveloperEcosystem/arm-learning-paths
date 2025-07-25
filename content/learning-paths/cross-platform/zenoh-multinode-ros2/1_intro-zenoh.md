@@ -22,7 +22,7 @@ A modern protocol must be:
 
 Traditional communication stacks such as Data Distribution Service (DDS) serve as the backbone for middleware like ROS 2. However, DDS struggles in multi-network or wireless environments where multicast is unavailable, or NAT traversal is needed. Zenoh was developed to address these challenges with a unified approach to data movement, storage, and interaction across heterogeneous, distributed systems.
 
-## Zenoh: an open-source pub/sub protocol for the industrial edge
+## What is Zenoh? A scalable pub/sub protocol for the industrial edge
 
 [Eclipse Zenoh](https://zenoh.io/) is a modern, open-source, data-centric communication protocol that goes beyond traditional pub/sub. Designed specifically for edge computing, industrial IoT, robotics, and autonomous systems, Zenoh unifies:
 
@@ -35,15 +35,14 @@ Unlike most traditional stacks, Zenoh is fully decentralized and designed to ope
 
 It supports heterogeneous platforms, is implemented in Rust for performance and safety, and also offers bindings for Python, enabling rapid prototyping.
 
-Zenoh is particularly effective in wireless, 5G, or cross-network deployments where multicast and DDS fall short. 
-Its routing engine avoids excessive discovery traffic, conserves bandwidth, and supports seamless bridging between legacy ROS 2/DDS apps and modern, optimized Zenoh networks using Zenoh-Bridge-DDS, a bridge between DDS systems and Zenoh networks.
+Zenoh excels in wireless, 5G, and cross-network deployments, which are environments where multicast is unavailable and DDS often struggles. Its routing engine avoids excessive discovery traffic, conserves bandwidth, and supports seamless bridging between legacy ROS 2/DDS apps and modern, optimized Zenoh networks using Zenoh-Bridge-DDS, a bridge between DDS systems and Zenoh networks.
 
 In this Learning Path, you’ll use Zenoh to build and validate a multi-node distributed communication system across multiple Arm-based platforms, gaining hands-on experience with data exchange and coordination between edge devices.
 
-The examples use Raspberry Pi boards, but you’re free to substitute any Cortex-A or Neoverse devices that support network connectivity running Linux.
+You can substitute Raspberry Pi with any Linux-based Arm device that supports networking, such as a Cortex-A or Neoverse board.
 
 By the end of this Learning Path, you'll be able to:
-- Understand the core architecture and data flow principles behind Eclipse Zenoh, including its support for pub/sub, querying, and queryable edge functions.
+- Explain the core architecture and data flow principles behind Eclipse Zenoh protocol, including its support for pub/sub, querying, and queryable edge functions.
 - Build and run distributed Zenoh examples across multiple Arm-based nodes using Raspberry Pi or other Arm Linux devices.
 - Rebuild and extend a Zenoh queryable node to simulate edge-side logic.
 
