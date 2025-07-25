@@ -1,5 +1,5 @@
 ---
-title: Install and build Zenoh on Arm devices
+title: Get started with Zenoh on Raspberry Pi and Arm Linux
 
 weight: 3
 
@@ -9,14 +9,15 @@ layout: learningpathall
 
 ## Set up Zenoh on Arm devices
 
+This section shows how to install and build the open-source Eclipse Zenoh protocol on Arm-based devices like Raspberry Pi.
 
-The following instructions have been verified on both Raspberry Pi 4 and 5 devices, but you can implement them on any Arm Linux device. These steps show how to install Zenoh on Raspberry Pi and other Arm-based Linux platforms.
+The following instructions have been verified on Raspberry Pi 4 and 5, but you can use any Arm Linux device. These steps apply to Raspberry Pi and other Arm-based Linux platforms.
 
 Before building Zenoh, make sure your system has the necessary development tools and runtime libraries.
 
 ### Install the Rust development environment
 
-First, install the [Rust](https://www.rust-lang.org/) environment, since the core of Zenoh is developed using Rust to keep it safe and efficient.
+First, install the [Rust](https://www.rust-lang.org/) environment. The core of Zenoh is developed in Rust for performance and safety. 
 
 ```bash
 sudo apt update
@@ -24,25 +25,24 @@ sudo apt install -y curl gcc
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ```
 
-Near the end of the installation you will see the success message:
+Near the end of the installation, you should see the message:
 
 ```output
 Rust is installed now. Great!
 ```
-
-Make sure to source the environment to add Rust to your shell environment:
+Source your shell environment to activate Rust:
 
 ```bash
 source "$HOME/.cargo/env"
 ```
 
-You can learn more using the [Rust install guide](/install-guides/rust/) for Arm Linux.
+For more information, see the [Rust Install Guide](/install-guides/rust/) for Arm Linux.
 
 ### Install ROS 2
 
 [Robot Operating System](https://www.ros.org/) is a set of software libraries and tools that help you build robot applications. ROS provides everything from drivers to state-of-the-art algorithms, as well as developer tools. It is completely open-source.
 
-If your use case involves ROS 2 integration, you should install ROS 2 before proceeding with Zenoh-related development. Follow the [ROS2 installation guide](/install-guides/ros2/) to install ROS 2 on your Arm platforms.
+If you plan to use Zenoh alongside ROS 2, for example, to bridge DDS-based nodes, you should install ROS 2 before proceeding. See the [ROS2 Installation Guide](/install-guides/ros2/) to install ROS 2 on your Arm platforms.
 
 ### Download and build the Zenoh source
 
@@ -52,15 +52,13 @@ Clone the Zenoh repository:
 cd $HOME
 git clone https://github.com/eclipse-zenoh/zenoh.git
 ```
-
-After cloning, use cargo to build the source:
+Build the source using Cargo:
 
 ```bash
 cd zenoh
 cargo build --release --all-targets -j $(nproc)
 ```
-
-This process will take several minutes depending on your device. Once the installation is complete, you should see:
+This process will take several minutes depending on your device. When complete, you should see output like:
 
 ```output
     Updating crates.io index
@@ -103,13 +101,16 @@ This may become a hard error in the future; see <https://github.com/rust-lang/ca
     Finished `release` profile [optimized] target(s) in 6m 28s
 ```
 
-After the build process, the binary executables will be stored under the directory of `~/zenoh/target/release/examples/`.
+After the build process, the binary executables will be located at `~/zenoh/target/release/examples/`.
 
 {{% notice Note %}}
 Installation time can vary depending on your device’s performance.
 {{% /notice %}}
 
-If you get a build error:
+
+## Troubleshooting build errors
+
+If you get a build error like this:
 ```output
 error[E0599]: no function or associated item named `start` found for struct `StoragesPlugin` in the current scope
    --> plugins/zenoh-plugin-storage-manager/tests/operations.rs:91:55
@@ -122,7 +123,7 @@ Edit the file `./plugins/zenoh-plugin-storage-manager/tests/operations.rs` and c
 use crate::path::to::Plugin;
 ```
 
-Run the build again:
+Then rebuild:
 
 ```bash
 cargo clean && cargo build

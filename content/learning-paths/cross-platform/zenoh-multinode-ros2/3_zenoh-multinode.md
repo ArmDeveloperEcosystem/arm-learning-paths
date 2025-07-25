@@ -1,5 +1,5 @@
 ---
-title: Set up a multi-node environment
+title: Containerize and deploy Zenoh across multiple Raspberry Pi devices
 
 weight: 4
 
@@ -15,7 +15,7 @@ If you’ve already installed Zenoh on an Arm Cortex-A or Neoverse platform as s
 
 However, to streamline deployment across multiple devices and ensure repeatability, this section demonstrates how to package Zenoh into a Docker image for batch rollout and scalable testing.
 
-This containerized approach not only simplifies deployment on Raspberry Pi, but also integrates seamlessly with Arm cloud platforms such as AWS Graviton Arm Cortex-A Linux or Arm Virtual Hardware—enabling a consistent cloud-to-edge development and validation workflow.
+This containerized approach not only simplifies deployment on Raspberry Pi, but also integrates seamlessly with Arm cloud platforms such as AWS Graviton Arm Cortex-A Linux or Arm Virtual Hardware, enabling a consistent cloud-to-edge development and validation workflow.
 
 In this session, you’ll use Raspberry Pi boards to simulate a scalable distributed environment. The same workflow applies to any Arm Linux system, including cloud instances and virtual hardware.
 
@@ -108,6 +108,9 @@ You can pull it directly using:
 ```bash
 docker pull odinlmshen/zenoh-node
 ```
+{{% notice Tip %}}
+Once built, you can reuse this Docker image across multiple Arm-based nodes, including Raspberry Pi, AWS Graviton, and Arm Virtual Hardware.
+{{% /notice %}}
 
 ### Transfer the Docker image to the other Raspberry Pi
 
@@ -130,7 +133,10 @@ Option 2: Push the image to a container registry such as Docker Hub
 
 You can also push the image to Docker Hub or GitHub Container Registry and pull it on the second device.
 
-### Run the Docker Image
+
+
+
+### Run the Docker image
 
 Once the image is successfully loaded on the second device, you can run the container to start the Zenoh environment.
 
@@ -144,8 +150,8 @@ The Zenoh example binaries are now available within this container, allowing you
 
 You’re now ready to run and test Zenoh communication flows across distributed edge devices.
 
-The following examples are written in Rust and precompiled in your container image. They're fully interoperable and can be used to demonstrate Zenoh's key capabilities across devices. The
-Rust binaries are already available under: `$ZENOH_LOC/target/release/examples/` directory. 
+The following examples are written in Rust and precompiled in your container image. They're fully interoperable and can be used to demonstrate Zenoh's key capabilities across devices. The Rust binaries are available in the `$ZENOH_LOC/target/release/examples/` directory. If you haven't set `ZENOH_LOC`, they can be found under `~/zenoh/target/release/examples/`.
+ 
 
 The following sections illustrate the procedures to run the Zenoh examples so as to demonstrate the primary capabilities of Zenoh:
 - Basic pub/sub – for real-time message distribution  
