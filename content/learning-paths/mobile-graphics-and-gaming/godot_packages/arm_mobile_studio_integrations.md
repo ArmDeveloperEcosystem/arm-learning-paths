@@ -151,3 +151,5 @@ func _on_new_wave_started() -> void:
 func _on_wave_completed() -> void:
     wave_job.stop()
 ```
+
+You can now annotate your Godot game and analyze the performance with markers that give context to a profile in Arm Performance Studio tools.
