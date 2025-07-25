@@ -22,7 +22,7 @@ Instead of streaming data continuously, robots expose a queryable endpoint that 
 
 This saves bandwidth and enables lightweight edge-side decision-making.
 
-### Create a new Zenoh rust project
+## Create a new Zenoh rust project
 
 On any Raspberry Pi:
 
@@ -40,7 +40,7 @@ tokio = { version = "1", features = ["full"] }
 url = "2"
 ```
 
-### Implement the queryable node
+## Implement the queryable node
 
 Next, log in to the other Raspberry Pi.
 
@@ -109,7 +109,7 @@ You can extend this queryable pattern to respond to other real-time diagnostics,
 
 This design pattern enables efficient, on-demand data exchange with minimal bandwidth usage. This is ideal for edge computing scenarios where resources and connectivity are constrained.
 
-### Battery health estimation formula
+## Battery health estimation formula
 
 The health score is calculated using the following logic:
 
@@ -129,7 +129,7 @@ For example, if `battery = 88` and `temp = 32`, then:
 - Temperature offset = (32 - 25) / 2 = 3
 - Health = 88 - 3 = 85%
 
-### Build and run
+## Build and run
 
 ```bash
 cd $HOME/zenoh/zenoh_battery_estimator
@@ -143,7 +143,7 @@ After the build process, you will see:
     Finished `release` profile [optimized] target(s) in 1m 22s
 ```
 
-### Query it with parameters
+## Query it with parameters
 
 Run it on the Raspberry Pi you used for the build run: 
 

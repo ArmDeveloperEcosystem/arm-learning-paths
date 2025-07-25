@@ -70,7 +70,7 @@ This model enables edge-based intelligence, such as:
 
 Queryable is a key feature for data-in-use scenarios, allowing fine-grained, on-demand compute inside your Zenoh-powered architecture.
 
-## What's next
+## What's next?
 
 In the next example, you'll extend this queryable pattern to support **runtime parameters**, such as battery level and temperature, allowing each node to return a calculated health score on demand.
 

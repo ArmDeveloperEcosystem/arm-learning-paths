@@ -16,8 +16,8 @@ Building on the previous pub/sub example, you’ll now run a lightweight Zenoh d
 This pattern is ideal for robotics and IIoT scenarios where devices intermittently connect or request snapshots of remote state.
 
 For example, in a warehouse or factory:
-- Robots can periodically publish position, temperature, or battery level
-- A central system or peer node can later query these values on demand
+- Robots can periodically publish position, temperature, or battery level.
+- A central system or peer node can later query these values on demand.
 
 Unlike Pub/Sub, which requires live, real-time message exchange, Zenoh's storage and query model enables asynchronous access to data that was published earlier, even if the original publisher is no longer online.
 
@@ -77,7 +77,7 @@ If you have more than two Raspberry Pi devices, you can run the `z_get` command 
 
 This example shows how Zenoh's storage with query model supports asynchronous data access and resilient state-sharing—critical capabilities in robotics and industrial IoT systems where network connectivity may be intermittent or system components loosely coupled.
 
-## What's next
+## What's next?
 
 Now that you've seen how Zenoh handles pub/sub and storage-based queries, you're ready to build reactive and intelligent edge nodes.
 
