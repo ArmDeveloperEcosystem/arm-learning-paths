@@ -1,5 +1,5 @@
 ---
-title: Introduction to Zenoh
+title: Build scalable communication systems with Eclipse Zenoh
 weight: 2
 
 ### FIXED, DO NOT MODIFY
