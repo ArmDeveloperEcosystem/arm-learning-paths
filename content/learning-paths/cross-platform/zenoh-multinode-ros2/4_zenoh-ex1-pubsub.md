@@ -1,18 +1,18 @@
 ---
-title: Zenoh Example-1 Simple Pub/Sub
+title: Run a simple Zenoh pub/sub example
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Example 1: Simple pub/sub
+## Test Zenoh pub/sub across two devices
 
-This first test demonstrates the real-time publish/subscribe model using two Raspberry Pi devices.
+This example demonstrates Zenoh's real-time publish/subscribe model across two Raspberry Pi devices.
 
-The following command is to initiate a subscriber for a key expression `demo/example/**`, a set of topics starting with the path `demo/example`.
+The subscriber listens for all data published under the key expression `demo/example/**`, which matches any topic beginning with `demo/example/`.
 
-### Step 1: Run subscriber
+## Start the subscriber node
 
 Run the subscriber example on one of the Raspberry Pi systems.
 
@@ -21,7 +21,7 @@ cd ~/zenoh/target/release/examples
 ./z_sub
 ```
 
-### Step 2: Run publisher
+## Start the publisher node
 
 Then, log in to the other Raspberry Pi and run the publisher.
 
@@ -30,12 +30,19 @@ cd ~/zenoh/target/release/examples
 ./z_pub
 ```
 
+{{% notice Tip %}}
+You can run both `z_sub` and `z_pub` on the same device for testing, but running them on separate Raspberry Pis demonstrates Zenoh’s distributed discovery and cross-node communication.
+{{% /notice %}}
+
+## Observe the pub/sub data flow
+
 The result is shown below:
 
-![img1 alt-text#center](zenoh_ex1.gif "Figure 1: Simple Pub/Sub")
+![img1 Zenoh subscriber receiving messages from a publisher in a two-terminal view#center](zenoh_ex1.gif "Simple Pub/Sub")
 
 The left-side window shows the `z_sub` program. 
 
 It receives values with the key `demo/example/zenoh-rs-pub` continuously published by `z_pub` running in the right-side window.
 
-This basic example shows Zenoh's zero-config discovery and low-latency pub/sub across physical nodes.
+This example confirms that Zenoh’s zero-configuration peer discovery and real-time pub/sub communication are working correctly across physical nodes.
+
