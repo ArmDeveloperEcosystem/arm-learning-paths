@@ -1,5 +1,5 @@
 ---
-title: Install and Use Arm integration extension in Godot
+title: Use the Arm Performance Studio Integration extension in Godot
 
 draft: true
 cascade:
