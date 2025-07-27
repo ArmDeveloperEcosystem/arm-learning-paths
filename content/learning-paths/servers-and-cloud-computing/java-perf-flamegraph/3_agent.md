@@ -35,4 +35,4 @@ sudo perf inject -j -i perf.data | perf script | stackcollapse-perf.pl | flamegr
 
 4. Launch profile.svg in a browser to analyse the profiling result
 
-![example image alt-text#center](_images/LP-flamegraph-agent.png "Java Flame Graph via Java agent and perf")
+![example image alt-text#center](_images/lp-flamegraph-agent.png "Java Flame Graph via Java agent and perf")

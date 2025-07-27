@@ -42,9 +42,9 @@ vim apache-tomcat-11.0.9/webapps/examples/META-INF/context.xml
 
 4. If you can access the page at "http://${tomcat_ip}:8080/examples" via a browser, congratulations-you can proceed to the next benchmarking step.
 
-![example image alt-text#center](./_images/LP-tomcat-homepage.png "Tomcat-HomePage")
+![example image alt-text#center](./_images/lp-tomcat-homepage.png "Tomcat-HomePage")
 
-![example image alt-text#center](./_images/LP-tomcat-examples.png "Tomcat-Examples")
+![example image alt-text#center](./_images/lp-tomcat-examples.png "Tomcat-Examples")
 
 ## Setup Benchmark Client - [wrk2](https://github.com/giltene/wrk2)
 - wrk2 is a high-performance HTTP benchmarking tool specialized in generating constant throughput loads and measuring latency percentiles for web services.

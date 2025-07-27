@@ -27,4 +27,4 @@ cd async-profiler-4.0-linux-arm64/bin
 
 3. Launch profile.html in a browser to analyse the profiling result
 
-![example image alt-text#center](_images/LP-flamegraph-async.png "Java Flame Graph via async-profiler")
+![example image alt-text#center](_images/lp-flamegraph-async.png "Java Flame Graph via async-profiler")
