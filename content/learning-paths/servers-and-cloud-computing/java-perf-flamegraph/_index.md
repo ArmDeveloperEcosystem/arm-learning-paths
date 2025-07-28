@@ -1,5 +1,5 @@
 ---
-title: Java Performance Analysis - FlameGraph
+title: Analyze Java Performance on Arm servers using FlameGraphs
 
 draft: true
 cascade:
@@ -7,7 +7,7 @@ cascade:
     
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory guide for individuals aiming to perform performance analysis of Java applications on the ARM Neoverse platform using flame graphs. 
+who_is_this_for: This is an introductory topic for software developers looking to analyze the performance of their Java applications on the Arm Neoverse based servers using flame graphs. 
 
 learning_objectives: 
     - How to set up tomcat benchmark environment
@@ -17,13 +17,12 @@ learning_objectives:
 prerequisites:
     - Basic familiarity with Java applications
     - Basic familiarity with flame graphs
-    - Basic familiarity with Tomcat, wrk, etc
 
 author: Ying Yu, Martin Ma
 
 ### Tags
 skilllevels: Introductory
-subjects: Java Performance Analysis
+subjects: Performance and Architecture
 armips:
     - Neoverse
   
@@ -34,13 +33,13 @@ tools_software_languages:
     - FlameGraph
     - wrk2
 operatingsystems:
-    - Ubuntu 24
+    - Linux
 
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: OpenJDK Wiki 
+        link: https://wiki.openjdk.org/
         type: documentation
     - resource:
         title: PLACEHOLDER BLOG 
