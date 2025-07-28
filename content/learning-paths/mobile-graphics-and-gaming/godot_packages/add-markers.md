@@ -1,9 +1,16 @@
 ---
-title: Add performance markers in Godot
+title: Annotate Game Events for Profiling in Godot
 weight: 5
 layout: learningpathall
 ---
 
+## Using the extension
+
+All functionality in the extension is provided by the PerformanceStudio class, so first create an instance of it:
+
+```console
+var performance_studio = PerformanceStudio.new()
+```
 ## Add single markers to highlight key game events
 
 All functionality in the extension is provided by the `PerformanceStudio` class. First, create an instance:

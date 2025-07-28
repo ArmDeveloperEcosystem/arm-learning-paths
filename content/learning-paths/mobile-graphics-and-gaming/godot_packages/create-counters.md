@@ -3,25 +3,23 @@ title: Create and track custom counters in Godot
 weight: 8
 layout: learningpathall
 ---
+### Creating counters
 
-## Track numerical performance data using counters
+Counters are numerical data points that can be plotted as a chart in the Streamline timeline view. Counters can be created as either absolute counters, where every value is an absolute value, or as a delta counter, where values are the number of instances of an event since the last value was emitted. All values are floats and will be presented to 2 decimal places.
 
-Counters are float values plotted as charts in the Streamline timeline. You can use **absolute counters** (e.g., frame rate) or **delta counters** (e.g., events per frame).
+When charts are first defined, you can specify a title and series name. The title names the chart, the series names the data series.
 
-### Create a counter:
+Multiple counter series can use the same title, which means that they will be plotted on the same chart in the Streamline timeline.
 
-```gdscript
+To create a counter:
+
+```console
 var counter = performance_studio.create_counter("Title", "Series", false)
 ```
 
-- `Title` = name of the chart
-- `Series` = label for the data series
-- `false` = absolute (set `true` for delta counters)
+Counter values are set easily as shown below:
 
-### Update counter values:
-
-```gdscript
+```console
 counter.setValue(42.2)
 ```
 
-Multiple series can share the same chart title to group related values together.
