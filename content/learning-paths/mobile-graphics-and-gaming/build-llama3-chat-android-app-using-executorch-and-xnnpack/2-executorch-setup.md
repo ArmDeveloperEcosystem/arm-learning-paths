@@ -15,8 +15,8 @@ The best practice is to generate an isolated Python environment in which to inst
 ### Option 1: Create a Python virtual environment
 
 ```bash
-python3.10 -m venv executorch
-source executorch/bin/activate
+python3.10 -m venv executorch-venv
+source executorch-venv/bin/activate
 ```
 
 The prompt of your terminal has `executorch` as a prefix to indicate the virtual environment is active.
@@ -28,8 +28,8 @@ Install Miniconda on your development machine by following the [Installing conda
 Once `conda` is installed, create the environment:
 
 ```bash
-conda create -yn executorch python=3.10.0
-conda activate executorch
+conda create -yn executorch-venv python=3.10.0
+conda activate executorch-venv
 ```
 
 ### Clone ExecuTorch and install the required dependencies
@@ -40,7 +40,7 @@ From within the conda environment, run the commands below to download the ExecuT
 git clone https://github.com/pytorch/executorch.git
 cd executorch
 git submodule sync
-git submodule update --init
+git submodule update --init --recursive
 ./install_executorch.sh
 ./examples/models/llama/install_requirements.sh
 ```
