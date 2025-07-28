@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- Linux: 153
+- Linux: 154
 - macOS: 10
 - Windows: 14
 pinned_modules:
@@ -19,7 +19,7 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 6
-- Containers and Virtualization: 28
+- Containers and Virtualization: 29
 - Databases: 15
 - Libraries: 9
 - ML: 28
@@ -53,10 +53,10 @@ tools_software_languages_filter:
 - AWS Elastic Container Service (ECS): 1
 - AWS Elastic Kubernetes Service (EKS): 3
 - AWS Graviton: 1
-- Azure CLI: 1
+- Azure CLI: 2
 - Azure Portal: 1
-- bash: 2
 - Bash: 1
+- bash: 2
 - Bastion: 3
 - BOLT: 2
 - bpftool: 1
@@ -99,7 +99,7 @@ tools_software_languages_filter:
 - GoogleTest: 1
 - HammerDB: 1
 - Herd7: 1
-- Hugging Face: 9
+- Hugging Face: 10
 - InnoDB: 1
 - Intrinsics: 1
 - iPerf3: 1
@@ -112,7 +112,6 @@ tools_software_languages_filter:
 - Libamath: 1
 - libbpf: 1
 - Linaro Forge: 1
-- Linux: 1
 - Litmus7: 1
 - Llama.cpp: 1
 - LLM: 9
@@ -125,8 +124,8 @@ tools_software_languages_filter:
 - MongoDB: 2
 - mpi: 1
 - MySQL: 9
-- Neon: 3
 - NEON: 4
+- Neon: 3
 - Nexmark: 1
 - Nginx: 3
 - Node.js: 3
@@ -141,6 +140,7 @@ tools_software_languages_filter:
 - PostgreSQL: 4
 - Python: 28
 - PyTorch: 9
+- QEMU: 1
 - RAG: 1
 - Redis: 3
 - Remote.It: 2
@@ -180,6 +180,6 @@ weight: 1
 cloud_service_providers_filter:
 - AWS: 17
 - Google Cloud: 13
-- Microsoft Azure: 9
+- Microsoft Azure: 10
 - Oracle: 2
 ---

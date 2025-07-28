@@ -39,5 +39,7 @@ tools_software_languages_filter:
 - Raspberry Pi: 4
 - Remote.It: 1
 - ROS2: 1
+- Rust: 1
 - VS Code: 1
+- Zenoh: 1
 ---
