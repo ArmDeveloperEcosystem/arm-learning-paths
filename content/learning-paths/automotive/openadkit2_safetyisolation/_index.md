@@ -8,7 +8,7 @@ who_is_this_for: This Learning Path is for automotive engineers developing safet
 learning_objectives: 
     - Apply functional safety principles, including risk prevention, fault detection, and ASIL compliance, to build robust, certifiable automotive systems
     - Use DDS and a publish-subscribe architecture for low-latency, scalable, and fault-tolerant communication in autonomous driving systems
-    - Implement distributed development by separating the simulation platform into independent,     safety-isolated components
+    - Implement distributed development by separating the simulation platform into independent, safety-isolated components
 
 prerequisites:
     - Access to two Arm-based Neoverse cloud instances, or a local Arm Neoverse Linux system with at least 16 CPUs and 32 GB of RAM
