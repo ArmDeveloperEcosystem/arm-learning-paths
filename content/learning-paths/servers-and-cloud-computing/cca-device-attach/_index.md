@@ -1,6 +1,10 @@
 ---
 title: CCA device attach
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 90
 
 who_is_this_for: This Learning Path is for developers who want to learn about CCA Realms, VirtIO, Bounce Buffers and Device Attach.
