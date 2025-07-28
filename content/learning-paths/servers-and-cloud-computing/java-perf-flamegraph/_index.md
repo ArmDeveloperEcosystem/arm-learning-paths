@@ -1,6 +1,10 @@
 ---
 title: Java Performance Analysis - FlameGraph
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory guide for individuals aiming to perform performance analysis of Java applications on the ARM Neoverse platform using flame graphs. 
