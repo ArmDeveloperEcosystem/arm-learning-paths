@@ -4,9 +4,13 @@ weight: 4
 layout: learningpathall
 ---
 
-## Install the Arm Performance Studio Integration extension
+## Install the Arm Performance Studio extension in Godot
 
-1. In Godot, click **AssetLib** to see the available extensions.
+To profile performance in your Godot game, first install the Arm Performance Studio extension using the Godot Asset Library.
+
+Start by opening your project in Godot,  then select **AssetLib** from the top menu to browse available extensions.
+
+
 2. Find the **Arm Performance Studio Integration** extension, then double-click to open the extension.
 3. The extension opens in a dialog box. Click **Download**.
 
