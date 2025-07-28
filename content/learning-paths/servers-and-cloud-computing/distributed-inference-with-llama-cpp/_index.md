@@ -1,6 +1,10 @@
 ---
 title: Distributed inference using llama.cpp
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 30
 
 who_is_this_for: This learning path is for developers with some experience using llama.cpp who want to learn about distributed inference.
