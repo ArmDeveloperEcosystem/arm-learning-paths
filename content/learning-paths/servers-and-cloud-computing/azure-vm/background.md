@@ -36,8 +36,8 @@ You should see an output similar to:
 
 ```output
 {
-  "azure-cli": "2.61.0",
-  "azure-cli-core": "2.61.0",
+  "azure-cli": "2.75.0",
+  "azure-cli-core": "2.75.0",
   "azure-cli-telemetry": "1.1.0",
   "extensions": {}
 }

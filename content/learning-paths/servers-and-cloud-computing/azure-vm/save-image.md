@@ -37,6 +37,14 @@ VM_SIZE="Standard_D4ps_v6"
 You can modify the environment variables such as RESOURCE_GROUP, VM_NAME, and LOCATION based on your naming preferences, region, and resource requirements.
 {{% /notice %}}
 
+Make sure to login to Azure using the CLI.
+
+```bash
+az login
+```
+
+If a link is printed, open it in a browser and enter the provided code to authenticate. 
+
 Create a new resource group. If you are using an existing resource group for the RESOURCE_GROUP environment variable you can skip this step. 
 
 ```bash
@@ -88,41 +96,41 @@ az sig create \
 Create the image definition.
 
 ```bash
-az sig image-definition create  
- --resource-group "$RESOURCE_GROUP"  
- --gallery-name "$GALLERY_NAME"  
- --gallery-image-definition "$IMAGE_DEF_NAME"  
- --publisher "$PUBLISHER"  
- --offer "$OFFER"  
- --sku "$SKU"  
- --os-type "$OS_TYPE"  
- --architecture "$ARCHITECTURE"  
+az sig image-definition create \
+ --resource-group "$RESOURCE_GROUP" \
+ --gallery-name "$GALLERY_NAME" \
+ --gallery-image-definition "$IMAGE_DEF_NAME" \
+ --publisher "$PUBLISHER" \
+ --offer "$OFFER" \
+ --sku "$SKU" \
+ --os-type "$OS_TYPE" \
+ --architecture "$ARCHITECTURE" \
  --hyper-v-generation "$HYPERV_GEN"
 ```
 
 Create the image version to register the VHD as a version of the custom image.
 
 ```bash
-az sig image-version create  
- --resource-group "$RESOURCE_GROUP"  
- --gallery-name "$GALLERY_NAME"  
- --gallery-image-definition "$IMAGE_DEF_NAME"  
- --gallery-image-version "$IMAGE_VERSION"  
- --location "$LOCATION"  
- --os-vhd-uri "[https://${STORAGE_ACCOUNT}.blob.core.windows.net/${CONTAINER_NAME}/${VHD_NAME](https://${storage_account}.blob.core.windows.net/$%7BCONTAINER_NAME%7D/$%7BVHD_NAME)}"  
- --os-vhd-storage-account "$STORAGE_ACCOUNT"  
+az sig image-version create \
+ --resource-group "$RESOURCE_GROUP" \
+ --gallery-name "$GALLERY_NAME" \
+ --gallery-image-definition "$IMAGE_DEF_NAME" \
+ --gallery-image-version "$IMAGE_VERSION" \
+ --location "$LOCATION" \
+ --os-vhd-uri "https://${STORAGE_ACCOUNT}.blob.core.windows.net/${CONTAINER_NAME}/${VHD_NAME}" \
+ --os-vhd-storage-account "$STORAGE_ACCOUNT" \
  --storage-account-type "$STORAGE_ACCOUNT_TYPE" 
 ```
 
 Once the image has been versioned, you can retrieve the unique image ID for use in VM creation.
 
 ```bash
-IMAGE_ID=$(az sig image-version show  
- --resource-group "$RESOURCE_GROUP"  
- --gallery-name "$GALLERY_NAME"  
- --gallery-image-definition "$IMAGE_DEF_NAME"  
- --gallery-image-version "$IMAGE_VERSION"  
+IMAGE_ID=$(az sig image-version show   \
+ --resource-group "$RESOURCE_GROUP"   \
+ --gallery-name "$GALLERY_NAME"   \
+ --gallery-image-definition "$IMAGE_DEF_NAME"  \
+ --gallery-image-version "$IMAGE_VERSION" \
  --query "id" -o tsv)
 ```
 
-Next, you can create a virtual machine with the new image using the image ID. 
+Next, you can create a virtual machine with the new image using the image ID.
