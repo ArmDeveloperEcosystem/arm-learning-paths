@@ -1,20 +1,20 @@
 ---
-title: "Device attach - part 1: virtio"
+title: "Device attach: virtio"
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-This section is a high level overview of VirtIO and Bounce Buffers, and how they
+This section provides a high level overview of VirtIO and Bounce Buffers, and how they
 relate to CCA Realms.
 
 A Realm has to use physical devices at some point to interact with the external
-and / or physical world. The easiest way to do this is by using VirtIO, which
-provides a fast high level emulation layer. This can be seen as the level-0 of
+and or physical world. The easiest way to do this is by using VirtIO, which
+provides a fast high level emulation layer. This can be viewed as the first level of
 device attach.
 
-As will be seen later in this learning path, more evolved device attach can be
+More evolved device attach features can be
 performed leveraging hardware security features like PCIe-TDISP (**T**EE
 **D**evice **I**nterface **S**ecurity **P**rotocol) and PCIe-IDE (**I**ntegrity
 and **D**ata **E**ncryption), where the host OS can assign a physical device to
@@ -27,8 +27,8 @@ and include it in its base and measurements.
 
 VirtIO is an abstraction layer for virtual devices in virtualized environments.
 It provides standardized and efficient interfaces between guest virtual machines
-(VMs) and host devices, making it easier to develop _paravirtualized_ drivers.
-_Paravirtualized_ means that the guest OS is aware it’s running in a virtualized
+(VMs) and host devices, making it easier to develop paravirtualized drivers.
+Paravirtualized means that the guest OS is aware it’s running in a virtualized
 environment and can use optimized drivers (VirtIO) to communicate with virtual
 hardware. Emulating hardware devices (like NICs or disks) for VMs is slow and
 inefficient. VirtIO provides a standardized and efficient interface that allows
@@ -45,9 +45,11 @@ VirtIO is most commonly used with KVM/QEMU virtualization. Example drivers are:
 
 ### How VirtIO works in VMs
 
+Here is an overview of how VirtIO works in Virtual Machines:
+
 1. The Host Hypervisor (e.g., QEMU/KVM) exposes VirtIO “backend” devices.
 2. The guest OS loads VirtIO _frontend_ drivers (e.g., `virtio_net`,
-   `virtio_blk`) that speak the VirtIO protocol.
+   `virtio_blk`) that communicate using the VirtIO protocol.
 3. Communication happens via shared memory (`virtqueues`) for I/O operations,
    avoiding full device emulation.
 4. Devices are exposed over the PCI or MMIO bus to the guest.
@@ -60,15 +62,12 @@ driver to send/receive packets via shared buffers.
 
 ### What are bounce buffers?
 
-Bounce buffers are a generic mechanism part of the Linux kernel. They are
-temporary memory buffers used in the Linux kernel to handle situations where
-direct memory access (DMA) can’t be performed directly on the original data
-buffer. This often happens because:
+Bounce buffers are temporary memory buffers used in the Linux kernel to handle situations where direct memory access (DMA) can’t be performed directly on the original data buffer. This often happens because:
 1. The original buffer is not physically contiguous.
 2. The buffer is in high memory or not accessible to the device.
 3. The buffer doesn’t meet alignment or boundary requirements of the device.
 
-### Why _bounce_ buffers?
+### Why bounce buffers?
 
 Data _bounces_ between:
 - The original buffer (in user/kernel space) and
@@ -88,14 +87,14 @@ that:
 - Even Direct Memory Access (DMA) from peripherals or untrusted drivers cannot
   access Realm data.
 
-This design ensures confidentiality but introduces a problem: *how can Realms
-interact with untrusted components*, such as:
+This design ensures confidentiality but introduces a problem: How can Realms
+interact with untrusted components, such as:
 - Network stacks in the host OS,
 - Storage subsystems,
 - I/O devices managed by untrusted drivers?
 
 The solution to safely exchange data between a Realm and the outside World is to
-use _bounce buffers_ as an intermediary !
+use bounce buffers as an intermediary.
 
 ### How bounce buffers are used with RME
 
@@ -117,27 +116,27 @@ This pattern preserves confidentiality and integrity of Realm data, since:
 
 ### Confidentiality preserved with bounce buffers, really?
 
-In the previous section, it was mentioned that _bounce buffers preserves
-confidentiality_, a sentence which deserves a bit more thoughts. Bounce buffers
+In the previous section, it was mentioned that bounce buffers preserve
+confidentiality. Lets dive a little deeper into that. Bounce buffers
 are nothing more than an explicitly shared temporary area between the Realm
 world and the outside world. This does indeed preserve the confidentiality of
 all the rest of the Realm data. On the other hand, for the data being
 transferred, it is leaving the Realm world and will only remain confidential if it
-is encrypted in some ways, e.g. for network traffic, TLS should be used.
+is encrypted in some way, e.g. for network traffic, TLS should be used.
 
 ## Seeing a Realm's bounce buffers at work
 
-Let's put this to work and check for ourselves that bounce buffers are used. This
-will build on the Key Broker demo that was used in the [CCA
+Let's put this to work and check for ourselves that bounce buffers are used. The
+steps in this section will build on the Key Broker demo that was used in the [CCA
 Essentials learning path](/learning-paths/servers-and-cloud-computing/cca-essentials/example/),
 demonstrating an end-to-end attestation.
 
-### Start the **K**eyb **B**roker **Server** (KBS)
+### Start the Key Broker Server (KBS)
 
 First, pull the docker container image with the pre-built KBS, and then run the container:
 
 ```bash
-docker pull armswdev/cca-learning-path:cca-key-broker-v2
+docker pull armswdev/cca-learning-path:cca-key-broker-v2 
 docker run --rm -it armswdev/cca-learning-path:cca-key-broker-v2
 ```
 
@@ -181,7 +180,7 @@ INFO starting service: "actix-web-service-172.17.0.2:8088", workers: 16, listeni
 ### Get into a Realm
 
 With the Key Broker Server running in one terminal, open up a new terminal in
-which you will run the **K**ey **B**roker **C**lient (KBC). The intent is to
+which you will run the Key Broker Client (KBC). The intent is to
 observe that the data transmitted over the network (thru `virtio_net`) are
 indeed using bounce buffers.
 
@@ -231,7 +230,7 @@ cd /cca
 ```
 
 You should see the realm boot. Note that `lkvm` is invoked with `--network
-mode=user`, which makes the guest see the network thru a VirtIO device.
+mode=user`, which makes the guest see the network through a VirtIO device.
 
 After boot up, which might take some time, you will be prompted to log in at the
 guest Linux prompt. Use root again as the username:
@@ -306,10 +305,10 @@ hwmon                    pwm
 i2c                      qcom_aoss
 ```
 
-As shown in the above transcript, you should get a list of the available trace
+As shown above, you should see a list of the available trace
 points.
 
-Now, enable the kernel tracing infrastructure together with the bounce buffer
+Now, enable the kernel tracing infrastructure together with bounce buffer
 tracing, read the trace in the background (filtering on `keybroker-app-`) and
 run the Key Broker Client application in the realm, using the endpoint address
 that the Key Broker Server is listening on (from the other terminal):
@@ -324,7 +323,7 @@ keybroker-app -v --endpoint http://172.17.0.2:8088 skywalker
 In the `keybroker-app`command above, `skywalker` is the key name that is
 requested from the KBS.
 
-You should get an output looking like:
+The output should look like:
 
 ```output
 INFO Requesting key named 'skywalker' from the keybroker server with URL http://172.17.0.2:8088/keys/v1/key/skywalker
@@ -336,4 +335,5 @@ INFO Attestation success :-) ! The key returned from the keybroker is 'May the f
 ```
 
 Note that the interleaving of the trace messages and KBC messages might differ
-from one run to another.
+from one run to another. With the `switlb_bounced` messages above you can successfully observe that the bounce buffers are being used in the realm.
+

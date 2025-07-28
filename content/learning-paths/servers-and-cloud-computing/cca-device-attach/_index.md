@@ -7,7 +7,7 @@ cascade:
     
 minutes_to_complete: 90
 
-who_is_this_for: This Learning Path is for developers who want to learn about CCA Realms, VirtIO, Bounce Buffers and Device Attach.
+who_is_this_for: This is an advanced topic for developers who want to learn about Arm CCA Realms, VirtIO, Bounce Buffers and Device Attach.
 
 learning_objectives:
     - Have a high level understanding of VirtIO and Bounce Buffers in CCA Realms
