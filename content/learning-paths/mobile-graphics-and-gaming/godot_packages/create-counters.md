@@ -3,23 +3,41 @@ title: Create and track custom counters in Godot
 weight: 8
 layout: learningpathall
 ---
-### Creating counters
+## What are counters?
 
-Counters are numerical data points that can be plotted as a chart in the Streamline timeline view. Counters can be created as either absolute counters, where every value is an absolute value, or as a delta counter, where values are the number of instances of an event since the last value was emitted. All values are floats and will be presented to 2 decimal places.
+Counters are floating-point values plotted as line charts in Streamline. Each value appears with two decimal places of precision.
 
-When charts are first defined, you can specify a title and series name. The title names the chart, the series names the data series.
+There are two types of counters:
 
-Multiple counter series can use the same title, which means that they will be plotted on the same chart in the Streamline timeline.
+- Absolute counters: every value is treated as an independent measurement
 
-To create a counter:
+- Delta counters: each value represents the change since the last measurement (for example, the number of enemy spawns since the last update)
+
+## Define your counter chart
+
+When charts are first defined, you can specify:
+
+- A title: this names the chart in Streamline
+
+- A series name: this labels the specific data stream within the chart
+
+You can group multiple counter series under the same title to plot them on the same chart.
+
+## Create and update a counter
+
+Use the `create_counter()` method to define a counter in your script. For example:
 
 ```console
 var counter = performance_studio.create_counter("Title", "Series", false)
 ```
 
-Counter values are set easily as shown below:
+The third parameter sets whether the counter is a delta counter `(true)` or absolute counter `(false)`.
+
+To update the counter value, use:
 
 ```console
 counter.setValue(42.2)
 ```
+
+This value will appear in the timeline alongside other profiling data during a Streamline capture.
 

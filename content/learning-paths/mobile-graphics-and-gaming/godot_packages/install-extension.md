@@ -10,10 +10,17 @@ To profile performance in your Godot game, first install the Arm Performance Stu
 
 Start by opening your project in Godot,  then select **AssetLib** from the top menu to browse available extensions.
 
+Search for **Arm Performance Studio Integration**, then double-click the result to open its details.
 
-2. Find the **Arm Performance Studio Integration** extension, then double-click to open the extension.
-3. The extension opens in a dialog box. Click **Download**.
+In the extension dialog that appears, select **Download** to begin the installation.
 
-![Installing the Arm Performance Studio Integration extension in Godot](godot_install_performance_studio_extension.png "Figure 2. Installing the Arm Performance Studio Integration extension in Godot")
+![Extension download dialog in Godot#center](godot_install_performance_studio_extension.png "Download dialog for the Arm Performance Studio Integration extension in Godot")
 
-4. A new dialog box opens where you can change the install folder if required. Click **Install**.
+When prompted, you can change the install folder if needed. To complete the setup, select **Install**.
+
+The extension will now be added to your project and ready to use for adding markers and counters.
+
+
+
+
+
