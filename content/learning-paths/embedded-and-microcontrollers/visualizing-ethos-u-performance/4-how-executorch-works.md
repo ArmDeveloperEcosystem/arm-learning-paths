@@ -1,6 +1,6 @@
 ---
 # User change
-title: "How ExecuTorch Works"
+title: "Understand the ExecuTorch workflow"
 
 weight: 5 # 1 is first, 2 is second, etc.
 
@@ -8,22 +8,27 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
+Before setting up your environment, it helps to understand how ExecuTorch processes a model and runs it on Arm-based hardware.
+
 To get a better understanding of [How ExecuTorch Works](https://docs.pytorch.org/executorch/stable/intro-how-it-works.html) refer to the official PyTorch Documentation. A summary is provided here for your reference:
 
+## ExecuTorch pipeline overview
+
+ExecuTorch works in three main stages:
+
 1. **Export the model:**
-   * Generate a Graph
-   * A graph is series of operators (ReLU, quantize, etc.) eligible for delegation to an accelerator
-   * Your goal is to identify operators for acceleration on the Ethos-U NPU
-2. **Compile to ExecuTorch:**
-   * This is the ahead-of-time compiler
-   * This is why ExecuTorch inference is faster than PyTorch inference
-   * Delegate operators to an accelerator, like the Ethos-U NPU
-3. **Run on targeted device:**
-   * Deploy the ML model to the Fixed Virtual Platform (FVP) or physical device
+   * Convert a trained PyTorch model into an operator graph.
+   * Identify operators that can be offloaded to the Ethos-U NPU (for example, ReLU, conv, quantize).
+2. **Compile with the AOT compiler:**
+   * Translate the operator graph into an optimized, quantized format.
+   * Use `--delegate` to move eligible operations to the Ethos-U accelerator.
+   * Save the compiled output as a `.pte` file.
+3. **Deploy and run:**
+   * Deploy the ML model to a Fixed Virtual Platform (FVP) or physical device
    * Execute operators on the CPU and delegated operators on the Ethos-U NPU
 
 **Diagram of How ExecuTorch Works**
-![How ExecuTorch works](./how-executorch-works-high-level.png)
+![How ExecuTorch works#center](./how-executorch-works-high-level.png)
 
 ## Deploy a TinyML Model
 
