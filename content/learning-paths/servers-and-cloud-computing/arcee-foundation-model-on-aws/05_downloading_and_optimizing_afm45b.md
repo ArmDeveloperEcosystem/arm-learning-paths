@@ -66,7 +66,7 @@ This command creates a 4-bit quantized version of the model:
 
 ## Arm optimization 
 
-Arm has contributed optimized kernels for Q4_0 that use Neoverse v2 instruction sets. These low-level routines accelerate math operations, delivering strong performance on Graviton4.
+Arm has contributed optimized kernels for Q4_0 that use Neoverse V2 instruction sets. These low-level routines accelerate math operations, delivering strong performance on Graviton4.
 
 These instruction sets allow Llama.cpp to run quantized operations significantly faster than generic implementations, making Arm processors a competitive choice for inference workloads.
 
@@ -85,7 +85,7 @@ This command creates an 8-bit quantized version of the model:
   
 ## Arm optimization
 
-Similar to Q4_0, Arm has contributed optimized kernels for Q8_0 quantization that take advantage of Neoverse v2 instruction sets. These optimizations provide excellent performance for 8-bit operations while maintaining higher accuracy compared to 4-bit quantization.
+Similar to Q4_0, Arm has contributed optimized kernels for Q8_0 quantization that take advantage of Neoverse V2 instruction sets. These optimizations provide excellent performance for 8-bit operations while maintaining higher accuracy compared to 4-bit quantization.
 
 ## Model files ready for inference
 

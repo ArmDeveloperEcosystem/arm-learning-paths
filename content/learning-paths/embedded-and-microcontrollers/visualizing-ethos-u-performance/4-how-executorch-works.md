@@ -8,7 +8,8 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-Source: [How ExecuTorch Works](https://docs.pytorch.org/executorch/stable/intro-how-it-works.html) (official PyTorch Documentation)
+To get a better understanding of [How ExecuTorch Works](https://docs.pytorch.org/executorch/stable/intro-how-it-works.html) refer to the official PyTorch Documentation. A summary is provided here for your reference:
+
 1. **Export the model:**
    * Generate a Graph
    * A graph is series of operators (ReLU, quantize, etc.) eligible for delegation to an accelerator

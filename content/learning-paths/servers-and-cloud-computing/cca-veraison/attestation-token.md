@@ -13,10 +13,10 @@ In this section, you will obtain an example CCA attestation token. To set up the
 First, start by removing any existing Go installation. Next, obtain the install files and run the following command:
 
 ```bash
-rm -rf /usr/local/go
+sudo rm -rf /usr/local/go
 
 wget https://go.dev/dl/go1.23.3.linux-$(dpkg --print-architecture).tar.gz
-tar -C /usr/local -xzf go1.23.3.linux-$(dpkg --print-architecture).tar.gz
+sudo tar -C /usr/local -xzf go1.23.3.linux-$(dpkg --print-architecture).tar.gz
 ```
 
 Export the installation path and add it to your `$PATH environment` variable:

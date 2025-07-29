@@ -39,28 +39,30 @@ repo version
 The output looks like this:
 
 ```output
+/usr/bin/repo:681: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.datetime.utcnow()
 <repo not installed>
-repo launcher version 2.17
+repo launcher version 2.36
        (from /usr/bin/repo)
-git 2.34.1
-Python 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0]
-OS Linux 6.2.0-1009-aws (#9~22.04.3-Ubuntu SMP Tue Aug  1 21:11:51 UTC 2023)
-CPU x86_64 (x86_64)
-Bug reports: https://bugs.chromium.org/p/gerrit/issues/entry?template=Repo+tool+issue
+git 2.43.0
+Python 3.12.3 (main, Jun 18 2025, 17:59:45) [GCC 13.3.0]
+OS Linux 6.8.0-1031-aws (#33-Ubuntu SMP Fri Jun 20 17:58:11 UTC 2025)
+CPU aarch64 (aarch64)
+Bug reports: https://issues.gerritcodereview.com/issues/new?component=1370071
 ```
 
 ### Fetch source code
 
 Create a new directory in to which you can download the source code, build the stack, and then obtain the manifest file.
 
-To obtain the manifest, choose a tag of the platform reference firmware. [RD-INFRA-2023.09.29](https://neoverse-reference-design.docs.arm.com/en/latest/releases/RD-INFRA-2023.09.29/release_note.html) is used here, although it is recommended to use the latest version available. See the [release notes](https://neoverse-reference-design.docs.arm.com/en/latest/) for more information.
+To obtain the manifest, choose a tag of the platform reference firmware. [RD-INFRA-2025.07.03](https://neoverse-reference-design.docs.arm.com/en/latest/releases/RD-INFRA-2025.07.03/release_note.html) is used here, although it is recommended to use the latest version available. See the [release notes](https://neoverse-reference-design.docs.arm.com/en/latest/) for more information.
 
 Specify the platform you would like with the manifest. In the [manifest repo](https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests) there are a number of available platforms. In this case, select `pinned-rdn2.xml`.
 
 ```bash 
 mkdir rd-infra
 cd rd-infra/
-repo init -u https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests.git -m pinned-rdn2.xml -b refs/tags/RD-INFRA-2023.12.22
+repo init -u https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests.git -m pinned-rdn2.xml -b refs/tags/RD-INFRA-2025.07.03
 ```
 
 Now look at what the configured manifest contains:
@@ -104,24 +106,24 @@ The contents of `pinned-rdn2.xml` are shown below:
   <remote fetch="https://git.kernel.org" name="kernel"/>
   <remote fetch="https://git.trustedfirmware.org" name="tforg"/>
 
-  <project remote="arm" name="platsw/scp-firmware" path="scp" revision="refs/tags/RD-INFRA-2023.12.22"/>
-  <project remote="arm" name="platsw/trusted-firmware-a" path="tf-a" revision="refs/tags/RD-INFRA-2023.12.22"/>
-  <project remote="arm" name="platsw/edk2" path="uefi/edk2" revision="refs/tags/RD-INFRA-2023.12.22"/>
-  <project remote="arm" name="platsw/edk2-platforms" path="uefi/edk2/edk2-platforms" revision="refs/tags/RD-INFRA-2023.12.22"/>
-  <project remote="arm" name="platsw/linux" path="linux" revision="refs/tags/RD-INFRA-2023.12.22"/>
-  <project remote="arm" name="scripts/build-scripts" path="build-scripts" revision="refs/tags/RD-INFRA-2023.12.22"/>
-  <project remote="arm" name="scripts/model-scripts" path="model-scripts" revision="refs/tags/RD-INFRA-2023.12.22"/>
-  <project remote="arm" name="scripts/container-scripts" path="container-scripts" revision="refs/tags/RD-INFRA-2023.12.22"/>
-  <project remote="arm" name="valsw/kvm-unit-tests" path="validation/sys-test/kvm-unit-tests" revision="refs/tags/RD-INFRA-2023.12.22"/>
-  <project remote="arm" name="platsw/buildroot" path="buildroot" revision="refs/tags/RD-INFRA-2023.12.22"/>
+  <project remote="arm" name="platsw/scp-firmware" path="scp" revision="refs/tags/RD-INFRA-2024.12.20"/>
+  <project remote="arm" name="platsw/trusted-firmware-a" path="tf-a" revision="refs/tags/RD-INFRA-2024.12.20"/>
+  <project remote="arm" name="platsw/edk2" path="uefi/edk2" revision="refs/tags/RD-INFRA-2024.12.20"/>
+  <project remote="arm" name="platsw/edk2-platforms" path="uefi/edk2/edk2-platforms" revision="refs/tags/RD-INFRA-2024.12.20"/>
+  <project remote="arm" name="platsw/linux" path="linux" revision="refs/tags/RD-INFRA-2024.12.20"/>
+  <project remote="arm" name="scripts/build-scripts" path="build-scripts" revision="refs/tags/RD-INFRA-2024.12.20"/>
+  <project remote="arm" name="scripts/model-scripts" path="model-scripts" revision="refs/tags/RD-INFRA-2024.12.20"/>
+  <project remote="arm" name="scripts/container-scripts" path="container-scripts" revision="refs/tags/RD-INFRA-2024.12.20"/>
+  <project remote="arm" name="valsw/kvm-unit-tests" path="validation/sys-test/kvm-unit-tests" revision="refs/tags/RD-INFRA-2024.12.20"/>
+  <project remote="arm" name="platsw/buildroot" path="buildroot" revision="refs/tags/RD-INFRA-2024.12.20"/>
 
   <project remote="tforg" name="TF-A/tf-a-tests.git" path="validation/comp-test/trusted-firmware-tf" revision="6f9e14a0e3a9e14051cf6235a49b06bae32823d9"/>
-  <project remote="github" name="acpica/acpica" path="tools/acpica" revision="refs/tags/R06_28_23"/>
-  <project remote="github" name="ARMmbed/mbedtls.git" path="mbedtls" revision="refs/tags/mbedtls-2.28.0"/>
-  <project remote="github" name="mirror/busybox" path="busybox" revision="refs/tags/1_36_0"/>
+  <project remote="github" name="acpica/acpica" path="tools/acpica" revision="refs/tags/G20240322"/>
+  <project remote="github" name="ARMmbed/mbedtls.git" path="mbedtls" revision="refs/tags/mbedtls-3.6.2"/>
+  <project remote="github" name="mirror/busybox" path="busybox" revision="refs/tags/1_36_1"/>
   <project remote="gnugit" name="git/grub.git" path="grub" revision="refs/tags/grub-2.04"/>
   <project remote="kernel" name="pub/scm/linux/kernel/git/jejb/efitools" path="tools/efitools" revision="refs/tags/v1.9.2"/>
-  <project remote="kernel" name="pub/scm/linux/kernel/git/will/kvmtool" path="kvmtool" revision="e17d182ad3f797f01947fc234d95c96c050c534b"/>
+  <project remote="kernel" name="pub/scm/linux/kernel/git/will/kvmtool" path="kvmtool" revision="da4cfc3e540341b84c4bbad705b5a15865bc1f80"/>
 </manifest>
 ```
 
@@ -133,18 +135,26 @@ repo sync -c -j $(nproc) --fetch-submodules --force-sync --no-clone-bundle
 ```
 The output from running this command looks like:
 ```output
-... A new version of repo (2.40) is available.
-... New version is available at: /home/ubuntu/rd-infra/.repo/repo/repo
+
+... A new version of repo (2.54) is available.
+... New version is available at: /home/ubuntu/rdn2-infra/.repo/repo/repo
 ... The launcher is run from: /usr/bin/repo
 !!! The launcher is not writable.  Please talk to your sysadmin or distro
 !!! to get an update installed.
 
-Fetching: 100% (17/17), done in 2m23.399s
-Fetching: 100% (16/16), done in 26.300s
-Fetching: 100% (8/8), done in 11.914s
-Fetching: 100% (1/1), done in 0.592s
-Updating files: 100% (79368/79368), done.testsUpdating files:  26% (21084/79368)
-Checking out: 100% (42/42), done in 13.164s
+Fetching: 100% (17/17), done in 8m16.653s
+Fetching: 100% (17/17), done in 17.218s
+Fetching: 100% (17/17), done in 14.719s
+Fetching: 100% (7/7), done in 12.526s
+Fetching: 100% (1/1), done in 0.385s
+Updating files: 100% (84978/84978), done.ting files:  17% (14646/84978)
+Checking out:  27% (16/59), done in 8.804s
+Checking out:  28% (17/59), done in 0.779s
+Updating files: 100% (18459/18459), done.ptoPkg/Library/OpensslLib/openssl/pyca-cryptographyUpdating files:  42% (10441/24326)
+Updating files: 100% (24326/24326), done.ptoPkg/Library/OpensslLib/openssl/fuzz/corporaUpdating files:  54% (13137/24326)
+Checking out:  30% (18/59), done in 1.675s
+Checking out:  11% (7/59), done in 0.874s
+Checking out:   1% (1/59), done in 0.004s
 repo sync has finished successfully.
 ```
 Now you should have all the code.
@@ -186,13 +196,19 @@ docker image list
 The output from this command looks like:
 ```output
 REPOSITORY        TAG              IMAGE ID       CREATED         SIZE
-rdinfra-builder   latest           8729adb0b96c   8 minutes ago   3.07GB
+rdinfra-builder   latest           e11c8e27a4c6   7 days ago     8.12GB
 ubuntu            jammy-20230624   5a81c4b8502e   6 months ago    77.8MB
 ```
 
 The appearance of the output is like a standard ubuntu container based on the latest release with the rdinfra-builder container built on top. Let's run and enter the container:
 ```bash
-docker run -it rdinfra-builder:latest /bin/bash
+docker run --rm \
+  -v /home/ubuntu/rd-infra/:/home/ubuntu/rd-infra/ \
+  -w /home/ubuntu/rd-infra/ \
+  -e ARCADE_USER=$(id -un) \
+  -e ARCADE_UID=$(id -u) \
+  -e ARCADE_GID=$(id -g) \
+  -it rdinfra-builder bash
 ```
 
 This command puts you in the running container where you can run `ls` to list the contents:

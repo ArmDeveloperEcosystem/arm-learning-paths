@@ -87,4 +87,4 @@ After compilation, you'll find several key command-line tools in the `bin` direc
 
 You can find more tools and usage details in the llama.cpp [GitHub repository](https://github.com/ggml-org/llama.cpp/tree/master/tools).
 
-These binaries are specifically optimized for Arm64 architecture and will provide excellent performance on your Graviton4 instance.
+These binaries are specifically optimized for the Arm architecture and will provide excellent performance on your Graviton4 instance.

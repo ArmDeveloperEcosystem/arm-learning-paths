@@ -20,7 +20,7 @@ If you're new to EC2, check out the Learning Path [Getting Started with AWS](/le
 
 To deploy the Arcee AFM-4.5B model, you need an EC2 instance running on Arm-based Graviton4 hardware.
 
-To do this, start by signing in to the [AWS Management Console](https://console.aws.amazon.com), then navigate to the **EC2** service.
+To do this, start by signing in to the [AWS Management Console](https://console.aws.amazon.com), change to your preferred region, and navigate to the **EC2** service.
 
 From there, you can create an SSH key pair that allows you to connect to your instance securely.
 
@@ -39,7 +39,7 @@ mkdir -p ~/.ssh
 mv arcee-graviton4-key.pem ~/.ssh/
 chmod 400 ~/.ssh/arcee-graviton4-key.pem
 ```
-internet
+
 ## Launch and configure the EC2 instance
 
 In the left sidebar of the EC2 dashboard, select **Instances**, and then **Launch instances**.

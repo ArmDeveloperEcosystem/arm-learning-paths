@@ -21,7 +21,7 @@ This section walks you through the required tools and two supported setup option
 
 ## Download and explore the code examples
 
-To get started, begin by [downloading the code examples](https://gitlab.arm.com/learning-cde-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2).
+To get started, begin by [downloading the code examples](https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2).
 
 Now extract the archive, and change directory to:
 ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2.``

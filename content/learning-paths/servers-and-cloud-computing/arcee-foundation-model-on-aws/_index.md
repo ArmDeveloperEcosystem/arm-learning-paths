@@ -18,7 +18,6 @@ learning_objectives:
 
 prerequisites:
     - An [AWS account](https://aws.amazon.com/) with permission to launch Graviton4 (`c8g.4xlarge` or larger) instances
-    - At least 128 GB of available storage
     - Basic familiarity with Linux and SSH
 
 author: Julien Simon

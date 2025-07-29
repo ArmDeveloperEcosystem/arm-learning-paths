@@ -313,7 +313,7 @@ The `ei_printf` command is a custom logging function from the Edge Impulse SDK, 
 
 ## Run your code
 
-Now that you have a good understanding of the code, you should run it on your device. With your **Arduino Nano RP2040** plugged into your computer, and the correct [board and port](/learning-paths/embedded-and-microcontrollers/egde/connect-and-set-up-arduino/) selected in the Arduino IDE, follow these steps:
+Now that you have a good understanding of the code, you should run it on your device. With your **Arduino Nano RP2040** plugged into your computer, and the correct board and port selected in the Arduino IDE, follow these steps:
 
 If you're using the **Upload Button**:
 

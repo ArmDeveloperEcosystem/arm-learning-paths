@@ -38,18 +38,23 @@ cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
     -DEXECUTORCH_BUILD_EXTENSION_DATA_LOADER=ON \
     -DEXECUTORCH_BUILD_EXTENSION_MODULE=ON \
     -DEXECUTORCH_BUILD_EXTENSION_TENSOR=ON \
+    -DEXECUTORCH_BUILD_EXTENSION_FLAT_TENSOR=ON \
     -DEXECUTORCH_BUILD_XNNPACK=ON \
     -DEXECUTORCH_BUILD_KERNELS_OPTIMIZED=ON \
     -DEXECUTORCH_BUILD_KERNELS_QUANTIZED=ON \
     -DEXECUTORCH_BUILD_KERNELS_CUSTOM=ON \
+    -DEXECUTORCH_BUILD_KERNELS_LLM=ON \
+    -DEXECUTORCH_BUILD_EXTENSION_LLM_RUNNER=ON \
+    -DEXECUTORCH_BUILD_EXTENSION_RUNNER_UTIL=ON \
     -DEXECUTORCH_XNNPACK_ENABLE_KLEIDI=ON \
     -DXNNPACK_ENABLE_ARM_BF16=OFF \
+    -DBUILD_TESTING=OFF \
     -Bcmake-out-android .
 
 cmake --build cmake-out-android -j7 --target install --config Release
 ```
 {{% notice Note %}}
-Make sure you add -DEXECUTORCH_XNNPACK_ENABLE_KLEIDI=ON option to enable support for KleidiAI kernels in ExecuTorch with XNNPack.
+Starting with Executorch version 0.7 beta, KleidiAI is enabled by default. The -DEXECUTORCH_XNNPACK_ENABLE_KLEIDI=ON option is enabled and adds default support for KleidiAI kernels in ExecuTorch with XNNPack.
 {{% /notice %}}
 
 ### 3. Build Llama runner for Android
@@ -67,7 +72,8 @@ cmake  -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
     -DEXECUTORCH_BUILD_KERNELS_OPTIMIZED=ON \
     -DEXECUTORCH_BUILD_KERNELS_QUANTIZED=ON \
     -DEXECUTORCH_BUILD_KERNELS_CUSTOM=ON \
-    -DEXECUTORCH_USE_TIKTOKEN=ON \
+    -DSUPPORT_REGEX_LOOKAHEAD=ON \
+    -DBUILD_TESTING=OFF \
     -Bcmake-out-android/examples/models/llama \
     examples/models/llama
 
@@ -144,13 +150,13 @@ Reached to the end of generation
  
 I 00:00:05.399314 executorch:runner.cpp:257] RSS after finishing text generation: 1269.445312 MiB (0 if unsupported)
 PyTorchObserver {"prompt_tokens":54,"generated_tokens":51,"model_load_start_ms":1710296339487,"model_load_end_ms":1710296343047,"inference_start_ms":1710296343370,"inference_end_ms":1710296344877,"prompt_eval_end_ms":1710296343556,"first_token_ms":1710296343556,"aggregate_sampling_time_ms":49,"SCALING_FACTOR_UNITS_PER_SECOND":1000}
-I 00:00:05.399342 executorch:stats.h:111] 	Prompt Tokens: 54    Generated Tokens: 51
-I 00:00:05.399344 executorch:stats.h:117] 	Model Load Time:		3.560000 (seconds)
-I 00:00:05.399346 executorch:stats.h:127] 	Total inference time:		1.507000 (seconds)		 Rate: 	33.842070 (tokens/second)
-I 00:00:05.399348 executorch:stats.h:135] 		Prompt evaluation:	0.186000 (seconds)		 Rate: 	290.322581 (tokens/second)
-I 00:00:05.399350 executorch:stats.h:146] 		Generated 51 tokens:	1.321000 (seconds)		 Rate: 	38.607116 (tokens/second)
-I 00:00:05.399352 executorch:stats.h:154] 	Time to first generated token:	0.186000 (seconds)
-I 00:00:05.399354 executorch:stats.h:161] 	Sampling time over 105 tokens:	0.049000 (seconds)
+I 00:00:04.530945 executorch:stats.h:108] 	Prompt Tokens: 54    Generated Tokens: 69
+I 00:00:04.530947 executorch:stats.h:114] 	Model Load Time:		1.196000 (seconds)
+I 00:00:04.530949 executorch:stats.h:124] 	Total inference time:		1.934000 (seconds)		 Rate: 	35.677353 (tokens/second)
+I 00:00:04.530952 executorch:stats.h:132] 		Prompt evaluation:	0.176000 (seconds)		 Rate: 	306.818182 (tokens/second)
+I 00:00:04.530954 executorch:stats.h:143] 		Generated 69 tokens:	1.758000 (seconds)		 Rate: 	39.249147 (tokens/second)
+I 00:00:04.530956 executorch:stats.h:151] 	Time to first generated token:	0.176000 (seconds)
+I 00:00:04.530959 executorch:stats.h:158] 	Sampling time over 123 tokens:	0.067000 (seconds)
 ```
 
 You have successfully run the Llama 3.1 1B Instruct model on your Android smartphone with ExecuTorch using KleidiAI kernels.

@@ -18,7 +18,7 @@ The Corstone reference system is provided free of charge, although you will have
 
 {{% notice macOS %}}
 
-Setting up FVPs on MacOS requires some extra steps, outlined in GitHub repo [VPs-on-Mac](https://github.com/Arm-Examples/FVPs-on-Mac/). macOS users must do this first, before setting up the Corestone-320 FVP.
+Setting up FVPs on MacOS requires some extra steps, outlined in GitHub repo [FVPs-on-Mac](https://github.com/Arm-Examples/FVPs-on-Mac/). macOS users must do this first, before setting up the Corstone-320 FVP.
 
 {{% /notice %}}
 
@@ -49,4 +49,4 @@ Test that the setup was successful by running the `run.sh` script for Ethos-U85,
 
 You will see a number of examples run on the FVP.
 
-This confirms the installation, so you can now proceed to the Learning Path [Build a Simple PyTorch Model](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/4-build-model/).
+This confirms the installation, so you can now proceed to the next section.

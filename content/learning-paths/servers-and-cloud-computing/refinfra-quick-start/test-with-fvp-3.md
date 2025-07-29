@@ -15,7 +15,8 @@ The firmware build can be executed on the Neoverse N2 Reference Design FVP that 
 
 Download the FVP from the previous page, or directly with:
 ```bash
-wget https://developer.arm.com/-/media/Arm%20Developer%20Community/Downloads/OSS/FVP/Neoverse-N2/Neoverse-N2-11-24-12/FVP_RD_N2_11.24_12_Linux64.tgz
+wget https://developer.arm.com/-/cdn-downloads/permalink/FVPs-Neoverse-Infrastructure/RD-N2/FVP_RD_N2_11.25_23_Linux64.tgz
+
 ```
 
 Unpack the tarball and run the install script:

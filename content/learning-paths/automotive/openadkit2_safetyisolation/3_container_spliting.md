@@ -1,45 +1,41 @@
 ---
-title: Split into multiple cloud container instances
-weight: 4
+title: Deploy OpenAD Kit across multiple cloud instances
+weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-### System Architecture and Component Design
+## Refactor OpenAD Kit for distributed deployment
 
-Now that you’ve explored the concept of a Safety Island, a dedicated subsystem responsible for executing safety-critical control logic, and learned how DDS (Data Distribution Service) enables real-time, distributed communication, you’ll refactor the original OpenAD Kit architecture into a multi-instance deployment.
+Now that you’ve explored the concept of a safety island, a dedicated subsystem responsible for executing safety-critical control logic, and learned how DDS (Data Distribution Service) enables real-time, distributed communication, you’ll refactor the original OpenAD Kit architecture into a multi-instance deployment.
 
-In [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](http://learn.arm.com/learning-paths/automotive/openadkit1_container/), you deployed three container components on a single Arm-based instance, handling:
-- Simulation environment
+The predecessor Learning Path, [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](http://learn.arm.com/learning-paths/automotive/openadkit1_container/), showed how to  deploying three container components on a single Arm-based instance, to handle:
+- The simulation environment
 - Visualization
-- Planning-Control
+- Planning and control
 
-In this session, you will split the simulation and visualization stack from the planning-control logic and deploy them across two independent Arm-based instances. 
+In this Learning Path, you will split the simulation and visualization stack from the planning-control logic and deploy them across two independent Arm-based instances. 
 
 These nodes communicate using ROS 2 with DDS as the middleware layer, ensuring low-latency and fault-tolerant data exchange between components.
 
-### Architectural Benefits
+## Architectural Benefits
 
 This architecture brings several practical benefits:
 
-- Enhanced System Stability: 
-Decoupling components prevents resource contention and ensures that safety-critical functions remain deterministic and responsive.
+- **Enhanced System Stability**: decoupling components prevents resource contention and ensures that safety-critical functions remain deterministic and responsive.
 
-- Real-Time, Scalable Communication: 
-DDS enables built-in peer discovery and configurable QoS, removing the need for a central broker or manual network setup.
+- **Real-Time, Scalable Communication**: DDS enables built-in peer discovery and configurable QoS, removing the need for a central broker or manual network setup.
 
-- Improved Scalability and Performance Tuning: 
-Each instance can be tuned based on its workload—for example, simulation tasks can use GPU-heavy hardware, while planning logic may benefit from CPU-optimized setups.
+- **Improved Scalability and Performance Tuning**: each instance can be tuned based on its workload,for example, simulation tasks can use GPU-heavy hardware, while planning logic might benefit from CPU-optimized setups.
 
-- Support for Modular CI/CD Workflows: 
-With containerized separation, you can build, test, and deploy each module independently—enabling agile development and faster iteration cycles.
+- **Support for Modular CI/CD Workflows**: with containerized separation, you can build, test, and deploy each module independently, which enables agile development and faster iteration cycles.
 
-![img1 alt-text#center](aws_example.jpg "Figure 1: Split instance example in AWS")
+![img1 alt-text#center](aws_example.jpg "Split instance example in AWS")
 
-### Networking Setting 
+## Configure networking for DDS communication
 
-To begin, launch two Arm-based VM instances. AWS EC2 is used, but you can use any Arm instances.
+To begin, launch two Arm-based VM instances. AWS EC2 is used, but you can use any Arm-based instances.
 
 These instances will independently host your simulation and control workloads.
 
@@ -55,22 +51,22 @@ To enable ROS 2 and DDS communication between the two nodes, configure network a
 If you are using AWS EC2, both instances should be assigned to the same Security Group.
 
 Within the EC2 Security Group settings:
-- Add an inbound rule that allows all traffic from the same Security Group by setting he source to the security group itself.
+- Add an inbound rule that allows all traffic from the same Security Group by setting the source to the security group itself.
 - Outbound traffic is typically allowed by default and usually does not require changes.
 
-![img2 alt-text#center](security_group.jpg "Figure 2: AWS Security Group Setting")
+![img2 alt-text#center](security_group.jpg "AWS Security Group Setting")
 
 This configuration allows automatic discovery and peer-to-peer communication between DDS participants across the two instances.
 
 Once both systems are operational, record the private IP addresses of each instance. You will need them when configuring CycloneDDS peer discovery in the next step.
 
-### New Docker YAML Configuration Setting
+## Update Docker and DDS configuration
 
-Before you begin, ensure that Docker is installed on both of your development instances. Review the [Docker install guide](/install-guides/docker/docker-engine/) if needed.
+Before you begin, ensure that Docker is installed on both of your development instances. Review the [Docker Install Guide](/install-guides/docker/docker-engine/) if needed.
 
 First, clone the demo repo and create xml file called `cycloneDDS.xml`
 
-#### Step 1: Clone the repository and prepare configuration files
+## Clone the repository and prepare configuration files
 
 ```bash
 git clone https://github.com/odincodeshen/openadkit_demo.autoware.git
@@ -95,20 +91,20 @@ export COMMON_FILE=/home/ubuntu/openadkit_demo.autoware/docker/etc/simulation/co
 docker compose -f docker-compose.yml pull
 ```
 
-{{% notice info %}}
-Each image is around 4–6 GB, so pulling them may vary depending on your network speed.
+{{% notice Note %}}
+Each image is around 4–6 GB, so the time to download them can vary depending on your network speed.
 {{% /notice %}}
 
-This command will download all images defined in the docker-compose-2ins.yml file, including:
+This command downloads all images defined in the docker-compose-2ins.yml file, including:
 - odinlmshen/autoware-simulator:v1.0
 - odinlmshen/autoware-planning-control:v1.0
 - odinlmshen/autoware-visualizer:v1.0
 
-#### Step 2: Configure CycloneDDS for Peer-to-Peer Communication
+## Configure CycloneDDS for peer-to-peer communication
 
 The cycloneDDS.xml file is used to customize how CycloneDDS (the middleware used by ROS 2) discovers and communicates between distributed nodes.
 
-Please copy the following configuration into docker/cycloneDDS.xml on both machines, and replace the IP addresses with the private IPs of each EC2 instance. 
+Copy the following configuration into docker/cycloneDDS.xml on both machines, and replace the IP addresses with the private IPs of each EC2 instance:
 
 ```xml
 <CycloneDDS>
@@ -128,7 +124,8 @@ Please copy the following configuration into docker/cycloneDDS.xml on both machi
 			<MaxAutoParticipantIndex>1000</MaxAutoParticipantIndex>
 			<ParticipantIndex>auto</ParticipantIndex>
 			<Peers>
-				<Peer address="192.168.xx.yy"/>
+				<!-- Replace these with the private IP addresses of both EC2 instances -->
+        <Peer address="192.168.xx.yy"/>
 				<Peer address="192.168.aa.bb"/>
 			</Peers>
 		</Discovery>
@@ -141,19 +138,19 @@ Please copy the following configuration into docker/cycloneDDS.xml on both machi
 ```
 
 {{% notice Note %}}
-1. Make sure the network interface name (ens5) matches the one on your EC2 instances. You can verify this using `ip -br a`.
-2. This configuration disables multicast and enables static peer discovery between the two machines using unicast.
-3. You can find the more detail about CycloneDDS setting [Configuration](https://cyclonedds.io/docs/cyclonedds/latest/config/config_file_reference.html#cyclonedds-domain-internal-socketreceivebuffersize)
+- Make sure the network interface name (for example, `ens5`) matches the one used by your EC2 instances. You can verify the instance name by running `ip -br a`.
+- This configuration disables multicast and enables static peer discovery between the two machines using unicast.
+- For more information on CycloneDDS settings, see the [Cyclone DDS Configuration Guide](https://cyclonedds.io/docs/cyclonedds/latest/config/config_file_reference.html#cyclonedds-domain-internal-socketreceivebuffersize).
 {{% /notice %}}
 
-#### Step 3: Update the Docker Compose Configuration for Multi-Host Deployment
+## Update the Docker Compose Configuration for Multi-Host Deployment
 
 To support running containers across two separate hosts, you’ll need to modify the docker/docker-compose-2ins.yml file. 
 This includes removing inter-container dependencies and updating the network and environment configuration.
 
-##### Remove Cross-Container Dependency
+## Remove cross-container dependency
 
-Since the planning-control and simulator containers will now run on different machines, you must remove any depends_on references between them to prevent Docker from attempting to start them on the same host.
+Since the planning-control and simulator containers will run on separate machines, remove any `depends_on` references between them. This prevents Docker from treating them as interdependent services on a single host.
 
 ```YAML
   planning-control:
@@ -162,9 +159,10 @@ Since the planning-control and simulator containers will now run on different ma
   #   - simulator
 ```
 
-##### Enable Host Networking
+## Enable host networking
 
-All three containers (visualizer, simulator, planning-control) need access to the host’s network interfaces for DDS-based peer discovery. 
+All three containers (visualizer, simulator, and planning-control) need access to the host’s network interfaces for DDS-based peer discovery. 
+
 Replace Docker's default bridge network with host networking:
 
 ```YAML
@@ -172,7 +170,7 @@ Replace Docker's default bridge network with host networking:
     network_mode: host
 ```
 
-##### Use CycloneDDS Configuration via Environment Variable
+## Apply the CycloneDDS configuration using an environment variable
 
 To ensure that each container uses your custom DDS configuration, mount the current working directory and set the CYCLONEDDS_URI environment variable:
 
@@ -185,7 +183,7 @@ To ensure that each container uses your custom DDS configuration, mount the curr
 
 Add this to every container definition to ensure consistent behavior across the deployment.
 
-Here is the complete XML file:
+Here is the complete YAML file:
 
 ```YAML
 services:
@@ -258,7 +256,7 @@ services:
 
 Before moving to the next step, make sure that `docker-compose-2ins.yml` and `cycloneDDS.xml` are already present on both instances.
 
-#### Step 4: Optimize Network Settings for DDS Communication
+## Optimize Network Settings for DDS Communication
 
 In a distributed DDS setup, `high-frequency UDP traffic` between nodes may lead to  `IP packet fragmentation` or  `buffer overflows`, especially under load. 
 These issues can degrade performance or cause unexpected system behavior.
@@ -270,10 +268,10 @@ sudo sysctl net.ipv4.ipfrag_high_thresh=134217728
 sudo sysctl -w net.core.rmem_max=2147483647
 ```
 
-Explanation of Parameters
-- `net.ipv4.ipfrag_time=3`: Reduces the timeout for holding incomplete IP fragments, helping free up memory more quickly.
-- `net.ipv4.ipfrag_high_thresh=134217728`: Increases the memory threshold for IP fragment buffers to 128 MB, preventing early drops under high load.
-- `net.core.rmem_max=2147483647`: Expands the maximum socket receive buffer size to support high-throughput DDS traffic.
+## Explanation of parameters
+- `net.ipv4.ipfrag_time=3`: reduces the timeout for holding incomplete IP fragments, helping free up memory more quickly.
+- `net.ipv4.ipfrag_high_thresh=134217728`: increases the memory threshold for IP fragment buffers to 128 MB, preventing early drops under high load.
+- `net.core.rmem_max=2147483647`: expands the maximum socket receive buffer size to support high-throughput DDS traffic.
 
 To ensure these settings persist after reboot, create a configuration file under /etc/sysctl.d/:
 
@@ -295,18 +293,19 @@ Links to documentation:
  - [ROS2 documentation](https://docs.ros.org/en/humble/How-To-Guides/DDS-tuning.html#cyclone-dds-tuning)
 
 
-#### Step 5: Verifying Cross-Instance DDS Communication with ROS 2
+## Verify DDS communication between instances using ROS 2
 
-To confirm that ROS 2 nodes can exchange messages across two separate EC2 instances using DDS, this test will walk you through a minimal publisher–subscriber setup using a custom topic.
+To confirm that ROS 2 nodes can exchange messages across two separate EC2 instances using DDS, this test walks you through a minimal publisher-subscriber setup using a custom topic.
 
-##### On Planning-Control Node (Publisher)
+## On the planning-control node (publisher)
 
 On the first EC2 instance, you will publish a custom message to the /hello topic using ROS 2. 
 This will simulate outbound DDS traffic from the planning-control container.
 
-Set the required environment variables and launch the planning-control container.
+Set the required environment variables and launch the planning-control container:
 
 ```bash
+# Replace this path with the location where you cloned the repository, if different
 export SCRIPT_DIR=/home/ubuntu/openadkit_demo.autoware/docker
 export CONF_FILE=$SCRIPT_DIR/etc/simulation/config/fail_static_obstacle_avoidance.param.yaml 
 export COMMON_FILE=$SCRIPT_DIR/etc/simulation/config/common.param.yaml
@@ -317,7 +316,7 @@ export TIMEOUT=300
 docker compose -f docker-compose-2ins.yml run --rm planning-control bash
 ```
 
-Once inside the container shell, activate the ROS 2 environment and start publishing to the /hello topic:
+Once inside the container shell, activate the ROS 2 environment and start listening to the /hello topic:
 
 ```bash
 # Inside the container:
@@ -326,7 +325,7 @@ ros2 topic list
 ros2 topic pub /hello std_msgs/String "data: Hello From Planning" --rate 1
 ```
 
-##### On Simulator Node (Subscriber) side
+## On the simulator node (subscriber) 
 
 On the second EC2 instance, you will listen for the /hello topic using ros2 topic echo. 
 This confirms that DDS communication from the planning node is received on the simulation node.
@@ -353,7 +352,7 @@ export TIMEOUT=300
 docker compose -f docker-compose-2ins.yml run --rm simulator bash
 ```
 
-Once inside the container shell, activate the ROS 2 environment and start publishing to the /hello topic:
+Once inside the container shell, activate the ROS 2 environment and start listening to the /hello topic:
 
 ```bash
 # Inside the container:
@@ -363,6 +362,11 @@ ros2 topic echo /hello
 ```
 
 In the simulator container, you should see repeated outputs like:
+
+{{% notice tip %}}
+If the subscriber shows a continuous stream of `/hello` messages, DDS discovery and ROS 2 communication between the nodes is working as expected.
+{{% /notice %}}
+
 ```
 root@ip-172-31-19-5:/autoware# ros2 topic echo /hello
 data: Hello From Planning

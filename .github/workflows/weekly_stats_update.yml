@@ -17,6 +17,7 @@ on:
 jobs:
   # This workflow contains a single job
   update_stats:
+    if: github.repository == 'ArmDeveloperEcosystem/arm-learning-paths'
     runs-on: ubuntu-latest
     steps:
       - name: Check out current repo

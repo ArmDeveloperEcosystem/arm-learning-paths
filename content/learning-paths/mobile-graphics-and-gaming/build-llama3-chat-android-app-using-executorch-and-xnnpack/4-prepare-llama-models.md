@@ -46,7 +46,8 @@ python3 -m examples.models.llama.export_llama \
 --metadata '{"get_bos_id":128000, "get_eos_ids":[128009, 128001, 128006, 128007]}' \
 --embedding-quantize 4,32 \
 --output_name="llama3_1B_kv_sdpa_xnn_qe_4_64_1024_embedding_4bit.pte" \
---max_seq_length 1024
+--max_seq_length 1024 \
+--max_context_length 1024
 ```
 
 Due to the larger vocabulary size of Llama 3, you should quantize the embeddings with `--embedding-quantize 4,32` to further reduce the model size.
