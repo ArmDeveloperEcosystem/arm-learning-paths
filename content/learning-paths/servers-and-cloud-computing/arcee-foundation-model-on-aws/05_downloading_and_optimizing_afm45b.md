@@ -6,9 +6,18 @@ weight: 7
 layout: learningpathall
 ---
 
-In this step, you’ll download the AFM-4.5B model from Hugging Face, convert it to the GGUF format for compatibility with `llama.cpp`, and generate quantized versions to optimize memory usage and improve inference speed.
+In this step, you’ll download the [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B) model from Hugging Face, convert it to the GGUF format for compatibility with `llama.cpp`, and generate quantized versions to optimize memory usage and improve inference speed.
+
+**Note: if you want to skip the model optimization process, [GGUF](https://huggingface.co/arcee-ai/AFM-4.5B-GGUF) versions are available.**
 
 Make sure to activate your virtual environment before running any commands. The instructions below walk you through downloading and preparing the model for efficient use on AWS Graviton4.
+
+## Signing up to Hugging Face
+
+In order to download AFM-4.5B, you will need:
+- a Hugging Face account: you can sign up at [https://huggingface.co](https://huggingface.co)
+- a read-only Hugging Face token: once logged in, you can create one at [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens). Don't forget to store it, as you will only be able to view it once.
+- to accept the terms of AFM-4.5B at [https://huggingface.co/arcee-ai/AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B)
 
 ## Install the Hugging Face libraries
 
@@ -19,14 +28,31 @@ pip install huggingface_hub hf_xet
 This command installs:
 
 - `huggingface_hub`: Python client for downloading models and datasets
--  `hf_xet`: Git extension for fetching large model files stored on Hugging Face
+- `hf_xet`: Git extension for fetching large model files stored on Hugging Face
 
-These tools include the `huggingface-cli` command-line interface you'll use next.
+These tools include the `hf` command-line interface you'll use next.
+
+## Login to the Hugging Face Hub
+
+```bash
+hf auth login
+
+    _|    _|  _|    _|    _|_|_|    _|_|_|  _|_|_|  _|      _|    _|_|_|      _|_|_|_|    _|_|      _|_|_|  _|_|_|_|
+    _|    _|  _|    _|  _|        _|          _|    _|_|    _|  _|            _|        _|    _|  _|        _|
+    _|_|_|_|  _|    _|  _|  _|_|  _|  _|_|    _|    _|  _|  _|  _|  _|_|      _|_|_|    _|_|_|_|  _|        _|_|_|
+    _|    _|  _|    _|  _|    _|  _|    _|    _|    _|    _|_|  _|    _|      _|        _|    _|  _|        _|
+    _|    _|    _|_|      _|_|_|    _|_|_|  _|_|_|  _|      _|    _|_|_|      _|        _|    _|    _|_|_|  _|_|_|_|
+
+    To login, `huggingface_hub` requires a token generated from https://huggingface.co/settings/tokens .
+Enter your token (input will not be visible):
+```
+
+Please enter the token you created above, and answer 'n' to "Add token as git credential? (Y/n)".
 
 ## Download the AFM-4.5B model
 
 ```bash
-huggingface-cli download arcee-ai/afm-4.5B --local-dir models/afm-4-5b
+hf download arcee-ai/afm-4.5B --local-dir models/afm-4-5b
 ```
 
 This command downloads the model to the `models/afm-4-5b` directory:
@@ -89,7 +115,7 @@ Similar to Q4_0, Arm has contributed optimized kernels for Q8_0 quantization tha
 
 ## Model files ready for inference
 
-After completing these steps, you'll have three versions of the AFM-4.5B model:
+After completing these steps, you'll have three versions of the AFM-4.5B model in `models/afm-4-5b`:
 - `afm-4-5B-F16.gguf` - The original full-precision model (~15GB)
 - `afm-4-5B-Q4_0.gguf` - 4-bit quantized version (~4.4GB) for memory-constrained environments
 - `afm-4-5B-Q8_0.gguf` - 8-bit quantized version (~8GB) for balanced performance and memory usage
