@@ -48,7 +48,7 @@ git clone https://github.com/pytorch/executorch.git
 cd executorch
 ```
 
-Set up internal dependencies:
+Set up internal submodules:
 
 ```bash
 git submodule sync
@@ -57,7 +57,7 @@ git submodule update --init --recursive
 ```
 
 {{% notice Tip %}}
-If you run into issues with `buck` running in a stale environment, reset it:
+If you encounter a stale `buck` environment, reset it using:
 
 ```bash
 ps aux | grep buck
@@ -65,12 +65,14 @@ pkill -f buck
 ```
 {{% /notice %}}
 
-Verify the installation:
+## Verify the installation:
+
+Check that ExecuTorch is correctly installed:
 
 ```bash
 pip list | grep executorch
 ```
-Example output:
+Expected output:
 
 ```output
 executorch         0.8.0a0+92fb0cc

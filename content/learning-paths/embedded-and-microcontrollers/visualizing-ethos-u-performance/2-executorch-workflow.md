@@ -17,7 +17,7 @@ ExecuTorch works in three main stages:
 **Export the model**
 
    - Convert a trained PyTorch model into an operator graph.
-   - Identify operators that can be offloaded to the Ethos-U NPU (e.g., ReLU, conv, quantize).
+   - Identify operators that can be offloaded to the Ethos-U NPU (for example, ReLU, conv, quantize).
 
 **Compile with the AOT compiler**
 
