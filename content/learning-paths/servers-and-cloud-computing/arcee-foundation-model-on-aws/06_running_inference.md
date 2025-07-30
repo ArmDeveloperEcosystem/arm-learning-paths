@@ -6,7 +6,7 @@ weight: 8
 layout: learningpathall
 ---
 
-Now that you have the AFM-4.5B models in GGUF format, you can run inference using various Llama.cpp tools. In this step, you'll explore how to generate text, benchmark performance, and interact with the model through both command-line and HTTP APIs.
+Now that you have the [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B) models in GGUF format, you can run inference using various Llama.cpp tools. In this step, you'll explore how to generate text, benchmark performance, and interact with the model through both command-line and HTTP APIs.
 
 
 ## Use llama-cli for interactive text generation
@@ -55,14 +55,15 @@ To exit the session, type `Ctrl+C` or `/bye`.
 You'll then see performance metrics like this:
 
 ```bash
-llama_perf_sampler_print:    sampling time =      26.66 ms /   356 runs   (    0.07 ms per token, 13352.84 tokens per second)
-llama_perf_context_print:        load time =     782.72 ms
-llama_perf_context_print: prompt eval time =     392.40 ms /    24 tokens (   16.35 ms per token,    61.16 tokens per second)
-llama_perf_context_print:        eval time =   13173.66 ms /   331 runs   (   39.80 ms per token,    25.13 tokens per second)
-llama_perf_context_print:       total time =  129945.08 ms /   355 tokens
+llama_perf_sampler_print:    sampling time =       9.47 ms /   119 runs   (    0.08 ms per token, 12569.98 tokens per second)
+llama_perf_context_print:        load time =     616.69 ms
+llama_perf_context_print: prompt eval time =     344.39 ms /    23 tokens (   14.97 ms per token,    66.79 tokens per second)
+llama_perf_context_print:        eval time =    9289.81 ms /   352 runs   (   26.39 ms per token,    37.89 tokens per second)
+llama_perf_context_print:       total time =   17446.13 ms /   375 tokens
+llama_perf_context_print:    graphs reused =          0
 ```
 
-In this example, the 8-bit model running on 16 threads generated 355 tokens, at ~25 tokens per second (`eval time`).
+In this example, the 8-bit model running on 16 threads generated 375 tokens, at ~37 tokens per second (`eval time`).
 
 ## Run a non-interactive prompt
 
@@ -77,7 +78,7 @@ This command:
 - Sends a one-time prompt using `-p`
 - Prints the generated response and exits
 
-The 4-bit model delivers faster generation—expect around 40 tokens per second on Graviton4. This shows how a more aggressive quantization recipe helps deliver faster performance.
+The 4-bit model delivers faster generation—expect around 60 tokens per second on Graviton4. This shows how a more aggressive quantization recipe helps deliver faster performance.
 
 ## Use llama-server for API access
 
@@ -130,29 +131,29 @@ The response includes the model’s reply and performance metrics:
       "index": 0,
       "message": {
         "role": "assistant",
-        "content": "Quantum computing uses quantum-mechanical phenomena, such as superposition and entanglement, to perform calculations. It allows for multiple possibilities to exist simultaneously, which can speed up certain processes. Unlike classical computers, quantum computers can solve complex problems and simulate systems more efficiently. Quantum bits (qubits) store information, and quantum gates perform operations. Quantum computing has potential applications in fields like cryptography, optimization, and materials science. Its development is an active area of research, with companies like IBM, Google, and Microsoft investing in quantum computing technology."
+        "content": "Quantum computing uses quantum-mechanical phenomena like superposition and entanglement to solve complex problems much faster than classical computers. Instead of binary bits (0 or 1), quantum bits (qubits) can exist in multiple states simultaneously, allowing for parallel processing of vast combinations of possibilities. This enables quantum computers to perform certain calculations exponentially faster, particularly in areas like cryptography, optimization, and drug discovery. However, quantum systems are fragile and prone to errors, requiring advanced error correction techniques. Current quantum computers are still in early stages but show promise for transformative applications."
       }
     }
   ],
-  "created": 1750929895,
+  "created": 1753876147,
   "model": "afm-4-5b",
-  "system_fingerprint": "b5757-716301d1",
+  "system_fingerprint": "b6030-1e15bfd4",
   "object": "chat.completion",
   "usage": {
-    "completion_tokens": 111,
+    "completion_tokens": 115,
     "prompt_tokens": 20,
-    "total_tokens": 131
+    "total_tokens": 135
   },
-  "id": "chatcmpl-tb93ww9iYCErwLJmsV0YLrIadVvpBk4m",
+  "id": "chatcmpl-0Zwzu03zbu77MFx4ogBsqz8E4IdxHOLU",
   "timings": {
-    "prompt_n": 11,
-    "prompt_ms": 105.651,
-    "prompt_per_token_ms": 9.604636363636363,
-    "prompt_per_second": 104.11638318615064,
-    "predicted_n": 111,
-    "predicted_ms": 2725.982,
-    "predicted_per_token_ms": 24.558396396396397,
-    "predicted_per_second": 40.719271073690145
+    "prompt_n": 20,
+    "prompt_ms": 68.37,
+    "prompt_per_token_ms": 3.4185000000000003,
+    "prompt_per_second": 292.525961679099,
+    "predicted_n": 115,
+    "predicted_ms": 1884.943,
+    "predicted_per_token_ms": 16.390808695652172,
+    "predicted_per_second": 61.00980241842857
   }
 }
 ```
@@ -161,7 +162,7 @@ The response includes the model’s reply and performance metrics:
 
 You’ve now successfully:
 
-- Run AFM-4.5B in interactive and non-interactive modes
+- Run [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B) in interactive and non-interactive modes
 - Tested performance with different quantized models
 - Served the model as an OpenAI-compatible API endpoint
 
