@@ -1,22 +1,27 @@
 ---
 # User change
-title: "Set up your development environment"
+title: "Set up your ExecuTorch environment"
 
-weight: 3
+weight: 4
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
 
+Get your development environment ready to deploy and run models with ExecuTorch.
 
-## Install dependencies
+## Install system dependencies
+
+{{< notice Note >}}
+Make sure Python 3 is installed. It comes pre-installed on most versions of Ubuntu.
+{{< /notice >}}
 
 These instructions have been tested on:
 
 - Ubuntu 22.04 and 24.04
 - Windows Subsystem for Linux (WSL)
 
-Make sure Python 3 is installed (it comes with Ubuntu by default). Then install the required system packages:
+Install the required system packages:
 
 ```bash
 sudo apt update
@@ -31,12 +36,11 @@ Create and activate a Python virtual environment:
 python3 -m venv $HOME/executorch-venv
 source $HOME/executorch-venv/bin/activate
 ```
-After activation, your terminal prompt should show (executorch) to indicate that the environment is active.
-
+Your shell prompt should now start with `(executorch)` to indicate the environment is active.
 
 ## Install ExecuTorch
 
-Clone the ExecuTorch repository and install its dependencies:
+Clone the ExecuTorch repository and install dependencies:
 
 ``` bash
 cd $HOME

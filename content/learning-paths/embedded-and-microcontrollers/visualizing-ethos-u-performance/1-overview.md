@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 ## Visualize ML on Embedded Devices
 
-Choosing the right hardware for your machine learning (ML) model starts with the right tools. In many cases, you need to test and iterate on software before the target hardware is even available,especially when working with cutting-edge accelerators like the Ethos-U NPU. 
+Choosing the right hardware for your machine learning (ML) model starts with having the right tools. In many cases, you need to test and iterate on software before the target hardware is even available,especially when working with cutting-edge accelerators like the Ethos-U NPU. 
 
 Arm [Fixed Virtual Platforms](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms) (FVPs) let you visualize and test model performance before any physical hardware is available.
 
@@ -19,7 +19,7 @@ This Learning Path focuses on using TinyML models with virtualized Arm hardware 
 
 If you're looking to build and train your own TinyML models, check out the [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/).
 
-What is ExecuTorch?
+## What is ExecuTorch?
 
 ExecuTorch is a lightweight runtime for executing PyTorch models on embedded and edge devices. It supports efficient model inference on a range of Arm processors, ranging from Cortex-M CPUs to Ethos-U NPUs, with support for hybrid CPU+accelerator execution.
 
@@ -31,7 +31,7 @@ ExecuTorch provides:
 
 ## Why use virtual platforms?
 
-Arm Fixed Virtual Platforms (FVPs) are virtual hardware models used to simulate Arm-based systems like the Corstone-320. They allow developers to validate and tune software before silicon is available, which is especially important when targeting newly released accelerators like the [Ethos-U85](https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u85) NPU.
+Arm Fixed Virtual Platforms (FVPs) are virtual hardware models used to simulate Arm-based systems like the Corstone-320. They allow developers to validate and tune software before silicon is available, which is especially important when targeting newly-released accelerators like the [Ethos-U85](https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u85) NPU.
 
 These virtual platforms also include a built-in graphical user interface (GUI) that helps you:
 
