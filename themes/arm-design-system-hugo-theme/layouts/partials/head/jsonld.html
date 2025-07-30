@@ -1,27 +1,22 @@
 {{/*  layouts/partials/head/jsonld.html  */}}
-
 {{/* ---------------------------------------------------------------
      Render JSON‑LD only for Learning‑Path _index.md main pages
 ---------------------------------------------------------------- */}}
 {{- if and .IsSection (eq .Params.learning_path_main_page "yes") -}}
-
     {{/* -------- Helper : Build ISO‑8601 duration (PT30M, PT2H, …) */}}
     {{- $duration := "" -}}
     {{- with .Params.minutes_to_complete -}}
         {{- $duration = printf "PT%dM" (int .) -}}
     {{- end -}}
-
     {{/* -------- Learning objectives & prerequisites  */}}
     {{- $objectives := slice -}}
     {{- with .Params.learning_objectives -}}
         {{- range . }}{{ $objectives = $objectives | append ( . | plainify ) }}{{ end -}}
     {{- end -}}
-
     {{- $prereqs := slice -}}
     {{- with .Params.prerequisites -}}
         {{- range . }}{{ $prereqs = $prereqs | append ( . | plainify ) }}{{ end -}}
     {{- end -}}
-
     {{/* -------- Collect tag‑style params into one keywords list */}}
     {{- $keywords := slice -}}
     {{- $tagParams := slice
@@ -42,14 +37,12 @@
             {{- end -}}
         {{- end -}}
     {{- end -}}
-
     {{/* -------- Assemble JSON‑LD dict  */}}
     {{- $j := dict
         "@context" "https://schema.org"
         "@type"    "Course"
         "name"     .Title
     -}}
-
     {{- with .Params.who_is_this_for     }}{{ $j = merge $j (dict "description" ( . | plainify )) }}{{ end -}}
     {{- if $duration                     }}{{ $j = merge $j (dict "timeRequired" $duration) }}{{ end -}}
     {{- with .Params.skilllevels         }}{{ $j = merge $j (dict "educationalLevel" .) }}{{ end -}}
@@ -58,10 +51,9 @@
     {{- with .Params.author              }}{{ $j = merge $j (dict "author" (dict "@type" "Person" "name" .)) }}{{ end -}}
     {{- if $keywords                     }}{{ $j = merge $j (dict "keywords" (delimit (uniq $keywords) ", ")) }}{{ end -}}
     {{- with .Site.Title                 }}{{ $j = merge $j (dict "provider" (dict "@type" "Organization" "name" .)) }}{{ end -}}
-
     {{/* -------- Emit into <head>  */}}
-    <script type="application/ld+json">
-    {{- $j | jsonify | safeHTML -}}
-    </script>
-
+<script type="application/ld+json">
+  {{- /* prettify the JSON (2‑space indent) and mark it as safe JS */ -}}
+  {{- $j | jsonify (dict "indent" "  ") | safeJS -}}
+  </script>
 {{- end -}}
