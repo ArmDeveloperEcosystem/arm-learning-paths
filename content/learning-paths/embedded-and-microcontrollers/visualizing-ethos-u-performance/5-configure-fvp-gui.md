@@ -1,8 +1,8 @@
 ---
 # User change
-title: "Configure the FVP GUI (optional)"
+title: "Set up the Corstone-320 FVP"
 
-weight: 6 # 1 is first, 2 is second, etc.
+weight: 7 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"

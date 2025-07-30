@@ -2,19 +2,15 @@
 # User change
 title: "Set up the Corstone-320 FVP on Linux"
 
-weight: 4 
+weight: 5 
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-## What is Corstone-320?
 
-To simulate embedded AI workloads on Arm hardware, you’ll use the Corstone-320 Fixed Virtual Platform (FVP). This pre-silicon software development environment for Arm-based microcontrollers provides a virtual representation of hardware, allowing developers to test and optimize software before actual hardware is available. Designed for AI and machine learning workloads, it includes support for Arm's Ethos-U NPU and Cortex-M processors, making it ideal for embedded AI applications. The FVP accelerates development by enabling early software validation and performance tuning in a flexible, simulation-based environment.
+Use the Corstone-320 Fixed Virtual Platform (FVP) to simulate an Arm-based system and run your ExecuTorch-compiled model.
 
-The Corstone-320 reference system is free to use, but you'll need to accept the license agreement during installation.  
-For more information, see the [official Corstone-320 documentation](https://developer.arm.com/documentation/109761/0000?lang=en).
-
-## Set up the Corstone-320 FVP for ExecuTorch
+## Install the Corstone-320 FVP
 
 Before you begin, make sure you’ve completed the steps in the previous section to install ExecuTorch.
 
@@ -23,40 +19,48 @@ On macOS, you'll need to perform additional setup to support FVP execution.
 See the [FVPs-on-Mac GitHub repo](https://github.com/Arm-Examples/FVPs-on-Mac/) for instructions before continuing.
 {{< /notice >}}
 
-
-
-
-
-
-
-Navigate to the Arm examples directory in the ExecuTorch repository. Run the following command.
+Run the setup script provided in the ExecuTorch examples directory:
 
 ```bash
 cd $HOME/executorch/examples/arm
 ./setup.sh --i-agree-to-the-contained-eula
 ```
 
-After the script has finished running, it prints a command to run to finalize the installation. This step adds the FVP executables to your system path.
+This installs the FVP and extracts all necessary components. It also prints a command to configure your shell environment.
+
+## Add the FVP to your system path
+
+Run the following command to update your environment:
 
 ```bash
 source $HOME/executorch/examples/arm/ethos-u-scratch/setup_path.sh
 ```
+This ensures the FVP binaries are available in your terminal session.
 
-Test that the setup was successful by running the `run.sh` script for Ethos-U85, which is the target device for Corstone-320:
+## Verify your setup
 
-{{% notice macOS %}}
-
-**Start Docker:** on macOS, FVPs run inside a Docker container.
-
-{{% /notice %}}
+Run a quick test to check that the FVP is working:
 
 ```bash
  ./examples/arm/run.sh --target=ethos-u85-256
 ```
 
-You will see a number of examples run on the FVP.
+This executes a built-in example on the Ethos-U85 configuration of the Corstone-320 platform.
 
-This confirms the installation, so you can now proceed to the next section.
+{{% notice macOS %}}
+
+On macOS, make sure Docker is running. FVPs execute inside a Docker container on macOS systems.
+
+{{% /notice %}}
+
+If you see example output from the platform, the setup is complete.
+
+## Next steps
+You're now ready to deploy and run your own model using ExecuTorch and the Corstone-320 FVP.
+
+
+
+
 
 
 

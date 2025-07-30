@@ -39,3 +39,10 @@ These virtual platforms also include a built-in graphical user interface (GUI) t
 - Visualize instruction counts  
 - Review total execution time  
 - Capture clear outputs for demos and prototypes  
+
+## What is Corstone-320?
+
+To simulate embedded AI workloads on Arm hardware, you’ll use the Corstone-320 Fixed Virtual Platform (FVP). This pre-silicon software development environment for Arm-based microcontrollers provides a virtual representation of hardware, allowing developers to test and optimize software before actual hardware is available. Designed for AI and machine learning workloads, it includes support for Arm's Ethos-U NPU and Cortex-M processors, making it ideal for embedded AI applications. The FVP accelerates development by enabling early software validation and performance tuning in a flexible, simulation-based environment.
+
+The Corstone-320 reference system is free to use, but you'll need to accept the license agreement during installation.  
+For more information, see the [official Corstone-320 documentation](https://developer.arm.com/documentation/109761/0000?lang=en).
