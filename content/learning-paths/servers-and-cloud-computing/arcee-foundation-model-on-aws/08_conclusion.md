@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Wrap up your AFM-4.5B deployment
 
-Congratulations! You have completed the process of deploying the Arcee AFM-4.5B foundation model on AWS Graviton4.
+Congratulations! You have completed the process of deploying the Arcee [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B) foundation model on AWS Graviton4.
 
 Here’s a summary of what you built and how you can take your knowledge forward.
 
@@ -29,8 +29,8 @@ Using this Learning Path, you have:
 
 The benchmarking results demonstrate the power of quantization and Arm-based computing:
 
-- **Memory efficiency** – the 4-bit model uses only ~4.4 GB of RAM compared to ~15 GB for the full-precision version
-- **Speed improvements** – inference with Q4_0 is 2–3x faster (40+ tokens/sec vs. 15–16 tokens/sec)
+- **Memory efficiency** – the 4-bit model uses only ~3 GB of RAM compared to ~9 GB for the full-precision version
+- **Speed improvements** – inference with Q4_0 is 2.5x faster (~60+ tokens/sec vs. 25 tokens/sec)
 - **Cost optimization** – lower memory needs enable smaller, more affordable instances
 - **Quality preservation** – the quantized models maintain strong perplexity scores, showing minimal quality loss
 
@@ -63,4 +63,4 @@ Together, Arcee AI’s foundation models, Llama.cpp’s efficient runtime, and G
 
 From chatbots and content generation to research tools, this stack strikes a balance between performance, cost, and developer control.
 
-For more information on Arcee AI, and how you can build high-quality, secure, and cost-efficient AI solutions, please visit www.arcee.ai.
+For more information on Arcee AI, and how you can build high-quality, secure, and cost-efficient AI solutions, please visit [www.arcee.ai](https://www.arcee.ai).
