@@ -1,24 +1,19 @@
 ---
-title: Scalable Networking for Industrial and Robotics with Zenoh on Raspberry Pi
-
-draft: true
-cascade:
-    draft: true
+title: Build and deploy multi-node Zenoh systems on Raspberry Pi
 
 minutes_to_complete: 45
 
-who_is_this_for: This learning path is designed for robotics developers, industrial automation engineers, and IoT system architects building distributed, scalable, and low-latency applications. Whether you are using Robot Operating System (ROS), developing autonomous systems, or designing multi-node communication frameworks, this guide will show you how to leverage the Eclipse Zenoh protocol on Arm-based platforms — both in the cloud (AVH or EC2) and on physical devices like Raspberry Pi.
+who_is_this_for: This Learning Path is for robotics developers, industrial automation engineers, and IoT system architects who are building distributed, scalable, and low-latency applications. Whether you're using the Robot Operating System (ROS), developing autonomous systems, or designing multi-node communication frameworks, you can use Eclipse Zenoh on Arm-based platforms, both in the cloud and on local devices like Raspberry Pi.
+
 
 learning_objectives: 
-    - Understand Zenoh's architecture and its integration of pub/sub, storage, querying, and computation models.
-    - Build and run Zenoh examples on both Arm servers and Raspberry Pi.
-    - Set up and deploy a multi-node Zenoh system using Arm-based hardware or virtual environments.
+    - Understand Zenoh's architecture and how it integrates pub/sub, storage, querying, and computation models
+    - Build and run Zenoh examples on both Arm servers and Raspberry Pi
+    - Set up and deploy a multi-node Zenoh system
 
 prerequisites:
-    - At least two [Raspberry Pi5 or Pi4](https://www.raspberrypi.com/products/raspberry-pi-5/) or other Cortex-A instances with a Linux-based OS installed.
-    - Basic understanding with the Linux command line.
-    - Experience with ROS 2 applications.
-    - Corellium account for virtual hardware testing. (Option)
+    - At least two local Cortex-A devices running Linux, such as Raspberry Pi 4 or Pi 5. You can also use Arm servers or cloud instances
+    - Experience with ROS 2 applications
 
 author: 
     - Odin Shen
@@ -34,6 +29,8 @@ tools_software_languages:
     - ROS2
     - C
     - Raspberry Pi
+    - Zenoh
+    - Rust
 
 operatingsystems:
     - Linux
@@ -52,6 +49,11 @@ further_reading:
         title: Eclipse Zenoh Github
         link: https://github.com/eclipse-zenoh/zenoh
         type: documentation
+    - resource:
+        title: Zenoh and ROS 2 Integration Guide
+        link: https://github.com/eclipse-zenoh/zenoh-plugin-ros2
+        type: documentation
+
 
 
 ### FIXED, DO NOT MODIFY

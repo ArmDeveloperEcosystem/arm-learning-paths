@@ -50,26 +50,26 @@ Visit the [releases page](https://github.com/aws/aperf/releases/) to see a list 
 You can also download a release from the command line:
 
 ```bash { target="ubuntu:latest" }
-wget https://github.com/aws/aperf/releases/download/v0.1.12-alpha/aperf-v0.1.12-alpha-aarch64.tar.gz
+wget https://github.com/aws/aperf/releases/download/v0.1.15-alpha/aperf-v0.1.15-alpha-aarch64.tar.gz
 ```
 
 Extract the release:
 
 ```bash { target="ubuntu:latest" }
-tar xvfz aperf-v0.1.12-alpha-aarch64.tar.gz
+tar xvfz aperf-v0.1.15-alpha-aarch64.tar.gz
 ```
 
 Add the path to `aperf` in your `.bashrc` file.
 
 ```console
-echo 'export PATH="$PATH:$HOME/aperf-v0.1.12-alpha-aarch64"' >> ~/.bashrc
+echo 'export PATH="$PATH:$HOME/aperf-v0.1.15-alpha-aarch64"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
 Alternatively, you can copy the `aperf` executable to a directory already in your search path.
 
 ```bash { target="ubuntu:latest" }
-sudo cp aperf-v0.1.12-alpha-aarch64/aperf /usr/local/bin
+sudo cp aperf-v0.1.15-alpha-aarch64/aperf /usr/local/bin
 ```
 
 Confirm `aperf` is installed by printing the version:

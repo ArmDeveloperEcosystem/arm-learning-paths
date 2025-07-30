@@ -1,5 +1,5 @@
 summary:
-  content_total: 382
+  content_total: 391
   content_with_all_tests_passing: 0
   content_with_tests_enabled: 61
 sw_categories:
@@ -196,3 +196,4 @@ sw_categories:
     zlib:
       readable_title: Learn how to build and use Cloudflare zlib on Arm servers
       tests_and_status: []
+

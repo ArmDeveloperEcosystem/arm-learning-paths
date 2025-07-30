@@ -23,7 +23,7 @@ You may need to fill out a form with your contact information to use the model:
 Download and copy the configuration file `model_config.json` and the model itself, `model.ckpt`, to your workspace directory, and verify they exist by running the command:
 
 ```bash
-ls $WORKSPACE/model_config.json $WORKSPACE/model.ckpt
+ls -lha $WORKSPACE/model_config.json $WORKSPACE/model.ckpt
 ```
 
 You can learn more about this model [here](https://huggingface.co/stabilityai/stable-audio-open-small).

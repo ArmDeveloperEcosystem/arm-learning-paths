@@ -1,39 +1,46 @@
 ---
-title: Zenoh Example-1 Simple Pub/Sub
+title: Run a simple Zenoh pub/sub example
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Example 1: Simple Pub/Sub
+## Test Zenoh pub/sub across two devices
 
-This first test demonstrates  real-time publish/subscribe model using two Raspberry Pi devices.
+This example demonstrates how to use Zenoh’s real-time publish/subscribe model to exchange messages between two Raspberry Pi devices over a local network.
 
-The following command is to initiate a subscriber for a key expression `demo/example/**`, i.e. a set of topics starting with the path `demo/example`.
+Pub/sub is a core Zenoh communication pattern where data producers (publishers) send values to a key, and data consumers (subscribers) receive updates for matching key expressions. In this case, the subscriber listens for all messages published under the key expression `demo/example/**`, which matches any topic that begins with `demo/example/`. This enables flexible topic filtering and lightweight data dissemination across distributed systems.
 
-### Step 1: Run Subscriber
+## Start the subscriber node
 
-Log in to Pi using any of the methods:
+Run the subscriber example on one of the Raspberry Pi systems:
 
 ```bash
 cd ~/zenoh/target/release/examples
 ./z_sub
 ```
 
-### Step 2: Run Publisher
+## Start the publisher node
 
-Then, log in to another machine Pi.
+Then, log in to the other Raspberry Pi and run the publisher:
 
 ```bash
 cd ~/zenoh/target/release/examples
 ./z_pub
 ```
 
-The result will look like: 
-![img1 alt-text#center](zenoh_ex1.gif "Figure 1: Simple Pub/Sub")
+{{% notice Tip %}}
+You can run both `z_sub` and `z_pub` on the same device for testing, but running them on separate Raspberry Pis demonstrates Zenoh’s distributed discovery and cross-node communication.
+{{% /notice %}}
 
-In the left-side window, I have logged into the device Pi4 and run the z_sub program. 
-It receives values with the key `demo/example/zenoh-rs-pub` continuously published by z_pub running on Pi in the right-side window.
+## Observe the pub/sub data flow
 
-This basic example shows Zenoh's zero-config discovery and low-latency pub/sub across physical nodes.
+The results are shown below:
+
+![img1 Zenoh subscriber receiving messages from a publisher in a two-terminal view#center](zenoh_ex1.gif "Simple Pub/Sub")
+
+The left-side window shows the `z_sub` program. It receives values with the key `demo/example/zenoh-rs-pub` continuously published by `z_pub` running in the right-side window.
+
+This example confirms that Zenoh’s zero-configuration peer discovery and real-time pub/sub communication are working correctly across physical nodes.
+

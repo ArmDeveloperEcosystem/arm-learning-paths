@@ -1,23 +1,19 @@
 ---
 title: Optimize Arm applications and shared libraries with BOLT
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
-who_is_this_for: Performance engineers and software developers working on Arm platforms who want to optimize both application binaries and shared libraries using BOLT.
+who_is_this_for: This is an advanced topic for performance engineers and software developers targeting Arm platforms who want to optimize application binaries and shared libraries using BOLT.
 
 learning_objectives: 
-    - Instrument and optimize application binaries for individual workload features using BOLT.
-    - Collect separate BOLT profiles and merge them for comprehensive code coverage.
-    - Optimize shared libraries independently.
-    - Integrate optimized shared libraries into applications.
-    - Evaluate and compare application and library performance across baseline, isolated, and merged optimization scenarios.
+  - Instrument and optimize application binaries for individual workload features using BOLT
+  - Collect and merge separate BOLT profiles to improve code coverage
+  - Optimize shared libraries independently of application binaries
+  - Integrate optimized shared libraries into applications
+  - Evaluate and compare performance across baseline, isolated, and merged optimization scenarios
 
 prerequisites:
-    - An Arm based system running Linux with [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed. 
+  - An Arm-based Linux system with [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed
 
 author: Gayathri Narayana Yegna Narayanan
 

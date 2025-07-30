@@ -1,63 +1,64 @@
 ---
-title: Setting Up Zenoh on Arm Devices
+title: Get started with Zenoh on Raspberry Pi and Arm Linux
+
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Setting Up Zenoh on Arm Devices
+## Set up Zenoh on Arm devices
 
-The following instructions are verified on both Raspberry Pi 4/5 and Arm Virtual Hardware, but you can implement them on any Cortex-A Linux device.
+This section shows you how to install and build the open-source Eclipse Zenoh protocol on Arm-based devices like Raspberry Pi.
 
-Before building Zenoh, make sure your system has the necessary development tools and runtime libraries.
+The following instructions have been verified on Raspberry Pi 4 and 5, but you can use any Arm Linux device. These steps apply to Raspberry Pi and other Arm-based Linux platforms. Before building Zenoh, make sure your system has the necessary development tools and runtime libraries.
 
-### Install the Rust build environment
+## Install the Rust development environment
 
-First, we need to install the [Rust](https://www.rust-lang.org/) build environment, since the core of Zenoh is totally developed using Rust to keep it safe and efficient. 
-
-Follow this [installation guide](https://learn.arm.com/install-guides/rust/) to install Rust and Cargo on Arm Linux, a build system for Rust. Or, simply use the following commands.
+First, install the [Rust](https://www.rust-lang.org/) environment. The core of Zenoh is developed in Rust for performance and safety. 
 
 ```bash
-curl https://sh.rustup.rs -sSf | sh
+sudo apt update
+sudo apt install -y curl gcc
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ```
 
-Follow the prompts to complete the installation. If successful, you’ll see:
+Near the end of the installation, you should see the message:
 
 ```output
 Rust is installed now. Great!
 ```
-
-For more details, refer to [Rust’s official install guide.](https://doc.rust-lang.org/cargo/getting-started/installation.html#install-rust-and-cargo)
-
-### Install ROS 2
-
-[Robot Operating System](https://www.ros.org/) is a set of software libraries and tools that help you build robot applications. From drivers to state-of-the-art algorithms, and with powerful developer tools, ROS has what you need for your next robotics project. And it's all open source.
-
-Since ROS was started in 2007, a lot has changed in the robotics and ROS community. The goal of the [ROS 2](https://docs.ros.org/en/rolling/index.html) project is to adapt to these changes, leveraging what is great about ROS 1 and improving what isn’t.
-
-Here is the quick [installation guide](https://learn.arm.com/install-guides/ros2/) about how to install ROS 2 in Arm platform.
-
-### Download and build the Zenoh source
-
-Now, we can clone the Zenoh.
+Source your shell environment to activate Rust:
 
 ```bash
-cd ~
-git clone https://github.com/eclipse-zenoh/zenoh.git
+source "$HOME/.cargo/env"
 ```
 
-After that, simply use cargo to build the source.
+For more information, see the [Rust Install Guide](/install-guides/rust/) for Arm Linux.
+
+## Install ROS 2
+
+[Robot Operating System](https://www.ros.org/) is a set of software libraries and tools that help you build robot applications. ROS provides everything from drivers to state-of-the-art algorithms, as well as developer tools. It is completely open-source.
+
+If you plan to use Zenoh alongside ROS 2, for example, to bridge DDS-based nodes, you should install ROS 2 before proceeding. See the [ROS2 Installation Guide](/install-guides/ros2/) to install ROS 2 on your Arm platforms.
+
+## Download and build the Zenoh source
+
+Clone the Zenoh repository:
+
+```bash
+cd $HOME
+git clone https://github.com/eclipse-zenoh/zenoh.git
+```
+Build the source using Cargo:
 
 ```bash
 cd zenoh
 cargo build --release --all-targets -j $(nproc)
 ```
-
-This will take several minutes depending on your device. Once the installation is complete, you should see:
+This process will take several minutes depending on your device. When complete, you should see output like:
 
 ```output
-cargo build --release --all-targets -j $(nproc)
     Updating crates.io index
   Downloaded humantime v2.2.0
   Downloaded spin v0.10.0
@@ -98,10 +99,32 @@ This may become a hard error in the future; see <https://github.com/rust-lang/ca
     Finished `release` profile [optimized] target(s) in 6m 28s
 ```
 
-After the build process, the binary executables will be stored under the directory of `~/zenoh/target/release/examples/`.
+After the build process, the binary executables will be located at `~/zenoh/target/release/examples/`.
 
 {{% notice Note %}}
-Installation time may vary depending on your device’s processing power.
+Installation time can vary depending on your device’s performance.
 {{% /notice %}}
+
+
+## Troubleshooting build errors
+
+If you get a build error like this:
+```output
+error[E0599]: no function or associated item named `start` found for struct `StoragesPlugin` in the current scope
+   --> plugins/zenoh-plugin-storage-manager/tests/operations.rs:91:55
+```
+
+Edit the file `./plugins/zenoh-plugin-storage-manager/tests/operations.rs` and comment the line shown below and add the second line to the file:
+
+```rust
+//use zenoh_plugin_trait::Plugin;
+use crate::path::to::Plugin;
+```
+
+Then rebuild:
+
+```bash
+cargo clean && cargo build
+```
 
 With Zenoh successfully compiled, you’re ready to explore how nodes communicate using the Zenoh runtime.

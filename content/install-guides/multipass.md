@@ -19,7 +19,7 @@ minutes_to_complete: 30
 author: Jason Andrews
 
 ### Link to official documentation
-official_docs: https://multipass.run/docs
+official_docs: https://documentation.ubuntu.com/multipass/en/latest/
 
 test_images:
 - ubuntu:latest
@@ -53,7 +53,7 @@ Multipass uses the terms virtual machine and instance synonymously.
 Download Multipass for macOS.
 
 ```console
-wget https://github.com/canonical/multipass/releases/download/v1.14.1-rc1/multipass-1.14.1-rc1+mac.14+gf2381bfe9.mac-Darwin.pkg
+wget https://github.com/canonical/multipass/releases/download/v1.16.0/multipass-1.16.0+mac-Darwin.pkg
 ```
 
 ### How do I install Multipass on macOS?
@@ -61,7 +61,7 @@ wget https://github.com/canonical/multipass/releases/download/v1.14.1-rc1/multip
 Install the download using the package command.
 
 ```console
-sudo installer -pkg multipass-1.14.1-rc1+mac.14+gf2381bfe9.mac-Darwin.pkg -target /
+sudo installer -pkg multipass-1.16.0+mac-Darwin.pkg -target /
 ```
 
 The getting started instructions below use the command line interface. If you prefer to use the graphical interface start it from the macOS Launchpad, the initial screen is shown below. You can use the UI to create, start, and stop virtual machines.
@@ -130,11 +130,7 @@ If you need to install `snapd` run:
 sudo apt install snapd -y
 ```
 
-LXD is also required for Multipass.
 
-```bash
-sudo snap install lxd
-```
 
 {{% notice Note %}}
 You can select from three Multipass releases: stable, beta, or edge. The default version is stable.
