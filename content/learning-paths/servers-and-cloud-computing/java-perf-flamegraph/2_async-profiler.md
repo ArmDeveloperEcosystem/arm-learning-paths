@@ -7,8 +7,8 @@ layout: learningpathall
 ---
 
 ## Java Flame Graph Generation using [async-profiler](https://github.com/async-profiler/async-profiler)
-- `async-profiler` is a low-overhead sampling profiler for JVM applications, capable of capturing CPU, allocation, and lock events to generate actionable performance insights.
-- A lightweight tool for Java performance analysis, `async-profiler` produces flame graphs and detailed stack traces with minimal runtime impact, suitable for production environments.
+`async-profiler` is a low-overhead sampling profiler for JVM applications, capable of capturing CPU, allocation, and lock events to generate actionable performance insights.
+A lightweight tool for Java performance analysis, `async-profiler` produces flame graphs and detailed stack traces with minimal runtime impact, suitable for production environments. In this section, you will learn how to install and use it to profile your Tomcat instance being benchmarked.
 
 You should deploy `async-profiler` on the same Arm Linux machine where Tomcat is running to ensure accurate performance profiling.
 1. Download async-profiler-4.0 and uncompress
