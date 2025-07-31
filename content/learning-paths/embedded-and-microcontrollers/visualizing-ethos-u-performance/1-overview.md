@@ -29,7 +29,7 @@ ExecuTorch provides:
 - Delegation of selected operators to accelerators like Ethos-U
 - Tight integration with Arm compute libraries
 
-## Why use virtual platforms?
+## Why use Arm Fixed Virtual Platforms?
 
 Arm Fixed Virtual Platforms (FVPs) are virtual hardware models used to simulate Arm-based systems like the Corstone-320. They allow developers to validate and tune software before silicon is available, which is especially important when targeting newly-released accelerators like the [Ethos-U85](https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u85) NPU.
 
