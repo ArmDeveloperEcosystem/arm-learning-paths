@@ -18,7 +18,7 @@ prerequisites:
     - Basic familiarity with SSH
     - Basic familiarity with RDP
 
-author: Joe Stech
+author: Waheed Brown
 
 ### Tags
 # Tagging metadata, see the Learning Path guide for the allowed values
