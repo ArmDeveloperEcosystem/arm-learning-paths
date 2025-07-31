@@ -24,8 +24,8 @@ layout: learningpathall
 
 Download the RDP file from your Windows on Arm VM's Connect screen:
 
-![Download RDP File#center](images/Download%20RDP%20file.png "Download the RDP file")
+![Download RDP File#center](images/download-rdp-file.png "Download the RDP file")
 
 Connect to your Windows on Arm VM by opening the RDP file in your remote desktop app:
 
-![Connect RDP#center](images/Connect%20to%20Windows%20on%20ARM%20VM%20Using%20RDP.png "Connect by opening the RDP file in your remote desktop app")
+![Connect RDP#center](images/connect-to-windows-on-arm-vm-using-rdp.png "Connect by opening the RDP file in your remote desktop app")
