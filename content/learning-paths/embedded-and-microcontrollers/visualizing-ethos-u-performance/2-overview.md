@@ -47,4 +47,4 @@ These virtual platforms also include a built-in graphical user interface (GUI) t
 The Corstone-320 FVP is a virtual model of an Arm-based microcontroller system optimized for AI and TinyML workloads. It supports Cortex-M CPUs and the Ethos-U NPU, making it ideal for early testing, performance tuning, and validation of embedded AI applications, all before physical hardware is available.
 
 The Corstone-320 reference system is free to use, but you'll need to accept the license agreement during installation.  
-For more information, see the [official Corstone-320 documentation](https://developer.arm.com/documentation/109761/0000?lang=en).
+For more information, see the [Corstone-320 documentation](https://developer.arm.com/documentation/109761/0000?lang=en).
