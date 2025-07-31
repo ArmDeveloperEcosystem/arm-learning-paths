@@ -1,5 +1,5 @@
 ---
-title: Visualize Ethos-U NPU Performance with ExecuTorch on Arm FVPs
+title: Visualize Ethos-U NPU performance with ExecuTorch on Arm FVPs
 
 minutes_to_complete: 120
 
@@ -32,7 +32,7 @@ operatingsystems:
 
 tools_software_languages:
     - Arm Virtual Hardware
-    - Fixed Virtual Platform
+    - Fixed Virtual Platform (FVP)
     - Python
     - PyTorch
     - ExecuTorch
