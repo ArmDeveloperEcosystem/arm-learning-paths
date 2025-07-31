@@ -72,7 +72,8 @@ After the installation completes, your virtual environment includes:
 - **NumPy**: for numerical computations and array operations
 - **Requests**: for HTTP operations and API calls
 - **Other dependencies**: additional packages required by llama.cpp's Python bindings and utilities
-Your environment is now ready to run Python scripts that integrate with the compiled Llama.cpp binaries
+  
+Your environment is now ready to run Python scripts that integrate with the compiled Llama.cpp binaries.
 
 {{< notice Tip >}}
 Before running any Python commands, make sure your virtual environment is activated. {{< /notice >}}
