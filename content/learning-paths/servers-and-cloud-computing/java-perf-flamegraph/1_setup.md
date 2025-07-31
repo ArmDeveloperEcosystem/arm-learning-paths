@@ -31,13 +31,13 @@ tar xzf apache-tomcat-11.0.9.tar.gz
 
 3. If you intend to access the built-in examples of Tomcat via an intranet IP or even an external IP, you need to modify a configuration file as shown:
 ```bash
-vim apache-tomcat-11.0.9/webapps/examples/META-INF/context.xml
+vi apache-tomcat-11.0.9/webapps/examples/META-INF/context.xml
 ```
-Then change the values:
-```console
+Then change the allow value as shown and save the changes:
+```output
 # change <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
 # to
-# <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow=".*" />
+<Valve className="org.apache.catalina.valves.RemoteAddrValve" allow=".*" />
 ```
 Now you can start Tomcat Server:
 ```bash
@@ -64,6 +64,9 @@ Tomcat started.
 
 ## Setup Benchmark Client - [wrk2](https://github.com/giltene/wrk2)
 `wrk2` is a high-performance HTTP benchmarking tool specialized in generating constant throughput loads and measuring latency percentiles for web services. `wrk2` is an enhanced version of `wrk` that provides accurate latency statistics under controlled request rates, ideal for performance testing of HTTP servers.
+
+Currently `wrk2` is only supported on x86 machines. You will run the Benchmark Client steps shown below on an x86_64 Linux machine.
+
 
 1. To use `wrk2`, you will need to install some essential tools before you can build it:
 ```bash
