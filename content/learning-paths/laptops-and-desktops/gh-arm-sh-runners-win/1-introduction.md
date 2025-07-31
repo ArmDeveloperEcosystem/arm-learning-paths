@@ -34,18 +34,18 @@ Navigate to your respository and select the **Settings** tab. On the left pane, 
 
 On the **Runners** page, push the **New self-hosted runner** button on the top right.
 
-![new-runner #center](_images/01%20Navigate%20to%20the%20GitHub%20Runners%20Page.png)
+![new-runner #center](_images/navigate-to-the-github-runners-page.png)
 
 Choose Windows ARM64 for the platform and click **Save**.
 
-![platform #center](_images/02%20Select%20Windows%20ARM64%20Image%20Architecture.png)
+![platform #center](_images/select-windows-arm64-image-architecture.png)
 
-Now follow the displayed instructions to **Download**, **Configure** and **[Use] your self-hosted runner** on your Microsoft Azure, Windows-on-Arm VM. [Use Windows PowerShell as an administrator](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell?view=powershell-7.6#run-with-administrative-privileges), to run the commands.
+Now follow the displayed instructions to **Download**, **Configure** and **Use your self-hosted runner** on your Microsoft Azure, Windows-on-Arm VM. [Use Windows PowerShell as an administrator](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell?view=powershell-7.6#run-with-administrative-privileges), to run the commands.
 
 {{% notice Note %}}
 
-For instructions on provisioning an Azure Windows-on-Arm VM please see the following learning path: [Deploy a Cobalt 100 Virtual Machine on Azure](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cobalt/)
+For instructions on provisioning an Azure Windows-on-Arm VM please see the following learning path: [Deploy a Windows on Arm Cobalt 100 Virtual Machine on Azure](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cobalt-windows/)
 
 {{% /notice %}}
 
-![download #center](_images/03%20Download%20Configure%20Use%20Runner.png)
+![download #center](_images/download-configure-use-runner.png)
