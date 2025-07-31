@@ -2,7 +2,7 @@
 # User change
 title: "Run your first model with ExecuTorch"
 
-weight: 6 # 1 is first, 2 is second, etc.
+weight: 7 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
