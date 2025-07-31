@@ -87,7 +87,7 @@ Move the executable to somewhere in your PATH:
 sudo cp wrk /usr/local/bin
 ```
 
-3. Finally, you can run the benchamrk of Tomcat through wrk2.
+3. Finally, you can run the benchmark of Tomcat through wrk2.
 ```bash
 wrk -c32 -t16 -R50000 -d60 http://${tomcat_ip}:8080/examples/servlets/servlet/HelloWorldExample
 ```
