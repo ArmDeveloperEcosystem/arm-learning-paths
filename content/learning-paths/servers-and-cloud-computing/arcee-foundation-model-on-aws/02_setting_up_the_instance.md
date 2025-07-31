@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-In this step, you'll set up the Graviton4 instance with the tools and dependencies required to build and run the Arcee Foundation Model. This includes installing system packages and a Python environment.
+In this step, you'll set up the Graviton4 instance with the tools and dependencies required to build and run the AFM-4.5B model. This includes installing system packages and a Python environment.
 
 ## Update the package list
 

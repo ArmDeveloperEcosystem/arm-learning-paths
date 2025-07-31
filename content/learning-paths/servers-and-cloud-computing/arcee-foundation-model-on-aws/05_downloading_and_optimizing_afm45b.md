@@ -6,9 +6,19 @@ weight: 7
 layout: learningpathall
 ---
 
-In this step, you’ll download the AFM-4.5B model from Hugging Face, convert it to the GGUF format for compatibility with `llama.cpp`, and generate quantized versions to optimize memory usage and improve inference speed.
+In this step, you’ll download the [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B) model from Hugging Face, convert it to the GGUF format for compatibility with `llama.cpp`, and generate quantized versions to optimize memory usage and improve inference speed.
+
+{{% notice Note %}}
+If you want to skip the model optimization process, [GGUF](https://huggingface.co/arcee-ai/AFM-4.5B-GGUF) versions are available. {{% /notice %}}
 
 Make sure to activate your virtual environment before running any commands. The instructions below walk you through downloading and preparing the model for efficient use on AWS Graviton4.
+
+## Signing up to Hugging Face
+
+In order to download AFM-4.5B, you will need:
+- a Hugging Face account: you can sign up at [https://huggingface.co](https://huggingface.co)
+- a read-only Hugging Face token: once logged in, you can create one at [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens). Don't forget to store it, as you will only be able to view it once.
+- to accept the terms of AFM-4.5B at [https://huggingface.co/arcee-ai/AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B)
 
 ## Install the Hugging Face libraries
 
@@ -19,14 +29,31 @@ pip install huggingface_hub hf_xet
 This command installs:
 
 - `huggingface_hub`: Python client for downloading models and datasets
--  `hf_xet`: Git extension for fetching large model files stored on Hugging Face
+- `hf_xet`: Git extension for fetching large model files hosted on Hugging Face
 
-These tools include the `huggingface-cli` command-line interface you'll use next.
+These tools include the `hf` command-line interface you'll use next.
+
+## Log in to the Hugging Face Hub
+
+```bash
+hf auth login
+
+    _|    _|  _|    _|    _|_|_|    _|_|_|  _|_|_|  _|      _|    _|_|_|      _|_|_|_|    _|_|      _|_|_|  _|_|_|_|
+    _|    _|  _|    _|  _|        _|          _|    _|_|    _|  _|            _|        _|    _|  _|        _|
+    _|_|_|_|  _|    _|  _|  _|_|  _|  _|_|    _|    _|  _|  _|  _|  _|_|      _|_|_|    _|_|_|_|  _|        _|_|_|
+    _|    _|  _|    _|  _|    _|  _|    _|    _|    _|    _|_|  _|    _|      _|        _|    _|  _|        _|
+    _|    _|    _|_|      _|_|_|    _|_|_|  _|_|_|  _|      _|    _|_|_|      _|        _|    _|    _|_|_|  _|_|_|_|
+
+    To login, `huggingface_hub` requires a token generated from https://huggingface.co/settings/tokens .
+Enter your token (input will not be visible):
+```
+
+Please enter the token you created above, and answer 'n' to "Add token as git credential? (Y/n)".
 
 ## Download the AFM-4.5B model
 
 ```bash
-huggingface-cli download arcee-ai/afm-4.5B --local-dir models/afm-4-5b
+hf download arcee-ai/afm-4.5B --local-dir models/afm-4-5b
 ```
 
 This command downloads the model to the `models/afm-4-5b` directory:
@@ -60,7 +87,7 @@ This command creates a 4-bit quantized version of the model:
 - `llama-quantize` is the quantization tool from Llama.cpp.
 - `afm-4-5B-F16.gguf` is the input GGUF model file in 16-bit precision. 
 - `Q4_0` applies zero-point 4-bit quantization.
-- This reduces the model size by approximately 45% (from ~15GB to ~8GB).
+- This reduces the model size by approximately ~70% (from ~15GB to ~4.4GB).
 - The quantized model will use less memory and run faster, though with a small reduction in accuracy.
 - The output file will be `afm-4-5B-Q4_0.gguf`.
 
@@ -78,7 +105,7 @@ bin/llama-quantize models/afm-4-5b/afm-4-5B-F16.gguf models/afm-4-5b/afm-4-5B-Q8
 
 This command creates an 8-bit quantized version of the model:
 - `Q8_0` specifies 8-bit quantization with zero-point compression.
-- This reduces the model size by approximately 70% (from ~15GB to ~4.4GB).
+- This reduces the model size by approximately ~45% (from ~15GB to ~8GB).
 - The 8-bit version provides a better balance between memory usage and accuracy than 4-bit quantization.
 - The output file is named `afm-4-5B-Q8_0.gguf`.
 - Commonly used in production scenarios where memory resources are available.
@@ -89,7 +116,7 @@ Similar to Q4_0, Arm has contributed optimized kernels for Q8_0 quantization tha
 
 ## Model files ready for inference
 
-After completing these steps, you'll have three versions of the AFM-4.5B model:
+After completing these steps, you'll have three versions of the AFM-4.5B model in `models/afm-4-5b`:
 - `afm-4-5B-F16.gguf` - The original full-precision model (~15GB)
 - `afm-4-5B-Q4_0.gguf` - 4-bit quantized version (~4.4GB) for memory-constrained environments
 - `afm-4-5B-Q8_0.gguf` - 8-bit quantized version (~8GB) for balanced performance and memory usage

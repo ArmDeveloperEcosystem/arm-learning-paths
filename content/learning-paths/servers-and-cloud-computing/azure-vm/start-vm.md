@@ -38,4 +38,16 @@ Use the public IP address to SSH to the VM. Replace `<public-ip-address>` with t
 ssh azureuser@<public-ip-address>
 ```
 
+After you login, print the machine information.
+
+```bash
+uname -a
+```
+
+The output is similar to:
+
+```output
+Linux MyAzureLinuxARMVM 6.6.92.2-2.azl3 #1 SMP Wed Jul  2 02:43:35 UTC 2025 aarch64 aarch64 aarch64 GNU/Linux
+```
+
 You are ready to use your Azure Linux virtual machine.

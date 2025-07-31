@@ -1,17 +1,13 @@
 ---
-title: Use the Arm Performance Studio Integration extension in Godot
-
-draft: true
-cascade:
-    draft: true
-    
+title: Profile Android game performance in Godot with Arm Performance Studio
+   
 minutes_to_complete: 15
 
-who_is_this_for: This is an introductory topic for Godot developers who are targeting Android devices and want to get more insight into how their game performs on devices with Arm CPUs and GPUs.
+who_is_this_for: This is an introductory topic for Godot developers targeting Android devices who want to optimize game performance on Arm CPUs and Mali GPUs using Arm Performance Studio tools.
 
 learning_objectives: 
     - Install the Arm Performance Studio Integration extension in Godot
-    - Annotate your Godot game with markers that give context to a profile in Arm Performance Studio tools
+    - Annotate your Godot game with performance markers for profiling in Streamline and Performance Advisor
 
 prerequisites:
     - Familiarity with Godot

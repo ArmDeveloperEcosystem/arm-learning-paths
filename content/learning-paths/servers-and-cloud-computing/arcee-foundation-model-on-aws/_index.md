@@ -1,10 +1,6 @@
 ---
 title: Deploy Arcee AFM-4.5B on Arm-based AWS Graviton4 with Llama.cpp
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: This Learning Path is for developers and ML engineers who want to deploy Arcee's AFM-4.5B small language model on AWS Graviton4 instances using Llama.cpp.
