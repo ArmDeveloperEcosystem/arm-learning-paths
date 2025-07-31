@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Run your first model with ExecuTorch"
+title: "Deploy and run Mobilenet V2 on the Corstone-320 FVP"
 
 weight: 7 # 1 is first, 2 is second, etc.
 
@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 ## Deploy a TinyML Model
 
-Now that your environment and virtual hardware are ready, you are ready to run your first model using ExecuTorch on the Corstone-320 FVP.
+With your environment and FVP now set up, you're ready to deploy and run a real TinyML model using ExecuTorch.
 
 ## Deploy Mobilenet V2 with ExecuTorch
 
@@ -17,9 +17,9 @@ This example deploys the [MobileNet V2](https://pytorch.org/hub/pytorch_vision_m
 
 The Python code for the MobileNet V2 model is in your local `executorch` repo: [executorch/examples/models/mobilenet_v2/model.py](https://github.com/pytorch/executorch/blob/main/examples/models/mobilenet_v2/model.py). You can deploy it using [run.sh](https://github.com/pytorch/executorch/blob/main/examples/arm/run.sh), just like you did in the previous step, with some extra parameters:
 
-{{% notice macOS %}}
+{{% notice Tip %}}
 
-**Start Docker:** on macOS, FVPs run inside a Docker container.
+On macOS, make sure Docker is running. FVPs execute inside a Docker container.
 
 {{% /notice %}}
 
@@ -30,6 +30,8 @@ The Python code for the MobileNet V2 model is in your local `executorch` repo: [
 --target=ethos-u85-128 \
 --model_name=mv2
 ```
+
+The `--model_name=mv2` flag tells `run.sh` to use the Mobilenet V2 model defined in examples/models/mobilenet_v2/model.py.
 
 **Explanation of run.sh Parameters**
 |run.sh Parameter|Meaning / Context|
@@ -58,7 +60,7 @@ Total delegated subgraphs: 1
 Number of delegated nodes: 419
 ```
 
-This confirms that the model was successfully compiled, deployed, and run with NPU acceleration.
+A high number of delegated nodes means the majority of model execution was successfully offloaded to the Ethos-U NPU for acceleration. This confirms that the model was successfully compiled, deployed, and run with NPU acceleration.
 
 ## Next steps
 If you’d like to visualize instruction counts and performance using the GUI, continue to the next (optional) section.
