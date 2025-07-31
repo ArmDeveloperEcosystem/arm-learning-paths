@@ -21,7 +21,7 @@ These instructions have been tested on:
 - Ubuntu 22.04 and 24.04
 - Windows Subsystem for Linux (WSL)
 
-Install the required system packages:
+## Install the required system packages:
 
 ```bash
 sudo apt update
@@ -80,4 +80,4 @@ executorch         0.8.0a0+92fb0cc
 
 ## Next steps
 
-Now that ExecuTorch is installed, you're ready to simulate your TinyML model on virtual Arm hardware. In the next section, you'll configure and launch a Fixed Virtual Platform.
+Now that ExecuTorch is installed, you're ready to simulate your TinyML model on an Arm Fixed Virtual Platform (FVP). In the next section, you'll configure and launch a Fixed Virtual Platform.
