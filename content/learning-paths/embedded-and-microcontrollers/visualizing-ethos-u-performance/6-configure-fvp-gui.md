@@ -8,7 +8,9 @@ weight: 6 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-In this section, you'll enable GUI output for the Corstone-320 FVP and deploy a real TinyML model to observe instruction counts and output in the visual interface.
+## Visualize model execution using the FVP GUI
+
+You’ll now enable the graphical interface for the Corstone-320 FVP and run a real TinyML model to observe instruction counts and performance output in a windowed display.
 
 ## Find your IP address
 
@@ -16,11 +18,11 @@ Note down your computer's IP address:
 ```bash
 ip addr show 
 ```
-Note down the IP address of your active network interface (inet) which you will use later to pass as an argument to the FVP.
+You'll use the IP address of your active network interface (inet) later to pass as an argument to the FVP.
 
-{{% notice macOS %}}
+{{% notice Note %}}
 
-Note down your `en0` IP address (or whichever network adapter is active):
+For macOS, note down your `en0` IP address (or whichever network adapter is active):
 
 ```bash
 ipconfig getifaddr en0 # Returns your Mac's WiFi IP address
