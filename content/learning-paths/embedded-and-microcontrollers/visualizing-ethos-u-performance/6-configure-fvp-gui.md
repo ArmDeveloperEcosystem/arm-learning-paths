@@ -61,12 +61,9 @@ Edit the following parameters in your locally checked out [executorch/backends/a
 
 {{% notice macOS %}}
 
-- **Start Docker:** on macOS, FVPs run inside a Docker container.
-
-  **Do not use Colima Docker!**
-
-  - Make sure to use an [official version of Docker](https://www.docker.com/products/docker-desktop/) and not a free version like the [Colima](https://github.com/abiosoft/colima?tab=readme-ov-file) Docker container runtime
-  - `run.sh` assumes Docker Desktop style networking (`host.docker.internal`) which breaks with Colima
+- **Start Docker:** on macOS, FVPs run inside a Docker container. 
+- Make sure to use an [official version of Docker](https://www.docker.com/products/docker-desktop/) and not a free version like the [Colima](https://github.com/abiosoft/colima?tab=readme-ov-file) Docker container runtime
+ - `run.sh` assumes Docker Desktop style networking (`host.docker.internal`) which breaks with Colima
   - Colima then breaks the FVP GUI
 
 - **Start XQuartz:** on macOS, the FVP GUI runs using XQuartz.
