@@ -7,7 +7,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Java Flame Graph Generation via Java agent and perf
+## Java Flame Graph Generation using Java agent and perf
 To profile a Java application with perf and ensure proper symbol resolution, you must include `libperf-jvmti.so` when launching the Java application.
 - `libperf-jvmti.so` is a JVM TI agent library enabling perf to resolve Java symbols, facilitating accurate profiling of Java applications.
 - A specialized shared library, `libperf-jvmti.so` bridges perf and the JVM, enabling proper translation of memory addresses to Java method names during profiling.
