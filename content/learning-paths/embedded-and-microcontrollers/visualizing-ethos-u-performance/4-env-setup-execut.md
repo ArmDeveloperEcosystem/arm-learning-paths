@@ -7,8 +7,9 @@ weight: 4
 # Do not modify these elements
 layout: "learningpathall"
 ---
+## Set up overview
 
-Get your development environment ready to deploy and run models with ExecuTorch.
+Before you can deploy and test models with ExecuTorch, you need to set up your local development environment. This section walks you through installing system dependencies, creating a virtual environment, and cloning the ExecuTorch repository on Ubuntu or WSL. Once complete, you'll be ready to run TinyML models on a virtual Arm platform.
 
 ## Install system dependencies
 
