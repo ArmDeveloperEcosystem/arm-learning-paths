@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## Java Flame Graph Generation via async-profiler [async-profiler](https://github.com/async-profiler/async-profiler)
+## Java Flame Graph Generation using [async-profiler](https://github.com/async-profiler/async-profiler)
 - `async-profiler` is a low-overhead sampling profiler for JVM applications, capable of capturing CPU, allocation, and lock events to generate actionable performance insights.
 - A lightweight tool for Java performance analysis, `async-profiler` produces flame graphs and detailed stack traces with minimal runtime impact, suitable for production environments.
 
