@@ -1,12 +1,12 @@
 ---
-title: Create the Cobalt 100 virtual machine
+title: Create the Cobalt 100 Windows Virtual Machine
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Use the Azure Portal to deploy a Cobalt 100 VM
+## Use the Azure Portal to deploy a Cobalt 100 Windows VM
 
 Cobalt 100 is Microsoft’s first Arm-based server processor, built on the Armv9 Neoverse-N2 CPU architecture. It is optimized for the performance and efficiency of scale-out, cloud-based applications.
 
@@ -30,10 +30,9 @@ To create a Cobalt 100 VM, follow these steps:
 
    ![Administrator Account#center](images/create-admin.png)
 
-5. For the **Public inbound ports** field, select **None**.
-6. On the **Disks** tab, accept the default options.
-7. On the **Networking** tab, ensure that a **Public IP** is selected. You will need it to connect to the VM later. Leave the NSG settings as **Basic**. 
+5. On the **Disks** tab, accept the default options.
+6. On the **Networking** tab, ensure that a **Public IP** is selected. You will need it to connect to the VM later. Leave the NSG settings as **Basic**. 
 
-8. Select **Review + create**, then **Create**. Azure deploys the VM and the automatically-generated Network Security Group (NSG). Provisioning takes ~2 minutes.
+7. Select **Review + create**, then **Create**. Azure deploys the VM and the automatically-generated Network Security Group (NSG). Provisioning takes ~2 minutes.
 
-9. Navigate to the **Deployment in progress** pane or open the **Notifications** panel to track progress. When the deployment completes, proceed to the next step to expose an inbound port.
+8. Navigate to the **Deployment in progress** pane or open the **Notifications** panel to track progress. When the deployment completes, proceed to the next step to expose an inbound port.

@@ -7,6 +7,7 @@ who_is_this_for: This is an introductory topic for software and DevOps developer
 
 learning_objectives:
     - Deploy a Windows on Arm Cobalt 100 virtual machine (VM) on Microsoft Azure
+    - Connect to the Cobalt 100 VM using SSH
     - Connect to the Cobalt 100 VM using remote desktop (RDP)
     - Configure an inbound TCP port in the associated Network Security Group (NSG)
     - Verify external connectivity to the newly-opened port
@@ -14,6 +15,7 @@ learning_objectives:
 prerequisites:
     - A Microsoft Azure subscription with permissions to create virtual machines and networking resources
     - A Windows 11 license
+    - Basic familiarity with SSH
     - Basic familiarity with RDP
 
 author: Joe Stech

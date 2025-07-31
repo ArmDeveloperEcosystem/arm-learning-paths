@@ -1,12 +1,26 @@
 ---
-title: Verify connectivity to the Cobalt 100 VM
-weight: 4
+title: Verify SSH Connectivity to the Cobalt 100 VM
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
 ## Connect over SSH and test the open port
+
+{{% notice Prerequisites %}}
+
+1. [Install the Azure Command Line Interface](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest):
+   
+   * You will need this to easily connect to your Windows on Arm VM over SSH
+
+2. [Configure SSH for Windows on an Azure VM](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/connect-ssh?tabs=azurecli):
+
+   * You will need to configure SSH for Windows on an Azure VM, in order to connect over SSH from your local machine
+
+3. Install [Python for Windows on Arm](https://learn.arm.com/install-guides/py-woa/)
+
+{{% /notice %}}
 
 On the **Overview** page of the VM, copy the **Public IP address**. Open a terminal on your local machine, and SSH to the VM (replace *azureuser* if you chose a different admin username):
 
@@ -23,11 +37,13 @@ When prompted, confirm the connection to add the VM to your *known_hosts* file.
 If you don't already have an application listening on TCP 8080, you can start one temporarily:
 
 ```bash
-sudo apt update -y && sudo apt install -y python3
-python3 -m http.server 8080
+python -m http.server 8080
 ```
 
 Leave this terminal open – the server runs in the foreground.
+
+#### Troubleshooting
+[Python for Windows on Arm](https://learn.arm.com/install-guides/py-woa/)
 
 ### Test from your local machine
 
