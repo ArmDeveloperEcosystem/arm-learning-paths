@@ -8,7 +8,8 @@ layout: learningpathall
 
 In this step, you’ll download the [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B) model from Hugging Face, convert it to the GGUF format for compatibility with `llama.cpp`, and generate quantized versions to optimize memory usage and improve inference speed.
 
-**Note: if you want to skip the model optimization process, [GGUF](https://huggingface.co/arcee-ai/AFM-4.5B-GGUF) versions are available.**
+{{% notice Note %}}
+If you want to skip the model optimization process, [GGUF](https://huggingface.co/arcee-ai/AFM-4.5B-GGUF) versions are available. {{% /notice %}}
 
 Make sure to activate your virtual environment before running any commands. The instructions below walk you through downloading and preparing the model for efficient use on AWS Graviton4.
 
