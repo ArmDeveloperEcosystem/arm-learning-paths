@@ -1,12 +1,14 @@
 ---
 # User change
-title: "Set up the Corstone-320 FVP"
+title: "Enable GUI and deploy a model on Corstone-320 FVP"
 
 weight: 6 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
+
+In this section, you'll enable GUI output for the Corstone-320 FVP and deploy a real TinyML model to observe instruction counts and output in the visual interface.
 
 ## Find your IP address
 
