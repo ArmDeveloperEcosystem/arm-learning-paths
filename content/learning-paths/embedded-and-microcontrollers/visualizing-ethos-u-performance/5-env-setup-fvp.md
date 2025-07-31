@@ -8,6 +8,8 @@ weight: 5
 layout: "learningpathall"
 ---
 
+## Get started with the Corstone-320 FVP
+
 In this section, you’ll install and configure the Corstone-320 FVP to simulate an Arm-based embedded system. This lets you run ExecuTorch-compiled models in a virtual environment without any hardware required.
 
 ## Install the Corstone-320 FVP
