@@ -32,7 +32,7 @@ This command does the following:
 
 - Runs the activation script, which modifies your shell environment
 - Updates your shell prompt to show `env-llama-cpp`, indicating the environment is active
-- Updates `PATH` to use so the environment’s Python interpreter 
+- Updates `PATH` to use the environment’s Python interpreter 
 - Ensures all `pip` commands install packages into the isolated environment
 
 ## Upgrade pip to the latest version
