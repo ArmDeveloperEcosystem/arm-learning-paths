@@ -2,7 +2,7 @@
 # User change
 title: "Set up your ExecuTorch environment"
 
-weight: 3
+weight: 4
 
 # Do not modify these elements
 layout: "learningpathall"
