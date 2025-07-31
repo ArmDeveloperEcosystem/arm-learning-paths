@@ -15,8 +15,8 @@ learning_objectives:
     - How to generate flame graphs for Java applications using Java agent
 
 prerequisites:
-    - Basic familiarity with Java applications
-    - Basic familiarity with flame graphs
+    - An Arm-based and x86 computer running Ubuntu. You can use a server instance from a cloud service provider of your choice.
+    - Basic familiarity with Java applications and flame graphs
 
 author: Ying Yu, Martin Ma
 
