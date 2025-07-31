@@ -42,13 +42,10 @@ further_reading:
         link: https://wiki.openjdk.org/
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
+        title: Java FlameGraphs
+        link: https://www.brendangregg.com/flamegraphs.html
         type: website
+
 
 
 
