@@ -11,6 +11,13 @@ Now that you have seen an [Arm Streamline example capture](/learning-paths/mobil
 
 ## Select the device and application in Streamline
 
+1. Launch the Performance Studio Hub and open Streamline.
+
+    - On Windows, search for Performance Studio.
+    - On macOS and Linux, open the Performance Studio application file from the install directory.
+
+    ![Performance Studio Hub](images/ps_Hub.png)
+
 1. In the Streamline `Start` view, select `Android (adb)` as your device type, then select your device from the list of detected devices. This installs the `gatord` daemon and connects to the device.
 
 1. Wait for the list of available packages to populate, then select the one you wish to profile.
