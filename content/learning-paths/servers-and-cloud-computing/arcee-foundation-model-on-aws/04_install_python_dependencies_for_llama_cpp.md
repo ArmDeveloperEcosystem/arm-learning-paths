@@ -32,7 +32,7 @@ This command does the following:
 
 - Runs the activation script, which modifies your shell environment
 - Updates your shell prompt to show `env-llama-cpp`, indicating the environment is active
-- Updates `PATH` to use so the environment’s Python interpreter 
+- Updates `PATH` to use the environment’s Python interpreter 
 - Ensures all `pip` commands install packages into the isolated environment
 
 ## Upgrade pip to the latest version
@@ -72,7 +72,8 @@ After the installation completes, your virtual environment includes:
 - **NumPy**: for numerical computations and array operations
 - **Requests**: for HTTP operations and API calls
 - **Other dependencies**: additional packages required by llama.cpp's Python bindings and utilities
-Your environment is now ready to run Python scripts that integrate with the compiled Llama.cpp binaries
+  
+Your environment is now ready to run Python scripts that integrate with the compiled Llama.cpp binaries.
 
 {{< notice Tip >}}
 Before running any Python commands, make sure your virtual environment is activated. {{< /notice >}}

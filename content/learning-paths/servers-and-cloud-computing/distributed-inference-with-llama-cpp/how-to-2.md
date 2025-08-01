@@ -190,7 +190,7 @@ llama_perf_context_print:        eval time =   77429.95 ms /   127 runs   (  609
 llama_perf_context_print:       total time =   79394.06 ms /   132 tokens
 llama_perf_context_print:    graphs reused =          0
 ```
-That's it! You have sucessfully run the llama-3.1-8B model on CPUs with the power of llama.cpp RPC functionality. The following table provides brief description of the metrics from `llama_perf`: <br><br>
+That's it! You have successfully run the llama-3.1-8B model on CPUs with the power of llama.cpp RPC functionality. The following table provides brief description of the metrics from `llama_perf`: <br><br>
 
 | Log Line          | Description                                                                 |
 |-------------------|-----------------------------------------------------------------------------|
@@ -200,11 +200,11 @@ That's it! You have sucessfully run the llama-3.1-8B model on CPUs with the powe
 | eval time         | Time to generate output tokens by forward-passing through the model.        |
 | total time        | Total time for both prompt processing and token generation (excludes model load). |
 
-Lastly to set up OpenAI compatible API, you can use the `llama-server` functionality. The process of implementing this is described [here](/learning-paths/servers-and-cloud-computing/llama-cpu) under the "Access the chatbot using the OpenAI-compatible API" section. Here is a snippet, for how to set up llama-server for disributed inference:
+Lastly to set up OpenAI compatible API, you can use the `llama-server` functionality. The process of implementing this is described [here](/learning-paths/servers-and-cloud-computing/llama-cpu) under the "Access the chatbot using the OpenAI-compatible API" section. Here is a snippet, for how to set up llama-server for distributed inference:
 ```bash
 bin/llama-server -m /home/ubuntu/model.gguf --port 8080 --rpc "$worker_ips" -ngl 99
 ```
-At the very end of the output to the above command, you will see somethin like the following: 
+At the very end of the output to the above command, you will see something like the following: 
 ```output
 main: server is listening on http://127.0.0.1:8080 - starting the main loop
 srv  update_slots: all slots are idle
