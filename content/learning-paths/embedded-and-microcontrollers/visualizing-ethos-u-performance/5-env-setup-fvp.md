@@ -16,9 +16,10 @@ In this section, you’ll install and configure the Corstone-320 FVP to simulate
 
 Before you begin, make sure you’ve completed the steps in the previous section to install ExecuTorch.
 
-{{< notice note >}}
-On macOS, you'll need to perform additional setup to support FVP execution.  
-See the [FVPs-on-Mac GitHub repo](https://github.com/Arm-Examples/FVPs-on-Mac/) for instructions before continuing.
+{{< notice Note >}}
+If you're using macOS, you need to perform additional setup to support FVP execution.  
+
+See the <a href="https://github.com/Arm-Examples/FVPs-on-Mac/" target="_blank">FVPs-on-Mac GitHub repo</a> for instructions before continuing.
 {{< /notice >}}
 
 Run the setup script provided in the ExecuTorch examples directory:

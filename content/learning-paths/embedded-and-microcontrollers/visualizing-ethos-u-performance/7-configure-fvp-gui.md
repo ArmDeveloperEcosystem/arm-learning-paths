@@ -2,7 +2,7 @@
 # User change
 title: "Enable GUI and deploy a model on Corstone-320 FVP"
 
-weight: 6 # 1 is first, 2 is second, etc.
+weight: 7 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Visualize model execution using the FVP GUI
 
-You’ll now enable the graphical interface for the Corstone-320 FVP and run a real TinyML model to observe instruction counts and performance output in a windowed display.
+You’ve successfully deployed a model on the Corstone-320 FVP from the command line. In this step, you’ll enable the platform’s built-in graphical output and re-run the model to observe instruction-level execution metrics in a windowed display.
 
 ## Find your IP address
 
@@ -30,7 +30,7 @@ ipconfig getifaddr en0 # Returns your Mac's WiFi IP address
 
 {{% /notice %}}
 
-## Enable the FVP's GUI
+## Configure the FVP for GUI output
 
 Edit the following parameters in your locally checked out [executorch/backends/arm/scripts/run_fvp.sh](https://github.com/pytorch/executorch/blob/d5fe5faadb8a46375d925b18827493cd65ec84ce/backends/arm/scripts/run_fvp.sh#L97-L102) file, to enable the Mobilenet V2 output on the FVP's GUI:
 
@@ -59,9 +59,24 @@ Edit the following parameters in your locally checked out [executorch/backends/a
 
 ## Deploy the model
 
-{{% notice macOS %}}
+Now run the Mobilenet V2 computer vision model, using [executorch/examples/arm/run.sh](https://github.com/pytorch/executorch/blob/main/examples/arm/run.sh):
+```bash
+./examples/arm/run.sh \
+--aot_arm_compiler_flags="--delegate --quantize --intermediates mv2_u85/ --debug --evaluate" \
+--output=mv2_u85 \
+--target=ethos-u85-128 \
+--model_name=mv2
+```
 
-- **Start Docker:** on macOS, FVPs run inside a Docker container. 
+Observe that the FVP loads the model file, compiles the PyTorch model to ExecuTorch `.pte` format and then shows an instruction count in the top right of the GUI:
+
+![Terminal and FVP output#center](./Terminal%20and%20FVP%20Output.jpg "Terminal and FVP output")
+
+{{% notice Note %}}
+
+For macOS users, follow these instructions:
+
+- Start Docker. FVPs run inside a Docker container. 
 - Make sure to use an [official version of Docker](https://www.docker.com/products/docker-desktop/) and not a free version like the [Colima](https://github.com/abiosoft/colima?tab=readme-ov-file) Docker container runtime
  - `run.sh` assumes Docker Desktop style networking (`host.docker.internal`) which breaks with Colima
   - Colima then breaks the FVP GUI
@@ -74,16 +89,3 @@ Edit the following parameters in your locally checked out [executorch/backends/a
   xhost + 127.0.0.1 # The Docker container seems to proxy through localhost
   ```
 {{% /notice %}}
-
-Now run the Mobilenet V2 computer vision model, using [executorch/examples/arm/run.sh](https://github.com/pytorch/executorch/blob/main/examples/arm/run.sh):
-```bash
-./examples/arm/run.sh \
---aot_arm_compiler_flags="--delegate --quantize --intermediates mv2_u85/ --debug --evaluate" \
---output=mv2_u85 \
---target=ethos-u85-128 \
---model_name=mv2
-```
-
-Observe that the FVP loads the model file, compiles the PyTorch model to ExecuTorch `.pte` format and then shows an instruction count in the top right of the GUI:
-
-![Terminal and FVP output](./Terminal%20and%20FVP%20Output.jpg)
