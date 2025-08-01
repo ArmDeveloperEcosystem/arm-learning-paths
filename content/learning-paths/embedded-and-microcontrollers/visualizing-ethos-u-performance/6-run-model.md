@@ -7,11 +7,9 @@ weight: 6 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-## Deploy a TinyML Model
+## Deploy Mobilenet V2 with ExecuTorch
 
 With your environment and FVP now set up, you're ready to deploy and run a real TinyML model using ExecuTorch.
-
-## Deploy Mobilenet V2 with ExecuTorch
 
 This example deploys the [MobileNet V2](https://pytorch.org/hub/pytorch_vision_mobilenet_v2/) computer vision model. The model is a convolutional neural network (CNN) that extracts visual features from an image. It is used for image classification and object detection.
 

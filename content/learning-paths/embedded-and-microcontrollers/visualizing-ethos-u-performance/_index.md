@@ -38,6 +38,7 @@ tools_software_languages:
     - ExecuTorch
     - Arm Compute Library
     - GCC
+    - Docker
 
 further_reading:
     - resource:
