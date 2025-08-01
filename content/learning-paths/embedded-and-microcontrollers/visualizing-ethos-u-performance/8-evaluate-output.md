@@ -2,20 +2,24 @@
 # User change
 title: "Evaluate Ethos-U Performance"
 
-weight: 7 # 1 is first, 2 is second, etc.
+weight: 8 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
 
+## Interpreting the results
+
+Now that you've successfully deployed and executed the MobileNet V2 model on the Corstone-320 FVP, this section walks you through how to interpret the resulting performance data. This includes inference time, operator delegation, and hardware-level metrics from the Ethos-U NPU.
+
 ## Observe Ahead-of-Time Compilation
-- The below output snippet from [run.sh](https://github.com/pytorch/executorch/blob/main/examples/arm/run.sh) is how you can confirm ahead-of-time compilation
-- Specifically you want to see that the original PyTorch model was converted to an ExecuTorch `.pte` file
+- The following output from [run.sh](https://github.com/pytorch/executorch/blob/main/examples/arm/run.sh) confirms that Ahead-of-Time (AOT) compilation was successful.
+- Specifically you want to confirm that the original PyTorch model was compiled into an ExecuTorch `.pte` file
 - For the MobileNet V2 example, the compiled ExecuTorch file will be output as `mv2_arm_delegate_ethos-u85-128.pte`
 
 {{% notice Note %}}
 
-In the below sample outputs, the `executorch` directory path is indicated as `/path/to/executorch`. Your actual path will depend on where you cloned your local copy of the [executorch repo](https://github.com/pytorch/executorch/tree/main).
+In the examples below, `/path/to/executorch` represents the directory where you cloned your local copy of the [ExecuTorch repo](https://github.com/pytorch/executorch/tree/main). Replace it with your actual path when running commands or reviewing output.
 
 {{% /notice %}}
 
@@ -162,4 +166,6 @@ I [executorch:arm_perf_monitor.cpp:184] ethosu_pmu_cntr4 : 130
 |ethosu_pmu_cntr3|External DRAM write beats(ETHOSU_PMU_EXT_WR_DATA_BEAT_WRITTEN)|Number of write data beats to external memory.|Helps detect offloading or insufficient SRAM.|
 |ethosu_pmu_cntr4|Idle cycles(ETHOSU_PMU_NPU_IDLE)|Number of cycles where the NPU had no work scheduled (i.e., idle).|High idle count = possible pipeline stalls or bad scheduling.|
 
-In this learning path you have successfully learned how to deploy a MobileNet V2 Model using ExecuTorch on Arm's Corstone-320 FVP.
+## Review
+
+In this Learning Path, you have learned how to deploy a MobileNet V2 model using ExecuTorch on Arm's Corstone-320 FVP. You're now ready to apply what you've learned to other models and configurations using ExecuTorch.
