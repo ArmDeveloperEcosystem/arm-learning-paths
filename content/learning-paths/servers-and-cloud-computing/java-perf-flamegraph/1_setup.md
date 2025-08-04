@@ -9,16 +9,16 @@ layout: learningpathall
 
 ## Overview 
 
-Flame graphs are a widely used entry point for analyzing Java application performance. Various methods and tools are available for generating Java flame graphs, including `async-profiler`, `Java Agent`, `jstack`, and `JFR` (Java Flight Recorder). This Learning Path focuses on two practical approaches: using `async-profiler` and a Java agent.
+Flame graphs are a widely used entry point for analyzing Java application performance. Tools for generating flame graphs include`async-profiler`, Java agents, `jstack`, and Java Flight Recorder (JFR)). This Learning Path focuses on two practical approaches: using `async-profiler` and a Java agent. 
 
 In this section, you'll set up a benchmark environment using Apache Tomcat and `wrk2` to simulate HTTP load and evaluate performance on an Arm-based server.
 
 ## Set up the Tomcat benchmark server
-[Apache Tomcat](https://tomcat.apache.org/) is an open-source Java Servlet container that runs Java web applications, handles HTTP requests, and serves dynamic content. As a core component in Java web development, Apache Tomcat supports Servlet, JSP, and WebSocket technologies, providing a lightweight runtime environment for web apps.
+[Apache Tomcat](https://tomcat.apache.org/) is an open-source Java Servlet container that runs Java web applications, handles HTTP requests, and serves dynamic content. It supports technologies such as Servlet, JSP, and WebSocket.
 
 ## Install the Java Development Kit (JDK)
 
-On your **Arm-based Ubuntu server**, install OpenJDK 21:
+Install OpenJDK 21 on your Arm-based Ubuntu server: 
 
 ```bash
 sudo apt update
@@ -27,27 +27,33 @@ sudo apt install -y openjdk-21-jdk
 
 ## Install Tomcat 
 
-You can either build Tomcat [from source](https://github.com/apache/tomcat) or download the pre-built package from [the Tomcat Apache website](https://tomcat.apache.org/whichversion.html):
+Download and extract Tomcat:
 
 ```bash
 wget -c https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.9/bin/apache-tomcat-11.0.9.tar.gz
 tar xzf apache-tomcat-11.0.9.tar.gz
 ```
+Alternatively, you can build Tomcat [from source](https://github.com/apache/tomcat).
 
 ## Enable access to Tomcat examples
 
-To access the built-in examples from your local network or external IP, modify the context.xml file:
+To access the built-in examples from your local network or external IP, modify the `context.xml` file:
 
 ```bash
 vi apache-tomcat-11.0.9/webapps/examples/META-INF/context.xml
 ```
 Update the `RemoteAddrValve` configuration to allow all IPs:
-```output
-# change <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
-# to
+
+<!-- Before -->
+<Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
+
+<!-- After -->
 <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow=".*" />
-```
-## Start the Tomcat Server:
+
+## Start the Tomcat server:
+
+Start the server:
+
 ```bash
 ./apache-tomcat-11.0.9/bin/startup.sh
 ```
@@ -66,44 +72,57 @@ Tomcat started.
 
 ## Confirm server access
 
-In your browser, open `http://${tomcat_ip}:8080/examples`
+In your browser, open:
+
+`http://${tomcat_ip}:8080/examples`
 
 You should see the Tomcat welcome page and examples, as shown below:
 
-![Screenshot of the Tomcat homepage showing version and welcome panel alt-text#center](./_images/lp-tomcat-homepage.png "Tomcat HomePage")
+![Screenshot of the Tomcat homepage showing version and welcome panel alt-text#center](./_images/lp-tomcat-homepage.png "Apache Tomcat HomePage")
 
-![Screenshot of the Tomcat examples page showing servlet and JSP demo links alt-text#center](./_images/lp-tomcat-examples.png "Tomcat Examples")
+![Screenshot of the Tomcat examples page showing servlet and JSP demo links alt-text#center](./_images/lp-tomcat-examples.png "Apache Tomcat Examples")
 
-Make sure port 8080 is open in the security group of the IP address for your Arm-based Linux machine.
+{{% notice Note %}}Make sure port 8080 is open in the security group of the IP address for your Arm-based Linux machine.{{% /notice%}}
 
-## Setup Benchmark Client - [wrk2](https://github.com/giltene/wrk2)
-`wrk2` is a high-performance HTTP benchmarking tool specialized in generating constant throughput loads and measuring latency percentiles for web services. `wrk2` is an enhanced version of `wrk` that provides accurate latency statistics under controlled request rates, ideal for performance testing of HTTP servers.
+## Set up the benchmarking client using wrk2
+[Wrk2](https://github.com/giltene/wrk2) is a high-performance HTTP benchmarking tool specialized in generating constant throughput loads and measuring latency percentiles for web services. `wrk2` is an enhanced version of `wrk` that provides accurate latency statistics under controlled request rates, ideal for performance testing of HTTP servers.
 
-Currently `wrk2` is only supported on x86 machines. You will run the Benchmark Client steps shown below on an x86_64 server running Ubuntu.
+{{% notice Note %}}
+Currently `wrk2` is only supported on x86 machines. Run the benchmark client steps below on an `x86_64` server running Ubuntu.
+{{%/notice%}}
 
+## Install dependencies 
 
-1. To use `wrk2`, you will need to install some essential tools before you can build it:
+Install the required packages:
+
 ```bash
 sudo apt-get update
 sudo apt-get install -y build-essential libssl-dev git zlib1g-dev
 ```
 
-2. Now you can clone and build it from source:
+## Clone and build wrk2
+
+Clone the repository and compile the tool:
+
 ```bash
 sudo git clone https://github.com/giltene/wrk2.git
 cd wrk2
 sudo make
 ```
-Move the executable to somewhere in your PATH:
+
+Move the binary to a directory in your system’s PATH:
 ```bash
 sudo cp wrk /usr/local/bin
 ```
 
-3. Finally, you can run the benchmark of Tomcat through wrk2.
+## Run the benchmark
+
+Use the following command to benchmark the HelloWorld servlet running on Tomcat:
+
 ```bash
 wrk -c32 -t16 -R50000 -d60 http://${tomcat_ip}:8080/examples/servlets/servlet/HelloWorldExample
 ```
-Shown below is the output of wrk2:
+You should see output similar to:
 
 ```console
 Running 1m test @ http://172.26.203.139:8080/examples/servlets/servlet/HelloWorldExample
