@@ -1,5 +1,5 @@
 ---
-title: Configuring Master Node 
+title: Configuring Control Node 
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -10,15 +10,15 @@ layout: learningpathall
 4. In this learning path, we will use the following three IP addresses for the nodes. 
 
 ```bash
-master_ip =" 172.31.110.10"
-worker_ips = "172.31.110.11,172.31.110.12"
+control_ip="172.31.110.10"
+worker_ips="172.31.110.11,172.31.110.12"
 ```
 Note that these IPs may be different in your setup. You can find the IP address of your AWS instance using the command provided below.
 ```bash
 curl http://169.254.169.254/latest/meta-data/local-ipv4
 ```
 
-Now, on the master node, you can verify communication with the worker nodes using the following command on master node:
+Now, on the control node, you can verify communication with the worker nodes using the following command on control node:
 ```bash
 telnet 172.31.110.11 50052
 ```
