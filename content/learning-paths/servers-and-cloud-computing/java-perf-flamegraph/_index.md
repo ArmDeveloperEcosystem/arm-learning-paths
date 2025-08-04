@@ -1,17 +1,17 @@
 ---
-title: Analyze Java Performance on Arm servers using FlameGraphs
+title: Analyze Java performance on Arm servers using flame graphs
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers who want to analyze the performance of Java applications on the Arm Neoverse-based servers using FlameGraphs.
+who_is_this_for: This is an introductory topic for developers who want to analyze the performance of Java applications on Arm Neoverse-based servers using flame graphs.
 
 learning_objectives: 
   - Set up a benchmarking environment using Tomcat and wrk2
-  - Generate FlameGraphs using async-profiler
-  - Generate FlameGraphs using a Java agent
+  - Generate flame graphs using async-profiler
+  - Generate flame graphs using a Java agent
 
 prerequisites:
   - Access to both Arm-based and x86-based computers running Ubuntu (you can use cloud-based server instances)
-  - Basic familiarity with Java applications and performance profiling using FlameGraphs
+  - Basic familiarity with Java applications and performance profiling using flame graphs
 
 author: 
   - Ying Yu

@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Overview 
 
-Flame graphs are a widely used entry point for analyzing Java application performance. Tools for generating flame graphs include`async-profiler`, Java agents, `jstack`, and Java Flight Recorder (JFR)). This Learning Path focuses on two practical approaches: using `async-profiler` and a Java agent. 
+Flame graphs are a widely used entry point for analyzing Java application performance. Tools for generating flame graphs include `async-profiler`, Java agents, `jstack`, and Java Flight Recorder (JFR). This Learning Path focuses on two practical approaches: using `async-profiler` and a Java agent. 
 
 In this section, you'll set up a benchmark environment using Apache Tomcat and `wrk2` to simulate HTTP load and evaluate performance on an Arm-based server.
 
@@ -50,7 +50,7 @@ Update the `RemoteAddrValve` configuration to allow all IPs:
 <!-- After -->
 <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow=".*" />
 
-## Start the Tomcat server:
+## Start the Tomcat server
 
 Start the server:
 
@@ -72,9 +72,7 @@ Tomcat started.
 
 ## Confirm server access
 
-In your browser, open:
-
-`http://${tomcat_ip}:8080/examples`
+In your browser, open: `http://${tomcat_ip}:8080/examples`.
 
 You should see the Tomcat welcome page and examples, as shown below:
 
@@ -111,6 +109,7 @@ sudo make
 ```
 
 Move the binary to a directory in your system’s PATH:
+ 
 ```bash
 sudo cp wrk /usr/local/bin
 ```
