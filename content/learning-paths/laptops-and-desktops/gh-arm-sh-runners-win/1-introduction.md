@@ -12,7 +12,7 @@ GitHub now supports Arm self-hosted Windows runners, in Microsoft Azure. You can
 
 ### What are GitHub Self-hosted Runners?
 
-Runners are the machines that execute jobs in a GitHub Actions workflow. An self-hosted runner is managed by you. This allows you to choose Arm architecture in your own cloud environment, to run GitHub Actions workflows. GitHub orchestrates the workflow jobs, while you run the Action workflows on your self-hosted virtual machine (VM) in the cloud.
+Runners are the machines that execute jobs in a GitHub Actions workflow. A self-hosted runner is managed by you. This allows you to choose Arm architecture in your own cloud environment, to run GitHub Actions workflows. GitHub orchestrates the workflow jobs, while you run the Action workflows on your self-hosted virtual machine (VM) in the cloud.
 
 GitHub self-hosted runners for Windows are now available in public preview, providing a powerful and efficient way to build, test, and deploy your Windows applications on Arm without the need for virtualization. These runners come with a Windows 11 Desktop image, equipped with many tools to get started with your workflows. 
 
@@ -20,10 +20,16 @@ Self-hosted runners are available for both private and public repositories at no
 
 ### How Do I Use GitHub Self-hosted Windows Runners on Arm?
 
-To leverage the GitHub Windows self-hosted runners on Arm64 VMs, you need to use the following label in your public repository workflow runs:
+To leverage the GitHub Windows self-hosted runners on Arm64 VMs, you need to use the `runs-on: self-hosted` label in your workflow runs:
 
 ```yaml
-runs-on: self-hosted
+# .github/workflows/example-workflow.yml
+jobs:
+  example-job:
+    runs-on: self-hosted
+    steps:
+      - run: |
+          winget install --accept-package-agreements --id Arm.ArmPerformanceLibraries --version 25.07
 ```
 
 ### How Do I Create a GitHub Self-hosted Runner?
@@ -36,7 +42,7 @@ On the **Runners** page, push the **New self-hosted runner** button on the top r
 
 ![new-runner #center](_images/navigate-to-the-github-runners-page.png)
 
-Choose Windows ARM64 for the platform and click **Save**.
+Choose Windows ARM64 for the platform.
 
 ![platform #center](_images/select-windows-arm64-image-architecture.png)
 
