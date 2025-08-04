@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Introduction"
+title: "Set Up Development Environment"
 
 weight: 2
 
@@ -31,7 +31,7 @@ At the time of writing, Python 3.13.3 is available. You can download it using th
 1. [Windows x64 (64-bit)](https://www.python.org/ftp/python/3.13.3/python-3.13.3-amd64.exe)
 2. [Windows ARM64](https://www.python.org/ftp/python/3.13.3/python-3.13.3-arm64.exe)
 
-Install both Python versions as required. After installation, confirm both are available by running the following command in your console
+Install your required Python version. After installation, confirm your version is available by running the following command in your console
 
 ```console
 py --list
@@ -42,6 +42,10 @@ The output should look like this:
 ```output
 py --list       
  -V:3.13 *        Python 3.13 (64-bit)
+```
+or
+```output
+py --list
  -V:3.13-arm64    Python 3.13 (ARM64)
 ```
 
