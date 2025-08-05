@@ -6,29 +6,30 @@ weight: 3
 layout: learningpathall
 ---
 
-You can view the Azure Linux 3.0 project on [GitHub](https://github.com/microsoft/azurelinux). There are links to the ISO downloads in the project README.
+You can view the Azure Linux 3.0 project on [GitHub](https://github.com/microsoft/azurelinux). There project README includes links to ISO downloads.
 
-Using QEMU, you can create a raw disk image and boot a virtual machine with the ISO to install the OS on the disk. 
-
-Once the installation is complete, you can convert the raw disk to a fixed-size VHD, upload it to Azure Blob Storage, and then use the Azure CLI to create a custom Arm image. 
+Using [QEMU](https://www.qemu.org/), you can create a raw disk image, boot a virtual machine with the ISO, and install the operating system. After installation is complete, you'll convert the image to a fixed-size VHD, upload it to Azure Blob Storage, and use the Azure CLI to create a custom Arm image. 
 
 ## Download and create a virtual disk file
 
-Use `wget` to download the Azure Linux ISO image file.
+Use `wget` to download the Azure Linux ISO image file:
 
 ```bash
 wget https://aka.ms/azurelinux-3.0-aarch64.iso
 ```
 
-Use `qemu-img` to create a 32 GB empty raw disk image to install the OS.
-
-You can increase the disk size by modifying the value passed to `qemu-img`. 
+Create a 32 GB empty raw disk image to install the OS:
 
 ```bash
 qemu-img create -f raw azurelinux-arm64.raw 34359738368
 ```
 
-## Boot and install the OS
+{{% notice Note %}}
+You can change the disk size by adjusting the value passed to `qemu-img`. 
+{{% /notice %}}
+
+
+## Boot the VM and install Azure Linux
 
 Use QEMU to boot the operating system in an emulated Arm VM.
 
@@ -46,14 +47,11 @@ qemu-system-aarch64 \
   -device virtio-net-device,netdev=net0
 ```
 
-Navigate through the installer by entering the hostname, username, and password for the custom image. 
-You should use the username of `azureuser` if you want match the instructions on the following pages.
+Navigate through the installer by entering the hostname, username, and password for the custom image. Use `azureuser` as the username to match the configuration used in later steps.
 
-Be patient, it takes some time to complete the full installation. 
+{{% notice Note %}}The installation process takes several minutes.{{% /notice %}}
 
-At the end of installation you are prompted for confirmation to reboot the system. 
-
-Once the newly installed OS boots successfully, install the Azure Linux Agent for VM provisioning, and power off the VM.
+At the end of installation, confirm the reboot prompt. After rebooting into the newly-installed OS, install and enable the Azure Linux Agent: 
 
 ```bash
 sudo dnf install WALinuxAgent -y 
@@ -62,7 +60,7 @@ sudo systemctl start waagent
 sudo poweroff
 ```
 
-Be patient, it takes some time to install the packages and power off. 
+{{% notice Note %}} It can take a few minutes to install the agent and power off the VM.{{% /notice %}}
 
 ## Convert the raw disk to VHD Format
 
@@ -73,7 +71,7 @@ qemu-img convert -f raw -o subformat=fixed,force_size -O vpc azurelinux-arm64.ra
 ```
 
 {{% notice Note %}}
-VHD files have 512 bytes of footer attached at the end. The `force_size` flag ensures that the exact virtual size specified is used for the final VHD file. Without this, QEMU may round the size or adjust for footer overhead (especially when converting from raw to VHD). The `force_size` flag forces the final image to match the original size. This flag makes the final VHD size a whole number in MB or GB, which is required for Azure.
+VHD files include a 512-byte footer at the end. The `force_size` flag ensures the final image size exactly matches the requested virtual size. Without this, QEMU may round the size or adjust for footer overhead (especially when converting from raw to VHD). The `force_size` flag forces the final image to match the original size. This is required for Azure compatibility, as it avoids rounding errors and ensures the VHD ends at a whole MB or GB boundary.
 {{% /notice %}}
 
-Next, you can save the image in your Azure account. 
+Next, you'll upload the image to your Azure account. 
