@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-You can view the Azure Linux 3.0 project on [GitHub](https://github.com/microsoft/azurelinux). There project README includes links to ISO downloads.
+You can view the Azure Linux 3.0 project on [GitHub](https://github.com/microsoft/azurelinux). The project README includes links to ISO downloads.
 
 Using [QEMU](https://www.qemu.org/), you can create a raw disk image, boot a virtual machine with the ISO, and install the operating system. After installation is complete, you'll convert the image to a fixed-size VHD, upload it to Azure Blob Storage, and use the Azure CLI to create a custom Arm image. 
 

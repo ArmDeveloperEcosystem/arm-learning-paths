@@ -10,7 +10,7 @@ You can now use the Azure CLI to create a disk image in Azure and copy the local
 
 ## Prepare Azure resources for the image 
 
-Before uploading the VHD file to Azure storage, set the environment variables for the Azure CLI.
+Before uploading the VHD file to Azure storage, set the environment variables for the Azure CLI:
 
 ```bash
 RESOURCE_GROUP="MyCustomARM64Group"  
@@ -37,7 +37,7 @@ VM_SIZE="Standard_D4ps_v6"
 You can modify the environment variables such as RESOURCE_GROUP, VM_NAME, and LOCATION based on your naming preferences, region, and resource requirements.
 {{% /notice %}}
 
-Make sure to login to Azure using the CLI.
+Logi n to Azure using the CLI:
 
 ```bash
 az login
