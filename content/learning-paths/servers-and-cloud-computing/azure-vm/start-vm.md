@@ -6,6 +6,8 @@ weight: 5
 layout: learningpathall
 ---
 
+## How do I launch a virtual machine using my custom Azure image?
+
 Now that your image is registered, you can launch a new VM using the Azure CLI and the custom image ID. This example creates a Linux VM on Cobalt 100 Arm-based processors using the custom image you created earlier.
 
 ## How do I create a virtual machine in Azure using a custom image?

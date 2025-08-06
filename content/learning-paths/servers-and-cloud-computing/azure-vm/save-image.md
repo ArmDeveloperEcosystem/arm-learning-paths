@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Section overview
+## How do I upload and register a VHD image in Azure?
 
 You're now ready to use the Azure CLI to create and upload a custom disk image to Azure. In this section, you'll configure environment variables, provision the necessary Azure resources, and upload a `.vhd` file. Then, you'll use the Shared Image Gallery to register the image for use with custom virtual machines. 
 

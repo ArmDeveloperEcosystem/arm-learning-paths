@@ -6,11 +6,13 @@ weight: 3
 layout: learningpathall
 ---
 
+## How do I create an Azure Linux image for Arm?
+
 You can view the Azure Linux 3.0 project on [GitHub](https://github.com/microsoft/azurelinux). The project README includes links to ISO downloads.
 
 Using [QEMU](https://www.qemu.org/), you can create a raw disk image, boot a virtual machine with the ISO, and install the operating system. After installation is complete, you'll convert the image to a fixed-size VHD, upload it to Azure Blob Storage, and use the Azure CLI to create a custom Arm image. 
 
-## Download and create a virtual disk file
+## How do I download the Azure Linux ISO and create a raw disk image?
 
 Use `wget` to download the Azure Linux ISO image file:
 
@@ -29,7 +31,7 @@ You can change the disk size by adjusting the value passed to `qemu-img`. Ensure
 {{% /notice %}}
 
 
-## Boot the VM and install Azure Linux
+## How do I install Azure Linux on a raw disk image using QEMU?
 
 Use QEMU to boot the operating system in an emulated Arm VM.
 
@@ -62,7 +64,7 @@ sudo poweroff
 
 {{% notice Note %}} It can take a few minutes to install the agent and power off the VM.{{% /notice %}}
 
-## Convert the raw disk to VHD format
+## How do I convert a raw disk image to a fixed-size VHD for Azure?
 
 Now that the raw disk image is ready for you to use, convert it to fixed-size VHD, which makes it compatible with Azure.
 
