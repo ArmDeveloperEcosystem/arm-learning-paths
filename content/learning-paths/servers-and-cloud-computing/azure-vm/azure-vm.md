@@ -25,7 +25,7 @@ qemu-img create -f raw azurelinux-arm64.raw 34359738368
 ```
 
 {{% notice Note %}}
-You can change the disk size by adjusting the value passed to `qemu-img`. 
+You can change the disk size by adjusting the value passed to `qemu-img`. Ensure it meets the minimum disk size requirements for Azure (typically at least 30 GB). 
 {{% /notice %}}
 
 
@@ -34,44 +34,44 @@ You can change the disk size by adjusting the value passed to `qemu-img`.
 Use QEMU to boot the operating system in an emulated Arm VM.
 
 ```bash
-qemu-system-aarch64 \ 
-  -machine virt \ 
-  -cpu cortex-a72 \ 
-  -m 4096 \ 
-  -nographic \ 
-  -bios /usr/share/qemu-efi-aarch64/QEMU_EFI.fd \ 
-  -drive if=none,file=azurelinux-arm64.raw,format=raw,id=hd0 \ 
-  -device virtio-blk-device,drive=hd0 \ 
-  -cdrom azurelinux-3.0-aarch64.iso \ 
-  -netdev user,id=net0 \ 
+qemu-system-aarch64 \
+  -machine virt \
+  -cpu cortex-a72 \
+  -m 4096 \
+  -nographic \
+  -bios /usr/share/qemu-efi-aarch64/QEMU_EFI.fd \
+  -drive if=none,file=azurelinux-arm64.raw,format=raw,id=hd0 \
+  -device virtio-blk-device,drive=hd0 \
+  -cdrom azurelinux-3.0-aarch64.iso \
+  -netdev user,id=net0 \
   -device virtio-net-device,netdev=net0
 ```
 
-Navigate through the installer by entering the hostname, username, and password for the custom image. Use `azureuser` as the username to match the configuration used in later steps.
+Follow the installer prompts to enter the hostname, username, and password. Use `azureuser` as the username to ensure compatibility with later steps.
 
 {{% notice Note %}}The installation process takes several minutes.{{% /notice %}}
 
 At the end of installation, confirm the reboot prompt. After rebooting into the newly-installed OS, install and enable the Azure Linux Agent: 
 
 ```bash
-sudo dnf install WALinuxAgent -y 
-sudo systemctl enable waagent 
-sudo systemctl start waagent 
+sudo dnf install WALinuxAgent -y
+sudo systemctl enable waagent
+sudo systemctl start waagent
 sudo poweroff
 ```
 
 {{% notice Note %}} It can take a few minutes to install the agent and power off the VM.{{% /notice %}}
 
-## Convert the raw disk to VHD Format
+## Convert the raw disk to VHD format
 
-Now that the raw disk image is ready to be used, convert the image to fixed-size VHD, making it compatible with Azure.
+Now that the raw disk image is ready for you to use, convert it to fixed-size VHD, which makes it compatible with Azure.
 
 ```bash
 qemu-img convert -f raw -o subformat=fixed,force_size -O vpc azurelinux-arm64.raw azurelinux-arm64.vhd
 ```
 
 {{% notice Note %}}
-VHD files include a 512-byte footer at the end. The `force_size` flag ensures the final image size exactly matches the requested virtual size. Without this, QEMU may round the size or adjust for footer overhead (especially when converting from raw to VHD). The `force_size` flag forces the final image to match the original size. This is required for Azure compatibility, as it avoids rounding errors and ensures the VHD ends at a whole MB or GB boundary.
+VHD files include a 512-byte footer at the end. The `force_size` flag ensures the final image size matches the requested virtual size. Without this, QEMU might round the size or adjust for footer overhead (especially when converting from raw to VHD). The `force_size` flag forces the final image to match the original size. This is required for Azure compatibility, as it avoids rounding errors and ensures the VHD ends at a whole MB or GB boundary.
 {{% /notice %}}
 
-Next, you'll upload the image to your Azure account. 
+In the next step, you'll upload the VHD image to Azure and register it as a custom image for use with Arm-based virtual machines.

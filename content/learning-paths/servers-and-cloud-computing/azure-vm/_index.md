@@ -1,7 +1,7 @@
 ---
 title: Create an Azure Linux 3.0 virtual machine with Cobalt 100 processors
 
-minutes_to_complete: 120  
+minutes_to_complete: 120
 
 who_is_this_for: This is an advanced topic for developers who want to run Azure Linux 3.0 on Arm-based Cobalt 100 processors in a custom virtual machine.
 
