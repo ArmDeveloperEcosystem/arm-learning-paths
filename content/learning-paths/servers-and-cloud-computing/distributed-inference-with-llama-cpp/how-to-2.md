@@ -30,10 +30,16 @@ Escape character is '^]'.
 ```
 Finally, you can execute the following command, to execute distributed inference:
 ```bash
-bin/llama-cli -m /home/ubuntu/model.gguf -p "Tell me a joke" -n 128 --rpc "$worker_ips" -ngl 99
+bin/llama-cli -m /home/ubuntu/model.gguf -p "Tell me a joke" -n 128 --rpc "$worker_ips" -ngl 999
 ```
+Here are short definitions of the flags used in above command: <br>
+-n => Number of maximum output tokens<br>
+--rpc => list of backend workers<br>
+-ngl => Number of layers to be placed on backend workers (999 means offload all layers on workers)
+
 {{% notice Note %}}At the time of publication, llama.cpp only supports up to 16 backend workers.{{% /notice %}} <br>
-The model file for this experiment is hosted on Arm’s private AWS S3 bucket. If you don’t have access to it, you can find a publicly available version of the model on Hugging Face.
+The model.gguf (llama-3.1-405B_Q4_0) used in this experiment is hosted on Arm’s private AWS S3 bucket. If you are using a device (or instance) with lower capacity, you may want to run a smaller model such as the 8B or 70B parameter variants. Quantized versions of these models are available [here](https://huggingface.co/aryan-arm). The 405B model is not avaible on previously mentioned link. However, you can obtain it by following the [bonus section](/learning-paths/servers-and-cloud-computing/distributed-inference-with-llama-cpp/how-to-3) of this learning path.<br>
+
 The output: 
 ```output
 build: 5935 (2adf8d83) with cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0 for aarch64-linux-gnu

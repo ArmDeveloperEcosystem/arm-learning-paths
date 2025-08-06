@@ -7,10 +7,10 @@ layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this Learning Path are for any Arm server running Ubuntu 24.04.2 LTS. You will need at least three Arm server instances with at least 64 cores and 128GB of RAM to run this example. The instructions have been tested on an AWS Graviton4 c8g.16xlarge instance
+The instructions in this Learning Path are for any Arm server running Ubuntu 24.04.2 LTS. You will need at least three Arm server instances with at least 64 cores and 128GB of RAM to run this example. The instructions have been tested on an AWS Graviton4 c8g.16xlarge instance.
 
 ## Overview
-llama.cpp is a C++ library that enables efficient inference of LLaMA and similar large language models on CPUs, optimized for local and embedded environments. Just over a year ago from its publication date, rgerganov’s RPC code was merged into llama.cpp, enabling distributed inference of large LLMs across multiple CPU-based machines—even when the models don’t fit into the memory of a single machine. In this learning path, we’ll explore how to run a 405B parameter model on Arm-based CPUs.
+llama.cpp is a C++ library that enables efficient inference of LLaMA and similar large language models on CPUs, optimized for local and embedded environments. Just over a year ago from the publication date of this article, rgerganov’s RPC code was merged into llama.cpp, enabling distributed inference of large LLMs across multiple CPU-based machines—even when the models don’t fit into the memory of a single machine. In this learning path, we’ll explore how to run a 405B parameter model on Arm-based CPUs.
 
 For the purposes of this demonstration, the following experimental setup will be used:
 - Total number of instances: 3
@@ -28,6 +28,9 @@ git clone https://github.com/ggerganov/llama.cpp
 ```
 2. Now we can build the llama.cpp library with the RPC feature enabled by compiling it with the -DLLAMA_RPC=ON flag
 ```bash
+apt install -y cmake build-essential
+apt install -y g++
+apt install -y libcurl4-openssl-dev
 cd llama.cpp
 mkdir -p build-rpc
 cd build-rpc
@@ -42,6 +45,7 @@ cd build-rpc
 bin/llama-cli -h
 ```
 If everything was built correctly, you should see a list of all the available flags that can be used with llama-cli.
+
 3. Now, choose two of the three devices to act as backend workers. If the devices had varying compute capacities, the ones with the highest compute should be selected—especially for a 405B model. However, since all three devices have identical compute capabilities in this case, you can select any two to serve as backend workers.
 
 Communication between the master node and the worker nodes occurs through a socket created on each worker. This socket listens for incoming data from the master—such as model parameters, tokens, hidden states, and other inference-related information.

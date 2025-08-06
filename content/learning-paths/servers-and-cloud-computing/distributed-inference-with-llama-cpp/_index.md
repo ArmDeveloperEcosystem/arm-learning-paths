@@ -1,9 +1,9 @@
 ---
 title: Distributed inference using llama.cpp
 
-draft: true
-cascade:
-    draft: true
+# draft: true
+# cascade:
+#     draft: true
     
 minutes_to_complete: 30
 
