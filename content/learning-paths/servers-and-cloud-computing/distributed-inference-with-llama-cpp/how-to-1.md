@@ -17,7 +17,7 @@ For the purposes of this demonstration, the following experimental setup will be
 - Instance type: c8g.16xlarge
 - Model: Llama-3.1-405B_Q4_0.gguf
 
-One of the three nodes will serve as the master node, which physically hosts the model file. The other two nodes will act as worker nodes. In llama.cpp, remote procedure calls (RPC) are used to offload both the model and the computation over TCP connections between nodes. The master node forwards inference requests to the worker nodes, where all the actual computation is performed.
+One of the three nodes will serve as the control node, which physically hosts the model file. The other two nodes will act as worker nodes. In llama.cpp, remote procedure calls (RPC) are used to offload both the model and the computation over TCP connections between nodes. The control node forwards inference requests to the worker nodes, where all the actual computation is performed.
 
 ## Implementation
 
@@ -26,7 +26,18 @@ One of the three nodes will serve as the master node, which physically hosts the
 ```bash
 git clone https://github.com/ggerganov/llama.cpp
 ```
+
 2. Now we can build the llama.cpp library with the RPC feature enabled by compiling it with the -DLLAMA_RPC=ON flag
+
+{{% notice Note %}}
+
+Some Linux versions on Arm cloud instances may not come with the `libcurl` development files, which are used in the below cmake script. You can confirm / install `libcurl` using the following command:
+```bash
+sudo apt install libcurl4-openssl-dev -y
+```
+
+{{% /notice %}}
+
 ```bash
 cd llama.cpp
 mkdir -p build-rpc
@@ -38,13 +49,12 @@ cmake --build . --config Release
 `llama.cpp` is now built in the `build-rpc/bin` directory.
 Check that `llama.cpp` has built correctly by running the help command:
 ```bash
-cd build-rpc
 bin/llama-cli -h
 ```
 If everything was built correctly, you should see a list of all the available flags that can be used with llama-cli.
 3. Now, choose two of the three devices to act as backend workers. If the devices had varying compute capacities, the ones with the highest compute should be selected—especially for a 405B model. However, since all three devices have identical compute capabilities in this case, you can select any two to serve as backend workers.
 
-Communication between the master node and the worker nodes occurs through a socket created on each worker. This socket listens for incoming data from the master—such as model parameters, tokens, hidden states, and other inference-related information.
+Communication between the control node and the worker nodes occurs through a socket created on each worker. This socket listens for incoming data from the control—such as model parameters, tokens, hidden states, and other inference-related information.
 {{% notice Note %}}The RPC feature in llama.cpp is not secure by default, so you should never expose it to the open internet. To mitigate this risk, ensure that the security groups for all your EC2 instances are properly configured—restricting access to only trusted IPs or internal VPC traffic. This helps prevent unauthorized access to the RPC endpoints.{{% /notice %}}
 Use the following command to start the listening on the worker nodes:
 ```bash
