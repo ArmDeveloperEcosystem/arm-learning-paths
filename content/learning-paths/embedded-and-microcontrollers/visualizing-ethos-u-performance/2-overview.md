@@ -28,7 +28,7 @@ TinyML is machine learning optimized to run on low-power, resource-constrained d
 
 This Learning Path focuses on using TinyML models with virtualized Arm hardware to simulate real-world AI workloads on microcontrollers and NPUs.
 
-If you're looking to build and train your own TinyML models, follow the [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/).
+If you're looking to build and train your own TinyML models, follow the [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/).
 
 ## What is ExecuTorch?
 
