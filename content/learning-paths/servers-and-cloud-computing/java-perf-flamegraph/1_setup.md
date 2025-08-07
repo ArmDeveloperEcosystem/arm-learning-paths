@@ -37,12 +37,13 @@ Alternatively, you can build Tomcat [from source](https://github.com/apache/tomc
 
 ## Enable access to Tomcat examples
 
-To access the built-in examples from your local network or external IP, modify the `context.xml` file:
+To access the built-in examples from your local network or external IP, use a text editor to modify the `context.xml` file by updating the `RemoteAddrValve` configuration to allow all IP addresses.
+
+The file is at:
 
 ```bash
-vi apache-tomcat-11.0.9/webapps/examples/META-INF/context.xml
+apache-tomcat-11.0.9/webapps/examples/META-INF/context.xml
 ```
-Update the `RemoteAddrValve` configuration to allow all IPs:
 
 <!-- Before -->
 <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
