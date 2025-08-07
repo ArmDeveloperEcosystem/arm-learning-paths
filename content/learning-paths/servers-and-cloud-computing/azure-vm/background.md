@@ -1,38 +1,56 @@
 ---
-title: "About Azure Linux"
+title: "Build and run Azure Linux 3.0 on an Arm-based Azure virtual machine"
 
 weight: 2
 
 layout: "learningpathall"
 ---
 
-## What is Azure Linux 3.0?
+## What is Azure Linux 3.0 and how can I use it?
 
-Azure Linux 3.0 is a Linux distribution developed and maintained by Microsoft, specifically designed for use on the Azure cloud platform. It is optimized for running cloud-native workloads, such as containers, microservices, and Kubernetes clusters, and emphasizes performance, security, and reliability. Azure Linux 3.0 provides native support for the Arm (AArch64) architecture, enabling efficient, scalable, and cost-effective deployments on Arm-based infrastructure within Azure.
+Azure Linux 3.0 is a Microsoft-developed Linux distribution designed for cloud-native workloads on the Azure platform. It is optimized for running containers, microservices, and Kubernetes clusters, with a focus on performance, security, and reliability. 
 
-Currently, Azure Linux 3.0 is not available as a ready-made virtual machine image for Arm-based VMs in the Azure Marketplace. Only x86_64 images, published by Ntegral Inc., are offered. This means you cannot directly create an Azure Linux 3.0 VM for Arm from the Azure portal or CLI.
+Azure Linux 3.0 includes native support for the Arm architecture (AArch64), enabling efficient, scalable, and cost-effective deployments on Arm-based Azure infrastructure.
 
-However, you can still run Azure Linux 3.0 on Arm-based Azure VMs by creating your own disk image. Using QEMU, an open-source machine emulator and virtualizer, you can build a custom Azure Linux 3.0 Arm image locally. After building the image, you can upload it to your Azure account as a managed disk or custom image. This process allows you to deploy and manage Azure Linux 3.0 VMs on Arm infrastructure, even before official images are available.
+## Can I run Azure Linux 3.0 on Arm-based Azure virtual machines?
 
-This Learning Path guides you through the steps to build an Azure Linux 3.0 disk image with QEMU, upload it to Azure, and prepare it for use in creating virtual machines.
+At the time of writing, Azure Linux 3.0 isn't available as a prebuilt virtual machine image for Arm-based VMs in the Azure Marketplace. Only x86_64 images (published by Ntegral Inc.) are available. This means you can't directly create an Azure Linux 3.0 VM for Arm from the Azure portal or CLI.
 
-Following this process, you'll be able to create and run Azure Linux 3.0 VMs on Arm-based Azure infrastructure.
+## How can I create and use a custom Azure Linux image for Arm?
 
-To get started install the dependencies on your local Linux machine. The instructions work for both Arm or x86 running Ubuntu. 
+To run Azure Linux 3.0 on an Arm-based VM, you'll need to build a custom image manually. Using [QEMU](https://www.qemu.org/), an open-source machine emulator and virtualizer, you can build the image locally. After the build completes, upload the resulting image to your Azure account as either a managed disk or a custom image resource. This process lets you deploy and manage Azure Linux 3.0 VMs on Arm-based Azure infrastructure, even before official images are published in the Marketplace. This gives you full control over image configuration and early access to Arm-native workloads.
+
+This Learning Path guides you through the steps to:
+
+- Build an Azure Linux 3.0 disk image with QEMU
+- Upload the image to Azure
+- Create a virtual machine from the custom image
+
+By the end of this process, you'll be able to run Azure Linux 3.0 VMs on Arm-based Azure infrastructure.
+
+## What tools do I need to build the Azure Linux image locally?
+
+You can build the image on either an Arm or x86 Ubuntu system. First, install the required tools:
+
+Install QEMU and related tools:
 
 ```bash
 sudo apt update && sudo apt install qemu-system-arm qemu-system-aarch64 qemu-efi-aarch64 qemu-utils ovmf -y
 ```
 
-You also need to install the Azure CLI. Refer to [How to install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest). You can also use the [Azure CLI install guide](/install-guides/azure-cli/) for Arm Linux systems. 
+You'll also need the Azure CLI. To install it, follow the [Azure CLI install guide](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest). 
 
-Make sure the CLI is working by running the version command and confirm the version is printed.
+If you're using an Arm Linux machine, see the [Azure CLI install guide](/install-guides/azure-cli/).
+
+## How do I verify the Azure CLI installation?
+
+After installing the CLI, verify it's working by running the following command:
 
 ```bash
 az version
 ```
 
-You should see an output similar to:
+You should see an output similar to the following:
 
 ```output
 {
@@ -43,4 +61,4 @@ You should see an output similar to:
 }
 ```
 
-Continue to learn how to prepare the Azure Linux disk image. 
+In the next section, you'll learn how to build the Azure Linux 3.0 disk image using QEMU.
