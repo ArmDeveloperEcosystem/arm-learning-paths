@@ -22,7 +22,7 @@ wget https://developer.arm.com/-/cdn-downloads/permalink/FVPs-Neoverse-Infrastru
 Unpack the tarball and run the install script:
 
 ```bash
-tar -xf FVP_RD_N2_11.24_12_Linux64.tgz 
+tar -xf FVP_RD_N2_11.25_23_Linux64.tgz 
 ./FVP_RD_N2.sh --i-agree-to-the-contained-eula --no-interactive
 ```
 

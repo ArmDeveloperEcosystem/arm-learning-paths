@@ -47,7 +47,7 @@ tools_software_languages_filter:
 - ASP.NET Core: 2
 - Assembly: 4
 - assembly: 1
-- Async-profiler: 1
+- async-profiler: 1
 - AWS: 1
 - AWS CDK: 2
 - AWS CodeBuild: 1
