@@ -10,7 +10,7 @@ layout: learningpathall
 The instructions in this Learning Path are for any Arm server running Ubuntu 24.04.2 LTS. You will need at least three Arm server instances with at least 64 cores and 128GB of RAM to run this example. The instructions have been tested on an AWS Graviton4 c8g.16xlarge instance
 
 ## Overview
-llama.cpp is a C++ library that enables efficient inference of LLaMA and similar large language models on CPUs, optimized for local and embedded environments. Just over a year ago from its publication date, rgerganov’s RPC code was merged into llama.cpp, enabling distributed inference of large LLMs across multiple CPU-based machines—even when the models don’t fit into the memory of a single machine. In this learning path, we’ll explore how to run a 405B parameter model on Arm-based CPUs.
+llama.cpp is a C++ library that enables efficient inference of LLaMA and similar large language models on CPUs, optimized for local and embedded environments. Just over a year ago from its publication date, rgerganov's RPC code was merged into llama.cpp, enabling distributed inference of large LLMs across multiple CPU-based machines—even when the models don’t fit into the memory of a single machine. In this learning path, we’ll explore how to run a 405B parameter model on Arm-based CPUs.
 
 For the purposes of this demonstration, the following experimental setup will be used:
 - Total number of instances: 3
