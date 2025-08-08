@@ -15,7 +15,13 @@ Build your application, and setup the Android device as described in [Setup task
 
 ## Connect to the device
 
-1. Open Frame Advisor and select `New trace` to start a new trace.
+1. Launch the Performance Studio Hub and open Frame Advisor.
+    - On Windows, search for Performance Studio.
+    - On macOS and Linux, open the Performance Studio application file from the install directory.
+
+    ![Performance Studio Hub](images/ps_Hub.png)
+
+1. Select `New trace` to start a new trace.
 
    ![Frame Advisor launch screen](images/fa_launch_screen.png)
 
