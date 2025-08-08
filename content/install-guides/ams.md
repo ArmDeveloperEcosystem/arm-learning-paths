@@ -57,13 +57,13 @@ Arm Performance Studio is supported on Windows, Linux, and macOS hosts. Download
 
 Full details about the supported OS and Android versions are given in the Arm Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
 
-## Install Arm Performance Studio on Windows
+## How do I install Arm Performance Studio on Windows
 
 Arm Performance Studio is provided as an installer executable. Double-click the `.exe` file and follow the instructions in the setup wizard.
 
 Open the Performance Studio Hub from the **Windows Start** menu, or by double-clicking the shortcut in the installation directory. You can read a description of the tools and launch them from the Hub.
 
-### Install Arm Performance Studio on macOS
+### How do I install Arm Performance Studio on macOS
 
 Arm Performance Studio is provided as a `.dmg` package. To mount it, double-click the `.dmg` package and follow the instructions. The Arm Performance Studio directory tree is copied to the Applications directory on your local file system for easy access.
 
