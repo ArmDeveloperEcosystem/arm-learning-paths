@@ -11,6 +11,9 @@ layout: learningpathall
 To ensure the platform transitions securely and reliably from power-on to operating system launch, this module introduces the roles and interactions of each firmware component within the RD‑V3 boot process.
 You’ll learn how each module contributes to system initialization and how control is systematically handed off across the boot chain.
 
+
+## How the System Wakes Up
+
 In the RD‑V3 platform, each subsystem—such as TF‑A, RSE, SCP, LCP, and UEFI—operates independently but cooperates through a well-defined sequence. 
 Each module is delivered as a separate firmware image, yet they coordinate tightly through a structured boot flow and inter-processor signaling.
 
@@ -18,40 +21,59 @@ The following diagram from the [Neoverse Reference Design Documentation](https:/
 
 ![img1 alt-text#center](rdf_single_chip.png "Boot Flow for RD-V3 Single Chip")
 
+### Stage 1. Security Validation Starts First (RSE)
 
-### TF-A: Trusted Firmware-A (BL1 / BL2)
+The first firmware module triggered after BL2 is the Runtime Security Engine (RSE), executing on Cortex‑M55.RSE authenticates all critical firmware components—including SCP, UEFI, and kernel images—using secure boot mechanisms.It performs cryptographic measurements and builds a Root of Trust before allowing any other processors to start.
 
-TF‑A is the entry point of the boot chain and is responsible for establishing the system’s root of trust.
-* BL1 (Boot Loader Stage 1): Executes from ROM, initializing minimal hardware such as clocks and serial interfaces, and loads BL2.
-* BL2 (Boot Loader Stage 2): Validates and loads SCP, RSE, and UEFI images, setting up secure handover to later stages.
+RSE acts as the platform’s security gatekeeper.
 
-TF‑A ensures all downstream components are authenticated and loaded from trusted sources, laying the foundation for a secure boot.
+### Stage 2. Early Hardware Initialization (SCP / MCP)
 
+Once RSE completes verification, the System Control Processor (SCP) and Management Control Processor (MCP) are released from reset.
 
-### Example: Walking Through the Full Boot Process on FVP
+These controllers perform essential platform bring-up:
+* Initialize clocks, reset lines, and power domains
+* Prepare DRAM and interconnect
+* Enable the application cores and signal readiness to TF‑A
 
-To illustrate this process end to end, let's walk through a practical example using the RD‑V3 FVP to boot a custom Linux kernel.
+SCP/MCP are the ground crew bringing hardware systems online.
 
-* System Power-On (BL1): The platform powers on via FVP. BL1 executes from ROM, sets up clocks and UART, and loads BL2.
+### Stage 3. Secure Execution Setup (TF‑A)
 
-* Secure Boot Begins (BL2 → RSE): BL2 loads RSE and other firmware components. RSE performs secure boot validation and releases authorization only if all images pass authentication.
+Once the AP is released, it begins executing Trusted Firmware‑A (TF‑A) at EL3.
+TF‑A configures the secure world, sets up exception levels, and prepares for handoff to UEFI.
 
-* Platform Initialization (SCP): SCP is loaded next and initializes DRAM, clocks, and power domains. It enables the application cores and signals readiness.
+TF‑A is the ignition controller, launching the next stages securely.
 
-* Firmware Handoff (AP → UEFI): The application processor takes over and runs TF-A BL31, which launches UEFI. UEFI scans boot devices and passes control to GRUB.
+### Stage 4. Firmware and Bootloader (EDK2 / GRUB)
 
-* OS Launch (GRUB → Kernel): GRUB selects the custom Linux image and launches it. The kernel initializes and prints Welcome to Arm RD-V3 Linux via UART.
+TF‑A hands off control to UEFI firmware (EDK2), which performs device discovery and launches GRUB.
 
-If successful, you’ll see the BusyBox shell prompt like this:
+Responsibilities:
+* Detect and initialize memory, PCIe, and boot devices
+* Generate ACPI and platform configuration tables
+* Locate and launch GRUB from storage or flash
 
-```
-Welcome to Arm RD-V3 Linux
-```
+EDK2 and GRUB are like the first- and second-stage rockets launching the payload.
 
-This flow demonstrates how each component enables and secures the next—entirely within a virtual environment, without requiring physical silicon.
+### Stage 5. Linux Kernel Boot
 
+GRUB loads the Linux kernel and passes full control to the OS.
 
-### RSE: Runtime Security Engine (Cortex‑M55)
+Responsibilities:
+* Initialize device drivers and kernel subsystems
+* Mount the root filesystem
+* Start user-space processes (e.g., BusyBox)
+
+The Linux kernel is the spacecraft—it takes over and begins its mission.
+
+## Firmware Module Responsibilities in Detail
+
+Now that we’ve examined the high-level boot stages, let’s break down each firmware module’s role in more detail.
+
+Each stage of the boot chain is backed by a dedicated component—either a secure bootloader, platform controller, or operating system manager—working together to ensure a reliable system bring-up.
+
+### RSE: Runtime Security Engine (Cortex‑M55) (Stage 1: Security Validation)
 
 RSE firmware runs on the Cortex‑M55 and plays a critical role in platform attestation and integrity enforcement.
 * Authenticates BL2, SCP, and UEFI firmware images (Secure Boot)
@@ -61,7 +83,7 @@ RSE firmware runs on the Cortex‑M55 and plays a critical role in platform atte
 RSE acts as the second layer of the chain of trust, maintaining a monitored and secure environment throughout early boot.
 
 
-### SCP: System Control Processor (Cortex‑M7)
+### SCP: System Control Processor (Cortex‑M7) (Stage 2: Early Hardware Bring-up)
 
 SCP firmware runs on the Cortex‑M7 core and performs early hardware initialization and power domain control.
 * Initializes clocks, reset controllers, and system interconnect
@@ -69,6 +91,24 @@ SCP firmware runs on the Cortex‑M7 core and performs early hardware initializa
 * Coordinates boot readiness with RSE via MHU (Message Handling Unit)
 
 SCP is central to bring-up operations and ensures the AP starts in a stable hardware environment.
+
+### TF-A: Trusted Firmware-A (BL1 / BL2) (Stage 3: Secure Execution Setup)
+
+TF‑A is the entry point of the boot chain and is responsible for establishing the system’s root of trust.
+* BL1 (Boot Loader Stage 1): Executes from ROM, initializing minimal hardware such as clocks and serial interfaces, and loads BL2.
+* BL2 (Boot Loader Stage 2): Validates and loads SCP, RSE, and UEFI images, setting up secure handover to later stages.
+
+TF‑A ensures all downstream components are authenticated and loaded from trusted sources, laying the foundation for a secure boot.
+
+
+### UEFI / GRUB / Linux Kernel (Stage 4–5: Bootloader and OS Handoff)
+
+After SCP powers on the application processor, control passes to the main bootloader and operating system:
+* UEFI (EDK2): Provides firmware abstraction, hardware discovery, and ACPI table generation
+* GRUB: Selects and loads the Linux kernel image
+* Linux Kernel: Initializes the OS, drivers, and launches the userland (e.g., BusyBox)
+
+On the FVP, you can observe this process via UART logs, helping validate each stage’s success.
 
 
 ### LCP: Low Power Controller (Optional Component)
@@ -79,16 +119,6 @@ If present in the configuration, LCP handles platform power management at a fine
 * Manages transitions to ACPI power states (e.g., S3, S5)
 
 LCP support depends on the FVP model and may be omitted in simplified virtual setups.
-
-
-### UEFI / GRUB / Linux Kernel
-
-After SCP powers on the application processor, control passes to the main bootloader and operating system:
-* UEFI (EDK2): Provides firmware abstraction, hardware discovery, and ACPI table generation
-* GRUB: Selects and loads the Linux kernel image
-* Linux Kernel: Initializes the OS, drivers, and launches the userland (e.g., BusyBox)
-
-On the FVP, you can observe this process via UART logs, helping validate each stage’s success.
 
 
 ### Coordination and Handoff Logic
@@ -125,5 +155,6 @@ In this module, you have:
 * Learned how secure boot is enforced and how each module hands off control to the next
 * Interpreted boot dependencies using FVP simulation and UART logs
 
-In the next module, you’ll set up your development environment, fetch the source code, and build the firmware stack used on RD‑V3.  
-You’ll simulate the full bring-up process and validate the results using a fully virtualized platform—before any hardware is required.
+With the full boot flow and firmware responsibilities now clear, you're ready to move from theory to practice.
+
+In the next module, you'll clone the RD‑V3 source tree, build the firmware stack, and prepare your own pre-silicon virtual platform using Arm FVP.
