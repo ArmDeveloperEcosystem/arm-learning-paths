@@ -38,7 +38,7 @@ operatingsystems:
 further_reading:
     - resource:
         title: Neural Graphics Development Kit
-        link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics-for-mobile
+        link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics
         type: website
     - resource:
         title: NSS Use Case Guide
