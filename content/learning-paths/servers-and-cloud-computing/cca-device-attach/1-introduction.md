@@ -20,6 +20,7 @@ A **Realm** is a protected execution environment enabled by RME.  It operates in
 
 Realms allow lower-privileged software, such as an application or a virtual machine, to protect its content and execution from attacks by higher-privileged software, such as an OS or a hypervisor. Realms provide an environment for confidential computing, without requiring the Realm owner to trust the software components that manage the resources that the Realm uses.
 
-To be useful, a Realm has to interact with the rest of the world at some point.
-For example, a network interface is likely to be needed. This Learning Path will
-show you how devices are attached and used by Realms.
+While Realms are isolated by design, they still need to interact with external components to be practical - for example, accessing a network interface or communicating with a peripheral device. 
+
+This Learning Path explains how devices can be securely attached to and used by Realms without compromising their isolation guarantees.
+
