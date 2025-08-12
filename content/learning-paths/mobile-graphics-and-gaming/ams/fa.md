@@ -19,7 +19,7 @@ Build your application, and setup the Android device as described in [Setup task
     - On Windows, search for Performance Studio.
     - On macOS and Linux, open the Performance Studio application file from the install directory.
 
-    ![Performance Studio Hub](images/ps_Hub.png)
+    ![Performance Studio Hub](images/ps_hub.png)
 
 1. Select `New trace` to start a new trace.
 
