@@ -23,7 +23,7 @@ Run `ShowFlag.VisualizeTemporalUpscaler 0` to disable the overview. To visualize
    r.NSS.Debug 2
    ```
 
-This will add real-time views showing the model’s processed outputs, such as predicted filter coefficients and feedback, as below. In the [Wrapping up section](/learning-paths/mobile-graphics-and-gaming/nss-unreal/6-wrapping-up.md), you will find links to learn more about what the debug outputs mean.
+This will add real-time views showing the model’s processed outputs, such as predicted filter coefficients and feedback, as below. In the [Wrapping up section](/learning-paths/mobile-graphics-and-gaming/nss-unreal/6-wrapping-up), you will find links to learn more about what the debug outputs mean.
 
 ![Debug view of Neural Super Sampling model output in Unreal Engine#center](./images/nss_debug.png "Figure 6: Visualize NSS model debug output in real time.")
 
