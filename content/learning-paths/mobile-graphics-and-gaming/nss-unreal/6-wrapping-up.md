@@ -17,7 +17,7 @@ You’ve covered:
 This ecosystem is built for developers who want to push boundaries - whether on flagship mobile SoCs or desktop dev kits. NSS is designed to give you better image quality without the complexity of building custom ML infrastructure.
 
 To learn more about the different aspects in this Learning Path, check out the following resources:
-- [Neural Graphics Development Kit landing page](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics-for-mobile)
+- [Neural Graphics Development Kit landing page](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics)
 - [NSS Use Case Guide](https://developer.arm.com/documentation/111009/latest/)
 - [Debugging NSS content with RenderDoc](https://developer.arm.com/documentation/109669/latest)
 - [Learning Path: Get started with neural graphics using ML Extensions for Vulkan](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample)
