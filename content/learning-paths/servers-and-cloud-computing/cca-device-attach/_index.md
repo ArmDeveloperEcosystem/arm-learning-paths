@@ -1,10 +1,7 @@
 ---
-title: CCA device attach
+title: Explore Device Attach in Arm CCA
 
-draft: true
-cascade:
-    draft: true
-    
+  
 minutes_to_complete: 90
 
 who_is_this_for: This is an advanced topic for developers who want to learn about Arm CCA Realms, VirtIO, Bounce Buffers and Device Attach.
