@@ -21,7 +21,7 @@ You might want to use RenderDoc when:
 
 To access RenderDoc for Arm GPUs containing the added features with ML extensions for Vulkan, you should install Arm Performance Studio. Download it from the [Arm Performance Studio Downloads](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads). The minimum version to use is `2025.4`
 
-Refer to the [Arm Performance Studio install guide](./install-guides/ams) to set it up.
+Refer to the [Arm Performance Studio install guide](/install-guides/ams) to set it up.
 
 Upon a finished installation, you can find the installed version of RenderDoc for Arm GPUs using the Windows **Start** menu.
 
