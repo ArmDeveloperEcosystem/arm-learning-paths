@@ -42,6 +42,9 @@ The RD‑V3 platform is a comprehensive reference design built around Arm’s [N
 
 These subsystems work together in a coordinated architecture, communicating through shared memory regions, control buses, and platform protocols. This enables multi-stage boot processes and robust secure boot implementations.
 
+Here is the Neoverse Reference Design Platform [Software Stack](https://neoverse-reference-design.docs.arm.com/en/latest/about/software_stack.html#sw-stack) for your reference.
+
+![img1 alt-text#center](rdinfra_sw_stack.jpg "Neoverse Reference Design Software Stack")
 
 
 ### Develop and Validate Without Hardware
