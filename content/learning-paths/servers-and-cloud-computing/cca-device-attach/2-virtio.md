@@ -1,5 +1,5 @@
 ---
-title: "Device attach: virtio"
+title: "Explore secure device attach with VirtIO"
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,31 +8,20 @@ layout: learningpathall
 
 This section introduces VirtIO and Bounce Buffers in the context of CCA Realms, and explains how they enable secure data exchange between a Realm and the untrusted external world.
 
-A Realm must use physical devices at some point to interact with the external
-and or physical world. The easiest way to achieve this is by using VirtIO, which
-provides a fast, high-level emulation layer. This can be viewed as the first level of
-device attach.
+A Realm must eventually use physical devices to interact with the external world. The easiest way to achieve this is by using VirtIO, which provides a fast, high-level emulation layer. This is considered the first level of device attach, where access is mediated by the hypervisor using paravirtualized interfaces.
 
-More advanced device attach features can be
-performed leveraging hardware security features like PCIe-TDISP (**T**EE
-**D**evice **I**nterface **S**ecurity **P**rotocol) and PCIe-IDE (**I**ntegrity
-and **D**ata **E**ncryption), where the host OS assigns a physical device to
-a Realm. The Realm can then make security measurements on the physical device and include those in its attestation base.
+More advanced device attach features can be enabled by hardware security features like PCIe-TDISP (**T**EE **D**evice **I**nterface **S**ecurity **P**rotocol) and PCIe-IDE (**I**ntegrity
+and **D**ata **E**ncryption), where the host OS assigns a physical device to a Realm. The Realm can then make security measurements on the physical device and include those in its attestation base.
 
 ## VirtIO
 
 Learn how VirtIO provides an efficient, paravirtualized I/O interface between Realms and host devices.
 
-### What is VirtIO ?
+### What is VirtIO?
 
-VirtIO is an abstraction layer for virtual devices in virtualized environments.
-It provides standardized and efficient interfaces between guest virtual machines
-(VMs) and host devices, making it easier to develop paravirtualized drivers.
+VirtIO is an abstraction layer for virtual devices in virtualized environments. It provides standardized and efficient interfaces between guest virtual machines (VMs) and host devices, making it easier to develop paravirtualized drivers.
 
-Paravirtualized means that the guest OS is aware it’s running in a virtualized
-environment and can use optimized drivers (VirtIO) to communicate with virtual
-hardware. Emulating physical hardware devices (like NICs or disks) for VMs is slow and
-inefficient. VirtIO allows VMs to bypass full device emulation and use streamlined drivers.
+Paravirtualized means that the guest OS is aware it’s running in a virtualized environment and can use optimized drivers (VirtIO) to communicate with virtual hardware. Emulating physical hardware devices (like NICs or disks) for VMs is slow and inefficient. VirtIO allows VMs to bypass full device emulation and use streamlined drivers.
 
 VirtIO is most commonly used with KVM/QEMU virtualization. Example drivers include:
 - `virtio-net`: Paravirtualized networking
@@ -41,7 +30,6 @@ VirtIO is most commonly used with KVM/QEMU virtualization. Example drivers inclu
 - `virtio-balloon`: Dynamic memory management
 - `virtio-rng`: Random number source
 - `virtio-console`: Simple console interface
-- ...
 
 ### How VirtIO works in VMs
 
@@ -76,8 +64,7 @@ This ensures that data transfer is possible even when the original memory isn’
 
 ## CCA Realms, VirtIO and bounce buffers
 
-The defining feature of a Realm is that its memory (called *Realm memory*) is
-cryptographically isolated from both the Normal and Secure Worlds. 
+The defining feature of a Realm is that its memory (called *Realm memory*) is cryptographically isolated from both the Normal and Secure Worlds. 
 
 This means that:
 - Realm memory is encrypted with unique keys
@@ -86,13 +73,7 @@ This means that:
 - Even Direct Memory Access (DMA) from peripherals or untrusted drivers cannot
   access Realm data
 
-This design ensures confidentiality but introduces a problem: How can Realms
-interact with untrusted components, such as:
-- Network stacks in the host OS,
-- Storage subsystems,
-- I/O devices managed by untrusted drivers?
-
-To exchange data securely with untrusted components (for example, network stacks, storage subsystems), Realms use bounce buffers as intermediaries.
+This design ensures confidentiality but presents a challenge: how can a Realm securely interact with untrusted components, such as network stacks in the host OS, storage subsystems, or I/O devices managed by untrusted drivers? To exchange data securely with untrusted components (for example, network stacks, storage subsystems), Realms use *bounce buffers* as intermediaries.
 
 ### How bounce buffers are used with RME
 
@@ -103,7 +84,7 @@ To exchange data securely with untrusted components (for example, network stacks
    - The host retrieves the data from the bounce buffer.
 
 2. Importing Data:
-   - The host places data (e.g., input from a file or device) into a bounce buffer.
+   - The host places data (for example, input from a file or device) into a bounce buffer.
    - The Realm is notified and validates the source.
    - The Realm copies the data from the bounce buffer into its protected memory.
 
@@ -112,20 +93,13 @@ This pattern preserves confidentiality and integrity of Realm data, since:
 - It can validate and sanitize any data received via bounce buffers.
 - No sensitive data is exposed without explicit copying.
 
-### Confidentiality preserved with bounce buffers, really?
+### Is confidentiality preserved with bounce buffers?
 
-In the previous section, it was mentioned that bounce buffers preserve
-confidentiality. Lets dive a little deeper into that. Bounce buffers
-are nothing more than an explicitly shared temporary area between the Realm
-world and the outside world. This does indeed preserve the confidentiality of
-all the rest of the Realm data. On the other hand, for the data being
-transferred, it is leaving the Realm world and will only remain confidential if it
-is encrypted in some way, e.g. for network traffic, TLS should be used.
+In the previous section, it was mentioned that bounce buffers preserve confidentiality. Lets dive a little deeper into that. Bounce buffers are nothing more than an explicitly shared temporary area between the Realm world and the outside world. This does indeed preserve the confidentiality of the rest of the Realm data. On the other hand, for the data being transferred, it is leaving the Realm world and will only remain confidential if it is encrypted in some way, for example, for network traffic, TLS should be used.
 
 ## Seeing a Realm's bounce buffers at work
 
-Let's put this to work and check for ourselves that bounce buffers are used. The
-steps in this section will build on the Key Broker demo that was used in the [CCA
+Let's put this to work and check for ourselves that bounce buffers are used. The steps in this section will build on the Key Broker demo that was used in the [CCA
 Essentials learning path](/learning-paths/servers-and-cloud-computing/cca-essentials/example/),
 demonstrating an end-to-end attestation.
 

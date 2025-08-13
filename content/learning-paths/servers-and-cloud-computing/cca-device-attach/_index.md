@@ -1,11 +1,9 @@
 ---
 title: Explore secure device attach in Arm CCA Realms
-
   
 minutes_to_complete: 90
 
 who_is_this_for: This is an advanced topic for developers who want to understand how Arm CCA Realms interact with I/O devices using VirtIO, bounce buffers, and secure device attach mechanisms.
-
 
 learning_objectives:
     - Understand the role of VirtIO and Bounce Buffers in CCA Realms
