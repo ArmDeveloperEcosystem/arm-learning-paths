@@ -27,7 +27,6 @@ armips:
     - Neoverse
 tools_software_languages:
     - C
-    - Linux
     - Docker
     - FVP
     - LinuxBoot
@@ -36,7 +35,7 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: Reference Design software stack architecture
+        title: Neoverse Compute Subsystems V3
         link: https://www.arm.com/products/neoverse-compute-subsystems/css-v3
         type: website
     - resource:

@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Introduction to the Arm RD‑V3 Platform
 
-This module introduces the foundational architecture behind Arm’s RD-V3 platform. You’ll learn how Neoverse CSS-V3 is designed for scalable server-class systems and how to develop and validate firmware using a fully virtual environment—before any hardware is available.
+This module introduces the foundational architecture [Neoverse Reference Design Platform Software](https://neoverse-reference-design.docs.arm.com/en/latest/index.html). You’ll learn how [Neoverse CSS-V3](https://www.arm.com/products/neoverse-compute-subsystems/css-v3) is designed for scalable server-class systems and how to develop and validate firmware using a fully virtual environment—before any hardware is available.
 
 Arm Neoverse is designed to meet the demanding requirements of data center and edge computing, delivering high performance and efficiency. Widely adopted in servers, networking, and edge devices, the Neoverse architecture provides a solid foundation for modern infrastructure.
 
@@ -37,8 +37,8 @@ The RD‑V3 platform is a comprehensive reference design built around Arm’s [N
 | Component     | Description                                                                 |
 |---------------|-----------------------------------------------------------------------------|
 | Neoverse V3   | The primary application processor responsible for executing OS and payloads |
-| Cortex‑M7     | Implements the System Control Processor (SCP) for power, clocks, and init   |
-| Cortex‑M55    | Hosts the Runtime Security Engine (RSE), providing secure boot and runtime integrity |
+| Cortex M7     | Implements the System Control Processor (SCP) for power, clocks, and init   |
+| Cortex M55    | Hosts the Runtime Security Engine (RSE), providing secure boot and runtime integrity |
 
 These subsystems work together in a coordinated architecture, communicating through shared memory regions, control buses, and platform protocols. This enables multi-stage boot processes and robust secure boot implementations.
 

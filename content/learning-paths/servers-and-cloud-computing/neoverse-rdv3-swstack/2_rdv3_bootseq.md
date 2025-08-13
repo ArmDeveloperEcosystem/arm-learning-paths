@@ -23,9 +23,9 @@ The following diagram from the [Neoverse Reference Design Documentation](https:/
 
 ### Stage 1. Security Validation Starts First (RSE)
 
-The first firmware module triggered after BL2 is the Runtime Security Engine (RSE), executing on Cortex‑M55.RSE authenticates all critical firmware components—including SCP, UEFI, and kernel images—using secure boot mechanisms.It performs cryptographic measurements and builds a Root of Trust before allowing any other processors to start.
+The first firmware module triggered after BL2 is the Runtime Security Engine (RSE), executing on Cortex‑M55. RSE authenticates all critical firmware components—including SCP, UEFI, and kernel images—using secure boot mechanisms. It performs cryptographic measurements and builds a Root of Trust before allowing any other processors to start.
 
-RSE acts as the platform’s security gatekeeper.
+***RSE acts as the platform’s security gatekeeper.***
 
 ### Stage 2. Early Hardware Initialization (SCP / MCP)
 
@@ -36,14 +36,14 @@ These controllers perform essential platform bring-up:
 * Prepare DRAM and interconnect
 * Enable the application cores and signal readiness to TF‑A
 
-SCP/MCP are the ground crew bringing hardware systems online.
+***SCP/MCP are the ground crew bringing hardware systems online.***
 
 ### Stage 3. Secure Execution Setup (TF‑A)
 
 Once the AP is released, it begins executing Trusted Firmware‑A (TF‑A) at EL3.
 TF‑A configures the secure world, sets up exception levels, and prepares for handoff to UEFI.
 
-TF‑A is the ignition controller, launching the next stages securely.
+***TF‑A is the ignition controller, launching the next stages securely.***
 
 ### Stage 4. Firmware and Bootloader (EDK2 / GRUB)
 
@@ -54,7 +54,7 @@ Responsibilities:
 * Generate ACPI and platform configuration tables
 * Locate and launch GRUB from storage or flash
 
-EDK2 and GRUB are like the first- and second-stage rockets launching the payload.
+***EDK2 and GRUB are like the first- and second-stage rockets launching the payload.***
 
 ### Stage 5. Linux Kernel Boot
 
@@ -65,7 +65,7 @@ Responsibilities:
 * Mount the root filesystem
 * Start user-space processes (e.g., BusyBox)
 
-The Linux kernel is the spacecraft—it takes over and begins its mission.
+***The Linux kernel is the spacecraft—it takes over and begins its mission.***
 
 ## Firmware Module Responsibilities in Detail
 
