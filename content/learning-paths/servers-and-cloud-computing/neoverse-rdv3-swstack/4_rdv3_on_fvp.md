@@ -30,9 +30,7 @@ tar -xvf FVP_RD_V3_11.29_35_Linux64_armv8l.tgz
 ./FVP_RD_V3.sh
 ```
 
-{{% notice Note %}}
-The FVP installation may prompt you with a few questions—choosing the default options is sufficient for this learning path.
-{{% /notice %}}
+The FVP installation may prompt you with a few questions—choosing the default options is sufficient for this learning path. By default, the FVP will be installed in `/home/ubuntu/FVP_RD_V3`.
 
 ### Step 2: Remote Desktop Set Up
 
@@ -128,3 +126,39 @@ Below is the UART-to-terminal mapping based on the default FVP configuration:
 | `FVP terminal_uart_lcp`    | 5    | LCP Logs (per-core power control)  | Cortex‑M55 (LCP)      |
 | `FVP terminal_sec_uart`    | 6    | Secure World / TF‑M Logs           | Cortex‑M55            |
 
+
+All terminal logs are stored in `~/rdv3/model-scripts/rdinfra/platforms/rdv3/rdv3`.
+
+For example, if you’d like to verify that each CPU core has its GICv3 redistributor and LPI table correctly initialized, you can refer to the relevant messages in refinfra-24812-uart-0-nsec_<date-time>.txt.
+
+
+```
+[    0.000056] Remapping and enabling EFI services.
+[    0.000078] smp: Bringing up secondary CPUs ...
+[    0.000095] Detected PIPT I-cache on CPU1
+[    0.000096] GICv3: CPU1: found redistributor 10000 region 0:0x0000000030200000
+[    0.000096] GICv3: CPU1: using allocated LPI pending table @0x0000008080200000
+[    0.000109] CPU1: Booted secondary processor 0x0000010000 [0x410fd840]
+[    0.000125] Detected PIPT I-cache on CPU2
+[    0.000126] GICv3: CPU2: found redistributor 20000 region 0:0x0000000030240000
+[    0.000126] GICv3: CPU2: using allocated LPI pending table @0x0000008080210000
+[    0.000139] CPU2: Booted secondary processor 0x0000020000 [0x410fd840]
+[    0.000155] Detected PIPT I-cache on CPU3
+[    0.000156] GICv3: CPU3: found redistributor 30000 region 0:0x0000000030280000
+[    0.000156] GICv3: CPU3: using allocated LPI pending table @0x0000008080220000
+[    0.000169] CPU3: Booted secondary processor 0x0000030000 [0x410fd840]
+[    0.000185] Detected PIPT I-cache on CPU4
+[    0.000186] GICv3: CPU4: found redistributor 40000 region 0:0x00000000302c0000
+[    0.000186] GICv3: CPU4: using allocated LPI pending table @0x0000008080230000
+[    0.000199] CPU4: Booted secondary processor 0x0000040000 [0x410fd840]
+[    0.000215] Detected PIPT I-cache on CPU5
+[    0.000216] GICv3: CPU5: found redistributor 50000 region 0:0x0000000030300000
+[    0.000216] GICv3: CPU5: using allocated LPI pending table @0x0000008080240000
+[    0.000229] CPU5: Booted secondary processor 0x0000050000 [0x410fd840]
+[    0.000245] Detected PIPT I-cache on CPU6
+[    0.000246] GICv3: CPU6: found redistributor 60000 region 0:0x0000000030340000
+[    0.000246] GICv3: CPU6: using allocated LPI pending table @0x0000008080250000
+[    0.000259] CPU6: Booted secondary processor 0x0000060000 [0x410fd840]
+...
+
+```

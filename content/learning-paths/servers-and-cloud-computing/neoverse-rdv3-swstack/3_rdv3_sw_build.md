@@ -177,6 +177,7 @@ Since building the full firmware stack can involve many components, the more eff
 To execute the full build and packaging flow:
 
 ```bash
+cd ~/rdv3
 docker run --rm \
   -v "$PWD:$PWD" \
   -w "$PWD" \
