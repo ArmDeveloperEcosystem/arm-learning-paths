@@ -51,6 +51,22 @@
     {{- with .Params.author              }}{{ $j = merge $j (dict "author" (dict "@type" "Person" "name" .)) }}{{ end -}}
     {{- if $keywords                     }}{{ $j = merge $j (dict "keywords" (delimit (uniq $keywords) ", ")) }}{{ end -}}
     {{- with .Site.Title                 }}{{ $j = merge $j (dict "provider" (dict "@type" "Organization" "name" .)) }}{{ end -}}
+
+    {{- $j = merge $j (dict "offers" (slice (dict "@type" "Offer" "category" "Free"))) -}}
+    {{- $ci := dict "@type" "CourseInstance" "courseMode" "Online" -}}
+    {{- if $duration                     }}{{ $ci = merge $ci (dict "courseWorkload" $duration) }}{{ end -}}
+    {{- with .Params.course_instances -}}
+        {{- $instances := slice -}}
+        {{- range . -}}
+            {{- $i := dict "@type" "CourseInstance" -}}
+            {{- with .courseMode       }}{{ $i = merge $i (dict "courseMode" .) }}{{ end -}}
+            {{- with .courseWorkload   }}{{ $i = merge $i (dict "courseWorkload" .) }}{{ end -}}
+            {{- $instances = $instances | append $i -}}
+        {{- end -}}
+        {{- if gt (len $instances) 0 }}{{ $j = merge $j (dict "hasCourseInstance" $instances) }}{{ else }}{{ $j = merge $j (dict "hasCourseInstance" (slice $ci)) }}{{ end -}}
+    {{- else -}}
+        {{- $j = merge $j (dict "hasCourseInstance" (slice $ci)) -}}
+    {{- end -}}
     {{/* -------- Emit into <head>  */}}
 <script type="application/ld+json">
   {{- /* prettify the JSON (2‑space indent) and mark it as safe JS */ -}}
