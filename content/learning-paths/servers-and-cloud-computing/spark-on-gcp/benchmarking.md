@@ -1,20 +1,21 @@
 ---
-title: Spark Internal Benchmarking
+title: Run Spark Benchmarks
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Apache Spark Internal Benchmarking
-Apache Spark includes internal micro-benchmarks to evaluate the performance of core components like SQL execution, aggregation, joins, and data source reads. These benchmarks are helpful for comparing platforms such as x86_64 vs Arm64.
-Below are the steps to run Spark’s built-in SQL benchmarks using the SBT-based framework.
+## Apache Spark Benchmarking
+Apache Spark includes internal micro-benchmarks to evaluate the performance of core components like SQL execution, aggregation, joins, and data source reads. These benchmarks are helpful for comparing performance on x86_64 vs Arm64 platforms.
+
+Follow the steps outlined to run Spark’s built-in SQL benchmarks using the SBT-based framework.
 
 1. Clone the Apache Spark source code
 ```console
 git clone https://github.com/apache/spark.git
 ```
-This downloads the full Spark source including internal test suites and the benchmarking tools.
+This clones the full Spark source code including internal test suites and the benchmarking tools.
 
 2. Checkout the desired Spark version
 ```console
@@ -32,9 +33,9 @@ This compiles Spark and its dependencies, enabling the benchmarks build profile 
 ```console
 ./build/sbt -Pbenchmarks "sql/test:runMain org.apache.spark.sql.execution.benchmark.AggregateBenchmark"
 ```  
-This executes the AggregateBenchmark, which compares performance of SQL aggregation operations (e.g., SUM, STDDEV) with and without WholeStageCodegen. WholeStageCodegen is an optimization technique used by Spark SQL to improve the performance of query execution by generating Java bytecode for entire query stages (aka whole stages) instead of interpreting them step-by-step.
+This executes the `AggregateBenchmark`, which compares performance of SQL aggregation operations (e.g., SUM, STDDEV) with and without `WholeStageCodegen`. `WholeStageCodegen` is an optimization technique used by Spark SQL to improve the performance of query execution by generating Java bytecode for entire query stages (aka whole stages) instead of interpreting them step-by-step.
 
-You should see an output similar to:
+You should see output similar to:
 ```output
 [info] Running benchmark: agg w/o group
 [info]   Running case: agg w/o group wholestage off
@@ -243,8 +244,8 @@ You should see an output similar to:
 - **Per Row (ns):** Average time taken per row (in nanoseconds).
 - **Relative Speed comparison:** baseline (1.0X) is the slower version.
 
-### Benchmark summary on x86_64:
-The following  benchmark results are collected on a c3-standard-4 (4 vCPU, 2 core, 16 GB Memory) x86_64 environment, running RHEL 9.
+### Benchmark summary on `x86_64`:
+The following benchmark results were collected by running the same benchmark on a `c3-standard-4` (4 vCPU, 2 core, 16 GB Memory) x86_64 virtual machine in GCP, running RHEL 9.
 
 | **Benchmark Case**         | **Sub-Case / Config**                | **Best Time (ms)** | **Avg Time (ms)** | **Stdev (ms)** | **Rate (M/s)** | **Per Row (ns)** | **Relative** |
 |---------------------------|--------------------------------------|--------------------|-------------------|----------------|----------------|------------------|--------------|
@@ -330,7 +331,8 @@ The following  benchmark results are collected on a c4a-standard-4 (4 vCPU, 16 G
 | BytesToBytesMap            | fast hash                | 42             | 42             | 0          | 499.2       | 2.0            | 3.3X      |
 | BytesToBytesMap    |Aggregate HashMap                 | 23             | 23             | 0          | 913.0       | 1.1            | 5.9X      |
 
-### **Highlights from GCP C4A Arm virtual machine**
+### Benchmarking comparison summary
+When you compare the benchmarking results you will notice that on the Google Axion C4A instances:
 
 - **Whole-stage code generation significantly boosts performance**, improving execution by up to **38×** (e.g., `agg w/o group` from 33.4s to 0.86s).
 - **Vectorized and row-based hash maps** consistently outperform non-codegen and traditional hashmap approaches, especially for aggregation with keys and complex data types (e.g., decimal keys: **6.8× faste**r with vectorized hashmap).
