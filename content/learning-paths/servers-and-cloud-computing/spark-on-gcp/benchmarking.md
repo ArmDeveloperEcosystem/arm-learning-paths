@@ -295,7 +295,7 @@ The following benchmark results were collected by running the same benchmark on 
 
 
 ### Benchmark summary on Arm64:
-The following  benchmark results are collected on a c4a-standard-4 (4 vCPU, 16 GB Memory) Arm64 environment, running RHEL 9.
+For easier comparison, the benchmark results collected from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB Memory) virtual machine, running RHEL 9 is summarized below:
 
 | Benchmark Case             | Sub-Case / Config        | Best Time (ms) | Avg Time (ms) | Stdev (ms) | Rate (M/s) | Per Row (ns) | Relative |
 |----------------------------|--------------------------|----------------|----------------|------------|-------------|----------------|-----------|
@@ -332,9 +332,9 @@ The following  benchmark results are collected on a c4a-standard-4 (4 vCPU, 16 G
 | BytesToBytesMap    |Aggregate HashMap                 | 23             | 23             | 0          | 913.0       | 1.1            | 5.9X      |
 
 ### Benchmarking comparison summary
-When you compare the benchmarking results you will notice that on the Google Axion C4A instances:
+When you compare the benchmarking results you will notice that on the Google Axion C4A Arm-based instances:
 
 - **Whole-stage code generation significantly boosts performance**, improving execution by up to **38×** (e.g., `agg w/o group` from 33.4s to 0.86s).
 - **Vectorized and row-based hash maps** consistently outperform non-codegen and traditional hashmap approaches, especially for aggregation with keys and complex data types (e.g., decimal keys: **6.8× faste**r with vectorized hashmap).
-- **Arm-based Spark shows strong hash performance**, with `fast hash` and `murmur3` achieving up to **3.3× better throughput** than UnsafeRowhash.
+- **Arm-based Spark shows strong hash performance**, with `fast hash` and `murmur3` achieving up to **3.3× better throughput** than `UnsafeRowhash`.
  
