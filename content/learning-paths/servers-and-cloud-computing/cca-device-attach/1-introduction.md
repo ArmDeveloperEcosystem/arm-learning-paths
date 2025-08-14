@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## What is Arm’s Confidential Computing Architecture (CCA) and Realm Management Extension (RME)?
+## What is Arm’s Confidential Computing Architecture (CCA) and the Realm Management Extension (RME)?
 
 Arm Confidential Computing Architecture (CCA) is a security framework introduced in the Armv9-A architecture. It defines a set of hardware-enforced isolation features that enable the creation of secure execution environments, which are designed to protect sensitive data while it’s being processed. CCA is the foundation of Confidential Computing on Arm platforms, ensuring that even privileged software like operating systems and hypervisors can’t access protected data.
 
@@ -16,7 +16,7 @@ Together, CCA and RME deliver the infrastructure needed to build Confidential Co
 
 ## What is a Realm?
 
-A **Realm** is a protected execution environment enabled by RME.  It operates independently from both the **Normal World** - where operating systems and user applications run - and the **Secure World**, which hosts trusted firmware and trusted execution environments (TEEs). 
+A Realm is a protected execution environment enabled by RME.  It operates independently from both the Normal World where operating systems and user applications run, and the Secure World, which hosts trusted firmware and trusted execution environments (TEEs). 
 
 Realms allow lower-privileged software, such as an application or a virtual machine, to protect its content and execution from attacks by higher-privileged software, such as an OS or a hypervisor. Realms provide an environment for confidential computing, without requiring the Realm owner to trust the software components that manage the resources that the Realm uses.
 

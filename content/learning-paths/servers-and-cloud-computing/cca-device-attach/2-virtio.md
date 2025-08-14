@@ -6,6 +6,8 @@ weight: 3
 layout: learningpathall
 ---
 
+## Overview
+
 This section introduces VirtIO and Bounce Buffers in the context of CCA Realms, and explains how they enable secure data exchange between a Realm and the untrusted external world.
 
 A Realm must eventually use physical devices to interact with the external world. The easiest way to achieve this is by using VirtIO, which provides a fast, high-level emulation layer. This is considered the first level of device attach, where access is mediated by the hypervisor using paravirtualized interfaces.
@@ -13,17 +15,16 @@ A Realm must eventually use physical devices to interact with the external world
 More advanced device attach features can be enabled by hardware security features like PCIe-TDISP (**T**EE **D**evice **I**nterface **S**ecurity **P**rotocol) and PCIe-IDE (**I**ntegrity
 and **D**ata **E**ncryption), where the host OS assigns a physical device to a Realm. The Realm can then make security measurements on the physical device and include those in its attestation base.
 
-## VirtIO
-
-Learn how VirtIO provides an efficient, paravirtualized I/O interface between Realms and host devices.
-
 ### What is VirtIO?
 
-VirtIO is an abstraction layer for virtual devices in virtualized environments. It provides standardized and efficient interfaces between guest virtual machines (VMs) and host devices, making it easier to develop paravirtualized drivers.
+VirtIO provides an efficient, paravirtualized I/O interface between Realms and host devices. It is an abstraction layer for virtual devices in virtualized environments. It provides standardized and efficient interfaces between guest virtual machines (VMs) and host devices, making it easier to develop paravirtualized drivers.
 
 Paravirtualized means that the guest OS is aware it’s running in a virtualized environment and can use optimized drivers (VirtIO) to communicate with virtual hardware. Emulating physical hardware devices (like NICs or disks) for VMs is slow and inefficient. VirtIO allows VMs to bypass full device emulation and use streamlined drivers.
 
-VirtIO is most commonly used with KVM/QEMU virtualization. Example drivers include:
+VirtIO is most commonly used with KVM/QEMU virtualization. 
+
+Example drivers include:
+
 - `virtio-net`: Paravirtualized networking
 - `virtio-blk`: Block device (disk) access
 - `virtio-fs`: File sharing (host ↔ guest)
@@ -31,7 +32,7 @@ VirtIO is most commonly used with KVM/QEMU virtualization. Example drivers inclu
 - `virtio-rng`: Random number source
 - `virtio-console`: Simple console interface
 
-### How VirtIO works in VMs
+### How does VirtIO work in VMs?
 
 Here is an overview of how VirtIO works in Virtual Machines:
 
