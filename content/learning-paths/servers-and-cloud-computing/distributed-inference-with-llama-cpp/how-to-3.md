@@ -6,11 +6,10 @@ weight: 4
 layout: learningpathall
 ---
 ## Master node setup
-In this learning path, we will use the following three IP addresses for the nodes. Replace these in the instructions with your own node IPs.
+In this learning path, we will use the following two IP addresses for the worker nodes. Replace these with your own node IPs.
 
 ```bash
-master_ip =" 172.31.110.10"
-worker_ips = "172.31.110.11,172.31.110.12"
+export worker_ips = "172.31.110.11:50052,172.31.110.12:50052"
 ```
 You can find the IP addresses of your AWS instances in the AWS console.
 
