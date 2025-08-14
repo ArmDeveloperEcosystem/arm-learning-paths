@@ -1,6 +1,10 @@
 ---
 title: Deploy Apache Spark on Google Axion C4A virtual machine
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for the software developers who are willing to migrate their Apache Spark workloads from the x86_64 platforms to Arm-based platforms, or on Google Axion-based C4A virtual machines specifically.  
