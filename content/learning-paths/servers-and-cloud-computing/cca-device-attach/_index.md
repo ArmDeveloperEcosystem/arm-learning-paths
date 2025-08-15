@@ -6,11 +6,11 @@ minutes_to_complete: 90
 who_is_this_for: This is an advanced topic for developers who want to understand how Arm CCA Realms interact with I/O devices using VirtIO, bounce buffers, and secure device attach mechanisms.
 
 learning_objectives:
-    - Explain what device attach means and how it applies to different types of devices
-    - Explain what a Realm is 
-    - Explain the two levels of device attach for Realms
-    - Understand the role of VirtIO and Bounce Buffers in CCA Realms
+    - Define device attach and distinguish VirtIO paravirtualized attach from secure physical device  attach
+    - Summarize what a Realm is and how RME isolates Realm memory
     - Describe how VirtIO enables paravirtualized I/O without full device emulation
+    - Explain when and why SWIOTLB bounce buffers are used in Realms
+    - Describe how PCIe‑TDISP and PCIe‑IDE support secure physical device attach and attestation
 
 prerequisites:
     - An AArch64 or x86_64 computer running Linux or macOS. You can also use a cloud instance from one of these [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
