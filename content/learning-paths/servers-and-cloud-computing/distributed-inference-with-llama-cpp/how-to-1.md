@@ -22,7 +22,7 @@ You will perform these steps in this Learning Path:
 First, ensure you have permissions to access to Meta's [405B parameter llama 3.1 model](https://huggingface.co/meta-llama/Llama-3.1-405B).
 
 {{% notice Note %}}
-Remember that you will need to replicate the install steps below on each device. Do NOT replicate the download and quantization step, since that will take excessive time -- instead do an `scp` from the quantization machine to the other instances, as shown below.
+Remember that you will need to replicate the install steps below on each device. Do NOT replicate the download and quantization step, llama.cpp will send the tensors to the cache.
 {{% /notice %}}
 
 ##### 1. Generate a virtual environment
@@ -150,11 +150,3 @@ Allowed quantization types:
    0  or  F32     : 26.00G              @ 7B
           COPY    : only copy tensors, no quantizing
 ```
-
-##### 5. Copy the quantized gguf to the other instances
-
-Ensure that your EC2 security group has an inbound rule allowing itself, copy your ssh pem file to the instance you did the requantization on, and then use `scp` to copy the quantized gguf file to your two other instances.
-
-{{% notice Note %}}
-Use the private IP of your ec2 instances for this copy operation if your SG has a self-reference.
-{{% /notice %}}

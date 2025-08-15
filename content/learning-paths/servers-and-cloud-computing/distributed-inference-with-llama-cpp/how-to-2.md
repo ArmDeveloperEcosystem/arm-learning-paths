@@ -23,7 +23,7 @@ Communication between the master node and the worker nodes occurs through a sock
 {{% notice Note %}}The RPC feature in llama.cpp is not secure by default, so you should never expose it to the open internet. To mitigate this risk, ensure that the security groups for all your EC2 instances are properly configured—restricting access to only trusted IPs or internal VPC traffic. This helps prevent unauthorized access to the RPC endpoints.{{% /notice %}}
 Use the following command to start the listening on the worker nodes:
 ```bash
-bin/rpc-server -p 50052 -H 0.0.0.0 -t 64
+bin/rpc-server -c -p 50052 -H 0.0.0.0 -t 64
 ```
 Below are the available flag options that can be used with the rpc-server functionality:
 
