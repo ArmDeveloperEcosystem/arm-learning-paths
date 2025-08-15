@@ -18,7 +18,7 @@ Together, CCA and RME deliver the infrastructure needed to build Confidential Co
 
 A Realm is a protected execution environment enabled by RME.  It operates independently from both the Normal World where operating systems and user applications run, and the Secure World, which hosts trusted firmware and trusted execution environments (TEEs). 
 
-Realms allow lower-privileged software, such as an application or a virtual machine, to protect its content and execution from attacks by higher-privileged software, such as an OS or a hypervisor. Realms provide an environment for confidential computing, without requiring the Realm owner to trust the software components that manage the resources that the Realm uses.
+Realms allow lower-privileged software, such as an application or a virtual machine, to protect its content and execution from attacks by higher-privileged software, such as an OS or a hypervisor. Essentially, realms provide an environment for confidential computing without requiring the Realm owner to trust the software components that manage the resources that the Realm uses.
 
 While Realms are isolated by design, they still need to interact with external components to be practical - for example, accessing a network interface or communicating with a peripheral device. 
 
