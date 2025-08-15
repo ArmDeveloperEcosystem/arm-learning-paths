@@ -6,7 +6,7 @@ minutes_to_complete: 90
 who_is_this_for: This is an advanced topic for developers who want to understand how Arm CCA Realms interact with I/O devices using VirtIO, bounce buffers, and secure device attach mechanisms.
 
 learning_objectives:
-    - Define device attach and distinguish VirtIO paravirtualized attach from secure physical device  attach
+    - Define device attach and distinguish VirtIO paravirtualized attach from secure physical device attach
     - Summarize what a Realm is and how RME isolates Realm memory
     - Describe how VirtIO enables paravirtualized I/O without full device emulation
     - Explain when and why SWIOTLB bounce buffers are used in Realms
