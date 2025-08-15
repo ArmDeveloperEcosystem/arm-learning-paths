@@ -3,20 +3,18 @@ title: Build a Privacy-First LLM Smart Home on Raspberry Pi 5
 
 minutes_to_complete: 45
 
-who_is_this_for: Anyone who wants a private, cloud-free smart home powered by GenAI on Arm
+who_is_this_for: This is an introductory topic for developers interested in building smart home systems using on-device LLMs and Arm-based edge platforms like the Raspberry Pi 5.
 
 learning_objectives:
-  - "Deploy a local Large Language Model (LLM) for smart home control"
-  - "Integrate natural language processing with GPIO control"
-  - "Build and run everything on Arm-based single-board computers (no cloud required)"
-  - "Optimize for speed, privacy, and offline operation"
-  - "Create an interactive web dashboard for smart home control"
+  - "Understand how the Arm architecture enables efficient, private, and responsive LLM inference"
+  - "Run a smart home assistant on Raspberry Pi 5 with local LLM integration"
+  - "Wire and control physical devices (e.g., LEDs) using Raspberry Pi GPIO pins"
+  - "Deploy and interact with a local language model using Ollama"
+  - "Launch and access a web-based dashboard for device control"
 prerequisites:
-  - "Basic Python knowledge"
-  - "A text editor (e.g., VS Code, Sublime, Notepad++)"
-  - "An Arm-based single board computer (e.g., Raspberry Pi 5 with at least 8GB RAM)"
-  - "Basic electronic components such as LEDs, sensors, and relays"
-  - "Basic understanding of GPIO pins and electronics"
+  - "An Arm-based single board computer (e.g., Raspberry Pi 5 running Raspberry Pi OS)"
+  - "Basic electronic components: breadboard, LEDs, resistors and jumper wires"
+  - "Basic understanding of Python, GPIO pins and electronics"
 
 author: "Fidel Makatia Omusilibwa"
 
@@ -24,17 +22,16 @@ author: "Fidel Makatia Omusilibwa"
 skilllevels: "Introductory"
 subjects: "ML"
 armips:
-  - "Arm Cortex A"
+  - "Cortex-A"
 tools_software_languages:
   - "Python"
   - "Ollama"
   - "gpiozero"
   - "lgpio"
   - "FastAPI"
-  - "VS Code or your preferred code editor"
-  - "Raspberry Pi OS (64-bit)"
+  - "Raspberry Pi"
 operatingsystems:
-  - "Windows , Linux, MacOS"
+  - "Linux"
 
 further_reading:
   - resource:
