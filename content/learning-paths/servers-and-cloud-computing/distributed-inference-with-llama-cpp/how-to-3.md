@@ -6,11 +6,10 @@ weight: 4
 layout: learningpathall
 ---
 ## Master node setup
-In this learning path, we will use the following three IP addresses for the nodes. Replace these in the instructions with your own node IPs.
+In this learning path, we will use the following two IP addresses for the worker nodes. Replace these with your own node IPs.
 
 ```bash
-master_ip =" 172.31.110.10"
-worker_ips = "172.31.110.11,172.31.110.12"
+export worker_ips = "172.31.110.11:50052,172.31.110.12:50052"
 ```
 You can find the IP addresses of your AWS instances in the AWS console.
 
@@ -28,6 +27,11 @@ Finally, you can execute the following command, to execute distributed inference
 ```bash
 bin/llama-cli -m ../../model.gguf -p "Tell me a joke" -n 128 --rpc "$worker_ips" -ngl 999
 ```
+
+{{% notice Note %}}
+It will take a significant amount of time (~30 minutes) to load the tensors on the worker nodes. Pre-loaded tensors are a current development request for llama.cpp.
+{{% /notice %}}
+
 Here are short definitions of the flags used in above command:
 -n => Number of maximum output tokens
 --rpc => list of backend workers
