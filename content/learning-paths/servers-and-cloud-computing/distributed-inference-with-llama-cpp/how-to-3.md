@@ -27,6 +27,11 @@ Finally, you can execute the following command, to execute distributed inference
 ```bash
 bin/llama-cli -m ../../model.gguf -p "Tell me a joke" -n 128 --rpc "$worker_ips" -ngl 999
 ```
+
+{{% notice Note %}}
+It will take a significant amount of time (~30 minutes) to load the tensors on the worker nodes. Pre-loaded tensors are a current development request for llama.cpp.
+{{% /notice %}}
+
 Here are short definitions of the flags used in above command:
 -n => Number of maximum output tokens
 --rpc => list of backend workers
