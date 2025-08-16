@@ -3,7 +3,7 @@ title: Distributed inference using llama.cpp
 
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is for developers with some experience using llama.cpp who want to learn distributed inference.
+who_is_this_for: This introductory topic is for developers with some experience using llama.cpp who want to learn distributed inference.
 
 learning_objectives: 
     - Set up a main host and worker nodes with llama.cpp
