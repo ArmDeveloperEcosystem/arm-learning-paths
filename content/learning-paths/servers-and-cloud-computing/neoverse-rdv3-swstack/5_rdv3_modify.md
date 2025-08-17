@@ -1,5 +1,5 @@
 ---
-title: Build and Run RD-V3-R1 Dual Chip Platform
+title: Simulate Dual Chip RD-V3-R1 Platform
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -87,7 +87,7 @@ You’ll observe additional UART consoles for components like the MCP, and you c
 Similar with previous session, the terminal logs are stored in `~/rdv3r1/model-scripts/rdinfra/platforms/rdv3r1/rdv3r1`.
 
 
-### Step 5: Modify MCP Code and Re-Validate the Boot
+### Step 5: Customize Firmware and Confirm MCP Execution
 
 To wrap up this learning path, let’s verify that your firmware changes can be compiled and simulated successfully within the RD‑V3‑R1 environment.
 
@@ -95,8 +95,7 @@ Edit the MCP source file `~/rdv3r1/host/scp/framework/src/fwk_module.c`
 
 Locate the function fwk_module_start(). Add the following logging line just before return FWK_SUCCESS;:
 
-```code
-
+```c
 int fwk_module_start(void)
 {
     ...
@@ -128,7 +127,9 @@ Launch the FVP simulation again and observe the UART output for MCP.
 
 ![img6 alt-text#center](rdv3r1_sim_codechange.jpg "RDV3 R1 modify firmware")
 
+
 If the change was successful, your custom log line will appear in the MCP console—confirming that your code was integrated and executed as part of the firmware boot process.
 
-You’ve now successfully simulated a dual-chip Arm server platform using RD‑V3‑R1 on FVP.  
-This foundation prepares you for further exploration, such as customizing firmware components or integrating BMC workflows.
+You’ve now successfully simulated a dual-chip Arm server platform using RD‑V3‑R1 on FVP—from cloning firmware sources to modifying secure control logic.
+
+This foundation sets the stage for deeper exploration, such as customizing platform firmware or integrating BMC workflows in future development cycles.

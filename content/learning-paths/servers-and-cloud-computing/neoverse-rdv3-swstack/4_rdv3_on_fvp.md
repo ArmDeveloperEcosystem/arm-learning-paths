@@ -1,5 +1,5 @@
 ---
-title: Simulating RD‑V3 with Arm FVP
+title: Simulate RD‑V3 Boot Flow on Arm FVP
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -10,6 +10,7 @@ layout: learningpathall
 
 In the previous module, you built the complete CSS‑V3 firmware stack.  
 Now, you’ll use Arm Fixed Virtual Platform (FVP) to simulate the system—allowing you to verify the boot sequence without any physical silicon.
+This simulation brings up the full stack from BL1 to Linux shell using Buildroot.
 
 ### Step 1: Download and Install the FVP Model
 
@@ -127,7 +128,8 @@ Below is the UART-to-terminal mapping based on the default FVP configuration:
 | `FVP terminal_sec_uart`    | 6    | Secure World / TF‑M Logs           | Cortex‑M55            |
 
 
-All terminal logs are stored in `~/rdv3/model-scripts/rdinfra/platforms/rdv3/rdv3`.
+Logs are also captured under `~/rdv3/model-scripts/rdinfra/platforms/rdv3/rdv3`, each UART redirected to its own log file.
+You can also explore refinfra-*.txt log files to validate subsystem states.
 
 For example, if you’d like to verify that each CPU core has its GICv3 redistributor and LPI table correctly initialized, you can refer to the relevant messages in refinfra-24812-uart-0-nsec_<date-time>.txt.
 
@@ -162,3 +164,7 @@ For example, if you’d like to verify that each CPU core has its GICv3 redistri
 ...
 
 ```
+
+You can try to identify the SCP, RSE, and kernel boot logs across their respective terminals.
+
+Successfully tracing these logs confirms your simulation environment and firmware stack are functioning correctly—all without physical silicon.

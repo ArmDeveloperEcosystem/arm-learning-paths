@@ -40,7 +40,7 @@ These controllers perform essential platform bring-up:
 
 ### Stage 3. Secure Execution Setup (TF‑A)
 
-Once the AP is released, it begins executing Trusted Firmware‑A (TF‑A) at EL3.
+Once the AP is released, it begins executing Trusted Firmware‑A (TF‑A) at EL3, starting from the reset vector address programmed during boot image layout.
 TF‑A configures the secure world, sets up exception levels, and prepares for handoff to UEFI.
 
 ***TF‑A is the ignition controller, launching the next stages securely.***
@@ -132,6 +132,7 @@ The RD‑V3 boot sequence follows a multi-stage, dependency-driven handshake mod
 | 3     | AP ← SCP + RSE       | The application processor starts only after SCP sets power and RSE permits |
 | 4     | UEFI → GRUB → Linux  | UEFI launches GRUB, which loads the kernel and enters the OS            |
 
+This handshake model ensures that no firmware stage proceeds unless its dependencies have securely initialized and authorized the next step.
 
 {{% notice Note %}}
 In the table above, arrows (←) represent **dependency relationships**—the component on the left **depends on** the component(s) on the right to be triggered or authorized.  
@@ -155,6 +156,5 @@ In this module, you have:
 * Learned how secure boot is enforced and how each module hands off control to the next
 * Interpreted boot dependencies using FVP simulation and UART logs
 
-With the full boot flow and firmware responsibilities now clear, you're ready to move from theory to practice.
-
-In the next module, you'll clone the RD‑V3 source tree, build the firmware stack, and prepare your own pre-silicon virtual platform using Arm FVP.
+With the full boot flow and firmware responsibilities now clear, you're ready to apply these insights. 
+In the next module, you'll fetch the RD‑V3 codebase, configure your workspace, and begin building your own firmware stack for simulation.

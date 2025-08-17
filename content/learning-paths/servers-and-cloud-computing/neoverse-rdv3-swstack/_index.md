@@ -1,21 +1,21 @@
 ---
-title: Build Boot and Customize Arm RD V3 Software on Arm Servers
+title: CSS-V3 Pre-Silicon Software Development Using Neoverse Servers
 
 minutes_to_complete: 90
 
-who_is_this_for:   This Learning Path is for CSS platform firmware developers, system architects, and silicon verification engineers working on Arm-based cloud and infrastructure-class systems. You’ll learn how to build, customize, and validate firmware on the RD‑V3 platform using Fixed Virtual Platforms (FVPs) before hardware is available.
+who_is_this_for: This Learning Path is for firmware developers, system architects, and silicon validation engineers building Arm Neoverse CSS  platforms. It focuses on pre-silicon development using Fixed Virtual Platforms (FVPs) for the CSS‑V3 reference design. You’ll learn how to build, customize, and validate firmware on the RD‑V3 platform using Fixed Virtual Platforms (FVPs) before hardware is available.
 
-learning_objectives: 
-    - Understand the architecture of Arm Neoverse CSS‑V3 and how it forms the basis for scalable compute subsystems
-    - Build and boot the RD‑V3 platform using standard firmware components like TF‑A, SCP, RSE, and UEFI
-    - Simulate multi-core, multi-chip server-class systems using Arm FVP models and interpret boot logs for debugging and validation
-    - Modify platform control code to test custom logic and validate it using pre-silicon simulation
+learning_objectives:
+    - Understand the architecture of Arm Neoverse CSS‑V3 as the foundation for scalable server-class platforms
+    - Build and boot the RD‑V3 firmware stack using TF‑A, SCP, RSE, and UEFI
+    - Simulate multi-core, multi-chip systems with Arm FVP models and interpret boot logs
+    - Modify platform control firmware to test custom logic and validate it via pre-silicon simulation 
 
 prerequisites:
-    - Arm-based Neoverse cloud instances, or local Arm Neoverse Linux system with at least 80 GB of storage
-    - Basic experience with Linux and terminal-based development
-    - Familiarity with the concept of firmware boot flow and system-on-chip (SoC) architecture
-    - Docker installed, or access to a Codespaces-compatible development environment
+    - Access to an Arm Neoverse-based Linux machine (cloud or local), with at least 80 GB of storage
+    - Familiarity with Linux command-line tools and basic scripting
+    - Understanding of firmware boot stages and SoC-level architecture
+    - Docker installed, or GitHub Codespaces-compatible development environment
 
 author:
     - Odin Shen
@@ -29,8 +29,7 @@ tools_software_languages:
     - C
     - Docker
     - FVP
-    - LinuxBoot
-operatingsystems:
+peratingsystems:
     - Linux
 
 further_reading:

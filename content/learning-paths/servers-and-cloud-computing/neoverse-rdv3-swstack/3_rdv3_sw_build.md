@@ -1,5 +1,5 @@
 ---
-title: Building the RD‑V3 Reference Platform
+title: Build the RD‑V3 Reference Platform
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -38,10 +38,11 @@ curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
 chmod a+rx ~/.bin/repo
 ```
 
-Once ready, create a workspace and initialize the repo manifest by following instruction.
+Once ready, create a workspace and initialize the repo manifest:
 
-You will reference the designated `manifest.xml` file from the Arm GitLab repository and specify the corresponding `release tag`. For this session, we will use pinned-rdv3.xml and RD-INFRA-2025.07.03. 
+We use a pinned manifest to ensure reproducibility across different environments. This locks all component repositories to known-good commits that are validated and aligned with a specific FVP version.
 
+For this session, we will use `pinned-rdv3.xml` and `RD-INFRA-2025.07.03`.
 
 ```bash
 cd ~
@@ -102,7 +103,7 @@ To build the container image:
 ./container.sh build
 ```
 
-The build procedure may take a few minutes, depending on network bandwidth and CPU performance. On my AWS m7g.4xlarge instance, it took 239 seconds.
+The build procedure may take a few minutes, depending on network bandwidth and CPU performance. On my AWS m7g.4xlarge instance, it took 250 seconds.
 
 ```
 Building docker image: rdinfra-builder ...
@@ -190,7 +191,9 @@ docker run --rm \
            ./build-scripts/rdinfra/build-test-buildroot.sh -p rdv3 package"
 ```
 
-After a successful build, the following output artifacts will be generated under ~/rdv3/output/rdv3/rdv3/
+The build artifacts will be placed under `~/rdv3/output/rdv3/rdv3/`, where the last `rdv3` corresponds to the selected platform name.
+
+After a successful build, the following output artifacts will be generated under `~/rdv3/output/rdv3/rdv3/`
 
 ```
 ls ~/rdv3/output/rdv3/rdv3 -al
@@ -216,14 +219,13 @@ lrwxrwxrwx 1 ubuntu ubuntu      48 Aug 12 13:15 tf_m_vm1_0.bin -> ../components/
 lrwxrwxrwx 1 ubuntu ubuntu      33 Aug 12 13:15 uefi.bin -> ../components/css-common/uefi.bin
 ```
 
-
-| Component            | Output Files                                |
-|----------------------|----------------------------------------------|
-| TF‑A                 | `bl1.bin`, `bl2.bin`, `bl31.bin`, `fip.bin`  |
-| SCP and RSE firmware | `scp.bin`, `mcp_rom.bin`, etc.               |
-| UEFI                 | `uefi.bin`, `flash0.img`                     |
-| Linux kernel         | `Image`                                      |
-| Initrd               | `rootfs.cpio.gz`                             |
+| Component            | Output Files                                 | Description                 |
+|----------------------|----------------------------------------------|-----------------------------|
+| TF‑A                 | `bl1.bin`, `bl2.bin`, `bl31.bin`, `fip.bin`  | Entry-level boot firmware   |
+| SCP and RSE firmware | `scp.bin`, `mcp_rom.bin`, etc.               | Platform power/control      |
+| UEFI                 | `uefi.bin`, `flash0.img`                     | Boot device enumeration     |
+| Linux kernel         | `Image`                                      | OS payload                  |
+| Initrd               | `rootfs.cpio.gz`                             | Minimal filesystem          |
 
 
 ### Optional: Run the Build Manually from Inside the Container
@@ -238,3 +240,6 @@ cd ~/rdv3
 ```
 
 This manual workflow is useful for debugging, partial builds, or making custom modifications to individual components.
+
+
+You’ve now successfully prepared and built the full RD‑V3 firmware stack. In the next module, you’ll install the matching FVP model and simulate the full boot sequence—bringing the firmware to life in a virtual platform.

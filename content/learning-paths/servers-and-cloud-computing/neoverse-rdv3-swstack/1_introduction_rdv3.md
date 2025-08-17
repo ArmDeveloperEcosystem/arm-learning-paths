@@ -1,5 +1,5 @@
 ---
-title: Introduction the Arm RD‑V3 Platform
+title: Introducing the Arm RD‑V3 Platform
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,9 +8,13 @@ layout: learningpathall
 
 ## Introduction to the Arm RD‑V3 Platform
 
-This module introduces the foundational architecture [Neoverse Reference Design Platform Software](https://neoverse-reference-design.docs.arm.com/en/latest/index.html). You’ll learn how [Neoverse CSS-V3](https://www.arm.com/products/neoverse-compute-subsystems/css-v3) is designed for scalable server-class systems and how to develop and validate firmware using a fully virtual environment—before any hardware is available.
+This module introduces the Arm [Neoverse CSS‑V3](https://www.arm.com/products/neoverse-compute-subsystems/css-v3) architecture and the RD‑V3 [Reference Design Platform Software](https://neoverse-reference-design.docs.arm.com/en/latest/index.html) that implements it. You'll learn how these components enable scalable, server-class system design, and how to simulate and validate the full firmware stack using Fixed Virtual Platforms (FVP)—well before hardware is available.
 
 Arm Neoverse is designed to meet the demanding requirements of data center and edge computing, delivering high performance and efficiency. Widely adopted in servers, networking, and edge devices, the Neoverse architecture provides a solid foundation for modern infrastructure.
+
+Using Arm Fixed Virtual Platforms (FVPs), you can explore system bring-up, boot flow, and firmware customization well before physical silicon becomes available.
+
+This module also introduces the key components involved, from Neoverse V3 cores to secure subsystem controllers, and shows how these elements work together in a fully virtualized system simulation.
 
 ### Neoverse CSS-V3 Platform Overview
 
@@ -28,6 +32,7 @@ Key features of CSS-V3 include:
 
 * Interconnect technology: Enabling high-speed, low-latency communication within the subsystem.
 
+The CSS‑V3 subsystem is fully supported by Arm's Fixed Virtual Platform, enabling pre-silicon testing of these capabilities.
 
 ### RD‑V3 Platform Introduction
 
@@ -74,4 +79,4 @@ To support different use cases and levels of platform complexity, Arm offers thr
 
 
 This Learning Path begins with RD‑V3 as the primary platform for foundational exercises, guiding you through the process of building the software stack and simulating it on FVP to verify the boot sequence.
-In later modules, you’ll transition to RD‑V3‑R1 for more advanced system validation and scalability exploration.
+In later modules, you’ll transition to RD‑V3‑R1 to more advanced system simulation, multi-node bring-up, and firmware coordination across components like MCP and SCP.
