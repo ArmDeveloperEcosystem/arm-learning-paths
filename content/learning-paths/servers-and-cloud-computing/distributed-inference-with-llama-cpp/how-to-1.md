@@ -1,5 +1,5 @@
 ---
-title: Convert model to GGUP and quantize
+title: Convert model to GGUF and quantize
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -12,14 +12,14 @@ This example runs on three AWS Graviton4 `c8g.16xlarge` instances. Each instance
 
 In this Learning Path, you will:
 
-1. Download Meta's [Llama 3.1 405B parameter model](https://huggingface.co/meta-llama/Llama-3.1-405B).
-2. Download and build `llama.cpp`, a C++ library for efficient CPU inference of LLaMA and similar large language models on CPUs, optimized for local and embedded environments.
-3. Convert Meta's `safetensors` files to a single GGUF file.
-4. Quantize the 16-bit GGUF weights file to 4-bit weights.
-5. Load and run the model.
+- Download Meta's [Llama 3.1 405B parameter model](https://huggingface.co/meta-llama/Llama-3.1-405B).
+- Download and build `llama.cpp`, a C++ library for efficient CPU inference of LLaMA and similar large language models on CPUs, optimized for local and embedded environments.
+- Convert Meta's `safetensors` files to a single GGUF file.
+- Quantize the 16-bit GGUF weights file to 4-bit weights.
+- Load and run the model.
 
 {{% notice Note %}}
-The **Reading time** shown on the Introduction page does not include downloading, converting, and quantizing the model. These steps can take more than six hours. If you already have a quantized GGUF file, you can skip the download and quantization.
+The **Reading time** shown on the **Introduction** page does not include downloading, converting, and quantizing the model. These steps can take more than six hours. If you already have a quantized GGUF file, you can skip the download and quantization.
 {{% /notice %}}
 
 ## Set up dependencies
@@ -27,7 +27,7 @@ The **Reading time** shown on the Introduction page does not include downloading
 Before you start, make sure you have permission to access Meta's [Llama 3.1 405B parameter model](https://huggingface.co/meta-llama/Llama-3.1-405B).
 
 {{% notice Note %}}
-You must repeat the install steps on each device. However, only run the download and quantization steps once. `llama.cpp` will cache the tensors for reuse across devices.
+You must repeat the install steps on each device. However, only run the download and quantization steps once as `llama.cpp` caches the tensors for reuse across devices.
 {{% /notice %}}
 
 ## Create a virtual environment
@@ -62,7 +62,7 @@ cd build-rpc
 bin/llama-cli -h
 ```
 
-## Download the model (single instance only)
+## Download the model (single instance)
 
 Install Hugging Face Hub in your virtual environment:
 
@@ -102,7 +102,7 @@ Run the script:
 python3 download.py
 ```
 
-## Convert and quantize the model (single instance only)
+## Convert and quantize the model (single instance)
 
 Install the conversion dependencies:
 
