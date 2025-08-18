@@ -334,7 +334,10 @@ For easier comparison, the benchmark results collected from the earlier run on t
 ### Benchmarking comparison summary
 When you compare the benchmarking results you will notice that on the Google Axion C4A Arm-based instances:
 
-- **Whole-stage code generation significantly boosts performance**, improving execution by up to **38×** (e.g., `agg w/o group` from 33.4s to 0.86s).
-- **Vectorized and row-based hash maps** consistently outperform non-codegen and traditional hashmap approaches, especially for aggregation with keys and complex data types (e.g., decimal keys: **6.8× faste**r with vectorized hashmap).
-- **Arm-based Spark shows strong hash performance**, with `fast hash` and `murmur3` achieving up to **3.3× better throughput** than `UnsafeRowhash`.
+- **Whole-stage code generation significantly boosts performance**, improving execution by up to **3×** (e.g., `agg w/o group` from 2728 ms to 856 ms).
+- **Aggregation with Keys**, across row-based and non-hashmap variants deliver ~1.7–5.4× speedups.
+For simple codegen+vectorized hashmap, x86 and Arm-based instances show similar performance.
+- **Arm-based Spark shows strong hash performance**, `murmur3` and `UnsafeRowhash` on Arm-based instances are ~3×–5× faster, with the aggregate hashmap ~6× faster; the `fast hash` path is roughly on par.
+
+Overall, when whole-stage codegen and vectorized hashmap paths are used, you should see multi-fold speedups on the Google Axion C4A Arm-based instances.
  
