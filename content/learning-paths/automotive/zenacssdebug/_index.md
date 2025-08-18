@@ -5,7 +5,7 @@ description: Learn how to set up a debug environment for Arm Zena CSS Reference 
 
 minutes_to_complete: 60
 
-who_is_this_for: This topic is for software developers who wish to use Arm Development Studio to explore and debug the Arm Zena CSS Reference Software Stack
+who_is_this_for: This topic is for software developers who wish to use Arm Development Studio to explore and debug the Arm Zena CSS Reference Software Stack.
 
 learning_objectives: 
     - Set up debug configuration for the Arm Zena CSS FVP
