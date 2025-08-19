@@ -1,10 +1,11 @@
 ---
-title: ChromeOS integration
+title: Integrate ChromeOS with Linux containers
+
 weight: 3
 layout: "learningpathall"
 ---
 
-## File sharing between ChromeOS and Linux
+## File sharing between ChromeOS and Linux containers
 
 Chromebooks with Linux offer convenient file sharing capabilities between the main ChromeOS environment and the Linux subsystem.
 
@@ -18,7 +19,7 @@ Key features:
 
 These features make it simple to move files between ChromeOS and Linux applications while maintaining security and user control.
 
-## Configure file system integration
+## Configure ChromeOS file system integration
 
 ### Share ChromeOS directories
 
@@ -46,7 +47,7 @@ Your shared folders appear in the **Linux settings** under **Manage shared folde
 
 ![Shared folders #center](_images/shared-folders.png)
 
-### Share a folder using the command line
+### Share folders using the command line
 
 You can also share folders using the Termina shell.
 
@@ -68,7 +69,7 @@ Share your ChromeOS Documents folder with the container:
 lxc config device add ubuntu-main documents disk source=/mnt/chromeos/MyFiles/Documents path=/home/username/Documents
 ```
 
-## File operations
+## Copy files with LXC commands
 
 You can use the `lxc file` command to copy files to and from a container from the Termina shell.
 

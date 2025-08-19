@@ -8,7 +8,7 @@ To use desktop applications like browsers in the Ubuntu container, you need to e
 
 Sommelier acts as a bridge, enabling seamless integration and smooth operation of Linux apps within the ChromeOS environment.
 
-## Enable GUI application support
+## Enable support for Linux GUI applications
 
 Install a minimal desktop environment to provide the necessary libraries for graphical applications:
 

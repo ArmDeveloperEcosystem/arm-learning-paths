@@ -1,10 +1,10 @@
 ---
-title: Learn more Linux Container commands
+title: Manage Linux containers with additional commands
 weight: 5
 layout: "learningpathall"
 ---
 
-## Container management
+## Manage containers from the Termina shell
 
 Now that you know the basics, here are some useful commands for managing your container from the Termina shell.
 
@@ -128,7 +128,7 @@ lxc config set u1 boot.autostart true
 lxc config set u1 boot.autostart.priority 1
 ```
 
-## Save and restore
+## Save and restore containers
 
 Once you have a container configured with your preferences, you can save it and use the backup to create new containers.
 
@@ -158,11 +158,11 @@ lxc import my-ubuntu.tar.gz u2
 
 Now you have a fresh container named `u2` at the same state you saved the backup.
 
-## Performance tips
+## Optimize container performance
 
 For a smoother experience, especially on devices with limited resources, you can monitor and manage your container performance.
 
-### Limit container resources
+### Set container resource limits
 
 Configure resource limits for your container from the Termina shell. This can prevent the container from consuming too many system resources.
 
@@ -172,7 +172,7 @@ Limit the container to 4 CPU cores:
 lxc config set u1 limits.cpu 4
 ```
 
-You can confirm using the Linux `lscpu` command. On an 8-core system you will see 4 cores moved to offline.
+You can confirm using the Linux `lscpu` command. On an 8-core system you will see four cores moved to offline.
 
 Limit the container to 2 GB of RAM:
 

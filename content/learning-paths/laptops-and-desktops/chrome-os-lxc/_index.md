@@ -6,9 +6,11 @@ minutes_to_complete: 60
 who_is_this_for: This Learning Path is for software developers who want to install Ubuntu and other Linux distributions on their Arm-based Chromebook with ChromeOS file sharing and GUI support.
 
 learning_objectives:
-  - Create an Ubuntu 24.04 container on ChromeOS Crostini using the Termina shell and LXC
+  - Create and run an Ubuntu 24.04 container on ChromeOS Crostini using LXC and Termina shell
   - Set up ChromeOS integration for file sharing and GUI applications
   - Manage LXC containers on ChromeOS
+  - Enable file sharing between ChromeOS and Ubuntu containers
+  - Run Linux GUI applications on your Chromebook with Sommelier integration
 
 prerequisites:
     - A ChromeOS device with the Linux development environment enabled. The Lenovo Chromebook Plus 14 is recommended. 

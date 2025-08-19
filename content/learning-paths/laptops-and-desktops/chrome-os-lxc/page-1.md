@@ -1,5 +1,5 @@
 ---
-title: "Create an Ubuntu 24.04 container"
+title: "Create an Ubuntu 24.04 container on ChromeOS"
 weight: 2
 layout: "learningpathall"
 ---
@@ -83,7 +83,7 @@ Open a shell in the Ubuntu container:
 lxc exec u1 -- bash
 ```
 
-## Complete the Ubuntu setup
+## Set up Ubuntu for development
 
 Once inside the Ubuntu container, perform initial setup tasks. 
 
