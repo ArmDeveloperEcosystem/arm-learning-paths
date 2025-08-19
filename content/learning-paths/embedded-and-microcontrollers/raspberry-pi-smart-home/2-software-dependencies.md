@@ -11,7 +11,7 @@ layout: learningpathall
 In this section, you’ll prepare your Raspberry Pi 5 by installing Python, required libraries, and Ollama, so you can run large language models (LLMs) locally.
 
 {{% notice Note %}}
-This guide assumes you have set up your Raspberry Pi with Raspberry Pi OS and network connectivity. For Raspberry Pi 5 setup help, see: [Raspberry Pi Getting Started](https://www.raspberrypi.com/documentation/)
+This Learning Path assumes you have set up your Raspberry Pi with Raspberry Pi OS and network connectivity. For Raspberry Pi 5 setup support, see [Raspberry Pi Getting Started](https://www.raspberrypi.com/documentation/).
 {{% /notice %}}
 
 ## Connect to your Raspberry Pi 5
@@ -46,7 +46,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install -y python3 python3-pip python3-venv git curl build-essential gcc python3-lgpio
 ```
 
-### Configure a virtual environment
+## Configure a virtual environment
 
 Create and activate a Python virtual environment to isolate project dependencies:
 

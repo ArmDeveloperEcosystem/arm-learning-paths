@@ -6,13 +6,17 @@ weight: 4
 layout: learningpathall
 ---
 
+## Overview
+
 The next step is to test the GPIO functionality. In this section, you configure an LED light to simulate a smart home device.
 
 ## Verify GPIO setup on Raspberry Pi 5
 
-Gather your electronic components. Connect the anode (long leg) of an LED in series with a 220Ω resistor to GPIO 17 (physical pin 11). Connect the cathode (short leg) to a ground (GND) pin. See the image below for the full setup:
+Gather your electronic components. Connect the anode (long leg) of an LED in series with a 220Ω resistor to GPIO 17 (physical pin 11). Connect the cathode (short leg) to a ground (GND) pin. 
 
-![Raspberry Pi connected to a breadboard with a green LED and jumper wires](pin_layout.jpg "Raspberry Pi connected to a breadboard with a green LED and jumper wires")
+See the image below for the full setup:
+
+![Raspberry Pi connected to a breadboard with a green LED and jumper wires alt-text#center](pin_layout.jpg "Raspberry Pi connected to a breadboard with a green LED and jumper wires")
 
 Create a Python script named `testgpio.py`:
 

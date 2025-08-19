@@ -24,7 +24,7 @@ The Raspberry Pi 5's Arm Cortex-A76 processor can manage high-performance comput
 
 These characteristics make the Raspberry Pi 5 well suited for workloads like smart home assistants, where responsiveness, efficiency, and local processing are important. Running LLMs locally on Arm-based devices brings several practical benefits. Privacy is preserved, since conversations and routines never leave the device. With optimized inference, the system can offer responsiveness under 100 ms, even on resource-constrained hardware. It remains fully functional in offline scenarios, continuing to operate when internet access is unavailable. Developers also gain flexibility to customize models and automations. Additionally, software updates and an active ecosystem continue to improve performance over time.
 
-## Leverage the Arm ecosystem for Raspberry Pi edge AI
+## Leverage the Arm ecosystem for Raspberry Pi Edge AI
 
 For the stack in this setup, Raspberry Pi 5 benefits from the extensive developer ecosystem:
 
@@ -46,7 +46,7 @@ The table below shows inference performance for several quantized models running
 | gemma2:2b           | 4.1        | 23,758           |
 | deepseek-r1:7b      | 1.6        | 64,797           |
 
-### LLM benchmark insights on Raspberry Pi 5
+## LLM benchmark insights on Raspberry Pi 5
 
 - Qwen 0.5B and TinyLlama 1.1B deliver fast token generation and low average latency, making them suitable for real-time interactions such as voice-controlled smart home commands
 - DeepSeek-Coder 1.3B and Gemma 2B trade some speed for improved language understanding, which can be useful for complex tasks or context-aware prompts
@@ -56,7 +56,7 @@ The table below shows inference performance for several quantized models running
 
 This Learning Path focuses on the Raspberry Pi 5, but you can adapt the concepts and code to other Arm-powered devices.
 
-### Recommended platforms
+## Recommended platforms
 
 | Platform            | CPU                              | RAM            | GPIO support                   | Model size suitability      |
 | ------------------- | -------------------------------- | -------------- | ------------------------------ | --------------------------- |
