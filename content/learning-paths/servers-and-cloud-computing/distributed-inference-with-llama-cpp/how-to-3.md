@@ -1,29 +1,37 @@
 ---
-title: Configuring Master Node
+title: Configure the master node
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Master node setup
-In this learning path, we will use the following two IP addresses for the worker nodes. Replace these with your own node IPs.
+
+## Set up the master node
+
+In this section, you configure the master node and verify communication with worker nodes before running distributed inference.
+
+Export the worker node IP addresses, then replace the example values with the IPs for your own nodes:
 
 ```bash
-export worker_ips = "172.31.110.11:50052,172.31.110.12:50052"
+export worker_ips="172.31.110.11:50052,172.31.110.12:50052"
 ```
+
 You can find the IP addresses of your AWS instances in the AWS console.
 
-You can verify communication with the worker nodes using the following command on master node:
+Verify communication with a worker node by running the following command on the master node:
+
 ```bash
 telnet 172.31.110.11 50052
 ```
-If the backend server is set up correctly, the output of the `telnet` command should look like the following:
-```bash
+If the backend server is set up correctly, the output should look like:
+
+```output
 Trying 172.31.110.11...
 Connected to 172.31.110.11.
 Escape character is '^]'.
 ```
-Finally, you can execute the following command, to execute distributed inference:
+Run distributed inference using `llama-cli`:
+
 ```bash
 bin/llama-cli -m ../../model.gguf -p "Here's a knock knock joke for kids:" -n 128 --rpc "$worker_ips" -ngl 999
 ```
@@ -31,15 +39,16 @@ bin/llama-cli -m ../../model.gguf -p "Here's a knock knock joke for kids:" -n 12
 {{% notice Note %}}
 It will take a significant amount of time (~10 minutes) for inference to run.
 {{% /notice %}}
+## Understand the command flags
 
-Here are short definitions of the flags used in above command:
--n => Number of maximum output tokens
---rpc => list of backend workers
--ngl => Number of layers to be placed on backend workers (999 means offload all layers on workers)
+- `-n`: maximum number of output tokens  
+- `--rpc`: list of backend workers  
+- `-ngl`: number of layers to offload to backend workers (`999` offloads all layers)  
 
 {{% notice Note %}}At the time of publication, llama.cpp only supports up to 16 backend workers.{{% /notice %}}
 
-The output:
+## Review example output
+
 ```output
 build: 6209 (fb22dd07) with cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0 for aarch64-linux-gnu
 main: llama backend init
@@ -197,13 +206,16 @@ llama_perf_context_print:        eval time =   36101.93 ms /    63 runs   (  573
 llama_perf_context_print:       total time =   37989.35 ms /    73 tokens
 llama_perf_context_print:    graphs reused =         60
 ```
-That's it! You have successfully run the llama-3.1-70B model on CPUs with the power of llama.cpp RPC functionality. The following table provides brief description of the metrics from `llama_perf`: 
+
+That's it! You have successfully run the llama-3.1-70B model on CPUs with the power of llama.cpp RPC functionality. 
+
+The following table provides brief description of the metrics from `llama_perf`: 
 
 
-| Log Line          | Description                                                                 |
+| Log line          | Description                                                                 |
 |-------------------|-----------------------------------------------------------------------------|
-| sampling time     | Time spent choosing next tokens using sampling strategy (e.g., top-k, top-p). |
-| load time         | Time to load the model into memory and initialize weights/buffers.          |
-| prompt eval time  | Time to process the input prompt tokens before generation (fills KV cache). |
-| eval time         | Time to generate output tokens by forward-passing through the model.        |
-| total time        | Total time for both prompt processing and token generation (excludes model load). |
+| sampling time     | Time spent choosing next tokens using the sampling strategy (for example, top-k, top-p) |
+| load time         | Time required to load the model into memory and initialize weights and buffers |
+| prompt eval time  | Time to process the input prompt tokens before generation (fills KV cache)  |
+| eval time         | Time to generate output tokens by forward-passing through the model         |
+| total time        | Total time for both prompt processing and token generation (excludes model load) |
