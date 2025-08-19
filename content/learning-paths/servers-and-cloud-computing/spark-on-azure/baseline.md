@@ -1,5 +1,5 @@
 ---
-title: Baseline Testing
+title: Functional Validation
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -7,10 +7,10 @@ layout: learningpathall
 ---
 
 
-## Baseline Testing
+## Functional Validation
 Since Apache Spark is installed successfully on your Arm virtual machine, let's now perform simple baseline testing to validate that Spark runs correctly and gives expected output.
 
-Run a simple PySpark script, create a file named `test_spark.py`, and add the below content to it:
+Using a file editor of your choice, create a file named `test_spark.py`, and add the below content to it:
 
 ```python
 from pyspark.sql import SparkSession
