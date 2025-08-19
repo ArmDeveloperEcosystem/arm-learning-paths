@@ -1,5 +1,5 @@
 ---
-title: Spark Internal Benchmarking
+title: Benchmark Spark
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -32,9 +32,9 @@ This compiles Spark and its dependencies, enabling the benchmarks build profile 
 ```console
 ./build/sbt -Pbenchmarks "sql/test:runMain org.apache.spark.sql.execution.benchmark.JoinBenchmark"
 ```
-This executes the **JoinBenchmark**, which measures the performance of various SQL join operations (e.g., SortMergeJoin, BroadcastHashJoin) under different query plans. It helps evaluate how Spark SQL optimizes and executes join strategies, especially with and without WholeStageCodegen, a technique that compiles entire query stages into efficient bytecode for faster execution.
+This executes the `JoinBenchmark`, which measures the performance of various SQL join operations (e.g., SortMergeJoin, BroadcastHashJoin) under different query plans. It helps evaluate how Spark SQL optimizes and executes join strategies, especially with and without WholeStageCodegen, a technique that compiles entire query stages into efficient bytecode for faster execution.
 
-You should see an output similar to:
+The output should look similar to:
 ```output
 [info] Running benchmark: Join w long
 [info]   Running case: Join w long wholestage off
@@ -183,36 +183,9 @@ You should see an output similar to:
 Benchmarking was performed in both an Azure Linux 3.0 Docker container and an Azure Linux 3.0 virtual machine. The benchmark results were found to be comparable.
 {{% /notice %}}
 
-Accordingly, this Learning path includes benchmark results from virtual machines only, for both x86 and Arm64 platforms.
-### Benchmark summary on x86_64:
-The following benchmark results are collected on an x86_64 **D4s_v4 Azure virtual machine using the Azure Linux 3.0 image published by Ntegral Inc**.
-| Benchmark                                | Wholestage | Best Time (ms) | Avg Time (ms) | Stdev (ms) | Rate (M/s) | Per Row (ns) | Relative |
-|------------------------------------------|------------|----------------|----------------|------------|-------------|----------------|----------|
-| Join w long                               | Off        | 3168           | 3185           | 24         | 6.6         | 151.1          | 1.0X     |
-|                                           | On         | 1509           | 1562           | 61         | 13.9        | 72.0           | 2.1X     |
-| Join w long duplicated                    | Off        | 2490           | 2504           | 20         | 8.4         | 118.7          | 1.0X     |
-|                                           | On         | 1151           | 1181           | 27         | 18.2        | 54.9           | 2.2X     |
-| Join w 2 ints                             | Off        | 217074         | 219364         | 3239       | 0.1         | 10350.9        | 1.0X     |
-|                                           | On         | 119692         | 119756         | 74         | 0.2         | 5707.4         | 1.8X     |
-| Join w 2 longs                            | Off        | 4367           | 4401           | 49         | 4.8         | 208.2          | 1.0X     |
-|                                           | On         | 2952           | 3003           | 35         | 7.1         | 140.8          | 1.5X     |
-| Join w 2 longs duplicated                 | Off        | 10255          | 10286          | 45         | 2.0         | 489.0          | 1.0X     |
-|                                           | On         | 7243           | 7300           | 36         | 2.9         | 345.4          | 1.4X     |
-| Outer join w long                         | Off        | 2401           | 2422           | 30         | 8.7         | 114.5          | 1.0X     |
-|                                           | On         | 1544           | 1564           | 17         | 13.6        | 73.6           | 1.6X     |
-| Semi join w long                          | Off        | 1344           | 1350           | 8          | 15.6        | 64.1           | 1.0X     |
-|                                           | On         | 673            | 685            | 12         | 31.2        | 32.1           | 2.0X     |
-| Sort merge join                           | Off        | 1144           | 1145           | 1          | 1.8         | 545.6          | 1.0X     |
-|                                           | On         | 1177           | 1228           | 46         | 1.8         | 561.4          | 1.0X     |
-| Sort merge join w/ duplicates             | Off        | 2075           | 2113           | 55         | 1.0         | 989.4          | 1.0X     |
-|                                           | On         | 1704           | 1720           | 14         | 1.2         | 812.3          | 1.2X     |
-| Shuffle hash join                         | Off        | 672            | 674            | 2          | 6.2         | 160.3          | 1.0X     |
-|                                           | On         | 524            | 525            | 1          | 8.0         | 124.9          | 1.3X     |
-| Broadcast nested loop join               | Off        | 36060          | 36103          | 62         | 0.6         | 1719.5         | 1.0X     |
-|                                           | On         | 31254          | 31346          | 78         | 0.7         | 1490.3         | 1.2X     |
 
 ### Benchmark summary on Arm64:
-The following benchmark results were collected on an Arm64 **D4ps_v6 Azure virtual machine created from a custom Azure Linux 3.0 image using the AArch64 ISO**. 
+For easier comparison, shown here is a summary of benchmark results collected on an Arm64 `D4ps_v6` Azure virtual machine created from a custom Azure Linux 3.0 image using the AArch64 ISO.
 | Benchmark                              | Wholestage | Best Time (ms) | Avg Time (ms) | Stdev (ms) | Rate (M/s) | Per Row (ns) | Relative |
 |----------------------------------------|------------|----------------|----------------|------------|-------------|----------------|----------|
 | Join w long                             | Off        | 2345           | 2649           | 429        | 8.9         | 111.8          | 1.0X     |
@@ -238,10 +211,41 @@ The following benchmark results were collected on an Arm64 **D4ps_v6 Azure virtu
 | Broadcast nested loop join             | Off        | 26847          | 26870          | 32         | 0.8         | 1280.2         | 1.0X     |
 |                                        | On         | 18857          | 18928          | 84         | 1.1         | 899.2          | 1.4X     |
 
-### **Highlights from Azure Linux Arm64 virtual machine**
+### Benchmark summary on x86_64:
+Shown here is a summary of the benchmark results collected on an `x86_64` `D4s_v4` Azure virtual machine using the Azure Linux 3.0 image published by Ntegral Inc.
+| Benchmark                                | Wholestage | Best Time (ms) | Avg Time (ms) | Stdev (ms) | Rate (M/s) | Per Row (ns) | Relative |
+|------------------------------------------|------------|----------------|----------------|------------|-------------|----------------|----------|
+| Join w long                               | Off        | 3168           | 3185           | 24         | 6.6         | 151.1          | 1.0X     |
+|                                           | On         | 1509           | 1562           | 61         | 13.9        | 72.0           | 2.1X     |
+| Join w long duplicated                    | Off        | 2490           | 2504           | 20         | 8.4         | 118.7          | 1.0X     |
+|                                           | On         | 1151           | 1181           | 27         | 18.2        | 54.9           | 2.2X     |
+| Join w 2 ints                             | Off        | 217074         | 219364         | 3239       | 0.1         | 10350.9        | 1.0X     |
+|                                           | On         | 119692         | 119756         | 74         | 0.2         | 5707.4         | 1.8X     |
+| Join w 2 longs                            | Off        | 4367           | 4401           | 49         | 4.8         | 208.2          | 1.0X     |
+|                                           | On         | 2952           | 3003           | 35         | 7.1         | 140.8          | 1.5X     |
+| Join w 2 longs duplicated                 | Off        | 10255          | 10286          | 45         | 2.0         | 489.0          | 1.0X     |
+|                                           | On         | 7243           | 7300           | 36         | 2.9         | 345.4          | 1.4X     |
+| Outer join w long                         | Off        | 2401           | 2422           | 30         | 8.7         | 114.5          | 1.0X     |
+|                                           | On         | 1544           | 1564           | 17         | 13.6        | 73.6           | 1.6X     |
+| Semi join w long                          | Off        | 1344           | 1350           | 8          | 15.6        | 64.1           | 1.0X     |
+|                                           | On         | 673            | 685            | 12         | 31.2        | 32.1           | 2.0X     |
+| Sort merge join                           | Off        | 1144           | 1145           | 1          | 1.8         | 545.6          | 1.0X     |
+|                                           | On         | 1177           | 1228           | 46         | 1.8         | 561.4          | 1.0X     |
+| Sort merge join w/ duplicates             | Off        | 2075           | 2113           | 55         | 1.0         | 989.4          | 1.0X     |
+|                                           | On         | 1704           | 1720           | 14         | 1.2         | 812.3          | 1.2X     |
+| Shuffle hash join                         | Off        | 672            | 674            | 2          | 6.2         | 160.3          | 1.0X     |
+|                                           | On         | 524            | 525            | 1          | 8.0         | 124.9          | 1.3X     |
+| Broadcast nested loop join               | Off        | 36060          | 36103          | 62         | 0.6         | 1719.5         | 1.0X     |
+|                                           | On         | 31254          | 31346          | 78         | 0.7         | 1490.3         | 1.2X     |
 
-- **Whole-stage codegen improves performance by up to 2.8×** on complex joins (e.g., with long columns).
-- **Simple joins (e.g., on integers)** show **negligible performance gain**, remaining close to 1.0×.
-- **Broadcast and shuffle-based joins**benefit moderately, with **1.4× to 1.5× improvements**.
-- **Overall**, enabling whole-stage codegen consistently improves performance across most join types.
-- **Benchmark results were consistent**across both Docker and virtual machine on Arm64.
+
+### Benchmark comparison insights
+
+When you compare the benchmark results you will notice that on the Azure Linux Arm64 virtual machine:
+
+- Whole-stage codegen improves performance by up to 2.8× on complex joins (e.g., with long columns).
+- Simple joins (e.g., on integers) show negligible performance gain, remains comparable to performance on `x86_64`.
+- Broadcast and shuffle-based joins benefit with 1.4× to 1.5× improvements.
+- Overall enabling whole-stage codegen consistently improves performance across most join types.
+
+You have successfully learnt how to deploy Apache Spark on an Azure Cobalt 100 virtual machine and measure the performance uplift. 
