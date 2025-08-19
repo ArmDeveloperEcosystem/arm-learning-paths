@@ -57,7 +57,7 @@ python3 smart_home_assistant.py --no-api
 {{< /tab >}}
 {{< /tabpane >}}
 
-### Command Options
+### Command options
 
 | Option            | Description                                                                                       | Example                                    |
 |------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------|
@@ -69,15 +69,15 @@ If everything is set up correctly, you should see the following output on runnin
 
 ![Running in Default Mode](cmd.png "Running the code in default mode")
 
-## Interact With Your Assistant
+## Interact with your assistant
 
 Try asking the assistant to `turn on living room light`. If you've connected additional devices, come up with prompts to test the setup.
 
 ### Web interface
 
- Open your browser and navigate to `http://0.0.0.0:8000`, or as printed in the terminal output.
+Open your browser and navigate to `http://0.0.0.0:8000`, or as printed in the terminal output.
 
- ![Web Interface Interaction](UI3.png "Interacting with the LLM through the web interface")
+![Web Interface Interaction](UI3.png "Interacting with the LLM through the web interface")
 
 
 ### Command line interface
@@ -105,9 +105,8 @@ If you're running into issues with the assistant, here are some things to check:
 - If port 8000 is unavailable, run the assistant with a different port using the `--port` flag.
 {{% /notice %}}
 
-## Wrapping up
+## Wrap up
 
 From here, you can modify the `smart_home_assistant.py` and extend the system by adding more devices, experimenting with conversational commands, or integrating sensors and automation logic into your smart home setup.
 
 You should now know more about setting up a Raspberry Pi 5 to control real-world devices using GPIO pins, and running a smart home assistant powered by local language models through Ollama. You’ve learned how to wire basic circuits with LEDs and resistors to simulate smart devices, and how to launch and interact with the assistant through both the command-line interface and a web dashboard. Along the way, you also explored common troubleshooting steps for GPIO access, missing dependencies, and model loading issues.
-
