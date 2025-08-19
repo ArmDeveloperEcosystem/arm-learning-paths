@@ -4,9 +4,9 @@ weight: 4
 layout: "learningpathall"
 ---
 
-To use desktop applications like browsers in the Ubuntu container, you need to enable the connection to the ChromeOS desktop using Sommelier. 
+## Overview
 
-Sommelier acts as a bridge, enabling seamless integration and smooth operation of Linux apps within the ChromeOS environment.
+To use desktop applications like browsers in the Ubuntu container, you need to enable the connection to the ChromeOS desktop using Sommelier. Sommelier acts as a bridge, enabling seamless integration and smooth operation of Linux apps within the ChromeOS environment.
 
 ## Enable support for Linux GUI applications
 

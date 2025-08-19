@@ -4,6 +4,8 @@ weight: 2
 layout: "learningpathall"
 ---
 
+## Overview
+
 The [Lenovo Chromebook Plus 14](https://www.bestbuy.com/site/lenovo-chromebook-plus-14-oled-2k-touchscreen-laptop-mediatek-kompanio-ultra-16gb-memory-256gb-ufs-seashell/6630493.p?skuId=6630493&intl=nosplash) is powered by the Arm-based MediaTek Kompanio Ultra processor. It provides a powerful and energy-efficient platform for Linux development, with strong compatibility for containerized environments and ChromeOS Linux (Crostini). This makes it an excellent choice for coding, testing, and running modern development workflows on the go.
 
 This Learning Path walks you through setting up an Ubuntu 24.04 container on your Arm-based Chromebook using ChromeOS's built-in Linux development environment. You'll learn how to create and manage containers, install essential development tools, and integrate your Ubuntu environment with ChromeOS features like file sharing and GUI application support. By the end, you'll have a flexible and powerful Arm Linux development environment.
