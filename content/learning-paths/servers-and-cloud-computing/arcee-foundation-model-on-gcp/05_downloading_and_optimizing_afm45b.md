@@ -86,7 +86,7 @@ This command creates a 4-bit quantized version of the model:
 - `llama-quantize` is the quantization tool from Llama.cpp.
 - `afm-4-5B-F16.gguf` is the input GGUF model file in 16-bit precision. 
 - `Q4_0` applies zero-point 4-bit quantization.
-- This reduces the model size by approximately 45% (from ~15GB to ~8GB).
+- This reduces the model size by approximately 70% (from ~15GB to ~4.4GB).
 - The quantized model will use less memory and run faster, though with a small reduction in accuracy.
 - The output file will be `afm-4-5B-Q4_0.gguf`.
 
@@ -104,7 +104,7 @@ bin/llama-quantize models/afm-4-5b/afm-4-5B-F16.gguf models/afm-4-5b/afm-4-5B-Q8
 
 This command creates an 8-bit quantized version of the model:
 - `Q8_0` specifies 8-bit quantization with zero-point compression.
-- This reduces the model size by approximately 70% (from ~15GB to ~4.4GB).
+- This reduces the model size by approximately 45% (from ~15GB to ~8GB).
 - The 8-bit version provides a better balance between memory usage and accuracy than 4-bit quantization.
 - The output file is named `afm-4-5B-Q8_0.gguf`.
 - Commonly used in production scenarios where memory resources are available.
