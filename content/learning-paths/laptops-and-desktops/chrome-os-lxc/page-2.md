@@ -1,6 +1,5 @@
 ---
 title: Integrate ChromeOS with Linux containers
-
 weight: 3
 layout: "learningpathall"
 ---
