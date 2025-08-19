@@ -6,20 +6,20 @@ weight: 2
 layout: learningpathall
 ---
 ## Overview
-This example will run on three AWS Graviton4 c8g.16xlarge instances with 64 cores and 128GB of RAM. The instances should have 2TB disk storage, to store downloaded and quantized model weights.
+This example will run on three AWS Graviton4 c8g.4xlarge instances with 16 cores and 32GB of RAM. The instances should have 500GB disk storage, to store downloaded and quantized model weights.
 
 You will perform these steps in this Learning Path:
 
-1. Download Meta's [405B parameter llama 3.1 model](https://huggingface.co/meta-llama/Llama-3.1-405B).
+1. Download Meta's [70B parameter llama 3.1 model](https://huggingface.co/meta-llama/Llama-3.1-70B).
 2. Download and build llama.cpp, a C++ library that enables efficient inference of LLaMA and similar large language models on CPUs, optimized for local and embedded environments.
 3. Convert Meta's safetensors files to a single gguf file.
 4. Quantize the 16 bit gguf weights file to 4 bit weights.
 5. Load and run the model. 
 
-{{% notice Note %}}The "reading time" mentioned on the Introduction page doesn't include downloading, converting, and requantizing the model. The process mentioned on this page will take 6+ hours. You may skip the model download and quantization if you have a quantized gguf file ready to use.{{% /notice %}}
+{{% notice Note %}}The "reading time" mentioned on the Introduction page doesn't include downloading, converting, and requantizing the model. The process mentioned on this page will take 1-2 hours. You may skip the model download and quantization if you have a quantized gguf file ready to use.{{% /notice %}}
 
 ## Procedure
-First, ensure you have permissions to access to Meta's [405B parameter llama 3.1 model](https://huggingface.co/meta-llama/Llama-3.1-405B).
+First, ensure you have permissions to access to Meta's [70B parameter llama 3.1 model](https://huggingface.co/meta-llama/Llama-3.1-70B).
 
 {{% notice Note %}}
 Remember that you will need to replicate the install steps below on each device. Do NOT replicate the download and quantization step, llama.cpp will send the tensors to the cache.
@@ -29,7 +29,7 @@ Remember that you will need to replicate the install steps below on each device.
 
 ```bash
 apt update
-apt install python3.12-venv
+apt install -y python3.12-venv
 python3 -m venv myenv
 source myenv/bin/activate
 ```
@@ -48,7 +48,6 @@ cmake --build . --config Release
 `llama.cpp` is now built in the `build-rpc/bin` directory.
 Check that `llama.cpp` has built correctly by running the help command:
 ```bash
-cd build-rpc
 bin/llama-cli -h
 ```
 
@@ -58,15 +57,16 @@ Install Huggingface Hub in the virtual environment:
 pip3 install huggingface_hub
 
 ```
-Make a python file and name it download.py:
+Make a python file in a parallel directory to llama.cpp and name it download.py:
 ```bash
+cd ../..
 vi download.py
 ```
 Write the following code to it:
 ```python
 import os
 from huggingface_hub import snapshot_download
-model_id = "meta-llama/Llama-3.1-405B"
+model_id = "meta-llama/Llama-3.1-70B"
 local_dir = "llama-hf"
 # Create the directory if it doesn't exist
 os.makedirs(local_dir, exist_ok=True)
@@ -87,7 +87,7 @@ Following lines installs the files important for conversion to .gguf format.
 pip3 install -r llama.cpp/requirements.txt
 python3 llama.cpp/convert_hf_to_gguf.py llama-hf
 cd llama.cpp/build-rpc
-bin/llama-quantize ../../llama-hf/llama-3.1-405B-F16.gguf Q4_0
+bin/llama-quantize ../../llama-hf/Llama-3.1-70B-F16.gguf Q4_0
 ```
 You may rename the resultant file to model.gguf and use it. There are different quantization options as well, as shown below:
 ```bash

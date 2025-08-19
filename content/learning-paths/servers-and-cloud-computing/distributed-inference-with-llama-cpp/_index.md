@@ -11,10 +11,10 @@ who_is_this_for: This learning path is for developers with some experience using
 
 learning_objectives: 
     - Set up the main host and worker nodes using llama.cpp
-    - Run a large quantized model (e.g., Llama 3.1 405B) on CPUs in a distributed manner on Arm machines
+    - Run a large quantized model (e.g., Llama 3.1 70B) on CPUs in a distributed manner on Arm machines
 
 prerequisites:
-    - Three AWS c8g.16xlarge instances with at least 2TB EBS space.
+    - Three AWS c8g.4xlarge instances with at least 500GB EBS space.
     - Python installed on the AWS instances.
     - Access to Meta’s gated repository for the Llama 3.1 model family, with a Hugging Face token generated for downloading the models.
     - Familiarity with -> [Deploy a Large Language Model (LLM) chatbot with llama.cpp using KleidiAI on Arm servers](/learning-paths/servers-and-cloud-computing/llama-cpu)
