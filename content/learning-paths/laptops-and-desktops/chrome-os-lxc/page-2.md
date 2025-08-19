@@ -44,7 +44,7 @@ ls /mnt/chromeos/GoogleDrive/MyDrive/AndroidAssets
 
 Your shared folders appear in the **Linux settings** under **Manage shared folders** as shown below:
 
-![Shared folders #center](_images/shared-folders.png)
+![Shared folders #center](_images/shared-folders.png "Shared folders")
 
 ### Share folders using the command line
 

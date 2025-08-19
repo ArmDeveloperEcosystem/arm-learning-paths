@@ -14,7 +14,7 @@ learning_objectives:
 
 prerequisites:
     - A ChromeOS device with the Linux development environment enabled. The Lenovo Chromebook Plus 14 is recommended. 
-    - Basic knowledge of the Linux command line.
+    - Basic knowledge of the Linux command line
 
 author: Jason Andrews
 

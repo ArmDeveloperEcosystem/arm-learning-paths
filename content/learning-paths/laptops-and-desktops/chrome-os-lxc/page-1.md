@@ -14,7 +14,7 @@ The first step to creating an Ubuntu container on ChromeOS is to open the Chrome
 
 Open the Chrome browser and press **Ctrl + Alt + T** to open crosh, the ChromeOS shell.
 
-![ChromeOS shell #center](_images/chromeos-shell.png)
+![ChromeOS shell #center](_images/chromeos-shell.png "ChromeOS shell")
 
 Run the command below to start the Termina shell:
 
@@ -93,7 +93,9 @@ Update package lists and upgrade installed packages:
 apt update && apt upgrade -y
 ```
 
-Install essential packages for development and system management. {{% notice Note %}}
+Install essential packages for development and system management. 
+
+{{% notice Note %}}
 You can select your favorite software packages, these are examples.
 {{% /notice %}}
 
