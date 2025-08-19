@@ -11,7 +11,7 @@ layout: learningpathall
 Before you begin, make sure you have the following:
 
 - A Google Cloud account  
-- Permission to launch a Compute Engine Axion instance of type `c4a-standard-16` (or larger)  
+- Permission to launch a Google Axion instance of type `c4a-standard-16` (or larger)  
 - At least 128 GB of available storage
 
 If you're new to Google Cloud, check out the Learning Path [Getting Started with Google Cloud](/learning-paths/servers-and-cloud-computing/csp/google/).
@@ -32,6 +32,8 @@ Use the following settings to configure your instance:
 In the left sidebar, select **OS and storage**.
 
 Under **Operating system and storage**, click on **Change**
+
+Select Ubuntu as the Operating system. For version select Ubuntu 24.04 LTS Minimal.
 
 Set the size of the disk to 128 GB, then click on **Select**.
 

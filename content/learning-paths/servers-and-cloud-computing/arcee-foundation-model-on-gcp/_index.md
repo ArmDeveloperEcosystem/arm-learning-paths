@@ -17,7 +17,7 @@ learning_objectives:
     - Evaluate model quality by measuring perplexity
 
 prerequisites:
-    - A [Google Cloud account](https://console.cloud.google.com/) with permission to launch Axion (`c4a.4x-standard-16` or larger) instances
+    - A [Google Cloud account](https://console.cloud.google.com/) with permission to launch Axion (`c4a-standard-16` or larger) instances
     - Basic familiarity with Linux and SSH
 
 author: Julien Simon
@@ -28,6 +28,7 @@ skilllevels: Introductory
 subjects: ML
 arm_ips:
     - Neoverse
+cloud_service_providers: Google Cloud
 tools_software_languages:
     - Google Cloud
     - Hugging Face
