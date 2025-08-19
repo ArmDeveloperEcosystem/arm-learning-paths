@@ -9,10 +9,10 @@ who_is_this_for: This topic is for software developers who wish to use Arm Devel
 
 learning_objectives: 
     - Set up debug configuration for the Arm Zena CSS FVP
-    - Debug System Control Processor (SCP) from boot time
-    - Debug Safety Island (SI) processor
-    - Debug Linux OS on Applications Processor
-    - Debug Linux application
+    - Debug Runtime Security Engine (RSE) from boot time
+    - Debug Safety Island (SI)
+    - Debug Linux OS on Primary Compute cores
+##    - Debug Linux application
 
 prerequisites:
     - Ubuntu 22.04 host machine
