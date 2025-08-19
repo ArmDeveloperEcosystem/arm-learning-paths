@@ -1,11 +1,11 @@
 ---
-title: Smart Home Assistant
+title: Build and Run a Smart Home Assistant on Raspberry Pi 5 with LLMs
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## About the assistant
+## Understand the Smart Home Assistant
 
 In this section, you will run the assistant through the `smart_home_assistant.py` script. It initializes all configured smart devices on specific GPIO pins and starts a local web server for interacting with the assistant. The script processes user commands using a local language model (via Ollama), parses the model’s JSON output, and executes actions such as toggling lights or locking doors. It supports both terminal and web-based control.
 
@@ -16,7 +16,7 @@ git clone https://github.com/fidel-makatia/EdgeAI_Raspi5.git
 cd EdgeAI_Raspi5
 ```
 
-## Connect further hardware
+## Connect additional smart home hardware on Raspberry Pi GPIO pins
 
 In the previous section, you configured a LED on GPIO pin 17. The smart home assistant is by default associating this with a `living_room_light` device. The single LED setup is enough to run through this Learning Path. If you'd like to connect actual devices, or play with more mock sensors, the default configuration looks like the table below. You can repeat the steps on the previous page to verify the hardware setup on the different GPIO pins. See the image below for an example.
 

@@ -1,5 +1,6 @@
 ---
-title: Overview
+title: Run LLMs locally on Raspberry Pi 5 for Edge AI
+
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -12,7 +13,7 @@ This Learning Path walks you through deploying an efficient large language model
 
 You will create a fully local, privacy-first smart home system that leverages the strengths of Arm Cortex-A architecture. The system can achieve 15+ tokens per second inference speeds using optimized models like TinyLlama and Qwen, while maintaining the energy efficiency that makes Arm processors well suited for always-on applications.
 
-## Why Arm Cortex-A for edge AI?
+## Why Arm Cortex-A76 makes Raspberry Pi 5 ideal for Edge AI
 
 The Raspberry Pi 5's Arm Cortex-A76 processor can manage high-performance computing tasks like AI inference. Key architectural features include:
 
@@ -23,7 +24,7 @@ The Raspberry Pi 5's Arm Cortex-A76 processor can manage high-performance comput
 
 These characteristics make the Raspberry Pi 5 well suited for workloads like smart home assistants, where responsiveness, efficiency, and local processing are important. Running LLMs locally on Arm-based devices brings several practical benefits. Privacy is preserved, since conversations and routines never leave the device. With optimized inference, the system can offer responsiveness under 100 ms, even on resource-constrained hardware. It remains fully functional in offline scenarios, continuing to operate when internet access is unavailable. Developers also gain flexibility to customize models and automations. Additionally, software updates and an active ecosystem continue to improve performance over time.
 
-## Arm ecosystem advantages
+## Leverage the Arm ecosystem for Raspberry Pi edge AI
 
 For the stack in this setup, Raspberry Pi 5 benefits from the extensive developer ecosystem:
 
@@ -45,7 +46,7 @@ The table below shows inference performance for several quantized models running
 | gemma2:2b           | 4.1        | 23,758           |
 | deepseek-r1:7b      | 1.6        | 64,797           |
 
-### Insights
+### LLM benchmark insights on Raspberry Pi 5
 
 - Qwen 0.5B and TinyLlama 1.1B deliver fast token generation and low average latency, making them suitable for real-time interactions such as voice-controlled smart home commands
 - DeepSeek-Coder 1.3B and Gemma 2B trade some speed for improved language understanding, which can be useful for complex tasks or context-aware prompts
@@ -69,4 +70,4 @@ Additionally, the platform must meet the following requirements:
 - Python 3.8 or newer
 - Ability to run [Ollama](https://ollama.com/)
 
-Continue to the next section to start building a smart home system that highlights how Arm-based processors enable efficient, responsive, and private AI applications at the edge.
+In the next section, you’ll set up the software dependencies needed to start building your privacy-first smart home system on Raspberry Pi 5.

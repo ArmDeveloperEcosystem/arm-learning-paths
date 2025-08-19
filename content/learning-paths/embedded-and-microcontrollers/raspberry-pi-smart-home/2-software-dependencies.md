@@ -1,10 +1,14 @@
 ---
-title: Set up software dependencies
+title: Set up software dependencies on Raspberry Pi 5 for Ollama and LLMs
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## Overview
+
+In this section, you’ll prepare your Raspberry Pi 5 by installing Python, required libraries, and Ollama, so you can run large language models (LLMs) locally.
 
 {{% notice Note %}}
 This guide assumes you have set up your Raspberry Pi with Raspberry Pi OS and network connectivity. For Raspberry Pi 5 setup help, see: [Raspberry Pi Getting Started](https://www.raspberrypi.com/documentation/)
@@ -26,7 +30,7 @@ Replace `<user>` with your Pi's username (typically `pi`), and `<pi-ip>` with yo
 ssh <user>@<pi-ip>
 ```
 
-## Set up dependencies
+## Install Python and system dependencies
 
 Create a directory called `smart-home` in your home directory and navigate into it:
 
@@ -77,7 +81,7 @@ If installation was successful, the output should be similar to:
 ollama version is 0.11.4
 ```
 
-## Download and test a language model
+## Run a test LLM with Ollama on Raspberry Pi 5
 
 Ollama supports various models. This guide uses `deepseek-r1:7b` as an example, but you can also use `tinyllama:1.1b`, `qwen:0.5b`, `gemma2:2b`, or `deepseek-coder:1.3b`.
 

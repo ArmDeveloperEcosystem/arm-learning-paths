@@ -3,7 +3,7 @@ title: Build a Privacy-First LLM Smart Home on Raspberry Pi 5
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for developers interested in building smart home systems using on-device LLMs and Arm-based edge platforms like the Raspberry Pi 5.
+who_is_this_for: This is an introductory topic for edge AI developers, Raspberry Pi hobbyists, and software engineers who want to build privacy-first smart home assistants. You’ll learn how to run large language models (LLMs) locally on the Raspberry Pi 5 using Ollama, control GPIO-connected devices, and deploy a web-based assistant without relying on cloud services.
 
 learning_objectives:
   - Understand how the Arm architecture enables efficient, private, and responsive LLM inference
@@ -14,8 +14,8 @@ learning_objectives:
 
 prerequisites:
   - An Arm-based single board computer (for example, Raspberry Pi 5 running Raspberry Pi OS)
-  - Basic electronic components - breadboard, LEDs, resistors, and jumper wires
-  - Basic understanding of Python, GPIO pins, and electronics
+  - Electronic components (breadboard, LEDs, resistors, jumper wires) for GPIO testing
+  - Familiarity with Python programming, Raspberry Pi GPIO pinout, and basic electronics
 
 author: Fidel Makatia Omusilibwa
 

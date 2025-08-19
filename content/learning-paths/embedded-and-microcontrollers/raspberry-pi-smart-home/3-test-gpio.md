@@ -1,5 +1,5 @@
 ---
-title: Test GPIO pins
+title: Test Raspberry Pi 5 GPIO pins for smart home devices
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 The next step is to test the GPIO functionality. In this section, you configure an LED light to simulate a smart home device.
 
-## Verify GPIO functionality
+## Verify GPIO setup on Raspberry Pi 5
 
 Gather your electronic components. Connect the anode (long leg) of an LED in series with a 220Ω resistor to GPIO 17 (physical pin 11). Connect the cathode (short leg) to a ground (GND) pin. See the image below for the full setup:
 
