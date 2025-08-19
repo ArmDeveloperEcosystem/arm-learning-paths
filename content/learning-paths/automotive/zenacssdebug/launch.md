@@ -8,24 +8,28 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-From the [documentation](https://arm-auto-solutions.docs.arm.com/en/v2.0/rd-aspen/user_guide/reproduce.html#run-the-fvp) the default command to launch the FVP with the software stack loaded is:
+## Launch FVP
+
+From the [documentation](https://arm-auto-solutions.docs.arm.com/en/v2.0/rd-aspen/user_guide/reproduce.html#run-the-fvp) the default command to launch the FVP (within the virtual environment) with the software stack loaded is:
 
 ```command
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose"
 ```
 
-However this does not enable the Iris debug server inside the model, and so will not be debuggable. Additional command options are necessary.
+It is sensible to continue to use this method to launch the FVP whilst debugging. However this command as shown does not enable the Iris debug server inside the model, and so will not be debuggable.
+
+Additional command options are necessary.
 
 We will use the following. See output of `FVP_RD_Aspen --help` for full list and explanation. Options are case-sensitive.
 
 | Option                | Alias    | Notes                                         |
 |---------------------- |--------- |---------------------------------------------- |
-| \-\-iris-server       | -I       | Start Iris Debug Server                       |
-| \-\-iris-port         |          | Specify a port number (default = `7100`)      |
-| \-\-run               | -R       | Run simulation when debug server started      |
-| \-\-iris-allow-remote | -A       | Allow remote connections (if different hosts) |
+| `--iris-server`       | `-I`     | Start Iris Debug Server                       |
+| `--iris-port`         |          | Specify a port number (default = `7100`)      |
+| `--run`               | `-R`     | Run simulation when debug server started      |
+| `--iris-allow-remote` | `-A`     | Allow remote connections (if different hosts) |
 
-## Launch FVP with additional options
+### Launch FVP with additional options
 
 To launch the FVP with additional options, modify the above command by adding `--` and then the options.
 

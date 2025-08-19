@@ -30,8 +30,6 @@ Debug Configurations are stored in a configuration database. You must first crea
 
 Navigate to `File` > `New` > `Other`, and then select `Configuration Database` > `Configuration Database` from the drop-down list.
 
-![New Configuration Database](configdb.png)
-
 Click `Next`. Give the Database a meaningful name, and click `Finish`.
 
 ## Debug Configuration

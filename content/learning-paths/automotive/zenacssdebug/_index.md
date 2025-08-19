@@ -17,7 +17,7 @@ learning_objectives:
 prerequisites:
     - Ubuntu 22.04 host machine
     - Arm Development Studio 2024.1 (or later) and an appropriate license
-    - A basic understanding of the Arm Zena CSS software stack
+    - A basic understanding of the Arm Zena CSS software stack and Arm processors
 
 author: Ronan Synnott
 
