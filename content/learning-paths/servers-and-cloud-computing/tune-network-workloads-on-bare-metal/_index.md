@@ -1,6 +1,10 @@
 ---
 title: Tune network workloads on Arm bare-metal
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for engineers who want to tune the performance of network workloads on Arm Neoverse-based bare-metal.
