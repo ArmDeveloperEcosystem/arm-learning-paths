@@ -1,18 +1,18 @@
 ---
-title: Benchmark and evaluate the quantized models
+title: Benchmark and evaluate AFM-4.5B quantized models on Axion
 weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Benchmark performance using llama-bench
+## Benchmark AFM-4.5B performance with llama-bench
 
-Use the [`llama-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench) tool to measure model performance, including inference speed and memory usage.
+Use the [`llama-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench) tool to measure model performance on Google Cloud Axion Arm64, including inference speed and memory usage.
 
-## Run basic benchmarks
+## Benchmark full, 8-bit, and 4-bit models
 
-Benchmark multiple model versions to compare performance:
+Run benchmarks on multiple versions of AFM-4.5B:
 
 ```bash
 # Benchmark the full-precision model
@@ -25,16 +25,17 @@ bin/llama-bench -m models/afm-4-5b/afm-4-5B-Q8_0.gguf
 bin/llama-bench -m models/afm-4-5b/afm-4-5B-Q4_0.gguf
 ```
 
-Typical results on a 16 vCPU instance:
-- **F16 model**: ~25 tokens/second, ~9GB memory usage
-- **Q8_0 model**: ~40 tokens/second, ~5GB memory usage
-- **Q4_0 model**: ~60 tokens/second, ~3GB memory usage
+Typical results on a 16 vCPU Axion instance:
 
-Your actual results might vary depending on your specific instance configuration and system load.
+- **F16 model**: ~25 tokens/sec, ~9GB memory  
+- **Q8_0 model**: ~40 tokens/sec, ~5GB memory  
+- **Q4_0 model**: ~60 tokens/sec, ~3GB memory  
 
-## Run advanced benchmarks
+Results vary depending on system configuration and load.
 
-Use this command to benchmark performance across prompt sizes and thread counts:
+## Run advanced benchmarks with threads and prompts
+
+Benchmark across prompt sizes and thread counts:
 
 ```bash
 bin/llama-bench -m models/afm-4-5b/afm-4-5B-Q4_0.gguf \
@@ -68,10 +69,11 @@ Here’s an example of how performance scales across threads and prompt sizes (p
 
 Even with just four threads, the Q4_0 model achieves comfortable generation speeds. On larger instances, you can run multiple concurrent model processes to support parallel workloads.
 
-To benchmark batch inference, use [`llama-batched-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/batched-bench).
+For batch inference, use [`llama-batched-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/batched-bench).
 
+## Evaluate AFM-4.5B quality with llama-perplexity
 
-## Evaluate model quality using llama-perplexity
+Perplexity measures how well a model predicts text:
 
 Use the llama-perplexity tool to measure how well each model predicts the next token in a sequence. Perplexity is a measure of how well a language model predicts text. It gives you insight into the model’s confidence and predictive ability, representing the average number of possible next tokens the model considers when predicting each word: 
 
@@ -103,13 +105,12 @@ bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-Q4_0.gguf -f wikitext-2-raw/wik
 To reduce runtime, add the `--chunks` flag to evaluate a subset of the data. For example: `--chunks 50` runs the evaluation on the first 50 text blocks.
 {{< /notice >}}
 
-## Run the evaluation as a background script
+## Run perplexity evaluation in the background
 
 Running a full perplexity evaluation on all three models takes about 3 hours. To avoid SSH timeouts and keep the process running after logout, wrap the commands in a shell script and run it in the background.
 
 Create a script named ppl.sh:
 
-For example:
 ```bash
 #!/bin/bash
 # ppl.sh
@@ -117,10 +118,13 @@ bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-F16.gguf -f wikitext-2-raw/wiki
 bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-Q8_0.gguf -f wikitext-2-raw/wiki.test.raw
 bin/llama-perplexity -m models/afm-4-5b/afm-4-5B-Q4_0.gguf -f wikitext-2-raw/wiki.test.raw
 ```
+
+Run it:
+
 ```bash
- nohup sh ppl.sh >& ppl.sh.log &
- tail -f ppl.sh.log
- ```
+nohup sh ppl.sh >& ppl.sh.log &
+tail -f ppl.sh.log
+```
 
 | Model | Generation speed (batch size 1, 16 vCPUs) | Memory Usage | Perplexity (Wikitext-2) | Perplexity Increase |
 |:-------:|:----------------------:|:------------:|:----------:|:----------------------:|

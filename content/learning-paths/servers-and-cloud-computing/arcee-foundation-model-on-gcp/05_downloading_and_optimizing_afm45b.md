@@ -1,38 +1,39 @@
 ---
-title: Download and optimize the AFM-4.5B model
+title: Download and optimize the AFM-4.5B model for Llama.cpp
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-In this step, you’ll download the [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B) model from Hugging Face, convert it to the GGUF format for compatibility with `llama.cpp`, and generate quantized versions to optimize memory usage and improve inference speed.
+In this step, you’ll download the [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B) model from Hugging Face, convert it to the GGUF format for compatibility with Llama.cpp, and generate quantized versions to optimize memory usage and inference speed.
 
-**Note: if you want to skip the model optimization process, [GGUF](https://huggingface.co/arcee-ai/AFM-4.5B-GGUF) versions are available.**
+**Note:** If you want to skip model optimization, pre-converted [GGUF versions](https://huggingface.co/arcee-ai/AFM-4.5B-GGUF) are available.  
 
-Make sure to activate your virtual environment before running any commands. The instructions below walk you through downloading and preparing the model for efficient use on Google Axion.
+Make sure your Python virtual environment is activated before running commands. These instructions show you how to prepare AFM-4.5B for efficient inference on Google Cloud Axion Arm64 with Llama.cpp.
 
-## Signing up to Hugging Face
+## Sign up to Hugging Face
 
-In order to download AFM-4.5B, you will need to:
-- sign up for a Hugging Face account at [https://huggingface.co](https://huggingface.co)
-- create a read-only Hugging Face token at [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens). Don't forget to store it, as you will only be able to view it once.
-- accept the terms of AFM-4.5B at [https://huggingface.co/arcee-ai/AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B)
+To download AFM-4.5B, you need to:
 
-## Install the Hugging Face libraries
+- Sign up for a Hugging Face account at [https://huggingface.co](https://huggingface.co)  
+- Create a read-only token at [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) (store it securely; it is only shown once)  
+- Accept the model terms at [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B)  
+
+## Install Hugging Face libraries
 
 ```bash
 pip install huggingface_hub hf_xet --upgrade
 ```
 
-This command installs the most up to date versions of:
+This installs:
 
-- `huggingface_hub`: Python client for downloading models and datasets
-- `hf_xet`: Git extension for fetching large model files stored on Hugging Face
+- `huggingface_hub`: Python client for downloading models and datasets  
+- `hf_xet`: Git extension for fetching large model files from Hugging Face  
 
-These tools include the `hf` command-line interface you'll use next.
+These tools include the `hf` CLI.
 
-## Login to the Hugging Face Hub
+## Log in to Hugging Face Hub
 
 ```bash
 hf auth login
@@ -49,7 +50,7 @@ Enter your token (input will not be visible):
 
 Please enter the token you created above, and answer 'n' to "Add token as git credential? (Y/n)".
 
-## Download the AFM-4.5B model
+## Download AFM-4.5B from Hugging Face
 
 ```bash
 hf download arcee-ai/afm-4.5B --local-dir models/afm-4-5b/
@@ -60,7 +61,7 @@ This command downloads the model to the `models/afm-4-5b` directory:
 - The download includes the model weights, configuration files, and tokenizer data.
 - This is a 4.5 billion parameter model, so the download can take several minutes depending on your internet connection.
 
-## Convert to GGUF format
+## Convert AFM-4.5B to GGUF format
 
 ```bash
 python3 convert_hf_to_gguf.py models/afm-4-5b
@@ -76,7 +77,7 @@ This command converts the downloaded Hugging Face model to GGUF (GGML Universal 
 
 Next, deactivate the Python virtual environment as future commands won't require it.
 
-## Create Q4_0 Quantized Version
+## Create a Q4_0 quantized version
 
 ```bash
 bin/llama-quantize models/afm-4-5b/afm-4-5B-F16.gguf models/afm-4-5b/afm-4-5B-Q4_0.gguf Q4_0
@@ -90,7 +91,7 @@ This command creates a 4-bit quantized version of the model:
 - The quantized model will use less memory and run faster, though with a small reduction in accuracy.
 - The output file will be `afm-4-5B-Q4_0.gguf`.
 
-## Arm optimization 
+## Arm optimizations for quantized models
 
 Arm has contributed optimized kernels for Q4_0 that use Neoverse V2 instruction sets. These low-level routines accelerate math operations, delivering strong performance on Axion.
 
@@ -113,11 +114,11 @@ This command creates an 8-bit quantized version of the model:
 
 Similar to Q4_0, Arm has contributed optimized kernels for Q8_0 quantization that take advantage of Neoverse V2 instruction sets. These optimizations provide excellent performance for 8-bit operations while maintaining higher accuracy compared to 4-bit quantization.
 
-## Model files ready for inference
+## AFM-4.5B models ready for inference
 
 After completing these steps, you'll have three versions of the AFM-4.5B model in `models/afm-4-5b`:
 - `afm-4-5B-F16.gguf` - The original full-precision model (~15GB)
 - `afm-4-5B-Q4_0.gguf` - 4-bit quantized version (~4.4GB) for memory-constrained environments
 - `afm-4-5B-Q8_0.gguf` - 8-bit quantized version (~8GB) for balanced performance and memory usage
 
-These models are now ready to be used with the `llama.cpp` inference engine for text generation and other language model tasks.
+These models are now ready to use with the Llama.cpp inference engine on Google Cloud Axion Arm64.

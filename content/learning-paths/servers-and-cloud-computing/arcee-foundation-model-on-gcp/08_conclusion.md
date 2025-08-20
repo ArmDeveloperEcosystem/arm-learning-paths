@@ -1,17 +1,16 @@
 ---
-title: Review what you built
+title: Review your AFM-4.5B deployment on Axion
 weight: 10
-
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Wrap up your AFM-4.5B deployment
+## Review your AFM-4.5B deployment on Google Cloud Axion
 
-Congratulations! You have completed the process of deploying the Arcee [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B) foundation model on Google Axion.
+Congratulations! You have successfully deployed the [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B) foundation model on Google Cloud Axion Arm64.  
 
-Here’s a summary of what you built and how you can take your knowledge forward.
+Here’s a summary of what you built and how to extend it.
 
 Using this Learning Path, you have:
 
@@ -34,33 +33,33 @@ The benchmarking results demonstrate the power of quantization and Arm-based com
 - **Cost optimization** – lower memory needs enable smaller, more affordable instances
 - **Quality preservation** – the quantized models maintain strong perplexity scores, showing minimal quality loss
 
-## The Google Axion advantage
+## Benefits of Google Cloud Axion Arm64
 
-Google Axion processors, built on the Arm Neoverse V2 architecture, provide:
+Google Cloud Axion processors, based on Arm Neoverse V2, provide:
 
-- Superior performance per watt compared to x86 alternatives
-- Cost savings of 20–40% for compute-intensive workloads
-- Optimized memory bandwidth and cache hierarchy for AI/ML workloads
-- Native Arm64 support for modern machine learning frameworks
+- Better performance per watt than x86 alternatives  
+- 20–40% cost savings for compute-intensive workloads  
+- Optimized memory bandwidth and cache hierarchy for ML tasks  
+- Native Arm64 support for modern machine learning frameworks  
 
-## Next steps for deploying AFM-4.5B on Arm
+## Next steps with AFM-4.5B on Axion
 
-Now that you have a fully functional AFM-4.5B deployment, here are some ways to extend your learning:
+Now that you have a working deployment, you can extend it further.
 
-**Production deployment**:
-- Set up auto-scaling groups for high availability
-- Implement load balancing for multiple model instances
-- Add monitoring and logging with CloudWatch
-- Secure your API endpoints with proper authentication
+**Production deployment**:  
+- Add auto-scaling for high availability  
+- Implement load balancing for multiple instances  
+- Enable monitoring and logging with CloudWatch  
+- Secure API endpoints with authentication  
 
-**Application development**:
-- Build a web application using the `llama-server` API
-- Create a chatbot or virtual assistant
-- Develop content generation tools
-- Integrate with existing applications via REST APIs
+**Application development**:  
+- Build a web app with the `llama-server` API  
+- Create a chatbot or assistant  
+- Develop content generation tools  
+- Integrate AFM-4.5B into existing apps via REST APIs  
 
-Together, Arcee AI’s foundation models, Llama.cpp’s efficient runtime, and Axion's compute capabilities give you everything you need to build scalable, production-grade AI applications. 
+Together, Arcee AI’s foundation models, Llama.cpp’s efficient runtime, and Google Cloud Axion provide a scalable, cost-efficient platform for AI.  
 
-From chatbots and content generation to research tools, this stack strikes a balance between performance, cost, and developer control.
+From chatbots and content generation to research tools, this stack delivers a balance of performance, cost, and developer control.  
 
 For more information on Arcee AI, and how you can build high-quality, secure, and cost-efficient AI solutions, please visit [www.arcee.ai](https://www.arcee.ai).
