@@ -1,9 +1,8 @@
 ---
 title: Overview of Microsoft Azure Cobalt 100, Azure Linux 3.0, and Apache Spark
-
-
 weight: 2
 
+### FIXED, DO NOT MODIFY
 layout: "learningpathall"
 ---
 
