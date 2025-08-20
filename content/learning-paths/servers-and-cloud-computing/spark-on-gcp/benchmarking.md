@@ -1,12 +1,13 @@
 ---
-title: Run Spark Benchmarks
+title: Apache Spark performance benchmarks on Arm64 and x86_64 in Google Cloud
+
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Apache Spark benchmarking
+## How to run Apache Spark benchmarks on Arm64 in GCP
 Apache Spark includes internal micro-benchmarks to evaluate the performance of core components like SQL execution, aggregation, joins, and data source reads. These benchmarks are helpful for comparing performance on x86_64 vs Arm64 platforms.
 
 Follow the steps outlined to run Spark’s built-in SQL benchmarks using the SBT-based framework.
@@ -35,7 +36,7 @@ This compiles Spark and its dependencies, enabling the benchmarks build profile 
 ```  
 This executes the `AggregateBenchmark`, which compares performance of SQL aggregation operations (e.g., SUM, STDDEV) with and without `WholeStageCodegen`. `WholeStageCodegen` is an optimization technique used by Spark SQL to improve the performance of query execution by generating Java bytecode for entire query stages instead of interpreting them step-by-step.
 
-### Benchmark results output
+### Example Apache Spark benchmark output (Arm64)
 You should see output similar to:
 
 ```output
@@ -237,7 +238,7 @@ You should see output similar to:
 [success] Total time: 669 s (11:09), completed Jul 24, 2025, 5:41:24 AM
 
 ```
-### Benchmark Results Table Explained:
+### Understanding Apache Spark benchmark metrics and results
 
 - **Best Time (ms):** Fastest execution time observed (in milliseconds).
 - **Avg Time (ms):** Average time across all iterations.
@@ -246,7 +247,7 @@ You should see output similar to:
 - **Per Row (ns):** Average time taken per row (in nanoseconds).
 - **Relative Speed comparison:** baseline (1.0X) is the slower version.
 
-### Benchmark summary on `x86_64`:
+## Apache Spark performance benchmark results on x86_64
 The following benchmark results were collected by running the same benchmark on a `c3-standard-4` (4 vCPU, 2 core, 16 GB Memory) x86_64 virtual machine in GCP, running RHEL 9.
 
 | **Benchmark Case**         | **Sub-Case / Config**                | **Best Time (ms)** | **Avg Time (ms)** | **Stdev (ms)** | **Rate (M/s)** | **Per Row (ns)** | **Relative** |
@@ -297,7 +298,7 @@ The following benchmark results were collected by running the same benchmark on 
 
 ---
 
-## Benchmark summary on Arm64
+## Apache Spark performance benchmark results on Arm64
 Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (RHEL 9):
 
 | Benchmark Case             | Sub-Case / Config        | Best Time (ms) | Avg Time (ms) | Stdev (ms) | Rate (M/s) | Per Row (ns) | Relative |
@@ -336,7 +337,7 @@ Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm6
 
 ---
 
-## Benchmarking comparison summary
+## Apache Spark performance benchmarking comparison on Arm64 and x86_64
 When you compare the benchmarking results you will notice that on the Google Axion C4A Arm-based instances:
 
 - **Whole-stage code generation significantly boosts performance**, improving execution by up to **38×** (e.g., `agg w/o group` from 33.4s to 0.86s).  
