@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-# Set up an Azure Linux 3.0 environment
+## Set up an Azure Linux 3.0 environment
 
 You can deploy your Spark workload either in an Azure Linux 3.0 Docker container or on a virtual machine created from a custom Azure Linux 3.0 image.
 

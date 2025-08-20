@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-# Functional validation of Apache Spark on Azure Cobalt 100 Arm64
+## Functional validation of Apache Spark on Azure Cobalt 100 Arm64
 
 After installing Apache Spark on your Arm64 virtual machine, you can perform simple baseline testing to validate that Spark runs correctly and produces the expected output.
 

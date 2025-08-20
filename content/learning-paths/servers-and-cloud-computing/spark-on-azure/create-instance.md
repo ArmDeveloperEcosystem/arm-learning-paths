@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-# Create an Arm-based virtual machine using Azure Cobalt 100
+## Create an Arm-based virtual machine using Azure Cobalt 100
 
 You can create an Azure Cobalt 100 Arm-based virtual machine in several ways: using the Microsoft Azure console, the Azure CLI, or your preferred Infrastructure as Code (IaC) tool. In this Learning Path, you will use the Azure console to create a virtual machine with the Azure Cobalt 100 Arm-based processor.
 
