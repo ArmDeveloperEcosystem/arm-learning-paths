@@ -5,6 +5,7 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Validate Apache Spark installation with a baseline test
 
 With Apache Spark installed successfully on your GCP C4A Arm-based virtual machine, you can now perform simple baseline testing to validate that Spark runs correctly and produces the expected output.
 
