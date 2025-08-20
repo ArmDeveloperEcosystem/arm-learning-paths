@@ -1,15 +1,16 @@
 ---
-title: Install Python dependencies 
+title: Install Python dependencies for Llama.cpp
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Overview
 
-In this step, you'll set up a Python virtual environment and install the required dependencies for working with Llama.cpp. This ensures you have a clean, isolated Python environment with all the necessary packages for model optimization.
+## Set up a Python environment for Llama.cpp
 
-## Create a Python virtual environment
+In this step, you’ll create a Python virtual environment and install the dependencies required to run AFM-4.5B with Llama.cpp. This ensures a clean, isolated environment for model optimization on Google Cloud Axion.
+
+## Create a virtual environment
 
 ```bash
 virtualenv env-llama-cpp
@@ -21,9 +22,7 @@ This command creates a new Python virtual environment named `env-llama-cpp`, whi
 - Ensures Llama.cpp dependencies don’t interfere with your global Python setup
 - Supports reproducible and portable development environments
 
-## Activate the virtual environment
-
-Run the following command to activate the virtual environment:
+## Activate your virtual environment
 
 ```bash
 source env-llama-cpp/bin/activate
@@ -35,14 +34,13 @@ This command does the following:
 - Updates `PATH` to use so the environment’s Python interpreter 
 - Ensures all `pip` commands install packages into the isolated environment
 
-## Upgrade pip to the latest version
+## Upgrade pip
 
-Before installing dependencies, it’s a good idea to upgrade pip:
+Before installing dependencies, upgrade pip:
 
 ```bash
 pip install --upgrade pip
 ```
-This command:
 
 - Ensures you have the latest version of pip
 - Helps avoid compatibility issues with modern packages
@@ -57,7 +55,7 @@ Use the following command to install all required Python packages:
 pip install -r requirements.txt
 ```
 
-This command does the following:
+This command:
 
 - Uses the `-r` flag to read the list of dependencies from `requirements.txt`
 - Installs the exact package versions required for the project
@@ -66,15 +64,16 @@ This command does the following:
 
 This step sets up everything you need to run AFM-4.5B in your Python environment.
 
-## What the environment includes
+## Verify installed Python packages
 
-After the installation completes, your virtual environment includes:
-- **NumPy**: for numerical computations and array operations
-- **Requests**: for HTTP operations and API calls
-- **Other dependencies**: additional packages required by llama.cpp's Python bindings and utilities
-Your environment is now ready to run Python scripts that integrate with the compiled Llama.cpp binaries
+After installation, your environment includes:
+
+- **NumPy**: numerical computations and array operations  
+- **Requests**: HTTP operations and API calls  
+- **Other packages**: dependencies required by Llama.cpp’s Python bindings and utilities  
+
+You can now run Python scripts that integrate with the compiled Llama.cpp binaries.
 
 {{< notice Tip >}}
-Before running any Python commands, make sure your virtual environment is activated. {{< /notice >}}
-
-
+Before running any Python commands, make sure your virtual environment is activated.
+{{< /notice >}}
