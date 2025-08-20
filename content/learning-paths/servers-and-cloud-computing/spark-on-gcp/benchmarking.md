@@ -1,12 +1,11 @@
 ---
-title: Run Spark Benchmarks
+title: Apache Spark performance benchmarks on Arm64 and x86_64 in Google Cloud
 weight: 6
 
-### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Apache Spark Benchmarking
+## How to run Apache Spark benchmarks on Arm64 in GCP
 Apache Spark includes internal micro-benchmarks to evaluate the performance of core components like SQL execution, aggregation, joins, and data source reads. These benchmarks are helpful for comparing performance on x86_64 vs Arm64 platforms.
 
 Follow the steps outlined to run Spark’s built-in SQL benchmarks using the SBT-based framework.
@@ -33,9 +32,11 @@ This compiles Spark and its dependencies, enabling the benchmarks build profile 
 ```console
 ./build/sbt -Pbenchmarks "sql/test:runMain org.apache.spark.sql.execution.benchmark.AggregateBenchmark"
 ```  
-This executes the `AggregateBenchmark`, which compares performance of SQL aggregation operations (e.g., SUM, STDDEV) with and without `WholeStageCodegen`. `WholeStageCodegen` is an optimization technique used by Spark SQL to improve the performance of query execution by generating Java bytecode for entire query stages (aka whole stages) instead of interpreting them step-by-step.
+This executes the `AggregateBenchmark`, which compares performance of SQL aggregation operations (e.g., SUM, STDDEV) with and without `WholeStageCodegen`. `WholeStageCodegen` is an optimization technique used by Spark SQL to improve the performance of query execution by generating Java bytecode for entire query stages instead of interpreting them step-by-step.
 
+## Example Apache Spark benchmark output (Arm64)
 You should see output similar to:
+
 ```output
 [info] Running benchmark: agg w/o group
 [info]   Running case: agg w/o group wholestage off
@@ -235,7 +236,7 @@ You should see output similar to:
 [success] Total time: 669 s (11:09), completed Jul 24, 2025, 5:41:24 AM
 
 ```
-### Benchmark Results Table Explained:
+## Understanding Apache Spark benchmark metrics and results
 
 - **Best Time (ms):** Fastest execution time observed (in milliseconds).
 - **Avg Time (ms):** Average time across all iterations.
@@ -244,7 +245,7 @@ You should see output similar to:
 - **Per Row (ns):** Average time taken per row (in nanoseconds).
 - **Relative Speed comparison:** baseline (1.0X) is the slower version.
 
-### Benchmark summary on `x86_64`:
+## Apache Spark performance benchmark results on x86_64
 The following benchmark results were collected by running the same benchmark on a `c3-standard-4` (4 vCPU, 2 core, 16 GB Memory) x86_64 virtual machine in GCP, running RHEL 9.
 
 | **Benchmark Case**         | **Sub-Case / Config**                | **Best Time (ms)** | **Avg Time (ms)** | **Stdev (ms)** | **Rate (M/s)** | **Per Row (ns)** | **Relative** |
@@ -293,9 +294,10 @@ The following benchmark results were collected by running the same benchmark on 
 | BytesToBytesMap           | BytesToBytesMap (on Heap)            | 624                | 627               | 3              | 33.6           | 29.8             | 0.3X         |
 | BytesToBytesMap           | Aggregate HashMap                    | 31                 | 31                | 0              | 680.7          | 1.5              | 6.6X         |
 
+---
 
-### Benchmark summary on Arm64:
-For easier comparison, the benchmark results collected from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB Memory) virtual machine, running RHEL 9 is summarized below:
+## Apache Spark performance benchmark results on Arm64
+Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (RHEL 9):
 
 | Benchmark Case             | Sub-Case / Config        | Best Time (ms) | Avg Time (ms) | Stdev (ms) | Rate (M/s) | Per Row (ns) | Relative |
 |----------------------------|--------------------------|----------------|----------------|------------|-------------|----------------|-----------|
@@ -331,13 +333,15 @@ For easier comparison, the benchmark results collected from the earlier run on t
 | BytesToBytesMap            | fast hash                | 42             | 42             | 0          | 499.2       | 2.0            | 3.3X      |
 | BytesToBytesMap    |Aggregate HashMap                 | 23             | 23             | 0          | 913.0       | 1.1            | 5.9X      |
 
-### Benchmarking comparison summary
+---
+
+## Apache Spark performance benchmarking comparison on Arm64 and x86_64
 When you compare the benchmarking results you will notice that on the Google Axion C4A Arm-based instances:
 
 - **Whole-stage code generation significantly boosts performance**, improving execution by up to **3×** (e.g., `agg w/o group` from 2728 ms to 856 ms).
 - **Aggregation with Keys**, across row-based and non-hashmap variants deliver ~1.7–5.4× speedups.
-For simple codegen+vectorized hashmap, x86 and Arm-based instances show similar performance.
 - **Arm-based Spark shows strong hash performance**, `murmur3` and `UnsafeRowhash` on Arm-based instances are ~3×–5× faster, with the aggregate hashmap ~6× faster; the `fast hash` path is roughly on par.
 
 Overall, when whole-stage codegen and vectorized hashmap paths are used, you should see multi-fold speedups on the Google Axion C4A Arm-based instances.
  
+
