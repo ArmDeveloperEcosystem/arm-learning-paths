@@ -1,5 +1,5 @@
 ---
-title: Baseline testing
+title: Apache Spark baseline testing on Google Axion C4A Arm VM
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 With Apache Spark installed successfully on your GCP C4A Arm-based virtual machine, you can now perform simple baseline testing to validate that Spark runs correctly and produces the expected output.
 
-## Spark baseline test
+## Run a baseline test for Apache Spark on Arm
 
 Use a text editor of your choice to create a simple Spark job file:
 
@@ -37,7 +37,7 @@ Here’s a step-by-step breakdown of the code:
 - **`val squared = distData.map(x => x * x).collect()`**: Squares each element using `map`, then gathers results back to the driver program with `collect`  
 - **`println("Squared values: " + squared.mkString(", "))`**: Prints the squared values as a comma-separated list  
 
-## Run the test in Spark shell
+## Run the Apache Spark baseline test in Spark shell
 
 Run the test file in the interactive Spark shell:
 

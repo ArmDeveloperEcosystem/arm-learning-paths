@@ -1,5 +1,5 @@
 ---
-title: Deploy Apache Spark on a Google Axion C4A virtual machine
+title: How to deploy Apache Spark on Google Axion C4A Arm virtual machines
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -7,13 +7,13 @@ layout: learningpathall
 ---
 
 
-## Deploy Apache Spark on Google Axion C4A virtual machine
+## How to deploy Apache Spark on a Google Axion C4A Arm VM in Google Cloud
 
 In this section you deploy Apache Spark on a Google Cloud C4A Arm virtual machine running Red Hat Enterprise Linux. You will install Java, Scala, Maven, and Spark. In the following sections you will run functional tests to validate your installation and benchmarking to compare Spark’s performance on Arm64 versus x86 architectures. 
 
 First, SSH into the Google Cloud C4A VM you created in the previous section. 
 
-## Install required packages
+## Install Java, Maven, and dependencies for Apache Spark on Arm
 
 On your running VM, install Java, Maven, and the other dependencies needed for deploying Spark:
 
@@ -36,7 +36,7 @@ OpenJDK Runtime Environment (Red_Hat-17.0.16.0.8-1) (build 17.0.16+8-LTS)
 OpenJDK 64-Bit Server VM (Red_Hat-17.0.16.0.8-1) (build 17.0.16+8-LTS, mixed mode, sharing)
 ```
 
-## Install Apache Spark on Arm
+## Install Apache Spark on a Google Axion C4A Arm VM
 
 Download and install Apache Spark on your Arm-based VM:
 
@@ -46,7 +46,7 @@ tar -xzf spark-3.5.6-bin-hadoop3.tgz
 sudo mv spark-3.5.6-bin-hadoop3 /opt/spark
 ```
 
-## Set environment variables
+## Configure environment variables for Apache Spark
 
 Set the environment variables to use Spark. Add the following lines to your shell configuration scripts to make the changes persistent across sessions:
 
@@ -62,7 +62,7 @@ Apply the changes immediately:
 source ~/.bashrc 
 ```
 
-## Verify Spark installation
+## Verify Apache Spark installation on Google Axion C4A
 
 Verify your Spark installation:
 
