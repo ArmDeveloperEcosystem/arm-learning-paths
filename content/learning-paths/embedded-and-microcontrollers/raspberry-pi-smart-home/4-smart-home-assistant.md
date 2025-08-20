@@ -1,11 +1,11 @@
 ---
-title: Smart Home Assistant
+title: Build and Run a Smart Home Assistant on Raspberry Pi 5 with LLMs
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## About the assistant
+## Understand the Smart Home Assistant
 
 In this section, you will run the assistant through the `smart_home_assistant.py` script. It initializes all configured smart devices on specific GPIO pins and starts a local web server for interacting with the assistant. The script processes user commands using a local language model (via Ollama), parses the model’s JSON output, and executes actions such as toggling lights or locking doors. It supports both terminal and web-based control.
 
@@ -16,7 +16,7 @@ git clone https://github.com/fidel-makatia/EdgeAI_Raspi5.git
 cd EdgeAI_Raspi5
 ```
 
-## Connect further hardware
+## Connect additional smart home hardware on Raspberry Pi GPIO pins
 
 In the previous section, you configured a LED on GPIO pin 17. The smart home assistant is by default associating this with a `living_room_light` device. The single LED setup is enough to run through this Learning Path. If you'd like to connect actual devices, or play with more mock sensors, the default configuration looks like the table below. You can repeat the steps on the previous page to verify the hardware setup on the different GPIO pins. See the image below for an example.
 
@@ -35,8 +35,9 @@ In the previous section, you configured a LED on GPIO pin 17. The smart home ass
 The code uses gpiozero with lgpio backend for Raspberry Pi 5 compatibility. You can use compatible output devices such as LEDs, relays, or small loads connected to these GPIO pins to represent actual smart home devices. All pin assignments are optimized for the Raspberry Pi 5's GPIO layout.
 {{% /notice %}}
 
-![Raspberry Pi connected to breadboard with LEDs, buttons, and a sensor module](hardware.jpeg "Setup that includes a blue LED (mapped to Living Room Light on GPIO 17), a red LED, push button, and a sensor module. This setup illustrates a simulated smart home with controllable devices.")
+![[Raspberry Pi 5 connected to a breadboard with LEDs, push button, and sensor module alt-text#center](hardware.jpeg "Setup that includes a blue LED (mapped to Living Room Light on GPIO 17), a red LED, push button, and a sensor module.")
 
+This setup illustrates a simulated smart home with controllable devices.
 
 ## Run the Smart Home Assistant
 
@@ -57,7 +58,7 @@ python3 smart_home_assistant.py --no-api
 {{< /tab >}}
 {{< /tabpane >}}
 
-### Command Options
+## Command options
 
 | Option            | Description                                                                                       | Example                                    |
 |------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------|
@@ -67,20 +68,20 @@ python3 smart_home_assistant.py --no-api
 
 If everything is set up correctly, you should see the following output on running the default command:
 
-![Running in Default Mode](cmd.png "Running the code in default mode")
+![Terminal running smart_home_assistant.py showing default web API and CLI output alt-text#center](cmd.png "Running the code in default mode")
 
-## Interact With Your Assistant
+## Interact with your assistant
 
 Try asking the assistant to `turn on living room light`. If you've connected additional devices, come up with prompts to test the setup.
 
-### Web interface
+## Web interface
 
- Open your browser and navigate to `http://0.0.0.0:8000`, or as printed in the terminal output.
+Open your browser and navigate to `http://0.0.0.0:8000`, or as printed in the terminal output.
 
- ![Web Interface Interaction](UI3.png "Interacting with the LLM through the web interface")
+![Web interface of the smart home assistant showing device control through LLM commands alt-text#center](UI3.png "Interacting with the LLM through the web interface")
 
 
-### Command line interface
+## Command line interface
 
 Type commands directly in the terminal.
 
@@ -92,7 +93,7 @@ I want to watch my favorite show
 its getting late, secure the house
 ```
 
-![DeepSeek-Coder Interaction](gemma2.png "Interacting with deepseek-coder:1.3b")
+![Terminal interaction with the smart home assistant showing LLM responses to user commands alt-text#center](gemma2.png "Interacting with deepseek-coder:1.3b")
 
 {{% notice Troubleshooting %}}
 If you're running into issues with the assistant, here are some things to check:
@@ -105,9 +106,8 @@ If you're running into issues with the assistant, here are some things to check:
 - If port 8000 is unavailable, run the assistant with a different port using the `--port` flag.
 {{% /notice %}}
 
-## Wrapping up
+## Wrap up
 
 From here, you can modify the `smart_home_assistant.py` and extend the system by adding more devices, experimenting with conversational commands, or integrating sensors and automation logic into your smart home setup.
 
 You should now know more about setting up a Raspberry Pi 5 to control real-world devices using GPIO pins, and running a smart home assistant powered by local language models through Ollama. You’ve learned how to wire basic circuits with LEDs and resistors to simulate smart devices, and how to launch and interact with the assistant through both the command-line interface and a web dashboard. Along the way, you also explored common troubleshooting steps for GPIO access, missing dependencies, and model loading issues.
-
