@@ -34,7 +34,7 @@ This compiles Spark and its dependencies, enabling the benchmarks build profile 
 ```  
 This executes the `AggregateBenchmark`, which compares performance of SQL aggregation operations (e.g., SUM, STDDEV) with and without `WholeStageCodegen`. `WholeStageCodegen` is an optimization technique used by Spark SQL to improve the performance of query execution by generating Java bytecode for entire query stages instead of interpreting them step-by-step.
 
-### Example Apache Spark benchmark output (Arm64)
+## Example Apache Spark benchmark output (Arm64)
 You should see output similar to:
 
 ```output
@@ -236,7 +236,7 @@ You should see output similar to:
 [success] Total time: 669 s (11:09), completed Jul 24, 2025, 5:41:24 AM
 
 ```
-### Understanding Apache Spark benchmark metrics and results
+## Understanding Apache Spark benchmark metrics and results
 
 - **Best Time (ms):** Fastest execution time observed (in milliseconds).
 - **Avg Time (ms):** Average time across all iterations.

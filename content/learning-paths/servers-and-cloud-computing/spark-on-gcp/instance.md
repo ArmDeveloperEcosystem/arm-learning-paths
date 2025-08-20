@@ -22,7 +22,7 @@ To create a virtual machine based on the C4A Arm architecture:
    - Set **Series** to `C4A`.
    - Select a machine type such as `c4a-standard-4`.
 
-   ![Instance Screenshot](./image1.png)
+   ![Create a Google Axion C4A Arm virtual machine in the Google Cloud Console with c4a-standard-4 selected alt-text#center](./image1.png "Google Cloud Console – creating a Google Axion C4A Arm virtual machine")
 
 4. Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image.  
    For this Learning Path, use **Red Hat Enterprise Linux 9**. Ensure you select the **Arm image** variant. Click **Select**.
