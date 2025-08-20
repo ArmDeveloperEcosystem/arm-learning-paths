@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## Apache Spark Benchmarking
+## Apache Spark benchmarking
 Apache Spark includes internal micro-benchmarks to evaluate the performance of core components like SQL execution, aggregation, joins, and data source reads. These benchmarks are helpful for comparing performance on x86_64 vs Arm64 platforms.
 
 Follow the steps outlined to run Spark’s built-in SQL benchmarks using the SBT-based framework.
@@ -33,9 +33,11 @@ This compiles Spark and its dependencies, enabling the benchmarks build profile 
 ```console
 ./build/sbt -Pbenchmarks "sql/test:runMain org.apache.spark.sql.execution.benchmark.AggregateBenchmark"
 ```  
-This executes the `AggregateBenchmark`, which compares performance of SQL aggregation operations (e.g., SUM, STDDEV) with and without `WholeStageCodegen`. `WholeStageCodegen` is an optimization technique used by Spark SQL to improve the performance of query execution by generating Java bytecode for entire query stages (aka whole stages) instead of interpreting them step-by-step.
+This executes the `AggregateBenchmark`, which compares performance of SQL aggregation operations (e.g., SUM, STDDEV) with and without `WholeStageCodegen`. `WholeStageCodegen` is an optimization technique used by Spark SQL to improve the performance of query execution by generating Java bytecode for entire query stages instead of interpreting them step-by-step.
 
+### Benchmark results output
 You should see output similar to:
+
 ```output
 [info] Running benchmark: agg w/o group
 [info]   Running case: agg w/o group wholestage off
@@ -293,9 +295,10 @@ The following benchmark results were collected by running the same benchmark on 
 | BytesToBytesMap           | BytesToBytesMap (on Heap)            | 624                | 627               | 3              | 33.6           | 29.8             | 0.3X         |
 | BytesToBytesMap           | Aggregate HashMap                    | 31                 | 31                | 0              | 680.7          | 1.5              | 6.6X         |
 
+---
 
-### Benchmark summary on Arm64:
-For easier comparison, the benchmark results collected from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB Memory) virtual machine, running RHEL 9 is summarized below:
+## Benchmark summary on Arm64
+Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (RHEL 9):
 
 | Benchmark Case             | Sub-Case / Config        | Best Time (ms) | Avg Time (ms) | Stdev (ms) | Rate (M/s) | Per Row (ns) | Relative |
 |----------------------------|--------------------------|----------------|----------------|------------|-------------|----------------|-----------|
@@ -331,10 +334,11 @@ For easier comparison, the benchmark results collected from the earlier run on t
 | BytesToBytesMap            | fast hash                | 42             | 42             | 0          | 499.2       | 2.0            | 3.3X      |
 | BytesToBytesMap    |Aggregate HashMap                 | 23             | 23             | 0          | 913.0       | 1.1            | 5.9X      |
 
-### Benchmarking comparison summary
+---
+
+## Benchmarking comparison summary
 When you compare the benchmarking results you will notice that on the Google Axion C4A Arm-based instances:
 
-- **Whole-stage code generation significantly boosts performance**, improving execution by up to **38×** (e.g., `agg w/o group` from 33.4s to 0.86s).
-- **Vectorized and row-based hash maps** consistently outperform non-codegen and traditional hashmap approaches, especially for aggregation with keys and complex data types (e.g., decimal keys: **6.8× faste**r with vectorized hashmap).
-- **Arm-based Spark shows strong hash performance**, with `fast hash` and `murmur3` achieving up to **3.3× better throughput** than `UnsafeRowhash`.
- 
+- **Whole-stage code generation significantly boosts performance**, improving execution by up to **38×** (e.g., `agg w/o group` from 33.4s to 0.86s).  
+- **Vectorized and row-based hash maps** consistently outperform non-codegen and traditional hashmap approaches, especially for aggregation with keys and complex data types (e.g., decimal keys: **6.8× faster** with vectorized hashmap).  
+- **Arm-based Spark shows strong hash performance**, with `fast hash` and `murmur3` achieving up to **3.3× better throughput** than `UnsafeRowhash`.  
