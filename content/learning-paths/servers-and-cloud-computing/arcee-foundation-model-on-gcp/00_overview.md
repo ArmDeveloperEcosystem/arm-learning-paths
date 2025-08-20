@@ -20,7 +20,7 @@ This hands-on guide helps developers build cost-efficient, high-performance LLM 
 - **Set up your environment**: install build tools and dependencies (CMake, Python, Git)  
 - **Build the inference engine**: clone the [Llama.cpp](https://github.com/ggerganov/llama.cpp) repository and compile the project for your Arm-based environment  
 - **Prepare the model**: download the AFM-4.5B model files from Hugging Face and use Llama.cpp’s quantization tools to reduce model size and optimize performance  
-- **Run inference**: load the quantized model and run sample prompts using Llama.cpp  
+- **Run inference**: load the quantized model and run sample prompts using Llama.cpp 
 - **Evaluate model quality**: calculate perplexity or use other metrics to assess performance  
 
 {{< notice Note >}}
