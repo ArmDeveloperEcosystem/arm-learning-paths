@@ -46,10 +46,11 @@ Run the test file in the interactive Spark shell:
 spark-shell < ~/spark_baseline_test.scala
 ```
 
-Alternatively, you can load the file from inside the shell:
+Alternatively, you can start the spark shell and then load the file from inside the shell:
 
 ```scala
-:load ~/spark_baseline_test.scala
+spark-shell
+:load /home/ubuntu/spark_baseline_test.scala
 ```
 
 You should see output similar to:
