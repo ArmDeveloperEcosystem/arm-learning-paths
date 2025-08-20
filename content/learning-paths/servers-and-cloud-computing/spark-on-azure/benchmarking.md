@@ -181,7 +181,7 @@ You should see output similar to the following:
 [info] broadcast nested loop join wholestage on           18857          18928          84          1.1         899.2       1.4X
 [success] Total time: 1644 s (27:24), completed Jul 25, 2025, 6:27:46 AM
 ```
-### Benchmark Results Table Explained:
+## Benchmark Results Table Explained:
 
 - **Best Time (ms):** Fastest execution time observed (in milliseconds).
 - **Avg Time (ms):** Average time across all iterations.
@@ -191,11 +191,11 @@ You should see output similar to the following:
 - **Relative Speed comparison:** baseline (1.0X) is the slower version.
 
 {{% notice Note %}}
-Benchmarks were performed in both an Azure Linux 3.0 Docker container and an Azure Linux 3.0 virtual machine. Results were found to be comparable.
+Benchmark results on Azure Linux 3.0 were consistent across both Docker containers and virtual machines.
 {{% /notice %}}
 
 
-### Benchmark summary on Arm64:
+## Benchmark summary on Arm64:
 For easier comparison, shown here is a summary of benchmark results collected on an Arm64 `D4ps_v6` Azure virtual machine created from a custom Azure Linux 3.0 image using the AArch64 ISO.
 | Benchmark                              | Wholestage | Best Time (ms) | Avg Time (ms) | Stdev (ms) | Rate (M/s) | Per Row (ns) | Relative |
 |----------------------------------------|------------|----------------|----------------|------------|-------------|----------------|----------|
@@ -222,7 +222,7 @@ For easier comparison, shown here is a summary of benchmark results collected on
 | Broadcast nested loop join             | Off        | 26847          | 26870          | 32         | 0.8         | 1280.2         | 1.0X     |
 |                                        | On         | 18857          | 18928          | 84         | 1.1         | 899.2          | 1.4X     |
 
-### Benchmark summary on x86_64:
+## Benchmark summary on x86_64:
 Shown here is a summary of the benchmark results collected on an `x86_64` `D4s_v4` Azure virtual machine using the Azure Linux 3.0 image published by Ntegral Inc.
 | Benchmark                                | Wholestage | Best Time (ms) | Avg Time (ms) | Stdev (ms) | Rate (M/s) | Per Row (ns) | Relative |
 |------------------------------------------|------------|----------------|----------------|------------|-------------|----------------|----------|
@@ -250,7 +250,7 @@ Shown here is a summary of the benchmark results collected on an `x86_64` `D4s_v
 |                                           | On         | 31254          | 31346          | 78         | 0.7         | 1490.3         | 1.2X     |
 
 
-### Benchmark comparison insights
+## Benchmark comparison insights
 
 When comparing the results on Arm64 vs x86_64 virtual machines:
 

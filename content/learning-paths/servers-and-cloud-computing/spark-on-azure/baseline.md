@@ -1,12 +1,12 @@
 ---
-title: Functional validation of Apache Spark on Azure Cobalt 100 Arm64
+title: Validate Apache Spark on Azure Cobalt 100 Arm64 VMs
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Functional validation of Apache Spark on Azure Cobalt 100 Arm64
+## Run a functional test of Apache Spark on Azure Cobalt 100 Arm64
 
 After installing Apache Spark on your Arm64 virtual machine, you can perform simple baseline testing to validate that Spark runs correctly and produces the expected output.
 
@@ -47,6 +47,6 @@ You should see output similar to:
 
 ## Output summary
 
-- Spark successfully generated code (10.5 ms) and executed a simple DataFrame operation  
-- The test data **[1, "ARM64"]** and **[2, "Azure"]** was displayed before cleanly shutting down (exitCode 0)  
-- This confirms a working Spark deployment on Arm64  
+- Spark successfully generated code (10.5 ms) and executed a simple DataFrame operation.  
+- The test data **[1, "ARM64"]** and **[2, "Azure"]** was displayed before cleanly shutting down (exitCode 0).  
+- This confirms a working Spark deployment on Arm64.  

@@ -1,5 +1,5 @@
 ---
-title: Run Spark applications on the Microsoft Azure Cobalt 100 processors
+title: Run Spark applications on Microsoft Azure Cobalt 100 processors
 
 minutes_to_complete: 60
 
