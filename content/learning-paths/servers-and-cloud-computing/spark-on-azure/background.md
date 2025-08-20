@@ -1,25 +1,31 @@
 ---
-title: "Overview"
+title: "Overview of Azure Cobalt 100, Azure Linux 3.0, and Apache Spark"
 
 weight: 2
 
 layout: "learningpathall"
 ---
 
-## What is the Azure Cobalt 100 processor?
+# Overview of Azure Cobalt 100, Azure Linux 3.0, and Apache Spark
 
-Azure’s Cobalt 100 is built on Microsoft's first-generation Arm-based processor: the Cobalt 100. Designed entirely by Microsoft and based on Arm’s Neoverse-N2 architecture, this 64-bit CPU delivers improved performance and energy efficiency across a broad spectrum of cloud-native, scale-out Linux workloads. These include web and application servers, data analytics, open-source databases, caching systems, and more. Running at 3.4 GHz, the Cobalt 100 processor allocates a dedicated physical core for each vCPU, ensuring consistent and predictable performance.
+This section introduces the key technologies you will use when running Spark applications on Microsoft Azure Cobalt 100 processors. You will learn about the Azure Cobalt 100 Arm-based processor, Azure Linux 3.0, and Apache Spark.
 
-To learn more about Cobalt 100, refer to the blog [Announcing the preview of new Azure virtual machine based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
+## Azure Cobalt 100 processor
 
-## Introduction to Azure Linux 3.0
+Azure Cobalt 100 is Microsoft’s first-generation Arm-based processor, designed for cloud-native, scale-out Linux workloads. Based on Arm’s Neoverse-N2 architecture, this 64-bit CPU delivers improved performance and energy efficiency. Running at 3.4 GHz, it provides a dedicated physical core for each vCPU, ensuring consistent and predictable performance.
 
-Azure Linux 3.0 is Microsoft's in-house, lightweight Linux distribution optimized for running cloud-native workloads on Azure. Designed with performance, security, and reliability in mind, it is fully supported by Microsoft and tailored for containers, microservices, and Kubernetes. With native support for Arm64 (AArch64) architecture, Azure Linux 3.0 enables efficient execution of workloads on energy-efficient Arm-based infrastructure, making it a powerful choice for scalable and cost-effective cloud deployments.
+Typical workloads include web and application servers, data analytics, open-source databases, and caching systems.
 
-## Apache Spark
+To learn more, see the blog [Announcing the preview of new Azure virtual machines based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
 
-Apache Spark is an open-source, distributed computing system designed for fast and general-purpose big data processing.
+## Azure Linux 3.0 overview
 
-It provides high-level APIs in Java, Scala, Python, and R, and supports in-memory computation for increased performance.
+Azure Linux 3.0 is Microsoft’s lightweight Linux distribution optimized for cloud-native workloads on Azure. It is designed for performance, security, and reliability, and is supported by Microsoft. Azure Linux 3.0 is tailored for containers, microservices, and Kubernetes.
 
-Spark is widely used for large-scale data analytics, machine learning, and real-time data processing. Learn more from the [Apache Spark official website](https://spark.apache.org/) and its [detailed official documentation](https://spark.apache.org/docs/latest/).
+With native support for Arm64 (AArch64) architecture, Azure Linux 3.0 enables efficient execution of workloads on Arm-based infrastructure, making it a scalable and cost-effective choice for cloud deployments.
+
+## Apache Spark overview
+
+Apache Spark is an open-source, distributed computing system for fast, general-purpose big data processing. It provides high-level APIs in Java, Scala, Python, and R, and supports in-memory computation for improved performance.
+
+Spark is widely used for large-scale data analytics, machine learning, and real-time data processing. Learn more at the [Apache Spark official website](https://spark.apache.org/) and in the [official documentation](https://spark.apache.org/docs/latest/).
