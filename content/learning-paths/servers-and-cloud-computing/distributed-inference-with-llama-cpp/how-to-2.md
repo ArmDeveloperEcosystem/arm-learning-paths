@@ -12,19 +12,19 @@ layout: learningpathall
 
 Just over a year before this Learning Path was published, Radoslav Gerganov's (rgerganov) RPC code was merged into `llama.cpp`. This feature enables distributed inference of large LLMs across multiple CPU-based machines, even when the models don’t fit into the memory of a single machine. 
 
-In this Learning Path, you’ll explore how to run a 405B parameter model on Arm-based CPUs.
+In this Learning Path, you’ll explore how to run a 70B parameter model on Arm-based CPUs.
 
 For this demonstration, the experimental setup includes:
 
-- Number of instances: 3
-- Instance type: `c8g.16xlarge`
-- Model: `model.GGUF` (Llama-3.1-405B_Q4_0)
+- Total number of instances: 3
+- Instance type: c8g.4xlarge
+- Model: model.gguf (Llama-3.1-70B_Q4_0, ~38GB when quantized to 4 bits)
 
 One of the three nodes serves as the master node, which physically hosts the model file. The other two nodes act as worker nodes. In `llama.cpp`, remote procedure calls (RPC) offload both the model and the computation over TCP connections between nodes. The master node forwards inference requests to the worker nodes, where computation is performed.
 
 ## Set up the worker nodes
 
-Choose two of the three devices to act as backend workers. If the devices have varying compute capacities, select the ones with the highest compute, especially for a 405B model. Because all three devices in this setup are identical, you can select any two to serve as backend workers.
+Choose two of the three devices to act as backend workers. If the devices have varying compute capacities, select the ones with the highest compute. Because all three devices in this setup are identical, you can select any two to serve as backend workers.
 
 Communication between the master node and the worker nodes occurs through a socket created on each worker. This socket listens for incoming data from the master, such as model parameters, tokens, hidden states, and other inference-related information.
 

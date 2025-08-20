@@ -10,7 +10,7 @@ learning_objectives:
     - Run a large quantized model (for example, Llama 3.1 405B) with distributed CPU inference on Arm machines
 
 prerequisites:
-    - Three AWS c8g.16xlarge instances with at least 2 TB of EBS storage
+    - Three AWS c8g.4xlarge instances with at least 500 GB of EBS storage
     - Python 3 installed on each instance
     - Access to Meta's gated repository for the Llama 3.1 model family and a Hugging Face token to download models
     - Familiarity with the Learning Path [Deploy a Large Language Model (LLM) chatbot with llama.cpp using KleidiAI on Arm servers](/learning-paths/servers-and-cloud-computing/llama-cpu)
