@@ -81,7 +81,7 @@ Add the following code:
 ```python
 import os
 from huggingface_hub import snapshot_download
-model_id = "meta-llama/llama-3.1-70B"
+model_id = "meta-llama/Llama-3.1-70B"
 local_dir = "llama-hf"
 
 # Create the directory if it doesn't exist
