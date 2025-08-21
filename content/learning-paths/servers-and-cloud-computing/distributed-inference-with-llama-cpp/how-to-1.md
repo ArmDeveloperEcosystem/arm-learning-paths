@@ -13,16 +13,16 @@ This example runs on three AWS Graviton4 `c8g.4xlarge` instances. Each instance 
 In this Learning Path, you will:
 
 - Download Meta's [Llama 3.1 70B parameter model](https://huggingface.co/meta-llama/Llama-3.1-70B).
-- Download and build `llama.cpp`, a C++ library for efficient CPU inference of LLaMA and similar large language models on CPUs, optimized for local and embedded environments.
+- Download and build `llama.cpp`, a C++ library for efficient CPU inference of Llama and similar large language models on CPUs, optimized for local and embedded environments.
 - Convert Meta's `safetensors` files to a single GGUF file.
 - Quantize the 16-bit GGUF weights file to 4-bit weights.
 - Load and run the model.
 
 {{% notice Note %}}
-The **Reading time** shown on the **Introduction** page does not include downloading, converting, and quantizing the model. These steps can take 1-2 hours. If you already have a quantized GGUF file, you can skip the download and quantization.
+The **Reading time** shown on the **Introduction** page does not include downloading, converting, and quantizing the model. These steps can take several hours depending on bandwidth and system resources. If you already have a quantized GGUF file, you can skip the download and quantization.
 {{% /notice %}}
 
-## Set up dependencies
+## Install dependencies
 
 Before you start, make sure you have permission to access Meta's [Llama 3.1 70B parameter model](https://huggingface.co/meta-llama/Llama-3.1-70B).
 
@@ -35,7 +35,7 @@ You must repeat the install steps on each device. However, only run the download
 ```bash
 apt update
 apt install -y python3.12-venv
-python3 -m venv myenv
+python3.12 -m venv myenv
 source myenv/bin/activate
 ```
 

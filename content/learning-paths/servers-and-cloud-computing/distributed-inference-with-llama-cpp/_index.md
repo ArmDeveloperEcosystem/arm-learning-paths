@@ -1,9 +1,9 @@
 ---
-title: Distributed inference using llama.cpp
+title: Run distributed inference with llama.cpp on Arm-based AWS Graviton4 instances
 
 minutes_to_complete: 30
 
-who_is_this_for: This introductory topic is for developers with some experience using llama.cpp who want to learn distributed inference.
+who_is_this_for: This introductory topic is for developers with some experience using llama.cpp who want to learn how to run distributed inference on Arm-based servers.
 
 learning_objectives: 
     - Set up a main host and worker nodes with llama.cpp
