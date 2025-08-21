@@ -1,46 +1,46 @@
 ---
-title: Build Llama.cpp
+title: Build Llama.cpp on Google Cloud Axion Arm64
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Build the Llama.cpp inference engine
 
-In this step, you'll build Llama.cpp from source. Llama.cpp is a high-performance C++ implementation of the LLaMA model, optimized for inference on a range of hardware platforms, including Arm-based processors like Google Axion.
+## Build the Llama.cpp inference engine on Google Cloud Axion
 
-Even though AFM-4.5B uses a custom model architecture, you can still use the standard Llama.cpp repository - Arcee AI has contributed the necessary modeling code upstream.
+In this step, you’ll build Llama.cpp from source. Llama.cpp is a high-performance C++ implementation of the LLaMA model, optimized for inference on multiple hardware platforms, including Arm64 processors such as Google Cloud Axion.
 
-## Clone the repository
+Although AFM-4.5B uses a custom architecture, you can use the standard Llama.cpp repository. Arcee AI has contributed the required modeling code upstream.
+
+## Clone the Llama.cpp repository
 
 ```bash
 git clone https://github.com/ggerganov/llama.cpp
 ```
 
-This command clones the Llama.cpp repository from GitHub to your local machine. The repository contains the source code, build scripts, and documentation needed to compile the inference engine.
+This command clones the Llama.cpp repository from GitHub. The repository includes source code, build scripts, and documentation.
 
-## Navigate to the project directory
+## Navigate to the Llama.cpp directory
 
 ```bash
 cd llama.cpp
 ```
 
-Change into the llama.cpp directory to run the build process. This directory contains the `CMakeLists.txt` file and all source code.
+Move into the `llama.cpp` directory to run the build process. This directory contains the `CMakeLists.txt` file and all source code.
 
-## Configure the build with CMake
+## Configure the build with CMake for Arm64
 
 ```bash
 cmake -B .
 ```
 
-This command configures the build system using CMake:
+This configures the build system using CMake:
 
-- `-B .` tells CMake to generate build files in the current directory
-- CMake detects your system's compiler, libraries, and hardware capabilities
-- It produces Makefiles (on Linux) or platform-specific build scripts for compiling the project
+- `-B .` generates build files in the current directory  
+- CMake detects the system compiler, libraries, and hardware capabilities  
+- It produces Makefiles (Linux) or platform-specific scripts for compilation  
 
-
-If you're running on Axion, the CMake output should include hardware-specific optimizations targeting the Neoverse V2 architecture. These optimizations are crucial for achieving high performance on Axion:
+On Google Cloud Axion, the output should show hardware-specific optimizations for the Neoverse V2 architecture:
 
 ```output
 -- ARM feature DOTPROD enabled
@@ -51,17 +51,13 @@ If you're running on Axion, the CMake output should include hardware-specific op
 -- Adding CPU backend variant ggml-cpu: -mcpu=neoverse-v2+crc+sve2-aes+sve2-sha3+dotprod+i8mm+sve
 ```
 
-These features enable advanced CPU instructions that accelerate inference performance on Arm64:
+These optimizations enable advanced Arm64 CPU instructions:
 
-- **DOTPROD: Dot Product**: hardware-accelerated dot product operations for neural network workloads
-
-- **SVE (Scalable Vector Extension)**: advanced vector processing capabilities that can handle variable-length vectors up to 2048 bits, providing significant performance improvements for matrix operations
-
-- **MATMUL_INT8**: integer matrix multiplication units optimized for transformers
-
-- **FMA**: fused multiply-add operations to speed up floating-point math
-
-- **FP16 vector arithmetic**: 16-bit floating-point vector operations to reduce memory use without compromising precision
+- **DOTPROD**: hardware-accelerated dot product operations  
+- **SVE (Scalable Vector Extension)**: advanced vector processing for large-scale matrix operations  
+- **MATMUL_INT8**: optimized integer matrix multiplication for transformers  
+- **FMA**: fused multiply-add for faster floating-point math  
+- **FP16 vector arithmetic**: reduced memory use with half-precision floats  
 
 ## Compile the project
 
@@ -69,22 +65,23 @@ These features enable advanced CPU instructions that accelerate inference perfor
 cmake --build . --config Release -j16
 ```
 
-This command compiles the Llama.cpp source code:
+This compiles Llama.cpp with the following options:
 
-- `--build .` tells CMake to build the project in the current directory
-- `--config Release` enables optimizations and strips debug symbols
-- `-j16` runs the build with 16 parallel jobs, which speeds up compilation on multi-core systems like Axion.
+- `--build .` builds in the current directory  
+- `--config Release` enables compiler optimizations  
+- `-j16` runs 16 parallel jobs for faster compilation on multi-core Axion systems  
 
-The build process compiles the C++ source code into executable binaries optimized for the Arm64 architecture. Compilation typically takes under a minute.
+The build produces Arm64-optimized binaries in under a minute.
 
-## Key binaries after compilation 
+## Key Llama.cpp binaries after compilation
 
-After compilation, you'll find several key command-line tools in the `bin` directory:
-- `llama-cli`: the main inference executable for running LLaMA models
-- `llama-server`: a web server for serving model inference over HTTP
-- `llama-quantize`: a tool for model quantization to reduce memory usage
-- Additional utilities for model conversion and optimization
+After compilation, you’ll find key tools in the `bin` directory:
 
-You can find more tools and usage details in the llama.cpp [GitHub repository](https://github.com/ggml-org/llama.cpp/tree/master/tools).
+- `llama-cli`: main inference executable  
+- `llama-server`: HTTP server for model inference  
+- `llama-quantize`: tool for quantization to reduce memory usage  
+- Additional utilities for model conversion and optimization  
 
-These binaries are specifically optimized for the Arm architecture and will provide excellent performance on your Axion instance.
+See the [Llama.cpp GitHub repository](https://github.com/ggml-org/llama.cpp/tree/master/tools) for details.
+
+These binaries are optimized for Arm64 and provide excellent performance on Google Cloud Axion.

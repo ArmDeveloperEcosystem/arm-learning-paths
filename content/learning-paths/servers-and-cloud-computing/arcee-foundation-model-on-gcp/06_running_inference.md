@@ -1,15 +1,16 @@
 ---
-title: Run inference with AFM-4.5B
+title: Run inference with AFM-4.5B using Llama.cpp
 weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Now that you have the [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B) models in GGUF format, you can run inference using various Llama.cpp tools. In this step, you'll explore how to generate text, benchmark performance, and interact with the model through both command-line and HTTP APIs.
+Now that you have the [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B) models in GGUF format, you can run inference on Google Cloud Axion Arm64 using various Llama.cpp tools. In this step, you’ll generate text, benchmark performance, and interact with the model through both command-line and HTTP APIs.
 
+## Use llama-cli for interactive inference
 
-## Use llama-cli for interactive text generation
+The `llama-cli` tool provides an interactive command-line interface for text generation. This is useful for quick testing and exploring model behavior.
 
 The `llama-cli` tool provides an interactive command-line interface for text generation. This is ideal for quick testing and hands-on exploration of the model's behavior.
 
@@ -19,14 +20,14 @@ The `llama-cli` tool provides an interactive command-line interface for text gen
 bin/llama-cli -m models/afm-4-5b/afm-4-5B-Q8_0.gguf -n 256 --color
 ```
 
-This command starts an interactive session:
+This starts an interactive session:
 
-- `-m` (model file path) specifies the model file to load
-- `-n 256` sets the maximum number of tokens to generate per response
-- `--color` enables colored terminal output
-- The tool will prompt you to enter text, and the model will generate a response
+- `-m`: specifies the model file to load  
+- `-n 256`: sets the maximum tokens per response  
+- `--color`: enables colored terminal output  
+- You’ll be prompted to enter text, and the model generates a response  
 
-In this example, `llama-cli` uses 16 vCPUs. You can try different values with `-t <number>`.
+By default, `llama-cli` uses 16 vCPUs. You can change this with `-t <number>`.
 
 ### Example interactive session
 
@@ -63,28 +64,30 @@ llama_perf_context_print:       total time =   17446.13 ms /   375 tokens
 llama_perf_context_print:    graphs reused =          0
 ```
 
-In this example, the 8-bit model running on 16 threads generated 375 tokens, at ~37 tokens per second (`eval time`).
+Here, the 8-bit model on 16 threads produced ~37 tokens per second.
 
-## Run a non-interactive prompt
+## Run a one-time prompt with llama-cli
 
-You can also use `llama-cli` in one-shot mode with a prompt:
+You can run `llama-cli` in non-interactive mode:
 
 ```bash
 bin/llama-cli -m models/afm-4-5b/afm-4-5B-Q4_0.gguf -n 256 --color -no-cnv -p "Give me a brief explanation of the attention mechanism in transformer models."
 ```
+
 This command:
-- Loads the 4-bit model
-- Disables conversation mode using  `-no-cnv`
-- Sends a one-time prompt using `-p`
-- Prints the generated response and exits
 
-The 4-bit model delivers faster generation—expect around 60 tokens per second on Axion. This shows how a more aggressive quantization recipe helps deliver faster performance.
+- Loads the 4-bit model  
+- Disables conversation mode with `-no-cnv`  
+- Sends a one-time prompt with `-p`  
+- Prints the response and exits  
 
-## Use llama-server for API access
+On Axion, the 4-bit model generates ~60 tokens per second, showing the speed benefit of aggressive quantization.
 
-The `llama-server` tool runs the model as a web server compatible with the OpenAI API format, allowing you to make HTTP requests for text generation. This is useful for integrating the model into applications or for batch processing.
+## Use llama-server for API-based inference
 
-## Start the server
+The `llama-server` tool runs the model as a web server with an OpenAI-compatible API. This allows integration with applications or batch jobs via HTTP requests.
+
+### Start llama-server
 
 ```bash
 bin/llama-server -m models/afm-4-5b/afm-4-5B-Q4_0.gguf \
@@ -99,16 +102,14 @@ This starts a local server that:
 - Accepts connections on port 8080
 - Supports a 4096-token context window
 
-### Make an API request
+### Send an API request
 
 Once the server is running, you can make requests using curl, or any HTTP client. 
 
 Open a new terminal on the Google Cloud instance, and run:
 
 ```bash
-curl -X POST http://localhost:8080/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{
+curl -X POST http://localhost:8080/v1/chat/completions   -H "Content-Type: application/json"   -d '{
     "model": "afm-4-5b",
     "messages": [
       {
@@ -162,8 +163,8 @@ The response includes the model’s reply and performance metrics:
 
 You’ve now successfully:
 
-- Run [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B) in interactive and non-interactive modes
-- Tested performance with different quantized models
-- Served the model as an OpenAI-compatible API endpoint
+- Run [AFM-4.5B](https://huggingface.co/arcee-ai/AFM-4.5B) in interactive and one-shot modes  
+- Compared performance with different quantized models on Axion  
+- Served the model as an OpenAI-compatible API endpoint  
 
-You can also interact with the server using Python with the [OpenAI client library](https://github.com/openai/openai-python), enabling streaming responses, and other features.
+You can also use the [OpenAI Python client](https://github.com/openai/openai-python) to send requests programmatically, enabling features like streaming responses.
