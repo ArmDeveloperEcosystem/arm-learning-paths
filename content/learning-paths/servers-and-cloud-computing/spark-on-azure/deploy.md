@@ -6,11 +6,12 @@ weight: 5
 layout: learningpathall
 ---
 
-## Install Apache Spark
+## Install Apache Spark on Azure Cobalt 100
 Within your running docker container image or your custom Azure Linux VM, follow the instructions to install Spark.
 
 Start by installing Java, Python, and other essential tools: 
-### Install Required Packages 
+
+## Install Java, Python, and tools for Apache Spark
 
 ```console
 sudo tdnf update -y
@@ -38,7 +39,7 @@ The output will look like:
 Python 3.12.9
 ```
 
-### Install Apache Spark on Arm
+## Download and install Apache Spark on Azure Cobalt 100 
 
 You can now download and configure Apache Spark on your Arm-based machine:
 
@@ -47,7 +48,7 @@ wget https://downloads.apache.org/spark/spark-3.5.6/spark-3.5.6-bin-hadoop3.tgz
 tar -xzf spark-3.5.6-bin-hadoop3.tgz
 sudo mv spark-3.5.6-bin-hadoop3 /opt/spark
 ```
-### Set Environment Variables 
+## Configure environment variables for Apache Spark
 Add this line to ~/.bashrc or ~/.zshrc to make the change persistent across terminal sessions.
 
 ```cosole
@@ -61,7 +62,7 @@ Apply changes immediately in your running shell:
 source ~/.bashrc
 ```
 
-### Verify Spark Installation
+## Verify Apache Spark installation on Azure Cobalt 100
 
 ```console
 spark-submit --version

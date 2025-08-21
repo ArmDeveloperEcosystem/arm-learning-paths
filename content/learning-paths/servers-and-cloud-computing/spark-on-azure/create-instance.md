@@ -1,30 +1,31 @@
 ---
-title: Create an Arm based cloud virtual machine using Azure Cobalt 100
+title: Create an Azure Cobalt 100 Arm64 virtual machine
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Introduction
+## Create an Azure Cobalt 100 Arm64 VM using the Azure portal
 
-There are several ways you can create an Azure Cobalt 100 Arm-basedvirtual machine : the Microsoft Azure console, the Azure CLI tool, or using your choice of IaC (Infrastructure as Code). In this Learning Path you will use the Azure console to create a virtual machine with Arm-based Azure Cobalt 100 Processor.
+You can create an Azure Cobalt 100 Arm64 virtual machine in several ways, including the Azure portal, the Azure CLI, or an Infrastructure as Code (IaC) tool. 
 
+In this Learning Path, you’ll use the Azure portal to create a VM with the Cobalt 100 processor, following a process similar to creating any other virtual machine in Azure.
 
-#### Create an Arm-based Azure Virtual Machine
+## Step-by-step: create the virtual machine
 
-Creating a virtual machine based on Azure Cobalt 100 is no different from creating any other virtual machine in Azure. To create an Azure virtual machine, launch the Azure portal and navigate to Virtual Machines.
+1. In the Azure portal, go to **Virtual Machines** and select **Create**.  
+2. Enter details such as **Name** and **Region**.  
+3. Choose the image for your virtual machine (for example, Ubuntu 24.04) and select **Arm64** as the architecture.  
+4. In the **Size** field, select **See all sizes**, then choose the D-Series v6 family of virtual machines.  
+5. Select **D4ps_v6** from the list and create the virtual machine.  
 
-Select “Create”, and fill in the details such as Name, and Region. Choose the image for your virtual machine (for example – Ubuntu 24.04) and select “Arm64” as the virtual machine architecture.
+![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](./instance-new.png "Figure 1: Create an Azure Cobalt 100 Arm64 VM in the Azure portal")
 
-In the “Size” field, click on “See all sizes” and select the D-Series v6 family of Virtual machine. Select “D4ps_v6” from the list and create the virtual machine.
-
-![Instance Screenshot](./instance-new.png)
-
-The virtual machine should be ready and running; You can then SSH into the virtual machine using the generated PEM key, along with the Public IP address of the running instance.
+Once the Arm64 virtual machine is running, you can SSH into it using the generated PEM key and the public IP address of the instance.
 
 {{% notice Note %}}
 
-To learn more about Arm-based virtual machine in Azure, refer to “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).
+To learn more about Arm-based virtual machines in Azure, see the Learning Path [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).
 
 {{% /notice %}}

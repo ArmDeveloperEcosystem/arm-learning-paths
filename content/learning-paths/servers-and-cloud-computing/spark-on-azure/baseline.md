@@ -1,16 +1,18 @@
 ---
-title: Functional Validation
+title: Validate Apache Spark on Azure Cobalt 100 Arm64 VMs
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Run a functional test of Apache Spark on Azure Cobalt 100 
 
-## Functional Validation
-Since Apache Spark is installed successfully on your Arm virtual machine, let's now perform simple baseline testing to validate that Spark runs correctly and gives expected output.
+After installing Apache Spark on your Arm64 virtual machine, you can perform simple baseline testing to validate that Spark runs correctly and produces the expected output.
 
-Using a file editor of your choice, create a file named `test_spark.py`, and add the below content to it:
+## Create a test Spark application
+
+Use a text editor of your choice to create a file named `test_spark.py` with the following content:
 
 ```python
 from pyspark.sql import SparkSession
@@ -19,11 +21,18 @@ df = spark.createDataFrame([(1, "ARM64"), (2, "Azure")], ["id", "name"])
 df.show()
 spark.stop()
 ```
-Execute with:
+
+## Run the Spark application
+
+Execute the test script with:
+
 ```console
 spark-submit test_spark.py
 ```
-You should see an output similar to:
+
+## Example output
+
+You should see output similar to:
 
 ```output
 25/07/22 05:16:00 INFO CodeGenerator: Code generated in 10.545923 ms
@@ -35,7 +44,9 @@ You should see an output similar to:
 |  2|Azure|
 +---+-----+
 ```
-Output summary:
 
-- The output shows Spark successfully generated code **(10.5ms)** and executed a simple DataFrame operation.
-- Displaying the test data **[1, "ARM64"]** and **[2, "Azure"]** before cleanly shutting down **(exitCode 0)**. This confirms a working Spark deployment on Arm64.
+## Output summary
+
+- Spark successfully generated code (10.5 ms) and executed a simple DataFrame operation.  
+- The test data **[1, "ARM64"]** and **[2, "Azure"]** was displayed before cleanly shutting down (exitCode 0).  
+- This confirms a working Spark deployment on Arm64.  

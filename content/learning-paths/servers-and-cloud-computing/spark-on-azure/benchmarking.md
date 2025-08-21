@@ -1,40 +1,51 @@
 ---
-title: Benchmark Spark
+title: Benchmark Apache Spark 
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Apache Spark Internal Benchmarking
-Apache Spark includes internal micro-benchmarks to evaluate the performance of core components like SQL execution, aggregation, joins, and data source reads. These benchmarks are helpful for comparing platforms such as x86_64 vs Arm64.
-Below are the steps to run Spark’s built-in SQL benchmarks using the SBT-based framework.
+## Benchmark Apache Spark on Azure Cobalt 100 Arm-based instances and x86_64 instances
 
-1. Clone the Apache Spark source code
-```console
-git clone https://github.com/apache/spark.git
-```
-This downloads the full Spark source including internal test suites and the benchmarking tools.
+Apache Spark includes internal micro-benchmarks to evaluate the performance of core components such as SQL execution, aggregation, joins, and data source reads. These benchmarks are useful for comparing performance on Arm64 and x86_64 platforms in Azure.
 
-2. Checkout the desired Spark version
-```console
-cd spark/ && git checkout v4.0.0
-```
-Switch to the stable Spark 4.0.0 release, which supports the latest internal benchmarking APIs.
+This section shows you how to run Spark’s built-in SQL benchmarks using the SBT-based framework.
 
-3. Build Spark with benchmarking profile enabled
-```console
-./build/sbt -Pbenchmarks clean package
-```
-This compiles Spark and its dependencies, enabling the benchmarks build profile for performance testing.
+## Steps to run Spark benchmarks
 
-4. Run a built-in benchmark suite
-```console
-./build/sbt -Pbenchmarks "sql/test:runMain org.apache.spark.sql.execution.benchmark.JoinBenchmark"
-```
-This executes the `JoinBenchmark`, which measures the performance of various SQL join operations (e.g., SortMergeJoin, BroadcastHashJoin) under different query plans. It helps evaluate how Spark SQL optimizes and executes join strategies, especially with and without WholeStageCodegen, a technique that compiles entire query stages into efficient bytecode for faster execution.
+1. Clone the Apache Spark source code  
 
-The output should look similar to:
+   ```console
+   git clone https://github.com/apache/spark.git
+   ```
+   This downloads the full Spark source code, including test suites and benchmarking tools  
+
+2. Checkout the desired Spark version  
+
+   ```console
+   cd spark/ && git checkout v4.0.0
+   ```
+   Switch to the stable Spark 4.0.0 release, which supports the latest benchmarking APIs  
+
+3. Build Spark with the benchmarking profile  
+
+   ```console
+   ./build/sbt -Pbenchmarks clean package
+   ```
+   This compiles Spark and its dependencies, enabling the benchmarking build profile  
+
+4. Run a built-in benchmark suite  
+
+   ```console
+   ./build/sbt -Pbenchmarks "sql/test:runMain org.apache.spark.sql.execution.benchmark.JoinBenchmark"
+   ```
+   This runs the `JoinBenchmark`, which measures the performance of SQL join operations such as `SortMergeJoin` and `BroadcastHashJoin`. It evaluates how Spark SQL optimizes join strategies, especially with and without WholeStageCodegen  
+
+## Example Apache Spark benchmark output
+
+You should see output similar to the following:
+
 ```output
 [info] Running benchmark: Join w long
 [info]   Running case: Join w long wholestage off
@@ -170,7 +181,7 @@ The output should look similar to:
 [info] broadcast nested loop join wholestage on           18857          18928          84          1.1         899.2       1.4X
 [success] Total time: 1644 s (27:24), completed Jul 25, 2025, 6:27:46 AM
 ```
-### Benchmark Results Table Explained:
+## Benchmark Results Table Explained:
 
 - **Best Time (ms):** Fastest execution time observed (in milliseconds).
 - **Avg Time (ms):** Average time across all iterations.
@@ -180,11 +191,11 @@ The output should look similar to:
 - **Relative Speed comparison:** baseline (1.0X) is the slower version.
 
 {{% notice Note %}}
-Benchmarking was performed in both an Azure Linux 3.0 Docker container and an Azure Linux 3.0 virtual machine. The benchmark results were found to be comparable.
+Benchmark results on Azure Linux 3.0 were consistent across both Docker containers and virtual machines.
 {{% /notice %}}
 
 
-### Benchmark summary on Arm64:
+## Benchmark summary on Arm64:
 For easier comparison, shown here is a summary of benchmark results collected on an Arm64 `D4ps_v6` Azure virtual machine created from a custom Azure Linux 3.0 image using the AArch64 ISO.
 | Benchmark                              | Wholestage | Best Time (ms) | Avg Time (ms) | Stdev (ms) | Rate (M/s) | Per Row (ns) | Relative |
 |----------------------------------------|------------|----------------|----------------|------------|-------------|----------------|----------|
@@ -211,7 +222,7 @@ For easier comparison, shown here is a summary of benchmark results collected on
 | Broadcast nested loop join             | Off        | 26847          | 26870          | 32         | 0.8         | 1280.2         | 1.0X     |
 |                                        | On         | 18857          | 18928          | 84         | 1.1         | 899.2          | 1.4X     |
 
-### Benchmark summary on x86_64:
+## Benchmark summary on x86_64:
 Shown here is a summary of the benchmark results collected on an `x86_64` `D4s_v4` Azure virtual machine using the Azure Linux 3.0 image published by Ntegral Inc.
 | Benchmark                                | Wholestage | Best Time (ms) | Avg Time (ms) | Stdev (ms) | Rate (M/s) | Per Row (ns) | Relative |
 |------------------------------------------|------------|----------------|----------------|------------|-------------|----------------|----------|
@@ -239,13 +250,13 @@ Shown here is a summary of the benchmark results collected on an `x86_64` `D4s_v
 |                                           | On         | 31254          | 31346          | 78         | 0.7         | 1490.3         | 1.2X     |
 
 
-### Benchmark comparison insights
+## Benchmark comparison insights
 
-When you compare the benchmark results you will notice that on the Azure Linux Arm64 virtual machine:
+When comparing the results on Arm64 vs x86_64 virtual machines:
 
-- Whole-stage codegen improves performance by up to 2.8× on complex joins (e.g., with long columns).
-- Simple joins (e.g., on integers) show negligible performance gain, remains comparable to performance on `x86_64`.
-- Broadcast and shuffle-based joins benefit with 1.4× to 1.5× improvements.
-- Overall enabling whole-stage codegen consistently improves performance across most join types.
+- Whole-stage codegen improves performance by up to 2.8× on complex joins  
+- Simple joins, such as integer joins, show negligible performance differences  
+- Broadcast and shuffle-based joins achieve 1.4× to 1.5× improvements  
+- Enabling whole-stage codegen consistently improves performance across most join types  
 
-You have successfully learnt how to deploy Apache Spark on an Azure Cobalt 100 virtual machine and measure the performance uplift. 
+You have now benchmarked Apache Spark on an Azure Cobalt 100 Arm64 virtual machine and compared results with x86_64.
