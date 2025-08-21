@@ -1,12 +1,12 @@
 ---
-title: Benchmark Apache Spark on Azure Cobalt 100 Arm64 and x86_64
+title: Benchmark Apache Spark 
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Benchmark Apache Spark on Azure Cobalt 100 Arm64 and x86_64
+## Benchmark Apache Spark on Azure Cobalt 100 Arm-based instances and x86_64 instances
 
 Apache Spark includes internal micro-benchmarks to evaluate the performance of core components such as SQL execution, aggregation, joins, and data source reads. These benchmarks are useful for comparing performance on Arm64 and x86_64 platforms in Azure.
 
