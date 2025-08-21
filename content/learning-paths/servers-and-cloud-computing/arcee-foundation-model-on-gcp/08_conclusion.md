@@ -33,7 +33,7 @@ The benchmarking results demonstrate the power of quantization and Arm-based com
 - **Cost optimization** – lower memory needs enable smaller, more affordable instances
 - **Quality preservation** – the quantized models maintain strong perplexity scores, showing minimal quality loss
 
-## Benefits of Google Cloud Axion Arm64
+## Benefits of Google Cloud Axion 
 
 Google Cloud Axion processors, based on Arm Neoverse V2, provide:
 
