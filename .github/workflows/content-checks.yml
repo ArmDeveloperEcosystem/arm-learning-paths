@@ -61,6 +61,7 @@ jobs:
           retention-days: 5 # Default is 90 days
       - name: Scan for profanities
         run: |
+          pip install better_profanity
           python tools/profanity.py
           cat profanity_log.txt
 

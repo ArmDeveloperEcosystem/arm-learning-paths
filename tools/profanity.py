@@ -1,7 +1,6 @@
 import os
 from better_profanity import profanity
-import argparse
-import sys
+
 def load_excluded_words(file_path):
     with open(file_path, 'r') as f:
         excluded_words = [word.strip() for word in f.readlines()]
