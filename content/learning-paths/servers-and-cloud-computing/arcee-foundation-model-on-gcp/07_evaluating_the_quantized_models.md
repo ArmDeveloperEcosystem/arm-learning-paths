@@ -10,7 +10,7 @@ layout: learningpathall
 
 Use the [`llama-bench`](https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench) tool to measure model performance on Google Cloud Axion Arm64, including inference speed and memory usage.
 
-## Benchmark full, 8-bit, and 4-bit models
+## Benchmark half-precision floating point, integer 8-bit, and integer 4-bit models
 
 Run benchmarks on multiple versions of AFM-4.5B:
 
