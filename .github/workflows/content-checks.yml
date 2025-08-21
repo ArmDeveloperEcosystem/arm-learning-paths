@@ -59,6 +59,17 @@ jobs:
           name: spellcheck-output
           path: spellcheck-output.txt
           retention-days: 5 # Default is 90 days
+      - name: Scan for profanities
+        run: |
+          python tools/profanity.py
+          cat profanity_log.txt
+
+      - name: Export profanities
+        uses: actions/upload-artifact@v4
+        with:
+          name: profanities
+          path: profanity_log.txt
+          retention-days: 5
 
       - name: Scan for malware
         run: |
