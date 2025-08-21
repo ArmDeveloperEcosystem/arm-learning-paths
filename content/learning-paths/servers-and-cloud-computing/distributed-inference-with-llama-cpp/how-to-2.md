@@ -18,7 +18,7 @@ For this demonstration, the experimental setup includes:
 
 - Total number of instances: 3
 - Instance type: c8g.4xlarge
-- Model: model.gguf (llama-3.1-70B_Q4_0, ~38GB when quantized to 4 bits)
+- Model: model.gguf (Llama-3.1-70B_Q4_0, ~38GB when quantized to 4 bits)
 
 One of the three nodes serves as the master node, which physically hosts the model file. The other two nodes act as worker nodes. In `llama.cpp`, remote procedure calls (RPC) offload both the model and the computation over TCP connections between nodes. The master node forwards inference requests to the worker nodes, where computation is performed.
 
