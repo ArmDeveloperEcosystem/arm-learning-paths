@@ -1,12 +1,12 @@
 ---
-title: Install Apache Spark on Azure Cobalt 100 Arm64 processors
+title: Install Apache Spark on Azure Cobalt 100 processors
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Install Apache Spark on Azure Cobalt 100 Arm64
+## Install Apache Spark on Azure Cobalt 100
 Within your running docker container image or your custom Azure Linux VM, follow the instructions to install Spark.
 
 Start by installing Java, Python, and other essential tools: 
@@ -39,7 +39,7 @@ The output will look like:
 Python 3.12.9
 ```
 
-## Download and install Apache Spark on Azure Cobalt 100 (Arm64)
+## Download and install Apache Spark on Azure Cobalt 100 
 
 You can now download and configure Apache Spark on your Arm-based machine:
 
