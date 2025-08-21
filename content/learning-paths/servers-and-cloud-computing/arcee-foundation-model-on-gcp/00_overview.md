@@ -1,5 +1,5 @@
 ---
-title: Overview of AFM-4.5B deployment on Google Cloud Axion with Llama.cpp
+title: AFM-4.5B deployment on Google Cloud Axion with Llama.cpp
 weight: 2
  
 ### FIXED, DO NOT MODIFY
