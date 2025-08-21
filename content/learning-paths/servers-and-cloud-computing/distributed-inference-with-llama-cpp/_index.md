@@ -1,5 +1,5 @@
 ---
-title: Run distributed inference with llama.cpp on Arm-based AWS instances
+title: Run distributed inference with llama.cpp on Arm-based AWS Graviton4 instances
 
 minutes_to_complete: 30
 
