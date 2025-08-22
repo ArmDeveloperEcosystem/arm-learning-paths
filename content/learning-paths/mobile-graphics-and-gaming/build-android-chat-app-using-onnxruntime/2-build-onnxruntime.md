@@ -30,7 +30,7 @@ You might be able to use a later commit. These steps have been tested with the c
 
 ### Build for Android CPU
 
-You use the Ninja generator to build on Windows for Android. First, set JAVA_HOME to the path to your JDK install. ONNX Runtime compiles well with JDK 17. If you face issuses with compilation please check your JDK version.
+You use the Ninja generator to build on Windows for Android. First, set JAVA_HOME to the path to your JDK install. ONNX Runtime compiles well with JDK 17. If you face issues with compilation please check your JDK version.
 
 ```bash
 $env:JAVA_HOME="C:\Program Files\Microsoft\jdk-17.0.16.8-hotspot\"
