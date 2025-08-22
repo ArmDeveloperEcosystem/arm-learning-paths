@@ -60,9 +60,9 @@ After cloning the repository, the project's submodules are updated, and two scri
 git clone https://github.com/pytorch/executorch.git
 cd executorch
 git submodule sync
-git submodule update --init
+git submodule update --init --recursive
 ./install_executorch.sh
-./examples/models/llama2/install_requirements.sh
+./examples/models/llama/install_requirements.sh
 ```
 
 When these scripts finish successfully, ExecuTorch is all set up. That means it's time to dive into the world of Llama models!

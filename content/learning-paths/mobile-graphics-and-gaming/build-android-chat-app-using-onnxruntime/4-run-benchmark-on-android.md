@@ -19,17 +19,16 @@ cd onnxruntime-genai
 copy src\ort_genai.h examples\c\include\
 copy src\ort_genai_c.h examples\c\include\
 cd examples\c
-mkdir build
-cd build
 ```
 Run the `cmake` command as shown:
 
 ```bash
-cmake -DCMAKE_TOOLCHAIN_FILE=C:\Users\$env:USERNAME\AppData\Local\Android\Sdk\ndk\27.0.12077973\build\cmake\android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-27 -DCMAKE_BUILD_TYPE=Release -G "Ninja" ..
-ninja
+cmake -G "Ninja" -S . -B build -DMODEL_QA=ON -DCMAKE_TOOLCHAIN_FILE=C:\Users\$env:USERNAME\AppData\Local\Android\Sdk\ndk\27.3.13750724\build\cmake\android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-27 -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS="-L../lib"
+cmake --build build --parallel --config Release 
+cd build
 ```
 
-After successful build, a binary program called `phi3` will be created.
+After successful build, a binary program called `model_qa` will be created.
 
 ### Prepare Phi-3-mini model
 
@@ -63,7 +62,7 @@ You should see your device listed to confirm it is connected.
 
 ``` bash
 adb push cpu-int4-rtn-block-32-acc-level-4 /data/local/tmp
-adb push .\phi3 /data/local/tmp
+adb push .\model_qa /data/local/tmp
 adb push onnxruntime-genai\build\Android\Release\libonnxruntime-genai.so /data/local/tmp
 adb push onnxruntime\build\Windows\Release\libonnxruntime.so /data/local/tmp
 ```
@@ -75,9 +74,9 @@ Use the runner to execute the model on the phone with the `adb` command:
 ``` bash
 adb shell
 cd /data/local/tmp
-chmod 777 phi3
+chmod 777 model_qa
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/local/tmp
-./phi3 cpu-int4-rtn-block-32-acc-level-4
+./model_qa cpu-int4-rtn-block-32-acc-level-4
 ```
 
 This will allow the runner program to load the model. It will then prompt you to input the text prompt to the model. After you enter your input prompt, the text output by the model will be displayed. On completion, performance metrics similar to those shown below should be displayed:
