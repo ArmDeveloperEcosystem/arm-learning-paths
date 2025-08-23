@@ -1,12 +1,12 @@
 ---
-title: Deep dive into individual operators
+title: Deep dive into individual operator
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Deep dive into individual operators
+# Deep dive into individual operator
 The session provides a guide of how to use the Streamline Annotation Channel feature to analyze running time of each node in the compute graph.
 More information about Streamline Annotation Channel can be found here https://developer.arm.com/documentation/101816/9-7/Annotate-your-code/User-space-annotations/Group-and-Channel-annotations?lang=en 
 
@@ -90,18 +90,21 @@ Then build llama-cli executable, run llama-cli and collect profiling data with S
 
 ## Analyze the data with Streamline
 String annotations are displayed as text overlays inside the relevant channels in the details panel of the Timeline view, for example inside Channel 0 in the following screenshot. 
-
-![text#center](images/deep_dive_1.png "Figure 15. Annotation Channel")
+    <p align="center">
+      <img src="images/deep_dive_1.png" alt="Alt text" width="90%"/>
+    </p>
 
 The letter A is displayed in the process list to indicate the presence of annotations. 
 String annotations are also displayed in the Message column in the Log view.
-
-![text#center](images/deep_dive_2.png "Figure 16. Annotation Channel")
-
+    <p align="center">
+      <img src="images/deep_dive_2.png" alt="Alt text" width="80%"/>
+    </p>
 ### View of individual operators at Prefill stage
 
 The screenshot of annotation channel view at Prefill stage is shown as below,
-![text#center](images/prefill_annotation_channel.png "Figure 17. Annotation Channel")
+    <p align="center">
+      <img src="images/prefill_annotation_channel.png" alt="Alt text" width="90%"/>
+    </p>
 
 Note that the name of operator in the screenshot above is manually marked. If the name of operator needs to be shown instead of Channel number by Streamline, ANNOTATE_NAME_CHANNEL can be added to ggml_graph_compute_thread function. 
 This annotation macro is defined as,  
@@ -115,18 +118,25 @@ For example,
 ```
 The code above sets the name of annotation channel 0 as ‘MUL_MAT_GEMV’, the name of annotation channel 1 as ‘MUL_MAT_GEMM’.
 We can get more detailed information by zooming in the view,
-![text#center](images/prefill_annotation_channel_2.png "Figure 18. Annotation Channel")
+    <p align="center">
+      <img src="images/prefill_annotation_channel_2.png" alt="Alt text" width="90%"/>
+    </p>
 
 When moving the cursor to the Annotation channel, the tensor node name, the name of operation and the dimension of source tensor nodes will be shown.
-![text#center](images/prefill_annotation_channel_3.png "Figure 19. Annotation Channel")
-
+    <p align="center">
+      <img src="images/prefill_annotation_channel_3.png" alt="Alt text" width="60%"/>
+    </p>
 The screenshot above shows a GGML_OP_MUL_MAT operator of FFN_UP node, whose source tensors dimension is [1024, 2816] and [1024, 68].
 The view clearly shows that the major time was spent on MUL_MAT GEMM operation of attention layers and FFN layers at Prefill stage. There is a large MUL_MAT GEMV operation at result output linear layer. Other operators such as MUL, Softmax, Norm, RoPE do not take significant time. 
 
 ### View of individual operators at Decode stage
 The screenshot of annotation channel view at Decode stage is shown as below,
-![text#center](images/decode_annotation_channel.png "Figure 20. Annotation Channel")
+    <p align="center">
+      <img src="images/decode_annotation_channel.png" alt="Alt text" width="80%"/>
+    </p>
 We can get more detailed information by zooming in the view,
-![text#center](images/decode_annotation_channel_2.png "Figure 21. Annotation Channel")
+    <p align="center">
+      <img src="images/decode_annotation_channel_2.png" alt="Alt text" width="80%"/>
+    </p>
 
 The view shows that the major time was spent on MUL_MAT GEMV operations of attention layers and FFN layers at Decode stage. Comparing with Prefill stage, there is no GEMM at those layers, GEMV operations are performed instead. The large MUL_MAT GEMV operation at result output linear layer takes more significant portion of time at Decode stage, since the time spent on each token generation at Decode stage is less due to utilization of KV cache. It corresponds to the percentage of execution time of the function ggml_vec_dot_q6_K_q8_K that we observed in previous session.
