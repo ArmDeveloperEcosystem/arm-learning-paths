@@ -7,12 +7,12 @@ layout: learningpathall
 ---
 
 # Analyzing token generation at Prefill and Decode stage
-We use Annotation Marker feature of Streamline and integrate the Annotation Marker generation code to the llama.cpp project. We can have a visible token generation view at Prefill and Decode stage.
-You can find more information about Annotation Marker feature [here](https://developer.arm.com/documentation/101816/9-7/Annotate-your-code?lang=en). 
+Annotation Marker feature of Streamline is used and the Annotation Marker generation code is integrated to the llama.cpp project. We can have a visible token generation view at Prefill and Decode stage.
+You can find more information about Annotation Marker feature here, https://developer.arm.com/documentation/101816/9-7/Annotate-your-code?lang=en. 
 
 ## Steps of llama.cpp integration and Streamline setup
 
-### Step 1: Build Streamline Annotation Library
+### Step 1: Build Streamline Annotation library
 Install ArmDS or Arm Streamline on your host PC first. 
 You can get Streamline Annotation support code in the installation directory like Arm\Development Studio 2024.1\sw\streamline\gator\annotate. 
 You can also get the Annotation support  code here, https://github.com/ARM-software/gator/tree/main , please download the proper code that matches the version of your Streamline tool.
@@ -50,7 +50,7 @@ To add Annotation Markers to llama-cli, change the llama-cli code ./llama.cpp/to
 ```c
 #include "streamline_annotate.h" 
 ```
-And
+and
 
 ```c
           for (int i = 0; i < (int) embd.size(); i += params.n_batch) {
@@ -121,13 +121,13 @@ Gator ready
 Then launch the Streamline application on your host PC, connect to the gatord running on your Arm64 target with either TCP or ADB connection. You can select PMU events to be monitored at this point. 
 
 <p align="center">
-    <img src="images/streamline_capture.png" alt="Alt text" width="80%"/>
+    <img src="images/streamline_capture.png" alt="Alt text" width="50%"/>
 </p>
 
 Please set the path of llama-cli executable is specified for Streamline so that the debug info in the executable can be used for analysis.
 
 <p align="center">
-    <img src="images/streamline_capture_image.png" alt="Alt text" width="70%"/>
+    <img src="images/streamline_capture_image.png" alt="Alt text" width="40%"/>
 </p>
 
 You can click ‘Start Capture’ button on Streamline to start collecting data from the Arm64 target.
@@ -146,13 +146,13 @@ After a while, you can stop the Streamline data collection by clicking ‘Stop�
 From the timeline view of Streamline, we can see some Annotation Markers, since we add an Annotation Marker before llama_decode function, each Annotation Marker marks the start time of a token generation. 
 
 <p align="center">
-    <img src="images/annotation_marker_1.png" alt="Alt text" width="70%"/>
+    <img src="images/annotation_marker_1.png" alt="Alt text" width="50%"/>
 </p>
 
 We also add a string that includes the position input the tokens and number of input tokens to process in each Annotation Marker. The string can be shown when clicking those Annotation Markers. For example,
 
 <p align="center">
-    <img src="images/annotation_marker_2.png" alt="Alt text" width="40%"/>
+    <img src="images/annotation_marker_2.png" alt="Alt text" width="20%"/>
 </p>
 
 The number after ‘past’ indicates the position of input tokens, the number after ‘n_eval’ indicates the number of tokens to be processed this time.
@@ -179,13 +179,13 @@ All those PMU event counters indicate that it is compute-bound at Prefill stage,
 Now, let us further profile the code execution with Streamline. In the ‘Call Paths’ view of Streamline, we can see the percentage of running time of call stack.
 
 <p align="center">
-    <img src="images/annotation_prefill_call_stack.png" alt="Alt text" width="80%"/>
+    <img src="images/annotation_prefill_call_stack.png" alt="Alt text" width="70%"/>
 </p>
 
 In the ‘Functions’ view of Streamline, we can see the percentage of running time of functions.
 
 <p align="center">
-    <img src="images/annotation_prefill_functions.png" alt="Alt text" width="80%"/>
+    <img src="images/annotation_prefill_functions.png" alt="Alt text" width="70%"/>
 </p>
 
 As we can see, the function, graph_compute, takes the largest part of the running time. With understanding of llama.cpp code, it shows that large amounts of GEMM and GEMV operation take most of the time. 
@@ -193,11 +193,11 @@ As we can see, the function, graph_compute, takes the largest part of the runnin
     - At Prefill stage, kai_run_matmul_clamp_f32_qsi8d32p4x8_qsi4c32p4x8_16x4_neon_i8mm ukernel is used for GEMM MAT_MUL(Matrix Multiply) operators. It takes the advantage of NEON I8MM instruction. Since Prefill stage only takes small percentage of the whole time, the percentage of this function is small as shown in figures above. However, if we focus on Prefill stage only, with ‘Samplings’ view in Timeline. We can see kai_run_matmul_clamp_f32_qsi8d32p4x8_qsi4c32p4x8_16x4_neon_i8mm takes the largest part of the whole Prefill stage.
 
     <p align="center">
-      <img src="images/Prefill_only.png" alt="Alt text" width="80%"/>
+      <img src="images/Prefill_only.png" alt="Alt text" width="70%"/>
     </p>
 
     - At Decode stage, kai_run_matmul_clamp_f32_qsi8d32p1x8_qsi4c32p4x8_1x4x32_neon_dotprod ukernel is used for GEMV MAT_MUL operators. It takes advantage of NEON Dotprod instruction. If we focus on Decode stage only, we can see this function takes the second largest percentage. 
-    
+
     <p align="center">
       <img src="images/Decode_only.png " alt="Alt text" width="80%"/>
     </p>
