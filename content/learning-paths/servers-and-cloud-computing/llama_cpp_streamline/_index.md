@@ -17,8 +17,8 @@ prerequisites:
 author: Zenon(Zhilong) Xiu
 
 ### Tags
-skilllevels: 4
-subjects: PLACEHOLDER SUBJECT
+skilllevels: Advanced
+subjects: Performance and Architecture
 armips:
     - Cortex-A
     - Neoverse
