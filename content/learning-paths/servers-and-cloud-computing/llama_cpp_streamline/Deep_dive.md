@@ -124,7 +124,7 @@ We can get more detailed information by zooming in the view,
 
 When moving the cursor to the Annotation channel, the tensor node name, the name of operation and the dimension of source tensor nodes will be shown.
     <p align="center">
-      <img src="images/prefill_annotation_channel_3.png" alt="Alt text" width="60%"/>
+      <img src="images/prefill_annotation_channel_3.png" alt="Alt text" width="40%"/>
     </p>
 The screenshot above shows a GGML_OP_MUL_MAT operator of FFN_UP node, whose source tensors dimension is [1024, 2816] and [1024, 68].
 The view clearly shows that the major time was spent on MUL_MAT GEMM operation of attention layers and FFN layers at Prefill stage. There is a large MUL_MAT GEMV operation at result output linear layer. Other operators such as MUL, Softmax, Norm, RoPE do not take significant time. 
@@ -136,7 +136,7 @@ The screenshot of annotation channel view at Decode stage is shown as below,
     </p>
 We can get more detailed information by zooming in the view,
     <p align="center">
-      <img src="images/decode_annotation_channel_2.png" alt="Alt text" width="80%"/>
+      <img src="images/decode_annotation_channel_2.png" alt="Alt text" width="60%"/>
     </p>
 
 The view shows that the major time was spent on MUL_MAT GEMV operations of attention layers and FFN layers at Decode stage. Comparing with Prefill stage, there is no GEMM at those layers, GEMV operations are performed instead. The large MUL_MAT GEMV operation at result output linear layer takes more significant portion of time at Decode stage, since the time spent on each token generation at Decode stage is less due to utilization of KV cache. It corresponds to the percentage of execution time of the function ggml_vec_dot_q6_K_q8_K that we observed in previous session.
