@@ -2,7 +2,7 @@ name: Test Learning Path
 on: pull_request
 env:
   HUGO_VERSION: 0.130.0
-  
+
 jobs:
   Test-Pull-Request:
     runs-on: ubuntu-24.04-arm
@@ -58,6 +58,11 @@ jobs:
       - name: Install dependencies
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         run: pip install -r tools/requirements.txt
+      - name: Validate _index.md files
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        run: |
+          echo "Checking YAML fields for changed learning paths..."
+          python3 tools/verify_index_fields.py ${{ steps.changed-markdown-files.outputs.all_changed_files }}
       - name: Run test suite for all changed .md files
         id: run-suite
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
