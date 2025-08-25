@@ -1,7 +1,7 @@
 summary:
-  content_total: 401
+  content_total: 405
   content_with_all_tests_passing: 0
-  content_with_tests_enabled: 62
+  content_with_tests_enabled: 61
 sw_categories:
   automotive: {}
   cross-platform:
@@ -99,9 +99,6 @@ sw_categories:
       tests_and_status: []
     kubectl:
       readable_title: Kubectl
-      tests_and_status: []
-    llm-jetson-xavier:
-      readable_title: AWS CLI
       tests_and_status: []
     multipass:
       readable_title: Multipass
