@@ -62,7 +62,7 @@ jobs:
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         run: |
           echo "Checking YAML fields for changed learning paths..."
-          python3 tools/validate_index_fields.py ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+          python3 tools/verify_index_fields.py ${{ steps.changed-markdown-files.outputs.all_changed_files }}
       - name: Run test suite for all changed .md files
         id: run-suite
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
