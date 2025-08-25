@@ -1,13 +1,13 @@
 ---
-title: Use Streamline to analyze LLM running on CPU on llama.cpp
+title: Use Streamline to analyze LLM running on CPU with llama.cpp
 
 minutes_to_complete: 50
 
-who_is_this_for: Engineers who want to learn LLM inference on CPU, engineers who want to proflie and optimize llama.cpp code.
+who_is_this_for: Engineers who want to learn LLM inference on CPU or proflie and optimize llama.cpp code.
 
 learning_objectives: 
     - Be able to use Streamline to profile llama.cpp code
-    - Learn the execution of LLM on CPU cores
+    - Learn the execution of LLM on CPU
 
 prerequisites:
     - Understanding of llama.cpp
@@ -18,7 +18,7 @@ author: Zenon(Zhilong) Xiu
 
 ### Tags
 skilllevels: Advanced
-subjects: Performance and Architecture
+subjects: ML
 armips:
     - Cortex-A
     - Neoverse
