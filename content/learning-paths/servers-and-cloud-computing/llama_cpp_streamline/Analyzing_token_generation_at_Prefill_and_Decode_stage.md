@@ -1,12 +1,12 @@
 ---
-title: Analyzing token generation at Prefill and Decode stage
+title: Analyze token generation at Prefill and Decode stage
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Analyzing token generation at Prefill and Decode stage
+# Analyze token generation at Prefill and Decode stage
 To get a visible token generation view at Prefill and Decode stage, Annotation Marker feature of Streamline is used and the Annotation Marker generation code is integrated to the llama.cpp project. 
 You can find more information about Annotation Marker feature here, https://developer.arm.com/documentation/101816/9-7/Annotate-your-code?lang=en. 
 
@@ -122,15 +122,10 @@ Gator ready
 
 Then launch the Streamline application on your host PC, connect to the gatord running on your Arm64 target with either TCP or ADB connection. You can select PMU events to be monitored at this point. 
 
-<p align="center">
-    <img src="images/streamline_capture.png" alt="Alt text" width="50%"/>
-</p>
+![text#center](images/streamline_capture.png "Figure 6. Streamline Start Capture ")
 
 Set the path of llama-cli executable for Streamline so that its debug info can be used for analysis.
-
-<p align="center">
-    <img src="images/streamline_capture_image.png" alt="Alt text" width="40%"/>
-</p>
+![text#center](images/streamline_capture_image.png "Figure 7. Streamline image path")
 
 Click ‘Start Capture’ button on Streamline to start collecting data from the Arm64 target.
 
@@ -146,24 +141,15 @@ After a while, you can stop the Streamline data collection by clicking ‘Stop�
 
 ## Analyze the data with Streamline
 From the timeline view of Streamline, we can see some Annotation Markers. Since we add an Annotation Marker before llama_decode function, each Annotation Marker marks the start time of a token generation. 
-
-<p align="center">
-    <img src="images/annotation_marker_1.png" alt="Alt text" width="50%"/>
-</p>
+![text#center](images/annotation_marker_1.png "Figure 8. Annotation Marker")
 
 The string in the Annotation Marker can be shown when clicking those Annotation Markers. For example,
-
-<p align="center">
-    <img src="images/annotation_marker_2.png" alt="Alt text" width="20%"/>
-</p>
+![text#center](images/annotation_marker_2.png "Figure 9. Annotation String")
 
 The number after ‘past’ indicates the position of input tokens, the number after ‘n_eval’ indicates the number of tokens to be processed this time.
 
 As shown in the timeline view below, with help of Annotation Markers, we can clearly identify the Prefill stage and Decode stage. 
-
-<p align="center">
-    <img src="images/annotation_marker_prefill.png" alt="Alt text" width="100%"/>
-</p>
+![text#center](images/annotation_marker_prefill.png "Figure 10. Annotation Marker at Prefill and Decode stage")
 
 By checking the string of Annotation Marker, the first token generation at Prefill stage has 'past 0, n_eval 78', which means that the position of input tokens starts at 0 and there are 78 input tokens to be processed. 
 We can see that the first token generated at Prefill stage takes more time, since 78 input tokens have to be processed at Prefill stage, it performs lots of GEMM operations. At Decode stage, tokens are generated one by one at mostly equal speed, one token takes less time than that of Prefill stage, thanks to the effect of KV cache. At Decode stage, it performs many GEMV operations.
@@ -172,39 +158,24 @@ We can further investigate it with PMU event counters that are captured by Strea
 
 At Decode stage, the amount of computation is relatively less (since the time of each token is less), but the number of L3 cache refill/miss goes much higher.
 By monitoring other PMU events, Backend Stall Cycles and Backend Stall Cycles due to Memory stall, 
-
-<p align="center">
-    <img src="images/annotation_pmu_stall.png" alt="Alt text" width="100%"/>
-</p>
+![text#center](images/annotation_pmu_stall.png "Figure 11. Backend stall PMU event")
 
 We can see that at Prefill stage, Backend Stall Cycles due to Memory stall are only about 10% of total Backend Stall Cycles. However, at Decode stage, Backend Stall Cycles due to Memory stall are around 50% of total Backend Stall Cycles.
 All those PMU event counters indicate that it is compute-bound at Prefill stage and memory-bound at Decode stage.
 
 Now, let us further profile the code execution with Streamline. In the ‘Call Paths’ view of Streamline, we can see the percentage of running time of functions that are orginized in form of call stack.
-
-<p align="center">
-    <img src="images/annotation_prefill_call_stack.png" alt="Alt text" width="70%"/>
-</p>
+![text#center](images/annotation_prefill_call_stack.png "Figure 12. Call stack")
 
 In the ‘Functions’ view of Streamline, we can see the overall percentage of running time of functions.
-
-<p align="center">
-    <img src="images/annotation_prefill_functions.png" alt="Alt text" width="70%"/>
-</p>
+![text#center](images/annotation_prefill_functions.png "Figure 13. Functions view")
 
 As we can see, the function, graph_compute, takes the largest portion of the running time. It shows that large amounts of GEMM and GEMV operations take most of the time. With Qwen1_5-0_5b-chat-q4_0 model,
 * The computation (GEMM and GEMV) of Q, K, V vectors and most of FFN layers: their weights are with Q4_0 data type and the input activations are with FP32 data type. The computation is forwarded to KleidiAI trait by *ggml_cpu_extra_compute_forward*. KleidiAI ukernels implemented with NEON Dotprod and I8MM vector instructions are used to accelerate the computation.
     - At Prefill stage, *kai_run_matmul_clamp_f32_qsi8d32p4x8_qsi4c32p4x8_16x4_neon_i8mm* KleidiAI ukernel is used for GEMM (Matrix Multiply) operators. It takes the advantage of NEON I8MM instruction. Since Prefill stage only takes small percentage of the whole time, the percentage of this function is small as shown in figures above. However, if we focus on Prefill stage only, with ‘Samplings’ view in Timeline. We can see *kai_run_matmul_clamp_f32_qsi8d32p4x8_qsi4c32p4x8_16x4_neon_i8mm* takes the largest portion of the whole Prefill stage.
-
-    <p align="center">
-      <img src="images/Prefill_only.png" alt="Alt text" width="70%"/>
-    </p>
+    ![text#center](images/Prefill_only.png "Figure 14. Prefill only view")
 
     - At Decode stage, *kai_run_matmul_clamp_f32_qsi8d32p1x8_qsi4c32p4x8_1x4x32_neon_dotprod* KleidiAI ukernel is used for GEMV operators. It takes advantage of NEON Dotprod instruction. If we focus on Decode stage only, we can see this function takes the second largest portion. 
-
-    <p align="center">
-      <img src="images/Decode_only.png " alt="Alt text" width="80%"/>
-    </p>
+    ![text#center](images/Decode_only.png "Figure 15. Decode only view")
 
 * There is a result_output linear layer in Qwen1_5-0_5b-chat-q4_0 model, the wights are with Q6_K data type. The layer computes a huge [1, 1024] x [1024, 151936] GEMV operation, where 1024 is the embedding size and 151936 is the vocabulary size. This operation cannot be handled by KleidiAI yet, it is handled by the ggml_vec_dot_q6_K_q8_K function in ggml-cpu library.
 * The tensor nodes for computation of Multi-Head attention are presented as three-dimension matrices with FP16 data type (KV cache also holds FP16 values), they are computed by ggml_vec_dot_f16 function in ggml-cpu library.

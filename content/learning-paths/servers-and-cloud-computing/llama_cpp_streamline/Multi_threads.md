@@ -13,7 +13,7 @@ The entrypoint of secondary thread is ggml_graph_compute_secondary_thread.
 When computing one tensor node/operator in the compute graph, if the worksize is big, llama.cpp splits its computation into multiple parts for those threads. 
 Here is an example of MUL_MAT operator to demonstrate how the splitting is done. 
 
-![text#center](images/multi_thread.png "Figure 22. Multi-thread")
+![text#center](images/multi_thread.jpg "Figure 22. Multi-thread")
 
 In this example, the result matrix C is split equally between four threads, each thread computes a quarter of matrix C.
 The execution of multi-threads on CPU cores can be observed by Streamline. Core Map and Cluster Map modes in the Streamline Timeline view map threads to CPU cores. 

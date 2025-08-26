@@ -29,8 +29,6 @@ operatingsystems:
     - Linux
     - Android
 
-
-
 further_reading:
     - resource:
         title: llama.cpp project
