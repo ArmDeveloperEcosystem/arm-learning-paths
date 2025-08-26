@@ -1,20 +1,20 @@
 ---
-title: "Google Axion C4A and Apache Spark"
+title: Getting started with Apache Spark on Google Axion C4A (Arm Neoverse-V2)
 
 weight: 2
 
 layout: "learningpathall"
 ---
 
-## Google Axion C4A instances
+## Google Axion C4A Arm instances in Google Cloud
 
-Google Axion C4A is a family of Arm-based virtual machines built on Google’s custom Axion CPU, which is based on Arm Neoverse-V2 cores. Designed for high-performance and energy-efficient computing, these virtual machine offer strong performance ideal for modern cloud workloads such as CI/CD pipelines, microservices, media processing, and general-purpose applications.
+Google Axion C4A is a family of Arm-based virtual machines built on Google’s custom Axion CPU, which is based on Arm Neoverse-V2 cores. Designed for high-performance and energy-efficient computing, these virtual machines offer strong performance for modern cloud workloads such as CI/CD pipelines, microservices, media processing, and general-purpose applications.
 
 The C4A series provides a cost-effective alternative to x86 virtual machines while leveraging the scalability and performance benefits of the Arm architecture in Google Cloud.
 
 To learn more about Google Axion, refer to the [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu) blog.
 
-## Apache Spark
+## Apache Spark for big data processing on Arm
 
 Apache Spark is an open-source, distributed computing system designed for fast and general-purpose big data processing. 
 

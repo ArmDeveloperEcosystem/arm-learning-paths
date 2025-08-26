@@ -24,11 +24,11 @@ Within your Windows PowerShell prompt, checkout the source repo:
 C:\Users\$env:USERNAME
 git clone https://github.com/microsoft/onnxruntime-genai
 cd onnxruntime-genai
-git checkout 1e4d289502a61265c3b07efb17d8796225bb0b7f
+git checkout 5ba9fce5b52452a82b12ac343d941765c430d996
 ```
 
 {{% notice Note %}}
-You might be able to use later commits. These steps have been tested with the commit `1e4d289502a61265c3b07efb17d8796225bb0b7f`.
+You might be able to use later commits. These steps have been tested with the commit `5ba9fce5b52452a82b12ac343d941765c430d996`. This corresponds to ORT Gen API 0.9.0
 {{% /notice %}}
 
 ### Build for Android CPU
@@ -37,11 +37,12 @@ Ninja generator is used to build on Windows for Android. Make sure you have set 
 
 ```bash
 python -m pip install requests 
-python3.11 build.py --build_java --android --android_home C:\Users\$env:USERNAME\AppData\Local\Android\Sdk --android_ndk_path C:\Users\$env:USERNAME\AppData\Local\Android\Sdk\ndk\27.0.12077973 --android_abi arm64-v8a --config Release
+python3.13 build.py --skip_wheel --build_java --android --android_home C:\Users\$env:USERNAME\AppData\Local\Android\Sdk --android_ndk_path C:\Users\$env:USERNAME\AppData\Local\Android\Sdk\ndk\27.3.13750724 --android_abi arm64-v8a --config Release
 ```
 
 When the build is complete, confirm the shared library has been created:
 
 ```output
-ls build\Android\Release\onnxruntime-genai.so
+ls build\Android\Release\libonnxruntime-genai.so
+ls build\Android\Release\src\java\build\android\outputs\aar\onnxruntime-genai-release.aar
 ```
