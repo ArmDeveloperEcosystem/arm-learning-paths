@@ -51,7 +51,7 @@ further_reading:
         type: documentation
     - resource:
         title: Zenoh and ROS 2 Integration Guide
-        link: https://github.com/eclipse-zenoh/zenoh-plugin-ros2dds
+        link: https://github.com/eclipse-zenoh/zenoh-plugin-ros2
         type: documentation
 
 
