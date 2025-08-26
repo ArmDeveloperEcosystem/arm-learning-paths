@@ -39,11 +39,13 @@ The CSS‑V3 subsystem is fully supported by Arm's Fixed Virtual Platform, enabl
 The RD‑V3 platform is a comprehensive reference design built around Arm’s [Neoverse V3](https://www.arm.com/products/silicon-ip-cpu/neoverse/neoverse-v3) CPUs, along with [Cortex-M55](https://www.arm.com/products/silicon-ip-cpu/cortex-m/cortex-m55) and [Cortex-M7](https://www.arm.com/products/silicon-ip-cpu/cortex-m/cortex-m7) microcontrollers. This platform enables efficient high-performance computing and robust platform management:
 
 
-| Component     | Description                                                                 |
-|---------------|-----------------------------------------------------------------------------|
-| Neoverse V3   | The primary application processor responsible for executing OS and payloads |
-| Cortex M7     | Implements the System Control Processor (SCP) for power, clocks, and init   |
-| Cortex M55    | Hosts the Runtime Security Engine (RSE), providing secure boot and runtime integrity |
+| Component        | Description                                                                                    |
+|------------------|------------------------------------------------------------------------------------------------|
+| Neoverse V3      | The primary application processor responsible for executing OS and payloads                    |
+| Cortex M7        | Implements the System Control Processor (SCP) for power, clocks, and init                      |
+| Cortex M55       | Hosts the Runtime Security Engine (RSE), providing secure boot and runtime integrity           |
+| Cortex M55 (LCP) | Acts as the Local Control Processor, enabling per-core power and reset management for AP cores |
+
 
 These subsystems work together in a coordinated architecture, communicating through shared memory regions, control buses, and platform protocols. This enables multi-stage boot processes and robust secure boot implementations.
 
@@ -76,6 +78,7 @@ To support different use cases and levels of platform complexity, Arm offers thr
 | RD‑V3       | Standard single-die platform with full processor and security blocks | Ideal for newcomers, firmware bring-up, and basic validation        |
 | RD‑V3‑R1    | Dual-die platform simulating chiplet-based architecture          | Suitable for multi-node, interconnect, and advanced boot tests     |
 | CFG1        | Lightweight model with reduced control complexity for fast startup | Best for CI pipelines, unit testing, and quick validations         |
+| CFG2        | Quad-chip platform with 4×32-core Poseidon-V CPUs connected via CCG links | Designed for advanced multi-chip validation, CML-based coherence, and high-performance platform scaling         |
 
 
 This Learning Path begins with RD‑V3 as the primary platform for foundational exercises, guiding you through the process of building the software stack and simulating it on FVP to verify the boot sequence.

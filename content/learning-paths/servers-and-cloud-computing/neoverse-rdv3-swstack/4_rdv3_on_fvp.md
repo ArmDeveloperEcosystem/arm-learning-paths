@@ -37,8 +37,9 @@ The FVP installation may prompt you with a few questions—choosing the default 
 
 The RD‑V3 FVP model launches multiple UART consoles—each mapped to a separate terminal window for different subsystems (e.g., Neoverse V3, Cortex‑M55, Cortex‑M7, panel).
 
-If you're accessing the platform over SSH, these console windows won't open properly.  
-To interact with all UART consoles, we recommend installing a Remote Desktop environment using XRDP.
+If you’re accessing the platform over SSH, these UART consoles can still be displayed, but network latency and graphical forwarding can severely degrade performance.
+
+To interact with different UARTs more efficiently, we recommend installing a remote desktop environment using `XRDP`. This provides a smoother user experience when dealing with multiple terminal windows and system interactions.
 
 In AWS Ubuntu 22.04 instance, you need install required packages:
 

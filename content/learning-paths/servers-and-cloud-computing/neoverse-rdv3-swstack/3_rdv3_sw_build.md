@@ -52,7 +52,7 @@ cd rdv3
 repo init -u https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests.git -m pinned-rdv3.xml -b refs/tags/RD-INFRA-2025.07.03 --depth=1
 
 # Sync the full source code
-repo sync -c -j $(nproc) --fetch-submodules --force-sync --no-clone-bundle
+repo sync -c -j $(nproc) --fetch-submodules --force-sync --no-clone-bundle --retry-fetches=5
 ```
 
 Once synced, you will see the message like:
@@ -148,18 +148,15 @@ REPOSITORY        TAG       IMAGE ID       CREATED         SIZE
 rdinfra-builder   latest    3a395c5a0b60   4 minutes ago   8.12GB
 ```
 
-
-###  Step 4: Enter the Container and Build Firmware
-
-You can enter the Docker container interactively to quick look the image.
+To quickly test the Docker image you just built, run the following command to enter it interactively:
 
 ```bash
 cd ~/rdv3/container-scripts
 ./container.sh -v ~/rdv3 run
 ```
 
-This mounts your source directory (~/rdv3) into the container and opens a shell at that location.
-Inside the container, you’ll see a prompt like:
+This script mounts your source directory (~/rdv3) into the container and opens a shell session at that location.
+Inside the container, you should see a prompt like this:
 
 ```
 Running docker image: rdinfra-builder ...
@@ -169,13 +166,18 @@ See "man sudo_root" for details.
 your-username:hostname:/home/your-username/rdv3$
 ```
 
-Since building the full firmware stack can involve many components, the more efficient method is to use a single Docker command that runs both build and package steps automatically.
+You can explore the container environment if you wish, then type exit to return to the host system.
+
+
+###  Step 4: Enter the Container and Build Firmware
+
+Building the full firmware stack involves compiling several components and preparing them for simulation. Rather than running each step manually, you can use a single Docker command to automate the build and package phases.
 
 - **build**: This phase compiles all individual components of the firmware stack, including TF‑A, SCP, RSE, UEFI, Linux kernel, and rootfs.
 
 - **package**: This phase consolidates the build outputs into simulation-ready formats and organizes boot artifacts for FVP.
 
-To execute the full build and packaging flow:
+Ensure you’re back in the host OS, then run the following command:
 
 ```bash
 cd ~/rdv3
