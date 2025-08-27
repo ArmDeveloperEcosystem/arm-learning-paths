@@ -30,4 +30,5 @@ cd $HOME/ai-camera-pipelines
 bin/low_light_image_enhancement resources/test_input2.ppm test_output2_lime.ppm resources/HDRNetLIME_lr_coeffs_v1_1_0_mixed_low_light_perceptual_l2_loss_int8_only_ptq.tflite
 ```
 
+![example image alt-text#center](test_input2.png "Original picture")
 ![example image alt-text#center](test_output2_lime.png "Picture with low-light enhancement applied")
