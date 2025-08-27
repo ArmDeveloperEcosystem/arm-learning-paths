@@ -12,9 +12,7 @@ layout: "learningpathall"
 
 #### Prerequisites
 
-Install git and docker packages. For example, on Ubuntu 24.04 LTS machine:
-
-Set up Docker's apt repository:
+Install docker. For example, on your Ubuntu 24.04 LTS host machine, first set up Docker's apt repository:
 ``` bash
 # Add Docker's official GPG key:
 sudo apt-get update
@@ -31,12 +29,12 @@ echo \
 sudo apt-get update
 ```
 
-Install packages:
+Install git and docker packages:
 ``` bash
 sudo apt-get install git docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-If you have just installed docker (like with the command line above), add yourself to the docker group:
+Add your user name to the docker group:
 ``` bash
 sudo usermod -aG docker $USER
 newgrp docker
@@ -44,7 +42,7 @@ newgrp docker
 
 #### Start Trustee Services docker containers
 
-Clone `cca-trustee` repository:
+Clone the `cca-trustee` repository:
 ``` bash
 git clone https://github.com/ArmDeveloperEcosystem/cca-trustee.git
 ```
@@ -52,14 +50,14 @@ git clone https://github.com/ArmDeveloperEcosystem/cca-trustee.git
 This repository contains configuration files used for running Trustee services docker containers with CCA attestation support as a simple cluster.
 The config files are based on the recommended configurations from [KBS Cluster](https://github.com/confidential-containers/trustee/blob/main/kbs/docs/cluster.md)
 
-In addition to the recommended configuration we also made the following changes for this Learning Path:
+In addition to the recommended configuration, the following changes were also made for this Learning Path:
 - Included the external Linaro CCA verifier into AS configuration
-- Included an attesation policy with CCA rules
+- Included an attestation policy with CCA rules
 - Defined an "affirming" resource policy
 - Created a secret demo message.
 - Defined a docker network shared by all containers in this demo.
 
-Go into `cca-trustee` directory and start Trustee services docker containers (as detached services):
+Go into the `cca-trustee` directory and start the Trustee services docker containers (as detached services):
 ``` bash { output_lines = "3-9" }
 cd cca-trustee
 docker compose up -d
@@ -100,7 +98,7 @@ launch the `run-cca-fvp.sh` script to run the Arm CCA pre-built binaries on the 
 ./run-cca-fvp.sh
 ```
 
-The `run-cca-fvp.sh` script uses screen command to connect to the different UARTs in the FVP.
+The `run-cca-fvp.sh` script uses the screen command to connect to the different UARTs in the FVP.
 
 You should see the host Linux kernel boot on your terminal. You will be prompted to log in to the host.
 
@@ -134,11 +132,11 @@ realm login: root
 (realm) #
 ```
 
-### Try to run attestation and request a secret
+### Try to use attestation to request a secret
 
 In this step, you will go through the process of using attestation to request
 a secret from the KBS. This will not work on the first attempt.
-But don't worry. We will explain why, and how to rectify the problem.
+But don't worry. You will learn why that is the case, and how to rectify the problem.
 You will have a better understanding of the attestation process as a result.
 
 Change directory to `/cca` and use `openssl` to create a realm RSA key:
@@ -147,19 +145,19 @@ cd /cca
 openssl genrsa -traditional -out realm.key
 ```
 
-Run attestation command and save EAT Attestation Result (EAR) message in JWT (JSON Web Token) format in `ear.jwt` file.
+Run the attestation command and save the EAT Attestation Result (EAR) message in JWT (JSON Web Token) format in a file named `ear.jwt`:
 ```bash
 ./kbs-client --url http://kbs:8080 attest --tee-key-file realm.key >ear.jwt
 ```
 
-Let's try to request a secret demo message using the attestation result:
+Now try to request a secret demo message using the attestation result:
 ```bash
 ./kbs-client --url http://kbs:8080 get-resource \
   --tee-key-file realm.key --attestation-token ear.jwt \
   --path "cca-trustee/demo-message/message.txt"
 ```
 
-The request would fail with `Access denied by policy` and `Token Verifier` errors:
+The request will fail with `Access denied by policy` and `Token Verifier` errors:
 ```output
 [2025-07-23T14:42:55Z WARN  kbs_protocol::client::token_client] Authenticating with KBS failed. Get a new token from the token provider: ErrorInformation {
         error_type: "https://github.com/confidential-containers/kbs/errors/PolicyDeny",
@@ -194,7 +192,7 @@ The following command will use the `arc` tool to verify the cryptographic signat
 
 {{% notice EAR expiry note %}}
 The EAR message produced by Trustee AS in this Learning Path demo is valid for 30 minutes.
-If you spend more time on anylising the message you will start seing errors from `arc verify` command:
+If you spend more time on analyzing the message you will start seeing errors from `arc verify` command:
 
 ``` output
 Using JWK key from JWT header
@@ -205,8 +203,8 @@ Please obtain a new EAR message by re-runing the attestation command.
 {{% /notice %}}
 
 
-`arc verify`  command produces quite a lot of output.
-However, the main part is the CCA attestation token similar to the one you inspected in
+The `arc verify` command produces quite a lot of output.
+However, the main part is the CCA attestation token that is similar to the one you inspected in
 [Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison) Learning Path.
 
 The most interesting part of the output is towards the bottom, and should look like this:
@@ -241,17 +239,17 @@ You can also check the status of the EAR:
 The warning status is the reason why the KBS chose not to grant access
 to the secret that you requested in the earlier step.
 It has not concluded that the realm is trustworthy.
-But this is simply because we have not supplied an expected reference measurement
+But this is simply because you have not supplied an expected reference measurement
 for the realm. You will do this in the next step.
 
 ### Endorse Realm Initial Measurement (RIM)
 
-For a successful attestaion of your CCA real you need to provide
+For a successful attestation of your CCA real you need to provide
 the Trustee Reference Values Provider Service (RVPS) with a known good reference value.
 
 In a production environment, the known good reference value is generated using a deployment-specific process,
 but for demonstration purposes and simplification, you will use the value which was calculated by `kbs-client`
-in the realm and included into EAT.
+in the realm and included into the EAT.
 
 Get the RIM from the attestation token:
 ```bash { output_lines = "2" }

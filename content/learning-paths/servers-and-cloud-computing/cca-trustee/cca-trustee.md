@@ -86,9 +86,9 @@ A verifier driver parses the attestation evidence provided by the hardware TEE. 
 1. Verifies the hardware TEE signature of the TEE quote and report provided in the evidence
 2. Receives the evidence and organizes the status into a JSON format to be returned
 
-In this Learning Path AS is configured to use an external CCA verifer.
+In this Learning Path, the AS is configured to use an external CCA verifer.
 
-[Linaro](https://www.linaro.org) provides such an attestation verifier for use with pre-silicon CCA platforms.
+[Linaro](https://www.linaro.org) provides such an attestation verifier for use with pre-silicon Arm CCA platforms.
 This verifier is built from the Open-Source [Veraison project](https://github.com/veraison).
 You can learn more about Veraison and Linaro attestation verifier service in
 [Get Started with CCA Attestation and Veraison](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cca-veraison/)
@@ -100,7 +100,7 @@ When an attestation request is received by the AS, it uses a policy ID in the re
 to decide which policies should be evaluated.
 The results of all policies evaluated are included in the attestation response.
 
-In this Learning Path AS attestation policy includes specific Arm CCA rules.
+In this Learning Path the AS attestation policy includes specific Arm CCA rules.
 
 #### Reference Value Provider Service (RVPS)
 
@@ -124,7 +124,7 @@ You will run this tool inside of a realm to make requests for an attestation res
 The client tool can also be used to provision the KBS/AS with resources and policies.
 
 KBS Client connects to the KBS in order to perform attestation. To prove the trustworthiness of the environment
-KBS Client sends the evidence (claims) from the TEE in the form of a CCA attestaion token.
+KBS Client sends the evidence (claims) from the TEE in the form of a CCA attestation token.
 You can learn more about CCA attestation tokens in
 [Get Started with CCA Attestation and Veraison](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cca-veraison/)
 
@@ -141,7 +141,7 @@ When the AS receives an attestation token from the realm via KBS:
 - it calls an external CCA verifer (the Linaro attestation verifier service) to obtain an attestation result.
 - the external CCA verifer checks the token's cryptographic signature,
   verifies that it denotes a confidential computing platform and provides an attestation result.
-- AS also checks the token evidences against a its own attestation policies and updates attestation result status and trustworthiness vectors.
+- it also checks the token evidences against its own attestation policies and updates attestation result status and trustworthiness vectors.
 
 When asked for a resource the KBS uses the attestation result to decide whether to release the secrets into the realm for processing.
 
