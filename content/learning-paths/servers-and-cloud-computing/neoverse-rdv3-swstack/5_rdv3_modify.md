@@ -29,10 +29,7 @@ Initialize and sync the codebase for RD‑V3‑R1:
 cd ~
 mkdir rdv3r1
 cd rdv3r1
-# Initialize the source tree
 repo init -u https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests.git -m pinned-rdv3r1.xml -b refs/tags/RD-INFRA-2025.07.03 --depth=1
-
-# Sync the full source code
 repo sync -c -j $(nproc) --fetch-submodules --force-sync --no-clone-bundle
 ```
 
@@ -51,7 +48,7 @@ tar -xvf FVP_RD_V3_R1_11.29_35_Linux64_armv8l.tgz
 
 ### Step 3: Build the Firmware
 
-Since you have already created the Docker image for firmware building in a previous module, there is no need to rebuild it for RD‑V3‑R1.
+Since you have already created the Docker image for firmware building in a previous section, there is no need to rebuild it for RD‑V3‑R1.
 
 Run the full firmware build and packaging process:
 
@@ -84,7 +81,7 @@ You’ll observe additional UART consoles for components like the MCP, and you c
 
 ![img5 alt-text#center](rdv3r1_sim_login.jpg "RDV3 R1 buildroot login")
 
-Similar with previous session, the terminal logs are stored in `~/rdv3r1/model-scripts/rdinfra/platforms/rdv3r1/rdv3r1`.
+Similar to the previous session, the terminal logs are stored in `~/rdv3r1/model-scripts/rdinfra/platforms/rdv3r1/rdv3r1`.
 
 
 ### Step 5: Customize Firmware and Confirm MCP Execution
@@ -93,7 +90,7 @@ To wrap up this learning path, let’s verify that your firmware changes can be 
 
 Edit the MCP source file `~/rdv3r1/host/scp/framework/src/fwk_module.c`
 
-Locate the function fwk_module_start(). Add the following logging line just before return FWK_SUCCESS;:
+Locate the function `fwk_module_start()`. Add the following logging line just before `return FWK_SUCCESS;`:
 
 ```c
 int fwk_module_start(void)

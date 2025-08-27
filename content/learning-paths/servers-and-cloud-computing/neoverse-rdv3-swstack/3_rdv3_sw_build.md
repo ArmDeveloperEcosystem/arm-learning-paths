@@ -1,13 +1,14 @@
 ---
-title: Build the RD‑V3 Reference Platform
+title: Build the RD‑V3 Reference Platform Software Stack
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Building the RD‑V3 Reference Platform
+## Building the RD‑V3 Reference Platform Software Stack
 
-In this module, you’ll set up your development environment on Arm server and build the firmware stack required to simulate the RD‑V3 platform.
+In this module, you’ll set up your development environment on any Arm-based server and build the firmware stack required to simulate the RD‑V3 platform. This Learning Path was tested on an AWS `m7g.4xlarge` Arm-based instance running Ubuntu 22.04
+
 
 ### Step 1: Prepare the Development Environment
 
@@ -48,15 +49,15 @@ For this session, we will use `pinned-rdv3.xml` and `RD-INFRA-2025.07.03`.
 cd ~
 mkdir rdv3
 cd rdv3
-# Initialize the source tree
+```
+Initialize and sync the source code tree:
+```bash
 repo init -u https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests.git -m pinned-rdv3.xml -b refs/tags/RD-INFRA-2025.07.03 --depth=1
-
-# Sync the full source code
 repo sync -c -j $(nproc) --fetch-submodules --force-sync --no-clone-bundle --retry-fetches=5
 ```
 
-Once synced, you will see the message like:
-```
+Once synced, the output should look like:
+```output
 Syncing:  95% (19/20), done in 2m36.453s
 Syncing: 100% (83/83) 2:52 | 1 job | 0:01 platsw/edk2-platforms @ uefi/edk2/edk2-platformsrepo sync has finished successfully.
 ```
@@ -81,7 +82,7 @@ There are two supported methods for building the reference firmware stack: **hos
 - The **host-based** build installs all required dependencies directly on your local system and executes the build natively.
 - The **container-based** build runs the compilation process inside a pre-configured Docker image, ensuring consistent results and isolation from host environment issues.
 
-In this Learning Path, we will use the **container-based** approach.
+In this Learning Path, you will use the **container-based** approach.
 
 The container image is designed to use the source directory from the host (`~/rdv3`) and perform the build process inside the container. Make sure Docker is installed on your Linux machine. You can follow this [installation guide](https://learn.arm.com/install-guides/docker/).
 
@@ -103,9 +104,9 @@ To build the container image:
 ./container.sh build
 ```
 
-The build procedure may take a few minutes, depending on network bandwidth and CPU performance. On my AWS m7g.4xlarge instance, it took 250 seconds.
+The build procedure may take a few minutes, depending on network bandwidth and CPU performance. This Learning Path was tested on an AWS `m7g.4xlarge` instance, and the build took 250 seconds. The output from the build looks like:
 
-```
+```output
 Building docker image: rdinfra-builder ...
 [+] Building 239.7s (19/19) FINISHED                                                                                                docker:default
  => [internal] load build definition from rd-infra-arm64                                                                                      0.0s
@@ -141,24 +142,29 @@ Building docker image: rdinfra-builder ...
  => => naming to docker.io/library/rdinfra-builder                                                                                            0.0s
 ```
 
-After the docker image build completes successfully, you can use `docker images` to find the build docker image called `rdinfra-builder`.  
-
+Verify the docker image build completed successfully:
+  
+```bash
+docker images
 ```
+
+You should see a docker image called `rdinfra-builder`:
+
+```output
 REPOSITORY        TAG       IMAGE ID       CREATED         SIZE
 rdinfra-builder   latest    3a395c5a0b60   4 minutes ago   8.12GB
 ```
 
-To quickly test the Docker image you just built, run the following command to enter it interactively:
+To quickly test the Docker image you just built, run the following command to enter the docker container interactively:
 
 ```bash
-cd ~/rdv3/container-scripts
 ./container.sh -v ~/rdv3 run
 ```
 
 This script mounts your source directory (~/rdv3) into the container and opens a shell session at that location.
 Inside the container, you should see a prompt like this:
 
-```
+```output
 Running docker image: rdinfra-builder ...
 To run a command as administrator (user "root"), use "sudo <command>".
 See "man sudo_root" for details.
@@ -169,7 +175,7 @@ your-username:hostname:/home/your-username/rdv3$
 You can explore the container environment if you wish, then type exit to return to the host system.
 
 
-###  Step 4: Enter the Container and Build Firmware
+###  Step 4: Build Firmware 
 
 Building the full firmware stack involves compiling several components and preparing them for simulation. Rather than running each step manually, you can use a single Docker command to automate the build and package phases.
 
@@ -193,13 +199,16 @@ docker run --rm \
            ./build-scripts/rdinfra/build-test-buildroot.sh -p rdv3 package"
 ```
 
-The build artifacts will be placed under `~/rdv3/output/rdv3/rdv3/`, where the last `rdv3` corresponds to the selected platform name.
+The build artifacts will be placed under `~/rdv3/output/rdv3/rdv3/`, where the last `rdv3` in the directory path corresponds to the selected platform name.
 
-After a successful build, the following output artifacts will be generated under `~/rdv3/output/rdv3/rdv3/`
+After a successful build, inspect the artifacts generated under `~/rdv3/output/rdv3/rdv3/`
 
-```
+```bash
 ls ~/rdv3/output/rdv3/rdv3 -al
+```
 
+The directory contents should look like:
+```output
 total 7092
 drwxr-xr-x 2 ubuntu ubuntu    4096 Aug 12 13:15 .
 drwxr-xr-x 4 ubuntu ubuntu    4096 Aug 12 13:15 ..
@@ -220,6 +229,7 @@ lrwxrwxrwx 1 ubuntu ubuntu      48 Aug 12 13:15 tf_m_vm0_0.bin -> ../components/
 lrwxrwxrwx 1 ubuntu ubuntu      48 Aug 12 13:15 tf_m_vm1_0.bin -> ../components/arm/rse/neoverse_rd/rdv3/vm1_0.bin
 lrwxrwxrwx 1 ubuntu ubuntu      33 Aug 12 13:15 uefi.bin -> ../components/css-common/uefi.bin
 ```
+Here's a reference of what each file refers to:
 
 | Component            | Output Files                                 | Description                 |
 |----------------------|----------------------------------------------|-----------------------------|
@@ -234,7 +244,7 @@ lrwxrwxrwx 1 ubuntu ubuntu      33 Aug 12 13:15 uefi.bin -> ../components/css-co
 
 You can also perform the build manually after entering the container:
 
-In the container shell:
+Start your docker container. In your running container shell:
 ```bash
 cd ~/rdv3
 ./build-scripts/rdinfra/build-test-buildroot.sh -p rdv3 build
@@ -244,4 +254,4 @@ cd ~/rdv3
 This manual workflow is useful for debugging, partial builds, or making custom modifications to individual components.
 
 
-You’ve now successfully prepared and built the full RD‑V3 firmware stack. In the next module, you’ll install the matching FVP model and simulate the full boot sequence—bringing the firmware to life in a virtual platform.
+You’ve now successfully prepared and built the full RD‑V3 firmware stack. In the next section, you’ll install the appropriate FVP and simulate the full boot sequence, bringing the firmware to life on a virtual platform.

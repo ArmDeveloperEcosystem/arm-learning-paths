@@ -1,5 +1,5 @@
 ---
-title: Introducing the Arm RD‑V3 Platform
+title: Learn about the Arm RD‑V3 Platform
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Introduction to the Arm RD‑V3 Platform
 
-This module introduces the Arm [Neoverse CSS‑V3](https://www.arm.com/products/neoverse-compute-subsystems/css-v3) architecture and the RD‑V3 [Reference Design Platform Software](https://neoverse-reference-design.docs.arm.com/en/latest/index.html) that implements it. You'll learn how these components enable scalable, server-class system design, and how to simulate and validate the full firmware stack using Fixed Virtual Platforms (FVP)—well before hardware is available.
+In this section, you will learn about the Arm [Neoverse CSS V3](https://www.arm.com/products/neoverse-compute-subsystems/css-v3) subsystem and the RD‑V3 [Reference Design Platform Software](https://neoverse-reference-design.docs.arm.com/en/latest/index.html) that implements it. You'll learn how these components enable scalable, server-class system design, and how to simulate and validate the full firmware stack using Fixed Virtual Platforms (FVP), well before hardware is available.
 
 Arm Neoverse is designed to meet the demanding requirements of data center and edge computing, delivering high performance and efficiency. Widely adopted in servers, networking, and edge devices, the Neoverse architecture provides a solid foundation for modern infrastructure.
 
@@ -56,9 +56,9 @@ Here is the Neoverse Reference Design Platform [Software Stack](https://neoverse
 
 ### Develop and Validate Without Hardware
 
-In traditional development workflows, system validation cannot begin until silicon is available—often introducing risk and delay. 
+In traditional development workflows, system validation cannot begin until silicon is available, often introducing risk and delay. 
 
-To address this, Arm provides the Fixed Virtual Platform ([FVP](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms)) —a  complete simulations model that emulates full Arm SoC behavior on a host machine. The CSS‑V3 platform is available in multiple FVP configurations, allowing developers to select the model that best fits their specific development and validation needs.
+To address this, Arm provides Fixed Virtual Platforms ([FVP](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms)), complete simulations model that emulates Arm SoC behavior on a host machine. The CSS‑V3 platform is available in multiple FVP configurations, allowing developers to select the model that best fits their specific development and validation needs.
 
 
 Key Capabilities of FVP:
@@ -67,11 +67,11 @@ Key Capabilities of FVP:
 * Compatible with TF‑A, UEFI, GRUB, and Linux kernel images
 * Provides boot logs, trace outputs, and interrupt event visibility for debugging
 
-FVP enables developers to verify boot sequences, debug firmware handoffs, and even simulate RSE behaviors—all before first silicon.
+FVP enables developers to verify boot sequences, debug firmware handoffs, and even simulate RSE (Runtime Security Engine) behaviors, all pre-silicon.
 
 ### Comparing different version of RD-V3 FVP
 
-To support different use cases and levels of platform complexity, Arm offers three virtual models based on the CSS‑v3 architecture: RD‑V3, RD-V3-Cfg1, and RD‑V3‑R1. While they share a common foundation, they differ in chip count, system topology, and simulation flexibility.
+To support different use cases and levels of platform complexity, Arm offers three virtual models based on the CSS V3 architecture: RD‑V3, RD-V3-Cfg1, and RD‑V3‑R1. While they share a common foundation, they differ in chip count, system topology, and simulation flexibility.
 
 | Model       | Description                                                      | Recommended Use Cases                                              |
 |-------------|------------------------------------------------------------------|--------------------------------------------------------------------|
@@ -81,5 +81,5 @@ To support different use cases and levels of platform complexity, Arm offers thr
 | CFG2        | Quad-chip platform with 4×32-core Poseidon-V CPUs connected via CCG links | Designed for advanced multi-chip validation, CML-based coherence, and high-performance platform scaling         |
 
 
-This Learning Path begins with RD‑V3 as the primary platform for foundational exercises, guiding you through the process of building the software stack and simulating it on FVP to verify the boot sequence.
+In this Learning Path you will use RD‑V3 as the primary platform for foundational exercises, guiding you through the process of building the software stack and simulating it on an FVP to verify the boot sequence.
 In later modules, you’ll transition to RD‑V3‑R1 to more advanced system simulation, multi-node bring-up, and firmware coordination across components like MCP and SCP.
