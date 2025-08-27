@@ -14,10 +14,10 @@ learning_objectives:
     - Baseline of optimal performance configuration before tuning
     - Tune network workloads performance with NIC queue
     - Tune network workloads performance with local NUMA
-    - Tune network workloads performance with iommu.strict and iommu.passthrough
+    - Tune network workloads performance with IOMMU
 
 prerequisites:
-    - Access to an Arm-based bare-metal running Ubuntu-24 (you can use a Grace) (for Tomcat)
+    - Access to an Arm Neoverse-based bare-metal running Ubuntu-24 (you can use a AWS c8g.metal-48xl) (for Tomcat)
     - Access to a x86-based bare-metal running Ubuntu-24 (you can use an any x86_64 bare-metal) (for wrk2)
     - Basic familiarity with Java applications
     - Basic familiarity with computer system, network communication, etc.
