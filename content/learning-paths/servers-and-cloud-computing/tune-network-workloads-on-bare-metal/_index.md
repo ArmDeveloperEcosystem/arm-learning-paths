@@ -1,5 +1,5 @@
 ---
-title: Tune network workloads on Arm bare-metal
+title: Tune network workloads on Arm-based bare metal instances
 
 draft: true
 cascade:
@@ -7,26 +7,25 @@ cascade:
     
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for engineers who want to tune the performance of network workloads on Arm Neoverse-based bare-metal.
+who_is_this_for: This is an advanced topic for engineers who want to tune the performance of network workloads on Arm Neoverse-based bare-metal instances.
 
 learning_objectives: 
     - Set up a benchmarking environment using Tomcat and wrk2
-    - Baseline of optimal performance configuration before tuning
-    - Tune network workloads performance with NIC queue
+    - Set up a baseline performance configuration before tuning
+    - Tune network workloads performance using NIC queues 
     - Tune network workloads performance with local NUMA
     - Tune network workloads performance with IOMMU
 
 prerequisites:
-    - Access to an Arm Neoverse-based bare-metal running Ubuntu-24 (you can use a AWS c8g.metal-48xl) (for Tomcat)
-    - Access to a x86-based bare-metal running Ubuntu-24 (you can use an any x86_64 bare-metal) (for wrk2)
+    - An Arm Neoverse-based bare-metal server running Ubuntu 24.04 to run Tomcat. This Learning Path was tested with an AWS c8g.metal-48xl instance
+    - Access to a x86_64 bare-metal server running Ubuntu 24.04 to run wrk2
     - Basic familiarity with Java applications
-    - Basic familiarity with computer system, network communication, etc.
 
 author: Ying Yu, Ker Liu, Rui Chang
 
 ### Tags
 skilllevels: Advanced
-subjects: Performance tuning
+subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
@@ -44,6 +43,10 @@ further_reading:
       link: https://wiki.openjdk.org/
       type: documentation
 
+  - resource:
+      title: Apache Tomcat documentation
+      link: https://tomcat.apache.org/tomcat-11.0-doc/index.html
+      type: documentation
 
 
 ### FIXED, DO NOT MODIFY
