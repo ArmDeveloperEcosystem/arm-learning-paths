@@ -1,5 +1,5 @@
 ---
-title: Install and Set Up GitHub Self-Hosted Runner on Google Cloud C4A Virtual Machine
+title: Set up a GitHub Self-Hosted Runner
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -7,31 +7,53 @@ layout: learningpathall
 ---
 
 
-## Set Up GitHub Actions Self-Hosted Runner on Google Axion C4A Virtual Machine
+This section shows how to deploy a self-hosted GitHub Actions runner on your instance. It covers installing Git and GitHub CLI, authenticating with GitHub and configuring the runner on an Arm64 environment for optimized CI/CD workflows.
 
-This Learning Path shows how to deploy a self-hosted GitHub Actions runner on a Google Cloud C4A Arm64 virtual machine running Ubuntu. It covers installing Git and GitHub CLI, authenticating with GitHub and configuring the runner on an Arm64 environment for optimized CI/CD workflows.
+### Set up development environment
 
-### Install Git and GitHub CLI 
+Start by installing the required dependencies using the `apt` package manager:
+
 ```console
-sudo apt update 
-sudo apt install -y git gh
+sudo apt update
+sudo apt install -y git gh vim
 ```
-Login to GitHub
+
+Next step is to configure your git credentials. Update the command with your name and email.
+
+```bash
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+```
+
+Now you are ready to connect the machine to GitHub. The command below is used to authenticate the GitHub CLI with your GitHub account. It allows you to securely log in using a web browser or token, enabling the CLI to interact with repositories, actions, and other GitHub features on your behalf.
+
+
 ```console
-gh auth login 
- ```
-The command `gh auth login` is used to authenticate the GitHub CLI with your GitHub account. It allows you to securely log in using a web browser or token, enabling the CLI to interact with repositories, actions, and other GitHub features on your behalf.
+gh auth login
+```
+
+The command will prompt you to make a few choices. For this use-case, you can use the default ones as shown in the image below.
 
 ![Login to GitHub](./images/gh-auth.png)
 
-Below is the GitHub login UI:
+{{% notice %}}
+If you get an error opening the browser on your virtual machine, you can navigate to the following URL on the host machine.
+```
+https://github.com/login/device
+```
+From there, you can enter the code displayed in the CLI of the virtual machine.
+{{% /notice %}}
+
+If the log in was successful, you will see the following confirmation in your browser window.
 
 ![GitHub UI](./images/login-page.png)
 
-### Test GitHub CLI and Git 
-Create a test repo: 
+### Test GitHub CLI and Git
+
+The command below creates a new public GitHub repository named **test-repo** using the GitHub CLI. It sets the repository visibility to public, meaning anyone can view it
+
 ```console
-gh repo create test-repo –public
+gh repo create test-repo --public
 ```
 You should see an output similar to:
 ```output
@@ -39,38 +61,25 @@ You should see an output similar to:
   https://github.com/<your-github-account>/test-repo
 ```
 
-The command `gh repo create test-repo --public` creates a new public GitHub repository named **test-repo** using the GitHub CLI. It sets the repository visibility to public, meaning anyone can view it 
 
 ### Configure the Self-Hosted Runner
-Go to your repository's **Settings > Actions**, and under the **Runners** section, click on **Add Runner** or view existing self-hosted runners.
+
+* Go to your repository's **Settings > Actions**, and under the **Runners** section
+* Click on **Add Runner** or view existing self-hosted runners.
+
+{{% notice Note %}}
 If the **Actions** tab is not visible, ensure Actions are enabled by navigating to **Settings > Actions > General**, and select **Allow all actions and reusable workflows**.
+{{% /notice %}}
 
 ![runner](./images/newsh-runner.png)
 
-Then, click on the **New runner** button, followed by **New self-hosted runner**. In the **Add new self-hosted runner** section, proceed as follows:
-- Select Linux for the operating system.
-- Choose ARM64 for the architecture
+Then, click on the **New self-hosted runner** button. In the **Add new self-hosted runner** section. Select Linux for the operating system, and choose ARM64 for the architecture. This will generate commands to set up the runner. Copy and run them on your Google Axion C4A virtual machine.
 
 ![new-runner](./images/new-runner.png)
 
-Next, execute the following instructions on your Google Axion C4A virtual machine:
-```console
-mkdir actions-runner && cd actions-runner# Download the latest runner package
-curl -o actions-runner-linux-arm64-2.326.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.326.0/actions-runner-linux-arm64-2.326.0.tar.gz
-echo "ee7c229c979c5152e9f12be16ee9e83ff74c9d9b95c3c1aeb2e9b6d07157ec85  actions-runner-linux-arm64-2.326.0.tar.gz" | shasum -a 256 -c# Extract the installer
-tar xzf ./actions-runner-linux-arm64-2.326.0.tar.gz
-```
-Then, configure the virtual machine with the following command:
-
-```console
-./config.sh --url https://github.com/<YOUR_USERNAME>/YOUR_REPO --token YOUR_TOKEN
-```
-Replace `YOUR_USERNAME`, `YOUR_REPO`, and `YOUR_TOKEN` accordingly.
-This command links the runner to your GitHub repo using a one-time registration token.
+The final command links the runner to your GitHub repo using a one-time registration token.
 
 During the command’s execution, you will be prompted to provide the runner group, the name of the runner, and the work folder name. You can accept the defaults by pressing **Enter** at each step. The output will resemble as below:
-
-You should see an output similar to:
 
 ```output
 --------------------------------------------------------------------------------
@@ -111,3 +120,5 @@ Current runner version: '2.326.0'
 The runner will now be visible in the GitHub actions:
 
 ![final-runner](./images/final-runner.png)
+
+For now, you can terminate the `./run.sh` command with `Ctrl+C`. Move on to the next section to set up a simple web server using the runner.

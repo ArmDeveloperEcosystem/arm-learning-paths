@@ -1,9 +1,9 @@
 ---
 title: Deploy GitHub Actions Self-Hosted Runner on Google Axion C4A virtual machine
- 
-minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is for DevOps engineers, system administrators, or developers who want to deploy GitHub Actions Self-Hosted Runner on the Google Axion C4A Arm virtual machine.
+minutes_to_complete: 15
+
+who_is_this_for: This is an introductory topic for developers who want to deploy GitHub Actions Self-Hosted Runner on an Arm-based Google Axion C4A instance.
 
 learning_objectives:
        - Provision an Arm virtual machine on the Google Cloud Platform using the C4A Google Axion instance family.
@@ -12,8 +12,7 @@ learning_objectives:
 
 prerequisites:
      - A [Google Cloud Platform (GCP)](https://cloud.google.com/free?utm_source=google&hl=en) account with billing enabled.
-     - Familiarity with [GitHub Actions](https://github.com/features/actions) and the Linux command line.
-     - A GitHub account. You can sign up [here](https://github.com/signup).     
+     - A GitHub account. You can sign up [here](https://github.com/signup).
 
 author: Jason Andrews
 
@@ -49,6 +48,11 @@ further_reading:
     - resource:
         title: GitHub Actions Arm runners
         link: https://github.blog/news-insights/product-news/arm64-on-github-actions-powering-faster-more-efficient-build-systems/
+        type: website
+
+    - resource:
+        title: GCP Quickstart Guide to Create a virtual machine
+        link: https://cloud.google.com/compute/docs/instances/create-start-instance
         type: website
 
 
