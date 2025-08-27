@@ -15,7 +15,7 @@ Support for AArch64 was added in Protobuf version v3.5.0 (November 2017). To dem
 Use migrate-ease to scan protobuf v2.5.0 and output the results to a JSON file named `result.json`:
 
 ```bash
-python3 -m cpp --git-repo https://github.com/protocolbuffers/protobuf.git --branch v2.5.0 --output result.json --arch aarch64 protobuf
+python3 -m cpp --git-repo https://github.com/protocolbuffers/protobuf.git --branch v2.5.0 --output result.json --march aarch64 protobuf
 ```
 
 The scan will generate a file called `result.json` in your current directory.
