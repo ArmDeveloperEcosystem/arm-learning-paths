@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Summary
-It can be observed that each step of the tuning method can bring significant performance improvements to Tomcat. **Similarly, these methods are equally applicable to other network-based workloads.**
+You will observe that each tuning method can bring significant performance improvements while running Tomcat as shown in the results summary below:
 
 | Method          | Requests/sec | Latency-Avg |
 |:----------------|:-------------|:------------|
@@ -16,7 +16,5 @@ It can be observed that each step of the tuning method can bring significant per
 | NUMA-Local      | 363744.39    | 9.41s       |
 | IOMMU           | 428628.50    | 4.92s       |
 
-{{% notice Note %}}
-Under normal circumstances, NUMA local can improve the performance of network-intensive workloads on bare-metal servers. However, the reason why the performance improvement is not achieved on the c8g.metal-48xl bare-metal cloud instance provided by AWS requires further investigation.
-{{% /notice %}}
 
+The same tuning methods can be applied as general guidance to help optimize and tune other network-based workloads.

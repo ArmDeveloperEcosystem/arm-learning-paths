@@ -1,5 +1,5 @@
 ---
-title: Tomcat benchmark set up
+title: Set up Tomcat
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -9,16 +9,16 @@ layout: learningpathall
 
 ## Overview 
 
-There are numerouse client-server and network-based workloads, and Tomcat is a typical example of such applications, which provide services via HTTP/HTTPS network requests.
+There are numerous client-server and network-based workloads, with Tomcat being a typical example of such applications. Tomcat provides services via HTTP/HTTPS network requests.
 
-In this section, you'll set up a benchmark environment using `Apache Tomcat` and `wrk2` to simulate HTTP load and evaluate performance on an Arm-based bare-metal, such as **__`AWS c8g.metal-48xl`__**.
+In this section, you will set up a benchmark environment using `Apache Tomcat` and `wrk2` to simulate an HTTP load and evaluate performance on an Arm-based bare metal instance. This Learning Path was tested on an AWS `c8g.metal-48xl` instance.
 
-## Set up the Tomcat benchmark server on **AWS c8g.metal-48xl**
+## Set up the Tomcat benchmark server
 [Apache Tomcat](https://tomcat.apache.org/) is an open-source Java Servlet container that runs Java web applications, handles HTTP requests, and serves dynamic content. It supports technologies such as Servlet, JSP, and WebSocket.
 
 ## Install the Java Development Kit (JDK)
 
-Install OpenJDK 21 on your Arm-based Ubuntu 24 bare-metal: 
+Install OpenJDK 21 on your Arm-based Ubuntu 24.04 bare-metal instance: 
 
 ```bash
 sudo apt update
@@ -44,13 +44,16 @@ The file is at:
 ~/apache-tomcat-11.0.10/webapps/examples/META-INF/context.xml
 ```
 
+Replace the existing allow value as shown:
 ```xml
-<!-- Before -->
 <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
+```
 
-<!-- After -->
+With:
+```xml
 <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow=".*" />
 ```
+Save the changes to your file.
 
 ## Start the Tomcat server
 {{% notice Note %}}
@@ -91,7 +94,7 @@ You should see the Tomcat welcome page and examples, as shown below:
 [Wrk2](https://github.com/giltene/wrk2) is a high-performance HTTP benchmarking tool specialized in generating constant throughput loads and measuring latency percentiles for web services. `wrk2` is an enhanced version of `wrk` that provides accurate latency statistics under controlled request rates, ideal for performance testing of HTTP servers.
 
 {{% notice Note %}}
-Currently `wrk2` is only supported on x86 machines. Run the benchmark client steps below on an `x86_64` server running Ubuntu 24.
+Currently `wrk2` is only supported on x86 machines. Run the benchmark client steps below on a bare metal `x86_64` server running Ubuntu 24.04
 {{% /notice %}}
 
 ## Install dependencies 
