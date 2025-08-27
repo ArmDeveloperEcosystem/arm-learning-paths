@@ -8,14 +8,14 @@ layout: learningpathall
 
 ## Firmware Stack Overview and Boot Sequence Coordination
 
-To ensure the platform transitions securely and reliably from power-on to operating system launch, this module introduces the roles and interactions of each firmware component within the RD‑V3 boot process.
-You’ll learn how each module contributes to system initialization and how control is systematically handed off across the boot chain.
+To ensure the platform transitions securely and reliably from power-on to operating system launch, this section introduces the roles and interactions of each firmware component within the RD‑V3 boot process.
+You’ll learn how each component contributes to system initialization and how control is systematically handed off across the boot chain.
 
 
-## How the System Wakes Up
+## How the System Boots Up
 
-In the RD‑V3 platform, each subsystem—such as TF‑A, RSE, SCP, LCP, and UEFI—operates independently but cooperates through a well-defined sequence. 
-Each module is delivered as a separate firmware image, yet they coordinate tightly through a structured boot flow and inter-processor signaling.
+In the RD‑V3 platform, each firmware component—such as TF‑A, RSE, SCP, LCP, and UEFI—operates independently but functions together through a well-defined sequence. 
+Each component is delivered as a separate firmware image, yet they coordinate tightly through a structured boot flow and inter-processor signaling.
 
 The following diagram from the [Neoverse Reference Design Documentation](https://neoverse-reference-design.docs.arm.com/en/latest/shared/boot_flow/rdv3_single_chip.html?highlight=boot) illustrates the progression of component activation from initial reset to OS handoff:
 
@@ -149,12 +149,12 @@ GRUB then selects and boots the Linux kernel. Unlike the previous dependency arr
 This layered approach supports modular testing, independent debugging, and early-stage simulation—all essential for secure and robust platform bring-up.
 
 
-In this module, you have:
+In this section, you have:
 
 * Explored the full boot sequence of the RD‑V3 platform, from power-on to Linux login
 * Understood the responsibilities of key firmware components such as TF‑A, RSE, SCP, LCP, and UEFI
 * Learned how secure boot is enforced and how each module hands off control to the next
 * Interpreted boot dependencies using FVP simulation and UART logs
 
-With the full boot flow and firmware responsibilities now clear, you're ready to apply these insights. 
-In the next module, you'll fetch the RD‑V3 codebase, configure your workspace, and begin building your own firmware stack for simulation.
+With an understanding of full boot sequence and firmware responsibilities, you're ready to apply these insights. 
+In the next section, you'll fetch the RD‑V3 codebase and start building the firmware stack for simulation.

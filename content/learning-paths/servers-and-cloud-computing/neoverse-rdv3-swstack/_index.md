@@ -1,6 +1,10 @@
 ---
 title: CSS-V3 Pre-Silicon Software Development Using Neoverse Servers
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 90
 
 who_is_this_for: This Learning Path is for firmware developers, system architects, and silicon validation engineers building Arm Neoverse CSS  platforms. It focuses on pre-silicon development using Fixed Virtual Platforms (FVPs) for the CSS‑V3 reference design. You’ll learn how to build, customize, and validate firmware on the RD‑V3 platform using Fixed Virtual Platforms (FVPs) before hardware is available.
