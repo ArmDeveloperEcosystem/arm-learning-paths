@@ -47,23 +47,21 @@ Update the line to:
 FVP_KEYWORD="terminal2: Listening for serial connection on port"
 ```
 
-The `run.sh` script will:
-* Launch the OpenBMC FVP and wait for the BMC to boot
-* Automatically start the host FVP for RD-V3 (running UEFI)
-* Connect the UART consoles between the BMC and the host via virtual pipes
-* Connect MCTP and IPMI tunnels between the OpenBMC FVP and the RD-V3 host FVP
-* Stop the OpenBMC FVP and RD-V3 host FVP when CTRL+C is pressed
-
 Then, execute the script.
 
 ```bash
+chmod +x ./run.sh
 ./run.sh -m ~/FVP_RD_V3_R1/models/Linux64_GCC-9.3/FVP_RD_V3_R1
 ```
 
-The run.sh script will:
+The `run.sh` script will:
+
 - Launch the OpenBMC FVP and wait for BMC boot
 - Automatically start the host FVP for RD-V3 (running UEFI)
 - Connect the UART consoles between the BMC and host via virtual pipes
+- Connect MCTP and IPMI tunnels between the OpenBMC FVP and the RD-V3 host FVP
+- Stop the OpenBMC FVP and RD-V3 host FVP when CTRL+C is pressed
+
 
 Once the simulation is running, the `OpenBMC FVP console` will stop at the Linux login prompt:
 

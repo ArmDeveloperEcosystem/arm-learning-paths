@@ -110,11 +110,9 @@ source setup fvp
 bitbake obmc-phosphor-image
 ```
 
-After the build completes, the generated image will contain both ipmitool and phosphor-ipmi-example.
+After the build completes, the generated image will contain both `ipmitool` and `phosphor-ipmi-example`.
 
-{{% notice Review %}}
-Should we explain where is the image location?
-{{% /notice %}}
+For more details about the final image configuration, you can inspect the generated FVP configuration file at `~/openbmc/build/fvp/tmp/deploy/images/fvp/obmc-phosphor-image-fvp.fvpconf`.
 
 ### Step 4: Verify the IPMI Command in Simulation
 
@@ -139,7 +137,7 @@ This response is a sequence of hexadecimal bytes returned by the BMC:
 * The first byte indicates the length of the payload — in this case `0x18`, 24 bytes.
 * The remaining 24 bytes represent the actual data payload, encoded as ASCII.
 
-![img6 alt-text#center](openbmc_impi.jpg "OpenBMC IMPI command")
+![img6 alt-text#center](openbmc_ipmi.jpg "OpenBMC IPMI command")
 
 To decode the message, copy the payload portion (excluding the first byte) and run:
 
