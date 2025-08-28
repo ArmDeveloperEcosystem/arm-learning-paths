@@ -14,7 +14,7 @@ prerequisites:
      - A [Google Cloud Platform (GCP)](https://cloud.google.com/free?utm_source=google&hl=en) account with billing enabled.
      - A GitHub account. You can sign up [here](https://github.com/signup).
 
-author: Jason Andrews
+author: Annie Tallund
 
 ##### Tags
 skilllevels: Advanced
