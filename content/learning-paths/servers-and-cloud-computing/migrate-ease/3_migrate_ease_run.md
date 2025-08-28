@@ -65,7 +65,7 @@ Here's an explanation of each of the arguments passed to the scanner tool:
 
 `{result_file_name}`: The name of the exported results file (without the extension).
 
-`{arch}`: The architecture type; `aarch64` is the default.
+`{arch}`: The architecture type; `armv8-a` is the default.
 
 `{scan_path}`: The path to the code you want to scan.
 
