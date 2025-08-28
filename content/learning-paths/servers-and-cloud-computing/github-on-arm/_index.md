@@ -17,7 +17,7 @@ prerequisites:
 author: Annie Tallund
 
 ##### Tags
-skilllevels: Advanced
+skilllevels: Introductory
 subjects: CI-CD
 cloud_service_providers: Google Cloud
 
