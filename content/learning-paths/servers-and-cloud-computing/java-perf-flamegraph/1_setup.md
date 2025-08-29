@@ -1,5 +1,5 @@
 ---
-title: Setup Tomcat Benchmark Environment
+title: Set up Tomcat benchmark environment
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -7,44 +7,59 @@ layout: learningpathall
 ---
 
 
-## Before You Begin 
-- There are numerous performance analysis methods and tools for Java applications, among which the call stack flame graph method is regarded as a conventional entry-level approach. Therefore, generating flame graphs is considered a basic operation.
-- Various methods and tools are available for generating Java flame graphs, including `async-profiler`, `Java Agent`, `jstack`, `JFR` (Java Flight Recorder), etc.
-- This Learning Path focuses on introducing two simple and easy-to-use methods: `async-profiler` and `Java Agent`.
+## Overview 
 
+Flame graphs are a widely used entry point for analyzing Java application performance. Tools for generating flame graphs include `async-profiler`, Java agents, `jstack`, and Java Flight Recorder (JFR). This Learning Path focuses on two practical approaches: using `async-profiler` and a Java agent. 
 
-## Setup Benchmark Server - Tomcat
-- [Apache Tomcat](https://tomcat.apache.org/) is an open-source Java Servlet container that enables running Java web applications, handling HTTP requests and serving dynamic content.
-- As a core component in Java web development, Apache Tomcat supports Servlet, JSP, and WebSocket technologies, providing a lightweight runtime environment for web apps.
+In this section, you'll set up a benchmark environment using Apache Tomcat and `wrk2` to simulate HTTP load and evaluate performance on an Arm-based server.
 
-1. Start by installing Java Development Kit (JDK) on your Arm-based server:
+## Set up the Tomcat benchmark server
+[Apache Tomcat](https://tomcat.apache.org/) is an open-source Java Servlet container that runs Java web applications, handles HTTP requests, and serves dynamic content. It supports technologies such as Servlet, JSP, and WebSocket.
+
+## Install the Java Development Kit (JDK)
+
+Install OpenJDK 21 on your Arm-based Ubuntu server: 
+
 ```bash
 sudo apt update
 sudo apt install -y openjdk-21-jdk
 ```
 
-2. Next, you can install Tomcat by either [building it from source](https://github.com/apache/tomcat) or downloading the pre-built package simply from [the official website](https://tomcat.apache.org/whichversion.html)
+## Install Tomcat 
+
+Download and extract Tomcat:
+
 ```bash
 wget -c https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.9/bin/apache-tomcat-11.0.9.tar.gz
 tar xzf apache-tomcat-11.0.9.tar.gz
 ```
+Alternatively, you can build Tomcat [from source](https://github.com/apache/tomcat).
 
-3. If you intend to access the built-in examples of Tomcat via an intranet IP or even an external IP, you need to modify a configuration file as shown:
+## Enable access to Tomcat examples
+
+To access the built-in examples from your local network or external IP, use a text editor to modify the `context.xml` file by updating the `RemoteAddrValve` configuration to allow all IP addresses.
+
+The file is at:
+
 ```bash
-vim apache-tomcat-11.0.9/webapps/examples/META-INF/context.xml
+apache-tomcat-11.0.9/webapps/examples/META-INF/context.xml
 ```
-Then change the values:
-```console
-# change <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
-# to
-# <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow=".*" />
-```
-Now you can start Tomcat Server:
+
+<!-- Before -->
+<Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
+
+<!-- After -->
+<Valve className="org.apache.catalina.valves.RemoteAddrValve" allow=".*" />
+
+## Start the Tomcat server
+
+Start the server:
+
 ```bash
 ./apache-tomcat-11.0.9/bin/startup.sh
 ```
 
-The output from starting the server should look like:
+You should see output like:
 
 ```output
 Using CATALINA_BASE:   /home/ubuntu/apache-tomcat-11.0.9
@@ -56,37 +71,58 @@ Using CATALINA_OPTS:
 Tomcat started.
 ```
 
-4. If you can access the page at "http://${tomcat_ip}:8080/examples" via a browser, you can proceed to the next benchmarking step.
+## Confirm server access
 
-![example image alt-text#center](./_images/lp-tomcat-homepage.png "Tomcat-HomePage")
+In your browser, open: `http://${tomcat_ip}:8080/examples`.
 
-![example image alt-text#center](./_images/lp-tomcat-examples.png "Tomcat-Examples")
+You should see the Tomcat welcome page and examples, as shown below:
 
-## Setup Benchmark Client - [wrk2](https://github.com/giltene/wrk2)
-`wrk2` is a high-performance HTTP benchmarking tool specialized in generating constant throughput loads and measuring latency percentiles for web services. `wrk2` is an enhanced version of `wrk` that provides accurate latency statistics under controlled request rates, ideal for performance testing of HTTP servers.
+![Screenshot of the Tomcat homepage showing version and welcome panel alt-text#center](./_images/lp-tomcat-homepage.png "Apache Tomcat homepage")
 
-1. To use `wrk2`, you will need to install some essential tools before you can build it:
+![Screenshot of the Tomcat examples page showing servlet and JSP demo links alt-text#center](./_images/lp-tomcat-examples.png "Apache Tomcat examples")
+
+{{% notice Note %}}Make sure port 8080 is open in the security group of the IP address for your Arm-based Linux machine.{{% /notice%}}
+
+## Set up the benchmarking client using wrk2
+[Wrk2](https://github.com/giltene/wrk2) is a high-performance HTTP benchmarking tool specialized in generating constant throughput loads and measuring latency percentiles for web services. `wrk2` is an enhanced version of `wrk` that provides accurate latency statistics under controlled request rates, ideal for performance testing of HTTP servers.
+
+{{% notice Note %}}
+Currently `wrk2` is only supported on x86 machines. Run the benchmark client steps below on an `x86_64` server running Ubuntu.
+{{%/notice%}}
+
+## Install dependencies 
+
+Install the required packages:
+
 ```bash
 sudo apt-get update
 sudo apt-get install -y build-essential libssl-dev git zlib1g-dev
 ```
 
-2. Now you can clone and build it from source:
+## Clone and build wrk2
+
+Clone the repository and compile the tool:
+
 ```bash
 sudo git clone https://github.com/giltene/wrk2.git
 cd wrk2
 sudo make
 ```
-Move the executable to somewhere in your PATH:
+
+Move the binary to a directory in your system’s PATH:
+ 
 ```bash
 sudo cp wrk /usr/local/bin
 ```
 
-3. Finally, you can run the benchamrk of Tomcat through wrk2.
+## Run the benchmark
+
+Use the following command to benchmark the HelloWorld servlet running on Tomcat:
+
 ```bash
 wrk -c32 -t16 -R50000 -d60 http://${tomcat_ip}:8080/examples/servlets/servlet/HelloWorldExample
 ```
-Shown below is the output of wrk2:
+You should see output similar to:
 
 ```console
 Running 1m test @ http://172.26.203.139:8080/examples/servlets/servlet/HelloWorldExample

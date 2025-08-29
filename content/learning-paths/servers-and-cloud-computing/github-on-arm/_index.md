@@ -1,6 +1,10 @@
 ---
 title: Deploy GitHub Actions Self-Hosted Runner on Google Axion C4A virtual machine
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for developers who want to deploy GitHub Actions Self-Hosted Runner on an Arm-based Google Axion C4A instance.

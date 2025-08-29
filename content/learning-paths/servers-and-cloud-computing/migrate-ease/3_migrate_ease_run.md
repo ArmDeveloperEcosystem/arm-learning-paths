@@ -48,13 +48,13 @@ You can use migrate-ease from the command-line or through a Web GUI.
 You can scan local codebases written in a supported programming languages. By default, scan results from the code analysis are sent to the console.
 
 ```bash
-python3 -m {scanner_name} --arch {arch} {scan_path}
+python3 -m {scanner_name} --march {arch} {scan_path}
 ```
 The result from the scan can be exported as `txt`, `csv`, `json` or `html`. Specify this using the `--output` option:
 
 To generate a JSON report:
 ```bash
-python3 -m {scanner_name} --output {result_file_name}.json --arch {arch} {scan_path}
+python3 -m {scanner_name} --output {result_file_name}.json --march {arch} {scan_path}
 ```
 
 Here's an explanation of each of the arguments passed to the scanner tool:
@@ -65,13 +65,13 @@ Here's an explanation of each of the arguments passed to the scanner tool:
 
 `{result_file_name}`: The name of the exported results file (without the extension).
 
-`{arch}`: The architecture type; `aarch64` is the default.
+`{arch}`: The architecture type; `armv8-a` is the default.
 
 `{scan_path}`: The path to the code you want to scan.
 
 To scan a remote Git repository:
 ```bash
-python3 -m {scanner_name} --output {result_file_name}.json --arch {arch} --git-repo {repo} {clone_path}
+python3 -m {scanner_name} --output {result_file_name}.json --march {arch} --git-repo {repo} {clone_path}
 ```
 In the case of git repository scan, `{clone_path}` is a directory where the remote repo code is cloned into. This directory should be empty or must be created by the user.
 

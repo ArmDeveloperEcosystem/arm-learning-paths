@@ -8,8 +8,8 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- Linux: 154
-- macOS: 10
+- Linux: 157
+- macOS: 11
 - Windows: 14
 pinned_modules:
 - module:
@@ -22,8 +22,8 @@ subjects_filter:
 - Containers and Virtualization: 29
 - Databases: 15
 - Libraries: 9
-- ML: 28
-- Performance and Architecture: 60
+- ML: 29
+- Performance and Architecture: 62
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -47,6 +47,8 @@ tools_software_languages_filter:
 - ASP.NET Core: 2
 - Assembly: 4
 - assembly: 1
+- async-profiler: 1
+- AWS: 1
 - AWS CDK: 2
 - AWS CodeBuild: 1
 - AWS EC2: 2
@@ -65,7 +67,7 @@ tools_software_languages_filter:
 - C++: 8
 - C/C++: 2
 - Capstone: 1
-- CCA: 6
+- CCA: 7
 - Clair: 1
 - Clang: 10
 - ClickBench: 1
@@ -77,10 +79,11 @@ tools_software_languages_filter:
 - Daytona: 1
 - Demo: 3
 - Django: 1
-- Docker: 17
+- Docker: 18
 - Envoy: 2
 - ExecuTorch: 1
 - FAISS: 1
+- FlameGraph: 1
 - Flink: 1
 - Fortran: 1
 - FunASR: 1
@@ -88,7 +91,7 @@ tools_software_languages_filter:
 - GCC: 22
 - gdb: 1
 - Geekbench: 1
-- GenAI: 11
+- GenAI: 12
 - GitHub: 6
 - GitLab: 1
 - Glibc: 1
@@ -114,7 +117,7 @@ tools_software_languages_filter:
 - Linaro Forge: 1
 - Litmus7: 1
 - Llama.cpp: 1
-- LLM: 9
+- LLM: 10
 - llvm-mca: 1
 - LSE: 1
 - MariaDB: 1
@@ -132,6 +135,7 @@ tools_software_languages_filter:
 - Ollama: 1
 - ONNX Runtime: 1
 - OpenBLAS: 1
+- OpenJDK-21: 1
 - OpenShift: 1
 - OrchardCore: 1
 - PAPI: 1
@@ -144,7 +148,7 @@ tools_software_languages_filter:
 - RAG: 1
 - Redis: 3
 - Remote.It: 2
-- RME: 6
+- RME: 7
 - Runbook: 71
 - Rust: 2
 - snappy: 1
@@ -161,6 +165,7 @@ tools_software_languages_filter:
 - TensorFlow: 2
 - Terraform: 11
 - ThirdAI: 1
+- Tomcat: 1
 - Trusted Firmware: 1
 - TSan: 1
 - TypeScript: 1
@@ -173,6 +178,7 @@ tools_software_languages_filter:
 - Whisper: 1
 - WindowsPerf: 1
 - WordPress: 3
+- wrk2: 1
 - x265: 1
 - zlib: 1
 - Zookeeper: 1

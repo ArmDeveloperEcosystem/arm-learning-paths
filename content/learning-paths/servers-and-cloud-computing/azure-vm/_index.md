@@ -1,23 +1,22 @@
 ---
 title: Create an Azure Linux 3.0 virtual machine with Cobalt 100 processors
 
-draft: true
-cascade:
-    draft: true
+minutes_to_complete: 120
 
-minutes_to_complete: 120  
-
-who_is_this_for: This Learning Path explains how to create a virtual machine on Azure running Azure Linux 3.0 on Cobalt 100 processors.
+who_is_this_for: This is an advanced topic for developers who want to run Azure Linux 3.0 on Arm-based Cobalt 100 processors in a custom virtual machine.
 
 
 learning_objectives:
-    - Use QEMU to create a raw disk image, boot a VM using an Aarch64 ISO, install the OS, and convert the raw disk image to VHD format.
-    - Upload the VHD file to Azure and use the Azure Shared Image Gallery (SIG) to create a custom image.
-    - Use the Azure CLI to create an Azure Linux 3.0 VM for Arm, using the custom image from the Azure SIG.
+  - Use QEMU to create a raw disk image
+  - Boot a virtual machine using an AArch64 ISO and install Azure Linux 3.0
+  - Convert the raw disk image to VHD format
+  - Upload the VHD file to Azure
+  - Use Azure Shared Image Gallery (SIG) to create a custom image
+  - Create an Azure Linux 3.0 virtual machine on Arm using the Azure CLI and the custom image
 
 prerequisites:
-    - A [Microsoft Azure](https://azure.microsoft.com/) account with permission to create resources, including instances using Cobalt 100 processors. 
-    - A Linux machine with [QEMU](https://www.qemu.org/download/) and the [Azure CLI](/install-guides/azure-cli/) installed and authenticated.
+    - A [Microsoft Azure](https://azure.microsoft.com/) account with permission to create resources, including instances using Cobalt 100 processors
+    - A Linux machine with [QEMU](https://www.qemu.org/download/) and the [Azure CLI](/install-guides/azure-cli/) installed and authenticated
     
 author: Jason Andrews
 
@@ -38,19 +37,19 @@ operatingsystems:
 
 further_reading:
   - resource:
-      title: Azure Virtual Machines documentation
+      title: Virtual machines in Azure
       link: https://learn.microsoft.com/en-us/azure/virtual-machines/
       type: documentation
   - resource:
-      title: Azure Shared Image Gallery documentation
+      title: Store and share images in an Azure Compute Gallery
       link: https://learn.microsoft.com/en-us/azure/virtual-machines/shared-image-galleries
       type: documentation
   - resource:
-      title: QEMU User Documentation
+      title: QEMU Documentation
       link: https://wiki.qemu.org/Documentation
       type: documentation
   - resource:
-      title: Upload a VHD to Azure and create an image
+      title: Upload a VHD to Azure or copy a managed disk to another region - Azure CLI
       link: https://learn.microsoft.com/en-us/azure/virtual-machines/linux/upload-vhd
       type: documentation
 

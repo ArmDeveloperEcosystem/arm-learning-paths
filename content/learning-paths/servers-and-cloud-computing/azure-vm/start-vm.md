@@ -6,29 +6,33 @@ weight: 5
 layout: learningpathall
 ---
 
-## Create a virtual machine using the new image
+## How do I launch a virtual machine using my custom Azure image?
 
-You can now use the newly created Azure Linux image to create a virtual machine in Azure with Cobalt 100 processors. Confirm the VM is created by looking in your Azure account in the “Virtual Machines” section.
+Now that your image is registered, you can launch a new VM using the Azure CLI and the custom image ID. This example creates a Linux VM on Cobalt 100 Arm-based processors using the custom image you created earlier.
+
+## How do I create a virtual machine in Azure using a custom image?
+
+Use the following command to create a virtual machine using your custom image:
 
 ```bash
-az vm create \ 
-  --resource-group "$RESOURCE_GROUP" \ 
-  --name "$VM_NAME" \ 
-  --image "$IMAGE_ID" \ 
-  --size "$VM_SIZE" \ 
-  --admin-username "$ADMIN_USER" \ 
-  --generate-ssh-keys \ 
+az vm create \
+  --resource-group "$RESOURCE_GROUP" \
+  --name "$VM_NAME" \
+  --image "$IMAGE_ID" \
+  --size "$VM_SIZE" \
+  --admin-username "$ADMIN_USER" \
+  --generate-ssh-keys \
   --public-ip-sku Standard
 ```
 
 After the VM is successfully created, retrieve the public IP address.
 
 ```bash
-az vm show \ 
-  --resource-group "$RESOURCE_GROUP" \ 
-  --name "$VM_NAME" \ 
-  --show-details \ 
-  --query "publicIps" \ 
+az vm show \
+  --resource-group "$RESOURCE_GROUP" \
+  --name "$VM_NAME" \
+  --show-details \
+  --query "publicIps" \
   -o tsv
 ```
 
@@ -38,7 +42,7 @@ Use the public IP address to SSH to the VM. Replace `<public-ip-address>` with t
 ssh azureuser@<public-ip-address>
 ```
 
-After you login, print the machine information.
+After connecting, print the machine information:
 
 ```bash
 uname -a

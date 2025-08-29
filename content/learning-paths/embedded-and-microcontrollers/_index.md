@@ -49,7 +49,7 @@ tools_software_languages_filter:
 - Coding: 26
 - Containerd: 1
 - DetectNet: 1
-- Docker: 9
+- Docker: 10
 - DSTREAM: 2
 - Edge AI: 1
 - Edge Impulse: 1

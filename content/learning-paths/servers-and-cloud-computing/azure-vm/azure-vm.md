@@ -6,74 +6,74 @@ weight: 3
 layout: learningpathall
 ---
 
-You can view the Azure Linux 3.0 project on [GitHub](https://github.com/microsoft/azurelinux). There are links to the ISO downloads in the project README.
+## How do I create an Azure Linux image for Arm?
 
-Using QEMU, you can create a raw disk image and boot a virtual machine with the ISO to install the OS on the disk. 
+You can view the Azure Linux 3.0 project on [GitHub](https://github.com/microsoft/azurelinux). The project README includes links to ISO downloads.
 
-Once the installation is complete, you can convert the raw disk to a fixed-size VHD, upload it to Azure Blob Storage, and then use the Azure CLI to create a custom Arm image. 
+Using [QEMU](https://www.qemu.org/), you can create a raw disk image, boot a virtual machine with the ISO, and install the operating system. After installation is complete, you'll convert the image to a fixed-size VHD, upload it to Azure Blob Storage, and use the Azure CLI to create a custom Arm image. 
 
-## Download and create a virtual disk file
+## How do I download the Azure Linux ISO and create a raw disk image?
 
-Use `wget` to download the Azure Linux ISO image file.
+Use `wget` to download the Azure Linux ISO image file:
 
 ```bash
 wget https://aka.ms/azurelinux-3.0-aarch64.iso
 ```
 
-Use `qemu-img` to create a 32 GB empty raw disk image to install the OS.
-
-You can increase the disk size by modifying the value passed to `qemu-img`. 
+Create a 32 GB empty raw disk image to install the OS:
 
 ```bash
 qemu-img create -f raw azurelinux-arm64.raw 34359738368
 ```
 
-## Boot and install the OS
+{{% notice Note %}}
+You can change the disk size by adjusting the value passed to `qemu-img`. Ensure it meets the minimum disk size requirements for Azure (typically at least 30 GB). 
+{{% /notice %}}
+
+
+## How do I install Azure Linux on a raw disk image using QEMU?
 
 Use QEMU to boot the operating system in an emulated Arm VM.
 
 ```bash
-qemu-system-aarch64 \ 
-  -machine virt \ 
-  -cpu cortex-a72 \ 
-  -m 4096 \ 
-  -nographic \ 
-  -bios /usr/share/qemu-efi-aarch64/QEMU_EFI.fd \ 
-  -drive if=none,file=azurelinux-arm64.raw,format=raw,id=hd0 \ 
-  -device virtio-blk-device,drive=hd0 \ 
-  -cdrom azurelinux-3.0-aarch64.iso \ 
-  -netdev user,id=net0 \ 
+qemu-system-aarch64 \
+  -machine virt \
+  -cpu cortex-a72 \
+  -m 4096 \
+  -nographic \
+  -bios /usr/share/qemu-efi-aarch64/QEMU_EFI.fd \
+  -drive if=none,file=azurelinux-arm64.raw,format=raw,id=hd0 \
+  -device virtio-blk-device,drive=hd0 \
+  -cdrom azurelinux-3.0-aarch64.iso \
+  -netdev user,id=net0 \
   -device virtio-net-device,netdev=net0
 ```
 
-Navigate through the installer by entering the hostname, username, and password for the custom image. 
-You should use the username of `azureuser` if you want match the instructions on the following pages.
+Follow the installer prompts to enter the hostname, username, and password. Use `azureuser` as the username to ensure compatibility with later steps.
 
-Be patient, it takes some time to complete the full installation. 
+{{% notice Note %}}The installation process takes several minutes.{{% /notice %}}
 
-At the end of installation you are prompted for confirmation to reboot the system. 
-
-Once the newly installed OS boots successfully, install the Azure Linux Agent for VM provisioning, and power off the VM.
+At the end of installation, confirm the reboot prompt. After rebooting into the newly-installed OS, install and enable the Azure Linux Agent: 
 
 ```bash
-sudo dnf install WALinuxAgent -y 
-sudo systemctl enable waagent 
-sudo systemctl start waagent 
+sudo dnf install WALinuxAgent -y
+sudo systemctl enable waagent
+sudo systemctl start waagent
 sudo poweroff
 ```
 
-Be patient, it takes some time to install the packages and power off. 
+{{% notice Note %}} It can take a few minutes to install the agent and power off the VM.{{% /notice %}}
 
-## Convert the raw disk to VHD Format
+## How do I convert a raw disk image to a fixed-size VHD for Azure?
 
-Now that the raw disk image is ready to be used, convert the image to fixed-size VHD, making it compatible with Azure.
+Now that the raw disk image is ready for you to use, convert it to fixed-size VHD, which makes it compatible with Azure.
 
 ```bash
 qemu-img convert -f raw -o subformat=fixed,force_size -O vpc azurelinux-arm64.raw azurelinux-arm64.vhd
 ```
 
 {{% notice Note %}}
-VHD files have 512 bytes of footer attached at the end. The `force_size` flag ensures that the exact virtual size specified is used for the final VHD file. Without this, QEMU may round the size or adjust for footer overhead (especially when converting from raw to VHD). The `force_size` flag forces the final image to match the original size. This flag makes the final VHD size a whole number in MB or GB, which is required for Azure.
+VHD files include a 512-byte footer at the end. The `force_size` flag ensures the final image size matches the requested virtual size. Without this, QEMU might round the size or adjust for footer overhead (especially when converting from raw to VHD). The `force_size` flag forces the final image to match the original size. This is required for Azure compatibility, as it avoids rounding errors and ensures the VHD ends at a whole MB or GB boundary.
 {{% /notice %}}
 
-Next, you can save the image in your Azure account. 
+In the next step, you'll upload the VHD image to Azure and register it as a custom image for use with Arm-based virtual machines.
