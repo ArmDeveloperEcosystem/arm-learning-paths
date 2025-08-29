@@ -1,6 +1,10 @@
 ---
 title: Run an end-to-end Attestation Flow with Arm CCA and Trustee
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 60
 
 who_is_this_for: This Learning Path is for software developers who want to learn how Trustee services can be used to run an end-to-end attestation flow with Arm's Confidential Computing Architecture (CCA).
