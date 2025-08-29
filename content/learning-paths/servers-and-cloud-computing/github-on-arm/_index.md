@@ -1,7 +1,7 @@
 ---
 title: Deploy GitHub Actions Self-Hosted Runner on Google Axion C4A virtual machine
 
- draft: true
+draft: true
 cascade:
     draft: true
     
