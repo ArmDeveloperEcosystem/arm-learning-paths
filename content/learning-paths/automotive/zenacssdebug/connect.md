@@ -32,7 +32,7 @@ You can also use `File` > `New` > `Other` > `Arm Debugger` > `Model Connection`,
 `Create a debug connection...` shortcut in the `Debug Control` pane.
 {{% /notice %}}
 
-Specify a connection name (`RSE`), and associate with the above project. Click `Next`.
+Specify a connection name (`RSE`), and associate with the above `Connections` project. Click `Next`.
 
 Locate the FVP based on the name you gave it previously (`Zena_CSS_FVP`). The text filter can help locate easily.
 

@@ -30,7 +30,6 @@ The FVP will start and emit various informational messages. Once initialized you
 ```output
 ...
 Info: RD_Aspen: RD_Aspen.css.smb.rse_flashloader: FlashLoader: Saved 64MB to file '~/arm-auto-solutions/build/tmp_baremetal/deploy/images/fvp-rd-aspen/rse-flash-image.img'
-
 Info: RD_Aspen: RD_Aspen.ros.flash_loader: FlashLoader: Saved 128MB to file '~/arm-auto-solutions/build/tmp_baremetal/deploy/images/fvp-rd-aspen/ap-flash-image.img'
 ```
 
@@ -40,7 +39,7 @@ Note that execution has not started.
 
 Using the `RSE` connection created in the previous section, connect the debugger to the FVP. Observe that the processor is stopped before the first instruction has been executed.
 
-In fact, the FVP is configured to have the vector table (`VTOR_S`) start at `0x11000000`, and it you inspect memory at that address the vector table will be populated. However no debug information is visible. Debug information must be loaded.
+In fact, the FVP is configured to have the vector table (`VTOR_S`) start at `0x11000000`, and if you inspect memory at that address the vector table will be populated. However no debug information is visible. Debug information must be loaded.
 
 In the `Debug Pane`, select `Load...` from the pane menu, and select `Add Symbols file`.
 
@@ -73,11 +72,8 @@ It is recommended to have an explicit `stop` command as symbols cannot be loaded
 
 ``` text
 stop
-
 add-symbol-file /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.1.0/build/bin/bl1_1.axf
-
 set substitute-path /usr/src/debug/trusted-firmware-m/2.1.0/ /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.1.0/git/tfm/
-
 stepi
 ```
 ![Debugger pane](debugger_commands.png)

@@ -23,13 +23,14 @@ Set up the `SI` connection in a similar way as the `RSE` connection. Use the fol
 
 ``` text
 stop
-
 add-symbol-file /arm-auto-solutions/build/tmp_baremetal/deploy/images/fvp-rd-aspen/si0_ramfw.elf
-
 set substitute-path /usr/src/debug/scp-firmware/2.14.0/ /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/scp-firmware/2.14.0/git/
-
 b arch_exception_reset
 ```
+
+{{% notice Note %}}
+Exact paths may differ for your set up.
+{{% /notice %}}
 
 ### Start execution
 

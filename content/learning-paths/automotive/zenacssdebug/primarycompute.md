@@ -26,11 +26,12 @@ For example the processors start in `EL3` and moves to `EL2N` when the Linux ker
 
 ``` text
 stop
-
 add-symbol-file /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-a/2.11.0+git/image/firmware/bl2.elf EL3:0x0
-
 tbreak bl2_entrypoint
 ```
+{{% notice Note %}}
+Exact paths may differ for your set up.
+{{% /notice %}}
 
 Run the code to the `bl2_entrypoint` and you can debug as expected.
 
@@ -40,9 +41,7 @@ To make use of the OS awareness, disconnect `Primary_init` and connect to `Prima
 
 ``` text
 stop
-
 add-symbol-file /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/linux-yocto/6.6.54+git/linux-fvp_rd_aspen-standard-build/vmlinux EL2N:0x0
-
 set substitute-path /usr/src/kernel/ /arm-auto-solutions/build/tmp_baremetal/work-shared/fvp-rd-aspen/kernel-source/
 ```
 Run the FVP until the OS prompt appears.
