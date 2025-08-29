@@ -34,7 +34,7 @@ Follow these steps to install and configure Android Studio:
 
 5. Click **OK** and **Apply**.
 
-## Install Python 3.15
+## Install Python 3.13
 
 Download and install [Python version 3.13](https://www.python.org/downloads/release/python-3135/)
 
