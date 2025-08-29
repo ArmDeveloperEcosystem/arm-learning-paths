@@ -6,15 +6,18 @@ weight: 3
 layout: learningpathall
 ---
 
+In this section you will start by establish an optimal baseline for tuning the network workload.
+
 {{% notice Note %}}
 To achieve maximum performance, ulimit -n 65535 must be executed on both server and client!
 {{% /notice %}}
 
-## Optimal baseline before tuning
-- Align the IOMMU settings with default Ubuntu settings
-- Baseline on Arm Neoverse bare-metal (default configuration)
-- Baseline on Arm Neoverse bare-metal (access logging disabled)
-- Baseline on Arm Neoverse bare-metal (optimal thread count)
+## Optimal baseline configuration before tuning
+This includes:
+- Aligning the IOMMU settings with default Ubuntu settings
+- Setting up a default configuration 
+- Disabling access logging
+- Setting up an optimal thread count
 
 ### Align the IOMMU settings with default Ubuntu settings
 
