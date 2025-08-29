@@ -11,7 +11,7 @@ You will observe that each tuning method can bring significant performance impro
 
 | Method          | Requests/sec | Latency-Avg |
 |:----------------|:-------------|:------------|
-| default         | 357835.75    | 10.26s      |
+| Baseline         | 357835.75    | 10.26s      |
 | NIC-Queue       | 378782.37    | 8.35s       |
 | NUMA-Local      | 363744.39    | 9.41s       |
 | IOMMU           | 428628.50    | 4.92s       |
