@@ -1,6 +1,10 @@
 ---
 title: Deploy GitHub Actions Self-Hosted Runner on Google Axion C4A virtual machine
- 
+
+ draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 30
 
 who_is_this_for: This Learning Path is for DevOps engineers, system administrators, or developers who want to deploy GitHub Actions Self-Hosted Runner on the Google Axion C4A Arm virtual machine.
