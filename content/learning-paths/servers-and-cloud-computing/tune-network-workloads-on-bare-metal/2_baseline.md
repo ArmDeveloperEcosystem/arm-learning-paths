@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-In this section you will start by establish an optimal baseline for tuning the network workload.
+In this section you will start by setting up a baseline configuration before using advanced techniques to tune the performance of network workloads.
 
 {{% notice Note %}}
 To achieve maximum performance, ulimit -n 65535 must be executed on both server and client!
