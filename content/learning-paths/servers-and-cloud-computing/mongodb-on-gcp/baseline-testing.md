@@ -110,7 +110,7 @@ Expected output:
 
 ### 7. Delete a Document
 
-Remove a single document:
+The command below tells MongoDB to delete one document from the test collection, where record is exactly 100:
 
 ```javascript
 db.test.deleteOne({ record: 100 })
