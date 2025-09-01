@@ -59,7 +59,7 @@ mkdir ~/openbmc/meta-evb/meta-evb-arm/meta-evb-fvp-base/recipes-phosphor/ipmi/ph
 touch ~/openbmc/meta-evb/meta-evb-arm/meta-evb-fvp-base/recipes-phosphor/ipmi/phosphor-ipmi-example/fvp-ipmi.cpp
 ```
 
-```c++
+```cpp
 #include <ipmid/api.hpp>
 #include <ipmid/utils.hpp>
 #include <string>

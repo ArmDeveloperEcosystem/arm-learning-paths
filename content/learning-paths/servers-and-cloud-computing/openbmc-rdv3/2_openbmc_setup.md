@@ -317,6 +317,6 @@ Your workspace should now follow a structured layout that separates the FVP simu
 │   ├── poky
 │   └── setup
 └── run.sh
-``
+```
 
 With both the OpenBMC and host firmware environments built and configured, you’re now fully prepared to launch the full system simulation and observe the boot process in action.
