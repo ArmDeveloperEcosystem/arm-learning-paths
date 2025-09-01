@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Debug Primary Compute and Linux OS"
+title: "Debug Primary Compute and Linux"
 
 weight: 8 # 1 is first, 2 is second, etc.
 
@@ -14,15 +14,15 @@ The Primary Compute application processors (`Cortex-A720AE`) are the final proce
 
 As before we can connect whilst powered down and monitor the point that they are enabled.
 
-You can debug the initialization code and/or the final operating system threads.
+You can debug the initialization code and/or the final Linux Operating System (OS) threads.
 
 ### Connect debugger to target
 
 Use the following debugger commands in the `Primary_init.launch` to load the symbols for the `BL2` initialization code, setting a breakpoint at `bl2_entrypoint`.
 
-Note that an address "offset" is used to specify the exception level that the image are relevant to. If code changes exception level, debug info would need to also be loaded to the corresponding EL address space.
+Note that an address "offset" is used to specify the exception level that the image is relevant to. If the processor changes exception level, the debug information would need to also be loaded to the corresponding EL address space.
 
-For example the processors start in `EL3` and moves to `EL2N` when the Linux kernel is enabled.
+For example the processors start in `EL3` and move to `EL2N` when the Linux kernel is enabled.
 
 ``` text
 stop
