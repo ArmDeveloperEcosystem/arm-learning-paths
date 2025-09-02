@@ -77,9 +77,8 @@ def should_capitalize_replacement(original, start_index, replacement):
     should_capitalize = False
     if start_index == 0 or (start_index >= 2 and original[start_index-2:start_index] == '. '):
         if replacement and replacement[0].islower():
-            return replacement[0].upper() + replacement[1:]
-        should_capitalize = True
-    return replacement, should_capitalize
+            should_capitalize = True
+    return should_capitalize
 
 def detect_passive_voice_with_spacy(text):
     """
@@ -126,7 +125,7 @@ def detect_passive_voice_with_spacy(text):
 
                 # Create active voice suggestion
                 # Capitalize if at start of sentence
-                active_suggestion, should_capitalize = should_capitalize_replacement(text, passive_span.start_char, active_suggestion)
+                should_capitalize = should_capitalize_replacement(text, passive_span.start_char, active_suggestion)
                 if should_capitalize:
                     active_suggestion = active_suggestion[0].upper() + active_suggestion[1:]
 
@@ -255,8 +254,9 @@ def check_style(content, file_path, style_rules):
 
                 # Get the matched text
                 # Determine if replacement should be capitalized
-                replacement, should_capitalize = should_capitalize_replacement(line, match.start(), rule["replacement"])
-                if replacement and should_capitalize:
+                replacement = rule["replacement"]
+                should_capitalize = should_capitalize_replacement(line, match.start(), replacement)
+                if should_capitalize:
                     replacement = replacement[0].upper() + replacement[1:]
 
                 # Apply the replacement
@@ -422,6 +422,10 @@ def main():
                     suggestions = check_style(content, file_path, style_rules)
                     all_suggestions.extend(suggestions)
                     print(f"Checked {file_path}: Found {len(suggestions)} style issues")
+
+    if not all_suggestions:
+        print("No style issues found in the checked files.")
+        return
 
     save_suggestions_to_file(all_suggestions, args.output)
     interactive_review(all_suggestions)
