@@ -7,10 +7,9 @@ layout: learningpathall
 ---
 
 ## Tuning via NIC queue count
-- Setting NIC queue count
-- The result after tuning NIC queue count
+To further optmize your settings, you can set the NIC queue count and observe the performance uplift:
 
-Typically, the number of transmit/receive queues for network cards in bare-metal environments is relatively large, reaching 63 on Grace. Each transmit/receive queue corresponds to one interrupt number. Before CPU cores are taken offline, there are sufficient cores to handle these interrupt numbers. However, when only 8 cores are retained, it results in a single core having to handle multiple interrupt numbers, thereby triggering more context switches.
+Typically, the number of transmit/receive queues for network cards in bare-metal environments is relatively large, reaching 63 on Arm Neoverse. Each transmit/receive queue corresponds to one interrupt number. Before CPU cores are taken offline, there are sufficient cores to handle these interrupt numbers. However, when only 8 cores are retained, it results in a single core having to handle multiple interrupt numbers, thereby triggering more context switches.
 
 ### Setting NIC queue count
 
@@ -18,19 +17,19 @@ Typically, the number of transmit/receive queues for network cards in bare-metal
 ```bash
 ip addr
 ```
-It can be observed that the NIC name `enp1s0f0np0` corresponsed to the IP address `10.169.226.181`.
-```bash
+From the output you can see that the NIC name `enp1s0f0np0` corresponds to the IP address `10.169.226.181`.
+```output
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
     inet6 ::1/128 scope host noprefixroute
        valid_lft forever preferred_lft forever
-2: enp1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
-    link/ether b8:e9:24:67:d5:3a brd ff:ff:ff:ff:ff:ff
-    inet 10.169.226.181/24 brd 10.169.226.255 scope global enp1s0f0np0
-       valid_lft forever preferred_lft forever
-    inet6 fe80::bae9:24ff:fe67:d53a/64 scope link
+2: enP11p4s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
+    link/ether 0e:cc:0b:ff:f6:57 brd ff:ff:ff:ff:ff:ff
+    inet 172.31.46.193/20 metric 100 brd 172.31.47.255 scope global dynamic enP11p4s0
+       valid_lft 1938sec preferred_lft 1938sec
+    inet6 fe80::ccc:bff:feff:f657/64 scope link
        valid_lft forever preferred_lft forever
 ```
 
@@ -45,17 +44,17 @@ sudo ethtool -l ${net}
 ```
 It can be observed that the number of transmit/receive queues for the ${net} network interface is currently 63.
 ```bash
-Channel parameters for enp1s0f0np0:
+Channel parameters for enP11p4s0:
 Pre-set maximums:
 RX:		n/a
 TX:		n/a
 Other:		n/a
-Combined:	63
+Combined:	32
 Current hardware settings:
 RX:		n/a
 TX:		n/a
 Other:		n/a
-Combined:	63
+Combined:	32
 ```
 
 4. Use the following command to reset the number of transmit/receive queues for the ${net} to match the number of CPUs, which is 8.
@@ -66,14 +65,14 @@ sudo ethtool -L ${net} combined 8
 ```bash
 sudo ethtool -l ${net}
 ```
-It can be observed that the number of combined Rx/Tx queues has been updated to 8.
-```bash
-Channel parameters for enp1s0f0np0:
+You should see that the number of combined Rx/Tx queues has been updated to 8.
+```output
+Channel parameters for enP11p4s0:
 Pre-set maximums:
 RX:		n/a
 TX:		n/a
 Other:		n/a
-Combined:	63
+Combined:	32
 Current hardware settings:
 RX:		n/a
 TX:		n/a
@@ -81,25 +80,25 @@ Other:		n/a
 Combined:	8
 ```
 
-### The result after tuning NIC queue count
+### The performance uplift after tuning NIC queue count
 
-1. Use the following command on the Grace bare-metal where `Tomcat` is on
+1. Shutdown and restart `Tomcat` on your Arm Neoverse bare-metal instance as shown:
 ```bash
-~/apache-tomcat-11.0.9/bin/shutdown.sh 2>/dev/null
-ulimit -n 65535 && ~/apache-tomcat-11.0.9/bin/startup.sh
+~/apache-tomcat-11.0.10/bin/shutdown.sh 2>/dev/null
+ulimit -n 65535 && ~/apache-tomcat-11.0.10/bin/startup.sh
 ```
 
-2. And use the following command on the `x86_64` bare-metal where `wrk2` is on
+2. Run `wrk2` on your `x86_64` bare-metal instance:
 ```bash
 ulimit -n 65535 && wrk -c1280 -t128 -R500000 -d60 http://${tomcat_ip}:8080/examples/servlets/servlet/HelloWorldExample
 ```
 
-The result after NIC queue count tuned:
-```bash
+Notice the performance uplift after tuning the NIC queue count:
+```output
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency    21.64s     8.71s   37.22s    57.82%
-    Req/Sec     1.53k     5.70     1.55k    77.15%
-  11562557 requests in 1.00m, 6.00GB read
-Requests/sec: 192932.92
-Transfer/sec:    102.49MB
+    Latency     8.35s     4.14s   16.33s    61.16%
+    Req/Sec     2.96k    73.02     3.24k    89.16%
+  22712999 requests in 1.00m, 11.78GB read
+Requests/sec: 378782.37
+Transfer/sec:    201.21MB
 ```

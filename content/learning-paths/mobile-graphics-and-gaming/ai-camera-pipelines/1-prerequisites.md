@@ -13,7 +13,7 @@ This Learning Path demonstrates how to improve the performance of camera pipelin
 ## Install required software
 
 Make sure the following tools are installed:
-- `git` - a version control system, for cloning the Voice Assistant codebase.
+- `git` - a version control system, for cloning the AI camera pipelines codebase.
 - `git lfs` - an extension to `git` for managing large files by storing lightweight references instead of the files themselves.
 - `docker` - an open-source containerization platform for running applications in isolated environments.
 - `libomp` - LLVM's OpenMP runtime library, required for enabling parallel execution during application performance optimization.
@@ -52,7 +52,7 @@ Once you have confirmed that Docker is installed on your machine, you can check 
 docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
-c9c5fd25a1bd: Pull complete 
+c9c5fd25a1bd: Pull complete
 Digest: sha256:c41088499908a59aae84b0a49c70e86f4731e588a737f1637e73c8c09d995654
 Status: Downloaded newer image for hello-world:latest
 
