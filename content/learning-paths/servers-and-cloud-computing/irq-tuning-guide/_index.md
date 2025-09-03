@@ -21,9 +21,17 @@ skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - AArch64
+tools_software_languages:
+
 operatingsystems:
     - Linux
 
+
+further_reading:
+    - resource:
+        title: Perf for Linux on Arm (LinuxPerf)
+        link: https://learn.arm.com/install-guides/perf/
+        type: website
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
