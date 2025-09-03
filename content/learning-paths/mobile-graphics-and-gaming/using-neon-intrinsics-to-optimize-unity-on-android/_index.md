@@ -5,7 +5,7 @@ minutes_to_complete: 90
 
 who_is_this_for: Developers who want to optimize their Unity apps on Android
 
-learning_objectives: 
+learning_objectives:
     - Use Arm Neon intrinsics in your Unity C# scripts
     - Optimize your code
     - Collect and compare performance data using the Unity Profiler and Analyzer tools
@@ -19,7 +19,7 @@ prerequisites:
 author: Arm
 
 ### Tags
-skilllevels: Intermediate
+skilllevels: Advanced
 subjects: Gaming
 armips:
     - armv8

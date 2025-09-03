@@ -5,7 +5,7 @@ minutes_to_complete: 120
 
 who_is_this_for: This Learning Path is for Vulkan developers who are familiar with rendering and are interested in deploying ray tracing in their applications.
 
-learning_objectives: 
+learning_objectives:
     - Describe how the Vulkan ray tracing API works.
     - Describe how to use ray tracing to implement realistic shadows, reflections, and refractions.
     - Implement basic ray tracing effects in a Vulkan renderer.
@@ -18,7 +18,7 @@ prerequisites:
 author: Iago Calvo Lista
 
 ### Tags
-skilllevels: Intermediate
+skilllevels: Advanced
 subjects: Graphics
 armips:
     - Mali
