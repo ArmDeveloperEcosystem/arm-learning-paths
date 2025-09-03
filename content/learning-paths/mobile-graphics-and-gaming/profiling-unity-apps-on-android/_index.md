@@ -5,7 +5,7 @@ minutes_to_complete: 40
 
 who_is_this_for: Unity developers wanting to analyze the performance of their apps on Android devices
 
-learning_objectives: 
+learning_objectives:
     - Deploy to Android
     - Profile code running on an Android device
     - Analyze performance data
@@ -19,7 +19,7 @@ prerequisites:
 author: Arm
 
 ### Tags
-skilllevels: Intermediate
+skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - armv8
