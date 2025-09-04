@@ -27,6 +27,7 @@ Only used by 'tabpane' shortcode to process code in tabs.
 {{ else }}
 {{ with $.Get "language" }}        {{ $tab = merge $tab (dict "language" ($.Get "language")) }}               {{ end }}
 {{ with $.Get "line_numbers" }}    {{ $tab = merge $tab (dict "line_numbers" ($.Get "line_numbers")) }}       {{ end }}
+{{ with $.Get "line_start" }}      {{ $tab = merge $tab (dict "line_start" ($.Get "line_start")) }}           {{ end }}
 {{ with $.Get "output_lines" }}    {{ $tab = merge $tab (dict "output_lines" ($.Get "output_lines")) }}       {{ end }}
 {{ with $.Get "command_line" }}    {{ $tab = merge $tab (dict "command_line" ($.Get "command_line")) }}       {{ end }}
 {{ with $.Inner }}
