@@ -83,12 +83,26 @@ Specify that line_numbers are true in the following way:
 \`\`\`bash { line_numbers = "true" } \
 echo 'hello world' \
 echo ‘I am line two’ \
-\`\`\` 
+\`\`\`
 
-```bash { line_numbers = "true" } 
-echo ‘hello world’ 
-echo ‘I am line two’ 
-``` 
+```bash { line_numbers = "true" }
+echo ‘hello world’
+echo ‘I am line two’
+```
+
+In some cases, the line numbering should not start from one but from another
+value, e.g. if the code excerpt is extracted from a larger file. Use the
+`line_start` attribute to achieve this:
+
+\`\`\`bash { line_numbers = "true" line_start = "10" } \
+echo 'hello world' \
+echo ‘I am line two’ \
+\`\`\`
+
+```bash { line_numbers = "true" line_start = "10" }
+echo ‘hello world’
+echo ‘I am line eleven’
+```
 
 ### Output Lines
 
