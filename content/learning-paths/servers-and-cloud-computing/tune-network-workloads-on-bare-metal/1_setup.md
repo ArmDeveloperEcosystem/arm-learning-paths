@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-Tomcat is a common client–server web workload that serves HTTP/HTTPS requests. In this section, you will set up a benchmarking environment using **Apache Tomcat** (server) and **wrk2** (client) to generate load and measure performance on an Arm-based bare‑metal instance. This guide was validated on an AWS **c8g.metal‑48xl** running Ubuntu 24.04.
+Tomcat is a common client–server web workload that serves HTTP/HTTPS requests. In this section, you will set up a benchmarking environment using Apache Tomcat (server) and `wrk2` (client) to generate load and measure performance on an Arm-based bare‑metal instance. This guide was validated on an AWS `c8g.metal‑48xl` instance running Ubuntu 24.04.
 
 ## Set up the Tomcat benchmark server
 
@@ -36,7 +36,7 @@ Alternatively, you can build Tomcat [from source](https://github.com/apache/tomc
 
 ## Enable access to Tomcat examples
 
-To access the built‑in examples from your local network or external IP, modify the `context.xml` file and update the `RemoteAddrValve` to allow your clients.
+To access the built‑in examples from your local network or external IP, modify the `context.xml` file and update `RemoteAddrValve` to allow your clients.
 
 The file is located at:
 

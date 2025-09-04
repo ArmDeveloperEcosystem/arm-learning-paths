@@ -6,28 +6,30 @@ weight: 6
 layout: learningpathall
 ---
 
-## IOMMU-based tuning
-IOMMU (Input-Output Memory Management Unit) is a hardware feature that manages how I/O devices access memory. 
-In cloud environments, SmartNICs are typically used to offload the IOMMU workload. On bare-metal systems, to align performance with the cloud, you should disable `iommu.strict` and enable `iommu.passthrough` settings to achieve better performance.
+## Tune with IOMMU
 
-### Setting IOMMU
+IOMMU (Input–Output Memory Management Unit) controls how I/O devices access memory. In many cloud environments, SmartNICs offload IOMMU-related work. On Arm Neoverse bare‑metal systems, you can often improve Tomcat networking performance by **disabling strict mode** and **enabling passthrough** (setting `iommu.strict=0` and `iommu.passthrough=1`).
 
-1. To configure the IOMMU setting, use a text editor to modify the `grub` file by adding or updating the `GRUB_CMDLINE_LINUX` configuration.
+## Configure IOMMU settings
+
+Edit the GRUB configuration to set IOMMU to passthrough and disable strict invalidations:
 
 ```bash
 sudo vi /etc/default/grub
 ```
-then add or update:
+Add or update the kernel command line:
 ```bash
 GRUB_CMDLINE_LINUX="iommu.strict=0 iommu.passthrough=1"
 ```
 
-2. Update GRUB and reboot to apply the settings.
+Update GRUB and reboot to apply the settings:
+
 ```bash
 sudo update-grub && sudo reboot
 ```
 
-3. Verify if the settings have been successfully applied:
+Verify that IOMMU is in passthrough mode after reboot:
+
 ```bash
 sudo dmesg | grep iommu
 ```
@@ -38,24 +40,30 @@ You will notice that the IOMMU is already in passthrough mode:
 [    0.855658] iommu: Default domain type: Passthrough (set via kernel command line)
 ```
 
-### The result after configuring IOMMU
+## Validate performance after IOMMU tuning
 
-1. Run the following command on the Arm Neoverse bare-metal where `Tomcat` is on:
+Prepare the Arm Neoverse bare‑metal server (ensure your `${net}` interface variable is set; if not, set it to your NIC name, for example `net=enP11p4s0`), align queues, and restart Tomcat:
+
 ```bash
 for no in {96..103}; do sudo bash -c "echo 1 > /sys/devices/system/cpu/cpu${no}/online"; done
 for no in {0..95} {104..191}; do sudo bash -c "echo 0 > /sys/devices/system/cpu/cpu${no}/online"; done
-net=$(ls /sys/class/net/ | grep 'en')
+
+# Ensure NIC queue count matches the number of online CPUs (example: 8)
 sudo ethtool -L ${net} combined 8
+
+# Restart Tomcat with a higher file‑descriptor limit
 ~/apache-tomcat-11.0.10/bin/shutdown.sh 2>/dev/null
 ulimit -n 65535 && ~/apache-tomcat-11.0.10/bin/startup.sh
 ```
 
-2. Run run `wrk2` on the `x86_64` bare-metal instance as shown:
+Run `wrk2` on the `x86_64` benchmarking client to measure throughput and latency:
+
 ```bash
 ulimit -n 65535 && wrk -c1280 -t128 -R500000 -d60 http://${tomcat_ip}:8080/examples/servlets/servlet/HelloWorldExample
 ```
 
-The result after iommu tuning should look like:
+Sample results after IOMMU tuning:
+
 ```output
   Thread Stats   Avg      Stdev     Max   +/- Stdev
     Latency     4.92s     2.49s   10.08s    62.27%

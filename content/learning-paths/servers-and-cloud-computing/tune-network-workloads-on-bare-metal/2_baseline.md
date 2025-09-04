@@ -26,7 +26,7 @@ This baseline includes:
 - Disabling access logging
 - Setting optimal thread counts
 
-### Align IOMMU settings with Ubuntu defaults
+## Align IOMMU settings with Ubuntu defaults
 
 {{% notice Note %}}
 If you are using a cloud image (for example, AWS) with non-default kernel parameters, align IOMMU settings with the Ubuntu defaults: `iommu.strict=1` and `iommu.passthrough=0`.
@@ -60,7 +60,7 @@ You should see that under the default configuration, `iommu.strict` is enabled, 
 ...
 ```
 
-### Establish a baseline on Arm Neoverse bare-metal instances
+## Establish a baseline on Arm Neoverse bare-metal instances
 
 {{% notice Note %}}
 To mirror a typical Tomcat deployment and simplify tuning, keep **8 CPU cores online** and set the remaining cores offline. Adjust the CPU range to match your instance. The example below assumes 192 CPUs (as on AWS `c8g.metal-48xl`).
@@ -115,7 +115,7 @@ To mirror a typical Tomcat deployment and simplify tuning, keep **8 CPU cores on
     Transfer/sec:    129.90MB
     ```
 
-### Disable access logging
+## Disable access logging
 
 Disabling access logs removes I/O overhead during benchmarking.
 
@@ -157,7 +157,7 @@ Disabling access logs removes I/O overhead during benchmarking.
     Transfer/sec:    144.36MB
     ```
 
-### Set optimal thread counts
+## Set optimal thread counts
 
 To minimize contention and context switching, align Tomcat’s CPU‑intensive thread count with available CPU cores.
 

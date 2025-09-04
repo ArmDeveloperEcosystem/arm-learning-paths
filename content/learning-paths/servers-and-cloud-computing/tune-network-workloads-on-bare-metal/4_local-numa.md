@@ -1,5 +1,5 @@
 ---
-title: NUMA-based Tuning
+title: NUMA-based tuning
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -10,7 +10,7 @@ layout: learningpathall
 
 In this section, you configure local NUMA and assess the performance uplift achieved through tuning. Cross‑NUMA data transfers generally incur higher latency than intra‑NUMA transfers, so Tomcat should be deployed on the NUMA node where the network interface resides to reduce cross‑node memory traffic and improve throughput and latency.
 
-### Configure local NUMA
+## Configure local NUMA
 
 Check NUMA topology and relative latencies:
 
@@ -78,7 +78,7 @@ NUMA:
 ...
 ```
 
-### Validate performance after NUMA tuning
+## Validate performance after NUMA tuning
 
 Restart Tomcat on the Arm Neoverse bare‑metal instance:
 

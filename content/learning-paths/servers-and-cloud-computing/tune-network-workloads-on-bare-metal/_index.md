@@ -14,7 +14,7 @@ learning_objectives:
 
 prerequisites:
     - An Arm Neoverse-based bare-metal server running Ubuntu 24.04 to run Apache Tomcat (this Learning Path was tested with an AWS c8g.metal-48xl instance)
-    - Access to an x86_64 bare-metal server running Ubuntu 24.04 to run wrk2
+    - Access to an x86_64 bare-metal server running Ubuntu 24.04 to run `wrk2`
     - Basic familiarity with Java applications
 
 author: Ying Yu, Ker Liu, Rui Chang
