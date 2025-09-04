@@ -6,14 +6,14 @@ minutes_to_complete: 60
 who_is_this_for: This is an advanced topic for engineers who want to tune the performance of network workloads on Arm Neoverse-based bare-metal instances.
 
 learning_objectives: 
-    - Set up a benchmarking environment using Apache Tomcat and wrk2 on an Arm Neoverse bare‑metal host
-    - Establish a reproducible baseline performance configuration (throughput and latency) before tuning
-    - Tune NIC multi‑queue, RSS/RPS/XPS, and IRQ affinity to increase throughput and stabilize latency
-    - Optimize NUMA locality by pinning Tomcat workers and interrupts to local CPUs and memory
-    - Evaluate IOMMU configuration options and select the setting that maximizes networking performance
+    - Set up Apache Tomcat and wrk2 to benchmark HTTP on an Arm Neoverse bare‑metal host
+    - Establish a reproducible baseline baseline (file‑descriptor limits, logging, thread counts, fixed core set)
+    - Tune NIC queue count to match available cores and measure impact
+    - Improve NUMA locality by placing Tomcat on the NIC’s NUMA node and aligning worker threads with cores
+    - Compare IOMMU strict mode and IOMMU passthrough mode, and select the configuration that delivers the best performance for your workload
 
 prerequisites:
-    - An Arm Neoverse-based bare-metal server running Ubuntu 24.04 to run Apache Tomcat (this Learning Path was tested with an AWS c8g.metal-48xl instance)
+    - An Arm Neoverse-based bare-metal server running Ubuntu 24.04 to run Apache Tomcat
     - Access to an x86_64 bare-metal server running Ubuntu 24.04 to run `wrk2`
     - Basic familiarity with Java applications
 

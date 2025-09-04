@@ -11,7 +11,7 @@ layout: learningpathall
 In this section, you establish a baseline configuration before applying advanced techniques to tune the performance of Tomcat-based network workloads on an Arm Neoverse bare-metal instance.
 
 {{% notice Note %}}
-To avoid running out of file descriptors under load, raise the file‑descriptor limit on **both** the server and the client:
+To avoid running out of file descriptors under load, raise the file‑descriptor limit on *both* the server and the client:
 ```bash
 ulimit -n 65535
 ```
@@ -32,24 +32,24 @@ This baseline includes:
 If you are using a cloud image (for example, AWS) with non-default kernel parameters, align IOMMU settings with the Ubuntu defaults: `iommu.strict=1` and `iommu.passthrough=0`.
 {{% /notice %}}
 
-1. Edit GRUB and add (or update) `GRUB_CMDLINE_LINUX`:
+Edit GRUB and add (or update) `GRUB_CMDLINE_LINUX`:
 
-    ```bash
+```bash
     sudo vi /etc/default/grub
-    ```
+```
 
-    Add or update the line to include:
-    ```bash
+Add or update the line to include:
+```bash
     GRUB_CMDLINE_LINUX="iommu.strict=1 iommu.passthrough=0"
-    ```
+```
 
-2. Update GRUB and reboot to apply the settings:
+Update GRUB and reboot to apply the settings:
 
-    ```bash
+```bash
     sudo update-grub && sudo reboot
-    ```
+```
 
-3. Verify that the default settings have been successfully applied:
+Verify that the default settings have been successfully applied:
 ```bash
 sudo dmesg | grep iommu
 ```
@@ -63,23 +63,23 @@ You should see that under the default configuration, `iommu.strict` is enabled, 
 ## Establish a baseline on Arm Neoverse bare-metal instances
 
 {{% notice Note %}}
-To mirror a typical Tomcat deployment and simplify tuning, keep **8 CPU cores online** and set the remaining cores offline. Adjust the CPU range to match your instance. The example below assumes 192 CPUs (as on AWS `c8g.metal-48xl`).
+To mirror a typical Tomcat deployment and simplify tuning, keep 8 CPU cores online and set the remaining cores offline. Adjust the CPU range to match your instance. The example below assumes 192 CPUs (as on AWS `c8g.metal-48xl`).
 {{% /notice %}}
 
-1. Set CPUs 8–191 offline:
+Set CPUs 8–191 offline:
 
-    ```bash
+```bash
     for no in {8..191}; do sudo bash -c "echo 0 > /sys/devices/system/cpu/cpu${no}/online"; done
-    ```
+```
 
-2. Confirm that CPUs `0–7` are online and the rest are offline:
+Confirm that CPUs `0–7` are online and the rest are offline:
 
-    ```bash
+```bash
     lscpu
-    ```
+```
 
-    Example output:
-    ```output
+Example output:
+```output
     Architecture:                aarch64
       CPU op-mode(s):            64-bit
       Byte Order:                Little Endian
@@ -89,23 +89,23 @@ To mirror a typical Tomcat deployment and simplify tuning, keep **8 CPU cores on
     Vendor ID:                   ARM
       Model name:                Neoverse-V2
     ...
-    ```
+```
 
-3. Restart Tomcat on the Arm instance:
+Restart Tomcat on the Arm instance:
 
-    ```bash
+```bash
     ~/apache-tomcat-11.0.10/bin/shutdown.sh 2>/dev/null
     ulimit -n 65535 && ~/apache-tomcat-11.0.10/bin/startup.sh
-    ```
+```
 
-4. From your `x86_64` benchmarking client, run `wrk2` (replace `<tomcat_ip>` with the server’s IP):
+From your `x86_64` benchmarking client, run `wrk2` (replace `<tomcat_ip>` with the server’s IP):
 
-    ```bash
+```bash
     ulimit -n 65535 && wrk -c1280 -t128 -R500000 -d60 http://<tomcat_ip>:8080/examples/servlets/servlet/HelloWorldExample
-    ```
+```
 
-    Example result:
-    ```output
+Example result:
+```output
       Thread Stats   Avg      Stdev     Max   +/- Stdev
         Latency    16.76s     6.59s   27.56s    56.98%
         Req/Sec     1.97k   165.05     2.33k    89.90%
@@ -113,41 +113,41 @@ To mirror a typical Tomcat deployment and simplify tuning, keep **8 CPU cores on
       Socket errors: connect 1264, read 0, write 0, timeout 1748
     Requests/sec: 244449.62
     Transfer/sec:    129.90MB
-    ```
+```
 
 ## Disable access logging
 
 Disabling access logs removes I/O overhead during benchmarking.
 
-1. Edit `server.xml` and comment out (or remove) the **`org.apache.catalina.valves.AccessLogValve`** block:
+Edit `server.xml` and comment out (or remove) the **`org.apache.catalina.valves.AccessLogValve`** block:
 
-    ```bash
+```bash
     vi ~/apache-tomcat-11.0.10/conf/server.xml
-    ```
+```
 
-    ```xml
+```xml
     <!--
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                 prefix="localhost_access_log" suffix=".txt"
                 pattern="%h %l %u %t &quot;%r&quot; %s %b" />
     -->
-    ```
+```
 
-2. Restart Tomcat:
+Restart Tomcat:
 
-    ```bash
+```bash
     ~/apache-tomcat-11.0.10/bin/shutdown.sh 2>/dev/null
     ulimit -n 65535 && ~/apache-tomcat-11.0.10/bin/startup.sh
-    ```
+```
 
-3. Re-run `wrk2`:
+Re-run `wrk2`:
 
-    ```bash
+```bash
     ulimit -n 65535 && wrk -c1280 -t128 -R500000 -d60 http://<tomcat_ip>:8080/examples/servlets/servlet/HelloWorldExample
-    ```
+```
 
-    Example result:
-    ```output
+Example result:
+```output
       Thread Stats   Avg      Stdev     Max   +/- Stdev
         Latency    16.16s     6.45s   28.26s    57.85%
         Req/Sec     2.16k     5.91     2.17k    77.50%
@@ -155,20 +155,20 @@ Disabling access logs removes I/O overhead during benchmarking.
       Socket errors: connect 0, read 0, write 0, timeout 75
     Requests/sec: 271675.12
     Transfer/sec:    144.36MB
-    ```
+```
 
 ## Set optimal thread counts
 
 To minimize contention and context switching, align Tomcat’s CPU‑intensive thread count with available CPU cores.
 
-1. While `wrk2` is running, identify CPU‑intensive Tomcat threads:
+While `wrk2` is running, identify CPU‑intensive Tomcat threads:
 
-    ```bash
+```bash
     top -H -p "$(pgrep -n java)"
-    ```
+```
 
-    Example output:
-    ```output
+Example output:
+```output
     top - 08:57:29 up 20 min,  1 user,  load average: 4.17, 2.35, 1.22
     Threads: 231 total,   8 running, 223 sleeping,   0 stopped,   0 zombie
     %Cpu(s): 31.7 us, 20.2 sy,  0.0 ni, 31.0 id,  0.0 wa,  0.0 hi, 17.2 si,  0.0 st
@@ -204,24 +204,24 @@ To minimize contention and context switching, align Tomcat’s CPU‑intensive t
 ...
 ```
 
-    You’ll typically see **`http-nio-8080-e`** and **`http-nio-8080-P`** threads as CPU intensive. Because the **`http-nio-8080-P`** thread count is fixed at 1 (in current Tomcat releases), and you have 8 online CPU cores, set **`http-nio-8080-e`** to **7**.
+You’ll typically see `http-nio-8080-e` and `http-nio-8080-P` threads as CPU-intensive. Because the `http-nio-8080-P` thread count is fixed at 1 (in current Tomcat releases), and you have 8 online CPU cores, set `http-nio-8080-e` to 7.
 
-2. Edit `server.xml` and update the HTTP connector to set the worker thread counts and connection limits:
+Edit `server.xml` and update the HTTP connector to set the worker thread counts and connection limits:
 
-    ```bash
+```bash
     vi ~/apache-tomcat-11.0.10/conf/server.xml
-    ```
+```
 
-    Replace the existing connector:
-    ```xml
+Replace the existing connector:
+```xml
     <!-- Before -->
         <Connector port="8080" protocol="HTTP/1.1"
                    connectionTimeout="20000"
                    redirectPort="8443" />
-    ```
+```
 
-    With the tuned settings:
-    ```xml
+With the tuned settings:
+```xml
     <!-- After -->
         <Connector port="8080" protocol="HTTP/1.1"
                    connectionTimeout="20000"
@@ -231,25 +231,25 @@ To minimize contention and context switching, align Tomcat’s CPU‑intensive t
                    maxKeepAliveRequests="500000"
                    maxConnections="100000"
         />
-    ```
+```
 
-3. Restart Tomcat and re-run `wrk2`:
+Restart Tomcat and re-run `wrk2`:
 
-    ```bash
+```bash
     ~/apache-tomcat-11.0.10/bin/shutdown.sh 2>/dev/null
     ulimit -n 65535 && ~/apache-tomcat-11.0.10/bin/startup.sh
 
     ulimit -n 65535 && wrk -c1280 -t128 -R500000 -d60 http://<tomcat_ip>:8080/examples/servlets/servlet/HelloWorldExample
-    ```
+```
 
-    Example result:
-    ```output
+Example result:
+```output
       Thread Stats   Avg      Stdev     Max   +/- Stdev
         Latency    10.26s     4.55s   19.81s    62.51%
         Req/Sec     2.86k    89.49     3.51k    77.06%
       21458421 requests in 1.00m, 11.13GB read
     Requests/sec: 357835.75
     Transfer/sec:    190.08MB
-    ```
+```
 
 With a solid baseline in place, you’re ready to proceed to NIC queue tuning, NUMA locality optimization, and IOMMU exploration in the next sections.

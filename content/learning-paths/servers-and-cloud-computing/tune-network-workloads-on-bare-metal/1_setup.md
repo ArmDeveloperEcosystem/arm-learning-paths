@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-Tomcat is a common client–server web workload that serves HTTP/HTTPS requests. In this section, you will set up a benchmarking environment using Apache Tomcat (server) and `wrk2` (client) to generate load and measure performance on an Arm-based bare‑metal instance. This guide was validated on an AWS `c8g.metal‑48xl` instance running Ubuntu 24.04.
+Tomcat is a common client–server web workload that serves HTTP/HTTPS requests. In this section, you will set up a benchmarking environment using Apache Tomcat (server) and `wrk2` (client) to generate load and measure performance on an Arm-based bare‑metal instance. This Learning Path was validated on an AWS `c8g.metal‑48xl` instance running Ubuntu 24.04.
 
 ## Set up the Tomcat benchmark server
 
@@ -63,7 +63,7 @@ Allowing `.*` permits access from all IP addresses and should be used only in is
 ## Start the Tomcat server
 
 {{% notice Note %}}
-For maximum performance, ensure the per‑process limit for open file descriptors is high enough.
+For maximum performance, ensure the per‑process limit for open file descriptors is sufficient.
 {{% /notice %}}
 
 Start the server:
@@ -106,7 +106,7 @@ Ensure port **8080** is open in the security group or firewall for your Arm‑ba
 [Wrk2](https://github.com/giltene/wrk2) is a high-performance HTTP benchmarking tool specialized in generating constant throughput loads and measuring latency percentiles for web services. `wrk2` is an enhanced version of `wrk` that provides accurate latency statistics under controlled request rates, ideal for performance testing of HTTP servers.
 
 {{% notice Note %}}
-Currently, `wrk2` is only supported on **x86_64** machines. Run the client steps below on a bare‑metal x86_64 server running Ubuntu 24.04.
+Currently, `wrk2` is only supported on x86_64 machines. Run the client steps below on a bare‑metal x86_64 server running Ubuntu 24.04.
 {{% /notice %}}
 
 ## Install dependencies
@@ -140,7 +140,7 @@ sudo cp wrk /usr/local/bin
 As with Tomcat, set a high open‑files limit to avoid hitting FD caps during the run.
 {{% /notice %}}
 
-Benchmark the HelloWorld servlet running on Tomcat:
+Benchmark the `HelloWorld` servlet running on Tomcat:
 
 ```bash
 ulimit -n 65535 && wrk -c32 -t16 -R50000 -d60 http://${tomcat_ip}:8080/examples/servlets/servlet/HelloWorldExample

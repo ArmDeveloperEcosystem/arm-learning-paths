@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Tune with IOMMU
 
-IOMMU (Input–Output Memory Management Unit) controls how I/O devices access memory. In many cloud environments, SmartNICs offload IOMMU-related work. On Arm Neoverse bare‑metal systems, you can often improve Tomcat networking performance by **disabling strict mode** and **enabling passthrough** (setting `iommu.strict=0` and `iommu.passthrough=1`).
+IOMMU (Input–Output Memory Management Unit) controls how I/O devices access memory. In many cloud environments, SmartNICs offload IOMMU-related work. On Arm Neoverse bare‑metal systems, you can often improve Tomcat networking performance by disabling strict mode and enabling passthrough (setting `iommu.strict=0` and `iommu.passthrough=1`).
 
 ## Configure IOMMU settings
 

@@ -41,7 +41,7 @@ Use the following command to check the current transmit/receive queues of the ${
 ```bash
 sudo ethtool -l ${net}
 ```
-It can be observed that the number of transmit/receive queues for the ${net} network interface is currently 63.
+You can see that the number of transmit/receive queues for the ${net} network interface is currently 63:
 ```bash
 Channel parameters for enP11p4s0:
 Pre-set maximums:
