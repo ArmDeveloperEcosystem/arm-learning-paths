@@ -1,5 +1,5 @@
 ---
-title: Accelerate Background Blur and Low-Light Camera Effects 
+title: Accelerate Denoising, Background Blur and Low-Light Camera Effects
 
 minutes_to_complete: 30
 
