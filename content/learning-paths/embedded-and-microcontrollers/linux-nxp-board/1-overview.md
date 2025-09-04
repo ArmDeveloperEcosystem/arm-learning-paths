@@ -16,11 +16,11 @@ Selecting the best hardware for machine learning (ML) models depends on effectiv
 *Unboxing NXP's FRDM i.MX 93 board*
 </center>
 
-![NXP FRDM i.MX 93 Board SoC Highlighted alt-text#center](./NXP%20FRDM%20i.MX%2093%20Board%20SoC%20Highlighted.png "Arm Ethos-U65 NPU location")
+![NXP FRDM i.MX 93 Board SoC Highlighted alt-text#center](./nxp-frdm-imx93-board-soc-highlighted.png "Arm Ethos-U65 NPU location")
 
 ### NXP's FRDM i.MX 93 Processor Decoded
 
-![i.MX 93 Processor SoC alt-text#center](./i.MX%2093%20Application%20Processor%20SoC.png "NXP's FRDM i.MX 93 processor")
+![i.MX 93 Processor SoC alt-text#center](./imx93-application-processor-soc.png "NXP's FRDM i.MX 93 processor")
 
 **NXP's Processor Labeling Convention:**
 |Line|Meaning|

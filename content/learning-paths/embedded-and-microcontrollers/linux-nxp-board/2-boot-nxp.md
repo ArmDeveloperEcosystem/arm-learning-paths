@@ -79,4 +79,4 @@ Prior to logging in to the NXP board, you need to configure `picocom`. This allo
 * Connect the NXP board to a monitor via HDMI
 * Connect a mouse to the NXP board's USB-A port
 
-![NXP board built-in ML demos alt-text#center](./NXP%20Board%20Built-In%20ML%20Demos.png "NXP board built-in ML demos")
+![NXP board built-in ML demos alt-text#center](./nxp-board-built-in-ml-demos.png "NXP board built-in ML demos")
