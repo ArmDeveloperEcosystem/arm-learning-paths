@@ -15,13 +15,6 @@ learning_objectives:
 
 prerequisites:
     - Purchase of a NXP [FRDM i.MX 93](https://www.nxp.com/design/design-center/development-boards-and-designs/frdm-i-mx-93-development-board:FRDM-IMX93) board.
-    - Purchase of a NXP [MCU-Link Pro Debug Probe](https://www.nxp.com/design/design-center/software/software-library/mcu-link-pro-debug-probe:MCU-LINK-PRO).
-    - A USB Mini-B to USB Type-A cable, or a USB Mini-B to USB Type-C cable.
-    - A small Phillips-head screwdriver.
-    - A magnifying lense (handheld or mounted).
-    - A soldering wand.
-    - A pair of tweezers.
-    - Basic knowledge of Machine Learning concepts.
     - A computer running Linux or macOS.
 
 author: Waheed Brown
