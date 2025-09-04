@@ -14,6 +14,7 @@ Called from:
         code                Str:  echo('Hello world')....
         language            Str:  python
         line_numbers        Bool: true or false
+        line_start          Str:  123
         output_lines        Str:  5 or 1-4, 9
         command_line        Str:  "root@localhost"
 */}}
@@ -42,14 +43,24 @@ Called from:
     {{$output_present = true}}
 {{end}}
 
-
 <!-- Start with the 'pre' element, then 'code' element, then the code content -->
 <pre
-    {{if .command_line}}
-        class="command-line"
-        data-user= {{ trim (index (split (index (split .command_line "|") 0) "@") 0 ) " "}}
-        data-host= {{ trim (index (split (index (split .command_line "|") 0) "@") 1 ) " "}}
-        data-output={{ trim (index (split .command_line "|") 1) " "}}
+    {{if or (.command_line) (.line_start)}}
+      {{if and (.command_line) (.line_start)}}
+          class="command-line line-numbers"
+      {{else if .command_line}}
+          class="command-line"
+      {{else if .line_start}}
+          class="line-numbers"
+      {{end}}
+      {{if .command_line}}
+          data-user= {{ trim (index (split (index (split .command_line "|") 0) "@") 0 ) " "}}
+          data-host= {{ trim (index (split (index (split .command_line "|") 0) "@") 1 ) " "}}
+          data-output={{ trim (index (split .command_line "|") 1) " "}}
+      {{end}}
+      {{if .line_start}}
+          data-start="{{.line_start}}"
+      {{end}}
     {{end}}
 >
     <code class='language-{{.language}}
