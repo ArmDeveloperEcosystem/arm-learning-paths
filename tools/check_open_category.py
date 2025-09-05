@@ -180,6 +180,7 @@ def ai_decide_label(client: OpenAI, entry: str, candidates: List[str], examples:
     system = (
         "You standardize taxonomy labels for 'tools_software_languages' on a public site. "
         "Prefer an existing canonical label if the user's entry is a near-duplicate. "
+        "Flag entries that are not tools, software, or langages (such as hardware, devices, or generic lables like 'mobile' or 'coding')."
         "Otherwise, minimally rewrite to match brand-correctness (NGINX not ngnix; AWS Lambda not Lambda; Apache Tomcat not Tomcat; Visual Studio Code not VS Code)."
     )
 
