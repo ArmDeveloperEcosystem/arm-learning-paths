@@ -19,9 +19,9 @@ Follow these steps in the Google Cloud Console:
 - Open the [Google Cloud Console](https://console.cloud.google.com/).
 - Go to **Navigation menu ▸ Compute Engine ▸ VM instances**, then select **Create instance**.
 - Under **Machine configuration**:
-  - Enter **Instance name**, **Region**, and **Zone**.
-  - Set **Series** to `C4A`.
-  - Choose a machine type such as `c4a-standard-4`.
+  - Enter **Instance name**, **Region**, and **Zone**
+  - Set **Series** to `C4A`
+  - Choose a machine type such as `c4a-standard-4`
 - Under **OS and storage**, select **Change**, pick **Ubuntu** as the operating system, and choose **Ubuntu 24.04 LTS Minimal**. Make sure you select the Arm image variant.
 - Under **Networking**, enable **Allow HTTP traffic** so you can test workloads like NGINX later.
 - Select **Create** to launch the instance.
