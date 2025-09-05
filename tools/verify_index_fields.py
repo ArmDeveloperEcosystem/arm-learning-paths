@@ -33,10 +33,10 @@ def extract_frontmatter(path):
         content = f.read()
     if not content.startswith('---'):
         return None
-    parts = content.split('---', 2)
-    if len(parts) < 3:
-        return None
-    return yaml.safe_load(parts[1])
+    parts = list(yaml.safe_load_all(content))
+    if len(parts) >= 2:
+        return parts[0]
+    return None
 
 def get_category_from_path(path):
     match = re.match(r"content/learning-paths/([^/]+)/", path)
