@@ -1,29 +1,30 @@
 ---
-title: Deploy NGINX the GitHub Runner
+title: Deploy NGINX with the GitHub runner
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Overview
 
 This workflow installs and starts a basic NGINX web server on a self-hosted runner whenever code is pushed to the main branch.
 
-In your instance's console, create a directory for the repository:
+In your instance console, create a directory for the repository:
 
 ```console
 mkdir test-repo && cd test-repo
 echo "# test-repo" >> README.md
 ```
 
-Then, create the GitHub Actions workflow file at `.github/workflows/deploy-nginx.yaml`.
+Create the GitHub Actions workflow file at `.github/workflows/deploy-nginx.yaml`:
 
 ```console
 mkdir .github  && mkdir .github/workflows/
 vim .github/workflows/deploy-nginx.yaml
 ```
 
-Paste the following code block into the file and save it.
+Paste the following content into the file:
 
 ```yaml
 name: Deploy NGINX
@@ -45,7 +46,7 @@ jobs:
         run: sudo systemctl start nginx
 ```
 
-Now it's time to initiate your repository and push the changes.
+Initialize your repository and push the changes:
 
 ```console
 git init
@@ -63,15 +64,15 @@ cd ..
 ./run.sh
 ```
 
-You will see in the output of the command that it identifies the a job called `deploy`, and that it finishes after having run the two steps.
+The output shows a job called `deploy` and confirms that both steps ran successfully.
 
-### Access the NGINX Server
+## Access the NGINX server
 Once the workflow completes, open your browser and navigate to your machine's external IP address. You will find the information in your instance overview, under **Network interfaces**.
 ```
 http://<your-public-IP>
 ```
 You should see the NGINX welcome page confirming a successful deployment.
 
-![nginx](./images/nginx.png)
+![nginx alt-text#center](./images/nginx.png "Screenshot of the NGINX welcome page in a browser")
 
-You should now know how to set up a self-hosted runner with an Arm-based Google Cloud instance, and use it to run GitHub Actions workflows. From here, you can modify the workflow file to try out different commands.
+You now know how to set up a self-hosted runner with an Arm-based Google Cloud instance, and use it to run GitHub Actions workflows. From here, you can modify the workflow file to try out different commands.
