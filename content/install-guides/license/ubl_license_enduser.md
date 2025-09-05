@@ -2,6 +2,7 @@
 title: UBL LLS End-user setup
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/102516
+publish_date: 2023-02-15
 author: Ronan Synnott
 weight: 3
 

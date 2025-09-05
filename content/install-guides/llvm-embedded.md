@@ -17,6 +17,7 @@ minutes_to_complete: 10
 ### Link to official documentation
 official_docs: https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm
 
+publish_date: 2023-07-27
 author: Ronan Synnott
 
 ### PAGE SETUP

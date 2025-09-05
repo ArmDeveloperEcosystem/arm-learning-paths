@@ -1,5 +1,6 @@
 ---
 title: AWS IoT Greengrass
+publish_date: 2023-03-22
 author: Michael Hall
 additional_search_terms:
 - iot

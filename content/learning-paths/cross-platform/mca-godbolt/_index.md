@@ -14,6 +14,7 @@ prerequisites:
     - Familiarity with Arm assembly.
     - LLVM version 16 or newer, which includes support for Neoverse V2.
 
+publish_date: 2024-08-16
 author: Rin Dobrescu
 
 ### Tags
@@ -23,7 +24,7 @@ armips:
     - Neoverse
     - Cortex-A
 tools_software_languages:
-    - assembly
+    - Assembly
     - llvm-mca
     - Runbook
 

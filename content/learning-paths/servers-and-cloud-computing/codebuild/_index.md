@@ -13,6 +13,7 @@ prerequisites:
     - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) for accessing AWS cloud services.
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or any Arm server, laptop, or single-board computer running [Docker](/install-guides/docker/) used to run the created images
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ### Tags

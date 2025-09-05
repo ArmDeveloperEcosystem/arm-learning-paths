@@ -13,6 +13,7 @@ prerequisites:
     - A development machine running Ubuntu or Debian Linux with `x86_64` architecture
     - An Android device with an Arm GPU
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ##### Tags
@@ -26,7 +27,7 @@ armips:
 operatingsystems:
     - Android
 tools_software_languages:
-    - NDK
+    - Android NDK
     - adb
 
 further_reading:

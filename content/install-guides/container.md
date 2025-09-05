@@ -1,5 +1,6 @@
 ---
 title: Container CLI for macOS
+publish_date: 2025-07-07
 author: Rani Chowdary Mandepudi
 minutes_to_complete: 10
 official_docs: https://github.com/apple/container

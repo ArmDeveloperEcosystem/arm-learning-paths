@@ -20,6 +20,7 @@ prerequisites:
     - For the OS, you can use Windows, Linux, or macOS.
   
 
+publish_date: 2024-10-01
 author: Dawid Borycki
 
 ### Tags
@@ -34,8 +35,7 @@ operatingsystems:
     - macOS
 tools_software_languages:
     - Android Studio
-    - Coding
-    - VS Code
+    - Visual Studio Code
 shared_path: true
 shared_between:
     - servers-and-cloud-computing

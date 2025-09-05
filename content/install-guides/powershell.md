@@ -2,6 +2,7 @@
 title: PowerShell
 minutes_to_complete: 10
 official_docs: https://learn.microsoft.com/en-us/powershell/
+publish_date: 2024-04-09
 author: Jason Andrews
 additional_search_terms:
 - pwsh

@@ -14,6 +14,7 @@ prerequisites:
     - A GitHub account
     - A Docker Hub account
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ### Tags

@@ -15,6 +15,7 @@ prerequisites:
     - Access to an x86 and an Arm Linux machine.
     - Familiarity with floating-point numbers.
 
+publish_date: 2023-02-15
 author: Kieran Hejmadi
 
 ### Tags

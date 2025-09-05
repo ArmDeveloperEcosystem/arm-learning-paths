@@ -17,6 +17,7 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11. 
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ### Tags
@@ -29,7 +30,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - WSL
-    - VS Code
+    - Visual Studio Code
 
 further_reading:
     - resource:

@@ -6,6 +6,7 @@ armips:
 - Ethos-U
 - Corstone
 
+publish_date: 2023-05-22
 author: Jason Andrews
 
 learning_objectives:
@@ -30,7 +31,7 @@ subjects: ML
 test_maintenance: false
 
 tools_software_languages:
-    - Fixed Virtual Platform
+    - FVP
     - Arm Virtual Hardware
     - GCC
     - Arm Compiler for Embedded

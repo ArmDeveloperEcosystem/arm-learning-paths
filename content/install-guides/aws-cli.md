@@ -6,6 +6,7 @@ additional_search_terms:
 
 layout: installtoolsall
 minutes_to_complete: 15
+publish_date: 2023-02-17
 author: Jason Andrews
 multi_install: false
 multitool_install_part: false

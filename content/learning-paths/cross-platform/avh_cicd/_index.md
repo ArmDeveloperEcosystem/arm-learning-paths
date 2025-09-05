@@ -12,6 +12,7 @@ learning_objectives:
 prerequisites:
     - Some familiarity with CI/CD concepts is assumed
 
+publish_date: 2023-02-15
 author: Pareena Verma
 
 ### Tags
@@ -22,7 +23,6 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - Coding
     - Arm Virtual Hardware
     - GitHub
 

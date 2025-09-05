@@ -14,6 +14,7 @@ prerequisites:
 - An Android mobile device that has a Mali GPU with hardware ray tracing support.
 - A USB cable to connect the mobile device to your computer.
 
+publish_date: 2023-02-15
 author: Owen Wu
 
 ### Tags

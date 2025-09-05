@@ -1,5 +1,6 @@
 ---
 title: Nerdctl
+publish_date: 2025-04-22
 author: Jason Andrews
 
 minutes_to_complete: 10

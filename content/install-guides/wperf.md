@@ -20,6 +20,7 @@ minutes_to_complete: 15
 ### Link to official documentation
 official_docs: https://gitlab.com/Linaro/WindowsPerf/windowsperf/blob/main/INSTALL.md
 
+publish_date: 2023-05-18
 author: Jason Andrews
 
 ### PAGE SETUP

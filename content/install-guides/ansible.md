@@ -2,6 +2,7 @@
 additional_search_terms:
 - linux
 - deploy
+publish_date: 2023-03-09
 author: Jason Andrews
 layout: installtoolsall
 minutes_to_complete: 10

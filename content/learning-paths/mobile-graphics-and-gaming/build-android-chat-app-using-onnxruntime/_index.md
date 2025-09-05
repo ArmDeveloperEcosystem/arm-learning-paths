@@ -13,6 +13,7 @@ prerequisites:
     - A Windows x86_64 development machine with at least 16GB of RAM.
     - An Android phone with at least 8GB of RAM. This learning path was tested on Samsung Galaxy S24.
 
+publish_date: 2024-10-16
 author: Koki Mitsunami
 
 ### Tags
@@ -25,7 +26,6 @@ tools_software_languages:
     - C++
     - ONNX Runtime
     - Android
-    - Mobile
     - Hugging Face
 
 operatingsystems:

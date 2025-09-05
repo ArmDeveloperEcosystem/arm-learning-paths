@@ -14,6 +14,7 @@ prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
     - A computer with [Terraform](/install-guides/terraform) installed
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ### Tags

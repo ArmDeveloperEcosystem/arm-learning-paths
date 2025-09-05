@@ -4,6 +4,7 @@ additional_search_terms:
 - EKS
 - AWS
 - infrastructure
+publish_date: 2023-10-03
 author: Jason Andrews
 layout: installtoolsall
 minutes_to_complete: 5

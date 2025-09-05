@@ -20,6 +20,7 @@ prerequisites:
     - 'C# Extension for Visual Studio Code: https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp'
     - 'Install Docker on Arm64: https://learn.arm.com/install-guides/docker/docker-woa/'
 
+publish_date: 2023-10-14
 author: Dawid Borycki
 
 ### Tags

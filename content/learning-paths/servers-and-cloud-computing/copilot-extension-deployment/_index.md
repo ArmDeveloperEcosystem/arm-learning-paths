@@ -15,6 +15,7 @@ prerequisites:
     - A GitHub account.
     - A Linux-based computer with npm, Python, and the AWS CLI installed.
 
+publish_date: 2025-02-07
 author: Joe Stech
 
 ### Tags

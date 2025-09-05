@@ -14,6 +14,7 @@ prerequisites:
     - A game project that uses advanced rendering features (such as hardware ray tracing) that stretch the performance capabilities of everyday smartphones.
     - A development machine with Git installed.
 
+publish_date: 2023-02-15
 author: Julie Gaskin
 
 ### Tags
@@ -24,7 +25,6 @@ armips:
     - Immortalis
 tools_software_languages:
     - Unreal Engine
-    - Mobile
 operatingsystems:
     - Android
 

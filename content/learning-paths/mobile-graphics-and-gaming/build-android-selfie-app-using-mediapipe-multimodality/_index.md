@@ -19,6 +19,7 @@ prerequisites:
     - Basic knowledge of Modern Android Architecture. See [Modern Android App Architecture](https://developer.android.com/courses/pathways/android-architecture).
     - Basic knowledge of Kotlin programming language, including [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) and [Kotlin Flows](https://kotlinlang.org/docs/flow.html).
 
+publish_date: 2024-12-05
 author: Han Yin
 
 ### Tags
@@ -28,7 +29,6 @@ armips:
     - Cortex-A
     - Mali GPU
 tools_software_languages:
-    - mobile
     - Android Studio
     - Kotlin
     - MediaPipe

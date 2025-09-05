@@ -18,6 +18,7 @@ prerequisites:
     - An Arm Linux machine or an [Arm cloud instance](/learning-paths/servers-and-cloud-computing/csp/).
     - A Raspberry Pi 5.
 
+publish_date: 2023-02-15
 author: Annie Tallund
 
 ### Tags
@@ -29,7 +30,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - LLM
-    - GenAI
+    - Generative AI
     - Raspberry Pi
     - Hugging Face
 

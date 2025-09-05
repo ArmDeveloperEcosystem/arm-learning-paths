@@ -16,6 +16,7 @@ prerequisites:
     - A Linux machine with root access
     - Some familiarity with embedded Linux
 
+publish_date: 2023-02-15
 author: Michael Hall
 
 ### Tags
@@ -31,9 +32,9 @@ operatingsystems:
 
 tools_software_languages:
     - Arm Virtual Hardware
-    - Balena Cloud
+    - balenaCloud
     - Raspberry Pi
-    - Balena OS
+    - BalenaOS
 
 further_reading:
     - resource:

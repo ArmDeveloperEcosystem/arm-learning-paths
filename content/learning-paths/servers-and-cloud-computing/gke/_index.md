@@ -12,6 +12,7 @@ prerequisites:
     - A Google Cloud account
     - A computer with the following tools installed`:` Terraform, Google Cloud CLI (gcloud), Kubernetes CLI (kubectl)
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ##### Tags

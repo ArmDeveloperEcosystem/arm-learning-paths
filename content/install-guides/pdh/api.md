@@ -2,6 +2,7 @@
 title: Access via API
 minutes_to_complete: 15
 official_docs: https://anypoint.mulesoft.com/exchange/portals/arm-3/f5af04c7-2f93-4d1e-8355-a60625973e1f/product-entitlement-customer-experience-api/
+publish_date: 2023-02-20
 author: Ronan Synnott
 weight: 3    
 

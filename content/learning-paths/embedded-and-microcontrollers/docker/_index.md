@@ -12,6 +12,7 @@ learning_objectives:
 
 prerequisites:
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### Tags
@@ -29,7 +30,6 @@ tools_software_languages:
     - Arm Development Studio
     - Arm Compiler for Embedded
     - Arm Fast Models
-    - Coding
 
 
 further_reading:

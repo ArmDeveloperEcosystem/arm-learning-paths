@@ -14,6 +14,7 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).    
     - Refer to [Visual Studio 2022 with Arm build tools](/install-guides/vs-woa).
     
+publish_date: 2023-03-28
 author: Dawid Borycki
 
 ### Tags
@@ -24,7 +25,8 @@ armips:
 operatingsystems:
     - Windows
 tools_software_languages:
-    - C/C++       
+    - C
+    - C++     
 
 further_reading:
     - resource:

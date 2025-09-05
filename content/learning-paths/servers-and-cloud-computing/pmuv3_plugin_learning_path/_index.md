@@ -16,6 +16,7 @@ prerequisites:
     - An Arm-based computer running Linux.
     - Some familiarity with Linux application performance analysis.
 
+publish_date: 2024-07-23
 author: Gayathri Narayana Yegna Narayanan
 
 ### Tags

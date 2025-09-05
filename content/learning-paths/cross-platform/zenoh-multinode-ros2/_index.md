@@ -15,6 +15,7 @@ prerequisites:
     - At least two local Cortex-A devices running Linux, such as Raspberry Pi 4 or Pi 5. You can also use Arm servers or cloud instances
     - Experience with ROS 2 applications
 
+publish_date: 2025-06-19
 author: 
     - Odin Shen
     - William Liang
@@ -26,7 +27,7 @@ armips:
     - Cortex-A
     - Neoverse
 tools_software_languages:
-    - ROS2
+    - ROS 2
     - C
     - Raspberry Pi
     - Zenoh

@@ -1,5 +1,6 @@
 ---
 title: Arduino core for the Raspberry Pi Pico
+publish_date: 2024-02-05
 author: Michael Hall
 additional_search_terms:
 - arduino

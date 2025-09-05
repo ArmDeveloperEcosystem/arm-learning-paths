@@ -13,6 +13,7 @@ prerequisites:
     - An installation of Arm Development Studio.
     - A basic understanding of Rust programming.
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 
@@ -26,7 +27,6 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - Coding
     - IP Explorer
 
 ### Cross-platform metadata only

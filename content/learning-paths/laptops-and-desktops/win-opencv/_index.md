@@ -12,6 +12,7 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm machine such as the Lenovo Thinkpad X13s, or an [Azure virtual machine](/learning-paths/cross-platform/woa_azure/).
 
+publish_date: 2023-03-28
 author: Koki Mitsunami
 
 ### Tags

@@ -16,6 +16,7 @@ prerequisites:
     - Comfortable with Windows 
     - NXP LPCXpresso55S69 board
 
+publish_date: 2023-02-15
 author: Pareena Verma
 
 ### Tags
@@ -28,8 +29,7 @@ operatingsystems:
 tools_software_languages:
     - TrustZone
     - Arm Compiler for Embedded
-    - Keil
-    - Coding
+    - Keil MDK
 
 further_reading:
     - resource:

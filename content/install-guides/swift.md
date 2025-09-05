@@ -1,6 +1,7 @@
 ---
 
 title: Swift
+publish_date: 2024-10-08
 author: Jason Andrews
 
 minutes_to_complete: 10

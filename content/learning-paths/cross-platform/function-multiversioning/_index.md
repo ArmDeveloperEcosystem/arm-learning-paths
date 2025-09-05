@@ -19,6 +19,7 @@ prerequisites:
     - Familiarity with Arm assembly.
     - A LLVM 20 compiler with runtime library support or GCC 14.
 
+publish_date: 2024-08-29
 author: Alexandros Lamprineas
 
 ### Tags
@@ -28,7 +29,8 @@ armips:
     - Cortex-A
     - Neoverse
 tools_software_languages:
-    - C/C++
+    - C
+    - C++
     - Runbook
 operatingsystems:
     - Linux

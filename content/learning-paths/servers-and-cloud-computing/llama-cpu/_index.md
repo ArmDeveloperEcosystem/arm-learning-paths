@@ -13,6 +13,7 @@ learning_objectives:
 prerequisites:
     - An AWS Graviton4 r8g.16xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
 
+publish_date: 2023-02-15
 author:
     - Pareena Verma
     - Jason Andrews
@@ -27,7 +28,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - LLM
-    - GenAI
+    - Generative AI
     - Python
     - Demo
     - Hugging Face

@@ -15,6 +15,7 @@ prerequisites:
     - Completion of the [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](/learning-paths/automotive/openadkit1_container/) Learning Path
     - Basic familiarity with Docker
 
+publish_date: 2025-06-17
 author: 
     - Odin Shen
     - Julien Jayat
@@ -27,7 +28,7 @@ armips:
 tools_software_languages:
     - Python
     - Docker
-    - ROS2
+    - ROS 2
     - DDS
 operatingsystems:
     - Linux

@@ -14,6 +14,7 @@ prerequisites:
     - Basic understanding of networking principles such as Transmission Control Protocol/Internet Protocol (TCP/IP) and User Datagram Protocol (UDP).
     - Access to two [Arm-based cloud instances](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/).
 
+publish_date: 2023-02-15
 author: Kieran Hejmadi
 
 ### Tags

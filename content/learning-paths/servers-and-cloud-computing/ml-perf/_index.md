@@ -16,6 +16,7 @@ prerequisites:
 - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate
   cloud service provider or an on-premise Arm server.
 
+publish_date: 2023-02-15
 author: Pareena Verma
 
 test_images:

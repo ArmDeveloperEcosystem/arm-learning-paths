@@ -11,6 +11,7 @@ learning_objectives:
 prerequisites:
     - None
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ### Tags

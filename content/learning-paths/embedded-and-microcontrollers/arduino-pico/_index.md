@@ -19,6 +19,7 @@ prerequisites:
     - A [PIR sensor](https://www.amazon.com/HiLetgo-HC-SR501-Infrared-Sensor-Arduino/dp/B07KZW86YR/ref=sr_1_3?keywords=pir+sensor&qid=1698432931&sr=8-3) for detecting motion
     - A [peizo-electric buzzer](https://www.amazon.com/mxuteuk-Electronic-Computers-Printers-Components/dp/B07VK1GJ9X/ref=sr_1_4?crid=2FAXYI17HZKDB&keywords=piezo+buzzer&qid=1698432968&sprefix=peizo%2Caps%2C148&sr=8-4) for signaling motion
 
+publish_date: 2024-02-05
 author: Michael Hall
 
 ### Tags

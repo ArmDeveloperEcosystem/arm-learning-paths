@@ -15,6 +15,7 @@ prerequisites:
     - Knowledge of the Vulkan API.
     - A Vulkan renderer. Most code is generic and should be easy to incorporate into any deferred PBR renderer.
 
+publish_date: 2024-08-29
 author: Iago Calvo Lista
 
 ### Tags
@@ -27,7 +28,6 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Vulkan
-    - Coding
 
 
 further_reading:

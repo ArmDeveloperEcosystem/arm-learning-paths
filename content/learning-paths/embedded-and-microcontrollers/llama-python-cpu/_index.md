@@ -14,6 +14,7 @@ learning_objectives:
 prerequisites:
     - A Raspberry Pi 5 running Raspberry Pi OS.
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ### Tags
@@ -25,7 +26,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - LLM
-    - GenAI
+    - Generative AI
     - Raspberry Pi
     - Python
     - Hugging Face

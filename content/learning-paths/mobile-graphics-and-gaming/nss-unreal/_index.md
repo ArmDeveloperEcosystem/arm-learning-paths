@@ -19,6 +19,7 @@ prerequisites:
     - Visual Studio 2022 (with Desktop Development with C++ and .NET desktop build tools)
 
 
+publish_date: 2025-08-12
 author: Annie Tallund
 
 ### Tags

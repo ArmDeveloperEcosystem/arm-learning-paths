@@ -2,6 +2,7 @@
 title: Fixed Virtual Platforms (FVP)
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/100966/
+publish_date: 2023-05-12
 author: Ronan Synnott
 weight: 3
 

@@ -13,6 +13,7 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Visual Studio 2022 with .NET Desktop Development workload
 
+publish_date: 2023-03-28
 author: Dawid Borycki
 
 ### Tags

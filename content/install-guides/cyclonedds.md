@@ -1,5 +1,6 @@
 ---
 title: Cyclone DDS
+publish_date: 2025-03-17
 author: Odin Shen
 minutes_to_complete: 20
 official_docs: https://cyclonedds.io/

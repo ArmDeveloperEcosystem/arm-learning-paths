@@ -14,6 +14,7 @@ prerequisites:
     - Any code editor, we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).
     - Visual Studio 2022 with Arm build tools. [Refer to this guide for the installation steps](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio)
 
+publish_date: 2023-03-28
 author: Dawid Borycki
 
 ### Tags

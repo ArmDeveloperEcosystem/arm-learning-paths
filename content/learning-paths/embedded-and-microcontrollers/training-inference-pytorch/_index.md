@@ -22,6 +22,7 @@ prerequisites:
    - An Arm license to run the examples on the Corstone-320 Fixed Virtual Platform (FVP), for hands-on deployment.
 
 
+publish_date: 2025-02-12
 author: Dominica Abena O. Amanfo
 
 ### Tags

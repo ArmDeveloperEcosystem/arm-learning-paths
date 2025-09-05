@@ -11,6 +11,7 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux OS and a recent version of compiler (Clang or GCC) installed
 
+publish_date: 2023-02-15
 author: Konstantinos Margaritis
 
 ### Tags
@@ -24,7 +25,6 @@ tools_software_languages:
     - GCC
     - Clang
     - SVE2
-    - Coding
     - Runbook
 
 operatingsystems:

@@ -17,6 +17,7 @@ prerequisites:
     - Ubuntu host or access to AWS
     - Optional MPS3 FPGA prototyping board
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### Tags
@@ -30,7 +31,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Trusted Firmware
-    - Fixed Virtual Platform
+    - FVP
     - GCC
 
 

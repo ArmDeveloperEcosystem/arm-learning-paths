@@ -16,6 +16,7 @@ prerequisites:
     - Valid GitHub account
     - Microsoft Azure account (if using virtual machine)
 
+publish_date: 2023-02-15
 author: Pareena Verma
 
 ### Tags
@@ -26,7 +27,6 @@ armips:
 operatingsystems:
     - Windows
 tools_software_languages:
-    - Coding
     - GitHub
 
 further_reading:

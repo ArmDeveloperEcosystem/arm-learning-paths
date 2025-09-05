@@ -14,6 +14,7 @@ prerequisites:
 - An Arm based instance from a cloud service provider.
 - Review the learning path on [LSE](/learning-paths/servers-and-cloud-computing/lse/)
 
+publish_date: 2023-02-15
 author: Ying Yu
 
 ### Tags
@@ -31,7 +32,7 @@ operatingsystems:
 - Linux
 
 tools_software_languages:
-- Glibc
+- glibc
 - LSE
 - MongoDB
 - Runbook

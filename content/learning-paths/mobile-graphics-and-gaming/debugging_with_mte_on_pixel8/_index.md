@@ -18,6 +18,7 @@ prerequisites:
     - A USB cable to connect your computer to your Google Pixel 8.
     - Android Debug Bridge (adb) installed on your device. If needed, follow the steps in the [Android Debug Bridge](https://developer.android.com/tools/adb) documentation.
 
+publish_date: 2023-12-14
 author: Roberto Lopez Mendez
 
 ### Tags
@@ -27,7 +28,7 @@ armips:
     - Cortex-A
 tools_software_languages:
     - Android Studio
-    - Memory Tagging Extension
+    - MTE
 operatingsystems:
     - Android
 

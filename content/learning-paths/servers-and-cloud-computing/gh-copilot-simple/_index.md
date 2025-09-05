@@ -14,6 +14,7 @@ prerequisites:
     - A GitHub account.
     - A Linux computer with Python installed.
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ### Tags

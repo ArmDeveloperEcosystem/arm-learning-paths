@@ -11,6 +11,7 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as a Lenovo Thinkpad X13 running Windows 11, or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
 
+publish_date: 2024-10-16
 author: Barbara Corriero
 
 ### Tags
@@ -23,7 +24,7 @@ tools_software_languages:
     - C++
     - Python
     - Git
-    - cmake
+    - CMake
     - ONNX Runtime
 operatingsystems:
     - Windows

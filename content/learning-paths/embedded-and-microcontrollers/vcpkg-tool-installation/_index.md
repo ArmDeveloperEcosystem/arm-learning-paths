@@ -17,6 +17,7 @@ prerequisites:
     - A basic understanding of the [development tools for Arm Cortex-M](https://developer.arm.com/Tools%20and%20Software/)
     - Command line access to your machine
 
+publish_date: 2023-07-18
 author: Christopher Seidl
 
 ### Tags

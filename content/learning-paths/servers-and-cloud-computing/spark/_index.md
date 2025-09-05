@@ -13,6 +13,7 @@ prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
     - A machine with [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli/), [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html), and [Ansible](/install-guides/ansible/) installed 
 
+publish_date: 2023-02-15
 author: Jason Andrews
 ### Tags
 skilllevels: Introductory

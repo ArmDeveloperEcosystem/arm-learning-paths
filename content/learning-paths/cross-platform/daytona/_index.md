@@ -16,6 +16,7 @@ prerequisites:
     - One or more Arm-based computers running Windows, macOS, or a Linux computer with Docker installed.
     - Optionally, an AWS account to create cloud development environments.
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 armips:

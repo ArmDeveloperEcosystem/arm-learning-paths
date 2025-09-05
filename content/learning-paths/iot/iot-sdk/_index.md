@@ -13,6 +13,7 @@ prerequisites:
     - Some familiarity with embedded programming
     - An AWS account (required for Arm Virtual Hardware)
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### Tags
@@ -27,8 +28,7 @@ operatingsystems:
     - RTOS
 tools_software_languages:
     - Arm Virtual Hardware
-    - Coding
-    - Fixed Virtual Platform
+    - FVP
     - Arm Compiler for Embedded
 
 

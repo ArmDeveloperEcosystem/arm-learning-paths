@@ -15,6 +15,7 @@ prerequisites:
     - Installation of [Arm Keil Studio for VS Code](/install-guides/keilstudio_vs)
     - Some familiarity with CMSIS is assumed
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### Tags
@@ -25,8 +26,7 @@ armips:
 operatingsystems:
     - RTOS
 tools_software_languages:
-    - Coding
-    - RTX
+    - Keil RTX RTOS
     - Keil MDK
     - Arm Development Studio
 

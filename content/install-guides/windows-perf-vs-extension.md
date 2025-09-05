@@ -7,6 +7,7 @@ minutes_to_complete: 10
 
 official_docs: https://gitlab.com/Linaro/WindowsPerf/vs-extension
 
+publish_date: 2023-03-16
 author: Nader Zouaoui
 
 ### Optional additional search terms (one per line) to assist in finding the article

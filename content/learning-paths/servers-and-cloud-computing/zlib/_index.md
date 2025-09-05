@@ -14,6 +14,7 @@ learning_objectives:
 prerequisites:
 - An Arm Linux computer or an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider running Ubuntu 20.04 or Ubuntu 22.04.
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 test_images:

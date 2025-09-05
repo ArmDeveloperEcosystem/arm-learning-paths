@@ -1,5 +1,6 @@
 ---
 title: DCPerf
+publish_date: 2025-06-13
 author: Kieran Hejmadi
 minutes_to_complete: 20
 official_docs: https://github.com/facebookresearch/DCPerf?tab=readme-ov-file#install-and-run-benchmarks

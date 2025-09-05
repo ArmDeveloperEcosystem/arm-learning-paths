@@ -15,6 +15,7 @@ prerequisites:
     - Recent Android device, such as a mobile phone or tablet
     - Desktop computer capable of running Unity
 
+publish_date: 2024-03-01
 author: visualSilicon
 
 ### Tags
@@ -24,7 +25,6 @@ armips:
     - Cortex
 tools_software_languages:
     - Unity
-    - Mobile
     - C#
 operatingsystems:
     - Android

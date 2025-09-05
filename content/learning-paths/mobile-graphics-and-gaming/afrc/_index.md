@@ -15,6 +15,7 @@ prerequisites:
     - Knowledge of the Vulkan API.
     - A Vulkan application that creates and uses images. This Learning Path shows how to use an API Sample in the [Khronos Vulkan Samples repository](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/scripts/README.adoc#generate-api-sample) as an example.
 
+publish_date: 2024-02-23
 author: Jose-Emilio Munoz-Lopez
 
 ### Tags
@@ -27,7 +28,6 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Vulkan
-    - Coding
 
 
 further_reading:

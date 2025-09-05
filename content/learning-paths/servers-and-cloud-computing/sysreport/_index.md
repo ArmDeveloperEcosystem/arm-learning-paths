@@ -13,6 +13,7 @@ learning_objectives:
 prerequisites:
     - An Arm-based system (bare metal server, cloud instance, developer board) running Linux 
 
+publish_date: 2024-03-21
 author: James Whitaker
 
 ### Tags

@@ -18,6 +18,7 @@ prerequisites:
 - A Google Cloud [account](https://console.cloud.google.com/)
 - A machine with [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli), [Google Cloud CLI](/install-guides/gcloud), [Azure CLI](/install-guides/azure-cli), [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html), and [Ansible](/install-guides/ansible/) installed
 
+publish_date: 2023-02-15
 author: Pareena Verma
 
 

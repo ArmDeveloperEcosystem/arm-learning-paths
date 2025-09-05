@@ -18,6 +18,7 @@ prerequisites:
     - A x86_64 or Apple M1 development machine with Android Studio installed.
     - A 64-bit Arm powered smartphone running Android.
 
+publish_date: 2023-03-28
 author: Dawid Borycki
 
 ### Tags
@@ -29,7 +30,6 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Android Studio
-    - Coding
 
 further_reading:
     - resource:

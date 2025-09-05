@@ -15,6 +15,7 @@ prerequisites:
     - Some familiarity with AI/ML software development 
     - An Amazon Web Services(AWS) [account](https://aws.amazon.com/) to subscribe [Arm Virtual Hardware](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g) Amazon Machine Image(AMI). 
 
+publish_date: 2023-02-15
 author: Liliya Wu
 
 ### Tags
@@ -27,7 +28,6 @@ operatingsystems:
     - Baremetal
 tools_software_languages:
     - Arm Virtual Hardware
-    - Coding
     - GCC
     - Paddle
     - TVMC

@@ -1,5 +1,6 @@
 ---
 title: ROS - Robot Operating System
+publish_date: 2025-03-07
 author: Odin Shen
 minutes_to_complete: 30
 official_docs: https://www.ros.org/blog/getting-started/

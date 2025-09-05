@@ -13,6 +13,7 @@ learning_objectives:
 prerequisites:
     - Some familiarity with embedded programming is assumed
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### Tags
@@ -30,7 +31,6 @@ tools_software_languages:
     - Arm Compiler for Embedded
     - Arm Fast Models
     - DSTREAM
-    - Coding
 
 further_reading:
     - resource:

@@ -16,6 +16,7 @@ learning_objectives:
 prerequisites:
     - A [GitHub](https://github.com/) account
 
+publish_date: 2023-02-15
 author: Zach Lasiuk
 
 ### Tags

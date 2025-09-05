@@ -15,6 +15,7 @@ prerequisites:
     - Knowledge about building workflows
     - Access to an aarch64 or x86_64 machine running Linux
 
+publish_date: 2023-02-15
 author: Kasper Mecklenburg
 
 ### Tags
@@ -29,7 +30,7 @@ tools_software_languages:
     - GCC
     - Arm Compiler for Linux
     - Docker
-    - Neon
+    - NEON
 
 further_reading:
     - resource:

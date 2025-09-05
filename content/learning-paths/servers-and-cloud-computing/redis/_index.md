@@ -14,6 +14,7 @@ prerequisites:
     - An Arm based instance from a cloud service provider, or an on-premise Arm server.
     - If you do not have an Arm node, the next section discusses some options.
 
+publish_date: 2023-03-17
 author: Elham Harirpoush
 ### Tags
 skilllevels: Introductory

@@ -13,6 +13,7 @@ prerequisites:
     - Some familiarity with embedded programming
     - A Linux host machine running Ubuntu
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### RS: Learning Path hidden until AWS instance updated
@@ -31,9 +32,8 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - Coding
     - Arm Virtual Hardware
-    - Fixed Virtual Platform
+    - FVP
     - GCC
     - Arm Compiler for Embedded
 

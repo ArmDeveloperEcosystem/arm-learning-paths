@@ -16,6 +16,7 @@ learning_objectives:
 prerequisites:
 - Access to an [AWS Graviton4, Google Axion, or Azure Cobalt 100 virtual machine](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
 
+publish_date: 2025-06-02
 author: Pareena Verma
 
 

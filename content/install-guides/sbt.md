@@ -1,6 +1,7 @@
 ---
 title: sbt
 
+publish_date: 2025-01-02
 author: Jason Andrews
 minutes_to_complete: 10
 

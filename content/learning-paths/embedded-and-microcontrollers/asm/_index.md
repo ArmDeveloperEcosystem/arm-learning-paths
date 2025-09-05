@@ -3,6 +3,7 @@ title: Write Arm Assembler functions
 
 minutes_to_complete: 60
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 who_is_this_for: This is an introductory topic for software developers who are interested in programming microcontrollers with C/Assembly.
@@ -25,8 +26,7 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - Coding
-    - Keil
+    - Keil MDK
 
 further_reading:
     - resource:

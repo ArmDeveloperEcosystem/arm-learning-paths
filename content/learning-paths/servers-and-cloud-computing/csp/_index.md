@@ -1,6 +1,7 @@
 ---
 title: Get started with Arm-based cloud instances
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 minutes_to_complete: 15

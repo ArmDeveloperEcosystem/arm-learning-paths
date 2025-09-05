@@ -14,6 +14,7 @@ prerequisites:
 - Some familiarity with embedded C programming
 - A machine running Ubuntu Linux
 
+publish_date: 2023-02-15
 author: Pareena Verma
 
 test_images:
@@ -31,10 +32,9 @@ operatingsystems:
 - Baremetal
 tools_software_languages:
 - Arm Virtual Hardware
-- Fixed Virtual Platform
+- FVP
 - TrustZone
 - Trusted Firmware
-- Coding
 
 further_reading:
     - resource:

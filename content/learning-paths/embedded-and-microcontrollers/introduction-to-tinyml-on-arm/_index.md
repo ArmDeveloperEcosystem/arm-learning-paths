@@ -16,6 +16,7 @@ prerequisites:
     - A Linux computer
 
 
+publish_date: 2024-09-05
 author: Dominica Abena O. Amanfo
 
 ### Tags
@@ -31,7 +32,7 @@ operatingsystems:
 
 tools_software_languages:
     - Arm Virtual Hardware
-    - Fixed Virtual Platform
+    - FVP
     - Python
     - PyTorch
     - ExecuTorch

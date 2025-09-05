@@ -12,6 +12,7 @@ learning_objectives:
 prerequisites:
     - Basic familiarity with Keil MDK
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### Tags
@@ -23,10 +24,7 @@ operatingsystems:
     - Baremetal
     - RTOS
 tools_software_languages:
-    - Coding
-    - Keil
-    - MDK
-    - Fixed Virtual Platform
+    - Keil MDK
     - FVP
 
 further_reading:

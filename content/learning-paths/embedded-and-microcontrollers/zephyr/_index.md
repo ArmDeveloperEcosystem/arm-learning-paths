@@ -14,6 +14,7 @@ prerequisites:
 - Some familiarity with embedded C programming
 - A Linux machine running Ubuntu, or an AWS account to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware)
 
+publish_date: 2023-02-15
 author: Pareena Verma
 
 test_images:
@@ -31,8 +32,7 @@ operatingsystems:
 tools_software_languages:
 - Zephyr
 - Arm Virtual Hardware
-- Fixed Virtual Platform
-- Coding
+- FVP
 
 further_reading:
     - resource:

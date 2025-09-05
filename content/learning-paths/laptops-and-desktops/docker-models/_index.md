@@ -15,6 +15,7 @@ prerequisites:
     - Basic understanding of Docker CLI and concepts.
     - Familiarity with LLM concepts.
 
+publish_date: 2025-05-30
 author: Jason Andrews
 
 ### Tags

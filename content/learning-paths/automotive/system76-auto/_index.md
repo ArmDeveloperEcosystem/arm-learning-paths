@@ -12,6 +12,7 @@ learning_objectives:
 prerequisites:
     - A System76 Thelio Astra desktop computer running Ubuntu 24.04. 
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ### Tags
@@ -22,7 +23,6 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - Automotive
 
 further_reading:
     - resource:

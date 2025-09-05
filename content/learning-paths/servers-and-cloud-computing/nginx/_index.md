@@ -15,6 +15,7 @@ prerequisites:
     - To create a reverse proxy or API gateway you will need at least three Arm based instances from a cloud service provider or at least three on-premises Arm servers.
     - Network settings (firewalls and security groups) which allow communication on port 22 (SSH) and port 443 (HTTPS).
 
+publish_date: 2023-02-15
 author: Julio Suarez
 
 ### Tags
@@ -23,7 +24,7 @@ subjects: Web
 armips:
     - Neoverse
 tools_software_languages:
-    - Nginx
+    - NGINX
 operatingsystems:
     - Linux
 

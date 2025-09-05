@@ -16,6 +16,7 @@ prerequisites:
     - Desktop computer capable of running Unity
     - Unity version compatible with Unity Burst compiler 1.5 or later
 
+publish_date: 2024-03-01
 author: Arm
 
 ### Tags
@@ -26,10 +27,9 @@ armips:
     - aarch64
     - arm64
     - arm architecture
-    - Neon
+    - NEON
 tools_software_languages:
     - Unity
-    - Mobile
     - C#
 operatingsystems:
     - Android

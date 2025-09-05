@@ -8,6 +8,7 @@ additional_search_terms:
 
 minutes_to_complete: 20
 
+publish_date: 2023-11-21
 author: Jonathan Davies
 
 official_docs: https://github.com/llvm/llvm-project/tree/main/bolt

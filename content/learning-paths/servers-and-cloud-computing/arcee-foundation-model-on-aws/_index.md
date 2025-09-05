@@ -16,6 +16,7 @@ prerequisites:
     - An [AWS account](https://aws.amazon.com/) with permission to launch Graviton4 (`c8g.4xlarge` or larger) instances
     - Basic familiarity with Linux and SSH
 
+publish_date: 2025-06-26
 author: Julien Simon
 
 # Tags
@@ -25,7 +26,7 @@ subjects: ML
 arm_ips:
     - Neoverse
 tools_software_languages:
-    - Amazon Web Services
+    - AWS
     - Hugging Face
     - Python
     - Llama.cpp

@@ -15,6 +15,7 @@ learning_objectives:
 prerequisites:
     - Seven physical Arm machines or cloud instances with either Ubuntu or Debian installed. 
 
+publish_date: 2023-02-15
 author: Pareena Verma
 
 ### Tags
@@ -26,7 +27,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Kafka
-    - Zookeeper
+    - ZooKeeper
 
 
 further_reading:

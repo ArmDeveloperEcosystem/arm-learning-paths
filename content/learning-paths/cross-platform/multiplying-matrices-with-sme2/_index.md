@@ -21,6 +21,7 @@ prerequisites:
     - A platform that supports SME2 - see the list of [devices with SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices) or an emulator to run code with SME2 instructions
     - Compiler support for SME2 instructions (for example, LLVM 17+ with SME2 backend support)
 
+publish_date: 2024-06-28
 author: Arnaud de Grandmaison
 
 ### Tags

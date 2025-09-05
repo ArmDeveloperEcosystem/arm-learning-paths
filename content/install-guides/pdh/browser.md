@@ -2,6 +2,7 @@
 title: Access via Internet Browser
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/107572
+publish_date: 2023-02-15
 author: Ronan Synnott
 weight: 2
 

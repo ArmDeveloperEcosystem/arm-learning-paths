@@ -1,5 +1,6 @@
 ---
 title: Java
+publish_date: 2024-08-27
 author: Jason Andrews
 minutes_to_complete: 15
 official_docs: https://docs.oracle.com/en/java/

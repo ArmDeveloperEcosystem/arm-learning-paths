@@ -17,6 +17,7 @@ prerequisites:
     - Access to an x86_64 bare-metal server running Ubuntu 24.04 to run `wrk2`
     - Basic familiarity with Java applications
 
+publish_date: 2025-08-14
 author: Ying Yu, Ker Liu, Rui Chang
 
 ### Tags
@@ -25,7 +26,7 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
-    - Tomcat
+    - Apache Tomcat
     - wrk2
     - OpenJDK 21
 operatingsystems:

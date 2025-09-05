@@ -1,5 +1,6 @@
 ---
 title: Docker
+publish_date: 2023-02-15
 author: Jason Andrews
 additional_search_terms:
 - containers

@@ -14,6 +14,7 @@ prerequisites:
     - General knowledge about SIMD processing, vectorization or Arm NEON.
     - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
+publish_date: 2023-02-15
 author: Florent Lebeau
 
 ### Tags
@@ -26,8 +27,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - SVE
-    - Neon
-    - Coding
+    - NEON
     - armie
     - GCC
     - armclang

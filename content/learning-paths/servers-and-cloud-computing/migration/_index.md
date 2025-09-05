@@ -14,6 +14,7 @@ learning_objectives:
 prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ### Tags
@@ -24,8 +25,7 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - Coding
-    - Neon
+    - NEON
     - SVE
     - Go
     - Runbook

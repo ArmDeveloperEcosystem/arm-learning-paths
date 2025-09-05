@@ -17,6 +17,7 @@ learning_objectives:
 prerequisites:
      - A [Google Cloud Platform (GCP)](https://cloud.google.com/free?utm_source=google&hl=en) account with billing enabled.
 
+publish_date: 2025-08-06
 author: Annie Tallund
 
 ##### Tags

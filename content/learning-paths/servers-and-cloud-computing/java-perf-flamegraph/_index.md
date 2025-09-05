@@ -13,6 +13,7 @@ prerequisites:
   - Access to both Arm-based and x86-based computers running Ubuntu (you can use cloud-based server instances)
   - Basic familiarity with Java applications and performance profiling using flame graphs
 
+publish_date: 2023-02-15
 author: 
   - Ying Yu
   - Martin Ma
@@ -24,8 +25,8 @@ armips:
   - Neoverse
 
 tools_software_languages:
-  - OpenJDK-21
-  - Tomcat
+  - OpenJDK 21
+  - Apache Tomcat
   - async-profiler
   - FlameGraph
   - wrk2

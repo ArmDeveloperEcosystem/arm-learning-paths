@@ -16,6 +16,7 @@ prerequisites:
     - Knowledge of [Neon](https://developer.arm.com/documentation/102474/latest)
     - Knowledge of [Scalable Vector Extension (SVE)](https://developer.arm.com/documentation/101726/4-0)
 
+publish_date: 2023-03-28
 author: Dawid Borycki
 
 ### Tags
@@ -27,7 +28,6 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Android Studio
-    - Coding
 
 further_reading:
     - resource:

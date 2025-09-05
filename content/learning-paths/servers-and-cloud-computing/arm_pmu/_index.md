@@ -13,6 +13,7 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux. A bare metal or cloud metal instance is best because they expose more counters. You can use a virtual machine (VM), but fewer counters may be available. These instructions have been tested on the `a1.metal` instance type.
 
+publish_date: 2023-09-05
 author: Julio Suarez
 
 ### Tags

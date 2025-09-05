@@ -13,6 +13,7 @@ prerequisites:
     - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) with access to AWS services.
     - An x86 computer running Ubuntu or Arch Linux, authorized for AWS access. If you're using another build environment, you'll need to configure the toolchains for cross-compilation.
 
+publish_date: 2024-11-24
 author: Paul Howard
 
 ### Tags

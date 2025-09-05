@@ -15,6 +15,7 @@ learning_objectives:
 prerequisites:
     - Some familiarity with embedded programming is assumed
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### Tags
@@ -25,7 +26,6 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - Coding
     - Arm Development Studio
     - Arm Compiler for Embedded
     - Arm Fast Models
