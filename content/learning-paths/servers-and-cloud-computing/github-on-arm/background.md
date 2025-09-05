@@ -16,12 +16,12 @@ Learn more in Google’s announcement: [Introducing Google Axion processors, our
 
 ## GitHub Actions and CI/CD
 
-GitHub Actions is a powerful CI/CD (Continuous Integration and Continuous Delivery) platform built into GitHub. It allows developers to automate tasks such as building, testing, and deploying code in response to events like code pushes, pull requests, or scheduled jobs—directly from their GitHub repositories. This helps improve development speed, reliability, and collaboration.
+GitHub Actions is a powerful CI/CD (Continuous Integration and Continuous Delivery) platform built into GitHub. It allows developers to automate tasks such as building, testing, and deploying code in response to events like code pushes, pull requests, or scheduled jobs - directly from their GitHub repositories. This helps improve development speed, reliability, and collaboration.
 
 A key feature of GitHub Actions is [self-hosted runners](https://docs.github.com/en/actions/concepts/runners/about-self-hosted-runners), which let you run workflows on your own infrastructure instead of GitHub’s hosted servers. This is especially useful for:
 
-- Running on custom hardware, including Arm64-based systems (e.g., Google Axion virtual machine), to optimize performance and ensure architecture-specific compatibility.
-- Private network access, allowing secure interaction with internal services or databases.
-- Faster execution, especially for resource-intensive workflows, by using dedicated or high-performance machines.
+- Running on custom hardware, including Arm64-based systems (for example, Google Axion virtual machine), to optimize performance and ensure architecture-specific compatibility
+- Private network access, allowing secure interaction with internal services or databases
+- Faster execution, especially for resource-intensive workflows, by using dedicated or high-performance machines
 
 Self-hosted runners give you more control, flexibility, and cost efficiency - ideal for advanced CI/CD pipelines and platform-specific testing.
