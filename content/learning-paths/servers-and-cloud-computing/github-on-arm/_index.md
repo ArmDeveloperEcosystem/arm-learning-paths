@@ -50,7 +50,7 @@ further_reading:
       link: https://github.blog/news-insights/product-news/arm64-on-github-actions-powering-faster-more-efficient-build-systems/
       type: website
 
-    - resource:
+  - resource:
         title: GCP Quickstart Guide to Create a virtual machine
         link: https://cloud.google.com/compute/docs/instances/create-start-instance
         type: website

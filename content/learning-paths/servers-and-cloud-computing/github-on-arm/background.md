@@ -8,11 +8,11 @@ layout: "learningpathall"
 
 ## Google Axion C4A series
 
-The Google Axion C4A series is a family of Arm-based virtual machines built on Google’s custom Axion CPU, which is based on Arm Neoverse-V2 cores. Designed for high-performance and energy-efficient computing, these virtual machines offer strong performance ideal for modern cloud workloads such as CI/CD pipelines, microservices, media processing, and general-purpose applications.
+The Google Axion C4A series is a family of Arm-based virtual machines (VMs) built on Google’s custom Axion CPU, which is based on Arm Neoverse-V2 cores. Designed for high-performance and energy-efficient computing, these virtual machines offer strong performance ideal for modern cloud workloads such as CI/CD pipelines, microservices, media processing, and general-purpose applications.
 
-The C4A series provides offer a cost-effective virtual machine while leveraging the scalability and performance benefits of the Arm architecture in Google Cloud.
+The C4A series provides cost-effective VMs while leveraging the scalability and performance benefits of the Arm architecture on Google Cloud.
 
-To learn more about Google Axion, refer to the blog [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
+Learn more in Google’s announcement: [Introducing Google Axion processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
 
 ## GitHub Actions and CI/CD
 
@@ -24,4 +24,4 @@ A key feature of GitHub Actions is [self-hosted runners](https://docs.github.com
 - Private network access, allowing secure interaction with internal services or databases.
 - Faster execution, especially for resource-intensive workflows, by using dedicated or high-performance machines.
 
-Self-hosted runners provide more control, flexibility, and cost-efficiency—making them ideal for advanced CI/CD pipelines and platform-specific testing.
+Self-hosted runners give you more control, flexibility, and cost efficiency - ideal for advanced CI/CD pipelines and platform-specific testing.
