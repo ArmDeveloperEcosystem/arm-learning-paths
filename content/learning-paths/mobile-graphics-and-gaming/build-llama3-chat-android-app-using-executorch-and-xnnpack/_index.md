@@ -21,6 +21,7 @@ prerequisites:
     - Java 17 JDK. Follow the steps in [Java 17 JDK](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download and install JDK for host.
     - Python 3.10.
 
+publish_date: 2024-05-21
 author: 
     - Varun Chari
     - Pareena Verma

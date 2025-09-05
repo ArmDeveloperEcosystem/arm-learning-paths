@@ -12,6 +12,7 @@ learning_objectives:
 prerequisites:
     - Basic familiarity with Keil MDK
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### Tags

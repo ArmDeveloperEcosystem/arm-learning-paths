@@ -12,6 +12,7 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11.
 
+publish_date: 2023-03-28
 author: Pareena Verma
 
 ### Tags

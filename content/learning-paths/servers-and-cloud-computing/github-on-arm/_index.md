@@ -18,6 +18,7 @@ prerequisites:
      - A [Google Cloud Platform (GCP)](https://cloud.google.com/free?utm_source=google&hl=en) account with billing enabled.
      - A GitHub account. You can sign up [here](https://github.com/signup).
 
+publish_date: 2025-07-16
 author: Annie Tallund
 
 ##### Tags

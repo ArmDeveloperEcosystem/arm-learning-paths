@@ -1,6 +1,7 @@
 ---
 title: Tekton CLI (tkn)
 
+publish_date: 2025-07-22
 author: Jason Andrews
 official_docs: https://tekton.dev/docs/cli/
 

@@ -12,6 +12,7 @@ prerequisites:
     - A basic understanding of SIMD.
     - Access to an Arm platform with a SIMD-supported engine, installed with recent versions of a C compiler such as Clang or GCC.
 
+publish_date: 2024-09-09
 author: 
     - Georgios Mermigkis
     - Konstantinos Margaritis

@@ -17,6 +17,7 @@ minutes_to_complete: 10
 ### Link to official documentation
 official_docs: https://git-scm.com/doc
 
+publish_date: 2024-11-26
 author: Jason Andrews
 
 ### PAGE SETUP

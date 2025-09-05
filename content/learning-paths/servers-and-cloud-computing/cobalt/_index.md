@@ -15,6 +15,7 @@ prerequisites:
     - A Microsoft Azure subscription with permissions to create virtual machines and networking resources
     - Basic familiarity with SSH
 
+publish_date: 2025-06-10
 author: Joe Stech
 
 ### Tags

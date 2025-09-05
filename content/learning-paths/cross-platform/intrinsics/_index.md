@@ -18,6 +18,7 @@ prerequisites:
 - An Arm based machine or [cloud instance](/learning-paths/servers-and-cloud-computing/csp/) running Ubuntu Linux.
 - Optionally, an `x86_64` machine also running Ubuntu.
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 test_images:

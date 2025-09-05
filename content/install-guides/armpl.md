@@ -20,6 +20,7 @@ test_images:
 
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/101004
+publish_date: 2023-08-21
 author: Pareena Verma
 
 ### PAGE SETUP

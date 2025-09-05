@@ -23,6 +23,7 @@ prerequisites:
     - PETG filament. Others can work, but PETG allows some flex without the risk of snapping
     
 
+publish_date: 2023-07-05
 author: Gabriel Peterson
 
 ### Tags

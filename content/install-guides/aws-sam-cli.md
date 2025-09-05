@@ -1,6 +1,7 @@
 ---
 title: AWS SAM CLI
 
+publish_date: 2024-10-04
 author: Jason Andrews
 minutes_to_complete: 15
 

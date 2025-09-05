@@ -14,6 +14,7 @@ prerequisites:
     - A CMSIS v5 based project.
     - A basic understanding of the CMSIS-Pack system.
 
+publish_date: 2023-02-15
 author: Christopher Seidl
 
 ### Tags

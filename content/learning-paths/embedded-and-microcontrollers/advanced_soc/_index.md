@@ -15,6 +15,7 @@ prerequisites:
     - Basic understanding of System on Chip design
     - A 'Zybo Z7-10' development board 
 
+publish_date: 2023-02-15
 author: Pareena Verma
 
 ### Tags

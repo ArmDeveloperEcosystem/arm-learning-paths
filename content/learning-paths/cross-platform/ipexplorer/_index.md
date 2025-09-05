@@ -13,6 +13,7 @@ prerequisites:
     - An Arm account that can access IP Explorer
     - (Optional) A Linux machine with the desired compilers installed
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### Tags

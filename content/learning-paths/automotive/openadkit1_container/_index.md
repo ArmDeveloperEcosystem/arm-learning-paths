@@ -14,6 +14,7 @@ prerequisites:
     - An Arm Neoverse cloud instance, or a local Arm Neoverse Linux computer with at least 16 CPUs and 32GB of RAM.
     - Familiarity with Docker and Docker Compose.
 
+publish_date: 2025-03-07
 author: Odin Shen
 
 ### Tags

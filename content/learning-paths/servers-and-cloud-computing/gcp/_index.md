@@ -15,6 +15,7 @@ prerequisites:
     - A computer with [Terraform](/install-guides/terraform) installed.
     - A computer with [Google Cloud CLI](/install-guides/gcloud) installed.
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ##### Tags

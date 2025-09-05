@@ -5,6 +5,7 @@ minutes_to_complete: 15
 
 official_docs: https://gitlab.com/Linaro/WindowsPerf/wpa-plugin
 
+publish_date: 2024-10-16
 author: Alaaeddine Chakroun 
 
 ### Optional additional search terms (one per line) to assist in finding the article

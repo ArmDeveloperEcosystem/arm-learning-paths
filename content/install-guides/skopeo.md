@@ -1,5 +1,6 @@
 ---
 title: Skopeo
+publish_date: 2024-12-16
 author: Jason Andrews
 minutes_to_complete: 10
 official_docs: https://github.com/containers/skopeo

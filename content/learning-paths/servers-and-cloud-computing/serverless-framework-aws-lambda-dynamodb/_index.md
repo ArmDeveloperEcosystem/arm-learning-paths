@@ -14,6 +14,7 @@ prerequisites:
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.
     - Completion of this [Learning Path](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-intro/).
 
+publish_date: 2023-03-28
 author: Dawid Borycki
 
 ### Tags

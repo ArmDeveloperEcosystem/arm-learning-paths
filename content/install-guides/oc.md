@@ -1,6 +1,7 @@
 ---
 title: OpenShift CLI (oc)
 
+publish_date: 2025-07-22
 author: Jason Andrews
 
 official_docs: https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/cli_tools/openshift-cli-oc#cli-getting-started

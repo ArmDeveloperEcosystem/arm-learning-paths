@@ -11,6 +11,7 @@ learning_objectives:
 prerequisites:
     - Bare-metal or cloud [installation of MySQL](/learning-paths//servers-and-cloud-computing/mysql)
 
+publish_date: 2023-02-15
 author: Julio Suarez
 
 skilllevels: Advanced

@@ -13,6 +13,7 @@ prerequisites:
     - An installation of [Arm Keil MDK](/install-guides/mdk) or [Arm Development Studio](/install-guides/armds) (MDK recommended)
     - Some familiarity with CMSIS is assumed
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### Tags

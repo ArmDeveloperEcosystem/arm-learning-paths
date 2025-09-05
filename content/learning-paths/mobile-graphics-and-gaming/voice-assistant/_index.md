@@ -13,6 +13,7 @@ prerequisites:
     - An Android phone that supports the i8mm Arm architecture feature (8-bit integer matrix multiplication). This Learning Path was tested on a Samsung Galaxy Z Flip 6. 
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
 
+publish_date: 2025-02-19
 author: Arnaud de Grandmaison
 
 skilllevels: Introductory

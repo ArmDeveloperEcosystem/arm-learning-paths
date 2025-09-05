@@ -3,6 +3,7 @@ additional_search_terms:
 - compiler
 layout: installtoolsall
 minutes_to_complete: 15
+publish_date: 2023-02-15
 author: Jason Andrews
 multi_install: false
 multitool_install_part: true

@@ -19,6 +19,7 @@ prerequisites:
     - Completion of the [Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison) Learning Path.
     - Completion of the [Run an end-to-end Attestation Flow with Arm CCA](/learning-paths/servers-and-cloud-computing/cca-essentials/) Learning Path.
 
+publish_date: 2024-12-11
 author:
     - Anton Antonov
 

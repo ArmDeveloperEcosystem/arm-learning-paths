@@ -15,6 +15,7 @@ prerequisites:
     - .NET 8 SDK for [arm64](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.100-windows-arm64-installer).
     - Any code editor, we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).
 
+publish_date: 2023-03-28
 author: Dawid Borycki
 
 ### Tags

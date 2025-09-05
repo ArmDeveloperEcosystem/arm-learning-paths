@@ -13,6 +13,7 @@ learning_objectives:
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud provider or an on-premise Arm server. This Learning Path was tested on an AWS Graviton4 r8g.24xlarge instance.
 
+publish_date: 2023-02-15
 author:
     - Tianyu Li
 

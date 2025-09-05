@@ -13,6 +13,7 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - '[Qt framework](https://www.qt.io/) or [Qt for Open Source Development](https://www.qt.io/download-open-source)'
 
+publish_date: 2023-03-28
 author: Dawid Borycki
 
 ### Tags

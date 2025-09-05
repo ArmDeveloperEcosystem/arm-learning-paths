@@ -15,6 +15,7 @@ prerequisites:
     - Cloud or bare-metal installation of an Envoy service
     - Review [Learn how to deploy Envoy](/learning-paths/servers-and-cloud-computing/envoy/) if you do not already have an Envoy setup
 
+publish_date: 2023-02-15
 author: Zhengjun Xing
 
 ### Tags

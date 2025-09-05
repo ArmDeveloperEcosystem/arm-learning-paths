@@ -13,6 +13,7 @@ prerequisites:
     - Some understanding of the Arm architecture
     - Arm Development Studio, 2023.0 or later
 
+publish_date: 2023-11-08
 author: Ronan Synnott
 
 ### Tags

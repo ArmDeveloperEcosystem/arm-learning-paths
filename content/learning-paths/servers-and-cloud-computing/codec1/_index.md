@@ -1,6 +1,7 @@
 ---
 title: Run the AV1 and VP9 codecs on Arm Linux
 
+publish_date: 2023-02-15
 author: Odin Shen
 
 minutes_to_complete: 30

@@ -1,5 +1,6 @@
 ---
 title: GNU Compiler
+publish_date: 2023-04-25
 author: Jason Andrews
 additional_search_terms:
 - compiler

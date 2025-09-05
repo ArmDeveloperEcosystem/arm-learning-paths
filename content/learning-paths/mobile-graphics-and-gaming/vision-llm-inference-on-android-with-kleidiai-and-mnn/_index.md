@@ -16,6 +16,7 @@ prerequisites:
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
     - A smartphone running Android with support for `i8mm` and `dotprod` instructions.
 
+publish_date: 2025-02-27
 author:
     - Shuheng Deng
     - Yiyang Fan

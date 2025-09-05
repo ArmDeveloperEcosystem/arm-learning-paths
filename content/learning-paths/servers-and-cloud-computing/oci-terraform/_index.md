@@ -12,6 +12,7 @@ prerequisites:
     - An OCI account
     - A computer with Terraform installed
 
+publish_date: 2023-02-15
 author: Frédéric -lefred- Descamps
 
 ### Tags

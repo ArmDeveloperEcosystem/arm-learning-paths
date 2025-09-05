@@ -13,6 +13,7 @@ prerequisites:
     - PLACEHOLDER PREREQ 1
     - PLACEHOLDER PREREQ 2
 
+publish_date: 2023-02-15
 author: PLACEHOLDER NAME
 
 ### Tags

@@ -14,6 +14,7 @@ learning_objectives:
 prerequisites:
     - An AArch64 or x86_64 computer running Linux. You can use cloud instances, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
+publish_date: 2023-02-15
 author: Pareena Verma
 
 ### Tags

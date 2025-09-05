@@ -6,6 +6,7 @@ armips:
 - Ethos-U
 - Corstone
 
+publish_date: 2023-05-22
 author: Jason Andrews
 
 learning_objectives:

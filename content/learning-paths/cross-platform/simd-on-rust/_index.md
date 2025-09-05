@@ -11,6 +11,7 @@ learning_objectives:
 prerequisites:
     - An Arm-based computer with recent versions of a C compiler (Clang or GCC) and a Rust compiler installed.
 
+publish_date: 2023-02-15
 author: Konstantinos Margaritis
 
 ### Tags

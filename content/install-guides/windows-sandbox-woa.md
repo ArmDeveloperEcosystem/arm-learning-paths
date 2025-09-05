@@ -16,6 +16,7 @@ minutes_to_complete: 15
 ### Link to official documentation
 official_docs: https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-overview
 
+publish_date: 2024-05-16
 author: Pareena Verma
 
 ### PAGE SETUP

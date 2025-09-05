@@ -16,6 +16,7 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
 
+publish_date: 2024-03-25
 author: Ronan Synnott
 
 ### Link to official documentation

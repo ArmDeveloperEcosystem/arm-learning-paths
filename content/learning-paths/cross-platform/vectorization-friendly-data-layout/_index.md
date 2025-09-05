@@ -11,6 +11,7 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux and a recent version of Clang or the GNU compiler (gcc) installed.
 
+publish_date: 2023-02-15
 author: Konstantinos Margaritis
 
 ### Tags

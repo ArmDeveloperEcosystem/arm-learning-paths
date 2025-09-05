@@ -13,6 +13,7 @@ prerequisites:
     - Some familiarity with embedded programming
     - A Linux host machine running Ubuntu
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### RS: Learning Path hidden until AWS instance updated

@@ -5,6 +5,7 @@ additional_search_terms:
 - hpc
 - linux
 - allinea
+publish_date: 2023-02-15
 author: Florent Lebeau
 layout: installtoolsall
 minutes_to_complete: 15

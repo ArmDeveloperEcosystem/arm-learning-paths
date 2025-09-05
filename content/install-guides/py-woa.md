@@ -17,6 +17,7 @@ minutes_to_complete: 15
 ### Link to official documentation
 official_docs: https://www.python.org/doc/
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ### PAGE SETUP

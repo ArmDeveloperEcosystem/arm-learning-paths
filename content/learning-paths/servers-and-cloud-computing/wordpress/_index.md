@@ -7,6 +7,7 @@ prerequisites:
     - An OCI account
     - An Arm compute instance deployed on OCI with Oracle Linux
 
+publish_date: 2023-02-15
 author: Frédéric -lefred- Descamps
 
 who_is_this_for: This is an introductory topic for developers who want to install WordPress on Oracle Cloud Infrastructure (OCI) using always free tier.

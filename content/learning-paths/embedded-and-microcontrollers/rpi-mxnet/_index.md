@@ -16,6 +16,7 @@ prerequisites:
     - A Raspberry Pi 3 or 4 board
 
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ### Tags

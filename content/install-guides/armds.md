@@ -18,6 +18,7 @@ test_maintenance: true
 test_images:
   - ubuntu:latest
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### Link to official documentation

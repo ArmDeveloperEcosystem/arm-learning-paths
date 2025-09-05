@@ -16,6 +16,7 @@ prerequisites:
     - A cloud or bare-metal installation of a Nginx file server or load balancer.
     - If you do not already have a Nginx setup, a review of [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/).
 
+publish_date: 2023-07-31
 author: Julio Suarez
 
 ### Tags

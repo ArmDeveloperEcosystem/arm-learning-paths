@@ -18,6 +18,7 @@ minutes_to_complete: 15
 ### Link to official documentation
 official_docs: https://www.pytorch.org/doc/
 
+publish_date: 2025-04-24
 author: Pareena Verma
 
 ### PAGE SETUP

@@ -16,6 +16,7 @@ prerequisites:
     - A Fixed Virtual Platform (FVP).
     - A basic understanding of Neoverse Reference Design (RD) platform boot.
 
+publish_date: 2023-02-15
 author: Daniel Nguyen
 
 ### Tags

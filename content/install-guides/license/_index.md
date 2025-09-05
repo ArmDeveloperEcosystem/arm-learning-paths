@@ -1,5 +1,6 @@
 ---
 title: Arm Software Licensing
+publish_date: 2023-02-15
 author: Ronan Synnott
 additional_search_terms:
 - success kits

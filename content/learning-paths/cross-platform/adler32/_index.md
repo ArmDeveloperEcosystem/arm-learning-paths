@@ -12,6 +12,7 @@ prerequisites:
     - An Arm computer running Linux with the GNU compiler (gcc) installed.
     - Visual Studio Code with the GitHub Copilot extension installed. 
 
+publish_date: 2025-04-21
 author: Jason Andrews
 
 ### Tags

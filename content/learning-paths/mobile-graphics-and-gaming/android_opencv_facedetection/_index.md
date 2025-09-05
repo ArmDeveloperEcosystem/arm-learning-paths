@@ -15,6 +15,7 @@ prerequisites:
    - An Android smartphone.
    - Familiarity with OpenCV, review [Create Computer Vision Applications with OpenCV on Android Devices](/learning-paths/mobile-graphics-and-gaming/android_opencv_camera/) before starting.
 
+publish_date: 2024-06-20
 author: Dawid Borycki
 
 ### Tags

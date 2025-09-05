@@ -2,6 +2,7 @@
 title: Pulumi
 minutes_to_complete: 5
 official_docs: https://www.pulumi.com/docs/
+publish_date: 2023-08-10
 author: Jason Andrews
 
 test_maintenance: true

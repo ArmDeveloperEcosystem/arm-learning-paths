@@ -17,6 +17,7 @@ prerequisites:
     - Prior exposure to CMSIS-DSP.
     - Python installed on your machine.
 
+publish_date: 2025-04-22
 author: Christophe Favergeon
 
 ### Tags

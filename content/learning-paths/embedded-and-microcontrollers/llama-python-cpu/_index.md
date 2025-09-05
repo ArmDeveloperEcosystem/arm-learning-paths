@@ -14,6 +14,7 @@ learning_objectives:
 prerequisites:
     - A Raspberry Pi 5 running Raspberry Pi OS.
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ### Tags

@@ -17,6 +17,7 @@ prerequisites:
     - Basic understanding of Large Language Models (LLMs) and how they are used in local inference.
     - Understanding of AI agents and the OpenAI Agent SDK (or similar frameworks).
 
+publish_date: 2025-05-07
 author: Andrew Choi
 
 skilllevels: Introductory

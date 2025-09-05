@@ -14,6 +14,7 @@ prerequisites:
     - An AWS account.
     - A computer with Docker, Terraform, the Amazon eksctl command-line interface, and kubectl installed.
 
+publish_date: 2023-11-05
 author: 
     - Pranay Bakre
     - Masoud Koleini

@@ -16,6 +16,7 @@ prerequisites:
     - A computer with [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/)installed.
     - A valid GitLab account
 
+publish_date: 2023-08-22
 author: Pranay Bakre
 
 ### Tags

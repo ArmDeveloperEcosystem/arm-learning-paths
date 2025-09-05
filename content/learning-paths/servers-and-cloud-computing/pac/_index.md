@@ -15,6 +15,7 @@ prerequisites:
     - If needed, review [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) to learn how to deploy Arm in the cloud. These learning paths also point to more advanced learning paths that show how to automate the deployment of Arm instances at different cloud providers.
     
 
+publish_date: 2023-02-15
 author: Pareena Verma
 
 ### Tags

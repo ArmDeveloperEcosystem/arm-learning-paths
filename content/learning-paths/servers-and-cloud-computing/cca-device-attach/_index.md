@@ -18,6 +18,7 @@ prerequisites:
     - Completion of the [Run an application in a Realm using the Arm Confidential Computing Architecture (CCA)](/learning-paths/servers-and-cloud-computing/cca-container/) Learning Path
     - Completion of the [Run an end-to-end Attestation Flow](/learning-paths/servers-and-cloud-computing/cca-essentials/) Learning Path
 
+publish_date: 2024-12-11
 author: Arnaud de Grandmaison
 
 ### Tags

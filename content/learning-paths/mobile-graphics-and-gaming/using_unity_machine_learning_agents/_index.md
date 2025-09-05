@@ -14,6 +14,7 @@ prerequisites:
 - An Android mobile device that has a 64-bit processor and supports at least Android 8.
 - A USB cable to connect the mobile device to your computer.
 
+publish_date: 2023-08-31
 author: Arm
 
 ### Tags

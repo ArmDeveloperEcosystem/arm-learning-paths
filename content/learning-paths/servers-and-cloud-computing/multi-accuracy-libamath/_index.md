@@ -2,6 +2,7 @@
 title: Select accuracy modes in Libamath (Arm Performance Libraries)
 
 minutes_to_complete: 20
+publish_date: 2025-05-20
 author: Joana Cruz
 
 who_is_this_for: This is an introductory topic for developers who want to use the different accuracy modes for vectorized math functions in Libamath, a component of Arm Performance Libraries. 

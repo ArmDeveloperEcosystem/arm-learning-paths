@@ -11,6 +11,7 @@ learning_objectives:
 prerequisites:
     - A computer with [Terraform](/install-guides/terraform/) and the [AWS CLI](/install-guides/aws-cli/) installed. 
     
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ### Tags

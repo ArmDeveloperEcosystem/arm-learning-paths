@@ -19,6 +19,7 @@ minutes_to_complete: 15
 ### Link to official documentation
 official_docs: https://learn.microsoft.com/en-us/virtualization/
 
+publish_date: 2023-03-28
 author: Jason Andrews
 
 ### PAGE SETUP

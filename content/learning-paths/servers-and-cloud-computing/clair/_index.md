@@ -13,6 +13,7 @@ learning_objectives:
 prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an Arm server with recent versions of Docker and Go installed.
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ### Tags

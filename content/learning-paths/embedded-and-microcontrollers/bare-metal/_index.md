@@ -15,6 +15,7 @@ learning_objectives:
 prerequisites:
     - Some familiarity with embedded programming is assumed
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### Tags

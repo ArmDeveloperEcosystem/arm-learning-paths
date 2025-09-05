@@ -17,6 +17,7 @@ prerequisites:
     - Familiarity with general-purpose registers.
     - Familiarity with memory barriers, including Acquire-Release Semantics.
 
+publish_date: 2025-03-14
 author: Julio Suarez
 
 skilllevels: Advanced

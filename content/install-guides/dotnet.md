@@ -1,6 +1,7 @@
 ---
 layout: installtoolsall
 minutes_to_complete: 10
+publish_date: 2024-05-31
 author: Jason Andrews
 multi_install: false
 multitool_install_part: false

@@ -15,6 +15,7 @@ prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free?utm_source=google&hl=en) account with billing enabled
   - Familiarity with distributed computing concepts and the [Apache Spark architecture](https://spark.apache.org/docs/latest/)
 
+publish_date: 2025-07-23
 author: Pareena Verma
 
 ##### Tags

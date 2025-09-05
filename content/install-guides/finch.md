@@ -1,5 +1,6 @@
 ---
 title: Finch on Arm Linux
+publish_date: 2025-05-21
 author: Jason Andrews
 
 minutes_to_complete: 10

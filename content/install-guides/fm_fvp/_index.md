@@ -1,5 +1,6 @@
 ---
 title: Arm Fast Models and FVPs
+publish_date: 2023-05-12
 author: Ronan Synnott
 
 additional_search_terms:

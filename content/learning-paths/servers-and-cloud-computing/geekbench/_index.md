@@ -12,6 +12,7 @@ learning_objectives:
 prerequisites:
 - An Arm computer running Linux. You can use a cloud instance, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/).
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 skilllevels: Introductory

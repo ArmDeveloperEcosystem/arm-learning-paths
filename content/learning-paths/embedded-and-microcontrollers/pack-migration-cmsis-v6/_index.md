@@ -13,6 +13,7 @@ prerequisites:
     - A good understanding of [CMSIS-Packs](https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/index.html).
     - A CMSIS-Pack that contains device support and was created for CMSIS v5.
 
+publish_date: 2023-02-15
 author: Christopher Seidl
 
 ### Tags

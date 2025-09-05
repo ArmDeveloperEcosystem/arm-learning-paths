@@ -16,6 +16,7 @@ prerequisites:
     - A Linux or macOS computer with Python 3 installed
 
 
+publish_date: 2024-09-05
 author: Waheed Brown
 
 ### Tags

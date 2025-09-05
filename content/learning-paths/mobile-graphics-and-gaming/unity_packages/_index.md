@@ -14,6 +14,7 @@ prerequisites:
     - Familiarity with Unity and the Unity Profiler
     - Familiarity with Arm Performance Studio tools
 
+publish_date: 2023-08-01
 author: Julie Gaskin
 
 ### Tags

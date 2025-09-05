@@ -15,6 +15,7 @@ prerequisites:
     - Some understanding of C, Python, and Linux commands
     - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
+publish_date: 2023-02-15
 author: Florent Lebeau
 
 ### Tags

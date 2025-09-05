@@ -16,6 +16,7 @@ learning_objectives:
 prerequisites:
   - Access to an Arm-based Linux system running Ubuntu, Debian, or CentOS.
 
+publish_date: 2025-05-19
 author: Geremy Cohen
 
 skill_level: Introductory

@@ -16,6 +16,7 @@ prerequisites:
     - A Linux machine with root access
     - Some familiarity with embedded Linux
 
+publish_date: 2023-02-15
 author: Michael Hall
 
 ### Tags

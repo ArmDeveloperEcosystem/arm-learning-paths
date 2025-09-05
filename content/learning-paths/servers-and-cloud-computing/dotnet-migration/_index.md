@@ -19,6 +19,7 @@ prerequisites:
     - GCC installed (Linux) or access to a cross-compiler
     - OrchardCore application created using the .NET CLI or Visual Studio
 
+publish_date: 2025-06-04
 author: Joe Stech
 
 ### Tags

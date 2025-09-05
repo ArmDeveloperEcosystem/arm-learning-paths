@@ -17,6 +17,7 @@ prerequisites:
     - Android Studio Profiler.
   
 
+publish_date: 2023-02-15
 author: Ben Clark
 
 ### Tags

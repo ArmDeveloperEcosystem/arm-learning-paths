@@ -13,6 +13,7 @@ prerequisites:
     - An Azure Cloud account.
     - An RDP client to connect to your Windows on Arm instance.  For more info on RDP clients, see [Remote Desktop clients for Remote Desktop Services and remote PCs](https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-clients) to get started.
 
+publish_date: 2023-02-15
 author: Pareena Verma
 
 ### Tags

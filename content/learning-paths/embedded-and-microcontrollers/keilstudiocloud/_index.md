@@ -15,6 +15,7 @@ prerequisites:
     - Some familiarity with embedded programming is assumed
     - An [Arm Account](https://developer.arm.com/register) is required
 
+publish_date: 2023-02-15
 author: Christopher Seidl 
 
 

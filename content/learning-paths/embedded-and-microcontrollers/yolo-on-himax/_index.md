@@ -18,6 +18,7 @@ prerequisites:
     - A USB-C cable.
     - An x86 Linux machine, or a Mac running macOS.
 
+publish_date: 2023-02-15
 author:
     - Chaodong Gong
     - Alex Su

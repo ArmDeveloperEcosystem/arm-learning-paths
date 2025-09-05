@@ -1,6 +1,7 @@
 ---
 title: Bedrust - invoke models on Amazon Bedrock
 minutes_to_complete: 10
+publish_date: 2025-04-09
 author: Jason Andrews
 
 additional_search_terms:

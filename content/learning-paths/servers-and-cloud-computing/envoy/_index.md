@@ -14,6 +14,7 @@ prerequisites:
     - To run Envoy as a web server, you will need at least one [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premises Arm server.
     - Network settings (firewalls and security groups) which allow communication on port 22 (SSH) and port 80 (HTTP).
 
+publish_date: 2023-02-15
 author: Zhengjun Xing
 
 ### Tags

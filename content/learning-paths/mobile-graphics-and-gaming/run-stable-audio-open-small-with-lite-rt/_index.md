@@ -17,6 +17,7 @@ prerequisites:
     - A [HuggingFace](https://huggingface.co/) account.
     - An Android phone in [developer mode](https://developer.android.com/studio/debug/dev-options) and a cable to connect it to your development machine.
 
+publish_date: 2025-05-03
 author:
     - Nina Drozd
     - Gian Marco Iodice

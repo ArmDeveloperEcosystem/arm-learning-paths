@@ -5,6 +5,7 @@ title: "Start Debugging with µVision"
 minutes_to_complete: 90
 # Always measured in minutes. Should be an integer, to complete the learning path (not just read it).
 
+publish_date: 2023-02-15
 author: Christopher Seidl
 
 who_is_this_for: >

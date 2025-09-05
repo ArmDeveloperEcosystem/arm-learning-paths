@@ -11,6 +11,7 @@ learning_objectives:
 prerequisites:
     - An AArch64 Linux development machine. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
+publish_date: 2023-02-15
 author: Jason Andrews
 
 ##### Tags

@@ -13,6 +13,7 @@ learning_objectives:
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, or a local Arm Linux computer with at least 8 CPUs and 16GB of RAM.
 
+publish_date: 2023-03-28
 author: Odin Shen
 
 ### Tags

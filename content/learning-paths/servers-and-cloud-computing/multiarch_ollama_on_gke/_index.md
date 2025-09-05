@@ -17,6 +17,7 @@ prerequisites:
     - The [GKE Cloud Plugin](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#gcloud) installed.
    
 
+publish_date: 2023-02-15
 author:
     - Geremy Cohen
 

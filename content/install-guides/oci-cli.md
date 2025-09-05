@@ -7,6 +7,7 @@ additional_search_terms:
 
 layout: installtoolsall
 minutes_to_complete: 10
+publish_date: 2023-06-27
 author: Daniel Gubay
 multi_install: false
 multitool_install_part: false

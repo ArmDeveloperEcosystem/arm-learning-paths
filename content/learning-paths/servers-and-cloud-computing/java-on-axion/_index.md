@@ -14,6 +14,7 @@ learning_objectives:
 prerequisites:
     - A [Google Cloud](https://cloud.google.com/) account with access to Axion based instances (C4A).
 
+publish_date: 2024-07-05
 author: Joe Stech
 
 ### Tags

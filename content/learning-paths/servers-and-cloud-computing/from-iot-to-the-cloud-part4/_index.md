@@ -17,6 +17,7 @@ prerequisites:
     - 'Node.js (details provided in this learning path)'
     - 'Azure CLI (details provided in this learning path)'
 
+publish_date: 2023-11-08
 author: Dawid Borycki
 
 ### Tags

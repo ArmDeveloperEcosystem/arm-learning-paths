@@ -12,6 +12,7 @@ learning_objectives:
 prerequisites:
     - Windows on Arm desktop or development machine
 
+publish_date: 2023-02-15
 author: Ronan Synnott
 
 ### Tags

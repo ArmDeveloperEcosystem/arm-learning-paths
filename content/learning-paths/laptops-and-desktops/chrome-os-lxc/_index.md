@@ -16,6 +16,7 @@ prerequisites:
     - A ChromeOS device with the Linux development environment enabled. The Lenovo Chromebook Plus 14 is recommended. 
     - Basic knowledge of the Linux command line
 
+publish_date: 2025-08-08
 author: Jason Andrews
 
 ### Tags

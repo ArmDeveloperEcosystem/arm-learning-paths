@@ -18,6 +18,7 @@ prerequisites:
     - A build system [GNU Make](https://www.gnu.org/software/make/) or [Ninja](https://ninja-build.org/).
     - A documentation generator [Doxygen](https://www.doxygen.nl/).
 
+publish_date: 2023-02-15
 author: Arnaud de Grandmaison
 
 

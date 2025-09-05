@@ -2,6 +2,7 @@
 title: Performance API (PAPI)
 minutes_to_complete: 15
 official_docs: https://github.com/icl-utk-edu/papi/wiki/Downloading-and-Installing-PAPI
+publish_date: 2023-10-03
 author: Jason Andrews
 additional_search_terms:
 - perf

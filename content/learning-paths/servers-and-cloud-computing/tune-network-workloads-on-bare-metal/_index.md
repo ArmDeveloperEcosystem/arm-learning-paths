@@ -17,6 +17,7 @@ prerequisites:
     - Access to a x86_64 bare-metal server running Ubuntu 24.04 to run wrk2
     - Basic familiarity with Java applications
 
+publish_date: 2025-08-14
 author: Ying Yu, Ker Liu, Rui Chang
 
 ### Tags

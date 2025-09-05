@@ -9,6 +9,7 @@ additional_search_terms:
 
 minutes_to_complete: 10
 
+publish_date: 2023-05-25
 author: Jason Andrews
 
 official_docs: https://cmake.org/documentation/

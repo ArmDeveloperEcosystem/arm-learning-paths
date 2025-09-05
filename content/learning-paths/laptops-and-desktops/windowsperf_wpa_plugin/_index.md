@@ -12,6 +12,7 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm laptop with WindowsPerf, Windows Performance Analyzer (WPA), and the WPA plugin installed.
 
+publish_date: 2023-02-15
 author: Alaaeddine Chakroun
 
 ### Tags
