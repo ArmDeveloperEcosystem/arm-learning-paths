@@ -27,7 +27,7 @@ armips:
     - Cortex-A
 tools_software_languages:
     - Android Studio
-    - Memory Tagging Extension
+    - MTE
 operatingsystems:
     - Android
 

@@ -23,7 +23,7 @@ subjects: Web
 armips:
     - Neoverse
 tools_software_languages:
-    - Nginx
+    - NGINX
 operatingsystems:
     - Linux
 

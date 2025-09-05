@@ -41,8 +41,7 @@ armips:
 operatingsystems:
   - Linux
 tools_software_languages:
-  - C
-  - Coding
+  - C 
   - Runbook
 
 ### Cross-platform metadata only

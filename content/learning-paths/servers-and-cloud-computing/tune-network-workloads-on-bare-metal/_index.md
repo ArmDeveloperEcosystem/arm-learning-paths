@@ -25,9 +25,9 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
-    - Tomcat
+    - Apache Tomcat
     - wrk2
-    - OpenJDK-21
+    - OpenJDK 21
 operatingsystems:
     - Linux
 

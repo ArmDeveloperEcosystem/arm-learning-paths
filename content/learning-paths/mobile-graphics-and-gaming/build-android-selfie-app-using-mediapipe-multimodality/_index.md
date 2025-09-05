@@ -28,7 +28,6 @@ armips:
     - Cortex-A
     - Mali GPU
 tools_software_languages:
-    - mobile
     - Android Studio
     - Kotlin
     - MediaPipe

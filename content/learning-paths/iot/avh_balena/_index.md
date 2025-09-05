@@ -31,9 +31,9 @@ operatingsystems:
 
 tools_software_languages:
     - Arm Virtual Hardware
-    - Balena Cloud
+    - balenaCloud
     - Raspberry Pi
-    - Balena OS
+    - BalenaOS
 
 further_reading:
     - resource:

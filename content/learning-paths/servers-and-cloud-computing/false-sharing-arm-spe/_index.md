@@ -23,7 +23,7 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
-    - Perf
+    - perf
     - Runbook
 operatingsystems:
     - Linux

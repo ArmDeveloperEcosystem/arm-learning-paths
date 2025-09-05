@@ -34,8 +34,7 @@ operatingsystems:
     - macOS
 tools_software_languages:
     - Android Studio
-    - Coding
-    - VS Code
+    - Visual Studio Code
 shared_path: true
 shared_between:
     - servers-and-cloud-computing

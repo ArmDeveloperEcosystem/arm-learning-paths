@@ -34,7 +34,6 @@ operatingsystems:
 tools_software_languages:
     - Arm Performance Studio
     - Arm Mobile Studio
-    - Coding
 
 further_reading:
     - resource:

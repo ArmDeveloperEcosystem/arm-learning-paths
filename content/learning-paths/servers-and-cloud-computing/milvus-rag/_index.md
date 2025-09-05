@@ -23,7 +23,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - Python
-    - GenAI
+    - Generative AI
     - RAG
     - Hugging Face
 

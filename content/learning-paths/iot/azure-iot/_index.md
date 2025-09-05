@@ -32,7 +32,7 @@ operatingsystems:
 tools_software_languages:    
     - Python
     - Azure
-    - VS Code
+    - Visual Studio Code
 
 further_reading:
     - resource:

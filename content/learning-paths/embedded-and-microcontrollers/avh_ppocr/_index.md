@@ -27,7 +27,6 @@ operatingsystems:
     - Baremetal
 tools_software_languages:
     - Arm Virtual Hardware
-    - Coding
     - GCC
     - Paddle
     - TVMC

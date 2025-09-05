@@ -23,7 +23,7 @@ armips:
     - Neoverse
     - Cortex-A
 tools_software_languages:
-    - assembly
+    - Assembly
     - llvm-mca
     - Runbook
 

@@ -26,7 +26,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Kafka
-    - Zookeeper
+    - ZooKeeper
 
 
 further_reading:

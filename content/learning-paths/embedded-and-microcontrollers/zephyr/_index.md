@@ -31,8 +31,7 @@ operatingsystems:
 tools_software_languages:
 - Zephyr
 - Arm Virtual Hardware
-- Fixed Virtual Platform
-- Coding
+- FVP
 
 further_reading:
     - resource:

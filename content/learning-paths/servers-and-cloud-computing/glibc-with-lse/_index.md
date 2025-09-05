@@ -31,7 +31,7 @@ operatingsystems:
 - Linux
 
 tools_software_languages:
-- Glibc
+- glibc
 - LSE
 - MongoDB
 - Runbook
