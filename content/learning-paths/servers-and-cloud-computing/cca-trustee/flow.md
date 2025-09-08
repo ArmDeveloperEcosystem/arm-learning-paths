@@ -199,7 +199,7 @@ Using JWK key from JWT header
 Error: verifying signed EAR from "ear.jwt" using "JWK header" key: failed verifying JWT message: jwt.Parse: failed to parse token: jwt.Validate: validation failed: "exp" not satisfied: token is expired
 ```
 
-Please obtain a new EAR message by re-runing the attestation command.
+Please obtain a new EAR message by re-running the attestation command.
 {{% /notice %}}
 
 

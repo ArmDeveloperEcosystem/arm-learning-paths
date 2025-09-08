@@ -14,7 +14,7 @@ The C4A series provides a cost-effective alternative to x86 virtual machines whi
 
 To learn more about Google Axion, refer to the [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu) blog.
 
-## Envoy for service proxying and traffic management on Arm
+## Envoy for service proxy and traffic management on Arm
 
 Envoy is an open-source, high-performance edge and service proxy designed for cloud-native applications.
 
