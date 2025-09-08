@@ -25,10 +25,14 @@ tools_software_languages:
     - bpftool
     - libbpf
     - Capstone
+<<<<<<< HEAD
     - C
     - C++
     - Runbook
 
+=======
+    - C/C++
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
 

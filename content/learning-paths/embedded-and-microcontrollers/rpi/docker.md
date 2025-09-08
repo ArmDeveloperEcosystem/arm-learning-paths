@@ -40,7 +40,11 @@ Also try out official images from Docker Hub such as Ubuntu. None of the project
 
 Docker Hub makes it easy to share images created on the Arm server and run them on the Raspberry Pi 4. 
 
+<<<<<<< HEAD
 It's also possible to build 32-bit Arm images on the Arm server and run those images on the Raspberry Pi 4 without using `docker buildx`. 
+=======
+It’s also possible to build 32-bit Arm images on the Arm server and run those images on the Raspberry Pi 4 without using `docker buildx`. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 An example C program which prints out the size of a pointer to indicate if the Linux userspace is 32-bit or 64-bit is shown below. 
 

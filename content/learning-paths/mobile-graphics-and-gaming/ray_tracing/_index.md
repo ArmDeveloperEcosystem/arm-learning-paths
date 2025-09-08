@@ -5,7 +5,11 @@ minutes_to_complete: 120
 
 who_is_this_for: This Learning Path is for Vulkan developers who are familiar with rendering and are interested in deploying ray tracing in their applications.
 
+<<<<<<< HEAD
 learning_objectives:
+=======
+learning_objectives: 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Describe how the Vulkan ray tracing API works.
     - Describe how to use ray tracing to implement realistic shadows, reflections, and refractions.
     - Implement basic ray tracing effects in a Vulkan renderer.
@@ -18,7 +22,11 @@ prerequisites:
 author: Iago Calvo Lista
 
 ### Tags
+<<<<<<< HEAD
 skilllevels: Advanced
+=======
+skilllevels: Intermediate
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 subjects: Graphics
 armips:
     - Mali
@@ -27,6 +35,10 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Vulkan
+<<<<<<< HEAD
+=======
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 
 further_reading:

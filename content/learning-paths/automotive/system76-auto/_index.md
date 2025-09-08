@@ -22,6 +22,10 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
+<<<<<<< HEAD
+=======
+    - Automotive
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

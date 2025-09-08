@@ -4,9 +4,15 @@ title: Get started with Geekbench on Arm
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers interested in comparing the performance of Arm Linux computers using Geekbench.
+<<<<<<< HEAD
 
 learning_objectives:
 - Learn how to install and run Geekbench
+=======
+  
+learning_objectives:
+- Learn how to install and run Geekbench 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 - Use Geekbench to help determine the appropriate hardware configuration for your workload
 
 prerequisites:
@@ -25,10 +31,17 @@ operatingsystems:
 test_maintenance: true
 test_images:
     - ubuntu:latest
+<<<<<<< HEAD
 tools_software_languages:
     - Geekbench
     - Runbook
 
+=======
+test_status:
+    - passed
+tools_software_languages:
+    - Geekbench
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:
@@ -44,8 +57,12 @@ further_reading:
         link: https://www.xda-developers.com/geekbench/
         type: website
 
+<<<<<<< HEAD
 ### FIXED, DO NOT MODIFY
 # ================================================================================
+=======
+
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'

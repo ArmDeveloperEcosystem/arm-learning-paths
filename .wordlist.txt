@@ -1657,6 +1657,10 @@ Kconfig
 buildroot
 RMM
 Bolt
+<<<<<<< HEAD
+=======
+Optimisation
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 PGO
 llvmorg
 latencies
@@ -1722,7 +1726,11 @@ fargate
 hBHf
 microservices
 ySm
+<<<<<<< HEAD
 Fargate's
+=======
+Fargate’s
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 LearningPath
 Przemyslaw
 Wirkus
@@ -1781,6 +1789,10 @@ EastUS
 Elo
 FLINK
 FPU
+<<<<<<< HEAD
+=======
+Fargate’s
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 FixedUpdate
 Flink
 Gameplay
@@ -2925,6 +2937,10 @@ MatOfRect
 Multibox
 OpenCV's
 OpenCVLoader
+<<<<<<< HEAD
+=======
+OpenCV’s
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 RGBA
 UC
 YOLO
@@ -3568,6 +3584,7 @@ cloudsdk
 highcpu
 proj
 sln
+<<<<<<< HEAD
 uploader
 AAPCS
 AOvVaw
@@ -4813,3 +4830,6 @@ lof
 BalenaOS
 balenaCloud
 
+=======
+uploader
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

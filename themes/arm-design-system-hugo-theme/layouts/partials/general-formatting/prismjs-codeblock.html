@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 {{/*
+=======
+{{/* 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 Codeblock formatting for prismjs
 
 Where it is used:
@@ -14,7 +18,10 @@ Called from:
         code                Str:  echo('Hello world')....
         language            Str:  python
         line_numbers        Bool: true or false
+<<<<<<< HEAD
         line_start          Str:  123
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
         output_lines        Str:  5 or 1-4, 9
         command_line        Str:  "root@localhost"
 */}}
@@ -35,6 +42,7 @@ Called from:
         {{else}}
                 {{$lines_to_mark_output = $lines_to_mark_output | append (int .)}}
         {{end}}
+<<<<<<< HEAD
     {{end}}
 {{end}}
 
@@ -61,6 +69,24 @@ Called from:
       {{if .line_start}}
           data-start="{{.line_start}}"
       {{end}}
+=======
+    {{end}}    
+{{end}}
+
+{{$output_present := false}}
+{{if or (.output_lines) (.command_line) (eq .language "output")}} 
+    {{$output_present = true}}
+{{end}}
+
+
+<!-- Start with the 'pre' element, then 'code' element, then the code content -->
+<pre
+    {{if .command_line}} 
+        class="command-line"
+        data-user= {{ trim (index (split (index (split .command_line "|") 0) "@") 0 ) " "}}
+        data-host= {{ trim (index (split (index (split .command_line "|") 0) "@") 1 ) " "}}
+        data-output={{ trim (index (split .command_line "|") 1) " "}}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     {{end}}
 >
     <code class='language-{{.language}}
@@ -84,6 +110,7 @@ Called from:
             {{- end -}}
         <!-- Functionally the same as above on linux, but this makes it easier for Windows reading of non-output code blocks as Windows doesn't like the line-break character -->
         {{else}}
+<<<<<<< HEAD
             {{- with .code -}}
                 {{- $inner := split . "\n" -}}
                 &#10;
@@ -91,6 +118,9 @@ Called from:
                     {{- . -}}&#10;
                 {{- end -}}
             {{- end -}}
+=======
+            {{.code}}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
         {{end}}
     </code>
 </pre>

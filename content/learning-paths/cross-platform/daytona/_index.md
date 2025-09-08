@@ -36,6 +36,10 @@ shared_path: true
 shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
+<<<<<<< HEAD
+=======
+    - embedded-systems
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

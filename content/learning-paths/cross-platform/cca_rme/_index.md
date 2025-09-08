@@ -21,6 +21,10 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
     - Cortex-A
+<<<<<<< HEAD
+=======
+    - Cortex-X
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Armv9-A
     
 operatingsystems:
@@ -28,12 +32,19 @@ operatingsystems:
     - Android
 
 tools_software_languages:
+<<<<<<< HEAD
+=======
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Trusted Firmware
     - Arm Development Studio
     - RME
     - CCA
+<<<<<<< HEAD
     - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ### Cross-platform metadata only
 shared_path: true

@@ -45,7 +45,11 @@ Now, append the following code to `zilliz-llm-rag.py` and save the contents:
 
 ```python
 collection_name = "my_rag_collection"
+<<<<<<< HEAD
 embedding_dim = 384
+=======
+embedding_dim = "384"
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 if milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)

@@ -44,8 +44,13 @@ Called from:
 {{/* Populate dictionary with author metadata */}}
 {{ range $index, $row := $csv_content }}
     {{ $name := index $row 0 }}
+<<<<<<< HEAD
 
     {{ $metadata := dict
+=======
+    
+    {{ $metadata := dict 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
         "company"   (cond (and (gt (len $row) 1) (ne (index $row 1) "")) (index $row 1) nil)
         "github"    (cond (and (gt (len $row) 2) (ne (index $row 2) "")) (printf "https://github.com/%s" (index $row 2)) nil)
         "linkedin"  (cond (and (gt (len $row) 3) (ne (index $row 3) "")) (printf "https://linkedin.com/in/%s" (index $row 3)) nil)
@@ -85,7 +90,11 @@ Called from:
             {{end}}
         {{ end }}
     {{end}}
+<<<<<<< HEAD
 {{end}}
+=======
+{{end}}  
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 <!-- Check if there are any matching learning paths to this tool (or the main tool) -->
 {{ if in $tools_software_languages (.Title | urlize)}}
@@ -97,6 +106,17 @@ Called from:
 
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
  <!-- Markdown metadata table -->
  <div class="content-box">
     {{- $page_h2 := printf "About this %s" $table_name -}}
@@ -127,22 +147,36 @@ Called from:
                             Reading time:
                         </td>
                         <td id="reading-time" class="td-metadata-value" >
+<<<<<<< HEAD
                             <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
+=======
+                            <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "partials/server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                         </td>
                     </tr>
                     <tr>
                         <td class="td-metadata-key">
                             Last updated:
                         </td>
+<<<<<<< HEAD
                         <td id="last-updated" class="td-metadata-value">
                             <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp;
                             {{/* If learning path, obtain last modified date from any LP file; install guide just display from this file. */}}
+=======
+                        <td id="last-updated" class="td-metadata-value">                    
+                            <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp;
+                            {{/* If learning path, obtain last modified date from any LP file; install guide just display from this file. */}} 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                             {{ if $is_learning_path}}
                                 {{- $true_last_mod_date := partial "server-side-processing/calculate-last-update.html" . }}
                                 {{$true_last_mod_date.Format "02 Jan 2006"}}
                             {{else}}
                                 {{ .Lastmod.UTC.Format "2 Jan 2006" }}
+<<<<<<< HEAD
                             {{end}}
+=======
+                            {{end}} 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                         </td>
                     </tr>
                 {{ if .Params.test_maintenance}}
@@ -155,8 +189,13 @@ Called from:
                         </td>
                     </tr>
                 {{end}}
+<<<<<<< HEAD
                 </table>
             </div>
+=======
+                </table>     
+            </div>     
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
             <!-- RIGHT TABLE, mobile -->
             <div class="md:u-hide u-display-block">
                 <table class="width-max-content">
@@ -179,7 +218,11 @@ Called from:
                     </tr>
                     <tr>
                         <td id="reading-time" class="td-metadata-value margin-l-24" >
+<<<<<<< HEAD
                             <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
+=======
+                            <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "partials/server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                         </td>
                     </tr>
                     <tr>
@@ -188,15 +231,25 @@ Called from:
                         </td>
                     </tr>
                     <tr>
+<<<<<<< HEAD
                         <td id="last-updated" class="td-metadata-value margin-l-24">
                             <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp;
                             {{/* If learning path, obtain last modified date from any LP file; install guide just display from this file. */}}
+=======
+                        <td id="last-updated" class="td-metadata-value margin-l-24">                    
+                            <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp;
+                            {{/* If learning path, obtain last modified date from any LP file; install guide just display from this file. */}} 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                             {{ if $is_learning_path}}
                                 {{- $true_last_mod_date := partial "server-side-processing/calculate-last-update.html" . }}
                                 {{$true_last_mod_date.Format "02 Jan 2006"}}
                             {{else}}
                                 {{ .Lastmod.UTC.Format "2 Jan 2006" }}
+<<<<<<< HEAD
                             {{end}}
+=======
+                            {{end}} 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                         </td>
                     </tr>
                 {{ if .Params.test_maintenance}}
@@ -211,7 +264,11 @@ Called from:
                         </td>
                     </tr>
                 {{end}}
+<<<<<<< HEAD
                 </table>
+=======
+                </table>   
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
             </div>
         </div>
         <!-- Second column table-->
@@ -250,7 +307,11 @@ Called from:
                                 </span>
                                 <br>
                             {{- end -}}
+<<<<<<< HEAD
                         </td>
+=======
+                        </td>                        
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                     </tr>
                     <!-- Arm IP if learning path. Official Docs if tool -->
                     {{if $is_learning_path}}
@@ -259,7 +320,11 @@ Called from:
                                 Arm IP:
                             </td>
                             <td class="td-metadata-value">
+<<<<<<< HEAD
                                 {{- range .Params.armips -}}<a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>{{- end -}}
+=======
+                                {{- range .Params.armips -}}<a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>{{- end -}}    
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                             </td>
                         </tr>
                     {{else}}
@@ -290,7 +355,11 @@ Called from:
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                         <span class="fa-solid fa-tag"></span>
                                         {{ .Params.subjects }}
+<<<<<<< HEAD
                                     </ads-tag>
+=======
+                                    </ads-tag> 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                                 {{end}}
                                 {{ if .Params.cloud_service_providers }}
                                     <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.cloud_service_providers | urlize}}' style="margin-bottom: 4px;">
@@ -313,7 +382,11 @@ Called from:
                                         {{ . }}
                                     </ads-tag>
                                 {{ end }}
+<<<<<<< HEAD
                             </span>
+=======
+                            </span>  
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                         </td>
                     </tr>
                     <!-- tool tags, if present in learning paths -->
@@ -328,14 +401,24 @@ Called from:
                                     <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                     <span class="fa-solid fa-tag"></span>
                                     {{$active_tag}}
+<<<<<<< HEAD
                                 </ads-tag></span>
+=======
+                                </ads-tag></span>                             
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                             </td>
                         </tr>
                         {{end}}
                     {{end}}
+<<<<<<< HEAD
                 </table>
             </div>
             <!-- Table mobile-sized windows only -->
+=======
+                </table>   
+            </div>
+            <!-- Table mobile-sized windows only -->   
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
             <div class="md:u-hide u-display-block">
                 <table>
                     <tr>
@@ -385,7 +468,11 @@ Called from:
                             <td class="td-metadata-value margin-l-24">
                                 {{- range .Params.armips -}}
                                     <a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>
+<<<<<<< HEAD
                                 {{- end -}}
+=======
+                                {{- end -}}    
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                             </td>
                         </tr>
                     {{else}}
@@ -442,7 +529,11 @@ Called from:
                                         {{ . }}
                                     </ads-tag>
                                 {{ end }}
+<<<<<<< HEAD
                                 </span>
+=======
+                                </span>  
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                             </td>
                         </tr>
                     <!-- Tool tag, if present in learning paths -->
@@ -459,18 +550,32 @@ Called from:
                                     <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                     <span class="fa-solid fa-tag"></span>
                                     {{$active_tag}}
+<<<<<<< HEAD
                                 </ads-tag></span>
+=======
+                                </ads-tag></span>                             
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                             </td>
                         </tr>
                         {{end}}
                     {{end}}
 
+<<<<<<< HEAD
                 </table>
 
             </div>
+=======
+                </table>   
+
+            </div>                
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
         </div>
         {{if not $is_learning_path}}
             <p style="margin-top: 24px;">This guide is intended to get you up and running with this tool quickly with the most common settings. For a thorough review of all options, refer to the official documentation.</p>
         {{end}}
+<<<<<<< HEAD
     </div>
+=======
+    </div>            
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 </div>

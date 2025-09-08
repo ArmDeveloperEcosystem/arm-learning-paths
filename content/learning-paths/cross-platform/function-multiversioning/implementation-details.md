@@ -1,6 +1,10 @@
 ---
 title: Further information on implementation 
+<<<<<<< HEAD
 weight: 7
+=======
+weight: 6
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,12 +12,17 @@ layout: learningpathall
 
 To select the most appropriate version of a function, each call to a versioned function is routed through an indirect function resolver which is pointed by the called symbol (ifunc). 
 
+<<<<<<< HEAD
 The compiler generates a resolver based on the function versions declared in the translation unit. A typical resolver implementation uses a runtime library to detect the presence of the architectural features on which the function versions depend and returns a pointer to the correct version. Features implied by the command line are not exempt from runtime detection.
+=======
+The compiler generates a resolver based on the function versions declared in the translation unit. A typical resolver implementation uses a runtime library to detect the presence of the architectural features on which the function versions depend and returns a pointer to the correct version. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The resolution of the called symbol is delayed until runtime, when the dynamic loader runs the resolver and updates the procedure linkage table (PLT) with a pointer to the chosen implementation. The resolver function is run only once and its returned value remains unchanged for the lifetime of the process. 
 
 Relocations handle references to the called symbol, which return the cached PLT entry.
 
+<<<<<<< HEAD
 #### Feature detection at runtime
 
 Some architectural features depend on others as indicated by the [dependencies table](https://arm-software.github.io/acle/main/acle.html#dependencies). Those are detected transitively and they are not exempt from runtime detection if implied by the command line. For example `rcpc3` depends on `rcpc2` which depends on `rcpc`. All three are detected in the following example.
@@ -69,6 +78,13 @@ The immediate value `#12582912` in this assembly is used to construct a bitmask 
 - The attribute `target_version` in GCC is only supported for C++, not for C.
 - The set of features as indicated by the [mapping table](https://arm-software.github.io/acle/main/acle.html#mapping) differs in support between the two compilers.
 - LLVM supports mixing `target_version` with `target_clones` whereas GCC does not yet support this.
+=======
+#### Differences between GCC 14 and LLVM 19 implementations
+
+- The attribute `target_version` in GCC is only supported for C++, not for C.
+- The set of features as indicated by the [mapping table](https://arm-software.github.io/acle/main/acle.html#mapping) differs in support between the two compilers.
+- GCC can statically resolve calls to versioned functions, whereas LLVM cannot.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 #### Resolver emission with LLVM
 
@@ -97,6 +113,7 @@ The compilation of `file1.c` yields normal code generation since no version of `
 
 When compiling `file2.c` a resolver is emitted for `func1` due to the presence of its default definition. GCC does not currently support multiversioning for this example as it only generates a resolver when a function is called.
 
+<<<<<<< HEAD
 #### Static resolution of calls
 
 Normally the called symbol is resolved at runtime (dynamically), however it may be possible to determine which function version to call at compile time (statically).
@@ -104,3 +121,14 @@ Normally the called symbol is resolved at runtime (dynamically), however it may 
 This may be possible when the caller function is compiled with a sufficiently high set of architecture features (explicitly by using the `target` attribute as an optimization hint, or the multiversioning attributes `target_version`/`target_clones`, and implicitly via command line options). Refer to the example in the next section for details. 
 
 The compiler optimizes calls to versioned functions which can be statically resolved into direct calls. As a result the versioned function may be inlined into the call site.
+=======
+#### Static resolution with GCC
+
+The GCC compiler optimizes calls to versioned functions when they can be statically resolved. 
+
+Such calls would otherwise be routed through the resolver, but instead they become direct which allows them to be inlined. 
+
+This might be possible whenever a function is compiled with a sufficiently high set of architecture features (so including `target`/`target_version`/`target_clones` attributes, and command line options). 
+
+LLVM is not yet able to perform this optimization.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

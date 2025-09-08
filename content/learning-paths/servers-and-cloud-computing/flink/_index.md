@@ -34,8 +34,11 @@ tools_software_languages:
 - Flink
 - Java
 - Nexmark
+<<<<<<< HEAD
 - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 
 further_reading:

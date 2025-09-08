@@ -18,7 +18,11 @@ prerequisites:
 author: Dawid Borycki
 
 ### Tags
+<<<<<<< HEAD
 skilllevels: Introductory
+=======
+skilllevels: Intermediate
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 subjects: Migration to Arm
 armips:
     - Cortex-A

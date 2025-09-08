@@ -15,6 +15,11 @@ test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
+<<<<<<< HEAD
+=======
+test_status:
+- passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 title: Anaconda
 tool_install: true
 weight: 1
@@ -95,7 +100,11 @@ eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
 
 Test Anaconda Distribution by running simple TensorFlow and PyTorch examples.
 
+<<<<<<< HEAD
 ### How do I use TensorFlow with Anaconda?
+=======
+### TensorFlow
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Create a new conda environment named tf, install TensorFlow, and activate the new environment.
 
@@ -139,7 +148,11 @@ The expected output format is below. Your version may be slightly different.
 tf.Tensor(342.34387, shape=(), dtype=float32)
 ```
 
+<<<<<<< HEAD
 ### How do I use PyTorch with Anaconda?
+=======
+### PyTorch
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Create a new conda environment named torch, install PyTorch, and activate the new environment.
 

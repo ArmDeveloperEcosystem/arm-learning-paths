@@ -17,7 +17,11 @@ prerequisites:
     - Familiarity with indirect functions (ifuncs).
     - Basic knowledge of loop vectorization.
     - Familiarity with Arm assembly.
+<<<<<<< HEAD
     - A LLVM 20 compiler with runtime library support or GCC 14.
+=======
+    - A LLVM 19 compiler with runtime library support or GCC 14.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 author: Alexandros Lamprineas
 
@@ -28,9 +32,13 @@ armips:
     - Cortex-A
     - Neoverse
 tools_software_languages:
+<<<<<<< HEAD
     - C
     - C++
     - Runbook
+=======
+    - C/C++
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
     - Android

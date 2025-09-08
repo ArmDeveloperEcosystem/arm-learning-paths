@@ -1,5 +1,9 @@
 ---
+<<<<<<< HEAD
 title: Learn about integer and floating-point conversions
+=======
+title: Learn about Integer and floating-point conversions
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 minutes_to_complete: 30
 
@@ -23,8 +27,12 @@ armips:
 tools_software_languages:
     - GCC
     - Clang
+<<<<<<< HEAD
     - Runbook
 
+=======
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
 shared_path: true

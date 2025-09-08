@@ -35,7 +35,11 @@ You can use Hyper-V to create and run virtual machines using Windows 11 on Arm.
 There is nothing to download to enable Hyper-V.
 {{% /notice %}}
 
+<<<<<<< HEAD
 ## What should I consider before enabling Hyper-V?
+=======
+## What should I consider before installing Hyper-V?
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Arm virtual machines on Windows with Hyper-V require `Windows 11 version 22H2` or newer. 
 
@@ -92,12 +96,25 @@ The output should include the message:
 The operation completed successfully.
 ```
 
+<<<<<<< HEAD
 Restart your computer to finish enabling Hyper-V.
 
 ## How do I start Hyper-V?
+=======
+## Restart 
+
+Restart your computer to finish enabling Hyper-V.
+
+
+## Start Hyper-V
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Hyper-V Manager should now be available in the applications menu.
 
 ![Hyper-V manager #center](/install-guides/_images/hyper-v-manager.png)
 
+<<<<<<< HEAD
 You are now ready to use Hyper-V to create virtual machines on your Windows on Arm device.
+=======
+You are now ready to use Hyper-V to create virtual machines on your Windows on Arm device. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

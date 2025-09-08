@@ -1,18 +1,33 @@
 ---
+<<<<<<< HEAD
 title: Accelerate an OpenCV-based Android Application with KleidiCV
 
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for developers who are interested in creating Computer Vision applications with OpenCV and KleidiCV on Android Devices.
+=======
+title: Accelerate OpenCV-based Android Applications with KleidiCV
+
+minutes_to_complete: 45
+
+who_is_this_for: This is an introductory topic for developers who are interested in creating Computer Vision Applications with OpenCV and KleidiCV on Android Devices.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 learning_objectives:
    - Describe what KleidiCV is, and what it can offer.
    - Create and configure a project to add OpenCV support.
+<<<<<<< HEAD
    - Process images using OpenCV functionality.
 
 prerequisites:
     - A development machine with [Android Studio](https://developer.android.com/studio) installed. 
     - Familiarity with Android development concepts.
+=======
+   - Process images using various OpenCV functions.
+
+prerequisites:
+    - A development machine with [Android Studio](https://developer.android.com/studio) installed. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - An Android smartphone.
 
 author: Dawid Borycki
@@ -23,7 +38,11 @@ subjects: Graphics
 armips:
     - Cortex-A
 operatingsystems:
+<<<<<<< HEAD
     - Android
+=======
+    - Windows
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 tools_software_languages:
     - Android
     - Android Studio

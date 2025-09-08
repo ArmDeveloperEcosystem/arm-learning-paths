@@ -18,12 +18,20 @@ prerequisites:
 author: visualSilicon
 
 ### Tags
+<<<<<<< HEAD
 skilllevels: Introductory
+=======
+skilllevels: Beginner
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 subjects: Gaming
 armips:
     - Cortex
 tools_software_languages:
     - Unity
+<<<<<<< HEAD
+=======
+    - Mobile
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - C#
 operatingsystems:
     - Android

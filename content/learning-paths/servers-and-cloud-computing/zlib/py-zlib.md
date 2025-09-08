@@ -6,7 +6,11 @@ weight: 3
 
 ## Install necessary software packages
 
+<<<<<<< HEAD
 * Make sure `python3` is available when `python` is run.
+=======
+* Make sure `python3` is available when `python` is run. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```bash
 sudo apt install python-is-python3 -y
@@ -14,7 +18,11 @@ sudo apt install python-is-python3 -y
 
 ## Detailed Steps
 
+<<<<<<< HEAD
 The previous section explained how to build the Cloudflare `zlib` which includes the use of `crc32` instructions to improve performance on data compression.
+=======
+The previous section explained how to build the Cloudflare `zlib` which includes the use of `crc32` instructions to improve performance on data compression. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Use a Python example and measure the performance difference with `zlib-cloudflare`.
 
@@ -48,6 +56,7 @@ dd if=/dev/zero of=largefile count=1M bs=1024
 Run with the default `zlib` and time the execution.
 
 ```bash
+<<<<<<< HEAD
 time python zip.py
 ```
 
@@ -58,6 +67,18 @@ Make a note of how many seconds the program took.
 This time, use `LD_PRELOAD` to change to `zlib-cloudflare` instead and check the performance difference.
 
 Adjust the path to `libz.so` as needed.
+=======
+time python ./zip.py
+```
+
+Make a note of how many seconds the program took. 
+
+## Run the example again with zlib-cloudflare
+
+This time, use `LD_PRELOAD` to change to `zlib-cloudflare` instead and check the performance difference. 
+
+Adjust the path to `libz.so` as needed. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```bash
 time LD_PRELOAD=/usr/local/lib/libz.so python ./zip.py

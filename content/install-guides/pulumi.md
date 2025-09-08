@@ -18,13 +18,21 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [Pulumi](https://www.pulumi.com/) is a multi-language infrastructure as code tool. Pulumi is [open source](https://github.com/pulumi/pulumi) and makes it easy to deploy cloud infrastructure.
 
+<<<<<<< HEAD
 ## What do I need before installing Pulumi?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Pulumi is available for a variety of operating systems and Linux distributions and has multiple ways to install it.
 
 This article provides a quick solution to install Pulumi on Linux.
 
+<<<<<<< HEAD
 ## How do I install Pulumi? {#install}
+=======
+## Installation {#install}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Run the following command to download and install Pulumi on Linux:
 
@@ -77,7 +85,11 @@ v3.135.1
 
 You are ready to use Pulumi on your Linux machine.
 
+<<<<<<< HEAD
 ## How do I get started with Pulumi? {#start}
+=======
+## Get started {#start}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Pulumi keeps your projects and state information in Pulumi Cloud, making it easy to access them from anywhere. If you want to use Pulumi Cloud visit [app.pulumi.com](https://app.pulumi.com/) and sign up.
 

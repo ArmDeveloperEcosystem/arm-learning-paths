@@ -20,7 +20,11 @@ weight: 1
 
 [Go](https://go.dev/) is an open source programming language. 
 
+<<<<<<< HEAD
 ## What should I do before installing Go?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Go is available for a variety of operating systems and Linux distributions and has multiple ways to install it. 
 
@@ -40,20 +44,32 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
+<<<<<<< HEAD
 ## How do I download and install Go?
+=======
+## Download and install
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The easiest way to install Go for Ubuntu on Arm is to download a release, extract it, and setup your `PATH` environment variable. 
 
 Download a Go release:
 
 ```bash { target="ubuntu:latest" }
+<<<<<<< HEAD
 wget https://go.dev/dl/go1.24.5.linux-arm64.tar.gz
+=======
+wget https://go.dev/dl/go1.23.1.linux-arm64.tar.gz
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Extract the release to `/usr/local/go`:
 
 ```bash { target="ubuntu:latest" }
+<<<<<<< HEAD
 sudo tar -C /usr/local -xzf ./go1.24.5.linux-arm64.tar.gz
+=======
+sudo tar -C /usr/local -xzf ./go1.23.1.linux-arm64.tar.gz
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Add the path to `go` in your `.bashrc` file. 
@@ -63,8 +79,11 @@ echo 'export PATH="$PATH:/usr/local/go/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
+<<<<<<< HEAD
 ## How do I verify Go is working?
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 Confirm `go` is installed by printing the version:
 
 ```bash { target="ubuntu:latest" env_source="~/.bashrc" } 
@@ -74,7 +93,11 @@ go version
 The output should print the version:
 
 ```output
+<<<<<<< HEAD
 go version go1.24.5 linux/arm64
+=======
+go version go1.23.1 linux/arm64
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 You are ready to use the Go programming language on your Arm machine running Ubuntu.

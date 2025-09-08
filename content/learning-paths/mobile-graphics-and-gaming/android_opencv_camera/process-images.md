@@ -88,5 +88,9 @@ You use 21 as the size of the block to use for calculating the threshold for eac
 
 After re-running the application, starting the preview, and enabling the processing, you should see the following result:
 
+<<<<<<< HEAD
 ![img12](figures/12.jpg)
+=======
+![img12](Figures/12.jpg)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 

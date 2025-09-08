@@ -6,7 +6,11 @@ minutes_to_complete: 30
 who_is_this_for: This Learning Path is for software developers who are interested in porting SIMD code across Arm platforms.
 
 learning_objectives: 
+<<<<<<< HEAD
     - Describe how to use SIMD.info's tools and features, such as navigation, search, and comparison, to simplify the process of finding equivalent SIMD intrinsics between architectures to improve code portability.
+=======
+    - Describe how to use SIMD.info’s tools and features, such as navigation, search, and comparison, to simplify the process of finding equivalent SIMD intrinsics between architectures to improve code portability.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 prerequisites:
     - A basic understanding of SIMD.
@@ -26,9 +30,14 @@ armips:
 tools_software_languages:
     - GCC
     - Clang
+<<<<<<< HEAD
     - Rust
     - Runbook
 
+=======
+    - Coding
+    - Rust
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
 shared_path: true

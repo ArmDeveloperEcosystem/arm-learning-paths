@@ -31,7 +31,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [Arm Socrates](https://developer.arm.com/Tools%20and%20Software/Socrates) is a tool used to select, configure and create Arm IP for easy and error free integration into a System on Chip(SoC).
 
+<<<<<<< HEAD
 ## How do I download Arm Socrates?
+=======
+## Download installer packages
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Socrates is a component of [Arm Hardware Success Kits](https://www.arm.com/products/development-tools/success-kits).
 
@@ -41,7 +45,11 @@ You can download Socrates as an individual component, or you can download the co
 
 For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](/install-guides/pdh/).
 
+<<<<<<< HEAD
 ## How do I install Arm Socrates?
+=======
+## Installation
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Arm Socrates requires a Linux machine running Red Hat Enterprise Linux. 
 
@@ -61,7 +69,11 @@ See also the output of:
 ./ARM-Socrates-1.8.0.1-Linux-x86-64-Install --help
 ```
 
+<<<<<<< HEAD
 ## How do I set up the product license?
+=======
+## Set up the product license
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Arm Socrates is license managed. License setup instructions are available in the [Arm License install guide](/install-guides/license/).
 
@@ -69,7 +81,12 @@ Configuration of some Arm IP products require a corresponding license for that I
 
 Full details are provided in the [Installation Guide](https://developer.arm.com/documentation/101400/latest/Setting-up-licensing), as well as the Release Notes provided within the downloaded tarball.
 
+<<<<<<< HEAD
 ## How do I update the IP Catalog?
+=======
+
+## Update IP Catalog
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 You will need to update the `IP Catalog` within the IDE for the first usage.
 
@@ -79,7 +96,12 @@ Click `Install IP Catalog Updates` if needed.
 
 Click `Apply and Close` when complete.
 
+<<<<<<< HEAD
 ## How do I get started with Arm Socrates?
+=======
+
+## Get started
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To check Socrates has installed correctly, use the `socrates.sh` command or double‑click the Socrates icon.
 

@@ -66,8 +66,13 @@ Use a text editor to copy and paste this script into a file on the remote machin
 #!/bin/bash
 
 # install NoMachine for remote desktop
+<<<<<<< HEAD
 wget https://download.nomachine.com/download/9.0/Arm/nomachine_9.0.188_11_arm64.deb
 sudo dpkg -i nomachine_9.0.188_11_arm64.deb
+=======
+wget https://download.nomachine.com/download/8.4/Arm/nomachine_8.4.2_1_arm64.deb
+sudo dpkg -i nomachine_8.4.2_1_arm64.deb
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 if [ $? != 0 ]; then
   exit 1
 fi

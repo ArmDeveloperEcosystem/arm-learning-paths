@@ -1,12 +1,19 @@
 summary:
+<<<<<<< HEAD
   content_total: 405
   content_with_all_tests_passing: 0
   content_with_tests_enabled: 61
+=======
+  content_total: 324
+  content_with_all_tests_passing: 31
+  content_with_tests_enabled: 57
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 sw_categories:
   automotive: {}
   cross-platform:
     dynamic-memory-allocator:
       readable_title: Write a Dynamic Memory Allocator
+<<<<<<< HEAD
       tests_and_status: []
     intrinsics:
       readable_title: Porting architecture specific intrinsics
@@ -22,6 +29,30 @@ sw_categories:
     acfl:
       readable_title: Arm Compiler for Linux
       tests_and_status: []
+=======
+      tests_and_status:
+      - ubuntu:latest: passed
+    intrinsics:
+      readable_title: Porting architecture specific intrinsics
+      tests_and_status:
+      - amd64/ubuntu:latest: passed
+      - arm64v8/ubuntu:latest: passed
+  embedded-and-microcontrollers:
+    tfm:
+      readable_title: Get started with Trusted Firmware-M
+      tests_and_status:
+      - armswdev/arm-tools:bare-metal-compilers: passed
+    zephyr:
+      readable_title: Run the Zephyr RTOS on Arm Corstone-300
+      tests_and_status:
+      - amd64/ubuntu:latest: passed
+  install-guides:
+    acfl:
+      readable_title: Arm Compiler for Linux
+      tests_and_status:
+      - ubuntu:latest: passed
+      - fedora:latest: passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     ambaviz:
       readable_title: Arm AMBA Viz
       tests_and_status: []
@@ -30,7 +61,12 @@ sw_categories:
       tests_and_status: []
     anaconda:
       readable_title: Anaconda
+<<<<<<< HEAD
       tests_and_status: []
+=======
+      tests_and_status:
+      - ubuntu:latest: passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     ansible:
       readable_title: Ansible
       tests_and_status: []
@@ -42,7 +78,13 @@ sw_categories:
       tests_and_status: []
     arm-gnu:
       readable_title: Arm GNU Toolchain
+<<<<<<< HEAD
       tests_and_status: []
+=======
+      tests_and_status:
+      - ubuntu:latest: passed
+      - fedora:latest: passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     armclang:
       readable_title: Arm Compiler for Embedded
       tests_and_status: []
@@ -61,6 +103,7 @@ sw_categories:
     aws-copilot:
       readable_title: AWS Copilot CLI
       tests_and_status: []
+<<<<<<< HEAD
     aws-q-cli:
       readable_title: Amazon Q Developer CLI
       tests_and_status: []
@@ -70,11 +113,18 @@ sw_categories:
     bedrust:
       readable_title: Bedrust - invoke models on Amazon Bedrock
       tests_and_status: []
+=======
+    azure-cli:
+      readable_title: Azure CLI
+      tests_and_status:
+      - ubuntu:latest: passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     bolt:
       readable_title: BOLT
       tests_and_status: []
     cross:
       readable_title: Cross-compiler
+<<<<<<< HEAD
       tests_and_status: []
     cyclonedds:
       readable_title: Cyclone DDS
@@ -88,27 +138,64 @@ sw_categories:
     forge:
       readable_title: Linaro Forge
       tests_and_status: []
+=======
+      tests_and_status:
+      - ubuntu:latest: passed
+      - fedora:latest: passed
+    dotnet:
+      readable_title: .NET SDK
+      tests_and_status:
+      - ubuntu:latest: passed
+    eksctl:
+      readable_title: AWS EKS CLI (eksctl)
+      tests_and_status:
+      - ubuntu:latest: passed
+    forge:
+      readable_title: Linaro Forge
+      tests_and_status:
+      - ubuntu:latest: passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     gcloud:
       readable_title: Google Cloud Platform (GCP) CLI
       tests_and_status: []
     gfortran:
       readable_title: GFortran
+<<<<<<< HEAD
       tests_and_status: []
+=======
+      tests_and_status:
+      - ubuntu:latest: passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     go:
       readable_title: Go
       tests_and_status: []
     kubectl:
       readable_title: Kubectl
+<<<<<<< HEAD
       tests_and_status: []
+=======
+      tests_and_status:
+      - ubuntu:latest: passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     multipass:
       readable_title: Multipass
       tests_and_status: []
     native:
       readable_title: Native compiler
+<<<<<<< HEAD
       tests_and_status: []
     oci-cli:
       readable_title: Oracle Cloud Infrastructure (OCI) CLI
       tests_and_status: []
+=======
+      tests_and_status:
+      - ubuntu:latest: passed
+      - fedora:latest: passed
+    oci-cli:
+      readable_title: Oracle Cloud Infrastructure (OCI) CLI
+      tests_and_status:
+      - ubuntu:latest: passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     papi:
       readable_title: Performance API (PAPI)
       tests_and_status: []
@@ -120,10 +207,15 @@ sw_categories:
       tests_and_status: []
     pytorch:
       readable_title: PyTorch
+<<<<<<< HEAD
       tests_and_status: []
     ros2:
       readable_title: ROS - Robot Operating System
       tests_and_status: []
+=======
+      tests_and_status:
+      - ubuntu:latest: passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     rust:
       readable_title: Rust for Linux Applications
       tests_and_status: []
@@ -144,7 +236,12 @@ sw_categories:
       tests_and_status: []
     terraform:
       readable_title: Terraform
+<<<<<<< HEAD
       tests_and_status: []
+=======
+      tests_and_status:
+      - ubuntu:latest: passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     topdown-tool:
       readable_title: Telemetry Solution (Topdown Methodology)
       tests_and_status: []
@@ -157,6 +254,7 @@ sw_categories:
   servers-and-cloud-computing:
     clickhouse:
       readable_title: Measure performance of ClickHouse on Arm servers
+<<<<<<< HEAD
       tests_and_status: []
     codec:
       readable_title: Run x265 (H.265 codec) on Arm servers
@@ -180,12 +278,46 @@ sw_categories:
     nginx:
       readable_title: Learn how to deploy Nginx
       tests_and_status: []
+=======
+      tests_and_status:
+      - ubuntu:latest: passed
+    codec:
+      readable_title: Run x265 (H.265 codec) on Arm servers
+      tests_and_status:
+      - ubuntu:latest: passed
+    geekbench:
+      readable_title: Get started with Geekbench on Arm
+      tests_and_status:
+      - ubuntu:latest: passed
+    memcached:
+      readable_title: Run memcached on Arm servers and measure its performance
+      tests_and_status:
+      - ubuntu:latest: passed
+    memcached_cache:
+      readable_title: Deploy Memcached as a cache for MySQL and PostgreSQL on Arm
+        based servers
+      tests_and_status:
+      - ubuntu:latest: passed
+    ml-perf:
+      readable_title: Measure Machine Learning Inference Performance on Arm servers
+      tests_and_status:
+      - ubuntu:latest: passed
+    mysql_tune:
+      readable_title: Learn how to Tune MySQL
+      tests_and_status:
+      - ubuntu:latest: passed
+    nginx:
+      readable_title: Learn how to deploy Nginx
+      tests_and_status:
+      - ubuntu:latest: passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     postgresql_tune:
       readable_title: Learn how to Tune PostgreSQL
       tests_and_status:
       - ubuntu:latest: passed
     ran:
       readable_title: Get started with the Arm 5G RAN Acceleration Library (ArmRAL)
+<<<<<<< HEAD
       tests_and_status: []
     snappy:
       readable_title: Measure performance of compression libraries on Arm servers
@@ -197,3 +329,20 @@ sw_categories:
     zlib:
       readable_title: Learn how to build and use Cloudflare zlib on Arm servers
       tests_and_status: []
+=======
+      tests_and_status:
+      - ubuntu:latest: passed
+    snappy:
+      readable_title: Measure performance of compression libraries on Arm servers
+      tests_and_status:
+      - ubuntu:latest: passed
+    vectorscan:
+      readable_title: Install Vectorscan (Hyperscan on Arm) and use it with Snort
+        3
+      tests_and_status:
+      - ubuntu:latest: passed
+    zlib:
+      readable_title: Learn how to build and use Cloudflare zlib on Arm servers
+      tests_and_status:
+      - ubuntu:latest: passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

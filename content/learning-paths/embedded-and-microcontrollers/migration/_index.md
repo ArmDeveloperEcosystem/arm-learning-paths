@@ -29,7 +29,11 @@ tools_software_languages:
     - GCC
     - Arm Compiler for Linux
     - Docker
+<<<<<<< HEAD
     - NEON
+=======
+    - Neon
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

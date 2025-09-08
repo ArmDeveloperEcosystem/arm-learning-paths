@@ -111,7 +111,11 @@ resources:
 ```
 
 The first section of the above file includes the following: 
+<<<<<<< HEAD
 * org: <KEEP_YOUR_ORG_NAME> - this specifies the organization name in the Serverless Framework's dashboard.
+=======
+* org: <KEEP_YOUR_ORG_NAME> - this specifies the organization name in the Serverless Framework’s dashboard.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 * service: AwsServerlessDynamoDbLambda - defines the name of the service. This name is used to organize and identify the resources created by this Serverless service.
 
 In the Serverless Framework a service is the fundamental unit of organization. It represents a single project or application and encapsulates all the functions, resources, and configurations necessary to deploy and manage that project in a serverless environment. A service can consist of multiple functions, each with its own triggers and configuration, and can define the necessary cloud resources such as databases, storage, and other infrastructure components.

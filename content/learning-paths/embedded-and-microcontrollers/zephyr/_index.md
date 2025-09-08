@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 title: Run the Zephyr RTOS on Arm Corstone-300
 
 minutes_to_complete: 30
@@ -16,10 +17,28 @@ prerequisites:
 
 author: Pareena Verma
 
+=======
+armips:
+- Cortex-M
+author: Pareena Verma
+layout: learningpathall
+learning_objectives:
+- Build and run Zephyr applications on the Corstone-300
+learning_path_main_page: 'yes'
+minutes_to_complete: 30
+operatingsystems:
+- RTOS
+prerequisites:
+- Some familiarity with embedded C programming
+- A Linux machine running Ubuntu, or an AWS account to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware)
+skilllevels: Introductory
+subjects: RTOS Fundamentals
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 test_images:
 - amd64/ubuntu:latest
 test_link: null
 test_maintenance: true
+<<<<<<< HEAD
 
 ### Tags
 skilllevels: Introductory
@@ -32,6 +51,16 @@ tools_software_languages:
 - Zephyr
 - Arm Virtual Hardware
 - FVP
+=======
+test_status:
+- passed
+title: Run the Zephyr RTOS on Arm Corstone-300
+tools_software_languages:
+- Zephyr
+- Arm Virtual Hardware
+- Fixed Virtual Platform
+- Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:
@@ -48,6 +77,7 @@ further_reading:
         type: website
 
 
+<<<<<<< HEAD
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
@@ -56,3 +86,9 @@ learning_path_main_page: "yes"  # This should be surfaced when looking for relat
 layout: learningpathall
 
 ---
+=======
+weight: 1
+who_is_this_for: This is an introductory topic for software developers getting started
+  with the Zephyr RTOS.
+---
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

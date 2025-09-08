@@ -25,13 +25,20 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
+<<<<<<< HEAD
+=======
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Fortran
     - GCC
     - Linaro Forge
     - gdb
     - mpi
+<<<<<<< HEAD
     - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 
 further_reading:

@@ -11,6 +11,7 @@ In this section, you will change the build configuration of the application and 
 ## Creating new build configurations
 To change the build configuration, click the target platform dropdown (by default, it displays 'Any CPU') and select 'Configuration Manager...':
 
+<<<<<<< HEAD
 ![fig8](figures/08.png)
 
 In the Configuration Manager, select '<New ...>' from the Active solution platform dropdown:
@@ -20,12 +21,24 @@ In the Configuration Manager, select '<New ...>' from the Active solution platfo
 This will open the 'New Solution Platform' window, where you should select ARM64 from the 'Type or select the new platform' dropdown:
 
 ![fig10](figures/10.png)
+=======
+![fig8](Figures/08.png)
+
+In the Configuration Manager, select '<New ...>' from the Active solution platform dropdown:
+
+![fig9](Figures/09.png)
+
+This will open the 'New Solution Platform' window, where you should select ARM64 from the 'Type or select the new platform' dropdown:
+
+![fig10](Figures/10.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Then, click the OK button. Similarly, create the x64 solution platform
 
 ## Comparing the performance
 You will now compare the computation performance on x64 and Arm64 platforms. First, start the application in Release mode and architecture set to x64:
 
+<<<<<<< HEAD
 ![fig11](figures/11.png)
 
 Once the application has started, run calculations for the following matrix sizes: 100, 200, 300, 400, and 500. You should see results similar to those in the following figure.
@@ -35,6 +48,17 @@ Once the application has started, run calculations for the following matrix size
 Next, launch the application for the Arm64 platform. Run the matrix multiplication for the same matrix sizes as above and observe the computation times:
 
 ![fig13](figures/13.png)
+=======
+![fig11](Figures/11.png)
+
+Once the application has started, run calculations for the following matrix sizes: 100, 200, 300, 400, and 500. You should see results similar to those in the following figure.
+
+![fig12](Figures/12.png)
+
+Next, launch the application for the Arm64 platform. Run the matrix multiplication for the same matrix sizes as above and observe the computation times:
+
+![fig13](Figures/13.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 By comparing the execution times, we observe that, on average, Arm64 provides almost a 30% performance improvement over x64.
 

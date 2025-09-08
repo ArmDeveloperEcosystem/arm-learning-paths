@@ -45,7 +45,11 @@ The version of Streamline provided with Performance Studio supports [certain And
 
 For other use cases, use Arm Streamline as provided with Arm Development Studio.
 
+<<<<<<< HEAD
 ## How do I download Streamline installation packages?
+=======
+## Download installer packages
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Download the appropriate package from the [Product Download Hub](https://developer.arm.com/downloads).
 
@@ -56,9 +60,15 @@ Arm Performance Studio supports Windows, Linux, and macOS hosts.
 
 Arm Development Studio supports Windows and Linux hosts.
 
+<<<<<<< HEAD
 ## How do I install Streamline?
 
 ### How do I install Streamline with Arm Performance Studio?
+=======
+## Installation
+
+### Arm Performance Studio
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Full install instructions are given in section 3 of the Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
 
@@ -68,19 +78,31 @@ If working with an Android target, you must also install Android Debug Bridge (`
 
 Add the Android SDK platform tools directory to your `PATH` environment variable.
 
+<<<<<<< HEAD
 ### How do I install Streamline with Arm Development Studio?
+=======
+### Arm Development Studio
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Install Arm Development Studio using the instructions in the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio).
 
 See also the Arm Development Studio [install guide](/install-guides/armds/).
 
+<<<<<<< HEAD
 ## How do I set up the product license?
+=======
+## Setting up product license
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Arm Development Studio is license managed. License setup instructions are available in the Arm Software Licensing [install guide](/install-guides/license/).
 
 Arm Performance Studio is free of charge and is not license managed.
 
+<<<<<<< HEAD
 ## How do I get started with Streamline?
+=======
+## Get started
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To configure your target and/or application for Streamline, follow the appropriate instructions below depending on your use case:
 

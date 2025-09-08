@@ -34,7 +34,12 @@ operatingsystems:
     - macOS
 tools_software_languages:
     - Android Studio
+<<<<<<< HEAD
     - Visual Studio Code
+=======
+    - Coding
+    - VS Code
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 shared_path: true
 shared_between:
     - servers-and-cloud-computing

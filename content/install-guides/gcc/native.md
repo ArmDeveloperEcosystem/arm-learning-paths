@@ -12,13 +12,23 @@ test_images:
 - fedora:latest
 test_link: null
 test_maintenance: true
+<<<<<<< HEAD
+=======
+test_status:
+- passed
+- passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 title: Native compiler
 tool_install: false
 weight: 2
 ---
 GCC is available on all Linux distributions and can be installed using the package manager.
 
+<<<<<<< HEAD
 ## What do I need before installing GCC?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Follow the instructions below to install GCC on an Arm Linux distribution. This covers `gcc` and `g++` for compiling C and C++ applications.
 
@@ -65,11 +75,16 @@ To install the most common development tools use the commands below. If the mach
 
 ```bash { target="fedora:latest" }
 sudo dnf update -y
+<<<<<<< HEAD
 sudo dnf group install "development-tools" -y
+=======
+sudo dnf groupinstall 'Development Tools' -y
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 If `sudo` is not available become _root_ and omit the `sudo`.
 ```console
 dnf update -y
+<<<<<<< HEAD
 sudo dnf group install "development-tools" -y
 ```
 ## Does GCC require a license?
@@ -77,6 +92,15 @@ sudo dnf group install "development-tools" -y
 GCC is open source and freely available for use.
 
 ## How do I get started with GCC? {#start}
+=======
+dnf groupinstall 'Development Tools' -y
+```
+## Setting up product license
+
+GCC is open source and freely available for use. 
+
+## Get started {#start}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To confirm the installation is complete run:
 

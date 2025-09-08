@@ -13,10 +13,17 @@ In this learning path, you will learn how to build and deploy a simple LLM-based
 Your first task is to prepare a development environment with the required software:
 
 - Android Studio (latest version recommended)
+<<<<<<< HEAD
 - Android NDK (tested with version 27.3.13750724)
 - Python 3.13
 - CMake (tested with version 4.1.0)
 - Ninja (tested with version 1.12.1)
+=======
+- Android NDK (tested with version 27.0.12077973)
+- Python 3.11
+- CMake (tested with version 3.28.1)
+- Ninja (tested with version 1.11.1)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The following instructions were tested on an x86 Windows machine with at least 16GB of RAM.
 
@@ -34,9 +41,15 @@ Follow these steps to install and configure Android Studio:
 
 5. Click **OK** and **Apply**.
 
+<<<<<<< HEAD
 ## Install Python 3.13
 
 Download and install [Python version 3.13](https://www.python.org/downloads/release/python-3135/)
+=======
+## Install Python 3.11
+
+Download and install [Python version 3.11](https://www.python.org/downloads/release/python-3110/)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ## Install CMake
 
@@ -45,7 +58,11 @@ CMake is an open-source tool that automates the build process for software proje
 [Download and install CMake](https://cmake.org/download/)
 
 {{% notice Note %}}
+<<<<<<< HEAD
 The instructions were tested with version 4.1.0
+=======
+The instructions were tested with version 3.28.1
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 {{% /notice %}}
 
 ## Install Ninja
@@ -55,7 +72,11 @@ Ninja is a minimalistic build system designed to efficiently handle incremental 
 [Download and install Ninja]( https://github.com/ninja-build/ninja/releases)
 
 {{% notice Note %}}
+<<<<<<< HEAD
 The instructions were tested with version 1.12.1
+=======
+The instructions were tested with version 1.11.1
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 {{% /notice %}}
 
 You now have the required development tools installed to follow this learning path.

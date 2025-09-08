@@ -13,10 +13,17 @@ In this section, you will obtain an example CCA attestation token. To set up the
 First, start by removing any existing Go installation. Next, obtain the install files and run the following command:
 
 ```bash
+<<<<<<< HEAD
 sudo rm -rf /usr/local/go
 
 wget https://go.dev/dl/go1.23.3.linux-$(dpkg --print-architecture).tar.gz
 sudo tar -C /usr/local -xzf go1.23.3.linux-$(dpkg --print-architecture).tar.gz
+=======
+rm -rf /usr/local/go
+
+wget https://go.dev/dl/go1.23.3.linux-$(dpkg --print-architecture).tar.gz
+tar -C /usr/local -xzf go1.23.3.linux-$(dpkg --print-architecture).tar.gz
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Export the installation path and add it to your `$PATH environment` variable:
@@ -52,7 +59,11 @@ sudo apt install jq
 
 Using your preferred web browser, navigate to the [token in the TrustedFirmware-M tools repository](https://github.com/TrustedFirmware-M/tf-m-tools/blob/main/iat-verifier/tests/data/cca_example_token.cbor).
 
+<<<<<<< HEAD
 Use GitHub's download button, located on the right of the upper toolbar, to download the token as a `raw` binary file.
+=======
+Use GitHub’s download button, located on the right of the upper toolbar, to download the token as a `raw` binary file.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ![download_raw.png](./download_raw.png)
 
@@ -148,7 +159,11 @@ It is not important to understand every detail of the attestation token, but her
 - Specific variants of the EAT format are known as profiles, so this token is adopting the Arm CCA profile of the EAT specification.
 - The CCA attestation token is divided at the top level into two sub-tokens. These are known individually as the platform token and the realm token.
 - The platform token contains the evidence about the Arm CCA platform on which the realm is running, which includes details about the state of the hardware and firmware that compose the platform. You can think of the platform as a single server or self-contained computing device. A single platform can host many realms, which can be executing as virtual machines or containers. Therefore, many realms might produce the same platform token.
+<<<<<<< HEAD
 - The realm token contains the evidence about the realm itself, which is running on the platform. It is the more dynamic part of the token. It includes information about the realm's initial memory contents and boot state.
+=======
+- The realm token contains the evidence about the realm itself, which is running on the platform. It is the more dynamic part of the token. It includes information about the realm’s initial memory contents and boot state.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 - The top-level data items in each sub-token are known as claims. A claim is an individual evidence fragment that describes a specific property of the system.
 - The claims of the platform token are labeled with the prefix `cca-platform-*`
 - The claims of the realm token are labeled with the prefix `cca-realm-*`

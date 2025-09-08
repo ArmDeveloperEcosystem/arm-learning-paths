@@ -32,9 +32,13 @@ tools_software_languages:
     - GCC
     - Clang
     - CMake
+<<<<<<< HEAD
     - Google Test
     - Runbook
 
+=======
+    - GoogleTest
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
     - macOS

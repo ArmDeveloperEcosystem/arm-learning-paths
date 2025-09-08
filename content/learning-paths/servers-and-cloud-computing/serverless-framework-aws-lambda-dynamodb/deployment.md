@@ -16,13 +16,21 @@ To deploy the resources, open the terminal or command prompt and navigate to Aws
 serverless deploy
 ```
 
+<<<<<<< HEAD
 When you invoke the serverless deploy command, the Serverless Framework orchestrates a series of steps to deploy your serverless application to the specified cloud provider (e.g., AWS). Here's a brief description of what happens during this process. The Serverless Framework validates your `serverless.yml` configuration file to ensure there are no syntax errors or missing information. Then, it compiles the service definition and resolves any variable references (e.g., environment variables or stage variables).
+=======
+When you invoke the serverless deploy command, the Serverless Framework orchestrates a series of steps to deploy your serverless application to the specified cloud provider (e.g., AWS). Here’s a brief description of what happens during this process. The Serverless Framework validates your `serverless.yml` configuration file to ensure there are no syntax errors or missing information. Then, it compiles the service definition and resolves any variable references (e.g., environment variables or stage variables).
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 In the next step, the framework packages your application code, including all necessary dependencies, into a deployable artifact (e.g., a ZIP file). It respects any packaging configuration specified in the `serverless.yml`, such as including or excluding specific files or directories.
 
 For AWS, the framework generates a CloudFormation template based on your service configuration, which describes the infrastructure and resources required (e.g., Lambda functions, API Gateway, DynamoDB tables). This template includes all resource definitions, IAM roles, permissions, and configuration settings.
 
+<<<<<<< HEAD
 The packaged artifact (code and configuration) is uploaded to the cloud provider's storage (e.g., S3 for AWS). The framework handles authentication and authorization using the credentials and roles configured for the deployment.
+=======
+The packaged artifact (code and configuration) is uploaded to the cloud provider’s storage (e.g., S3 for AWS). The framework handles authentication and authorization using the credentials and roles configured for the deployment.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The Serverless Framework initiates the deployment process by executing the infrastructure-as-code (IaC) template. For AWS, this involves creating or updating a CloudFormation stack, which provisions and configures all defined resources.
 

@@ -30,7 +30,11 @@ subjects: ML
 test_maintenance: false
 
 tools_software_languages:
+<<<<<<< HEAD
     - FVP
+=======
+    - Fixed Virtual Platform
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Arm Virtual Hardware
     - GCC
     - Arm Compiler for Embedded

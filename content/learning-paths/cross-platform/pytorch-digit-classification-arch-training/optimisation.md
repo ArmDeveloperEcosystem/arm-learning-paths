@@ -56,7 +56,11 @@ A quantization configuration is applied using the `qnnpack` backend, which is de
 
 After fusing the layers, the model is prepared for static quantization with `torch.quantization.prepare()`, which involves calibrating the model on the training data to collect statistics needed for quantization. The calibration phase runs the model on some training data without updating the weights.
 
+<<<<<<< HEAD
 Once calibration is complete, the model is converted to a quantized version using `torch.quantization.convert()`. The quantized model is then traced with `torch.jit.trace()`, which captures the model's computational graph. 
+=======
+Once calibration is complete, the model is converted to a quantized version using `torch.quantization.convert()`. The quantized model is then traced with `torch.jit.trace()`, which captures the model’s computational graph. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Finally, the traced model is optimized for mobile using `optimize_for_mobile()`, further refining it for performance on mobile devices. 
 

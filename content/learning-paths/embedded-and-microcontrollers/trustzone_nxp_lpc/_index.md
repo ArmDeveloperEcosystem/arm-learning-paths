@@ -28,7 +28,12 @@ operatingsystems:
 tools_software_languages:
     - TrustZone
     - Arm Compiler for Embedded
+<<<<<<< HEAD
     - Keil MDK
+=======
+    - Keil
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

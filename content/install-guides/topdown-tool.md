@@ -39,7 +39,11 @@ The Telemetry Solution requires Linux Perf to collect metrics.
 
 The Telemetry Solution also includes data for defining PMU events, a test suite to stress CPU resources, and a tool to parse Statistical Profiling Extension (SPE) data for analysis.
 
+<<<<<<< HEAD
 ## What do I need before installing the Telemetry Solution?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Follow the instructions below to install the Telemetry Solution on an Arm Linux system.
 
@@ -74,7 +78,11 @@ sudo apt update
 sudo apt install python-is-python3 python3-pip python3-venv python3-packaging linux-tools-generic linux-tools-$(uname -r) -y
 ```
 
+<<<<<<< HEAD
 ## How do I install the Telemetry Solution?
+=======
+## Install the Telemetry Solution
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 1. Clone the repository:
 
@@ -95,7 +103,11 @@ Install `topdown-tool` in `/usr/local/bin`:
 
 ```bash
 cd telemetry-solution/tools/topdown_tool
+<<<<<<< HEAD
 pip install -e .
+=======
+sudo pip install -e .
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 3. Confirm you can run `top-down` using the `version` command:
@@ -163,7 +175,11 @@ output options:
   --debug               enable debug output
 ```
 
+<<<<<<< HEAD
 ## How do I test the Telemetry Solution?
+=======
+4. Test `topdown-tool`
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 {{% notice Note %}}
 You may need to enable access to the counters. More information about the options is in the [Linux Perf install guide](/install-guides/perf/).

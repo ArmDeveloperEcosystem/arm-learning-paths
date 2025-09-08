@@ -26,8 +26,15 @@ skilllevels: Advanced
 subjects: ML
 armips:
     - Cortex-A
+<<<<<<< HEAD
     - Mali GPU
 tools_software_languages:
+=======
+    - Cortex-X
+    - Mali GPU
+tools_software_languages:
+    - mobile
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Android Studio
     - Kotlin
     - MediaPipe

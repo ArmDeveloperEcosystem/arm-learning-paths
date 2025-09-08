@@ -21,26 +21,45 @@ Open up a Windows PowerShell and checkout the source tree:
 cd C:\Users\$env:USERNAME
 git clone --recursive https://github.com/Microsoft/onnxruntime.git
 cd onnxruntime
+<<<<<<< HEAD
 git checkout 5630b081cd25e4eccc7516a652ff956e51676794
 ```
 
 {{% notice Note %}}
 You might be able to use a later commit. These steps have been tested with the commit `5630b081cd25e4eccc7516a652ff956e51676794`. This corresponds to ORT 1.22.2
+=======
+git checkout 9b37b3ea4467b3aab9110e0d259d0cf27478697d
+```
+
+{{% notice Note %}}
+You might be able to use a later commit. These steps have been tested with the commit `9b37b3ea4467b3aab9110e0d259d0cf27478697d`.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 {{% /notice %}}
 
 ### Build for Android CPU
 
+<<<<<<< HEAD
 You use the Ninja generator to build on Windows for Android. First, set JAVA_HOME to the path to your JDK install. ONNX Runtime compiles well with JDK 17. If you face issues with compilation please check your JDK version.
 
 ```bash
 $env:JAVA_HOME="C:\Program Files\Microsoft\jdk-17.0.16.8-hotspot\"
+=======
+You use the Ninja generator to build on Windows for Android. First, set JAVA_HOME to the path to your JDK install. You can point to the JDK from Android Studio, or a standalone JDK install.
+
+```bash
+$env:JAVA_HOME="C:\Program Files\Android\Android Studio\jbr"
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Now run the following command:
 
 ```bash
 
+<<<<<<< HEAD
 ./build.bat --config Release --build_shared_lib --android --android_sdk_path C:\Users\$env:USERNAME\AppData\Local\Android\Sdk --android_ndk_path C:\Users\$env:USERNAME\AppData\Local\Android\Sdk\ndk\27.3.13750724 --android_abi arm64-v8a --android_api 27 --cmake_generator Ninja --build_java
+=======
+./build.bat --config Release --build_shared_lib --android --android_sdk_path C:\Users\$env:USERNAME\AppData\Local\Android\Sdk --android_ndk_path C:\Users\$env:USERNAME\AppData\Local\Android\Sdk\ndk\27.0.12077973 --android_abi arm64-v8a --android_api 27 --cmake_generator Ninja --build_java
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```
 
@@ -49,7 +68,11 @@ An Android Archive (AAR) file, which can be imported directly in Android Studio,
 When the build is complete, confirm the shared library and the AAR file have been created:
 
 ```
+<<<<<<< HEAD
 ls build\Windows\Release\libonnxruntime.so
+=======
+ls build\Windows\Release\onnxruntime.so
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ls build\Windows\Release\java\build\android\outputs\aar\onnxruntime-release.aar
 ```
 

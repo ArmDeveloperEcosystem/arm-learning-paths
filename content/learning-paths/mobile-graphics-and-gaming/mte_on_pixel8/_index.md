@@ -24,9 +24,13 @@ subjects: Performance and Architecture
 armips:
     - Cortex-A
 tools_software_languages:
+<<<<<<< HEAD
     - MTE
     - adb
     - Google Pixel 8
+=======
+    - Memory Bug Report
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Android
 

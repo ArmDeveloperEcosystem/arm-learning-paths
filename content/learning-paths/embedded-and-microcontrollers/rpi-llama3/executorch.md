@@ -35,7 +35,11 @@ conda activate executorch-venv
 
 ## Install Clang
 
+<<<<<<< HEAD
 Install Clang, which is required to build ExecuTorch:
+=======
+Install Clang, which is required to build ExecuTorch: 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```bash
 sudo apt install clang -y
@@ -52,7 +56,11 @@ sudo update-alternatives --set c++ /usr/bin/clang++
 
 ## Clone ExecuTorch and install the required dependencies
 
+<<<<<<< HEAD
 Continue in your Python virtual environment, and run the commands below to download the ExecuTorch repository and install the required packages.
+=======
+Continue in your Python virtual environment, and run the commands below to download the ExecuTorch repository and install the required packages. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 After cloning the repository, the project's submodules are updated, and two scripts install additional dependencies.
 
@@ -60,9 +68,22 @@ After cloning the repository, the project's submodules are updated, and two scri
 git clone https://github.com/pytorch/executorch.git
 cd executorch
 git submodule sync
+<<<<<<< HEAD
 git submodule update --init --recursive
 ./install_executorch.sh
 ./examples/models/llama/install_requirements.sh
 ```
 
+=======
+git submodule update --init
+./install_requirements.sh --pybind xnnpack
+./examples/models/llama2/install_requirements.sh
+```
+
+{{% notice Note %}}
+You can safely ignore the following error on failing to import lm_eval running the install_requirements.sh scripts:
+`Failed to import examples.models due to lm_eval conflict`
+{{% /notice %}}
+
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 When these scripts finish successfully, ExecuTorch is all set up. That means it's time to dive into the world of Llama models!

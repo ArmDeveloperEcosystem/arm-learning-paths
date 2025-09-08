@@ -3,6 +3,7 @@ title: Deploy a Windows on Arm virtual machine on Microsoft Azure
 
 minutes_to_complete: 15
 
+<<<<<<< HEAD
 who_is_this_for: This is an introductory topic for software developers interested using Windows on Arm in the Azure cloud.
 
 learning_objectives: 
@@ -12,6 +13,15 @@ learning_objectives:
 prerequisites:
     - An Azure Cloud account.
     - An RDP client to connect to your Windows on Arm instance.  For more info on RDP clients, see [Remote Desktop clients for Remote Desktop Services and remote PCs](https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-clients) to get started.
+=======
+who_is_this_for: This is an introductory topic for software developers interested using Windows on Arm in the cloud.
+
+learning_objectives: 
+    - Start a Windows on Arm virtual machine in Azure cloud
+
+prerequisites:
+    - Valid Azure Cloud account
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 author: Pareena Verma
 

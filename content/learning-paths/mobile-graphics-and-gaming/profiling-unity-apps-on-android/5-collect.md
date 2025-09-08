@@ -60,7 +60,11 @@ You will now collect some data from the unoptimized version of the code. To do t
 
 ### Collect data for the optimized version
 
+<<<<<<< HEAD
 Let's repeat the above process but this time build and deploy the optimized version of the code.
+=======
+Let’s repeat the above process but this time build and deploy the optimized version of the code.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 1. Open the script _Assets/BurstNeonCollisions/Scripts/CollisionCalculationScript.cs_
 

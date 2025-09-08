@@ -10,7 +10,11 @@ learning_objectives:
 
 prerequisites:
     - Bare-metal or cloud [installation of MySQL](/learning-paths//servers-and-cloud-computing/mysql)
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 author: Julio Suarez
 
 skilllevels: Advanced
@@ -24,13 +28,21 @@ tools_software_languages:
     - SQL
     - MySQL
     - InnoDB
+<<<<<<< HEAD
     - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 test_images:
     - ubuntu:latest
 test_link: null
 test_maintenance: true
+<<<<<<< HEAD
+=======
+test_status:
+    - passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:
@@ -42,8 +54,12 @@ further_reading:
         link: https://mysqlonarm.github.io/Running-MySQL-on-ARM/
         type: documentation
 
+<<<<<<< HEAD
 ### FIXED, DO NOT MODIFY
 # ================================================================================
+=======
+
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'

@@ -32,13 +32,21 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio) is the most comprehensive embedded C/C++ dedicated software development solution. It is used for validation of SoC debug through emulation, simulation, FPGA, and silicon bring-up design and verification stages. It has the earliest support for all Arm processors and interconnects.
 
+<<<<<<< HEAD
 ## What should I know before installing Arm Development Studio?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Arm Development Studio can be installed on Windows and Linux hosts.
 
 Full host platform requirements are given in the [Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Hardware-and-host-platform-requirements).
 
+<<<<<<< HEAD
 ## How do I download the installer packages?
+=======
+## Download installer packages
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The installer will depend on the [edition](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio#Editions) of Development Studio that you are entitled to.
 
@@ -50,9 +58,15 @@ Versions of Arm Development Studio denoted by `year.index`, where `index` is a l
 
 For more information about the Product Download Hub, refer to the [Product Download Hub guide](/install-guides/pdh/).
 
+<<<<<<< HEAD
 ## How do I install Arm Development Studio?
 
 ### How do I install on Windows?
+=======
+## Install Arm Development Studio
+
+### Windows
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Unzip the downloaded installation archive.
 
@@ -70,7 +84,11 @@ Full installation instructions are provided in the [Arm Development Studio Getti
 * [Install Arm Development Studio on Windows using the command line](https://developer.arm.com/documentation/101469/2024-0/Installing-and-configuring-Arm-Development-Studio/Install-Arm-Development-Studio-on-Windows-using-the-command-line)
 * [Install Arm Development Studio on Windows using the installation wizard](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Install-Arm-Development-Studio-on-Windows-using-the-installation-wizard)
 
+<<<<<<< HEAD
 ### How do I install on Linux?
+=======
+### Linux
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Extract the downloaded package:
 ```command
@@ -87,9 +105,15 @@ The install may report that additional [libraries](https://developer.arm.com/doc
 
 Full installation instructions are provided in the Linux section of the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Installing-on-Linux).
 
+<<<<<<< HEAD
 ## How do I configure the command line?
 
 ### How do I configure the Windows command line?
+=======
+## Configure command line
+
+### Windows
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 You will see `Arm DS <version> Command Prompt` installed. This configures all necessary environment variables for use with the tools. You can select an appropriate toolchain with:
 ```command
@@ -103,7 +127,11 @@ select_default_toolchain
 By default, only the supplied `Arm Compiler for Embedded 6` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
 {{% /notice %}}
 
+<<<<<<< HEAD
 ### How do I configure the Linux command line?
+=======
+### Linux
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Navigate to `bin` directory of your install, for example:
 ```command
@@ -125,7 +153,11 @@ and select the desired toolchain. You can then configure with simply:
 By default, only the supplied `Arm Compiler for Embedded 6` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
 {{% /notice %}}
 
+<<<<<<< HEAD
 ## How do I use the Arm Development Studio IDE?
+=======
+## Arm Development Studio IDE
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Arm Development Studio is provided with a fully featured Eclipse based IDE and integrated debugger.
 
@@ -134,7 +166,11 @@ Launch the IDE from your desktop, or from the above prompt using:
 ./armds_ide
 ```
 
+<<<<<<< HEAD
 ## How do I set up the product license?
+=======
+## Set up the product license
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Arm Development Studio is license managed. When you launch the IDE for the first time, you should be prompted to set up your license if necessary. You can return to this view from `Help` > `Arm License Manager`.
 
@@ -142,7 +178,11 @@ A free 30 day evaluation license for Arm Development Studio is also available. Y
 
 Full license setup instructions are available in the [Arm Software Licensing install guide](/install-guides/license/).
 
+<<<<<<< HEAD
 ## How do I get started with Arm Development Studio?
+=======
+## Get started
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To verify everything is working OK, run the compiler from your command prompt:
 ```command

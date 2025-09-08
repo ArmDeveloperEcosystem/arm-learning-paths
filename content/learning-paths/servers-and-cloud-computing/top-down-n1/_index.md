@@ -24,8 +24,11 @@ armips:
 tools_software_languages:
     - perf
     - Telemetry
+<<<<<<< HEAD
     - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 operatingsystems:
     - Linux

@@ -23,7 +23,10 @@ author: Nobel Chowdary Mandepudi
 
 ### Tags
 skilllevels: Advanced
+<<<<<<< HEAD
 cloud_service_providers: Google Cloud
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 armips:
     - Neoverse
 subjects: ML
@@ -33,8 +36,11 @@ tools_software_languages:
     - Python
     - Streamlit
     - Google Axion
+<<<<<<< HEAD
     - Demo
     - Hugging Face
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

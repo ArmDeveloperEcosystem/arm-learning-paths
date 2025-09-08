@@ -37,15 +37,25 @@ The source code is available from the [GitLab repository](https://gitlab.arm.com
 
 Use `git` to download the code:
 
+<<<<<<< HEAD
 ```bash { cwd="$HOME" }
+=======
+```bash
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 git clone https://git.gitlab.arm.com/networking/ral.git
 ```
 
 ## Create a build folder
 
+<<<<<<< HEAD
 Navigate to the source directory and create an empty build directory:
 
 ```bash { cwd="$HOME" }
+=======
+Navigate to the source directory and create an empty build directory: 
+
+```bash
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 cd ral
 mkdir build
 cd build
@@ -73,7 +83,11 @@ Use the features available on your hardware when you run `cmake` in the next sec
 
 If your platform supports only Neon (`asimd`), set up the build with:
 
+<<<<<<< HEAD
 ```bash { cwd="$HOME/ral/build" }
+=======
+```bash { cwd="ral/build" }
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 cmake -DBUILD_TESTING=On -DARMRAL_ARCH=NEON  ..
 ```
 
@@ -101,15 +115,25 @@ cmake -DBUILD_TESTING=On -DARMRAL_ARCH=SVE -DCMAKE_INSTALL_PREFIX=/home/ubuntu/a
 
 Build the library using `make`:
 
+<<<<<<< HEAD
 ```bash { cwd="$HOME/ral/build" }
+=======
+```bash { cwd="ran/build" }
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 make
 ```
 
 ## Install the library
 
+<<<<<<< HEAD
 Install the library:
 
 ```bash { cwd="$HOME/ral/build" }
+=======
+Install the library: 
+
+```bash { cwd="ran/build" }
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 sudo make install
 ```
 
@@ -117,7 +141,11 @@ sudo make install
 
 Build and run the supplied benchmark example by running:
 
+<<<<<<< HEAD
 ```bash { ret_code="0" cwd="$HOME/ral/build" }
+=======
+```bash { cwd="ral/build",ret_code="0" }
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 make check
 ```
 

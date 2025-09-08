@@ -29,8 +29,11 @@ tools_software_languages:
     - RME
     - CCA
     - Docker
+<<<<<<< HEAD
     - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     
 further_reading:
     - resource:

@@ -31,7 +31,11 @@ You can connect the Profiler to your device manually while the app is running or
 
 If the part of your app you want to profile occurs soon after launch, then auto-connecting the Profiler can save you a couple of steps.
 
+<<<<<<< HEAD
 On the other hand, if the performance issues happen later in the app's lifetime, you might prefer to launch the app first, navigate to the problem area, and then connect the Profiler.
+=======
+On the other hand, if the performance issues happen later in the app’s lifetime, you might prefer to launch the app first, navigate to the problem area, and then connect the Profiler.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 In our sample, the performance issues will be apparent soon after launch. To profile directly on an Android device:
 

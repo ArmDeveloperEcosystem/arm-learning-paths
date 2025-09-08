@@ -139,6 +139,10 @@ document.getElementById('fetchTemperatureButton').addEventListener('click', func
 
 After saving all the files, open the **index.html** file in a web browser. It should render as follows:
 
+<<<<<<< HEAD
 ![fig1](figures/01.png)
+=======
+![fig1](Figures/01.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The website is now ready. However, to fetch temperatures, you will need to add the Lambda endpoint. You will configure this in the next section.

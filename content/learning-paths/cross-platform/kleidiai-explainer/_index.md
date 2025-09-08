@@ -19,14 +19,24 @@ author: Zach Lasiuk
 skilllevels: Introductory 
 subjects: ML
 armips:
+<<<<<<< HEAD
+=======
+    - Cortex-X
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Cortex-A
     - Neoverse
 tools_software_languages:
     - C++
+<<<<<<< HEAD
     - Generative AI
     - NEON
     - Runbook
 
+=======
+    - GenAI
+    - Coding
+    - NEON
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
 

@@ -12,6 +12,7 @@ In this section, you connect the emulator to AWS IoT Core.
 ## Connecting the emulator
 Log in to the AWS Console at https://aws.amazon.com, and then search for IoT. From the list that appears, select **IoT Core**:
 
+<<<<<<< HEAD
 ![fig1](figures/01.png)
 
 In the AWS IoT console, click **Connect one device**:
@@ -21,6 +22,17 @@ In the AWS IoT console, click **Connect one device**:
 This will open the **Connect one device** wizard:
 
 ![fig3](figures/03.png)
+=======
+![fig1](Figures/01.png)
+
+In the AWS IoT console, click **Connect one device**:
+
+![fig2](Figures/02.png)
+
+This will open the **Connect one device** wizard:
+
+![fig3](Figures/03.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 In the first step of this wizard, **Register and secure your device**, you can see the ping command, which you can use to ensure you can connect to AWS services. 
 
@@ -44,17 +56,29 @@ Note that the **a6t44uzbanvsz-ats.iot.eu-central-1.amazonaws.com** is your endpo
 
 Click the **Next** button. This takes you to the **Register and secure your device** step, in which you type **WeatherEmulator** under the **Thing** name:
 
+<<<<<<< HEAD
 ![fig4](figures/04.png)
+=======
+![fig4](Figures/04.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Then, click the **Next** button, which opens the **Choose platform and SDK** window, in which you select:
 * **Windows** from the **Device platform operating system**.
 * **Node.js** from the **AWS IoT Device SDK**.
 
+<<<<<<< HEAD
 ![fig5](figures/05.png)
 
 Afterwards, click the **Next** button, which takes you to the **Download connection kit** step, in which you click the **Download connection kit** button to get the zip with certificates and the sample code, which sends data to the AWS cloud:
 
 ![fig6](figures/06.png)
+=======
+![fig5](Figures/05.png)
+
+Afterwards, click the **Next** button, which takes you to the **Download connection kit** step, in which you click the **Download connection kit** button to get the zip with certificates and the sample code, which sends data to the AWS cloud:
+
+![fig6](Figures/06.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 After downloading the kit, click the **Next** button. This takes you to the **Run connection kit**, in which you click the **Continue** button. This takes you back to the AWS IoT screen.
 
@@ -83,11 +107,19 @@ Before you can connect the device to the AWS IoT Core, you need to configure the
 
 To update the policy, under the AWS IoT console, click **Security** -> **Policies**:
 
+<<<<<<< HEAD
 ![fig7](figures/07.png)
 
 There should be one policy, **WeatherEmulator-Policy**. Click that policy. This opens another view, in which you can see the policy details. In that view, click **Edit active version** button, which opens the Edit policy view:
 
 ![fig7](figures/08.png)
+=======
+![fig7](Figures/07.png)
+
+There should be one policy, **WeatherEmulator-Policy**. Click that policy. This opens another view, in which you can see the policy details. In that view, click **Edit active version** button, which opens the Edit policy view:
+
+![fig7](Figures/08.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Modify the first entry ('iot:Publish,iot:Receive,iot:PublishRetain') such that you replace the 'topic/sdk/test/js' with 'topic/*'. This will enable the application to publish and receive messages from any topic. Similarly, modify the second entry, and replace 'topicfilter/sdk/test/js' with 'topicfilter/*'. 
 

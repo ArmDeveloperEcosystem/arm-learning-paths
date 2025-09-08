@@ -40,8 +40,14 @@ operatingsystems:
     - RTOS
     - Baremetal
 tools_software_languages:
+<<<<<<< HEAD
     - Keil MDK
     - FVP
+=======
+    - Coding
+    - Keil
+    - Fixed Virtual Platform
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 
 

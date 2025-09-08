@@ -17,7 +17,10 @@ on:
 jobs:
   # This workflow contains a single job
   update_stats:
+<<<<<<< HEAD
     if: github.repository == 'ArmDeveloperEcosystem/arm-learning-paths'
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     runs-on: ubuntu-latest
     steps:
       - name: Check out current repo

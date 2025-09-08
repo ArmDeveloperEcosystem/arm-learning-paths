@@ -30,10 +30,16 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Trusted Firmware
+<<<<<<< HEAD
     - FVP
     - GCC
 
 
+=======
+    - Fixed Virtual Platform
+    - GCC
+
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ### Cross-platform metadata only
 shared_path: true
 shared_between:

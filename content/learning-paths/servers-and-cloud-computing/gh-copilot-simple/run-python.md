@@ -70,7 +70,11 @@ if __name__ == "__main__":
 
 ```
 
+<<<<<<< HEAD
 You might need to install the following Python packages:
+=======
+You may need to install the following Python packages:
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```console
 sudo apt update
@@ -84,7 +88,11 @@ python -m venv venv
 source venv/bin/activate
 ```
 
+<<<<<<< HEAD
 Your shell prompt now includes `(venv)` indicating that the virtual environment is active. 
+=======
+Your shell prompt now includes `(venv)` indicating the virtual environment is active. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Install the required Python packages:
 
@@ -108,6 +116,10 @@ WARNING: This is a development server. Do not use it in a production deployment.
 Press CTRL+C to quit
 ```
 
+<<<<<<< HEAD
 Your extension is running, but it needs to be connected to Copilot. 
 
 Continue to learn how to share your extension with Copilot.
+=======
+Your extension is running, but needs to be connected to Copilot. Continue to learn how to share it with Copilot.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

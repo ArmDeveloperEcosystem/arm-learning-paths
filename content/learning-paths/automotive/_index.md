@@ -11,6 +11,7 @@ subtitle: Build secure, connected, smart IoT devices
 title: Automotive
 weight: 4
 subjects_filter:
+<<<<<<< HEAD
 - Containers and Virtualization: 3
 - Performance and Architecture: 5
 operatingsystems_filter:
@@ -32,4 +33,11 @@ tools_software_languages_filter:
 - ROS 2: 3
 - Rust: 1
 - Zenoh: 1
+=======
+- Containers and Virtualization: 1
+operatingsystems_filter:
+- Linux: 1
+tools_software_languages_filter:
+- Automotive: 1
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ---

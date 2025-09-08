@@ -92,7 +92,11 @@ makes them suitable for using in bigger algorithms and is a common pattern used 
 
 One point worth mentioning is related to the `Abs` class: depending on the type
 used at instantiation, the compiler selects an optimized implementation for
+<<<<<<< HEAD
 unsigned types, as there is no need to compute the absolute value of an always
+=======
+unsigned types, and there is no need to compute the absolute value of an always
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 positive value. This optimization is transparent to users.
 
 Those operators are marked as `constexpr` so that the compiler can optimize the
@@ -203,7 +207,11 @@ type traits (from `<numeric_limit>`) such as `max` to get the maximum value
 representable for a given type.
 
 As those tests have been added to a new source file, it needs to be known to the
+<<<<<<< HEAD
 build system, so add it now to the `matrix-test` target in `CMakeLists.txt`:
+=======
+build system, so add it now to the matrix-test target in `CMakeLists.txt`:
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```TXT
 add_executable(matrix-test tests/main.cpp
@@ -292,7 +300,11 @@ First, create a `applyEltWiseUnaryOp` helper routine in the public section of
  operation as follows:
 
 ```CPP
+<<<<<<< HEAD
     /// Apply element wise unary scalar operator \p op to each element.
+=======
+    /// Apply element wise unary scalar operator \p uOp to each element.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     template <template <typename> class uOp>
     Matrix &applyEltWiseUnaryOp(const uOp<Ty> &op) {
         static_assert(std::is_base_of<unaryOperation, uOp<Ty>>::value,
@@ -505,7 +517,11 @@ ninja check
 [----------] 4 tests from unaryOperator (0 ms total)
 
 [----------] Global test environment tear-down
+<<<<<<< HEAD
 [==========] 27 tests from 2 test suites ran. (0 ms total)
+=======
+[==========] 27 tests from 3 test suites ran. (0 ms total)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 [  PASSED  ] 27 tests.
 ```
 
@@ -692,7 +708,11 @@ Add this `applyEltWiseBinaryOp` helper routine to the public section of `Matrix`
 in `include/Matrix/Matrix.h`:
 
 ```CPP
+<<<<<<< HEAD
     /// Apply element wise binary scalar operator \p op to each element.
+=======
+    /// Apply element wise binary scalar operator \p bOp to each element.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     template <template <typename> class bOp>
     Matrix &applyEltWiseBinaryOp(const bOp<Ty> &op, const Matrix &rhs) {
         static_assert(std::is_base_of<binaryOperation, bOp<Ty>>::value,
@@ -1116,6 +1136,7 @@ content.
 - Resize: to be able to dynamically change a matrix dimensions.
 - Extract: to be able to extract part of a matrix.
 
+<<<<<<< HEAD
 ### Optimization
 
 The code written so far is relatively high level and allows the compiler to
@@ -1137,6 +1158,8 @@ learning path.
 You can also learn how to
 [Accelerate Matrix Multiplication Performance with SME2](/learning-paths/cross-platform/multiplying-matrices-with-sme2/).
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ## What have you achieved so far?
 
 At this stage, the code structure looks like:
@@ -1171,7 +1194,10 @@ built and used.
 The testing could - and *should* - go much deeper, as a number of corner cases have not been covered.
 
 You can continue to add more functions, and more tests.
+<<<<<<< HEAD
 
 You can refer to this chapter source code in
 `code-examples/learning-paths/cross-platform/matrix/chapter-4` in the archive that
 you have downloaded earlier.
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

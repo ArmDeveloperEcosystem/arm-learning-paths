@@ -24,8 +24,12 @@ tools_software_languages:
     - GCC
     - Clang
     - SVE2
+<<<<<<< HEAD
     - Runbook
 
+=======
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
 shared_path: true

@@ -27,6 +27,10 @@ operatingsystems:
     - Baremetal
 tools_software_languages:
     - Arm Virtual Hardware
+<<<<<<< HEAD
+=======
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - GCC
     - Paddle
     - TVMC

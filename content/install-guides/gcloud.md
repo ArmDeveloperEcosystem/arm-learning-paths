@@ -46,7 +46,11 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## How do I download and install gcloud for Ubuntu on Arm?
 
+<<<<<<< HEAD
 ### How do I install gcloud using the package manager? 
+=======
+### Install gcloud using the package manager 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The easiest way to install `gcloud` for Ubuntu on Arm is to use the package manager.
 
@@ -64,7 +68,11 @@ curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 sudo apt-get update && sudo apt-get install google-cloud-cli -y
 ```
 
+<<<<<<< HEAD
 ### How do I install gcloud using the archive file?
+=======
+### Install gcloud using the archive file
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 If you cannot use the package manager or you get a Python version error such as the one below you can use the archive file.
 
@@ -113,7 +121,11 @@ Alternatively, you can add the `bin` directory to your path by adding the line b
 export PATH="/opt/google-cloud-sdk/bin:$PATH"
 ```
 
+<<<<<<< HEAD
 ## How do I test gcloud?
+=======
+## Test gcloud
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Confirm the executable is available and print the version:
 

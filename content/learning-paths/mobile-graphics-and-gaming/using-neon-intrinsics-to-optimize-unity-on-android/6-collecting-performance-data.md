@@ -13,7 +13,11 @@ To keep this learning path a reasonable length, we will just measure and compare
 For more detail regarding the Profiler and Analyzer, please read the previous learning path in this series, [Profiling Unity apps on Android](/learning-paths/mobile-graphics-and-gaming/profiling-unity-apps-on-android).
 
 ## Create a consistent scenario
+<<<<<<< HEAD
 First, you will need a consistent scenario in which you can reliably compare the three modes. We need to compare the data when all the versions are processing the same amount of data. It's important to note that the randomness of the scene can make it harder to pick representative frames but we can wait until the number of characters is the same in each run.
+=======
+First, you will need a consistent scenario in which you can reliably compare the three modes. We need to compare the data when all the versions are processing the same amount of data. It’s important to note that the randomness of the scene can make it harder to pick representative frames but we can wait until the number of characters is the same in each run.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The sample generates new characters every frame up to a maximum of 2401. This maximum is reached in a couple of minutes or so.
 

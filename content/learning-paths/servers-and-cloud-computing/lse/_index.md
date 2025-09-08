@@ -23,8 +23,11 @@ operatingsystems:
     - Linux 
 tools_software_languages:
     - GCC
+<<<<<<< HEAD
     - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     
 further_reading:
     - resource:
@@ -35,10 +38,13 @@ further_reading:
         title: Arm's LSE for atomics and MySQL
         link: https://mysqlonarm.github.io/ARM-LSE-and-MySQL/
         type: blog
+<<<<<<< HEAD
     - resource:
         title: Learn about glibc with Large System Extensions (LSE) for performance improvement
         link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/glibc-with-lse/
         type: website
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 
 

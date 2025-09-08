@@ -30,6 +30,10 @@ tools_software_languages:
     - Arm Compiler for Embedded
     - Arm Fast Models
     - DSTREAM
+<<<<<<< HEAD
+=======
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

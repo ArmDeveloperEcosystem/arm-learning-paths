@@ -40,6 +40,10 @@ Current runner version: '2.303.0'
 
 Return to the `Actions->Runners` page in your GitHub repository and you should now see your runner displayed similar to the below:
 
+<<<<<<< HEAD
 ![ghrunner2 #center](images/ghrunner_2.png)
+=======
+![ghrunner2 #center](Images/ghrunner_2.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 You are now ready to test a simple CI/CD GitHub Actions workflow on your Windows on Arm runner.

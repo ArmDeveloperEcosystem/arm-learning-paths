@@ -28,13 +28,21 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 This guide is intended to get you up and running with the [Arm Virtual Hardware (AVH) Fixed Virtual Platforms (FVPs)](https://www.arm.com/products/development-tools/simulation/virtual-hardware) on macOS. For a thorough review of all options, refer to the official documentation.
 
+<<<<<<< HEAD
 ## What are the prerequisites for running AVH FVPs on macOS?
+=======
+## Prerequisites
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 [Install Docker Desktop on Mac](https://docs.docker.com/desktop/install/mac-install/).
 
 If this is for commercial use, you might require a paid subscription.
 
+<<<<<<< HEAD
 ## How do I clone the repository?
+=======
+## Clone the repo
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Open a terminal and set the working directory to the location in which you would like to store the Fast Model. Then run:
 
@@ -44,7 +52,11 @@ git clone https://github.com/Arm-Examples/FVPs-on-Mac.git
 
 This creates the subdirectory `FVPs-on-Mac` in the current working directory.
 
+<<<<<<< HEAD
 ## How do I build the Docker wrapper for AVH FVPs?
+=======
+## Build the Docker wrapper
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Run the build script to create the Docker image and populate the `bin` folder with model wrappers:
 
@@ -60,7 +72,11 @@ These wrappers can be used exactly like any native model executable:
 ./bin/FVP_MPS2_Cortex-M3 --version
 ```
 
+<<<<<<< HEAD
 ## How do I expose the models to my local environment?
+=======
+## Expose models to local environment
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Add `$(pwd)/FVPs-on-Mac/bin` to `PATH` environment:
 

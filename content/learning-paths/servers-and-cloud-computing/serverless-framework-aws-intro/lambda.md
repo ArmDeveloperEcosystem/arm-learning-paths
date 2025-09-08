@@ -110,7 +110,11 @@ functions:
     handler: handler.hello
 ```
 
+<<<<<<< HEAD
 This `serverless.yml` file contains the organization or account name within the Serverless Framework's dashboard. It is used to group and manage services under a specific account in the Serverless Framework's cloud platform. This is particularly useful for managing multiple projects or teams.
+=======
+This `serverless.yml` file contains the organization or account name within the Serverless Framework’s dashboard. It is used to group and manage services under a specific account in the Serverless Framework’s cloud platform. This is particularly useful for managing multiple projects or teams.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The service keyword defines the name of your Serverless service. This name will be used as a prefix for all the AWS resources created by the framework. It helps in organizing and identifying resources associated with this particular service.
 

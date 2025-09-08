@@ -24,7 +24,11 @@ You can use PAPI in your source code to access performance counters and profile 
 
 PAPI is available as source code on GitHub.
 
+<<<<<<< HEAD
 ## What should I do before installing PAPI?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 This article provides concise instructions to download, build, and install PAPI on Arm Linux distributions.
 
@@ -53,7 +57,11 @@ sudo apt update -y
 sudo apt install -y make gcc
 ```
 
+<<<<<<< HEAD
 ## How do I download, build, install, and test PAPI?
+=======
+## Download, build, install, and test PAPI
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 1. Clone the PAPI repository:
 

@@ -45,5 +45,9 @@ az role assignment create --assignee $USER_ID --role AcrPush --scope $ACR_ID
 
 {{% notice Note %}} You’ll need to replace <YOUR_USER_ID> with the username you used.  {{% /notice %}}
 
+<<<<<<< HEAD
 The last command's output will look as follows:
+=======
+The last command’s output will look as follows:
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ![command prompt#left](figures/21.png "Figure 21. Creating the role assignment")

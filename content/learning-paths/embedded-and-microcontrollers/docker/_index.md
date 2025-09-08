@@ -29,6 +29,10 @@ tools_software_languages:
     - Arm Development Studio
     - Arm Compiler for Embedded
     - Arm Fast Models
+<<<<<<< HEAD
+=======
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 
 further_reading:

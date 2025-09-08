@@ -39,14 +39,22 @@ Run `make` to build it:
 
 ```bash
 cd llama.cpp
+<<<<<<< HEAD
 cmake -B build
 cmake --build build --config Release
+=======
+make GGML_NO_LLAMAFILE=1 -j$(nproc)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Check that `llama.cpp` has built correctly by running the help command:
 
 ```bash
+<<<<<<< HEAD
 ./build/bin/llama-cli -h
+=======
+./llama-cli -h
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 If `llama.cpp` has been built correctly, you will see the help option displayed. The output snippet looks like this:
@@ -73,7 +81,11 @@ The GGUF model format, introduced by the Llama.cpp team, uses compression and qu
 To requantize the model, run:
 
 ```bash
+<<<<<<< HEAD
 ./build/bin/llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0
+=======
+./llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0_8_8
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 This outputs a new file, `dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf`, which contains reconfigured weights that allow `llama-cli` to use SVE 256 and MATMUL_INT8 support.
@@ -86,7 +98,11 @@ You can utilize the `llama.cpp` server program and send requests through an Open
 Start the server from the command line, and it listens on port 8080:
 
 ```bash
+<<<<<<< HEAD
 ./build/bin/llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -n 2048 -t 64 -c 65536  --port 8080
+=======
+./llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -n 2048 -t 64 -c 65536  --port 8080
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 The output from this command should look like:

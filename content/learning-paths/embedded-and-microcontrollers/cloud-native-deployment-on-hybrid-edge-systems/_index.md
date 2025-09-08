@@ -25,7 +25,11 @@ armips:
     - Cortex-A
 tools_software_languages:
     - Docker
+<<<<<<< HEAD
     - Arm Virtual Hardware
+=======
+    - AVH
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - K3s
     - Containerd
 operatingsystems:

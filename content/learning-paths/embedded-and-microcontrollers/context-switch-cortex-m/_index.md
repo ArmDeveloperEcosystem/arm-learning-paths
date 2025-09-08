@@ -25,6 +25,10 @@ operatingsystems:
     - Baremetal
 tools_software_languages:
     - CMSIS
+<<<<<<< HEAD
+=======
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Arm Development Studio
 
 further_reading:

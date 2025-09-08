@@ -140,7 +140,11 @@ Push the container image to the new repository using `docker push` as in the pre
 docker push [your account number].dkr.ecr.us-east-2.amazonaws.com/myapp
 ```
 
+<<<<<<< HEAD
 Refresh the repository's page to verify you’ve successfully pushed the image to the AWS ECR repository.
+=======
+Refresh the repository’s page to verify you’ve successfully pushed the image to the AWS ECR repository.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ![ecs34 #center](./images/ecs34.png)
 
@@ -177,7 +181,11 @@ Navigate to Amazon ECS Clusters and verify that you can see the changes:
 
 To run the image, you can launch it as an ECS container.
 
+<<<<<<< HEAD
 To deploy the image to ECS, you can create a task. A task tells ECS how you want to run your Docker container. A task describes the container's critical specifications of how to launch your container. 
+=======
+To deploy the image to ECS, you can create a task. A task tells ECS how you want to run your Docker container. A task describes the container’s critical specifications of how to launch your container. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 These specifications include:
 
@@ -312,7 +320,11 @@ resource "aws_alb" "application_load_balancer" {
 }
 ```
 
+<<<<<<< HEAD
 The configuration creates a load balancer that will distribute the workloads across multiple resources to ensure application's availability, scalability, and security.
+=======
+The configuration creates a load balancer that will distribute the workloads across multiple resources to ensure application’s availability, scalability, and security.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ### Create a security group for the load balancer
 
@@ -446,7 +458,11 @@ Run the `apply` command to provision infrastructure on AWS. Remember to enter ye
 terraform apply
 ```
 
+<<<<<<< HEAD
 When the `apply` command is complete you will see the application's URL on your terminal.
+=======
+When the `apply` command is complete you will see the application’s URL on your terminal.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```output
 Plan: 9 to add, 0 to change, 0 to destroy.

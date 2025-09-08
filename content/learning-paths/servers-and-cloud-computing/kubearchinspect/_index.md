@@ -23,8 +23,11 @@ armips:
     - Neoverse
 tools_software_languages:
     - Kubernetes
+<<<<<<< HEAD
     - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
 

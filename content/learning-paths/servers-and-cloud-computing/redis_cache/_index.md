@@ -29,8 +29,11 @@ tools_software_languages:
     - Redis
     - SQL
     - MySQL
+<<<<<<< HEAD
     - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

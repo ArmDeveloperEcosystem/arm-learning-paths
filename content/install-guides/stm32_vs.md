@@ -39,13 +39,21 @@ The tools are available as a [VS Code](https://code.visualstudio.com/) extension
 See [STMicroelectronics provides full STM32 support for Microsoft Visual Studio Code](https://newsroom.st.com/media-center/press-item.html/t4536.html) for more information.
 
 
+<<<<<<< HEAD
 ## Where can I download Visual Studio Code?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 [Download](https://code.visualstudio.com/download), install, and start `Visual Studio Code` on your desktop.
 
 Linux, macOS, and Windows are supported. 
 
+<<<<<<< HEAD
 ## How do I install the STM32 VS Code Extension?
+=======
+## Install STM32 VS Code Extension
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The `STM32 VS Code Extension` is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=stmicroelectronics.stm32-vscode-extension).
 
@@ -57,7 +65,11 @@ Install the `STM32` extension:
 
 Visual Studio Code will install the extension. `STM32 VS Code Extension` is now available in the `Activity Bar`.
 
+<<<<<<< HEAD
 ### How do I install additional dependencies?
+=======
+### Install additional dependencies
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Additional software packages need to be downloaded from STM website. Click `Get Software` on each of the below, to download the appropriate installer for your host.
 
@@ -67,10 +79,18 @@ Additional software packages need to be downloaded from STM website. Click `Get 
 
 Run the installer(s) and follow on-screen instructions.
 
+<<<<<<< HEAD
 ### How do I install Git for version control functionality?
 
 You can download the latest version from [here](https://git-scm.com/).
 
 ### What about Keil Studio for VS Code?
+=======
+### Install Git for version control functionality
+
+You can download the latest version from [here](https://git-scm.com/).
+
+### Keil Studio for VS Code
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 [Keil Studio for VS Code](https://www.keil.arm.com/) is also available. Refer to the [Arm Keil Studio for VS Code install guide](/install-guides/keilstudio_vs/) for more information.

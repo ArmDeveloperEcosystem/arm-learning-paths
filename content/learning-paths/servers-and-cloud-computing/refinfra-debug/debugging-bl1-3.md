@@ -6,6 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
+<<<<<<< HEAD
 ## Debugging BL1
 Due to RSE CPU wait hold and the APs will be powered off. You will not be able to start the debugger until RSE has powered the AP cores.
 
@@ -33,6 +34,9 @@ func bl1_entrypoint
         _exception_vectors=bl1_exceptions   
 ```
 
+=======
+## Debugging BL1 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 In the **Edit configuration and launch** panel **Connection** tab, select the **ARM_Neoverse-N2_0**.
 
 ![select target alt-text#center](images/select_target.png "Figure 1. Select target")
@@ -53,6 +57,7 @@ If you would like to add platform-specific debug files, the memory locations are
 
 These commands load the symbol files and specify the memory address location, updating **workspace** to include the path to your own workspace directory.
 
+<<<<<<< HEAD
 The `EL` (Exception Level) and number at the end of each command, for example, `EL3:0`, ensure the symbols are loaded into the correct virtual address space and at the correct memory offset. ATF uses absolute addresses for its symbols so you can use an offset of 0.
 
 When you connect the debugger, the primary CPU will be "spinning" on a ``b .`` instruction from the one you manually added to the ``bl1_entrypoint`` function.
@@ -81,3 +86,20 @@ Example command:
 ```bash
 ./boot.sh -p rdv3r1cfg1 -a "--break RD_V3_R1_Cfg1.socket0.css0.lcp_app_group00.app0.cluster.cpu0=0@0x0"
 ```
+=======
+The `EL` (Exception Level) and number at the end of each command, for example, `EL3:0`, ensure the symbols are loaded into the correct virtual address space and at the correct memory offset. ATF uses absolute addresses for its symbols so we use an offset of 0.
+
+After connecting to the running model, check that it has stopped. Set a breakpoint on the next instruction of
+the TF-A and press **run**. In this debug panel, you can find common debugging functions like stepping and skipping.
+
+![debug options alt-text#center](images/debug_options.png "Figure 3. Debug options")
+
+Observe the SCP console output. After the SCP deasserts, reset for the Neoverse N2 Core 0, it stops on the breakpoint.
+
+
+![scp terminal alt-text#center](images/scp_terminal.png "Figure 4. SCP terminal")
+
+Finally, set a breakpoint in the function you would like to debug. In this example, we set a breakpoint at ``bl1_main()``and continue. 
+
+![bl1 breakpoint alt-text#center](images/bl1_breakpoint.png "Figure 5. BL1 breakpoint")
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

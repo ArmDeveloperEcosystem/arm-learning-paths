@@ -23,6 +23,7 @@ layout: learningpathall
 
    ![Successful conversion](./output_conversion.png)
 
+<<<<<<< HEAD
 1. The vcpkg configuration file is automatically activated. You notice a couple of "Arm Tools" available in the
    **Status Bar** at the bottom:
 
@@ -34,6 +35,19 @@ layout: learningpathall
    ![CMSIS build](./cmsis-build.png)
 
 3. The `cbuild` task starts. A successful project build will end with:
+=======
+1. The vcpkg configuration file is automatically activated. You notice an active "Environment" configuration in the **Status Bar** at the bottom:
+
+   ![vcpkg activated](./vcpkg-activated.png)
+
+1. Click on the **CMSIS** icon in the **Activity Bar**. The **Primary Side Bar** changes and shows the **CONTEXT**, **SOLUTION**, and **ACTIONS** for the project.
+
+1. In the **ACTIONS** section, click on **Build**:
+
+   ![CMSIS build](./cmsis-build.png)
+
+1. The `cbuild` task starts. A successful project build will end with:
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
    ```output
    Program size: Code=... RO-data=... RW-data=... ZI-data=...

@@ -23,9 +23,13 @@ subjects: Web
 armips:
     - Neoverse
 tools_software_languages:
+<<<<<<< HEAD
     - Envoy  
     - Runbook
   
+=======
+    - Envoy    
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
 

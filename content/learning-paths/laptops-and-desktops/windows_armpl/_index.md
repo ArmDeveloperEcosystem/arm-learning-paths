@@ -23,7 +23,10 @@ tools_software_languages:
     - Visual Studio
     - C#
     - .NET
+<<<<<<< HEAD
     - Arm Performance Libraries
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Windows
 

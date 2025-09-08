@@ -40,7 +40,11 @@ If you are using a cloud service like AWS RDS, then the installation of PostgreS
 
 ## What is the best way of configuring the PostgreSQL Server?
 
+<<<<<<< HEAD
 Getting PostgreSQL up and running is easy. This is because the default out of box configuration will work. However, this default configuration is most likely under optimized. A graph of the performance difference between an out of box PostgreSQL database and a tuned database is shown in the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/tuning) learning path. For the purpose of learning, it's ok to start with the default configuration. Once you have that working, you should read the [PostgreSQL server configuration documentation](https://www.postgresql.org/docs/current/index.html) , and follow the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/) learning path.
+=======
+Getting PostgreSQL up and running is easy. This is because the default out of box configuration will work. However, this default configuration is most likely under optimized. A graph of the performance difference between an out of box PostgreSQL database and a tuned database is shown in the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/tuning) learning path. For the purpose of learning, it’s ok to start with the default configuration. Once you have that working, you should read the [PostgreSQL server configuration documentation](https://www.postgresql.org/docs/current/index.html) , and follow the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/) learning path.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ## How do I get the PostgreSQL Build Configuration?
 

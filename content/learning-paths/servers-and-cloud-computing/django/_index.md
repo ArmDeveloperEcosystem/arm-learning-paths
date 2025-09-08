@@ -26,7 +26,11 @@ armips:
 tools_software_languages:
     - Django
     - Python
+<<<<<<< HEAD
     - NGINX
+=======
+    - Nginx
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - PostgreSQL
 operatingsystems:
     - Linux

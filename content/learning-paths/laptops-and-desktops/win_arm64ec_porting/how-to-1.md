@@ -8,7 +8,11 @@ layout: "learningpathall"
 ---
 
 ## Introduction
+<<<<<<< HEAD
 Arm64EC is a Windows 11 Application Binary Interface (ABI) that helps you transition existing x64 apps to Arm64. It enables your existing x64 dependencies to load in the same process as the Arm64 binaries, resolving the bottleneck of porting dependencies. This approach improves your app's performance without changing any code.
+=======
+Arm64EC is a Windows 11 Application Binary Interface (ABI) that helps you transition existing x64 apps to Arm64. It enables your existing x64 dependencies to load in the same process as the Arm64 binaries, resolving the bottleneck of porting dependencies. This approach improves your app’s performance without changing any code.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Using Arm64EC helps migrate large and complex applications with their own ecosystem. The app vendor may not know about the dependencies the app customer requires. For example, professionals may use plugins from many independent vendors in an image processing application. When that image processing application is compatible with Arm64EC, the users can use all the plugins, irrespective of whether the makers have ported them to Arm64. Arm64EC enables shipping applications that link legacy binary dependencies, even if they have missing source code or an unsupported toolchain.
 

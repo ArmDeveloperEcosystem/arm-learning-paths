@@ -23,7 +23,11 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
+<<<<<<< HEAD
 ## How do I install Chrome?
+=======
+## Installing Chrome
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The Chrome browser runs on Windows on Arm as a native ARM64 application. Chrome is not available for Arm Linux. 
 

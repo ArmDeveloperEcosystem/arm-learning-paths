@@ -15,7 +15,11 @@ Julie Gaskin,Arm,,,,
 Pranay Bakre,Arm,,,,
 Elham Harirpoush,Arm,,,,
 Frédéric -lefred- Descamps,OCI,,,,lefred.be
+<<<<<<< HEAD
 Fr�d�ric -lefred- Descamps,OCI,,,,lefred.be
+=======
+Fr�d�ric -lefred- Descamps,OCI,,,,lefred.be
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 Kristof Beyls,Arm,,,,
 David Spickett,Arm,,,,
 Uma Ramalingam,Arm,uma-ramalingam,,,
@@ -47,7 +51,11 @@ Alaaeddine Chakroun,Day Devs,Alaaeddine-Chakroun,alaaeddine-chakroun,,https://da
 Koki Mitsunami,Arm,,kmitsunami,,
 Chen Zhang,Zilliz,,,,
 Tianyu Li,Arm,,,,
+<<<<<<< HEAD
 Georgios Mermigkis,VectorCamp,gMerm,georgios-mermigkis,,https://vectorcamp.gr/
+=======
+Georgios Mermigkis,VectorCamp,gMerm,georgios-mermigkis,,https://vectorcamp.gr/ 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 Ben Clark,Arm,,,,
 Han Yin,Arm,hanyin-arm,nacosiren,,
 Willen Yang,Arm,,,,
@@ -63,7 +71,11 @@ Albin Bernhardsson,,,,,
 Przemyslaw Wirkus,,,,,
 Zach Lasiuk,,,,,
 Daniel Nguyen,,,,,
+<<<<<<< HEAD
 Joe Stech,Arm,JoeStech,joestech,,
+=======
+Joe Stech,Arm,,,,
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 visualSilicon,,,,,
 Konstantinos Margaritis,VectorCamp,,,,
 Kieran Hejmadi,,,,,
@@ -78,6 +90,7 @@ Masoud Koleini,,,,,
 Na Li,Arm,,,,
 Tom Pilar,,,,,
 Cyril Rohr,,,,,
+<<<<<<< HEAD
 Odin Shen,Arm,odincodeshen,odin-shen-lmshen,,
 Avin Zarlez,Arm,AvinZarlez,avinzarlez,,https://www.avinzarlez.com/
 Shuheng Deng,Arm,,,,
@@ -102,3 +115,6 @@ Ker Liu,,,,,
 Rui Chang,,,,,
 Alejandro Martinez Vicente,Arm,,,,
 Mohamad Najem,Arm,,,,
+=======
+Odin Shen,Arm,,,,
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

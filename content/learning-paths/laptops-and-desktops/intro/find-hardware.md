@@ -10,6 +10,7 @@ Desktops and laptops, based on the Arm architecture, are available with differen
 
 ### Windows
 
+<<<<<<< HEAD
 [Windows on Arm](https://learn.microsoft.com/en-us/windows/arm/overview) laptops are available for software development from a variety of vendors. 
 
 
@@ -20,6 +21,19 @@ Chromebooks with Arm processors can also be used for software development.
 If you are looking high performance, the [Lenovo Chromebook Plus 14](https://www.bestbuy.com/site/lenovo-chromebook-plus-14-oled-2k-touchscreen-laptop-mediatek-kompanio-ultra-16gb-memory-256gb-ufs-seashell/6630493.p?skuId=6630493&intl=nosplash) is is powered by the MediaTek Kompanio Ultra processor, the fastest Arm chip in a Chromebook.
 
 The Lenovo [Duet Gen 9](https://www.lenovo.com/us/en/p/laptops/lenovo/lenovo-edu-chromebooks/lenovo-chromebook-duet-gen-9-11-inch-mediatek/83hh0000us) is a popular detachable Chromebook. 
+=======
+Windows on Arm laptops are available for software development. Some examples include:
+
+- [Lenovo ThinkPad X13s](https://www.lenovo.com/us/en/p/laptops/thinkpad/thinkpadx/thinkpad-x13s-(13-inch-snapdragon)/len101t0019)
+- [Surface Pro 9 with 5G](https://www.microsoft.com/en-us/d/surface-pro-9/93vkd8np4fvk)
+- [Dell Inspiron 14](https://www.dell.com/en-us/shop/dell-laptops/inspiron-14-laptop/spd/inspiron-14-3420-laptop)
+
+There are many other Windows on Arm laptops available.
+
+### ChromeOS
+
+Chromebooks with Arm processors can also be used for software development. The Lenovo [Duet Gen 9](https://www.lenovo.com/us/en/p/laptops/lenovo/lenovo-edu-chromebooks/lenovo-chromebook-duet-gen-9-11-inch-mediatek/83hh0000us) is a popular detachable Chromebook. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ### Linux
 

@@ -24,6 +24,10 @@ skilllevels: Advanced
 subjects: ML
 armips:
     - Cortex-A
+<<<<<<< HEAD
+=======
+    - Cortex-X
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 tools_software_languages:
     - Java
     - MediaPipe
@@ -31,8 +35,11 @@ tools_software_languages:
     - Android NDK
     - Bazel
     - XNNPACK
+<<<<<<< HEAD
     - Hugging Face
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
 

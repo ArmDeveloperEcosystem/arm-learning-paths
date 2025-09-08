@@ -19,6 +19,11 @@ author:
     - Nikhil Gupta
     - Pareena Verma
     - Nobel Chowdary Mandepudi
+<<<<<<< HEAD
+=======
+    - Ravi Malhotra
+    - Konstantinos Margaritis
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ### Tags
 skilllevels: Introductory
@@ -29,10 +34,17 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - LLM
+<<<<<<< HEAD
     - Generative AI
     - Python
     - PyTorch
     - Hugging Face
+=======
+    - GenAI
+    - Python
+    - PyTorch
+
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

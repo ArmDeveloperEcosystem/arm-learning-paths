@@ -13,7 +13,11 @@ You will now implement the AWS Lambda function to scan the records from the Dyna
 Go the AWS Lambda console. Then, create the function as shown below:
 1. Click the *Create function* button:
 
+<<<<<<< HEAD
 ![fig1](figures/01.png)
+=======
+![fig1](Figures/01.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 2. This opens a *Create function* wizard, in which you:
 * Select **Author from scratch**.
@@ -23,19 +27,31 @@ Go the AWS Lambda console. Then, create the function as shown below:
 
 At this point your wizard should look as per the image below:
 
+<<<<<<< HEAD
 ![fig2](figures/02.png)
+=======
+![fig2](Figures/02.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Next, in the *Create function* wizard expand *Change default execution role*, and proceed as follows:
 1. Select **Create a new role from AWS policy templates**.
 2. Type **role-lambda-to-dynamodb** under the Role name.
 3. Under *Policy templates - optional* select **Simple microservice permissions**.
 
+<<<<<<< HEAD
 ![fig3](figures/03.png)
+=======
+![fig3](Figures/03.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 This ensures that your AWS Lambda function has all the necessary permissions to access the items in the DynamoDB table.
 
 Finally, scroll down and click the **Create function** button. This will take you to the GetAverageTemperature function dashboard: 
 
+<<<<<<< HEAD
 ![fig4](figures/04.png)
+=======
+![fig4](Figures/04.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 In the next step, you will use this dashboard to modify the function code.

@@ -32,7 +32,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [Visual Studio 2022 17.4](https://learn.microsoft.com/en-us/visualstudio/install/visual-studio-on-arm-devices) (and higher) natively supports Windows on Arm.
 
+<<<<<<< HEAD
 ## How do I download and install Visual Studio for Windows on Arm?
+=======
+## Download and Install
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 [Download the Visual Studio Installer](https://visualstudio.microsoft.com/vs/) to get started.
 
@@ -44,12 +48,20 @@ Choose the appropriate version for your usage.
 
 Once downloaded, run the `VisualStudioSetup.exe` file on a Windows on Arm machine. This is the installer.
 
+<<<<<<< HEAD
 ## How do I install C and C++ support in Visual Studio?
+=======
+# Install C and C++ support in Visual Studio
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 During the installation process, you will be asked to choose the workloads you want and customize your installation. At a minimum, select `Desktop development with C++`.
 
 ![img1 #center](/install-guides/_images/vs-woa.png)
 
+<<<<<<< HEAD
 ## How do I install LLVM support in Visual Studio? {#install-llvm-support-in-visual-studio}
+=======
+# Install LLVM support in Visual Studio
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To build native Windows Applications using the LLVM toolchain in Visual Studio, you need to install additional components.
 
@@ -69,7 +81,11 @@ LLVM supports `clang-cl`, a compatibility layer for Microsoft Visual C++ (MSVC).
 
 You can now proceed with `Install`. The installation process can take several minutes to complete. A reboot of your machine is required before you launch Visual Studio.
 
+<<<<<<< HEAD
 ## How do I modify my Visual Studio installation?
+=======
+## Modify your installation
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 The workload and individual component selection can also be made at any time after you complete the installation of Visual Studio. To modify your installation, run `VisualStudioSetup.exe`, select `Continue` to accept the installation conditions and then choose `Modify`.
 
 You can choose additional workloads and individual components to further customize your installation.

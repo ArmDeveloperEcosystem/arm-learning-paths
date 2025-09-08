@@ -15,7 +15,11 @@ In this learning path, you will learn how to create a desktop application for Wi
 Before you begin, install the following:
 1. CMake for Arm64 [link](https://github.com/Kitware/CMake/releases/download/v3.28.1/cmake-3.28.1-windows-arm64.msi). During an installation check **Add CMake to the system PATH for the current user** as shown below
 
+<<<<<<< HEAD
 ![fig1](figures/01.png)
+=======
+![fig1](Figures/01.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 2. Visual Studio 2022 with Desktop development with C++ workload
 
@@ -103,7 +107,11 @@ Let's run the `cefsimple` application. The binaries can be found under the `buil
 
 By default, the application renders the Google homepage:
 
+<<<<<<< HEAD
 ![fig2](figures/02.png)
+=======
+![fig2](Figures/02.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ## Modify the application
 You will now modify the `cefsimple` application to render a custom page. This page will fetch data from `JSONPlaceholder` and display it in a table.
@@ -221,7 +229,11 @@ You will now create a custom index.html file to fetch the data from the JSONPlac
 
 Re-run the application and you will see the following:
 
+<<<<<<< HEAD
 ![fig3](figures/03.png)
+=======
+![fig3](Figures/03.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 This example demonstrates the versatility and power of CEF applications. One of their key strengths is the ability to modify the rendered content dynamically. This means you can change what's displayed in the application, like updating the HTML or CSS, without having to rebuild the entire application each time. This feature significantly streamlines the development process, making it quicker and more efficient.
 
@@ -296,7 +308,11 @@ button:hover {
 
 After re-running the application you will see the following:
 
+<<<<<<< HEAD
 ![fig4](figures/04.png)
+=======
+![fig4](Figures/04.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ## Summary
 CEF is a powerful tool for integrating web browser functionalities into desktop applications, utilizing modern web technologies. You have learned how to setup a project, create a basic application, and use CMake for CEF projects. Additionally, you have explored more advanced features like fetching and displaying data from JSONPlaceholder, adding and styling HTML elements like tables and buttons through separate CSS files all on your Windows on Arm machine.

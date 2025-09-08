@@ -23,7 +23,12 @@ armips:
 operatingsystems:
     - RTOS
 tools_software_languages:
+<<<<<<< HEAD
     - Keil RTX RTOS
+=======
+    - Coding
+    - RTX
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Keil MDK
     - Arm Development Studio
 

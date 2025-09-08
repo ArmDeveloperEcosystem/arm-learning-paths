@@ -30,19 +30,19 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 [Arm Keil MDK](https://developer.arm.com/Tools%20and%20Software/Keil%20MDK) is the complete software development environment for a range of Arm Cortex-M based microcontroller devices. MDK includes the µVision IDE and debugger, Arm C/C++ compiler, and essential middleware components. It supports more than 10,000 devices and is easy to learn and use.
 
-## What do I need before installing Arm Keil MDK?
+## Before you begin
 
 You will need a 64-bit x86 Microsoft Windows machine to run Keil MDK.
 
 Full host platform requirements are given in the [System Requirements](https://developer.arm.com/Tools%20and%20Software/Keil%20MDK#Editions) section.
 
-## How do I download Arm Keil MDK?
+## Download installer packages
 
 You can download the installer from the [Product Download Hub](https://developer.arm.com/downloads/view/MDK000).
 
 Follow the installation instructions provided in the [µVision User's Guide](https://developer.arm.com/documentation/101407/latest/About-uVision/Installation).
 
-## How do I set up a license for Arm Keil MDK?
+## Setting up a license
 
 Arm Keil MDK is license managed. Follow the [license setup instructions](https://developer.arm.com/documentation/101454/latest/License-Management).
 
@@ -50,7 +50,7 @@ The MDK-Community license is free for non-commercial use. Visit [Arm Keil MDK-Co
 
 A free 30 day evaluation license for MDK-Professional is also available by completing the [request form](https://www.keil.com/MDKEvaluationRequest/).
 
-## How do I get started with Arm Keil MDK? {#start}
+## Get started {#start}
 
 To verify everything is installed correctly and to get started with your first project, use an [example project](https://developer.arm.com/documentation/101407/latest/Example-Programs).
 

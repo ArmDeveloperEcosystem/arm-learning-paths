@@ -1,5 +1,9 @@
 ---
+<<<<<<< HEAD
 title: Get started with Arm Performance Studio
+=======
+title: Get started with Arm Performance Studio for mobile
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 description: Learn how to use each of the tools supplied with Arm Performance Studio (formerly known as Arm Mobile Studio).
 
@@ -12,6 +16,7 @@ learning_objectives:
     - Get started profiling and optimizing your application.
 
 prerequisites:
+<<<<<<< HEAD
     - An Android device.
     - Arm Performance Studio supports applications built with OpenGL ES versions 2.0 to 3.2, or Vulkan versions 1.0 to 1.2.
     - For OpenGL ES applications, your device must be running Android 10 or later.
@@ -19,6 +24,13 @@ prerequisites:
     - A debuggable build of your application. 
     - Arm Performance Studio installed. Follow the [Arm Performance Studio install guide](/install-guides/ams) for instructions.
     - Android SDK Platform tools installed. Required for the Android Debug bridge (adb).
+=======
+    - An appropriate Android device. These [devices](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices) have been tested internally within Arm, and confirmed to work with Arm Performance Studio.
+    - Arm Performance Studio supports applications built with OpenGL ES versions 2.0 to 3.2, or Vulkan versions 1.0 to 1.2. For OpenGL ES applications, your device must be running Android 10 or later. For Vulkan applications, your device must be running Android 9 or later.
+    - A debuggable build of your application. 
+    - Download and install Arm Performance Studio from [Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0). It is supported on Windows, Linux, and macOS host platforms.
+    - Download and install [Android SDK Platform tools](https://developer.android.com/studio/releases/platform-tools.html). Required for [Android Debug bridge (adb)](https://developer.android.com/studio/command-line/adb).
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 author: Ronan Synnott
 
@@ -34,6 +46,10 @@ operatingsystems:
 tools_software_languages:
     - Arm Performance Studio
     - Arm Mobile Studio
+<<<<<<< HEAD
+=======
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:
@@ -45,9 +61,15 @@ further_reading:
         link: https://developer.arm.com/documentation/102478
         type: documentation
     - resource:
+<<<<<<< HEAD
         title: Frame Advisor video tutorial
         link: https://developer.arm.com/Additional%20Resources/Video%20Tutorials/Capture%20and%20analyze%20a%20problem%20frame%20with%20Frame%20Advisor
         type: video
+=======
+        title: Graphics Analyzer video tutorial
+        link: https://www.youtube.com/watch?v=6j68rtcTYRc
+        type: website
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - resource:
         title: Get started with Mali Offline Compiler Tutorial
         link: https://developer.arm.com/documentation/102468
@@ -72,10 +94,13 @@ further_reading:
         title: Integrate Arm Performance Studio into a CI workflow
         link: https://developer.arm.com/documentation/102543
         type: documentation
+<<<<<<< HEAD
     - resource:
         title: RenderDoc Reference Guide
         link: https://renderdoc.org/docs/index.html
         type: documentation
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 
 ### FIXED, DO NOT MODIFY

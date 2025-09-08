@@ -228,9 +228,15 @@ This optimization showcases the benefits of quantization and layer fusion for mo
 
 This would allow the model to take full advantage of the device's computational capabilities, potentially further reducing the inference time.
 
+<<<<<<< HEAD
 ![fig alt-text#center](figures/07.jpg "Figure 9.")
 
 ![fig alt-text#center](figures/08.jpg "Figure 10.")
+=======
+![fig alt-text#center](Figures/07.jpg "Figure 9.")
+
+![fig alt-text#center](Figures/08.jpg "Figure 10.")
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ### What have you learned?
 

@@ -18,6 +18,11 @@ test_images:
 - fedora:latest
 test_link: null
 test_maintenance: true
+<<<<<<< HEAD
+=======
+test_status:
+- passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 title: GFortran
 tool_install: true
 weight: 1
@@ -25,7 +30,15 @@ weight: 1
 
 [GNU Fortran](https://gcc.gnu.org/fortran/) is the Fortran compiler front end and run-time libraries for GCC, the GNU Compiler Collection.
 
+<<<<<<< HEAD
 ## How do I prepare to install and use gfortran on an Arm Linux distribution?
+=======
+GFortran is available on all Linux distributions and can be installed using the package manager.
+
+## Before you begin
+
+Follow the instructions below to install and use `gfortran` on an Arm Linux distribution.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Confirm you are using an Arm machine by running:
 
@@ -41,11 +54,21 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
+<<<<<<< HEAD
 ## How do I download gfortran using the Linux package manager?
 
 The Linux package manager downloads the required files so there are no special instructions.
 
 ### How do I install gfortran on Debian-based distributions such as Ubuntu?
+=======
+## Download 
+
+The Linux package manager downloads the required files so there are no special instructions.
+
+## Installation {#install}
+
+### Installing on Debian based distributions such as Ubuntu
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Use the `apt` command to install software packages on any Debian based Linux distribution, including Ubuntu.
 
@@ -54,9 +77,15 @@ sudo apt update
 sudo apt install gfortran -y
 ```
 
+<<<<<<< HEAD
 ### How do I install gfortran on Red Hat, Fedora, or Amazon Linux?
 
 These Linux distributions use `yum` as the package manager.
+=======
+### Installing on Red Hat / Fedora / Amazon Linux
+
+These Linux distributions use `yum` as the package manager. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To install the most common development tools use the commands below. If the machine has `sudo` you can use it.
 
@@ -72,11 +101,20 @@ sudo yum update -y
 sudo yum install gcc-gfortran -y
 ```
 
+<<<<<<< HEAD
 ## Do I need to set up a product license for gfortran?
 
 Arm GNU Toolchain is open source and freely available for use. No licenses need to be set up for use.
 
 ## How do I verify the gfortran installation and get started?
+=======
+
+## Setting up product license {#license}
+
+Arm GNU Toolchain is open source and freely available for use. No licenses need to be set up for use.
+
+## Get started {#start}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To confirm the installation is complete run:
 

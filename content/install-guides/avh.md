@@ -34,7 +34,11 @@ There are currently two families of Arm Virtual Hardware. Click the link, or scr
 - [Arm Virtual Hardware Corstone](#corstone) uses Arm Fast Model technology to create virtual platforms in a cloud instance.
 - [Arm Virtual Hardware 3rd Party](#thirdparty) uses hypervisor technology to model real hardware provided by Arm's partners.
 
+<<<<<<< HEAD
 ## How do I use Arm Virtual Hardware Corstone? {#corstone}
+=======
+## Arm Virtual Hardware Corstone {#corstone}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 A valid [AWS account](https://aws.amazon.com/) is necessary. 
 
@@ -44,22 +48,34 @@ A `c5.large` instance type is recommended for AVH.
 
 Information about launching an AWS instance is available in the [Getting Started with AWS](/learning-paths/servers-and-cloud-computing/csp/aws/) install guide.
 
+<<<<<<< HEAD
 ### How do I connect to the instance terminal via SSH?
+=======
+### Connect to instance terminal via SSH
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 On your local machine, run the following command to connect to the instance (with user name `ubuntu`) with SSH Key `your_key.pem`.
 ```console
 ssh  -i <path_to>/your_key.pem ubuntu@<AMI_IP_address>
 ```
+<<<<<<< HEAD
 
 ### How do I verify the instance has launched successfully?
+=======
+### Verify instance has launched successfully
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 In your SSH terminal, run the `tool-inventory.sh` script to verify the instance has launched successfully, and component tools are available for use.
 ```console
 ./tool-inventory.sh
 ```
+<<<<<<< HEAD
 
 ### How do I enable Code Server (Visual Studio Code)? {#vscode}
 
+=======
+### Enable Code Server (Visual Studio Code)  {#vscode}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 To enabling access to Visual Studio Code with a web browser, you will need to start a SSH tunnel to the instance and forward port `8080`.
 
 ```console
@@ -69,8 +85,12 @@ You can then access the IDE via a web browser on your local machine at:
 ```console
 http://localhost:8080
 ```
+<<<<<<< HEAD
 
 ### How do I enable Virtual Network Computing (VNC)? {#vnc}
+=======
+### Enable Virtual Network Computing (VNC) {#vnc}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 In the AVH terminal, enable and set VNC password (you do not need to enter a view-only password when prompted):
 
@@ -92,6 +112,7 @@ ssh -I <key.pem> -N –L 5901:localhost:5901 ubuntu@<AMI_IP_addr>
 
 Connect your VNC client to port `5901`. You will be prompted for the VNC password.
 
+<<<<<<< HEAD
 ### Where can I find example projects?
 
 A number of [example](https://arm-software.github.io/AVH/main/examples/html/index.html) projects are available to further help you get started.
@@ -99,6 +120,15 @@ A number of [example](https://arm-software.github.io/AVH/main/examples/html/inde
 ### How do I use FVP_Corstone-1000?
 
 When using the supplied `FVP_Corstone-1000`, you must disable the Cryptocell component therein, else you will see a licensing error.
+=======
+### Example projects
+
+A number of [example](https://arm-software.github.io/AVH/main/examples/html/index.html) projects are available to further help you get started.
+
+### Use of FVP_Corstone-1000
+
+When using the supplied `FVP_Corstone-1000`,  you must disable the Cryptocell component therein, else you will see a licensing error.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To do this, add the parameter `se.cryptocell.DISABLE_DEVICE=1` to your launch command:
 
@@ -106,7 +136,11 @@ To do this, add the parameter `se.cryptocell.DISABLE_DEVICE=1` to your launch co
 FVP_Corstone-1000 -C se.cryptocell.DISABLE_DEVICE=1  ...
 ```
 
+<<<<<<< HEAD
 ## How do I use Arm Virtual Hardware 3rd Party targets? {#thirdparty}
+=======
+## Arm Virtual Hardware 3rd Party {#thirdparty}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 A valid [Arm AVH account](https://www.arm.com/resources/contact-us/virtual-hardware-boards) is required.
 

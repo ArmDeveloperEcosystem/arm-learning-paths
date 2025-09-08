@@ -1,6 +1,10 @@
 ---
 # User change
+<<<<<<< HEAD
 title: "Install MongoDB on Arm"
+=======
+title: "Run MongoDB on Arm"
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 weight: 2 # 1 is first, 2 is second, etc.
 

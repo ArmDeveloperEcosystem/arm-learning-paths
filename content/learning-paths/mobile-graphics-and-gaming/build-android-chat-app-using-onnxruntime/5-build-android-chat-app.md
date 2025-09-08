@@ -16,11 +16,19 @@ You can use the Android demo application included in the [onnxruntime-inference-
 ``` bash
 git clone https://github.com/microsoft/onnxruntime-inference-examples
 cd onnxruntime-inference-examples
+<<<<<<< HEAD
 git checkout 7a635daae48450ff142e5c0848a564b245f04112
 ```
 
 {{% notice Note %}}
 You could probably use a later commit but these steps have been tested with the commit `7a635daae48450ff142e5c0848a564b245f04112`.
+=======
+git checkout 009920df0136d7dfa53944d06af01002fb63e2f5
+```
+
+{{% notice Note %}}
+You could probably use a later commit but these steps have been tested with the commit `009920df0136d7dfa53944d06af01002fb63e2f5`.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 {{% /notice %}}
 
 ### Build the app using Android Studio
@@ -29,11 +37,18 @@ Open the `mobile\examples\phi-3\android` directory with Android Studio.
 
 #### (Optional) In case you want to use the ONNX Runtime AAR you built
 
+<<<<<<< HEAD
 Copy ONNX Runtime AAR and ONNX Runtime GenAI AAR you built earlier in this learning path:
 
 ```bash
 Copy onnxruntime\build\Windows\Release\java\build\android\outputs\aar\onnxruntime-release.aar onnxruntime-inference-examples\mobile\examples\phi-3\android\app\libs\
 Copy onnxruntime-genai\build\Android\Release\src\java\build\android\outputs\aar\onnxruntime-genai-release.aar onnxruntime-inference-examples\mobile\examples\phi-3\android\app\libs\
+=======
+Copy ONNX Runtime AAR you built earlier in this learning path:
+
+```bash
+Copy onnxruntime\build\Windows\Release\java\build\android\outputs\aar\onnxruntime-release.aar mobile\examples\phi-3\android\app\libs
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Update `build.gradle.kts (:app)` as below:
@@ -42,8 +57,11 @@ Update `build.gradle.kts (:app)` as below:
 // ONNX Runtime with GenAI
 //implementation("com.microsoft.onnxruntime:onnxruntime-android:latest.release")
 implementation(files("libs/onnxruntime-release.aar"))
+<<<<<<< HEAD
 //implementation(files("libs/onnxruntime-genai-android-0.8.1.aar"))
 implementation(files("libs/onnxruntime-genai-release.aar"))
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Finally, click **File > Sync Project with Gradle**

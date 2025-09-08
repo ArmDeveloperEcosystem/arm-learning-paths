@@ -23,7 +23,12 @@ weight: 1
 
 A safety qualified branch of Arm Compiler for Embedded, known as [Arm Compiler for Embedded FuSa](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded%20FuSa), is available for safety critical applications.
 
+<<<<<<< HEAD
 ## How can I access Arm Compiler for Embedded from Arm Development Studio?
+=======
+
+## Use the version contained in Arm Development Studio or Keil MDK
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The easiest way to access the Arm Compiler for Embedded is to use the version provided with [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
 
@@ -35,11 +40,19 @@ Alternative versions can be [downloaded separately](#download).
 
 Arm Compiler for Embedded FuSa must also be [downloaded separately](#download).
 
+<<<<<<< HEAD
 ## How do I download standalone compiler packages? {#download}
 
 Individual compiler packages for all supported host platforms can be downloaded from the [Arm Product Download Hub](#pdh) or the [Arm Tools Artifactory](#artifactory).
 
 ### How do I download Arm Compiler for Embedded from the Product Download Hub? {#pdh}
+=======
+## Standalone compiler packages {#download}
+
+Individual compiler packages for all supported host platforms can be downloaded from the [Arm Product Download Hub](#pdh) or the [Arm Tools Artifactory](#artifactory).
+
+### Product Download Hub {#pdh}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 All compiler packages can be downloaded from the [Arm Product Download Hub](https://developer.arm.com/downloads) (requires login).
 
@@ -51,7 +64,11 @@ See also: [What should I do if I want to download a legacy release of Arm Compil
 
 See [Arm Product Download Hub](../pdh) for additional information on usage.
 
+<<<<<<< HEAD
 ### How do I install compiler packages?
+=======
+### Install compiler packages
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To install on Windows, unzip the downloaded package, launch the installer, and follow on-screen prompts.
 ```console
@@ -87,7 +104,11 @@ set path=(/home/$USER/ArmCompilerforEmbedded6.22/bin $path)
 armclang --version
 ```
 
+<<<<<<< HEAD
 ### How do I download Arm Compiler for Embedded from the Arm Tools Artifactory? {#artifactory}
+=======
+### Arm Tools Artifactory {#artifactory}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The Arm Compiler for Embedded, as well as other tools and utilities are available in the [Arm Tools Artifactory](https://www.keil.arm.com/artifacts/). The Keil Studio VS Code [Extensions](../keilstudio_vs) use the artifactory to fetch and install and the necessary components.
 
@@ -107,13 +128,21 @@ export PATH=/home/$USER/ArmCompilerforEmbedded6.22/bin:$PATH
 export AC6_TOOLCHAIN_6_22_0=/home/$USER/ArmCompilerforEmbedded6.22/bin
 ```
 
+<<<<<<< HEAD
 ## How do I set up the product license?
+=======
+## Set up the product license
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 `Arm Compiler for Embedded` and `Arm Compiler for Embedded FuSa` are license managed.
 
 License setup instructions are available in the [Arm Licensing install guide](/install-guides/license/).
 
+<<<<<<< HEAD
 ## How do I verify my installation?
+=======
+## Verify installation
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To verify everything works, compile a simple `Hello World` example.
 
@@ -138,7 +167,11 @@ If the the command completes with no errors, the compiler is working.
 
 More information about the example is available in the [Arm Compiler for Embedded User Guide](https://developer.arm.com/documentation/100748/latest/Getting-Started/Compiling-a-Hello-World-example).
 
+<<<<<<< HEAD
 ## How do I integrate with Arm Development Studio? {#armds}
+=======
+## Integrate with Arm Development Studio {#armds}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To integrate this compiler with Arm Development Studio, [register](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain) the installation and [configure](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain/Configure-a-compiler-toolchain-for-the-Arm-DS-command-prompt) the environment to use that version.
 

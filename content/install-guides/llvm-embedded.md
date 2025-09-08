@@ -31,7 +31,11 @@ The [LLVM Embedded Toolchain for Arm](https://github.com/ARM-software/LLVM-embed
 
 [Pre-built binaries](https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases) are available for Windows (x86_64), macOS (x86_64 and Apple Silicon), and Linux (x86_64 and AArch64) hosts. 
 
+<<<<<<< HEAD
 ## How do I install the LLVM Embedded Toolchain for Arm on Windows? {#windows}
+=======
+## Windows {#windows}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Copy and paste the URL below into your browser to download the latest release from GitHub:
 
@@ -45,7 +49,11 @@ Open Windows `Control Panel` and add the LLVM `bin` directory to the `Path`.
 
 Open a `Command Prompt` and [test your installation](#test).
 
+<<<<<<< HEAD
 ## How do I install the LLVM Embedded Toolchain for Arm on macOS? {#macos}
+=======
+## macOS {#macos}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Copy and paste the URL below into your browser to download the latest release from GitHub:
 
@@ -70,7 +78,11 @@ find . -type f -perm +0111 | xargs xattr -d com.apple.quarantine
 
 You can now [test your installation](#test).
 
+<<<<<<< HEAD
 ## How do I install the LLVM Embedded Toolchain for Arm on Linux? {#linux}
+=======
+## Linux {#linux}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The information below assumes `Ubuntu Linux` on an `AArch64` host. Modify the filenames and paths as needed for other hosts.
 
@@ -92,11 +104,19 @@ Add the LLVM `bin` directory to your `PATH`:
 export PATH=$HOME/LLVM-ET-Arm-18.1.3-Linux-AArch64/bin:$PATH
 ```
 
+<<<<<<< HEAD
 ## How do I test the LLVM Embedded Toolchain installation? {#test}
 
 You can now test your installation.
 
 ### How do I verify the clang installation?
+=======
+You can now [test your installation](#test).
+
+## Test installation {#test}
+
+### Verify the clang installation
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Use the `--version` option to verify the correct compiler is being invoked:
 
@@ -113,7 +133,11 @@ Thread model: posix
 InstalledDir: /home/ubuntu/LLVM-ET-Arm-18.1.3-Linux-AArch64/bin
 ```
 
+<<<<<<< HEAD
 ### How do I build a simple application with clang?
+=======
+### Build a simple application
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Use a text editor to create an example source file with the name `hello.c` and the code below:
 
@@ -141,7 +165,11 @@ To build for `Armv7-M`:
 clang --target=armv7m-none-eabi -fno-exceptions -fno-rtti -lcrt0-semihost -lsemihost -T picolibc.ld -o hello_v7m hello.c
 ```
 
+<<<<<<< HEAD
 ### How do I run the example applications?
+=======
+### Run the examples
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The applications can be run on [Fixed Virtual Platforms (FVP)](/install-guides/fm_fvp/fvp/). 
 

@@ -1,7 +1,11 @@
 ---
 title: Debug Neoverse N2 Reference Design with Arm Development Studio
 
+<<<<<<< HEAD
 minutes_to_complete: 30
+=======
+minutes_to_complete: 20
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 who_is_this_for: This is an advanced topic for software developers who are interested in debugging the Arm Neoverse N2 Reference Firmware Stack.
 
@@ -25,16 +29,28 @@ armips:
     - Neoverse
 tools_software_languages:
     - Arm Development Studio
+<<<<<<< HEAD
 
 operatingsystems:
     - Linux
 
+=======
+operatingsystems:
+    - Linux
+
+
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 further_reading:
     - resource:
         title: Neoverse Reference Design Platform Software Documentation
         link: https://neoverse-reference-design.docs.arm.com/en/latest/index.html
         type: documentation
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly

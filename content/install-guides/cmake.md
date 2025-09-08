@@ -32,11 +32,11 @@ It is available for a variety of operating systems and there are multiple ways t
 
 This article provides quick instructions to install CMake for Arm Linux distributions and for Windows on Arm.
 
-### How do I prepare to install CMake for Windows on Arm?
+### How do I download and install CMake for Windows on Arm?
 
 Confirm you are using a Windows on Arm device such as the Lenovo ThinkPad X13s or Surface Pro 9 with 5G.
 
-### How do I prepare to install CMake on Arm Linux distributions?
+### How do I download and install CMake for Arm Linux distributions?
 
 Confirm you are using an Arm computer with 64-bit Linux by running:
 
@@ -52,7 +52,7 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## How do I download and install CMake on Windows on Arm?
+## How do I download and install on Windows on Arm?
 
 Native CMake support for Windows on Arm is available starting with version 3.24. Installers are available now from the [CMake download](https://cmake.org/download/) page. Emulated CMake can be used but is no longer needed unless an older version of CMake must be used.
 
@@ -74,11 +74,11 @@ Wait for the installer to complete and click `Finish`:
 
 ![Install #center](/install-guides/_images/cmake-finish.png)
 
-## How do I download and install CMake on Linux?
+## How do I download and install on Linux?
 
 There are multiple ways to install CMake on Linux. 
 
-### How do I install CMake using the package manager?
+### Use the package manager
 
 Use `apt` on Ubuntu and Debian to install:
 
@@ -95,7 +95,7 @@ sudo dnf install cmake -y
 
 Depending on your Linux distribution you may have a version of `cmake` which is too old or too new for your project. 
 
-### How do I install the CMake Snap?
+### Use Snap
 
 Installing with `snap` provides the latest version of `cmake`:
 
@@ -105,7 +105,7 @@ sudo snap install cmake --classic
 
 With `snap` the `cmake` executable is installed in `/snap/bin` which should already be in your search path.
 
-### How do I use a specific CMake release from GitHub?
+### Use a specific release from GitHub
 
 If you need a specific version look for it in the [GitHub releases area](https://github.com/Kitware/CMake/releases)
 

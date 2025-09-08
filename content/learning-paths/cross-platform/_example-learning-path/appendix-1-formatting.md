@@ -83,6 +83,7 @@ Specify that line_numbers are true in the following way:
 \`\`\`bash { line_numbers = "true" } \
 echo 'hello world' \
 echo ‘I am line two’ \
+<<<<<<< HEAD
 \`\`\`
 
 ```bash { line_numbers = "true" }
@@ -103,6 +104,14 @@ echo ‘I am line two’ \
 echo ‘hello world’
 echo ‘I am line eleven’
 ```
+=======
+\`\`\` 
+
+```bash { line_numbers = "true" } 
+echo ‘hello world’ 
+echo ‘I am line two’ 
+``` 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ### Output Lines
 
@@ -114,7 +123,11 @@ There are three ways you can specify command outputs in code:
 {{% notice Note %}}
 In each of the three situations, code marked as 'output' will:
 - not be copied when clicking the 'copy' button
+<<<<<<< HEAD
 - not be highlighted by a cursor
+=======
+- not be highlightable by a cursor
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 - appear slightly darker
 {{% /notice %}}
 

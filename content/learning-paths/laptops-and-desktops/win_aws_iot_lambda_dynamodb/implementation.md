@@ -134,7 +134,11 @@ When dealing with timestamps and comparing dates across different systems, such 
 
 The ISO 8601 format is a standardized way to represent dates and times. It includes the date, time, and time zone information, ensuring consistency across different systems. The format looks like this: YYYY-MM-DDTHH:mm:ss.sssZ, where Z indicates the UTC (Coordinated Universal Time) time zone.
 
+<<<<<<< HEAD
 By formatting the time threshold to an ISO 8601 string, you ensure that both the IoT device's timestamps and the server's time threshold are in a consistent format. Comparing timestamps in a standardized format ensures that the time-based filtering logic works correctly.
+=======
+By formatting the time threshold to an ISO 8601 string, you ensure that both the IoT device’s timestamps and the server’s time threshold are in a consistent format. Comparing timestamps in a standardized format ensures that the time-based filtering logic works correctly.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Now you will configure the DynamoDB scan parameters:
 

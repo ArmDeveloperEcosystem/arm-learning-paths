@@ -35,7 +35,11 @@ Arm Success Kits are a component of:
 * [Arm Flexible Access](https://www.arm.com/en/products/flexible-access)
 * [Arm Academic Access](https://www.arm.com/resources/research/enablement/academic-access)
 
+<<<<<<< HEAD
 ## How do I download Success Kit components?
+=======
+## Downloading Success Kit components
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 All downloads are provided via the [Arm Product Download Hub](https://developer.arm.com/downloads).
 
@@ -45,7 +49,11 @@ You can download individual components, or the complete Success Kits.
 
 Bundles are provided for Windows, Linux, or Mac OS. Not all components are supported on all hosts.
 
+<<<<<<< HEAD
 ## How do I install Success Kit components?
+=======
+## Component installation and setup
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 [User license setup](/install-guides/license/)
 

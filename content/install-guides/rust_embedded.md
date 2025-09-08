@@ -29,9 +29,15 @@ This install guide describes a setup using an Ubuntu Linux host.
 
 For a thorough review of all options, refer to the official documentation. See [The Embedded Rust Book](https://docs.rust-embedded.org/book/).
 
+<<<<<<< HEAD
 ## How do I install Rust for Embedded Applications? {#install}
 
 ### How do I download and install Rust?
+=======
+## Installation {#install}
+
+### Download and install Rust
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Run the following command to download and install Rust:
 
@@ -56,8 +62,12 @@ The output is similar to:
 rustc 1.78.0 (9b00956e5 2024-04-29)
 cargo 1.78.0 (54d8815d0 2024-03-26)
 ```
+<<<<<<< HEAD
 
 ### How do I add Arm cross-compilation support?
+=======
+### Add Arm cross-compilation support
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Add cross compilation support for the required Arm Architectures. For example, to add support for Armv7-M architecture, you can use:
 ```bash
@@ -68,7 +78,11 @@ For a full list of supported architectures, use:
 rustup target list
 ```
 
+<<<<<<< HEAD
 ### How do I install cargo-generate?
+=======
+### Install cargo-generate
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To generate a project from a template, you need `cargo-generate`. To install and rebuild use:
 
@@ -78,10 +92,16 @@ sudo apt install -y build-essential
 cargo install cargo-generate
 ```
 
+<<<<<<< HEAD
 ### How do I install cargo-binutils? (optional)
 
 Other utilities are also available. For completeness, they can be installed with:
 
+=======
+### Install cargo-binutils (optional)
+
+Other utilities are also available. For completeness, they can be installed with:
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```command
 cargo install cargo-binutils
 rustup component add llvm-tools-preview

@@ -35,7 +35,11 @@ List of devices attached
 RZ8MC03VVEW	device
 ```
 
+<<<<<<< HEAD
 If your device is listed as `unauthorized`, disable and enable the **USB Debugging** option on your device, and then re-approve your computer's access.
+=======
+If your device is listed as `unauthorized`, disable and enable the **USB Debugging** option on your device, and then re-approve your computer’s access.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 2. In Unity, select **File > Build Settings**.
 3. Check that Android is set as the platform. If it is not, select Android, and choose Switch Platforms.

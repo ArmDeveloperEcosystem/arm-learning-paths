@@ -17,7 +17,11 @@ benefits:
 - They offer an opportunity to catch regressions.
 - They demonstrate how to use the library in practice.
 - They create opportunities for those new to the project to easily check their patches, and verify that the introduction of the new code has not created unintended negative changes.
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 You will notice that setting up testing precedes library code development.
 
 There are many unit testing frameworks available, and C++ is not short of them. See this [wikipedia
@@ -38,6 +42,7 @@ all external dependencies. It will be used by the main `CMakeLists.txt`.
 
 Create the file `external/CMakeLists.txt` with the following content:
 
+<<<<<<< HEAD
 ```TXT
 cmake_minimum_required(VERSION 3.6)
 
@@ -70,6 +75,9 @@ ExternalProject_Add(googletest
     CMAKE_ARGS ${EXTERNAL_PROJECT_CMAKE_ARGS}
 )
 ```
+=======
+{{< include-code TXT "content/learning-paths/cross-platform/matrix/projects/chapter-2/external/CMakeLists.txt" >}}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 You might notice a new CMake feature: variables. Variables start with the `$` character and have a name inserted between curly braces. A CMake variable can be set by the CMake itself, or by the user, and they can be modified or used as they are.
 
@@ -266,6 +274,7 @@ several files inside the `tests/` directory.
 
 Create the top-level test in `tests/main.cpp` and paste the following code into the file:
 
+<<<<<<< HEAD
 ```CPP
 #include "gtest/gtest.h"
 
@@ -293,6 +302,13 @@ TEST(Matrix, getVersion) {
     EXPECT_EQ(version.patch, 0);
 }
 ```
+=======
+{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-2/tests/main.cpp" >}}
+
+Create `tests/Version.cpp` and add the `getVersion` unit test into the file:
+
+{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-2/tests/Version.cpp" >}}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 This test invokes `getVersion` and checks that the `major`, `minor` and `patch` levels match the expected values.
 
@@ -378,7 +394,10 @@ Matrix/
 CMake makes it easy to use GoogleTest as an external project. Adding unit tests as you go is now easy.
 
 You have created the unit testing environment for your Matrix library and added a test. The infrastructure is now in place to implement the core of the Matrix processing library.
+<<<<<<< HEAD
 
 You can refer to this chapter source code in
 `code-examples/learning-paths/cross-platform/matrix/chapter-2` in the archive that
 you have downloaded earlier.
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

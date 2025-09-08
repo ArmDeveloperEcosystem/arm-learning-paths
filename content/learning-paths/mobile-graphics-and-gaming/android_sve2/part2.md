@@ -201,6 +201,7 @@ This method generates three pseudo-random vectors of floats and a fourth vector 
 ## Build and Run the code
 To test the code described above, you will need an Armv8-powered device (for this example, we used a Samsung Galaxy S22). Follow [these steps](https://developer.android.com/studio/run/device) to prepare your device for development. Once your phone is configured, it will appear in the drop-down list at the top of Android Studio.
 
+<<<<<<< HEAD
 ![img7](figures/07.png)
 
 Select your phone and then click the play icon. This action will build and deploy the application to your device. Next, enter the vector length, for example, 10,000, and click the **Run calculations** button. Repeat the process after selecting the "Use SVE2?" checkbox. You should observe the following results:
@@ -208,6 +209,15 @@ Select your phone and then click the play icon. This action will build and deplo
 ![img8](figures/08.png)
 
 ![img9](figures/09.png)
+=======
+![img7](Figures/07.png)
+
+Select your phone and then click the play icon. This action will build and deploy the application to your device. Next, enter the vector length, for example, 10,000, and click the **Run calculations** button. Repeat the process after selecting the "Use SVE2?" checkbox. You should observe the following results:
+
+![img8](Figures/08.png)
+
+![img9](Figures/09.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 As has just been demonstrated, using SVE2 intrinsics can achieve computation times that are 3-4 times shorter, depending on the vector length.
 

@@ -185,7 +185,11 @@ Using the torchvision library, download the MNIST dataset and apply a transforma
 
 Next, create two data loaders: one for the training set and one for the test set, each configured with a batch size of 32. These data loaders allow you to easily feed batches of images into the model during training and testing.
 
+<<<<<<< HEAD
 Next, define a training loop, which is at the core of the model's learning process. For each batch of images and labels, the model generates predictions, and you calculate the cross-entropy loss to measure how far off the predictions are from the true labels. 
+=======
+Next, define a training loop, which is at the core of the model’s learning process. For each batch of images and labels, the model generates predictions, and you calculate the cross-entropy loss to measure how far off the predictions are from the true labels. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The Adam optimizer is used to perform backpropagation, updating the model's weights to reduce this error. The process repeats for every batch in the training dataset, gradually improving model accuracy over time.
 

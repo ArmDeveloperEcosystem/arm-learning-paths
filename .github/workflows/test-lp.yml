@@ -1,8 +1,11 @@
 name: Test Learning Path
 on: pull_request
+<<<<<<< HEAD
 env:
   HUGO_VERSION: 0.130.0
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 jobs:
   Test-Pull-Request:
     runs-on: ubuntu-24.04-arm
@@ -11,6 +14,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ steps.vars.outputs.branch-name }}
+<<<<<<< HEAD
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
@@ -63,12 +67,27 @@ jobs:
         run: |
           echo "Checking YAML fields for changed learning paths..."
           python3 tools/verify_index_fields.py ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+=======
+      - name: Get all changed markdown files
+        id: changed-markdown-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+             **.md
+      - name: Install dependencies
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        run: pip install -r tools/requirements.txt
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
       - name: Run test suite for all changed .md files
         id: run-suite
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         # Run the test suite
         run: |
+<<<<<<< HEAD
               set -o pipefail; ./tools/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee test-lp-output.txt
+=======
+            set -o pipefail; ./tools/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee test-lp-output.txt
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
       - name: Parse test suite errors
         id: test-suite-state
         if: success()

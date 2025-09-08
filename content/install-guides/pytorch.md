@@ -14,6 +14,11 @@ test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
+<<<<<<< HEAD
+=======
+test_status:
+- passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 title: PyTorch
 tool_install: true
 weight: 1
@@ -27,7 +32,11 @@ Follow the instructions below to install and use PyTorch on Arm Linux.
 Anaconda provides another way to install PyTorch. See the [Anaconda install guide](/install-guides/anaconda/) to find out how to use PyTorch from Anaconda. The Anaconda version of PyTorch might be older than the version available using `pip`.
 {{% /notice %}}
 
+<<<<<<< HEAD
 ## What do I need before installing PyTorch?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Confirm that you are using an Arm Linux system by running:
 
@@ -59,7 +68,11 @@ sudo dnf install python-pip -y
 alias python=python3
 ```
 
+<<<<<<< HEAD
 ## How do I download and install PyTorch?
+=======
+## Download and install PyTorch
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 It is recommended that you install PyTorch in your own Python virtual environment. Set up your virtual environment:
 
@@ -74,7 +87,11 @@ source venv/bin/activate
 sudo pip install torch torchvision torchaudio
 ```
 
+<<<<<<< HEAD
 ## How do I get started with PyTorch?
+=======
+## Get started
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Test PyTorch:
 

@@ -16,13 +16,21 @@ This Learning Path explains how to use Vectorscan on Arm and provides an example
 
 ## Before you begin
 
+<<<<<<< HEAD
 You should have an Arm server available with Ubuntu 20.04 or Ubuntu 22.04 installed.
+=======
+You should have an Arm server available with Ubuntu 20.04 or Ubuntu 22.04 installed. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The instructions provided have been tested on an Ubuntu 22.04 AWS Arm EC2 instance (c6g.xlarge) and Ubuntu 20.04 Oracle Ampere A1 instance.
 
 ### Software dependencies
 
+<<<<<<< HEAD
 Before building Vectorscan, install the following software.
+=======
+Before building Vectorscan, install the following software. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Update the sources list for the package manager.
 
@@ -33,12 +41,20 @@ sudo apt update
 GCC for your Arm Linux distribution. If needed, refer to the [installation guide](/install-guides/gcc/native/).
 
 ```bash
+<<<<<<< HEAD
 sudo apt install -y build-essential
+=======
+sudo apt install -y build-essential 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 [CMake build system](https://cmake.org/):
 
+<<<<<<< HEAD
 ```bash
+=======
+```bash 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 sudo apt install -y cmake
 ```
 
@@ -83,9 +99,15 @@ cd vectorscan
 
 ## Determine if your processor has SVE
 
+<<<<<<< HEAD
 [Scalable Vector Extensions (SVE)](https://developer.arm.com/Architectures/Scalable%20Vector%20Extensions) is a SIMD extension of the Arm architecture which is available on some Arm processors. For example, the Neoverse-N1 does not include SVE and the Neoverse-V1 does include SVE.
 
 Vectorscan will run faster if you have an processor with SVE and you enable it when building the software.
+=======
+[Scalable Vector Extensions (SVE)](https://developer.arm.com/Architectures/Scalable%20Vector%20Extensions) is a SIMD extension of the Arm architecture which is available on some Arm processors. For example, the Neoverse-N1 does not include SVE and the Neoverse-V1 does include SVE. 
+
+Vectorscan will run faster if you have an processor with SVE and you enable it when building the software. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To determine if SVE is available on your processor run:
 
@@ -93,15 +115,25 @@ To determine if SVE is available on your processor run:
 lscpu | grep sve
 ```
 
+<<<<<<< HEAD
 If SVE is available the Flags will be printed:
+=======
+If SVE is available the Flags will be printed: 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```output
 Flags: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm ssbs paca pacg dcpodp svei8mm svebf16 i8mm bf16 dgh rng
 ```
 
+<<<<<<< HEAD
 If no SVE is present, there will be no output.
 
 ### Build Vectorscan
+=======
+If no SVE is present, there will be no output. 
+
+### Build Vectorscan 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Create a build directory and build with cmake:
 
@@ -117,7 +149,11 @@ cmake -DBUILD_SVE=1 ../
 
 Use `make` to build the vectorscan library:
 
+<<<<<<< HEAD
 ```bash { cwd="./vectorscan/build" }
+=======
+```bash { cwd="./vectorscan/vectorscan-build" }
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 make -j$(nproc)
 ```
 
@@ -127,8 +163,13 @@ The executables from the build are created in the `bin` directory.
 
 Run a check to validate that `Vectorscan` is built and running correctly:
 
+<<<<<<< HEAD
 ```bash { cwd="./vectorscan/build" }
 ls bin && ./bin/unit-hyperscan
+=======
+```bash { cwd="./vectorscan/vectorscan-build" }
+./bin/unit-hyperscan
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 All the unit tests should run successfully. At the end of execution you will see output similar to:

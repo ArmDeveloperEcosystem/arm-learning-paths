@@ -19,7 +19,11 @@ APerf was created by AWS to help with Linux performance analysis.
 
 In addition to the CLI, APerf includes an HTML view to visualize the collected data.
 
+<<<<<<< HEAD
 ## What should I do before I begin installing APerf?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 APerf works on Linux, and is available as a single binary.
 
@@ -41,7 +45,11 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
+<<<<<<< HEAD
 ## How do I download and install APerf?
+=======
+## Download and install APerf
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The easiest way to install APerf is to download a release from GitHub, extract it, and setup your `PATH` environment variable or copy the executable to a directory already in your search path.
 
@@ -50,26 +58,42 @@ Visit the [releases page](https://github.com/aws/aperf/releases/) to see a list 
 You can also download a release from the command line:
 
 ```bash { target="ubuntu:latest" }
+<<<<<<< HEAD
 wget https://github.com/aws/aperf/releases/download/v0.1.15-alpha/aperf-v0.1.15-alpha-aarch64.tar.gz
+=======
+wget https://github.com/aws/aperf/releases/download/v0.1.12-alpha/aperf-v0.1.12-alpha-aarch64.tar.gz
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Extract the release:
 
 ```bash { target="ubuntu:latest" }
+<<<<<<< HEAD
 tar xvfz aperf-v0.1.15-alpha-aarch64.tar.gz
+=======
+tar xvfz aperf-v0.1.12-alpha-aarch64.tar.gz
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Add the path to `aperf` in your `.bashrc` file.
 
 ```console
+<<<<<<< HEAD
 echo 'export PATH="$PATH:$HOME/aperf-v0.1.15-alpha-aarch64"' >> ~/.bashrc
+=======
+echo 'export PATH="$PATH:$HOME/aperf-v0.1.12-alpha-aarch64"' >> ~/.bashrc
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 source ~/.bashrc
 ```
 
 Alternatively, you can copy the `aperf` executable to a directory already in your search path.
 
 ```bash { target="ubuntu:latest" }
+<<<<<<< HEAD
 sudo cp aperf-v0.1.15-alpha-aarch64/aperf /usr/local/bin
+=======
+sudo cp aperf-v0.1.12-alpha-aarch64/aperf /usr/local/bin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Confirm `aperf` is installed by printing the version:
@@ -84,9 +108,15 @@ The output should print the version:
 aperf 0.1.0 (4b910d2)
 ```
 
+<<<<<<< HEAD
 ## How do I verify APerf is working?
 
 ### How do I create and view a report?
+=======
+## Verify APerf is working
+
+### Create and view a report
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To confirm APerf is working, start it for 10 seconds and take a sample every 1 second.
 
@@ -120,7 +150,11 @@ You can browse the data and see what has been collected.
 The Kernel Config and Sysctl Data tabs are blank unless you click No.
 {{% /notice %}}
 
+<<<<<<< HEAD
 ### How do I create and view a report containing 2 runs?
+=======
+### Create and view a report containing 2 runs
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To demonstrate comparing 2 runs, create a second run with `aperf record`:
 
@@ -144,7 +178,11 @@ A screenshot is shown below:
 
 ![APerf #center](/install-guides/_images/aperf.png)
 
+<<<<<<< HEAD
 ### How do I use an HTTP server to view reports?
+=======
+### Use an HTTP server
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 If you are doing performance analysis on a remote system or cloud instance without a remote desktop, you can view the APerf reports from your local browser by running a simple web server on the remote machine.
 

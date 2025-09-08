@@ -28,6 +28,10 @@ operatingsystems:
 tools_software_languages:
     - TensorFlow
     - STM32
+<<<<<<< HEAD
+=======
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

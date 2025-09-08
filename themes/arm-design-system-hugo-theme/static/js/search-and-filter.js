@@ -1,54 +1,10 @@
 // filter-learning-paths.js
-function updateURLWithFilters(active_tags_by_group) {
-    // active_tags_by_group = {'group-subjects': [tag1,tag2], 'group-skill-level': [tag3]}
-    // obtain tag name from each tag in each group
-    let filters = {};
-    for (let group_name in active_tags_by_group) {
-        // if group_name not already in filters, add it
-        let group = group_name.replace('group-','');
-        if (!(group in filters)) {
-            filters[group] = [];
-        }
-        // iterate over tags in this group
-        for (let tag of active_tags_by_group[group_name]) {
-            let tag_name = tag.id.replace('filter-tag-',''); // tag.id = filter-tag-databases   strip off 'filter-'            
-            filters[group].push(tag_name);
-        }
-    }
-
-    // Get any active searches too
-    document.getElementById('search-box').value().then((value) => { 
-        if (value) {
-            filters['search'] = value;
-        }
-
-        // Finish processing filters and update URL
-        const queryString = new URLSearchParams(filters).toString();
-        const newUrl = `${window.location.pathname}?${queryString}`;
-        
-        // if newUrl is the same as the current URL, don't pushState
-        const currentUrl = window.location.href.replace(window.location.origin, '');
-        const newUrlPath = newUrl.replace(window.location.origin, '');
-        if (newUrlPath === currentUrl) {
-            return;
-        }
-    
-        // This changes the URL in the address bar without reloading the page:
-        history.replaceState({ filters }, "", newUrl); //replaceState or pushState if you don't want to keep the back button history
-        
-    });
-
-  }
-
 function filter_LearningPath_card(card) {
     let to_hide = true;             // set as true by default; change to false if conditions apply
 
     // iterate over all active filters in the dom area; if this card matches ALL of the tags, keep shown
     const active_tags = document.getElementsByClassName('filter-facet');
-    if (active_tags.length==0) { 
-        updateURLWithFilters({}); // clear filters from URL
-        return false 
-    }        // Return already if no tags...no filtering neccecary 
+    if (active_tags.length==0) { return false }        // Return already if no tags...no filtering neccecary 
 
     // create dictionary, grouping together tags by group
     // gropued_active_tags = {'group-subjects': [tag1,tag2], 'group-skill-level': [tag3]}
@@ -88,9 +44,6 @@ function filter_LearningPath_card(card) {
     
     // If there are any trues, that means that this path should be hidden. If all falses, then it should be shown (to_hide = false)
     if(!Object.values(group_status).includes(true)){ to_hide = false; }
-
-    // Send to URL
-    updateURLWithFilters(grouped_active_tags);
 
     /* OLD implementation of ANDS only
     for (tag of active_tags) {
@@ -190,9 +143,6 @@ function addFacet(element) {
      // Show 'clear filters' command (if already shown this command does nothing.)
      document.getElementById('tag-clear-btn').hidden = false;
 
-
-     
-
      // Apply search and filters to current parameters
         // deal with ads promise
         document.getElementById('search-box').value().then((value) => { 
@@ -212,9 +162,6 @@ function turnOnFilters(filters_list) {
     for (let filter of filters_list) {
         let filter_group = filter.split('=')[0];
         let filter_name = filter.split('=')[1];
-        console.log('yo prodcessing turnOnFilters');
-        console.log(filter_group,filter_name);
-        console.log('==============================');
 
         // get checkbox elements to check (mobile and desktop apperance) by 'data-urlized-name'
         let checkbox_elements = document.querySelectorAll("ads-checkbox[data-urlized-name='"+filter_name+"']");
@@ -346,23 +293,10 @@ function parseParamsFromURL(url_str) {
             if (param.includes('search=')) {
                 search_str = sanitizeInput(decodeURIComponent(param.replace('?','').replace('search=','')));
             }
-            else {
-                // if multiple params in the same group, split by %2C (comma)
-                if (param.includes('%2C')) {
-                    let group_filter = param.split('=')[0].replace('?','');
-                    param.split('=')[1].split('%2C').forEach(param =>
-                        filters.push(sanitizeInput(decodeURIComponent(group_filter+('=')+param)))
-                    );
-                }
-                else {
-                    filters.push(sanitizeInput(decodeURIComponent(param.replace('?',''))));
-                }
+            else if (param.includes('-filter=')) {
+                filters.push(sanitizeInput(decodeURIComponent(param.replace('?','').replace('-filter=','='))));
             }
         }
-        console.log('URL PARAMS:');
-        console.log(search_str);
-        console.log(filters);
-        console.log('==============================');
 
         return [search_str,filters]
 }
@@ -500,9 +434,7 @@ function searchHandler_Tools(search_string) {
     const all_path_cards = document.querySelectorAll('div.search-div');
     // Apply search and filters to current parameters
     let results_to_hide = applySearchAndFilters(all_path_cards, search_string,'tools'); // apply active search & filter terms to the specified divs
-    // Update url
-    updateURLWithFilters({})
-
+   
     // Hide specified elements
     hideElements(all_path_cards,results_to_hide);
 

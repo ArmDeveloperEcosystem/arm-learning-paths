@@ -42,7 +42,11 @@ Additionally, PyTorch enables layer fusion through its torch.quantization module
 
 Furthermore, the TorchScript functionality allows for the creation of serializable and optimizable models that can be efficiently deployed on mobile devices. 
 
+<<<<<<< HEAD
 PyTorch's integration with hardware acceleration libraries, such as NNAPI for Android, enables developers to leverage specific hardware capabilities, ensuring optimal model performance tailored to the device's architecture. 
+=======
+PyTorch’s integration with hardware acceleration libraries, such as NNAPI for Android, enables developers to leverage specific hardware capabilities, ensuring optimal model performance tailored to the device's architecture. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Overall, PyTorch provides a comprehensive ecosystem that empowers developers to implement effective optimizations for mobile and edge deployment, enhancing both speed and efficiency.
 

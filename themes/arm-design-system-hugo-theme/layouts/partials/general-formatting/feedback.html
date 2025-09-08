@@ -22,6 +22,7 @@ Called from:
 {{ $issuesURL := printf "%s/issues/new?title=Feedback - %s" $gh_repo (safeURL .context.Parent.Title ) -}}
 
 
+<<<<<<< HEAD
 <div id="feedback-container">
 
     <h2>Give Feedback</h2>
@@ -103,3 +104,91 @@ Called from:
         </ul>
     </div>
 </div>
+=======
+<!-- Give an independent row -->
+<div class="c-row">
+    <div class="c-col">
+        <div id="feedback-container">
+
+            <h2>Feedback</h2>
+
+            <!-- 1) Stars -->
+            <div id="feedback-1-stars">
+                <p>How would you rate the overall quality of this {{.learningpath_or_toolinstall}}?</p>
+                <div class="rating" style="float: left">
+                    <input id="rating-5" type="radio" name="rating" value="5" onclick="starRatingGiven(this)"/><label title="Excellent" for="rating-5"><i class="fa-regular fa-2x fa-star"></i></label>
+                    <input id="rating-4" type="radio" name="rating" value="4" onclick="starRatingGiven(this)"/><label title="Good" for="rating-4"><i class="fa-regular fa-2x fa-star"></i></label>
+                    <input id="rating-3" type="radio" name="rating" value="3" onclick="starRatingGiven(this)"/><label title="Okay" for="rating-3"><i class="fa-regular fa-2x fa-star"></i></label>
+                    <input id="rating-2" type="radio" name="rating" value="2" onclick="starRatingGiven(this)"/><label title="Bad" for="rating-2"><i class="fa-regular fa-2x fa-star"></i></label>
+                    <input id="rating-1" type="radio" name="rating" value="1" onclick="starRatingGiven(this)"/><label title="Very Bad" for="rating-1"><i class="fa-regular fa-2x fa-star"></i></label>
+                </div>
+            </div>
+
+            <!-- 2) Multiple-choice feedback -->
+            <div id="feedback-2-choice" hidden>
+                <p class="u-margin-bottom-0">What is the primary reason for your feedback <span id="specific-stars"></span>?</p>
+                <form id='feedback-choice-form' action='javascript:choiceFeedbackGiven()'>
+                    <!-- Bad options, 1-3 stars given -->
+                    <div id="1-2-3-star-options" class="u-margin-left-1" hidden>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="poor-1" value="Missing information" name="feedback-choice"></input>
+                            <label for="poor-1">Missing information</label>
+                        </div>
+                        <br>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="poor-2" value="Too complicated / unclear steps" name="feedback-choice"></input>
+                            <label for="poor-2">Too complicated / unclear steps</label>
+                        </div>
+                        <br>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="poor-3" value="Code problems" name="feedback-choice"></input>
+                            <label for="poor-3">Code problems</label>
+                        </div>
+                        <br>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="poor-4" value="Out of date" name="feedback-choice"></input>
+                            <label for="poor-4">Out of date</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Good options, 4-5 stars given -->
+                    <div id="4-5-star-options" class="u-margin-left-1" hidden>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="good-1" value="Easy to understand" name="feedback-choice"></input>
+                            <label for="good-1">Easy to understand</label>
+                        </div>
+                        <br>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="good-2" value="Solved my problem" name="feedback-choice"></input>
+                            <label for="good-2">Solved my problem</label>
+                        </div>
+                        <br>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="good-3" value="Helpful code snippets" name="feedback-choice"></input>
+                            <label for="good-3">Excellent code snippets</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Error message if submit without selection; hidden by default. -->
+                    <span>
+                        <input class="u-margin-top-1 u-margin-bottom-1" type="submit" value="Submit Feedback" id="submit-feedback-btn">
+                        <div id="choice-select-option-error" hidden>
+                            <p id="error-text">&nbsp;&nbsp;&nbsp;Please select a reason before submitting.</p>
+                        </div>
+                    </span>
+
+                </form>
+            </div>
+
+            <!-- 3) Thank you message -->
+            <div id="feedback-3-thanks" hidden>
+                <p>Thank you. We're grateful for your feedback on how to improve this {{.learningpath_or_toolinstall}}.</p>
+                <ul>
+                    <li>Have more detailed feedback about what to improve or add next? <a href="{{$issuesURL}}" target="_blank">Log an issue on GitHub.{{partial "general-formatting/external-link.html" }}</a></li>
+                    <li>Want to discuss this topic with fellow developers and Arm Experts? <a href="https://discord.com/invite/armsoftwaredev" target="_blank">Collaborate in the Arm Developer Discord server.{{partial "general-formatting/external-link.html" }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

@@ -32,13 +32,21 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 Arm IP Explorer is a cloud-based tool used to accelerate IP selection and SoC design. 
 It also includes a simulation feature used by software developers for benchmarking Arm processors as part of the IP selection process.
 
+<<<<<<< HEAD
 ## What do I need before using Arm IP Explorer?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 An Arm account is required to access Arm IP Explorer.
 
 To create an Arm account, enter your e-mail on the [registration form](https://www.arm.com/register) and follow the instructions.
 
+<<<<<<< HEAD
 ## Do I need to install Arm IP Explorer?
+=======
+## Installation
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 As Arm IP Explorer is a cloud application, it does not require any installation.
 
@@ -48,7 +56,11 @@ If your Arm account is not setup for access, you will be presented with a reques
 
 Fill out the form, Arm will review your request, and grant access, if appropriate.
 
+<<<<<<< HEAD
 ## How do I explore Arm IP?
+=======
+## Explore Arm IP
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Use the `Explore` buttons to learn about the features of various Arm IP and compare them against each other.
 
@@ -62,11 +74,19 @@ You can configure IP blocks to your needs to be able to make comparisons in term
 
 You can save your configured IP for later use, as well as render the RTL for your configuration (**Note** that this requires an appropriate license from Arm).
 
+<<<<<<< HEAD
 ## How do I simulate processors?
 
 To help evaluate the performance of the processors, Arm IP Explorer provides a number of RTL-based simulation systems that allow you to run benchmark code on them.
 
 ## How do I create an SoC concept?
+=======
+## Simulate Processors
+
+To help evaluate the performance of the processors, Arm IP Explorer provides a number of RTL-based simulation systems that allow you to run benchmark code on them.
+
+## Create SoC Concept
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 A `SoC Concept` is the first step towards the architectural design of your device.
 

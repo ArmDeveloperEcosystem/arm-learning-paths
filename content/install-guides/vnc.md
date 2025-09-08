@@ -37,11 +37,19 @@ Feel free to seek out additional VNC tutorials or add more information to this p
 
 This installation only works on newer versions of Ubuntu and Debian. It was successfully tested on **Ubuntu 22.04** and is known to fail on **Ubuntu 20.04**.
 
+<<<<<<< HEAD
 ## What is VNC?
 
 VNC is a client server application. A VNC server runs on a remote machine. A VNC client runs on the local machine and connects to the remote server.
 
 ### How do I install the VNC server and xfce4 desktop?
+=======
+## VNC
+
+VNC is a client server application. A VNC server runs on a remote machine. A VNC client runs on the local machine and connects to the remote server.
+
+### Install VNC server and xfce4 desktop
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To use VNC, a VNC server needs to be installed. There are multiple VNC servers which can be used. This recipe uses [TigerVNC](https://tigervnc.org/).
 
@@ -59,7 +67,11 @@ Install the VNC server.
 sudo apt-get install tigervnc-standalone-server tigervnc-common -y
 ```
 
+<<<<<<< HEAD
 ### How do I set a VNC password?
+=======
+### Set a VNC password
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Run the password command to set a password for VNC. This is not the password for the user account, just for the VNC client to connect to the VNC server.
 
@@ -69,7 +81,11 @@ vncpasswd
 
 Remember the password for later when the client is connected.
 
+<<<<<<< HEAD
 ### How do I configure the desktop startup for VNC?
+=======
+### Configure the desktop startup
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Create a file at `$HOME/.vnc/xstartup` with the contents:
 
@@ -84,7 +100,11 @@ Make sure the `xstartup` file has executable permission.
 chmod +x $HOME/.vnc/xstartup
 ```
 
+<<<<<<< HEAD
 ### How do I set up a systemd service to manage VNC?
+=======
+### Setup a systemd service to start and stop VNC
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To create a systemd service to start the VNC server create the file `/etc/systemd/system/vncserver@.service`
 
@@ -127,7 +147,11 @@ To restart the VNC service:
 sudo systemctl restart vncserver@1.service
 ```
 
+<<<<<<< HEAD
 ### How do I use port forwarding via SSH to connect to VNC?
+=======
+### Use port forwarding via SSH to connect
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The default port for the first instance of VNC is `5901`. SSH port forwarding is the best solution for accessing the Linux desktop on a cloud machine. This way no additional ports need to be opened in the security group.
 

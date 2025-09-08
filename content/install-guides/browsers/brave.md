@@ -23,12 +23,17 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
+<<<<<<< HEAD
 ## How do I install Brave?
+=======
+## Installing Brave
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The Brave browser runs on Windows on Arm as a native ARM64 application, and is available on Arm Linux distributions. 
 
 ### Linux
 
+<<<<<<< HEAD
 There are two options to install Brave on Linux.
 
 To install Brave with a single command:
@@ -38,6 +43,9 @@ curl -fsS https://dl.brave.com/install.sh | sh
 ```
 
 To install Brave using multiple commands:
+=======
+To install Brave on Linux:
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu/Debian" language="bash">}}

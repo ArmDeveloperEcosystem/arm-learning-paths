@@ -14,7 +14,11 @@ Optical character recognition (OCR) aims at recognizing the text content in a fi
 
 OCR has been widely used in many industry scenarios such as ticket information extraction, manufacturing product traceability, and government medical document processing. 
 
+<<<<<<< HEAD
 Text recognition is a sub-task of OCR. It's the step after text detection in OCR's two-stage algorithm which converts image information into text information. 
+=======
+Text recognition is a sub-task of OCR. It’s the step after text detection in OCR’s two-stage algorithm which converts image information into text information. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ![Example of English text recognition #center](./Figure1.png "Figure 1. Example of English text recognition (Image source: https://iapr.org/archives/icdar2015/index.html)")
 

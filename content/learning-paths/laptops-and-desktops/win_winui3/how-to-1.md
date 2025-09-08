@@ -25,20 +25,36 @@ Before you begin the implementation, install Visual Studio 2022 with the followi
 2. Universal Windows Platform development
 3. After selecting these workloads, expand the .NET desktop development group under the Installation details and ensure that the 'Windows App SDK C# Templates' option is selected.
 
+<<<<<<< HEAD
 ![fig1](figures/01.png)
 
 Then, click the 'Individual components' tab and check '.NET 6.0 Runtime (Long Term Support)'.
 
 ![fig2](figures/02.png)
+=======
+![fig1](Figures/01.png)
+
+Then, click the 'Individual components' tab and check '.NET 6.0 Runtime (Long Term Support)'.
+
+![fig2](Figures/02.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ## Create the project
 Open Visual Studio and click 'Create a new project'.
 
+<<<<<<< HEAD
 ![fig3](figures/03.png)
 
 In the next window, search for the 'Blank App, Packaged (WinUI 3 in Desktop)' template. Select this template and click the 'Next' button.
 
 ![fig4](figures/04.png)
+=======
+![fig3](Figures/03.png)
+
+In the next window, search for the 'Blank App, Packaged (WinUI 3 in Desktop)' template. Select this template and click the 'Next' button.
+
+![fig4](Figures/04.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 This action opens the 'Configure your new project' window. Here, you should:
 
@@ -47,7 +63,11 @@ This action opens the 'Configure your new project' window. Here, you should:
 3. Ensure the 'Place solution and project in the same directory' option is checked
 4. Click the 'Create' button
 
+<<<<<<< HEAD
 ![fig5](figures/05.png)
+=======
+![fig5](Figures/05.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Your project should now be ready. Next, you will design the view using XAML declarations and implement the logic using the C# code.
 
@@ -116,7 +136,11 @@ There are four style declarations, which differ by the 'TargetType' attribute. T
 
 Next, you will declare the following user interface:
 
+<<<<<<< HEAD
 ![fig6](figures/06.png)
+=======
+![fig6](Figures/06.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 This view uses a tabular layout, comprising five rows and two columns. To create such a layout using XAML, you can use the Grid control. Open the `MainWindow.xaml` file and modify it as follows:
 

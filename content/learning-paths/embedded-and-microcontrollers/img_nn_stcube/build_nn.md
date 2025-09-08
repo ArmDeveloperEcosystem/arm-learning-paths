@@ -91,7 +91,11 @@ plt.show()
 
 The expected output is shown below
 
+<<<<<<< HEAD
 ![output1](images/lab4_1.PNG)
+=======
+![output1](Images/lab4_1.PNG)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Next, normalize all the training and testing data to have values between 0 and 1. This normalization facilitates machine learning. Each RGB value ranges from 0 to 255, so divide the training and testing data by 255.
 
@@ -124,7 +128,11 @@ You are going to create a small convolutional neural network for image classific
 
 Here is an image illustrating the network architecture. Note that only convolution and dense layers are illustrated in this image.
 
+<<<<<<< HEAD
 ![output2](images/lab4_2.PNG)
+=======
+![output2](Images/lab4_2.PNG)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Execute the code blocks below to create a sequential model and add the layers
 

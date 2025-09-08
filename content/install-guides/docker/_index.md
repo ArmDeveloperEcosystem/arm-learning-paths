@@ -23,10 +23,19 @@ The operating system of the computer and the architecture (x86 or Arm) determine
 
 ### How do I install Docker on Linux and Chrome OS?
 
+<<<<<<< HEAD
 - Docker Engine on Linux runs on a variety of Linux distributions and architectures, including arm32v7 and arm64v8 (AArch64). Use the Docker Engine instructions for Linux and Chrome OS (using the Linux feature). This includes the Windows Subsystem for Linux 2 (WSL 2).
+=======
+- Docker Engine on Linux runs on a variety of Linux distributions and architectures, including arm32v7 and arm64v8 (AArch64). Use these instructions for Linux and Chrome OS (using the Linux feature). This includes the Windows Subsystem for Linux 2 (WSL 2).
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ### How do I install Docker on Windows and macOS?
 
 - Docker Desktop is the easiest way to install Docker on Windows and macOS. The macOS version supports both Intel and Apple Silicon. 
+<<<<<<< HEAD
 - The Windows on Arm version of Docker Desktop was announced at Microsoft Build 2024 and is available as a Beta release.
 - Docker Desktop for Arm Linux is available if your machine has KVM support and is running a KDE or Gnome desktop environment. Refer to Docker Desktop for Arm Linux below for details.
+=======
+- The Windows on Arm version of Docker Desktop was announced at Microsoft Build 2024. 
+- Docker Desktop for Linux is available if your machine has KVM support and is running a KDE or Gnome desktop environment.    
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

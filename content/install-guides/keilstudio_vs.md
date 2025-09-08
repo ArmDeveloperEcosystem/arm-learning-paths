@@ -35,13 +35,21 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 Alternatively, [Keil Studio Cloud](/install-guides/keilstudiocloud/) provides similar functionality, but runs in a browser and requires no installation. 
 
+<<<<<<< HEAD
 ## Where can I download Visual Studio Code?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 [Download](https://code.visualstudio.com/download), install, and start `Visual Studio Code` on your desktop.
 
 Linux, macOS, and Windows are supported. 
 
+<<<<<<< HEAD
 ## How do I install the Keil Studio extensions?
+=======
+## Install the Keil Studio extensions
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The `Keil Studio Pack` extensions is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack).
 
@@ -57,11 +65,19 @@ You will be prompted to enable an [MDK Community License](https://www.keil.arm.c
 
 If you have a commercial license for `Keil MDK` installed, decline this option.
 
+<<<<<<< HEAD
 ## How do I get started?
 
 Follow the [Getting started with an example project](https://developer.arm.com/documentation/108029/latest/Get-started-with-an-example-project) tutorial to verify the extensions are installed correctly.
 
 ## Where can I find more information about the Keil Studio extensions?
+=======
+## Get started
+
+Follow the [Getting started with an example project](https://developer.arm.com/documentation/108029/latest/Get-started-with-an-example-project) tutorial to verify the extensions are installed correctly.
+
+## Extension information
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Use the table below to find additional information about the VS Code extensions.
 

@@ -100,12 +100,17 @@ To run the above pipeline, you need to make modifications to the source code and
 
 This change updates the page's main header to greet Arm developers specifically.
 
+<<<<<<< HEAD
 ![img11](figures/11.png)
+=======
+![img11](Figures/11.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 3. Below the file editor, find and click the Commit changes button. This action opens the Commit changes window.
 
 4. In the Commit changes window, you have the option to add a commit message describing your changes. After reviewing your message, click Commit changes to finalize the update:
 
+<<<<<<< HEAD
 ![img12](figures/12.png)
 
 Committing these changes to the main branch will automatically trigger the CI/CD pipeline. You can monitor the progress of this pipeline under the Actions tab of your GitHub repository:
@@ -115,6 +120,17 @@ Committing these changes to the main branch will automatically trigger the CI/CD
 Upon completion of the second job, which builds and pushes the Docker image, you can find the updated Docker image in your Docker Hub repository. The new image will be tagged as latest and will reflect the changes made to the index.cshtml file:
 
 ![img14](figures/14.png)
+=======
+![img12](Figures/12.png)
+
+Committing these changes to the main branch will automatically trigger the CI/CD pipeline. You can monitor the progress of this pipeline under the Actions tab of your GitHub repository:
+
+![img13](Figures/13.png)
+
+Upon completion of the second job, which builds and pushes the Docker image, you can find the updated Docker image in your Docker Hub repository. The new image will be tagged as latest and will reflect the changes made to the index.cshtml file:
+
+![img14](Figures/14.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 This process demonstrates how code changes in your repository can seamlessly integrate with GitHub Actions to automate the build and deployment of your application, including updating Docker images in Docker Hub.
 

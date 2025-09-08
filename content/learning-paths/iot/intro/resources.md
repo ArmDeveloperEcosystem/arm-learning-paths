@@ -11,7 +11,11 @@ There are a number of books written to discuss software development on Cortex-M.
 * [The Definitive Guide to Arm Cortex-M3 and Cortex-M4 Processors](https://www.oreilly.com/library/view/the-definitive-guide/9780124080829/)
 * [The Definitive Guide to Arm Cortex-M23 and Cortex-M33 Processors](https://www.oreilly.com/library/view/definitive-guide-to/9780128207369/)
 * [The Designer's Guide to the Cortex-M Processor Family](https://www.oreilly.com/library/view/the-designers-guide/9780081006344/)
+<<<<<<< HEAD
 * [The Insider's Guide to Arm Cortex-M Development](https://www.packtpub.com/product/the-insiders-guide-to-arm-cortex-m-development/9781803231112)
+=======
+* [The Insider’s Guide to Arm Cortex-M Development](https://www.packtpub.com/product/the-insiders-guide-to-arm-cortex-m-development/9781803231112)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Arm offers a free of charge [Arm Helium Technology M-Profile Vector Extension (MVE) for Arm Cortex-M Processors](https://www.arm.com/resources/ebook/helium-mve-reference-book) e-book.
 

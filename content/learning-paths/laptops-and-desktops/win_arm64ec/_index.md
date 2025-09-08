@@ -22,6 +22,10 @@ armips:
 operatingsystems:
     - Windows
 tools_software_languages:
+<<<<<<< HEAD
+=======
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Arm64EC
     - Visual Studio
 

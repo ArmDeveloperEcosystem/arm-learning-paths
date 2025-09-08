@@ -37,6 +37,10 @@ operatingsystems:
     - Linux
 
 tools_software_languages:
+<<<<<<< HEAD
+=======
+    - Slicing software
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Fusion 360
 
 further_reading:

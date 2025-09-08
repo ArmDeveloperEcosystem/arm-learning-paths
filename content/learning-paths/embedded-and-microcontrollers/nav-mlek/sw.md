@@ -11,7 +11,11 @@ layout: "learningpathall"
 
 You should use an `x86_64` development machine running Windows or Linux for the best experience. 
 
+<<<<<<< HEAD
 The [Arm ML Evaluation Kit (MLEK)](https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit) is not fully supported on Windows. Some of the required tools work only on Linux. Linux is recommended if you plan to use MLEK extensively. 
+=======
+The [Arm ML Evaluation Kit (MLEK)](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit) is not fully supported on Windows. Some of the required tools work only on Linux. Linux is recommended if you plan to use MLEK extensively. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 There are some ML examples which can be developed using Windows tools. 
 
@@ -52,7 +56,11 @@ You may want to use [Docker](/install-guides/docker) to simplify ML development 
 As an example, clone the MLEK repository and look at the `Dockerfile` at the top of the repository to see one way to use Docker in ML application development:
 
 ```console
+<<<<<<< HEAD
 git clone "https://git.gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit.git"
+=======
+git clone "https://review.mlplatform.org/ml/ethos-u/ml-embedded-evaluation-kit"
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 cd ml-embedded-evaluation-kit
 git submodule update --init
 ```
@@ -61,7 +69,11 @@ Use an editor or program such as `more` or `cat` to view the Dockerfile.
 
 ## Machine learning Frameworks
 
+<<<<<<< HEAD
 [LiteRT for Microcontrollers](https://ai.google.dev/edge/litert/microcontrollers/overview), formerly known as TensorFlow Lite for Microcontrollers is one of the more common framework for microcontroller ML applications.
+=======
+[TensorFlow Lite for Microcontrollers (TFLM)](https://www.tensorflow.org/lite/embedded-and-microcontrollers/) is on of the more common framework for microcontroller ML applications.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 TensorFlow uses [`xxd`](https://linux.die.net/man/1/xxd/) to convert TensorFlow Lite models into C data structures. 
 
@@ -96,9 +108,15 @@ Resources for learning about ML applications are listed below for you to investi
 
 ### Arm ML Evaluation Kit (MLEK)
 
+<<<<<<< HEAD
 The [MLEK](https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit) provides a number of example ML applications.
 
 [The Quick Start Guide](https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit/-/blob/main/docs/quick_start.md) guides you through running an example application.
+=======
+The [MLEK](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit) provides a number of example ML applications.
+
+[The Quick Start Guide](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit/+/HEAD/docs/quick_start.md) guides you through running an example application.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ### Micro speech
 

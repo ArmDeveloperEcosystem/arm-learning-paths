@@ -10,7 +10,11 @@ layout: "learningpathall"
 ## Versatility and Functions of OpenCV ##
 OpenCV (Open Source Computer Vision Library) is designed for real-time computer vision applications. By default, it is cross-platform, and you can use it in a variety of applications, including mobile. Modern mobile devices are equipped with advanced cameras and powerful processors, meaning that they are capable of performing complex computer vision solutions. 
 
+<<<<<<< HEAD
 The cross-platform feature of OpenCV allows developers to create versatile applications that can run on multiple devices without significant modifications to the code. Specifically, OpenCV can be seamlessly integrated with Kotlin, a preferred language for Android development. Kotlin's concise syntax and interoperability with Java makes it easier to use OpenCV libraries and functions, resulting in more readable and maintainable code.
+=======
+The cross-platform feature of OpenCV allows developers to create versatile applications that can run on multiple devices without significant modifications to the code. Specifically, OpenCV can be seamlessly integrated with Kotlin, a preferred language for Android development. Kotlin’s concise syntax and interoperability with Java makes it easier to use OpenCV libraries and functions, resulting in more readable and maintainable code.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 OpenCV offers a wide range of functions for different aspects of computer vision and image processing, including:
 - Image and video capture.
@@ -27,7 +31,11 @@ The OpenCV SDK for Android is designed to be easily integrated with Android Stud
 
 ### Capturing and Processing Images ###
 
+<<<<<<< HEAD
 OpenCV simplifies the process of capturing and processing images and videos from the device's camera. This includes:
+=======
+OpenCV simplifies the process of capturing and processing images and videos from the device’s camera. This includes:
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 - Accessing the camera feed.
 - Capturing frames in real-time.
 - Applying computer vision algorithms directly to the camera feed.
@@ -38,7 +46,11 @@ Recently, OpenCV became available for Arm through the Maven repository, enabling
 
 The Learning Path comprises three steps:
 1. Create and configure your project to use OpenCV.
+<<<<<<< HEAD
 2. Extend the project to access the device's camera and retrieve camera frames with OpenCV.
+=======
+2. Extend the project to access the device’s camera and retrieve camera frames with OpenCV.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 3. Process camera images using OpenCV.
 
 You can find all the code used in this Learning Path in a [GitHub repository](https://github.com/dawidborycki/Arm64OpenCVCamera.git).

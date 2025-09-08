@@ -5,7 +5,11 @@ minutes_to_complete: 40
 
 who_is_this_for: Unity developers wanting to analyze the performance of their apps on Android devices
 
+<<<<<<< HEAD
 learning_objectives:
+=======
+learning_objectives: 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Deploy to Android
     - Profile code running on an Android device
     - Analyze performance data
@@ -19,7 +23,11 @@ prerequisites:
 author: Arm
 
 ### Tags
+<<<<<<< HEAD
 skilllevels: Introductory
+=======
+skilllevels: Intermediate
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 subjects: Performance and Architecture
 armips:
     - armv8
@@ -29,6 +37,10 @@ armips:
     - arm architecture
 tools_software_languages:
     - Unity
+<<<<<<< HEAD
+=======
+    - Mobile
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - C#
 operatingsystems:
     - Android

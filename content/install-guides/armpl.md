@@ -32,12 +32,21 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-performance-libraries#documentation) provides developers with optimized math libraries for high performance computing applications on Arm Neoverse based hardware.
 
+<<<<<<< HEAD
 These libraries include highly optimized functions for BLAS, LAPACK, FFT, sparse linear algebra, random number generation, libamath and libastring.
 These libraries are free to use and do not require a license.
 
 Arm Performance Libraries are available for use on [Windows 11 on Arm](#windows), [macOS](#macos) (Apple Silicon), and [Linux](#linux) (AArch64) hosts.
 
 ## How do I install Arm Performance Libraries on Windows? {#windows}
+=======
+These libraries include highly optimized functions for BLAS, LAPACK, FFT, sparse linear algebra, libamath and libastring.
+These libraries are free to use and do not require a license. They can be installed either standalone or with your installation of [Arm Compiler for Linux](/install-guides/acfl). This install guide covers the standalone installation.
+
+Arm Performance Libraries are available for use on [Windows 11 on Arm](#windows), [macOS](#macos) (Apple Silicon), and [Linux](#linux) (AArch64) hosts.
+
+## Windows {#windows}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 On your Windows 11 Arm machine, go to the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries).
 Click on the Download Windows section and download the Windows Installer:
@@ -63,6 +72,7 @@ Click 'Install' and then 'Finish' to complete the installation.
 
 ![win_wizard04 #left](/install-guides/_images/armpl_wizard04.png)
 
+<<<<<<< HEAD
 To install Arm Performance Libraries from a command prompt and automatically accept the End User License Agreement use:
 ```console
 msiexec.exe /i arm-performance-libraries_<version>_Windows.msi /quiet ACCEPT_EULA=1
@@ -73,53 +83,88 @@ To install Arm Performance Libraries using the `winget` package manager and auto
 winget install --accept-package-agreements Arm.ArmPerformanceLibraries
 ```
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 You can now start linking your application to the Arm Performance libraries on your Windows on Arm device. Follow the examples in the included `RELEASE_NOTES` file of your extracted installation directory to get started.
 
 For more information refer to [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/109361).
 
 
+<<<<<<< HEAD
 ## How do I install Arm Performance Libraries on macOS? {#macos}
+=======
+## macOS {#macos}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 [Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your macOS distribution.
 
 In a terminal, run the command shown below to download the macOS package:
 ```console
+<<<<<<< HEAD
 wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_25.07/arm-performance-libraries_25.07_macOS.tgz
+=======
+wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-performance-libraries/24-10/macos/arm-performance-libraries_24.10_macOS.tgz
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Use tar to extract the file:
 ```console
+<<<<<<< HEAD
 tar zxvf arm-performance-libraries_25.07_macOS.tgz
+=======
+tar zxvf arm-performance-libraries_24.10_macOS.tgz
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Output of above command:
 ```console
+<<<<<<< HEAD
 armpl_25.07_flang-20.dmg
+=======
+armpl_24.10_flang-new_clang_19.dmg
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Mount the disk image by running from a terminal:
 ```console
+<<<<<<< HEAD
 hdiutil attach armpl_25.07_flang-20.dmg
+=======
+hdiutil attach armpl_24.10_flang-new_clang_19.dmg
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Now run the installation script as a superuser:
 
 ```console
+<<<<<<< HEAD
 /Volumes/armpl_25.07_flang-20_installer/armpl_25.07_flang-20_install.sh -y
 ```
 
 Using this command you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory. If you want to change the installation directory location use the `--install_dir=` option with the script and provide the desired directory location.
+=======
+/Volumes/armpl_24.10_flang-new_clang_19_installer/armpl_24.10_flang-new_clang_19_install.sh -y
+```
+
+Using this command you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory. If you want to change the installation directory location use the `--install_dir` option with the script and provide the desired directory location.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To get started, compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.
 
 For more information refer to [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/109362).
 
 
+<<<<<<< HEAD
 ## How do I install Arm Performance Libraries on Linux? {#linux}
 
 Arm Performance Libraries are supported on most Linux distributions like Ubuntu, RHEL, SLES and Amazon Linux on an `AArch64` host and compatible with various versions of GCC, LLVM, and NVHPC. The GCC compatible releases are built with GCC 14 and tested with GCC versions 7 to 14. The LLVM compatible releases are tested with LLVM 20.1. The NVHPC compatible releases are tested with NVHPC 25.5.
 
 ### How do I manually download and install Arm Performance Libraries on Linux?
+=======
+## Linux {#linux}
+
+Arm Performance Libraries are supported on most Linux Distributions like Ubuntu, RHEL, SLES and Amazon Linux on an `AArch64` host and compatible with various versions of GCC and NVHPC. The GCC compatible releases are built with GCC 14 and tested with GCC versions 7 to 14. The NVHPC compatible releases are built and tested with NVHPC 24.7.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 [Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your Linux distribution. The deb based installers can be used on Ubuntu 20 and Ubuntu 22. The RPM based installers can be used on the following supported distributions:
 
@@ -129,28 +174,44 @@ Arm Performance Libraries are supported on most Linux distributions like Ubuntu,
 
 The instructions shown below are for deb based installers for GCC users.
 
+<<<<<<< HEAD
 In a terminal, run the command shown below to download the Debian package:
 
 ```bash
 wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_25.07/arm-performance-libraries_25.07_deb_gcc.tar
+=======
+In a terminal, run the command shown below to download the debian package:
+
+```bash
+wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_24.10/arm-performance-libraries_24.10_deb_gcc.tar
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Use `tar` to extract the file and then change directory:
 
 ```bash
+<<<<<<< HEAD
 tar xf arm-performance-libraries_25.07_deb_gcc.tar
+=======
+tar -xf arm-performance-libraries_24.10_deb_gcc.tar
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Run the installation script as a super user:
 
 ```bash
+<<<<<<< HEAD
 sudo ./arm-performance-libraries_25.07_deb/arm-performance-libraries_25.07_deb.sh --accept
+=======
+sudo ./arm-performance-libraries_24.10_deb/arm-performance-libraries_24.10_deb.sh --accept
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Using the `--accept` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.
 
 If you want to change the installation directory location use the `--install-to` option with the script and provide the desired directory location.
 
+<<<<<<< HEAD
 ### How do I download and install Arm Performance Libraries using system packages on Linux?
 
 Arm Performance Libraries are available to install using Linux system package managers. The instructions shown below are for the Ubuntu system package manager `apt` command.
@@ -172,6 +233,9 @@ sudo apt install arm-performance-libraries
 ```
 
 ### How do I set up the environment for Arm Performance Libraries on Linux?
+=======
+### Setup your environment
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Install environment modules on your machine:
 
@@ -200,13 +264,21 @@ module avail
 The output should be similar to:
 
 ```output
+<<<<<<< HEAD
 armpl/25.07_gcc
+=======
+armpl/24.10.0_gcc
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Load the appropriate module:
 
 ```console
+<<<<<<< HEAD
 module load armpl/25.07_gcc
+=======
+module load armpl/24.10.0_gcc
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 You can now compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.

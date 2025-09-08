@@ -23,10 +23,15 @@ armips:
     - Neoverse
     - Cortex-A
 tools_software_languages:
+<<<<<<< HEAD
     - Assembly
     - llvm-mca
     - Runbook
 
+=======
+    - assembly
+    - llvm-mca
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
     - Windows

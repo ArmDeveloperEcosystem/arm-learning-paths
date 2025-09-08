@@ -28,8 +28,13 @@ The previous section explained how to run a Python program to compress large fil
 
 Continue with the same `zip.py` program as the previous section. Make sure to start with `zip.py` and `largefile` available. Confirm the application is working and `largefile.gz` is created when it is run.
 
+<<<<<<< HEAD
 ```console
 python zip.py
+=======
+```bash
+python ./zip.py
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 ## Run the example with perf using the default zlib
@@ -40,7 +45,11 @@ Run with the default `zlib` and time the execution.
 perf stat python ./zip.py
 ```
 
+<<<<<<< HEAD
 The `perf stat` command will display counts of a few selected PMU events.
+=======
+The `perf stat` command will display counts of a few selected PMU events. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ## Use perf record and generate the flame graph
 
@@ -50,7 +59,11 @@ You can also record the application activity with `perf record`. `-F` specifies 
 perf record -F 99 -g python ./zip.py
 ```
 
+<<<<<<< HEAD
 To visualize the results, you can generate an image with `FlameGraph`. Install it with:
+=======
+To visualize the results, you can generate an image with `FlameGraph`. Install it with: 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```bash
 sudo apt install git -y
@@ -77,9 +90,15 @@ Note that the `zlib` and the `deflate` function are taking significant time.
 
 ## Run the example again with perf stat and zlib-cloudflare
 
+<<<<<<< HEAD
 This time use `LD_PRELOAD` to change to `zlib-cloudflare` instead and check the performance difference.
 
 Adjust the path to the Cloudflare `libz.so` as needed.
+=======
+This time use `LD_PRELOAD` to change to `zlib-cloudflare` instead and check the performance difference. 
+
+Adjust the path to the Cloudflare `libz.so` as needed. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```console
 LD_PRELOAD=/usr/local/lib/libz.so  perf stat python ./zip.py

@@ -25,6 +25,10 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
+<<<<<<< HEAD
+=======
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Arm Development Studio
     - Arm Compiler for Embedded
     - Arm Fast Models

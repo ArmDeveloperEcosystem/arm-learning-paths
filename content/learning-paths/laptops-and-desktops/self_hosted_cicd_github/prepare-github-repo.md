@@ -14,7 +14,11 @@ Now, you will prepare your GitHub repository as follows:
 1. Go to GitHub and log in with your account credentials.
 2. In the top right corner, click the + dropdown and select Import repository.
 
+<<<<<<< HEAD
 ![img5](figures/05.png)
+=======
+![img5](Figures/05.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 3. In the Import your project to GitHub section:
 * Paste the following link https://github.com/dawidborycki/arm-lp-ci-cd-net.git into the 'Your old repository's clone URL' field.
@@ -23,14 +27,22 @@ Now, you will prepare your GitHub repository as follows:
 
 After the import is complete, you will create two secrets that will store your Docker username and token. Proceed as follows
 1. Go to your repository settings, and on the left, scroll down to Secrets and variables, then click Actions:
+<<<<<<< HEAD
 ![img6](figures/06.png)
+=======
+![img6](Figures/06.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 2. Under Actions secrets and variables, click the New repository secret button. This opens the New secret window, where you should configure the secret as follows:
 * Name: DOCKER_USERNAME
 * Value: <TYPE_YOUR_USERNAME>
 * Click the Add secret button
 
+<<<<<<< HEAD
 ![img7](figures/07.png)
+=======
+![img7](Figures/07.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 3. Similarly, create another secret:
 * Name: DOCKER_PASSWORD

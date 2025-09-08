@@ -351,7 +351,11 @@ If there is an error loading the image or the folder is empty, an appropriate er
     * It converts the resultant execution time to microseconds by dividing the result by 1000.
     * This method is used to measure the time taken for model inference in the `runInference()` method.
 
+<<<<<<< HEAD
 * The `assetFilePath()` method is a helper function that copies a file from the assets folder to the application's internal storage and returns the absolute path of the copied file. This is necessary because PyTorch's `Module.load()` method requires a file path, not an InputStream. The `assetFilePath()` method does the following:
+=======
+* The `assetFilePath()` method is a helper function that copies a file from the assets folder to the application's internal storage and returns the absolute path of the copied file. This is necessary because PyTorch’s `Module.load()` method requires a file path, not an InputStream. The `assetFilePath()` method does the following:
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
     * The function reads the specified asset file.
     * It writes its contents to a file in the internal storage.

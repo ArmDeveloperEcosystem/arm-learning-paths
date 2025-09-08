@@ -25,8 +25,6 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Redis
-    - Runbook
-
 
 further_reading:
     - resource:

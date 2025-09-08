@@ -12,17 +12,28 @@ layout: "learningpathall"
 
 #### Background
 
+<<<<<<< HEAD
 The concept of a Key Broker Server (KBS) is a common one in confidential computing, and there are multiple open-source implementations, including the [Trustee](https://github.com/confidential-containers/trustee) from the [CNCF Confidential Containers](https://confidentialcontainers.org/) project.
 
 The KBS in this Learning Path is part of the [Veraison](https://github.com/veraison) project. It has been created specifically for educational purposes, so is intentionally small and simple to understand, and is not designed for production use.
+=======
+The concept of a Key Broker Server (KBS) is a common one in confidential computing, and there are multiple open-source implementations, including the [Trustee](https://github.com/confidential-containers/trustee) from the [CNCF Confidential Containers](https://confidentialcontainers.org/) project. 
+
+The KBS in this Learning Path is part of the [Veraison](https://github.com/veraison) project. It has been created specifically for educational purposes, so is intentionally small and simple to understand, and is not designed for production use. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 #### Get started
 
 First, pull the docker container image with the pre-built KBS, and then run the container:
 
 ```bash
+<<<<<<< HEAD
 docker pull armswdev/cca-learning-path:cca-key-broker-v2
 docker run --rm -it armswdev/cca-learning-path:cca-key-broker-v2
+=======
+docker pull armswdev/cca-learning-path:cca-key-broker-v1
+docker run --rm -it armswdev/cca-learning-path:cca-key-broker-v1
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Now within your running docker container, get a list of network interfaces:
@@ -45,7 +56,11 @@ The output should look like:
     inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0
        valid_lft forever preferred_lft forever
 ```
+<<<<<<< HEAD
 Start the KBS on the `eth0` network interface, and replace 172.17.0.2 shown in the command below with the IP address corresponding to eth0 in the output of `ip -c a` above.
+=======
+Start the KBS on the `eth0` network interface, and replace 172.17.0.2 shown in the command below with the IP address corresponding to eth0 in the output of "ip -c a" above.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```bash
 ./keybroker-server -v --addr 172.17.0.2
@@ -66,12 +81,20 @@ With the Key Broker Server running in one terminal, open up a new terminal in wh
 In the new terminal that you have just opened, pull the docker container image that contains the FVP and pre-built software binaries to run the Key Broker Client in a realm.
 
 ```bash
+<<<<<<< HEAD
 docker pull armswdev/cca-learning-path:cca-simulation-v2
+=======
+docker pull armswdev/cca-learning-path:cca-simulation-v1
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Now run the docker container:
 ```bash
+<<<<<<< HEAD
 docker run --rm -it armswdev/cca-learning-path:cca-simulation-v2
+=======
+docker run --rm -it armswdev/cca-learning-path:cca-simulation-v1
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Within your running container, launch the `run-cca-fvp.sh` script to run the Arm CCA pre-built binaries on the FVP:
@@ -79,11 +102,19 @@ Within your running container, launch the `run-cca-fvp.sh` script to run the Arm
 ```bash
 ./run-cca-fvp.sh
 ```
+<<<<<<< HEAD
 The `run-cca-fvp.sh` script uses the screen command to connect to the different UARTs in the FVP.
 
 You should see the host Linux kernel boot on your terminal.
 
 You will be prompted to log in to the host.
+=======
+The run-cca-fvp.sh script uses the screen command to connect to the different UARTs in the FVP.
+
+You should see the host Linux kernel boot on your terminal. 
+
+You will be prompted to log in to the host. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Enter root as the username:
 
@@ -109,11 +140,19 @@ host login: root
 Use kvmtool to launch guest Linux in a Realm:
 ```bash
 cd /cca
+<<<<<<< HEAD
 ./lkvm run --realm --disable-sve --irqchip=gicv3-its --firmware KVMTOOL_EFI.fd -c 1 -m 512 --no-pvtime --force-pci --disk guest-disk.img --measurement-algo=sha256 --restricted_mem
 ```
 You should see the realm boot.
 
 After boot up, which might take some time, you will be prompted to log in at the guest Linux prompt.
+=======
+./lkvm run --realm --disable-sve --irqchip=gicv3-its --firmware KVMTOOL_EFI.fd -c 1 -m 512 --no-pvtime --force-pci --disk guest-disk.img --measurement-algo=sha256 --restricted_mem 
+```
+You should see the realm boot. 
+
+After boot up, you will be prompted to log in at the guest Linux prompt. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Use root again as the username:
 
@@ -134,14 +173,25 @@ realm login: root
 (realm) #
 ```
 
+<<<<<<< HEAD
 Now run the Key Broker Client application in the realm.
+=======
+Now run the Key Broker Client application in the realm. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Use the endpoint address that the Key Broker Server is listening in on the other terminal:
 
 ```bash
+<<<<<<< HEAD
 keybroker-app -v --endpoint http://172.17.0.2:8088 skywalker
 ```
 In the command above, `skywalker` is the key name that is requested from the Key Broker Server.
+=======
+cd /cca 
+./keybroker-app -v --endpoint http://172.17.0.2:8088 skywalker 
+```
+In the command above, `skywalker` is the key name that is requested from the Key Broker Server. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 After some time, you should see the following output:
 ```
@@ -150,7 +200,11 @@ INFO Challenge (64 bytes) = [0f, ea, c4, e2, 24, 4e, fa, dc, 1d, ea, ea, 3d, 60,
 INFO Submitting evidence to URL http://172.17.0.2:8088/keys/v1/evidence/3974368321
 INFO Attestation failure :-( ! AttestationFailure: No attestation result was obtained. No known-good reference values.
 ```
+<<<<<<< HEAD
 You can see from the Key Broker client application output that the `skywalker` key is requested from the Key Broker Server, which did send a challenge.
+=======
+You can see from the Key Broker client application output that the `skywalker` key is requested from the Key Broker Server, which did send a challenge. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The Key Broker Client application uses the challenge to submit its evidence back to the Key Broker Server, but it receives an attestation failure. This is because the server does not have any known good reference values.
 
@@ -163,6 +217,7 @@ command-line option to populate it with known-good RIM values:
 --reference-values <(echo '{ "reference-values": [ "tiA66VOokO071FfsCHr7es02vUbtVH5FpLLqTzT7jps=" ] }')
 INFO Evidence submitted for challenge 1302147796: no attestation result was obtained. No known-good reference values.
 ```
+<<<<<<< HEAD
 From the server output, you can see that it did create the challenge for the Key Broker application, but it reports that it has no known good reference values.
 
 It does however provide a way to provision the Key Broker Server with known good values if the client is trusted.
@@ -172,6 +227,17 @@ In a production environment, the known good reference value is generated using a
 Now go ahead and terminate the running instance of the Key Broker Server using Ctrl+C and restart it with the known good reference value.
 
 Notice here that you need to copy the `--reference-values` argument directly from the previous error message reported by the Key Broker.
+=======
+From the server output, you can see that it did create the challenge for the Key Broker application, but it reports that it has no known good reference values. 
+
+It does however provide a way to provision the Key Broker Server with known good values if the client is trusted. 
+
+In a production environment, the known good reference value is generated using a deployment- specific process, but for demonstration purposes and simplification, you will use the value proposed by the Key Broker Server.
+
+Now go ahead and terminate the running instance of the Key Broker Server using Ctrl+C and restart it with the known good reference value. 
+
+Notice here that you need to copy the `--reference-values` argument directly from the previous error message reported by the Key Broker. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 When running the next command, ensure that you are copying the exact value reported, for example:
 
@@ -182,7 +248,11 @@ When running the next command, ensure that you are copying the exact value repor
 On the terminal with the running realm, rerun the Key Broker Client application with the exact same command line parameters as before:
 
 ```bash
+<<<<<<< HEAD
 keybroker-app -v --endpoint http://172.17.0.2:8088 skywalker
+=======
+./keybroker-app -v --endpoint http://172.17.0.2:8088 skywalker
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 You should now get a successful attestation as shown:

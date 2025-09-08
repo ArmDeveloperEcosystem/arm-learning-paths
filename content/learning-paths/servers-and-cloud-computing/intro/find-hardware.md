@@ -22,8 +22,13 @@ Cloud providers offer Arm instances based on Neoverse processors. For example:
 - [Hetzner Cloud](https://www.hetzner.com/news/arm64-cloud)
 
 Free tier offers are currently available:
+<<<<<<< HEAD
 - [Amazon EC2 t4g.small instances powered by AWS Graviton2 processors are free for up to 750 hours / month until Dec 31st 2025](https://aws.amazon.com/ec2/instance-types/t4/)
 - [Oracle free tier includes up to 4 instances of Arm Ampere A1 Compute 3,000 OCPU hours and 18,000 GB hours per month which are always free](https://www.oracle.com/cloud/free/)
+=======
+- [Amazon EC2 t4g.small instances powered by AWS Graviton2 processors are free until Dec 31st 2024](https://aws.amazon.com/ec2/instance-types/t4/)
+- [Oracle free tier includes up to 4 instances of ARM Ampere A1 Compute which are always free](https://www.oracle.com/cloud/free/)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 [Get started with Arm-based cloud service platforms](/learning-paths/servers-and-cloud-computing/csp/) explains how to create an account and start an Arm virtual machine using the cloud service providers listed above.
 

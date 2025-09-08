@@ -2,6 +2,7 @@ XX
 -kill
 kill
 KVM
+<<<<<<< HEAD
 kvm
 X.X.X
 .xx.
@@ -16,11 +17,19 @@ test
 TEST
 Test
 --strip-
+=======
+#IO_L3N_T0_DQS_AD1N_35
+172.X.X.X
+naked
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 (x=x
 **VM
 Kill
 slave
 Slave
+<<<<<<< HEAD
 A55
 a55
 455
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

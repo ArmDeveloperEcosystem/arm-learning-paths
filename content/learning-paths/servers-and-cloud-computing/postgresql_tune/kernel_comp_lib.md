@@ -12,7 +12,11 @@ layout: "learningpathall"
 
 The underlying storage technology and the file system format can impact performance significantly. In general, locally attached SSD storage will perform best. However, network based storage systems can perform well. As always, performance is dependent on the request profile coming from clients. You should spend some time studying and experimenting with different storage technologies and configuration options.
 
+<<<<<<< HEAD
 Aside from the storage technology, it is also worth testing different file system formats with `PostgreSQL`. The `xfs` file system is a good starting point. The `ext4` file system is another good alternative.
+=======
+Aside from the storage technology, it is also worth testing different file system formats with `PostgreSQL`. The `xfs` file system is a good starting point. The `ext4` file system is another good alternative.  
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ##  Kernel configuration
 
@@ -20,7 +24,11 @@ Aside from the storage technology, it is also worth testing different file syste
 
 ### Linux-PAM limits
 
+<<<<<<< HEAD
 Linux-PAM limits can be changed in the `/etc/security/limits.conf` file, or by using the `ulimit` command.
+=======
+Linux-PAM limits can be changed in the `/etc/security/limits.conf` file, or by using the `ulimit` command. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 If you want more information about how to display and modify parameters check the documentation of the `ulimit` command.
 
@@ -41,9 +49,15 @@ Some of the key settings that can affect performance are:
 
 ### Linux virtual memory subsystem
 
+<<<<<<< HEAD
 Making changes to the Linux Virtual Memory subsystem can also improve performance.
 
 These settings can be changed in the `/etc/sysctl.conf` file, or by using the `sysctl` command.
+=======
+Making changes to the Linux Virtual Memory subsystem can also improve performance. 
+
+These settings can be changed in the `/etc/sysctl.conf` file, or by using the `sysctl` command. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 If you want more information about how to display and modify virtual memory parameters check the documentation of the `sysctl` command.
 
@@ -57,9 +71,15 @@ sudo sysctl -a
 
 ### Overcommit memory
 
+<<<<<<< HEAD
 The overcommit policy is set via the sysctl `vm.overcommit_memory' setting.
 
 The recommended setting for `vm.overcommit_memory` is 2 according to the [PostgreSQL documentation](https://www.postgresql.org/docs/15/kernel-resources.html).
+=======
+The overcommit policy is set via the sysctl `vm.overcommit_memory' setting. 
+
+The recommended setting for `vm.overcommit_memory` is 2 according to the [PostgreSQL documentation](https://www.postgresql.org/docs/15/kernel-resources.html). 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To set the overcommit_memory parameter to 2 temporarily, run the following command:
 
@@ -75,7 +95,11 @@ This tells Linux to never over commit memory. Setting `vm.overcommit_memory` to 
 
 ### Huge memory pages
 
+<<<<<<< HEAD
 `PostgreSQL` benefits from using huge memory pages. Huge pages reduce how often virtual memory pages are mapped to physical memory.
+=======
+`PostgreSQL` benefits from using huge memory pages. Huge pages reduce how often virtual memory pages are mapped to physical memory.  
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To see the current memory page configuration, run the following command on the host:
 
@@ -94,9 +118,15 @@ Hugepagesize:       2048 kB
 Hugetlb:               0 kB
 ```
 
+<<<<<<< HEAD
 Huge pages are not being used if `HugePages_Total` is 0 (this is the default).
 
 Also note that `Hugepagesize` is 2MB which is the typical default for huge pages on Linux.
+=======
+Huge pages are not being used if `HugePages_Total` is 0 (this is the default). 
+
+Also note that `Hugepagesize` is 2MB which is the typical default for huge pages on Linux. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 You can modify the huge page values.
 
@@ -106,9 +136,15 @@ The setting that enables huge pages is shown below:
 vm.nr_hugepages
 ```
 
+<<<<<<< HEAD
 This parameter sets the number of huge pages you want the kernel to make available to applications.
 
 The total amount of memory that will be used for huge pages will be this number (defaulted to 0) times the `Hugepagesize`.
+=======
+This parameter sets the number of huge pages you want the kernel to make available to applications. 
+
+The total amount of memory that will be used for huge pages will be this number (defaulted to 0) times the `Hugepagesize`. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 As an example, if you want a total of 1GB of huge page space, then you should set `vm.nr_hugepages` to 500 (500x2MB=1GB).
 
@@ -124,7 +160,11 @@ sudo sh -c 'echo "vm.nr_hugepages=500" >> /etc/sysctl.conf'
 
 ### Selecting the number of huge pages to use
 
+<<<<<<< HEAD
 You should set `vm.nr_hugepages` to a value that gives a total huge page space slightly bigger than the `PostgreSQL` shared buffer size (discussed later).
+=======
+You should set `vm.nr_hugepages` to a value that gives a total huge page space slightly bigger than the `PostgreSQL` shared buffer size (discussed later). 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Make it slightly larger than the shared buffer because `PostgreSQL` will use additional memory for things like connection management.
 
@@ -135,6 +175,7 @@ More information on the different parameters that affect the configuration of hu
 `PostgreSQL` writes data to files like any Linux process does. The behavior of the page cache can affect performance. There are two sysctl that parameters control how often the kernel flushes the page cache data to disk.
 
 - `vm.dirty_background_ratio=5`
+<<<<<<< HEAD
 - `vm.dirty_ratio=20`
 
 The `vm.dirty_background_ratio` sets the percentage of the page cache that needs to be dirty in order for a flush to disk to start in the background.
@@ -144,6 +185,21 @@ Setting this value to lower than the default (typically 10) helps write heavy wo
 The `vm.dirty_ratio` sets the percentage of the page cache that needs to be dirty in order for threads that are writing to storage to be paused to allow flushing to catch up.
 
 This should be set higher than `vm.dirty_background_ratio`. The OS default is typically around 20 which is usually good. In some cases it may be beneficial to set this value to be higher, it gives the background flusher (controlled by `vm.dirty_background_ratio`) more time to catch up if disk writes are very bursty. In general, you can leave this to the OS default, but it may be worth experimenting with higher values on specific workload profiles.
+=======
+- `vm.dirty_ratio=80`
+
+The `vm.dirty_background_ratio` sets the percentage of the page cache that needs to be dirty in order for a flush to disk to start in the background. 
+
+Setting this value to lower than the default (typically 10) helps write heavy workloads. This is because by lowering this threshold, you are spreading writes to storage over time. This reduces the probability of saturating storage.
+
+Setting this value to 5 can improve performance.
+
+The `vm.dirty_ratio` sets the percentage of the page cache that needs to be dirty in order for threads that are writing to storage to be paused to allow flushing to catch up. 
+
+Setting this value higher than default (typically 10-20) helps performance when disk writes are bursty. A higher value gives the background flusher (controlled by `vm.dirty_background_ratio`) more time to catch up. 
+
+Setting this as high as 80 can improve performance.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ##  Compiler Considerations
 

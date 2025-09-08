@@ -8,7 +8,11 @@ layout: "learningpathall"
 
 ## What is the Azure Cobalt 100 Arm-based processor?
 
+<<<<<<< HEAD
 Cobalt 100 is Microsoft's first Arm-based server processor, built using the Armv9 Neoverse-N2 CPU. 
+=======
+Cobalt 100 is Microsoft’s first Arm-based server processor, built using the Armv9 Neoverse-N2 CPU. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The Cobalt 100 processor is optimized for the performance of scale-out cloud-based applications. 
 

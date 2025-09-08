@@ -4,7 +4,11 @@ title: Get Started with CCA Attestation and Veraison
 minutes_to_complete: 30
 
 
+<<<<<<< HEAD
 who_is_this_for: This Learning Path is for developers who would like to learn about attestation in confidential computing, using Arm's Confidential Computing Architecture (CCA). 
+=======
+who_is_this_for: This Learning Path is for developers who would like to learn about attestation in confidential computing, using Arm’s Confidential Computing Architecture (CCA). 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 learning_objectives:
     - Describe the importance of attestation in confidential computing.
@@ -29,9 +33,12 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - CCA
+<<<<<<< HEAD
     - RME
     - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 
 

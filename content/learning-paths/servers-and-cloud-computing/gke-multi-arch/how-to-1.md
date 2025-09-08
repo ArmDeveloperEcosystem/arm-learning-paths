@@ -8,7 +8,11 @@ layout: learningpathall
 
 ## Migrate an existing x86-based application to run on Arm-based nodes in a single GKE cluster 
 
+<<<<<<< HEAD
 Google Kubernetes Engine (GKE) supports hybrid clusters with x86 and Arm based nodes. The Arm-based nodes can be deployed on the `C4A` family of virtual machines. The `C4A` VMs are based on [Google Axion](http://cloud.google.com/products/axion/), Google's first Arm-based server processor, built using the Armv9 Neoverse V2 CPU.
+=======
+Google Kubernetes Engine (GKE) supports hybrid clusters with x86 and Arm based nodes. The Arm-based nodes can be deployed on the `C4A` family of virtual machines. The `C4A` VMs are based on [Google Axion](http://cloud.google.com/products/axion/), Google’s first Arm-based server processor, built using the Armv9 Neoverse V2 CPU.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ## Before you begin
 

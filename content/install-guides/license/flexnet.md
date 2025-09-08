@@ -15,15 +15,25 @@ Older Arm products do not support user-based licenses. These will be enabled wit
 
 You will be supplied with license key(s) to generate such license(s).
 
+<<<<<<< HEAD
 ## How do I set up a license server?
 
 ### How do I download the FlexNet Publisher software?
+=======
+## License server set up
+
+### Download the latest FlexNet Publisher software
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 License Administrators should download and install the latest FlexNet Publisher software to your internal license server.
 ```url
 https://developer.arm.com/downloads/-/download-flexnet-publisher
 ```
+<<<<<<< HEAD
 ### How do I generate a license file?
+=======
+### Generate license file
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Access the [Software Licensing Portal](https://developer.arm.com/support/licensing) to generate your license. You will need the `HOSTID` of the license server and your product license key from Arm.
 
@@ -31,7 +41,11 @@ Optionally add license server names and network port to the `SERVER` line of the
 ```output
 SERVER HOSTNAME HOSTID PORT
 ```
+<<<<<<< HEAD
 ### How do I launch the license server?
+=======
+### Launch the license server
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Start the license server with:
 ```command
@@ -40,7 +54,11 @@ lmgrd -c license_file
 See the [FlexNet for Arm Tools License Management Guide](https://developer.arm.com/documentation/dui0209) for full options.
 
 
+<<<<<<< HEAD
 ## How do I configure end-user setup?
+=======
+## End-user set up
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 End-users should set the environment variable `ARMLMD_LICENSE_FILE` to map to the location of your license server.
 
@@ -53,7 +71,11 @@ set ARMLMD_LICENSE_FILE=port@server
 export ARMLMD_LICENSE_FILE=port@server
 ```
 
+<<<<<<< HEAD
 ### How do I activate the license via tools IDE?
+=======
+### Activate via tools IDE
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The license can also be activated in the various Arm tool IDEs.
 
@@ -63,7 +85,11 @@ If `ARMLMD_LICENSE_FILE` is not set, use `Add` > `Add product license`, and spec
 
 Arm Development Studio will also ask to specify the appropriate [Edition](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio#Editions) as the `Active Product`.
 
+<<<<<<< HEAD
 ### How do I verify the license setup?
+=======
+### Verify setup
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To verify that the license is set up correctly, set the following environment variable:
 

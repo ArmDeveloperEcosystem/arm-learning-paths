@@ -24,8 +24,11 @@ operatingsystems:
 tools_software_languages:
     - MySQL
     - GCC
+<<<<<<< HEAD
     - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 test_images:
     - ubuntu:latest

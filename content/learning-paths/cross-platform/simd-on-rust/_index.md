@@ -22,9 +22,14 @@ armips:
 tools_software_languages:
     - GCC
     - Clang
+<<<<<<< HEAD
     - Rust
     - Runbook
 
+=======
+    - Coding
+    - Rust
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
 shared_path: true

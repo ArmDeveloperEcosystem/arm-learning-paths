@@ -20,7 +20,11 @@ weight: 1
 
 The Amazon Web Services (AWS) Serverless Application Model (SAM) CLI is an open-source command-line tool that you can use to build, test, and deploy serverless applications. The SAM CLI provides a Lambda-like execution environment that lets you locally build, test and debug applications defined by AWS SAM templates. It is available for a variety of operating systems and Linux distributions, and supports the Arm architecture. 
 
+<<<<<<< HEAD
 ## How do I prepare to install the AWS SAM CLI on Ubuntu?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Follow the instructions below to install and try the latest version of the AWS SAM CLI for Ubuntu on Arm.
 
@@ -48,14 +52,22 @@ To install, run the following command:
 sudo apt install python-is-python3 python3-pip -y
 ```
 
+<<<<<<< HEAD
 ## How do I download and install the AWS SAM CLI?
+=======
+## Download and install the AWS SAM CLI
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 There are two options to install the SAM CLI, you can select your preferred method:
 
 * From a zip file.
 * Using the Python `pip` command.
 
+<<<<<<< HEAD
 ### How do I download and install from a zip file?
+=======
+### Download and install from zip file
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Use `wget`:
 
@@ -65,7 +77,11 @@ unzip aws-sam-cli-linux-arm64.zip -d sam-install
 sudo ./sam-install/install
 ```
 
+<<<<<<< HEAD
 ### How do I install the AWS SAM CLI using Python pip?
+=======
+### Install the SAM CLI using Python pip
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```
 sudo apt install python3-venv -y
@@ -74,7 +90,11 @@ source .venv/bin/activate
 pip install aws-sam-cli
 ```
 
+<<<<<<< HEAD
 ### How can I confirm that the AWS SAM CLI was installed correctly?
+=======
+### Confirm that the SAM CLI has been installed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```bash
 sam --version
@@ -86,7 +106,11 @@ The version should be printed on screen:
 SAM CLI, version 1.125.0
 ```
 
+<<<<<<< HEAD
 ## How do I create an example application with the AWS SAM CLI?
+=======
+## Example application
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 You can use the AWS SAM CLI to build and deploy a simple "Hello World" serverless application that includes the line `uname -m` to check the platform it is running on, by following these steps.
 
@@ -173,5 +197,9 @@ REPORT RequestId: 513dbd6f-7fc0-4212-ae13-a9a4ce2f21f4	Init Duration: 0.26 ms	Du
 {"statusCode": 200, "body": "{\"message\": \"aarch64\\n\"}"}
 ```
 
+<<<<<<< HEAD
 You are ready to use the AWS SAM CLI to build more complex functions and deploy them into AWS. Make sure to select `arm64` as the architecture for your Lambda functions.
+=======
+You are ready to use the AWS SAM CLI to build more complex functions and deploy them into AWS. Make sure to select `arm64` as the architecture for your Lambda functions. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 

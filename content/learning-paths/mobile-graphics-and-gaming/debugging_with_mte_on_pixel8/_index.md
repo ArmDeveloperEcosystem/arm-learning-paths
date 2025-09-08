@@ -27,7 +27,11 @@ armips:
     - Cortex-A
 tools_software_languages:
     - Android Studio
+<<<<<<< HEAD
     - MTE
+=======
+    - Memory Tagging Extension
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Android
 

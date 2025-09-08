@@ -8,17 +8,26 @@ weight: 2 # (intro is 1), 2 is first, 3 is second, etc.
 layout: "learningpathall"
 ---
 
+<<<<<<< HEAD
 ## Overview
 
+=======
+
+## Overview
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 "Glibc with LSE" refers to the version of [the GNU C Library (glibc)](https://www.gnu.org/software/libc/) that includes support for [LSE (Large Systems Extensions)](https://learn.arm.com/learning-paths/servers-and-cloud-computing/lse/). LSE is an extension to the ARMv8-A architecture that provides enhanced atomic operations and memory model features.
 
 LSE introduces additional atomic instructions and operations, such as Load-Acquire, Store-Release, and Atomic Compare-and-Swap (CAS). These operations allow for more efficient synchronization and concurrent access to shared memory in multi-threaded applications running on ARMv8-A processors.
 
 When glibc is compiled with LSE support, it can take advantage of these enhanced atomic operations provided by the LSE extension. This can potentially improve the performance of multi-threaded applications that heavily rely on atomic operations and synchronization primitives.
 
+<<<<<<< HEAD
 {{% notice Warning %}}
 If you have a recent version of Linux, you probably do not need to change your GNU C Library. 
 
+=======
+{{% notice Note %}}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 Your version of the GNU C Library may already have support for LSE. Before you build a new version check if LSE is already included by running:
 
 ```console
@@ -27,8 +36,11 @@ objdump -d /lib/aarch64-linux-gnu/libc.so.6 | grep -i 'cas\|casp\|swp\|ldadd\|st
 
 If a non-zero number is printed your GNU C Library already has LSE.
 
+<<<<<<< HEAD
 Most recent Linux distributions, including Ubuntu 22.04 and Ubuntu 24.04, already have LSE included in the GNU C Library. 
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 {{% /notice %}}
 
 ## Before you begin
@@ -43,12 +55,15 @@ sudo apt install -y gcc-10 g++-10 gawk bison make
 ```
 
 ## Build and Install Glibc
+<<<<<<< HEAD
 
 
 {{% notice Danger %}}
 Incorrectly modifying the GNU C Library on your system may result in failing applications or complete system failure. You should use a temporary virtual machine which can be deleted if problems occur. 
 {{% /notice %}}
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 You can now checkout the glibc source package and create a build directory:
 
 ```bash

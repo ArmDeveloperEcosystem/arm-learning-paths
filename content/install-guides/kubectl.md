@@ -17,6 +17,11 @@ test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
+<<<<<<< HEAD
+=======
+test_status:
+- passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 title: Kubectl
 tool_install: true
 weight: 1
@@ -28,7 +33,11 @@ The Kubernetes command-line tool, [kubectl](https://kubernetes.io/docs/reference
 
 ## What should I consider before installing kubectl for Ubuntu on Arm?
 
+<<<<<<< HEAD
 [General installation information](https://kubernetes.io/docs/tasks/tools/) is available which covers all supported operating systems, but it doesn't talk about Arm.
+=======
+[General installation information](https://kubernetes.io/docs/tasks/tools/) is available which covers all supported operating systems, but it doesn't talk about Arm. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 This article provides a quick solution to install `kubectl` for Ubuntu on Arm.
 
@@ -46,7 +55,11 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## How do I download and Install kubectl for Ubuntu on Arm?
 
+<<<<<<< HEAD
 The easiest way to install `kubectl` for Ubuntu on Arm is to use curl and copy the executable to a common location.
+=======
+The easiest way to install `kubectl` for Ubuntu on Arm is to use curl and copy the executable to a common location. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To install curl, for example on ubuntu:
 
@@ -60,7 +73,11 @@ Download and install the latest version of `kubctl`. There is just 1 executable 
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
 ```
 
+<<<<<<< HEAD
 If you have sudo or root access, install the executable in a common location for all users.
+=======
+If you have sudo or root access, install the executable in a common location for all users. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```bash { target="ubuntu:latest" }
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl

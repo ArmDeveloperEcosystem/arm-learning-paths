@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {{/* Any codeblock in markdown will be processed through this code. Linking to the following partial to remain
 consistent with tabpane shortcode.
 ```.Type { line_numbers = .Attributes.line_numbers output_lines = .Attributes.output_lines command_line =
@@ -8,3 +9,12 @@ consistent with tabpane shortcode.
 {{partial "general-formatting/prismjs-codeblock.html" (dict "input_from" "normal" "code" .Inner "language" .Type
 "line_numbers" .Attributes.line_numbers "output_lines" .Attributes.output_lines "command_line" .Attributes.command_line "line_start" .Attributes.line_start)
 }}
+=======
+
+{{/* Any codeblock in markdown will be processed through this code. Linking to the following partial to remain consistent with tabpane shortcode.
+    ```.Type { line_numbers = .Attributes.line_numbers   output_lines = .Attributes.output_lines    command_line = .Attributes.command_line  }
+        .Inner
+    ```
+*/}}
+{{partial "general-formatting/prismjs-codeblock.html" (dict "input_from" "normal" "code" .Inner "language" .Type "line_numbers" .Attributes.line_numbers  "output_lines" .Attributes.output_lines "command_line" .Attributes.command_line) }}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

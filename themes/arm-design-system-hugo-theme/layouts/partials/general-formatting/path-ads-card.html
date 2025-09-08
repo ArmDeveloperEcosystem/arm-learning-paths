@@ -32,9 +32,17 @@ Called from:
             &nbsp; {{.calculated_date.Format "02 Jan 2006"}}
 
             &nbsp;&nbsp;&nbsp;&nbsp;
+<<<<<<< HEAD
 
             <span><i class="fa-light fa-clock"></i></span>
             &nbsp;<span class="time-to-complete-string" name="{{.learning_path.Params.minutes_to_complete}}">{{partial "server-side-processing/time-beautifier.html" .learning_path.Params.minutes_to_complete}}</span>
         </p>
     </ads-card-content>
+=======
+            
+            <span><i class="fa-light fa-clock"></i></span>
+            &nbsp;<span class="time-to-complete-string" name="{{.learning_path.Params.minutes_to_complete}}">{{partial "partials/server-side-processing/time-beautifier.html" .learning_path.Params.minutes_to_complete}}</span>
+        </p>
+    </ads-card-content>   
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 </ads-card>

@@ -23,13 +23,20 @@ In the Matrix processing library, you implement two types of checks:
 
 The idea here is to make the program fail in a noticeable way. Of course, in a real world application, the error should be caught and dealt with by the application, if it can. Error handling, and especially recovering from errors, can be a complex topic.
 
+<<<<<<< HEAD
 At the top of file `include/Matrix/Matrix.h`, include `<cassert>` to get the C-style assertions declarations for checks in `Debug` mode only, as well as `<cstddef>` which provides standard C declaration like `size_t`:
+=======
+At the top of file `include/Matrix/Matrix.h`, include `<cassert>` to get the C-style assertions declarations for checks in `Debug` mode only:
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```CPP
 #pragma once
 
 #include <cassert>
+<<<<<<< HEAD
 #include <cstddef>
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 namespace MatComp {
 ```
@@ -45,7 +52,11 @@ const Version &getVersion();
 /// and the EXIT_FAILURE error code. It will also print the file name (\p
 /// fileName) and line number (\p lineNumber) that caused that application to
 /// exit.
+<<<<<<< HEAD
 [[noreturn]] void die(const char *fileName, size_t lineNumber,
+=======
+[[noreturn]] void die(const char *fileName, std::size_t lineNumber,
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
                       const char *reason);
 
 ```
@@ -63,6 +74,7 @@ Open `lib/Matrix/Matrix.cpp` and include at the top of the file:
 
 Add `die`'s body as shown below:
 
+<<<<<<< HEAD
 ```CPP
 #include "Matrix/Matrix.h"
 
@@ -85,6 +97,9 @@ void die(const char *fileName, size_t lineNumber, const char *reason) {
 
 } // namespace MatComp
 ```
+=======
+{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-3/lib/Matrix/Matrix.cpp" >}}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 At this stage, the project should still build and compile, try it to confirm:
 
@@ -110,11 +125,18 @@ The Matrix data structure has the following private data members:
 Modern C++ offers constructs in the language to deal safely with memory; you will use `std::unique_ptr` which guaranties that the Matrix class will be safe from a whole range of memory management errors.
 
 Add the following includes at the top of `include/Matrix/Matrix.h`, right under
+<<<<<<< HEAD
 the `<cstddef>` include:
 
 ```CPP
 #include <cassert>
 #include <cstddef>
+=======
+the '<cassert>' include:
+
+```CPP
+#include <cassert>
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 #include <cstring>
 #include <initializer_list>
 #include <iostream>
@@ -231,6 +253,15 @@ TEST(Matrix, defaultConstruct) {
 TEST(Matrix, booleanConversion) {
     EXPECT_FALSE(Matrix<int8_t>());
     EXPECT_FALSE(Matrix<double>());
+<<<<<<< HEAD
+=======
+
+    EXPECT_TRUE(Matrix<int8_t>(1, 1));
+    EXPECT_TRUE(Matrix<double>(1, 1));
+
+    EXPECT_TRUE(Matrix<int8_t>(1, 1, 1));
+    EXPECT_TRUE(Matrix<double>(1, 1, 2.0));
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 }
 ```
 
@@ -316,9 +347,15 @@ The tests should still pass, check for yourself.
 The next step is to be able to construct valid matrices, so add this constructor to the public section of class `Matrix` in `include/Matrix/Matrix.h`:
 
 ```CPP
+<<<<<<< HEAD
     /// Construct a \p numRows x \p numCols uninitialized Matrix
     Matrix(size_t numRows, size_t numCols)
         : numRows(numRows), numColumns(numCmns), data() {
+=======
+    /// Construct a \p numRows x \p numColumns uninitialized Matrix
+    Matrix(size_t numRows, size_t numColumns)
+        : numRows(numRows), numColumns(numColumns), data() {
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
         allocate(getNumElements());
     }
 ```
@@ -344,6 +381,7 @@ TEST(Matrix, uninitializedConstruct) {
 ```
 
 This constructs a valid `Matrix` if it contains elements), and the `uninitializedConstruct` test checks that two valid matrices of different types and dimensions can be constructed.
+<<<<<<< HEAD
 You should also update the `booleanConversion` test in this file to check for boolean conversion for valid matrices so it now looks like:
 
 ```CPP
@@ -355,6 +393,8 @@ TEST(Matrix, booleanConversion) {
     EXPECT_TRUE(Matrix<double>(1, 1));
 }
 ```
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Compile and test again, all should pass:
 
@@ -381,6 +421,7 @@ ninja check
 [  PASSED  ] 4 tests.
 ```
 
+<<<<<<< HEAD
 Another constructor that is missing is one that will create and initialize matrices to a known value. Let's add it to `Matrix` in `include/Matrix/Matrix.h`:
 
 ```CPP
@@ -410,6 +451,8 @@ TEST(Matrix, booleanConversion) {
 
 You should be getting the pattern now: each new feature or method comes with tests.
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 The `Matrix` class is missing two important methods:
 - A *getter*, to read the matrix element at (row, col).
 - A *setter*, to modify the matrix element at (row, col).
@@ -433,6 +476,23 @@ Add them now in the public section of `Matrix` in `include/Matrix/Matrix.h`:
     }
 ```
 
+<<<<<<< HEAD
+=======
+Another constructor that is missing is one that will create and initialize matrices to a known value. Let's add it to `Matrix` in `include/Matrix/Matrix.h`:
+
+```CPP
+    /// Construct a \p numRows x \p numColumns Matrix with all elements
+    /// initialized to value \p val.
+    Matrix(size_t numRows, size_t numCols, Ty val) : Matrix(numRows, numCols) {
+        allocate(getNumElements());
+        for (size_t i = 0; i < getNumElements(); i++)
+            data[i] = val;
+    }
+```
+
+You should be getting the pattern now.
+
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 Add tests for those 3 methods in `tests/Matrix.cpp`:
 
 ```CPP
@@ -525,7 +585,11 @@ The C++ `std::initializer_list`  enables users to provide a list of literal
 values (in row major order) to use to initialize the matrix with:
 
 ```CPP
+<<<<<<< HEAD
     /// Construct a \p numRows x \p numCols Matrix with elements
+=======
+    /// Construct a \p numRows x \p numColumns Matrix with elements
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     /// initialized from the values from \p il in row-major order.
     Matrix(size_t numRows, size_t numCols, std::initializer_list<Ty> il)
         : Matrix(numRows, numCols) {
@@ -884,7 +948,11 @@ ninja check
 [----------] 16 tests from Matrix (0 ms total)
 
 [----------] Global test environment tear-down
+<<<<<<< HEAD
 [==========] 16 tests from 1 test suite ran. (0 ms total)
+=======
+[==========] 16 tests from 3 test suites ran. (0 ms total)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 [  PASSED  ] 16 tests.
 ```
 
@@ -963,7 +1031,10 @@ Add these to the public section of `Matrix` in `include/Matrix/Matrix.h`:
                 return false;
         return true;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     /// Returns true iff matrices do not compare equal.
     bool operator!=(const Matrix &rhs) const { return !(*this == rhs); }
 ```
@@ -1089,7 +1160,10 @@ After this rather long exercise, you have a minimalistic, yet fully-functional c
 Modern C++ enables you to express move and copy semantics, and to use smart pointers to make memory management easy.
 
 The compiler also catch a large number of type or misuse errors. With this core functionality in place, you have all you need to implement matrix operations in the next section.
+<<<<<<< HEAD
 
 You can refer to this chapter source code in
 `code-examples/learning-paths/cross-platform/matrix/chapter-3` in the archive that
 you have downloaded earlier.
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

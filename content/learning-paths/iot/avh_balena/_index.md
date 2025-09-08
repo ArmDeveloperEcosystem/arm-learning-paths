@@ -31,9 +31,15 @@ operatingsystems:
 
 tools_software_languages:
     - Arm Virtual Hardware
+<<<<<<< HEAD
     - balenaCloud
     - Raspberry Pi
     - BalenaOS
+=======
+    - Balena Cloud
+    - Raspberry Pi
+    - Balena OS
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

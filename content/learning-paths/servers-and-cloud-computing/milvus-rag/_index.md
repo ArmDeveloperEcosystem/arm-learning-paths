@@ -23,10 +23,15 @@ armips:
     - Neoverse
 tools_software_languages:
     - Python
+<<<<<<< HEAD
     - Generative AI
     - RAG
     - Hugging Face
 
+=======
+    - GenAI
+    - RAG
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
 

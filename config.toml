@@ -27,12 +27,6 @@ cloudFrontDistributionID = "E2NEF61QWPFRIH"
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-    [markup.goldmark.extensions]
-      [markup.goldmark.extensions.passthrough]
-        enable = true
-        [markup.goldmark.extensions.passthrough.delimiters]
-          block = [['\[', '\]'], ['$$', '$$']]
-          inline = [['\(', '\)']]
 
 [frontmatter]
 lastmod = ["lastmod", ":git", "date", "publishDate"]
@@ -89,17 +83,3 @@ title = 'Arm Learning Paths'
 description = 'Tutorials with code examples, created by the Arm ecosystem to develop better code faster across all platforms: Servers, phones, laptops, embedded devices, and microcontrollers.'
 social_image = '/img/social-image.png'
 twitter_handle = '@ArmSoftwareDev'
-
-math = true
-
-
-# Enabling building of COVEO-specific sitemap in addition to the normal one.
-[outputFormats]
-  [outputFormats.COVEO]
-    mediaType = "application/xml"
-    baseName = "sitemap-COVEO"
-    isPlainText = true
-    notAlternative = true
-
-[outputs]
-  home = ["HTML", "COVEO"]

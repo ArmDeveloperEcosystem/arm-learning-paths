@@ -6,7 +6,6 @@ weight: 4
 layout: learningpathall
 ---
 
-TODO: Ask Annie to try from her end
 ## Compile and build the executable
 
 Start by setting some environment variables that are used by ExecuTorch.
@@ -28,9 +27,9 @@ You are now in $HOME/executorch and ready to create the model file for ExecuTorc
 
 ```bash
 cd $ET_HOME
-python -m examples.arm.aot_arm_compiler --model_name=examples/arm/tiny_sentiment.py \
+python -m examples.arm.aot_arm_compiler --model_name=examples/arm/rps_tiny.py \
 --delegate --quantize --target=ethos-u85-256 \
---so_library=cmake-out-aot-lib/kernels/quantized/libquantized_ops_aot_lib.so \
+--so_library=kernels/quantized/libquantized_ops_aot_lib.so \
 --system_config=Ethos_U85_SYS_DRAM_Mid --memory_mode=Sram_Only
 ```
 
@@ -45,13 +44,33 @@ cmake -DCMAKE_BUILD_TYPE=Release \
 -DTARGET_CPU=cortex-m85 \
 -DET_DIR_PATH:PATH=$ET_HOME/ \
 -DET_BUILD_DIR_PATH:PATH=$ET_HOME/cmake-out \
--DET_PTE_FILE_PATH:PATH=$ET_HOME/tiny_sentiment_arm_delegate_ethos-u85-256.pte \
+-DET_PTE_FILE_PATH:PATH=$ET_HOME/examples/arm/rps_tiny.pte \
 -DETHOS_SDK_PATH:PATH=$ET_HOME/examples/arm/ethos-u-scratch/ethos-u \
 -DETHOSU_TARGET_NPU_CONFIG=ethos-u85-256 \
 -DPYTHON_EXECUTABLE=$HOME/executorch-venv/bin/python3 \
 -DSYSTEM_CONFIG=Ethos_U85_SYS_DRAM_Mid  \
 -B $ET_HOME/examples/arm/executor_runner/cmake-out
 
+```
+
+You should see:
+
+```bash
+-- *******************************************************
+-- PROJECT_NAME                           : ethos-u-corstone-320
+-- TR_ARENA_SIZE                          : 
+-- MESSAGE_HANDLER_ARENA_SIZE             : 
+-- *******************************************************
+-- ET_ARM_BAREMETAL_SCRATCH_TEMP_ALLOCATOR_POOL_SIZE = 0x200000
+-- ET_ARM_BAREMETAL_FAST_SCRATCH_TEMP_ALLOCATOR_POOL_SIZE = 
+-- Configuring done (17.1s)
+-- Generating done (0.2s)
+-- Build files have been written to: ~/executorch/examples/arm/executor_runner/cmake-out
+```
+
+Build the Ethos-U runner:
+
+```bash
 cmake --build $ET_HOME/examples/arm/executor_runner/cmake-out --parallel -- arm_executor_runner
 
 ```

@@ -7,6 +7,10 @@
 
     "remoteUser": "ubuntu",
 
+<<<<<<< HEAD
     "postStartCommand": "nohup bash -c 'hugo ; bin/pagefind --site public --output-subdir ../static/pagefind ; hugo server --baseURL=/ --liveReloadPort=443 --appendPort=false --bind=0.0.0.0 &' "
+=======
+    "postStartCommand": "nohup bash -c 'hugo ; bin/pagefind --site public --output-subdir ../static/pagefind ; hugo server --baseUrl=/ --liveReloadPort=443 --appendPort=false --bind=0.0.0.0 &' "
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 }

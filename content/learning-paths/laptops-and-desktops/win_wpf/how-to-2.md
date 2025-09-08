@@ -14,6 +14,7 @@ To prepare an application for ARM64 and x86_64 builds, proceed as follows:
 
 1. Click the **Any CPU** drop-down menu and select Configuration Manager...:
 
+<<<<<<< HEAD
 ![fig8](figures/08.png)
 
 2. In the Configuration Manager, click New... from the **Active Solution Platform** drop-down menu:
@@ -23,11 +24,23 @@ To prepare an application for ARM64 and x86_64 builds, proceed as follows:
 3. In the **New Solution Platform** window, select ARM64, and click the OK button, as shown below:
 
 ![fig10](figures/10.png)
+=======
+![fig8](Figures/08.png)
+
+2. In the Configuration Manager, click New... from the **Active Solution Platform** drop-down menu:
+
+![fig9](Figures/09.png)
+
+3. In the **New Solution Platform** window, select ARM64, and click the OK button, as shown below:
+
+![fig10](Figures/10.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 4. Repeat these steps to create the x86_64 solution platform.
 
 To build and run the application, select the **solution platform** (for example, x86_64) and then click the **Arm64.Desktop.WPF button**:
 
+<<<<<<< HEAD
 ![fig11](figures/11.png)
 
 When the application launches, type the execution count value, e.g., 2000 and click the "Run calculations" button. The application will display the column with the label denoting the computation time. Repeat this for other execution counts: 4000, 6000, 8000 and 10000. Your results should look like the following figure:
@@ -37,6 +50,17 @@ When the application launches, type the execution count value, e.g., 2000 and cl
 Now, relaunch the application for the ARM64 solution platform and observe the computation times:
 
 ![fig13](figures/13.png)
+=======
+![fig11](Figures/11.png)
+
+When the application launches, type the execution count value, e.g., 2000 and click the "Run calculations" button. The application will display the column with the label denoting the computation time. Repeat this for other execution counts: 4000, 6000, 8000 and 10000. Your results should look like the following figure:
+
+![fig12](Figures/12.png)
+
+Now, relaunch the application for the ARM64 solution platform and observe the computation times:
+
+![fig13](Figures/13.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 On average, we have achieved about a 30% reduction in computation times.
 

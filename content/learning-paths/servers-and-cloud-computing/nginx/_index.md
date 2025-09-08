@@ -23,7 +23,11 @@ subjects: Web
 armips:
     - Neoverse
 tools_software_languages:
+<<<<<<< HEAD
     - NGINX
+=======
+    - Nginx    
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
 
@@ -31,6 +35,11 @@ test_images:
 - ubuntu:latest
 test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
 test_maintenance: true
+<<<<<<< HEAD
+=======
+test_status:
+- passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

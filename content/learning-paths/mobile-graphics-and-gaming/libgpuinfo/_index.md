@@ -26,7 +26,11 @@ armips:
 operatingsystems:
     - Android
 tools_software_languages:
+<<<<<<< HEAD
     - Android NDK
+=======
+    - NDK
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - adb
 
 further_reading:

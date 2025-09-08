@@ -37,7 +37,11 @@ Perf can be used on a wide variety of Arm Linux systems including laptops, deskt
 
 Perf is best installed using a Linux package manager, but if a suitable package is not available you can build it from source code. Both situations are covered below.
 
+<<<<<<< HEAD
 ## What should I do before installing Perf?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Follow the instructions below to install Perf on an Arm Linux system.
 
@@ -73,7 +77,11 @@ For example:
 
 This indicates kernel version 5.15.
 
+<<<<<<< HEAD
 ## How do I install Perf?
+=======
+## Install Perf
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The Perf source code is part of the Linux kernel source tree.
 
@@ -81,7 +89,11 @@ There are two ways to install Perf on Arm Linux machines:
 - Use a [Linux package manager](#packman)
 - Build the [source code](#source)
 
+<<<<<<< HEAD
 ### How do I install Perf using a Linux package manager? {#packman}
+=======
+### Use a Linux package manager {#packman}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 If a package exists for your specific kernel version you can install Perf using the package manager.
 
@@ -107,7 +119,11 @@ There are hundreds of packages, and the package name must match the output of `u
 
 If there is no match, you can install Perf using the source code as described in the next [section](#source).
 
+<<<<<<< HEAD
 ### How do I build Perf from source code? {#source}
+=======
+### Build the source code {#source}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 If there is no package available for your kernel version you can build Perf from source code.
 
@@ -148,7 +164,11 @@ To copy it use:
 sudo cp tools/perf/perf /usr/local/bin
 ```
 
+<<<<<<< HEAD
 ## How do I test Perf? {#test}
+=======
+## Test Perf {#test}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Regardless of how you installed Perf, run the `version` command:
 
@@ -223,7 +243,11 @@ Error #2:
 E: linux-perf-5.15 is not installed.
 ```
 
+<<<<<<< HEAD
 ### How do I generate a test Perf report?
+=======
+### Generate a test Perf report
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Generate a simple Perf report. For example:
 ```console
@@ -251,7 +275,11 @@ Access to performance monitoring and observability operations is limited.
 ```
 You will need to modify the [PMU access permissions](#access).
 
+<<<<<<< HEAD
 ### How do I manage PMU access permissions? {#access}
+=======
+### PMU access permission {#access}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 On some systems, using Perf to access hardware counters is restricted by the value of `/proc/sys/kernel/perf_event_paranoid`
 
@@ -279,7 +307,11 @@ To permanently set the paranoid level, add the following line to the file `/etc/
 kernel.perf_event_paranoid=2
 ```
 
+<<<<<<< HEAD
 ### What are some additional Perf commands?
+=======
+### Additional Perf commands
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 There are five common commands used in performance analysis.
 
@@ -291,7 +323,11 @@ There are five common commands used in performance analysis.
 
 * **annotate** displays the annotated code showing the source and assembly code for the samples
 
+<<<<<<< HEAD
 ### How do I check the Arm PMU driver?
+=======
+### Arm PMU driver
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Arm systems use a kernel driver to expose PMU hardware counters. The driver needs to be enabled in the Linux kernel in order to collect the hardware events.
 

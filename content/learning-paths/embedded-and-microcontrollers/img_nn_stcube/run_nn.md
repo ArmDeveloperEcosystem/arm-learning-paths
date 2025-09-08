@@ -37,20 +37,36 @@ If the board is not detected, click the black button on the board to reset, then
 
 Select the model network from the list of models deployed on the board.
 
+<<<<<<< HEAD
 ![output9](images/lab4_9.PNG)
 
 Select the network and the label file (`Data/labels/cifar10_labels.txt`)
 
 ![output10](images/lab4_10.PNG)
+=======
+![output9](Images/lab4_9.PNG)
+
+Select the network and the label file (`Data/labels/cifar10_labels.txt`)
+
+![output10](Images/lab4_10.PNG)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Open an image to test. The tool will automatically launch a new pane, and show the inference result.
 
 Observe that the model correctly predicted the label. In addition, note the time taken to finish the prediction.
 
+<<<<<<< HEAD
 ![output11](images/lab4_11.PNG)
 
 You can also use your workstation camera to test image classification. Hold an appropriate picture up to your camera, then press `S`. The tool captures the image and sends it to the board.
 
 ![output12](images/lab4_12.PNG)
+=======
+![output11](Images/lab4_11.PNG)
+
+You can also use your workstation camera to test image classification. Hold an appropriate picture up to your camera, then press `S`. The tool captures the image and sends it to the board.
+
+![output12](Images/lab4_12.PNG)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 You have now successfully ran the model on your STM32 board.

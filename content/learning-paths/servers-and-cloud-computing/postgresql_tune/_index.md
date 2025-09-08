@@ -16,6 +16,11 @@ author: Julio Suarez
 test_images:
     - ubuntu:latest
 test_maintenance: true
+<<<<<<< HEAD
+=======
+test_status:
+    - passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ### Tags
 skilllevels: Advanced
@@ -28,8 +33,11 @@ tools_software_languages:
     - SQL
     - PostgreSQL
     - HammerDB
+<<<<<<< HEAD
     - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

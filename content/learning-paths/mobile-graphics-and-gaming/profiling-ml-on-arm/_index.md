@@ -23,14 +23,21 @@ author: Ben Clark
 skilllevels: Introductory
 subjects: ML
 armips:
+<<<<<<< HEAD
+=======
+    - Cortex-X
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Cortex-A
     - Mali
     - Immortalis
 tools_software_languages:
     - Android Studio
     - LiteRT
+<<<<<<< HEAD
     - Hugging Face
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Android
     - Linux

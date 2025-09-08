@@ -25,7 +25,11 @@ weight: 1
 
 BOLT is an open-source post-link binary optimization tool developed to speed up large applications. It does this by optimizing the application's code layout based on performance profile samples collected during execution.
 
+<<<<<<< HEAD
 ## What do I need before installing BOLT?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 This article provides quick instructions to download and install BOLT. The instructions are for Debian-based Linux distributions, but can be adapted for other Linux distributions.
 
@@ -102,11 +106,19 @@ InstalledDir: /usr/bin
 sudo apt-get install xz-utils -y
 ```
 
+<<<<<<< HEAD
 ## How do I install BOLT?
 
 You can install BOLT in 2 different ways, by building the source code or by downloading a binary release from GitHub.
 
 ### How do I build and install BOLT from source code?
+=======
+## Install BOLT
+
+You can install BOLT in 2 different ways, by building the source code or by downloading a binary release from GitHub.
+
+### Option 1: Download, build, and install BOLT from source code
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 1. Clone the repository
 
@@ -138,30 +150,50 @@ source ~/.bashrc
 
 You are now ready to [verify BOLT is installed](#verify).
 
+<<<<<<< HEAD
 ### How do I install BOLT using a binary release?
+=======
+### Option 2: Download and install BOLT using a binary release
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 1. Download a binary release
 
 For Arm Linux use the file with `aarch64` in the name:
 
 ```bash
+<<<<<<< HEAD
 wget https://github.com/llvm/llvm-project/releases/download/llvmorg-19.1.7/clang+llvm-19.1.7-aarch64-linux-gnu.tar.xz
+=======
+wget https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.5/clang+llvm-17.0.5-aarch64-linux-gnu.tar.xz
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 2. Extract the downloaded file
 
 ```bash
+<<<<<<< HEAD
 tar -xvf clang+llvm-19.1.7-aarch64-linux-gnu.tar.xz
+=======
+tar -xvf clang+llvm-17.0.5-aarch64-linux-gnu.tar.xz
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 3. Add the path to BOLT in your `.bashrc` file
 
 ```bash
+<<<<<<< HEAD
 echo 'export PATH="$PATH:$HOME/clang+llvm-19.1.7-aarch64-linux-gnu/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
 ### How do I verify BOLT is installed? {#verify}
+=======
+echo 'export PATH="$PATH:$HOME/clang+llvm-17.0.5-aarch64-linux-gnu/bin"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Verify BOLT is installed {#verify}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 1. Confirm BOLT applications `perf2bolt` and `llvm-bolt` are installed
 
@@ -201,8 +233,14 @@ The output is similar to:
 
 ```output
 LLVM (http://llvm.org/):
+<<<<<<< HEAD
   LLVM version 19.1.7
   Optimized build with assertions.
+=======
+  LLVM version 18.0.0git
+  Optimized build with assertions.
+BOLT revision 99c15eb49ba0b607314b3bd221f0760049130d97
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
   Registered Targets:
     aarch64    - AArch64 (little endian)

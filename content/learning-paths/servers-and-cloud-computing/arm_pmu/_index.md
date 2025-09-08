@@ -25,8 +25,11 @@ tools_software_languages:
     - perf
     - Assembly
     - GCC
+<<<<<<< HEAD
     - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
 

@@ -5,7 +5,11 @@ minutes_to_complete: 90
 
 who_is_this_for: Developers who want to optimize their Unity apps on Android
 
+<<<<<<< HEAD
 learning_objectives:
+=======
+learning_objectives: 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Use Arm Neon intrinsics in your Unity C# scripts
     - Optimize your code
     - Collect and compare performance data using the Unity Profiler and Analyzer tools
@@ -19,16 +23,27 @@ prerequisites:
 author: Arm
 
 ### Tags
+<<<<<<< HEAD
 skilllevels: Advanced
+=======
+skilllevels: Intermediate
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 subjects: Gaming
 armips:
     - armv8
     - aarch64
     - arm64
     - arm architecture
+<<<<<<< HEAD
     - NEON
 tools_software_languages:
     - Unity
+=======
+    - Neon
+tools_software_languages:
+    - Unity
+    - Mobile
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - C#
 operatingsystems:
     - Android

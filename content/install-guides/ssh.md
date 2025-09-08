@@ -35,11 +35,23 @@ This section provides answers to the most frequently asked SSH setup questions r
 
 Feel free to seek out additional SSH tutorials or add more information to this page.
 
+<<<<<<< HEAD
 ## What is SSH?
 
 SSH is a client-server application. An SSH server (daemon) runs on a remote machine, and an SSH client runs on the local machine.
 
 ### How do I decide if the SSH daemon is already running?
+=======
+## SSH
+
+SSH is a client server application.
+
+An SSH server, also called the SSH daemon, runs on a remote machine.
+
+An SSH client runs on the local machine (the one you are typing on) and connects to the remote daemon.
+
+### Decide if the SSH daemon is already running
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 For SSH to work, the SSH daemon must be running on the remote machine. Many Linux distributions install and run the SSH daemon automatically.
 
@@ -59,8 +71,12 @@ If the output displays "running", then the SSH daemon is already running.
 ```output
 Active: active (running) since Tue 2022-09-27 01:04:44 UTC; 17h ago
 ```
+<<<<<<< HEAD
 
 ### How do I install the SSH server?
+=======
+### Install SSH server
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 If the SSH daemon is not running on the remote Linux machine, install it using the package manager.
 
@@ -73,7 +89,11 @@ For Red Hat and Amazon Linux distributions.
 sudo yum install openssh-server
 ```
 
+<<<<<<< HEAD
 ### How do I start and stop the SSH daemon? {#startstop}
+=======
+### Start and stop the SSH daemon {#startstop}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The commands below are for any Linux distribution using `systemd`. This includes Debian, Ubuntu, and Amazon Linux.
 
@@ -89,8 +109,12 @@ To restart the SSH daemon:
 ```bash
 sudo systemctl restart ssh
 ```
+<<<<<<< HEAD
 
 ### How do I use a password with SSH?
+=======
+### Use a password with SSH
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 For security reasons, cloud instances don’t enable password logins and there is no password set for the user accounts (such as `ubuntu` or `ec2-user`).
 
@@ -113,7 +137,11 @@ sudo passwd ubuntu
 
 For improved security, set the security group of the cloud instance to allow port 22 traffic (SSH) from a minimal set of IP addresses, not anywhere on the internet. Use password access with caution.
 
+<<<<<<< HEAD
 ### How do I manage SSH keys? {#ssh-keys}
+=======
+### SSH keys
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 SSH uses a private and a public key. The public key is placed on the remote machine (server) and the private key is kept on the local machine (client). The keys allow the client to connect to the server.
 
@@ -154,7 +182,11 @@ With a config file SSH can be used with only the Hostname and no arguments.
 ssh myserver
 ```
 
+<<<<<<< HEAD
 ### How do I add a new SSH key pair?
+=======
+### Add a new key pair
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 If you want to give access to somebody else without enabling password access or sharing your private key, you can add another key pair to the remote machine. You may also want to change the key pair used when the remote machine was created.
 
@@ -166,7 +198,11 @@ If you ran `ssh-keygen` on your local machine, the public key is at `~/.ssh/id_r
 
 Use the new private key on the local machine to connect. If you have `~/.ssh/id_rsa` on your local machine it will be used automatically and you can SSH to the remote machine.
 
+<<<<<<< HEAD
 ### How do I set up port forwarding with SSH?
+=======
+### Port forwarding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 You can use port forwarding to access a port on a remote computer which is blocked by a firewall or security group. This is helpful when your application is running on a remote computer with SSH access, but no other ports are open. For example, if you are running a web application on a cloud instance and it uses port 3000 you can SSH to the cloud instance with port forwarding and access the application.
 

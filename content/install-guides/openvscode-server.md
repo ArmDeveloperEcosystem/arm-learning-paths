@@ -28,9 +28,17 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [OpenVSCode Server](https://www.gitpod.io/blog/openvscode-server-launch) is a version of VS Code which runs on any computer and can be accessed using a browser. The project was initiated by Gitpod and is available on [GitHub](https://github.com/gitpod-io/openvscode-server/)
 
+<<<<<<< HEAD
 OpenVSCode Server supports the Arm architecture and is useful for developing on a remote Arm machine. It can be used on cloud instances, without requiring a Linux desktop to be installed. It's also useful when developing on a local Arm machine with a Linux subsystem, such as Windows Subsystem for Linux (WSL), ChromeOS with Linux enabled, or Multipass.
 
 ## What do I need before installing OpenVSCode Server?
+=======
+
+
+OpenVSCode Server supports the Arm architecture and is useful for developing on a remote Arm machine. It can be used on cloud instances, without requiring a Linux desktop to be installed. It's also useful when developing on a local Arm machine with a Linux subsystem, such as Windows Subsystem for Linux (WSL), ChromeOS with Linux enabled, or Multipass.
+
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Follow the instructions below to install OpenVSCode Server natively on an Arm Linux machine.
 
@@ -46,30 +54,52 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
+<<<<<<< HEAD
 ## How do I download OpenVSCode Server?
+=======
+## Download 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Download a release of OpenVSCode Server from the [GitHub release area](https://github.com/gitpod-io/openvscode-server/releases). The releases are in sync with VS Code and change frequently. Make sure to download the `arm64` version.
 
 For example, use `wget` to download.
 
 ```bash
+<<<<<<< HEAD
 wget https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v1.101.2/openvscode-server-v1.101.2-linux-arm64.tar.gz 
 ```
 
 ## How do I install OpenVSCode Server?
+=======
+wget https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v1.90.0/openvscode-server-v1.90.0-linux-arm64.tar.gz 
+```
+
+## Install 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Install the download by extracting the file
 
 ```bash 
+<<<<<<< HEAD
 tar xvfz openvscode-server-v1.101.2-linux-arm64.tar.gz
 ```
 
 ## How do I start OpenVSCode Server?
+=======
+tar xvfz openvscode-server-v1.90.0-linux-arm64.tar.gz
+```
+
+## Start OpenVSCode Server
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To start OpenVSCode Server run:
 
 ```bash
+<<<<<<< HEAD
 ./openvscode-server-v1.101.2-linux-arm64/bin/openvscode-server 
+=======
+./openvscode-server-v1.90.0-linux-arm64/bin/openvscode-server 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 The server will print a URL to access VS Code in a browser. The URL is localhost URL. If your machine is a remote system or a Linux subsystem there are two options to connect using your local browser.
@@ -77,7 +107,11 @@ The server will print a URL to access VS Code in a browser. The URL is localhost
 - Use SSH to forward port 3000 and connect using localhost
 - Open port 3000 on the remote machine and use the public IP address instead of localhost
 
+<<<<<<< HEAD
 ### How do I connect using SSH port forwarding?
+=======
+### Option 1 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Refer to [SSH](/install-guides/ssh/) for more info about SSH. 
 
@@ -95,7 +129,11 @@ http://localhost:3000/?tkn=40711257-5e5d-4906-b88f-fe13b1f317b7
 
 Open the link in your local browser and VS Code will appear.
 
+<<<<<<< HEAD
 ### How do I connect by opening a port on the remote machine?
+=======
+### Option 2 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The second option is to open port `3000` for access. On a cloud instance this involves changing the security group to open TCP port 3000. For best security, Make sure to open the port for your IP address only, not from all IP addresses. 
 
@@ -107,12 +145,20 @@ On ChromeOS you can use the Linux configuration settings to automatically do por
 
 ![port forwarding #center](/install-guides/_images/ChromeOSpf.png)
 
+<<<<<<< HEAD
 ## What other configuration options are available?
+=======
+## Other information
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 There are command line options to change the port, the token, and other configuration options. To see the options run:
 
 ```bash
+<<<<<<< HEAD
 ./openvscode-server-v1.101.2-linux-arm64/bin/openvscode-server --help
+=======
+./openvscode-server-v1.90.0-linux-arm64/bin/openvscode-server --help
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 If you are running all on a local machine the token can be eliminated using the `--without-connection-token` option.

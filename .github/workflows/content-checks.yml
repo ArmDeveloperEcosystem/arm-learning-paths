@@ -59,6 +59,7 @@ jobs:
           name: spellcheck-output
           path: spellcheck-output.txt
           retention-days: 5 # Default is 90 days
+<<<<<<< HEAD
       - name: Scan for profanities
         run: |
           pip install better_profanity
@@ -71,6 +72,8 @@ jobs:
           name: profanities
           path: profanity_log.txt
           retention-days: 5
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
       - name: Scan for malware
         run: |

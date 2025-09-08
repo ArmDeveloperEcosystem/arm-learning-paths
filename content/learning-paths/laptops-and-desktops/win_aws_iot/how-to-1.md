@@ -17,7 +17,11 @@ Key features of AWS IoT Core include:
 
 2. **Rules Engine**: transforms and routes the data to other AWS services such as AWS Lambda, Amazon Kinesis, Amazon S3, and more for processing, storage, or analytics.
 
+<<<<<<< HEAD
 3. **Device Shadow**: provides a persistent virtual version, or "shadow", of each device that includes the device's latest state so that applications can read messages and interact with the device even when it is offline.
+=======
+3. **Device Shadow**: provides a persistent virtual version, or "shadow", of each device that includes the device’s latest state so that applications can read messages and interact with the device even when it is offline.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 4. **Security and Identity Service**: offers mutual authentication and encryption at all points of connection, ensuring that data is never exchanged between devices and AWS IoT Core without a proven identity.
 

@@ -25,8 +25,12 @@ armips:
 operatingsystems:
     - Windows
 tools_software_languages:
+<<<<<<< HEAD
     - C
     - C++
+=======
+    - C/C++
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Qt    
 
 further_reading:

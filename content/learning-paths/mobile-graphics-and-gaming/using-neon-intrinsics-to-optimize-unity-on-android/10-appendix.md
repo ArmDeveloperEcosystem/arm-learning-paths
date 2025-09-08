@@ -32,7 +32,11 @@ Load multiple floating point values from memory into a single vector register. T
 ```
 Line 741: vcgeq_f32(wallMinXs, charMaxXs)
 ```
+<<<<<<< HEAD
 Floating point comparisons (greater-than or equal). It compares 4 walls at once with a character's _Max X_. Each of the four results will either be all ones (true) or all zeros (false).
+=======
+Floating point comparisons (greater-than or equal). It compares 4 walls at once with a character’s _Max X_. Each of the four results will either be all ones (true) or all zeros (false).
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ### `vorrq_u32`
 ```

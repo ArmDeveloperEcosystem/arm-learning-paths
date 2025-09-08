@@ -11,11 +11,19 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: true    # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
+<<<<<<< HEAD
 ## What do I need to know about the Local License Server?
 
 A [Local License Server (LLS)](/install-guides/license/ubl_license_admin/) must first be set up by your license administration team.
 
 ## How do I activate a license on my computer?
+=======
+## Local License Server
+
+A [Local License Server (LLS)](/install-guides/license/ubl_license_admin/) must first be set up by your license administration team.
+
+## Activate license on end user machine
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The user-based license can be activated on the end user machine in different ways. Select the most appropriate for your needs.
 
@@ -23,7 +31,11 @@ The user-based license can be activated on the end user machine in different way
 * [Activate within tools IDE](#ide)
 * [Activate manually](#manual)
 
+<<<<<<< HEAD
 ## How do I activate a license using an environment variable? {#envvar}
+=======
+## Activate via environment variable {#envvar}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Create `ARMLM_ONDEMAND_ACTIVATION` environment variable referencing the product code and your internal license server. Contact your internal license administrators for information on your internal server.
 
@@ -42,7 +54,11 @@ armclang --version
 ```
 You can now [confirm your license has been checked out](#confirm).
 
+<<<<<<< HEAD
 ## How do I activate a license from the tools IDE? {#ide}
+=======
+## Activate within tools IDE {#ide}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The license can also be activated in the various Arm tool IDEs.
 
@@ -50,7 +66,11 @@ For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Sof
 
 Select `Activate with` > `License Server`, and enter the appropriate license server address. Click `Query` to see what license types are available, and select the appropriate one from the pull down. Click `Activate`.
 
+<<<<<<< HEAD
 ## How do I activate a license manually? {#manual}
+=======
+## Activate manually {#manual}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Open a command prompt, and navigate to the bin directory of any user-based licensing enabled product.
 
@@ -59,7 +79,11 @@ Activate your user-based license with `armlm`:
 armlm activate --server https://internal.ubl.server --product HWSKT-STD0
 ```
 
+<<<<<<< HEAD
 ## How do I confirm my license check-out? {#confirm}
+=======
+## Confirm license check-out {#confirm}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To confirm you have checked-out a license, enter the command:
 ```console
@@ -78,7 +102,11 @@ Hardware Success Kit
     License server: https://internal.ubl.server
 ```
 
+<<<<<<< HEAD
 ## How do I refresh my license? {#refresh}
+=======
+## License refresh {#refresh}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Your license is cached on your local machine, and is valid for 7 days.
 

@@ -34,6 +34,10 @@ subjects: Graphics
 armips:
     - Cortex-A
 tools_software_languages:
+<<<<<<< HEAD
+=======
+    - Mobile
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Java
     - Kotlin
     - C++

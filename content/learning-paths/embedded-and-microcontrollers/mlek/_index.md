@@ -31,15 +31,25 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
+<<<<<<< HEAD
     - Arm Virtual Hardware
     - FVP
+=======
+    - Coding
+    - Arm Virtual Hardware
+    - Fixed Virtual Platform
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - GCC
     - Arm Compiler for Embedded
 
 further_reading:
     - resource:
         title: ML Evaluation Kit Quick Start Guide
+<<<<<<< HEAD
         link: https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit/-/blob/main/docs/quick_start.md
+=======
+        link: https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit/+/HEAD/docs/quick_start.md
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
         type: documentation
     - resource:
         title: Creating ML applications for embedded devices on Arm Virtual Hardware

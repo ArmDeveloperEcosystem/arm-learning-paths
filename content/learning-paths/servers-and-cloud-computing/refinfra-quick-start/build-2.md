@@ -21,11 +21,18 @@ Perform a build inside the container:
 ```
 
  During the build you will see that TF-A, UEFI and SCP firmware are built using their own build systems. The build finishes with the following output:
+<<<<<<< HEAD
 
 ```output
 output/bin/grub-mkimage: info: kernel_img=0xf0a19d2c2010, kernel_size=0x1a000.
 output/bin/grub-mkimage: info: the core size is 0xa3040.
 output/bin/grub-mkimage: info: writing 0xa6000 bytes.
+=======
+```output
+output/bin/grub-mkimage: info: kernel_img=0x7f366cf65010, kernel_size=0x1a000.
+output/bin/grub-mkimage: info: the core size is 0xa2a98.
+output/bin/grub-mkimage: info: writing 0xa5000 bytes.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 Execute build for build-grub.sh on rdn2[rdn2][busybox] done.
 -----------------------------------
 ***********************************

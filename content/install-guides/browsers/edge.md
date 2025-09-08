@@ -23,7 +23,11 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
+<<<<<<< HEAD
 ## How do I install Microsoft Edge?
+=======
+## Installing Microsoft Edge
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The Microsoft Edge browser runs on Windows on Arm as a native ARM64 application. It is the default browser for Windows 11 on Arm and requires no installation.
 

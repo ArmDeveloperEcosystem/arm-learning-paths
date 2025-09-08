@@ -12,11 +12,14 @@ additional_search_terms:
 - mali
 - immortalis
 - cortex-a
+<<<<<<< HEAD
 - Install Arm Mobile Studio
 - Streamline
 - Performance Advisor
 - RenderDoc
 - Frame Advisor
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
@@ -37,6 +40,7 @@ test_maintenance: true
 test_images:
   - ubuntu:latest
 ---
+<<<<<<< HEAD
 [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) is a performance analysis tool suite for Android and Linux application developers
 
 It comprises of a suite of easy-to-use tools that show you how well your game or app performs on production devices, so that you can identify problems that might cause slow performance, overheat the device, or drain the battery.
@@ -111,3 +115,43 @@ cd <installation_directory>/streamline
 ## How do I get started with Arm Performance Studio?
 
 See the [Get started with Arm Performance Studio](/learning-paths/mobile-graphics-and-gaming/ams/) learning path for an overview of how to run each tool in Arm Performance Studio.
+=======
+[Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio%20for%20Mobile) (formally known as `Arm Mobile Studio`) is a performance analysis tool suite for various application developers:
+
+* Android application developers
+* Linux application developers in Embedded and Cloud segments
+
+It comprises of a suite of easy-to-use tools that show you how well your game or app performs on production devices, so that you can identify problems that might cause slow performance, overheat the device, or drain the battery.
+
+[Frame Advisor](https://developer.arm.com/Tools%20and%20Software/Frame%20Advisor) is available in `2023.5` and later.
+
+[RenderDoc for Arm GPUs](https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/beyond-mobile-arm-mobile-studio-is-now-arm-performance-studio) is available in `2024.0` and later.
+
+[Graphics Analyzer](https://developer.arm.com/Tools%20and%20Software/Graphics%20Analyzer) is no longer provided. The final release was provided in the `2024.2` release.
+
+All features of Arm Performance Studio are available free of charge without any additional license as of the `2022.4` release.
+
+## Installation
+
+Arm Performance Studio is supported on Windows, Linux, and macOS hosts. Download the appropriate installer from the [Arm Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0).
+
+Full installation and application launch instructions are given in the Arm Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
+
+### Windows
+
+Run the supplied `Arm_Performance_Studio_<version>_windows_x86-64.exe` installer, and follow on-screen instructions.
+
+### Linux
+
+Unpack the supplied `Arm Performance Studio` bundle to the desired location. For example:
+```console
+tar -xf Arm_Performance_Studio_2024.3_linux_x86-64.tgz
+```
+### macOS
+
+Run the supplied `Arm_Performance_Studio_<version>_macos_x86-64.dmg` installer, and follow on-screen instructions.
+
+## Get started
+
+See the [Get started with Arm Performance Studio for Mobile](/learning-paths/mobile-graphics-and-gaming/ams/) learning path for a collection of tutorials for each component of Performance Studio.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

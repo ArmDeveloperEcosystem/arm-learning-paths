@@ -144,6 +144,7 @@ def mdToMetadata(md_file_path):
     metadata_dic = yaml.safe_load(metadata_text)
     return metadata_dic
 
+<<<<<<< HEAD
 def authorAdd(author_names,tracking_dic):
     ### Update 'individual_authors' area, raw number by each author.
 
@@ -176,6 +177,33 @@ def authorAdd(author_names,tracking_dic):
                     else:
                         tracking_dic['contributions']['external'] = tracking_dic['contributions']['external'] + 1
         
+=======
+def authorAdd(author_name,tracking_dic):
+    ### Update 'individual_authors' area, raw number by each author.
+    # Check if author already exists as key. If not, add new key
+    author_urlized = urlize(author_name)
+    if author_urlized in tracking_dic['individual_authors']:
+        # Update number for this author
+        tracking_dic['individual_authors'][author_urlized] = tracking_dic['individual_authors'][author_urlized] + 1
+    else:
+        # Add key to dic with 1 to their name
+        tracking_dic['individual_authors'][author_urlized] = 1
+
+    ### Update 'contributions' area, internal vs external contributions
+    
+    # open the contributors CSV file
+    with open('../assets/contributors.csv', mode ='r')as file:
+        csvFile = csv.reader(file)
+        for line in csvFile:
+            company = line[1]
+            # If author in the line, check if they work at Arm or not, and increment contributions number for internal or external
+            if author_name in line:
+                if company == 'Arm':
+                    tracking_dic['contributions']['internal'] = tracking_dic['contributions']['internal'] + 1
+                else:
+                    tracking_dic['contributions']['external'] = tracking_dic['contributions']['external'] + 1
+    
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     return tracking_dic
 
 def iterateContentIndexMdFiles():
@@ -240,7 +268,11 @@ def iterateContentIndexMdFiles():
             weekly_count_dic[category] = weekly_count_dic[category] + 1
 
             ######### AUTHOR info
+<<<<<<< HEAD
             weekly_authors_contributions_dic = authorAdd(content_metadic['author'],weekly_authors_contributions_dic)
+=======
+            weekly_authors_contributions_dic = authorAdd(content_metadic['author_primary'],weekly_authors_contributions_dic)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
             
 
             # Record entry in test file

@@ -18,15 +18,21 @@ author: Joe Stech
 
 ### Tags
 skilllevels: Introductory
+<<<<<<< HEAD
 cloud_service_providers: Google Cloud
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 subjects: Performance and Architecture
 armips:
     - Neoverse V2
 tools_software_languages:
     - Java
     - Google Axion
+<<<<<<< HEAD
     - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Linux
 

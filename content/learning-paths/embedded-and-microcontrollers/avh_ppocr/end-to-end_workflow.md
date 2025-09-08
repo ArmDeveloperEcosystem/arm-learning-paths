@@ -22,7 +22,11 @@ Start by launching the [Arm Virtual Hardware AMI](/install-guides/avh/).
 
 Alternatively, you can also download the Corstone-300 FVP from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. For installation instructions see [Arm Ecosystem FVPs](/install-guides/fm_fvp/eco_fvp/).
 
+<<<<<<< HEAD
 The code for this [project](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/tree/main/OCR-example), is available to download from [ArmDeveloperEcosystem](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH) GitHub repository as well as [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR/tree/dygraph/deploy/avh)'s GitHub repository (under the dygraph branch).
+=======
+The code for this [project](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/tree/main/OCR-example), is available to download from [ArmDeveloperEcosystem](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH) GitHub repository as well as [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR/tree/dygraph/deploy/avh)’s GitHub repository (under the dygraph branch).
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Start by cloning the code repository on your running AVH AMI instance:
 
@@ -38,10 +42,17 @@ sudo bash scripts/config_tvm.sh
 Now you can navigate to the text recognition example directory.
 
 ```bash
+<<<<<<< HEAD
 cd ./OCR-example/Text-recognition-example-m85/
 ```
 
 In this directory, there is a script named [run_demo.sh](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/blob/main/OCR-example/Text-recognition-example-m85/run_demo.sh) that automates the entire process described in the End-to-end workflow diagram.
+=======
+cd ./ocr/text_recognition/
+```
+
+In this directory, there is a script named [run_demo.sh](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/blob/main/OCR-example/run_demo.sh) that automates the entire process described in the End-to-end workflow diagram.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Update the FVP executable name in the `run_demo.sh` script. The `VHT_Platform` should match what is installed in the system. The executable starts with either `VHT_Corstone_SSE` or `FVP_Corstone_SSE`. Check which one is available in the `$PATH` by typing it out and using the Tab key to autocomplete. Then, using a code editor of your choice or `vim`, you can assign the correct executable:
 

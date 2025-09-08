@@ -7,6 +7,7 @@ weight: 3
 layout: "learningpathall"
 ---
 ## Create a project
+<<<<<<< HEAD
 You will need a development computer with [Android Studio](https://developer.android.com/studio) installed. This example uses Android Studio Ladybug 2024.2.1, Patch 3.
 
 You can create a project and add OpenCV with KleidiCV support by following the steps outlined in this section.
@@ -22,10 +23,26 @@ Start by creating a new project, and configuring it:
 - Name: **Arm64.KleidiCV.Demo**.
 - Package name: **com.arm.arm64kleidicvdemo**.
 - Save location: *Select relevant file location for your setup*.
+=======
+You will need a development computer with [Android Studio](https://developer.android.com/studio) installed (this examples uses Android Studio Ladybug | 2024.2.1 Patch 3)
+
+Follow these steps to create a project and add OpenCV with KleidiCV support:
+
+1. Open Android Studio on your development machine and then click the **+ New Project** icon:
+2. In the New Project window, select **Empty Views Activity**:
+
+![img1](Figures/01.png)
+
+3. Configure the project as follows (see figure below):
+- Name: **Arm64.KleidiCV.Demo**.
+- Package name: **com.arm.arm64kleidicvdemo**.
+- Save location: *Select relevant file location*.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 - Language: **Kotlin**.
 - Minimum SDK: **API 24**.
 - Build configuration language: **Kotlin DSL**.
 
+<<<<<<< HEAD
 ![img2 alt-text#center](figures/02.png "Figure 2: Configuring your new project.")
 
 4. Click the **Finish** button. 
@@ -34,12 +51,26 @@ Now wait a few moments until your project is ready. You will be able to configur
 
 ## Add OpenCV support
 To add OpenCV support for Arm64 (AArch64), open the *build.gradle.ts (Module: app)*, and add the following line under the dependencies:
+=======
+![img2](Figures/02.png)
+
+4. Click the **Finish** button. 
+
+The project will be ready in a few moments. Afterward you can configure the project.
+
+## Add OpenCV support
+To add OpenCV for Arm64, open the *build.gradle.ts (Module: app)*, and add the following line under the dependencies:
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```JSON
 implementation("org.opencv:opencv:4.11.0")
 ```
 
+<<<<<<< HEAD
 Make sure that compileSdk is set to 35. The contents of the file should look like this:
+=======
+Also, make sure that compileSdk is set to 35. The contents of the file should look something like this:
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```JSON
 plugins {
@@ -92,8 +123,12 @@ dependencies {
 }
 ```
 
+<<<<<<< HEAD
 Now click the **Sync Now** link in the top pane that appears. 
 
 You can now use OpenCV with KleidiCV support in your application. 
+=======
+Then, click the **Sync Now** link in the top pane that appears. From here on, you can use OpenCV with KleidiCV support in your application. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Save the file. In the next step, you will define the application UI.

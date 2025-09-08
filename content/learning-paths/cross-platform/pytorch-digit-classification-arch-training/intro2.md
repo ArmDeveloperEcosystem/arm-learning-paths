@@ -33,7 +33,11 @@ Loss is a measure of how well a model's predictions match the true labels of the
 
 Gradients represent the rate of change of the loss with respect to each of the model's parameters (weights and biases). They are used to update the model's parameters in the direction that reduces the loss. Gradients are calculated during the backpropagation step, where the loss is propagated backward through the network to compute how each parameter contributes to the overall loss. Optimizers like SGD or Adam use these gradients to adjust the parameters, effectively “teaching” the model to improve its predictions.
 
+<<<<<<< HEAD
 An epoch refers to one complete pass through the entire training dataset. During each epoch, the model sees every data point once and updates its parameters accordingly. Multiple epochs are typically required to train a model effectively because, during each epoch, the model learns and fine-tunes its parameters based on the data it processes. The number of epochs is a hyperparameter that you set before training, and increasing it can improve the model's performance, but too many epochs may lead to overfitting, where the model performs well on training data but poorly on new, unseen data.
+=======
+An epoch refers to one complete pass through the entire training dataset. During each epoch, the model sees every data point once and updates its parameters accordingly. Multiple epochs are typically required to train a model effectively because, during each epoch, the model learns and fine-tunes its parameters based on the data it processes. The number of epochs is a hyperparameter that you set before training, and increasing it can improve the model’s performance, but too many epochs may lead to overfitting, where the model performs well on training data but poorly on new, unseen data.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Backpropagation is a fundamental algorithm used in training neural networks to optimize their parameters—weights and biases—by minimizing the loss function. It works by propagating the error backward through the network, calculating the gradients of the loss function with respect to each parameter, and updating these parameters accordingly.
 
@@ -47,17 +51,29 @@ To train a model in PyTorch, several essential components are required:
 
 3. **Model**: the Neural Network Architecture defines the structure of the neural network. You learned that in PyTorch, models are typically created by subclassing `torch.nn.Module` and defining the network layers and forward pass. This includes specifying the input and output dimensions and the sequence of layers, such as linear layers, activation functions, and dropout.
 
+<<<<<<< HEAD
 4. **Loss Function**: measures how far the model's predictions are from the actual targets. It guides the optimization process by providing a signal that tells the model how to adjust its parameters. Common loss functions include Cross-Entropy Loss for classification tasks and Mean Squared Error (MSE) Loss for regression tasks. You can select a predefined loss function from torch.nn or define your own.
 
 5. **Optimizer**: updates the model's parameters based on the gradients computed during backpropagation. It determines how the model learns from the data. Popular optimizers include Stochastic Gradient Descent (SGD) and Adam, which are available in the torch.optim module. You need to specify the learning rate (a hyperparameter that controls how much to change the parameters in response to the gradient) and other hyperparameters when creating the optimizer.
+=======
+4. **Loss Function**: measures how far the model’s predictions are from the actual targets. It guides the optimization process by providing a signal that tells the model how to adjust its parameters. Common loss functions include Cross-Entropy Loss for classification tasks and Mean Squared Error (MSE) Loss for regression tasks. You can select a predefined loss function from torch.nn or define your own.
+
+5. **Optimizer**: updates the model’s parameters based on the gradients computed during backpropagation. It determines how the model learns from the data. Popular optimizers include Stochastic Gradient Descent (SGD) and Adam, which are available in the torch.optim module. You need to specify the learning rate (a hyperparameter that controls how much to change the parameters in response to the gradient) and other hyperparameters when creating the optimizer.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 6. **Training Loop**: where the actual learning happens. For each iteration of the loop:
     * A batch of data is fetched from the DataLoader.
     * The model performs a forward pass to generate predictions.
     * The loss is calculated using the predictions and the true labels.
     * The gradients are computed via backpropagation.
+<<<<<<< HEAD
     * The optimizer updates the model's parameters based on the gradients.
 
 This process is repeated for a specified number of epochs to gradually reduce the loss and improve the model's performance.
+=======
+    * The optimizer updates the model’s parameters based on the gradients.
+
+This process is repeated for a specified number of epochs to gradually reduce the loss and improve the model’s performance.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 In the next step you will see how to perform model training.

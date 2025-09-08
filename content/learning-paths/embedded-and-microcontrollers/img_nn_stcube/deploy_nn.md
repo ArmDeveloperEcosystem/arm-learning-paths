@@ -52,6 +52,7 @@ In this section, you will deploy the model directly on the STM32 board.
 
 5. Set `Toolchain/IDE` as `STM32CubeIDE`
 
+<<<<<<< HEAD
 ![output3](images/lab4_3.PNG)
 
 6. Go to `Pinout & Configuration` and clear pinouts from the `Pinout` menu.
@@ -61,6 +62,17 @@ In this section, you will deploy the model directly on the STM32 board.
 7. In `Software Packs` menu, click `Select Components`. Enable `X-CUBE-AI`. For device application, choose `Validation`. Click `OK` to save.
 
 ![output5](images/lab4_5.PNG)
+=======
+![output3](Images/lab4_3.PNG)
+
+6. Go to `Pinout & Configuration` and clear pinouts from the `Pinout` menu.
+
+![output4](Images/lab4_4.PNG)
+
+7. In `Software Packs` menu, click `Select Components`. Enable `X-CUBE-AI`. For device application, choose `Validation`. Click `OK` to save.
+
+![output5](Images/lab4_5.PNG)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 8. Navigate to `X-CUBE-AI` configuration.
 
@@ -70,7 +82,11 @@ In this section, you will deploy the model directly on the STM32 board.
 
 11. Generate the validation code for the model by clicking `Generate Code`.
 
+<<<<<<< HEAD
 ![output6](images/lab4_6.PNG)
+=======
+![output6](Images/lab4_6.PNG)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 12. Open STM32CubeIDE.
 
@@ -80,10 +96,18 @@ In this section, you will deploy the model directly on the STM32 board.
 
 15. Ensure that the board is connected to your computer. If it is correctly connected, build and flash the code by clicking `Run As`.
 
+<<<<<<< HEAD
 ![output7](images/lab4_7.PNG)
 
 16. If you get an ‘undefined reference’ error, go to `Core/Src/main.c`. Remove `static` from the declaration of the `MX_USART1_UART_Init()` function and also from its definition. Try `Run As` again.
 
 ![output8](images/lab4_8.PNG)
+=======
+![output7](Images/lab4_7.PNG)
+
+16. If you get an ‘undefined reference’ error, go to `Core/Src/main.c`. Remove `static` from the declaration of the `MX_USART1_UART_Init()` function and also from its definition. Try `Run As` again.
+
+![output8](Images/lab4_8.PNG)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 With the model now deployed on the STM32 board, you are ready to test it.

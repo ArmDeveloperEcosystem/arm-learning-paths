@@ -16,11 +16,19 @@ Follow these steps to create a project and add OpenCV:
 
 1. Open Android Studio on your development machine and then click the **+ New Project** icon:
 
+<<<<<<< HEAD
 ![img1](figures/01.png)
 
 2. In the New Project window, select **Empty Views Activity**:
 
 ![img2](figures/02.png)
+=======
+![img1](Figures/01.png)
+
+2. In the New Project window, select **Empty Views Activity**:
+
+![img2](Figures/02.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 3. Configure the project as follows (see figure below):
 - Name: **Arm64.OpenCV.FaceDetection**.
@@ -30,7 +38,11 @@ Follow these steps to create a project and add OpenCV:
 - Minimum SDK: **API 24**.
 - Build configuration language: **Kotlin DSL**.
 
+<<<<<<< HEAD
 ![img3](figures/03.png)
+=======
+![img3](Figures/03.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 4. Click the **Finish** button. 
 
@@ -51,7 +63,11 @@ You will now initialize OpenCV and prepare the application to stream frames from
 1. Under the Project in the left window, double-click *app/res/layout/activity_main.xml*. This opens the view designer. 
 2. Click the highlighted icon in the top right corner to switch to the XML view.
 
+<<<<<<< HEAD
 ![img4](figures/04.png)
+=======
+![img4](Figures/04.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 3. Modify the *activity_main.xml* as shown below:
 
@@ -218,7 +234,11 @@ The above code also declares CameraBridgeViewBase.CvCameraViewListener2 methods:
 ## Launch the application
 You have just prepared the application to stream camera frames. You can now launch the application in the emulator. To do so, click the green 'run' button as shown here:
 
+<<<<<<< HEAD
 ![click run](figures/05.png)
+=======
+![click run](Figures/05.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The application should start, and you should see the app running in an emulator. It will ask you for camera permissions.
 

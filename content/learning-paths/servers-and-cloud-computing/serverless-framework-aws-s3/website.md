@@ -131,8 +131,13 @@ This JavaScript code adds interactivity to a web page by enabling two buttons to
 Two API endpoints, `writeTemperaturesUrl` and `getAverageTemperatureUrl`, are defined as placeholders for the actual API URLs that the buttons call. These placeholders are replaced by the values that the Serverless Framework outputs after the resource deployment.
 
 The code then defines event listeners for the buttons:
+<<<<<<< HEAD
  * `writeTemperaturesButton` click event. When clicked, it sends a POST request to the writeTemperaturesUrl endpoint to write temperature data. If successful, it displays a message with the response data. If there's an error, it logs the error and shows an alert.
  * `getAverageTemperatureButton` click event. When clicked, it sends a GET request to the getAverageTemperatureUrl endpoint to retrieve the average temperature. If successful, it displays the average temperature in a specific div on the web page. If there's an error, it logs the error and shows an alert.
+=======
+ * `writeTemperaturesButton` click event. When clicked, it sends a POST request to the writeTemperaturesUrl endpoint to write temperature data. If successful, it displays a message with the response data. If there’s an error, it logs the error and shows an alert.
+ * `getAverageTemperatureButton` click event. When clicked, it sends a GET request to the getAverageTemperatureUrl endpoint to retrieve the average temperature. If successful, it displays the average temperature in a specific div on the web page. If there’s an error, it logs the error and shows an alert.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 This code interacts with a backend service composed of AWS Lambda functions to write new temperature data and fetch the average temperature, enhancing the functionality of the web page.
 

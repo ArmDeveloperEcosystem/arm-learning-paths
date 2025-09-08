@@ -27,10 +27,18 @@ operatingsystems:
     - Baremetal
     - RTOS
 tools_software_languages:
+<<<<<<< HEAD
     - Keil Studio Cloud
     - Arm Compiler for Embedded
     - Arm Virtual Hardware
     - CMSIS
+=======
+    - Keil
+    - Arm Compiler for Embedded
+    - Arm Virtual Hardware
+    - CMSIS
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

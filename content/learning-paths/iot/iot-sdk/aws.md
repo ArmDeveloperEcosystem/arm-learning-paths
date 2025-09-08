@@ -168,7 +168,11 @@ ML_HEARD_ON
 ...
 ```
 
+<<<<<<< HEAD
 ![keyword #center](images/keyword.png)
+=======
+![keyword #center](Images/keyword.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ## Repeat with the speech example
 
@@ -185,6 +189,10 @@ INFO - Complete recognition: turn down the temperature in the bedroom
 134 14506 [ML_MQTT] [INFO] Publish to the MQTT topic <thingname>/ml/inference.
 ```
 
+<<<<<<< HEAD
 ![speech #center](images/speech.png)
+=======
+![speech #center](Images/speech.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 See the [README.md](https://github.com/ARM-software/open-iot-sdk/blob/main/v8m/README.md#setting-up-aws-connectivity) for full details.

@@ -20,7 +20,11 @@ Install the python dependencies on your Ubuntu 22.04 machine:
 sudo apt update
 sudo apt install python-is-python3 -y
 sudo apt install python3-pip -y
+<<<<<<< HEAD
 sudo apt install python3.10-venv -y
+=======
+sudo apt install python3.10-venv
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 ## Install Pulumi 
@@ -41,7 +45,11 @@ git clone https://github.com/pbk8s/pulumi-ec2.git
 ```
 
 ## Build gatord
+<<<<<<< HEAD
 You will also need the gatord binary for performance analysis. [gator](https://github.com/ARM-software/gator) is a target agent (daemon), part of Arm Streamline, a set of performance analysis tools. Use the following commands to build it from source.
+=======
+You would also need the gatord binary for performance analysis. [gator](https://github.com/ARM-software/gator) is a target agent (daemon), part of Arm Streamline, a set of performance analysis tools. Use the following commands to build it from source.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```bash
 git clone https://github.com/ARM-software/gator.git
@@ -65,14 +73,24 @@ cp build-native-gcc-rel/gatord ~/pulumi-ec2/
 ## Install awscli and set environment variables
 Use the [awscli](https://learn.arm.com/install-guides/aws-cli/) learning path to install the awscli. 
 
+<<<<<<< HEAD
 Set the following environment variables on your local computer to connect to your AWS account:
 ```bash
+=======
+Set the following environment variables on your local computer to connect to your AWS account
+```console
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 export AWS_ACCESS_KEY_ID=<access-key-id>
 export AWS_SECRET_ACCESS_KEY=<secret-access-key>
 export AWS_SESSION_TOKEN=<session-token>
 ```
+<<<<<<< HEAD
 Execute the following command to validate the credentials:
 ```bash
+=======
+Execute the following command to validate the credentials
+```console
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 aws sts get-caller-identity
 ```
 
@@ -134,7 +152,11 @@ subnet = aws.ec2.Subnet("p1-subnet",
     })
 ```
 
+<<<<<<< HEAD
 Note: The security groups created by this script are a lot less restrictive, to simplify the deployment process and to remove additional complexities. Please modify the ingress/egress rules as per your organization's policy.
+=======
+Note: The security groups created by this script are lot less restrictive, to simplify the deployment process and to remove additional complexities. Please modify the ingress/egress rules as per your organizations' policy.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```python
 group = aws.ec2.SecurityGroup('p1-security-grouup',

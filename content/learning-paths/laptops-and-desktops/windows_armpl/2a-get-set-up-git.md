@@ -19,7 +19,11 @@ The example application renders a rotating 3D cube to perform the calculations u
 First, navigate to an empty directory, and clone the repository containing the example from GitHub:
 
 ```cmd
+<<<<<<< HEAD
 git clone https://github.com/arm/SpinTheCubeInGDI.git
+=======
+git clone https://github.com/odincodeshen/SpinTheCubeInGDI.git
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 {{% notice Note %}}

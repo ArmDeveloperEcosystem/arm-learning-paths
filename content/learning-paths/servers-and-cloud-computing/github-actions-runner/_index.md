@@ -24,7 +24,11 @@ armips:
     - Neoverse
 
 tools_software_languages:
+<<<<<<< HEAD
     - AWS Cloud Formation
+=======
+    - CloudFormation
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - GitHub
     - AWS EC2
 

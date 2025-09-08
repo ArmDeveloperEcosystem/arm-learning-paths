@@ -29,6 +29,11 @@ test_images:
     - ubuntu:22.04
 test_link: null
 test_maintenance: false
+<<<<<<< HEAD
+=======
+test_status:
+    - passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:
@@ -45,8 +50,11 @@ further_reading:
         type: documentation
 
 
+<<<<<<< HEAD
 ### FIXED, DO NOT MODIFY
 # ================================================================================
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'

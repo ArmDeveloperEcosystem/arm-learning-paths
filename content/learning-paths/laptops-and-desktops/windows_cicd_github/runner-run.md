@@ -13,7 +13,11 @@ To test this CI/CD workflow, select `Actions` from the repository menu.
 
 You will be presented with the option to start with a `Simple workflow` that gives you a file with the minimum necessary structure to build, test and deploy your code. Click  `Configure`.
 
+<<<<<<< HEAD
 ![ghrunner3 #center](images/ghrunner_3.png)
+=======
+![ghrunner3 #center](Images/ghrunner_3.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 A file named `blank.yml` will be created for you under `<your-repo-name>/.github/workflows/`. Optionally rename this to something more meaningful (`hello.yml`).
 
@@ -44,6 +48,10 @@ In the `PowerShell` window, you will see the progress of the Action:
 ```
 Similarly in the `Actions` tab of your repository:
 
+<<<<<<< HEAD
 ![actions #center](images/actions.png)
+=======
+![actions #center](Images/actions.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
  Congratulations, you have successfully run a simple GitHub Actions CI/CD workflow on your Windows on Arm machine.

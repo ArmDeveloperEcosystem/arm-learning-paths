@@ -14,6 +14,11 @@ test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
+<<<<<<< HEAD
+=======
+test_status:
+- passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 title: AWS EKS CLI (eksctl)
 tool_install: true
 weight: 1
@@ -25,7 +30,11 @@ The EKS CLI is available for a variety of operating systems and Linux distributi
 
 ## What should I do before installing eksctl on Arm Linux and Windows on Arm?
 
+<<<<<<< HEAD
 This install guide provides a quick solution to install `eksctl` on Arm Linux and Windows on Arm.
+=======
+This install guide provides a quick solution to install `eksctl` on Arm Linux and Windows on Arm. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 1. Confirm you have an Arm machine
 
@@ -43,11 +52,19 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
+<<<<<<< HEAD
 For Windows, confirm the Arm architecture by typing "Settings" in the Windows search box.
 
 When the settings appear, click System on the left side and then About at the bottom.
 
 In the Device specifications section look for "ARM-based processor" in the System type area.
+=======
+For Windows, confirm the Arm architecture by typing "Settings" in the Windows search box. 
+
+When the settings appear, click System on the left side and then About at the bottom.
+
+In the Device specifications section look for "ARM-based processor" in the System type area. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 2. Install `kubectl`
 
@@ -55,13 +72,21 @@ Install the Kubernetes command-line tool, `kubectl`, using the [Kubectl install 
 
 ## How do I download and install eksctl on Arm Linux?
 
+<<<<<<< HEAD
 1. Download the `eksctl` package using `curl`:
+=======
+1. Download the `eksctl` package using `curl`: 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```bash { target="ubuntu:latest" }
 curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_Linux_arm64.tar.gz"
 ```
 
+<<<<<<< HEAD
 2. Install `eksctl` with:
+=======
+2. Install `eksctl` with: 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```bash { target="ubuntu:latest" }
 tar -xzf eksctl_Linux_arm64.tar.gz -C /tmp && rm eksctl_Linux_arm64.tar.gz
@@ -102,11 +127,19 @@ The output will be similar to:
 
 `eksctl` relies on the AWS CLI being installed and configured. Use the [AWS CLI install guide](/install-guides/aws-cli/) to install the AWS CLI. The CLI provides the `aws` command.
 
+<<<<<<< HEAD
 You will also need to configure the AWS CLI using the `aws configure` or the `aws configure sso` command. There are multiple ways to configure the CLI, including environment variables, command-line options, and credentials files. Refer to the [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for more details.
 
 ## How do I use eksctl to create a simple EKS cluster?
 
 With your AWS account configured, run `eksctl` to create a cluster with 2 nodes with AWS Graviton processors:
+=======
+You will also need to configure the AWS CLI using the `aws configure` or the `aws configure sso` command. There are multiple ways to configure the CLI, including environment variables, command-line options, and credentials files. Refer to the [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for more details. 
+
+## How do I use eksctl to create a simple EKS cluster?
+
+With your AWS account configured, run `eksctl` to create a cluster with 2 nodes with AWS Graviton processors: 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```console
 eksctl create cluster  \
@@ -114,12 +147,21 @@ eksctl create cluster  \
 --region us-east-1 \
 --node-type t4g.small \
 --nodes 2 \
+<<<<<<< HEAD
 --nodegroup-name node-group-1
 ```
 
 Use the AWS console to look at the resources associated with the cluster and monitor progress of cluster creation.
 
 When the cluster is created, use `kubectl` to get the status of the nodes in the cluster.
+=======
+--nodegroup-name node-group-1 
+```
+
+Use the AWS console to look at the resources associated with the cluster and monitor progress of cluster creation. 
+
+When the cluster is created, use `kubectl` to get the status of the nodes in the cluster. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```console
 kubectl get nodes -o wide

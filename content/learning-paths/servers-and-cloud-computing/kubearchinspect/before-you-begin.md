@@ -22,7 +22,11 @@ Make sure you can connect to your Kubernetes cluster using `kubectl`.
 For Arm Linux, download the KubeArchInspect package from GitHub:
 
 ```console
+<<<<<<< HEAD
 wget https://github.com/ArmDeveloperEcosystem/kubearchinspect/releases/download/v0.7.0/kubearchinspect_Linux_arm64.tar.gz
+=======
+wget https://github.com/ArmDeveloperEcosystem/kubearchinspect/releases/download/v0.4.0/kubearchinspect_Linux_arm64.tar.gz
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 Extract the files from the release package:

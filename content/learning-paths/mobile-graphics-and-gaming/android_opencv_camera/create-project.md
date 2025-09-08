@@ -13,11 +13,19 @@ Follow these steps to create a project and add OpenCV:
 
 1. Open Android Studio on your development machine and then click the **+ New Project** icon:
 
+<<<<<<< HEAD
 ![img1](figures/01.png)
 
 2. In the New Project window, select **Empty Views Activity**:
 
 ![img2](figures/02.png)
+=======
+![img1](Figures/01.png)
+
+2. In the New Project window, select **Empty Views Activity**:
+
+![img2](Figures/02.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 3. Configure the project as follows (see figure below):
 - Name: **Arm64.OpenCV.Camera**.
@@ -27,13 +35,21 @@ Follow these steps to create a project and add OpenCV:
 - Minimum SDK: **API 24**.
 - Build configuration language: **Kotlin DSL**.
 
+<<<<<<< HEAD
 ![img3](figures/03.png)
+=======
+![img3](Figures/03.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 4. Click the **Finish** button. 
 
 The project will be ready in a few moments, and Android Studio should appear as shown below:
 
+<<<<<<< HEAD
 ![img4](figures/04.png)
+=======
+![img4](Figures/04.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ## Add OpenCV support
 To add OpenCV for Arm64, open the *build.gradle.ts (Module: app)*, and add the following line under the dependencies:
@@ -44,7 +60,11 @@ implementation("org.opencv:opencv:4.10.0")
 
 Then, click the **Sync Now** link in the top pane that appears:
 
+<<<<<<< HEAD
 ![img5](figures/05.png)
+=======
+![img5](Figures/05.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 From here on, you can use OpenCV in your application. 
 
@@ -56,7 +76,11 @@ To initialize OpenCV and check the initialization status, follow these steps:
 
 2. Click the highlighted icon in the top-right corner to switch to the XML view.
 
+<<<<<<< HEAD
 ![img6](figures/06.png)
+=======
+![img6](Figures/06.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 3. Modify the `activity_main.xml` file as shown below:
 
@@ -129,6 +153,12 @@ Finally, you call updateControls(), which updates the UI based on whether OpenCV
 ## Launch the application
 You can now launch the application in the simulator. To do so, use the top menu, where you click Run -> Run ‘app’. The application should start, and you should see the “OpenCV initialized” text as shown below:
 
+<<<<<<< HEAD
 ![img7](figures/07.png)
 
 You have successfully added OpenCV to the Android application. In the next step, you will extend the application to get images from the device's camera and process them in real-time.
+=======
+![img7](Figures/07.png)
+
+You have successfully added OpenCV to the Android application. In the next step, you will extend the application to get images from the device’s camera and process them in real-time.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

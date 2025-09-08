@@ -25,7 +25,11 @@ operatingsystems:
 tools_software_languages:
     - GitHub
     - Docker
+<<<<<<< HEAD
     - Runbook
+=======
+
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ### Cross-platform metadata only
 shared_path: true
 shared_between:

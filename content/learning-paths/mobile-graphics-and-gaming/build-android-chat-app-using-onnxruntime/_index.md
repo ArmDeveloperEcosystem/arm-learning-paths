@@ -20,13 +20,21 @@ skilllevels: Advanced
 subjects: ML
 armips:
     - Cortex-A
+<<<<<<< HEAD
+=======
+    - Cortex-X
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 tools_software_languages:
     - Kotlin
     - C++
     - ONNX Runtime
     - Android
+<<<<<<< HEAD
     - Hugging Face
 
+=======
+    - Mobile
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
     - Windows
     - Android

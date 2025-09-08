@@ -39,13 +39,21 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 See [The New Era of MCUXpresso Starts Today with VS Code and Open-CMSIS-Packs](https://www.nxp.com/company/blog/the-new-era-of-mcuxpresso-starts-today-with-vs-code-and-open-cmsis-packs:BL-THE-NEW-ERA-OF-MCUXPRESSO) for more information.
 
 
+<<<<<<< HEAD
 ## What do I need before installing MCUXpresso for VS Code?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 [Download](https://code.visualstudio.com/download), install, and start `Visual Studio Code` on your desktop.
 
 Linux, macOS, and Windows are supported. 
 
+<<<<<<< HEAD
 ## How do I install MCUXpresso for VS Code?
+=======
+## Install MCUXpresso for VS Code
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 `MCUXpresso for VS Code` is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=NXPSemiconductors.mcuxpresso).
 
@@ -57,7 +65,11 @@ Install the `MCUXpresso` extension:
 
 Visual Studio Code will install the extension. `MCUXpresso` is now available in the `Activity Bar`.
 
+<<<<<<< HEAD
 ### How do I install additional dependencies?
+=======
+### Install additional dependencies
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Additional software packages can be installed with the [MCUXpresso Installer](https://github.com/nxp-mcuxpresso/vscode-for-mcux/wiki/Dependency-Installation) for your host operating system.
 
@@ -67,7 +79,11 @@ Select one or more packages and click `Install`.
 
 ![MCUXpresso Installer #center](/install-guides/_images/MCUXpresso_Installer.png)
 
+<<<<<<< HEAD
 ### Are there other embedded development extensions for VS Code?
+=======
+### Keil Studio for VS Code
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 [Keil Studio for VS Code](https://www.keil.arm.com/) is also available. Refer to the [Arm Keil Studio for VS Code install guide](/install-guides/keilstudio_vs/) for more information.
 

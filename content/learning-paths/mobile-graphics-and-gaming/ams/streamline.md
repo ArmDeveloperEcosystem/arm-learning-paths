@@ -11,6 +11,7 @@ Now that you have seen an [Arm Streamline example capture](/learning-paths/mobil
 
 ## Select the device and application in Streamline
 
+<<<<<<< HEAD
 1. Launch the Performance Studio Hub and open Streamline.
 
     - On Windows, search for Performance Studio.
@@ -18,6 +19,8 @@ Now that you have seen an [Arm Streamline example capture](/learning-paths/mobil
 
     ![Performance Studio Hub](images/ps_hub.png)
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 1. In the Streamline `Start` view, select `Android (adb)` as your device type, then select your device from the list of detected devices. This installs the `gatord` daemon and connects to the device.
 
 1. Wait for the list of available packages to populate, then select the one you wish to profile.
@@ -29,6 +32,10 @@ Now that you have seen an [Arm Streamline example capture](/learning-paths/mobil
 Optionally, you can set a preferred location to store your captures using `Window` > `Preferences` > `Data Locations`. New reports will be created in the topmost folder specified.
 {{% /notice %}}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ## Capture data
 
 1. Click `Start capture` to start capturing profile data from the device. Enter a name and location for the capture file.

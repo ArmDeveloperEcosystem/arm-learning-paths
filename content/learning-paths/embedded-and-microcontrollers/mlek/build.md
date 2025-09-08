@@ -7,7 +7,11 @@ weight: 2 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
+<<<<<<< HEAD
 The [Arm ML Evaluation Kit (MLEK)](https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit) provides a number of ready-to-use ML applications. These allow you to investigate the embedded software stack and evaluate performance on the Cortex-M55 and Ethos-U85 processors.
+=======
+The [Arm ML Evaluation Kit (MLEK)](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit) provides a number of ready-to-use ML applications. These allow you to investigate the embedded software stack and evaluate performance on the Cortex-M55 and Ethos-U85 processors.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 You can use the MLEK source code to build sample applications and run them on the [Corstone reference systems](https://www.arm.com/products/silicon-ip-subsystems/), for example the [Corstone-320](https://developer.arm.com/Processors/Corstone-320) Fixed Virtual Platform (FVP).
 
@@ -53,7 +57,11 @@ You can review the installation guides for further details.
 Clone the ML Evaluation Kit repository, and navigate into the new directory:
 
 ```bash
+<<<<<<< HEAD
 git clone "https://git.gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit.git"
+=======
+git clone "https://review.mlplatform.org/ml/ethos-u/ml-embedded-evaluation-kit"
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 cd ml-embedded-evaluation-kit
 git submodule update --init
 ```

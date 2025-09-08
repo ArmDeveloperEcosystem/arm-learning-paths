@@ -22,7 +22,8 @@ armips:
     - Neoverse
 tools_software_languages:
     - Terraform
-    - AWS Lambda
+    - Lambda
+    - Coding
 
 operatingsystems:
     - Linux

@@ -12,11 +12,21 @@ test_images:
 - fedora:latest
 test_link: null
 test_maintenance: true
+<<<<<<< HEAD
+=======
+test_status:
+- passed
+- passed
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 title: Cross-compiler
 tool_install: false
 weight: 3
 ---
+<<<<<<< HEAD
 GCC is available on all Linux distributions and can be installed using the package manager.
+=======
+GCC is available on all Linux distributions and can be installed using the package manager. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 This covers `gcc` and `g++` for compiling C and C++ as a cross-compiler targeting the Arm architecture.
 
@@ -24,9 +34,15 @@ This covers `gcc` and `g++` for compiling C and C++ as a cross-compiler targetin
 
 GCC is often used to cross-compile software for Arm microcontrollers and embedded devices which have firmware and other low-level software. The executables are `arm-none-eabi-gcc` and `arm-none-eabi-g++`.
 
+<<<<<<< HEAD
 GCC is also used to cross compile Linux applications. Applications can be compiled for 32-bit or 64-bit Linux systems.
 
 The executables for 32-bit are `arm-linux-gnueabihf-gcc` and `arm-linux-gnueabihf-g++`.
+=======
+GCC is also used to cross compile Linux applications. Applications can be compiled for 32-bit or 64-bit Linux systems. 
+
+The executables for 32-bit are `arm-linux-gnueabihf-gcc` and `arm-linux-gnueabihf-g++`. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The executables for 64-bit are `aarch64-linux-gnu-gcc` and `aarch64-linux-gnu-g++`.
 
@@ -87,7 +103,11 @@ brew install arm-none-eabi-gcc
 
 ## Setting up product license {#license}
 
+<<<<<<< HEAD
 GCC is open source and freely available for use.
+=======
+GCC is open source and freely available for use. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ## Get started {#start}
 

@@ -11,7 +11,11 @@ layout: "learningpathall"
 
 As with most cloud service providers, Google Cloud offers a pay-as-you-use [pricing policy](https://cloud.google.com/pricing), including a number of [free](https://cloud.google.com/free/docs/free-cloud-features) services.
 
+<<<<<<< HEAD
 This section is to help you get started with [Google Cloud Compute Engine](https://cloud.google.com/compute) compute services, using Arm-based Virtual Machines. Google Cloud offers two generations of Arm-based VMs, `C4A` is the latest generation based on [Google Axion](https://cloud.google.com/products/axion), Google's first Arm-based server processor, built using the Armv9 Neoverse V2 CPU. The previous generation VMs are based on Ampere Altra processor and part of [Tau T2A](https://cloud.google.com/tau-vm) family of Virtual Machines. 
+=======
+This section is to help you get started with [Google Cloud Compute Engine](https://cloud.google.com/compute) compute services, using Arm-based Virtual Machines. Google Cloud offers two generations of Arm-based VMs, `C4A` is the latest generation based on [Google Axion](https://cloud.google.com/products/axion), Google’s first Arm-based server processor, built using the Armv9 Neoverse V2 CPU. The previous generation VMs are based on Ampere Altra processor and part of [Tau T2A](https://cloud.google.com/tau-vm) family of Virtual Machines. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Detailed instructions are available in the Google Cloud [documentation](https://cloud.google.com/compute/docs/instances). 
 

@@ -108,6 +108,7 @@ This code demonstrates how to use a saved PyTorch model for inference and visual
 
 After running the code, you should see results similar to the following figure:
 
+<<<<<<< HEAD
 ![image](figures/03.png "Figure 6. Results Displayed")
 
 ### What have you learned?
@@ -117,6 +118,17 @@ You have completed the process of training and using a PyTorch model for digit c
 After training, you saved the model using `TorchScript`, which captures both the model's architecture and its learned parameters. This improved the flexibility of the model; making it portable and able to function independently of the original class definition, which simplifies deployment.
 
 Next, you performed inference. You loaded the saved model and set it to evaluation mode to ensure that layers like dropout and batch normalization behaved correctly during inference. You randomly selected 16 images from the MNIST test dataset to evaluate the model's performance on unseen data. For each selected image, you used the model to predict the digit, comparing the predicted labels with the actual ones. You displayed the images alongside their actual and predicted labels in a 4x4 grid, visually assessing the model's accuracy and performance.
+=======
+![image](Figures/03.png "Figure 6. Results Displayed")
+
+### What have you learned?
+
+You have completed the process of training and using a PyTorch model for digit classification on the MNIST dataset. Using the training dataset, you optimized the model’s weights and biases over multiple epochs. You employed the `CrossEntropyLoss` function and the `Adam optimizer` to minimize prediction errors and improve accuracy. You periodically evaluated the model on the test dataset to monitor its performance, ensuring it was learning effectively without overfitting.
+
+After training, you saved the model using `TorchScript`, which captures both the model’s architecture and its learned parameters. This improved the flexibility of the model; making it portable and able to function independently of the original class definition, which simplifies deployment.
+
+Next, you performed inference. You loaded the saved model and set it to evaluation mode to ensure that layers like dropout and batch normalization behaved correctly during inference. You randomly selected 16 images from the MNIST test dataset to evaluate the model’s performance on unseen data. For each selected image, you used the model to predict the digit, comparing the predicted labels with the actual ones. You displayed the images alongside their actual and predicted labels in a 4x4 grid, visually assessing the model’s accuracy and performance.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 This comprehensive process, from model training and saving to inference and visualization, illustrates the end-to-end workflow for building and deploying a machine learning model in PyTorch. It demonstrates how to train a model, save it in a portable format, and then use it to make predictions on new data.
 

@@ -23,7 +23,11 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
+<<<<<<< HEAD
 ## How do I install Docker Engine on Linux?
+=======
+## Install Docker Engine on Linux
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 For any Linux machine, the commands below will install Docker.
 
@@ -33,13 +37,21 @@ The commands work on any architecture, and on any system running Linux, from a c
 
 The commands can also be used in the Windows Subsystem for Linux 2 (WSL 2) and on a Chromebook.
 
+<<<<<<< HEAD
 ### How do I run the installer?
+=======
+### Run installer
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```console
 curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 ```
 
+<<<<<<< HEAD
 ### How do I add my username to the Docker group?
+=======
+### Add user
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Add the user to the docker group. The `newgrp` command avoids the need to logout and back in.
 
@@ -47,7 +59,11 @@ Add the user to the docker group. The `newgrp` command avoids the need to logout
 sudo usermod -aG docker $USER ; newgrp docker
 ```
 
+<<<<<<< HEAD
 ### How do I confirm the installation?
+=======
+### Confirm installation
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To confirm the installation is successful run:
 
@@ -89,7 +105,11 @@ uname -m
 
 Output values can be `aarch64` (Arm 64-bit), `armv7l` (Arm 32-bit) or `x86_64`.
 
+<<<<<<< HEAD
 ### Which Docker Engine versions are available?
+=======
+### Docker Engine versions
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The Stable channel (`get.docker.com`) provides the latest releases for general availability.
 
@@ -97,7 +117,11 @@ The Test channel (`test.docker.com`) installs pre-releases that are for testing 
 
 Replace `get.docker.com` with `test.docker.com` above to use the test version.
 
+<<<<<<< HEAD
 ### What about Linux distributions where get.docker.com isn't supported?
+=======
+### Linux distributions where get.docker.com isn't supported
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Some Linux distributions are not supported by [get.docker.com](https://get.docker.com)
 
@@ -127,7 +151,11 @@ To confirm the installation is successful run the same hello-world as above.
 docker run hello-world
 ```
 
+<<<<<<< HEAD
 ### How do I start and stop the Docker daemon on Linux distributions with systemd?
+=======
+### Start and Stop the Docker daemon on Linux distributions with systemd
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To start the docker daemon.
 

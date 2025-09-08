@@ -32,6 +32,7 @@ Emacs](https://www.gnu.org/software/emacs/), or [Sublime
 Text](https://www.sublimetext.com/), which are also popular and they all
 support extensions that make C++ development easy.
 
+<<<<<<< HEAD
 ## Source code
 
 In case you want to, you can [download the source code](https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/matrix) for this learning path. This will download a `.tar.gz` archive that you will need to expand:
@@ -42,6 +43,8 @@ mv code-examples-main-learning-paths-cross-platform-matrix code-examples
 ```
 
 The source code for this learning path will be available in `code-examples/learning-paths/cross-platform/matrix/`.
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ## What are the differences between configuring the project and building the code?
 
@@ -74,7 +77,11 @@ projects like [LLVM](https://www.llvm.org) or [Qt](https://www.qt.io/).
 
 Organizing the files in a project is important because it allows you to:
 
+<<<<<<< HEAD
 - Easily navigate the structure and find information.
+=======
+- Easily navigate the structure and find information.  
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 - Organize information for the tools, such as compilers and linkers.
 - Make a distinction between information that is exported or installed, and what is
   only relevant for building the project.
@@ -127,6 +134,7 @@ There is nothing like creating the canonical `Hello, World!` application!
 Use your favorite text editor or IDE to
 create the file `src/howdy.cpp` and add the following content:
 
+<<<<<<< HEAD
 ```CPP
 #include <cstdlib>
 #include <iostream>
@@ -139,6 +147,9 @@ int main(int argc, char *argv[]) {
     return EXIT_SUCCESS;
 }
 ```
+=======
+{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-1/src/howdy.cpp" >}}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ## Setup CMake
 
@@ -247,6 +258,7 @@ library version.
 Add the `Matrix.h` header file, declaring the `Version` object
 and the `getVersion` function and save the file as `include/Matrix/Matrix.h`:
 
+<<<<<<< HEAD
 ```CPP
 #pragma once
 
@@ -264,10 +276,14 @@ const Version &getVersion();
 
 } // namespace MatComp
 ```
+=======
+{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-1/include/Matrix/Matrix.h" >}}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 With those declarations in place, create and add the following lines to
 `lib/Matrix/Matrix.cpp` to provide an implementation to `getVersion`:
 
+<<<<<<< HEAD
 ```CPP
 #include "Matrix/Matrix.h"
 
@@ -281,10 +297,14 @@ const Version &getVersion() { return version; }
 
 } // namespace MatComp
 ```
+=======
+{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-1/lib/Matrix/Matrix.cpp" >}}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Now, you can create a program that will make use of the
 ``getVersion`` function. Use your editor to save the code below as `src/getVersion.cpp`:
 
+<<<<<<< HEAD
 ```CPP
 #include "Matrix/Matrix.h"
 
@@ -330,6 +350,13 @@ target_include_directories(Matrix
 add_executable(matrix-getVersion src/getVersion.cpp)
 target_link_libraries(matrix-getVersion Matrix)
 ```
+=======
+{{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-1/src/getVersion.cpp" >}}
+
+Finally, add the instructions below in the top-level `CMakeLists.txt`:
+
+{{< include-code TXT "content/learning-paths/cross-platform/matrix/projects/chapter-1/CMakeLists.txt" >}}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The `add_library` instructs CMake how to build the Matrix library. The
 `target_include_directories` specifies where the Matrix library header is located, and the `target_compile_features` specifies that C++17 is the version
@@ -390,7 +417,10 @@ For example, Visual Studio Code can work seamlessly with CMake with plugins, and
 generate project files for several popular IDEs, such as Xcode, Sublime Text, Eclipse,
 CodeBlocks, and CodeLite. You can run `cmake --help` to get a
 list of supported *generators* (in CMake terminology) for your platform.
+<<<<<<< HEAD
 
 You can refer to this chapter source code in
 `code-examples/learning-paths/cross-platform/matrix/chapter-1` in the archive that
 you have downloaded earlier.
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

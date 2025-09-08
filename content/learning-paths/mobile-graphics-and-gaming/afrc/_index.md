@@ -5,7 +5,11 @@ minutes_to_complete: 25
 
 who_is_this_for: Software developers of Android applications and mobile games who are interested in learning how to enable Arm Fixed Rate Compression (AFRC) to improve performance.
 
+<<<<<<< HEAD
 learning_objectives:
+=======
+learning_objectives: 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Query for fixed-rate compression support.
     - Specify what compression to use.
     - Verify that compression is applied.
@@ -18,7 +22,11 @@ prerequisites:
 author: Jose-Emilio Munoz-Lopez
 
 ### Tags
+<<<<<<< HEAD
 skilllevels: Advanced
+=======
+skilllevels: Intermediate
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 subjects: Graphics
 armips:
     - Mali
@@ -27,6 +35,10 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Vulkan
+<<<<<<< HEAD
+=======
+    - Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 
 further_reading:

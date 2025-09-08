@@ -21,11 +21,19 @@ Before you begin, install Visual Studio 2022 with .NET Desktop Development workl
 ## Create the project
 Start by creating the project. Open Visual Studio and then click 'Create a new project'. 
 
+<<<<<<< HEAD
 ![fig1](figures/01.png)
 
 In the 'Create a new project' window, select the 'Windows Forms App' template. 
 
 ![fig2](figures/02.png)
+=======
+![fig1](Figures/01.png)
+
+In the 'Create a new project' window, select the 'Windows Forms App' template. 
+
+![fig2](Figures/02.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 This will open the 'Configure your new project' view, in which you should configure the project as follows (refer to the figure below):
 
@@ -34,11 +42,19 @@ This will open the 'Configure your new project' view, in which you should config
 3. Check the option **Place solution and project in the same directory**
 4. Click the **Next** button
 
+<<<<<<< HEAD
 ![fig3](figures/03.png)
 
 In the final step, 'Additional Information', select **.NET 8.0 (Long-Term Support)** from the 'Framework' dropdown list. Then, click the **Create** button. 
 
 ![fig4](figures/04.png)
+=======
+![fig3](Figures/03.png)
+
+In the final step, 'Additional Information', select **.NET 8.0 (Long-Term Support)** from the 'Framework' dropdown list. Then, click the **Create** button. 
+
+![fig4](Figures/04.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Your project is now ready. Next, you will create the user interface and then implement the application logic.
 
@@ -52,12 +68,20 @@ To create the user interface proceed as follows:
 * one ListBox
 3. Position the controls as shown in the figure below:
 
+<<<<<<< HEAD
 ![fig5](figures/05.png)
+=======
+![fig5](Figures/05.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 4. Right-click the first label and select the Properties from the context menu 
 5. In the Properties window, change the (Name) property to **labelArchitecture**:
 
+<<<<<<< HEAD
 ![fig6](figures/06.png)
+=======
+![fig6](Figures/06.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 6. Similarly, rename the ListBox from **listBox1** to **listBoxResults**
 7. Modify the properties of the first NumericUpDown control as follows:
@@ -221,6 +245,10 @@ When the application is running and the user clicks the Start button, the applic
 ## Run the application
 The application is now ready to run. To do this, click 'Debug' > 'Start Debugging'. Visual Studio will then build and launch the application. Afterwards, click 'Start'. Then, change the matrix size to 200 and click the 'Start' button again. Repeat this process for matrix sizes of 300, 400, and 500. The results should appear as shown in the following figure:
 
+<<<<<<< HEAD
 ![fig7](figures/07.png)
+=======
+![fig7](Figures/07.png)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 By default, the application uses the Arm64 configuration. For each matrix size, you will observe the computation time. In the next step, you will learn how to change the build configuration to x64. This will allow you to compare the results with those obtained using x64.

@@ -31,11 +31,17 @@ operatingsystems:
 - Linux
 
 tools_software_languages:
+<<<<<<< HEAD
 - glibc
 - LSE
 - MongoDB
 - Runbook
 
+=======
+- Glibc
+- LSE
+- MongoDB
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 
 further_reading:

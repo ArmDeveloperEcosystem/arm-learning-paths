@@ -33,16 +33,26 @@ Now build and run the app using default settings (F5 or Ctrl + R). After executi
 
 ![fig3](figures/03.png)
 
+<<<<<<< HEAD
 The app continuously transforms the image of Tux (Linux's penguin character) by rotating, scaling, and shearing it. You can stop the animation by clicking Animate. It is active when the app runs inside the constructor of the XFormWidget.
+=======
+The app continuously transforms the image of Tux (Linux’s penguin character) by rotating, scaling, and shearing it. You can stop the animation by clicking Animate. It is active when the app runs inside the constructor of the XFormWidget.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Now you can modify this default behavior.
 
 ## Develop the application
 To modify the Affine Transformations app, you will add one more button with a Run label. When you click this button, it invokes the custom `runAnimation` method. This method will be responsible for executing affine transformations several times. This allows you to measure the performance of these operations when you build the app for x64 and AArch64 architectures.
 
+<<<<<<< HEAD
 As with any other C++ app, the application's entry point is the main function, as defined in `main.cpp`. The main function initializes and displays XFormWidget, in `xform.h` and `xform.cpp`.
 
 Start by changing the xform.h file (located inside the Header folder in the project tree on the left side). First, add one `include` directive to import the QElapsedTimer class, which you use to measure the code's execution time:
+=======
+As with any other C++ app, the application’s entry point is the main function, as defined in `main.cpp`. The main function initializes and displays XFormWidget, in `xform.h` and `xform.cpp`.
+
+Start by changing the xform.h file (located inside the Header folder in the project tree on the left side). First, add one `include` directive to import the QElapsedTimer class, which you use to measure the code’s execution time:
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```Cpp
 #ifndef XFORM_H

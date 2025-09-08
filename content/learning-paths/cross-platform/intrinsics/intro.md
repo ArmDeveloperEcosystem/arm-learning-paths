@@ -8,11 +8,19 @@ weight: 2
 
 Migrating C/C++ applications from x64 to Arm requires recompiling the source code for the Arm architecture. A simple recompile works much of the time, but not always.
 
+<<<<<<< HEAD
 SIMD extensions are one of the common barriers encountered when porting C/C++ applications from x64 to Arm. This article is a short background on intrinsics and how to identify them in code. This Learning Path presents options for how to get the code compiled and running on an Arm-based platform.
 
 ## Intrinsics
 
 Intrinsics are functions which are built into the compiler and not part of a library. They look like function calls, but don’t require an actual function call. When the compiler encounters intrinsics it directly substitutes a sequence of instructions. Intrinsics are often used to access special instructions that don’t have a direct mapping from C/C++ or when performance optimization is needed.
+=======
+SIMD extensions are one of the common barriers encountered when porting C/C++ applications from x64 to Arm. This article is a short background on intrinsics and how to identify them in code. This Learning Path presents options for how to get the code compiled and running on an Arm-based platform. 
+
+## Intrinsics
+
+Intrinsics are functions which are built into the compiler and not part of a library. They look like function calls, but don’t require an actual function call. When the compiler encounters intrinsics it directly substitutes a sequence of instructions. Intrinsics are often used to access special instructions that don’t have a direct mapping from C/C++ or when performance optimization is needed. 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 One use of intrinsics is to access SIMD (single-instruction, multiple-data) instructions directly from C/C++ for improved application performance. Intrinsics are easier to work with compared to assembly language, but they often pose a challenge when porting source code to a new architecture.
 
@@ -21,7 +29,11 @@ Intel Streaming SIMD Extensions (SSE) and [Arm NEON](https://developer.arm.com/d
 There are generally 3 ways to program SIMD hardware:
 - The C/C++ compiler recognizes opportunities to use SIMD instructions and inserts them automatically (with or without some guidance)
 - Intrinsics to access SIMD instructions directly from C/C++ source code
+<<<<<<< HEAD
 - Assembly programming
+=======
+- Assembly programming 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ## Source code example
 

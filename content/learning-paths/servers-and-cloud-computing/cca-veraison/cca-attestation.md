@@ -20,5 +20,9 @@ CCA attestation tokens have two very important properties:
 * Firstly, they are cryptographically-signed using a private key that is strongly protected by the platform where the realm is running. 
 * Secondly, they can be evaluated remotely using an attestation verification service. 
 
+<<<<<<< HEAD
 The verification service acts as a trust authority. It can verify the token's cryptographic signature, which ensures that the evidence is authentic. It can also compare the evidence against the expectations of a trustworthy platform. In combination, these two properties allow a user of the realm to decide whether the realm will provide an adequate trusted environment for confidential computing.
+=======
+The verification service acts as a trust authority. It can verify the token’s cryptographic signature, which ensures that the evidence is authentic. It can also compare the evidence against the expectations of a trustworthy platform. In combination, these two properties allow a user of the realm to decide whether the realm will provide an adequate trusted environment for confidential computing.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 

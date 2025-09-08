@@ -93,7 +93,11 @@ With minimal effort from the programmer, the Burst compiler is able to produce h
 Producing vector-based instructions from code is called vectorization. The Burst compiler is capable of auto-vectorizing code, i.e., the programmer doesn’t have to write Neon instructions. The compiler can do even better if we follow a few simple rules or best practices.
 
 ### Best practices
+<<<<<<< HEAD
 The way data and code are structured are very important factors that will influence the compiler's ability to auto-vectorize. Here are some recommended best practices:
+=======
+The way data and code are structured are very important factors that will influence the compiler’s ability to auto-vectorize. Here are some recommended best practices:
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 - Keep your code loops simple and small rather than large and complex
 
@@ -137,7 +141,11 @@ Before diving into the modifications made to optimize for Neon, here are some po
 
 1. Neon intrinsics let you use a high level language while still accessing the low level native instructions you need
 
+<<<<<<< HEAD
 1. The compiler won’t always recognize code that is vectorizable so it's worth checking what is and isn’t getting vectorized. The [Unity Burst Inspector](https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/editor-burst-inspector.html) can help you identify which areas of your code are using Burst.
+=======
+1. The compiler won’t always recognize code that is vectorizable so it’s worth checking what is and isn’t getting vectorized. The [Unity Burst Inspector](https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/editor-burst-inspector.html) can help you identify which areas of your code are using Burst.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 1. Writing Neon code can be complex
 

@@ -25,10 +25,17 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - LLM
+<<<<<<< HEAD
     - Generative AI
     - Raspberry Pi
     - Python
     - Hugging Face
+=======
+    - GenAI
+    - Raspberry Pi
+    - Python
+
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

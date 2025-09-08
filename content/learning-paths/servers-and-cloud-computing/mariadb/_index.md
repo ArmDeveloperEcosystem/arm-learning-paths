@@ -28,8 +28,11 @@ tools_software_languages:
     - Ansible
     - MariaDB
     - Docker
+<<<<<<< HEAD
     - Runbook
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 further_reading:
     - resource:

@@ -24,7 +24,10 @@ operatingsystems:
 tools_software_languages:
     - Python
     - PyTorch
+<<<<<<< HEAD
     - Hugging Face
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     
 further_reading:
     - resource:

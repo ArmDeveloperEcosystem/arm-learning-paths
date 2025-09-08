@@ -25,6 +25,10 @@ tools_software_languages:
 - MTE
 - Linux
 - C
+<<<<<<< HEAD
+=======
+- Coding
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 operatingsystems:
 - Linux
 

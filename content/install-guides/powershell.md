@@ -20,7 +20,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 PowerShell is a cross-platform task automation solution made up of a command-line shell, a scripting language, and a configuration management framework. It runs on a variety of operating systems, including Windows, Linux, and macOS.
 
+<<<<<<< HEAD
 ## What do I need before installing PowerShell?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 PowerShell is available for a variety of operating systems and Linux distributions and there are multiple ways to install it.
 
@@ -40,7 +44,11 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
+<<<<<<< HEAD
 ## How do I install PowerShell on Arm Linux?
+=======
+## Installation
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 {{% notice Note %}}
 The PowerShell installation documentation for Linux package managers does not work for the Arm architecture because there is no Arm support in the repositories. This may change for future versions of PowerShell.
@@ -52,7 +60,11 @@ You can download a release file for the Arm architecture from GitHub and install
 
 ```bash { target="ubuntu:latest" }
 # Download the powershell '.tar.gz' archive
+<<<<<<< HEAD
 curl -L -o /tmp/powershell.tar.gz https://github.com/PowerShell/PowerShell/releases/download/v7.5.2/powershell-7.5.2-linux-arm64.tar.gz
+=======
+curl -L -o /tmp/powershell.tar.gz https://github.com/PowerShell/PowerShell/releases/download/v7.4.1/powershell-7.4.1-linux-arm64.tar.gz
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 # Create the target folder where powershell will be placed
 sudo mkdir -p /opt/microsoft/powershell/7
@@ -88,12 +100,20 @@ pwsh --version
 The version is printed:
 
 ```output
+<<<<<<< HEAD
 PowerShell 7.5.2
+=======
+PowerShell 7.4.1
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 You are now ready to use PowerShell on your Arm Linux computer.
 
+<<<<<<< HEAD
 ## How do I get started with PowerShell?
+=======
+## Get started
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To print a hello world message using `pwsh` run the following commands:
 

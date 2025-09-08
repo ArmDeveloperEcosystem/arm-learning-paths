@@ -54,7 +54,11 @@ for idx, file in enumerate(data_files):
 You can check the extracted features with this code block. These are the extracted features from one data sample.
 Expected output shown below:
 
+<<<<<<< HEAD
 ![output5](images/output5.PNG)
+=======
+![output5](Images/output5.PNG)
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ## Feature based model
 

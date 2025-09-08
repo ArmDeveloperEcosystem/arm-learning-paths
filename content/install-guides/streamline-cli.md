@@ -33,7 +33,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 The Streamline CLI tools are native command-line tools that are designed to run directly on an Arm server running Linux. The tools provide a software profiling methodology that gives you clear and actionable performance data. You can use this data to guide the optimization of the heavily used functions in your software.
 
+<<<<<<< HEAD
 ## Which platforms support Streamline CLI tools?
+=======
+## Platform support
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Streamline CLI tools are supported with the following host operating systems running on an Arm AArch64 host machine:
 
@@ -48,7 +52,11 @@ Streamline CLI tools are supported on the following Arm CPUs:
 * Arm Neoverse N2
 * Arm Neoverse V1
 
+<<<<<<< HEAD
 ## What should I do before using Streamline CLI tools?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Use the Arm Sysreport utility to determine whether your system configuration supports hardware-assisted profiling. Follow the instructions in [Get ready for performance analysis with Sysreport][1] to discover how to download and run this utility.
 
@@ -64,7 +72,11 @@ The Streamline CLI tools can give top-down metrics in systems with as few as 3 a
 The Streamline CLI tools can be used without SPE. Load operation data source metrics will not be available, and branch mispredict metrics might be less
 accurate.
 
+<<<<<<< HEAD
 ## How should I build my application for profiling?
+=======
+## Building your application
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Before you can capture a software profile you must build your application with debug information. This enables the profiler to map instruction addresses back to specific functions in your source code. For C and C++ you do this by passing the `-g` option to the compiler.
 
@@ -72,9 +84,15 @@ Arm recommends that you profile an optimized release build of your application, 
 
 If you are using the `workflow_topdown_basic option`, ensure that your application workload is at least 20 seconds long, in order to give the core time to capture all of the metrics needed. This time increases linearly as you add more metrics to capture.
 
+<<<<<<< HEAD
 ## How do I set up Python for Streamline CLI tools?
 
 The Python scripts provided with Streamline CLI tools require Python 3.8 or later, and depend on several third-party modules. It is recommended to create a Python virtual environment containing these modules to run the tools.
+=======
+## Using Python scripts
+
+The Python scripts provided with Streamline CLI tools require Python 3.8 or later, and depend on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Create a virtual environment:
 
@@ -89,7 +107,11 @@ The prompt of your terminal has (sl-venv) as a prefix indicating the virtual env
 The instructions assume that you run all Python commands from inside the virtual environment.
 {{% /notice %}}
 
+<<<<<<< HEAD
 ## How do I install Streamline CLI tools? {.reference}
+=======
+## Installing the tools {.reference}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The Streamline CLI tools are available as a standalone download to enable easy integration in to server workflows.
 
@@ -139,9 +161,15 @@ For manual download, you can find all available releases here:
 https://artifacts.tools.arm.com/arm-performance-studio/Streamline_CLI_Tools/
 ```
 
+<<<<<<< HEAD
 ## How do I apply the kernel patch?
 
 For best results, a Linux kernel patch is available that modifies the behavior of Linux perf to improve support for capturing function-attributed top-down metrics on Arm systems. This patch provides two new capabilities:
+=======
+## Applying the kernel patch
+
+For best results, we provide a Linux kernel patch that modifies the behavior of Linux perf to improve support for capturing function-attributed top-down metrics on Arm systems. This patch provides two new capabilities:
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 * It allows a new thread to inherit the perf counter group configuration of its parent.
 * It decouples the perf event-based sampling window size from the overall sample rate. This allows strobed mark-space sampling patterns where the tool can capture a small window without using a high sample rate.
@@ -162,7 +190,11 @@ With the patch applied, it is possible to collect the following profiles:
 The following instructions show you how to install the patch on Amazon Linux 2023.
 You might need to adapt them slightly to other Linux distributions.
 
+<<<<<<< HEAD
 ### How do I manually apply the patch to the source tree?
+=======
+### Manual application to the source tree
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To apply the patch to the latest 6.7 kernel, you can use `git`:
 
@@ -176,7 +208,11 @@ or `patch`:
 patch -p 1 -i patch/v6.7-combined.patch
 ```
 
+<<<<<<< HEAD
 ### How do I apply the patch to an RPM-based distribution?
+=======
+### Manual application to an RPM-based distribution
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Follow these steps to integrate these patches into an RPM-based distribution's kernel:
 
@@ -273,4 +309,7 @@ Follow these steps to integrate these patches into an RPM-based distribution's k
     ```
 
 You are now ready to use Streamline CLI Tools. Refer to [Profiling for Neoverse with Streamline CLI Tools](/learning-paths/servers-and-cloud-computing/profiling-for-neoverse/) to get started.
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

@@ -19,7 +19,11 @@ minutes_to_complete: 30
 author: Jason Andrews
 
 ### Link to official documentation
+<<<<<<< HEAD
 official_docs: https://documentation.ubuntu.com/multipass/en/latest/
+=======
+official_docs: https://multipass.run/docs
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 test_images:
 - ubuntu:latest
@@ -40,28 +44,49 @@ A computer running macOS with Apple Silicon or an Arm Linux computer with KVM en
 
 Multipass provides a clear CLI to easily start virtual machine instances, do development tasks, and clean the VMs from your computer.
 
+<<<<<<< HEAD
 ## What are the prerequisites for running Multipass?
+=======
+## Before you begin
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Multipass runs on a variety of platforms and host operating systems. The information below covers running Multipass on macOS with Apple Silicon and Arm Linux with the goal of creating a compatible Ubuntu Linux environment for developers working on cloud instances.
 
 Multipass uses the terms virtual machine and instance synonymously.
 
+<<<<<<< HEAD
 ## How do I install Multipass on macOS?
 
 ### How do I download Multipass for macOS? {#download}
+=======
+## Installation on macOS
+
+### Download  {#download}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Download Multipass for macOS.
 
 ```console
+<<<<<<< HEAD
 wget https://github.com/canonical/multipass/releases/download/v1.16.0/multipass-1.16.0+mac-Darwin.pkg
 ```
 
 ### How do I install Multipass on macOS?
+=======
+wget https://github.com/canonical/multipass/releases/download/v1.14.1-rc1/multipass-1.14.1-rc1+mac.14+gf2381bfe9.mac-Darwin.pkg
+```
+
+### Install
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Install the download using the package command.
 
 ```console
+<<<<<<< HEAD
 sudo installer -pkg multipass-1.16.0+mac-Darwin.pkg -target /
+=======
+sudo installer -pkg multipass-1.14.1-rc1+mac.14+gf2381bfe9.mac-Darwin.pkg -target /
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 ```
 
 The getting started instructions below use the command line interface. If you prefer to use the graphical interface start it from the macOS Launchpad, the initial screen is shown below. You can use the UI to create, start, and stop virtual machines.
@@ -70,7 +95,11 @@ The getting started instructions below use the command line interface. If you pr
 
 Multipass is now installed. Proceed to [Get Started with Multipass](#getstarted).
 
+<<<<<<< HEAD
 ## How do I install Multipass on Arm Linux?
+=======
+## Installation on Arm Linux
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Multipass can be used on Arm Linux computers such as the Raspberry Pi 5.
 
@@ -78,7 +107,11 @@ Running Multipass on Linux requires the KVM hypervisor. KVM does not typically w
 
 The instructions have been tested on a Raspberry Pi 5 running Raspberry Pi OS and Ubuntu.
 
+<<<<<<< HEAD
 ### How do I check if KVM is available?
+=======
+### Check KVM
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Install and run the `kvm-ok` command to confirm KVM is available.
 
@@ -112,7 +145,11 @@ HINT:   sudo /usr/sbin/kvm-ok
 
 If KVM is available, proceed with the install.
 
+<<<<<<< HEAD
 ### How do I install the Sanp daemon on Arm Linux?
+=======
+### Install
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 You may need to install the Snap daemon, `snapd`, before installing Multipass.
 
@@ -130,7 +167,15 @@ If you need to install `snapd` run:
 sudo apt install snapd -y
 ```
 
+<<<<<<< HEAD
 
+=======
+LXD is also required for Multipass.
+
+```bash
+sudo snap install lxd
+```
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 {{% notice Note %}}
 You can select from three Multipass releases: stable, beta, or edge. The default version is stable.
@@ -141,11 +186,17 @@ Add `--beta` or `--edge` to the install command below to select these more recen
 sudo snap install multipass
 ```
 
+<<<<<<< HEAD
 ## How do I get started with Multipass? {#getstarted}
 
 Multipass is now installed, you can try it out. 
 
 ### How do I confirm Multipass is installed?
+=======
+Multipass is now installed.
+
+## Get started with Multipass {#getstarted}
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To confirm multipass is installed run the `version` command.
 
@@ -159,8 +210,11 @@ If the `multipass` command is not found, you can add `/snap/bin` to the Bash sea
 export PATH=$PATH:/snap/bin
 ```
 
+<<<<<<< HEAD
 ### How do I list available Ubuntu images?
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 Multipass runs Ubuntu images. The last three LTS (long-term support) versions are available. A Docker environment with Portainer is also available as well as a few other images.
 
 To see the available images run the `find` command. Any of the listed images can be used to create a new instance.
@@ -187,7 +241,11 @@ ros-noetic                                    0.1              A development and
 ros2-humble                                   0.1              A development and testing environment for ROS 2 Humble.
 ```
 
+<<<<<<< HEAD
 ### How do I launch a Multipass instance?
+=======
+### Launching instances
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The default values for launching instances allocate 1 CPU, create a small disk (5 Gb), and limited memory (1 Gb). By default, the name of the instance is automatically assigned.
 
@@ -201,7 +259,11 @@ multipass launch lts --name m1u --cpus 4 --disk 16G --memory 4G
 
 Once launched, the command prompt returns and the instance is running in the background.
 
+<<<<<<< HEAD
 ### How do I connect to a Multipass instance?
+=======
+### Connect and use instances
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Use the `list` command to identify created instances. Make note of the instance names as the name is used in other commands.
 
@@ -215,8 +277,11 @@ To start a command line shell on a running instance use the `shell` command.
 multipass shell m1u
 ```
 
+<<<<<<< HEAD
 ### How do I execute a command on a Multipass instance?
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 To run a specific command from the host on the instance use the `exec` command. The command to be run comes after the ``--``
 
 ```console
@@ -229,7 +294,11 @@ The `uname` output will look similar to:
 Linux m1u 6.8.0-36-generic #36-Ubuntu SMP PREEMPT_DYNAMIC Mon Jun 10 13:20:23 UTC 2024 aarch64 aarch64 aarch64 GNU/Linux
 ```
 
+<<<<<<< HEAD
 ### How do I print instance information with Multipass?
+=======
+### Print information
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 The `info` command prints information about the instance, including the IP address.
 
@@ -253,7 +322,11 @@ Memory usage:   355.3MiB out of 3.8GiB
 Mounts:         --
 ```
 
+<<<<<<< HEAD
 ### How do I mount a host directory into a Multipass instance?
+=======
+### Mount a host directory
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 To access a large number of files on the host machine without copying or transferring them into the instance use the `mount` command. This command makes a host directory visible in the instance and all files can be accessed. Modifications made from inside the instance will directly change the files on the host.
 
@@ -265,8 +338,11 @@ multipass mount dev m1u:/home/ubuntu/dev
 
 There are also options to adjust the user and group IDs as needed to avoid permission problems.
 
+<<<<<<< HEAD
 ### How do I unmount a host directory from a Multipass instance?
 
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 Use the `umount` command to unmount the directory.
 
 ```console
@@ -275,7 +351,11 @@ multipass umount m1u:/home/ubuntu/dev
 
 Directories can be dynamically mounted and unmounted without stopping the instance.
 
+<<<<<<< HEAD
 ### How do I stop and start a Multipass instance?
+=======
+### Stop and Start
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Multipass instances can be stopped and started quickly.
 
@@ -293,7 +373,11 @@ To start the instance.
 multipass start m1u
 ```
 
+<<<<<<< HEAD
 ### How do I clean up Multipass instances?
+=======
+### Cleanup
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 Multipass instances are easy to delete. There is one extra level of protection to recover deleted instances before they are fully deleted.
 

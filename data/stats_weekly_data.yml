@@ -4906,6 +4906,7 @@
     avg_close_time_hrs: 0
     num_issues: 12
     percent_closed_vs_total: 0.0
+<<<<<<< HEAD
 - a_date: '2025-02-24'
   content:
     automotive: 1
@@ -7498,3 +7499,5 @@
     avg_close_time_hrs: 0
     num_issues: 25
     percent_closed_vs_total: 0.0
+=======
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)

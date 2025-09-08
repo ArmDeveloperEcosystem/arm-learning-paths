@@ -26,7 +26,11 @@ From now on, you can manage the cluster using the `kubectl`. This tool provides 
 
 {{% notice Note %}} From this point, you can use any `kubectl` command, and follow many Kubernetes tutorials. {{% /notice %}}
 
+<<<<<<< HEAD
 For instance, let's display the list of nodes by typing the following command: 
+=======
+For instance, let’s display the list of nodes by typing the following command: 
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 ```console
 kubectl get nodes

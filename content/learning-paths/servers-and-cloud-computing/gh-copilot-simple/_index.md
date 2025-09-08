@@ -1,6 +1,13 @@
 ---
 title: Build a GitHub Copilot Extension in Python
 
+<<<<<<< HEAD
+=======
+draft: true
+cascade:
+    draft: true
+
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers who want to learn how to build a simple GitHub Copilot Extension. 
@@ -8,7 +15,11 @@ who_is_this_for: This is an introductory topic for software developers who want 
 learning_objectives:
     - Create a simple GitHub Copilot Extension in Python.
     - Use ngrok to expose the extension to Copilot.
+<<<<<<< HEAD
     - Add a GitHub App to your GitHub account and deploy the Copilot Extension.
+=======
+    - Add a GitHub App to your GitHub account and use your Copilot Extension.
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
 
 prerequisites:
     - A GitHub account.

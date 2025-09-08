@@ -27,7 +27,12 @@ operatingsystems:
     - RTOS
 tools_software_languages:
     - Arm Virtual Hardware
+<<<<<<< HEAD
     - FVP
+=======
+    - Coding
+    - Fixed Virtual Platform
+>>>>>>> 5f2151168 (Changed model to Tiny Rock–Paper–Scissors CNN)
     - Arm Compiler for Embedded
 
 
