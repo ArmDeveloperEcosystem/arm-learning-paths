@@ -1,6 +1,10 @@
 ---
 title: Run MongoDB on the Microsoft Azure Cobalt 100 processors 
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30   
 
 who_is_this_for: This Learning Path is designed for software developers looking to migrate their MongoDB workloads from x86_64 to Arm-based platforms, specifically on the Microsoft Azure Cobalt 100 processors.
