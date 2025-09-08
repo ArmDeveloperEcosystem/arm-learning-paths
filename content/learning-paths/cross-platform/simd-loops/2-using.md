@@ -28,20 +28,26 @@ A loop is structured as follows:
 ```C
 // Includes and loop_<NNN>_data structure definition
 
+#if defined(HAVE_NATIVE) || defined(HAVE_AUTOVEC)
+
+// C code
+void inner_loop_<NNN>(struct loop_<NNN>_data *data) { ... }
+
 #if defined(HAVE_xxx_INTRINSICS)
 
 // Intrinsics versions: xxx = SME, SVE, or SIMD (Neon) versions
 void inner_loop_<NNN>(struct loop_<NNN>_data *data) { ... }
 
-#elif defined(HAVE_xxx)
+#elif defined(<ASM_COND>)
 
-// Hand-written inline assembly : xxx = SME2P1, SME2, SVE2P1, SVE2, SVE, or SIMD
+ // Hand-written inline assembly :
+// <ASM_COND> = __ARM_FEATURE_SME2p1, __ARM_FEATURE_SME2, __ARM_FEATURE_SVE2p1,
+//              __ARM_FEATURE_SVE2, __ARM_FEATURE_SVE, or __ARM_NEON
 void inner_loop_<NNN>(struct loop_<NNN>_data *data) { ... }
 
 #else
 
-// Equivalent C code
-void inner_loop_<NNN>(struct loop_<NNN>_data *data) { ... }
+#error "No implementations available for this target."
 
 #endif
 
@@ -50,14 +56,15 @@ void inner_loop_<NNN>(struct loop_<NNN>_data *data) { ... }
 
 Each loop is implemented in several SIMD extension variants, and conditional
 compilation is used to select one of the optimisations for the
-`inner_loop_<NNN>` function. When ACLE is supported (e.g. SME, SVE, or
-SIMD/Neon), a high-level intrinsic implementation is compiled. If ACLE is not
-available, the tool falls back to handwritten inline assembly targeting one of
-the various SIMD extensions, including SME2.1, SME2, SVE2.1, SVE2, and others.
-If no handwritten inline assembly is detected, a fallback implementation in
-native C is used. The overall code structure also includes setup and cleanup
-code in the main function, where memory buffers are allocated, the selected loop
-kernel is executed, and results are verified for correctness.
+`inner_loop_<NNN>` function. The native C implementation is written first, and
+it can be generated either when building natively (HAVE_NATIVE) or through
+compiler auto-vectorization (HAVE_AUTOVEC). When SIMD ACLE is supported (e.g.,
+SME, SVE, or Neon), the code is compiled using high-level intrinsics. If ACLE
+support is not available, the build process falls back to handwritten inline
+assembly targeting one of the available SIMD extensions, such as SME2.1, SME2,
+SVE2.1, SVE2, and others. The overall code structure also includes setup and
+cleanup code in the main function, where memory buffers are allocated, the
+selected loop kernel is executed, and results are verified for correctness.
 
 At compile time, you can select which loop optimisation to compile, whether it
 is based on SME or SVE intrinsics, or one of the available inline assembly

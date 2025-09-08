@@ -59,7 +59,7 @@ mechanics of matrix tiles --- this is where you’ll see them in action.
 The project includes:
 - Dozens of numbered loop kernels, each focused on a specific feature or pattern
 - Reference C implementations to establish expected behavior
-- Inline assembly and/or intrinsics for scalar, Neon, SVE, SVE2, and SME2
+- Inline assembly and/or intrinsics for scalar, Neon, SVE, SVE2, SVE2.1, SME2 and SME2.1
 - Build support for different instruction sets, with runtime validation
 - A simple command-line runner to execute any loop interactively
 - Optional standalone binaries for bare-metal and simulator use
