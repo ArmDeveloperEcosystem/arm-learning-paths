@@ -8,20 +8,21 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-### Run Trustee Services
+## Run Trustee services
 
-#### Prerequisites
+### Prerequisites
 
-Install docker. For example, on your Ubuntu 24.04 LTS host machine, first set up Docker's apt repository:
-``` bash
+Install Docker. On Ubuntu 24.04 LTS, set up Docker’s APT repository:
+
+```bash
 # Add Docker's official GPG key:
 sudo apt-get update
-sudo apt-get install ca-certificates curl
+sudo apt-get install -y ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-# Add the repository to Apt sources:
+# Add the repository to APT sources:
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
   $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
@@ -29,33 +30,37 @@ echo \
 sudo apt-get update
 ```
 
-Install git and docker packages:
-``` bash
-sudo apt-get install git docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+Install Git and Docker packages:
+```
+sudo apt-get install -y git docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-Add your user name to the docker group:
+Add your user name to the docker group (open a new shell after this so the change takes effect):
 ``` bash
 sudo usermod -aG docker $USER
 newgrp docker
 ```
 
-#### Start Trustee Services docker containers
+## Start Trustee services containers
 
 Clone the `cca-trustee` repository:
 ``` bash
 git clone https://github.com/ArmDeveloperEcosystem/cca-trustee.git
 ```
 
-This repository contains configuration files used for running Trustee services docker containers with CCA attestation support as a simple cluster.
-The config files are based on the recommended configurations from [KBS Cluster](https://github.com/confidential-containers/trustee/blob/main/kbs/docs/cluster.md)
+This repository contains configuration to run Trustee services (KBS, AS, RVPS) with CCA attestation support as a simple cluster. The configuration is based on the recommended settings from [KBS Cluster](https://github.com/confidential-containers/trustee/blob/main/kbs/docs/cluster.md).
 
-In addition to the recommended configuration, the following changes were also made for this Learning Path:
-- Included the external Linaro CCA verifier into AS configuration
-- Included an attestation policy with CCA rules
-- Defined an "affirming" resource policy
-- Created a secret demo message.
-- Defined a docker network shared by all containers in this demo.
+Additional Learning Path–specific changes include:
+
+- External Linaro CCA verifier in the AS configuration
+
+- Attestation policy with CCA rules
+
+- An “affirming” resource policy
+
+- A demo secret message
+
+- A shared Docker network for all containers in this demo
 
 Go into the `cca-trustee` directory and start the Trustee services docker containers (as detached services):
 ``` bash { output_lines = "3-9" }
@@ -76,13 +81,11 @@ docker compose logs <service>
 ```
 Where `service` is either `as`,`kbs` or `rvps`.
 
-### Launch a CCA Realm with FVP
+## Launch a CCA Realm with FVP
 
-With the Trustee Services running in one terminal,
-open up a new terminal in which you will run CCA attestations.
+With the Trustee Services running in one terminal, open up a new terminal in which you will run CCA attestations.
 
-Pull the docker image with the pre-built FVP,
-and then run the container connected to the same docker network:
+Pull the docker image with the pre-built FVP, and then run the container connected to the same docker network:
 
 ```bash
 docker pull armswdev/cca-learning-path:cca-simulation-v2
@@ -91,16 +94,15 @@ docker pull armswdev/cca-learning-path:cca-simulation-v2
 docker run --rm -it --network cca-trustee armswdev/cca-learning-path:cca-simulation-v2
 ```
 
-Within your running container,
-launch the `run-cca-fvp.sh` script to run the Arm CCA pre-built binaries on the FVP:
+Within your running container, launch the `run-cca-fvp.sh` script to run the Arm CCA pre-built binaries on the FVP:
 
 ```bash
 ./run-cca-fvp.sh
 ```
 
-The `run-cca-fvp.sh` script uses the screen command to connect to the different UARTs in the FVP.
+The `run-cca-fvp.sh` script uses the `screen` command to connect to the different UARTs in the FVP.
 
-You should see the host Linux kernel boot on your terminal. You will be prompted to log in to the host.
+When the host Linux boots, log in:
 
 Enter root as the username:
 ```output
@@ -120,10 +122,7 @@ cd /cca
 
 You should see the realm boot.
 
-The `realm` will take some time to boot, please be patient.
-After boot up, you will be prompted to log in at the guest Linux prompt.
-
-Use root again as the username:
+After the realm boots, log in, using the root again as the username:
 
 ```output
 
@@ -132,12 +131,9 @@ realm login: root
 (realm) #
 ```
 
-### Try to use attestation to request a secret
+## Request a secret using attestation
 
-In this step, you will go through the process of using attestation to request
-a secret from the KBS. This will not work on the first attempt.
-But don't worry. You will learn why that is the case, and how to rectify the problem.
-You will have a better understanding of the attestation process as a result.
+This first attempt intentionally fails so you can see why and how attestation policy gates secret release.
 
 Change directory to `/cca` and use `openssl` to create a realm RSA key:
 ```bash
@@ -147,15 +143,15 @@ openssl genrsa -traditional -out realm.key
 
 Run the attestation command and save the EAT Attestation Result (EAR) message in JWT (JSON Web Token) format in a file named `ear.jwt`:
 ```bash
-./kbs-client --url http://kbs:8080 attest --tee-key-file realm.key >ear.jwt
+./kbs-client --url http://kbs:8080 attest --tee-key-file realm.key > ear.jwt
 ```
 
-Now try to request a secret demo message using the attestation result:
-```bash
-./kbs-client --url http://kbs:8080 get-resource \
+Request the demo secret with that EAR:
+```bash./kbs-client --url http://kbs:8080 get-resource \
   --tee-key-file realm.key --attestation-token ear.jwt \
   --path "cca-trustee/demo-message/message.txt"
-```
+```  
+
 
 The request will fail with `Access denied by policy` and `Token Verifier` errors:
 ```output
@@ -174,14 +170,9 @@ The request will fail with `Access denied by policy` and `Token Verifier` errors
 Error: request unauthorized
 ```
 
-Proceed to the next step to understand why the KBS did not grant access
-to the requested secret, and how to resolve the problem.
+## Evaluate the Attestation Result
 
-#### Evaluate the Attestation Result
-
-In the previous step, the KBS failed to provide the requested secret.
-To understand why this happened, you need to learn more about how
-the attestation result is used to evaluate the trustworthiness of a CCA realm.
+In the previous step, the KBS failed to provide the requested secret. To understand why this happened, you need to learn more about how the attestation result is used to evaluate the trustworthiness of a CCA realm.
 In this step, you will examine the attestation result more closely.
 
 The following command will use the `arc` tool to verify the cryptographic signature on the attestation result and display the result in a human-readable format:
@@ -191,7 +182,7 @@ The following command will use the `arc` tool to verify the cryptographic signat
 ```
 
 {{% notice EAR expiry note %}}
-The EAR message produced by Trustee AS in this Learning Path demo is valid for 30 minutes.
+The EAR is valid for 30 minutes. If it expires, re-run the attestation command to generate a fresh token.
 If you spend more time on analyzing the message you will start seeing errors from `arc verify` command:
 
 ``` output
@@ -207,7 +198,7 @@ The `arc verify` command produces quite a lot of output.
 However, the main part is the CCA attestation token that is similar to the one you inspected in
 [Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison) Learning Path.
 
-The most interesting part of the output is towards the bottom, and should look like this:
+Check the trustworthiness vectors near the end of the output. Example:
 
 ```output
 [trustworthiness vectors]
@@ -226,7 +217,7 @@ This part of the output shows how the attestation service has compared the attes
 These comparisons are known as "trustworthiness vectors".
 It also shows the conclusions that were drawn from that comparison.
 
-Please notice these two trustworthiness vectors in the result:
+Note these two trustworthiness vectors in the result:
 - __Hardware [affirming]__. Evidence in the attestation token shows a good match against the expectations of CCA platform.
 - __Executables [warning]__. Attestation token does not show a good match against the expectations of a recognized genuine set of approved executables have been loaded during the boot process.
 
@@ -236,13 +227,13 @@ You can also check the status of the EAR:
             "ear.status": "warning",
 ```
 
-The warning status is the reason why the KBS chose not to grant access
+The warning status is the reason why the KBS does not grant access
 to the secret that you requested in the earlier step.
 It has not concluded that the realm is trustworthy.
 But this is simply because you have not supplied an expected reference measurement
 for the realm. You will do this in the next step.
 
-### Endorse Realm Initial Measurement (RIM)
+## Endorse Realm Initial Measurement (RIM)
 
 For a successful attestation of your CCA real you need to provide
 the Trustee Reference Values Provider Service (RVPS) with a known good reference value.
@@ -271,7 +262,7 @@ In the terminal where you started Trustee services, run `endorse-rim.sh` script 
 Reference Values Updated
 ```
 
-### Re-run attestation and request a secret
+## Re-run attestation and request a secret
 
 In the realm terminal re-run the attestation command:
 ```bash
