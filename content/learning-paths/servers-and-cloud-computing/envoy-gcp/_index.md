@@ -7,10 +7,10 @@ cascade:
    
 minutes_to_complete: 30
 
-who_is_this_for: This introductory topic is for software developers interested in migrating their Envoy workloads from x86_64 platforms to Arm-based platforms, specifically on Google Axion–based C4A virtual machines.  
+who_is_this_for: This is an introductory topic is for software developers interested in migrating their Envoy workloads from x86_64 servers to Arm-based servers, specifically on Google Axion–based C4A virtual machines.  
 
 learning_objectives:
-  - Start an Arm virtual machine on Google Cloud Platform (GCP) using the C4A Google Axion instance family with RHEL 9 as the base image
+  - Start an Arm virtual machine on Google Cloud Platform (GCP) using the C4A Google Axion instance 
   - Install and configure Envoy on Arm-based GCP C4A instances
   - Validate Envoy functionality through baseline testing
   - Benchmark Envoy performance on Arm
