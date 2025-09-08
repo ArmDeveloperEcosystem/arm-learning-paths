@@ -86,7 +86,7 @@ A verifier driver parses the attestation evidence provided by the hardware TEE. 
 1. Verifies the hardware TEE signature of the TEE quote and report provided in the evidence
 2. Receives the evidence and organizes the status into a JSON format to be returned
 
-In this Learning Path, the AS is configured to use an external CCA verifer.
+In this Learning Path, the AS is configured to use an external CCA verifier.
 
 [Linaro](https://www.linaro.org) provides such an attestation verifier for use with pre-silicon Arm CCA platforms.
 This verifier is built from the Open-Source [Veraison project](https://github.com/veraison).
