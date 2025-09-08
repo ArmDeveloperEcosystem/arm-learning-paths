@@ -138,8 +138,8 @@ FVP and the reference software stack, see the
 Learning Path.
 
 When the AS receives an attestation token from the realm via KBS:
-- it calls an external CCA verifer (the Linaro attestation verifier service) to obtain an attestation result.
-- the external CCA verifer checks the token's cryptographic signature,
+- it calls an external CCA verifier (the Linaro attestation verifier service) to obtain an attestation result.
+- the external CCA verifier checks the token's cryptographic signature,
   verifies that it denotes a confidential computing platform and provides an attestation result.
 - it also checks the token evidences against its own attestation policies and updates attestation result status and trustworthiness vectors.
 
