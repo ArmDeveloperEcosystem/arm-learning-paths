@@ -61,7 +61,7 @@ This runs the Envoy proxy with your configuration file (envoy_config.yaml) so it
 ```
 curl -v http://127.0.0.1:10000/get
 ```
-Running from another terminal returns a **200 OK** status, confirming that Envoy is running and successfully proxying requests.
+Running from another terminal returns a **200 OK** status, confirming that Envoy is running and successfully processing requests.
 
 3. Run a Time-based Load Test
 
