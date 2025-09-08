@@ -34,7 +34,7 @@ tools_software_languages:
     - C
     - Docker
     - FVP
-peratingsystems:
+operatingsystems:
     - Linux
 
 further_reading:
