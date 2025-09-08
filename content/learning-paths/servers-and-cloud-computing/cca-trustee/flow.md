@@ -171,7 +171,7 @@ The request will fail with `Access denied by policy` and `Token Verifier` errors
 Error: request unauthorized
 ```
 
-## Evaluate the Attestation Result
+## Evaluate the Attestation result
 
 In the previous step, the KBS failed to provide the requested secret. To understand why this happened, you need to learn more about how the attestation result is used to evaluate the trustworthiness of a CCA realm.
 In this step, you will examine the attestation result more closely.
@@ -190,16 +190,15 @@ If you spend more time on analyzing the message you will start seeing errors fro
 Using JWK key from JWT header
 Error: verifying signed EAR from "ear.jwt" using "JWK header" key: failed verifying JWT message: jwt.Parse: failed to parse token: jwt.Validate: validation failed: "exp" not satisfied: token is expired
 ```
-
-Please obtain a new EAR message by re-running the attestation command.
 {{% /notice %}}
 
 
 The `arc verify` command produces quite a lot of output.
+
 However, the main part is the CCA attestation token that is similar to the one you inspected in
 [Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison) Learning Path.
 
-Check the trustworthiness vectors near the end of the output. Example:
+Check the trustworthiness vectors near the end of the output:
 
 ```output
 [trustworthiness vectors]
@@ -214,9 +213,7 @@ Storage Opaque [none]: no claim being made
 Sourced Data [none]: no claim being made
 ```
 
-This part of the output shows how the attestation service has compared the attestation token against its expectations of a trustworthy system.
-These comparisons are known as "trustworthiness vectors".
-It also shows the conclusions that were drawn from that comparison.
+This part of the output shows how the attestation service has compared the attestation token against its expectations of a trustworthy system. These comparisons are known as *trustworthiness vectors"*. It also shows the conclusions that were drawn from that comparison.
 
 Note these two trustworthiness vectors in the result:
 - __Hardware [affirming]__. Evidence in the attestation token shows a good match against the expectations of CCA platform.
