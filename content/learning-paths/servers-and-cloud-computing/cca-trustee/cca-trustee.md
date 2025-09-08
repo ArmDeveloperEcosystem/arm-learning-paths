@@ -25,7 +25,7 @@ processing, is a common practice in confidential computing.
 This Learning Path is similar to
 [Run an end-to-end Attestation Flow with Arm CCA](/learning-paths/servers-and-cloud-computing/cca-essentials/).
 
-The main difference is that, instead of the KBS from the [Veraison](https://github.com/veraison) project, you will use components implemented in the [Confidential Containers (CoCo)](https://github.com/confidential-containers) to support the [IETF RATS model](https://datatracker.ietf.org/doc/rfc9334/) (Remote ATtestation procedureS). These components include the Attestation Service (AS), Key Broker Service (KBS), Reference Value Provider Service (RVPS), Attestation Agent (AA), and Confidential Data Hub (CDH).
+The main difference is that, instead of the KBS from the [Veraison](https://github.com/veraison) project, you will use components implemented in the [Confidential Containers (CoCo) Project](https://github.com/confidential-containers) to support the [IETF RATS model](https://datatracker.ietf.org/doc/rfc9334/) (Remote ATtestation procedureS). These components include the Attestation Service (AS), Key Broker Service (KBS), Reference Value Provider Service (RVPS), Attestation Agent (AA), and Confidential Data Hub (CDH).
 The AS, KBS, and RVPS components are part of the [Trustee project](https://github.com/confidential-containers/trustee),
 whereas the AA and CDH are part of the [Guest Components](https://github.com/confidential-containers/guest-components) project in CoCo.
 
@@ -84,11 +84,10 @@ RVPS verifies, stores, and provides reference values. It receives inputs from th
 
 Guest components run inside the realm (TEE). In RATS terms, these components act as the **Attester**.
 
-For simplicity instead of Attestation Agent (AA) and Confidential Data Hub (CDH)
-you will use [KBS Client Tool](https://github.com/confidential-containers/trustee/tree/main/tools/kbs-client).
+For simplicity, instead of Attestation Agent (AA) and Confidential Data Hub (CDH), you will use the [KBS Client Tool](https://github.com/confidential-containers/trustee/tree/main/tools/kbs-client).
 
 This is a simple client for the KBS that facilitates basic attestation flows.
-You will run this tool inside of a realm to make requests for an attestation result token (EAR) and a secret.
+You will run this tool in a realm to make requests for an attestation result token (EAR) and a secret.
 
 The client tool can also be used to provision the KBS/AS with resources and policies.
 

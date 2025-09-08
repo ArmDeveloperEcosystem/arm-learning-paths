@@ -7,10 +7,10 @@ weight: 3 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
+## Overview
+In this section you’ll run the **Trustee services** (AS, KBS, RVPS), launch a **CCA realm** on **Arm FVP**, generate attestation evidence, and request a secret. You’ll intentionally fail the first request to see how **attestation policy** gates secret release, then **endorse the realm initial measurement (RIM)**, re-attest, and successfully retrieve the secret.
 
-## Run Trustee services
-
-### Prerequisites
+## Install dependencies
 
 Install Docker. On Ubuntu 24.04 LTS, set up Docker’s APT repository:
 
@@ -75,7 +75,7 @@ docker compose up -d
  ✔ Container cca-trustee-kbs-client-1  Started
 ```
 
-While running the demo you can also check logs of the Trustee services in this termimal:
+While running the demo you can also check logs of the Trustee services in this terminal:
 ``` bash
 docker compose logs <service>
 ```
@@ -147,6 +147,7 @@ Run the attestation command and save the EAT Attestation Result (EAR) message in
 ```
 
 Request the demo secret with that EAR:
+
 ```bash./kbs-client --url http://kbs:8080 get-resource \
   --tee-key-file realm.key --attestation-token ear.jwt \
   --path "cca-trustee/demo-message/message.txt"
@@ -276,7 +277,7 @@ Verify that the new EAR now contains `affirming` status:
             "ear.status": "affirming",
 ```
 
-and `affirming` result for the `Executables` trustworthness vector:
+and `affirming` result for the `Executables` trustworthiness vector:
 ```bash { output_lines = "2-11" }
 ./arc verify ear.jwt |grep -A10 "trustworthiness vectors"
 [trustworthiness vectors]
