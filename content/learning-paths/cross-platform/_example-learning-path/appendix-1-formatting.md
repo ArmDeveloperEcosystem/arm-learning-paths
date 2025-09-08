@@ -114,7 +114,7 @@ There are three ways you can specify command outputs in code:
 {{% notice Note %}}
 In each of the three situations, code marked as 'output' will:
 - not be copied when clicking the 'copy' button
-- not be highlightable by a cursor
+- not be highlighted by a cursor
 - appear slightly darker
 {{% /notice %}}
 
