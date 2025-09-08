@@ -18,4 +18,4 @@ To learn more about Google Axion, see the blog post [Introducing Google Axion Pr
 
 MongoDB is a popular open-source NoSQL database designed for performance, scalability, and flexibility. It stores data in JSON-like BSON documents, making it well suited to applications that require dynamic, schema-less data models.
 
-MongoDB is widely used for web, mobile, IoT, and real-time analytics workloads. Learn more on the [MongoDB website](https://www.mongodb.com/) and in the [official documentation](https://www.mongodb.com/docs/).
+MongoDB is widely used for web, mobile, IoT, and real-time analytics workloads. Learn more on the [MongoDB website](https://www.mongodb.com/) and in the [MongoDB documentation](https://www.mongodb.com/docs/).

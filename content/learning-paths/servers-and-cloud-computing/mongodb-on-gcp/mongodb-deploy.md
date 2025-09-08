@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-This section shows how to install MongoDB and the MongoDB Shell (`mongosh`) on an Arm-based Google Axion C4A instance running Red Hat Enterprise Linux. You will download the Arm64 binaries, update your environment, and verify that the database server runs correctly.
+This section shows you how to install MongoDB and the MongoDB Shell (`mongosh`) on an Arm-based Google Axion C4A instance running Red Hat Enterprise Linux. You will download the Arm64 binaries, update your environment, and verify that the database server runs correctly.
 
 ## Install system dependencies
 

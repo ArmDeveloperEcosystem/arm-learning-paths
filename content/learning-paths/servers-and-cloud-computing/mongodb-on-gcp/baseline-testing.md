@@ -6,7 +6,11 @@ weight: 5
 layout: learningpathall
 ---
 
+## Overview
+
 Now that MongoDB is installed on your Google Axion C4A Arm VM, verify that the server is running and accepting local connections.
+
+Use mongosh to create a test database, run basic CRUD operations, and capture a quick insert-time baseline before you start benchmarking.
 
 ## Connect to MongoDB
 
@@ -14,6 +18,7 @@ Open a shell session to the local MongoDB instance:
 
 ```console
 mongosh mongodb://127.0.0.1:27017
+```
 
 
 ## Create a test database and collection
