@@ -7,16 +7,16 @@ layout: learningpathall
 ---
 
 
-Since Envoy is installed successfully on your GCP C4A Arm virtual machine, follow these steps to validate that the Envoy is running.
+With Envoy installed successfully on your GCP C4A Arm virtual machine, you will proceed to validate that the Envoy is running as expected.
 
 ## Validate Envoy installation with a baseline test
 
-In this section, we covered how to create a minimal Envoy config, start Envoy with it, and verify functionality using `curl`. 
-The test confirmed that Envoy listens on port **10000**, forwards requests to `httpbin.org`, and returns a successful **200 OK** response.
+In this section, you will learn how to create a minimal Envoy config, start Envoy with it, and verify functionality using `curl`. 
+The test will confirm that Envoy listens on port **10000**, forwards requests to `httpbin.org`, and returns a successful **200 OK** response.
 
 ### Create a Minimal Configuration File
 
-Using a file editor of your choice, create a file named `envoy_config.yaml`, and add the below content to it. This file configures Envoy to listen on port **10000** and forward all traffic to `http://httpbin.org`. The host_rewrite_literal is essential to prevent 404 Not Found errors from the upstream server.
+Using a file editor of your choice, create a file named `envoy_config.yaml`, and add the below content to it. This file configures Envoy to listen on port **10000** and forward all traffic to `http://httpbin.org`. The `host_rewrite_literal` is essential to prevent 404 Not Found errors from the upstream server.
 
 ```YAML
 static_resources:
@@ -72,7 +72,7 @@ static_resources:
 ### Run and Test Envoy
 
 This is the final phase of functional validation, confirming that the proxy is operational.
-Start the Envoy proxy using your configuration file. This command will keep the terminal occupied, so you will need a new terminal for the next step.
+Start the Envoy proxy using your configuration file as shown on your current terminal:
 
 ```console
  envoy -c envoy_config.yaml --base-id 1
@@ -90,12 +90,12 @@ The output should look similar to:
 [2025-08-21 11:53:51.599][67137][info][config] [source/common/listener_manager/listener_manager_impl.cc:930] all dependencies initialized. starting workers
 ```
 
-Now, **Send a test request** from another terminal window to the Envoy listener using `curl`.
+Now, open a new terminal and send a test request to the Envoy listener using `curl`.
 
 ```console
 curl -v http://localhost:10000/get
 ```
-The `-v` flag provides verbose output, showing the full request and response headers. A successful test will show a **HTTP/1.1 200 OK** response with a JSON body from httpbin.org.
+The `-v` flag provides verbose output, showing the full request and response headers. A successful test will show a **HTTP/1.1 200 OK** response with a JSON body from `httpbin.org`.
 
 The output should look similar to:
 
@@ -133,9 +133,9 @@ The output should look similar to:
 ```
 #### Summary of the curl Output
 
-- **Successful Connection:** The **curl** command successfully connected to the Envoy proxy on **localhost:10000**.
-- **Correct Status Code:** Envoy successfully forwarded the request and received a healthy **200 OK** response from the upstream server.
-- **Host Header Rewrite:** The **Host** header was correctly rewritten from **localhost:10000** to **httpbin.org** as defined in the configuration.
+- **Successful Connection:** The `curl` command successfully connected to the Envoy proxy on `localhost:10000`.
+- **Correct Status Code:** Envoy successfully forwarded the request and received a successful `200 OK` response from the upstream server.
+- **Host Header Rewrite:** The Host header was correctly modified from `localhost:10000` to `httpbin.org` as defined in the configuration.
 - **End-to-End Success:** The proxy is fully operational, proving that requests are correctly received, processed, and forwarded to the intended backend.
 
-This confirms the end-to-end flow is working correctly.
+This confirms the end-to-end flow with Envoy server is working correctly.
