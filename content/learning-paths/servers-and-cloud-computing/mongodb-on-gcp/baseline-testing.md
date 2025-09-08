@@ -6,9 +6,13 @@ weight: 5
 layout: learningpathall
 ---
 
-Now that MongoDB is successfully installed on your GCP C4A Arm virtual machine, follow these steps to verify that the server is running correctly and accepting local connections.
+## Overview
 
-### 1. Connect to MongoDB
+Now that MongoDB is installed on your Google Axion C4A Arm VM, verify that the server is running and accepting local connections.
+
+Use mongosh to create a test database, run basic CRUD operations, and capture a quick insert-time baseline before you start benchmarking.
+
+## Connect to MongoDB
 
 Open a shell session to the local MongoDB instance:
 
@@ -16,7 +20,8 @@ Open a shell session to the local MongoDB instance:
 mongosh mongodb://127.0.0.1:27017
 ```
 
-### 2. Create a Test Database and Collection
+
+## Create a test database and collection
 
 Switch to a new database and create a collection:
 
@@ -34,7 +39,7 @@ switched to db baselineDB
 { ok: 1 }
 ```
 
-### 3. Insert 10,000 Test Documents
+## Insert 10,000 test documents
 
 Populate the collection with 10,000 timestamped documents:
 
@@ -48,9 +53,9 @@ for (let i = 0; i < 10000; i++) {
 }
 ```
 
-Each document will contain:
+Each document contains:
 - `record`: a counter from 0 to 9999
-- `status`: always `"new"`
+- `status`: `"new"`
 - `timestamp`: the current date/time of insertion
 
 Sample output:
@@ -59,7 +64,7 @@ Sample output:
 { acknowledged: true, insertedId: ObjectId('...') }
 ```
 
-### 4. Read a Subset of Documents
+## Read a subset of documents
 
 Verify read functionality by querying the first few documents:
 
@@ -69,7 +74,7 @@ db.test.find({ status: "new" }).limit(5)
 
 This returns the first 5 documents where `status` is `"new"`.
 
-### 5. Update a Document
+## Update a document
 
 Update a specific document by changing its status:
 
@@ -89,7 +94,7 @@ Expected output:
 }
 ```
 
-### 6. View the Updated Document
+## View the updated document
 
 Confirm that the document was updated:
 
@@ -108,7 +113,7 @@ Expected output:
 }
 ```
 
-### 7. Delete a Document
+## Delete a document
 
 The command below tells MongoDB to delete one document from the test collection, where record is exactly 100:
 
@@ -116,7 +121,7 @@ The command below tells MongoDB to delete one document from the test collection,
 db.test.deleteOne({ record: 100 })
 ```
 
-Verify that it was deleted:
+Verify deletion:
 
 ```javascript
 db.test.findOne({ record: 100 })
@@ -128,7 +133,7 @@ Expected output:
 null
 ```
 
-### 8. Measure Execution Time (Optional)
+## Measure execution time (optional)
 
 Measure how long it takes to insert 10,000 documents:
 
@@ -146,7 +151,7 @@ Sample output:
 Insert duration (ms): 4427
 ```
 
-### 9. Count Total Documents
+## Count total documents
 
 Check the total number of documents in the collection:
 
@@ -163,9 +168,11 @@ Expected output:
 The count **19999** reflects the total documents after inserting 10,000 initial records, adding 10,000 more (in point 8), and deleting one (record: 100).
 
 
-### 10. Clean Up (Optional)
+## Clean up (optional)
 
-For the sake of resetting the environment, this following command deletes the current database you are connected to in mongosh. Drop the `baselineDB` database to remove all test data:
+For the sake of resetting the environment, this following command deletes the current database you are connected to in mongosh. 
+
+Drop the `baselineDB` database to remove all test data:
 
 ```javascript
 db.dropDatabase()
@@ -177,4 +184,4 @@ Expected output:
 { ok: 1, dropped: 'baselineDB' }
 ```
 
-These baseline operations confirm that MongoDB is functioning properly on your GCP Arm64 environment. Using `mongosh`, you validated key database capabilities including **inserts**, **queries**, **updates**, **deletes**, and **performance metrics**. Your instance is now ready for benchmarking or application integration.
+These baseline operations confirm that MongoDB is functioning properly on your GCP Arm64 environment. Using `mongosh`, you validated inserts, queries, updates, deletes, and basic performance timing. Your instance is now ready for benchmarking or application integration.

@@ -5,36 +5,36 @@ weight: 6
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## MongoDB Benchmarking with YCSB (Yahoo! Cloud Serving Benchmark)
 
-**YCSB (Yahoo! Cloud Serving Benchmark)** is an open-source tool for evaluating the performance of NoSQL databases under various workloads. It simulates operations such as reads, writes, updates, and scans to mimic real-world usage patterns.
+## Benchmark MongoDB with YCSB
 
-### Install YCSB (Build from Source)
+YCSB (Yahoo! Cloud Serving Benchmark) is an open-source tool for evaluating NoSQL databases under various workloads. It simulates operations such as writes, updates, and scans to mimic production traffic.
 
-First, install the required build tools and clone the YCSB repository:
+## Install YCSB from source
+
+Install build tools and clone YCSB, then build the MongoDB binding:
 
 ```console
 sudo dnf install -y git maven java-11-openjdk-devel
 git clone https://github.com/brianfrankcooper/YCSB.git
 cd YCSB
 mvn -pl site.ycsb:mongodb-binding -am clean package
-```
 
-### Load Phase – Insert Initial Dataset
 
-This phase inserts a set of documents into MongoDB to simulate a typical starting workload. By default, it inserts 1,000 records.
+## Load initial data 
 
+Load a starter dataset (defaults to 1,000 records) into MongoDB:
 ```console
 ./bin/ycsb load mongodb -s \
   -P workloads/workloada \
   -p mongodb.url=mongodb://127.0.0.1:27017/ycsb
 ```
 
-This prepares the database for the actual performance test.
+This prepares the database for the performance test.
 
-### Execute Benchmark Workload
+## Run a mixed workload
 
-Run the actual benchmark with the predefined workload. This command performs mixed read/write operations and collects performance metrics.
+Run Workload A (50% reads, 50% updates) and collect metrics:
 
 ```console
 ./bin/ycsb run mongodb -s \
@@ -48,7 +48,7 @@ Run the actual benchmark with the predefined workload. This command performs mix
 
 This simulates common real-world applications like session stores or shopping carts.
 
-You’ll see performance output that looks like this:
+Sample output:
 
 ```output
 [READ], Operations, 534
@@ -65,19 +65,19 @@ You’ll see performance output that looks like this:
 [OVERALL], Throughput(ops/sec), 1953.125
 ```
 
-### YCSB Operations & Latency Metrics Explained
+## Understand YCSB metrics
 
-- **Operations Count**: Total operations performed for each type (e.g., READ, UPDATE).
+- **Operations Count**: Total operations performed for each type (for example, READ, UPDATE).
 - **Average Latency (us)**: The average time to complete each operation, measured in microseconds.
 - **Min Latency / Max Latency (us)**: The fastest and slowest observed times for any single operation of that type.
 
 With YCSB installed and benchmark results captured, you now have a baseline for MongoDB's performance under mixed workloads.
 
-### Benchmark summary on x86_64
+## Benchmark summary on x86_64
 
 To better understand how MongoDB behaves across architectures, YCSB benchmark workloads were run on both an **x86_64 (C3 Standard)** and an **Arm64 (C4A Standard)** virtual machine, each with 4 vCPUs and 16 GB of memory, running RHEL 9.
 
-The following  benchmark results are collected on a c3-standard-4 (4 vCPU, 2 core, 16 GB Memory) x86_64 environment, running RHEL 9.
+Results from a c3-standard-4 instance (4 vCPUs, 16 GB RAM) on RHEL 9:
 
 | Operation | Count | Avg Latency (us) | Min Latency (us) | Max Latency (us) | 50th Percentile (us) | 95th Percentile (us) | 99th Percentile (us) |
 |-----------|-------|------------------|------------------|------------------|-----------------------|----------------------|-----------------------|
@@ -85,8 +85,8 @@ The following  benchmark results are collected on a c3-standard-4 (4 vCPU, 2 cor
 | UPDATE    | 528   | 621.27           | 214              | 12855            | 554                   | 971                  | 1224                  |
 | CLEANUP   | 1     | 4702             | 4700             | 4703             | 4703                  | 4703                 | 4703                  |
 
-### Benchmark summary on Arm64:
-The following  benchmark results are collected on a c4a-standard-4 (4 vCPU, 16 GB Memory) Arm64 environment, running RHEL 9.
+## Benchmark summary on Arm64 (Google Axion C4A):
+Results from a c4a-standard-4 instance (4 vCPUs, 16 GB RAM) on RHEL 9:
 
 | Operation | Count | Avg Latency (us) | Min Latency (us) | Max Latency (us) | 50th Percentile (us) | 95th Percentile (us) | 99th Percentile (us) |
 |----------|------------------|------------------|------------------|------------------|----------------------|----------------------|----------------------|
@@ -94,10 +94,12 @@ The following  benchmark results are collected on a c4a-standard-4 (4 vCPU, 16 G
 | UPDATE    |               466 |           384.45  |               186 |             26543 |                   296 |                   498 |                   821 |
 | CLEANUP   |                 1 |          4138     |              4136 |              4139 |                  4139 |                  4139 |                  4139 |
 
-### **Highlights from GCP C4A Arm virtual machine**
+## Highlights from the C4A Arm VM
 
-- Arm results show low **average latencies**, **READ** at **313 us** and **UPDATE** at **384 us**.
-- **50th** to **99th percentile** latencies remain stable, indicating consistent performance.
-- **Max latency** spikes (**8279 us READ**, **26543 us UPDATE**) suggest rare outliers.
+- Lower average latencies on Arm: ~313 µs (READ) and ~384 µs (UPDATE).
 
-This Learning Path walked you through setting up and benchmarking MongoDB on an Arm-based GCP instance, highlighting how to run core operations, validate performance, and interpret benchmarking results with YCSB. Alongside, you explored some performance numbers, showing that Arm is a powerful and cost-efficient alternative for modern data-serving workloads like MongoDB.
+- Stable p50–p99 latencies indicate consistent performance.
+
+- Occasional max-latency outliers suggest transient spikes common in mixed workloads.
+
+With YCSB built and results captured, you now have a baseline for MongoDB performance on Arm-based Google Axion C4A. You can iterate on dataset size, thread counts, and workloads (A–F) to profile additional scenarios and compare cost-performance across architectures.
