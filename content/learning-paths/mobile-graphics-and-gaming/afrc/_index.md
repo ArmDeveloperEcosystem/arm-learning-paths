@@ -5,7 +5,7 @@ minutes_to_complete: 25
 
 who_is_this_for: Software developers of Android applications and mobile games who are interested in learning how to enable Arm Fixed Rate Compression (AFRC) to improve performance.
 
-learning_objectives: 
+learning_objectives:
     - Query for fixed-rate compression support.
     - Specify what compression to use.
     - Verify that compression is applied.
@@ -18,7 +18,7 @@ prerequisites:
 author: Jose-Emilio Munoz-Lopez
 
 ### Tags
-skilllevels: Intermediate
+skilllevels: Advanced
 subjects: Graphics
 armips:
     - Mali

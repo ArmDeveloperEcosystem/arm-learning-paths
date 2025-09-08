@@ -6,28 +6,30 @@ weight: 3
 layout: learningpathall
 ---
 
-## Introduction
+## Overview
 
-This guide walks you through provisioning **Google Axion C4A Arm virtual machine** on GCP with the **c4a-standard-4 (4 vCPUs, 16 GB Memory)** machine type, using the **Google Cloud Console**.
+This section walks you through creating a Google Axion C4A Arm virtual machine on Google Cloud with the `c4a-standard-4` (4 vCPUs, 16 GB memory) machine type using the Google Cloud Console. You will use this VM later as the host for a GitHub Actions self-hosted runner.
 
-If you haven't got a Google Cloud account, you can follow the Learning Path on [Getting Started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/) to get started.
+If you don't have a Google Cloud account, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
 
-### Create an Arm-based Virtual Machine (C4A)
+## Create an Arm-based virtual machine (C4A)
 
-To create a virtual machine based on the C4A Arm architecture:
-1. Open the [Google Cloud Console](https://console.cloud.google.com/).
-2. Navigate to the card **Compute Engine** and click on **Create Instance**.
-3. Under the **Machine Configuration**:
-      - Fill in basic details like **Instance Name**, **Region**, and **Zone**.
-      - Choose the **Series** as `C4A`.
-      - Select a machine type such as `c4a-standard-4`.
-![Instance Screenshot](./images/select-instance.png)
-4. Under the **OS and Storage**, click on **Change**, pick **Ubuntu** as the Operating System with **Ubuntu 24.04 LTS Minimal** as the Version. Make sure you pick the version of image for Arm.
-5. Under **Networking**, enable **Allow HTTP traffic** to test workloads like NGINX later.
-6. Click on **Create**, and the instance will launch.
+Follow these steps in the Google Cloud Console:
+
+- Open the [Google Cloud Console](https://console.cloud.google.com/).
+- Go to **Navigation menu ▸ Compute Engine ▸ VM instances**, then select **Create instance**.
+- Under **Machine configuration**:
+  - Enter **Instance name**, **Region**, and **Zone**
+  - Set **Series** to `C4A`
+  - Choose a machine type such as `c4a-standard-4`
+- Under **OS and storage**, select **Change**, pick **Ubuntu** as the operating system, and choose **Ubuntu 24.04 LTS Minimal**. Make sure you select the Arm image variant.
+- Under **Networking**, enable **Allow HTTP traffic** so you can test workloads like NGINX later.
+- Select **Create** to launch the instance.
+
+![Google Cloud Console page showing C4A VM creation with c4a-standard-4 selectedalt-text#center](./images/select-instance.png "Create a C4A VM in the Google Cloud Console")
 
 {{% notice Important %}}
-You should not enable the **Allow HTTP traffic** permanently, since this poses a security risk. For the long-term, you should only allow traffic from the IP address you use to connect to the instance.
+Do not leave **Allow HTTP traffic** enabled permanently. For long-term use, allow traffic only from the IP addresses you use to connect to the instance.
 {{% /notice %}}
 
-You can access the Google Cloud Console by clicking the **SSH** button in the instance overview. Use this command line interface (CLI) to run the commands in the remainder of this Learning Path.
+Access the VM from the instance list by selecting **SSH** in the instance overview. Use this command line interface (CLI) to run the commands in the remainder of this Learning Path.

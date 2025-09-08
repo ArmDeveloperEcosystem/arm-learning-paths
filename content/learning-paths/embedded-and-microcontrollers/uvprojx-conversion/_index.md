@@ -5,7 +5,7 @@ minutes_to_complete: 10
 
 who_is_this_for: This is a topic for users of µVision who want to migrate to the new project format (csolution) required by CMSIS-Toolbox.
 
-learning_objectives: 
+learning_objectives:
     - Import, convert, and build uvprojx-based projects in Keil Studio.
     - Convert uvprojx-based projects in µVision.
     - Convert and build uvprojx-based projects on the command line.
@@ -19,7 +19,7 @@ prerequisites:
 author: Christopher Seidl
 
 ### Tags
-skilllevels: Intermediate
+skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
     - Cortex-M
@@ -43,7 +43,7 @@ further_reading:
         link: https://community.arm.com/arm-community-blogs/b/internet-of-things-blog/posts/keil-mdk-version-6
         type: blog
     - resource:
-        title: keil.arm.com 
+        title: keil.arm.com
         link: https://keil.arm.com
         type: website
 

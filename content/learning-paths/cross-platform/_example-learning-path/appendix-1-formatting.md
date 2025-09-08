@@ -83,12 +83,26 @@ Specify that line_numbers are true in the following way:
 \`\`\`bash { line_numbers = "true" } \
 echo 'hello world' \
 echo ‘I am line two’ \
-\`\`\` 
+\`\`\`
 
-```bash { line_numbers = "true" } 
-echo ‘hello world’ 
-echo ‘I am line two’ 
-``` 
+```bash { line_numbers = "true" }
+echo ‘hello world’
+echo ‘I am line two’
+```
+
+In some cases, the line numbering should not start from one but from another
+value, e.g. if the code excerpt is extracted from a larger file. Use the
+`line_start` attribute to achieve this:
+
+\`\`\`bash { line_numbers = "true" line_start = "10" } \
+echo 'hello world' \
+echo ‘I am line two’ \
+\`\`\`
+
+```bash { line_numbers = "true" line_start = "10" }
+echo ‘hello world’
+echo ‘I am line eleven’
+```
 
 ### Output Lines
 
@@ -100,7 +114,7 @@ There are three ways you can specify command outputs in code:
 {{% notice Note %}}
 In each of the three situations, code marked as 'output' will:
 - not be copied when clicking the 'copy' button
-- not be highlightable by a cursor
+- not be highlighted by a cursor
 - appear slightly darker
 {{% /notice %}}
 
