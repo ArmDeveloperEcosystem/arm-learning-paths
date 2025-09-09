@@ -1,25 +1,21 @@
 ---
 title: CSS-V3 Pre-Silicon Software Development Using Neoverse Servers
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 90
 
-who_is_this_for: This Learning Path is for firmware developers, system architects, and silicon validation engineers building Arm Neoverse CSS  platforms. It focuses on pre-silicon development using Fixed Virtual Platforms (FVPs) for the CSS‑V3 reference design. You’ll learn how to build, customize, and validate firmware on the RD‑V3 platform using Fixed Virtual Platforms (FVPs) before hardware is available.
+who_is_this_for: This Learning Path is for firmware developers, system architects, and silicon validation engineers building Arm Neoverse CSS platforms. It focuses on pre-silicon development for the CSS-V3 reference design using Fixed Virtual Platforms (FVPs). You’ll build, customize, and validate firmware on the RD-V3 platform before hardware is available.
 
 learning_objectives:
-    - Understand the architecture of Arm Neoverse CSS‑V3 as the foundation for scalable server-class platforms
-    - Build and boot the RD‑V3 firmware stack using TF‑A, SCP, RSE, and UEFI
+    - Understand the architecture of Arm Neoverse CSS-V3 as the foundation for scalable server-class platforms
+    - Build and boot the RD-V3 firmware stack using TF-A, SCP, RSE, and UEFI
     - Simulate multi-core, multi-chip systems with Arm FVP models and interpret boot logs
-    - Modify platform control firmware to test custom logic and validate it via pre-silicon simulation 
+    - Modify platform control firmware to test custom logic and validate via pre-silicon simulation
 
 prerequisites:
-    - Access to an Arm Neoverse-based Linux machine (cloud or local), with at least 80 GB of storage
+    - Access to an Arm Neoverse-based Linux machine (cloud or local) with at least 80 GB of free storage
     - Familiarity with Linux command-line tools and basic scripting
     - Understanding of firmware boot stages and SoC-level architecture
-    - Docker installed, or GitHub Codespaces-compatible development environment
+    - Docker installed, or a GitHub Codespaces-compatible development environment
 
 author:
     - Odin Shen
