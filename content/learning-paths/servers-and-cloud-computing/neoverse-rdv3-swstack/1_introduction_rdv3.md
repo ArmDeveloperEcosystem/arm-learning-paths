@@ -14,9 +14,9 @@ Arm Neoverse is designed for the demanding requirements of data-center and edge 
 
 Using Arm Fixed Virtual Platforms (FVPs), you can explore system bring-up, boot flow, and firmware customization well before physical silicon becomes available.
 
-This module also introduces the key components involved, from Neoverse V3 cores to secure subsystem controllers, and shows how these elements work together in a fully virtualized system simulation.
+This Learning Path also introduces the key components involved, from Neoverse V3 cores to secure subsystem controllers, and shows how these elements work together in a fully virtualized system simulation.
 
-### Neoverse CSS-V3 platform overview
+## Neoverse CSS-V3 platform overview
 
 [Neoverse CSS-V3](https://www.arm.com/products/neoverse-compute-subsystems/css-v3) (Compute Subsystem Version 3) is the core subsystem architecture underpinning the Arm RD-V3 platform. It is optimized for high-performance server and data-center applications, providing an integrated solution that combines processing cores, memory management, and interconnect technology.
 
@@ -32,7 +32,7 @@ Key features of CSS-V3 include:
 
 The CSS-V3 subsystem is fully supported by Arm’s Fixed Virtual Platforms (FVPs), enabling pre-silicon testing of these capabilities.
 
-### RD-V3 platform introduction
+## RD-V3 platform introduction
 
 The RD-V3 platform is a comprehensive reference design built around Arm’s [Neoverse V3](https://www.arm.com/products/silicon-ip-cpu/neoverse/neoverse-v3) CPUs, along with [Cortex-M55](https://www.arm.com/products/silicon-ip-cpu/cortex-m/cortex-m55) and [Cortex-M7](https://www.arm.com/products/silicon-ip-cpu/cortex-m/cortex-m7) microcontrollers. This platform enables efficient high-performance computing and robust platform management:
 
@@ -64,7 +64,7 @@ Key capabilities of FVPs:
 
 FVPs enable developers to verify boot sequences, debug firmware handoffs, and even simulate RSE (Runtime Security Engine) behaviors, all pre-silicon.
 
-### Comparing RD-V3 FVP variants
+## Comparing RD-V3 FVP variants
 
 To support different use cases and levels of platform complexity, Arm offers several virtual models based on the CSS-V3 architecture: RD-V3, RD-V3-R1, RD-V3-Cfg1 (CFG1), and RD-V3-Cfg2 (CFG2). While they share a common foundation, they differ in chip count, system topology, and simulation flexibility.
 

@@ -21,7 +21,7 @@ The RD‑V3‑R1 platform is a dual-chip simulation environment built to model m
 - Adds MCP (Cortex‑M7) to support cross-die management
 - More complex power/reset coordination
 
-### Step 1: Clone the RD‑V3‑R1 Firmware Stack
+## Step 1: Clone the RD‑V3‑R1 Firmware Stack
 
 Initialize and sync the codebase for RD‑V3‑R1:
 
@@ -33,7 +33,7 @@ repo init -u https://git.gitlab.arm.com/infra-solutions/reference-design/infra-r
 repo sync -c -j $(nproc) --fetch-submodules --force-sync --no-clone-bundle
 ```
 
-### Step 2: Install RD-V3-R1 FVP
+## Step 2: Install RD-V3-R1 FVP
 
 Refer to the [RD-V3-R1 Release Tags](https://neoverse-reference-design.docs.arm.com/en/latest/platforms/rdv3.html#release-tags) to determine which FVP model version matches your selected release tag.  
 Then download and install the corresponding FVP binary.
@@ -46,7 +46,7 @@ tar -xvf FVP_RD_V3_R1_11.29_35_Linux64_armv8l.tgz
 ./FVP_RD_V3_R1.sh
 ```
 
-### Step 3: Build the Firmware
+## Step 3: Build the Firmware
 
 Since you have already created the Docker image for firmware building in a previous section, there is no need to rebuild it for RD‑V3‑R1.
 
@@ -66,7 +66,7 @@ docker run --rm \
            ./build-scripts/rdinfra/build-test-buildroot.sh -p rdv3r1 package"
 ```
 
-### Step 4: Launch the Simulation
+## Step 4: Launch the Simulation
 
 Once connected via Remote Desktop, open a terminal and launch the RD‑V3‑R1 FVP simulation:
 
@@ -84,7 +84,7 @@ You’ll observe additional UART consoles for components like the MCP, and you c
 Similar to the previous session, the terminal logs are stored in `~/rdv3r1/model-scripts/rdinfra/platforms/rdv3r1/rdv3r1`.
 
 
-### Step 5: Customize Firmware and Confirm MCP Execution
+## Step 5: Customize Firmware and Confirm MCP Execution
 
 To wrap up this learning path, let’s verify that your firmware changes can be compiled and simulated successfully within the RD‑V3‑R1 environment.
 

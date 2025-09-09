@@ -9,7 +9,7 @@ layout: learningpathall
 
 In this module, you’ll set up your development environment on any Arm-based server and build the firmware stack required to simulate the RD-V3 platform. This Learning Path was tested on an AWS `m7g.4xlarge` Arm-based instance running Ubuntu 22.04.
 
-### Step 1: Prepare the Development Environment
+## Step 1: Prepare the Development Environment
 
 First, ensure your system is up to date and install the required tools and libraries:
 
@@ -23,7 +23,7 @@ git config --global user.name "<your-name>"
 git config --global user.email "<your-email@example.com>"
 ```
 
-### Step 2: Fetch the source code
+## Step 2: Fetch the source code
 
 The RD‑V3 platform firmware stack consists of many independent components, such as TF‑A, SCP, RSE, UEFI, Linux kernel, and Buildroot. Each component is maintained in a separate Git repository. To manage and synchronize these repositories efficiently, use the `repo` tool. It simplifies syncing the full platform software stack from multiple upstreams.
 
@@ -61,15 +61,15 @@ Syncing: 100% (83/83) 2:52 | 1 job | 0:01 platsw/edk2-platforms @ uefi/edk2/edk2
 As of the time of writing, the latest release tag is `RD-INFRA-2025.07.03`. Newer tags might be available in future updates.
 {{% /notice %}}
 
-This manifest fetches the required sources,including:
+This manifest fetches the required sources, including:
 * TF‑A
 * SCP / RSE firmware
-* EDK2 (UEFI)
+* EDK II (UEFI)
 * Linux kernel
 * Buildroot and platform scripts
 
 
-### Step 3: Build the Docker Image
+## Step 3: Build the Docker Image
 
 There are two supported methods for building the reference firmware stack: **host-based** and **container-based**.
 
@@ -170,7 +170,7 @@ your-username:hostname:/home/your-username/rdv3$
 You can explore the container environment if you wish, then type `exit` to return to the host.
 
 
-###  Step 4: Build firmware 
+##  Step 4: Build firmware 
 
 Building the full firmware stack involves compiling several components and packaging them for simulation. The following command runs build and then package inside the Docker image:
 
@@ -234,7 +234,7 @@ Reference mapping:
 | Initrd               | `rootfs.cpio.gz`                             | Minimal filesystem          |
 
 
-### Optional: run the build manually from inside the container
+## Optional: run the build manually from inside the container
 
 You can also build from within an interactive container session (useful for debugging or partial builds):
 

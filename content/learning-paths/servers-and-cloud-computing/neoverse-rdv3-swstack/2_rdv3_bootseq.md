@@ -1,5 +1,5 @@
 ---
-title: Understanding the CSS-V3 Boot Flow and Firmware Stack
+title: Understand the CSS-V3 boot flow and firmware stack
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -41,19 +41,19 @@ When the AP is released, it begins executing Trusted Firmware-A (TF-A) at EL3 fr
 
 ***TF-A is the ignition controller, launching the next stages securely.***
 
-## Stage 4: Firmware and Bootloader (EDK2/GRUB)
+## Stage 4: Firmware and Bootloader (EDK II/GRUB)
 
-TF-A hands off control to UEFI firmware (EDK 2), which performs device discovery and launches GRUB.
+TF-A hands off control to UEFI firmware (EDK II), which performs device discovery and launches GRUB.
 
 Responsibilities:
 * Detect and initialize memory, PCIe, and boot devices
 * Generate ACPI and platform configuration tables
 * Locate and launch GRUB from storage or flash
 
-***EDK2 and GRUB are like the first- and second-stage rockets launching the payload.***
+***EDK II and GRUB are like the first- and second-stage rockets launching the payload.***
 
 ## Stage 5: Linux kernel boot
-
+ 
 GRUB loads the Linux kernel and passes full control to the OS.
 
 Responsibilities:
@@ -68,7 +68,7 @@ Now that you’ve examined the high-level boot stages, you can now examine each 
 
 Each stage of the boot chain is backed by a dedicated component, such as secure bootloader, platform controller, or OS manager, and they work together to ensure reliable system bring-up.
 
-## RSE: Runtime Security Engine (Cortex-M55) — (Stage 1: Security Validation)
+### RSE: Runtime Security Engine (Cortex-M55) (Stage 1: Security Validation)
 
 RSE firmware runs on the Cortex‑M55 and plays a critical role in platform attestation and integrity enforcement.
 * Authenticates BL2, SCP, and UEFI firmware images (Secure Boot)
@@ -84,14 +84,14 @@ RSE acts as the second layer of the chain of trust, maintaining a monitored and 
 * Manages DRAM setup and enables power for the AP
 * Coordinates boot readiness with RSE via the Message Handling Unit (MHU)
 
-### TF-A: Trusted Firmware-A (BL1/BL2) - Stage 3
+## TF-A: Trusted Firmware-A (BL1/BL2) (Stage 3)
 
 * **BL1** executes from ROM, initializes minimal hardware (clocks, UART), and loads BL2  
 * **BL2** validates and loads SCP, RSE, and UEFI images, setting up secure handover to later stages
 
 TF-A establishes the system’s chain of trust and ensures downstream components are authenticated and loaded from trusted sources.
 
-### UEFI, GRUB, and the Linux kernel — Stages 4–5
+### UEFI, GRUB, and the Linux kernel (Stages 4–5)
 
 * **UEFI (EDK II):** firmware abstraction, hardware discovery, ACPI table generation  
 * **GRUB:** selects and loads the Linux kernel image  
