@@ -1,6 +1,10 @@
 ---
 title: Debug Arm Zena CSS Reference Software Stack with Arm Development Studio
 
+draft: true
+cascade:
+    draft: true
+    
 description: Learn how to set up a debug environment for Arm Zena CSS Reference Software Stack
 
 minutes_to_complete: 60
