@@ -7,11 +7,11 @@ who_is_this_for: This Learning Path is for software developers who want to run a
 
 learning_objectives:
   - Describe how you can use attestation with Arm's Confidential Computing Architecture (CCA) and Trustee services
-  - Launch a CCA realm and run a sample workload on an Armv9-A AEM Base Fixed Virtual Platform (FVP) with Realm Management Extension (RME) support
+  - Deploy a simple workload in a CCA realm on an Armv9-A AEM Base Fixed Virtual Platform (FVP) that has support for RME extensions
   - Connect the workload with Trustee services to create an end-to-end example that uses attestation to unlock the confidential processing of data
 
 prerequisites:
-  - An AArch64 or x86_64 computer running Linux or macOS. You can use cloud instances; see this list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/)
+  - An AArch64 or x86_64 computer running Linux or macOS; you can use cloud instances - see the [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/)
   - Completion of the [Get started with CCA attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison) Learning Path
   - Completion of the [Run an end-to-end attestation flow with Arm CCA](/learning-paths/servers-and-cloud-computing/cca-essentials/) Learning Path
 

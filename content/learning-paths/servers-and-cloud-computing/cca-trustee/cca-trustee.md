@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Overview of the software architecture"
+title: "Architecture overview for Arm CCA Attestation with Trustee"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -10,32 +10,24 @@ layout: "learningpathall"
 
 ## The role of attestation
 
-In this Learning Path, you will learn how attestation controls the release of confidential data into a confidential Linux realm for processing.
-
-The role of attestation is to assess whether the target compute environment
-offers a provable level of confidential isolation. In this Learning Path,
-the target compute environment is a Linux realm. The assessment of a provable
-level of confidential isolation must occur before the realm can be trusted
-to receive confidential data or algorithms. This use of attestation to judge
-the trustworthiness of a compute environment, before allowing it to do any
-processing, is a common practice in confidential computing.
+In this Learning Path, you will learn how attestation controls the release of confidential data into a confidential Linux realm for processing. The role of attestation is to assess whether the target compute environment offers a provable level of confidential isolation. In this Learning Path,
+the target compute environment is a Linux realm. The assessment of a provable level of confidential isolation must occur before the realm can be trusted to receive confidential data or algorithms. This use of attestation to judge the trustworthiness of a compute environment, before allowing it to do any processing, is a common practice in confidential computing.
 
 ## Key software components
 
 This Learning Path is similar to
-[Run an end-to-end Attestation Flow with Arm CCA](/learning-paths/servers-and-cloud-computing/cca-essentials/).
-
-The main difference is that, instead of the KBS from the [Veraison](https://github.com/veraison) project, you will use components implemented in the [Confidential Containers (CoCo) Project](https://github.com/confidential-containers) to support the [IETF RATS model](https://datatracker.ietf.org/doc/rfc9334/) (Remote ATtestation procedureS). These components include the Attestation Service (AS), Key Broker Service (KBS), Reference Value Provider Service (RVPS), Attestation Agent (AA), and Confidential Data Hub (CDH).
+[Run an end-to-end Attestation Flow with Arm CCA](/learning-paths/servers-and-cloud-computing/cca-essentials/). The main difference is that, instead of the KBS from the [Veraison](https://github.com/veraison) project, you will use components implemented in the [Confidential Containers (CoCo) Project](https://github.com/confidential-containers) to support the [IETF RATS model](https://datatracker.ietf.org/doc/rfc9334/) (Remote ATtestation procedureS). These components include the Attestation Service (AS), Key Broker Service (KBS), Reference Value Provider Service (RVPS), Attestation Agent (AA), and Confidential Data Hub (CDH).
 The AS, KBS, and RVPS components are part of the [Trustee project](https://github.com/confidential-containers/trustee),
 whereas the AA and CDH are part of the [Guest Components](https://github.com/confidential-containers/guest-components) project in CoCo.
 
 ## RATS roles
 
-This Learning Path uses the following RATS roles:
+This Learning Path focuses on the following key concepts:
 
-- **Attester** – Provides evidence that is evaluated to decide trustworthiness (for example, whether it is authorized to perform an action). Evidence can include configuration data, measurements, telemetry, or inferences.
-- **Verifier** – Evaluates the evidence from the Attester and produces attestation results that are sent to the Relying party. The Verifier vouches for the validity of those results.
-- **Relying party** – Depends on the validity of information from the Attester (either directly or through the Verifier) to make an access or policy decision.
+- **Attester** – provides evidence that is evaluated to decide **Trustworthiness** (for example, whether it is authorized to perform an action). 
+- **Evidence** can include configuration data, measurements, telemetry, or inferences.
+- **Verifier** – evaluates the evidence from the Attester and produces attestation results that are sent to the Relying party. The Verifier vouches for the validity of those results.
+- **Relying party** – depends on the validity of information from the Attester (either directly or through the Verifier) to make an access or policy decision.
 
 ## Trustee components
 
@@ -55,8 +47,8 @@ The following diagram shows the AS components:
 
 The AS performs this verification flow:
 
-1. **Verify format and origin of evidence** – For example, verify the evidence signature. This is handled by a platform-specific Verifier driver.
-2. **Evaluate claims** – For example, validate that measurements match expected values. This is handled by the Policy engine, with RVPS support.
+- **Verify format and origin of evidence** – for example, verify the evidence signature. This is handled by a platform-specific Verifier driver.
+- **Evaluate claims** – for example, validate that measurements match expected values. This is handled by the Policy engine, with RVPS support.
 
 ## Verifier driver
 

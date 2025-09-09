@@ -12,7 +12,7 @@ In this section you’ll run the **Trustee services** (AS, KBS, RVPS), launch a 
 
 ## Install dependencies
 
-Install Docker. On Ubuntu 24.04 LTS, set up Docker’s APT repository:
+Start by installing Docker. On Ubuntu 24.04 LTS, set up Docker’s APT repository:
 
 ```bash
 # Add Docker's official GPG key:
@@ -35,7 +35,7 @@ Install Git and Docker packages:
 sudo apt-get install -y git docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-Add your user name to the docker group (open a new shell after this so the change takes effect):
+Add your user name to the Docker group (open a new shell after this so the change takes effect):
 ``` bash
 sudo usermod -aG docker $USER
 newgrp docker
@@ -56,13 +56,13 @@ Additional Learning Path–specific changes include:
 
 - Attestation policy with CCA rules
 
-- An “affirming” resource policy
+- An *affirming* resource policy
 
 - A demo secret message
 
 - A shared Docker network for all containers in this demo
 
-Go into the `cca-trustee` directory and start the Trustee services docker containers (as detached services):
+Go into the `cca-trustee` directory and start the Trustee services Docker containers (as detached services):
 ``` bash { output_lines = "3-9" }
 cd cca-trustee
 docker compose up -d
@@ -85,7 +85,7 @@ Where `service` is either `as`,`kbs` or `rvps`.
 
 With the Trustee Services running in one terminal, open up a new terminal in which you will run CCA attestations.
 
-Pull the docker image with the pre-built FVP, and then run the container connected to the same docker network:
+Pull the Docker image with the pre-built FVP, and then run the container connected to the same Docker network:
 
 ```bash
 docker pull armswdev/cca-learning-path:cca-simulation-v2
@@ -148,7 +148,8 @@ Run the attestation command and save the EAT Attestation Result (EAR) message in
 
 Request the demo secret with that EAR:
 
-```bash./kbs-client --url http://kbs:8080 get-resource \
+```bash
+  ./kbs-client --url http://kbs:8080 get-resource \
   --tee-key-file realm.key --attestation-token ear.jwt \
   --path "cca-trustee/demo-message/message.txt"
 ```  
@@ -213,7 +214,7 @@ Storage Opaque [none]: no claim being made
 Sourced Data [none]: no claim being made
 ```
 
-This part of the output shows how the attestation service has compared the attestation token against its expectations of a trustworthy system. These comparisons are known as *trustworthiness vectors"*. It also shows the conclusions that were drawn from that comparison.
+This part of the output shows how the attestation service has compared the attestation token against its expectations of a trustworthy system. These comparisons are known as *trustworthiness vectors*. It also shows the conclusions that were drawn from that comparison.
 
 Note these two trustworthiness vectors in the result:
 - __Hardware [affirming]__. Evidence in the attestation token shows a good match against the expectations of CCA platform.
