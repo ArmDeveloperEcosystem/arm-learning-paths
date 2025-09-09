@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Introduction to OpenBMC and UEFI
 
-In this module, you will learn the roles of OpenBMC and UEFI in the Arm server boot flow, and understand why simulating their integration is key to early-stage development.
+This section explains the roles of OpenBMC and UEFI in the Arm server boot flow, and highlights why simulating their integration is essential for early-stage development.
 
 ### OpenBMC
 
@@ -32,7 +32,7 @@ OpenBMC is particularly well-suited to Arm-based server platforms like **[Neover
 
 OpenBMC enables faster development cycles, open innovation, and reduced vendor lock-in across data centers, cloud platforms, and edge environments.
 
-**In this Learning Path**, you’ll simulate how OpenBMC manages the early-stage boot process, power sequencing, and remote access for a virtual Neoverse RD-V3 server. You will interact with the BMC console, inspect boot logs, and verify serial-over-LAN and UART communication with the host.
+In this Learning Path, you’ll simulate how OpenBMC manages the early stage boot process, power sequencing, and remote access for a virtual Neoverse RD-V3 server. You will interact with the BMC console, inspect boot logs, and verify serial-over-LAN and UART communication with the host.
 
 ### UEFI
 

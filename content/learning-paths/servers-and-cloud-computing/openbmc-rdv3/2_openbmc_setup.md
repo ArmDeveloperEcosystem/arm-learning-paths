@@ -1,5 +1,5 @@
 ---
-title: Set Up Pre-Silicon Development Environment for OpenBMC and UEFI
+title: Set Up the Pre-Silicon Development Environment for OpenBMC and UEFI
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,17 +8,13 @@ layout: learningpathall
 
 ## Set Up Development Environment
 
-In this module, you’ll prepare your workspace to build and simulate OpenBMC and UEFI firmware on the Neoverse RD-V3 platform using Arm Fixed Virtual Platforms (FVPs). 
-You’ll install the required tools, configure repositories, and set up a Docker-based build environment for both BMC and host firmware.
+In this section, you’ll prepare your workspace to build and simulate OpenBMC and UEFI firmware on the Neoverse RD-V3 platform using Arm Fixed Virtual Platforms (FVPs). 
+You will install the required tools, configure repositories, and set up a Docker-based build environment for both BMC and host firmware.
 
 Before getting started, it’s strongly recommended to review the previous Learning Path: [CSS-V3 Pre-Silicon Software Development Using Neoverse Servers](https://learn.arm.com/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack).
-That guide walks you through how to use the CSSv3 reference design on FVP to perform early-stage development and validation.
+It walks you through how to use the CSSv3 reference design on FVP to perform early-stage development and validation.
 
-Ensure your system meets the following requirements:
-- Access to an Arm Neoverse-based Linux machine (either cloud-based or local) is required, with at least 80 GB of free disk space, 48 GB of RAM, and running Ubuntu 22.04 LTS.
-- Working knowledge of Docker, Git, and Linux terminal tools
-- Basic understanding of server firmware stack (UEFI, BMC, TF-A, etc.)
-- Docker installed, or GitHub Codespaces-compatible development environment
+You will perform the steps outlined below on your Arm Neoverse-based Linux machine running Ubuntu 22.04 LTS. You will need at least 80 GB of free disk space, 48 GB of RAM.
 
 ### Install Required Packages
 
@@ -26,8 +22,10 @@ Install the base packages for building OpenBMC with the Yocto Project:
 
 ```bash
 sudo apt update
-sudo apt install git gcc g++ make file wget gawk diffstat bzip2 cpio chrpath zstd lz4 bzip2 unzip
+sudo apt install -y git gcc g++ make file wget gawk diffstat bzip2 cpio chrpath zstd lz4 bzip2 unzip
 ```
+
+Install [Docker](/install-guides/docker)
 
 ### Set Up the repo Tool
 
@@ -38,9 +36,9 @@ curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
 chmod a+rx ~/.bin/repo
 ```
 
-### Download the Arm FVP Model (RD-V3)
+### Download and Install the Arm FVP Model (RD-V3)
 
-Download and extract the RD-V3 FVP binary from Arm:
+Download and extract the RD-V3 FVP:
 ```bash
 mkdir ~/fvp
 cd ~/fvp
@@ -49,7 +47,7 @@ tar -xvf FVP_RD_V3_R1_11.29_35_Linux64_armv8l.tgz
 ./FVP_RD_V3_R1.sh
 ```
 
-The FVP installation may prompt you with a few questions—choosing the default options is sufficient for this learning path. By default, the FVP will be installed in /home/ubuntu/FVP_RD_V3_R1.
+The FVP installation may prompt you with a few questions, choosing the default options is sufficient for this learning path. By default, the FVP will be installed in `$HOME/FVP_RD_V3_R1`.
 
 
 ### Initialize the Host Build Environment
@@ -59,12 +57,10 @@ Set up a workspace for host firmware builds:
 ```bash
 mkdir ~/host
 cd host
-
 ~/.bin/repo init -u "https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests.git" \
  -m "pinned-rdv3r1-bmc.xml" \
  -b "refs/tags/RD-INFRA-2025.07.03" \
  --depth=1
-
 repo sync -c -j $(nproc) --fetch-submodules --force-sync --no-clone-bundle
 ```
 
@@ -85,10 +81,10 @@ git pull origin main
 
 This approach allows you to fetch only the `patch` folder from the remote Git repository—saving time and disk space.
 
-Next, create an `apply_patch.sh` script inside the `~` directory and paste in the following content. 
+Next, using a file editor of your choice, create an `apply_patch.sh` script inside the `~` directory and paste in the following content. 
 This script will automatically apply the necessary patches to each firmware component.
 
-```patch
+```bash
 FVP_DIR="host"
 SOURCE=${PWD}
 
@@ -139,9 +135,9 @@ These patches enable additional UEFI features, integrate the Redfish client, and
 ### Build RDv3 R1 Host Docker Image
 
 Before building the host image, update the following line in `~/host/grub/bootstrap` to replace the `git://` protocol.
-Some networks or corporate environments restrict `git://` access due to firewall or security policies. Switching to `https://` ensures reliable and secure access to external Git repositories.
+Some networks may restrict `git://` access due to firewall or security policies. Switching to `https://` ensures reliable and secure access to external Git repositories.
 
-```
+```bash
 diff --git a/bootstrap b/bootstrap
 index 5b08e7e2d..031784582 100755
 --- a/bootstrap
@@ -174,10 +170,14 @@ docker run --rm \
   bash -c "./build-scripts/rdinfra/build-test-busybox.sh -p rdv3r1 all"
 ```
 
-Once complete, you can observe the build binary in `~/host/output/rdv3r1/rdv3r1/`
+Once complete, you can observe the build binary in `~/host/output/rdv3r1/rdv3r1/`:
 
-```
+```bash
 ls -la host/output/rdv3r1/rdv3r1/
+```
+The directory contents should look like:
+
+```output
 total 4308
 drwxr-xr-x 2 ubuntu ubuntu    4096 Aug 18 10:19 .
 drwxr-xr-x 4 ubuntu ubuntu    4096 Aug 18 10:20 ..
@@ -210,13 +210,13 @@ lrwxrwxrwx 1 ubuntu ubuntu      33 Aug 18 10:19 uefi.bin -> ../components/css-co
 
 
 {{% notice Note %}}
-The other [Arm Learning Path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack/3_rdv3_sw_build/) provides a complete introduction to setting up the RDv3 development environment — feel free to refer to it for more details.
+This [Arm Learning Path](/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack/3_rdv3_sw_build/) provides a complete introduction to setting up the RDv3 development environment, please refer to it for more details.
 {{% /notice %}}
 
 
 ### Build OpenBMC Image
 
-OpenBMC is built on the Yocto Project, which uses BitBake as its build tool.
+OpenBMC is built on the Yocto Project, which uses `BitBake` as its build tool.
 You don’t need to download BitBake separately, as it is included in the OpenBMC build environment. 
 Once you’ve set up the OpenBMC repository and initialized the build environment, BitBake is already available for building images, compiling packages, or running other tasks.
 
@@ -230,9 +230,9 @@ source setup fvp
 bitbake obmc-phosphor-image
 ```
 
-During the OpenBMC build process, you may encounter a native compilation error when building Node.js (especially version 22+) due to high memory usage during the V8 engine build phase depends on your build machine.
+During the OpenBMC build process, you may encounter a native compilation error when building `Node.js` (especially version 22+) due to high memory usage during the V8 engine build phase.
 
-```log
+```output
 g++: fatal error: Killed signal terminated program cc1plus
 compilation terminated.
 ERROR: oe_runmake failed
@@ -249,9 +249,9 @@ PARALLEL_MAKE = "-j2"
 
 This ensures that BitBake only runs two parallel tasks and that each Makefile invocation limits itself to two threads. It significantly reduces peak memory usage and avoids OOM terminations.
 
-Once success build, you should see a successful build message similar to:
+With a successful build, you should see output similar to:
 
-```
+```output
 Loading cache: 100% |                                                                                                              | ETA:  --:--:--
 Loaded 0 entries from dependency cache.
 Parsing recipes: 100% |#############################################################################################################| Time: 0:00:09
@@ -290,9 +290,9 @@ This confirms that the OpenBMC image was built successfully.
 The first build may take up to an hour depending on your system performance, as it downloads and compiles the entire firmware stack.
 {{% /notice %}}
 
-Your workspace should now follow a structured layout that separates the FVP simulator, host build system, OpenBMC source, and patches—making it easier to organize, maintain, and troubleshoot your simulation environment.
+Your workspace should now be structured to separate the FVP, host build system, OpenBMC source, and patches—simplifying organization, maintenance, and troubleshooting.
 
-```text
+```output
 ├── FVP_RD_V3_R1
 ├── apply_patch.sh
 ├── fvp
