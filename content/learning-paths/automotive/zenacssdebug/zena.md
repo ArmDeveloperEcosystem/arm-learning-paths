@@ -22,12 +22,12 @@ For more information, see [Arm Zena Compute Subsystem (CSS)](https://developer.a
 
 ## Build software stack
 
-The steps to download and build the software stack are described in the [User Guide](https://arm-auto-solutions.docs.arm.com/en/v2.0/rd-aspen/user_guide/reproduce.html).
+Follow the steps to download and build the software stack in the [User Guide](https://arm-auto-solutions.docs.arm.com/en/v2.0/rd-aspen/user_guide/reproduce.html).
 
 The default `Arm Automotive Solutions Demo` build is used.
 
 {{% notice Note %}}
-This learning path is focused on **debugging** the software stack only.
+The focus of this Learning Path is to demonstrate the **debug** of the software stack.
 {{% /notice %}}
 
 ## Verify correct build and execution
@@ -58,13 +58,13 @@ For legacy reasons the FVP is named is `FVP_RD_Aspen`.
 
 Arm Development Studio is a software development solution with support of multicore debug for Arm CPUs. It provides the earliest support for the latest processors.
 
-The CPUs implemented within Arm Zena CSS are supported by Arm Development Studio 2024.0 and later, though 2024.1 or later is recommended for appropriate Linux OS support. At time of writing the latest version available is 2025.0, and that is the version used for screenshots etc in this learning path.
+The CPUs implemented within Arm Zena CSS are supported by Arm Development Studio 2024.0 and later, though 2024.1 or later is recommended for appropriate Linux OS support. At time of writing the latest version available is 2025.0, and that is the version used for this learning path.
 
 For more information see [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
 
 Arm Development Studio is a commercial, license managed, product. For installation and set up instructions, see this [Install Guide](/install-guides/armds/).
 
-Launch the IDE. We recommend creating a new workspace folder.
+Launch the IDE. It is recommended to create a new workspace folder.
 
 If prompted by the launcher (this is disabled by default) create a new folder there, else select `File` > `Switch Workspace` > `Other...`.
 
