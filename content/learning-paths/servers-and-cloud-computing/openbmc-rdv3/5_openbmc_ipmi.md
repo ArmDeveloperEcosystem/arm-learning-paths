@@ -8,21 +8,21 @@ layout: learningpathall
 
 ## Customize IPMI Commands in OpenBMC
 
-With the host console accessible through OpenBMC, you're now ready to extend its functionality by implementing a custom IPMI command handler.
+With the host console accessible through OpenBMC, you are now ready to extend its functionality by implementing a custom IPMI command handler.
 
 The Intelligent Platform Management Interface ([IPMI](https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface)) is a standardized protocol for managing and monitoring servers, even when the operating system is not running. In OpenBMC, IPMI support is built-in and can be extended using custom handlers through the D-Bus/IPMI infrastructure.
 
-In this module, you'll implement a custom IPMI command handler that returns a simple string response. You'll write the handler in C++, package it with a BitBake recipe, build it into the OpenBMC image, and test it using `ipmitool` inside the simulated FVP environment.
+In this module, you'll implement a custom IPMI command handler that returns a simple string response. You will write the handler in C++, package it with a BitBake recipe, build it into the OpenBMC image, and test it using `ipmitool` inside the simulated FVP environment.
 
 ### Step 1: Create a BitBake Recipe
 
-Create a new file named phosphor-ipmi-example.bb at the same folder.
+Create a new file named `phosphor-ipmi-example.bb` in the same folder.
 
 ```bash
 touch ~/openbmc/meta-evb/meta-evb-arm/meta-evb-fvp-base/recipes-phosphor/ipmi/phosphor-ipmi-example.bb
 ```
 
-Paste the following content:
+Paste the following content into it:
 
 ```bash
 SUMMARY = "Custom IPMI commands"
@@ -52,12 +52,14 @@ FILES:${PN} += "${libdir}/ipmid-providers/libmyipmi.so"
 
 ### Step 2: Create a Custom IPMI Handler
 
-Create a folder `phosphor-ipmi-example` at the same path, and add a new file `fvp-ipmi.cpp`:
+Create a folder `phosphor-ipmi-example` at the same path, and add a new file called `fvp-ipmi.cpp`:
 
 ```bash
 mkdir ~/openbmc/meta-evb/meta-evb-arm/meta-evb-fvp-base/recipes-phosphor/ipmi/phosphor-ipmi-example
 touch ~/openbmc/meta-evb/meta-evb-arm/meta-evb-fvp-base/recipes-phosphor/ipmi/phosphor-ipmi-example/fvp-ipmi.cpp
 ```
+
+Add the contents below into `fvp-ipmi.cpp`:
 
 ```cpp
 #include <ipmid/api.hpp>
@@ -85,13 +87,13 @@ void register_my_ipmi() {
 This function registers a custom IPMI handler using NetFn `0x30` and Command `0x20`. 
 When triggered, it returns a static ASCII string: `"Hello from OpenBMC IPMI!"`.
 At runtime, this string is encoded as a sequence of hex bytes and sent back through the IPMI response. 
-You'll observe this by running `ipmitool raw` and decoding the output.
+You will observe this by running `ipmitool raw` and decoding the output.
 
 ### Step 3: Add to Build Configuration
 
-To verify the IPMI command, you need to add the following to the configuration to install ipmitool and phosphor-ipmi-example. 
+To verify the IPMI command, you need to add the following to the configuration to install `ipmitool` and `phosphor-ipmi-example`. 
 
-Edit fvp.conf at: `~/openbmc/meta-evb/meta-evb-arm/meta-evb-fvp-base/conf/machine/fvp.conf`
+Edit `fvp.conf` at `~/openbmc/meta-evb/meta-evb-arm/meta-evb-fvp-base/conf/machine/fvp.conf`
 
 Append the following packages:
 
@@ -127,7 +129,7 @@ This command invokes your custom IPMI handler registered under:
 * Command: 0x20
 
 You should see a response similar to:
-```
+```output
 root@fvp:~# ipmitool raw 0x30 0x20
  18 48 65 6c 6c 6f 20 66 72 6f 6d 20 4f 70 65 6e 
  42 4d 43 20 49 50 4d 49 21
@@ -146,11 +148,11 @@ echo "48 65 6c 6c 6f 20 66 72 6f 6d 20 4f 70 65 6e 42 4d 43 20 49 50 4d 49 21" |
 ```
 
 The output will be:
-```
+```output
 "Hello from OpenBMC IPMI!"
 ```
 This output confirms that the custom string returned by your `myIpmiCommand()` function has been correctly encoded and transmitted via IPMI:
-```
+```bash
 std::string reply = "Hello from OpenBMC IPMI!";
 return ipmi::responseSuccess(reply);
 ```
@@ -162,9 +164,9 @@ The response from `ipmitool raw` confirms that your custom IPMI handler was:
 - Correctly executed in the simulated environment via IPMI raw access  
 - Returning the intended payload, encoded as ASCII and received in hex format
 
-By decoding the hex payload into ASCII, you’ve verified the full path from handler registration to command execution and payload delivery.
+By decoding the hex payload into ASCII, you have verified the full path from handler registration to command execution and payload delivery.
 
-You’ve now successfully implemented and tested a custom IPMI command in OpenBMC using pre-silicon simulation.
+You have now successfully implemented and tested a custom IPMI command in OpenBMC using pre-silicon simulation.
 
 This sets the foundation for adding OEM commands or platform-specific extensions to your BMC firmware.  
 You can now expand this pattern to support argument parsing, custom data formats, or system-level control—enabling rapid prototyping of features such as sensor telemetry, power domain control, or boot policy configuration.
