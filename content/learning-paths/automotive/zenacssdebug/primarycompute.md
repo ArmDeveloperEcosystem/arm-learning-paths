@@ -12,9 +12,9 @@ layout: "learningpathall"
 
 The Primary Compute application processors (`Cortex-A720AE`) are the final processors to be enabled.
 
-As before we can connect whilst powered down and monitor the point that they are enabled.
+As before, you can connect whilst powered down and monitor the point that they are enabled.
 
-You can debug the initialization code and/or the final Linux Operating System (OS) threads.
+You can debug the initialization code and the final Linux Operating System (OS) threads.
 
 ### Connect debugger to target
 
@@ -37,7 +37,7 @@ Run the code to the `bl2_entrypoint` and you can debug as expected.
 
 ### Debug Linux kernel modules
 
-To make use of the OS awareness, disconnect `Primary_init` and connect to `Primary_Linux` as created previously. Load the symbols from `vmlinux` image.
+To make use of the OS awareness feature, disconnect `Primary_init` and connect to `Primary_Linux` as created previously. Load the symbols from the `vmlinux` image.
 
 ``` text
 stop
@@ -47,7 +47,7 @@ set substitute-path /usr/src/kernel/ /arm-auto-solutions/build/tmp_baremetal/wor
 Run the FVP until the OS prompt appears.
 
 {{% notice %}}
-If only interested in kernel debug, modify the launch command for the FVP to include `--run` to start execution immediately.
+If you are only interested in kernel debug, modify the launch command for the FVP to include `--run` to start execution immediately.
 
 ``` command
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose -- --iris-server --iris-port 7100 --run"
