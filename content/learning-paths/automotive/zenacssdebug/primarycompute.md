@@ -67,3 +67,5 @@ WARNING(ROS60): Could not enable OS support as the OS does not appear to be init
 ```
 may be emitted if the OS is not booted when you connect. It can safely be ignored.
 {{% /notice %}}
+
+You have successfully learnt how to use Arm Development Studio to explore and debug the Arm Zena CSS Reference Software Stack.
