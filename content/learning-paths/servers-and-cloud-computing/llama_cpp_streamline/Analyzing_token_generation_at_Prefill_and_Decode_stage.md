@@ -54,6 +54,19 @@ To add Annotation Markers to llama-cli, change the llama-cli code *llama.cpp/too
 ```
 and the Annotation Marker code in the 'main' function,
 
+Firstly, add the Streamline Annotation setup code after *common_init*, 
+```c
+    common_init();
+ 
+    //Add the Annotation setup code
+    ANNOTATE_SETUP;
+
+```
+
+
+then add the Annotation Marker generation code here, 
+
+
 ```c
           for (int i = 0; i < (int) embd.size(); i += params.n_batch) {
                 int n_eval = (int) embd.size() - i;

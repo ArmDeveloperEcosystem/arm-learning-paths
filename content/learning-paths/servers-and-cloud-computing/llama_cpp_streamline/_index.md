@@ -1,5 +1,5 @@
 ---
-title: Use Streamline to analyze LLM running on CPU with llama.cpp
+title: Use Streamline to analyze LLM running on CPU with llama.cpp and KleidiAI
 
 minutes_to_complete: 50
 
