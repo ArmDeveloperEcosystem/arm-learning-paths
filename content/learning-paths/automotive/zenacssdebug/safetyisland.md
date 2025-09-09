@@ -19,7 +19,7 @@ If necessary, restart the FVP in the reset state as before, and reconnect `RSE`.
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose -- --iris-server --iris-port 7100"
 ```
 
-Set up the `SI` connection in a similar way as the `RSE` connection. Use the following commands in the `Debugger` pane. This will load debug symbols and performing the necessary path substitution. You can then set a breakpoint on the entry point of the `SI` code, `arch_exception_reset`.
+Set up the `SI` connection in a similar way as the `RSE` connection. Use the following commands in the `Debugger` pane. This will load debug symbols and perform the necessary path substitution. You can then set a breakpoint on the entry of the `SI` code, `arch_exception_reset`.
 
 ``` text
 stop
@@ -43,6 +43,8 @@ The `RSE` code will run until the point that the `SI` is enabled. This is reflec
 ```
 
 #### Full output log
+
+The full output lof is shown here for your reference:
 
 ``` output
 Trying ::1...
