@@ -68,6 +68,6 @@ Launch the IDE. It is recommended to create a new workspace folder.
 
 If prompted by the launcher (this is disabled by default) create a new folder there, else select `File` > `Switch Workspace` > `Other...`.
 
-{{% notice %}}
+{{% notice Note %}}
 To enable this prompt by default, navigate to `Window` > `Preferences` > `General` > `Startup and Shutdown` > `Workspaces`, and enable `Prompt for workspace on startup`.
 {{% /notice %}}
