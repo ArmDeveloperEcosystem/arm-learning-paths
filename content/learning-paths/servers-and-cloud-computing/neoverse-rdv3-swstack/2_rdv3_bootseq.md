@@ -12,7 +12,7 @@ To ensure the platform transitions securely and reliably from power-on to operat
 
 ## How the system boots up
 
-In the RD-V3 platform, each firmware component  such as TF-A, RSE, SCP, MCP, LCP, and UEFI - operates independently but participates in a well-defined sequence. Each is delivered as a separate firmware image, yet they coordinate tightly through a structured boot flow and inter-processor signaling.
+In the RD-V3 platform, each firmware component  such as TF-A, RSE, SCP, MCP, LCP, and UEFI operates independently but participates in a well-defined sequence. Each is delivered as a separate firmware image, yet they coordinate tightly through a structured boot flow and inter-processor signaling.
 
 The following diagram from the [Neoverse Reference Design documentation](https://neoverse-reference-design.docs.arm.com/en/latest/shared/boot_flow/rdv3_single_chip.html?highlight=boot) illustrates the progression of component activation from initial reset to OS handoff:
 
@@ -20,7 +20,7 @@ The following diagram from the [Neoverse Reference Design documentation](https:/
 
 ## Stage 1: Security validation starts (RSE)
 
-After BL2, the Runtime Security Engine (RSE, Cortex-M55) authenticates critical firmware components—including SCP, UEFI, and kernel images—using secure-boot mechanisms. It performs cryptographic measurements and establishes a Root of Trust (RoT) before allowing other processors to start.
+After BL2, the Runtime Security Engine (RSE, Cortex-M55) authenticates critical firmware components that include SCP, UEFI, and kernel images, using secure-boot mechanisms. It performs cryptographic measurements and establishes a Root of Trust (RoT) before allowing other processors to start.
 
 ***RSE acts as the platform’s security gatekeeper.***
 
@@ -41,7 +41,7 @@ When the AP is released, it begins executing Trusted Firmware-A (TF-A) at EL3 fr
 
 ***TF-A is the ignition controller, launching the next stages securely.***
 
-## Stage 4: Firmware and Bootloader (EDK2 / GRUB)
+## Stage 4: Firmware and Bootloader (EDK2/GRUB)
 
 TF-A hands off control to UEFI firmware (EDK 2), which performs device discovery and launches GRUB.
 
@@ -63,10 +63,10 @@ Responsibilities:
 
 ***The Linux kernel is the spacecraft - it takes over and begins its mission.***
 
-## Firmware module responsibilities in detail
-Now that you’ve examined the high-level boot stages, you can now break down each firmware module’s role in more detail.
+## In detail: firmware module responsibilities 
+Now that you’ve examined the high-level boot stages, you can now examine each firmware module’s role in more detail.
 
-Each stage of the boot chain is backed by a dedicated component - secure bootloader, platform controller, or OS manager - working together to ensure reliable system bring-up.
+Each stage of the boot chain is backed by a dedicated component, such as secure bootloader, platform controller, or OS manager, and they work together to ensure reliable system bring-up.
 
 ## RSE: Runtime Security Engine (Cortex-M55) — (Stage 1: Security Validation)
 
@@ -84,20 +84,20 @@ RSE acts as the second layer of the chain of trust, maintaining a monitored and 
 * Manages DRAM setup and enables power for the AP
 * Coordinates boot readiness with RSE via the Message Handling Unit (MHU)
 
-### TF-A: Trusted Firmware-A (BL1 / BL2) — Stage 3
+### TF-A: Trusted Firmware-A (BL1/BL2) - Stage 3
 
 * **BL1** executes from ROM, initializes minimal hardware (clocks, UART), and loads BL2  
 * **BL2** validates and loads SCP, RSE, and UEFI images, setting up secure handover to later stages
 
 TF-A establishes the system’s chain of trust and ensures downstream components are authenticated and loaded from trusted sources.
 
-### UEFI / GRUB / Linux kernel — Stages 4–5
+### UEFI, GRUB, and the Linux kernel — Stages 4–5
 
 * **UEFI (EDK II):** firmware abstraction, hardware discovery, ACPI table generation  
 * **GRUB:** selects and loads the Linux kernel image  
 * **Linux kernel:** initializes the OS, drivers, and launches userland (for example, BusyBox)
 
-On the FVP you can observe this process via UART logs to validate each stage.
+On the FVP you can see this process through UART logs to validate each stage.
 
 ### LCP: Low-Power Controller (optional)
 
@@ -106,7 +106,7 @@ If present, the LCP provides fine-grained platform power management:
 * Controls per-core power gating
 * Manages transitions to ACPI power states (for example, S3, S5)
 
-LCP support depends on the FVP model and may be omitted in simplified setups.
+LCP support depends on the FVP model and can be omitted in simplified setups.
 
 ## Coordination and handoff logic
 
@@ -122,7 +122,7 @@ The RD-V3 boot sequence follows a multi-stage, dependency-driven handshake model
 This handshake ensures no stage proceeds unless its dependencies have securely initialized and authorized the next step.
 
 {{% notice Note %}}
-In the table, arrows (←) indicate **dependency**—the component on the left depends on the component(s) on the right to be triggered or authorized.  
+In the table, arrows (←) indicate **dependency** - the component on the left depends on the component(s) on the right to be triggered or authorized.  
 For example, `RSE ← BL2` means BL2 loads/triggers RSE; `AP ← SCP + RSE` means the AP can start only after SCP has initialized hardware and RSE has granted authorization.  
 The right-facing arrows in `UEFI → GRUB → Linux` indicate a **direct execution path**—each stage passes control directly to the next.
 {{% /notice %}}
