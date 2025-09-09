@@ -1,6 +1,10 @@
 ---
 title: Learn about the impact of NIC IRQs and patterns on cloud
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 20
 
 who_is_this_for: This is anyone interested in understanding how IRQ patterns can enhance networking workload performance on cloud.
