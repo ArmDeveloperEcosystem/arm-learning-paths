@@ -18,7 +18,7 @@ prerequisites:
 author: visualSilicon
 
 ### Tags
-skilllevels: Beginner
+skilllevels: Introductory
 subjects: Gaming
 armips:
     - Cortex
