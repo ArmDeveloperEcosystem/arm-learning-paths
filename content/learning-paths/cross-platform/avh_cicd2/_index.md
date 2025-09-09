@@ -23,7 +23,6 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - Coding
     - Arm Virtual Hardware
     - GitHub
 

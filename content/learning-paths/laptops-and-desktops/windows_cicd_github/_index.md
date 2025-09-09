@@ -26,7 +26,6 @@ armips:
 operatingsystems:
     - Windows
 tools_software_languages:
-    - Coding
     - GitHub
 
 further_reading:

@@ -25,7 +25,7 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - Yocto Linux
+    - Yocto Project
     - QEMU
 
 further_reading:

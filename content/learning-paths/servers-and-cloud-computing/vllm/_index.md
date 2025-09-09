@@ -26,7 +26,7 @@ operatingsystems:
 tools_software_languages:
     - vLLM
     - LLM
-    - GenAI
+    - Generative AI
     - Python
     - Hugging Face
 

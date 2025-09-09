@@ -25,7 +25,7 @@ subjects: ML
 arm_ips:
     - Neoverse
 tools_software_languages:
-    - Amazon Web Services
+    - AWS
     - Hugging Face
     - Python
     - Llama.cpp

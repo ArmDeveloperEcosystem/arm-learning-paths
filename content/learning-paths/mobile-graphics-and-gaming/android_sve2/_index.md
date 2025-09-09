@@ -27,7 +27,6 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Android Studio
-    - Coding
 
 further_reading:
     - resource:

@@ -40,9 +40,8 @@ operatingsystems:
     - RTOS
     - Baremetal
 tools_software_languages:
-    - Coding
-    - Keil
-    - Fixed Virtual Platform
+    - Keil MDK
+    - FVP
 
 
 

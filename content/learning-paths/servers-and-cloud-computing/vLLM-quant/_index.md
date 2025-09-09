@@ -36,7 +36,7 @@ operatingsystems:
 tools_software_languages:
     - vLLM
     - LLM
-    - GenAI
+    - Generative AI
     - Python
     - PyTorch
     - OpenBLAS

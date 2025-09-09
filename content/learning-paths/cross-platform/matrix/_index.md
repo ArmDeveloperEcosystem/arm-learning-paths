@@ -32,7 +32,7 @@ tools_software_languages:
     - GCC
     - Clang
     - CMake
-    - GoogleTest
+    - Google Test
     - Runbook
 
 operatingsystems:

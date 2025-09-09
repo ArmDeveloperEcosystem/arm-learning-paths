@@ -37,7 +37,6 @@ operatingsystems:
     - Linux
 
 tools_software_languages:
-    - Slicing software
     - Fusion 360
 
 further_reading:

@@ -25,7 +25,6 @@ operatingsystems:
     - Baremetal
 tools_software_languages:
     - CMSIS
-    - Coding
     - Arm Development Studio
 
 further_reading:
