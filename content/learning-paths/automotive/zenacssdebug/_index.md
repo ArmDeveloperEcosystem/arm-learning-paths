@@ -26,11 +26,13 @@ author: Ronan Synnott
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
-    - Arm Zena CSS
+    - Cortex-A
+    - Cortex-R
 operatingsystems:
     - Linux
 tools_software_languages:
     - Arm Development Studio
+    - Arm Zena CSS
 
 
 further_reading:
