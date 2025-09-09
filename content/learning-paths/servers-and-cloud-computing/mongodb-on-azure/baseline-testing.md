@@ -180,7 +180,7 @@ Index Creation Time (ms): 22
 
 ```console
 for i in {1..5}; do
-  /usr/bin/mongosh --eval 'use baselineDB; db.concurrent.insertMany([...Array(1000).keys()].map(k => ({ test: k, ts: new Date() })))' &
+  mongosh --eval 'use baselineDB; db.concurrent.insertMany([...Array(1000).keys()].map(k => ({ test: k, ts: new Date() })))' &
 done
 wait
 ```
