@@ -25,7 +25,7 @@ To debug from reset, launch the FVP with the Iris server but do not run. This wi
 ```command
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose -- --iris-server --iris-port 7100"
 ```
-The FVP will start and emit various informational messages. Once initialized you should see something similar to:
+The FVP will start and generate various informational messages. Once initialized you should see something similar to:
 
 ```output
 ...

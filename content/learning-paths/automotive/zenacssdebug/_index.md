@@ -4,36 +4,35 @@ title: Debug Arm Zena CSS Reference Software Stack with Arm Development Studio
 draft: true
 cascade:
     draft: true
-    
-description: Learn how to set up a debug environment for Arm Zena CSS Reference Software Stack
 
 minutes_to_complete: 60
 
-who_is_this_for: This topic is for software developers who wish to use Arm Development Studio to explore and debug the Arm Zena CSS Reference Software Stack.
+who_is_this_for: This is an introductory topic for software developers who wish to use Arm Development Studio to explore and debug the Arm Zena CSS Reference Software Stack.
 
 learning_objectives: 
     - Set up debug configuration for the Arm Zena CSS FVP
     - Debug Runtime Security Engine (RSE) from boot time
     - Debug Safety Island (SI)
     - Debug Linux OS on Primary Compute cores
-##    - Debug Linux application
 
 prerequisites:
     - Ubuntu 22.04 host machine
-    - Arm Development Studio 2024.1 (or later) and an appropriate license
+    - You will need [Arm Development Studio 2024.1 (or later)](/install-guides/armds) and an appropriate license
     - A basic understanding of the Arm Zena CSS software stack and Arm processors
 
 author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
-subjects: 
+subjects: Performance and Architecture
 armips:
-    - Arm Zena CSS
+    - Cortex-A
+    - Cortex-R
 operatingsystems:
     - Linux
 tools_software_languages:
     - Arm Development Studio
+    - Arm Zena CSS
 
 
 further_reading:

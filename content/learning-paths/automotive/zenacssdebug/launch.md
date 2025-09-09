@@ -10,17 +10,17 @@ layout: "learningpathall"
 
 ## Launch FVP
 
-From the [documentation](https://arm-auto-solutions.docs.arm.com/en/v2.0/rd-aspen/user_guide/reproduce.html#run-the-fvp) the default command to launch the FVP (within the virtual environment) with the software stack loaded is:
+You can now launch the FVP within the virtual environment with the software stack loaded:
 
 ```command
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose"
 ```
-
-It is sensible to continue to use this method to launch the FVP whilst debugging. However this command as shown does not enable the Iris debug server inside the model, and so will not be debuggable.
+Refer to the [documentation](https://arm-auto-solutions.docs.arm.com/en/v2.0/rd-aspen/user_guide/reproduce.html#run-the-fvp) for more details.
+While you can continue to use this method to launch the FVP whilst debugging, this command does not enable the Iris debug server inside the model, and so will not be debuggable.
 
 Additional command options are necessary.
 
-We will use the following. See output of `FVP_RD_Aspen --help` for full list and explanation. Options are case-sensitive.
+You will use the following. See output of `FVP_RD_Aspen --help` for full list and explanation. Options are case-sensitive.
 
 | Option                | Alias    | Notes                                         |
 |---------------------- |--------- |---------------------------------------------- |

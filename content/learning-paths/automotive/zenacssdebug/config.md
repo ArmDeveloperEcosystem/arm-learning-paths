@@ -12,9 +12,9 @@ layout: "learningpathall"
 
 Arm Development Studio requires a `Debug Configuration` of the target that it will connect to.
 
-As of 2025.0, there is no such configuration provided 'out-of-the-box' for the Zena CSS FVP. However creating such a configuration is straight forward.
+As of Arm Development Studio version 2025.0, there is no such configuration provided 'out-of-the-box' for the Zena CSS FVP. However creating such a configuration is straight forward.
 
-See the Arm Development Studio [Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Migrating-from-DS-5-to-Arm-Development-Studio/Connect-to-new-or-custom-models) for full instructions, but summarized below.
+See the Arm Development Studio [Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Migrating-from-DS-5-to-Arm-Development-Studio/Connect-to-new-or-custom-models) for full instructions, but they are also summarized below.
 
 ## Launch FVP
 
@@ -38,7 +38,7 @@ Debug Configurations are stored in a configuration database. You must first crea
 
 Navigate to `File` > `New` > `Other`, and then select `Configuration Database` > `Configuration Database` from the drop-down list.
 
-Click `Next`. Give the Database a meaningful name, and click `Finish`.
+Click `Next`. Give the Database a name, and click `Finish`.
 
 ## Debug Configuration
 
