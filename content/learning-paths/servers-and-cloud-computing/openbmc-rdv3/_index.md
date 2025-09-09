@@ -1,6 +1,10 @@
 ---
 title: Simulate Pre-Silicon Integration of OpenBMC and UEFI on Neoverse RD-V3
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 120
 
 who_is_this_for: This Learning Path is for firmware developers, platform software engineers, and system integrators working on Arm Neoverse-based platforms. It is especially useful for those exploring pre-silicon development, testing, and integration of Baseboard Management Controllers (BMC) with UEFI firmware. If you are building or validating server-class reference platforms—such as RD-V3—before hardware is available, this guide will help you simulate and debug the full boot path using Fixed Virtual Platforms (FVPs).
