@@ -1,5 +1,5 @@
 ---
-title: Example
+title: Code example
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -263,7 +263,7 @@ Guide](https://developer.arm.com/documentation/109246/latest/).
 Beyond the SME2 and SVE2 implementations shown above, this loop also includes several
 alternative optimized versions, each leveraging architecture-specific features.
 
-### Neon
+### NEON
 
 The neon version (lines 612-710) relies on multiple structure load/store
 combined with indexed `fmla` instructions to vectorize the matrix multiplication
