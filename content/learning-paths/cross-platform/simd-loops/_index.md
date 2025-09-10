@@ -3,6 +3,10 @@ title: "Code kata: perfect your SVE and SME instructions skills with SIMD Loops"
 
 minutes_to_complete: 30
 
+draft: true
+cascade:
+    draft: true
+
 who_is_this_for: This is an advanced topic for software developers who want to learn how to use the full range of features available in SVE, SVE2 and SME2 to improve the performance of their software for Arm processors.
 
 learning_objectives:
