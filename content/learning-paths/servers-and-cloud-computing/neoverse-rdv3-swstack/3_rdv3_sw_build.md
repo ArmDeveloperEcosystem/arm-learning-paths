@@ -28,16 +28,18 @@ git config --global user.email "<your-email@example.com>"
 
 ## Step 2: Fetch the source code
 
-The RD‑V3 platform firmware stack consists of many independent components, such as:
+The RD‑V3 platform firmware stack consists of multiple components, most maintained in separate Git respositories, such as:
 
 - TF‑A
-- SCP
-- RSE
-- UEFI
+- SCP/MCP
+- RSE (TF-M)
+- UEFI (EDK II)
 - Linux kernel
-- Buildroot. 
+- Buildroot
+- kvmtool (lkvm)
+- RMM (optional)
 
-Each component is maintained in a separate Git repository. To manage and synchronize these repositories efficiently, use the `repo` tool. It simplifies syncing the full platform software stack from multiple upstreams.
+Use the repo tool with the RD-V3 manifest to sync these sources from multiple upstreams consistently (typically to a pinned release tag). It simplifies syncing the full platform software stack from multiple upstreams.
 
 If `repo` is not installed, you can download it and add it to your `PATH`:
 
@@ -182,7 +184,7 @@ your-username:hostname:/home/your-username/rdv3$
 You can explore the container environment if you wish, then type `exit` to return to the host.
 
 
-##  Step 4: Build firmware 
+## Step 4: Build firmware 
 
 Building the full firmware stack involves compiling several components and packaging them for simulation. The following command runs build and then package inside the Docker image:
 

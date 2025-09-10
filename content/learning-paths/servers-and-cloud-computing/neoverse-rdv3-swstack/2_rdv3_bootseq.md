@@ -84,7 +84,7 @@ RSE acts as the second layer of the chain of trust, maintaining a monitored and 
 * Manages DRAM setup and enables power for the AP
 * Coordinates boot readiness with RSE via the Message Handling Unit (MHU)
 
-## TF-A: Trusted Firmware-A (BL1/BL2) (Stage 3)
+### TF-A: Trusted Firmware-A (BL1/BL2) (Stage 3)
 
 * **BL1** executes from ROM, initializes minimal hardware (clocks, UART), and loads BL2  
 * **BL2** validates and loads SCP, RSE, and UEFI images, setting up secure handover to later stages
@@ -112,12 +112,12 @@ LCP support depends on the FVP model and can be omitted in simplified setups.
 
 The RD-V3 boot sequence follows a multi-stage, dependency-driven handshake model, where each firmware module validates, powers, or authorizes the next.
 
-| Stage | Dependency chain     | Description                                                                   |
+| Stage(s) | Dependency chain     | Description                                                                   |
 |------:|----------------------|-------------------------------------------------------------------------------|
 | 1     | RSE ← BL2            | RSE is loaded and triggered by BL2 to begin security validation              |
 | 2     | SCP ← BL2 + RSE      | SCP initialization requires BL2 and authorization from RSE                   |
 | 3     | AP ← SCP + RSE       | The AP starts only after SCP sets power and RSE permits                      |
-| 4     | UEFI → GRUB → Linux  | UEFI launches GRUB, which loads the kernel and enters the OS                 |
+| 4-5     | UEFI → GRUB → Linux  | UEFI launches GRUB, which loads the kernel and enters the OS                 |
 
 This handshake ensures no stage proceeds unless its dependencies have securely initialized and authorized the next step.
 
@@ -134,7 +134,7 @@ This layered approach supports modular testing, independent debugging, and early
 In this section, you have:
 
 * Explored the full boot sequence of the RD-V3 platform, from power-on to Linux login
-* Understood the responsibilities of TF-A, RSE, SCP, MCP, LCP, and UEFI
+* Learned about the responsibilities of TF-A, RSE, SCP, MCP, LCP, and UEFI
 * Learned how secure boot is enforced and how each module hands off control
 * Interpreted boot dependencies using FVP simulation and UART logs
 

@@ -1,5 +1,5 @@
 ---
-title: CSS-V3 Pre-Silicon Software Development Using Neoverse Servers
+title: Develop and Validate Firmware Pre-Silicon on Arm Neoverse CSS V3
 
 minutes_to_complete: 90
 
