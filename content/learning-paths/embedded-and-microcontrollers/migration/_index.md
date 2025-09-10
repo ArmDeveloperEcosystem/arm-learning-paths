@@ -29,7 +29,7 @@ tools_software_languages:
     - GCC
     - Arm Compiler for Linux
     - Docker
-    - Neon
+    - NEON
 
 further_reading:
     - resource:

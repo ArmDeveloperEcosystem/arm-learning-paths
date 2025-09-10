@@ -25,7 +25,7 @@ armips:
     - Cortex-A
 tools_software_languages:
     - Docker
-    - AVH
+    - Arm Virtual Hardware
     - K3s
     - Containerd
 operatingsystems:

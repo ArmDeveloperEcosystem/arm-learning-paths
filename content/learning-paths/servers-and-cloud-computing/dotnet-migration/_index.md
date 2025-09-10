@@ -28,7 +28,7 @@ armips:
     - Neoverse
 tools_software_languages: 
     - .NET
-    - OrchardCore
+    - Orchard Core
     - C
 operatingsystems:
     - Linux
@@ -36,7 +36,7 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: OrchardCore documentation
+        title: Orchard Core documentation
         link: https://docs.orchardcore.net/
         type: documentation  
     - resource:

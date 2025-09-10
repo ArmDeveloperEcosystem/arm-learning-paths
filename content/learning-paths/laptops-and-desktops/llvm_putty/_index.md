@@ -23,8 +23,7 @@ operatingsystems:
     - Windows
 tools_software_languages:
     - LLVM
-    - VS Code
-    - Coding
+    - Visual Studio Code
 
 further_reading:
     - resource:

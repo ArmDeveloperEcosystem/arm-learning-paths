@@ -28,7 +28,6 @@ operatingsystems:
 tools_software_languages:
     - TensorFlow
     - STM32
-    - Coding
 
 further_reading:
     - resource:

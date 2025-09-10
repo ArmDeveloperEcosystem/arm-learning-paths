@@ -28,8 +28,7 @@ operatingsystems:
 tools_software_languages:
     - TrustZone
     - Arm Compiler for Embedded
-    - Keil
-    - Coding
+    - Keil MDK
 
 further_reading:
     - resource:

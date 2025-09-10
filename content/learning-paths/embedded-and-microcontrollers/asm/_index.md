@@ -25,8 +25,7 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - Coding
-    - Keil
+    - Keil MDK
 
 further_reading:
     - resource:

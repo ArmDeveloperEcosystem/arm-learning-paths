@@ -18,13 +18,12 @@ prerequisites:
 author: visualSilicon
 
 ### Tags
-skilllevels: Beginner
+skilllevels: Introductory
 subjects: Gaming
 armips:
     - Cortex
 tools_software_languages:
     - Unity
-    - Mobile
     - C#
 operatingsystems:
     - Android

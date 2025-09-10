@@ -30,7 +30,7 @@ subjects: ML
 test_maintenance: false
 
 tools_software_languages:
-    - Fixed Virtual Platform
+    - FVP
     - Arm Virtual Hardware
     - GCC
     - Arm Compiler for Embedded

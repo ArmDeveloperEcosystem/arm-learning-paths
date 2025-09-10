@@ -24,7 +24,6 @@ tools_software_languages:
     - GCC
     - Clang
     - SVE2
-    - Coding
     - Runbook
 
 operatingsystems:

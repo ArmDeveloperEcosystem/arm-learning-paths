@@ -27,7 +27,7 @@ armips:
 tools_software_languages:
     - Python
     - Docker
-    - ROS2
+    - ROS 2
     - DDS
 operatingsystems:
     - Linux

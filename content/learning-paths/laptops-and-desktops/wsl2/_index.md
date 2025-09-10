@@ -29,7 +29,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - WSL
-    - VS Code
+    - Visual Studio Code
 
 further_reading:
     - resource:

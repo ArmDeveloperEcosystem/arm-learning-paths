@@ -52,6 +52,13 @@ Start MongoDB manually:
 mongod --dbpath /var/lib/mongo --logpath /var/log/mongodb/mongod.log --fork
 ```
 
+The output from this command should look like:
+```output
+about to fork child process, waiting until server is ready for connections.
+forked process: 3356
+child process started successfully, parent exiting
+```
+
 6. Install mongosh
 
 **mongosh** is the MongoDB Shell used to interact with your MongoDB server. It provides a modern, user-friendly CLI for running queries and database operations.
@@ -81,16 +88,15 @@ db version v8.0.12
 Build Info: {
     "version": "8.0.12",
     "gitVersion": "b60fc6875b5fb4b63cc0dbbd8dda0d6d6277921a",
-    "openSSLVersion": "OpenSSL 3.2.2 4 Jun 2024",
+    "openSSLVersion": "OpenSSL 3.0.13 30 Jan 2024",
     "modules": [],
     "allocator": "tcmalloc-google",
     "environment": {
-        "distmod": "rhel93",
+        "distmod": "ubuntu2404",
         "distarch": "aarch64",
         "target_arch": "aarch64"
     }
 }
-$ mongosh --version
 2.3.8
 ```
 

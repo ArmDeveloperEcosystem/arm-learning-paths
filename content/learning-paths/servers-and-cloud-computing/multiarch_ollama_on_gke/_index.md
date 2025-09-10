@@ -36,7 +36,7 @@ operatingsystems:
 tools_software_languages:
     - LLM
     - Ollama
-    - GenAI
+    - Generative AI
 
 further_reading:
   - resource:
