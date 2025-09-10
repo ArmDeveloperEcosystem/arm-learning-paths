@@ -19,9 +19,9 @@ sudo apt update
 sudo apt install -y curl git
 ```
 
-Configure git:
+Configure git(optional):
 
-```
+```bash
 git config --global user.name "<your-name>"
 git config --global user.email "<your-email@example.com>"
 ```
