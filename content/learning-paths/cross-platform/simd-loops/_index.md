@@ -1,5 +1,5 @@
 ---
-title: "Code kata: perfect your SVE and SME instructions skills with SIMD Loops"
+title: "Code kata: perfect your SVE and SME skills with SIMD Loops"
 
 minutes_to_complete: 30
 
@@ -7,14 +7,14 @@ draft: true
 cascade:
     draft: true
 
-who_is_this_for: This is an advanced topic for software developers who want to learn how to use the full range of features available in SVE, SVE2 and SME2 to improve the performance of their software for Arm processors.
+who_is_this_for: This is an advanced topic for software developers who want to learn how to use the full range of features available in SVE, SVE2 and SME2 to improve software performance on Arm processors.
 
 learning_objectives:
-     - Improve your writing of SIMD code with SVE and SME.
+     - Improve SIMD code performance using Scalable Vector Extension (SVE) and Scalable Matrix Extension (SME).
 
 prerequisites:
-    - An AArch64 computer running Linux or macOS. You can use cloud instances, see this list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
-    - Some familiarity of SIMD programming and Neon intrinsics
+    - An AArch64 computer running Linux or macOS. You can use cloud instances, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) for a list of cloud service providers. 
+    - Some familiarity with SIMD programming and NEON intrinsics.
 
 author:
     - Alejandro Martinez Vicente
@@ -32,6 +32,13 @@ tools_software_languages:
     - GCC
     - Clang
     - FVP
+
+shared_path: true
+shared_between:
+    - servers-and-cloud-computing
+    - laptops-and-desktops
+    - mobile-graphics-and-gaming
+    - automotive
 
 further_reading:
     - resource:
