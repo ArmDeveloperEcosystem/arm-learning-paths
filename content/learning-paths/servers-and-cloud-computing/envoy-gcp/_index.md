@@ -1,28 +1,25 @@
 ---
-title: Deploy Envoy on Google Axion processors
+title:  Deploy Envoy Proxy on Google Cloud C4A (Arm-based Axion VMs)
 
-draft: true
-cascade:
-    draft: true
-   
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic is for software developers interested in migrating their Envoy workloads from x86_64 servers to Arm-based servers, specifically on Google Axion–based C4A virtual machines.  
+who_is_this_for: This introductory topic for software developers migrating Envoy Proxy workloads from x86_64 to Arm-based servers, specifically on Google Cloud C4A virtual machines built on Axion processors.
+
 
 learning_objectives:
-  - Start an Arm virtual machine on Google Cloud Platform (GCP) using the C4A Google Axion instance 
-  - Install and configure Envoy on Arm-based GCP C4A instances
-  - Validate Envoy functionality through baseline testing
-  - Benchmark Envoy performance on Arm
+  - Provision an Arm-based C4A VM on Google Cloud Platform (GCP) 
+  - Install and configure Envoy Proxy on a C4A instance
+  - Validate Envoy functionality with baseline tests
+  - Benchmark Envoy performance on Arm64 (AArch64) infrastructure
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free?utm_source=google&hl=en) account with billing enabled
-  - Familiarity with networking concepts and the [Envoy architecture](https://www.envoyproxy.io/docs/envoy/latest/).
+  - Familiarity with networking concepts and the [Envoy architecture](https://www.envoyproxy.io/docs/envoy/latest/)
 
 author: Pareena Verma
 
 ##### Tags
-skilllevels: Advanced
+skilllevels: Introductory
 subjects: Web
 cloud_service_providers: Google Cloud
 
@@ -31,7 +28,9 @@ armips:
 
 tools_software_languages:
   - Envoy
-  - Siege 
+  - Siege
+  - Networking
+  - Service Mesh
 
 operatingsystems:
   - Linux
@@ -41,7 +40,7 @@ operatingsystems:
 # ================================================================================
 further_reading:
   - resource:
-      title: Google Cloud official documentation
+      title: Google Cloud documentation
       link: https://cloud.google.com/docs
       type: documentation
 
@@ -51,11 +50,11 @@ further_reading:
       type: documentation
 
   - resource:
-      title: The official documentation for Siege
+      title: Siege documentation
       link: https://www.joedog.org/siege-manual/
       type: documentation
 
-weight: 1                       # _index.md always has weight of 1 to order correctly
-layout: "learningpathall"       # All files under learning paths have this same wrapper
-learning_path_main_page: "yes"  # Indicates this should be surfaced when looking for related content. Only set for _index.md of learning path content.
+weight: 1
+layout: "learningpathall"
+learning_path_main_page: "yes"
 ---

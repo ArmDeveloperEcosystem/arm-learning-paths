@@ -1,5 +1,5 @@
 ---
-title: How to create a Google Axion C4A Arm virtual machine on GCP 
+title: Create a Google Axion C4A Arm virtual machine on GCP 
 weight: 3
 
 ### FIXED, DO NOT MODIFY
