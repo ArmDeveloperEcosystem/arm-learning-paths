@@ -27,11 +27,10 @@ operatingsystems:
     - Baremetal
     - RTOS
 tools_software_languages:
-    - Keil
+    - Keil Studio Cloud
     - Arm Compiler for Embedded
     - Arm Virtual Hardware
     - CMSIS
-    - Coding
 
 further_reading:
     - resource:

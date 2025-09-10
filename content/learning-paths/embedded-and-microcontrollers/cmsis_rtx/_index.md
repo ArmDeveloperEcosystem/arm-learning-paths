@@ -23,8 +23,7 @@ armips:
 operatingsystems:
     - RTOS
 tools_software_languages:
-    - Coding
-    - RTX
+    - Keil RTX RTOS
     - Keil MDK
     - Arm Development Studio
 

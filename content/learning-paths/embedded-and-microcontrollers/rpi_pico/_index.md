@@ -28,7 +28,6 @@ operatingsystems:
     - Baremetal
 tools_software_languages:
     - Raspberry Pi
-    - Coding
 
 further_reading:
     - resource:

@@ -22,7 +22,6 @@ armips:
 operatingsystems:
     - Windows
 tools_software_languages:
-    - Coding
     - Arm64EC
     - Visual Studio
 

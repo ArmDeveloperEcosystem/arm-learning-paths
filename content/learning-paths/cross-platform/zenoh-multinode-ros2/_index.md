@@ -26,7 +26,7 @@ armips:
     - Cortex-A
     - Neoverse
 tools_software_languages:
-    - ROS2
+    - ROS 2
     - C
     - Raspberry Pi
     - Zenoh

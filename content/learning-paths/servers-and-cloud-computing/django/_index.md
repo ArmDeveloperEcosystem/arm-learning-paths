@@ -26,7 +26,7 @@ armips:
 tools_software_languages:
     - Django
     - Python
-    - Nginx
+    - NGINX
     - PostgreSQL
 operatingsystems:
     - Linux

@@ -22,7 +22,6 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - Automotive
 
 further_reading:
     - resource:

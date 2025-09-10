@@ -27,7 +27,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - LLM
-    - GenAI
+    - Generative AI
     - Python
     - Demo
     - Hugging Face

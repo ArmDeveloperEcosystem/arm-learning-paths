@@ -29,7 +29,6 @@ tools_software_languages:
     - Arm Development Studio
     - Arm Compiler for Embedded
     - Arm Fast Models
-    - Coding
 
 
 further_reading:

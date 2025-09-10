@@ -26,7 +26,7 @@ tools_software_languages:
     - ModelScope
     - FunASR
     - LLM
-    - GenAI
+    - Generative AI
     - Python
 
 

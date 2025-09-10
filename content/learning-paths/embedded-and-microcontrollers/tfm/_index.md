@@ -31,10 +31,9 @@ operatingsystems:
 - Baremetal
 tools_software_languages:
 - Arm Virtual Hardware
-- Fixed Virtual Platform
+- FVP
 - TrustZone
 - Trusted Firmware
-- Coding
 
 further_reading:
     - resource:

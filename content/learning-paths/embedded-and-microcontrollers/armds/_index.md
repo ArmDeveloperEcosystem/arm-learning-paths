@@ -30,7 +30,6 @@ tools_software_languages:
     - Arm Compiler for Embedded
     - Arm Fast Models
     - DSTREAM
-    - Coding
 
 further_reading:
     - resource:

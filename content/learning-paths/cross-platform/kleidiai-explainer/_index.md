@@ -23,8 +23,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - C++
-    - GenAI
-    - Coding
+    - Generative AI
     - NEON
     - Runbook
 

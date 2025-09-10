@@ -27,8 +27,7 @@ operatingsystems:
     - RTOS
 tools_software_languages:
     - Arm Virtual Hardware
-    - Coding
-    - Fixed Virtual Platform
+    - FVP
     - Arm Compiler for Embedded
 
 

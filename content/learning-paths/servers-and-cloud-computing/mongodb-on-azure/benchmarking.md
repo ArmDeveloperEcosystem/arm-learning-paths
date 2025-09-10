@@ -47,7 +47,7 @@ Go version: go1.23.11
    compiler: gc
 ```
 
-3. Start MongoDB Server
+3. Make sure that the MongoDB Server that you started in the previous section is still running. If not, start it again, using the command as shown:
 
 ```console
 mongod --dbpath /var/lib/mongo --logpath /var/log/mongodb/mongod.log --fork

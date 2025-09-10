@@ -34,7 +34,6 @@ subjects: Graphics
 armips:
     - Cortex-A
 tools_software_languages:
-    - Mobile
     - Java
     - Kotlin
     - C++
