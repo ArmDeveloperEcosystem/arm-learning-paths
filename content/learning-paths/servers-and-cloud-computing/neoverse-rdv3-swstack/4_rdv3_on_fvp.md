@@ -8,11 +8,9 @@ layout: learningpathall
 
 ## Simulating RD-V3 with an Arm FVP
 
-In the previous section, you built the complete CSS-V3 firmware stack.  
-Now you’ll use an Arm Fixed Virtual Platform (FVP) to simulate the system, allowing you to verify the boot sequence without any physical silicon.  
-This simulation brings up the full stack from BL1 to a Linux shell using Buildroot.
+In the previous section, you built the complete CSS-V3 firmware stack. Now you’ll use an Arm Fixed Virtual Platform (FVP) to simulate the system, allowing you to verify the boot sequence without any physical silicon. This simulation brings up the full stack from BL1 to a Linux shell using Buildroot.
 
-## Step 1: Download and Install the FVP Model
+## Step 1: Download and install the FVP model
 
 Each reference design release tag corresponds to a specific FVP model version.  
 For example, the **RD-INFRA-2025.07.03** tag is designed to work with **FVP version 11.29.35**.
@@ -29,15 +27,15 @@ tar -xvf FVP_RD_V3_11.29_35_Linux64_armv8l.tgz
 ./FVP_RD_V3.sh
 ```
 
-The FVP installation might prompt you with a few questions,choosing the defaults is sufficient for this Learning Path. By default, the FVP installs under `/home/ubuntu/FVP_RD_V3`.
+The FVP installation might prompt you with a few questions, choose the default settings. By default, the FVP installs under `/home/ubuntu/FVP_RD_V3`.
 
-## Step 2: remote desktop setup
+## Step 2: set up remote desktop 
 
 The RD‑V3 FVP model launches multiple UART consoles. Each console is mapped to a separate terminal window for different subsystems (for example, Neoverse V3, Cortex‑M55, Cortex‑M7, panel).
 
 If you’re accessing the platform over SSH, these UART consoles can still be displayed, but network latency and graphical forwarding can severely degrade performance.
 
-To interact with different UARTs more efficiently, it is recommend to install a remote desktop environment using `XRDP`. This provides a smoother user experience when dealing with multiple terminal windows and system interactions.
+To interact with different UARTs more efficiently, install a remote desktop environment using `XRDP`. This provides a smoother user experience when dealing with multiple terminal windows and system interactions.
 
 Install required packages and enable XRDP:
 
@@ -49,6 +47,7 @@ sudo systemctl enable --now xrdp
 ```
 
 To allow remote desktop connections, you need to open port 3389 (RDP) in your AWS EC2 security group:
+
 - Go to the EC2 Dashboard → Security Groups
 - Select your instance’s group → **Inbound rules** → **Edit inbound rules**
 - Add a rule: Type: RDP, Port: 3389, Source: your public IP (recommended)
@@ -63,9 +62,11 @@ For better security, limit the source to your current public IP instead of 0.0.0
 ## Switch to Xorg (required on Ubuntu 22.04)
 
 Wayland is the default display server on Ubuntu 22.04, but it is not compatible with XRDP.  
-To enable XRDP remote sessions, you must switch to Xorg by modifying the GDM configuration.
+To enable XRDP remote sessions, you must switch to Xorg by modifying the GDM configuration:
 
-Open the `/etc/gdm3/custom.conf` in a text editor. Find the line: 
+Open the `/etc/gdm3/custom.conf` in a text editor. 
+
+Find the line: 
 
 ```output
 #WaylandEnable=false
@@ -78,15 +79,16 @@ WaylandEnable=false
 ```
 
 Restart the GDM display manager:
+
 ```bash
 sudo systemctl restart gdm3
 ```
 
-After restart, XRDP sessions will use Xorg and you can connect to it in the Arm server using Remote Desktop.
+After restart, XRDP sessions will use Xorg and you can connect to it in the Arm server using a remote desktop.
 
 ## Step 3: launch the simulation
 
-Once connected using Remote Desktop, open a terminal and launch the RD‑V3 FVP simulation:
+Once connected using a remote desktop, open a terminal and launch the RD‑V3 FVP simulation:
 
 ```bash
 cd ~/rdv3/model-scripts/rdinfra

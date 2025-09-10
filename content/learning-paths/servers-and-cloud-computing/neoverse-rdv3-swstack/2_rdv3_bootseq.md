@@ -10,7 +10,7 @@ layout: learningpathall
 
 To ensure the platform transitions securely and reliably from power-on to operating system launch, this section introduces the roles and interactions of each firmware component within the RD-V3 boot process. You’ll learn how each component contributes to system initialization and how control is systematically handed off across the boot chain.
 
-## How the system boots up
+## Booting the system up
 
 In the RD-V3 platform, each firmware component  such as TF-A, RSE, SCP, MCP, LCP, and UEFI operates independently but participates in a well-defined sequence. Each is delivered as a separate firmware image, yet they coordinate tightly through a structured boot flow and inter-processor signaling.
 
@@ -24,14 +24,14 @@ After BL2, the Runtime Security Engine (RSE, Cortex-M55) authenticates critical 
 
 ***RSE acts as the platform’s security gatekeeper.***
 
-## Stage 2: Early hardware initialization (SCP / MCP)
+## Stage 2: Early hardware initialization (SCP/MCP)
 
 Once RSE completes verification, the System Control Processor (SCP, Cortex-M7) and the Management Control Processor (MCP, where present) are released from reset.
 
 They perform essential bring-up:
-* Initialize clocks, reset lines, and power domains
-* Prepare DRAM and interconnect
-* Enable the application processor (AP) cores and signal readiness to TF-A
+* Initializing clocks, reset lines, and power domains
+* Preparing DRAM and interconnect
+* Enabling the application processor (AP) cores and signaling readiness to TF-A
 
 ***SCP/MCP are the ground crew bringing hardware systems online.***
 
@@ -45,10 +45,10 @@ When the AP is released, it begins executing Trusted Firmware-A (TF-A) at EL3 fr
 
 TF-A hands off control to UEFI firmware (EDK II), which performs device discovery and launches GRUB.
 
-Responsibilities:
-* Detect and initialize memory, PCIe, and boot devices
-* Generate ACPI and platform configuration tables
-* Locate and launch GRUB from storage or flash
+Responsibilities here include:
+* Detecting and initializing memory, PCIe, and boot devices
+* Generating ACPI and platform configuration tables
+* Locating and launching GRUB from storage or flash
 
 ***EDK II and GRUB are like the first- and second-stage rockets launching the payload.***
 
@@ -56,10 +56,10 @@ Responsibilities:
  
 GRUB loads the Linux kernel and passes full control to the OS.
 
-Responsibilities:
-* Initialize device drivers and kernel subsystems
-* Mount the root filesystem
-* Start user-space processes (for example, BusyBox)
+Responsibilities include:
+* Initializing device drivers and kernel subsystems
+* Mounting the root filesystem
+* Starting user-space processes (for example, BusyBox)
 
 ***The Linux kernel is the spacecraft - it takes over and begins its mission.***
 
@@ -127,9 +127,12 @@ For example, `RSE ← BL2` means BL2 loads/triggers RSE; `AP ← SCP + RSE` mean
 The right-facing arrows in `UEFI → GRUB → Linux` indicate a **direct execution path**—each stage passes control directly to the next.
 {{% /notice %}}
 
-This layered approach supports modular testing, independent debugging, and early simulation—essential for secure and robust platform bring-up.
+This layered approach supports modular testing, independent debugging, and early simulation, which is essential for secure and robust platform bring-up.
 
-**In this section, you have:**
+## Summary
+
+In this section, you have:
+
 * Explored the full boot sequence of the RD-V3 platform, from power-on to Linux login
 * Understood the responsibilities of TF-A, RSE, SCP, MCP, LCP, and UEFI
 * Learned how secure boot is enforced and how each module hands off control

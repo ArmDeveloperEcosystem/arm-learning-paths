@@ -6,17 +6,17 @@ weight: 6
 layout: learningpathall
 ---
 
-## Build and run the RD-V3-R1 dual-chip platform
+## The RD-V3-R1 dual-chip platform
 
 The RD-V3-R1 platform is a dual-chip simulation environment built to model multi-die Arm server SoCs. It expands on the single-die RD-V3 design by introducing a second application processor and a Management Control Processor (MCP).
 
-### Key use cases
+Key use cases of RD-V3-R! are:
 
 - Simulating a chiplet-style boot flow with two APs
 - Observing coordination between SCP and MCP across dies
 - Testing secure boot in a distributed firmware environment
 
-### Key differences from RD-V3
+Key differences from RD-V3 are:
 
 - Dual AP boot flow instead of a single AP
 - MCP (Cortex-M7) to support cross-die management
@@ -38,7 +38,7 @@ repo sync -c -j "$(nproc)" --fetch-submodules --force-sync --no-clone-bundle
 
 Refer to the [RD-V3-R1 Release Tags](https://neoverse-reference-design.docs.arm.com/en/latest/platforms/rdv3.html#release-tags) to pick the FVP version that matches your tag, then download and install it: 
 
-
+```bash
 mkdir -p ~/fvp
 cd ~/fvp
 wget https://developer.arm.com/-/cdn-downloads/permalink/FVPs-Neoverse-Infrastructure/RD-V3-r1/FVP_RD_V3_R1_11.29_35_Linux64_armv8l.tgz
@@ -46,11 +46,13 @@ tar -xvf FVP_RD_V3_R1_11.29_35_Linux64_armv8l.tgz
 ./FVP_RD_V3_R1.sh
 ```
 
-## Step 3: Build the Firmware
+## Step 3: Build the firmware
 
-If you built the Docker image earlier, you can reuse it for RD-V3-R1. Run the full build and package flow:
+If you built the Docker image earlier, you can reuse it for RD-V3-R1. 
 
+Run the full build and package flow:
 
+```bash
 cd ~/rdv3r1
 docker run --rm \
   -v "$PWD:$PWD" \
@@ -67,6 +69,7 @@ docker run --rm \
 ## Step 4: Launch the simulation
 
 From a desktop session on the build host, start the RD-V3-R1 FVP:
+
 ```bash
 cd ~/rdv3r1/model-scripts/rdinfra
 export MODEL="$HOME/FVP_RD_V3_R1/models/Linux64_armv8l_GCC-9.3/FVP_RD_V3_R1"  # adjust if your path/toolchain differs

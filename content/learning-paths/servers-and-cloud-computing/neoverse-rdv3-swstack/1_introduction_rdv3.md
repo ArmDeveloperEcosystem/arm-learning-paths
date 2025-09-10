@@ -64,7 +64,7 @@ Key capabilities of FVPs:
 
 FVPs enable developers to verify boot sequences, debug firmware handoffs, and even simulate RSE (Runtime Security Engine) behaviors, all pre-silicon.
 
-## Comparing RD-V3 FVP variants
+## Compare RD-V3 FVP variants
 
 To support different use cases and levels of platform complexity, Arm offers several virtual models based on the CSS-V3 architecture: RD-V3, RD-V3-R1, RD-V3-Cfg1 (CFG1), and RD-V3-Cfg2 (CFG2). While they share a common foundation, they differ in chip count, system topology, and simulation flexibility.
 

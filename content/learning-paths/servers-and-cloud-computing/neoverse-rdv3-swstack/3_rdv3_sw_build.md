@@ -5,19 +5,22 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
 ## Building the RD-V3 Reference Platform Software Stack
 
 In this module, you’ll set up your development environment on any Arm-based server and build the firmware stack required to simulate the RD-V3 platform. This Learning Path was tested on an AWS `m7g.4xlarge` Arm-based instance running Ubuntu 22.04.
 
-## Step 1: Prepare the Development Environment
+## Step 1: Set up your development environment
 
-First, ensure your system is up to date and install the required tools and libraries:
+First, check that your system is current and install the required dependencies:
 
 ```bash
 sudo apt update
 sudo apt install -y curl git
 ```
-Configure git as follows:
+
+Configure git:
+
 ```
 git config --global user.name "<your-name>"
 git config --global user.email "<your-email@example.com>"
@@ -25,7 +28,16 @@ git config --global user.email "<your-email@example.com>"
 
 ## Step 2: Fetch the source code
 
-The RD‑V3 platform firmware stack consists of many independent components, such as TF‑A, SCP, RSE, UEFI, Linux kernel, and Buildroot. Each component is maintained in a separate Git repository. To manage and synchronize these repositories efficiently, use the `repo` tool. It simplifies syncing the full platform software stack from multiple upstreams.
+The RD‑V3 platform firmware stack consists of many independent components, such as:
+
+- TF‑A
+- SCP
+- RSE
+- UEFI
+- Linux kernel
+- Buildroot. 
+
+Each component is maintained in a separate Git repository. To manage and synchronize these repositories efficiently, use the `repo` tool. It simplifies syncing the full platform software stack from multiple upstreams.
 
 If `repo` is not installed, you can download it and add it to your `PATH`:
 
