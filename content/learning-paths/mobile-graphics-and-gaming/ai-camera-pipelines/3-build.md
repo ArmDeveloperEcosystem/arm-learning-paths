@@ -30,7 +30,7 @@ Build the Docker container used to compile the pipelines:
 docker build -t ai-camera-pipelines -f docker/Dockerfile \
   --build-arg DOCKERHUB_MIRROR=docker.io \
   --build-arg CI_UID=$(id -u) \
-  docker
+  docker/
 ```
 
 ## Build the AI Camera Pipelines
@@ -45,7 +45,7 @@ Inside the container, run the following commands:
 
 ```bash
 ENABLE_SME2=0
-TENSORFLOW_GIT_TAG=ddceb963c1599f803b5c4beca42b802de5134b44
+TENSORFLOW_GIT_TAG="v2.19.0"
 
 # Build flatbuffers
 git clone https://github.com/google/flatbuffers.git
