@@ -197,7 +197,7 @@ What the key fields do:
 - `type: kedify-http` — Use Kedify’s HTTP scaler.
 - `hosts`, `pathPrefixes` — Which requests to observe for scaling.
 - `service`, `port` — The Service and port receiving traffic.
-- `scalingMetric: requestRate` and `targetValue: 1000` — Target 1000 req/s (per granularity/window) before scaling out.
+- `scalingMetric: requestRate` and `targetValue: 10` — Target 1000 req/s (per granularity/window) before scaling out.
 - `minReplicaCount: 0` — Allows scale-to-zero when idle.
 - `trafficAutowire: ingress` — Lets Kedify auto-wire your Ingress to the kedify-proxy.
 
@@ -237,7 +237,7 @@ You should see a 200 OK response. Next, generate sustained load. You can use `he
 #### Test higher load
 
 ```bash
-hey -n 10000 -c 150 -host "application.keda" http://$INGRESS_IP
+hey -n 40000 -c 200 -host "application.keda" http://$INGRESS_IP
 ```
 
 While the load runs, watch replicas change:
