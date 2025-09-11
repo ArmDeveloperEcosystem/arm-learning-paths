@@ -246,6 +246,15 @@ While the load runs, watch replicas change:
 watch kubectl get deployment application -n default
 ```
 
+For example something like this:
+
+```
+Every 2,0s: kubectl get deployment application -n default
+
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+application   5/5     5            5           23m
+```
+
 Expected behavior:
 - On bursty load, Kedify scales the Deployment up toward `maxReplicaCount`.
 - When traffic subsides, replicas scale down. After the cooldown, they can return to zero.
