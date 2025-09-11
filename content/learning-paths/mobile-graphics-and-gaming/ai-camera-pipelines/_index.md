@@ -1,16 +1,16 @@
 ---
-title: Accelerate Denoising, Background Blur and Low-Light Camera Effects
+title: Accelerate Denoising, Background Blur, and Low-Light Camera Effects with KleidiAI and KleidiCV
 
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path introduces developers to the benefits of optimizing the performance of camera pipelines using KleidiAI and KleidiCV.
+who_is_this_for: This introductory topic is for mobile and computer-vision developers, camera pipeline engineers, and performance-minded practitioners who want to optimize real-time camera effects on Arm using KleidiAI and KleidiCV.
 
 learning_objectives:
-    - Compile and run AI-powered camera pipeline applications.
-    - Use KleidiCV and KleidiAI to improve the performance of real-time camera pipelines.
+    - Build and run AI-powered camera pipeline applications
+    - Use KleidiCV and KleidiAI to improve the performance of real-time camera pipelines
 
 prerequisites:
-    - A computer running Arm Linux or macOS with Docker installed.
+    - A computer running Arm Linux or macOS with Docker installed
 
 author: Arnaud de Grandmaison
 
@@ -25,6 +25,7 @@ armips:
     - Cortex-A
 tools_software_languages:
     - C++
+    - Docker
 operatingsystems:
     - Linux
     - macOS

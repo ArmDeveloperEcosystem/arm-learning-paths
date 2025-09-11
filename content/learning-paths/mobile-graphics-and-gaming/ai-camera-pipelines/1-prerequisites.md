@@ -8,39 +8,44 @@ layout: learningpathall
 
 ## Host machine requirements
 
-This Learning Path demonstrates how to improve the performance of camera pipelines using KleidiAI and KleidiCV in applications running on Arm. You will need an Arm64 machine, preferably running an Ubuntu-based distribution. The instructions have been tested on Ubuntu 24.04.
+This Learning Path demonstrates how to improve the performance of camera pipelines using KleidiAI and KleidiCV on Arm. You’ll need an Arm64 machine, preferably running an Ubuntu-based distribution. The instructions have been tested on Ubuntu 24.04.
 
 ## Install required software
 
 Make sure the following tools are installed:
-- `git` - a version control system, for cloning the AI camera pipelines codebase.
-- `git lfs` - an extension to `git` for managing large files by storing lightweight references instead of the files themselves.
-- `docker` - an open-source containerization platform for running applications in isolated environments.
-- `libomp` - LLVM's OpenMP runtime library, required for enabling parallel execution during application performance optimization.
+- **Git** – version control, for cloning the AI camera pipelines codebase
+- **Git LFS** – extension to Git for managing large files using lightweight pointers
+- **Docker** – an open-source container platform for running the applications in isolated environments
+- **OpenMP runtime (`libomp`)** – LLVM’s OpenMP runtime library, required for nabling parallel execution during application performance optimization
 
-### git and git lfs
+### Git and Git LFS
 
-These tools can be installed by running the following command, depending on your OS:
+Install with the commands for your OS:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux/Ubuntu" language="bash">}}
-sudo apt install git git-lfs -y
+sudo apt update
+sudo apt install -y git git-lfs
+# one-time LFS setup on this machine:
+git lfs install
   {{< /tab >}}
   {{< tab header="macOS" language="bash">}}
 brew install git git-lfs
+# one-time LFS setup on this machine:
+git lfs install
   {{< /tab >}}
 {{< /tabpane >}}
 
 ### Docker
 
-Start by checking that `docker` is installed on your machine by typing the following command line in a terminal:
+Check that Docker is installed:
 
 ```bash { output_lines="2" }
 docker --version
 Docker version 27.3.1, build ce12230
 ```
 
-If you see an error like "`docker: command not found`," then follow the steps from the [Docker Install Guide](https://learn.arm.com/install-guides/docker/).
+If you see "`docker: command not found`," follow the [Docker Install Guide](https://learn.arm.com/install-guides/docker/).
 
 {{% notice Note %}}
 You might need to log in again or restart your machine for the changes to take effect.

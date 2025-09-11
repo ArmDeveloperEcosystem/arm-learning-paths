@@ -68,8 +68,7 @@ computationally demanding --- steps in a camera pipeline. Done well, it
 transforms noisy frames into sharp, vibrant captures. Done poorly, it leaves
 smudges and artifacts that ruin the shot.
 
-As depicted in the diagram below, the Neural Denoising pipeline is using 2
-algorithms to process the frames:
+As depicted in the diagram below, the Neural Denoising pipeline uses two algorithms to process the frames:
 - either temporally, with an algorithm named `ultralite` in the code
 repository,
 - or spatially, with an algorithm named `collapsenet` in the code repository,
