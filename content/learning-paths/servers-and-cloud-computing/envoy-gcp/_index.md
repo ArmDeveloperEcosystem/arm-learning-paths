@@ -10,7 +10,7 @@ learning_objectives:
   - Provision an Arm-based C4A VM on Google Cloud Platform (GCP) 
   - Install and configure Envoy Proxy on a C4A instance
   - Validate Envoy functionality with baseline tests
-  - Benchmark Envoy performance on Arm64 (AArch64) infrastructure
+  - Benchmark Envoy performance on both Arm64 (AArch64) and x86_64 architectures
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free?utm_source=google&hl=en) account with billing enabled

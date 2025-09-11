@@ -11,10 +11,10 @@ Google Axion C4A is a family of Arm-based virtual machines powered by Google’s
 
 The C4A series can provide a cost-efficient alternative to x86 VMs while leveraging the scalability and performance characteristics of the Arm64 (AArch64) architecture on Google Cloud.
 
-To learn more about Google Axion, see the blog [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu) blog.
+To learn more about Google Axion, see the blog [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
 
 ## Envoy Proxy for service proxying and traffic management on Arm
 
-Envoy Proxy is an open-source, high-performance edge and service proxy designed for cloud-native applications. It handles service-to-service communication, traffic routing, load balancing, and observability, improving the reliability and security of microservices.
+Envoy Proxy is an open-source, high-performance edge and service proxy designed for cloud-native applications. It handles service-to-service communication, traffic routing, load balancing, and observability - improving the reliability and security of microservices.
 
-Envoy is widely used in service meshes, API gateways, and modern cloud environments. Learn more on the [Envoy website](https://www.envoyproxy.io/) and in the [documentation](https://www.envoyproxy.io/docs/envoy/latest/).
+Envoy is widely used in service meshes, API gateways, and modern cloud environments. Learn more on the [Envoy website](https://www.envoyproxy.io/) and in the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/).

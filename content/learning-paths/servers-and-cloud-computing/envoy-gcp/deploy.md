@@ -1,5 +1,5 @@
 ---
-title: How to deploy Envoy on Google Axion C4A Arm virtual machines
+title: Deploy Envoy on Google Axion C4A Arm virtual machines
 weight: 4
 
 ### FIXED, DO NOT MODIFY
