@@ -30,7 +30,7 @@ Build the Docker container used to compile the pipelines:
 docker build -t ai-camera-pipelines -f docker/Dockerfile \
   --build-arg DOCKERHUB_MIRROR=docker.io \
   --build-arg CI_UID=$(id -u) \
-  docker
+  docker/
 ```
 
 ## Build the AI Camera Pipelines
