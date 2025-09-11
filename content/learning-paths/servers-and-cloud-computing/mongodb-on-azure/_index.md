@@ -7,19 +7,18 @@ cascade:
 
 minutes_to_complete: 30   
 
-who_is_this_for: This Learning Path is designed for software developers looking to migrate their MongoDB workloads from x86_64 to Arm-based platforms, specifically on the Microsoft Azure Cobalt 100 processors.
+who_is_this_for: This Learning Path is designed for software developers looking to migrate their MongoDB workloads to Arm-based platforms, specifically on the Microsoft Azure Cobalt 100 processors.
 
 learning_objectives: 
-    - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image.
-    - Deploy the MongoDB on an Azure ubuntu virtual machine.
-    - Perform MongoDB baseline testing and benchmarking on both x86_64 and Arm64 virtual machine.
+    - Provision an Azure Arm64 Cobalt 100 based virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image.
+    - Deploy MongoDB on an Azure Cobalt 100 based virtual machine.
+    - Perform MongoDB baseline testing and benchmarking on the Arm64 virtual machine.
 
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6). 
-    - Basic understanding of Linux command line.
     - Familiarity with the [MongoDB architecture](https://www.mongodb.com/) and deployment practices on Arm64 platforms.
 
-author: Jason Andrews
+author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory

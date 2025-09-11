@@ -8,8 +8,8 @@ layout: learningpathall
 
 ## Benchmark MongoDB with **mongotop** and **mongostat**
 
-This guide will help the user measure MongoDB’s performance in real time.
-The user will install the official MongoDB database tools, start MongoDB, run a script to simulate heavy load, and watch the database’s live performance using **mongotop** and **mongostat**.
+In this section, you will measure MongoDB's performance in real time.
+You will install the official MongoDB database tools, start MongoDB and run a script to simulate heavy load. With the script running you will then meassure the database's live performance using **mongotop** and **mongostat**.
 
 1. Install MongoDB Database Tools
 
@@ -20,7 +20,7 @@ sudo apt install -y ./mongodb-database-tools-ubuntu2404-arm64-100.13.0.deb
 echo 'export PATH=$PATH:~/mongodb-database-tools-ubuntu2404-arm64-100.13.0/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
-These commands download and unpack MongoDB’s official monitoring tools (**mongotop** & **mongostat**), then add them to your PATH so you can run them from any terminal.
+These commands download and unpack MongoDB's official monitoring tools (**mongotop** & **mongostat**), then add them to your PATH so you can run them from any terminal.
 
 2. Verify the Installation
 
@@ -30,7 +30,7 @@ mongostat --version
 ```
 This checks that both tools were installed correctly and are ready to use.
 
-You should see an output similar to:
+You should see output similar to:
 ```output
 mongostat --version
 mongotop version: 100.13.0
@@ -52,11 +52,11 @@ Go version: go1.23.11
 ```console
 mongod --dbpath /var/lib/mongo --logpath /var/log/mongodb/mongod.log --fork
 ```
-These commands create a folder for MongoDB’s data, then start the database server in the background, allowing connections from any IP, and save logs for troubleshooting.
+These commands create a folder for MongoDB's data, then start the database server in the background, allowing connections from any IP, and save logs for troubleshooting.
 
 4. Create a Long-Running Load Script for Benchmarking
 
-Save this script file as **long_system_load.js**:
+Use a file editor of your choice and create a file named `long_system_load.js` with the content below:
 
 ```javascript
 function randomString(len) {
@@ -109,7 +109,7 @@ for (let cycle = 0; cycle < totalCycles; cycle++) {
 print("=== Long load generation completed ===");
 ```
 
-This is the load generator script, it creates several collections and repeatedly **inserts, queries, updates** and **deletes** data. Running it simulates real application traffic so the monitors have something to measure.
+This is the load generator script, it creates several collections and repeatedly inserts, queries, updates and deletes data. Running it simulates real application traffic so the monitors have something to measure.
 
 {{% notice Note %}}
 Before proceeding, the load script and the monitoring tools must be run in separate terminals simultaneously.
@@ -117,7 +117,7 @@ Before proceeding, the load script and the monitoring tools must be run in separ
 - The load script continuously generates activity in MongoDB, keeping the database busy with multiple operations.
 - The mongotop and mongostat tools monitor and report this activity in real time as it happens.
 
-If all commands are run in the same terminal, the monitoring tools will only start after the script finishes, preventing real-time observation of MongoDB’s performance.
+If all commands are run in the same terminal, the monitoring tools will only start after the script finishes, preventing real-time observation of MongoDB's performance.
 {{% /notice %}}
 
 ### Run the load script (start the workload) — Terminal 1
@@ -128,7 +128,7 @@ mongosh < long_system_load.js
 
 This command tells the MongoDB shell to execute the entire script. The script will run through its cycles and print the progress while generating the read/write activity on the server.
 
-You should see an output similar to:
+You should see output similar to:
 ```output
 test> // long_system_load.js
 
@@ -255,7 +255,7 @@ test> print("=== Long load generation completed ===");
 
 ```
 
-The load has been generated successfully. Now, you can proceed with the monitoring:
+The load has been generated successfully. Now, you can proceed to the next section where you will monitor this running workload with:
 
 - **mongotop** to observe activity per collection.
 - **mongostat** to monitor overall operations per second, memory usage, and network activity.

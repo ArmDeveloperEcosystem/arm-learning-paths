@@ -36,7 +36,7 @@ echo 'export PATH=/usr/local/mongodb/bin:$PATH' | sudo tee /etc/profile.d/mongod
 source /etc/profile.d/mongodb.sh
 ```
 
-4. Create a data and log directories
+4. Create data and log directories to use with MongoDB:
 
 Set up the database data directory:
 ```console
@@ -47,7 +47,7 @@ sudo chown -R $USER:$USER /var/lib/mongo /var/log/mongodb
 
 5. Start MongoDB Server 
 
-Start MongoDB manually:
+You can start MongoDB manually as shown:
 ```console
 mongod --dbpath /var/lib/mongo --logpath /var/log/mongodb/mongod.log --fork
 ```
@@ -77,12 +77,12 @@ source /etc/profile.d/mongosh.sh
 
 ### Verify MongoDB and mongosh Installation
 
-Check if MongoDB and mongosh is properly installed:
+Check if MongoDB and mongosh are properly installed on your machine:
 ```console
 mongod --version
 mongosh --version
 ```
-You should see an output similar to: 
+You should see output similar to: 
 ```output
 db version v8.0.12
 Build Info: {
@@ -102,11 +102,11 @@ Build Info: {
 
 ### Connect to MongoDB via mongosh
 
-Start interacting with MongoDB through its shell interface:
+You can now start interacting with MongoDB through its shell interface:
 ```console
 mongosh mongodb://127.0.0.1:27017
 ```
-You should see an output similar to: 
+You should see output on your terminal similar to: 
 ```output
 Current Mongosh Log ID: 68b573411523231d81a00aa0
 Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.8
@@ -130,4 +130,4 @@ For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
 test>
 ```
 
-MongoDB installation is complete. You can now proceed with the baseline testing.
+With this you have verified that the MongoDB installation is complete. You can now proceed with the baseline testing of MongoDB on your Azure Cobalt 100 based VM.
