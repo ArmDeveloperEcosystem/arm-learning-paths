@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 This page installs Kedify on your cluster using Helm. You’ll add the Kedify chart repo, install KEDA (Kedify build), the HTTP Scaler, and the Kedify Agent, then verify everything is running.
 
-For more details and all installation methods, see Kedify installation docs: https://docs.kedify.io/installation
+For more details and all installation methods, see Kedify installation docs: https://docs.kedify.io/installation/helm#installation-on-arm
 
 ## Prerequisites
 
@@ -40,6 +40,10 @@ helm repo update
 
 ## Helm installation
 
+Most providers like AWS EKS and Azure AKS automatically place pods on ARM nodes when you specify `nodeSelector` for `kubernetes.io/arch=arm64`. However, Google Kubernetes Engine (GKE) applies an explicit taint on ARM nodes, requiring matching `tolerations`.
+
+To ensure a portable deployment strategy across all cloud providers, we recommend configuring both `nodeSelector` and `tolerations` in your Helm values or CLI flags.
+
 Install each component into the keda namespace. Replace placeholders where noted.
 
 1) Install Kedify build of KEDA:
@@ -47,7 +51,12 @@ Install each component into the keda namespace. Replace placeholders where noted
 ```bash
 helm upgrade --install keda kedifykeda/keda \
   --namespace keda \
-  --create-namespace
+  --create-namespace \
+  --set "nodeSelector.kubernetes.io/arch=arm64" \
+  --set "tolerations[0].key=kubernetes.io/arch" \
+  --set "tolerations[0].operator=Equal" \
+  --set "tolerations[0].value=arm64" \
+  --set "tolerations[0].effect=NoSchedule"
 ```
 
 2) Install Kedify HTTP Scaler:
@@ -55,6 +64,16 @@ helm upgrade --install keda kedifykeda/keda \
 ```bash
 helm upgrade --install keda-add-ons-http kedifykeda/keda-add-ons-http \
   --namespace keda
+  --set "interceptor.nodeSelector.kubernetes.io/arch=arm64" \
+  --set "interceptor.tolerations[0].key=kubernetes.io/arch" \
+  --set "interceptor.tolerations[0].operator=Equal" \
+  --set "interceptor.tolerations[0].value=arm64" \
+  --set "interceptor.tolerations[0].effect=NoSchedule" \
+  --set "scaler.nodeSelector.kubernetes.io/arch=arm64" \
+  --set "scaler.tolerations[0].key=kubernetes.io/arch" \
+  --set "scaler.tolerations[0].operator=Equal" \
+  --set "scaler.tolerations[0].value=arm64" \
+  --set "scaler.tolerations[0].effect=NoSchedule"
 ```
 
 3) Install Kedify Agent (edit clusterName, orgId, apiKey):
@@ -62,7 +81,18 @@ helm upgrade --install keda-add-ons-http kedifykeda/keda-add-ons-http \
 ```bash
 helm upgrade --install kedify-agent kedifykeda/kedify-agent \
   --namespace keda \
-  --set clusterName="my-cluster" \
+  --set "agent.nodeSelector.kubernetes.io/arch=arm64" \
+  --set "agent.tolerations[0].key=kubernetes.io/arch" \
+  --set "agent.tolerations[0].operator=Equal" \
+  --set "agent.tolerations[0].value=arm64" \
+  --set "agent.tolerations[0].effect=NoSchedule" \
+  --set "agent.kedifyProxy.globalValues.nodeSelector.kubernetes.io/arch=arm64" \
+  --set "agent.kedifyProxy.globalValues.tolerations[0].key=kubernetes.io/arch" \
+  --set "agent.kedifyProxy.globalValues.tolerations[0].operator=Equal" \
+  --set "agent.kedifyProxy.globalValues.tolerations[0].value=arm64" \
+  --set "agent.kedifyProxy.globalValues.tolerations[0].effect=NoSchedule" \
+  \
+  --set clusterName="my-arm-cluster" \
   --set agent.orgId="$YOUR_ORG_ID" \
   --set agent.apiKey="$YOUR_API_KEY"
 ```
