@@ -1,5 +1,5 @@
 ---
-title: How to deploy Envoy on Google Axion C4A Arm virtual machines
+title: Deploy Envoy on Google Axion C4A Arm virtual machines
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -7,10 +7,10 @@ layout: learningpathall
 ---
 
 
-## How to deploy Envoy on a Google Axion C4A Arm virtual machine
-In this section you will learn how to install Envoy Proxy v1.30.0 on a Google Cloud Axion C4A virtual machine running RHEL 9. You will install the dependencies, download the official static Arm64 Envoy binary and check the installed version. 
+## Install Envoy Proxy v1.30.0 on a Google Axion C4A Arm VM
+In this section you'll install Envoy Proxy v1.30.0 on a Google Cloud Axion C4A virtual machine running RHEL 9. You'll install the dependencies, download the official static Arm64 Envoy binary, and verify the installation. 
 
-1. Install Dependencies
+## Install Dependencies
 
 ```console
 sudo dnf install -y \
@@ -25,10 +25,9 @@ sudo dnf install -y \
 pip3 install virtualenv
 ```
 
-2. Install Envoy (Static Arm64 Binary)
+## Install Envoy (static Arm64 binary)
 
-You will now download and install the Envoy binary on your Arm-based instance.
-Download the binary directly to **/usr/local/bin/envoy**. The `-L` flag is crucial as it follows any redirects from the download URL.
+Download the Envoy binary. `-L` follows redirects:
 
 ```console
 sudo curl -L \
@@ -40,17 +39,16 @@ Change the permissions on the downloaded binary to make it an executable:
 ```console
 sudo chmod +x /usr/local/bin/envoy
 ```
-Verify the installation by checking its version.
+Verify the installation by checking its version:
 
 ```console
 envoy --version
 ```
 This confirms the binary is correctly placed and executable.
 
-The output should look like:
+Expected output:
 
 ```output
 envoy  version: 50ea83e602d5da162df89fd5798301e22f5540cf/1.30.0/Clean/RELEASE/BoringSSL
 ```
-This confirms the installation of Envoy.
-You can now proceed with the baseline testing in the next section.
+Envoy is now installed. Continue to baseline testing in the next section.
