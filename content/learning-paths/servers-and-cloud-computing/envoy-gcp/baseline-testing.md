@@ -26,9 +26,6 @@ The test confirms the following:
 
 Using a text editor, create a file named `envoy_config.yaml` and add the following content as shown below. 
 
-This configures Envoy to listen on port **10000** and forward all traffic to `http://httpbin.org`. The `host_rewrite_literal` is required to prevent `404 Not Found` from the upstream server.
-
-
 ```yaml
 static_resources:
   listeners:
@@ -75,6 +72,11 @@ static_resources:
                 address: httpbin.org
                 port_value: 80
 ```
+
+## Explanatory notes on the configuration
+
+This configures Envoy to listen on port **10000** and forward all traffic to `http://httpbin.org`. The `host_rewrite_literal` is required to prevent `404 Not Found` from the upstream server.
+
 - **Listeners:** Envoy accepts incoming HTTP requests on port **10000** of your VM.
 - **HTTP Connection Manager:** Processes incoming requests, and applies routing.
 - **Routing:** All traffic is routed to the `service_httpbin` cluster, with the `Host` header rewritten to  `httpbin.org`.

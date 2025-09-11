@@ -27,7 +27,7 @@ pip3 install virtualenv
 
 ## Install Envoy (static Arm64 binary)
 
-Download the Envoy binary; `-L` follows redirects:
+Download the Envoy binary. `-L` follows redirects:
 
 ```console
 sudo curl -L \

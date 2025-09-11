@@ -8,20 +8,20 @@ layout: learningpathall
 
 ## How to run Envoy benchmarks with Siege on Arm64 in GCP
 
-**Siege** is a lightweight HTTP load testing and benchmarking tool that simulates concurrent users making requests to a target service. It is useful for Envoy benchmarking because it measures availability, throughput, response time, and failure rates under load, thus helping evaluate Envoy’s performance as a proxy under real-world traffic conditions.
+Siege is a lightweight HTTP load testing and benchmarking tool that simulates concurrent users making requests to a target service. It is useful for Envoy benchmarking because it measures availability, throughput, response time, and failure rates under load, thus helping evaluate Envoy’s performance as a proxy under real-world traffic conditions.
 
 Follow the steps outlined to run Envoy benchmarks using Siege.
 
 ## Install Siege (build from source)
 
 
-1. Install required build tools
+Install required build tools:
 
 ```console
 sudo dnf groupinstall -y "Development Tools"
 sudo dnf install -y wget make gcc
 ```
-2. Download, extract and build Siege source
+Download, extract and build Siege source:
 
 ```console
 wget http://download.joedog.org/siege/siege-4.1.6.tar.gz
@@ -33,13 +33,12 @@ sudo make install
 ```
 You have now successfully built and installed Siege on your Arm-based machine.
 
-
-3. Verify installation
+Verify installation:
 
 ```console
 siege --version
 ```
-This checks if Siege is installed properly and shows the version number.
+This checks if Siege is installed properly and shows the version number:
 ```output
 SIEGE 4.1.6
 
@@ -51,7 +50,7 @@ FOR A PARTICULAR PURPOSE.
 ## Envoy benchmarking
 
 
-1. To start, make sure Envoy is up and running with your config file (listening on port 10000):
+To start, make sure Envoy is up and running with your config file (listening on port 10000):
 
 
 ```console
@@ -59,7 +58,7 @@ envoy -c envoy_config.yaml --base-id 1
 ```
 This runs the Envoy proxy with your configuration file (envoy_config.yaml) so it can start listening for requests.
 
-2. On another terminal, verify that Envoy is running as expected with curl:
+On another terminal, verify that Envoy is running as expected with curl:
 
 
 ```
@@ -150,7 +149,7 @@ Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm6
 ### Envoy performance benchmarking comparison on Arm64 and x86_64
 When you compare the benchmarking performance results between the two instance types with the same vCPUs, you will notice that on the Google Axion C4A Arm-based instances:
 
-- You have more successful transactions, fewer failures.
-- Lower response times, higher transaction rate, better throughput.
+- You have more successful transactions, fewer failures
+- Lower response times, higher transaction rate, better throughput
 
-You have successfully learned how to use Siege to benchmark Envoy on your Arm-based Axion Google cloud instance, validating both performance and reliability against similar x86 instances.
+You have successfully learned how to use Siege to benchmark Envoy on your Arm-based Axion Google cloud instance, validating both performance and reliability against similar x86_64 instances.
