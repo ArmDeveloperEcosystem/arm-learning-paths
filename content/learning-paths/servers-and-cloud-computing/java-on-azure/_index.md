@@ -1,6 +1,10 @@
 ---
 title: Deploy Java applications on the Microsoft Azure Cobalt 100 processors 
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30   
 
 who_is_this_for: This Learning Path introduces Java deployment on Microsoft Azure Cobalt 100 (Arm-based) virtual machines. It is designed for developers migrating Java applications from x86_64 to Arm with minimal or no changes.
