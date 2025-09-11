@@ -57,7 +57,7 @@ export INGRESS_IP=$(kubectl get service ingress-nginx-controller --namespace=ing
 echo "Ingress IP/Hostname: $INGRESS_IP"
 ```
 
-This will save the external IP or hostname in the `INGRESS_IP` environment variable and display it. Note the value:
+This will save the external IP or hostname in the `INGRESS_IP` environment variable and display it. If the command doesn't print any value, please repeat it after some time. Please note the value:
 - **AWS EKS**: You'll see an AWS LoadBalancer hostname (e.g., `a1234567890abcdef-123456789.us-west-2.elb.amazonaws.com`)
 - **Google GKE**: You'll see an IP address (e.g., `34.102.136.180`)
 - **Azure AKS**: You'll see an IP address (e.g., `20.62.196.123`)

@@ -34,7 +34,7 @@ If you followed the [Install Ingress Controller](../install-ingress/) guide, you
 export INGRESS_IP=$(kubectl get service ingress-nginx-controller --namespace=ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}{.status.loadBalancer.ingress[0].hostname}')
 echo "Ingress IP/Hostname: $INGRESS_IP"
 ```
-You should now have the correct IP address or hostname stored in the `$INGRESS_IP` environment variable.
+You should now have the correct IP address or hostname stored in the `$INGRESS_IP` environment variable. If the command doesn't print any value, please repeat it after some time.
 
 {{% notice Note %}}
 If your ingress controller service has a different name or namespace, adjust the command accordingly. For example, some installations use `nginx-ingress-controller` or place it in a different namespace.
@@ -121,6 +121,19 @@ Notes:
 - `RESPONSE_DELAY` adds ~300ms latency per request, making scaling effects easier to see.
 - The Ingress uses host `application.keda`. To access this app we will use your ingress controller’s IP with a `Host:` header (shown below).
 
+#### Verify the application is running correctly
+
+Let's check that we have 1 replica of the application deployed and ready:
+
+```bash
+kubectl get deployment application
+```
+
+In the output we should see 1 replica ready:
+```
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+application   1/1     1            1           3m44s
+```
 
 #### Test the application
 Hit the app to confirm the app is ready and routing works:
@@ -173,7 +186,7 @@ spec:
         service: application-service
         port: "8080"
         scalingMetric: requestRate
-        targetValue: "1000"
+        targetValue: "10"
         granularity: 1s
         window: 10s
         trafficAutowire: ingress
@@ -201,13 +214,15 @@ Becuase we are not sending any traffic to our application, after some time, it s
 Run this command and wait until there is 0 replicas:
 
 ```bash
-kubectl get deployment application -n default --watch
+watch kubectl get deployment application -n default
 ```
 
 You should see similar output:
 ```bash
+Every 2,0s: kubectl get deployment application -n default
+
 NAME          READY   UP-TO-DATE   AVAILABLE   AGE
-application   0/0     0            0           6m10s
+application   0/0     0            0           110s
 ```
 
 #### Verify the app can scale from zero
@@ -228,7 +243,7 @@ hey -n 10000 -c 150 -host "application.keda" http://$INGRESS_IP
 While the load runs, watch replicas change:
 
 ```bash
-kubectl get deploy application -w
+watch kubectl get deployment application -n default
 ```
 
 Expected behavior:

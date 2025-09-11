@@ -52,7 +52,8 @@ Install each component into the keda namespace. Replace placeholders where noted
 helm upgrade --install keda kedifykeda/keda \
   --namespace keda \
   --create-namespace \
-  --set "nodeSelector.kubernetes.io/arch=arm64" \
+  --devel \
+  --set "nodeSelector.kubernetes\.io/arch=arm64" \
   --set "tolerations[0].key=kubernetes.io/arch" \
   --set "tolerations[0].operator=Equal" \
   --set "tolerations[0].value=arm64" \
@@ -63,13 +64,14 @@ helm upgrade --install keda kedifykeda/keda \
 
 ```bash
 helm upgrade --install keda-add-ons-http kedifykeda/keda-add-ons-http \
-  --namespace keda
-  --set "interceptor.nodeSelector.kubernetes.io/arch=arm64" \
+  --namespace keda \
+  --devel \
+  --set "interceptor.nodeSelector.kubernetes\.io/arch=arm64" \
   --set "interceptor.tolerations[0].key=kubernetes.io/arch" \
   --set "interceptor.tolerations[0].operator=Equal" \
   --set "interceptor.tolerations[0].value=arm64" \
   --set "interceptor.tolerations[0].effect=NoSchedule" \
-  --set "scaler.nodeSelector.kubernetes.io/arch=arm64" \
+  --set "scaler.nodeSelector.kubernetes\.io/arch=arm64" \
   --set "scaler.tolerations[0].key=kubernetes.io/arch" \
   --set "scaler.tolerations[0].operator=Equal" \
   --set "scaler.tolerations[0].value=arm64" \
@@ -81,12 +83,12 @@ helm upgrade --install keda-add-ons-http kedifykeda/keda-add-ons-http \
 ```bash
 helm upgrade --install kedify-agent kedifykeda/kedify-agent \
   --namespace keda \
-  --set "agent.nodeSelector.kubernetes.io/arch=arm64" \
+  --set "agent.nodeSelector.kubernetes\.io/arch=arm64" \
   --set "agent.tolerations[0].key=kubernetes.io/arch" \
   --set "agent.tolerations[0].operator=Equal" \
   --set "agent.tolerations[0].value=arm64" \
   --set "agent.tolerations[0].effect=NoSchedule" \
-  --set "agent.kedifyProxy.globalValues.nodeSelector.kubernetes.io/arch=arm64" \
+  --set "agent.kedifyProxy.globalValues.nodeSelector.kubernetes\.io/arch=arm64" \
   --set "agent.kedifyProxy.globalValues.tolerations[0].key=kubernetes.io/arch" \
   --set "agent.kedifyProxy.globalValues.tolerations[0].operator=Equal" \
   --set "agent.kedifyProxy.globalValues.tolerations[0].value=arm64" \
