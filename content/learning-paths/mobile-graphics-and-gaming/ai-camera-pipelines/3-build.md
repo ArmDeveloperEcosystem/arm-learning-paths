@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Download the AI Camera Pipelines Project
+## Download the AI camera pipelines project
 
 Clone the project repository:
 
@@ -33,7 +33,7 @@ docker build -t ai-camera-pipelines -f docker/Dockerfile \
   docker/
 ```
 
-## Build the AI Camera Pipelines
+## Build the AI camera pipelines
 
 Start a shell in the container you just built:
 
@@ -46,7 +46,6 @@ Inside the container, run the following commands:
 ```bash
 ENABLE_SME2=0
 TENSORFLOW_GIT_TAG="v2.19.0"
-
 # Build flatbuffers
 git clone https://github.com/google/flatbuffers.git
 cd flatbuffers
@@ -72,7 +71,7 @@ tar cfz example/install.tar.gz install
 
 Leave the container by pressing `Ctrl+D`.
 
-## Notes on the cmake configuration options
+## Notes on the CMake configuration options
 
 The `cmake` command line options relevant to this learning path are:
 

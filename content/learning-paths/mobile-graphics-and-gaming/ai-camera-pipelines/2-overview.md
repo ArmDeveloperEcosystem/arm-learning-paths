@@ -1,83 +1,75 @@
 ---
-
 title: Overview
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
-
 ---
 
 ## KleidiAI
 
-[KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) is an open-source library that provides optimized, performance-critical routines - also known as micro-kernels - for artificial intelligence (AI) workloads on Arm CPUs.
+[KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) is an open-source library of optimized, performance-critical routines (micro-kernels) for AI workloads on Arm CPUs. These routines are tuned for specific Arm microarchitectures to maximize performance and are designed for straightforward integration into C/C++ ML and AI frameworks.
 
-These routines are tuned to take full advantage of specific Arm hardware architectures to maximize performance. The [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) library is designed for easy integration into C or C++ machine learning (ML) and AI frameworks.
-
-Several popular AI frameworks already take advantage of [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) to improve performance on Arm platforms.
+Several popular AI frameworks already take advantage of KleidiAI to improve performance on Arm platforms.
 
 ## KleidiCV
 
-[KleidiCV](https://gitlab.arm.com/kleidi/kleidicv) is an open-source library that provides high-performance image processing functions for AArch64.
-
-It is designed to be lightweight and simple to integrate into a wide variety of projects. Some computer vision frameworks, such as OpenCV, leverage [KleidiCV](https://gitlab.arm.com/kleidi/kleidicv) to accelerate image processing on Arm devices.
+[KleidiCV](https://gitlab.arm.com/kleidi/kleidicv) is an open-source library that provides high-performance image-processing functions for AArch64. It is lightweight and simple to integrate, and computer-vision frameworks such as OpenCV can leverage KleidiCV to accelerate image processing on Arm devices.
 
 ## AI camera pipelines
 
 This Learning Path provides three example applications that combine AI and computer vision (CV) techniques:
-- Background Blur,
-- Low-Light Enhancement,
-- Neural Denoising.
 
-## Background Blur and Low Light Enhancement
+- Background blur
+- Low-light enhancement
+- Neural denoising
+
+## Background blur and low-light enhancement
 
 Both applications:
-- Use input and output images that are stored in `png` format, with three RGB channels (Red, Green, and Blue). Each channel supports 256 intensity levels (0-255) commonly referred to as `RGB8`.
-- Convert the images to the `YUV420` color space for processing.
-- Apply the relevant effect (background blur or low-light enhancement).
-- Convert the processed images back to `RGB8` and save them as `.png` files.
 
-### Background Blur
+- Use input and output images in **PNG** format with three **RGB** channels (8-bit per channel, often written as **RGB8**)
+- Convert images to **YUV 4:2:0** for processing
+- Apply the relevant effect (background blur or low-light enhancement)
+- Convert the processed images back to **RGB8** and save as **.png**
 
-The background blur pipeline is implemented as follows:
+### Background blur
 
-![example image alt-text#center](blur_pipeline.png "Background Blur Pipeline Diagram")
+The background-blur pipeline is implemented as follows:
 
-### Low Light Enhancement
+![Background blur pipeline diagram showing RGB8 input, conversion to YUV 4:2:0, blur applied to background mask, and reconversion to RGB8 alt-text#center](blur_pipeline.png "Background blur pipeline")
 
-The low-light enhancement pipeline is adapted from the LiveHDR+ method originally proposed by Google Research in 2017:
+### Low-light enhancement
 
-![example image alt-text#center](lle_pipeline.png "Low-Light Enhancement Pipeline Diagram")
+The low-light enhancement pipeline is adapted from the LiveHDR+ method proposed by Google Research (2017):
 
-The Low-Resolution Coefficient Prediction Network (implemented with LiteRT) performs computations such as:
-- Strided convolutions.
-- Local feature extraction using convolutional layers.
-- Global feature extraction using convolutional and fully connected layers.
-- Add, convolve, and reshape operations.
+![Low-light enhancement pipeline diagram with burst capture, alignment/merge, coefficient prediction network (LiteRT), tone mapping, and RGB output alt-text#center](lle_pipeline.png "Low-light enhancement pipeline")
 
-## Neural Denoising
+The low-resolution coefficient-prediction network (implemented with LiteRT) performs operations such as:
+
+- Strided convolutions
+- Local feature extraction using convolutional layers
+- Global feature extraction using convolutional and fully connected layers
+- Add, convolve, and reshape ops
+
+## Neural denoising
 
 Every smartphone photographer has seen it: images that look sharp in daylight
-but fall apart in dim lighting. This is because _signal-to-noise ratio (SNR)_
+but fall apart in dim lighting. This is because **signal-to-noise ratio (SNR)**
 drops dramatically when sensors capture fewer photons. At 1000 lux, the signal
 dominates and images look clean; at 1 lux, readout noise becomes visible as
 grain, color speckles, and loss of fine detail.
 
-That’s why _neural camera denoising_ is one of the most critical --- and
-computationally demanding --- steps in a camera pipeline. Done well, it
-transforms noisy frames into sharp, vibrant captures. Done poorly, it leaves
-smudges and artifacts that ruin the shot.
+That’s why **neural camera denoising** is a critical, and computationally demanding, stage in modern camera pipelines. Done well, it turns noisy frames into sharp, vibrant captures; done poorly, it leaves smudges and artifacts.
 
-As depicted in the diagram below, the Neural Denoising pipeline uses two algorithms to process the frames:
-- either temporally, with an algorithm named `ultralite` in the code
-repository,
-- or spatially, with an algorithm named `collapsenet` in the code repository,
-- or both.
+As shown below, the neural-denoising pipeline uses two algorithms:
 
-Temporal denoising uses some frames as history.
+- **Temporal** denoising, `ultralite` in the repository (uses a history of previous frames)
+- **Spatial** denoising, `collapsenet` in the repository
+- Or a combination of both
 
-![example image alt-text#center](denoising_pipeline.png "Neural Denoising Pipeline Diagram")
+![Neural denoising pipeline diagram showing temporal path (with frame history) and spatial path, followed by fusion and output alt-text#center](denoising_pipeline.png "Neural denoising pipeline")
 
 The Neural Denoising application works on frames, as emitted by a camera sensor in Bayer format:
-- the input frames are in RGGB 1080x1920x4 format,
-- the output frames in YGGV 4x1080x1920 format.
+- The input frames are in RGGB 1080x1920x4 format
+- The output frames in YGGV 4x1080x1920 format

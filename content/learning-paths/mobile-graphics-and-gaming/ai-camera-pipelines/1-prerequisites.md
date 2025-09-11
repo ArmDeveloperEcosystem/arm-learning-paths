@@ -15,8 +15,8 @@ This Learning Path demonstrates how to improve the performance of camera pipelin
 Make sure the following tools are installed:
 - **Git** – version control, for cloning the AI camera pipelines codebase
 - **Git LFS** – extension to Git for managing large files using lightweight pointers
-- **Docker** – an open-source container platform for running the applications in isolated environments
-- **OpenMP runtime (`libomp`)** – LLVM’s OpenMP runtime library, required for nabling parallel execution during application performance optimization
+- **Docker** – an open-source container platform for running applications in isolated environments
+- **OpenMP runtime (`libomp`)** – LLVM’s OpenMP runtime library, required for enabling parallel execution during application performance optimization
 
 ### Git and Git LFS
 
