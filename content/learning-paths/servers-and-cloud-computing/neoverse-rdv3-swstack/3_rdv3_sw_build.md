@@ -28,7 +28,7 @@ git config --global user.email "<your-email@example.com>"
 
 ## Step 2: Fetch the source code
 
-The RD‑V3 platform firmware stack consists of multiple components, most maintained in separate Git respositories, such as:
+The RD‑V3 platform firmware stack consists of multiple components, most maintained in separate Git repositories, such as:
 
 - TF‑A
 - SCP/MCP
