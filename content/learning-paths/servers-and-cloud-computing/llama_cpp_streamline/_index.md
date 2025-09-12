@@ -7,7 +7,7 @@ cascade:
     
 minutes_to_complete: 50
 
-who_is_this_for: Engineers who want to learn LLM inference on CPU or proflie and optimize llama.cpp code.
+who_is_this_for: Engineers who want to learn LLM inference on CPU or profile and optimize llama.cpp code.
 
 learning_objectives: 
     - Be able to use Streamline to profile llama.cpp code
