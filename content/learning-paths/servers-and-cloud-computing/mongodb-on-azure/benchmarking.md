@@ -9,7 +9,7 @@ layout: learningpathall
 ## Benchmark MongoDB with **mongotop** and **mongostat**
 
 In this section, you will measure MongoDB's performance in real time.
-You will install the official MongoDB database tools, start MongoDB and run a script to simulate heavy load. With the script running you will then meassure the database's live performance using **mongotop** and **mongostat**.
+You will install the official MongoDB database tools, start MongoDB and run a script to simulate heavy load. With the script running you will then measure the database's live performance using **mongotop** and **mongostat**.
 
 1. Install MongoDB Database Tools
 
