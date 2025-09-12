@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-First you should run the following command to identify all IRQs on the system. Identify the NIC IRQs and adjust the system by experirmenting and seeing how performance improves.
+First you should run the following command to identify all IRQs on the system. Identify the NIC IRQs and adjust the system by experimenting and seeing how performance improves.
 
 ```
 grep '' /proc/irq/*/smp_affinity_list | while IFS=: read path cpus; do
