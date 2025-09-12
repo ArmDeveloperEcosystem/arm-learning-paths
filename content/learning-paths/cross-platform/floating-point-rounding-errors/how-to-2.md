@@ -1,20 +1,28 @@
 ---
-title: Differences between x86 and Arm
+title: Overflow in floating-point to integer conversion
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What are the differences in behavior between x86 and Arm floating point?
+## Are there differences in behavior between x86 and Arm floating point?
 
-Although both x86 and Arm generally follow the IEEE 754 standard for floating-point representation, their behavior in edge cases — like overflow and truncation — can differ due to implementation details and instruction sets.
+Both the x86 and Arm architectures fully comply with the IEEE 754 standard for floating-point representation. For all well-defined operations, both architectures produce identical results. Differences only occur in cases where the IEEE 754 standard explicitly leaves behavior undefined, such as converting out-of-range floating-point values to integers. These are special undefined cases where the standard permits implementations to behave differently and is not a flaw or limitation of either architecture.
 
-You can see this by comparing an example application on both an x86 and an Arm Linux system. 
+Understanding these undefined corner cases will help you correct any non-portable code.
 
-Run this example on any Linux system with x86 and Arm architecture; on AWS, use EC2 instance types `t3.micro` and `t4g.small` with Ubuntu 24.04.
+### Undefined behavior in floating-point to integer conversion
 
-To learn about floating-point differences, use an editor to copy and paste the C++ code below into a new file named `converting-float.cpp`:
+The following example demonstrates undefined behavior that occurs when converting out-of-range floating-point values to integers. An out-of-range floating-point value is too large or too small to be represented within the limits of the floating-point format used, such as float or double. 
+
+This behavior is explicitly undefined by the IEEE 754 standard and the C++ specification, meaning different architectures are permitted to handle these cases differently. 
+
+The differences shown below only occur in undefined behavior cases. Normal floating-point operations produce identical results on both architectures.
+
+An example of undefined behavior in floating-point code is provided below. You can run the example application on both an x86 and an Arm Linux system. If you are using AWS, use EC2 instance types `t3.micro` and `t4g.small` with Ubuntu 24.04.
+
+To learn about floating-point conversions, use an editor to copy and paste the C++ code below into a new file named `conversions.cpp`.
 
 ```cpp
 #include <iostream>
@@ -60,65 +68,65 @@ int main() {
 }
 ```
 
-If you need to install the `g++` compiler, run the commands below:
+If you need to install the `g++` and `clang` compilers, run the commands below:
 
 ```bash
 sudo apt update
-sudo apt install g++  -y
+sudo apt install g++ clang -y
 ```
 
-Compile `converting-float.cpp` on an Arm and x86 machine. 
+Compile `conversions.cpp` on an Arm and an x86 Linux machine. 
 
 The compile command is the same on both systems.
 
 ```bash
-g++ converting-float.cpp -o converting-float 
+g++ conversions.cpp -o converting-float 
+```
+
+Run the program on both systems:
+
+```bash
+./converting-float
 ```
 
 For easy comparison, the image below shows the x86 output (left) and Arm output (right). The  highlighted lines show the difference in output: 
 
 ![differences](./differences.png)
 
-As you can see, there are several cases where different behavior is observed. For example when trying to convert a signed number to an unsigned number or dealing with out-of-bounds numbers. 
+As you can see, there are several cases where different behavior is observed in these undefined scenarios. For example, when trying to convert a signed number to an unsigned number or dealing with out-of-bounds values. 
 
-## Removing hardcoded values with macros
+## Avoid out-of-range conversions
 
-The above differences show that explicitly checking for specific values will lead to unportable code. 
+The above differences demonstrate non-portable code. Undefined behavior, such as converting out-of-range floating-point values to integers, can lead to inconsistent results across platforms. To ensure portability and predictable behavior, it is essential to check for out-of-range values before performing such conversions.
 
-For example, the function below checks if the casted result is `0`. This can be misleading — on x86, casting an out-of-range floating-point value to `uint32_t` may wrap to `0`, while on Arm it may behave differently. Relying on these results makes the code unportable.
-
-  
+You can check for out-of-range values using the code below. This approach ensures that the conversion is only performed when the value is within the valid range for the target data type. If the value is out of range, a default value is used to handle the situation gracefully. This prevents unexpected results and makes the code portable.
 
 ```cpp
-void checkFloatToUint32(float num) {
-    uint32_t castedNum = static_cast<uint32_t>(num);
-    if (castedNum == 0) {
-        std::cout << "The casted number is 0, indicating that the float is out of bounds for uint32_t." << std::endl;
+constexpr float UINT32_MAX_F = static_cast<float>(UINT32_MAX);
+
+void convertFloatToInt(float value) {
+    // Convert to unsigned 32-bit integer with range checking
+    uint32_t u32;
+    if (!std::isnan(value) && value >= 0.0f && value <= UINT32_MAX_F) {
+        u32 = static_cast<uint32_t>(value);
+        std::cout << "The casted number is: " << u32 << std::endl;
     } else {
-        std::cout << "The casted number is: " << castedNum << std::endl;
+        u32 = 0; // Default value for out-of-range
+        std::cout << "The float is out of bounds for uint32_t, using 0." << std::endl;
     }
+
+    // ...existing code...
 }
 ```
 
-This can simply be corrected by using the macro, `UINT32_MAX`. 
+This checking provides a portable solution that identifies out-of-range values before casting and sets the out-of-range values to 0. By incorporating such checks, you can avoid undefined behavior and ensure that your code behaves consistently across different platforms.
 
-{{% notice Note %}} 
-To find out all the available compiler-defined macros, you can output them using:
-```bash
-echo "" | g++ -dM -E -
-```
-{{% /notice %}}
+### Key takeaways
 
-A portable version of the code is:
+- Arm and x86 produce identical results for all well-defined floating-point operations, both architectures comply with IEEE 754.
+- Differences only occur in special undefined cases where the IEEE 754 standard explicitly permits different behaviors.
+- An example undefined scenario is converting out-of-range floating-point values to integers.
+- You should avoid relying on undefined behavior to ensure portability.
 
-```cpp
-void checkFloatToUint32(float num) {
-    uint32_t castedNum = static_cast<uint32_t>(num);
-    if (castedNum == UINT32_MAX) {
-        std::cout << "The casted number is " << UINT32_MAX <<  " indicating the float was out of bounds for uint32_t." << std::endl;
-    } else {
-        std::cout << "The casted number is: " << castedNum << std::endl;
-    }
-}
-```
+By understanding these nuances, you can confidently write code that behaves consistently across platforms.
 

@@ -1,22 +1,24 @@
 ---
-title: Error propagation
+title: Single and double precision considerations
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What is error propagation in x86 and Arm systems?
+## Understanding numerical precision differences in single vs double precision
 
-One cause of different outputs between x86 and Arm stems from the order of instructions and how errors are propagated. As a hypothetical example, an Arm system may decide to reorder the instructions that each have a different rounding error so that subtle changes are observed. 
+This section explores how different levels of floating-point precision can affect numerical results. The differences shown here are not architecture-specific issues, but demonstrate the importance of choosing appropriate precision levels for numerical computations. 
 
-It is possible that two functions that are mathematically equivalent will propagate errors differently on a computer. 
+### Single precision limitations
 
- Functions `f1` and `f2` are mathematically equivalent. You would expect them to return the same value given the same input. 
+Consider two mathematically equivalent functions, `f1()` and `f2()`. While they should theoretically produce the same result, small differences can arise due to the limited precision of floating-point arithmetic. 
+
+The differences shown in this example are due to using single precision (float) arithmetic, not due to architectural differences between Arm and x86. Both architectures handle single precision arithmetic according to IEEE 754.
+
+Functions `f1()` and `f2()` are mathematically equivalent. You would expect them to return the same value given the same input. 
  
- If the input is a very small number, `1e-8`, the error is different due to the loss in precision caused by different operations. Specifically, `f2` avoids subtracting nearly equal numbers for clarity. For a full description look into the topic of [numerical stability](https://en.wikipedia.org/wiki/Numerical_stability). 
-
-Use an editor to copy and paste the C++ code below into a file named `error-propagation.cpp`: 
+Use an editor to copy and paste the C++ code below into a file named `single-precision.cpp` 
 
 ```cpp
 #include <stdio.h>
@@ -53,15 +55,14 @@ int main() {
 }
 ```
 
-Compile the code on both x86 and Arm with the following command:
+Compile and run the code on both x86 and Arm with the following command:
 
 ```bash
-g++ -g error-propagation.cpp -o error-propagation
+g++ -g single-precision.cpp -o single-precision
+./single-precision
 ```
 
-Running the two binaries shows that the second function, `f2`, has a small rounding error on both architectures. Additionally, there is a further rounding difference when run on x86 compared to Arm.
-
-Running on x86:
+Output running on x86:
 
 ```output
 f1(1.000000e-08) = 0.0000000000
@@ -70,10 +71,45 @@ Difference (f1 - f2) = -4.9999999696e-09
 Final result after magnification: -0.4999000132
 ```
 
-Running on Arm:
+Output running on Arm:
+
 ```output
 f1(1.000000e-08) = 0.0000000000
 f2(1.000000e-08) = 0.0000000050
 Difference (f1 - f2) = -4.9999999696e-09
 Final result after magnification: -0.4998999834
 ```
+
+Depending on your compiler and library versions, you may get the same output on both systems. You can also use the `clang` compiler and see if the output matches. 
+
+```bash
+clang -g single-precision.cpp -o single-precision -lm
+./single-precision
+```
+
+In some cases the GNU compiler output differs from the Clang output. 
+
+Here's what's happening:
+
+1. Different square root algorithms: x86 and Arm use different hardware and library implementations for `sqrtf(1 + 1e-8)`
+
+2. Tiny implementation differences get amplified. The difference between the two `sqrtf()` results is only about 3e-10, but this gets multiplied by 100,000,000, making it visible in the final result.
+
+3. Both `f1()` and `f2()` use `sqrtf()`. Even though `f2()` is more numerically stable, both functions call `sqrtf()` with the same input, so they both inherit the same architecture-specific square root result.
+
+4. Compiler and library versions may produce different output due to different implementations of library functions such as `sqrtf()`.
+
+The final result is that x86 and Arm libraries compute `sqrtf(1.00000001)` with tiny differences in the least significant bits. This is normal and expected behavior and IEEE 754 allows for implementation variations in transcendental functions like square root, as long as they stay within specified error bounds.
+
+The very small difference you see is within acceptable floating-point precision limits.
+
+### Key takeaways
+
+- The small differences shown are due to library implementations in single-precision mode, not fundamental architectural differences.
+- Single-precision arithmetic has inherent limitations that can cause small numerical differences.
+- Using numerically stable algorithms, like `f2()`, can minimize error propagation.
+- Understanding [numerical stability](https://en.wikipedia.org/wiki/Numerical_stability) is important for writing portable code.
+
+By adopting best practices and appropriate precision levels, developers can ensure consistent results across platforms. 
+
+Continue to the next section to see how precision impacts the results.
