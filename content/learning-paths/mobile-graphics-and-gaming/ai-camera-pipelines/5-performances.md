@@ -63,9 +63,9 @@ Total run time over 10 iterations: 37.6839 ms
 ```
 
 From these results, you can see that:
-- `cinematic_mode_benchmark` performed 20 iterations in 2028.745 ms.
-- `low_light_image_enhancement_benchmark` performed 20 iterations in 58.2126 ms.
-- `neural_denoiser_temporal_benchmark_4K` performed 20 iterations in 37.6839 ms.
+- `cinematic_mode_benchmark` performed 20 iterations in 2028.745 ms
+- `low_light_image_enhancement_benchmark` performed 20 iterations in 58.2126 ms
+- `neural_denoiser_temporal_benchmark_4K` performed 20 iterations in 37.6839 ms
 
 ## Benchmark results without KleidiCV and KleidiAI
 
@@ -112,7 +112,7 @@ The new output is similar to:
 Total run time over 20 iterations: 38.0813 ms
 ```
 
-### Comparison table and future performance uplift with SME2
+## Comparison table and future performance uplift with SME2
 
 | Benchmark                                 | Without KleidiCV+KleidiAI | With KleidiCV+KleidiAI |
 |-------------------------------------------|---------------------------|------------------------|

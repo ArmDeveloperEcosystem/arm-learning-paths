@@ -21,25 +21,25 @@ Several popular AI frameworks already take advantage of KleidiAI to improve perf
 This Learning Path provides three example applications that combine AI and computer vision (CV) techniques:
 
 - Background blur
-- Low-light enhancement
+- Low-light enhancement (LLE)
 - Neural denoising
 
 ## Background blur and low-light enhancement
 
-Both applications:
+The applications:
 
 - Use input and output images in **PNG** format with three **RGB** channels (8-bit per channel, often written as **RGB8**)
 - Convert images to **YUV 4:2:0** for processing
 - Apply the relevant effect (background blur or low-light enhancement)
 - Convert the processed images back to **RGB8** and save as **.png**
 
-### Background blur
+## Background blur
 
-The background-blur pipeline is implemented as follows:
+The background blur pipeline is implemented as follows:
 
 ![Background blur pipeline diagram showing RGB8 input, conversion to YUV 4:2:0, blur applied to background mask, and reconversion to RGB8 alt-text#center](blur_pipeline.png "Background blur pipeline")
 
-### Low-light enhancement
+## Low-light enhancement
 
 The low-light enhancement pipeline is adapted from the LiveHDR+ method proposed by Google Research (2017):
 
@@ -54,13 +54,9 @@ The low-resolution coefficient-prediction network (implemented with LiteRT) perf
 
 ## Neural denoising
 
-Every smartphone photographer has seen it: images that look sharp in daylight
-but fall apart in dim lighting. This is because **signal-to-noise ratio (SNR)**
-drops dramatically when sensors capture fewer photons. At 1000 lux, the signal
-dominates and images look clean; at 1 lux, readout noise becomes visible as
-grain, color speckles, and loss of fine detail.
+Every smartphone photographer has experienced it: images that look sharp in daylight but degrade in dim lighting. This is because **signal-to-noise ratio (SNR)** drops sharply when sensors capture fewer photons. At 1000 lux, the signal dominates and images look clean; at 1 lux, readout noise becomes visible as grain, color speckling, and loss of fine detail.
 
-That’s why **neural camera denoising** is a critical, and computationally demanding, stage in modern camera pipelines. Done well, it turns noisy frames into sharp, vibrant captures; done poorly, it leaves smudges and artifacts.
+That’s why **neural camera denoising** is a critical, computationally-demanding, stage in modern camera pipelines. Done well, it can transform noisy frames into sharp, vibrant captures; done poorly, it leaves smudges and artifacts.
 
 As shown below, the neural-denoising pipeline uses two algorithms:
 

@@ -1,5 +1,5 @@
 ---
-title: Accelerate Denoising, Background Blur, and Low-Light Camera Effects with KleidiAI and KleidiCV
+title: Accelerate Denoising, Background Blur and Low-Light Camera Effects with KleidiAI and KleidiCV
 
 minutes_to_complete: 30
 
