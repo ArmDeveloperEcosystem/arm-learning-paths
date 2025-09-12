@@ -1,12 +1,6 @@
 ---
 title: Understand floating-point behavior across x86 and Arm architectures
 
-draft: true
-cascade:
-    draft: true
-
-minutes_to_complete: 30
-
 who_is_this_for: This is an introductory topic for developers who are porting applications from x86 to Arm and want to understand floating-point behavior across these architectures. Both architectures provide reliable and consistent floating-point computation following the IEEE 754 standard.
 
 learning_objectives: 
