@@ -87,7 +87,7 @@ INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 Total run time over 20 iterations: 2030.5525 ms
 ```
 
-Re-run the Low Light Enhancment benchmark:
+Re-run the Low Light Enhancement benchmark:
 
 ```bash
 bin/low_light_image_enhancement_benchmark 20 resources/HDRNetLIME_lr_coeffs_v1_1_0_mixed_low_light_perceptual_l1_loss_float32.tflite
