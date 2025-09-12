@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-First you should run the following command to identify all IRQs on the system. Identify the NIC IRQs and adjust the system by experirmenting and seeing how performance improves.
+First you should run the following command to identify all IRQs on the system. Identify the NIC IRQs and adjust the system by experimenting and seeing how performance improves.
 
 ```
 grep '' /proc/irq/*/smp_affinity_list | while IFS=: read path cpus; do
@@ -47,7 +47,7 @@ IRQ 104 -> CPUs 12 -> Device ens34-Tx-Rx-5
 IRQ 105 -> CPUs 5 -> Device ens34-Tx-Rx-6
 IRQ 106 -> CPUs 10 -> Device ens34-Tx-Rx-7
 ```
-This can potential hurt performance. Suggestions and patterns to expertiment with will be on the next step.
+This can potential hurt performance. Suggestions and patterns to experiment with will be on the next step.
 
 ### reset
 
@@ -69,4 +69,4 @@ done
 
 ### Saving these changes
 
-Any changes you make to IRQs will be reset at reboot. You will need to change your systems settings to make your changes permenant.
+Any changes you make to IRQs will be reset at reboot. You will need to change your systems settings to make your changes permanant.

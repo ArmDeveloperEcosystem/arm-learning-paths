@@ -90,7 +90,7 @@ then add the Annotation Marker generation code here,
                 }
 ```
 
-A string is added to the Annotation Marker to record the position of input tokens and numbr of tokens to be processed.
+A string is added to the Annotation Marker to record the position of input tokens and number of tokens to be processed.
 
 ### Step 3: Build llama-cli executable 
 For convenience, llama-cli is static linked. 
@@ -181,7 +181,7 @@ By monitoring other PMU events, Backend Stall Cycles and Backend Stall Cycles du
 We can see that at Prefill stage, Backend Stall Cycles due to Memory stall are only about 10% of total Backend Stall Cycles. However, at Decode stage, Backend Stall Cycles due to Memory stall are around 50% of total Backend Stall Cycles.
 All those PMU event counters indicate that it is compute-bound at Prefill stage and memory-bound at Decode stage.
 
-Now, let us further profile the code execution with Streamline. In the ‘Call Paths’ view of Streamline, we can see the percentage of running time of functions that are orginized in form of call stack.
+Now, let us further profile the code execution with Streamline. In the ‘Call Paths’ view of Streamline, we can see the percentage of running time of functions that are organized in form of call stack.
 
 ![text#center](images/annotation_prefill_call_stack.png "Figure 12. Call stack")
 

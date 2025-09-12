@@ -149,6 +149,6 @@ A successful test shows HTTP/1.1 200 OK with a JSON body from httpbin.org, for e
 - **Successful connection:** The `curl` command successfully connected to the Envoy proxy on `localhost:10000`.
 - **Correct status code:** Envoy forwards the request and receives a successful `200 OK` response from the upstream.
 - **Host header rewrite:** Envoy rewrites `Host` to `httpbin.org` as configured.
-- **End-to-end Success:** The proxy is operational; requests are received, processed, and forwarded to the ackend.
+- **End-to-end Success:** The proxy is operational; requests are received, processed, and forwarded to the backend.
 
 To stop Envoy in the first terminal, press **Ctrl+C**. This confirms the end-to-end flow with Envoy server is working correctly.

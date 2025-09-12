@@ -43,4 +43,4 @@ Creating a virtual machine based on Azure Cobalt 100 is no different from creati
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/final-vm.png "Figure 5: VM deployment confirmation in Azure portal")
 
-While the virtual machine ready, proceed to the next section to delpoy MongoDB on your running instance.
+While the virtual machine ready, proceed to the next section to deploy MongoDB on your running instance.
