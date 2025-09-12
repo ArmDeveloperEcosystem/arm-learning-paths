@@ -47,7 +47,7 @@ IRQ 104 -> CPUs 12 -> Device ens34-Tx-Rx-5
 IRQ 105 -> CPUs 5 -> Device ens34-Tx-Rx-6
 IRQ 106 -> CPUs 10 -> Device ens34-Tx-Rx-7
 ```
-This can potential hurt performance. Suggestions and patterns to expertiment with will be on the next step.
+This can potential hurt performance. Suggestions and patterns to experiment with will be on the next step.
 
 ### reset
 
