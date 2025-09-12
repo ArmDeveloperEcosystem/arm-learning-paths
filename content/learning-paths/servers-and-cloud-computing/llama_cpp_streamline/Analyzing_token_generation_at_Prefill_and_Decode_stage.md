@@ -90,7 +90,7 @@ then add the Annotation Marker generation code here,
                 }
 ```
 
-A string is added to the Annotation Marker to record the position of input tokens and numbr of tokens to be processed.
+A string is added to the Annotation Marker to record the position of input tokens and number of tokens to be processed.
 
 ### Step 3: Build llama-cli executable 
 For convenience, llama-cli is static linked. 
