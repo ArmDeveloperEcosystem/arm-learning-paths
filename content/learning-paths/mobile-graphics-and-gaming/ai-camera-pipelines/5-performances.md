@@ -16,11 +16,11 @@ The application you built earlier includes a *benchmark mode* that runs the core
 
 These benchmarks demonstrate the performance improvements enabled by KleidiCV and KleidiAI:
 - KleidiCV enhances OpenCV performance with computation kernels optimized for Arm processors.
-- KleidiAI accelerates LiteRT + XNNPack inference using AI-optimized micro-kernels tailored for Arm CPUs.
+- KleidiAI accelerates LiteRT+XNNPack inference using AI-optimized micro-kernels tailored for Arm CPUs.
 
-## Performances with KleidiCV and KleidiAI
+## Performance with KleidiCV and KleidiAI
 
-By default, the OpenCV library is built with KleidiCV support, and LiteRT+xnnpack is built with KleidiAI support.
+By default, the OpenCV library is built with KleidiCV support, and LiteRT+XNNPack is built with KleidiAI support.
 
 You can run the benchmarks using the applications you built earlier.
 
@@ -59,7 +59,7 @@ bin/neural_denoiser_temporal_benchmark_4K 20
 The output is similar to:
 
 ```output
-Total run time over 10 iterations: 37.6839 ms
+Total run time over 20 iterations: 37.6839 ms
 ```
 
 From these results, you can see that:
@@ -87,7 +87,7 @@ INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 Total run time over 20 iterations: 2030.5525 ms
 ```
 
-Re-run the Low Light Enhancment benchmark:
+Re-run the Low Light Enhancement benchmark:
 
 ```bash
 bin/low_light_image_enhancement_benchmark 20 resources/HDRNetLIME_lr_coeffs_v1_1_0_mixed_low_light_perceptual_l1_loss_float32.tflite
@@ -121,7 +121,7 @@ Total run time over 20 iterations: 38.0813 ms
 | `neural_denoiser_temporal_benchmark_4K`   | 38.0813 ms                | 37.6839 ms (-1.04%)    |
 
 As shown, the Background Blur (`cinematic_mode_benchmark`) and Neural Denoising
-pipelines gains only a minor improvement, while the low-light enhancement pipeline
+pipelines gain only a minor improvement, while the low-light enhancement pipeline
 sees a minor performance degradation (0.26%) when KleidiCV and KleidiAI are
 enabled.
 

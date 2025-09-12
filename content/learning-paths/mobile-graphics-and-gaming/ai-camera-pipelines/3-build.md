@@ -73,9 +73,9 @@ Leave the container by pressing `Ctrl+D`.
 
 ## Notes on the CMake configuration options
 
-The `cmake` command line options relevant to this learning path are:
+The `cmake` command-line options relevant to this learning path are:
 
-| Command line option                 | Description                                                                                  |
+| Command-line option                 | Description                                                                                  |
 |-------------------------------------|----------------------------------------------------------------------------------------------|
 | `ENABLE_SME2=$ENABLE_SME2`          | SME2 (Scalable Matrix Extension 2) is disabled in this build with `ENABLE_SME2=0`.           |
 | `ARMNN_TFLITE_PARSER=0`             | Configures the `ai-camera-pipelines` repository to use LiteRT with XNNPack instead of ArmNN. |
@@ -90,7 +90,7 @@ tar xfz ai-camera-pipelines.git/install.tar.gz
 mv install ai-camera-pipelines
 ```
 
-## Diving further in the AI camera pipelines
+## Dive deeper into the AI camera pipelines
 
 The AI camera pipelines
 [repository](https://git.gitlab.arm.com/kleidi/kleidi-examples/ai-camera-pipelines)
