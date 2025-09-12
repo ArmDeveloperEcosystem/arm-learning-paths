@@ -19,7 +19,7 @@ python3 -m venv venv
 pip install -r ai-camera-pipelines.git/docker/python-requirements.txt
 ```
 
-### Background Blur
+## Background blur
 
 Run the background Blur pipeline, using `resources/test_input.png` as the input image and write the transformed image to `test_output.png`:
 
@@ -31,7 +31,7 @@ bin/cinematic_mode resources/test_input.png test_output.png resources/depth_and_
 ![example image alt-text#center](test_input2.png "Input image")
 ![example image alt-text#center](test_output2.png "Image with blur applied")
 
-### Low-Light Enhancement
+## Low-Light Enhancement
 
 Run the Low-Light Enhancement pipeline, using `resources/test_input.png` as the input image and write the transformed image to `test_output2_lime.png`:
 
@@ -55,9 +55,9 @@ will become available very soon:
 ```
 
 The input frames are:
- - first converted from `.png` files in the `resources/test-lab-sequence/` directory to the sensor format (RGGB Bayer) into `neural_denoiser_io/input_noisy*`,
- - those frames are then processed by the Neural Denoiser and written into `neural_denoiser_io/output_denoised*`,
- - last, the denoised frames are converted back to `.png` for easy visualization in directory `test-lab-sequence-out`.
+ - first converted from `.png` files in the `resources/test-lab-sequence/` directory to the sensor format (RGGB Bayer) into `neural_denoiser_io/input_noisy*`
+ - those frames are then processed by the Neural Denoiser and written into `neural_denoiser_io/output_denoised*`
+ - last, the denoised frames are converted back to `.png` for easy visualization in directory `test-lab-sequence-out`
 
 ![example image alt-text#center](denoising_input_0010.png "Original frame")
 ![example image alt-text#center](denoising_output_0010.png "Frame with temporal denoising applied")
