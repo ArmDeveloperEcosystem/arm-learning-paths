@@ -1,10 +1,18 @@
 ---
-title: "Floating-Point Representation"
+title: "Floating-point representation"
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## Introduction
+
+This Learning Path explores floating-point behavior across x86 and Arm architectures. Both architectures fully implement the IEEE 754 standard and produce identical results for all well-defined floating-point operations.
+
+Any differences you encounter are limited to special undefined cases where the IEEE 754 standard explicitly permits different implementations. These cases represent edge conditions that can be avoided, not fundamental differences in floating-point results.
+
+Arm processors provide completely reliable and accurate floating-point computation that is equivalent to x86 for all standard mathematical operations. By understanding the nuances of floating-point arithmetic and following best practices, you can write portable and robust code that performs consistently across platforms.
 
 ## Review of floating-point numbers
 
@@ -47,8 +55,7 @@ Key takeaways:
 - ULP behavior impacts numerical stability and precision.
 
 {{% notice Learning tip %}}
-Keep in mind that rounding and representation issues aren't bugs — they’re a consequence of how floating-point math works at the hardware level. Understanding these fundamentals is essential when porting numerical code across architectures like x86 and Arm.
+Keep in mind that rounding and representation issues aren't bugs, they are a consequence of how floating-point math works at the hardware level. Understanding these fundamentals is useful when porting numerical code across architectures like x86 and Arm.
 {{% /notice %}}
 
-
-In the next section, you'll explore how x86 and Arm differ in how they implement and optimize floating-point operations — and why this matters for writing portable, accurate software.
+In the next section, you'll explore why you may come across differences in undefined floating point operations and how you can use this information to write portable floating-point code. 
