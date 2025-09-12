@@ -26,8 +26,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - SVE
-    - Neon
-    - Coding
+    - NEON
     - armie
     - GCC
     - armclang

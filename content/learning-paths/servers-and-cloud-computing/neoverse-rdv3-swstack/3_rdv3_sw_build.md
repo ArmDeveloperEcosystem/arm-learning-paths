@@ -1,36 +1,47 @@
 ---
-title: Build the RD‑V3 Reference Platform Software Stack
+title: Build the RD-V3 Reference Platform Software Stack
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Building the RD‑V3 Reference Platform Software Stack
 
-In this module, you’ll set up your development environment on any Arm-based server and build the firmware stack required to simulate the RD‑V3 platform. This Learning Path was tested on an AWS `m7g.4xlarge` Arm-based instance running Ubuntu 22.04
+## Building the RD-V3 Reference Platform Software Stack
 
+In this module, you’ll set up your development environment on any Arm-based server and build the firmware stack required to simulate the RD-V3 platform. This Learning Path was tested on an AWS `m7g.4xlarge` Arm-based instance running Ubuntu 22.04.
 
-### Step 1: Prepare the Development Environment
+## Step 1: Set up your development environment
 
-First, ensure your system is up-to-date and install the required tools and libraries:
+First, check that your system is current and install the required dependencies:
 
 ```bash
 sudo apt update
-sudo apt install curl git
+sudo apt install -y curl git
 ```
 
-Configure git as follows.
+Configure git(optional):
 
 ```bash
 git config --global user.name "<your-name>"
 git config --global user.email "<your-email@example.com>"
 ```
 
-### Step 2: Fetch the Source Code
+## Step 2: Fetch the source code
 
-The RD‑V3 platform firmware stack consists of many independent components—such as TF‑A, SCP, RSE, UEFI, Linux kernel, and Buildroot. Each component is maintained in a separate Git repository. To manage and synchronize these repositories efficiently, we use the `repo` tool. It simplifies syncing the full platform software stack from multiple upstreams.
+The RD‑V3 platform firmware stack consists of multiple components, most maintained in separate Git repositories, such as:
 
-If repo is not installed, you can download it manually:
+- TF‑A
+- SCP/MCP
+- RSE (TF-M)
+- UEFI (EDK II)
+- Linux kernel
+- Buildroot
+- kvmtool (lkvm)
+- RMM (optional)
+
+Use the repo tool with the RD-V3 manifest to sync these sources from multiple upstreams consistently (typically to a pinned release tag). It simplifies syncing the full platform software stack from multiple upstreams.
+
+If `repo` is not installed, you can download it and add it to your `PATH`:
 
 ```bash
 mkdir -p ~/.bin
@@ -39,11 +50,9 @@ curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
 chmod a+rx ~/.bin/repo
 ```
 
-Once ready, create a workspace and initialize the repo manifest:
+Once ready, create a workspace and initialize the repo manifest. This Learning Path uses a pinned manifest to ensure reproducibility across different environments. This locks all component repositories to known-good commits that are validated and aligned with a specific FVP version.
 
-We use a pinned manifest to ensure reproducibility across different environments. This locks all component repositories to known-good commits that are validated and aligned with a specific FVP version.
-
-For this session, we will use `pinned-rdv3.xml` and `RD-INFRA-2025.07.03`.
+For this session, use `pinned-rdv3.xml` and `RD-INFRA-2025.07.03`:
 
 ```bash
 cd ~
@@ -63,19 +72,18 @@ Syncing: 100% (83/83) 2:52 | 1 job | 0:01 platsw/edk2-platforms @ uefi/edk2/edk2
 ```
 
 {{% notice Note %}}
-As of the time of writing, the latest official release tag is RD-INFRA-2025.07.03.
-Please note that newer tags may be available as future platform updates are published.
+As of the time of writing, the latest release tag is `RD-INFRA-2025.07.03`. Newer tags might be available in future updates.
 {{% /notice %}}
 
-This manifest will fetch all required sources including:
+This manifest fetches the required sources, including:
 * TF‑A
 * SCP / RSE firmware
-* EDK2 (UEFI)
+* EDK II (UEFI)
 * Linux kernel
 * Buildroot and platform scripts
 
 
-### Step 3: Build the Docker Image
+## Step 3: Build the Docker Image
 
 There are two supported methods for building the reference firmware stack: **host-based** and **container-based**.
 
@@ -84,7 +92,7 @@ There are two supported methods for building the reference firmware stack: **hos
 
 In this Learning Path, you will use the **container-based** approach.
 
-The container image is designed to use the source directory from the host (`~/rdv3`) and perform the build process inside the container. Make sure Docker is installed on your Linux machine. You can follow this [installation guide](https://learn.arm.com/install-guides/docker/).
+The container image uses your host source directory (~/rdv3) and performs the build inside Docker. Ensure Docker is installed on your machine. You can follow this [installation guide](https://learn.arm.com/install-guides/docker/).
 
 
 After Docker is installed, you’re ready to build the container image.
@@ -104,7 +112,9 @@ To build the container image:
 ./container.sh build
 ```
 
-The build procedure may take a few minutes, depending on network bandwidth and CPU performance. This Learning Path was tested on an AWS `m7g.4xlarge` instance, and the build took 250 seconds. The output from the build looks like:
+The build procedure can take a few minutes, depending on network bandwidth and CPU performance. This Learning Path was tested on an AWS `m7g.4xlarge` instance, and the build took 250 seconds. 
+
+Expected output:
 
 ```output
 Building docker image: rdinfra-builder ...
@@ -142,7 +152,7 @@ Building docker image: rdinfra-builder ...
  => => naming to docker.io/library/rdinfra-builder                                                                                            0.0s
 ```
 
-Verify the docker image build completed successfully:
+Verify the image:
   
 ```bash
 docker images
@@ -155,14 +165,13 @@ REPOSITORY        TAG       IMAGE ID       CREATED         SIZE
 rdinfra-builder   latest    3a395c5a0b60   4 minutes ago   8.12GB
 ```
 
-To quickly test the Docker image you just built, run the following command to enter the docker container interactively:
+Quick interactive test:
 
 ```bash
 ./container.sh -v ~/rdv3 run
 ```
 
-This script mounts your source directory (~/rdv3) into the container and opens a shell session at that location.
-Inside the container, you should see a prompt like this:
+This script mounts your source directory (~/rdv3) into the container and opens a shell session at that location. Inside the container, you should see a prompt like this:
 
 ```output
 Running docker image: rdinfra-builder ...
@@ -172,18 +181,17 @@ See "man sudo_root" for details.
 your-username:hostname:/home/your-username/rdv3$
 ```
 
-You can explore the container environment if you wish, then type exit to return to the host system.
+You can explore the container environment if you wish, then type `exit` to return to the host.
 
 
-###  Step 4: Build Firmware 
+## Step 4: Build firmware 
 
-Building the full firmware stack involves compiling several components and preparing them for simulation. Rather than running each step manually, you can use a single Docker command to automate the build and package phases.
+Building the full firmware stack involves compiling several components and packaging them for simulation. The following command runs build and then package inside the Docker image:
 
-- **build**: This phase compiles all individual components of the firmware stack, including TF‑A, SCP, RSE, UEFI, Linux kernel, and rootfs.
+- **build**compiles all individual components of the firmware stack, including TF‑A, SCP, RSE, UEFI, Linux kernel, and rootfs
+- **package** consolidates outputs into simulation-ready artifacts for FVP
 
-- **package**: This phase consolidates the build outputs into simulation-ready formats and organizes boot artifacts for FVP.
-
-Ensure you’re back in the host OS, then run the following command:
+Ensure you’re back in the host OS, then run:
 
 ```bash
 cd ~/rdv3
@@ -201,13 +209,13 @@ docker run --rm \
 
 The build artifacts will be placed under `~/rdv3/output/rdv3/rdv3/`, where the last `rdv3` in the directory path corresponds to the selected platform name.
 
-After a successful build, inspect the artifacts generated under `~/rdv3/output/rdv3/rdv3/`
+Inspect the artifacts:
 
 ```bash
 ls ~/rdv3/output/rdv3/rdv3 -al
 ```
 
-The directory contents should look like:
+Expected output:
 ```output
 total 7092
 drwxr-xr-x 2 ubuntu ubuntu    4096 Aug 12 13:15 .
@@ -229,7 +237,7 @@ lrwxrwxrwx 1 ubuntu ubuntu      48 Aug 12 13:15 tf_m_vm0_0.bin -> ../components/
 lrwxrwxrwx 1 ubuntu ubuntu      48 Aug 12 13:15 tf_m_vm1_0.bin -> ../components/arm/rse/neoverse_rd/rdv3/vm1_0.bin
 lrwxrwxrwx 1 ubuntu ubuntu      33 Aug 12 13:15 uefi.bin -> ../components/css-common/uefi.bin
 ```
-Here's a reference of what each file refers to:
+Reference mapping:
 
 | Component            | Output Files                                 | Description                 |
 |----------------------|----------------------------------------------|-----------------------------|
@@ -240,9 +248,9 @@ Here's a reference of what each file refers to:
 | Initrd               | `rootfs.cpio.gz`                             | Minimal filesystem          |
 
 
-### Optional: Run the Build Manually from Inside the Container
+## Optional: run the build manually from inside the container
 
-You can also perform the build manually after entering the container:
+You can also build from within an interactive container session (useful for debugging or partial builds):
 
 Start your docker container. In your running container shell:
 ```bash
@@ -251,7 +259,4 @@ cd ~/rdv3
 ./build-scripts/rdinfra/build-test-buildroot.sh -p rdv3 package
 ```
 
-This manual workflow is useful for debugging, partial builds, or making custom modifications to individual components.
-
-
-You’ve now successfully prepared and built the full RD‑V3 firmware stack. In the next section, you’ll install the appropriate FVP and simulate the full boot sequence, bringing the firmware to life on a virtual platform.
+You’ve now prepared and built the full RD-V3 firmware stack. In the next section, you’ll install the appropriate FVP and simulate the full boot sequence, bringing the firmware to life on a virtual platform.

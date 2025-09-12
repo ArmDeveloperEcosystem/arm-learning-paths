@@ -25,7 +25,6 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - Coding
     - Runbook
 
 

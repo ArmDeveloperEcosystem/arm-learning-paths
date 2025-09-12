@@ -28,7 +28,8 @@ armips:
     - Cortex-A
     - Neoverse
 tools_software_languages:
-    - C/C++
+    - C
+    - C++
     - Runbook
 operatingsystems:
     - Linux

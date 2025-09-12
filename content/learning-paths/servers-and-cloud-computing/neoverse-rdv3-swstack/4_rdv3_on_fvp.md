@@ -1,47 +1,43 @@
 ---
-title: Simulate RD‑V3 Boot Flow on Arm FVP
+title: Simulate RD-V3 Boot Flow on Arm FVP
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Simulating RD‑V3 with an Arm FVP
+## Simulating RD-V3 with an Arm FVP
 
-In the previous section, you built the complete CSS‑V3 firmware stack.  
-Now, you’ll use Arm Fixed Virtual Platform (FVP) to simulate the system, allowing you to verify the boot sequence without any physical silicon.
-This simulation brings up the full stack from BL1 to Linux shell using Buildroot.
+In the previous section, you built the complete CSS-V3 firmware stack. Now you’ll use an Arm Fixed Virtual Platform (FVP) to simulate the system, allowing you to verify the boot sequence without any physical silicon. This simulation brings up the full stack from BL1 to a Linux shell using Buildroot.
 
-### Step 1: Download and Install the FVP Model
+## Step 1: Download and install the FVP model
 
-Before downloading the RD‑V3 FVP, it’s important to understand that each reference design release tag corresponds to a specific version of the FVP model.
+Each reference design release tag corresponds to a specific FVP model version.  
+For example, the **RD-INFRA-2025.07.03** tag is designed to work with **FVP version 11.29.35**.
 
-For example, the **RD‑INFRA‑2025.07.03** release tag is designed to work with **FVP version 11.29.35**.
+See the [RD-V3 Release Tags](https://neoverse-reference-design.docs.arm.com/en/latest/platforms/rdv3.html#release-tags) for a full list of release tags, corresponding FVP versions, and their associated release notes, which summarize changes and validated test cases.
 
-You can refer to the [RD-V3 Release Tags](https://neoverse-reference-design.docs.arm.com/en/latest/platforms/rdv3.html#release-tags) for a full list of release tags, corresponding FVP versions, and their associated release notes, which summarize changes and validated test cases.
-
-Download the matching FVP binary for your selected release tag using the link provided:
+Download and install the matching FVP:
 
 ```bash
 mkdir -p ~/fvp
 cd ~/fvp
 wget https://developer.arm.com/-/cdn-downloads/permalink/FVPs-Neoverse-Infrastructure/RD-V3/FVP_RD_V3_11.29_35_Linux64_armv8l.tgz
-
 tar -xvf FVP_RD_V3_11.29_35_Linux64_armv8l.tgz
 ./FVP_RD_V3.sh
 ```
 
-The FVP installation may prompt you with a few questions,choosing the default options is sufficient for this learning path. By default, the FVP will be installed in `/home/ubuntu/FVP_RD_V3`.
+The FVP installation might prompt you with a few questions, choose the default settings. By default, the FVP installs under `/home/ubuntu/FVP_RD_V3`.
 
-### Step 2: Remote Desktop Set Up
+## Step 2: set up remote desktop 
 
-The RD‑V3 FVP model launches multiple UART consoles—each mapped to a separate terminal window for different subsystems (e.g., Neoverse V3, Cortex‑M55, Cortex‑M7, panel).
+The RD‑V3 FVP model launches multiple UART consoles. Each console is mapped to a separate terminal window for different subsystems (for example, Neoverse V3, Cortex‑M55, Cortex‑M7, panel).
 
 If you’re accessing the platform over SSH, these UART consoles can still be displayed, but network latency and graphical forwarding can severely degrade performance.
 
-To interact with different UARTs more efficiently, it is recommend to install a remote desktop environment using `XRDP`. This provides a smoother user experience when dealing with multiple terminal windows and system interactions.
+To interact with different UARTs more efficiently, install a remote desktop environment using `XRDP`. This provides a smoother user experience when dealing with multiple terminal windows and system interactions.
 
-You will need to install the required packages:
+Install required packages and enable XRDP:
 
 
 ```bash
@@ -51,45 +47,48 @@ sudo systemctl enable --now xrdp
 ```
 
 To allow remote desktop connections, you need to open port 3389 (RDP) in your AWS EC2 security group:
+
 - Go to the EC2 Dashboard → Security Groups
-- Select the security group associated with your instance
-- Under the Inbound rules tab, click Edit inbound rules
+- Select your instance’s group → **Inbound rules** → **Edit inbound rules**
+- Add a rule: Type: RDP, Port: 3389, Source: your public IP (recommended)
 - Add the following rule:
-   - Type: RDP
-   - Port: 3389
-   - Source: your local machine IP
+   - **Type**: RDP
+   - **Port**: 3389
+   - **Source**: your local machine IP
 
 For better security, limit the source to your current public IP instead of 0.0.0.0/0.
 
 
-***Switch to Xorg (required on Ubuntu 22.04):***
+## Switch to Xorg (required on Ubuntu 22.04)
 
 Wayland is the default display server on Ubuntu 22.04, but it is not compatible with XRDP.  
-To enable XRDP remote sessions, you need to switch to Xorg by modifying the GDM configuration.
+To enable XRDP remote sessions, you must switch to Xorg by modifying the GDM configuration:
 
-Open the `/etc/gdm3/custom.conf` in a text editor.
+Open the `/etc/gdm3/custom.conf` in a text editor. 
+
 Find the line: 
 
 ```output
 #WaylandEnable=false
 ```
 
-Uncomment it by removing the # so it becomes:
+Uncomment it:
 
 ```output
 WaylandEnable=false
 ```
 
-Then restart the GDM display manager for the change to take effect:
+Restart the GDM display manager:
+
 ```bash
 sudo systemctl restart gdm3
 ```
 
-After reboot, XRDP will use Xorg and you should be able to connect to the Arm server via Remote Desktop.
+After restart, XRDP sessions will use Xorg and you can connect to it in the Arm server using a remote desktop.
 
-### Step 3: Launch the Simulation
+## Step 3: launch the simulation
 
-Once connected via Remote Desktop, open a terminal and launch the RD‑V3 FVP simulation:
+Once connected using a remote desktop, open a terminal and launch the RD‑V3 FVP simulation:
 
 ```bash
 cd ~/rdv3/model-scripts/rdinfra
@@ -97,26 +96,27 @@ export MODEL=/home/ubuntu/FVP_RD_V3/models/Linux64_armv8l_GCC-9.3/FVP_RD_V3
 ./boot-buildroot.sh -p rdv3 &
 ```
 
-The command will launch the simulation and open multiple xterm windows, each corresponding to a different CPU.
-You can start by locating the ***terminal_ns_uart0*** window — in it, you should see the GRUB menu.
+The command launches the simulation and opens multiple xterm windows, each corresponding to a different CPU.
 
-From there, select RD-V3 Buildroot in the GRUB menu and press Enter to proceed.
+Start by locating the ***terminal_ns_uart0*** window. In it, you should see the GRUB menu.
+
+Select **RD-V3 Buildroot** in the GRUB menu and press **Enter** to proceed.
 ![img3 alt-text#center](rdv3_sim_run.jpg "GRUB Menu")
 
-Booting Buildroot will take a little while — you’ll see typical Linux boot messages scrolling through.
+Booting Buildroot takes a short while as Linux messages scroll by.
+
 Eventually, the system will stop at the `Welcome to Buildroot` message on the ***terminal_ns_uart0*** window.
 
-At the `buildroot login:` prompt, type `root` and press Enter to log in.
+Log in at the `buildroot login:` prompt with user `root`.
+
 ![img4 alt-text#center](rdv3_sim_login.jpg "Buildroot login")
 
-Congratulations — you’ve successfully simulated the boot process of the RD-V3 software you compiled earlier, all on FVP!
+Congratulations - you’ve now successfully simulated the boot of the RD-V3 software you built earlier, all on FVP!
 
-### Step 4: Understand the UART Outputs
+## Step 4: Understand the UART Outputs
 
-When you launch the RD‑V3 FVP model, it opens multiple terminal windows—each connected to a different UART channel.  
-These UARTs provide console logs from various firmware components across the system.
-
-Below is the UART-to-terminal mapping based on the default FVP configuration:
+The RD-V3 FVP opens multiple terminals, each connected to a different UART that carries logs from specific firmware components.
+UART-to-terminal mapping based on the default FVP configuration:
 
 | Terminal Window Title      | UART | Output Role                        | Connected Processor  |
 |----------------------------|------|------------------------------------|-----------------------|

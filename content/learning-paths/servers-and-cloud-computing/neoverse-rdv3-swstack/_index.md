@@ -1,25 +1,23 @@
 ---
-title: CSS-V3 Pre-Silicon Software Development Using Neoverse Servers
-
-draft: true
-cascade:
-    draft: true
+title: Develop and Validate Firmware Pre-Silicon on Arm Neoverse CSS V3
 
 minutes_to_complete: 90
 
-who_is_this_for: This Learning Path is for firmware developers, system architects, and silicon validation engineers building Arm Neoverse CSS  platforms. It focuses on pre-silicon development using Fixed Virtual Platforms (FVPs) for the CSS‑V3 reference design. You’ll learn how to build, customize, and validate firmware on the RD‑V3 platform using Fixed Virtual Platforms (FVPs) before hardware is available.
+who_is_this_for: This advanced topic is for firmware developers, system architects, and silicon validation engineers working on Arm Neoverse CSS platforms who require a pre-silicon workflow for the CSS-V3 reference design using Fixed Virtual Platforms (FVPs).
 
 learning_objectives:
-    - Understand the architecture of Arm Neoverse CSS‑V3 as the foundation for scalable server-class platforms
-    - Build and boot the RD‑V3 firmware stack using TF‑A, SCP, RSE, and UEFI
-    - Simulate multi-core, multi-chip systems with Arm FVP models and interpret boot logs
-    - Modify platform control firmware to test custom logic and validate it via pre-silicon simulation 
-
+    - Explain the CSS-V3 architecture and the RD-V3 firmware boot sequence (TF-A, RSE, SCP/MCP/LCP, UEFI/GRUB, Linux)
+    - Set up a containerized build environment and sync sources with a pinned manifest using repo
+    - Build and boot the RD-V3 firmware stack on FVP and map UART consoles to components
+    - Interpret boot logs to verify bring-up and diagnose boot-stage issues
+    - Modify platform control firmware (for example, SCP/MCP) and validate changes via pre-silicon simulation
+    - Launch a dual-chip RD-V3-R1 simulation and verify AP/MCP coordination
+   
 prerequisites:
-    - Access to an Arm Neoverse-based Linux machine (cloud or local), with at least 80 GB of storage
+    - Access to an Arm Neoverse-based Linux machine (cloud or local) with at least 80 GB of free storage
     - Familiarity with Linux command-line tools and basic scripting
     - Understanding of firmware boot stages and SoC-level architecture
-    - Docker installed, or GitHub Codespaces-compatible development environment
+    - Docker installed, or a GitHub Codespaces-compatible development environment
 
 author:
     - Odin Shen

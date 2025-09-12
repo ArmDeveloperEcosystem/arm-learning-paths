@@ -25,7 +25,6 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - Coding
     - Arm Development Studio
     - Arm Compiler for Embedded
     - Arm Fast Models

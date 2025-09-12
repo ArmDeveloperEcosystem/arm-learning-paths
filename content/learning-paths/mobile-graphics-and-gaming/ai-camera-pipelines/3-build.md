@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Download the AI Camera Pipelines Project
+## Download the AI camera pipelines project
 
 Clone the project repository:
 
@@ -29,10 +29,11 @@ Build the Docker container used to compile the pipelines:
 ```bash
 docker build -t ai-camera-pipelines -f docker/Dockerfile \
   --build-arg DOCKERHUB_MIRROR=docker.io \
-  --build-arg CI_UID=$(id -u) .
+  --build-arg CI_UID=$(id -u) \
+  docker/
 ```
 
-## Build the AI Camera Pipelines
+## Build the AI camera pipelines
 
 Start a shell in the container you just built:
 
@@ -44,8 +45,7 @@ Inside the container, run the following commands:
 
 ```bash
 ENABLE_SME2=0
-TENSORFLOW_GIT_TAG=ddceb963c1599f803b5c4beca42b802de5134b44
-
+TENSORFLOW_GIT_TAG="v2.19.0"
 # Build flatbuffers
 git clone https://github.com/google/flatbuffers.git
 cd flatbuffers
@@ -71,11 +71,11 @@ tar cfz example/install.tar.gz install
 
 Leave the container by pressing `Ctrl+D`.
 
-## Notes on the cmake configuration options
+## Notes on the CMake configuration options
 
-The `cmake` command line options relevant to this learning path are:
+The `cmake` command-line options relevant to this learning path are:
 
-| Command line option                 | Description                                                                                  |
+| Command-line option                 | Description                                                                                  |
 |-------------------------------------|----------------------------------------------------------------------------------------------|
 | `ENABLE_SME2=$ENABLE_SME2`          | SME2 (Scalable Matrix Extension 2) is disabled in this build with `ENABLE_SME2=0`.           |
 | `ARMNN_TFLITE_PARSER=0`             | Configures the `ai-camera-pipelines` repository to use LiteRT with XNNPack instead of ArmNN. |
@@ -90,7 +90,7 @@ tar xfz ai-camera-pipelines.git/install.tar.gz
 mv install ai-camera-pipelines
 ```
 
-## Diving further in the AI camera pipelines
+## Dive deeper into the AI camera pipelines
 
 The AI camera pipelines
 [repository](https://git.gitlab.arm.com/kleidi/kleidi-examples/ai-camera-pipelines)

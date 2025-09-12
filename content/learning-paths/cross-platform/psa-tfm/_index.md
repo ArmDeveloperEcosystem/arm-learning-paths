@@ -30,7 +30,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Trusted Firmware
-    - Fixed Virtual Platform
+    - FVP
     - GCC
 
 

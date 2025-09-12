@@ -27,7 +27,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - LLM
-    - GenAI
+    - Generative AI
     - AWS
 operatingsystems:
     - Linux

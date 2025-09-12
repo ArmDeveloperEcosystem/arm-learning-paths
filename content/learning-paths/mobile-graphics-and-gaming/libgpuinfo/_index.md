@@ -26,7 +26,7 @@ armips:
 operatingsystems:
     - Android
 tools_software_languages:
-    - NDK
+    - Android NDK
     - adb
 
 further_reading:

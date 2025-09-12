@@ -23,10 +23,7 @@ operatingsystems:
     - Baremetal
     - RTOS
 tools_software_languages:
-    - Coding
-    - Keil
-    - MDK
-    - Fixed Virtual Platform
+    - Keil MDK
     - FVP
 
 further_reading:

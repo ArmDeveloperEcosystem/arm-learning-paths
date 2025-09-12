@@ -32,7 +32,7 @@ operatingsystems:
 
 tools_software_languages:
     - Arm Virtual Hardware
-    - Fixed Virtual Platform
+    - FVP
     - Python
     - PyTorch
     - ExecuTorch

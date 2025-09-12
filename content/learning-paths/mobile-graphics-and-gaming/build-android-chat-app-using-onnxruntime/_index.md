@@ -25,7 +25,6 @@ tools_software_languages:
     - C++
     - ONNX Runtime
     - Android
-    - Mobile
     - Hugging Face
 
 operatingsystems:

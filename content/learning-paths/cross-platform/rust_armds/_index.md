@@ -26,7 +26,6 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - Coding
     - IP Explorer
 
 ### Cross-platform metadata only

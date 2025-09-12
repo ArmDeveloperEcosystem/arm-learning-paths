@@ -23,7 +23,7 @@ tools_software_languages:
     - C++
     - Python
     - Git
-    - cmake
+    - CMake
     - ONNX Runtime
 operatingsystems:
     - Windows

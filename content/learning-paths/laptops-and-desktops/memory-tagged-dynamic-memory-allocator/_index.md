@@ -25,7 +25,6 @@ tools_software_languages:
 - MTE
 - Linux
 - C
-- Coding
 operatingsystems:
 - Linux
 

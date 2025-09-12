@@ -27,7 +27,6 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Vulkan
-    - Coding
 
 
 further_reading:

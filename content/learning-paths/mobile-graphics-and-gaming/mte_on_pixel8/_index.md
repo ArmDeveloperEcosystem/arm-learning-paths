@@ -24,7 +24,9 @@ subjects: Performance and Architecture
 armips:
     - Cortex-A
 tools_software_languages:
-    - Memory Bug Report
+    - MTE
+    - adb
+    - Google Pixel 8
 operatingsystems:
     - Android
 

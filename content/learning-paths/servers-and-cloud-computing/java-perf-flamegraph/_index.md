@@ -24,8 +24,8 @@ armips:
   - Neoverse
 
 tools_software_languages:
-  - OpenJDK-21
-  - Tomcat
+  - OpenJDK 21
+  - Apache Tomcat
   - async-profiler
   - FlameGraph
   - wrk2

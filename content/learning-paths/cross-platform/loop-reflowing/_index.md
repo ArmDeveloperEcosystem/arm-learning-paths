@@ -22,7 +22,6 @@ armips:
 tools_software_languages:
     - GCC
     - Clang
-    - Coding
     - Runbook
 
 operatingsystems:

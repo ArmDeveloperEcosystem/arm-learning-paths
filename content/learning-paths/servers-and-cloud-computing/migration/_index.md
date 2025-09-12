@@ -24,8 +24,7 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - Coding
-    - Neon
+    - NEON
     - SVE
     - Go
     - Runbook
