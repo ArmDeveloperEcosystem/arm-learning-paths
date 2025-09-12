@@ -12,7 +12,7 @@ This Learning Path explores floating-point behavior across x86 and Arm architect
 
 Any differences you encounter are limited to special undefined cases where the IEEE 754 standard explicitly permits different implementations. These cases represent edge conditions that can be avoided, not fundamental differences in floating-point results.
 
-Arm processors provide completely reliable and accurate floating-point computation that is equivalent to x86 for all standard mathematical operations. By understanding the nuances of floating-point arithmetic and following best practices, you can write portable and robust code that performs consistently across platforms.
+Arm processors provide accurate floating-point computation that is comparable to x86 for all standard mathematical operations. By understanding the nuances of floating-point arithmetic and following best practices, you can write portable and robust code that performs consistently across platforms.
 
 ## Review of floating-point numbers
 
