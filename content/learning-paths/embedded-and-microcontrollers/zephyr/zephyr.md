@@ -15,7 +15,7 @@ You can get the Zephyr source, install the Zephyr SDK, build sample applications
 
 ## Host platform
 
-Zephyr SDK is available on Windows, Linux, and macOS hosts. However the FVP is natively available for Windows and Linux hosts, and can be run on macOS with a Docker as explained in [AVH FVPs on macOS](install-guides/fvps-on-macos/).
+Zephyr SDK is available on Windows, Linux, and macOS hosts. However the FVP is natively available for Windows and Linux hosts, and can be run on macOS with a Docker as explained in [AVH FVPs on macOS](/install-guides/fvps-on-macos/).
 
 These instructions assume an Ubuntu Linux host machine.
 
