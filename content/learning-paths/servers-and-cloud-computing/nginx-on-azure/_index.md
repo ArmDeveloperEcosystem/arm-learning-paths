@@ -1,6 +1,10 @@
 ---
 title: Deploy NGINX on the Microsoft Azure Cobalt 100 processors 
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 30   
 
 who_is_this_for: This Learning Path introduces NGINX deployment on Microsoft Azure Cobalt 100 (Arm-based) virtual machine. It is intended for system administrators and developers looking to deploy and benchmark NGINX on Arm architecture with minimal adjustments from traditional x86_64 environments.
