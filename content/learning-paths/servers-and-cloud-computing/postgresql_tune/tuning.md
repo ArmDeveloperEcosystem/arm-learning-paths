@@ -10,9 +10,9 @@ layout: "learningpathall"
 
 ##  PostgreSQL configuration
 
-There are different ways to set configuration parameters for `PostgreSQL`. 
+There are different ways to set configuration parameters for `PostgreSQL`.
 
-This is discussed in the [Setting Parameters documentation](https://www.postgresql.org/docs/current/config-setting.html). 
+This is discussed in the [Setting Parameters documentation](https://www.postgresql.org/docs/current/config-setting.html).
 
 The configurations below can be directly pasted into a `PostgreSQL` configuration file.
 
@@ -27,11 +27,11 @@ max_prepared_transactions = 1000   # Default 0
 
 Keep in mind that more client connections means more resources will be consumed (especially memory). Setting this to something higher is completely dependent on use case and requirements.
 
-`max_prepared_transactions` is 0 by default. 
+`max_prepared_transactions` is 0 by default.
 
 This means that stored procedures and functions cannot be used out of the box. It must be enabled by setting `max_prepared_transactions` to a value greater than 0. If this is set to a number larger than 0, a good number to start with would be at least as large as `max_connections`. In a test or development environment, it doesn't hurt to set it to an even larger value(10000) to avoid errors.
 
-Using procedures and functions can greatly improve performance. 
+Using procedures and functions can greatly improve performance.
 
 ### Memory related configuration
 
@@ -42,7 +42,7 @@ work_mem = 32MB    # default is 4MB
 maintenance_work_mem = 2GB    # Default is 64MB
 ```
 
-Turning on `huge_pages` is not required because the default is `try`. 
+Turning on `huge_pages` is not required because the default is `try`.
 
 However, you can explicitly set it to `on` because errors will be produced if huge pages are not enabled in Linux.
 
@@ -59,7 +59,7 @@ deadlock_timeout = 10s                      # Default is 1s
 max_worker_processes = <num_system_cpus>    # Default is 8
 ```
 
-`deadlock_timeout` sets a polling interval for checking locks. The [documentation](https://www.postgresql.org/docs/15/runtime-config-locks.html) states that this check is expensive from a CPU cycles standpoint, and that the default of 1s is probably the smallest that should be used. Consider raising this timeout much higher to save some CPU cycles. 
+`deadlock_timeout` sets a polling interval for checking locks. The [documentation](https://www.postgresql.org/docs/15/runtime-config-locks.html) states that this check is expensive from a CPU cycles standpoint, and that the default of 1s is probably the smallest that should be used. Consider raising this timeout much higher to save some CPU cycles.
 
 `max_worker_processes` is a key parameter for performance. It's the number of total background processes allowed. A good starting point is to set this to the number of cores present on the PostgreSQL node.
 
@@ -69,18 +69,15 @@ max_worker_processes = <num_system_cpus>    # Default is 8
 synchronous_commit = off    # Default is on
 max_wal_size = 20GB         # Default is 1GB
 min_wal_size = 1GB          # Default is 80MB
-wal_recycle = off           # Default is on
 ```
 
 If `synchronous_commit` is on (default), it tells the WAL processor to wait until more of the log is applied before reporting success to clients. Turning this off means that the PostgreSQL instance will report success to clients sooner. This will result in a performance improvement. It is safe to turn this off in most cases, but keep in mind that it will increase the risk of losing transactions if there is a crash. However, it will not increase the risk of data corruption.
 
 In high load scenarios, check pointing can happen very often. In fact, in testing with HammerDB, there may be so much check pointing that PostgreSQL reports warnings. One way to reduce how often check pointing occurs is to increase the `max_wal_size` of the WAL log. Setting it to 20GB can make the excessive check pointing warnings go away. `min_wal_size` can also be increased to help absorb spikes in WAL log usage under high load.
 
-`wal_recycle` does not impact performance. However, in scenarios where a large amount of data is being loaded (for example, restoring a database), turning this off will speed up the data load and reduce the chances of replication errors to occur if streaming replication is used.
-
 ### Planner/Optimizer configuration
 
-The optimizer (also called planner) is responsible for taking statistics about the execution of previous queries, and using that information to figure out what is the fastest way to process new queries. Some of these statistics include shared buffer hit/miss rate, execution time of sequential scans, and execution time of index scans. Below are some parameters that affect the optimizer. 
+The optimizer (also called planner) is responsible for taking statistics about the execution of previous queries, and using that information to figure out what is the fastest way to process new queries. Some of these statistics include shared buffer hit/miss rate, execution time of sequential scans, and execution time of index scans. Below are some parameters that affect the optimizer.
 
 ```output
 effective_cache_size = <80% of system memory>    # Default is 4GB
@@ -91,7 +88,7 @@ One key piece of information that a `PostgreSQL` instance will not have access t
 
 **How does `effective_cache_size` affect the optimizer and help performance?**
 
-When data is loaded into the PostgreSQL shared buffer, the same data may also be present in the page cache. It is also possible that data that isn't in the shared buffer is present in the page cache. This second case creates a scenario where tuning `effective_cache_size` can help improve performance. 
+When data is loaded into the PostgreSQL shared buffer, the same data may also be present in the page cache. It is also possible that data that isn't in the shared buffer is present in the page cache. This second case creates a scenario where tuning `effective_cache_size` can help improve performance.
 
 Sometimes `PostgreSQL` needs to read data that is not in the shared buffer, but it is in the page cache. From the perspective of `PostgreSQL`, there will be a shared buffer miss when it tries to read the data. When this happens, the `PostgreSQL` instance will assume that reading this data will be slow because it will come from disk. It assumes the data will come from disk because `PostgreSQL` has no way to know if the data is in the page cache. However, if it turns out that the data is present in the page cache, the data will be read faster than if it was read from disk.
 
