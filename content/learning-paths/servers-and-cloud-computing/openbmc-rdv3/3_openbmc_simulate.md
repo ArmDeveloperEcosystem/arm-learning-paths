@@ -1,37 +1,34 @@
 ---
-title: Run OpenBMC and Host UEFI Simulation on RD-V3 FVP
+title: Run OpenBMC and host UEFI simulation on RD-V3 FVP
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Prepare Pre-Silicon OpenBMC Simulation
+## Prepare pre-silicon OpenBMC simulation
 
-With your environment prepared, you can now simulate the full pre-silicon firmware boot flow using the Arm Neoverse RD-V3 reference design.
-You’ll build the OpenBMC image, launch the Arm Fixed Virtual Platform (FVP), and observe the full boot process of both the BMC and host UEFI firmware in a simulated environment.
+With your environment ready, you can simulate the full pre-silicon firmware boot flow using the Arm Neoverse RD-V3 r1 reference design. You’ll build the OpenBMC image, launch the Arm Fixed Virtual Platform (FVP), and observe the boot of both the BMC and host UEFI firmware.
 
-This simulation launches multiple UART consoles,each mapped to a separate terminal window for different subsystems (e.g., Neoverse V3, Cortex‑M55, Cortex‑M7, and the Cortex-A BMC).
+This simulation launches multiple UART consoles, each in a separate terminal window for different subsystems (for example, Neoverse V3, Cortex-M55, Cortex-M7, and the Cortex-A BMC). These graphical terminals require a desktop session. If you’re connecting over SSH only, they won’t render.
 
-These graphical terminal windows require a desktop session. If you're accessing the simulation over SSH (e.g., on a cloud instance), they may not display properly.
-
-To ensure proper display and interactivity, it is recommended to install a Remote Desktop environment using XRDP.
-
-On an Arm cloud Ubuntu 22.04 instance, you will need to install required packages:
+Install a remote desktop environment with XRDP:
 
 ```bash
 sudo apt update
-sudo apt install -y ubuntu-desktop xrdp xfce4 xfce4-goodies pv xterm sshpass socat retry
+sudo apt install -y xrdp xorg xfce4 xfce4-goodies xterm pv sshpass socat
+echo xfce4-session > ~/.xsession
+sudo adduser xrdp ssl-cert
 sudo systemctl enable --now xrdp
 ```
 
-You may need to follow the Step 2 on the [RD-V3 learning path](/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack/4_rdv3_on_fvp/) to setup the networking and GDM configuration.
+If you use GNOME on the server, you may need the networking and GDM tweaks in Step 2 of the RD-V3 Learning Path: [/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack/4_rdv3_on_fvp/](/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack/4_rdv3_on_fvp/)
 
-Once connected via Remote Desktop, open a terminal and launch the RD‑V3 FVP simulation:
+Once connected through Remote Desktop, open a terminal and launch the RD-V3 FVP simulation.
 
-## Execute Pre-Silicon OpenBMC Simulation
+## Execute pre-silicon OpenBMC simulation
 
-To make the simulation process more intuitive, you’ll need to modify a script from Arm’s GitLab repository:
+Download the helper script from Arm’s GitLab:
 
 ```bash
 cd ~
@@ -40,7 +37,7 @@ wget https://gitlab.arm.com/server_management/PoCs/fvp-poc/-/raw/2a79ae93560969a
 
 Before running the simulation, open the `run.sh` script and locate the line that defines FVP_KEYWORD.
 This variable determines when the host FVP should be launched by monitoring OpenBMC’s console output.
-If not set correctly, the script may hang or fail to start the host simulation.
+If not set correctly, the script might hang or fail to start the host simulation.
 Update the line to:
 
 ```output
@@ -54,16 +51,15 @@ chmod +x ./run.sh
 ./run.sh -m ~/FVP_RD_V3_R1/models/Linux64_GCC-9.3/FVP_RD_V3_R1
 ```
 
-The `run.sh` script will:
+The script will:
 
 - Launch the OpenBMC FVP and wait for BMC boot
-- Automatically start the host FVP for RD-V3 (running UEFI)
-- Connect the UART consoles between the BMC and host via virtual pipes
-- Connect MCTP and IPMI tunnels between the OpenBMC FVP and the RD-V3 host FVP
-- Stop the OpenBMC FVP and RD-V3 host FVP when CTRL+C is pressed
+- Start the host FVP for RD-V3 r1 (UEFI)
+- Bridge UART consoles between BMC and host via virtual pipes
+- Create MCTP and IPMI tunnels between the OpenBMC FVP and the host FVP
+- Stop both FVPs when you press Ctrl+C
 
-
-Once the simulation is running, the `OpenBMC FVP console` will stop at the Linux login prompt:
+When running, the **OpenBMC FVP console** stops at a Linux login prompt:
 
 ```output
 [  OK  ] Started phosphor systemd target monitor.
@@ -81,39 +77,36 @@ Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) nodistro.0 fvp ttyA
 fvp login:
 ```
 
-Enter the OpenBMC default username `root` and password, which is `0penBmc`.
-
+Log in with user `root` and password `0penBmc`.
 
 {{% notice Note %}}
-The first character of the password is the number ***0***, not a capital ***O***.
+The first character of the password is the number **0**, not a capital **O**.
 {{% /notice %}}
 
-After login, you will be dropped into the OpenBMC shell, a minimal Linux environment running inside the simulated BMC.
-
-The host-side UEFI simulation will appear in the `FVP terminal_ns_uart0` console. 
-You may briefly see the UEFI Firmware Setup Menu—select `Continue` to proceed with boot. 
-The system will then enter GRUB and begin booting Linux.
+The host-side UEFI appears in the **FVP terminal_ns_uart0** window. You might briefly see the UEFI firmware setup. Select **Continue** to proceed, then GRUB appears and Linux boots.
 
 ![img2 alt-text#center](openbmc_hostuefi.jpg "UEFI Firmware Setup Menu")
 
-The simulation will carry on the CSS-V3-R1 part, enter the GRUB menu. Press Enter to proceed.
+The simulation proceeds to the **CSSv3 r1** GRUB menu. Press **Enter** to boot.
 
-A successful simulation will show login prompts on both BMC and host consoles. You can also confirm success by seeing the final system state in the Web UI or UART output.
+A successful run shows login prompts on both BMC and host consoles. You can also confirm final state in the Web UI or via UART output.
 
-![img2 alt-text#center](openbmc_cssv3_sim.jpg "Simuation Success")
+![img2 alt-text#center](openbmc_cssv3_sim.jpg "Simulation success")
 
-Shown here is a simulation recording. It gives you a quick visual overview of how OpenBMC and UEFI boot and interact during pre-silicon execution.
+Shown here is a short recording that illustrates OpenBMC and UEFI interaction during pre-silicon execution.
 
-![img1 alt-text#center](openbmc_cssv3_running.gif "Simuation Running")
+![img1 alt-text#center](openbmc_cssv3_running.gif "Simulation running")
 
-After simulation completes, logs for both the BMC and host will be stored in `~/logs`. These are useful for verifying boot success or troubleshooting issues.
+After the simulation, logs for both BMC and host are stored in `~/logs`:
 
-- `obmc_boot.log`: BMC boot output  
-- `obmc_console.log`: BMC serial output  
-- `fvp_boot.log`: Host UEFI boot output
+- `obmc_boot.log`  BMC boot output
+- `obmc_console.log`  BMC serial output
+- `fvp_boot.log`  Host UEFI boot output
 
-By reviewing the contents of the logs folder, you can verify the expected system behavior or quickly diagnose
-any anomalies that arise during boot or runtime.
+Tail them to verify behavior or troubleshoot:
 
-With the simulation running successfully, you are now ready to perform real-time testing between the host and the BMC.  
-In the next section, you will explore how to interact with the BMC using UART and IPMI from the host side, validating communication channels in a pre-silicon context.
+```bash
+tail -n +1 ~/logs/* | less -R
+```
+
+With the simulation running successfully, you’re ready to exercise host↔BMC flows. Next, you’ll interact with the BMC via UART and IPMI from the host to validate pre-silicon communication paths.
