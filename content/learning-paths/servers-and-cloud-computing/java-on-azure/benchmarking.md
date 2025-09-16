@@ -6,10 +6,13 @@ weight: 6
 layout: learningpathall
 ---
 
-Now that you’ve built and run the Tomcat-like response, you can use it to test the JVM performance using JMH. You can also use it to test the performance difference between Cobalt 100 instances and other similar D series x86_64 based instances.
-## Run the performance tests using JMH
+Now that you have built and run a Tomcat-like response in Java, the next step is to benchmark it using a reliable, JVM-aware framework.
 
-JMH (Java Microbenchmark Harness) is a Java benchmarking framework developed by the JVM team at Oracle to measure the performance of small code snippets with high precision. It accounts for JVM optimizations like JIT and warm-up to ensure accurate and reproducible results. It measures the throughput, average latency, or execution time. Below steps help benchmark the Tomcat-like operation:
+## Run performance tests using JMH
+
+JMH (Java Microbenchmark Harness) is a Java benchmarking framework developed by the JVM team at Oracle to measure the performance of small code snippets with high precision. It accounts for JVM optimizations like JIT and warm-up to ensure accurate and reproducible results. You can measure throughput (ops/sec), average execution time, or percentiles for latency. 
+
+Follow the steps to help benchmark the Tomcat-like operation with JMH:
 
 
 Install Maven:
@@ -17,7 +20,7 @@ Install Maven:
 ```console
 sudo apt install maven -y
 ```
-Create Benchmark Project:
+Once Maven is installed, create a JMH benchmark project using the official archetype provided by OpenJDK:
 
 ```console
 mvn archetype:generate \
@@ -30,8 +33,31 @@ mvn archetype:generate \
   -Dversion=1.0
 cd jmh-benchmark
 ```
+The output should look like:
 
-Edit the `src/main/java/com/example/MyBenchmark.java` file and add the below code on it:
+```output
+[INFO] ----------------------------------------------------------------------------
+[INFO] Using following parameters for creating project from Archetype: jmh-java-benchmark-archetype:1.37
+[INFO] ----------------------------------------------------------------------------
+[INFO] Parameter: groupId, Value: com.example
+[INFO] Parameter: artifactId, Value: jmh-benchmark
+[INFO] Parameter: version, Value: 1.0
+[INFO] Parameter: package, Value: com.example
+[INFO] Parameter: packageInPathFormat, Value: com/example
+[INFO] Parameter: package, Value: com.example
+[INFO] Parameter: groupId, Value: com.example
+[INFO] Parameter: artifactId, Value: jmh-benchmark
+[INFO] Parameter: version, Value: 1.0
+[INFO] Project created from Archetype in dir: /home/azureuser/jmh-benchmark
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.474 s
+[INFO] Finished at: 2025-09-15T18:28:15Z
+[INFO] ------------------------------------------------------------------------
+```
+
+Now edit the `src/main/java/com/example/MyBenchmark.java` file in the generated project. Replace the placeholder `TestMethod()` function with the following code:
 
 ```java
 package com.example;
@@ -56,23 +82,36 @@ public class MyBenchmark {
     }
 }
 ```
-This simulates HTTP response generation similar to Tomcat.
+This mirrors the Tomcat-like simulation you created earlier but now runs under JMH.
 
-Build the Benchmark:
+Build the Benchmark JAR:
 
 ```console
 mvn clean install
 ```
 
-After the build is complete, the JMH benchmark jar will be in the target/ directory.
+The output from this command should look like:
+
+```output
+[INFO] Installing /home/azureuser/jmh-benchmark/target/jmh-benchmark-1.0.jar to /home/azureuser/.m2/repository/com/example/jmh-benchmark/1.0/jmh-benchmark-1.0.jar
+[INFO] Installing /home/azureuser/jmh-benchmark/pom.xml to /home/azureuser/.m2/repository/com/example/jmh-benchmark/1.0/jmh-benchmark-1.0.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.420 s
+[INFO] Finished at: 2025-09-15T18:31:32Z
+```
+
+After the build is complete, the JMH benchmark JAR will be located in the target directory.
 
 Run the Benchmark:
 
 ```console
 java -jar target/benchmarks.jar
 ```
+This will execute the benchmarkHttpResponse() method under JMH, showing average time per operation.
 
-You should see an output similar to:
+You should see output similar to:
 ```output
 # JMH version: 1.37
 # VM version: JDK 21.0.8, OpenJDK 64-Bit Server VM, 21.0.8+9-Ubuntu-0ubuntu124.04.1
@@ -160,6 +199,9 @@ Result "com.example.MyBenchmark.benchmarkHttpResponse":
 
 # Run complete. Total time: 00:08:21
 
+JMH runs warmup iterations so the JVM has a chance to JIT-compile and optimize the code before the real measurement begins.
+Each iteration shows how many times per second your `benchmarkHttpResponse()` method ran. You get an aggregate summary of the result at the end. In this example, on average the JVM executed ~35.6 million response constructions per second.
+
 REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
 why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
 experiments, perform baseline and negative tests that provide experimental control, make sure
@@ -178,12 +220,12 @@ MyBenchmark.benchmarkHttpResponse  thrpt   25  35659618.044 ± 686946.011  ops/s
 
 ### Benchmark Metrics Explained  
 
-- **Run Count**: The total number of benchmark iterations executed. A higher run count increases statistical reliability and reduces the effect of outliers.  
-- **Average Throughput**: The mean number of operations executed per second across all iterations. This metric represents the overall sustained performance of the benchmarked workload.
+- **Run Count**: The total number of benchmark iterations that JMH executed. More runs improve statistical reliability and help smooth out anomalies caused by the JVM or OS. 
+- **Average Throughput**: The mean number of operations completed per second across all measured iterations. This is the primary indicator of sustained performance for the benchmarked code.
 - **Standard Deviation**: Indicates the amount of variation or dispersion from the average throughput. A smaller standard deviation means more consistent performance.  
-- **Confidence Interval (99.9%)**: The statistical range within which the true average throughput is expected to fall, with 99.9% certainty. Narrow intervals imply more reliable results.  
-- **Min Throughput**: The lowest throughput observed across all iterations, reflecting the worst-case performance scenario.  
-- **Max Throughput**: The highest throughput observed across all iterations, reflecting the best-case performance scenario.  
+- **Confidence Interval (99.9%)**: The statistical range in which the true average throughput is expected to fall with 99.9% certainty. Narrow confidence intervals suggest more reliable and repeatable measurements. 
+- **Min Throughput**: The lowest observed throughput across all iterations, representing a worst-case scenario under the current test conditions.
+- **Max Throughput**: The highest observed throughput across all iterations, representing the best-case performance under the current test conditions. 
 
 ### Benchmark summary on Arm64
 
@@ -198,26 +240,12 @@ Here is a summary of benchmark results collected on an Arm64 **D4ps_v6 Ubuntu Pr
 | **Min Throughput**             | 33.53M ops/sec            |
 | **Max Throughput**             | 36.99M ops/sec            |
 
-### Benchmark summary on x86
 
-Here is a summary of benchmark results collected on x86 **D4s_v6 Ubuntu Pro 24.04 LTS virtual machine**.
+### Key insights from the results
 
-| Metric                        | Value |
-|--------------------------------|---------------------------|
-| **Java Version**               | OpenJDK 21.0.8            |
-| **Run Count**                  | 25 iterations             |
-| **Average Throughput**         | 16.78M ops/sec            |
-| **Standard Deviation**         | ±0.06M ops/sec            |
-| **Confidence Interval (99.9%)**| [16.74M, 16.83M] ops/sec  |
-| **Min Throughput**             | 16.64M ops/sec            |
-| **Max Throughput**             | 16.88M ops/sec            |
+- **Strong throughput performance** The benchmark sustained around 35.6 million operations per second, demonstrating efficient string construction and memory handling on the Arm64 JVM.
+- **Consistency across runs** With a standard deviation under 1 million ops/sec, results were tightly clustered. This suggests stable system performance without significant noise from background processes.
+- **High statistical confidence** The narrow 99.9% confidence interval ([34.97M, 36.34M]) indicates reliable, repeatable results. 
+- **Predictable performance envelope** The difference between min (33.5M) and max (37.0M) throughput is modest (~10%), suggests the workload performed consistently without extreme slowdowns or spikes.
 
-
-### Benchmark comparison insights
-When comparing the results on Arm64 vs x86_64 virtual machines:
-
-- **High Throughput:** Achieved an average of **35.66M ops/sec**, with peak performance reaching **36.99M ops/sec**.  
-- **Stable Performance:** Standard deviation of **±0.92M ops/sec**, with results tightly bounded within the 99.9% confidence interval **[34.97M, 36.34M]**.  
-- **Consistent Efficiency:** Demonstrates the reliability of Arm64 architecture for sustaining high-throughput Java workloads on Azure Ubuntu Pro environments.
-
-You have now benchmarked Java on an Azure Cobalt 100 Arm64 virtual machine and compared results with x86_64.
+The Arm-based Azure `D4ps_v6` VM provides stable and efficient performance for Java workloads, even in microbenchmark scenarios. These results establish a baseline you can now compare directly against x86_64 instances to evaluate relative performance. 
