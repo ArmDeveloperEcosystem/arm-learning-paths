@@ -29,10 +29,9 @@ Prior to logging in to the NXP board, you need to configure `picocom`. This allo
    ```bash
    brew install picocom
    ```
-{{% /notice %}}
 
-1. Establish a USB-to-UART (serial) connection:
-   - Connect the board's "DEBUG" USB-C connector to your laptop
+3. Establish a USB-to-UART (serial) connection:
+   - Connect the board's "DEBUG" USB-C connector to your Mac
    - Find the NXP board's USB connections in your computer's terminal:
      ```bash { output_lines = "2-7" }
      ls /dev/tty.*
@@ -47,6 +46,28 @@ Prior to logging in to the NXP board, you need to configure `picocom`. This allo
    - Connect to the NXP board:
      ```bash { output_lines = "2-5" }
      sudo picocom -b 115200 /dev/tty.usbmodem56D70442811
+     # output lines
+     picocom v3.1
+     ...
+     Terminal ready
+     ```
+
+4. Go straight to step 2, in the below instructions
+
+{{% /notice %}}
+
+1. Establish a USB-to-UART (serial) connection:
+   - Connect the board's "DEBUG" USB-C connector to your Linux machine
+   - Find the NXP board's USB connections in your computer's terminal:
+     ```bash { output_lines = "2-3" }
+     ls /dev/ttyUSB* /dev/ttyACM* 2>/dev/null
+     # output lines
+     /dev/ttyACM0   /dev/ttyACM1
+     ```
+
+   - Connect to the NXP board:
+     ```bash { output_lines = "2-5" }
+     sudo picocom -b 115200 /dev/ttyACM0
      # output lines
      picocom v3.1
      ...

@@ -59,7 +59,7 @@ layout: "learningpathall"
 6. Assuming your WiFi network is connected to the Internet, test connectivity:
 
    ```bash
-   curl -i http://www.example.com
+   curl -I http://www.example.com
    ```
 
    If WiFi is configured correctly, you will see the example.com web page load:
