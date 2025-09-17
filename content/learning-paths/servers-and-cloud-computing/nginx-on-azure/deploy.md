@@ -10,9 +10,11 @@ layout: learningpathall
 
 ## NGINX Installation on Ubuntu Pro 24.04 LTS
 
-Install NGINX using `apt` on your Ubuntu Pro 24.04 LTS virtual machine, start the NGINX service, and allow **HTTP** traffic through the firewall. Then access the default welcome page using your virtual machine’s public IP address in a browser.
+In this section, you will install and configure NGINX, a high-performance web server and reverse proxy on your Arm-based Azure instance. NGINX is widely used to serve static content, handle large volumes of connections efficiently, and act as a load balancer. Running it on your Azure Cobalt-100 virtual machine will allow you to serve web traffic securely and reliably.
 
 ### Install NGINX
+
+Run the following commands to install and enable NGINX:
 
 ```console
 sudo apt update
@@ -23,10 +25,27 @@ sudo systemctl start nginx
 
 ### Verify NGINX
 
+Check the installed version of NGINX:
+
+```console
+nginx -v
+```
+The output should look like:
+
+```output
+nginx version: nginx/1.24.0 (Ubuntu)
+```
+{{% notice Note %}}
+
+The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends NGINX version 1.20.1 as the minimum recommended on the Arm platforms.
+
+{{% /notice %}}
+
+You can confirm that NGINX is running correctly by checking its systemd service status:
 ```console
 sudo systemctl status nginx
 ```
-You should see an output similar to:
+You should see output similar to:
 
 ```output
 ● nginx.service - A high performance web server and a reverse proxy server
@@ -44,16 +63,8 @@ You should see an output similar to:
              ├─1944 "nginx: worker process"
              └─1945 "nginx: worker process"
 ```
-Also, you can use the below command to see the installed version of NGINX:
+If you see Active: active (running), NGINX is successfully installed and running.
 
-```console
-nginx -v
-```
-{{% notice Note %}}
-There is an [Arm community blog](https://community.arm.com/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/improve-nginx-performance-up-to-32-by-deploying-on-alibaba-cloud-yitian-710-instances) that shows that NGINX version 1.20.1 deployed on Yitian 710 based ECS provides up to 32% more throughput in compared to the equivalent x86 based ECS instances.
- 
-The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends NGINX version 1.20.1 as the minimum recommended on the Arm platforms.
-{{% /notice %}}
 
 ### Validation with curl
 Validation with `curl` confirms that NGINX is correctly installed, running, and serving **HTTP** responses.
@@ -62,9 +73,9 @@ Run the following command to send a HEAD request to the local NGINX server:
 ```console
 curl -I http://localhost/
 ```
-The `curl -I http://localhost/` command sends a HEAD request to NGINX to check its **HTTP** response headers without downloading the page content.
+The -I option tells curl to request only the HTTP response headers, without downloading the page body.
 
-You should see an output similar to:
+You should see output similar to:
 
 ```output
 HTTP/1.1 200 OK
@@ -78,20 +89,31 @@ ETag: "68be5aff-267"
 Accept-Ranges: bytes
 ```
 
-Output summery:
-- **HTTP/1.1 200 OK**: nginx is responding successfully.
-- **Server: nginx/1.24.0**: Confirms it's running nginx.
-- Confirms your web server is reachable on **localhost**.
+Output summary:
+- HTTP/1.1 200 OK: Confirms that NGINX is responding successfully.
+- Server: nginx/1.24.0: Shows that the server is powered by NGINX.
+- Content-Type, Content-Length, Last-Modified, ETag: Provide details about the served file and its metadata.
 
-### Allow HTTP Traffic in Firewall(Optional)
+This step verifies that your NGINX installation is functional at the system level, even before exposing it to external traffic. It’s a quick diagnostic check that is useful when troubleshooting connectivity issues.
 
-On **Ubuntu Pro 24.04 LTS** virtual machines, **UFW (Uncomplicated Firewall)** is used to manage firewall rules. By default, it allows only SSH (port 22) and blocks most other traffic.  
+### Allowing HTTP Traffic
 
-So even if Azure allows HTTP on port 80 (added to inbound ports during Virtual Machine creation), your Virtual Machine’s firewall may still block it until you run:
+When you created your VM instance earlier, you configured the Azure Network Security Group (NSG) to allow inbound HTTP (port 80) traffic. This means the Azure-side firewall is already open for web requests.
+On the VM itself, you still need to make sure that the Uncomplicated firewall (UFW) which is used to manage firewall rules on Ubuntu allows web traffic. Run:
+
 
 ```console
 sudo ufw allow 80/tcp
 sudo ufw enable
+```
+The output from this command should look like:
+
+```output
+sudo ufw enable
+Rules updated
+Rules updated (v6)
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
 ```
 You can verify that HTTP is now allowed with:
 
@@ -109,19 +131,17 @@ To                         Action      From
 8080/tcp (v6)              ALLOW       Anywhere (v6)
 80/tcp (v6)                ALLOW       Anywhere (v6)
 ```
+This ensures that both Azure and the VM-level firewalls are aligned to permit HTTP requests.
 
 ### Accessing the NGINX Default Page
 
-You can access the NGINX default page from your Virtual machine’s public IP. Run the following command to display your public URL:
+You can now access the NGINX default page from your Virtual machine’s public IP address. Run the following command to display your public URL:
 
-Now you can access the NGINX default page in a browser. Run the following command to print your Virtual machine’s public URL, then open it in a browser:
 ```console
 echo "http://$(curl -s ifconfig.me)/"
 ```
-
-Open the printed URL in a browser. You should see the NGINX welcome page confirming a successful installation.
+Copy the printed URL and open it in your browser. You should see the default NGINX welcome page, which confirms a successful installation and that HTTP traffic is reaching your VM.
 
 ![NGINX](images/nginx-browser.png)
 
-NGINX installation is complete. You can now proceed with the baseline testing ahead.
-
+At this stage, your NGINX installation is complete. You are now ready to proceed with baseline testing and further configuration.

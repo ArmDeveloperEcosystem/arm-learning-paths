@@ -7,24 +7,22 @@ cascade:
     
 minutes_to_complete: 30   
 
-who_is_this_for: This Learning Path introduces NGINX deployment on Microsoft Azure Cobalt 100 (Arm-based) virtual machine. It is intended for system administrators and developers looking to deploy and benchmark NGINX on Arm architecture with minimal adjustments from traditional x86_64 environments.
+who_is_this_for: This Learning Path introduces NGINX deployment on Microsoft Azure Cobalt 100 (Arm-based) virtual machine. It is intended for system administrators and developers looking to deploy and benchmark NGINX on Arm-based instances.
 
 learning_objectives: 
     - Start an Azure Arm64 virtual machine using the Azure console and Ubuntu Pro 24.04 LTS as the base image.
-    - Deploy the NGINX web server on the Azure Arm64 virtual machine running Ubuntu Pro 24.04 LTS.
+    - Deploy the NGINX web server on the Azure Arm64 virtual machine.
     - Configure and test a static website using NGINX on the virtual machine.
     - Perform baseline testing and benchmarking of NGINX in the Ubuntu Pro 24.04 LTS Arm64 virtual machine environment.
 
 
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6).
-    - Familiarity with the [NGINX architecture](https://www.nginx.com/) and deployment practices on Arm64 platforms.
-    - Network settings (firewalls and security groups) should allow inbound communication on ports 22 (SSH) and 80 (HTTP).
 
-author: Jason Andrews
+author: Pareena Verma
 
 ### Tags
-skilllevels: Advanced
+skilllevels: Introductory
 subjects: Web
 cloud_service_providers: Microsoft Azure
 
