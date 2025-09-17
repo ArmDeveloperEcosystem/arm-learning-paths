@@ -1,43 +1,48 @@
 ---
-title: "Code kata: perfect your SVE and SME skills with SIMD Loops"
+title: "Code kata: perfect your SVE and SME skills with SIMD loops"
+description: "Hands-on code kata for advanced developers to optimize SIMD loops on Arm using SVE, SVE2, and SME2—covering predication, tiling, kernel structure, and benchmarking."
+slug: "code-kata-sve-sve2-sme2-simd"
 
 minutes_to_complete: 30
 
-draft: true
-cascade:
-    draft: true
 
 who_is_this_for: This is an advanced topic for software developers who want to learn how to use the full range of features available in SVE, SVE2 and SME2 to improve software performance on Arm processors.
 
 learning_objectives:
-     - Improve SIMD code performance using Scalable Vector Extension (SVE) and Scalable Matrix Extension (SME).
+  - Improve SIMD loop performance using Scalable Vector Extension (SVE), SVE2, and Scalable Matrix Extension (SME2)
+  - Apply predication, vector-length–agnostic loops, and gather/scatter patterns correctly
+  - Structure inner kernels with SME2 tiles and manage ZA state safely
+  - Benchmark, interpret results, and iterate using compiler flags and micro-optimizations
 
 prerequisites:
-    - An AArch64 computer running Linux or macOS. You can use cloud instances, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) for a list of cloud service providers. 
-    - Some familiarity with SIMD programming and NEON intrinsics.
+  - An AArch64 computer running Linux or macOS (cloud OK). See: /learning-paths/servers-and-cloud-computing/csp/
+  - Some familiarity with SIMD programming and NEON intrinsics.
+  - Recent toolchains that support SVE/SME (GCC 13+ or Clang 16+ recommended)
 
 author:
-    - Alejandro Martinez Vicente
-    - Mohamad Najem
+  - Alejandro Martinez Vicente
+  - Mohamad Najem
 
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
-    - Neoverse
+  - Neoverse
 operatingsystems:
-    - Linux
-    - macOS
+  - Linux
+  - macOS
 tools_software_languages:
-    - GCC
-    - Clang
+  - C
+  - C++
+  - GCC
+  - Clang
 
 shared_path: true
 shared_between:
-    - servers-and-cloud-computing
-    - laptops-and-desktops
-    - mobile-graphics-and-gaming
-    - automotive
+  - servers-and-cloud-computing
+  - laptops-and-desktops
+  - mobile-graphics-and-gaming
+  - automotive
 
 further_reading:
     - resource:
