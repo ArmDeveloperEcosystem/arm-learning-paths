@@ -91,7 +91,7 @@ pip install -U huggingface_hub
 hf download Qwen/Qwen2.5-VL-3B-Instruct --local-dir ./Qwen2.5-VL-3B-Instruct/
 pip install llmexport
 ```
-Use the `llmexport` to quantize the model with these options:
+Use `llmexport` to quantize the model with these options:
 
 ```bash
 llmexport --path ../Qwen2.5-VL-3B-Instruct/ --export mnn --quant_bit 4 \
@@ -99,7 +99,7 @@ llmexport --path ../Qwen2.5-VL-3B-Instruct/ --export mnn --quant_bit 4 \
 ```
 
 {{% notice Note %}}
-if you run into issues where llmexport is not able to access utils, try the following
+If you run into issues where llmexport is not able to access utils, try the following
 ```bash
 # From your project dir (inside the venv)
 cat > llmexport_fixed.py <<'PY'
