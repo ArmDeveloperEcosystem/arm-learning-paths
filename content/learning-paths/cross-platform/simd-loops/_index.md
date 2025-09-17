@@ -31,7 +31,6 @@ operatingsystems:
 tools_software_languages:
     - GCC
     - Clang
-    - FVP
 
 shared_path: true
 shared_between:
