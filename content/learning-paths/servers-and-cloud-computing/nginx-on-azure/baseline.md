@@ -8,17 +8,18 @@ layout: learningpathall
 
 
 ### Baseline testing with a static website on NGINX
-Perform baseline testing of NGINX on an **Ubuntu Pro 24.04 LTS** virtual machine by deploying a custom static HTML page. This verifies that NGINX is correctly serving content on the Arm64 platform.
+Once NGINX is installed and serving the default welcome page, the next step is to verify that it can serve your own content. A baseline test using a simple static HTML site ensures that NGINX is correctly configured and working as expected on your Ubuntu Pro 24.04 LTS virtual machine.
 
 1. Create a Static Website Directory:
 
 Prepare a folder to host your HTML content.
 ```console
-mkdir -p ~/my-static-site
+mkdir -p /var/www/my-static-site
+cd /var/www/my-static-site
 ```
 2. Create an HTML file and Web page:
 
-Create a HTML file `nano my-static-site/index.html` with the content below to design a visually appealing static landing page.
+Create a simple HTML file to replace the default NGINX welcome page. Using a file editor of your choice create the file `index.html` with the content below:
 
 ```html
 <!DOCTYPE html>
@@ -61,69 +62,89 @@ Create a HTML file `nano my-static-site/index.html` with the content below to de
 </body>
 </html>
 ```
-3. Move the Website to NGINX's Accessible Directory:
+3. Adjust Permissions:
 
-Since NGINX runs under the `www-data` user and may not have access to files inside `/home/ubuntu`, move the site to a directory where NGINX has permissions by default:
+Ensure that NGINX (running as the www-data user) can read the files in your custom site directory:
 
 ```console
-sudo mkdir -p /var/www/my-static-site
-sudo cp -r ~/my-static-site/* /var/www/my-static-site/
 sudo chown -R www-data:www-data /var/www/my-static-site
 ```
+This sets the ownership of the directory and files so that the NGINX process can serve them without permission issues.
 
-4. Create NGINX Config File to Serve Static Website:
+4. Update NGINX Configuration:
 
-Point NGINX to serve your static HTML content.
+Point NGINX to serve files from your new directory by creating a dedicated configuration file under /etc/nginx/conf.d/.
+
 ```console
 sudo nano /etc/nginx/conf.d/static-site.conf
 ```
-Now, add the following configuration:
+Add the following configuration to it:
 
-```NGINX
+```console
 server {
-    listen 80;
-    server_name localhost;
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
+
+    root /var/www/my-static-site;
+    index index.html;
 
     location / {
-        root /var/www/my-static-site;
-        index index.html;
+        try_files $uri $uri/ =404;
     }
 
     access_log /var/log/nginx/static-access.log;
-    error_log /var/log/nginx/static-error.log;
+    error_log  /var/log/nginx/static-error.log;
 }
 ```
-Make sure `/home/ubuntu/my-static-site` is the correct path to your **index.html**.
+This configuration block tells NGINX to:
+  - Listen on port 80 (both IPv4 and IPv6).
+  - Serve files from /var/www/my-static-site.
+  - Use index.html as the default page.
+  - Log access and errors to dedicated log files for easier troubleshooting.
 
-5. Test the NGINX Configuration:
+Make sure the path to your `index.html` file is correct before saving.
+
+5. Disable the default site:
+
+By default, NGINX comes with a packaged default site configuration. Since you have created a custom config, it is good practice to disable the default to avoid conflicts:
+
+```console
+sudo unlink /etc/nginx/sites-enabled/default
+```
+
+6. Test the NGINX Configuration:
+
+Before applying your changes, always test the configuration to make sure there are no syntax errors:
 
 ```console
 sudo nginx -t
 ```
-You should see an output similar to:
+You should see output similar to:
 ```output
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
 ```
+If you see both lines, your configuration is valid.
 
-6. Reload or Restart NGINX:
+7. Reload or Restart NGINX:
 
-Apply configuration changes and restart the web server.
+After testing the configuration, apply your changes by reloading or restarting the NGINX service:
 ```console
 sudo nginx -s reload
 sudo systemctl restart nginx
 ```
 
-7. Test the Static Website on browser:
+8. Test the Static Website in a browser:
 
 Access your website at your public IP on port 80.
+
 ```console
 http://<your-vm-public-ip>/
 ```
-Make sure port 80 is open in your Azure Network Security Group (NSG).
 
-8. You should see the NGINX welcome page confirming a successful deployment:
+9. You should see the NGINX welcome page confirming a successful deployment:
 
 ![Static Website Screenshot](images/nginx-web.png)
 
-This verifies the basic functionality of NGINX installation before proceeding to the benchmarking.
+This verifies the basic functionality of NGINX installation and you can now proceed to benchmarking the performance of NGINX on your Arm-based Azure VM.
