@@ -17,7 +17,7 @@ extensions introduce new instructions, more flexible programming models, and
 support for concepts like predication, scalable vectors, and streaming modes.
 However, they also come with a learning curve.
 
-That is where [SIMD Loops](https://gitlab.arm.com/architecture/simd-loops) becomes a valuable resource, enabling you to quickly and effectively learn how to write high-performance SIMD code.
+[SIMD Loops](https://gitlab.arm.com/architecture/simd-loops) is a valuable resource, enabling you to quickly and effectively learn how to write high-performance SIMD code.
 
 SIMD Loops is designed to help
 you learn how to write SVE and SME code. It is a collection

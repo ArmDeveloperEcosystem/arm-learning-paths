@@ -6,12 +6,16 @@ weight: 5
 layout: learningpathall
 ---
 
-To illustrate the structure and design principles of simd-loops, consider loop
-202 as an example. `inner_loop_202` is defined at lines 69-79 in file
+To illustrate the structure and design principles of SIMD Loops, consider loop
+202 as an example. 
+
+Use a text editor to look at the file `loops/loop_202.c`
+
+The function `inner_loop_202()` is defined at lines 60-70 in file
 `loops/loops_202.c` and calls the `matmul_fp32` routine defined in
 `matmul_fp32.c`.
 
-Open `loops/matmul_fp32.c`.
+Use a text editor to look at the file `loops/matmul_fp32.c`
 
 This loop implements a single precision floating point matrix multiplication of
 the form:
@@ -39,10 +43,10 @@ struct loop_202_data {
 ```
 
 For this loop:
-- The first input matrix (A) is stored in column-major format in memory.
+- The first input matrix (a) is stored in column-major format in memory.
 - The second input matrix (b) is stored in row-major format in memory.
-- None of the memory area designated by `a`, `b` anf `c` alias (i.e. they
-  overlap in some way) --- as indicated by the `restrict` keyword.
+- None of the memory area designated by `a`, `b` and `c` alias (they
+  overlap in some way) as indicated by the `restrict` keyword.
 
 This layout choice helps optimize memory access patterns for all the targeted
 SIMD architectures.
@@ -59,7 +63,7 @@ This design enables portability across different SIMD extensions.
 
 ## Function implementation
 
-The `matmul_fp32` function from file `loops/matmul_fp32.c` provides several
+The `matmul_fp32()` function from file `loops/matmul_fp32.c` provides several
 optimizations of the single-precision floating-point matrix multiplication,
 including the ACLE intrinsics-based code, and the assembly hand-optimized code.
 
