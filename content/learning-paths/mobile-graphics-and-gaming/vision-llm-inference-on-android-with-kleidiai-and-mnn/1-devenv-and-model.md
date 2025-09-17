@@ -46,6 +46,12 @@ pip 24.0 from /usr/lib/python3/dist-packages/pip (python 3.12)
 If Python 3.x is not the default version, try running `python3 --version` and `pip3 --version`.
 {{% /notice %}}
 
+It's reccommended to do the changes in a python virtual environment
+```output
+python3.12 -m venv vision_llm
+source vision_llm/bin/activate
+```
+
 ## Set up Phone Connection
 
 You need to set up an authorized connection with your phone. The Android SDK Platform Tools package, included with Android Studio, provides Android Debug Bridge (ADB) for transferring files. 
@@ -72,7 +78,7 @@ The pre-quantized model is available in Hugging Face, you can download with the 
 ```bash
 git lfs install
 git clone https://huggingface.co/taobao-mnn/Qwen2.5-VL-3B-Instruct-MNN
-git checkout 9057334b3f85a7f106826c2fa8e57c1aee727b53
+git checkout a4622194b3c518139e2cb8099e147e3d71975f7a
 ```
 
 ## (Optional) Download and Convert the Model
@@ -81,28 +87,48 @@ If you need to quantize the model with customized parameter, the following comma
 ```bash
 cd $HOME
 pip install -U huggingface_hub
-huggingface-cli download Qwen/Qwen2-VL-2B-Instruct --local-dir ./Qwen2-VL-2B-Instruct/
-git clone https://github.com/wangzhaode/llm-export
-cd llm-export && pip install .
+hf download Qwen/Qwen2.5-VL-3B-Instruct --local-dir ./Qwen2.5-VL-3B-Instruct/
+pip install llmexport
 ```
-Use the `llm-export` repository to quantize the model with these options:
+Use the `llmexport` to quantize the model with these options:
 
 ```bash
-llmexport --path ../Qwen2-VL-2B-Instruct/ --export mnn --quant_bit 4 \
-    --quant_block 0 --dst_path Qwen2-VL-2B-Instruct-convert-4bit-per_channel --sym
+llmexport --path ../Qwen2.5-VL-3B-Instruct/ --export mnn --quant_bit 4 \
+    --quant_block 64 --dst_path Qwen2.5-VL-3B-Instruct-convert-4bit-64qblock
 ```
+
+{{% notice Note %}}
+if you run into issues where llmexport is not able to access utils, try the following
+```bash
+# From your project dir (inside the venv)
+cat > llmexport_fixed.py <<'PY'
+import sys, importlib
+# make "utils" resolve to "llmexport.utils"
+sys.modules.setdefault("utils", importlib.import_module("llmexport.utils"))
+
+from llmexport.__main__ import main
+if __name__ == "__main__":
+    main()
+PY
+
+# Use this instead of the entrypoint:
+python llmexport_fixed.py \
+  --path Qwen2.5-VL-3B-Instruct \
+  --export mnn --quant_bit 4 --quant_block 64 \
+  --dst_path Qwen2.5-VL-3B-Instruct-convert-4bit-64qblock
+```
+{{% /notice %}}
 
 The table below gives you an explanation of the different arguments:
 
 | Parameter        | Description | Explanation |
 |------------------|-------------|--------------|
 | `--quant_bit` | MNN quant bit, 4 or 8, default is 4. | `4` represents q4 quantization. |
-| `--quant_block` | MNN quant block, default is 0. | `0` represents per-channel quantization; `128` represents 128 per-block quantization. |
-| `--sym` | Symmetric quantization (without zeropoint); default is False. | The quantization parameter that enables symmetrical quantization. |
+| `--quant_block` | MNN quant block, default is 0. | `0` represents per-channel quantization; `64` represents 64 per-block quantization. |
 
 To learn more about the parameters, see the [transformers README.md](https://github.com/alibaba/MNN/tree/master/transformers).
 
-Verify that the model was built correctly by checking that the `Qwen2-VL-2B-Instruct-convert-4bit-per_channel` directory is at least 1 GB in size.
+Verify that the model was built correctly by checking that the `Qwen2.5-VL-3B-Instruct-convert-4bit-64qblock` directory is at least 2GB in size.
 
 ## Push the model to Android device
 

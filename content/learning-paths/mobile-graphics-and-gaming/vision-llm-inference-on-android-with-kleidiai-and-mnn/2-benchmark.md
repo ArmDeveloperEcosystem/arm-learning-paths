@@ -29,7 +29,7 @@ Run the following commands to clone the MNN repository and checkout the source t
 cd $HOME
 git clone https://github.com/alibaba/MNN.git
 cd MNN
-git checkout 282cebeb785118865b9c903decc4b5cd98d5025e
+git checkout a739ea5870a4a45680f0e36ba9662ca39f2f4eec
 ```
 
 Create a build directory and run the build script. 
