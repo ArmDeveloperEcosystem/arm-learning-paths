@@ -46,8 +46,9 @@ pip 24.0 from /usr/lib/python3/dist-packages/pip (python 3.12)
 If Python 3.x is not the default version, try running `python3 --version` and `pip3 --version`.
 {{% /notice %}}
 
-It's reccommended to do the changes in a python virtual environment
-```output
+It is recommended to use a python virtual environment:
+
+```bash
 python3.12 -m venv vision_llm
 source vision_llm/bin/activate
 ```
