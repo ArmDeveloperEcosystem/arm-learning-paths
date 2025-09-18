@@ -92,7 +92,7 @@ You can build the [hello world](https://docs.zephyrproject.org/latest/samples/he
 
 ```bash { env_source="/shared/zephyrproject/.venv/bin/activate",cwd="/shared" }
 cd zephyrproject/zephyr
-west build -p auto -b mps3_an547 samples/hello_world
+west build -p auto -b mps3/corstone300/fvp samples/hello_world samples/hello_world
 ```
 
 {{% notice Note %}}
