@@ -6,11 +6,9 @@ weight: 3
 layout: learningpathall
 ---
 
-Writing high-performance software on Arm often means using single instruction, multiple data (SIMD) technologies. Many developers start with NEON, a familiar fixed-width vector extension. As Arm architectures evolve, so do the SIMD capabilities available to you.
+Writing high-performance software on Arm often means using single-instruction, multiple-data (SIMD) technologies. Many developers start with NEON, a familiar fixed-width vector extension. As Arm architectures evolve, so do the SIMD capabilities available to you.
 
-This Learning Path uses **Scalable Vector Extension (SVE)** and **Scalable Matrix Extension (SME)** to teach modern SIMD patterns. They are two powerful, scalable vector extensions designed for modern
-workloads. Unlike NEON, these architecture extensions are not just wider; they are fundamentally different. They introduce predication, vector-length-agnostic (VLA) programming, gather/scatter, streaming modes, and tile-based compute with **ZA** state. The result is more power and flexibility, with a learning curve to match.
-
+This Learning Path uses the **Scalable Vector Extension (SVE)** and the **Scalable Matrix Extension (SME)** to teach modern SIMD patterns. They are two powerful, scalable vector extensions designed for modern workloads. Unlike NEON, these architecture extensions are not just wider; they are fundamentally different. They introduce predication, vector-length-agnostic (VLA) programming, gather/scatter, streaming modes, and tile-based compute with ZA state. The result is more power and flexibility, with a learning curve to match.
 
 **SIMD Loops** offer a hands-on way to climb the learning curve. It is a public codebase of self-contained, real loop kernels written in C, Arm C Language Extensions (ACLE) intrinsics, and selected inline assembly. Kernels span tasks such as matrix multiply, sorting, and string processing. You can build them, run them, step through them, and adapt them for your own SIMD workloads.
 

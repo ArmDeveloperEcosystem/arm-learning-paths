@@ -3,11 +3,11 @@ title: "Code kata: perfect your SVE and SME skills with SIMD loops"
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for software developers who want to learn how to use the full range of features available in SVE, SVE2 and SME2 to improve software performance on Arm processors.
+who_is_this_for: This is an advanced topic for software developers who want to learn how to use the full range of features available in SVE, SVE2, and SME2 to improve software performance on Arm processors.
 
 learning_objectives:
   - Improve SIMD loop performance using Scalable Vector Extension (SVE), SVE2, and Scalable Matrix Extension (SME2)
-  - Explore how SVE indexed fmla and SME2 fmopa instructions accelerate matrix multiplication
+  - Explore how SVE-indexed fmla and SME2 fmopa instructions accelerate matrix multiplication
   - Understand how SME2 kernels use ZA tiles and streaming attributes
   - Describe what SIMD Loops contains and how kernels are organized across scalar, NEON, SVE/SVE2, and SME2 variants
   - Build and run a selected kernel with the provided runner and validate correctness against the C reference
@@ -16,7 +16,7 @@ learning_objectives:
 
 prerequisites:
   - An AArch64 computer running Linux or macOS (cloud OK). See: /learning-paths/servers-and-cloud-computing/csp/
-  - Some familiarity with SIMD programming and NEON intrinsics.
+  - Some familiarity with SIMD programming and NEON intrinsics
   - Recent toolchains that support SVE/SME (GCC 13+ or Clang 16+ recommended)
 
 author:
