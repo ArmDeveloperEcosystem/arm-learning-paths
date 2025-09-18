@@ -1,35 +1,32 @@
 ---
 title: Code example
-weight: 5
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-To illustrate the structure and design principles of SIMD Loops, consider loop
-202 as an example. 
+## Overview: loop 202 matrix multiplication example
 
-Use a text editor to look at the file `loops/loop_202.c`
+To illustrate the structure and design principles of SIMD Loops, consider loop 202 as an example.
 
-The function `inner_loop_202()` is defined at lines 60-70 in file
-`loops/loops_202.c` and calls the `matmul_fp32` routine defined in
-`matmul_fp32.c`.
+Use a text editor to open `loops/loop_202.c`.
 
-Use a text editor to look at the file `loops/matmul_fp32.c`
+The function `inner_loop_202()` is defined around lines 60–70 in `loops/loop_202.c` and calls the `matmul_fp32` routine defined in `loops/matmul_fp32.c`
 
-This loop implements a single precision floating point matrix multiplication of
-the form:
+Open `loops/matmul_fp32.c` in your editor.
 
-`C[M x N] = A[M x K] x B[K x N]`
+This loop implements single-precision floating-point matrix multiplication of the form:
 
-A matrix multiplication can be understood in two equivalent ways:
-- As the dot product between each row of matrix `A` and each column of matrix `B`.
-- As the sum of outer products between the columns of `A` and the rows of `B`.
+`C[M × N] = A[M × K] × B[K × N]`
 
-## Data structure
+You can view matrix multiplication in two equivalent ways:
+- As the dot product between each row of `A` and each column of `B`
+- As the sum of outer products between the columns of `A` and the rows of `B`
 
-The loop begins by defining the data structure, which captures the matrix
-dimensions (`M`, `K`, `N`) along with input and output buffers:
+## Data structure definition
+
+The loop begins by defining a data structure that captures the matrix dimensions (`M`, `K`, `N`) along with input and output buffers:
 
 ```C
 struct loop_202_data {
@@ -43,35 +40,27 @@ struct loop_202_data {
 ```
 
 For this loop:
-- The first input matrix (a) is stored in column-major format in memory.
-- The second input matrix (b) is stored in row-major format in memory.
-- None of the memory area designated by `a`, `b` and `c` alias (they
-  overlap in some way) as indicated by the `restrict` keyword.
+- Matrix `a` is stored in column-major order
+- Matrix `b` is stored in row-major order
+- The memory regions referenced by `a`, `b`, and `c` do not alias, as indicated by the `restrict` keyword
 
-This layout choice helps optimize memory access patterns for all the targeted
-SIMD architectures.
+This layout helps optimize memory access patterns across the targeted SIMD architectures.
 
-## Loop attributes
+## Loop attributes by architecture
 
-Next, the loop attributes are specified depending on the target architecture:
-- For SME targets, the function `inner_loop_202` must be invoked with the
-  `__arm_streaming` attribute, using a shared `ZA` register context
-  (`__arm_inout("za")`). There attributes are wrapped in the LOOP_ATTR macro.
-- For SVE or NEON targets, no additional attributes are required.
+Loop attributes are specified per target architecture:
+- **SME targets** — `inner_loop_202` is invoked with the `__arm_streaming` attribute and uses a shared `ZA` register context (`__arm_inout("za")`). These attributes are wrapped in the `LOOP_ATTR` macro
+- **SVE or NEON targets** — no additional attributes are required
 
-This design enables portability across different SIMD extensions.
+This design enables portability across SIMD extensions.
 
-## Function implementation
+## Function implementation in loops/matmul_fp32.c
 
-The `matmul_fp32()` function from file `loops/matmul_fp32.c` provides several
-optimizations of the single-precision floating-point matrix multiplication,
-including the ACLE intrinsics-based code, and the assembly hand-optimized code.
+`loops/matmul_fp32.c` provides several optimizations of matrix multiplication, including ACLE intrinsics and hand-optimized assembly.
 
 ### Scalar code
 
-A scalar C implementation is provided at lines 40-52. This version follows the
-dot-product formulation of matrix multiplication, serving both as a functional
-reference and a baseline for auto-vectorization:
+A scalar C implementation appears around lines 40–52. It follows the dot-product formulation and serves as both a functional reference and an auto-vectorization baseline:
 
 ```C { line_numbers="true", line_start="40" }
    for (uint64_t x = 0; x < m; x++) {
@@ -89,16 +78,13 @@ reference and a baseline for auto-vectorization:
      }
 ```
 
-### SVE optimized code
+### SVE-optimized code
 
-The SVE implementation uses the indexed floating-point multiply-accumulate
-(`fmla`) instruction to optimize the matrix multiplication operation. In this
-formulation, the outer-product is decomposed into multiple indexed
-multiplication steps, with results accumulated directly into `Z` registers.
+The SVE version uses indexed floating-point multiply–accumulate (`fmla`) to optimize the matrix multiplication operation. The outer product is decomposed into indexed multiply steps, and results accumulate directly in `Z` registers.
 
-In the intrinsic version (lines 167-210), the innermost loop is structured as follows:
+In the intrinsics version (lines 167–210), the innermost loop is structured as follows:
 
-```C { line_numbers = "true", line_start="167"}
+```C { line_numbers="true", line_start="167" }
   for (m_idx = 0; m_idx < m; m_idx += 8) {
     for (n_idx = 0; n_idx < n; n_idx += svcntw() * 2) {
       ZERO_PAIR(0);
@@ -145,36 +131,23 @@ In the intrinsic version (lines 167-210), the innermost loop is structured as fo
   }
 ```
 
-At the beginning of the loop, the accumulators (`Z` registers) are explicitly
-initialized to zero. This is achieved using `svdup` intrinsic (or its equivalent
-`dup` assembly instruction), encapsulated in the `ZERO_PAIR` macro.
+At the beginning of the loop, the accumulators (`Z` registers) are zeroed using `svdup` (or `dup` in assembly), encapsulated in the `ZERO_PAIR` macro.
 
 Within each iteration over the `K` dimension:
-- 128 bits (four consecutive floating point values) are loaded from the matrix
-  `A`, using the load replicate `svld1rq` intrinsics (or `ld1rqw` in assembly)
-  in `LOADA_PAIR` macro.
-- Two consecutive vectors are loaded from matrix `B`, using the SVE load
-  instructions, called by the `LOADB_PAIR` macro.
-- A sequence of indexed multiply-accumulate operations is performed, computing
-  the product of each element from `A` with the vectors from `B`.
-- The results are accumulated across the 16 `Z` register accumulators,
-  progressively building the partial results of the matrix multiplication.
+- 128 bits (four consecutive floating-point values) are loaded from `A` using replicate loads `svld1rq` (or `ld1rqw`), through `LOADA_PAIR`
+- Two vectors are loaded from `B` using SVE vector loads, using `LOADB_PAIR`
+- Indexed `fmla` operations compute element–vector products and accumulate into 16 `Z` register accumulators
+- Partial sums build up the output tile
 
-After completing all iterations across the `K` dimension, the accumulated
-results in the `Z` registers are stored back to memory. The `STORE_PAIR` macro
-writes the values into the corresponding locations of the output matrix `C`.
+After all `K` iterations, results in the `Z` registers are stored to `C` using the `STORE_PAIR` macro.
 
-The equivalent SVE hand-optimized assembly code is written at lines 478-598.
+The equivalent SVE hand-optimized assembly appears around lines 478–598.
 
-This loop showcases how SVE registers and indexed `fmla` instructions enable
-efficient decomposition of the outer-product formulation into parallel,
-vectorized accumulation steps.
+This loop shows how SVE registers and indexed `fmla` enable efficient decomposition of the outer-product formulation into parallel, vectorized accumulation.
 
-For more details on SVE/SVE2 instruction semantics, optimization guidelines and
-other documents refer to the [Scalable Vector Extensions
-resources](https://developer.arm.com/Architectures/Scalable%20Vector%20Extensions).
+For SVE/SVE2 semantics and optimization guidance, see the [Scalable Vector Extensions resources](https://developer.arm.com/Architectures/Scalable%20Vector%20Extensions).
 
-### SME2 optimized code
+## SME2-optimized code
 
 The SME2 implementation leverages the outer-product formulation of the matrix
 multiplication function, utilizing the `fmopa` SME instruction to perform the
@@ -182,7 +155,7 @@ outer-product and accumulate partial results in `ZA` tiles.
 
 A snippet of the loop is shown below:
 
-```C { line_numbers = "true", line_start="78"}
+```C { line_numbers="true", line_start="78" }
 #if defined(__ARM_FEATURE_SME2p1)
   svzero_za();
 #endif
@@ -236,50 +209,28 @@ A snippet of the loop is shown below:
   }
 ```
 
-Within the SME2 intrinsics code (lines 91-106), the innermost loop iterates across
-the `K` dimension - corresponding to the columns of matrix `A` and the rows of
-matrix `B`.
+Within the SME2 intrinsics code (lines 91–106), the innermost loop iterates across
+the `K` dimension - columns of `A` and rows of `B`.
 
 In each iteration:
-- Two consecutive vectors are loaded from `A` and two consecutive vectors are
-  loaded from `B` (`vec_a`, and `vec_b`), using the multi-vector load
-  instructions.
-- The `fmopa` instruction, encapsulated within the `MOPA_TILE` macro, computes
-  the outer product of the input vectors.
-- The results are accumulated into the four 32-bit `ZA` tiles.
+- Two consecutive vectors are loaded from `A` and two from `B` (`vec_a*`, `vec_b*`) using multi-vector load intrinsics
+- `fmopa`, wrapped by `MOPA_TILE`, computes the outer product
+- Partial results accumulate in four 32-bit `ZA` tiles
 
-After all iterations over K dimension, the accumulated results are stored back
-to memory through a store loop at lines 111-124:
+After all `K` iterations, results are written back in a store loop (lines 111–124).
 
-During this phase, four rows of `ZA` tiles are read out into four `Z` vectors
-using the `svread_hor_za8_u8_vg4` intrinsic (or the equivalent `mova` assembly
-instruction). The vectors are then stored into the output buffer with SME
-multi-vector `st1w` store instructions, wrapped in the `STORE_PAIR` macro.
+During this phase, rows of `ZA` tiles are read into `Z` vectors using `svread_hor_za8_u8_vg4` (or `svreadz_hor_za8_u8_vg4` on SME2.1). Vectors are then stored to the output buffer using SME multi-vector `st1w` stores using `STORE_PAIR`.
 
-The equivalent SME2 hand-optimized code is at lines 229-340.
+The equivalent SME2 hand-optimized assembly appears around lines 229–340.
 
-For more details on instruction semantics, and SME/SME2 optimization guidelines,
-refer to the official [SME Programmer's
-Guide](https://developer.arm.com/documentation/109246/latest/).
+For instruction semantics and SME/SME2 optimization guidance, see the [SME Programmer's Guide](https://developer.arm.com/documentation/109246/latest/).
 
 ## Other optimizations
 
-Beyond the SME2 and SVE2 implementations shown above, this loop also includes several
-alternative optimized versions, each leveraging architecture-specific features.
+Beyond the SME2 and SVE implementations, this loop also includes additional optimized versions that leverage architecture-specific features:
 
-### NEON
+- **NEON**: the NEON version (lines 612–710) uses structure load/store combined with indexed `fmla` to vectorize the computation.
 
-The neon version (lines 612-710) relies on multiple structure load/store
-combined with indexed `fmla` instructions to vectorize the matrix multiplication
-operation.
+- **SVE2.1**: the SVE2.1 version (lines 355–462) extends the base SVE approach using multi-vector loads and stores.
 
-### SVE2.1
-
-The SVE2.1 implementation (lines 355-462) extends the base SVE approach by
-utilizing multi-vector load and store instructions.
-
-### SME2.1
-
-The SME2.1 leverages the `movaz` instruction / `svreadz_hor_za8_u8_vg4`
-intrinsic to simultaneously reinitialize `ZA` tile accumulators while moving
-data out to registers.
+- **SME2.1**: the SME2.1 version uses `movaz`/`svreadz_hor_za8_u8_vg4` to reinitialize `ZA` tile accumulators while moving data out to registers.
