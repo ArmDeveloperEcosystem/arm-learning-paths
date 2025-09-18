@@ -1,6 +1,6 @@
 ---
 title: Code example
-weight: 5
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

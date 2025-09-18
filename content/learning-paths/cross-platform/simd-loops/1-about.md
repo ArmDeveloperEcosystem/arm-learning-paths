@@ -1,6 +1,6 @@
 ---
 title: About single instruction, multiple data (SIMD) loops
-weight: 3
+weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
