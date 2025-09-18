@@ -1,13 +1,9 @@
 ---
 title: "Code kata: perfect your SVE and SME skills with SIMD loops"
-description: "Hands-on code kata for advanced developers to optimize SIMD loops on Arm using SVE, SVE2, and SME2—covering predication, tiling, kernel structure, and benchmarking."
-slug: "code-kata-sve-sve2-sme2-simd"
 
 minutes_to_complete: 30
 
-
 who_is_this_for: This is an advanced topic for software developers who want to learn how to use the full range of features available in SVE, SVE2 and SME2 to improve software performance on Arm processors.
-
 
 learning_objectives:
   - Improve SIMD loop performance using Scalable Vector Extension (SVE), SVE2, and Scalable Matrix Extension (SME2)
