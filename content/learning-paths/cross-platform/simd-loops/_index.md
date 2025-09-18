@@ -7,8 +7,6 @@ who_is_this_for: This is an advanced topic for software developers who want to l
 
 learning_objectives:
      - Improve SIMD code performance using Scalable Vector Extension (SVE) and Scalable Matrix Extension (SME)
-     - Explore how SVE indexed fmla and SME2 fmopa instructions accelerate matrix multiplication
-     - Understand how SME2 kernels use ZA tiles and streaming attributes
      - Describe what SIMD Loops contains and how kernels are organized across scalar, NEON, SVE,SVE2, and SME2 variants
      - Build and run a selected kernel with the provided runner and validate correctness against the C reference
      - Choose the appropriate build target to compare NEON, SVE/SVE2, and SME2 implementations
