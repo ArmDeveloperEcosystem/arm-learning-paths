@@ -6,31 +6,25 @@ minutes_to_complete: 30
 who_is_this_for: This is an advanced topic for software developers who want to learn how to use the full range of features available in SVE, SVE2, and SME2 to improve software performance on Arm processors.
 
 learning_objectives:
-  - Improve SIMD loop performance using Scalable Vector Extension (SVE), SVE2, and Scalable Matrix Extension (SME2)
-  - Explore how SVE-indexed fmla and SME2 fmopa instructions accelerate matrix multiplication
-  - Understand how SME2 kernels use ZA tiles and streaming attributes
-  - Describe what the SIMD Loops project contains and how kernels are organized across scalar, NEON, SVE/SVE2, and SME2 variants
-  - Build and run a selected kernel with the provided runner and validate correctness against the C reference
-  - Choose the appropriate build target to compare NEON, SVE/SVE2, and SME2 implementations
-
+     - Improve SIMD code performance using Scalable Vector Extension (SVE) and Scalable Matrix Extension (SME).
 
 prerequisites:
-  - An AArch64 computer running Linux or macOS (cloud OK). See: /learning-paths/servers-and-cloud-computing/csp/
-  - Some familiarity with SIMD programming and NEON intrinsics
-  - Recent toolchains that support SVE/SME (GCC 13+ or Clang 16+ recommended)
+    - An AArch64 computer running Linux or macOS. You can use cloud instances, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) for a list of cloud service providers. 
+    - Some familiarity with SIMD programming and NEON intrinsics.
+    - Recent toolchains that support SVE/SME (GCC 13+ or Clang 16+ recommended)
 
 author:
-  - Alejandro Martinez Vicente
-  - Mohamad Najem
+    - Alejandro Martinez Vicente
+    - Mohamad Najem
 
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
-  - Neoverse
+    - Neoverse
 operatingsystems:
-  - Linux
-  - macOS
+    - Linux
+    - macOS
 tools_software_languages:
   - C
   - C++
@@ -39,10 +33,10 @@ tools_software_languages:
 
 shared_path: true
 shared_between:
-  - servers-and-cloud-computing
-  - laptops-and-desktops
-  - mobile-graphics-and-gaming
-  - automotive
+    - servers-and-cloud-computing
+    - laptops-and-desktops
+    - mobile-graphics-and-gaming
+    - automotive
 
 further_reading:
     - resource:
