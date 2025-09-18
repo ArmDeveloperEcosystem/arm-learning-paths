@@ -6,6 +6,8 @@ weight: 3
 layout: learningpathall
 ---
 
+## Set up your development environment
+
 To get started, clone the SIMD Loops project and change to the project directory:
 
 ```bash

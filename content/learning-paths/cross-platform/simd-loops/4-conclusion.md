@@ -1,10 +1,12 @@
 ---
-title: Conclusion
+title: How to learn with SIMD Loops
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## Bridging the gap between specs and real code
 
 SIMD Loops is a practical way to learn the intricacies of SVE and SME across modern Arm architectures. By providing small, runnable loop kernels with reference code and optimized variants, it closes the gap between architectural specifications and real applications.
 

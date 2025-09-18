@@ -6,6 +6,8 @@ weight: 4
 layout: learningpathall
 ---
 
+## Overview: loop 202 matrix multiplication example
+
 To illustrate the structure and design principles of SIMD Loops, consider loop 202 as an example.
 
 Use a text editor to open `loops/loop_202.c`.
@@ -22,7 +24,7 @@ You can view matrix multiplication in two equivalent ways:
 - As the dot product between each row of `A` and each column of `B`
 - As the sum of outer products between the columns of `A` and the rows of `B`
 
-## Data structure
+## Data structure definition
 
 The loop begins by defining a data structure that captures the matrix dimensions (`M`, `K`, `N`) along with input and output buffers:
 
@@ -44,7 +46,7 @@ For this loop:
 
 This layout helps optimize memory access patterns across the targeted SIMD architectures.
 
-## Loop attributes
+## Loop attributes by architecture
 
 Loop attributes are specified per target architecture:
 - **SME targets** — `inner_loop_202` is invoked with the `__arm_streaming` attribute and uses a shared `ZA` register context (`__arm_inout("za")`). These attributes are wrapped in the `LOOP_ATTR` macro
@@ -52,7 +54,7 @@ Loop attributes are specified per target architecture:
 
 This design enables portability across SIMD extensions.
 
-## Function implementation
+## Function implementation in loops/matmul_fp32.c
 
 `loops/matmul_fp32.c` provides several optimizations of matrix multiplication, including ACLE intrinsics and hand-optimized assembly.
 
@@ -208,33 +210,27 @@ A snippet of the loop is shown below:
 ```
 
 Within the SME2 intrinsics code (lines 91–106), the innermost loop iterates across
-the `K` dimension—columns of `A` and rows of `B`
+the `K` dimension - columns of `A` and rows of `B`.
 
 In each iteration:
 - Two consecutive vectors are loaded from `A` and two from `B` (`vec_a*`, `vec_b*`) using multi-vector load intrinsics
 - `fmopa`, wrapped by `MOPA_TILE`, computes the outer product
 - Partial results accumulate in four 32-bit `ZA` tiles
 
-After all `K` iterations, results are written back in a store loop (lines 111–124)
+After all `K` iterations, results are written back in a store loop (lines 111–124).
 
-During this phase, rows of `ZA` tiles are read into `Z` vectors using `svread_hor_za8_u8_vg4` (or `svreadz_hor_za8_u8_vg4` on SME2.1). Vectors are then stored to the output buffer using SME multi-vector `st1w` stores using `STORE_PAIR`
+During this phase, rows of `ZA` tiles are read into `Z` vectors using `svread_hor_za8_u8_vg4` (or `svreadz_hor_za8_u8_vg4` on SME2.1). Vectors are then stored to the output buffer using SME multi-vector `st1w` stores using `STORE_PAIR`.
 
-The equivalent SME2 hand-optimized assembly appears around lines 229–340
+The equivalent SME2 hand-optimized assembly appears around lines 229–340.
 
-For instruction semantics and SME/SME2 optimization guidance, see the [SME Programmer's Guide](https://developer.arm.com/documentation/109246/latest/)
+For instruction semantics and SME/SME2 optimization guidance, see the [SME Programmer's Guide](https://developer.arm.com/documentation/109246/latest/).
 
 ## Other optimizations
 
-Beyond the SME2 and SVE implementations, this loop also includes additional optimized versions that leverage architecture-specific features.
+Beyond the SME2 and SVE implementations, this loop also includes additional optimized versions that leverage architecture-specific features:
 
-### NEON
+- **NEON**: the NEON version (lines 612–710) uses structure load/store combined with indexed `fmla` to vectorize the computation.
 
-The NEON version (lines 612–710) uses structure load/store combined with indexed `fmla` to vectorize the computation.
+- **SVE2.1**: the SVE2.1 version (lines 355–462) extends the base SVE approach using multi-vector loads and stores.
 
-### SVE2.1
-
-The SVE2.1 version (lines 355–462) extends the base SVE approach using multi-vector loads and stores.
-
-### SME2.1
-
-The SME2.1 version uses `movaz`/`svreadz_hor_za8_u8_vg4` to reinitialize `ZA` tile accumulators while moving data out to registers.
+- **SME2.1**: the SME2.1 version uses `movaz`/`svreadz_hor_za8_u8_vg4` to reinitialize `ZA` tile accumulators while moving data out to registers.

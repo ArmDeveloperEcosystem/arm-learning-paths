@@ -6,7 +6,7 @@ minutes_to_complete: 30
 who_is_this_for: This is an advanced topic for software developers who want to learn how to use the full range of features available in SVE, SVE2, and SME2 to improve software performance on Arm processors.
 
 learning_objectives:
-     - Improve SIMD code performance using Scalable Vector Extension (SVE) and Scalable Matrix Extension (SME).
+     - Improve SIMD code performance using Scalable Vector Extension (SVE) and Scalable Matrix Extension (SME)
      - Explore how SVE indexed fmla and SME2 fmopa instructions accelerate matrix multiplication
      - Understand how SME2 kernels use ZA tiles and streaming attributes
      - Describe what SIMD Loops contains and how kernels are organized across scalar, NEON, SVE,SVE2, and SME2 variants
