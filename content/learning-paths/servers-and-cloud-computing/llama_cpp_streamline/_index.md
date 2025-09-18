@@ -18,7 +18,9 @@ prerequisites:
     - Knowledge of Streamline usage
     - An Arm Neoverse or Cortex-A run on Linux or Android to test the application
 
-author: Zenon Zhilong Xiu
+author: 
+    - Zenon Zhilong Xiu
+    - Odin Shen
 
 ### Tags
 skilllevels: Advanced
@@ -29,6 +31,9 @@ armips:
 tools_software_languages:
     - Arm Streamline
     - C++
+    - llama.cpp
+    - AWS
+    - Profiling
 operatingsystems:
     - Linux
     - Android

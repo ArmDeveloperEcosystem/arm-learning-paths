@@ -33,21 +33,23 @@ For other machine, you need to set up the cross compiler environment by install 
 You can refer this [guide](https://learn.arm.com/install-guides/gcc/cross/) for Cross-compiler installation.
 
 {{< tabpane code=true >}}
-  {{< tab header="Arm native build" language="bash">}}
+  {{< tab header="Arm Native Build" language="bash">}}
     apt-get update
     apt-get install ninja-build cmake gcc g++ g++-aarch64-linux-gnu curl zip unzip tar pkg-config git
     cd ~
     git clone https://github.com/ARM-software/gator.git
     cd gator
     ./build-linux.sh
+
     cd annotate
     make  
   {{< /tab >}}
-  {{< tab header="Cross compiler" language="bash">}}
+  {{< tab header="Cross Compiler" language="bash">}}
     apt-get update
     apt-get install ninja-build cmake gcc g++ g++-aarch64-linux-gnu curl zip unzip tar pkg-config git
     cd ~
     git clone https://github.com/ARM-software/gator.git
+
     cd gator
     make CROSS_COMPILE=/path/to/aarch64_linux_gcc_tool
   {{< /tab >}}
@@ -105,8 +107,8 @@ Finally, add an annotation marker inside the main loop:
 
                 LOG_DBG("eval: %s\n", string_from(ctx, embd).c_str());
 	
-                // Add annotation marker code for Streamline 				
-	              {
+                // Add annotation marker code for Streamline
+                {
                   char printf_buf[200];
                   sprintf(printf_buf, "past %d, n_eval %d", n_past,n_eval );
                   ANNOTATE_MARKER_STR(printf_buf);
@@ -135,7 +137,7 @@ mkdir ./build & cd ./build
 Then configure the project by running 
 
 {{< tabpane code=true >}}
-  {{< tab header="Arm native build" language="bash">}}
+  {{< tab header="Arm Native Build" language="bash">}}
     cmake .. \
       -DGGML_NATIVE=ON \
       -DLLAMA_F16C=OFF \
@@ -150,7 +152,7 @@ Then configure the project by running
       -DLLAMA_BUILD_EXAMPLES=ON \
       -DLLAMA_CURL=OFF  
   {{< /tab >}}
-  {{< tab header="Cross compiler" language="bash">}}
+  {{< tab header="Cross Compiler" language="bash">}}
     cmake .. \
       -DCMAKE_SYSTEM_NAME=Linux \
       -DCMAKE_SYSTEM_PROCESSOR=arm \
@@ -176,8 +178,7 @@ Set `CMAKE_C_COMPILER` and `DCMAKE_CXX_COMPILER` to your cross compiler path. Ma
 
 
 In this learning path, we run llama-cli on an Arm CPU that supports **NEON Dotprod** and **I8MM** instructions.  
-Therefore, we specify:  
-**armv8.2-a+dotprod+i8mm**.
+Therefore, we specify: **armv8.2-a+dotprod+i8mm**.
 
 We also specify **-static** and **-g** options:
 - **-static**: produces a statically linked executable, so it can run on different Arm64 Linux/Android environments without needing shared libraries.

@@ -1,12 +1,12 @@
 ---
-title: Analyzing Multi-core/Multi-thread Performance
+title: Analyzing Multi-Core/Multi-Thread Performance
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Analyzing Multi-core/Multi-thread Performance
+## Analyzing Multi-Core/Multi-Thread Performance
 
 The CPU backend in **llama.cpp** uses multiple cores and threads to accelerate operator execution.  
 It creates a **threadpool**, where:  
@@ -20,7 +20,7 @@ When computing a tensor node/operator with a large workload, llama.cpp splits th
 ### Example: MUL_MAT Operator
 
 For the **MUL_MAT** operator, the output matrix **C** can be divided across threads:
-![text#center](images/multi_thread.jpg "Figure 23. Multi-thread")
+![text#center](images/multi_thread.jpg "Figure 23. Multi-Thread")
 
 In this example, four threads each compute one quarter of matrix C.  
 
@@ -41,7 +41,7 @@ Run llama-cli with `-t 2 -C 0x3` to specify two threads and thread affinity as C
 
 Collect profiling data with **Streamline**, then select **Core Map** and **Cluster Map** modes in the Timeline view.
 
-![text#center](images/multi_thread_core_map.png "Figure 24. Multi-thread")
+![text#center](images/multi_thread_core_map.png "Figure 24. Multi-Thread")
 
 In the screenshot above:  
 - Two threads are created  
@@ -50,7 +50,7 @@ In the screenshot above:
 In addition, you can use the **Annotation Channel** view to analyze operator execution on a per-thread basis.  
 Each thread generates its own annotation channel independently.
 
-![text#center](images/multi_thread_annotation_channel.png "Figure 25. Multi-thread")
+![text#center](images/multi_thread_annotation_channel.png "Figure 25. Multi-Thread")
 
 In the screenshot above, at the highlighted time:  
 - Both threads are executing the **same node**  

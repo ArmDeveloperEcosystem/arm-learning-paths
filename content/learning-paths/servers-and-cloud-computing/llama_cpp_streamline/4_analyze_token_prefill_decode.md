@@ -14,13 +14,13 @@ After successfully building **llama-cli**, the next step is to set up the runtim
 
 Depending on how you built llama.cpp:
 
-- **Cross-build:** 
+- **Cross Build:** 
   - Copy the `llama-cli` executable to your Arm64 target. 
   - Also copy the `gatord` binary from the Arm DS or Streamline installation:  
     - Linux: `Arm\Development Studio 2024.1\sw\streamline\bin\linux\arm64`  
     - Android: `Arm\Development Studio 2024.1\sw\streamline\bin\android\arm64`  
 
-- **Native build:** 
+- **Native Build:** 
   - Use the `llama-cli` from your local build and the `gatord` you compiled earlier (`~/gator/build-native-gcc-rel/gatord`).  
 
 ### Download a lightweight model
