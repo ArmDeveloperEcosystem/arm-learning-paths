@@ -13,6 +13,10 @@ learning_objectives:
   - Apply predication, vector-length–agnostic loops, and gather/scatter patterns correctly
   - Structure inner kernels with SME2 tiles and manage ZA state safely
   - Benchmark, interpret results, and iterate using compiler flags and micro-optimizations
+  - Describe what SIMD Loops contains and how kernels are organized across scalar, NEON, SVE/SVE2, and SME2 variants
+  - Build and run a selected kernel with the provided runner and validate correctness against the C reference
+  - Identify where SVE features (predication, VLA loops, gather/scatter) and SME2 features (streaming mode, ZA tiles) are demonstrated in the code
+  - Choose the appropriate build target to compare NEON vs SVE/SVE2 vs SME2 implementations
 
 prerequisites:
   - An AArch64 computer running Linux or macOS (cloud OK). See: /learning-paths/servers-and-cloud-computing/csp/

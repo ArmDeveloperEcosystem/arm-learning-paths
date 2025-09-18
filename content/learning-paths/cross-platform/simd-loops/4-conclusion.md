@@ -6,23 +6,14 @@ weight: 6
 layout: learningpathall
 ---
 
-SIMD Loops is an invaluable
-resource for developers looking to learn the intricacies of SVE and
-SME on a variety of Arm architectures. By providing practical, hands-on examples, it
-bridges the gap between the architecture specification and real-world
-application. 
+SIMD Loops is a practical way to learn the intricacies of SVE and SME across modern Arm architectures. By providing small, runnable loop kernels with reference code and optimized variants, it closes the gap between architectural specifications and real applications.
 
-Whether you're transitioning from NEON or starting fresh with SVE
-and SME, SIMD Loops offers a comprehensive toolkit to enhance your understanding
-and proficiency.
+Whether you are moving from NEON or starting directly with SVE and SME, the project offers:
+- A broad catalog of kernels that highlight specific features (predication, VLA programming, gather/scatter, streaming mode, ZA tiles)
+- Clear, readable implementations in C, ACLE intrinsics, and selected inline assembly
+- Flexible build targets and a simple runner to execute and validate loops
 
-With its extensive collection of loop kernels, detailed documentation, and
-flexible build options, SIMD Loops helps you to explore
-and leverage the full potential of Arm's advanced vector extensions. Dive into
-the project, experiment with the examples, and take your high-performance coding
-skills for Arm to the next level.
+Use the repository to explore, modify, and benchmark kernels so you can understand tradeoffs and apply the patterns to your own workloads.
 
-For more information and to get started, visit the GitLab project and refer
-to the
-[README.md](https://gitlab.arm.com/architecture/simd-loops/-/blob/main/README.md)
+For more information and to get started, visit the GitLab project and see the [README.md](https://gitlab.arm.com/architecture/simd-loops/-/blob/main/README.md)
 for the latest instructions on building and running the code. 

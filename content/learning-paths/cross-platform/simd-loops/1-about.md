@@ -6,28 +6,15 @@ weight: 3
 layout: learningpathall
 ---
 
-Writing high-performance software for Arm processors often involves delving into
-SIMD technologies. For many developers, that journey started with NEON, a
-familiar, fixed-width vector extension that has been around for many years. But as
-Arm architectures continue to evolve, so do their SIMD technologies.
+Writing high-performance software on Arm often means using single instruction, multiple data (SIMD) technologies. Many developers start with NEON, a familiar fixed-width vector extension. As Arm architectures evolve, so do the SIMD capabilities available to you.
 
-Enter the world of Scalable Vector Extension (SVE) and Scalable Matrix Extension (SME): two powerful, scalable vector extensions designed for modern
-workloads. Unlike NEON, they are not just wider; they are fundamentally different. These
-extensions introduce new instructions, more flexible programming models, and
-support for concepts like predication, scalable vectors, and streaming modes.
-However, they also come with a learning curve.
+This Learning Path uses **Scalable Vector Extension (SVE)** and **Scalable Matrix Extension (SME)** to teach modern SIMD patterns. They are two powerful, scalable vector extensions designed for modern
+workloads. Unlike NEON, these architecture extensions are not just wider; they are fundamentally different. They introduce predication, vector-length-agnostic (VLA) programming, gather/scatter, streaming modes, and tile-based compute with **ZA** state. The result is more power and flexibility, with a learning curve to match.
 
-[SIMD Loops](https://gitlab.arm.com/architecture/simd-loops) is a valuable resource, enabling you to quickly and effectively learn how to write high-performance SIMD code.
 
-SIMD Loops is designed to help
-you learn how to write SVE and SME code. It is a collection
-of self-contained, real-world loop kernels written in a mix of C, Arm C Language Extensions (ACLE)
-intrinsics, and inline assembly. These kernels target tasks ranging from simple arithmetic
-to matrix multiplication, sorting, and string processing. You can compile them,
-run them, step through them, and use them as a foundation for your own SIMD
-work.
+**SIMD Loops** offer a hands-on way to climb the learning curve. It is a public codebase of self-contained, real loop kernels written in C, Arm C Language Extensions (ACLE) intrinsics, and selected inline assembly. Kernels span tasks such as matrix multiply, sorting, and string processing. You can build them, run them, step through them, and adapt them for your own SIMD workloads.
 
-If you are familiar with NEON intrinsics, you can use SIMD Loops to learn and explore SVE and SME.
+> Repo: [SIMD Loops](https://gitlab.arm.com/architecture/simd-loops)
 
 ## What is SIMD Loops?
 
@@ -54,17 +41,13 @@ gather/scatter, streaming mode, ZA storage, compact instructions, or the
 mechanics of matrix tiles, this is where you will see them in action.
 
 The project includes:
-- Dozens of numbered loop kernels, each focused on a specific feature or pattern
+- Many numbered loop kernels, each focused on a specific feature or pattern
 - Reference C implementations to establish expected behavior
 - Inline assembly and/or intrinsics for scalar, NEON, SVE, SVE2, SVE2.1, SME2, and SME2.1
 - Build support for different instruction sets, with runtime validation
 - A simple command-line runner to execute any loop interactively
 - Optional standalone binaries for bare-metal and simulator use
 
-You do not need to worry about auto-vectorization, compiler flags, or tooling
-quirks. Each loop is hand-written and annotated to make the use of SIMD features
-clear. The intent is that you can study, modify, and run each loop as a learning
-exercise, and use the project as a foundation for your own exploration of
-Arm’s vector extensions.
+You do not need to rely on auto-vectorization or guess at compiler flags. Each loop is handwritten and annotated to make the intended use of SIMD features clear. Study a kernel, modify it, rebuild, and observe the effect - this is the core learning loop.
 
 
