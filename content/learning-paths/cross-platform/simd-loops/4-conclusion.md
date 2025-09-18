@@ -15,5 +15,4 @@ Whether you are moving from NEON or starting directly with SVE and SME, the proj
 
 Use the repository to explore, modify, and benchmark kernels so you can understand tradeoffs and apply the patterns to your own workloads.
 
-For more information and to get started, visit the GitLab project and see the [README.md](https://gitlab.arm.com/architecture/simd-loops/-/blob/main/README.md)
-for the latest instructions on building and running the code. 
+For more information and to get started, visit the GitLab project and see the [README.md](https://gitlab.arm.com/architecture/simd-loops/-/blob/main/README.md) for the latest instructions on building and running the code. 
