@@ -22,7 +22,7 @@ sudo adduser xrdp ssl-cert
 sudo systemctl enable --now xrdp
 ```
 
-If you use GNOME on the server, you may need the networking and GDM tweaks in Step 2 of the RD-V3 Learning Path: [/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack/4_rdv3_on_fvp/](/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack/4_rdv3_on_fvp/)
+If you use GNOME on the server, you may need the networking and GDM tweaks in Step 2 of the [RD-V3 Learning Path](/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack/4_rdv3_on_fvp/).
 
 Once connected through Remote Desktop, open a terminal and launch the RD-V3 FVP simulation.
 

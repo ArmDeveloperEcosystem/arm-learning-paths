@@ -26,14 +26,23 @@ sudo apt install -y git gcc g++ make file wget gawk diffstat bzip2 cpio chrpath 
 Now install Docker: 
 
 ```bash
+curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
+sudo usermod -aG docker $USER ; newgrp docker
+```
+
+{{% notice Note %}}
+See the [Docker Install Guide](/install-guides/docker) for further information.
+{{% /notice %}}
+
+Next install the `repo` tool:
+
+```bash
 mkdir -p ~/.bin
 PATH="${HOME}/.bin:${PATH}"
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
 chmod a+rx ~/.bin/repo
 ```
-{{% notice Note %}}
-See the [Docker Install Guide](/install-guides/docker) for support.
-{{% /notice %}}
+
 
 
 
