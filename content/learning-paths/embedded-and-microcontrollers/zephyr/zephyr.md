@@ -15,15 +15,15 @@ You can get the Zephyr source, install the Zephyr SDK, build sample applications
 
 ## Host platform
 
-Zephyr SDK is available on Windows, Linux, and macOS hosts. However the FVP is only available for Windows and Linux hosts.
+Zephyr SDK is available on Windows, Linux, and macOS hosts. However the FVP is natively available for Windows and Linux hosts, and can be run on macOS with a Docker as explained in [AVH FVPs on macOS](/install-guides/fvps-on-macos/).
 
-These instructions assume an Ubuntu Linux host machine or use of Arm Virtual Hardware (AVH).
+These instructions assume an Ubuntu Linux host machine.
 
 ## Corstone-300 FVP {#fvp}
 
-The Corstone-300 FVP is available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. Setup instructions are given in the [install guide](/install-guides/fm_fvp).
+The Corstone-300 FVP is available for download from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. Setup instructions are given in the [install guide](/install-guides/fm_fvp).
 
-Alternatively, you can access the FVP with [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware). Setup instructions are given in the [Arm Virtual Hardware install guide](/install-guides/avh#corstone).
+Alternatively, you can access the FVP from [Arm Tools Artifactory](https://www.keil.arm.com/artifacts/#models/arm/avh-fvp). Setup instructions are given in the [AVH FVPs in Arm Tools Artifactory](https://arm-software.github.io/AVH/main/infrastructure/html/avh_fvp_artifactory.html).
 
 ## Install the required software to build Zephyr
 
@@ -92,7 +92,7 @@ You can build the [hello world](https://docs.zephyrproject.org/latest/samples/he
 
 ```bash { env_source="/shared/zephyrproject/.venv/bin/activate",cwd="/shared" }
 cd zephyrproject/zephyr
-west build -p auto -b mps3_an547 samples/hello_world
+west build -p auto -b mps3/corstone300/fvp samples/hello_world samples/hello_world
 ```
 
 {{% notice Note %}}
@@ -104,17 +104,10 @@ The application binaries are placed in the `~/zephyrproject/zephyr/build/zephyr/
 
 ## Run Zephyr application on Corstone-300 FVP {#runzephyr}
 
-### Using local machine with the FVP installed 
+Execute on the machine with the installed Corstone-300 FVP: 
 
 ```fvp { fvp_name="FVP_Corstone_SSE-300_Ethos-U55",cwd="/shared/zephyrproject/zephyr" }
 FVP_Corstone_SSE-300_Ethos-U55 -a build/zephyr/zephyr.elf -C mps3_board.visualisation.disable-visualisation=1 --simlimit 30
-```
-### Using Arm Virtual Hardware
-
-To run on AVH:
-
-```console
-VHT_Corstone_SSE-300_Ethos-U55 -a build/zephyr/zephyr.elf -C mps3_board.visualisation.disable-visualisation=1 --simlimit 30
 ```
 
 {{% notice Optional switches %}}

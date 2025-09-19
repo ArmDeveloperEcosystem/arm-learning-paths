@@ -26,20 +26,19 @@ tools_software_languages_filter:
 - Arm Virtual Hardware: 6
 - AWS IoT Greengrass: 1
 - Azure: 1
-- Balena Cloud: 1
-- Balena OS: 1
+- balenaCloud: 1
+- BalenaOS: 1
 - C: 1
-- Coding: 3
 - Docker: 2
-- Fixed Virtual Platform: 1
+- FVP: 1
 - GitHub: 3
 - Matter: 1
 - MCP: 1
 - Python: 2
 - Raspberry Pi: 4
 - Remote.It: 1
-- ROS2: 1
+- ROS 2: 1
 - Rust: 1
-- VS Code: 1
+- Visual Studio Code: 1
 - Zenoh: 1
 ---

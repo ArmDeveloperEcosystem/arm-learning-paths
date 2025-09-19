@@ -12,7 +12,7 @@ MNN is a high-performance, lightweight deep learning framework designed for both
 
 **MNN-LLM** is a large language model (LLM) runtime solution built on the MNN engine. It enables local deployment of LLMs across diverse platforms, including mobile devices, PCs, and IoT systems, and supports leading models such as Qianwen, Baichuan, Zhipu, and Llama for efficient, accessible AI-powered experiences.
 
-KleidiAI, a collection of optimized AI micro-kernels, is integrated into the MNN framework to enhance the inference performance of LLMs. In this Learning Path, the Android app demonstrates Vision Transformer inference using the MNN framework. You will use KleidiAI to speed up inference for the [Qwen Vision 2B](https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct) model.
+KleidiAI, a collection of optimized AI micro-kernels, is integrated into the MNN framework to enhance the inference performance of LLMs. In this Learning Path, the Android app demonstrates Vision Transformer inference using the MNN framework. You will use KleidiAI to speed up inference for the [Qwen2.5 Vision 3B](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct) model.
 
 ## Vision Transformer (ViT)
 The Vision Transformer (ViT) is a deep learning model designed for image recognition tasks. Unlike traditional convolutional neural networks (CNNs) that use convolutional layers, ViT leverages the transformer architecture originally developed for natural language processing (NLP).

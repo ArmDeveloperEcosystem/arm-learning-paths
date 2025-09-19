@@ -182,7 +182,8 @@ sw_categories:
       tests_and_status: []
     postgresql_tune:
       readable_title: Learn how to Tune PostgreSQL
-      tests_and_status: []
+      tests_and_status:
+      - ubuntu:latest: passed
     ran:
       readable_title: Get started with the Arm 5G RAN Acceleration Library (ArmRAL)
       tests_and_status: []
