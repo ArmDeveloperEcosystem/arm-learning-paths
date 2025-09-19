@@ -8,16 +8,16 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- ChromeOS: 1
-- Linux: 31
-- macOS: 8
+- ChromeOS: 2
+- Linux: 33
+- macOS: 9
 - Windows: 44
 subjects_filter:
 - CI-CD: 5
-- Containers and Virtualization: 6
+- Containers and Virtualization: 7
 - Migration to Arm: 28
 - ML: 2
-- Performance and Architecture: 25
+- Performance and Architecture: 27
 subtitle: Create and migrate apps for power efficient performance
 title: Laptops and Desktops
 tools_software_languages_filter:
@@ -27,24 +27,21 @@ tools_software_languages_filter:
 - Arm Development Studio: 1
 - Arm Performance Libraries: 2
 - Arm64EC: 1
-- assembly: 1
-- C: 3
+- Assembly: 1
+- C: 8
 - C#: 6
-- C++: 6
-- C/C++: 4
+- C++: 11
 - CCA: 1
-- Clang: 11
-- cmake: 1
-- CMake: 2
-- Coding: 16
+- Clang: 13
+- CMake: 3
 - CSS: 1
 - Daytona: 1
 - Docker: 5
-- GCC: 10
+- GCC: 12
 - Git: 1
 - GitHub: 3
 - GitLab: 1
-- GoogleTest: 1
+- Google Test: 1
 - HTML: 2
 - Hyper-V: 1
 - i3: 1
@@ -57,7 +54,7 @@ tools_software_languages_filter:
 - llvm-mca: 1
 - MSBuild: 1
 - MTE: 1
-- Neon: 1
+- NEON: 1
 - Neovim: 1
 - Node.js: 3
 - ONNX Runtime: 1
@@ -72,9 +69,9 @@ tools_software_languages_filter:
 - SVE: 1
 - SVE2: 1
 - Trusted Firmware: 1
+- Ubuntu: 1
 - Visual Studio: 14
-- Visual Studio Code: 10
-- VS Code: 3
+- Visual Studio Code: 13
 - Windows Forms: 1
 - Windows Performance Analyzer: 1
 - Windows Presentation Foundation: 1

@@ -6,13 +6,15 @@ weight: 3
 layout: learningpathall
 ---
 
-## Create an Azure Cobalt 100 Arm64 VM using the Azure portal
+## Introduction
 
-You can create an Azure Cobalt 100 Arm64 virtual machine in several ways, including the Azure portal, the Azure CLI, or an Infrastructure as Code (IaC) tool. 
+There are several ways to create an Arm-based Cobalt 100 virtual machine : the Microsoft Azure console, the Azure CLI tool, or using your choice of IaC (Infrastructure as Code). This guide will use the Azure console to create a virtual machine with Arm-based Cobalt 100 Processor. 
 
-In this Learning Path, you’ll use the Azure portal to create a VM with the Cobalt 100 processor, following a process similar to creating any other virtual machine in Azure.
+This learning path focuses on the general-purpose virtual machine of the D series. Please read the guide on [Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series) offered by Microsoft Azure.  
 
-## Step-by-step: create the virtual machine 
+If you have never used the Microsoft Cloud Platform before, please review the microsoft [guide to Create a Linux virtual machine in the Azure portal](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-portal?tabs=ubuntu). 
+
+#### Create an Arm-based Azure Virtual Machine 
 
 Creating a virtual machine based on Azure Cobalt 100 is no different from creating any other virtual machine in Azure. To create an Azure virtual machine, launch the Azure portal and navigate to "Virtual Machines".
 1. Select "Create", and click on "Virtual Machine" from the drop-down list.
@@ -33,7 +35,7 @@ Creating a virtual machine based on Azure Cobalt 100 is no different from creati
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/ubuntu-pro.png "Figure 3: Review and Create an Azure Cobalt 100 Arm64 VM")
 
-10. Finally, click on the "Create" button, and click on the "Download Private key and Create Resources" button.
+10. Finally, when you are confident about your selection, click on the "Create" button, and click on the "Download Private key and Create Resources" button.
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance4.png "Figure 4: Download Private key and Create Resources")
 
