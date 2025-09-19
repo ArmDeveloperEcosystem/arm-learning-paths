@@ -11,7 +11,7 @@ maintopic: true
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 30
-- Linux: 29
+- Linux: 30
 - macOS: 7
 - RTOS: 9
 - Windows: 4
@@ -20,7 +20,7 @@ subjects_filter:
 - Containers and Virtualization: 6
 - Embedded Linux: 4
 - Libraries: 3
-- ML: 15
+- ML: 16
 - Performance and Architecture: 21
 - RTOS Fundamentals: 4
 - Security: 2
@@ -35,18 +35,16 @@ tools_software_languages_filter:
 - Arm Compute Library: 2
 - Arm Development Studio: 8
 - Arm Fast Models: 4
-- Arm Virtual Hardware: 11
+- Arm Virtual Hardware: 12
 - Assembly: 1
-- AVH: 1
-- C: 3
-- C/C++: 1
+- C: 4
+- C++: 1
 - ChatGPT: 1
 - Clang: 1
 - CMSIS: 4
 - CMSIS-DSP: 1
 - CMSIS-Toolbox: 3
 - CNN: 1
-- Coding: 26
 - Containerd: 1
 - DetectNet: 1
 - Docker: 10
@@ -54,39 +52,40 @@ tools_software_languages_filter:
 - Edge AI: 1
 - Edge Impulse: 1
 - ExecuTorch: 3
-- Fixed Virtual Platform: 10
+- FastAPI: 1
 - FPGA: 1
 - Fusion 360: 1
-- FVP: 1
+- FVP: 10
 - GCC: 9
-- GenAI: 2
+- Generative AI: 2
 - GitHub: 3
 - GitLab: 1
+- gpiozero: 1
 - Himax SDK: 1
 - Hugging Face: 3
 - IP Explorer: 4
 - Jupyter Notebook: 1
 - K3s: 1
-- Keil: 5
-- Keil MDK: 3
+- Keil MDK: 7
+- Keil RTX RTOS: 2
+- Keil Studio Cloud: 1
 - Kubernetes: 1
+- lgpio: 1
 - LLM: 2
 - MCP: 1
-- MDK: 1
 - MPS3: 1
 - MXNet: 1
-- Neon: 1
+- NEON: 1
 - NumPy: 1
+- Ollama: 1
 - Paddle: 1
 - Porcupine: 1
-- Python: 7
+- Python: 8
 - PyTorch: 3
 - QEMU: 1
-- Raspberry Pi: 6
+- Raspberry Pi: 7
 - Remote.It: 1
-- RTX: 2
 - Runbook: 4
-- Slicing software: 1
 - STM32: 2
 - TensorFlow: 3
 - TensorRT: 1
@@ -95,7 +94,7 @@ tools_software_languages_filter:
 - TrustZone: 2
 - TVMC: 1
 - vcpkg: 1
-- Yocto Linux: 1
+- Yocto Project: 1
 - Zephyr: 1
 weight: 5
 ---

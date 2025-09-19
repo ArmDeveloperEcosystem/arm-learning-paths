@@ -1,5 +1,5 @@
 ---
-title: "Code kata: perfect your SVE and SME skills with SIMD loops"
+title: "Code kata: perfect your SVE and SME skills with SIMD Loops"
 
 minutes_to_complete: 30
 
