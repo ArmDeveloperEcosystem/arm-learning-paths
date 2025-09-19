@@ -1,16 +1,15 @@
 ---
-title: Introduction to OpenBMC and UEFI
+title: What are OpenBMC and UEFI?
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
 ## Overview
 
 This section explains the roles of OpenBMC and UEFI in the Arm server boot flow and why simulating their integration is essential for early-stage development.
 
-### OpenBMC
+### What is OpenBMC?
 
 [OpenBMC](https://www.openbmc.org/) is a collaborative open-source firmware stack for Baseboard Management Controllers (BMC), hosted by the Linux Foundation.  
 BMCs are embedded controllers on server motherboards that enable both in-band and out-of-band system management. Out-of-band access allows remote management even when the host is powered off or unresponsive, while in-band interfaces support communication with the host operating system during normal operation.
@@ -32,7 +31,7 @@ OpenBMC enables faster development cycles, open innovation, and reduced vendor l
 
 In this Learning Path, you’ll simulate how OpenBMC manages the early-stage boot process, power sequencing, and remote access for a virtual Neoverse RD-V3 server. You will interact with the BMC console, inspect boot logs, and verify SOL and UART communication with the host.
 
-### UEFI
+## What is UEFI?
 
 The [Unified Extensible Firmware Interface (UEFI)](https://uefi.org/) is the modern replacement for legacy BIOS, responsible for initializing hardware and loading the operating system. UEFI provides a robust, modular, and extensible interface between platform firmware and OS loaders. It supports:
 

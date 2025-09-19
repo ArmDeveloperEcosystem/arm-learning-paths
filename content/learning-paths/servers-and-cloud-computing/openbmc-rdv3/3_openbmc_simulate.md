@@ -35,8 +35,9 @@ cd ~
 wget https://gitlab.arm.com/server_management/PoCs/fvp-poc/-/raw/2a79ae93560969a3b802dfb3d7d89f9fd9dee5a6/run.sh
 ```
 
-Before running the simulation, open the `run.sh` script and locate the line that defines FVP_KEYWORD.
+Before running the simulation, open the `run.sh` script and locate the line that defines `FVP_KEYWORD`.
 This variable determines when the host FVP should be launched by monitoring OpenBMC’s console output.
+
 If not set correctly, the script might hang or fail to start the host simulation.
 Update the line to:
 
@@ -44,7 +45,7 @@ Update the line to:
 FVP_KEYWORD="terminal2: Listening for serial connection on port"
 ```
 
-Then, execute the script.
+Then, execute the script:
 
 ```bash
 chmod +x ./run.sh
@@ -55,7 +56,7 @@ The script will:
 
 - Launch the OpenBMC FVP and wait for BMC boot
 - Start the host FVP for RD-V3 r1 (UEFI)
-- Bridge UART consoles between BMC and host via virtual pipes
+- Bridge UART consoles between BMC and host using virtual pipes
 - Create MCTP and IPMI tunnels between the OpenBMC FVP and the host FVP
 - Stop both FVPs when you press Ctrl+C
 
@@ -80,22 +81,26 @@ fvp login:
 Log in with user `root` and password `0penBmc`.
 
 {{% notice Note %}}
-The first character of the password is the number **0**, not a capital **O**.
+The first character of the password is the number **0** (zero), not a capital **O**.
 {{% /notice %}}
 
-The host-side UEFI appears in the **FVP terminal_ns_uart0** window. You might briefly see the UEFI firmware setup. Select **Continue** to proceed, then GRUB appears and Linux boots.
+The host-side UEFI appears in the **FVP terminal_ns_uart0** window. You might briefly see the UEFI firmware setup. 
 
-![img2 alt-text#center](openbmc_hostuefi.jpg "UEFI Firmware Setup Menu")
+Select **Continue** to proceed, then GRUB appears and Linux boots:
+
+![img2 UEFI firmware setup menu in the FVP `terminal_ns_uart0` console before GRUB boots (OpenBMC/UEFI on RD-V3 FVP)#center](openbmc_hostuefi.jpg "UEFI firmware setup menu before GRUB boots")
 
 The simulation proceeds to the **CSSv3 r1** GRUB menu. Press **Enter** to boot.
 
-A successful run shows login prompts on both BMC and host consoles. You can also confirm final state in the Web UI or via UART output.
+A successful run shows login prompts on both BMC and host consoles. You can also confirm final state in the Web UI or using UART output.
 
-![img2 alt-text#center](openbmc_cssv3_sim.jpg "Simulation success")
+![img2 BMC and host consoles each showing a login prompt after a successful OpenBMC + host UEFI simulation on RD-V3 FVP#center](openbmc_cssv3_sim.jpg "Simulation success with BMC and host consoles")
+
 
 Shown here is a short recording that illustrates OpenBMC and UEFI interaction during pre-silicon execution.
 
-![img1 alt-text#center](openbmc_cssv3_running.gif "Simulation running")
+![img1 Animated capture of OpenBMC and host UEFI consoles interacting during pre-silicon execution on the RD-V3 FVP#center](openbmc_cssv3_running.gif "OpenBMC and UEFI consoles interacting during pre-silicon execution")
+
 
 After the simulation, logs for both BMC and host are stored in `~/logs`:
 
@@ -109,4 +114,4 @@ Tail them to verify behavior or troubleshoot:
 tail -n +1 ~/logs/* | less -R
 ```
 
-With the simulation running successfully, you’re ready to exercise host↔BMC flows. Next, you’ll interact with the BMC via UART and IPMI from the host to validate pre-silicon communication paths.
+With the simulation running successfully, you’re ready to exercise host↔BMC flows. You'll now move on to interact with the BMC using UART and IPMI from the host to validate pre-silicon communication paths.

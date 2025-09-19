@@ -1,5 +1,5 @@
 ---
-title: Set up the pre-silicon development environment for OpenBMC and UEFI
+title: Set up the development environment for OpenBMC and UEFI
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -10,11 +10,11 @@ layout: learningpathall
 
 In this section, you prepare your workspace to build and simulate OpenBMC and UEFI firmware on the Neoverse RD-V3 r1 platform using Arm Fixed Virtual Platforms (FVPs). You will install the required tools, configure repositories, and set up a Docker-based build environment for both BMC and host firmware.
 
-Before you start, review the previous Learning Path: [CSS-V3 pre-silicon software development using Neoverse servers](https://learn.arm.com/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack). It walks through using the CSSv3 reference design on FVP to perform early development and validation.
+Before you start, review the related Learning Path [CSS-V3 pre-silicon software development using Neoverse servers](https://learn.arm.com/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack). It walks through using the CSSv3 reference design on FVP to perform early development and validation.
 
 You will perform the steps outlined below on your Arm Neoverse-based Linux machine running Ubuntu 22.04 LTS. You will need at least 80 GB of free disk space, 48 GB of RAM.
 
-### Install required packages
+## Install the required packages
 
 Install the base packages for building OpenBMC with the Yocto Project:
 
@@ -23,9 +23,7 @@ sudo apt update
 sudo apt install -y git gcc g++ make file wget gawk diffstat bzip2 cpio chrpath zstd lz4 bzip2 unzip xz-utils python3
 ```
 
-Install [Docker](/install-guides/docker)
-
-### Set up the repo tool
+Now install Docker: 
 
 ```bash
 mkdir -p ~/.bin
@@ -33,8 +31,13 @@ PATH="${HOME}/.bin:${PATH}"
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
 chmod a+rx ~/.bin/repo
 ```
+{{% notice Note %}}
+See the [Docker Install Guide](/install-guides/docker) for support.
+{{% /notice %}}
 
-### Download and install the Arm FVP (RD-V3 r1)
+
+
+## Download and install the Arm FVP (RD-V3 r1)
 
 ```bash
 mkdir -p ~/fvp
@@ -46,7 +49,7 @@ tar -xvf FVP_RD_V3_R1_11.29_35_Linux64_armv8l.tgz
 
 Accept the defaults unless you have a reason not to. By default, the FVP installs under `$HOME/FVP_RD_V3_R1`.
 
-### Initialize the host build environment
+## Initialize the host build environment
 
 ```bash
 mkdir -p ~/host
@@ -55,7 +58,7 @@ cd ~/host
 repo sync -c -j $(nproc) --fetch-submodules --force-sync --no-clone-bundle
 ```
 
-### Apply required patches
+## Apply required patches
 
 These patches enable platform-specific functionality such as Redfish support and UEFI enhancements and align the build system with the RD-V3 FVP setup.
 
@@ -70,10 +73,10 @@ echo /patch >> .git/info/sparse-checkout
 git pull origin main
 ```
 
-This approach allows you to fetch only the `patch` folder from the remote Git repository—saving time and disk space.
+This approach allows you to fetch only the `patch` folder from the remote Git repository - saving time and disk space.
 
 Next, using a file editor of your choice, create an `apply_patch.sh` script inside the `~` directory and paste in the following content. 
-This script will automatically apply the necessary patches to each firmware component.
+This script automatically applies the necessary patches to each firmware component:
 
 ```bash
 FVP_DIR="host"
@@ -124,10 +127,10 @@ chmod +x ./apply_patch.sh
 This script automatically applies patches to edk2, edk2-platforms, buildroot, and related components.
 These patches enable additional UEFI features, integrate the Redfish client, and align the build system with the RD-V3 simulation setup.
 
-### Build RDv3 R1 host Docker image
+## Build RDv3 R1 host Docker image
 
 Before building the host image, update the following line in `~/host/grub/bootstrap` to replace the `git://` protocol.
-Some networks may restrict `git://` access due to firewall or security policies. Switching to `https://` ensures reliable and secure access to external Git repositories.
+Some networks might restrict `git://` access due to firewall or security policies. Switching to `https://` ensures reliable and secure access to external Git repositories.
 
 ```bash
 diff --git a/bootstrap b/bootstrap
@@ -202,8 +205,7 @@ lrwxrwxrwx 1 ubuntu ubuntu      33 Aug 18 10:19 uefi.bin -> ../components/css-co
 
 
 {{% notice Note %}}
-This [Arm Learning Path](/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack/3_rdv3_sw_build/) provides a complete introduction to setting up the RD-V3 development environment. Refer to it for more details.
-{{% /notice %}}
+See the Learning Path [Develop and Validate Firmware Pre-Silicon on Arm Neoverse CSS V3](/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack/3_rdv3_sw_build/) for an introduction to setting up the RD-V3 development environment. {{% /notice %}}
 
 ## Build the OpenBMC image
 
@@ -219,7 +221,7 @@ source setup fvp
 bitbake obmc-phosphor-image
 ```
 
-During the OpenBMC build process, you may encounter a native compilation error when building `Node.js` (especially version 22+) due to high memory usage during the V8 engine build phase.
+During the OpenBMC build process, you might encounter a native compilation error when building `Node.js` (especially version 22+) due to high memory usage during the V8 engine build phase.
 
 ```output
 g++: fatal error: Killed signal terminated program cc1plus
