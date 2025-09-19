@@ -7,9 +7,9 @@ key_ip:
 - Neoverse
 maintopic: true
 operatingsystems_filter:
-- Android: 2
-- Linux: 157
-- macOS: 11
+- Android: 3
+- Linux: 175
+- macOS: 13
 - Windows: 14
 pinned_modules:
 - module:
@@ -18,14 +18,14 @@ pinned_modules:
     - providers
     - migration
 subjects_filter:
-- CI-CD: 6
-- Containers and Virtualization: 29
-- Databases: 15
+- CI-CD: 7
+- Containers and Virtualization: 31
+- Databases: 17
 - Libraries: 9
-- ML: 29
-- Performance and Architecture: 62
+- ML: 31
+- Performance and Architecture: 71
 - Storage: 1
-- Web: 10
+- Web: 12
 subtitle: Optimize cloud native apps on Arm for performance and cost
 title: Servers and Cloud Computing
 tools_software_languages_filter:
@@ -34,27 +34,31 @@ tools_software_languages_filter:
 - 5G: 1
 - ACL: 1
 - AI: 1
-- Amazon Web Services: 1
 - Android Studio: 1
 - Ansible: 2
+- Apache Bench: 1
+- Apache Spark: 2
+- Apache Tomcat: 2
 - Arm Compiler for Linux: 1
 - Arm Development Studio: 3
 - Arm ISA: 1
 - Arm Performance Libraries: 1
+- Arm Streamline: 1
 - armclang: 1
 - armie: 1
 - ArmRAL: 1
 - ASP.NET Core: 2
-- Assembly: 4
-- assembly: 1
+- Assembly: 5
 - async-profiler: 1
-- AWS: 1
+- AWS: 2
 - AWS CDK: 2
+- AWS Cloud Formation: 1
 - AWS CodeBuild: 1
 - AWS EC2: 2
 - AWS Elastic Container Service (ECS): 1
 - AWS Elastic Kubernetes Service (EKS): 3
 - AWS Graviton: 1
+- AWS Lambda: 1
 - Azure CLI: 2
 - Azure Portal: 1
 - Bash: 1
@@ -62,61 +66,62 @@ tools_software_languages_filter:
 - Bastion: 3
 - BOLT: 2
 - bpftool: 1
-- C: 5
+- C: 10
 - C#: 2
-- C++: 8
-- C/C++: 2
+- C++: 12
 - Capstone: 1
-- CCA: 7
+- CCA: 8
 - Clair: 1
-- Clang: 10
+- Clang: 12
 - ClickBench: 1
 - ClickHouse: 1
-- CloudFormation: 1
 - CMake: 1
-- Coding: 17
 - conda: 1
 - Daytona: 1
 - Demo: 3
 - Django: 1
-- Docker: 18
-- Envoy: 2
+- Docker: 22
+- Envoy: 3
 - ExecuTorch: 1
 - FAISS: 1
 - FlameGraph: 1
 - Flink: 1
 - Fortran: 1
 - FunASR: 1
-- FVP: 4
-- GCC: 22
+- FVP: 7
+- GCC: 24
 - gdb: 1
 - Geekbench: 1
-- GenAI: 12
+- Generative AI: 12
 - GitHub: 6
+- GitHub Actions: 1
+- GitHub CLI: 1
 - GitLab: 1
-- Glibc: 1
+- glibc: 1
 - Go: 4
+- go test -bench: 1
+- Golang: 1
 - Google Axion: 3
 - Google Benchmark: 1
-- Google Cloud: 1
-- GoogleTest: 1
+- Google Cloud: 2
+- Google Test: 1
 - HammerDB: 1
 - Herd7: 1
-- Hugging Face: 10
+- Hugging Face: 11
 - InnoDB: 1
 - Intrinsics: 1
 - iPerf3: 1
-- Java: 3
+- Java: 4
 - JAX: 1
+- JMH: 1
 - Kafka: 1
 - Keras: 1
 - Kubernetes: 10
-- Lambda: 1
 - Libamath: 1
 - libbpf: 1
 - Linaro Forge: 1
 - Litmus7: 1
-- Llama.cpp: 1
+- Llama.cpp: 2
 - LLM: 10
 - llvm-mca: 1
 - LSE: 1
@@ -124,33 +129,36 @@ tools_software_languages_filter:
 - Memcached: 2
 - MLPerf: 1
 - ModelScope: 1
-- MongoDB: 2
+- MongoDB: 4
+- mongostat: 1
+- mongotop: 1
 - mpi: 1
 - MySQL: 9
-- NEON: 4
-- Neon: 3
+- NEON: 7
+- Networking: 1
 - Nexmark: 1
-- Nginx: 3
+- NGINX: 4
 - Node.js: 3
 - Ollama: 1
 - ONNX Runtime: 1
 - OpenBLAS: 1
-- OpenJDK-21: 1
+- OpenJDK 21: 2
 - OpenShift: 1
-- OrchardCore: 1
+- Orchard Core: 1
 - PAPI: 1
-- perf: 5
-- Perf: 1
+- perf: 6
 - PostgreSQL: 4
-- Python: 28
+- Python: 31
 - PyTorch: 9
 - QEMU: 1
 - RAG: 1
 - Redis: 3
 - Remote.It: 2
-- RME: 7
+- RME: 8
 - Runbook: 71
 - Rust: 2
+- Service Mesh: 1
+- Siege: 1
 - snappy: 1
 - Snort3: 1
 - SQL: 7
@@ -165,27 +173,27 @@ tools_software_languages_filter:
 - TensorFlow: 2
 - Terraform: 11
 - ThirdAI: 1
-- Tomcat: 1
 - Trusted Firmware: 1
+- Trustee: 1
 - TSan: 1
 - TypeScript: 1
 - Vectorscan: 1
-- Veraison: 1
-- Visual Studio Code: 4
+- Veraison: 2
+- Visual Studio Code: 5
 - vLLM: 2
-- VS Code: 1
 - vvenc: 1
 - Whisper: 1
 - WindowsPerf: 1
 - WordPress: 3
-- wrk2: 1
+- wrk2: 2
 - x265: 1
+- YCSB: 1
 - zlib: 1
-- Zookeeper: 1
+- ZooKeeper: 1
 weight: 1
 cloud_service_providers_filter:
 - AWS: 17
-- Google Cloud: 13
-- Microsoft Azure: 10
+- Google Cloud: 18
+- Microsoft Azure: 15
 - Oracle: 2
 ---
