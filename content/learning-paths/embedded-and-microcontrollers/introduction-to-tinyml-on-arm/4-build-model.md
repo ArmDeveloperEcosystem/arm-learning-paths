@@ -65,10 +65,7 @@ Then, generate a model file on the `.pte` format using the Arm examples. The Ahe
 
 ```bash
 cd $ET_HOME
-python -m examples.arm.aot_arm_compiler --model_name=examples/arm/simple_nn.py \
---delegate --quantize --target=ethos-u85-256 \
---so_library=cmake-out-aot-lib/kernels/quantized/libquantized_ops_aot_lib.so \
---system_config=Ethos_U85_SYS_DRAM_Mid --memory_mode=Sram_Only
+python -m examples.arm.aot_arm_compiler --model_name=examples/arm/simple_nn.py --delegate --quantize --target=ethos-u85-256 --system_config=Ethos_U85_SYS_DRAM_Mid --memory_mode=Sram_Only
 ```
 
 From the Arm Examples directory, you can build an embedded Arm runner with the `.pte` included. This allows you to optimize the performance of your model, and ensures compatibility with the CPU kernels on the FVP. Finally, generate the executable `arm_executor_runner`.

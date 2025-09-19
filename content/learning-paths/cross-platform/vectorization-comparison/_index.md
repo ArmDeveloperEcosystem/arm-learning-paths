@@ -1,25 +1,24 @@
 ---
-title: "Code kata: perfect your SVE and SME skills with SIMD Loops"
+title: "Mapping x86 vector extensions to Arm: a migration overview"
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for software developers who want to learn how to use the full range of features available in SVE, SVE2, and SME2 to improve software performance on Arm processors.
+draft: true
+cascade:
+    draft: true
+
+who_is_this_for: This is an advanced topic for software developers who want to learn how to migrate vectorized code to Arm.
 
 learning_objectives:
-     - Improve SIMD code performance using Scalable Vector Extension (SVE) and Scalable Matrix Extension (SME)
-     - Describe what SIMD Loops contains and how kernels are organized across scalar, NEON, SVE,SVE2, and SME2 variants
-     - Build and run a selected kernel with the provided runner and validate correctness against the C reference
-     - Choose the appropriate build target to compare NEON, SVE/SVE2, and SME2 implementations
-
+     - Understand how Arm vector extensions, including NEON, Scalable Vector Extension (SVE), and Scalable Matrix Extension (SME) map to vector extensions from other architectures.
+     - Start planning how to migrate your SIMD code to the Arm architecture.
 
 prerequisites:
-    - An AArch64 computer running Linux or macOS. You can use cloud instances, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) for a list of cloud service providers. 
-    - Some familiarity with SIMD programming and NEON intrinsics.
-    - Recent toolchains that support SVE/SME (GCC 13+ or Clang 16+ recommended)
+    - Familiarity with vector extensions, SIMD programming, and compiler intrinsics.
+    - Access to Linux systems with NEON and SVE support. 
 
 author:
-    - Alejandro Martinez Vicente
-    - Mohamad Najem
+    - Jason Andrews
 
 ### Tags
 skilllevels: Advanced
@@ -28,12 +27,9 @@ armips:
     - Neoverse
 operatingsystems:
     - Linux
-    - macOS
 tools_software_languages:
-  - C
-  - C++
-  - GCC
-  - Clang
+    - GCC
+    - Clang
 
 shared_path: true
 shared_between:
@@ -58,14 +54,6 @@ further_reading:
     - resource:
         title: Arm Scalable Matrix Extension (SME) Introduction (Part 1)
         link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction
-        type: blog
-    - resource:
-        title: Arm Scalable Matrix Extension (SME) Introduction (Part 2)
-        link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2
-        type: blog
-    - resource:
-        title: (Part 3) Matrix-matrix multiplication. Neon, SVE, and SME compared
-        link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/matrix-matrix-multiplication-neon-sve-and-sme-compared
         type: blog
     - resource:
         title: Build adaptive libraries with multiversioning
