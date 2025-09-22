@@ -20,7 +20,7 @@ author: Annie Tallund
 
 ### Tags
 skilllevels: Advanced
-subjects: ML, Graphics, Upscaling, PyTorch
+subjects: ML
 armips:
     - Mali
 tools_software_languages:
