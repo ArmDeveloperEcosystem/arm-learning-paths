@@ -1,5 +1,10 @@
 ---
-title: Halide Essentials. From Basics to Android Integration
+title: Halide Essentials: From Basics to Android Integration
+
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 180
 
 who_is_this_for: This is an introductory topic for software developers interested in learning how to use Halide for image processing. 
