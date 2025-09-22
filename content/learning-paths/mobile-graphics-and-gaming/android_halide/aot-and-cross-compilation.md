@@ -105,8 +105,8 @@ target.set_feature(Target::NoRuntime, false);
 ```
 
 Notes: 
-* NoRuntime feature. When set to true, Halide excludes its runtime from the generated code, requiring you to link the runtime manually during the linking step. Setting it to false includes the Halide runtime within the generated library, simplifying deployment.
-* ARMFp16. Leverages ARM’s hardware support for half-precision (16-bit) floating-point computations, significantly accelerating workloads where reduced precision is acceptable, such as neural networks and image processing.
+* NoRuntime — When set to true, Halide excludes its runtime from the generated code, and you must link the runtime manually during the linking step. When set to false, the Halide runtime is included in the generated library, which simplifies deployment.
+* ARMFp16 — Enables the use of ARM hardware support for half-precision (16-bit) floating-point operations, which can provide faster execution when reduced precision is acceptable.
 
 We declare spatial variables (x, y) and an ImageParam named “input” representing the input image data. We use boundary clamping (clamp) to safely handle edge pixels. Then, we apply a 3x3 blur with a reduction domain (RDom). The accumulated sum is divided by 9 (the number of pixels in the neighborhood), producing an average blurred image. Lastly, thresholding is applied, producing a binary output: pixels above a certain brightness threshold (128) become white (255), while others become black (0).
 

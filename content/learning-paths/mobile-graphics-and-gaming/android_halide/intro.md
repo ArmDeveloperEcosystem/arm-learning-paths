@@ -207,7 +207,6 @@ invert.reorder_storage(c, x, y);
 
 Using only reorder(c, x, y) affects the computational loop order but not necessarily the memory layout. The computed data could still be stored in planar order by default. Using reorder_storage(c, x, y) explicitly defines the memory layout as interleaved.
 
-
 ## Compilation instructions
 Compile the program as follows (replace /path/to/halide accordingly):
 ```console
