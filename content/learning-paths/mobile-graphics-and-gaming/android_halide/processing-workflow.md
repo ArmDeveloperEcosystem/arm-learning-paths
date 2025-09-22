@@ -8,10 +8,10 @@ layout: "learningpathall"
 ---
 
 ## Objective
-In this section, we will build a real-time camera processing pipeline using Halide. First, we capture video frames from a webcam using OpenCV, then implement a Gaussian (binomial) blur to smooth the captured images, followed by thresholding to create a clear binary output highlighting prominent image features. After establishing this pipeline, we will measure performance and then explore Halide’s scheduling options—parallelization and tiling—to understand when they help and when they don’t.
+In this section, you will build a real-time camera processing pipeline using Halide. First, you capture video frames from a webcam using OpenCV, then implement a Gaussian (binomial) blur to smooth the captured images, followed by thresholding to create a clear binary output highlighting prominent image features. After establishing this pipeline, you will measure performance and then explore Halide’s scheduling options—parallelization and tiling—to understand when they help and when they don’t.
 
 ## Gaussian blur and thresholding
-Create a new camera-capture.cpp file and modify it as follows:
+Create a new `camera-capture.cpp` file and modify it as follows:
 ```cpp
 #include "Halide.h"
 #include "HalideRuntime.h"   // for Runtime::Buffer make_interleaved
@@ -178,7 +178,7 @@ imshow("Processed Image", blurredThresholded);
 
 The main loop continues capturing frames, running the Halide pipeline, and displaying the processed output in real-time until a key is pressed. This demonstrates how Halide integrates with OpenCV to build efficient, interactive image processing applications.
 
-In the examples above, pixel coordinates were manually clamped with a helper function:
+In the examples above, pixel coordinates are manually clamped with a helper function:
 
 ```cpp
 gray(clampCoord(x + r.x - 1, width),
@@ -187,7 +187,7 @@ gray(clampCoord(x + r.x - 1, width),
 
 This ensures that when the reduction domain r extends beyond the image borders (for example, at the left or top edge), the coordinates are clipped into the valid range [0, width-1] and [0, height-1]. Manual clamping is explicit and easy to understand, but it scatters boundary-handling logic across the pipeline.
 
-Halide provides an alternative through boundary condition functions, which wrap an existing Func and define its behavior outside the valid region. For the Gaussian blur, we can clamp the grayscale function instead of the raw input, producing a new function that automatically handles out-of-bounds coordinates:
+Halide provides an alternative through boundary condition functions, which wrap an existing Func and define its behavior outside the valid region. For the Gaussian blur, you can clamp the grayscale function instead of the raw input, producing a new function that automatically handles out-of-bounds coordinates:
 ```cpp
 // Clamp the grayscale function instead of raw input
 Halide::Func grayClamped = Halide::BoundaryConditions::repeat_edge(gray);
@@ -218,13 +218,13 @@ The output should look as in the figure below:
 ![img3](Figures/03.png)
 
 ## Parallelization and Tiling
-In this section, we will explore two complementary scheduling optimizations provided by Halide: Parallelization and Tiling. Both techniques help enhance performance but achieve it through different mechanisms—parallelization leverages multiple CPU cores, whereas tiling improves cache efficiency by optimizing data locality.
+In this section, you will explore two complementary scheduling optimizations provided by Halide: Parallelization and Tiling. Both techniques help enhance performance but achieve it through different mechanisms—parallelization leverages multiple CPU cores, whereas tiling improves cache efficiency by optimizing data locality.
 
-Below, we’ll demonstrate each technique separately for clarity and to emphasize their distinct benefits. 
+Now you will learn how to use each technique separately for clarity and to emphasize their distinct benefits. 
 
-Let’s first lock in a measurable baseline before we start changing the schedule. We’ll make a second file, camera-capture-perf-measurement.cpp, that runs the same grayscale → blur → threshold pipeline but prints per-frame timing, FPS, and MPix/s around the Halide realize() call. This lets us quantify each optimization we add next (parallelization, tiling, caching).
+Let’s first lock in a measurable baseline before we start changing the schedule. You will create a second file, `camera-capture-perf-measurement.cpp`, that runs the same grayscale → blur → threshold pipeline but prints per-frame timing, FPS, and MPix/s around the Halide realize() call. This lets you quantify each optimization you will add next (parallelization, tiling, caching).
 
-Create camera-capture-perf-measurement.cpp with the following code:
+Create `camera-capture-perf-measurement.cpp` with the following code:
 ```cpp
 #include "Halide.h"
 #include "HalideRuntime.h"          
@@ -362,13 +362,13 @@ int main() {
     return 0;
 }
 ```
-
-What this gives us: 
+ 
 * The console prints ms, FPS, and MPix/s per frame, measured strictly around realize() (camera capture and UI are excluded).
-* The very first line is labeled [warm-up] because it includes Halide’s JIT compilation. We can ignore it when comparing schedules.
+* The very first line is labeled [warm-up] because it includes Halide’s JIT compilation. You can ignore it when comparing schedules.
 * MPix/s = (width*height)/seconds is a good resolution-agnostic metric to compare schedule variants.
 
 Build and run the application. Here is the sample output:
+
 ```console
 % ./camera-capture-perf-measurement 
 [warm-up] Halide realize: 327.13 ms  |  3.06 FPS  |  6.34 MPix/s
@@ -417,12 +417,12 @@ Halide realize: 79.19 ms  |  12.63 FPS  |  26.19 MPix/s
 Halide realize: 80.70 ms  |  12.39 FPS  |  25.70 MPix/s
 ```
 
-This gives an rverage FPS of 12.48, and average throughput of 25.88 MPix/s. Now let’s start measuring potential improvements from scheduling.
+This gives an average FPS of 12.48, and average throughput of 25.88 MPix/s. Now you can start measuring potential improvements from scheduling.
 
 ### Parallelization
 Parallelization lets Halide run independent pieces of work at the same time on multiple CPU cores. For image pipelines, rows (or tiles of rows) are naturally parallel: each can be processed independently once producer data is available. By distributing work across cores, we reduce wall-clock time—crucial for real-time video.
 
-With the baseline measured, we apply a minimal schedule that parallelizes the blur reduction across rows while keeping the threshold stage at root. This avoids tricky interactions between a parallel consumer and an unscheduled reduction (a common source of internal errors).
+With the baseline measured, you will apply a minimal schedule that parallelizes the blur reduction across rows while keeping the threshold stage at root. This avoids tricky interactions between a parallel consumer and an unscheduled reduction (a common source of internal errors).
 
 Add these lines right after the threshold definition (and before any realize()):
 ```cpp
@@ -434,7 +434,7 @@ This does two important things:
 * compute_root() on blur moves the reduction to the top level, so it isn’t nested under a parallel loop that might complicate reduction ordering.
 * parallel(y) parallelizes over the pure loop variable y (rows), not the reduction domain r, which is the safe/idiomatic way to parallelize reductions in Halide.
 
-Let's re-buld and re-run the app. The results should look like here:
+Now rebuild and run the application again. The results should look like:
 ```output
 % ./camera-capture-perf-measurement
 [warm-up] Halide realize: 312.66 ms  |  3.20 FPS  |  6.63 MPix/s
@@ -497,10 +497,10 @@ Tiling splits the image into cache-friendly blocks (tiles). Two wins:
 * Partitioning: tiles are easy to parallelize across cores.
 * Locality: when you cache intermediates per tile, you avoid refetching/recomputing data and hit L1/L2 more often.
 
-Below we show both flavors.
+Now lets look at both flavors.
 
 ### Tiling with explicit intermediate storage (best for cache efficiency)
-Here we cache gray once per tile so the 3×3 blur can reuse it instead of recomputing RGB -> gray up to 9× per output pixel.
+Here you will cache gray once per tile so the 3×3 blur can reuse it instead of recomputing RGB -> gray up to 9× per output pixel.
 
 Before using this, remove any earlier compute_root().parallel(y) schedule for blur.
 
@@ -536,7 +536,7 @@ Recompile your application as before, then run. On our machine, this version ran
 This pattern shines when the cached intermediate is expensive and reused a lot (bigger kernels, multi-use intermediates, or separable/multi-stage pipelines). For a tiny 3×3 on CPU, the benefit often doesn’t amortize.
 
 ### Tiling for parallelization (without explicit intermediate storage)
-Tiling can also be used just to partition work across cores, without caching intermediates. This keeps the schedule simple: we split the output into tiles, parallelize across tiles, and vectorize along unit-stride x. Producers are computed inside each tile to keep the working set small, but we don’t materialize extra tile-local buffers:
+Tiling can also be used just to partition work across cores, without caching intermediates. This keeps the schedule simple: you split the output into tiles, parallelize across tiles, and vectorize along unit-stride x. Producers are computed inside each tile to keep the working set small, but don’t materialize extra tile-local buffers:
 ```cpp
 // Tiling (partitioning only)
 Halide::Var xo("xo"), yo("yo"), xi("xi"), yi("yi");
@@ -579,7 +579,7 @@ When to choose what:
 * Keep stages that read interleaved inputs unvectorized; vectorize only planar consumers.
 
 ## Summary
-In this section, we built a real-time Halide+OpenCV pipeline—grayscale, a 3×3 binomial blur, then thresholding—and instrumented it to measure throughput. The baseline settled around 12.48 FPS (25.88 MPix/s). A small, safe schedule tweak that parallelizes the blur reduction across rows lifted performance to about 14.79 FPS (30.67 MPix/s). In contrast, tiling used only for partitioning landed near 9.35 FPS (19.40 MPix/s), and tiling with a cached per-tile grayscale buffer was slower still at roughly 8.2 FPS (17.0 MPix/s).
+In this section, you built a real-time Halide+OpenCV pipeline—grayscale, a 3×3 binomial blur, then thresholding—and instrumented it to measure throughput. The baseline settled around 12.48 FPS (25.88 MPix/s). A small, safe schedule tweak that parallelizes the blur reduction across rows lifted performance to about 14.79 FPS (30.67 MPix/s). In contrast, tiling used only for partitioning landed near 9.35 FPS (19.40 MPix/s), and tiling with a cached per-tile grayscale buffer was slower still at roughly 8.2 FPS (17.0 MPix/s).
 
 The pattern is clear. On CPU, with a small kernel and an interleaved camera source, parallelizing the reduction is the most effective first step. Tiling starts to pay off only when an expensive intermediate is reused enough to amortize the overhead, e.g., after making the blur separable (horizontal+vertical), producing a planar grayscale once per frame with gray.compute_root(), and applying boundary conditions to unlock interior fast paths. From there, tune tile sizes and thread count to squeeze out the remaining headroom.
 
