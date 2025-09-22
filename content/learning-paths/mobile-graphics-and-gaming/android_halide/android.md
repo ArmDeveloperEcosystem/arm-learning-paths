@@ -346,42 +346,7 @@ The code defines three utility methods:
 2. extractGrayScaleBytes - converts a Bitmap into a grayscale byte array suitable for native processing.
 3. createBitmapFromGrayBytes - converts a grayscale byte array back into a Bitmap for display purposes.
 
-Note that performing the grayscale conversion in Halide allows us to exploit operator fusion, further improving performance by avoiding intermediate memory accesses. This could be done as follows:
-```cpp
-// Halide variables
-Halide::Var x("x"), y("y"), c("c");
-
-// Original RGB input buffer (interleaved RGB)
-Halide::Buffer<uint8_t> inputBuffer(inputRgbData, width, height, 3);
-
-// Convert RGB to grayscale directly in Halide pipeline
-Halide::Func grayscale("grayscale");
-grayscale(x, y) = Halide::cast<uint8_t>(
-    0.299f * inputBuffer(x, y, 0) +
-    0.587f * inputBuffer(x, y, 1) +
-    0.114f * inputBuffer(x, y, 2)
-);
-
-// Continue pipeline: Gaussian blur (example)
-Halide::Func blur("blur");
-Halide::RDom r(-1, 3, -1, 3);
-Halide::Expr kernel[3][3] = {
-    {1, 2, 1},
-    {2, 4, 2},
-    {1, 2, 1}
-};
-
-Halide::Expr blurSum = 0;
-for (int i = 0; i < 3; ++i) {
-    for (int j = 0; j < 3; ++j) {
-        blurSum += grayscale(x + r.x, y + r.y) * kernel[i][j];
-    }
-}
-blur(x, y) = Halide::cast<uint8_t>(blurSum / 16);
-
-// Fuse grayscale and blur operations
-grayscale.compute_at(blur, x);
-```
+Note that performing the grayscale conversion in Halide allows us to exploit operator fusion, further improving performance by avoiding intermediate memory accesses. This could be done as in our examples before (processing-workflow).
 
 The JNI integration occurs through an external method declaration, blurThresholdImage, loaded via the companion object at app startup. The native library (armhalideandroiddemo) containing this function is compiled separately and integrated into the application (native-lib.cpp).
 
