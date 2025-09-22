@@ -49,8 +49,7 @@ def init_container(i_img, img):
         package_manager = "yum"
         user = "wheel"
     else:
-        logging.info(f"Image {img} not supported")
-        return ""
+        raise SystemExit(f"Image {img} not supported")
 
     docker_cmd = [f"docker exec test_{i_img} {package_manager} update"]
     logging.debug(docker_cmd)
