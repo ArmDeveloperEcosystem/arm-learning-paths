@@ -17,7 +17,7 @@ The NSS model is available in two formats:
 | Model format | File extension | Used for                                                                 |
 |--------------|----------------|--------------------------------------------------------------------------|
 | PyTorch      | .pt            | training, fine-tuning, or evaluation in or scripts using the Model Gym  |
-| VGF          | .vgf           | for deployment using Vulkan ML on Arm-based hardware or emulation layers |
+| VGF          | .vgf           | for deployment using ML Extensions for Vulkan on Arm-based hardware or emulation layers |
 
 Both formats are available in the [NSS repository on Hugging Face](https://huggingface.co/Arm/neural-super-sampling). You'll also be able to explore config files, model metadata, usage details and detailed documentation on the use-case.
 
