@@ -63,6 +63,11 @@ jobs:
         run: |
           echo "Checking YAML fields for changed learning paths..."
           python3 tools/verify_index_fields.py ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+      - name: Validate open categories
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        run: |
+          echo "Checking open categories for changed learning paths..."
+          python3 tools/check_open_category.py ${{ steps.changed-markdown-files.outputs.all_changed_files }}
       - name: Run test suite for all changed .md files
         id: run-suite
         if: steps.changed-markdown-files.outputs.any_changed == 'true'

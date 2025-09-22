@@ -34,7 +34,7 @@ To emulate the ML extensions for Vulkan:
    ```
 ![Add user-defined Vulkan layers path in Vulkan Configurator#center](./images/load_layers.png "Figure 1: Add Vulkan layer path.")
 
-5. Ensure the Graph layer is listed *above* the Tensor layer, and that you've set up the configuration scope as shown in the image.
+5. Switch back to the **Vulkan Loader Management** tab. Ensure the Graph layer is listed *above* the Tensor layer, and that you've set up the configuration scope as shown in the image.
 
 ![Layer configuration showing Graph above Tensor#center](./images/verify_layers.png "Figure 2: Verify layer ordering and scope.")
 
