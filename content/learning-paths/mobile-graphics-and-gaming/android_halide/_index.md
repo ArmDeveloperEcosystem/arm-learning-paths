@@ -17,7 +17,6 @@ learning_objectives:
 
 prerequisites:
     - Basic C++ knowledge
-    - Basic programming knowledge
     - Android Studio with Android Emulator
 
 author: Dawid Borycki
