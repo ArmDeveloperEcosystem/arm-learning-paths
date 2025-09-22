@@ -1,5 +1,5 @@
 ---
-title: Halide Essentials: From Basics to Android Integration
+title: Halide Essentials From Basics to Android Integration
 
 draft: true
 cascade:
