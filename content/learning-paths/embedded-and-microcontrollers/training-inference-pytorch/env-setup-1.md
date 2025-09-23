@@ -17,7 +17,7 @@ A Convolutional Neural Network (CNN) is a type of deep neural network primarily 
 
 ![Image of a convolutional neural network architecture](image.png)
 
-Image of a convolutional neural network architecture : [Image credits](https://wiki.seeedstudio.com/grove_vision_ai_v2/). 
+Image of a convolutional neural network architecture : [Image credits](https://medium.com/@atul_86537/learning-ml-from-first-principles-c-linux-the-rick-and-morty-way-convolutional-neural-c76c3df511f4). 
 
 CNNs are the backbone of many modern computer vision applications, including:
 
