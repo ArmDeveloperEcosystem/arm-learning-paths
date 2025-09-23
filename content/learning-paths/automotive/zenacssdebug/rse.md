@@ -8,72 +8,78 @@ weight: 6 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Debug RSE from reset
+You'll now move on to debug the initial code that runs on the Runtime Security Engine (RSE) based on Cortex-M55 in the Zena CSS FVP. You will launch the model with the Iris debug server, connect from Arm Development Studio, load Trusted Firmware-M (TF‑M) symbols, and step from reset.
 
-Let us start by debugging the initial code that executes on the Cortex-M55 within the RSE block.
+## Launch the FVP and hold at reset
 
-### Launch FVP
-
-Start a new `tmux` session for the FVP (if necessary):
+Start a new `tmux` session for the FVP if needed:
 ```command
 tmux new-session -s arm-auto-solutions
 ```
-and navigate to your code repository.
 
-To debug from reset, launch the FVP with the Iris server but do not run. This will hold the FVP in the initial reset condition.
-
+Navigate to your code repository, then launch the FVP with Iris **without** running so it stays at reset:
 ```command
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose -- --iris-server --iris-port 7100"
 ```
-The FVP will start and generate various informational messages. Once initialized you should see something similar to:
 
+The FVP initializes and prints information messages, for example:
 ```output
 ...
 Info: RD_Aspen: RD_Aspen.css.smb.rse_flashloader: FlashLoader: Saved 64MB to file '~/arm-auto-solutions/build/tmp_baremetal/deploy/images/fvp-rd-aspen/rse-flash-image.img'
 Info: RD_Aspen: RD_Aspen.ros.flash_loader: FlashLoader: Saved 128MB to file '~/arm-auto-solutions/build/tmp_baremetal/deploy/images/fvp-rd-aspen/ap-flash-image.img'
 ```
-
 Note that execution has not started.
 
-### Connect the debugger
+{{% notice Tip %}}
+If you need remote debugging, start the FVP with `-A` and ensure the chosen Iris port (default `7100`) is reachable through your firewall.
+{{% /notice %}}
 
-Using the `RSE` connection created in the previous section, connect the debugger to the FVP. Observe that the processor is stopped before the first instruction has been executed.
+## Connect the debugger to RSE (Cortex-M55)
 
-In fact, the FVP is configured to have the vector table (`VTOR_S`) start at `0x11000000`, and if you inspect memory at that address the vector table will be populated. However no debug information is visible. Debug information must be loaded.
+Use the **RSE** model connection you created earlier to attach the debugger. The processor is stopped before the first instruction.
 
-In the `Debug Pane`, select `Load...` from the pane menu, and select `Add Symbols file`.
+The FVP configures the secure vector table (**VTOR_S**) at `0x11000000`. If you inspect memory at that address, the vector table is populated, but source is not visible until you load symbols.
 
-Browse to the `bl1_1.axf` file which is likely at:
+Load TF‑M symbols and map sources:
 
-``` bash
-/arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.1.0/build/bin/bl1_1.axf
+- In **Debug Control**, open the pane menu and choose **Load...**
+- Select **Add Symbols file**
+- Choose the TF‑M image, for example:
+   ```bash
+   /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.1.0/build/bin/bl1_1.axf
+   ```
+- When prompted for **substitute path**, map build-time paths to your local sources, for example:
+   ```bash
+   /usr/src/debug/trusted-firmware-m/2.1.0/
+   /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.1.0/git/tfm/
+   ```
+
+Step one instruction to fetch the reset handler and stop there:
+```text
+stepi
 ```
-Debug symbols will be loaded, but likely no source will be displayed. This is because the build was performed within the virtual environment but the debugger is running outside of that.
 
-You will be prompted to enter a path substitution to locate the sources. You can refer to the lowest common path so that all subsequent source files will also be located successfully.
+You can now step through code, set breakpoints, and inspect the target as the code proceeds.
 
-``` bash
-/usr/src/debug/trusted-firmware-m/2.1.0/
-/arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.1.0/git/tfm/"
-```
-Finally, to perform a single instruction step (`stepi`) to allow the processor to fetch the address of the `Reset_Handler` and stop there.
+{{% notice Note %}}
+Paths vary by environment. Use your actual build output and source locations when adding symbols or configuring path substitution.
+{{% /notice %}}
 
-You can now step through the code, set breakpoints, and inspect the target as the code proceeds.
+## Automate setup with debugger commands
 
-### Automate setup
+Automate the connection steps by adding **Debugger Commands** to the `.launch` configuration so they run on every attach:
 
-For convenience, it is possible to automate these actions every time you connect by entering them as `Debugger Commands` in the `.launch` configuration.
+- Open (double-click) your **RSE.launch** file
+- Go to the **Debugger** tab
+- Enable **Execute debugger commands**
+- Add commands similar to the following (adjust paths as needed)
 
-Open (double-click) the `.launch` file, and navigate to the `Debugger` pane.
-
-Enable `Execute debugger commands`, and enter the following (note pathing for your setup). You can copy the exact commands from the `Command` or `History` pane whilst performing the above GUI configuration.
-
-It is recommended to have an explicit `stop` command as symbols cannot be loaded whilst the target is running.
-
-``` text
+```text
 stop
 add-symbol-file /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.1.0/build/bin/bl1_1.axf
 set substitute-path /usr/src/debug/trusted-firmware-m/2.1.0/ /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.1.0/git/tfm/
 stepi
 ```
-![Debugger pane](debugger_commands.png)
+
+![RSE.launch in Arm Development Studio showing Debugger pane with TF-M symbols loaded and path substitution mapping alt-text#center](debugger_commands.png "RSE Debugger pane with TF-M symbol loading and source path substitution")
+

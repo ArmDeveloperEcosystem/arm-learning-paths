@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Launch FVP"
+title: "Launch the FVP"
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -8,7 +8,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Launch the FVP
+## Start the FVP from the build environment
 
 You can launch the FVP within the build environment with the software stack loaded:
 
@@ -16,11 +16,11 @@ You can launch the FVP within the build environment with the software stack load
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose"
 ```
 
-See the [documentation](https://arm-auto-solutions.docs.arm.com/en/v2.0/rd-aspen/user_guide/reproduce.html#run-the-fvp) for details.
+See the [Arm Zena CSS User Guide](https://arm-auto-solutions.docs.arm.com/en/v2.0/rd-aspen/user_guide/reproduce.html#run-the-fvp) for further information.
 
 While you can continue to use this method during debugging, it does not enable the Iris debug server in the model, so the system cannot be debugged from Arm Development Studio. Additional command-line options are required.
 
-You will use the following options (see `FVP_RD_Aspen --help` for the full list). **Options are case-sensitive.**
+You will use the following options (see `FVP_RD_Aspen --help` for the full list). Options are case-sensitive.
 
 | Option                  | Alias | Notes                                                 |
 |-------------------------|:-----:|-------------------------------------------------------|
@@ -29,25 +29,25 @@ You will use the following options (see `FVP_RD_Aspen --help` for the full list)
 | `--run`                 | `-R`  | Run the simulation when the debug server starts       |
 | `--iris-allow-remote`   | `-A`  | Allow remote connections (only if required)           |
 
-## Launch the FVP with additional options
+## Enable the Iris debug server for Arm Development Studio
 
 Append `--` to pass model options through `runfvp`.
 
-**Start the model with the debug server and hold at reset:**
+Start the model with the debug server and hold at reset:
 ```command
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose -- --iris-server --iris-port 7100"
 ```
 
-Start the model with the debug server and begin execution (so boot can progress):
+Start the model with the debug server and begin execution so that boot can progress:
 ```command
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose -- --iris-server --iris-port 7100 --run"
 ```
 
-Allow remote debug connections (only if needed), using option aliases:
+If required, allow remote debug connections using option aliases:
 ```command
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose -- -I -A --iris-port 7100"
 ```
 
 {{% notice Note %}}
-Specify the Iris port explicitly (even when using the default) so it matches your debugger connection settings. If you enable remote connections, ensure your firewall allows inbound access to the chosen port.
+Even when using the default, specify the Iris port explicitly so it matches your debugger connection settings. If you enable remote connections, ensure your firewall allows inbound access to the chosen port.
 {{% /notice %}}
