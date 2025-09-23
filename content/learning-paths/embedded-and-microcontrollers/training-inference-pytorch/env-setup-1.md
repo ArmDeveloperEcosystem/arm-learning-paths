@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Overview 
-This learning path (LP) is a direct follow-up to the Introduction to TinyML on Arm using PyTorch and ExecuTorch learning path. While the previous path introduced you to the core concepts and the toolchain, this one puts that knowledge into practice with a fun, real-world example. We will move from the simple "Feedforward Neural Network" in the previous LP, to a more practical computer vision task: A tiny Rock-Paper-Scissors game, to demonstrate how these tools can be used to solve a tangible problem and run efficiently on Arm-based edge devices.
+This learning path (LP) is a direct follow-up to the [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm) learning path. While the previous path introduced you to the core concepts and the toolchain, this one puts that knowledge into practice with a fun, real-world example. We will move from the simple ["Feedforward Neural Network"](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/4-build-model) in the previous LP, to a more practical computer vision task: A tiny Rock-Paper-Scissors game, to demonstrate how these tools can be used to solve a tangible problem and run efficiently on Arm-based edge devices.
 
 
 We will train a lightweight CNN to classify images of the letters R, P, and S as "rock," "paper," or "scissors." The script uses a synthetic data renderer to create a large dataset of these images with various transformations and noise, eliminating the need for a massive real-world dataset.
@@ -21,7 +21,7 @@ Image of a convolutional neural network architecture : [Image credits](https://w
 
 CNNs are the backbone of many modern computer vision applications, including:
 
-- **Image Classification:** Identifying the main object in an image (e.g., classifying a photo as a "cat" or "dog").
+- **Image Classification:** Identifying the main object in an image, like classifying a photo as a "cat" or "dog".
 - **Object Detection:** Locating specific objects within an image and drawing a box around them.
 - **Facial Recognition:** Identifying and verifying individuals based on their faces.
 
