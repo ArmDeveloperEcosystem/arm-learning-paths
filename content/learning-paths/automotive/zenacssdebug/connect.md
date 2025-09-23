@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Debug Connections"
+title: "Create debug connections"
 
 weight: 5 # 1 is first, 2 is second, etc.
 
@@ -72,7 +72,7 @@ Create **Primary_init.launch**:
 - Select your **Zena_CSS_FVP** model
 - In **Edit configuration**, expand **Bare Metal Debug** and select **ARM_Cortex-A720AE_0** to attach to CPU0 only. This leaves other CPUs running
 
-## Primary Linux (kernel awareness, SMP)
+#### Primary Linux (kernel awareness, SMP)
 
 Create **Primary_Linux.launch** for Linux kernel debug with OS awareness:
 
