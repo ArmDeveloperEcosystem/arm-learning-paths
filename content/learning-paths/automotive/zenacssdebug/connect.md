@@ -14,13 +14,13 @@ You are now ready to create debug connections for each of the sub-systems within
 
 Arm Development Studio has full support for Heterogeneous systems such as Zena CSS, and so you can connect to all processors simultaneously.
 
-### Debug connection project
+## Debug connection project
 
 First, create a project to store these connections (`.launch` files) in.
 
 Select **File** > **New...** > **Project** > **General** > **Project**, and give it a meaningful name (`Connections`).
 
-### RSE (Cortex-M55)
+## RSE (Cortex-M55)
 
 Runtime Security Engine (RSE) is based on [Cortex-M55](https://developer.arm.com/Processors/Cortex-M55) core and is a security subsystem fulfilling the role of Root of Trust.
 
@@ -46,7 +46,7 @@ Assuming the same host will be running both the FVP and the debugger, specify th
 
 Arm Development Studio creates **RSE.launch** inside the **Connections** project.
 
-### Safety Island (Cortex-R82AE)
+## Safety Island (Cortex-R82AE)
 
 The Safety Island is based on the [Cortex-R82AE](https://developer.arm.com/Processors/Cortex-R82AE) core and manages power, clocks, and CMN control.
 
@@ -58,13 +58,13 @@ Follow the same steps as for RSE, with this change:
 To save time, copy **RSE.launch** to **SI.launch** and update the CPU selection to **Arm_Cortex-R82AE**.
 {{% /notice %}}
 
-### Primary Compute (Cortex-A720AE)
+## Primary Compute (Cortex-A720AE)
 
 Primary Compute comprises four clusters intended to run a rich OS such as Linux. Each cluster has four [Cortex-A720AE](https://developer.arm.com/Processors/Cortex-A720AE) cores alongside a [DSU-120AE](https://developer.arm.com/Processors/DSU-120AE) DynamIQ Shared Unit.
 
 You will create two connections: one for bare-metal initialization and one with Linux kernel awareness for SMP debug.
 
-#### Primary init (bare metal)
+## Primary init (bare metal)
 
 Create **Primary_init.launch**:
 
@@ -72,7 +72,7 @@ Create **Primary_init.launch**:
 - Select your **Zena_CSS_FVP** model
 - In **Edit configuration**, expand **Bare Metal Debug** and select **ARM_Cortex-A720AE_0** to attach to CPU0 only. This leaves other CPUs running
 
-#### Primary Linux (kernel awareness, SMP)
+## Primary Linux (kernel awareness, SMP)
 
 Create **Primary_Linux.launch** for Linux kernel debug with OS awareness:
 
