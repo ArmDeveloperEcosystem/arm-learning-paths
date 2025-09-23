@@ -8,7 +8,7 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Debug Connections
+## Overview
 
 You are now ready to create debug connections for each of the sub-systems within Zena CSS. In this section you will create the connections, which will be subsequently enhanced in the following section. You may prefer to fully set up one such connection before moving to others.
 
@@ -79,12 +79,8 @@ Create **Primary_Linux.launch** for Linux kernel debug with OS awareness:
 - Use **File > New > Model Connection**.
 - Select your **Zena_CSS_FVP** model.
 - In **Edit configuration**, expand **Linux Kernel Debug** and choose **ARM_Cortex-A720AEx16 SMP Cluster 1**.  
-  This connects to all 16 Cortex-A720AE processors described in the FVP. Only cores 0 to 3 are used by the default Linux configuration
+  This connects to all 16 Cortex-A720AE processors described in the FVP. Only cores 0 to 3 are used by the default Linux configuration.
 
 To learn more about OS awareness in Arm Debugger, see the [OS awareness documentation](https://developer.arm.com/documentation/101470/latest/Debugging-Embedded-Systems/About-OS-awareness).
 
-## Next steps: enhance connections (symbols, reset, semihosting)
 
-{{% notice Next %}}
-In the next section, you will enhance these connections with symbol loading, reset behavior, semihosting, and Linux kernel awareness settings.
-{{% /notice %}}

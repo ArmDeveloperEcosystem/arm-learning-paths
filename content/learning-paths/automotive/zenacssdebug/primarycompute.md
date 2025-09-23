@@ -1,13 +1,13 @@
 ---
 # User change
-title: "Debug Primary Compute and Linux"
+title: "Debug primary compute and Linux"
 
 weight: 8 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-## Debug Primary Compute
+## Debug primary compute
 
 The Primary Compute application processors (`Cortex-A720AE`) are the final processors to be enabled.
 
@@ -39,7 +39,7 @@ Run to **bl2_entrypoint** and step through as required.
 Symbol loading is Exception Level–aware. If execution changes Exception Level, load symbols into the corresponding EL address space. For example, the processors start in EL3 and transition to EL2N when the Linux kernel is enabled.
 {{% /notice %}}
 
-## Debug the Linux kernel with OS awareness (SMP)
+## Debug the Linux kernel with OS awareness (symmetric multiprocessing)
 
 Switch to the `Primary_Linux.launch` connection you created earlier to enable Arm Development Studio OS awareness for the Linux kernel. Load the kernel symbols and set source mapping if your kernel sources are located outside the default paths:
 

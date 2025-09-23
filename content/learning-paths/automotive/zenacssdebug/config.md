@@ -8,7 +8,7 @@ weight: 4 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Debug configuration
+## Set up a debug configuration for the Zena CSS FVP
 
 Now you'll walk through setting up an Arm Development Studio debug configuration for the Zena CSS FVP using the Iris interface. This is a fast, reliable path to a working configuration.
 

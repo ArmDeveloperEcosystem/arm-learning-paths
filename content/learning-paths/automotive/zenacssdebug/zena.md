@@ -8,7 +8,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-# Arm Zena Compute Subsystem
+## Arm Zena Compute Subsystem
 
 The Arm Zena Compute Subsystem (CSS) consists of a high-performance Arm Cortex-A720AE application processor system (primary compute), augmented with an Arm Cortex-R82AE–based Safety Island (SI) and a real-time domain to host additional system-safety monitoring and real-time services.
 
@@ -25,7 +25,7 @@ Follow the steps to download and build the software stack in the [Arm Zena CSS U
 Here the default **Arm Automotive Solutions Demo** build is used.
 
 {{% notice Note %}}
-The focus of this Learning Path primarily is to demonstrate how to debug the software stack.
+The primary focus of this Learning Path is to demonstrate how to debug the software stack.
 {{% /notice %}}
 
 ## Verify the build and execution
@@ -62,7 +62,7 @@ For more information, see [Arm Development Studio](https://developer.arm.com/Too
 
 Arm Development Studio is a commercial, license-managed product. For installation and setup instructions, see the [Arm Development Studio Install Guide](/install-guides/armds/).
 
-Launch the IDE. It’s recommended that you create a new workspace folder.
+Launch the IDE and create a new workspace folder.
 
 If you’re prompted by the launcher (this prompt is disabled by default), create a new folder there. 
 

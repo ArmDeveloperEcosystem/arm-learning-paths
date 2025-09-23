@@ -8,6 +8,8 @@ weight: 6 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
+## Overview
+
 You'll now move on to debug the initial code that runs on the Runtime Security Engine (RSE) based on Cortex-M55 in the Zena CSS FVP. You will launch the model with the Iris debug server, connect from Arm Development Studio, load Trusted Firmware-M (TF‑M) symbols, and step from reset.
 
 ## Launch the FVP and hold at reset
@@ -43,12 +45,12 @@ The FVP configures the secure vector table (**VTOR_S**) at `0x11000000`. If you 
 Load TF‑M symbols and map sources:
 
 - In **Debug Control**, open the pane menu and choose **Load...**
-- Select **Add Symbols file**
+- Select **Add Symbols file**.
 - Choose the TF‑M image, for example:
    ```bash
    /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.1.0/build/bin/bl1_1.axf
    ```
-- When prompted for **substitute path**, map build-time paths to your local sources, for example:
+When prompted for **substitute path**, map build-time paths to your local sources, for example:
    ```bash
    /usr/src/debug/trusted-firmware-m/2.1.0/
    /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.1.0/git/tfm/
@@ -69,10 +71,10 @@ Paths vary by environment. Use your actual build output and source locations whe
 
 Automate the connection steps by adding **Debugger Commands** to the `.launch` configuration so they run on every attach:
 
-- Open (double-click) your **RSE.launch** file
-- Go to the **Debugger** tab
-- Enable **Execute debugger commands**
-- Add commands similar to the following (adjust paths as needed)
+- Open (double-click) your **RSE.launch** file.
+- Go to the **Debugger** tab.
+- Enable **Execute debugger commands**.
+- Add commands similar to the following (adjust paths as needed).
 
 ```text
 stop
