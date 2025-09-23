@@ -1,5 +1,5 @@
 ---
-title: Train and Test the Sentiment Classifier
+title: Train and Test the Rock-Paper-Scissors Model
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -14,17 +14,16 @@ Navigate to the Arm examples directory in the ExecuTorch repository.
 cd $HOME/executorch/examples/arm
 ```
 
-Using a file editor of your choice, create a file named tiny_sentiment.py with the code shown below:
+Using a file editor of your choice, create a file named rps_tiny.py, copy and paste the code shown below:
 
 ```python
 #!/usr/bin/env python3
 """
-rps_tiny.py
 Tiny Rock–Paper–Scissors CNN (PyTorch) + ExecuTorch export + CLI mini-game.
 
 Usage:
   # Train (fast) + export .pte + play
-  python rps_tiny.py --epochs 6 --export --play
+  python rps_tiny.py --epochs 8 --export --play
 
   # Just train (no export)
   python rps_tiny.py --epochs 8
@@ -36,9 +35,9 @@ Usage:
   python rps_tiny.py --play
 
 Outputs:
-  - rps_best.pt                (best PyTorch weights)
-  - rps_labels.json            (label map)
-  - rps_tiny.pte               (ExecuTorch program, if --export)
+  - rps_best.pt               (best PyTorch weights)
+  - rps_labels.json           (label map)
+  - rps_tiny.pte              (ExecuTorch program, if --export)
 """
 
 import argparse, json, math, os, random, sys
@@ -46,8 +45,7 @@ from dataclasses import dataclass
 from typing import Tuple, List
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
-
+from PIL import Image,ImageOps,ImageDraw, ImageFont, ImageFilter
 
 import torch
 import torch.nn as nn
@@ -166,7 +164,7 @@ class RPSDataset(Dataset):
 # ---------------------------
 # Model: Tiny CNN (Ethos-friendly)
 # ---------------------------
-class TinyRPSCNN(nn.Module):
+class TinyRPS(nn.Module):
     """
     Simple ConvNet:
     [B,1,28,28] -> Conv3x3(16) -> ReLU -> Conv3x3(32) -> ReLU
@@ -190,6 +188,9 @@ class TinyRPSCNN(nn.Module):
     def forward(self, x):  # x: [B,1,28,28]
         return self.head(self.body(x))
 
+# AOT entry points expected by aot_arm_compiler
+ModelUnderTest = TinyRPS()  
+ModelInputs = (torch.zeros(1, 1, IMG_SIZE, IMG_SIZE, dtype=torch.float32),)
 
 # ---------------------------
 # Train / Eval
@@ -220,7 +221,6 @@ def export_to_pte(model: nn.Module, out_path=PTE_OUT):
     example = torch.zeros(1,1,IMG_SIZE,IMG_SIZE, dtype=torch.float32)
     exported = None
     try:
-        # Prefer torch.export (PyTorch 2.1+)
         try:
             from torch.export import export
         except Exception:
@@ -319,12 +319,12 @@ def main():
     with open(LABELS_JSON, "w") as f:
         json.dump({"labels": LABELS}, f, indent=2)
 
-    model = TinyRPSCNN()
+    model = TinyRPS()
 
     if not args.no_train:
         print("== Building synthetic datasets ==")
         tr = RPSDataset(TRAIN_SAMPLES_PER_CLASS, train=True)
-        va = RPSDataset(VAL_SAMPLES_PER_CLASS,   train=False)
+        va = RPSDataset(VAL_SAMPLES_PER_CLASS,  train=False)
         train_loader = DataLoader(tr, batch_size=BATCH, shuffle=True, num_workers=0)
         val_loader   = DataLoader(va, batch_size=BATCH, shuffle=False, num_workers=0)
 
@@ -336,7 +336,7 @@ def main():
         best = -1.0
         for e in range(1, args.epochs+1):
             tl, ta = run_epoch(train_loader, model, crit, opt)
-            vl, vaa = run_epoch(val_loader,   model, crit, None)
+            vl, vaa = run_epoch(val_loader,  model, crit, None)
             print(f"Epoch {e:02d}/{args.epochs} | train {ta*100:5.2f}% | val {vaa*100:5.2f}%")
             if vaa > best:
                 best = vaa
@@ -370,23 +370,27 @@ if __name__ == "__main__":
 
 
 ### How This Script Works:
-- Generates a large synthetic dataset of positive and negative sentences (with negations like “not good” / “not bad” and many object/verb variations).
-- Builds a vocabulary from the training data, lowercases and tokenizes, and encodes text to fixed length with padding (MAX_LEN).
-- Trains a compact TextCNN model for sentiment classification with dropout and weight decay for stability.
-- Tracks validation accuracy and saves the best weights to best_model_state.pt.
-- Saves the vocabulary and sequence length to tiny_sentiment_vocab.json.
-- Saves the trained model and vocabulary for inference.
-- Starts an interactive prompt where you can type any sentence and see the predicted sentiment and confidence.
+The script handles the entire workflow: data generation, model training, and a simple command-line game.
+
+- **Synthetic Data Generation:** The script includes a function render_rps() that generates 28x28 grayscale images of the letters 'R', 'P', and 'S' with random rotations, blurs, and noise. This creates a diverse dataset that's used to train the model.
+- **Model Architecture:** The model, a TinyRPS class, is a simple Convolutional Neural Network (CNN). It uses a series of 2D convolutional layers, followed by pooling layers to reduce spatial dimensions, and finally, fully connected linear layers to produce a final prediction. This architecture is efficient and well-suited for edge devices.
+- **Training:** The script generates synthetic training and validation datasets. It then trains the CNN model using the **Adam optimizer** and **Cross-Entropy Loss**. It tracks validation accuracy and saves the best-performing model to rps_best.pt.
+- **ExecuTorch Export:** A key part of the script is the export_to_pte() function. This function uses the torch.export module (or a fallback) to trace the trained PyTorch model and convert it into an ExecuTorch program (.pte). This compiled program is highly optimized for deployment on any target hardware. For self-practice, you can play around with Cortex-A or M devices.
+- **CLI Mini-Game**: After training, you can play an interactive game. The script generates an image of your move and a random opponent's move. It then uses the trained model to classify both images and determines the winner based on the model's predictions.
 
 
-To train and test the model with your own inputs, run:
+### Running the Script:
+
+To train the model, export it, and play the game, run the following command:
+
 ```bash
-python ~/executorch/examples/arm/tiny_sentiment.py
+python rps_tiny.py --epochs 8 --export --play
 ```
+
+You'll see the training progress, where the model's accuracy rapidly improves on the synthetic data.
 
 ```bash
 == Building synthetic datasets ==
-  img = Image.fromarray(arr, mode="L")
 Train size: 3000  |  Val size: 600
   totl += float(loss)*x.size(0)
 Epoch 01/8 | train 80.03% | val 98.67%
@@ -394,14 +398,12 @@ Epoch 01/8 | train 80.03% | val 98.67%
 Epoch 02/8 | train 99.57% | val 100.00%
   ↑ saved rps_best.pt (val 100.00%)
 Epoch 03/8 | train 99.83% | val 99.83%
-Epoch 04/8 | train 99.97% | val 100.00%
-Epoch 05/8 | train 100.00% | val 100.00%
-Epoch 06/8 | train 100.00% | val 100.00%
-Epoch 07/8 | train 100.00% | val 100.00%
 Epoch 08/8 | train 100.00% | val 100.00%
 Training done.
 Loaded weights from rps_best.pt
+[export] wrote rps_tiny.pte
 ```
+After training and export, the game will start. Type rock, paper, or scissors and see the model's predictions and what your opponent played.
 
 ```bash
 === Rock–Paper–Scissors: Play vs Tiny CNN ===
@@ -485,98 +487,4 @@ Model thinks opponent played: rock (100.0%)
 --------------------------------------------------
 Your move> 
 ```
-Type quit to stop playing
-
-
-**Example inputs to try:**
-I am happy → Positive
-
-I am sad → Negative
-
-I love this product → Positive
-
-This service is awful → Negative
-
-What a wonderful day → Positive
-
-This movie is terrible → Negative
-
-not bad → (usually Positive)
-
-not good → (usually Negative)
-
-I hate water → Negative
-
-I adore this song → Positive
-
-{{% notice Note %}}
-This is binary (Positive/Negative). Neutral phrases like “I want water” may skew slightly negative unless paired with a positive adjective (Eg: “I want great service”).
-{{% /notice %}}
-
-
-{{% notice Note %}}
-The output has been truncated 
-{{% /notice %}}
-
-The output should look like:
-```bash
-=== Sentiment Analysis Classifier ===
-This program demonstrates text sentiment classification using PyTorch
-
-Loading dataset...
-Total examples: 12
-Positive examples: 6
-Negative examples: 6
-
-Building vocabulary from training data...
-Vocabulary size: 19 words
-
-Initializing model...
-Starting training...
-Training on device: cpu
-
-Epoch 1/20
-Training: 100%|██████████| 3/3 [00:00<00:00, 62.94it/s, loss=0.2385, acc=44.44%]
-Validation: 100%|███████| 1/1 [00:00<00:00, 633.87it/s, loss=0.2302, acc=66.67%]
-
-Epoch Summary:
-Train Loss: 0.7154, Train Acc: 44.44%
-Val Loss: 0.6906, Val Acc: 66.67%
-New best validation accuracy: 66.67%! Saving model...
-
-.
-.
-.
-Saving vocabulary...
-
-=== Interactive Testing Mode ===
-Enter text to analyze sentiment. Type 'quit' to exit.
-==================================================
-Enter text to analyze (or 'quit' to exit): I am happy
-
-Processing text: "I am happy"
-Tokenization: i am happy
-Padding: Added 47 padding tokens
-
-Analyzing sentiment...
-
-Result:
-Sentiment: Positive
-Confidence: 96.67%
-==================================================
-Enter text to analyze (or 'quit' to exit): I am sad
-
-Processing text: "I am sad"
-Tokenization: i am sad
-Padding: Added 47 padding tokens
-
-Analyzing sentiment...
-
-Result:
-Sentiment: Negative
-Confidence: 83.98%
-==================================================
-Enter text to analyze (or 'quit' to exit): quit
-```
-
-Do not forget to type 'quit' once you are done testing the model, you will see `Goodbye!`. You are now ready to optimize and convert the model using ExecuTorch.
+Type quit to exit the game. You can now prepare the model to run on the FVP in the next chapter.

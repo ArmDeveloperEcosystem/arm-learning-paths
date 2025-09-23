@@ -6,9 +6,13 @@ weight: 4
 layout: learningpathall
 ---
 
+This section guides you through the process of compiling your trained Rock-Paper-Scissors model and running it on a simulated Arm-based edge device, the Corstone-320 Fixed Virtual Platform (FVP). This final step demonstrates the end-to-end workflow of deploying a TinyML model for on-device inference.
+
 ## Compile and build the executable
 
-Start by setting some environment variables that are used by ExecuTorch.
+First, you'll use the Ahead-of-Time (AOT) Arm compiler to convert your PyTorch model into a format optimized for the Arm architecture and the Ethos-U NPU. This process, known as delegation, offloads parts of the neural network graph that are compatible with the NPU, allowing for highly efficient inference.
+
+Set up your environment variables by running the following commands in your terminal:
 
 ```bash
 export ET_HOME=$HOME/executorch
@@ -16,44 +20,41 @@ export executorch_DIR=$ET_HOME/build
 ```
 
 
-Then, generate a `.pte` file using the Arm examples. The Ahead-of-Time (AoT) Arm compiler will enable optimizations for edge devices like the Raspberry Pi and the Corstone-320 FVP. Run it from the ExecuTorch root directory.
-
-Navigate to the root directory using:
-
-```bash
-cd ../../
-```
-You are now in $HOME/executorch and ready to create the model file for ExecuTorch.
+Use the AOT Arm compiler to generate the optimized .pte file. This command delegates the model to the Ethos-U85 NPU, applies quantization to reduce model size and improve performance, and specifies the memory configuration. Run it from the ExecuTorch root directory.
 
 ```bash
 cd $ET_HOME
 python -m examples.arm.aot_arm_compiler --model_name=examples/arm/rps_tiny.py \
---delegate --quantize --target=ethos-u85-256 \
---so_library=kernels/quantized/libquantized_ops_aot_lib.so \
---system_config=Ethos_U85_SYS_DRAM_Mid --memory_mode=Sram_Only
+--delegate --quantize --target=ethos-u85-128 \
+--system_config=Ethos_U85_SYS_DRAM_Mid --memory_mode=Dedicated_Sram
 ```
 
-From the Arm Examples directory, you build an embedded Arm runner with the `.pte` included. This allows you to get the most performance out of your model, and ensures compatibility with the CPU kernels on the FVP. Finally, generate the executable `arm_executor_runner`.
+You should see: 
+
+```output
+PTE file saved as rps_tiny_arm_delegate_ethos-u85-128.pte
+```
+
+Next, you'll build the Ethos-U runner, which is a bare-metal executable that includes the ExecuTorch runtime and your compiled model. This runner is what the FVP will execute. Navigate to the runner's directory and use CMake to configure the build.
 
 ```bash
 cd $HOME/executorch/examples/arm/executor_runner
 
 
 cmake -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_TOOLCHAIN_FILE=$ET_HOME/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake \
--DTARGET_CPU=cortex-m85 \
--DET_DIR_PATH:PATH=$ET_HOME/ \
--DET_BUILD_DIR_PATH:PATH=$ET_HOME/cmake-out \
--DET_PTE_FILE_PATH:PATH=$ET_HOME/examples/arm/rps_tiny.pte \
--DETHOS_SDK_PATH:PATH=$ET_HOME/examples/arm/ethos-u-scratch/ethos-u \
--DETHOSU_TARGET_NPU_CONFIG=ethos-u85-256 \
--DPYTHON_EXECUTABLE=$HOME/executorch-venv/bin/python3 \
--DSYSTEM_CONFIG=Ethos_U85_SYS_DRAM_Mid  \
--B $ET_HOME/examples/arm/executor_runner/cmake-out
-
+      -S "$ET_HOME/examples/arm/executor_runner" \
+      -B "$ET_HOME/examples/arm/executor_runner/cmake-out" \
+      -DCMAKE_TOOLCHAIN_FILE="$ET_HOME/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake" \
+      -DTARGET_CPU=cortex-m85 \
+      -DET_DIR_PATH="$ET_HOME" \
+      -DET_BUILD_DIR_PATH="$ET_HOME/arm_test/cmake-out" \
+      -DET_PTE_FILE_PATH="$ET_HOME/rps_tiny_arm_delegate_ethos-u85-128.pte" \
+      -DETHOS_SDK_PATH="$ET_HOME/examples/arm/ethos-u-scratch/ethos-u" \
+      -DETHOSU_TARGET_NPU_CONFIG=ethos-u85-128 \
+      -DSYSTEM_CONFIG=Ethos_U85_SYS_DRAM_Mid \
 ```
 
-You should see:
+You should see output similar to this, indicating a successful configuration:
 
 ```bash
 -- *******************************************************
@@ -68,14 +69,14 @@ You should see:
 -- Build files have been written to: ~/executorch/examples/arm/executor_runner/cmake-out
 ```
 
-Build the Ethos-U runner:
+Now, build the executable with CMake:
 
 ```bash
-cmake --build $ET_HOME/examples/arm/executor_runner/cmake-out --parallel -- arm_executor_runner
-
+cmake --build "$ET_HOME/examples/arm/executor_runner/cmake-out" -j --target arm_executor_runner
 ```
 
-Run the model on the Corstone-320 with the following command:
+### Run the Model on the FVP
+With the arm_executor_runner executable ready, you can now run it on the Corstone-320 FVP to see the model on a simulated Arm device.
 
 ```bash
 FVP_Corstone_SSE-320 \
@@ -95,31 +96,23 @@ The argument `mps4_board.visualisation.disable-visualisation=1` disables the FVP
 {{% /notice %}}
 
 
-Observe that the FVP loads the model file.
+Observe the output from the FVP. You'll see messages indicating that the model file has been loaded and the inference is running. This confirms that your ExecuTorch program is successfully executing on the simulated Arm hardware.
+
 ```output
 telnetterminal0: Listening for serial connection on port 5000
 telnetterminal1: Listening for serial connection on port 5001
 telnetterminal2: Listening for serial connection on port 5002
 telnetterminal5: Listening for serial connection on port 5003
-I [executorch:arm_executor_runner.cpp:412] Model in 0x70000000 $
-I [executorch:arm_executor_runner.cpp:414] Model PTE file loaded. Size: 3360 bytes.
-```
-
-You can now test the model. 
-
-## Test the Model
-Test the model with your own inputs with the following command:
-
-
-TODO: Add commands
-
-```bash
-
+I [executorch:arm_executor_runner.cpp:489 main()] PTE in 0x70000000 $ Size: 433968 bytes
+I [executorch:arm_executor_runner.cpp:514 main()] PTE Model data loaded. Size: 433968 bytes.
+I [executorch:arm_executor_runner.cpp:527 main()] Model buffer loaded, has 1 methods
+I [executorch:arm_executor_runner.cpp:535 main()] Running method forward
+I [executorch:arm_executor_runner.cpp:546 main()] Setup Method allocator pool. Size: 62914560 bytes.
+I [executorch:arm_executor_runner.cpp:563 main()] Setting up planned buffer 0, size 3920.
+I [executorch:EthosUBackend.cpp:116 init()] data:0x70000070
 ```
 
 
-You've successfully trained and tested a CNN model for sentiment analysis on Arm hardware using Executorch.
+Congratulations! You've successfully built, optimized, and deployed a computer vision model on a simulated Arm-based system. This hands-on exercise demonstrates the power and practicality of TinyML and ExecuTorch for resource-constrained devices.
 
-Experiment with different inputs and data samples. This hands-on course showcases the power of TinyML and NLP on resource-constrained devices.
-
-In the next Learning Path, we would compare different model performances and inference times, before and after optimization using ExecuTorch. We would also analyze CPU and memory usage during inference. 
+In a future learning path, you can explore comparing different model performances and inference times before and after optimization. You could also analyze CPU and memory usage during inference, providing a deeper understanding of how the ExecuTorch framework optimizes your model for edge deployment.
