@@ -8,66 +8,66 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-# Arm Zena Compute Subsystem
+## Arm Zena Compute Subsystem
 
-The Arm Zena Compute Subsystem (CSS) consists of a high-performance Arm Cortex-A720AE Application Processor (Primary Compute) system augmented with an Arm Cortex-R82AE based Safety Island (SI) and real-time domain to host additional system safety monitoring and real-time services.
+The Arm Zena Compute Subsystem (CSS) consists of a high-performance Arm Cortex-A720AE application processor system (primary compute), augmented with an Arm Cortex-R82AE–based Safety Island (SI) and a real-time domain to host additional system-safety monitoring and real-time services.
 
-The system additionally includes a Runtime Security Engine (RSE) used for the secure boot of the system elements and the runtime secure services.
+The system also includes a Runtime Security Engine (RSE), which is used for secure boot of the system elements and to provide runtime secure services.
 
-The Arm Zena CSS software stack provides an open-source, integrated solution running on a Fixed Virtual Platform (FVP).
+The Arm Zena CSS Reference Software Stack provides an open-source, integrated solution running on a Fixed Virtual Platform (FVP). Both the reference software stack and the FVP are freely available.
 
-The reference software stack and the FVP are freely available.
+For more information, see [Arm Zena Compute Subsystem (CSS)](https://developer.arm.com/Compute%20Subsystems/Arm%20Zena%20Compute%20Subsystem).
 
-For more information, see [Arm Zena Compute Subsystem (CSS)](https://developer.arm.com/Compute%20Subsystems/Arm%20Zena%20Compute%20Subsystem) and associated links.
+## Build the software stack
 
-## Build software stack
+Follow the steps to download and build the software stack in the [Arm Zena CSS User Guide](https://arm-auto-solutions.docs.arm.com/en/v2.0/rd-aspen/user_guide/reproduce.html).
 
-Follow the steps to download and build the software stack in the [User Guide](https://arm-auto-solutions.docs.arm.com/en/v2.0/rd-aspen/user_guide/reproduce.html).
-
-The default `Arm Automotive Solutions Demo` build is used.
+Here the default **Arm Automotive Solutions Demo** build is used.
 
 {{% notice Note %}}
-The focus of this Learning Path is to demonstrate the **debug** of the software stack.
+The primary focus of this Learning Path is to demonstrate how to debug the software stack.
 {{% /notice %}}
 
-## Verify correct build and execution
+## Verify the build and execution
 
-Once the software stack has been built, you can verify that it runs successfully with the command:
+After you build the software stack, verify that it runs successfully:
 
-``` command
+```bash
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose"
 ```
 
-The system will run through the boot process until a Linux prompt is available (in `terminal_ns_uart0`).
+The system runs through the boot process until a Linux prompt is available (in `terminal_ns_uart0`).
 
-Use `Ctrl+C` on the command terminal to terminate.
+Press **Ctrl+C** in the command terminal to terminate the process.
 
 ## Install FVP (optional)
 
-The FVP is downloaded and installed as part of the build process above.
+The FVP is downloaded and installed as part of the build process.
 
-The `Arm-Zena-CSS-FVP` can also be independently downloaded from the Arm Developer [website](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms/Automotive%20FVPs).
+You can also separately download Arm-Zena-CSS-FVP from the Arm Developer [website](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms/Automotive%20FVPs).
 
 See also the Arm Ecosystem FVPs and Architecture Envelope Models [Install Guide](/install-guides/fm_fvp/eco_fvp/).
 
 {{% notice Note %}}
-For legacy reasons the FVP is named is `FVP_RD_Aspen`.
+For legacy reasons, the FVP is named `FVP_RD_Aspen`.
 {{% /notice %}}
 
-# Arm Development Studio
+## Arm Development Studio
 
-Arm Development Studio is a software development solution with support of multicore debug for Arm CPUs. It provides the earliest support for the latest processors.
+Arm Development Studio is a software development environment with multicore debug support for Arm CPUs. It provides early support for the latest processors and works seamlessly with FVPs.
 
-The CPUs implemented within Arm Zena CSS are supported by Arm Development Studio 2024.0 and later, though 2024.1 or later is recommended for appropriate Linux OS support. At time of writing the latest version available is 2025.0, and that is the version used for this learning path.
+The CPUs implemented within Arm Zena CSS are supported by Arm Development Studio 2024.0 and later; however, 2024.1 or later is recommended for Linux OS debug support. At the time of writing, the latest version is 2025.0, which is used for this Learning Path.
 
-For more information see [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
+For more information, see [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
 
-Arm Development Studio is a commercial, license managed, product. For installation and set up instructions, see this [Install Guide](/install-guides/armds/).
+Arm Development Studio is a commercial, license-managed product. For installation and setup instructions, see the [Arm Development Studio Install Guide](/install-guides/armds/).
 
-Launch the IDE. It is recommended to create a new workspace folder.
+Launch the IDE and create a new workspace folder.
 
-If prompted by the launcher (this is disabled by default) create a new folder there, else select `File` > `Switch Workspace` > `Other...`.
+If you’re prompted by the launcher (this prompt is disabled by default), create a new folder there. 
+
+Otherwise, select **File** > **Switch Workspace** > **Other**.
 
 {{% notice Note %}}
-To enable this prompt by default, navigate to `Window` > `Preferences` > `General` > `Startup and Shutdown` > `Workspaces`, and enable `Prompt for workspace on startup`.
+To enable the workspace prompt, go to **Window** > **Preferences** > **General** > **Startup and Shutdown** > **Workspaces**, and enable **Prompt for workspace on startup**.
 {{% /notice %}}
