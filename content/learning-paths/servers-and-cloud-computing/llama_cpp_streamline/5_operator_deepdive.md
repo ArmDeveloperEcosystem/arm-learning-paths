@@ -141,7 +141,7 @@ For example,
 
 The code above sets the name of annotation channel 0 as **MUL_MAT_GEMV** and channel 1 as **MUL_MAT_GEMM**.
 By zooming into the timeline view, you can see more details:
-![text#center](images/prefill_annotation_channel_2.png "Figure 19. Annotation Channel at Decode stage")
+![text#center](images/prefill_annotation_channel_2.png "Figure 19. Annotation Channel at Prefill stage")
 
 
 When moving the cursor over an annotation channel, Streamline shows:  
