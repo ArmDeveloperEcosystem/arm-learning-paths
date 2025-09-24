@@ -3,12 +3,12 @@ title: Run MongoDB on Arm-based Microsoft Azure Cobalt 100 instances
 
 minutes_to_complete: 30   
 
-who_is_this_for: Software developers who want to migrate MongoDB workloads to Arm-based platforms, with a focus on Microsoft Azure Cobalt 100 Arm64 instances.
+who_is_this_for: This is an introductory topic for software developers who want to migrate MongoDB workloads to Arm-based platforms, with a focus on Microsoft Azure Cobalt 100 Arm64 instances.
 
 learning_objectives: 
-    - Provision an Arm64-based Cobalt 100 virtual machine in Azure using Ubuntu Pro 24.04 LTS.
-    - Deploy MongoDB on the Cobalt 100 instance.
-    - Run baseline tests and performance benchmarks on MongoDB in the Arm64 environment.
+    - Provision an Arm64-based Cobalt 100 virtual machine in Azure using Ubuntu Pro 24.04 LTS
+    - Deploy MongoDB on the Cobalt 100 instance
+    - Run baseline tests and performance benchmarks on MongoDB in the Arm64 environment
 
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 (Dpsv6) instances
