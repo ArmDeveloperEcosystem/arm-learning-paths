@@ -14,7 +14,7 @@ This learning path focuses only on **inference on the CPU**.
 The **llama-cli** tool provides a command-line interface to run LLMs with the llama.cpp inference engine. 
 It supports text generation, chat mode, and grammar-constrained output directly from the terminal.  
 
-![text#center](images/llama_structure.png "Figure 1. Annotation String")
+![text#center](images/llama_structure.png "Figure 1. llama-cli Flow")
 
 ### What llama-cli does
 - Load and interpret LLMs in **.gguf** format  
@@ -24,7 +24,7 @@ It supports text generation, chat mode, and grammar-constrained output directly 
 - Allocate memory for tensor nodes using the **graph planner**  
 - Execute tensor nodes in the graph during the **graph_compute** stage, which traverses nodes and forwards work to backend devices  
 
-All these steps are wrapped inside the function **`llama_decode`**.  
+Step2 to Step4 are wrapped inside the function **`llama_decode`**.
 During **Prefill** and **Decode**, `llama-cli` repeatedly calls `llama_decode` to generate tokens.  
 The parameter **`llama_batch`** passed to `llama_decode` differs between stages, containing input tokens, their count, and their positions.  
 

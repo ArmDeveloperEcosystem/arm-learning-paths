@@ -1,5 +1,5 @@
 ---
-title: Use Streamline to analyze LLM on CPU with llama.cpp
+title: Use Streamline to analyze LLM on CPU with llama.cpp and KleidiAI
 
 minutes_to_complete: 50
 
@@ -16,7 +16,7 @@ prerequisites:
     - Basic understanding of llama.cpp
     - Understanding of transformer model
     - Knowledge of Streamline usage
-    - An Arm Neoverse or Cortex-A run on Linux or Android to test the application
+    - An Arm Neoverse or Cortex-A hardware platform running Linux or Android to test the application
 
 author: 
     - Zenon Zhilong Xiu
@@ -32,7 +32,8 @@ tools_software_languages:
     - Arm Streamline
     - C++
     - llama.cpp
-    - AWS
+    - KleidiAI
+    - Neoverse
     - Profiling
 operatingsystems:
     - Linux

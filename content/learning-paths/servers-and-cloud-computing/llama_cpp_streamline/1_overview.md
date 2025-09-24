@@ -25,6 +25,7 @@ The same method can also be applied to **Arm64 Android** platforms.
 
 ## Prerequisites
 Before starting this guide, you should be familiar with:
-- Transformer architectures
-- llama.cpp
-- Arm Streamline
+- Basic understanding of llama.cpp
+- Understanding of transformer model
+- Knowledge of Streamline usage
+- An Arm Neoverse or Cortex-A hardware platform running Linux or Android to test the application

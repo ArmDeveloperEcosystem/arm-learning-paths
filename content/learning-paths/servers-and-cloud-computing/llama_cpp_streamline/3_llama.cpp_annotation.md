@@ -74,7 +74,7 @@ mkdir streamline_annotation
 cp ~/gator/annotate/libstreamline_annotate.a ~/gator/annotate/streamline_annotate.h streamline_annotation
 ```
 
-To link `libstreamline_annotate.a` library when building llama-cli, adding following lines in the end of `llama.cpp/CMakeLists.txt`.
+To link `libstreamline_annotate.a` library when building llama-cli, adding following lines in the end of `llama.cpp/tools/main/CMakeLists.txt`.
 
 ```makefile
 set(STREAMLINE_LIB_PATH "${CMAKE_SOURCE_DIR}/streamline_annotation/libstreamline_annotate.a")
