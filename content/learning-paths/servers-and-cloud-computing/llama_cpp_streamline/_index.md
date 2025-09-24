@@ -1,6 +1,10 @@
 ---
 title: Use Streamline to analyze LLM on CPU with llama.cpp and KleidiAI
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 50
 
 who_is_this_for: This advanced topic is for software developers, performance engineers, and AI practitioners who want to run llama.cpp on Arm-based CPUs, learn how to use Arm Streamline to capture and analyze performance data, understand how LLM inference behaves at the Prefill and Decode stages.
