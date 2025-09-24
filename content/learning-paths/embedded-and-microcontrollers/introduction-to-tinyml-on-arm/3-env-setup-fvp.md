@@ -16,11 +16,11 @@ The Corstone reference system is provided free of charge, although you will have
 
 ## Corstone-320 FVP Setup for ExecuTorch
 
-Navigate to the Arm examples directory in the ExecuTorch repository. Run the following command.
+Run the FVP setup script in the ExecuTorch repository.
 
 ```bash
-cd $HOME/executorch/examples/arm
-./setup.sh --i-agree-to-the-contained-eula
+cd $HOME/executorch
+./examples/arm/setup.sh --i-agree-to-the-contained-eula
 ```
 
 After the script has finished running, it prints a command to run to finalize the installation. This step adds the FVP executables to your system path.

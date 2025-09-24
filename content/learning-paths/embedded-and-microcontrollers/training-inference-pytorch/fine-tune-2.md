@@ -14,7 +14,7 @@ Navigate to the Arm examples directory in the ExecuTorch repository.
 cd $HOME/executorch/examples/arm
 ```
 
-Using a file editor of your choice, create a file named rps_tiny.py, copy and paste the code shown below:
+Using a file editor of your choice, create a file named `rps_tiny.py`, copy and paste the code shown below:
 
 ```python
 #!/usr/bin/env python3
@@ -252,7 +252,7 @@ def ascii_show(img: torch.Tensor) -> str:
         row=[]
         for x in range(0,w,1):
             v = arr[y, x]
-            row.append(chars[min(len(chars)-1, v*len(chars)//256)])
+            row.append(chars[min(len(chars)-1, int(v)*len(chars)//256)])
         lines.append("".join(row))
     return "\n".join(lines)
 
@@ -369,15 +369,14 @@ if __name__ == "__main__":
 ```
 
 
-### How This Script Works:
+### About the Script
 The script handles the entire workflow: data generation, model training, and a simple command-line game.
 
-- **Synthetic Data Generation:** The script includes a function render_rps() that generates 28x28 grayscale images of the letters 'R', 'P', and 'S' with random rotations, blurs, and noise. This creates a diverse dataset that's used to train the model.
+- **Synthetic Data Generation:** The script includes a function `render_rps()` that generates 28x28 grayscale images of the letters 'R', 'P', and 'S' with random rotations, blurs, and noise. This creates a diverse dataset that's used to train the model.
 - **Model Architecture:** The model, a TinyRPS class, is a simple Convolutional Neural Network (CNN). It uses a series of 2D convolutional layers, followed by pooling layers to reduce spatial dimensions, and finally, fully connected linear layers to produce a final prediction. This architecture is efficient and well-suited for edge devices.
-- **Training:** The script generates synthetic training and validation datasets. It then trains the CNN model using the **Adam optimizer** and **Cross-Entropy Loss**. It tracks validation accuracy and saves the best-performing model to rps_best.pt.
-- **ExecuTorch Export:** A key part of the script is the export_to_pte() function. This function uses the torch.export module (or a fallback) to trace the trained PyTorch model and convert it into an ExecuTorch program (.pte). This compiled program is highly optimized for deployment on any target hardware. For self-practice, you can play around with Cortex-A or M devices.
+- **Training:** The script generates synthetic training and validation datasets. It then trains the CNN model using the **Adam optimizer** and **Cross-Entropy Loss**. It tracks validation accuracy and saves the best-performing model to `rps_best.pt`.
+- **ExecuTorch Export:** A key part of the script is the `export_to_pte()` function. This function uses the `torch.export module` (or a fallback) to trace the trained PyTorch model and convert it into an ExecuTorch program (`.pte`). This compiled program is highly optimized for deployment on any target hardware, for example Cortex-M or Cortex-A CPUs for embedded devices.
 - **CLI Mini-Game**: After training, you can play an interactive game. The script generates an image of your move and a random opponent's move. It then uses the trained model to classify both images and determines the winner based on the model's predictions.
-
 
 ### Running the Script:
 
@@ -389,7 +388,7 @@ python rps_tiny.py --epochs 8 --export --play
 
 You'll see the training progress, where the model's accuracy rapidly improves on the synthetic data.
 
-```bash
+```output
 == Building synthetic datasets ==
 Train size: 3000  |  Val size: 600
   totl += float(loss)*x.size(0)
@@ -405,7 +404,7 @@ Loaded weights from rps_best.pt
 ```
 After training and export, the game will start. Type rock, paper, or scissors and see the model's predictions and what your opponent played.
 
-```bash
+```output
 === Rock–Paper–Scissors: Play vs Tiny CNN ===
 Type one of: rock / paper / scissors / quit
 
@@ -487,4 +486,5 @@ Model thinks opponent played: rock (100.0%)
 --------------------------------------------------
 Your move>
 ```
-Type quit to exit the game. You can now prepare the model to run on the FVP in the next chapter.
+
+Type `quit` to exit the game. In the next chapter, you'll prepare the model to run on the FVP.
