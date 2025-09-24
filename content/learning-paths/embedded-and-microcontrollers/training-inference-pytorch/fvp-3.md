@@ -110,7 +110,7 @@ I [executorch:EthosUBackend.cpp:116 init()] data:0x70000070
 
 {{% notice Note %}}
 The inference itself may take a longer to run with a model this size - note that this is not a reflection of actual execution time.
-{{%% /notice }}
+{{% /notice %}}
 
 You've now successfully built, optimized, and deployed a computer vision model on a simulated Arm-based system. This hands-on exercise demonstrates the power and practicality of TinyML and ExecuTorch for resource-constrained devices.
 
