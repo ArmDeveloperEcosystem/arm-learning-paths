@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Install MongoDB and mongosh on the Ubuntu Pro 24.04 LTS Arm instance
+## Getting started 
 
-Install MongoDB and `mongosh on Ubuntu Pro 24.04 LTS (Arm64) by downloading the binaries, setting up environment paths, configuring data and log directories, and starting the server for local access and verification.
+Install MongoDB and `mongosh` on Ubuntu Pro 24.04 LTS (Arm64) by downloading the binaries, setting up environment paths, configuring data and log directories, and starting the server for local access and verification.
 
 ## Install system dependencies
 
@@ -58,9 +58,9 @@ forked process: 3356
 child process started successfully, parent exiting
 ```
 
-6. **Install mongosh**
+## Install mongosh
 
-**mongosh** is the MongoDB shell used to interact with your MongoDB server. It provides a modern, user-friendly CLI for running queries and database operations.
+`Mongosh` is the MongoDB shell used to interact with your MongoDB server. It provides a modern, user-friendly CLI for running queries and database operations.
 
 Download and install the MongoDB shell for Arm:
 ```console
@@ -75,7 +75,7 @@ echo 'export PATH=/usr/local/mongosh/bin:$PATH' | sudo tee /etc/profile.d/mongos
 source /etc/profile.d/mongosh.sh
 ```
 
-### Verify MongoDB and mongosh installation
+## Verify MongoDB and mongosh installation
 
 Check if MongoDB and `mongosh` are properly installed on your machine:
 ```console
@@ -100,7 +100,7 @@ Build Info: {
 2.3.8
 ```
 
-### Connect to MongoDB via mongosh
+## Connect to MongoDB using mongosh
 
 Start interacting with MongoDB through the shell:
 ```console
