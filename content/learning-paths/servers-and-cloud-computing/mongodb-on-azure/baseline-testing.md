@@ -6,21 +6,25 @@ weight: 5
 layout: learningpathall
 ---
 
+## Overview
 
-### Baseline testing of MongoDB
-In this section you will perform baseline testing by verifying MongoDB is running, logging into the shell, executing a few test queries, and monitoring live performance. This ensures the database is functioning correctly before starting any benchmarks.
+Use this section to validate your **MongoDB** setup on an **Azure Cobalt 100 (Arm64)** VM running **Ubuntu 24.04 LTS**. You will check service health, run a quick storage baseline with **fio**, validate CRUD operations with **mongosh**, and do light query, index, and concurrency checks before larger benchmarks.
 
-1. Verify Installation & Service Health
+{{% notice Note %}}
+For this exercise, `mongod` runs locally and **access control is disabled** by default. Keep the server bound to `127.0.0.1` until you configure users and authentication.
+{{% /notice %}}
+
+## Verify MongoDB installation and service health (Azure Cobalt 100 Arm64)
 
 ```console
 ps -ef | grep mongod
 mongod --version
 netstat -tulnp | grep 27017
 ```
-An explanation of what each command is doing:
-- **ps -ef | grep mongod** – Checks if the MongoDB server process is running.
-- **mongod --version** – Shows the version of MongoDB installed.
-- **netstat -tulnp | grep 27017** – Checks if MongoDB is listening for connections on its default port 27017.
+What each command does:
+- **ps -ef | grep mongod** checks if the MongoDB server process is running
+- **mongod --version** shows the installed MongoDB version
+- **netstat -tulnp | grep 27017** confirms MongoDB is listening on the default port **27017**
 
 You should see output similar to:
 
@@ -47,9 +51,9 @@ Build Info: {
 tcp        0      0 127.0.0.1:27017         0.0.0.0:*               LISTEN      4288/mongod
 ```
 
-2. Storage and Health Check
+## Run a storage baseline with fio (random read IOPS on Ubuntu 24.04)
 
-To perform a storage and health check, run the command below. This command checks how fast your storage can randomly read small 4KB chunks from a 100 MB file for 30 seconds, using one job, followed by a summary report:
+This reads random **4 KB** blocks from a **100 MB** file for **30 seconds** with one job and prints a summary.
 
 ```console
 fio --name=baseline --rw=randread --bs=4k --size=100M --numjobs=1 --time_based --runtime=30 --group_reporting
@@ -70,7 +74,7 @@ baseline: (groupid=0, jobs=1): err= 0: pid=3753: Mon Sep  1 10:25:07 2025
      | 30.00th=[  190], 40.00th=[  229], 50.00th=[  243], 60.00th=[  253],
      | 70.00th=[  269], 80.00th=[  289], 90.00th=[  318], 95.00th=[  330],
      | 99.00th=[  416], 99.50th=[  490], 99.90th=[  799], 99.95th=[ 1106],
-     | 99.99th=[ 3884]
+     | 99.99th=[  3884]
    bw (  KiB/s): min=14536, max=19512, per=100.00%, avg=17046.10, stdev=1359.69, samples=59
    iops        : min= 3634, max= 4878, avg=4261.53, stdev=339.92, samples=59
   lat (usec)   : 100=1.27%, 250=56.61%, 500=41.65%, 750=0.34%, 1000=0.06%
@@ -88,22 +92,24 @@ Run status group 0 (all jobs):
 Disk stats (read/write):
   sda: ios=127195/29, sectors=1017560/552, merge=0/15, ticks=29133/8, in_queue=29151, util=96.37%
 ```
-The output shows how fast it read data (**16.6 MB/s**) and how many reads it did per second (**~4255 IOPS**), which tells you how responsive your storage is for random reads.
+Interpretation:
+- **16.6 MB/s** is the measured read bandwidth for **4 KB** random reads.
+- **~4255 IOPS** indicates random read responsiveness.
 
-3. Connectivity and CRUD Sanity Check
+## Connectivity and CRUD sanity check
 
 To verify that the MongoDB server is reachable you will perform a connectivity check. You will run a sanity test of core database functionality and permissions, refered to as CRUD:
 
-C - Create: Insert a new record/document into the database.
-R - Read: Query the database to retrieve data.
-U - Update: Modify an existing record.
-D - Delete: Remove a record.
+- C - Create: insert a new record/document into the database
+- R - Read: query the database to retrieve data
+- U - Update: modify an existing record
+- D - Delete: remove a record
 
 ```console
 mongosh --host localhost --port 27017
 ```
 
-Inside shell:
+Inside the shell:
 
 ```javascript
 use baselineDB
@@ -113,7 +119,11 @@ db.testCollection.updateOne({ name: "baseline-check" }, { $set: { value: 2 } })
 db.testCollection.deleteOne({ name: "baseline-check" })
 exit
 ```
-These commands create a test record, read it, update its value, and then delete it a simple way to check if MongoDB’s basic **add, read, update, and delete** operations are working.
+What these commands do:
+- Create a test document.
+- Read it.
+- Update its value.
+- Delete it.
 
 You should see output similar to:
 
@@ -147,30 +157,31 @@ baselineDB> db.testCollection.deleteOne({ name: "baseline-check" })
 { acknowledged: true, deletedCount: 1 }
 ```
 
-4. Basic Query Performance Test
+## Run a basic query performance test (count filter)
 
-You will now perform a lightweight query performance check:
+Run a lightweight query performance check.
 
 ```console
 mongosh --eval '
 db = db.getSiblingDB("baselineDB");
 for (let i=0; i<1000; i++) { db.perf.insertOne({index:i, value:Math.random()}) };
 var start = new Date();
-db.perf.find({ value: { $gt: 0.5 } }).count();
+db.perf.countDocuments({ value: { $gt: 0.5 } });
 print("Query Time (ms):", new Date() - start);
 '
 ```
-The command connected to MongoDB, switched to the `baselineDB` database, inserted 1,000 documents into the perf collection, and then measured the execution time for counting documents where value > 0.5. The final output displayed the query execution time in milliseconds.
+This connects to MongoDB, selects the `baselineDB` database, inserts **1,000** documents into the `perf` collection, and measures the time to count documents where `value > 0.5`.
 
-You should see the Query Time output similar to:
+You should see output similar to:
 
 ```output
 Query Time (ms): 2
 ```
 
-5. Index Creation Speed Test
+## Measure index creation time in MongoDB
 
-You will now run a performance sanity check that measures how long MongoDB takes to create an index on a given collection:
+Measure how long MongoDB takes to create an index on a collection.
+
 ```console
 mongosh --eval '
 db = db.getSiblingDB("baselineDB");
@@ -179,7 +190,7 @@ db.perf.createIndex({ value: 1 });
 print("Index Creation Time (ms):", new Date() - start);
 '
 ```
-The test connected to MongoDB, switched to the `baselineDB` database, and created an index on the value field in the `perf` collection. The index creation process completed in 22 milliseconds, indicating relatively fast index building for the dataset size.
+This creates an index on the `value` field in the `perf` collection and prints the time taken.
 
 You should see output similar to:
 
@@ -187,9 +198,9 @@ You should see output similar to:
 Index Creation Time (ms): 22
 ```
 
-6. Concurrency Smoke Test
+## Run a concurrency smoke test with parallel mongosh sessions
 
-You will now verify that MongoDB can handle concurrent client connections and inserts without errors:
+Verify that MongoDB can handle concurrent client connections and inserts.
 
 ```console
 for i in {1..5}; do
@@ -197,10 +208,9 @@ for i in {1..5}; do
 done
 wait
 ```
-This command runs five MongoDB insert jobs at the same time, each adding 1,000 new records to the `baselineDB.concurrent` collection.
-It is a quick way to test how MongoDB handles multiple users writing data at once.
+This runs five parallel MongoDB shell sessions, each inserting **1,000** documents into the `baselineDB.concurrent` collection.
 
-You should see an output similar to:
+You should see output similar to:
 
 ```output
 [1] 3818
@@ -220,8 +230,8 @@ switched to db baselineDB;
 [5]+  Done                    mongosh --eval 'use baselineDB; db.concurrent.insertMany([...Array(1000).keys()].map(k => ({ test: k, ts: new Date() })))'
 ```
 
-Five parallel MongoDB shell sessions were executed, each inserting 1,000 test documents into the baselineDB.concurrent collection. All sessions completed successfully, confirming that concurrent data insertion works as expected.
+All sessions completed successfully, confirming that concurrent inserts work as expected.
 
-With these tests you have confirmed that MongoDB is installed successfully and is functioning as expected on the Azure Cobalt 100 (Arm64) environment.
+## Next steps
 
-You are now ready to perform further benchmarking for MongoDB.
+With these checks complete, proceed to the MongoDB benchmarking section to run workload‑focused tests on the **Azure Cobalt 100 Arm64** instance.
