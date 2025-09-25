@@ -1,5 +1,5 @@
 ---
-title: Benchmarking via JMH
+title: Benchmark using JMH
 weight: 6 
 
 ### FIXED, DO NOT MODIFY
