@@ -9,19 +9,25 @@ layout: "learningpathall"
 ---
 ## Debug Safety Island code from beginning
 
-The Safety Island (Cortex-R82AE) is released from reset by the RSE code, and so the RSE code must proceed to that point before the Safety Island core can execute.
+The Safety Island subsystem based on the Cortex-R82AE is released from reset by RSE code. To debug Safety Island from first instruction, you must let the RSE (Cortex‑M55) code reach the point where it enables Safety Island on the Zena CSS FVP.
 
-### Launch FVP
+## Launch the FVP and reconnect RSE
 
-If necessary, restart the FVP in the reset state as before, and reconnect `RSE`.
+If necessary, start (or restart) the FVP held at reset and reconnect the RSE model connection in Arm Development Studio:
 
 ```command
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose -- --iris-server --iris-port 7100"
 ```
 
-Set up the `SI` connection in a similar way as the `RSE` connection. Use the following commands in the `Debugger` pane. This will load debug symbols and perform the necessary path substitution. You can then set a breakpoint on the entry of the `SI` code, `arch_exception_reset`.
+{{% notice Tip %}}
+For remote debugging, add `-A` and ensure the chosen Iris port (default `7100`) is reachable.
+{{% /notice %}}
 
-``` text
+## Connect the debugger to Safety Island (Cortex-R82AE)
+
+Configure the **SI** model connection similarly to **RSE**. Add the following **Debugger commands** to load symbols, set up source path substitution, and break at the Safety Island reset entry (`arch_exception_reset`):
+
+```text
 stop
 add-symbol-file /arm-auto-solutions/build/tmp_baremetal/deploy/images/fvp-rd-aspen/si0_ramfw.elf
 set substitute-path /usr/src/debug/scp-firmware/2.14.0/ /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/scp-firmware/2.14.0/git/
@@ -29,22 +35,22 @@ b arch_exception_reset
 ```
 
 {{% notice Note %}}
-Exact paths may differ for your set up.
+Paths vary by environment. Use your actual build output and source locations when adding symbols or configuring path substitution.
 {{% /notice %}}
 
-### Start execution
+## Start execution to release Safety Island
 
-Select the `RSE` connection in the `Debug Control` pane, and start execution (this will be unavailable in the `SI` connection, as that is currently powered down).
+In **Debug Control**, select the **RSE** connection and start execution (run). The **SI** connection remains unavailable to run until Safety Island is powered up.
 
-The `RSE` code will run until the point that the `SI` is enabled. This is reflected in the output log.
+When RSE enables Safety Island, you will see a log message like:
 
-``` output
+```output
 [INF] BL2: SI CL0 post load start
 ```
 
-#### Full output log
+## Full output log
 
-The full output lof is shown here for your reference:
+The full output log is shown here for your reference:
 
 ``` output
 Trying ::1...
