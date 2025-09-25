@@ -32,10 +32,10 @@ Now follow these steps:
    ![Azure portal VM creation — inbound port rules alt-text#center](images/instance1.png "Allow inbound port rules")
 - Select **Review + create** and verify your configuration.
    
-   ![Azure portal review and create — Ubuntu Pro Arm64 VM alt-text#center](images/ubuntu-pro.png "Review and Create an Azure Cobalt 100 Arm64 VM")
+   ![Azure portal review and create — Ubuntu Pro Arm64 VM alt-text#center](images/ubuntu-pro.png "Review and create an Azure Cobalt 100 Arm64 VM")
 - Select **Create**, then **Download private key and create resource**.
     
-    ![Azure portal VM creation — download private key alt-text#center](images/instance4.png "Download Private key and Create Resources")
+    ![Azure portal VM creation — download private key alt-text#center](images/instance4.png "Download private key and create resource")
 - After deployment completes, select **Go to resource**. From **Overview**, copy the **Public IP address** and connect through SSH using your key.
 
    ![Azure portal deployment confirmation — VM running alt-text#center](images/final-vm.png "VM deployment confirmation in Azure portal")

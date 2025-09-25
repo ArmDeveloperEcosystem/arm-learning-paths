@@ -1,3 +1,4 @@
+
 ---
 title: Benchmark using JMH
 weight: 6 
@@ -10,7 +11,7 @@ Now that you have built and run a Tomcat-like response in Java, the next step is
 
 ## Run performance tests using JMH
 
-JMH (Java Microbenchmark Harness) is a Java benchmarking framework developed by the JVM team at Oracle to measure the performance of small code snippets with high precision. It accounts for JVM optimizations like JIT and warm-up to ensure accurate and reproducible results. You can measure throughput (ops/sec), average execution time, or percentiles for latency. 
+JMH (Java Microbenchmark Harness) is a Java benchmarking framework developed by the JVM team at Oracle to measure the performance of small code snippets with high precision. It accounts for JVM optimizations like JIT and warmup to ensure accurate and reproducible results. You can measure throughput (ops/sec), average execution time, or percentiles for latency. 
 
 Follow the steps to help benchmark the Tomcat-like operation with JMH:
 
@@ -18,19 +19,13 @@ Follow the steps to help benchmark the Tomcat-like operation with JMH:
 Install Maven:
 
 ```console
-sudo apt install maven -y
+sudo apt update
+sudo apt install -y maven
 ```
 Once Maven is installed, create a JMH benchmark project using the official archetype provided by OpenJDK:
 
 ```console
-mvn archetype:generate \
-  -DinteractiveMode=false \
-  -DarchetypeGroupId=org.openjdk.jmh \
-  -DarchetypeArtifactId=jmh-java-benchmark-archetype \
-  -DarchetypeVersion=1.37 \
-  -DgroupId=com.example \
-  -DartifactId=jmh-benchmark \
-  -Dversion=1.0
+mvn archetype:generate   -DinteractiveMode=false   -DarchetypeGroupId=org.openjdk.jmh   -DarchetypeArtifactId=jmh-java-benchmark-archetype   -DarchetypeVersion=1.37   -DgroupId=com.example   -DartifactId=jmh-benchmark   -Dversion=1.0
 cd jmh-benchmark
 ```
 The output should look like:
@@ -84,10 +79,10 @@ public class MyBenchmark {
 ```
 This mirrors the Tomcat-like simulation you created earlier but now runs under JMH.
 
-Build the Benchmark JAR:
+## Build the benchmark JAR
 
 ```console
-mvn clean install
+mvn clean install -q
 ```
 
 The output from this command should look like:
@@ -218,7 +213,7 @@ Benchmark                           Mode  Cnt         Score        Error  Units
 MyBenchmark.benchmarkHttpResponse  thrpt   25  35659618.044 ± 686946.011  ops/s
 ```
 
-### Benchmark Metrics Explained  
+## Benchmark metrics explained  
 
 - **Run Count**: The total number of benchmark iterations that JMH executed. More runs improve statistical reliability and help smooth out anomalies caused by the JVM or OS. 
 - **Average Throughput**: The mean number of operations completed per second across all measured iterations. This is the primary indicator of sustained performance for the benchmarked code.
