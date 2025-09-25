@@ -138,33 +138,12 @@ Username: win11arm
 
 The run script supports several options for different use cases:
 
-### Basic connection
-
-```console
-./run-win11-vm.sh /path/to/vm
-```
-Starts the VM and connects in windowed mode with default settings.
-
-### Fullscreen mode
-
-```console
-./run-win11-vm.sh /path/to/vm --fullscreen
-```
-Connects in fullscreen mode for an immersive experience. Press `Ctrl+Alt+F` to exit fullscreen.
-
 ### Custom RDP port
 
 ```console
 ./run-win11-vm.sh /path/to/vm --rdp-port 3390
 ```
 Uses a custom RDP port, useful when running multiple VMs or avoiding port conflicts.
-
-### Combined options
-
-```console
-./run-win11-vm.sh /home/user/my-vm --fullscreen --rdp-port 3390
-```
-Combines multiple options for customized VM access.
 
 ### Help information
 
@@ -177,21 +156,29 @@ Displays usage information and all available options.
 
 The script uses Remmina as the RDP client and creates a Remmina profile with the connection settings.
 
-The file name is `help` and you can review and edit as needed.
+The file name is `connect.remmina` and you can review and edit as needed.
 
 ```ini
 [remmina]
-password=win11arm
-username=win11arm
-server=127.0.0.1:3389
-colordepth=32
-resolution_mode=1
-quality=9
-sound=local
+name=VM Connect
+protocol=RDP
 scale=2
+quality=9
+disable_fastpath=0
+glyph-cache=0
+multitransport=0
+relax-order-checks=1
 ignore-tls-errors=1
 cert_ignore=1
-network=lan
+window_width=1024
+window_height=768
+window_maximize=0
+disableautoreconnect=1
+viewmode=1
+network=lan #change viewmode=1 to viewmode=3 for fullscreen
+sound=local #to get microphone input working, change to sound=remote, and USB passthrough your m
+icrophone to the VM.
+colordepth=63
 ```
 
 
@@ -199,11 +186,11 @@ network=lan
 
 The preferred method is to shut down Windows normally from within the virtual machine.
 
-1. **Click the Start button** in Windows
-2. **Select Power → Shut down**
-3. **Wait for Windows to complete shutdown**
-4. **VM automatically stops** when Windows finishes shutting down
-5. **Remmina exits** automatically when the connection closes
+1. Click the Start button in Windows
+2. Select Power → Shut down
+3. Wait for Windows to complete shutdown
+4. VM automatically stops when Windows finishes shutting down
+5. Remmina exits automatically when the connection closes
 
 You should avoid killing QEMU directly as it may corrupt the VM disk as well as avoid exiting Remmina as it may leave the VM running in the background.
 
@@ -222,6 +209,13 @@ cat $HOME/win11-vm/qemu.pid
 
 # Test RDP connectivity
 timeout 3 bash -c "echo >/dev/tcp/localhost/3389"
+```
+
+If the RDP connectivity fails the output is:
+
+```output
+bash: connect: Connection refused
+bash: line 1: /dev/tcp/localhost/3389: Connection refused
 ```
 
 ### Resource usage monitoring
@@ -274,11 +268,6 @@ Verify RDP port:
 netstat -tlnp | grep 3389
 ```
 
-Test port connectivity: 
-```console
-telnet localhost 3389
-```
-
 ### Known Remmina crash issue
 
 When disconnecting from RDP, Remmina may crash with:
@@ -288,5 +277,6 @@ When disconnecting from RDP, Remmina may crash with:
 RDP session ended
 ```
 
-This is a known Remmina issue and does not affect VM functionality. 
+This is a known Remmina issue and does not affect VM functionality.
 
+You have learned how to create Windows on Arm virtual machines on an Arm Linux system with QEMU and KVM. You can use these virtual machines for software development and testing. You can speedup your development tasks by using an Arm Linux desktop or server with high processor count and plenty of RAM.

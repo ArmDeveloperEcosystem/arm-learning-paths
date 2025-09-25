@@ -87,7 +87,7 @@ The scripts try to manage resources based on your system.
 
 For CPU allocation, `/proc/cpuinfo` is used to determine the total number of CPU cores and use half of the available cores for the VM. A minimum of 2 cores for creation and 4 cores for runtime are required.
 
-For memory allocation, `/proc/meminfo` is used to determine total system RAM and allocate half of the available memory for the VM. A minimum of 2GB is required and memory usage is based on system capacity, with an option to override using the a command line parameter. 
+For memory allocation, `/proc/meminfo` is used to determine total system RAM and allocate half of the available memory for the VM. A minimum of 2GB is required and memory usage is based on system capacity, with an option to override using a command line parameter. 
 
 For storage, the default VM disk size is 40GB in QCOW2 format. The available disk space is validated before creation.
 
@@ -95,6 +95,6 @@ All settings are customizable using command line arguments.
 
 ## Script Integration and Workflow
 
-The create and run scripts share the same configuration files. Separating creation from execution enables you can create a VM once and then use the run script repeatedly. 
+The create and run scripts share the same configuration files. Separating creation from execution enables you to create a VM once and then use the run script repeatedly. 
 
-The next section explains how to create a run a Windows on Arm virtual machine. 
+The next section explains how to create and run a Windows on Arm virtual machine.

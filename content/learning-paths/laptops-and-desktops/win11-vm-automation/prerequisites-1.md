@@ -8,7 +8,7 @@ layout: learningpathall
 
 If you are building and testing Windows on Arm software you have a variety of options to run Windows on Arm. You can use local laptops, cloud virtual machines, and CI/CD platforms like GitHub Actions for development tasks.
 
-You can also use a local Arm Linux server to create virtual machines for Windows on Arm software development tasks. This Learning Paths explains how to install and use Windows on Arm virtual machines running on an Arm Linux system. Two scripts are provided to create and run Windows on Arm virtual machines to make the process easy. 
+You can also use a local Arm Linux server to create virtual machines for Windows on Arm software development tasks. This Learning Path explains how to install and use Windows on Arm virtual machines on an Arm Linux system. Two scripts are provided to create and run Windows on Arm virtual machines to make the process easy. 
 
 Before creating a Windows on Arm virtual machine, ensure your Arm Linux system meets the hardware and software requirements. This section covers everything you need to prepare to create a Windows on Arm virtual machine using QEMU and KVM.
 
@@ -25,14 +25,14 @@ Other Arm Linux systems and other Linux distributions are possible, but have not
 The minimum hardware requirements for the Arm Linux system are:
 
 - 8 cores with hardware virtualization support
-- 8GB RAM
-- 50GB free disk space
+- 8 GB RAM
+- 50 GB free disk space
 
 The scripts automatically allocate resources as listed below, but the details can be customized for your system.
 
-- CPU: half of available cores (minimum 4)
-- Memory: Half of available RAM (minimum 4GB)
-- Disk: 40GB VM disk
+- CPU: half of available cores (minimum 4 cores)
+- Memory: half of available RAM (minimum 4 GB)
+- Disk: 40 GB VM disk
 
 ## KVM support 
 
@@ -67,19 +67,10 @@ Install the packages using the Linux package manager.
 
 ```console
 sudo apt update
-sudo apt install qemu-system-aarch64 qemu-img mkisofs wget curl jq uuid-runtime -y
+sudo apt install qemu-system-arm qemu-utils genisoimage wget curl jq uuid-runtime -y
 ```
 
-The installed software packages provide the following functionality:
-
-- qemu-system-aarch64 - QEMU emulator for AArch64 architecture
-- qemu-img - QEMU disk image utility
-- mkisofs - creates ISO images for unattended installation
-- wget/curl - download Windows ISO and VirtIO drivers
-- jq - JSON processor for parsing download responses
-- uuid-runtime - generates unique identifiers for VM configuration
-
-If needed, the [Remmina](https://remmina.org/) remote desktop (RDP) client is automatically installed by the run script so you don't need to install it now, but you can using the command below.
+If needed, the [Remmina](https://remmina.org/) remote desktop (RDP) client is automatically installed by the run script so you don't need to install it now, but you can install it using the command below.
 
 ```console
 sudo apt install remmina remmina-plugin-rdp -y
