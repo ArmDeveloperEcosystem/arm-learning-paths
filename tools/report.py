@@ -25,7 +25,12 @@ If Learning Path, changes in any file in the directory will count.
 """
 def get_latest_updated(directory, is_lp, item):
     article_path = directory if is_lp else f"{directory}/{item}"
-    date = subprocess.run(["git", "log", "-1" ,"--format=%cs", str(article_path)], stdout=subprocess.PIPE)
+    process = subprocess.run(["git", "log", "-2" ,"--format=%cs", str(article_path)], stdout=subprocess.PIPE)
+    dates = process.stdout.decode("utf-8").split("\n")
+    if dates[0] == "2025-01-09":
+        date = dates[1]
+    else:
+        date = dates[0]
     return date
 
 """
@@ -53,7 +58,6 @@ def content_parser(directory, period):
 
             date = get_latest_updated(directory, is_lp, item)
             # strip out '\n' and decode byte to string
-            date = date.stdout.rstrip().decode("utf-8")
             logging.debug(f"Last updated: {date}")
             author = "None"
             for directory_list in open(directory +"/" + item):
