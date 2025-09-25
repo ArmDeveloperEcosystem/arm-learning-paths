@@ -3,7 +3,7 @@ title: Deploy Java applications on Azure Cobalt 100 processors
 
 minutes_to_complete: 30   
 
-who_is_this_for: This is an introductory topic about Java deployment and benchmarking on Microsoft Azure Cobalt 100 (Arm-based) virtual machines. It is designed for developers migrating Java applications from x86_64 to Arm.
+who_is_this_for: This is an introductory topic about Java deployment and benchmarking on Microsoft Azure Cobalt 100 Arm-based virtual machines. It is designed for developers migrating Java applications from x86_64 to Arm architecture.
 
 learning_objectives: 
     - Provision an Azure Arm-based Cobalt 100 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image

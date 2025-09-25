@@ -63,7 +63,3 @@ source ~/.bashrc
 Ubuntu Pro 24.04 LTS provides OpenJDK 21 by default. Ensure your OpenJDK for Arm64 is **11.0.9 or newer** if you must run Java 11; releases before 11.0.9 can suffer performance issues due to false‑sharing cache contention. See the Arm community blog: [Java performance on Neoverse N1](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/java-performance-on-neoverse-n1). You can also consult the [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) for package guidance on Arm Neoverse Linux systems.
 {{% /notice %}}
 
-## Next steps
-
-- run a quick **Hello World** to confirm the toolchain
-- proceed to **Java baseline testing** and **JMH benchmarking** on your Azure Cobalt 100 Arm64 VM

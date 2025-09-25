@@ -29,18 +29,18 @@ Now follow these steps:
 - Select **Generate new key pair**, select **SSH key type** (**ED25519** or **RSA**), and provide a **Key pair name**.
 - In **Inbound port rules**, set **Public inbound ports** to **Allow selected ports**, then select **HTTP (80)** and **SSH (22)**.
    
-   ![Azure portal VM creation — inbound port rules](images/instance1.png "Figure 2: Allow inbound port rules")
+   ![Azure portal VM creation — inbound port rules alt-text#center](images/instance1.png "Allow inbound port rules")
 - Select **Review + create** and verify your configuration.
    
-   ![Azure portal review and create — Ubuntu Pro Arm64 VM](images/ubuntu-pro.png "Figure 3: Review and Create an Azure Cobalt 100 Arm64 VM")
+   ![Azure portal review and create — Ubuntu Pro Arm64 VM alt-text#center](images/ubuntu-pro.png "Review and Create an Azure Cobalt 100 Arm64 VM")
 - Select **Create**, then **Download private key and create resource**.
     
-    ![Azure portal VM creation — download private key](images/instance4.png "Figure 4: Download Private key and Create Resources")
-- After deployment completes, select **Go to resource**. From **Overview**, copy the **Public IP address** and connect via SSH using your key.
+    ![Azure portal VM creation — download private key alt-text#center](images/instance4.png "Download Private key and Create Resources")
+- After deployment completes, select **Go to resource**. From **Overview**, copy the **Public IP address** and connect through SSH using your key.
 
-   ![Azure portal deployment confirmation — VM running](images/final-vm.png "Figure 5: VM deployment confirmation in Azure portal")
+   ![Azure portal deployment confirmation — VM running alt-text#center](images/final-vm.png "VM deployment confirmation in Azure portal")
 
-### Connect to your VM (example)
+## Connect to your VM (example)
 
 Use the command below, replacing placeholders with your values:
 ```bash
