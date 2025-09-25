@@ -121,4 +121,4 @@ keda-operator-metrics-apiserver-xxxxx            1/1     Running   0          1m
 kedify-agent-xxxxx                               1/1     Running   0          1m
 ```
 
-Proceed to the next section to deploy a sample HTTP app and test autoscaling.
+Proceed to the next section to learn how to install an Ingress controller before deploying a sample HTTP app and testing autoscaling.
