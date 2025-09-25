@@ -4,7 +4,7 @@ weight: 3
 layout: "learningpathall"
 ---
 
-Before deploying HTTP applications with Kedify autoscaling, you need an Ingress Controller to handle incoming traffic. Most major cloud providers (AWS EKS, Google GKE, Azure AKS) do not include an Ingress Controller by default in their managed Kubernetes offerings.
+Before deploying HTTP applications with Kedify autoscaling, you need an Ingress Controller to handle incoming traffic. Most managed Kubernetes services offered by major cloud providers (AWS EKS, Google GKE, Azure AKS) do not include an Ingress Controller by default.
 
 {{% notice Note %}}
 If your cluster already has an Ingress Controller installed and configured, you can skip this step and proceed directly to the [HTTP Scaling guide](../http-scaling/).
@@ -64,13 +64,13 @@ This will save the external IP or hostname in the `INGRESS_IP` environment varia
 
 ## Configure Access
 
-For this tutorial, you have two options:
+To configure access to the ingress controller, you have two options:
 
 ### Option 1: DNS Setup (Recommended for production)
 Point `application.keda` to your ingress controller's external IP/hostname using your DNS provider.
 
 ### Option 2: Host Header (Quick setup)
-Use the external IP/hostname directly with a `Host:` header in your requests. When testing, you'll use:
+Use the external IP/hostname directly with a `Host:` header in your requests. When testing, you will use:
 
 ```bash
 curl -H "Host: application.keda" http://$INGRESS_IP
@@ -80,7 +80,7 @@ The `$INGRESS_IP` environment variable contains the actual external IP or hostna
 
 ## Verification
 
-Test that the ingress controller is working by checking its readiness:
+Verify that the ingress controller is working by checking its readiness:
 
 ```bash
 kubectl get pods --namespace ingress-nginx
@@ -88,6 +88,5 @@ kubectl get pods --namespace ingress-nginx
 
 You should see the `ingress-nginx-controller` pod in `Running` status.
 
-## Next Steps
 
-Now that you have an Ingress Controller installed and configured, proceed to the [HTTP Scaling guide](../http-scaling/) to deploy an application and configure Kedify autoscaling.
+Now that you have an Ingress Controller installed and configured, proceed to the next section to deploy an application and configure Kedify autoscaling.
