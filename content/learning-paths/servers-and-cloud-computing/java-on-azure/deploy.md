@@ -30,9 +30,10 @@ java -version
 javac -version
 ```
 
-You should the JRE version printed: 
+You see the version information printed: 
 
 ```output
+aarch64
 openjdk version "21.0.8" 2025-07-15
 OpenJDK Runtime Environment (build 21.0.8+9-Ubuntu-0ubuntu124.04.1)
 OpenJDK 64-Bit Server VM (build 21.0.8+9-Ubuntu-0ubuntu124.04.1, mixed mode, sharing)
@@ -41,22 +42,44 @@ OpenJDK 64-Bit Server VM (build 21.0.8+9-Ubuntu-0ubuntu124.04.1, mixed mode, sha
 Check to ensure that the JDK is properly installed:
 
 ```console
-echo $JAVA_HOME
 which java
 which javac
 ```
 The output should look similar to:
 
 ```output
-javac 21.0.8
+/usr/bin/java
+/usr/bin/javac
 ```
 
-Set the Java Environment Variables to point to the root directory of your JDK installation: 
+Set the Java Environment Variables to point to the root directory of your JDK installation.
+
+Use a text editor to edit the file `$HOME/.bashrc` and add the 2 environment variables.
 
 ```console 
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-arm64
 export PATH=$JAVA_HOME/bin:$PATH
+```
+Source the updated `$HOME/.bashrc` file.
+
+```console
 source ~/.bashrc 
+```
+
+Confirm the new settings.
+
+```console
+echo $JAVA_HOME
+which java
+which javac
+```
+
+The output is:
+
+```output
+/usr/lib/jvm/java-21-openjdk-arm64
+/usr/lib/jvm/java-21-openjdk-arm64/bin/java
+/usr/lib/jvm/java-21-openjdk-arm64/bin/javac
 ```
 
 {{% notice Note %}}
