@@ -6,12 +6,12 @@ weight: 8
 layout: learningpathall
 ---
 
-## Benchmark MongoDB with **mongotop** and **mongostat**
+## Benchmark MongoDB with mongotop and mongostat
 
 In this section, you will measure MongoDB's performance in real time.
 You will install the official MongoDB database tools, start MongoDB and run a script to simulate heavy load. With the script running you will then measure the database's live performance using **mongotop** and **mongostat**.
 
-1. Install MongoDB Database Tools
+## Install MongoDB database tools
 
 ```console
 wget https://fastdl.mongodb.org/tools/db/mongodb-database-tools-ubuntu2404-arm64-100.13.0.deb
@@ -22,7 +22,7 @@ source ~/.bashrc
 ```
 These commands download and unpack MongoDB's official monitoring tools (**mongotop** & **mongostat**), then add them to your PATH so you can run them from any terminal.
 
-2. Verify the Installation
+## Verify the installation
 
 ```console
 mongostat 2
@@ -40,7 +40,6 @@ mongostat --host 127.0.0.1 --port 27017 2
 insert query update delete getmore command dirty used flushes vsize  res qrw arw net_in net_out conn                time
      8    16      8      8     182     1|0  0.0% 0.0%       0 3.54G 146M 0|0 0|0  34.0k    172k   11 Sep  4 04:57:56.761
      4     8      4      4      98     1|0  0.0% 0.0%       0 3.54G 146M 0|0 0|0  18.3k    116k   11 Sep  4 04:57:58.762
-     9    18      9      9     198     1|0  0.0% 0.0%       0 3.54G 146M 0|0 0|0  36.4k    179k   11 Sep  4 04:58:00.760
      4     9      4      4      99     1|0  0.0% 0.0%       0 3.54G 146M 0|0 0|0  18.3k    117k   11 Sep  4 04:58:02.760
      8    17      8      8     202     1|0  0.0% 0.0%       0 3.54G 146M 0|0 0|0  37.0k    183k   11 Sep  4 04:58:04.762
      4     9      4      4     103     2|0  0.0% 0.0%       0 3.54G 146M 0|0 0|0  19.0k    119k   11 Sep  4 04:58:06.760

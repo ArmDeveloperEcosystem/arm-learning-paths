@@ -10,13 +10,13 @@ layout: learningpathall
 
 This section demonstrates how to monitor MongoDB performance using `mongotop`, which reports how much time the server spends reading and writing per collection in real time. It includes benchmark results collected on Azure Arm64 virtual machines, providing a reference for expected latencies.
 
-## Prerequisites.
+## Prerequisites
 
 - `mongod` is running locally and bound to `127.0.0.1` (as started earlier)
 - Your **long_system_load.js** script is actively generating traffic in another terminal
 - MongoDB Database Tools (which include `mongotop`) are installed
 
-## Run mongotop — Terminal 2
+## Run mongotop - terminal 2
 
 ```console
 mongotop 2

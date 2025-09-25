@@ -80,7 +80,7 @@ tar -xvzf mongosh-2.3.8-linux-arm64.tgz
 sudo mv mongosh-2.3.8-linux-arm64 /usr/local/mongosh
 ```
 
-Add `mongosh` to the system `PATH`.
+Add `mongosh` to the system `PATH`:
 
 ```console
 echo 'export PATH=/usr/local/mongosh/bin:$PATH' | sudo tee /etc/profile.d/mongosh.sh

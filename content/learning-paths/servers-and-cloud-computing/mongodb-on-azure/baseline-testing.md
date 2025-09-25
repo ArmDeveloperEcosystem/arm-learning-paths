@@ -22,9 +22,9 @@ mongod --version
 netstat -tulnp | grep 27017
 ```
 What each command does:
-- **ps -ef | grep mongod** checks if the MongoDB server process is running.
-- **mongod --version** shows the installed MongoDB version.
-- **netstat -tulnp | grep 27017** confirms MongoDB is listening on the default port **27017**.
+- **ps -ef | grep mongod** checks if the MongoDB server process is running
+- **mongod --version** shows the installed MongoDB version
+- **netstat -tulnp | grep 27017** confirms MongoDB is listening on the default port **27017**
 
 You should see output similar to:
 
@@ -100,10 +100,10 @@ Interpretation:
 
 To verify that the MongoDB server is reachable you will perform a connectivity check. You will run a sanity test of core database functionality and permissions, refered to as CRUD:
 
-C - Create: Insert a new record/document into the database.
-R - Read: Query the database to retrieve data.
-U - Update: Modify an existing record.
-D - Delete: Remove a record.
+- C - Create: insert a new record/document into the database
+- R - Read: query the database to retrieve data
+- U - Update: modify an existing record
+- D - Delete: remove a record
 
 ```console
 mongosh --host localhost --port 27017
