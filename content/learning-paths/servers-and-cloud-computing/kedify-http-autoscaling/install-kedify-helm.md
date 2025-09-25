@@ -4,17 +4,19 @@ weight: 2
 layout: "learningpathall"
 ---
 
-This page installs Kedify on your cluster using Helm. You’ll add the Kedify chart repo, install KEDA (Kedify build), the HTTP Scaler, and the Kedify Agent, then verify everything is running.
+In this section you will learn how to install Kedify on your Kubernetes cluster using Helm. You will add the Kedify chart repo, install KEDA (Kedify build), the HTTP Scaler, and the Kedify Agent, then verify everything is running.
 
-For more details and all installation methods, see Kedify installation docs: https://docs.kedify.io/installation/helm#installation-on-arm
+For more details and all installation methods on Arm, you can refer to the [Kedify installation docs](https://docs.kedify.io/installation/helm#installation-on-arm)
 
-## Prerequisites
+## Before you begin
 
-- A running Kubernetes cluster (kind, minikube, EKS, GKE, AKS, etc.)
-- kubectl and helm installed and configured to talk to your cluster
-- Kedify Service account (https://dashboard.kedify.io/) to obtain Organization ID and API Key — log in or create an account if you don’t have one
+You will need:
 
-## Prepare installation
+- A running Kubernetes cluster (kind, minikube, EKS, GKE, AKS, etc.). This can be on any cloud service provider.
+- kubectl and helm installed and configured to communicate with your cluster
+- A Kedify Service account (https://dashboard.kedify.io/) to obtain Organization ID and API Key — log in or create an account if you don’t have one
+
+## Installation
 
 1) Get your Organization ID: In the Kedify dashboard (https://dashboard.kedify.io/) go to Organization -> Details and copy the ID.
 
@@ -25,7 +27,7 @@ For more details and all installation methods, see Kedify installation docs: htt
 kubectl get secret -n keda kedify-agent -o=jsonpath='{.data.apikey}' | base64 --decode
 ```
 
-- Otherwise, in the Kedify dashboard (https://dashboard.kedify.io/) go to Organization -> API Keys, click Create Agent Key, and copy the key.
+Otherwise, in the Kedify dashboard (https://dashboard.kedify.io/) go to Organization -> API Keys, click Create Agent Key, and copy the key.
 
 Note: The API Key is shared across all your Agent installations. If you regenerate it, update existing Agent installs and keep it secret.
 
@@ -40,9 +42,9 @@ helm repo update
 
 ## Helm installation
 
-Most providers like AWS EKS and Azure AKS automatically place pods on ARM nodes when you specify `nodeSelector` for `kubernetes.io/arch=arm64`. However, Google Kubernetes Engine (GKE) applies an explicit taint on ARM nodes, requiring matching `tolerations`.
+Most providers like AWS EKS and Azure AKS automatically place pods on Arm nodes when you specify `nodeSelector` for `kubernetes.io/arch=arm64`. However, Google Kubernetes Engine (GKE) applies an explicit taint on Arm nodes, requiring matching `tolerations`.
 
-To ensure a portable deployment strategy across all cloud providers, we recommend configuring both `nodeSelector` and `tolerations` in your Helm values or CLI flags.
+To ensure a portable deployment strategy across all cloud providers, it is recommended that you configure both `nodeSelector` and `tolerations` in your Helm values or CLI flags.
 
 Install each component into the keda namespace. Replace placeholders where noted.
 
@@ -101,13 +103,15 @@ helm upgrade --install kedify-agent kedifykeda/kedify-agent \
 
 ## Verify installation
 
+You are now ready to verify your installation:
+
 ```bash
 kubectl get pods -n keda
 ```
 
-Expected example (names may differ):
+Expected output should look like (names may differ):
 
-```text
+```output
 NAME                                             READY   STATUS    RESTARTS   AGE
 keda-add-ons-http-external-scaler-xxxxx          1/1     Running   0          1m
 keda-add-ons-http-interceptor-xxxxx              1/1     Running   0          1m
