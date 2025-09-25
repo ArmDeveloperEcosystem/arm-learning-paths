@@ -7,8 +7,7 @@ cascade:
     
 minutes_to_complete: 45
 
-who_is_this_for: >
-  Developers and SREs running HTTP-based workloads on Kubernetes who want to enable intelligent, event-driven autoscaling.
+who_is_this_for: This is an introductory topic for developers running HTTP-based workloads on Kubernetes who want to enable event-driven autoscaling.
 
 learning_objectives:
   - Install Kedify (KEDA build, HTTP Scaler, and Kedify Agent) via Helm
@@ -18,14 +17,13 @@ learning_objectives:
 prerequisites:
   - A running Kubernetes cluster (local or cloud)
   - kubectl and helm installed locally
-  - Access to the Kedify Service dashboard (https://dashboard.kedify.io/) to obtain Organization ID and API Key — log in or create an account if you don’t have one
+  - Access to the Kedify Service dashboard (https://dashboard.kedify.io/) to obtain Organization ID and API Key. You can log in or create an account if you don’t have one
 
 author: Zbynek Roubalik
 
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
-cloud_service_providers: Any
 armips:
   - Neoverse
 operatingsystems:
