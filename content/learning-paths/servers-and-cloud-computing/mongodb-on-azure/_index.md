@@ -1,5 +1,5 @@
 ---
-title: Run MongoDB on Arm-based Microsoft Azure Cobalt 100 instances
+title: Run MongoDB on Arm-based Azure Cobalt 100 instances
 
 minutes_to_complete: 30   
 

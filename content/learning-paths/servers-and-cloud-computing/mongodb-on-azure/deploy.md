@@ -6,13 +6,18 @@ weight: 4
 layout: learningpathall
 ---
 
-## Getting started 
+## Get started
 
-Install MongoDB and `mongosh` on Ubuntu Pro 24.04 LTS (Arm64) by downloading the binaries, setting up environment paths, configuring data and log directories, and starting the server for local access and verification.
+Install MongoDB and **mongosh** on Ubuntu Pro 24.04 LTS (Arm64). You will download the binaries, add them to your `PATH`, create data and log directories, and start the server locally to verify the setup.
+
+{{% notice Note %}}
+For this exercise, `mongod` runs locally and **access control is disabled** by default. Keep the server bound to `127.0.0.1` until you configure users and authentication. To accept remote connections later, set `--bind_ip` (or `bindIp` in the config) and enable authorization.
+{{% /notice %}}
 
 ## Install system dependencies
 
 Install the required system packages to support MongoDB:
+
 ```console
 sudo apt update
 sudo apt install -y curl wget tar fio openssl libcurl4 net-tools
@@ -21,6 +26,7 @@ sudo apt install -y curl wget tar fio openssl libcurl4 net-tools
 ## Download and extract MongoDB
 
 Fetch and unpack the MongoDB binaries for Arm64:
+
 ```console
 wget https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-ubuntu2404-8.0.12.tgz
 tar -xvzf mongodb-linux-aarch64-ubuntu2404-8.0.12.tgz
@@ -30,6 +36,7 @@ sudo mv mongodb-linux-aarch64-ubuntu2404-8.0.12 /usr/local/mongodb
 ## Add MongoDB to the system PATH
 
 Enable running MongoDB from any terminal session:
+
 ```console
 echo 'export PATH=/usr/local/mongodb/bin:$PATH' | sudo tee /etc/profile.d/mongodb.sh
 source /etc/profile.d/mongodb.sh
@@ -37,39 +44,44 @@ source /etc/profile.d/mongodb.sh
 
 ## Create data and log directories
 
-Set up the database data and log directories:
+Create the database data and log directories and assign ownership to your user:
+
 ```console
 sudo mkdir -p /var/lib/mongo
 sudo mkdir -p /var/log/mongodb
 sudo chown -R $USER:$USER /var/lib/mongo /var/log/mongodb
 ```
 
-## Start the MongoDB server
+## Start the MongoDB server (local)
 
-Start `mongod` manually for local testing:
+Start `mongod` in the background and write logs to `/var/log/mongodb/mongod.log`:
+
 ```console
 mongod --dbpath /var/lib/mongo --logpath /var/log/mongodb/mongod.log --fork
 ```
 
-Expected output:
+Sample output:
+
 ```output
 about to fork child process, waiting until server is ready for connections.
 forked process: 3356
 child process started successfully, parent exiting
 ```
 
-## Install mongosh
+## Install mongosh (MongoDB shell)
 
-`Mongosh` is the MongoDB shell used to interact with your MongoDB server. It provides a modern, user-friendly CLI for running queries and database operations.
+**mongosh** is the MongoDB shell for running queries and database operations.
 
-Download and install the MongoDB shell for Arm:
+Download and install the MongoDB shell for Arm64:
+
 ```console
 wget https://downloads.mongodb.com/compass/mongosh-2.3.8-linux-arm64.tgz
 tar -xvzf mongosh-2.3.8-linux-arm64.tgz
 sudo mv mongosh-2.3.8-linux-arm64 /usr/local/mongosh
 ```
 
-Add `mongosh` to the system PATH:
+Add `mongosh` to the system `PATH`.
+
 ```console
 echo 'export PATH=/usr/local/mongosh/bin:$PATH' | sudo tee /etc/profile.d/mongosh.sh
 source /etc/profile.d/mongosh.sh
@@ -77,12 +89,15 @@ source /etc/profile.d/mongosh.sh
 
 ## Verify MongoDB and mongosh installation
 
-Check if MongoDB and `mongosh` are properly installed on your machine:
+Confirm that MongoDB and `mongosh` are installed and available:
+
 ```console
 mongod --version
 mongosh --version
 ```
+
 You should see output similar to:
+
 ```output
 db version v8.0.12
 Build Info: {
@@ -102,11 +117,14 @@ Build Info: {
 
 ## Connect to MongoDB using mongosh
 
-Start interacting with MongoDB through the shell:
+Connect to the local instance and verify an interactive prompt:
+
 ```console
 mongosh mongodb://127.0.0.1:27017
 ```
+
 You should see output similar to:
+
 ```output
 Current Mongosh Log ID: 68b573411523231d81a00aa0
 Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.8
@@ -130,4 +148,4 @@ For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
 test>
 ```
 
-With this, you have verified that the MongoDB installation is complete. You can now proceed with baseline testing of MongoDB on your Azure Cobalt 100 VM.
+With this verification complete, proceed to MongoDB baseline testing on your Azure Cobalt 100 VM.
