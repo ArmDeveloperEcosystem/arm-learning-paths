@@ -27,7 +27,7 @@ This refreshes every 2 seconds and displays per‑collection time spent on reads
 
 The tail end of the output should look like:
 ```output
-                            ns    total    read    write    2025-09-04T04:58:23Z
+`                           ns    total    read    write    2025-09-04T04:58:23Z
 test.admin_system_version_test      5ms     2ms      3ms
     test.system_sessions_bench      5ms     2ms      3ms
                 admin.atlascli      3ms     1ms      1ms
