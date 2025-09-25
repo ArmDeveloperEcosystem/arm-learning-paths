@@ -1,6 +1,10 @@
 ---
-title: "Autoscaling HTTP applications on Kubernetes"
+title: Autoscaling HTTP applications on Kubernetes
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 45
 
 who_is_this_for: >
