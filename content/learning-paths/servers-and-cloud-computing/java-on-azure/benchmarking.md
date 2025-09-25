@@ -1,11 +1,12 @@
 
 ---
-title: Benchmark using JMH
+title: Benchmark using Java Microbenchmark Harness
 weight: 6 
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Overview
 
 Now that you have built and run a Tomcat-like response in Java, the next step is to benchmark it using a reliable, JVM-aware framework.
 
@@ -81,6 +82,8 @@ This mirrors the Tomcat-like simulation you created earlier but now runs under J
 
 ## Build the benchmark JAR
 
+Build the project to produce the benchmark JAR:
+
 ```console
 mvn clean install -q
 ```
@@ -99,7 +102,7 @@ The output from this command should look like:
 
 After the build is complete, the JMH benchmark JAR will be located in the target directory.
 
-Run the Benchmark:
+Run the benchmark:
 
 ```console
 java -jar target/benchmarks.jar
@@ -215,32 +218,32 @@ MyBenchmark.benchmarkHttpResponse  thrpt   25  35659618.044 ± 686946.011  ops/s
 
 ## Benchmark metrics explained  
 
-- **Run Count**: The total number of benchmark iterations that JMH executed. More runs improve statistical reliability and help smooth out anomalies caused by the JVM or OS. 
-- **Average Throughput**: The mean number of operations completed per second across all measured iterations. This is the primary indicator of sustained performance for the benchmarked code.
-- **Standard Deviation**: Indicates the amount of variation or dispersion from the average throughput. A smaller standard deviation means more consistent performance.  
-- **Confidence Interval (99.9%)**: The statistical range in which the true average throughput is expected to fall with 99.9% certainty. Narrow confidence intervals suggest more reliable and repeatable measurements. 
-- **Min Throughput**: The lowest observed throughput across all iterations, representing a worst-case scenario under the current test conditions.
-- **Max Throughput**: The highest observed throughput across all iterations, representing the best-case performance under the current test conditions. 
+- **Run count** - the total number of benchmark iterations that JMH executed. More runs improve statistical reliability and help smooth out anomalies caused by the JVM or OS. 
+- **Average throughput** - the mean number of operations completed per second across all measured iterations. This is the primary indicator of sustained performance for the benchmarked code.
+- **Standard deviation** - indicates the amount of variation or dispersion from the average throughput. A smaller standard deviation means more consistent performance.  
+- **Confidence interval (99.9%)** - the statistical range in which the true average throughput is expected to fall with 99.9% certainty. Narrow confidence intervals suggest more reliable and repeatable measurements. 
+- **Min throughput** - the lowest observed throughput across all iterations, representing a worst-case scenario under the current test conditions.
+- **Max throughput** - the highest observed throughput across all iterations, representing the best-case performance under the current test conditions. 
 
-### Benchmark summary on Arm64
+## Benchmark summary on Arm64
 
 Here is a summary of benchmark results collected on an Arm64 **D4ps_v6 Ubuntu Pro 24.04 LTS virtual machine**.
 | Metric                        | Value |
 |--------------------------------|---------------------------|
-| **Java Version**               | OpenJDK 21.0.8            |
-| **Run Count**                  | 25 iterations             |
-| **Average Throughput**         | 35.66M ops/sec            |
-| **Standard Deviation**         | ±0.92M ops/sec            |
-| **Confidence Interval (99.9%)**| [34.97M, 36.34M] ops/sec  |
-| **Min Throughput**             | 33.53M ops/sec            |
-| **Max Throughput**             | 36.99M ops/sec            |
+| **Java version**               | OpenJDK 21.0.8            |
+| **Run count**                  | 25 iterations             |
+| **Average throughput**         | 35.66M ops/sec            |
+| **Standard deviation**         | ±0.92M ops/sec            |
+| **Confidence interval (99.9%)**| [34.97M, 36.34M] ops/sec  |
+| **Min throughput**             | 33.53M ops/sec            |
+| **Max throughput**             | 36.99M ops/sec            |
 
 
-### Key insights from the results
+## Key insights from the results
 
-- **Strong throughput performance** The benchmark sustained around 35.6 million operations per second, demonstrating efficient string construction and memory handling on the Arm64 JVM.
-- **Consistency across runs** With a standard deviation under 1 million ops/sec, results were tightly clustered. This suggests stable system performance without significant noise from background processes.
-- **High statistical confidence** The narrow 99.9% confidence interval ([34.97M, 36.34M]) indicates reliable, repeatable results. 
-- **Predictable performance envelope** The difference between min (33.5M) and max (37.0M) throughput is modest (~10%), suggests the workload performed consistently without extreme slowdowns or spikes.
+- **Strong throughput performance** - the benchmark sustained around 35.6 million operations per second, demonstrating efficient string construction and memory handling on the Arm64 JVM.
+- **Consistency across runs** - with a standard deviation under 1 million ops/sec, results were tightly clustered. This suggests stable system performance without significant noise from background processes.
+- **High statistical confidence** - the narrow 99.9% confidence interval ([34.97M, 36.34M]) indicates reliable, repeatable results. 
+- **Predictable performance envelope** - the difference between min (33.5M) and max (37.0M) throughput is modest (~10%), suggests the workload performed consistently without extreme slowdowns or spikes.
 
 The Arm-based Azure `D4ps_v6` VM provides stable and efficient performance for Java workloads, even in microbenchmark scenarios. These results establish a baseline you can now compare directly against x86_64 instances to evaluate relative performance. 

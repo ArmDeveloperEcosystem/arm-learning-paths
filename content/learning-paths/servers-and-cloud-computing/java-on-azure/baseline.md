@@ -7,13 +7,13 @@ layout: learningpathall
 ---
 
 
-### Deploy a Java application with a Tomcat-like operation 
+## Deploy a Java application with a Tomcat-like operation 
 Apache Tomcat is a widely used Java web application server. Technically, it is a Servlet container, responsible for executing Java servlets and supporting technologies such as:
 
 - JSP (JavaServer Pages): Java-based templates for dynamic web content
-- RESTful APIs: Lightweight endpoints for modern microservices
+- RESTful APIs: lightweight endpoints for modern microservices
 
-In production, frameworks like Tomcat introduce additional complexity (request parsing, thread management, I/O handling). Before layering those components, it's useful to measure how efficiently raw Java executes simple request/response logic on Azure Cobalt 100 Arm-based instances.
+In production, frameworks like Tomcat introduce additional complexity (such as request parsing, thread management, and I/O handling). Before layering those components, it's useful to measure how efficiently raw Java executes simple request/response logic on Azure Cobalt 100 Arm-based instances.
 
 In this section, you will run a minimal Tomcat-like simulation. It won't launch a real server, but instead it will do the following:
 - Construct a basic HTTP response string in memory
@@ -40,20 +40,24 @@ public class HttpSingleRequestTest {
     }
 }
 ```
-## Compile and Run the Java program
+## Compile and run the Java program
+
+Compile the program and run it with modest heap sizes and the G1 garbage collector:
 
 ```console
 javac HttpSingleRequestTest.java
 java -Xms128m -Xmx256m -XX:+UseG1GC HttpSingleRequestTest
 ```
 
-## jvm flags explained
+## JVM flags explained
 
 - **-Xms128m** - sets the initial heap size to 128 MB
 - **-Xmx256m** - sets the maximum heap size to 256 MB
 - **-XX:+UseG1GC** - enables the G1 garbage collector designed for low pause times
 
 ## Sample output
+
+If the program runs successfully, you should see output similar to the following:
 
 ```output
 java -Xms128m -Xmx256m -XX:+UseG1GC HttpSingleRequestTest
