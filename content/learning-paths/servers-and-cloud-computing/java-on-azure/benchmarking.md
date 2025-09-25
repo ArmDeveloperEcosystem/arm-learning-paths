@@ -203,7 +203,7 @@ Each iteration shows how many times per second your `benchmarkHttpResponse()` me
 REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
 why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
 experiments, perform baseline and negative tests that provide experimental control, make sure
-the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts. Do not assume the numbers tell you what you want them to tell.
 
 NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
 extra caution when trusting the results, look into the generated code to check the benchmark still
