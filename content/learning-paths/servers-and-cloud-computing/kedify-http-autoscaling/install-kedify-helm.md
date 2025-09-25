@@ -12,7 +12,7 @@ For more details and all installation methods on Arm, you can refer to the [Kedi
 
 You will need:
 
-- A running Kubernetes cluster (kind, minikube, EKS, GKE, AKS, etc.). This can be on any cloud service provider.
+- A running Kubernetes cluster (e.g., kind, minikube, EKS, GKE, AKS, etc.), hosted on any cloud provider or local environment.
 - kubectl and helm installed and configured to communicate with your cluster
 - A Kedify Service account (https://dashboard.kedify.io/) to obtain Organization ID and API Key — log in or create an account if you don’t have one
 
