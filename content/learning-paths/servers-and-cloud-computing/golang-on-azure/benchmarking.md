@@ -6,13 +6,13 @@ weight: 6
 layout: learningpathall
 ---
 
-## Run the performance tests using go test -bench
+## Run Performance Tests Using go test -bench
 
 `go test -bench` (the benchmarking mode of go test) is Golang’s built-in benchmarking framework that measures the performance of functions by running them repeatedly and reporting execution time (**ns/op**), memory usage, and allocations. With the `-benchmem flag`, it also shows memory usage and allocations. It’s simple, reliable, and requires only writing benchmark functions in the standard Golang testing package.
 
 1. Create a Project Folder
 
-Open your terminal and create a new folder for this project:
+In your terminal, create a directory for your benchmark project and navigate into it:
 
 ```console
 mkdir gosort-bench
@@ -20,22 +20,22 @@ cd gosort-bench
 ```
 
 2. Initialize a Go Module
-
-Inside the project directory, run following command:
+   
+Inside your project directory, initialize a new Go module by running:
 
 ```console
 go mod init gosort-bench
 ```
-This creates a go.mod file, which defines the module path (gosort-bench in this case) and marks the directory as a Go project. The go.mod file also allows Go to manage dependencies (external libraries) automatically, ensuring your project remains reproducible and easy to maintain.
+This creates a `go.mod` file, which defines the module path (gosort-bench in this case) and marks the directory as a Go project. The `go.mod` file also allows Go to manage dependencies (external libraries) automatically, ensuring your project remains reproducible and easy to maintain.
 
 3. Add Sorting Functions
 
-Create a file called **sorting.go**:
+Create a file called `sorting.go`:
 
 ```console
 nano sorting.go
 ```
-Paste this code in **sorting.go** file:
+Paste the following code in `sorting.go`:
 
 ```go
 package sorting 
@@ -75,13 +75,15 @@ func partition(arr []int, low, high int) int {
     return i + 1
 }
 ```
-- The code contains **two sorting methods**, Bubble Sort and Quick Sort, which arrange numbers in order from smallest to largest.
-- **Bubble Sort** works by repeatedly comparing two numbers side by side and swapping them if they are in the wrong order. It keeps doing this until the whole list is sorted.
-- **Quick Sor**t is faster. It picks a "pivot" number and splits the list into two groups — numbers smaller than the pivot and numbers bigger than it. Then it sorts each group separately.
-- The **function** partition helps Quick Sort decide where to split the list based on the pivot number.
-- In short, **Bubble Sort is simple but slow,** while **Quick Sort is smarter and usually much faster for big lists of numbers**.
+The code contains two sorting methods, Bubble Sort and Quick Sort, which arrange numbers in order from smallest to largest.
+  * Bubble Sort works by repeatedly comparing two numbers side by side and swapping them if they are in the wrong order. It keeps doing this until the whole list is sorted.
+  * Quick Sort is faster. It picks a pivot number and splits the list into two groups — numbers smaller than the pivot and numbers bigger than it. Then it sorts each group separately. The function partition helps Quick Sort decide where to split the list based on the pivot number.
 
-You create the sorting folder and then move `sorting.go` into it to organize your code properly so that the Go module can reference it as `gosort-bench/sorting`.
+To summarize, Bubble Sort is simple but slow, while Quick Sort is more efficient and usually much faster for big lists of numbers. 
+
+At this point, you have defined two sorting algorithms ready to be benchmarked.
+
+To keep your project modular and maintainable, it’s best practice to place implementation code inside its own package folder. This allows benchmarks and other Go files to import it cleanly.
 
 ```console
 mkdir sorting
@@ -90,13 +92,13 @@ mv sorting.go sorting/
 
 4. Add Benchmark Tests
 
-Create another file called s**orting_benchmark_test.go**:
+Next, create a benchmark test file named `sorting_benchmark_test.go` in your project’s root directory (not inside the sorting/ folder, so it can import the sorting package cleanly):
 
 ```console
 nano sorting_benchmark_test.go
 ````
 
-Paste the below code:
+Paste the following code into it:
 
 ```go
 package sorting_test
@@ -131,13 +133,12 @@ func BenchmarkQuickSort(b *testing.B) {
     }
 }
 ```
+The code implements a benchmark that checks how fast Bubble Sort and Quick Sort run in Go.
+- It first creates a list of 10,000 random numbers each time before running a sort, so the test is fair and consistent.
+- The BenchmarkBubbleSort() function measures the speed of sorting using the slower Bubble Sort method.
+- The BenchmarkQuickSort() function measures the speed of sorting using the faster Quick Sort method.
 
-- The code is a **benchmark test** that checks how fast Bubble Sort and Quick Sort run in Go.
-- It first creates a **list of 10,000 random numbers** each time before running a sort, so the test is fair and consistent.
-- **BenchmarkBubbleSort** measures the speed of sorting using the slower Bubble Sort method.
-- **BenchmarkQuickSort** measures the speed of sorting using the faster Quick Sort method.
-
-When you run **go test -bench=. -benchmem**, Go will show you how long each sort takes and how much memory it uses, so you can compare the two sorting techniques.
+When you run the benchmark, Go will show you how long each sort takes and how much memory it uses, so you can compare the two sorting techniques.
 
 ### Run the Benchmark
 
@@ -145,10 +146,10 @@ Execute the benchmark suite using the following command:
 ```console
 go test -bench=. -benchmem
 ```
-- **-bench=.** - runs all functions starting with Benchmark.
-- **-benchmem** - also shows memory usage (allocations per operation).
+-bench=. runs every function whose name starts with Benchmark.
+-benchmem adds memory metrics (B/op, allocs/op) to the report.
 
-You should see the output similar to this:
+You should see output similar to:
 
 ```output
 goos: linux
@@ -159,14 +160,14 @@ BenchmarkQuickSort-4                3506            340873 ns/op               0
 PASS
 ok      gosort-bench    2.905s
 ```
-### Matrics Explanation
+### Metrics Explained
 
-- **ns/op** - nanoseconds per operation (lower is better).
-- **B/op** - bytes of memory used per operation.
-- **allocs/op** - how many memory allocations happened per operation.
-
+  * ns/op – nanoseconds per operation (lower is better). This is the primary latency metric.
+  * B/op – bytes allocated per operation (lower is better). This is useful for spotting hidden allocations.
+  * allocs/op – number of heap allocations per operation (lower is better). Zero here means the algorithm itself didn’t allocate.
+    
 ### Benchmark summary on Arm64
-Here is a summary of benchmark results collected on an Arm64 **D4ps_v6 Ubuntu Pro 24.04 LTS virtual machine**.
+Here is a summary of benchmark results collected on an Arm64 D4ps_v6 Ubuntu Pro 24.04 LTS virtual machine.
 
 | Benchmark          | Value on Virtual Machine |
 |-------------------|--------------------------|
@@ -179,7 +180,7 @@ Here is a summary of benchmark results collected on an Arm64 **D4ps_v6 Ubuntu Pr
 | Total time (s)     | 2.905                   |
 
 ### Benchmark summary on x86_64
-Here is a summary of the benchmark results collected on x86_64 **D4s_v6 Ubuntu Pro 24.04 LTS virtual machine**.
+Here is a summary of the benchmark results collected on x86_64 D4s_v6 Ubuntu Pro 24.04 LTS virtual machine.
 
 | Benchmark          | Value on Virtual Machine |
 |-------------------|--------------------------|
