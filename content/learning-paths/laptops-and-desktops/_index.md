@@ -9,13 +9,13 @@ maintopic: true
 operatingsystems_filter:
 - Android: 2
 - ChromeOS: 2
-- Linux: 33
+- Linux: 34
 - macOS: 9
-- Windows: 44
+- Windows: 45
 subjects_filter:
 - CI-CD: 5
 - Containers and Virtualization: 7
-- Migration to Arm: 28
+- Migration to Arm: 29
 - ML: 2
 - Performance and Architecture: 27
 subtitle: Create and migrate apps for power efficient performance
@@ -28,6 +28,7 @@ tools_software_languages_filter:
 - Arm Performance Libraries: 2
 - Arm64EC: 1
 - Assembly: 1
+- Bash: 1
 - C: 8
 - C#: 6
 - C++: 11
@@ -48,6 +49,7 @@ tools_software_languages_filter:
 - Intrinsics: 1
 - JavaScript: 2
 - Kubernetes: 1
+- KVM: 1
 - Linux: 1
 - LLM: 1
 - LLVM: 2
@@ -61,7 +63,9 @@ tools_software_languages_filter:
 - OpenCV: 1
 - perf: 4
 - Python: 6
+- QEMU: 1
 - Qt: 2
+- RDP: 1
 - Remote.It: 1
 - RME: 1
 - Runbook: 18

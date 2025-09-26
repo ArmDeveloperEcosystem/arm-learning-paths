@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Model Configuration"
+title: "Configure the model"
 
 weight: 4 # 1 is first, 2 is second, etc.
 
@@ -8,56 +8,57 @@ weight: 4 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-# Debug Configuration
+## Set up a debug configuration for the Zena CSS FVP
 
-Arm Development Studio requires a `Debug Configuration` of the target that it will connect to.
+Now you'll walk through setting up an Arm Development Studio debug configuration for the Zena CSS FVP using the Iris interface. This is a fast, reliable path to a working configuration.
 
-As of Arm Development Studio version 2025.0, there is no such configuration provided 'out-of-the-box' for the Zena CSS FVP. However creating such a configuration is straight forward.
+As of Arm Development Studio 2025.0, there is no out-of-the-box configuration for the Zena CSS FVP. Creating one, however, is straightforward.
 
-See the Arm Development Studio [Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Migrating-from-DS-5-to-Arm-Development-Studio/Connect-to-new-or-custom-models) for full instructions, but they are also summarized below.
+For full guidance, see the Arm Development Studio [Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Migrating-from-DS-5-to-Arm-Development-Studio/Connect-to-new-or-custom-models). A concise, task-focused version is below.
 
-## Launch FVP
+## Launch the FVP (with Iris)
 
-As per previous section, launch FVP with the Iris server enabled:
+Launch the FVP with the Iris server enabled:
 
-```command
+```bash
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose -- --iris-server --iris-port 7100"
 ```
-or if connecting to the FVP remotely:
+If connecting to the FVP remotely, you can use this command:
 
-```command
+```bash
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose -- --iris-server --iris-port 7100 -A"
 ```
+
 {{% notice Note %}}
-A local connection is assumed for the remainder of this learning path.
+This example modeled below uses a local connection for the remaining steps.
 {{% /notice %}}
 
-## Configuration Database
+## Create a configuration database in Arm Development Studio
 
-Debug Configurations are stored in a configuration database. You must first create a local database in which to store the configuration.
+Debug configurations are stored in a configuration database. Create a local database to store your model configuration:
 
-Navigate to `File` > `New` > `Other`, and then select `Configuration Database` > `Configuration Database` from the drop-down list.
+- In Arm Development Studio, go to **File > New > Other**.
+- Select **Configuration Database > Configuration Database**.
+- Click **Next**, enter a **Name**, then click **Finish**.
 
-Click `Next`. Give the Database a name, and click `Finish`.
+## Create a model configuration for Zena CSS FVP (Iris)
 
-## Debug Configuration
+- Open the same wizard (**File > New > Other**), then choose **Configuration Database > Model Configuration**.
+- Click **Next**, select the **Configuration Database** you created, then click **Next**.
+- For **Model Interface**, choose **Iris**, then click **Next**.
+- Choose **Browse for model running on local host**. The debugger detects and interrogates the FVP.  
+- If connecting remotely, choose **Connect to model running on either local or remote host** and provide the host and port.
 
-Navigate to the same wizard as above, and select `Model Configuration`.
+Arm Development Studio generates a `model.mdf` file that enumerates all CPUs in the FVP.
 
-Click `Next`, and you will be prompted to select the above `Configuration Database`. Click `Next` again, and you will be prompted to select a Model Interface.
+Optionally, update **Manufacturer Name** (for example, `Arm`) and **Platform Name** (for example, `Zena_CSS_FVP`). Then **Save** and **Import** the model into the configuration database.
 
-Select `Iris` from the pulldown, and click `Next`.
-
-You will then be prompted to locate the model to connect to.
-
-Select `Browse for model running on local host`. The FVP will be detected and interrogated by the debugger.
-
-{{% notice Note %}}
-Use `Connect to model running on either local or remote host` if connecting remotely.
+{{% notice Tip %}}
+If the FVP is not detected, verify the Iris server is running on the expected port (`7100` by default) and that your firewall allows local connections. For remote connections, confirm the host is reachable and the port is open.
 {{% /notice %}}
 
 A `model.mdf` file will be created that identifies all CPUs within the FVP.
 
-You can change the `Manufacturer Name` and `Platform Name` to something more meaningful (such as `Arm` and `Zena_CSS_FVP`), then `Save`, and `Import` into the configuration database.
+You can change the **Manufacturer Name** and **Platform Name** to something more meaningful (such as `Arm` and `Zena_CSS_FVP`), then **Save**, and **Import** into the configuration database.
 
 The debugger is now aware of the FVP and you are ready to debug.

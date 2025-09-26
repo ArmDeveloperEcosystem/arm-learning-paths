@@ -1,33 +1,40 @@
 ---
-title: Set Up the Pre-Silicon Development Environment for OpenBMC and UEFI
+title: Set up the development environment for OpenBMC and UEFI
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set Up Development Environment
+## Set up your development environment
 
-In this section, you’ll prepare your workspace to build and simulate OpenBMC and UEFI firmware on the Neoverse RD-V3 platform using Arm Fixed Virtual Platforms (FVPs). 
-You will install the required tools, configure repositories, and set up a Docker-based build environment for both BMC and host firmware.
+In this section, you prepare your workspace to build and simulate OpenBMC and UEFI firmware on the Neoverse RD-V3 r1 platform using Arm Fixed Virtual Platforms (FVPs). You will install the required tools, configure repositories, and set up a Docker-based build environment for both BMC and host firmware.
 
-Before getting started, it’s strongly recommended to review the previous Learning Path: [CSS-V3 Pre-Silicon Software Development Using Neoverse Servers](https://learn.arm.com/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack).
-It walks you through how to use the CSSv3 reference design on FVP to perform early-stage development and validation.
+Before you start, review the related Learning Path [CSS-V3 pre-silicon software development using Neoverse servers](https://learn.arm.com/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack). It walks through using the CSSv3 reference design on FVP to perform early development and validation.
 
 You will perform the steps outlined below on your Arm Neoverse-based Linux machine running Ubuntu 22.04 LTS. You will need at least 80 GB of free disk space, 48 GB of RAM.
 
-### Install Required Packages
+## Install the required packages
 
 Install the base packages for building OpenBMC with the Yocto Project:
 
 ```bash
 sudo apt update
-sudo apt install -y git gcc g++ make file wget gawk diffstat bzip2 cpio chrpath zstd lz4 bzip2 unzip
+sudo apt install -y git gcc g++ make file wget gawk diffstat bzip2 cpio chrpath zstd lz4 bzip2 unzip xz-utils python3
 ```
 
-Install [Docker](/install-guides/docker)
+Now install Docker: 
 
-### Set Up the repo Tool
+```bash
+curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
+sudo usermod -aG docker $USER ; newgrp docker
+```
+
+{{% notice Note %}}
+See the [Docker Install Guide](/install-guides/docker) for further information.
+{{% /notice %}}
+
+Next install the `repo` tool:
 
 ```bash
 mkdir -p ~/.bin
@@ -36,37 +43,33 @@ curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
 chmod a+rx ~/.bin/repo
 ```
 
-### Download and Install the Arm FVP Model (RD-V3)
 
-Download and extract the RD-V3 FVP:
+
+
+## Download and install the Arm FVP (RD-V3 r1)
+
 ```bash
-mkdir ~/fvp
+mkdir -p ~/fvp
 cd ~/fvp
 wget https://developer.arm.com/-/cdn-downloads/permalink/FVPs-Neoverse-Infrastructure/RD-V3-r1/FVP_RD_V3_R1_11.29_35_Linux64_armv8l.tgz
 tar -xvf FVP_RD_V3_R1_11.29_35_Linux64_armv8l.tgz
 ./FVP_RD_V3_R1.sh
 ```
 
-The FVP installation may prompt you with a few questions, choosing the default options is sufficient for this learning path. By default, the FVP will be installed in `$HOME/FVP_RD_V3_R1`.
+Accept the defaults unless you have a reason not to. By default, the FVP installs under `$HOME/FVP_RD_V3_R1`.
 
-
-### Initialize the Host Build Environment
-
-Set up a workspace for host firmware builds:
+## Initialize the host build environment
 
 ```bash
-mkdir ~/host
-cd host
-~/.bin/repo init -u "https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests.git" \
- -m "pinned-rdv3r1-bmc.xml" \
- -b "refs/tags/RD-INFRA-2025.07.03" \
- --depth=1
+mkdir -p ~/host
+cd ~/host
+~/.bin/repo init -u "https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests.git"  -m "pinned-rdv3r1-bmc.xml"  -b "refs/tags/RD-INFRA-2025.07.03"  --depth=1
 repo sync -c -j $(nproc) --fetch-submodules --force-sync --no-clone-bundle
 ```
 
-### Apply Required Patches
+## Apply required patches
 
-To enable platform-specific functionality such as Redfish support and UEFI enhancements, apply a set of pre-defined patches from Arm’s GitLab repository.
+These patches enable platform-specific functionality such as Redfish support and UEFI enhancements and align the build system with the RD-V3 FVP setup.
 
 Use sparse checkout to download only the `patch/` folder:
 
@@ -79,14 +82,15 @@ echo /patch >> .git/info/sparse-checkout
 git pull origin main
 ```
 
-This approach allows you to fetch only the `patch` folder from the remote Git repository—saving time and disk space.
+This approach allows you to fetch only the `patch` folder from the remote Git repository - saving time and disk space.
 
 Next, using a file editor of your choice, create an `apply_patch.sh` script inside the `~` directory and paste in the following content. 
-This script will automatically apply the necessary patches to each firmware component.
+This script automatically applies the necessary patches to each firmware component:
 
 ```bash
 FVP_DIR="host"
-SOURCE=${PWD}
+SOURCE="$HOME/host"
+
 
 GREEN='\033[0;32m'
 NC='\033[0m'
@@ -121,7 +125,7 @@ popd > /dev/null
 popd > /dev/null
 ```
 
-Run the patch script:
+Run the script:
 
 ```bash
 cd ~
@@ -132,10 +136,10 @@ chmod +x ./apply_patch.sh
 This script automatically applies patches to edk2, edk2-platforms, buildroot, and related components.
 These patches enable additional UEFI features, integrate the Redfish client, and align the build system with the RD-V3 simulation setup.
 
-### Build RDv3 R1 Host Docker Image
+## Build RDv3 R1 host Docker image
 
 Before building the host image, update the following line in `~/host/grub/bootstrap` to replace the `git://` protocol.
-Some networks may restrict `git://` access due to firewall or security policies. Switching to `https://` ensures reliable and secure access to external Git repositories.
+Some networks might restrict `git://` access due to firewall or security policies. Switching to `https://` ensures reliable and secure access to external Git repositories.
 
 ```bash
 diff --git a/bootstrap b/bootstrap
@@ -150,7 +154,7 @@ usage() {
     cat <<EOF
 ```
 
-This command builds the Docker image used for compiling the host firmware components in a controlled environment.
+Build the container image and host artifacts:
 
 ```bash
 cd ~/host/container-scripts
@@ -170,10 +174,10 @@ docker run --rm \
   bash -c "./build-scripts/rdinfra/build-test-busybox.sh -p rdv3r1 all"
 ```
 
-Once complete, you can observe the build binary in `~/host/output/rdv3r1/rdv3r1/`:
+Verify the build artifacts:
 
 ```bash
-ls -la host/output/rdv3r1/rdv3r1/
+ls -la ~/host/output/rdv3r1/rdv3r1/
 ```
 The directory contents should look like:
 
@@ -210,17 +214,13 @@ lrwxrwxrwx 1 ubuntu ubuntu      33 Aug 18 10:19 uefi.bin -> ../components/css-co
 
 
 {{% notice Note %}}
-This [Arm Learning Path](/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack/3_rdv3_sw_build/) provides a complete introduction to setting up the RDv3 development environment, please refer to it for more details.
-{{% /notice %}}
+See the Learning Path [Develop and Validate Firmware Pre-Silicon on Arm Neoverse CSS V3](/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack/3_rdv3_sw_build/) for an introduction to setting up the RD-V3 development environment. {{% /notice %}}
 
+## Build the OpenBMC image
 
-### Build OpenBMC Image
+OpenBMC is built on the Yocto Project, which uses BitBake as its build tool. BitBake is included in the OpenBMC environment, so you do not install it separately.
 
-OpenBMC is built on the Yocto Project, which uses `BitBake` as its build tool.
-You don’t need to download BitBake separately, as it is included in the OpenBMC build environment. 
-Once you’ve set up the OpenBMC repository and initialized the build environment, BitBake is already available for building images, compiling packages, or running other tasks.
-
-Start by cloning and building the OpenBMC image using the bitbake build system:
+Clone and build:
 
 ```bash
 cd ~
@@ -230,7 +230,7 @@ source setup fvp
 bitbake obmc-phosphor-image
 ```
 
-During the OpenBMC build process, you may encounter a native compilation error when building `Node.js` (especially version 22+) due to high memory usage during the V8 engine build phase.
+During the OpenBMC build process, you might encounter a native compilation error when building `Node.js` (especially version 22+) due to high memory usage during the V8 engine build phase.
 
 ```output
 g++: fatal error: Killed signal terminated program cc1plus
@@ -287,10 +287,12 @@ NOTE: Executing Tasks
 This confirms that the OpenBMC image was built successfully.
 
 {{% notice Note %}}
-The first build may take up to an hour depending on your system performance, as it downloads and compiles the entire firmware stack.
+The first build can take up to an hour depending on system performance because it downloads and compiles the full firmware stack.
 {{% /notice %}}
 
-Your workspace should now be structured to separate the FVP, host build system, OpenBMC source, and patches—simplifying organization, maintenance, and troubleshooting.
+## Workspace layout
+
+Your workspace separates the FVP, host build system, OpenBMC source, and patches for easier maintenance and troubleshooting.
 
 ```output
 ├── FVP_RD_V3_R1
@@ -319,4 +321,4 @@ Your workspace should now be structured to separate the FVP, host build system, 
 └── run.sh
 ```
 
-With both the OpenBMC and host firmware environments built and configured, you’re now fully prepared to launch the full system simulation and observe the boot process in action.
+With both the OpenBMC and host firmware environments built and configured, you are ready to launch full-system simulation and observe the boot process.

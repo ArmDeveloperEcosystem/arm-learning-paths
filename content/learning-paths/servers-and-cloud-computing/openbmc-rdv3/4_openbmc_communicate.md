@@ -1,25 +1,24 @@
 ---
-title: Monitor and Control the Host CPU via OpenBMC SOL and Web UI
+title: Monitor and control the host CPU using OpenBMC SOL and web UI
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Access the Host Console via OpenBMC SOL
+## Access the host console via OpenBMC SOL
 
-The OpenBMC platform provides `Serial over LAN` (SOL), allowing you to access the host console (RD-V3 FVP) remotely through the BMC, without needing a physical serial cable.
-In this section, you will use `socat` to create a virtual UART bridge, verify port mappings, and access the host console via the BMC Web UI.
+OpenBMC provides Serial oOer LAN (SOL) so you can access the host console (RD-V3 FVP) remotely through the BMC without a physical serial cable. In this section, you create a virtual UART bridge with `socat`, verify the port mappings, and open the host console from the BMC web UI.
 
-### Step 1: Connect the BMC and Host Consoles
+### Step 1: Connect the BMC and host consoles
 
-Run the following command on your development Linux machine (where the simulation is running) to bridge the BMC and host UART ports:
+Run this command on the Linux machine where the simulation is running to bridge the BMC and host UART ports:
 
 ```bash
 socat -x tcp:localhost:5005 tcp:localhost:5067
 ```
 
-This command connects the host-side UART port (5005) to the BMC-side port (5067), allowing bi-directional serial communication.
+This command connects the host-side UART port 5005 to the BMC-side port 5067 to enable bidirectional serial communication.
 
 {{% notice Note %}}
 If you see a Connection refused error, check the FVP logs to verify the port numbers:
@@ -32,23 +31,21 @@ terminal_3: Listening for serial connection on port 5067
 Ensure both ports are active and match the socat command arguments.
 
 
-### Step 2: Manually Set Host Power State
+### Step 2: Manually set the host power state
 
-Once the SOL bridge is established, run the following command from the OpenBMC console shell to simulate the host being powered on:
+After the SOL bridge is established, run the following command from the OpenBMC console shell to simulate the host as powered on:
 
 ```bash
-busctl set-property xyz.openbmc_project.State.Host \
-/xyz/openbmc_project/state/host0 xyz.openbmc_project.State.Host \
-CurrentHostState s xyz.openbmc_project.State.Host.HostState.Running
+busctl set-property xyz.openbmc_project.State.Host /xyz/openbmc_project/state/host0 xyz.openbmc_project.State.Host CurrentHostState s xyz.openbmc_project.State.Host.HostState.Running
 ```
 
-This updates the BMC’s internal host state, allowing UEFI to begin execution.
+This command updates the BMC internal host state so UEFI can begin execution.
 
-### Step 3: Access Host Console from Web UI
+### Step 3: Access the host console from the web UI
 
 - From your simulation host, launch a browser and open the BMC Web UI at:
   https://127.0.0.1:4223
-   ![img3 alt-text#center](openbmc_webui_login.jpg "WebUI login") 
+   ![BMC web UI login page with username and password fields alt-text#center](openbmc_webui_login.jpg "BMC web UI login")
 
 - Login using the default credentials:
    - Username: root
@@ -59,13 +56,13 @@ This updates the BMC’s internal host state, allowing UEFI to begin execution.
    After login, you should see the Web UI dashboard:
 
 - From the Overview page, click the `SOL Console` button.
-   ![img4 alt-text#center](openbmc_webui_overview.jpg "WebUI Overview")
+   ![BMC web UI overview dashboard showing system status and SOL Console button alt-text#center](openbmc_webui_overview.jpg "Web UI overview")
 
 - The SOL terminal in the Web UI will display the host console output (UEFI shell or Linux login). You can type commands directly as if you were connected over a physical serial line.
-   ![img5 alt-text#center](openbmc_webui_sol.jpg "WebUI SOL")
+   ![BMC web UI SOL terminal showing host console output and input prompt alt-text#center](openbmc_webui_sol.jpg "Web UI SOL console")
 
-Once connected to the SOL terminal, you can monitor the UEFI boot sequence, interact with the host shell, and run diagnostic or recovery workflows, just as if you were connected to a physical serial port.
+When you are connected to the SOL terminal, you can monitor the UEFI boot sequence, interact with the host shell, and run diagnostic or recovery workflows just as you would over a physical serial port.
 
-This confirms that OpenBMC is fully managing host power and console access in your simulated environment.
+This process confirms that OpenBMC manages host power and console access in your simulated environment.
 
-In the next module, you'll expand this control further by sending IPMI commands to the BMC—allowing you to test low-level system interactions and even implement your own OEM command handlers.
+In the next section, you extend this control by sending IPMI commands to the BMC to test low-level system interactions and implement custom OEM command handlers.

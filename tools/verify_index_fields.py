@@ -117,5 +117,7 @@ if __name__ == "__main__":
             if validate_file(f, allowlist):
                 any_errors = True
 
+
+
     if any_errors:
         sys.exit(1)

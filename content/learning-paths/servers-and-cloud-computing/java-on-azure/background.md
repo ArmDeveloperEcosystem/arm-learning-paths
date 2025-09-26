@@ -6,15 +6,18 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Cobalt 100 Arm-based processor
+## Azure Cobalt 100 Arm-based CPU for Linux workloads
 
-Azure’s Cobalt 100 is built on Microsoft's first-generation, in-house Arm-based processor: the Cobalt 100. Designed entirely by Microsoft and based on Arm’s Neoverse N2 architecture, this 64-bit CPU delivers improved performance and energy efficiency across a broad spectrum of cloud-native, scale-out Linux workloads. These include web and application servers, data analytics, open-source databases, caching systems, and more. Running at 3.4 GHz, the Cobalt 100 processor allocates a dedicated physical core for each vCPU, ensuring consistent and predictable performance. 
+Azure Cobalt 100 is Microsoft’s first‑generation, in‑house Arm‑based CPU built on Arm Neoverse N2. It is designed for predictable performance and energy efficiency across common Linux workloads such as web and application servers, analytics, open‑source databases, and caching systems. Each vCPU maps to a dedicated physical core and runs up to **3.4 GHz**, helping deliver consistent latency under load.
 
-To learn more about Cobalt 100, refer to the blog [Announcing the preview of new Azure virtual machine based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
+Learn more in this Microsoft announcement blog: [Announcing the preview of new Azure VMs based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
 
-## Java  
-Java is a high-performance, open-source, object-oriented programming language and runtime environment widely used for building scalable, reliable, and secure applications.  
+## Running Java on Azure Cobalt 100 Arm-based VMs
 
-It enables developers to write code once and run it anywhere, thanks to the Java Virtual Machine (JVM), which abstracts away hardware and operating system differences. Java applications are compiled into bytecode, which the JVM executes, providing portability and performance across platforms.  
+Java is a mature, object‑oriented language and runtime used to build scalable, secure applications. The Java Virtual Machine (JVM) executes platform‑independent bytecode, enabling *write once, run anywhere* portability across architectures, including Arm64 (AArch64). On Azure Cobalt 100, Java services benefit from modern JIT compilers and efficient multithreading for steady throughput and low tail latency.
 
-Java is extensively used in enterprise systems, cloud-native applications, Android development, big data processing, and high-performance computing. Learn more from the [OpenJDK official website](https://openjdk.org/) and its [official documentation](https://docs.oracle.com/en/java/).  
+Learn more with these resources:
+- Visit the [OpenJDK website](https://openjdk.org/).
+- See the [Java documentation](https://docs.oracle.com/en/java/).
+
+

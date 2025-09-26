@@ -1,24 +1,30 @@
 ---
-title: Use Streamline to analyze LLM running on CPU with llama.cpp and KleidiAI
+title: Use Streamline to analyze LLM on CPU with llama.cpp and KleidiAI
 
 draft: true
 cascade:
     draft: true
-    
+
 minutes_to_complete: 50
 
-who_is_this_for: Engineers who want to learn LLM inference on CPU or profile and optimize llama.cpp code.
+who_is_this_for: This advanced topic is for software developers, performance engineers, and AI practitioners who want to run llama.cpp on Arm-based CPUs, learn how to use Arm Streamline to capture and analyze performance data, understand how LLM inference behaves at the Prefill and Decode stages.
 
-learning_objectives: 
-    - Be able to use Streamline to profile llama.cpp code
-    - Learn the execution of LLM on CPU
+learning_objectives:
+    - Describe the architecture of llama.cpp and the role of Prefill and Decode stages
+    - Integrate Streamline Annotations into llama.cpp for fine-grained performance insights
+    - Capture and interpret profiling data with Streamline
+    - Use Annotation Channels to analyze specific operators during token generation
+    - Evaluate multi-core and multi-thread execution of llama.cpp on Arm CPUs
 
 prerequisites:
-    - Understanding of llama.cpp
+    - Basic understanding of llama.cpp
     - Understanding of transformer model
     - Knowledge of Streamline usage
+    - An Arm Neoverse or Cortex-A hardware platform running Linux or Android to test the application
 
-author: Zenon(Zhilong) Xiu
+author: 
+    - Zenon Zhilong Xiu
+    - Odin Shen
 
 ### Tags
 skilllevels: Advanced
@@ -29,6 +35,10 @@ armips:
 tools_software_languages:
     - Arm Streamline
     - C++
+    - llama.cpp
+    - KleidiAI
+    - Neoverse
+    - Profiling
 operatingsystems:
     - Linux
     - Android
@@ -46,8 +56,6 @@ further_reading:
         title: Arm Streamline User Guide 
         link: https://developer.arm.com/documentation/101816/9-7
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

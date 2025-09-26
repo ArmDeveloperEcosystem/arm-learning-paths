@@ -329,17 +329,19 @@ def check_entries(lp_index_path: Path, model: str = "gpt-4o-2024-08-06") -> int:
 # ----------------------------
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: python tools/check_tools_software_languages.py /path/to/content/<section>/<category>/<lp>/_index.md")
-        sys.exit(2)
 
-    lp_index_path = Path(sys.argv[1]).resolve()
-    if not lp_index_path.exists():
-        print(f"[ERROR] File not found: {lp_index_path}")
-        sys.exit(2)
+    files = sys.argv[1:]
+    problems = 0
 
-    # Single sequential flow so you can follow the variables:
-    problems = check_entries(lp_index_path, model="gpt-4o-2024-08-06")
+    for f in files:
+        if "content/" in f and f.endswith("_index.md"):
+            lp_index_path = Path(f).resolve()
+            if not lp_index_path.exists():
+                print(f"[ERROR] File not found: {lp_index_path}")
+                sys.exit(2)
+            print("Checking file:", f)
+            # Single sequential flow so you can follow the variables:
+            problems = problems + check_entries(lp_index_path, model="gpt-4o-2024-08-06")
 
     # Exit codes: 0 ok, 1 issues found
     sys.exit(1 if problems > 0 else 0)

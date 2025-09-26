@@ -45,11 +45,12 @@ tools_software_languages_filter:
 - CMSIS-DSP: 1
 - CMSIS-Toolbox: 3
 - CNN: 1
+- Computer Vision: 1
 - Containerd: 1
 - DetectNet: 1
 - Docker: 10
 - DSTREAM: 2
-- Edge AI: 1
+- Edge AI: 2
 - Edge Impulse: 1
 - ExecuTorch: 3
 - FastAPI: 1

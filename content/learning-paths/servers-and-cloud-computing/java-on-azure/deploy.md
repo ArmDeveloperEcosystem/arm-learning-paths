@@ -6,29 +6,34 @@ weight: 4
 layout: learningpathall
 ---
 
+## Install Java on Azure Ubuntu Pro 24.04 LTS (Arm64)
 
-
-## Java Installation on Azure Ubuntu Pro virtual machine
 In this section, you will install Java on your Arm-based Ubuntu Pro virtual machine. The goal is to ensure you have both the Java Runtime Environment (JRE) for running Java applications and the Java Development Kit (JDK) for compiling code and running benchmarks.
 
 
-### Install Java
+## Install OpenJDK (JRE + JDK)
 
-You will install Java using the Ubuntu package manager. `default-jdk` installs both the default JRE and JDK provided by Azure Ubuntu Pro machine.
+Use the Ubuntu package manager. The `default-jdk` package installs both the runtime and the compiler.
+
 ```console
 sudo apt update
 sudo apt install -y default-jdk
 ```
- 
-Verify your JRE installation: 
+
+## Verify your installation
+
+Confirm the architecture and the installed Java versions:
 
 ```console
-java -version 
-``` 
+uname -m
+java -version
+javac -version
+```
 
-You should the JRE version printed: 
+You see the version information printed: 
 
 ```output
+aarch64
 openjdk version "21.0.8" 2025-07-15
 OpenJDK Runtime Environment (build 21.0.8+9-Ubuntu-0ubuntu124.04.1)
 OpenJDK 64-Bit Server VM (build 21.0.8+9-Ubuntu-0ubuntu124.04.1, mixed mode, sharing)
@@ -37,27 +42,47 @@ OpenJDK 64-Bit Server VM (build 21.0.8+9-Ubuntu-0ubuntu124.04.1, mixed mode, sha
 Check to ensure that the JDK is properly installed:
 
 ```console
-javac -version 
+which java
+which javac
 ```
 The output should look similar to:
 
 ```output
-javac 21.0.8
+/usr/bin/java
+/usr/bin/javac
 ```
 
-Set the Java Environment Variables to point to the root directory of your JDK installation: 
+Set the Java Environment Variables to point to the root directory of your JDK installation.
+
+Use a text editor to edit the file `$HOME/.bashrc` and add the 2 environment variables.
 
 ```console 
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-arm64
 export PATH=$JAVA_HOME/bin:$PATH
+```
+Source the updated `$HOME/.bashrc` file.
+
+```console
 source ~/.bashrc 
 ```
- 
-{{% notice Note %}}
-Ubuntu Pro 24.04 LTS offers the default JDK version 21.0.8. It’s important to ensure that your version of OpenJDK for Arm is at least 11.0.9, or above. There is a large performance gap between OpenJDK-11.0.8 and OpenJDK 11.0.9. A patch added in 11.0.9 reduces false-sharing cache contention. 
-For more information, you can view this [Arm community blog](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/java-performance-on-neoverse-n1). 
 
-You can also refer to the [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) for software package version recommendations on Arm Neoverse Linux machines.
+Confirm the new settings.
+
+```console
+echo $JAVA_HOME
+which java
+which javac
+```
+
+The output is:
+
+```output
+/usr/lib/jvm/java-21-openjdk-arm64
+/usr/lib/jvm/java-21-openjdk-arm64/bin/java
+/usr/lib/jvm/java-21-openjdk-arm64/bin/javac
+```
+
+{{% notice Note %}}
+Ubuntu Pro 24.04 LTS provides OpenJDK 21 by default. Ensure your OpenJDK for Arm64 is **11.0.9 or newer** if you must run Java 11; releases before 11.0.9 can suffer performance issues due to false‑sharing cache contention. See the Arm community blog: [Java performance on Neoverse N1](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/java-performance-on-neoverse-n1). You can also consult the [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) for package guidance on Arm Neoverse Linux systems.
 {{% /notice %}}
 
-Your Java environment has been successfully configured. You may now proceed with baseline testing.

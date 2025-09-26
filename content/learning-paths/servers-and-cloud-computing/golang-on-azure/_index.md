@@ -5,9 +5,9 @@ draft: true
 cascade:
     draft: true
     
-minutes_to_complete: 40   
+minutes_to_complete: 30   
 
-who_is_this_for: This Learning Path is designed for software developers looking to migrate their Golang workloads from x86_64 to Arm-based platforms, specifically on the Microsoft Azure Cobalt 100 processors.
+who_is_this_for: This is an introductory topic for software developers looking to migrate their Golang workloads from x86_64 to Arm-based platforms, specifically on the Microsoft Azure Cobalt 100 processors.
 
 learning_objectives: 
     - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image.
@@ -16,13 +16,12 @@ learning_objectives:
 
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
-    - Basic understanding of Linux command line.
     - Familiarity with the [Golang](https://go.dev/) and deployment practices on Arm64 platforms.
 
-author: Jason Andrews
+author: Pareena Verma
 
 ### Tags
-skilllevels: Advanced
+skilllevels: Introductory
 subjects: Performance and Architecture
 cloud_service_providers: Microsoft Azure
 
@@ -31,7 +30,6 @@ armips:
 
 tools_software_languages:
     - Golang
-    - go test -bench
 
 operatingsystems:
     - Linux

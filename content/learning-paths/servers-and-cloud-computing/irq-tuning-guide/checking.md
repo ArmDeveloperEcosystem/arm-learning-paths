@@ -69,4 +69,4 @@ done
 
 ### Saving these changes
 
-Any changes you make to IRQs will be reset at reboot. You will need to change your systems settings to make your changes permanant.
+Any changes you make to IRQs will be reset at reboot. You will need to change your systems settings to make your changes permanent.

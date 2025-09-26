@@ -19,7 +19,7 @@ author: Pareena Verma
 test_images:
 - amd64/ubuntu:latest
 test_link: null
-test_maintenance: true
+test_maintenance: false
 
 ### Tags
 skilllevels: Introductory
