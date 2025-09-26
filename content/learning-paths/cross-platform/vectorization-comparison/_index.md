@@ -1,5 +1,5 @@
 ---
-title: "Migrate x86-64 SIMD (SSE/AVX) to Arm64: map to NEON, SVE, and SME"
+title: "Migrate x86-64 SIMD to Arm64"
 
 minutes_to_complete: 30
 
