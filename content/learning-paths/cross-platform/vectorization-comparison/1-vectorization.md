@@ -12,7 +12,7 @@ Migrating SIMD (Single Instruction, Multiple Data) code from x86 extensions to A
 
 Understanding the mapping between x86 instruction sets like SSE, AVX, and AMX to Arm's NEON, SVE, and SME extensions is essential for ensuring portability and high performance. This Learning Path provides an overview to help you design a migration plan, leveraging Arm features such as scalable vector lengths and advanced matrix operations, to effectively adapt your code.
 
-Vectorization is a key optimization strategy where one instruction processes multiple data elements simultaneously. It drives performance in HPC, AI/ML, signal processing, and data analytics.  
+Vectorization lets one instruction process multiple data elements simultaneously. It drives performance in HPC, AI/ML, signal processing, and data analytics.
 
 Both x86 and Arm processors offer rich SIMD capabilities, but they differ in philosophy and design. The x86 architecture provides fixed-width vector units of 128, 256, and 512 bits. The Arm architecture offers a mix of fixed-width, for NEON,  and scalable vectors for SVE and SME ranging from 128 to 2048 bits.  
 
