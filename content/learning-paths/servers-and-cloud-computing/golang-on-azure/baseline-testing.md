@@ -155,4 +155,4 @@ Open this URL in your browser, and you should see the styled HTML landing page b
 
 ![golang](images/go-web.png)
 
-Now, your Golang instance is ready for further benchmarking and production use.                                                                   
+Reaching this page in your browser confirms that Go is installed correctly, your environment is configured, and your Go web server is working end-to-end on Azure Cobalt 100 (Arm64). You can now proceed to perform further benchmarking tests.                                                      
