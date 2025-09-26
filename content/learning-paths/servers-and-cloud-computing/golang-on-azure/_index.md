@@ -5,7 +5,7 @@ draft: true
 cascade:
     draft: true
     
-minutes_to_complete: 40   
+minutes_to_complete: 30   
 
 who_is_this_for: This is an introductory topic for software developers looking to migrate their Golang workloads from x86_64 to Arm-based platforms, specifically on the Microsoft Azure Cobalt 100 processors.
 
