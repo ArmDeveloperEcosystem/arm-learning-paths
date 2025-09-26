@@ -197,8 +197,8 @@ Here is a summary of the benchmark results collected on x86_64 D4s_v6 Ubuntu Pro
 
 When you compare the benchmarking results you will notice that on the Azure Cobalt 100:
 
-- **Arm64 maintains consistency** – the virtual machine delivered stable and predictable results, showing that Arm64 optimizations are effective for compute workloads.
-- **BubbleSort (CPU-heavy, O(n²))** – runs in **~36.6M ns/op**, proving that raw CPU performance on Arm64 is consistent and unaffected by environmental factors.
-- **QuickSort (efficient O(n log n))** – execution is very fast (**~341K ns/op**), demonstrating that Arm64 handles algorithmic workloads efficiently.
-- **No memory overhead** – the benchmark shows **0 B/op and 0 allocs/op**, confirming Golang’s memory efficiency is preserved on Arm64.
-- **Run counts align closely** – **BubbleSort (32 runs)** and **QuickSort (3,506 runs)** indicate Arm64 delivers repeatable and reliable performance.
+Azure Cobalt 100 (Arm64) outperforms in both BubbleSort and QuickSort benchmarks, with the advantage more pronounced for QuickSort. The performance delta (~15–33%) shows how Arm Neoverse cores deliver strong results in CPU-bound, integer-heavy workloads common in Go applications.
+
+For real-world Go applications that rely on sorting, JSON processing, and other recursive or data-processing workloads, running on Azure Cobalt 100 Arm64 VMs can deliver better throughput and reduced execution time compared to similarly sized x86_64 VMs.
+
+These results validate the benefits of running Go workloads on Azure Cobalt 100 Arm64 instances, and establish a baseline for extending benchmarks to real-world workloads beyond sorting.
