@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 3
-- Linux: 175
+- Linux: 177
 - macOS: 13
 - Windows: 14
 pinned_modules:
@@ -19,11 +19,11 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 7
-- Containers and Virtualization: 31
+- Containers and Virtualization: 32
 - Databases: 17
 - Libraries: 9
 - ML: 31
-- Performance and Architecture: 71
+- Performance and Architecture: 72
 - Storage: 1
 - Web: 12
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -72,7 +72,7 @@ tools_software_languages_filter:
 - Capstone: 1
 - CCA: 8
 - Clair: 1
-- Clang: 12
+- Clang: 13
 - ClickBench: 1
 - ClickHouse: 1
 - CMake: 1
@@ -89,7 +89,7 @@ tools_software_languages_filter:
 - Fortran: 1
 - FunASR: 1
 - FVP: 7
-- GCC: 24
+- GCC: 25
 - gdb: 1
 - Geekbench: 1
 - Generative AI: 12
@@ -106,21 +106,27 @@ tools_software_languages_filter:
 - Google Cloud: 2
 - Google Test: 1
 - HammerDB: 1
+- Helm: 1
 - Herd7: 1
 - Hugging Face: 11
 - InnoDB: 1
 - Intrinsics: 1
 - iPerf3: 1
+- ipmitool: 1
 - Java: 4
 - JAX: 1
 - JMH: 1
 - Kafka: 1
+- KEDA: 1
+- Kedify: 1
 - Keras: 1
-- Kubernetes: 10
+- KleidiAI: 1
+- Kubernetes: 11
 - Libamath: 1
 - libbpf: 1
 - Linaro Forge: 1
 - Litmus7: 1
+- llama.cpp: 1
 - Llama.cpp: 2
 - LLM: 10
 - llvm-mca: 1
@@ -135,6 +141,7 @@ tools_software_languages_filter:
 - mpi: 1
 - MySQL: 9
 - NEON: 7
+- Neoverse: 1
 - Networking: 1
 - Nexmark: 1
 - NGINX: 4
@@ -142,12 +149,14 @@ tools_software_languages_filter:
 - Ollama: 1
 - ONNX Runtime: 1
 - OpenBLAS: 1
+- OpenBMC: 1
 - OpenJDK 21: 2
 - OpenShift: 1
 - Orchard Core: 1
 - PAPI: 1
 - perf: 6
 - PostgreSQL: 4
+- Profiling: 1
 - Python: 31
 - PyTorch: 9
 - QEMU: 1
@@ -188,6 +197,7 @@ tools_software_languages_filter:
 - wrk2: 2
 - x265: 1
 - YCSB: 1
+- Yocto/BitBake: 1
 - zlib: 1
 - ZooKeeper: 1
 weight: 1

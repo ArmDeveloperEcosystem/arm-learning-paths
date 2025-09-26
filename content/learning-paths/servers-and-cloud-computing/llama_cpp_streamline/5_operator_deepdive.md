@@ -82,7 +82,7 @@ for (int node_n = 0; node_n < cgraph->n_nodes && atomic_load_explicit(&tp->abort
 
 ### Step 2: Add Tensor Shape Info (Optional) 
 
-You can also add information of the shape and size of source tensor by replace sprintf funcation as follow:
+You can also add information of the shape and size of source tensor by replace sprintf function as follow:
 
 ```c
         sprintf(printf_buf,"%s %s %d_%d_%d %d_%d_%d",  node->name, ggml_get_name(node), \
