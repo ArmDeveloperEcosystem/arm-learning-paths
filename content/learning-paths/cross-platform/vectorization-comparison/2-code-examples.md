@@ -1,24 +1,25 @@
 ---
-title: Vector extension code examples
+title: "Vector extension code examples"
 weight: 4
 
-### FIXED, DO NOT MODIFY
-layout: learningpathall
+# FIXED, DO NOT MODIFY
+layout: "learningpathall"
 ---
 
-## SAXPY Example code
+## SAXPY example code
 
-As a way to provide some hands-on experience, you can study and run example code to better understand the vector extensions. The example used here is SAXPY.
+This page walks you through a SAXPY (Single-Precision A·X Plus Y) kernel implemented in plain C and with vector extensions on both Arm (NEON, SVE) and x86 (AVX2, AVX-512). You will see how to build and run each version and how the vector width affects throughput.
 
-SAXPY stands for "Single-Precision A·X Plus Y" and is a fundamental operation in linear algebra. It computes the result of the equation `y[i] = a * x[i] + y[i]` for all elements in the arrays `x` and `y`. 
+SAXPY computes `y[i] = a * x[i] + y[i]` across arrays `x` and `y`. It is widely used in numerical computing and is an accessible way to compare SIMD behavior across ISAs.
 
-SAXPY is widely used in numerical computing, particularly in vectorized and parallelized environments, due to its simplicity and efficiency.
+{{% notice Tip %}}
+If a library already provides a tuned SAXPY (for example, BLAS), prefer that over hand-written kernels. These examples are for learning and porting.
+{{% /notice %}}
 
-### Reference version
 
-Below is a plain C implementation of SAXPY without any vector extensions. 
+### Reference C version (no SIMD intrinsics)
 
-This serves as a reference for the optimized examples provided later.
+Below is a plain C implementation of SAXPY without any vector extensions which serves as a reference baseline for the optimized examples provided later:
 
 ```c
 #include <stddef.h>
@@ -65,13 +66,11 @@ gcc -O3 -o saxpy_plain saxpy_plain.c
 
 You can use Clang for any of the examples by replacing `gcc` with `clang` on the command line.
 
-### Arm NEON version (128-bit SIMD, 4 floats per operation)
+## Arm NEON version (128-bit SIMD, 4 floats per operation)
 
-NEON operates on fixed 128-bit registers, able to process 4 single-precision float values simultaneously in every vector instruction. 
+NEON uses fixed 128-bit registers, processing four `float` values per instruction. It is available on most Armv8-A devices and is excellent for accelerating loops and signal processing tasks in mobile and embedded workloads.
 
-This extension is available on most Arm-based devices and is excellent for accelerating loops and signal processing tasks in mobile and embedded workloads. 
-
-The example below processes 16 floats per iteration using four separate NEON operations to improve instruction-level parallelism and reduce loop overhead.
+The example below processes 16 floats per iteration using four separate NEON operations to improve instruction-level parallelism and reduce loop overhead:
 
 ```c
 #include <arm_neon.h>
@@ -139,7 +138,13 @@ gcc -O3 -march=armv8-a+simd -o saxpy_neon saxpy_neon.c
 ./saxpy_neon
 ```
 
-### AVX2 (256-bit SIMD, 8 floats per operation)
+{{% notice optional_title %}}
+On AArch64, NEON is mandatory; the flag is shown for clarity.
+{{% /notice %}}
+
+
+
+## x86 AVX2 version (256-bit SIMD, 8 floats per operation)
 
 AVX2 doubles the SIMD width compared to NEON, processing 8 single-precision floats at a time in 256-bit registers. 
 
@@ -214,6 +219,7 @@ SVE encourages writing vector-length agnostic code: the compiler automatically h
 ```c
 #include <arm_sve.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -270,13 +276,13 @@ gcc -O3 -march=armv8-a+sve -o saxpy_sve saxpy_sve.c
 ./saxpy_sve
 ```
 
-### AVX-512 (512-bit SIMD, 16 floats per operation)
+## x86 AVX-512 version (512-bit SIMD, 16 floats per operation)
 
 AVX-512 provides the widest SIMD registers of mainstream x86 architectures, processing 16 single-precision floats per 512-bit operation. 
 
 AVX-512 availability varies across x86 processors. It's found on Intel Xeon server processors and some high-end desktop processors, as well as select AMD EPYC models.
 
-For very large arrays and high-performance workloads, AVX-512 delivers extremely high throughput, with additional masking features for efficient tail processing.
+For large arrays and high-performance workloads, AVX-512 delivers extremely high throughput, with additional masking features for efficient tail processing.
 
 ```c
 #include <immintrin.h>
@@ -341,7 +347,7 @@ gcc -O3 -mavx512f -o saxpy_avx512 saxpy_avx512.c
 ./saxpy_avx512
 ```
 
-### Summary
+## Summary
 
 Wider data lanes mean each operation processes more elements, offering higher throughput on supported hardware. However, actual performance depends on factors like memory bandwidth, the number of execution units, and workload characteristics. 
 
@@ -349,4 +355,4 @@ Processors also improve performance by implementing multiple SIMD execution unit
 
 Each vector extension requires different intrinsics, compilation flags, and programming approaches. While x86 and Arm vector extensions serve similar purposes and achieve comparable performance gains, you will need to understand the options and details to create portable code. 
 
-You should also look for existing libraries that already work across vector extensions before you get too deep into code porting. This is often a good way to leverage the available SIMD capabilities on your target hardware.
+You can also look for existing libraries that already work across vector extensions before you get too deep into code porting. This is often a good way to leverage the available SIMD capabilities on your target hardware.
