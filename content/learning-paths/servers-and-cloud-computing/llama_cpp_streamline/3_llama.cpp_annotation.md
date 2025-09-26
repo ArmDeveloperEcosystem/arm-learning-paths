@@ -26,7 +26,7 @@ For installation guidance, refer to the [Streamline installation guide](https://
 
 Clone the gator repository that matches your Streamline version and build the `Annotation support library`.
 
-The installation step is depends on your developement machine.
+The installation step is depends on your development machine.
 
 For Arm native build, you can use following insturction to install the packages.
 For other machine, you need to set up the cross compiler environment by install [aarch64 gcc compiler toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
@@ -121,7 +121,7 @@ Finally, add an annotation marker inside the main loop:
                 }
 ```
 
-A string is added to the Annotation Marker to record the position of input tokens and numbr of tokens to be processed.
+A string is added to the Annotation Marker to record the position of input tokens and number of tokens to be processed.
 
 ### Step 3: Build llama-cli
 
