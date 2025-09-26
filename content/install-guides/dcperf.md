@@ -9,7 +9,7 @@ additional_search_terms:
 - Neoverse
 
 test_images:
-- ubuntu:22.04
+- ubuntu:latest
 test_maintenance: false
 
 layout: installtoolsall
@@ -23,12 +23,12 @@ weight: 1
 
 DCPerf is an open-source benchmarking and microbenchmarking suite originally developed by Meta. It faithfully replicates the characteristics of general-purpose data center workloads, with particular attention to microarchitectural fidelity. DCPerf stands out for accurate simulation of behaviors such as cache misses and branch mispredictions, which are details that many other benchmarking tools overlook.
 
-You can use DCPerf to generate performance data to inform procurement decisions, and for regression testing to detect changes in the environment, such as kernel and compiler changes. 
+You can use DCPerf to generate performance data to inform procurement decisions, and for regression testing to detect changes in the environment, such as kernel and compiler changes.
 
-DCPerf runs on Arm-based servers. The examples below have been tested on an AWS `c7g.metal` instance running Ubuntu 22.04 LTS. 
+DCPerf runs on Arm-based servers. The examples below have been tested on an AWS `c7g.metal` instance running Ubuntu 22.04 LTS.
 
 {{% notice Note %}}
-When running on a server provided by a cloud service, you have limited access to some parameters, such as UEFI settings, which can affect performance. 
+When running on a server provided by a cloud service, you have limited access to some parameters, such as UEFI settings, which can affect performance.
 {{% /notice %}}
 
 ## Install prerequisites
@@ -40,7 +40,7 @@ sudo apt update
 sudo apt install -y python-is-python3 python3-pip python3-venv git
 ```
 
-It is recommended that you install Python packages in a Python virtual environment. 
+It is recommended that you install Python packages in a Python virtual environment.
 
 Set up your virtual environment:
 
@@ -48,7 +48,7 @@ Set up your virtual environment:
 python3 -m venv venv
 source venv/bin/activate
 ```
-If requested, restart the recommended services. 
+If requested, restart the recommended services.
 
 Install the required packages:
 
@@ -65,9 +65,9 @@ cd DCPerf
 
 ## Running the MediaWiki benchmark
 
-DCPerf offers many benchmarks. See the official documentation for the benchmark of your choice. 
+DCPerf offers many benchmarks. See the official documentation for the benchmark of your choice.
 
-One example is the MediaWiki benchmark, designed to faithfully reproduce the workload of the Facebook social networking site. 
+One example is the MediaWiki benchmark, designed to faithfully reproduce the workload of the Facebook social networking site.
 
 Install HipHop Virtual Machine (HHVM), a virtual machine used to execute the web application code:
 
@@ -95,14 +95,14 @@ Compiler: 1704922878_080332982
 Repo schema: 4239d11395efb06bee3ab2923797fedfee64738e
 ```
 
-Confirm security-enhanced Linux (SELinux) is disabled with the following commands: 
+Confirm security-enhanced Linux (SELinux) is disabled with the following commands:
 
 ```bash
 sudo apt install selinux-utils
 getenforce
 ```
 
-You should see the following response: 
+You should see the following response:
 
 ```output
 Disabled
@@ -181,7 +181,7 @@ The metrics file contains several key performance indicators from the benchmark 
 
 These metrics help you evaluate the performance and reliability of the system under test. Higher values for successful requests and RPS, and lower response times, generally indicate better performance. The score provides a single value for easy comparison across runs or systems.
 
-## Next steps 
+## Next steps
 
 These are some activities you might like to try next:
 

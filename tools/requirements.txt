@@ -5,3 +5,4 @@ pyspellchecker
 better-profanity
 setuptools
 alive-progress
+openai
