@@ -1,5 +1,5 @@
 ---
-title: "Vector extension code examples"
+title: "Explore vector extension code examples"
 weight: 4
 
 # FIXED, DO NOT MODIFY
@@ -13,11 +13,11 @@ This page walks you through a SAXPY (Single-Precision A·X Plus Y) kernel implem
 SAXPY computes `y[i] = a * x[i] + y[i]` across arrays `x` and `y`. It is widely used in numerical computing and is an accessible way to compare SIMD behavior across ISAs.
 
 {{% notice Tip %}}
-If a library already provides a tuned SAXPY (for example, BLAS), prefer that over hand-written kernels. These examples are for learning and porting.
+If a library already provides a tuned SAXPY (for example, BLAS), use that over hand-written kernels. These examples are for learning and porting.
 {{% /notice %}}
 
 
-### Reference C version (no SIMD intrinsics)
+## Reference C version (no SIMD intrinsics)
 
 Below is a plain C implementation of SAXPY without any vector extensions which serves as a reference baseline for the optimized examples provided later:
 
@@ -57,7 +57,7 @@ int main() {
 }
 ```
 
-Use a text editor to copy the code to a file `saxpy_plain.c` and build and run the code using:
+Use a text editor to copy the code to a file called `saxpy_plain.c` and build and run the code using:
 
 ```bash
 gcc -O3 -o saxpy_plain saxpy_plain.c
@@ -138,7 +138,7 @@ gcc -O3 -march=armv8-a+simd -o saxpy_neon saxpy_neon.c
 ./saxpy_neon
 ```
 
-{{% notice optional_title %}}
+{{% notice Note %}}
 On AArch64, NEON is mandatory; the flag is shown for clarity.
 {{% /notice %}}
 
@@ -208,7 +208,7 @@ gcc -O3 -mavx2 -mfma -o saxpy_avx2 saxpy_avx2.c
 ./saxpy_avx2
 ```
 
-### Arm SVE (hardware dependent: 4 to 16+ floats per operation)
+## Arm SVE (hardware dependent: 4 to 16+ floats per operation)
 
 Arm SVE lets the hardware determine the register width, which can range from 128 up to 2048 bits. This means each operation can process from 4 to 64 single-precision floats at a time, depending on the implementation. 
 
