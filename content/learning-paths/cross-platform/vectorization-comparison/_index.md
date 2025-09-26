@@ -1,21 +1,18 @@
 ---
-title: "Mapping x86 vector extensions to Arm: a migration overview"
+title: "Migrate x86-64 SIMD to Arm64"
 
 minutes_to_complete: 30
 
-draft: true
-cascade:
-    draft: true
-
-who_is_this_for: This is an advanced topic for software developers who want to learn how to migrate vectorized code to Arm.
+who_is_this_for: This is an advanced topic for developers migrating vectorized (SIMD) code from x86-64 to Arm64.
 
 learning_objectives:
-     - Understand how Arm vector extensions, including NEON, Scalable Vector Extension (SVE), and Scalable Matrix Extension (SME) map to vector extensions from other architectures.
-     - Start planning how to migrate your SIMD code to the Arm architecture.
+     - Identify how Arm vector extensions including NEON, Scalable Vector Extension (SVE), and Scalable Matrix Extension (SME) map to vector extensions from other architectures
+     - Plan a migration strategy using autovectorization, intrinsics, or library substitution
+   
 
 prerequisites:
-    - Familiarity with vector extensions, SIMD programming, and compiler intrinsics.
-    - Access to Linux systems with NEON and SVE support. 
+    - Familiarity with vector extensions, SIMD programming, and compiler intrinsics
+    - Access to Linux systems with NEON and SVE support
 
 author:
     - Jason Andrews
@@ -40,11 +37,11 @@ shared_between:
 
 further_reading:
     - resource:
-        title: SVE Programming Examples
+        title: SVE programming examples
         link: https://developer.arm.com/documentation/dai0548/latest
         type: documentation
     - resource:
-        title: Port Code to Arm Scalable Vector Extension (SVE)
+        title: Port code to Arm Scalable Vector Extension (SVE)
         link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/sve
         type: website
     - resource:
@@ -64,18 +61,17 @@ further_reading:
         link: https://developer.arm.com/documentation/109246/latest
         type: documentation
     - resource:
-        title: Compiler Intrinsics
+        title: Compiler intrinsics (overview)
         link: https://en.wikipedia.org/wiki/Intrinsic_function
         type: website
     - resource:
-        title: ACLE - Arm C Language Extension
+        title: ACLE - Arm C Language Extensions
         link: https://github.com/ARM-software/acle
         type: website
     - resource:
-        title: Application Binary Interface for the Arm Architecture
+        title: Application Binary Interface for the Arm Architecture (AAPCS64)
         link: https://github.com/ARM-software/abi-aa
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -83,3 +79,6 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+
+   
+
