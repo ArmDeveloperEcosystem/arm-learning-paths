@@ -7,7 +7,7 @@ cascade:
 
 minutes_to_complete: 30   
 
-who_is_this_for: This is an introductory topic for system administrators and developers to learn how to deploy and benchmark NGINX on Microsoft Azure Cobalt 100 Arm-based instances.
+who_is_this_for: This is an introductory topic for system administrators and developers who want to learn how to deploy and benchmark NGINX on Microsoft Azure Cobalt 100 Arm-based instances.
 
 learning_objectives: 
     - Create an Arm64 virtual machine on Azure Cobalt 100 (Dpsv6) using the Azure console with Ubuntu Pro 24.04 LTS as the base image
