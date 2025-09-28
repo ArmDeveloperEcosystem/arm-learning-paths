@@ -1,23 +1,23 @@
 ---
-title: Deploy NGINX on the Microsoft Azure Cobalt 100 processors 
+title: Deploy NGINX on Azure Cobalt 100 Arm-based virtual machines 
 
 draft: true
 cascade:
     draft: true
-    
+
 minutes_to_complete: 30   
 
-who_is_this_for: This Learning Path introduces NGINX deployment on Microsoft Azure Cobalt 100 (Arm-based) virtual machine. It is intended for system administrators and developers looking to deploy and benchmark NGINX on Arm-based instances.
+who_is_this_for: This is an introductory topic for system administrators and developers to learn how to deploy and benchmark NGINX on Microsoft Azure Cobalt 100 Arm-based instances.
 
 learning_objectives: 
-    - Start an Azure Arm64 virtual machine using the Azure console and Ubuntu Pro 24.04 LTS as the base image.
-    - Deploy the NGINX web server on the Azure Arm64 virtual machine.
-    - Configure and test a static website using NGINX on the virtual machine.
-    - Perform baseline testing and benchmarking of NGINX in the Ubuntu Pro 24.04 LTS Arm64 virtual machine environment.
+    - Create an Arm64 virtual machine on Azure Cobalt 100 (Dpsv6) using the Azure console with Ubuntu Pro 24.04 LTS as the base image
+    - Install and configure the NGINX web server on the Azure Arm64 virtual machine
+    - Configure and test a static website with NGINX on the virtual machine
+    - Run baseline NGINX performance tests with ApacheBench (ab) on Ubuntu Pro 24.04 LTS Arm64
 
 
 prerequisites:
-    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6).
+    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
 
 author: Pareena Verma
 
@@ -31,7 +31,7 @@ armips:
 
 tools_software_languages:
     - NGINX
-    - Apache Bench
+    - ApacheBench
 
 operatingsystems:
     - Linux
@@ -42,11 +42,11 @@ further_reading:
       link: https://nginx.org/en/docs/
       type: documentation
   - resource:
-      title: Apache Bench official documentation
+      title: ApacheBench official documentation
       link: https://httpd.apache.org/docs/2.4/programs/ab.html
       type: documentation
   - resource:
-      title: NGINX on Azure
+      title: NGINX on Azure virtual machines
       link: https://docs.nginx.com/nginx/deployment-guides/microsoft-azure/virtual-machines-for-nginx/
       type: documentation
 
