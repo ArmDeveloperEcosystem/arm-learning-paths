@@ -92,10 +92,17 @@ ETag: "68be5aff-267"
 Accept-Ranges: bytes
 ```
 
-Output summary:
-- HTTP/1.1 200 OK: Confirms that NGINX is responding successfully.
-- Server: nginx/1.24.0: Shows that the server is powered by NGINX.
-- Content-Type, Content-Length, Last-Modified, ETag: Provide details about the served file and its metadata.
+**Output summary**
+
+| Field            | What it tells you                                   | Example                      |
+|------------------|------------------------------------------------------|------------------------------|
+| `HTTP/1.1 200 OK`| NGINX responded successfully                        | `HTTP/1.1 200 OK`            |
+| Server       | NGINX and version returned by the server            | `nginx/1.24.0 (Ubuntu)`      |
+| Content-Type | MIME type of the response                           | `text/html`                  |
+| Content-Length | Size of the response body in bytes               | `615`                        |
+| Last-Modified| Timestamp of the file served                        | `Mon, 08 Sep 2025 04:26:39 GMT` |
+| ETag         | Identifier for the specific version of the resource | `68be5aff-267`             |
+
 
 This confirms that NGINX is functional at the system level, even before exposing it to external traffic.
 
