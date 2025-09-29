@@ -8,6 +8,8 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
+## Overview
+
 In this section, you run scripts to set up the Corstone-320 reference package.
 
 The Corstone-320 Fixed Virtual Platform (FVP) is a pre-silicon software development environment for Arm-based microcontrollers. It provides a virtual representation of hardware so you can test and optimize software before boards are available. Designed for AI and machine learning workloads, it includes support for Arm Ethos-U NPUs and Cortex-M processors, which makes it well-suited to embedded AI applications. The FVP accelerates development by enabling early software validation and performance tuning in a flexible, simulation-based environment.
