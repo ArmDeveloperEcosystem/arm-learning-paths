@@ -3,17 +3,19 @@ title: Accelerate Voice Assistant performance with KleidiAI and SME2
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers who want to accelerate Voice Assistant performance on Android devices using KleidiAI and SME2.
+who_is_this_for: This is an introductory topic for developers who want to see a multi-model pipeline of a Voice Assistant application and accelerate the performance on Android devices using KleidiAI and SME2.
 
 learning_objectives:
     - Compile and run a Voice Assistant Android application.
     - Optimize performance using KleidiAI and SME2.
 
 prerequisites:
-    - An Android phone that supports the i8mm Arm architecture feature (8-bit integer matrix multiplication). This Learning Path was tested on a Samsung Galaxy Z Flip 6. 
+    - An Android phone that supports the i8mm Arm architecture feature (8-bit integer matrix multiplication). This Learning Path was tested on a Google Pixel 9 Pro.
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
 
-author: Arnaud de Grandmaison
+author:
+    - Arnaud de Grandmaison
+    - Nina Drozd
 
 skilllevels: Introductory
 subjects: Performance and Architecture
@@ -22,6 +24,7 @@ armips:
 tools_software_languages:
     - Java
     - Kotlin
+    - C++
 operatingsystems:
     - Linux
     - macOS
