@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-# Baseline test NGINX with a static website
+## Baseline test NGINX with a static website
 
 Once NGINX is installed and serving the default welcome page, verify that it can serve your own content. A baseline test with a simple static HTML site confirms that NGINX is correctly configured and working as expected on your Ubuntu Pro 24.04 LTS virtual machine.
 
@@ -19,7 +19,7 @@ cd /var/www/my-static-site
 
 ## Create an HTML file
 
-Create a simple HTML page to replace the default NGINX welcome page. Using a file editor of your choice, create **index.html** with the following content:
+Create a simple HTML page to replace the default NGINX welcome page. Using a file editor of your choice, create `index.html` with the following content:
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -63,13 +63,13 @@ Create a simple HTML page to replace the default NGINX welcome page. Using a fil
 ```
 
 ## Adjust permissions  
-Ensure that NGINX (running as the **www-data** user) can read the files in your custom site directory:
+Ensure that NGINX (running as the `www-data` user) can read the files in your custom site directory:
 ```console
 sudo chown -R www-data:www-data /var/www/my-static-site
 ```
 
 ## Update NGINX configuration
-Point NGINX to serve files from your new directory by creating a dedicated configuration file under **/etc/nginx/conf.d/**:
+Point NGINX to serve files from your new directory by creating a dedicated configuration file under `/etc/nginx/conf.d/`:
 ```console
 sudo nano /etc/nginx/conf.d/static-site.conf
 ```
@@ -91,14 +91,11 @@ server {
     error_log  /var/log/nginx/static-error.log;
 }
 ```
-This configuration tells NGINX to:
+This server block listens on port 80 for both IPv4 and IPv6, serves files from `/var/www/my-static-site/`, and uses `index.html` as the default page. It also writes access and error events to dedicated log files to simplify troubleshooting.
 
-- listen on port 80 (IPv4 and IPv6)
-- serve files from `/var/www/my-static-site/`
-- use `index.html` as the default page
-- log access and errors to dedicated log files for easier troubleshooting
-
+{{% notice Note %}}
 Make sure the path to your `index.html` file is correct before saving.
+{{% /notice %}}
 
 ## Disable the default site  
 NGINX ships with a packaged default site configuration. Since you created a custom config, disable the default to avoid conflicts:
@@ -132,6 +129,6 @@ http://<your-vm-public-ip>/
 
 ## Verify the page renders  
 You should see your custom page instead of the default welcome page:
-![Custom static website served by NGINX on Azure VM alt-text#center](images/nginx-web.png)
+![Custom static website served by NGINX on Azure VM alt-text#center](images/nginx-web.png "Custom static website served by NGINX on an Azure Arm64 VM")
 
 This verifies the basic functionality of the NGINX installation. You can now proceed to benchmarking NGINX performance on your Arm-based Azure VM.

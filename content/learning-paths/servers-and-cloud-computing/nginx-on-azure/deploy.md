@@ -108,7 +108,9 @@ This confirms that NGINX is functional at the system level, even before exposing
 
 ## Allow HTTP traffic (port 80) in UFW and NSG
 
-When you created your VM instance earlier, you configured the Azure **Network Security Group (NSG)** to allow inbound HTTP (**port 80**) traffic. On the VM itself, you must also allow traffic through the Ubuntu firewall (**UFW**). Run:
+When you created your VM instance earlier, you configured the Azure Network Security Group (NSG) to allow inbound HTTP (port 80) traffic. 
+
+On the VM itself, you must also allow traffic through the Ubuntu firewall (UFW). To do this, run:
 
 ```console
 sudo ufw allow 80/tcp
@@ -154,7 +156,7 @@ You can now access the NGINX welcome page from your VM’s public IP address. Ru
 echo "http://$(curl -s ifconfig.me)/"
 ```
 
-Copy the printed URL and open it in your browser. You should see the default NGINX welcome page, which confirms that HTTP traffic is reaching your VM.
+Copy the printed URL and open it in your browser. You should see the default NGINX welcome page as shown below, which confirms that HTTP traffic is reaching your VM:
 
 ![NGINX default welcome page in a web browser on an Azure VM alt-text#center](images/nginx-browser.png)
 

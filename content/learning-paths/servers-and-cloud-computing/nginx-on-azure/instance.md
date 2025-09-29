@@ -7,15 +7,15 @@ layout: learningpathall
 ---
 ## Set up your development environment
 
-There are several ways to create an Arm-based Cobalt 100 virtual machine: 
+There is more than one way to create an Arm-based Cobalt 100 virtual machine: 
 
 - The Microsoft Azure portal
 - The Azure CLI
 - Your preferred infrastructure as code (IaC) tool
 
-In this section, you will use the Azure portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
+In this Learning Path, you will use the Azure portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor. 
 
-This Learning Path focuses on the general-purpose virtual machines in the D-series. For further information, see the Microsoft Azure guide for the [Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
+You will focus on the general-purpose virtual machines in the D-series. For further information, see the Microsoft Azure guide for the [Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
 While the steps to create this instance are included here for convenience, for further information on setting up Cobalt on Azure, see [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
 
@@ -40,7 +40,7 @@ To get started, launch the Azure portal and navigate to **Virtual Machines**. Th
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance1.png "Allowing inbound port rules")
 
-Now select the **Review + create** tab and review the configuration for your virtual machine. It should look like the following:
+Now select the **Review and create** tab and review the configuration for your virtual machine. It should look like the following:
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/ubuntu-pro.png "Reviewing and creating an Azure Cobalt 100 Arm64 VM")
 

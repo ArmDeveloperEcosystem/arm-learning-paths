@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-# Benchmark NGINX with ApacheBench (ab) on Ubuntu Pro 24.04 LTS
+## Benchmark NGINX with ApacheBench (ab) on Ubuntu Pro 24.04 LTS
 
 Use ApacheBench (**ab**) to measure NGINX performance on your Arm64 Azure VM. This section shows you how to install the tool, run a basic benchmark, interpret key metrics, and review a sample result from an Azure **D4ps_v6** instance.
 
@@ -109,12 +109,7 @@ Percentage of the requests served within a certain time (ms)
 
 ## Interpret benchmark results
 
-ApacheBench outputs several metrics. Key ones to focus on include:
-
-- Requests per second: average throughput
-- Time per request (mean): latency per request
-- Failed requests: should be **0**
-- Transfer rate: effective bandwidth
+ApacheBench produces a variety of metrics, but the most useful ones highlight how well your server handles load. The requests per second value shows the average throughput, while the time per request (mean) indicates the latency experienced by each request. Ideally, the failed requests metric should remain at zero to confirm reliability. Finally, the transfer rate measures the effective bandwidth used by the responses, giving you insight into overall data flow efficiency.
 
 ## Benchmark summary on Arm64
 
@@ -146,7 +141,7 @@ The following results were collected on an Arm64 **D4ps_v6** VM running **Ubuntu
 
 These results highlight the performance characteristics of NGINX on Arm64-based Azure VMs (such as **D4ps_v6**):
 
-- High Requests Per second(31,523.86 requests/sec), demonstrating high throughput under concurrent load.
+- High Requests per second (31,523.86 requests/sec), demonstrating high throughput under concurrent load.
 - Response time per request averaged 1.586 ms, indicating efficient handling of requests with minimal delay.
 - Zero failed requests, confirming stability and reliability during testing.
 - Consistently low connection and processing times (mean ≈ 1 ms), ensuring smooth performance.
