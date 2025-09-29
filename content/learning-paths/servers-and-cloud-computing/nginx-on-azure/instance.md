@@ -5,9 +5,9 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Introduction
+## Set up your development environment
 
-There are several ways to create an Arm-based Cobalt 100 virtual machine, and here are three: 
+There are several ways to create an Arm-based Cobalt 100 virtual machine: 
 
 - The Microsoft Azure portal
 - The Azure CLI
@@ -17,13 +17,13 @@ In this section, you will use the Azure portal to create a virtual machine with 
 
 This Learning Path focuses on the general-purpose virtual machines in the D-series. For further information on the varying specifications of instances, see the Microsoft Azure guide for the [Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
-While the steps to create this instance are included here for convenience, you can also refer to the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
+While the steps to create this instance are included here for convenience, for further information, see [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
 
 ## Create an Arm-based Azure virtual machine
 
 Creating a virtual machine based on Azure Cobalt 100 is similar to creating any other virtual machine in Azure. 
 
-To create the Azure virtual machine, launch the Azure portal and navigate to **Virtual Machines**. Then follow these steps:
+To get started, launch the Azure portal and navigate to **Virtual Machines**. Then follow these steps:
 
 - Select **Create**, then choose **Virtual machine** from the drop-down list.
 - In the **Basics** tab, fill in instance details such as **Virtual machine name** and **Region**.
