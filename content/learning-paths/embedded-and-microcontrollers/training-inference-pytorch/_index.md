@@ -1,5 +1,5 @@
 ---
-title: "Edge AI on Arm with PyTorch and ExecuTorch: Tiny Rock-Paper-Scissors"
+title: "Edge AI on Arm with PyTorch and ExecuTorch: Tiny Rock, Paper, Scissors"
 
 minutes_to_complete: 60
 

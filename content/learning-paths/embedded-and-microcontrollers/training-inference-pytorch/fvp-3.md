@@ -6,13 +6,15 @@ weight: 4
 layout: learningpathall
 ---
 
-This section guides you through the process of compiling your trained Rock-Paper-Scissors model and running it on a simulated Arm-based edge device, the Corstone-320 Fixed Virtual Platform (FVP). This final step demonstrates the end-to-end workflow of deploying a TinyML model for on-device inference.
+# Compile and run the rock-paper-scissors model on Corstone-320 FVP
+
+This section shows how to compile your trained Rock, Paper, Scissors model and run it on the Corstone-320 Fixed Virtual Platform (FVP), a simulated Arm-based edge device. This completes the end-to-end workflow for deploying a TinyML model for on-device inference.
 
 ## Compile and build the executable
 
-First, you'll use the Ahead-of-Time (AOT) Arm compiler to convert your PyTorch model into a format optimized for the Arm architecture and the Ethos-U NPU. This process, known as delegation, offloads parts of the neural network graph that are compatible with the NPU, allowing for highly efficient inference.
+Use the Ahead-of-Time (AoT) Arm compiler to convert your PyTorch model to an ExecuTorch program optimized for Arm and the Ethos-U NPU. This process (delegation) offloads supported parts of the neural network to the NPU for efficient inference.
 
-Set up your environment variables by running the following commands in your terminal:
+Set up environment variables:
 
 ```bash
 export ET_HOME=$HOME/executorch
@@ -34,7 +36,7 @@ You should see:
 PTE file saved as rps_tiny_arm_delegate_ethos-u85-128.pte
 ```
 
-Next, you'll build the **Ethos-U runner**, which is a bare-metal executable that includes the ExecuTorch runtime and your compiled model. This runner is what the FVP will execute. Navigate to the runner's directory and use CMake to configure the build.
+Next, build the Ethos-U runner - a bare-metal executable that includes the ExecuTorch runtime and your compiled model. Configure the build with CMake:
 
 ```bash
 cd $HOME/executorch/examples/arm/executor_runner
@@ -52,7 +54,7 @@ cmake -DCMAKE_BUILD_TYPE=Release \
       -DSYSTEM_CONFIG=Ethos_U85_SYS_DRAM_Mid
 ```
 
-You should see output similar to this, indicating a successful configuration:
+You should see configuration output similar to:
 
 ```bash
 -- *******************************************************
@@ -67,13 +69,13 @@ You should see output similar to this, indicating a successful configuration:
 -- Build files have been written to: ~/executorch/examples/arm/executor_runner/cmake-out
 ```
 
-Now, build the executable with CMake:
+Build the executable:
 
 ```bash
 cmake --build "$ET_HOME/examples/arm/executor_runner/cmake-out" -j --target arm_executor_runner
 ```
 
-### Run the Model on the FVP
+### Run the model on the FVP
 With the `arm_executor_runner` executable ready, you can now run it on the Corstone-320 FVP to see the model on a simulated Arm device.
 
 ```bash
@@ -88,11 +90,10 @@ FVP_Corstone_SSE-320 \
 ```
 
 {{% notice Note %}}
-The argument `mps4_board.visualisation.disable-visualisation=1` disables the FVP GUI. This can speed up launch time for the FVP.
+`mps4_board.visualisation.disable-visualisation=1` disables the FVP GUI and can reduce launch time
 {{% /notice %}}
 
-
-Observe the output from the FVP. You'll see messages indicating that the model file has been loaded and the inference is running. This confirms that your ExecuTorch program is successfully executing on the simulated Arm hardware.
+You should see logs indicating that the model file loads and inference begins:
 
 ```output
 telnetterminal0: Listening for serial connection on port 5000
@@ -109,9 +110,7 @@ I [executorch:EthosUBackend.cpp:116 init()] data:0x70000070
 ```
 
 {{% notice Note %}}
-The inference itself may take a longer to run with a model this size - note that this is not a reflection of actual execution time.
+Inference might take longer with a model of this size on the FVP; this does not reflect real device performance.
 {{% /notice %}}
 
-You've now successfully built, optimized, and deployed a computer vision model on a simulated Arm-based system. This hands-on exercise demonstrates the power and practicality of TinyML and ExecuTorch for resource-constrained devices.
-
-In a future learning path, you can explore comparing different model performances and inference times before and after optimization. You could also analyze CPU and memory usage during inference, providing a deeper understanding of how the ExecuTorch framework optimizes your model for edge deployment.
+You have now built, optimized, and deployed a computer vision model on a simulated Arm-based system. In a future Learning Path, you can compare performance and latency before and after optimization and analyze CPU and memory usage during inference for deeper insight into ExecuTorch on edge devices.
