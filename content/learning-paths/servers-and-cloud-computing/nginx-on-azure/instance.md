@@ -52,8 +52,4 @@ Your virtual machine should soon be ready and start running. You can SSH into th
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/final-vm.png "VM deployment confirmation in Azure portal")
 
-{{% notice Note %}}
-
-To find out more about Arm-based virtual machines on Azure, see “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).
-
-{{% /notice %}}
+{{% notice Note %}} To find out more about Arm-based virtual machines on Azure, see the section *Getting Started with Microsoft Azure* within the Learning Path [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure). {{% /notice %}}

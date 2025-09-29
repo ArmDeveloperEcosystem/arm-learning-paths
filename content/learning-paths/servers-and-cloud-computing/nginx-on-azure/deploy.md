@@ -6,11 +6,13 @@ weight: 4
 layout: learningpathall
 ---
 
-# Install NGINX on Ubuntu Pro 24.04 LTS
+# Install and verify NGINX on Ubuntu Pro 24.04 LTS (Azure Arm64)
 
-In this section, you install and configure NGINX, a high-performance web server and reverse proxy, on your Arm-based Azure instance. NGINX is widely used to serve static content, handle large volumes of connections efficiently, and act as a load balancer. Running it on your Azure Cobalt 100 virtual machine allows you to serve web traffic securely and reliably.
+In this section, you install and configure NGINX, a high-performance web server and reverse proxy, on your Azure Arm64 (Cobalt 100) virtual machine. NGINX is widely used to serve static content, handle large volumes of connections efficiently, and act as a load balancer. Running it on your Azure Cobalt 100 virtual machine allows you to serve web traffic securely and reliably.
 
-## Install NGINX
+## Install NGINX (apt)
+
+Install NGINX from Ubuntu’s repositories on Ubuntu Pro 24.04 LTS.
 
 Run the following commands to install and enable NGINX:
 
@@ -21,7 +23,7 @@ sudo systemctl enable nginx
 sudo systemctl start nginx
 ```
 
-## Verify NGINX installation
+## Verify NGINX is running
 
 Check the installed version of NGINX:
 
@@ -66,7 +68,7 @@ Expected output:
 
 If you see `Active: active (running)`, NGINX is successfully installed and running.
 
-## Validate with curl
+## Validate HTTP response with curl
 
 You can validate that NGINX is serving HTTP responses using `curl`:
 
@@ -97,7 +99,7 @@ Output summary:
 
 This confirms that NGINX is functional at the system level, even before exposing it to external traffic.
 
-## Allow HTTP traffic
+## Allow HTTP traffic (port 80) in UFW and NSG
 
 When you created your VM instance earlier, you configured the Azure **Network Security Group (NSG)** to allow inbound HTTP (**port 80**) traffic. On the VM itself, you must also allow traffic through the Ubuntu firewall (**UFW**). Run:
 
@@ -137,9 +139,9 @@ To                         Action      From
 
 This ensures that both Azure and the VM-level firewalls permit HTTP requests.
 
-## Access the NGINX default page
+## Access the NGINX welcome page
 
-You can now access the NGINX default page from your VM’s public IP address. Run:
+You can now access the NGINX welcome page from your VM’s public IP address. Run:
 
 ```console
 echo "http://$(curl -s ifconfig.me)/"
