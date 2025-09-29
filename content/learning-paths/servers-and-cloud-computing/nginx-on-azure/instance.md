@@ -15,20 +15,20 @@ There are several ways to create an Arm-based Cobalt 100 virtual machine:
 
 In this section, you will use the Azure portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
 
-This Learning Path focuses on the general-purpose virtual machines in the D-series. For further information on the varying specifications of instances, see the Microsoft Azure guide for the [Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
+This Learning Path focuses on the general-purpose virtual machines in the D-series. For further information, see the Microsoft Azure guide for the [Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
-While the steps to create this instance are included here for convenience, for further information, see [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
+While the steps to create this instance are included here for convenience, for further information on setting up Cobalt on Azure, see [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
 
 ## Create an Arm-based Azure virtual machine
 
-Creating a virtual machine based on Azure Cobalt 100 is similar to creating any other virtual machine in Azure. 
+Creating a virtual machine based on Azure Cobalt 100 is similar to creating any other virtual machine on Azure. 
 
 To get started, launch the Azure portal and navigate to **Virtual Machines**. Then follow these steps:
 
-- Select **Create**, then choose **Virtual machine** from the drop-down list.
-- In the **Basics** tab, fill in instance details such as **Virtual machine name** and **Region**.
-- Choose the image for your virtual machine (for example, Ubuntu Pro 24.04 LTS) and select **Arm64** as the VM architecture.
-- In the **Size** field, select **See all sizes**, choose the **D-series v6** family of virtual machines, then select **D4ps_v6**.
+- Select **Create**, then select **Virtual machine** from the drop-down list.
+- In the **Basics** tab, fill in information about the instance such as **Virtual machine name** and **Region**.
+- Select the image for your virtual machine (for example, Ubuntu Pro 24.04 LTS) and select **Arm64** as the VM architecture.
+- In the **Size** field, select **See all sizes**, select the **D-series v6** family of virtual machines, then select **D4ps_v6**.
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance.png "Selecting the D-series v6 family of virtual machines")
 
@@ -44,16 +44,16 @@ Now select the **Review + create** tab and review the configuration for your vir
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/ubuntu-pro.png "Reviewing and creating an Azure Cobalt 100 Arm64 VM")
 
-When you are confident about your selection, select **Create**, then **Download private key and create resources**.
+When you have made your selection, select **Create**, then **Download private key and create resources**.
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance4.png "Downloading private key and creating resources")
 
-Your virtual machine should be ready and running shortly. You can SSH into the virtual machine using the private key and the **Public IP** details.
+Your virtual machine should soon be ready and start running. You can SSH into the virtual machine using the private key and the **Public IP** details.
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/final-vm.png "VM deployment confirmation in Azure portal")
 
 {{% notice Note %}}
 
-To find out more about Arm-based virtual machines in Azure, see “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).
+To find out more about Arm-based virtual machines on Azure, see “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).
 
 {{% /notice %}}
