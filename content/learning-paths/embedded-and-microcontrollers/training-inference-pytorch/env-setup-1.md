@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## Environment setup for tiny rock-paper-scissors on Arm (PyTorch + ExecuTorch)
+## Environment setup for Tiny Rock, Paper, Scissors on Arm (PyTorch + ExecuTorch)
 
 
 
@@ -17,10 +17,12 @@ You will train a lightweight CNN to classify images of the letters R, P, and S a
 ### What is a Convolutional Neural Network (CNN)?
 A Convolutional Neural Network (CNN) is a type of deep neural network primarily used for analyzing visual imagery. Unlike traditional neural networks, CNNs are designed to process pixel data by using a mathematical operation called convolution. This allows them to automatically and adaptively learn spatial hierarchies of features from input images, from low-level features like edges and textures to high-level features like shapes and objects.
 
-A convolutional neural network (CNN) is a deep neural network designed to analyze visual data using the **convolution** operation. CNNs learn spatial hierarchies of features - from edges and textures to shapes and objects - directly from pixels.
+A convolutional neural network (CNN) is a deep neural network designed to analyze visual data using the *convolution* operation. CNNs learn spatial hierarchies of features - from edges and textures to shapes and objects - directly from pixels.
 
-![Conceptual CNN diagram alt-text#center](image.png)  
-[Image credits](https://medium.com/@atul_86537/learning-ml-from-first-principles-c-linux-the-rick-and-morty-way-convolutional-neural-c76c3df511f4)
+![Conceptual diagram of a convolutional neural network alt-text#center](image.png "Conceptual CNN diagram")
+
+Image credits: [Medium article](https://medium.com/@atul_86537/learning-ml-from-first-principles-c-linux-the-rick-and-morty-way-convolutional-neural-c76c3df511f4)
+
 
 Common CNN applications include:
 
