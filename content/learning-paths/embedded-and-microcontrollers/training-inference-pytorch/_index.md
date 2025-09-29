@@ -14,7 +14,7 @@ learning_objectives:
 prerequisites:
   - Basic understanding of machine learning concepts
   - Familiarity with Python and the PyTorch library
-  - Completion of the Learning Path [Introduction to TinyML on Arm using PyTorch and ExecuTorch] (/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm)
+  - Completion of the Learning Path [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/)
   - An x86 Linux host machine or VM running Ubuntu 22.04 or later
 
 author: Dominica Abena O. Amanfo
