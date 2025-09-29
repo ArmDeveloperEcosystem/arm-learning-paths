@@ -8,7 +8,7 @@ weight: 3
 layout: "learningpathall"
 ---
 
-In this section, you will prepare a development environment to compile a machine learning model.
+In this section, you prepare a development environment to compile and run a machine learning model with ExecuTorch.
 
 ## Introduction to ExecuTorch
 
@@ -18,7 +18,7 @@ ExecuTorch is a lightweight runtime designed for efficient execution of PyTorch 
 
 These instructions have been tested on Ubuntu 22.04, 24.04, and on Windows Subsystem for Linux (WSL).
 
-Python3 is required and comes installed with Ubuntu, but some additional packages are needed:
+Python 3 is required and comes installed with Ubuntu, but some additional packages are needed:
 
 ```bash
 sudo apt update
@@ -36,7 +36,7 @@ source $HOME/executorch-venv/bin/activate
 The prompt of your terminal now has `(executorch)` as a prefix to indicate the virtual environment is active.
 
 
-## Install Executorch
+## Install ExecuTorch
 
 From within the Python virtual environment, run the commands below to download the ExecuTorch repository and install the required packages:
 
@@ -74,6 +74,6 @@ pip list | grep executorch
 executorch             1.1.0a0+1883128
 ```
 
-## Next Steps
+## Next steps
 
-Proceed to the next section to learn about and set up the virtualized hardware.
+Proceed to the next section to set up the virtualized hardware.
