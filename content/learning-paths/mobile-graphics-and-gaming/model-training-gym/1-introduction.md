@@ -12,11 +12,11 @@ Neural graphics is an intersection of graphics and machine learning. Rather than
 
 ## How does Arm support neural graphics?
 
-Arm enables neural graphics through the **Neural Graphics Development Kit**: a set of open-source tools that let developers train, evaluate, and deploy ML models for graphics workloads.
+Arm enables neural graphics through the [**Neural Graphics Development Kit**](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics): a set of open-source tools that let developers train, evaluate, and deploy ML models for graphics workloads.
 
 At its core are the ML Extensions for Vulkan, which bring native ML inference into the GPU pipeline using structured compute graphs. These extensions (`VK_ARM_tensors` and `VK_ARM_data_graph`) allow real-time upscaling and similar effects to run efficiently alongside rendering tasks.
 
-The neural graphics models can be developed using well-known ML frameworks like **PyTorch**, and exported to deployment using Arm's hardware-aware pipeline. The workflow converts .pt model weights to `.vgf` via the TOSA intermediate representation, making it possible to do tailored model development for you game use-case. This Learning Path focuses on **Neural Super Sampling (NSS)** as the use case for training, evaluating, and deploying neural models using a toolkit called the **Neural Graphics Model Gym**.
+The neural graphics models can be developed using well-known ML frameworks like **PyTorch**, and exported to deployment using Arm's hardware-aware pipeline. The workflow converts the model to `.vgf` via the TOSA intermediate representation, making it possible to do tailored model development for you game use-case. This Learning Path focuses on **Neural Super Sampling (NSS)** as the use case for training, evaluating, and deploying neural models using a toolkit called the [**Neural Graphics Model Gym**](https://github.com/arm/neural-graphics-model-gym). To learn more about NSS, you can check out the [resources on Hugging Face](https://huggingface.co/Arm/neural-super-sampling).
 
 Starting in 2026, Arm GPUs will feature dedicated neural accelerators, optimized for low-latency inference in graphics workloads. To help developers get started early, Arm provides the ML Emulation Layers for Vulkan that simulate future hardware behavior, so you can build and test models now.
 
@@ -29,7 +29,7 @@ The Neural Graphics Model Gym is an open-source toolkit for fine-tuning and expo
 Model Gym gives you:
 
 - A training and evaluation API built on PyTorch
-- Model export to .vgf for real-time use in game development
+- Model export to .vgf using ExecuTorch for real-time use in game development
 - Support for quantization-aware training (QAT) and post-training quantization (PTQ) using ExecuTorch
 - Optional Docker setup for reproducibility
 

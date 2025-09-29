@@ -9,7 +9,7 @@ learning_objectives:
     - Understand the principles of neural graphics and how it’s applied to game performance
     - Learn how to fine-tune and evaluate a neural network for Neural Super Sampling (NSS)
     - Use the Model Gym Python API and CLI to configure and train neural graphics models
-    - Visualize and inspect models using the Model Explorer tool
+    - Visualize and inspect `.vgf` models using the Model Explorer tool
 
 prerequisites:
     - Basic understanding of PyTorch and machine learning concepts

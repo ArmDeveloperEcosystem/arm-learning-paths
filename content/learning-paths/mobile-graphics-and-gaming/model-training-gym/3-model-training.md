@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-In this section, you'll get hands-on with how you can use the model gym to train your own models, or fine-tune the NSS use-case.
+In this section, you'll get hands-on with how you can use the model gym to fine-tune the NSS use-case.
 
 ## About NSS
 
@@ -54,7 +54,7 @@ neural-graphics-model-gym-examples/model_training_example.ipynb
 
 Step through the notebook for training.
 
-Once your model is trained, the next step is evaluation. You'll measure accuracy, compare checkpoints, and prepare the model for export. Open the evaluation notebook.
+Once your model is trained, the next step is evaluation. You'll measure accuracy, compare checkpoints, and prepare the model for export. Open the evaluation notebook located at the following location:
 
 ```output
 neural-graphics-model-gym-examples/model_evaluation_example.ipynb
