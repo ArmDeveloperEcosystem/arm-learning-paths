@@ -46,7 +46,7 @@ sw_vers -productVersion
 Example output:
 
 ```output
-15.5
+15.6.1
 ```
 
 You must be running macOS 15.0 or later to use the Container CLI.
@@ -60,13 +60,13 @@ Go to the [GitHub Releases page](https://github.com/apple/container/releases) an
 For example:
 
 ```bash
-wget https://github.com/apple/container/releases/download/0.2.0/container-0.2.0-installer-signed.pkg
+wget https://github.com/apple/container/releases/download/0.4.1/container-0.4.1-installer-signed.pkg
 ```
 
 Install the package:
 
 ```bash
-sudo installer -pkg container-0.2.0-installer-signed.pkg -target /
+sudo installer -pkg container-0.4.1-installer-signed.pkg -target /
 ```
 
 This installs the Container binary at `/usr/local/bin/container`.
@@ -90,7 +90,7 @@ container --version
 Example output:
 
 ```output
-container CLI version 0.2.0
+container CLI version 0.4.1 (build: release, commit: 4ac18b5)
 ```
 
 ## Build and run a container
