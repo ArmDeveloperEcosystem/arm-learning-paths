@@ -1,6 +1,10 @@
 ---
 title: Deploy SqueezeNet 1.0 INT8 model with ONNX Runtime on Azure Cobalt 100
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 60   
 
 who_is_this_for: This Learning Path introduces ONNX deployment on Microsoft Azure Cobalt 100 (Arm-based) virtual machines. It is designed for developers migrating ONNX-based applications from x86_64 to Arm with minimal or no changes.
