@@ -6,24 +6,24 @@ weight: 4
 layout: learningpathall
 ---
 
-
 ## Install Golang on Ubuntu Pro 24.04 LTS (Arm64)
-This section guides you through installing the latest Go toolchain on Ubuntu Pro 24.04 LTS (Arm64), configuring the environment, and verifying the setup for benchmarking workloads on Azure Cobalt 100 VMs.
 
-1. Download the Golang archive
+This section shows how to install the Go toolchain on Ubuntu Pro 24.04 LTS (Arm64), configure your environment, and verify the setup for benchmarking on Azure Cobalt 100 VMs.
 
-Use the following command to download the latest Go release for Linux Arm64 directly from the official Go distribution site:
+## Download the Go archive
 
+Use the following command to download the Arm64 build from the official Go distribution (update the version as needed):
 ```console
 wget https://go.dev/dl/go1.25.0.linux-arm64.tar.gz
 ```
+
 {{% notice Note %}}
-There are many enhancements added to Golang version 1.18, that have resulted in up to a 20% increase in performance for Golang workloads on Arm-based servers. Please see [this blog](https://aws.amazon.com/blogs/compute/making-your-go-workloads-up-to-20-faster-with-go-1-18-and-aws-graviton/) for the details.
+There are many enhancements added to Golang version 1.18, that have resulted in up to a 20% increase in performance for Golang workloads on Arm-based servers. For further information, see the AWS blog [Making your go workloads up to 20% faster with Golang 1.18 and AWS Graviton](https://aws.amazon.com/blogs/compute/making-your-go-workloads-up-to-20-faster-with-go-1-18-and-aws-graviton/).
 
 The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) also recommends Golang version 1.18 as the minimum recommended on the Arm platforms.
 {{% /notice %}}
 
-2. Extract the archive 
+## Extract the archive to `/usr/local`
 
 Unpack the downloaded archive into `/usr/local`, which is the conventional directory for installing system-wide software on Linux. This ensures the Go toolchain is available for all users and integrates cleanly with the system’s environment.
 
@@ -31,15 +31,15 @@ Unpack the downloaded archive into `/usr/local`, which is the conventional direc
 sudo tar -C /usr/local -xzf ./go1.25.0.linux-arm64.tar.gz
 ```
 
-3. Add Go to your system PATH
+## Add Go to your shell `PATH`
 
-To make the Go toolchain accessible from any directory, add its binary location to your shell’s PATH environment variable. Updating your `.bashrc` file ensures this change persists across sessions:
+To make the Go toolchain accessible from any directory, add its binary location to your shell’s `PATH` environment variable. Updating your `.bashrc` file ensures this change persists across sessions:
 
 ```console
 echo 'export PATH="$PATH:/usr/local/go/bin"' >> ~/.bashrc
 ```
 
-4. Apply the PATH changes immediately
+## Apply the changes immediately
 
 After updating .bashrc, reload it so your current shell session picks up the new environment variables without requiring you to log out and back in:
 
@@ -47,25 +47,25 @@ After updating .bashrc, reload it so your current shell session picks up the new
 source ~/.bashrc
 ```
 
-5. Verify Go installation
+## Verify the installation
 
-Check if Go is installed correctly and confirm the version:
-
+Confirm the installed version:
 ```console
 go version
 ```
 
-You should see output similar to: 
-
+Expected output:
 ```output
 go version go1.25.0 linux/arm64
 ```
-6. Check Go environment settings
+## Check Go environment settings
+
 
 Use the following command to display Go’s environment variables and confirm that key paths (such as GOROOT and GOPATH) are correctly set:
 
+
 ```console
-go env
+go env GOROOT GOPATH GOARCH GOOS
 ```
 
 You should see output similar to: 
@@ -118,4 +118,4 @@ GOVERSION='go1.25.0'
 GOWORK=''
 PKG_CONFIG='pkg-config'
 ```
-At this point, the Go installation on Ubuntu Pro 24.04 LTS (Arm64) VM is complete. You are now ready to proceed with Go application development, benchmarking, or performance tuning on Azure Cobalt 100 VMs.
+The Go installation on Ubuntu Pro 24.04 LTS (Arm64) VM is now complete and you are ready to proceed with Go application development, benchmarking, or performance tuning on Azure Cobalt 100 VMs.
