@@ -1,42 +1,39 @@
 ---
-title: Benchmarking via go test -bench
+title: Benchmarking using go test -bench
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Run Performance Tests Using go test -bench
+## Run performance tests using go test -bench
 
-`go test -bench` (the benchmarking mode of go test) is Golang’s built-in benchmarking framework that measures the performance of functions by running them repeatedly and reporting execution time (**ns/op**), memory usage, and allocations. With the `-benchmem flag`, it also shows memory usage and allocations. It’s simple, reliable, and requires only writing benchmark functions in the standard Golang testing package.
+`go test -bench` is Go’s built-in benchmark runner. It repeatedly executes benchmark functions and reports latency (ns/op). With the `-benchmem` flag, it also reports memory usage (B/op) and allocations (allocs/op). It’s simple, reliable, and requires only writing benchmark functions in the standard Golang testing package.
 
-1. Create a Project Folder
+## Create a project folder
 
-In your terminal, create a directory for your benchmark project and navigate into it:
-
+Create a directory for your benchmark project and navigate to it:
 ```console
 mkdir gosort-bench
 cd gosort-bench
 ```
 
-2. Initialize a Go Module
-   
-Inside your project directory, initialize a new Go module by running:
+## Initialize a Go module
 
+Initialize a new module:
 ```console
 go mod init gosort-bench
 ```
 This creates a `go.mod` file, which defines the module path (gosort-bench in this case) and marks the directory as a Go project. The `go.mod` file also allows Go to manage dependencies (external libraries) automatically, ensuring your project remains reproducible and easy to maintain.
 
-3. Add Sorting Functions
+## Add sorting functions
 
-Create a file called `sorting.go`:
-
+Create a file named `sorting.go`:
 ```console
 nano sorting.go
 ```
-Paste the following code in `sorting.go`:
 
+Paste the following implementation into `sorting.go`:
 ```go
 package sorting 
 func BubbleSort(arr []int) {
@@ -75,9 +72,10 @@ func partition(arr []int, low, high int) int {
     return i + 1
 }
 ```
-The code contains two sorting methods, Bubble Sort and Quick Sort, which arrange numbers in order from smallest to largest.
-  * Bubble Sort works by repeatedly comparing two numbers side by side and swapping them if they are in the wrong order. It keeps doing this until the whole list is sorted.
-  * Quick Sort is faster. It picks a pivot number and splits the list into two groups — numbers smaller than the pivot and numbers bigger than it. Then it sorts each group separately. The function partition helps Quick Sort decide where to split the list based on the pivot number.
+The code contains two sorting methods, Bubble Sort and Quick Sort, which arrange numbers in order from smallest to largest:
+
+- Bubble Sort works by repeatedly comparing two numbers side by side and swapping them if they are in the wrong order. It keeps doing this until the whole list is sorted.
+- Quick Sort is faster. It picks a pivot number and splits the list into two groups. Numbers smaller than the pivot and numbers bigger than it. Then it sorts each group separately. The function partition helps Quick Sort decide where to split the list based on the pivot number.
 
 To summarize, Bubble Sort is simple but slow, while Quick Sort is more efficient and usually much faster for big lists of numbers. 
 
@@ -90,16 +88,14 @@ mkdir sorting
 mv sorting.go sorting/
 ```
 
-4. Add Benchmark Tests
+### Add benchmark tests
 
-Next, create a benchmark test file named `sorting_benchmark_test.go` in your project’s root directory (not inside the sorting/ folder, so it can import the sorting package cleanly):
-
+Create a benchmark file named `sorting_benchmark_test.go` in the project root:
 ```console
 nano sorting_benchmark_test.go
-````
+```
 
-Paste the following code into it:
-
+Paste the following code:
 ```go
 package sorting_test
 import (
@@ -133,10 +129,7 @@ func BenchmarkQuickSort(b *testing.B) {
     }
 }
 ```
-The code implements a benchmark that checks how fast Bubble Sort and Quick Sort run in Go.
-- It first creates a list of 10,000 random numbers each time before running a sort, so the test is fair and consistent.
-- The BenchmarkBubbleSort() function measures the speed of sorting using the slower Bubble Sort method.
-- The BenchmarkQuickSort() function measures the speed of sorting using the faster Quick Sort method.
+The code implements a benchmark that measures the performance of Bubble Sort and Quick Sort in Go by generating a new list of 10,000 random numbers before each run to keep the test fair and consistent. The BenchmarkBubbleSort() function evaluates the slower Bubble Sort algorithm, while the BenchmarkQuickSort() function evaluates the faster Quick Sort algorithm, allowing you to compare their relative speeds and efficiency.
 
 When you run the benchmark, Go will show you how long each sort takes and how much memory it uses, so you can compare the two sorting techniques.
 
@@ -146,11 +139,9 @@ Execute the benchmark suite using the following command:
 ```console
 go test -bench=. -benchmem
 ```
--bench=. runs every function whose name starts with Benchmark.
--benchmem adds memory metrics (B/op, allocs/op) to the report.
+`-bench=.` runs every function whose name starts with `Benchmark`. `-benchmem` adds memory metrics (B/op, allocs/op) to the report.
 
-You should see output similar to:
-
+Expected output:
 ```output
 goos: linux
 goarch: arm64
@@ -160,27 +151,30 @@ BenchmarkQuickSort-4                3506            340873 ns/op               0
 PASS
 ok      gosort-bench    2.905s
 ```
-### Metrics Explained
 
-  * ns/op – nanoseconds per operation (lower is better). This is the primary latency metric.
-  * B/op – bytes allocated per operation (lower is better). This is useful for spotting hidden allocations.
-  * allocs/op – number of heap allocations per operation (lower is better). Zero here means the algorithm itself didn’t allocate.
-    
+### Metrics explained
+
+- ns/op: nanoseconds per operation (lower is better)  
+- B/op: bytes allocated per operation (lower is better)  
+- allocs/op: number of heap allocations per operation (lower is better)
+
 ### Benchmark summary on Arm64
-Here is a summary of benchmark results collected on an Arm64 D4ps_v6 Ubuntu Pro 24.04 LTS virtual machine.
 
-| Benchmark          | Value on Virtual Machine |
-|-------------------|--------------------------|
-| BubbleSort (ns/op) | 36,616,759              |
-| QuickSort (ns/op)  | 340,873                 |
-| BubbleSort runs    | 32                      |
-| QuickSort runs     | 3,506                   |
-| Allocations/op     | 0                       |
-| Bytes/op           | 0                       |
-| Total time (s)     | 2.905                   |
+Results collected on an Arm64 **D4ps_v6** Ubuntu Pro 24.04 LTS virtual machine:
 
-### Benchmark summary on x86_64
-Here is a summary of the benchmark results collected on x86_64 D4s_v6 Ubuntu Pro 24.04 LTS virtual machine.
+| Benchmark            | Value |
+|----------------------|-------|
+| BubbleSort (ns/op)   | 36,616,759 |
+| QuickSort (ns/op)    | 340,873 |
+| BubbleSort runs      | 32 |
+| QuickSort runs       | 3,506 |
+| Allocations/op       | 0 |
+| Bytes/op             | 0 |
+| Total time (s)       | 2.905 |
+
+## Benchmark summary on x86-64
+
+Results collected on an x86-64 **D4s_v6** Ubuntu Pro 24.04 LTS virtual machine:
 
 | Benchmark          | Value on Virtual Machine |
 |-------------------|--------------------------|
@@ -193,12 +187,8 @@ Here is a summary of the benchmark results collected on x86_64 D4s_v6 Ubuntu Pro
 | Total time (s)     | 2.716                   |
 
 
-### Benchmarking comparison summary
+## Benchmarking comparison summary
 
-When you compare the benchmarking results you will notice that on the Azure Cobalt 100:
+On Azure Cobalt 100 (Arm64), both BubbleSort and QuickSort run faster, with a larger advantage for QuickSort. The observed performance delta (~15–33%) highlights how Arm Neoverse cores excel at CPU-bound, integer-heavy workloads common in Go services.
 
-Azure Cobalt 100 (Arm64) outperforms in both BubbleSort and QuickSort benchmarks, with the advantage more pronounced for QuickSort. The performance delta (~15–33%) shows how Arm Neoverse cores deliver strong results in CPU-bound, integer-heavy workloads common in Go applications.
-
-For real-world Go applications that rely on sorting, JSON processing, and other recursive or data-processing workloads, running on Azure Cobalt 100 Arm64 VMs can deliver better throughput and reduced execution time compared to similarly sized x86_64 VMs.
-
-These results validate the benefits of running Go workloads on Azure Cobalt 100 Arm64 instances, and establish a baseline for extending benchmarks to real-world workloads beyond sorting.
+For real-world Go applications, such as sorting, JSON processing, and other recursive or data-processing tasks, Azure Cobalt 100 Arm64 VMs can provide higher throughput and lower execution time than similarly sized x86-64 VMs. These results validate the benefits of running Go on Cobalt 100 and establish a baseline for extending benchmarks beyond simple sorting.
