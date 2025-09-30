@@ -1,20 +1,20 @@
 ---
-title: Create an Arm based cloud virtual machine using Microsoft Cobalt 100 CPU 
+title: Create Azure Cobalt 100 Arm64 Virtual Machine for Golang Deployment
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Introduction
+## Prerequisites and setup overview
 
 There are several ways to create an Arm-based Cobalt 100 virtual machine: 
 
-- The Azure console
+- The Azure Portal
 - The Azure CLI
 - An infrastructure as code (IaC) tool
 
-In this section, you will use the Azure console to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
+In this section, you will launch the Azure Portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
 
 This Learning Path focuses on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
