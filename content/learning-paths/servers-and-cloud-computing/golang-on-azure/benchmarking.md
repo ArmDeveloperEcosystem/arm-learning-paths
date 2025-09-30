@@ -152,11 +152,9 @@ PASS
 ok      gosort-bench    2.905s
 ```
 
-### Metrics explained
+## Metrics explained
 
-- ns/op: nanoseconds per operation (lower is better)  
-- B/op: bytes allocated per operation (lower is better)  
-- allocs/op: number of heap allocations per operation (lower is better)
+The metrics reported by go test -bench include ns/op, which measures nanoseconds per operation and reflects latency where lower values are better, B/op, which shows the number of bytes allocated per operation and helps identify memory efficiency, and allocs/op, which indicates the number of heap allocations per operation and highlights how often memory is being allocated, with lower values preferred in all cases.
 
 ### Benchmark summary on Arm64
 

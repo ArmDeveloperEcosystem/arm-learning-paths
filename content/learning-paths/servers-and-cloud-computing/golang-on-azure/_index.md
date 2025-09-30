@@ -3,16 +3,17 @@ title: Deploy Golang on Azure Cobalt 100 on Arm
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers looking to migrate their Golang workloads from x86_64 to Arm-based platforms, specifically on Microsoft Azure Cobalt 100 processors.
+who_is_this_for: This is an introductory guide for software developers, DevOps engineers, and cloud architects looking to migrate their Golang (Go) applications from x86_64 to high-performance Arm-based Azure Cobalt 100 virtual machines for improved cost efficiency and performance.
 
 learning_objectives: 
     - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image
     - Deploy Golang on an Arm64-based virtual machine running Ubuntu Pro 24.04 LTS
-    - Perform Golang baseline testing and benchmarking on both x86_64 and Arm64 virtual machine
+    - Perform Golang baseline testing and benchmarking on both x86_64 and Arm64 virtual machines
 
 prerequisites:
-    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
-    - Familiarity with the [Golang](https://go.dev/) and deployment practices on Arm64 platforms.
+    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Azure Cobalt 100 Arm-based instances (Dpsv6-series)
+    - Basic familiarity with the [Go programming language](https://go.dev/) and cloud deployment practices
+    - Understanding of Linux command line and virtual machine management
 
 author: Pareena Verma
 
