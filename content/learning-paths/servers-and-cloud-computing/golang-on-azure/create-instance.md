@@ -1,56 +1,64 @@
 ---
-title: Create an Arm based cloud virtual machine using Microsoft Cobalt 100 CPU 
+title: Create an Azure Cobalt 100 Arm64 virtual machine for Golang deployment
 weight: 3
-
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Introduction
+## Prerequisites and setup
 
-There are several ways to create an Arm-based Cobalt 100 virtual machine: 
+There are several common ways to create an Arm-based Cobalt 100 virtual machine, and you can choose the method that best fits your workflow or requirements:
 
-- The Azure console
+- The Azure Portal
 - The Azure CLI
 - An infrastructure as code (IaC) tool
 
-In this section, you will use the Azure console to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
+In this section, you will launch the Azure Portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
 
-This learning path focuses on the general-purpose virtual machine of the D series. Please read the guide on [Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series) offered by Microsoft Azure.  
+This Learning Path focuses on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
 While the steps to create this instance are included here for convenience, you can also refer to the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
 
-#### Create an Arm-based Azure Virtual Machine 
+## Create an Arm-based Azure virtual machine
 
-Creating a virtual machine based on Azure Cobalt 100 is no different from creating any other virtual machine in Azure. To create an Azure virtual machine, launch the Azure portal and navigate to "Virtual Machines".
-1. Select "Create", and click on "Virtual Machine" from the drop-down list.
-2. Inside the "Basic" tab, fill in the Instance details such as "Virtual machine name" and "Region".
-3. Choose the image for your virtual machine (for example, Ubuntu Pro 24.04 LTS) and select “Arm64” as the VM architecture.
-4. In the “Size” field, click on “See all sizes” and select the D-Series v6 family of virtual machines. Select “D4ps_v6” from the list.
+Creating a virtual machine on Azure Cobalt 100 follows the standard Azure VM flow, which typically involves specifying basic settings, selecting an operating system image, configuring authentication, and setting up networking and security options. 
 
-![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance.png "Figure 1: Select the D-Series v6 family of virtual machines")
+For more information, see the [Azure VM creation documentation](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-portal).
 
-5. Select "SSH public key" as an Authentication type. Azure will automatically generate an SSH key pair for you and allow you to store it for future use. It is a fast, simple, and secure way to connect to your virtual machine.
-6. Fill in the Administrator username for your VM.
-7. Select "Generate new key pair", and select "RSA SSH Format" as the SSH Key Type. RSA could offer better security with keys longer than 3072 bits. Give a Key pair name to your SSH key.
-8. In the "Inbound port rules", select HTTP (80) and SSH (22) as the inbound ports.
+To create a VM using the Azure Portal, follow these steps:
 
-![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance1.png "Figure 2: Allow inbound port rules")
+- In the Azure portal, go to **Virtual machines**.
 
-9. Click on the "Review + Create" tab and review the configuration for your virtual machine. It should look like the following:
+- Select **Create**, then choose **Virtual machine** from the drop-down.
 
-![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/ubuntu-pro.png "Figure 3: Review and Create an Azure Cobalt 100 Arm64 VM")
+- On the **Basics** tab, enter **Virtual machine name** and **Region**.
 
-10. Finally, when you are confident about your selection, click on the "Create" button, and click on the "Download Private key and Create Resources" button.
+- Under **Image**, choose your OS (for example, *Ubuntu Pro 24.04 LTS*) and set **Architecture** to **Arm64**.
 
-![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance4.png "Figure 4: Download Private key and Create Resources")
+- In **Size**, select **See all sizes**, choose the **Dpsv6** series, then select **D4ps_v6**.
 
-11. Your virtual machine should be ready and running within no time. You can SSH into the virtual machine using the private key, along with the Public IP details.
+![Azure portal VM creation - Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance.png "Select the Dpsv6 series and D4ps_v6")
 
-![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/final-vm.png "Figure 5: VM deployment confirmation in Azure portal")
+- Under **Authentication type**, choose **SSH public key**. Azure can generate a key pair and store it for future use. For **SSH key type**, **ED25519** is recommended (RSA is also supported).
 
-{{% notice Note %}}
+- Enter the **Administrator username**.
 
-To learn more about Arm-based virtual machine in Azure, refer to “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).
+- If generating a new key, select **Generate new key pair**, choose **ED25519** (or **RSA**), and provide a **Key pair name**.
 
-{{% /notice %}}
+- In **Inbound port rules**, select **HTTP (80)** and **SSH (22)**.
+
+![Azure portal VM creation - Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance1.png "Allow inbound port rules")
+
+- Select **Review + create** and review your configuration. It should look similar to:
+
+![Azure portal VM creation - Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/ubuntu-pro.png "Review and create an Arm64 VM on Cobalt 100")
+
+When you’re ready, select **Create**, then **Download private key and create resources**.
+
+![Azure portal VM creation - Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance4.png "Download private key and create resources")
+
+Your virtual machine should be ready and running within no time. You can SSH into the virtual machine using the private key, along with the Public IP details.
+
+![Azure portal VM creation - Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/final-vm.png "VM deployment confirmation in the Azure portal")
+
+{{% notice Note %}}To learn more about Arm-based virtual machines on Azure, see the section *Getting Started with Microsoft Azure* within the Learning Path [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).{{% /notice %}}

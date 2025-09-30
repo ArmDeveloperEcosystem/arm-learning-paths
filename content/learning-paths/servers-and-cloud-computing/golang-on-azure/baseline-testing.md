@@ -1,32 +1,31 @@
 ---
-title: Golang Baseline Testing 
+title: Perform Golang baseline testing and web server deployment on Azure Cobalt 100 
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Baseline testing: run a Go web server on Azure Arm64
 
-### Baseline Testing: Running a Go Web Server on Azure Arm64
-To validate your Go toolchain and runtime environment, you can build and run a lightweight web server. This ensures that compilation, networking, and runtime execution are working correctly on your Ubuntu Pro 24.04 LTS Arm64 virtual machine running on Azure Cobalt 100.
+Validate your Go development environment by building and deploying a complete web application. This baseline test confirms that compilation, networking, and runtime execution work correctly on your Ubuntu Pro 24.04 LTS Arm64 virtual machine powered by Azure Cobalt 100 processors.
 
-1. Create the project directory
-   
-Start by creating a new folder to hold your Go web project and navigate to it:
+## Initialize Go Web Project
+
+Create a dedicated project directory for your Go web application:
 
 ```console
 mkdir goweb && cd goweb
 ```
 
-2. Create an HTML Page with Bootstrap Styling
+## Create an HTML page with Bootstrap styling
 
-Next, create a simple web page that your Go server will serve. Using the nano editor (or any editor of your choice), create a file named `index.html`:
-
+Next, create a simple web page that your Go server will serve. Open an editor and create `index.html`:
 ```console
 nano index.html
 ```
 
-Paste the following HTML code into the `index.html` file. This page uses Bootstrap for styling and includes a header, a welcome message, and a button that links to a Go-powered API endpoint.
+Add the following HTML code with Bootstrap styling and Azure Cobalt 100 branding:
 
 ```html
 <!DOCTYPE html>
@@ -65,15 +64,16 @@ Paste the following HTML code into the `index.html` file. This page uses Bootstr
 </body>
 </html>
 ```
-3. Create Golang Web Server
 
 Now, let’s create the Go program that will serve your static HTML page and expose a simple API endpoint.
 
+Open an editor and create `main.go`:
 ```console
 nano main.go
 ```
-Paste the following code into the `main.go` file. This sets up a very basic web server that serves files from the current folder, including the `index.html` you just created. When it runs, it will print a message showing the server address.
+Paste the following code into the `main.go` file. This sets up a basic web server that serves files from the current folder, including the `index.html` you just created. When it runs, it will print a message showing the server address.
 
+Paste the following code into `main.go`:
 ```go
 package main
 import (
@@ -105,24 +105,22 @@ func main() {
 ```
 {{% notice Note %}}Running on port 80 requires root privileges. Use sudo with the full Go path if needed.{{% /notice %}}
 
-4. Run the Web Server
-   
-Compile and start your Go program with:
+## Deploy and Start the Web Server
+
+Compile and launch your Go web server on Azure Cobalt 100:
 
 ```console
 sudo /usr/local/go/bin/go run main.go
 ```
 
-This command compiles the Go source code into a binary and immediately starts the server on port 80. If the server starts successfully, you will see the following message in your terminal:
-
+Expected output confirming successful startup:
 ```output
 2025/08/19 04:35:06 Server running on http://0.0.0.0:80
 ```
-5. Allow HTTP Traffic in Firewall
 
-On Ubuntu Pro 24.04 LTS virtual machines, UFW (Uncomplicated Firewall) is used to manage firewall rules. By default, it allows only SSH (port 22), while other inbound connections are blocked. 
+### Configure Ubuntu Firewall for HTTP Access
 
-Even if you have already configured Azure Network Security Group (NSG) rules to allow inbound traffic on port 80, the VM level firewall may still block HTTP requests until explicitly opened.
+Ubuntu Pro 24.04 LTS uses UFW (Uncomplicated Firewall) to manage network access. Even with Azure Network Security Group (NSG) rules configured, the VM-level firewall requires explicit HTTP access configuration.
 
 Run the following commands to allow HTTP traffic on port 80:
 
@@ -145,14 +143,27 @@ To                         Action      From
 80/tcp (v6)                ALLOW       Anywhere (v6)
 ```
 
-6. Open in a Browser
-To quickly get your VM’s public IP address and form the URL, run:
+{{% notice Note %}}
+If UFW is already active, `sudo ufw enable` might warn you about disrupting SSH. Proceed only if you understand the impact, or use an Azure VM serial console as a recovery option.
+{{% /notice %}}
 
+## Open the site in a browser
+
+Print your VM’s public URL:
 ```console
 echo "http://$(curl -s ifconfig.me)/"
 ```
-Open this URL in your browser, and you should see the styled HTML landing page being served directly by your Go application.
 
-![golang](images/go-web.png)
+Open this URL in your browser. You should see the styled HTML landing page served by your Go application.
 
-Reaching this page in your browser confirms that Go is installed correctly, your environment is configured, and your Go web server is working end-to-end on Azure Cobalt 100 (Arm64). You can now proceed to perform further benchmarking tests.                                                      
+![Go web server running on Azure Cobalt 100 Arm64 alt-text#center](images/go-web.png "Go web server running on Azure Cobalt 100 Arm64")
+
+## Baseline Testing Complete
+
+Successfully reaching this page confirms:
+- **Go toolchain** is properly installed and configured
+- **Development environment** is ready for Arm64 compilation
+- **Network connectivity** and firewall configuration are correct
+- **Runtime performance** is functioning on Azure Cobalt 100 processors
+
+Your Azure Cobalt 100 virtual machine is now ready for advanced Go application development and performance benchmarking.
