@@ -49,6 +49,20 @@ Check the status:
 ```console
 sudo systemctl status mysql
 ```
+The output should look like:
+
+```output
+mysql.service - MySQL Community Server
+     Loaded: loaded (/usr/lib/systemd/system/mysql.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2025-09-30 20:31:48 UTC; 1min 53s ago
+   Main PID: 3255 (mysqld)
+     Status: "Server is operational"
+      Tasks: 39 (limit: 19099)
+     Memory: 366.4M (peak: 380.2M)
+        CPU: 952ms
+     CGroup: /system.slice/mysql.service
+             └─3255 /usr/sbin/mysqld
+```
 You should see `active (running)`.
 
 4. Verify MySQL version 
@@ -58,7 +72,7 @@ You check the installed version of MySQL to confirm it’s set up correctly and 
 ```console
 mysql -V 
 ```
-You should see output similar to the following:
+You should see output similar to:
 
 ```output
 mysql  Ver 8.0.43-0ubuntu0.24.04.1 for Linux on aarch64 ((Ubuntu))
@@ -102,7 +116,6 @@ Inside the MySQL shell, run:
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'MyStrongPassword!';
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
-;
 EXIT;
 ```
 
