@@ -1,18 +1,14 @@
 ---
-title: Deploy Golang on the Microsoft Azure Cobalt 100 processors 
+title: Deploy Golang on Azure Cobalt 100 on Arm
 
-draft: true
-cascade:
-    draft: true
-    
-minutes_to_complete: 30   
+minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for software developers looking to migrate their Golang workloads from x86_64 to Arm-based platforms, specifically on the Microsoft Azure Cobalt 100 processors.
+who_is_this_for: This is an introductory topic for developers looking to migrate their Golang workloads from x86_64 to Arm-based platforms, specifically on Microsoft Azure Cobalt 100 processors.
 
 learning_objectives: 
-    - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image.
-    - Deploy Golang on an Arm64-based virtual machine running Ubuntu Pro 24.04 LTS.
-    - Perform Golang baseline testing and benchmarking on both x86_64 and Arm64 virtual machine.
+    - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image
+    - Deploy Golang on an Arm64-based virtual machine running Ubuntu Pro 24.04 LTS
+    - Perform Golang baseline testing and benchmarking on both x86_64 and Arm64 virtual machine
 
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
@@ -26,13 +22,13 @@ subjects: Performance and Architecture
 cloud_service_providers: Microsoft Azure
 
 armips:
-    - Neoverse
+  - Neoverse
 
 tools_software_languages:
     - Golang
 
 operatingsystems:
-    - Linux
+  - Linux
 
 further_reading:
     - resource: 
@@ -42,7 +38,7 @@ further_reading:
     - resource:
         title: Testing and Benchmarking in Go
         link: https://pkg.go.dev/testing
-        type: Official Documentation
+        type: Documentation
     - resource:        
         title: Using go test -bench for Benchmarking
         link: https://pkg.go.dev/cmd/go#hdr-Testing_flags
