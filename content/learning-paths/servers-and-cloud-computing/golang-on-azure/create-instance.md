@@ -52,10 +52,8 @@ When you’re ready, select **Create**, then **Download private key and create r
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance4.png "Download private key and create resources")
 
-11. Your virtual machine should be ready and running within no time. You can SSH into the virtual machine using the private key, along with the Public IP details.
+Your virtual machine should be ready and running within no time. You can SSH into the virtual machine using the private key, along with the Public IP details.
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/final-vm.png "VM deployment confirmation in the Azure portal")
 
-{{% notice Note %}}
-To learn more about Arm-based virtual machines on Azure, see “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).
-{{% /notice %}}
+{{% notice Note %}}To learn more about Arm-based virtual machines on Azure, see “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).{{% /notice %}}
