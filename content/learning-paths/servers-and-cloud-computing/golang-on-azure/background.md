@@ -15,5 +15,7 @@ To learn more, see the Microsoft blog: [Announcing the preview of new Azure virt
 ## Golang
 Golang (or Go) is an open-source programming language developed by Google, designed for simplicity, efficiency, and scalability. It provides built-in support for concurrency, strong typing, and a rich standard library, making it ideal for building reliable, high-performance applications.
 
-Common use cases include cloud-native development, microservices, systems programming, DevOps tooling, and distributed systems. For more information, visit the [Go website](https://go.dev/) and the [Go documentation](https://go.dev/doc/).
+Common use cases include cloud-native development, microservices, systems programming, DevOps tooling, and distributed systems. 
+
+For more information, visit the [Go website](https://go.dev/) and the [Go documentation](https://go.dev/doc/).
 
