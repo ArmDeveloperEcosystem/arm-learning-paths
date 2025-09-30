@@ -6,32 +6,34 @@ weight: 2
 layout: learningpathall
 ---
 
-## TinyML
+## Overview
 
 This Learning Path is about TinyML. It is a starting point for learning how innovative AI technologies can be used on even the smallest of devices, making Edge AI more accessible and efficient. You will learn how to set up your host machine to facilitate compilation and ensure smooth integration across devices.
 
 This section provides an overview of the domain with real-life use cases and available devices.
+## What is TinyML?
+
 
 TinyML represents a significant shift in Machine Learning deployment. Unlike traditional Machine Learning, which typically depends on cloud-based servers or high-performance hardware, TinyML is tailored to function on devices with limited resources, constrained memory, low power, and fewer processing capabilities.
 
 TinyML has gained popularity because it enables AI applications to operate in real-time, directly on the device, with minimal latency, enhanced privacy, and the ability to work offline. This shift opens up new possibilities for creating smarter and more efficient embedded systems.
 
-### Benefits and applications
+## Benefits and applications
 
 The benefits of TinyML align well with the Arm architecture, which is widely used in IoT, mobile devices, and edge AI deployments.
 
 Here are some of the key benefits of TinyML on Arm:
 
 
-- **Power Efficiency**: TinyML models are designed to be extremely power-efficient, making them ideal for battery-operated devices like sensors, wearables, and drones.
+- Power efficiency: TinyML models are designed to be extremely power-efficient, making them ideal for battery-operated devices like sensors, wearables, and drones.
 
-- **Low Latency**: AI processing happens on-device, so there is no need to send data to the cloud, which reduces latency and enables real-time decision-making.
+- Low latency: AI processing happens on-device, so there is no need to send data to the cloud, which reduces latency and enables real-time decision-making.
 
-- **Data Privacy**: With on-device computation, sensitive data remains local, providing enhanced privacy and security. This is a priority in healthcare and personal devices.
+- Data privacy: with on-device computation, sensitive data remains local, providing enhanced privacy and security. This is a priority in healthcare and personal devices.
 
-- **Cost-Effective**: Arm devices, which are cost-effective and scalable, can now handle sophisticated Machine Learning tasks, reducing the need for expensive hardware or cloud services.
+- Cost-effective: Arm devices, which are cost-effective and scalable, can now handle sophisticated machine learning tasks, reducing the need for expensive hardware or cloud services.
 
-- **Scalability**: With billions of Arm devices in the market, TinyML is well-suited for scaling across industries, enabling widespread adoption of AI at the edge.
+- Scalability: with billions of Arm devices in the market, TinyML is well-suited for scaling across industries, enabling widespread adoption of AI at the edge.
 
 TinyML is being deployed across multiple industries, enhancing everyday experiences and enabling groundbreaking solutions. The table below shows some examples of TinyML applications.
 

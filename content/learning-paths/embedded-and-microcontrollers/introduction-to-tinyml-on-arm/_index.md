@@ -6,10 +6,10 @@ minutes_to_complete: 40
 who_is_this_for: This is an introductory topic for developers and data scientists new to Tiny Machine Learning (TinyML) who want to explore its potential using PyTorch and ExecuTorch.
 
 learning_objectives:
-    - Describe what differentiates TinyML from other AI domains.
-    - Describe the benefits of deploying AI models on Arm-based edge devices.
-    - Identify suitable Arm-based devices for TinyML applications.
-    - Set up and configure a TinyML development environment using ExecuTorch and Corstone-320 Fixed Virtual Platform (FVP).
+    - Describe what differentiates TinyML from other AI domains
+    - Describe the benefits of deploying AI models on Arm-based edge devices
+    - Identify suitable Arm-based devices for TinyML applications
+    - Set up and configure a TinyML development environment using ExecuTorch and Corstone-320 Fixed Virtual Platform (FVP)
 
 prerequisites:
     - Basic knowledge of Machine Learning concepts
