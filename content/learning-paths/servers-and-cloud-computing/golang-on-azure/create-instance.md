@@ -1,13 +1,13 @@
 ---
-title: Create Azure Cobalt 100 Arm64 VM for Golang deployment
+title: Create an Azure Cobalt 100 Arm64 virtual machine for Golang deployment
 weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Prerequisites and setup overview
+## Prerequisites and setup
 
-There is more than one way to create an Arm-based Cobalt 100 virtual machine, and you can use any of the following: 
+There are several common ways to create an Arm-based Cobalt 100 virtual machine, and you can choose the method that best fits your workflow or requirements:
 
 - The Azure Portal
 - The Azure CLI
@@ -21,9 +21,11 @@ While the steps to create this instance are included here for convenience, you c
 
 ## Create an Arm-based Azure virtual machine
 
-Creating a virtual machine on Azure Cobalt 100 follows the standard Azure VM flow.
+Creating a virtual machine on Azure Cobalt 100 follows the standard Azure VM flow, which typically involves specifying basic settings, selecting an operating system image, configuring authentication, and setting up networking and security options. 
 
-Follow these steps:
+For more information, see the [Azure VM creation documentation](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-portal).
+
+To create a VM using the Azure Portal, follow these steps:
 
 - In the Azure portal, go to **Virtual machines**.
 

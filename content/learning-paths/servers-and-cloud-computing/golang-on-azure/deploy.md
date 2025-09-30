@@ -1,12 +1,13 @@
 ---
 title: Install and configure Golang on Azure Cobalt 100 Arm64
+
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Install Golang on Azure Cobalt 100 (Ubuntu Pro 24.04 LTS Arm64)
+## Install Golang on Azure Cobalt 100 
 
 This section demonstrates how to install the Go programming language toolchain on Ubuntu Pro 24.04 LTS (Arm64), configure your development environment, and verify the setup for optimal performance on Azure Cobalt 100 virtual machines.
 
@@ -19,7 +20,7 @@ wget https://go.dev/dl/go1.25.0.linux-arm64.tar.gz
 ```
 
 {{% notice Note %}}
-There are many enhancements added to Golang version 1.18, that have resulted in up to a 20% increase in performance for Golang workloads on Arm-based servers. For further information, see the AWS blog [Making your go workloads up to 20% faster with Golang 1.18 and AWS Graviton](https://aws.amazon.com/blogs/compute/making-your-go-workloads-up-to-20-faster-with-go-1-18-and-aws-graviton/).
+There are many enhancements added to Golang version 1.18, that have resulted in up to a 20% increase in performance for Golang workloads on Arm-based servers. For further information, see the AWS blog [Making your Go workloads up to 20% faster with Go 1.18 and AWS Graviton](https://aws.amazon.com/blogs/compute/making-your-go-workloads-up-to-20-faster-with-go-1-18-and-aws-graviton/).
 
 The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) also recommends Golang version 1.18 as the minimum recommended on the Arm platforms.
 {{% /notice %}}
@@ -40,7 +41,7 @@ To make the Go toolchain accessible from any directory, add its binary location 
 echo 'export PATH="$PATH:/usr/local/go/bin"' >> ~/.bashrc
 ```
 
-## Reload Shell Configuration
+## Reload shell configuration
 
 Apply the environment changes to your current shell session without requiring a logout/login cycle:
 
@@ -48,7 +49,7 @@ Apply the environment changes to your current shell session without requiring a 
 source ~/.bashrc
 ```
 
-## Verify Go Installation
+## Verify Go installation
 
 Confirm that Go is properly installed and accessible:
 

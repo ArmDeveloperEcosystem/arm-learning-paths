@@ -1,6 +1,7 @@
 ---
 title: "Overview"
 weight: 2
+
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
@@ -20,19 +21,19 @@ To learn more, see the Microsoft blog: [Announcing the preview of new Azure virt
 
 Golang (Go) is a modern, open-source programming language developed by Google, specifically designed for building scalable, high-performance applications. Go excels in simplicity, compilation speed, and runtime efficiency, making it an ideal choice for cloud-native development and Arm64 architecture deployment.
 
-## Key Go language features:
+Key performance features include:
 - Built-in concurrency with goroutines and channels
 - Strong static typing for improved code reliability
 - Comprehensive standard library for rapid development
 - Fast compilation and efficient garbage collection
 - Cross-platform compatibility including native Arm64 support
 
-## Go language primary use cases:
+Go language primary use cases:
 - Cloud-native applications and containerized workloads
 - Microservices architecture and API development
 - Systems programming and infrastructure tools
 - DevOps automation and CI/CD pipelines
 - Distributed systems and high-throughput services 
 
-For more information, visit the [Go website](https://go.dev/) and the [Go documentation](https://go.dev/doc/).
+For more information, visit the [Go website](https://go.dev/) and see the [Go documentation](https://go.dev/doc/).
 
