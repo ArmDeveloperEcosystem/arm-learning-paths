@@ -1,36 +1,40 @@
 ---
-title: Integrating Streamline Annotations into llama.cpp
+title: Integrate Streamline Annotations into llama.cpp
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Integrating Streamline Annotations into llama.cpp
+## Integrate Streamline Annotations into llama.cpp
 
-To visualize token generation at the **Prefill** and **Decode** stages, we use **Streamline’s Annotation Marker** feature.  
-This requires integrating annotation support into the **llama.cpp** project.  
-More information about the Annotation Marker API can be found [here](https://developer.arm.com/documentation/101816/9-7/Annotate-your-code?lang=en).
+To visualize token generation at the Prefill and Decode stages, you can use Streamline's Annotation Marker feature.  
+
+This requires integrating annotation support into the llama.cpp project.  
+
+More information about the Annotation Marker API can be found in the [Streamline User Guide](https://developer.arm.com/documentation/101816/9-7/Annotate-your-code?lang=en).
 
 {{% notice Note %}}
-You can either build natively on an **Arm platform**, or cross-compile on another architecture using an Arm cross-compiler toolchain.
+You can either build natively on an Arm platform, or cross-compile on another architecture using an Arm cross-compiler toolchain.
 {{% /notice %}}
 
 ### Step 1: Build Streamline Annotation library
 
 Install [Arm DS](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio) or [Arm Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) on your development machine first.
 
-Streamline Annotation support code in the installation directory such as *"Arm\Development Studio 2024.1\sw\streamline\gator\annotate"*.
+Streamline Annotation support code is in the installation directory such as `Arm/Development Studio 2024.1/sw/streamline/gator/annotate`.
 
-For installation guidance, refer to the [Streamline installation guide](https://learn.arm.com/install-guides/streamline/).
+For installation guidance, refer to the [Streamline installation guide](/install-guides/streamline/).
 
 Clone the gator repository that matches your Streamline version and build the `Annotation support library`.
 
-The installation step is depends on your development machine.
+The installation step depends on your development machine.
 
-For Arm native build, you can use following insturction to install the packages.
-For other machine, you need to set up the cross compiler environment by install [aarch64 gcc compiler toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
-You can refer this [guide](https://learn.arm.com/install-guides/gcc/cross/) for Cross-compiler installation.
+For Arm native build, you can use the following instructions to install the packages.
+
+For other machines, you need to set up the cross compiler environment by installing [Arm GNU toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
+
+You can refer to the [GCC install guide](https://learn.arm.com/install-guides/gcc/cross/) for cross-compiler installation.
 
 {{< tabpane code=true >}}
   {{< tab header="Arm Native Build" language="bash">}}
@@ -40,7 +44,6 @@ You can refer this [guide](https://learn.arm.com/install-guides/gcc/cross/) for 
     git clone https://github.com/ARM-software/gator.git
     cd gator
     ./build-linux.sh
-
     cd annotate
     make  
   {{< /tab >}}
@@ -49,20 +52,22 @@ You can refer this [guide](https://learn.arm.com/install-guides/gcc/cross/) for 
     apt-get install ninja-build cmake gcc g++ g++-aarch64-linux-gnu curl zip unzip tar pkg-config git
     cd ~
     git clone https://github.com/ARM-software/gator.git
-
     cd gator
     make CROSS_COMPILE=/path/to/aarch64_linux_gcc_tool
   {{< /tab >}}
 {{< /tabpane >}}
 
-Once complete, the static library **libstreamline_annotate.a** will be generated at `~/gator/annotate/libstreamline_annotate.a` and the header file at: `gator/annotate/streamline_annotate.h`
+Once complete, the static library `libstreamline_annotate.a` will be generated at `~/gator/annotate/libstreamline_annotate.a` and the header file is at `gator/annotate/streamline_annotate.h`.
 
 ### Step 2: Integrate Annotation Marker into llama.cpp
 
-Next, we need to install **llama.cpp** to run the LLM model.
-To make the following performance profiling content easier to follow, this Learning Path will use a specific release version of llama.cpp to ensure the steps and results remain consistent.
+Next, you need to install llama.cpp to run the LLM model.
 
-Before the build **llama.cpp**, create a directory `streamline_annotation` and copy the library `libstreamline_annotate.a` and the header file `streamline_annotate.h` into the folder. 
+{{% notice Note %}}
+To make the performance profiling content easier to follow, this Learning Path uses a specific release version of llama.cpp to ensure the steps and results remain consistent.
+{{% /notice %}}
+
+Before building llama.cpp, create a directory `streamline_annotation` and copy the library `libstreamline_annotate.a` and the header file `streamline_annotate.h` into the new directory. 
 
 ```bash
 cd ~
@@ -74,7 +79,7 @@ mkdir streamline_annotation
 cp ~/gator/annotate/libstreamline_annotate.a ~/gator/annotate/streamline_annotate.h streamline_annotation
 ```
 
-To link `libstreamline_annotate.a` library when building llama-cli, adding following lines in the end of `llama.cpp/tools/main/CMakeLists.txt`.
+To link the `libstreamline_annotate.a` library when building llama-cli, add the following lines at the end of `llama.cpp/tools/main/CMakeLists.txt`.
 
 ```makefile
 set(STREAMLINE_LIB_PATH "${CMAKE_SOURCE_DIR}/streamline_annotation/libstreamline_annotate.a")
@@ -82,13 +87,13 @@ target_include_directories(llama-cli PRIVATE "${CMAKE_SOURCE_DIR}/streamline_ann
 target_link_libraries(llama-cli PRIVATE "${STREAMLINE_LIB_PATH}")
 ```
 
-To add Annotation Markers to llama-cli, change the llama-cli code **llama.cpp/tools/main/main.cpp** by adding
+To add Annotation Markers to `llama-cli`, change the `llama-cli` code in `llama.cpp/tools/main/main.cpp` by adding the include file:
 
 ```c
 #include "streamline_annotate.h" 
 ```
 
-After the call to common_init(), add the setup macro:
+After the call to `common_init()`, add the setup macro:
 
 ```c
     common_init();
@@ -125,16 +130,16 @@ A string is added to the Annotation Marker to record the position of input token
 
 ### Step 3: Build llama-cli
 
-For convenience, llama-cli is **static linked**.
+For convenience, llama-cli is statically linked.
 
-Firstly, create a new directory `build` understand llama.cpp root directory and go into it.
+Create a new directory `build` under the llama.cpp root directory and change to the new directory: 
 
 ```bash
 cd ~/llama.cpp
-mkdir ./build & cd ./build
+mkdir build && cd build
 ```
 
-Then configure the project by running 
+Next, configure the project.
 
 {{< tabpane code=true >}}
   {{< tab header="Arm Native Build" language="bash">}}
@@ -174,23 +179,20 @@ Then configure the project by running
 {{< /tabpane >}}
 
 
-Set `CMAKE_C_COMPILER` and `DCMAKE_CXX_COMPILER` to your cross compiler path. Make sure that **-march** in `DCMAKE_C_FLAGS` and `CMAKE_CXX_FLAGS` matches your Arm CPU hardware. 
+Set `CMAKE_C_COMPILER` and `CMAKE_CXX_COMPILER` to your cross compiler path. Make sure that -march in `CMAKE_C_FLAGS` and `CMAKE_CXX_FLAGS` matches your Arm CPU hardware. 
 
 
-In this learning path, we run llama-cli on an Arm CPU that supports **NEON Dotprod** and **I8MM** instructions.  
-Therefore, we specify: **armv8.2-a+dotprod+i8mm**.
+With the flags above you can run `llama-cli` on an Arm CPU that supports NEON dot product and 8-bit integer multiply (i8mm) instructions.  
 
-We also specify **-static** and **-g** options:
-- **-static**: produces a statically linked executable, so it can run on different Arm64 Linux/Android environments without needing shared libraries.
-- **-g**: includes debug information, which makes source code and function-level profiling in Streamline much easier.  
+The `-static` and `-g` options are also specified to produce a statically linked executable, so it can run on different Arm64 Linux/Android environments without needing shared libraries and to include debug information, which makes source code and function-level profiling in Streamline much easier.  
 
-so that the llama-cli executable is static linked and with debug info. This makes source code/function level profiling easier and the llama-cli executable runnable on various version of Arm64 Linux/Android.
-
-Now you can build the project by running:
+Now you can build the project using `cmake`: 
 
 ```bash
 cd ~/llama.cpp/build
 cmake --build ./ --config Release
 ```
 
-After the building process, you should find the llama-cli will be generated at **~/llama.cpp/build/bin/** directory.
+After the building process completes, you can find the `llama-cli` in the `~/llama.cpp/build/bin/` directory.
+
+You now have an annotated version of `llama-cli` ready for Streamline.
