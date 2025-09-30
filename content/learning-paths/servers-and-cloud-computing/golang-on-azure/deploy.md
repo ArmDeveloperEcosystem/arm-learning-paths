@@ -1,5 +1,5 @@
 ---
-title: Install Golang
+title: Install and Configure Golang on Azure Cobalt 100 Arm64
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -48,18 +48,20 @@ Apply the environment changes to your current shell session without requiring a 
 source ~/.bashrc
 ```
 
-## Verify the installation
+## Verify Go Installation
 
-Confirm the installed version:
+Confirm that Go is properly installed and accessible:
+
 ```console
 go version
 ```
 
-Expected output:
+Expected output for Azure Cobalt 100 Arm64:
 ```output
 go version go1.25.0 linux/arm64
 ```
-## Check Go environment settings
+
+## Validate Go environment configuration
 
 
 Use the following command to display Go’s environment variables and confirm that key paths (such as GOROOT and GOPATH) are correctly set:
