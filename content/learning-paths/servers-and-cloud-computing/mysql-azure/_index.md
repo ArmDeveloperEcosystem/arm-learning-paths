@@ -1,6 +1,10 @@
 ---
 title: Deploy MySQL on Microsoft Azure Cobalt 100 processors
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 40
 
 who_is_this_for: This is an advanced topic that introduces MySQL deployment on Microsoft Azure Cobalt 100 (Arm-based) virtual machines. It is designed for developers migrating MySQL applications from x86_64 to Arm.
