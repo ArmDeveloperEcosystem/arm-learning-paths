@@ -1,5 +1,5 @@
 ---
-title: Install and Configure Golang on Azure Cobalt 100 Arm64
+title: Install and configure Golang on Azure Cobalt 100 Arm64
 weight: 4
 
 ### FIXED, DO NOT MODIFY

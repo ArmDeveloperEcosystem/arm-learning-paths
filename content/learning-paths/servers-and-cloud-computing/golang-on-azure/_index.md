@@ -6,7 +6,7 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory guide for software developers, DevOps engineers, and cloud architects looking to migrate their Golang (Go) applications from x86_64 to high-performance Arm-based Azure Cobalt 100 virtual machines for improved cost efficiency and performance.
 
 learning_objectives: 
-    - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image
+    - Provision an Azure Arm64 virtual machine using the Azure portal, with Ubuntu Pro 24.04 LTS as the base image
     - Deploy Golang on an Arm64-based virtual machine running Ubuntu Pro 24.04 LTS
     - Perform Golang baseline testing and benchmarking on both x86_64 and Arm64 virtual machines
 

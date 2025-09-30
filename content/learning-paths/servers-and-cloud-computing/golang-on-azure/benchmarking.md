@@ -1,5 +1,5 @@
 ---
-title: Benchmarking using go test -bench
+title: Benchmark using go test -bench
 weight: 6
 
 ### FIXED, DO NOT MODIFY
