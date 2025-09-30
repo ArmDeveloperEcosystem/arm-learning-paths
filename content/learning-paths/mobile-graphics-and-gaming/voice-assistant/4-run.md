@@ -48,7 +48,7 @@ If you have built the application using the default `llama.cpp` backend, you can
 
 For this, click the image button first:
 
-![use image alt-text#center](voice_assistant_use_multimodal_1.png "Add image button")
+![use image alt-text#center](voice_assistant_multimodal_1.png "Add image button")
 
 This will bring up the photos you can chose from:
 
@@ -60,7 +60,7 @@ Choose the image, and add image for voice assistant:
 
 You can now ask questions related to this image, the large language model will you the image and text for multimodal question answering.
 
-![ask question image alt-text#center](voice_assistant_use_multimodal_2.png "Add image to the question")
+![ask question image alt-text#center](voice_assistant_multimodal_2.png "Add image to the question")
 
 Now that you have explored how the android application is set up and built, you can see in detail how KleidiAI library is used in the next step.
 

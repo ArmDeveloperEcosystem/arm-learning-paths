@@ -61,7 +61,7 @@ The text transcription from the previous part of the pipeline is used as input t
 
 By default, the LLM runs asynchronously, streaming tokens as they are generated. The UI updates in real time with each token, which is also passed to the final pipeline stage.
 
-The voice assistant pipeline imports and builds a separate module to provide this STT functionality. You can access this at:
+The voice assistant pipeline imports and builds a separate module to provide this LLM functionality. You can access this at:
 
 ```
 https://gitlab.arm.com/kleidi/kleidi-examples/large-language-models
