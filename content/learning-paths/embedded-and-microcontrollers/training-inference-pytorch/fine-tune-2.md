@@ -1,5 +1,5 @@
 ---
-title: Train and Test the Rock-Paper-Scissors Model
+title: Train and Test the rock-paper-scissors Model
 weight: 3
 
 ### FIXED, DO NOT MODIFY

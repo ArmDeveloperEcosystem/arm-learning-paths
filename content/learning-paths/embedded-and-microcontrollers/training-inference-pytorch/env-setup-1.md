@@ -6,11 +6,9 @@ weight: 2
 layout: learningpathall
 ---
 
-## Set up your environment for Tiny Rock, Paper, Scissors on Arm (PyTorch + ExecuTorch)
+## Set up your environment for Tiny rock-paper-scissors on Arm 
 
-
-
-This Learning Path is a direct follow-up to [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm). While the previous Learning Path introduced the core concepts and toolchain, this one puts that knowledge into practice with a small, real-world example. You move from a simple [Feedforward Neural Network](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/4-build-model) to a practical computer vision task: a tiny Rock-Paper-Scissors game that runs efficiently on Arm-based edge devices.
+This Learning Path is a direct follow-up to [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm). While the previous Learning Path introduced the core concepts and toolchain, this one puts that knowledge into practice with a small, real-world example. You move from a simple [Feedforward Neural Network](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/4-build-model) to a practical computer vision task: a tiny rock-paper-scissors game that runs efficiently on Arm-based edge devices.
 
 You will train a lightweight CNN to classify images of the letters R, P, and S as "rock," "paper," or "scissors." The script uses a synthetic data renderer to create a large dataset of these images with various transformations and noise, eliminating the need for a massive real-world dataset.
 

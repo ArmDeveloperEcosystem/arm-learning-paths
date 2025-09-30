@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-# Compile and run the rock-paper-scissors model on Corstone-320 FVP
+## Compile and run the rock-paper-scissors model on Corstone-320 FVP
 
-This section shows how to compile your trained Rock, Paper, Scissors model and run it on the Corstone-320 Fixed Virtual Platform (FVP), a simulated Arm-based edge device. This completes the end-to-end workflow for deploying a TinyML model for on-device inference.
+This section shows how to compile your trained rock-paper-scissors model and run it on the Corstone-320 Fixed Virtual Platform (FVP), a simulated Arm-based edge device. This completes the end-to-end workflow for deploying a TinyML model for on-device inference.
 
 ## Compile and build the executable
 
@@ -75,7 +75,7 @@ Build the executable:
 cmake --build "$ET_HOME/examples/arm/executor_runner/cmake-out" -j --target arm_executor_runner
 ```
 
-### Run the model on the FVP
+## Run the model on the FVP
 With the `arm_executor_runner` executable ready, you can now run it on the Corstone-320 FVP to see the model on a simulated Arm device.
 
 ```bash
