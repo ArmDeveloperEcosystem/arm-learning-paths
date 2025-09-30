@@ -23,7 +23,7 @@ There are many enhancements added to Golang version 1.18, that have resulted in 
 The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) also recommends Golang version 1.18 as the minimum recommended on the Arm platforms.
 {{% /notice %}}
 
-## Extract the archive to `/usr/local`
+## Extract the archive 
 
 Unpack the downloaded archive into `/usr/local`, which is the conventional directory for installing system-wide software on Linux. This ensures the Go toolchain is available for all users and integrates cleanly with the system’s environment.
 
@@ -31,7 +31,7 @@ Unpack the downloaded archive into `/usr/local`, which is the conventional direc
 sudo tar -C /usr/local -xzf ./go1.25.0.linux-arm64.tar.gz
 ```
 
-## Add Go to your shell `PATH`
+## Add Go to your shell PATH
 
 To make the Go toolchain accessible from any directory, add its binary location to your shell’s `PATH` environment variable. Updating your `.bashrc` file ensures this change persists across sessions:
 
@@ -39,7 +39,7 @@ To make the Go toolchain accessible from any directory, add its binary location 
 echo 'export PATH="$PATH:/usr/local/go/bin"' >> ~/.bashrc
 ```
 
-## Apply the changes immediately
+## Apply the changes
 
 After updating .bashrc, reload it so your current shell session picks up the new environment variables without requiring you to log out and back in:
 
