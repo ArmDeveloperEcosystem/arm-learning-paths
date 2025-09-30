@@ -1,12 +1,12 @@
 ---
-title: Perform Benchmark using go test -bench
+title: Run performance tests using go test -bench
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Run performance tests using go test -bench
+## Performance benchmarking with Go's built-in testing framework
 
 `go test -bench` is Go’s built-in benchmark runner. It repeatedly executes benchmark functions and reports latency (ns/op). With the `-benchmem` flag, it also reports memory usage (B/op) and allocations (allocs/op). It’s simple, reliable, and requires only writing benchmark functions in the standard Golang testing package.
 
@@ -24,7 +24,7 @@ Initialize a new module:
 ```console
 go mod init gosort-bench
 ```
-This creates a `go.mod` file, which defines the module path (gosort-bench in this case) and marks the directory as a Go project. The `go.mod` file also allows Go to manage dependencies (external libraries) automatically, ensuring your project remains reproducible and easy to maintain.
+This creates a `go.mod` file, which defines the module path (`gosort-bench` in this case) and marks the directory as a Go project. The `go.mod` file also allows Go to manage dependencies (external libraries) automatically, ensuring your project remains reproducible and easy to maintain.
 
 ## Add sorting functions
 
@@ -72,10 +72,10 @@ func partition(arr []int, low, high int) int {
     return i + 1
 }
 ```
-The code contains two sorting methods, Bubble Sort and Quick Sort, which arrange numbers in order from smallest to largest:
+The code contains two sorting methods, *Bubble Sort* and *Quick Sort*, which arrange numbers in order from smallest to largest:
 
-- Bubble Sort works by repeatedly comparing two numbers side by side and swapping them if they are in the wrong order. It keeps doing this until the whole list is sorted.
-- Quick Sort is faster. It picks a pivot number and splits the list into two groups. Numbers smaller than the pivot and numbers bigger than it. Then it sorts each group separately. The function partition helps Quick Sort decide where to split the list based on the pivot number.
+- *Bubble Sort* works by repeatedly comparing two numbers side by side and swapping them if they are in the wrong order. It keeps doing this until the whole list is sorted.
+- *Quick Sort* is faster. It picks a pivot number and splits the list into two groups. Numbers smaller than the pivot and numbers bigger than it. Then it sorts each group separately. The function partition helps Quick Sort decide where to split the list based on the pivot number.
 
 To summarize, Bubble Sort is simple but slow, while Quick Sort is more efficient and usually much faster for big lists of numbers. 
 
@@ -133,7 +133,7 @@ The code implements a benchmark that measures the performance of Bubble Sort and
 
 When you run the benchmark, Go will show you how long each sort takes and how much memory it uses, so you can compare the two sorting techniques.
 
-### Run the Benchmark
+## Run the Benchmark
 
 Execute the benchmark suite using the following command:
 ```console
@@ -156,9 +156,9 @@ ok      gosort-bench    2.905s
 
 The metrics reported by go test -bench include ns/op, which measures nanoseconds per operation and reflects latency where lower values are better, B/op, which shows the number of bytes allocated per operation and helps identify memory efficiency, and allocs/op, which indicates the number of heap allocations per operation and highlights how often memory is being allocated, with lower values preferred in all cases.
 
-### Benchmark summary on Arm64
+## Benchmark summary on Arm64
 
-Results collected on an Arm64 **D4ps_v6** Ubuntu Pro 24.04 LTS virtual machine:
+Results collected on an Arm64 D4ps_v6 Ubuntu Pro 24.04 LTS virtual machine:
 
 | Benchmark            | Value |
 |----------------------|-------|
@@ -172,7 +172,7 @@ Results collected on an Arm64 **D4ps_v6** Ubuntu Pro 24.04 LTS virtual machine:
 
 ## Benchmark summary on x86-64
 
-Results collected on an x86-64 **D4s_v6** Ubuntu Pro 24.04 LTS virtual machine:
+Results collected on an x86-64 D4s_v6 Ubuntu Pro 24.04 LTS virtual machine:
 
 | Benchmark          | Value on Virtual Machine |
 |-------------------|--------------------------|
