@@ -6,13 +6,14 @@ weight: 4
 layout: learningpathall
 ---
 
-## Install Golang on Ubuntu Pro 24.04 LTS (Arm64)
+## Install Golang on Azure Cobalt 100 (Ubuntu Pro 24.04 LTS Arm64)
 
-This section shows how to install the Go toolchain on Ubuntu Pro 24.04 LTS (Arm64), configure your environment, and verify the setup for benchmarking on Azure Cobalt 100 VMs.
+This section demonstrates how to install the Go programming language toolchain on Ubuntu Pro 24.04 LTS (Arm64), configure your development environment, and verify the setup for optimal performance on Azure Cobalt 100 virtual machines.
 
-## Download the Go archive
+## Download the Official Go Distribution
 
-Use the following command to download the Arm64 build from the official Go distribution (update the version as needed):
+Download the latest Arm64-optimized Go distribution directly from the official Go website. This ensures you get the best performance on Azure Cobalt 100 processors:
+
 ```console
 wget https://go.dev/dl/go1.25.0.linux-arm64.tar.gz
 ```
@@ -39,9 +40,9 @@ To make the Go toolchain accessible from any directory, add its binary location 
 echo 'export PATH="$PATH:/usr/local/go/bin"' >> ~/.bashrc
 ```
 
-## Apply the changes
+## Reload Shell Configuration
 
-After updating .bashrc, reload it so your current shell session picks up the new environment variables without requiring you to log out and back in:
+Apply the environment changes to your current shell session without requiring a logout/login cycle:
 
 ```console
 source ~/.bashrc
