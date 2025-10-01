@@ -49,7 +49,7 @@ This will build the benchmark tool inside ./build/Linux/Release/onnxruntime_perf
 Now that the benchmarking tool has been built, you can benchmark the **squeezenet-int8.onnx** model, as below:
 
 ```console
-./build/Linux/Release/onnxruntime_perf_test -e cpu -r 100 -m times -s -Z -I <path-to-squeezenet-int8.onnx>
+./build/Linux/Release/onnxruntime_perf_test -e cpu -r 100 -m times -s -Z -I ../squeezenet-int8.onnx
 ```
 - **e cpu**: Use the CPU execution provider (not GPU or any other backend). 
 - **r 100**: Run 100 inferences. 
