@@ -8,14 +8,14 @@ layout: learningpathall
 
 ## Install MySQL on Azure Cobalt 100
 
-This section walks you through installing and securing MySQL on an Azure Arm64 virtual machine. You will set up the database, configure access, and verify it’s running—ready for development and testing.
+This section demonstrates how to install and secure MySQL on an Azure Arm64 virtual machine. You will configure the database, set up security measures, and verify that the service is running properly, making the environment ready for development, testing, or production deployment.
 
-Start by installing MySQL and other essential tools: 
+## Install MySQL and Tools
 
-## Install MySQL and tools
+Before installing MySQL, it’s important to ensure your VM is updated so you have the latest Arm64-optimized libraries and security patches. Ubuntu and other modern Linux distributions maintain Arm-native MySQL packages, so installation is straightforward with the system package manager.
 
 1. Update the system and install MySQL
-You update your system's package lists to ensure you get the latest versions and then install the MySQL server using the package manager.
+Update your system's package lists to ensure you get the latest versions and then install the MySQL server using the package manager.
 
 ```console
 sudo apt update
@@ -24,12 +24,13 @@ sudo apt install -y mysql-server
 
 2. Secure MySQL installation
 
-After installing MySQL, You are locking down your database so only you can access it safely. It’s like setting up a password and cleaning up unused accounts to make sure no one else can mess with your data.
+Once MySQL is installed, the default configuration is functional but not secure. 
+You will lock down your database so only you can access it safely. This involves setting up a password and cleaning up unused accounts to make sure no one else can access your data.
 
 ```console
 sudo mysql_secure_installation
 ```
-Follow the prompts:
+This interactive script walks you through several critical security steps. Follow the prompts:
 
 - Set a strong password for root.
 - Remove anonymous users.
@@ -37,19 +38,21 @@ Follow the prompts:
 - Remove test databases.
 - Reload privilege tables.
 
+After securing your MySQL installation, the database is significantly harder to compromise.
+
 3. Start and enable MySQL service
-You are turning on the database so it starts working and making sure it stays on every time you turn on your computer.:
+After installation and securing MySQL, the next step is to ensure that the MySQL server process (mysqld) is running and configured to start automatically whenever your VM boots.
 
 ```console
 sudo systemctl start mysql
 sudo systemctl enable mysql
 ```
-Check the status:
+Verify MySQL Status:
 
 ```console
 sudo systemctl status mysql
 ```
-The output should look like:
+You should see output similar to:
 
 ```output
 mysql.service - MySQL Community Server
@@ -63,11 +66,11 @@ mysql.service - MySQL Community Server
      CGroup: /system.slice/mysql.service
              └─3255 /usr/sbin/mysqld
 ```
-You should see `active (running)`.
+You should see `active (running)` in the output, which indicates that MySQL is up and running.
 
 4. Verify MySQL version 
 
-You check the installed version of MySQL to confirm it’s set up correctly and is running.
+You check also check the installed version of MySQL to confirm it’s set up correctly and is running.
 
 ```console
 mysql -V 
@@ -79,12 +82,12 @@ mysql  Ver 8.0.43-0ubuntu0.24.04.1 for Linux on aarch64 ((Ubuntu))
 ```
 5. Access MySQL shell
 
-You log in to the MySQL interface using the root user to interact with the database and perform administrative tasks:
+After confirming that MySQL is running, the next step is to log in to the MySQL monitor (shell). This is the command-line interface used to interact with the database server for administrative tasks such as creating users, managing databases, and tuning configurations.
 
 ```
 sudo mysql
 ```
-You should see output similar to the following:
+You should see output similar to:
 
 ```output
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -101,16 +104,18 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql>
 ```
+The `mysql> prompt` indicates you are now in the MySQL interactive shell and can issue SQL commands.
 
 6. Create a new user
 
-You are setting up a new area to store your data and giving someone special permissions to use it. This helps you organize your work better and control who can access it:
+While the root account gives you full control, it’s best practice to avoid using it for day-to-day database operations. Instead, you should create separate users with specific privileges.
+Start by entering the MySQL shell:
 
 ```console
 sudo mysql
 ```
 
-Inside the MySQL shell, run:
+Inside the shell, create a new user:
 
 ```sql
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'MyStrongPassword!';
@@ -119,19 +124,21 @@ FLUSH PRIVILEGES;
 EXIT;
 ```
 
-- Replace **MyStrongPassword!** with the password you want.
-- This reloads the privilege tables so your new password takes effect immediately.
+Replace `MyStrongPassword!` with a strong password of your choice.
+`FLUSH PRIVILEGES;` Reloads the in-memory privilege tables from disk, applying changes immediately.
 
 ## Verify Access with New User 
 
-You test logging into MySQL using the new user account to ensure it works and has the proper permissions. In my case new user is `admin`.
+Once you’ve created a new MySQL user, it’s critical to test login and confirm that the account works as expected. This ensures the account is properly configured and can authenticate against the MySQL server.
+
+Run the following command ( for user `admin`):
 
 ```console
 mysql -u admin -p
 ```
-- Enter your current `admin` password.
+You will then be asked to enter the password you created in the previous step.
 
-You should see output similar to the following:
+You should see output similar to:
 
 ```output
 Enter password:
