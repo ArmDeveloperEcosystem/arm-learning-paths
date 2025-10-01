@@ -12,7 +12,7 @@ who_is_this_for: This is an introductory topic that introduces MySQL deployment 
 learning_objectives:
     - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image.
     - Deploy MySQL on the Ubuntu virtual machine.
-    - Perform MySQL baseline testing and benchmarking on both x86_64 and Arm64 virtual machines.
+    - Perform MySQL baseline testing and benchmarking on Arm64 virtual machines.
 
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
