@@ -6,9 +6,9 @@ weight: 7
 layout: learningpathall
 ---
 
-## Benchmark MySQL on Azure Cobalt 100 Arm-based instances and x86_64 instances
+## Benchmark MySQL on Azure Cobalt 100 Arm-based instances 
 
-To understand how MySQL performs on Azure Cobalt 100 (Arm64) VMs compared to x86_64 instances, you can use the built-in mysqlslap tool.
+To understand how MySQL performs on Azure Cobalt 100 (Arm64) VMs, you can use the built-in `mysqlslap` tool.
 
 `mysqlslap` is the official MySQL benchmarking tool used to simulate multiple client connections and measure query performance. It helps evaluate read/write throughput, query response times, and overall MySQL server performance under different workloads, making it ideal for baseline testing and optimization.
 
