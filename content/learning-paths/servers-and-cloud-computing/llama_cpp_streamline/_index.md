@@ -1,5 +1,5 @@
 ---
-title: Use Streamline to analyze LLM on CPU with llama.cpp and KleidiAI
+title: Analyze llama.cpp with KleidiAI LLM performance using Streamline
 
 draft: true
 cascade:
@@ -7,10 +7,10 @@ cascade:
 
 minutes_to_complete: 50
 
-who_is_this_for: This advanced topic is for software developers, performance engineers, and AI practitioners who want to run llama.cpp on Arm-based CPUs, learn how to use Arm Streamline to capture and analyze performance data, understand how LLM inference behaves at the Prefill and Decode stages.
+who_is_this_for: This is an advanced topic for software developers, performance engineers, and AI practitioners who want to run llama.cpp on Arm-based CPUs, learn how to use Arm Streamline to capture and analyze performance data, and understand how LLM inference behaves at the Prefill and Decode stages.
 
 learning_objectives:
-    - Describe the architecture of llama.cpp and the role of Prefill and Decode stages
+    - Describe the architecture of llama.cpp and the role of the Prefill and Decode stages
     - Integrate Streamline Annotations into llama.cpp for fine-grained performance insights
     - Capture and interpret profiling data with Streamline
     - Use Annotation Channels to analyze specific operators during token generation
@@ -18,7 +18,7 @@ learning_objectives:
 
 prerequisites:
     - Basic understanding of llama.cpp
-    - Understanding of transformer model
+    - Understanding of transformer models
     - Knowledge of Streamline usage
     - An Arm Neoverse or Cortex-A hardware platform running Linux or Android to test the application
 
@@ -37,7 +37,6 @@ tools_software_languages:
     - C++
     - llama.cpp
     - KleidiAI
-    - Neoverse
     - Profiling
 operatingsystems:
     - Linux
