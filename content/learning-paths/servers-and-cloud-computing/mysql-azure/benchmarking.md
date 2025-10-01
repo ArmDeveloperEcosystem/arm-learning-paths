@@ -143,5 +143,3 @@ The benchmark results on the Arm64 virtual machine show:
   Moderate Workload Handling: With 10 clients and an average of 1 query per client, the system handled concurrent operations efficiently without significant delays.
   
 This demonstrates that the MySQL setup on Arm64 provides reliable and steady performance for both data insertion and retrieval tasks, making it a solid choice for applications requiring dependable database operations.
-
-You have now benchmarked MySql on an Azure Cobalt 100 Arm64 virtual machine and compared results with x86_64.
