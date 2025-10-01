@@ -14,7 +14,7 @@ Install Python, create a virtual environment, and use pip to install ONNX, ONNX 
 
 ```console
 sudo apt update
-sudo apt install -y python3 python3-pip python3-virtualenv
+sudo apt install -y python3 python3-pip python3-virtualenv python3-venv
 ```
 Create and activate a virtual environment:
 
@@ -39,7 +39,7 @@ Create **version.py** as below:
 import onnx  
 import onnxruntime 
 
-print("ONNX version:", onnx.version)  
+print("ONNX version:", onnx.__version__)  
 print("ONNX Runtime version:", onnxruntime.__version__)  
 ```
 Now, run version.py: 
@@ -49,8 +49,8 @@ python3 version.py
 ```
 You should see an output similar to:
 ```output
-ONNX version: 1.18.0
-ONNX Runtime version: 1.22.0
+ONNX version: 1.19.0
+ONNX Runtime version: 1.23.0
 ```
 ### Download and Validate ONNX Model - SqueezeNet:
 SqueezeNet is a lightweight convolutional neural network (CNN) architecture designed to achieve comparable accuracy to AlexNet, but with fewer parameters and smaller model size. 
