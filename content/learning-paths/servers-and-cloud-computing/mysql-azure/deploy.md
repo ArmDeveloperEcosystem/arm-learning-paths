@@ -156,4 +156,4 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement
 mysql> exit
 ```
 
-MySQL installation is complete. You can now proceed with the baseline testing of MySQL in the next section
+With this, the MySQL installation is complete. You can now proceed with baseline testing of MySQL in the next section.
