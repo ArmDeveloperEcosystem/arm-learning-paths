@@ -5,9 +5,9 @@ draft: true
 cascade:
     draft: true
     
-minutes_to_complete: 40
+minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic that introduces MySQL deployment on Microsoft Azure Cobalt 100 (Arm-based) virtual machines. It is designed for developers migrating MySQL applications from x86_64 to Arm.
+who_is_this_for: This is an introductory topic that introduces MySQL deployment on Microsoft Azure Cobalt 100 (Arm-based) virtual machines. It is designed for developers migrating MySQL applications from x86_64 to Arm.
 
 learning_objectives:
     - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image.
@@ -21,7 +21,7 @@ prerequisites:
 author: Pareena Verma
 
 ### Tags
-skilllevels: Advanced
+skilllevels: Introductory
 subjects: Databases
 cloud_service_providers: Microsoft Azure
 
