@@ -22,9 +22,9 @@ Typical CNN architecture by Aphex34, licensed under
 
 Common CNN applications include:
 
-- Image classification: identifying the main object in an image, such as classifying a photo as a cat or dog
-- Object detection: locating specific objects in an image and draw bounding boxes
-- Facial recognition: identifying or verify individuals based on facial features
+- Image classification: identify the main object in an image, such as classifying a photo as a cat or dog
+- Object detection: locate specific objects in an image and draw bounding boxes
+- Facial recognition: identify or verify individuals based on facial features
 
 For the rock-paper-scissors game, you use a tiny CNN to classify the letters R, P, and S as the corresponding hand gestures.
 
