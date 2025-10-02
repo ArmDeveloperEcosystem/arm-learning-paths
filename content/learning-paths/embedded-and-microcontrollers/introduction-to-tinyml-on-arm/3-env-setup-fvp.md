@@ -8,22 +8,24 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-In this section, you will run scripts to set up the Corstone-320 reference package.
+## Overview
 
-The Corstone-320 Fixed Virtual Platform (FVP) is a pre-silicon software development environment for Arm-based microcontrollers. It provides a virtual representation of hardware, allowing developers to test and optimize software before actual hardware is available. Designed for AI and machine learning workloads, it includes support for Arm's Ethos-U NPU and Cortex-M processors, making it ideal for embedded AI applications. The FVP accelerates development by enabling early software validation and performance tuning in a flexible, simulation-based environment.
+In this section, you run scripts to set up the Corstone-320 reference package.
+
+The Corstone-320 Fixed Virtual Platform (FVP) is a pre-silicon software development environment for Arm-based microcontrollers. It provides a virtual representation of hardware so you can test and optimize software before boards are available. Designed for AI and machine learning workloads, it includes support for Arm Ethos-U NPUs and Cortex-M processors, which makes it well-suited to embedded AI applications. The FVP accelerates development by enabling early software validation and performance tuning in a flexible, simulation-based environment.
 
 The Corstone reference system is provided free of charge, although you will have to accept the license in the next step. For more information on Corstone-320, check out the [official documentation](https://developer.arm.com/documentation/109761/0000?lang=en).
 
-## Corstone-320 FVP Setup for ExecuTorch
+## Set up Corstone-320 FVP for ExecuTorch
 
-Run the FVP setup script in the ExecuTorch repository.
+Run the FVP setup script in the ExecuTorch repository:
 
 ```bash
 cd $HOME/executorch
 ./examples/arm/setup.sh --i-agree-to-the-contained-eula
 ```
 
-After the script has finished running, it prints a command to run to finalize the installation. This step adds the FVP executables to your system path.
+When the script completes, it prints a command to finalize the installation by adding the FVP executables to your `PATH`:
 
 ```bash
 source $HOME/executorch/examples/arm/ethos-u-scratch/setup_path.sh

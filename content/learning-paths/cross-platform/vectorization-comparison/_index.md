@@ -1,10 +1,6 @@
 ---
 title: "Migrate x86-64 SIMD to Arm64"
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for developers migrating vectorized (SIMD) code from x86-64 to Arm64.

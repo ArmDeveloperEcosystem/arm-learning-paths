@@ -36,7 +36,7 @@ class SimpleNN(torch.nn.Module):
         return out
 
 # Create the model instance
-input_size = 10   # example input features size
+input_size = 10   # example input feature size
 hidden_size = 5   # hidden layer size
 output_size = 2   # number of output classes
 
@@ -52,7 +52,7 @@ ModelInputs = x
 print("Model successfully exported to simple_nn.pte")
 ```
 
-## Running the model on the Corstone-320 FVP
+## Run the model on the Corstone-320 FVP
 
 The final step is to take the Python-defined model and run it on the Corstone-320 FVP. This was done upon running the `run.sh` script in a previous section. To wrap up the Learning Path, you will perform these steps separately to better understand what happened under the hood. Start by setting some environment variables that are used by ExecuTorch.
 
@@ -61,7 +61,7 @@ export ET_HOME=$HOME/executorch
 export executorch_DIR=$ET_HOME/build
 ```
 
-Then, generate a model file on the `.pte` format using the Arm examples. The Ahead-of-Time (AoT) Arm compiler will enable optimizations for devices like the Grove Vision AI Module V2 and the Corstone-320 FVP. Run it from the ExecuTorch root directory.
+Generate a model in ExecuTorch `.pte` format using the Arm examples. The AoT Arm compiler enables optimizations for devices such as the Grove Vision AI Module V2 and the Corstone-320 FVP. Run the compiler from the ExecuTorch root directory:
 
 ```bash
 cd $ET_HOME
@@ -90,7 +90,7 @@ cmake --build $ET_HOME/examples/arm/executor_runner/cmake-out --parallel -- arm_
 
 ```
 
-Now run the model on the Corstone-320 with the following command:
+Run the model on Corstone-320:
 
 ```bash
 FVP_Corstone_SSE-320 \
@@ -104,9 +104,7 @@ FVP_Corstone_SSE-320 \
 ```
 
 {{% notice Note %}}
-
-The argument `mps4_board.visualisation.disable-visualisation=1` disables the FVP GUI. This can speed up launch time for the FVP.
-
+The argument `mps4_board.visualisation.disable-visualisation=1` disables the FVP GUI and can speed up launch time
 {{% /notice %}}
 
 Observe that the FVP loads the model file.
@@ -119,4 +117,4 @@ I [executorch:arm_executor_runner.cpp:412] Model in 0x70000000 $
 I [executorch:arm_executor_runner.cpp:414] Model PTE file loaded. Size: 3360 bytes.
 ```
 
-You have now set up your environment for TinyML development on Arm, and tested a small PyTorch and ExecuTorch Neural Network. In the next Learning Path of this series, you will learn about optimizing neural networks to run on Arm.
+You have now set up your environment for TinyML development on Arm and tested a small PyTorch model with ExecuTorch on the Corstone-320 FVP. In the next Learning Path, you learn how to optimize neural networks to run efficiently on Arm.
