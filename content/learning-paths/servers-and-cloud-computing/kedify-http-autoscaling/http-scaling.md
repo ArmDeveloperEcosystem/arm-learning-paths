@@ -30,7 +30,7 @@ There are three main components involved in the process:
 
 ## Configure the Ingress IP environment variable
 
-Before testing the application, make sure the INGRESS_IP environment variable is set to your ingress controller’s external IP address or hostname.
+Before testing the application, make sure the `INGRESS_IP` environment variable is set to your ingress controller’s external IP address or hostname.
 
 If you followed the [Install Ingress Controller](../install-ingress/) guide, you should already have this set. If not, or if you're using an existing ingress controller, run this command:
 
@@ -200,13 +200,16 @@ spec:
 EOF
 ```
 
-Key fields explained:
-- `type: kedify-http` - specifies that Kedify’s HTTP scaler should be used
-- `hosts`, `pathPrefixes` - define which requests are monitored for scaling decisions
-- `service`, `port` - identify the Kubernetes Service and port that will receive the traffic
-- `scalingMetric: requestRate`, `granularity: 1s`, and `targetValue: "10"` - scale out when sustained request rate exceeds ~10 req/s per replica
-- `minReplicaCount: 0` — Enables scale-to-zero when there is no traffic.
-- `trafficAutowire: ingress` — Automatically wires your Ingress to the Kedify proxy for seamless traffic management.
+## Key fields explained
+
+Use the following field descriptions to understand how the `ScaledObject` controls HTTP-driven autoscaling and how each setting affects traffic routing and scale decisions:
+
+- `type: kedify-http` - Uses Kedify’s HTTP scaler.
+- `hosts`, `pathPrefixes` - Define which requests are monitored for scaling decisions.
+- `service`, `port` - Identify the Kubernetes Service and port that receive traffic.
+- `scalingMetric: requestRate`, `granularity: 1s`, `window: 10s`, `targetValue: "10"` - Scales out when the average request rate exceeds ~10 requests/second (rps) per replica over the last 10 seconds.
+- `minReplicaCount: 0` - Enables scale to zero when there is no traffic.
+- `trafficAutowire: ingress` - Automatically wires your Ingress to the Kedify proxy for seamless traffic management.
 
 After applying, the `ScaledObject` will appear in the Kedify dashboard (https://dashboard.kedify.io/).
 
@@ -224,7 +227,7 @@ To confirm that the application has scaled down, run the following command and w
 watch kubectl get deployment application -n default
 ```
 
-You should output similar to:
+You should see output similar to:
 ```output
 Every 2,0s: kubectl get deployment application -n default
 
@@ -233,14 +236,13 @@ application   0/0     0            0           110s
 ```
 This continuously monitors the deployment status in the default namespace. Once traffic stops and the idle window has passed, you should see the application deployment report 0/0 replicas, indicating that it has successfully scaled to zero.
 
-### Verify the app can scale from zero
+## Verify the app can scale from zero
 
 Send a request to trigger scale-up:
 
 ```bash
 curl -I -H "Host: application.keda" http://$INGRESS_IP
 ```
-The application should scale from 0 → 1 replica automatically.
 You should receive an HTTP 200 OK response, confirming that the service is reachable again.
 
 The application scales from 0 → 1 replica automatically, and you should receive an HTTP `200 OK` response.
@@ -288,4 +290,4 @@ This will delete the `ScaledObject`, Ingress, Service, and Deployment associated
 
 ## Next steps
 
-To go further, you can explore the Kedify [How-to guides](https://docs.kedify.io/how-to/) for more configurations such as Gateway API, Istio VirtualService, or OpenShift Routes.
+To go further, you can explore the [Kedify How-To Guides](https://docs.kedify.io/how-to/) for more configurations such as Gateway API, Istio VirtualService, or OpenShift Routes.

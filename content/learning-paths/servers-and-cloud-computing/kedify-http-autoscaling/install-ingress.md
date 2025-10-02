@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ## Install an ingress controller for HTTP autoscaling on Kubernetes
 
-Before deploying HTTP applications with Kedify autoscaling, you need an ingress controller to handle incoming traffic. Most managed Kubernetes services (AWS EKS, Google GKE, Azure AKS) do not include an ingress controller by default. In this Learning Path, you install the NGINX Ingress Controller with Helm and target Arm64 nodes.
+Before deploying HTTP applications with Kedify autoscaling, you need an ingress controller to handle incoming traffic. Most managed Kubernetes services (AWS EKS, Google GKE, Azure AKS) do not include an ingress controller by default. In this Learning Path, you install the NGINX Ingress Controller with Helm and target arm64 nodes.
 
 {{% notice Note %}}
 If your cluster already has an ingress controller installed and configured, you can skip this step and proceed to the [Autoscale HTTP applications with Kedify and Kubernetes Ingress section](../http-scaling/).
