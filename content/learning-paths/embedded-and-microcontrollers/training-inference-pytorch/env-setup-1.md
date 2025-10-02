@@ -15,7 +15,7 @@ You will train a lightweight CNN to classify images of the letters R, P, and S a
 ### What is a Convolutional Neural Network (CNN)?
 A Convolutional Neural Network (CNN) is a type of deep neural network primarily used for analyzing visual imagery. Unlike traditional neural networks, CNNs are designed to process pixel data by using a mathematical operation called convolution. This allows them to automatically and adaptively learn spatial hierarchies of features from input images, from low-level features like edges and textures to high-level features like shapes and objects.
 
-![CNN architecture](Typical_cnn.png)
+![CNN architecture](typical_cnn.png)
 
 Typical CNN architecture by Aphex34, licensed under 
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
