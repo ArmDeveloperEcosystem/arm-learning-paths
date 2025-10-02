@@ -48,7 +48,7 @@ This indicates the model successfully executed a single forward pass through the
 
 #### Output summary:
 
-Single inference latency(0.00260 sec): This is the time required for the model to process one input image and produce an output.
-Cold-start performance: The first run includes graph loading, memory allocation, and model initialization overhead.
-Subsequent inferences are usually faster due to caching and optimized execution paths.model. 
-- This demonstrates that the setup is fully working, and ONNX Runtime efficiently executes quantized models on Arm64. 
+Single inference latency(0.00260 sec): This is the time required for the model to process one input image and produce an output. The first run includes graph loading, memory allocation, and model initialization overhead.
+Subsequent inferences are usually faster due to caching and optimized execution.
+
+This demonstrates that the setup is fully working, and ONNX Runtime efficiently executes quantized models on Arm64. 
