@@ -1,5 +1,5 @@
 ---
-title: "Install Ingress Controller"
+title: "Install an ingress controller"
 weight: 3
 layout: "learningpathall"
 ---

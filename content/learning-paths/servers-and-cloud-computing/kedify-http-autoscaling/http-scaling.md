@@ -1,10 +1,11 @@
 ---
-title: "HTTP Scaling for Ingress-Based Applications"
+title: "Autoscale HTTP applications with Kedify and Kubernetes Ingress"
 weight: 4
 layout: "learningpathall"
 ---
+## Overview
 
-In this section, you’ll gain hands-on experience with Kedify HTTP autoscaling. You will deploy a small web service, expose it through a standard Kubernetes Ingress, and rely on Kedify’s autowiring to route traffic via its proxy so requests are measured and drive scaling.
+In this section, you’ll gain hands-on experience with Kedify HTTP autoscaling. You will deploy a small web service, expose it through a standard Kubernetes Ingress, and rely on Kedify’s autowiring to route traffic through its proxy so requests are measured and drive scaling.
 
 You will scale a real HTTP app exposed through Kubernetes Ingress using Kedify’s [kedify-http](https://docs.kedify.io/scalers/http-scaler/) scaler. You will deploy a simple application, enable autoscaling with a [ScaledObject](https://keda.sh/docs/latest/concepts/scaling-deployments/), generate load, and observe the system scale out and back in (including scale-to-zero when idle).
 
@@ -18,10 +19,12 @@ Ingress → kedify-proxy → Service → Deployment
 
 The [Kedify Proxy](https://docs.kedify.io/scalers/http-scaler/#kedify-proxy) gathers request metrics used by the scaler to make decisions.
 
-## Deployment Overview
-  * Deployment & Service: An HTTP server with a small response delay to simulate work
-  * Ingress: Public entry point configured using host `application.keda`
-  * ScaledObject: A Kedify HTTP scaler using `trafficAutowire: ingress`
+## Deployment overview
+
+There are three main components at play:
+* For the application deployment and service, there is an HTTP server with a small response delay to simulate work.
+* For ingress, there is a public entry point that is configured using the `application.keda` host.
+* For the ScaledObject, there is a Kedify HTTP scaler using `trafficAutowire: ingress`.
 
 ## Configure the Ingress IP environment variable
 
@@ -117,18 +120,18 @@ EOF
 ```
 
 Notes:
-- `RESPONSE_DELAY` adds ~300ms latency per request, making scaling effects easier to see.
-- The Ingress uses host `application.keda`. To access this app we will use your ingress controller’s IP with a `Host:` header (shown below).
+- `RESPONSE_DELAY` adds ~300 ms latency per request, making scaling effects easier to see.
+- The Ingress uses host `application.keda`. To access this app, you will use your Ingress controller’s IP with a `Host:` header (shown below).
 
-## Verify the application is running correctly
+## Verify the application is running
 
-You will now check if you have 1 replica of the application deployed and ready:
+Run the following command to check that 1 replica is ready:
 
 ```bash
 kubectl get deployment application
 ```
 
-In the output you should see 1 replica ready:
+Expected output includes 1 available replica:
 ```output
 NAME          READY   UP-TO-DATE   AVAILABLE   AGE
 application   1/1     1            1           3m44s
@@ -225,9 +228,9 @@ application   0/0     0            0           110s
 ```
 This continuously monitors the deployment status in the default namespace. Once traffic stops and the idle window has passed, you should see the application deployment report 0/0 replicas, indicating that it has successfully scaled to zero.
 
-#### Verify the app can scale from zero
+### Verify the app can scale from zero
 
-Next, test that the application can scale back up from zero when traffic arrives. Send a request to the app:
+Send a request to trigger scale-up:
 
 ```bash
 curl -I -H "Host: application.keda" http://$INGRESS_IP
@@ -235,7 +238,7 @@ curl -I -H "Host: application.keda" http://$INGRESS_IP
 The application should scale from 0 → 1 replica automatically.
 You should receive an HTTP 200 OK response, confirming that the service is reachable again.
 
-#### Test higher load
+The application scales from 0 → 1 replica automatically, and you should receive an HTTP `200 OK` response.
 
 Now, generate a heavier, sustained load against the application. You can use `hey` (or a similar benchmarking tool):
 
