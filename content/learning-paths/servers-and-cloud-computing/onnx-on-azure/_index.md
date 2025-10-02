@@ -7,7 +7,7 @@ cascade:
     
 minutes_to_complete: 60   
 
-who_is_this_for: This Learning Path introduces ONNX deployment on Microsoft Azure Cobalt 100 (Arm-based) virtual machines. It is designed for developers migrating ONNX-based applications from x86_64 to Arm with minimal or no changes.
+who_is_this_for: This Learning Path introduces ONNX deployment on Microsoft Azure Cobalt 100 (Arm-based) virtual machines. It is designed for developers deploying ONNX-based applications on Arm-based machines.
 
 learning_objectives:
     - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image.
@@ -19,10 +19,10 @@ prerequisites:
     - Basic understanding of Python and machine learning concepts.
     - Familiarity with [ONNX Runtime](https://onnxruntime.ai/docs/) and Azure cloud services.
 
-author: Jason Andrews
+author: Pareena Verma    
 
 ### Tags
-skilllevels: Advanced
+skilllevels: Introductory
 subjects: ML
 cloud_service_providers: Microsoft Azure
 
