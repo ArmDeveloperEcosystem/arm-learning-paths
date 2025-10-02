@@ -8,24 +8,25 @@ layout: learningpathall
 
 ## Run llama-cli and analyze the data with Streamline
 
-After successfully building llama-cli, the next step is to set up the runtime environment on your Arm platform.
+After successfully building llama-cli, the next step is to set up the runtime environment on your Arm platform. This can be your development machine or another Arm system.
 
-### Set up gatord 
+### Set up the gator daemon
 
-The gator daemon (gatord) is the Streamline collection agent that runs on the target device. It captures performance data including CPU metrics, PMU events, and annotations, then sends this data to the Streamline analysis tool running on your host machine. The daemon needs to be running on your target device before you can capture performance data.
+The gator daemon, `gatord`, is the Streamline collection agent that runs on the target device. It captures performance data including CPU metrics, PMU events, and annotations, then sends this data to the Streamline analysis tool running on your host machine. The daemon needs to be running on your target device before you can capture performance data.
 
 Depending on how you built llama.cpp:
 
 For the cross-compiled build flow:
 
   - Copy the `llama-cli` executable to your Arm target. 
-  - Also copy the `gatord` binary from the Arm DS or Streamline installation:  
-    - Linux: `Arm\Development Studio 2024.1\sw\streamline\bin\linux\arm64`  
-    - Android: `Arm\Development Studio 2024.1\sw\streamline\bin\android\arm64`  
+  - Copy the `gatord` binary from the Arm Performance Studio release. If you are targeting Linux, take it from `streamline\bin\linux\arm64` and if you are targeting Android take it from `streamline\bin\android\arm64`.
+
+Put both of these programs in your home directory on the target system. 
 
 For the native build flow:
+  - Use the `llama-cli` from your local build in `llama.cpp/build/bin` and the `gatord` you compiled earlier at `~/gator/build-native-gcc-rel/gatord`.  
 
-  - Use the `llama-cli` from your local build and the `gatord` you compiled earlier (`~/gator/build-native-gcc-rel/gatord`).  
+You now have the `gatord` and the `llama-cli` on the computer you want to run and profile. 
 
 ### Download a lightweight model
 
@@ -49,8 +50,9 @@ Start the gator daemon on your Arm target:
 You should see similar messages to those shown below:
 
 ``` bash
-Streamline Data Recorder v9.4.0 (Build 9b1e8f8)
-Copyright (c) 2010-2024 Arm Limited. All rights reserved.
+Streamline Data Recorder v9.6.0 (Build oss)
+Copyright (c) 2010-2025 Arm Limited. All rights reserved.
+
 Gator ready
 ```
 
