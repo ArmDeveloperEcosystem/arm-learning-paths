@@ -9,7 +9,7 @@ In this section, you’ll gain hands-on experience with Kedify HTTP autoscaling.
 
 You will scale a real HTTP app exposed through Kubernetes Ingress using [Kedify’s HTTP Scaler](https://docs.kedify.io/scalers/http-scaler/), and then move on to deploy a simple application, enable autoscaling with a scaled object, generate load, and observe the system scale out and back in (including scale-to-zero when idle). 
 
-For more information, see [Scaling Deployments, StatefulSets & Custom Resources](https://keda.sh/docs/latest/concepts/scaling-deployments/) at the KEDA website.  
+For more information, see [Scaling Deployments, StatefulSets & Custom Resources](https://keda.sh/docs/latest/concepts/scaling-deployments/) on the KEDA website.  
 
 ## How it works
 
@@ -47,8 +47,6 @@ If your ingress controller service uses a different name or namespace, update th
 ## Deploy the application and configure Ingress
 
 Now you will deploy a simple HTTP server and expose it using an Ingress resource. The source code for this application is available on the [Kedify GitHub repository](https://github.com/kedify/examples/tree/main/samples/http-server).
-
-### Deploy the application
 
 Run the following command to deploy your application:
 
@@ -121,9 +119,12 @@ spec:
 EOF
 ```
 
-Notes:
-- `RESPONSE_DELAY` adds ~300 ms latency per request, making scaling effects easier to see.
-- The Ingress uses host `application.keda`. To access this app, you will use your Ingress controller’s IP with a `Host:` header (shown below).
+## Key settings explained
+
+The manifest includes a few key options that affect scaling behavior:
+
+- `RESPONSE_DELAY` is set in the Deployment manifest above and adds approximately 300 ms latency per request; this slower response time increases the number of concurrent requests, making scaling effects easier to observe.
+- The ingress uses the host `application.keda`. To access this app, use your Ingress controller’s IP with a `Host:` header.
 
 ## Verify the application is running
 
@@ -163,6 +164,7 @@ The application is now running. Next, you will enable autoscaling so that it can
 ```bash
 cat <<'EOF' | kubectl apply -f -
 apiVersion: keda.sh/v1alpha1
+
 kind: ScaledObject
 metadata:
   name: application

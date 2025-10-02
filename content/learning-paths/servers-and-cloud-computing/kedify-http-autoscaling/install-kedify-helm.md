@@ -5,7 +5,7 @@ layout: "learningpathall"
 ---
 
 ## Overview
-In this section, you will install Kedify on your Kubernetes cluster using Helm. You will add the Kedify chart repository, install KEDA (Kedify build), the HTTP Scaler, and the Kedify Agent. You will then verify the installation. This enables HTTP autoscaling on Kubernetes with KEDA and Kedify, including arm64 nodes.
+In this section, you will install Kedify on your Kubernetes cluster using Helm. You will add the Kedify chart repository, then install three separate Helm charts: KEDA (Kedify build) for event-driven autoscaling, the HTTP Scaler for HTTP-based scaling, and the Kedify Agent for connecting your cluster to Kedify's cloud service. You will then verify the installation. This enables HTTP autoscaling on Kubernetes with KEDA and Kedify, including arm64 nodes.
 
 For more information and other installation methods on Arm, see the [Kedify installation documentation](https://docs.kedify.io/installation/helm#installation-on-arm).
 
@@ -28,7 +28,7 @@ kubectl get secret -n keda kedify-agent -o=jsonpath='{.data.apikey}' | base64 --
 Otherwise, in the Kedify dashboard go to **Organization** → **API Keys**, select **Create Agent Key**, and copy the key.
 
 {{% notice Note %}}
-The API key is shared across all Agent installations. If you regenerate it, update existing Agents and keep it secret.
+The API key is shared across all agent installations. If you regenerate it, update existing agents and keep it secret.
 {{% /notice %}}
 
 Optionally, export these values for reuse in the following commands:
@@ -127,4 +127,4 @@ keda-operator-metrics-apiserver-xxxxx            1/1     Running   0          1m
 kedify-agent-xxxxx                               1/1     Running   0          1m
 ```
 
-Proceed to the next section to install an Ingress controller, deploy a sample HTTP app, and test autoscaling.
+Proceed to the next section to install an ingress controller, deploy a sample HTTP app, and test autoscaling.

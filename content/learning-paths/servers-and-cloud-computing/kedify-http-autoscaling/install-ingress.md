@@ -6,10 +6,10 @@ layout: "learningpathall"
 
 ## Install an ingress controller for HTTP autoscaling on Kubernetes
 
-Before deploying HTTP applications with Kedify autoscaling, you need an ingress controller to handle incoming traffic. Most managed Kubernetes services (AWS EKS, Google GKE, Azure AKS) do not include an ingress controller by default. In this learning path, you install the NGINX Ingress Controller with Helm and target Arm64 nodes.
+Before deploying HTTP applications with Kedify autoscaling, you need an ingress controller to handle incoming traffic. Most managed Kubernetes services (AWS EKS, Google GKE, Azure AKS) do not include an ingress controller by default. In this Learning Path, you install the NGINX Ingress Controller with Helm and target Arm64 nodes.
 
 {{% notice Note %}}
-If your cluster already has an ingress controller installed and configured, you can skip this step and proceed to the [HTTP scaling guide](../http-scaling/).
+If your cluster already has an ingress controller installed and configured, you can skip this step and proceed to the [Autoscale HTTP applications with Kedify and Kubernetes Ingress section](../http-scaling/).
 {{% /notice %}}
 
 ## Install the NGINX Ingress Controller with Helm
@@ -51,11 +51,11 @@ If no value is printed, wait briefly and re-run the command.
 
 You have two options:
 
-- **Option 1 — DNS (recommended for production):**  
-  Create a DNS record pointing `application.keda` to the external IP address or hostname of your ingress controller.
+- Option 1: DNS (recommended for production):
+  create a DNS record pointing `application.keda` to the external IP address or hostname of your ingress controller.
 
-- **Option 2 — host header (quick test):**  
-  Use the external IP address or hostname directly with a `Host:` header:
+- Option 2: host header (quick test):  
+  use the external IP address or hostname directly with a `Host:` header:
   ```bash
   curl -H "Host: application.keda" http://$INGRESS_IP
   ```
