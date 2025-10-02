@@ -23,7 +23,7 @@ The [Kedify Proxy](https://docs.kedify.io/scalers/http-scaler/#kedify-proxy) gat
   * Ingress: Public entry point configured using host `application.keda`
   * ScaledObject: A Kedify HTTP scaler using `trafficAutowire: ingress`
 
-## Step 1 — Configure the Ingress IP environment variable
+## Configure the Ingress IP environment variable
 
 Before testing the application, make sure the INGRESS_IP environment variable is set to your ingress controller’s external IP address or hostname.
 
@@ -39,11 +39,11 @@ This will store the correct IP or hostname in the $INGRESS_IP environment variab
 If your ingress controller service uses a different name or namespace, update the command accordingly. For example, some installations use `nginx-ingress-controller` or place it in a different namespace.
 {{% /notice %}}
 
-## Step 2 — Deploy the application and configure Ingress
+## Deploy the application and configure Ingress
 
 Now  you will deploy a simple HTTP server and expose it using an Ingress resource. The source code for this application is available on [GitHub](https://github.com/kedify/examples/tree/main/samples/http-server).
 
-#### Deploy the application
+### Deploy the application
 
 Run the following command to deploy your application:
 
@@ -120,7 +120,7 @@ Notes:
 - `RESPONSE_DELAY` adds ~300ms latency per request, making scaling effects easier to see.
 - The Ingress uses host `application.keda`. To access this app we will use your ingress controller’s IP with a `Host:` header (shown below).
 
-#### Verify the application is running correctly
+## Verify the application is running correctly
 
 You will now check if you have 1 replica of the application deployed and ready:
 
@@ -134,7 +134,7 @@ NAME          READY   UP-TO-DATE   AVAILABLE   AGE
 application   1/1     1            1           3m44s
 ```
 
-#### Test the application
+## Test the application
 Once the application and Ingress are deployed, verify that everything is working correctly by sending a request to the exposed endpoint. Run the following command:
 
 ```bash
@@ -150,7 +150,7 @@ Content-Length: 301
 Connection: keep-alive
 ```
 
-## Step 3 — Enable autoscaling with Kedify
+## Enable autoscaling with Kedify
 
 The application is now running. Next,  you will enable autoscaling so that it can scale dynamically between 0 and 10 replicas. Kedify ensures that no requests are dropped during scaling. Apply the `ScaledObject` by running the following command:
 
@@ -204,11 +204,11 @@ After applying, the `ScaledObject` will appear in the Kedify dashboard (https://
 
 ![Kedify Dashboard With ScaledObject](images/scaledobject.png)
 
-## Step 4 — Send traffic and observe scaling
+## Send traffic and observe scaling
 
 Since no traffic is currently being sent to the application, it will eventually scale down to zero replicas.
 
-#### Verify scale to zero
+## Verify scale to zero
 
 To confirm that the application has scaled down, run the following command and watch until the number of replicas reaches 0:
 
