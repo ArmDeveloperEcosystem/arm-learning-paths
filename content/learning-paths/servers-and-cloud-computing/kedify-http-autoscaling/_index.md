@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
   - A running Kubernetes cluster (local or cloud)
-  - Kubectl and Helm installed locally
+  - Kubectl and Helm installed 
   - Access to the Kedify Service dashboard to obtain your Organization ID and API key (sign up at [Kedify dashboard](https://dashboard.kedify.io/))
 
 author: Zbynek Roubalik

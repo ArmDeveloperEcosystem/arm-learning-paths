@@ -5,9 +5,9 @@ layout: "learningpathall"
 ---
 
 ## Overview
-In this section, you install Kedify on your Kubernetes cluster using Helm. You will add the Kedify chart repository, install KEDA (Kedify build), the HTTP Scaler, and the Kedify Agent, then verify the installation. This enables HTTP autoscaling on Kubernetes with KEDA and Kedify, including arm64 nodes.
+In this section, you will install Kedify on your Kubernetes cluster using Helm. You will add the Kedify chart repository, install KEDA (Kedify build), the HTTP Scaler, and the Kedify Agent. You will then verify the installation. This enables HTTP autoscaling on Kubernetes with KEDA and Kedify, including arm64 nodes.
 
-For more information and other installation methods on Arm, see the [Kedify installation docs](https://docs.kedify.io/installation/helm#installation-on-arm).
+For more information and other installation methods on Arm, see the [Kedify installation documentation](https://docs.kedify.io/installation/helm#installation-on-arm).
 
 ## Before you begin
 
