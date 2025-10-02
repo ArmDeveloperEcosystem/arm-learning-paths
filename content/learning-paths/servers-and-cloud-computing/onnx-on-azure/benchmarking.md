@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 Now that you have validated ONNX Runtime with Python-based timing (e.g., SqueezeNet baseline test), you can move to using a dedicated benchmarking utility called `onnxruntime_perf_test`. This tool is designed for systematic performance evaluation of ONNX models, allowing you to capture more detailed statistics than simple Python timing.
-This helps evaluate the ONNX Runtime efficiency on Azure Arm64-based Cobalt 100 instances and other x86_64 VM architectures.
+This helps evaluate the ONNX Runtime efficiency on Azure Arm64-based Cobalt 100 instances and other x86_64 instances. architectures.
 
 ## Run the performance tests using onnxruntime_perf_test
 The `onnxruntime_perf_test` is a performance benchmarking tool included in the ONNX Runtime source code. It is used to measure the inference performance of ONNX models and supports multiple execution providers (like CPU, GPU, or other execution providers). on Arm64 VMs, CPU execution is the focus.
@@ -121,4 +121,4 @@ The results on Arm64 virtual machines demonstrate:
 - Lightweight Resource Footprint: Peak memory usage stayed below 37 MB, with CPU utilization around 96%, ideal for efficient edge or cloud inference.  
 - Consistent Performance: P50, P95, and Max latency remained tightly bound, showcasing reliable performance on Azure Cobalt 100 Arm-based infrastructure.
 
-You have now benchmarked ONNX on an Azure Cobalt 100 Arm64 virtual machine and compared results with x86_64.
+You have now successfully benchmarked inference time of ONNX models on an Azure Cobalt 100 Arm64 virtual machine.
