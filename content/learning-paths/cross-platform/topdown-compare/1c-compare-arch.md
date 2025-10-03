@@ -7,15 +7,11 @@ layout: learningpathall
 ---
 ## Contrast Intel and Arm Neoverse implementation approaches
 
-After understanding each architecture's methodology individually, you can now examine how they differ in implementation while achieving equivalent analysis capabilities.
+After understanding each architecture's methodology individually, you can now examine how they differ in implementation while achieving equivalent analysis capabilities. Both architectures implement the same fundamental approach with architecture-specific adaptations:
 
-## Review shared implementation principles
-
-Both architectures implement the same fundamental approach with architecture-specific adaptations:
-
-- Slot-based accounting: Pipeline utilization measured in issue or rename slots
-- Hierarchical analysis: Broad classification followed by drill-down into dominant bottlenecks
-- Resource attribution: Map performance issues to specific CPU micro-architectural components
+- Slot-based accounting: pipeline utilization measured in issue or rename slots
+- Hierarchical analysis: broad classification followed by drill-down into dominant bottlenecks
+- Resource attribution: map performance issues to specific CPU micro-architectural components
 
 ## Compare 4-level hierarchical and 2-stage methodologies  
 
