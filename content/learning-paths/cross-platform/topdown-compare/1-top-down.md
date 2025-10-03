@@ -1,5 +1,5 @@
 ---
-title: Top-down performance analysis
+title: "x86 and Arm Neoverse Top-Down Performance Analysis: PMU Counters and Methodologies"
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,19 +8,17 @@ layout: learningpathall
 
 ## What are the differences between Arm and x86 PMU counters?
 
-This is a common question from software developers and performance engineers. 
+This is a common question from software developers and performance engineers working across architectures.
 
-Both Arm and x86 CPUs provide sophisticated Performance Monitoring Units (PMUs) with hundreds of hardware counters. Instead of trying to list all available counters and compare microarchitecture, it makes more sense to focus on the performance methodologies they enable and the calculations used for performance metrics. 
+Both Intel x86 and Arm Neoverse CPUs provide sophisticated Performance Monitoring Units (PMUs) with hundreds of hardware counters. Instead of trying to list all available counters and compare microarchitecture, it makes more sense to focus on the performance methodologies they enable and the calculations used for performance metrics. 
 
-While the specific counter names and formulas differ between architectures, both have converged on top-down performance analysis methodologies that categorize performance bottlenecks into four buckets: Retiring, Bad Speculation, Frontend Bound, and Backend Bound.
+While the specific counter names and formulas differ between architectures, both x86 and Arm Neoverse have converged on top-down performance analysis methodologies that categorize performance bottlenecks into four buckets: Retiring, Bad Speculation, Frontend Bound, and Backend Bound.
 
-This Learning Path provides a comparison of how Arm and x86 processors implement top-down
-analysis, highlighting the similarities in approach while explaining the architectural differences in counter events and formulas.
+This Learning Path provides a comparison of how x86 processors implement 4-level hierarchical top-down analysis compared to Arm Neoverse's 2-stage methodology, highlighting the similarities in approach while explaining the architectural differences in PMU counter events and formulas.
 
 ## Introduction to top-down performance analysis
 
-Top-down methodology makes performance analysis easier by shifting focus from individual performance
-counters to pipeline slot utilization. Instead of trying to interpret dozens of seemingly unrelated metrics, you can systematically identify bottlenecks by attributing each CPU pipeline slot to one of four categories.
+Top-down methodology makes performance analysis easier by shifting focus from individual PMU counters to pipeline slot utilization. Instead of trying to interpret dozens of seemingly unrelated metrics, you can systematically identify bottlenecks by attributing each CPU pipeline slot to one of four categories:
 
 - Retiring: pipeline slots that successfully complete useful work
 - Bad Speculation: slots wasted on mispredicted branches
@@ -31,9 +29,9 @@ The methodology uses a hierarchical approach that allows you to drill down only 
 
 The next sections compare the Intel x86 methodology with the Arm top-down methodology. AMD also has an equivalent top-down methodology which is similar to Intel, but uses different counters and calculations. 
 
-## Intel x86 top-down methodology
+## Intel x86 4-level hierarchical top-down methodology
 
-Intel uses a slot-based accounting model where each CPU cycle provides multiple issue slots. A slot is a hardware resource needed to process operations. More slots means more work can be done. The number of slots depends on the design but current processor designs have 4, 6, or 8 slots. 
+Intel uses a slot-based accounting model where each CPU cycle provides multiple issue slots. A slot is a hardware resource needed to process micro-operations (uops). More slots means more work can be done per cycle. The number of slots depends on the microarchitecture design but current Intel processor designs typically have 4 issue slots per cycle. 
 
 ### Hierarchical Structure
 
@@ -96,9 +94,9 @@ Intel processors expose hundreds of performance events, but top-down analysis re
 
 Using the above levels of metrics you can find out which of the 4 top-level categories are causing bottlenecks.
 
-### Arm top-down methodology
+## Arm Neoverse 2-stage top-down methodology
 
-Arm developed a similar top-down methodology for Neoverse server cores. The Arm architecture uses an 8-slot rename unit for pipeline bandwidth accounting.
+Arm developed a complementary top-down methodology specifically for Neoverse server cores. The Arm Neoverse architecture uses an 8-slot rename unit for pipeline bandwidth accounting, differing from Intel's issue-slot model.
 
 ### Two-Stage Approach
 
@@ -162,7 +160,7 @@ Neoverse cores expose approximately 100 hardware events optimized for server wor
 | `MEM_ACCESS`          | Total memory accesses (baseline for cache/TLB effectiveness ratios).                     |
 
 
-## Arm compared to x86 
+## x86 and Arm Neoverse architectural comparison
 
 ### Conceptual similarities
 
@@ -173,9 +171,9 @@ Both architectures adhere to the same fundamental top-down performance analysis 
 3. Hierarchical analysis: Broad classification followed by drill-down into dominant bottlenecks
 4. Resource attribution: Map performance issues to specific CPU micro-architectural components
 
-### Key Differences
+### Key methodology differences
 
-| Aspect | x86 Intel | Arm Neoverse |
+| Aspect | Intel x86 | Arm Neoverse |
 | :-- | :-- | :-- |
 | Hierarchy Model | Multi-level tree (Level 1 → Level 2 → Level 3+) | Two-stage: Topdown Level 1 + Resource Groups |
 | Slot Width | 4 issue slots per cycle (typical) | 8 rename slots per cycle (Neoverse V1) |
@@ -192,6 +190,10 @@ Both architectures adhere to the same fundamental top-down performance analysis 
 | Memory bound? | `CYCLE_ACTIVITY.STALLS_L3_MISS` | `L1D_CACHE_REFILL`, `L2D_CACHE_REFILL` |
 | Cache effectiveness? | `MEM_LOAD_RETIRED.L3_MISS_PS` | Cache refill metrics / Cache access metrics |
 
-While it doesn't make sense to directly compare PMU counters for the Arm and x86 architectures, it is useful to understand the top-down methodologies for each so you can do effective performance analysis and compare you code running on each architecture. 
+While PMU counter names and calculation formulas differ significantly between Intel x86 and Arm Neoverse architectures, both provide equivalent top-down analysis capabilities. Understanding these methodological differences enables effective cross-platform performance optimization:
 
-Continue to the next step to try a code example.
+- **Intel x86**: Use `perf stat --topdown` for Level 1 analysis, then drill down through hierarchical levels
+- **Arm Neoverse**: Use `topdown-tool -m Cycle_Accounting` for Stage 1, then explore resource effectiveness groups
+- **Cross-platform strategy**: Focus on the four common categories while adapting tools and counter interpretations to each architecture
+
+Continue to the next step to see practical examples comparing both methodologies.
