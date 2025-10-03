@@ -83,4 +83,4 @@ At the Decode stage, by utilizing the [KV cache](https://huggingface.co/blog/not
 
 In summary, Prefill is compute-bound, dominated by large GEMM operations and Decode is memory-bound, dominated by KV cache access and GEMV operations. 
 
-You will see this highlighted during the analysis with Streamline.
+You will see this highlighted during the Streamline performance analysis.

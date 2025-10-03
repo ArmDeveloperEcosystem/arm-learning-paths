@@ -20,26 +20,23 @@ You can either build natively on an Arm platform, or cross-compile on another ar
 
 ### Step 1: Build Streamline Annotation library
 
-Install [Arm DS](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio) or [Arm Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) on your development machine first.
+Download and install [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads) on your development machine.
 
-Streamline Annotation support code is in the installation directory such as `Arm/Development Studio 2024.1/sw/streamline/gator/annotate`.
+{{% notice Note %}}
+You can also download and install [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio#Downloads), as it also includes Streamline.
 
-For installation guidance, refer to the [Streamline installation guide](/install-guides/streamline/).
+{{% /notice %}}
 
-Clone the gator repository that matches your Streamline version and build the `Annotation support library`.
+Streamline Annotation support code is in the Arm Performance Studio installation directory in the `streamline/gator/annotate` directory.
 
-The installation step depends on your development machine.
+Clone the gator repository that matches your Streamline version and build the `Annotation support library`. You can build it on your current machine using the native build instructions and you can cross compile it for another Arm computer using the cross compile instructions. 
 
-For Arm native build, you can use the following instructions to install the packages.
-
-For other machines, you need to set up the cross compiler environment by installing [Arm GNU toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
-
-You can refer to the [GCC install guide](https://learn.arm.com/install-guides/gcc/cross/) for cross-compiler installation.
+If you need to set up a cross compiler you can review the [GCC install guide](/install-guides/gcc/cross/).
 
 {{< tabpane code=true >}}
   {{< tab header="Arm Native Build" language="bash">}}
-    apt-get update
-    apt-get install ninja-build cmake gcc g++ g++-aarch64-linux-gnu curl zip unzip tar pkg-config git
+    sudo apt-get update
+    sudo apt-get install -y ninja-build cmake gcc g++ g++-aarch64-linux-gnu curl zip unzip tar pkg-config git
     cd ~
     git clone https://github.com/ARM-software/gator.git
     cd gator
@@ -47,9 +44,9 @@ You can refer to the [GCC install guide](https://learn.arm.com/install-guides/gc
     cd annotate
     make  
   {{< /tab >}}
-  {{< tab header="Cross Compiler" language="bash">}}
-    apt-get update
-    apt-get install ninja-build cmake gcc g++ g++-aarch64-linux-gnu curl zip unzip tar pkg-config git
+  {{< tab header="Cross Compile" language="bash">}}
+    sudo apt-get update
+    sudo apt-get install ninja-build cmake gcc g++ g++-aarch64-linux-gnu curl zip unzip tar pkg-config git
     cd ~
     git clone https://github.com/ARM-software/gator.git
     cd gator
@@ -79,7 +76,7 @@ mkdir streamline_annotation
 cp ~/gator/annotate/libstreamline_annotate.a ~/gator/annotate/streamline_annotate.h streamline_annotation
 ```
 
-To link the `libstreamline_annotate.a` library when building llama-cli, add the following lines at the end of `llama.cpp/tools/main/CMakeLists.txt`.
+To link the `libstreamline_annotate.a` library when building llama-cli, use an editor to add the following lines at the end of `llama.cpp/tools/main/CMakeLists.txt`.
 
 ```makefile
 set(STREAMLINE_LIB_PATH "${CMAKE_SOURCE_DIR}/streamline_annotation/libstreamline_annotate.a")
@@ -87,13 +84,15 @@ target_include_directories(llama-cli PRIVATE "${CMAKE_SOURCE_DIR}/streamline_ann
 target_link_libraries(llama-cli PRIVATE "${STREAMLINE_LIB_PATH}")
 ```
 
-To add Annotation Markers to `llama-cli`, change the `llama-cli` code in `llama.cpp/tools/main/main.cpp` by adding the include file:
+To add Annotation Markers to `llama-cli`, edit the file `llama.cpp/tools/main/main.cpp` and make 3 modification.
+
+First, add the include file at the top of `main.cpp` with the other include files.
 
 ```c
 #include "streamline_annotate.h" 
 ```
 
-After the call to `common_init()`, add the setup macro:
+Next, the find the `common_init()` call in the `main()` function and add the Streamline setup macro below it so that the code looks like:
 
 ```c
     common_init();
@@ -101,7 +100,7 @@ After the call to `common_init()`, add the setup macro:
     ANNOTATE_SETUP;
 ```
 
-Finally, add an annotation marker inside the main loop:
+Finally, add an annotation marker inside the main loop. Add the complete code instead the annotation comments so it looks like:
 
 ```c
           for (int i = 0; i < (int) embd.size(); i += params.n_batch) {
@@ -150,8 +149,8 @@ Next, configure the project.
       -DBUILD_SHARED_LIBS=OFF \
       -DCMAKE_EXE_LINKER_FLAGS="-static -g" \
       -DGGML_OPENMP=OFF \
-      -DCMAKE_C_FLAGS="-march=armv8.2-a+dotprod+i8mm -g" \
-      -DCMAKE_CXX_FLAGS="-march=armv8.2-a+dotprod+i8mm -g" \
+      -DCMAKE_C_FLAGS="-march=native -g" \
+      -DCMAKE_CXX_FLAGS="-march=native -g" \
       -DGGML_CPU_KLEIDIAI=ON \
       -DLLAMA_BUILD_TESTS=OFF \
       -DLLAMA_BUILD_EXAMPLES=ON \
@@ -161,8 +160,8 @@ Next, configure the project.
     cmake .. \
       -DCMAKE_SYSTEM_NAME=Linux \
       -DCMAKE_SYSTEM_PROCESSOR=arm \
-      -DCMAKE_C_COMPILER=aarch64-none-linux-gnu-gcc \
-      -DCMAKE_CXX_COMPILER=aarch64-none-linux-gnu-g++ \
+      -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc \
+      -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ \
       -DLLAMA_NATIVE=OFF \
       -DLLAMA_F16C=OFF \
       -DLLAMA_GEMM_ARM=ON \
@@ -190,7 +189,7 @@ Now you can build the project using `cmake`:
 
 ```bash
 cd ~/llama.cpp/build
-cmake --build ./ --config Release
+cmake --build ./ --config Release -j $(nproc)
 ```
 
 After the building process completes, you can find the `llama-cli` in the `~/llama.cpp/build/bin/` directory.

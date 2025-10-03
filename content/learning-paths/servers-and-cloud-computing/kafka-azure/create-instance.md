@@ -1,24 +1,18 @@
 ---
-title: Create an Arm-based Azure VM with Cobalt 100
+title: Create an Arm based cloud virtual machine using Microsoft Cobalt 100 CPU 
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up your development environment
+## Introduction
 
-There is more than one way to create an Arm-based Cobalt 100 virtual machine: 
+There are several ways to create an Arm-based Cobalt 100 virtual machine : the Microsoft Azure console, the Azure CLI tool, or using your choice of IaC (Infrastructure as Code). This guide will use the Azure console to create a virtual machine with Arm-based Cobalt 100 Processor. 
 
-- The Microsoft Azure portal
-- The Azure CLI
-- Your preferred infrastructure as code (IaC) tool
+This learning path focuses on the general-purpose virtual machine of the D series. Please read the guide on [Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series) offered by Microsoft Azure.  
 
-In this Learning Path, you will use the Azure portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor. 
-
-You will focus on the general-purpose virtual machines in the D-series. For further information, see the Microsoft Azure guide for the [Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
-
-While the steps to create this instance are included here for convenience, for further information on setting up Cobalt on Azure, see [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
+If you have never used the Microsoft Cloud Platform before, please review the microsoft [guide to Create a Linux virtual machine in the Azure portal](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-portal?tabs=ubuntu). 
 
 #### Create an Arm-based Azure Virtual Machine 
 
