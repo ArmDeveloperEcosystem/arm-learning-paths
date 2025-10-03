@@ -1,18 +1,18 @@
 ---
-title: "Learn about Intel x86 four-level hierarchical top-down methodology"
+title: "Implement Intel x86 4-level hierarchical top-down analysis"
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Intel x86 four-level hierarchical top-down methodology
+## Configure slot-based accounting with Intel x86 PMU counters
 
-Intel uses a slot-based accounting model where each CPU cycle provides multiple issue slots. A slot is a hardware resource needed to process micro-operations (uops). More slots means more work can be done per cycle. The number of slots depends on the microarchitecture design but current Intel processor designs typically have four issue slots per cycle. 
+Intel uses a slot-based accounting model where each CPU cycle provides multiple issue slots. A slot is a hardware resource needed to process micro-operations (uops). More slots means more work can be done per cycle. The number of slots depends on the microarchitecture design but current Intel processor designs typically have four issue slots per cycle.
 
-Intel uses a multi-level hierarchy that typically extends to 4 levels of detail, and these are covered below.
+Intel's methodology uses a multi-level hierarchy that extends to 4 levels of detail. Each level provides progressively more granular analysis, allowing you to drill down from high-level categories to specific microarchitecture events.
 
-### Level 1 (top-level)
+## Level 1: Identify top-level performance categories
 
 At Level 1, all pipeline slots are attributed to one of four categories, providing a high-level view of whether the CPU is doing useful work or stalling.
 
@@ -23,26 +23,26 @@ At Level 1, all pipeline slots are attributed to one of four categories, providi
 
 Where `SLOTS = 4 * CPU_CLK_UNHALTED.THREAD` on most Intel cores.
 
-### Level 2 breakdown
+## Level 2: Analyze broader bottleneck causes
 
-Level 2 drills into each of these to identify broader causes, such as distinguishing between frontend latency and bandwidth limits, or between memory and core execution stalls in the backend.
+Once you've identified the dominant Level 1 category, Level 2 drills into each area to identify broader causes. This level distinguishes between frontend latency and bandwidth limits, or between memory and core execution stalls in the backend.
 
 - Frontend Bound covers frontend latency in comparison with frontend bandwidth
 - Backend Bound covers memory bound in comparison with core bound
 - Bad Speculation covers branch mispredicts in comparison with machine clears
 - Retiring covers base in comparison with microcode sequencer
 
-### Level 3 breakdown
+## Level 3: Target specific microarchitecture bottlenecks
 
-Level 3 provides fine-grained attribution, pinpointing specific bottlenecks like DRAM latency, cache misses, or port contention, which makes it possible to identify the exact root cause and apply targeted optimizations. Memory Bound expands into detailed cache hierarchy analysis including L1 Bound, L2 Bound, L3 Bound, DRAM Bound, and Store Bound categories, while Core Bound breaks down into execution unit constraints such as Divider and Ports Utilization, along with many other specific microarchitecture-level categories that enable precise performance tuning.
+After identifying broader cause categories in Level 2, Level 3 provides fine-grained attribution that pinpoints specific bottlenecks like DRAM latency, cache misses, or port contention. This precision makes it possible to identify the exact root cause and apply targeted optimizations. Memory Bound expands into detailed cache hierarchy analysis including L1 Bound, L2 Bound, L3 Bound, DRAM Bound, and Store Bound categories, while Core Bound breaks down into execution unit constraints such as Divider and Ports Utilization, along with many other specific microarchitecture-level categories that enable precise performance tuning.
 
-### Level 4 breakdown
+## Level 4: Access specific PMU counter events
 
-Level 4 provides the specific microarchitecture events that cause the inefficiencies. 
+The final level provides direct access to the specific microarchitecture events that cause the inefficiencies. At this level, you work directly with raw PMU counter values to understand the underlying hardware behavior causing performance bottlenecks. This enables precise tuning by identifying exactly which execution units, cache levels, or pipeline stages are limiting performance, allowing you to apply targeted code optimizations or hardware configuration changes. 
 
-## Key performance events
+## Apply essential Intel x86 PMU counters for analysis
 
-Intel processors expose hundreds of performance events, but top-down analysis relies on a core set:
+Intel processors expose hundreds of performance events, but top-down analysis relies on a core set of counters that map directly to the four-level hierarchy:
 
 | Event Name                                      | Purpose                                                                              |
 | :---------------------------------------------- | :----------------------------------------------------------------------------------- |

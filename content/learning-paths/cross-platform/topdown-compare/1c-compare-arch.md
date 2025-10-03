@@ -1,24 +1,19 @@
 ---
-title: "x86 and Arm Neoverse architectural comparison"
+title: "Evaluate Intel x86 and Arm Neoverse top-down analysis: PMU counters and methodology differences"
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## x86 and Arm Neoverse architectural comparison
+## Recognize universal top-down performance analysis principles
 
-### Conceptual similarities
+Despite their different implementation approaches, both Intel x86 and Arm Neoverse architectures adhere to the same fundamental top-down performance analysis philosophy:
 
-Both architectures adhere to the same fundamental top-down performance analysis philosophy:
+**Four-category classification** forms the foundation, using Retiring, Bad Speculation, Frontend Bound, and Backend Bound across both architectures. **Slot-based accounting** measures pipeline utilization, though Intel uses issue slots while Arm employs rename slots. **Hierarchical analysis** enables broad classification followed by drill-down into dominant bottlenecks, and **resource attribution** maps performance issues to specific CPU micro-architectural components for targeted optimization.
 
-1. Four-category classification: Retiring, Bad Speculation, Frontend Bound, Backend Bound
-2. Slot-based accounting: Pipeline utilization measured in issue or rename slots
-3. Hierarchical analysis: Broad classification followed by drill-down into dominant bottlenecks
-4. Resource attribution: Map performance issues to specific CPU micro-architectural components
+## Contrast 4-level hierarchical and 2-stage methodologies
 
-### Key methodology differences
-
-| Aspect | Intel x86 | Arm Neoverse |
+While both architectures share the same fundamental principles, their implementation strategies differ significantly in structure and execution:
 | :-- | :-- | :-- |
 | Hierarchy Model | Multi-level tree (Level 1 → Level 2 → Level 3+) | Two-stage: Topdown Level 1 + Resource Groups |
 | Slot Width | 4 issue slots per cycle (typical) | 8 rename slots per cycle (Neoverse V1) |

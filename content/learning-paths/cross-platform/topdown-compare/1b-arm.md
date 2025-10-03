@@ -1,31 +1,27 @@
 ---
-title: "Learn about Arm Neoverse two-stage top-down methodology"
+title: "Deploy Arm Neoverse 2-stage top-down analysis"
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Arm Neoverse two-stage top-down methodology
+## Configure 8-slot rename unit accounting with Arm PMU counters
 
 Arm developed a complementary top-down methodology specifically for Neoverse server cores. The Arm Neoverse architecture uses an 8-slot rename unit for pipeline bandwidth accounting, differing from Intel's issue-slot model.
 
-Unlike Intel's hierarchical model, Arm employs a two-stage methodology:
+Unlike Intel's hierarchical model, Arm employs a streamlined two-stage methodology that balances analysis depth with practical usability:
 
-### Stage 1: top-down analysis
+### Execute Stage 1: Calculate top-down performance categories
 
-- Identifies high-level bottlenecks using the same four categories
-- Uses Arm-specific PMU events and formulas
-- Slot-based accounting similar to Intel but with Arm event names
+Stage 1 identifies high-level bottlenecks using the same four categories as Intel but with Arm-specific PMU events and formulas. This stage uses slot-based accounting similar to Intel's approach while employing Arm event names and calculations tailored to the Neoverse architecture.
 
-### Stage 2: Micro-architecture exploration
+### Execute Stage 2: Explore resource effectiveness groups
 
-- Resource-specific effectiveness metrics grouped by CPU component
-- Industry-standard metrics like MPKI (Misses Per Kilo Instructions)
-- Detailed breakdown without strict hierarchical drilling
+Stage 2 focuses on resource-specific effectiveness metrics grouped by CPU component. This stage provides industry-standard metrics like MPKI (Misses Per Kilo Instructions) and offers detailed breakdown without the strict hierarchical drilling required by Intel's methodology.
 
-### Stage 1: formulas 
+### Configure Arm-specific PMU counter formulas
 
-Arm uses different top-down metrics based on different events but the concept is similar.
+Arm uses different top-down metrics based on different events but the concept remains similar to Intel's approach. The key difference lies in the formula calculations and slot accounting methodology:
 
 | Metric | Formula | Purpose |
 | :-- | :-- | :-- |
@@ -34,19 +30,13 @@ Arm uses different top-down metrics based on different events but the concept is
 | Bad speculation | `100 * (1 - (OP_RETIRED/OP_SPEC)) * (1 - (STALL_SLOT/(CPU_CYCLES * 8))) + (BR_MIS_PRED / (4 * CPU_CYCLES))` | Misprediction recovery |
 | Retiring | `100 * (OP_RETIRED/OP_SPEC) * (1 - (STALL_SLOT/(CPU_CYCLES * 8)))` | Useful work completed |
 
-### Stage 2: resource groups
+### Navigate resource groups without hierarchical constraints
 
-Instead of hierarchical levels, Arm organizes detailed metrics into effectiveness groups as shown below:
+Instead of Intel's hierarchical levels, Arm organizes detailed metrics into effectiveness groups that can be explored independently. **Branch Effectiveness** provides misprediction rates and MPKI, while **ITLB/DTLB Effectiveness** measures translation lookaside buffer efficiency. **Cache Effectiveness** groups (L1I/L1D/L2/LL) deliver cache hit ratios and MPKI across the memory hierarchy. Additionally, **Operation Mix** breaks down instruction types (SIMD, integer, load/store), and **Cycle Accounting** tracks frontend versus backend stall percentages.
 
-- Branch Effectiveness: Misprediction rates, MPKI
-- ITLB/DTLB Effectiveness: Translation lookaside buffer efficiency
-- L1I/L1D/L2/LL Cache Effectiveness: Cache hit ratios and MPKI
-- Operation Mix: Breakdown of instruction types (SIMD, integer, load/store)
-- Cycle Accounting: Frontend vs. backend stall percentages
+## Apply essential Arm Neoverse PMU counters for analysis
 
-## Key performance events 
-
-Neoverse cores expose approximately 100 hardware events optimized for server workloads, including:
+Neoverse cores expose approximately 100 hardware events optimized for server workloads. The core set for top-down analysis includes:
 
 | Event Name            | Purpose / Usage                                                                          |
 | :-------------------- | :--------------------------------------------------------------------------------------- |
