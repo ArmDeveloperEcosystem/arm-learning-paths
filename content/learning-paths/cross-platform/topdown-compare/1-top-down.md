@@ -6,19 +6,24 @@ weight: 3
 layout: learningpathall
 ---
 
-## What are the differences between Arm and x86 PMU counters?
+## What are the differences between Arm and Intel x86 PMU counters?
 
-This is a common question from software developers and performance engineers working across architectures.
+This is a common question from both software developers and performance engineers working across architectures.
 
 Both Intel x86 and Arm Neoverse CPUs provide sophisticated Performance Monitoring Units (PMUs) with hundreds of hardware counters. Instead of trying to list all available counters and compare microarchitecture, it makes more sense to focus on the performance methodologies they enable and the calculations used for performance metrics. 
 
-While the specific counter names and formulas differ between architectures, both x86 and Arm Neoverse have converged on top-down performance analysis methodologies that categorize performance bottlenecks into four buckets: Retiring, Bad Speculation, Frontend Bound, and Backend Bound.
+While the specific counter names and formulas differ between architectures, both Intel x86 and Arm Neoverse have converged on top-down performance analysis methodologies that categorize performance bottlenecks into four buckets:
 
-This Learning Path provides a comparison of how x86 processors implement 4-level hierarchical top-down analysis compared to Arm Neoverse's 2-stage methodology, highlighting the similarities in approach while explaining the architectural differences in PMU counter events and formulas.
+- Retiring
+- Bad Speculation
+- Frontend Bound
+- Backend Bound
+
+This Learning Path provides a comparison of how x86 processors implement four-level hierarchical top-down analysis compared to Arm Neoverse's two-stage methodology, highlighting the similarities in approach while explaining the architectural differences in PMU counter events and formulas.
 
 ## Introduction to top-down performance analysis
 
-Top-down methodology makes performance analysis easier by shifting focus from individual PMU counters to pipeline slot utilization. Instead of trying to interpret dozens of seemingly unrelated metrics, you can systematically identify bottlenecks by attributing each CPU pipeline slot to one of four categories:
+The top-down methodology makes performance analysis easier by shifting focus from individual PMU counters to pipeline slot utilization. Instead of trying to interpret dozens of seemingly unrelated metrics, you can systematically identify bottlenecks by attributing each CPU pipeline slot to one of four categories:
 
 - Retiring: pipeline slots that successfully complete useful work
 - Bad Speculation: slots wasted on mispredicted branches
@@ -27,17 +32,19 @@ Top-down methodology makes performance analysis easier by shifting focus from in
 
 The methodology uses a hierarchical approach that allows you to drill down only into the dominant bottleneck category, and avoid the complexity of analyzing all possible performance issues at the same time. 
 
-The next sections compare the Intel x86 methodology with the Arm top-down methodology. AMD also has an equivalent top-down methodology which is similar to Intel, but uses different counters and calculations. 
+The next sections compare the Intel x86 methodology with the Arm top-down methodology. 
+
+{{% notice Note %}}
+AMD also has an equivalent top-down methodology which is similar to Intel, but uses different counters and calculations. 
+{{% /notice %}}
 
 ## Intel x86 4-level hierarchical top-down methodology
 
-Intel uses a slot-based accounting model where each CPU cycle provides multiple issue slots. A slot is a hardware resource needed to process micro-operations (uops). More slots means more work can be done per cycle. The number of slots depends on the microarchitecture design but current Intel processor designs typically have 4 issue slots per cycle. 
+Intel uses a slot-based accounting model where each CPU cycle provides multiple issue slots. A slot is a hardware resource needed to process micro-operations (uops). More slots means more work can be done per cycle. The number of slots depends on the microarchitecture design but current Intel processor designs typically have four issue slots per cycle. 
 
-### Hierarchical Structure
+Intel uses a multi-level hierarchy that typically extends to 4 levels of detail, and these are covered below.
 
-Intel uses a multi-level hierarchy that typically extends to 4 levels of detail.
-
-**Level 1 (Top-Level):**
+### Level 1 (top-level)
 
 At Level 1, all pipeline slots are attributed to one of four categories, providing a high-level view of whether the CPU is doing useful work or stalling.
 
@@ -48,28 +55,24 @@ At Level 1, all pipeline slots are attributed to one of four categories, providi
 
 Where `SLOTS = 4 * CPU_CLK_UNHALTED.THREAD` on most Intel cores.
 
-**Level 2 breakdown:**
+### Level 2 breakdown
 
 Level 2 drills into each of these to identify broader causes, such as distinguishing between frontend latency and bandwidth limits, or between memory and core execution stalls in the backend.
 
-- Frontend Bound covers frontend latency vs. frontend bandwidth
-- Backend Bound covers memory bound vs. core bound
-- Bad Speculation covers branch mispredicts vs. machine clears
-- Retiring covers base vs. microcode sequencer
+- Frontend Bound covers frontend latency in comparison with frontend bandwidth
+- Backend Bound covers memory bound in comparison with core bound
+- Bad Speculation covers branch mispredicts in comparison with machine clears
+- Retiring covers base in comparison with microcode sequencer
 
-**Level 3 breakdown:**
+### Level 3 breakdown
 
-Level 3 provides fine-grained attribution, pinpointing specific bottlenecks like DRAM latency, cache misses, or port contention, which makes it possible to identify the exact root cause and apply targeted optimizations.
+Level 3 provides fine-grained attribution, pinpointing specific bottlenecks like DRAM latency, cache misses, or port contention, which makes it possible to identify the exact root cause and apply targeted optimizations. Memory Bound expands into detailed cache hierarchy analysis including L1 Bound, L2 Bound, L3 Bound, DRAM Bound, and Store Bound categories, while Core Bound breaks down into execution unit constraints such as Divider and Ports Utilization, along with many other specific microarchitecture-level categories that enable precise performance tuning.
 
-- Memory Bound includes L1 Bound, L2 Bound, L3 Bound, DRAM Bound, Store Bound
-- Core Bound includes Divider, Ports Utilization
-- And many more specific categories
-
-**Level 4 breakdown:**
+### Level 4 breakdown
 
 Level 4 provides the specific microarchitecture events that cause the inefficiencies. 
 
-### Key Performance Events
+## Key performance events
 
 Intel processors expose hundreds of performance events, but top-down analysis relies on a core set:
 
@@ -92,29 +95,27 @@ Intel processors expose hundreds of performance events, but top-down analysis re
 | `OFFCORE_RESPONSE.*`                            | Detailed classification of off-core responses (L3 vs. DRAM, local vs. remote socket) |
 
 
-Using the above levels of metrics you can find out which of the 4 top-level categories are causing bottlenecks.
+Using the above levels of metrics you can find out which of the four top-level categories are causing bottlenecks.
 
-## Arm Neoverse 2-stage top-down methodology
+## Arm Neoverse two-stage top-down methodology
 
 Arm developed a complementary top-down methodology specifically for Neoverse server cores. The Arm Neoverse architecture uses an 8-slot rename unit for pipeline bandwidth accounting, differing from Intel's issue-slot model.
 
-### Two-Stage Approach
-
 Unlike Intel's hierarchical model, Arm employs a two-stage methodology:
 
-**Stage 1: Topdown analysis**
+### Stage 1: top-down analysis
 
 - Identifies high-level bottlenecks using the same four categories
 - Uses Arm-specific PMU events and formulas
 - Slot-based accounting similar to Intel but with Arm event names
 
-**Stage 2: Micro-architecture exploration**
+### Stage 2: Micro-architecture exploration
 
 - Resource-specific effectiveness metrics grouped by CPU component
 - Industry-standard metrics like MPKI (Misses Per Kilo Instructions)
 - Detailed breakdown without strict hierarchical drilling
 
-### Stage 1 formulas 
+### Stage 1: formulas 
 
 Arm uses different top-down metrics based on different events but the concept is similar.
 
@@ -125,7 +126,7 @@ Arm uses different top-down metrics based on different events but the concept is
 | Bad speculation | `100 * (1 - (OP_RETIRED/OP_SPEC)) * (1 - (STALL_SLOT/(CPU_CYCLES * 8))) + (BR_MIS_PRED / (4 * CPU_CYCLES))` | Misprediction recovery |
 | Retiring | `100 * (OP_RETIRED/OP_SPEC) * (1 - (STALL_SLOT/(CPU_CYCLES * 8)))` | Useful work completed |
 
-### Stage 2 resource groups
+### Stage 2: resource groups
 
 Instead of hierarchical levels, Arm organizes detailed metrics into effectiveness groups as shown below:
 
@@ -135,7 +136,7 @@ Instead of hierarchical levels, Arm organizes detailed metrics into effectivenes
 - Operation Mix: Breakdown of instruction types (SIMD, integer, load/store)
 - Cycle Accounting: Frontend vs. backend stall percentages
 
-### Key performance events 
+## Key performance events 
 
 Neoverse cores expose approximately 100 hardware events optimized for server workloads, including:
 
@@ -181,7 +182,7 @@ Both architectures adhere to the same fundamental top-down performance analysis 
 | Event Naming | Intel-specific mnemonics | Arm-specific mnemonics |
 | Drill-down Strategy | Strict hierarchical descent | Exploration by resource groups |
 
-### Event Mapping Examples
+### Event mapping examples
 
 | Performance Question | x86 Intel Events | Arm Neoverse Events |
 | :-- | :-- | :-- |
