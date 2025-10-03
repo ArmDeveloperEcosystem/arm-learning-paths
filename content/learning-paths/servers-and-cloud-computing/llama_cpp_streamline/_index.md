@@ -19,8 +19,8 @@ learning_objectives:
 prerequisites:
     - Basic understanding of llama.cpp
     - Understanding of transformer models
-    - Knowledge of Streamline usage
-    - An Arm Neoverse or Cortex-A hardware platform running Linux or Android to test the application
+    - Knowledge of Arm Streamline usage
+    - An Arm Neoverse or Cortex-A hardware platform running Linux or Android
 
 author: 
     - Zenon Zhilong Xiu

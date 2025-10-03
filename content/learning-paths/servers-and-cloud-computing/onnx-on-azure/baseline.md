@@ -7,12 +7,11 @@ layout: learningpathall
 ---
 
 
-## Baseline testing using ONNX Runtime: 
+## Baseline Testing using ONNX Runtime: 
 
-This test measures the inference latency of the ONNX Runtime by timing how long it takes to process a single input using the `squeezenet-int8.onnx model`. It helps evaluate how efficiently the model runs on the target hardware.
+The purpose of this test is to measure the inference latency of ONNX Runtime on your Azure Cobalt 100 VM. By timing how long it takes to process a single input through the SqueezeNet INT8 model, you can validate that ONNX Runtime is functioning correctly and get a baseline performance measurement for your target hardware.
 
-Create a **baseline.py** file with the below code for baseline test of ONNX:
-
+Create a file named `baseline.py` with the following code:
 ```python
 import onnxruntime as ort
 import numpy as np
@@ -29,12 +28,12 @@ end = time.time()
 print("Inference time:", end - start)
 ```
 
-Run the baseline test:
+Run the baseline script to measure inference time:
 
 ```console
 python3 baseline.py
 ```
-You should see an output similar to:
+You should see output similar to:
 ```output
 Inference time: 0.0026061534881591797
 ```
@@ -45,8 +44,11 @@ input tensor of shape (1, 3, 224, 224):
 - 224 x 224: image resolution (common for models like SqueezeNet)
 {{% /notice %}}
 
+This indicates the model successfully executed a single forward pass through the SqueezeNet INT8 ONNX model and returned results.
+
 #### Output summary:
 
-- Single inference latency: ~2.60 milliseconds (0.00260 sec) 
-- This shows the initial (cold-start) inference performance of ONNX Runtime on CPU using an optimized int8 quantized model. 
-- This demonstrates that the setup is fully working, and ONNX Runtime efficiently executes quantized models on Arm64. 
+Single inference latency(0.00260 sec): This is the time required for the model to process one input image and produce an output. The first run includes graph loading, memory allocation, and model initialization overhead.
+Subsequent inferences are usually faster due to caching and optimized execution.
+
+This demonstrates that the setup is fully working, and ONNX Runtime efficiently executes quantized models on Arm64. 

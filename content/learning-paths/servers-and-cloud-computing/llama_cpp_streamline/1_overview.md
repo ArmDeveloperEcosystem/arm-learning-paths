@@ -14,7 +14,7 @@ Frameworks such as [**llama.cpp**](https://github.com/ggml-org/llama.cpp), provi
 
 To analyze their execution and use profiling insights for optimization, you need both a basic understanding of transformer architectures and the right analysis tools.
 
-This Learning Path demonstrates how to use `llama-cli` application from llama.cpp together with Arm Streamline to analyze the efficiency of LLM inference on Arm CPUs.  
+This Learning Path demonstrates how to use `llama-cli` from the command line together with Arm Streamline to analyze the efficiency of LLM inference on Arm CPUs.  
 
 You will learn how to:
 - Profile token generation at the Prefill and Decode stages
@@ -23,4 +23,4 @@ You will learn how to:
 
 You will run the `Qwen1_5-0_5b-chat-q4_0.gguf` model using `llama-cli` on Arm Linux and use Streamline for analysis.  
 
-The same method can also be applied to Android platforms.
+The same method can also be used on Android.
