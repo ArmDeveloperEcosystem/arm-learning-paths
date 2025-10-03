@@ -1,6 +1,6 @@
 ---
 title: "Compare Arm Neoverse and Intel x86 performance using topdown-tool and Perf PMU counters"
-weight: 4
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
