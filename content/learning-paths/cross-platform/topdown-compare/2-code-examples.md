@@ -263,7 +263,7 @@ Crypto Operations Percentage........ 0.00% operations
 
 ## Cross-architecture performance analysis summary
 
-Both Arm Neoverse and modern x86 cores expose hardware PMU events that enable equivalent top-down analysis, despite different counter names and calculation methods:
+Both Arm Neoverse and modern x86 cores expose hardware PMU events that enable equivalent top-down analysis, despite different counter names and calculation methods. Intel x86 processors use a four-level hierarchical methodology based on slot-based pipeline accounting, relying on PMU counters such as `UOPS_RETIRED.RETIRE_SLOTS`, `IDQ_UOPS_NOT_DELIVERED.CORE`, and `CPU_CLK_UNHALTED.THREAD` to break down performance into retiring, bad speculation, frontend bound, and backend bound categories. Linux Perf serves as the standard collection tool, using commands like `perf stat --topdown` and the `-M topdownl1` option for detailed breakdowns.
 
 Intel x86 processors use a four-level hierarchical top-down analysis methodology based on slot-based pipeline accounting. This approach relies on PMU counters such as `UOPS_RETIRED.RETIRE_SLOTS`, `IDQ_UOPS_NOT_DELIVERED.CORE`, and `CPU_CLK_UNHALTED.THREAD` to break down performance into categories like retiring, bad speculation, frontend bound, and backend bound. The standard tool for collecting these metrics is Linux Perf, using commands like `perf stat --topdown` and the `-M topdownl1` option for detailed breakdowns.
 
