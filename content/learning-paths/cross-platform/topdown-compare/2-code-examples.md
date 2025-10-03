@@ -1,5 +1,5 @@
 ---
-title: "Hands-on Performance Analysis: x86 Perf and Arm Neoverse topdown-tool with PMU Counters"
+title: "Compare Arm Neoverse and x86 performance using topdown-tool and Perf PMU counters"
 weight: 4
 
 ### FIXED, DO NOT MODIFY

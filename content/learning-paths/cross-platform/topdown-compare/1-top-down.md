@@ -1,5 +1,5 @@
 ---
-title: "x86 and Arm Neoverse Top-Down Performance Analysis: PMU Counters and Methodologies"
+title: "Learn about Arm Neoverse and Intel x86 top-down performance analysis"
 weight: 3
 
 ### FIXED, DO NOT MODIFY
