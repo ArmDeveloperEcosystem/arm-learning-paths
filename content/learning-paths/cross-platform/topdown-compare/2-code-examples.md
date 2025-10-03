@@ -1,5 +1,5 @@
 ---
-title: "Compare Arm Neoverse and Intel x86 performance using topdown-tool and Perf PMU counters"
+title: "Measure cross-platform performance with topdown-tool and Perf PMU counters"
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -265,9 +265,7 @@ Crypto Operations Percentage........ 0.00% operations
 
 Both Arm Neoverse and modern x86 cores expose hardware PMU events that enable equivalent top-down analysis, despite different counter names and calculation methods. Intel x86 processors use a four-level hierarchical methodology based on slot-based pipeline accounting, relying on PMU counters such as `UOPS_RETIRED.RETIRE_SLOTS`, `IDQ_UOPS_NOT_DELIVERED.CORE`, and `CPU_CLK_UNHALTED.THREAD` to break down performance into retiring, bad speculation, frontend bound, and backend bound categories. Linux Perf serves as the standard collection tool, using commands like `perf stat --topdown` and the `-M topdownl1` option for detailed breakdowns.
 
-Intel x86 processors use a four-level hierarchical top-down analysis methodology based on slot-based pipeline accounting. This approach relies on PMU counters such as `UOPS_RETIRED.RETIRE_SLOTS`, `IDQ_UOPS_NOT_DELIVERED.CORE`, and `CPU_CLK_UNHALTED.THREAD` to break down performance into categories like retiring, bad speculation, frontend bound, and backend bound. The standard tool for collecting these metrics is Linux Perf, using commands like `perf stat --topdown` and the `-M topdownl1` option for detailed breakdowns.
+Arm Neoverse platforms implement a complementary two-stage methodology where Stage 1 focuses on topdown categories using counters such as `STALL_SLOT_BACKEND`, `STALL_SLOT_FRONTEND`, `OP_RETIRED`, and `OP_SPEC` to analyze pipeline stalls and instruction retirement. Stage 2 evaluates resource effectiveness, including cache and operation mix metrics through `topdown-tool`, which accepts the desired metric group via the `-m` argument.
 
-Arm Neoverse platforms implement a two-stage top-down methodology. Stage 1 focuses on topdown categories using counters such as `STALL_SLOT_BACKEND`, `STALL_SLOT_FRONTEND`, `OP_RETIRED`, and `OP_SPEC` to analyze pipeline stalls and instruction retirement. Stage 2 evaluates resource effectiveness, including cache and operation mix metrics. The recommended tool for collecting these metrics is `topdown-tool`, specifying the desired metric group with the `-m` argument.
-
-Both architectures identify the same performance bottleneck categories, allowing you to use similar optimization strategies across Intel and Arm platforms while accounting for the methodological differences in measurement and analysis depth. 
+Both architectures identify the same performance bottleneck categories, enabling similar optimization strategies across Intel and Arm platforms while accounting for methodological differences in measurement depth and analysis approach. 
 
