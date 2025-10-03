@@ -1,5 +1,5 @@
 ---
-title: Learn about the impact of NIC IRQs and patterns on cloud
+title: Learn about the impact of network interrupts on cloud workloads
 
 draft: true
 cascade:
@@ -7,16 +7,15 @@ cascade:
     
 minutes_to_complete: 20
 
-who_is_this_for: This is anyone interested in understanding how IRQ patterns can enhance networking workload performance on cloud.
-
+who_is_this_for: This is a specialized topic for developers and performance engineers who are interested in understanding how network interrupt patterns can impact performance on cloud servers.
 
 learning_objectives:
-   - Analyze the current IRQ layout on the machine.
-   - Test different options and patterns to improve performance.
+   - Analyze the current interrupt request (IRQ) layout on an Arm Linux system
+   - Experiment with different interrupt options and patterns to improve performance
 
 prerequisites:
-    - An Arm computer running Linux installed.
-    - Some familiarity with running Linux command line commands.
+    - An Arm computer running Linux
+    - Some familiarity with the Linux command line
 
 author: Kiel Friedt
 
@@ -24,7 +23,8 @@ author: Kiel Friedt
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
-    - AArch64
+    - Neoverse
+    - Cortex-A
 tools_software_languages:
 
 operatingsystems:
