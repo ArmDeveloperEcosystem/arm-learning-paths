@@ -1,16 +1,16 @@
 ---
-title: Performance analysis code example
-weight: 4
+title: "Measure cross-platform performance with topdown-tool and Perf PMU counters"
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-##  Example code
+##  Cross-platform performance analysis example
 
-To compare top-down on Arm and x86 you can run a small example to gain some practical experience. 
+To compare x86 and Arm Neoverse top-down methodologies, you can run a backend-bound benchmark that demonstrates PMU counter differences between architectures.
 
-You can prepare the application and test it on both x86 and Arm Linux systems. You will need a C compiler installed, [GCC](/install-guides/gcc/native/) or Clang, and [Perf](/install-guides/perf/) installed on each system. Refer to the package manager for your Linux distribution for installation information. 
+You can prepare the application and test it on both x86 and Arm Neoverse Linux systems. You will need a C compiler installed, [GCC](/install-guides/gcc/native/) or Clang, and [Perf](/install-guides/perf/) installed on each system. For Arm systems, you'll also need [topdown-tool](/install-guides/topdown-tool/). Refer to the package manager for your Linux distribution for installation information. 
 
 Use a text editor to copy the code below to a file named `test.c`
 
@@ -51,9 +51,7 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-This  program takes a single command-line argument specifying the number of iterations to run. It performs that many sequential floating-point divisions in a loop, using a volatile variable to prevent compiler optimization, and prints the final result. 
-
-It's a contrived example used to create a dependency chain of high-latency operations (divisions), simulating a CPU-bound workload where each iteration must wait for the previous one to finish.
+This program demonstrates a backend-bound workload that will show high `STALL_SLOT_BACKEND` on Arm Neoverse and high `Backend_Bound` percentage on x86. It takes a single command-line argument specifying the number of iterations to run. The sequential floating-point divisions create a dependency chain of high-latency operations, simulating a core-bound workload where each iteration must wait for the previous division to complete.
 
 Build the application using GCC:
 
@@ -76,11 +74,11 @@ Performing 1000000000 dependent floating-point divisions...
 Done. Final result: 0.000056
 ```
 
-## Collect x86 top-down level 1 metrics 
+## Collect x86 top-down Level 1 metrics with Perf
 
-Linux Perf computes top-down level 1 breakdown as described in the previous section for Retiring, Bad Speculation, Frontend Bound, and Backend Bound.
+Linux Perf computes 4-level hierarchical top-down breakdown using PMU counters like `UOPS_RETIRED.RETIRE_SLOTS`, `IDQ_UOPS_NOT_DELIVERED.CORE`, and `CPU_CLK_UNHALTED.THREAD` for the four categories: Retiring, Bad Speculation, Frontend Bound, and Backend Bound.
 
-Use `perf stat` to on the pinned core to collect the metrics. 
+Use `perf stat` on the pinned core to collect Level 1 metrics: 
 
 ```console
 taskset -c 1 perf stat -C 1 --topdown ./test 1000000000 
@@ -131,18 +129,21 @@ Done. Final result: 0.000056
        6.029283206 seconds time elapsed
 ```
 
-Again, showing `Backend_Bound` value very high (0.96). 
+Again, showing `Backend_Bound` value very high (0.96). Notice the x86-specific PMU counters:
+- `uops_issued.any` and `uops_retired.retire_slots` for micro-operation accounting
+- `idq_uops_not_delivered.core` for frontend delivery failures
+- `cpu_clk_unhalted.thread` for cycle normalization
 
-If you want to learn more, you can continue with the level 2 and level 3 analysis.
+If you want to learn more, you can continue with the Level 2 and Level 3 hierarchical analysis.
 
 
-## Use the Arm top-down methodology
+## Use the Arm Neoverse 2-stage top-down methodology
 
-Make sure you install the Arm top-down tool.
+Arm's approach uses a 2-stage methodology with PMU counters like `STALL_SLOT_BACKEND`, `STALL_SLOT_FRONTEND`, `OP_RETIRED`, and `OP_SPEC` for Stage 1 analysis, followed by resource effectiveness groups in Stage 2.
 
-Use the [Telemetry Solution install guide](/install-guides/topdown-tool/) for information about installing `topdown-tool`. 
+Make sure you install the Arm topdown-tool using the [Telemetry Solution install guide](/install-guides/topdown-tool/).
 
-Collect instructions per cycle (IPC):
+Collect Stage 2 general metrics including Instructions Per Cycle (IPC):
 
 ```console
 taskset -c 1 topdown-tool -m General ./test 1000000000
@@ -159,7 +160,7 @@ Stage 2 (uarch metrics)
 Instructions Per Cycle 0.355 per cycle
 ```
 
-Connect the stage 1 metrics:
+Collect the Stage 1 topdown metrics using Arm's cycle accounting:
 
 ```console
 taskset -c 1 topdown-tool -m Cycle_Accounting ./test 1000000000
@@ -177,7 +178,7 @@ Frontend Stalled Cycles 0.04% cycles
 Backend Stalled Cycles. 88.15% cycles
 ```
 
-This confirms the example has high backend stalls as on x86. 
+This confirms the example has high backend stalls equivalent to x86's Backend_Bound category. Notice how Arm's Stage 1 uses percentage of cycles rather than Intel's slot-based accounting. 
 
 You can continue to use the `topdown-tool` for additional microarchitecture exploration.
 
@@ -199,7 +200,7 @@ L1D Cache MPKI............... 0.023 misses per 1,000 instructions
 L1D Cache Miss Ratio......... 0.000 per cache access
 ```
 
-For L1 instruction cache:
+For L1 instruction cache effectiveness:
 
 ```console
 taskset -c 1 topdown-tool -m L1D_Cache_Effectiveness  ./test 1000000000
@@ -260,9 +261,11 @@ Crypto Operations Percentage........ 0.00% operations
 ```
 
 
-## Summary
+## Cross-architecture performance analysis summary
 
-Both Arm Neoverse and modern x86 cores expose hardware events that Perf aggregates into the same top-down categories. Names of the PMU counters differ, but the level 1 categories are the same. 
+Both Arm Neoverse and modern x86 cores expose hardware PMU events that enable equivalent top-down analysis, despite different counter names and calculation methods. Intel x86 processors use a four-level hierarchical methodology based on slot-based pipeline accounting, relying on PMU counters such as `UOPS_RETIRED.RETIRE_SLOTS`, `IDQ_UOPS_NOT_DELIVERED.CORE`, and `CPU_CLK_UNHALTED.THREAD` to break down performance into retiring, bad speculation, frontend bound, and backend bound categories. Linux Perf serves as the standard collection tool, using commands like `perf stat --topdown` and the `-M topdownl1` option for detailed breakdowns.
 
-If you are working on both architectures you can use the same framework with minor differences between Intel's hierarchical structure and Arm's two-stage resource groups to systematically identify and resolve performance bottlenecks. 
+Arm Neoverse platforms implement a complementary two-stage methodology where Stage 1 focuses on topdown categories using counters such as `STALL_SLOT_BACKEND`, `STALL_SLOT_FRONTEND`, `OP_RETIRED`, and `OP_SPEC` to analyze pipeline stalls and instruction retirement. Stage 2 evaluates resource effectiveness, including cache and operation mix metrics through `topdown-tool`, which accepts the desired metric group via the `-m` argument.
+
+Both architectures identify the same performance bottleneck categories, enabling similar optimization strategies across Intel and Arm platforms while accounting for methodological differences in measurement depth and analysis approach. 
 
