@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 3
-- Linux: 179
+- Linux: 180
 - macOS: 13
 - Windows: 14
 pinned_modules:
@@ -24,7 +24,7 @@ subjects_filter:
 - Libraries: 9
 - ML: 32
 - Performance and Architecture: 72
-- Storage: 1
+- Storage: 2
 - Web: 12
 subtitle: Optimize cloud native apps on Arm for performance and cost
 title: Servers and Cloud Computing
@@ -115,7 +115,9 @@ tools_software_languages_filter:
 - Java: 4
 - JAX: 1
 - JMH: 1
-- Kafka: 1
+- Kafka: 2
+- kafka-consumer-perf-test.sh: 1
+- kafka-producer-perf-test.sh: 1
 - KEDA: 1
 - Kedify: 1
 - Keras: 1
@@ -153,6 +155,7 @@ tools_software_languages_filter:
 - Orchard Core: 1
 - PAPI: 1
 - perf: 6
+- Perf: 1
 - PostgreSQL: 4
 - Profiling: 1
 - Python: 32
@@ -180,6 +183,7 @@ tools_software_languages_filter:
 - TensorFlow: 2
 - Terraform: 11
 - ThirdAI: 1
+- topdown-tool: 1
 - Trusted Firmware: 1
 - Trustee: 1
 - TSan: 1
@@ -202,6 +206,6 @@ weight: 1
 cloud_service_providers_filter:
 - AWS: 17
 - Google Cloud: 18
-- Microsoft Azure: 17
+- Microsoft Azure: 18
 - Oracle: 2
 ---

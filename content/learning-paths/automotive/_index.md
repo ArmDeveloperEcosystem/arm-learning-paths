@@ -28,9 +28,11 @@ tools_software_languages_filter:
 - Docker: 2
 - FVP: 1
 - GCC: 3
+- Perf: 1
 - Python: 2
 - Raspberry Pi: 1
 - ROS 2: 3
 - Rust: 1
+- topdown-tool: 1
 - Zenoh: 1
 ---

@@ -1,21 +1,23 @@
 ---
-title: "Compare Arm and x86 Top-Down Performance Analysis"
-
-minutes_to_complete: 30
+title: Compare Arm Neoverse and Intel x86 top-down performance analysis with PMU counters 
 
 draft: true
 cascade:
     draft: true
 
-who_is_this_for: This is an advanced topic for software developers who want to understand the similarities and differences between Arm and x86 top-down performance analysis. 
+minutes_to_complete: 30
+
+who_is_this_for: This is an advanced topic for software developers and performance engineers who want to understand the similarities and differences between Arm Neoverse and Intel x86 top-down performance analysis using PMU counters, Linux Perf, and the topdown-tool. 
 
 learning_objectives:
-     - Describe the similarities and differences between top-down performance analysis on x86 and Arm Linux systems.
-     - Run applications on both architectures and understand how performance analysis is done on each system.
+     - Compare Intel x86 4-level hierarchical top-down methodology with Arm Neoverse 2-stage approach using PMU counters
+     - Execute performance analysis using Linux Perf on x86 and topdown-tool on Arm systems
+     - Analyze Backend Bound, Frontend Bound, Bad Speculation, and Retiring categories across both architectures
 
 prerequisites:
-    - Familiarity with performance analysis on Linux systems using Perf. 
-    - Arm and x86 Linux systems to try code examples.
+    - Familiarity with performance analysis on Linux systems using Perf and PMU counters
+    - Access to Arm Neoverse and Intel x86 Linux systems for hands-on examples
+    - Basic understanding of CPU pipeline concepts and performance bottlenecks
 
 author:
     - Jason Andrews
@@ -30,6 +32,8 @@ operatingsystems:
 tools_software_languages:
     - GCC
     - Clang
+    - Perf
+    - topdown-tool
 
 shared_path: true
 shared_between:
@@ -47,7 +51,7 @@ further_reading:
         type: documentation
     - resource:
         title: How to use the Arm Performance Monitoring Unit and System Counter
-        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/arm_pmu/).
+        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/arm_pmu/
         type: website
 
 

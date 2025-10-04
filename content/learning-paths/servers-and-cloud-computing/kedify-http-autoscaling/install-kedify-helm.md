@@ -1,55 +1,62 @@
 ---
-title: "Install Kedify via Helm"
+title: "Install Kedify using Helm"
 weight: 2
 layout: "learningpathall"
 ---
 
-In this section you will learn how to install Kedify on your Kubernetes cluster using Helm. You will add the Kedify chart repo, install KEDA (Kedify build), the HTTP Scaler, and the Kedify Agent, then verify everything is running.
+## Overview
+In this section, you will install Kedify on your Kubernetes cluster using Helm. You will add the Kedify chart repository, then install three separate Helm charts: KEDA (Kedify build) for event-driven autoscaling, the HTTP Scaler for HTTP-based scaling, and the Kedify Agent for connecting your cluster to Kedify's cloud service. You will then verify the installation. This enables HTTP autoscaling on Kubernetes with KEDA and Kedify, including arm64 nodes.
 
-For more details and all installation methods on Arm, you can refer to the [Kedify installation docs](https://docs.kedify.io/installation/helm#installation-on-arm)
+For more information and other installation methods on Arm, see the [Kedify installation documentation](https://docs.kedify.io/installation/helm#installation-on-arm).
 
 ## Before you begin
 
 You will need:
 
-- A running Kubernetes cluster (e.g., kind, minikube, EKS, GKE, AKS, etc.), hosted on any cloud provider or local environment.
-- kubectl and helm installed and configured to communicate with your cluster
-- A Kedify Service account (https://dashboard.kedify.io/) to obtain Organization ID and API Key — log in or create an account if you don’t have one
+- A running Kubernetes cluster (for example, kind, minikube, EKS, GKE, or AKS), hosted on any cloud provider or local environment
+- Kubectl and Helm installed and configured to communicate with your cluster
+- A Kedify Service account to obtain your Organization ID and API key (sign up at the [Kedify dashboard](https://dashboard.kedify.io/))
 
-## Installation
+## Gather Kedify credentials
 
-1) Get your Organization ID: In the Kedify dashboard (https://dashboard.kedify.io/) go to Organization -> Details and copy the ID.
+From the Kedify dashboard, copy your Organization ID (**Organization** → **Details**) and retrieve or create an API key.
 
-2) Get your API key:
-- If you already have a Kedify Agent deployed, you can retrieve it from the existing Secret:
-
+If you already have a Kedify Agent deployed, decode the key from the existing Secret:
 ```bash
 kubectl get secret -n keda kedify-agent -o=jsonpath='{.data.apikey}' | base64 --decode
 ```
+Otherwise, in the Kedify dashboard go to **Organization** → **API Keys**, select **Create Agent Key**, and copy the key.
 
-Otherwise, in the Kedify dashboard (https://dashboard.kedify.io/) go to Organization -> API Keys, click Create Agent Key, and copy the key.
+{{% notice Note %}}
+The API key is shared across all agent installations. If you regenerate it, update existing agents and keep it secret.
+{{% /notice %}}
 
-Note: The API Key is shared across all your Agent installations. If you regenerate it, update existing Agent installs and keep it secret.
+Optionally, export these values for reuse in the following commands:
+```bash
+export YOUR_ORG_ID="<your-org-id>"
+export YOUR_API_KEY="<your-agent-api-key>"
+export CLUSTER_NAME="my-arm-cluster"
+```
 
-## Helm repository
+## Add the Kedify Helm repository
 
 Add the Kedify Helm repository and update your local index:
-
 ```bash
 helm repo add kedifykeda https://kedify.github.io/charts
 helm repo update
 ```
 
-## Helm installation
+## Install components with Helm
 
-Most providers like AWS EKS and Azure AKS automatically place pods on Arm nodes when you specify `nodeSelector` for `kubernetes.io/arch=arm64`. However, Google Kubernetes Engine (GKE) applies an explicit taint on Arm nodes, requiring matching `tolerations`.
+Most providers (such as EKS and AKS) schedule pods on Arm nodes when you specify a `nodeSelector` for `kubernetes.io/arch=arm64`. On Google Kubernetes Engine (GKE), Arm nodes commonly have an explicit taint, so matching `tolerations` are required. To stay portable across providers, configure both `nodeSelector` and `tolerations`.
 
-To ensure a portable deployment strategy across all cloud providers, it is recommended that you configure both `nodeSelector` and `tolerations` in your Helm values or CLI flags.
+{{% notice Note %}}
+For a portable deployment across cloud providers, configure both `nodeSelector` and `tolerations` in your Helm values or CLI flags.
+{{% /notice %}}
 
-Install each component into the keda namespace. Replace placeholders where noted.
+## Install the Kedify build of KEDA
 
-1) Install Kedify build of KEDA:
-
+Run the following Helm command to install the Kedify build of KEDA into the `keda` namespace:
 ```bash
 helm upgrade --install keda kedifykeda/keda \
   --namespace keda \
@@ -62,8 +69,9 @@ helm upgrade --install keda kedifykeda/keda \
   --set "tolerations[0].effect=NoSchedule"
 ```
 
-2) Install Kedify HTTP Scaler:
+## Install the Kedify HTTP Scaler
 
+Install the Kedify HTTP Scaler with matching node selector and tolerations:
 ```bash
 helm upgrade --install keda-add-ons-http kedifykeda/keda-add-ons-http \
   --namespace keda \
@@ -80,8 +88,9 @@ helm upgrade --install keda-add-ons-http kedifykeda/keda-add-ons-http \
   --set "scaler.tolerations[0].effect=NoSchedule"
 ```
 
-3) Install Kedify Agent (edit clusterName, orgId, apiKey):
+## Install the Kedify Agent
 
+Edit the cluster name, Organization ID, and API key (or rely on the exported environment variables), then run:
 ```bash
 helm upgrade --install kedify-agent kedifykeda/kedify-agent \
   --namespace keda \
@@ -95,22 +104,19 @@ helm upgrade --install kedify-agent kedifykeda/kedify-agent \
   --set "agent.kedifyProxy.globalValues.tolerations[0].operator=Equal" \
   --set "agent.kedifyProxy.globalValues.tolerations[0].value=arm64" \
   --set "agent.kedifyProxy.globalValues.tolerations[0].effect=NoSchedule" \
-  \
-  --set clusterName="my-arm-cluster" \
-  --set agent.orgId="$YOUR_ORG_ID" \
-  --set agent.apiKey="$YOUR_API_KEY"
+  --set clusterName="${CLUSTER_NAME:-my-arm-cluster}" \
+  --set agent.orgId="${YOUR_ORG_ID}" \
+  --set agent.apiKey="${YOUR_API_KEY}"
 ```
 
 ## Verify installation
 
-You are now ready to verify your installation:
-
+List pods in the `keda` namespace to confirm all components are running:
 ```bash
 kubectl get pods -n keda
 ```
 
-Expected output should look like (names may differ):
-
+Expected output (names might vary):
 ```output
 NAME                                             READY   STATUS    RESTARTS   AGE
 keda-add-ons-http-external-scaler-xxxxx          1/1     Running   0          1m
@@ -121,4 +127,4 @@ keda-operator-metrics-apiserver-xxxxx            1/1     Running   0          1m
 kedify-agent-xxxxx                               1/1     Running   0          1m
 ```
 
-Proceed to the next section to learn how to install an Ingress controller before deploying a sample HTTP app and testing autoscaling.
+Proceed to the next section to install an ingress controller, deploy a sample HTTP app, and test autoscaling.

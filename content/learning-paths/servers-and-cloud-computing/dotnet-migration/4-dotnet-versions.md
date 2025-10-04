@@ -15,8 +15,8 @@ Understanding which versions perform best and the features they offer can help y
 {{% notice Support status summary %}}
 
 - .NET 8 – Current LTS (support until Nov 2026)
-- .NET 9 – STS (preview; GA Q4 2025)
-- .NET 10 – Next LTS (preview; expected 2025 Q4–Q1 2026)
+- .NET 9 – STS (support until Nov 2026)
+- .NET 10 – Next LTS (preview; expected GA Nov 2025)
 - .NET 3.1, 5, 6, 7 – End of life
 {{% /notice %}}
 
@@ -69,7 +69,7 @@ Important Arm-related improvements include:
 - Smaller base container images (`mcr.microsoft.com/dotnet/aspnet:8.0` and `…/runtime:8.0`) thanks to a redesigned layering strategy, particularly beneficial on Arm where network bandwidth is often at a premium.
 - Garbage-collector refinements that reduce pause times on highly-threaded, many-core servers.
 
-## .NET 9
+## .NET 9 (current STS - support until November 2026)
 
 .NET 9 is still in preview, so features may change, but public builds already show promising Arm-centric updates:
 
