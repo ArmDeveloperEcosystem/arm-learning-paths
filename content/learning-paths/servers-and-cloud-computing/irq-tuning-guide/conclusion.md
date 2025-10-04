@@ -34,18 +34,35 @@ For larger systems with more than 16 vCPUs, the findings are different:
 
 On larger systems, the overhead of interrupt handling is proportionally smaller compared to the available processing power. The main performance bottleneck occurs when multiple high-frequency network interrupts compete for the same core.
 
-## Implementation Considerations
+## Implementation considerations
 
-When implementing these IRQ management strategies, there are some important points to keep in mind.
+When implementing these IRQ management strategies, several factors influence your success.
 
-Pay attention to the workload type. CPU-bound applications may benefit from different IRQ patterns than I/O-bound applications.
+Consider your workload type first, as CPU-bound applications can benefit from different IRQ patterns than I/O-bound applications. Always benchmark your specific workload with different IRQ patterns rather than assuming one approach works universally.
 
-Always benchmark your specific workload with different IRQ patterns. 
+For real-time monitoring, use `watch -n1 'grep . /proc/interrupts'` to observe IRQ distribution as it happens. This helps you verify your changes are working as expected.
 
-Monitor IRQ counts in real-time using `watch -n1 'grep . /proc/interrupts'` to observe IRQ distribution in real-time.
+On multi-socket systems, NUMA effects become important. Keep IRQs on cores close to the PCIe devices generating them to minimize cross-node memory access latency. Additionally, ensure your IRQ affinity settings persist across reboots by adding them to `/etc/rc.local` or creating a systemd service file.
 
-Also consider NUMA effects on multi-socket systems. Keep IRQs on cores close to the PCIe devices generating them to minimize cross-node memory access.
+As workloads and hardware evolve, revisiting and adjusting IRQ management strategies may be necessary to maintain optimal performance. What works well today might need refinement as your application scales or changes.
 
-Make sure to set up IRQ affinity settings in `/etc/rc.local` or a systemd service file to ensure they persist across reboots.
+## Next Steps
 
-Remember that as workloads and hardware evolve, revisiting and adjusting IRQ management strategies may be necessary to maintain optimal performance.
+You have successfully learned how to optimize network interrupt handling on Arm servers. You can now analyze IRQ distributions, implement different management patterns, and configure persistent solutions for your workloads.
+
+### Learn more about Arm server performance
+
+* [Deploy applications on Arm-based cloud instances](../csp/)
+* [Get started with performance analysis using Linux Perf](../../../install-guides/perf/)
+* [Optimize server applications for Arm Neoverse processors](../mongodb/)
+
+### Explore related topics
+
+* [Understanding Arm server architecture](../arm-cloud-native-performance/)
+* [Cloud migration strategies for Arm](../migration/)
+
+### Additional resources
+
+* [Linux kernel IRQ subsystem documentation](https://www.kernel.org/doc/html/latest/core-api/irq/index.html)
+* [Arm Neoverse performance optimization guide](https://developer.arm.com/documentation/)
+* [Network performance tuning best practices](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/monitoring_and_managing_system_status_and_performance/)

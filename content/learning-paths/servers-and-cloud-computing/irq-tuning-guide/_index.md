@@ -1,17 +1,16 @@
 ---
-title: Learn about the impact of network interrupts on cloud workloads
+title: Optimize network interrupt handling on Arm servers
 
-draft: true
-cascade:
-    draft: true
-    
+   
 minutes_to_complete: 20
 
-who_is_this_for: This is a specialized topic for developers and performance engineers who are interested in understanding how network interrupt patterns can impact performance on cloud servers.
+who_is_this_for: This is an introductory topic for developers and performance engineers who are interested in understanding how network interrupt patterns can impact performance on cloud servers.
 
 learning_objectives:
    - Analyze the current interrupt request (IRQ) layout on an Arm Linux system
    - Experiment with different interrupt options and patterns to improve performance
+   - Configure optimal IRQ distribution strategies for your workload
+   - Implement persistent IRQ management solutions
 
 prerequisites:
     - An Arm computer running Linux
