@@ -27,7 +27,7 @@ author: Parichay Das
 
 ### Tags
 skilllevels: Introductory
-subjects: GenAI
+subjects: ML
 armips:
     - Neoverse
 
