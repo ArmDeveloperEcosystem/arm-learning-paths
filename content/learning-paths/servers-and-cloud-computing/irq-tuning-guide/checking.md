@@ -1,5 +1,5 @@
 ---
-title: Understand and Analyze network IRQ configuration
+title: Understand and analyze network IRQ configuration
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -10,11 +10,11 @@ layout: learningpathall
 
 In modern cloud environments, network performance is critical to overall system efficiency. Network interface cards (NICs) generate interrupt requests (IRQs) to notify the CPU when data packets arrive or need to be sent. These interrupts temporarily pause normal processing, allowing the system to handle network traffic.
 
-By default, Linux distributes these network interrupts across available CPU cores. However, this distribution is not always optimal for performance:
+By default, Linux distributes these network interrupts across available CPU cores. However, this distribution is not always optimal for performance, for the following reasons:
 
-- High interrupt rates: In busy servers, network cards can generate thousands of interrupts per second
-- CPU cache locality: Processing related network operations on the same CPU core improves cache efficiency
-- Resource contention: When network IRQs compete with application workloads for the same CPU resources, both can suffer
+- High interrupt rates: in busy servers, network cards can generate thousands of interrupts per second
+- CPU cache locality: processing related network operations on the same CPU core improves cache efficiency
+- Resource contention: when network IRQs compete with application workloads for the same CPU resources, both can suffer
 - Power efficiency: IRQ management can help reduce unnecessary CPU wake-ups, improving energy efficiency
 
 Understanding and optimizing IRQ assignment allows you to balance network processing loads, reduce latency, and maximize throughput for your specific workloads.

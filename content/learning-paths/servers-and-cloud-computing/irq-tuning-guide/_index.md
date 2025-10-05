@@ -35,6 +35,22 @@ further_reading:
         title: Perf for Linux on Arm (LinuxPerf)
         link: https://learn.arm.com/install-guides/perf/
         type: website
+    - resource:
+        title: Tune network workloads on Arm-based bare-metal instances
+        link: /learning-paths/servers-and-cloud-computing/tune-network-workloads-on-bare-metal/
+        type: learning-path
+    - resource:
+        title: Get started with Arm-based cloud instances
+        link: /learning-paths/servers-and-cloud-computing/csp/
+        type: learning-path
+    - resource:
+        title: Linux kernel IRQ subsystem documentation
+        link: https://www.kernel.org/doc/html/latest/core-api/irq/index.html
+        type: website
+    - resource:
+        title: Microbenchmark and tune network performance with iPerf3
+        link: /learning-paths/servers-and-cloud-computing/microbenchmark-network-iperf3/
+        type: learning-path
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
