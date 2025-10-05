@@ -12,22 +12,20 @@ Different IRQ management patterns can significantly impact network performance a
 
 Network interrupt requests (IRQs) can be distributed across CPU cores in various ways, each with potential benefits depending on your workload characteristics and system configuration. By strategically assigning network IRQs to specific cores, you can improve cache locality, reduce contention, and potentially boost overall system performance.
 
-The following patterns have been tested on various systems and can be implemented using the provided scripts. An optimal pattern is suggested at the conclusion of this Learning Path, but your specific workload may benefit from a different approach.
+The following patterns have been tested on various systems and can be implemented using the provided scripts. An optimal pattern is suggested at the conclusion of this Learning Path, but your specific workload might benefit from a different approach.
 
 ## Common IRQ distribution patterns
 
 Four main distribution strategies offer different performance characteristics:
 
-Default: uses the IRQ pattern provided at boot time by the Linux kernel
-Random: assigns all IRQs to cores without overlap with network IRQs  
-Housekeeping: assigns all non-network IRQs to specific dedicated cores
-NIC-focused: assigns network IRQs to single or multiple ranges of cores, including pairs 
+- Default: uses the IRQ pattern provided at boot time by the Linux kernel
+- Random: assigns all IRQs to cores without overlap with network IRQs  
+- Housekeeping: assigns all non-network IRQs to specific dedicated cores
+- NIC-focused: assigns network IRQs to single or multiple ranges of cores, including pairs 
 
 ## Scripts to implement IRQ management patterns
 
-The scripts below demonstrate how to implement different IRQ management patterns on your system. Each script targets a specific distribution strategy:
-
-Before running these scripts, identify your network interface name using `ip link show` and determine your system's CPU topology with `lscpu`. Always test these changes in a non-production environment first, as improper IRQ assignment can impact system stability.
+The scripts below demonstrate how to implement different IRQ management patterns on your system. Each script targets a specific distribution strategy. Before running these scripts, identify your network interface name using `ip link show` and determine your system's CPU topology with `lscpu`. Always test these changes in a non-production environment first, as improper IRQ assignment can impact system stability.
 
 ## Housekeeping pattern
 
@@ -43,7 +41,7 @@ for irq in $(awk '/ACPI:Ged/ {sub(":","",$1); print $1}' /proc/interrupts); do
 done
 ```
 
-### Paired core pattern
+## Paired core pattern
 
 The paired core assignment pattern distributes network IRQs across CPU core pairs for better cache coherency.
 
@@ -66,7 +64,7 @@ for irq in "${irqs[@]}"; do
 done
 ```
 
-### Range assignment pattern
+## Range assignment pattern
 
 The range assignment pattern assigns network IRQs to a specific range of cores, providing dedicated network processing capacity.
 
@@ -80,6 +78,6 @@ for irq in $(awk '/'$IFACE'/ {sub(":","",$1); print $1}' /proc/interrupts); do
 done
 ```
 
-Each pattern offers different performance characteristics depending on your workload. The housekeeping pattern reduces system noise, paired cores optimize cache usage, and range assignment provides dedicated network processing capacity. Test these patterns in your environment to determine which provides the best performance for your specific use case.
+Each pattern offers different performance characteristics depending on your workload. The housekeeping pattern reduces system noise, paired cores optimize cache usage, and range assignment provides dedicated network processing capacity. Improper configuration can degrade performance or stability, so always test these patterns in a non-production environment to determine which provides the best results for your specific use case.
 
 Continue to the next section for additional guidance.
