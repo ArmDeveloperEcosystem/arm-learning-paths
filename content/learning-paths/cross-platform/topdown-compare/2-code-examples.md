@@ -153,11 +153,17 @@ The output is similar to:
 
 ```output
 Performing 1000000000 dependent floating-point divisions...
+Monitoring command: test. Hit Ctrl-C to stop.
+Run 1
 Done. Final result: 0.000056
-Stage 2 (uarch metrics)
-=======================
-[General]
-Instructions Per Cycle 0.355 per cycle
+CPU Neoverse V2 metrics
+└── Stage 2 (uarch metrics)
+    └── General (General)
+        └── ┏━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━┓
+            ┃ Metric                 ┃ Value ┃ Unit      ┃
+            ┡━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━┩
+            │ Instructions Per Cycle │ 0.324 │ per cycle │
+            └────────────────────────┴───────┴───────────┘
 ```
 
 Collect the Stage 1 topdown metrics using Arm's cycle accounting:
@@ -170,12 +176,18 @@ The output is similar to:
 
 ```output
 Performing 1000000000 dependent floating-point divisions...
+Monitoring command: test. Hit Ctrl-C to stop.
+Run 1
 Done. Final result: 0.000056
-Stage 1 (Topdown metrics)
-=========================
-[Cycle Accounting]
-Frontend Stalled Cycles 0.04% cycles
-Backend Stalled Cycles. 88.15% cycles
+CPU Neoverse V2 metrics
+└── Stage 2 (uarch metrics)
+    └── Cycle Accounting (Cycle_Accounting)
+        └── ┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━┓
+            ┃ Metric                  ┃ Value ┃ Unit ┃
+            ┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━┩
+            │ Backend Stalled Cycles  │ 93.22 │ %    │
+            │ Frontend Stalled Cycles │ 0.03  │ %    │
+            └─────────────────────────┴───────┴──────┘
 ```
 
 This confirms the example has high backend stalls, equivalent to x86's Backend_Bound category. Notice how Arm's Stage 1 uses percentage of cycles rather than Intel's slot-based accounting. 
@@ -192,12 +204,20 @@ The output is similar to:
 
 ```output
 Performing 1000000000 dependent floating-point divisions...
+Monitoring command: test. Hit Ctrl-C to stop.
+Run 1
 Done. Final result: 0.000056
-Stage 2 (uarch metrics)
-=======================
-[L1 Data Cache Effectiveness]
-L1D Cache MPKI............... 0.023 misses per 1,000 instructions
-L1D Cache Miss Ratio......... 0.000 per cache access
+CPU Neoverse V2 metrics
+└── Stage 2 (uarch metrics)
+    └── L1 Data Cache Effectiveness (L1D_Cache_Effectiveness)
+        ├── Follows
+        │   └── Backend Bound (backend_bound)
+        └── ┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+            ┃ Metric               ┃ Value ┃ Unit                          ┃
+            ┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+            │ L1D Cache Miss Ratio │ 0.000 │ per cache access              │
+            │ L1D Cache MPKI       │ 0.129 │ misses per 1,000 instructions │
+            └──────────────────────┴───────┴───────────────────────────────┘
 ```
 
 For L1 instruction cache effectiveness:
@@ -210,12 +230,20 @@ The output is similar to:
 
 ```output
 Performing 1000000000 dependent floating-point divisions...
+Monitoring command: test. Hit Ctrl-C to stop.
+Run 1
 Done. Final result: 0.000056
-Stage 2 (uarch metrics)
-=======================
-[L1 Instruction Cache Effectiveness]
-L1I Cache MPKI............... 0.022 misses per 1,000 instructions
-L1I Cache Miss Ratio......... 0.000 per cache access
+CPU Neoverse V2 metrics
+└── Stage 2 (uarch metrics)
+    └── L1 Instruction Cache Effectiveness (L1I_Cache_Effectiveness)
+        ├── Follows
+        │   └── Frontend Bound (frontend_bound)
+        └── ┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+            ┃ Metric               ┃ Value ┃ Unit                          ┃
+            ┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+            │ L1I Cache Miss Ratio │ 0.003 │ per cache access              │
+            │ L1I Cache MPKI       │ 0.474 │ misses per 1,000 instructions │
+            └──────────────────────┴───────┴───────────────────────────────┘
 ```
 
 For last level cache: 
@@ -228,13 +256,22 @@ The output is similar to:
 
 ```output
 Performing 1000000000 dependent floating-point divisions...
+Monitoring command: test. Hit Ctrl-C to stop.
+Run 1
 Done. Final result: 0.000056
-Stage 2 (uarch metrics)
-=======================
-[Last Level Cache Effectiveness]
-LL Cache Read MPKI.............. 0.017 misses per 1,000 instructions
-LL Cache Read Miss Ratio........ 0.802 per cache access
-LL Cache Read Hit Ratio......... 0.198 per cache access
+CPU Neoverse V2 metrics
+└── Stage 2 (uarch metrics)
+    └── Last Level Cache Effectiveness (LL_Cache_Effectiveness)
+        ├── Follows
+        │   ├── Backend Bound (backend_bound)
+        │   └── Frontend Bound (frontend_bound)
+        └── ┏━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+            ┃ Metric                   ┃ Value ┃ Unit                          ┃
+            ┡━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+            │ LL Cache Read Hit Ratio  │ nan   │ per cache access              │
+            │ LL Cache Read Miss Ratio │ nan   │ per cache access              │
+            │ LL Cache Read MPKI       │ 0.000 │ misses per 1,000 instructions │
+            └──────────────────────────┴───────┴───────────────────────────────┘
 ```
 
 For operation mix:
@@ -247,17 +284,28 @@ The output is similar to:
 
 ```output
 Performing 1000000000 dependent floating-point divisions...
+Monitoring command: test. Hit Ctrl-C to stop.
+Run 1
 Done. Final result: 0.000056
-Stage 2 (uarch metrics)
-=======================
-[Speculative Operation Mix]
-Load Operations Percentage.......... 16.70% operations
-Store Operations Percentage......... 16.59% operations
-Integer Operations Percentage....... 33.61% operations
-Advanced SIMD Operations Percentage. 0.00% operations
-Floating Point Operations Percentage 16.45% operations
-Branch Operations Percentage........ 16.65% operations
-Crypto Operations Percentage........ 0.00% operations
+CPU Neoverse V2 metrics
+└── Stage 2 (uarch metrics)
+    └── Speculative Operation Mix (Operation_Mix)
+        ├── Follows
+        │   ├── Backend Bound (backend_bound)
+        │   └── Retiring (retiring)
+        └── ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━┓
+            ┃ Metric                                           ┃ Value ┃ Unit ┃
+            ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━┩
+            │ Barrier Operations Percentage                    │ ❌    │ %    │
+            │ Branch Operations Percentage                     │ ❌    │ %    │
+            │ Crypto Operations Percentage                     │ 0.00  │ %    │
+            │ Integer Operations Percentage                    │ 33.52 │ %    │
+            │ Load Operations Percentage                       │ 16.69 │ %    │
+            │ Floating Point Operations Percentage             │ 16.51 │ %    │
+            │ Advanced SIMD Operations Percentage              │ 0.00  │ %    │
+            │ Store Operations Percentage                      │ 16.58 │ %    │
+            │ SVE Operations (Load/Store Inclusive) Percentage │ 0.00  │ %    │
+            └──────────────────────────────────────────────────┴───────┴──────┘
 ```
 
 
