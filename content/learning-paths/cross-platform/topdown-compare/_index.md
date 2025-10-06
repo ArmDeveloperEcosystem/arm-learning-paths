@@ -1,16 +1,12 @@
 ---
 title: Compare Arm Neoverse and Intel x86 top-down performance analysis with PMU counters 
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for software developers and performance engineers who want to understand the similarities and differences between Arm Neoverse and Intel x86 top-down performance analysis using PMU counters, Linux Perf, and the topdown-tool. 
 
 learning_objectives:
-     - Compare Intel x86 4-level hierarchical top-down methodology with Arm Neoverse 2-stage approach using PMU counters
+     - Compare Intel x86 multi-level hierarchical methodology with Arm Neoverse micro-architecture exploration methodology
      - Execute performance analysis using Linux Perf on x86 and topdown-tool on Arm systems
      - Analyze Backend Bound, Frontend Bound, Bad Speculation, and Retiring categories across both architectures
 
