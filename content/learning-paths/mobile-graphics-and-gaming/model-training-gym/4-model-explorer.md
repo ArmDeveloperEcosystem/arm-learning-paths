@@ -8,8 +8,6 @@ layout: learningpathall
 
 ## What is Model Explorer?
 
-TODO: verify .vgf flavor runs smoothly
-
 Model Explorer is a visualization tool for inspecting neural network structures and execution graphs. Arm provides a VGF adapter for Model Explorer, allowing you to visualize `.vgf` models created from your training and export pipeline.
 
 This lets you inspect model architecture, tensor shapes, and graph connectivity before deployment. This can be a powerful way to debug and understand your exported neural graphics models.

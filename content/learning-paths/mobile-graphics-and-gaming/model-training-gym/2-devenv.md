@@ -39,6 +39,12 @@ This will:
 - install the `ng-model-gym` package and required dependencies
 - download the datasets and weights needed to run the notebooks
 
+Activate the virtual environment:
+
+```bash
+source nb-env/bin/activate
+```
+
 Run the following in a python shell to confirm that the script was successful:
 
 ```python

@@ -49,7 +49,7 @@ jupyter lab
 This will prompt you to open your browser to `http://localhost:8888`and enter the token that is printed in the terminal output. Navigate to:
 
 ```output
-neural-graphics-model-gym-examples/model_training_example.ipynb
+neural-graphics-model-gym-examples/tutorials/nss/model_training_example.ipynb
 ```
 
 Step through the notebook for training.
@@ -57,7 +57,7 @@ Step through the notebook for training.
 Once your model is trained, the next step is evaluation. You'll measure accuracy, compare checkpoints, and prepare the model for export. Open the evaluation notebook located at the following location:
 
 ```output
-neural-graphics-model-gym-examples/model_evaluation_example.ipynb
+neural-graphics-model-gym-examples/tutorials/nss/model_evaluation_example.ipynb
 ```
 
 At the end you should see a visual comparison of the NSS upscaling and the ground truth image.
