@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Analyze multi-threaded performance
 
-The CPU backend in llama.cpp uses multiple cores and threads to accelerate operator execution.  
+The CPU backend in llama.cpp uses multiple cores and threads to accelerate operator execution.
 
 It creates a threadpool, where:  
 - The number of threads is controlled by the `-t` option  
