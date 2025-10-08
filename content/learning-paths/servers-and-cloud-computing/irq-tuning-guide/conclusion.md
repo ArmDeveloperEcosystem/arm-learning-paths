@@ -8,44 +8,41 @@ layout: learningpathall
 
 ## Optimal IRQ Management Strategies
 
-Testing across multiple cloud platforms reveals that IRQ management effectiveness varies significantly based on system size and workload characteristics. No single pattern works optimally for all scenarios, but clear patterns emerged during performance testing under heavy network loads.
+Performance testing across multiple cloud platforms shows that IRQ management effectiveness depends heavily on system size and workload characteristics. While no single approach works optimally in all scenarios, clear patterns emerged during testing under heavy network loads.
 
-## Recommendations by system size
+## Recommendations for systems with 16 vCPUs or less
 
-### Systems with 16 vCPUs or less
+For smaller systems with 16 or fewer vCPUs, different strategies prove more effective:
 
-For smaller systems with 16 or less vCPUs, concentrated IRQ assignment may provide measurable performance improvements.
+- Concentrate network IRQs on just one or two CPU cores rather than spreading them across all available cores.
+- Use the `smp_affinity` range assignment pattern with a limited core range (example: `0-1`).
+- This approach works best when the number of NIC IRQs exceeds the number of available vCPUs.
+- Focus on high-throughput network workloads where concentrated IRQ handling delivers the most significant performance improvements.
 
-- Assign all network IRQs to just one or two CPU cores
-- This approach showed the most significant performance gains
-- Most effective when the number of NIC IRQs exceeds the number of vCPUs
-- Use the `smp_affinity` range assignment pattern from the previous section with a very limited core range, for example `0-1`
+Performance improves significantly when network IRQs are concentrated rather than dispersed across all available cores on smaller systems. This concentration reduces context switching overhead and improves cache locality for interrupt handling.
 
-Performance improves significantly when network IRQs are concentrated rather than dispersed across all available cores on smaller systems. 
+## Recommendations for systems with more than 16 vCPUs
 
-### Systems with more than 16 vCPUs
+For larger systems with more than 16 vCPUs, different strategies prove more effective:
 
-For larger systems with more than 16 vCPUs, the findings are different:
+- Default IRQ distribution typically delivers good performance.
+- Focus on preventing multiple network IRQs from sharing the same CPU core.
+- Use the diagnostic scripts from the previous section to identify and resolve overlapping IRQ assignments.
+- Apply the paired core pattern to ensure balanced distribution across the system.
 
-- Default IRQ distribution generally performs well
-- The primary concern is avoiding duplicate core assignments for network IRQs
-- Use the scripts from the previous section to check and correct any overlapping IRQ assignments
-- The paired core pattern can help ensure optimal distribution on these larger systems
+On larger systems, interrupt handling overhead becomes less significant relative to total processing capacity. The primary performance issue occurs when high-frequency network interrupts compete for the same core, creating bottlenecks.
 
-On larger systems, the overhead of interrupt handling is proportionally smaller compared to the available processing power. The main performance bottleneck occurs when multiple high-frequency network interrupts compete for the same core.
+## Implementation considerations
 
-## Implementation Considerations
+When implementing these IRQ management strategies, several factors influence your success:
 
-When implementing these IRQ management strategies, there are some important points to keep in mind.
+- Consider your workload type first, as CPU-bound applications can benefit from different IRQ patterns than I/O-bound applications. Always benchmark your specific workload with different IRQ patterns rather than assuming one approach works universally.
+- For real-time monitoring, use `watch -n1 'grep . /proc/interrupts'` to observe IRQ distribution as it happens. This helps you verify your changes are working as expected.
+- On multi-socket systems, NUMA effects become important. Keep IRQs on cores close to the PCIe devices generating them to minimize cross-node memory access latency. Additionally, ensure your IRQ affinity settings persist across reboots by adding them to `/etc/rc.local` or creating a systemd service file.
 
-Pay attention to the workload type. CPU-bound applications may benefit from different IRQ patterns than I/O-bound applications.
+As workloads and hardware evolve, revisiting and adjusting IRQ management strategies might be necessary to maintain optimal performance. What works well today might need refinement as your application scales or changes.
 
-Always benchmark your specific workload with different IRQ patterns. 
+## Next Steps
 
-Monitor IRQ counts in real-time using `watch -n1 'grep . /proc/interrupts'` to observe IRQ distribution in real-time.
+You have successfully learned how to optimize network interrupt handling on Arm servers. You can now analyze IRQ distributions, implement different management patterns, and configure persistent solutions for your workloads.
 
-Also consider NUMA effects on multi-socket systems. Keep IRQs on cores close to the PCIe devices generating them to minimize cross-node memory access.
-
-Make sure to set up IRQ affinity settings in `/etc/rc.local` or a systemd service file to ensure they persist across reboots.
-
-Remember that as workloads and hardware evolve, revisiting and adjusting IRQ management strategies may be necessary to maintain optimal performance.
