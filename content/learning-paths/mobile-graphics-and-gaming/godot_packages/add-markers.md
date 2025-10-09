@@ -10,7 +10,7 @@ All annotation features are provided through the `PerformanceStudio` class. To b
 
 ```gdscript
 var performance_studio = PerformanceStudio.new()
-
+```
 
 ## Add single markers to highlight key game events
 

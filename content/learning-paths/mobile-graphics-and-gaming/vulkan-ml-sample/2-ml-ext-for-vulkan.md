@@ -55,7 +55,7 @@ Next, enable the emulation layers using the Vulkan Configurator to simulate the 
 
 Under the **Vulkan Layers Location** tab, add the path to your `MLEmulationLayerForVulkan` folder.
 
-In the **Apply a Vulkan Loader Configuration** list, right-click and choose **Create a new Configuration**. You can give the new configuration any name, for example `tensor_and_data_graph`.
+Switch back to the **Vulkan Loader Management** tab. In the **Apply a Vulkan Loader Configuration** list, right-click and choose **Create a new Configuration**. You can give the new configuration any name, for example `tensor_and_data_graph`.
 
 ![Screenshot of the Vulkan Configurator showing the Vulkan Layers Location tab, where the emulation layer path (MLEmulationLayerForVulkan) is added to enable VK_ARM_data_graph and VK_ARM_tensors alt-text#center](./images/load_layers.png "Add emulation layers in Vulkan Configurator")
 

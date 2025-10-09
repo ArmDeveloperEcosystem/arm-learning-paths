@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Setup a 3 node Kafka Cluster"
+title: "Set up a 3 node Kafka Cluster"
 
 weight: 4
 
@@ -9,9 +9,9 @@ layout: "learningpathall"
 
 ---
 
-## Setup 3 node Kafka Cluster:
+## Set up 3 node Kafka Cluster:
 
-In this section, you will setup a Kafka cluster on 3 Arm machines. Ensure that the [3 Node Zookeeper cluster](/learning-paths/servers-and-cloud-computing/kafka/zookeeper_cluster) is running.
+In this section, you will set up a Kafka cluster on 3 Arm machines. Ensure that the [3 Node Zookeeper cluster](/learning-paths/servers-and-cloud-computing/kafka/zookeeper_cluster) is running.
 
 ### Node 1:
 

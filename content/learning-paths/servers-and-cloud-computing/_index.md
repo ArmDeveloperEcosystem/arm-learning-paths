@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 3
-- Linux: 175
+- Linux: 180
 - macOS: 13
 - Windows: 14
 pinned_modules:
@@ -19,12 +19,12 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 7
-- Containers and Virtualization: 31
-- Databases: 17
+- Containers and Virtualization: 32
+- Databases: 18
 - Libraries: 9
-- ML: 31
-- Performance and Architecture: 71
-- Storage: 1
+- ML: 32
+- Performance and Architecture: 72
+- Storage: 2
 - Web: 12
 subtitle: Optimize cloud native apps on Arm for performance and cost
 title: Servers and Cloud Computing
@@ -36,9 +36,9 @@ tools_software_languages_filter:
 - AI: 1
 - Android Studio: 1
 - Ansible: 2
-- Apache Bench: 1
 - Apache Spark: 2
 - Apache Tomcat: 2
+- ApacheBench: 1
 - Arm Compiler for Linux: 1
 - Arm Development Studio: 3
 - Arm ISA: 1
@@ -72,7 +72,7 @@ tools_software_languages_filter:
 - Capstone: 1
 - CCA: 8
 - Clair: 1
-- Clang: 12
+- Clang: 13
 - ClickBench: 1
 - ClickHouse: 1
 - CMake: 1
@@ -80,7 +80,7 @@ tools_software_languages_filter:
 - Daytona: 1
 - Demo: 3
 - Django: 1
-- Docker: 22
+- Docker: 23
 - Envoy: 3
 - ExecuTorch: 1
 - FAISS: 1
@@ -89,7 +89,7 @@ tools_software_languages_filter:
 - Fortran: 1
 - FunASR: 1
 - FVP: 7
-- GCC: 24
+- GCC: 25
 - gdb: 1
 - Geekbench: 1
 - Generative AI: 12
@@ -99,28 +99,35 @@ tools_software_languages_filter:
 - GitLab: 1
 - glibc: 1
 - Go: 4
-- go test -bench: 1
 - Golang: 1
 - Google Axion: 3
 - Google Benchmark: 1
 - Google Cloud: 2
 - Google Test: 1
 - HammerDB: 1
+- Helm: 1
 - Herd7: 1
 - Hugging Face: 11
 - InnoDB: 1
 - Intrinsics: 1
 - iPerf3: 1
+- ipmitool: 1
 - Java: 4
 - JAX: 1
 - JMH: 1
-- Kafka: 1
+- Kafka: 2
+- kafka-consumer-perf-test.sh: 1
+- kafka-producer-perf-test.sh: 1
+- KEDA: 1
+- Kedify: 1
 - Keras: 1
-- Kubernetes: 10
+- KleidiAI: 1
+- Kubernetes: 11
 - Libamath: 1
 - libbpf: 1
 - Linaro Forge: 1
 - Litmus7: 1
+- llama.cpp: 1
 - Llama.cpp: 2
 - LLM: 10
 - llvm-mca: 1
@@ -133,22 +140,25 @@ tools_software_languages_filter:
 - mongostat: 1
 - mongotop: 1
 - mpi: 1
-- MySQL: 9
+- MySQL: 10
 - NEON: 7
 - Networking: 1
 - Nexmark: 1
 - NGINX: 4
 - Node.js: 3
 - Ollama: 1
-- ONNX Runtime: 1
+- ONNX Runtime: 2
 - OpenBLAS: 1
+- OpenBMC: 1
 - OpenJDK 21: 2
 - OpenShift: 1
 - Orchard Core: 1
 - PAPI: 1
 - perf: 6
+- Perf: 1
 - PostgreSQL: 4
-- Python: 31
+- Profiling: 1
+- Python: 32
 - PyTorch: 9
 - QEMU: 1
 - RAG: 1
@@ -161,7 +171,7 @@ tools_software_languages_filter:
 - Siege: 1
 - snappy: 1
 - Snort3: 1
-- SQL: 7
+- SQL: 8
 - Streamline CLI: 1
 - Streamlit: 2
 - Supervisor: 1
@@ -173,6 +183,7 @@ tools_software_languages_filter:
 - TensorFlow: 2
 - Terraform: 11
 - ThirdAI: 1
+- topdown-tool: 1
 - Trusted Firmware: 1
 - Trustee: 1
 - TSan: 1
@@ -188,12 +199,13 @@ tools_software_languages_filter:
 - wrk2: 2
 - x265: 1
 - YCSB: 1
+- Yocto/BitBake: 1
 - zlib: 1
 - ZooKeeper: 1
 weight: 1
 cloud_service_providers_filter:
 - AWS: 17
 - Google Cloud: 18
-- Microsoft Azure: 15
+- Microsoft Azure: 18
 - Oracle: 2
 ---

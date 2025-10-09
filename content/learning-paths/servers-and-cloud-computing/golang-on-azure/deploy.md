@@ -1,74 +1,78 @@
 ---
-title: Install Golang
+title: Install and configure Golang on Azure Cobalt 100 Arm64
+
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Install Golang on Azure Cobalt 100 
 
-## Install Golang on Ubuntu Pro 24.04 LTS (Arm64)
-This section covers installing the latest Golang version on **Ubuntu Pro 24.04 LTS Arm64**, configuring the environment, and verifying the setup.
+This section demonstrates how to install the Go programming language toolchain on Ubuntu Pro 24.04 LTS (Arm64), configure your development environment, and verify the setup for optimal performance on Azure Cobalt 100 virtual machines.
 
-1. Download the Golang archive
+## Download the Official Go Distribution
 
-This command downloads the official Golang package for Linux Arm64 from the Golang website.
+Download the latest Arm64-optimized Go distribution directly from the official Go website. This ensures you get the best performance on Azure Cobalt 100 processors:
 
 ```console
 wget https://go.dev/dl/go1.25.0.linux-arm64.tar.gz
 ```
+
 {{% notice Note %}}
-There are many enhancements added to Golang version 1.18, that has resulted in up to a 20% increase in performance for Golang workloads on Arm-based servers. Please see [this reference content](https://aws.amazon.com/blogs/compute/making-your-go-workloads-up-to-20-faster-with-go-1-18-and-aws-graviton/) for the details.
+There are many enhancements added to Golang version 1.18, that have resulted in up to a 20% increase in performance for Golang workloads on Arm-based servers. For further information, see the AWS blog [Making your Go workloads up to 20% faster with Go 1.18 and AWS Graviton](https://aws.amazon.com/blogs/compute/making-your-go-workloads-up-to-20-faster-with-go-1-18-and-aws-graviton/).
 
 The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) also recommends Golang version 1.18 as the minimum recommended on the Arm platforms.
 {{% /notice %}}
 
-2. Extract the archive into `/usr/local`
+## Extract the archive 
 
-This unpacks the Golang files into the system directory /usr/local, which is a standard place for system-wide software.
+Unpack the downloaded archive into `/usr/local`, which is the conventional directory for installing system-wide software on Linux. This ensures the Go toolchain is available for all users and integrates cleanly with the system’s environment.
 
 ```console
 sudo tar -C /usr/local -xzf ./go1.25.0.linux-arm64.tar.gz
 ```
 
-3. Add Golang to your system PATH
+## Add Go to your shell PATH
 
-This updates your .bashrc file so your shell can recognize the Golang command from anywhere.
+To make the Go toolchain accessible from any directory, add its binary location to your shell’s `PATH` environment variable. Updating your `.bashrc` file ensures this change persists across sessions:
 
 ```console
 echo 'export PATH="$PATH:/usr/local/go/bin"' >> ~/.bashrc
 ```
 
-4. Apply the PATH changes immediately
+## Reload shell configuration
 
-This reloads your .bashrc so you don’t need to log out and log back in for the changes to take effect.
+Apply the environment changes to your current shell session without requiring a logout/login cycle:
 
 ```console
 source ~/.bashrc
 ```
 
-5. Verify Golang installation
+## Verify Go installation
 
-This checks if Golang is installed correctly and shows the installed version.
+Confirm that Go is properly installed and accessible:
 
 ```console
 go version
 ```
 
-You should see an output similar to: 
-
+Expected output for Azure Cobalt 100 Arm64:
 ```output
 go version go1.25.0 linux/arm64
 ```
-6. Check Golang environment settings
 
-This displays Golang’s environment variables (like GOROOT and GOPATH) to ensure they point to the correct installation.
+## Validate Go environment configuration
+
+
+Use the following command to display Go’s environment variables and confirm that key paths (such as GOROOT and GOPATH) are correctly set:
+
 
 ```console
-go env
+go env GOROOT GOPATH GOARCH GOOS
 ```
 
-You should see an output similar to: 
+You should see output similar to: 
 
 ```output
 AR='ar'
@@ -118,4 +122,4 @@ GOVERSION='go1.25.0'
 GOWORK=''
 PKG_CONFIG='pkg-config'
 ```
-Golang installation on Ubuntu Pro 24.04 LTS Arm64 is complete. You can now proceed with Golang development or baseline testing.
+The Go installation on Ubuntu Pro 24.04 LTS (Arm64) VM is now complete and you are ready to proceed with Go application development, benchmarking, or performance tuning on Azure Cobalt 100 VMs.

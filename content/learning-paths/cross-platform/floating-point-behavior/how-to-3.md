@@ -1,26 +1,26 @@
 ---
-title: Single and double precision considerations
+title: Precision and floating-point instruction considerations
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Understanding numerical precision differences in single vs double precision
+When moving from x86 to Arm you may see differences in floating-point behavior. Understanding these differences may require digging deeper into the details, including the precision and the floating-point instructions.
 
-This section explores how different levels of floating-point precision can affect numerical results. The differences shown here are not architecture-specific issues, but demonstrate the importance of choosing appropriate precision levels for numerical computations. 
+This section explores an example with minor differences in floating-point results, particularly focused on Fused Multiply-Add (FMAC) operations. You can run the example to learn more about how the same C code can produce different results on different platforms.
 
-### Single precision limitations
+## Single precision and FMAC differences
 
-Consider two mathematically equivalent functions, `f1()` and `f2()`. While they should theoretically produce the same result, small differences can arise due to the limited precision of floating-point arithmetic. 
+Consider two mathematically equivalent functions, `f1()` and `f2()`. While they should theoretically produce the same result, small differences can arise due to the limited precision of floating-point arithmetic and the instructions used. 
 
-The differences shown in this example are due to using single precision (float) arithmetic, not due to architectural differences between Arm and x86. Both architectures handle single precision arithmetic according to IEEE 754.
+When these small differences are amplified, you can observe how Arm and x86 architectures handle floating-point operations differently, particularly with respect to FMAC (Fused Multiply-Add) operations. The example shows the Clang compiler on Arm using FMAC instructions by default, which can lead to slightly different results compared to x86, which is not using FMAC instructions.
 
 Functions `f1()` and `f2()` are mathematically equivalent. You would expect them to return the same value given the same input. 
  
-Use an editor to copy and paste the C++ code below into a file named `single-precision.cpp` 
+Use an editor to copy and paste the C code below into a file named `example.c` 
 
-```cpp
+```c
 #include <stdio.h>
 #include <math.h>
 
@@ -42,74 +42,109 @@ int main() {
 
     // Theoretically, result1 and result2 should be the same
     float difference = result1 - result2;
-    // Multiply by a large number to amplify the error
+    
+    // Multiply by a large number to amplify the error - using single precision (float)
+    // This is where architecture differences occur due to FMAC instructions
     float final_result = 100000000.0f * difference + 0.0001f;
+    
+    // Using double precision for the calculation makes results consistent across platforms
+    double final_result_double = 100000000.0 * difference + 0.0001;
 
     // Print the results
     printf("f1(%e) = %.10f\n", x, result1);
     printf("f2(%e) = %.10f\n", x, result2);
     printf("Difference (f1 - f2) = %.10e\n", difference);
-    printf("Final result after magnification: %.10f\n", final_result);
+    printf("Final result after magnification (float): %.10f\n", final_result);
+    printf("Final result after magnification (double): %.10f\n", final_result_double);
 
     return 0;
 }
 ```
 
+You need access to an Arm and x86 Linux computer to compare the results. The output below is from Ubuntu 24.04 using Clang. The Clang version is 18.1.3.
+
 Compile and run the code on both x86 and Arm with the following command:
 
 ```bash
-g++ -g single-precision.cpp -o single-precision
-./single-precision
+clang -g example.c -o example -lm
+./example
 ```
 
-Output running on x86:
+The output running on x86:
 
 ```output
 f1(1.000000e-08) = 0.0000000000
 f2(1.000000e-08) = 0.0000000050
 Difference (f1 - f2) = -4.9999999696e-09
-Final result after magnification: -0.4999000132
+Final result after magnification (float): -0.4999000132
+Final result after magnification (double): -0.4998999970
 ```
 
-Output running on Arm:
+The output running on Arm:
 
 ```output
 f1(1.000000e-08) = 0.0000000000
 f2(1.000000e-08) = 0.0000000050
 Difference (f1 - f2) = -4.9999999696e-09
-Final result after magnification: -0.4998999834
+Final result after magnification (float): -0.4998999834
+Final result after magnification (double): -0.4998999970
 ```
 
-Depending on your compiler and library versions, you may get the same output on both systems. You can also use the `clang` compiler and see if the output matches. 
+Notice that the double precision results are identical across platforms, while the single precision results differ.
+
+You can disable the fused multiply-add on Arm with a compiler flag:
 
 ```bash
-clang -g single-precision.cpp -o single-precision -lm
-./single-precision
+clang -g -ffp-contract=off example.c -o example2 -lm
+./example2
 ```
 
-In some cases the GNU compiler output differs from the Clang output. 
+Now the output of `example2` on Arm matches the x86 output. 
 
-Here's what's happening:
+You can use `objdump` to look at the assembly instructions to confirm the use of FMAC instructions.
 
-1. Different square root algorithms: x86 and Arm use different hardware and library implementations for `sqrtf(1 + 1e-8)`
+Page through the `objdump` output to find the difference shown below in the `main()` function.
 
-2. Tiny implementation differences get amplified. The difference between the two `sqrtf()` results is only about 3e-10, but this gets multiplied by 100,000,000, making it visible in the final result.
+```bash
+llvm-objdump -d ./example  | more
+```
 
-3. Both `f1()` and `f2()` use `sqrtf()`. Even though `f2()` is more numerically stable, both functions call `sqrtf()` with the same input, so they both inherit the same architecture-specific square root result.
+The Arm output includes `fmadd`:
 
-4. Compiler and library versions may produce different output due to different implementations of library functions such as `sqrtf()`.
+```output
+8c8: 1f010800     	fmadd	s0, s0, s1, s2
+```
 
-The final result is that x86 and Arm libraries compute `sqrtf(1.00000001)` with tiny differences in the least significant bits. This is normal and expected behavior and IEEE 754 allows for implementation variations in transcendental functions like square root, as long as they stay within specified error bounds.
+The x86 uses separate multiply and add instructions:
 
-The very small difference you see is within acceptable floating-point precision limits.
+```output
+125c: f2 0f 59 c1                  	mulsd	%xmm1, %xmm0
+1260: f2 0f 10 0d b8 0d 00 00      	movsd	0xdb8(%rip), %xmm1      # 0x2020 <_IO_stdin_used+0x20>
+1268: f2 0f 58 c1                  	addsd	%xmm1, %xmm0
+```
 
-### Key takeaways
+{{% notice Note %}}
+On Ubuntu 24.04 the GNU Compiler, `gcc`, produces the same result as x86 and does not use the `fmadd` instruction. Be aware that corner case examples like this may change in future compiler versions.
+{{% /notice %}}
 
-- The small differences shown are due to library implementations in single-precision mode, not fundamental architectural differences.
-- Single-precision arithmetic has inherent limitations that can cause small numerical differences.
-- Using numerically stable algorithms, like `f2()`, can minimize error propagation.
-- Understanding [numerical stability](https://en.wikipedia.org/wiki/Numerical_stability) is important for writing portable code.
+## Techniques for consistent results
 
-By adopting best practices and appropriate precision levels, developers can ensure consistent results across platforms. 
+You can make the results consistent across platforms in several ways:
 
-Continue to the next section to see how precision impacts the results.
+- Use double precision for critical calculations by changing `100000000.0f` to `100000000.0` (double precision).
+
+- Disable fused multiply-add operations using the `-ffp-contract=off` compiler flag. 
+
+- Use the compiler flag `-ffp-contract=fast` to enable fused multiply-add on x86.
+
+## Key takeaways
+
+- Different floating-point behavior between architectures can often be traced to specific hardware features or instructions such as Fused Multiply-Add (FMAC) operations.
+- FMAC performs multiplication and addition with a single rounding step, which can lead to different results compared to separate multiply and add operations.
+- Compilers may use FMAC instructions on Arm by default, but not on x86. 
+- To ensure consistent results across platforms, consider using double precision for critical calculations and controlling compiler optimizations with flags like `-ffp-contract=off` and `-ffp-contract=fast`.
+- Understanding [numerical stability](https://en.wikipedia.org/wiki/Numerical_stability) remains important for writing portable code.
+
+If you see differences in floating-point results, it typically means you need to look a little deeper to find the causes.
+
+These situations are not common, but it is good to be aware of them as a software developer migrating to the Arm architecture. You can be confident that floating-point on Arm behaves predictably and that you can get consistent results across multiple architectures.

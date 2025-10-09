@@ -1,33 +1,31 @@
 ---
-title: Golang Baseline Testing 
+title: Perform Golang baseline testing and web server deployment on Azure Cobalt 100 
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Baseline testing: run a Go web server on Azure Arm64
 
-### Baseline testing of Golang Web Page on Azure Arm64
-This section demonstrates how to test your Go installation on the **Ubuntu Pro 24.04 LTS Arm64** virtual machine by creating and running a simple Go web server that serves a styled HTML page.
+Validate your Go development environment by building and deploying a complete web application. This baseline test confirms that compilation, networking, and runtime execution work correctly on your Ubuntu Pro 24.04 LTS Arm64 virtual machine powered by Azure Cobalt 100 processors.
 
-**1. Create Project Directory**
+## Initialize Go Web Project
 
-First, create a new folder called goweb to contain all project files, and then navigate into it:
+Create a dedicated project directory for your Go web application:
 
 ```console
 mkdir goweb && cd goweb
 ```
-This command creates a new directory named goweb and then switches into it.
 
-**2. Create HTML Page with Bootstrap Styling**
+## Create an HTML page with Bootstrap styling
 
-Next, create a file named `index.html` using the nano editor:
-
+Next, create a simple web page that your Go server will serve. Open an editor and create `index.html`:
 ```console
 nano index.html
 ```
 
-Paste the following HTML code into the index.html file. This builds a simple, styled web page with a header, a welcome message, and a button using Bootstrap.
+Add the following HTML code with Bootstrap styling and Azure Cobalt 100 branding:
 
 ```html
 <!DOCTYPE html>
@@ -66,15 +64,16 @@ Paste the following HTML code into the index.html file. This builds a simple, st
 </body>
 </html>
 ```
-**3. Create Golang Web Server**
 
-Now create the Go program that will serve this web page:
+Now, let’s create the Go program that will serve your static HTML page and expose a simple API endpoint.
 
+Open an editor and create `main.go`:
 ```console
 nano main.go
 ```
-Paste the following code into the main.go file. This sets up a very basic web server that serves files from the current folder, including the **index.html** you just created. When it runs, it will print a message showing the server address.
+Paste the following code into the `main.go` file. This sets up a basic web server that serves files from the current folder, including the `index.html` you just created. When it runs, it will print a message showing the server address.
 
+Paste the following code into `main.go`:
 ```go
 package main
 import (
@@ -105,57 +104,66 @@ func main() {
 }
 ```
 {{% notice Note %}}Running on port 80 requires root privileges. Use sudo with the full Go path if needed.{{% /notice %}}
-**4. Run on the Web Server**
 
-Run your Go program with:
+## Deploy and Start the Web Server
+
+Compile and launch your Go web server on Azure Cobalt 100:
 
 ```console
 sudo /usr/local/go/bin/go run main.go
 ```
 
-This compiles and immediately starts the server. If the server starts successfully, you will see the following message in your terminal::
-
+Expected output confirming successful startup:
 ```output
 2025/08/19 04:35:06 Server running on http://0.0.0.0:80
 ```
-**5. Allow HTTP Traffic in Firewall**
 
-On **Ubuntu Pro 24.04 LTS** virtual machines, **UFW (Uncomplicated Firewall)** is used to manage firewall rules. By default, it allows only SSH (port 22) and blocks most other traffic.  
+### Configure Ubuntu Firewall for HTTP Access
 
-So even if Azure allows HTTP on port 80 (added to inbound ports during VM creation), your VM’s firewall may still block it until you run:
+Ubuntu Pro 24.04 LTS uses UFW (Uncomplicated Firewall) to manage network access. Even with Azure Network Security Group (NSG) rules configured, the VM-level firewall requires explicit HTTP access configuration.
+
+Run the following commands to allow HTTP traffic on port 80:
 
 ```console
 sudo ufw allow 80/tcp
 sudo ufw enable
 ```
-You can verify that HTTP is now allowed with:
+After enabling UFW and allowing traffic on port 80, confirm that the firewall is now configured correctly by running:
 
 ```console
 sudo ufw status
 ```
-You should see an output similar to: 
+You should see output similar to: 
 ```output
 Status: active
 
 To                         Action      From
 --                         ------      ----
-8080/tcp                   ALLOW       Anywhere
 80/tcp                     ALLOW       Anywhere
-8080/tcp (v6)              ALLOW       Anywhere (v6)
 80/tcp (v6)                ALLOW       Anywhere (v6)
 ```
 
-**6. Open in Browser**
+{{% notice Note %}}
+If UFW is already active, `sudo ufw enable` might warn you about disrupting SSH. Proceed only if you understand the impact, or use an Azure VM serial console as a recovery option.
+{{% /notice %}}
 
-Run the following command to print your VM’s public URL, then open it in a browser:
+## Open the site in a browser
 
+Print your VM’s public URL:
 ```console
 echo "http://$(curl -s ifconfig.me)/"
 ```
-When you visit this link, you should see the styled HTML page being served directly by your Go application.
 
-You should see the Golang web page confirming a successful installation of Golang.
+Open this URL in your browser. You should see the styled HTML landing page served by your Go application.
 
-![golang](images/go-web.png)
+![Go web server running on Azure Cobalt 100 Arm64 alt-text#center](images/go-web.png "Go web server running on Azure Cobalt 100 Arm64")
 
-Now, your Golang instance is ready for further benchmarking and production use.                                                                   
+## Baseline Testing Complete
+
+Successfully reaching this page confirms:
+- **Go toolchain** is properly installed and configured
+- **Development environment** is ready for Arm64 compilation
+- **Network connectivity** and firewall configuration are correct
+- **Runtime performance** is functioning on Azure Cobalt 100 processors
+
+Your Azure Cobalt 100 virtual machine is now ready for advanced Go application development and performance benchmarking.

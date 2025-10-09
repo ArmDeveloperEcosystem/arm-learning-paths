@@ -23,8 +23,7 @@ author: Jason Andrews
 test_images:
 - amd64/ubuntu:latest
 - arm64v8/ubuntu:latest
-test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
-test_maintenance: true
+test_maintenance: false
 
 ### Tags
 skilllevels: Advanced

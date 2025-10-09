@@ -1,24 +1,26 @@
 ---
-title: Use Streamline to analyze LLM running on CPU with llama.cpp and KleidiAI
+title: Profile llama.cpp performance with Arm Streamline and KleidiAI LLM kernels
 
-draft: true
-cascade:
-    draft: true
-    
-minutes_to_complete: 50
+minutes_to_complete: 60
 
-who_is_this_for: Engineers who want to learn LLM inference on CPU or profile and optimize llama.cpp code.
+who_is_this_for: This is an advanced topic for software developers, performance engineers, and AI practitioners who want to optimize llama.cpp performance on Arm-based CPUs. 
 
-learning_objectives: 
-    - Be able to use Streamline to profile llama.cpp code
-    - Learn the execution of LLM on CPU
+learning_objectives:
+    - Profile llama.cpp architecture and identify the role of the Prefill and Decode stages
+    - Integrate Streamline Annotations into llama.cpp for fine-grained performance insights
+    - Capture and interpret profiling data with Streamline
+    - Analyze specific operators during token generation using Annotation Channels
+    - Evaluate multi-core and multi-thread execution of llama.cpp on Arm CPUs
 
 prerequisites:
-    - Understanding of llama.cpp
-    - Understanding of transformer model
-    - Knowledge of Streamline usage
+    - Basic understanding of llama.cpp
+    - Understanding of transformer models
+    - Knowledge of Arm Streamline usage
+    - An Arm Neoverse or Cortex-A hardware platform running Linux or Android
 
-author: Zenon(Zhilong) Xiu
+author: 
+    - Zenon Zhilong Xiu
+    - Odin Shen
 
 ### Tags
 skilllevels: Advanced
@@ -29,6 +31,8 @@ armips:
 tools_software_languages:
     - Arm Streamline
     - C++
+    - llama.cpp
+    - Profiling
 operatingsystems:
     - Linux
     - Android
@@ -36,18 +40,24 @@ operatingsystems:
 further_reading:
     - resource:
         title: llama.cpp project
-        link:  https://github.com/ggml-org/llama.cpp
-        type:  source code
+        link: https://github.com/ggml-org/llama.cpp
+        type: website
     - resource:
-        title: Qwen1_5-0_5b-chat-q4_0.gguf 
-        link: https://huggingface.co/Qwen/Qwen1.5-0.5B-Chat-GGUF/blob/main/qwen1_5-0_5b-chat-q4_0.gguf 
-        type:  LLM model
+        title: Build and run llama.cpp on Arm servers
+        link: /learning-paths/servers-and-cloud-computing/llama-cpu/
+        type: website
+    - resource:
+        title: Run a Large Language Model chatbot with PyTorch using KleidiAI
+        link: /learning-paths/servers-and-cloud-computing/pytorch-llama/
+        type: website
     - resource:
         title: Arm Streamline User Guide 
         link: https://developer.arm.com/documentation/101816/9-7
         type: website
-
-
+    - resource:
+        title: KleidiAI project
+        link: https://github.com/ARM-software/kleidiai
+        type: website
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

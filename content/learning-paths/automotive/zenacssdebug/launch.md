@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Launch FVP"
+title: "Launch the FVP"
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -8,49 +8,46 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Launch FVP
+## Start the FVP from the build environment
 
-You can now launch the FVP within the virtual environment with the software stack loaded:
+You can launch the FVP within the build environment with the software stack loaded:
 
 ```command
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose"
 ```
-Refer to the [documentation](https://arm-auto-solutions.docs.arm.com/en/v2.0/rd-aspen/user_guide/reproduce.html#run-the-fvp) for more details.
-While you can continue to use this method to launch the FVP whilst debugging, this command does not enable the Iris debug server inside the model, and so will not be debuggable.
 
-Additional command options are necessary.
+See the [Arm Zena CSS User Guide](https://arm-auto-solutions.docs.arm.com/en/v2.0/rd-aspen/user_guide/reproduce.html#run-the-fvp) for further information.
 
-You will use the following. See output of `FVP_RD_Aspen --help` for full list and explanation. Options are case-sensitive.
+While you can continue to use this method during debugging, it does not enable the Iris debug server in the model, so the system cannot be debugged from Arm Development Studio. Additional command-line options are required.
 
-| Option                | Alias    | Notes                                         |
-|---------------------- |--------- |---------------------------------------------- |
-| `--iris-server`       | `-I`     | Start Iris Debug Server                       |
-| `--iris-port`         |          | Specify a port number (default = `7100`)      |
-| `--run`               | `-R`     | Run simulation when debug server started      |
-| `--iris-allow-remote` | `-A`     | Allow remote connections (if different hosts) |
+You will use the following options (see `FVP_RD_Aspen --help` for the full list). Options are case-sensitive.
 
-### Launch FVP with additional options
+| Option                  | Alias | Notes                                                 |
+|-------------------------|:-----:|-------------------------------------------------------|
+| `--iris-server`         | `-I`  | Start the Iris debug server                           |
+| `--iris-port <port>`    |       | Set the Iris port (default `7100`)                    |
+| `--run`                 | `-R`  | Run the simulation when the debug server starts       |
+| `--iris-allow-remote`   | `-A`  | Allow remote connections (only if required)           |
 
-To launch the FVP with additional options, modify the above command by adding `--` and then the options.
+## Enable the Iris debug server for Arm Development Studio
 
-For example, to launch the model with the debug server and hold at the initial reset condition:
+Append `--` to pass model options through `runfvp`.
 
+Start the model with the debug server and hold at reset:
 ```command
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose -- --iris-server --iris-port 7100"
 ```
 
-To launch the model and start running (so that it can start to boot up):
-
+Start the model with the debug server and begin execution so that boot can progress:
 ```command
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose -- --iris-server --iris-port 7100 --run"
 ```
 
-To launch the model so that remote hosts can access it (not recommended if not needed), using options aliases:
-
+If required, allow remote debug connections using option aliases:
 ```command
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose -- -I -A --iris-port 7100"
 ```
 
 {{% notice Note %}}
-It is recommended to specify the port number used even if it is the default as that must match the debug connection setting (see later).
+Even when using the default, specify the Iris port explicitly so it matches your debugger connection settings. If you enable remote connections, ensure your firewall allows inbound access to the chosen port.
 {{% /notice %}}
