@@ -194,6 +194,10 @@ kubectl logs --timestamps -l app=nginx-multiarch -nnginx --prefix | grep -E "(GE
 echo
 ```
 
+{{% notice Note %}}
+This script supports all architectures (intel, arm, amd, multiarch) and will be used throughout the tutorial. You only need to create it once.
+{{% /notice %}}
+
 5. Make the script executable with the following command:
 
 ```bash
