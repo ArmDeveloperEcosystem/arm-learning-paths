@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-In this section, you will install a few dependencies into your Ubuntu environment. You'll need a working Python 3.10+ environment with some ML and system dependencies. Make sure Python is installed by verifying the version is printed:
+In this section, you will install a few dependencies into your Ubuntu environment. You'll need a working Python 3.10+ environment with some ML and system dependencies. Make sure Python is installed by verifying that the version is >3.10:
 
 ```bash
 python3 --version

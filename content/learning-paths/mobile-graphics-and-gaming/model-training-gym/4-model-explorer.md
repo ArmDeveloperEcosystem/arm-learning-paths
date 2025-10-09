@@ -22,15 +22,7 @@ The VGF adapter extends Model Explorer to support `.vgf` files exported from the
 pip install vgf-adapter-model-explorer
 ```
 
-Or install the prebuilt wheel from GitHub:
-
-```bash
-PYTHON_VERSION_TAG=311
-gh release download \
-  --repo arm/vgf-adapter-model-explorer \
-  --pattern "*py${PYTHON_VERSION_TAG}*.whl"
-pip install *py${PYTHON_VERSION_TAG}*.whl
-```
+The source code is available on [GitHub](https://github.com/arm/vgf-adapter-model-explorer).
 
 ### Install Model Explorer
 

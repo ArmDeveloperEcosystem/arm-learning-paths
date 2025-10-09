@@ -9,7 +9,7 @@ learning_objectives:
     - Understand the principles of neural graphics and how it’s applied to game performance
     - Learn how to fine-tune and evaluate a neural network for Neural Super Sampling (NSS)
     - Use the Model Gym Python API and CLI to configure and train neural graphics models
-    - Visualize and inspect `.vgf` models using the Model Explorer tool
+    - Visualize and inspect .vgf models using the Model Explorer tool
 
 prerequisites:
     - Basic understanding of PyTorch and machine learning concepts
@@ -35,17 +35,17 @@ further_reading:
         link: https://github.com/arm/neural-graphics-model-gym
         type: code
     - resource:
-        title: How Arm Neural Super Sampling works
-        link: https://community.arm.com/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/how-arm-neural-super-sampling-works
-        type: blog
+        title: NSS Fine-Tuning Guide
+        link: https://developer.arm.com/documentation/111141/latest
+        type: documentation
     - resource:
         title: Neural Graphics Development Kit
         link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics
         type: website
     - resource:
-        title: NSS Use Case Guide
-        link: https://developer.arm.com/documentation/111009/latest/
-        type: documentation
+        title: NSS on HuggingFace
+        link: https://huggingface.co/Arm/neural-super-sampling
+        type: website
 
 
 ### FIXED, DO NOT MODIFY
