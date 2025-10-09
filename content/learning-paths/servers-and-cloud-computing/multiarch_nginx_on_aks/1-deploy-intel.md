@@ -140,8 +140,6 @@ Make sure you have curl installed before running.
 ```bash
 #!/bin/bash
 
-echo "Server response:"
-
 get_service_ip() {
     arch=$1
     svc_name="nginx-${arch}-svc"
@@ -150,7 +148,7 @@ get_service_ip() {
 
 get_request() {
     svc_ip=$1
-    curl -s http://$svc_ip/ | head -10
+    curl -s http://$svc_ip/ | grep "<title>Welcome to nginx!</title>"
 }
 
 run_action() {
@@ -158,11 +156,26 @@ run_action() {
     arch=$2
 
     svc_ip=$(get_service_ip $arch)
-    echo "Using service endpoint $svc_ip for $action on $arch"
+    echo "Using service endpoint $svc_ip for $action on $(tput bold)$arch service$(tput sgr0)"
 
     case $action in
         get)
-            get_request $svc_ip
+            # Make the request
+            response=$(get_request $svc_ip)
+            echo "Response: $response"
+            
+            # Wait a moment for logs to appear
+            sleep 2
+            
+            # Find the most recent log entry with our curl user agent
+            serving_pod=$(kubectl logs --timestamps -l app=nginx-multiarch -nnginx --prefix --since=5s | grep "curl/8.7.1" | tail -1 | sed 's/.*\[pod\/\([^\/]*\).*/\1/')
+            if [ -n "$serving_pod" ]; then
+                # Extract architecture from deployment name and bold it
+                bold_pod=$(echo "$serving_pod" | sed "s/nginx-\([^-]*\)-deployment/nginx-$(tput bold)\1$(tput sgr0)-deployment/")
+                echo "Served by: $bold_pod"
+            else
+                echo "Served by: Unable to determine"
+            fi
             ;;
         *)
             echo "Invalid first argument. Use 'get'."
@@ -189,8 +202,6 @@ case $1 in
         ;;
 esac
 
-echo -e "\n\nPod log output:"
-kubectl logs --timestamps -l app=nginx-multiarch -nnginx --prefix | grep -E "(GET|POST)" | tail -3
 echo
 ```
 
@@ -215,21 +226,9 @@ The script conveniently bundles test and logging commands into a single place, m
 You get back the HTTP response, as well as the log line from the pod that served it:
 
 ```output
-Server response:
-Using service endpoint 48.223.233.136 for get on intel
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-html { color-scheme: light dark; }
-body { width: 35em; margin: 0 auto;
-font-family: Tahoma, Verdana, Arial, sans-serif; }
-</style>
-</head>
-
-Pod log output:
-[pod/nginx-intel-deployment-dc84dc59f-7qb72/nginx-multiarch] 2025-10-09T21:37:19.941010920Z 10.224.0.6 - - [09/Oct/2025:21:37:19 +0000] "GET / HTTP/1.1" 200 615 "-" "curl/8.7.1" "-"
+Using service endpoint 48.223.233.136 for get on **intel service**
+Response: <title>Welcome to nginx!</title>
+Served by: nginx-**intel**-deployment-dc84dc59f-7qb72
 ```
 
 If you see the output `Welcome to nginx!` you have successfully bootstrapped your AKS cluster with an Intel node, running a deployment with the nginx multi-architecture container instance.

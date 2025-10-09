@@ -117,21 +117,9 @@ When the pods show `Running` and the service shows a valid `External IP`, you're
 You get back the HTTP response, as well as the log line from the AMD pod that served it:
 
 ```output
-Server response:
-Using service endpoint 20.4.5.6 for get on amd
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-html { color-scheme: light dark; }
-body { width: 35em; margin: 0 auto;
-font-family: Tahoma, Verdana, Arial, sans-serif; }
-</style>
-</head>
-
-Pod log output:
-[pod/nginx-amd-deployment-7d4c8f9b-abc34/nginx-multiarch] 2025-10-09T21:45:15.123456789Z 10.224.0.7 - - [09/Oct/2025:21:45:15 +0000] "GET / HTTP/1.1" 200 615 "-" "curl/8.7.1" "-"
+Using service endpoint 20.4.5.6 for get on **amd service**
+Response: <title>Welcome to nginx!</title>
+Served by: nginx-**amd**-deployment-7d4c8f9b-abc34
 ```
 
 If you see the output `Welcome to nginx!` and the pod log shows `nginx-amd-deployment`, you have successfully added AMD nodes to your cluster running nginx.

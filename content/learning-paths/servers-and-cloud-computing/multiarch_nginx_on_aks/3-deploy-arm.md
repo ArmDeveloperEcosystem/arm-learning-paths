@@ -119,21 +119,9 @@ When the pods show `Running` and the service shows a valid `External IP`, you're
 You get back the HTTP response, as well as the log line from the ARM pod that served it:
 
 ```output
-Server response:
-Using service endpoint 20.7.8.9 for get on arm
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-html { color-scheme: light dark; }
-body { width: 35em; margin: 0 auto;
-font-family: Tahoma, Verdana, Arial, sans-serif; }
-</style>
-</head>
-
-Pod log output:
-[pod/nginx-arm-deployment-6f8d9c2a-def56/nginx-multiarch] 2025-10-09T21:50:22.987654321Z 10.224.0.8 - - [09/Oct/2025:21:50:22 +0000] "GET / HTTP/1.1" 200 615 "-" "curl/8.7.1" "-"
+Using service endpoint 20.7.8.9 for get on **arm service**
+Response: <title>Welcome to nginx!</title>
+Served by: nginx-**arm**-deployment-6f8d9c2a-def56
 ```
 
 If you see the output `Welcome to nginx!` and the pod log shows `nginx-arm-deployment`, you have successfully added ARM nodes to your cluster running nginx.

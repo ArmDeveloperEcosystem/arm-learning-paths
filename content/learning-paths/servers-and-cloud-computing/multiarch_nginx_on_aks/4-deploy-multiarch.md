@@ -94,21 +94,9 @@ nginx-multiarch-svc   10.244.0.217:80,10.244.1.177:80,10.244.2.68:80   1m
 You get back the HTTP response from one of the available pods:
 
 ```output
-Server response:
-Using service endpoint 20.10.11.12 for get on multiarch
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-html { color-scheme: light dark; }
-body { width: 35em; margin: 0 auto;
-font-family: Tahoma, Verdana, Arial, sans-serif; }
-</style>
-</head>
-
-Pod log output:
-[pod/nginx-arm-deployment-6f8d9c2a-def56/nginx-multiarch] 2025-10-09T22:25:30.987654321Z 10.224.0.8 - - [09/Oct/2025:22:25:30 +0000] "GET / HTTP/1.1" 200 615 "-" "curl/8.7.1" "-"
+Using service endpoint 20.10.11.12 for get on **multiarch service**
+Response: <title>Welcome to nginx!</title>
+Served by: nginx-**arm**-deployment-6f8d9c2a-def56
 ```
 
 5. Run the command multiple times to see load balancing across architectures:
