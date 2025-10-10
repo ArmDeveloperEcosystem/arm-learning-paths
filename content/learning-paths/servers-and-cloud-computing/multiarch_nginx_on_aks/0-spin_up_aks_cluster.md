@@ -25,34 +25,38 @@ Create the resource group and AKS cluster with all three node pools:
 ```bash
 # Set environment variables
 export RESOURCE_GROUP=nginx-on-arm-rg
-export LOCATION=eastus
+export LOCATION=westus2
 export CLUSTER_NAME=nginx-on-arm
 
 # Create resource group
 az group create --name $RESOURCE_GROUP --location $LOCATION
 
-# Create AKS cluster with Intel node pool
+# Create AKS cluster with Intel node pool in zone 2
 az aks create \
   --resource-group $RESOURCE_GROUP \
   --name $CLUSTER_NAME \
+  --location $LOCATION \
+  --zones 2 \
   --node-count 1 \
   --node-vm-size Standard_D2s_v6 \
   --nodepool-name intel \
   --generate-ssh-keys
 
-# Add ARM node pool
+# Add ARM node pool in zone 2
 az aks nodepool add \
   --resource-group $RESOURCE_GROUP \
   --cluster-name $CLUSTER_NAME \
   --name arm \
+  --zones 2 \
   --node-count 1 \
   --node-vm-size Standard_D2ps_v6
 
-# Add AMD node pool
+# Add AMD node pool in zone 2
 az aks nodepool add \
   --resource-group $RESOURCE_GROUP \
   --cluster-name $CLUSTER_NAME \
   --name amd \
+  --zones 2 \
   --node-count 1 \
   --node-vm-size Standard_D2as_v6
 ```
