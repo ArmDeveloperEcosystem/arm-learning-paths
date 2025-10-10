@@ -6,5 +6,3 @@ weight: 21                  # Set to always be larger than the content in this p
 title: "Next Steps"         # Always the same, html page title.
 layout: "learningpathall"   # All files under learning paths have this same wrapper for Hugo processing.
 ---
-
-

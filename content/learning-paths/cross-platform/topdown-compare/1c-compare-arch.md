@@ -13,7 +13,7 @@ After understanding each architecture's methodology individually, you can now ex
 - Hierarchical analysis: broad classification followed by drill-down into dominant bottlenecks
 - Resource attribution: map performance issues to specific CPU micro-architectural components
 
-## Compare 4-level hierarchical and 2-stage methodologies  
+## Compare multi-level hierarchical and resource groups methodologies  
 
 | Aspect | Intel x86 | Arm Neoverse |
 | :-- | :-- | :-- |

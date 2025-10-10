@@ -45,6 +45,8 @@ Read the files in the directory `content/learning-paths/cross-platform/_example-
 
 Each Learning Path must have an _index.md file and a _next-steps.md file. The _index.md file contains the main content of the Learning Path. The _next-steps.md file contains links to related content and is included at the end of the Learning Path.
 
+Additional resources and 'next steps' content should be placed in the `further_reading` section of `_index.md`, NOT in `_next-steps.md`. The `_next-steps.md` file should remain minimal and unmodified as indicated by "FIXED, DO NOT MODIFY" comments in the template.
+
 The _index.md file should contain the following front matter and content sections:
 
 Front Matter (YAML format):
@@ -60,6 +62,16 @@ Front Matter (YAML format):
 - `skilllevels`: Skill levels allowed are only Introductory and Advanced
 - `operatingsystems`: Operating systems used, must match the closed list on https://learn.arm.com/learning-paths/cross-platform/_example-learning-path/write-2-metadata/
 
+### Further Reading Curation
+
+Limit further_reading resources to 4-6 essential links. Prioritize:
+- Direct relevance to the topic
+- Arm-specific Learning Paths over generic external resources  
+- Foundation knowledge for target audience
+- Required tools (install guides)
+- Logical progression from basic to advanced
+
+Avoid overwhelming readers with too many links, which can cause them to leave the platform.
 
 All Learning Paths should generally include:
 Title: [Imperative verb] + [technology/tool] + [outcome]
@@ -205,18 +217,23 @@ Some links are useful in content, but too many links can be distracting and read
 
 ### Internal links
 
-Use a relative path format for internal links that are on learn.arm.com. 
-For example, use: descriptive link text pointing to a relative path like learning-paths/category/path-name/
+Use the full path format for internal links: `/learning-paths/category/path-name/` (e.g., `/learning-paths/cross-platform/docker/`). Do NOT use relative paths like `../path-name/`.
 
 Examples:
-- learning-paths/servers-and-cloud-computing/csp/ (Arm-based instance)
-- learning-paths/cross-platform/docker/ (Docker learning path)
+- /learning-paths/servers-and-cloud-computing/csp/ (Arm-based instance)
+- /learning-paths/cross-platform/docker/ (Docker learning path)
 
 ### External links
 
 Use the full URL for external links that are not on learn.arm.com, these open in a new tab.
 
+### Link Verification Process
+
+When creating Learning Path content:
+- Verify internal links exist before adding them
+- Use semantic search or website browsing to confirm Learning Path availability
+- Prefer verified external authoritative sources over speculative internal links
+- Test link formats against existing Learning Path examples
+- Never assume Learning Paths exist without verification
+
 This instruction set enables high-quality Arm Learning Paths content while maintaining consistency and technical accuracy.
-
-
-
