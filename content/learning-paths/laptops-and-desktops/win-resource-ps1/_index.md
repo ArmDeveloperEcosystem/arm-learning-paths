@@ -11,12 +11,12 @@ who_is_this_for: This is an introductory topic for developers who want to measur
 
 learning_objectives: 
     - Run video encode and decode tasks by using FFmpeg
-    - Benchmark video encode task
-    - Sample CPU / memory / power usage of video decode task
+    - Benchmark the video encode task
+    - Sample CPU, memory, and power usage for the video decode task
 
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11
-    - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.
+    - A code editor such as [Visual Studio Code for Windows on Arm](https://code.visualstudio.com/docs/?dv=win32arm64user) 
 
 author: Ruifeng Wang
 
