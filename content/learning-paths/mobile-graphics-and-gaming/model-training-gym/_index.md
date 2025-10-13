@@ -1,10 +1,7 @@
 ---
 title: Fine-Tuning Neural Graphics Models with Model Gym
 
-draft: true
-cascade:
-    draft: true
-    
+   
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for developers exploring neural graphics and interested in training and deploying upscaling models like Neural Super Sampling (NSS) using PyTorch and Arm’s hardware-aware backend.
