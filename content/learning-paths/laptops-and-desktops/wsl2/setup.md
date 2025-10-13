@@ -59,7 +59,7 @@ The operation completed successfully.
 
 ## Install a Linux distribution
 
-Once WSL 2 is installed, the Microsoft store is the easiest place to find a Linux distribution. [Installing Ubuntu 22.04](https://apps.microsoft.com/store/detail/ubuntu-22041-lts/9PN20MSR04DW) is quick and easy from the store. 
+Once WSL 2 is installed, the Microsoft store is the easiest place to find a Linux distribution. [Installing Ubuntu 24.04](https://apps.microsoft.com/detail/9nz3klhxdjp5?hl=en-US&gl=US) is quick and easy from the store. 
 
 There are other Linux distributions available in the Microsoft Store. Make sure to select the ones that work on Arm. Some do not work and it may be some trial-and-error to identify those that work on Arm.
 
@@ -74,24 +74,33 @@ wsl --list --online
 The output will list the available distributions:
 
 ```output
+The following is a list of valid distributions that can be installed.
+Install using 'wsl.exe --install <Distro>'.
+
 NAME                   FRIENDLY NAME
-Ubuntu                 Ubuntu
+AlmaLinux-8            AlmaLinux OS 8
+AlmaLinux-9            AlmaLinux OS 9
+AlmaLinux-Kitten-10    AlmaLinux OS Kitten 10
+AlmaLinux-10           AlmaLinux OS 10
 Debian                 Debian GNU/Linux
+FedoraLinux-42         Fedora Linux 42
+Ubuntu                 Ubuntu
+Ubuntu-24.04           Ubuntu 24.04 LTS
 kali-linux             Kali Linux Rolling
-Ubuntu-18.04           Ubuntu 18.04 LTS
+openSUSE-Tumbleweed    openSUSE Tumbleweed
+openSUSE-Leap-16.0     openSUSE Leap 16.0
 Ubuntu-20.04           Ubuntu 20.04 LTS
 Ubuntu-22.04           Ubuntu 22.04 LTS
-Ubuntu-24.04           Ubuntu 24.04 LTS
-openSUSE-Tumbleweed    openSUSE Tumbleweed
+openSUSE-Leap-15.6     openSUSE Leap 15.6
 ```
 
 Install a distribution from this list:
 
 ```cmd
-wsl --install Ubuntu
+wsl --install Ubuntu-24.04
 ```
 
-Be patient, the progress may stay on 0 for a bit.
+Be patient, the download and install takes some time.
 
 After installation, each Linux distribution will have an icon on the Windows application menu. Use this icon to start WSL with the Linux distribution. 
 
@@ -154,7 +163,7 @@ wsl --list --running
 Terminate a running distribution:
 
 ```console
-wsl --terminate Ubuntu-22.04
+wsl --terminate Ubuntu-24.04
 ```
 
 Shutdown all running distributions:
@@ -166,7 +175,7 @@ wsl --shutdown
 Unregister the Linux distribution and delete the filesystem:
 
 ```console
-wsl --unregister Ubuntu-22.04
+wsl --unregister Ubuntu-24.04
 ```
 
 Update WSL to the latest version:
