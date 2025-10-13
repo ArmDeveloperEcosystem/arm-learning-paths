@@ -14,8 +14,8 @@ Open your code editor, copy the content below, and save it as `sample_decoding.p
 
 ```PowerShell { line_numbers = true }
 param (
-    [string]$exePath = "path\to\ffplay.exe",
-    [string[]]$argList = @("-loop", "15", "-autoexit", "D:\RaceNight_1080p.mp4"),
+    [string]$exePath = "ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1\ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1\bin\ffplay.exe",
+    [string[]]$argList = @("-loop", "15", "-autoexit", "RaceNight_1080p.mp4"),
     [int]$interval = 2,
     [string]$outputFile = "usage_log.csv"
 )

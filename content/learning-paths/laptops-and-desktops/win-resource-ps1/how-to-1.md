@@ -38,10 +38,10 @@ The downloaded video file is in YUV raw format, which means playback of the vide
 
 Use `ffmpeg.exe` to compress the YUV raw video with the x265 encoder and convert the file format to `.mp4`. 
 
-Open a terminal and run the following command:
+Assuming you downloaded the files and extraced them in the current directory, open a terminal and run the following command:
 
 ```console
-path\to\ffmpeg.exe -f rawvideo -pix_fmt yuv420p -s 3840x2160 -r 50 -i D:\path\to\RaceNight_YUV_RAW\RaceNight_3840x2160_50fps_8bit.yuv -vf scale=1920:1080 -c:v libx265 -preset medium -crf 20 D:\RaceNight_1080p.mp4 -benchmark -stats -report
+ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1\ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1\bin\ffmpeg.exe -f rawvideo -pix_fmt yuv420p -s 3840x2160 -r 50 -i  RaceNight_3840x2160_50fps_420_8bit_YUV_RAW\RaceNight_3840x2160_50fps_8bit.yuv -vf scale=1920:1080 -c:v libx265 -preset medium -crf 20 RaceNight_1080p.mp4 -benchmark -stats -report
 ```
 
 {{% notice Note %}}
@@ -52,7 +52,7 @@ The command transforms the video size and compresses the video into an MP4 file 
 
 The `benchmark` option is turned on to show performance data at the same time. 
 
-The generated file will be at D:\RaceNight_1080p.mp4.
+The generated file will be at RaceNight_1080p.mp4.
 
 Run the command with both the x86_64 and the Arm64 versions of FFmpeg and compare the output.
 
@@ -63,7 +63,7 @@ The output below is from the x86_64 version of `ffmpeg.exe`:
 ```output
 x265 [info]: tools: rd=3 psy-rd=2.00 early-skip rskip mode=1 signhide tmvp
 x265 [info]: tools: b-intra strong-intra-smoothing lslices=6 deblock sao
-Output #0, mp4, to 'D:\RaceNight_1080p.mp4':
+Output #0, mp4, to 'RaceNight_1080p.mp4':
   Metadata:
     encoder         : Lavf61.7.100
   Stream #0:0: Video: hevc (hev1 / 0x31766568), yuv420p(tv, progressive), 1920x1080, q=2-31, 50 fps, 12800 tbn
@@ -88,7 +88,7 @@ The output below is from the Arm64 native compiled `ffmpeg.exe`:
 ```output
 x265 [info]: tools: rd=3 psy-rd=2.00 early-skip rskip mode=1 signhide tmvp
 x265 [info]: tools: b-intra strong-intra-smoothing lslices=6 deblock sao
-Output #0, mp4, to 'D:\RaceNight_1080p.mp4':
+Output #0, mp4, to 'RaceNight_1080p.mp4':
   Metadata:
     encoder         : Lavf61.7.100
   Stream #0:0: Video: hevc (hev1 / 0x31766568), yuv420p(tv, progressive), 1920x1080, q=2-31, 50 fps, 12800 tbn
