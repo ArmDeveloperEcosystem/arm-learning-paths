@@ -1,13 +1,15 @@
 ---
-title: Accelerate Voice Assistant performance with KleidiAI and SME2
+title: Accelerate multi-modal Voice Assistant performance with KleidiAI and SME2
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers who want to see a multi-model pipeline of a Voice Assistant application and accelerate the performance on Android devices using KleidiAI and SME2.
+who_is_this_for: This is an introductory topic for developers who want to see a pipeline of a multi-modal Voice Assistant application and accelerate the performance on Android devices using KleidiAI and SME2.
 
 learning_objectives:
-    - Compile and run a Voice Assistant Android application.
-    - Optimize performance using KleidiAI and SME2.
+    - Learn about the multi-modal Voice Assistant pipeline and different components used.
+    - Learn about the functionality of ML components used and how these can be built and benchmarked on various platforms.
+    - Compile and run a multi-modal Voice Assistant example based on Android OS.
+    - Optimize performance of multi-modal Voice Assistant using KleidiAI and SME2.
 
 prerequisites:
     - An Android phone that supports the i8mm Arm architecture feature (8-bit integer matrix multiplication). This Learning Path was tested on a Google Pixel 8 Pro.

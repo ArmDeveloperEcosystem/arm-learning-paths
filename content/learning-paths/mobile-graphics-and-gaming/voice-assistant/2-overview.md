@@ -39,7 +39,7 @@ The voice assistant pipeline imports and builds a separate module to provide thi
 https://gitlab.arm.com/kleidi/kleidi-examples/speech-to-text
 ```
 
-and build for various platforms:
+and build for various platforms to independently benchmark STT functionality:
 
 |Platform|Details|
 |---|---|
@@ -67,7 +67,7 @@ The voice assistant pipeline imports and builds a separate module to provide thi
 https://gitlab.arm.com/kleidi/kleidi-examples/large-language-models
 ```
 
-and build for various platforms:
+and build for various platforms to independently benchmark LLM functionality:
 
 |Platform|Details|
 |---|---|
@@ -94,4 +94,4 @@ This part of the application pipeline uses the Android Text-to-Speech API along 
 
 In synchronous mode, speech playback begins only after the full LLM response is received. By default, the application operates in asynchronous mode, where speech synthesis starts as soon as a full or partial sentence is ready. Remaining tokens are buffered and processed by the Android Text-to-Speech engine to ensure uninterrupted playback.
 
-You are now familiar with the building blocks of this application, so you can build the voice assistant for an Android device in the next step.
+You are now familiar with the building blocks of this application and can build these independently for various platforms. You can now build the multi-modal Voice Assistant example which runs on Android OS in the next step.
