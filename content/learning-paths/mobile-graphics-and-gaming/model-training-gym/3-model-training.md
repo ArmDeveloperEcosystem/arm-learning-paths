@@ -62,6 +62,8 @@ neural-graphics-model-gym-examples/tutorials/nss/model_evaluation_example.ipynb
 
 At the end you should see a visual comparison of the NSS upscaling and the ground truth image.
 
-Proceed to the final section to view the model structure and explore further resources.
+
+You’ve completed the training and evaluation steps. Proceed to the final section to view the model structure and explore further resources. 
+
 
 

@@ -55,4 +55,5 @@ print("Torch version:", torch.__version__)
 print("Model Gym version:", ng_model_gym.__version__)
 ```
 
-You’re now ready to start walking through the training and evaluation steps.
+You’ve completed your environment setup - great work! You’re now ready to start walking through the training and evaluation steps.
+

@@ -50,6 +50,10 @@ further_reading:
         title: NSS on HuggingFace
         link: https://huggingface.co/Arm/neural-super-sampling
         type: website
+    - resource:
+        title: Vulkan ML Sample Learning Path
+        link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
+        type: learningpath
 
 
 ### FIXED, DO NOT MODIFY

@@ -46,4 +46,4 @@ Use the file browser to open the `.vgf` model exported earlier in your training 
 
 Through this Learning Path, you’ve learned what neural graphics is and why it matters for game performance. You’ve stepped through the process of training and evaluating an NSS model using PyTorch and the Model Gym, and seen how to export that model into VGF (.vgf) for real-time deployment. You’ve also explored how to visualize and inspect the model’s structure using Model Explorer.
 
-As a next step, you can head over to the [Model Training Gym repository](https://github.com/arm/neural-graphics-model-gym/tree/main) documentation to explore integration into your own game development workflow. You’ll find resources on fine-tuning, deeper details about the training and export process, and everything you need to adapt to your own content and workflows.
+You’ve completed the Learning Path. You now know how to train, export, and visualize neural graphics models on Arm. Explore the Model Training Gym repository for deeper integration and to keep building your skills.
