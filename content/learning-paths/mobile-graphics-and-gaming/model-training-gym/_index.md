@@ -1,6 +1,5 @@
 ---
 title: Fine-Tuning Neural Graphics Models with Model Gym
-
    
 minutes_to_complete: 45
 
