@@ -39,15 +39,15 @@ The voice assistant pipeline imports and builds a separate module to provide thi
 https://gitlab.arm.com/kleidi/kleidi-examples/speech-to-text
 ```
 
-and build for various platforms to independently benchmark STT functionality:
+You can build the pipeline for various platforms and independently benchmark the STT functionality:
 
 |Platform|Details|
 |---|---|
 |Linux|x86_64 - KleidiAI is disabled by default, aarch64 - KleidiAI is enabled by default.|
 |Android|Cross-compile for an Android device, ensure the Android NDK path is set and correct toolchain file is provided. KleidiAI enabled by default.|
-|MacOS|Native or cross-compilation for a Mac device. KleidiAI and SME kernels can be used if available on device.|
+|macOS|Native or cross-compilation for a Mac device. KleidiAI and SME kernels can be used if available on device.|
 
-Currently, this module uses [whisper.cpp](https://github.com/ggml-org/whisper.cpp) and wraps the backend library by a thin C++ layer. The module also provides JNI bindings for developers targetting Android based applications.
+Currently, this module uses [whisper.cpp](https://github.com/ggml-org/whisper.cpp) and wraps the backend library with a thin C++ layer. The module also provides JNI bindings for developers targeting Android based applications.
 
 {{% notice %}}
 You can get more information on how to build and use this module [here](https://gitlab.arm.com/kleidi/kleidi-examples/speech-to-text/-/blob/main/README.md?ref_type=heads)
@@ -67,15 +67,15 @@ The voice assistant pipeline imports and builds a separate module to provide thi
 https://gitlab.arm.com/kleidi/kleidi-examples/large-language-models
 ```
 
-and build for various platforms to independently benchmark LLM functionality:
+You can build this pipeline for various platforms and independently benchmark the LLM functionality:
 
 |Platform|Details|
 |---|---|
 |Linux|x86_64 - KleidiAI is disabled by default, aarch64 - KleidiAI is enabled by default.|
 |Android|Cross-compile for an Android device, ensure the Android NDK path is set and correct toolchain file is provided. KleidiAI enabled by default.|
-|MacOS|Native or cross-compilation for a Mac device. KleidiAI and SME kernels can be used if available on device.|
+|macOS|Native or cross-compilation for a Mac device. KleidiAI and SME kernels can be used if available on device.|
 
-Currently, this module provides a thin C++ layer as well as JNI bindings for developers targetting Android based applications, supported backends are:
+Currently, this module provides a thin C++ layer as well as JNI bindings for developers targeting Android based applications, supported backends are:
 |Framework|Dependency|Input modalities supported|Output modalities supported|Neural Network|
 |---|---|---|---|---|
 |llama.cpp|https://github.com/ggml-org/llama.cpp|`image`, `text`|`text`|phi-2,Qwen2-VL-2B-Instruct|
@@ -94,4 +94,4 @@ This part of the application pipeline uses the Android Text-to-Speech API along 
 
 In synchronous mode, speech playback begins only after the full LLM response is received. By default, the application operates in asynchronous mode, where speech synthesis starts as soon as a full or partial sentence is ready. Remaining tokens are buffered and processed by the Android Text-to-Speech engine to ensure uninterrupted playback.
 
-You are now familiar with the building blocks of this application and can build these independently for various platforms. You can now build the multi-modal Voice Assistant example which runs on Android OS in the next step.
+You are now familiar with the building blocks of this application and can build these independently for various platforms. You can now build the multimodal Voice Assistant example which runs on Android OS in the next step.
