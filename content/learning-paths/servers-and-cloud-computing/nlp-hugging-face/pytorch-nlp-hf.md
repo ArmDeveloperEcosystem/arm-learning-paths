@@ -96,6 +96,8 @@ The output from this script should look like:
 3) positive 0.0477
 ```
 
+You should see three lines, each with a rank, sentiment label (negative / neutral / positive), and confidence score. The first line is the model’s strongest guess. The three probabilities should sum to 1. In this example, the model is confident the sentiment is negative.
+
 You have successfully performed sentiment analysis on the input text, all running on your Arm AArch64 CPU. You can change the input text in your example and re-run the classification example.
 
 Now that you have run the model, let's add the ability to profile the model execution. You can use the [PyTorch Profiler](https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html) to analyze the execution time on the CPU. Copy the contents shown below into a file named `sentiment-analysis-profile.py`:
