@@ -39,15 +39,15 @@ Creating a virtual machine based on Azure Cobalt 100 is no different from creati
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance1.png "Allow inbound port rules")
 
-- Click on the **Review + Create** tab and review the configuration for your virtual machine. It should look like the following:
+Click on the **Review + Create** tab and review the configuration for your virtual machine. It should look like the following:
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/ubuntu-pro.png "Review and Create an Azure Cobalt 100 Arm64 VM")
 
-- When you are confident about your selection, click on the **Create** button, and click on the **Download Private key and Create Resources** button.
+When you are confident about your selection, click on the **Create** button, and click on the **Download Private key and Create Resources** button.
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance4.png "Download Private key and Create Resources")
 
-- Your virtual machine should be ready and running within a few minutes. You can SSH into the virtual machine using the private key, along with the Public IP details.
+Your virtual machine should be ready and running within a few minutes. You can SSH into the virtual machine using the private key, along with the Public IP details.
 
 You should see your VM listed as **Running** in the Azure portal. If you have trouble connecting, double-check your SSH key and ensure the correct ports are open. If the VM creation fails, check your Azure quota, region availability, or try a different VM size.
 

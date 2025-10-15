@@ -36,14 +36,13 @@ python3 baseline.py
 You should see output similar to:
 ```output
 Inference time: 0.0026061534881591797
-```
 {{% notice Note %}}
-Inference time is the amount of time it takes for a trained machine learning model to make a prediction (produce output) after receiving input data.
+Inference time is how long it takes for a trained machine learning model to make a prediction after it receives input data.
 
-The input tensor has the shape `(1, 3, 224, 224)`, which means:
-- 1: batch size (number of images processed at once)
-- 3: color channels (RGB)
-- 224 x 224: image resolution (common for models like SqueezeNet)
+The input tensor shape `(1, 3, 224, 224)` means:
+- `1`: One image is processed at a time (batch size)
+- `3`: Three color channels (red, green, blue)
+- `224 x 224`: Each image is 224 pixels wide and 224 pixels tall (standard for SqueezeNet)
 {{% /notice %}}
 
 This indicates the model successfully executed a single forward pass through the SqueezeNet INT8 ONNX model and returned results.

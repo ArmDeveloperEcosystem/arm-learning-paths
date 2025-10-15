@@ -11,7 +11,7 @@ Now that you have validated ONNX Runtime with Python-based timing (for example, 
 
 This approach helps you evaluate ONNX Runtime efficiency on Azure Arm64-based Cobalt 100 instances and compare results with other architectures if needed.
 
-You are ready to run benchmarks — a key skill for optimizing real-world deployments.
+You are ready to run benchmarks, which is a key skill for optimizing real-world deployments.
 
 
 ## Run the performance tests using onnxruntime_perf_test
@@ -35,7 +35,7 @@ You should see output similar to:
 ```output
 libprotoc 3.21.12
 ```
-### Build ONNX Runtime from source
+## Build ONNX Runtime from source
 
 The benchmarking tool `onnxruntime_perf_test` isn’t available as a pre-built binary for any platform, so you will need to build it from source. This process can take up to 40 minutes.
 
@@ -65,12 +65,12 @@ Now that you have built the benchmarking tool, you can run inference benchmarks 
 
 Breakdown of the flags:
 
-- `-e cpu`: Use the CPU execution provider.
-- `-r 100`: Run 100 inference passes for statistical reliability.
-- `-m times`: Run in “repeat N times” mode for latency-focused measurement.
-- `-s`: Print summary statistics after the run.
-- `-Z`: Disable memory arena for more consistent timing.
-- `-I ../squeezenet-int8.onnx`: Path to your ONNX model file.
+- `-e cpu`: use the CPU execution provider.
+- `-r 100`: run 100 inference passes for statistical reliability.
+- `-m times`: run in “repeat N times” mode for latency-focused measurement.
+- `-s`: print summary statistics after the run.
+- `-Z`: disable memory arena for more consistent timing.
+- `-I ../squeezenet-int8.onnx`: path to your ONNX model file.
 
 You should see output with latency and throughput statistics. If you encounter build errors, check that you have enough memory (at least 8 GB recommended) and all dependencies are installed. For missing dependencies, review the installation steps above.
 
