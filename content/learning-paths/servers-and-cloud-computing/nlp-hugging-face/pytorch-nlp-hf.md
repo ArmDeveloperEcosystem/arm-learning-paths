@@ -179,7 +179,7 @@ Self CPU time total: 51.903ms
 2) neutral 0.2287
 3) positive 0.0477
 ```
-In addition to the classification output from the model, you can now see the execution time for the different operators. 
+In addition to the classification output from the model, you can now see the execution time for the different operators. The table shows how much time each operation takes on the CPU, both by itself and including any child operations. 
 
 You can experiment with the [BFloat16 floating-point number format](/install-guides/pytorch#bfloat16-floating-point-number-format) and [Transparent huge pages](/install-guides/pytorch#transparent-huge-pages) settings with PyTorch and see how that impacts the performance of your model.
 
