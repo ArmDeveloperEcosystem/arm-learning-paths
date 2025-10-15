@@ -49,6 +49,7 @@ PyTorch requires Python 3, and this can be installed with `pip`.
 For Ubuntu, run:
 
 ```bash
+sudo apt update
 sudo apt install python-is-python3 python3-pip python3-venv -y
 ```
 
@@ -71,7 +72,7 @@ source venv/bin/activate
  In your active virtual environment, install PyTorch:
 
 ```bash
-sudo pip install torch torchvision torchaudio
+pip install torch torchvision torchaudio
 ```
 
 ## How do I get started with PyTorch?
