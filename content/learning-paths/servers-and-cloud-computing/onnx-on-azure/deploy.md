@@ -8,14 +8,16 @@ layout: learningpathall
 
 
 ## ONNX Installation on Azure Ubuntu Pro 24.04 LTS
-To work with ONNX models on Azure, you will need a clean Python environment with the required packages. The following steps install Python, set up a virtual environment, and prepare for ONNX model execution using ONNX Runtime.
+To work with ONNX models on Azure, you will need a clean Python environment with the required packages. The following steps show you how to install Python, set up a virtual environment, and prepare for ONNX model execution using ONNX Runtime.
 
 
-### Install Python and virtual environment
+## Install Python and virtual environment
+
+To get started, update your package list and install Python 3 along with the tools needed to create a virtual environment:
 
 ```console
 sudo apt update
-sudo apt install -y python3 python3-pip python3-virtualenv python3-venv
+sudo apt install -y python3 python3-pip python3-venv
 ```
 
 Create and activate a virtual environment:
@@ -29,7 +31,7 @@ source onnx-env/bin/activate
 Once your environment is active, you're ready to install the required libraries.
 
 
-### Install ONNX and required libraries
+## Install ONNX and required libraries
 
 Upgrade pip and install ONNX with its runtime and supporting libraries:
 ```console
@@ -43,7 +45,7 @@ If you encounter errors during installation, check your internet connection and 
 After installation, you're ready to validate your setup.
 
 
-### Validate ONNX and ONNX Runtime
+## Validate ONNX and ONNX Runtime
 Once the libraries are installed, verify that both ONNX and ONNX Runtime are correctly set up on your VM.
 
 Create a file named `version.py` with the following code:
@@ -68,7 +70,7 @@ If you see version numbers for both ONNX and ONNX Runtime, your environment is r
 Great job! You have confirmed that ONNX and ONNX Runtime are installed and ready on your Azure Cobalt 100 VM. This is the foundation for running inference workloads and serving ONNX models.
 
 
-### Download and validate ONNX model: SqueezeNet
+## Download and validate ONNX model: SqueezeNet
 SqueezeNet is a lightweight convolutional neural network (CNN) architecture designed to provide accuracy close to AlexNet while using 50x fewer parameters and a much smaller model size. This makes it well-suited for benchmarking ONNX Runtime.
 
 Now that your environment is set up and validated, you're ready to download and test the SqueezeNet model in the next step.
@@ -76,7 +78,7 @@ Download the quantized model:
 ```console
 wget https://github.com/onnx/models/raw/main/validated/vision/classification/squeezenet/model/squeezenet1.0-12-int8.onnx -O squeezenet-int8.onnx
 ```
-#### Validate the model: 
+## Validate the model: 
 
 After downloading the SqueezeNet ONNX model, the next step is to confirm that it is structurally valid and compliant with the ONNX specification. ONNX provides a built-in checker utility that verifies the graph, operators, and metadata.
 Create a file named `validation.py` with the following code:

@@ -7,8 +7,8 @@ minutes_to_complete: 60
 who_is_this_for: This Learning Path is for developers deploying ONNX-based applications on Arm-based machines.
 
 learning_objectives:
-    - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image.
-    - Perform ONNX baseline testing and benchmarking on Arm64 virtual machines.
+    - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image
+    - Perform ONNX baseline testing and benchmarking on Arm64 virtual machines
 
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)

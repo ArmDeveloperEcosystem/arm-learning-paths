@@ -1,12 +1,12 @@
 ---
-title: Benchmarking via onnxruntime_perf_test
+title: Benchmark ONNX runtime performance with onnxruntime_perf_test
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-
+## Benchmark ONNX model inference on Azure Cobalt 100
 Now that you have validated ONNX Runtime with Python-based timing (for example, the SqueezeNet baseline test), you can move to using a dedicated benchmarking utility called `onnxruntime_perf_test`. This tool is designed for systematic performance evaluation of ONNX models, allowing you to capture more detailed statistics than simple Python timing.
 
 This approach helps you evaluate ONNX Runtime efficiency on Azure Arm64-based Cobalt 100 instances and compare results with other architectures if needed.
@@ -18,7 +18,7 @@ You are ready to run benchmarks — a key skill for optimizing real-world deploy
 The `onnxruntime_perf_test` tool is included in the ONNX Runtime source code. You can use it to measure the inference performance of ONNX models and compare different execution providers (such as CPU or GPU). On Arm64 VMs, CPU execution is the focus.
 
 
-### Install required build tools
+## Install required build tools
 Before building or running `onnxruntime_perf_test`, you need to install a set of development tools and libraries. These packages are required for compiling ONNX Runtime and handling model serialization via Protocol Buffers.
 
 ```console
@@ -56,7 +56,7 @@ If the build completes successfully, you should see the executable at:
 ```
 
 
-### Run the benchmark
+## Run the benchmark
 Now that you have built the benchmarking tool, you can run inference benchmarks on the SqueezeNet INT8 model:
 
 ```console
@@ -105,17 +105,17 @@ P95 Latency: 0.00187393 s
 P99 Latency: 0.00190312 s
 P999 Latency: 0.00190312 s
 ```
-### Benchmark Metrics Explained  
+## Benchmark Metrics Explained  
 
-  * Average Inference Time: The mean time taken to process a single inference request across all runs. Lower values indicate faster model execution.  
-  * Throughput: The number of inference requests processed per second. Higher throughput reflects the model’s ability to handle larger workloads efficiently.  
-  * CPU Utilization: The percentage of CPU resources used during inference. A value close to 100% indicates full CPU usage, which is expected during performance benchmarking.  
-  * Peak Memory Usage: The maximum amount of system memory (RAM) consumed during inference. Lower memory usage is beneficial for resource-constrained environments. 
-  * P50 Latency (Median Latency): The time below which 50% of inference requests complete. Represents typical latency under normal load.   
-  * Latency Consistency: Describes the stability of latency values across all runs. "Consistent" indicates predictable inference performance with minimal jitter.  
+  * Average inference time: the mean time taken to process a single inference request across all runs. Lower values indicate faster model execution.  
+  * Throughput: the number of inference requests processed per second. Higher throughput reflects the model’s ability to handle larger workloads efficiently.  
+  * CPU utilization: the percentage of CPU resources used during inference. A value close to 100% indicates full CPU usage, which is expected during performance benchmarking.  
+  * Peak Memory Usage: the maximum amount of system memory (RAM) consumed during inference. Lower memory usage is beneficial for resource-constrained environments. 
+  * P50 Latency (Median Latency): the time below which 50% of inference requests complete. Represents typical latency under normal load.   
+  * Latency Consistency: describes the stability of latency values across all runs. "Consistent" indicates predictable inference performance with minimal jitter.  
 
-### Benchmark summary on Arm64:
-Here is a summary of benchmark results collected on an Arm64 **D4ps_v6 Ubuntu Pro 24.04 LTS virtual machine**.
+## Benchmark summary on Arm64:
+Here is a summary of benchmark results collected on an Arm64 D4ps_v6 Ubuntu Pro 24.04 LTS virtual machine.
 
 | **Metric**                | **Value** |
 |----------------------------|-------------------------------|
@@ -132,12 +132,9 @@ Here is a summary of benchmark results collected on an Arm64 **D4ps_v6 Ubuntu Pr
 | **Latency Consistency**    | Consistent                   |
 
 
-### Highlights from Benchmarking on Azure Cobalt 100 Arm64 VMs
+## Highlights from Benchmarking on Azure Cobalt 100 Arm64 VMs
 
-The results on Arm64 virtual machines demonstrate:
-- Low-Latency Inference: Achieved consistent average inference times of ~1.86 ms on Arm64.  
-- Strong and Stable Throughput: Sustained throughput of over 538 inferences/sec using the `squeezenet-int8.onnx` model on D4ps_v6 instances.  
-- Lightweight Resource Footprint: Peak memory usage stayed below 37 MB, with CPU utilization around 96%, ideal for efficient edge or cloud inference.  
-- Consistent Performance: P50, P95, and Max latency remained tightly bound, showcasing reliable performance on Azure Cobalt 100 Arm-based infrastructure.
+
+These results on Arm64 virtual machines demonstrate low-latency inference, with consistent average inference times of approximately 1.86 ms. Throughput remains strong and stable, sustaining over 538 inferences per second using the `squeezenet-int8.onnx` model on D4ps_v6 instances. The resource footprint is lightweight, as peak memory usage stays below 37 MB and CPU utilization is around 96%, making this setup ideal for efficient edge or cloud inference. Performance is also consistent, with P50, P95, and maximum latency values tightly grouped, showcasing reliable results on Azure Cobalt 100 Arm-based infrastructure.
 
 You have now successfully benchmarked inference time of ONNX models on an Azure Cobalt 100 Arm64 virtual machine.
