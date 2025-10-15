@@ -6,14 +6,20 @@ weight: 6
 layout: learningpathall
 ---
 
-Now that you have validated ONNX Runtime with Python-based timing (e.g., SqueezeNet baseline test), you can move to using a dedicated benchmarking utility called `onnxruntime_perf_test`. This tool is designed for systematic performance evaluation of ONNX models, allowing you to capture more detailed statistics than simple Python timing.
-This helps evaluate the ONNX Runtime efficiency on Azure Arm64-based Cobalt 100 instances and other x86_64 instances. architectures.
+
+Now that you have validated ONNX Runtime with Python-based timing (for example, the SqueezeNet baseline test), you can move to using a dedicated benchmarking utility called `onnxruntime_perf_test`. This tool is designed for systematic performance evaluation of ONNX models, allowing you to capture more detailed statistics than simple Python timing.
+
+This approach helps you evaluate ONNX Runtime efficiency on Azure Arm64-based Cobalt 100 instances and compare results with other architectures if needed.
+
+You are ready to run benchmarks — a key skill for optimizing real-world deployments.
+
 
 ## Run the performance tests using onnxruntime_perf_test
-The `onnxruntime_perf_test` is a performance benchmarking tool included in the ONNX Runtime source code. It is used to measure the inference performance of ONNX models and supports multiple execution providers (like CPU, GPU, or other execution providers). on Arm64 VMs, CPU execution is the focus.
+The `onnxruntime_perf_test` tool is included in the ONNX Runtime source code. You can use it to measure the inference performance of ONNX models and compare different execution providers (such as CPU or GPU). On Arm64 VMs, CPU execution is the focus.
 
-### Install Required Build Tools
-Before building or running `onnxruntime_perf_test`, you will need to install a set of development tools and libraries. These packages are required for compiling ONNX Runtime and handling model serialization via Protocol Buffers.
+
+### Install required build tools
+Before building or running `onnxruntime_perf_test`, you need to install a set of development tools and libraries. These packages are required for compiling ONNX Runtime and handling model serialization via Protocol Buffers.
 
 ```console
 sudo apt update
@@ -29,24 +35,26 @@ You should see output similar to:
 ```output
 libprotoc 3.21.12
 ```
-### Build ONNX Runtime from Source:
+### Build ONNX Runtime from source
 
-The benchmarking tool `onnxruntime_perf_test`, isn’t available as a pre-built binary for any platform. So, you will have to build it from the source, which is expected to take around 40 minutes. 
+The benchmarking tool `onnxruntime_perf_test` isn’t available as a pre-built binary for any platform, so you will need to build it from source. This process can take up to 40 minutes.
 
-Clone onnxruntime repo:
+Clone the ONNX Runtime repository:
 ```console
 git clone --recursive https://github.com/microsoft/onnxruntime 
 cd onnxruntime
 ```
+
 Now, build the benchmark tool:
 
 ```console
 ./build.sh --config Release --build_dir build/Linux --build_shared_lib --parallel --build --update --skip_tests 
 ```
-You should see the executable at:
+If the build completes successfully, you should see the executable at:
 ```output
 ./build/Linux/Release/onnxruntime_perf_test
 ```
+
 
 ### Run the benchmark
 Now that you have built the benchmarking tool, you can run inference benchmarks on the SqueezeNet INT8 model:
@@ -54,10 +62,21 @@ Now that you have built the benchmarking tool, you can run inference benchmarks 
 ```console
 ./build/Linux/Release/onnxruntime_perf_test -e cpu -r 100 -m times -s -Z -I ../squeezenet-int8.onnx
 ```
+
 Breakdown of the flags:
-  -e cpu → Use the CPU execution provider.
-  -r 100 → Run 100 inference passes for statistical reliability.
-  -m times → Run in “repeat N times” mode. Useful for latency-focused measurement.
+
+- `-e cpu`: Use the CPU execution provider.
+- `-r 100`: Run 100 inference passes for statistical reliability.
+- `-m times`: Run in “repeat N times” mode for latency-focused measurement.
+- `-s`: Print summary statistics after the run.
+- `-Z`: Disable memory arena for more consistent timing.
+- `-I ../squeezenet-int8.onnx`: Path to your ONNX model file.
+
+You should see output with latency and throughput statistics. If you encounter build errors, check that you have enough memory (at least 8 GB recommended) and all dependencies are installed. For missing dependencies, review the installation steps above.
+
+If the benchmark runs successfully, you are ready to analyze and optimize your ONNX model performance on Arm-based Azure infrastructure.
+
+Well done! You have completed a full benchmarking workflow. Continue to the next section to explore further optimizations or advanced deployment scenarios.
   -s → Show detailed per-run statistics (latency distribution).
   -Z → Disable intra-op thread spinning. Reduces CPU waste when idle between runs, especially on high-core systems like Cobalt 100.
   -I → Input the ONNX model path directly, skipping pre-generated test data.

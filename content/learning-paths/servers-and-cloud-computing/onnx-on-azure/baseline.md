@@ -52,3 +52,7 @@ Single inference latency(0.00260 sec): This is the time required for the model t
 Subsequent inferences are usually faster due to caching and optimized execution.
 
 This demonstrates that the setup is fully working, and ONNX Runtime efficiently executes quantized models on Arm64. 
+
+Great job! You've completed your first ONNX Runtime inference on Arm-based Azure infrastructure. This baseline test confirms your environment is set up correctly and ready for more advanced benchmarking.
+
+Next, you'll use a dedicated benchmarking tool to capture more detailed performance statistics and further optimize your deployment.
