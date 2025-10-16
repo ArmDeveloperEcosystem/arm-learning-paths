@@ -28,12 +28,18 @@ You should see an output similar to:
 Hello from Node.js
 undefined
 ```
-This confirms that Node.js can execute JavaScript commands successfully.
+This confirms that Node.js can execute JavaScript commands successfully.   Please now press "Ctrl-D" to exit node. 
 
 ### 2. Test a Basic HTTP Server
 You can now create a small HTTP server to validate that Node.js can handle web requests.
 
-Create `app.js`.  For example, you can type "vi app.js" in the SSH shell and then insert the following code:
+Create `app.js`.  For example, you can type "vi app.js" in the SSH shell:
+
+```console
+vi app.js
+```
+
+ ...and then insert the following code:
 
 ```javascript
 const http = require('http');
@@ -50,7 +56,7 @@ server.listen(80, '0.0.0.0', () => {
  - This server listens on port 80.
  - Binding to 0.0.0.0 allows connections from any IP, not just localhost.
 
-Run the server in the background:
+Save the code and exit your editor. Next, we run the HTTP server in the background via sudo:
 
 ```console
 export MY_NODE=`which node`
