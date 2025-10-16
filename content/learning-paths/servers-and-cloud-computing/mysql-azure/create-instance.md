@@ -20,7 +20,7 @@ This Learning Path focuses on general-purpose virtual machines in the Dpsv6 seri
 
 While the steps to create this instance are included here for convenience, you can also refer to the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
 
-#### Create an Arm-based Azure Virtual Machine 
+## Create an Arm-based Azure virtual machine 
 
 Creating a virtual machine based on Azure Cobalt 100 is no different from creating any other virtual machine in Azure. To create an Azure virtual machine, launch the Azure portal and navigate to **Virtual Machines**.
 
