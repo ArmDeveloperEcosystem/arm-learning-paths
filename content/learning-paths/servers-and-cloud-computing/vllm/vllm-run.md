@@ -31,8 +31,12 @@ To run inference with multiple prompts, you can create a simple Python script to
 Use a text editor to save the Python script below in a file called `batch.py`:
 
 ```python
+import os
 import json
 from vllm import LLM, SamplingParams
+
+# Force CPU-only execution
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
 # Sample prompts.
 prompts = [
@@ -41,11 +45,14 @@ prompts = [
     "Write a hello world program in Rust",
 ]
 
+# Modify model here
+MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
+
 # Create a sampling params object.
 sampling_params = SamplingParams(temperature=0.8, top_p=0.95, max_tokens=256)
 
 # Create an LLM.
-llm = LLM(model="Qwen/Qwen2.5-0.5B-Instruct", dtype="bfloat16")
+llm = LLM(model=MODEL, dtype="float32", enforce_eager=True, tensor_parallel_size=1)
 
 # Generate texts from the prompts. The output is a list of RequestOutput objects
 # that contain the prompt, generated text, and other information.
