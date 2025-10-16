@@ -9,7 +9,7 @@ layout: "learningpathall"
 ## Azure Cobalt 100 Arm-based processor
 
 
-Azure’s Cobalt 100 is built on Microsoft's first-generation, in-house Arm-based processor, the Cobalt 100. Designed entirely by Microsoft and based on Arm’s Neoverse N2 architecture, this 64-bit CPU delivers improved performance and energy efficiency across a broad spectrum of cloud-native, scale-out Linux workloads. 
+Azure’s Cobalt 100 is built on Microsoft's first-generation, in-house Arm-based processor, the Cobalt 100. Designed entirely by Microsoft and based on Arm’s Neoverse N2 architecture, it is a 64-bit CPU that delivers improved performance and energy efficiency across a broad spectrum of cloud-native, scale-out Linux workloads. 
 
 You can use Cobalt 100 for:
 
@@ -35,6 +35,6 @@ ONNX models are serialized into a standardized format that you can execute with 
 
 To learn more, see the [ONNX official website](https://onnx.ai/) and the [ONNX Runtime documentation](https://onnxruntime.ai/docs/).
 
-## Summary
+## Next steps for ONNX on Azure Cobalt 100
 
-Now that you understand the basics of Azure Cobalt 100 and ONNX, you're ready to start deploying and benchmarking ONNX models on Arm-based Azure infrastructure. If this is your first time working with these technologies, don't worry, each step in this Learning Path is designed to help you succeed.
+Now that you understand the basics of Azure Cobalt 100 and ONNX Runtime, you are ready to deploy and benchmark ONNX models on Arm-based Azure virtual machines. This Learning Path will guide you step by step through setting up an Azure Cobalt 100 VM, installing ONNX Runtime, and running machine learning inference on Arm64 infrastructure.
