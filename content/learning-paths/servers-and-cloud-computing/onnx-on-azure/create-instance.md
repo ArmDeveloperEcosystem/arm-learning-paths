@@ -1,12 +1,12 @@
 ---
-title: Create an Arm-based Azure VM with Cobalt 100
+title: Create an Arm-based Azure Cobalt 100 virtual machine
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up your development environment
+## Set up your Arm-based Azure Cobalt 100 virtual machine
 
 There is more than one way to create an Arm-based Cobalt 100 virtual machine: 
 
@@ -23,10 +23,13 @@ While the steps to create this instance are included here for convenience, for f
 ## Create an Arm-based Azure Virtual Machine 
 
 
-Creating a virtual machine based on Azure Cobalt 100 is no different from creating any other virtual machine in Azure. To create an Azure virtual machine, launch the Azure portal and navigate to **Virtual Machines**.
+
+To launch an Arm-based virtual machine on Azure, you will use the Azure portal to create a Linux VM powered by the Cobalt 100 processor. This process is similar to creating any other Azure VM, but you will specifically select the Arm64 architecture and the D-Series v6 (D4ps_v6) size for optimal performance on Arm.
+
+Follow these steps to deploy a Linux-based Azure Cobalt 100 VM:
 
 - Select **Create**, and click on **Virtual Machine** from the drop-down list.
-- Inside the **Basic** tab, fill in the Instance details such as **Virtual machine name** and **Region**.
+- Inside the **Basic** tab, fill in the instance details such as **Virtual machine name** and **Region**.
 - Choose the image for your virtual machine (for example, Ubuntu Pro 24.04 LTS) and select **Arm64** as the VM architecture.
 - In the **Size** field, click on **See all sizes** and select the D-Series v6 family of virtual machines. Select **D4ps_v6** from the list.
 
@@ -49,9 +52,11 @@ When you are confident about your selection, click on the **Create** button, and
 
 Your virtual machine should be ready and running within a few minutes. You can SSH into the virtual machine using the private key, along with the Public IP details.
 
-You should see your VM listed as **Running** in the Azure portal. If you have trouble connecting, double-check your SSH key and ensure the correct ports are open. If the VM creation fails, check your Azure quota, region availability, or try a different VM size.
 
-Nice work! You have successfully provisioned an Arm-based Azure Cobalt 100 virtual machine. This environment is now ready for ONNX Runtime installation and benchmarking in the next steps.
+You should see your Arm-based Azure Cobalt 100 VM listed as **Running** in the Azure portal. If you have trouble connecting, double-check your SSH key and ensure the correct ports are open. If the VM creation fails, check your Azure quota, region availability, or try a different VM size. For more troubleshooting tips, see the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
+
+
+Nice work! You have successfully provisioned an Arm-based Azure Cobalt 100 virtual machine. This setup is ideal for deploying Linux workloads, running ONNX Runtime, and benchmarking machine learning models on Arm64 infrastructure. You are now ready to continue with ONNX Runtime installation and performance testing in the next steps.
 
 ![Azure portal VM creation - Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/final-vm.png "VM deployment confirmation in Azure portal")
 
