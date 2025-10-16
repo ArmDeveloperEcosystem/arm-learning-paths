@@ -21,19 +21,20 @@ npm install -g autocannon
 
 If your sample HTTP server is not already running from the last section, you can start it by typing:
 ```console
-node app.js &
+export MY_NODE=`which node`
+sudo ${MY_NODE} app.js &
 ```
 
-Server should be listening on port 3000 in the background:
+Server should be listening on port 80 in the background:
 
 ```output
-Server running at http://0.0.0.0:3000/
+Server running at http://0.0.0.0:80/
 ```
 
 ### Run a Basic Benchmark (Local)
 
 ```console
-autocannon -c 100 -d 10 http://localhost:3000
+autocannon -c 100 -d 10 http://localhost:80
 ```
 - `-c 100` → 100 concurrent connections
 - `-d 10` → duration 10 seconds
@@ -41,7 +42,7 @@ autocannon -c 100 -d 10 http://localhost:3000
 
 You should see an output similar to:
 ```output
-Running 10s test @ http://localhost:3000
+Running 10s test @ http://localhost:80
 100 connections
 
 
