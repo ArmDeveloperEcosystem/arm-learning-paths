@@ -1,23 +1,63 @@
 ---
-title: Model Loading & Optimization for ARM
+title: Model Preparation and Conversion
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Model Loading & Optimization for ARM
+To begin working with Llama 3, the pre-trained model parameters can be accessed through Meta’s Llama Downloads page. Users are required to request access by submitting their details and reviewing and accepting the Responsible Use Guide. Upon approval, a license and a download link—valid for 24 hours—are provided. For this exercise, the Llama 3.2 1B Instruct model is utilized; however, the same procedures can be applied to other available variants with only minor modifications.
 
-###### Hugging Face Authentication
-```bash
-Login to Hugging Face (needed for Llama models)
-pip install huggingface_hub
-huggingface-cli login
+Convert the model into an ExecuTorch-compatible format optimized for Arm devices
+## Script the Model
 
-Enter your token when prompted
-Get token from: https://huggingface.co/settings/tokens
+```python
+import torch
+from transformers import AutoModelForCausalLM
+
+model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-3.1-8B-Instruct", torch_dtype=torch.float16)
+scripted_model = torch.jit.script(model)
+scripted_model.save("llama_exec.pt")
 
 ```
+
+Install the llama-stack package from pip.
+```python 
+pip install llama-stack
+```
+
+Run the command to download, and paste the download link from the email when prompted.
+```python 
+llama model download --source meta --model-id Llama3.2-1B-Instruct
+```
+
+When the download is finished, the installation path is printed as output.
+```python 
+Successfully downloaded model to /<path-to-home>/.llama/checkpoints/Llama3.2-1B-Instruct
+```
+Verify by viewing the downloaded files under this path:
+```
+ls $HOME/.llama/checkpoints/Llama3.2-1B-Instruct
+checklist.chk           consolidated.00.pth     params.json             tokenizer.model
+
+```
+
+Export the model and generate a .pte file by running the appropriate Python command. This command will export the model and save the resulting file in your current working directory.
+```python 
+python3 -m examples.models.llama.export_llama \
+--checkpoint $HOME/.llama/checkpoints/Llama3.2-1B-Instruct/consolidated.00.pth \
+--params $HOME/.llama/checkpoints/Llama3.2-1B-Instruct/params.json \
+-kv --use_sdpa_with_kv_cache -X --xnnpack-extended-ops -qmode 8da4w \
+--group_size 64 -d fp32 \
+--metadata '{"get_bos_id":128000, "get_eos_ids":[128009, 128001, 128006, 128007]}' \
+--embedding-quantize 4,32 \
+--output_name="llama3_1B_kv_sdpa_xnn_qe_4_64_1024_embedding_4bit.pte" \
+--max_seq_length 1024 \
+--max_context_length 1024
+```
+
+Because Llama 3 has a larger vocabulary size, it is recommended to quantize the embeddings using the parameter --embedding-quantize 4,32. This helps to further optimize memory usage and reduce the overall model size.
+
 
 ###### Load a pre-fine-tuned model (from Hugging Face)
 - Example: meta-llama/Llama-3-8B-Instruct or a customer-support fine-tuned variant
