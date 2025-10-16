@@ -281,3 +281,5 @@ Voice and Tone:
 - Write comprehensive summaries that AI can use as content overviews
 - Ensure each section can stand alone as a coherent piece of information
 - Use clear, declarative statements rather than implied or contextual references
+
+Your Azure Cobalt 100 Arm64 virtual machine is now ready. Continue to the next step to install and configure MySQL.
