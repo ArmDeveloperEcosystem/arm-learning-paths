@@ -6,7 +6,9 @@ weight: 6
 layout: learningpathall
 ---
 
-After installing MySQL on your Azure Cobalt 100 Arm64 virtual machine, you should run a functional test to confirm that the database is operational and ready for use. Beyond just checking service status, validation ensures MySQL is processing queries correctly, users can authenticate, and the environment is correctly configured for cloud workloads.
+## Validate MySQL functionality on Azure Arm64
+
+After installing MySQL on your Azure Cobalt 100 Arm64 virtual machine, run a functional test to confirm that the database is operational and ready for use. Beyond checking service status, validation ensures MySQL is processing queries correctly, users can authenticate, and the environment is correctly configured for cloud workloads.
 
 ### Start MySQL 
 
@@ -37,10 +39,10 @@ USE baseline_test;
 SELECT DATABASE();
 ```
 
-- `CREATE DATABASE baseline_test;` - Creates a new database named baseline_test.
-- `SHOW DATABASES;` - Lists all available databases.
-- `USE baseline_test;` - Switches to the new database.
-- `SELECT DATABASE();` - Confirms the current database in use.
+- `CREATE DATABASE baseline_test;` - creates a new database named baseline_test.
+- `SHOW DATABASES;` - lists all available databases.
+- `USE baseline_test;` - switches to the new database.
+- `SELECT DATABASE();` - confirms the current database in use.
 
 You should see output similar to:
 
@@ -128,8 +130,8 @@ After inserting data into `test_table`, you can confirm the write operation succ
 ```sql
 SELECT * FROM test_table;
 ```
-- `SELECT *` - Retrieves all columns.
-- `FROM test_table` - Selects from the test_table.
+- `SELECT *` - retrieves all columns.
+- `FROM test_table` - selects from the test_table.
 
 You should see output similar to:
 
