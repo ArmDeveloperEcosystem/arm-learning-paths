@@ -1,20 +1,20 @@
 ---
-title: Create a Flask app, configure the Dockerfile, and set up the Buildkite pipeline
+title: Create a Flask app and set up the Buildkite pipeline
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
+## Create an application
 
-You can now create an application to get containerized with Docker. This guide covers building a Flask-based simple Python application.
+You can now create an application to containerize with Docker. The example below is a simple Flask-based Python application.
 
-Make sure you have a GitHub repository ready where you can execute the upcoming steps, including creating the Dockerfile and app.py file.
+Create a new public GitHub repository where you can create the Dockerfile and the Python file for the application.
 
-### Create Dockerfile
+### Create a Dockerfile
 
-Inside your GitHub repo, add a file named `Dockerfile` with this content:
+In a GitHub repo, add a new file named `Dockerfile` with this content:
 
 ```dockerfile
 FROM python:3.12-slim
@@ -30,9 +30,9 @@ EXPOSE 5000
 CMD ["python", "app.py"]
 ```
 
-### Create app.py
+### Create a Python application
 
-In the same repo, add a file named `app.py`:
+In the same repo, add a Python source file named `app.py`:
 
 ```python
 from flask import Flask
@@ -47,45 +47,38 @@ if __name__ == "__main__":
 ```
 
 This Python code defines a simple Flask web server that listens on all interfaces (0.0.0.0) at port 5000 and responds with "Hello from Arm-based Buildkite runner!" when the root URL (/) is accessed.
-It is essentially a basic “Hello World” web app running on an ARM-based environment.
 
-### Push Repo to GitHub
+### Add the code to your GitHub repository
 
 Before triggering the pipeline, your GitHub repository should have:
 
 - `Dockerfile` (defines your multi-arch image)
 - `app.py` (your Python microservice)
 
-Commit and push your repo with both `Dockerfile` and `app.py`.
+You will need the path to the GitHub repository when you create a Buildkite pipeline below.
 
-```console
-git add .
-git commit -m "ADD COMMIT MESSAGE"
-git push origin main
-```
-
-### Adding Docker Credentials as Buildkite Secrets
+### Add Docker credentials as Buildkite secrets
 
 Make sure to add your Docker credentials as secrets in the Buildkite UI.
-- Navigate to: **Buildkite → Agents → Secrets**
-- Here you can add `DOCKER_USERNAME` and `DOCKER_PASSWORD`.
 
+Navigate to Buildkite and select Agents and then Secrets and add `DOCKER_USERNAME` and `DOCKER_PASSWORD`.
 
-![Buildkite Dashboard alt-text#center](images/secrets.png "Figure 1: Set Secrets")
+![Buildkite Dashboard alt-text#center](images/secrets.png "Set Secrets")
 
-### Create Buildkite Pipeline for Multiarch
+### Create a Buildkite pipeline for multi-arch builds
 
-In Buildkite, define your pipeline YAML (through the UI):
+In Buildkite, define your pipeline using YAML through the UI.
 
-1. Go to **Buildkite Dashboard → Pipelines → New Pipeline**.
-2. Fill out the form:
+Go to the Buildkite Dashboard and select Pipelines and New Pipeline
 
-   - **Git Repository:** Enter your repository URL (SSH or HTTPS).  
-   - **Pipeline Name:** Enter the desired name for your pipeline.
+Fill out the form:
 
-![Buildkite Dashboard alt-text#center](images/pipeline.png "Figure 2: Create Pipeline")
+   - Git Repository: Enter your GitHub repository URL (SSH or HTTPS).  
+   - Name: Enter a name for your pipeline.
 
-3. In the **Steps (YAML Steps)** section, paste your pipeline YAML.
+![Buildkite Dashboard alt-text#center](images/pipeline.png "Create Pipeline")
+
+In the Steps (YAML Steps) section, paste your pipeline YAML.
 
 ```yaml
 steps:
@@ -104,11 +97,12 @@ steps:
       queue: buildkite-queue1
 ```   
 
-![Buildkite Dashboard alt-text#center](images/yaml.png "Figure 3: YAML steps")
-4. Click **Create Pipeline**.
+![Buildkite Dashboard alt-text#center](images/yaml.png "YAML steps")
 
-5. Trigger a new build by clicking **New Build** on your pipeline’s dashboard.
+Click Create Pipeline.
 
-![Buildkite Dashboard alt-text#center](images/build-p.png "Figure 4: Create Build")
+Trigger a new build by clicking New Build on your pipeline’s dashboard.
+
+![Buildkite Dashboard alt-text#center](images/build-p.png "Create Build")
 
 Once your files and pipeline are ready, you can validate that your Buildkite agent is running and ready to execute jobs.
