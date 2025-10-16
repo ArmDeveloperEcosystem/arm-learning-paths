@@ -1,54 +1,43 @@
 ---
-title: Run the Buildkite Pipeline
+title: Run the Buildkite pipeline
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Run the Buildkite Pipeline for Multi-Arch Builds
+## Run the Buildkite pipeline for multi-arch builds
 
-Follow these steps to run your pipeline on an Arm-based Buildkite agent.
+Follow the steps below to run your pipeline on an Arm-based Buildkite agent. You will use Docker Buildx to create a multi-architecture image for both `arm64` and `amd64`. 
 
-### Ensure the Agent is Running
+### Ensure the agent is running
 
-Before your pipeline can execute, the Buildkite agent must be running and connected to your Buildkite account:
+Before your pipeline can execute, the Buildkite agent must be running and connected to your Buildkite account. To verify the agent status, run the following command on your VM:
 
 ```console
-# If running manually
-sudo /root/.buildkite-agent/bin/buildkite-agent start
-
-# Or if using systemd
-sudo systemctl start buildkite-agent
-sudo systemctl status buildkite-agent
+sudo /root/.buildkite-agent/bin/buildkite-agent status
 ```
-- The agent listens for jobs from Buildkite and executes your pipeline steps.
-- Using `systemctl` ensures the agent starts automatically on VM boot.
-- You should see logs showing “Registered agent” to confirm it’s online.
 
-### Trigger the Pipeline
+This command checks the current state of your Buildkite agent and displays its connection status. When the agent is properly running and connected, you'll see logs indicating "Registered agent" in the output, confirming that the agent is online and ready to receive jobs from Buildkite. The agent continuously listens for new pipeline jobs and executes the steps you've defined in your configuration.
 
-Trigger via Buildkite UI
+### Trigger the pipeline
 
-- Open your pipeline in **Buildkite** → **Pipeline** page
-- Click **“New Build”**  
-- Select branch → **Start Build**
+To start your pipeline, navigate to your pipeline in the Buildkite web interface. From your Buildkite dashboard, select the pipeline you created and click the "New Build" button. Choose the branch you want to build from the dropdown menu, then click "Start Build" to begin execution.
 
-![Buildkite Dashboard alt-text#center](images/build-p.png "Figure 1: Trigger Pipeline")
+![Buildkite Dashboard alt-text#center](images/build-p.png "Trigger the pipeline")
 
-- Triggering the pipeline tells Buildkite to start running the steps you defined in your YAML file.
-- The pipeline steps will run on the ARM-based agent you set up.
+When you trigger the pipeline, Buildkite sends the job to your Arm-based agent and begins executing the steps defined in your YAML configuration file. The agent will process each step in sequence, starting with Docker login, followed by creating the Buildx builder, and finally building and pushing your multi-architecture Docker image.
 
 ### Monitor the Build
 
 You can see the logs of your build live in the Buildkite UI.
-Steps include:
 
+The steps include:
 - Docker login
 - Buildx builder creation
 - Multi-arch Docker image build and push
 
-![Buildkite Dashboard alt-text#center](images/log.png "Figure 2: Monitor Build")
+![Buildkite Dashboard alt-text#center](images/log.png "Monitor the build")
 
 ### Verify Multi-Arch Image
 
@@ -57,6 +46,7 @@ After the pipeline completes successfully, you can go to Docker Hub and verify t
 ![Docker-Hub alt-text#center](images/multi-arch-image.png "Figure 3: Docker image")
 
 ### Run the Flask Application on Arm
+
 ```console
 docker pull <DOCKER_USERNAME>/multi-arch-app:latest
 docker run --rm -p 80:5000 <DOCKER_USERNAME>/multi-arch-app:latest
