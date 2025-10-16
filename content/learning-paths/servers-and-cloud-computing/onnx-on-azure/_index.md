@@ -1,23 +1,19 @@
 ---
 title: Deploy SqueezeNet 1.0 INT8 model with ONNX Runtime on Azure Cobalt 100
 
-draft: true
-cascade:
-    draft: true
-    
+   
 minutes_to_complete: 60   
 
-who_is_this_for: This Learning Path introduces ONNX deployment on Microsoft Azure Cobalt 100 (Arm-based) virtual machines. It is designed for developers deploying ONNX-based applications on Arm-based machines.
+who_is_this_for: This Learning Path is for developers deploying ONNX-based applications on Arm-based machines.
 
 learning_objectives:
-    - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image.
-    - Deploy ONNX on the Ubuntu Pro virtual machine.
-    - Perform ONNX baseline testing and benchmarking on Arm64 virtual machines.
+    - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image
+    - Perform ONNX baseline testing and benchmarking on Arm64 virtual machines
 
 prerequisites:
-    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6).
-    - Basic understanding of Python and machine learning concepts.
-    - Familiarity with [ONNX Runtime](https://onnxruntime.ai/docs/) and Azure cloud services.
+    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
+    - Basic understanding of Python and machine learning concepts
+    - Familiarity with [ONNX Runtime](https://onnxruntime.ai/docs/) and Azure cloud services
 
 author: Pareena Verma    
 
