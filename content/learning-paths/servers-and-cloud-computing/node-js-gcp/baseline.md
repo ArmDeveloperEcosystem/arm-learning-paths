@@ -33,7 +33,7 @@ This confirms that Node.js can execute JavaScript commands successfully.
 ### 2. Test a Basic HTTP Server
 You can now create a small HTTP server to validate that Node.js can handle web requests.
 
-Create `app.js`:
+Create `app.js`.  For example, you can type "vi app.js" in the SSH shell and then insert the following code:
 
 ```javascript
 const http = require('http');
@@ -50,10 +50,10 @@ server.listen(3000, '0.0.0.0', () => {
  - This server listens on port 3000.
  - Binding to 0.0.0.0 allows connections from any IP, not just localhost.
 
-Run the server:
+Run the server in the background:
 
 ```console
-node app.js
+node app.js &
 ```
 You should see an output similar to:
 
