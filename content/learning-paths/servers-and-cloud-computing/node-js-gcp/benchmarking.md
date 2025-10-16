@@ -14,25 +14,27 @@ After validating that Node.js is installed and your HTTP server is running, you 
 **Autocannon** is a fast HTTP/1.1 benchmarking tool for Node.js, used to measure server throughput, latency, and request handling under concurrent load.
 
 ```console
-sudo npm install -g autocannon
+npm install -g autocannon
 ```
 
 ### Start Your Node.js HTTP Server
 
+If your sample HTTP server is not already running from the last section, you can start it by typing:
 ```console
-node app.js
+export MY_NODE=`which node`
+sudo ${MY_NODE} app.js &
 ```
 
-Server should be listening on port 3000:
+Server should be listening on port 80 in the background:
 
 ```output
-Server running at http://0.0.0.0:3000/
+Server running at http://0.0.0.0:80/
 ```
 
 ### Run a Basic Benchmark (Local)
 
 ```console
-autocannon -c 100 -d 10 http://localhost:3000
+autocannon -c 100 -d 10 http://localhost:80
 ```
 - `-c 100` → 100 concurrent connections
 - `-d 10` → duration 10 seconds
@@ -40,27 +42,27 @@ autocannon -c 100 -d 10 http://localhost:3000
 
 You should see an output similar to:
 ```output
-Running 10s test @ http://localhost:3000
+Running 10s test @ http://localhost:80
 100 connections
 
 
-┌─────────┬──────┬──────┬───────┬──────┬────────┬─────────┬───────┐
-│ Stat    │ 2.5% │ 50%  │ 97.5% │ 99%  │ Avg    │ Stdev   │ Max   │
-├─────────┼──────┼──────┼───────┼──────┼────────┼─────────┼───────┤
-│ Latency │ 1 ms │ 1 ms │ 3 ms  │ 3 ms │ 1.2 ms │ 0.62 ms │ 24 ms │
-└─────────┴──────┴──────┴───────┴──────┴────────┴─────────┴───────┘
-┌───────────┬─────────┬─────────┬─────────┬─────────┬──────────┬──────────┬─────────┐
-│ Stat      │ 1%      │ 2.5%    │ 50%     │ 97.5%   │ Avg      │ Stdev    │ Min     │
-├───────────┼─────────┼─────────┼─────────┼─────────┼──────────┼──────────┼─────────┤
-│ Req/Sec   │ 45,279  │ 45,279  │ 54,719  │ 55,199  │ 53,798.4 │ 2,863.96 │ 45,257  │
-├───────────┼─────────┼─────────┼─────────┼─────────┼──────────┼──────────┼─────────┤
-│ Bytes/Sec │ 8.78 MB │ 8.78 MB │ 10.6 MB │ 10.7 MB │ 10.4 MB  │ 557 kB   │ 8.78 MB │
-└───────────┴─────────┴─────────┴─────────┴─────────┴──────────┴──────────┴─────────┘
+┌─────────┬──────┬──────┬───────┬──────┬─────────┬─────────┬───────┐
+│ Stat    │ 2.5% │ 50%  │ 97.5% │ 99%  │ Avg     │ Stdev   │ Max   │
+├─────────┼──────┼──────┼───────┼──────┼─────────┼─────────┼───────┤
+│ Latency │ 1 ms │ 1 ms │ 2 ms  │ 2 ms │ 1.06 ms │ 0.41 ms │ 28 ms │
+└─────────┴──────┴──────┴───────┴──────┴─────────┴─────────┴───────┘
+┌───────────┬─────────┬─────────┬─────────┬────────┬───────────┬──────────┬─────────┐
+│ Stat      │ 1%      │ 2.5%    │ 50%     │ 97.5%  │ Avg       │ Stdev    │ Min     │
+├───────────┼─────────┼─────────┼─────────┼────────┼───────────┼──────────┼─────────┤
+│ Req/Sec   │ 66,175  │ 66,175  │ 70,847  │ 72,191 │ 70,713.61 │ 1,616.86 │ 66,134  │
+├───────────┼─────────┼─────────┼─────────┼────────┼───────────┼──────────┼─────────┤
+│ Bytes/Sec │ 12.8 MB │ 12.8 MB │ 13.7 MB │ 14 MB  │ 13.7 MB   │ 313 kB   │ 12.8 MB │
+└───────────┴─────────┴─────────┴─────────┴────────┴───────────┴──────────┴─────────┘
 
 Req/Bytes counts sampled once per second.
 # of samples: 10
 
-538k requests in 10.03s, 104 MB read
+707k requests in 10.02s, 137 MB read
 ```
 
 ### Understanding Node.js benchmark metrics and results with Autocannon

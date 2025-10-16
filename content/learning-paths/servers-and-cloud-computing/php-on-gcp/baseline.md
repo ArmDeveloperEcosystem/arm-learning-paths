@@ -8,75 +8,127 @@ layout: learningpathall
 
 
 ## Baseline Setup for PHP-FPM
-This section covers the installation and configuration of **PHP and Apache** on a SUSE Arm-based GCP VM. It includes setting up **PHP-FPM** with a Unix socket, verifying PHP functionality via a test page, and ensuring Apache and PHP-FPM work together correctly.  
+This section guides you through configuring PHP-FPM (FastCGI Process Manager) on a SUSE Arm-based Google Cloud C4A virtual machine. You will prepare the PHP-FPM pool configuration, verify PHP's FastCGI setup, and later connect it to Apache to confirm end-to-end functionality.
 
 ### Configure the PHP-FPM Pool
 
-**PHP-FPM:** A FastCGI Process Manager that runs PHP scripts efficiently, handling multiple requests separately from the web server for better performance and security.
+PHP-FPM (FastCGI Process Manager) runs PHP scripts in dedicated worker processes that are independent of the web server.
+This design improves performance, security, and fault isolation — especially useful on multi-core Arm-based processors like Google Cloud’s Axion C4A VMs.
 
-A **pool** is basically a set of PHP worker processes that handle requests.  
+A pool defines a group of PHP worker processes, each serving incoming FastCGI requests. Different applications or virtual hosts can use separate pools for better resource control.
 
 ### Copy the Default Configuration (if missing)
 
-Run this command to create a working config file:
+If your PHP-FPM configuration files don't exist yet (for example, after a minimal installation in this Learning Path), copy the defaults into place using the commands below:
 
 ```console
 sudo cp /etc/php8/fpm/php-fpm.d/www.conf.default /etc/php8/fpm/php-fpm.d/www.conf
+sudo cp /etc/php8/fpm/php-fpm.conf.default /etc/php8/fpm/php-fpm.conf
 ```
+These commands:
+Create a default pool configuration (www.conf) that controls how PHP-FPM spawns and manages worker processes.
+Restore the main FPM service configuration (php-fpm.conf) if it's missing.
 
 ### Edit the Configuration
 
-Open the config file in a text editor:
+Open the PHP-FPM pool configuration file in a text editor:
 
 ```console
 sudo vi /etc/php8/fpm/php-fpm.d/www.conf
 ```
 
-Update the file to use a Unix socket:
+Locate the following line:
 
-Find this line `; listen = 127.0.0.1:9000`. Replace it with these lines.
+```output
+listen = 127.0.0.1:9000
+```
+Replace it with the following configuration to use a Unix socket instead of a TCP port:
 
-```ini
+```console
 listen = /run/php-fpm/www.sock
 listen.owner = wwwrun
 listen.group = www
 listen.mode = 0660
 ```
-- `listen = /run/php-fpm/www.sock` → PHP will talk to Apache using a local “socket file” instead of a network port.  
-- `listen.owner = wwwrun` → `wwwrun` is Apache’s default user on SUSE, so Apache can access the socket.  
-- `listen.group = www` → sets the group to match Apache’s group.  
-- `listen.mode = 0660` → gives read/write permission to both Apache and PHP-FPM.
+
+Explanation of each directive:
+| Directive                                             | Description                                                                                                                                                                   |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| listen = /run/php-fpm/[www.sock](http://www.sock) | Configures PHP-FPM to communicate with Apache using a local Unix socket instead of a TCP port (`127.0.0.1:9000`). This reduces network overhead and improves performance. |
+| listen.owner = wwwrun                             | Sets the owner of the socket file to `wwwrun`, which is the default user that Apache runs as on SUSE systems. This ensures Apache has access to the socket.               |
+| listen.group = www                                | Assigns the group ownership of the socket to `www`, aligning with Apache’s default process group for proper access control.                                               |
+| listen.mode = 0660                                | Defines file permissions so that both the owner (`wwwrun`) and group (`www`) can read and write to the socket. This enables smooth communication between Apache and PHP-FPM.  |
+
 
 ### Start and Enable PHP-FPM
 
-Restart PHP-FPM so it picks up the changes:
+After updating the configuration, restart the PHP-FPM service so it picks up the new settings:
 
 ```console
 sudo systemctl restart php-fpm
 ```
+Then, verify that PHP-FPM is running:
+
+```console
+sudo systemctl status php-fpm
+```
+
+You should see output similar to:
+
+```output
+● php-fpm.service - The PHP FastCGI Process Manager
+     Loaded: loaded (/usr/lib/systemd/system/php-fpm.service; disabled; vendor preset: disabled)
+     Active: active (running) since Thu 2025-10-16 13:56:44 UTC; 7s ago
+   Main PID: 19606 (php-fpm)
+     Status: "Ready to handle connections"
+      Tasks: 3
+        CPU: 29ms
+     CGroup: /system.slice/php-fpm.service
+             ├─ 19606 "php-fpm: master process (/etc/php8/fpm/php-fpm.conf)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─ 19607 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+             └─ 19608 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+
+Oct 16 13:56:44 pareena-php-test systemd[1]: Starting The PHP FastCGI Process Manager...
+Oct 16 13:56:44 pareena-php-test systemd[1]: Started The PHP FastCGI Process Manager.
+```
+PHP-FPM is now active and ready to process requests via its Unix socket (/run/php-fpm/www.sock).
+Next, you will configure Apache to communicate with PHP-FPM, allowing your server to process and serve dynamic PHP pages.
+
+## Install the Apache PHP8 module
+If you prefer to have Apache handle PHP execution directly (instead of using PHP-FPM), you can install the Apache PHP 8 module, which integrates PHP into Apache using the `mod_php` interface:
+
+```console
+sudo zypper install apache2-mod_php8
+```
+Once the module is installed, restart Apache to load the new configuration:
+
+```console
+sudo systemctl restart apache2
+```
+Next, you will test PHP execution by creating a simple PHP page and verifying that Apache can correctly render dynamic content.
 
 ## Test PHP
-Now that PHP and Apache are installed, let’s verify that everything is working correctly.  
+Now that PHP and Apache are installed, you can verify that everything is working correctly.
 
 ### Create a Test Page
-We will make a simple PHP file that shows details about the PHP setup.
+Create a simple PHP file that displays detailed information about your PHP installation:
 
 ```console
 echo "<?php phpinfo(); ?>" | sudo tee /srv/www/htdocs/info.php
 ```
-This creates a file named **info.php** inside Apache’s web root directory `(/srv/www/htdocs/)`. When you open this file in a browser, it will display the PHP configuration page.
+This creates a file named `info.php` inside Apache's web root directory `(/srv/www/htdocs/)`. When you open this file in a browser, it will display the PHP configuration page.
 
 ### Test from Inside the VM
-Run the following command:
+You can verify that PHP and Apache are communicating correctly by testing the web server locally using curl:
 
 ```console
 curl http://localhost/info.php
 ```
 - `curl` fetches the page from the local Apache server.  
-- If PHP is working, you’ll see a large block of HTML code as output.  
-- This confirms that PHP is correctly connected with Apache.  
+- If PHP is working, you will see a large block of HTML code as output. This is the rendered output of the phpinfo() function.
+- This confirms that Apache successfully passed the request to the PHP interpreter and returned the generated HTML response.
 
-You should see an output similar to:
+You should see output similar to:
 
 ```output
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
@@ -96,18 +148,20 @@ h1 {font-size: 150%;}
 h2 {font-size: 125%;}
 h2 a:link, h2 a:visited{color: inherit; background: inherit;}
 ```
-Basically, it is the HTML output that confirms PHP is working.
+This long HTML output represents the PHP configuration page content. 
 
 ### Test from Your Browser
-Now, let’s test it from outside the VM. Open a web browser on your local machine (Chrome, Firefox, Edge, etc.) and enter the following URL in the address bar:
+Now, let's verify that your PHP setup works correctly from outside the VM.
+Open a web browser on your local machine (such as Chrome, Firefox, or Edge) and enter the following URL in the address bar:
 
 ```console
 http://<YOUR_VM_PUBLIC_IP>/info.php
 ```
-- Replace `<YOUR_VM_PUBLIC_IP>` with the public IP of your GCP VM.
+- Replace `<YOUR_VM_PUBLIC_IP>` with the public IP of your Google Cloud Axion VM.
 
 If everything is set up correctly, you will see a PHP Info page in your browser. It looks like this:
 
 ![PHP-info page alt-text#center](images/php-web.png "Figure 1: PHP info")
 
-This verifies the basic functionality of the PHP installation before proceeding to the benchmarking.
+Successfully loading the PHP Info page in your browser confirms that your PHP and Apache environment on Google Cloud C4A is configured and functioning properly.
+You are now ready to proceed to the benchmarking and performance testing phase.
