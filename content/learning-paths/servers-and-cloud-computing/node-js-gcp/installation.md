@@ -1,64 +1,63 @@
 ---
-title: Install Node.js
+title: Install Node.js Using Node Version Manager
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Install Node.js 
-This guide walks you through installing **Node.js v24.8.0** on a SUSE Arm64 virtual machine using the official tarball package. 
+## Install Node.js with Node Version Manager (NVM)
+This guide walks you through installing **NodeJS** via the Node Version Manager (NVM).  NVM is a powerful tool that allows users to specify which version of **NodeJS** that they want to use. NVM will then download and install the requested vesion using the **NodeJS** official packages. 
 
-### 1. Download Node.js Binary
-First, download the Node.js package (precompiled binaries for Linux Arm64) from the official website.
-
-```console
-sudo wget https://nodejs.org/dist/latest/node-v24.8.0-linux-arm64.tar.gz
-```
-
-### 2. Extract the Tarball
-Unpack the downloaded file so we can access the Node.js binaries.
+### 1. Install Node Version Manager (NVM)
+First, we will run this command to download and install NVM into our VM instance:
 
 ```console
-sudo tar -xvf node-v24.8.0-linux-arm64.tar.gz
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ```
 
-### 3. Rename Extracted Directory
-Rename the extracted folder to something shorter such as node-v24.8.01 for easier reference.
+Next, we have to activate NVM in our terminal shell.  We can manually activate our current shell via copy and paste of the following into the shell:
 
 ```console
-sudo mv node-v24.8.0-linux-arm64 node-v24.8.0
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 ```
 
-### 4. Create a Symlink (Optional)
-This step creates a shortcut (`/usr/local/node`) pointing to your Node.js installation directory.
-
-It makes future upgrades easier — you only need to update the symlink instead of changing paths everywhere.
+You should be able to confirm that NVM is available by typing:
 
 ```console
-sudo ln -s /usr/local/node-v24.8.0 /usr/local/node
+nvm --version
 ```
 
-### 5. Update PATH Environment Variable
-
-Add Node.js binaries to your PATH so you can run `node` and `npm` commands from anywhere in your terminal.
+### 2. Install NodeJS
+Now that NVM is installed, we simply type the following commands in our shell to download and install **NodeJS**: 
 
 ```console
-echo 'export PATH=$HOME/node-v24.8.0/bin:$PATH' >> ~/.bashrc
-source ~/.bashrc
+nvm install v24
+nvm use v24
 ```
 
-### 6. Verify Installation
+Additionally, we can add this command to the bottom of our $HOME/.bashrc file:
+
+```console
+echo 'nvm use v24' >> ~/.bashrc
+```
+
+### 3. Verify Installation
 Check that Node.js and npm (Node’s package manager) are installed correctly.
 
+You should be able to confirm that **NodeJS** is now installed and available!
+
 ```console
-node -v
-npm -v
+node --version
+npm --version
 ```
+
 You should see an output similar to:
 ```output
-v24.8.0
-11.6.0
+v24.10.0
+11.6.1
 ```
 
 Node.js installation is complete. You can now proceed with the baseline testing.

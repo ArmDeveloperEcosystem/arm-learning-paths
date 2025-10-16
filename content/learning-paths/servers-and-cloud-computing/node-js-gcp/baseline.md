@@ -28,12 +28,18 @@ You should see an output similar to:
 Hello from Node.js
 undefined
 ```
-This confirms that Node.js can execute JavaScript commands successfully.
+This confirms that Node.js can execute JavaScript commands successfully.   Please now press "Ctrl-D" to exit node. 
 
 ### 2. Test a Basic HTTP Server
 You can now create a small HTTP server to validate that Node.js can handle web requests.
 
-Create `app.js`:
+Create `app.js`.  For example, you can type "vi app.js" in the SSH shell:
+
+```console
+vi app.js
+```
+
+ ...and then insert the following code:
 
 ```javascript
 const http = require('http');
@@ -43,36 +49,28 @@ const server = http.createServer((req, res) => {
   res.end('Baseline test successful!\n');
 });
 
-server.listen(3000, '0.0.0.0', () => {
-  console.log('Server running at http://0.0.0.0:3000/');
+server.listen(80, '0.0.0.0', () => {
+  console.log('Server running at http://0.0.0.0:80/');
 });
 ```
- - This server listens on port 3000.
+ - This server listens on port 80.
  - Binding to 0.0.0.0 allows connections from any IP, not just localhost.
 
-Run the server:
+Save the code and exit your editor. Next, we run the HTTP server in the background via sudo:
 
 ```console
-node app.js
+export MY_NODE=`which node`
+sudo ${MY_NODE} app.js &
 ```
 You should see an output similar to:
 
 ```output
-Server running at http://0.0.0.0:3000/
+Server running at http://0.0.0.0:80/
 ```
-{{% notice Note %}}
-Make sure your GCP firewall allows TCP traffic on port 3000. On SUSE Arm64, internal firewalls are usually disabled, so only the GCP firewall needs to be configured.
-
-```console
-sudo zypper install -y firewalld
-sudo firewall-cmd --permanent --add-port=3000/tcp
-sudo firewall-cmd --reload
-```
-{{% /notice %}}
 #### Test Locally with Curl
 
 ```console
-curl http://localhost:3000
+curl http://localhost:80
 ```
 
 You should see an output similar to:
@@ -85,7 +83,7 @@ Baseline test successful!
 Also, you can access it from the browser with your VM's public IP. Run the following command to print your VM’s public URL, then open it in a browser:
 
 ```console
-echo "http://$(curl -s ifconfig.me):3000/"
+echo "http://$(curl -s ifconfig.me):80/"
 ```
 
 You should see the following message in your browser, confirming that your Node.js HTTP server is running successfully:
