@@ -18,9 +18,9 @@ For support on GCP setup, see the Learning Path [Getting started with Google Clo
 
 To create a virtual machine based on the C4A instance type:
 - Navigate to the [Google Cloud Console](https://console.cloud.google.com/).
-- Go to **Compute Engine > VM Instances** and select **Create Instance**. 
-- Under **Machine configuration**:
-   - Populate fields such as **Instance name**, **Region**, and **Zone**.
+- Go to Compute Engine > VM Instances and select Create Instance. 
+- Under Machine configuration:
+   - Populate fields such as Instance name, Region, and Zone.
    - Set **Series** to `C4A`.
    - Select `c4a-standard-4` for machine type.
 
