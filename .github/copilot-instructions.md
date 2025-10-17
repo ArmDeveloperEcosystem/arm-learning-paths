@@ -55,7 +55,7 @@ Front Matter (YAML format):
 - `layout`: Template type (usually "learningpathall")
 - `minutes_to_complete`: Realistic time estimate for completion
 - `prerequisites`: List of required knowledge, tools, or prior learning paths
-- `author_primary`: Main contributor's name, multiple authors can be listed separated using - on new lines
+- `author`: Main contributor's name, multiple authors can be listed separated using - on new lines
 - `subjects`: Technology categories for filtering and search, this is a closed list and must match one of the subjects listed on https://learn.arm.com/learning-paths/cross-platform/_example-learning-path/write-2-metadata/
 - `armips`: Relevant Arm IP, stick to Neoverse, Cortex-A, Cortex-M, etc. Don't list specific CPU models or Arm architecture versions
 - `tools_software_languages`: Open category listing Programming languages, frameworks, and development tools used
@@ -281,5 +281,3 @@ Voice and Tone:
 - Write comprehensive summaries that AI can use as content overviews
 - Ensure each section can stand alone as a coherent piece of information
 - Use clear, declarative statements rather than implied or contextual references
-
-Your Azure Cobalt 100 Arm64 virtual machine is now ready. Continue to the next step to install and configure MySQL.
