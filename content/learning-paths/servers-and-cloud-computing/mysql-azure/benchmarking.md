@@ -6,7 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-## Benchmark MySQL on Azure Cobalt 100 Arm-based instances 
+## Benchmark with mysqlslap
 
 To understand how MySQL performs on Azure Cobalt 100 (Arm64) VMs, you can use the built-in `mysqlslap` tool.
 

@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Cobalt 100 Arm-based processor
 
-Azure Cobalt 100 is Microsoft’s first-generation Arm-based processor, designed for cloud-native, scale-out Linux workloads. Based on Arm’s Neoverse-N2 architecture, this 64-bit CPU delivers improved performance and energy efficiency. Running at 3.4 GHz, it provides a dedicated physical core for each vCPU, ensuring consistent and predictable performance.
+Azure Cobalt 100 is Microsoft’s first-generation Arm-based processor, designed for cloud-native, scale-out Linux workloads. Based on Arm’s Neoverse-N2 architecture, it is a 64-bit CPU that delivers improved performance and energy efficiency. Running at 3.4 GHz, it provides a dedicated physical core for each vCPU, ensuring consistent and predictable performance.
 
 Typical workloads include web and application servers, data analytics, open-source databases, and caching systems.
 

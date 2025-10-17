@@ -8,17 +8,17 @@ layout: learningpathall
 
 ## Getting started with MySQL on an Azure Arm64 virtual machine
 
-This section demonstrates how to install and secure MySQL on an Azure Arm64 virtual machine. You will do the following:
+This section demonstrates how to install and secure MySQL on an Azure Arm64 virtual machine. It shows you how to do the following:
 
 - Configure the database
 - Set up security measures
 - Verify that the service is running properly
 
-This ensures that the environment is then ready for development, testing, or production deployment.
+Following these steps ensures that the environment is ready for development, testing, or production deployment.
 
-## Install MySQL and tools
+## Prepare and install MySQL and tools 
 
-Before installing MySQL, it’s important to ensure your VM is updated so that you have the latest Arm64-optimized libraries and security patches. Ubuntu and other modern Linux distributions maintain Arm-native MySQL packages, so installation is straightforward with the system package manager.
+First, update your VM to ensure you have the latest Arm64-optimized libraries and security patches. Ubuntu and other modern Linux distributions maintain Arm-native MySQL packages, so installation is straightforward with the system package manager.
 
 ## Update the system and install MySQL
 Update your system's package lists to ensure you get the latest versions and then install the MySQL server using the package manager:
@@ -81,7 +81,7 @@ You should see `active (running)` in the output, which indicates that MySQL is u
 
 ## Verify MySQL version 
 
-You check also check the installed version of MySQL to confirm it’s set up correctly and is running.
+You can also check the installed version of MySQL to confirm it’s set up correctly and is running.
 
 ```console
 mysql -V 
@@ -126,7 +126,7 @@ Start by entering the MySQL shell:
 sudo mysql
 ```
 
-Inside the shell, create a new user:
+Inside the MySQL shell, create a new user:
 
 ```sql
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'MyStrongPassword!';

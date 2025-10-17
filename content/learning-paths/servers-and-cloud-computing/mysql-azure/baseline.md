@@ -8,7 +8,11 @@ layout: learningpathall
 
 ## Validate MySQL functionality on Azure Arm64
 
-After installing MySQL on your Azure Cobalt 100 Arm64 virtual machine, run a functional test to confirm that the database is operational and ready for use. Beyond checking service status, validation ensures MySQL is processing queries correctly, users can authenticate, and the environment is correctly configured for cloud workloads.
+After installing MySQL on your Azure Cobalt 100 Arm64 VM, run a functional test to confirm that the database is operational and ready for use. Beyond checking service status, validation ensures the following:
+
+- MySQL is processing queries correctly
+- Users can authenticate
+- The environment is correctly configured for cloud workloads
 
 ## Start MySQL 
 
@@ -25,9 +29,9 @@ Connect using the MySQL client:
 ```console
 mysql -u admin -p
 ```
-This opens the MySQL client and connects as the new user(admin), prompting you to enter the admin password.
+This opens the MySQL client and connects as the new user (admin), prompting you to enter the admin password.
 
-## Show and use database
+## Show and use a database
 
 Once you’ve connected successfully with your new user, the next step is to create and interact with a database. This verifies that your MySQL instance is not only accessible but also capable of storing and organizing data.
 
@@ -77,7 +81,7 @@ mysql> SELECT DATABASE();
 ```
 You created a new database named `baseline_test`, verified its presence with `SHOW DATABASES`, and confirmed it is the active database using `SELECT DATABASE()`.
 
-## Create and show table
+## Create and show a table
 
 After creating and selecting a database, the next step is to define a table, which represents how your data will be structured. In MySQL, tables are the core storage objects where data is inserted, queried, and updated.
 Run the following inside the `baseline_test` database:
@@ -88,6 +92,7 @@ CREATE TABLE test_table (
     name VARCHAR(50),
     value INT
 );
+SHOW TABLES;
 ```
 
 - `CREATE TABLE` - defines a new table named test_table
@@ -147,6 +152,6 @@ mysql> SELECT * FROM test_table;
 +----+---------+-------+
 3 rows in set (0.00 sec)
 ```
-This confirms that that rows were successfully inserted, the auto-increment primary key (id) is working correctly and the query engine can read back from disk/memory and return results instantly.
+This confirms that rows were successfully inserted, the auto-increment primary key (id) is working correctly and the query engine can read data from disk or memory and return results instantly.
 
 The functional test was successful. The test_table contains the expected three rows (Alice, Bob, and Charlie) with their respective values. This confirms that MySQL is working correctly on your Cobalt 100 Arm-based VM, completing the installation and validation phase.
