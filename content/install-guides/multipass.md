@@ -53,7 +53,7 @@ Multipass uses the terms virtual machine and instance synonymously.
 Download Multipass for macOS.
 
 ```console
-wget https://github.com/canonical/multipass/releases/download/v1.16.0/multipass-1.16.0+mac-Darwin.pkg
+wget https://github.com/canonical/multipass/releases/download/v1.16.1/multipass-1.16.1+mac-Darwin.pkg
 ```
 
 ### How do I install Multipass on macOS?
@@ -61,7 +61,7 @@ wget https://github.com/canonical/multipass/releases/download/v1.16.0/multipass-
 Install the download using the package command.
 
 ```console
-sudo installer -pkg multipass-1.16.0+mac-Darwin.pkg -target /
+sudo installer -pkg multipass-1.16.1+mac-Darwin.pkg -target /
 ```
 
 The getting started instructions below use the command line interface. If you prefer to use the graphical interface start it from the macOS Launchpad, the initial screen is shown below. You can use the UI to create, start, and stop virtual machines.
@@ -112,7 +112,7 @@ HINT:   sudo /usr/sbin/kvm-ok
 
 If KVM is available, proceed with the install.
 
-### How do I install the Sanp daemon on Arm Linux?
+### How do I install the Snap daemon on Arm Linux?
 
 You may need to install the Snap daemon, `snapd`, before installing Multipass.
 
@@ -129,8 +129,6 @@ If you need to install `snapd` run:
 ```bash
 sudo apt install snapd -y
 ```
-
-
 
 {{% notice Note %}}
 You can select from three Multipass releases: stable, beta, or edge. The default version is stable.
@@ -166,25 +164,26 @@ Multipass runs Ubuntu images. The last three LTS (long-term support) versions ar
 To see the available images run the `find` command. Any of the listed images can be used to create a new instance.
 
 ```bash
-sudo multipass find
+multipass find
 ```
+
 The output from `find` will be similar to the below.
 
 ```output
 Image                       Aliases           Version          Description
-20.04                       focal             20240821         Ubuntu 20.04 LTS
-22.04                       jammy             20241002         Ubuntu 22.04 LTS
-24.04                       noble,lts         20241004         Ubuntu 24.04 LTS
-daily:24.10                 oracular,devel    20241009         Ubuntu 24.10
+22.04                       jammy             20251001         Ubuntu 22.04 LTS
+24.04                       noble,lts         20251001         Ubuntu 24.04 LTS
+25.04                       plucky            20251003         Ubuntu 25.04
+daily:25.10                 questing,devel    20251015         Ubuntu 25.10
 
-Blueprint                   Aliases           Version          Description
+Blueprint (deprecated)      Aliases           Version          Description
 anbox-cloud-appliance                         latest           Anbox Cloud Appliance
 charm-dev                                     latest           A development and testing environment for charmers
 docker                                        0.4              A Docker environment with Portainer and related tools
 jellyfin                                      latest           Jellyfin is a Free Software Media System that puts you in control of managing and streaming your media.
 minikube                                      latest           minikube is local Kubernetes
-ros-noetic                                    0.1              A development and testing environment for ROS Noetic.
 ros2-humble                                   0.1              A development and testing environment for ROS 2 Humble.
+ros2-jazzy                                    0.1              A development and testing environment for ROS 2 Jazzy.
 ```
 
 ### How do I launch a Multipass instance?
