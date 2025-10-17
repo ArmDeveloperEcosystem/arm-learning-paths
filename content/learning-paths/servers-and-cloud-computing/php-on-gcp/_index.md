@@ -11,10 +11,10 @@ who_is_this_for: This is an introductory topic for software developers migrating
 
 
 learning_objectives:
-  - Provision an Arm-based SUSE SLES virtual machine on Google Cloud (C4A with Axion processors)
+  - Provision a SUSE SLES virtual machine on Google Cloud C4A (Arm-based Axion VM)
   - Install PHP on a SUSE Arm64 (C4A) instance
   - Validate PHP functionality with baseline HTTP server tests  
-  - Benchmark PHP performance using PHPBench on Arm64 (Aarch64) architecture 
+  - Benchmark PHP performance using PHPBench on Arm64 architecture 
 
 
 prerequisites:
