@@ -1,12 +1,12 @@
 ---
-title: Validate MySQL
+title: Validate MySQL functionality on Azure Arm64
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Validate MySQL functionality on Azure Arm64
+## The benefits of validation 
 
 After installing MySQL on your Azure Cobalt 100 Arm64 VM, run a functional test to confirm that the database is operational and ready for use. Beyond checking service status, validation ensures the following:
 
@@ -16,12 +16,14 @@ After installing MySQL on your Azure Cobalt 100 Arm64 VM, run a functional test 
 
 ## Start MySQL 
 
-Ensure MySQL is running and configured to start on boot:
+Ensure MySQL is running and configured to start on boot by running the following:
 
 ```console
 sudo systemctl start mysql
 sudo systemctl enable mysql
 ```
+You’ve now validated that MySQL is running correctly and can store, retrieve, and organize data on your Azure Cobalt 100 Arm64 virtual machine. This confirms your environment is ready for development or production workloads. 
+
 ## Connect to MySQL 
 
 Connect using the MySQL client:
