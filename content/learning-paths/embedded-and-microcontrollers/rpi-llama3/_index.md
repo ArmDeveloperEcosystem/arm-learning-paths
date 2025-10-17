@@ -32,6 +32,7 @@ tools_software_languages:
     - Generative AI
     - Raspberry Pi
     - Hugging Face
+    - ExecuTorch
 
 
 
