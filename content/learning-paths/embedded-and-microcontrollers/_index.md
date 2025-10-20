@@ -52,7 +52,7 @@ tools_software_languages_filter:
 - DSTREAM: 2
 - Edge AI: 2
 - Edge Impulse: 1
-- ExecuTorch: 3
+- ExecuTorch: 4
 - FastAPI: 1
 - FPGA: 1
 - Fusion 360: 1
