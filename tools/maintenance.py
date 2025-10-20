@@ -157,10 +157,13 @@ def main():
         if args.stats_report:
             # If all test results are zero, all tests have passed
             patch.patch(args.instructions, results_dict, args.link)
-        if all(results_dict.get(k) for k in results_dict):
-            # Errors exist
-            logging.info("Tests failed in test suite")
-            sys.exit(1)
+        if results_dict is not None:
+            if all(results_dict.get(k) for k in results_dict):
+                # Errors exist
+                logging.info("Tests failed in test suite")
+                sys.exit(1)
+        else:
+            pass
     elif args.spelling:
         logging.info(f"Checking spelling of {args.spelling}")
         output = parse.spelling(args.spelling)
