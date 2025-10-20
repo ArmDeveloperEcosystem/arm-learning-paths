@@ -19,7 +19,7 @@ OpenAI compatibility means that you can reuse existing software which was design
 Run vLLM with the same `Qwen/Qwen2.5-0.5B-Instruct` model:
 
 ```bash
-python3 -m vllm.entrypoints.openai.api_server --model Qwen/Qwen2.5-0.5B-Instruct --dtype float32
+python3 -m vllm.entrypoints.openai.api_server --model Qwen/Qwen2.5-0.5B-Instruct --dtype float16
 ```
 
 The server output displays that it is ready for requests:

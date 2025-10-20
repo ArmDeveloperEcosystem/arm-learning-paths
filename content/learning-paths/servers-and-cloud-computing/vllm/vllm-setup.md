@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Before you begin
 
-To follow the instructions for this Learning Path, you will need an Arm server running Ubuntu 24.04 LTS with at least 8 cores, 16GB of RAM, and 50GB of disk storage.
+To follow the instructions for this Learning Path, you will need an Arm server running Ubuntu 24.04 LTS with at least 8 cores, 16GB of RAM, and 50GB of disk storage. The instructions have been tested on an AWS Graviton3 m7g.2xlarge instance.
 
 ## What is vLLM?
 
