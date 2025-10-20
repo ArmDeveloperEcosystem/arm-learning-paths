@@ -38,7 +38,7 @@ The downloaded video file is in YUV raw format, which means playback of the vide
 
 Use `ffmpeg.exe` to compress the YUV raw video with the x265 encoder and convert the file format to `.mp4`. 
 
-Assuming you downloaded the files and extraced them in the current directory, open a terminal and run the following command:
+Assuming you downloaded the files and extracted them in the current directory, open a terminal and run the following command:
 
 ```console
 ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1\ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1\bin\ffmpeg.exe -f rawvideo -pix_fmt yuv420p -s 3840x2160 -r 50 -i  RaceNight_3840x2160_50fps_420_8bit_YUV_RAW\RaceNight_3840x2160_50fps_8bit.yuv -vf scale=1920:1080 -c:v libx265 -preset medium -crf 20 RaceNight_1080p.mp4 -benchmark -stats -report
