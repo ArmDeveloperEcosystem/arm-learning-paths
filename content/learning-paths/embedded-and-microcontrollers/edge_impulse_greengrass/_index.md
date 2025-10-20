@@ -22,7 +22,7 @@ prerequisites:
 author: Doug Anson
 
 ### Tags
-skilllevels: Intermediate
+skilllevels: Introductory
 cloud_service_providers: AWS
 subjects: ML
 armips:
