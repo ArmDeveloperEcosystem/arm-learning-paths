@@ -93,4 +93,4 @@ Confirm that the agent is online and connected to the queue `buildkite-queue1`.
 
 ![Buildkite Dashboard alt-text#center](images/agent.png "Verify Agent")
 
-The Buildkite agent is ready, you can proceed to use Buildkit for building multi-arch images. 
+The Buildkite agent is ready, you can proceed to use Buildkite for building multi-arch images. 
