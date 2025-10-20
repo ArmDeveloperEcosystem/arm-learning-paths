@@ -16,7 +16,7 @@ def patch(article_path: str, results: dict, link: str):
     article_path_pure = PurePath(re.sub(r"^.*?content/", "", article_path))
     article_path_parts = list(article_path_pure.parts)
     if "learning-paths" in article_path_parts:
-        content_type, sw_category, content_title = article_path_parts
+        content_type, sw_category, content_title, *others_1 = article_path_parts
         article_path = PurePath(article_path, "_index.md")
     elif "install-guides" in article_path_parts:
         # In case the install guide is in a subdirectory
