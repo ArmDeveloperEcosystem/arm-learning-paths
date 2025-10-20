@@ -28,7 +28,7 @@ tools_software_languages:
     - Edge Impulse
     - Edge AI
 operatingsystems:
-    - Ubuntu/Debian
+    - Linux
 
 
 further_reading:
