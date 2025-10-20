@@ -30,30 +30,33 @@ def patch(article_path: str, results: dict, link: str):
     else:
         raise SystemExit("Unknown content path, pass learning paths or install guides only")
 
-    test_images = results.keys()
-    results_values = defaultdict(lambda: "failed")
-    results_values[0] = "passed"
+    if results is not None:
+        test_images = results.keys()
+        results_values = defaultdict(lambda: "failed")
+        results_values[0] = "passed"
 
-    content_data = data["sw_categories"][sw_category][content_title]
+        content_data = data["sw_categories"][sw_category][content_title]
 
-    # Create 'tests_and_status' if it doesn't exist
-    if "tests_and_status" not in content_data or not isinstance(content_data["tests_and_status"], list):
-        content_data["tests_and_status"] = [{} for _ in range(len(test_images))]
+        # Create 'tests_and_status' if it doesn't exist
+        if "tests_and_status" not in content_data or not isinstance(content_data["tests_and_status"], list):
+            content_data["tests_and_status"] = [{} for _ in range(len(test_images))]
 
-    # If 'tests_and_status' exists but is too short, extend it
-    if len(content_data["tests_and_status"]) < len(test_images):
-        additional_entries = [{} for _ in range(len(test_images) - len(content_data["tests_and_status"]))]
-        content_data["tests_and_status"].extend(additional_entries)
+        # If 'tests_and_status' exists but is too short, extend it
+        if len(content_data["tests_and_status"]) < len(test_images):
+            additional_entries = [{} for _ in range(len(test_images) - len(content_data["tests_and_status"]))]
+            content_data["tests_and_status"].extend(additional_entries)
 
-    # Now safe to index
-    for i, image in enumerate(test_images):
-        idx = min(i, len(content_data["tests_and_status"]) - 1)
-        content_data["tests_and_status"][idx][image] = results_values[results[image]]
+        # Now safe to index
+        for i, image in enumerate(test_images):
+            idx = min(i, len(content_data["tests_and_status"]) - 1)
+            content_data["tests_and_status"][idx][image] = results_values[results[image]]
 
-    if link:
-        data["sw_categories"][sw_category][content_title]["test_link"] = link
+        if link:
+            data["sw_categories"][sw_category][content_title]["test_link"] = link
 
 
-    with open(stats_file, mode='w') as f:
-        yaml.dump(data, f)
-        f.close()
+        with open(stats_file, mode='w') as f:
+            yaml.dump(data, f)
+            f.close()
+    else:
+        pass
