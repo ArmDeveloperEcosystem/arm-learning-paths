@@ -120,7 +120,8 @@ sw_categories:
       tests_and_status: []
     pytorch:
       readable_title: PyTorch
-      tests_and_status: []
+      tests_and_status:
+      - ubuntu:latest: passed
     ros2:
       readable_title: ROS - Robot Operating System
       tests_and_status: []

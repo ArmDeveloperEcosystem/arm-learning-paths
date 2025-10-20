@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 3
-- Linux: 180
+- Linux: 183
 - macOS: 13
 - Windows: 14
 pinned_modules:
@@ -18,14 +18,14 @@ pinned_modules:
     - providers
     - migration
 subjects_filter:
-- CI-CD: 7
+- CI-CD: 8
 - Containers and Virtualization: 32
 - Databases: 18
 - Libraries: 9
 - ML: 32
 - Performance and Architecture: 72
 - Storage: 2
-- Web: 12
+- Web: 14
 subtitle: Optimize cloud native apps on Arm for performance and cost
 title: Servers and Cloud Computing
 tools_software_languages_filter:
@@ -36,6 +36,7 @@ tools_software_languages_filter:
 - AI: 1
 - Android Studio: 1
 - Ansible: 2
+- apache: 1
 - Apache Spark: 2
 - Apache Tomcat: 2
 - ApacheBench: 1
@@ -50,6 +51,7 @@ tools_software_languages_filter:
 - ASP.NET Core: 2
 - Assembly: 5
 - async-profiler: 1
+- Autocannon: 1
 - AWS: 2
 - AWS CDK: 2
 - AWS Cloud Formation: 1
@@ -66,6 +68,7 @@ tools_software_languages_filter:
 - Bastion: 3
 - BOLT: 2
 - bpftool: 1
+- Buildkite: 1
 - C: 10
 - C#: 2
 - C++: 12
@@ -80,7 +83,8 @@ tools_software_languages_filter:
 - Daytona: 1
 - Demo: 3
 - Django: 1
-- Docker: 23
+- Docker: 24
+- Docker Buildx: 1
 - Envoy: 3
 - ExecuTorch: 1
 - FAISS: 1
@@ -121,7 +125,6 @@ tools_software_languages_filter:
 - KEDA: 1
 - Kedify: 1
 - Keras: 1
-- KleidiAI: 1
 - Kubernetes: 11
 - Libamath: 1
 - libbpf: 1
@@ -145,7 +148,8 @@ tools_software_languages_filter:
 - Networking: 1
 - Nexmark: 1
 - NGINX: 4
-- Node.js: 3
+- Node.js: 4
+- npm: 1
 - Ollama: 1
 - ONNX Runtime: 2
 - OpenBLAS: 1
@@ -156,6 +160,8 @@ tools_software_languages_filter:
 - PAPI: 1
 - perf: 6
 - Perf: 1
+- PHP: 1
+- PHPBench: 1
 - PostgreSQL: 4
 - Profiling: 1
 - Python: 32
@@ -205,7 +211,7 @@ tools_software_languages_filter:
 weight: 1
 cloud_service_providers_filter:
 - AWS: 17
-- Google Cloud: 18
+- Google Cloud: 21
 - Microsoft Azure: 18
 - Oracle: 2
 ---

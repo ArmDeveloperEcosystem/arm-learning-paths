@@ -78,11 +78,12 @@ Set up a VM with English International language:
 ./create-win11-vm.sh all $HOME/win11-vm --language "English International"
 ```
 
+
 ## Alternative four-step creation process
 
-The VM creation process consists of four distinct steps that can be run individually. Understanding each step helps with troubleshooting and customization.
+You can run each step of the VM creation process individually. Understanding each step helps with troubleshooting and customization.
 
-### Step 1: Create VM directory structure
+### Step 1: Create the VM directory structure
 
 ```console
 ./create-win11-vm.sh create $HOME/win11-vm
@@ -151,7 +152,7 @@ The script uses an automated process to download Windows 11 from Microsoft's off
 3. Obtain download link - Retrieves the direct download URL for Arm64
 4. Download and verify - Downloads the ISO and verifies its integrity
 
-### Step 3: Prepare VM disk 
+### Step 3: Prepare the VM disk
 
 ```console
 ./create-win11-vm.sh prepare $HOME/win11-vm
@@ -175,7 +176,7 @@ The script creates a QCOW2 disk image with these optimizations:
 
 Important Note: If `disk.qcow2` already exists, the script will warn you that proceeding will delete the existing VM's hard drive and start over with a clean installation.
 
-### Step 4: First boot and Windows installation
+### Step 4: Boot and install Windows for the first time
 
 ```console
 ./create-win11-vm.sh firstboot $HOME/win11-vm

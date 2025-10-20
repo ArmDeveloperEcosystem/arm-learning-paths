@@ -1,5 +1,5 @@
 ---
-title: Application and data set
+title: Set up FFmpeg and encode a test video
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -7,41 +7,63 @@ layout: learningpathall
 ---
 
 ## Overview
-System resource usage provides an approach to understand the performance of an application as a black box. This Learning Path demonstrates how to sample system resource usage by using a script.
+System resource usage provides an approach to understand the performance of an application as a black box. This Learning Path demonstrates how to sample system resource usage using a script.
 
-The application used is FFmpeg. It is a tool set that performs video encode and decode tasks. We will run the same tests with both x86_64 binary (through emulation) and Arm64 native binary.
+The example application you will use is FFmpeg, a tool set that performs video encode and decode tasks. You will run the same tests with both the x86_64 binary (using Windows instruction emulation) and the Arm64 native binary on a Windows on Arm computer.
 
 ## Application
-Binary builds are available. You don't need to build them from source. Download executable files for Windows:
+Binary builds of FFmpeg are available, so you don't need to build them from source. 
 
-1. Download [x86_64 package](https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2025-07-31-14-15/ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1.zip).
-2. Download [Arm64 native package](https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2025-07-31-14-15/ffmpeg-n7.1.1-56-gc2184b65d2-winarm64-gpl-7.1.zip).
+To get started: 
 
-Unzip the downloaded packages. You can find the binaries in **bin** folder. Note paths to **ffmpeg.exe** and **ffplay.exe**. They are used in later steps.
+1. Download the [FFmpeg x86_64 package](https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2025-07-31-14-15/ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1.zip).
+
+2. Download the [FFmpeg Arm64 native package](https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2025-07-31-14-15/ffmpeg-n7.1.1-56-gc2184b65d2-winarm64-gpl-7.1.zip).
+
+3. Unzip the downloaded packages. 
+
+You can find the binaries in the `bin` folder. 
+
+{{% notice Note %}}
+Make note of the paths to both versions of `ffmpeg.exe` and `ffplay.exe`, so you can run each one and compare the results. 
+{{% /notice %}}
 
 ## Video source
-Download test video [RaceNight](https://ultravideo.fi/video/RaceNight_3840x2160_50fps_420_8bit_YUV_RAW.7z) from a public dataset. Unzip the package and note path to the uncompressed yuv file.
+Download the test video [RaceNight](https://ultravideo.fi/video/RaceNight_3840x2160_50fps_420_8bit_YUV_RAW.7z) from a public dataset. 
+
+Unzip the package and note the path to the uncompressed `.yuv` file.
 
 ## Video encoding
-The downloaded video file is in yuv raw format. It means playback of the video file involves no decoding effort. You need to encode the raw video with some compressing algorithms to add computation pressure at playback.
+The downloaded video file is in YUV raw format, which means playback of the video file involves no decoding effort. You need to encode the raw video with compression algorithms to add computation pressure during playback.
 
-Use **ffmpeg.exe** to compress the yuv raw video with x265 algorithm and convert file format to mp4. Open a terminal and run command:
+Use `ffmpeg.exe` to compress the YUV raw video with the x265 encoder and convert the file format to `.mp4`. 
+
+Assuming you downloaded the files and extracted them in the current directory, open a terminal and run the following command:
+
 ```console
-path\to\ffmpeg.exe -f rawvideo -pix_fmt yuv420p -s 3840x2160 -r 50 -i D:\path\to\RaceNight_YUV_RAW\RaceNight_3840x2160_50fps_8bit.yuv -vf scale=1920:1080 -c:v libx265 -preset medium -crf 20 D:\RaceNight_1080p.mp4 -benchmark -stats -report
+ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1\ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1\bin\ffmpeg.exe -f rawvideo -pix_fmt yuv420p -s 3840x2160 -r 50 -i  RaceNight_3840x2160_50fps_420_8bit_YUV_RAW\RaceNight_3840x2160_50fps_8bit.yuv -vf scale=1920:1080 -c:v libx265 -preset medium -crf 20 RaceNight_1080p.mp4 -benchmark -stats -report
 ```
 
 {{% notice Note %}}
-Modify the paths to `ffmpeg.exe` and yuv raw video file accordingly.
+Modify the paths to `ffmpeg.exe` and the YUV raw video file to match your locations.
 {{% /notice %}}
 
-The command transforms video size, compresses the video into a H.265 encoded mp4 file. `benchmark` option is turned on to show performance data at the same time. The generated file is at D:\RaceNight_1080p.mp4.
+The command transforms the video size and compresses the video into an MP4 file using H.265 encoding (via the x265 encoder). 
+
+The `benchmark` option is turned on to show performance data at the same time. 
+
+The generated file will be at RaceNight_1080p.mp4.
+
+Run the command with both the x86_64 and the Arm64 versions of FFmpeg and compare the output.
 
 ### View results
-Shown below is example output from running x86_64 version ffmpeg.exe:
+
+The output below is from the x86_64 version of `ffmpeg.exe`:
+
 ```output
 x265 [info]: tools: rd=3 psy-rd=2.00 early-skip rskip mode=1 signhide tmvp
 x265 [info]: tools: b-intra strong-intra-smoothing lslices=6 deblock sao
-Output #0, mp4, to 'D:\RaceNight_1080p.mp4':
+Output #0, mp4, to 'RaceNight_1080p.mp4':
   Metadata:
     encoder         : Lavf61.7.100
   Stream #0:0: Video: hevc (hev1 / 0x31766568), yuv420p(tv, progressive), 1920x1080, q=2-31, 50 fps, 12800 tbn
@@ -61,11 +83,12 @@ x265 [info]: Weighted P-Frames: Y:0.0% UV:0.0%
 encoded 600 frames in 71.51s (8.39 fps), 9075.96 kb/s, Avg QP:27.27
 ```
 
-Example output from running Arm64 native ffmpeg.exe:
+The output below is from the Arm64 native compiled `ffmpeg.exe`:
+
 ```output
 x265 [info]: tools: rd=3 psy-rd=2.00 early-skip rskip mode=1 signhide tmvp
 x265 [info]: tools: b-intra strong-intra-smoothing lslices=6 deblock sao
-Output #0, mp4, to 'D:\RaceNight_1080p.mp4':
+Output #0, mp4, to 'RaceNight_1080p.mp4':
   Metadata:
     encoder         : Lavf61.7.100
   Stream #0:0: Video: hevc (hev1 / 0x31766568), yuv420p(tv, progressive), 1920x1080, q=2-31, 50 fps, 12800 tbn
@@ -84,3 +107,7 @@ x265 [info]: Weighted P-Frames: Y:0.0% UV:0.0%
 
 encoded 600 frames in 26.20s (22.90 fps), 9110.78 kb/s, Avg QP:27.23
 ```
+
+The last line of each output shows the run time and the frames per second for each build of FFmpeg. 
+
+Continue to learn how to track resource usage and compare each version.

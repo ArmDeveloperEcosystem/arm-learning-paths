@@ -6,7 +6,11 @@ weight: 3
 layout: learningpathall
 ---
 
-In this section, you will install a few dependencies into your Ubuntu environment. You'll need a working Python 3.10+ environment with some ML and system dependencies. Make sure Python is installed by verifying that the version is >3.10:
+## Overview
+
+In this section, you will install a few dependencies into your Ubuntu environment. You'll need a working Python 3.10+ environment with some ML and system dependencies. 
+
+Start by making sure Python is installed by verifying that the version is >3.10:
 
 ```bash
 python3 --version
@@ -34,10 +38,10 @@ From inside the `neural-graphics-model-gym-examples/` folder, run the setup scri
 ./setup.sh
 ```
 
-This will:
-- create a Python virtual environment called `nb-env`
-- install the `ng-model-gym` package and required dependencies
-- download the datasets and weights needed to run the notebooks
+This will do the following:
+- Create a Python virtual environment called `nb-env`
+- Install the `ng-model-gym` package and required dependencies
+- Download the datasets and weights needed to run the notebooks
 
 Activate the virtual environment:
 
@@ -55,4 +59,5 @@ print("Torch version:", torch.__version__)
 print("Model Gym version:", ng_model_gym.__version__)
 ```
 
-You’re now ready to start walking through the training and evaluation steps.
+You’ve completed your environment setup - great work! You’re now ready to start walking through the training and evaluation steps.
+

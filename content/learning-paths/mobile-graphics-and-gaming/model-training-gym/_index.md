@@ -1,10 +1,6 @@
 ---
-title: Fine-Tuning Neural Graphics Models with Model Gym
-
-draft: true
-cascade:
-    draft: true
-    
+title: Fine-tuning neural graphics models with Model Gym
+   
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for developers exploring neural graphics and interested in training and deploying upscaling models like Neural Super Sampling (NSS) using PyTorch and Arm’s hardware-aware backend.
@@ -50,10 +46,15 @@ further_reading:
         title: NSS on HuggingFace
         link: https://huggingface.co/Arm/neural-super-sampling
         type: website
+    - resource:
+        title: Vulkan ML Sample Learning Path
+        link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
+        type: learningpath
 
 
 ### FIXED, DO NOT MODIFY
-weight: 1
-layout: "learningpathall"
-learning_path_main_page: "yes"
+# ================================================================================
+weight: 1                       # _index.md always has weight of 1 to order correctly
+layout: "learningpathall"       # All files under learning paths have this same wrapper
+learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---

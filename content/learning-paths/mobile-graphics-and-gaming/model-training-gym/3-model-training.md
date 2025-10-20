@@ -5,19 +5,18 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## About NSS
 
 In this section, you'll get hands-on with how you can use the model gym to fine-tune the NSS use-case.
 
-## About NSS
-
 Arm Neural Super Sampling (NSS) is an upscaling technique designed to solve a growing challenge in real-time graphics: delivering high visual quality without compromising performance or battery life. Instead of rendering every pixel at full resolution, NSS uses a neural network to intelligently upscale frames, freeing up GPU resources and enabling smoother, more immersive experiences on mobile devices.
 
-The NSS model is available in two formats:
+The NSS model is available in two formats, as shown in the table below:
 
 | Model format | File extension | Used for                                                                 |
 |--------------|----------------|--------------------------------------------------------------------------|
-| PyTorch      | .pt            | training, fine-tuning, or evaluation in or scripts using the Model Gym  |
-| VGF          | .vgf           | for deployment using ML Extensions for Vulkan on Arm-based hardware or emulation layers |
+| PyTorch      | `.pt`            | training, fine-tuning, or evaluation in or scripts using the Model Gym  |
+| VGF          | `.vgf`           | for deployment using ML Extensions for Vulkan on Arm-based hardware or emulation layers |
 
 Both formats are available in the [NSS repository on Hugging Face](https://huggingface.co/Arm/neural-super-sampling). You'll also be able to explore config files, model metadata, usage details and detailed documentation on the use-case.
 
@@ -62,6 +61,8 @@ neural-graphics-model-gym-examples/tutorials/nss/model_evaluation_example.ipynb
 
 At the end you should see a visual comparison of the NSS upscaling and the ground truth image.
 
-Proceed to the final section to view the model structure and explore further resources.
+
+You’ve completed the training and evaluation steps. Proceed to the final section to view the model structure and explore further resources. 
+
 
 

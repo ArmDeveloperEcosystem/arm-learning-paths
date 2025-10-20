@@ -1,5 +1,5 @@
 ---
-title: Measuring power usage
+title: Measure power usage
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -7,15 +7,17 @@ layout: learningpathall
 ---
 
 ## Sampling battery status
-Querying battery status provides a way to measure power usage without an external power meter. It is also handy in that data collection and logging can be automatic.
 
-A PowerShell script does all the work. It launches the video decoding task, samples battery status, and outputs sampled data to a file with format.
+Querying battery status provides a way to measure power usage without an external power meter. Battery monitoring is also convenient because data collection and logging can be automated.
 
-Open your code editor, copy content below and save it as `sample_power.ps1`.
+A PowerShell script launches the video decoding task, samples battery status, and outputs the collected data to a CSV formatted file.
+
+Open your code editor, copy the content below, and save it as `sample_power.ps1`:
+
 ```PowerShell { line_numbers = true }
 param (
-    [string]$exePath = "path\to\ffplay.exe",
-    [string[]]$argList = @("-loop", "150", "-autoexit", "D:\RaceNight_1080p.mp4"),
+    [string]$exePath = "ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1\ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1\bin\ffplay.exe",
+    [string[]]$argList = @("-loop", "15", "-autoexit", "RaceNight_1080p.mp4"),
     [int]$interval = 10,
     [string]$outputFile = "watts.csv"
 )
@@ -63,20 +65,22 @@ while (-not $process.HasExited) {
 }
 ```
 
-{{% notice Note %}}
-Modify the path to `ffplay.exe` on line 2 accordingly.
-{{% /notice %}}
+Before you run the script, modify the path to `ffplay.exe` on line 2 to match your installation location.
 
-The battery data is system based and process agnostic. Full charge the battery. Close any unnecessary applications. Unplug the power cord. And run the script:
+The battery data is system-based and process-agnostic. Fully charge the battery, close any unnecessary applications, unplug the power cord, and run the script:
+
 ```console
 .\sample_power.ps1
 ```
-A video starts playing. It ends in 30 minutes. And then you can find the sample results file **watts.csv** in current directory. The test runs for a longer time so you can observe a distinct battery remaining capacity drop.
 
-The script collects battery remaining capacity and discharge rate periodically. You can track the battery remaining capacity to have an understanding of the power consumption.
+A video starts playing and completes in 30 minutes. When finished, you can find the results file `watts.csv` in the current directory. The test runs for a longer duration so you can observe a distinct drop in battery remaining capacity.
 
-### View result
-Shown below is example sample result from running x86_64 version ffplay.exe:
+The script collects remaining battery capacity and discharge rate periodically. You can track the battery remaining capacity to understand the power consumption patterns.
+
+### View results
+
+The output below shows the results from running the x86_64 version of `ffplay.exe`:
+
 ```output
 Timestamp,RemainingCapacity(mWh),DischargeRate(mW)
 2025-08-15T14:42:50.5231628+08:00,48438,4347
@@ -84,7 +88,8 @@ Timestamp,RemainingCapacity(mWh),DischargeRate(mW)
 2025-08-15T15:12:38.2028188+08:00,43823,8862
 ```
 
-Example result from running Arm64 native ffplay.exe:
+The output below shows the results from running the Arm64 version of `ffplay.exe`:
+
 ```output
 Timestamp,RemainingCapacity(mWh),DischargeRate(mW)
 2025-08-15T15:53:05.8430758+08:00,48438,3255
@@ -92,4 +97,6 @@ Timestamp,RemainingCapacity(mWh),DischargeRate(mW)
 2025-08-15T16:22:55.3163530+08:00,44472,7319
 ```
 
-The sample result file is in **csv** format. You can open it with spreadsheet applications like Microsoft Excel for a better view and plot lines for data analysis.
+The sample results file is in CSV format. You can open it with spreadsheet applications like Microsoft Excel for better visualization and to plot data analysis charts.
+
+Battery monitoring provides an effective way to measure power consumption differences between x86_64 and native Arm64 applications. By comparing discharge rates, you can quantify the power efficiency advantages that Arm processors typically demonstrate for video decoding workloads.
