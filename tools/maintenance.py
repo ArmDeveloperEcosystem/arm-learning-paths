@@ -22,6 +22,7 @@ level = { 10: "DEBUG",  20: "INFO",  30: "WARNING",  40: "ERROR" }
 Test Learning Path
 """
 def check_lp(lp_path, link, debug):
+    test_image_results = None # initialize the variable
     if not os.path.isdir(lp_path):
         lp_path = os.path.dirname(lp_path)
 
