@@ -41,11 +41,14 @@ prompts = [
     "Write a hello world program in Rust",
 ]
 
+# Modify model here
+MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
+
 # Create a sampling params object.
 sampling_params = SamplingParams(temperature=0.8, top_p=0.95, max_tokens=256)
 
 # Create an LLM.
-llm = LLM(model="Qwen/Qwen2.5-0.5B-Instruct", dtype="bfloat16")
+llm = LLM(model=MODEL, dtype="bfloat16")
 
 # Generate texts from the prompts. The output is a list of RequestOutput objects
 # that contain the prompt, generated text, and other information.
