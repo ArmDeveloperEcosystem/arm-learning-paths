@@ -18,7 +18,7 @@ sudo zypper update -y
 ```
 
 ### Install PHP, Apache, and common extensions
-Now install PHP, PHP-FPM, Apache web server, and some commonly used PHP extensions.
+Now install PHP, PHP-FPM, Apache web server, and some commonly used PHP extensions by using the following command:
 
 ```console
 sudo zypper install -y php php-cli php-fpm php-mysql php-xml php-mbstring php-opcache apache2
@@ -37,7 +37,7 @@ Package breakdown:
 
 
 ### Enable and start Apache:
-Once Apache is installed, you need to enable and start the service so that it runs automatically on boot and begins serving HTTP requests immediately.
+Once Apache is installed, enable and start the service so that it runs automatically on boot and begins serving HTTP requests immediately:
 ```console
 sudo systemctl enable apache2
 sudo systemctl start apache2
