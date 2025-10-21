@@ -1,5 +1,5 @@
 ---
-title: Get started with PHP on Google Axion C4A (Arm Neoverse V2)
+title: Get started with PHP on Google Axion C4A on Arm Neoverse V2
 
 weight: 2
 
@@ -16,8 +16,6 @@ To learn more about Google Axion, refer to the [Introducing Google Axion Process
 
 ## PHP
 
-PHP (Hypertext Preprocessor) is an open-source, server-side scripting language designed for web development.  
+PHP (Hypertext Preprocessor) is an open-source, server-side scripting language designed for web development. It allows you  to create dynamic web pages, interact with databases, handle forms, and build web applications. You can embed PHP directly into HTML, making it easy to generate content dynamically on the server before sending it to the browser.  
 
-It allows developers to create dynamic web pages, interact with databases, handle forms, and build web applications. PHP can be embedded directly into HTML, making it easy to generate content dynamically on the server before sending it to the browser.  
-
-PHP is widely used for websites, web applications, content management systems (CMS), and APIs. Learn more from the [PHP official website](https://www.php.net/) and its [official documentation](https://www.php.net/docs.php).
+PHP is widely used for websites, web applications, content management systems (CMS), and APIs. Learn more from the [PHP website](https://www.php.net/) and the [PHP documentation](https://www.php.net/docs.php).
