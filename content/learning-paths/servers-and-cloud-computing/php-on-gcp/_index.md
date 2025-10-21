@@ -1,16 +1,15 @@
 ---
-title:  Deploy PHP on Google Cloud C4A on Arm-based Axion VMs
+title:  Deploy PHP on Google Cloud C4A Arm-based Axion VMs
 
   
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for software developers migrating PHP workloads from x86_64 to Arm-based servers, specifically on Google Cloud C4A virtual machines built on Axion processors.
-
+who_is_this_for: This is an introductory topic for software developers migrating PHP workloads from x86_64 to Arm-based servers, specifically on Google Cloud C4A virtual machines(VM) built on Axion processors.
 
 learning_objectives:
-  - Provision a SUSE SLES virtual machine on a Google Cloud C4A Arm-based Axion VM
+  - Provision a SUSE SLES virtual machine on a Google Cloud C4A Arm-based Axion virtual machine
   - Install PHP on a SUSE Arm64 C4A instance
-  - Validate PHP functionality with baseline HTTP server tests  
+  - Validate PHP functionality by running baseline HTTP server tests  
   - Benchmark PHP performance using PHPBench on Arm64 architecture 
 
 
