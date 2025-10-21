@@ -22,7 +22,6 @@ level = { 10: "DEBUG",  20: "INFO",  30: "WARNING",  40: "ERROR" }
 Test Learning Path
 """
 def check_lp(lp_path, link, debug):
-    test_image_results = None # initialize the variable
     if not os.path.isdir(lp_path):
         lp_path = os.path.dirname(lp_path)
 
@@ -157,13 +156,10 @@ def main():
         if args.stats_report:
             # If all test results are zero, all tests have passed
             patch.patch(args.instructions, results_dict, args.link)
-        if results_dict is not None:
-            if all(results_dict.get(k) for k in results_dict):
-                # Errors exist
-                logging.info("Tests failed in test suite")
-                sys.exit(1)
-        else:
-            pass
+        if all(results_dict.get(k) for k in results_dict):
+            # Errors exist
+            logging.info("Tests failed in test suite")
+            sys.exit(1)
     elif args.spelling:
         logging.info(f"Checking spelling of {args.spelling}")
         output = parse.spelling(args.spelling)
