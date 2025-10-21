@@ -42,7 +42,7 @@ static const char* schedule_name(Schedule s) {
         case Schedule::FuseBlurAndThreshold: return "FuseBlurAndThreshold";
         case Schedule::FuseAll:              return "FuseAll";
         case Schedule::Tile:                 return "Tile";
-        default:                              return "Unknown";
+        default:                             return "Unknown";
     }
 }
 
@@ -174,10 +174,10 @@ int main(int argc, char** argv) {
         if (!frame.isContinuous()) frame = frame.clone();
 
         // Wrap interleaved frame
-        auto in_rt = Runtime::Buffer<uint8_t>::make_interleaved(
-            frame.data, frame.cols, frame.rows, /*channels*/3);
-        Buffer<> in_fe(*in_rt.raw_buffer());
-        input.set(in_fe);
+        Halide::Buffer<uint8_t> inputBuf = Runtime::Buffer<uint8_t>::make_interleaved(
+            frame.data, frame.cols, frame.rows, frame.channels());
+        
+        input.set(inputBuf);
 
         // Time the Halide realize() only
         auto t0 = std::chrono::high_resolution_clock::now();
@@ -232,32 +232,6 @@ int main(int argc, char** argv) {
     return 0;
 }
 ```
-You will begin by pulling in the right set of headers. Right after the includes you define an enumeration, Schedule, which lists the four different scheduling strategies you want to experiment with. These represent the “modes” you will toggle between while the program is running: a simple materialized version, a fused blur-plus-threshold, a fully fused pipeline, and a tiled variant.
-
-Finally, to make the output more readable, you add a small helper function, `schedule_name`. It converts each enum value into a human-friendly label so that when the program prints logs or overlays statistics, you can immediately see which schedule is active.
-```cpp
-#include "Halide.h"
-#include <opencv2/opencv.hpp>
-#include <chrono>
-#include <iomanip>
-#include <iostream>
-#include <string>
-#include <cstdint>
-#include <exception>
-
-using namespace Halide;
-using namespace cv;
-using namespace std;
-
-enum class Schedule : int {
-    Simple = 0,
-    FuseBlurAndThreshold = 1,
-    FuseAll = 2,
-    Tile = 3,
-};
-
-static const char* schedule_name(Schedule s) { ... }
-```
 
 The main part of this program is the `make_pipeline` function. It defines the camera processing pipeline in Halide and applies different scheduling choices depending on which mode we select.
 
@@ -281,33 +255,6 @@ Pipeline make_pipeline(ImageParam& input, Schedule schedule) {
 Next comes the gray conversion. As in previous section, you will use Rec.601 weights a 3×3 binomial blur. Instead of using a reduction domain (RDom), you unroll the sum in C++ host code with a pair of loops over the kernel. The kernel values {1, 2, 1; 2, 4, 2; 1, 2, 1} approximate a Gaussian filter. Each pixel of blur is simply the weighted sum of its 3×3 neighborhood, divided by 16.
 
 You will then add a threshold stage. Pixels above 128 become white, and all others black, producing a binary image. Finally, define an output Func that wraps the thresholded result and call compute_root() on it so that it will be realized explicitly when you run the pipeline.
-
-```cpp
-    // (c) BGR → gray (Rec.601, float weights)
-    Func gray("gray");
-    gray(x, y) = cast<uint8_t>(0.114f * inputClamped(x, y, 0)
-                             + 0.587f * inputClamped(x, y, 1)
-                             + 0.299f * inputClamped(x, y, 2));
-
-    // (d) 3×3 binomial blur, unrolled in host code (no RDom needed)
-    Func blur("blur");
-    const uint16_t k[3][3] = {{1,2,1},{2,4,2},{1,2,1}};
-    Expr blurSum = cast<uint16_t>(0);
-    for (int j = 0; j < 3; ++j)
-        for (int i = 0; i < 3; ++i)
-            blurSum = blurSum + cast<uint16_t>(gray(x + i - 1, y + j - 1)) * k[j][i];
-    blur(x, y) = cast<uint8_t>(blurSum / 16);
-
-    // (e) Threshold to binary
-    Func thresholded("thresholded");
-    Expr T = cast<uint8_t>(128);
-    thresholded(x, y) = select(blur(x, y) > T, cast<uint8_t>(255), cast<uint8_t>(0));
-
-    // (f) Final output and default root
-    Func output("output");
-    output(x, y) = thresholded(x, y);
-    output.compute_root();
-```
 
 Now comes the interesting part: the scheduling choices. Depending on the Schedule enum passed in, you instruct Halide to either fuse everything (the default), materialize some intermediates, or even tile the output.
   * Simple: Here you will explicitly compute and store both gray and blur across the whole frame with compute_root(). This makes them easy to reuse or parallelize, but requires extra memory traffic.
@@ -470,7 +417,7 @@ Comparing the numbers:
 
 By toggling schedules live, you can see and measure how operator fusion and materialization change both the loop structure and the throughput:
 * Fusion is the default in Halide and eliminates temporary storage, but may cause recomputation for spatial filters.
-* Materializing selected stages with compute_root() or compute_at() can reduce recomputation, enable vectorization and parallelization, and sometimes yield much higher throughput.
+* Materializing selected stages with compute_root() or compute_at() can reduce recomputation and improve locality. It can also make vectorization and parallelization easier or more effective, but they are not strictly required by materialization and can be applied independently. For best performance, consider these choices together and measure on your target.
 * Tile-level materialization (compute_at) provides a hybrid - fusing within tiles while keeping intermediates small and cache-resident.
 
 This demo makes these trade-offs concrete: the loop nest diagrams explain the structure, and the live FPS/MPix/s stats show the real performance impact.

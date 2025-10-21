@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
 }
 ```
 
-In the original implementation constants 128, 255, and 0 were implicitly treated as integers. Here, the threshold value (128) and output values (255, 0) are explicitly cast to uint8_t. This approach removes ambiguity and clearly specifies the types used, ensuring compatibility and clarity. Both approaches result in identical functionality, but explicitly casting helps emphasize the type correctness and may avoid subtle issues during cross-compilation or in certain environments.
+In the original implementation constants 128, 255, and 0 were implicitly treated as integers. Here, the threshold value (128) and output values (255, 0) are explicitly cast to uint8_t. This approach removes ambiguity and clearly specifies the types used, ensuring compatibility and clarity. Both approaches result in identical functionality, but explicitly casting helps emphasize the type correctness and may avoid subtle issues during cross-compilation or in certain environments. Additionally, explicit uint8_t casts help avoid implicit promotion to 32-bit integers (and the corresponding narrowings back to 8-bit) in the generated code, reducing redundant cast operations and potential vector widen/narrow overhead—especially on ARM/NEON
 
 The program takes at least one command-line argument, the output base name used to generate the files (e.g., “blur_threshold_android”). Here, the target architecture is explicitly set within the code to Android ARM64:
 
@@ -105,8 +105,12 @@ target.set_feature(Target::NoRuntime, false);
 ```
 
 Notes: 
-* NoRuntime — When set to true, Halide excludes its runtime from the generated code, and you must link the runtime manually during the linking step. When set to false, the Halide runtime is included in the generated library, which simplifies deployment.
-* ARMFp16 — Enables the use of ARM hardware support for half-precision (16-bit) floating-point operations, which can provide faster execution when reduced precision is acceptable.
+1. NoRuntime — When set to true, Halide excludes its runtime from the generated code, and you must link the runtime manually during the linking step. When set to false, the Halide runtime is included in the generated library, which simplifies deployment.
+2. ARMFp16 — Enables the use of ARM hardware support for half-precision (16-bit) floating-point operations, which can provide faster execution when reduced precision is acceptable.
+3. Why the runtime choice matters - If your app links several AOT-compiled pipelines, ensure there is exactly one Halide runtime at link time:
+* Strategy A (cleanest): build all pipelines with NoRuntime ON and link a single standalone Halide runtime once (matching the union of features you need, e.g., Vulkan/OpenCL/Metal or ARM options).
+* Strategy B: embed the runtime in exactly one pipeline (leave NoRuntime OFF only there); compile all other pipelines with NoRuntime ON.
+* Mixing more than one runtime can cause duplicate symbols and split global state (e.g., error handlers, device interfaces).
 
 We declare spatial variables (x, y) and an ImageParam named “input” representing the input image data. We use boundary clamping (clamp) to safely handle edge pixels. Then, we apply a 3x3 blur with a reduction domain (RDom). The accumulated sum is divided by 9 (the number of pixels in the neighborhood), producing an average blurred image. Lastly, thresholding is applied, producing a binary output: pixels above a certain brightness threshold (128) become white (255), while others become black (0).
 
