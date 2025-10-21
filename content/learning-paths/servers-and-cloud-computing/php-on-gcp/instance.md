@@ -14,10 +14,12 @@ In this section, you’ll provision a Google Cloud Axion C4A Arm virtual machine
 For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
-## Step-by-step: provisioning Axion C4A Arm VM on Google Cloud Console
+## Provision your Google Axion C4A instance
+
+Follow these steps to create a `c4a-standard-4` instance configured for PHP on Arm. This walkthrough covers machine selection, OS image choice, and basic networking. Ensure your Google Cloud project has billing enabled and you have permission to create Compute Engine instances.
 
 
-To create a virtual machine based on the C4A instance type, follow these steps:
+Follow these steps to get started:
 
 - Go to the [Google Cloud Console](https://console.cloud.google.com/).
 - In the left menu, select **Compute Engine** > **VM Instances**.
@@ -25,7 +27,7 @@ To create a virtual machine based on the C4A instance type, follow these steps:
 - Under **Machine configuration**:
    - Enter your **Instance name**, **Region**, and **Zone**.
    - Set **Series** to `C4A`.
-   - Set **Machine type** to `c4a-standard-4` (four vCPUs, 16 GB memory).
+   - Set **Machine type** to `c4a-standard-4` (four vCPUs, 16 GB memory), as shown below.
   
    ![Screenshot of Google Cloud Console showing c4a-standard-4 selected for Axion C4A Arm VM creation. alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
 
@@ -36,6 +38,4 @@ To create a virtual machine based on the C4A instance type, follow these steps:
 - Under **Networking**, enable **Allow HTTP traffic**.
 - Select **Create** to launch the instance.
 
-{{% notice success %}}
 You’ve successfully provisioned an Arm-based Axion C4A VM on Google Cloud. Your server is ready for PHP installation and cloud-native development on Arm.
-{{% /notice %}}

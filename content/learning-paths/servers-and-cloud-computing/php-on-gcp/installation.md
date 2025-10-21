@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Install PHP
+## Overview
 In this section, you’ll install PHP, the Apache web server, and several commonly used PHP extensions on a SUSE Arm-based virtual machine. This setup forms the foundation for running and serving dynamic PHP applications on Arm-based machines.
 
 ## Update the system

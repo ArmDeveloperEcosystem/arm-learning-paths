@@ -6,18 +6,17 @@ weight: 6
 layout: learningpathall
 ---
 
-
 ## PHP benchmarking using PHPBench
 
-In this section, you will learn how to benchmark PHP performance using PHPBench, a modern and extensible benchmarking framework for PHP applications. You will install PHPBench, run sample tests, and interpret key metrics such as mode time, variance, and throughput.
-You will then analyze the results to understand how your Google Cloud C4A (Axion Arm64) virtual machine performs on common operations like string manipulation and array processing.
+In this section, you will learn how to benchmark PHP performance using PHPBench, a modern and extensible benchmarking framework for PHP applications. You will install PHPBench, run sample tests, and interpret key metrics such as mode time, variance, and throughput. You will then analyze the results to understand how your Google Cloud C4A (Axion Arm64) virtual machine performs on common operations like string manipulation and array processing.
 
 PHPBench is a flexible micro-benchmarking tool designed to measure PHP code performance precisely and repeatably. 
 
-It allows developers to do the following:
+With PHPBench, you can:
   * Measure the execution time of PHP functions or code blocks
   * Identify performance regressions between versions
   * Automate performance testing across CI/CD pipelines
+  * Track results over time to detect optimizations or slowdowns
   * Track results over time to detect optimizations or slowdowns
 
 ## Download Composer installer
