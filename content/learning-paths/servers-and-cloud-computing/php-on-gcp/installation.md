@@ -10,7 +10,7 @@ layout: learningpathall
 In this section, you will install PHP together with the Apache web server and several commonly used PHP extensions on a SUSE Arm-based virtual machine. This forms the foundation for running and serving dynamic PHP applications on Arm-based machines.
 
 ### Update the system
-Before installing any software, make sure your system is up to date with the latest packages and security patches.
+Before installing any software, make sure your system has the latest packages and security patches:
 
 ```console
 sudo zypper refresh
