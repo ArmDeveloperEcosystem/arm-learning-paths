@@ -7,16 +7,16 @@ layout: learningpathall
 ---
 
 
-## Baseline setup for PHP-FPM
+## Configure PHP-FPM baseline
 In this section, you’ll configure PHP-FPM (FastCGI Process Manager) on a SUSE Linux Arm-based Google Cloud Axion C4A virtual machine. You’ll set up the PHP-FPM pool and verify the FastCGI configuration. Next, you’ll connect PHP-FPM to Apache. These steps confirm that your Arm server is ready for dynamic PHP workloads.
 
-## Configure the PHP-FPM pool
+## Set up the PHP-FPM pool
 
-PHP-FPM (FastCGI Process Manager) runs PHP scripts in dedicated worker processes, independent of the web server. This design improves performance, security, and fault isolation—especially on multi-core Arm-based processors like Google Cloud Axion C4A VMs.
+PHP-FPM (FastCGI Process Manager) runs PHP scripts in dedicated worker processes, independent of the web server. You’ll notice better performance, stronger security, and improved fault isolation when you use multi-core Arm-based processors like Google Cloud Axion C4A VMs.
 
 A pool is a group of PHP worker processes that serve FastCGI requests. You can use separate pools for different applications or virtual hosts to control resources more effectively.
 
-## Copy the default configuration (if missing)
+## Copy the default configuration
 
 If your PHP-FPM configuration files don't exist yet (for example, after a minimal installation in this Learning Path), copy the defaults into place using the commands below:
 
@@ -24,11 +24,11 @@ If your PHP-FPM configuration files don't exist yet (for example, after a minima
 sudo cp /etc/php8/fpm/php-fpm.d/www.conf.default /etc/php8/fpm/php-fpm.d/www.conf
 sudo cp /etc/php8/fpm/php-fpm.conf.default /etc/php8/fpm/php-fpm.conf
 ```
-These commands:
+These commands do the following:
 - Create a default pool configuration (`www.conf`) to control how PHP-FPM spawns and manages worker processes
 - Restore the main FPM service configuration (`php-fpm.conf`) if it’s missing
 
-## Edit the configuration
+## Edit the PHP-FPM configuration
 
 Open the PHP-FPM pool configuration file in a text editor:
 
@@ -50,7 +50,7 @@ listen.group = www
 listen.mode = 0660
 ```
 
-Explanation of each directive:
+This table gives you an explanation of each directive:
 | Directive                                             | Description                                                                                                                                                                   |
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | listen = /run/php-fpm/[www.sock](http://www.sock) | Configures PHP-FPM to communicate with Apache using a local Unix socket instead of a TCP port (`127.0.0.1:9000`). This reduces network overhead and improves performance. |
@@ -59,7 +59,7 @@ Explanation of each directive:
 | listen.mode = 0660                                | Defines file permissions so that both the owner (`wwwrun`) and group (`www`) can read and write to the socket. This enables smooth communication between Apache and PHP-FPM.  |
 
 
-## Start and enable PHP-FPM
+## Start and enable PHP-FPM service
 
 After updating the configuration, restart the PHP-FPM service so it picks up the new settings:
 
@@ -90,7 +90,7 @@ You should see output similar to:
 Oct 16 13:56:44 pareena-php-test systemd[1]: Starting The PHP FastCGI Process Manager...
 Oct 16 13:56:44 pareena-php-test systemd[1]: Started The PHP FastCGI Process Manager.
 ```
-PHP-FPM is now active and ready to process requests via its Unix socket (`/run/php-fpm/www.sock`).
+PHP-FPM is now active and ready to process requests using its Unix socket (`/run/php-fpm/www.sock`).
 Next, you’ll configure Apache to communicate with PHP-FPM, allowing your Arm server to process and serve dynamic PHP pages.
 
 ## Install the Apache PHP8 module
@@ -106,10 +106,10 @@ sudo systemctl restart apache2
 ```
 Next, you’ll test PHP execution by creating a simple PHP page and verifying that Apache can correctly render dynamic content.
 
-## Test PHP
+## Test PHP functionality
 Now that PHP and Apache are installed, you can verify that everything is working correctly on your Arm-based VM.
 
-## Create a test page
+## Create a PHP test page
 Create a simple PHP file that displays detailed information about your PHP installation:
 
 ```console
@@ -117,15 +117,13 @@ echo "<?php phpinfo(); ?>" | sudo tee /srv/www/htdocs/info.php
 ```
 This creates a file named `info.php` inside Apache’s web root directory (`/srv/www/htdocs/`). When you open this file in a browser, it displays the PHP configuration page.
 
-## Test from inside the VM
+## Verify PHP from inside the VM
 You can verify that PHP and Apache are communicating correctly by testing the web server locally using curl:
 
 ```console
 curl http://localhost/info.php
 ```
-- `curl` fetches the page from the local Apache server.
-- If PHP is working, you’ll see a large block of HTML code as output. This is the rendered output of the `phpinfo()` function.
-- This confirms that Apache successfully passed the request to the PHP interpreter and returned the generated HTML response.
+When you run the `curl` command, it fetches the PHP test page from the local Apache server. If PHP is configured correctly, you'll see a large block of HTML code in the output, which is the result of the `phpinfo()` function. This confirms that Apache is successfully passing requests to the PHP interpreter and returning the generated HTML response.
 
 You should see output similar to:
 
@@ -149,19 +147,23 @@ h2 a:link, h2 a:visited{color: inherit; background: inherit;}
 ```
 This long HTML output represents the PHP configuration page content.
 
-## Test from your browser
+## Verify PHP from your browser
 Now, verify that your PHP setup works correctly from outside the VM.
 Open a web browser on your local machine (such as Chrome, Firefox, or Edge) and enter the following URL in the address bar:
 
 ```console
 http://<YOUR_VM_PUBLIC_IP>/info.php
 ```
-- Replace `<YOUR_VM_PUBLIC_IP>` with the public IP of your Google Cloud Axion C4A Arm VM.
+Replace `<YOUR_VM_PUBLIC_IP>` with the public IP of your Google Cloud Axion C4A Arm VM.
 
-If everything is set up correctly, you’ll see a PHP Info page in your browser. It looks like this:
+If your configuration is correct, your browser displays the PHP Info page. This page shows detailed information about your PHP environment, including version, build options, and loaded modules, as shown below:
 
-![PHP-info page alt-text#center](images/php-web.png "Figure 1: PHP info")
+![Screenshot of PHP info page in browser showing PHP configuration details on Google Cloud Axion C4A Arm VM. alt-text#center](images/php-web.png "PHP info page in browser on Google Cloud Axion C4A Arm VM")
 
 Successfully loading the PHP Info page in your browser confirms that your PHP and Apache environment on Google Cloud Axion C4A Arm is configured and functioning properly.
 
+## What's next?
+
 You’ve validated your PHP baseline setup on an Arm-based Google Cloud VM. You’re ready to move on to benchmarking and performance testing for your PHP workloads on Arm.
+
+Next, you’ll learn how to measure PHP performance on Google Cloud Axion C4A Arm VMs. You’ll use benchmarking tools to evaluate throughput, latency, and resource utilization. This helps you optimize your PHP environment for production workloads and identify areas for improvement.

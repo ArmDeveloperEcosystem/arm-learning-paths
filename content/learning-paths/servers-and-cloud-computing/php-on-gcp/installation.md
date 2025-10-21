@@ -21,15 +21,19 @@ sudo zypper update -y
 Install PHP, PHP-FPM, Apache web server, and some commonly used PHP extensions by running:
 
 ```console
-sudo zypper install -y php php-cli php-fpm php-mysql php-xml php-mbstring php-opcache apache2```
-- `php`: provides the core PHP interpreter for running web applications.
-- `php-cli`: allows you to run PHP scripts from the command line, which is useful for testing and automation tasks.
-- `php-fpm`: installs the FastCGI Process Manager, which manages PHP worker processes and helps improve concurrency and performance.
-- `php-mysql`: enables PHP to connect to MySQL or MariaDB databases.
-- `php-xml`: adds support for parsing and manipulating XML data.
-- `php-mbstring`: enables multi-byte string handling, which is required by many web frameworks.
-- `php-opcache`: improves performance by caching precompiled PHP bytecode in memory, reducing runtime overhead.
-- `apache2`: installs the Apache HTTP web server, which serves PHP files using either mod_php or FastCGI.
+sudo zypper install -y php php-cli php-fpm php-mysql php-xml php-mbstring php-opcache apache2
+```
+
+Here’s what each package in the installation command does:
+
+- `php`: provides the core PHP interpreter for running web applications
+- `php-cli`: allows you to run PHP scripts from the command line, which is useful for testing and automation tasks
+- `php-fpm`: installs the FastCGI Process Manager, which manages PHP worker processes and helps improve concurrency and performance
+- `php-mysql`: enables PHP to connect to MySQL or MariaDB databases
+- `php-xml`: adds support for parsing and manipulating XML data
+- `php-mbstring`: enables multi-byte string handling, which is required by many web frameworks
+- `php-opcache`: improves performance by caching precompiled PHP bytecode in memory, reducing runtime overhead
+- `apache2`: installs the Apache HTTP web server, which serves PHP files using either mod_php or FastCGI
 
 
 ## Enable and start Apache
@@ -78,4 +82,8 @@ with Zend OPcache v8.0.30, Copyright (c), by Zend Technologies
 PHP is installed and ready for use on your Arm-based SUSE VM.
 {{% /notice %}}
 ```
-You can now proceed to the baseline testing section, where you’ll create and load a simple PHP web page to confirm that Apache and PHP are working together on your SUSE Arm-based virtual machine.
+## What's next?
+
+You've installed PHP, Apache, and essential PHP extensions on your SUSE Arm-based virtual machine. Apache is running and ready to serve dynamic PHP applications. You verified your PHP installation and confirmed that your environment is set up for web development on Arm.
+
+You can move on to the baseline testing section, where you'll create and load a simple PHP web page to confirm that Apache and PHP are working together on your SUSE Arm-based virtual machine.

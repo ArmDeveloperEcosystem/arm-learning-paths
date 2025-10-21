@@ -8,9 +8,7 @@ layout: learningpathall
 
 ## PHP benchmarking using PHPBench
 
-In this section, you will learn how to benchmark PHP performance using PHPBench, a modern and extensible benchmarking framework for PHP applications. You will install PHPBench, run sample tests, and interpret key metrics such as mode time, variance, and throughput. You will then analyze the results to understand how your Google Cloud C4A (Axion Arm64) virtual machine performs on common operations like string manipulation and array processing.
-
-PHPBench is a flexible micro-benchmarking tool designed to measure PHP code performance precisely and repeatably. 
+In this section, you will learn how to benchmark PHP performance using PHPBench, a modern and extensible benchmarking framework for PHP applications. You will install PHPBench, run sample tests, and interpret key metrics such as mode time, variance, and throughput. You will then analyze the results to understand how your Google Cloud C4A (Axion Arm64) virtual machine performs on common operations like string manipulation and array processing. PHPBench is a flexible micro-benchmarking tool designed to measure PHP code performance precisely and repeatably. 
 
 With PHPBench, you can:
   * Measure the execution time of PHP functions or code blocks
@@ -93,7 +91,7 @@ This installs `phpbench` in your user's global Composer directory, typically loc
 
 ## Add Composer global bin to PATH
 
-To make `phpbench` accessible from any terminal session, add Composer's global binary path to your system's environment PATH:
+To make `phpbench` accessible from any terminal session, add Composer's global binary path to your system's environment `PATH`:
 ```console
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 echo 'export PATH=$HOME/.config/composer/vendor/bin:$PATH' >> ~/.bashrc
@@ -160,9 +158,7 @@ class ExampleBenchmark
 ```
 This sets up two basic benchmark tests, string concatenation and array push.
 
-- @Revs(1000): Each benchmark repeats 1000 times per iteration.
-- @Iterations(5): The benchmark runs 5 separate iterations and averages results.
-- `benchStringConcat` and `benchArrayPush`: Sample benchmarks for string and array operations.
+The `@Revs(1000)` annotation ensures each benchmark function is executed 1,000 times per iteration, while `@Iterations(5)` means the benchmark runs five separate iterations and averages the results for greater accuracy. The sample benchmarks, `benchStringConcat` and `benchArrayPush`, measure the performance of string concatenation and array operations, respectively.
 
 ## Run the benchmarks
 
@@ -185,20 +181,19 @@ with PHP version 8.0.30, xdebug ❌, opcache ❌
 Subjects: 2, Assertions: 0, Failures: 0, Errors: 0
 ```
 
-## Understanding PHP benchmark metrics and results with PHPBench
+## Understanding PHPBench metrics and results
 
-- **benchStringConcat** → Name of the benchmark function; in this case, it measures string concatenation performance.
-- **benchArrayPush** → Name of another benchmark function; here, measuring array push performance.
-- **xdebug ❌** → Xdebug extension is disabled, which is good because Xdebug slows down execution.
-- **opcache ❌** → Opcache is disabled, so you’re measuring raw execution without caching optimizations.
-- **I4** → Number of iterations per measurement.  
-  - `I4` means 4 iterations of this benchmark were executed for one measurement.
-- **Mo13.438μs** → Mode (or mean) execution time for the benchmark.  
-  - `Mo` = Mode, showing the most common measured execution time across iterations.  
-  - `13.438 μs` = 13.438 microseconds per iteration.
-- **(±0.82%)** → Variation or coefficient of variation in the measurements.  
-  - Shows consistency of results.  
-  - Lower percentage → more stable and reliable benchmark.
+PHPBench reports several key metrics to help you understand your code's performance, as defined in the table below:
+
+| Metric/Term         | Meaning                                                                                                   |
+|---------------------|-----------------------------------------------------------------------------------------------------------|
+| **benchStringConcat** | Name of the benchmark function; measures string concatenation performance.                               |
+| **benchArrayPush**    | Name of the benchmark function; measures array push performance.                                         |
+| **xdebug ❌**          | Xdebug extension is disabled, which is good because Xdebug slows down execution.                        |
+| **opcache ❌**         | Opcache is disabled, so you’re measuring raw execution without caching optimizations.                   |
+| **I4**                | Number of iterations per measurement. `I4` means 4 iterations of this benchmark were executed per run.  |
+| **Mo13.438μs**        | Mode (most common) execution time for the benchmark. `13.438 μs` = 13.438 microseconds per iteration.   |
+| **(±0.82%)**          | Variation or coefficient of variation in the measurements. Lower percentage means more stable results.   |
 
 
 ## Benchmark summary on Arm64
@@ -222,10 +217,13 @@ For comparison, the same PHPBench test suite was executed on a Google Cloud c4-s
 
 When comparing benchmark results between Google Cloud Axion C4A (Arm64) and x86-based C4 (x86_64) instances, you will see:
 
-The results show that both architectures deliver nearly identical execution times for typical PHP operations, with Arm64 showing slightly lower variation (more stable performance). The Arm64 instance performs within ~15% of x86_64, showing strong memory throughput and cache performance for dynamic array allocation workloads.
-Low variance (±0.82% / ±0.51: Indicates that the Axion-based Arm cores on C4A provide stable, repeatable performance, ideal for predictable PHP application behavior in production.
+- The results show that both architectures deliver nearly identical execution times for typical PHP operations, with Arm64 showing a slightly lower level of variation which indicates more stable performance. 
+- The Arm64 instance performs within ~15% of x86_64, showing strong memory throughput and cache performance for dynamic array allocation workloads.
+- Low variance (±0.82% / ±0.51) indicates that the Axion-based Arm cores on C4A provide stable, repeatable performance, ideal for predictable PHP application behavior in production.
 
-These results show that PHP performs consistently across both architectures, and that Google Cloud Axion C4A Arm64 VMs deliver competitive, reliable performance for PHP-based web and backend applications.
+## Summary
+
+These results show that PHP performs consistently across both architectures, and that Google Cloud Axion C4A Arm64 VMs deliver competitive, reliable performance for PHP-based web and backend applications. You can confidently deploy PHP workloads on Arm64 instances, knowing that performance is stable and comparable to x86_64 systems. This benchmarking process helps you identify areas for optimization and ensures your applications run efficiently on Arm platforms. As you continue developing and scaling PHP solutions, regularly benchmarking on Arm64 will help you maintain high performance and take advantage of the cost and energy efficiency benefits offered by Arm-based cloud infrastructure.
 
 
 
