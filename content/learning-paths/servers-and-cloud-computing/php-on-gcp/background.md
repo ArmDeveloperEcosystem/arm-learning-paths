@@ -1,5 +1,5 @@
 ---
-title: Deploy PHP on Google Cloud Axion C4A Arm VMs
+title: Get started with PHP on Google Axion C4A on Arm Neoverse V2
 
 weight: 2
 
@@ -16,6 +16,14 @@ For more information on Google Axion, see [Introducing Google Axion Processors, 
 
 ## PHP
 
-PHP (Hypertext Preprocessor) is an open-source, server-side scripting language designed for web development. It allows you  to create dynamic web pages, interact with databases, handle forms, and build web applications. You can embed PHP directly into HTML, making it easy to generate content dynamically on the server before sending it to the browser.  
+PHP (Hypertext Preprocessor) is an open-source, server-side scripting language designed for web development. You use PHP to:
+- Create dynamic web pages
+- Interact with databases
+- Handle forms
+- Build web applications and APIs
+
+You can embed PHP directly into HTML, making it easy to generate content dynamically on the server before sending it to the browser.
 
 PHP is widely used for websites, web applications, content management systems (CMS), and APIs. For more information, see the [PHP website](https://www.php.net/) and the [PHP documentation](https://www.php.net/docs.php).
+
+You’re ready to begin deploying PHP workloads on Arm-based Google Cloud Axion C4A VMs. This Learning Path helps you optimize PHP for Arm servers, benchmark performance, and migrate from x86 to Arm with confidence.
