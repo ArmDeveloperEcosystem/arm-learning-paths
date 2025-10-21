@@ -21,17 +21,15 @@ sudo zypper update -y
 Install PHP, PHP-FPM, Apache web server, and some commonly used PHP extensions by running:
 
 ```console
-sudo zypper install -y php php-cli php-fpm php-mysql php-xml php-mbstring php-opcache apache2
-```
-**Package breakdown:**
-- **php**: Core PHP interpreter used to run web applications.
-- **php-cli**: Enables running PHP scripts from the command line. Useful for testing and automation.
-- **php-fpm**: FastCGI Process Manager—manages PHP worker processes and improves concurrency and performance.
-- **php-mysql**: Provides MySQL/MariaDB database connectivity for PHP.
-- **php-xml**: Adds support for parsing and manipulating XML data.
-- **php-mbstring**: Adds multi-byte string handling, required by many web frameworks.
-- **php-opcache**: Boosts performance by caching precompiled PHP bytecode in memory, reducing runtime overhead.
-- **apache2**: Installs the Apache HTTP web server, which will serve PHP files via mod_php or FastCGI.
+sudo zypper install -y php php-cli php-fpm php-mysql php-xml php-mbstring php-opcache apache2```
+- `php`: provides the core PHP interpreter for running web applications.
+- `php-cli`: allows you to run PHP scripts from the command line, which is useful for testing and automation tasks.
+- `php-fpm`: installs the FastCGI Process Manager, which manages PHP worker processes and helps improve concurrency and performance.
+- `php-mysql`: enables PHP to connect to MySQL or MariaDB databases.
+- `php-xml`: adds support for parsing and manipulating XML data.
+- `php-mbstring`: enables multi-byte string handling, which is required by many web frameworks.
+- `php-opcache`: improves performance by caching precompiled PHP bytecode in memory, reducing runtime overhead.
+- `apache2`: installs the Apache HTTP web server, which serves PHP files using either mod_php or FastCGI.
 
 
 ## Enable and start Apache
