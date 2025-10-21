@@ -7,18 +7,20 @@ layout: learningpathall
 ---
 
 
-## PHP Benchmarking using PHPBench
+## PHP benchmarking using PHPBench
 
 In this section, you will learn how to benchmark PHP performance using PHPBench, a modern and extensible benchmarking framework for PHP applications. You will install PHPBench, run sample tests, and interpret key metrics such as mode time, variance, and throughput.
 You will then analyze the results to understand how your Google Cloud C4A (Axion Arm64) virtual machine performs on common operations like string manipulation and array processing.
 
-PHPBench is a flexible micro-benchmarking tool designed to measure PHP code performance precisely and repeatably. It allows developers to:
-  * Measure the execution time of PHP functions or code blocks.
-  * Identify performance regressions between versions.
-  * Automate performance testing across CI/CD pipelines.
-  * Track results over time to detect optimizations or slowdowns.
+PHPBench is a flexible micro-benchmarking tool designed to measure PHP code performance precisely and repeatably. 
 
-### Download Composer Installer
+It allows developers to do the following:
+  * Measure the execution time of PHP functions or code blocks
+  * Identify performance regressions between versions
+  * Automate performance testing across CI/CD pipelines
+  * Track results over time to detect optimizations or slowdowns
+
+## Download Composer installer
 
 Before installing PHPBench, you need Composer, which is PHP's dependency manager. Composer handles library installations, versioning, and autoloading, ensuring tools like PHPBench run consistently across environments.
 
@@ -29,7 +31,7 @@ sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 
 This command downloads a PHP script called `composer-setup.php`, which will install Composer.
 
-### Install the phar extension
+## Install the phar extension
 
 Composer requires PHP's phar (PHP Archive) extension to run. This extension allows PHP to execute .phar archive files, self-contained PHP applications like Composer and PHPBench are distributed in this format.
 
@@ -38,7 +40,7 @@ Install the extension with:
 sudo zypper install -y php8-phar
 ```
 
-### Install Composer system-wide
+## Install Composer system-wide
 
 Now, install Composer globally so it is available for all users and can be executed from any directory:
 
@@ -56,7 +58,7 @@ Use it: php /usr/local/bin/composer
 ```
 Composer is now installed system-wide at /usr/local/bin/composer and ready to manage PHP dependencies.
 
-### Remove the installer script
+## Remove the installer script
 
 After successfully installing Composer, remove the installer file to keep your environment clean:
 
@@ -65,7 +67,7 @@ sudo php -r "unlink('composer-setup.php');"
 ```
 Since Composer is now installed system-wide, the installer file is no longer needed.
 
-### Verify Composer installation
+## Verify Composer installation
 To confirm that Composer was installed correctly and is accessible globally, run:
 
 ```console
@@ -80,7 +82,7 @@ Run the "diagnose" command to get more detailed diagnostics output.
 
 Composer is now successfully installed and you can proceed to installing PHPBench.
 
-### Install PHPBench globally
+## Install PHPBench globally
 
 PHPBench is a powerful benchmarking tool for measuring the performance of PHP code. Install it globally using Composer so you can access it from any directory:
 
@@ -90,7 +92,7 @@ composer global require phpbench/phpbench
 
 This installs `phpbench` in your user's global Composer directory, typically located under `$HOME/.config/composer/`
 
-### Add Composer global bin to PATH
+## Add Composer global bin to PATH
 
 To make `phpbench` accessible from any terminal session, add Composer's global binary path to your system's environment PATH:
 ```console
@@ -99,7 +101,7 @@ echo 'export PATH=$HOME/.config/composer/vendor/bin:$PATH' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-### Verify PHPBench installation
+## Verify PHPBench installation
 Once installed, verify that PHPBench is working correctly:
 ```console
 phpbench --version
@@ -111,7 +113,7 @@ phpbench 1.2.14
 ```
 PHPBench is now installed and ready to run.
 
-### Create a Benchmark Directory
+## Create a benchmark directory
 
 Create a new PHP benchmark file using your preferred text editor:
 
@@ -119,7 +121,7 @@ Create a new PHP benchmark file using your preferred text editor:
 mkdir ~/phpbench-tests
 cd ~/phpbench-tests
 ```
-### Create a Benchmark Script
+## Create a benchmark script
 
 Create a new PHP benchmark file using your preferred editor:
 
@@ -163,7 +165,7 @@ This sets up two basic benchmark tests, string concatenation and array push.
 - @Iterations(5): The benchmark runs 5 separate iterations and averages results.
 - `benchStringConcat` and `benchArrayPush`: Sample benchmarks for string and array operations.
 
-### Run the Benchmarks
+## Run the benchmarks
 
 Execute the benchmark suite you created using the `phpbench run` command:
 
@@ -184,7 +186,7 @@ with PHP version 8.0.30, xdebug ❌, opcache ❌
 Subjects: 2, Assertions: 0, Failures: 0, Errors: 0
 ```
 
-### Understanding PHP benchmark metrics and results with PHPBench
+## Understanding PHP benchmark metrics and results with PHPBench
 
 - **benchStringConcat** → Name of the benchmark function; in this case, it measures string concatenation performance.
 - **benchArrayPush** → Name of another benchmark function; here, measuring array push performance.
@@ -200,7 +202,7 @@ Subjects: 2, Assertions: 0, Failures: 0, Errors: 0
   - Lower percentage → more stable and reliable benchmark.
 
 
-### Benchmark summary on Arm64
+## Benchmark summary on Arm64
 
 Results from the benchmark suite executed on a Google Cloud c4a-standard-4 (Arm64) instance with 4 vCPUs and 16 GB memory, running SUSE Linux:
 | Benchmark Function   | Iterations | Mode Execution Time (μs)| Variation (%) | Notes                                    |
@@ -209,7 +211,7 @@ Results from the benchmark suite executed on a Google Cloud c4a-standard-4 (Arm6
 | benchArrayPush       | I4          | 8.487 μs          | ±0.51%    | Measures performance of pushing elements to an array|
 
 
-### Benchmark summary on x86_64
+## Benchmark summary on x86_64
 For comparison, the same PHPBench test suite was executed on a Google Cloud c4-standard-4 (x86_64) instance with 4 vCPUs and 15 GB memory, running SUSE Linux:
 
 | Benchmark Function   | Iterations | Mode Execution Time (μs) | Variation (%) | Notes                                           |
@@ -217,7 +219,7 @@ For comparison, the same PHPBench test suite was executed on a Google Cloud c4-s
 | benchStringConcat   | I4         | 13.493         | ±1.80%        | Measures performance of string concatenation |
 | benchArrayPush      | I4         | 7.395          | ±1.07%         | Measures performance of pushing elements to an array |
 
-### PHP performance benchmarking comparison on Arm64 and x86_64
+## PHP performance benchmarking comparison on Arm64 and x86_64
 
 When comparing benchmark results between Google Cloud Axion C4A (Arm64) and x86-based C4 (x86_64) instances, you will see:
 

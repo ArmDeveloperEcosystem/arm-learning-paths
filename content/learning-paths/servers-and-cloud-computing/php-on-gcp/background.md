@@ -26,4 +26,4 @@ You can embed PHP directly into HTML, making it easy to generate content dynamic
 
 PHP is widely used for websites, web applications, content management systems (CMS), and APIs. For more information, see the [PHP website](https://www.php.net/) and the [PHP documentation](https://www.php.net/docs.php).
 
-You’re ready to begin deploying PHP workloads on Arm-based Google Cloud Axion C4A VMs. This Learning Path helps you optimize PHP for Arm servers, benchmark performance, and migrate from x86 to Arm with confidence.
+You’re now ready to begin deploying PHP workloads on Arm-based Google Cloud Axion C4A VMs. This Learning Path helps you optimize PHP for Arm servers, benchmark performance, and migrate from x86 to Arm with confidence.

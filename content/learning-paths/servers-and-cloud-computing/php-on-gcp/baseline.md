@@ -7,16 +7,16 @@ layout: learningpathall
 ---
 
 
-## Baseline Setup for PHP-FPM
-In this section, you’ll configure PHP-FPM (FastCGI Process Manager) on a SUSE Linux Arm-based Google Cloud Axion C4A virtual machine. You’ll set up the PHP-FPM pool, verify FastCGI configuration, connect PHP-FPM to Apache, and confirm that your Arm server is ready for dynamic PHP workloads.
+## Baseline setup for PHP-FPM
+In this section, you’ll configure PHP-FPM (FastCGI Process Manager) on a SUSE Linux Arm-based Google Cloud Axion C4A virtual machine. You’ll set up the PHP-FPM pool and verify the FastCGI configuration. Next, you’ll connect PHP-FPM to Apache. These steps confirm that your Arm server is ready for dynamic PHP workloads.
 
-### Configure the PHP-FPM Pool
+## Configure the PHP-FPM pool
 
 PHP-FPM (FastCGI Process Manager) runs PHP scripts in dedicated worker processes, independent of the web server. This design improves performance, security, and fault isolation—especially on multi-core Arm-based processors like Google Cloud Axion C4A VMs.
 
 A pool is a group of PHP worker processes that serve FastCGI requests. You can use separate pools for different applications or virtual hosts to control resources more effectively.
 
-### Copy the Default Configuration (if missing)
+## Copy the default configuration (if missing)
 
 If your PHP-FPM configuration files don't exist yet (for example, after a minimal installation in this Learning Path), copy the defaults into place using the commands below:
 
@@ -25,10 +25,10 @@ sudo cp /etc/php8/fpm/php-fpm.d/www.conf.default /etc/php8/fpm/php-fpm.d/www.con
 sudo cp /etc/php8/fpm/php-fpm.conf.default /etc/php8/fpm/php-fpm.conf
 ```
 These commands:
-- Create a default pool configuration (`www.conf`) to control how PHP-FPM spawns and manages worker processes.
-- Restore the main FPM service configuration (`php-fpm.conf`) if it’s missing.
+- Create a default pool configuration (`www.conf`) to control how PHP-FPM spawns and manages worker processes
+- Restore the main FPM service configuration (`php-fpm.conf`) if it’s missing
 
-### Edit the Configuration
+## Edit the configuration
 
 Open the PHP-FPM pool configuration file in a text editor:
 
@@ -59,7 +59,7 @@ Explanation of each directive:
 | listen.mode = 0660                                | Defines file permissions so that both the owner (`wwwrun`) and group (`www`) can read and write to the socket. This enables smooth communication between Apache and PHP-FPM.  |
 
 
-### Start and Enable PHP-FPM
+## Start and enable PHP-FPM
 
 After updating the configuration, restart the PHP-FPM service so it picks up the new settings:
 
@@ -109,7 +109,7 @@ Next, you’ll test PHP execution by creating a simple PHP page and verifying th
 ## Test PHP
 Now that PHP and Apache are installed, you can verify that everything is working correctly on your Arm-based VM.
 
-### Create a Test Page
+## Create a test page
 Create a simple PHP file that displays detailed information about your PHP installation:
 
 ```console
@@ -117,7 +117,7 @@ echo "<?php phpinfo(); ?>" | sudo tee /srv/www/htdocs/info.php
 ```
 This creates a file named `info.php` inside Apache’s web root directory (`/srv/www/htdocs/`). When you open this file in a browser, it displays the PHP configuration page.
 
-### Test from Inside the VM
+## Test from inside the VM
 You can verify that PHP and Apache are communicating correctly by testing the web server locally using curl:
 
 ```console
@@ -149,7 +149,7 @@ h2 a:link, h2 a:visited{color: inherit; background: inherit;}
 ```
 This long HTML output represents the PHP configuration page content.
 
-### Test from Your Browser
+## Test from your browser
 Now, verify that your PHP setup works correctly from outside the VM.
 Open a web browser on your local machine (such as Chrome, Firefox, or Edge) and enter the following URL in the address bar:
 
