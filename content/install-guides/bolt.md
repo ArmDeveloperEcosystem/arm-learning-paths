@@ -30,8 +30,7 @@ BOLT is an open-source post-link binary optimization tool developed to speed up 
 This article provides quick instructions to download and install BOLT. The instructions are for Debian-based Linux distributions, but can be adapted for other Linux distributions.
 
 {{% notice Note %}}
-The [Arm Toolchain for Linux](https://developer.arm.com/documentation/110477)
-provides a ready to use BOLT as an integral part of the suite. For more
+BOLT is provided as a built-in, ready-to-use component of the [Arm Toolchain for Linux](https://developer.arm.com/documentation/110477) suite. For more
 information refer to [this guide](https://developer.arm.com/documentation/110477/211/How-to-use-BOLT-with-our-toolchain).
 {{% /notice %}}
 
