@@ -83,6 +83,7 @@ jobs:
             const maintId = statusField?.options?.find(o => o.name === STATUS_MAINT)?.id || null;
 
             const lrdId = findDateFieldId(LRD_FIELD_NAME);
+            const publishedUrlFieldId = findTextFieldId(PUBLISHED_URL_FIELD_NAME);
 
             if (!statusFieldId || !doneId || !maintId || !lrdId) {
               throw new Error('Missing required project fields/options: Status/Done/Maintenance or Last Reviewed Date.');
