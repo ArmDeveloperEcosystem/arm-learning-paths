@@ -11,54 +11,50 @@ System resource usage provides an approach to understand the performance of an a
 
 The example application you will use is FFmpeg, a tool set that performs video encode and decode tasks. You will run the same tests with both the x86_64 binary (using Windows instruction emulation) and the Arm64 native binary on a Windows on Arm computer.
 
-## Application
-Binary builds of FFmpeg are available, so you don't need to build them from source. 
+## Download the packages
 
-To get started: 
+You don't need to build FFmpeg from scratch—just grab the ready-made binaries and get started.
 
-1. Download the [FFmpeg x86_64 package](https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2025-07-31-14-15/ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1.zip).
+- First, download the [FFmpeg x86_64 package](https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2025-07-31-14-15/ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1.zip).
+- Next, download the [FFmpeg Arm64 native package](https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2025-07-31-14-15/ffmpeg-n7.1.1-56-gc2184b65d2-winarm64-gpl-7.1.zip).
 
-2. Download the [FFmpeg Arm64 native package](https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2025-07-31-14-15/ffmpeg-n7.1.1-56-gc2184b65d2-winarm64-gpl-7.1.zip).
+## Unzip the downloaded packages
 
-3. Unzip the downloaded packages. 
-
-You can find the binaries in the `bin` folder. 
+Once you've downloaded both packages, unzip them. You'll find the binaries in the `bin` folder inside each package. The x86_64 version is for emulation, while the Arm64 version runs natively on your Windows on Arm device. Double-check the folder names so you don't mix them up.
 
 {{% notice Note %}}
-Make note of the paths to both versions of `ffmpeg.exe` and `ffplay.exe`, so you can run each one and compare the results. 
+It's a good idea to create a separate folder for each version. Make a note of where you put both `ffmpeg.exe` and `ffplay.exe` for each version—you'll need these paths soon to run your tests and compare results.
 {{% /notice %}}
 
-## Video source
-Download the test video [RaceNight](https://ultravideo.fi/video/RaceNight_3840x2160_50fps_420_8bit_YUV_RAW.7z) from a public dataset. 
+Now you're set up with both versions of FFmpeg. Next, you'll use these binaries to encode a video and see how each one performs.
 
-Unzip the package and note the path to the uncompressed `.yuv` file.
+## Download the video source
 
-## Video encoding
-The downloaded video file is in YUV raw format, which means playback of the video file involves no decoding effort. You need to encode the raw video with compression algorithms to add computation pressure during playback.
+For this test, you'll use a sample video called RaceNight. Download it from [this public dataset](https://ultravideo.fi/video/RaceNight_3840x2160_50fps_420_8bit_YUV_RAW.7z).
 
-Use `ffmpeg.exe` to compress the YUV raw video with the x265 encoder and convert the file format to `.mp4`. 
+Unzip the package and make a note of the path to the `.yuv` file inside.
 
-Assuming you downloaded the files and extracted them in the current directory, open a terminal and run the following command:
+## Encode the video
+
+The video you just downloaded is in YUV raw format, which means it's uncompressed and doesn't need decoding to play. To really test your system, you'll use FFmpeg to compress the video with the x265 encoder and convert it to an `.mp4` file.
+
+Assuming everything is in your current directory, open a terminal and run this command:
 
 ```console
-ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1\ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1\bin\ffmpeg.exe -f rawvideo -pix_fmt yuv420p -s 3840x2160 -r 50 -i  RaceNight_3840x2160_50fps_420_8bit_YUV_RAW\RaceNight_3840x2160_50fps_8bit.yuv -vf scale=1920:1080 -c:v libx265 -preset medium -crf 20 RaceNight_1080p.mp4 -benchmark -stats -report
+ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1\ffmpeg-n7.1.1-56-gc2184b65d2-win64-gpl-7.1\bin\ffmpeg.exe -f rawvideo -pix_fmt yuv420p -s 3840x2160 -r 50 -i RaceNight_3840x2160_50fps_420_8bit_YUV_RAW\RaceNight_3840x2160_50fps_8bit.yuv -vf scale=1920:1080 -c:v libx265 -preset medium -crf 20 RaceNight_1080p.mp4 -benchmark -stats -report
 ```
 
 {{% notice Note %}}
-Modify the paths to `ffmpeg.exe` and the YUV raw video file to match your locations.
+Make sure to update the paths to `ffmpeg.exe` and the YUV video file to match where you saved them.
 {{% /notice %}}
 
-The command transforms the video size and compresses the video into an MP4 file using H.265 encoding (via the x265 encoder). 
+This command resizes the video and compresses it into an MP4 file using H.265 encoding (via the x265 encoder). The `-benchmark` option shows performance stats while the encoding runs. When it's done, you'll have a new file called `RaceNight_1080p.mp4`.
 
-The `benchmark` option is turned on to show performance data at the same time. 
+Try running the command with both the x86_64 and Arm64 versions of FFmpeg. Then, compare the results to see which one is faster.
 
-The generated file will be at RaceNight_1080p.mp4.
+## View the results
 
-Run the command with both the x86_64 and the Arm64 versions of FFmpeg and compare the output.
-
-### View results
-
-The output below is from the x86_64 version of `ffmpeg.exe`:
+Here's what the output looks like for the x86_64 version of `ffmpeg.exe`:
 
 ```output
 x265 [info]: tools: rd=3 psy-rd=2.00 early-skip rskip mode=1 signhide tmvp
@@ -83,7 +79,7 @@ x265 [info]: Weighted P-Frames: Y:0.0% UV:0.0%
 encoded 600 frames in 71.51s (8.39 fps), 9075.96 kb/s, Avg QP:27.27
 ```
 
-The output below is from the Arm64 native compiled `ffmpeg.exe`:
+And here's the output from the Arm64 native version:
 
 ```output
 x265 [info]: tools: rd=3 psy-rd=2.00 early-skip rskip mode=1 signhide tmvp
@@ -108,6 +104,8 @@ x265 [info]: Weighted P-Frames: Y:0.0% UV:0.0%
 encoded 600 frames in 26.20s (22.90 fps), 9110.78 kb/s, Avg QP:27.23
 ```
 
-The last line of each output shows the run time and the frames per second for each build of FFmpeg. 
+Check out the last line in each output—the run time and frames per second show how each build performed. The Arm64 version is much faster, thanks to running natively on your hardware.
 
-Continue to learn how to track resource usage and compare each version.
+## Review your progress and compare performance
+
+You've successfully set up both x86_64 and Arm64 versions of FFmpeg, downloaded a sample video, and encoded it using each binary on your Windows on Arm device. By comparing the output, you've seen firsthand how native Arm64 performance outpaces emulated x86_64. This gives you a solid foundation for deeper resource usage analysis in the next section.
