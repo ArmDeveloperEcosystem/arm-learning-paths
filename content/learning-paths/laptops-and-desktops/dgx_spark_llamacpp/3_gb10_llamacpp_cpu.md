@@ -20,7 +20,6 @@ cd ~/llama.cpp
 mkdir -p build-cpu
 cd build-cpu
 
-cmake --fresh .
 cmake .. \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_SYSTEM_PROCESSOR=aarch64 \
