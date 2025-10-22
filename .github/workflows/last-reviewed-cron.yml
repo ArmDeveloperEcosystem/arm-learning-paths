@@ -197,7 +197,6 @@ jobs:
               
               const prNumber = item.content.number;
               const repoName = item.content.repository.name;
-              const shortRef = `${repoName}#${prNumber}`;
 
               let lastTwoSegments = pickLastTwoSegments(item.content.bodyText) || pickLastTwoSegments(item.content.url) || '(no-path)';
 
@@ -205,7 +204,7 @@ jobs:
               if (status === STATUS_DONE && toDate(lrd) <= toDate(sixMonthsAgoISO)) {
                 await setStatus(itemId, statusFieldId, maintId);
                 movedDoneToMaint++;
-                const line = `[Cron] Moved ${shortRef} → Maintenance (LRD ${lrd} ≤ ${sixMonthsAgoISO}) | ${lastTwoSegments}`;
+                const line = `[Cron] Moved ${lastTwoSegments} → Maintenance (LRD ${lrd} ≤ ${sixMonthsAgoISO}) | ${lastTwoSegments}`;
                 console.log(line);
                 moveLog.push(line);
                 continue; // skip second rule for same item
