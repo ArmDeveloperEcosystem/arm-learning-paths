@@ -143,14 +143,21 @@ jobs:
                             id
                             content{
                               __typename
-                              ... on PullRequest { number repository{ name } }
+                              ... on PullRequest {
+                                number
+                                repository { name }
+                              }
                             }
-                            fieldValues(first:50){
+                            fieldValues(first:100){
                               nodes{
                                 __typename
                                 ... on ProjectV2ItemFieldDateValue {
                                   field { ... on ProjectV2Field { id name } }
                                   date
+                                }
+                                ... on ProjectV2ItemFieldTextValue {
+                                  field { ... on ProjectV2Field { id name } }
+                                  text
                                 }
                                 ... on ProjectV2ItemFieldSingleSelectValue {
                                   field { ... on ProjectV2SingleSelectField { id name } }
@@ -160,13 +167,17 @@ jobs:
                               }
                             }
                           }
-                          pageInfo{ hasNextPage endCursor }
+                          pageInfo {
+                            hasNextPage
+                            endCursor
+                          }
                         }
                       }
                     }
                   }`,
                   { org: orgLogin, num: projectNumber, after: cursor }
                 );
+            
                 const page = r.organization.projectV2.items;
                 for (const n of page.nodes) yield n;
                 if (!page.pageInfo.hasNextPage) break;
@@ -209,7 +220,7 @@ jobs:
               if (status === STATUS_DONE && toDate(lrd) <= toDate(sixMonthsAgoISO)) {
                 await setStatus(itemId, statusFieldId, maintId);
                 movedDoneToMaint++;
-                const line = `[Cron] Moved ${lastTwoSegments} → Maintenance (LRD ${lrd} ≤ ${sixMonthsAgoISO}) | ${lastTwoSegments}`;
+                const line = `[Cron] Moved ${lastTwoSegments} → Maintenance (LRD ${lrd} ≤ ${sixMonthsAgoISO})`;
                 console.log(line);
                 moveLog.push(line);
                 continue; // skip second rule for same item
@@ -219,7 +230,7 @@ jobs:
               if (status === STATUS_MAINT && toDate(lrd) > toDate(sixMonthsAgoISO)) {
                 await setStatus(itemId, statusFieldId, doneId);
                 movedMaintToDone++;
-                const line = `[Cron] Moved ${lastTwoSegments} → Done (LRD ${lrd} > ${sixMonthsAgoISO}) | ${lastTwoSegments}`;
+                const line = `[Cron] Moved ${lastTwoSegments} → Done (LRD ${lrd} > ${sixMonthsAgoISO})`;
                 console.log(line);
                 moveLog.push(line);
               }
