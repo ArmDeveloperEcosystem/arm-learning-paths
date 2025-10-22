@@ -77,6 +77,13 @@ jobs:
             const findDateFieldId = (name) =>
               fields.find(f => f.__typename === 'ProjectV2Field' && f.name === name && f.dataType === 'DATE')?.id || null;
 
+            const findTextFieldId = (name) => {
+              const exact = fields.find(f => f.__typename === 'ProjectV2Field' && f.name === name && f.dataType === 'TEXT');
+              if (exact) return exact.id;
+              const ci = fields.find(f => f.__typename === 'ProjectV2Field' && (f.name?.toLowerCase?.() === name.toLowerCase()) && f.dataType === 'TEXT');
+              return ci?.id || null;
+            };
+            
             const statusField = fields.find(f => f.__typename === 'ProjectV2SingleSelectField' && f.name === STATUS_FIELD_NAME);
             const statusFieldId = statusField?.id || null;
             const doneId  = statusField?.options?.find(o => o.name === STATUS_DONE)?.id || null;
