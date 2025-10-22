@@ -160,6 +160,27 @@ jobs:
               }
             }
 
+            const pickLastTwoSegments = (textOrUrl) => {
+              if (!textOrUrl) return '';
+              try {
+                const urlObj = new URL(textOrUrl);
+                const segs = urlObj.pathname.split('/').filter(Boolean);
+                if (segs.length >= 2) return `${segs[segs.length - 2]}/${segs[segs.length - 1]}/`;
+                if (segs.length === 1) return `${segs[0]}/`;
+                return '';
+              } catch {
+                const m = (textOrUrl.match(/https?:\/\/[^\s)'"<>]+/i) || [])[0];
+                if (!m) return '';
+                try {
+                  const u = new URL(m);
+                  const segs = u.pathname.split('/').filter(Boolean);
+                  if (segs.length >= 2) return `${segs[segs.length - 2]}/${segs[segs.length - 1]}/`;
+                  if (segs.length === 1) return `${segs[0]}/`;
+                  return '';
+                } catch { return ''; }
+              }
+            };
+
             // Movement counters & log
             let movedDoneToMaint = 0;
             let movedMaintToDone = 0;
@@ -173,12 +194,18 @@ jobs:
               const status = getStatusName(item);
               const lrd = getDate(item, lrdId);
               if (!status || !lrd) continue; // only move when LRD exists
+              
+              const prNumber = item.content.number;
+              const repoName = item.content.repository.name;
+              const shortRef = `${repoName}#${prNumber}`;
+
+              let lastTwoSegments = pickLastTwoSegments(item.content.bodyText) || pickLastTwoSegments(item.content.url) || '(no-path)';
 
               // Done -> Maintenance: LRD older/equal than 6 months ago
               if (status === STATUS_DONE && toDate(lrd) <= toDate(sixMonthsAgoISO)) {
                 await setStatus(itemId, statusFieldId, maintId);
                 movedDoneToMaint++;
-                const line = `[Cron] Move Done → Maintenance (LRD ${lrd} ≤ ${sixMonthsAgoISO})`;
+                const line = `[Cron] Moved ${shortRef} → Maintenance (LRD ${lrd} ≤ ${sixMonthsAgoISO}) | ${lastTwoSegments}`;
                 console.log(line);
                 moveLog.push(line);
                 continue; // skip second rule for same item
@@ -188,7 +215,7 @@ jobs:
               if (status === STATUS_MAINT && toDate(lrd) > toDate(sixMonthsAgoISO)) {
                 await setStatus(itemId, statusFieldId, doneId);
                 movedMaintToDone++;
-                const line = `[Cron] Move Maintenance → Done (LRD ${lrd} > ${sixMonthsAgoISO})`;
+                const line = `[Cron] Moved ${shortRef} → Done (LRD ${lrd} > ${sixMonthsAgoISO}) | ${lastTwoSegments}`;
                 console.log(line);
                 moveLog.push(line);
               }
