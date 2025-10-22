@@ -34,6 +34,7 @@ jobs:
             const STATUS_DONE = 'Done';
             const STATUS_MAINT = 'Maintenance';
             const LRD_FIELD_NAME = 'Last Reviewed Date';
+            const PUBLISHED_URL_FIELD_NAME = 'Published URL';
             // ----------------------------------
 
             // Dates
