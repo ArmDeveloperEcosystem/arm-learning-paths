@@ -6,11 +6,12 @@ weight: 3
 layout: learningpathall
 ---
 
-## Sample video decoding resource usage
+## Analyze resource usage during sample video decoding
 
-To monitor resource usage during video decoding, use the following PowerShell script. This script starts the decoding process, periodically records CPU and memory statistics, and saves the results to a CSV file for analysis.
 
-Open your code editor, copy the content below, and save it as `sample_decoding.ps1`.
+To monitor resource usage during video decoding, use the following PowerShell script. This script starts the decoding process, periodically records CPU and memory statistics, and then saves the results to a CSV file for analysis.
+
+Open your code editor, copy the content below, and save it as `sample_decoding.ps1`:
 
 ```PowerShell { line_numbers = true }
 param (
@@ -114,24 +115,23 @@ Run the script:
 Set-ExecutionPolicy -Scope Process RemoteSigned
 .\sample_decoding.ps1
 ```
-
-A video starts playing and completes in 3 minutes. When finished, you can find the results file `usage_log.csv` in the current directory.
+When you run the script, the video plays for about three minutes. After playback finishes, you'll find the results file named `usage_log.csv` in your current directory. Open this file with a spreadsheet application to review and analyze the recorded resource usage data.
 
 {{% notice Note %}}
-Script execution may be blocked due to security policy configuration. The `Set-ExecutionPolicy` command allows local scripts to run during this session.
+Script execution might be blocked due to security policy configuration. The `Set-ExecutionPolicy` command allows local scripts to run during this session.
 {{% /notice %}}
 
-### Script explanation
+## Understand what the script does
 
 The `param` section defines variables including the binary path, video playback arguments, sampling interval, and result file path. You can modify these values as needed.
 
-Lines 15-26 check and modify the binary file attributes. The binaries in use are downloaded from the web and may be blocked from running due to lack of digital signature. These lines unlock the binaries.
+Lines 15–26 check whether the binary file is blocked by Windows security settings. When you download executables from the web, Windows may prevent them from running if they lack a digital signature. This section attempts to unlock the binary using the `Unblock-File` command, allowing the script to run the application without security restrictions.
 
 Line 41 retrieves all child processes of the main process. The statistical data includes resources used by all processes spawned by the main process.
 
 The `while` section collects CPU and memory usage periodically until the application exits. The CPU usage represents accumulated time that the process runs on the CPU. The memory usage shows the size of memory occupation with or without shared spaces accounted for.
 
-### View results
+### View the results
 
 The output below shows the results from running the x86_64 version of `ffplay.exe`:
 
@@ -150,5 +150,4 @@ Timestamp,CPU Sum (s),Memory Sum (MB),Memory Private Sum (MB),CPU0 (s),Memory0 (
 ......
 2025-08-18T10:39:01.7856168+08:00,329.109375,352.53,339.96,329.09375,340.23046875,338.20703125,0.015625,12.30078125,1.75390625
 ```
-
-The sample result file uses CSV (comma-separated values) format. You can open it with spreadsheet applications like Microsoft Excel for better visualization and create charts for data analysis.
+The sample result file is in CSV (comma-separated values) format. Open it with a spreadsheet application such as Microsoft Excel to view the data in a table. You can use built-in chart tools to visualize CPU and memory usage over time, making it easier to spot trends and compare performance between Arm64 and x86_64 versions.

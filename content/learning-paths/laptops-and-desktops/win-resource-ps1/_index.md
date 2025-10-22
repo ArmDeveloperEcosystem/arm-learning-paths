@@ -31,7 +31,7 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: Recording for Resource-based Analysis
+        title: Recording for resource-based analysis
         link: https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-8.1-and-8/hh448202(v=win.10)
         type: documentation
     - resource:
