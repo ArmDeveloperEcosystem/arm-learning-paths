@@ -1,0 +1,125 @@
+name: Last Reviewed Date Backfill (One Time)
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Log actions only (no writes)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  pull-requests: read
+  repository-projects: write
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Backfill Last Reviewed Date
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.PROJECT_TOKEN }}
+          script: |
+            const dryRun = core.getInput('dry_run') === 'true';
+
+            const orgLogin = 'ArmDeveloperEcosystem';
+            const projectNumber = 4;
+
+            const ISO_CUTOFF = '2024-12-31';
+            const toDate = (iso) => new Date(iso + 'T00:00:00.000Z');
+
+            // 1) project
+            const proj = await github.graphql(
+              `query($org:String!,$num:Int!){ organization(login:$org){ projectV2(number:$num){ id } } }`,
+              { org: orgLogin, num: projectNumber }
+            );
+            const projectId = proj.organization?.projectV2?.id;
+            if (!projectId) throw new Error('Project not found');
+
+            // 2) fields
+            const fields = (await github.graphql(
+              `query($id:ID!){ node(id:$id){ ... on ProjectV2 {
+                fields(first:50){ nodes{
+                  __typename
+                  ... on ProjectV2Field{ id name dataType }
+                  ... on ProjectV2SingleSelectField{ id name options{ id name } }
+                } } } } }`, { id: projectId }
+            )).node.fields.nodes;
+
+            const dateFieldId = (n)=>fields.find(f=>f.__typename==='ProjectV2Field'&&f.name===n&&f.dataType==='DATE')?.id||null;
+            const statusField = fields.find(f=>f.__typename==='ProjectV2SingleSelectField' && f.name==='Status');
+            const statusFieldId = statusField?.id;
+            const publishId = dateFieldId('Publish Date');
+            const lrdId = dateFieldId('Last Reviewed Date');
+
+            if (!statusFieldId || !lrdId) throw new Error('Missing Status or Last Reviewed Date field');
+
+            // writers
+            const setDate = async (itemId, fieldId, iso) => {
+              if (dryRun) return console.log(`[DRY RUN] setDate item=${itemId} -> ${iso}`);
+              const m = `mutation($p:ID!,$i:ID!,$f:ID!,$d:String!){
+                updateProjectV2ItemFieldValue(input:{projectId:$p,itemId:$i,fieldId:$f,value:{date:$d}}){
+                  projectV2Item{ id }
+                }}`;
+              await github.graphql(m, { p: projectId, i: itemId, f: fieldId, d: iso });
+            };
+
+            // helpers
+            const getDate = (item,id)=>item.fieldValues.nodes.find(n=>n.__typename==='ProjectV2ItemFieldDateValue'&&n.field?.id===id)?.date||null;
+            const getStatus = (item)=>{ const n=item.fieldValues.nodes.find(n=>n.__typename==='ProjectV2ItemFieldSingleSelectValue'&&n.field?.id===statusFieldId); return n?.name||null; };
+
+            // iterate
+            async function* items(){ let cursor=null; for(;;){
+              const r=await github.graphql(
+                `query($org:String!,$num:Int!,$after:String){
+                  organization(login:$org){ projectV2(number:$num){
+                    items(first:100, after:$after){
+                      nodes{
+                        id
+                        content{ __typename ... on PullRequest{ number repository{ name } } }
+                        fieldValues(first:50){ nodes{
+                          __typename
+                          ... on ProjectV2ItemFieldDateValue{ field{ ... on ProjectV2Field{ id name } } date }
+                          ... on ProjectV2ItemFieldSingleSelectValue{ field{ ... on ProjectV2SingleSelectField{ id name } } name optionId }
+                        } }
+                      }
+                      pageInfo{ hasNextPage endCursor }
+                    }
+                  } } }`,
+                { org: orgLogin, num: projectNumber, after: cursor }
+              );
+              const page=r.organization.projectV2.items;
+              for(const n of page.nodes) yield n;
+              if(!page.pageInfo.hasNextPage) break;
+              cursor=page.pageInfo.endCursor;
+            } }
+
+            let updates=0;
+            for await (const item of items()){
+              if (item.content?.__typename !== 'PullRequest') continue;
+
+              const status = getStatus(item);
+              if (status !== 'Done' && status !== 'Maintenance') continue;
+
+              const lrd = getDate(item, lrdId);
+              if (lrd) continue; // already has a value
+
+              if (status === 'Done') {
+                const publish = publishId ? getDate(item, publishId) : null;
+                if (publish) {
+                  await setDate(item.id, lrdId, publish);
+                  updates++; console.log(`[Backfill][Done] Set LRD=${publish}`);
+                } else {
+                  console.log(`[Skip][Done] No Publish Date; not setting LRD`);
+                }
+              }
+
+              if (status === 'Maintenance') {
+                await setDate(item.id, lrdId, ISO_CUTOFF);
+                updates++; console.log(`[Backfill][Maintenance] Set LRD=${ISO_CUTOFF}`);
+              }
+            }
+
+            console.log(`Backfill complete. Items updated: ${updates}. Dry run: ${dryRun}`);
