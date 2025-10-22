@@ -107,7 +107,7 @@ jobs:
                 return;
               }
               const m = `
-                mutation($p:ID!,$i:ID!,$f:ID!,$o:Date!){
+                mutation($p:ID!,$i:ID!,$f:ID!,$o:String!){
                   updateProjectV2ItemFieldValue(input:{
                     projectId:$p, itemId:$i, fieldId:$f, value:{ singleSelectOptionId:$o }
                   }){
