@@ -198,7 +198,8 @@ jobs:
               const prNumber = item.content.number;
               const repoName = item.content.repository.name;
 
-              let lastTwoSegments = pickLastTwoSegments(item.content.bodyText) || pickLastTwoSegments(item.content.url) || '(no-path)';
+              const publishedUrl = publishedUrlFieldId ? getText(item, publishedUrlFieldId) : null;
+              const lastTwoSegments = lastTwoFromUrl(publishedUrl) || '(no-published-url)';
 
               // Done -> Maintenance: LRD older/equal than 6 months ago
               if (status === STATUS_DONE && toDate(lrd) <= toDate(sixMonthsAgoISO)) {
