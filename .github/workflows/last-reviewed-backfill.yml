@@ -59,7 +59,7 @@ jobs:
             // writers
             const setDate = async (itemId, fieldId, iso) => {
               if (dryRun) return console.log(`[DRY RUN] setDate item=${itemId} -> ${iso}`);
-              const m = `mutation($p:ID!,$i:ID!,$f:ID!,$d:String!){
+              const m = `mutation($p:ID!,$i:ID!,$f:ID!,$d:Date!){
                 updateProjectV2ItemFieldValue(input:{projectId:$p,itemId:$i,fieldId:$f,value:{date:$d}}){
                   projectV2Item{ id }
                 }}`;
