@@ -214,7 +214,7 @@ jobs:
               if (status === STATUS_MAINT && toDate(lrd) > toDate(sixMonthsAgoISO)) {
                 await setStatus(itemId, statusFieldId, doneId);
                 movedMaintToDone++;
-                const line = `[Cron] Moved ${shortRef} → Done (LRD ${lrd} > ${sixMonthsAgoISO}) | ${lastTwoSegments}`;
+                const line = `[Cron] Moved ${lastTwoSegments} → Done (LRD ${lrd} > ${sixMonthsAgoISO}) | ${lastTwoSegments}`;
                 console.log(line);
                 moveLog.push(line);
               }
