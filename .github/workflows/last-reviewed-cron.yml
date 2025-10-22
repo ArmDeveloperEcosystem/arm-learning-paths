@@ -103,6 +103,11 @@ jobs:
                 n.__typename === 'ProjectV2ItemFieldDateValue' && n.field?.id === fieldId
               )?.date || null;
 
+            const getText = (item, fieldId) =>
+              item.fieldValues.nodes.find(n =>
+                n.__typename === 'ProjectV2ItemFieldTextValue' && n.field?.id === fieldId
+              )?.text || null;
+              
             const getStatusName = (item) => {
               const n = item.fieldValues.nodes.find(n =>
                 n.__typename === 'ProjectV2ItemFieldSingleSelectValue' && n.field?.id === statusFieldId
@@ -169,25 +174,15 @@ jobs:
               }
             }
 
-            const pickLastTwoSegments = (textOrUrl) => {
-              if (!textOrUrl) return '';
+            const lastTwoFromUrl = (url) => {
+              if (!url) return '';
               try {
-                const urlObj = new URL(textOrUrl);
-                const segs = urlObj.pathname.split('/').filter(Boolean);
+                const u = new URL(url);
+                const segs = u.pathname.split('/').filter(Boolean);
                 if (segs.length >= 2) return `${segs[segs.length - 2]}/${segs[segs.length - 1]}/`;
                 if (segs.length === 1) return `${segs[0]}/`;
                 return '';
-              } catch {
-                const m = (textOrUrl.match(/https?:\/\/[^\s)'"<>]+/i) || [])[0];
-                if (!m) return '';
-                try {
-                  const u = new URL(m);
-                  const segs = u.pathname.split('/').filter(Boolean);
-                  if (segs.length >= 2) return `${segs[segs.length - 2]}/${segs[segs.length - 1]}/`;
-                  if (segs.length === 1) return `${segs[0]}/`;
-                  return '';
-                } catch { return ''; }
-              }
+              } catch { return ''; }
             };
 
             // Movement counters & log
