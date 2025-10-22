@@ -1,0 +1,212 @@
+name: Last Reviewed Cron
+
+on:
+  schedule:
+    - cron: "0 9 * * *"  # daily at 09:00 UTC
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Log actions only (no writes)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  pull-requests: read
+  repository-projects: write
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Move items based on Last Reviewed Date
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.PROJECT_TOKEN }}
+          script: |
+            // Inputs
+            const dryRun = core.getInput('dry_run') === 'true';
+
+            // ---- Config (edit if needed) ----
+            const orgLogin = 'ArmDeveloperEcosystem';
+            const projectNumber = 4;
+            const STATUS_FIELD_NAME = 'Status';
+            const STATUS_DONE = 'Done';
+            const STATUS_MAINT = 'Maintenance';
+            const LRD_FIELD_NAME = 'Last Reviewed Date';
+            // ----------------------------------
+
+            // Dates
+            const TODAY = new Date();
+            const sixMonthsAgoISO = (() => {
+              const d = new Date(TODAY);
+              d.setUTCMonth(d.getUTCMonth() - 6);
+              return d.toISOString().split('T')[0];
+            })();
+            const toDate = (iso) => new Date(iso + 'T00:00:00.000Z');
+
+            // Project
+            const proj = await github.graphql(
+              `query($org:String!,$num:Int!){
+                organization(login:$org){
+                  projectV2(number:$num){ id }
+                }
+              }`,
+              { org: orgLogin, num: projectNumber }
+            );
+            const projectId = proj.organization?.projectV2?.id;
+            if (!projectId) throw new Error('Project not found');
+
+            // Fields
+            const fields = (await github.graphql(
+              `query($id:ID!){
+                node(id:$id){
+                  ... on ProjectV2 {
+                    fields(first:50){
+                      nodes{
+                        __typename
+                        ... on ProjectV2Field { id name dataType }
+                        ... on ProjectV2SingleSelectField { id name options { id name } }
+                      }
+                    }
+                  }
+                }
+              }`, { id: projectId }
+            )).node.fields.nodes;
+
+            const findDateFieldId = (name) =>
+              fields.find(f => f.__typename === 'ProjectV2Field' && f.name === name && f.dataType === 'DATE')?.id || null;
+
+            const statusField = fields.find(f => f.__typename === 'ProjectV2SingleSelectField' && f.name === STATUS_FIELD_NAME);
+            const statusFieldId = statusField?.id || null;
+            const doneId  = statusField?.options?.find(o => o.name === STATUS_DONE)?.id || null;
+            const maintId = statusField?.options?.find(o => o.name === STATUS_MAINT)?.id || null;
+
+            const lrdId = findDateFieldId(LRD_FIELD_NAME);
+
+            if (!statusFieldId || !doneId || !maintId || !lrdId) {
+              throw new Error('Missing required project fields/options: Status/Done/Maintenance or Last Reviewed Date.');
+            }
+
+            // Helpers
+            const getDate = (item, fieldId) =>
+              item.fieldValues.nodes.find(n =>
+                n.__typename === 'ProjectV2ItemFieldDateValue' && n.field?.id === fieldId
+              )?.date || null;
+
+            const getStatusName = (item) => {
+              const n = item.fieldValues.nodes.find(n =>
+                n.__typename === 'ProjectV2ItemFieldSingleSelectValue' && n.field?.id === statusFieldId
+              );
+              return n?.name || null;
+            };
+
+            const setStatus = async (itemId, fieldId, optionId) => {
+              if (dryRun) {
+                console.log(`[DRY RUN] setStatus item=${itemId} -> option=${optionId}`);
+                return;
+              }
+              const m = `
+                mutation($p:ID!,$i:ID!,$f:ID!,$o:Date!){
+                  updateProjectV2ItemFieldValue(input:{
+                    projectId:$p, itemId:$i, fieldId:$f, value:{ singleSelectOptionId:$o }
+                  }){
+                    projectV2Item { id }
+                  }
+                }`;
+              await github.graphql(m, { p: projectId, i: itemId, f: fieldId, o: optionId });
+            };
+
+            async function* iterItems() {
+              let cursor = null;
+              for (;;) {
+                const r = await github.graphql(
+                  `query($org:String!,$num:Int!,$after:String){
+                    organization(login:$org){
+                      projectV2(number:$num){
+                        items(first:100, after:$after){
+                          nodes{
+                            id
+                            content{
+                              __typename
+                              ... on PullRequest { number repository{ name } }
+                            }
+                            fieldValues(first:50){
+                              nodes{
+                                __typename
+                                ... on ProjectV2ItemFieldDateValue {
+                                  field { ... on ProjectV2Field { id name } }
+                                  date
+                                }
+                                ... on ProjectV2ItemFieldSingleSelectValue {
+                                  field { ... on ProjectV2SingleSelectField { id name } }
+                                  name
+                                  optionId
+                                }
+                              }
+                            }
+                          }
+                          pageInfo{ hasNextPage endCursor }
+                        }
+                      }
+                    }
+                  }`,
+                  { org: orgLogin, num: projectNumber, after: cursor }
+                );
+                const page = r.organization.projectV2.items;
+                for (const n of page.nodes) yield n;
+                if (!page.pageInfo.hasNextPage) break;
+                cursor = page.pageInfo.endCursor;
+              }
+            }
+
+            // Movement counters & log
+            let movedDoneToMaint = 0;
+            let movedMaintToDone = 0;
+            const moveLog = [];
+
+            // Sweep
+            for await (const item of iterItems()) {
+              if (item.content?.__typename !== 'PullRequest') continue; // PRs only
+
+              const itemId = item.id;
+              const status = getStatusName(item);
+              const lrd = getDate(item, lrdId);
+              if (!status || !lrd) continue; // only move when LRD exists
+
+              // Done -> Maintenance: LRD older/equal than 6 months ago
+              if (status === STATUS_DONE && toDate(lrd) <= toDate(sixMonthsAgoISO)) {
+                await setStatus(itemId, statusFieldId, maintId);
+                movedDoneToMaint++;
+                const line = `[Cron] Move Done → Maintenance (LRD ${lrd} ≤ ${sixMonthsAgoISO})`;
+                console.log(line);
+                moveLog.push(line);
+                continue; // skip second rule for same item
+              }
+
+              // Maintenance -> Done: LRD within last 6 months (strictly newer than threshold)
+              if (status === STATUS_MAINT && toDate(lrd) > toDate(sixMonthsAgoISO)) {
+                await setStatus(itemId, statusFieldId, doneId);
+                movedMaintToDone++;
+                const line = `[Cron] Move Maintenance → Done (LRD ${lrd} > ${sixMonthsAgoISO})`;
+                console.log(line);
+                moveLog.push(line);
+              }
+            }
+
+            // Summary
+            const totalMoves = movedDoneToMaint + movedMaintToDone;
+            console.log(`Cron complete. Moved Done→Maintenance: ${movedDoneToMaint}, Maintenance→Done: ${movedMaintToDone}, Total: ${totalMoves}. Dry run: ${dryRun}`);
+
+            // Nice Job Summary in the Actions UI
+            await core.summary
+              .addHeading('Last Reviewed Cron Summary')
+              .addTable([
+                [{ data: 'Direction', header: true }, { data: 'Count', header: true }],
+                ['Done → Maintenance', String(movedDoneToMaint)],
+                ['Maintenance → Done', String(movedMaintToDone)],
+                ['Total moves', String(totalMoves)],
+              ])
+              .addHeading('Details', 2)
+              .addCodeBlock(moveLog.join('\n') || 'No moves', 'text')
+              .write();
