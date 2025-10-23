@@ -25,6 +25,32 @@ To create a virtual machine based on the C4A instance type:
    - Select `c4a-standard-4` for machine type.
 
    ![Create a Google Axion C4A Arm virtual machine in the Google Cloud Console with c4a-standard-4 selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
-- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. Pick the preferred version for your Operating System. Ensure you select the **Arm image** variant. Click **Select**.
+
+
+- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. Select "Pay As You Go" for the license type. Click **Select**.
 - Under **Networking**, enable **Allow HTTP traffic**.
 - Click **Create** to launch the instance.
+- Once created, you should see a "SSH" option to the right in your list of VM instances.  Click on this to launch a SSH shell into your VM instance:
+
+![Invoke a SSH session via your browser alt-text#center](images/gcp-ssh.png "Invoke a SSH session into your running VM instance")
+
+- A window from your browser should come up and you should now see a shell into your VM instance:
+
+![Terminal Shell in your VM instance alt-text#center](images/gcp-shell.png "Terminal shell in your VM instance")
+
+## Explore your instance
+
+### Run uname
+
+Use the [uname](https://en.wikipedia.org/wiki/Uname) utility to verify that you are using an Arm-based server. For example:
+
+```console
+uname -m
+```
+will identify the host machine as `aarch64`.
+
+## Automating Arm Based Infrastructure Deployment
+
+Cloud infrastructure deployment is typically done via Infrastructure as code (IaC) automation tools. There are Cloud Service Provider specific tools like [Google Cloud Deployment Manager](https://cloud.google.com/deployment-manager/docs/).
+
+There are also Cloud Service Provider agnostic tools like [Terraform](https://www.terraform.io/).There is a [deploying Arm VMs on (GCP) using Terraform learning path](/learning-paths/servers-and-cloud-computing/gcp) that should be reviewed next.
