@@ -6,10 +6,10 @@ weight: 4
 layout: learningpathall
 ---
 
-## Overview
-This section shows you how to install Node.js using Node Version Manager (NVM). NVM lets you choose which Node.js version to use and handles the download and installation for you. You’ll use official Node.js packages, making setup simple and reliable.
-
 ## Install Node Version Manager (NVM)
+To install Node.js on your Arm-based VM, use Node Version Manager (NVM). NVM lets you select and manage different Node.js versions easily. By using official Node.js packages, you'll get a reliable and straightforward setup.
+
+
 First, use this command to download and install NVM into your VM instance:
 
 ```console
