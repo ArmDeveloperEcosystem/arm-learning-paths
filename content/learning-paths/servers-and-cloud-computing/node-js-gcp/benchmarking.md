@@ -10,14 +10,14 @@ layout: learningpathall
 
 After validating that Node.js is installed and your HTTP server is running, you can benchmark it using **Autocannon**.
 
-### Install Autocannon
+## Install Autocannon
 **Autocannon** is a fast HTTP/1.1 benchmarking tool for Node.js, used to measure server throughput, latency, and request handling under concurrent load.
 
 ```console
 npm install -g autocannon
 ```
 
-### Start Your Node.js HTTP Server
+## Start Your Node.js HTTP Server
 
 If your sample HTTP server is not already running from the last section, you can start it by typing:
 ```console
@@ -31,7 +31,7 @@ Server should be listening on port 80 in the background:
 Server running at http://0.0.0.0:80/
 ```
 
-### Run a Basic Benchmark (Local)
+## Run a Basic Benchmark (Local)
 
 ```console
 autocannon -c 100 -d 10 http://localhost:80
@@ -65,7 +65,7 @@ Req/Bytes counts sampled once per second.
 707k requests in 10.02s, 137 MB read
 ```
 
-### Understanding Node.js benchmark metrics and results with Autocannon
+## Understanding Node.js benchmark metrics and results with Autocannon
 
 - **Avg (Average Latency)** → The mean time it took for requests to get a response.
 - **Stdev (Standard Deviation)** → How much individual request times vary around the average. Smaller numbers mean more consistent response times.
@@ -103,7 +103,7 @@ Throughput:
 | Req/Sec    | 45,279 | 45,279 | 54,719  | 55,199  | 53,798.4 | 2,863.96 | 45,257 |
 | Bytes/Sec  | 8.78 MB| 8.78 MB| 10.6 MB | 10.7 MB | 10.4 MB  | 557 kB   | 8.78 MB |
 
-### Node.js performance benchmarking comparison on Arm64 and x86_64
+## Node.js performance benchmarking comparison on Arm64 and x86_64
 When you compare the benchmarking results, you will notice that on the Google Axion C4A Arm-based instances:
 
 - Average latency is very low (~1.2 ms) with consistent response times.  

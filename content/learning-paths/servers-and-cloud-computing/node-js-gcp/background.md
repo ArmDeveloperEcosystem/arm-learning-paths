@@ -16,6 +16,6 @@ For more information on Google Axion, see the Google blog [Introducing Google Ax
 
 ## Node.js
 
-Node.js is an open-source, cross-platform JavaScript runtime environment built on Chrome's V8 engine. It enables you to build scalable server-side applications, APIs, and backend services using JavaScript. Node.js features an event-driven, non-blocking I/O model, making it highly efficient for handling concurrent connections.
+Node.js is an open-source, cross-platform JavaScript runtime environment built on Chrome's V8 engine. It enables you to build scalable server-side applications, APIs, and backend services using JavaScript. Node.js features an event-driven, non-blocking I/O model, making it highly efficient for handling concurrent connections. Node.js is widely used for web servers, real-time applications, microservices, and cloud-native backend services. 
 
-Node.js is widely used for web servers, real-time applications, microservices, and cloud-native backend services. For more information on Node.js, see the [Node.js official website](https://nodejs.org/en) and the [Node.js documentation](https://nodejs.org/docs/latest/api/).
+For more information on Node.js, see the [Node.js website](https://nodejs.org/en) and the [Node.js documentation](https://nodejs.org/docs/latest/api/).
