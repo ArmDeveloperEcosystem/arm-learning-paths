@@ -8,21 +8,24 @@ layout: learningpathall
 
 ## Project Overview
 
-Arm CPUs are widely used in web server workloads on Kubernetes. In this Learning Path, you'll learn how to deploy [nginx](https://nginx.org/) on Arm-based CPUs within a hybrid architecture (amd64 and arm64) K8s cluster.
+Arm CPUs are widely used in web server workloads on Kubernetes (k8s). In this Learning Path, you'll learn how to deploy [nginx](https://nginx.org/) on Arm-based CPUs within a hybrid architecture (x64 and arm64) K8s cluster on Azure's AKS.
 
-First, you'll bring up an initial Kubernetes cluster with an amd64 node running an nginx Deployment and Service.
+Many people begin their journey with Arm on K8s by adding Arm nodes to an existing x64-based cluster.  This tutorial begins the same way.   
 
-Next, you'll expand the cluster by adding an arm64 deployment and service to it, forming a hybrid cluster. This allows you to test both architectures together, and separately, to investigate performance. 
+To begin, login to azure-cli, and bring up the initial AKS cluster:
 
-Once satisfied with arm64 performance, you can remove the amd64-specific node, deployment, and service, which then completes your migration to an arm64-only cluster.
+### Login to Azure via azure-cli 
+If you haven't already, login to your Azure account using the Azure CLI:
 
-Once you've seen how easy it is to add arm64 nodes to an existing cluster, you will be ready to explore arm64 nodes for other workloads in your environment.
- 
-### Create the cluster
+```commandline
+az login
+```
 
-Create the resource group and AKS cluster with all three node pools:
+### Create the cluster and resource
+Once logged in, you can create the resource group and AKS cluster with two node pools: one with Intel-based nodes, and one with Arm-based nodes:
 
-```bash
+
+```commandline
 # Set environment variables
 export RESOURCE_GROUP=nginx-on-arm-rg
 export LOCATION=westus2
@@ -51,41 +54,19 @@ az aks nodepool add \
   --node-count 1 \
   --node-vm-size Standard_D2ps_v6
 
-# Add AMD node pool in zone 2
-az aks nodepool add \
-  --resource-group $RESOURCE_GROUP \
-  --cluster-name $CLUSTER_NAME \
-  --name amd \
-  --zones 2 \
-  --node-count 1 \
-  --node-vm-size Standard_D2as_v6
 ```
 
 ### Connect to the cluster
 
-Ensure you have `kubectl` and `az` (Azure CLI) installed. 
-
-You can verify each command by printing the version.
-
-Verify `az` by running:
-
-```bash
-az version
-```
-
-If `az` is installed the version information is printed. 
-
-Verify `kubectl` by running:
+Verify `kubectl` is available by running:
 
 ```bash
 kubectl version --client
 ```
 
-If `kubectl` is installed the version information is printed. 
+If `kubectl` is installed the version information is printed. If you don't see the version information printed refer to the [Azure CLI](/install-guides/azure-cli) and [kubectl](/install-guides/kubectl/) install guides.
 
-If you don't see the version information printed refer to the [Azure CLI](/install-guides/azure-cli) and [kubectl](/install-guides/kubectl/) install guides.
-
-Now you can set up your newly-created K8s cluster credentials using the Azure CLI:
+Next, set up your newly-created K8s cluster credentials using the Azure CLI:
 
 ```bash
 az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
@@ -105,15 +86,8 @@ Verify your node pools are created correctly:
 kubectl get nodes -o wide
 ```
 
-Verify your node pools are created correctly:
-
-```bash
-kubectl get nodes -o wide
-```
-
-You should see three nodes with different instance types:
+You should see two nodes with different instance types:
 - `aks-intel-*`: Intel (Standard_D2s_v6)
 - `aks-arm-*`: ARM (Standard_D2ps_v6) 
-- `aks-amd-*`: AMD (Standard_D2as_v6)
 
-All nodes should show `Ready` status and be running Ubuntu 22.04.5 LTS.
+All nodes should show `Ready` status.

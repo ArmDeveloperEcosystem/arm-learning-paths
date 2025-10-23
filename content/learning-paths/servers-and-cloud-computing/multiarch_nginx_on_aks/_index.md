@@ -1,14 +1,19 @@
 ---
-title: Add Arm nodes to your AKS cluster using a multi-architecture nginx container image 
+title: Add Arm nodes to your Azure Kubernetes Services cluster using a multi-architecture nginx container image 
 
-minutes_to_complete: 30
+minutes_to_complete: 60
 
-who_is_this_for: This Learning Path is for developers who want to compare the performance of amd64 and arm64 deployments by running nginx on a hybrid AKS cluster using a multi-architecture container image.
+who_is_this_for: This Learning Path is for developers who want to compare the performance of x64 and arm64 deployments by running nginx on a hybrid Azure Kubernetes Service (AKS) cluster using nginx's multi-architecture container image.  
+  
+Once you've seen how easy it is to add arm64 nodes to an existing cluster, you'll be ready to explore arm64-based nodes for other workloads in your environment.
+
 
 learning_objectives:
-  - Create a hybrid AKS cluster with amd64 and arm64 nodes.
-  - Deploy nginx services for amd64 and arm64 architectures using a single multi-architecture container image.
-  - Validate deployments by testing nginx responses to compare architecture performance.
+  - Create a hybrid AKS cluster with x64 and arm64 nodes.
+  - Deploy nginx's multi-architecture container image, pods, and services to the AKS cluster. 
+  - Smoke test nginx from each architecture in the cluster to verify proper installation.
+  - Performance test against each architecture in the cluster to better understand performance.
+  
 
 prerequisites:
     - An [Azure account](https://azure.microsoft.com/en-us/free/).
@@ -48,8 +53,8 @@ further_reading:
       link: https://docs.microsoft.com/en-us/azure/aks/
       type: documentation
   - resource:
-      title: Create an External Load Balancer 
-      link: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/
+      title: Learn how to tune Nginx
+      link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/nginx_tune/
       type: documentation
 
 ### FIXED, DO NOT MODIFY
