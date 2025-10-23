@@ -17,7 +17,7 @@ For support on GCP setup, see the Learning Path [Getting started with Google Clo
 ## Provision a Google Axion C4A Arm VM in Google Cloud Console
 
 To create a virtual machine based on the C4A instance type:
-- Navigate to the [Google Cloud Console](https://console.cloud.google.com/).
+- Navigate to [Google Cloud Console](https://console.cloud.google.com/).
 - Go to **Compute Engine > VM Instances** and select **Create Instance**. 
 - Under **Machine configuration**:
    - Populate fields such as **Instance name**, **Region**, and **Zone**.
@@ -37,3 +37,10 @@ To create a virtual machine based on the C4A instance type:
 - A window from your browser should come up and you should now see a shell into your VM instance:
 
 ![Terminal Shell in your VM instance alt-text#center](images/gcp-shell.png "Terminal shell in your VM instance")
+
+
+## What you've accomplished
+
+You've successfully provisioned a Google Axion C4A Arm virtual machine running SUSE Linux Enterprise Server. You're now ready to install Node.js and deploy your workloads on Arm.
+
+

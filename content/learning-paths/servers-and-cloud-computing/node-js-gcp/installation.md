@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Install Node.js with Node Version Manager (NVM)
-This guide walks you through installing **NodeJS** via the Node Version Manager (NVM).  NVM is a powerful tool that allows users to specify which version of **NodeJS** that they want to use. NVM will then download and install the requested vesion using the **NodeJS** official packages. 
+This Learning Path walks you through installing **NodeJS** via the Node Version Manager (NVM).  NVM is a powerful tool that allows users to specify which version of **NodeJS** that they want to use. NVM will then download and install the requested vesion using the **NodeJS** official packages. 
 
 ### 1. Install Node Version Manager (NVM)
 First, we will run this command to download and install NVM into our VM instance:
