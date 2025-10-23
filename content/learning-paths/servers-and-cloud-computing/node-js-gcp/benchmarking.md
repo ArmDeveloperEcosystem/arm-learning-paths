@@ -20,7 +20,7 @@ npm install -g autocannon
 
 ## Start the Node.js HTTP server
 
-If your sample HTTP server is still running from the last section, you can start it by using this command:
+If your sample HTTP server isn't running from the last section, start it by using this command:
 ```console
 export MY_NODE=`which node`
 sudo ${MY_NODE} app.js &
