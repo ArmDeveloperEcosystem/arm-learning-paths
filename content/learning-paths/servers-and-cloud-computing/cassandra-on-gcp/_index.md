@@ -1,5 +1,9 @@
 ---
-title:  Deploy Cassandra on Google Cloud C4A (Arm-based Axion VMs)
+title:  Deploy Cassandra on a Google Axion C4A virtual machine
+
+draft: true
+cascade:
+    draft: true
 
 minutes_to_complete: 30
 
