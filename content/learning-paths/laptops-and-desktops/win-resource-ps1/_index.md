@@ -1,18 +1,14 @@
 ---
-title: Track resource usage of applications on Windows on Arm
-
-draft: true
-cascade:
-  draft: true
+title: Measure application resource and power usage on Windows on Arm with FFmpeg and PowerShell
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for developers who want to measure resource usage of applications on Windows on Arm devices.
+who_is_this_for: This is an introductory topic for developers who want to measure resource usage of applications on Windows on Arm devices using FFmpeg.
 
 learning_objectives: 
-    - Run video encode and decode tasks by using FFmpeg
-    - Benchmark the video encode task
-    - Sample CPU, memory, and power usage for the video decode task
+    - Measure application resource usage using FFmpeg and PowerShell
+    - Benchmark a video encoding task
+    - Monitor CPU, memory, and power consumption during a video decode task
 
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11
@@ -35,7 +31,7 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: Recording for Resource-based Analysis
+        title: Recording for resource-based analysis
         link: https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-8.1-and-8/hh448202(v=win.10)
         type: documentation
     - resource:
