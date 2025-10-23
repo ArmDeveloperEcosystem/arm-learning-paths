@@ -1,13 +1,9 @@
 ---
 title: Build multi-architecture Docker images with Buildkite on Google Axion
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 40
 
-who_is_this_for: This is an introductory guide for software developers learning to build and run multi-architecture Docker images with Buildkite on Arm-based Google Cloud C4A virtual machines powered by Google Axion processors.
+who_is_this_for: This is an introductory topic for developers learning to build and run multi-architecture Docker images with Buildkite on Arm-based Google Cloud C4A virtual machines powered by Google Axion processors.
 
 learning_objectives:
 - Provision an Arm-based virtual machine on Google Cloud running SUSE Linux Enterprise Server or Ubuntu

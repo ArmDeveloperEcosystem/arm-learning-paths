@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Install Buildkite on a Google Axion C4A Arm VM
-This section guides you through installing the Buildkite agent on a Google Axion C4A Arm VM, enabling it to connect to your Buildkite account and run CI/CD pipelines.
+This section guides you through installing the Buildkite agent on a Google Axion C4A Arm VM, enabling it to connect to your Buildkite account and run the CI/CD pipelines.
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu" language="bash">}}
@@ -20,19 +20,20 @@ sudo zypper install -y curl unzip
   {{< /tab >}}
 {{< /tabpane >}}
 
-### Download and Install Buildkite Agent
+## Download and install Buildkite agent
+
+This one-line command downloads and runs the Buildkite installer:
 
 ```console
 sudo bash -c "$(curl -sL https://raw.githubusercontent.com/buildkite/agent/main/install.sh)" 
 ```
-
-This one-line command downloads and runs the Buildkite installer.  
-
 The installer performs the following steps:
 
-- Download the latest version of the agent, for example `v3.109.1`  
-- Install it into the home directory of the root user at `/root/.buildkite-agent`  
-- Create a default config file (`buildkite-agent.cfg`) where you’ll later add your agent token 
+- Downloads the latest version of the agent, for example `v3.109.1`  
+- Installs the Buildkite agent into the home directory of the root user at `/root/.buildkite-agent`  
+- Creates a default config file (`buildkite-agent.cfg`) where you’ll later add your agent token 
+
+You should see this output:
 
 ```output
  
@@ -67,7 +68,8 @@ Happy building! <3
 ```
 
 ### Verify installation
-This command checks the version of the Buildkite agent and confirms it is installed successfully.
+
+Now verify installation using this command that checks the version of the Buildkite agent and confirms it has installed successfully:
 
 ```console
 sudo /root/.buildkite-agent/bin/buildkite-agent --version
@@ -86,9 +88,7 @@ The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) re
 
 ### Install Docker and Docker Buildx
 
-Buildkite will use Docker to build and push images. 
-
-First, refresh the package repositories and install the required packages including git, Python3-pip, and Docker:
+Buildkite uses Docker to build and push images. First, refresh the package repositories and install the required packages including git, Python3-pip, and Docker:
 
 Next, enable and start the Docker service to ensure it runs automatically when your VM starts:
 
