@@ -1,6 +1,6 @@
 ---
 title: Deploy nginx ARM to the cluster
-weight: 5
+weight: 50
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

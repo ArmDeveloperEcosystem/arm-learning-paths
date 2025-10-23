@@ -1,6 +1,6 @@
 ---
 title: Apply performance configuration and monitoring tools
-weight: 7
+weight: 70
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

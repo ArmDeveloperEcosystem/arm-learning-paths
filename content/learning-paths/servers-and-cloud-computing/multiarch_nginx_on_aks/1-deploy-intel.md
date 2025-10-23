@@ -1,6 +1,6 @@
 ---
 title: Deploy nginx Intel to the cluster
-weight: 3
+weight: 30
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

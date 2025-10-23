@@ -1,6 +1,6 @@
 ---
 title: Deploy nginx multiarch service to the cluster
-weight: 6
+weight: 60
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

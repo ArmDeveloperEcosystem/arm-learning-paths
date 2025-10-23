@@ -1,6 +1,6 @@
 ---
 title: Create the AKS Cluster
-weight: 2
+weight: 10
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

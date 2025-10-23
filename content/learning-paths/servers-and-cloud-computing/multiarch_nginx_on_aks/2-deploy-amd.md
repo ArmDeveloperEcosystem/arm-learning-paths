@@ -1,6 +1,6 @@
 ---
 title: Deploy nginx AMD to the cluster
-weight: 4
+weight: 40
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
