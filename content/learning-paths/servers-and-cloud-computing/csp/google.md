@@ -56,11 +56,11 @@ Install the `gcc` compiler:
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu" language="bash">}}
 sudo apt update
-sudo apt install unzip -y
+sudo apt install gcc -y
   {{< /tab >}}
   {{< tab header="SUSE Linux" language="bash">}}
 sudo zypper refresh
-sudo zypper install -y curl unzip
+sudo zypper install -y gcc
   {{< /tab >}}
 {{< /tabpane >}}
 
