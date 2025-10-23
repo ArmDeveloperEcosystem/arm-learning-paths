@@ -17,15 +17,19 @@ To begin, login to azure-cli, and bring up the initial AKS cluster:
 ### Login to Azure via azure-cli 
 If you haven't already, login to your Azure account using the Azure CLI:
 
-```commandline
+```bash
 az login
 ```
 
 ### Create the cluster and resource
-Once logged in, you can create the resource group and AKS cluster with two node pools: one with Intel-based nodes, and one with Arm-based nodes:
+Once logged in, create the resource group and AKS cluster with two node pools: one with Intel-based nodes (Standard_D2s_v6), and one with Arm-based (Standard_D2ps_v6) nodes.  
 
+{{% notice Note %}}
+This tutorial uses the `westus2` region, which supports both Intel and Arm VM sizes. You can choose a different region if you prefer, but ensure it supports both VMs and AKS.
+{{% /notice %}}
 
-```commandline
+ 
+```bash
 # Set environment variables
 export RESOURCE_GROUP=nginx-on-arm-rg
 export LOCATION=westus2
@@ -72,22 +76,32 @@ Next, set up your newly-created K8s cluster credentials using the Azure CLI:
 az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
 ```
 
-Finally, test the connection to the cluster with this command:
+To verify you're connected to the cluster:
 
 ```bash
 kubectl cluster-info
 ```
 
-If you receive a non-error response, you're successfully connected to the K8s cluster.
+A message similar to the following should be displayed:
 
-Verify your node pools are created correctly:
+```output
+Kubernetes control plane is running at https://nginx-on-a-nginx-on-arm-rg-dd0bfb-eenbox6p.hcp.westus2.azmk8s.io:443
+...
+```
+
+With the cluster running, verify the node pools are ready (and you're ready to continue to the next chapter), with the following command:
 
 ```bash
 kubectl get nodes -o wide
 ```
 
-You should see two nodes with different instance types:
-- `aks-intel-*`: Intel (Standard_D2s_v6)
-- `aks-arm-*`: ARM (Standard_D2ps_v6) 
+You should see output similar to this:
 
-All nodes should show `Ready` status.
+```output
+NAME                            STATUS   ROLES    AGE    VERSION
+aks-arm-13087205-vmss000002     Ready    <none>   6h8m   v1.32.7
+aks-intel-39600573-vmss000002   Ready    <none>   6h8m   v1.32.7
+```
+
+
+With all nodes showing `Ready` status, you're ready to continue to the next chapter.
