@@ -27,7 +27,10 @@ To create a virtual machine based on the C4A instance type:
    ![Create a Google Axion C4A Arm virtual machine in the Google Cloud Console with c4a-standard-4 selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
 
 
-- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. Select "Pay As You Go" for the license type. Click **Select**.
+- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server** or **Ubuntu**. 
+   - If using use **SUSE Linux Enterprise Server**. Select "Pay As You Go" for the license type. 
+   - If using **Ubuntu**, under the **Version** tab, please scroll down and select the aarch64 version of **Ubuntu 22.04 LTS**.
+- Once appropriately selected, please Click **Select**. 
 - Under **Networking**, enable **Allow HTTP traffic**.
 - Click **Create** to launch the instance.
 - Once created, you should see a "SSH" option to the right in your list of VM instances.  Click on this to launch a SSH shell into your VM instance:
@@ -48,6 +51,43 @@ Use the [uname](https://en.wikipedia.org/wiki/Uname) utility to verify that you 
 uname -m
 ```
 will identify the host machine as `aarch64`.
+
+### Run hello world
+
+Install the `gcc` compiler:
+
+{{< tabpane code=true >}}
+  {{< tab header="Ubuntu" language="bash">}}
+sudo apt update
+sudo apt install -y build-essential
+  {{< /tab >}}
+  {{< tab header="SUSE Linux" language="bash">}}
+sudo zypper refresh
+sudo zypper install -y gcc
+  {{< /tab >}}
+{{< /tabpane >}}
+
+Using a text editor of your choice, create a file named `hello.c` with the contents below:
+
+```C
+#include <stdio.h>
+int main(){
+    printf("hello world\n");
+    return 0;
+}
+```
+Build and run the application:
+
+```console
+gcc hello.c -o hello
+./hello
+```
+
+The output is shown below:
+
+```output
+hello world
+```
 
 ## Automating Arm Based Infrastructure Deployment
 

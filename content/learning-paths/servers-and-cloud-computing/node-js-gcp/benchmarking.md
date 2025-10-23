@@ -1,5 +1,5 @@
 ---
-title: Benchmark Node.js performance with Autocannon on Arm and x86_64
+title: Benchmark Node.js performance with Autocannon 
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -81,23 +81,6 @@ Now have a look at the Autocannon benchmark metrics to get a sense of how Node.j
 - The average latency (Avg) shows the mean time it takes for each request to receive a response from the server. 
 - Standard deviation (Stdev) indicates how much the response times vary around the average; lower values mean the server responds more consistently. 
 - The minimum latency (Min) represents the fastest response recorded during the benchmark, highlighting the best-case performance for individual requests.
-
-## Review Node.js benchmark results on x86_64
-
-To compare the benchmark results, the following results were collected by running the same benchmark on a `x86 - c4-standard-4` (4 vCPUs, 15 GB Memory) x86_64 VM in GCP, running SUSE:
-
-### Latency results (ms):
-
-| Metric   | 2.5% | 50% (Median) | 97.5% | 99% | Avg    | Stdev  | Max   |
-|----------|------|--------------|-------|-----|--------|--------|-------|
-| Latency  | 0    | 1            | 2     | 2   | 0.73   | 0.87   | 104   |
-
-### Throughput results:
-
-| Metric     | 1%     | 2.5%   | 50%     | 97.5%   | Avg      | Stdev     | Min     |
-|------------|--------|--------|---------|---------|----------|-----------|---------|
-| Req/Sec    | 70,143 | 70,143 | 84,479  | 93,887  | 84,128   | 7,547.18  | 70,095 |
-| Bytes/Sec  | 13.6 MB| 13.6 MB| 16.4 MB | 18.2 MB | 16.3 MB  | 1.47 MB   | 13.6 MB|
 
 ## Review Node.js benchmark results on Arm64
 
