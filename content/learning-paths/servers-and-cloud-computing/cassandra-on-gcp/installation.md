@@ -6,23 +6,33 @@ weight: 4
 layout: learningpathall
 ---
 
-## Apache Cassandra Installation on SUSE VM
-This guide will help you install **Apache Cassandra** on a SUSE Linux virtual machine. Cassandra is a highly scalable NoSQL database designed for high availability and fault tolerance.
+## Apache Cassandra Installation on Ubuntu or SuSE VM
+This guide will help you install **Apache Cassandra** on a Ubuntu or SuSE Linux virtual machine. Cassandra is a highly scalable NoSQL database designed for high availability and fault tolerance.
 
 ### Update System Packages
 Updating system packages ensures that your system has the latest security patches and dependencies required for Cassandra.
 
-```console
+{{< tabpane code=true >}}
+  {{< tab header="Ubuntu" language="bash">}}
+sudo apt update
+  {{< /tab >}}
+  {{< tab header="SUSE Linux" language="bash">}}
 sudo zypper refresh
 sudo zypper update -y
-```
+  {{< /tab >}}
+{{< /tabpane >}}
 
 ### Install Java
 Cassandra requires a Java runtime environment. You can use either Java 11 or Java 17. This example uses Java 17 for optimal performance and compatibility with Cassandra 5.0.5.
 
-```console
+{{< tabpane code=true >}}
+  {{< tab header="Ubuntu" language="bash">}}
+sudo apt install -y openjdk-17-jdk
+  {{< /tab >}}
+  {{< tab header="SUSE Linux" language="bash">}}
 sudo zypper install -y java-17-openjdk java-17-openjdk-devel
-```
+  {{< /tab >}}
+{{< /tabpane >}}
 
 ### Download Cassandra
 Download the latest stable release of Apache Cassandra 5.0.5 from the official Apache repository.

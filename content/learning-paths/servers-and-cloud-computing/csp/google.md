@@ -27,7 +27,10 @@ To create a virtual machine based on the C4A instance type:
    ![Create a Google Axion C4A Arm virtual machine in the Google Cloud Console with c4a-standard-4 selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
 
 
-- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server** or **Ubuntu**. Click **Select**. 
+- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server** or **Ubuntu**. 
+   - If using use **SUSE Linux Enterprise Server**. Select "Pay As You Go" for the license type. 
+   - If using **Ubuntu**, under the **Version** tab, please scroll down and select the aarch64 version of **Ubuntu 22.04 LTS**.
+- Once appropriately selected, please Click **Select**. 
 - Under **Networking**, enable **Allow HTTP traffic**.
 - Click **Create** to launch the instance.
 - Once created, you should see a "SSH" option to the right in your list of VM instances.  Click on this to launch a SSH shell into your VM instance:
@@ -56,7 +59,7 @@ Install the `gcc` compiler:
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu" language="bash">}}
 sudo apt update
-sudo apt install gcc -y
+sudo apt install -y build-essential
   {{< /tab >}}
   {{< tab header="SUSE Linux" language="bash">}}
 sudo zypper refresh
