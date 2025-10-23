@@ -1,9 +1,7 @@
 ---
-title:  Deploy Node.js on Google Cloud C4A (Arm-based Axion VMs)
+title:  Deploy Node.js on Google Cloud C4A on Arm-based Axion VMs
 
-draft: true
-cascade:
-    draft: true
+
 
 minutes_to_complete: 30
 

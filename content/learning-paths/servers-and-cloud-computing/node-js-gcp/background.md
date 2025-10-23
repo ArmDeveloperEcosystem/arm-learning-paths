@@ -12,12 +12,10 @@ Google Axion C4A is a family of Arm-based virtual machines built on Google’s c
 
 The C4A series provides a cost-effective alternative to x86 virtual machines while leveraging the scalability and performance benefits of the Arm architecture in Google Cloud.
 
-To learn more about Google Axion, refer to the [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu) blog.
+For more information on Google Axion, see the Google blog [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
 
 ## Node.js
 
-Node.js is an open-source, cross-platform JavaScript runtime environment built on Chrome's V8 engine.
+Node.js is an open-source, cross-platform JavaScript runtime environment built on Chrome's V8 engine. It allows developers to build scalable server-side applications, APIs, and backend services using JavaScript. Node.js features an event-driven, non-blocking I/O model, making it highly efficient for handling concurrent connections.
 
-It allows developers to build scalable server-side applications, APIs, and backend services using JavaScript. Node.js features an event-driven, non-blocking I/O model, making it highly efficient for handling concurrent connections.
-
-Node.js is widely used for web servers, real-time applications, microservices, and cloud-native backend services. Learn more from the [Node.js official website](https://nodejs.org/en) and its [official documentation](https://nodejs.org/docs/latest/api/).
+Node.js is widely used for web servers, real-time applications, microservices, and cloud-native backend services. For more information on Node.js, see the [Node.js official website](https://nodejs.org/en) and the [Node.js documentation](https://nodejs.org/docs/latest/api/).
