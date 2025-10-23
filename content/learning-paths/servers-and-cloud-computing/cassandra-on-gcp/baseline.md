@@ -115,3 +115,5 @@ You should see an output similar to:
 ```
 
 This baseline test verifies that Cassandra 5.0.5 is installed and running correctly on the VM. It confirms the node status, allows connection via `cqlsh`, and ensures basic operations like creating a keyspace, table, inserting, and querying data work as expected.
+
+Please now press "Ctrl-D" to exit the Cassandra Query Shell. 

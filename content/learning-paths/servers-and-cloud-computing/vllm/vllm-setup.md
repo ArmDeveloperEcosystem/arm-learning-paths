@@ -8,7 +8,25 @@ layout: learningpathall
 
 ## Before you begin
 
-To follow the instructions for this Learning Path, you will need an Arm server running Ubuntu 24.04 LTS with at least 8 cores, 16GB of RAM, and 50GB of disk storage. The instructions have been tested on an AWS Graviton3 m7g.2xlarge instance.
+To follow the instructions for this Learning Path, you will need an Arm server running Ubuntu 24.04 LTS with at least 8 cores, 16GB of RAM, and 50GB of disk storage. You also need a system which supports BFloat16.
+
+To check if your system includes BFloat16, use the `lscpu` command:
+
+```console
+lscpu | grep bf16
+```
+
+If the `Flags` are printed, you have a processor with BFloat16.
+
+```output
+Flags: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm sb paca pacg dcpodp sve2 sveaes svepmull svebitperm svesha3 flagm2 frint svei8mm svebf16 i8mm bf16 dgh rng bti
+```
+
+If the result is blank, you do not have a processor with BFloat16.
+
+BFloat16 provides improved performance and smaller memory footprint with the same dynamic range. You might experience a drop in model inference accuracy with BFloat16, but the impact is acceptable for the majority of applications.
+
+The instructions have been tested on an AWS Graviton3 `m7g.2xlarge` instance.
 
 ## What is vLLM?
 
@@ -24,13 +42,7 @@ First, ensure your system is up-to-date and install the required tools and libra
 
 ```bash
 sudo apt-get update -y
-sudo apt-get install -y curl ccache git wget vim numactl gcc-12 g++-12 python3 python3-pip python3-venv python-is-python3 libtcmalloc-minimal4 libnuma-dev ffmpeg libsm6 libxext6 libgl1 libssl-dev pkg-config
-```
-
-Set the default GCC to version 12:
-
-```bash
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 10 --slave /usr/bin/g++ g++ /usr/bin/g++-12
+sudo apt-get install -y curl ccache git wget vim numactl gcc g++ python3 python3-pip python3-venv python-is-python3 libtcmalloc-minimal4 libnuma-dev ffmpeg libsm6 libxext6 libgl1 libssl-dev pkg-config
 ```
 
 Next, install Rust. For more information, see the [Rust install guide](/install-guides/rust/).
@@ -74,7 +86,7 @@ First, clone the vLLM repository from GitHub:
 ```bash
 git clone https://github.com/vllm-project/vllm.git
 cd vllm
-git checkout 72ff3a968682e6a3f7620ab59f2baf5e8eb2777b
+git checkout releases/v0.11.0 
 ```
 
 {{% notice Note %}}
@@ -86,8 +98,8 @@ Omit this command to use the latest code on the main branch.
 Install the Python packages for vLLM:
 
 ```bash
-pip install -r requirements-build.txt
-pip install -v -r requirements-cpu.txt
+pip install -r requirements/build.txt
+pip install -v -r requirements/cpu.txt
 ```
 
 Build vLLM using Pip:
@@ -104,4 +116,4 @@ rm -rf dist
 cd ..
 ```
 
-You are now ready to download an LLM and run vLLM.
+You are now ready to download a large language model (LLM) and run vLLM.
