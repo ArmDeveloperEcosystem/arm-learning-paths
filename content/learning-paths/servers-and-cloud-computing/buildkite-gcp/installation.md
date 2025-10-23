@@ -1,12 +1,12 @@
 ---
-title: Install Buildkite
+title: Install Buildkite on a Google Axion C4A Arm VM
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Install Buildkite on a Google Axion C4A Arm VM
+## Get started with installing the Buildkite agent
 This section guides you through installing the Buildkite agent on a Google Axion C4A Arm VM, enabling it to connect to your Buildkite account and run the CI/CD pipelines.
 
 {{< tabpane code=true >}}
@@ -22,7 +22,7 @@ sudo zypper install -y curl unzip
 
 ## Download and install Buildkite agent
 
-This one-line command downloads and runs the Buildkite installer:
+Use this one-line command to download and run the Buildkite installer:
 
 ```console
 sudo bash -c "$(curl -sL https://raw.githubusercontent.com/buildkite/agent/main/install.sh)" 
@@ -67,30 +67,39 @@ For docs, help and support:
 Happy building! <3
 ```
 
-### Verify installation
+## Verify installation
 
-Now verify installation using this command that checks the version of the Buildkite agent and confirms it has installed successfully:
+Now verify the installation by checking the Buildkite agent version. This confirms that the agent is installed and ready to use:
 
 ```console
 sudo /root/.buildkite-agent/bin/buildkite-agent --version
 ```
-You should see output similar to:
+
+The expected output is similar to:
 
 ```output
 buildkite-agent version 3.109.1+10971.5c28e309805a3d748068a3ff7f5c531f51f6f495
 ```
 
+
+
 {{% notice Note %}}
-The Buildkite Agent version 3.43.0 introduces Linux/Arm64 Docker image for the Buildkite Agent, making deployment and installation easier for Linux users on Arm. You can view the [release note](https://github.com/buildkite/agent/releases/tag/v3.43.0).
+The Buildkite Agent version 3.43.0 introduces Linux/Arm64 Docker image for the Buildkite Agent, making deployment and installation easier for Linux users on Arm. You can view the [Buildkite agent GitHub release note](https://github.com/buildkite/agent/releases/tag/v3.43.0).
 
-The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends Buildkite Agent version v3.43.0 as the minimum recommended on the Arm platforms.
+The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends Buildkite Agent version v3.43.0 or later for Arm platforms.
 {{% /notice %}}
-
 ### Install Docker and Docker Buildx
 
-Buildkite uses Docker to build and push images. First, refresh the package repositories and install the required packages including git, Python3-pip, and Docker:
+Buildkite uses Docker to build and push images.
 
-Next, enable and start the Docker service to ensure it runs automatically when your VM starts:
+To make sure Docker runs whenever your VM starts, enable and start the Docker service:
+
+```bash
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+
+This step ensures Docker is always available for your CI/CD pipelines.
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu" language="bash">}}
@@ -106,7 +115,7 @@ sudo usermod -aG docker $USER ; newgrp docker
 {{< /tabpane >}}
 
 
-SUSE Linux requires some extra steps to start Docker, you can skip this for Ubuntu:
+If you're using SUSE Linux, you need to run a few extra commands to start Docker. You don't need these steps on Ubuntu:
 
 ```console
 sudo systemctl enable docker
@@ -146,9 +155,8 @@ For more examples and ideas, visit:
 
 ##  Install Docker Buildx
 
-Docker Buildx is a plugin that allows building multi-architecture images, for example `arm64` and `amd64`. 
-
-For SUSE Linux, you need to install Docker Buildx. This is not necessary on Ubuntu.
+Docker Buildx is a plugin that allows the building of multi-architecture images, for example `arm64` and `amd64`. 
+If you're using SUSE Linux, you need to install Docker Buildx manually. On Ubuntu, Docker Buildx is included by default, so you can skip this step.
 
 Download the binary and move it to the Docker CLI plugin directory:
 
@@ -159,4 +167,6 @@ sudo mkdir -p /usr/libexec/docker/cli-plugins
 sudo mv buildx-v0.26.1.linux-arm64 /usr/libexec/docker/cli-plugins/docker-buildx
 ```
 
-Now that the Buildkite installation is complete, you can set up the Buildkite agent.
+## What you've accomplished
+
+Great job! You’ve installed Docker, Docker Buildx, and the Buildkite agent on your Arm VM. Next, you’ll set up and connect your Buildkite agent to your account.
