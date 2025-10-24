@@ -1,15 +1,15 @@
 ---
-title: Cassendra Benchmarking
+title: Cassandra Benchmarking
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Cassendra Benchmarking by Cassendra-Stress
+## Cassandra Benchmarking by Cassandra-Stress
 Cassandra benchmarking can be performed using the built-in `cassandra-stress` tool, which helps measure database performance under different workloads such as write, read, and mixed operations.
 
-### Steps for Cassendra Benchmarking with Cassendra-Stress
+### Steps for Cassandra Benchmarking with Cassandra-Stress
 **Verify cassandra-stress Installation:**
 
 Cassandra comes with a built-in tool called **cassandra-stress** that is used for testing performance. It is usually located in the `tools/bin/` folder of your Cassandra installation. 
@@ -356,7 +356,7 @@ Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm6
 | Total GC Time               | 0.0 s                | 0.0 s                |
 | Total Operation Time        | 0:00:00              | 0:00:02              |
 
-### Cassendra performance benchmarking notes
+### Cassandra performance benchmarking notes
 When examining the benchmark results, you will notice that on the Google Axion C4A Arm-based instances:
 
 - The write operations achieved a high throughput of **10,690 op/s**, while read operations reached **4,962 op/s** on the `c4a-standard-4` Arm64 VM.  
