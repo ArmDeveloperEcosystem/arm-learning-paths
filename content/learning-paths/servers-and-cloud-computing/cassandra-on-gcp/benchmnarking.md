@@ -335,30 +335,8 @@ END
 - **GC metrics (Garbage Collection):** Shows whether JVM garbage collection paused Cassandra during the test.  
 - **Total operation time:** The total wall-clock time taken to run the benchmark.  
 
-### Benchmark summary on x86_64
-To compare the benchmark results, the following results were collected by running the same benchmark on a `x86 - c4-standard-4` (4 vCPUs, 15 GB Memory) x86_64 VM in GCP, running SUSE:
-
-| Metric                     | Write Test             | Read Test              |
-|----------------------------|----------------------|----------------------|
-| Operation Rate (op/s)       | 4,922                | 4,349                |
-| Partition Rate (pk/s)       | 4,922                | 4,349                |
-| Row Rate (row/s)            | 4,922                | 4,349                |
-| Latency Mean                | 8.4 ms               | 8.0 ms               |
-| Latency Median              | 5.9 ms               | 6.6 ms               |
-| Latency 95th Percentile     | 22.9 ms              | 18.7 ms              |
-| Latency 99th Percentile     | 40.4 ms              | 28.9 ms              |
-| Latency 99.9th Percentile   | 75.0 ms              | 48.9 ms              |
-| Latency Max                 | 175.2 ms             | 84.0 ms              |
-| Total Partitions            | 10,000               | 10,000               |
-| Total Errors                | 0                    | 0                    |
-| Total GC Count              | 0                    | 0                    |
-| Total GC Memory             | 0 B                  | 0 B                  |
-| Total GC Time               | 0.0 s                | 0.0 s                |
-| Total Operation Time        | 0:00:02              | 0:00:02              |
-
-
 ### Benchmark summary on Arm64
-Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
+Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SuSE shown, Ubuntu results were very similar):
 
 | Metric                     | Write Test             | Read Test              |
 |----------------------------|----------------------|----------------------|
@@ -378,11 +356,12 @@ Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm6
 | Total GC Time               | 0.0 s                | 0.0 s                |
 | Total Operation Time        | 0:00:00              | 0:00:02              |
 
-### Cassendra performance benchmarking comparison on Arm64 and x86_64
-When you compare the benchmarking results, you will notice that on the Google Axion C4A Arm-based instances:
+### Cassendra performance benchmarking notes
+When examining the benchmark results, you will notice that on the Google Axion C4A Arm-based instances:
 
 - The write operations achieved a high throughput of **10,690 op/s**, while read operations reached **4,962 op/s** on the `c4a-standard-4` Arm64 VM.  
-- Latency for writes was lower (mean: **3.7 ms**) compared to reads (mean: **6.3 ms**), indicating faster write processing on this setup.  
-- The 95th and 99th percentile latencies show consistent performance, with writes significantly faster than reads (write 95th: **9.5 ms** vs read 95th: **17.4 ms**).  
+- Latency for writes was very low (mean: **3.7 ms**) compared to reads (mean: **6.3 ms**), indicating fast write processing on this Arm64 VM.  
+- The 95th and 99th percentile latencies show consistent performance, with writes significantly faster than reads.  
 - There were no errors or GC overhead, confirming stable and reliable benchmarking results.  
-- Overall, the Arm64 VM provides efficient and predictable performance, making it suitable for high-throughput Cassandra workloads.
+
+Overall, the Arm64 VM provides efficient and predictable performance, making it suitable for high-throughput Cassandra workloads.
