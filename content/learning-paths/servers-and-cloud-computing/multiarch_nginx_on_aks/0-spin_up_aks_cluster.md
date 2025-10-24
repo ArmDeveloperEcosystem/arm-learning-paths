@@ -60,6 +60,8 @@ az aks nodepool add \
 
 ```
 
+Each command returns JSON output. Verify that `"provisioningState": "Succeeded"` appears in each response.
+
 ### Connect to the cluster
 
 Verify `kubectl` is available by running:
@@ -68,12 +70,25 @@ Verify `kubectl` is available by running:
 kubectl version --client
 ```
 
+The output should look similar to:
+
+```output
+Client Version: v1.34.1
+Kustomize Version: v5.7.1
+```
+
 If `kubectl` is installed the version information is printed. If you don't see the version information printed refer to the [Azure CLI](/install-guides/azure-cli) and [kubectl](/install-guides/kubectl/) install guides.
 
 Next, set up your newly-created K8s cluster credentials using the Azure CLI:
 
 ```bash
 az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
+```
+
+You should see:
+
+```output
+Merged "nginx-on-arm" as current context in /home/user/.kube/config
 ```
 
 To verify you're connected to the cluster:
