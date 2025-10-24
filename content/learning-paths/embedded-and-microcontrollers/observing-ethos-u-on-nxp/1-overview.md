@@ -31,12 +31,6 @@ Selecting the best hardware for machine learning (ML) models depends on effectiv
 |1P87F|• Silicon mask set identifier|
 |SBBM2410E|• NXP traceability code|
 
-## Hardware Overview - NXP's MCU-Link Pro Debug Probe
-
-The [MCU-Link Pro Debug Probe](https://www.nxp.com/design/design-center/software/software-library/mcu-link-pro-debug-probe:MCU-LINK-PRO) is a debugging tool for NXP boards. NXP's [MCUXpresso Integrated Development Environment (IDE)](https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-integrated-development-environment-ide:MCUXpresso-IDE) depends on this debug probe, when deploying ExecuTorch models to the above FRDM i.MX 93 board.
-
-![NXP MCU-Link Pro Debug Probe alt-text#center](./mcu-link-pro-guide-img.jpg "NXP's MCU-Link Pro Debug Probe")
-
 ## Software Overview - NXP's MCUXpresso IDE
 
 NXP generously provides free software for working with their boards, the [MCUXpresso Integrated Development Environment (IDE)](https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-integrated-development-environment-ide:MCUXpresso-IDE). In this learning path, you will instead use [MCUXpresso for Visual Studio Code](https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-for-visual-studio-code:MCUXPRESSO-VSC).

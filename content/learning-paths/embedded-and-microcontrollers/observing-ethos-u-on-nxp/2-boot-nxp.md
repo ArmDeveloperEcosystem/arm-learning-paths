@@ -74,36 +74,6 @@ Prior to logging in to the NXP board, you need to configure `picocom`. This allo
        - Hold the NXP board's power button for 2-seconds, until the lights turn off
        - Hold the NXP board's power button again for 2-seconds, until the lights turn on
 
-## How to Open U-Boot Terminal on the NXP Board
-
-{{% notice macOS %}}
-
-* Use uuu instead of U-Boot and Fastboot
-
-{{% /notice %}}
-
-* Connect to the NXP board, like you did above:
-
-  ```bash { output_lines = "2-5" }
-  sudo picocom -b 115200 /dev/tty.usbmodem56D70442811
-  # output lines
-  picocom v3.1
-  ...
-  Terminal ready
-  ```
-* This time, when you log in to the NXP board, press any key to interrupt the autoboot process
-
-  You will see the `u-boot=>` prompt, if you successfully stop autoboot:
-  ```bash { output_lines = "1-2" }
-  Hit any key to stop autoboot:  0 
-  u-boot=>
-  ```
-* Now you can enter Fastboot mode by typing the following command in the `u-boot=>` prompt:
-  ```bash
-  fastboot 0
-  ```
-* You will be required to enter Fastboot mode on the next page of this learning path
-
 ## [Optional] Run the Built-In NXP Demos
 * Connect the NXP board to a monitor via HDMI
 * Connect a mouse to the NXP board's USB-A port
