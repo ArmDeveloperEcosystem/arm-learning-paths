@@ -341,54 +341,83 @@ Benchmarking and profiling are not simple tasks. The purpose of this Learning Pa
 First, make sure that the `sme2_matmul_asm` executable is up-to-date:
 
 {{< tabpane code=true >}}
-  {{< tab header="Native SME2 support" language="bash" output_lines="2">}}
-  make sme2_matmul_asm
-  make: `sme2_matmul_asm' is up to date.
-  {{< /tab >}}
 
-  {{< tab header="Emulated SME2 support" language="bash" output_lines="2">}}
-  docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v2 make sme2_matmul_asm
-  make: 'sme2_matmul_asm' is up to date.
-  {{< /tab >}}
+{{< tab header="Native SME2 support" language="bash" output_lines="2-3">}}
+ninja -C build-native/ sme2_matmul_asm
+ninja: Entering directory `build-native/'
+ninja: no work to do.
+{{< /tab >}}
+
+{{< tab header="Android phones with SME2 support" language="bash" output_lines="2-3">}}
+ninja -C build-android/ sme2_matmul_asm
+ninja: Entering directory `build-android/'
+ninja: no work to do.
+{{< /tab >}}
+
+{{< tab header="Emulated SME2 support" language="bash" output_lines="2-3">}}
+docker run --rm -v "$PWD:/work" armswdev/sme2-learning-path:sme2-environment-v3 ninja -C build-baremetal/ sme2_matmul_asm
+ninja: Entering directory `build-baremetal/'
+ninja: no work to do.
+{{< /tab >}}
+
 {{< /tabpane >}}
 
-Then execute `sme2_matmul_asm` either natively or on the FVP:
+Then execute `sme2_matmul_asm` either natively, or on the FVP, or on the Android phone:
 
 {{< tabpane code=true >}}
-  {{< tab header="Native SME2 support" language="bash" output_lines="2-4">}}
-  ./sme2_matmul_asm
-  SME2 Matrix Multiply fp32 *asm* [verification mode] with M=125, K=70, N=35
-  Matrix preprocessing: PASS !
-  Matrix multiplication: PASS !
-  {{< /tab >}}
 
-  {{< tab header="Emulated SME2 support" language="bash" output_lines="2-6">}}
-  docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v2 ./run-fvp.sh sme2_matmul_asm
-  SME2 Matrix Multiply fp32 *asm* [verification mode] with M=125, K=70, N=35
-  Matrix preprocessing: PASS !
-  Matrix multiplication: PASS !
+{{< tab header="Native SME2 support" language="bash" output_lines="2-4">}}
+./build-native/sme2_matmul_asm
+SME2 Matrix Multiply fp32 *asm* [verification mode] with M=125, K=70, N=35
+Matrix preprocessing: PASS !
+Matrix multiplication: PASS !
+{{< /tab >}}
 
-  Info: /OSCI/SystemC: Simulation stopped by user.
-  {{< /tab >}}
+{{< tab header="Android phones with SME2 support" language="bash" output_lines="2,5-7">}}
+adb push build-android/sme2_matmul_asm /data/local/tmp
+build-android/sme2_matmul_asm: 1 file pushed, 0 skipped. 29.7 MB/s (19456 bytes in 0.001s)
+adb shell chmod 755 /data/local/tmp/sme2_matmul_asm
+adb shell /data/local/tmp/sme2_matmul_asm
+SME2 Matrix Multiply fp32 *asm* [verification mode] with M=125, K=70, N=35
+Matrix preprocessing: PASS !
+Matrix multiplication: PASS !
+{{< /tab >}}
+
+{{< tab header="Emulated SME2 support" language="bash" output_lines="2-6">}}
+docker run --rm -v "$PWD:/work" armswdev/sme2-learning-path:sme2-environment-v3 ./run-fvp.sh build-baremetal/sme2_matmul_asm
+SME2 Matrix Multiply fp32 *asm* [verification mode] with M=125, K=70, N=35
+Matrix preprocessing: PASS !
+Matrix multiplication: PASS !
+
+Info: /OSCI/SystemC: Simulation stopped by user.
+{{< /tab >}}
+
 {{< /tabpane >}}
 
 `sme2_matmul_asm` prints the version of the matrix multiplication performed
-(asm or intr) as well as the `M`, `K` and `N` parameters. It also prints
+(`asm` or `intr`) as well as the `M`, `K` and `N` parameters. It also prints
 whether the preprocessing and matrix multiplication passed (`PASS`) or failed
 (`FAILED`) the comparison the vanilla reference implementation.
 
 {{% notice Tip %}}
 The example above uses the default values for the `M` (125), `K`(70) and `N`(70)
-parameters. You can override this and provide your own values on the command line:
+parameters. You can override this and provide your own values on the command line
+when executing `sme2_matmul_asm`:
 
 {{< tabpane code=true >}}
-  {{< tab header="Native SME2 support" language="bash">}}
-  ./sme2_matmul_asm 7 8 9
-  {{< /tab >}}
 
-  {{< tab header="Emulated SME2 support" language="bash">}}
-  docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v2 ./run-fvp.sh sme2_matmul_asm 7 8 9
-  {{< /tab >}}
+{{< tab header="Native SME2 support" language="bash">}}
+./build-native/sme2_matmul_asm 7 8 9
+{{< /tab >}}
+
+{{< tab header="Android phones with SME2 support" language="bash">}}
+adb shell /data/local/tmp/sme2_matmul_asm 7 8 9
+{{< /tab >}}
+
+{{< tab header="Emulated SME2 support" language="bash">}}
+docker run --rm -v "$PWD:/work" armswdev/sme2-learning-path:sme2-environment-v3 ./run-fvp.sh build-baremetal/sme2_matmul_asm 7 8 9
+{{< /tab >}}
+
 {{< /tabpane >}}
 
 In this example, `M=7`, `K=8`, and `N=9` are used.

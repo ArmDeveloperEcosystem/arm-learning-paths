@@ -10,9 +10,9 @@ layout: learningpathall
 
 In this section, you'll learn how to improve matrix multiplication performance using the SME engine and outer product operations.
 
-This approach increases the number of multiply-accumulate (MACC) operations per memory load, reducing bandwidth pressure and improving overall throughput.
+This approach increases the number of multiply-accumulate (MAC) operations per memory load, reducing bandwidth pressure and improving overall throughput.
 
-## Increase MACC efficiency using outer products
+## Increase MAC efficiency using outer products
 
 In the vanilla implementation, the core multiply-accumulate step looks like this:
 
@@ -20,9 +20,9 @@ In the vanilla implementation, the core multiply-accumulate step looks like this
                 acc += matLeft[m * K + k] * matRight[k * N + n];
 ```
 
-This translates to one multiply-accumulate operation, known as `macc`, for two loads (`matLeft[m * K + k]` and `matRight[k * N + n]`). It therefore has a 1:2 `macc` to `load` ratio of multiply-accumulate operations (MACCs) to memory loads - one multiply-accumulate and two loads per iteration, which is inefficient. This becomes more pronounced in triple-nested loops and when matrices exceed cache capacity. 
+This translates to one multiply-accumulate operation, known as `mac`, for two loads (`matLeft[m * K + k]` and `matRight[k * N + n]`). It therefore has a 1:2 `mac` to `load` ratio of multiply-accumulate operations (MACs) to memory loads - one multiply-accumulate and two loads per iteration, which is inefficient. This becomes more pronounced in triple-nested loops and when matrices exceed cache capacity.
 
-To improve performance, you want to increase the `macc` to `load` ratio, which means increasing the number of multiply-accumulate operations per load - you can express matrix multiplication as a sum of column-by-row outer products.
+To improve performance, you want to increase the `mac` to `load` ratio, which means increasing the number of multiply-accumulate operations per load - you can express matrix multiplication as a sum of column-by-row outer products.
 
 The diagram below illustrates how the matrix multiplication of `matLeft` (3 rows, 2
 columns) by `matRight` (2 rows, 3 columns) can be decomposed into a sum of column-by-row outer
