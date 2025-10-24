@@ -105,4 +105,6 @@ Trigger a new build by clicking New Build on your pipeline’s dashboard.
 
 ![Buildkite Dashboard alt-text#center](images/build-p.png "Create Build")
 
-Once your files and pipeline are ready, you can validate that your Buildkite agent is running and ready to execute jobs.
+## What you've accomplished
+
+You've now created a simple Flask application, added a Dockerfile, set up your GitHub repository, and configured a Buildkite pipeline for multi-architecture builds on Arm. You also added Docker credentials as secrets and defined your pipeline steps in YAML. These steps prepare you to build, push, and test containerized applications using Arm-based infrastructure. You're now ready to validate your setup and run your first build!

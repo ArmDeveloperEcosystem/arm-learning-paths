@@ -1,14 +1,14 @@
 ---
-title: Set up Buildkite
+title: Set up and connect Buildkite agent on a Google Axion C4A Arm VM
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Set up a Buildkite agent
+## What you'll do in this section
 
-After installing the Buildkite agent binary on a Google Axion C4A Arm VM, you can set up and configure a Buildkite agent and queue.
+In this section, you'll configure and connect a Buildkite agent on a Google Axion C4A Arm virtual machine (VM). You'll generate an agent token, set up the agent configuration, create a Buildkite queue, and verify that your agent is online and ready to run CI/CD jobs on Arm infrastructure.
 
 ## Create an agent token
 
@@ -27,7 +27,7 @@ To create an agent token, follow these steps:
 ![Buildkite Dashboard alt-text#center](images/agent-token.png "Create Buildkite agent token")
 
 
-## Configure Buildkite Agent
+## Configure the Buildkite agent
 
 Create the configuration directory and file on your local system with the commands below:
 
@@ -66,7 +66,7 @@ token="YOUR-GENERATED-TOKEN-VALUE"
 tags="queue=buildkite-queue1"
 ```
 
-## Create a Queue in Buildkite
+## Create a queue in Buildkite
 
 Now that your agent is created, you can create a queue. 
 
@@ -80,7 +80,7 @@ This step connects your agent to the correct queue, ensuring jobs are routed to 
 Make sure the queue name matches the `tags` field in the agent configuration.
 {{% /notice %}}
 
-![Buildkite Dashboard alt-text#center](images/queue.png "Create Buildkite Queue")
+![Buildkite Dashboard alt-text#center](images/queue.png "Create the Buildkite queue")
 
 ## Verify the agent in the Buildkite UI
 
@@ -90,12 +90,13 @@ First, start the agent on your local computer:
 sudo /root/.buildkite-agent/bin/buildkite-agent start --build-path="/var/lib/buildkite-agent/builds"
 ```
 
-Then, confirm it is visible in the Buildkite UI:
+Then, confirm the agent is visible in the Buildkite UI, by doing the following:
 
-Go Buildkite and select Agents
+- In the Buildkite dashboard, select **Agents** from the left menu. This page lists all registered agents for your organization. 
+- Look for your new agent in the list and verify that its status is **online** and that it is assigned to the correct queue.
 
 Confirm that the agent is online and connected to the queue `buildkite-queue1`.
 
 ![Buildkite Dashboard alt-text#center](images/agent.png "Verify the agent")
 
-The Buildkite agent is ready, you can proceed to use Buildkite for building multi-arch images. 
+Congratulations! Your Buildkite agent is now set up and connected to your queue. You can now start using Buildkite to build multi-architecture images on your Arm-based VM. This setup enables you to run CI/CD pipelines optimized for Arm platforms, and take advantage of the performance and scalability of Arm servers.
