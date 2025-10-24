@@ -12,39 +12,12 @@ You now have nginx running on Intel, AMD, and ARM nodes with architecture-specif
 
 ### Create the multiarch service
 
-1. Use a text editor to copy the following YAML and save it to a file called `multiarch_nginx.yaml`:
+The multiarch service targets all pods with the `app: nginx-multiarch` label (all nginx deployments share this label). It uses `sessionAffinity: None` to ensure requests are distributed across all available pods without stickiness, and can route to Intel, AMD, or ARM pods based on availability and load balancing algorithms.
 
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx-multiarch-svc
-  namespace: nginx
-spec:
-  sessionAffinity: None
-  ports:
-  - nodePort: 30083
-    port: 80
-    protocol: TCP
-    targetPort: 80
-  selector:
-    app: nginx-multiarch
-  type: LoadBalancer
-```
-
-When the above is applied:
-
-* A new load balancer service `nginx-multiarch-svc` is created, targeting all pods with the `app: nginx-multiarch` label (all nginx deployments share this label).
-
-* The service uses `sessionAffinity: None` to ensure requests are distributed across all available pods without stickiness.
-
-* This service can route to Intel, AMD, or ARM pods based on availability and load balancing algorithms.
-
-### Apply the multiarch service
-
-1. Run the following command to apply the multiarch service:
+1. Run the following command to download and apply the multiarch service:
 
 ```bash
+curl -sO https://raw.githubusercontent.com/geremyCohen/nginxOnAKS/main/multiarch_nginx.yaml
 kubectl apply -f multiarch_nginx.yaml
 ```
 
