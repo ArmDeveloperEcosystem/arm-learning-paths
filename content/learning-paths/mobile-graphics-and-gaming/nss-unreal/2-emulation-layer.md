@@ -65,17 +65,30 @@ By default, Unreal uses DirectX. Instead, you need to choose Vulkan as the defau
 
 ![Project Settings with Vulkan selected as Default RHI under Targeted RHIs#center](./images/targeted_rhis.png "Figure 4: Set Vulkan as the default RHI.")
 
+## Create the Plugins directory
 
-## Add and enable the plugins
+Open your project directory in Windows explorer, and create a new folder called `Plugins`.
 
-1. Open your project directory in Windows explorer, and create a new folder called `Plugins`.
-2. Copy the downloaded and extracted `.zips` into the new directory:
+Enabling the plugin will look slightly different depending on what Unreal version you are using. Follow the steps corresponding to your setup.
+
+## For Unreal 5.5
+
+1. Copy the downloaded and extracted `.zip` into the new `Plugins` directory:
+   - `UE5.5`
    - `NNERuntimeRDGMLExtensionsForVulkan`
-   - `NSS`
-3. Re-open Unreal Engine. When prompted, confirm plugin integration.
-4. Rebuild your project in Visual Studio from source.
-5. Verify the installation by opening the Plugins view in Unreal Engine, and making sure the checkbox is selected for both `NSS` and `NNERuntimeRDGMLExtensionsForVulkan` as shown. Restart Unreal Engine if prompted.
+2. Re-open Unreal Engine. When prompted, confirm plugin integration.
+3. Rebuild your project in Visual Studio from source.
+4. Verify the installation by opening the Plugins view in Unreal Engine, and making sure the checkbox is selected for both `NSS` and `NNERuntimeRDGMLExtensionsForVulkan` as shown. Restart Unreal Engine if prompted.
 
 ![Unreal Engine plugins window showing NSS and NNERuntimeRDGMLExtensionsForVulkan enabled#center](./images/verify_plugin_enabled.png "Figure 5: Verify plugin installation in Unreal Engine.")
+
+
+## For Unreal 5.4
+
+1. Copy the downloaded and extracted `.zip` into the new `Plugins` directory:
+   - `UE5.4`
+2. Re-open Unreal Engine. When prompted, confirm plugin integration.
+3. Rebuild your project in Visual Studio from source.
+4. Verify the installation by opening the Plugins view in Unreal Engine, and making sure the checkbox is selected for `NSS`. Restart Unreal Engine if prompted.
 
 With the emulation layers and plugins configured, you're ready to run Neural Super Sampling in Unreal Engine. Continue to the next section to test the integration.
