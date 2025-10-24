@@ -51,6 +51,10 @@ Taking a closer look at the `intel_nginx.yaml` deployment file, you'll see some 
         kubernetes.io/arch: amd64
 ```
 
+{{% notice Note %}}
+The `amd64` architecture label represents x86_64 nodes, which can be either AMD or Intel processors. In this tutorial, we're using Intel x64 nodes.
+{{% /notice %}}
+
 * The A `sessionAffinity` tag, which removes sticky connections to the target pods. This removes persistent connections to the same pod on each request.
 
 ```yaml
