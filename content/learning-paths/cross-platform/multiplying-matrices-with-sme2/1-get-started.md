@@ -258,11 +258,11 @@ These Apple devices support SME2 natively.
 | MacBook Pro (14-inch, 16-inch, 2024)| 2024         | M4 Pro, M4 Max            |
 | MacBook Air (2025)                  | 2025         | M4                        |
 
+
 These Android phones support SME2 natively.
+
 
 | Device                              | Release Date | Chip Options              |
 |-------------------------------------|--------------|---------------------------|
-| Vivo X300                           | 2025         | MediaTek Dimensity 9500, which includes 8 Arm C1 CPUs (1 C1-Ultra, 3 C1-Premium & 4 C1-Pro)
- and Arm G1-Ultra GPU |
-| OPPO Find X9                        | 2025         | MediaTek Dimensity 9500, which includes 8 Arm C1 CPUs (1 C1-Ultra, 3 C1-Premium & 4 C1-Pro)
- and Arm G1-Ultra GPU |
+| Vivo X300                           | 2025         | MediaTek Dimensity 9500 featuring an 8-core Arm C1 CPU cluster and Arm G1-Ultra GPU |
+| OPPO Find X9                        | 2025         | MediaTek Dimensity 9500 featuring an 8-core Arm C1 CPU cluster and Arm G1-Ultra GPU |
