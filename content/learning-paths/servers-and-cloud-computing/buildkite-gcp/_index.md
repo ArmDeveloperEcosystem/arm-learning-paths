@@ -1,22 +1,22 @@
 ---
-title: Build multi-architecture Docker images with Buildkite on Google Axion
+title: Create multi-architecture Docker images with Buildkite on Google Axion
 
 minutes_to_complete: 40
 
-who_is_this_for: This is an introductory topic for developers learning to build and run multi-architecture Docker images with Buildkite on Arm-based Google Cloud C4A virtual machines powered by Google Axion processors.
+who_is_this_for: This is an introductory topic for developers who want to build and run multi-architecture Docker images with Buildkite on Arm-based Google Cloud C4A virtual machines (VM) powered by Google Axion processors.
 
 learning_objectives:
-- Provision an Arm-based virtual machine on Google Cloud running SUSE Linux Enterprise Server or Ubuntu
+- Provision an Arm-based VM on Google Cloud running either SUSE Linux Enterprise Server or Ubuntu
 - Install and configure Docker, Docker Buildx, and the Buildkite agent
 - Write a Dockerfile to containerize a simple Flask-based Python application
 - Configure a Buildkite pipeline to build a multi-architecture Docker image and push it to Docker Hub
-- Run the application to ensure it works as expected
+- Start the application and verify that it runs correctly
 
 prerequisites:
-  - A [Google Cloud Platform (GCP)](https://cloud.google.com/free?utm_source=google&hl=en) account with billing enabled
-  - Basic knowledge of Linux system administration such as creating users, installing packages, and managing services
-  - Familiarity with Docker and container concepts
-  - A GitHub account to host your application repository
+  - A [Google Cloud Platform (GCP) account](https://cloud.google.com/free?utm_source=google&hl=en) with billing enabled
+  - Basic Linux system administration skills, including how to create users, install packages, and manage services
+  - Familiarity with [Docker](https://docs.docker.com/get-started/) and container concepts
+  - A [GitHub account](https://github.com/join) to host your application repository
 
 author: Jason Andrews
 

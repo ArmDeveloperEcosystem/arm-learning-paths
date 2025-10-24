@@ -81,8 +81,6 @@ The expected output is similar to:
 buildkite-agent version 3.109.1+10971.5c28e309805a3d748068a3ff7f5c531f51f6f495
 ```
 
-
-
 {{% notice Note %}}
 The Buildkite Agent version 3.43.0 introduces Linux/Arm64 Docker image for the Buildkite Agent, making deployment and installation easier for Linux users on Arm. You can view the [Buildkite agent GitHub release note](https://github.com/buildkite/agent/releases/tag/v3.43.0).
 
@@ -91,13 +89,6 @@ The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) re
 ### Install Docker and Docker Buildx
 
 Buildkite uses Docker to build and push images.
-
-To make sure Docker runs whenever your VM starts, enable and start the Docker service:
-
-```bash
-sudo systemctl enable docker
-sudo systemctl start docker
-```
 
 This step ensures Docker is always available for your CI/CD pipelines.
 
@@ -113,14 +104,6 @@ sudo zypper install -y git python3 python3-pip docker
 sudo usermod -aG docker $USER ; newgrp docker
   {{< /tab >}}
 {{< /tabpane >}}
-
-
-If you're using SUSE Linux, you need to run a few extra commands to start Docker. You don't need these steps on Ubuntu:
-
-```console
-sudo systemctl enable docker
-sudo systemctl start docker
-```
 
 Verify the Docker installation by checking the version and running a test container:
 

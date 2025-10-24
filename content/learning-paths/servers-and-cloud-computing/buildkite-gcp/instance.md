@@ -6,25 +6,32 @@ weight: 3
 layout: learningpathall
 ---
 
-## Overview
+## Get started
 
-In this section, you'll learn how to provision a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` instance type with 4 vCPUs and 16 GB memory in the Google Cloud Console.
+You're about to launch a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP). This section guides you through each step, from selecting the optimal instance type to configuring your operating system and networking. By the end, you'll have a ready-to-use Arm-based VM, perfect for high-performance workloads and cloud-native development.
+You'll learn how to provision a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` instance type with 4 vCPUs and 16 GB memory in the Google Cloud Console.
 
-## Provision a Google Axion C4A VM in the Google Cloud Console
+## Provision a VM
 
 To create a virtual machine based on the C4A instance type:
+- Open the [Google Cloud Console](https://console.cloud.google.com/).
+- In the left navigation pane, select **Compute Engine** > **VM instances**.
+- Select **Create instance**.
+- In the **Machine configuration** section:
+   - Enter a value for **Instance name**.
+   - Select a **Region** and **Zone**.
+   - For **Series**, select **C4A**.
+   - For **Machine type**, select **c4a-standard-4**.
+- The following image shows the **Machine configuration** section with the C4A series and c4a-standard-4 machine type selected.
 
-- Navigate to the [Google Cloud Console](https://console.cloud.google.com/).
-- Go to Compute Engine > VM Instances and select **Create Instance**.
-- Under **Machine configuration**:
-   - Populate fields such as **Instance name**, **Region**, and **Zone**.
-   - Set **Series** to **C4A**.
-   - Select **c4a-standard-4** for machine type.
+   ![Screenshot of the Machine configuration section in Google Cloud Console with C4A series and c4a-standard-4 machine type selected.](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
 
-   ![Create a Google Axion C4A Arm virtual machine in the Google Cloud Console with c4a-standard-4 selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
+- In the **OS and storage** section, select **Change**.
+   - In the **Operating system** dialog, choose an Arm64-based image such as **SUSE Linux Enterprise Server** or **Ubuntu**.
+   - Select your preferred version, making sure to choose the Arm architecture.
+   - Select **Select** to confirm your choice.
+- In the **Networking** section, enable the **Allow HTTP traffic** option.
+- Select **Create** to launch your instance.
 
-- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server** or **Ubuntu**. Select your preferred version for the operating system. Ensure you choose the Arm version, then select **Select**.
-- Under **Networking**, enable **Allow HTTP traffic**.
-- Select **Create** to launch the instance.
+Once the instance is running, you can connect to it using SSH from the Google Cloud Console or your local terminal. This allows you to configure your environment and begin deploying workloads on your new Arm-based VM.
 
-Once the instance is running, connect using SSH.
