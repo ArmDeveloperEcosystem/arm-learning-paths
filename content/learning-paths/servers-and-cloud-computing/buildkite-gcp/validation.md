@@ -24,11 +24,11 @@ This command checks the current state of your Buildkite agent and displays its c
 
 To start your pipeline, navigate to your pipeline in the Buildkite web interface. From your Buildkite dashboard, select the pipeline you created and click the "New Build" button. Choose the branch you want to build from the dropdown menu, then click "Start Build" to begin execution.
 
-![Screenshot of the Buildkite dashboard showing the "New Build" button highlighted, with the pipeline name and branch selection visible. This interface allows you to trigger a new build and select the branch to build from.](images/build-p.png "Trigger the pipeline")
+![Screenshot of the Buildkite dashboard showing the "New Build" button highlighted, with the pipeline name and branch selection visible. This interface allows you to trigger a new build and select the branch to build from alt-text#center](images/build-p.png "Trigger the pipeline")
 
 When you trigger the pipeline, Buildkite sends the job to your Arm-based agent and begins executing the steps defined in your YAML configuration file. The agent will process each step in sequence, starting with Docker login, followed by creating the Buildx builder, and finally building and pushing your multi-architecture Docker image.
 
-## Monitor the Build
+## Monitor the build
 You can watch your build logs in real time in the Buildkite dashboard. Each step appears as it runs, so you can track progress and spot any issues quickly.
 
 The main steps you'll see are:
@@ -37,13 +37,13 @@ The main steps you'll see are:
 - Creating the Buildx builder
 - Building and pushing the multi-architecture Docker image
 
-![Screenshot of the Buildkite dashboard displaying real-time build logs, showing each pipeline step and its status for monitoring progress](images/log.png "Monitor the build")
+![Screenshot of the Buildkite dashboard displaying real-time build logs, showing each pipeline step and its status for monitoring progress alt-text#center](images/log.png "Monitor the build")
 
 ## Verify multi-arch image
 
 After the pipeline completes successfully, you can go to Docker Hub and verify the pushed multi-arch images:
 
-![Screenshot of Docker Hub showing the multi-architecture image for the application repository, confirming both arm64 and amd64 platforms are available](images/multi-arch-image.png "Docker image")
+![Screenshot of Docker Hub showing the multi-architecture image for the application repository, confirming both arm64 and amd64 platforms are available alt-text#center](images/multi-arch-image.png "Docker image")
 
 ## Run the Flask application
 
@@ -60,7 +60,7 @@ You can now visit the VM’s Public IP to access the Flask application:
 http://<VM_IP>
 ```
 You should see output similar to:
-![Screenshot of the Docker Hub web interface showing the multi-architecture image tags for the application repository, confirming successful upload of both arm64 and amd64 images](images/browser.png "Verify Docker images")
+![Screenshot of the Docker Hub web interface showing the multi-architecture image tags for the application repository, confirming successful upload of both arm64 and amd64 alt-text#center](images/browser.png "Verify Docker images")
 
 ## What you've accomplished
 
