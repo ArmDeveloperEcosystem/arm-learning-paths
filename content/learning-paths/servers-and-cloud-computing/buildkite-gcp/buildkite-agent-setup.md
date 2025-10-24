@@ -1,5 +1,5 @@
 ---
-title: Set-up Buildkite
+title: Set up Buildkite
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -10,21 +10,24 @@ layout: learningpathall
 
 After installing the Buildkite agent binary on a Google Axion C4A Arm VM, you can set up and configure a Buildkite agent and queue.
 
-## 1. Create an Agent Token
+## Create an agent token
 
 Before configuring the agent, you need an agent token from your Buildkite organization.
 
-1. Log in to your Buildkite account (you can login with GitHub), and go to your Organization Settings
-2. Click Agents in the left menu
-3. Click Create Agent Token  
-4. Enter a name for your token, such as `buildkite-arm`
-5. Click Create Token
-6. Copy the token immediately, you won’t be able to see it again after leaving the page.
+To create an agent token, follow these steps:
 
-![Buildkite Dashboard alt-text#center](images/agent-token.png "Create Buildkite agent Token")
+- Sign in to your Buildkite account. You can use your GitHub credentials if you prefer.
+- In the left menu, select **Organization settings**.
+- Select **Agents**.
+- Select **Create agent token**.
+- Enter a descriptive name for the token, such as `buildkite-arm`.
+- Select **Create token**.
+- Copy the token and store it securely as you won’t be able to view it again after you leave the page.
+
+![Buildkite Dashboard alt-text#center](images/agent-token.png "Create Buildkite agent token")
 
 
-## 2. Configure Buildkite Agent
+## Configure Buildkite Agent
 
 Create the configuration directory and file on your local system with the commands below:
 
@@ -35,10 +38,10 @@ tags="queue=buildkite-queue1"
 EOF
 ```
 
-Replace `YOUR_AGENT_TOKEN` with the token you generated from your Buildkite Agents page.  
+Replace `YOUR_AGENT_TOKEN` with the token that you generated from your Buildkite Agents page.  
 
-{{% notice Note %}}
-You find it easier to copy the commands above into a text file named `config-agent.sh` and run the file.
+{{% notice Tip %}}
+You might find it easier to copy the commands above into a text file named `config-agent.sh` and run the file.
 ```console
 bash ./config-agent.sh
 ```
@@ -63,13 +66,15 @@ token="YOUR-GENERATED-TOKEN-VALUE"
 tags="queue=buildkite-queue1"
 ```
 
-## 3. Create a Queue in Buildkite
+## Create a Queue in Buildkite
 
 Now that your agent is created, you can create a queue. 
 
-1. Go to your Buildkite Organization select Queues and then select Create Queue
-2. Name the queue, for example `buildkite-queue1`
-3. Save the queue
+- Go to your Buildkite organization, select **Queues**, and then select **Create queue**.
+- Enter a name for the queue, for example `buildkite-queue1`.
+- Select **Save** to create the queue.
+
+This step connects your agent to the correct queue, ensuring jobs are routed to your Arm-based Buildkite agent.
 
 {{% notice Note %}}
 Make sure the queue name matches the `tags` field in the agent configuration.
@@ -77,7 +82,7 @@ Make sure the queue name matches the `tags` field in the agent configuration.
 
 ![Buildkite Dashboard alt-text#center](images/queue.png "Create Buildkite Queue")
 
-## 4. Verify the agent in the Buildkite UI
+## Verify the agent in the Buildkite UI
 
 First, start the agent on your local computer: 
 
@@ -91,6 +96,6 @@ Go Buildkite and select Agents
 
 Confirm that the agent is online and connected to the queue `buildkite-queue1`.
 
-![Buildkite Dashboard alt-text#center](images/agent.png "Verify Agent")
+![Buildkite Dashboard alt-text#center](images/agent.png "Verify the agent")
 
 The Buildkite agent is ready, you can proceed to use Buildkite for building multi-arch images. 

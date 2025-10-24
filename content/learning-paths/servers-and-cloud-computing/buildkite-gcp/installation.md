@@ -86,7 +86,8 @@ The Buildkite Agent version 3.43.0 introduces Linux/Arm64 Docker image for the B
 
 The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends Buildkite Agent version v3.43.0 or later for Arm platforms.
 {{% /notice %}}
-### Install Docker
+
+## Install Docker
 
 Buildkite uses Docker to build and push images.
 
@@ -141,9 +142,13 @@ For more examples and ideas, visit:
 Docker Buildx is a plugin that allows the building of multi-architecture images, for example `arm64` and `amd64`. 
 If you're using SUSE Linux, you need to install Docker Buildx manually. On Ubuntu, Docker Buildx is included by default, so you can skip this step.
 
+For more information or troubleshooting details, see the [Docker Buildx documentation](https://docs.docker.com/build/buildx/).
+
 ## Download Docker Buildx
 
-Download the Docker Buildx binary and move it to the Docker CLI plugin directory. This enables advanced multi-architecture builds on your Arm VM.
+If you need to download Docker Buildx, follow these steps.
+
+Start by downloading the Docker Buildx binary and move it to the Docker CLI plugin directory. This enables advanced multi-architecture builds on your Arm VM:
 
 ```console
 wget https://github.com/docker/buildx/releases/download/v0.26.1/buildx-v0.26.1.linux-arm64
