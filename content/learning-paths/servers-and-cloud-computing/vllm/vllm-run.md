@@ -34,32 +34,36 @@ Use a text editor to save the Python script below in a file called `batch.py`:
 import json
 from vllm import LLM, SamplingParams
 
-# Sample prompts.
-prompts = [
-    "Write a hello world program in C",
-    "Write a hello world program in Java",
-    "Write a hello world program in Rust",
-]
+if __name__ == '__main__':
+    # Sample prompts.
+    prompts = [
+        "Write a hello world program in C",
+        "Write a hello world program in Java",
+        "Write a hello world program in Rust",
+    ]
 
-# Create a sampling params object.
-sampling_params = SamplingParams(temperature=0.8, top_p=0.95, max_tokens=256)
+    # Modify model here
+    MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
 
-# Create an LLM.
-llm = LLM(model="Qwen/Qwen2.5-0.5B-Instruct", dtype="bfloat16")
+    # Create a sampling params object.
+    sampling_params = SamplingParams(temperature=0.8, top_p=0.95, max_tokens=256)
 
-# Generate texts from the prompts. The output is a list of RequestOutput objects
-# that contain the prompt, generated text, and other information.
-outputs = llm.generate(prompts, sampling_params)
+    # Create an LLM.
+    llm = LLM(model=MODEL, dtype="bfloat16", max_num_batched_tokens=32768)
 
-# Print the outputs.
-for output in outputs:
-    prompt = output.prompt
-    generated_text = output.outputs[0].text
-    result = {
-        "Prompt": prompt,
-        "Generated text": generated_text
-    }
-    print(json.dumps(result, indent=4))
+    # Generate texts from the prompts. The output is a list of RequestOutput objects
+    # that contain the prompt, generated text, and other information.
+    outputs = llm.generate(prompts, sampling_params)
+
+    # Print the outputs.
+    for output in outputs:
+        prompt = output.prompt
+        generated_text = output.outputs[0].text
+        result = {
+            "Prompt": prompt,
+            "Generated text": generated_text
+        }
+        print(json.dumps(result, indent=4))
 ```
 
 The script uses `bfloat16` precision. 
@@ -75,36 +79,62 @@ python ./batch.py
 The output shows vLLM starting, the model loading, and the batch processing of the three prompts:
 
 ```output
-INFO 12-12 22:52:57 config.py:441] This model supports multiple tasks: {'generate', 'reward', 'embed', 'score', 'classify'}. Defaulting to 'generate'.
-WARNING 12-12 22:52:57 config.py:567] Async output processing is not supported on the current platform type cpu.
-WARNING 12-12 22:52:57 cpu.py:56] CUDA graph is not supported on CPU, fallback to the eager mode.
-WARNING 12-12 22:52:57 cpu.py:68] Environment variable VLLM_CPU_KVCACHE_SPACE (GB) for CPU backend is not set, using 4 by default.
-INFO 12-12 22:52:57 importing.py:15] Triton not installed or not compatible; certain GPU-related functions will not be available.
-INFO 12-12 22:52:57 llm_engine.py:250] Initializing an LLM engine (v0.6.4.post2.dev322+g72ff3a96) with config: VllmConfig(model_config=<vllm.config.ModelConfig object at 0xe1e8054ef5e0>, cache_config=<vllm.config.CacheConfig object at 0xe1e84500d780>, parallel_config=ParallelConfig(pipeline_parallel_size=1, tensor_parallel_size=1, worker_use_ray=False, max_parallel_loading_workers=None, disable_custom_all_reduce=False, tokenizer_pool_config=None, ray_workers_use_nsight=False, placement_group=None, distributed_executor_backend=None, worker_cls='vllm.worker.cpu_worker.CPUWorker', sd_worker_cls='auto', world_size=1, rank=0), scheduler_config=SchedulerConfig(runner_type='generate', max_num_batched_tokens=32768, max_num_seqs=256, max_model_len=32768, num_lookahead_slots=0, delay_factor=0.0, enable_chunked_prefill=False, is_multimodal_model=False, preemption_mode=None, num_scheduler_steps=1, multi_step_stream_outputs=True, send_delta_data=False, policy='fcfs', chunked_prefill_enabled=False), device_config=<vllm.config.DeviceConfig object at 0xe1e845163f40>, load_config=LoadConfig(load_format=<LoadFormat.AUTO: 'auto'>, download_dir=None, model_loader_extra_config=None, ignore_patterns=['original/**/*']), lora_config=None, speculative_config=None, decoding_config=DecodingConfig(guided_decoding_backend='xgrammar'), observability_config=ObservabilityConfig(otlp_traces_endpoint=None, collect_model_forward_time=False, collect_model_execute_time=False), prompt_adapter_config=None, quant_config=None, compilation_config=CompilationConfig(level=0, debug_dump_path='', backend='', custom_ops=[], splitting_ops=['vllm.unified_attention', 'vllm.unified_attention_with_output'], use_inductor=True, candidate_compile_sizes=[], inductor_compile_config={}, inductor_passes={}, use_cudagraph=False, cudagraph_num_of_warmups=0, cudagraph_capture_sizes=None, cudagraph_copy_inputs=False, pass_config=PassConfig(dump_graph_stages=[], dump_graph_dir=PosixPath('.'), enable_fusion=True, enable_reshape=True), compile_sizes=[], capture_sizes=[256, 248, 240, 232, 224, 216, 208, 200, 192, 184, 176, 168, 160, 152, 144, 136, 128, 120, 112, 104, 96, 88, 80, 72, 64, 56, 48, 40, 32, 24, 16, 8, 4, 2, 1], enabled_custom_ops=Counter(), disabled_custom_ops=Counter(), compilation_time=0.0, static_forward_context={}), kv_transfer_config=None, instance_id='5c715'),use_cached_outputs=False, 
-INFO 12-12 22:52:58 cpu.py:33] Cannot use _Backend.FLASH_ATTN backend on CPU.
-INFO 12-12 22:52:58 selector.py:141] Using Torch SDPA backend.
-INFO 12-12 22:52:58 weight_utils.py:243] Using model weights format ['*.safetensors']
-INFO 12-12 22:52:58 weight_utils.py:288] No model.safetensors.index.json found in remote.
+INFO 10-23 18:38:40 [__init__.py:216] Automatically detected platform cpu.
+INFO 10-23 18:38:42 [utils.py:233] non-default args: {'dtype': 'bfloat16', 'max_num_batched_tokens': 32768, 'disable_log_stats': True, 'model': 'Qwen/Qwen2.5-0.5B-Instruct'}
+INFO 10-23 18:38:42 [model.py:547] Resolved architecture: Qwen2ForCausalLM
+`torch_dtype` is deprecated! Use `dtype` instead!
+INFO 10-23 18:38:42 [model.py:1510] Using max model len 32768
+WARNING 10-23 18:38:42 [cpu.py:117] Environment variable VLLM_CPU_KVCACHE_SPACE (GiB) for CPU backend is not set, using 4 by default.
+INFO 10-23 18:38:42 [arg_utils.py:1166] Chunked prefill is not supported for ARM and POWER and S390X CPUs; disabling it for V1 backend.
+INFO 10-23 18:38:44 [__init__.py:216] Automatically detected platform cpu.
+(EngineCore_DP0 pid=8933) INFO 10-23 18:38:46 [core.py:644] Waiting for init message from front-end.
+(EngineCore_DP0 pid=8933) INFO 10-23 18:38:46 [core.py:77] Initializing a V1 LLM engine (v0.11.0) with config: model='Qwen/Qwen2.5-0.5B-Instruct', speculative_config=None, tokenizer='Qwen/Qwen2.5-0.5B-Instruct', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=32768, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=True, quantization=None, enforce_eager=False, kv_cache_dtype=auto, device_config=cpu, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser=''), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=Qwen/Qwen2.5-0.5B-Instruct, enable_prefix_caching=True, chunked_prefill_enabled=False, pooler_config=None, compilation_config={"level":2,"debug_dump_path":"","cache_dir":"","backend":"inductor","custom_ops":["none"],"splitting_ops":null,"use_inductor":true,"compile_sizes":null,"inductor_compile_config":{"enable_auto_functionalized_v2":false,"dce":true,"size_asserts":false,"nan_asserts":false,"epilogue_fusion":true},"inductor_passes":{},"cudagraph_mode":0,"use_cudagraph":true,"cudagraph_num_of_warmups":0,"cudagraph_capture_sizes":[],"cudagraph_copy_inputs":false,"full_cuda_graph":false,"use_inductor_graph_partition":false,"pass_config":{},"max_capture_size":null,"local_cache_dir":null}
+(EngineCore_DP0 pid=8933) INFO 10-23 18:38:46 [importing.py:63] Triton not installed or not compatible; certain GPU-related functions will not be available.
+(EngineCore_DP0 pid=8933) WARNING 10-23 18:38:47 [cpu.py:316] Pin memory is not supported on CPU.
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+(EngineCore_DP0 pid=8933) INFO 10-23 18:38:47 [parallel_state.py:1208] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+(EngineCore_DP0 pid=8933) INFO 10-23 18:38:47 [cpu_model_runner.py:106] Starting to load model Qwen/Qwen2.5-0.5B-Instruct...
+(EngineCore_DP0 pid=8933) INFO 10-23 18:38:47 [cpu.py:104] Using Torch SDPA backend.
+(EngineCore_DP0 pid=8933) INFO 10-23 18:38:47 [weight_utils.py:392] Using model weights format ['*.safetensors']
+(EngineCore_DP0 pid=8933) INFO 10-23 18:38:47 [weight_utils.py:450] No model.safetensors.index.json found in remote.
 Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
-Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00, 12.97it/s]
-
-INFO 12-12 22:52:58 cpu_executor.py:186] # CPU blocks: 21845
-INFO 12-12 22:52:59 llm_engine.py:447] init engine (profile, create kv cache, warmup model) took 0.25 seconds
-Processed prompts: 100%|███████████████████████████████████████| 3/3 [00:33<00:00, 11.10s/it, est. speed input: 0.63 toks/s, output: 20.61 toks/s]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00, 14.03it/s]
+(EngineCore_DP0 pid=8933) 
+(EngineCore_DP0 pid=8933) INFO 10-23 18:38:47 [default_loader.py:267] Loading weights took 0.10 seconds
+(EngineCore_DP0 pid=8933) INFO 10-23 18:38:47 [kv_cache_utils.py:1087] GPU KV cache size: 349,520 tokens
+(EngineCore_DP0 pid=8933) INFO 10-23 18:38:47 [kv_cache_utils.py:1091] Maximum concurrency for 32,768 tokens per request: 10.67x
+(EngineCore_DP0 pid=8933) INFO 10-23 18:38:48 [cpu_model_runner.py:117] Warming up model for the compilation...
+(EngineCore_DP0 pid=8933) WARNING 10-23 18:38:48 [cudagraph_dispatcher.py:106] cudagraph dispatching keys are not initialized. No cudagraph will be used.
+(EngineCore_DP0 pid=8933) INFO 10-23 18:38:52 [cpu_model_runner.py:121] Warming up done.
+(EngineCore_DP0 pid=8933) INFO 10-23 18:38:52 [core.py:210] init engine (profile, create kv cache, warmup model) took 4.12 seconds
+(EngineCore_DP0 pid=8933) WARNING 10-23 18:38:52 [cpu.py:117] Environment variable VLLM_CPU_KVCACHE_SPACE (GiB) for CPU backend is not set, using 4 by default.
+INFO 10-23 18:38:52 [llm.py:306] Supported_tasks: ['generate']
+Adding requests: 100%|████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00, 2043.01it/s]
+Processed prompts: 100%|███████████████████| 3/3 [00:18<00:00,  6.05s/it, est. speed input: 1.16 toks/s, output: 35.22 toks/s]
 {
     "Prompt": "Write a hello world program in C",
-    "Generated text": "\n\nHere's a simple \"Hello, World!\" program written in C:\n\n```c\n#include <stdio.h>\n\nint main() {\n    printf(\"Hello, World!\\n\");\n    return 0;\n}\n```\n\nThis program does the following:\n\n1. Includes the `<stdio.h>` header to use the `printf` function.\n2. Defines a `main` function, which is the entry point of the program.\n3. Uses `printf` to output the message \"Hello, World!\" to the console.\n4. Returns 0 to indicate that the program executed successfully.\n\nWhen you run this program, you should see the output:\n\n```\nHello, World!\n``` \n\nThis is the basic structure of a C program, providing a simple example of how to create, run, and display a basic program. Note that C is a high-level programming language, meaning that it provides low-level operations for users to interact with the hardware, but at the same time, it is a low-level language that needs to be compiled and linked into an executable file (.exe) that the computer's operating system can load and run. C, as a compiled language, often requires additional libraries and tools for use. For more information, you can refer to the C Programming Language documentation."
+    "Generated text": "++ to print \"Hello, World!\" on the console.\n\n```cpp\n#include <iostream>\n\nint main() {\n    std::cout << \"Hello, World!\" << std::endl;\n    return 0;\n}\n```\n\nThis program demonstrates the use of the `std::cout` stream object in C++ to output text to the console. The `<<` operator is used to print the text \"Hello, World!\" to the console, followed by a newline character (`std::endl`). The `return 0;` statement indicates that the program should exit with a success code. The `main` function is the entry point of the program. When executed, the `main` function will invoke the `std::cout` object and print \"Hello, World!\" to the console. The `return 0;` statement indicates that the program is successful and should not throw any errors."
 }
 {
     "Prompt": "Write a hello world program in Java",
-    "Generated text": "\n\nCertainly! Below is a simple `HelloWorld.java` file that prints \"Hello, World!\" to the console when you run it:\n\n```java\npublic class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}\n```\n\nTo compile this program, you would use an integrated development environment (IDE) like IntelliJ IDEA, Eclipse, or NetBeans. Here is how you can compile it:\n\n1. Open a terminal or command prompt.\n2. Navigate to the directory where you saved the `HelloWorld.java` file.\n3. Compile the program using the following command:\n   ```bash\n   javac HelloWorld.java\n   ```\n4. Run the compiled program using the following command:\n   ```bash\n   java HelloWorld\n   ```\n\nThis will output:\n```\nHello, World!\n```"
+    "Generated text": "\n\nSure! Here is a simple \"Hello World\" program in Java:\n\n```java\npublic class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println(\"Hello World!\");\n    }\n}\n```\n\nTo run this program, simply compile it using the Java compiler:\n\n```\njavac HelloWorld.java\n```\n\nThen run it using the `java` command:\n\n```\njava HelloWorld\n```\n\nYou should see the message \"Hello World!\" printed to the console. \n\nThis is a basic example of how to write a Java program. Java is a popular programming language and there are many other examples and libraries available for more advanced programming tasks. \n\nIf you're new to Java, you might want to start with the official Java tutorials or the official Java documentation. There are also many online resources and communities that can help you learn Java. For a complete introduction, I recommend checking out the Java Tutorial on Codecademy. \n\nLet me know if you have any more questions!"
 }
 {
     "Prompt": "Write a hello world program in Rust",
-    "Generated text": "\n\nCertainly! Here is a simple example of a `HelloWorld` program in Rust:\n\n```rust\nfn main() {\n    println!(\"Hello, world!\");\n}\n```\n\n### Explanation:\n\n- `fn main()`: This is the entry point of the program.\n- `println!`: This function is used to print out the message `Hello, world!` to the console.\n- `println!`: The `println!` macro is used to print messages in Rust.\n\n### How to Run the Program:\n\n1. Make sure you have Rust installed on your system.\n2. Save the above code in a file with a `.rs` extension, e.g., `hello.rs`.\n3. Open a terminal or command prompt and navigate to the directory where the file is saved.\n4. Run the program by typing `rustc hello.rs` (if you're using `rustc`, you don't need to specify the file extension).\n5. After the program runs, it should print the message `Hello, world!` to the console.\n\n### Running in Development:\n\nIf you want to run the program in development mode to see the output in the terminal, you can use the `-o` flag:\n\n```sh\nrustc -o hello-dev hello.rs\n./"
+    "Generated text": ".\nCertainly! Here's a simple \"Hello, World!\" program in Rust:\n\n```rust\nfn main() {\n    println!(\"Hello, World!\");\n}\n```\n\nThis program defines a `main` function that runs when the program is executed. Inside the `main` function, the `println!` macro is used to print the string \"Hello, World!\" to the console. \n\nYou can save this code in a file with a `.rs` extension, for example `hello.rs`, and run it using the command `rustc hello.rs`, which will compile and run the program. When you run the program, you should see the output \"Hello, World!\" printed to the console. \n\nIn Rust, the `main` function is the entry point of the program, and the program starts executing from there. The `println!` macro is a function that prints a string to the console. Other important functions in Rust include `println!`, `printlnln`, `println!`, `printlnln`, `println!`, and `printlnln`, which provide similar functionality for different purposes. \n\nYou can also use the `println!` macro to print more complex data structures to the console, such as arrays, slices, strings, numbers, booleans, and"
 }
 ```
 
-You can try with other prompts and models such as `meta-llama/Llama-3.2-1B`. 
-
-Continue to learn how to set up an OpenAI-compatible server.
+You can try with other prompts and models such as `meta-llama/Llama-3.2-1B`. Continue to learn how to set up an OpenAI-compatible server.
