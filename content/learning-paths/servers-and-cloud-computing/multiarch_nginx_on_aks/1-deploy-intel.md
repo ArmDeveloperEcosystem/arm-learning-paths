@@ -10,63 +10,18 @@ layout: learningpathall
 
 In this section, you'll bootstrap the cluster with nginx on Intel, simulating an existing Kubernetes (K8s) cluster running nginx. In the next section, you'll add arm64 nodes alongside the Intel nodes for performance comparison. 
 
-1. Use a text editor to copy the following YAML and save it to a file called `namespace.yaml`:
+1. Run the following command to download and create the namespace:
 
-```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: nginx
+```bash
+curl -o namespace.yaml https://raw.githubusercontent.com/geremyCohen/nginxOnAKS/refs/heads/main/namespace.yaml
 ```
 
 Applying this YAML creates a new namespace called `nginx`, which contains all subsequent K8s objects.
 
-2. Use a text editor to copy the following YAML and save it to a file called `intel_nginx.yaml`:
+2. Run the following command to download the Intel nginx deployment and service configuration:
 
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx-intel-deployment
-  labels:
-    app: nginx-multiarch
-  namespace: nginx
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      arch: intel
-  template:
-    metadata:
-      labels:
-        app: nginx-multiarch
-        arch: intel
-    spec:
-      nodeSelector:
-        agentpool: intel
-      containers:
-      - image: nginx:latest
-        name: nginx-multiarch
-        ports:
-        - containerPort: 80
-          name: http
-          protocol: TCP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx-intel-svc
-  namespace: nginx
-spec:
-  sessionAffinity: None
-  ports:
-  - nodePort: 30080
-    port: 80
-    protocol: TCP
-    targetPort: 80
-  selector:
-    arch: intel
-  type: LoadBalancer
+```bash
+curl -o intel_nginx.yaml https://raw.githubusercontent.com/geremyCohen/nginxOnAKS/refs/heads/main/intel_nginx.yaml
 ```
 
 When the above is applied:
