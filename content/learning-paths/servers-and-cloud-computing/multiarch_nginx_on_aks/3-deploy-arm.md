@@ -95,13 +95,13 @@ When the pods show `Running` and the service shows a valid `External IP`, you're
 2. Run the following to make an HTTP request to the ARM nginx service using the script you created earlier:
 
 ```bash
-./nginx_util.sh get arm
+./nginx_util.sh curl arm
 ```
 
 You get back the HTTP response, as well as information about which pod served it:
 
 ```output
-Using service endpoint 48.192.64.197 for get on arm service
+Using service endpoint 48.192.64.197 for curl on arm service
 Response:
 {
   "message": "nginx response",
@@ -119,8 +119,8 @@ If you see output similar to above, you have successfully added ARM nodes to you
 Now you can test both architectures and compare their responses:
 
 ```bash
-./nginx_util.sh get intel
-./nginx_util.sh get arm
+./nginx_util.sh curl intel
+./nginx_util.sh curl arm
 ```
 
 Each command will route to its respective architecture-specific service, allowing you to compare performance and verify that your multi-architecture cluster is working correctly.

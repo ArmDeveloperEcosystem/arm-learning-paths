@@ -125,13 +125,13 @@ With the pods in a `Ready` state and the service showing a valid `External IP`, 
 4. Run the following to make an HTTP request to the Intel nginx service:
 
 ```bash
-./nginx_util.sh get intel
+./nginx_util.sh curl intel
 ```
 
 You get back the HTTP response, as well as information about which pod served it:
 
 ```output
-Using service endpoint 20.3.71.69 for get on intel service
+Using service endpoint 20.3.71.69 for curl on intel service
 Response:
 {
   "message": "nginx response",

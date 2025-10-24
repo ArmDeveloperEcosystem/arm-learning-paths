@@ -60,13 +60,13 @@ nginx-multiarch-svc   10.244.0.21:80,10.244.1.1:80   47s
 4. Run the following to make HTTP requests to the multiarch nginx service:
 
 ```bash
-./nginx_util.sh get multiarch
+./nginx_util.sh curl multiarch
 ```
 
 You get back the HTTP response from one of the available pods:
 
 ```output
-Using service endpoint 20.99.208.140 for get on multiarch service
+Using service endpoint 20.99.208.140 for curl on multiarch service
 Response:
 {
   "message": "nginx response",
@@ -80,9 +80,9 @@ Served by: nginx-arm-deployment-5bf8df95db-wznff
 5. Run the command multiple times to see load balancing across architectures:
 
 ```bash
-./nginx_util.sh get multiarch
-./nginx_util.sh get multiarch
-./nginx_util.sh get multiarch
+./nginx_util.sh curl multiarch
+./nginx_util.sh curl multiarch
+./nginx_util.sh curl multiarch
 ```
 
 The responses will show requests being served by different architecture deployments (intel or arm), demonstrating that the multiarch service distributes load across all available pods.
@@ -91,8 +91,8 @@ The responses will show requests being served by different architecture deployme
 
 Now you can compare the behavior:
 
-- **Architecture-specific**: `./nginx_util.sh get intel` always routes to Intel pods
-- **Architecture-specific**: `./nginx_util.sh get arm` always routes to ARM pods
-- **Multiarch**: `./nginx_util.sh get multiarch` routes to any available pod
+- **Architecture-specific**: `./nginx_util.sh curl intel` always routes to Intel pods
+- **Architecture-specific**: `./nginx_util.sh curl arm` always routes to ARM pods
+- **Multiarch**: `./nginx_util.sh curl multiarch` routes to any available pod
 
 This multiarch service provides high availability and load distribution across your entire multi-architecture cluster.
