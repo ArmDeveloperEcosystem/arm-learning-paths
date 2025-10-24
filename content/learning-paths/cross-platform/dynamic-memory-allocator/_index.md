@@ -5,7 +5,6 @@ minutes_to_complete: 120
 
 who_is_this_for: This is an introductory topic for software developers learning about dynamic memory allocation for the first time, and who may have used malloc and free in C programming. It also provides a starting point to explore more advanced memory allocation topics.
 
-layout: learningpathall
 learning_objectives:
 - Explain how dynamic memory allocation and the C heap works
 - Write a simple dynamic memory allocator

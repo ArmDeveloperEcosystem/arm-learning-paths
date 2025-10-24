@@ -29,8 +29,6 @@ rag_data_cutoff_date: 2025/01/17
 
 title_chatbot_area: Phi-4-mini Chatbot Demo
 
-prismjs: true
-
 
 
 ### Specific details to this demo
@@ -51,7 +49,6 @@ tps_ranges:
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 demo_template_name: phi_onnx_chatbot_demo   # allows the 'demo.html' partial to route to the correct Configuration and Demo/Stats sub partials for page render.
-weight: 2                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---

@@ -74,4 +74,4 @@ You should see an output similar to:
 ```output
 5.0.5
 ```
-Cassadra's installation is complete. You can now proceed with the baseline testing.
+Cassandra's installation is complete. You can now proceed with the baseline testing.
