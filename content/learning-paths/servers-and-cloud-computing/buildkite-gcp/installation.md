@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Get started with installing the Buildkite agent
-This section guides you through installing the Buildkite agent on a Google Axion C4A Arm VM, enabling it to connect to your Buildkite account and run the CI/CD pipelines.
+This section walks you through installing the Buildkite agent on a Google Axion C4A Arm VM, enabling it to connect to your Buildkite account and run the CI/CD pipelines.
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu" language="bash">}}
@@ -20,7 +20,7 @@ sudo zypper install -y curl unzip
   {{< /tab >}}
 {{< /tabpane >}}
 
-## Download and install Buildkite agent
+## Download and install the Buildkite agent
 
 Use this one-line command to download and run the Buildkite installer:
 
@@ -86,7 +86,7 @@ The Buildkite Agent version 3.43.0 introduces Linux/Arm64 Docker image for the B
 
 The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends Buildkite Agent version v3.43.0 or later for Arm platforms.
 {{% /notice %}}
-### Install Docker and Docker Buildx
+### Install Docker
 
 Buildkite uses Docker to build and push images.
 
@@ -141,7 +141,9 @@ For more examples and ideas, visit:
 Docker Buildx is a plugin that allows the building of multi-architecture images, for example `arm64` and `amd64`. 
 If you're using SUSE Linux, you need to install Docker Buildx manually. On Ubuntu, Docker Buildx is included by default, so you can skip this step.
 
-Download the binary and move it to the Docker CLI plugin directory:
+## Download Docker Buildx
+
+Download the Docker Buildx binary and move it to the Docker CLI plugin directory. This enables advanced multi-architecture builds on your Arm VM.
 
 ```console
 wget https://github.com/docker/buildx/releases/download/v0.26.1/buildx-v0.26.1.linux-arm64
@@ -149,6 +151,26 @@ chmod +x buildx-v0.26.1.linux-arm64
 sudo mkdir -p /usr/libexec/docker/cli-plugins
 sudo mv buildx-v0.26.1.linux-arm64 /usr/libexec/docker/cli-plugins/docker-buildx
 ```
+
+After installing, verify that Docker Buildx is available:
+
+```console
+docker buildx version
+```
+
+The expected output is similar to:
+
+```output
+github.com/docker/buildx v0.26.1
+```
+
+If you see the version information, Docker Buildx is installed correctly and ready for use.
+
+{{% notice Note %}}
+If you encounter a "permission denied" error, ensure your user is in the `docker` group and that the plugin file is executable.
+{{% /notice %}}
+
+You can now use Docker Buildx to build and push multi-architecture images, which is especially useful for Arm-based CI/CD pipelines.
 
 ## What you've accomplished
 
