@@ -54,8 +54,6 @@ Taking a closer look at the `arm_nginx.yaml` deployment file, you'll see setting
 
 ### Verify the deployment
 
-### Verify the deployment
-
 1. Get the status of nodes, pods and services by running:
 
 ```bash
