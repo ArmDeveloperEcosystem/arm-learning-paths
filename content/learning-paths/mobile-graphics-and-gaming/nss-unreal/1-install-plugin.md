@@ -35,7 +35,8 @@ Before you begin, download the required plugins and dependencies. These two repo
 
 [**Neural Super Sampling Unreal Engine Plugin** → GitHub Repository](https://github.com/arm/neural-graphics-for-unreal)
 
-Download the latest release package and extract it on your Windows machine.
+Download the latest release package and extract it on your Windows machine. Use the folder corresponding to your Unreal version.
+
 
 ### 2. Download the runtime for ML Extensions for Vulkan
 [**Unreal NNE Runtime RDG for ML Extensions for Vulkan** → GitHub Repository](https://github.com/arm/ml-extensions-for-vulkan-unreal-plugin).
