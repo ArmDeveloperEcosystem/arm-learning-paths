@@ -23,9 +23,7 @@ subjects: Performance and Architecture
 armips:
 - Neoverse
 
-layout: learningpathall
 
-learning_path_main_page: 'yes'
 
 operatingsystems:
 - Linux
