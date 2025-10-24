@@ -86,10 +86,6 @@ To compile with GCC, run:
 g++ -march=armv8-a -O3 skip-word.c
 ```
 
-{{% notice Note %}}
-Note that `gcc++-14` does not support "mops" as a function multiversioning feature, so to compile this example with gcc remove the `target_clones` from CopyWord.
-{{% /notice %}}
-
 To run the application:
 
 ```console

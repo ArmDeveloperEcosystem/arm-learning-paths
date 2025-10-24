@@ -64,11 +64,9 @@ f.resolver:
 The immediate value `#12582912` in this assembly is used to construct a bitmask for materializing the runtime detection of `rcpc3`.
 {{% /notice %}}
 
-#### Differences between GCC 14 and LLVM 20 implementations
+#### Differences between GCC 16 and LLVM 20 implementations
 
-- The attribute `target_version` in GCC is only supported for C++, not for C.
 - The set of features as indicated by the [mapping table](https://arm-software.github.io/acle/main/acle.html#mapping) differs in support between the two compilers.
-- LLVM supports mixing `target_version` with `target_clones` whereas GCC does not yet support this.
 
 #### Resolver emission with LLVM
 

@@ -141,10 +141,6 @@ To compile with GCC, use:
 g++ -march=armv8-a -O3 dotprod.c
 ```
 
-{{% notice Note %}}
-Note that `gcc-14` does not yet support `target_version` when using the c-frontend. You can use `g++-14` instead.
-{{% /notice %}}
-
 To run the application:
 
 ```console
