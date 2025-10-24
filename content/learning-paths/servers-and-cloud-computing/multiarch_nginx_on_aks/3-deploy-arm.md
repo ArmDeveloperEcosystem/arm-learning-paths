@@ -10,52 +10,23 @@ layout: learningpathall
 
 In this section, you'll add nginx on ARM nodes to your existing cluster, completing your multi-architecture Intel/AMD/ARM environment for comprehensive performance comparison.
 
-1. Use a text editor to copy the following YAML and save it to a file called `arm_nginx.yaml`:
+Copy and paste the following commands into a terminal to download and apply the ARM deployment and service:
 
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx-arm-deployment
-  labels:
-    app: nginx-multiarch
-  namespace: nginx
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      arch: arm
-  template:
-    metadata:
-      labels:
-        app: nginx-multiarch
-        arch: arm
-    spec:
-      nodeSelector:
-        agentpool: arm
-      containers:
-      - image: nginx:latest
-        name: nginx-multiarch
-        ports:
-        - containerPort: 80
-          name: http
-          protocol: TCP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx-arm-svc
-  namespace: nginx
-spec:
-  sessionAffinity: None
-  ports:
-  - nodePort: 30082
-    port: 80
-    protocol: TCP
-    targetPort: 80
-  selector:
-    arch: arm
-  type: LoadBalancer
+```bash
+curl -o arm_nginx.yaml https://raw.githubusercontent.com/geremyCohen/nginxOnAKS/refs/heads/main/arm_nginx.yaml
+kubectl apply -f arm_nginx.yaml
+```
+
+When pasted into your terminal, you will see output similar to the following for each command:
+
+```output
+curl -o arm_nginx.yaml https://raw.githubusercontent.com/geremyCohen/nginxOnAKS/refs/heads/main/arm_nginx.yaml
+kubectl apply -f arm_nginx.yaml
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   739  100   739    0     0  15192      0 --:--:-- --:--:-- --:--:-- 15306
+deployment.apps/nginx-arm-deployment created
+service/nginx-arm-svc created
 ```
 
 When the above is applied:
