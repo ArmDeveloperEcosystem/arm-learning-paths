@@ -21,7 +21,7 @@ This section walks you through the required tools and two supported setup option
 
 ## Download and explore the code examples
 
-To get started, begin by [downloading the code examples](https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2).
+To get started, begin by [downloading the code examples](https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/d41190c0cf962f778ae71b94adf5330033019aed/code-examples-d41190c0cf962f778ae71b94adf5330033019aed.tar.gz?path=learning-paths/cross-platform/multiplying-matrices-with-sme2).
 
 Now extract the archive, and change directory to:
 ``code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2.``
@@ -68,7 +68,7 @@ Among other files, it includes:
 - `run-fvp.sh` to run the FVP model.
 - A `docker` directory containing:
   - `assets.source_me` to provide toolchain paths.
-  - `build-my-container.sh`, a script that automates building the Docker image from the `sme2-environment.docker` file. It runs the Docker build command with the correct arguments so you don’t have to remember them. 
+  - `build-my-container.sh`, a script that automates building the Docker image from the `sme2-environment.docker` file. It runs the Docker build command with the correct arguments so you don’t have to remember them.
   - `sme2-environment.docker`, a custom Docker file that defines the steps to build the SME2 container image. It installs all the necessary dependencies, including the SME2-compatible compiler and Arm FVP emulator.
   - `build-all-containers.sh`, a script to build multi-architecture images.
 - `.devcontainer/devcontainer.json` for VS Code container support.
@@ -113,7 +113,7 @@ If your machine doesn't support SME2, or you want to emulate it, you can use the
 
 The Docker container includes both a compiler and [Arm's Fixed Virtual Platform (FVP)
 model](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms)
-for emulating code that uses SME2 instructions. You can either run the prebuilt container image provided in this Learning Path or build it yourself using the Docker file that is included. 
+for emulating code that uses SME2 instructions. You can either run the prebuilt container image provided in this Learning Path or build it yourself using the Docker file that is included.
 
 If building manually, follow the instructions in the ``sme2-environment.docker`` file to install the required tools on your machine.
 
@@ -144,7 +144,7 @@ that it is working with the following:
 docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
-c9c5fd25a1bd: Pull complete 
+c9c5fd25a1bd: Pull complete
 Digest: sha256:940c619fbd418f9b2b1b63e25d8861f9cc1b46e3fc8b018ccfe8b78f19b8cc4f
 Status: Downloaded newer image for hello-world:latest
 
