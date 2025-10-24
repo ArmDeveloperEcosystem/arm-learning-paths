@@ -10,28 +10,54 @@ layout: learningpathall
 
 Install the MCUXpresso extension in VS Code:
 
+{{< tabpane code=false >}}
+{{< tab header="Windows/Linux" >}}
 1. Open VS Code and press `Ctrl+Shift+X` to open Extensions
 2. Search for "MCUXpresso for VS Code"
 3. Click **Install** on the NXP extension
+{{< /tab >}}
+{{< tab header="macOS" >}}
+1. Open VS Code and press `Cmd+Shift+X` to open Extensions
+2. Search for "MCUXpresso for VS Code"  
+3. Click **Install** on the NXP extension
+{{< /tab >}}
+{{< /tabpane >}}
 
 Configure the ARM toolchain path:
 
+{{< tabpane code=false >}}
+{{< tab header="Windows/Linux" >}}
 1. Open Settings with `Ctrl+,`
 2. Search for **MCUXpresso: Toolchain**
-3. Set the toolchain path in settings.json:
-
-```json
-{
-  "mcuxpresso.toolchainPath": "/opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin"
-}
-```
+3. Set the toolchain path to: `/opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin`
+{{< /tab >}}
+{{< tab header="macOS" >}}
+1. Open Settings with `Cmd+,`
+2. Search for **MCUXpresso: Toolchain**
+3. Set the toolchain path to: `/opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin`
+{{< /tab >}}
+{{< /tabpane >}}
 
 Install the MCUXpresso SDK for FRDM-MIMX93:
 
+{{< tabpane code=false >}}
+{{< tab header="Windows/Linux" >}}
 1. Open Command Palette: `Ctrl+Shift+P`
 2. Type: **MCUXpresso: Install MCUXpresso SDK**
-3. Search for "FRDM-MIMX93"
+3. Search for "FRDM-MIMX93" or select **MCIMX93-EVK**
 4. Select the latest SDK and click **Install**
+{{< /tab >}}
+{{< tab header="macOS" >}}
+1. Open Command Palette: `Cmd+Shift+P`
+2. Type: **MCUXpresso: Install MCUXpresso SDK**
+3. Search for "FRDM-MIMX93" or select **MCIMX93-EVK**
+4. Select the latest SDK and click **Install**
+{{< /tab >}}
+{{< /tabpane >}}
+
+{{% notice Note %}}
+If the FRDM-MIMX93 development board is not listed in the current MCUXpresso SDK catalog, you can alternatively select **MCIMX93-EVK** as they share the same i.MX93 SoC with Cortex-M33 core architecture. The SDK compatibility ensures seamless development across both platforms.
+{{% /notice %}}
 
 ## Clone the executor_runner repository
 
@@ -84,10 +110,20 @@ code .
 
 Initialize the MCUXpresso project:
 
+{{< tabpane code=false >}}
+{{< tab header="Windows/Linux" >}}
 1. Press `Ctrl+Shift+P` to open Command Palette
 2. Type: **MCUXpresso: Import Repository**
 3. Select the current folder
 4. Choose **MIMX9352_cm33** as the target processor
+{{< /tab >}}
+{{< tab header="macOS" >}}
+1. Press `Cmd+Shift+P` to open Command Palette
+2. Type: **MCUXpresso: Import Repository**
+3. Select the current folder
+4. Choose **MIMX9352_cm33** as the target processor
+{{< /tab >}}
+{{< /tabpane >}}
 
 VS Code generates the MCUXpresso configuration.
 
@@ -115,16 +151,35 @@ If you see "region RAM overflowed" errors during build, reduce these pool sizes.
 
 Configure the build system:
 
+{{< tabpane code=false >}}
+{{< tab header="Windows/Linux" >}}
 1. Press `Ctrl+Shift+P`
 2. Type: **CMake: Configure**
 3. Select **ARM GCC** as the kit
 4. Choose **Debug** or **Release**
+{{< /tab >}}
+{{< tab header="macOS" >}}
+1. Press `Cmd+Shift+P`
+2. Type: **CMake: Configure**
+3. Select **ARM GCC** as the kit
+4. Choose **Debug** or **Release**
+{{< /tab >}}
+{{< /tabpane >}}
 
 Build the project:
 
 Press `F7` or:
+
+{{< tabpane code=false >}}
+{{< tab header="Windows/Linux" >}}
 1. Press `Ctrl+Shift+P`
 2. Type: **CMake: Build**
+{{< /tab >}}
+{{< tab header="macOS" >}}
+1. Press `Cmd+Shift+P`
+2. Type: **CMake: Build**
+{{< /tab >}}
+{{< /tabpane >}}
 
 Watch the build output:
 
