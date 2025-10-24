@@ -14,9 +14,24 @@ Find your board's IP address using the serial console or check your router's DHC
 
 Connect via SSH:
 
+{{< tabpane code=false >}}
+{{< tab header="Windows/Linux" >}}
 ```bash
 ssh root@192.168.1.24
 ```
+
+Alternative with PuTTY on Windows:
+- Host: `192.168.1.24`
+- Port: `22`
+- Connection type: SSH
+- Username: `root`
+{{< /tab >}}
+{{< tab header="macOS" >}}
+```bash
+ssh root@192.168.1.24
+```
+{{< /tab >}}
+{{< /tabpane >}}
 
 Replace `192.168.1.24` with your board's IP address.
 
@@ -24,9 +39,18 @@ Replace `192.168.1.24` with your board's IP address.
 
 Copy the built firmware file to the board's firmware directory:
 
+{{< tabpane code=false >}}
+{{< tab header="Windows/Linux" >}}
 ```bash
-scp build/executorch_runner_cm33.elf root@192.168.1.24:/lib/firmware/
+scp debug/executorch_runner_cm33.elf root@192.168.1.24:/lib/firmware/
 ```
+{{< /tab >}}
+{{< tab header="macOS" >}}
+```bash
+scp debug/executorch_runner_cm33.elf root@192.168.1.24:/lib/firmware/
+```
+{{< /tab >}}
+{{< /tabpane >}}
 
 Verify the file was copied:
 
@@ -75,9 +99,18 @@ The executor_runner loads `.pte` model files from DDR memory at address 0x801000
 
 Copy your `.pte` model to the board:
 
+{{< tabpane code=false >}}
+{{< tab header="Windows/Linux" >}}
 ```bash
 scp model.pte root@192.168.1.24:/tmp/
 ```
+{{< /tab >}}
+{{< tab header="macOS" >}}
+```bash
+scp model.pte root@192.168.1.24:/tmp/
+```
+{{< /tab >}}
+{{< /tabpane >}}
 
 Write the model to DDR memory:
 
@@ -105,15 +138,28 @@ The executor_runner outputs debug information via UART. Connect a USB-to-serial 
 
 Open a serial terminal (115200 baud, 8N1):
 
+{{< tabpane code=false >}}
+{{< tab header="Windows/Linux" >}}
 ```bash
 screen /dev/ttyUSB0 115200
 ```
 
-On macOS:
-
+Alternative with minicom:
+```bash
+minicom -D /dev/ttyUSB0 -b 115200
+```
+{{< /tab >}}
+{{< tab header="macOS" >}}
 ```bash
 screen /dev/tty.usbserial-* 115200
 ```
+
+Alternative with minicom:
+```bash
+minicom -D /dev/tty.usbserial-* -b 115200
+```
+{{< /tab >}}
+{{< /tabpane >}}
 
 You should see output from the ExecuTorch runtime:
 
@@ -217,7 +263,21 @@ This might indicate memory configuration issues. Reduce the memory pool sizes in
 To deploy a new version of the firmware:
 
 1. Build the updated firmware on your development machine
-2. Copy to the board: `scp build/executorch_runner_cm33.elf root@<board-ip>:/lib/firmware/`
+2. Copy to the board: 
+
+{{< tabpane code=false >}}
+{{< tab header="Windows/Linux" >}}
+```bash
+scp debug/executorch_runner_cm33.elf root@<board-ip>:/lib/firmware/
+```
+{{< /tab >}}
+{{< tab header="macOS" >}}
+```bash
+scp debug/executorch_runner_cm33.elf root@<board-ip>:/lib/firmware/
+```
+{{< /tab >}}
+{{< /tabpane >}}
+
 3. Restart RemoteProc:
 
 ```bash { command_line="root@frdm-imx93" }
