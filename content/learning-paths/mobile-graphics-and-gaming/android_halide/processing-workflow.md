@@ -8,7 +8,7 @@ layout: "learningpathall"
 ---
 
 ## Objective
-In this section, you will build a real-time camera processing pipeline using Halide. First, you capture video frames from a webcam using OpenCV, then implement a Gaussian (binomial) blur to smooth the captured images, followed by thresholding to create a clear binary output highlighting prominent image features. After establishing this pipeline, you will measure performance and then explore Halide’s scheduling options—parallelization and tiling—to understand when they help and when they don’t.
+In this section, you will build a real-time camera processing pipeline using Halide. First, you capture video frames from a webcam using OpenCV, then implement a Gaussian (binomial) blur to smooth the captured images, followed by thresholding to create a clear binary output highlighting prominent image features. After establishing this pipeline, you will measure performance and then explore Halide's  scheduling options—parallelization and tiling—to understand when they help and when they don’t.
 
 ## Gaussian blur and thresholding
 Create a new `camera-capture.cpp` file and modify it as follows:
@@ -364,7 +364,7 @@ int main() {
 ```
  
 * The console prints ms, FPS, and MPix/s per frame, measured strictly around realize() (camera capture and UI are excluded).
-* The very first line is labeled [warm-up] because it includes Halide’s JIT compilation. You can ignore it when comparing schedules.
+* The very first line is labeled [warm-up] because it includes Halide's  JIT compilation. You can ignore it when comparing schedules.
 * MPix/s = (width*height)/seconds is a good resolution-agnostic metric to compare schedule variants.
 
 Build and run the application. Here is the sample output:

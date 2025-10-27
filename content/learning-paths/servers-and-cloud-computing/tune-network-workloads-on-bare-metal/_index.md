@@ -9,7 +9,7 @@ learning_objectives:
     - Set up Apache Tomcat and wrk2 to benchmark HTTP on an Arm Neoverse bare‑metal host
     - Establish a reproducible baseline baseline (file‑descriptor limits, logging, thread counts, fixed core set)
     - Tune NIC queue count to match available cores and measure impact
-    - Improve NUMA locality by placing Tomcat on the NIC’s NUMA node and aligning worker threads with cores
+    - Improve NUMA locality by placing Tomcat on the NIC's NUMA node and aligning worker threads with cores
     - Compare IOMMU strict mode and IOMMU passthrough mode, and select the configuration that delivers the best performance for your workload
 
 prerequisites:

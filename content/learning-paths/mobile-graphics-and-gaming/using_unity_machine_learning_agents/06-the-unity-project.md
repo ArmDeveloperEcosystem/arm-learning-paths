@@ -114,9 +114,9 @@ _DecisionRequester_ is a component from the ML Agents Toolkit. It controls how o
 
 ![DecisionRequesterComponent](images/decision-requester-component.png "Figure 6. The DecisionRequester component on the ML-NPC game object.")
 
-ML Agent components are designed to be run from a _MonoBehaviour_'s _FixedUpdate_ function.
+ML Agent components are designed to be run from a _MonoBehavior_'s _FixedUpdate_ function.
 
-_MonoBehaviour_ provides a variety of functions that game objects can use to perform various functions at specific times during a frame. _FixedUpdate_ is called in step with the Unity physics system and is called at a fixed interval (independent of frame rate). The interval rate for _FixedUpdate_ can be changed using Edit->Project Settings->Time->Fixed Timestep.
+_MonoBehavior_ provides a variety of functions that game objects can use to perform various functions at specific times during a frame. _FixedUpdate_ is called in step with the Unity physics system and is called at a fixed interval (independent of frame rate). The interval rate for _FixedUpdate_ can be changed using Edit->Project Settings->Time->Fixed Timestep.
 
 You shouldn't need to modify this value but it is important to be aware that _FixedUpdate_ can be called multiple times per frame depending on the interval.
 
@@ -132,7 +132,7 @@ _Max Step_ is a property from _Agent_. It determines the maximum number of steps
 
 The ML subsystem calls on AgentDrArm implementations of functions such as _CollateObservations(..)_ and _OnActionReceived(..)_. (More on this later.)
 
-#### BehaviourParameters Component
+#### Behavior Parameters Component
 
 The behavior parameters dictate the size of the neural network.
 
@@ -144,7 +144,7 @@ _Inference Device_ is set to _Default_ and determines which compute device is us
 
 There shouldn't be much difference between Burst and CPU in this case, though Unity is moving more and more to the Burst compiler.
 
-The _Behaviour Name_ is important as you will use it again later in the training sections. You will see that "BossBattle" is used in several places.
+The _Behavior Name_ is important as you will use it again later in the training sections. You will see that "BossBattle" is used in several places.
 
 #### RayPerceptionSensor3D Component
 

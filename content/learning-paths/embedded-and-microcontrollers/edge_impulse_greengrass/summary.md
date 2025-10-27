@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Summary 
 
-Congradulations!  You have completed this workshop!  Please select "Next" below to read a bit about cleaning up your AWS environment in order to minimize costs/etc (AWS workshop attendees: this will happen automatically for you)
+Congratulations!  You have completed this workshop!  Please select "Next" below to read a bit about cleaning up your AWS environment in order to minimize costs/etc (AWS workshop attendees: this will happen automatically for you)
 
 ### For More Information
 
