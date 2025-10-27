@@ -46,7 +46,7 @@ Example output (NIC on NUMA node 1):
 1
 ```
 
-Allocate the eight reserved cores to the NIC’s NUMA node (the example below keeps CPUs 96–103 online on node 1 and offlines the rest):
+Allocate the eight reserved cores to the NIC's NUMA node (the example below keeps CPUs 96–103 online on node 1 and offlines the rest):
 
 ```bash
 for no in {96..103}; do sudo bash -c "echo 1 > /sys/devices/system/cpu/cpu${no}/online"; done
@@ -93,7 +93,7 @@ Run `wrk2` on the `x86_64` bare‑metal client to measure throughput and latency
 ulimit -n 65535 && wrk -c1280 -t128 -R500000 -d60 http://${tomcat_ip}:8080/examples/servlets/servlet/HelloWorldExample
 ```
 
-Sample results after placing Tomcat on the NIC’s local NUMA node:
+Sample results after placing Tomcat on the NIC's local NUMA node:
 
 ```output
   Thread Stats   Avg      Stdev     Max   +/- Stdev

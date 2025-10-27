@@ -1,5 +1,5 @@
 ---
-title: Deploy Edge AI models scalably using Edge Impulse and AWS IoT Greengrass
+title: Deploy Edge AI models using Edge Impulse and AWS IoT Greengrass
 
 draft: true
 cascade:
@@ -7,13 +7,13 @@ cascade:
 
 minutes_to_complete: 120
 
-who_is_this_for: This learning path is for Edge AI and embedded engineers who need to scalably deploy crafted ML for the Edge to thousands of edge devices. 
+who_is_this_for: This learning path is for Edge AI and embedded engineers who need to deploy crafted ML for the Edge to thousands of edge devices. 
 
 learning_objectives:
   - Basic understanding of Edge Impulses Edge ML Solution
   - Basic hardware setup for Edge AI ML development with Edge Impulse
   - Install AWS IoT Greengrass onto the edge device
-  - Configure the edge device with the custom integration between Edge Implulse and AWS IoT Greengrass
+  - Configure the edge device with the custom integration between Edge Impulse and AWS IoT Greengrass
 
 prerequisites:
   - An [Edge Impulse Studio](https://studio.edgeimpulse.com/signup) account (workshop will walk through this).

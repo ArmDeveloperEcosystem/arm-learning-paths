@@ -22,7 +22,7 @@ Prior to installing AWS IoT Greengrass, we need to create a set of AWS credentia
 >		export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
 >		export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
 
-If you are using your personal AWS account and do not have the credentails created, you will need to create them. If you already have them, please skip the next step and proceed to step 3) below. 
+If you are using your personal AWS account and do not have the credentials created, you will need to create them. If you already have them, please skip the next step and proceed to step 3) below. 
 
 #### 1a. Creating Access Credentials (personal AWS Accounts)
 

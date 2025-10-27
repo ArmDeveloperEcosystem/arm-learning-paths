@@ -70,7 +70,7 @@ Key in this is the "Impulse".  On the left side of the dashboard, our "Impulse" 
 
 ![Edge Impulse](./images/EI_Project_2.png)
 
-Clicking on "Object Detection" on the left, you will see some detail on the model that has been utlized in our Impulse:
+Clicking on "Object Detection" on the left, you will see some detail on the model that has been utilized in our Impulse:
 
 ![Edge Impulse](./images/EI_Project_3.png)
 
