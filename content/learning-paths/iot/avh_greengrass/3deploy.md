@@ -32,7 +32,7 @@ As an example, you can deploy the AWS Greengrass CLI (which is different from th
 
 In the Public Components section, search for `CLI` and then select `aws.greengrass.Cli` from the list.
 
-![select components screen](gg_select_components.png)
+![select components screen](gg_select_components.webp)
 
 There is no configuration needed for the AWS Greengrass CLI component, so you can skip the next screens until you get to the `Review` step. 
 
@@ -46,7 +46,7 @@ After deploying you will be redirected to your `AVH-Testing` deployment page.
 
 After a moment you should see that the deployment to your `MyGreengrassCore` device was successful.
 
-![device components](gg_device_components.png)
+![device components](gg_device_components.webp)
 
 Clicking the device will show you a list of installed and running components.
 

@@ -28,7 +28,7 @@ You do not need to set any advanced boot options.
 
 Wait for the device to be created. It is ready to use when you see the ready message:
 
-![device ready](device_ready.png)
+![device ready](device_ready.webp)
 
 ## Verify your device is ready
 
