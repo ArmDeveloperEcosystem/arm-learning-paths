@@ -120,7 +120,7 @@ y_test shape: (10000, 10)
 
 ## Create the Model
 
-You are going to create a small convolutional neural network for image classification. The image size of CIFAR10 is 32 by 32, and the number of colour channels is 3. So, the input shape of the first convolution layer is (32, 32, 3). Since the number of classes is 10, so the last dense layer should have 10 units.
+You are going to create a small convolutional neural network for image classification. The image size of CIFAR10 is 32 by 32, and the number of color channels is 3. So, the input shape of the first convolution layer is (32, 32, 3). Since the number of classes is 10, so the last dense layer should have 10 units.
 
 Here is an image illustrating the network architecture. Note that only convolution and dense layers are illustrated in this image.
 

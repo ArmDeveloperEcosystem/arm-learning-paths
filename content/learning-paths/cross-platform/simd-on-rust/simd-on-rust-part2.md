@@ -281,7 +281,7 @@ This seems counter-intuitive but the reason is that, unlike C, Rust treats the i
 
 Like functions, inlining them is not always guaranteed. If it is possible to inline the intrinsic, code generation and performance would be almost as that with C. If it is not possible, you might find that the same code in Rust performs worse than in C.
 
-Because of this, you have to look carefully at the disassembly generated from your SIMD Rust code. So, how can you fix this behaviour and get the expected generated code?
+Because of this, you have to look carefully at the disassembly generated from your SIMD Rust code. So, how can you fix this behavior and get the expected generated code?
 
 As you have seen, Rust has a very particular way to enable target features. In this case, you have to remember to add that `dotprod` is the required target feature. Make this change in the function `sad_vec_asimd` as shown below:
 
