@@ -27,16 +27,11 @@ author:
 skilllevels: Introductory
 subjects: RTOS Fundamentals
 armips:
-    - Cortex-M
-tools_software_languages:
-    - Zephyr RTOS
+- Cortex-M
 operatingsystems:
-    - RTOS
-
-test_images:
-    - Cortex-M
-test_link: null
-test_maintenance: true
+- RTOS
+tools_software_languages:
+- Zephyr
 
 further_reading:
     - resource:
