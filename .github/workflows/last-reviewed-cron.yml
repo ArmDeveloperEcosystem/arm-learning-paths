@@ -17,6 +17,7 @@ permissions:
 
 jobs:
   sweep:
+    if: github.repository == 'ArmDeveloperEcosystem/arm-learning-paths'
     runs-on: ubuntu-latest
     steps:
       - name: Move items based on Last Reviewed Date
