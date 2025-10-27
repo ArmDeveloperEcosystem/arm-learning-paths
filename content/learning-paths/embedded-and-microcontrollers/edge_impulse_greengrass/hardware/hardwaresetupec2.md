@@ -33,7 +33,7 @@ Press "Add security group rule" and lets allow port tcp/4912:
 
 Lets also give the EC2 instance a bit more disk space. Please change the "8" to "28" here:
 
-![Increase Diskspace](../images/EC2_Setup_5.png)
+![Increase disk space](../images/EC2_Setup_5.png)
 
 Finally, press "Launch instance". You should see your EC2 instance getting created:
 

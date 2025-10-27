@@ -11,7 +11,7 @@ maintopic: true
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 30
-- Linux: 30
+- Linux: 31
 - macOS: 7
 - RTOS: 9
 - Windows: 4
@@ -20,7 +20,7 @@ subjects_filter:
 - Containers and Virtualization: 6
 - Embedded Linux: 4
 - Libraries: 3
-- ML: 16
+- ML: 17
 - Performance and Architecture: 21
 - RTOS Fundamentals: 4
 - Security: 2
@@ -50,8 +50,8 @@ tools_software_languages_filter:
 - DetectNet: 1
 - Docker: 10
 - DSTREAM: 2
-- Edge AI: 2
-- Edge Impulse: 1
+- Edge AI: 3
+- Edge Impulse: 2
 - ExecuTorch: 4
 - FastAPI: 1
 - FPGA: 1
