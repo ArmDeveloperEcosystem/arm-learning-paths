@@ -17,7 +17,7 @@ prerequisites:
     - Familiarity with indirect functions (ifuncs).
     - Basic knowledge of loop vectorization.
     - Familiarity with Arm assembly.
-    - A LLVM 20 compiler with runtime library support or GCC 14.
+    - A LLVM 20 compiler with runtime library support or GCC 16.
 
 author: Alexandros Lamprineas
 
