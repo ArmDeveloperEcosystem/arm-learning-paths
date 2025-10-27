@@ -42,7 +42,7 @@ You do not need to set any advanced boot options.
 
 Wait for the device to be created. 
 
-![device ready](device_ready.png)
+![device ready](device_ready.webp)
 
  When it is ready, log in with the default username `pi` and password `raspberry`.
 
