@@ -1,6 +1,28 @@
 User-agent: *
-Allow: /
-Disallow: /*?
+Disallow:
 
+# Explicitly welcome AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Sitemaps help AI discovery
 Sitemap: https://learn.arm.com/sitemap.xml
-Image Sitemap: https://learn.arm.com/learn-image-sitemap.xml
+Sitemap: https://learn.arm.com/learn-image-sitemap.xml

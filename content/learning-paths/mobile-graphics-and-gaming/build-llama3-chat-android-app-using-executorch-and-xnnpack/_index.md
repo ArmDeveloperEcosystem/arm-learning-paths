@@ -35,6 +35,7 @@ tools_software_languages:
     - C++
     - Python
     - Hugging Face
+    - ExecuTorch
 
 operatingsystems:
     - macOS

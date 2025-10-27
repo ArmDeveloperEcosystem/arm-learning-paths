@@ -1,10 +1,12 @@
 ---
-title: Understanding the virtual machine scripts
+title: Understand and customize Windows on Arm VM automation scripts
 
 weight: 3
 
 layout: "learningpathall"
 ---
+
+## Get started with the Windows on Arm VM automation scripts
 
 A GitHub project provides two Bash scripts. Understanding their architecture and design will help you use them effectively and enable you to customize the options for your specific needs.
 
@@ -47,15 +49,15 @@ Virtual machine creation includes the following steps:
 
 The `create-win11-vm.sh` script implements a four-step process that builds a Windows VM incrementally:
 
-### Step 1: Create VM directory
+### Step 1: Create the VM directory
 
 Step 1 initializes the VM directory structure and configuration. It creates the VM directory, copies initial configuration files, and sets up the basic environment. As a result, the VM directory, configuration files, and connection profiles are created. 
 
-### Step 2: Download Windows
+### Step 2: Download Windows and VirtIO drivers
 
 Step 2 downloads the Windows 11 ISO and VirtIO drivers. It downloads the Windows 11 Arm ISO from Microsoft, fetches VirtIO drivers, and prepares unattended installation files. The files created during this step include `installer.iso`, `virtio-win.iso`, and the unattended installation directory. This step takes some time as the Windows ISO download is large, but if you already have the file the script will save time and not repeat the download.
 
-### Step 3: Prepare VM disk image
+### Step 3: Prepare the VM disk image
 
 Step 3 creates the VM disk image and finalizes the installation setup. It builds the unattended installation ISO, creates the main VM disk image, and configures all installation media. The files created during this step include `disk.qcow2` and `unattended.iso`.
 
@@ -63,7 +65,7 @@ Step 3 creates the VM disk image and finalizes the installation setup. It builds
 The product key used in the scripts is a generic key provided by Microsoft, which allows installation. This key is for testing purposes only and does not activate Windows. If you plan to continue using Windows beyond installation, you should replace it with a genuine product key.
 {{% /notice %}}
 
-### Step 4: First Windows boot
+### Step 4: Boot Windows for the first time
 
 Step 4 executes the Windows installation. It boots the VM with installation media, runs the automated Windows setup, and completes the initial configuration. The result is a fully installed and configured Windows on Arm VM.
 
@@ -93,7 +95,7 @@ For storage, the default VM disk size is 40GB in QCOW2 format. The available dis
 
 All settings are customizable using command line arguments. 
 
-## Script Integration and Workflow
+## Script integration and workflow
 
 The create and run scripts share the same configuration files. Separating creation from execution enables you to create a VM once and then use the run script repeatedly. 
 

@@ -10,13 +10,13 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 32
-- Linux: 30
+- Linux: 31
 - macOS: 14
 - Windows: 14
 subjects_filter:
 - Gaming: 6
 - Graphics: 6
-- ML: 12
+- ML: 13
 - Performance and Architecture: 35
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech
 title: Mobile, Graphics, and Gaming
@@ -34,13 +34,13 @@ tools_software_languages_filter:
 - Bazel: 1
 - C: 4
 - C#: 3
-- C++: 11
+- C++: 12
 - CCA: 1
 - Clang: 12
 - CMake: 1
 - Coding: 1
 - Docker: 1
-- ExecuTorch: 1
+- ExecuTorch: 2
 - Frame Advisor: 1
 - GCC: 12
 - Generative AI: 2
@@ -49,6 +49,7 @@ tools_software_languages_filter:
 - Google Test: 1
 - Hugging Face: 5
 - Java: 6
+- Jupyter Notebook: 1
 - KleidiAI: 1
 - Kotlin: 7
 - LiteRT: 1
@@ -61,7 +62,7 @@ tools_software_languages_filter:
 - ONNX Runtime: 1
 - OpenGL ES: 1
 - Python: 4
-- PyTorch: 1
+- PyTorch: 2
 - QEMU: 1
 - RenderDoc: 1
 - RME: 1
@@ -74,7 +75,7 @@ tools_software_languages_filter:
 - Unreal Engine: 4
 - Visual Studio: 1
 - Visual Studio Code: 1
-- Vulkan: 4
+- Vulkan: 5
 - Vulkan SDK: 1
 - XNNPACK: 1
 weight: 3
