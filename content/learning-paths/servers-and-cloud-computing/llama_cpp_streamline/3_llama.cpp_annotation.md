@@ -6,32 +6,33 @@ weight: 4
 layout: learningpathall
 ---
 
-## Integrate Streamline Annotations into llama.cpp
+##  Set up performance annotation markers
 
-To visualize token generation at the Prefill and Decode stages, you can use Streamline's Annotation Marker feature.  
+To visualize token generation at the Prefill and Decode stages, you can use Streamline's Annotation Marker feature.
 
-This requires integrating annotation support into the llama.cpp project.  
+{{% notice Note %}}
+*Annotation markers* are code markers that you insert into your application to identify specific events or time periods during execution. When Streamline captures performance data, these markers appear in the timeline, making it easier to correlate performance data with specific application behavior.
+{{% /notice %}}
 
-More information about the Annotation Marker API can be found in the [Streamline User Guide](https://developer.arm.com/documentation/101816/9-7/Annotate-your-code?lang=en).
+This requires integrating annotation support into the llama.cpp project. More information about the Annotation Marker API can be found in the [Streamline User Guide](https://developer.arm.com/documentation/101816/9-7/Annotate-your-code?lang=en).
 
 {{% notice Note %}}
 You can either build natively on an Arm platform, or cross-compile on another architecture using an Arm cross-compiler toolchain.
 {{% /notice %}}
 
-### Step 1: Build Streamline Annotation library
+## Build the Streamline annotation library
 
 Download and install [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads) on your development machine.
 
 {{% notice Note %}}
 You can also download and install [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio#Downloads), as it also includes Streamline.
-
 {{% /notice %}}
 
-Streamline Annotation support code is in the Arm Performance Studio installation directory in the `streamline/gator/annotate` directory.
+Streamline Annotation support code is located in the Arm Performance Studio installation directory under `streamline/gator/annotate`.
 
-Clone the gator repository that matches your Streamline version and build the `Annotation support library`. You can build it on your current machine using the native build instructions and you can cross compile it for another Arm computer using the cross compile instructions. 
+Clone the gator repository that matches your Streamline version and build the Annotation support library. You can build it natively on your current machine or cross-compile it for another Arm computer.
 
-If you need to set up a cross compiler you can review the [GCC install guide](/install-guides/gcc/cross/).
+If you need to set up a cross-compiler, you can review the [GCC install guide](/install-guides/gcc/cross/).
 
 {{< tabpane code=true >}}
   {{< tab header="Arm Native Build" language="bash">}}
@@ -56,7 +57,7 @@ If you need to set up a cross compiler you can review the [GCC install guide](/i
 
 Once complete, the static library `libstreamline_annotate.a` will be generated at `~/gator/annotate/libstreamline_annotate.a` and the header file is at `gator/annotate/streamline_annotate.h`.
 
-### Step 2: Integrate Annotation Marker into llama.cpp
+## Integrate annotation marker into llama.cpp
 
 Next, you need to install llama.cpp to run the LLM model.
 
@@ -64,7 +65,7 @@ Next, you need to install llama.cpp to run the LLM model.
 To make the performance profiling content easier to follow, this Learning Path uses a specific release version of llama.cpp to ensure the steps and results remain consistent.
 {{% /notice %}}
 
-Before building llama.cpp, create a directory `streamline_annotation` and copy the library `libstreamline_annotate.a` and the header file `streamline_annotate.h` into the new directory. 
+Before building llama.cpp, create a directory `streamline_annotation` and copy the library `libstreamline_annotate.a` and the header file `streamline_annotate.h` into the new directory:
 
 ```bash
 cd ~
@@ -76,7 +77,7 @@ mkdir streamline_annotation
 cp ~/gator/annotate/libstreamline_annotate.a ~/gator/annotate/streamline_annotate.h streamline_annotation
 ```
 
-To link the `libstreamline_annotate.a` library when building llama-cli, use an editor to add the following lines at the end of `llama.cpp/tools/main/CMakeLists.txt`.
+To link the `libstreamline_annotate.a` library when building llama-cli, use an editor to add the following lines at the end of `llama.cpp/tools/main/CMakeLists.txt`:
 
 ```makefile
 set(STREAMLINE_LIB_PATH "${CMAKE_SOURCE_DIR}/streamline_annotation/libstreamline_annotate.a")
@@ -84,15 +85,15 @@ target_include_directories(llama-cli PRIVATE "${CMAKE_SOURCE_DIR}/streamline_ann
 target_link_libraries(llama-cli PRIVATE "${STREAMLINE_LIB_PATH}")
 ```
 
-To add Annotation Markers to `llama-cli`, edit the file `llama.cpp/tools/main/main.cpp` and make 3 modification.
+To add Annotation Markers to `llama-cli`, edit the file `llama.cpp/tools/main/main.cpp` and make three modifications.
 
-First, add the include file at the top of `main.cpp` with the other include files.
+First, add the include file at the top of `main.cpp` with the other include files:
 
 ```c
 #include "streamline_annotate.h" 
 ```
 
-Next, the find the `common_init()` call in the `main()` function and add the Streamline setup macro below it so that the code looks like:
+Next, the find the `common_init()` call in the `main()` function and add the Streamline setup macro below it so that the code looks like this:
 
 ```c
     common_init();
@@ -127,7 +128,7 @@ Finally, add an annotation marker inside the main loop. Add the complete code in
 
 A string is added to the Annotation Marker to record the position of input tokens and number of tokens to be processed.
 
-### Step 3: Build llama-cli
+## Compile llama-cli with annotation support
 
 For convenience, llama-cli is statically linked.
 
@@ -138,7 +139,7 @@ cd ~/llama.cpp
 mkdir build && cd build
 ```
 
-Next, configure the project.
+Next, configure the project:
 
 {{< tabpane code=true >}}
   {{< tab header="Arm Native Build" language="bash">}}
@@ -194,4 +195,6 @@ cmake --build ./ --config Release -j $(nproc)
 
 After the building process completes, you can find the `llama-cli` in the `~/llama.cpp/build/bin/` directory.
 
-You now have an annotated version of `llama-cli` ready for Streamline.
+## Summary
+
+You have successfully integrated Streamline annotations into llama.cpp and built an annotated version of `llama-cli`. The annotation markers you added will help identify token generation events during profiling. In the next section, you'll use this instrumented executable to capture performance data with Streamline and analyze the distinct characteristics between Prefill and Decode stages during LLM inference.

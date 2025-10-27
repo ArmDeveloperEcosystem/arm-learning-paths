@@ -90,7 +90,9 @@ cmake -DPYTHON_EXECUTABLE=python \
     -DEXECUTORCH_BUILD_KERNELS_CUSTOM=ON \
     -DEXECUTORCH_BUILD_EXTENSION_FLAT_TENSOR=ON \
     -DEXECUTORCH_BUILD_EXTENSION_LLM_RUNNER=ON \
+    -DEXECUTORCH_BUILD_EXTENSION_TENSOR=ON \
     -DEXECUTORCH_BUILD_EXTENSION_LLM=ON \
+    -DEXECUTORCH_BUILD_KERNELS_LLM=ON \
     -Bcmake-out .
 cmake --build cmake-out -j16 --target install --config Release
 ```
@@ -101,10 +103,7 @@ Next, compile and build `llama_runner` and `llama_main`:
 cmake -DPYTHON_EXECUTABLE=python \
     -DCMAKE_INSTALL_PREFIX=cmake-out \
     -DCMAKE_BUILD_TYPE=Release \
-    -DEXECUTORCH_BUILD_KERNELS_CUSTOM=ON \
     -DEXECUTORCH_BUILD_KERNELS_OPTIMIZED=ON \
-    -DEXECUTORCH_BUILD_XNNPACK=ON \
-    -DEXECUTORCH_BUILD_KERNELS_QUANTIZED=ON \
     -Bcmake-out/examples/models/llama \
     examples/models/llama
 cmake --build cmake-out/examples/models/llama -j16 --config Release

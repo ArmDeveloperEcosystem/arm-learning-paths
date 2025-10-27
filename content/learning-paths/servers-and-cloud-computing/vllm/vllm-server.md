@@ -10,7 +10,7 @@ Instead of a batch run from Python, you can create an OpenAI-compatible server. 
 
 Running a local LLM offers several advantages:
 
-* Cost-effective - it avoids the costs associated with using external APIs, especially for high-usage scenarios.   
+* Cost-effective - it avoids the costs associated with using external APIs, especially for high-usage scenarios.   
 * Privacy - it keeps your data and prompts within your local environment, which enhances privacy and security.
 * Offline Capability - it enables operation without an internet connection, making it ideal for scenarios with limited or unreliable network access.
 
@@ -19,7 +19,7 @@ OpenAI compatibility means that you can reuse existing software which was design
 Run vLLM with the same `Qwen/Qwen2.5-0.5B-Instruct` model:
 
 ```bash
-python3 -m vllm.entrypoints.openai.api_server --model Qwen/Qwen2.5-0.5B-Instruct --dtype float16
+python3 -m vllm.entrypoints.openai.api_server --model Qwen/Qwen2.5-0.5B-Instruct --dtype float16 --max-num-batched-tokens 32768
 ```
 
 The server output displays that it is ready for requests:

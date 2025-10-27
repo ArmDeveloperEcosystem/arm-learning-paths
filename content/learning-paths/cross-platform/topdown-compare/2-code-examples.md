@@ -98,9 +98,9 @@ S0-D0-C1           1                 8.5%                 0.0%                 0
        6.052117775 seconds time elapsed
 ```
 
-You see a very large `backend bound` component for this program. 
+You see a very large `backend bound` component for this program.
 
-You can also run with the `-M topdownl1` argument on Perf. 
+You can also run with the `-M topdownl1` argument with Perf. 
 
 ```console
 taskset -c 1 perf stat -C 1 -M topdownl1  ./test 1000000000
@@ -129,7 +129,7 @@ Done. Final result: 0.000056
        6.029283206 seconds time elapsed
 ```
 
-Again, showing `Backend_Bound` value very high (0.96). Notice the x86-specific PMU counters:
+Again, showing a `Backend_Bound` value that is very high (0.96). Notice the x86-specific PMU counters:
 - `uops_issued.any` and `uops_retired.retire_slots` for micro-operation accounting
 - `idq_uops_not_delivered.core` for frontend delivery failures
 - `cpu_clk_unhalted.thread` for cycle normalization
@@ -137,13 +137,13 @@ Again, showing `Backend_Bound` value very high (0.96). Notice the x86-specific P
 If you want to learn more, you can continue with the Level 2 and Level 3 hierarchical analysis.
 
 
-## Use the Arm Neoverse 2-stage top-down methodology
+## Use the Arm Neoverse top-down methodology
 
-Arm's approach uses a 2-stage methodology with PMU counters like `STALL_SLOT_BACKEND`, `STALL_SLOT_FRONTEND`, `OP_RETIRED`, and `OP_SPEC` for Stage 1 analysis, followed by resource effectiveness groups in Stage 2.
+Arm's approach uses a methodology with PMU counters like `STALL_SLOT_BACKEND`, `STALL_SLOT_FRONTEND`, `OP_RETIRED`, and `OP_SPEC` for Stage 1 analysis, followed by resource effectiveness groups in Stage 2.
 
 Make sure you install the Arm topdown-tool using the [Telemetry Solution install guide](/install-guides/topdown-tool/).
 
-Collect Stage 2 general metrics including Instructions Per Cycle (IPC):
+Collect general metrics including Instructions Per Cycle (IPC):
 
 ```console
 taskset -c 1 topdown-tool -m General ./test 1000000000
@@ -153,11 +153,17 @@ The output is similar to:
 
 ```output
 Performing 1000000000 dependent floating-point divisions...
+Monitoring command: test. Hit Ctrl-C to stop.
+Run 1
 Done. Final result: 0.000056
-Stage 2 (uarch metrics)
-=======================
-[General]
-Instructions Per Cycle 0.355 per cycle
+CPU Neoverse V2 metrics
+└── Stage 2 (uarch metrics)
+    └── General (General)
+        └── ┏━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━┓
+            ┃ Metric                 ┃ Value ┃ Unit      ┃
+            ┡━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━┩
+            │ Instructions Per Cycle │ 0.324 │ per cycle │
+            └────────────────────────┴───────┴───────────┘
 ```
 
 Collect the Stage 1 topdown metrics using Arm's cycle accounting:
@@ -170,52 +176,74 @@ The output is similar to:
 
 ```output
 Performing 1000000000 dependent floating-point divisions...
+Monitoring command: test. Hit Ctrl-C to stop.
+Run 1
 Done. Final result: 0.000056
-Stage 1 (Topdown metrics)
-=========================
-[Cycle Accounting]
-Frontend Stalled Cycles 0.04% cycles
-Backend Stalled Cycles. 88.15% cycles
+CPU Neoverse V2 metrics
+└── Stage 2 (uarch metrics)
+    └── Cycle Accounting (Cycle_Accounting)
+        └── ┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━┓
+            ┃ Metric                  ┃ Value ┃ Unit ┃
+            ┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━┩
+            │ Backend Stalled Cycles  │ 93.22 │ %    │
+            │ Frontend Stalled Cycles │ 0.03  │ %    │
+            └─────────────────────────┴───────┴──────┘
 ```
 
-This confirms the example has high backend stalls equivalent to x86's Backend_Bound category. Notice how Arm's Stage 1 uses percentage of cycles rather than Intel's slot-based accounting. 
+This confirms the example has high backend stalls, equivalent to x86's Backend_Bound category. Notice how Arm's Stage 1 uses percentage of cycles rather than Intel's slot-based accounting. 
 
 You can continue to use the `topdown-tool` for additional microarchitecture exploration.
 
 For L1 data cache:
 
 ```console
-taskset -c 1 topdown-tool -m L1D_Cache_Effectiveness  ./test 1000000000
+taskset -c 1 topdown-tool -m L1D_Cache_Effectiveness ./test 1000000000
 ```
 
 The output is similar to:
 
 ```output
 Performing 1000000000 dependent floating-point divisions...
+Monitoring command: test. Hit Ctrl-C to stop.
+Run 1
 Done. Final result: 0.000056
-Stage 2 (uarch metrics)
-=======================
-[L1 Data Cache Effectiveness]
-L1D Cache MPKI............... 0.023 misses per 1,000 instructions
-L1D Cache Miss Ratio......... 0.000 per cache access
+CPU Neoverse V2 metrics
+└── Stage 2 (uarch metrics)
+    └── L1 Data Cache Effectiveness (L1D_Cache_Effectiveness)
+        ├── Follows
+        │   └── Backend Bound (backend_bound)
+        └── ┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+            ┃ Metric               ┃ Value ┃ Unit                          ┃
+            ┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+            │ L1D Cache Miss Ratio │ 0.000 │ per cache access              │
+            │ L1D Cache MPKI       │ 0.129 │ misses per 1,000 instructions │
+            └──────────────────────┴───────┴───────────────────────────────┘
 ```
 
 For L1 instruction cache effectiveness:
 
 ```console
-taskset -c 1 topdown-tool -m L1D_Cache_Effectiveness  ./test 1000000000
+taskset -c 1 topdown-tool -m L1I_Cache_Effectiveness  ./test 1000000000
 ```
 
 The output is similar to:
 
 ```output
 Performing 1000000000 dependent floating-point divisions...
+Monitoring command: test. Hit Ctrl-C to stop.
+Run 1
 Done. Final result: 0.000056
-Stage 2 (uarch metrics)
-=======================
-[L1 Data Cache Effectiveness]
-L1D Cache MPKI............... 0.022 misses per 1,000 instructions
-L1D Cache Miss Ratio......... 0.000 per cache access
+CPU Neoverse V2 metrics
+└── Stage 2 (uarch metrics)
+    └── L1 Instruction Cache Effectiveness (L1I_Cache_Effectiveness)
+        ├── Follows
+        │   └── Frontend Bound (frontend_bound)
+        └── ┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+            ┃ Metric               ┃ Value ┃ Unit                          ┃
+            ┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+            │ L1I Cache Miss Ratio │ 0.003 │ per cache access              │
+            │ L1I Cache MPKI       │ 0.474 │ misses per 1,000 instructions │
+            └──────────────────────┴───────┴───────────────────────────────┘
 ```
 
 For last level cache: 
@@ -228,13 +256,22 @@ The output is similar to:
 
 ```output
 Performing 1000000000 dependent floating-point divisions...
+Monitoring command: test. Hit Ctrl-C to stop.
+Run 1
 Done. Final result: 0.000056
-Stage 2 (uarch metrics)
-=======================
-[Last Level Cache Effectiveness]
-LL Cache Read MPKI.............. 0.017 misses per 1,000 instructions
-LL Cache Read Miss Ratio........ 0.802 per cache access
-LL Cache Read Hit Ratio......... 0.198 per cache access
+CPU Neoverse V2 metrics
+└── Stage 2 (uarch metrics)
+    └── Last Level Cache Effectiveness (LL_Cache_Effectiveness)
+        ├── Follows
+        │   ├── Backend Bound (backend_bound)
+        │   └── Frontend Bound (frontend_bound)
+        └── ┏━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+            ┃ Metric                   ┃ Value ┃ Unit                          ┃
+            ┡━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+            │ LL Cache Read Hit Ratio  │ nan   │ per cache access              │
+            │ LL Cache Read Miss Ratio │ nan   │ per cache access              │
+            │ LL Cache Read MPKI       │ 0.000 │ misses per 1,000 instructions │
+            └──────────────────────────┴───────┴───────────────────────────────┘
 ```
 
 For operation mix:
@@ -247,25 +284,38 @@ The output is similar to:
 
 ```output
 Performing 1000000000 dependent floating-point divisions...
+Monitoring command: test. Hit Ctrl-C to stop.
+Run 1
 Done. Final result: 0.000056
-Stage 2 (uarch metrics)
-=======================
-[Speculative Operation Mix]
-Load Operations Percentage.......... 16.70% operations
-Store Operations Percentage......... 16.59% operations
-Integer Operations Percentage....... 33.61% operations
-Advanced SIMD Operations Percentage. 0.00% operations
-Floating Point Operations Percentage 16.45% operations
-Branch Operations Percentage........ 16.65% operations
-Crypto Operations Percentage........ 0.00% operations
+CPU Neoverse V2 metrics
+└── Stage 2 (uarch metrics)
+    └── Speculative Operation Mix (Operation_Mix)
+        ├── Follows
+        │   ├── Backend Bound (backend_bound)
+        │   └── Retiring (retiring)
+        └── ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━┓
+            ┃ Metric                                           ┃ Value ┃ Unit ┃
+            ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━┩
+            │ Barrier Operations Percentage                    │ ❌    │ %    │
+            │ Branch Operations Percentage                     │ ❌    │ %    │
+            │ Crypto Operations Percentage                     │ 0.00  │ %    │
+            │ Integer Operations Percentage                    │ 33.52 │ %    │
+            │ Load Operations Percentage                       │ 16.69 │ %    │
+            │ Floating Point Operations Percentage             │ 16.51 │ %    │
+            │ Advanced SIMD Operations Percentage              │ 0.00  │ %    │
+            │ Store Operations Percentage                      │ 16.58 │ %    │
+            │ SVE Operations (Load/Store Inclusive) Percentage │ 0.00  │ %    │
+            └──────────────────────────────────────────────────┴───────┴──────┘
 ```
 
 
 ## Cross-architecture performance analysis summary
 
-Both Arm Neoverse and modern x86 cores expose hardware PMU events that enable equivalent top-down analysis, despite different counter names and calculation methods. Intel x86 processors use a four-level hierarchical methodology based on slot-based pipeline accounting, relying on PMU counters such as `UOPS_RETIRED.RETIRE_SLOTS`, `IDQ_UOPS_NOT_DELIVERED.CORE`, and `CPU_CLK_UNHALTED.THREAD` to break down performance into retiring, bad speculation, frontend bound, and backend bound categories. Linux Perf serves as the standard collection tool, using commands like `perf stat --topdown` and the `-M topdownl1` option for detailed breakdowns.
+Both Arm Neoverse and modern x86 cores expose hardware PMU events that enable equivalent top-down analysis, despite different counter names and calculation methods. 
+
+Intel x86 processors use a four-level hierarchical methodology based on slot-based pipeline accounting, relying on PMU counters such as `UOPS_RETIRED.RETIRE_SLOTS`, `IDQ_UOPS_NOT_DELIVERED.CORE`, and `CPU_CLK_UNHALTED.THREAD` to break down performance into retiring, bad speculation, frontend bound, and backend bound categories. Linux Perf serves as the standard collection tool, using commands like `perf stat --topdown` and the `-M topdownl1` option for detailed breakdowns.
 
 Arm Neoverse platforms implement a complementary two-stage methodology where Stage 1 focuses on topdown categories using counters such as `STALL_SLOT_BACKEND`, `STALL_SLOT_FRONTEND`, `OP_RETIRED`, and `OP_SPEC` to analyze pipeline stalls and instruction retirement. Stage 2 evaluates resource effectiveness, including cache and operation mix metrics through `topdown-tool`, which accepts the desired metric group via the `-m` argument.
 
-Both architectures identify the same performance bottleneck categories, enabling similar optimization strategies across Intel and Arm platforms while accounting for methodological differences in measurement depth and analysis approach. 
+Both architectures identify the same performance bottleneck categories, enabling similar optimization strategies across Intel and Arm platforms while accounting for methodological differences in measurement depth and analysis approach.
 

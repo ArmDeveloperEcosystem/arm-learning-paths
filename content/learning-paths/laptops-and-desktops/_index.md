@@ -11,11 +11,11 @@ operatingsystems_filter:
 - ChromeOS: 2
 - Linux: 34
 - macOS: 9
-- Windows: 45
+- Windows: 46
 subjects_filter:
 - CI-CD: 5
 - Containers and Virtualization: 7
-- Migration to Arm: 29
+- Migration to Arm: 30
 - ML: 2
 - Performance and Architecture: 27
 subtitle: Create and migrate apps for power efficient performance
@@ -38,6 +38,7 @@ tools_software_languages_filter:
 - CSS: 1
 - Daytona: 1
 - Docker: 5
+- FFmpeg: 1
 - GCC: 12
 - Git: 1
 - GitHub: 3
@@ -62,6 +63,7 @@ tools_software_languages_filter:
 - ONNX Runtime: 1
 - OpenCV: 1
 - perf: 4
+- PowerShell: 1
 - Python: 6
 - QEMU: 1
 - Qt: 2
