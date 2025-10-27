@@ -163,7 +163,7 @@ def main():
                 logging.info("Tests failed in test suite")
                 sys.exit(1)
         else:
-            pass
+            logging.info(f"results_dict is None for LP. Link: {args.link}")
     elif args.spelling:
         logging.info(f"Checking spelling of {args.spelling}")
         output = parse.spelling(args.spelling)
