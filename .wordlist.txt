@@ -4667,7 +4667,6 @@ Sommelier
 chromeos
 linuxcontainers
 XPS
-NIC’s
 offlines
 passthrough
 SLOs
@@ -4721,7 +4720,6 @@ attester
 ATtestation
 CoCo
 procedureS
-NIC’s
 httpbin
 proxying
 OpenBMC
@@ -4844,7 +4842,6 @@ Golang
 Golang’s
 HWC
 Halide
-Halide’s
 ImageParam
 Istio
 KEDA
@@ -4853,10 +4850,8 @@ Kedify’s
 LLC
 LLE
 MPix
-NIC’s
 Netty
 NoRuntime
-OpenBMC’s
 Parallelization
 QCOW
 QuickSort
@@ -4963,14 +4958,11 @@ mysqlslap
 squeezenet
 Aphex
 Autoscale
-Halide’s
 KRaft
 Kedify's
 Kedify’s
 MirrorMaker
-NIC’s
 Neoverse's
-OpenBMC’s
 Rebalance
 StatefulSets
 codemia
@@ -4987,14 +4979,11 @@ DischargeRate
 FPM
 FastCGI
 FilePath
-Halide’s
 HasExited
 ImportError
-NIC’s
 NVM
 NodeJS
 Opcache
-OpenBMC’s
 PHPBench
 ParentProcessId
 PassThru
@@ -5070,11 +5059,8 @@ EdgeImpulseServiceComponent
 FullAccess
 GGDeploy
 GStreamer
-Halide’s
 IoTCore
 JSONs
-NIC’s
-OpenBMC’s
 SecretsManagerReadWrite
 TERUpdate
 TokenExchange

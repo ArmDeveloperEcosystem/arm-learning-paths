@@ -10,7 +10,7 @@ layout: "learningpathall"
 ## Objective
 In the previous section, you explored parallelization and tiling. Here, you will focus on operator fusion (inlining) in Halide i.e., letting producers be computed directly inside their consumers—versus materializing intermediates with compute_root() or compute_at(). You will learn when fusion reduces memory traffic and when materializing saves recomputation (e.g., for large stencils or multi-use intermediates). You will inspect loop nests with print_loop_nest(), switch among schedules (fuse-all, fuse-blur-only, materialize, tile-and-materialize-per-tile) in a live camera pipeline, and measure the impact (ms/FPS/MPix/s).
 
-This section does not cover loop fusion (the fuse directive). You will focus on operator fusion, which is Halide’s default behavior.
+This section does not cover loop fusion (the fuse directive). You will focus on operator fusion, which is Halide's  default behavior.
 
 ## Code
 To demonstrate how fusion in Halide works create a new file `camera-capture-fusion.cpp`, and modify it as follows. This code uses a live camera pipeline (BGR → gray → 3×3 blur → threshold), adds a few schedule variants to toggle operator fusion vs. materialization, and print ms / FPS / MPix/s. So you can see the impact immediately.
@@ -476,7 +476,7 @@ By toggling schedules live, you can see and measure how operator fusion and mate
 This demo makes these trade-offs concrete: the loop nest diagrams explain the structure, and the live FPS/MPix/s stats show the real performance impact.
 
 ## What “fusion” means in Halide
-One of Halide’s defining features is that, by default, it performs operator fusion, also called inlining. This means that if a stage produces some intermediate values, those values aren’t stored in a separate buffer and then re-read later—instead, the stage is computed directly inside the consumer’s loop. In other words, unless you tell Halide otherwise, every producer Func is fused into the next stage that uses it.
+One of Halide's  defining features is that, by default, it performs operator fusion, also called inlining. This means that if a stage produces some intermediate values, those values aren’t stored in a separate buffer and then re-read later—instead, the stage is computed directly inside the consumer’s loop. In other words, unless you tell Halide otherwise, every producer Func is fused into the next stage that uses it.
 
 Why is this important? Fusion reduces memory traffic, because Halide doesn’t need to write intermediates out to RAM and read them back again. On CPUs, where memory bandwidth is often the bottleneck, this can be a major performance win. Fusion also improves cache locality, since values are computed exactly where they are needed and the working set stays small. The trade-off, however, is that fusion can cause recomputation: if a consumer uses a neighborhood (like a blur that reads 3×3 or 9×9 pixels), the fused producer may be recalculated multiple times for overlapping regions. Whether fusion is faster depends on the balance between compute cost and memory traffic.
 
@@ -509,7 +509,7 @@ Our pipeline is: BGR input → gray → 3×3 blur → thresholded → output. De
 By toggling between these modes in the live demo, you can see how the loop nests and throughput numbers change, which makes the abstract idea of fusion much more concrete.
 
 ## When to use operator fusion
-Fusion is Halide’s default and usually the right place to start. It’s especially effective for:
+Fusion is Halide's  default and usually the right place to start. It’s especially effective for:
 * Element-wise chains, where each pixel is transformed independently:
 examples include intensity scaling or offset, gamma correction, channel mixing, color-space conversions, and logical masking.
 * Cheap post-ops after spatial filters:
@@ -528,4 +528,4 @@ Fusion isn’t always best. You’ll want to materialize an intermediate (comput
 The fastest way to check whether fusion helps is to measure it. Our demo prints timing and throughput per frame, but Halide also includes a built-in profiler that reports per-stage runtimes. To learn how to enable and interpret the profiler, see the official [Halide profiling tutorial](https://halide-lang.org/tutorials/tutorial_lesson_21_auto_scheduler_generate.html#profiling).
 
 ## Summary
-In this section, you have learned about operator fusion in Halide—a powerful technique for reducing memory bandwidth and improving computational efficiency. You explored why fusion matters, looked at scenarios where it is most effective, and saw how Halide’s scheduling constructs such as compute_root() and compute_at() let us control whether stages are fused or materialized. By experimenting with different schedules, including fusing the Gaussian blur and thresholding stages, we observed how fusion can significantly improve the performance of a real-time image processing pipeline
+In this section, you have learned about operator fusion in Halide—a powerful technique for reducing memory bandwidth and improving computational efficiency. You explored why fusion matters, looked at scenarios where it is most effective, and saw how Halide's  scheduling constructs such as compute_root() and compute_at() let us control whether stages are fused or materialized. By experimenting with different schedules, including fusing the Gaussian blur and thresholding stages, we observed how fusion can significantly improve the performance of a real-time image processing pipeline
