@@ -95,10 +95,10 @@ You can read a detail explanation of the build steps here: [ARM Ethos-U Backend]
     
    ```bash
    ./examples/arm/setup.sh \
-     --target-toolchain aarch64-none-linux-gnu
+     --target-toolchain arm-none-eabi-gcc
    ```
   
-2. Update your `PATH` with the `aarch64-none-linux-gnu` toolchain:
+2. Update your environment:
    ```bash
    source examples/arm/ethos-u-scratch/setup_path.sh
    ```
@@ -112,7 +112,7 @@ Now you will build the `.pte` file, that will be used on the NXP board.
    python3 -m examples.arm.aot_arm_compiler \
      --model_name="mv2" \
      --quantize \
-     --intermediates="mv2_cortexa/" \
+     --delegate \
      --debug
    ```
 
