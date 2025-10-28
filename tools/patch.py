@@ -30,7 +30,6 @@ def patch(article_path: str, results: dict, link: str):
     else:
         raise SystemExit("Unknown content path, pass learning paths or install guides only")
 
-
     test_images = results.keys()
     results_values = defaultdict(lambda: "failed")
     results_values[0] = "passed"

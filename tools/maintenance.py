@@ -81,6 +81,8 @@ Main function
 def main():
     global verbosity, level
 
+    logging.info("This is Dougs Test maintenance.py FILE")
+
     arg_parser = argparse.ArgumentParser(description='Maintenance tool.', prefix_chars='-')
     arg_parser.add_argument('-v', '--version', action='version', version='Maintenance toolkit version 0.1', help='Display software version')
     arg_parser.add_argument('-d', '--debug', action='store_true', help='Enable debugging messages')

@@ -8,7 +8,7 @@ First step in this exercise is to install the latest version of the Raspberry Pi
 
 The easiest way to setup Raspberry Pi OS is to follow the instructions here after downloading and installing the Raspberry Pi Imager application:
 
-![Raspberry Pi Imager](../images/RPi_Imager.png)
+![Raspberry Pi Imager](RPi_Imager.png)
 
 Instructions: [Install Raspberry Pi Imager](https://www.raspberrypi.com/software/)
 
@@ -103,4 +103,4 @@ Lastly, please safe off these JSONs.  These will be used to customize our AWS Gr
 
 Alright!  Lets continue by getting our Edge Impulse project setup! Let's go!
 
-[Next](../../edgeimpulseprojectbuild/)
+[Next](./edgeimpulseprojectbuild/)
