@@ -94,7 +94,8 @@ You can read a detail explanation of the build steps here: [ARM Ethos-U Backend]
 1. Run the steps to set up the build environment: 
     
    ```bash
-   ./examples/arm/setup.sh
+   ./examples/arm/setup.sh \
+     --target-toolchain arm-none-eabi-gcc
    ```
   
 2. Update your environment:
