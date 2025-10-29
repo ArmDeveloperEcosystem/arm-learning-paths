@@ -1,30 +1,27 @@
 ---
-title: Analyzing Instruction Mix on Grace CPU using Process Watch
+title: Analyze CPU instruction mix using Process Watch
 weight: 5
 layout: "learningpathall"
 ---
 
-## Analyzing Instruction Mix on the Grace CPU Using Process Watch
+## How can I analyze the instruction mix on the CPU using Process Watch?
 
-In this session, you will explore how the **Grace CPU** executes Armv9 vector and matrix instructions during quantized LLM inference.
-By using **Process Watch**, you will observe how Neon SIMD instructions dominate execution on the Grace CPU and learn why SVE and SVE2 remain inactive under the current kernel configuration.
-This exercise demonstrates how Armv9 vector execution behaves in real AI workloads and how hardware capabilities evolve—from traditional SIMD pipelines to scalable vector and matrix computation.
+In this section, you'll explore how the Grace CPU executes Armv9 vector instructions during quantized LLM inference.
 
-### Step 1: Observe SIMD Execution with Process Watch
+Process Watch helps you observe Neon SIMD instruction execution on the Grace CPU and understand why SVE and SVE2 remain inactive under the current kernel configuration. This demonstrates how Armv9 vector execution works in AI workloads and shows the evolution from traditional SIMD pipelines to scalable vector computation.
 
-Start by running a quantized model on the Grace CPU:
+### Install and configure Process Watch
 
-In this step, you will install and configure **Process Watch**, an instruction-level profiling tool that shows live CPU instruction usage across threads. It supports real-time visualization of **NEON**, **SVE**, **FP**, and other vector and scalar instructions executed on Armv9 processors.
+First, install the required packages:
 
 ```bash
 sudo apt update
 sudo apt install -y git cmake build-essential libncurses-dev libtinfo-dev
 ```
 
-Use the following commands to download the source code, compile it, and install the binary into the processwatch directory.
+Clone and build Process Watch:
 
 ```bash
-# Clone and build Process Watch
 cd ~
 git clone --recursive https://github.com/intel/processwatch.git
 cd processwatch
@@ -32,21 +29,17 @@ cd processwatch
 sudo ln -s ~/processwatch/processwatch /usr/local/bin/processwatch
 ```
 
-To collect instruction-level metrics, ***Process Watch*** requires access to kernel performance counters and eBPF features.
-Although it can run as a non-root user, full functionality requires elevated privileges. For simplicity and completeness, run it with administrative rights.
-For safety and simplicity, it is recommended to run it with administrative rights.
+Process Watch requires elevated privileges to access kernel performance counters and eBPF features.
 
 Run the following commands to enable the required permissions:
+
 ```bash
 sudo setcap CAP_PERFMON,CAP_BPF=+ep ./processwatch
 sudo sysctl -w kernel.perf_event_paranoid=-1
 sudo sysctl kernel.unprivileged_bpf_disabled=0
 ```
 
-These commands:
-- Grant Process Watch the ability to use performance monitoring (perf) and eBPF tracing.
-- Lower kernel restrictions on accessing performance counters.
-- Allow unprivileged users to attach performance monitors.
+These commands grant Process Watch access to performance monitoring and eBPF tracing capabilities.
 
 Verify the installation:
 
@@ -55,7 +48,8 @@ Verify the installation:
 ```
 
 You should see a usage summary similar to:
-```
+
+```output
 usage: processwatch [options]
 options:
   -h          Displays this help message.
@@ -72,9 +66,9 @@ options:
   -d          Prints only debug information.
 ```
 
-In this step, you will run a quantized TinyLlama model on the Grace CPU to generate live instruction activity.
+You can run a quantized TinyLlama model on the Grace CPU to generate the instruction activity.
 
-Use the same CPU-only llama.cpp build created in the previous session:
+Use the same CPU-only llama.cpp build created in the previous section:
 
 ```bash
 cd ~/llama.cpp/build-cpu/bin
@@ -86,18 +80,18 @@ cd ~/llama.cpp/build-cpu/bin
 ```
 
 Keep this terminal running while the model generates text output.
-You will now attach Process Watch to this active process.
+
+You can now attach Process Watch to this active process.
 
 Once the llama.cpp process is running on the Grace CPU, attach Process Watch to observe its live instruction activity.
-If only one ***llama-cli process*** is running, you can directly launch Process Watch without manually checking its PID:
+
+If only one `llama-cli` process is running, you can directly launch Process Watch without manually checking its PID:
 
 ```bash
 sudo processwatch --pid $(pgrep llama-cli)
 ```
 
-This automatically attaches to the most active user-space process (typically llama-cli if it is the only inference task running).
-
-If multiple instances of llama-cli or other workloads are active, first list all running processes:
+If you have multiple processes running, first identify the correct process ID:
 
 ```bash
 pgrep llama-cli
@@ -106,16 +100,18 @@ pgrep llama-cli
 Then attach Process Watch to monitor the instruction mix of this process:
 
 ```bash
-sudo processwatch --pid <<LLAMA-CLI ID>>
+sudo processwatch --pid <LLAMA-CLI-PID>
 ```
+
 {{% notice Note %}}
-processwatch --list does not display all system processes.
+`processwatch --list` does not display all system processes.
 It is intended for internal use and may not list user-level tasks like llama-cli.
-Use pgrep, ps -ef | grep llama, or htop to identify process IDs before attaching.
+Use `pgrep` or `ps -ef | grep llama` or `htop` to identify process IDs before attaching.
 {{% /notice %}}
 
-The tool will display a live instruction breakdown similar to the following:
-```
+Process Watch displays a live instruction breakdown similar to the following:
+
+```output
 PID      NAME             FPARMv8  NEON     SVE      SVE2     %TOTAL   TOTAL   
 ALL      ALL              5.07     15.23    0.00     0.00     100.00   29272   
 72930    llama-cli        5.07     15.23    0.00     0.00     100.00   29272   
@@ -161,52 +157,47 @@ ALL      ALL              2.52     8.37     0.00     0.00     100.00   26566
 72930    llama-cli        2.52     8.37     0.00     0.00     100.00   26566   
 ```
 
-Interpretation:
+Here is an interpretation of the values:
 - NEON (≈ 7–15 %) : Active SIMD integer and floating-point operations.
-- FPARMv8         : Scalar FP operations (e.g., activation, normalization).
-- SVE/SVE2 = 0    : The kernel is restricted to 128-bit vectors and does not issue SVE instructions.
+- FPARMv8         : Scalar FP operations such as activation and normalization.
+- SVE/SVE2 = 0    : The kernel does not issue SVE instructions.
 
-This confirms that the Grace CPU performs quantized inference primarily using Neon SIMD pipelines.
+This confirms that the Grace CPU performs quantized inference primarily using NEON.
 
+### Why are SVE and SVE2 inactive?
 
-### Step 2: Why SVE and SVE2 Remain Inactive
+Although the Grace CPU supports SVE and SVE2, the vector length is 16 bytes (128-bit).
 
-Although the Grace CPU supports SVE and SVE2, the current NVIDIA Grace kernel limits the default vector length to 16 bytes (128-bit).
-This restriction ensures binary compatibility with existing Neon-optimized workloads.
+Verify the current setting:
 
-You can confirm this setting by:
 ```bash
 cat /proc/sys/abi/sve_default_vector_length
 ```
 
-Output:
-```
+The output is:
+
+```output
 16
 ```
 
-Even if you try to increase the length:
+Even if you try to increase the length it cannot be changed. 
 
 ```bash
 echo 256 | sudo tee /proc/sys/abi/sve_default_vector_length
-cat /proc/sys/abi/sve_default_vector_length
 ```
 
-It will revert to 16.
-This behavior is expected — SVE is enabled but fixed at 128 bits, so Neon remains the active execution path.
+This behavior is expected because SVE is available but fixed at 128 bits.
 
 {{% notice Note %}}
-The current kernel image restricts the SVE vector length to 128 bits to maintain compatibility with existing software stacks.
-Future kernel updates are expected to introduce configurable SVE vector lengths (for example, 256-bit or 512-bit).
-This Learning Path will be revised accordingly once those capabilities become available on the Grace platform.
+Future kernel updates may introduce SVE2 instructions.
 {{% /notice %}}
 
-In this session, you used ***Process Watch*** to observe instruction activity on the Grace CPU and interpret how Armv9 vector instructions are utilized during quantized LLM inference.
-You confirmed that Neon SIMD remains the primary execution path under the current kernel configuration, while SVE and SVE2 are enabled but restricted to 128-bit vector length for compatibility reasons.
+## Summary
 
-This experiment highlights how architectural features evolve over time — the Grace CPU already implements advanced Armv9 capabilities, and future kernel releases will unlock their full potential.
+You have learned how to:
+- Use Process Watch to monitor CPU instruction activity
+- Interpret Armv9 vector instruction usage during LLM inference
+- Prepare for future Armv9 enhancements
 
-By mastering these observation tools and understanding the instruction mix, you are now better equipped to:
-- Profile Arm-based systems at the architectural level,
-- Interpret real-time performance data meaningfully, and
-- Prepare your applications for future Armv9 enhancements.
+This knowledge helps you profile Arm systems effectively and optimize applications.
 
