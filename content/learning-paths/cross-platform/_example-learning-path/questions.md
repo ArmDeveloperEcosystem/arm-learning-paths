@@ -31,10 +31,3 @@ Modify the weight values to be unique and the extra buttons will disappear.
 
 There are various reasons this can happen. One being that the top links on the page will take you to the external site. Make sure that you are still viewing the Hugo server on `localhost`.
 
-### I have a markdown page in my Learning Path that I do not want to have it listed in the navigation pane... how do I hide it?
-
-Simple: in the markdown page's metadata block, add the following metdata tag:
-
-```markdown
-     hide_from_navpane: true
-```

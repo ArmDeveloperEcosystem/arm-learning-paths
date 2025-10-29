@@ -300,13 +300,5 @@ You can also give a custom title as specified here.
 - Work
 {{% /notice %}}
 
-## Hiding a page from being listed in the navigation pane
 
-Use the following metadata in your markdown page to effectively "hide" the page from being listed in the navigation pane:
-
-```markdown
----
-hide_from_navpane: true
----
-```
 
