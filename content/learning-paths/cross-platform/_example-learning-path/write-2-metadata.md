@@ -26,6 +26,7 @@ The following metadata is defined in the `_index.md` file:
 | learning_objectives   | 2-5 bullet points, one sentence each, describing what a reader will learn. Should start with a verb (deploy, measure). |
 | prerequisites         | Everything needed before this Learning Path can be started. Can include online service accounts, prior knowledge, previous Learning Paths, or specific tools and software. Offers explanatory links when possible. |
 | author      | The name of the person or people who wrote the Learning Path. |
+| hide_from_navpane     | Optional: set to **true** if the author does not want a specific markdown page to appear in the navigation pane. |
 
 Look at other Learning Paths for inspiration about how to write a good title, learning objectives, and prerequisites. 
 
