@@ -8,14 +8,20 @@ layout: learningpathall
 
 ## Project Overview
 
-Arm CPUs are widely used in web server workloads on Kubernetes (k8s). In this Learning Path, you'll learn how to deploy [nginx](https://nginx.org/) on Arm-based CPUs within a hybrid architecture (x64 and arm64) K8s cluster on Azure's AKS.
+Arm CPUs are widely used in web server workloads on Kubernetes (k8s). In this Learning Path, you'll learn how to deploy [nginx](https://nginx.org/) on Arm-based CPUs within a heterogeneous (x64 and arm64) K8s cluster on Azure's AKS.
 
-Many people begin their journey with Arm on K8s by adding Arm nodes to an existing x64-based cluster.  This tutorial begins the same way.   
+### Benefits of the multi-architecture approach
 
-To begin, login to azure-cli, and bring up the initial AKS cluster:
+Many developers begin their journey with Arm on K8s by adding Arm nodes to an existing x64-based cluster.  This has many advantages:
+
+1. Since you are already familiar with K8s on x64, you can leverage that knowledge to quickly get the core components up and running.
+2. Leveraging the multi-architectural container image of your existing x64 workload expedites the migration to Arm with minimal deployment modifications. 
+3. With both x64 and Arm workloads running in the same cluster, comparing performance across them is simplified.
+
+Even if you don't already have an existing AKS cluster, you're covered, as this learning path will walk you through bringing up an initial AKS environment and nginx workload on x64.  From there, you'll add Arm-based nodes running the same exact workload.  You'll see how to smoke test it (simple tests to verify functionality), and then performance test it (slightly more involved) to better understand the performance characteristics of each architecture.
 
 ### Login to Azure via azure-cli 
-If you haven't already, login to your Azure account using the Azure CLI:
+To begin, login to your Azure account using the Azure CLI:
 
 ```bash
 az login
