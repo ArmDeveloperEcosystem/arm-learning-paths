@@ -1,5 +1,5 @@
 ---
-title: Deploying quantized LLMs on DGX Spark using llama.cpp
+title: Deploy quantized LLMs on DGX Spark using llama.cpp
 
 draft: true
 cascade:
@@ -7,15 +7,16 @@ cascade:
 
 minutes_to_complete: 60
 
-who_is_this_for: This session is intended for AI practitioners, performance engineers, and system architects who want to understand how the Grace–Blackwell (GB10) platform enables efficient quantized LLM inference through CPU–GPU collaboration.
+who_is_this_for: This Learning Path is for AI practitioners, performance engineers, and system architects who want to understand how the Grace–Blackwell (GB10) platform enables efficient quantized LLM inference through CPU–GPU collaboration.
 
 learning_objectives:
-    - Understand the Grace–Blackwell (GB10) architecture and how it supports efficient AI inference.
-    - Build and validate both CUDA 13-enabled and CPU-only versions of llama.cpp for flexible deployment of quantized LLMs on the GB10 platform.
-    - Observe and interpret how Armv9 SIMD instructions (Neon, SVE) are utilized during quantized LLM inference on the Grace CPU using Process Watch.
+    - Understand the Grace–Blackwell (GB10) architecture and how it supports efficient AI inference
+    - Build and validate both CUDA-enabled and CPU-only versions of llama.cpp for flexible deployment
+    - Analyze how Armv9 SIMD instructions accelerate quantized LLM inference on the Grace CPU
 
 prerequisites:
-    - One NVIDIA DGX Spark system with at least 15 GB of available disk space.
+    - NVIDIA DGX Spark system with at least 15 GB of available disk space
+    - Basic understanding of machine learning concepts
 
 author: Odin Shen
 
@@ -23,29 +24,33 @@ author: Odin Shen
 skilllevels: Introductory
 subjects: ML
 armips:
-    - Cortex-X
     - Cortex-A
+    - Cortex-X
 operatingsystems:
     - Linux
 tools_software_languages:
     - Python
-    - C++
+    - C
     - Bash
     - llama.cpp
 
 further_reading:
     - resource:
-        title: Nvidia DGX Spark
+        title: NVIDIA DGX Spark
         link: https://www.nvidia.com/en-gb/products/workstations/dgx-spark/
         type: website
     - resource:
-        title: Nvidia DGX Spark Playbooks
+        title: NVIDIA DGX Spark Playbooks
         link: https://github.com/NVIDIA/dgx-spark-playbooks
         type: documentation
     - resource:
-        title: Arm Blog Post
+        title: Explore llama.cpp architecture and the inference workflow
+        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama_cpp_streamline/
+        type: blog
+    - resource:
+        title: The Dawn of New Desktop Devices Arm-Powered NVIDIA DGX Spark Workstations to Redefine AI Computing
         link: https://newsroom.arm.com/blog/arm-powered-nvidia-dgx-spark-ai-workstations
-        type: Blog
+        type: website
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
