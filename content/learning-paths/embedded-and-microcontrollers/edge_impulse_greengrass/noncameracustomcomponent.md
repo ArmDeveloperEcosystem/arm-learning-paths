@@ -1,3 +1,10 @@
+---
+hide_from_navpane: true
+
+### FIXED, DO NOT MODIFY
+layout: learningpathall
+---
+
 ## Non-Camera Custom Component
 
 For those edge devices that do not contain a camera, the following component will prepare the edge device with some sample images that can be referenced by the Edge Impulse "Runner" component's JSON configuration (via "gst\_args" settings) to direct the running model to pull its image data from the file (vs. camera). 
@@ -31,16 +38,16 @@ Next, we need to edit the EdgeImpulseRunnerRuntimeInstallerComponent.yaml and ch
 
 Within the AWS dashboard, go to the IoTCore dashboard, then navigate to "Components" under the "Greengrass devices" drop-down on the left hand side. 
 
-![CreateComponent](GG_Create_NC_Component_1.png)
+![CreateComponent](./images/GG_Create_NC_Component_1.png)
 
 Press "Create Component" and select "YAML" as the recipe format type. Copy and paste the contents of your updated/modified file EdgeImpulseRunnerRuntimeInstallerComponent.yaml into the text window after clearing the initial contents:
 
-![CreateComponent](GG_Create_NC_Component_2.png)
+![CreateComponent](./images/GG_Create_NC_Component_2.png)
 
 Finally, press "Create Component" and you should now have 2 custom components registered:
 
-![CreateComponent](GG_Create_NC_Component_3.png)
+![CreateComponent](./images/GG_Create_NC_Component_3.png)
 
 Awesome!  Now that the non-camera support component is created, we can go back and continue with the deployment of these components to your edge device via the AWS IoT Greengrass deployment mechanism. Press "Return to Deployment Steps" below and continue!
 
-[Return to Deployment Steps](../6_CustomComponentDeployment/CustomComponentDeployment.md)
+### [Return to Deployment Steps](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/customcomponentdeployment/)
