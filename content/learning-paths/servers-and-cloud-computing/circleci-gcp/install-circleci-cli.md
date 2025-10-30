@@ -11,10 +11,21 @@ This guide explains how to install the **CircleCI Command Line Interface (CLI)**
 The CLI allows you to interact with CircleCI directly from your terminal, such as to validate configuration files, run jobs locally, or manage runners.
 
 ### Install Required Packages
+
+Add OpenSUSE Leap repository:
+```bash
+sudo zypper addrepo https://download.opensuse.org/distribution/leap/15.5/repo/oss/ openSUSE-Leap-15.5-OSS
+```
+
+Refresh repositories:
+```bash
+sudo zypper refresh
+```
+# Install git
 Before installing the CircleCI CLI, make sure your system has the basic tools required for downloading and extracting files.
 
 ```console
-sudo zypper install curl tar gzip coreutils gpg git
+sudo zypper install curl tar gzip coreutils gpg git-core
 ```
 
 ## Download and Extract the CircleCI CLI
