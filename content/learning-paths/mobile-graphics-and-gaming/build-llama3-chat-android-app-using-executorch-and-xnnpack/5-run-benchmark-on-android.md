@@ -32,6 +32,7 @@ Use `cmake` to cross-compile ExecuTorch:
 cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
     -DANDROID_ABI=arm64-v8a \
     -DANDROID_PLATFORM=android-23 \
+    -DEXECUTORCH_BUILD_EXTENSION_NAMED_DATA_MAP=ON \
     -DCMAKE_INSTALL_PREFIX=cmake-out-android \
     -DEXECUTORCH_ENABLE_LOGGING=1 \
     -DCMAKE_BUILD_TYPE=Release \
@@ -69,11 +70,7 @@ cmake  -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
     -DCMAKE_INSTALL_PREFIX=cmake-out-android \
     -DCMAKE_BUILD_TYPE=Release \
     -DPYTHON_EXECUTABLE=python \
-    -DEXECUTORCH_BUILD_XNNPACK=ON \
     -DEXECUTORCH_BUILD_KERNELS_OPTIMIZED=ON \
-    -DEXECUTORCH_BUILD_KERNELS_QUANTIZED=ON \
-    -DEXECUTORCH_BUILD_KERNELS_CUSTOM=ON \
-    -DSUPPORT_REGEX_LOOKAHEAD=ON \
     -DBUILD_TESTING=OFF \
     -Bcmake-out-android/examples/models/llama \
     examples/models/llama

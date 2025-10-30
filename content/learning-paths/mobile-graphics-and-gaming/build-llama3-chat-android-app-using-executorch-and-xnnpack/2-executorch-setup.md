@@ -12,7 +12,9 @@ ExecuTorch is an end-to-end solution for enabling on-device inference capabiliti
 
 The best practice is to generate an isolated Python environment in which to install your ExecuTorch dependencies. We provide instructions for both a Python virtual environment and a Conda virtual environment, but you only need one.
 
-### Option 1: Create a Python virtual environment
+### Create a Python virtual environment
+
+Use the `venv` module that is available through Python:
 
 ```bash
 python3.10 -m venv executorch-venv
@@ -21,24 +23,14 @@ source executorch-venv/bin/activate
 
 The prompt of your terminal has `executorch` as a prefix to indicate the virtual environment is active.
 
-### Option 2: Create a Conda virtual environment
-
-Install Miniconda on your development machine by following the [Installing conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) instructions.
-
-Once `conda` is installed, create the environment:
-
-```bash
-conda create -yn executorch-venv python=3.10.0
-conda activate executorch-venv
-```
-
 ### Clone ExecuTorch and install the required dependencies
 
-From within the conda environment, run the commands below to download the ExecuTorch repository and install the required packages:
+From within the virtual environment, run the commands below to download the ExecuTorch repository and install the required packages:
 
 ``` bash
 git clone https://github.com/pytorch/executorch.git
 cd executorch
+git checkout release/1.0
 git submodule sync
 git submodule update --init --recursive
 ./install_executorch.sh
