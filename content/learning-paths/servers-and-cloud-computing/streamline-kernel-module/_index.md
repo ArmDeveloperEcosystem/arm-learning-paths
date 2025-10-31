@@ -1,6 +1,10 @@
 ---
 title: Profiling the Linux kernel with Arm Streamline
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 60
 
 who_is_this_for: Software developers and performance engineers interested in profiling Linux kernel performance.
