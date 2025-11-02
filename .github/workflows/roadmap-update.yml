@@ -171,12 +171,22 @@ jobs:
                     console.log('Start Date field not found');
                   }
                 } else if (labelName === 'publish') {
-                  const endDateFieldId = await getFieldId(projectId, 'Publish Date');
-                  if (endDateFieldId) {
-                    await updateDateField(projectId, itemId, endDateFieldId, today);
+                  // Publish Date
+                  const publishDateFieldId = await getFieldId(projectId, 'Publish Date');
+                  if (publishDateFieldId) {
+                    await updateDateField(projectId, itemId, publishDateFieldId, today);
                     console.log('Updated Publish Date to', today);
                   } else {
                     console.log('Publish Date field not found');
+                  }
+
+                  // Last Reviewed Date (same as Publish Date)
+                  const lastReviewedFieldId = await getFieldId(projectId, 'Last Reviewed Date');
+                  if (lastReviewedFieldId) {
+                    await updateDateField(projectId, itemId, lastReviewedFieldId, today);
+                    console.log('Updated Last Reviewed Date to', today);
+                  } else {
+                    console.log('Last Reviewed Date field not found');
                   }
                 } else {
                   console.log('No action taken for label:', labelName);
