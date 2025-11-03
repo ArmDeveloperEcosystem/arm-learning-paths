@@ -47,7 +47,7 @@ further_reading:
         link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama_cpp_streamline/
         type: blog
     - resource:
-        title: Arm Newsroom Blog: The Dawn of New Desktop Devices Arm-Powered NVIDIA DGX Spark Workstations to Redefine AI Computing
+        title: The Dawn of New Desktop Devices Arm-Powered NVIDIA DGX Spark Workstations to Redefine AI Computing (Arm Newsroom Blog)
         link: https://newsroom.arm.com/blog/arm-powered-nvidia-dgx-spark-ai-workstations
         type: website
 
