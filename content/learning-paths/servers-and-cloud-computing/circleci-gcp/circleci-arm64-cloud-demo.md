@@ -57,11 +57,22 @@ Before proceeding with the app setup, please make sure **Node.js** and **npm** (
 sudo zypper install nodejs
 sudo zypper install npm
 ```
-### Clone Your App Repository
-Clone your application repository (or create one locally):
+### Create a repository for your example code
+First, install GitHub CLI:
+
+```bash
+sudo zypper install gh
+```
+Authenticate:
+
+```bash
+gh auth login
+```
+
+Create a new repository for your example code:
 
 ```console
-git clone https://github.com/<your-repo>/arm64-node-demo.git
+gh repo create arm64-node-demo --public --clone
 cd arm64-node-demo
 ```
 
@@ -170,6 +181,7 @@ package.json
 Once all files (`Dockerfile`, `index.js`, `package.json`, `.circleci/config.yml`) are ready, push your project to GitHub so CircleCI can build it automatically.
 
 ```console
+git config --global user.name "your-user-name"
 git add .
 git commit -m "Add ARM64 CircleCI Node.js demo project"
 git push -u origin main
