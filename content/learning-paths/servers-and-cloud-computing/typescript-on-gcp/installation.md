@@ -7,35 +7,44 @@ layout: learningpathall
 ---
 
 ## Install TypeScript on GCP VM
-This page guides you through installing **TypeScript** and its prerequisites on a **GCP SUSE Arm64 VM**. We will install Node.js, npm, TypeScript, and ts-node, and verify that everything works correctly.
+This section walks you through installing TypeScript and its dependencies on a Google Cloud Platform (GCP) SUSE Arm64 virtual machine. You’ll install Node.js, npm, TypeScript, and ts-node, and verify that everything works correctly.
+
+Running TypeScript on Google Cloud C4A instances, powered by Axion Arm64 processors, provides a high-performance and energy-efficient platform for Node.js-based workloads.
 
 ### Update SUSE System
-Before installing new packages, refresh the repositories and update existing packages:
+Before installing new packages, refresh the repositories and update existing ones to ensure your environment is current and secure:
 
 ```console
 sudo zypper refresh
 sudo zypper update -y
 ```
-This ensures that your VM has the latest package information and security updates.
+Keeping your system up to date ensures that dependencies, libraries, and compilers required for Node.js and TypeScript work seamlessly on the Arm64 architecture.
 
 ### Install Node.js and npm
-Node.js is required to run TypeScript scripts, and npm is the Node.js package manager:
+Node.js provides the JavaScript runtime that powers TypeScript execution, while npm (Node Package Manager) manages project dependencies and global tools.
+
+Install both packages using SUSE’s repositories:
 
 ```console
 sudo zypper install -y nodejs npm
 ```
-The above command installs Node.js runtime and npm on your GCP SUSE VM.
+This command installs the Node.js runtime and npm package manager on your Google Cloud SUSE Arm64 VM.
 
 ### Install TypeScript globally
-TypeScript (`tsc`) compiles `.ts` files to JavaScript, and ts-node allows you to run TypeScript directly without compiling:
+TypeScript (tsc) is the compiler that converts .ts files into JavaScript.
+`ts-node` lets you run TypeScript files directly without pre-compiling them. It is useful for testing, scripting, and lightweight development workflows.
+
+Install both globally using npm:
 
 ```console
 sudo npm install -g typescript ts-node
 ```
-- Installing globally (`-g`) makes `tsc` and `ts-node` available in any directory on your VM.
+The `-g` flag installs packages globally, making tsc and ts-node available system-wide.
+
+This approach simplifies workflows for developers running multiple TypeScript projects on the same VM.
 
 ### Verify installations
-Check that Node.js, npm, TypeScript, and ts-node are installed correctly:
+Check that Node.js, npm, TypeScript, and ts-node are all installed correctly:
 
 ```console
 node -v
@@ -44,7 +53,7 @@ tsc -v
 ts-node -v
 ```
 
-**Output:**
+The expected output is:
 
 ```output
 >node -v
@@ -57,4 +66,5 @@ Version 5.9.3
 v10.9.2
 ```
 
-These version outputs confirm that the Node.js and TypeScript are installed correctly and are ready for development or benchmarking.
+Node.js, npm, and TypeScript are now successfully installed and verified on your Google Cloud C4A (Arm64) virtual machine.
+You’re ready to create and execute TypeScript scripts for testing, deployment, or performance benchmarking.
