@@ -7,33 +7,33 @@ layout: learningpathall
 ---
 
 ## Baseline Setup for TypeScript
-This guide covers the **baseline setup and testing** of TypeScript on a **Google Axion C4A virtual machine** running SUSE Linux. The objective is to ensure that the TypeScript environment is installed correctly, that basic compilation works, and that a simple TypeScript script can run on the VM.
+This section walks you through the baseline setup and validation of TypeScript on a Google Cloud C4A (Axion Arm64) virtual machine running SUSE Linux.
+The goal is to confirm that your TypeScript environment is functioning correctly, from initializing a project to compiling and executing a simple TypeScript file, ensuring a solid foundation before performance or benchmarking steps.
 
 ### Set Up a TypeScript Project
-Before testing, we need a project folder with all necessary TypeScript dependencies.  
+Before running any tests, you’ll create a dedicated project directory and initialize a minimal TypeScript environment.
 
-**1. Create project folder**
+1. Create project folder
 
-Create a dedicated folder for your TypeScript project:
+Start by creating a new folder to hold your TypeScript project files:
 
 ```console
 mkdir ~/typescript-benchmark
 cd ~/typescript-benchmark
 ```
-This ensures all files are organized in one place, separate from system files.
+This creates a workspace named `typescript-benchmark` in your home directory, ensuring all TypeScript configuration and source files are organized separately from system files and global modules.
 
-**2. Initialize npm project**
+2. Initialize npm project
 
-Initialize a Node.js project with default settings:
+Next, initialize a new Node.js project. This creates a `package.json` file that defines your project metadata, dependencies, and scripts.
 
 ```console
 npm init -y
 ```
-The above command creates a  `package.json` file, which manages your project dependencies and scripts.
 
-**3. Install Node.js type definitions**
+3. Install Node.js type definitions
 
-These definitions allow TypeScript to understand Node.js APIs, enabling type checking and code autocompletion.
+To enable TypeScript to properly recognize Node.js built-in APIs (like fs, path, and process), install the Node.js type definitions package:
 
 ```console
 npm install --save-dev @types/node
@@ -56,9 +56,9 @@ You should see output similar to:
 ```
 
 ### Baseline Testing
-After setting up the project, we perform baseline testing to verify that TypeScript is working correctly on the GCP SUSE VM.
+With the TypeScript environment configured, you’ll now perform a baseline functionality test to confirm that TypeScript compilation and execution work correctly on your Google Cloud SUSE Arm64 VM.
 
-**1. Create a Simple TypeScript File**
+1. Create a Simple TypeScript File
 
 Create a file named `hello.ts` with the following content:
 
@@ -71,17 +71,18 @@ console.log(greet("GCP SUSE ARM64"));
 ```
 This simple function demonstrates TypeScript syntax, type annotations, and basic console output.
 
-**2. Compile TypeScript**
+2. Compile TypeScript
 
-The TypeScript compiler (`tsc`) converts `hello.ts` into `hello.js`, which can be executed by Node.js.
+Use the TypeScript compiler (tsc) to transpile the .ts file into JavaScript:
 
 ```console
 tsc hello.ts
 ```
+This generates a new file named `hello.js` in the same directory.
 
-**3. Run compiled JavaScript**
+3. Run compiled JavaScript
 
-After compiling the TypeScript file into JavaScript (`hello.js`), you need to execute it using `Node.js`. This step verifies that:
+Now, execute the compiled JavaScript using Node.js. This step verifies that:
 
 - The TypeScript code was successfully compiled into valid JavaScript.
 - The JavaScript code runs correctly in the Node.js runtime on your GCP SUSE VM.
@@ -93,7 +94,9 @@ node hello.js
 ```
 
 You should see output similar to:
+
 ```output
 Hello, GCP SUSE ARM64
 ```
-This verifies the basic functionality of the TypeScript installation before proceeding to the benchmarking.
+You have successfully verified that your TypeScript environment is working correctly.
+Next, you can proceed to TypeScript performance benchmarking to measure compilation and runtime performance on your Google Cloud Arm64 VM.
