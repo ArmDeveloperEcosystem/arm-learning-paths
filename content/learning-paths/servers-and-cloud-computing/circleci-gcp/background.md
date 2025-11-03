@@ -16,10 +16,10 @@ To learn more about Google Axion, refer to the [Introducing Google Axion Process
 
 ## CircleCI
 
-CircleCI is a cloud-based **Continuous Integration and Continuous Delivery (CI/CD)** platform that automates the process of **building, testing, and deploying software**.
+CircleCI is a cloud-based Continuous Integration and Continuous Delivery (CI/CD) platform that automates the process of building, testing, and deploying software.
 
-It integrates with popular version control systems like **GitHub**, **Bitbucket**, and **GitLab**, and allows developers to define custom workflows in a `.circleci/config.yml` file using **YAML syntax**.
+It integrates with popular version control systems like GitHub, Bitbucket, and GitLab, and allows developers to define custom workflows in a `.circleci/config.yml` file using the YAML syntax.
 
-CircleCI supports multiple environments, including **Docker**, **Linux**, **macOS**, and **Windows**, and offers advanced features like **parallelism**, **caching**, and **matrix builds** to speed up pipelines and improve efficiency.
+CircleCI supports multiple platforms, including Linux, macOS, and Windows, and offers advanced features like parallelism, caching, and matrix builds to speed up pipelines and improve efficiency.
 
-It is widely used for **automating tests, running builds, deploying applications, and ensuring code quality** in modern development workflows. Learn more from the [CircleCI official website](https://circleci.com/) and its [documentation](https://circleci.com/docs/).
+It is widely used for automating tests, running builds, deploying applications, and ensuring code quality in modern development workflows. Learn more from the [CircleCI official website](https://circleci.com/) and its [documentation](https://circleci.com/docs/).
