@@ -95,3 +95,6 @@ Oct 09 11:15:03 lpprojectsusearm64 circleci-runner[10150]: 11:15:03 6f109 46.144
 You can also confirm that your runner is connected and active by visiting the Self-Hosted Runners page in the CircleCI web dashboard.
 
 ![Self-Hosted Runners alt-text#center](images/dashboard.png "Figure 1: Self-Hosted Runners ")
+
+Your CircleCI Machine Runner is now installed, configured, and registered on your SUSE Arm64 VM (Google Cloud C4A).
+You can now define jobs in your `.circleci/config.yml` that target your Arm-native Resource Class and begin running builds directly on this runner.
