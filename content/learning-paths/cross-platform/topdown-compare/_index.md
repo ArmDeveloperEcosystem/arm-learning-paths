@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - Familiarity with performance analysis on Linux systems using Perf and PMU counters
-    - Access to Arm Neoverse and Intel x86 Linux systems for hands-on examples
+    - Access to Arm Neoverse V2 and Intel x86 Linux systems to run the code example
     - Basic understanding of CPU pipeline concepts and performance bottlenecks
 
 author:
@@ -38,9 +38,13 @@ shared_between:
 
 further_reading:
     - resource:
-        title: Arm Neoverse V1 Top-down Methodology for Performance Analysis & Telemetry Specification
-        link: https://community.arm.com/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/arm-neoverse-v1-top-down-methodology
-        type: blog
+        title: Arm Neoverse V2 Core Telemetry Specification
+        link: https://developer.arm.com/documentation/109528/0200/?lang=en
+        type: documentation
+    - resource:
+        title: Arm Neoverse V2 Software Optimization Guide
+        link: https://developer.arm.com/documentation/109898/latest/
+        type: documentation
     - resource:
         title: Performance Analysis and Tuning on Modern CPUs
         link: https://www.amazon.com/Performance-Analysis-Tuning-Modern-CPUs/dp/B0DNQZJ92S
