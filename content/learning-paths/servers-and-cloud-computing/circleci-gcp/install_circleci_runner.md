@@ -18,8 +18,13 @@ SUSE is an RPM-based distribution, so first add the official CircleCI repository
 ```console
 curl -s https://packagecloud.io/install/repositories/circleci/runner/script.rpm.sh?any=true | sudo bash
 ```
-
 ### Install the CircleCI Runner
+Create a symlink for `adduser` as the Circle CI runner script assumes Ubuntu/Debian as your OS:
+
+```bash
+sudo ln -s /usr/sbin/useradd /usr/sbin/adduser
+```
+
 Install the pre-built CircleCI runner package:
 
 ```console
