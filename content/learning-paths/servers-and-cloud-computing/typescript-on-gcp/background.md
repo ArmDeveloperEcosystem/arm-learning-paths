@@ -18,6 +18,6 @@ To learn more about Google Axion, refer to the [Introducing Google Axion Process
 
 TypeScript is an open-source, strongly typed programming language developed and maintained by Microsoft.  
 
-It is a superset of JavaScript, which means all valid JavaScript code is also valid TypeScript, but TypeScript adds **static typing, interfaces, and advanced tooling** to help developers write more reliable and maintainable code.  
+It is a superset of JavaScript, which means all valid JavaScript code is also valid TypeScript, but TypeScript adds static typing, interfaces, and advanced tooling to help developers write more reliable and maintainable code.  
 
-TypeScript is widely used for **web applications, server-side development (Node.js), and large-scale JavaScript projects** where type safety and code quality are important. Learn more from the [TypeScript official website](https://www.typescriptlang.org/) and its [handbook and documentation](https://www.typescriptlang.org/docs/).
+TypeScript is widely used for web applications, server-side development (Node.js), and large-scale JavaScript projects** where type safety and code quality are important. Learn more from the [TypeScript official website](https://www.typescriptlang.org/) and its [handbook and documentation](https://www.typescriptlang.org/docs/).
