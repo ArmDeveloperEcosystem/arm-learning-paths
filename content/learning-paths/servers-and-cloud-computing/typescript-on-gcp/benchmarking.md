@@ -108,7 +108,7 @@ Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm6
 |-----------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|---------|
 | Time (ms) | 2.286 | 0.749 | 1.145 | 0.674 | 0.671 | 0.671 | 0.672 | 0.667 | 0.667 | 0.673 | 0.888   |
 
-### TypeScript performance benchmarking comparison on Arm64 and x86_64
+### TypeScript performance benchmarking summary on Arm64
 
 When you look at the benchmarking results, you will notice that on the Google Axion C4A Arm-based instances:
 
