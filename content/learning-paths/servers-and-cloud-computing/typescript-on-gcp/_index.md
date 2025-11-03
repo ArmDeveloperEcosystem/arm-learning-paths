@@ -7,13 +7,13 @@ cascade:
     
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is intended for software developers deploying and optimizing TypeScript workloads on Linux/Arm64 environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
+who_is_this_for: This is an introductory topic for software developers deploying and optimizing TypeScript workloads on Arm64 Linux environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
 
 learning_objectives:
   - Provision an Arm-based SUSE SLES virtual machine on Google Cloud (C4A with Axion processors)
   - Install TypeScript on a SUSE Arm64 (C4A) instance
   - Validate TypeScript functionality by creating, compiling, and running a simple TypeScript script on the Arm64 VM
-  - Benchmark TypeScript performance using a JMH-style custom benchmark with perf_hooks on Arm64 (Aarch64) architecture
+  - Benchmark TypeScript performance using a JMH-style custom benchmark with perf_hooks on Arm64 architecture
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
@@ -34,7 +34,6 @@ tools_software_languages:
   - TypeScript
   - node.js
   - npm
-  - perf_hooks
 
 operatingsystems:
   - Linux
