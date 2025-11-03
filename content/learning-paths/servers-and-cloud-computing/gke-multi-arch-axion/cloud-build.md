@@ -1,6 +1,6 @@
 ---
 title:  Automate builds and rollout with Cloud Build & Skaffold
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -28,21 +28,13 @@ Cloud Build runs as a per-project service account: `<PROJECT_NUMBER>@cloudbuild.
 PROJECT_NUMBER="$(gcloud projects describe "${PROJECT_ID}" --format='value(projectNumber)')"
 CLOUD_BUILD_SA="${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com"
 
-gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
-  --member="serviceAccount:${CLOUD_BUILD_SA}" \
-  --role="roles/cloudbuild.builds.builder"
+gcloud projects add-iam-policy-binding "${PROJECT_ID}" --member="serviceAccount:${CLOUD_BUILD_SA}" --role="roles/cloudbuild.builds.builder" --condition=None --quiet
 
-gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
-  --member="serviceAccount:${CLOUD_BUILD_SA}" \
-  --role="roles/container.developer"
+gcloud projects add-iam-policy-binding "${PROJECT_ID}" --member="serviceAccount:${CLOUD_BUILD_SA}" --role="roles/container.developer" --condition=None --quiet
 
-gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
-  --member="serviceAccount:${CLOUD_BUILD_SA}" \
-  --role="roles/artifactregistry.writer"
+gcloud projects add-iam-policy-binding "${PROJECT_ID}" --member="serviceAccount:${CLOUD_BUILD_SA}" --role="roles/artifactregistry.writer" --condition=None --quiet
 
-gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
-  --member="serviceAccount:${CLOUD_BUILD_SA}" \
-  --role="roles/logging.logWriter"
+gcloud projects add-iam-policy-binding "${PROJECT_ID}" --member="serviceAccount:${CLOUD_BUILD_SA}" --role="roles/logging.logWriter" --condition=None --quiet
 ```
 
 ## Update skaffold.yaml for deploy-only
@@ -50,6 +42,24 @@ gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
 This will let Cloud Build handle image builds and use Skaffold only to apply the Kustomize overlays.
 
 ```yaml
+# From the repo root (microservices-demo)
+[ -f skaffold.yaml ] && cp skaffold.yaml "skaffold.yaml.bak.$(date +%s)"
+cat > skaffold.yaml <<'YAML'
+
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 apiVersion: skaffold/v3
 kind: Config
 metadata:
@@ -83,6 +93,7 @@ manifests:
     - ./kubernetes-manifests/loadgenerator.yaml
 deploy:
   kubectl: {}
+YAML
 
 ```
 
@@ -91,6 +102,35 @@ deploy:
 This pipeline installs `Docker + Buildx` in the runner, enables QEMU, builds two services as examples (extend as desired), connects to your cluster, deploys to amd64, verifies, migrates to arm64, verifies, and prints the external IP.  ￼
 
 ```yaml
+cat > cloudbuild.yaml <<'YAML'
+
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# [START cloudbuild_microservice_demo_cloudbuild]
+
+# This configuration file is used to build and deploy the app into a
+# GKE cluster using Google Cloud Build.
+#
+# PREREQUISITES:
+# - Cloud Build service account must have role: "Kubernetes Engine Developer"
+
+# USAGE:
+# GCP zone and GKE target cluster must be specified as substitutions
+# Example invocation:
+# `gcloud builds submit --config=cloudbuild.yaml --substitutions=_ZONE=us-central1-b,_CLUSTER=demo-app-staging .`
+
 substitutions:
   _REGION: ${REGION}
   _CLUSTER: ${CLUSTER_NAME}
@@ -142,7 +182,7 @@ steps:
 
         docker buildx build --platform linux/amd64,linux/arm64 \
           -t "${_REPO}/cartservice:v1" \
-          src/cartservice --push
+          src/cartservice/src --push
 
   # 3) Connect kubectl to the target cluster
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
@@ -189,7 +229,8 @@ steps:
         kubectl get pods -o wide
         echo "Fetching external IP for the frontend service..."
         IP=$(kubectl get svc frontend-external -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')
-        echo "Open http://${IP} in your browser."
+        echo "Open http://$${IP} in your browser."
+YAML
 ```
 
 {{% notice Note %}}

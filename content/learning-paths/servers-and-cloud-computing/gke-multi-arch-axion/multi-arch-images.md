@@ -1,23 +1,26 @@
 ---
-title: Build and push multi-architecture images to Artifact Registry with Docker Buildx
+title: Build-ready Dockerfiles for multi-architecture (amd64 & arm64)
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-With the environment ready, the next step is to make the Online Boutique services multi-architecture and publish them to Artifact Registry. You will patch a few Dockerfiles (only where needed), set up Docker Buildx, build and push amd64 & arm64 images, and verify the resulting manifest lists.
+With the environment prepared, this step makes the Online Boutique services multi-architecture ready. You will patch a few Dockerfiles so they build cleanly for both architectures. On the next page, you will build and push images using a GKE-native Buildx builder (one pod per arch, no QEMU).
 
-### Update Dockerfiles for multi-arch support
+### Services that need edits
 
-The goal of this step is to make the application's services compatible with both amd64 and arm64. Most Dockerfiles in the microservices demo already support multi-architecture builds without modification. However, three services require updates:
+Most services already build for both architectures. These four need small, safe changes:
 
-- **emailservice**
+- **emailservice** 
 - **recommendationservice**
 - **loadgenerator**
+- **cartservice**
+
+These edits don't change application behavior-they only ensure the right compiler headers and runtime libs are present per architecture (Python native wheels for email/recommendation/loadgen; system `protoc` for .NET cartservice).
 
 {{% notice Note %}}
-Production migrations begin with assessing cross-architecture compatibility for each service (base images, native extensions such as CGO/JNI, platform-specific packages, and CI build targets). This section demonstrates minor Dockerfile edits for three representative services. In the referenced Online Boutique release, the remaining services generally build for both **amd64** and **arm64** without modification.
+Production migrations begin with assessing cross-architecture compatibility for each service (base images, native extensions such as CGO/JNI, platform-specific packages, and CI build targets). This section demonstrates minor Dockerfile edits for four representative services. In the referenced Online Boutique release, the remaining services generally build for both **amd64** and **arm64** without modification.
 {{% /notice %}}
 
 #### Update src/emailservice/Dockerfile
@@ -26,49 +29,56 @@ Replace the entire contents of the file with the following multi-architecture-co
 
 ```bash
 cat << 'EOF' > src/emailservice/Dockerfile
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
+# syntax=docker/dockerfile:1.6
 ARG TARGETPLATFORM
-
 FROM --platform=$TARGETPLATFORM python:3.12.8-alpine@sha256:54bec49592c8455de8d5983d984efff76b6417a6af9b5dcc8d0237bf6ad3bd20 AS base
 FROM --platform=$TARGETPLATFORM base AS builder
-
-RUN apk update \
-  && apk add --no-cache g++ linux-headers musl-dev \
-  && rm -rf /var/cache/apk/*
-
-# Install Python dependencies
+RUN apk add --no-cache g++ gcc linux-headers musl-dev libffi-dev openssl-dev
 COPY requirements.txt .
-RUN pip install -r requirements.txt
-
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --prefer-binary -r requirements.txt
 FROM --platform=$TARGETPLATFORM base
-ENV PYTHONUNBUFFERED=1 ENABLE_PROFILER=1
-
-RUN apk update \
-  && apk add --no-cache libstdc++ \
-  && rm -rf /var/cache/apk/*
-
+ENV PYTHONUNBUFFERED=1
+ENV ENABLE_PROFILER=1
+RUN apk add --no-cache libstdc++ libgcc libffi openssl
 WORKDIR /email_server
 COPY --from=builder /usr/local/lib/python3.12/ /usr/local/lib/python3.12/
 COPY . .
 EXPOSE 8080
 ENTRYPOINT ["python","email_server.py"]
+
+
 EOF
 ```
 
-{{% notice Note %}}
-**Why this works:** `TARGETPLATFORM` is set by Docker Buildx at build time (linux/amd64 or linux/arm64). Using `--platform=$TARGETPLATFORM` ensures you pull the correct base image and compile native artifacts for that architecture.
-{{% /notice %}}
+{{% details title="Details (optional)" %}}
+- **BuildKit syntax** unlocks `--mount=type=cache` to speed rebuilds.
+- **TARGETPLATFORM** lets Buildx set linux/amd64 vs linux/arm64 explicitly.
+- **Dev vs runtime packages:** build stage compiles native wheels; final stage keeps only needed shared libs.
+- **`--prefer-binary`** avoids source builds when wheels exist (more reliable across arches).
+- **Removed extra `apk update`** since `apk add --no-cache` already avoids stale indexes & caches.
+{{% /details %}}
 
-#### Apply equivalent updates to the other two services
+#### Apply equivalent updates to the other three services
 
-Run the following commands to automatically update the remaining two Dockerfiles:
-- src/recommendationservice/Dockerfile
-- src/loadgenerator/Dockerfile
-
-These commands insert ARG TARGETPLATFORM, update platform references, and ensure the required cross-architecture libraries (`musl-dev` & `libgcc`) are included.
 Run the following sed commands to automatically patch the Dockerfiles:
 
 #### Update src/recommendationservice/Dockerfile
+
 ```bash
 sed -i \
   -e '/^# limitations under the License./a ARG TARGETPLATFORM' \
@@ -80,152 +90,67 @@ sed -i \
   -e 's|COPY --from=builder /usr/local/lib/python3\.12/ /usr/local/lib/python3\.12/|COPY --from=builder /install/lib/python3.12 /usr/local/lib/python3.12/|' \
   src/recommendationservice/Dockerfile
 ```
+**What these edits do**
+
+- Make the base image architecture-aware.
+- Let native wheels build cleanly.
+- Keep the runtime slim & predictable.
+
 
 #### Update src/loadgenerator/Dockerfile
 ```bash
+FILE=src/loadgenerator/Dockerfile
+
+# Platform plumbing (TARGETPLATFORM) + fix FROM lines
 sed -i \
-  -e '/^# limitations under the License./a ARG TARGETPLATFORM' \
-  -e 's|^FROM[[:space:]]\+python:3\.12\.8-alpine@sha256:54bec49592c8455de8d5983d984efff76b6417a6af9b5dcc8d0237bf6ad3bd20[[:space:]]\+AS[[:space:]]\+base|FROM --platform=\$TARGETPLATFORM python:3.12.8-alpine@sha256:54bec49592c8455de8d5983d984efff76b6417a6af9b5dcc8d0237bf6ad3bd20 AS base|' \
-  -e 's|^FROM[[:space:]]\+base[[:space:]]\+AS[[:space:]]\+builder|FROM --platform=\$TARGETPLATFORM base AS builder|' \
-  -e 's|^FROM[[:space:]]\+base$|FROM --platform=\$TARGETPLATFORM base|' \
-  -e '/apk add/ s/\blinux-headers\b/& musl-dev/' \
-  -e '/apk add/ s/\blibstdc\b/libstdc++/g' \
-  -e '/apk add/ s/\blibgcc\+\+\b/libgcc/g' \
-  -e '/apk add/ {/libgcc/! s/$/ libgcc/; }' \
-  src/loadgenerator/Dockerfile
+  -e '/^FROM --platform=\$BUILDPLATFORM python:3\.12\.8-alpine@sha256:54bec49592c8455de8d5983d984efff76b6417a6af9b5dcc8d0237bf6ad3bd20 AS base/i ARG TARGETPLATFORM' \
+  -e 's/^FROM --platform=\$BUILDPLATFORM python:3\.12\.8-alpine@sha256:54bec49592c8455de8d5983d984efff76b6417a6af9b5dcc8d0237bf6ad3bd20 AS base/FROM --platform=$TARGETPLATFORM python:3.12.8-alpine@sha256:54bec49592c8455de8d5983d984efff76b6417a6af9b5dcc8d0237bf6ad3bd20 AS base/' \
+  -e 's/^FROM base AS builder$/FROM --platform=$TARGETPLATFORM base AS builder/' \
+  -e 's/^FROM base$/FROM --platform=$TARGETPLATFORM base/' \
+  "$FILE"
+
+# Ensure libgcc is present on runtime apk line that installs libstdc++
+sed -i -E \
+  '/^[[:space:]]*&&[[:space:]]*apk add --no-cache[[:space:]]+libstdc\+\+/{/libgcc/! s/libstdc\+\+/libstdc++ libgcc/}' \
+  "$FILE"
+
+# Add musl-dev to the builder deps line
+sed -i -E \
+  '/^[[:space:]]*&&[[:space:]]*apk add --no-cache[[:space:]]+wget[[:space:]]+g\+\+[[:space:]]+linux-headers/ s/linux-headers/linux-headers musl-dev/' \
+  "$FILE"
 ```
+
+**What these edits do**
+
+- Make the base image architecture-aware.
+- Fix native build/run deps.
+- Keep runtime lean and no flags/app code changed.
+
+#### Update src/cartservice/src/Dockerfile
+
+```bash
+FILE=src/cartservice/src/Dockerfile
+
+# 1) After the ARG line, install protoc in the builder image
+sed -i \
+  '/^ARG TARGETARCH$/a RUN apt-get update \&\& apt-get install -y --no-install-recommends protobuf-compiler \&\& rm -rf /var/lib/apt/lists/*' \
+  "$FILE"
+
+# 2) In the publish step, inject Protobuf_Protoc=/usr/bin/protoc right after the first line
+sed -i \
+  '/^RUN[[:space:]]\+dotnet publish cartservice\.csproj[[:space:]]*\\$/a \    -p:Protobuf_Protoc=/usr/bin/protoc \\' \
+  "$FILE"
+
+```
+**What these edits do**
+
+- Install system protoc.
+- Force MSBuild to use it.
+- No behavioral change.
 
 {{% notice Note %}}
-Result: All three services now support cross-architecture builds.
-{{% /notice %}}
+`ARG TARGETPLATFORM` + `FROM --platform=$TARGETPLATFORM` is not strictly required if you always build with --platform and your base image is multi-arch (which it is). Keeping it is perfectly fine and makes intent explicit; it does not change runtime behavior.
 
-### Prepare the build environment & permissions
-
-Before building and pushing images, complete these setup steps in Cloud Shell:
-
-1. Create and activate a new Buildx builder to enable multi-platform builds:  
-
-```bash
-docker buildx create --use --name multiarch-builder --driver docker-container
-docker buildx inspect --bootstrap
-```
-Cloud Shell uses the docker-container driver for multi-arch and sets up emulation when required.
-Cloud Shell's default Docker driver doesn't support multi-arch. The docker-container driver enables multi-platform builds and sets up emulation when required.
-
-2. Ensure Artifact Registry permissions:
-
-Your Cloud Shell account must have permission to push images to Artifact Registry. Grant the Artifact Registry **Writer**  role to your account:
-
-```bash
-gcloud projects add-iam-policy-binding "${PROJECT_ID}" --member="user:$(gcloud config get-value account)" --role="roles/artifactregistry.writer" --condition=None --quiet
-
-```
-
-Optionally, verify that the role binding was added correctly:
-
-```bash
-gcloud projects get-iam-policy "${PROJECT_ID}" --flatten="bindings[].members" --filter="bindings.role=roles/artifactregistry.writer AND bindings.members=user:$(gcloud config get-value account)" --format="value(bindings.role)"
-```
-
-Now that the Dockerfiles have been updated, you will build and push container images for both arm64 and amd64 architectures. Choose one of the following approaches based on your environment:
-
-### Option 1:  Single environment (Cloud Shell, emulation)
-
-#### Build one service (example):
-
-```bash
-docker buildx build --platform linux/amd64,linux/arm64 -t "${GAR}/adservice:v1" src/adservice --push
-```
-#### Build multiple services (script):
-
-```bash
-cat << 'EOF' > build-multiarch.sh
-#!/usr/bin/env bash
-set -euo pipefail
-
-: "${GAR:?GAR must be set (region-docker.pkg.dev/PROJECT_ID/REPO)}"
-
-# Adjust this list as needed; 'emailservice' can be built here or via Option 2.
-services=(
-  cartservice
-  checkoutservice
-  currencyservice
-  frontend
-  paymentservice
-  productcatalogservice
-  recommendationservice
-  shippingservice
-  loadgenerator
-)
-
-for svc in "${services[@]}"; do
-  if [ "$svc" = "cartservice" ] && [ -d "src/cartservice/src" ]; then
-    context="src/cartservice/src"
-  else
-    context="src/${svc}"
-  fi
-
-  echo ">>> Building ${svc}..."
-  docker buildx build --platform linux/amd64,linux/arm64 -t "${GAR}/${svc}:v1" "${context}" --push
-done
-EOF
-
-chmod +x build-multiarch.sh
-./build-multiarch.sh
-
-```
-### Option 2:  Two native builders (one amd64 host, one arm64 host)
-
-Use an amd64 machine for amd64 images and an arm64 machine (for example, a C4A VM) for arm64 images. Authenticate both hosts to Artifact Registry, then compose a single multi-arch tag.
-
-**On the amd64 host:**
-
-```bash
-# Build amd64-specific image and push with an arch suffix tag
-docker buildx build --platform linux/amd64 -t "${GAR}/emailservice:v1-amd64" src/emailservice --push
-```
-
-**On the arm64 host:**
-```bash
-# Build arm64-specific image and push with an arch suffix tag
-docker buildx build --platform linux/arm64 -t "${GAR}/emailservice:v1-arm64" src/emailservice --push
-```
-
-Combine into a single multi-arch manifest (run from either host):
-
-```bash
-docker buildx imagetools create --tag "${GAR}/emailservice:v1" "${GAR}/emailservice:v1-amd64" "${GAR}/emailservice:v1-arm64"
-
-```
-Repeat the same pattern for other services if you prefer native builds:
-- Replace emailservice with each service name.
-- Push :v1-amd64 and :v1-arm64, then create :v1.
-
-
-{{% notice Tip %}}
-Two supported build paths are shown. Use **Option 1** when you have a single environment (for example, Cloud Shell); Docker Buildx uses emulation (QEMU via `binfmt_misc`) to produce both architectures, and builds that compile native dependencies may take longer. Use **Option 2** when you have access to both **amd64** and **arm64** hosts; native builds avoid emulation and typically finish faster. Both approaches produce the same multi-architecture tag in Artifact Registry; the resulting images run natively on their target CPU.
-{{% /notice %}}
-
-### Verify images in Artifact Registry
-
-List all images in your Artifact Registry repository to confirm each service tag was pushed:
-
-```bash
-gcloud artifacts docker images list "${GAR}"
-```
-
-Inspect one multi-arch tag to confirm it's a **manifest list** that references per-architecture images:
-```bash
-docker buildx imagetools inspect "${GAR}/adservice:v1"
-```
-
-You should see entries for:
-```
-Platform: linux/amd64
-Platform: linux/arm64
-```
-
-{{% notice Explanation %}}
-A manifest list ties the per-architecture images to a single tag. When a node pulls the image, Kubernetes automatically fetches the variant that matches the node's CPU architecture.
+Result: All services now support cross-architecture builds.
 {{% /notice %}}
 
