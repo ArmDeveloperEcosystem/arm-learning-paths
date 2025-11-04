@@ -26,7 +26,7 @@ DGX Spark is a compact yet powerful development platform for modern AI workloads
 
 DGX Spark represents a major step toward NVIDIA’s vision of AI Everywhere, empowering developers to prototype, fine-tune, and deploy large-scale AI models locally while seamlessly connecting to cloud or data-center environments when needed.
 
-### Why Grace Blackwell for quantized LLMs?
+## Why should I use Grace Blackwell for quantized LLMs?
 
 Quantized Large Language Models (LLMs), such as those using Q4, Q5, or Q8 precision, benefit from the hybrid architecture of the Grace Blackwell Superchip.
 
@@ -47,11 +47,11 @@ In a typical quantized LLM workflow:
 Together, these features make the GB10 a developer-grade AI laboratory for running, profiling, and scaling quantized LLMs efficiently in a desktop form factor.
 
 
-### Inspecting your GB10 environment
+## Verify your GB10 development environment
 
 Let's verify that your DGX Spark system is configured and ready for building and running quantized LLMs.
 
-#### Step 1: Check CPU information
+## Step 1: Check the CPU information
 
 Run the following command to print the CPU information:
 
@@ -119,7 +119,7 @@ Vulnerabilities:
   Tsx async abort:        Not affected
 ```
 
-The Grace CPU implements the Armv9-A instruction set and supports advanced vector extensions, making it ideal for quantized LLM inference and tensor operations.
+Great! You've checked your CPU configuration. Your system is using Armv9 cores, which are ideal for quantized LLM workloads. The Grace CPU implements the Armv9-A instruction set and supports advanced vector extensions, making it ideal for quantized LLM inference and tensor operations.
 
 The following table summarizes the key specifications of the Grace CPU and explains their relevance to quantized LLM inference.
 
@@ -154,7 +154,9 @@ Codename:	noble
 As shown above, DGX Spark runs on Ubuntu 24.04 LTS, a developer-friendly Linux distribution.
 It provides excellent compatibility with AI frameworks, compiler toolchains, and system utilities—making it an ideal environment for building and deploying quantized LLM workloads.
 
-#### Step 2: Verify Blackwell GPU and driver
+Nice work! You've confirmed your operating system is Ubuntu 24.04 LTS, which is well-supported for AI development on Arm.
+
+## Step 2: Verify Blackwell GPU and driver
 
 After confirming your CPU configuration, verify that the Blackwell GPU inside the GB10 Grace Blackwell Superchip is available and ready for CUDA workloads.
 
@@ -204,8 +206,10 @@ The table below provides more explanation of the `nvidia-smi` output:
 | Memory Usage | Not Supported (headless GPU configuration) | DGX Spark operates in headless compute mode; display memory metrics may not be exposed. |
 | Persistence Mode | On | Ensures the GPU remains initialized and ready for rapid inference startup. |
 
+Excellent! Your Blackwell GPU is recognized and ready for CUDA workloads. This means your system is set up for GPU-accelerated LLM inference.
 
-#### Step 3: Check CUDA Toolkit
+
+## Step 3: Check the CUDA Toolkit
 
 To build the CUDA version of llama.cpp, the system must have a CUDA toolkit installed.
 
@@ -215,6 +219,7 @@ This ensures that CMake can correctly detect and compile the GPU-accelerated com
 ```bash
 nvcc --version
 ```
+You're almost ready! Verifying the CUDA toolkit ensures you can build GPU-enabled versions of llama.cpp for maximum performance.
 
 You will see output similar to:
 
@@ -239,3 +244,12 @@ At this point, you have verified that:
 - The CUDA toolkit 13.0 is available for building the GPU-enabled version of llama.cpp.
 
 Your DGX Spark environment is now fully prepared for the next section,  where you will build and configure both CPU and GPU versions of llama.cpp, laying the foundation for running quantized LLMs efficiently on the Grace Blackwell platform.
+
+## What have I achieved?
+
+You have:
+- Verified your Arm-based Grace CPU and its capabilities
+- Confirmed your Blackwell GPU and CUDA driver are ready
+- Checked your operating system and CUDA toolkit
+
+You're now ready to move on to building and running quantized LLMs on your DGX Spark!

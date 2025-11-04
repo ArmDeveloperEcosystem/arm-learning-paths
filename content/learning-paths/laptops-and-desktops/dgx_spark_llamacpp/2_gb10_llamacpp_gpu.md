@@ -37,6 +37,8 @@ hf download TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF --local-dir TinyLlama-1.1B
 
 After the download completes, the models will be available in the `~/models` directory.
 
+Great! You’ve installed all the required build tools and downloaded a quantized model for validation. Your environment is ready for source code setup.
+
 ### Step 2: Clone the llama.cpp repository
 
 Use the commands below to download the source code for llama.cpp from GitHub.
@@ -46,6 +48,8 @@ cd ~
 git clone https://github.com/ggerganov/llama.cpp.git
 cd ~/llama.cpp
 ```
+
+Nice work! You now have the latest llama.cpp source code on your DGX Spark system.
 
 ### Step 3: Configure and Build the CUDA-Enabled Version (GPU Mode)
 
@@ -109,6 +113,8 @@ The build output is shown below:
 After the build completes, the GPU-accelerated binaries will be located under `~/llama.cpp/build-gpu/bin/`
 
 These binaries provide all necessary tools for quantized model inference (llama-cli) and for serving GPU inference via HTTP API (llama-server). You are now ready to test quantized LLMs with full GPU acceleration in the next step.
+
+Excellent! The CUDA-enabled build is complete. Your binaries are optimized for the Blackwell GPU and ready for validation.
 
 Together, these options ensure that the build targets the Grace Blackwell GPU with full CUDA 13 compatibility.
 
@@ -176,9 +182,21 @@ The following screenshot shows GPU utilization during TinyLlama inference on DGX
 ![image1 nvtop screenshot](nvtop.png "TinyLlama GPU Utilization")
 
 The nvtop interface shows:
-- GPU Utilization (%) : confirm CUDA kernels are active
-- Memory Usage (VRAM) : observe model loading and runtime footprint
-- Temperature / Power Draw : monitor thermal stability under sustained workloads
+
+ - GPU Utilization (%): Confirms CUDA kernels are active.
+ - Memory Usage (VRAM): Shows model loading and runtime footprint.
+ - Temperature / Power Draw: Monitors thermal stability under sustained workloads.
 
 You have now successfully built and validated the CUDA-enabled version of llama.cpp on DGX Spark.
-In the next section, you will build the optimized CPU-only version of llama.cpp and explore how the Grace CPU executes Armv9 vector instructions during inference.
+
+Success! You’ve confirmed that the GPU-accelerated version of llama.cpp is correctly built and can run quantized LLM inference on your DGX Spark.
+
+## What have I achieved?
+
+You have:
+- Installed all required tools and dependencies
+- Downloaded a quantized model for testing
+- Built the CUDA-enabled version of llama.cpp
+- Verified GPU linkage and successful inference
+
+You’re ready to move on to building and testing the CPU-only version! You will build the optimized CPU-only version of llama.cpp and explore how the Grace CPU executes Armv9 vector instructions during inference.
