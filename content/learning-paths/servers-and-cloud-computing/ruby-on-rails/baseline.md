@@ -178,13 +178,19 @@ Now, verify that the table exists and has the correct structure following the st
 
 ```console
 sudo -u postgres psql
+```
+In the PostgreSQL shell, run the following commands:
+
+```console
 \c db_test_rubyapp_development
 \d tasks
+\q
 ```
 - `sudo -u postgres psql` → Launches the PostgreSQL shell as the superuser `postgres`.
 - `\c db_test_rubyapp_development` → Connects to the Rails app’s development database.
 - `\d tasks` → Displays the schema (columns and types) of the `tasks` table.
-
+- `\q → Exit from the PostgreSQL shell
+  
 You should see output similar to:
 ```output
 psql (15.10)
@@ -236,9 +242,16 @@ Click on **"Create"**. The Firewall rule will be created successfully and can be
 
 ![ Create Firewall rule alt-text#center](images/firewall5.png "Figure 5: Create Firewall rule")
  
-Once done, go back to the VM, and execute the below commands to allow port 3000:
+Once done, go back to the VM, install FirewallD 
+```console
+sudo zypper install firewalld
+```
+
+Now start FirewallD and execute the below commands to allow port 3000:
  
 ```console
+sudo systemctl start firewalld
+sudo systemctl enable firewalld
 sudo firewall-cmd --permanent --add-port=3000/tcp
 sudo firewall-cmd --reload
 ```
