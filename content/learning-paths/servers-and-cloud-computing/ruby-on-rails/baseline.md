@@ -45,7 +45,7 @@ The output should look like:
 This command creates a new PostgreSQL role (user) named `gcpuser` with **superuser privileges**.  
 
 ```console
-sudo -u postgres createuser --superuser gcpuser
+sudo -u postgres psql -c "CREATE USER gcpuser WITH SUPERUSER PASSWORD 'your_password';"
 ```
 - `sudo -u postgres` → Runs the command as the `postgres` user (default PostgreSQL superuser).
 - `createuser --superuser gcpuser` → Creates a PostgreSQL role named `gcpuser` with full admin privileges.
@@ -55,6 +55,15 @@ sudo -u postgres createuser --superuser gcpuser
 
 This role will be used by Rails to connect to the PostgreSQL database.
 
+### Set Environment variables
+
+Before you create your Rails app, set the following environment variables:
+
+```console
+export PGUSER=gcpuser
+export PGPASSWORD=your_password
+export PGHOST=localhost
+```
 ### Create a Rails App with PostgreSQL
 Creates a new Rails application configured to use PostgreSQL as its database.
 
@@ -72,10 +81,10 @@ Check `config/database.yml` to ensure the `username` and `password` match your P
 {{% /notice %}}
 
 ### Verify and Update Database Configuration
-Open the Rails database configuration file:
+Open and modify your Rails database configuration file:
 
 ```console
-vi config/database.yml
+sudo vi config/database.yml
 ```
 Find the `default`: and `development`: sections.
 Ensure the username matches the PostgreSQL user you created (gcpuser):
@@ -86,12 +95,39 @@ default: &default
   adapter: postgresql
   encoding: unicode
   username: gcpuser
-  password:
+  password: your_password
   host: localhost
   pool: 5
 
 development:
   <<: *default
+```
+
+### Change the Authentication Method
+Change the authentication method in the PostgreSQL configuration file `pg_hba.conf` from `ident` to `md5`. 
+
+Open your configuration file
+```console
+sudo vi /var/lib/pgsql/data/pg_hba.conf
+```
+Find lines that look like this:
+```output
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            ident
+# IPv6 local connections:
+host    all             all             ::1/128                 ident
+```
+Change the method on these lines to look like:
+```output
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            md5
+# IPv6 local connections:
+host    all             all             ::1/128                 md5
+```
+Save the file. Restart PostgreSQL:
+
+```console
+sudo systemctl restart postgresql
 ```
 ### Create and Initialize the Database
 Initializes and creates the development and test databases for your Rails app using PostgreSQL.
