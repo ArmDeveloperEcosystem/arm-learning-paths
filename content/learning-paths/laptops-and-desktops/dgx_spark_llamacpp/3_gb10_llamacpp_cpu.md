@@ -1,6 +1,6 @@
 ---
 title: Build the CPU version of llama.cpp on GB10
-weight: 4
+weight: 5
 layout: "learningpathall"
 ---
 

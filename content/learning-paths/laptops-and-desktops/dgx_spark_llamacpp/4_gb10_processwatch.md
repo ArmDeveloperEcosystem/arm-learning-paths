@@ -1,6 +1,6 @@
 ---
 title: Analyze CPU instruction mix using Process Watch
-weight: 5
+weight: 6
 layout: "learningpathall"
 ---
 

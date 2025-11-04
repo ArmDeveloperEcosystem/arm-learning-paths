@@ -1,6 +1,6 @@
 ---
 title: Build the GPU version of llama.cpp on GB10
-weight: 3
+weight: 4
 layout: "learningpathall"
 ---
 
