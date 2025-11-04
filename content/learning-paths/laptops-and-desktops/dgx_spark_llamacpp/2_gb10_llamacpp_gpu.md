@@ -125,7 +125,7 @@ Together, these options ensure that the build targets the Grace Blackwell GPU wi
 
 ### Step 4: Validate the CUDA-enabled build
 
-After the build completes successfully, verify that the GPU-enabled binary of *llama.cpp is correctly linked to the NVIDIA CUDA runtime.
+After the build completes successfully, verify that the GPU-enabled binary of llama.cpp is correctly linked to the NVIDIA CUDA runtime.
 
 To verify CUDA linkage, run the following command:
 

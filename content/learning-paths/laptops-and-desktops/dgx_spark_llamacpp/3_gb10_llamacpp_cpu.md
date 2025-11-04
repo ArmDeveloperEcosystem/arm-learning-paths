@@ -9,7 +9,7 @@ In this section, you'll build and test the CPU-only version of llama.cpp, optimi
 
 The Grace CPU features Arm Cortex-X925 and Cortex-A725 cores with advanced vector extensions including SVE2, BFloat16, and I8MM. These extensions make the CPU highly efficient for quantized inference workloads, even without GPU acceleration.
 
-### Configure and build the CPU-only version
+## Configure and build the CPU-only version
 
 
 In this session, you will configure and build the CPU-only version of llama.cpp, optimized for the Armv9-based Grace CPU.
@@ -83,8 +83,7 @@ The build output is shown below:
 ```
 
 After the build finishes, you'll find the CPU-optimized binaries at `~/llama.cpp/build-cpu/bin/`
-
-### Step 2: Validate the CPU-Enabled Build (CPU Mode)
+## Validate the CPU-enabled build (CPU mode)
 
 First, validate that the binary was compiled in CPU-only mode and runs correctly on the Grace CPU:
 
@@ -116,7 +115,7 @@ Here is an explanation of the key flags:
 - `-ngl 0` disables GPU offloading (CPU-only execution)
 - `-t 20` uses 20 threads (1 per Grace CPU core)
 
-If the build is successful, you will observe smooth model initialization and token generation, with CPU utilization increasing across all cores.
+If the build is successful, you will see smooth model initialization and token generation, with CPU utilization increasing across all cores.
 
 To monitor live CPU utilization and power metrics during inference, use `htop`:
 
@@ -125,7 +124,7 @@ htop
 ```
 
 The following screenshot shows CPU utilization and thread activity during TinyLlama inference on DGX Spark, confirming full multi-core engagement.
-![image2 htop screenshot](htop.png "TinyLlama CPU Utilization")
+![htop display showing 20 Grace CPU cores at 75-85% utilization during TinyLlama inference with OpenMP threading alt-text#center](htop.png)](htop.png "TinyLlama CPU Utilization")
 
 The `htop` interface shows:
 
@@ -138,7 +137,7 @@ The `htop` interface shows:
 In htop, press F6 to sort by CPU% and verify load distribution, or press `t` to toggle the tree view, which shows the `llama-cli` main process and its worker threads.
 {{% /notice %}}
 
-## What have I accomplished?
+## What you have accomplished
 
 In this section you have:
 - Built and validated the CPU-only version of llama.cpp.
