@@ -1,3 +1,10 @@
+---
+hide_from_navpane: true
+
+### FIXED, DO NOT MODIFY
+layout: learningpathall
+---
+
 ## Setup and Configuration for Ubuntu-based EC2 instance
 
 ### Create Ubuntu EC2 Instance
@@ -6,42 +13,42 @@ AWS EC2 instances can be used to simulate edge devices when edge device hardware
 
 We'll start by opening our AWS Console and search for EC2:
 
-![AWS Console](../images/EC2_Setup_1.png)
+![AWS Console](./images/EC2_Setup_1.png)
 
 We'll now open the EC2 console page:
 
-![AWS EC2 Console](../images/EC2_Setup_2.png)
+![AWS EC2 Console](./images/EC2_Setup_2.png)
 
 Select "Launch instance". Provide a Name for the EC2 instance and select the "Ubuntu" Quick Start option. Additionally, select "64-bit(Arm)" as the architecture type and select "t4g.large" as the Instance type:
 
-![Create EC2 Instance](../images/EC2_Setup_3.png)
+![Create EC2 Instance](./images/EC2_Setup_3.png)
 
 Additionally, please click on "Create new Key Pair" and provide a name for a new SSH key pair that will be used to SSH into our EC2 instance. Press "Create key pair":
 
-![Create EC2 Keypair](../images/EC2_Setup_4.png)
+![Create EC2 Keypair](./images/EC2_Setup_4.png)
 
 >**_NOTE:_**
 >You will notice that a download will occur with your browser. Save off this key (a .pem file) as we'll use it shortly.
 
 Next, we need to edit our "Network Settings" for our EC2 instance... scroll down to "Network Settings" and press "Edit":
 
-![Security Group](../images/EC2_Setup_4_ns.png)
+![Security Group](./images/EC2_Setup_4_ns.png)
 
 Press "Add security group rule" and lets allow port tcp/4912:
 
-![Security Group](../images/EC2_Setup_4_4912.png)
+![Security Group](./images/EC2_Setup_4_4912.png)
 
 Lets also give the EC2 instance a bit more disk space. Please change the "8" to "28" here:
 
-![Increase Diskspace](../images/EC2_Setup_5.png)
+![Increase disk space](./images/EC2_Setup_5.png)
 
 Finally, press "Launch instance". You should see your EC2 instance getting created:
 
-![Launch Instance](../images/EC2_Setup_6.png)
+![Launch Instance](./images/EC2_Setup_6.png)
 
 Now, press "View all instances" and press the refresh button... you should see your new EC2 instance in the "Running" state:
 
-![Running Instance](../images/EC2_Setup_7.png)
+![Running Instance](./images/EC2_Setup_7.png)
 
 You can scroll over and save off your Public IPv4 IP Address. You'll need this to SSH into your EC2 instance. 
 
@@ -55,7 +62,7 @@ Lets now confirm that we can SSH into our EC2 instance. With the saved off pem f
 
 You should see a login shell now for your EC2 instance!
 
-![Login Shell](../images/EC2_Setup_8.png)
+![Login Shell](./images/EC2_Setup_8.png)
 
 Excellent! You can keep that shell open as we'll make use of it when we start installing Greengrass a bit later. 
 
@@ -105,6 +112,6 @@ Before we go to the next section, lets also save off this JSON - it will be used
 	   }  
 	}
 
-OK, Lets proceed to the next step and get our Edge Impulse environment setup!
+OK, Lets proceed to the next step and get our Edge Impulse environment setup!  Press "Next" to continue:
 
-[Next](../../edgeimpulseprojectbuild/)
+### [Next](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/edgeimpulseprojectbuild/)

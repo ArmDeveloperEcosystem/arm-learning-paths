@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 3
-- Linux: 183
+- Linux: 185
 - macOS: 13
 - Windows: 14
 pinned_modules:
@@ -18,9 +18,9 @@ pinned_modules:
     - providers
     - migration
 subjects_filter:
-- CI-CD: 8
+- CI-CD: 9
 - Containers and Virtualization: 32
-- Databases: 18
+- Databases: 19
 - Libraries: 9
 - ML: 32
 - Performance and Architecture: 72
@@ -36,7 +36,8 @@ tools_software_languages_filter:
 - AI: 1
 - Android Studio: 1
 - Ansible: 2
-- apache: 1
+- Apache: 1
+- Apache Cassandra: 1
 - Apache Spark: 2
 - Apache Tomcat: 2
 - ApacheBench: 1
@@ -73,20 +74,24 @@ tools_software_languages_filter:
 - C#: 2
 - C++: 12
 - Capstone: 1
+- cassandra-stress: 1
 - CCA: 8
+- CircleCI: 1
 - Clair: 1
 - Clang: 13
 - ClickBench: 1
 - ClickHouse: 1
 - CMake: 1
 - conda: 1
+- cqlsh: 1
 - Daytona: 1
 - Demo: 3
 - Django: 1
-- Docker: 24
+- Docker: 25
 - Docker Buildx: 1
 - Envoy: 3
 - ExecuTorch: 1
+- Express: 1
 - FAISS: 1
 - FlameGraph: 1
 - Flink: 1
@@ -116,7 +121,7 @@ tools_software_languages_filter:
 - Intrinsics: 1
 - iPerf3: 1
 - ipmitool: 1
-- Java: 4
+- Java: 5
 - JAX: 1
 - JMH: 1
 - Kafka: 2
@@ -148,8 +153,8 @@ tools_software_languages_filter:
 - Networking: 1
 - Nexmark: 1
 - NGINX: 4
-- Node.js: 4
-- npm: 1
+- Node.js: 5
+- npm: 2
 - Ollama: 1
 - ONNX Runtime: 2
 - OpenBLAS: 1
@@ -211,7 +216,7 @@ tools_software_languages_filter:
 weight: 1
 cloud_service_providers_filter:
 - AWS: 17
-- Google Cloud: 21
+- Google Cloud: 23
 - Microsoft Azure: 18
 - Oracle: 2
 ---

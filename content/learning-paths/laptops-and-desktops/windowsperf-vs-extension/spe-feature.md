@@ -19,7 +19,7 @@ This section requires hardware that supports the SPE specification to function p
 
 The Arm Statistical Profiling Extension (SPE) is an architectural feature designed for enhanced instruction execution profiling within Arm CPUs. This feature has been available since the introduction of the Neoverse N1 CPU platform in 2019, along with performance monitor units (PMUs) generally available in Arm CPUs.
 
-The SPE is an optional feature in ARMv8.2 hardware that allows CPU instructions to be sampled and associated with the source code location where that instruction occured.
+The SPE is an optional feature in ARMv8.2 hardware that allows CPU instructions to be sampled and associated with the source code location where that instruction occurred.
 
 Some of the key methodologies that can be applied for performance analysis using SPE-profiled data are as follows:
 

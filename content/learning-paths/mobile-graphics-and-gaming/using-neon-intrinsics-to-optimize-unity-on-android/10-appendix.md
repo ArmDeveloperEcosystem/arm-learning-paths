@@ -8,7 +8,7 @@ layout: learningpathall
 ## The Neon intrinsics we used
 Here is a breakdown of some of the Neon intrinsics that were used to optimize the AABB collision detection in the function called `NeonAABBObjCollisionDetectionUnrolled`. It can be found at line **718** in _CollisionCalculationScript.cs_.
 
-`NeonAABBObjCollisionDetectionUnrolled` performs the collision detection between the characters and the walls. The outer loop iterates through all of the characters, while the inner loop iterates through the walls. The result is an array of boolean values (**true** denotes a collision has occured) which tells us which characters have collided with which walls.
+`NeonAABBObjCollisionDetectionUnrolled` performs the collision detection between the characters and the walls. The outer loop iterates through all of the characters, while the inner loop iterates through the walls. The result is an array of boolean values (**true** denotes a collision has occurred) which tells us which characters have collided with which walls.
 
 ### `Unity.Burst.Intrinsics.v64` (loading data into a vector register)
 ```

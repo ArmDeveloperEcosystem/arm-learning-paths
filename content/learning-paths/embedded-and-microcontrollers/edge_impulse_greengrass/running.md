@@ -20,7 +20,7 @@ So, for example, if my public ip address of my edge device is "1.1.1.1", my url 
 
 		http://1.1.1.1:4912
 		
-You should now see both the imput (video either from file or from your edge devices attached camera) as well as inference results and inference times. There are two output scenarios depending on whether your edge device has a camera or does not have a camera... read below!
+You should now see both the input (video either from file or from your edge devices attached camera) as well as inference results and inference times. There are two output scenarios depending on whether your edge device has a camera or does not have a camera... read below!
 
 ### Option 1: Edge devices with cameras
 
@@ -60,7 +60,7 @@ Additionally, you will see, model metrics being published periodically:
 
 ![Model Metrics](./images/EI_Model_Metrics.png)
 
-#### Issuing a command and examing the command result
+#### Issuing a command and examining the command result
 
 The integration provides a set of commands (see the [Summary](8_Summary.md) for details on the commands). One command, in particular, restarts the Edge Impulse "Runner" service. 
 
@@ -102,7 +102,7 @@ and you should see your inferencing resuming. You should also see more inference
 >**_NOTE:_**
 >For those who have edge devices WITHOUT cameras, your runner will read is input image video and report inferences until the video ends. Once ended, the "Runner" will simply wait for you to issue the above "restart" command to replay the video file. The restart command will cause the Runner to restart and it will once again, play the video file. 
 
-Cool!  Congradulations!  You have completed this workshop!!
+Cool!  Congratulations!  You have completed this workshop!!
 
 #### Supplemental notes
 Below are a few additional notes regarding the component deployment, log files, launch times for some devices:

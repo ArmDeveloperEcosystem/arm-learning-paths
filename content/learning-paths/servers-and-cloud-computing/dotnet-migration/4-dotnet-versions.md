@@ -55,7 +55,7 @@ With .NET 5 Microsoft started the “one .NET” unification. Even though it had
 Key highlights were:
 
 - General-availability of Native AOT publishing for console applications, producing self-contained, very small binaries with fast start-up on Arm64.
-- Dynamic PGO (Profile-Guided Optimization) and On-Stack Replacement became the default, letting the JIT optimise the hottest code paths based on real run-time data.
+- Dynamic PGO (Profile-Guided Optimization) and On-Stack Replacement became the default, letting the JIT optimize the hottest code paths based on real run-time data.
 - New Arm64 hardware intrinsics (e.g. SHA-1/SHA-256, AES, CRC-32) exposed through System.Runtime.Intrinsics, enabling high-performance crypto workloads.
 
 ## .NET 8 (current LTS – support until November 2026)
