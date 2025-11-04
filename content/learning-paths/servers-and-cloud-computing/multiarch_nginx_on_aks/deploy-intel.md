@@ -118,8 +118,8 @@ kubectl get configmap -nnginx
 ```
 
 ```output
-NAME                 DATA   AGE
-nginx-intel-config   1      51s
+NAME               DATA   AGE
+nginx-config       1      51s
 ```
 
 With the pods in a `Ready` state and the service showing a valid `External IP`, you're now ready to test the nginx Intel service.

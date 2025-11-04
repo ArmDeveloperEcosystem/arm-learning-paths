@@ -24,7 +24,6 @@ kubectl apply -f arm_nginx.yaml
 You will see output similar to:
 
 ```output
-configmap/nginx-arm-config created
 deployment.apps/nginx-arm-deployment created
 service/nginx-arm-svc created
 ```
@@ -48,8 +47,6 @@ Taking a closer look at the `arm_nginx.yaml` deployment file, you'll see setting
     app: nginx-multiarch
     arch: arm
 ```
-
-* The ARM ConfigMap includes performance optimizations specific to ARM architecture, such as `worker_processes 2` and `worker_cpu_affinity 01 10` for optimal CPU core utilization.
 
 ### Verify the deployment
 
@@ -75,16 +72,15 @@ service/nginx-arm-svc     LoadBalancer   10.0.241.154   48.192.64.197   80:30082
 service/nginx-intel-svc   LoadBalancer   10.0.226.250   20.80.128.191   80:30080/TCP   9m22s
 ```
 
-You can also verify the ConfigMap was created:
+You can also verify the shared ConfigMap is available:
 
 ```bash
 kubectl get configmap -nnginx
 ```
 
 ```output
-NAME                 DATA   AGE
-nginx-arm-config     1      51s
-nginx-intel-config   1      10m
+NAME               DATA   AGE
+nginx-config       1      10m
 ```
 
 When the pods show `Running` and the service shows a valid `External IP`, you're ready to test the nginx ARM service.
