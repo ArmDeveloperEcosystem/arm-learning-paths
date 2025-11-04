@@ -10,21 +10,25 @@ layout: learningpathall
 
 In this section, you'll add a new namespace, deployment, and service for nginx on Intel. The end result will be a K8s cluster running nginx accessible via the Internet through a load balancer. 
 
-To better understand the individual components, the configuration is split into two files:
+To better understand the individual components, the configuration is split into three files:
 
 1. **namespace.yaml** - Creates a new namespace called `nginx`, which contains all your K8s nginx objects
 
-2. **intel_nginx.yaml** - Creates the following K8s objects:
-   - **ConfigMap** (`nginx-intel-config`) - Contains performance-optimized nginx configuration
-   - **Deployment** (`nginx-intel-deployment`) - Pulls a multi-architecture [nginx image](https://hub.docker.com/_/nginx) from DockerHub, launches a pod on the Intel node, and mounts the ConfigMap as `/etc/nginx/nginx.conf`
+2. **nginx-configmap.yaml** - Creates a shared ConfigMap (`nginx-config`) containing performance-optimized nginx configuration used by both Intel and ARM deployments
+
+3. **intel_nginx.yaml** - Creates the following K8s objects:
+   - **Deployment** (`nginx-intel-deployment`) - Pulls a multi-architecture [nginx image](https://hub.docker.com/_/nginx) from DockerHub, launches a pod on the Intel node, and mounts the shared ConfigMap as `/etc/nginx/nginx.conf`
    - **Service** (`nginx-intel-svc`) - Load balancer targeting pods with both `app: nginx-multiarch` and `arch: intel` labels
 
 
-The following commands download, create, and apply the namespace and Intel nginx deployment and service configuration:
+The following commands download, create, and apply the namespace, ConfigMap, and Intel nginx deployment and service configuration:
 
 ```bash
 curl -o namespace.yaml https://raw.githubusercontent.com/geremyCohen/nginxOnAKS/refs/heads/main/namespace.yaml
 kubectl apply -f namespace.yaml
+
+curl -o nginx-configmap.yaml https://raw.githubusercontent.com/geremyCohen/nginxOnAKS/refs/heads/main/nginx-configmap.yaml
+kubectl apply -f nginx-configmap.yaml
 
 curl -o intel_nginx.yaml https://raw.githubusercontent.com/geremyCohen/nginxOnAKS/refs/heads/main/intel_nginx.yaml
 kubectl apply -f intel_nginx.yaml
@@ -35,7 +39,7 @@ You will see output similar to:
 
 ```output
 namespace/nginx created
-configmap/nginx-intel-config created
+configmap/nginx-config created
 deployment.apps/nginx-intel-deployment created
 service/nginx-intel-svc created
 ```
