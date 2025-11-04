@@ -10,24 +10,8 @@ layout: learningpathall
 
 In this section, you'll add nginx on ARM nodes to your existing cluster, completing your multi-architecture Intel/ARM environment for comprehensive performance comparison.
 
-### A quick note on Arm vs Intel nginx configurations
-
-The only difference between the Arm and Intel nginx configs is the presence of these two lines in the Arm config:
-
-```output
-worker_processes 2
-worker_cpu_affinity 01 10
-```
-
-Why are they there?  ARM's physical cores operate most efficiently when each has a dedicated worker thread with no interruptions. Intel's hyperthreaded cores work best when threads can flexibly be assigned across logical cores.  
-
-Nginx on Arm performs optimally when these values are explicitly set.  Intel performs best when these two values are left at *auto*, which is the default in the Intel-version of the nginx configuration.
-
-## Continuing with Arm K8s Configuration
-
 When applied, the **arm_nginx.yaml** file creates the following K8s objects:
-   - **ConfigMap** (`nginx-arm-config`) - Contains performance-optimized nginx configuration with ARM-specific tuning
-   - **Deployment** (`nginx-arm-deployment`) - Pulls the multi-architecture nginx image from DockerHub, launches a pod on the ARM node, and mounts the ConfigMap as `/etc/nginx/nginx.conf`
+   - **Deployment** (`nginx-arm-deployment`) - Pulls the multi-architecture nginx image from DockerHub, launches a pod on the ARM node, and mounts the shared ConfigMap as `/etc/nginx/nginx.conf`
    - **Service** (`nginx-arm-svc`) - Load balancer targeting pods with both `app: nginx-multiarch` and `arch: arm` labels
 
 Copy and paste the following commands into a terminal to download and apply the ARM deployment and service:
