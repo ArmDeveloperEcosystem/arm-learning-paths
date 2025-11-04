@@ -19,7 +19,7 @@ sudo apt update
 sudo apt install -y git cmake build-essential libncurses-dev libtinfo-dev
 ```
 
-Clone and build Process Watch:
+Now clone and build Process Watch:
 
 ```bash
 cd ~
@@ -91,7 +91,7 @@ If only one `llama-cli` process is running, you can directly launch Process Watc
 sudo processwatch --pid $(pgrep llama-cli)
 ```
 
-If you have multiple processes running, first identify the correct process ID:
+If multiple processes are running, first identify the correct process ID:
 
 ```bash
 pgrep llama-cli
@@ -102,6 +102,8 @@ Then attach Process Watch to monitor the instruction mix of this process:
 ```bash
 sudo processwatch --pid <LLAMA-CLI-PID>
 ```
+
+Replace `<LLAMA-CLI-PID>` with the actual process ID from the previous command.
 
 {{% notice Note %}}
 `processwatch --list` does not display all system processes.
@@ -174,7 +176,7 @@ Verify the current setting:
 cat /proc/sys/abi/sve_default_vector_length
 ```
 
-The output is:
+The output is similar to:
 
 ```output
 16
@@ -192,12 +194,24 @@ This behavior is expected because SVE is available but fixed at 128 bits.
 Future kernel updates may introduce SVE2 instructions.
 {{% /notice %}}
 
-## Summary
+## What you've achieved and what's next
 
-You have learned how to:
-- Use Process Watch to monitor CPU instruction activity
-- Interpret Armv9 vector instruction usage during LLM inference
-- Prepare for future Armv9 enhancements
+You have completed the Learning Path for analyzing large language model inference on the DGX Spark platform with Arm-based Grace CPUs and Blackwell GPUs.
 
-This knowledge helps you profile Arm systems effectively and optimize applications.
+Throughout this Learning Path, you have learned how to:
+
+- Set up your DGX Spark system with the required Arm software stack and CUDA 13 environment
+- Build and validate both GPU-accelerated and CPU-only versions of llama.cpp for quantized LLM inference
+- Download and run quantized TinyLlama models for efficient testing and benchmarking
+- Monitor GPU utilization and performance using tools like nvtop
+- Analyze CPU instruction mix with Process Watch to understand how Armv9 vector instructions are used during inference
+- Interpret the impact of NEON, SVE, and SVE2 on AI workloads, and recognize current kernel limitations for vector execution
+
+By completing these steps, you are now equipped to:
+
+- Profile and optimize LLM workloads on Arm-based systems
+- Identify performance bottlenecks and opportunities for acceleration on both CPU and GPU
+- Prepare for future enhancements in Armv9 vector processing and software support
+- Confidently deploy and monitor AI inference on modern Arm server platforms
+For additional learning, see the resources in the "Further Reading" section. You can continue experimenting with different models and monitoring tools as new kernel updates become available.
 

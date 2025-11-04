@@ -4,19 +4,20 @@ weight: 5
 layout: "learningpathall"
 ---
 
-## How do I build the CPU version of llama.cpp on GB10?
+## Overview
+In this section, you'll build and test the CPU-only version of llama.cpp, optimized specifically for the Grace CPU's advanced Armv9 capabilities.
 
-Use the steps below to build and test the CPU only versoin of llama.cpp.
+The Grace CPU features Arm Cortex-X925 and Cortex-A725 cores with advanced vector extensions including SVE2, BFloat16, and I8MM. These extensions make the CPU highly efficient for quantized inference workloads, even without GPU acceleration.
 
-### Step 1: Configure and Build the CPU-Only Version
+### Configure and build the CPU-only version
+
 
 In this session, you will configure and build the CPU-only version of llama.cpp, optimized for the Armv9-based Grace CPU.
 
 This build runs entirely on the Grace CPU (Arm Cortex-X925 and Cortex-A725), which supports advanced Armv9 vector extensions including SVE2, BFloat16, and I8MM, making it highly efficient for quantized inference workloads even without GPU acceleration.
+To ensure a clean separation from the GPU build artifacts, start from a clean directory.
 
-Start from a clean directory to ensure a clean separation from the GPU build artifacts.
-
-Run the following commands to configure the build system for the CPU-only version of llama.cpp.
+Configure the build system for the CPU-only version of llama.cpp:
 
 ```bash
 cd ~/llama.cpp
@@ -34,15 +35,15 @@ cmake .. \
 	-DCMAKE_CXX_FLAGS="-O3 -march=armv9-a+sve2+bf16+i8mm -mtune=native -fopenmp"
 ```
 
-Explanation of Key Flags:
+Explanation of key flags:
 
 | **Feature** | **Description / Impact** |
 |--------------|------------------------------|
-| -march=armv9-a | Targets the Armv9-A architecture used by the Grace CPU and enables advanced vector extensions.|
-| +sve2+bf16+i8mm | Activates Scalable Vector Extensions (SVE2), INT8 matrix multiply (I8MM), and BFloat16 operations for quantized inference.|
-| -fopenmp | Enables multi-threaded execution via OpenMP, allowing all 20 Grace cores to be utilized.|
-| -mtune=native | Optimizes code generation for the local Grace CPU microarchitecture.|
-| -DLLAMA_ACCELERATE=ON | Enables llama.cpp’s internal Arm acceleration path (Neon/SVE optimized kernels).|
+| -march=armv9-a | Targets the Armv9-A architecture used by the Grace CPU and enables advanced vector extensions |
+| +sve2+bf16+i8mm | Activates Scalable Vector Extensions (SVE2), INT8 matrix multiply (I8MM), and BFloat16 operations for quantized inference |
+| -fopenmp | Enables multi-threaded execution via OpenMP, allowing all 20 Grace cores to be utilized |
+| -mtune=native | Optimizes code generation for the local Grace CPU microarchitecture |
+| -DLLAMA_ACCELERATE=ON | Enables llama.cpp's internal Arm acceleration path (Neon/SVE optimized kernels) |
 
 When the configuration process completes successfully, the terminal should display output similar to the following:
 
@@ -52,7 +53,7 @@ When the configuration process completes successfully, the terminal should displ
 -- Build files have been written to: /home/nvidia/llama.cpp/build-cpu
 ```
 
-Then, start the compilation process:
+Once you see this, you can now move on to start the compilation process:
 
 ```bash
 make -j"$(nproc)"
@@ -81,17 +82,17 @@ The build output is shown below:
 [100%] Built target llama-server
 ```
 
-After the build finishes, the CPU-optimized binaries will be available under `~/llama.cpp/build-cpu/bin/`
+After the build finishes, you'll find the CPU-optimized binaries at `~/llama.cpp/build-cpu/bin/`
 
 ### Step 2: Validate the CPU-Enabled Build (CPU Mode)
 
-In this step, you will validate that the binary was compiled in CPU-only mode and runs correctly on the Grace CPU.
+First, validate that the binary was compiled in CPU-only mode and runs correctly on the Grace CPU:
 
 ```bash
 ./bin/llama-server --version
 ```
 
-Expected output:
+The output confirms the build configuration:
 
 ```output
 version: 6819 (19a5a3ed)
@@ -117,7 +118,7 @@ Here is an explanation of the key flags:
 
 If the build is successful, you will observe smooth model initialization and token generation, with CPU utilization increasing across all cores.
 
-For live CPU utilization and power metrics, use `htop`:
+To monitor live CPU utilization and power metrics during inference, use `htop`:
 
 ```bash
 htop
@@ -128,14 +129,16 @@ The following screenshot shows CPU utilization and thread activity during TinyLl
 
 The `htop` interface shows:
 
-- CPU Utilization: All 20 cores operate between 75–85%, confirming efficient multi-thread scaling.
-- Load Average: Around 5.0, indicating balanced workload distribution.
-- Memory Usage: Approximately 4.5 GB total for the TinyLlama Q8_0 model.
-- Process List: Displays multiple `llama-cli` threads (each 7–9% CPU), confirming OpenMP parallelism 
+- CPU Utilization: all 20 cores operate between 75–85%, confirming efficient multi-thread scaling
+- Load Average: around 5.0, indicating balanced workload distribution
+- Memory Usage: approximately 4.5 GB total for the TinyLlama Q8_0 model
+- Process List: displays multiple `llama-cli` threads (each 7–9% CPU), confirming OpenMP parallelism 
 
 {{% notice Note %}}
 In htop, press F6 to sort by CPU% and verify load distribution, or press `t` to toggle the tree view, which shows the `llama-cli` main process and its worker threads.
 {{% /notice %}}
+
+## What have I accomplished?
 
 In this section you have:
 - Built and validated the CPU-only version of llama.cpp.

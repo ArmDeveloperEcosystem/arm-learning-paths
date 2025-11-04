@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 In the previous section, you verified that your DGX Spark system is correctly configured with the Grace CPU, Blackwell GPU, and CUDA 13 environment.
 
-Now that your hardware and drivers are ready, this section focuses on building the GPU-enabled version of llama.cpp, a lightweight, portable inference engine optimized for quantized LLM workloads on NVIDIA Blackwell GPUs.
+Now that your hardware and drivers are ready, this section focuses on building the GPU-enabled version of llama.cpp, which is a lightweight, portable inference engine optimized for quantized LLM workloads on NVIDIA Blackwell GPUs.
 
 llama.cpp is an open-source project by Georgi Gerganov that provides efficient and dependency-free large language model inference on both CPUs and GPUs. 
 
@@ -23,7 +23,9 @@ sudo apt install -y git cmake build-essential nvtop htop
 
 These packages provide the C/C++ compiler toolchain, CMake build system, and GPU monitoring utility (nvtop) required to compile and test llama.cpp.
 
-To verify your GPU build later, you need at least one quantized model for testing.
+### Download a test model
+
+To test your GPU build, you'll need a quantized model. In this section, you'll download a lightweight model that's perfect for validation.
 
 First, ensure that you have the latest Hugging Face Hub CLI installed and download models:
 
@@ -35,7 +37,9 @@ pip install -U huggingface_hub
 hf download TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF --local-dir TinyLlama-1.1B
 ```
 
-After the download completes, the models will be available in the `~/models` directory.
+{{% notice Note %}}
+After the download completes, you'll find the models in the `~/models` directory.
+{{% /notice Note %}}
 
 Great! You’ve installed all the required build tools and downloaded a quantized model for validation. Your environment is ready for source code setup.
 
@@ -53,9 +57,8 @@ Nice work! You now have the latest llama.cpp source code on your DGX Spark syste
 
 ### Step 3: Configure and Build the CUDA-Enabled Version (GPU Mode)
 
-Run the following `cmake` command to configure the build system for GPU acceleration.
+Run the following `cmake` command to configure the build system for GPU acceleration:
 
-This command enables CUDA support and prepares llama.cpp for compiling GPU-optimized kernels.
 
 ```bash
 mkdir -p build-gpu
@@ -70,9 +73,11 @@ cmake .. \
 	-DCMAKE_CUDA_COMPILER=nvcc
 ```
 
+This command enables CUDA support and prepares llama.cpp for compiling GPU-optimized kernels
+
 ### Explanation of key flags:
 
-The following table provides an explanation of the key flags you used in the previous code:
+Here's what each configuration flag does:
 
 | **Feature** | **Description / Impact** |
 |--------------|------------------------------|
@@ -110,11 +115,11 @@ The build output is shown below:
 [100%] Built target llama-server
 ```
 
-After the build completes, the GPU-accelerated binaries are located under `~/llama.cpp/build-gpu/bin/`
+After the build completes, you'll find the GPU-accelerated binaries located under `~/llama.cpp/build-gpu/bin/`.
 
-These binaries provide all necessary tools for quantized model inference (llama-cli) and for serving GPU inference via HTTP API (llama-server). You are now ready to test quantized LLMs with full GPU acceleration in the next step.
+These binaries provide all necessary tools for quantized model inference (llama-cli) and for serving GPU inference using HTTP API (llama-server). 
 
-Excellent! The CUDA-enabled build is complete. Your binaries are optimized for the Blackwell GPU and ready for validation.
+Excellent! The CUDA-enabled build is complete. Your binaries are optimized for the Blackwell GPU and ready for validation. You are now ready to test quantized LLMs with full GPU acceleration in the next step.
 
 Together, these options ensure that the build targets the Grace Blackwell GPU with full CUDA 13 compatibility.
 
@@ -140,7 +145,7 @@ The output is similar to:
 
 If the CUDA library is correctly linked, it confirms that the binary can access the GPU through the system driver.
 
-Next, confirm that the binary initializes the GPU correctly by checking device detection and compute capability.
+Next, confirm that the binary initializes the GPU correctly by checking device detection and compute capability:
 
 ```bash
 ./bin/llama-server --version
@@ -171,15 +176,17 @@ Next, use the downloaded quantized model (for example, TinyLlama-1.1B) to verify
 
 If the build is successful, you will see text generation begin within a few seconds.
 
-While `nvidia-smi` can display basic GPU information, `nvtop` provides real-time visualization of utilization, temperature, and power metrics which are useful for verifying CUDA kernel activity during inference.
+To monitor GPU utilization during inference, use `nvtop` to view real-time performance metrics:
 
 ```bash
 nvtop
 ```
 
+This command displays GPU utilization, memory usage, temperature, and power consumption. You can use this to verify that CUDA kernels are active during model inference.
+
 The following screenshot shows GPU utilization during TinyLlama inference on DGX Spark.
 
-![image1 nvtop screenshot](nvtop.png "TinyLlama GPU Utilization")
+![nvtop terminal interface displaying real-time GPU metrics, including GPU utilization, memory usage, temperature, power consumption, and active processes for the NVIDIA GB10 GPU during model inference on DGX Spark. alt-text#center](nvtop.png "TinyLlama GPU Utilization")
 
 The nvtop interface shows:
 
@@ -188,8 +195,6 @@ The nvtop interface shows:
  - Temperature / Power Draw: Monitors thermal stability under sustained workloads.
 
 You have now successfully built and validated the CUDA-enabled version of llama.cpp on DGX Spark.
-
-Success! You’ve confirmed that the GPU-accelerated version of llama.cpp is correctly built and can run quantized LLM inference on your DGX Spark.
 
 ## What have I achieved?
 
