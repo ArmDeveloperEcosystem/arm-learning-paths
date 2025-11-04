@@ -44,7 +44,7 @@ In the folder you ran the curl command, you should now see the `nginx_util.sh` s
 
 The output should include usage instructions:
 ```output
-Invalid first argument. Use 'get', 'put', or 'login'.
+Invalid first argument. Use 'curl', 'wrk', 'put', or 'login'.
 ```
 
 With it working, you're now ready to deploy nginx to the Intel nodes in the cluster.
