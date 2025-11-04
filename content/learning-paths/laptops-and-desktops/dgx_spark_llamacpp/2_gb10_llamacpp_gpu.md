@@ -14,7 +14,7 @@ llama.cpp is an open-source project by Georgi Gerganov that provides efficient a
 
 ### Step 1: Preparation
 
-In this step, you will install the necessary build tools and download a small quantized model for validation.
+In this step, you will install the necessary build tools and download a small quantized model for validation:
 
 ```bash
 sudo apt update
@@ -41,7 +41,7 @@ Great! You’ve installed all the required build tools and downloaded a quantize
 
 ### Step 2: Clone the llama.cpp repository
 
-Use the commands below to download the source code for llama.cpp from GitHub.
+Use the commands below to download the source code for llama.cpp from GitHub:
 
 ```bash
 cd ~
@@ -70,13 +70,15 @@ cmake .. \
 	-DCMAKE_CUDA_COMPILER=nvcc
 ```
 
-Explanation of Key Flags:
+### Explanation of key flags:
+
+The following table provides an explanation of the key flags you used in the previous code:
 
 | **Feature** | **Description / Impact** |
 |--------------|------------------------------|
-| -DGGML_CUDA=ON | Enables the CUDA backend in llama.cpp, allowing matrix operations and transformer layers to be offloaded to the GPU for acceleration.|
-| -DGGML_CUDA_F16=ON | Enables FP16 (half-precision) CUDA kernels, reducing memory usage and increasing throughput — especially effective for quantized models (e.g., Q4, Q5). |
-| -DCMAKE_CUDA_ARCHITECTURES=121 | Specifies the compute capability for the NVIDIA Blackwell GPU (GB10 = sm_121), ensuring the CUDA compiler (nvcc) generates optimized GPU kernels. |
+| -DGGML_CUDA=ON | Enables the CUDA backend in llama.cpp, allowing matrix operations and transformer layers to be offloaded to the GPU for acceleration|
+| -DGGML_CUDA_F16=ON | Enables FP16 (half-precision) CUDA kernels, reducing memory usage and increasing throughput — especially effective for quantized models (for example, Q4, Q5) |
+| -DCMAKE_CUDA_ARCHITECTURES=121 | Specifies the compute capability for the NVIDIA Blackwell GPU (GB10 = sm_121), ensuring the CUDA compiler (nvcc) generates optimized GPU kernels|
 
 When the configuration process completes successfully, the terminal should display output similar to the following:
 
@@ -87,17 +89,15 @@ When the configuration process completes successfully, the terminal should displ
 ```
 
 {{% notice Note %}}
-1. For systems with multiple CUDA versions installed, explicitly specifying the compilers (`-DCMAKE_C_COMPILER`, `-DCMAKE_CXX_COMPILER`, `-DCMAKE_CUDA_COMPILER`) ensures that CMake uses the correct CUDA 13.0 toolchain.  
-2. In case of configuration errors, revisit the previous section to verify that your CUDA toolkit and driver versions are properly installed and aligned with Blackwell (sm_121) support.
-{{% /notice %}}
+- For systems with multiple CUDA versions installed, explicitly specifying the compilers (`-DCMAKE_C_COMPILER`, `-DCMAKE_CXX_COMPILER`, `-DCMAKE_CUDA_COMPILER`) ensures that CMake uses the correct CUDA 13.0 toolchain.  
+- If you encounter configuration errors, return to the previous section and confirm that your CUDA toolkit and driver versions are correctly installed and compatible with Blackwell (sm_121).{{% /notice Note %}}
 
 Once CMake configuration succeeds, start the compilation process:
 
 ```bash
 make -j"$(nproc)"
 ```
-
-This command compiles all CUDA and C++ source files in parallel, utilizing all available CPU cores for optimal build performance. On the Grace CPU in the DGX Spark system, the build process typically completes within 2–4 minutes, demonstrating the efficiency of the Arm-based architecture for software development.
+This command compiles all CUDA and C++ source files in parallel, using all available CPU cores. On the Grace CPU, the build typically finishes in 2–4 minutes.
 
 The build output is shown below:
 
@@ -110,7 +110,7 @@ The build output is shown below:
 [100%] Built target llama-server
 ```
 
-After the build completes, the GPU-accelerated binaries will be located under `~/llama.cpp/build-gpu/bin/`
+After the build completes, the GPU-accelerated binaries are located under `~/llama.cpp/build-gpu/bin/`
 
 These binaries provide all necessary tools for quantized model inference (llama-cli) and for serving GPU inference via HTTP API (llama-server). You are now ready to test quantized LLMs with full GPU acceleration in the next step.
 

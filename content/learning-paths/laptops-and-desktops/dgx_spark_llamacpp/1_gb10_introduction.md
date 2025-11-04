@@ -1,14 +1,14 @@
 ---
-title: "Introduction to Grace Blackwell: Unlocking efficient quantized LLMs on Arm-based NVIDIA DGX Spark"
+title: Discover the Grace Blackwell architecture
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Introduction to the Grace Blackwell architecture
+## Overview
 
-In this section, you'll explore the architecture and system design of the [NVIDIA DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/) platform, a next-generation Arm-based CPU–GPU hybrid for large-scale AI workloads. You'll perform hands-on verification steps to ensure your DGX Spark environment is properly configured for subsequent GPU-accelerated LLM sessions.
+In this section, you'll explore the architecture and system design of the [NVIDIA DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/) platform, a next-generation Arm-based CPU–GPU hybrid for large-scale AI workloads. 
 
 The NVIDIA DGX Spark is a personal AI supercomputer that brings data center–class AI computing directly to the developer desktop. The NVIDIA GB10 Grace Blackwell Superchip fuses CPU and GPU into a single unified compute engine.
 
@@ -23,7 +23,9 @@ This NVIDIA Grace Blackwell DGX Spark (GB10) platform design delivers up to one 
 
 Quantized Large Language Models (LLMs), such as those using Q4, Q5, or Q8 precision, benefit from the hybrid architecture of the Grace Blackwell Superchip.
 
-The Grace Blackwell architecture brings several key advantages to quantized LLM workloads. The unified CPU-GPU design eliminates traditional bottlenecks while providing specialized compute capabilities for different aspects of inference:
+The Grace Blackwell architecture brings several key advantages to quantized LLM workloads. The unified CPU-GPU design eliminates traditional bottlenecks while providing specialized compute capabilities for different aspects of inference, which are summarized in the table below:
+
+### Features of the Grace Blackwell architecture and the impact they have on quantized LLMs
 
 | **Feature** | **Impact on quantized LLMs** |
 |--------------|------------------------------|
@@ -33,6 +35,7 @@ The Grace Blackwell architecture brings several key advantages to quantized LLM 
 | Unified 128 GB memory (NVLink-C2C) | CPU and GPU share the same memory space, allowing quantized model weights to be accessed without explicit data transfer |
 | Energy-efficient Arm design | Armv9 cores maintain strong performance-per-watt, enabling sustained inference for extended workloads |
 
+### The quantized LLM workflow
 
 In a typical quantized LLM workflow:
 - The Grace CPU orchestrates text tokenization, prompt scheduling, and system-level tasks
