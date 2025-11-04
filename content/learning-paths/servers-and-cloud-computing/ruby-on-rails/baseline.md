@@ -24,6 +24,23 @@ Verify that the PostgreSQL service is active and running:
 ```console
 systemctl status postgresql
 ```
+The output should look like:
+```output
+● postgresql.service - PostgreSQL database server
+     Loaded: loaded (/usr/lib/systemd/system/postgresql.service; enabled; vendor preset: disabled)
+     Active: active (running) since Tue 2025-11-04 21:25:59 UTC; 18s ago
+   Main PID: 26997 (postgres)
+      Tasks: 7
+        CPU: 372ms
+     CGroup: /system.slice/postgresql.service
+             ├─ 26997 /usr/lib/postgresql15/bin/postgres -D /var/lib/pgsql/data
+             ├─ 26998 "postgres: logger " "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+             ├─ 26999 "postgres: checkpointer " "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+             ├─ 27000 "postgres: background writer " "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" >
+             ├─ 27002 "postgres: walwriter " "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+             ├─ 27003 "postgres: autovacuum launcher " "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ">
+             └─ 27004 "postgres: logical replication launcher " "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ">
+```
 
 This command creates a new PostgreSQL role (user) named `gcpuser` with **superuser privileges**.  
 
