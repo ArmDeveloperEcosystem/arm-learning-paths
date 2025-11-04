@@ -7,36 +7,38 @@ layout: learningpathall
 ---
 
 ## Create a Resource Class for Self-Hosted Runner in CircleCI
-This guide explains how to create a **Resource Class** in the **CircleCI Web Dashboard** for a **self-hosted runner**.  
-A Resource Class defines a unique identifier for your runner and links it to your CircleCI namespace, allowing CircleCI jobs to target your custom machine environment.
+This section explains how to create a Resource Class in the CircleCI Web Dashboard for a self-hosted runner.
+A Resource Class is a unique identifier that links your self-hosted runner to your CircleCI organization (namespace). It defines the “machine type” that CircleCI jobs can target, ensuring that only authorized jobs run on your managed infrastructure, in this case, your SUSE Linux Arm64 VM on Google Cloud C4A (Axion).
 
 ### Steps
 
-1. **Go to the CircleCI Web Dashboard**
-   - From the left sidebar, navigate to **Self-Hosted Runners**.  
-   - You’ll see a screen asking you to accept the **terms of use**.  
-   - **Check the box** that says **“Yes, I agree to the terms”** to enable runners.  
-   - Then click **Self-Hosted Runners** to continue setup.
+1. Open the CircleCI Web Dashboard
+   - Login or Create a new account at [CircleCI](https://app.circleci.com/home)
+   - In the left-hand navigation panel, click Self-Hosted Runners.
+   - If this is your first time setting up runners, you’ll be prompted to accept the Terms of Use.
+     Check “Yes, I agree to the terms” to enable runner functionality for your organization.
+   - After accepting, click Self-Hosted Runners again to continue the setup process.
 
 ![Self-Hosted Runners alt-text#center](images/shrunner0.png "Figure 1: Self-Hosted Runners ")
 
-2. **Create a New Resource Class**
+2. Create a New Resource Class
 
-Click **Create Resource Class** on your CircleCI dashboard. 
+On your CircleCI Dashboard, click Create Resource Class.
 
-**Fill in the following details:** 
+Fill in the following details:
 
-   - **Namespace:** Your CircleCI username or organization name (e.g., `circleci`)
-   - **Resource Class Name:** A clear, descriptive name for your runner (e.g., `arm64`)
-   - Click **Create Resource Class**.
+  * Namespace: Your CircleCI organization or username (e.g., circleci)
+  * Resource Class Name: A clear, descriptive identifier for your runner (e.g., arm64)
+  * Once complete, click Create Resource Class to generate it.
 
 ![Self-Hosted Runners alt-text#center](images/shrunner1.png "Figure 2: Create Resource Class ")
 
 ![Self-Hosted Runners alt-text#center](images/shrunner2.png "Figure 3: Details Resource Class & Namespace")
 
-3. **Save and Copy the Token**
-   - Once created, CircleCI will generate a **Resource Class Token**.  
-   - Copy this token and store it securely — you will need it to register your runner on the GCP VM.
+3. Save and Copy the Token
+
+ After creating the resource class, CircleCI automatically generates a Resource Class Token, a secure authentication key used to register your runner. Copy this token immediately and store it in a secure location.
+You’ll need this token in the next step to connect your SUSE Arm64 runner on the Google Cloud C4A (Axion) VM to CircleCI.
 
 ![Self-Hosted Runners alt-text#center](images/shrunner3.png "Figure 4: Resource Class Token")
    
