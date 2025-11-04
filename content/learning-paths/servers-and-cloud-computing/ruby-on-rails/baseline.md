@@ -75,7 +75,7 @@ Check `config/database.yml` to ensure the `username` and `password` match your P
 Open the Rails database configuration file:
 
 ```console
-nano config/database.yml
+vi config/database.yml
 ```
 Find the `default`: and `development`: sections.
 Ensure the username matches the PostgreSQL user you created (gcpuser):
