@@ -33,7 +33,7 @@ Virtual Network Computing (VNC) is one of the common tools used to connect to a 
 
 This guide provides information about how to set up VNC on a remote Arm Linux machine.
 
-This installation only works on newer versions of Ubuntu and Debian. It was successfully tested on **Ubuntu 22.04** and is known to fail on **Ubuntu 20.04**.
+This installation only works on newer versions of Ubuntu and Debian. It was successfully tested on Ubuntu 22.04 and Ubuntu 24.04.
 
 ## What is VNC?
 
@@ -89,6 +89,8 @@ To create a systemd service to start the VNC server, create the file `/etc/syste
 
 Use `sudo` or root privileges because this file is in a system directory.
 
+If your username is not `ubuntu` change the `User` value to match your username after you create the new file. 
+
 ```ini
  [Unit]
  Description=Remote desktop service (VNC)
@@ -106,6 +108,7 @@ Use `sudo` or root privileges because this file is in a system directory.
  [Install]
  WantedBy=multi-user.target
 ```
+
 The following commands are for any Linux distribution that uses `systemd`.
 
 To start the VNC service:
