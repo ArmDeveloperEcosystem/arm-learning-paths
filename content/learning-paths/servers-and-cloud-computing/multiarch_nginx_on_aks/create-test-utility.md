@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Test utility script
 
-Now that you have your Intel nginx deployment running, you'll create a utility script to test and manage your nginx services across all architectures. This script will be used throughout the tutorial to test services, apply configurations, and access pods.
+You'll create a utility script to test and manage your nginx services across all architectures. This script will be used throughout the tutorial to test services, apply configurations, and access pods.
 
 ### Script functionality
 
