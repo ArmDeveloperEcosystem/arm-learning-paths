@@ -46,17 +46,17 @@ Load TF‑M symbols and map sources:
 
 - In **Debug Control**, open the pane menu and choose **Load...**
 - Select **Add Symbols file**.
-- Choose the TF‑M image, for example:
+- Locate the TF‑M image, for example:
    ```bash
-   /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.1.0/build/bin/bl1_1.axf
+   /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.2.1+git/build/bin/bl1_1.axf
    ```
 When prompted for **substitute path**, map build-time paths to your local sources, for example:
    ```bash
-   /usr/src/debug/trusted-firmware-m/2.1.0/
-   /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.1.0/git/tfm/
+   /usr/src/debug/trusted-firmware-m/2.2.1+git/
+   /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.2.1+git/git/tfm/
    ```
 
-Step one instruction to fetch the reset handler and stop there:
+Step one instruction to fetch the reset handler and stop there. In the debugger `Commands` pane enter:
 ```text
 stepi
 ```
@@ -78,10 +78,14 @@ Automate the connection steps by adding **Debugger Commands** to the `.launch` c
 
 ```text
 stop
-add-symbol-file /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.1.0/build/bin/bl1_1.axf
-set substitute-path /usr/src/debug/trusted-firmware-m/2.1.0/ /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.1.0/git/tfm/
+add-symbol-file "/arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.2.1+git/build/bin/bl1_1.axf"
+set substitute-path "/usr/src/debug/trusted-firmware-m/2.2.1+git/" "/arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-m/2.2.1+git/git/tfm/"
 stepi
 ```
+
+{{% notice Note %}}
+Use the `Commands` or `History` pane to see and copy the equivalent debugger commands of the GUI actions.
+{{% /notice %}}
 
 ![RSE.launch in Arm Development Studio showing Debugger pane with TF-M symbols loaded and path substitution mapping alt-text#center](debugger_commands.png "RSE Debugger pane with TF-M symbol loading and source path substitution")
 
