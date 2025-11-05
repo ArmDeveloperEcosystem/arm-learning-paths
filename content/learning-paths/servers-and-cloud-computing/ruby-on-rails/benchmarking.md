@@ -7,21 +7,21 @@ layout: learningpathall
 ---
 
 
-## Ruby on Rails Benchmarking with built-in Benchmark
-This section benchmarks Ruby on Rails using Ruby’s built-in `Benchmark` library to measure execution time for database inserts, queries, and CPU computations on GCP SUSE VMs, providing insights into performance metrics and bottlenecks.
+## Ruby on Rails Benchmarking 
+In this section you will benchmark Ruby on Rails using Ruby’s built-in `Benchmark` library to measure execution time for database inserts, queries, and CPU computations on GCP SUSE VMs, providing insights into performance metrics and bottlenecks.
 
 ### Go into your Rails app folder
-You need to navigate into the folder of your Rails application. This is where Rails expects your application code, models, and database configurations to be located. All commands related to your app should be run from this folder.
+Navigate into the folder of your Rails application. This is where Rails expects your application code, models, and database configurations to be located. All commands related to your app should be run from this folder.
 
 ```console
 cd ~/db_test_rubyapp
 ````
 
-### Create the benchmark file inside the app
-We create a new Ruby file named `benchmark.rb` where we will write code to measure performance.
+### Create the benchmark
+Now create a new Ruby file named `benchmark.rb` where you will write code to measure performance.
 
 ```console
-nano benchmark.rb
+vi benchmark.rb
 ```
 
 ### Benchmark code for measuring Rails app performance
@@ -62,21 +62,21 @@ end
 This code gives you a basic understanding of how your Rails app performs under different types of workloads.
 
 ### Run the benchmark inside Rails
-Now that your benchmark file is ready, run it **within the Rails environment** using the following command:
+Now that your benchmark file is ready, run it within the Rails environment using the following command:
 
 ```console
 rails runner benchmark.rb
 ```
-- `rails runner` runs any Ruby script in the context of your Rails application.  
+`rails runner` runs any Ruby script in the context of your Rails application.  
 
-- It automatically loads your **Rails environment**, including:
+It automatically loads your Rails environment, including:
   - All models (like `Task`)
   - Database connections
   - Configuration and dependencies  
 
-- This ensures that your benchmark can interact with the **PostgreSQL database** through ActiveRecord, rather than running as a plain Ruby script.
+This ensures that your benchmark can interact with the PostgreSQL database through ActiveRecord, rather than running as a plain Ruby script.
 
-You should see an output similar to:
+You should see output similar to:
 
 ```output
                   user     system      total        real
@@ -92,17 +92,8 @@ Computation:  0.410907   0.000000   0.410907 (  0.410919)
 - **total** → `user + system` (sum of CPU processing time).  
 - **real** → The **wall-clock time** (actual elapsed time, includes waiting for DB, I/O, etc).  
 
-### Benchmark summary on x86_64
-To compare the benchmark results, the following results were collected by running the same benchmark on a `x86 - c4-standard-4` (4 vCPUs, 15 GB Memory) x86_64 VM in GCP, running SUSE:
-
-| Task         | user (sec) | system (sec) | total (sec) | real (sec) |
-|--------------|------------|--------------|-------------|------------|
-| DB Insert    | 1.902564   | 0.061805     | 1.964369    | 2.606764   |
-| DB Query     | 2.725923   | 0.009513     | 2.735436    | 2.735956   |
-| Computation  | 0.331519   | 0.000083     | 0.331602    | 0.331610   |
-
 ### Benchmark summary on Arm64
-Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
+Results summarized from the your run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
 
 
 | Task         | user (sec) | system (sec) | total (sec) | real (sec) |
@@ -112,9 +103,9 @@ Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm6
 | Computation  | 0.410907 | 0.000000 | 0.410907 | 0.410919 |
 
 
-### Ruby/Rails performance benchmarking comparison on Arm64 and x86_64
+### Analysis of Results
 
-When you compare the benchmarking results, you will notice that on the Google Axion C4A Arm-based instances:
+When you look the benchmarking results, you will notice that on the Google Axion C4A Arm-based instances:
 
 - **Database operations are the main bottleneck:** DB Insert and DB Query take the most time.  
 - **DB Query has the highest latency:** It is the slowest operation at 3.39 seconds.  
