@@ -94,4 +94,4 @@ You should see output similar to:
 Rails 8.0.3
 ```
 
-Ruby/Rails installation is complete. You can now proceed with the baseline testing.
+You have now installed Ruby and Rails on your Google Cloud C4A Arm-based VM. You can now proceed with the baseline testing.
