@@ -41,7 +41,7 @@ From within the Python virtual environment, run the commands below to download t
 cd $HOME
 git clone https://github.com/pytorch/executorch.git
 cd executorch
-git checkout 188312844ebfb499f92ab5a02137ed1a4abca782
+git checkout release/1.0
 ```
 
 Run the commands below to set up the ExecuTorch internal dependencies:
