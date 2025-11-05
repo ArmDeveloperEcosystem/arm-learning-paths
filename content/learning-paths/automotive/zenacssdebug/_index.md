@@ -14,7 +14,7 @@ learning_objectives:
 
 prerequisites:
   - Ubuntu 22.04 host machine
-  - Arm Development Studio 2024.1 or later with a valid license - for support see the [Install Guide for ADS](/install-guides/armds) 
+  - Arm Development Studio 2024.1 or later with a valid license - for support see the [Install Guide for Arm DS](/install-guides/armds) 
   - Basic understanding of the Arm Zena CSS software stack, Armv8-A/Armv9-A cores, and Linux
 
 author: Ronan Synnott
