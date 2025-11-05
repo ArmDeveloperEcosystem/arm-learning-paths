@@ -161,7 +161,7 @@ func start
 ```
 
 Once running, observe the HTTP trigger endpoint, which should appear similar to the following:
-![img36 alt-text#center](figures/36.png)
+![img36 alt-text#center](figures/36.webp)
 
 Next, start the simulator to stream sensor data and open the HTTP trigger endpoint URL in your web browser. You will see the calculated average temperature displayed:
 ![img37 alt-text#center](figures/37.png)
@@ -177,7 +177,7 @@ Now that your Azure Function is fully tested and ready, it's time to deploy it t
 ![img39 alt-text#center](figures/39.png)
 3. Wait for the deployment to complete. This process typically takes a few moments. Once deployed, your Azure Function is hosted in Azure and ready for use.
 4. Open the Azure Portal, and go to your function app (in this example, "IoTTemperatureAlertFunc"). You will see the deployed functions:
-![img40 alt-text#center](figures/40.png)
+![img40 alt-text#center](figures/40.webp)
 
 ## Configure Function App Settings
 You have just deployed the functions to Azure. Previously, when testing the functions locally, you used the `local.settings.json` file to store the Cosmos DB connection string. However, this local configuration file is not deployed to Azure. Therefore, you need to update the corresponding settings directly within the Azure portal.
@@ -190,7 +190,7 @@ Follow these steps to configure the Cosmos DB connection string
 3. Click the **+ Add** button.
 4. Enter the name you used in your code (such as "armiotcosmosdb_DOCUMENTDB").
 5. Paste the Cosmos DB connection string into the Value field:
-![img41 alt-text#center](figures/41.png)
+![img41 alt-text#center](figures/41.webp)
 6. Click **Apply** to add the setting.
 7. Click **Apply** at the bottom to apply changes. Then, confirm to save changes
 
@@ -199,7 +199,7 @@ Once you've configured the connection string, test your deployed Azure Function 
 1. Return to the Overview page of your Azure Function App.
 2. Click on your HTTP-triggered function (GetAverageTemperature).
 3. Click Get function URL and copy the displayed URL (under default):
-![img42 alt-text#center](figures/42.png)
+![img42 alt-text#center](figures/42.webp)
 4. Open this URL in your web browser.
 5. Start your IoT simulator to begin streaming telemetry data to Cosmos DB.
 6. Refresh or access the function URL again, and you should see the calculated average temperature displayed:
