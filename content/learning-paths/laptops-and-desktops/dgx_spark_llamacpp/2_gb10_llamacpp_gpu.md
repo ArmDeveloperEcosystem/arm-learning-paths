@@ -39,7 +39,7 @@ hf download TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF --local-dir TinyLlama-1.1B
 
 {{% notice Note %}}
 After the download completes, you'll find the models in the `~/models` directory.
-{{% /notice Note %}}
+{{% /notice %}}
 
 Great! You’ve installed all the required build tools and downloaded a quantized model for validation. Your environment is ready for source code setup.
 
