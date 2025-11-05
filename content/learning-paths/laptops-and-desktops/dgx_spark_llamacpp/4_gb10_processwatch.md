@@ -156,9 +156,9 @@ ALL      ALL              2.52     8.37     0.00     0.00     100.00   26566
 ```
 
 Here is an interpretation of the values:
-- NEON (≈ 7–15 %) : Active SIMD integer and floating-point operations
-- FPARMv8         : Scalar FP operations such as activation and normalization
-- SVE/SVE2 = 0    : The kernel does not issue SVE instructions
+- NEON: 7–15% for SIMD integer and floating-point operations
+- FPARMv8: 2-5% for scalar FP operations such as activation and normalization
+- SVE/SVE2: 0%, the kernel does not issue SVE instructions
 
 This confirms that the Grace CPU performs quantized inference primarily using NEON.
 
