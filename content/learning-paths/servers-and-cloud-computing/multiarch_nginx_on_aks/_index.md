@@ -1,6 +1,10 @@
 ---
 title: Add Arm nodes to your Azure Kubernetes Services cluster using a multi-architecture nginx container image 
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 60
 
 who_is_this_for: This Learning Path is for developers who want to compare the performance of x64 and arm64 deployments by running nginx on a hybrid Azure Kubernetes Service (AKS) cluster using nginx's multi-architecture container image.  Once you've seen how easy it is to add arm64 nodes to an existing cluster, you'll be ready to explore arm64-based nodes for other workloads in your environment.
