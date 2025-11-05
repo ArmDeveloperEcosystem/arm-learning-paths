@@ -95,7 +95,7 @@ When the configuration process completes successfully, the terminal should displ
 
 {{% notice Note %}}
 - For systems with multiple CUDA versions installed, explicitly specifying the compilers (`-DCMAKE_C_COMPILER`, `-DCMAKE_CXX_COMPILER`, `-DCMAKE_CUDA_COMPILER`) ensures that CMake uses the correct CUDA 13.0 toolchain.  
-- If you encounter configuration errors, return to the previous section and confirm that your CUDA toolkit and driver versions are correctly installed and compatible with Blackwell (sm_121).{{% /notice Note %}}
+- If you encounter configuration errors, return to the previous section and confirm that your CUDA toolkit and driver versions are correctly installed and compatible with Blackwell (sm_121).{{% /notice %}}
 
 Once CMake configuration succeeds, start the compilation process:
 
