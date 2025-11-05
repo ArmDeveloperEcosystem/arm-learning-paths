@@ -36,7 +36,7 @@ wget https://gitlab.arm.com/server_management/PoCs/fvp-poc/-/raw/2a79ae93560969a
 ```
 
 Before running the simulation, open the `run.sh` script and locate the line that defines `FVP_KEYWORD`.
-This variable determines when the host FVP should be launched by monitoring OpenBMC’s console output.
+This variable determines when the host FVP should be launched by monitoring OpenBMC's console output.
 
 If not set correctly, the script might hang or fail to start the host simulation.
 Update the line to:

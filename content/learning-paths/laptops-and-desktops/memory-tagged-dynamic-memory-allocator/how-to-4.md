@@ -218,11 +218,11 @@ If you are attempting to free memory using an incorrectly tagged pointer,
 this is invalid. This applies whether it actually points to an allocated range
 or to free space. Letting either happen could corrupt the internal structures of the heap.
 
-## Undefined Malloc And Free Behaviour
+## Undefined Malloc And Free Behavior
 
 The C standard library defines `free` as expecting to be given a pointer that
 is exactly the same as that which was produced by `malloc`. Therefore, it is
-undefined behaviour to pass a modified pointer to free, for example, as a pointer to
+undefined behavior to pass a modified pointer to free, for example, as a pointer to
 the middle of an allocation rather than the start.
 
 This doesn't mean that an implementation can't accept a modified pointer. It
@@ -234,7 +234,7 @@ points to the same allocation. Our memory tagging allocator is stricter than
 that. Despite the pointer's logical tag not changing where it points to, the allocator
 will not allow you to use a pointer with an incorrect tag.
 
-Looking at the examples above, you can see why the ranges of behaviour allowed by
+Looking at the examples above, you can see why the ranges of behavior allowed by
 the standard (or rather, left undefined) can be useful for different use cases.
 
 If you wanted to make our allocator less strict, you could disable tag checking.

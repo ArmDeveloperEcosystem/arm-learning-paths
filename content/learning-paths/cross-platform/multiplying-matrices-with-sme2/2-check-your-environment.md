@@ -197,7 +197,7 @@ defined in ``misc.c``.
 
 The ``sme2_check`` program then displays whether SVE, SME and SME2 are supported
 at line 24. The checking of SVE, SME and SME2 is done differently depending on
-``BAREMETAL``. This platform specific behaviour is abstracted by the
+``BAREMETAL``. This platform specific behavior is abstracted by the
 ``display_cpu_features()``:
 - In baremetal mode, our program has access to system registers and can inspect system registers for SME2 support. The program will print the SVE field of the ``ID_AA64PFR0_EL1`` system register and the SME field of the ``ID_AA64PFR1_EL1`` system register.
 - In non baremetal mode, on an Apple platform the program needs to use a higher
