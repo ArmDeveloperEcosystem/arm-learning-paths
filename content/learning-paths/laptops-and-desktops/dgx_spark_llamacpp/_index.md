@@ -1,5 +1,5 @@
 ---
-title: Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark using Armv9 SIMD instructions
+title: Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark
 
 minutes_to_complete: 60
 
