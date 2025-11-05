@@ -152,21 +152,21 @@ You will now deploy the web portal you have created to Azure Blob Storage, makin
 2. Create a Storage Account:
 * Click **Create a resource**.
 * Search for “Storage account”.
-![img45 alt-text#center](figures/45.png)
+![img45 alt-text#center](figures/45.webp)
 * Click **Create**.
 ![img46 alt-text#center](figures/46.png)
 3. Provide the required details:
 * Subscription, resource group, and storage account name (e.g. armiotstorage).
 * For Primary service, choose **Azure Blob Storage** or **Azure Data Lake Storage Gen 2**.
 * Select **Standard performance** and **Locally-redundant storage (LRS)**.
-![img47 alt-text#center](figures/47.png)
+![img47 alt-text#center](figures/47.webp)
 * Click "Review + create", then "Create".
 3. Enable Static Website Hosting:
 * Navigate to your newly created storage account.
 * Under Data management, click **Static website**.
 * Select **Enabled**.
 * Set index.html as the index document name.
-![img48 alt-text#center](figures/48.png)
+![img48 alt-text#center](figures/48.webp)
 * Click **Save**.
 
 After saving, Azure provides you with a URL like: https://<storage-account-name>.z22.web.core.windows.net/. 
@@ -179,7 +179,7 @@ You can upload your website files directly using the Azure Portal or via Azure S
 3. Open the container named ”$web” (created automatically when enabling static websites).
 4. Click **Upload** and select your three website files (index.html, main.js, styles.css), and upload them.
 
-![img49 alt-text#center](figures/49.png)
+![img49 alt-text#center](figures/49.webp)
 
 ### Verify the Deployment
 After uploading your files, open a browser and navigate to https://<storage-account-name>.z22.web.core.windows.net/. 
