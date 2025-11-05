@@ -103,10 +103,12 @@ Results summarized from the your run on the `c4a-standard-4` (4 vCPU, 16 GB memo
 | Computation  | 0.410907 | 0.000000 | 0.410907 | 0.410919 |
 
 
-### Analysis of Results
+### Key Takeaways
 
 When you look the benchmarking results, you will notice that on the Google Axion C4A Arm-based instances:
 
-- **Database operations are the main bottleneck:** DB Insert and DB Query take the most time.  
-- **DB Query has the highest latency:** It is the slowest operation at 3.39 seconds.  
-- **Core computation is fast:** Pure Ruby/Rails calculations complete quickly at 0.41 seconds.
+Rails on Arm64 performs consistently: Ruby and PostgreSQL are both natively optimized for Arm, providing stable, predictable latency.
+Database I/O remains the main optimization target: Techniques such as query caching, connection pooling, and async queries can improve DB-heavy performance.
+Compute-bound tasks scale well: Axion’s Arm cores and Ruby’s YJIT show excellent CPU utilization for non-I/O workloads.
+
+Ruby on Rails runs efficiently on Google Cloud’s Axion-based C4A Arm64 instances. 
