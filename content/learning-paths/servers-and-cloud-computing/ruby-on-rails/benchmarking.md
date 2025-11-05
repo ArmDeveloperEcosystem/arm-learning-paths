@@ -25,7 +25,7 @@ vi benchmark.rb
 ```
 
 ### Benchmark code for measuring Rails app performance
-Below mentioned code (`benchmark.rb` file) measures database inserts, queries, and CPU computations in your Rails application using Ruby’s Benchmark library.
+Copy the code below into `benchmark.rb`. It measures database inserts, queries, and CPU computations in your Rails application using Ruby’s Benchmark library.
 
 ```ruby
 require 'benchmark'
