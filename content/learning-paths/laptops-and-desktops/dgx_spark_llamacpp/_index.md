@@ -13,8 +13,10 @@ learning_objectives:
 
 prerequisites:
     - Access to an NVIDIA DGX Spark system with at least 15 GB of available disk space
-    - Basic understanding of machine learning concepts
     - Familiarity with command-line interfaces and basic Linux operations
+    - understanding of CUDA programming basics and GPU/CPU compute concepts
+    - Basic knowledge of quantized large language models (LLMs) and machine learning inference
+    - Experience building software from source using CMake and Make
 
 
 author: Odin Shen
