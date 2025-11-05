@@ -6,13 +6,13 @@ weight: 3
 layout: learningpathall
 ---
 
-## Overview
+## Set up your Grace Blackwell environment
 
 Before building and running quantized LLMs on your DGX Spark, you need to verify that your system is fully prepared for AI workloads. This includes checking your Arm-based Grace CPU configuration, confirming your operating system, ensuring the Blackwell GPU and CUDA drivers are active, and validating that the CUDA toolkit is installed. These steps provide a solid foundation for efficient LLM inference and development on Arm.
 
 This section is organized into three main steps: verifying your CPU, checking your operating system, and confirming your GPU and CUDA toolkit setup. You'll also find additional context and technical details throughout, should you wish to explore the platform's capabilities more deeply.
 
-## Step 1: check your CPU configuration
+## Step 1: Verify your CPU configuration
 
 Before running LLM workloads, it's helpful to understand more about the CPU you're working with. The DGX Spark uses Arm-based Grace processors, which bring some unique advantages for AI inference.
 
@@ -82,13 +82,13 @@ Vulnerabilities:
   Tsx async abort:        Not affected
 ```
 
-Great! If you have seen this message your system is using Armv9 cores, which are ideal for quantized LLM workloads. The Grace CPU implements the Armv9-A instruction set and supports advanced vector extensions, making it ideal for quantized LLM inference and tensor operations.
+If you have seen this message your system is using Armv9 cores, great! These are ideal for quantized LLM workloads. The Grace CPU implements the Armv9-A instruction set and supports advanced vector extensions, making it ideal for quantized LLM inference and tensor operations.
 
 ### Grace CPU specification 
 
 The following table provides more information about the key specifications of the Grace CPU and explains their relevance to quantized LLM inference:
 
-| **Category** | **Specification** | **Description / Impact for LLM Inference** |
+| **Category** | **Specification** | **Description/Impact for LLM Inference** |
 |---------------|-------------------|---------------------------------------------|
 | Architecture | Armv9-A (64-bit, aarch64) | Modern Arm architecture supporting advanced vector and AI extensions|
 | Core Configuration | 20 cores total - 10× Cortex-X925 (performance) + 10× Cortex-A725 (efficiency) | Heterogeneous CPU design balancing high performance and power efficiency |
@@ -100,6 +100,8 @@ The following table provides more information about the key specifications of th
 | Security and Reliability | Not affected by Meltdown, Spectre, Retbleed, or similar vulnerabilities | Ensures stable and secure operation for long-running inference tasks |
 
 Its SVE2, BF16, and INT8 matrix multiplication (I8MM) capabilities are what make it ideal for quantized LLM workloads, as these provide a power-efficient foundation for both CPU-only inference and CPU-GPU hybrid processing.
+
+### Verify OS
 
 You can also verify the operating system running on your DGX Spark by using the following command:
 
@@ -120,7 +122,7 @@ This shows you that your DGX Spark runs on Ubuntu 24.04 LTS, a developer-friendl
 
 Nice work! You've confirmed your operating system is Ubuntu 24.04 LTS, so you can move on to the next step.
 
-## Step 2: verify the Blackwell GPU and driver
+## Step 2: Verify the Blackwell GPU and driver
 
 After confirming your CPU configuration, verify that the Blackwell GPU inside the GB10 Grace Blackwell Superchip is available and ready for CUDA workloads by using the following:
 
@@ -174,7 +176,7 @@ The table below provides more explanation of the `nvidia-smi` output:
 Excellent! Your Blackwell GPU is recognized and ready for CUDA workloads. This means your system is set up for GPU-accelerated LLM inference.
 
 
-## Step 3: check the CUDA toolkit
+## Step 3: Check the CUDA toolkit
 
 To build the CUDA version of llama.cpp, the system must have a CUDA toolkit installed.
 
@@ -214,8 +216,8 @@ Your DGX Spark environment is now fully prepared for the next section,  where yo
 
 In this entire setup section, you have achieved the following:
 
-- Verified your Arm-based Grace CPU and its capabilities—you've confirmed that your system is running Armv9 cores with SVE2, BF16, and INT8 matrix multiplication support, which are perfect for quantized LLM inference
-- Confirmed your Blackwell GPU and CUDA driver are ready—the GB10 GPU is active, properly recognized, and set up with CUDA 13, so you're all set for GPU-accelerated workloads
-- Checked your operating system and CUDA toolkit—Ubuntu 24.04 LTS provides a solid foundation, and the CUDA compiler is installed and ready for building GPU-enabled inference tools
+- Verified your Arm-based Grace CPU and its capabilities by confirming that your system is running Armv9 cores with SVE2, BF16, and INT8 matrix multiplication support, which are perfect for quantized LLM inference
+- Confirmed your Blackwell GPU and CUDA driver are ready by seeing that the GB10 GPU is active, properly recognized, and set up with CUDA 13, so you're all set for GPU-accelerated workloads
+- Checked your operating system and CUDA toolkit - Ubuntu 24.04 LTS provides a solid foundation, and the CUDA compiler is installed and ready for building GPU-enabled inference tools
 
 You're now ready to move on to building and running quantized LLMs on your DGX Spark. The next section walks you through compiling llama.cpp for both CPU and GPU, so you can start running AI inference on this platform.

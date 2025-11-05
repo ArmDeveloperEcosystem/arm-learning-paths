@@ -11,9 +11,6 @@ The Grace CPU features Arm Cortex-X925 and Cortex-A725 cores with advanced vecto
 
 ## Configure and build the CPU-only version
 
-
-In this session, you will configure and build the CPU-only version of llama.cpp, optimized for the Armv9-based Grace CPU.
-
 This build runs entirely on the Grace CPU (Arm Cortex-X925 and Cortex-A725), which supports advanced Armv9 vector extensions including SVE2, BFloat16, and I8MM, making it highly efficient for quantized inference workloads even without GPU acceleration.
 To ensure a clean separation from the GPU build artifacts, start from a clean directory.
 
@@ -123,8 +120,8 @@ To monitor live CPU utilization and power metrics during inference, use `htop`:
 htop
 ```
 
-The following screenshot shows CPU utilization and thread activity during TinyLlama inference on DGX Spark, confirming full multi-core engagement.
-![htop display showing 20 Grace CPU cores at 75-85% utilization during TinyLlama inference with OpenMP threading alt-text#center](htop.png)](htop.png "TinyLlama CPU Utilization")
+The following screenshot shows CPU utilization and thread activity during TinyLlama inference on DGX Spark, confirming full multi-core engagement:
+![htop display showing 20 Grace CPU cores at 75-85% utilization during TinyLlama inference with OpenMP threading alt-text#center](htop.png "TinyLlama CPU utilization")
 
 The `htop` interface shows:
 
@@ -145,6 +142,4 @@ In this section you have:
 - Tested quantized model inference using the TinyLlama Q8_0 model.
 - Used monitoring tools (htop) to confirm efficient CPU utilization.
 
-You have now successfully built and validated the CPU-only version of llama.cpp on the Grace CPU.
-
-In the next section, you will learn how to use the Process Watch tool to visualize instruction-level execution and better understand how Armv9 vectorization (SVE2 and NEON) accelerates quantized LLM inference on the Grace CPU.
+You have now successfully built and validated the CPU-only version of llama.cpp on the Grace CPU. In the next section, you will learn how to use the Process Watch tool to visualize instruction-level execution and better understand how Armv9 vectorization (SVE2 and NEON) accelerates quantized LLM inference on the Grace CPU.

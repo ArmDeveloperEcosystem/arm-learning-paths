@@ -1,5 +1,5 @@
 ---
-title: Unlock efficient quantized LLMs on Arm-based NVIDIA DGX Spark using Armv9 SIMD instructions
+title: Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark using Armv9 SIMD instructions
 
 minutes_to_complete: 60
 
@@ -14,9 +14,9 @@ learning_objectives:
 prerequisites:
     - Access to an NVIDIA DGX Spark system with at least 15 GB of available disk space
     - Familiarity with command-line interfaces and basic Linux operations
-    - understanding of CUDA programming basics and GPU/CPU compute concepts
+    - Understanding of CUDA programming basics and GPU/CPU compute concepts
     - Basic knowledge of quantized large language models (LLMs) and machine learning inference
-    - Experience building software from source using CMake and Make
+    - Experience building software from source using CMake and make
 
 
 author: Odin Shen

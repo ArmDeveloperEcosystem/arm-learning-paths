@@ -10,7 +10,7 @@ In this section, you'll explore how the Grace CPU executes Armv9 vector instruct
 
 Process Watch helps you observe Neon SIMD instruction execution on the Grace CPU and understand why SVE and SVE2 remain inactive under the current kernel configuration. This demonstrates how Armv9 vector execution works in AI workloads and shows the evolution from traditional SIMD pipelines to scalable vector computation.
 
-### Install and configure Process Watch
+## Install and configure Process Watch
 
 First, install the required packages:
 
@@ -79,11 +79,7 @@ cd ~/llama.cpp/build-cpu/bin
 	-p "Explain the benefits of vector processing in modern Arm CPUs."
 ```
 
-Keep this terminal running while the model generates text output.
-
-You can now attach Process Watch to this active process.
-
-Once the llama.cpp process is running on the Grace CPU, attach Process Watch to observe its live instruction activity.
+Keep this terminal running while the model generates text output. You can now attach Process Watch to this active process. Once the llama.cpp process is running on the Grace CPU, attach Process Watch to observe its live instruction activity.
 
 If only one `llama-cli` process is running, you can directly launch Process Watch without manually checking its PID:
 
@@ -160,13 +156,13 @@ ALL      ALL              2.52     8.37     0.00     0.00     100.00   26566
 ```
 
 Here is an interpretation of the values:
-- NEON (≈ 7–15 %) : Active SIMD integer and floating-point operations.
-- FPARMv8         : Scalar FP operations such as activation and normalization.
-- SVE/SVE2 = 0    : The kernel does not issue SVE instructions.
+- NEON (≈ 7–15 %) : Active SIMD integer and floating-point operations
+- FPARMv8         : Scalar FP operations such as activation and normalization
+- SVE/SVE2 = 0    : The kernel does not issue SVE instructions
 
 This confirms that the Grace CPU performs quantized inference primarily using NEON.
 
-### Why are SVE and SVE2 inactive?
+## Why are SVE and SVE2 inactive?
 
 Although the Grace CPU supports SVE and SVE2, the vector length is 16 bytes (128-bit).
 
@@ -191,10 +187,10 @@ echo 256 | sudo tee /proc/sys/abi/sve_default_vector_length
 This behavior is expected because SVE is available but fixed at 128 bits.
 
 {{% notice Note %}}
-Future kernel updates may introduce SVE2 instructions.
+Future kernel updates might introduce SVE2 instructions.
 {{% /notice %}}
 
-## What you've achieved and what's next
+## What you've accomplished and what's next
 
 You have completed the Learning Path for analyzing large language model inference on the DGX Spark platform with Arm-based Grace CPUs and Blackwell GPUs.
 
@@ -213,5 +209,5 @@ By completing these steps, you are now equipped to:
 - Identify performance bottlenecks and opportunities for acceleration on both CPU and GPU
 - Prepare for future enhancements in Armv9 vector processing and software support
 - Confidently deploy and monitor AI inference on modern Arm server platforms
-For additional learning, see the resources in the "Further Reading" section. You can continue experimenting with different models and monitoring tools as new kernel updates become available.
+For additional learning, see the resources in the Further Reading section. You can continue experimenting with different models and monitoring tools as new kernel updates become available.
 
