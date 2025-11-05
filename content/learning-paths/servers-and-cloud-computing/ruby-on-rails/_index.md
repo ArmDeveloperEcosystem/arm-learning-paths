@@ -7,7 +7,7 @@ cascade:
 
 minutes_to_complete: 40
 
-who_is_this_for: This learning path is intended for software developers deploying and optimizing Ruby on Rails workloads on Linux/Arm64 environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
+who_is_this_for: This is an introductory topic intended for software developers deploying and optimizing Ruby on Rails workloads on Linux Arm64 environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
 
 learning_objectives:
   - Provision an Arm-based SUSE SLES virtual machine on Google Cloud (C4A with Axion processors)
