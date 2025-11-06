@@ -99,11 +99,11 @@ process_images() {
             else
                 # Set quality dynamically based on file size
                 if [ "$kbsize" -ge 15000 ]; then           # ≥ 15MB
-                    quality=30
-                elif [ "$kbsize" -ge 5000 ]; then          # 5–15MB
                     quality=50
+                elif [ "$kbsize" -ge 5000 ]; then          # 5–15MB
+                    quality=70
                 else                                            # < 5MB
-                    quality=75
+                    quality=85
                 fi
                 echo "Optimizing $img (${kbsize}KB, ${width}px), quality=$quality"
                 # Resize and convert to WebP. If error occurs, capture it and exit.
@@ -130,7 +130,8 @@ process_images() {
                 find "$img_dir" "$(dirname "$img_dir")" -name "*.md" 2>/dev/null | while read -r md_file; do
                     if grep -q "$img_name" "$md_file"; then
                         echo "Replacing $img_name → $webp_name in $md_file"
-                        sed -i '' "s|$img_name|$webp_name|g" "$md_file"
+                        sed -i '' "s|($img_name|(${webp_name}|g" "$md_file"
+                        sed -i '' "s|/$img_name|/${webp_name}|g" "$md_file"
                     fi
                 done
             fi                                  
