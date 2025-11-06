@@ -112,3 +112,7 @@ Database I/O remains the main optimization target: Techniques such as query cach
 Compute-bound tasks scale well: Axion’s Arm cores and Ruby’s YJIT show excellent CPU utilization for non-I/O workloads.
 
 Ruby on Rails runs efficiently on Google Cloud’s Axion-based C4A Arm64 instances. 
+
+## What you've accomplished
+
+You’ve benchmarked your Ruby on Rails application on a Google Cloud C4A Arm-based VM using Ruby’s built-in Benchmark library. You measured database insert and query speeds, as well as CPU computation performance, and interpreted the results to identify optimization opportunities. With these insights, you’re equipped to further tune your Rails workloads for Arm and confidently deploy performance-sensitive applications on Arm-based cloud infrastructure.

@@ -20,4 +20,8 @@ Ruby on Rails (Rails) is an open-source, server-side web application framework w
 
 It allows developers to build database-backed web applications quickly using convention over configuration, MVC (Model-View-Controller) architecture, and built-in tools for routing, database migrations, and view rendering.  
 
-Rails is widely used for web applications, APIs, and full-stack development projects. Learn more from the [Ruby on Rails official website](https://rubyonrails.org/) and its [guides and documentation](https://guides.rubyonrails.org/).
+Rails is widely used for web applications, APIs, and full-stack development projects. Learn more from the [Ruby on Rails official website](https://rubyonrails.org/) and the [Ruby on Rails Guides](https://guides.rubyonrails.org/).
+
+## What you've accomplished and what's next
+
+You’ve now learned about Google Axion C4A Arm instances and the fundamentals of Ruby on Rails. Understanding these technologies sets the stage for deploying and optimizing Rails workloads on Arm-based cloud infrastructure.

@@ -308,3 +308,7 @@ You will see a Rails welcome page in your browser if everything is set up correc
 ![Rails-info page alt-text#center](images/rails-web.png "Figure 6: Ruby/Rails Welcome Page")
 
 With port 3000 reachable and the welcome page loading, your Rails stack on SUSE Arm64 (C4A Axion) is verified end-to-end and you can proceed to benchmarking.
+
+## What you've accomplished
+
+You’ve successfully set up a Ruby on Rails application with PostgreSQL on a Google Cloud C4A Arm-based virtual machine running SUSE Linux. You installed and configured PostgreSQL, created a dedicated database user, and connected your Rails app to the database. You verified connectivity, generated a scaffold for CRUD operations, and ensured your application is accessible over the network. With your Rails stack running on Arm, you’re ready to move on to benchmarking and performance validation.

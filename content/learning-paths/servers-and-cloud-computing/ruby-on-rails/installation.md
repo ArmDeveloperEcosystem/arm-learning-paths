@@ -94,4 +94,6 @@ You should see output similar to:
 Rails 8.0.3
 ```
 
-You have now installed Ruby and Rails on your Google Cloud C4A Arm-based VM. You can now proceed with the baseline testing.
+## What you've accomplished
+
+You’ve completed the installation of Ruby and Rails on your Google Cloud C4A Arm-based SUSE Linux VM. Your environment is now ready for Arm-native Rails development, with all dependencies, version management, and performance enhancements in place. You’re prepared to start building, testing, and optimizing Ruby on Rails applications on Arm infrastructure.
