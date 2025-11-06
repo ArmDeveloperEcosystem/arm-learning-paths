@@ -1,5 +1,5 @@
 ---
-title: Deploy Ruby on Rails on Google Cloud C4A (Arm-based Axion VMs)
+title: Deploy Ruby on Rails on Arm-based Google Cloud C4A virtual machines
 
 minutes_to_complete: 40
 

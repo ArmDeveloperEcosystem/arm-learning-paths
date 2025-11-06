@@ -1,12 +1,12 @@
 ---
-title: Install Ruby on Rails
+title: Install Ruby on Rails on SUSE Linux
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Install Ruby on Rails on SUSE Linux
+## Overview
 
 In this section, you'll install Ruby, Rails, and essential supporting tools on your Google Cloud C4A instance running SUSE Enterprise Linux. The steps ensure your environment is ready to build, deploy, and optimize Ruby on Rails applications on Arm-based infrastructure.
 
@@ -17,7 +17,7 @@ Start by updating your system packages to ensure you have the latest security pa
 sudo zypper update
 ```
 ## Install required dependencies
-Before installing Ruby, install essential development libraries and tools that ensure Ruby compiles and runs correctly on your SUSE Arm64 environment:
+Install essential development libraries and tools that Ruby needs to compile and run properly on your SUSE Arm64 system:
 
 ```console
 sudo zypper install git curl gcc make patch libyaml-devel libffi-devel libopenssl-devel readline-devel zlib-devel gdbm-devel bzip2 bzip2-devel
@@ -34,10 +34,10 @@ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc
 ```
-These commands accomplish the following:
-- Clone the rbenv repository to your home directory
-- Add rbenv to your PATH so the shell can find it
-- Configure rbenv to initialize automatically in new shell sessions
+These commands configure rbenv for your environment by doing the following:
+- Cloning the rbenv repository to your home directory
+- Adding rbenv to your PATH so the shell can find it
+- Configuring rbenv to initialize automatically in new shell sessions
 ## Install ruby-build plugin
 Install the `ruby-build` plugin to enable rbenv to compile and install Ruby versions from source:
 

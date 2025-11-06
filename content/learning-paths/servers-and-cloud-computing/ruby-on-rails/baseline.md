@@ -1,23 +1,28 @@
 ---
-title: Set up Ruby on Rails baseline testing on Google Axion C4A Arm virtual machine
+title: Set up Ruby on Rails baseline testing
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up Ruby on Rails with PostgreSQL on SUSE Arm64 (Google Cloud C4A)
+## Set up Ruby on Rails with PostgreSQL on SUSE Arm64
 
 Follow these steps to install PostgreSQL, connect it to a Ruby on Rails app, and verify everything works on a SUSE Arm64 Google Cloud C4A VM.
 
-### Install PostgreSQL and development headers
+## Install PostgreSQL and development headers
 
-Install PostgreSQL and its development headers so Rails can use the `pg` gem:
+Install PostgreSQL and its development headers on your SUSE system:
 
 ```console
 sudo zypper install postgresql-devel postgresql-server
 ```
-- `postgresql-devel` lets you compile the `pg` gem for Rails.
+
+This installs two packages:
+- `postgresql-server` - the PostgreSQL database service
+- `postgresql-devel` - development headers needed to compile the `pg` gem that connects Rails to PostgreSQL
+
+The development headers are essential because Rails uses the `pg` gem to communicate with PostgreSQL, and this gem needs to be compiled during installation.
 
 Start PostgreSQL and enable it to run at boot:
 
@@ -41,47 +46,63 @@ The output is similar to:
 ```
 If the Active state is running, PostgreSQL is ready.
 
-### Create a PostgreSQL user for Rails
+## Create a PostgreSQL user for Rails
 
 Create a dedicated PostgreSQL user for your Rails app:
 
 ```console
 sudo -u postgres psql -c "CREATE USER gcpuser WITH SUPERUSER PASSWORD 'your_password';"
 ```
-- This command creates a user named `gcpuser` with superuser privileges.
+This command creates a user named `gcpuser` with superuser privileges. You’ll use this user in your Rails configuration.
 
-You’ll use this user in your Rails configuration.
+## Set environment variables
 
-### Set environment variables
-
-Export environment variables so Rails and the `pg` gem can connect to PostgreSQL:
+Set environment variables for Rails to connect to PostgreSQL:
 
 ```console
 export PGUSER=gcpuser
 export PGPASSWORD=your_password
 export PGHOST=localhost
 ```
-- `PGUSER` sets the PostgreSQL user.
-- `PGPASSWORD` stores the password for this session.
-- `PGHOST` points to the local VM.
 
-### Create a new Rails app with PostgreSQL
+These variables tell Rails how to connect to your PostgreSQL database:
+- `PGUSER` - the PostgreSQL username you created
+- `PGPASSWORD` - the password for that user  
+- `PGHOST` - tells Rails to connect to the local database server
 
-Generate a new Rails app that uses PostgreSQL:
+## Create a new Rails app with PostgreSQL
+
+Now you'll create a Rails application configured to use PostgreSQL as its database.
+
+Generate a new Rails app:
 
 ```console
 rails new db_test_rubyapp -d postgresql
+```
+
+This command creates a new Rails application named `db_test_rubyapp` with PostgreSQL as the default database adapter.
+
+Navigate to your new app directory:
+
+```console
 cd db_test_rubyapp
+```
+
+Install the required gems:
+
+```console
 bundle install
 ```
-- `rails new db_test_rubyapp -d postgresql` creates a Rails app using PostgreSQL.
-- `bundle install` installs gem dependencies, including the `pg` gem.
+
+The `bundle install` command downloads and installs all the gem dependencies listed in your `Gemfile`, including the `pg` gem that allows Rails to communicate with PostgreSQL.
+
+You now have a Rails application ready to connect to your PostgreSQL database.
 
 {{% notice Note %}}
 Check `config/database.yml` and make sure `username` and `password` match your PostgreSQL user (`gcpuser`).
 {{% /notice %}}
 
-### Update Rails database configuration
+## Update Rails database configuration
 
 Open `config/database.yml` and confirm the credentials:
 
@@ -103,7 +124,7 @@ development:
   <<: *default
 ```
 
-### Change the Authentication Method
+## Change the Authentication Method
 By default, PostgreSQL on many Linux distributions (including SUSE) uses the ident authentication method for local connections. This method maps Linux system usernames directly to PostgreSQL roles. While convenient for local access, it prevents password-based authentication, which is necessary for Rails and most application connections.
 
 To allow Rails to connect using a username and password, change the authentication method in PostgreSQL’s configuration file `pg_hba.conf` from ident to md5.
@@ -142,7 +163,7 @@ sudo systemctl status postgresql
 ```
 The service should show as active (running).
 
-### Create and Initialize the Database
+## Create and Initialize the Database
 Once PostgreSQL is configured and Rails can authenticate, you can create your application’s development and test databases.
 This step verifies that Rails is correctly connected to PostgreSQL and that the pg gem is working on your Arm64 environment.
 
@@ -158,24 +179,25 @@ Created database 'db_test_rubyapp_test'
 ```
 This output confirms that Rails successfully. It connected to the PostgreSQL service using the credentials from `config/database.yml` and created two new databases — one for development and one for testing.
 
-### Generate a Scaffold for Testing
+## Generate a Scaffold for Testing
 To verify your Ruby on Rails and PostgreSQL integration, you’ll create a small scaffold application.
 A scaffold is a Rails generator that automatically builds a model, controller, views, and database migration, allowing you to test CRUD (Create, Read, Update, Delete) operations quickly.
 
 For this example, you’ll create a simple Task Tracker app that manages tasks with titles and due dates.
+
 Run the following command inside your Rails project directory:
 
 ```console
 rails generate scaffold task title:string due_date:date
 ```
-- This command generates a model, controller, views, and migration for tasks.
+This command generates a model, controller, views, and migration for tasks.
 
 Apply the migration:
 
 ```console
 rails db:migrate
 ```
-You’ll see output like:
+You’ll see output similar to:
 
 ```output
 == 20251006101717 CreateTasks: migrating ======================================
@@ -184,7 +206,7 @@ You’ll see output like:
 == 20251006101717 CreateTasks: migrated (0.0128s) =============================
 ```
 
-### Verify the tasks table in PostgreSQL
+## Verify the tasks table in PostgreSQL
 
 Check that the `tasks` table exists:
 
@@ -223,7 +245,7 @@ Indexes:
     "tasks_pkey" PRIMARY KEY, btree (id)
 ```
 
-### Open port 3000 in Google Cloud (VPC firewall)
+## Open port 3000 in Google Cloud (VPC firewall)
 Before proceeding to run the Rails server, you need to allow port 3000 from your GCP console. Below are the steps to do that:
 
 a. On the GCP console, navigate to **Firewall** -> **Create Firewall Rule**
@@ -254,7 +276,7 @@ Click on **"Create"**. The Firewall rule will be created successfully and can be
 
 ![ Create Firewall rule alt-text#center](images/firewall5.png "Figure 5: Create Firewall rule")
 
- ### OS firewall (firewalld) on SUSE
+ ## OS firewall (firewalld) on SUSE
 Once done, go back to your VM, install FirewallD:
 ```console
 sudo zypper install firewalld
@@ -276,9 +298,8 @@ rails server -b 0.0.0.0
 ```
 - This command lets you access Rails from your browser using the VM’s external IP.
 
-### Access your Rails app
 
-### Access the Application:
+## Access the Rails application:
 Open a web browser on your local machine (Chrome, Firefox, Edge, etc.) and enter the following URL in the address bar:
 
 ```
@@ -288,7 +309,7 @@ http://[YOUR_VM_EXTERNAL_IP]:3000
 
 You will see a Rails welcome page in your browser if everything is set up correctly. It looks like this:
 
-![Rails-info page alt-text#center](images/rails-web.png "Figure 6: Ruby/Rails Welcome Page")
+![Rails default welcome page displaying Ruby on Rails framework logo with green and red styling, welcome message, and navigation links for About your application environment, getting started guide, and Rails documentation on a clean white background alt-text#center](images/rails-web.png "Ruby/Rails welcome page")
 
 With port 3000 reachable and the welcome page loading, your Rails stack on SUSE Arm64 (C4A Axion) is verified end-to-end and you can proceed to benchmarking.
 

@@ -32,4 +32,4 @@ To create a virtual machine based on the C4A instance type:
 
 ## What you've accomplished 
 
-Congratulations! You’ve successfully created a Google Axion C4A Arm virtual machine on GCP. Your Arm-based cloud environment is now ready for Ruby on Rails development.
+You've successfully created a Google Axion C4A Arm virtual machine on GCP. Your Arm-based cloud environment is ready for Ruby on Rails development.
