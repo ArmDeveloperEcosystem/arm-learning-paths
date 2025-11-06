@@ -1,106 +1,95 @@
 ---
-title: Ruby on Rails Baseline Testing on Google Axion C4A Arm Virtual Machine
+title: Set up Ruby on Rails baseline testing on Google Axion C4A Arm virtual machine
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Baseline Setup for Ruby on Rails with PostgreSQL
-This section sets up PostgreSQL and connects it with a Ruby on Rails application on a SUSE Arm64 Google Cloud C4A virtual machine. You’ll install PostgreSQL, configure it for Rails, create a database user, and verify that Rails can connect and serve requests successfully.
+## Set up Ruby on Rails with PostgreSQL on SUSE Arm64 (Google Cloud C4A)
 
-### Install and Configure PostgreSQL
-PostgreSQL is a robust, production-grade relational database that integrates seamlessly with Ruby on Rails.
+Follow these steps to install PostgreSQL, connect it to a Ruby on Rails app, and verify everything works on a SUSE Arm64 Google Cloud C4A VM.
 
-Install PostgreSQL and its development headers:
+### Install PostgreSQL and development headers
+
+Install PostgreSQL and its development headers so Rails can use the `pg` gem:
 
 ```console
 sudo zypper install postgresql-devel postgresql-server
 ```
-- `postgresql-devel` is required to compile the pg gem for Rails.
+- `postgresql-devel` lets you compile the `pg` gem for Rails.
 
-After installation, ensure that PostgreSQL is running and configured to start automatically at boot:
+Start PostgreSQL and enable it to run at boot:
 
 ```console
 sudo systemctl start postgresql
 sudo systemctl enable postgresql
 systemctl status postgresql
 ```
-The output should look like:
+The output is similar to:
+
 ```output
 ● postgresql.service - PostgreSQL database server
-     Loaded: loaded (/usr/lib/systemd/system/postgresql.service; enabled; vendor preset: disabled)
-     Active: active (running) since Tue 2025-11-04 21:25:59 UTC; 18s ago
+  Loaded: loaded (/usr/lib/systemd/system/postgresql.service; enabled; vendor preset: disabled)
+  Active: active (running) since Tue 2025-11-04 21:25:59 UTC; 18s ago
    Main PID: 26997 (postgres)
-      Tasks: 7
-        CPU: 372ms
-     CGroup: /system.slice/postgresql.service
-             ├─ 26997 /usr/lib/postgresql15/bin/postgres -D /var/lib/pgsql/data
-             ├─ 26998 "postgres: logger " "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
-             ├─ 26999 "postgres: checkpointer " "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
-             ├─ 27000 "postgres: background writer " "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" >
-             ├─ 27002 "postgres: walwriter " "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
-             ├─ 27003 "postgres: autovacuum launcher " "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ">
-             └─ 27004 "postgres: logical replication launcher " "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ">
+   Tasks: 7
+     CPU: 372ms
+  CGroup: /system.slice/postgresql.service
+       ├─ 26997 /usr/lib/postgresql15/bin/postgres -D /var/lib/pgsql/data
+       └─ ... (other postgres processes)
 ```
-If the Active state reads running, your PostgreSQL service is operational and ready for configuration.
+If the Active state is running, PostgreSQL is ready.
 
-### Create a Database Role for Rails
-Next, create a dedicated PostgreSQL role (user) that Rails will use to connect to the database.
+### Create a PostgreSQL user for Rails
+
+Create a dedicated PostgreSQL user for your Rails app:
 
 ```console
 sudo -u postgres psql -c "CREATE USER gcpuser WITH SUPERUSER PASSWORD 'your_password';"
 ```
-This command:
+- This command creates a user named `gcpuser` with superuser privileges.
 
-Executes under the default PostgreSQL superuser account (postgres).
-Creates a new PostgreSQL role called gcpuser.
-Assigns superuser privileges, allowing the user to create databases, manage roles, and execute administrative tasks.
+You’ll use this user in your Rails configuration.
 
-This user will serve as the Rails database owner and be referenced in the Rails configuration file (config/database.yml) later.
+### Set environment variables
 
-### Set Environment variables
-
-Before creating your Rails application, export environment variables so Rails and the `pg gem` can authenticate automatically with PostgreSQL.
+Export environment variables so Rails and the `pg` gem can connect to PostgreSQL:
 
 ```console
 export PGUSER=gcpuser
 export PGPASSWORD=your_password
 export PGHOST=localhost
 ```
+- `PGUSER` sets the PostgreSQL user.
+- `PGPASSWORD` stores the password for this session.
+- `PGHOST` points to the local VM.
 
-PGUSER → Specifies the PostgreSQL user that Rails will connect as.
-PGPASSWORD → Stores the password for that user in memory (temporary for this session).
-PGHOST → Points to the PostgreSQL host (in this case, the local VM).
+### Create a new Rails app with PostgreSQL
 
-### Create a Rails App with PostgreSQL
-Now, generate a new Rails application configured to use PostgreSQL as its default database adapter:
+Generate a new Rails app that uses PostgreSQL:
 
 ```console
 rails new db_test_rubyapp -d postgresql
 cd db_test_rubyapp
 bundle install
 ```
-- rails new db_test_rubyapp → Creates a new Rails application named db_test_rubyapp.
-- `d postgresql` → Instructs Rails to use PostgreSQL instead of the default SQLite database.
-- bundle install → Installs all gem dependencies defined in the Gemfile, including the pg gem that connects Rails to PostgreSQL.
+- `rails new db_test_rubyapp -d postgresql` creates a Rails app using PostgreSQL.
+- `bundle install` installs gem dependencies, including the `pg` gem.
 
 {{% notice Note %}}
-Check `config/database.yml` to ensure the `username` and `password` match your PostgreSQL role `(gcpuser)`.
+Check `config/database.yml` and make sure `username` and `password` match your PostgreSQL user (`gcpuser`).
 {{% /notice %}}
 
-### Verify and Update Database Configuration
-Rails uses the `config/database.yml` file to define how it connects to databases in different environments (development, test, and production).
-It's important to verify that these credentials align with the PostgreSQL role you created earlier.
+### Update Rails database configuration
 
-Open the file with your preferred text editor:
+Open `config/database.yml` and confirm the credentials:
 
 ```console
 sudo vi config/database.yml
 ```
-Locate the default and development sections, and make sure they match the PostgreSQL user and password you configured.
+Set these fields:
 
-Your configuration file should have the following fields set:
 ```output
 default: &default
   adapter: postgresql
@@ -119,6 +108,7 @@ By default, PostgreSQL on many Linux distributions (including SUSE) uses the ide
 
 To allow Rails to connect using a username and password, change the authentication method in PostgreSQL’s configuration file `pg_hba.conf` from ident to md5.
 
+Open your configuration file
 ```console
 sudo vi /var/lib/pgsql/data/pg_hba.conf
 ```
@@ -132,7 +122,7 @@ host    all             all             127.0.0.1/32            ident
 # IPv6 local connections:
 host    all             all             ::1/128                 ident
 ```
-Modify both lines to use md5, which enables password-based authentication:
+Change `ident` to `md5`:
 
 ```output
 # IPv4 local connections:
@@ -140,7 +130,7 @@ host    all             all             127.0.0.1/32            md5
 # IPv6 local connections:
 host    all             all             ::1/128                 md5
 ```
-After saving the file, restart the PostgreSQL service to apply the new authentication settings:
+Restart PostgreSQL:
 
 ```console
 sudo systemctl restart postgresql
@@ -160,7 +150,8 @@ Run the following command from inside your Rails app directory:
 ```console
 rails db:create
 ```
-You should see output similar to:
+The expected output is:
+
 ```output
 Created database 'db_test_rubyapp_development'
 Created database 'db_test_rubyapp_test'
@@ -177,20 +168,15 @@ Run the following command inside your Rails project directory:
 ```console
 rails generate scaffold task title:string due_date:date
 ```
-This single command automatically generates:
-A database migration to create the tasks table in PostgreSQL.
-A model file (app/models/task.rb) that maps to the tasks table.
-A controller (app/controllers/tasks_controller.rb) with full CRUD actions (index, show, new, create, edit, update, destroy).
-Corresponding views in app/views/tasks/ with ready-to-use HTML + embedded Ruby templates.
-Route entries in config/routes.rb to make the new resource accessible via /tasks.
+- This command generates a model, controller, views, and migration for tasks.
 
-Now apply the migration to create the tasks table in your PostgreSQL database:
+Apply the migration:
 
 ```console
 rails db:migrate
 ```
+You’ll see output like:
 
-You should see output similar to:
 ```output
 == 20251006101717 CreateTasks: migrating ======================================
 -- create_table(:tasks)
@@ -198,16 +184,14 @@ You should see output similar to:
 == 20251006101717 CreateTasks: migrated (0.0128s) =============================
 ```
 
-This confirms that Rails connected successfully to PostgreSQL and the database schema was updated.
-The new tasks table was created inside your db_test_rubyapp_development database.
+### Verify the tasks table in PostgreSQL
 
-### Verify Table and Database Connectivity
-TThe scaffold created a tasks table in your PostgreSQL database. Verify it exists and has the expected schema:
+Check that the `tasks` table exists:
 
 ```console
 sudo -u postgres psql
 ```
-Inside the PostgreSQL shell, run:
+In the PostgreSQL shell, run:
 
 ```console
 \c db_test_rubyapp_development
@@ -290,14 +274,14 @@ Now that port 3000 is allowed in your VM’s ingress firewall rules, you can sta
 ```console
 rails server -b 0.0.0.0
 ```
-- `rails server -b 0.0.0.0` → Starts the Rails server and binds it to all network interfaces, not just `localhost`.
-- Binding to `0.0.0.0` allows other machines (or your local browser) to access the Rails app running on the VM using its external IP.
+- This command lets you access Rails from your browser using the VM’s external IP.
 
+### Access your Rails app
 
 ### Access the Application:
 Open a web browser on your local machine (Chrome, Firefox, Edge, etc.) and enter the following URL in the address bar:
 
-```console
+```
 http://[YOUR_VM_EXTERNAL_IP]:3000
 ```
 - Replace `<YOUR_VM_PUBLIC_IP>` with the public IP of your GCP VM.
@@ -310,4 +294,4 @@ With port 3000 reachable and the welcome page loading, your Rails stack on SUSE 
 
 ## What you've accomplished
 
-You’ve successfully set up a Ruby on Rails application with PostgreSQL on a Google Cloud C4A Arm-based virtual machine running SUSE Linux. You installed and configured PostgreSQL, created a dedicated database user, and connected your Rails app to the database. You verified connectivity, generated a scaffold for CRUD operations, and ensured your application is accessible over the network. With your Rails stack running on Arm, you’re ready to move on to benchmarking and performance validation.
+You set up a Ruby on Rails app with PostgreSQL on a Google Cloud C4A Arm-based VM running SUSE Linux. You installed and configured PostgreSQL, created a database user, connected Rails, verified connectivity, generated a scaffold, and made your app accessible over the network. Your Rails stack is now ready for benchmarking and performance testing on Arm.

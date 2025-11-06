@@ -1,5 +1,5 @@
 ---
-title: Getting started with Ruby/Rails on Google Axion C4A (Arm Neoverse-V2)
+title: Getting started with Ruby on Rails on Google Axion C4A
 
 weight: 2
 
@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Google Axion C4A Arm instances in Google Cloud
 
-Google Axion C4A is a family of Arm-based virtual machines built on Google’s custom Axion CPU, which is based on Arm Neoverse-V2 cores. Designed for high-performance and energy-efficient computing, these virtual machines offer strong performance for modern cloud workloads such as CI/CD pipelines, microservices, media processing, and general-purpose applications.
+Google Axion C4A is a family of Arm-based virtual machines built on Google's custom Axion CPU, which is based on Arm Neoverse-V2 cores. Designed for high-performance and energy-efficient computing, these virtual machines offer strong performance for modern cloud workloads such as CI/CD pipelines, microservices, media processing, and general-purpose applications.
 
 The C4A series provides a cost-effective alternative to x86 virtual machines while leveraging the scalability and performance benefits of the Arm architecture in Google Cloud.
 
@@ -24,4 +24,9 @@ Rails is widely used for web applications, APIs, and full-stack development proj
 
 ## What you've accomplished and what's next
 
-You’ve now learned about Google Axion C4A Arm instances and the fundamentals of Ruby on Rails. Understanding these technologies sets the stage for deploying and optimizing Rails workloads on Arm-based cloud infrastructure.
+Understanding these technologies sets the stage for deploying and optimizing Rails workloads on Arm-based cloud infrastructure. Now that you have the foundational context, you’re ready to set up your development environment and begin working with Ruby on Rails on Google Axion C4A instances.
+
+In the next section, you’ll install the required tools and configure your environment to run Rails applications on Arm-based Google Cloud VMs. This hands-on setup will help you build, test, and deploy Rails projects efficiently on Arm architecture.
+
+Continue to the installation steps to get started.
+
