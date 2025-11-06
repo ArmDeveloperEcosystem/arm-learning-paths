@@ -6,28 +6,32 @@ weight: 4
 layout: learningpathall
 ---
 
-## Analyze and Debug Zephyr Applications in VS Code
+## Analyze and debug Zephyr applications in VS Code
 
 In this module, you'll learn how to inspect memory usage and perform live debugging on your Zephyr applications using Zephyr Workbench. These capabilities are essential for diagnosing bugs and optimizing embedded firmware performance on Arm Cortex-M platforms.
 
-## Analyze Memory Usage
+## Analyze memory usage
 
 Understanding how your application uses memory is crucial for optimizing embedded firmware on resource-constrained Arm Cortex-M systems. Zephyr Workbench provides built-in tools to generate detailed memory usage reports after a successful build, helping you identify ROM and RAM consumption hotspots early in development.
 
-### Generate Memory Reports
+### Generate memory reports
 
-After building your Zephyr application, it’s important to analyze how memory is allocated and used. Zephyr Workbench offers built-in memory reporting tools that help you visualize RAM and ROM usage, identify inefficient memory patterns, and guide optimization efforts. These insights are especially useful when working with constrained Arm Cortex-M platforms.
+After building your Zephyr application, analyze how memory is allocated and used. Zephyr Workbench offers built-in memory reporting tools that help you visualize RAM and ROM usage, identify inefficient memory patterns, and guide optimization efforts. These insights are especially useful when working with constrained Arm Cortex-M platforms.
+
+To generate memory reports, open the **Zephyr Workbench** panel and select **Memory Analysis** after a successful build. The tool generates detailed reports showing RAM usage (stack, heap, static variables), ROM usage (code size, constants), and **Puncover** analysis for binary analysis including function size, call graphs, and timing on Arm Cortex-M processors.
+
+The following steps show how to generate and review memory reports:
 
 - Open the **Zephyr Workbench** panel
-- Click **Memory Analysis** after a successful build
+- Select **Memory Analysis** after a successful build
 - Review detailed memory reports:
   - **RAM usage**: stack, heap, static variables
   - **ROM usage**: code size, constants
-  - **Puncover**: binary analysis for function size, call graphs, and timing on ARM Cortex-M
+  - **Puncover**: binary analysis for function size, call graphs, and timing on Arm Cortex-M
 
 ![Memory Analysis](images/memory_analysis.png)
 
-The RAM Report looks like this:
+The RAM Report displays detailed memory allocation information:
 
 ```
 Path                                                                                             Size       %  Address    Section
@@ -155,9 +159,9 @@ Root                                                                            
 ```
 
 
-## Install and Configure Debug Tools
+## Install and configure debug tools
 
-Depending on your board, different debug utilities may be required. Zephyr Workbench integrates several common runners:
+Depending on your board, different debug utilities might be required. Zephyr Workbench integrates several common runners:
 
 Go to **Host Tools > Install Debug Tools** in Zephyr Workbench. Debug tools vary depending on your target board.
 
@@ -166,57 +170,44 @@ Go to **Host Tools > Install Debug Tools** in Zephyr Workbench. Debug tools vary
 - **STM32CubeProgrammer**: For STM32 boards
 - **J-Link**: For SEGGER debug probes
 
-### Install Debug Utilities
+### Install debug utilities
 
-- Go to **Host Tools > Install Debug Tools** in the Zephyr Workbench panel.
-- Select the tools applicable to your board.
+To install debug tools for your specific board, go to **Host Tools > Install Debug Tools** in the Zephyr Workbench panel and select the tools applicable to your board.
 
 ![Debug Tools](images/install_debug_tools.png)
 
-## Configure Debug Settings
+## Configure debug settings
 
-Before starting a debug session, ensure your settings match your application and board configuration.
+Before starting a debug session, make sure your settings match your application and board configuration.
 
-### Application Configuration
-- Select your application and build config (e.g., "primary").
-- Wait for values to load or build the project if needed.
+### Application configuration
+Select your application and build config (for example, "primary"), then wait for values to load or build the project if needed.
 
-### Program Settings
-- ELF executable path is auto-filled after build.
-- *(Optional)* Add a **CMSIS-SVD** file to enable register-level view.
+### Program settings
+The ELF executable path is auto-filled after build. You can optionally add a **CMSIS-SVD** file to enable register-level view.
 
-### Debug Server
-- Choose the runner: OpenOCD, J-Link, LinkServer, or PyOCD.
-- If not detected, enter the runner path manually.
-- Click **Apply** to save or launch debug directly.
+### Debug server
+Choose the runner from OpenOCD, J-Link, LinkServer, or PyOCD. If the system doesn't detect your runner automatically, enter the runner path manually. Select **Apply** to save your settings or launch debug directly.
 
 ![Debug Manager](images/debug_manager.png)
 
-### Manual Debug Runner Configuration
+### Manual debug runner configuration
 
-If Zephyr Workbench does not automatically detect the installed debug runner:
-
-- Open the **Debug Manager** from the sidebar.
-- Locate your board profile and enter the path to the runner executable manually.
+If Zephyr Workbench doesn't automatically detect the installed debug runner, open the **Debug Manager** from the sidebar and locate your board profile to enter the path to the runner executable manually.
 
 {{% notice Note %}}
-Manual configuration may be required on first-time setups or if using custom runner versions.
+Manual configuration might be required on first-time setups or if using custom runner versions.
 {{% /notice %}}
 
+## Launch and use the debugger
 
-## Launch and Use the Debugger
-
-Start from Zephyr Workbench:
-- Click **Debug**
-
-Or from VS Code:
-- Go to **Run and Debug** (`Ctrl+Shift+D`)
-- Select the debug config
-- Click **Run**
+You can start debugging from Zephyr Workbench by selecting **Debug**, or from VS Code by going to **Run and Debug** (`Ctrl+Shift+D`), selecting the debug config, and selecting **Run**.
 
 ![Debug Application](images/debug_app.png)
 
-### Debug Toolbar Controls
+### Debug toolbar controls
+
+The debug toolbar provides the following controls for stepping through your code:
 
 - **Continue/Pause (F5)**
 - **Step Over (F10)**
@@ -225,14 +216,10 @@ Or from VS Code:
 - **Restart (Ctrl+Shift+F5)**
 - **Stop (Shift+F5)**
 
-### Debug Features
+### Debug features
 
-- Breakpoints and variable watches
-- **Register view** for ARM CPU states
-- **Call stack navigation**
-- **Memory view** of address space
+The debugger provides comprehensive inspection capabilities including breakpoints and variable watches, **Register view** for Arm CPU states, **Call stack navigation**, and **Memory view** of address space.
 
-If using `pyocd`, target support may take a few seconds to initialize.
+If using `pyocd`, target support might take a few seconds to initialize.
 
-In this learning path, you learned how to analyze build-time memory usage and perform interactive debugging using Zephyr Workbench.
-By integrating build artifacts, toolchain paths, and debug runners, Workbench simplifies the often complex setup process. These skills empower you to confidently inspect runtime behavior, troubleshoot issues, and optimize embedded applications on Arm Cortex-M platforms.
+In this Learning Path, you explored how to analyze memory usage and debug Zephyr applications using Zephyr Workbench in VS Code. You learned to generate memory reports, install and configure debug tools, and launch interactive debug sessions. These steps help you troubleshoot and optimize embedded applications for Arm Cortex-M boards.
