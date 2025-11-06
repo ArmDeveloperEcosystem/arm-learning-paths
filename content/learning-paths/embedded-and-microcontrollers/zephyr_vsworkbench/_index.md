@@ -26,7 +26,7 @@ author:
     - Odin Shen
 
 skilllevels: Introductory
-subjects: RTOS
+subjects: RTOS Fundamentals
 armips:
     - Cortex-M
 operatingsystems:
