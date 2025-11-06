@@ -119,7 +119,6 @@ By default, PostgreSQL on many Linux distributions (including SUSE) uses the ide
 
 To allow Rails to connect using a username and password, change the authentication method in PostgreSQL’s configuration file `pg_hba.conf` from ident to md5.
 
-Open your configuration file
 ```console
 sudo vi /var/lib/pgsql/data/pg_hba.conf
 ```
