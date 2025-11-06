@@ -106,7 +106,7 @@ See the previous section [Set up the Development Environment](../2-app-scaffoldi
 
 2. Now you should see both model asset bundles in your `assets` directory, as shown below:
 
-![model asset bundles](images/4/model%20asset%20bundles.png)
+![model asset bundles](images/4/model_asset_bundles.png)
 
 3. You are ready to import MediaPipe's Face Landmark Detection and Gesture Recognizer into the project. 
 
