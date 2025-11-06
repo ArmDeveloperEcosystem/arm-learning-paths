@@ -1,5 +1,5 @@
 ---
-title: Build Zephyr Projects with Zephyr Workbench in VS Code
+title: Build Zephyr projects with Zephyr Workbench in VS Code
 
 draft: true
 cascade:
@@ -7,35 +7,33 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is for embedded developers targeting Arm-based platforms with Zephyr RTOS using the Zephyr Workbench extension for VS Code. It is ideal for those developing IoT, wearable, or sensor-driven systems seeking a streamlined and modern development workflow.
+who_is_this_for: This is an introductory topic for embedded developers targeting Arm-based platforms with the Zephyr RTOS using the Zephyr Workbench extension for VS Code.
 
 learning_objectives:
     - Install and configure the Zephyr Workbench extension in VS Code
-    - Set up a complete Zephyr development environment including SDK and toolchain
+    - Set up a complete Zephyr development environment including the SDK and toolchain
     - Create, build, and debug Zephyr applications using hands-on examples
     - Perform memory usage analysis and apply basic optimization techniques
-    - Apply essential debugging workflows for embedded systems on Arm 
+    - Apply essential debugging workflows for embedded systems
 
 prerequisites:
     - Basic familiarity with embedded C programming
     - Visual Studio Code installed and running
-    - Understanding of embedded systems concepts
-    - Cortex-M developement board
-    - Windows 10+ (64-bit) or macOS with Homebrew
+    - A Cortex-M development board
 
 author: 
     - Ayoub Bourjilat
     - Odin Shen
 
-### Tags
 skilllevels: Introductory
-subjects: RTOS Fundamentals
+subjects: RTOS
 armips:
-- Cortex-M
+    - Cortex-M
 operatingsystems:
-- RTOS
+    - RTOS
 tools_software_languages:
-- Zephyr
+    - Zephyr
+    - C
 
 further_reading:
     - resource:
@@ -49,9 +47,8 @@ further_reading:
     - resource:
         title: AC6 Zephyr Training
         link: https://www.ac6-training.com/en/cours.php/cat_oRT/ref_oRT5/zephyr-rtos-programming
-        type: repository
+        type: website
 
-### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
