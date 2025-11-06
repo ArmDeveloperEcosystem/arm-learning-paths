@@ -1,5 +1,5 @@
 ---
-title: Build Zephyr Applications in VS Code
+title: Build Zephyr applications in VS Code
 weight: 3
 
 ### FIXED, DO NOT MODIFY

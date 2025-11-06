@@ -1,5 +1,5 @@
 ---
-title: Analyze and Debug Zephyr Applications in VS Code
+title: Analyze and debug Zephyr applications in VS Code
 weight: 4
 
 ### FIXED, DO NOT MODIFY
