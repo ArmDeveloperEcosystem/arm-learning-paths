@@ -35,9 +35,9 @@ echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc
 ```
 These commands configure rbenv for your environment by doing the following:
-- Cloning the rbenv repository to your home directory
-- Adding rbenv to your PATH so the shell can find it
-- Configuring rbenv to initialize automatically in new shell sessions
+- Cloning the rbenv repository to your home directory.
+- Adding rbenv to your PATH so the shell can find it.
+- Configuring rbenv to initialize automatically in new shell sessions.
 ## Install ruby-build plugin
 Install the `ruby-build` plugin to enable rbenv to compile and install Ruby versions from source:
 
@@ -57,9 +57,9 @@ ruby -v
 ```
 
 This process accomplishes several tasks:
-- Downloads and compiles Ruby 3.4.6 from source, optimized for your Arm64 architecture
-- Sets Ruby 3.4.6 as the default version system-wide for your user account
-- Verifies the installation by displaying the active Ruby version
+- Downloads and compiles Ruby 3.4.6 from source, optimized for your Arm64 architecture.
+- Sets Ruby 3.4.6 as the default version system-wide for your user account.
+- Verifies the installation by displaying the active Ruby version.
 
 The compilation process can take several minutes as Ruby builds natively for your Arm processor.
 

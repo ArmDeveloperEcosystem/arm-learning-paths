@@ -1,5 +1,5 @@
 ---
-title: Ruby on Rails Benchmarking
+title: Benchmark Ruby on Rails
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -25,7 +25,7 @@ Create a new Ruby file called `benchmark.rb` to measure your Rails application's
 vi benchmark.rb
 ```
 
-This file will contain the benchmarking code that tests different aspects of your application's performance.
+This file contains the benchmarking code that tests different aspects of your application's performance.
 Copy the following code into `benchmark.rb`. This code measures three different aspects of your Rails application's performance:
 
 
@@ -68,7 +68,7 @@ This benchmarking script tests three key areas of your Rails application's perfo
 
 This code gives you a basic understanding of how your Rails app performs under different types of workloads.
 
-### Run the benchmark inside Rails
+## Run the benchmark inside Rails
 Now that your benchmark file is ready, run it within the Rails environment using the following command:
 
 ```console
@@ -91,7 +91,7 @@ DB Insert:    2.271645   0.050236   2.321881 (  2.721631)
 DB Query:     3.379849   0.009345   3.389194 (  3.389613)
 Computation:  0.410907   0.000000   0.410907 (  0.410919)
 ```
-## Interpet your benchmark results
+## Interpret the benchmark results
 
 The output shows four different timing measurements that help you understand where your application spends its time.
 
@@ -115,7 +115,7 @@ Here are the performance results from running the benchmark on a `c4a-standard-4
 | DB Query | 3.38 sec | 0.01 sec | 3.39 sec | 3.39 sec |
 | Computation | 0.41 sec | 0.00 sec | 0.41 sec | 0.41 sec |
 
-### What these results tell you
+## What these results tell you
 
 - Database operations (insert and query) take significantly longer than pure computation, with queries being the slowest operation.
 - System time is minimal across all tasks, indicating efficient system resource usage on Arm64.

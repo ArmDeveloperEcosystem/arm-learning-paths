@@ -1,5 +1,5 @@
 ---
-title: Getting started with Ruby on Rails on Google Axion C4A
+title: Get started with Ruby on Rails on Google Axion C4A
 
 weight: 2
 

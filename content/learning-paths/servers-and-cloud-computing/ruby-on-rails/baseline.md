@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Set up Ruby on Rails with PostgreSQL on SUSE Arm64
+## Overview
 
 Follow these steps to install PostgreSQL, connect it to a Ruby on Rails app, and verify everything works on a SUSE Arm64 Google Cloud C4A VM.
 
@@ -127,9 +127,9 @@ development:
 ## Change the Authentication Method
 By default, PostgreSQL on many Linux distributions (including SUSE) uses the ident authentication method for local connections. This method maps Linux system usernames directly to PostgreSQL roles. While convenient for local access, it prevents password-based authentication, which is necessary for Rails and most application connections.
 
-To allow Rails to connect using a username and password, change the authentication method in PostgreSQL’s configuration file `pg_hba.conf` from ident to md5.
+To allow Rails to connect using a username and password, change the authentication method in PostgreSQL’s configuration file `pg_hba.conf` from ident to md5:
 
-Open your configuration file
+
 ```console
 sudo vi /var/lib/pgsql/data/pg_hba.conf
 ```
@@ -220,10 +220,25 @@ In the PostgreSQL shell, run:
 \d tasks
 \q
 ```
+Connect to PostgreSQL as the database superuser and inspect the table structure:
+
+```console
+sudo -u postgres psql
+```
+
+In the PostgreSQL shell, connect to your Rails development database and examine the tasks table:
+
+```console
+\c db_test_rubyapp_development
+\d tasks
+\q
+```
+
+This sequence of commands does the following:
 - `sudo -u postgres psql` → Launches the PostgreSQL shell as the superuser `postgres`.
-- `\c db_test_rubyapp_development` → Connects to the Rails app’s development database.
+- `\c db_test_rubyapp_development` → Connects to the Rails app's development database.
 - `\d tasks` → Displays the schema (columns and types) of the `tasks` table.
-- `\q → Exit from the PostgreSQL shell
+- `\q` → Exit from the PostgreSQL shell.
   
 You should see output similar to:
 ```output
@@ -245,43 +260,47 @@ Indexes:
     "tasks_pkey" PRIMARY KEY, btree (id)
 ```
 
-## Open port 3000 in Google Cloud (VPC firewall)
-Before proceeding to run the Rails server, you need to allow port 3000 from your GCP console. Below are the steps to do that:
+## Configure Google Cloud firewall to allow port 3000
 
-a. On the GCP console, navigate to **Firewall** -> **Create Firewall Rule**
+Your Rails app runs on port 3000 by default. To access it from your browser, you need to configure Google Cloud's firewall to allow incoming connections on this port.
+
+Navigate to the firewall settings in your Google Cloud Console:
+
+- Open the **Navigation menu** (hamburger icon in the top left)
+- Go to **VPC network** → **Firewall**
+- Click **Create Firewall Rule**
  
- ![Firewall Info alt-text#center](images/firewall1.png "Figure 1: Firewall Create")
+![Google Cloud Console navigation menu showing VPC network section expanded with Firewall option highlighted, displaying the standard Google Cloud interface with blue sidebar navigation and white background alt-text#center](images/firewall1.png "Create firewall rule")
 
-b. Fill in the details as below:
+Fill in the details as below:
 
-Give a **name** for your desired port (e.g., `allow-3000-ingress`).
+- Provide a **name** for your desired port (for example, `allow-3000-ingress`).
 
-![Allow Ingress alt-text#center](images/firewall2.png "Figure 2: Allow-3000-ingress ")
+![Google Cloud Console firewall rule creation form showing Name field with allow-3000-ingress entered, Direction of traffic set to Ingress, Action set to Allow, Targets dropdown showing All instances in the network option, and Source IP ranges field containing 0.0.0.0/0 for unrestricted access, displayed in the standard white Google Cloud interface with blue accent colors alt-text#center](images/firewall2.png "Allow-3000-ingress ")
  
 
-Set **Direction of Traffic** to **"Ingress"**.
+- Set **Direction of Traffic** to **Ingress**.
 
-Set **Target** to **"All Instances in the Network"**. You can also choose **"Specific Tags"**.
+- Set **Target** to **All Instances in the network**. You can also select **Specific Tags**.
 
-Set the **Source IPv4 range** to **"0.0.0.0/0"**, for global access.
+- Set the **Source IPv4 range** to `0.0.0.0/0`, for global access.
 
-![Set Direction of Traffic  alt-text#center](images/firewall3.png "Figure 3: Target Set")
+![Google Cloud Console firewall rule creation form showing Direction of traffic field set to Ingress with a dropdown menu, Target field displaying All instances in the network option, and Source IP ranges field visible below, all within the standard Google Cloud interface featuring white background and blue accent elements alt-text#center](images/firewall3.png "Setting the target")
+In the **Protocols and ports** section, select **TCP** and enter `3000` in the port field:
  
-In the **"Protocols and Ports"**, click on **"TCP"**, and mention the port number **"3000"**.
- 
-![Set Protocols and Ports  alt-text#center](images/firewall4.png "Figure 4: Protocols and Ports")
+![Google Cloud Console firewall rule configuration page showing Protocols and ports section with TCP checkbox selected and port 3000 entered in the Specified ports field, displaying Allow on match radio button selected, with clean white interface and blue Google Cloud styling alt-text#center](images/firewall4.png "Protocols and ports")
  
  
-Click on **"Create"**. The Firewall rule will be created successfully and can be viewed in the Firewall Policies Page:
+- Select **Create**. Your firewall rule is created and appears in the Firewall policies page:
 
-![ Create Firewall rule alt-text#center](images/firewall5.png "Figure 5: Create Firewall rule")
+![Google Cloud Console Firewall Policies page showing a list of firewall rules including the newly created allow-3000-ingress rule with status enabled, displaying rule names, directions, priorities, and actions in a clean white interface with blue Google Cloud branding alt-text#center](images/firewall5.png "Create Firewall rule")
 
  ## OS firewall (firewalld) on SUSE
 Once done, go back to your VM, install FirewallD:
 ```console
 sudo zypper install firewalld
 ```
-Now start FirewallD and execute the commands to allow port 3000:
+Now start FirewallD and run the commands to allow port 3000:
  
 ```console
 sudo systemctl start firewalld
@@ -296,18 +315,18 @@ Now that port 3000 is allowed in your VM’s ingress firewall rules, you can sta
 ```console
 rails server -b 0.0.0.0
 ```
-- This command lets you access Rails from your browser using the VM’s external IP.
+This command lets you access Rails from your browser using the VM’s external IP.
 
 
 ## Access the Rails application:
-Open a web browser on your local machine (Chrome, Firefox, Edge, etc.) and enter the following URL in the address bar:
+Open a web browser on your local machine and enter the following URL in the address bar:
 
 ```
 http://[YOUR_VM_EXTERNAL_IP]:3000
 ```
 - Replace `<YOUR_VM_PUBLIC_IP>` with the public IP of your GCP VM.
 
-You will see a Rails welcome page in your browser if everything is set up correctly. It looks like this:
+You will see a Rails welcome page in your browser if everything is set up correctly, as shown below:
 
 ![Rails default welcome page displaying Ruby on Rails framework logo with green and red styling, welcome message, and navigation links for About your application environment, getting started guide, and Rails documentation on a clean white background alt-text#center](images/rails-web.png "Ruby/Rails welcome page")
 
