@@ -18,9 +18,10 @@ Many developers begin their journey with Arm on K8s by adding Arm nodes to an ex
 2. Leveraging the multi-architectural container image of your existing x64 workload expedites the migration to Arm with minimal deployment modifications. 
 3. With both x64 and Arm workloads running in the same cluster, comparing performance across them is simplified.
 
-Even if you don't already have an existing AKS cluster, you're covered, as this learning path will walk you through bringing up an initial AKS environment and nginx workload on x64.  From there, you'll add Arm-based nodes running the same exact workload.  You'll see how to smoke test it (simple tests to verify functionality), and then performance test it (slightly more involved) to better understand the performance characteristics of each architecture.
+This Learning Path explains how to create an initial AKS environment and install nginx on x64.  From there, you'll add Arm-based nodes running the same exact workload.  You'll see how to run simple tests to verify functionality, and then run performance testing to better understand the performance characteristics of each architecture.
 
-### Login to Azure via azure-cli 
+### Login to Azure using the Azure CLI
+
 To begin, login to your Azure account using the Azure CLI:
 
 ```bash
@@ -28,12 +29,14 @@ az login
 ```
 
 ### Create the cluster and resource
+
 Once logged in, create the resource group and AKS cluster with two node pools: one with Intel-based nodes (Standard_D2s_v6), and one with Arm-based (Standard_D2ps_v6) nodes.  
 
 {{% notice Note %}}
-This tutorial uses the `westus2` region, which supports both Intel and Arm VM sizes. You can choose a different region if you prefer, but ensure it supports both VMs and AKS.
+This tutorial uses the `westus2` region, which supports both Intel and Arm VM sizes. You can choose a different region if you prefer, but ensure it supports both VM types and AKS.
 {{% /notice %}}
 
+Set the environment variables as shown below and run the `az aks` commands on your command line.
  
 ```bash
 # Set environment variables
@@ -107,16 +110,15 @@ A message similar to the following should be displayed:
 
 ```output
 Kubernetes control plane is running at https://nginx-on-a-nginx-on-arm-rg-dd0bfb-eenbox6p.hcp.westus2.azmk8s.io:443
-...
 ```
 
-With the cluster running, verify the node pools are ready (and you're ready to continue to the next chapter), with the following command:
+With the cluster running, verify the node pools are ready with the following command:
 
 ```bash
 kubectl get nodes -o wide
 ```
 
-You should see output similar to this:
+You should see output similar to:
 
 ```output
 NAME                            STATUS   ROLES    AGE    VERSION
@@ -125,4 +127,4 @@ aks-intel-39600573-vmss000002   Ready    <none>   6h8m   v1.32.7
 ```
 
 
-With all nodes showing `Ready` status, you're ready to continue to the next chapter.
+With all nodes showing `Ready` status, you're ready to continue to the next section.

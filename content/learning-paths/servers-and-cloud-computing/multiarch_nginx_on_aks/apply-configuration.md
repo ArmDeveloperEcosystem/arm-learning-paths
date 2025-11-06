@@ -6,15 +6,15 @@ weight: 70
 layout: learningpathall
 ---
 
-## Apply configuration updates
+## Install btop monitoring tool on nginx pods
 
-Now that you have all your nginx deployments running across Intel and ARM architectures, you can monitor performance across each architecture using wrk to generate load and btop to monitor system performance.
+Now that you have all your nginx deployments running across Intel and Arm architectures, you can monitor performance across each architecture using wrk to generate load and btop to monitor system performance.
 
 {{% notice Note %}}
-This tutorial uses wrk to generate load, which is readily available on apt and brew package managers.  [wrk2](https://github.com/giltene/wrk2) is a modern fork of wrk with additional features.  wrk was chosen for this tutorial due to its ease of install, but if you prefer to install and use wrk2 (or other http load generators) for your testing, feel free to do so.
+This tutorial uses [wrk](https://github.com/wg/wrk) to generate load, which is readily available on apt and brew package managers. [wrk2](https://github.com/giltene/wrk2) is a modern fork of wrk with additional features. wrk was chosen for this tutorial due to its ease of installation, but if you prefer to install and use wrk2 (or other http load generators) for your testing, feel free to do so.
 {{% /notice %}}
 
-### Apply performance configuration
+### Install btop and apply optimized configuration
 
 The `nginx_util.sh` script includes a `put config` command that will:
 
@@ -22,7 +22,7 @@ The `nginx_util.sh` script includes a `put config` command that will:
 - Install btop monitoring tool on all pods for system monitoring
 - Restart pods with the new configuration
 
-1. Run the following command to apply the configuration updates:
+Run the following command to apply the configuration updates:
 
 ```bash
 ./nginx_util.sh put btop
@@ -41,9 +41,9 @@ Installing btop on nginx-intel-deployment-6f5bff9667-zdrqc...
 ✅ btop installed on all pods!
 ```
 
-### Verify configuration updates
+### Check pod restart status
 
-2. Check that all pods have restarted with the new configuration:
+Check that all pods have restarted with the new configuration:
 
 ```bash
 kubectl get pods -n nginx
@@ -52,57 +52,72 @@ kubectl get pods -n nginx
 You should see all pods with recent restart times.
 
 {{% notice Note %}}
-Because pods are ephemeral, btop will need to be reinstalled if the pods are deleted or restarted.  If you get an error saying btop is not found, simply rerun the `./nginx_util.sh put btop` command to reinstall it.
+Because pods are ephemeral, btop will need to be reinstalled if the pods are deleted or restarted. If you get an error saying btop is not found, rerun the `./nginx_util.sh put btop` command to reinstall it.
 {{% /notice %}}
 
 
-### Monitor pod performance
+### Set up real-time performance monitoring
 
-You can now login to any pod and use btop to monitor system performance.  There are many variables which may affect an individual workload's performance, btop (like top), is a great first step in understanding those variables.
+You can now log in to any pod and use btop to monitor system performance. There are many variables that can affect an individual workload's performance, and btop (like top) is a great first step in understanding those variables.
 
 {{% notice Note %}}
-When performing load generation tests from your laptop, local system and network settings may interfere with proper load generation between your machine and the remote cluster services.  To mitigate these issues, its suggested to install the nginx_util.sh (or whichever tool you wish to use) on a [remote Azure instance](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/azure/) in the same region and zone as your K8s cluster (us-west-2 if you follow these tutorial instructions exactly) for best results.  If you aren't seeing at least 70K+ requests/s to either K8s service endpoint, switching to a better located/tuned system is advised.
+When performing load generation tests from your laptop, local system and network settings may interfere with proper load generation between your machine and the remote cluster services. To mitigate these issues, it's suggested to install the `nginx_util.sh` script on a [remote Azure instance](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/azure/) in the same region and zone as your K8s cluster for best results. If you aren't seeing at least 70K+ requests/s to either K8s service endpoint, switching to a better located system is advised.
 {{% /notice %}}
 
-Bringing up two btop terminals, one for each pod, is a convenient way to view performance in realtime. To bring up btop on both Arm and Intel pods:
+Running two btop terminals, one for each pod, is a convenient way to view performance in real time. 
 
-1. Open a new terminal window or tab.
-2. Within the terminal, run the `login arm` command from the nginx utility script to enter the pod: 
+To bring up btop on both Arm and Intel pods:
+
+1. Open two new terminal windows
+2. In one terminal, run `login arm` from the nginx utility script to enter the pod 
+3. In the second terminal, run `login intel` from the nginx utility script to enter the pod 
+4. Once inside each pod, run btop to see real-time system monitoring
+
+The commands are shown below.
+
+For the Arm terminal:
 
 ```bash
-# Login to AMD pod (replace with intel or arm as needed)
 ./nginx_util.sh login arm
 ```
 
-3. Once inside the pod, run btop to see real-time system monitoring:
+For the Intel terminal:
+
+```bash
+./nginx_util.sh login intel
+```
+
+In both terminals run:
 
 ```bash
 btop --utf-force
 ```
-4. Repeat, from Step 1, but this time, using the `login intel` command.
 
-You should now see something similar to below, that is, one terminal for each Arm and Intel, running btop:
+You should now see something similar to the image below, with one terminal for each Arm and Intel pod running btop:
 
 ![Project Overview](images/btop_idle.png)
 
-To visualize performance with btop against the Arm and Intel pods via the load balancer service endpoints, you can use the nginx_util.sh wrapper to generate the load two both simultaneoulsy:
+To visualize performance with btop against the Arm and Intel pods via the load balancer service endpoints, you can use the `nginx_util.sh` wrapper to generate load to both simultaneously:
 
 ```bash
 ./nginx_util.sh wrk both
 ```
 
-This runs wrk with predefined setting (1 thread, 50 simultaneous connections) to generate load to the K8s architecture-specific endpoints. While it runs (for a default of 30s), you can observe some performance characteristics from the btop outputs:
+This runs wrk with predefined settings (1 thread, 50 simultaneous connections) to generate load to the K8s architecture-specific endpoints. 
+
+While it runs (for a default of 30s), you can observe some performance characteristics from the btop outputs:
 
 ![Project Overview](images/under_load.png)
 
-Of particular interest is memory and CPU resource usage per pod.  For Intel, figure 1 shows memory usage for the process, with figure 2 showing total cpu usage.  Figures 3 and 4 show us the same metrics, but for Arm.
+Of particular interest is memory and CPU resource usage per pod. For Intel, red marker 1 shows memory usage for the process, and red marker 2 shows total CPU usage.  
+
+Red markers 3 and 4 show the same metrics for Arm.
 
 ![Project Overview](images/mem_and_cpu.png)
 
-In addition to the visual metrics, the script also returns runtime results including requests per second, and latencies:
+In addition to the visual metrics, the script also returns runtime results including requests per second and latencies:
 
 ```output
-azureuser@gcohen-locust-1:/tmp/1127$ ./nginx_util.sh wrk both
 Running wrk against both architectures in parallel...
 
 Intel: wrk -t1 -c50 -d30 http://172.193.227.195/
@@ -134,9 +149,9 @@ Transfer/sec:     26.24MB
 Both tests completed
 ```
 
-### Experimenting with wrk
+### Customize load testing parameters
 
-The nginx_util.sh script shows the results of the load generation, as well as the command lines used to generate them.  
+The `nginx_util.sh` script shows the results of the load generation, as well as the command lines used to generate them.  
 
 ```output
 ...
@@ -146,21 +161,23 @@ ARM: wrk -t1 -c50 -d30 http://20.252.73.72/
 ```
 
 
-Feel free to experiment increasing/decreasing client threads, connections, and durations to better understand the performance characteristics under different scenarios.  
+Feel free to experiment with by increasing and decreasing client threads, connections, and durations to better understand the performance characteristics under different scenarios.
 
-For example, to generate load using 500 connections across 4 threads to the Arm service for five minutes (300s), you could use the following commandline:
+For example, to generate load using 500 connections across 4 threads to the Arm service for 5 minutes (300s), you can use the following command:
 
 ```bash
 wrk -t4 -c500 -d300 http://20.252.73.72/
 ``` 
 
-As mentioned earlier, unless your local system is tuned to handle load generation, you may find better traffic generation results by running on a VM. If aren't seeing at least 70K+ requests/s to either K8s service endpoint when running `wrk`, switching to a better located/tuned system is advised.
-
 ## Next Steps
 
-You learned in this learning path how to run a sample nginx workload on a dual-architecture (Arm and Intel) Azure Kubernetes Service.  Once setup, you learned how to generate load with the wrk utility, and monitor runtime metrics with btop.  If you wish to continue experimenting with this learning path, some ideas you may wish to explore include:
+You have learned how to run a sample nginx workload on a dual-architecture (Arm and Intel) Azure Kubernetes Service.
+
+You learned how to generate load with the wrk utility and monitor runtime metrics with btop.  
+
+Here are some ideas for further exploration: 
 
 * What do the performance curves look like between the two architectures as a function of load?
 * How do larger instance types scale versus smaller ones?
 
-Most importantly, you now possess the knowledge needed to begin experimenting with your own workloads on Arm-based AKS nodes to identify performance and efficiency opportunities unique to your own environments.
+You now have the knowledge to experiment with your own workloads on Arm-based AKS nodes to identify performance and efficiency opportunities unique to your own environments.

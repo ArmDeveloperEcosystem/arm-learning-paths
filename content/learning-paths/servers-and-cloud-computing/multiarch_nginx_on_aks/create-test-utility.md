@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Test utility script
 
-You'll create a utility script to test and manage your nginx services across all architectures. This script will be used throughout the tutorial to test services, apply configurations, and access pods.
+In this section, you'll create a utility script to test and manage your nginx services across both architectures. The script will be used throughout the Learning Path to test services, apply configurations, and access pods.
 
 ### Script functionality
 
@@ -18,18 +18,19 @@ The `nginx_util.sh` script provides three main functions:
 - **`put btop`** - Install btop monitoring tool on all pods
 - **`login intel|arm`** - Interactive bash access to architecture-specific pods
 
-The script conveniently bundles test and logging commands into a single place, making it easy to test, troubleshoot, and view services. You'll use it throughout the tutorial to test services, apply configurations, and access pods across all architectures.
+The script conveniently bundles test and logging commands into a single place, making it easy to test, troubleshoot, and view services. 
 
-
-### Create the utility script
+### Download the utility script
 
 {{% notice Note %}}
-The following utility `nginx_util.sh` is provided for convenience. 
+The following utility `nginx_util.sh` is provided for your convenience. 
 
 It's a wrapper for kubectl and other commands, utilizing [curl](https://curl.se/).  Make sure you have curl installed before running.
+
+You can click on the link below to review the code before downloading. 
 {{% /notice %}}
 
-Copy and paste the following command into a terminal to download and create the `nginx_util.sh` script:
+Copy and paste the following commands into a terminal to download and create the `nginx_util.sh` script:
 
 ```bash
 curl -o nginx_util.sh https://raw.githubusercontent.com/geremyCohen/nginxOnAKS/refs/heads/main/nginx_util.sh
@@ -42,9 +43,10 @@ In the folder you ran the curl command, you should now see the `nginx_util.sh` s
 ./nginx_util.sh
 ```
 
-The output should include usage instructions:
+The output presents the usage instructions:
+
 ```output
 Invalid first argument. Use 'curl', 'wrk', 'put', or 'login'.
 ```
 
-With it working, you're now ready to deploy nginx to the Intel nodes in the cluster.
+You're now ready to deploy nginx to the Intel nodes in the cluster.
