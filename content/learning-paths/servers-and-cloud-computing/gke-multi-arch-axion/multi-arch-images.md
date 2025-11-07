@@ -65,13 +65,14 @@ ENTRYPOINT ["python","email_server.py"]
 EOF
 ```
 
-{{% details title="Details (optional)" %}}
+**What these edits do**
+
 - **BuildKit syntax** unlocks `--mount=type=cache` to speed rebuilds.
 - **TARGETPLATFORM** lets Buildx set linux/amd64 vs linux/arm64 explicitly.
 - **Dev vs runtime packages:** build stage compiles native wheels; final stage keeps only needed shared libs.
 - **`--prefer-binary`** avoids source builds when wheels exist (more reliable across arches).
 - **Removed extra `apk update`** since `apk add --no-cache` already avoids stale indexes & caches.
-{{% /details %}}
+
 
 #### Apply equivalent updates to the other three services
 
