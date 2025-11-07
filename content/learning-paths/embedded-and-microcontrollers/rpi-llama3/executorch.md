@@ -59,6 +59,7 @@ After cloning the repository, the project's submodules are updated, and two scri
 ``` bash
 git clone https://github.com/pytorch/executorch.git
 cd executorch
+git checkout release/1.0
 git submodule sync
 git submodule update --init --recursive
 ./install_executorch.sh
