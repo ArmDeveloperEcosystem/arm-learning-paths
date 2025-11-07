@@ -22,7 +22,6 @@ prerequisites:
     - Basic familiarity with Docker, Kubernetes, and gcloud.
 
 author: 
-   - Pranay Bakre
    - Rani Chowdary Mandepudi
 
 ### Tags
