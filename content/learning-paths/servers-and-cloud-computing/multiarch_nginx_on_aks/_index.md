@@ -1,5 +1,5 @@
 ---
-title: Add Arm nodes to your Azure Kubernetes Services cluster using a multi-architecture nginx container image 
+title: Build hybrid AKS clusters with Arm nodes and nginx
 
 draft: true
 cascade:
@@ -7,14 +7,14 @@ cascade:
 
 minutes_to_complete: 60
 
-who_is_this_for: This Learning Path is for developers who want to compare the performance of x64 and arm64 deployments by running nginx on a hybrid Azure Kubernetes Service (AKS) cluster using nginx's multi-architecture container image.  Once you've seen how easy it is to add arm64 nodes to an existing cluster, you'll be ready to explore arm64-based nodes for other workloads in your environment.
-
+who_is_this_for: This Learning Path is for developers who want to understand nginx performance on x64 and arm64 deployments by running a hybrid Azure Kubernetes Service (AKS) cluster. 
 
 learning_objectives:
-  - Create a hybrid AKS cluster with x64 and arm64 nodes.
-  - Deploy nginx's multi-architecture container image, pods, and services to the AKS cluster. 
-  - Smoke test nginx from each architecture in the cluster to verify proper installation.
-  - Performance test against each architecture in the cluster to better understand performance.
+  - Create a hybrid AKS cluster with x64 and arm64 nodes
+  - Deploy nginx's multi-architecture container image, pods, and services to the AKS cluster
+  - Smoke test nginx from each architecture in the cluster to verify proper installation
+  - Test the performance of each architecture in the cluster
+  - Apply the same process to other kubernetes workloads
   
 
 prerequisites:
@@ -35,7 +35,6 @@ armips:
 
 operatingsystems:
     - Linux
-    - macOS
 
 tools_software_languages:
     - nginx

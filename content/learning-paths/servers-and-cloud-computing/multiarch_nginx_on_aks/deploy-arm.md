@@ -1,20 +1,20 @@
 ---
-title: Deploy nginx ARM to the cluster
+title: Deploy nginx on Arm 
 weight: 50
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Add ARM deployment and service
+## Add the Arm deployment and service
 
-In this section, you'll add nginx on ARM nodes to your existing cluster, completing your multi-architecture Intel/ARM environment for comprehensive performance comparison.
+In this section, you'll add nginx on Arm to your existing cluster, completing your multi-architecture Intel/Arm environment for comprehensive performance comparison.
 
 When applied, the **arm_nginx.yaml** file creates the following K8s objects:
-   - **Deployment** (`nginx-arm-deployment`) - Pulls the multi-architecture nginx image from DockerHub, launches a pod on the ARM node, and mounts the shared ConfigMap as `/etc/nginx/nginx.conf`
+   - **Deployment** (`nginx-arm-deployment`) - Pulls the multi-architecture nginx image from DockerHub, launches a pod on the Arm node, and mounts the shared ConfigMap as `/etc/nginx/nginx.conf`
    - **Service** (`nginx-arm-svc`) - Load balancer targeting pods with both `app: nginx-multiarch` and `arch: arm` labels
 
-Copy and paste the following commands into a terminal to download and apply the ARM deployment and service:
+Copy and paste the following commands into a terminal to download and apply the Arm deployment and service:
 
 ```bash
 curl -o arm_nginx.yaml https://raw.githubusercontent.com/geremyCohen/nginxOnAKS/refs/heads/main/arm_nginx.yaml
@@ -30,9 +30,9 @@ service/nginx-arm-svc created
 
 ### Examining the deployment configuration
 
-Taking a closer look at the `arm_nginx.yaml` deployment file, you'll see settings optimized for ARM architecture:
+Taking a closer look at the `arm_nginx.yaml` deployment file, you'll see settings optimized for the Arm architecture:
 
-* The `nodeSelector` `kubernetes.io/arch: arm64`. This ensures that the deployment only runs on ARM nodes, utilizing the arm64 version of the nginx container image.
+The `nodeSelector` value of `kubernetes.io/arch: arm64` ensures that the deployment only runs on Arm nodes, utilizing the `arm64` version of the nginx container image.
 
 ```yaml
     spec:
@@ -40,7 +40,7 @@ Taking a closer look at the `arm_nginx.yaml` deployment file, you'll see setting
         kubernetes.io/arch: arm64
 ```
 
-* The service selector uses both `app: nginx-multiarch` and `arch: arm` labels to target only ARM pods. This dual-label approach allows for both architecture-specific and multi-architecture service routing.
+The service selector uses both `app: nginx-multiarch` and `arch: arm` labels to target only Arm pods. This dual-label approach allows for both architecture-specific and multi-architecture service routing.
 
 ```yaml
   selector:
@@ -50,7 +50,7 @@ Taking a closer look at the `arm_nginx.yaml` deployment file, you'll see setting
 
 ### Verify the deployment
 
-1. Get the status of nodes, pods and services by running:
+Get the status of nodes, pods and services by running:
 
 ```bash
 kubectl get nodes,pods,svc -nnginx 
@@ -78,16 +78,18 @@ You can also verify the shared ConfigMap is available:
 kubectl get configmap -nnginx
 ```
 
+The output is similar to:
+
 ```output
 NAME               DATA   AGE
 nginx-config       1      10m
 ```
 
-When the pods show `Running` and the service shows a valid `External IP`, you're ready to test the nginx ARM service.
+When the pods show `Running` and the service shows a valid `External IP`, you're ready to test the nginx Arm service.
 
-### Test the nginx web service on ARM
+### Test the nginx web service on Arm
 
-2. Run the following to make an HTTP request to the ARM nginx service using the script you created earlier:
+Run the following command to make an HTTP request to the Arm nginx service using the script you created earlier:
 
 ```bash
 ./nginx_util.sh curl arm
@@ -107,7 +109,7 @@ Response:
 Served by: nginx-arm-deployment-5bf8df95db-wznff
 ```
 
-If you see output similar to above, you have successfully added ARM nodes to your cluster running nginx.
+If you see similar output, you have successfully added Arm nodes to your cluster running nginx.
 
 ### Compare both architectures
 

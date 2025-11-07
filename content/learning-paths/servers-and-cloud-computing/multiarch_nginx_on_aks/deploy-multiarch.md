@@ -1,20 +1,20 @@
 ---
-title: Deploy nginx multiarch service to the cluster
+title: Deploy a nginx multiarch service
 weight: 60
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Add multiarch service
+## Add a multi-architecture service to your cluster
 
-You now have nginx running on Intel and ARM nodes with architecture-specific services. In this section, you'll create a multiarch service that can route to any available nginx pod regardless of architecture, providing load balancing across all architectures.
+You now have nginx running on Intel and Arm nodes with architecture-specific services. In this section, you'll create a multi-architecture service that can route to any available nginx pod regardless of architecture, providing load balancing across both architectures.
 
 ### Create the multiarch service
 
-The multiarch service targets all pods with the `app: nginx-multiarch` label (all nginx deployments share this label). It uses `sessionAffinity: None` to ensure requests are distributed across all available pods without stickiness, and can route to Intel or ARM pods based on availability and load balancing algorithms.
+The multiarch service targets all pods with the `app: nginx-multiarch` label (all nginx deployments share this label). It uses `sessionAffinity: None` to ensure requests are distributed across all available pods without stickiness, and can route to Intel or Arm pods based on availability and load balancing algorithms.
 
-1. Run the following command to download and apply the multiarch service:
+Run the following commands to download and apply the multiarch service:
 
 ```bash
 curl -sO https://raw.githubusercontent.com/geremyCohen/nginxOnAKS/main/multiarch_nginx.yaml
@@ -27,7 +27,7 @@ You see the following response:
 service/nginx-multiarch-svc created
 ```
 
-2. Get the status of all services by running:
+Next, get the status of all services by running:
 
 ```bash
 kubectl get svc -nnginx 
@@ -42,7 +42,7 @@ nginx-intel-svc       LoadBalancer   10.0.226.250   20.80.128.191   80:30080/TCP
 nginx-multiarch-svc   LoadBalancer   10.0.40.169    20.99.208.140   80:30083/TCP   38s
 ```
 
-3. Check which pods the multiarch service can route to:
+Check which pods the multiarch service can route to:
 
 ```bash
 kubectl get endpoints nginx-multiarch-svc -nnginx
@@ -55,9 +55,11 @@ NAME                  ENDPOINTS                      AGE
 nginx-multiarch-svc   10.244.0.21:80,10.244.1.1:80   47s
 ```
 
+You are ready to test the multiarch service. 
+
 ### Test the nginx multiarch service
 
-4. Run the following to make HTTP requests to the multiarch nginx service:
+Run the following to make HTTP requests to the multiarch nginx service:
 
 ```bash
 ./nginx_util.sh curl multiarch
@@ -77,7 +79,7 @@ Response:
 Served by: nginx-arm-deployment-5bf8df95db-wznff
 ```
 
-5. Run the command multiple times to see load balancing across architectures:
+Run the command multiple times to see load balancing across architectures:
 
 ```bash
 ./nginx_util.sh curl multiarch
@@ -85,9 +87,9 @@ Served by: nginx-arm-deployment-5bf8df95db-wznff
 ./nginx_util.sh curl multiarch
 ```
 
-The responses will show requests being served by different architecture deployments (intel or arm), demonstrating that the multiarch service distributes load across all available pods.
+The responses will show requests being served by different architecture deployments (Intel or Arm), demonstrating that the multiarch service distributes the load across the available pods.
 
-### Compare architecture-specific vs multiarch routing
+### Compare architecture-specific versus multiarch routing
 
 Now you can compare the behavior:
 
