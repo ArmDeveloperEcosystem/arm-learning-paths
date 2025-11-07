@@ -1,18 +1,22 @@
 ---
-title: Provision a Dual-Arch GKE Cluster and Publish Multi-Arch Images
+title: Provision a dual-architecture GKE cluster and publish images
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Now create a **GKE cluster** with **two node pools** (amd64 & arm64), then build and push multi-arch images natively on those node pools. Each architecture uses its own BuildKit pod, and no QEMU emulation is involved.
+You are ready to create a GKE cluster with two node pools (amd64 and arm64), then build and push multi-arch images natively on those node pools. 
 
-#### Networking (VPC-native / IP aliasing)
+Each architecture uses its own BuildKit pod, and no QEMU emulation is required.
 
-GKE uses **VPC-native (IP aliasing)** and requires **two secondary ranges** on the chosen subnet: one for **Pods** and one for **Services**.
-- **Default VPC:** Skip this step. GKE will create the secondary ranges automatically.
-- **Custom VPC/subnet:** Set variables and add/verify secondary ranges:
+## Networking configuration
+
+GKE uses VPC-native (IP aliasing) and requires two secondary ranges on the chosen subnet: one for Pods and one for Services.
+
+For the default VPC, GKE creates the secondary ranges automatically.
+
+Run the commands below in your terminal, adjusting the environment variables as needed for your account:
 
 ```bash
 # Set/confirm network variables (adjust to your environment)
@@ -29,13 +33,14 @@ gcloud compute networks subnets list --network "${NETWORK}" --regions "${REGION}
 # If missing, add two secondary ranges (example CIDRs; ensure no overlap)
 gcloud compute networks subnets update "${SUBNET}" --region "${REGION}" --add-secondary-ranges ${POD_RANGE_NAME}=10.8.0.0/14,${SVC_RANGE_NAME}=10.4.0.0/20
 ```
-This avoids users on default VPC accidentally setting NETWORK/SUBNET and passing the wrong flags later.
 
-### Create the GKE cluster
+This approach prevents users on the default VPC from accidentally setting NETWORK/SUBNET variables and passing incorrect flags later.
 
-Create a GKE Standard cluster with VPC-native (IP aliasing) enabled and no default node pool (you'll add amd64 and arm64 pools next). The command below works for both default and custom VPCs: if NETWORK, SUBNET, and the secondary range variables are unset, GKE uses the default VPC and manages ranges automatically.
+## Create the GKE cluster
 
-Create the cluster with no default node pool and add node pools explicitly.
+Create a GKE Standard cluster with VPC-native (IP aliasing) enabled and no default node pool. You'll add amd64 and arm64 pools in the next step.
+
+The command below works for both default and custom VPCs. If the NETWORK, SUBNET, and secondary range variables are unset, GKE uses the default VPC and manages ranges automatically.
 
 ```bash
 # Cluster vars (reuses earlier PROJECT_ID/REGION/ZONE)
@@ -46,7 +51,7 @@ export CLUSTER_NAME="${CLUSTER_NAME:-gke-multi-arch-cluster}"
 gcloud container clusters create "${CLUSTER_NAME}" --region "${REGION}" --enable-ip-alias --num-nodes "1" --machine-type "e2-standard-2" ${NETWORK:+--network "${NETWORK}"} ${SUBNET:+--subnetwork "${SUBNET}"} ${POD_RANGE_NAME:+--cluster-secondary-range-name "${POD_RANGE_NAME}"} ${SVC_RANGE_NAME:+--services-secondary-range-name "${SVC_RANGE_NAME}"}
 ```
 
-Create an x86 (amd64) pool and an Arm (arm64) pool. Use machine types available in your region (e.g., c4-standard-* for x86 and c4a-standard-* for Axion). 
+Now create an x86 (amd64) pool and an Arm (arm64) pool. Use machine types available in your region. The commands below use `c4-standard-*` for x86 and `c4a-standard-*` for Axion:
 
 ```bash
 # amd64 pool (x86)
@@ -67,14 +72,14 @@ kubectl config current-context
 kubectl get nodes -o wide
 kubectl get nodes -L kubernetes.io/arch
 ```
-You should see nodes for both architectures. In zonal clusters (or when a pool has --num-nodes=1 in a single zone), expect one amd64 and one arm64 node. In regional clusters, --num-nodes is per zone, with three zones you'll see three amd64 and three arm64 nodes.
 
-### Create the Buildx builder on GKE (native, one pod per arch)
+You should see nodes for both architectures. In zonal clusters (or when a pool has `--num-nodes=1` in a single zone), expect one amd64 and one arm64 node. In regional clusters, `--num-nodes` is per zone, so with three zones you'll see three amd64 and three arm64 nodes.
 
-Now run a BuildKit pod on an amd64 node and another on an arm64 node. Buildx will route each platform's build to the matching pod - native builds, no emulation.
+## Create the Buildx builder on GKE 
+
+Now run a BuildKit pod on an amd64 node and another on an arm64 node. Buildx routes each platform's build to the matching pod. These are native builds with no QEMU emulation.
 
 ```bash
-
 # Namespace for BuildKit pods
 kubectl create ns buildkit --dry-run=client -o yaml | kubectl apply -f -
 
@@ -87,14 +92,16 @@ docker buildx create --driver kubernetes --append --name gke-native --driver-opt
 # Bootstrap and verify pods
 docker buildx inspect gke-native --bootstrap
 kubectl -n buildkit get pods -o wide
-
 ```
-{{% notice Note %}}
-You will now have a multi-node Buildx builder named gke-native. Each BuildKit pod is pinned to a specific CPU arch via nodeselector.
-{{% /notice %}}
 
-### Build & push all services (multi-arch manifest lists)
-Build every service for linux/amd64 and linux/arm64 using the GKE-backed builder:
+You now have a multi-node Buildx builder named `gke-native`. Each BuildKit pod is pinned to a specific CPU architecture using node selectors.
+
+## Build and push all services
+
+You can now build all services for `linux/amd64` and `linux/arm64` using the GKE-backed builder.
+
+Run the commands:
+
 ```bash
 cat << 'EOF' > build-all-multiarch.sh
 #!/usr/bin/env bash
@@ -132,9 +139,10 @@ EOF
 chmod +x build-all-multiarch.sh
 ./build-all-multiarch.sh
 ```
-Each :v1 you push is a manifest list that points to two images (one per arch).
 
-### Verify manifest lists and per-arch pulls
+Each tag you push is a manifest list that points to two images, one per architecture.
+
+## Verify manifest lists and per-arch pulls
 
 List pushed images:
 
@@ -142,13 +150,17 @@ List pushed images:
 gcloud artifacts docker images list "${GAR}"
 ```
 
-Inspect one tag (should show both platforms):
+Inspect one tag to confirm it shows both platforms:
+
 ```bash
 docker buildx imagetools inspect "${GAR}/adservice:v1"
 ```
 
-Expected Output:
-```
+The output is:
+
+```output
 Platform: linux/amd64
 Platform: linux/arm64
 ```
+
+You are now ready to prepare the application manifests and deploy the application.

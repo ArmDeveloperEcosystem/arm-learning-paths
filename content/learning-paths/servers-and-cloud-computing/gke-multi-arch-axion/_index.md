@@ -1,25 +1,25 @@
 ---
 title: From x86 to Arm on GKE - Build, Deploy, and Migrate with Google Axion
+
 draft: true
 cascade:
     draft: true
 
 minutes_to_complete: 90
 
-who_is_this_for: This learning path is for cloud, platform, and SRE engineers operating Kubernetes on Google Cloud who need a prescriptive path to build multi‑architecture images and migrate services from x86 to Arm (Google Axion) using production‑grade practices.
+who_is_this_for: This is an advanced topic for cloud, platform, and site reliability engineers operating Kubernetes on Google Cloud who need a prescriptive path to build multi-architecture images and migrate services from x86 to Arm using Google Axion processors.
 
 learning_objectives:
-    - Prepare Dockerfiles for multi-architecture builds (minimal, safe edits so services compile and run on amd64 & arm64).
-    - Create a dual-architecture GKE Standard cluster with two node pools, amd64 and arm64 (Axion-based C4A).
-    - Build and publish multi-architecture images to Artifact Registry using Docker Buildx (Kubernetes driver) - BuildKit pods run natively on both pools (no QEMU or extra build VMs).
-    - Deploy to amd64 first, then migrate to arm64 using Kustomize overlays and progressive rollout.
-    - Optionally automate builds and rollouts end-to-end with Cloud Build and Skaffold.
+    - Prepare Dockerfiles for multi-architecture builds by adding arm64 support
+    - Create a dual-architecture GKE standard cluster with two node pools, amd64 and arm64
+    - Build and publish multi-architecture images to Artifact Registry using Docker Buildx without using QEMU to emulate Arm instructions
+    - Deploy a Kubernetes application amd64 first, then migrate to arm64 using Kustomize overlays and progressive rollout
+    - Optionally automate builds and rollouts with Cloud Build and Skaffold
     
 prerequisites:
-    - A [Google Cloud account](https://console.cloud.google.com/) with billing enabled. 
-    - Cloud Shell access (used as the control plane, includes gcloud, kubectl, and Docker Buildx).
-    - (Optional if not using Cloud Shell) A Linux/macOS workstation with Docker (Buildx enabled), kubectl, the Google Cloud CLI (gcloud), and Git.
-    - Basic familiarity with Docker, Kubernetes, and gcloud.
+    - A [Google Cloud account](https://console.cloud.google.com/) with billing enabled
+    - A local Linux or macOS computer or Cloud Shell access with Docker, Kubernetes CLI (kubectl), Google Cloud CLI (gcloud), and Git installed
+    - Basic familiarity with Docker, Kubernetes, and gcloud
 
 author: 
    - Rani Chowdary Mandepudi
@@ -43,7 +43,7 @@ further_reading:
         title: GKE documentation
         link: https://cloud.google.com/kubernetes-engine/docs
         type: documentation
-    -  resource:
+    - resource:
         title: Create Arm-based clusters and node pools 
         link: https://cloud.google.com/kubernetes-engine/docs/how-to/create-arm-clusters-nodes
         type: documentation
