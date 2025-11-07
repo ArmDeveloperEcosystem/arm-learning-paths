@@ -1,27 +1,34 @@
 ---
-title:  Automate builds and rollout with Cloud Build & Skaffold
+title: Automate builds and rollout with Cloud Build and Skaffold
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Google [**Cloud Build**](https://cloud.google.com/build/docs/set-up) is a managed CI/CD service that runs your containerized build and deploy steps in isolated runners. In this page you'll automate the flow you performed manually: **build multi-arch images, deploy to GKE on amd64, then migrate to arm64**, and print the app's external IP.
+Google [**Cloud Build**](https://cloud.google.com/build/docs/set-up) is a managed CI/CD service that runs your containerized build and deploy steps in isolated runners. 
 
-## What this pipeline does
-- Authenticates Docker to **Artifact Registry**.
-- Builds and pushes **amd64 + arm64** images with **Docker Buildx** (QEMU enabled in the runner).
-- Connects to your **GKE** cluster.
-- Applies the **amd64** Kustomize overlay, verifies pods, then applies the **arm64** overlay and verifies again.
-- Prints the **frontend-external** LoadBalancer IP at the end. 
+In this section, you'll automate the flow you performed manually: build multi-arch images, deploy to GKE on amd64, then migrate to arm64, and print the app's external IP.
 
+## What does this pipeline do?
+
+The pipeline performs the following steps:
+
+- Authenticates Docker to your Artifact Registry
+- Builds and pushes amd64 and arm64 images with Docker Buildx, with QEMU enabled in the runner
+- Connects to your GKE cluster
+- Applies the amd64 Kustomize overlay, verifies pods, then applies the arm64 overlay and verifies pods again
+- Prints the frontend-external LoadBalancer IP at the end
 
 {{% notice Tip %}}
-Run this from the **microservices-demo** repo root in **Cloud Shell**. Ensure you completed earlier pages (GAR created, images path/tag decided, GKE cluster with amd64 + arm64 node pools, and Kustomize overlays present).
+Run this from the microservices-demo repo root in Cloud Shell. Ensure you completed the previous steps. 
 {{% /notice %}}
 
-## Grant IAM to the Cloud Build service account
+## Grant IAM permission to the Cloud Build service account
+
 Cloud Build runs as a per-project service account: `<PROJECT_NUMBER>@cloudbuild.gserviceaccount.com`. Grant it the minimal roles needed to build, push, log, and interact with GKE.
+
+Grant the required roles:
 
 ```bash
 # Uses env vars set earlier: PROJECT_ID, REGION, CLUSTER_NAME, GAR
@@ -37,9 +44,11 @@ gcloud projects add-iam-policy-binding "${PROJECT_ID}" --member="serviceAccount:
 gcloud projects add-iam-policy-binding "${PROJECT_ID}" --member="serviceAccount:${CLOUD_BUILD_SA}" --role="roles/logging.logWriter" --condition=None --quiet
 ```
 
-## Update skaffold.yaml for deploy-only
+## Update the Skaffold configuration
 
-This will let Cloud Build handle image builds and use Skaffold only to apply the Kustomize overlays.
+Create a `skaffold.yaml` file for Cloud Build. This lets Cloud Build handle image builds and uses Skaffold only to apply the Kustomize overlays.
+
+Create the configuration:
 
 ```yaml
 # From the repo root (microservices-demo)
@@ -97,9 +106,11 @@ YAML
 
 ```
 
-##  Create cloudbuild.yaml
+## Create a YAML file for Cloud Build 
 
-This pipeline installs `Docker + Buildx` in the runner, enables QEMU, builds two services as examples (extend as desired), connects to your cluster, deploys to amd64, verifies, migrates to arm64, verifies, and prints the external IP.  ￼
+This pipeline installs Docker with Buildx in the runner, enables QEMU, builds two services as examples (extend as desired), connects to your cluster, deploys to amd64, verifies, migrates to arm64, verifies, and prints the external IP.  ￼
+
+Run the commands to create the `cloudbuild.yaml` file.
 
 ```yaml
 cat > cloudbuild.yaml <<'YAML'
@@ -239,7 +250,7 @@ In production, add one build step per microservice (or a loop) and enable cachin
 
 ## Run the pipeline
 
-From the repo root:
+Submit the build from the root of the repository: 
 
 ```bash
 gcloud builds submit --config=cloudbuild.yaml --substitutions=_CLUSTER="${CLUSTER_NAME}",_REGION="${REGION}",_REPO="${GAR}"
@@ -251,4 +262,4 @@ The final step prints in the build description:
 Open http://<EXTERNAL-IP> in your browser.
 ```
 
-Open that URL to load the storefront and confirm the full build - deploy - migrate flow is automated.
+Open the URL to load the storefront and confirm the full build, deploy, and migrate flow is automated.
