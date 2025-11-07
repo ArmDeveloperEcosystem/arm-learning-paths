@@ -47,6 +47,7 @@ Clone the ExecuTorch repository and install dependencies:
 cd $HOME
 git clone https://github.com/pytorch/executorch.git
 cd executorch
+git checkout release/1.0
 ```
 
 Set up internal submodules:
