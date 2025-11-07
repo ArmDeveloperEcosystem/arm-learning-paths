@@ -1,6 +1,6 @@
 ---
 title: Deploy nginx on Intel x86
-weight: 30
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,20 +8,17 @@ layout: learningpathall
 
 ## Deployment and service
 
-In this section, you'll add a new namespace, deployment, and service for nginx on Intel x86. The result will be a K8s cluster running nginx accessible via the Internet through a load balancer. 
+In this section, you'll add a new namespace, deployment, and service for `nginx` on Intel x86 architecture. The result will be a K8s cluster running `nginx` accessible through the Internet using a load balancer. 
 
-To better understand the individual components, the configuration is split into three files:
+The deployment configuration uses three separate files to organize the different components:
 
-`namespace.yaml` - Creates a new namespace called `nginx`, which contains all your K8s nginx objects
-
-`nginx-configmap.yaml` - Creates a shared ConfigMap (`nginx-config`) containing performance-optimized nginx configuration used by both Intel and Arm deployments
-
-`intel_nginx.yaml` - Creates the following K8s objects:
-   - **Deployment** (`nginx-intel-deployment`) - Pulls a multi-architecture [nginx image](https://hub.docker.com/_/nginx) from DockerHub, launches a pod on the Intel node, and mounts the shared ConfigMap as `/etc/nginx/nginx.conf`
-   - **Service** (`nginx-intel-svc`) - Load balancer targeting pods with both `app: nginx-multiarch` and `arch: intel` labels
-
-
-Run the following commands to download, create, and apply the namespace, ConfigMap, and Intel nginx deployment and service configuration:
+- A file called `namespace.yaml` that creates a dedicated `nginx` namespace to contain all your Kubernetes `nginx` objects. 
+- A file called `nginx-configmap.yaml` that contains a shared ConfigMap called `nginx-config` with performance-optimized `nginx` settings that both Intel and Arm deployments will use. 
+- A file called `intel_nginx.yaml` that creates two main Kubernetes objects: 
+  - A deployment called `nginx-intel-deployment` that pulls the multi-architecture [nginx image](https://hub.docker.com/_/nginx) from DockerHub and runs it on the Intel node
+  - A service called `nginx-intel-svc` that acts as a load balancer for pods labeled with both `app: nginx-multiarch` and `arch: intel`. The deployment automatically mounts the shared ConfigMap as `/etc/nginx/nginx.conf` to apply the optimized configuration.
+  
+  Run the following commands to download and apply the namespace, ConfigMap, and Intel nginx deployment configuration:
 
 ```bash
 curl -o namespace.yaml https://raw.githubusercontent.com/geremyCohen/nginxOnAKS/refs/heads/main/namespace.yaml
@@ -44,12 +41,12 @@ deployment.apps/nginx-intel-deployment created
 service/nginx-intel-svc created
 ```
 
-### Examine the deployment configuration
+## Examine the deployment configuration
 
-Take a closer look at the `intel_nginx.yaml` deployment file, you'll see some settings that ensure the deployment runs on the Intel x86 node. 
+Take a closer look at the `intel_nginx.yaml` deployment file. You'll see some settings that ensure the deployment runs on the Intel x86 node. 
 
 {{% notice Note %}}
-The `amd64` architecture label represents x86_64 nodes, which can be either AMD or Intel processors. In this tutorial, we're using Intel x64 nodes.
+The `amd64` architecture label represents x86_64 nodes, which can be either AMD or Intel processors. This Learning Path was tested on Intel x86 nodes.
 {{% /notice %}}
 
 The `nodeSelector` value is set to `kubernetes.io/arch: amd64`. This ensures that the deployment only runs on x86_64 nodes, utilizing the amd64 version of the nginx container image.
@@ -75,7 +72,7 @@ The service selector uses both `app: nginx-multiarch` and `arch: intel` labels t
     arch: intel
 ```
 
-Because the final goal is to run nginx on multiple architectures, the deployment uses the standard nginx image from DockerHub. This image supports multiple architectures, including amd64 (Intel) and arm64 (Arm).
+Because the final goal is to run `nginx` on multiple architectures, the deployment uses the standard `nginx` image from DockerHub. This image supports multiple architectures, including amd64 (Intel) and arm64 (Arm).
 
 ```yaml
       containers:
@@ -84,17 +81,18 @@ Because the final goal is to run nginx on multiple architectures, the deployment
 ```
 
 {{% notice Note %}}
-Optionally, you can set the `default Namespace` to `nginx` to simplify future commands by removing the need to specify the `-nnginx` flag each time:
+You can set `nginx` as your default namespace to avoid typing `-nnginx` in future commands:
 ```bash
 kubectl config set-context --current --namespace=nginx
 ```
 {{% /notice %}}
 
-### Verify the deployment is complete
 
-It's time to verify everything is running as expected.
+## Verify the deployment is complete
 
-Confirm the nodes, pods, and services are running:
+It's now time to verify everything is running as expected.
+
+Confirm that the nodes, pods, and services are running:
 
 ```bash
 kubectl get nodes,pods,svc -nnginx 
@@ -114,7 +112,7 @@ NAME                      TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S) 
 service/nginx-intel-svc   LoadBalancer   10.0.226.250   20.80.128.191   80:30080/TCP   39s
 ```
 
-You can also verify the ConfigMap was created:
+You can also verify that the ConfigMap was created:
 
 ```bash
 kubectl get configmap -nnginx
@@ -125,17 +123,17 @@ NAME               DATA   AGE
 nginx-config       1      51s
 ```
 
-With the pods in a `Ready` state and the service showing a valid `External IP`, you're now ready to test the nginx Intel service.
+With the pods in a `Ready` state and the service showing a valid `External IP`, you're now ready to test the `nginx` Intel service.
 
-### Test the Intel service
+## Test the Intel service
 
-Run the following to make an HTTP request to the Intel nginx service:
+Run the following to make an HTTP request to the Intel `nginx` service:
 
 ```bash
 ./nginx_util.sh curl intel
 ```
 
-You get back the HTTP response, as well as information about which pod served it:
+You can see the HTTP response along with details about which pod served the request:
 
 ```output
 Using service endpoint 20.3.71.69 for curl on intel service
@@ -149,6 +147,6 @@ Response:
 Served by: nginx-intel-deployment-758584d5c6-2nhnx
 ```
 
-If you see similar output, you've successfully configured your AKS cluster with an Intel node, running an nginx deployment and service with the nginx multi-architecture container image.
+If you see similar output, you've successfully configured your AKS cluster with an Intel node, running an `nginx` deployment and service with the `nginx` multi-architecture container image.
 
 

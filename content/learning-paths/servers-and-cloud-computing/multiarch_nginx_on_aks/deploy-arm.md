@@ -1,6 +1,6 @@
 ---
 title: Deploy nginx on Arm 
-weight: 50
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,11 +8,12 @@ layout: learningpathall
 
 ## Add the Arm deployment and service
 
-In this section, you'll add nginx on Arm to your existing cluster, completing your multi-architecture Intel/Arm environment for comprehensive performance comparison.
+In this section, you'll add `nginx` on Arm to your existing cluster, completing your multi-architecture Intel/Arm environment for comprehensive performance comparison.
 
-When applied, the **arm_nginx.yaml** file creates the following K8s objects:
-   - **Deployment** (`nginx-arm-deployment`) - Pulls the multi-architecture nginx image from DockerHub, launches a pod on the Arm node, and mounts the shared ConfigMap as `/etc/nginx/nginx.conf`
-   - **Service** (`nginx-arm-svc`) - Load balancer targeting pods with both `app: nginx-multiarch` and `arch: arm` labels
+When you apply the arm_nginx.yaml file, it creates two Kubernetes objects:
+
+- A deployment named `nginx-arm-deployment` that pulls the multi-architecture `nginx` image from DockerHub, launches a pod on the Arm node, and mounts the shared ConfigMap as `/etc/nginx/nginx.conf`
+- A service called `nginx-arm-svc` that acts as a load balancer, targeting pods with both `app: nginx-multiarch` and `arch: arm` labels
 
 Copy and paste the following commands into a terminal to download and apply the Arm deployment and service:
 
@@ -28,11 +29,11 @@ deployment.apps/nginx-arm-deployment created
 service/nginx-arm-svc created
 ```
 
-### Examining the deployment configuration
+## Examining the deployment configuration
 
-Taking a closer look at the `arm_nginx.yaml` deployment file, you'll see settings optimized for the Arm architecture:
+Take a closer look at the `arm_nginx.yaml` deployment file and you'll see settings optimized for the Arm architecture:
 
-The `nodeSelector` value of `kubernetes.io/arch: arm64` ensures that the deployment only runs on Arm nodes, utilizing the `arm64` version of the nginx container image.
+The `nodeSelector` value of `kubernetes.io/arch: arm64` ensures that the deployment only runs on Arm nodes, utilizing the `arm64` version of the `nginx` container image.
 
 ```yaml
     spec:
@@ -48,9 +49,8 @@ The service selector uses both `app: nginx-multiarch` and `arch: arm` labels to 
     arch: arm
 ```
 
-### Verify the deployment
-
-Get the status of nodes, pods and services by running:
+## Verify the deployment
+Get the status of nodes, pods, and services by running:
 
 ```bash
 kubectl get nodes,pods,svc -nnginx 
@@ -85,17 +85,16 @@ NAME               DATA   AGE
 nginx-config       1      10m
 ```
 
-When the pods show `Running` and the service shows a valid `External IP`, you're ready to test the nginx Arm service.
+When the pods show `Running` and the service shows a valid `External IP`, you're ready to test the `nginx` Arm service.
 
-### Test the nginx web service on Arm
+## Test the nginx web service on Arm
 
-Run the following command to make an HTTP request to the Arm nginx service using the script you created earlier:
+Run the following command to make an HTTP request to the Arm `nginx` service using the script you created earlier:
 
 ```bash
 ./nginx_util.sh curl arm
 ```
-
-You get back the HTTP response, as well as information about which pod served it:
+The response includes both the HTTP data and details about which pod handled the request:
 
 ```output
 Using service endpoint 48.192.64.197 for curl on arm service
@@ -109,9 +108,9 @@ Response:
 Served by: nginx-arm-deployment-5bf8df95db-wznff
 ```
 
-If you see similar output, you have successfully added Arm nodes to your cluster running nginx.
+If you see similar output, you have successfully added Arm nodes to your cluster running `nginx`.
 
-### Compare both architectures
+## Compare both architectures
 
 Now you can test both architectures and compare their responses:
 
@@ -120,4 +119,4 @@ Now you can test both architectures and compare their responses:
 ./nginx_util.sh curl arm
 ```
 
-Each command will route to its respective architecture-specific service, allowing you to compare performance and verify that your multi-architecture cluster is working correctly.
+Each command routes to its respective architecture-specific service, allowing you to compare performance and verify that your multi-architecture cluster is working correctly.

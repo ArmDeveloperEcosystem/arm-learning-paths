@@ -1,6 +1,6 @@
 ---
-title: Deploy a nginx multiarch service
-weight: 60
+title: Deploy nginx multiarch service on AKS
+weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Add a multi-architecture service to your cluster
 
-You now have nginx running on Intel and Arm nodes with architecture-specific services. In this section, you'll create a multi-architecture service that can route to any available nginx pod regardless of architecture, providing load balancing across both architectures.
+You now have `nginx` running on Intel and Arm nodes with architecture-specific services. In this section, you'll create a multi-architecture service that can route to any available `nginx` pod regardless of architecture, providing load balancing across both architectures.
 
-### Create the multiarch service
+## Create the multiarch service
 
-The multiarch service targets all pods with the `app: nginx-multiarch` label (all nginx deployments share this label). It uses `sessionAffinity: None` to ensure requests are distributed across all available pods without stickiness, and can route to Intel or Arm pods based on availability and load balancing algorithms.
+The multiarch service targets all pods with the `app: nginx-multiarch` label (all `nginx` deployments share this label). It uses `sessionAffinity: None` to ensure requests are distributed across all available pods without stickiness, and can route to Intel or Arm pods based on availability and load balancing algorithms.
 
 Run the following commands to download and apply the multiarch service:
 
@@ -57,9 +57,9 @@ nginx-multiarch-svc   10.244.0.21:80,10.244.1.1:80   47s
 
 You are ready to test the multiarch service. 
 
-### Test the nginx multiarch service
+## Test the nginx multiarch service
 
-Run the following to make HTTP requests to the multiarch nginx service:
+Run the following to make HTTP requests to the multiarch `nginx` service:
 
 ```bash
 ./nginx_util.sh curl multiarch
@@ -89,12 +89,17 @@ Run the command multiple times to see load balancing across architectures:
 
 The responses will show requests being served by different architecture deployments (Intel or Arm), demonstrating that the multiarch service distributes the load across the available pods.
 
-### Compare architecture-specific versus multiarch routing
+## Compare architecture-specific and multiarch routing
 
 Now you can compare the behavior:
 
-- **Architecture-specific**: `./nginx_util.sh curl intel` always routes to Intel pods
-- **Architecture-specific**: `./nginx_util.sh curl arm` always routes to ARM pods
-- **Multiarch**: `./nginx_util.sh curl multiarch` routes to any available pod
+- The architecture-specific services provide predictable routing patterns. When you run `./nginx_util.sh curl intel`, your requests consistently reach Intel-based pods. Similarly, `./nginx_util.sh curl arm` ensures your traffic goes to Arm-based pods. 
 
-This multiarch service provides high availability and load distribution across your entire multi-architecture cluster.
+- In contrast, the multiarch service distributes requests across all available pods regardless of architecture. This means `./nginx_util.sh curl multiarch` might connect you to either an Intel or Arm pod depending on current load and availability.
+
+
+## What you've accomplished and what's next
+
+Excellent work! You've successfully created a multi-architecture service that intelligently distributes traffic across both Arm and Intel pods. This unified service approach provides high availability and load distribution across your entire multi-architecture cluster, giving you the flexibility to leverage the strengths of different CPU architectures within a single Kubernetes environment.
+
+You now have a complete multi-architecture deployment with three different service routing patterns: architecture-specific services for targeted testing, and a multiarch service for production-grade load balancing. You're ready to move on to performance monitoring and comparison.
