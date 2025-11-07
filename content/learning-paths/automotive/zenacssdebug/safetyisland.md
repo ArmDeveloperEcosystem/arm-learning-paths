@@ -29,8 +29,8 @@ Configure the **SI** model connection similarly to **RSE**. Add the following **
 
 ```text
 stop
-add-symbol-file /arm-auto-solutions/build/tmp_baremetal/deploy/images/fvp-rd-aspen/si0_ramfw.elf
-set substitute-path /usr/src/debug/scp-firmware/2.14.0/ /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/scp-firmware/2.14.0/git/
+add-symbol-file "/arm-auto-solutions/build/tmp_baremetal/deploy/images/fvp-rd-aspen/si0_ramfw.elf"
+set substitute-path "/usr/src/debug/scp-firmware/2.16.0+git/" "/arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/scp-firmware/2.16.0+git/git/"
 b arch_exception_reset
 ```
 
@@ -53,10 +53,7 @@ When RSE enables Safety Island, you will see a log message like:
 The full output log is shown here for your reference:
 
 ``` output
-Trying ::1...
-Trying 127.0.0.1...
-Connected to localhost.
-Escape character is '^]'.
+[INF] [CC3XX] Init OK PIDR0: 0xc1
 [INF] Starting TF-M BL1_1
 [INF] Jumping to BL1_2
 [INF] Starting TF-M BL1_2
@@ -65,12 +62,23 @@ Escape character is '^]'.
 [INF] BL2 image validated successfully
 [INF] Jumping to BL2
 [INF] Starting bootloader
+[INF] [CC3XX] Init OK PIDR0: 0xc1
 [INF] PSA Crypto init done, sig_type: EC-P256
+[INF] BL2: SI CL1 not present, skip loading
 [INF] BL2: SI CL0 pre load start
 [INF] BL2: SI CL0 pre load complete
 [INF] Primary   slot: version=0.0.7+0
-[INF] Secondary slot: version=0.0.7+0
+[INF] Image 3 Secondary slot: Image not found
 [INF] Image 3 RAM loading to 0x70083c00 is succeeded.
+[INF] Key 0 hash found for image 3
 [INF] Image 3 loaded from the primary slot
 [INF] BL2: SI CL0 post load start
+[INF] BL2: SI ATU region 0: [0x80000000 - 0xbfffffff]->[0x1_00000000 - 0x1_3fffffff]
+[INF] BL2: SI ATU region 1: [0xc0000000 - 0xcfffffff]->[0x1_40000000 - 0x1_4fffffff]
+[INF] BL2: SI ATU region 2: [0xd0000000 - 0xd001ffff]->[0x20000_d8000000 - 0x20000_d801ffff]
+[INF] BL2: SI ATU region 3: [0xd0020000 - 0xd002ffff]->[0x20000_d0200000 - 0x20000_d020ffff]
+[INF] BL2: SI ATU region 4: [0xd0030000 - 0xd003ffff]->[0x20000_d0400000 - 0x20000_d040ffff]
+[INF] BL2: SI ATU region 5: [0xd0040000 - 0xd006ffff]->[0x20000_d0100000 - 0x20000_d012ffff]
+[INF] BL2: SI ATU region 6: [0xe0030000 - 0xe0031fff]->[0x0_00000000 - 0x0_00001fff]
+[INF] BL2: SI ATU region 7: [0xe0130000 - 0xe0135fff]->[0x0_00100000 - 0x0_00105fff]
 ```

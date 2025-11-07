@@ -20,12 +20,16 @@ For more information, see [Arm Zena Compute Subsystem (CSS)](https://developer.a
 
 ## Build the software stack
 
-Follow the steps to download and build the software stack in the [Arm Zena CSS User Guide](https://arm-auto-solutions.docs.arm.com/en/v2.0/rd-aspen/user_guide/reproduce.html).
+Follow the steps to download and build the software stack in the [Arm Automotive Solutions Software Reference Stack User Guide](https://arm-auto-solutions.docs.arm.com/en/latest/rd-aspen/user_guide/reproduce.html).
 
-Here the default **Arm Automotive Solutions Demo** build is used.
+The default **Cfg1, Arm Automotive Solutions Demo, Bare Metal** build is used in this learning path.
+
+Software build will usually take at least one hour to complete, depending on host machine.
 
 {{% notice Note %}}
 The primary focus of this Learning Path is to demonstrate how to debug the software stack.
+
+The latest version of software tested at time of writing is `2.1`. Screenshots show previous versions.
 {{% /notice %}}
 
 ## Verify the build and execution
@@ -38,18 +42,18 @@ kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose"
 
 The system runs through the boot process until a Linux prompt is available (in `terminal_ns_uart0`).
 
-Press **Ctrl+C** in the command terminal to terminate the process.
+Press **Ctrl+C** in the command terminal (use `Ctrl+B` > `0` to swap to that terminal) to terminate the process.
 
 ## Install FVP (optional)
 
 The FVP is downloaded and installed as part of the build process.
 
-You can also separately download Arm-Zena-CSS-FVP from the Arm Developer [website](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms/Automotive%20FVPs).
+You can also separately download either `Arm-Zena-CSS-FVP` (`Cfg1` or `Cfg2`) from the Arm Developer [website](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms/Automotive%20FVPs).
 
 See also the Arm Ecosystem FVPs and Architecture Envelope Models [Install Guide](/install-guides/fm_fvp/eco_fvp/).
 
 {{% notice Note %}}
-For legacy reasons, the FVP is named `FVP_RD_Aspen`.
+For legacy reasons, the FVP was previously named `FVP_RD_Aspen`.
 {{% /notice %}}
 
 ## Arm Development Studio

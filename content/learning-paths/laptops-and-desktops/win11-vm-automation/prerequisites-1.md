@@ -44,7 +44,7 @@ Verify your system supports KVM by running:
 
 ```console
 sudo apt install cpu-checker -y
-sudo kvm-ok
+kvm-ok
 ```
 
 If KVM is available, you will see the messages:
@@ -59,6 +59,13 @@ This confirms that:
 - The KVM kernel module is loaded
 - The `/dev/kvm` device exists 
 
+Add your user account to the KVM group:
+
+```console
+sudo usermod -a -G kvm $USER
+newgrp kvm
+```
+
 ## Install required software
 
 The scripts require several software packages. 
@@ -67,7 +74,7 @@ Install the packages using the Linux package manager.
 
 ```console
 sudo apt update
-sudo apt install qemu-system-arm qemu-utils genisoimage wget curl jq uuid-runtime -y
+sudo apt install qemu-system-arm qemu-utils genisoimage wget curl jq uuid-runtime seabios -y
 ```
 
 If needed, the [Remmina](https://remmina.org/) remote desktop (RDP) client is automatically installed by the run script so you don't need to install it now, but you can install it using this command:
@@ -76,7 +83,4 @@ If needed, the [Remmina](https://remmina.org/) remote desktop (RDP) client is au
 sudo apt install remmina remmina-plugin-rdp -y
 ```
 
-
 You’ve verified your system requirements and you’re now ready to move on and start working with Windows on Arm virtual machines. 
-
-
