@@ -1,21 +1,23 @@
 ---
-title: Deploying quantized LLMs on DGX Spark using llama.cpp
-
-draft: true
-cascade:
-    draft: true
+title: Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark
 
 minutes_to_complete: 60
 
-who_is_this_for: This session is intended for AI practitioners, performance engineers, and system architects who want to understand how the Grace–Blackwell (GB10) platform enables efficient quantized LLM inference through CPU–GPU collaboration.
+who_is_this_for: This is an introductory topic for AI practitioners, performance engineers, and system architects who want to learn how to deploy and optimize quantized large language models (LLMs) on NVIDIA DGX Spark systems powered by the Grace-Blackwell (GB10) architecture.
 
 learning_objectives:
-    - Understand the Grace–Blackwell (GB10) architecture and how it supports efficient AI inference.
-    - Build and validate both CUDA 13-enabled and CPU-only versions of llama.cpp for flexible deployment of quantized LLMs on the GB10 platform.
-    - Observe and interpret how Armv9 SIMD instructions (Neon, SVE) are utilized during quantized LLM inference on the Grace CPU using Process Watch.
+    - Describe the Grace–Blackwell (GB10) architecture and its support for efficient AI inference
+    - Build CUDA-enabled and CPU-only versions of llama.cpp for flexible deployment
+    - Validate the functionality of both builds on the DGX Spark platform
+    - Analyze how Armv9 SIMD instructions accelerate quantized LLM inference on the Grace CPU
 
 prerequisites:
-    - One NVIDIA DGX Spark system with at least 15 GB of available disk space.
+    - Access to an NVIDIA DGX Spark system with at least 15 GB of available disk space
+    - Familiarity with command-line interfaces and basic Linux operations
+    - Understanding of CUDA programming basics and GPU/CPU compute concepts
+    - Basic knowledge of quantized large language models (LLMs) and machine learning inference
+    - Experience building software from source using CMake and make
+
 
 author: Odin Shen
 
@@ -23,29 +25,33 @@ author: Odin Shen
 skilllevels: Introductory
 subjects: ML
 armips:
-    - Cortex-X
     - Cortex-A
+    - Cortex-X
 operatingsystems:
     - Linux
 tools_software_languages:
     - Python
-    - C++
+    - C
     - Bash
     - llama.cpp
 
 further_reading:
     - resource:
-        title: Nvidia DGX Spark
+        title: NVIDIA DGX Spark website
         link: https://www.nvidia.com/en-gb/products/workstations/dgx-spark/
         type: website
     - resource:
-        title: Nvidia DGX Spark Playbooks
+        title: NVIDIA DGX Spark Playbooks GitHub repository
         link: https://github.com/NVIDIA/dgx-spark-playbooks
         type: documentation
     - resource:
-        title: Arm Blog Post
+        title: Profile llama.cpp performance with Arm Streamline and KleidiAI LLM kernels Learning Path
+        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama_cpp_streamline/
+        type: blog
+    - resource:
+        title: Arm-Powered NVIDIA DGX Spark Workstations to Redefine AI
         link: https://newsroom.arm.com/blog/arm-powered-nvidia-dgx-spark-ai-workstations
-        type: Blog
+        type: blog
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
