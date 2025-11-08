@@ -31,13 +31,6 @@ When the script completes, it prints a command to finalize the installation by a
 source $HOME/executorch/examples/arm/ethos-u-scratch/setup_path.sh
 ```
 
-Then configure git informations, you can stay anonymous or fill in your email and name:
-
-```bash
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
-```
-
 Test that the setup was successful by running the `run.sh` script for Ethos-U85, which is the target device for Corstone-320:
 
 ```bash
