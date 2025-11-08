@@ -6,6 +6,11 @@ layout: "learningpathall"
 
 ## Integrating Retrieval and Generation
 
+In the previous modules, you prepared the environment, validated the ***E5-base-v2*** embedding model, and verified that the ***Llama 3.1 8B*** Instruct model runs successfully on the ***Grace–Blackwell (GB10)*** platform.
+
+In this module, you will bring all components together to build a complete ***Retrieval-Augmented Generation*** (RAG) workflow.
+This stage connects the ***CPU-based retrieval and indexing*** with ***GPU-accelerated language generation***, creating an end-to-end system capable of answering technical questions using real documentation data.
+
 Building upon the previous modules, you will now:
 - Connect the **E5-base-v2** embedding model and FAISS vector index.
 - Integrate the **llama.cpp** REST server for GPU-accelerated inference.
@@ -179,7 +184,7 @@ Follow the previous (learning path) [https://learn.arm.com/learning-paths/laptop
 
 ![image1 CPU–GPU Utilization screenshot](rag_utilization.jpeg "CPU–GPU Utilization")
 
-The figure illustrates how the ***Grace CPU*** and ***Blackwell GPU*** collaborate during ***RAG** execution.
+The figure above illustrates how the ***Grace CPU*** and ***Blackwell GPU*** collaborate during ***RAG** execution.
 On the left, the GPU utilization graph shows a clear spike reaching ***96%***, indicating that the llama.cpp inference engine is actively generating tokens on the GPU.
 Meanwhile, on the right, the htop panel shows multiple Python processes (rag_query_rest.py) running on a single Grace CPU core, maintaining around 93% per-core utilization.
 

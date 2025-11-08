@@ -17,6 +17,8 @@ Typical pipeline:
 
 User Query ─> Embedding ─> Vector Search ─> Context ─> Generation ─> Answer
 
+Each stage in this pipeline plays a distinct role in transforming a user’s question into an accurate, context-aware response:
+
 * ***Embedding model*** (e.g., E5-base-v2): Converts text into dense numerical vectors.
 * ***Vector database*** (e.g., FAISS): Searches for semantically similar chunks.
 * ***Language model*** (e.g., Llama 3.1 8B Instruct – GGUF Q8_0): Generates an answer conditioned on retrieved context.
@@ -25,6 +27,10 @@ More information about RAG system and the challenges of building them can be fou
 
 
 ## Why Grace–Blackwell (GB10)?
+
+The Grace–Blackwell (GB10) platform combines Arm-based Grace CPUs with NVIDIA Blackwell GPUs, forming a unified architecture optimized for large-scale AI workloads.
+
+Its unique CPU–GPU co-design and Unified Memory enable seamless data exchange, making it an ideal foundation for Retrieval-Augmented Generation (RAG) systems that require both fast document retrieval and high-throughput language model inference.
 
 The GB10 platform integrates:
 - ***Grace CPU (Arm v9.2)*** – 20 cores (10 × Cortex-X925 + 10 × Cortex-A725)
@@ -71,7 +77,7 @@ Benefits for RAG:
 ```
 
 To make the concept concrete, this learning path will later demonstrate a small **engineering assistant** example.  
-The assistant retrieves technical references (e.g., Arm SDK, TensorRT, or OpenCL documentation) and generates helpful explanations for software developers.  
+The assistant retrieves technical references (e.g., datasheet, programming guide or application note) and generates helpful explanations for software developers.  
 This use case illustrates how a RAG system can provide **real, contextual knowledge** without retraining the model.
 
 | **Stage** | **Technology / Framework** | **Hardware Execution** | **Function** |
@@ -81,7 +87,7 @@ This use case illustrates how a RAG system can provide **real, contextual knowle
 | **Semantic Retrieval** | FAISS + LangChain | Grace CPU | Searches the vector index to find the most relevant text chunks for a given query. |
 | **Text Generation** | llama.cpp REST Server (GGUF model) | Blackwell GPU + Grace CPU | Generates natural language responses using the Llama 3 model, accelerated by GPU inference. |
 | **Pipeline Orchestration** | Python (RAG Query Script) | Grace CPU | Coordinates embedding, retrieval, and generation via REST API calls. |
-| **Unified Memory Architecture** | NVLink-C2C Shared Memory | Grace CPU + Blackwell GPU | Enables zero-copy data sharing between CPU and GPU for improved latency and efficiency. |
+| **Unified Memory Architecture** | Unified LPDDR5X Shared Memory | Grace CPU + Blackwell GPU | Enables zero-copy data sharing between CPU and GPU for improved latency and efficiency. |
 
 
 ## Prerequisites Check
@@ -105,13 +111,16 @@ Expected output:
 - ***CUDA Version***:   13.0 (or later)
 - ***Driver Version***: 580.95.05
 
+{{% notice Note %}}
+If your software version is lower than the one mentioned above, it’s recommended to upgrade the driver before proceeding with the next steps.
+{{% /notice %}}
 
 ## Wrap-up
 
-In this module, you learned the foundational concepts of **Retrieval-Augmented Generation (RAG)** and how it benefits from the **Grace–Blackwell (GB10)** architecture.  
-You explored how the **Grace CPU** and **Blackwell GPU** collaborate through **Unified Memory**, enabling seamless data sharing and hybrid execution for AI workloads.
+In this module, you explored the foundational concepts of **Retrieval-Augmented Generation (RAG)** and how it benefits from the **Grace–Blackwell (GB10)** architecture.  
+You examined how the **Grace CPU** and **Blackwell GPU** collaborate through **Unified Memory**, enabling seamless data sharing and hybrid execution for AI workloads.
 
 With the conceptual architecture and hardware overview complete, you are now ready to begin hands-on implementation.  
-In the next module, you will **prepare the development environment**, install the required dependencies, and verify that both the **E5-base-v2** embedding model and **Llama 3.1 8B Instruct** LLM are functional on the **Grace–Blackwell platform**.
+In the next module, you will **set up the development environment**, install the required dependencies, and verify that both the **E5-base-v2** embedding model and **Llama 3.1 8B Instruct** LLM run correctly on the **Grace–Blackwell** platform.
 
-This marks the transition from **theory to practice** — moving from conceptual RAG fundamentals to building your own hybrid CPU–GPU RAG pipeline.
+This marks the transition from **theory to practice** — moving from RAG concepts to building your own **hybrid CPU–GPU pipeline** on Grace–Blackwell.

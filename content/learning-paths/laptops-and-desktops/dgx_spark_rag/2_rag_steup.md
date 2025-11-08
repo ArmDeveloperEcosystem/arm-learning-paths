@@ -1,10 +1,10 @@
 ---
-title: Preparing the Environment
+title: Setting Up and Validating the RAG Foundation
 weight: 3
 layout: "learningpathall"
 ---
 
-## Preparing the Environment
+## Setting Up and Validating the RAG Foundation
 
 In the previous session, you verified that your **DGX Spark (GB10)** system is correctly configured with the Grace CPU, Blackwell GPU, and CUDA 13 environment.
 
@@ -27,19 +27,20 @@ source rag-venv/bin/activate
 
 # Upgrade pip and install base dependencies
 pip install --upgrade pip
-pip install sentence-transformers faiss-cpu \
-            langchain langchain-community langchain-huggingface \
-            huggingface_hub pypdf cryptography tqdm
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+pip install transformers==4.46.2 sentence-transformers==2.7.0 faiss-cpu langchain==1.0.5 \   
+            langchain-community langchain-huggingface huggingface_hub \
+            pypdf tqdm numpy
 ```
 
 **Why these packages?**  
 These libraries provide the essential building blocks of the RAG system:  
 - **sentence-transformers** — used for text embedding with the E5-base-v2 model.  
-- **FAISS** — enables efficient similarity search for document retrieval.  
+- **faiss-cpu** — enables efficient similarity search for document retrieval. Since this pipeline runs on the Grace CPU, the CPU version of FAISS is sufficient — GPU acceleration is not required for this stage. 
 - **LangChain** — manages data orchestration between embedding, retrieval, and generation.  
 - **huggingface_hub** — handles model download and authentication.  
 - **pypdf** — extracts and processes text content from documents.  
-- **cryptography** and **tqdm** — provide secure dependencies and progress visualization.
+- **tqdm** — provide progress visualization.
 
 
 Check installation:
@@ -59,7 +60,7 @@ FAISS GPU: False
 
 ## Step 2 – Model Preparation
 
-Download and organize the models required for the **GB10 Local RAG Blueprint**:
+Download and organize the models required for the **GB10 Local RAG Pipeline**:
 
 - **LLM (Large Language Model)** — llama-3-8b-instruct for text generation.
 - **Embedding Model** — E5-base-v2 for document vectorization.
@@ -77,7 +78,9 @@ hf download intfloat/e5-base-v2 --local-dir ~/models/e5-base-v2
 wget https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/main/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf -P ~/models/Llama-3.1-8B-gguf
 ```
 
-Run a short Python script to verify that the **E5-base-v2** model loads correctly and can generate embeddings.
+### Verify the **E5-base-v2** model
+
+Run a Python script to verify that the **E5-base-v2** model loads correctly and can generate embeddings.
 
 ```bash
 from sentence_transformers import SentenceTransformer
@@ -113,7 +116,18 @@ First vector snippet: [-0.012  -0.0062 -0.0008 -0.0014  0.026  -0.0066 -0.0173  
  -0.0455]
  ```
 
-A successful output confirms that the E5-base-v2 embedding model is functional and ready for use on the Grace CPU.
+Interpret the E5-base-v2 Result:
+
+- ***Test sentences***: The two example sentences are used to confirm that the model can process text input and generate embeddings correctly. If this step succeeds, it means the model’s tokenizer, encoder, and PyTorch runtime on the Grace CPU are all working together properly.
+- ***Embedding shape (2, 768)***: The two sentences were converted into two 768-dimensional embedding vectors — 768 is the hidden dimension size of this model.
+- ***First vector snippet***: Displays the first 10 values of the first embedding vector. Each number represents a learned feature extracted from the text.
+
+A successful output confirms that the ***E5-base-v2 embedding model*** is functional and ready for use on the Grace CPU.
+
+
+### Verify the **llama-3.1-8B** model
+
+Then, you are going to verify the gguf model.
 
 The **llama.cpp** runtime will be used for text generation.  
 Please ensure that both the **CPU** and **GPU** builds have been installed following the previous [learning path](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/2_gb10_llamacpp_gpu/).
@@ -390,7 +404,7 @@ results = db.similarity_search(query, k=3)
 for i, r in enumerate(results, 1):
     print(f"\nResult {i}")
     print(f"Source: {r.metadata.get('source')}")
-    print(r.page_content[:300], "..."
+    print(r.page_content[:300], "...")
 
 query = "Use SWD debug Raspberry Pi Pico"    
 results = db.similarity_search(query, k=3)
@@ -450,9 +464,9 @@ The execution of `check_index.py` confirmed that your local ***FAISS vector inde
 
 You performed two distinct queries targeting different product lines within the Raspberry Pi ecosystem: ***Raspberry Pi 4 power supply*** and ***Raspberry Pi Pico SWD debugging***.
 
-For the first query, ***raspberry pi 4 power supply***, the system returned three highly relevant results, all sourced from the `cm4io-datasheet.txt` file. These passages provided technical guidance on power requirements, supply voltage ranges, and hardware configurations specific to the Compute Module 4 IO Board. This indicates that the embeddings captured the correct semantic intent, and that the FAISS index correctly surfaced content even when specific keywords like ***power supply*** appeared in varied contexts.
+- For the first query, ***raspberry pi 4 power supply***, the system returned three highly relevant results, all sourced from the `cm4io-datasheet.txt` file. These passages provided technical guidance on power requirements, supply voltage ranges, and hardware configurations specific to the Compute Module 4 IO Board. This indicates that the embeddings captured the correct semantic intent, and that the FAISS index correctly surfaced content even when specific keywords like ***power supply*** appeared in varied contexts.
 
-For the second query, ***Use SWD debug Raspberry Pi Pico***, the search retrieved top results from all three relevant datasheets in the Pico family: `pico-datasheet.txt`, `pico-2-datasheet.txt`, and `pico-w-datasheet.txt`. 
+- For the second query, ***Use SWD debug Raspberry Pi Pico***, the search retrieved top results from all three relevant datasheets in the Pico family: `pico-datasheet.txt`, `pico-2-datasheet.txt`, and `pico-w-datasheet.txt`. 
 The extracted passages consistently explained how the ***Serial Wire Debug (SWD)*** port allows developers to reset the system, load and run code without manual input, and perform interactive debugging on the RP2040 or RP2350 microcontrollers. This demonstrates that your chunking and indexing pipeline accurately retained embedded debugging context, and that metadata mapping correctly links each result to its original source document.
 
 This process validates that your system can perform semantic retrieval on technical documents — a core capability of any RAG application.
@@ -468,7 +482,6 @@ In summary, both semantic queries were successfully answered using your local ve
 | Generation | llama.cpp REST Server | Blackwell GPU + Grace CPU | Text generation |
 | Orchestration | Python RAG Script | Grace CPU | Pipeline control |
 | Unified Memory | NVLink-C2C | Shared | Zero-copy data exchange |
-
 
 At this point, your environment is fully configured and validated.
 You have confirmed that the E5-base-v2 embedding model, FAISS index, and Llama 3.1 8B model are all functioning correctly.
