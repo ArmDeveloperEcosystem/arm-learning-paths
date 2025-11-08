@@ -1,14 +1,14 @@
 ---
-title: Build a multi-architecture Kubernetes cluster with Arm and x86 nginx workloads on Azure AKS
+title: Build a multi-architecture Kubernetes cluster running nginx on Azure AKS
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for developers who want to deploy multi-architecture Kubernetes workloads and compare `nginx` performance between x86 and Arm-based nodes in Azure Kubernetes Service (AKS) clusters.
+who_is_this_for: This is an introductory topic for developers who want to deploy multi-architecture Kubernetes workloads and compare nginx performance between x86 and Arm-based nodes in Azure Kubernetes Service (AKS) clusters.
 
 learning_objectives:
     - Create a hybrid AKS cluster with both x86 and Arm64 nodes
-    - Deploy `nginx` using multi-architecture container images across different node types
-    - Verify `nginx` deployment and functionality on each architecture
+    - Deploy nginx using multi-architecture container images across different node types
+    - Verify nginx deployment and functionality on each architecture
     - Compare performance between x86 and Arm64 `nginx` instances
     - Learn techniques for deploying multi-architecture Kubernetes workloads
   
@@ -40,9 +40,9 @@ tools_software_languages:
 
 further_reading:
   - resource:
-      title: nginx - High Performance Load Balancer, Web Server, & Reverse Proxy
+      title: NGINX website
       link: https://nginx.org/
-      type: documentation
+      type: website
   - resource:
       title: nginx Docker Hub
       link: https://hub.docker.com/_/nginx
