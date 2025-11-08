@@ -1,5 +1,5 @@
 ---
-title: Ruby on Rails Benchmarking
+title: Benchmark Ruby on Rails
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -7,25 +7,27 @@ layout: learningpathall
 ---
 
 
-## Ruby on Rails Benchmarking 
+## Overview
 In this section you will benchmark Ruby on Rails using Ruby’s built-in `Benchmark` library to measure execution time for database inserts, queries, and CPU computations on GCP SUSE VMs, providing insights into performance metrics and bottlenecks.
 
-### Go into your Rails app folder
+## Locate the Rails app folder
 Navigate into the folder of your Rails application. This is where Rails expects your application code, models, and database configurations to be located. All commands related to your app should be run from this folder.
 
 ```console
 cd ~/db_test_rubyapp
 ````
 
-### Create the benchmark
-Now create a new Ruby file named `benchmark.rb` where you will write code to measure performance.
+## Create the benchmark file
+
+Create a new Ruby file called `benchmark.rb` to measure your Rails application's performance:
 
 ```console
 vi benchmark.rb
 ```
 
-### Benchmark code for measuring Rails app performance
-Copy the code below into `benchmark.rb`. It measures database inserts, queries, and CPU computations in your Rails application using Ruby’s Benchmark library.
+This file contains the benchmarking code that tests different aspects of your application's performance.
+Copy the following code into `benchmark.rb`. This code measures three different aspects of your Rails application's performance:
+
 
 ```ruby
 require 'benchmark'
@@ -52,16 +54,21 @@ Benchmark.bm do |x|
   end
 end
 ```
-- `require 'benchmark'` → Loads Ruby’s built-in benchmarking library.
-- `n = 1000` → Sets the number of iterations for each task. You can increase or decrease this number to simulate heavier or lighter workloads.
-- `Benchmark.bm` → Starts a block to measure performance of different tasks.
-- **DB Insert** → Creates 1,000 new `Task` records in the database. Measures how long it takes to insert data.
-- **DB Query** → Retrieves the 1,000 `Task` records from the database. Measures how long it takes to query data.
-- **Computation** → Performs a simple calculation 1,000 times. Measures pure CPU performance (without database interactions).
+This benchmarking script tests three key areas of your Rails application's performance:
+
+- The `require 'benchmark'` statement loads Ruby's built-in benchmarking library, which provides precise timing measurements for code execution. 
+- The variable `n = 1000` sets how many times each test runs - you can adjust this number to simulate lighter or heavier workloads depending on your testing needs.
+- The `Benchmark.bm` method creates a benchmarking block that measures and reports the performance of different tasks. Within this block, three different tests run to evaluate your application:
+
+  - The DB Insert test creates 1,000 new `Task` records in your PostgreSQL database. This measures how efficiently your application can write data, which is crucial for understanding performance during high-volume data entry operations.
+
+  - The DB Query test retrieves those same `Task` records from the database. This measurement shows how quickly your application can read data, helping you understand performance during data-heavy read operations like report generation or search functionality.
+
+  - The Computation test performs a mathematical calculation (summing numbers 1 through 10,000) repeatedly without any database interaction. This gives you a baseline for pure CPU performance, showing how your application handles processing-intensive tasks that don't involve external resources.
 
 This code gives you a basic understanding of how your Rails app performs under different types of workloads.
 
-### Run the benchmark inside Rails
+## Run the benchmark inside Rails
 Now that your benchmark file is ready, run it within the Rails environment using the following command:
 
 ```console
@@ -84,31 +91,50 @@ DB Insert:    2.271645   0.050236   2.321881 (  2.721631)
 DB Query:     3.379849   0.009345   3.389194 (  3.389613)
 Computation:  0.410907   0.000000   0.410907 (  0.410919)
 ```
+## Interpret the benchmark results
 
-### Benchmark Metrics Explained
+The output shows four different timing measurements that help you understand where your application spends its time.
 
-- **user** → Time spent executing your Ruby code (**CPU time in user mode**).  
-- **system** → Time spent in **system calls** (I/O, database, kernel interactions).  
-- **total** → `user + system` (sum of CPU processing time).  
-- **real** → The **wall-clock time** (actual elapsed time, includes waiting for DB, I/O, etc).  
+- The user time measures how long your Ruby code actually ran on the CPU. This represents the pure processing time for your application logic, calculations, and Ruby operations.
 
-### Benchmark summary on Arm64
-Results summarized from the your run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
+- The system time tracks how long your application spent waiting for system-level operations like database queries, file I/O, and network requests. Higher system time usually indicates bottlenecks in external resources.
 
+- The total time simply adds user and system time together, giving you the complete CPU processing time your application consumed.
 
-| Task         | user (sec) | system (sec) | total (sec) | real (sec) |
-|--------------|----------|----------|----------|----------|
-| DB Insert    | 2.271645 | 0.050236 | 2.321881 | 2.721631 |
-| DB Query     | 3.379849 | 0.009345 | 3.389194 | 3.389613 |
-| Computation  | 0.410907 | 0.000000 | 0.410907 | 0.410919 |
+- The real time shows the actual wall-clock time that passed from start to finish. This includes everything: CPU processing, waiting for the database to respond, network delays, and any other factors that made your application pause. Real time is often higher than total time because your application might wait for resources that are busy with other tasks.
 
+When real time significantly exceeds total time, it typically indicates that your application is spending considerable time waiting for external resources rather than actively processing data.
 
-### Key Takeaways
+## Benchmark summary on Arm64
 
-When you look the benchmarking results, you will notice that on the Google Axion C4A Arm-based instances:
+Here are the performance results from running the benchmark on a `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP with SUSE:
 
-Rails on Arm64 performs consistently: Ruby and PostgreSQL are both natively optimized for Arm, providing stable, predictable latency.
-Database I/O remains the main optimization target: Techniques such as query caching, connection pooling, and async queries can improve DB-heavy performance.
-Compute-bound tasks scale well: Axion’s Arm cores and Ruby’s YJIT show excellent CPU utilization for non-I/O workloads.
+| Task | User Time | System Time | Total Time | Real Time |
+|------|-----------|-------------|------------|-----------|
+| DB Insert | 2.27 sec | 0.05 sec | 2.32 sec | 2.72 sec |
+| DB Query | 3.38 sec | 0.01 sec | 3.39 sec | 3.39 sec |
+| Computation | 0.41 sec | 0.00 sec | 0.41 sec | 0.41 sec |
 
-Ruby on Rails runs efficiently on Google Cloud’s Axion-based C4A Arm64 instances. 
+## What these results tell you
+
+- Database operations (insert and query) take significantly longer than pure computation, with queries being the slowest operation.
+- System time is minimal across all tasks, indicating efficient system resource usage on Arm64.
+- Real time closely matches total time for most operations, showing minimal waiting for external resources.
+- Computation tasks run very efficiently, demonstrating strong CPU performance on Axion processors.
+
+## Key takeaways
+
+When you analyze the benchmarking results, you'll notice several important patterns on Google Cloud Axion C4A Arm-based instances:
+
+- Consistent performance - Ruby and PostgreSQL are both natively optimized for Arm, which provides stable and predictable latency across different workloads.
+- Database optimization opportunities - the results show that database I/O remains the primary bottleneck. You can improve database-heavy performance using techniques such as:
+- Query caching
+- Connection pooling  
+- Asynchronous queries
+- Strong compute performance - Axion's Arm cores combined with Ruby's YJIT compiler demonstrate excellent CPU utilization for compute-intensive tasks that don't rely heavily on I/O operations.
+
+Ruby on Rails runs efficiently on Google Cloud's Axion-based C4A Arm64 instances, making them a solid choice for Rails applications.
+
+## What you've accomplished
+
+You’ve benchmarked your Ruby on Rails application on a Google Cloud C4A Arm-based VM using Ruby’s built-in Benchmark library. You measured database insert and query speeds, as well as CPU computation performance, and interpreted the results to identify optimization opportunities. With these insights, you’re equipped to further tune your Rails workloads for Arm and confidently deploy performance-sensitive applications on Arm-based cloud infrastructure.
