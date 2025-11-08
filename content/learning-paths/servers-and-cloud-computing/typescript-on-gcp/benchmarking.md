@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## JMH-style Custom Benchmarking
 
-This section demonstrates how to benchmark TypeScript functions using a JMH-style (Java Microbenchmark Harness) methodology implemented with Node.js’s built-in `perf_hooks` module.
+This section demonstrates how to benchmark TypeScript functions using a JMH-style (Java Microbenchmark Harness) methodology implemented with Node.js's built-in `perf_hooks` module.
 Unlike basic `console.time()` measurements, this approach executes multiple iterations, computes the average runtime, and produces stable and repeatable performance data, useful for evaluating workloads on your Google Cloud C4A (Axion Arm64) VM running SUSE Linux.
 
 ### Create the Benchmark Script
