@@ -1,31 +1,37 @@
 ---
-title: Build-ready Dockerfiles for multi-architecture (amd64 & arm64)
+title: Create build-ready Dockerfiles for both architectures
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-With the environment prepared, this step makes the Online Boutique services multi-architecture ready. You will patch a few Dockerfiles so they build cleanly for both architectures. On the next page, you will build and push images using a GKE-native Buildx builder (one pod per arch, no QEMU).
+With your environment set up, you're ready to modify the Online Boutique services to support multi-architecture builds.
 
-### Services that need edits
+You will patch some Dockerfiles so they build cleanly for both architectures. In the next section, you will build and push images using a GKE-native Buildx builder.
 
-Most services already build for both architectures. These four need small, safe changes:
+## Services to edit
 
-- **emailservice** 
-- **recommendationservice**
-- **loadgenerator**
-- **cartservice**
+Most services already build for both architectures.
 
-These edits don't change application behavior-they only ensure the right compiler headers and runtime libs are present per architecture (Python native wheels for email/recommendation/loadgen; system `protoc` for .NET cartservice).
+The four listed below need small changes:
+
+- emailservice
+- recommendationservice
+- loadgenerator
+- cartservice
+
+These edits don't change application behavior, they only ensure the right compiler headers and runtime libraries are present per architecture. This includes Python native wheels for email/recommendation/loadgen, and system `protoc` for the .NET cartservice.
 
 {{% notice Note %}}
 Production migrations begin with assessing cross-architecture compatibility for each service (base images, native extensions such as CGO/JNI, platform-specific packages, and CI build targets). This section demonstrates minor Dockerfile edits for four representative services. In the referenced Online Boutique release, the remaining services generally build for both **amd64** and **arm64** without modification.
 {{% /notice %}}
 
-#### Update src/emailservice/Dockerfile
+### Update the emailservice Dockerfile
 
-Replace the entire contents of the file with the following multi-architecture-compatible version:
+You can review the [emailservice Dockerfile](https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/src/emailservice/Dockerfile) before replacing it.
+
+Run the following command to replace the entire contents of the file with the multi-architecture-compatible version:
 
 ```bash
 cat << 'EOF' > src/emailservice/Dockerfile
@@ -65,7 +71,7 @@ ENTRYPOINT ["python","email_server.py"]
 EOF
 ```
 
-**What these edits do**
+Here is a summary of the changes:
 
 - **BuildKit syntax** unlocks `--mount=type=cache` to speed rebuilds.
 - **TARGETPLATFORM** lets Buildx set linux/amd64 vs linux/arm64 explicitly.
@@ -73,12 +79,15 @@ EOF
 - **`--prefer-binary`** avoids source builds when wheels exist (more reliable across arches).
 - **Removed extra `apk update`** since `apk add --no-cache` already avoids stale indexes & caches.
 
+## Apply updates to the other three services
 
-#### Apply equivalent updates to the other three services
+Run the following sed commands to automatically patch the remaining Dockerfiles.
 
-Run the following sed commands to automatically patch the Dockerfiles:
+### Update the recommendationservice Dockerfile
 
-#### Update src/recommendationservice/Dockerfile
+You can review the [recommendationservice Dockerfile](https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/src/recommendationservice/Dockerfile) before modifying it. 
+
+Paste the command below to your terminal to update the file with the required multi-architecture changes.
 
 ```bash
 sed -i \
@@ -91,14 +100,19 @@ sed -i \
   -e 's|COPY --from=builder /usr/local/lib/python3\.12/ /usr/local/lib/python3\.12/|COPY --from=builder /install/lib/python3.12 /usr/local/lib/python3.12/|' \
   src/recommendationservice/Dockerfile
 ```
-**What these edits do**
 
-- Make the base image architecture-aware.
-- Let native wheels build cleanly.
-- Keep the runtime slim & predictable.
+Here is a summary of the changes:
 
+- Make the base image architecture-aware
+- Let native wheels build cleanly
+- Keep the runtime slim & predictable
 
-#### Update src/loadgenerator/Dockerfile
+### Update loadgenerator Dockerfile
+
+You can review the [loadgenerator Dockerfile](https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/src/loadgenerator/Dockerfile) before modifying it. 
+
+Paste the command below to your terminal to run `sed` to update the file with the required multi-architecture changes.
+
 ```bash
 FILE=src/loadgenerator/Dockerfile
 
@@ -121,13 +135,17 @@ sed -i -E \
   "$FILE"
 ```
 
-**What these edits do**
+Here is a summary of the changes:
 
-- Make the base image architecture-aware.
-- Fix native build/run deps.
-- Keep runtime lean and no flags/app code changed.
+- Make the base image architecture-aware
+- Fix native build/run deps
+- Keep runtime lean and no flags/app code changed
 
-#### Update src/cartservice/src/Dockerfile
+### Update cartservice Dockerfile
+
+You can review the [carkservice Dockerfile](https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/src/cartservice/src/Dockerfile) before replacing it. 
+
+Paste the command below to your terminal to update the file with the required multi-architecture changes.
 
 ```bash
 FILE=src/cartservice/src/Dockerfile
@@ -143,15 +161,17 @@ sed -i \
   "$FILE"
 
 ```
-**What these edits do**
 
-- Install system protoc.
-- Force MSBuild to use it.
-- No behavioral change.
+Here is a summary of the changes:
+
+- Install the system `protoc` command
+- Force MSBuild to use the supplied `protoc` command
+- No behavioral changes
 
 {{% notice Note %}}
-`ARG TARGETPLATFORM` + `FROM --platform=$TARGETPLATFORM` is not strictly required if you always build with --platform and your base image is multi-arch (which it is). Keeping it is perfectly fine and makes intent explicit; it does not change runtime behavior.
+`ARG TARGETPLATFORM` + `FROM --platform=$TARGETPLATFORM` is not strictly required if you always build with --platform and your base image is multi-arch. Keeping it is good practice and makes intent explicit and does not change runtime behavior.
 
-Result: All services now support cross-architecture builds.
 {{% /notice %}}
+
+After making the Dockerfile modification, all services now support multi-architecture builds.
 
