@@ -46,19 +46,27 @@ Debug configurations are stored in a configuration database. Create a local data
 - Open the same wizard (**File > New > Other**), then choose **Configuration Database > Model Configuration**.
 - Click **Next**, select the **Configuration Database** you created, then click **Next**.
 - For **Model Interface**, choose **Iris**, then click **Next**.
-- Choose **Browse for model running on local host**. The debugger detects and interrogates the FVP.  
+- Choose **Browse for model running on local host**. Select your FVP and click **Finish**. The debugger detects and interrogates the FVP.  
 - If connecting remotely, choose **Connect to model running on either local or remote host** and provide the host and port.
+
+{{% notice Tip %}}
+The name of the FVP may be displayed as `RD_ASD` or other.
+
+If unsure, use the port number to identify the correct FVP.
+{{% /notice %}}
 
 Arm Development Studio generates a `model.mdf` file that enumerates all CPUs in the FVP.
 
-Optionally, update **Manufacturer Name** (for example, `Arm`) and **Platform Name** (for example, `Zena_CSS_FVP`). Then **Save** and **Import** the model into the configuration database.
+Optionally, update **Manufacturer Name** (for example, `Arm`) and **Platform Name** (for example, `Zena_CSS_FVP`).
+
+**Save** and **Import** the model into the configuration database.
 
 {{% notice Tip %}}
-If the FVP is not detected, verify the Iris server is running on the expected port (`7100` by default) and that your firewall allows local connections. For remote connections, confirm the host is reachable and the port is open.
+If the FVP is not detected, verify the Iris server is running on the expected port (`7100` by default) and that your firewall allows local connections.
+
+For remote connections, confirm the host is reachable and the port is open.
 {{% /notice %}}
 
 A `model.mdf` file will be created that identifies all CPUs within the FVP.
-
-You can change the **Manufacturer Name** and **Platform Name** to something more meaningful (such as `Arm` and `Zena_CSS_FVP`), then **Save**, and **Import** into the configuration database.
 
 The debugger is now aware of the FVP and you are ready to debug.

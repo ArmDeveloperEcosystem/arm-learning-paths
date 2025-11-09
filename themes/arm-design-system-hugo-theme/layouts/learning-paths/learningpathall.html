@@ -47,12 +47,15 @@ Calls to:
             {{ $counter := 0 }}       <!-- Counter to track index-->
             {{ range .Site.Pages.ByWeight }}
                 {{ if .File}}
-                    {{ if (eq .File.Dir $thisdir)}}
-                        {{ $learningpathfiles = $learningpathfiles | append . }}
+                   <!-- Add option for metadata to optionally hide page from navigation pane-->
+                   {{ if ne .Params.hide_from_navpane true  }}
+                        {{ if (eq .File.Dir $thisdir)}}
+                            {{ $learningpathfiles = $learningpathfiles | append . }}
 
-                        <!-- Call partial to fill out navigation tabs -->
-                        {{partial "navigation/content-navigation.html" (dict "context" . "thisfile" $thisfile "counter" $counter) }}
-                        {{ $counter = add $counter 1 }}
+                            <!-- Call partial to fill out navigation tabs -->
+                            {{partial "navigation/content-navigation.html" (dict "context" . "thisfile" $thisfile "counter" $counter) }}
+                            {{ $counter = add $counter 1 }}
+                        {{ end }}
                     {{ end }}
                 {{end}}
             {{end}} 

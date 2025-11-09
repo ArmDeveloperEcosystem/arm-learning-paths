@@ -68,23 +68,28 @@ cd $ET_HOME
 python -m examples.arm.aot_arm_compiler --model_name=examples/arm/simple_nn.py --delegate --quantize --target=ethos-u85-256 --system_config=Ethos_U85_SYS_DRAM_Mid --memory_mode=Sram_Only
 ```
 
-From the Arm Examples directory, you can build an embedded Arm runner with the `.pte` included. This allows you to optimize the performance of your model, and ensures compatibility with the CPU kernels on the FVP. Finally, generate the executable `arm_executor_runner`.
+From the Arm Examples directory, you can build an embedded Arm runner with the `.pte` included. This allows you to optimize the performance of your model, and ensures compatibility with the CPU kernels on the FVP. Finally, build the ExecuTorch libraries and generate the executable `arm_executor_runner`.
 
 ```bash
+cmake -S "${ET_HOME}" \
+      -B "${executorch_DIR}" \
+      --preset arm-baremetal \
+      -DCMAKE_BUILD_TYPE=Release
+
+cmake --build "$executorch_DIR" --target install --parallel
+
 cd $HOME/executorch/examples/arm/executor_runner
 
-
-cmake -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_TOOLCHAIN_FILE=$ET_HOME/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake \
--DTARGET_CPU=cortex-m85 \
--DET_DIR_PATH:PATH=$ET_HOME/ \
--DET_BUILD_DIR_PATH:PATH=$ET_HOME/cmake-out \
--DET_PTE_FILE_PATH:PATH=$ET_HOME/simple_nn_arm_delegate_ethos-u85-256.pte \
--DETHOS_SDK_PATH:PATH=$ET_HOME/examples/arm/ethos-u-scratch/ethos-u \
--DETHOSU_TARGET_NPU_CONFIG=ethos-u85-256 \
--DPYTHON_EXECUTABLE=$HOME/executorch-venv/bin/python3 \
--DSYSTEM_CONFIG=Ethos_U85_SYS_DRAM_Mid  \
--B $ET_HOME/examples/arm/executor_runner/cmake-out
+cmake -S "${ET_HOME}/examples/arm/executor_runner" \
+      -B "${ET_HOME}/examples/arm/executor_runner/cmake-out" \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_TOOLCHAIN_FILE=$ET_HOME/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake \
+      -DTARGET_CPU=cortex-m85 \
+      -DET_PTE_FILE_PATH:PATH=$ET_HOME/simple_nn_arm_delegate_ethos-u85-256.pte \
+      -DETHOS_SDK_PATH:PATH=$ET_HOME/examples/arm/ethos-u-scratch/ethos-u \
+      -DETHOSU_TARGET_NPU_CONFIG=ethos-u85-256 \
+      -DPYTHON_EXECUTABLE=$HOME/executorch-venv/bin/python3 \
+      -DSYSTEM_CONFIG=Ethos_U85_SYS_DRAM_Mid \
 
 cmake --build $ET_HOME/examples/arm/executor_runner/cmake-out --parallel -- arm_executor_runner
 
