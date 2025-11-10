@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 3
-- Linux: 185
+- Linux: 191
 - macOS: 13
 - Windows: 14
 pinned_modules:
@@ -19,13 +19,13 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 9
-- Containers and Virtualization: 32
-- Databases: 19
+- Containers and Virtualization: 34
+- Databases: 20
 - Libraries: 9
 - ML: 32
-- Performance and Architecture: 72
+- Performance and Architecture: 73
 - Storage: 2
-- Web: 14
+- Web: 16
 subtitle: Optimize cloud native apps on Arm for performance and cost
 title: Servers and Cloud Computing
 tools_software_languages_filter:
@@ -45,7 +45,8 @@ tools_software_languages_filter:
 - Arm Development Studio: 3
 - Arm ISA: 1
 - Arm Performance Libraries: 1
-- Arm Streamline: 1
+- Arm Performance Studio: 1
+- Arm Streamline: 2
 - armclang: 1
 - armie: 1
 - ArmRAL: 1
@@ -64,8 +65,8 @@ tools_software_languages_filter:
 - AWS Lambda: 1
 - Azure CLI: 2
 - Azure Portal: 1
-- Bash: 1
 - bash: 2
+- Bash: 1
 - Bastion: 3
 - BOLT: 2
 - bpftool: 1
@@ -81,6 +82,7 @@ tools_software_languages_filter:
 - Clang: 13
 - ClickBench: 1
 - ClickHouse: 1
+- Cloud Build: 1
 - CMake: 1
 - conda: 1
 - cqlsh: 1
@@ -91,10 +93,9 @@ tools_software_languages_filter:
 - Docker Buildx: 1
 - Envoy: 3
 - ExecuTorch: 1
-- Express: 1
 - FAISS: 1
 - FlameGraph: 1
-- Flink: 1
+- Flink: 2
 - Fortran: 1
 - FunASR: 1
 - FVP: 7
@@ -106,6 +107,7 @@ tools_software_languages_filter:
 - GitHub Actions: 1
 - GitHub CLI: 1
 - GitLab: 1
+- GKE: 1
 - glibc: 1
 - Go: 4
 - Golang: 1
@@ -121,7 +123,7 @@ tools_software_languages_filter:
 - Intrinsics: 1
 - iPerf3: 1
 - ipmitool: 1
-- Java: 5
+- Java: 6
 - JAX: 1
 - JMH: 1
 - Kafka: 2
@@ -130,17 +132,19 @@ tools_software_languages_filter:
 - KEDA: 1
 - Kedify: 1
 - Keras: 1
-- Kubernetes: 11
+- Kubernetes: 12
 - Libamath: 1
 - libbpf: 1
 - Linaro Forge: 1
+- Linux kernel: 1
 - Litmus7: 1
-- llama.cpp: 1
 - Llama.cpp: 2
+- llama.cpp: 1
 - LLM: 10
 - llvm-mca: 1
 - LSE: 1
 - MariaDB: 1
+- Maven: 1
 - Memcached: 2
 - MLPerf: 1
 - ModelScope: 1
@@ -153,8 +157,10 @@ tools_software_languages_filter:
 - Networking: 1
 - Nexmark: 1
 - NGINX: 4
+- nginx: 1
 - Node.js: 5
-- npm: 2
+- node.js: 1
+- npm: 3
 - Ollama: 1
 - ONNX Runtime: 2
 - OpenBLAS: 1
@@ -165,21 +171,25 @@ tools_software_languages_filter:
 - PAPI: 1
 - perf: 6
 - Perf: 1
+- Performance analysis: 1
 - PHP: 1
 - PHPBench: 1
-- PostgreSQL: 4
+- PostgreSQL: 5
 - Profiling: 1
 - Python: 32
 - PyTorch: 9
 - QEMU: 1
 - RAG: 1
+- Rails: 1
 - Redis: 3
 - Remote.It: 2
 - RME: 8
+- Ruby: 1
 - Runbook: 71
 - Rust: 2
 - Service Mesh: 1
 - Siege: 1
+- Skaffold: 1
 - snappy: 1
 - Snort3: 1
 - SQL: 8
@@ -198,12 +208,13 @@ tools_software_languages_filter:
 - Trusted Firmware: 1
 - Trustee: 1
 - TSan: 1
-- TypeScript: 1
+- TypeScript: 2
 - Vectorscan: 1
 - Veraison: 2
 - Visual Studio Code: 5
 - vLLM: 2
 - vvenc: 1
+- Web Server: 1
 - Whisper: 1
 - WindowsPerf: 1
 - WordPress: 3
@@ -216,7 +227,7 @@ tools_software_languages_filter:
 weight: 1
 cloud_service_providers_filter:
 - AWS: 17
-- Google Cloud: 23
-- Microsoft Azure: 18
+- Google Cloud: 26
+- Microsoft Azure: 19
 - Oracle: 2
 ---

@@ -13,7 +13,7 @@ operatingsystems_filter:
 - Baremetal: 30
 - Linux: 31
 - macOS: 7
-- RTOS: 9
+- RTOS: 10
 - Windows: 4
 subjects_filter:
 - CI-CD: 5
@@ -22,7 +22,7 @@ subjects_filter:
 - Libraries: 3
 - ML: 17
 - Performance and Architecture: 21
-- RTOS Fundamentals: 4
+- RTOS Fundamentals: 5
 - Security: 2
 - Virtual Hardware: 2
 subtitle: Learn best practices for microcontroller development
@@ -37,7 +37,7 @@ tools_software_languages_filter:
 - Arm Fast Models: 4
 - Arm Virtual Hardware: 12
 - Assembly: 1
-- C: 4
+- C: 5
 - C++: 1
 - ChatGPT: 1
 - Clang: 1
@@ -96,6 +96,6 @@ tools_software_languages_filter:
 - TVMC: 1
 - vcpkg: 1
 - Yocto Project: 1
-- Zephyr: 1
+- Zephyr: 2
 weight: 5
 ---
