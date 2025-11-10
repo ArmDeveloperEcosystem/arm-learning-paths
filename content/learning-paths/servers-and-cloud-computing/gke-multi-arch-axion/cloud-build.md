@@ -265,6 +265,9 @@ Open http://<EXTERNAL-IP> in your browser.
 
 Open the URL to load the storefront and confirm the full build, deploy, and migrate flow is automated.
 
+![Storefront reachable after Cloud Build deploy/migrate (arm64) #center](images/storefront-running-on-Google-Axion.jpeg "Storefront after Cloud Build automation on Axion (arm64)")
+
+
 ## What you've accomplished
 
 Congratulations! You've successfully automated the entire build, deploy, and migration workflow using Cloud Build and Skaffold. Your multi-architecture application runs natively on Arm-powered GKE nodes, and you can deploy updates automatically with a single command.
