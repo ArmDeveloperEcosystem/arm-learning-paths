@@ -1,6 +1,6 @@
 ---
 title: Create build-ready Dockerfiles for both architectures
-weight: 3
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

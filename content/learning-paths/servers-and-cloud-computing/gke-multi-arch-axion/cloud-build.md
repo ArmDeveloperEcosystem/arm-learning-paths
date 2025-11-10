@@ -1,6 +1,6 @@
 ---
 title: Automate builds and rollout with Cloud Build and Skaffold
-weight: 6
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

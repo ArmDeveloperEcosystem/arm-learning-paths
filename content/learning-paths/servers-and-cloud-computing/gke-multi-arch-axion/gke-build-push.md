@@ -1,6 +1,6 @@
 ---
 title: Provision a dual-architecture GKE cluster and publish images
-weight: 4
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
