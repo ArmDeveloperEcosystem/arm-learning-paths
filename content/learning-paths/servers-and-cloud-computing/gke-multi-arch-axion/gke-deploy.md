@@ -138,5 +138,7 @@ Copy the EXTERNAL-IP value and open it in a new browser tab:
 http://<EXTERNAL-IP>
 ```
 
-The microservices storefront loads, confirming that your application is accessible and functional on the arm64 node pool.
+The microservices storefront loads, confirming that your application is accessible and functional on the arm64 node pool as shown:
+
+![Online Boutique storefront running on Google Axion (arm64) nodes in GKE #center](images/storefront-running-on-Google-Axion.jpeg  "Online Boutique storefront running on Google Axion (arm64) nodes in GKE")
 
