@@ -1,6 +1,10 @@
 ---
 title: High throughput LLM serving using vLLM on Arm Servers
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 60
 
 who_is_this_for: This learning path is for software developers and AI engineers who want to build an optimized vLLM for Arm servers, quantize models to INT4, and serve them through an OpenAI‑compatible API.
@@ -53,8 +57,7 @@ further_reading:
         link: /learning-paths/servers-and-cloud-computing/vllm/
         type: website
 
-### Notes
-This path focuses on CPU inference on Arm servers using an optimized vLLM build with oneDNN and the Arm Compute Library (ACL), 4‑bit quantization accelerated by Arm KleidiAI microkernels, and OpenAI‑compatible serving. You can apply these steps to many LLMs; the examples use `deepseek-ai/DeepSeek-V2-Lite` for concreteness. As vLLM’s CPU support matures, manual builds will be replaced by a simple `pip install` flow.
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
