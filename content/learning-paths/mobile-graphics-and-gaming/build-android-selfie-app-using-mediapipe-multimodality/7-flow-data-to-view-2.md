@@ -132,7 +132,7 @@ This makes sure each of the three parallel `launch` code sections run in its own
 5. Build and run the app again.
 Now you should see two switches on the bottom of the screen as shown below, which turn on and off while you smile and show thumb-up gestures. Good job!
 
-![indicator UI alt-text#center](images/7/indicator%20ui.png "Figure 8: Indicator UI.")
+![indicator UI alt-text#center](images/7/indicator_ui.png "Figure 8: Indicator UI.")
 
 ## Recap on SharedFlow vs StateFlow
 
