@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Overview and Environment Setup"
+title: "Overview"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
