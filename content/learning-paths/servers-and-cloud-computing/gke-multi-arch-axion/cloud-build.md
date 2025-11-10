@@ -1,14 +1,16 @@
 ---
 title: Automate builds and rollout with Cloud Build and Skaffold
-weight: 6
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Google [**Cloud Build**](https://cloud.google.com/build/docs/set-up) is a managed CI/CD service that runs your containerized build and deploy steps in isolated runners. 
+## Automate the deployment with Cloud Build
 
-In this section, you'll automate the flow you performed manually: build multi-arch images, deploy to GKE on amd64, then migrate to arm64, and print the app's external IP.
+Google [Cloud Build](https://cloud.google.com/build/docs/set-up) is a managed CI/CD service that runs your containerized build and deploy steps in isolated runners. 
+
+In this section, you automate the flow you performed manually: build multi-arch images, deploy to GKE on amd64, then migrate to arm64, and print the app's external IP.
 
 ## What does this pipeline do?
 
@@ -19,9 +21,8 @@ The pipeline performs the following steps:
 - Connects to your GKE cluster
 - Applies the amd64 Kustomize overlay, verifies pods, then applies the arm64 overlay and verifies pods again
 - Prints the frontend-external LoadBalancer IP at the end
-
 {{% notice Tip %}}
-Run this from the microservices-demo repo root in Cloud Shell. Ensure you completed the previous steps. 
+Run this command from the `microservices-demo` repository root in Cloud Shell. Make sure you've completed the previous steps.
 {{% /notice %}}
 
 ## Grant IAM permission to the Cloud Build service account
@@ -110,7 +111,7 @@ YAML
 
 This pipeline installs Docker with Buildx in the runner, enables QEMU, builds two services as examples (extend as desired), connects to your cluster, deploys to amd64, verifies, migrates to arm64, verifies, and prints the external IP.  ￼
 
-Run the commands to create the `cloudbuild.yaml` file.
+Run the commands to create the `cloudbuild.yaml` file:
 
 ```yaml
 cat > cloudbuild.yaml <<'YAML'
@@ -263,3 +264,36 @@ Open http://<EXTERNAL-IP> in your browser.
 ```
 
 Open the URL to load the storefront and confirm the full build, deploy, and migrate flow is automated.
+
+![Storefront reachable after Cloud Build deploy/migrate (arm64) #center](images/storefront-running-on-google-axion.jpeg "Storefront after Cloud Build automation on Axion (arm64)")
+
+
+## What you've accomplished
+
+Congratulations! You've successfully automated the entire build, deploy, and migration workflow using Cloud Build and Skaffold. Your multi-architecture application runs natively on Arm-powered GKE nodes, and you can deploy updates automatically with a single command.
+
+You've learned how to:
+
+- Update Dockerfiles to support native builds on both amd64 and arm64 architectures
+- Create a dual-architecture GKE cluster with separate node pools for each platform
+- Build multi-architecture container images using Docker Buildx with native BuildKit pods
+- Deploy applications to amd64 nodes, then migrate them to arm64 nodes using Kustomize overlays
+- Automate the entire workflow with Cloud Build and Skaffold for continuous deployment
+
+## What's next
+
+Now that you have a working multi-architecture deployment pipeline, you can explore these next steps:
+
+- Optimize for Arm performance: profile your services on arm64 nodes to identify optimization opportunities. Arm Neoverse processors offer different performance characteristics than x86, so you might discover new ways to improve throughput or reduce latency.
+
+- Expand your migration: add build steps for the remaining Online Boutique services. You can extend the `cloudbuild.yaml` file to build all services, not just the two examples provided.
+
+- Implement progressive rollouts: use Skaffold profiles and Cloud Build triggers to set up canary deployments or blue-green deployments across architectures. This lets you test changes on a subset of traffic before rolling out to all users.
+
+- Monitor architecture-specific metrics: set up monitoring dashboards in Cloud Monitoring to compare performance, resource usage, and cost between amd64 and arm64 deployments. This data helps you make informed decisions about your migration strategy.
+
+- Explore cost optimization: review your GKE cluster costs and consider rightsizing your node pools. Arm-based C4A instances often provide better price-performance for cloud-native workloads, so you might reduce costs while maintaining or improving performance.
+
+
+
+

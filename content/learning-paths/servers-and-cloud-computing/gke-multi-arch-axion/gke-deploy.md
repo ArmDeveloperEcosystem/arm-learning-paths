@@ -1,18 +1,18 @@
 ---
 title: Prepare manifests and deploy on GKE
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
-You'll now configure the application manifests to use your Artifact Registry images and create Kustomize overlays for different CPU architectures. This allows you to deploy the same application to both x86 and Arm node pools.
-
 ## Prepare deployment manifests
 
-Replace sample image references with your Artifact Registry path and tag, then create Kustomize overlays to select nodes by architecture.
+You'll now configure the application manifests to use your Artifact Registry images and create Kustomize overlays for different CPU architectures. This allows you to deploy the same application to both x86 and Arm node pools by replacing sample image references with your Artifact Registry path and tag, then creating overlays to select nodes by architecture.
 
-### Point base manifests at your images
+
+## Update base manifests to use your images
+
+Replace the sample image references in the base manifests with your Artifact Registry path and tag:
 
 Replace the image references with your references:
 
@@ -29,7 +29,10 @@ find kustomize/base -name "*.yaml" -type f -exec \
 grep -r "${GAR}" kustomize/base/ || true
 ```
 
-### Create node-selector overlays
+You’ve updated your deployment manifests to reference your own Artifact Registry images. This ensures your application uses the multi-architecture containers you built for Arm and x86.
+
+
+## Create node-selector overlays
 
 Create node-selector overlays for targeting specific architectures.
 
@@ -79,7 +82,7 @@ cat << 'EOF' > kustomize/overlays/arm64/node-selector.yaml
 EOF
 ```
 
-You now have updated manifests that reference your container images and Kustomize overlays that target specific CPU architectures.
+You’ve updated your deployment manifests to reference your own Artifact Registry images. This ensures your application uses the multi-architecture containers you built for Arm and x86.
 
 ## Deploy to the x86 (amd64) pool
 
@@ -101,6 +104,8 @@ kubectl get pods -o=custom-columns=NAME:.metadata.name,NODE:.spec.nodeName,STATU
 
 Pods should be scheduled on nodes labeled `kubernetes.io/arch=amd64`.
 
+You’ve deployed your application to the x86 node pool and verified pod placement. This confirms your manifests and overlays work as expected before migrating to Arm.
+
 ## Migrate to the Arm (arm64) pool
 
 Apply the arm64 overlay to move workloads: 
@@ -116,6 +121,8 @@ kubectl get pods -o wide
 ```
 
 You should see pods now running on nodes where `kubernetes.io/arch=arm64`.
+
+You’ve migrated your workloads to the Arm node pool. Pods now run on Arm-based nodes, demonstrating a successful architecture transition.
 
 ## Verify external access
 
@@ -138,5 +145,6 @@ Copy the EXTERNAL-IP value and open it in a new browser tab:
 http://<EXTERNAL-IP>
 ```
 
-The microservices storefront loads, confirming that your application is accessible and functional on the arm64 node pool.
+The microservices storefront loads, confirming that your application is accessible and functional on the arm64 node pool. You’re now running a production-ready microservices storefront on Arm-powered GKE infrastructure.
 
+![Online Boutique storefront running on Google Axion (arm64) nodes in GKE #center](images/storefront-running-on-google-axion.jpeg  "Online Boutique storefront running on Google Axion (arm64) nodes in GKE")
