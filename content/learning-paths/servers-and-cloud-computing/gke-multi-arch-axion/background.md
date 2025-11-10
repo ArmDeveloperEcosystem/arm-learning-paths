@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Overview"
+title: "Explore the benefits of migrating microservices to Arm on GKE"
 
 weight: 2 
 
@@ -8,7 +8,10 @@ weight: 2
 layout: "learningpathall"
 ---
 
-This Learning Path shows you how to migrate a real microservices application from x86 to Arm on GKE using multi-architecture container images. You'll work with Google's Online Boutique, a sample application built with multiple programming languages that represents real production architectures. The migration requires no major code changes, making it a practical example of moving to Arm-based Google Axion processors.
+## Overview 
+
+This Learning Path shows you how to migrate a microservices application from x86 to Arm on GKE using multi-architecture container images. You'll work with Google's Online Boutique, a sample application built with multiple programming languages. The migration requires no code changes, making it a straightforward example of moving to Arm-based Google Axion processors.
+
 
 ## Why use Google Axion processors for GKE?
 
@@ -16,15 +19,15 @@ Google Axion processors bring modern Arm-based compute to GKE, delivering strong
 
 ### What is Google Axion?
 
-[Google Axion](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu) is Google Cloud's Arm-based CPU family built on Arm Neoverse, for general-purpose, cloud-native services and CPU-based AI. Deploy it for workloads like web apps and web servers, containerized microservices, open-source databases, in-memory caches, data analytics, media processing, and CPU-based AI inference and data processing. On GKE, leverage Axion through the C4A and N4A VM families, paired with Google's Titanium offloads to free CPU cycles for application work.
+[Google Axion](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu) is Google Cloud's Arm-based CPU family built on Arm Neoverse, for general-purpose, cloud-native services and CPU-based AI. You can deploy it for workloads like web apps and web servers, containerized microservices, open-source databases, in-memory caches, data analytics, media processing, and CPU-based AI inference and data processing. On GKE, you can leverage Axion through the C4A and N4A VM families, paired with Google's Titanium offloads to free CPU cycles for application work.
 
 ### Why migrate to Arm on GKE?
+There are three clear benefits to consider when considerring migrating to Arm on GKE:
 
-Consider three factors when evaluating Google Axion processors:
 
-- Price-performance: you can run more workload per unit of cost for scale-out services
-- Energy efficiency: you can reduce power usage for always-on microservices
-- Compatibility: migrate containerized apps with build and deploy changes only—no code rewrites required
+- Price-performance: you can run more workload per unit of cost, which is particularly valuable for scale-out services that need to handle increasing traffic efficiently.
+- Energy efficiency: you reduce power usage for always-on microservices, lowering both operational costs and environmental impact.
+- Compatibility: you can migrate containerized applications with build and deploy changes only—no code rewrites are required, making the transition straightforward.
 
 ## Learn about the Online Boutique sample application
 
