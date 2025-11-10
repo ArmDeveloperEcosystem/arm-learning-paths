@@ -22,7 +22,7 @@ Google Axion processors bring modern Arm-based compute to GKE. You get strong pr
 [Google Axion](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu) is Google Cloud's Arm-based CPU family built on Arm Neoverse, for general-purpose, cloud-native services and CPU-based AI. You can deploy it for workloads like web apps and web servers, containerized microservices, open-source databases, in-memory caches, data analytics, media processing, and CPU-based AI inference and data processing. On GKE, you can leverage Axion through the C4A and N4A VM families, paired with Google's Titanium offloads to free CPU cycles for application work.
 
 ## Why migrate to Arm on GKE?
-There are three clear benefits to consider when considerring migrating to Arm on GKE:
+There are three clear benefits to consider when considering migrating to Arm on GKE:
 
 - Price-performance: you can run more workload per unit of cost, which is particularly valuable for scale-out services that need to handle increasing traffic efficiently.
 - Energy efficiency: you reduce power usage for always-on microservices, lowering both operational costs and environmental impact.
