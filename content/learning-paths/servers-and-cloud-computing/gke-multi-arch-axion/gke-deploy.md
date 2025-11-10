@@ -5,14 +5,14 @@ weight: 6
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
-You'll now configure the application manifests to use your Artifact Registry images and create Kustomize overlays for different CPU architectures. This allows you to deploy the same application to both x86 and Arm node pools.
-
 ## Prepare deployment manifests
 
-Replace sample image references with your Artifact Registry path and tag, then create Kustomize overlays to select nodes by architecture.
+You'll now configure the application manifests to use your Artifact Registry images and create Kustomize overlays for different CPU architectures. This allows you to deploy the same application to both x86 and Arm node pools by replacing sample image references with your Artifact Registry path and tag, then creating overlays to select nodes by architecture.
 
-## Point base manifests at your images
+
+## Update base manifests to use your images
+
+Replace the sample image references in the base manifests with your Artifact Registry path and tag:
 
 Replace the image references with your references:
 

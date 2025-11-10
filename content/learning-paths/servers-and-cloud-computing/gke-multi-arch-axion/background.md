@@ -10,20 +10,19 @@ layout: "learningpathall"
 
 ## Overview 
 
-This Learning Path shows you how to migrate a microservices application from x86 to Arm on GKE using multi-architecture container images. You'll work with Google's Online Boutique, a sample application built with multiple programming languages. The migration requires no code changes, making it a straightforward example of moving to Arm-based Google Axion processors.
+This Learning Path shows you how to migrate a microservices application from x86 to Arm on Google Kubernetes Engine (GKE) using multi-architecture container images. You'll work with Google's Online Boutique, a sample application built with multiple programming languages. The migration requires no code changes, making it a straightforward example of moving to Arm-based Google Axion processors.
 
 
 ## Why use Google Axion processors for GKE?
 
-Google Axion processors bring modern Arm-based compute to GKE, delivering strong price-performance and energy efficiency for cloud-native, scale-out services. With multi-architecture images and mixed node pools, you can migrate services from x86 to Arm gradually, with no major code changes.
+Google Axion processors bring modern Arm-based compute to GKE. You get strong price-performance and energy efficiency for cloud-native, scale-out services. With multi-architecture images and mixed node pools, you can migrate services from x86 to Arm gradually, with no major code changes.
 
-### What is Google Axion?
+## What is Google Axion?
 
 [Google Axion](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu) is Google Cloud's Arm-based CPU family built on Arm Neoverse, for general-purpose, cloud-native services and CPU-based AI. You can deploy it for workloads like web apps and web servers, containerized microservices, open-source databases, in-memory caches, data analytics, media processing, and CPU-based AI inference and data processing. On GKE, you can leverage Axion through the C4A and N4A VM families, paired with Google's Titanium offloads to free CPU cycles for application work.
 
-### Why migrate to Arm on GKE?
+## Why migrate to Arm on GKE?
 There are three clear benefits to consider when considerring migrating to Arm on GKE:
-
 
 - Price-performance: you can run more workload per unit of cost, which is particularly valuable for scale-out services that need to handle increasing traffic efficiently.
 - Energy efficiency: you reduce power usage for always-on microservices, lowering both operational costs and environmental impact.
@@ -43,7 +42,7 @@ You'll migrate the Online Boutique application from x86 to Arm step by step. You
 
 The migration process involves these steps:
 
-- Open Google Cloud Shell and set the environment variables.
+- Open Google Cloud Shell and set up the environment variables.
 - Enable required APIs, create an Artifact Registry repository, and authenticate Docker.
 - Create a GKE Standard cluster with an amd64 node pool and add an arm64 (Axion-based C4A) node pool.
 - Create a Buildx (Kubernetes driver) builder that targets both pools, then build and push multi-architecture images (amd64 and arm64) natively using BuildKit pods.

@@ -10,9 +10,9 @@ layout: "learningpathall"
 
 ## Get started in Cloud Shell
 
-Use [Cloud Shell](https://cloud.google.com/shell/docs/using-cloud-shell) to set variables, enable APIs, create Artifact Registry, authenticate Docker, and clone the sample microservices demo.
+You can use [Cloud Shell](https://cloud.google.com/shell/docs/using-cloud-shell) to set variables, enable APIs, create Artifact Registry, authenticate Docker, and clone the sample microservices demo.
 
-Make sure `kubectl`, `gcloud`, `docker`, and `git` commands are installed.
+Make sure you have the following tools installed: `kubectl`, `gcloud`, `docker`, and `git`.
 
 {{% notice Note %}}
 You can use your local macOS or Linux computer instead of Cloud Shell. Make sure the required software is installed.
@@ -41,7 +41,7 @@ gcloud config set compute/zone "${ZONE}"
 
 You'll need the environment variables in any shell you use to work on the project.
 
-### Enable required Google Cloud APIs
+## Enable the required Google Cloud APIs
 
 Enable the required APIs so the project can create GKE clusters, push and pull container images in Artifact Registry, and use Cloud Build for CI/CD:
 
@@ -49,7 +49,7 @@ Enable the required APIs so the project can create GKE clusters, push and pull c
 gcloud services enable container.googleapis.com artifactregistry.googleapis.com cloudbuild.googleapis.com
 ```
 
-### Create an Artifact Registry (Docker) repository
+## Create an Artifact Registry (Docker) repository
 
 Create a Docker repository in Artifact Registry in this region for pushing and pulling your multi-architecture images:
 
@@ -57,7 +57,7 @@ Create a Docker repository in Artifact Registry in this region for pushing and p
 gcloud artifacts repositories create "${REPO}" --repository-format=docker --location="${REGION}" --description="Multi-arch images for microservices demo"
 ```
 
-### Authenticate Docker to Artifact Registry
+## Authenticate Docker to Artifact Registry
 
 Authenticate Docker to Artifact Registry so you can push and pull images:
 
@@ -65,7 +65,7 @@ Authenticate Docker to Artifact Registry so you can push and pull images:
 gcloud auth configure-docker "${REGION}-docker.pkg.dev"
 ```
 
-### Clone the Online Boutique sample microservices application
+## Clone the Online Boutique sample microservices application
 
 Clone the sample application repository:
 

@@ -1,5 +1,5 @@
 ---
-title: Migrate x86 workloads to Arm on GKE with Google Axion
+title: Migrate x86 workloads to Arm on Google Kubernetes Engine with Axion processors 
 
 minutes_to_complete: 90
 
@@ -36,7 +36,7 @@ tools_software_languages:
     
 further_reading:
     - resource:
-        title: GKE documentation
+        title: Google Kubernetes Engine documentation
         link: https://cloud.google.com/kubernetes-engine/docs
         type: documentation
     - resource:

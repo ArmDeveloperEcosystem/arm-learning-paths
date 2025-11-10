@@ -6,28 +6,35 @@ weight: 4
 layout: learningpathall
 ---
 
-With your environment set up, you're ready to modify the Online Boutique services to support multi-architecture builds.
+## Update Dockerfiles to support multi-architecture builds
 
-You will patch some Dockerfiles so they build cleanly for both architectures. In the next section, you will build and push images using a GKE-native Buildx builder.
+Now that your environment set up, you're now ready to modify the Online Boutique services to support multi-architecture builds.
+
+You will patch some Dockerfiles so they build cleanly for both architectures. 
 
 ## Services to edit
 
-Most services already build for both architectures.
+Most services in Online Boutique already build for both architectures without any changes.
 
-The four listed below need small changes:
+Four services need small updates:
 
 - emailservice
 - recommendationservice
 - loadgenerator
 - cartservice
 
-These edits don't change application behavior, they only ensure the right compiler headers and runtime libraries are present per architecture. This includes Python native wheels for email/recommendation/loadgen, and system `protoc` for the .NET cartservice.
+These edits ensure the correct compiler headers and runtime libraries are present for each architecture. The changes include:
+
+- Python native wheels for emailservice, recommendationservice, and loadgenerator
+- System `protoc` for the .NET cartservice
+
+These updates don't change application behavior.
 
 {{% notice Note %}}
 Production migrations begin with assessing cross-architecture compatibility for each service (base images, native extensions such as CGO/JNI, platform-specific packages, and CI build targets). This section demonstrates minor Dockerfile edits for four representative services. In the referenced Online Boutique release, the remaining services generally build for both **amd64** and **arm64** without modification.
 {{% /notice %}}
 
-### Update the emailservice Dockerfile
+## Update the emailservice Dockerfile
 
 You can review the [emailservice Dockerfile](https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/src/emailservice/Dockerfile) before replacing it.
 
@@ -73,21 +80,18 @@ EOF
 
 Here is a summary of the changes:
 
-- **BuildKit syntax** unlocks `--mount=type=cache` to speed rebuilds.
-- **TARGETPLATFORM** lets Buildx set linux/amd64 vs linux/arm64 explicitly.
-- **Dev vs runtime packages:** build stage compiles native wheels; final stage keeps only needed shared libs.
-- **`--prefer-binary`** avoids source builds when wheels exist (more reliable across arches).
-- **Removed extra `apk update`** since `apk add --no-cache` already avoids stale indexes & caches.
+- The updated Dockerfile uses BuildKit syntax to enable cache mounts, which speed up rebuilds. 
+- The `TARGETPLATFORM` argument allows Buildx to explicitly set the target architecture (either `linux/amd64` or `linux/arm64`). The build follows a two-stage approach: the builder stage compiles native wheels with necessary development packages, while the final runtime stage includes only the required shared libraries. 
+- The `--prefer-binary` flag helps avoid building from source when pre-built wheels are available, making builds more reliable across architectures. The update also removes the extra `apk update` command because `apk add --no-cache` already handles index updates without creating a cache.
 
-## Apply updates to the other three services
+## Apply updates to recommendationservice, loadgenerator, and cartservice
 
 Run the following sed commands to automatically patch the remaining Dockerfiles.
 
 ### Update the recommendationservice Dockerfile
+You can review the [recommendationservice Dockerfile](https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/src/recommendationservice/Dockerfile) before modifying it.
 
-You can review the [recommendationservice Dockerfile](https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/src/recommendationservice/Dockerfile) before modifying it. 
-
-Paste the command below to your terminal to update the file with the required multi-architecture changes.
+Run the following command to update the file with the required multi-architecture changes:
 
 ```bash
 sed -i \
@@ -101,17 +105,13 @@ sed -i \
   src/recommendationservice/Dockerfile
 ```
 
-Here is a summary of the changes:
-
-- Make the base image architecture-aware
-- Let native wheels build cleanly
-- Keep the runtime slim & predictable
+The three key changes are to make the base image architecture-aware, let native wheels build cleanly, and keep the runtime slim and predictable.
 
 ### Update loadgenerator Dockerfile
 
 You can review the [loadgenerator Dockerfile](https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/src/loadgenerator/Dockerfile) before modifying it. 
 
-Paste the command below to your terminal to run `sed` to update the file with the required multi-architecture changes.
+Run the following command to update the file with the required multi-architecture changes:
 
 ```bash
 FILE=src/loadgenerator/Dockerfile
@@ -135,17 +135,12 @@ sed -i -E \
   "$FILE"
 ```
 
-Here is a summary of the changes:
-
-- Make the base image architecture-aware
-- Fix native build/run deps
-- Keep runtime lean and no flags/app code changed
+The changes focus on three key areas. First, make the base image architecture-aware so it automatically selects the correct variant for your platform. Second, fix native build and runtime dependencies to ensure they match the target architecture. Third, keep the runtime environment lean—you don't need to change any flags or application code.
 
 ### Update cartservice Dockerfile
 
 You can review the [carkservice Dockerfile](https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/src/cartservice/src/Dockerfile) before replacing it. 
-
-Paste the command below to your terminal to update the file with the required multi-architecture changes.
+Run the following command to update the file with the required multi-architecture changes:
 
 ```bash
 FILE=src/cartservice/src/Dockerfile
@@ -164,14 +159,17 @@ sed -i \
 
 Here is a summary of the changes:
 
-- Install the system `protoc` command
-- Force MSBuild to use the supplied `protoc` command
-- No behavioral changes
+- Install the system `protoc` compiler in the builder image
+- Configure MSBuild to use the installed `protoc` instead of downloading one
+
+These changes don't affect application behavior.
 
 {{% notice Note %}}
-`ARG TARGETPLATFORM` + `FROM --platform=$TARGETPLATFORM` is not strictly required if you always build with --platform and your base image is multi-arch. Keeping it is good practice and makes intent explicit and does not change runtime behavior.
+Using `ARG TARGETPLATFORM` and `FROM --platform=$TARGETPLATFORM` isn't strictly required when you build with `--platform` and your base image supports multiple architectures. However, keeping these declarations makes your build intent explicit and doesn't change runtime behavior.
 
 {{% /notice %}}
 
-After making the Dockerfile modification, all services now support multi-architecture builds.
+After updating these Dockerfiles, all services support multi-architecture builds. You're ready to build and push images using a GKE-native Buildx builder. Great job!
+
+
 
