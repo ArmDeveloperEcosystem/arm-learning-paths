@@ -45,7 +45,7 @@ You must use a version >= 1.4.321 for the Vulkan SDK.
 
 For this Learning Path, a pre-built of package of the emulation layers is available. Download them by clicking the link.
 
-[ML Emulation Layer for Vulkan](https://www.arm.com/-/media/Files/developer/MLEmulationLayerForVulkan)
+[ML Emulation Layer for Vulkan](https://www.arm.com/-/media/Files/developer/MLEmulationLayerForVulkan20251107)
 
 Extract the downloaded file in a location of your choice. You’re now ready to enable the emulation layers in Vulkan Configurator.
 

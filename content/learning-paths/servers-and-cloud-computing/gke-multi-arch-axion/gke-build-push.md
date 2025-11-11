@@ -1,10 +1,12 @@
 ---
-title: Provision a dual-architecture GKE cluster and publish images
-weight: 4
+title: Build and deploy multi-architecture images on GKE
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## Create a cluster and build the multi-arch images
 
 You are ready to create a GKE cluster with two node pools (amd64 and arm64), then build and push multi-arch images natively on those node pools. 
 
@@ -40,7 +42,7 @@ This approach prevents users on the default VPC from accidentally setting NETWOR
 
 Create a GKE Standard cluster with VPC-native (IP aliasing) enabled and no default node pool. You'll add amd64 and arm64 pools in the next step.
 
-The command below works for both default and custom VPCs. If the NETWORK, SUBNET, and secondary range variables are unset, GKE uses the default VPC and manages ranges automatically.
+The command below works for both default and custom VPCs. If the NETWORK, SUBNET, and secondary range variables are unset, GKE uses the default VPC and manages ranges automatically:
 
 ```bash
 # Cluster vars (reuses earlier PROJECT_ID/REGION/ZONE)

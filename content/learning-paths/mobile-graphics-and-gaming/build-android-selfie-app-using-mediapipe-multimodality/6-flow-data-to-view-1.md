@@ -366,5 +366,5 @@ class GestureOverlayView(context: Context?, attrs: AttributeSet?) :
 
 4. Build and run the app again. Now you should see face and gesture overlays on top of the camera preview as shown below. Good job!
 
-![overlay views alt-text#center](images/6/overlay%20views.png "Figure 7: Face and Gesture Overlays.")
+![overlay views alt-text#center](images/6/overlay_views.png "Figure 7: Face and Gesture Overlays.")
 
