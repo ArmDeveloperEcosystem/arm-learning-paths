@@ -135,7 +135,7 @@ This script creates a Arm KleidiAI 4‑bit quantized copy of the vLLM model and 
 
 ```bash
 # DeepSeek example
-python quantize_vllm_models.py deepseek-ai/DeepSeek-V2-Lite \
+python3 quantize_vllm_models.py deepseek-ai/DeepSeek-V2-Lite \
   --scheme channelwise --method mse
 ```
 
