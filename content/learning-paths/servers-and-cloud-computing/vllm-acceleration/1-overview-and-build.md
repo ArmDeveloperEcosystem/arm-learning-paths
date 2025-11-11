@@ -42,7 +42,8 @@ Install the minimum system package used by vLLM on Arm:
 
 ```bash
 sudo apt-get update -y
-sudo apt-get install -y libnuma-dev
+sudo apt-get install -y build-essential cmake libnuma-dev
+sudo apt install python3.12-venv python3.12-dev
 ```
 
 Optional performance helper you can install now or later:
@@ -60,9 +61,9 @@ On aarch64, vLLM’s CPU backend automatically builds with Arm Compute Library v
 Create and activate a virtual environment:
 
 ```bash
-python3 -m venv vllm_env
+python3.12 -m venv vllm_env
 source vllm_env/bin/activate
-python -m pip install --upgrade pip
+python3 -m pip install --upgrade pip
 ```
 
 Clone vLLM and install build requirements:
