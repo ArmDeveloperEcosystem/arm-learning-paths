@@ -61,7 +61,7 @@ Halide can be set up using one of two main approaches:
 Here, you will use pre-built binaries:
   1. Visit the official Halide releases [page](https://github.com/halide/Halide/releases). As of this writing, the latest Halide version is v19.0.0.
   2. Download and unzip the binaries to a convenient location (e.g., /usr/local/halide on Linux/macOS or C:\halide on Windows).
-  3. 3. Optionally set environment variables to simplify further usage:
+  3. Optionally set environment variables to simplify further usage:
 ```console
 export HALIDE_DIR=/path/to/halide
 export PATH=$HALIDE_DIR/bin:$PATH
