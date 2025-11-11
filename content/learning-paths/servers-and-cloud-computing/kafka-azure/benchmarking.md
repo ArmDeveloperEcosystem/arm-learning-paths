@@ -101,6 +101,7 @@ Minimal rebalance and fetch times confirm Kafka’s responsiveness under sustain
 |--------|--------------|-------------|------------|-----------------|-----------------|-------------------------|-------------------------|-------------------------|---------------------------|
 | Value  | 1,000,000    | 257,532.8   | 24.56      | 816.19          | 1237.00         | 799                     | 1168                    | 1220                    | 1231                      |
 | Unit   | Records      | Records/sec | MB/sec     | ms              | ms              | ms                      | ms                      | ms                      | ms                        |
+
 Interpretation:
 The producer sustained a throughput of ~257,500 records/sec (~24.5 MB/sec) with an average latency of 816 ms.
 The 95th percentile latency (1168 ms) and 99th percentile (1220 ms) show predictable network and I/O performance.
