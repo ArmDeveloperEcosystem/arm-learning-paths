@@ -126,6 +126,6 @@ bin/kafka-console-consumer.sh --topic test-topic-kafka --from-beginning --bootst
 ```
 If Kafka is working correctly, you should immediately see your message `hello from azure arm vm` displayed:
 
+You’ve now completed a full end-to-end Kafka validation test on your Azure Cobalt 100 Arm64 VM, verifying producer, broker, and consumer communication.
 
 Now you can proceed to benchmarking Kafka’s performance on the Azure Cobalt 100 Arm virtual machine.
-`hello from azure arm vm`
