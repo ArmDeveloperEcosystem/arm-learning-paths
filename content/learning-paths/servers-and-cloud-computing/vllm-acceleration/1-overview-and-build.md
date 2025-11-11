@@ -43,7 +43,7 @@ Install the minimum system package used by vLLM on Arm:
 ```bash
 sudo apt-get update -y
 sudo apt-get install -y build-essential cmake libnuma-dev
-sudo apt install python3.12-venv python3.12-dev
+sudo apt install -y python3.12-venv python3.12-dev
 ```
 
 Optional performance helper you can install now or later:
