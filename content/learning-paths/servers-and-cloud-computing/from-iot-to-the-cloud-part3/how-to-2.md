@@ -32,11 +32,11 @@ The previous step will activate the Create Kubernetes cluster wizard, which you 
 
 At this point, your configuration should look as follows:
 
-![AKS#left](figures/03.png)
+![AKS#left](figures/03.webp)
 
 Click **Next: Node pools >**. This will open the Node pools tab. Under the Node pools tab, click the hyperlink **Standard DS2_v2 (change)** under the Node size column of the agent pool:
 
-![AKS#left](figures/04.png)
+![AKS#left](figures/04.webp)
 
 You will see the Update node pool wizard, in which you do the following:
 1.	Under the Scale method, select **Manual**
@@ -45,21 +45,21 @@ You will see the Update node pool wizard, in which you do the following:
 4.	This will open Select a VM size screen, where you look for **D2pds_v5 VM** (the arm64-based VM you used in the first part of this learning series).
 5.	Click the **Select** button
 
-![AKS#left](figures/05.png)
+![AKS#left](figures/05.webp)
 
 Your Update node pool wizard should look as follows:
 
-![AKS#left](figures/06.png)
+![AKS#left](figures/06.webp)
 
 Click the **Update** button. This will take you back to the Create Kubernetes cluster wizard, where you click the **Next: Networking >** button. Under the **Networking** tab, scroll down to Network policy and select **None**. Then click the **Next: Integrations >** button.
 
 Under integrations, look for the Container registry and select **people** (or your Azure Container Registry, if you used a different name):
 
-![AKS#left](figures/07.png)
+![AKS#left](figures/07.webp)
 
 Finally, click the **Review + create** button and wait for the validation to complete. Then, click the **Create** button:
 
-![AKS#left](figures/08.png)
+![AKS#left](figures/08.webp)
 
 Wait a few moments for the cluster to be deployed, and in the confirmation screen, click the **Go to resource** button.
 

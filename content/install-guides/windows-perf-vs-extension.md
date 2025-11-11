@@ -109,7 +109,7 @@ The WindowsPerf extension is composed of several key features, each designed to 
 
 The sampling interface is shown below:
 
-![Sampling preview #center](/install-guides/_images/wperf-vs-extension-sampling-preview.png)
+![Sampling preview #center](/install-guides/_images/wperf-vs-extension-sampling-preview.webp)
 
 * Counting Settings UI: Build a `wperf stat` command from scratch using the configuration interface, then view the output in VS Code or open it with Windows Performance Analyzer (WPA). 
 The interface to configure counting is shown below:

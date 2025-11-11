@@ -17,7 +17,7 @@ To access Compiler Explorer, open a browser and go to https://godbolt.org.
 
 This leads you to the page shown below in Figure 1. Your view might be slightly different. 
 
-![godbolt open alt-text#center](open.png "Figure 1. Compiler Explorer")
+![godbolt open alt-text#center](open.webp "Figure 1. Compiler Explorer")
 
 The left side of the page contains the source code. In Figure 1, the language is set to C++, but you can click on the programming language to select a different language for the source code. 
 

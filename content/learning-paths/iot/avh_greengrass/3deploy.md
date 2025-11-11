@@ -24,7 +24,7 @@ For the `Deployment target` select `Thing group`.
 
 For the `Target name` select the `MyGreengrassCoreGroup` that was created when you installed AWS IoT Greengrass.
 
-![create deployment screen](gg_create_deployment.png)
+![create deployment screen](gg_create_deployment.webp)
 
 The next step is to select which components should be in your deployment. 
 
@@ -42,7 +42,7 @@ Verify your component selection and deployment target and click the `Deploy` but
 
 After deploying you will be redirected to your `AVH-Testing` deployment page.
 
-![deployment overview](gg_deployment_overview.png)
+![deployment overview](gg_deployment_overview.webp)
 
 After a moment you should see that the deployment to your `MyGreengrassCore` device was successful.
 
@@ -81,6 +81,6 @@ You should see a similar help message printed.
 
   This is the first revision of your deployment. In the future, you can add components, remove the Greengrass CLI component, and change configurations by simply revising your `AVH-Testing` deployment.
 
-  ![revise a deployment](gg_revise_deployment.png)
+  ![revise a deployment](gg_revise_deployment.webp)
 
   When you create a new revision of your deployment, the new components and configurations are automatically deployed to every device in your deployment simultaneously.

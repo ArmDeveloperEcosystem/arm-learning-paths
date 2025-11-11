@@ -16,7 +16,7 @@ Start by creating a new project, and configuring it:
 1. Open Android Studio on your development machine, and click the **+ New Project** icon.
 2. In the **New Project** window, select **Empty Views Activity**:
 
-![img1 alt-text#center](figures/01.png "Figure 1: Creating a new project.")
+![img1 alt-text#center](figures/01.webp "Figure 1: Creating a new project.")
 
 3. Figure 2 shows you how to configure the project:
 - Name: **Arm64.KleidiCV.Demo**.
@@ -26,7 +26,7 @@ Start by creating a new project, and configuring it:
 - Minimum SDK: **API 24**.
 - Build configuration language: **Kotlin DSL**.
 
-![img2 alt-text#center](figures/02.png "Figure 2: Configuring your new project.")
+![img2 alt-text#center](figures/02.webp "Figure 2: Configuring your new project.")
 
 4. Click the **Finish** button. 
 

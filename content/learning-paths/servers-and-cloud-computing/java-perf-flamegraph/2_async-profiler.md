@@ -51,4 +51,4 @@ Alternatively, if you already know the process ID (PID):
 
 Open the generated `profile.html` file in a browser to view your Java flame graph:
 
-![Flame graph visualization showing Java method stack traces captured using async-profile alt-text#center](_images/lp-flamegraph-async.png "Java flame graph built using async-profiler")
+![Flame graph visualization showing Java method stack traces captured using async-profile alt-text#center](_images/lp-flamegraph-async.webp "Java flame graph built using async-profiler")

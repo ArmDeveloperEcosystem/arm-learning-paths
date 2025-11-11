@@ -55,7 +55,7 @@ Start by creating the Create Cosmos DB account and database:
 ![img15 alt-text#center](figures/15.png)
 
 3. Select Azure Cosmos DB for NoSQL, then click **Create**.
-![img16 alt-text#center](figures/16.png)
+![img16 alt-text#center](figures/16.webp)
 
 4. Fill in the required details:
 * Subscription: select your subscription.

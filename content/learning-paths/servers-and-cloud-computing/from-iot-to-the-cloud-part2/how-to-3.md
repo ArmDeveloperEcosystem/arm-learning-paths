@@ -47,7 +47,7 @@ You can now create another Azure Container Instance. To do this, go to the Azure
 12.	OS type: **Linux**
 13.	Size: **1 vcpu, 1.5 GiB memory, 0 gpus** (or choose any other size, if this specific size is unavailable in the Azure region you used)
 
-![Azure#left](figures/12.png)
+![Azure#left](figures/12.webp)
 
 Click the **Review + create** button. Wait for the validation to complete, and then click the **Create** button.
 

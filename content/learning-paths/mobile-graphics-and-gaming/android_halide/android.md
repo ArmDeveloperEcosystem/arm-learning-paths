@@ -41,14 +41,14 @@ Before integrating Halide into your Android application, ensure you have the nec
 ### Creating the project
 1. Open Android Studio.
 2. Select New Project > Native C++.
-![img4](Figures/04.png)
+![img4](Figures/04.webp)
 
 ### Configure the project
 1. Set the project Name to Arm.Halide.AndroidDemo.
 2. Choose Kotlin as the language.
 3. Set Minimum SDK to API 24.
 4. Click Next.
-![img5](Figures/05.png)
+![img5](Figures/05.webp)
 5. Select C++17 from the C++ Standard dropdown list.
 ![img6](Figures/06.png)
 6. Click Finish.
@@ -202,7 +202,7 @@ Now, you'll define the application's User Interface, consisting of two buttons a
 
 Now you can run the app to view the UI:
 
-![img7](Figures/07.png)
+![img7](Figures/07.webp)
 
 ## Processing
 You will now implement the image processing code. First, pick up an image you want to process. Here we use the camera man. Then, under the Arm.Halide.AndroidDemo/src/main create assets folder, and save the image under that folder as img.png.
@@ -351,7 +351,7 @@ Note that performing the grayscale conversion in Halide allows us to exploit ope
 The JNI integration occurs through an external method declaration, blurThresholdImage, loaded via the companion object at app startup. The native library (armhalideandroiddemo) containing this function is compiled separately and integrated into the application (native-lib.cpp).
 
 You will now need to create blurThresholdImage function. To do so, in Android Studio put the cursor above blurThresholdImage function, and then click Create JNI function for blurThresholdImage:
-![img8](Figures/08.png)
+![img8](Figures/08.webp)
 
 This will generate a new function in the native-lib.cpp:
 ```cpp

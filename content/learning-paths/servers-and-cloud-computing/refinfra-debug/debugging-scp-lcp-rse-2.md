@@ -40,7 +40,7 @@ Click **Browse for model running on local host**.
 
 Select the correct model, and click **Finish**.
 
-![connect model alt-text#center](images/connect_model.png "Figure 4. Connect model")
+![connect model alt-text#center](images/connect_model.webp "Figure 4. Connect model")
 
 In the **Edit configuration and launch** panel, in the **Connection** tab, select the correct target.
 
@@ -86,11 +86,11 @@ break cmn700_discovery
 continue
 ```
 
-![scp breakpoint 1 alt-text#center](images/scp_breakpoint1.png "Figure 7. cmn700_discovery() breakpoint")
+![scp breakpoint 1 alt-text#center](images/scp_breakpoint1.webp "Figure 7. cmn700_discovery() breakpoint")
 
 Set another breakpoint at a debug print statement.
 
-![scp breakpoint 2 alt-text#center](images/scp_breakpoint2.png "Figure 8. SCP breakpoint 2")
+![scp breakpoint 2 alt-text#center](images/scp_breakpoint2.webp "Figure 8. SCP breakpoint 2")
 
 Observe the output in the SCP UART window.
 

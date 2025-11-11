@@ -129,6 +129,6 @@ http://<your-vm-public-ip>/
 
 ## Verify the page renders  
 You should see your custom page instead of the default welcome page:
-![Custom static website served by NGINX on Azure VM alt-text#center](images/nginx-web.png "Custom static website served by NGINX on an Azure Arm64 VM")
+![Custom static website served by NGINX on Azure VM alt-text#center](images/nginx-web.webp "Custom static website served by NGINX on an Azure Arm64 VM")
 
 This verifies the basic functionality of the NGINX installation. You can now proceed to benchmarking NGINX performance on your Arm-based Azure VM.

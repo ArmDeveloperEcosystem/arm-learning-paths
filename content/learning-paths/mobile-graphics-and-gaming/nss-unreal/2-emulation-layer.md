@@ -47,7 +47,7 @@ Keep the Vulkan Configurator running to enable the emulation layers during engin
 
 1. Open Unreal Engine and create a new **Third Person** template project using the **C++** option.
 
-![Unreal Engine project selection screen showing C++ Third Person template#center](./images/unreal_startup.png "Figure 3: Create a new C++ project in Unreal Engine.")
+![Unreal Engine project selection screen showing C++ Third Person template#center](./images/unreal_startup.webp "Figure 3: Create a new C++ project in Unreal Engine.")
 
 2. Open the project in **Visual Studio**. Build it from source through **Build** > **Build Solution** or with `Ctrl+Shift+B`.
 

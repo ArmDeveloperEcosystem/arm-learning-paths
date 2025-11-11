@@ -28,8 +28,8 @@ cd $HOME/ai-camera-pipelines
 bin/cinematic_mode resources/test_input.png test_output.png resources/depth_and_saliency_v3_2_assortedv2_w_augment_mobilenetv2_int8_only_ptq.tflite
 ```
 
-![example image alt-text#center](test_input2.png "Input image")
-![example image alt-text#center](test_output2.png "Image with blur applied")
+![example image alt-text#center](test_input2.webp "Input image")
+![example image alt-text#center](test_output2.webp "Image with blur applied")
 
 ## Low-Light Enhancement
 
@@ -40,8 +40,8 @@ cd $HOME/ai-camera-pipelines
 bin/low_light_image_enhancement resources/test_input.png test_output2_lime.png resources/HDRNetLIME_lr_coeffs_v1_1_0_mixed_low_light_perceptual_l1_loss_float32.tflite
 ```
 
-![example image alt-text#center](test_input2.png "Input image")
-![example image alt-text#center](test_output2_lime.png "Image with low-light enhancement applied")
+![example image alt-text#center](test_input2.webp "Input image")
+![example image alt-text#center](test_output2_lime.webp "Image with low-light enhancement applied")
 
 
 ### Neural denoising

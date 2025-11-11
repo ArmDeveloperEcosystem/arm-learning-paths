@@ -27,7 +27,7 @@ To modify your existing installation of Visual Studio:
 
 3. On the Workloads tab, click on the `.NET desktop development` checkbox and then select `Modify`.
 
-![img2](net2.png)
+![img2](net2.webp)
 
 After the installation completes, close the installer.
 

@@ -18,7 +18,7 @@ To set up an Arm-powered EC2 instance, follow these steps:
    
    Then, click on **EC2** in the search results:
 
-![Figure 5 alt-text#center](figures/05.png "Figure 5: Search for the EC2 Service in the AWS Management Console.")
+![Figure 5 alt-text#center](figures/05.webp "Figure 5: Search for the EC2 Service in the AWS Management Console.")
 
 3. In the EC2 Dashboard, click **Launch Instance** and add the following information in these corresponding data fields to configure your setup:
 * Name: enter **arm-server**.
@@ -28,7 +28,7 @@ To set up an Arm-powered EC2 instance, follow these steps:
 
 The configuration should look like the configuration fields that Figure 6 shows:
 
-![Figure 6 alt-text#center](figures/06.png "Figure 6: Configuration Fields.")
+![Figure 6 alt-text#center](figures/06.webp "Figure 6: Configuration Fields.")
 
 4. Scroll down to **Key pair** (login), and click **Create new key pair**. 
   This displays the **Create key pair** window. 
@@ -49,7 +49,7 @@ The configuration should look like the configuration fields that Figure 6 shows:
 * Description: **arm-security-group**.
 * Inbound security groups. 
 
-![fig8](figures/08.png)
+![fig8](figures/08.webp)
 
 6. Configure **Inbound Security Group Rules** by selecting **Add Rule** and then setting the following details:
 * Type: **Custom TCP**.
@@ -61,13 +61,13 @@ Repeat this step for all three ports that the application is using. This example
 
 The configuration should look like:
 
-![fig9](figures/09.png)
+![fig9](figures/09.webp)
 
 7. Launch an instance by clicking the **Launch instance** button. You should see the green box with the **Success** label. 
 
 This box also contains a link to the EC2 instance. Click on it, and it takes you to the instance dashboard, as Figure 10 shows:
 
-![fig10](figures/10.png)
+![fig10](figures/10.webp)
 
 ### Deploy the application
 Once the EC2 instance is ready, you can connect to it, and deploy the application. Follow these steps to connect:
@@ -129,7 +129,7 @@ The application runs the same way as it does locally. You should see the followi
 
 Finally, open the application in the web browser, using the EC2's public IP:
 
-![fig13](figures/13.png)
+![fig13](figures/13.webp)
 
 ### Summary 
 You have successfully deployed the Aspire app on to an Arm-powered AWS EC2 instance. This demonstrates the compatibility of .NET applications with Arm architecture and AWS Graviton instances, offering high performance and cost-efficiency.

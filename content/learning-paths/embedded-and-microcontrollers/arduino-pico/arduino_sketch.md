@@ -246,7 +246,7 @@ If successful, you should see the LED on your board light up. If you wave your h
 
 You can further check that your code is running properly by opening the `Serial Monitor` from the `Tools` menu of the Arduino IDE. There you should see all of the output messages, including count of detected motion events, coming from your sketch.
 
-![Debug output](_images/output.png)
+![Debug output](_images/output.webp)
 
 Congratulations! You have successfully programmed your microcontroller and built a working, if simple, smart device. 
 

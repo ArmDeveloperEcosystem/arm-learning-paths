@@ -156,7 +156,7 @@ echo "http://$(curl -s ifconfig.me)/"
 
 Open this URL in your browser. You should see the styled HTML landing page served by your Go application.
 
-![Go web server running on Azure Cobalt 100 Arm64 alt-text#center](images/go-web.png "Go web server running on Azure Cobalt 100 Arm64")
+![Go web server running on Azure Cobalt 100 Arm64 alt-text#center](images/go-web.webp "Go web server running on Azure Cobalt 100 Arm64")
 
 ## Baseline Testing Complete
 

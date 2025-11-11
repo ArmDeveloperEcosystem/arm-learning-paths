@@ -25,7 +25,7 @@ The complete project code used in this learning path is hosted [here](https://gi
 ## Project Setup
 To set up the project, start by creating the dependencies (the DLLs). In this example you will use CMake in Visual Studio 2022 to create the base project for your dependencies. You can also use MS Build/Visual C++ project templates to compile to Arm64EC by adding the architecture to your build configuration. To access CMake, open Visual Studio 2022 and click Create a new project and look for CMake Project in the window that appears.
 
-![fig1](figures/01.png)
+![fig1](figures/01.webp)
 
 Then, click **Next** and set the following configurations:
 

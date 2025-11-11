@@ -20,7 +20,7 @@ Follow these steps to create a project and add OpenCV:
 
 2. In the New Project window, select **Empty Views Activity**:
 
-![img2](figures/02.png)
+![img2](figures/02.webp)
 
 3. Configure the project as follows (see figure below):
 - Name: **Arm64.OpenCV.FaceDetection**.
@@ -30,7 +30,7 @@ Follow these steps to create a project and add OpenCV:
 - Minimum SDK: **API 24**.
 - Build configuration language: **Kotlin DSL**.
 
-![img3](figures/03.png)
+![img3](figures/03.webp)
 
 4. Click the **Finish** button. 
 
@@ -51,7 +51,7 @@ You will now initialize OpenCV and prepare the application to stream frames from
 1. Under the Project in the left window, double-click *app/res/layout/activity_main.xml*. This opens the view designer. 
 2. Click the highlighted icon in the top right corner to switch to the XML view.
 
-![img4](figures/04.png)
+![img4](figures/04.webp)
 
 3. Modify the *activity_main.xml* as shown below:
 
@@ -218,7 +218,7 @@ The above code also declares CameraBridgeViewBase.CvCameraViewListener2 methods:
 ## Launch the application
 You have just prepared the application to stream camera frames. You can now launch the application in the emulator. To do so, click the green 'run' button as shown here:
 
-![click run](figures/05.png)
+![click run](figures/05.webp)
 
 The application should start, and you should see the app running in an emulator. It will ask you for camera permissions.
 

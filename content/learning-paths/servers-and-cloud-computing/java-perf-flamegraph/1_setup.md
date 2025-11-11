@@ -77,9 +77,9 @@ In your browser, open: `http://${tomcat_ip}:8080/examples`.
 
 You should see the Tomcat welcome page and examples, as shown below:
 
-![Screenshot of the Tomcat homepage showing version and welcome panel alt-text#center](./_images/lp-tomcat-homepage.png "Apache Tomcat homepage")
+![Screenshot of the Tomcat homepage showing version and welcome panel alt-text#center](./_images/lp-tomcat-homepage.webp "Apache Tomcat homepage")
 
-![Screenshot of the Tomcat examples page showing servlet and JSP demo links alt-text#center](./_images/lp-tomcat-examples.png "Apache Tomcat examples")
+![Screenshot of the Tomcat examples page showing servlet and JSP demo links alt-text#center](./_images/lp-tomcat-examples.webp "Apache Tomcat examples")
 
 {{% notice Note %}}Make sure port 8080 is open in the security group of the IP address for your Arm-based Linux machine.{{% /notice%}}
 

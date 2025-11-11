@@ -287,7 +287,7 @@ perf report
 
 When the report opens, use the down arrow key to highlight the `main` function:
 
-![stride #center](report-1.png)
+![stride #center](report-1.webp)
 
 Press return to annotate the main function.
 
@@ -295,7 +295,7 @@ Press return to annotate the main function.
 
 You will see the source code of the `main` function with the percent of samples for each line of source code.
 
-![main #center](report-3.png)
+![main #center](report-3.webp)
 
 All the samples are on `subs` instruction which is right after the load instruction which reads the array and causes the high cache miss rate. Press the `q` key to exit the report.
 

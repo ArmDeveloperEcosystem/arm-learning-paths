@@ -63,15 +63,15 @@ pulumi up
 
 The Pulumi will analyze your index.ts file to get the list of resources to be deployed. Then, it will display the list of resources to be deployed:
 
-![Pulumi#left](figures/03.png)
+![Pulumi#left](figures/03.webp)
 
 Confirm the deployment by selecting yes and pressing enter. Then, wait a few moments for the resources to be deployed. Once the deployment is done, you will see the public IP address of your Azure Container Instance. Here, that is **4.236.196.236**.
 
-![Pulumi#left](figures/04.png)
+![Pulumi#left](figures/04.webp)
 
 Copy the IP address and supplement it by 8080. Then, type it in the address bar of your web browser. You will see the application up and running. Compare this result to what we get in part 2 of this series.
 
-![Pulumi#left](figures/05.png)
+![Pulumi#left](figures/05.webp)
 
 ## Clean up
 We have just deployed Azure resources using the Infrastructure as Code. The advantage of this approach is that we can now update the cloud infrastructure by modifying the index.ts and re-running the pulumi up command. It will compare the new declaration with the current state of the cloud deployment and update if needed. Also, you can use a single Pulumi command to de-provision all resources declared in the index.ts. To do so, you type:
@@ -82,11 +82,11 @@ pulumi down
 
 Pulumi will ask you to confirm your choice (select yes and press enter):
 
-![Pulumi#left](figures/06.png)
+![Pulumi#left](figures/06.webp)
 
 After a few moments, you will see the delete confirmation message:
 
-![Pulumi#left](figures/07.png)
+![Pulumi#left](figures/07.webp)
 
 ## Summary
 You learned how to use infrastructure as code using Pulumi in this learning path. This approach is particularly beneficial as you can code cloud infrastructure as an application. Therefore, you can keep the declarations of the cloud infrastructure in the git repository and apply typical workflows you use for the application code development and deployment, like pull requests.

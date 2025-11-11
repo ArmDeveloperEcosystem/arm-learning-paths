@@ -274,7 +274,7 @@ Expected behavior:
 
 You can also monitor traffic and scaling in the Kedify dashboard:
 
-![Kedify dashboard showing request load and scaling over time alt-text#center](images/load.png "Kedify dashboard: request load and scaling over time")
+![Kedify dashboard showing request load and scaling over time alt-text#center](images/load.webp "Kedify dashboard: request load and scaling over time")
 
 ## Clean up
 

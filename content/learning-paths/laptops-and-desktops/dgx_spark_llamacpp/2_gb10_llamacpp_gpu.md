@@ -183,7 +183,7 @@ This command displays GPU utilization, memory usage, temperature, and power cons
 
 The following screenshot shows GPU utilization during TinyLlama inference on DGX Spark:
 
-![nvtop terminal interface displaying real-time GPU metrics, including GPU utilization, memory usage, temperature, power consumption, and active processes for the NVIDIA GB10 GPU during model inference on DGX Spark. alt-text#center](nvtop.png "TinyLlama GPU Utilization")
+![nvtop terminal interface displaying real-time GPU metrics, including GPU utilization, memory usage, temperature, power consumption, and active processes for the NVIDIA GB10 GPU during model inference on DGX Spark. alt-text#center](nvtop.webp "TinyLlama GPU Utilization")
 
 The nvtop interface shows:
 

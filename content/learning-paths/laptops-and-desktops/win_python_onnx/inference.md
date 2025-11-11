@@ -30,7 +30,7 @@ py -V:3.13 .\main.py
 ```
 
 The code will display a sample inference result similar to the image below:
-![fig1](figures/01.png)
+![fig1](figures/01.webp)
 Upon closing the displayed image, the script will output the computation time:
 ```output
 PS C:\Users\db\onnx> py -V:3.13 .\main.py  

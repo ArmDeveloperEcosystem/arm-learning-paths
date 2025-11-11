@@ -207,7 +207,7 @@ Run the executable:
 ```
 
 The output should look as in the figure below:
-![img3](Figures/03.png)
+![img3](Figures/03.webp)
 
 ## Parallelization and Tiling
 In this section, you will explore two complementary scheduling optimizations provided by Halide: Parallelization and Tiling. Both techniques help enhance performance but achieve it through different mechanisms—parallelization leverages multiple CPU cores, whereas tiling improves cache efficiency by optimizing data locality.

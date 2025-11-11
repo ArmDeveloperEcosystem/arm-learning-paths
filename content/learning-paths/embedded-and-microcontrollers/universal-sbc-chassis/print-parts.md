@@ -43,6 +43,6 @@ You can experiment with the quality settings. The parts are not complex shapes, 
 5. Slice and export G-code using your slicing software
 6. Print
 
-![STL files in slicing software](./slicer.png)
+![STL files in slicing software](./slicer.webp)
 
-![Parts after printing](./printed.jpg)
+![Parts after printing](./printed.webp)

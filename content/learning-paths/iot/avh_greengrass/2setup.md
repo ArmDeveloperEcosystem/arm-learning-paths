@@ -30,7 +30,7 @@ You will be presented with a list of devices to choose from.
 
 Select Raspberry Pi 4 from the list of devices and proceed to the configure dialog. 
 
-![create device](./create_device.png)
+![create device](./create_device.webp)
 
 AWS IoT Greengrass Core runs on Ubuntu Server and Raspberry Pi OS. 
 
