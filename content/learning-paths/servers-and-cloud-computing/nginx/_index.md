@@ -7,7 +7,7 @@ who_is_this_for: This is an introductory topic for engineers who want to use Ngi
 
 learning_objectives:
     - Install and run Nginx on Arm servers
-    - Setup Nginx as a web server, reverse proxy, or an API Gateway
+    - Set up Nginx as a web server, reverse proxy, or an API Gateway
     - Verify Nginx is working correctly
 
 prerequisites:
