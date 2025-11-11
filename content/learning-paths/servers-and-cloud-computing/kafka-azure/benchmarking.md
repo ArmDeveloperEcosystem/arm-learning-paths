@@ -108,7 +108,7 @@ Kafka maintained consistent throughput, even under full-speed production, with n
 
 ### Benchmark Comparison Insights
 When analyzing performance on Azure Cobalt 100 Arm64 virtual machines:
-**Producer efficiency**: The producer reached ~23–25 MB/sec throughput with average latencies below 900 ms, demonstrating stable delivery rates for high-volume workloads.
-**Consumer scalability**: The consumer maintained ~262K messages/sec throughput with near-linear scaling of fetch performance — exceeding 1.85M messages/sec internally.
-**Performance stability**: Both producer and consumer benchmarks showed low jitter and consistent latency distribution across iterations, confirming Kafka’s predictable behavior on Arm-based VMs.
-afka on an Azure Cobalt 100 Arm64 virtual machine and compared results with x86_64.
+   **Producer efficiency**: The producer reached ~23–25 MB/sec throughput with average latencies below 900 ms, demonstrating stable delivery rates for high-volume workloads.
+   **Consumer scalability**: The consumer maintained ~262K messages/sec throughput with near-linear scaling of fetch performance — exceeding 1.85M messages/sec internally.
+   **Performance stability**: Both producer and consumer benchmarks showed low jitter and consistent latency distribution across iterations, confirming Kafka’s predictable behavior on Arm-based VMs.
+
