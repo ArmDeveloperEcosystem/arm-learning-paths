@@ -98,16 +98,16 @@ process_images() {
                 echo "DRY RUN: Would update markdown references"
             else
                 # Set quality dynamically based on file size
-                if [ "$kbsize" -ge 15000 ]; then           # ≥ 15MB
-                    quality=50
-                elif [ "$kbsize" -ge 5000 ]; then          # 5–15MB
-                    quality=70
-                else                                            # < 5MB
-                    quality=85
+                if [ "$kbsize" -ge 1500 ]; then           # ≥ 150KB
+                    quality=80
+                elif [ "$kbsize" -ge 500 ]; then          # 500–1500KB
+                    quality=75
+                else                                            # < 500KB
+                    quality=95
                 fi
                 echo "Optimizing $img (${kbsize}KB, ${width}px), quality=$quality"
                 # Resize and convert to WebP. If error occurs, capture it and exit.
-                error=$(magick "$img" -resize 1280x\> -quality $quality "$webp_img" 2>&1)
+                error=$(magick "$img" -resize 1280x\> -quality $quality -define webp:lossless=true "$webp_img" 2>&1)
                 convert_status=$?
                 if [ $convert_status -ne 0 ]; then
                     echo "⚠️ Error converting $img to WebP format."
