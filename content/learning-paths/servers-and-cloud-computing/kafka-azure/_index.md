@@ -7,19 +7,19 @@ cascade:
 
 minutes_to_complete: 30   
 
-who_is_this_for: This Learning Path is designed for software developers looking to migrate their Kafka workloads from x86_64 to Arm-based platforms, specifically on the Microsoft Azure Cobalt 100 processors.
+who_is_this_for: This is an advanced topic designed for software developers looking to migrate their Kafka workloads from x86_64 to Arm-based platforms, specifically on the Microsoft Azure Cobalt 100 processors.
 
 learning_objectives: 
     - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image.
     - Deploy Kafka on the Ubuntu virtual machine.
-    - Perform Kafka baseline testing and benchmarking on both x86_64 and Arm64 virtual machines.
+    - Perform Kafka baseline testing and benchmarking on Arm64 virtual machines.
 
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6). 
     - Basic understanding of Linux command line.
     - Familiarity with the [Apache Kafka architecture](https://kafka.apache.org/) and deployment practices on Arm64 platforms.
 
-author: Jason Andrews
+author: Pareena Verma
 
 ### Tags
 skilllevels: Advanced
@@ -31,8 +31,6 @@ armips:
 
 tools_software_languages:
     - Kafka
-    - kafka-producer-perf-test.sh
-    - kafka-consumer-perf-test.sh
 
 operatingsystems:
     - Linux
