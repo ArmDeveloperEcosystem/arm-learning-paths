@@ -65,7 +65,7 @@ process_images() {
         }
 
         # Skip if not an image file
-        if [[ ! "$img" =~ \.(png|jpg|jpeg)$ ]]; then
+        if [[ ! "$img" =~ \.(png|PNG|jpg|JPG|jpeg|JPEG)$ ]]; then
             if [[ "$img" == *.webp ]]; then
                 echo "Skipping $img (already .webp)"
                 continue
@@ -79,7 +79,7 @@ process_images() {
         width=$(identify -format "%w" "$img" 2>/dev/null || echo 0)
 
         # Get file size in KB (macOS stat is different)
-        filesize=$(stat -f%z "$img" 2>/dev/null || echo 0)
+        filesize=$(stat -c%s "$img" 2>/dev/null || echo 0)
         kbsize=$((filesize / 1024))
 
         # Define new filename
@@ -98,7 +98,7 @@ process_images() {
                 echo "DRY RUN: Would update markdown references"
             else
                 # Set quality dynamically based on file size
-                if [ "$kbsize" -ge 1500 ]; then           # ≥ 150KB
+                if [ "$kbsize" -ge 1500 ]; then           # ≥ 1500KB
                     quality=80
                 elif [ "$kbsize" -ge 500 ]; then          # 500–1500KB
                     quality=75
@@ -107,7 +107,7 @@ process_images() {
                 fi
                 echo "Optimizing $img (${kbsize}KB, ${width}px), quality=$quality"
                 # Resize and convert to WebP. If error occurs, capture it and exit.
-                error=$(magick "$img" -resize 1280x\> -quality $quality -define webp:lossless=true "$webp_img" 2>&1)
+                error=$(magick "$img" -resize ${target_width}x\> -quality $quality -define webp:lossless=true "$webp_img" 2>&1)
                 convert_status=$?
                 if [ $convert_status -ne 0 ]; then
                     echo "⚠️ Error converting $img to WebP format."

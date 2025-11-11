@@ -20,7 +20,7 @@ jobs:
         run: |
           # Find all image files that changed since last Monday
           CHANGED_IMAGES=$(git log --since="7 days ago" --name-only --pretty="" \
-          -- '*.jpg' '*.jpeg' '*.png' | sort -u | tr '\n' ' ')
+          -- '*.jpg' '*.jpeg' '*.png' '*.JPG' '*.JPEG' '*.PNG' | sort -u | tr '\n' ' ')
           
           echo "changed_images=$CHANGED_IMAGES" >> $GITHUB_OUTPUT
           echo "Changed images: $CHANGED_IMAGES"
