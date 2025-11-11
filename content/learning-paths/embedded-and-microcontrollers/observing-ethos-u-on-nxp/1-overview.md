@@ -39,7 +39,7 @@ NXP generously provides free software for working with their boards, the [MCUXpr
 
 [Visual Studio Code](https://code.visualstudio.com/) is a free integrated development environment provided by Microsoft. It is platform independent, full featured, and accomodating of many engineering frameworks. You will use Visual Studio Code to both configure NXP's software and connect to NXP's hardware.
 
-## Software Overview - TinyML
+## Software Overview - TinyML.
 
 This Learning Path uses TinyML. TinyML is machine learning tailored to function on devices with limited resources, constrained memory, low power, and fewer processing capabilities.
 
@@ -48,8 +48,8 @@ For a learning path focused on creating and deploying your own TinyML models, pl
 ## Benefits and applications
 
 NPUs, like Arm's [Ethos-U65](https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u65) NPU are available on physical devices specifically made for developers. Development boards like NXP's [FRDM i.MX 93](https://www.nxp.com/design/design-center/development-boards-and-designs/frdm-i-mx-93-development-board:FRDM-IMX93) also connect to displays via a HDMI cable. Additionally the board accepts video inputs. This is useful for for ML performance visualization due to:
-- visual confirmation that your ML model is running on the physical device,
-- image and video inputs for computer vision models running on the device,
-- clearly indicated instruction counts,
+- visual confirmation that your ML model is running on the physical device
+- image and video inputs for computer vision models running on the device
+- clearly indicated instruction counts
 - confirmation of total execution time and
-- visually appealing output for prototypes and demos.
+- visually appealing output for prototypes and demos
