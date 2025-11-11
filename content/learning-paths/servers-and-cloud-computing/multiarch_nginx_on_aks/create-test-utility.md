@@ -6,21 +6,21 @@ weight: 4
 layout: learningpathall
 ---
 
-## Overview
+## Understand the utility script’s purpose
 
-In this section, you'll create a utility script that simplifies working with your multi-architecture Kubernetes deployment. This script acts as a convenient wrapper around common `kubectl` and testing commands, making it easier to interact with `nginx` pods across different architectures.
+In this section, you'll create a utility script that simplifies working with your multi-architecture Kubernetes deployment. This script acts as a convenient wrapper around common kubectl and testing commands, making it easier to interact with nginx pods across different architectures.
 
-Instead of typing long `kubectl` commands repeatedly, you'll use this utility to quickly test services, monitor performance, and access pods on both Arm and Intel nodes. This approach saves time and reduces errors, especially when comparing behavior across architectures.
+Instead of typing long kubectl commands repeatedly, you'll use this utility to quickly test services, monitor performance, and access pods on both Arm and Intel nodes. This approach saves time and reduces errors, especially when comparing behavior across architectures.
 
 By the end of this section, you'll have a ready-to-use tool that streamlines the testing and monitoring tasks you'll perform throughout the rest of this Learning Path.
 
 ## Get to know the utility script
-The utility script provides three main functions to help you work with your multi-architecture `nginx` deployment. You can use it to test services across different architectures, monitor performance, and access pods directly.
+The utility script provides three main functions to help you work with your multi-architecture nginx deployment. You can use it to test services across different architectures, monitor performance, and access pods directly.
 
-The script provides the following key commands to interact with your `nginx` deployment:
+The script provides the following key commands to interact with your nginx deployment:
 
-- `curl intel|arm|multiarch` tests `nginx` services and show which pod served the request
-- `put btop` installs `btop` monitoring tool on all pods
+- `curl intel|arm|multiarch` tests nginx services and show which pod served the request
+- `put btop` installs btop monitoring tool on all pods
 - `login intel|arm` is an interactive bash access to architecture-specific pods
 
 These commands streamline common tasks you'll perform when working with multi-architecture deployments. The `curl` command helps you verify that requests are being properly distributed across different architectures, while the `login` command gives you direct access to pods for debugging or configuration changes.
@@ -55,4 +55,4 @@ The script displays its usage instructions:
 Invalid first argument. Use 'curl', 'wrk', 'put', or 'login'.
 ```
 
-You're now ready to deploy `nginx` to the Intel nodes in the cluster.
+You're now ready to deploy nginx to the Intel nodes in the cluster.

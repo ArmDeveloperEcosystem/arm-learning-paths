@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Install btop monitoring tool on nginx pods
 
-Now that you have all your `nginx` deployments running across Intel and Arm architectures, you can monitor performance across each architecture using `wrk` to generate load and `btop` to monitor system performance.
+Now that you have all your nginx deployments running across Intel and Arm architectures, you can monitor performance across each architecture using `wrk` to generate load and `btop` to monitor system performance.
 
 {{% notice Note %}}
 This Learning Path uses [`wrk`](https://github.com/wg/wrk) to generate HTTP load testing. You can easily install `wrk` using `apt` or `brew` package managers. 
@@ -39,7 +39,7 @@ Installing btop on nginx-intel-deployment-6f5bff9667-zdrqc...
 
 The `nginx_util.sh` script includes a `put config` command that:
 
-- Applies a performance-optimized `nginx` configuration to all pods
+- Applies a performance-optimized nginx configuration to all pods
 - Installs `btop` monitoring tool on all pods for system monitoring
 - Restarts pods with the new configuration
 
@@ -60,8 +60,7 @@ Because pods are ephemeral, you need to reinstall `btop` if pods restart or get 
 
 
 ## Set up real-time performance monitoring
-
-You can now log in to any pod and use `btop` to monitor system performance. There are many variables that can affect an individual workload's performance, and `btop` (like `top`) is a great first step in understanding those variables.
+You can now log in to any pod and monitor system performance with `btop`. Many factors can affect workload performance, and `btop` (like `top`) is an excellent starting point for understanding these metrics.
 
 {{% notice Note %}}
 Network performance can impact load testing accuracy when running from your local machine. If you experience low request rates (under 70,000 requests/s), consider running the test from an Azure VM in the same region as your cluster.
@@ -73,7 +72,7 @@ Running two btop terminals, one for each pod, is a convenient way to view perfor
 To bring up btop on both Arm and Intel pods, follow these steps:
 
 - Open two new terminal windows
-- In one terminal, run `login arm` from the `nginx` utility script to enter the pod 
+- In one terminal, run `login arm` from the nginx utility script to enter the pod 
 - In the second terminal, run `login intel` from the `nginx` utility script to enter the pod 
 - Once inside each pod, run `btop` to see real-time system monitoring
 
@@ -101,7 +100,7 @@ You should now see something similar to the image below, with one terminal for e
 
 ![Two terminal windows displaying btop system monitoring interface with CPU, memory, and process information for nginx pods running on different architectures in an idle state alt-text#center](images/btop_idle.png)
 
-To visualize performance with `btop` against the Arm and Intel pods via the load balancer service endpoints, you can use the `nginx_util.sh` wrapper to generate load to both simultaneously:
+To visualize performance with btop against the Arm and Intel pods using the load balancer service endpoints, you can use the `nginx_util.sh` wrapper to generate load to both simultaneously:
 
 ```bash
 ./nginx_util.sh wrk both

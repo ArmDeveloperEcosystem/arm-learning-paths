@@ -9,13 +9,13 @@ learning_objectives:
     - Create a hybrid AKS cluster with both x86 and Arm64 nodes
     - Deploy nginx using multi-architecture container images across different node types
     - Verify nginx deployment and functionality on each architecture
-    - Compare performance between x86 and Arm64 `nginx` instances
+    - Compare performance between x86 and Arm64 nginx instances
     - Learn techniques for deploying multi-architecture Kubernetes workloads
   
 
 prerequisites:
     - An [Azure account](https://azure.microsoft.com/en-us/free/)
-    - A local machine with [`jq`](https://jqlang.org/download/), [`curl`](https://curl.se/download.html), [`wrk`](https://github.com/wg/wrk), [Azure CLI](/install-guides/azure-cli/) and [`kubectl`](/install-guides/kubectl/) installed
+    - A local machine with [`jq`](https://jqlang.org/download/), [`curl`](https://curl.se/download.html), [`wrk`](https://github.com/wg/wrk), [Azure CLI](/install-guides/azure-cli/), and [`kubectl`](/install-guides/kubectl/) installed
    
 author:
     - Geremy Cohen
@@ -40,11 +40,11 @@ tools_software_languages:
 
 further_reading:
   - resource:
-      title: NGINX website
+      title: nginx website
       link: https://nginx.org/
       type: website
   - resource:
-      title: nginx Docker Hub
+      title: nginx on Docker Hub
       link: https://hub.docker.com/_/nginx
       type: documentation
   - resource:
@@ -52,7 +52,11 @@ further_reading:
       link: https://docs.microsoft.com/en-us/azure/aks/
       type: documentation
   - resource:
-      title: Learn how to tune Nginx
+      title: Learn how to deploy nginx [Arm Learning Path]
+      link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/nginx/
+      type: documentation
+  - resource:
+      title: Learn how to tune nginx [Arm Learning Path]
       link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/nginx_tune/
       type: documentation
 

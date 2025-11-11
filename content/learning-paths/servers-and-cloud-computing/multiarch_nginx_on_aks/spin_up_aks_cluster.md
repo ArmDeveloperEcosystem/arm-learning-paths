@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## Overview
+## Set up a multi-architecture AKS cluster
 
 In this section, you'll create a multi-architecture Azure Kubernetes Service (AKS) cluster that supports both Intel and Arm-based nodes. This setup allows you to deploy and compare workloads across different CPU architectures within the same Kubernetes environment.
 

@@ -8,12 +8,12 @@ layout: learningpathall
 
 ## Deployment and service
 
-In this section, you'll add a new namespace, deployment, and service for `nginx` on Intel x86 architecture. The result will be a K8s cluster running `nginx` accessible through the Internet using a load balancer. 
+In this section, you'll add a new namespace, deployment, and service for nginx on Intel x86 architecture. The result will be a K8s cluster running nginx accessible through the Internet using a load balancer. 
 
 The deployment configuration uses three separate files to organize the different components:
 
-- A file called `namespace.yaml` that creates a dedicated `nginx` namespace to contain all your Kubernetes `nginx` objects. 
-- A file called `nginx-configmap.yaml` that contains a shared ConfigMap called `nginx-config` with performance-optimized `nginx` settings that both Intel and Arm deployments will use. 
+- A file called `namespace.yaml` that creates a dedicated nginx namespace to contain all your Kubernetes nginx objects. 
+- A file called `nginx-configmap.yaml` that contains a shared ConfigMap called `nginx-config` with performance-optimized nginx settings that both Intel and Arm deployments will use. 
 - A file called `intel_nginx.yaml` that creates two main Kubernetes objects: 
   - A deployment called `nginx-intel-deployment` that pulls the multi-architecture [nginx image](https://hub.docker.com/_/nginx) from DockerHub and runs it on the Intel node
   - A service called `nginx-intel-svc` that acts as a load balancer for pods labeled with both `app: nginx-multiarch` and `arch: intel`. The deployment automatically mounts the shared ConfigMap as `/etc/nginx/nginx.conf` to apply the optimized configuration.
@@ -72,7 +72,7 @@ The service selector uses both `app: nginx-multiarch` and `arch: intel` labels t
     arch: intel
 ```
 
-Because the final goal is to run `nginx` on multiple architectures, the deployment uses the standard `nginx` image from DockerHub. This image supports multiple architectures, including amd64 (Intel) and arm64 (Arm).
+Because the final goal is to run nginx on multiple architectures, the deployment uses the standard nginx image from DockerHub. This image supports multiple architectures, including amd64 (Intel) and arm64 (Arm).
 
 ```yaml
       containers:
@@ -81,7 +81,7 @@ Because the final goal is to run `nginx` on multiple architectures, the deployme
 ```
 
 {{% notice Note %}}
-You can set `nginx` as your default namespace to avoid typing `-nnginx` in future commands:
+You can set nginx as your default namespace to avoid typing `-nnginx` in future commands:
 ```bash
 kubectl config set-context --current --namespace=nginx
 ```
@@ -123,11 +123,11 @@ NAME               DATA   AGE
 nginx-config       1      51s
 ```
 
-With the pods in a `Ready` state and the service showing a valid `External IP`, you're now ready to test the `nginx` Intel service.
+With the pods in a `Ready` state and the service showing a valid `External IP`, you're now ready to test the nginx Intel service.
 
 ## Test the Intel service
 
-Run the following to make an HTTP request to the Intel `nginx` service:
+Run the following to make an HTTP request to the Intel nginx service:
 
 ```bash
 ./nginx_util.sh curl intel
@@ -147,6 +147,6 @@ Response:
 Served by: nginx-intel-deployment-758584d5c6-2nhnx
 ```
 
-If you see similar output, you've successfully configured your AKS cluster with an Intel node, running an `nginx` deployment and service with the `nginx` multi-architecture container image.
+If you see similar output, you've successfully configured your AKS cluster with an Intel node, running an nginx` deployment and service with the nginx multi-architecture container image.
 
 

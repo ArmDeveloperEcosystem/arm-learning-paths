@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Add the Arm deployment and service
 
-In this section, you'll add `nginx` on Arm to your existing cluster, completing your multi-architecture Intel/Arm environment for comprehensive performance comparison.
+In this section, you'll add nginx on Arm to your existing cluster, completing your multi-architecture Intel/Arm environment for comprehensive performance comparison.
 
 When you apply the arm_nginx.yaml file, it creates two Kubernetes objects:
 
-- A deployment named `nginx-arm-deployment` that pulls the multi-architecture `nginx` image from DockerHub, launches a pod on the Arm node, and mounts the shared ConfigMap as `/etc/nginx/nginx.conf`
+- A deployment named `nginx-arm-deployment` that pulls the multi-architecture nginx image from DockerHub, launches a pod on the Arm node, and mounts the shared ConfigMap as `/etc/nginx/nginx.conf`
 - A service called `nginx-arm-svc` that acts as a load balancer, targeting pods with both `app: nginx-multiarch` and `arch: arm` labels
 
 Copy and paste the following commands into a terminal to download and apply the Arm deployment and service:
@@ -33,7 +33,7 @@ service/nginx-arm-svc created
 
 Take a closer look at the `arm_nginx.yaml` deployment file and you'll see settings optimized for the Arm architecture:
 
-The `nodeSelector` value of `kubernetes.io/arch: arm64` ensures that the deployment only runs on Arm nodes, utilizing the `arm64` version of the `nginx` container image.
+The `nodeSelector` value of `kubernetes.io/arch: arm64` ensures that the deployment only runs on Arm nodes, utilizing the `arm64` version of the nginx container image.
 
 ```yaml
     spec:
@@ -85,11 +85,11 @@ NAME               DATA   AGE
 nginx-config       1      10m
 ```
 
-When the pods show `Running` and the service shows a valid `External IP`, you're ready to test the `nginx` Arm service.
+When the pods show `Running` and the service shows a valid `External IP`, you're ready to test the nginx Arm service.
 
 ## Test the nginx web service on Arm
 
-Run the following command to make an HTTP request to the Arm `nginx` service using the script you created earlier:
+Run the following command to make an HTTP request to the Arm nginx service using the script you created earlier:
 
 ```bash
 ./nginx_util.sh curl arm
@@ -108,7 +108,7 @@ Response:
 Served by: nginx-arm-deployment-5bf8df95db-wznff
 ```
 
-If you see similar output, you have successfully added Arm nodes to your cluster running `nginx`.
+If you see similar output, you have successfully added Arm nodes to your cluster running nginx.
 
 ## Compare both architectures
 

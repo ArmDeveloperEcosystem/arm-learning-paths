@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Add a multi-architecture service to your cluster
 
-You now have `nginx` running on Intel and Arm nodes with architecture-specific services. In this section, you'll create a multi-architecture service that can route to any available `nginx` pod regardless of architecture, providing load balancing across both architectures.
+You now have nginx running on Intel and Arm nodes with architecture-specific services. In this section, you'll create a multi-architecture service that can route to any available nginx pod regardless of architecture, providing load balancing across both architectures.
 
 ## Create the multiarch service
 
-The multiarch service targets all pods with the `app: nginx-multiarch` label (all `nginx` deployments share this label). It uses `sessionAffinity: None` to ensure requests are distributed across all available pods without stickiness, and can route to Intel or Arm pods based on availability and load balancing algorithms.
+The multiarch service targets all pods with the `app: nginx-multiarch` label (all nginx deployments share this label). It uses `sessionAffinity: None` to ensure requests are distributed across all available pods without stickiness, and can route to Intel or Arm pods based on availability and load balancing algorithms.
 
 Run the following commands to download and apply the multiarch service:
 
@@ -59,7 +59,7 @@ You are ready to test the multiarch service.
 
 ## Test the nginx multiarch service
 
-Run the following to make HTTP requests to the multiarch `nginx` service:
+Run the following to make HTTP requests to the multiarch nginx service:
 
 ```bash
 ./nginx_util.sh curl multiarch
