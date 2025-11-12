@@ -135,9 +135,13 @@ This script creates a Arm KleidiAI INT4 quantized copy of the vLLM model and sav
 ## Quantize DeepSeek‑V2‑Lite model
 
 ### Quantization parameter tuning
+Quantization parameters determine how the model’s floating-point weights and activations are converted into lower-precision integer formats. Choosing the right combination is essential for balancing model accuracy, memory footprint, and runtime throughput on Arm CPUs.
+
 1. You can choose `minmax` (faster model quantization) or `mse` (more accurate but slower model quantization) method. 
 2. `channelwise` is a good default for most models.
 3. `groupwise` can improve accuracy further; `--groupsize 32` is common.
+
+Execute the following command to quantize the DeepSeek-V2-Lite model:
 
 ```bash
 # DeepSeek example
@@ -145,7 +149,7 @@ python3 quantize_vllm_models.py deepseek-ai/DeepSeek-V2-Lite \
   --scheme channelwise --method mse
 ```
 
-The 4-bit quantized DeepSeek-V2-Lite will be stored the directory:
+This will generate an INT4 quantized model directory such as:
 
 ```text
 DeepSeek-V2-Lite-w4a8dyn-mse-channelwise
