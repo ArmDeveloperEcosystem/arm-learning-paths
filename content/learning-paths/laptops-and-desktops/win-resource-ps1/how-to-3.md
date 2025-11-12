@@ -1,12 +1,12 @@
 ---
-title: Measure power usage
+title: Measure power usage on Windows on Arm with PowerShell
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Sampling battery status
+## Sample the battery status
 
 Querying battery status provides a way to measure power usage without an external power meter. Battery monitoring is also convenient because data collection and logging can be automated.
 
@@ -77,7 +77,7 @@ A video starts playing and completes in 30 minutes. When finished, you can find 
 
 The script collects remaining battery capacity and discharge rate periodically. You can track the battery remaining capacity to understand the power consumption patterns.
 
-### View results
+### View the results
 
 The output below shows the results from running the x86_64 version of `ffplay.exe`:
 
@@ -100,3 +100,7 @@ Timestamp,RemainingCapacity(mWh),DischargeRate(mW)
 The sample results file is in CSV format. You can open it with spreadsheet applications like Microsoft Excel for better visualization and to plot data analysis charts.
 
 Battery monitoring provides an effective way to measure power consumption differences between x86_64 and native Arm64 applications. By comparing discharge rates, you can quantify the power efficiency advantages that Arm processors typically demonstrate for video decoding workloads.
+
+## Wrapping up and next steps
+ 
+You’ve measured power usage on your Windows on Arm device and can now compare results across builds to see how native Arm64 performance affects battery life. Sharing your findings with the Arm developer community helps others optimize applications for Windows on Arm.

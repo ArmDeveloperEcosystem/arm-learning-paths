@@ -8,7 +8,7 @@ layout: "learningpathall"
 ---
 
 ## Ahead-of-time and cross-compilation
-One of Halide’s standout features is the ability to compile image processing pipelines ahead-of-time (AOT), enabling developers to generate optimized binary code on their host machines rather than compiling directly on target devices. This AOT compilation process allows developers to create highly efficient libraries that run effectively across diverse hardware without incurring the runtime overhead associated with just-in-time (JIT) compilation.
+One of Halide's  standout features is the ability to compile image processing pipelines ahead-of-time (AOT), enabling developers to generate optimized binary code on their host machines rather than compiling directly on target devices. This AOT compilation process allows developers to create highly efficient libraries that run effectively across diverse hardware without incurring the runtime overhead associated with just-in-time (JIT) compilation.
 
 Halide also supports robust cross-compilation capabilities. Cross-compilation means using the host version of Halide, typically running on a desktop Linux or macOS system—to target different architectures, such as ARM for Android devices. Developers can thus optimize Halide pipelines on their host machine, produce libraries specifically optimized for Android, and integrate them seamlessly into Android applications. The generated pipeline code includes essential optimizations and can embed minimal runtime support, further reducing workload on the target device and ensuring responsiveness and efficiency.
 
@@ -16,7 +16,7 @@ Halide also supports robust cross-compilation capabilities. Cross-compilation me
 In this section, we leverage the host version of Halide to perform AOT compilation of an image processing pipeline via cross-compilation. The resulting pipeline library is specifically tailored to Android devices (targeting, for instance, arm64-v8a ABI), while the compilation itself occurs entirely on the host system. This approach significantly accelerates development by eliminating the need to build Halide or perform JIT compilation on Android devices. It also guarantees that the resulting binaries are optimized for the intended hardware, streamlining the deployment of high-performance image processing applications on mobile platforms.
 
 ## Prepare Pipeline for Android
-The procedure implemented in the following code demonstrates how Halide’s AOT compilation and cross-compilation features can be utilized to create an optimized image processing pipeline for Android. We will run Halide on our host machine (in this example, macOS) to generate a static library containing the pipeline function, which will later be invoked from an Android device. Below is a step-by-step explanation of this process.
+The procedure implemented in the following code demonstrates how Halide's  AOT compilation and cross-compilation features can be utilized to create an optimized image processing pipeline for Android. We will run Halide on our host machine (in this example, macOS) to generate a static library containing the pipeline function, which will later be invoked from an Android device. Below is a step-by-step explanation of this process.
 
 Create a new file named blur-android.cpp with the following contents:
 
@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
 }
 ```
 
-In the original implementation constants 128, 255, and 0 were implicitly treated as integers. Here, the threshold value (128) and output values (255, 0) are explicitly cast to uint8_t. This approach removes ambiguity and clearly specifies the types used, ensuring compatibility and clarity. Both approaches result in identical functionality, but explicitly casting helps emphasize the type correctness and may avoid subtle issues during cross-compilation or in certain environments.
+In the original implementation constants 128, 255, and 0 were implicitly treated as integers. Here, the threshold value (128) and output values (255, 0) are explicitly cast to uint8_t. This approach removes ambiguity and clearly specifies the types used, ensuring compatibility and clarity. Both approaches result in identical functionality, but explicitly casting helps emphasize the type correctness and may avoid subtle issues during cross-compilation or in certain environments. Additionally, explicit uint8_t casts help avoid implicit promotion to 32-bit integers (and the corresponding narrowings back to 8-bit) in the generated code, reducing redundant cast operations and potential vector widen/narrow overhead—especially on ARM/NEON
 
 The program takes at least one command-line argument, the output base name used to generate the files (e.g., “blur_threshold_android”). Here, the target architecture is explicitly set within the code to Android ARM64:
 
@@ -105,8 +105,12 @@ target.set_feature(Target::NoRuntime, false);
 ```
 
 Notes: 
-* NoRuntime — When set to true, Halide excludes its runtime from the generated code, and you must link the runtime manually during the linking step. When set to false, the Halide runtime is included in the generated library, which simplifies deployment.
-* ARMFp16 — Enables the use of ARM hardware support for half-precision (16-bit) floating-point operations, which can provide faster execution when reduced precision is acceptable.
+1. NoRuntime — When set to true, Halide excludes its runtime from the generated code, and you must link the runtime manually during the linking step. When set to false, the Halide runtime is included in the generated library, which simplifies deployment.
+2. ARMFp16 — Enables the use of ARM hardware support for half-precision (16-bit) floating-point operations, which can provide faster execution when reduced precision is acceptable.
+3. Why the runtime choice matters - If your app links several AOT-compiled pipelines, ensure there is exactly one Halide runtime at link time:
+* Strategy A (cleanest): build all pipelines with NoRuntime ON and link a single standalone Halide runtime once (matching the union of features you need, e.g., Vulkan/OpenCL/Metal or ARM options).
+* Strategy B: embed the runtime in exactly one pipeline (leave NoRuntime OFF only there); compile all other pipelines with NoRuntime ON.
+* Mixing more than one runtime can cause duplicate symbols and split global state (e.g., error handlers, device interfaces).
 
 We declare spatial variables (x, y) and an ImageParam named “input” representing the input image data. We use boundary clamping (clamp) to safely handle edge pixels. Then, we apply a 3x3 blur with a reduction domain (RDom). The accumulated sum is divided by 9 (the number of pixels in the neighborhood), producing an average blurred image. Lastly, thresholding is applied, producing a binary output: pixels above a certain brightness threshold (128) become white (255), while others become black (0).
 
@@ -118,7 +122,7 @@ This strategy can simplify debugging by clearly isolating computational steps an
 
 By clearly separating algorithm logic from scheduling, developers can easily test and compare different scheduling strategies,such as compute_inline, compute_root, compute_at, and more, without modifying their fundamental algorithmic code. This separation significantly accelerates iterative optimization and debugging processes, ultimately yielding better-performing code with minimal overhead.
 
-We invoke Halide’s AOT compilation function compile_to_static_library, which generates a static library (.a) containing the optimized pipeline and a corresponding header file (.h).
+We invoke Halide's  AOT compilation function compile_to_static_library, which generates a static library (.a) containing the optimized pipeline and a corresponding header file (.h).
 
 ```cpp
 thresholded.compile_to_static_library(
@@ -130,7 +134,7 @@ thresholded.compile_to_static_library(
 ```
 
 This will produce:
-* A static library (blur_threshold_android.a) containing the compiled pipeline. This static library also includes Halide’s runtime functions tailored specifically for the targeted architecture (arm-64-android). Thus, no separate Halide runtime needs to be provided on the Android device when linking against this library.
+* A static library (blur_threshold_android.a) containing the compiled pipeline. This static library also includes Halide's  runtime functions tailored specifically for the targeted architecture (arm-64-android). Thus, no separate Halide runtime needs to be provided on the Android device when linking against this library.
 * A header file (blur_threshold_android.h) declaring the pipeline function for use in other C++/JNI code.
 
 These generated files are then ready to integrate directly into an Android project via JNI, allowing efficient execution of the optimized pipeline on Android devices. The integration process is covered in the next section.
@@ -159,4 +163,4 @@ This will produce two files:
 We will integrate these files into our Android project in the following section.
 
 ## Summary
-In this section, we’ve explored Halide’s powerful ahead-of-time (AOT) and cross-compilation capabilities, preparing an optimized image processing pipeline tailored specifically for Android devices. By using the host-based Halide compiler, we’ve generated a static library optimized for ARM64 Android architecture, incorporating safe boundary conditions, neighborhood-based blurring, and thresholding operations. This streamlined process allows seamless integration of highly optimized native code into Android applications, ensuring both development efficiency and runtime performance on mobile platforms.
+In this section, we’ve explored Halide's  powerful ahead-of-time (AOT) and cross-compilation capabilities, preparing an optimized image processing pipeline tailored specifically for Android devices. By using the host-based Halide compiler, we’ve generated a static library optimized for ARM64 Android architecture, incorporating safe boundary conditions, neighborhood-based blurring, and thresholding operations. This streamlined process allows seamless integration of highly optimized native code into Android applications, ensuring both development efficiency and runtime performance on mobile platforms.

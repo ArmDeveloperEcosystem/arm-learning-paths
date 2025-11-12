@@ -17,6 +17,7 @@ permissions:
 
 jobs:
   sweep:
+    if: github.repository == 'ArmDeveloperEcosystem/arm-learning-paths'
     runs-on: ubuntu-latest
     steps:
       - name: Move items based on Last Reviewed Date
@@ -34,6 +35,7 @@ jobs:
             const STATUS_DONE = 'Done';
             const STATUS_MAINT = 'Maintenance';
             const LRD_FIELD_NAME = 'Last Reviewed Date';
+            const PUBLISHED_URL_FIELD_NAME = 'Published URL';
             // ----------------------------------
 
             // Dates
@@ -77,12 +79,20 @@ jobs:
             const findDateFieldId = (name) =>
               fields.find(f => f.__typename === 'ProjectV2Field' && f.name === name && f.dataType === 'DATE')?.id || null;
 
+            const findTextFieldId = (name) => {
+              const exact = fields.find(f => f.__typename === 'ProjectV2Field' && f.name === name && f.dataType === 'TEXT');
+              if (exact) return exact.id;
+              const ci = fields.find(f => f.__typename === 'ProjectV2Field' && (f.name?.toLowerCase?.() === name.toLowerCase()) && f.dataType === 'TEXT');
+              return ci?.id || null;
+            };
+            
             const statusField = fields.find(f => f.__typename === 'ProjectV2SingleSelectField' && f.name === STATUS_FIELD_NAME);
             const statusFieldId = statusField?.id || null;
             const doneId  = statusField?.options?.find(o => o.name === STATUS_DONE)?.id || null;
             const maintId = statusField?.options?.find(o => o.name === STATUS_MAINT)?.id || null;
 
             const lrdId = findDateFieldId(LRD_FIELD_NAME);
+            const publishedUrlFieldId = findTextFieldId(PUBLISHED_URL_FIELD_NAME);
 
             if (!statusFieldId || !doneId || !maintId || !lrdId) {
               throw new Error('Missing required project fields/options: Status/Done/Maintenance or Last Reviewed Date.');
@@ -94,6 +104,11 @@ jobs:
                 n.__typename === 'ProjectV2ItemFieldDateValue' && n.field?.id === fieldId
               )?.date || null;
 
+            const getText = (item, fieldId) =>
+              item.fieldValues.nodes.find(n =>
+                n.__typename === 'ProjectV2ItemFieldTextValue' && n.field?.id === fieldId
+              )?.text || null;
+              
             const getStatusName = (item) => {
               const n = item.fieldValues.nodes.find(n =>
                 n.__typename === 'ProjectV2ItemFieldSingleSelectValue' && n.field?.id === statusFieldId
@@ -129,14 +144,21 @@ jobs:
                             id
                             content{
                               __typename
-                              ... on PullRequest { number repository{ name } }
+                              ... on PullRequest {
+                                number
+                                repository { name }
+                              }
                             }
-                            fieldValues(first:50){
+                            fieldValues(first:100){
                               nodes{
                                 __typename
                                 ... on ProjectV2ItemFieldDateValue {
                                   field { ... on ProjectV2Field { id name } }
                                   date
+                                }
+                                ... on ProjectV2ItemFieldTextValue {
+                                  field { ... on ProjectV2Field { id name } }
+                                  text
                                 }
                                 ... on ProjectV2ItemFieldSingleSelectValue {
                                   field { ... on ProjectV2SingleSelectField { id name } }
@@ -146,19 +168,34 @@ jobs:
                               }
                             }
                           }
-                          pageInfo{ hasNextPage endCursor }
+                          pageInfo {
+                            hasNextPage
+                            endCursor
+                          }
                         }
                       }
                     }
                   }`,
                   { org: orgLogin, num: projectNumber, after: cursor }
                 );
+            
                 const page = r.organization.projectV2.items;
                 for (const n of page.nodes) yield n;
                 if (!page.pageInfo.hasNextPage) break;
                 cursor = page.pageInfo.endCursor;
               }
             }
+
+            const lastTwoFromUrl = (url) => {
+              if (!url) return '';
+              try {
+                const u = new URL(url);
+                const segs = u.pathname.split('/').filter(Boolean);
+                if (segs.length >= 2) return `${segs[segs.length - 2]}/${segs[segs.length - 1]}/`;
+                if (segs.length === 1) return `${segs[0]}/`;
+                return '';
+              } catch { return ''; }
+            };
 
             // Movement counters & log
             let movedDoneToMaint = 0;
@@ -173,12 +210,18 @@ jobs:
               const status = getStatusName(item);
               const lrd = getDate(item, lrdId);
               if (!status || !lrd) continue; // only move when LRD exists
+              
+              const prNumber = item.content.number;
+              const repoName = item.content.repository.name;
+
+              const publishedUrl = publishedUrlFieldId ? getText(item, publishedUrlFieldId) : null;
+              const lastTwoSegments = lastTwoFromUrl(publishedUrl) || '(no-published-url)';
 
               // Done -> Maintenance: LRD older/equal than 6 months ago
               if (status === STATUS_DONE && toDate(lrd) <= toDate(sixMonthsAgoISO)) {
                 await setStatus(itemId, statusFieldId, maintId);
                 movedDoneToMaint++;
-                const line = `[Cron] Move Done → Maintenance (LRD ${lrd} ≤ ${sixMonthsAgoISO})`;
+                const line = `[Cron] Moved ${lastTwoSegments} → Maintenance (LRD ${lrd} ≤ ${sixMonthsAgoISO})`;
                 console.log(line);
                 moveLog.push(line);
                 continue; // skip second rule for same item
@@ -188,7 +231,7 @@ jobs:
               if (status === STATUS_MAINT && toDate(lrd) > toDate(sixMonthsAgoISO)) {
                 await setStatus(itemId, statusFieldId, doneId);
                 movedMaintToDone++;
-                const line = `[Cron] Move Maintenance → Done (LRD ${lrd} > ${sixMonthsAgoISO})`;
+                const line = `[Cron] Moved ${lastTwoSegments} → Done (LRD ${lrd} > ${sixMonthsAgoISO})`;
                 console.log(line);
                 moveLog.push(line);
               }

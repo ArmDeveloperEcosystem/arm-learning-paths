@@ -12,7 +12,7 @@ Halide is a powerful, open-source programming language specifically designed to 
 
 A key advantage of Halide lies in its innovative programming model. By clearly distinguishing between algorithmic logic and scheduling decisions—such as parallelism, vectorization, memory management, and hardware-specific optimizations, developers can first focus on ensuring the correctness of their algorithms. Performance tuning can then be handled independently, significantly accelerating development cycles. This approach often yields performance that matches or even surpasses manually optimized code. As a result, Halide has seen widespread adoption across industry and academia, powering image processing systems at organizations such as Google, Adobe, and Facebook, and enabling advanced computational photography features used by millions daily.
 
-In this learning path, you will explore Halide’s foundational concepts, set up your development environment, and create your first functional Halide application. By the end, you will understand what makes Halide uniquely suited to efficient image processing, particularly on mobile and Arm-based hardware, and be ready to build your own optimized pipelines.
+In this learning path, you will explore Halide's  foundational concepts, set up your development environment, and create your first functional Halide application. By the end, you will understand what makes Halide uniquely suited to efficient image processing, particularly on mobile and Arm-based hardware, and be ready to build your own optimized pipelines.
 
 For broader or more general use cases, please refer to the official Halide documentation and tutorials available at [halide-lang.org](https://halide-lang.org).
 
@@ -20,7 +20,7 @@ The example code for this Learning Path is available in two repositories [here](
 
 ## Key concepts in Halide
 ### Separation of algorithm and schedule
-At the core of Halide’s design philosophy is the principle of clearly separating algorithms from schedules. Traditional image-processing programming tightly couples algorithmic logic with execution strategy, complicating optimization and portability. In contrast, Halide explicitly distinguishes these two components:
+At the core of Halide's  design philosophy is the principle of clearly separating algorithms from schedules. Traditional image-processing programming tightly couples algorithmic logic with execution strategy, complicating optimization and portability. In contrast, Halide explicitly distinguishes these two components:
   * Algorithm: Defines what computations are performed—for example, image filters, pixel transformations, or other mathematical operations on image data.
   * Schedule: Specifies how and where these computations are executed, addressing critical details such as parallel execution, memory usage, caching strategies, and hardware-specific optimizations.
 
@@ -61,32 +61,29 @@ Halide can be set up using one of two main approaches:
 Here, you will use pre-built binaries:
   1. Visit the official Halide releases [page](https://github.com/halide/Halide/releases). As of this writing, the latest Halide version is v19.0.0.
   2. Download and unzip the binaries to a convenient location (e.g., /usr/local/halide on Linux/macOS or C:\halide on Windows).
-  3. 3. Optionally set environment variables to simplify further usage:
+  3. Optionally set environment variables to simplify further usage:
 ```console
 export HALIDE_DIR=/path/to/halide
 export PATH=$HALIDE_DIR/bin:$PATH
 ```
 
 To proceed futher, make sure to install the following components:
-1. LLVM (Halide requires LLVM to compile and execute pipelines): 
-* Linux (Ubuntu):
-```console
-sudo apt-get install llvm-19-dev libclang-19-dev clang-19
-```
-* macOS (Homebrew):
-```console
-brew install llvm
-```
-2. OpenCV (for image handling in later lessons):
-* Linux (Ubuntu):
-```console
-sudo apt-get install libopencv-dev pkg-config
-```
-* macOS (Homebrew):
-```console
-brew install opencv pkg-config
-```
+1. LLVM (Halide requires LLVM to compile and execute pipelines)
+2. OpenCV (for image handling in later lessons)
 
+Install with the commands for your OS:
+
+{{< tabpane code=true >}}
+  {{< tab header="Linux/Ubuntu" language="bash">}}
+sudo apt-get install llvm-19-dev libclang-19-dev clang-19
+sudo apt-get install libopencv-dev pkg-config
+  {{< /tab >}}
+  {{< tab header="macOS" language="bash">}}
+brew install llvm
+brew install opencv pkg-config
+  {{< /tab >}}
+{{< /tabpane >}}
+   
 Halide examples were tested with OpenCV 4.11.0
 
 ## Your first Halide program
@@ -154,7 +151,7 @@ int main() {
 }
 ```
 
-This program demonstrates how to combine Halide’s image processing capabilities with OpenCV’s image I/O and display functionality. It begins by loading an image from disk using OpenCV, specifically reading from a static file named `img.png` (here you use a Cameraman image). Since OpenCV loads images in BGR format by default, the code immediately converts the image to RGB format so that it is compatible with Halide’s expectations.
+This program demonstrates how to combine Halide's  image processing capabilities with OpenCV’s image I/O and display functionality. It begins by loading an image from disk using OpenCV, specifically reading from a static file named `img.png` (here you use a Cameraman image). Since OpenCV loads images in BGR format by default, the code immediately converts the image to RGB format so that it is compatible with Halide's  expectations.
 
 Once the image is loaded and converted, the program wraps the raw image data into a Halide buffer, capturing the image’s dimensions (width, height, and color channels). Next, the Halide pipeline is defined through a function named invert, which specifies the computations to perform on each pixel—in this case, subtracting the original pixel value from 255 to invert the colors. The pipeline definition alone does not perform any actual computation; it only describes what computations should occur and how to schedule them.
 
@@ -188,7 +185,7 @@ Buffer<uint8_t> inputBuffer = Buffer<uint8_t>::make_interleaved(
 
 2. Planar Layout (RRR...GGG...BBB...):
 * Preferred by certain image-processing routines or hardware accelerators (e.g., some GPU kernels or certain ML frameworks).
-* Achieved naturally by Halide’s default loop ordering (x, y, c).
+* Achieved naturally by Halide's  default loop ordering (x, y, c).
 
 It is essential to select loop ordering based on your specific data format requirements and integration scenario. Halide provides full flexibility, allowing you to explicitly reorder loops to match the desired memory layout efficiently.
 
@@ -231,7 +228,7 @@ You will see two windows displaying the original and inverted images:
 ![img2](Figures/02.png)
 
 ## Summary
-In this section, you have learned Halide’s foundational concepts, explored the benefits of separating algorithms and schedules, set up your development environment, and created your first functional Halide application integrated with OpenCV. 
+In this section, you have learned Halide's  foundational concepts, explored the benefits of separating algorithms and schedules, set up your development environment, and created your first functional Halide application integrated with OpenCV. 
 
 While the example introduces the core concepts of Halide pipelines (such as defining computations symbolically and realizing them), it does not yet showcase the substantial benefits of explicitly separating algorithm definition from scheduling strategies.
 
