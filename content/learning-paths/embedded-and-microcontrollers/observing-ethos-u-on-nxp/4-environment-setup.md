@@ -57,7 +57,7 @@ Use a Docker container to build ExecuTorch:
    ```bash { output_lines = "2-3" }
    docker run -it ubuntu-24-container /bin/bash
    # Output will be the Docker container prompt
-   root@<CONTAINER ID>:/#
+   ubuntu@<CONTAINER ID>:/#
    ```
 
    [OPTIONAL] If you already have an existing container:
@@ -76,6 +76,12 @@ Use a Docker container to build ExecuTorch:
 
 {{% /notice %}}
 
+After logging in to the Docker container, navigate to the ubuntu home directory:
+
+```bash
+cd /home/ubuntu
+```
+
 1. **Install dependencies:**
 
    ```bash { output_lines = "1" }
@@ -92,12 +98,16 @@ Use a Docker container to build ExecuTorch:
 
 2. Clone ExecuTorch:
    ```bash
-   git clone --depth 1 https://github.com/pytorch/executorch.git
+   git clone https://github.com/pytorch/executorch.git
+   cd executorch
+   git fetch --tags
+   git checkout v1.0.0
+   git submodule sync
+   git submodule update --init --recursive
    ```
 
 3. Create a Virtual Environment:
-   ```bash { output_lines = "4" }
-   cd executorch
+   ```bash { output_lines = "3" }
    python3 -m venv .venv
    source .venv/bin/activate
    # Your prompt will prefix with (.venv)
