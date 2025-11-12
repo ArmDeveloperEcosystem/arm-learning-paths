@@ -368,6 +368,7 @@ html[theme="dark"] .minhang-mist-text {
 .table-wrapper-for-overflow {
     width: 100%;
     overflow-x: auto;
+    margin-top: 20px;
 }
 
 
