@@ -22,7 +22,7 @@ The script performs three key steps. It does the following:
 
 When the virtual machine starts you will see it on your Linux desktop:
 
-![Screenshot showing the Windows 11 desktop running in a virtual machine on an Arm-based Linux system. The Windows Start menu and taskbar are visible, confirming successful VM launch and RDP connection. alt-text#center](./images/win11arm.png "Windows 11 Arm VM desktop")
+![Screenshot showing the Windows 11 desktop running in a virtual machine on an Arm-based Linux system. The Windows Start menu and taskbar are visible, confirming successful VM launch and RDP connection. alt-text#center](./images/win11arm.webp "Windows 11 Arm VM desktop")
 
 ## What does the run script do? 
 

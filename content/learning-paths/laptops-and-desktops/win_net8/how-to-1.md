@@ -95,10 +95,10 @@ dotnet run -c Release -f net8.0
 
 The command will build and run the performance benchmarks. The output will look as follows:
 
-![fig1](figures/01.png)
+![fig1](figures/01.webp)
 
 The output lists all available benchmarks. You can type * to run all benchmarks or type a number to select individual performance tests. In this example, let's type **483** to execute the Perf_Doubles benchmark. After a while you will see a summary of the performance test. A portion of this output is shown in the figure below:
 
-![fig2](figures/02.png)
+![fig2](figures/02.webp)
 
 By default, the table summarizes the performance test results. You can see each performance test's execution time and statistics (mean, median, minimum, maximum, and standard deviation) which gives you a comprehensive overview of code performance.

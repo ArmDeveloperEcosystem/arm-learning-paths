@@ -21,7 +21,7 @@ Select `Create Azure Virtual Machine`, and fill in the details such as `Name`, a
 
 In the `Size` field, click on `See all sizes` and select the `D-Series v6` family of VMs. Select `D2psv6` from the list and create the VM.
 
-![azure-cobalt-vm #center](_images/azure-cobalt-vm.png)
+![azure-cobalt-vm #center](_images/azure-cobalt-vm.webp)
 
 {{% notice Note %}}
 To learn more about Arm-based VMs in Azure, refer to "Getting Started with Microsoft Azure" in  [*Get started with Arm-based cloud instances*](/learning-paths/servers-and-cloud-computing/csp/azure).
@@ -251,11 +251,11 @@ It has the following main steps:
 
 The next step is to trigger the pipeline manually by navigating to `Actions` tab in the GitHub repository. Select `Deploy .NET app`, and click on `Run Workflow`. You can also execute the pipeline by making a commit to the repository. Once the pipeline executes successfully, you will see the Actions output in a format similar to what is shown below:
 
-![github-run #center](_images/github-run.png)
+![github-run #center](_images/github-run.webp)
 
 You can check your kubernetes cluster and see new application pods deployed on the cluster as shown below:
 
-![kubernetes-deployment #center](_images/kubernetes-deployment.png)
+![kubernetes-deployment #center](_images/kubernetes-deployment.webp)
 
 
 

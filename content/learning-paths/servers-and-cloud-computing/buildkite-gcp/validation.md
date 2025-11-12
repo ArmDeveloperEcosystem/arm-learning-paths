@@ -37,7 +37,7 @@ The main steps you'll see are:
 - Creating the Buildx builder
 - Building and pushing the multi-architecture Docker image
 
-![Screenshot of the Buildkite dashboard displaying real-time build logs, showing each pipeline step and its status for monitoring progress alt-text#center](images/log.png "Monitor the build")
+![Screenshot of the Buildkite dashboard displaying real-time build logs, showing each pipeline step and its status for monitoring progress alt-text#center](images/log.webp "Monitor the build")
 
 ## Verify multi-arch image
 

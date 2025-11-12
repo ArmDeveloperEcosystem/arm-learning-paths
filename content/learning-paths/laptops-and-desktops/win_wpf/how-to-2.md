@@ -14,7 +14,7 @@ To prepare an application for ARM64 and x86_64 builds, proceed as follows:
 
 1. Click the **Any CPU** drop-down menu and select Configuration Manager...:
 
-![fig8](figures/08.png)
+![fig8](figures/08.webp)
 
 2. In the Configuration Manager, click New... from the **Active Solution Platform** drop-down menu:
 
@@ -28,7 +28,7 @@ To prepare an application for ARM64 and x86_64 builds, proceed as follows:
 
 To build and run the application, select the **solution platform** (for example, x86_64) and then click the **Arm64.Desktop.WPF button**:
 
-![fig11](figures/11.png)
+![fig11](figures/11.webp)
 
 When the application launches, type the execution count value, e.g., 2000 and click the "Run calculations" button. The application will display the column with the label denoting the computation time. Repeat this for other execution counts: 4000, 6000, 8000 and 10000. Your results should look like the following figure:
 

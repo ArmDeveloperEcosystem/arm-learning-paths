@@ -46,7 +46,7 @@ In the screenshot above, you can observe that two threads are created and they a
 
 You can also use the Annotation Channel view to analyze operator execution on a per-thread basis. Each thread generates its own annotation channel independently, allowing you to see how work is distributed across parallel execution units.
 
-![Screenshot showing Streamline annotation channels with multiple threads executing the same tensor node simultaneously alt-text#center](images/multi_thread_annotation_channel.png "Multi-thread annotation channels")
+![Screenshot showing Streamline annotation channels with multiple threads executing the same tensor node simultaneously alt-text#center](images/multi_thread_annotation_channel.webp "Multi-thread annotation channels")
 
 In the screenshot above, at the highlighted time, both threads are executing the same node. In this particular case, the node is the result_output linear layer. You can see how the workload is distributed across threads, with each thread processing a different portion of the matrix computation. This visualization helps identify load balancing issues and optimization opportunities in parallel execution.
 

@@ -27,7 +27,7 @@ During inference, such as when trying to generate the next *token* or *word* wit
 
 For example, in the image below, *z1* is calculated as a dot product of connected *x*s and *w*s from the previous layer. A matrix multiplication operation can therefore efficiently calculate all *z* values in Layer 0.
 
-![Neural Network example#center](neural-node-pic.jpg "Zoomed-in neural network node.")
+![Neural Network example#center](neural-node-pic.webp "Zoomed-in neural network node.")
 
 
 In addition to *weights*, each neuron in a neural network is assigned a *bias*. These weights and biases are learned during training, and make up a model's parameters. For example, in the Llama 3 model with 8 billion parameters, the model has around 8 billion individual weights and biases that embody what the model learned during training. Generally speaking, the higher the number of parameters a model has, the more information it can retain from its training, which increases its performance capability. For more information about Llama 3 view its [Hugging Face model card](https://huggingface.co/meta-llama/Meta-Llama-3-8B).

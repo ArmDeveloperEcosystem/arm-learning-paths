@@ -34,7 +34,7 @@ sudo docker build -t people.webapp:v1 .
 ```
 
 Then, type your password, and you will see the Docker build progress:
-![command prompt#left](figures/19.png "Figure 19. Building a Docker image")
+![command prompt#left](figures/19.webp "Figure 19. Building a Docker image")
 
 {{% notice Note %}} In the above example, we used the -t flag to tag the image (people.webapp:v1). Also, we used . to set the build context to the working directory. 
 

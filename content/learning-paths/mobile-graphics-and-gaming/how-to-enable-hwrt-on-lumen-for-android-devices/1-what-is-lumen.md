@@ -12,8 +12,8 @@ Lumen introduces a new ray-tracing based solution that allows developers to rend
 
 You can see the improvements in the rendering quality by comparing the following two images of the same scene. The first image uses only direct lighting where details in the areas beyond the direct lighting range (such as the background) are not visible. In contrast, the second image utilizes Lumen lighting, incorporating both direct and indirect lighting. Now, you can discern many more details in the background that were previously hidden, as Lumen takes light bounces into account.
 
-![](images/no_lumen.png "Figure 1. The scene without Lumen has only dirct lighting.")
+![](images/no_lumen.webp "Figure 1. The scene without Lumen has only dirct lighting.")
 
-![](images/lumen.png "Figure 2. The scene with Lumen has both direct and indirect lighting.")
+![](images/lumen.webp "Figure 2. The scene with Lumen has both direct and indirect lighting.")
 
 Lumen supports both software and hardware ray tracing. Software ray tracing uses a simplified Lumen scene to replace actual geometries in the scene. In contrast, hardware ray tracing uses actual geometries to trace rays, resulting in better lighting quality.

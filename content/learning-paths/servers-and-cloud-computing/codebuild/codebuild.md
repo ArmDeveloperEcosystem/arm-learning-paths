@@ -72,7 +72,7 @@ The Source section is where the GitHub project information is entered. To connec
 
 After the GitHub connection is made enter the GitHub URL for the project. Enter the link to the `hello-world` project in GitHub.
 
-![alt-text #center](images/codebuild_source.png)
+![alt-text #center](images/codebuild_source.webp)
 
 The Environment section contains the information about the Docker image to use for the build. This is NOT the Docker image you are building, it is the image used to build the image. CodeBuild runs a container to build the image and you need to make sure all of the tools needed are contained in the Docker image used to run the build. This is sometimes referred to as Docker-in-Docker.
  

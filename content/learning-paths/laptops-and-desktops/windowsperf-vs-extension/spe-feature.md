@@ -106,4 +106,4 @@ To do so you need to go to go to `Tools -> WindowsPerf Host Data` scroll to the 
 All the SPE results will be prefixed by your SPE device version name (e.g. `FEAT_SPEv1p1`)
 {{% /notice %}}
 
-![SPE results #center](./spe-results.png)
+![SPE results #center](./spe-results.webp)

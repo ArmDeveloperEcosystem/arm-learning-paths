@@ -35,7 +35,7 @@ For this to work, you must ensure that the `allow-my-ip` tag is present on your 
 Upload an image and enter your prompt in the UI to generate a response.
 
 You should see the LLM generating a response based on the prompt, using the image as context as shown below:
-![browser_output](browser_output.png)
+![browser_output](browser_output.webp)
 
 ## Further Interaction and Custom Applications
 

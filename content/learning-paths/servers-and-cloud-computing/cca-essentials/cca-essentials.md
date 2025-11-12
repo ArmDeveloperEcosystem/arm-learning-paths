@@ -32,6 +32,6 @@ The attestation verification service is hosted by Linaro, so it is not necessary
 
 Figure 1 demonstrates the software architecture that you will construct to run the attestation example.
 
-![cca-essentials](cca-essentials.png "Figure 1: Software architecture for running attestation.")
+![cca-essentials](cca-essentials.webp "Figure 1: Software architecture for running attestation.")
 
 You can now proceed to the next section to run the end-to-end attestation example with the software components and architecture as described here.

@@ -78,7 +78,7 @@ export MODEL="$HOME/FVP_RD_V3_R1/models/Linux64_armv8l_GCC-9.3/FVP_RD_V3_R1"  # 
 
 This starts the dual-chip simulation. You’ll see additional UART consoles (for example, MCP) and can verify both application processors (AP0 and AP1) boot in a coordinated manner.
 
-![img5 alt-text#center](rdv3r1_sim_login.jpg "RD-V3-R1 Buildroot login")
+![img5 alt-text#center](rdv3r1_sim_login.webp "RD-V3-R1 Buildroot login")
 
 As before, the terminal logs are stored under `~/rdv3r1/model-scripts/rdinfra/platforms/rdv3r1/rdv3r1`.
 

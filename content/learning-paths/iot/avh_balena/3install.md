@@ -16,7 +16,7 @@ On the next screen you will be asked to configure your device by choosing the fi
 
 Use the `Upload your own firmwware` on the right side to drag or browse for the file  `balenaos_rpi4b.zip`. 
 
-![upload custom firmware screen](upload_firmware.png)
+![upload custom firmware screen](upload_firmware.webp)
 
 Uploading the file takes some time. 
 
@@ -28,7 +28,7 @@ You do not need to set any advanced boot options.
 
 Wait for the device to be created. It is ready to use when you see the ready message:
 
-![device ready](device_ready.png)
+![device ready](device_ready.webp)
 
 ## Verify your device is ready
 

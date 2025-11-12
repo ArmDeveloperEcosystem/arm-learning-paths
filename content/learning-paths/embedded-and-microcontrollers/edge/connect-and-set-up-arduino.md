@@ -37,7 +37,7 @@ You will need the following components:
 - **Anode (long leg) of the LED** → connect to **GPIO pin D2** through a 220 Ω resistor  
 - **Cathode (short leg)** → connect to **GND**
 
-![Diagram showing the physical breadboard circuit connecting an LED to GPIO D2 and GND on the Arduino Nano RP2040 alt-text#center](images/led_connection.png)
+![Diagram showing the physical breadboard circuit connecting an LED to GPIO D2 and GND on the Arduino Nano RP2040 alt-text#center](images/led_connection.webp)
 
 ![Schematic diagram showing the LED connected between GPIO D2 and GND with a 220 Ω resistor in series alt-text#center](images/led_connection_schematic.png)
 

@@ -91,7 +91,7 @@ Run the program on both systems:
 
 For easy comparison, the image below shows the x86 output (left) and Arm output (right). The  highlighted lines show the difference in output: 
 
-![differences](./differences.png)
+![differences](./differences.webp)
 
 As you can see, there are several cases where different behavior is observed in these undefined scenarios. For example, when trying to convert a signed number to an unsigned number or dealing with out-of-bounds values. 
 

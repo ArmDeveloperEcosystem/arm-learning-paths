@@ -28,7 +28,7 @@ The PMUv3 plugin groups performance events together into categories called bundl
 
 The events in each bundle and the derived performance metrics are shown in the table below: 
 
-![example image alt-text#center](bundles.png "Table 1. Bundled Events")
+![example image alt-text#center](bundles.webp "Table 1. Bundled Events")
 
 Next, learn how to get the PMUv3 plugin and use it in an application. 
 
