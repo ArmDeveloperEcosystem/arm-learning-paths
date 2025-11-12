@@ -147,4 +147,6 @@ Extend your workflow to other models on Hugging Face that are compatible with vL
     
 You can quantize and serve them using the same `quantize_vllm_models.py` recipe, just update the model name.
 
-* **Connect a chat client:**  Link your server with OpenAI-compatible UIs like [Open WebUI](https://github.com/open-webui/open-webui)
+**Connect a chat client:**  Link your server with OpenAI-compatible UIs like [Open WebUI](https://github.com/open-webui/open-webui)
+
+You can continue exploring how Arm’s efficiency, oneDNN+ACL acceleration, and vLLM’s dynamic batching combine to deliver fast, sustainable, and scalable AI inference on modern Arm architectures.
