@@ -22,7 +22,7 @@ To prepare for debugging, remove the `–R` parameter from the `PARAMS=` section
 
 When `-R` is used, the FVP continues execution and does not wait for the debug connection.
 
-![modify parameters alt-text#center](images/modify_params.png "Figure 1. Modify run_model.sh")
+![modify parameters alt-text#center](images/modify_params.webp "Figure 1. Modify run_model.sh")
 
 {{% notice Debug server %}}
 To start a `CADI` debug server, use the `-S` option. For an `Iris` debug server, change this to `-I` instead.

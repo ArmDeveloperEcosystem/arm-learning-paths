@@ -143,7 +143,7 @@ Before starting the UI design, install the Syncfusion.SfChart.WPF NuGet package 
 2. In Solution Explorer, right-click on Dependencies under the Arm64.DesktopApp.WPF project. From the context menu, select Manage NuGet Packages... to open the NuGet Package Manager.
 3. In the NuGet Package Manager, search for Syncfusion Chart WPF. Then select Syncfusion.SfChart.WPF from the results and click the Install button. Refer to the figure below for guidance:
 
-![fig6](figures/06.png)
+![fig6](figures/06.webp)
 
 4. A Preview Changes window will appear. Click the Apply button to confirm and proceed with the changes to the solution. The installation of the NuGet package will complete.
 

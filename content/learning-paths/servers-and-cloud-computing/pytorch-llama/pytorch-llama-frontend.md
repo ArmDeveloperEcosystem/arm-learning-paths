@@ -73,7 +73,7 @@ Collecting usage statistics. To deactivate, set browser.gatherUsageStats to fals
 
 Open the local URL from the link above in a browser and you should see the chatbot running:
 
-![Chatbot](images/chatbot.png)
+![Chatbot](images/chatbot.webp)
 
 {{% notice Note %}}
 If you are running a server in the cloud, the local URL may not connect when starting the frontend server. If this happens, stop the frontend server and reconnect to your instance using port forwarding (see code below). After reconnecting, activate the `venv` and start the Streamlit frontend server.

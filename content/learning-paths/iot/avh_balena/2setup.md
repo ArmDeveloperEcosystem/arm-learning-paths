@@ -20,7 +20,7 @@ Create a new fleet and name it `AVH-Testing`.
 
 Add a device to your fleet. Navigate to the `Devices` section of your fleet and click on the `Add Device` button. This will open a dialog to create a custom device image.
 
-![Add Device dialog window](add_device.png)
+![Add Device dialog window](add_device.webp)
 
 You can use the Raspberry Pi 4 device on Arm Virtual Hardware (AVH) as the new device.
 

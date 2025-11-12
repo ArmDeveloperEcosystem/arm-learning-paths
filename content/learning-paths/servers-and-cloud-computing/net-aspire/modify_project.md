@@ -82,6 +82,6 @@ dotnet run --project NetAspire.Arm.AppHost
 
 Next, navigate to the web frontend, select **Weather**, and then return to the dashboard. Click **Traces** and note that the operation now takes significantly longer to complete — approximately four seconds in the example below:
 
-![fig4 alt-text#center](figures/04.png "Figure 4: Traces Example.")
+![fig4 alt-text#center](figures/04.webp "Figure 4: Traces Example.")
 
 You are now ready to deploy the application to the cloud.

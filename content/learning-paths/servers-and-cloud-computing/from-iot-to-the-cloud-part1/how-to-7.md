@@ -32,7 +32,7 @@ az acr create -n people -g rg-arm64 --sku Basic
 ```
 
 The output of the above commands will look as shown below:
-![command prompt#left](figures/20.png "Figure 20. Creating the Azure Container Registry")
+![command prompt#left](figures/20.webp "Figure 20. Creating the Azure Container Registry")
 
 In the next step, we must configure the role assignment so that the current Azure user can push Docker images to the Azure Container Registry. To do so, we use the WSL terminal, in which we type:
 ```console
@@ -46,4 +46,4 @@ az role assignment create --assignee $USER_ID --role AcrPush --scope $ACR_ID
 {{% notice Note %}} You’ll need to replace <YOUR_USER_ID> with the username you used.  {{% /notice %}}
 
 The last command's output will look as follows:
-![command prompt#left](figures/21.png "Figure 21. Creating the role assignment")
+![command prompt#left](figures/21.webp "Figure 21. Creating the role assignment")

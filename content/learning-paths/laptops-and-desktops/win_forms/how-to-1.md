@@ -21,11 +21,11 @@ Before you begin, install Visual Studio 2022 with .NET Desktop Development workl
 ## Create the project
 Start by creating the project. Open Visual Studio and then click 'Create a new project'. 
 
-![fig1](figures/01.png)
+![fig1](figures/01.webp)
 
 In the 'Create a new project' window, select the 'Windows Forms App' template. 
 
-![fig2](figures/02.png)
+![fig2](figures/02.webp)
 
 This will open the 'Configure your new project' view, in which you should configure the project as follows (refer to the figure below):
 

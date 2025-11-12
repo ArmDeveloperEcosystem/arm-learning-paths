@@ -18,7 +18,7 @@ Open Balena Hub in a new tab by clicking on the Balena Hub button on the top rig
 
 On the Balena Hub, click `Apps` in the top navigation bar, then search for `balena-app`. This is a pre-built dashboard backed by Grafana and served by Nginx.
 
-![balena-app page](balena_hub_app.png)
+![balena-app page](balena_hub_app.webp)
 
 Click on the app to open the details page. 
 
@@ -38,7 +38,7 @@ If you have more than one device in your fleet, this process will deploy the sel
 
 Once the deployment is finished, click on your device in Balena Cloud dashboard to open up the device page. You will see that the Grafana and Nginx services have been deployed to and are running on your device.
 
-![balena app running](balena_app_running.png)
+![balena app running](balena_app_running.webp)
 
 You will also be able to see the system logs from your device, and optionally get access to the device's terminal from this Balena Cloud screen.
 
@@ -50,10 +50,10 @@ Toggle the `Public Device URL` switch to the `On` position.
 
 A link will appear next to the switch, click on it to open the newly created public URL.
 
-![balena-app login](balena_app_login.png)
+![balena-app login](balena_app_login.webp)
 
 This will open the `balena-app` on your device in your browser. You will be presented with a log in screen, use the default username `admin` and password `admin` to log in. You will be prompted to set a new password for the `admin` user before continuing.
 
-![balena-app dashboard](balena_app_dashboard.png)
+![balena-app dashboard](balena_app_dashboard.webp)
 
 You now see the Grafana dashboard monitoring your Balena OS installation on this device, including the containers running Grafana and Nginx.

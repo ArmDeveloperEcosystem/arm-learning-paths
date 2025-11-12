@@ -180,7 +180,8 @@ sw_categories:
       tests_and_status: []
     nginx:
       readable_title: Learn how to deploy Nginx
-      tests_and_status: []
+      tests_and_status:
+      - ubuntu:latest: passed
     postgresql_tune:
       readable_title: Learn how to Tune PostgreSQL
       tests_and_status:

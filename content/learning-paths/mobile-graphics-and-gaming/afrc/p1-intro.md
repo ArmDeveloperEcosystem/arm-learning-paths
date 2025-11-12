@@ -28,7 +28,7 @@ So much so that, to the naked eye, the compressed and uncompressed images look t
 &nbsp;
 | Uncompressed | AFRC 2BPC (bits per component) |
 | ----------- | ----------- |
-| ![Uncompressed](images/sponza_default.png) | ![AFRC 2BPC](images/sponza_afrc.png) |
+| ![Uncompressed](images/sponza_default.webp) | ![AFRC 2BPC](images/sponza_afrc.webp) |
 
 More information can be found in [this blog on Arm® Immortalis™](https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/arm-immortalis-g715-developer-overview) and in [this Vulkan sample](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/samples/performance/image_compression_control/README.adoc).
 

@@ -16,5 +16,5 @@ Under AWS IoT Core, click on **MQTT test client** under the **Test** menu.
 In the 'Topic Filter' field, type 'Emulators/Weather/SensorReadings', and click the **Subscribe** button.
 You will see the data sent by the emulator displayed:
 
-![fig9](figures/09.png)
+![fig9](figures/09.webp)
 

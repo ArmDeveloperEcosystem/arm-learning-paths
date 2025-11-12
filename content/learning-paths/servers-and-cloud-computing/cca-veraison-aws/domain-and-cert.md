@@ -63,7 +63,7 @@ Use the **Add another name to this certificate** button to create the secondary 
 
 For the validation method, you should use **DNS validation**, which is the recommended default. You can also use the default **RSA 2048** for the certificate key algorithm as shown below.
 
-![Certificate Validation and Key Algorithm](./cert-validation-and-algorithm.png)
+![Certificate Validation and Key Algorithm](./cert-validation-and-algorithm.webp)
 
 Now click **Request** to request the certificate from the Certificate Manager.
 

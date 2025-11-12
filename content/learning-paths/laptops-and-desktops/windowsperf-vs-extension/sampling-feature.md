@@ -29,7 +29,7 @@ As you configure the settings, the dialog provides a real-time preview of the Wi
 
 When you are satisfied with your configurations, click `Save`.
 
-![Sampling overview #center](./sampling-overview.png)
+![Sampling overview #center](./sampling-overview.webp)
 
 ## How do I initiate sampling?
 
@@ -51,7 +51,7 @@ Any accessible source file appears as a clickable hyperlink. Selecting it will d
 
 Based on the insights gathered from the sampling results, proceed to make any required optimizations or edits to your source code.
 
-![Sampling results #center](./sampling-results.png)
+![Sampling results #center](./sampling-results.webp)
 
 ## How do I evaluate the result after making changes?
 

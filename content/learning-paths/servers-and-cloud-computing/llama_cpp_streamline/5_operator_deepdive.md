@@ -151,7 +151,7 @@ When moving the cursor over an annotation channel, Streamline shows:
 - The operator type  
 - The shape and size of the source tensors  
 
-![Close-up screenshot of annotation channel tooltip showing tensor node details including operator type and tensor dimensions alt-text#center](images/prefill_annotation_channel_3.png "Annotation channel zoom in")
+![Close-up screenshot of annotation channel tooltip showing tensor node details including operator type and tensor dimensions alt-text#center](images/prefill_annotation_channel_3.webp "Annotation channel zoom in")
 
 The example above shows a `GGML_OP_MUL_MAT` operator for the `FFN_UP` node.
 The source tensors have shapes [1024, 2816] and [1024, 68].  

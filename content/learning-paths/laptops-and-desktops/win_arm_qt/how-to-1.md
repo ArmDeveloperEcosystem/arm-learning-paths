@@ -19,19 +19,19 @@ You will need to install Qt on your Windows on Arm machine. Go to the Qt Group [
 
 In the Qt Setup window select, as a minimum, Qt version 6.2. In this example, we use version 6.4.
 
-![fig1](figures/01.png)
+![fig1](figures/01.webp)
 
 ## Create the project
 After installation, open the Qt Creator, click Examples, select Qt6, and type “affine” in the search box. The list of examples should include one project: Affine Transformations. Click on it to make the source code available in Qt Creator. 
 
-![fig2](figures/02.png)
+![fig2](figures/02.webp)
 
 {{% notice Note %}} If you are new to Qt Creator, consult the documentation for a quick introduction. Project files are on the left side, and double-clicking them opens them in the editor. The Run and Debug buttons are on the bottom left, or you can press F5 to run and debug your project and Ctrl + R to run it without the debugger.
  {{% /notice %}}
 
 Now build and run the app using default settings (F5 or Ctrl + R). After execution, the app should look like this:
 
-![fig3](figures/03.png)
+![fig3](figures/03.webp)
 
 The app continuously transforms the image of Tux (Linux's penguin character) by rotating, scaling, and shearing it. You can stop the animation by clicking Animate. It is active when the app runs inside the constructor of the XFormWidget.
 
@@ -226,7 +226,7 @@ Now it's time to run the application using the AArch64 build. To do this, use th
 
 Start debugging by clicking on the green play icon. The application will launch:
 
-![fig5](figures/05.png)
+![fig5](figures/05.webp)
 
 Click **Run** to trigger the animation. The Tux image is transformed 10,000 times. The time needed for the transformations appears in the Application Output window at the bottom of the Qt Creator window. You must click Application Output or press Alt + 3 to view it:
 

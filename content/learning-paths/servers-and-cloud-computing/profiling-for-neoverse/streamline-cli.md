@@ -94,7 +94,7 @@ Arm recommends that you profile an optimized release build of your application, 
 
 1. View your report in Excel or other compatible application. In functions reports, problem areas are indicated in red, to help you focus on the main problems.
 
-  ![An example functions report](images/v1-spe-report-full.png)
+  ![An example functions report](images/v1-spe-report-full.webp)
 
   See our [example report](/learning-paths/servers-and-cloud-computing/profiling-for-neoverse/example) to learn more about how to interpret the results.
 

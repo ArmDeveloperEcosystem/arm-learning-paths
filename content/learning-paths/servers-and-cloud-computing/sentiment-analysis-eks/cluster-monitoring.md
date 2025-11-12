@@ -113,4 +113,4 @@ Locate a `Kubernetes/Compute Resources/Node (Pods)` dashboard and click on it.
 
 You should see a dashboard like below for your Kubernetes cluster:
 
-![grafana #center](_images/grafana.png "Figure 8: Dashboard for Kubernetes Cluster.")
+![grafana #center](_images/grafana.webp "Figure 8: Dashboard for Kubernetes Cluster.")

@@ -152,4 +152,4 @@ You will be prompted for the password you created earlier with `vncpasswd`.
 
 A remote Linux desktop should appear on your local computer. When you are finished, close the VNC client first and then exit the SSH connection.
 
-![Linux desktop #center](/install-guides/_images/xfce4.png)
+![Linux desktop #center](/install-guides/_images/xfce4.webp)

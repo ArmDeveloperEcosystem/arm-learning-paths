@@ -33,7 +33,7 @@ code people_aks.yaml
 
 4.	This will open the code/text editor in Azure:
 
-![AKS#left](figures/11.png)
+![AKS#left](figures/11.webp)
 
 5.	Check line number 17. In our case, it points to the fully qualified container image name, **image: people.azurecr.io/people.webapp:v1**. This includes the container registry login server, image name, and image tag. The login server is the same one we created in part 2 of this learning path series. If you use a different name for either the container registry or the container name, update line 17 correspondingly. Then save the changes to the same file, people_aks.yml (CTRL+S), and close the editor (CTRL+Q).
 
@@ -55,7 +55,7 @@ kubectl get svc
 
 This will display the list of services as shown below:
 
-![AKS#left](figures/12.png)
+![AKS#left](figures/12.webp)
 
 Note the IP address under the **EXTERNAL-IP** column of **people-web-appsvc**. That is the Public IP where you can find your application. In my case, that is **4.156.88.80**. By typing this IP in the web browser, you will see an application up and running:
 

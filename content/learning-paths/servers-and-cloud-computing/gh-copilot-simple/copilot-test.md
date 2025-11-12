@@ -45,7 +45,7 @@ Lastly, the chat output from your extension is printed.
 
 Here it is in VS Code:
 
-![#Copilot output](_images/output.png)
+![#Copilot output](_images/output.webp)
 
 Your GitHub Copilot Extension is now responding to chat prompts. 
 

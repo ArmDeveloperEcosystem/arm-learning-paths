@@ -99,6 +99,6 @@ When a resource is requested, the KBS uses the attestation result to decide whet
 
 This diagram shows the software architecture you will construct to run the attestation example:
 
-![Software architecture for running attestation alt-text#center](trustee.png "Software architecture for running attestation")
+![Software architecture for running attestation alt-text#center](trustee.webp "Software architecture for running attestation")
 
 Proceed to the next section to run the end-to-end attestation example using the components and architecture described here.

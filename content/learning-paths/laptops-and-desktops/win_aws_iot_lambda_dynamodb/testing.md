@@ -12,11 +12,11 @@ To test the function, launch the IoT emulator to write some data to the DynamoDB
 
 In the `GetAverageTemperature` function dashboard click the **Deploy** button:
 
-![fig5](figures/05.png)
+![fig5](figures/05.webp)
 
 You can then click the **Test** button. This will open the *Configure test event* window, in which you type **Test** in the Event name and click the **Save** button. This will take you back to the `GetAverageTemperature` function dashboard, where you click the **Test** button again. You will see the execution status, including the average temperature value as shown below:
 
-![fig6](figures/06.png)
+![fig6](figures/06.webp)
 
 # Summary
 In this learning path you have implemented an AWS Lambda function that processes data stored in a DynamoDB table. You utilized AWS SDK for JavaScript v3 to interact with DynamoDB. Specifically, to create a DynamoDB Query, you constructed a DynamoDB Scan Command with a FilterExpression to retrieve records from the last N minutes. 

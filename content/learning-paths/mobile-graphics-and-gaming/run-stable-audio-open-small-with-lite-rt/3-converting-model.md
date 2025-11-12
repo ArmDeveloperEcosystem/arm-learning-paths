@@ -18,7 +18,7 @@ The open-source model consists of three main submodules. They are described in t
 |AutoEncoder| Compresses audio waveforms into a latent representation for processing by the DiT model, and decompresses the output back into audio. |
 
 
-![Model structure#center](./model.png)
+![Model structure#center](./model.webp)
 
 In this section, you will explore two different conversion routes, to convert the submodules to [LiteRT](https://ai.google.dev/edge/litert) format. Both methods will be run using Python wrapper scripts from the examples repository.
 

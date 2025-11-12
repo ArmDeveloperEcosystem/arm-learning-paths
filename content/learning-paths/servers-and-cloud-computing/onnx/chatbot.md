@@ -126,4 +126,4 @@ python3 phi4.py -m cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4 -e cpu -g
 ```
 
 You should see output similar to the image below when the server starts successfully:
-![server](server.png)
+![server](server.webp)

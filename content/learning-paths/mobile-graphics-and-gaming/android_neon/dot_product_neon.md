@@ -234,7 +234,7 @@ You have now added all the code to this file and can proceed to building the app
 
 By default, the Build Variant is `debug` for this project. Select `Build-> Select Build Variant...` and change the Active Build Variant to `release` as shown in the image below:
 
-![img7](neon7.png)
+![img7](neon7.webp)
 
 Now build the code. Select `Build-> Make Project`. Once the build completes, you should see output similar to what is shown below:
 

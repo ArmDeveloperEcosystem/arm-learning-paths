@@ -134,4 +134,4 @@ You will now deploy the sample to your Android device. Your device must already 
 
 Unity will take a moment to build the Android version and then automatically deploy it to your connected Android device. Depending on your setup, the build and deployment might take several minutes.
 
-![Running on Android#center](images/android-plain-mode.jpg "Figure 6. Sample application running on Android.")
+![Running on Android#center](images/android-plain-mode.webp "Figure 6. Sample application running on Android.")

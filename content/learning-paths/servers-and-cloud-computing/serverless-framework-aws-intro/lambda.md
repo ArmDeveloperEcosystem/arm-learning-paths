@@ -176,7 +176,7 @@ You will see the following output:
 
 Finally, log into the AWS console. Change the region to us-east-1 (N. Virginia). Then, go to the Lambda dashboard to see the deployed Lambda function. It will be named *AwsServerlessLambda-dev-hello*:
 
-![fig1](figures/01.png)
+![fig1](figures/01.webp)
 
 ## Summary
 In this Learning Path, you learned about the Serverless Framework, its benefits, and its integration with Infrastructure as Code (IaC) for managing cloud resources. You set up the Serverless Framework for AWS and created a project. We explained its structure, specifically focusing on the serverless.yml file, including the structure and configuration options for setting up a basic Serverless service with AWS Lambda. Finally, we explored the Lambda handler function and deployed the resources to AWS.

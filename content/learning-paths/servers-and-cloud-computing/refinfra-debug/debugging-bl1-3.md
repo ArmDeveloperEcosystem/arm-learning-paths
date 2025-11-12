@@ -49,7 +49,7 @@ add-symbol-file "/<workspace>/rd-infra/tf-a/build/rdn2/debug/bl31/bl31.elf" EL3:
 If you would like to add platform-specific debug files, the memory locations are in the corresponding ``platform_h.def`` file.
 {{% /notice %}}
 
-![tfa symbols alt-text#center](images/tfa-symbols.png "Figure 2. Load TF-A symbols")
+![tfa symbols alt-text#center](images/tfa-symbols.webp "Figure 2. Load TF-A symbols")
 
 These commands load the symbol files and specify the memory address location, updating **workspace** to include the path to your own workspace directory.
 
@@ -63,7 +63,7 @@ Set a breakpoint in the function you would like to debug. In this example, you c
 
 Simply interrupt the CPU and enter debug command `set $pc += 4'; you can now step through and debug the TF-A boot flow.
 
-![bl1 breakpoint alt-text#center](images/bl1_breakpoint.png "Figure 5. BL1 breakpoint")
+![bl1 breakpoint alt-text#center](images/bl1_breakpoint.webp "Figure 5. BL1 breakpoint")
 
 ## Alternate break method
 Another method of setting a breakpoint without modifying TF-A is by launching the model with ``--break``.

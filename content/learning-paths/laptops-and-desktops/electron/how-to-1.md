@@ -218,7 +218,7 @@ npm start
 
 The application window appears. Then click the Fetch data button and you will see the list of posts:
 
-![fig2](figures/02.png)
+![fig2](figures/02.webp)
 
 ## Styling an application
 The application works fine. However, it uses default styles and does not look very pretty. To change this you can use cascading style sheets (CSS) as per web applications. To style the application, proceed as follows:
@@ -302,7 +302,7 @@ body {
 
 After the application launches, click the **Fetch data** button and you will see the following result:
 
-![fig3](figures/03.png)
+![fig3](figures/03.webp)
 
 ## Checkpoint
 You now have the application up and running. By default, it runs using the Arm64 architecture because we used Node.js for Arm64. To confirm this, open the Task Manager, click the Details tab and look for **electron.exe** processes:
