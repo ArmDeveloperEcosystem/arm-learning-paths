@@ -28,10 +28,10 @@ Use a Docker container to build ExecuTorch:
 
    ```bash
    cd ubuntu-24-container
-   touch dockerfile
+   touch Dockerfile
    ```
 
-4. Add the following commands to your `dockerfile`:
+4. Add the following commands to your `Dockerfile`:
 
    ```dockerfile
    FROM ubuntu:24.04

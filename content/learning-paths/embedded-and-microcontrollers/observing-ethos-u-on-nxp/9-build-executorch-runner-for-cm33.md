@@ -85,11 +85,21 @@ abc123def456   executorch     "/bin/bash"   2 hours ago    Exited
 Copy the libraries:
 
 ```bash
-docker cp abc123def456:/root/executorch/cmake-out/lib/. ./executorch/lib/
-docker cp abc123def456:/root/executorch/. ./executorch/include/executorch/
+docker cp abc123def456:/home/ubuntu/executorch/cmake-out/lib/. ./executorch/lib/
+docker cp abc123def456:/home/ubuntu/executorch/. ./executorch/include/executorch/
 ```
 
 Replace `abc123def456` with your actual container ID.
+
+{{% notice Note %}}
+In some Docker containers, the `cmake-out` folder might not exist. If you don't see the libraries, run the following command to build them:
+
+```bash
+./examples/arm/run.sh --build-only
+```
+
+The libraries will be generated in `arm_test/cmake-out`.
+{{% /notice %}}
 
 Verify the libraries:
 

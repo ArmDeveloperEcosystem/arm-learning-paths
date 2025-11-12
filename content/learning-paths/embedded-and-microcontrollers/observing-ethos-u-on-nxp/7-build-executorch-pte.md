@@ -109,17 +109,31 @@ Now you will build the `.pte` file, that will be used on the NXP board.
 1. Build the [MobileNet V2](https://pytorch.org/hub/pytorch_vision_mobilenet_v2/) ExecuTorch `.pte` runtime file using [aot_arm_compiler](https://github.com/pytorch/executorch/blob/2bd96df8de07bc86f2966a559e3d6c80fc324896/examples/arm/aot_arm_compiler.py):
 
    ```bash
-   python3 -m examples.arm.aot_arm_compiler \
-     --model_name="mv2" \
-     --quantize \
-     --delegate \
-     --debug
+      python3 -m examples.arm.aot_arm_compiler \
+         --model_name="mv2" \
+         --quantize \
+         --delegate \
+         --debug \
+         --target ethos-u55-256
+
    ```
 
-3. Check that the `mv2_arm.pte` file was generated:
+{{% notice Note %}}
+| Flag                     | Meaning                                             |
+| ------------------------ | --------------------------------------------------- |
+| `--model_name="mv2"`     | Example model: MobileNetV2 (small, efficient)       |
+| `--quantize`             | Enables int8 quantization (required for Ethos-NPUs) |
+| `--delegate`             | Enables offloading layers to the Ethos backend      |
+| `--debug`                | Verbose build output                                |
+| `--target ethos-u55-256` | Targets the Ethos-U55      |
+
+The `--quantize` flag uses one input example, so the resulting model will likely have poor classification performance.
+{{% /notice %}}
+
+3. Check that the `mv2_arm_delegate_ethos-u55-256.pte` file was generated:
    
    ```bash
-   ls mv2/mv2_arm.pte
+   ls mv2_arm_delegate_ethos-u55-256.pte
    ```
 
 ## Troubleshooting
