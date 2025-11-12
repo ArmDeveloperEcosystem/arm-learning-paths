@@ -36,7 +36,7 @@ vLLM’s performance on Arm servers is driven by both software optimization and 
 Each component of this optimized build contributes to higher throughput and lower latency during inference:
 
 - Optimized kernels: The aarch64 vLLM build uses direct oneDNN with the Arm Compute Library for key operations.
-- 4‑bit weight quantization: vLLM supports INT4 quantized models, and Arm accelerates this using KleidiAI microkernels, which take advantage of DOT-product (SDOT/UDOT) and SME2 (Scalable Matrix Extension) instructions.
+- 4‑bit weight quantization: vLLM supports INT4 quantized models, and Arm accelerates this using KleidiAI microkernels, which take advantage of DOT-product (SDOT/UDOT) instructions.
 - Efficient MoE execution: For Mixture-of-Experts (MoE) models, vLLM fuses INT4 quantized expert layers to reduce intermediate memory transfers, which minimizes bandwidth bottlenecks
 - Optimized Paged attention: The paged attention mechanism, which handles token reuse during long-sequence generation, is SIMD-tuned for Arm’s NEON and SVE (Scalable Vector Extension) pipelines.
 - System tuning: Using thread affinity ensures efficient CPU core pinning and balanced thread scheduling across Arm clusters.
