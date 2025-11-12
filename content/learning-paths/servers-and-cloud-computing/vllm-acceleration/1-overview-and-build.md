@@ -144,5 +144,8 @@ Processed prompts: 100%|██████████████████�
 ```
 
 {{% notice Note %}}
-As CPU support in vLLM continues to mature, manual builds will be replaced by a simple `pip install` flow for easier setup in near future.
+As CPU support in vLLM continues to mature, these manual build steps will eventually be replaced by a streamlined pip install workflow for aarch64, simplifying future deployments on Arm servers.
 {{% /notice %}}
+
+You have now verified that your vLLM Arm64 build runs correctly and performs inference using Arm-optimized kernels.
+Next, you’ll proceed to model quantization, where you’ll compress LLM weights to INT4 precision using llmcompressor and benchmark the resulting performance improvements.
