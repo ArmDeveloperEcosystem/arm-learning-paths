@@ -5,33 +5,39 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Accelerating LLMs with 4-bit Quantization
 
-You can accelerate many LLMs on Arm CPUs with 4‑bit quantization. In this guide, we use `deepseek-ai/DeepSeek-V2-Lite` as the example model which gets accelerated by the INT4 path in vLLM using Arm KleidiAI microkernels.
+You can accelerate many LLMs on Arm CPUs with 4‑bit quantization. In this section, you’ll quantize the deepseek-ai/DeepSeek-V2-Lite model to 4-bit integer (INT4) weights.
+The quantized model runs efficiently through vLLM’s INT4 inference path, which is accelerated by Arm KleidiAI microkernels.
 
 ## Install quantization tools
 
-Install the vLLM model quantization packages
+Install the quantization dependencies used by vLLM and the llmcompressor toolkit:
 
 ```bash
 pip install --no-deps compressed-tensors
 pip install llmcompressor
 ```
-
-Reinstall your locally built vLLM if you rebuilt it:
+  * compressed-tensors provides the underlying tensor storage and compression utilities used for quantized model formats.
+  * llmcompressor includes quantization, pruning, and weight clustering utilities compatible with Hugging Face Transformers and vLLM runtime formats.
+    
+If you recently rebuilt vLLM, reinstall your locally built wheel to ensure compatibility with the quantization extensions:
 
 ```bash
 pip install --no-deps dist/*.whl
 ```
 
-If your chosen model is gated on Hugging Face, authenticate first:
+Authenticate with Hugging Face (if required):
+
+If the model you plan to quantize is gated on Hugging Face (e.g., DeepSeek or proprietary models), log in to authenticate your credentials before downloading model weights:
 
 ```bash
 huggingface-cli login
 ```
 
-## INT4 Quantization recipe
+## INT4 Quantization Recipe
 
-Save the following as `quantize_vllm_models.py`:
+Using a file editor of your choice, save the following code into a file named `quantize_vllm_models.py`:
 
 ```python
 import argparse
@@ -124,7 +130,7 @@ if __name__ == "__main__":
     main()
 ```
 
-This script creates a Arm KleidiAI 4‑bit quantized copy of the vLLM model and saves it to a new directory.
+This script creates a Arm KleidiAI INT4 quantized copy of the vLLM model and saves it to a new directory.
 
 ## Quantize DeepSeek‑V2‑Lite model
 
