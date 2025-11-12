@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Build the ExecuTorch .pte File"
+title: "Build the ExecuTorch .pte "
 
 weight: 8 # 1 is first, 2 is second, etc.
 
@@ -103,7 +103,7 @@ You can read a detail explanation of the build steps here: [ARM Ethos-U Backend]
    source examples/arm/ethos-u-scratch/setup_path.sh
    ```
 
-## Build the ExecuTorch .pte Runtime File
+## Build the ExecuTorch .pte
 Now you will build the `.pte` file, that will be used on the NXP board.
 
 1. Build the [MobileNet V2](https://pytorch.org/hub/pytorch_vision_mobilenet_v2/) ExecuTorch `.pte` runtime file using [aot_arm_compiler](https://github.com/pytorch/executorch/blob/2bd96df8de07bc86f2966a559e3d6c80fc324896/examples/arm/aot_arm_compiler.py):
