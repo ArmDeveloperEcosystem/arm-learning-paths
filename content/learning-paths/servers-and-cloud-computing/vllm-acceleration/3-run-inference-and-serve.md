@@ -6,13 +6,20 @@ weight: 4
 layout: learningpathall
 ---
 
-## About batch sizing in vLLM
+## Batch Sizing in vLLM
 
-vLLM enforces two limits to balance memory use and throughput: a per‑sequence length (`max_model_len`) and a per‑batch token limit (`max_num_batched_tokens`). No single request can exceed the sequence limit, and the sum of tokens in a batch must stay within the batch limit.
+vLLM uses dynamic continuous batching to maximize hardware utilization. Two key parameters govern this process:
+  * `max_model_len` — The maximum sequence length (number of tokens per request).
+No single prompt or generated sequence can exceed this limit.
+  * `max_num_batched_tokens` — The total number of tokens processed in one batch across all requests.
+The sum of input and output tokens from all concurrent requests must stay within this limit.
+
+Together, these parameters determine how much memory the model can use and how effectively CPU threads are saturated.
+On Arm-based servers, tuning them helps achieve stable throughput while avoiding excessive paging or cache thrashing.
 
 ## Serve an OpenAI‑compatible API
 
-Start the server with sensible CPU default parameters and a quantized model:
+Start vLLM’s OpenAI-compatible API server using the quantized INT4 model and environment variables optimized for performance.
 
 ```bash
 export VLLM_TARGET_DEVICE=cpu
@@ -27,9 +34,19 @@ vllm serve DeepSeek-V2-Lite-w4a8dyn-mse-channelwise \
   --dtype float32 --max-model-len 4096 --max-num-batched-tokens 4096
 ```
 
-## Run multi‑request batch
+The server now exposes the standard OpenAI-compatible /v1/chat/completions endpoint.
 
-After confirming a single request works explained in previous example, simulate concurrent load with a small OpenAI API compatible client. Save this as `batch_test.py`:
+You can test it using any OpenAI-style client library to measure tokens-per-second throughput and response latency on your Arm-based server.
+
+## Run multi‑request batch
+After verifying a single request in the previous section, simulate concurrent load against the OpenAI-compatible server to exercise vLLM’s continuous batching scheduler.
+
+About the client:
+Uses AsyncOpenAI with base_url="http://localhost:8000/v1" to target the vLLM server.
+A semaphore caps concurrency to 8 simultaneous requests (adjust CONCURRENCY to scale load).
+max_tokens limits generated tokens per request—this directly affects batch size and KV cache use.
+
+Save the code below in a file named `batch_test.py`:
 
 ```python
 import asyncio
@@ -88,7 +105,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-Run 8 concurrent requests against your server:
+Run 8 concurrent requests:
 
 ```bash
 python3 batch_test.py
@@ -108,19 +125,28 @@ This validates multi‑request behavior and shows aggregate throughput in the se
 (APIServer pid=4474) INFO:     127.0.0.1:44120 - "POST /v1/chat/completions HTTP/1.1" 200 OK
 (APIServer pid=4474) INFO 11-10 01:01:06 [loggers.py:221] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 57.5 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
 ```
-## Optional: Serving BF16 non-quantized model
+## Optional: Serve a BF16 (Non-Quantized) Model
 
-For a BF16 path on Arm, vLLM is acclerated by direct oneDNN integration in vLLM which allows aarch64 model to be hyperoptimized.
+For a non-quantized path, vLLM on Arm can run BF16 end-to-end using its oneDNN integration (which routes to Arm-optimized kernels via ACL under aarch64).
 
 ```bash
 vllm serve deepseek-ai/DeepSeek-V2-Lite \
   --dtype bfloat16 --max-model-len 4096  \
   --max-num-batched-tokens 4096
 ```
+Use this BF16 setup to establish a quality reference baseline, then compare throughput and latency against your INT4 deployment to quantify the performance/accuracy trade-offs on your Arm system.
 
 ## Go Beyond: Power Up Your vLLM Workflow
-Now that you’ve successfully quantized and served a model using vLLM on Arm, here are some further ways to explore:
+Now that you’ve successfully quantized, served, and benchmarked a model using vLLM on Arm, you can build on what you’ve learned to push performance, scalability, and usability even further.
 
-* **Try different models:** Apply the same steps to other [Hugging Face models](https://huggingface.co/models) like Llama, Qwen or Gemma.
+**Try Different Models**
+Extend your workflow to other models on Hugging Face that are compatible with vLLM and can benefit from Arm acceleration:
+  * Meta Llama 2 / Llama 3 – Strong general-purpose baselines; excellent for comparing BF16 vs INT4 performance.
+  * Qwen / Qwen-Chat – High-quality multilingual and instruction-tuned models.
+  * Gemma (Google) – Compact and efficient architecture; ideal for edge or cost-optimized serving.
+    
+You can quantize and serve them using the same `quantize_vllm_models.py` recipe, just update the model name.
 
-* **Connect a chat client:**  Link your server with OpenAI-compatible UIs like [Open WebUI](https://github.com/open-webui/open-webui)
+**Connect a chat client:**  Link your server with OpenAI-compatible UIs like [Open WebUI](https://github.com/open-webui/open-webui)
+
+You can continue exploring how Arm’s efficiency, oneDNN+ACL acceleration, and vLLM’s dynamic batching combine to deliver fast, sustainable, and scalable AI inference on modern Arm architectures.
