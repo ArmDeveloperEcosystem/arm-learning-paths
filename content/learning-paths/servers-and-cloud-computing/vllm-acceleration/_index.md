@@ -1,5 +1,5 @@
 ---
-title: High throughput LLM serving using vLLM on Arm Servers
+title: Optimized LLM Inference with vLLM on Arm-Based Servers
 
 draft: true
 cascade:
@@ -36,8 +36,7 @@ tools_software_languages:
     - Generative AI
     - Python
     - PyTorch
-    - llmcompressor
-
+    
 further_reading:
     - resource:
         title: vLLM Documentation
