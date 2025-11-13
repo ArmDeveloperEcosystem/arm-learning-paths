@@ -128,9 +128,9 @@ int main() {
 }
 ```
 
-The camera delivers interleaved BGR frames. Inside Halide, we convert to grayscale (Rec.601), apply a 3×3 binomial blur (sum/16 with 16-bit accumulation), then threshold to produce a binary image. We compile once (outside the capture loop) and realize per frame for real-time processing.
+The camera delivers interleaved BGR frames. Inside Halide, convert to grayscale (Rec.601), apply a 3×3 binomial blur (sum/16 with 16-bit accumulation), then threshold to produce a binary image. Compile once (outside the capture loop) and realize per frame for real-time processing.
 
-A 3×3 filter needs neighbors (x±1, y±1). At the image edges, some taps would fall outside the valid region. Rather than scattering manual clamps across expressions, we wrap the input once:
+A 3×3 filter needs neighbors (x±1, y±1). At the image edges, some taps would fall outside the valid region. Rather than scattering manual clamps across expressions, wrap the input once:
 
 ```cpp
 // Wrap the input so out-of-bounds reads replicate the nearest edge pixel.
@@ -139,7 +139,7 @@ Func inputClamped = BoundaryConditions::repeat_edge(input);
 
 Any out-of-bounds access replicates the nearest edge pixel. This makes the boundary policy obvious, keeps expressions clean, and ensures all downstream stages behave consistently at the edges.
 
-Grayscale conversion happens inside Halide using Rec.601 weights. We read B, G, R from the interleaved input and compute luminance:
+Grayscale conversion happens inside Halide using Rec.601 weights. Read B, G, R from the interleaved input and compute luminance:
 
 ```cpp
 // Grayscale (Rec.601)
@@ -150,7 +150,7 @@ gray(x, y) = cast<uint8_t>(0.114f * inputClamped(x, y, 0) +    // B
                            0.299f * inputClamped(x, y, 2));    // R
 ```
 
-Next, the pipeline applies a Gaussian-approximate (binomial) blur using a fixed 3×3 kernel. For this learning path, we implement it with small loops and 16-bit accumulation for safety:
+Next, the pipeline applies a Gaussian-approximate (binomial) blur using a fixed 3×3 kernel. For this Learning Path, implement it with small loops and 16-bit accumulation for safety:
 
 ```cpp
 Func blur("blur");
@@ -167,7 +167,7 @@ Why this kernel?
 * The weights approximate a Gaussian distribution, which reduces noise but preserves edges better than a box filter.
 * This is mathematically a binomial filter, a standard and efficient approximation of Gaussian blurring.
 
-After the blur, the pipeline applies thresholding to produce a binary image. We explicitly cast constants to uint8_t to remove ambiguity and avoid redundant widen/narrow operations in generated code:
+After the blur, the pipeline applies thresholding to produce a binary image. Explicitly cast constants to uint8_t to remove ambiguity and avoid redundant widen/narrow operations in generated code:
 
 ```cpp
 Func output("output");
@@ -354,7 +354,7 @@ realize: 3.98 ms  |  251.51 FPS  |  521.52 MPix/s
 This gives an FPS of 251.51, and average throughput of 521.52 MPix/s. Now you can start measuring potential improvements from scheduling.
 
 ### Parallelization
-Parallelization lets Halide run independent pieces of work at the same time on multiple CPU cores. In image pipelines, rows (or row tiles) are naturally parallel once producer data is available. By distributing work across cores, we reduce wall-clock time—crucial for real-time video.
+Parallelization lets Halide run independent pieces of work at the same time on multiple CPU cores. In image pipelines, rows (or row tiles) are naturally parallel once producer data is available. By distributing work across cores, wall-clock time is reduced—crucial for real-time video.
 
 With the baseline measured, apply a minimal schedule that parallelizes the loop iteration for y axis.
 
@@ -387,10 +387,10 @@ Tiling splits the image into cache-friendly blocks (tiles). Two wins:
 * Partitioning: tiles are easy to parallelize across cores.
 * Locality: when you cache intermediates per tile, you avoid refetching/recomputing data and hit CPU L1/L2 cache more often.
 
-Now lets look at both flavors.
+Now let's look at both flavors.
 
 ### Tiling with explicit intermediate storage (best for cache efficiency)
-Here you will cache gray once per tile so the 3×3 blur can reuse it instead of recomputing RGB -> gray up to 9× per output pixel.
+Cache gray once per tile so the 3×3 blur can reuse it instead of recomputing RGB -> gray up to 9× per output pixel.
 
 ```cpp
 // Scheduling
@@ -414,23 +414,23 @@ In this scheduling:
 * parallel(yo) distributes tiles across CPU cores where a CPU core is in charge of a row (yo) of tiles.
 * gray.compute_at(...).store_at(...) materializes a tile-local planar buffer for the grayscale intermediate so blur can reuse it within the tile.
 
-Recompile your application as before, then run. What we observed on our machine:
+Recompile your application as before, then run. Here's sample output:
 ```output
 realize: 0.98 ms  |  1023.15 FPS  |  2121.60 MPix/s
 ```
 
 This was the fastest variant here—caching a planar grayscale per tile enabled efficient reuse.
 
-### How we schedule
-In general, there is no one-size-fits-all rule of scheduling to achieve the best performance as it depends on your pipeline characteristics and the target device architecture. So, it is recommended to explore the scheduling options and that is where Halide's scheduling API is purposed for.
+### How to schedule
+In general, there's no one-size-fits-all rule of scheduling to achieve the best performance as it depends on your pipeline characteristics and the target device architecture. It's recommended to explore the scheduling options and that's where Halide's scheduling API is purposed for.
 
 For example of this application:
 * Start with parallelizing the outer-most loop.
-* Add tiling + caching only if: there is a spatial filter, or the intermediate is reused by multiple consumers—and preferably after converting sources to planar (or precomputing a planar gray).
+* Add tiling + caching only if: there's a spatial filter, or the intermediate is reused by multiple consumers—and preferably after converting sources to planar (or precomputing a planar gray).
 * From there, tune tile sizes and thread count for your target. `HL_NUM_THREADS` is the environmental variable which allows you to limit the number of threads in-flight.
 
 ## Summary
-In this section, you built a real-time Halide+OpenCV pipeline—grayscale, a 3×3 binomial blur, then thresholding—and instrumented it to measure throughput. And then, we observed that parallelization and tiling improved the performance.
+In this section, you built a real-time Halide+OpenCV pipeline—grayscale, a 3×3 binomial blur, then thresholding—and instrumented it to measure throughput. Parallelization and tiling improved the performance.
 
 * Parallelization spreads independent work across CPU cores.
-* Tiling for cache efficiency helps when an expensive intermediate is reused many times per output (e.g., larger kernels, separable/multi-stage pipelines, multiple consumers) and when producers read planar data.
+* Tiling for cache efficiency helps when an expensive intermediate is reused many times per output (for example, larger kernels, separable/multi-stage pipelines, multiple consumers) and when producers read planar data.

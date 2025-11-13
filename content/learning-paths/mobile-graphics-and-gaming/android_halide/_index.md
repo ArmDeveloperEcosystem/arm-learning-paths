@@ -1,9 +1,5 @@
 ---
-title: Halide Essentials From Basics to Android Integration
-
-draft: true
-cascade:
-    draft: true
+title: Build high-performance image processing with Halide on Android
 
 minutes_to_complete: 180
 
@@ -31,7 +27,12 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Android Studio
-    - Coding
+    - Halide
+    - C++
+    - Kotlin
+    - Android Studio
+    - CMake
+
 
 further_reading:
     - resource:
