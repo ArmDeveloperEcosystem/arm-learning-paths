@@ -33,6 +33,17 @@ Verify the Maven installation:
 ```console
 mvn -version
 ```
+
+The output should look like:
+
+```output
+pache Maven 3.8.6 (84538c9988a25aec085021c365c560670ad80f63)
+Maven home: /opt/maven
+Java version: 17.0.13, vendor: N/A, runtime: /usr/lib64/jvm/java-17-openjdk-17
+Default locale: en, platform encoding: UTF-8
+OS name: "linux", version: "5.14.21-150500.55.124-default", arch: "aarch64", family: "unix"
+```
+
 At this point, both Java and Maven are installed and ready to use.
 
 ### Start the Flink Cluster
