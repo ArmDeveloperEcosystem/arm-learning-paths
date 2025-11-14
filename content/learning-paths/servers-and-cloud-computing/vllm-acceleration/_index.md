@@ -7,7 +7,7 @@ cascade:
     
 minutes_to_complete: 60
 
-who_is_this_for: This learning path is designed for software developers and AI engineers who want to build and optimize vLLM for Arm-based servers, quantize large language models (LLMs) to INT4, and serve them efficiently through an OpenAI-compatible API.
+who_is_this_for: This learning path is designed for software developers and AI engineers who want to build and optimize vLLM for Arm-based servers, quantize large language models (LLMs) to INT4, serve them efficiently through an OpenAI-compatible API, and benchmark model accuracy using the LM Evaluation Harness.
 
 learning_objectives:
     - Build an optimized vLLM for aarch64 with oneDNN and the Arm Compute Library(ACL).
@@ -15,6 +15,7 @@ learning_objectives:
     - Quantize an LLM (DeepSeek‑V2‑Lite) to 4-bit integer (INT4) precision.
     - Run and serve both quantized and BF16 (non-quantized) variants using vLLM.
     - Use OpenAI‑compatible endpoints and understand sequence and batch limits.
+    - Evaluate accuracy using the LM Evaluation Harness on BF16 and INT4 models with vLLM.
 
 prerequisites:
     - An Arm-based Linux server (Ubuntu 22.04+ recommended) with a minimum of 32 vCPUs, 64 GB RAM, and 64 GB free disk space. 
@@ -32,6 +33,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - vLLM
+    - LM Evaluation Harness
     - LLM
     - Generative AI
     - Python
@@ -54,6 +56,10 @@ further_reading:
         title: Build and Run vLLM on Arm Servers
         link: /learning-paths/servers-and-cloud-computing/vllm/
         type: website
+    - resource:
+        title: LM Evaluation Harness (GitHub)
+        link: https://github.com/EleutherAI/lm-evaluation-harness
+        type: github
 
 
 
