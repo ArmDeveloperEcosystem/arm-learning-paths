@@ -7,13 +7,16 @@ weight: 5
 layout: "learningpathall"
 ---
 
+
+## What you'll build
+In this section, you'll leverage the host version of Halide to perform AOT compilation of an image processing pipeline via cross-compilation. The resulting pipeline library is specifically tailored to Android devices (targeting, for instance, arm64-v8a ABI), while the compilation itself occurs entirely on the host system. This approach significantly accelerates development by eliminating the need to build Halide or perform JIT compilation on Android devices. It also guarantees that the resulting binaries are optimized for the intended hardware, streamlining the deployment of high-performance image processing applications on mobile platforms.
+
+
 ## Learn about ahead-of-time (AOT) and cross-compilation
 One of Halide's standout features is the ability to compile image processing pipelines ahead-of-time (AOT), enabling you to generate optimized binary code on your host machine rather than compiling directly on target devices. This AOT compilation process enables you to create highly efficient libraries that run effectively across diverse hardware without incurring the runtime overhead associated with just-in-time (JIT) compilation.
 
 Halide also supports robust cross-compilation capabilities. Cross-compilation means using the host version of Halide, typically running on a desktop Linux or macOS system—to target different architectures, such as Arm for Android devices. You can optimize Halide pipelines on your host machine, produce libraries specifically optimized for Android, and integrate them seamlessly into Android applications. The generated pipeline code includes essential optimizations and can embed minimal runtime support, further reducing workload on the target device and ensuring responsiveness and efficiency.
 
-## What you'll build
-In this section, you'll leverage the host version of Halide to perform AOT compilation of an image processing pipeline via cross-compilation. The resulting pipeline library is specifically tailored to Android devices (targeting, for instance, arm64-v8a ABI), while the compilation itself occurs entirely on the host system. This approach significantly accelerates development by eliminating the need to build Halide or perform JIT compilation on Android devices. It also guarantees that the resulting binaries are optimized for the intended hardware, streamlining the deployment of high-performance image processing applications on mobile platforms.
 
 ## Prepare pipeline for Android
 The following code demonstrates how to use Halide's AOT compilation and cross-compilation features to create an optimized image processing pipeline for Android. Run Halide on your host machine (in this example, macOS) to generate a static library containing the pipeline function, which you'll later invoke from an Android device. Below is a step-by-step explanation of this process.
