@@ -364,7 +364,7 @@ This gives an FPS of 251.51, and average throughput of 521.52 MPix/s. Now you ca
 
 ### Apply parallelization
 
-Parallelization lets Halide run independent pieces of work at the same time on multiple CPU cores. In image pipelines, rows (or row tiles) are naturally parallel once producer data is available. By distributing work across cores, wall-clock time is reduced—crucial for real-time video.
+Parallelization allows Halide to process different parts of the image at the same time using multiple CPU cores. In image processing pipelines, each row or block of rows can be handled independently once the input data is ready. By spreading the work across several cores, you reduce the total processing time—this is especially important for real-time video applications.
 
 With the baseline measured, apply a minimal schedule that parallelizes the loop iteration for y axis.
 
@@ -379,10 +379,15 @@ Add these lines after defining output(x, y) (and before any realize()). In this 
 ```
 
 This does two important things:
-* compute_root() on gray divides the entire processing into two loops, one to compute the entire gray output, and the other to compute the final output.
-* parallel(y) parallelizes over the pure loop variable y (rows). The rows are computed on different CPU cores in parallel.
+* `compute_root()` on gray divides the entire processing into two loops, one to compute the entire gray output, and the other to compute the final output.
+* `parallel(y)` parallelizes over the pure loop variable y (rows). The rows are computed on different CPU cores in parallel.
+Now rebuild and run the application. You should see output similar to:
 
-Now rebuild and run the application again. The results should look like:
+```output
+realize: 1.16 ms  |  864.15 FPS  |  1791.90 MPix/s
+```
+
+This shows a significant speedup from parallelization. The exact numbers depend on your Arm CPU and how many cores are available.
 ```output
 % ./camera-capture-perf-measurement
 realize: 1.16 ms  |  864.15 FPS  |  1791.90 MPix/s
@@ -394,11 +399,12 @@ The performance gain by parallelization depends on how many CPU cores are availa
 
 Tiling is a scheduling technique that divides computations into smaller, cache-friendly blocks or tiles. This approach significantly enhances data locality, reduces memory bandwidth usage, and leverages CPU caches more efficiently. While tiling can also use parallel execution, its primary advantage comes from optimizing intermediate data storage.
 
-Tiling splits the image into cache-friendly blocks (tiles). Two wins:
-* Partitioning: tiles are easy to parallelize across cores.
-* Locality: when you cache intermediates per tile, you avoid refetching/recomputing data and hit CPU L1/L2 cache more often.
+Tiling divides the image into smaller, cache-friendly blocks called tiles. This gives you two main benefits:
 
-Explore both approaches.
+* Partitioning: tiles are easy to process in parallel, so you can spread the work across multiple CPU cores.
+* Locality: by caching intermediate results within each tile, you avoid repeating calculations and make better use of the CPU cache.
+
+Try both methods to see how they improve performance.
 
 ## Cache intermediates per tile
 
@@ -422,11 +428,13 @@ This approach caches gray once per tile so the 3×3 blur can reuse it instead of
 ```
 
 In this scheduling:
-* tile(...) splits the image into cache-friendly blocks and makes it easy to parallelize across tiles
-* parallel(yo) distributes tiles across CPU cores where a CPU core is in charge of a row (yo) of tiles
-* gray.compute_at(...).store_at(...) materializes a tile-local planar buffer for the grayscale intermediate so blur can reuse it within the tile
+* `tile`(...) splits the image into cache-friendly blocks and makes it easy to parallelize across tiles
+* `parallel(yo)` distributes tiles across CPU cores where a CPU core is in charge of a row (yo) of tiles
+* `gray.compute_at(...).store_at(...)` materializes a tile-local planar buffer for the grayscale intermediate so blur can reuse it within the tile
 
-Recompile your application as before, then run. Here's sample output:
+Recompile your application as before, then run. 
+
+Here's sample output:
 ```output
 realize: 0.98 ms  |  1023.15 FPS  |  2121.60 MPix/s
 ```
@@ -437,12 +445,16 @@ Caching the grayscale image for each tile gives the best performance. By storing
 There isn't a universal scheduling strategy that guarantees the best performance for every pipeline or device. The optimal approach depends on your specific image-processing workflow and the Arm architecture you're targeting. Halide's scheduling API gives you the flexibility to experiment with parallelization, tiling, and caching. Try different combinations to see which delivers the highest throughput and efficiency for your application.
 
 For the example of this application:
-* Start with parallelizing the outer-most loop.
-* Add tiling + caching only if: there's a spatial filter, or the intermediate is reused by multiple consumers—and preferably after converting sources to planar (or precomputing a planar gray).
-* From there, tune tile sizes and thread count for your target. `HL_NUM_THREADS` is the environmental variable which allows you to limit the number of threads in-flight.
+Start by parallelizing the outermost loop to use multiple CPU cores. This is usually the simplest way to boost performance.
+
+Add tiling and caching if your pipeline includes a spatial filter (such as blur or convolution), or if an intermediate result is reused by several stages. Tiling works best after converting your source data to planar format, or after precomputing a planar grayscale image.
+
+Try parallelization first, then experiment with tiling and caching for further speedups. From there, tune tile sizes and thread count for your target. `HL_NUM_THREADS` is the environmental variable which allows you to limit the number of threads in-flight.
 
 ## What you've accomplished and what's next
-In this section, you built a real-time Halide+OpenCV pipeline—grayscale, a 3×3 binomial blur, then thresholding—and instrumented it to measure throughput. Parallelization and tiling improved the performance.
+You built a real-time image processing pipeline using Halide and OpenCV. The workflow included converting camera frames to grayscale, applying a 3×3 binomial blur, and thresholding to create a binary image. You also measured performance to see how different scheduling strategies affect throughput.
 
-* Parallelization spreads independent work across CPU cores.
-* Tiling for cache efficiency helps when an expensive intermediate is reused many times per output (for example, larger kernels, separable/multi-stage pipelines, multiple consumers) and when producers read planar data.
+- Parallelization lets Halide use multiple CPU cores, speeding up processing by dividing work across rows or tiles.
+- Tiling improves cache efficiency, especially when intermediate results are reused often, such as with larger filters or multi-stage pipelines.
+
+By combining these techniques, you achieved faster and more efficient image processing on Arm systems.

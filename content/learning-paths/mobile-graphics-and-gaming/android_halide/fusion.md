@@ -8,7 +8,9 @@ layout: "learningpathall"
 ---
 
 ## What you'll build
-In the previous section, you explored parallelization and tiling. Here, you'll focus on operator fusion (inlining) in Halide, that is, letting producers be computed directly inside their consumers—versus materializing intermediates with compute_root() or compute_at(). You'll learn when fusion reduces memory traffic and when materializing saves recomputation (for example, for large stencils or multi-use intermediates). You'll inspect loop nests with print_loop_nest(), switch among schedules (fuse-all, fuse-blur-only, materialize, tile-and-materialize-per-tile) in a live camera pipeline, and measure the impact (ms/FPS/MPix/s).
+
+In this section, you'll focus on operator fusion in Halide—where each stage is computed directly inside its consumer, instead of storing intermediate results. You'll learn how fusion can reduce memory traffic, and when materializing intermediates with `compute_root()` or `compute_at()` is better, especially for large filters or when results are reused. You'll use `print_loop_nest()` to see how Halide arranges the computation, switch between different scheduling modes (fuse all, fuse blur only, materialize, tile and materialize per tile) in a live camera pipeline, and measure the impact using ms, FPS, and MPix/s.
+
 
 This section doesn't cover loop fusion (the fuse directive). You'll focus instead on operator fusion, which is Halide's default behavior.
 
@@ -475,4 +477,5 @@ Fusion isn’t always best. You’ll want to materialize an intermediate (comput
 The fastest way to check whether fusion helps is to measure it. The demo prints timing and throughput per frame, but Halide also includes a built-in profiler that reports per-stage runtimes. To learn how to enable and interpret the profiler, see the official [Halide profiling tutorial](https://halide-lang.org/tutorials/tutorial_lesson_21_auto_scheduler_generate.html#profiling).
 
 ## Summary
-In this section, you've learned about operator fusion in Halide—a powerful technique for reducing memory bandwidth and improving computational efficiency. You explored why fusion matters, looked at scenarios where it's most effective, and saw how Halide's scheduling constructs such as compute_root() and compute_at() let you control whether stages are fused or materialized. By experimenting with different schedules, including fusing the Gaussian blur and thresholding stages, you observed how fusion can significantly improve the performance of a real-time image processing pipeline.
+
+You've seen how operator fusion in Halide can make your image processing pipeline faster and more efficient. Fusion means Halide computes each stage directly inside its consumer, reducing memory traffic and keeping data in cache. You learned when fusion is best—like for simple pixel operations or cheap post-processing—and when materializing intermediates with `compute_root()` or `compute_at()` can help, especially for large stencils or multi-use buffers. By switching schedules in the live demo, you saw how fusion and materialization affect both the loop structure and real-time performance. Now you know how to choose the right approach for your own Arm-based image processing tasks.
