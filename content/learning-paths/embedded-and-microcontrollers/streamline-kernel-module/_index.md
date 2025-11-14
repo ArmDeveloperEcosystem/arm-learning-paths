@@ -28,7 +28,6 @@ skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
     - Cortex-A
-    - Neoverse
 tools_software_languages:
     - Arm Streamline
     - Arm Performance Studio

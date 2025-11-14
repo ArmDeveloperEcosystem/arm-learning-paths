@@ -12,11 +12,11 @@ With periodic sampling, Streamline collects CPU performance data using hardware 
 
 The Statistical Profiling Extension (SPE) removes these limits. It samples the PC in hardware, directly inside the CPU pipeline. This adds almost no overhead, so the sampling rate can be much higher. SPE also records extra details about each sampled instruction, giving a much clearer view of how the code runs. For more details on SPE and how it works in Streamline see [this blog post](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/introduction-to-statistical-profiling-support-in-streamline).
 
-To find out if your target supports SPE, please see [Streamline user guide](https://developer.arm.com/documentation/101816/9-7/Capture-a-Streamline-profile/Counter-Configuration/Configure-SPE-counters).
+To find out if your target supports SPE, see [Streamline user guide](https://developer.arm.com/documentation/101816/9-7/Capture-a-Streamline-profile/Counter-Configuration/Configure-SPE-counters).
 
 ### Profiling Kernel Module Using SPE
 
-To profile both in-tree and out-of-tree kernel modules, we can use the same setup steps as before. The only change is to add “Arm Statistical Profiling Extension” to the Events to Collect list in the Counter Configuration dialog.
+To profile both in-tree and out-of-tree kernel modules, you can use the same setup steps as before. The only change is to add “Arm Statistical Profiling Extension” to the Events to Collect list in the Counter Configuration dialog.
 ![SPE counter selection#center](./images/img14_spe_select_counters.png)
 
 After saving the counter configurations, Click Start capture to begin data collection, then wait for Streamline to analyze results.
