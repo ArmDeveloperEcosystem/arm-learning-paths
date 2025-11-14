@@ -7,16 +7,16 @@ weight: 5
 layout: "learningpathall"
 ---
 
-## Ahead-of-time and cross-compilation
-One of Halide's standout features is the ability to compile image processing pipelines ahead-of-time (AOT), enabling developers to generate optimized binary code on their host machines rather than compiling directly on target devices. This AOT compilation process allows developers to create highly efficient libraries that run effectively across diverse hardware without incurring the runtime overhead associated with just-in-time (JIT) compilation.
+## Learn about ahead-of-time (AOT) and cross-compilation
+One of Halide's standout features is the ability to compile image processing pipelines ahead-of-time (AOT), enabling you to generate optimized binary code on your host machine rather than compiling directly on target devices. This AOT compilation process enables you to create highly efficient libraries that run effectively across diverse hardware without incurring the runtime overhead associated with just-in-time (JIT) compilation.
 
-Halide also supports robust cross-compilation capabilities. Cross-compilation means using the host version of Halide, typically running on a desktop Linux or macOS system—to target different architectures, such as ARM for Android devices. Developers can thus optimize Halide pipelines on their host machine, produce libraries specifically optimized for Android, and integrate them seamlessly into Android applications. The generated pipeline code includes essential optimizations and can embed minimal runtime support, further reducing workload on the target device and ensuring responsiveness and efficiency.
+Halide also supports robust cross-compilation capabilities. Cross-compilation means using the host version of Halide, typically running on a desktop Linux or macOS system—to target different architectures, such as Arm for Android devices. You can optimize Halide pipelines on your host machine, produce libraries specifically optimized for Android, and integrate them seamlessly into Android applications. The generated pipeline code includes essential optimizations and can embed minimal runtime support, further reducing workload on the target device and ensuring responsiveness and efficiency.
 
-## Objective
+## What you'll build
 In this section, you'll leverage the host version of Halide to perform AOT compilation of an image processing pipeline via cross-compilation. The resulting pipeline library is specifically tailored to Android devices (targeting, for instance, arm64-v8a ABI), while the compilation itself occurs entirely on the host system. This approach significantly accelerates development by eliminating the need to build Halide or perform JIT compilation on Android devices. It also guarantees that the resulting binaries are optimized for the intended hardware, streamlining the deployment of high-performance image processing applications on mobile platforms.
 
 ## Prepare pipeline for Android
-The procedure implemented in the following code demonstrates how Halide's AOT compilation and cross-compilation features can be utilized to create an optimized image processing pipeline for Android. Run Halide on your host machine (in this example, macOS) to generate a static library containing the pipeline function, which will later be invoked from an Android device. Below is a step-by-step explanation of this process.
+The following code demonstrates how to use Halide's AOT compilation and cross-compilation features to create an optimized image processing pipeline for Android. Run Halide on your host machine (in this example, macOS) to generate a static library containing the pipeline function, which you'll later invoke from an Android device. Below is a step-by-step explanation of this process.
 
 Create a new file named blur-android.cpp with the following contents:
 
@@ -99,14 +99,14 @@ target.bits = 64;
 // Enable Halide runtime inclusion in the generated library (needed if not linking Halide runtime separately).
 target.set_feature(Target::NoRuntime, false);
 
-// Optionally, enable hardware-specific optimizations to improve performance on ARM devices:
-// - DotProd: Optimizes matrix multiplication and convolution-like operations on ARM.
+// Optionally, enable hardware-specific optimizations to improve performance on Arm devices:
+// - DotProd: Optimizes matrix multiplication and convolution-like operations on Arm.
 // - ARMFp16 (half-precision floating-point operations).
 ```
 
 Notes: 
 1. NoRuntime — When set to true, Halide excludes its runtime from the generated code, and you must link the runtime manually during the linking step. When set to false, the Halide runtime is included in the generated library, which simplifies deployment.
-2. ARMFp16 — Enables the use of ARM hardware support for half-precision (16-bit) floating-point operations, which can provide faster execution when reduced precision is acceptable.
+2. ARMFp16 — Enables the use of Arm hardware support for half-precision (16-bit) floating-point operations, which improves execution speed when reduced precision is acceptable.
 3. Why the runtime choice matters - If your app links several AOT-compiled pipelines, ensure there is exactly one Halide runtime at link time:
 * Strategy A (cleanest): build all pipelines with NoRuntime ON and link a single standalone Halide runtime once (matching the union of features you need, for example, Vulkan/OpenCL/Metal or Arm options).
 * Strategy B: embed the runtime in exactly one pipeline (leave NoRuntime OFF only there); compile all other pipelines with NoRuntime ON.
@@ -120,7 +120,7 @@ Simple scheduling directives (compute_root) instruct Halide to compute intermedi
 
 This strategy can simplify debugging by clearly isolating computational steps and may enhance runtime efficiency by explicitly controlling intermediate storage locations.
 
-By clearly separating algorithm logic from scheduling, developers can easily test and compare different scheduling strategies,such as compute_inline, compute_root, compute_at, and more, without modifying their fundamental algorithmic code. This separation significantly accelerates iterative optimization and debugging processes, ultimately yielding better-performing code with minimal overhead.
+By clearly separating algorithm logic from scheduling, you can easily test and compare different scheduling strategies, such as compute_inline, compute_root, compute_at, and more, without modifying your fundamental algorithmic code. This separation significantly accelerates iterative optimization and debugging processes, ultimately yielding better-performing code with minimal overhead.
 
 Halide's AOT compilation function compile_to_static_library generates a static library (.a) containing the optimized pipeline and a corresponding header file (.h).
 
@@ -141,7 +141,7 @@ These generated files are then ready to integrate directly into an Android proje
 
 JNI (Java Native Interface) is a framework that allows Java (or Kotlin) code running in a Java Virtual Machine (JVM), such as on Android, to interact with native applications and libraries written in languages like C or C++. JNI bridges the managed Java/Kotlin environment and the native, platform-specific implementations.
 
-## Compilation instructions
+## Compile the pipeline
 To compile the pipeline-generation program on your host system, use the following commands (replace /path/to/halide with your Halide installation directory):
 ```console
 export DYLD_LIBRARY_PATH=/path/to/halide/lib/libHalide.19.dylib
@@ -160,7 +160,7 @@ This will produce two files:
 * blur_threshold_android.a: The static library containing your Halide pipeline.
 * blur_threshold_android.h: The header file needed to invoke the generated pipeline.
 
-We will integrate these files into our Android project in the following section.
+You'll integrate these files into the Android project in the following section.
 
 ## Summary
-In this section, we’ve explored Halide's  powerful ahead-of-time (AOT) and cross-compilation capabilities, preparing an optimized image processing pipeline tailored specifically for Android devices. By using the host-based Halide compiler, we’ve generated a static library optimized for ARM64 Android architecture, incorporating safe boundary conditions, neighborhood-based blurring, and thresholding operations. This streamlined process allows seamless integration of highly optimized native code into Android applications, ensuring both development efficiency and runtime performance on mobile platforms.
+You've explored Halide's powerful ahead-of-time (AOT) and cross-compilation capabilities, preparing an optimized image processing pipeline tailored specifically for Android devices. By using the host-based Halide compiler, you generated a static library optimized for 64-bit Arm Android architecture, incorporating safe boundary conditions, neighborhood-based blurring, and thresholding operations. This streamlined process allows seamless integration of highly optimized native code into Android applications, ensuring both development efficiency and runtime performance on mobile platforms.

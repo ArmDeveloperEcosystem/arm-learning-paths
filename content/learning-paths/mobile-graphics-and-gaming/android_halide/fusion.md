@@ -1,16 +1,16 @@
 ---
 # User change
-title: "Demonstrating Operation Fusion"
+title: "Apply operator fusion in Halide for real-time image processing"
 
 weight: 4
 
 layout: "learningpathall"
 ---
 
-## Objective
-In the previous section, you explored parallelization and tiling. Here, you will focus on operator fusion (inlining) in Halide, that is, letting producers be computed directly inside their consumers—versus materializing intermediates with compute_root() or compute_at(). You will learn when fusion reduces memory traffic and when materializing saves recomputation (for example, for large stencils or multi-use intermediates). You will inspect loop nests with print_loop_nest(), switch among schedules (fuse-all, fuse-blur-only, materialize, tile-and-materialize-per-tile) in a live camera pipeline, and measure the impact (ms/FPS/MPix/s).
+## What you'll build
+In the previous section, you explored parallelization and tiling. Here, you'll focus on operator fusion (inlining) in Halide, that is, letting producers be computed directly inside their consumers—versus materializing intermediates with compute_root() or compute_at(). You'll learn when fusion reduces memory traffic and when materializing saves recomputation (for example, for large stencils or multi-use intermediates). You'll inspect loop nests with print_loop_nest(), switch among schedules (fuse-all, fuse-blur-only, materialize, tile-and-materialize-per-tile) in a live camera pipeline, and measure the impact (ms/FPS/MPix/s).
 
-This section doesn't cover loop fusion (the fuse directive). You will focus on operator fusion, which is Halide's default behavior.
+This section doesn't cover loop fusion (the fuse directive). You'll focus instead on operator fusion, which is Halide's default behavior.
 
 ## Code
 To demonstrate how fusion in Halide works create a new file `camera-capture-fusion.cpp`, and modify it as follows. This code uses a live camera pipeline (BGR → gray → 3×3 blur → threshold), adds a few schedule variants to toggle operator fusion vs. materialization, and print ms / FPS / MPix/s. So you can see the impact immediately.
@@ -257,10 +257,10 @@ Next comes the gray conversion. As in previous section, use Rec.601 weights and 
 Then add a threshold stage. Pixels above 128 become white, and all others black, producing a binary image. Finally, define an output Func that wraps the thresholded result and call compute_root() on it so that it will be realized explicitly when you run the pipeline.
 
 Now comes the interesting part: the scheduling choices. Depending on the Schedule enum passed in, you instruct Halide to either fuse everything (the default), materialize some intermediates, or even tile the output.
-  * Simple: Here you will explicitly compute and store both gray and blur across the whole frame with compute_root(). This makes them easy to reuse or parallelize, but requires extra memory traffic.
+  * Simple: Here you'll explicitly compute and store both gray and blur across the whole frame with compute_root(). This makes them easy to reuse or parallelize, but requires extra memory traffic.
   * FuseBlurAndThreshold: You compute gray once as a planar buffer, but leave blur and thresholded fused into output. This often works well when the input is interleaved, because subsequent stages read from a planar gray.
-  * FuseAll: You will apply no scheduling to producers, so gray, blur, and thresholded are all inlined into output. This minimizes memory usage but can recompute gray many times inside the 3×3 stencil.
-  * Tile: You will split the output into 64×64 tiles. Within each tile, we materialize gray (compute_at(output, xo)), so the working set is small and stays in cache. blur remains fused within each tile.
+  * FuseAll: You'll apply no scheduling to producers, so gray, blur, and thresholded are all inlined into output. This minimizes memory usage but can recompute gray many times inside the 3×3 stencil.
+  * Tile: You'll split the output into 64×64 tiles. Within each tile, you materialize gray (compute_at(output, xo)), so the working set is small and stays in cache. blur remains fused within each tile.
 
 To help you examine what’s happening, print the loop nest Halide generates for each schedule using print_loop_nest(). This will give you a clear view of how fusion or materialization changes the structure of the computation.
 
@@ -399,7 +399,7 @@ Simple | 6.01 ms  |  166.44 FPS  |  345.12 MPix/s15 MPix/s
 ```
 
 The console output combines two kinds of information:
-1. Loop nests – printed by print_loop_nest(). These show how Halide actually arranges the computation for the chosen schedule. They are a great “x-ray” view of fusion and materialization:
+1. Loop nests – printed by print_loop_nest(). These show how Halide actually arranges the computation for the chosen schedule. They're a great "x-ray" view of fusion and materialization:
 * In FuseAll, the loop nest contains only output. That’s because gray, blur, and thresholded are all inlined (fused) into it. Each pixel of output recomputes its 3×3 neighborhood of gray.
 * In FuseBlurAndThreshold, there is an extra loop for gray, because we explicitly called gray.compute_root(). The blur and thresholded stages are still fused into output. This reduces recomputation of gray and makes downstream loops simpler to vectorize.
 * In Simple, both gray and blur have their own loop nests, and thresholded fuses into output. This introduces two extra buffers, but each stage is computed once and can be parallelized independently.
@@ -422,8 +422,8 @@ By toggling schedules live, you can see and measure how operator fusion and mate
 
 This demo makes these trade-offs concrete: the loop nest diagrams explain the structure, and the live FPS/MPix/s stats show the real performance impact.
 
-## What “fusion” means in Halide
-One of Halide's  defining features is that, by default, it performs operator fusion, also called inlining. This means that if a stage produces some intermediate values, those values aren’t stored in a separate buffer and then re-read later—instead, the stage is computed directly inside the consumer’s loop. In other words, unless you tell Halide otherwise, every producer Func is fused into the next stage that uses it.
+## What "fusion" means in Halide
+Halide's defining feature is that, by default, it performs operator fusion, also called inlining. This means that if a stage produces some intermediate values, those values aren't stored in a separate buffer and then re-read later—instead, the stage is computed directly inside the consumer's loop. In other words, unless you tell Halide otherwise, every producer Func is fused into the next stage that uses it.
 
 Why is this important? Fusion reduces memory traffic, because Halide doesn’t need to write intermediates out to RAM and read them back again. On CPUs, where memory bandwidth is often the bottleneck, this can be a major performance win. Fusion also improves cache locality, since values are computed exactly where they are needed and the working set stays small. The trade-off, however, is that fusion can cause recomputation: if a consumer uses a neighborhood (like a blur that reads 3×3 or 9×9 pixels), the fused producer may be recalculated multiple times for overlapping regions. Whether fusion is faster depends on the balance between compute cost and memory traffic.
 
@@ -444,7 +444,7 @@ for y: for x: out(x,y) = threshold( sum kernel * gray(x+i,y+j) )
 
 The fused version eliminates buffer writes but recomputes gray under the blur stencil. The materialized version performs more memory operations but avoids recomputation, and also provides a clean point to parallelize or vectorize the gray stage.
 
-It's worth noting that Halide also supports a loop fusion directive (fuse) that merges two loop variables together. That's a different concept and not the focus here. In this tutorial, the focus is specifically on operator fusion—the decision of whether to inline or materialize stages.
+Note that Halide also supports a loop fusion directive (fuse) that merges two loop variables together. That's a different concept and not the focus here. This tutorial focuses specifically on operator fusion—the decision of whether to inline or materialize stages.
 
 ## How this looks in the live camera demo
 The pipeline is: BGR input → gray → 3×3 blur → thresholded → output. Depending on the schedule, different kinds of fusion are shown:

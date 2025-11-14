@@ -6,10 +6,10 @@ minutes_to_complete: 180
 who_is_this_for: This is an introductory topic for developers interested in learning how to use Halide for image processing. 
 
 learning_objectives:
-    - Understand Halide fundamentals and set up your development environment
-    - Create a basic real-time image processing pipeline using Halide
-    - Optimize image processing workflows by applying operation fusion in Halide
-    - Integrate Halide pipelines into Android applications developed with Kotlin
+    - Learn the basics of Halide and set up your development environment
+    - Build a simple real-time image processing pipeline with Halide
+    - Make your image processing faster by combining operations in Halide
+    - Use Halide pipelines in Android apps written with Kotlin
 
 prerequisites:
     - Basic C++ knowledge
@@ -36,11 +36,11 @@ tools_software_languages:
 
 further_reading:
     - resource:
-        title: Halide 19.0.0
+        title: Halide documentation
         link: https://halide-lang.org/docs/index.html
         type: website
     - resource:
-        title: Halide GitHub
+        title: Halide GitHub repository
         link: https://github.com/halide/Halide
         type: repository  
     - resource:
