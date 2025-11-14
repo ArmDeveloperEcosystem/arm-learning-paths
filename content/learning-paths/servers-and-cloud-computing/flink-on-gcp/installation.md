@@ -82,6 +82,6 @@ flink -v
 You should see an output similar to:
 
 ```output
-Version: 2.1.0, Commit ID: 4cb6bd3
+Version: 2.1.1, Commit ID: 074f8c5
 ```
 This confirms that Apache Flink has been installed and is ready for use.
