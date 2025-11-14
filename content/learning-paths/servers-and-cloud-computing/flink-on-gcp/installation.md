@@ -24,7 +24,7 @@ Next, download the pre-built binary package for **Apache Flink** from the offici
 
 ```console
 cd /opt
-sudo wget https://dlcdn.apache.org/flink/flink-2.1.0/flink-2.1.0-bin-scala_2.12.tgz
+sudo wget https://dlcdn.apache.org/flink/flink-2.1.1/flink-2.1.1-bin-scala_2.12.tgz
 ```
 This command retrieves the official Flink binary distribution for installation on your VM.
 
