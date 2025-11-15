@@ -503,7 +503,7 @@ Fusion isn’t always best. You’ll want to materialize an intermediate (comput
 * The intermediate is reused by multiple consumers.
 * You need a natural stage to apply parallelization or tiling.
 
-### Profiling
+## Profiling
 The fastest way to check whether fusion helps is to measure it. The demo prints timing and throughput per frame, but Halide also includes a built-in profiler that reports per-stage runtimes. To learn how to enable and interpret the profiler, see the official [Halide profiling tutorial](https://halide-lang.org/tutorials/tutorial_lesson_21_auto_scheduler_generate.html#profiling).
 
 ## Summary
