@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 When the analysis completes, you will see Frame Advisor's `Analysis` screen.
 
-![Frame Advisor's Analysis screen alt-text#center](fa_analysis.png "Figure 1. Frame Advisor's Analysis screen")
+![Frame Advisor's Analysis screen alt-text#center](fa_analysis.webp "Figure 1. Frame Advisor's Analysis screen")
 
 1. Captured frames are listed in the Frame hierarchy view. Here, we can see that this frame draws over 657,000 primitives using 426 draw calls within 16 render passes.
 

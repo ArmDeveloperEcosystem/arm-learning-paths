@@ -9,7 +9,7 @@ layout: learningpathall
 
 To begin, input the text prompt as shown in the example below:
 
-![output](output.png)
+![output](output.webp)
 
 ## Observe performance metrics
 

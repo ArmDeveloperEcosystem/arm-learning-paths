@@ -11,13 +11,13 @@ layout: "learningpathall"
 ## Create the Self-Hosted Runner in GitHub
 Go to the Actions tab, and under Management, click on Runners. If you do not see the Actions tab, navigate to Settings > Actions and select Allow all actions and reusable workflows. This will display the following window: 
 
-![img8](figures/08.png)
+![img8](figures/08.webp)
 
 Then, click on the 'New runner' button, followed by 'New self-hosted runner'. In the 'Add new self-hosted runner' section, proceed as follows:
 * Select Linux for the operating system.
 * Choose ARM64 for the architecture
 
-![img9](figures/09.png)
+![img9](figures/09.webp)
 
 Next, execute the following instructions on your machine:
 
@@ -100,6 +100,6 @@ Current runner version: '2.314.1'
 
 The runner will now be visible in the GitHub actions:
 
-![img10](figures/10.png)
+![img10](figures/10.webp)
 
 You have successfully prepared all the tools needed to run the CI/CD pipeline on the self-hosted runner. In the next step, you will test it.

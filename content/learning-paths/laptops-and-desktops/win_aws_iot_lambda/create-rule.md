@@ -14,11 +14,11 @@ Start by creating the rule:
 
 1. Open AWS IoT Core, and look for *Rules* under *Message routing*:
 
-![fig1](figures/01.png)
+![fig1](figures/01.webp)
 
 2. Click the *Create rule* button. This opens the *Create rule* view, in which you configure the rule:
 
-![fig2](figures/02.png)
+![fig2](figures/02.webp)
 
 3. Use the *Create rule* view to configure the rule. Firstly, under the rule name, type: **check_temperature**. Then, click the *Next* button. This takes you to the Configure SQL statement, where you use the following SQL query:
 
@@ -36,15 +36,15 @@ This query ensures that only temperature readings are sent to the AWS Lambda fun
 
 6. Click the *Create a Lambda function* button. This opens another tab. Select *Author from scratch*, type **SendNotification** for the function name, select *Node.js 20.x* for the runtime, and *arm64* for the architecture:
 
-![fig4](figures/04.png)
+![fig4](figures/04.webp)
 
 7. Scroll down, and under the *Execution role*, select *Create a new role from AWS policy templates*. This activates additional controls, where you type **sns-email-role** for the *Role name*. Then, click the drop-down list *Policy templates*, and select *Amazon SNS publish policy*:
 
-![fig5](figures/05.png)
+![fig5](figures/05.webp)
 
 8. Click the *Create function* button. This takes you to the AWS Lambda Console, which looks as shown below:
 
-![fig6](figures/06.png)
+![fig6](figures/06.webp)
 
 9. Keep the AWS Lambda Console open in a separate tab and go back to the *Create rule* wizard. Select *SendNotification* from the Lambda function dropdown, and ensure that the Lambda function version points to $LATEST:
 
@@ -54,7 +54,7 @@ This query ensures that only temperature readings are sent to the AWS Lambda fun
 
 11. Go back to AWS Lambda Console and refresh the page. You will now see that your function accepts the AWS IoT trigger:
 
-![fig8](figures/08.png)
+![fig8](figures/08.webp)
 
 This means that the AWS Lambda function you have just created has an input trigger set to AWS IoT. Specifically, the AWS Lambda function is invoked whenever a new message is sent to the 'Emulators/Weather/SensorReadings' topic.
 

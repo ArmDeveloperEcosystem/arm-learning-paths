@@ -61,32 +61,29 @@ Halide can be set up using one of two main approaches:
 Here, you will use pre-built binaries:
   1. Visit the official Halide releases [page](https://github.com/halide/Halide/releases). As of this writing, the latest Halide version is v19.0.0.
   2. Download and unzip the binaries to a convenient location (e.g., /usr/local/halide on Linux/macOS or C:\halide on Windows).
-  3. 3. Optionally set environment variables to simplify further usage:
+  3. Optionally set environment variables to simplify further usage:
 ```console
 export HALIDE_DIR=/path/to/halide
 export PATH=$HALIDE_DIR/bin:$PATH
 ```
 
 To proceed futher, make sure to install the following components:
-1. LLVM (Halide requires LLVM to compile and execute pipelines): 
-* Linux (Ubuntu):
-```console
-sudo apt-get install llvm-19-dev libclang-19-dev clang-19
-```
-* macOS (Homebrew):
-```console
-brew install llvm
-```
-2. OpenCV (for image handling in later lessons):
-* Linux (Ubuntu):
-```console
-sudo apt-get install libopencv-dev pkg-config
-```
-* macOS (Homebrew):
-```console
-brew install opencv pkg-config
-```
+1. LLVM (Halide requires LLVM to compile and execute pipelines)
+2. OpenCV (for image handling in later lessons)
 
+Install with the commands for your OS:
+
+{{< tabpane code=true >}}
+  {{< tab header="Linux/Ubuntu" language="bash">}}
+sudo apt-get install llvm-19-dev libclang-19-dev clang-19
+sudo apt-get install libopencv-dev pkg-config
+  {{< /tab >}}
+  {{< tab header="macOS" language="bash">}}
+brew install llvm
+brew install opencv pkg-config
+  {{< /tab >}}
+{{< /tabpane >}}
+   
 Halide examples were tested with OpenCV 4.11.0
 
 ## Your first Halide program

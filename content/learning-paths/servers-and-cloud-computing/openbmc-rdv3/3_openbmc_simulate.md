@@ -94,7 +94,7 @@ The simulation proceeds to the **CSSv3 r1** GRUB menu. Press **Enter** to boot.
 
 A successful run shows login prompts on both BMC and host consoles. You can also confirm final state in the Web UI or using UART output.
 
-![img2 BMC and host consoles each showing a login prompt after a successful OpenBMC + host UEFI simulation on RD-V3 FVP#center](openbmc_cssv3_sim.jpg "Simulation success with BMC and host consoles")
+![img2 BMC and host consoles each showing a login prompt after a successful OpenBMC + host UEFI simulation on RD-V3 FVP#center](openbmc_cssv3_sim.webp "Simulation success with BMC and host consoles")
 
 
 Shown here is a short recording that illustrates OpenBMC and UEFI interaction during pre-silicon execution.

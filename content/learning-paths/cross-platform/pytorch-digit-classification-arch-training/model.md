@@ -94,7 +94,7 @@ summary(model, (1, 28, 28))
 
 After running the notebook, you will see the output as shown in Figure 4:
 
-![img4 alt-text#center](figures/4.png "Figure 4: Notebook Output.")
+![img4 alt-text#center](figures/4.webp "Figure 4: Notebook Output.")
 
 You will see a detailed summary of the NeuralNetwork model's architecture, including the following information:
 

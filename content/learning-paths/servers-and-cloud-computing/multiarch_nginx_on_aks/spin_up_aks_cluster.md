@@ -1,42 +1,40 @@
 ---
-title: Create the AKS Cluster
-weight: 10
+title: Create the AKS cluster
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Project Overview
+## Set up a multi-architecture AKS cluster
 
-Arm CPUs are widely used in web server workloads on Kubernetes (k8s). In this Learning Path, you'll learn how to deploy [nginx](https://nginx.org/) on Arm-based CPUs within a heterogeneous (x64 and arm64) K8s cluster on Azure's AKS.
+In this section, you'll create a multi-architecture Azure Kubernetes Service (AKS) cluster that supports both Intel and Arm-based nodes. This setup allows you to deploy and compare workloads across different CPU architectures within the same Kubernetes environment.
 
-### Benefits of the multi-architecture approach
+You'll work through three activities: 
 
-Many developers begin their journey with Arm on K8s by adding Arm nodes to an existing x64-based cluster.  This has many advantages:
+* Set up authentication - you'll connect to your Azure account using the Azure CLI
+* Create the cluster infrastructure - you'll build an AKS cluster with two distinct node pools (one x86 and one Arm)
+* Verify connectivity -  you'll confirm your cluster is running and accessible using `kubectl`
 
-1. Since you are already familiar with K8s on x64, you can leverage that knowledge to quickly get the core components up and running.
-2. Leveraging the multi-architectural container image of your existing x64 workload expedites the migration to Arm with minimal deployment modifications. 
-3. With both x64 and Arm workloads running in the same cluster, comparing performance across them is simplified.
+This multi-architecture approach gives you the flexibility to run workloads optimized for specific CPU types while maintaining a unified Kubernetes management experience. By the end of this section, you'll have a fully functional cluster ready for deploying containerized applications.
 
-This Learning Path explains how to create an initial AKS environment and install nginx on x64.  From there, you'll add Arm-based nodes running the same exact workload.  You'll see how to run simple tests to verify functionality, and then run performance testing to better understand the performance characteristics of each architecture.
-
-### Login to Azure using the Azure CLI
+## Create the cluster and resource
 
 To begin, login to your Azure account using the Azure CLI:
 
 ```bash
 az login
 ```
+Once logged in, create the resource group and AKS cluster with two node pools: 
 
-### Create the cluster and resource
-
-Once logged in, create the resource group and AKS cluster with two node pools: one with Intel-based nodes (Standard_D2s_v6), and one with Arm-based (Standard_D2ps_v6) nodes.  
+- One with Intel-based nodes (Standard_D2s_v6)
+- One with Arm-based nodes (Standard_D2ps_v6)
 
 {{% notice Note %}}
-This tutorial uses the `westus2` region, which supports both Intel and Arm VM sizes. You can choose a different region if you prefer, but ensure it supports both VM types and AKS.
+This Learning Path uses the `westus2` region because it supports both Intel and Arm VM sizes. You can use a different region, but make sure it supports both VM types and AKS.
 {{% /notice %}}
 
-Set the environment variables as shown below and run the `az aks` commands on your command line.
+Set the environment variables as shown below and run the `az aks` commands on your command line:
  
 ```bash
 # Set environment variables
@@ -68,10 +66,9 @@ az aks nodepool add \
   --node-vm-size Standard_D2ps_v6
 
 ```
+Each command returns JSON output with status information. Look for `"provisioningState": "Succeeded"` in each response to confirm the operation completed successfully.
 
-Each command returns JSON output. Verify that `"provisioningState": "Succeeded"` appears in each response.
-
-### Connect to the cluster
+## Connect to the cluster
 
 Verify `kubectl` is available by running:
 
@@ -86,33 +83,31 @@ Client Version: v1.34.1
 Kustomize Version: v5.7.1
 ```
 
-If `kubectl` is installed the version information is printed. If you don't see the version information printed refer to the [Azure CLI](/install-guides/azure-cli) and [kubectl](/install-guides/kubectl/) install guides.
+If `kubectl` is installed the version information is printed. If you don't see the version information printed, refer to the [Azure CLI Install Guide](/install-guides/azure-cli) and [kubectl Install Guide](/install-guides/kubectl/).
 
 Next, set up your newly-created K8s cluster credentials using the Azure CLI:
 
 ```bash
 az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
 ```
-
-You should see:
+The expected output is:
 
 ```output
 Merged "nginx-on-arm" as current context in /home/user/.kube/config
 ```
 
-To verify you're connected to the cluster:
+Now verify you're connected to the cluster:
 
 ```bash
 kubectl cluster-info
 ```
-
-A message similar to the following should be displayed:
+The expected output is:
 
 ```output
 Kubernetes control plane is running at https://nginx-on-a-nginx-on-arm-rg-dd0bfb-eenbox6p.hcp.westus2.azmk8s.io:443
 ```
 
-With the cluster running, verify the node pools are ready with the following command:
+With the cluster running, verify the node pools are ready:
 
 ```bash
 kubectl get nodes -o wide
@@ -127,4 +122,8 @@ aks-intel-39600573-vmss000002   Ready    <none>   6h8m   v1.32.7
 ```
 
 
-With all nodes showing `Ready` status, you're ready to continue to the next section.
+With all nodes showing `Ready` status, you're now ready to continue to the next section.
+
+## What you've accomplished and what's next
+
+Great job! You’ve successfully created a multi-architecture AKS cluster with both Arm and x64 node pools. This is a significant milestone and you're now set up to deploy and compare workloads across architectures. Keep going to see your cluster in action!

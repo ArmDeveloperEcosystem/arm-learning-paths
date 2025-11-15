@@ -54,13 +54,13 @@ adb push <tokenizer.bin> /data/local/tmp/llama/
 
 1. Use Android Studio's device explorer to look for the model files.
 
-![Device Explorer](device-explorer.png "Figure 1. Android Studio Device Explorer")
+![Device Explorer](device-explorer.webp "Figure 1. Android Studio Device Explorer")
 
 2. Upload the files.
 
 If the files are not on the device, use the device explorer to copy them.
 
-![Files Upload](device-explorer-upload.png "Figure 2. Android Studio upload files using Device Explorer")
+![Files Upload](device-explorer-upload.webp "Figure 2. Android Studio upload files using Device Explorer")
 
 ## Build the Android Package Kit
 

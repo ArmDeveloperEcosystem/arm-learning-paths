@@ -50,4 +50,4 @@ You can click the `Open in WPA` button to open the collected counts in the Windo
 
 A screenshot of WPA is below:
 
-![Open in WPA #center](./open-in-wpa.png)
+![Open in WPA #center](./open-in-wpa.webp)

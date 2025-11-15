@@ -40,7 +40,7 @@ From the menu select `Tools -> Board -> Boards Manager`.
 
 When the `Boards Manager` opens search for `pico` and the `Arduino Mbed OS RP2040 Boards` will be displayed. Click the `Install` button to add it to the Arduino IDE.
 
-![Arduino Board Manager](/install-guides/_images/arduino_rp2040_boards.png)
+![Arduino Board Manager](/install-guides/_images/arduino_rp2040_boards.webp)
 
 ### How do I set up the Raspberry Pi Pico W?
 

@@ -32,7 +32,7 @@ From here onwards, you can ignore the "Ready to Play" version of the scene. Inst
 
 1. To get a better look at the scene from the player's perspective, right click on _ML-Player_ and select _Align View to Selected_. This will change the scene view to the viewpoint of your player character at ground level. You will see the inside of the arena and the enemy character in the distance.
 
-    ![Align View to ML-Player](images/ml-player-aligned-view.png "Figure 2. Align View to ML-Player")
+    ![Align View to ML-Player](images/ml-player-aligned-view.webp "Figure 2. Align View to ML-Player")
 
 1. Check that the Package Manager is updated and everything is correctly installed by navigating to _Window->Package Manager_.
 
@@ -174,6 +174,6 @@ ML-Core contains various managers and controllers common to many apps and games.
 
 The entire scene is lit from a single light called "Directional Light". The light is marked as "Realtime" so it doesn't include any baked lighting.
 
-![Environment](images/environment-mesh-light.png "Figure 12. Our world consists of a single light and a single mesh for the whole battle arena.")
+![Environment](images/environment-mesh-light.webp "Figure 12. Our world consists of a single light and a single mesh for the whole battle arena.")
 
 (You could add baked lighting or more realtime lights to make the lighting more interesting, but this is outside the scope of this learning path. If you do experiment with the lighting, remember that adding extra lights and changing some options can affect performance.)

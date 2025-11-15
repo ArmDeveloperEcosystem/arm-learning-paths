@@ -230,7 +230,7 @@ You will now build and run the application for x64 and Arm64 configurations. Pro
 
 1. Start by creating the Arm64 configuration. To do this, click the Debug drop-down, and select Configuration Manager... as shown in the figure below:
 
-![fig8](figures/08.png)
+![fig8](figures/08.webp)
 
 2. In the Configuration Manager, select <New...> from the Active solution platform drop-down:
 
@@ -244,7 +244,7 @@ You will now build and run the application for x64 and Arm64 configurations. Pro
 ```
 6. Next, select ARM64 from the solution platform drop-down, and then click the Windows Machine button:
 
-![fig10](figures/10.png)
+![fig10](figures/10.webp)
 
 7. The application will start after a while. Run vector calculations for various execution counts: 10, 100, 1000, and 10000
 8. Repeat the same for x64. Your results from the two runs should look similar to the following figures:

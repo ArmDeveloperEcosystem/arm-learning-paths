@@ -121,7 +121,7 @@ htop
 ```
 
 The following screenshot shows CPU utilization and thread activity during TinyLlama inference on DGX Spark, confirming full multi-core engagement:
-![htop display showing 20 Grace CPU cores at 75-85% utilization during TinyLlama inference with OpenMP threading alt-text#center](htop.png "TinyLlama CPU utilization")
+![htop display showing 20 Grace CPU cores at 75-85% utilization during TinyLlama inference with OpenMP threading alt-text#center](htop.webp "TinyLlama CPU utilization")
 
 The `htop` interface shows:
 

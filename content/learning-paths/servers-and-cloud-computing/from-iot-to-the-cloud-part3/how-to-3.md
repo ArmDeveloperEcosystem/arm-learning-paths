@@ -34,6 +34,6 @@ kubectl get nodes
 
 The output of this command will look as shown below:
 
-![AKS#left](figures/10.png)
+![AKS#left](figures/10.webp)
 
 We have one node, which we will now use to deploy the application.

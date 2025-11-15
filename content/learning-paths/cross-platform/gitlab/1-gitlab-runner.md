@@ -26,7 +26,7 @@ Create a repository in your GitLab account by clicking the "+" sign on top-left 
 
 After you create the repository, navigate to `Settings->CI/CD` in the left-hand pane. Expand the `Runners` section and under `Project Runners`, select `New Project Runner`.
 
-![arm64-runner #center](_images/create-gitlab-runner.png)
+![arm64-runner #center](_images/create-gitlab-runner.webp)
 
 Use `Tags` to specify the jobs that can be executed on the runner. In the `Tags` field, enter `arm64`. In `Runner description` enter `google-axion-arm64-runner` and click the `Create Runner` button
 
@@ -69,7 +69,7 @@ Runner registered successfully. Feel free to start it, but if it's running alrea
 
 You should see the newly registered runner in the Runners section of the GitLab console as shown below.
 
-![registered-runner #center](_images/registered-runner.png)
+![registered-runner #center](_images/registered-runner.webp)
 
 To create an `amd64` GitLab runner, follow the same steps as above, except for the `Download binaries` section. Change the download url to `https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64`
 

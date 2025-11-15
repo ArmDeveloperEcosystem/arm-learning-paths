@@ -9,7 +9,7 @@ layout: learningpathall
 
 A few things were done to reduce the time it takes to train the ML agents to a reasonable level.
 
-![Training Scene](images/training-scene.png "Figure 1. The Training Scene (again)")
+![Training Scene](images/training-scene.webp "Figure 1. The Training Scene (again)")
 
 ### Multiple simultaneous battles
 

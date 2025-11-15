@@ -76,19 +76,19 @@ This opens up the `CMake Settings` dialog.
 
 You can now add a new configuration to build PuTTY for Arm. This configuration uses the LLVM toolchain installed by the Visual Studio Installer. 
 
-![putty_2](putty_2.png)
+![putty_2](putty_2.webp)
 
 6. Add a new configuration
 
 In `CMake Settings`, click on `+` sign to `Add a New Configuration` and select `arm64-Clang-Debug`. 
 
-![putty_3](putty_3.png)
+![putty_3](putty_3.webp)
 
 7. Change the toolset
 
 With the `arm64-Clang-Debug` configuration selected, change the `Toolset` from the drop-down menu to `clang_cl_arm64`. 
 
-![putty_4](putty_4.png)
+![putty_4](putty_4.webp)
 
 8. Generate the CMake configuration
 

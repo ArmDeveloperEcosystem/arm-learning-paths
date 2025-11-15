@@ -34,25 +34,25 @@ The easiest way to launch your instance is via the [ECS Console](https://ecs.con
 
 Navigate to `Elastic Compute Service` by search or the menu.
 
-![alibaba #center](images/588897d0-6c77-ee64-c7aa-235cbf460426.png "Navigate to the ECS Dashboard")
+![alibaba #center](images/588897d0-6c77-ee64-c7aa-235cbf460426.webp "Navigate to the ECS Dashboard")
 
 Use the `Create ECS Instance` button to get started. Select `Custom Launch` configuration.
 
-![alibaba #center](images/bf7f23d0-2afb-6a84-60aa-78dc1c27be39.png "Create Instance")
+![alibaba #center](images/bf7f23d0-2afb-6a84-60aa-78dc1c27be39.webp "Create Instance")
 
-![alibaba #center](images/2bd139ad-a28b-8e82-8dae-c0d7e54a4ebc.png "Custom Launch")
+![alibaba #center](images/2bd139ad-a28b-8e82-8dae-c0d7e54a4ebc.webp "Custom Launch")
 
 ### Select a Billing Method
 
 `Subscription`, `Pay-as-you-go`, or `Preemptible Instance` options are available. If you are experimenting initially, select `Preemptible Instance` for the lowest cost. You will be prompted for pricing options later.
 
-![alibaba #center](images/99554b4b-5f15-2dce-4de4-c59e26a3a90e.png "Select a Billing Method")
+![alibaba #center](images/99554b4b-5f15-2dce-4de4-c59e26a3a90e.webp "Select a Billing Method")
 
 ### Select Instance Type
 
 Using the `Type-based Selection` tab, set `Architecture` as `ARM`, and `Category` as `General Purpose`, to see the available instance types. If you already know the desired instance type, you can enter this in the filter.
 
-![alibaba #center](images/6ccdd195-7020-b944-4eed-846edf808b2a.png "Select Instance Type")
+![alibaba #center](images/6ccdd195-7020-b944-4eed-846edf808b2a.webp "Select Instance Type")
 
 ### Select OS image
 
@@ -60,29 +60,29 @@ There are many images available on the [Alibaba Cloud Marketplace](https://marke
 
 For now, select `Ubuntu` version (e.g. `20.04 64-bit for ARM`) from the pull-down menu.
 
-![alibaba #center](images/c0329674-b751-5aa5-09b8-f2786a338d8e.png "Select OS Image")
+![alibaba #center](images/c0329674-b751-5aa5-09b8-f2786a338d8e.webp "Select OS Image")
 
 ### Other settings
 
 Other settings, such as storage size are selectable. For now, use the default selection. Click `Next` to move to `Networking`. Proceed with the default selection for `Networking`. Click `Next` to move to `System Configurations`.
 
-![alibaba #center](images/08b7ccdd-003f-b23d-de99-471aa11eb285.png "Configure Storage Options")
+![alibaba #center](images/08b7ccdd-003f-b23d-de99-471aa11eb285.webp "Configure Storage Options")
 
-![alibaba #center](images/ee8331cb-caec-a3a1-5ded-f7eb56f3e558.png "Configure Network Options")
+![alibaba #center](images/ee8331cb-caec-a3a1-5ded-f7eb56f3e558.webp "Configure Network Options")
 
 ### Set a Key Pair and other security settings
 
 To be able to access the instance (see later), you must use a [key pair](https://www.alibabacloud.com/help/en/elastic-compute-service/latest/key-pairs). If this is your first time logging in, use the `Create Key Pair` dialog to create your key. The `public-key` will be downloaded to your local machine. When created, select from the pull-down.
 
-![alibaba #center](images/bf231337-39ba-5d61-6bbb-4c9d2c3f8d6c.png "Select or create a key pair")
+![alibaba #center](images/bf231337-39ba-5d61-6bbb-4c9d2c3f8d6c.webp "Select or create a key pair")
 
 Select `Logon Credentials` and set `Logon Username` to `ecs-user` and an appropriate  `password` if desired.
 
-![alibaba #center](images/8be6f704-0b04-1a19-e156-9f4b5e2f6d10.png "Set Username and Password for logon")
+![alibaba #center](images/8be6f704-0b04-1a19-e156-9f4b5e2f6d10.webp "Set Username and Password for logon")
 
 Other settings such as `Instance Name` and `Description` are free-form for appropriate personal input. Other settings can be left as default.
 
-![alibaba #center](images/fd90820b-5ac5-6fae-831c-1505028e4393.png "Advanced Settings(Optional)")
+![alibaba #center](images/fd90820b-5ac5-6fae-831c-1505028e4393.webp "Advanced Settings(Optional)")
 
 In the `Preview` stage, click `Create Instance`. After a few moments, the instance will be available for use.
 

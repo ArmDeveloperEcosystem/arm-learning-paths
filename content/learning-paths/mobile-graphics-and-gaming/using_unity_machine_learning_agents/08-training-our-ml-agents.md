@@ -172,7 +172,7 @@ Go to the _Project_ tab (normally bottom left) and navigate to _Assets->#DevSumm
 
 Once the training scene is loaded, it should look similar to this:
 
-![Training Scene](images/training-scene.png "Figure 2. Training Scene")
+![Training Scene](images/training-scene.webp "Figure 2. Training Scene")
 
 ### Start the training
 
@@ -366,7 +366,7 @@ This section describes how TensorBoard can be used to monitor the training progr
 
 1. Now open up your browser to http://localhost:6006 (the port that was passed to the launch command), which should look similar to this:
 
-    ![TensorBoard UI](images/tensorboard-ui.png "Figure 7. TensorBoard UI")
+    ![TensorBoard UI](images/tensorboard-ui.webp "Figure 7. TensorBoard UI")
 
 1. Some cards to take a note of:
 

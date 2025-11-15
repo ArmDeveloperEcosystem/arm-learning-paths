@@ -71,7 +71,7 @@ Follow these steps:
 1. Enter your query in the prompt field of the web application.
 2. Submit the query to receive a response from the LLM.
 
-![RAG_IMG3](rag_img3.png)
+![RAG_IMG3](rag_img3.webp)
 
 While the response is streamed to the frontend for immediate viewing, you can monitor the performance metrics on the backend server terminal. This provides insights into the processing speed and efficiency of the LLM.
 

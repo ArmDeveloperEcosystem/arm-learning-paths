@@ -69,4 +69,4 @@ sudo perf inject -j -i perf.data | perf script | stackcollapse-perf.pl | flamegr
 
 You can now launch `profile.svg` in a browser to analyse the profiling result:
 
-![Flame graph visualization of Java method calls collected using perf and a Java agent on a Tomcat server alt-text#center](_images/lp-flamegraph-agent.png "Java flame graph built through Java agent and perf")
+![Flame graph visualization of Java method calls collected using perf and a Java agent on a Tomcat server alt-text#center](_images/lp-flamegraph-agent.webp "Java flame graph built through Java agent and perf")
