@@ -17,7 +17,7 @@ You'll also use `print_loop_nest()` to see how Halide arranges the computation, 
 This section doesn't cover loop fusion using the `fuse` directive. You'll focus instead on operator fusion, which is Halide's default behavior.
 {{% /notice %}}
 
-## Code
+## Explore the code
 To explore how fusion in Halide works create a new file called `camera-capture-fusion.cpp`, and copy in the code below. This code uses a live camera pipeline (BGR → gray → 3×3 blur → threshold), adds a few schedule variants to toggle operator fusion compared to materialization, and print ms / FPS / MPix/s.  - you'll be able to see the impact immediately:
 
 ```cpp

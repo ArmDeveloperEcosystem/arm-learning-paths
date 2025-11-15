@@ -262,7 +262,6 @@ You'll see two windows displaying the original and inverted images:
 
 You've learned Halide's foundational concepts, explored the benefits of separating algorithms and schedules, set up your development environment, and created your first functional Halide application integrated with OpenCV for Arm development.
 
-cheWhile the example introduces the core concepts of Halide pipelines (such as defining computations symbolically and realizing them), it doesn't yet showcase the benefits of separating algorithm definition from scheduling strategies.
+While the example introduces the core concepts of Halide pipelines (such as defining computations symbolically and realizing them), it doesn't yet showcase the benefits of separating algorithm definition from scheduling strategies.
 
 In subsequent sections, you'll explore advanced Halide scheduling techniques, including parallelism, vectorization, tiling, and loop fusion, which demonstrate the practical advantages of separating algorithm logic from scheduling. These techniques enable fine-grained performance optimization tailored to Arm processors and other hardware without modifying algorithmic correctness.
-
