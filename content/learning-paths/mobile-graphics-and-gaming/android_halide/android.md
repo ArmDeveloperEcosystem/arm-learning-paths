@@ -26,9 +26,9 @@ In short, Halide delivers high-performance image processing without sacrificing 
 
 ### Navigate Android development challenges
 While Android presents abundant opportunities for developers, the mobile development ecosystem brings its own set of challenges, especially for performance-intensive applications:
-1. Limited Hardware Resources. Unlike desktop or server environments, mobile devices have significant constraints on processing power, memory capacity, and battery life. Developers must optimize software meticulously to deliver smooth performance while carefully managing hardware resource consumption. Leveraging tools like Halide allows developers to overcome these constraints by optimizing computational workloads, making resource-intensive tasks feasible on constrained hardware.
-2. Cross-Compilation Complexities. Developing native code for Android requires handling multiple hardware architectures (such as armv8-a, ARM64, and sometimes x86/x86_64). Cross-compilation introduces complexities due to different instruction sets, CPU features, and performance characteristics. Managing this complexity involves careful use of the Android NDK, understanding toolchains, and correctly configuring build systems (e.g., Gradle, CMake). Halide helps mitigate these issues by abstracting away many platform-specific optimizations, automatically generating code optimized for target architectures.
-3. Image-Format Conversions (Bitmap ↔ Halide Buffer). Android typically handles images through the Bitmap class or similar platform-specific constructs, whereas Halide expects image data to be in raw, contiguous buffer formats. Developers must bridge the gap between Android-specific image representations (Bitmaps, YUV images from camera APIs, etc.) and Halide's native buffer format. Proper management of these conversions—including considerations for pixel formats, stride alignment, and memory copying overhead—can significantly impact performance and correctness, necessitating careful design and efficient implementation of buffer-handling routines.
+- Limited hardware resources: unlike desktop or server environments, mobile devices have significant constraints on processing power, memory capacity, and battery life. Developers must optimize software meticulously to deliver smooth performance while carefully managing hardware resource consumption. Leveraging tools like Halide allows developers to overcome these constraints by optimizing computational workloads, making resource-intensive tasks feasible on constrained hardware.
+- Cross-compilation complexities: developing native code for Android requires handling multiple hardware architectures (such as Armv8-A, ARM64, and sometimes x86/x86_64). Cross-compilation introduces complexities due to different instruction sets, CPU features, and performance characteristics. Managing this complexity involves careful use of the Android NDK, understanding toolchains, and correctly configuring build systems (e.g., Gradle, CMake). Halide helps mitigate these issues by abstracting away many platform-specific optimizations, automatically generating code optimized for target architectures.
+- Image format conversions (Bitmap ↔ Halide Buffer). Android typically handles images through the Bitmap class or similar platform-specific constructs, whereas Halide expects image data to be in raw, contiguous buffer formats. Developers must bridge the gap between Android-specific image representations (Bitmaps, YUV images from camera APIs, etc.) and Halide's native buffer format. Proper management of these conversions—including considerations for pixel formats, stride alignment, and memory copying overhead—can significantly impact performance and correctness, necessitating careful design and efficient implementation of buffer-handling routines.
 
 ## Project requirements
 Before integrating Halide into your Android application, ensure you have the necessary tools and libraries.
@@ -41,7 +41,7 @@ Before integrating Halide into your Android application, ensure you have the nec
 ### Create the project
 1. Open Android Studio.
 2. Select New Project > Native C++.
-![img4](Figures/04.webp)
+![Android Studio New Project dialog showing Native C++ template selected. The dialog displays options for project name, language, and minimum SDK. The primary subject is the Native C++ template highlighted in the project creation workflow. The wider environment is a typical Android Studio interface with a neutral, technical tone. Visible text includes Native C++ and fields for configuring the new project.]
 
 ### Configure the project
 1. Set the project Name to Arm.Halide.AndroidDemo.
@@ -407,7 +407,7 @@ The input Java byte array (input_bytes) is accessed and pinned into native memor
 
 Through this JNI bridge, Kotlin can invoke high-performance native code. You can now re-run the application. Select the Load Image button, and then Process Image. You'll see the following results:
 
-![img9](Figures/09.png)
+Android app screenshot showing the Arm Halide Android demo interface. The screen displays two buttons labeled Load Image and Process Image, with the Process Image button enabled. Below the buttons, an ImageView shows a grayscale photo of a camera man standing outdoors, holding a camera and tripod. The environment appears neutral and technical, with no visible emotional tone. The layout is centered and uses a simple vertical arrangement, making the interface easy to navigate for users with visual impairment.
 ![img10](Figures/10.png)
 
 In the above code we created a new jbyteArray and copying the data explicitly, which can result in an additional overhead. To optimize performance by avoiding unnecessary memory copies, you can directly wrap Halide's buffer in a Java-accessible ByteBuffer like so

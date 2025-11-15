@@ -7,15 +7,18 @@ weight: 4
 layout: "learningpathall"
 ---
 
-## What you'll build
+## What you'll build and learn
 
-In this section, you'll focus on operator fusion in Halide—where each stage is computed directly inside its consumer, instead of storing intermediate results. You'll learn how fusion can reduce memory traffic, and when materializing intermediates with `compute_root()` or `compute_at()` is better, especially for large filters or when results are reused. You'll use `print_loop_nest()` to see how Halide arranges the computation, switch between different scheduling modes (fuse all, fuse blur only, materialize, tile and materialize per tile) in a live camera pipeline, and measure the impact using ms, FPS, and MPix/s.
+You'll explore operator fusion in Halide, where each stage is computed inside its consumer instead of storing intermediate results. This approach reduces memory traffic and improves cache efficiency. You'll also learn when it's better to materialize intermediates using `compute_root()` or `compute_at()`, such as with large filters or when results are reused by multiple stages. By the end, you'll understand how to choose between fusion and materialization for real-time image processing on Arm devices.
 
+You'll also use `print_loop_nest()` to see how Halide arranges the computation, switch between different scheduling modes (fuse all, fuse blur only, materialize, tile and materialize per tile) in a live camera pipeline, and measure the impact using ms, FPS, and MPix/s.
 
-This section doesn't cover loop fusion (the fuse directive). You'll focus instead on operator fusion, which is Halide's default behavior.
+{{% notice Note on scope %}}
+This section doesn't cover loop fusion using the `fuse` directive. You'll focus instead on operator fusion, which is Halide's default behavior.
+{{% /notice %}}
 
 ## Code
-To demonstrate how fusion in Halide works create a new file `camera-capture-fusion.cpp`, and modify it as follows. This code uses a live camera pipeline (BGR → gray → 3×3 blur → threshold), adds a few schedule variants to toggle operator fusion vs. materialization, and print ms / FPS / MPix/s. So you can see the impact immediately.
+To explore how fusion in Halide works create a new file called `camera-capture-fusion.cpp`, and copy in the code below. This code uses a live camera pipeline (BGR → gray → 3×3 blur → threshold), adds a few schedule variants to toggle operator fusion compared to materialization, and print ms / FPS / MPix/s.  - you'll be able to see the impact immediately:
 
 ```cpp
 #include "Halide.h"
@@ -234,12 +237,17 @@ int main(int argc, char** argv) {
     return 0;
 }
 ```
+The heart of this program is the `make_pipeline` function. This function builds the camera processing pipeline in Halide and lets you switch between different scheduling modes. Each mode changes how intermediate results are handled, by either fusing stages together to minimize memory use, or materializing them to avoid recomputation. By adjusting the schedule, you can see how these choices affect both the loop structure and the real-time performance of your image processing pipeline.
 
-The main part of this program is the `make_pipeline` function. It defines the camera processing pipeline in Halide and applies different scheduling choices depending on which mode is selected.
+Start by declaring `Var x, y` to represent pixel coordinates. The camera frames use a 3-channel interleaved BGR format. This means:
 
-Start by declaring Var x, y as pixel coordinates. Similarly as before, the camera frames come in as 3-channel interleaved BGR, telling Halide how the data is laid out: the stride along x is 3 (one step moves across all three channels), the stride along c (channels) is 1, and the bounds on the channel dimension are 0–2.
+- The stride along the x-axis is 3, because each step moves across all three color channels.
+- The stride along the channel axis (c) is 1, so channels are stored contiguously.
+- The channel bounds are set from 0 to 2, covering the three BGR channels.
 
-Because you don't want to worry about array bounds when applying filters, clamp the input at the borders. In Halide 19, BoundaryConditions::repeat_edge works cleanly when applied to an ImageParam, since it has .dim() information. This way, all downstream stages can assume safe access even at the edges of the image.
+These settings tell Halide exactly how the image data is organized in memory, so it can process each pixel and channel correctly.
+
+To avoid errors when applying filters near the edges of an image, clamp the input at the borders. In Halide 19, you can use `BoundaryConditions::repeat_edge` directly on an `ImageParam`, because it includes dimension information. This ensures that all stages in your pipeline can safely access pixels, even at the image boundaries.
 
 ```cpp
 Pipeline make_pipeline(ImageParam& input, Schedule schedule) {
@@ -253,10 +261,32 @@ Pipeline make_pipeline(ImageParam& input, Schedule schedule) {
     // (b) Border handling: clamp the *ImageParam* (works cleanly in Halide 19)
     Func inputClamped = BoundaryConditions::repeat_edge(input);
 ```
+The next stage converts the image to grayscale. Use the Rec.601 weights for BGR to gray conversion, just like in the previous section. For the blur, apply a 3×3 binomial kernel with values:
 
-Next comes the gray conversion. As in previous section, use Rec.601 weights and a 3×3 binomial blur. Instead of using a reduction domain (RDom), unroll the sum in C++ host code with a pair of loops over the kernel. The kernel values {1, 2, 1; 2, 4, 2; 1, 2, 1} approximate a Gaussian filter. Each pixel of blur is simply the weighted sum of its 3×3 neighborhood, divided by 16.
+```
+1 2 1
+2 4 2
+1 2 1
+```
 
-Then add a threshold stage. Pixels above 128 become white, and all others black, producing a binary image. Finally, define an output Func that wraps the thresholded result and call compute_root() on it so that it will be realized explicitly when you run the pipeline.
+This kernel closely approximates a Gaussian filter. Instead of using Halide's reduction domain (`RDom`), unroll the sum directly in C++ using two nested loops over the kernel values. For each pixel, calculate the weighted sum of its 3×3 neighborhood and divide by 16 to get the blurred result. This approach makes the computation straightforward and easy to follow.
+Now, add a threshold stage to your pipeline. This stage checks each pixel value after the blur and sets it to white (255) if it's above 128, or black (0) otherwise. This produces a binary image, making it easy to see which areas are brighter than the threshold.
+
+Here's how you define the thresholded stage and the output Func:
+
+```cpp
+// Threshold (binary)
+Func thresholded("thresholded");
+Expr T = cast<uint8_t>(128);
+thresholded(x, y) = select(blur(x, y) > T, cast<uint8_t>(255), cast<uint8_t>(0));
+
+// Final output
+Func output("output");
+output(x, y) = thresholded(x, y);
+output.compute_root(); // Realize 'output' explicitly when running the pipeline
+```
+
+This setup ensures that the output is a binary image, and Halide will compute and store the result when you run the pipeline. By calling `compute_root()` on the output Func, you tell Halide to materialize the final result, making it available for display or further processing.
 
 Now comes the interesting part: the scheduling choices. Depending on the Schedule enum passed in, you instruct Halide to either fuse everything (the default), materialize some intermediates, or even tile the output.
   * Simple: Here you'll explicitly compute and store both gray and blur across the whole frame with compute_root(). This makes them easy to reuse or parallelize, but requires extra memory traffic.
