@@ -22,7 +22,7 @@ prerequisites:
     - Python 3.12 and basic familiarity with Hugging Face Transformers and quantization.
 
 author:
-   - Nikhil Gupta
+   - Nikhil Gupta, Pareena Verma
 
 ### Tags
 skilllevels: Introductory
