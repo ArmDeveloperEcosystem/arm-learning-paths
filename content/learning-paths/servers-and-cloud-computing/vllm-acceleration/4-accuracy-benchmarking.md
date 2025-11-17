@@ -8,22 +8,27 @@ layout: learningpathall
 
 ## Why accuracy benchmarking
 
-The lm-evaluation-harness is the standard way to measure model accuracy across common academic benchmarks (for example, MMLU, HellaSwag, GSM8K) and runtimes (Hugging Face, vLLM, llama.cpp, etc.). In this module, you will run accuracy tests for both BF16 and INT4 deployments of your model served by vLLM on Arm-based servers.
+The LM Evaluation Harness (lm-eval-harness) is a widely used open-source framework for evaluating the accuracy of large language models on standardized academic benchmarks such as MMLU, HellaSwag, and GSM8K.
+It provides a consistent interface for evaluating models served through various runtimes—such as Hugging Face Transformers, vLLM, or llama.cpp using the same datasets, few-shot templates, and scoring metrics.
+In this module, you will measure how quantization impacts model quality by comparing BF16 (non-quantized) and INT4 (quantized) versions of your model running on Arm-based servers.
 
 You will:
-  * Install lm-eval-harness with vLLM support
-  * Run benchmarks on a BF16 model and an INT4 (weight-quantized) model
-  * Interpret key metrics and compare quality across precisions
+  * Install lm-eval-harness with vLLM backend support.
+  * Run benchmark tasks on both BF16 and INT4 model deployments.
+  * Analyze and interpret accuracy differences between the two precisions.
 
 {{% notice Note %}}
-Results depend on CPU, dataset versions, and model choice. Use the same tasks and few-shot settings when comparing BF16 and INT4 to ensure a fair comparison.
+Accuracy results can vary depending on CPU, dataset versions, and model choice. Use the same tasks, few-shot settings and evaluation batch size when comparing BF16 and INT4 results to ensure a fair comparison.
 {{% /notice %}}
 
 ## Prerequisites
 
-Before you start:
-  * Complete the optimized build in “Overview and Optimized Build” and validate your vLLM install.
-  * Optionally quantize a model using the “Quantize an LLM to INT4 for Arm Platform” module. We’ll reference the output directory name from that step.
+Before you begin, make sure your environment is ready for evaluation.
+You should have:
+  * Completed the optimized build from the “Overview and Optimized Build” section and successfully validated your vLLM installation.
+  * (Optional) Quantized a model using the “Quantize an LLM to INT4 for Arm Platform” module.
+  The quantized model directory (for example, DeepSeek-V2-Lite-w4a8dyn-mse-channelwise) will be used as input for INT4 evaluation.
+If you haven’t quantized a model, you can still evaluate your BF16 baseline to establish a reference accuracy.
 
 ## Install lm-eval-harness
 
