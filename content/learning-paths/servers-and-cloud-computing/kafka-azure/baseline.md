@@ -27,14 +27,14 @@ KRaft (Kafka Raft) mode replaces ZooKeeper by managing metadata directly within 
 Before you start Kafka in KRaft mode, you need to configure the broker and initialize the storage directory. You only need to do this once for each broker.
 
 
-- **Edit the configuration file**  
+ ## Edit the configuration file
     Open the Kafka configuration file in an editor:
 
     ```console
     vi /opt/kafka/config/server.properties
     ```
 
-- **Add or modify KRaft properties**  
+## Add or modify KRaft properties
     Ensure the following configuration entries are present for a single-node KRaft setup:
 
     ```java
@@ -47,7 +47,7 @@ Before you start Kafka in KRaft mode, you need to configure the broker and initi
     ```
     This configuration file sets up a single Kafka server to act as both a controller (managing cluster metadata) and a broker (handling data), running in KRaft mode. It defines the node's unique ID and specifies the local host as the sole participant in the controller quorum.
 
-- **Format the storage directory**  
+## Format the storage directory
     Format the metadata storage directory using the kafka-storage.sh tool. This initializes KRaft’s internal Raft logs with a unique cluster ID.
 
     ```console
@@ -60,7 +60,7 @@ Before you start Kafka in KRaft mode, you need to configure the broker and initi
     ```
     This confirms that the Kafka storage directory has been successfully formatted and that the broker is ready to start in KRaft mode.
 
-## Perform the Baseline Test
+## Perform the baseline test
 With Kafka 4.1.0 installed and configured in KRaft mode, you’re now ready to run a baseline test to verify that the Kafka broker starts correctly, topics can be created, and message flow works as expected.
 
 You’ll use multiple terminals for this test:
@@ -78,7 +78,7 @@ bin/kafka-server-start.sh config/server.properties
 ```
 Keep this terminal open and running. The broker process must stay active for all subsequent commands.
 
-## Terminal 2 - create a Topic
+## Terminal 2 - create a topic
 Open a new terminal window. Create a topic named test-topic-kafka, which acts as a logical channel where producers send and consumers receive messages:
 
 ```console
