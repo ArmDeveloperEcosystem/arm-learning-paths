@@ -24,7 +24,7 @@ Next, download the pre-built binary package for **Apache Flink** from the offici
 
 ```console
 cd /opt
-sudo wget https://dlcdn.apache.org/flink/flink-2.1.0/flink-2.1.0-bin-scala_2.12.tgz
+sudo wget https://dlcdn.apache.org/flink/flink-2.1.1/flink-2.1.1-bin-scala_2.12.tgz
 ```
 This command retrieves the official Flink binary distribution for installation on your VM.
 
@@ -39,15 +39,15 @@ The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) re
 Extract the downloaded `.tgz` archive to make the Flink files accessible for configuration.
 
 ```console
-sudo tar -xvzf flink-2.1.0-bin-scala_2.12.tgz
+sudo tar -xvzf flink-2.1.1-bin-scala_2.12.tgz
 ```
-After extraction, you will have a directory named `flink-2.1.0` under `/opt`.
+After extraction, you will have a directory named `flink-2.1.1` under `/opt`.
 
 **Rename the extracted directory for convenience:**
 For easier access and management, rename the extracted Flink directory to a simple name like `/opt/flink`.
 
 ```console
-sudo mv flink-2.1.0 /opt/flink
+sudo mv flink-2.1.1 /opt/flink
 ```
 This makes future references to your Flink installation path simpler and more consistent.
 
@@ -82,6 +82,6 @@ flink -v
 You should see an output similar to:
 
 ```output
-Version: 2.1.0, Commit ID: 4cb6bd3
+Version: 2.1.1, Commit ID: 074f8c5
 ```
 This confirms that Apache Flink has been installed and is ready for use.
