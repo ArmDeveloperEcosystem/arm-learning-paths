@@ -30,9 +30,11 @@ You should have:
   The quantized model directory (for example, DeepSeek-V2-Lite-w4a8dyn-mse-channelwise) will be used as input for INT4 evaluation.
 If you haven’t quantized a model, you can still evaluate your BF16 baseline to establish a reference accuracy.
 
-## Install lm-eval-harness
+## Install LM Evaluation Harness
 
-Install the harness with vLLM extras in your active Python environment:
+You will install the LM Evaluation Harness with vLLM backend support, allowing direct evaluation against your running vLLM server.
+
+Install it inside your active Python environment:
 
 ```bash
 pip install "lm_eval[vllm]"
@@ -40,12 +42,14 @@ pip install ray
 ```
 
 {{% notice Tip %}}
-If your benchmarks include gated models or datasets, run `huggingface-cli login` first so the harness can download what it needs.
+If your benchmarks include gated models or restricted datasets, run `huggingface-cli login`
+This ensures the harness can authenticate with Hugging Face and download any protected resources needed for evaluation.
 {{% /notice %}}
 
-## Recommended runtime settings for Arm CPU
+## Recommended Runtime Settings for Arm CPU
 
-Export the same performance-oriented environment variables used for serving. These enable Arm-optimized kernels through oneDNN+ACL and consistent thread pinning:
+Before running accuracy benchmarks, export the same performance tuned environment variables you used for serving.
+These settings ensure vLLM runs with Arm-optimized kernels (via oneDNN + Arm Compute Library) and consistent thread affinity across all CPU cores during evaluation.
 
 ```bash
 export VLLM_TARGET_DEVICE=cpu
@@ -57,13 +61,28 @@ export OMP_NUM_THREADS="$(nproc)"
 export LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libtcmalloc_minimal.so.4
 ```
 
+Explanation of settings
+
+| Variable                                            | Purpose                                                                                                                      |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **`VLLM_TARGET_DEVICE=cpu`**                        | Forces vLLM to run entirely on CPU, ensuring evaluation results use Arm-optimized oneDNN kernels.                            |
+| **`VLLM_CPU_KVCACHE_SPACE=32`**                     | Reserves 32 GB for key/value caches used in attention. Adjust if evaluating with longer contexts or larger batches.          |
+| **`VLLM_CPU_OMP_THREADS_BIND="0-$(($(nproc)-1))"`** | Pins OpenMP worker threads to physical cores (0–N-1) to minimize OS thread migration and improve cache locality.             |
+| **`VLLM_MLA_DISABLE=1`**                            | Disables GPU/MLA probing for faster initialization in CPU-only mode.                                                         |
+| **`ONEDNN_DEFAULT_FPMATH_MODE=BF16`**               | Enables **bfloat16** math mode, using reduced precision operations for faster compute while maintaining numerical stability. |
+| **`OMP_NUM_THREADS="$(nproc)"`**                    | Uses all available CPU cores to parallelize matrix multiplications and attention layers.                                     |
+| **`LD_PRELOAD`**                                    | Preloads **tcmalloc** (Thread-Caching Malloc) to reduce memory allocator contention under high concurrency.                  |
+
 {{% notice Note %}}
-`LD_PRELOAD` uses tcmalloc to reduce allocator contention. Install it via `sudo apt-get install -y libtcmalloc-minimal4` if you haven’t already.
+tcmalloc helps reduce allocator overhead when running multiple evaluation tasks in parallel.
+If it’s not installed, add it with `sudo apt-get install -y libtcmalloc-minimal4`
 {{% /notice %}}
 
-## Accuracy Benchmarking Meta‑Llama‑3.1‑8B‑Instruct BF16 model
+## Accuracy Benchmarking Meta‑Llama‑3.1‑8B‑Instruct (BF16 Model)
 
-Run with a non-quantized model. Replace the model ID as needed.
+To establish a baseline accuracy reference, evaluate a non-quantized BF16 model served through vLLM.
+This run measures how the original model performs under Arm-optimized BF16 inference before applying INT4 quantization.
+Replace the model ID if you are using a different model variant or checkpoint.
 
 ```bash
 lm_eval \
@@ -74,12 +93,16 @@ lm_eval \
   --batch_size auto \
   --output_path results
 ```
+After completing this test, review the results directory for accuracy metrics (e.g., acc_norm, acc) and record them as your BF16 baseline.
 
-## Accuracy Benchmarking INT4 quantized model
+Next, you’ll run the same benchmarks on the INT4 quantized model to compare accuracy across precisions.
 
-Use the INT4 quantization recipe & script from previous steps to quantize `meta-llama/Meta-Llama-3.1-8B-Instruct` model
+## Accuracy Benchmarking: INT4 quantized model
 
-Channelwise INT4 (MSE):
+Now that you’ve quantized your model using the INT4 recipe and script from the previous module, you can benchmark its accuracy using the same evaluation harness and task set.
+This test compares quantized (INT4) performance against your BF16 baseline, revealing how much accuracy is preserved after compression.
+Use the quantized directory generated earlier, for example:
+Meta-Llama-3.1-8B-Instruct-w4a8dyn-mse-channelwise.
 
 ```bash
 lm_eval \
@@ -90,18 +113,26 @@ lm_eval \
   --batch_size auto \
   --output_path results
 ```
+After this evaluation, compare the results metrics from both runs:
 
 ## Interpreting results
 
-The harness prints per-task and aggregate scores (for example, `acc`, `acc_norm`, `exact_match`). Higher is generally better. Compare BF16 vs INT4 on the same tasks to assess quality impact.
+After running evaluations, the LM Evaluation Harness prints per-task and aggregate metrics such as acc, acc_norm, and exact_match.
+These represent model accuracy across various datasets and question formats—higher values indicate better performance.
+Key metrics include:
+  * acc – Standard accuracy (fraction of correct predictions).
+  * acc_norm – Normalized accuracy; adjusts for multiple-choice imbalance.
+  * exact_match – Strict string-level match, typically used for reasoning or QA tasks.
 
+Compare BF16 and INT4 results on identical tasks to assess the accuracy–efficiency trade-off introduced by quantization.
 Practical tips:
-  * Use the same tasks and few-shot settings across runs.
-  * For quick iteration, you can add `--limit 200` to run on a subset.
+  * Always use identical tasks, few-shot settings, and seeds across runs to ensure fair comparisons.
+  * Add --limit 200 for quick validation runs during tuning. This limits each task to 200 samples for faster iteration.
 
 ## Example results for Meta‑Llama‑3.1‑8B‑Instruct model
 
-These illustrative results are representative; actual scores may vary across hardware, dataset versions, and harness releases. Higher values indicate better accuracy.
+The following results are illustrative and serve as reference points.
+Your actual scores may differ based on hardware, dataset version, or lm-eval-harness release.
 
 | Variant                         | MMLU (acc±err)    | HellaSwag (acc±err) |
 |---------------------------------|-------------------|---------------------|
@@ -109,10 +140,21 @@ These illustrative results are representative; actual scores may vary across har
 | INT4 Groupwise minmax (G=32)    | 0.5831 ± 0.0049   | 0.7819 ± 0.0041     |
 | INT4 Channelwise MSE            | 0.5712 ± 0.0049   | 0.7633 ± 0.0042     |
 
-Use these as ballpark expectations to check whether your runs are in a reasonable range, not as official targets.
+How to interpret:
+
+  * BF16 baseline – Represents near-FP32 accuracy; serves as your quality reference.
+  * INT4 Groupwise minmax – Retains almost all performance while reducing model size ~4× and improving throughput substantially.
+  * INT4 Channelwise MSE – Slightly lower accuracy, often within 2–3 percentage points of BF16, still competitive for most production use cases.
 
 ## Next steps
 
-  * Try additional tasks to match your usecase: `gsm8k`, `winogrande`, `arc_easy`, `arc_challenge`.
-  * Sweep quantization recipes (minmax vs mse; channelwise vs groupwise, group size) to find a better accuracy/performance balance.
+  * Broaden accuracy testing to cover reasoning, math, and commonsense tasks that reflect your real-world use cases:
+GSM8K – Arithmetic and logical reasoning (sensitive to quantization).
+Winogrande – Commonsense and pronoun disambiguation.
+ARC-Easy / ARC-Challenge – Science and multi-step reasoning questions.
+Running multiple benchmarks gives a more comprehensive picture of model robustness under different workloads.
+
+  * Experiment with different quantization configurations to find the best accuracy–throughput trade-off for your hardware. 
   * Record both throughput and accuracy to choose the best configuration for your workload.
+
+By iterating on these steps, you will build a custom performance and accuracy profile for your Arm deployment, helping you select the optimal quantization strategy and runtime configuration for your target workload.
