@@ -1,5 +1,5 @@
 ---
-title: Create an Arm based cloud virtual machine using Microsoft Cobalt 100 CPU 
+title: Create an Arm-based cloud virtual machine using Microsoft Cobalt 100 CPU 
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,21 +8,22 @@ layout: learningpathall
 
 ## Introduction
 
-There are several ways to create an Arm-based Cobalt 100 virtual machine : the Microsoft Azure console, the Azure CLI tool, or using your choice of IaC (Infrastructure as Code). This guide will use the Azure console to create a virtual machine with Arm-based Cobalt 100 Processor. 
+You can create an Arm-based Cobalt 100 virtual machine in several ways: using the Microsoft Azure portal, the Azure CLI, or Infrastructure as Code (IaC) tools. This Learning Path uses the Azure portal to walk you through creating a virtual machine with an Arm-based Cobalt 100 processor, which is from the D-Series v6 general-purpose virtual machines. 
 
-This learning path focuses on the general-purpose virtual machine of the D series. Please read the guide on [Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series) offered by Microsoft Azure.  
+These VMs are designed for a wide range of workloads and offer Arm-based performance with the Cobalt 100 CPU. To learn more about the Dpsv6 size series, see the official [Dpsv6 size series guide](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series) from Microsoft Azure.
 
-If you have never used the Microsoft Cloud Platform before, please review the microsoft [guide to Create a Linux virtual machine in the Azure portal](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-portal?tabs=ubuntu). 
+If you have never used the Microsoft Cloud Platform before, see the Microsoft guide on how to [Create a Linux virtual machine in the Azure portal](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-portal?tabs=ubuntu). 
 
-#### Create an Arm-based Azure Virtual Machine 
+## Create an Arm-based Azure Virtual Machine 
 
-Creating a virtual machine based on Azure Cobalt 100 is no different from creating any other virtual machine in Azure. To create an Azure virtual machine, launch the Azure portal and navigate to "Virtual Machines".
-1. Select "Create", and click on "Virtual Machine" from the drop-down list.
-2. Inside the "Basic" tab, fill in the Instance details such as "Virtual machine name" and "Region".
-3. Choose the image for your virtual machine (for example, Ubuntu Pro 24.04 LTS) and select “Arm64” as the VM architecture.
-4. In the “Size” field, click on “See all sizes” and select the D-Series v6 family of virtual machines. Select “D4ps_v6” from the list.
+Creating a virtual machine based on Azure Cobalt 100 is no different from creating any other virtual machine in Azure. To create an Azure virtual machine, launch the Azure portal and navigate to **Virtual Machines**.
 
-![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance.png "Figure 1: Select the D-Series v6 family of virtual machines")
+- Select **Create**, and click on **Virtual Machine** from the drop-down list.
+- Inside the **Basic** tab, fill in the Instance details such as **Virtual machine name** and **Region**.
+- Choose the image for your virtual machine (for example, Ubuntu Pro 24.04 LTS) and select **Arm64** as the VM architecture.
+- In the **Size** field, click on **See all sizes** and select the D-Series v6 family of virtual machines. Select **D4ps_v6** from the list.
+
+![Azure portal showing the selection of the D-Series v6 family of virtual machines, with D4ps_v6 highlighted as the chosen size. The interface displays a list of available VM sizes, including CPU, memory, and pricing details. The wider environment is the Azure portal's virtual machine creation workflow, with a clean and organized layout. The tone is neutral and informative, focused on guiding users through the selection process. Visible text includes D-Series v6, D4ps_v6, CPU, memory, and price columns.](images/instance.png "Selecting the D-Series v6 family of virtual machines")
 
 5. Select "SSH public key" as an Authentication type. Azure will automatically generate an SSH key pair for you and allow you to store it for future use. It is a fast, simple, and secure way to connect to your virtual machine.
 6. Fill in the Administrator username for your VM.

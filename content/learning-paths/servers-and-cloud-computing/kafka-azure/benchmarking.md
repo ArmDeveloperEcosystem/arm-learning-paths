@@ -1,5 +1,5 @@
 ---
-title: Benchmarking with Official Kafka Tools
+title: Benchmark with official Kafka tools
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -13,7 +13,7 @@ Apache Kafka includes official performance testing utilities that allow you to m
 ## Steps for Kafka Benchmarking 
 
 Before running the benchmarks, make sure your Kafka broker is already active in a separate terminal (as configured in the previous section).
-Now open two new terminal sessions — one for running the producer benchmark and another for the consumer benchmark.
+Now open two new terminal sessions; one for running the producer benchmark, and the other for the consumer benchmark.
 
 ### Terminal A - Producer Benchmark
 
