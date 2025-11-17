@@ -19,11 +19,16 @@ Ensure that Puppet is installed and functioning correctly:
 ```console
 puppet --version
 ```
+Output:
+```output
+8.10.0
+```
 
 ### Create a Benchmark Manifest
 Create a directory and a simple manifest file:
 
 ```console
+cd ~
 mkdir -p ~/puppet-benchmark
 cd ~/puppet-benchmark
 vi benchmark.pp
@@ -51,16 +56,16 @@ This executes the manifest locally and outputs timing statistics.
 
 You should see an output similar to:
 ```output
-Notice: Compiled catalog for ########arm64.c.imperial-time-463411-q5.internal in environment production in 0.01 seconds
+Notice: Compiled catalog for danson-puppet-2.c.arm-deveco-stedvsl-prd.internal in environment production in 0.01 seconds
 Info: Using environment 'production'
-Info: Applying configuration version '1762160712'
+Info: Applying configuration version '1763407825'
 Notice: Running Puppet standalone benchmark.
 Notice: /Stage[main]/Main/Notify[Benchmark Test]/message: defined 'message' as 'Running Puppet standalone benchmark.'
 Notice: Applied catalog in 0.01 seconds
 
-real    0m1.175s
-user    0m0.779s
-sys     0m0.385s
+real    0m1.054s
+user    0m0.676s
+sys     0m0.367s
 ```
 
 ### Benchmark Metrics Explanation
@@ -71,34 +76,22 @@ sys     0m0.385s
 - **user** → CPU time spent in user-space.  
 - **sys** → CPU time spent in system calls.  
 
-### Benchmark summary on x86_64
-To compare the benchmark results, the following results were collected by running the same benchmark on a `x86 - c4-standard-4` (4 vCPUs, 15 GB Memory) x86_64 VM in GCP, running SUSE:
-
-| Metric | Result |
-|---------|---------|
-| Compiled catalog | 0.01 seconds |
-| Environment | production |
-| Applied catalog | 0.01 seconds |
-| real | 0m1.072s |
-| user | 0m0.834s |
-| sys | 0m0.213s |
-
-### Benchmark summary on Arm64
-Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
+### Benchmark results
+The above results were executed on a `c4a-standard-4` (4 vCPU, 16 GB memory) Axiom Arm64 VM in GCP running SuSE:
 
 | **Metric / Log** | **Output** |
 |-------------------|------------|
 | Compiled catalog | 0.01 seconds |
 | Environment | production |
 | Applied catalog | 0.01 seconds |
-| real | 0m1.175s |
-| user | 0m0.779s |
-| sys | 0m0.385s |
+| real | 0m1.054s |
+| user | 0m0.676s |
+| sys | 0m0.367s |
 
-### Puppet benchmarking comparison on Arm64 and x86_64
+### Puppet benchmarking summary
 
 - **Catalog compilation:** Completed in just **0.01 seconds**, showing excellent processing speed on **Arm64**.
 - **Environment:** Executed smoothly under the **production** environment.
-- **Configuration version:** Recorded as **1762160712**, confirming successful version tracking.
+- **Configuration version:** Recorded as **1763407825**, confirming successful version tracking.
 - **Catalog application:** Finished in **0.01 seconds**, demonstrating very low execution latency.
-- **Real time:** Total runtime of **1.175 seconds**, reflecting efficient end.
+- **Real time:** Total runtime of **1.054 seconds**, reflecting efficient end.

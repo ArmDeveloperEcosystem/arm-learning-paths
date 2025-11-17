@@ -12,9 +12,21 @@ This guide walks you through installing Puppet on a **Google Cloud Platform (GCP
 ### Install build dependencies and Ruby from source
 Installs all required tools and builds Ruby 3.1.4 from source to ensure compatibility with Puppet.
 
+First we install the prerequisites for ruby:
 ```console
-sudo zypper install -y gcc make openssl-devel libyaml-devel zlib-devel readline-devel gdbm-devel ncurses-devel
-cd /usr/local/src
+sudo zypper install git curl gcc make patch libyaml-devel libffi-devel libopenssl-devel readline-devel zlib-devel gdbm-devel bzip2 bzip2-devel
+```
+
+NOTE:
+```note
+Due to changing version dependencies, you may receive a message in the "zypper" 
+command above that ncurses-devel is not the correct version. If so, please select the 
+option that permits downgrading of the installed ncurses-devel package to the required 
+version (normally "Solution 1"), followed by confirmation with "y".
+```
+Then, we will install ruby itself:
+```console
+cd ~
 sudo wget https://cache.ruby-lang.org/pub/ruby/3.1/ruby-3.1.4.tar.gz
 sudo tar -xzf ruby-3.1.4.tar.gz
 cd ruby-3.1.4
@@ -43,8 +55,9 @@ Installs essential Puppet libraries (`semantic_puppet, facter, hiera`) needed fo
 - **hiera** – Key-value lookup tool that manages configuration data outside of Puppet manifests for flexible data separation.
 
 ```console
-wget https://github.com/puppetlabs/puppet/archive/refs/tags/8.10.0.tar.gz
-tar -xvf 8.10.0.tar.gz
+cd ~
+sudo wget https://github.com/puppetlabs/puppet/archive/refs/tags/8.10.0.tar.gz
+sudo tar -xvf 8.10.0.tar.gz
 cd ~/puppet-8.10.0
 sudo /usr/local/bin/gem install semantic_puppet -v "~> 1.0"
 sudo gem install facter -v "~> 4.0"
