@@ -34,11 +34,11 @@ First off, if you haven't already got Unity, we recommend following their steps 
 
 - Click on the recommended version. On the next screen we will add the Android module:
 
-![Recommended editor version#center](images/unity-install-lts.png "Figure 3. Install recommended LTS version") - [Update when 6.3 onwards becomes LTS]
+![Recommended editor version#center](images/install-6.2s.png "Figure 3. Install recommended LTS version") - [Update when 6.3 onwards becomes LTS]
 
 You should see a list of optional features to install with your editor. You can install Android build support now. In the list, click on "Android Build Support".
 
-![Install Android Build Support module#center](images/unity-install-modules.png "Figure 4. Add Android Build Support module") - [Update when 6.3 onwards becomes LTS]
+![Install Android Build Support module#center](images/install-android.png "Figure 4. Add Android Build Support module") - [Update when 6.3 onwards becomes LTS]
 
 You now have Unity and Android support. If you forgot to tick Android Build Support or you already had a version of Unity without it, follow the next section to download Android support separately.
 
@@ -48,7 +48,7 @@ Follow these steps if you already have a version of Unity and just need to add t
 
 - Click on the _Installs_ tab on the left to see your list of editor installations. Then click on the _cog_ button and select _Add Modules_:
 
-![Add Modules option#center](images/unity-add-modules-option.png "Figure 5. Select Add Modules on the editor for which you wish to add Android support") - [left alone due to 6.2 security isse ]
+![Add Modules option#center](images/6.2-add.png "Figure 5. Select Add Modules on the editor for which you wish to add Android support") 
 
 - You will be presented with the module list. Select _Android Build Support_ and any other modules you wish to install. Then click _Continue_.
 
@@ -60,6 +60,8 @@ Android Build Support installs and manages the Android SDK and Android NDK for y
 
 ![Android settings in preferences#center](images/unity-prefs-external-tools.png "Figure 6. Android settings in Preferences")
 
+_Note that this will be within a project not the hub_
+
 ## 3. Extract and open the Unity project
 
 We have provided a simple project to accompany this learning path. To open it in Unity, please follow these instructions:
@@ -69,7 +71,7 @@ We have provided a simple project to accompany this learning path. To open it in
 
 - In Unity Hub, from the _Projects_ tab, select _Add project from disk_ from the drop-down menu:
 
-![Add project from disk#center](images/unity-add-project-from-disk.png "Figure 7. Add the sample project to Unity Hub")
+![Add project from disk#center](images/Add-disk.png "Figure 7. Add the sample project to Unity Hub")
 
 - Navigate to your unzipped project directory and click "Add project"
 
