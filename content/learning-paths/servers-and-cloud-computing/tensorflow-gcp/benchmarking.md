@@ -27,7 +27,7 @@ pip install tensorflow==2.20.0 numpy
 ```
 
 ### Create a Python file named tf_cpu_benchmark.py:
-This step creates a Python script (`tf_cpu_benchmark.py`) using your favorite editor (showing "edit" as an example below) that will run TensorFlow model benchmarking tests:
+This step creates a Python script (`tf_cpu_benchmark.py`) using your text editor (showing "edit" as an example below) that will run TensorFlow model benchmarking tests:
 
 ```console
 edit tf_cpu_benchmark.py

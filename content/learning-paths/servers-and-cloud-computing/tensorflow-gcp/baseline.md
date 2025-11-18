@@ -51,7 +51,7 @@ You should see an output similar to:
 Computation time: 0.008263111114501953 seconds
 ```
 ### Test Neural Network Execution
-Create a new file for testing a simple neural network using your favorite editor ("edit" is shown as an example):
+Create a new file for testing a simple neural network using your text editor ("edit" is shown as an example):
 
 ```console
 edit test_nn.py
