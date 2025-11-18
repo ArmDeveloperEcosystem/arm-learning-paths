@@ -18,6 +18,12 @@ rustc --version
 cargo --version
 ```
 
+You should see an output similar to:
+```output
+rustc 1.91.0 (f8297e351 2025-10-28)
+cargo 1.91.0 (ea2d97820 2025-10-10)
+```
+
 ### Create a New Rust Project
 Create a new Rust project for benchmarking:
 
@@ -26,7 +32,7 @@ cargo new rust-benchmark
 cd rust-benchmark
 ```
 ### Add Criterion Benchmarking Dependency
-**Criterion** is the officially recommended benchmarking crate for Rust. Add it to your project by editing the `Cargo.toml` file located inside your project root directory (for example, rust-benchmark/Cargo.toml):
+**Criterion** is the officially recommended benchmarking crate for Rust. Add it to your project by editing the `Cargo.toml` file located inside your project root directory using your favorite editor (location example: rust-benchmark/Cargo.toml). Replace your "[dependencies]" tag within your file with this content, then save the file:
 
 ```toml
 [dependencies]
@@ -39,11 +45,11 @@ harness = false
 This enables Criterion for high-precision benchmarking.
 
 ### Create the Benchmark File
-Create a new benchmark file inside the `benches/` directory:
+Create a new benchmark file inside the `benches/` directory using your favorite editor ("edit" used in the example below):
 
 ```console
 mkdir benches
-vi benches/my_benchmark.rs
+edit benches/my_benchmark.rs
 ```
 Benchmark files in this directory are automatically detected by Cargo.
 
@@ -96,21 +102,12 @@ Found 1 outliers among 100 measurements (1.00%)
 - **Plotting Backend:** Used `plotters` since Gnuplot was not found.  
 - The results show **consistent performance** with only slight variation across 100 measurements.
 
-### Benchmark summary on x86_64
-To compare the benchmark results, the following results were collected by running the same benchmark on a `x86 - c4-standard-4` (4 vCPUs, 15 GB Memory) x86_64 VM in GCP, running SUSE:
-
-| **Benchmark**     | **Average Time (µs)** | **Min (µs)** | **Max (µs)** | **Outliers (%)** | **Remarks**                     |
-|--------------------|----------------------:|--------------:|--------------:|-----------------:|----------------------------------|
-| **fibonacci 20**   | 19.152               | 19.100        | 19.205        | 6.00%            | Minor outliers, stable overall.  |
-
-### Benchmark summary on Arm64
+### Benchmark summary
 Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
 
 | **Benchmark**     | **Average Time (µs)** | **Min (µs)** | **Max (µs)** | **Outliers (%)** | **Remarks**                     |
 |--------------------|----------------------:|--------------:|--------------:|-----------------:|----------------------------------|
 | **fibonacci 20**   | 12.028               | 12.026        | 12.030        | 1.00%            | Very stable performance, minimal variation. |
-
-### Rust benchmarking comparison on Arm64 and x86_64
 
 - The **Fibonacci (n=20)** benchmark demonstrated **consistent performance** with minimal deviation.  
 - **Average execution time** was around **12.028 µs**, indicating efficient CPU computation on **Arm64**.  
