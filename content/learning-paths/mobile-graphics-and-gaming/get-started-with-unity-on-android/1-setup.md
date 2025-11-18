@@ -26,19 +26,19 @@ First off, if you haven't already got Unity, we recommend following their steps 
 
 - Once logged in, if you don't already have any editor versions installed, Unity may recommend the latest Long-Term Support version.
 
-![Unity LTS suggested installation#center](images/unity-auto-suggested-install.png "Figure 1. Long Term Support version suggested by Unity Hub") - [Update when 6.3 onwards becomes LTS]
+![Unity LTS suggested installation#center](images/unity-auto-suggested-install.png "Figure 1. Long Term Support version suggested by Unity Hub") 
 
 - Go ahead and install the editor they suggest. If you don't see the above screen, you can always install a version of Unity manually. Click on the _Installs_ tab on the left to see the list of installed editors (which will likely be empty):
 
-![Empty installs windows#center](images/unity-no-installs.png "Figure 2. Unity Hub installation list (empty)")  - [Update when 6.3 onwards becomes LTS]
+![Empty installs windows#center](images/unity-no-installs.png "Figure 2. Unity Hub installation list (empty)") 
 
 - Click on the recommended version. On the next screen we will add the Android module:
 
-![Recommended editor version#center](images/install-6.2.png "Figure 3. Install recommended LTS version") - [Update when 6.3 onwards becomes LTS]
+![Recommended editor version#center](images/install-6.2.png "Figure 3. Install recommended LTS version")
 
 You should see a list of optional features to install with your editor. You can install Android build support now. In the list, click on "Android Build Support".
 
-![Install Android Build Support module#center](images/install-android.png "Figure 4. Add Android Build Support module") - [Update when 6.3 onwards becomes LTS]
+![Install Android Build Support module#center](images/install-android.png "Figure 4. Add Android Build Support module") 
 
 You now have Unity and Android support. If you forgot to tick Android Build Support or you already had a version of Unity without it, follow the next section to download Android support separately.
 
