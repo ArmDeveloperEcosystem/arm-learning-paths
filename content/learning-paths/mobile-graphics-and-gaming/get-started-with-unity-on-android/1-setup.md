@@ -48,7 +48,7 @@ Follow these steps if you already have a version of Unity and just need to add t
 
 - Click on the _Installs_ tab on the left to see your list of editor installations. Then click on the _cog_ button and select _Add Modules_:
 
-![Add Modules option#center](images/unity-add-modules-option.png "Figure 5. Select Add Modules on the editor for which you wish to add Android support")
+![Add Modules option#center](images/unity-add-modules-option.png "Figure 5. Select Add Modules on the editor for which you wish to add Android support") - [left alone due to 6.2 security isse ]
 
 - You will be presented with the module list. Select _Android Build Support_ and any other modules you wish to install. Then click _Continue_.
 
