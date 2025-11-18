@@ -9,9 +9,9 @@ layout: learningpathall
 ## Batch Sizing in vLLM
 
 vLLM uses dynamic continuous batching to maximize hardware utilization. Two key parameters govern this process:
-  * `max_model_len` — The maximum sequence length (number of tokens per request).
+  * `max_model_len`, which is the maximum sequence length (number of tokens per request).
 No single prompt or generated sequence can exceed this limit.
-  * `max_num_batched_tokens` — The total number of tokens processed in one batch across all requests.
+  * `max_num_batched_tokens`, which is the total number of tokens processed in one batch across all requests.
 The sum of input and output tokens from all concurrent requests must stay within this limit.
 
 Together, these parameters determine how much memory the model can use and how effectively CPU threads are saturated.
@@ -19,7 +19,7 @@ On Arm-based servers, tuning them helps achieve stable throughput while avoiding
 
 ## Serve an OpenAI‑compatible API
 
-Start vLLM’s OpenAI-compatible API server using the quantized INT4 model and environment variables optimized for performance.
+Start vLLM’s OpenAI-compatible API server using the quantized INT4 model and environment variables optimized for performance:
 
 ```bash
 export VLLM_TARGET_DEVICE=cpu
@@ -125,9 +125,9 @@ This validates multi‑request behavior and shows aggregate throughput in the se
 (APIServer pid=4474) INFO:     127.0.0.1:44120 - "POST /v1/chat/completions HTTP/1.1" 200 OK
 (APIServer pid=4474) INFO 11-10 01:01:06 [loggers.py:221] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 57.5 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
 ```
-## Optional: Serve a BF16 (Non-Quantized) Model
+## Serve a BF16 (non-quantized) model (optional)
 
-For a non-quantized path, vLLM on Arm can run BF16 end-to-end using its oneDNN integration (which routes to Arm-optimized kernels via ACL under aarch64).
+For a non-quantized path, vLLM on Arm can run BF16 end-to-end using its oneDNN integration (which routes to Arm-optimized kernels using ACL under aarch64).
 
 ```bash
 vllm serve deepseek-ai/DeepSeek-V2-Lite \
@@ -136,17 +136,18 @@ vllm serve deepseek-ai/DeepSeek-V2-Lite \
 ```
 Use this BF16 setup to establish a quality reference baseline, then compare throughput and latency against your INT4 deployment to quantify the performance/accuracy trade-offs on your Arm system.
 
-## Go Beyond: Power Up Your vLLM Workflow
+## Go beyond: power up your vLLM workflow
 Now that you’ve successfully quantized, served, and benchmarked a model using vLLM on Arm, you can build on what you’ve learned to push performance, scalability, and usability even further.
 
-**Try Different Models**
-Extend your workflow to other models on Hugging Face that are compatible with vLLM and can benefit from Arm acceleration:
-  * Meta Llama 2 / Llama 3 – Strong general-purpose baselines; excellent for comparing BF16 vs INT4 performance.
-  * Qwen / Qwen-Chat – High-quality multilingual and instruction-tuned models.
-  * Gemma (Google) – Compact and efficient architecture; ideal for edge or cost-optimized serving.
-    
-You can quantize and serve them using the same `quantize_vllm_models.py` recipe, just update the model name.
+## Try different models
+Explore other Hugging Face models that work well with vLLM and take advantage of Arm acceleration:
 
-**Connect a chat client:**  Link your server with OpenAI-compatible UIs like [Open WebUI](https://github.com/open-webui/open-webui)
+- Meta Llama 2 and Llama 3: these versatile models work well for general tasks, and you can try them to compare BF16 and INT4 performance
+- Qwen and Qwen-Chat: these models support multiple languages and are tuned for instructions, giving you high-quality results
+- Gemma (Google): this compact and efficient model is a good choice for edge devices or deployments where cost matters
 
-You can continue exploring how Arm’s efficiency, oneDNN+ACL acceleration, and vLLM’s dynamic batching combine to deliver fast, sustainable, and scalable AI inference on modern Arm architectures.
+You can quantize and serve any of these models using the same `quantize_vllm_models.py` script. Just update the model name in the script.
+
+You can also try connecting a chat client by linking your server with OpenAI-compatible user interfaces such as [Open WebUI](https://github.com/open-webui/open-webui).
+
+Continue exploring how Arm efficiency, oneDNN and ACL acceleration, and vLLM dynamic batching work together to provide fast, sustainable, and scalable AI inference on modern Arm architectures.
