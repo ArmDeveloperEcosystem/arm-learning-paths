@@ -17,6 +17,12 @@ rustc --version
 cargo --version
 ```
 
+You should see an output similar to:
+```output
+rustc 1.91.0 (f8297e351 2025-10-28)
+cargo 1.91.0 (ea2d97820 2025-10-10)
+```
+
 ### Create a Sample Rust Program
 Create and build a simple “Hello, World” application to ensure everything is functioning properly:
 
