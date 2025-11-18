@@ -1,30 +1,18 @@
 ---
-title: Rust Baseline Testing on Google Axion C4A Arm Virtual Machine
+title: Test Rust baseline performance on Google Axion C4A Arm virtual machines
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Rust Baseline Testing on GCP SUSE VMs
-This guide demonstrates how to perform baseline testing of Rust on GCP SUSE Arm64 VMs, verifying installation, build functionality, and compilation performance on the Arm-based Axion C4A platform.
+## Perform baseline testing
 
-### Verify Installation
-Check the Rust version and toolchain setup:
+You can perform baseline testing of Rust on GCP SUSE aarch64 VMs to verify installation, build functionality, and compilation performance on the Arm-based Axion C4A platform.
 
-```console
-rustc --version
-cargo --version
-```
+### Create a sample Rust program
 
-You should see an output similar to:
-```output
-rustc 1.91.0 (f8297e351 2025-10-28)
-cargo 1.91.0 (ea2d97820 2025-10-10)
-```
-
-### Create a Sample Rust Program
-Create and build a simple “Hello, World” application to ensure everything is functioning properly:
+Create and build a simple "Hello, World" application to verify that Rust is working correctly:
 
 ```console
 mkdir rust-baseline
@@ -33,13 +21,11 @@ cargo new hello
 cd hello
 cargo run
 ```
-- **`mkdir rust-baseline`** – Creates a new directory named `rust-baseline`.  
-- **`cd rust-baseline`** – Enters the `rust-baseline` directory.  
-- **`cargo new hello`** – Creates a new Rust project named `hello` with default files (`main.rs`, `Cargo.toml`).  
-- **`cd hello`** – Moves into the newly created `hello` project directory.  
-- **`cargo run`** – Compiles and runs the Rust program, printing **“Hello, world!”**, confirming that Rust and Cargo are properly set up.
 
-You should see an output similar to:
+This creates a new Rust project and runs it immediately. The `cargo new hello` command generates a default Rust project with the necessary files including `main.rs` and `Cargo.toml`.
+
+The output is similar to:
+
 ```output
    Compiling hello v0.1.0 (/home/gcpuser/rust-baseline/hello)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s
@@ -47,16 +33,21 @@ You should see an output similar to:
 Hello, world!
 ```
 
-### Measure Compilation Speed
-Use the time command to measure how long Rust takes to compile a small program:
+This confirms that Rust and Cargo are properly configured on your aarch64 VM.
+
+### Measure compilation performance
+
+Use the `time` command to measure compilation performance on the Arm64 processor:
 
 ```console
 cargo clean
 time cargo build
 ```
-This gives a rough idea of compilation performance on the Arm64 CPU.
 
-You should see an output similar to:
+The `cargo clean` command removes all build artifacts, ensuring you measure a complete compilation from scratch.
+
+The output is similar to:
+
 ```output
 Removed 21 files, 7.7MiB total
    Compiling hello v0.1.0 (/home/gcpuser/rust-baseline/hello)
@@ -66,4 +57,5 @@ real    0m0.186s
 user    0m0.118s
 sys     0m0.071s
 ```
-This confirms that Rust is working properly on your Arm64 VM.
+
+The timing results show that Rust compilation performs well on the Arm64 architecture, with the "real" time indicating the total elapsed time for the build process.
