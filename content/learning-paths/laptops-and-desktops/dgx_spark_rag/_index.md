@@ -1,5 +1,5 @@
 ---
-title: End-to-End RAG Pipeline on Grace–Blackwell (GB10)
+title: Build a RAG pipeline on NVIDIA DGX Spark
 
 draft: true
 cascade:
@@ -7,7 +7,7 @@ cascade:
 
 minutes_to_complete: 60
 
-who_is_this_for: This learning path is designed for developers and engineers who want to understand and implement a Retrieval-Augmented Generation (RAG) pipeline optimized for the Grace–Blackwell (GB10) platform. It is ideal for those interested in exploring how Arm-based Grace CPUs manage local document retrieval and orchestration, while Blackwell GPUs accelerate large language model inference through the open-source llama.cpp REST Server. By the end, learners will understand how to build an efficient hybrid CPU–GPU RAG system that leverages Unified Memory for seamless data sharing between computation layers.
+who_is_this_for: This is an advanced topic for developers who want to understand and implement a Retrieval-Augmented Generation (RAG) pipeline on the NVIDIA DGX Spark platform. It is ideal for those interested in exploring how Arm-based Grace CPUs manage local document retrieval and orchestration, while Blackwell GPUs accelerate large language model inference through the open-source llama.cpp REST server.
 
 learning_objectives:
     - Understand how a RAG system combines document retrieval and language model generation.  
@@ -16,23 +16,19 @@ learning_objectives:
     - Build a reproducible RAG application that demonstrates efficient hybrid computing.  
 
 prerequisites:
-    - One NVIDIA DGX Spark system with at least 15 GB of available disk space.
-    - Follow the previous [Learning Path](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/) to install both the CPU and GPU builds of llama.cpp.
+    - An NVIDIA DGX Spark system with at least 15 GB of available disk space.
 
 author: Odin Shen
 
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: ML
 armips:
-    - Cortex-X
     - Cortex-A
 operatingsystems:
     - Linux
 tools_software_languages:
     - Python
-    - C++
-    - Bash
     - llama.cpp
 
 further_reading:
@@ -41,11 +37,15 @@ further_reading:
         link: https://www.nvidia.com/en-gb/products/workstations/dgx-spark/
         type: website
     - resource:
+        title: EdgeXpert from MSI
+        link: https://ipc.msi.com/product_detail/Industrial-Computer-Box-PC/AI-Supercomputer/EdgeXpert-MS-C931
+        type: website
+    - resource:
         title: Nvidia DGX Spark Playbooks
         link: https://github.com/NVIDIA/dgx-spark-playbooks
         type: documentation
     - resource:
-        title: Arm Learning Path
+        title: Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark
         link: https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/
         type: Learning Path
 
