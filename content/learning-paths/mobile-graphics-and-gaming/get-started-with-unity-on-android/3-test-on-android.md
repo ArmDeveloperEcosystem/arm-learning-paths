@@ -14,7 +14,7 @@ We're going to build the sample for Android. To do so takes just a few steps and
 
 1. First off, we need to switch the project to _Android_.
 
-1. Select _File->Build Settings_ to show the Build Settings window:
+1. Select _File->Build Profile_ to show the Build Profile window:
 
     ![Build Settings window#center](images/build-settings.png "Figure 1. Build Settings window")
 
@@ -24,11 +24,7 @@ We're going to build the sample for Android. To do so takes just a few steps and
 
     ![Switch platform to Android#center](images/build-settings-switch-platform.png "Figure 2. Switch platform to Android")
 
-1. We must now tell Unity which scene to open when the app runs. This affects all platforms. Click on _Add Open Scenes_ to add the opened sample scene to the _Scenes in Build_ list. We will only need to do this once.
-
-![Scenes in Build#center](images/build-settings-scenes-in-build.png "Figure 3. Scenes in Build list")
-
-That's all we need to do to simply run the app. There are a couple more steps required to run the profiler but we'll cover those later.
+1. in the screenshot you can see that our sample scen is already preselected top be loaded. here is where you would go if you had a variety of scenes to load
 
 ## Prepare your Android device for development
 
