@@ -1,24 +1,25 @@
 ---
-title: Implementing the RAG Pipeline
-weight: 4
+title: Implementing the RAG pipeline
+weight: 5
 layout: "learningpathall"
 ---
 
-## Integrating Retrieval and Generation
+## Integrating retrieval and generation
 
-In the previous modules, you prepared the environment, validated the ***E5-base-v2*** embedding model, and verified that the ***Llama 3.1 8B*** Instruct model runs successfully on the ***Grace–Blackwell (GB10)*** platform.
+In the previous sections, you prepared the environment, validated the e5-base-v2 embedding model, and verified that the Llama 3.1 8B Instruct model runs successfully on the Grace–Blackwell (GB10) platform.
 
-In this module, you will bring all components together to build a complete ***Retrieval-Augmented Generation*** (RAG) workflow.
-This stage connects the ***CPU-based retrieval and indexing*** with ***GPU-accelerated language generation***, creating an end-to-end system capable of answering technical questions using real documentation data.
+In this section, you will bring all components together to build a complete Retrieval-Augmented Generation (RAG) workflow.
+
+This stage connects the CPU-based retrieval and indexing with GPU-accelerated language generation, creating an end-to-end system capable of answering technical questions using real documentation data.
 
 Building upon the previous modules, you will now:
-- Connect the **E5-base-v2** embedding model and FAISS vector index.
-- Integrate the **llama.cpp** REST server for GPU-accelerated inference.
-- Execute a complete **Retrieval-Augmented Generation** (RAG) workflow for end-to-end question answering.
+- Connect the e5-base-v2 embedding model and FAISS vector index.
+- Integrate the llama.cpp REST server for GPU-accelerated inference.
+- Execute a complete Retrieval-Augmented Generation (RAG) workflow for end-to-end question answering.
 
-### Step 1 – Start the llama.cpp REST Server
+### Start the llama.cpp REST server
 
-Before running the RAG query script, ensure the LLM server is active.
+Before running the RAG query script, ensure the LLM server is active by running:
 
 ```bash
 cd ~/llama.cpp/build-gpu/
@@ -29,23 +30,24 @@ cd ~/llama.cpp/build-gpu/
 ```
 
 Verify the server status from another terminal:
+
 ```bash
 curl http://127.0.0.1:8000/health
 ```
 
-Expected output:
-```
+The output is:
+
+```output
 {"status":"ok"}
 ```
 
+### Create the RAG query script
 
-### Step 2 – Create the RAG Query Script
+This script performs the full pipeline using the flow:
 
-This script performs the full pipeline:
+User Query ─> Embedding ─> Vector Search ─> Context ─> Generation ─> Answer
 
-***query*** → ***embedding*** → ***retrieval*** → ***context assembly*** → ***generation***
-
-Save as rag_query_rest.py under ~/rag/.
+Save the code below in a file named `rag_query_rest.py` in the `~/rag` directory.
 
 ```bash
 import os
@@ -100,9 +102,14 @@ if __name__ == "__main__":
     print(answer)
 ```
 
-### Step 3 – Execute the RAG Query Script
+Make sure you are in the Python virtual environment in each terminal. If needed, run:
 
-Then, run the python script to ask the question about ***How many CPU core inside the RaspberryPi 4?***
+```bash
+cd ~/rag
+source rag-venv/bin/activate
+```
+
+Run the python script to ask the question, "How many CPU core inside the RaspberryPi 4?".
 
 ```bash
 python rag_query_rest.py
@@ -110,7 +117,7 @@ python rag_query_rest.py
 
 You will receive an answer similar to the following.
 
-```
+```output
 Retrieved sources:
 1. cm4-datasheet.txt
 2. raspberry-pi-4-datasheet.txt
@@ -124,15 +131,20 @@ The Raspberry Pi 4 has 4 CPU cores.
 
 The retrieved context referenced three datasheets and produced the correct answer: "4".
 
-Next, let’s ask a more Raspberry Pi 4 hardware-specific question like: what's the default pull setting of GPIO12?`
+Try a different question.
 
-Comment out the first question line `answer = rag_query("How many CPU core inside the RaspberryPi 4?")`
-and uncomment the second one to test a more detailed query.
-`answer = rag_query("On the Raspberry Pi 4, which GPIOs have a default pull-down (pull low) configuration? Please specify the source and the section of the datasheet where this information can be found.")`
+Comment out the first question `answer = rag_query("How many CPU core inside the RaspberryPi 4?")`
+and uncomment the second question to test a more detailed query.
 
+Run the script again with the new question.
 
-Modify the answer = rag_query("On raspbeery pi 4, what's the default pull of GPIO12?")
+```bash
+python rag_query_rest.py
 ```
+
+The output is:
+
+```output
 Retrieved sources:
 1. cm3-plus-datasheet.txt
 2. raspberry-pi-4-datasheet.txt
@@ -147,11 +159,6 @@ Step 3:  Specifically, we are looking for the default pull state of GPIO12. We c
 Step 4:  The table shows that GPIO12 has a default pull state of Low.
 Step 5:  Therefore, the default pull of GPIO12 on a Raspberry Pi 4 is Low.
 
-The final answer is: $\boxed{Low}$
-```
-
-
-```
 Retrieved sources:
 1. raspberry-pi-4-datasheet.txt
 2. cm4-datasheet.txt
@@ -178,22 +185,31 @@ This demonstrates that the RAG system correctly retrieved relevant sources and g
 
 You can reference the section 5.1.2 on the PDF to verify the result.
 
-### Step 4 - CPU–GPU Utilization Observation
+### Observe CPU and GPU utilization
 
-Follow the previous (learning path) [https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/2_gb10_llamacpp_gpu/], you can also install `htop` and `nvtop` to observe CPU and GPU utilitization.
+If you have installed `htop` and `nvtop`, you can observe CPU and GPU utilization.
 
-![image1 CPU–GPU Utilization screenshot](rag_utilization.jpeg "CPU–GPU Utilization")
+If you do not have them, run:
 
-The figure above illustrates how the ***Grace CPU*** and ***Blackwell GPU*** collaborate during ***RAG** execution.
-On the left, the GPU utilization graph shows a clear spike reaching ***96%***, indicating that the llama.cpp inference engine is actively generating tokens on the GPU.
-Meanwhile, on the right, the htop panel shows multiple Python processes (rag_query_rest.py) running on a single Grace CPU core, maintaining around 93% per-core utilization.
+```bash
+sudo apt install -y nvtop htop
+```
+
+The screenshots below show `nvtop` on the left and `htop` on the right side.
+
+![image1 CPU–GPU Utilization screenshot](rag_utilization.jpeg)
+
+From the screenshots, you can see how the Grace CPU and the Blackwell GPU collaborate during RAG execution.
+
+On the left, the GPU utilization graph shows a clear spike reaching 96%, indicating that the llama.cpp inference engine is actively generating tokens on the GPU.
+
+Meanwhile, on the right, `htop` shows multiple Python processes running on the Grace CPU cores, maintaining around 93% per-core utilization.
 
 This demonstrates the hybrid execution model of the RAG pipeline:
 - The Grace CPU handles embedding computation, FAISS retrieval, and orchestration of REST API calls.
 - The Blackwell GPU performs heavy matrix multiplications for LLM token generation.
-- Both operate concurrently within the same Unified Memory space, eliminating data copy overhead between CPU and GPU.
+- Both operate concurrently within the same Unified Memory space, eliminating data copy overhead between the CPU and GPU.
 
-You have now connected all components of the RAG pipeline on the ***Grace–Blackwell*** (GB10) platform.
-The ***Grace CPU*** handled ***embedding*** and ***FAISS retrieval***, while the ***Blackwell GPU*** generated answers efficiently via llama.cpp REST Server.
+You have now connected the components of the RAG pipeline on the GB10 platform.
 
-With the RAG pipeline now complete, the next module will focus on Unified Memory behavior, you will observe Unified Memory behavior to understand how CPU and GPU share data seamlessly within the same memory space.
+With the RAG pipeline now complete, the next section focuses on unified memory. You will learn how the CPU and GPU share data seamlessly within the same memory space.
