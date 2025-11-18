@@ -24,7 +24,10 @@ We're going to build the sample for Android. To do so takes just a few steps and
 
    ![List of scenes#center](images/scene-list.png "Figure 2. Scene list")
 
-1. in the screenshot you can see that our sample scene is already preselected to be loaded. Here is where you would go if you had a variety of scenes to load and needed to pick a specific one to start with 
+1. In the screenshot, you can see that our SampleScene is already included in the build and preselected as the first scene to load.
+This list shows all the scenes that will be packaged into the final build.
+The top scene in the list is the one Unity will load first when the game starts.
+If your project contains multiple scenes, this is where you would select which ones to include and set your startup scene.
 
 ## Prepare your Android device for development
 
