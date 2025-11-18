@@ -34,7 +34,7 @@ First off, if you haven't already got Unity, we recommend following their steps 
 
 - Click on the recommended version. On the next screen we will add the Android module:
 
-![Recommended editor version#center](images/install-6.2s.png "Figure 3. Install recommended LTS version") - [Update when 6.3 onwards becomes LTS]
+![Recommended editor version#center](images/install-6.2.png "Figure 3. Install recommended LTS version") - [Update when 6.3 onwards becomes LTS]
 
 You should see a list of optional features to install with your editor. You can install Android build support now. In the list, click on "Android Build Support".
 
