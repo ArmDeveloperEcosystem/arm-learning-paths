@@ -1,5 +1,5 @@
 ---
-title: Benchmarking with Official Kafka Tools
+title: Benchmark with official Kafka tools
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -13,7 +13,7 @@ Apache Kafka includes official performance testing utilities that allow you to m
 ## Steps for Kafka Benchmarking 
 
 Before running the benchmarks, make sure your Kafka broker is already active in a separate terminal (as configured in the previous section).
-Now open two new terminal sessions — one for running the producer benchmark and another for the consumer benchmark.
+Now open two new terminal sessions; one for running the producer benchmark, and the other for the consumer benchmark.
 
 ### Terminal A - Producer Benchmark
 
@@ -107,9 +107,6 @@ The producer sustained a throughput of ~257,500 records/sec (~24.5 MB/sec) with 
 The 95th percentile latency (1168 ms) and 99th percentile (1220 ms) show predictable network and I/O performance.
 Kafka maintained consistent throughput, even under full-speed production, with no message loss or broker errors reported.
 
-### Benchmark Comparison Insights
-When analyzing performance on Azure Cobalt 100 Arm64 virtual machines:
-   **Producer efficiency**: The producer reached ~23–25 MB/sec throughput with average latencies below 900 ms, demonstrating stable delivery rates for high-volume workloads.
-   **Consumer scalability**: The consumer maintained ~262K messages/sec throughput with near-linear scaling of fetch performance — exceeding 1.85M messages/sec internally.
-   **Performance stability**: Both producer and consumer benchmarks showed low jitter and consistent latency distribution across iterations, confirming Kafka’s predictable behavior on Arm-based VMs.
+### Benchmark comparison insights
+When analyzing performance on Azure Cobalt 100 Arm64 virtual machines, you’ll notice that Kafka delivers stable and predictable results for both producers and consumers. The producer consistently achieves throughput between 23 MB/sec and 25 MB/sec, with average latencies below 900 ms. This means you can rely on efficient message delivery, even when handling high-volume workloads. On the consumer side, throughput remains strong at around 262,000 messages per second, and fetch performance scales nearly linearly, often exceeding 1.85 million messages per second internally. Throughout multiple benchmark runs, both producer and consumer tests demonstrate low jitter and consistent latency distribution, confirming that Kafka maintains reliable performance on Arm-based virtual machines.
 
