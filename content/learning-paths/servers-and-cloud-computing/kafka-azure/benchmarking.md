@@ -10,12 +10,12 @@ layout: learningpathall
 
 Apache Kafka includes official performance testing utilities that allow you to measure throughput, latency, and end-to-end efficiency of your messaging system. These tools`kafka-producer-perf-test.sh` and `kafka-consumer-perf-test.sh` are bundled with Kafka’s standard installation and are designed for realistic performance evaluation of producers and consumers.
 
-## Steps for Kafka Benchmarking 
+## Steps for Kafka benchmarking
 
 Before running the benchmarks, make sure your Kafka broker is already active in a separate terminal (as configured in the previous section).
 Now open two new terminal sessions; one for running the producer benchmark, and the other for the consumer benchmark.
 
-### Terminal A - Producer Benchmark
+### Terminal 1 - Producer Benchmark
 
 The Producer Performance Test measures how quickly Kafka can publish messages to a topic and reports key performance metrics such as throughput, average latency, and percentile latencies.
 
@@ -44,7 +44,7 @@ You should see output similar to:
 | **Max latency**                    | The longest single message send time recorded.                                                                  |
 | **50th / 95th / 99th percentiles** | Distribution of message send times. For example, 95% of messages completed under 1,184 ms in the sample output. |
 
-### Terminal B - Consumer benchmark
+### Terminal 2 - Consumer benchmark
 
 The Consumer Performance Test measures how efficiently Kafka can read and process messages from a topic. It reports metrics such as total messages consumed, data throughput, and fetch rates, helping validate overall consumer-side performance on your Azure Cobalt 100 (Arm64) VM.
 
