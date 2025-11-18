@@ -18,7 +18,7 @@ We're going to build the sample for Android. To do so takes just a few steps and
 
     ![Build Profiles window#center](images/build-profiles-android.png "Figure 1. Build Profiles window")
 
-1. In your project the platofrm labelled _Active_ will be your machine's operating systems (Windows, Mac or Linux) since we are developing an android app we must rebuild for android.
+1. In your project the platofrm labelled _Active_ will be your machine's operating systems (Windows, Mac or Linux). Since we are developing an android app we must rebuild for android.
 
 1. Select _Android_ on the left and then click on _Switch Platform_ at the bottom of the build profiles screen. This will take a few moments as it re-builds the assets for the Android mode (this step can take longer the first time it is done for any project).
 
