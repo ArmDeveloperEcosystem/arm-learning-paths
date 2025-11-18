@@ -17,6 +17,7 @@ We're going to build the sample for Android. To do so takes just a few steps and
 1. Select _File->Build Profile_ to show the Build Profile window:
 
     ![Build Settings window#center](images/build-settings.png "Figure 1. Build Settings window")
+[add in corrected photo for build profiles ]
 
 1. Notice how the project is currently in "Windows, Mac, Linux" mode. We need to switch to Android.
 
@@ -24,7 +25,7 @@ We're going to build the sample for Android. To do so takes just a few steps and
 
     ![Switch platform to Android#center](images/build-settings-switch-platform.png "Figure 2. Switch platform to Android")
 
-1. in the screenshot you can see that our sample scen is already preselected top be loaded. here is where you would go if you had a variety of scenes to load
+1. in the screenshot you can see that our sample scen is already preselected to be loaded. Here is where you would go if you had a variety of scenes to load and needed to pick a specific one
 
 ## Prepare your Android device for development
 
@@ -44,9 +45,9 @@ Connect your Android device to your computer using a USB cable. Unity may take a
 
 Android may ask for confirmation before enabling the connection.
 
-In the _Build Settings_ window:
+In the _Build Profile_ window:
 
-1. Ensure your device appears in the _Run Device_ menu and select it.
+1. Ensure your device appears in the _Run Device_ menu and select it, if the device doesn't appear make sure to press the "Refresh" button then your device should appear in the drop down menu
 
 1. Select _Build and Run_. Choose a location to save your build.
 
