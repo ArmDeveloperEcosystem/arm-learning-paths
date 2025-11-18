@@ -1,6 +1,10 @@
 ---
 title: How to Benchmark a Single KleidiAI Micro-kernel in ExecuTorch
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: This article is intended for advanced developers who want to leverage KleidiAI to accelerate ExecuTorch model inference on the AArch64 platform.
