@@ -16,7 +16,7 @@ We're going to build the sample for Android. To do so takes just a few steps and
 
 1. Select _File->Build Profile_ to show the Build Profile window:
 
-    ![Build Settings window#center](images/build-settings.png "Figure 1. Build Settings window")
+    ![Build Settings window#center](images/build profiles andorid.png "Figure 1. Build Profiles window")
 [add in corrected photo for build profiles ]
 
 1. Notice how the project is currently in "Windows, Mac, Linux" mode. We need to switch to Android.
