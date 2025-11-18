@@ -64,7 +64,8 @@ Android Build Support installs and manages the Android SDK and Android NDK for y
 
 We have provided a simple project to accompany this learning path. To open it in Unity, please follow these instructions:
 
-- Unzip the [simple profiling example](supporting-files/simple-profiling-example.zip) to your computer
+- Unzip the [simple profiling example](supporting-files/simple-profiling-example.zip) to your computer. 
+  Important to make sure you save this to your local disk and NOT a cloud storage like OneDrive as that may result in errors further down the road 
 
 - In Unity Hub, from the _Projects_ tab, select _Add project from disk_ from the drop-down menu:
 
