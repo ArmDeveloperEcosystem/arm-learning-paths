@@ -6,43 +6,56 @@ weight: 4
 layout: learningpathall
 ---
 
-## Rust Installation on GCP SUSE VM
-This guide explains how to install and configure Rust on a GCP SUSE Arm64 VM, ensuring the environment is ready for building and benchmarking Rust applications.
+## Install Rust
 
-### System Preparation
-Updates the system and installs essential build tools for compiling Rust programs.
+This section explains how to install and configure Rust on a GCP SUSE aarch64 VM, preparing your environment for building and benchmarking Rust applications.
+
+### Update your system
+
+Update the system and install essential build tools required for compiling Rust programs:
 
 ```console
 sudo zypper refresh
 sudo zypper update -y
 sudo zypper install -y curl gcc make
 ```
-### Install Rust Using rustup
-Rust provides an official installer script via `rustup`, which handles the setup automatically:
+
+This ensures your system has the latest packages and the necessary compilation tools.
+
+### Install Rust using rustup
+
+Rust provides an official installer script via `rustup` that handles the setup automatically:
 
 ```console
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
-When prompted, you can choose **option 1** (default installation).
 
-### Configure Rust Environment
-Activates Rust’s environment variables for the current shell session.
+When prompted, select option 1 for the default installation. This installs the latest stable version of Rust along with Cargo, Rust's package manager and build system.
+
+### Configure your environment
+
+Activate Rust's environment variables for your current shell session:
 
 ```console
 source $HOME/.cargo/env
 ```
 
-### Verify Rust Installation
-Confirms successful installation of Rust and Cargo by checking their versions.
+This command adds the Rust toolchain to your PATH, making the `rustc` compiler and `cargo` commands available.
+
+### Verify the installation
+
+Confirm that Rust and Cargo installed successfully by checking their versions:
 
 ```console
 rustc --version
 cargo --version
 ```
 
-You should see an output similar to:
+The output is similar to:
+
 ```output
 rustc 1.91.0 (f8297e351 2025-10-28)
 cargo 1.91.0 (ea2d97820 2025-10-10)
 ```
-Rust installation is complete. You can now go ahead with the baseline testing of Rust in the next section.
+
+Your Rust installation is now complete and ready for development on the aarch64 platform.

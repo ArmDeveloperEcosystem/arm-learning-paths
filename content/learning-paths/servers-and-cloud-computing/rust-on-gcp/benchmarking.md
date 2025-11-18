@@ -1,38 +1,27 @@
 ---
-title: Rust Benchmarking
+title: Benchmark Rust performance using Criterion
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Benchmark Rust performance
 
-## Rust Benchmarking by cargo bench
-This section demonstrates how to benchmark Rust performance using **official Rust benchmarking tools** — `cargo bench` and the **Criterion** library — to measure code execution speed, stability, and performance consistency on Arm64 hardware.
+This section demonstrates how to benchmark Rust performance using `cargo bench` and the Criterion library to measure code execution speed and performance consistency on aarch64 hardware.
 
-### Verify Rust and Cargo
-Ensure that Rust and Cargo are properly installed before running benchmarks
+### Create a benchmark project
 
-```console
-rustc --version
-cargo --version
-```
-
-You should see an output similar to:
-```output
-rustc 1.91.0 (f8297e351 2025-10-28)
-cargo 1.91.0 (ea2d97820 2025-10-10)
-```
-
-### Create a New Rust Project
-Create a new Rust project for benchmarking:
+Create a new Rust project specifically for benchmarking:
 
 ```console
 cargo new rust-benchmark
 cd rust-benchmark
 ```
-### Add Criterion Benchmarking Dependency
-**Criterion** is the officially recommended benchmarking crate for Rust. Add it to your project by editing the `Cargo.toml` file located inside your project root directory using your favorite editor (location example: rust-benchmark/Cargo.toml). Replace your "[dependencies]" tag within your file with this content, then save the file:
+
+### Configure Criterion as a dependency
+
+Criterion is the recommended benchmarking crate for Rust. Edit the `Cargo.toml` file in your project root directory and replace the existing content with:
 
 ```toml
 [dependencies]
@@ -42,20 +31,24 @@ criterion = "0.5"
 name = "my_benchmark"
 harness = false
 ```
-This enables Criterion for high-precision benchmarking.
 
-### Create the Benchmark File
-Create a new benchmark file inside the `benches/` directory using your favorite editor ("edit" used in the example below):
+This configuration enables Criterion for high-precision benchmarking and disables the default test harness.
+
+### Create the benchmark directory and file
+
+Create the benchmark structure that Cargo expects:
 
 ```console
 mkdir benches
+```
+
+Create a new benchmark file in the `benches/` directory:
+
+```console
 edit benches/my_benchmark.rs
 ```
-Benchmark files in this directory are automatically detected by Cargo.
 
-**Add the Benchmark Code**
-
-Paste the following benchmark code:
+Add the following benchmark code to measure Fibonacci number calculation performance:
 
 ```rust
 use criterion::{black_box, Criterion, criterion_group, criterion_main};
@@ -76,17 +69,21 @@ fn benchmark_fibonacci(c: &mut Criterion) {
 criterion_group!(benches, benchmark_fibonacci);
 criterion_main!(benches);
 ```
-This code measures how efficiently Rust computes the 20th Fibonacci number.
 
-### Run the Benchmark
-Now run the benchmark using Cargo:
+This code implements a recursive Fibonacci function and measures how efficiently Rust computes the 20th Fibonacci number. The `black_box` function prevents the compiler from optimizing away the benchmark.
+
+### Run the benchmark
+
+Execute the benchmark using Cargo:
 
 ```console
 cargo bench
 ```
-Cargo compiles your code in optimized mode and runs the Criterion benchmarks, showing execution time, performance deviation, and stability metrics for your Rust functions.
 
-You should see an output similar to:
+Cargo compiles your code with optimizations enabled and runs the Criterion benchmarks, providing detailed performance metrics.
+
+The output is similar to:
+
 ```output
 Running benches/my_benchmark.rs (target/release/deps/my_benchmark-f40a307ef9cad515)
 Gnuplot not found, using plotters backend
@@ -102,14 +99,22 @@ Found 1 outliers among 100 measurements (1.00%)
 - **Plotting Backend:** Used `plotters` since Gnuplot was not found.  
 - The results show **consistent performance** with only slight variation across 100 measurements.
 
-### Benchmark summary
-Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
+### Understand the results
 
-| **Benchmark**     | **Average Time (µs)** | **Min (µs)** | **Max (µs)** | **Outliers (%)** | **Remarks**                     |
-|--------------------|----------------------:|--------------:|--------------:|-----------------:|----------------------------------|
-| **fibonacci 20**   | 12.028               | 12.026        | 12.030        | 1.00%            | Very stable performance, minimal variation. |
+The benchmark output provides several key metrics:
 
-- The **Fibonacci (n=20)** benchmark demonstrated **consistent performance** with minimal deviation.  
-- **Average execution time** was around **12.028 µs**, indicating efficient CPU computation on **Arm64**.  
-- Only **1% outliers** were detected, showing **high stability** and **repeatability** of results.  
-- Overall, the test confirms **Rust’s reliable execution speed** and **low variance** on the Arm64 platform.
+- **Average time**: Mean execution time across benchmark runs
+- **Outliers**: Runs significantly slower or faster than average  
+- **Plotting backend**: Uses plotters since Gnuplot wasn't found
+
+The results show consistent performance with only slight variation across 100 measurements.
+
+### Performance summary
+
+The following table shows results from running the benchmark on a `c4a-standard-4` (4 vCPU, 16 GB memory) aarch64 VM in GCP using SUSE:
+
+| Benchmark     | Average Time (µs) | Min (µs) | Max (µs) | Outliers (%) | Remarks |
+|---------------|------------------:|---------:|---------:|-------------:|---------|
+| fibonacci 20  | 12.028           | 12.026   | 12.030   | 1.00%        | Stable performance with minimal variation |
+
+The Fibonacci benchmark demonstrates consistent performance on the aarch64 platform. The average execution time of 12.028 µs indicates efficient CPU computation, while only 1% of measurements were outliers. This low variance confirms Rust's reliable execution speed and performance stability on aarch64 architecture.
