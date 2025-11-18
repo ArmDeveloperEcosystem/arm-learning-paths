@@ -13,24 +13,24 @@ This guide benchmarks multiple TensorFlow models (ResNet50, MobileNetV2, and Inc
 `tf.keras` is **TensorFlow’s high-level API** for building, training, and benchmarking deep learning models. It provides access to **predefined architectures** such as **ResNet**, **MobileNet**, and **Inception**, making it easy to evaluate model performance on different hardware setups like **CPU**, **GPU**, or **TPU**.
 
 ### Activate your TensorFlow virtual environment
-This step enables your isolated Python environment (`tf-venv`) where TensorFlow is installed. It ensures that all TensorFlow-related packages and dependencies run in a clean, controlled setup without affecting system-wide Python installations.
+This step enables your isolated Python environment (`tf-venv`) where TensorFlow is installed. It ensures that all TensorFlow-related packages and dependencies run in a clean, controlled setup without affecting system-wide Python installations:
 
 ```console
 source ~/tf-venv/bin/activate
 python -c "import tensorflow as tf; print(tf.__version__)"
 ```
-### Install required packages
-Here, you install TensorFlow 2.20.0 and NumPy, the core libraries needed for model creation, computation, and benchmarking. NumPy supports efficient numerical operations, while TensorFlow handles deep learning workloads.
+### Install required packages for the benchmark
+Here, you install TensorFlow 2.20.0 and NumPy, the core libraries needed for model creation, computation, and benchmarking. NumPy supports efficient numerical operations, while TensorFlow handles deep learning workloads (these packages are likely already installed FYI):
 
 ```console
 pip install tensorflow==2.20.0 numpy
 ```
 
 ### Create a Python file named tf_cpu_benchmark.py:
-This step creates a Python script (`tf_cpu_benchmark.py`) that will run TensorFlow model benchmarking tests.
+This step creates a Python script (`tf_cpu_benchmark.py`) using your favorite editor (showing "edit" as an example below) that will run TensorFlow model benchmarking tests:
 
 ```console
-vi tf_cpu_benchmark.py
+edit tf_cpu_benchmark.py
 ```
 
 Paste the following code:
@@ -104,16 +104,7 @@ InceptionV3 throughput: 35.67 images/sec
 - **Throughput (images/sec):** Indicates how many images the model can process per second. Higher throughput means better overall efficiency.
 - **Model Type:** Refers to the neural network architecture used for testing (e.g., ResNet50, MobileNetV2, InceptionV3). Each model has different computational complexity.
 
-### Benchmark summary on x86_64
-To compare the benchmark results, the following results were collected by running the same benchmark on a `x86 - c4-standard-4` (4 vCPUs, 15 GB Memory) x86_64 VM in GCP, running SUSE:
-
-| **Model**       | **Average Inference Time per Batch (seconds)** | **Throughput (images/sec)** |
-|------------------|-----------------------------------------------:|-----------------------------:|
-| **ResNet50**     | 1.3690                                         | 23.37                        |
-| **MobileNetV2**  | 0.4274                                         | 74.87                        |
-| **InceptionV3**  | 0.8799                                         | 36.37                        |
-
-### Benchmark summary on Arm64
+### Benchmark summary
 Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
 
 | **Model**       | **Average Inference Time per Batch (seconds)** | **Throughput (images/sec)** |
@@ -122,10 +113,8 @@ Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm6
 | **MobileNetV2**  | 0.2909                                         | 110.02                       |
 | **InceptionV3**  | 0.8971                                         | 35.67                        |
 
-### TensorFlow benchmarking comparison on Arm64 and x86_64
-
 - **Arm64 VMs show strong performance** for lightweight CNNs like **MobileNetV2**, achieving over **110 images/sec**, indicating excellent optimization for CPU-based inference. 
 - **Medium-depth models** like **InceptionV3** maintain a **balanced trade-off between accuracy and latency**, confirming consistent multi-core utilization on Arm.  
 - **Heavier architectures** such as **ResNet50** show expected longer inference times but still deliver **stable throughput**, reflecting good floating-point efficiency.  
-- Compared to **x86_64**, **Arm64 provides energy-efficient yet competitive performance**, particularly for **mobile, quantized, or edge AI workloads**.  
+- **Arm64 provides energy-efficient yet competitive performance**, particularly for **mobile, quantized, or edge AI workloads**.  
 - **Overall**, Arm64 demonstrates that **TensorFlow workloads can run efficiently on cloud-native ARM processors**, making them a **cost-effective and power-efficient alternative** for AI inference and model prototyping.
