@@ -16,16 +16,15 @@ We're going to build the sample for Android. To do so takes just a few steps and
 
 1. Select _File->Build Profile_ to show the Build Profile window:
 
-    ![Build Profiles window#center](images/build-profiles-andorid.png "Figure 1. Build Profiles window")
+    ![Build Profiles window#center](images/build-profiles-android.png "Figure 1. Build Profiles window")
 
+1. In your project the platofrm labelled _Active_ will be your machine's operating systems (Windows, Mac or Linux) since we are developing an android app we must rebuild for android.
 
-1. In your project the platofrm labelled _Active_ will be your machine's operating systems (Windows, Mac or Linux) since we .
+1. Select _Android_ on the left and then click on _Switch Platform_ at the bottom of the build profiles screen. This will take a few moments as it re-builds the assets for the Android mode (this step can take longer the first time it is done for any project).
 
-1. Select _Android_ on the left and then click on _Switch Platform_. This will take a few moments as it re-builds the assets for the Android mode (this step can take longer the first time it is done for any project).
+   ![List of scenes#center](images/scene-list.png "Figure 2. Scene list")
 
-    ![Switch platform to Android#center](images/build-settings-switch-platform.png "Figure 2. Switch platform to Android")
-
-1. in the screenshot you can see that our sample scene is already preselected to be loaded. Here is where you would go if you had a variety of scenes to load and needed to pick a specific one
+1. in the screenshot you can see that our sample scene is already preselected to be loaded. Here is where you would go if you had a variety of scenes to load and needed to pick a specific one to start with 
 
 ## Prepare your Android device for development
 
