@@ -31,10 +31,9 @@ Create a directory and a simple manifest file:
 cd ~
 mkdir -p ~/puppet-benchmark
 cd ~/puppet-benchmark
-vi benchmark.pp
 ```
 
-Add the following content to the `benchmark.pp`:
+Use an editor to create the following content in a file named `benchmark.pp`:
 
 ```puppet
 notify { 'Benchmark Test':

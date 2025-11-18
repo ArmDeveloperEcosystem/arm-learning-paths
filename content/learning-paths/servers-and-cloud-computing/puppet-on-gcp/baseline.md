@@ -6,47 +6,62 @@ weight: 5
 layout: learningpathall
 ---
 
-## Puppet Baseline Testing on GCP SUSE VMs
-In this guide, you will perform baseline testing of Puppet on a GCP SUSE Arm64 VM to verify that the installation works correctly. You will check Puppet and Facter versions, run basic Puppet commands, apply a simple manifest, and confirm that system facts are collected accurately.
+## Puppet baseline testing on GCP SUSE VMs
 
-### Verify Puppet Installation
-Verify that Puppet and Facter are correctly installed and respond to version checks:
+You can perform baseline testing of Puppet on a GCP SUSE Arm64 VM to verify that the installation works correctly. You will check Puppet and Facter versions, run basic Puppet commands, apply a simple manifest, and confirm that system facts are collected accurately.
 
-Version Check:
+### Verify the Puppet installation
+
+Verify that Puppet and Facter are correctly installed and respond to version checks.
+
+Check the Puppet version:
+
 ```console
 puppet --version
 ```
-Output:
+
+The output shows the installed version:
+
 ```output
 8.10.0
 ```
-Version Check:
+
+Check the Facter version:
 ```console
 facter --version
 ```
-Output:
+
+The output shows the Facter version:
+
 ```output
 4.10.0
 ```
-Version Check:
+
+Check the Ruby version, which is a dependency for Puppet:
+
 ```console
 ruby -v
 ```
-Output:
+
+The output confirms the Ruby version and architecture:
+
 ```output
 ruby 3.1.4p223 (2023-03-30 revision 957bb7cb81) [aarch64-linux]
 ```
 
-### Run a Simple Puppet Command
-Check that Puppet responds to commands by running puppet help. If the help menu appears, Puppet is working correctly.
+### Run a simple Puppet command
+
+Check that Puppet responds to commands by running `puppet help`. If the help menu appears, Puppet is working correctly.
+
+Run the `puppet help` command:
 
 ```console
 puppet help
 ```
 
-Output:
+The output displays the help menu, confirming Puppet is operational:
 
-```console
+```output
 Usage: puppet <subcommand> [options] <action> [options]
 
 Available subcommands:
@@ -82,7 +97,8 @@ Puppet v8.10.0
 ```
 
 ### Test a Simple Puppet Manifest
-Create and run a basic Puppet script to make sure Puppet can apply configurations. If it successfully creates the test file, your Puppet agent functions as expected.
+
+Create a basic Puppet script to make sure Puppet can apply configurations. If it successfully creates the test file, your Puppet agent functions as expected.
 
 ```bash
 cd ~
@@ -93,18 +109,20 @@ file { '/tmp/puppet_test.txt':
 }
 EOF
 ```
+
+Run the script:
+
 ```console
 puppet apply test.pp
 ```
 
 You should see an output similar to:
+
 ```output
 Notice: Compiled catalog for danson-puppet-2.c.arm-deveco-stedvsl-prd.internal in environment production in 0.01 seconds
 Notice: /Stage[main]/Main/File[/tmp/puppet_test.txt]/ensure: defined content as '{sha256}bcf972b61979afe69626549b3f3f30798aeb50b359e76603a36e96b2abbe73c0'
 Notice: Applied catalog in 0.01 seconds
 ```
-
-**Then verify:**
 
 Open the file created by Puppet to confirm the content matches your script. This step validates that Puppet executed your manifest correctly.
 
@@ -117,14 +135,15 @@ Output:
 Hello from Puppet on SUSE ARM64!
 ```
 
-### Check Facter Integration
-Run `facter` commands to verify that it collects accurate system details like OS and CPU type. This ensures Puppet can gather the facts it needs for automation decisions.
+### Check Facter integration
 
-OS Check:
+Run `facter` commands to verify that it collects accurate system details, such as the OS and CPU type. This ensures Puppet can gather the facts it needs for automation decisions.
+
+Check the OS:
 ```console
 facter os
 ```
-Output:
+The output is similar to the following:
 ```output
 {
   architecture => "aarch64",
@@ -151,19 +170,27 @@ Output:
   }
 }
 ```
-Architecture Check:
+
+Check the architecture:
+
 ```console
 facter architecture
 ```
-Output:
+
+The output is:
+
 ```output
 aarch64
 ```
-Processors Check:
+
+Check the processors:
+
 ```console
 facter processors
 ```
-Output:
+
+The output is similar to the following:
+
 ```output
 {
   cores => 4,
@@ -179,4 +206,5 @@ Output:
   threads => 1
 }
 ```
-With these checks complete, proceed to the Puppet benchmarking section to run workload‑focused tests on the GCP SUSE VMs.
+
+With these checks complete, proceed to the Puppet benchmarking section to run workload-focused tests on the GCP SUSE VMs.
