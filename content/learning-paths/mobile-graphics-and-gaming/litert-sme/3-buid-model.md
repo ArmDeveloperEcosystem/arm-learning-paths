@@ -9,7 +9,7 @@ layout: learningpathall
 ### KleidiAI SME2 support in LiteRT
 
 Only a subset of KleidiAI SME, SME2 micro-kernels has been integrated into XNNPACK.
-These micro-kernels support operators using the following data types and quantization configurations in the LiteRT model. 以下列出的每个operator，kleidiai都会有对应的micro-kernels
+These micro-kernels support operators using the following data types and quantization configurations in the LiteRT model.
 Other operators are using XNNPACK’s default implementation during the inference.
 
 * Fully connected 
