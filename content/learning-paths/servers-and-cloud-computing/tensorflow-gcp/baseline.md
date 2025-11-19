@@ -16,6 +16,12 @@ This command checks if TensorFlow is installed correctly and prints its version 
 ```console
 python -c "import tensorflow as tf; print(tf.__version__)"
 ```
+
+You should see an output similar to:
+```output
+2.20.0
+```
+
 ### List Available Devices
 This command shows which hardware devices TensorFlow can use — like CPU or GPU. On most VMs, you’ll see only CPU listed.
 
@@ -45,18 +51,17 @@ You should see an output similar to:
 Computation time: 0.008263111114501953 seconds
 ```
 ### Test Neural Network Execution
-Create a new file for testing a simple neural network:
+Create a new file for testing a simple neural network using your text editor ("edit" is shown as an example):
 
 ```console
-vi test_nn.py
+edit test_nn.py
 ```
 This opens a new Python file where you’ll write a short TensorFlow test program.
 Paste the code below into the `test_nn.py` file:
 
 ```python
-import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
+import keras
+from keras import layers
 import numpy as np
 
 # Dummy data
@@ -64,10 +69,10 @@ x = np.random.rand(1000, 20)
 y = np.random.rand(1000, 1)
 
 # Define the model
-model = Sequential([
-    Dense(64, activation='relu', input_shape=(20,)),
-    Dense(1)
-])
+model = keras.Sequential()
+model.add(keras.Input(shape=(20,)))
+model.add(layers.Dense(64,activation="relu"))
+model.add(layers.Dense(1))
 
 # Compile the model
 model.compile(optimizer='adam', loss='mse')

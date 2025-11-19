@@ -10,12 +10,11 @@ layout: learningpathall
 TensorFlow is a widely used **open-source machine learning library** developed by Google, designed for building and deploying ML models efficiently. On Arm64 SUSE VMs, TensorFlow can run on CPU natively, or on GPU if available.
 
 ### System Preparation
-Update the system and install Python3 and pip:
+Update the system and install Python3 and pip3 to a compatible version with tensorflow (please enter "y" when prompted to confirm the install):
 
 ```console
 sudo zypper refresh
-sudo zypper update -y
-sudo zypper install -y python3 python3-pip python3-venv
+sudo zypper install python311 python311-pip python311-venv
 ```
 This ensures your system is up-to-date and installs Python with the essential tools required for TensorFlow setup.
 
@@ -24,15 +23,22 @@ This ensures your system is up-to-date and installs Python with the essential to
 Confirm that Python and pip are correctly installed and identify their versions to ensure compatibility with TensorFlow requirements.
 
 ```console
-python3 --version
+python3.11 --version
 pip3 --version
+```
+
+Your particular versions may vary a bit but typically your version output should resemble:
+
+```output
+Python 3.11.10
+pip 22.3.1 from /usr/lib/python3.11/site-packages/pip (python 3.11)
 ```
 
 ### Create a Virtual Environment (Recommended)
 Set up an isolated Python environment (`tf-venv`) so that TensorFlow and its dependencies don’t interfere with system-wide packages or other projects.
 
 ```console
-python3 -m venv tf-venv
+python3.11 -m venv tf-venv
 source tf-venv/bin/activate
 ```
 Create and activate an isolated Python environment to keep TensorFlow dependencies separate from system packages.
@@ -41,14 +47,14 @@ Create and activate an isolated Python environment to keep TensorFlow dependenci
 Upgrade pip to the latest version for smooth and reliable package installation.
 
 ```console
-pip install --upgrade pip
+pip3 install --upgrade pip
 ```
 
 ### Install TensorFlow
 Install the latest stable TensorFlow version for Arm64:
 
 ```console
-pip install tensorflow==2.20.0
+pip3 install tensorflow==2.20.0
 ```
 
 {{% notice Note %}}
