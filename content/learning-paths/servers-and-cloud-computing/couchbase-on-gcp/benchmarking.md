@@ -1,13 +1,13 @@
 ---
 title: Couchbase Benchmarking
-weight: 6
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
 
-##  Puppet Benchmark on GCP SUSE Arm64 VM
+##  Couchbase Benchmark on GCP SUSE Arm64 VM
 This section guides you through benchmarking Couchbase performance on a GCP SUSE Arm64 VM using the **official `cbc-pillowfight` tool** from Couchbase C SDK.  
 It involves installing dependencies, building the SDK, verifying the setup, and running the benchmark test.
 
@@ -15,7 +15,7 @@ It involves installing dependencies, building the SDK, verifying the setup, and 
 Before compiling the Couchbase SDK, install all required development tools and libraries.  
 
 ```console
-sudo zypper install -y gcc gcc-c++ cmake make git openssl-devel libevent-devel cyrus-sasl-devel
+sudo zypper install -y gcc gcc-c++ cmake make git openssl-devel libevent-devel cyrus-sasl-devel java
 ```
 
 ### Download and Build the Couchbase C SDK (includes cbc-pillowfight)
@@ -60,7 +60,7 @@ After installation, the tools like **cbc**, **cbc-pillowfight**, etc. should be 
 cbc version
 cbc-pillowfight --help
 ```
-You should see an output similar to:
+For the "cbc version" command, you should see an output similar to:
 ```output
 cbc:
   Runtime: Version=3.3.18, Changeset=a8e17873d167ec75338a358e54cec3994612d260
@@ -79,18 +79,19 @@ cbc:
   CXX: GNU 7.5.0;  -fno-strict-aliasing -ggdb3 -pthread
 ```
 
+For the "cbc-pillowfight --help" command, you should see the "help" menu displayed for cbc-pillowfight.
+
 ### Run Benchmark using cbc-pillowfight
-Once Couchbase Server is running and a bucket (e.g., `benchmark`) is created, you can run a workload test using the following command:
+Once Couchbase Server is running and a bucket (e.g., `benchmark`) is created, you can run a workload test using the following command (use your Couchbase administrators password):
 
 ```console
 cbc-pillowfight -U couchbase://127.0.0.1/benchmark \
--u Administrator -P password \
--I 10000 -B 1000 -t 5 -c 500
+-u Administrator -P password -I 10000 -B 1000 -t 5 -c 500
 ```
 
 - **-U couchbase://127.0.0.1/benchmark**: Connection string to Couchbase bucket
-- **-u Administrator**:	Couchbase username
-- **-P password**: Couchbase password
+- **-u Administrator**:	Couchbase admin username (default: "Administrator")
+- **-P password**: Couchbase Administrator's password
 - **-I 10000**:	Number of items (documents) to use
 - **-B 1000**: Batch size for operations
 - **-t 5**:	Number of concurrent threads
@@ -114,7 +115,7 @@ http://<your-vm-ip>:8091
 ```
 
 **Navigate to**:
-**Dashboard → Buckets → benchmark → Metrics tab**
+**Dashboard → Buckets → benchmark**
 
 Monitor real-time performance metrics such as:
 - **Ops/sec** — should match your CLI output
@@ -124,21 +125,12 @@ Monitor real-time performance metrics such as:
 
 ![Couchbase Dashboard alt-text#center](images/arm-benchmark.png "Monitor Benchmark Log")
 
-### Benchmark summary on x86_64
-To compare the benchmark results, the following results were collected by running the same benchmark on a `x86 - c4-standard-4` (4 vCPUs, 15 GB Memory) x86_64 VM in GCP, running SUSE:
-
-| **Name**     | **Items** | **Resident** | **Ops/sec** | **RAM Used / Quota** | **Disk Used** |
-|---------------|------------|---------------|---------------|-----------------------|---------------|
-| benchmark     | 10,000     | 100%          | 219,961.9     | 36.9 MiB / 1 GiB      | 25.3 MiB      |
-
-### Benchmark summary on Arm64
+### Benchmark summary
 Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
 
 | **Name**     | **Items** | **Resident** | **Ops/sec** | **RAM Used / Quota** | **Disk Used** |
 |---------------|------------|---------------|---------------|-----------------------|---------------|
 | benchmark     | 10,000     | 100%          | 227,981.1     | 36.8 MiB / 1 GiB      | 26.7 MiB      |
-
-### Couchbase benchmarking comparison on Arm64 and x86_64
 
 - **Operations per Second:** 227,981.1 ops/sec — indicates high throughput
 - **Resident Ratio:** 100% — all data served directly from memory
