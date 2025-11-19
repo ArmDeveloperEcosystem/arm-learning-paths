@@ -1,63 +1,53 @@
 ---
-title: TensorFlow Baseline Testing on Google Axion C4A Arm Virtual Machine
+title: Test TensorFlow baseline performance on Google Axion C4A Arm virtual machines
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## TensorFlow Baseline Testing on GCP SUSE VMs
-This section helps you check if TensorFlow is properly installed and working on your **Google Axion C4A Arm64 VM**. You will run small tests to confirm that your CPU can perform TensorFlow operations correctly.
+## Perform baseline testing
 
+This section helps you verify that TensorFlow is properly installed and working on your Google Axion C4A VM. You'll run tests to confirm that your CPU can perform TensorFlow operations correctly.
 
-### Verify Installation
-This command checks if TensorFlow is installed correctly and prints its version number.
+### Check available devices
 
-```console
-python -c "import tensorflow as tf; print(tf.__version__)"
-```
-
-You should see an output similar to:
-```output
-2.20.0
-```
-
-### List Available Devices
-This command shows which hardware devices TensorFlow can use — like CPU or GPU. On most VMs, you’ll see only CPU listed.
+This command shows which hardware devices TensorFlow can use, such as CPU or GPU. On most VMs, you'll see only CPU listed:
 
 ```console
 python -c "import tensorflow as tf; print(tf.config.list_physical_devices())"
 ```
 
-You should see an output similar to:
+The output is similar to:
+
 ```output
 [PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU')]
 ```
 
-### Run a Simple Computation
-This test multiplies two large matrices to check that TensorFlow computations work correctly on your CPU and measures how long it takes.
+### Run a computation test
 
-```python
+This test multiplies two large matrices to verify that TensorFlow computations work correctly on your CPU and measures execution time:
+
+```console
 python -c "import tensorflow as tf; import time; 
 a = tf.random.uniform((1000,1000)); b = tf.random.uniform((1000,1000));
 start = time.time(); c = tf.matmul(a,b); end = time.time(); 
 print('Computation time:', end - start, 'seconds')"
 ```
-- This checks **CPU speed** and the correctness of basic operations.
-- Note the **computation time** as your baseline.
 
-You should see an output similar to:
+This checks CPU performance for basic operations and provides a baseline measurement.
+
+The output is similar to:
+
 ```output
 Computation time: 0.008263111114501953 seconds
 ```
-### Test Neural Network Execution
-Create a new file for testing a simple neural network using your text editor ("edit" is shown as an example):
 
-```console
-edit test_nn.py
-```
-This opens a new Python file where you’ll write a short TensorFlow test program.
-Paste the code below into the `test_nn.py` file:
+### Test neural network execution
+
+Use a text editor to create a new file named `test_nn.py` for testing a simple neural network.
+
+Add the following code to create and train a basic neural network using random data:
 
 ```python
 import keras
@@ -80,21 +70,21 @@ model.compile(optimizer='adam', loss='mse')
 # Train for 1 epoch
 model.fit(x, y, epochs=1, batch_size=32)
 ```
-This script creates and trains a simple neural network using random data — just to make sure TensorFlow’s deep learning functions work properly.
 
-**Run the Script**
+This script creates a simple neural network to verify that TensorFlow's deep learning functions work properly on the Arm platform.
 
-Execute the script with Python:
+### Run the neural network test
+
+Execute the script:
 
 ```console
 python test_nn.py
 ```
 
-**Output**
+TensorFlow displays training progress similar to:
 
-TensorFlow will print training progress, like:
 ```output
 32/32 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 0.1024
 ```
 
-This confirms that TensorFlow is working properly on your Arm64 VM.
+This confirms that TensorFlow is working correctly on your Arm VM and can perform both basic computations and neural network training.
