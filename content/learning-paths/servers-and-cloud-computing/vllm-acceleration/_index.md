@@ -34,6 +34,7 @@ tools_software_languages:
     - Generative AI
     - Python
     - PyTorch
+    - Hugging Face
     
 further_reading:
     - resource:

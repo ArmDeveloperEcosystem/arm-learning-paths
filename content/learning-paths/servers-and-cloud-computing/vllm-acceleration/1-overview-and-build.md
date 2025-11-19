@@ -1,5 +1,5 @@
 ---
-title: Build and validate vLLM for Arm64 inference on Azure Cobalt 100
+title: Build and validate vLLM for inference on Azure Cobalt 100
 weight: 2
 
 ### FIXED, DO NOT MODIFY
