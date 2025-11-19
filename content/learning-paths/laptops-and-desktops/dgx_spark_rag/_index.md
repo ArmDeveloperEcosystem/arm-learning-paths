@@ -29,7 +29,8 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Python
-    - llama.cpp
+    - llama.cpp 
+    - Hugging Face
 
 further_reading:
     - resource:
