@@ -31,7 +31,7 @@ Recommended:
 &nbsp;  
 &nbsp;  
 
-## Keep It Short and Simple
+## Keep It Short and Simple (KISS Principle)
 
 Use short words, sentences, paragraphs and sections. Avoid a long or complex word when a simpler, shorter word will make the same point. Conditional words are ambiguous. For example, instead of “could”, “would”, “should”, and “may”, use “can”, “will”, and “might”.
 
