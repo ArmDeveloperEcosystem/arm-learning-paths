@@ -163,6 +163,16 @@ When exporting models, the generate_etrecord option is enabled to produce the .e
 These ETRecord files are essential for subsequent model analysis and performance evaluation.
 {{%/notice%}}
 
+
+### Run the Complete Benchmark Model Script
+Instead of manually executing each code block explained above, you can download and run the full example script that builds and exports the conv2D benchmark models.
+This script automatically performs quantization, partitioning, lowering, and export to ExecuTorch format.
+
+```bash
+wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/refs/heads/main/content/learning-paths/mobile-graphics-and-gaming/measure-kleidiai-kernel-performance-on-executorch/export-conv2d-model.py
+chmod +x export-conv2d-model.py
+python3 ./export-conv2d-model.py
+```
 ### Validate Outputs
 
 After running this script, both the PTE model file and the etrecord file are generated.
