@@ -13,7 +13,6 @@ Before building ExecuTorch, it is highly recommended to create an isolated Pytho
 This prevents dependency conflicts with your system Python installation and ensures a clean build environment.
 
 ```bash 
-cd $HOME
 sudo apt update
 sudo apt install -y python3 python3-venv
 python3 -m venv pyenv
@@ -26,7 +25,8 @@ All subsequent steps should be executed within this Python virtual environment.
 
 Clone the ExecuTorch repository from GitHub. The following command checks out the stable v1.0.0 release and ensures all required submodules are fetched.
 
-```bash 
+```bash
+export WORKSPACE=$HOME
 cd $WORKSPACE
 git clone -b v1.0.0 --recurse-submodules https://github.com/pytorch/executorch.git
 
