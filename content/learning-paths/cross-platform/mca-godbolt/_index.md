@@ -21,7 +21,6 @@ skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-A
-    - Cortex-X
     - Neoverse
 tools_software_languages:
     - Assembly
