@@ -20,6 +20,7 @@ prerequisites:
     - Basic familiarity with embedded C programming
     - Visual Studio Code installed and running
     - A Cortex-M development board
+    - Windows 10+ (64-bit), macOS with Homebrew, or Linux (preferably Ubuntu 20.04+)
 
 author: 
     - Ayoub Bourjilat
@@ -42,7 +43,7 @@ further_reading:
         type: documentation
     - resource:
         title: Workbench for Zephyr Official Website
-        link: https://zephyr-workbench.com/
+        link: https://z-workbench.com/
         type: website
     - resource:
         title: AC6 Zephyr Training
