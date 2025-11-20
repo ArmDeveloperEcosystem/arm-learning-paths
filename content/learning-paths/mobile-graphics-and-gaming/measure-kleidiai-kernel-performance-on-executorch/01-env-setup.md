@@ -56,3 +56,4 @@ After the build completes successfully, verify that ExecuTorch was installed int
 python -c "import executorch; print('Executorch build and install successfully.')"
 ```
 
+If the output confirms success, you’re ready to begin cross-compilation and profiling preparation for KleidiAI micro-kernels.
