@@ -6,9 +6,9 @@ weight: 7
 layout: learningpathall
 ---
 
-In the previous section, we discussed that the Batch Matrix Multiply operator supports multiple GEMM (General Matrix Multiplication) variants.
+The Batch Matrix Multiply operator (torch.bmm) under XNNPACK lowers to GEMM and, when shapes and dtypes match supported patterns, can dispatch to KleidiAI micro-kernels on Arm. 
 
-To evaluate the performance of these variants across different hardware platforms, we construct a set of benchmark models that utilize the batch matrix multiply operator with different GEMM implementations for comparative analysis.
+To evaluate the performance of these variants across different hardware platforms, you will construct a set of benchmark models that utilize the batch matrix multiply operator with different GEMM implementations for comparative analysis.
 
 
 ### Matrix multiply benchmark model
@@ -72,11 +72,10 @@ export_mutrix_mul_model(torch.float32,"matrix_mul_pf32_gemm")
 
 ```
 
-**NOTE:** 
-
+{{%notice Note%}}
 When exporting models, the **generate_etrecord** option is enabled to produce the .etrecord file alongside the .pte model file.
 These ETRecord files are essential for subsequent model analysis and performance evaluation.
-
+{{%/notice%}}
 
 After running this script, both the PTE model file and the etrecord file are generated.
 
