@@ -165,13 +165,12 @@ These ETRecord files are essential for subsequent model analysis and performance
 
 
 ### Run the Complete Benchmark Model Script
-Instead of manually executing each code block explained above, you can download and run the full example script that builds and exports the conv2D benchmark models.
-This script automatically performs quantization, partitioning, lowering, and export to ExecuTorch format.
+Rather than executing each block by hand, download and run the full export script. It will generate both Conv2d variants, run quantization (INT8) where applicable, partition to XNNPACK, lower, and export to ExecuTorch .pte together with .etrecord metadata.
 
 ```bash
-wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/refs/heads/main/content/learning-paths/mobile-graphics-and-gaming/measure-kleidiai-kernel-performance-on-executorch/export-conv2d-model.py
-chmod +x export-conv2d-model.py
-python3 ./export-conv2d-model.py
+wget https://raw.githubusercontent.com/pareenaverma/arm-learning-paths/refs/heads/content_review/content/learning-paths/mobile-graphics-and-gaming/measure-kleidiai-kernel-performance-on-executorch/export-conv2d.py
+chmod +x export-conv2d.py
+python3 ./export-conv2d.py
 ```
 ### Validate Outputs
 
@@ -185,4 +184,3 @@ pointwise_conv2d_pf32_gemm.etrecord
 pointwise_conv2d_pf32_gemm.pte
 ```
 
-The complete source code is available [here](../export-conv2d.py).
