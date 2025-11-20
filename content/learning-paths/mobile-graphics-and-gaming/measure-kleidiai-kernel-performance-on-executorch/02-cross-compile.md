@@ -10,6 +10,10 @@ layout: learningpathall
 This section describes how to cross-compile ExecuTorch for an AArch64 target platform with XNNPACK and KleidiAI support enabled.
 All commands below are intended to be executed on an x86-64 Linux host with an appropriate cross-compilation toolchain installed (e.g., aarch64-linux-gnu-gcc).
 
+```bash
+sudo apt install gcc-aarch64-linux-gnu -y
+```
+
 
 ### Run CMake Configuration 
 
