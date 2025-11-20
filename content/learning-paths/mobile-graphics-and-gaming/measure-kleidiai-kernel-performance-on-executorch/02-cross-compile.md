@@ -1,5 +1,5 @@
 ---
-title: Cross-Compile ExecuTorch for the Aarch64 platform
+title: Cross-Compile ExecuTorch for the AArch64 platform
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -7,17 +7,20 @@ layout: learningpathall
 ---
 
 
-This section describes how to cross-compile ExecuTorch for an AArch64 target platform with XNNPACK and KleidiAI support enabled.
-All commands below are intended to be executed on an x86-64 Linux host with an appropriate cross-compilation toolchain installed (e.g., aarch64-linux-gnu-gcc).
+In this section, you’ll cross-compile ExecuTorch for an AArch64 (Arm64) target platform with both XNNPACK and KleidiAI support enabled.
+Cross-compiling ensures that all binaries and libraries are built for your Arm target hardware, even when your development host is an x86_64 machine.
 
+### Install the Cross-Compilation Toolchain
+On your x86_64 Linux host, install the GNU Arm cross-compilation toolchain along with Ninja, a fast build backend commonly used by CMake:
 ```bash
 sudo apt install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu ninja-build -y
 ```
 
-
 ### Run CMake Configuration 
 
-Use CMake to configure the ExecuTorch build for Aarch64. The example below enables key extensions, developer tools, and XNNPACK with KleidiAI acceleration: 
+Use CMake to configure the ExecuTorch build for the AArch64 target.
+
+The command below enables all key runtime extensions, developer tools, and optimized backends including XNNPACK and KleidiAI.
 
 ```bash 
 
@@ -65,18 +68,19 @@ cmake -GNinja \
 
 
 ### Build ExecuTorch 
+Once CMake configuration completes successfully, compile the ExecuTorch runtime and its associated developer tools:
 
 ```bash 
 cmake --build . -j$(nproc)
-
 ```
+CMake invokes Ninja to perform the actual build, generating both static libraries and executables for the AArch64 target.
 
-If the build completes successfully, you should find the executor_runner binary under the directory:
+### Locate the executor_runner Binary
+If the build completes successfully, you should see the main benchmarking and profiling utility, executor_runner, under:
 
-```bash
+```output
 build-arm64/executor_runner
-
 ```
-
+You will use executor_runner in the later sections on your Arm64 target as standalone binary used to execute and profile ExecuTorch models directly from the command line.
 This binary can be used to run ExecuTorch models on the ARM64 target device using the XNNPACK backend with KleidiAI acceleration.
 
