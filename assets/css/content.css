@@ -62,13 +62,14 @@ html[theme="dark"]  div.markdown-content-div > div.code-tabpane {
     --ads-horizontal-tabs-tab-content-background-color: var(--arm-color-surface); 
 }
 
-
+/*
 div.markdown-content-div > table {
-    width: max-content;     /* No full-length tables unless there is a reason */
+    width: max-content;
     margin-top: 16px;
     margin-left: 16px;
     margin-bottom: 24px;
 }
+*/
 html[theme="light"] div.markdown-content-div > table tbody { background-color: var(--arm-white); }
 html[theme="dark"]  div.markdown-content-div > table tbody { background-color: var(--arm-color-base); }
 
