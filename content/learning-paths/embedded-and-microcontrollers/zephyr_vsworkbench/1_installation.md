@@ -20,15 +20,23 @@ Workbench for Zephyr provides one-click environment setup that automatically ins
 
 To get started with Workbench for Zephyr you need to have Visual Studio Code downloaded, installed, and running on your computer.
 
-For Windows, you need version 10 or later (64-bit), along with administrator privileges for installing tools and drivers. 
+**Windows OS:**
+For Windows, you need version 10 or later (64-bit x64), along with administrator privileges for installing runners and drivers. 
 
-On macOS, the Homebrew package manager is required. To install Homebrew, run the following command:
+**MacOS:**
+On MacOS, the Homebrew package manager is required. To install Homebrew, run the following command:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-Zephyr Workbench supports STM32 development boards (STM32 Discovery, Nucleo series), Nordic Semiconductor boards (nRF52, nRF53, nRF91 series), NXP development boards (FRDM, LPCXpresso series), Espressif boards (ESP32-based boards), and many other Zephyr-supported platforms. You need a development board to try out the code examples.
+**Linux:**
+- A recent 64-bit X64 distribution such as Ubuntu 20.04 or later, Fedora, Clear Linux OS, or Arch Linux
+- Other distributions might work, but may require manual configuration of system packages
+- After installation, use the Workbench host tools manager to verify that all required tools were installed correctly
+
+
+Zephyr Workbench supports STM32 development boards (STM32 Discovery, Nucleo series), Nordic Semiconductor boards (nRF52, nRF53, nRF91 series), NXP development boards (FRDM, LPCXpresso series), Espressif boards (ESP32-based boards), and many other Zephyr-supported platforms like Renesas, Silabs or Infineon. You need a development board to try out the code examples.
 
 ## Configure the Workbench for Zephyr extension in Visual Studio Code
 
