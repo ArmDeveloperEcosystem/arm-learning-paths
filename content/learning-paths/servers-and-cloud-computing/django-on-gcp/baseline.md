@@ -1,6 +1,6 @@
 ---
 title: Django Baseline Testing on Google Axion C4A Arm Virtual Machine
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -12,13 +12,6 @@ You will first run the Django development server and access it from your browser
 
 ### Baseline 1 — View Django Welcome Page
 This test confirms that Django is installed correctly and the server runs successfully.
-
-#### Activate your Python environment
-Before running Django, activate the Python virtual environment you created during installation.
-
-```console
-source venv/bin/activate
-```
 
 #### Create a new Django project
 Run the following command to create a new Django project named `myproject`:
@@ -46,8 +39,10 @@ myproject/
 Migrations prepare your project’s database by creating the required tables for Django’s internal apps (admin, authentication, etc.):
 
 ```console
-python manage.py migrate
+python3 manage.py migrate
 ```
+
+You should get output showing the Running Migrations (all of which should be "OK").
 
 #### Start the Django development server
 Before starting the Django development server, you must configure your ALLOWED_HOSTS setting to allow access from your VM’s external IP.
@@ -59,14 +54,14 @@ This ensures that Django accepts HTTP requests from outside the localhost (e.g.,
   Move into your Django project directory where the settings.py file is located.
 
   ```console
-  cd ~/myproject/mysite/mysite
+  cd ~/myproject/myproject/
   ```
 
 - Open settings.py File
-  Use any text editor (like vi or nano) to open the file.
+  Use any text editor (like vi or nano) to open the file ("edit" is used as an example below).
 
   ```console
-  vi settings.py
+  edit myproject/settings.py
   ```
   
 - Locate the `ALLOWED_HOSTS` Line
@@ -79,30 +74,27 @@ This ensures that Django accepts HTTP requests from outside the localhost (e.g.,
 
 - Allow All Hosts (for Testing Only)
   To make your Django app accessible from your VM’s external IP address, update it to:
-  ```pthon
+  ```python
   ALLOWED_HOSTS = ['*']
   ```
 {{% notice Note %}}
 Allowing all hosts `('*')` is suitable **only for development or testing**.
-For production, replace `'*'` with specific domain names or IPs, such as:
+For production, replace `'*'` with specific domain names or IPs, such as your public IP address for your VM that you recorded earlier:
 {{% /notice %}}
 
 ```python
 ALLOWED_HOSTS = ['your-external-ip', 'your-domain.com']
 ```
 
-#### Enable Port 8000 in GCP Firewall
-
-By default, Google Cloud VMs block external traffic on custom ports like 8000. You must open this port to access Django from your browser.
-
 **Now start the Django development server:**
 
+We can now start the Django development server since we have exposed TCP/8000 in our VM via firewall rules: 
 ```console
-python manage.py runserver 0.0.0.0:8000
+python3 manage.py runserver 0.0.0.0:8000
 ```
 
 #### View in browser
-Open a web browser on your local machine (Chrome, Firefox, Edge, etc.) and enter the following URL in the address bar:
+Open a web browser on your local machine (Chrome, Firefox, Edge, etc.) and enter the following URL in the address bar. Please replace "YOUR_VM_EXTERNAL_IP" with the external IP address of your VM that you saved off earlier:
 
 ```console
 http://<YOUR_VM_EXTERNAL_IP>:8000
@@ -123,7 +115,7 @@ Press `Ctrl + C` to stop the Django server if running.
 Within your Django project directory, create a new app named `hello`:
 
 ```console
-python manage.py startapp hello
+python3 manage.py startapp hello
 ```
 
 **This creates the following directory:**
@@ -150,7 +142,7 @@ def home(request):
 This defines a simple view function that sends a basic HTML message as the HTTP response.
 
 #### Create app URL configuration
-Create a new file hello/urls.py and add:
+Create a new file `hello/urls.py` and add:
 
 ```python
 from django.urls import path
@@ -210,7 +202,7 @@ INSTALLED_APPS = [
 #### Run the server again
 
 ```console
-python manage.py runserver 0.0.0.0:8000
+python3 manage.py runserver 0.0.0.0:8000
 ```
 
 #### Test your app

@@ -1,6 +1,6 @@
 ---
 title: Django Benchmarking
-weight: 6
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -10,6 +10,9 @@ layout: learningpathall
 ## Django Benchmarking using ApacheBench
 This section describes how to benchmark a Django web application deployed with **Gunicorn** using **ApacheBench (ab)** — a lightweight HTTP benchmarking tool.  
 You will measure **throughput (requests per second)** and **latency (response time)** to evaluate the performance of your Django app on an Arm-based GCP SUSE VM.
+
+### Stop the server
+Press `Ctrl + C` to stop the Django server if running.
 
 ### Ensure ApacheBench is installed
 **ApacheBench (ab)** is a command-line tool used to benchmark web servers by simulating multiple HTTP requests.
@@ -27,45 +30,24 @@ This confirms ApacheBench is correctly installed and available system-wide.
 ab -V
 ```
 
-### Activate Django Virtual Environment
-A virtual environment isolates Python dependencies for your Django project to prevent version conflicts.
-
-```console
-cd ~/myproject
-source venv/bin/activate
-```
-When activated, your shell prompt should show (`venv`) — indicating you’re inside the virtual environment.
-
 **Ensure Django and Gunicorn are installed:**
 
 ```console
-pip install django gunicorn
+python3 -m pip install django gunicorn
 ```
 - **Django** is the Python web framework you’re benchmarking.
 - **Gunicorn** is a high-performance WSGI HTTP server for deploying Django apps in production-like environments.
 
-### Run Django Migrations and Collect Static Files
-Before running the server, initialize the database and prepare static files.
-
-```console
-python manage.py migrate
-python manage.py collectstatic --noinput
-```
-- `migrate` applies database schema changes (like creating tables).
-- `collectstatic` gathers static assets (CSS, JS, images) into a single directory for efficient serving.
-
-This ensures your Django project is fully configured and ready for deployment under Gunicorn.
-
 ### Run Django with Gunicorn
-Use Gunicorn to serve your Django application for benchmarking:
+Use Gunicorn to serve your Django application for benchmarking (run in the background):
 
 ```console
-gunicorn myproject.wsgi:application --bind 0.0.0.0:8000 --workers 4
+gunicorn myproject.wsgi:application --bind 0.0.0.0:8000 --workers 4 &
 ```
 
 - `--workers 4`: number of worker processes
 - `--bind 0.0.0.0:8000`: binds to all interfaces on port 8000
-- Replace `myproject.wsgi:application` with your actual Django project name.
+- `myproject.wsgi:application` your Django project name ("myproject" used in this example).
 
 {{% notice Note %}}
 Keep this terminal running during the benchmark. If you’re testing remotely, ensure port 8000 is open in your VM firewall settings.
@@ -138,6 +120,10 @@ Percentage of the requests served within a certain time (ms)
  100%      5 (longest request)
 ```
 
+### Cleanup
+
+With the following output (above) seen, you can type "fg" followed by "ctrl-c" to exit the gunicorn server that is running. 
+
 ### Benchmark Metrics Explanation
 
 - **Concurrency Level:** Number of requests executed simultaneously during the test.  
@@ -151,28 +137,7 @@ Percentage of the requests served within a certain time (ms)
 - **Time per Request (across concurrent):** Mean time per request across all concurrent clients.  
 - **Transfer Rate:** Average network data throughput during the benchmark.
 
-### Benchmark summary on x86_64
-To compare the benchmark results, the following results were collected by running the same benchmark on a `x86 - c4-standard-4` (4 vCPUs, 15 GB Memory) x86_64 VM in GCP, running SUSE:
-
-| **Parameter** | **Description** | **Value** |
-|----------------|------------------|-----------|
-| **Server Software** | Web server used for serving Django | gunicorn |
-| **Server Hostname** | Host address tested | 127.0.0.1 |
-| **Server Port** | Port number for benchmark | 8000 |
-| **Document Path** | Endpoint used for testing | / |
-| **Document Length** | Size of each response | 12068 bytes |
-| **Concurrency Level** | Number of concurrent requests | 10 |
-| **Time Taken for Tests** | Total time to complete all requests | 0.364 seconds |
-| **Complete Requests** | Total number of successful requests | 1000 |
-| **Failed Requests** | Number of failed requests | 0 |
-| **Total Transferred** | Total bytes transferred (including headers) | 12,351,000 bytes |
-| **HTML Transferred** | Total HTML body bytes transferred | 12,068,000 bytes |
-| **Requests per Second (mean)** | Throughput — higher is better | **2750.72 req/sec** |
-| **Time per Request (mean)** | Average time for each request | **3.635 ms** |
-| **Time per Request (across all concurrent requests)** | Average latency considering concurrency | **0.364 ms** |
-| **Transfer Rate** | Network throughput rate | **33,177.89 KB/sec** |
-
-### Benchmark summary on Arm64
+### Benchmark summary
 Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
 
 | **Parameter** | **Description** | **Value** |
@@ -192,8 +157,6 @@ Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm6
 | **Time per Request (mean)** | Average time for each request | **1.036 ms** |
 | **Time per Request (across all concurrent requests)** | Average latency considering concurrency | **0.104 ms** |
 | **Transfer Rate** | Network throughput rate | **2639.00 KB/sec** |
-
-### Django benchmarking comparison on Arm64 and x86_64
 
 - **Exceptional Throughput:** The Arm64 VM efficiently handled nearly 10K requests per second, showcasing excellent concurrency handling.  
 - **Low Latency:** Average response time stayed around 1 ms, indicating rapid request processing even under load.  
