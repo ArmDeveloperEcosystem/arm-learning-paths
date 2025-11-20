@@ -11,7 +11,7 @@ This section describes how to cross-compile ExecuTorch for an AArch64 target pla
 All commands below are intended to be executed on an x86-64 Linux host with an appropriate cross-compilation toolchain installed (e.g., aarch64-linux-gnu-gcc).
 
 ```bash
-sudo apt install gcc-aarch64-linux-gnu -y
+sudo apt install gcc-aarch64-linux-gnu ninja-build -y
 ```
 
 
