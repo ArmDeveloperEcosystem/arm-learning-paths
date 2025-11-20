@@ -14,7 +14,7 @@ This prevents dependency conflicts with your system Python installation and ensu
 
 ```bash 
 sudo apt update
-sudo apt install -y python3 python3-venv
+sudo apt install -y python3 python3.12-dev python3-venv build-essential cmake
 python3 -m venv pyenv
 source pyenv/bin/activate
 
