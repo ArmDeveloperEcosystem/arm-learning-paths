@@ -13,7 +13,9 @@ Before building ExecuTorch, it is highly recommended to create an isolated Pytho
 This prevents dependency conflicts with your system Python installation and ensures a clean build environment.
 
 ```bash 
-cd $WORKSPACE
+cd $HOME
+sudo apt update
+sudo apt install -y python3 python3-venv
 python3 -m venv pyenv
 source pyenv/bin/activate
 
