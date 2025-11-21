@@ -1,16 +1,26 @@
 ---
-title: Run model and generate the etdump
+title: Run model and generate the ETDump
 weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-After generating the model, we can now run it on an ARM64 platform using the following command:
+### Copy artifacts to your Arm64 target
+From your x86_64 host (where you cross-compiled), copy the runner and exported models to the Arm device:
+
+```bash
+scp $WORKSPACE/build-arm64/executor_runner <arm_user>@<arm_host>:~/bench/
+scp -r model/ <arm_user>@<arm_host>:~/bench/
+```
+
+### Run a model and emit ETDump
+Use one of the models you exported earlier (e.g., FP32 linear: linear_model_pf32_gemm.pte).
+The flags below tell executor_runner where to write the ETDump and how many times to execute.
 
 ```bash 
-cd $WORKSPACE 
-/build-arm64/executor_runner -etdump_path model/linear_model_f32.etdump -model_path model/linear_model_f32.pte -num_executions=1 -cpu_threads 1
+cd ~/bench
+./executor_runner -etdump_path model/linear_model_f32.etdump -model_path model/linear_model_f32.pte -num_executions=1 -cpu_threads 1
 
 ```
 
