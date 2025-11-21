@@ -74,7 +74,7 @@ def export_int8_quantize_conv2d_model(model_name: str):
     etrecord = et_program.get_etrecord()
     etrecord.save(etr_file)
 
-export_int8_quantize_depthwise_model("qint8_conv2d_pqs8_qc8w_gemm");
+export_int8_quantize_conv2d_model("qint8_conv2d_pqs8_qc8w_gemm");
 
 
 

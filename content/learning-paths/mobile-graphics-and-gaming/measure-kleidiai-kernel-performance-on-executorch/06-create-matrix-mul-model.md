@@ -6,9 +6,9 @@ weight: 7
 layout: learningpathall
 ---
 
-In the previous section, we discussed that the Batch Matrix Multiply operator supports multiple GEMM (General Matrix Multiplication) variants.
+The Batch Matrix Multiply operator (torch.bmm) under XNNPACK lowers to GEMM and, when shapes and dtypes match supported patterns, can dispatch to KleidiAI micro-kernels on Arm. 
 
-To evaluate the performance of these variants across different hardware platforms, we construct a set of benchmark models that utilize the batch matrix multiply operator with different GEMM implementations for comparative analysis.
+To evaluate the performance of these variants across different hardware platforms, you will construct a set of benchmark models that utilize the batch matrix multiply operator with different GEMM implementations for comparative analysis.
 
 
 ### Matrix multiply benchmark model
@@ -72,11 +72,22 @@ export_mutrix_mul_model(torch.float32,"matrix_mul_pf32_gemm")
 
 ```
 
-**NOTE:** 
-
+{{%notice Note%}}
 When exporting models, the **generate_etrecord** option is enabled to produce the .etrecord file alongside the .pte model file.
 These ETRecord files are essential for subsequent model analysis and performance evaluation.
+{{%/notice%}}
 
+### Run the Complete Benchmark Model Script
+Instead of executing each export block manually, you can download and run the full matrix-multiply benchmark script.
+This script automatically builds and exports both FP16 and FP32 models, performing all necessary partitioning, lowering, and ETRecord generation.
+
+```bash
+wget https://raw.githubusercontent.com/pareenaverma/arm-learning-paths/refs/heads/content_review/content/learning-paths/mobile-graphics-and-gaming/measure-kleidiai-kernel-performance-on-executorch/export-matrix-mul.py
+chmod +x export-matrix-mul.py
+python3 ./export-matrix-mul.py
+```
+
+### Verify the output
 
 After running this script, both the PTE model file and the etrecord file are generated.
 
@@ -87,5 +98,6 @@ model/matrix_mul_pf16_gemm.pte
 model/matrix_mul_pf32_gemm.etrecord
 model/matrix_mul_pf32_gemm.pte
 ```
+These files are the inputs for upcoming executor_runner benchmarks, where you’ll measure and compare KleidiAI micro-kernel performance.
 
 The complete source code is available [here](../export-matrix-mul.py).

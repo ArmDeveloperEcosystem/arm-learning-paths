@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-In the previous section, we discussed that both INT8-quantized Conv2d and pointwise (1×1) Conv2d operators can be accelerated using KleidiAI’s matrix-multiplication micro-kernels.
+In the previous section, you saw that that both INT8-quantized Conv2d and pointwise (1×1) Conv2d operators can be accelerated using KleidiAI’s matrix-multiplication micro-kernels.
 
 
 | XNNPACK GEMM Variant | Input DataType| Filter DataType | Output DataType                      |
@@ -14,14 +14,14 @@ In the previous section, we discussed that both INT8-quantized Conv2d and pointw
 | pqs8_qc8w_gemm | Asymmetric INT8 quantization(NHWC) | Per-channel or per-tensor symmetric INT8 quantization | Asymmetric INT8 quantization(NHWC) |
 | pf32_gemm    | FP32                         | FP32, pointwise (1×1)                   | FP32                         |
 
-To evaluate the performance of Conv2d operators across multiple hardware platforms, we create a set of benchmark models that utilize different GEMM implementation variants within the convolution operators for systematic comparative analysis.
+To evaluate the performance of Conv2d operators across multiple hardware platforms, you will create a set of benchmark models that utilize different GEMM implementation variants within the convolution operators for systematic comparative analysis.
 
 
-### INT8-quantized Conv2d benchmark model
+### INT8-Quantized Conv2d benchmark model
 
 The following example defines a simple model to generate INT8-quantized Conv2d nodes that can be accelerated by KleidiAI.
 
-By adjusting some of the model’s input parameters, we can also simulate the behavior of nodes that appear in real-world models.
+By adjusting some of the model’s input parameters, you can also simulate the behavior of nodes that appear in real-world models.
 
 
 ```python
@@ -100,7 +100,7 @@ export_int8_quantize_conv2d_model("qint8_conv2d_pqs8_qc8w_gemm");
 
 ### PointwiseConv2d benchmark model
 
-In the following example model, we use simple model to generate pointwise Conv2d nodes that can be accelerated by Kleidiai. 
+In the following example model, you will use simple model to generate pointwise Conv2d nodes that can be accelerated by Kleidiai. 
 
 As before, input parameters can be adjusted to simulate real-world model behavior.
 
@@ -158,10 +158,21 @@ export_pointwise_model("pointwise_conv2d_pf32_gemm")
 
 ```
 
-**NOTES:** 
-
+{{%notice Note%}}
 When exporting models, the generate_etrecord option is enabled to produce the .etrecord file alongside the .pte model file.
 These ETRecord files are essential for subsequent model analysis and performance evaluation.
+{{%/notice%}}
+
+
+### Run the Complete Benchmark Model Script
+Rather than executing each block by hand, download and run the full export script. It will generate both Conv2d variants, run quantization (INT8) where applicable, partition to XNNPACK, lower, and export to ExecuTorch .pte together with .etrecord metadata.
+
+```bash
+wget https://raw.githubusercontent.com/pareenaverma/arm-learning-paths/refs/heads/content_review/content/learning-paths/mobile-graphics-and-gaming/measure-kleidiai-kernel-performance-on-executorch/export-conv2d.py
+chmod +x export-conv2d.py
+python3 ./export-conv2d.py
+```
+### Validate Outputs
 
 After running this script, both the PTE model file and the etrecord file are generated.
 
@@ -173,4 +184,3 @@ pointwise_conv2d_pf32_gemm.etrecord
 pointwise_conv2d_pf32_gemm.pte
 ```
 
-The complete source code is available [here](../export-conv2d.py).

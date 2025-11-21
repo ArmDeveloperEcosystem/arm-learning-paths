@@ -5,9 +5,9 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-ExecuTorch uses XNNPACK as its primary CPU backend for operator execution and performance optimization.
+ExecuTorch uses XNNPACK as its primary CPU backend to execute and optimize operators such as convolutions, matrix multiplications, and fully connected layers.
 
-Within this architecture, only a subset of KleidiAI SME (Scalable Matrix Extension) micro-kernels has been integrated into XNNPACK to provide additional acceleration on supported Arm platforms.
+Within this architecture, a subset of KleidiAI SME (Scalable Matrix Extension) micro-kernels has been integrated into XNNPACK to provide additional acceleration on supported Arm platforms.
 
 These specialized micro-kernels are designed to accelerate operators with specific data types and quantization configurations in ExecuTorch models.
 
