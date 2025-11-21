@@ -63,4 +63,4 @@ Below is an example showing the runtime data corresponding to the Fully Connecte
 
 You can now iterate over FP32 vs FP16 vs INT8 vs INT4 models, confirm the exact GEMM variant used, and quantify the latency savings attributable to KleidiAI micro-kernels on your Arm device.
 
-You can experiment with different models and matrix sizes to obtain various performance results.
+You can experiment with different models and matrix sizes to analyze various performance results.
