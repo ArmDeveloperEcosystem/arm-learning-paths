@@ -73,9 +73,10 @@ Create a file at `$HOME/.vnc/xstartup` with the following contents:
 
 ```console
 #!/bin/sh
-unset SESSION_MANAGER
-unset DBUS_SESSION_BUS_ADDRESS
-exec startxfce4
+# select your favorite windows manager here
+/bin/bash -l <<EOF
+exec /etc/X11/Xsession startxfce4
+EOF
 ```
 Make sure the `xstartup` file has executable permissions:
 
