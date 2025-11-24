@@ -30,7 +30,7 @@ sudo zypper install -y nodejs npm
 ```
 This command installs the Node.js runtime and npm package manager on your Google Cloud SUSE Arm64 VM.
 
-### Install TypeScript globally
+## Install TypeScript globally
 TypeScript (tsc) is the compiler that converts .ts files into JavaScript.
 `ts-node` lets you run TypeScript files directly without pre-compiling them. It is useful for testing, scripting, and lightweight development workflows.
 
@@ -43,7 +43,7 @@ The `-g` flag installs packages globally, making tsc and ts-node available syste
 
 This approach simplifies workflows for developers running multiple TypeScript projects on the same VM.
 
-### Verify installations
+## Verify installations
 Check that Node.js, npm, TypeScript, and ts-node are all installed correctly:
 
 ```console

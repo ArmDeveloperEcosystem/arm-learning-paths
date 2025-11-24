@@ -1,5 +1,5 @@
 ---
-title: TypeScript Benchmarking
+title: Benchmark TypeScript performance
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -7,12 +7,12 @@ layout: learningpathall
 ---
 
 
-## JMH-style Custom Benchmarking
+## Create a custom JMH-style benchmark for TypeScript on Arm
 
 This section demonstrates how to benchmark TypeScript functions using a JMH-style (Java Microbenchmark Harness) methodology implemented with Node.js's built-in `perf_hooks` module.
 Unlike basic `console.time()` measurements, this approach executes multiple iterations, computes the average runtime, and produces stable and repeatable performance data, useful for evaluating workloads on your Google Cloud C4A (Axion Arm64) VM running SUSE Linux.
 
-### Create the Benchmark Script
+## Implement benchmarking with Node.js perf_hooks on Arm
 Create a file named `benchmark_jmh.ts` inside your project directory with the content below:
 
 ```typescript
@@ -88,7 +88,7 @@ Iteration 10: 0.673 ms
 Average execution time over 10 iterations: 0.888 ms
 ```
 
-### Benchmark Metrics Explained
+## Run and analyze TypeScript benchmark results on Google Axion C4A
 
   * Iteration times → Each iteration represents the time taken for one complete execution of the benchmarked function.
   * Average execution time → Calculated as the total of all iteration times divided by the number of iterations. This gives a stable measure of real-world performance.
@@ -96,7 +96,7 @@ Average execution time over 10 iterations: 0.888 ms
     A single run can be affected by transient factors such as CPU scheduling, garbage collection, or memory caching.
     Running multiple iterations and averaging the results smooths out variability, producing more repeatable and statistically meaningful data, similar to Java’s JMH benchmarking methodology.
     
-### Interpretation
+### Interpret your TypeScript performance data on Arm
 
 The average execution time reflects how efficiently the function executes under steady-state conditions.
 The first iteration often shows higher latency because Node.js performing initial JIT (Just-In-Time) compilation and optimization, a common warm-up behavior in JavaScript/TypeScript benchmarks.
