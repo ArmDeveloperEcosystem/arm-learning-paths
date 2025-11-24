@@ -1,121 +1,89 @@
 ---
-title: Incorporating PGO into a GitHub Actions workflow
+title: Using Profile Guided Optimization (Windows)
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-### Build locally with make
+### Build with PGO
 
-PGO can be integrated into a `Makefile` and continuous integration (CI) systems using simple command-line instructions, as shown in the sample `Makefile` below.
+To generate a binary optimized using runtime profile data, first build an instrumented binary that records usage data. Before building, open the Arm dev shell so that the compiler is in your PATH:
 
-{{% notice Caution %}}
-PGO adds additional build steps which can increase compile time - especially for large code bases. As such, PGO is not suitable for all sections of code. You should PGO only for sections of code which are heavily influenced by run-time behavior and are performance critical. Therefore, PGO might not be ideal for early-stage development or for applications with highly variable or unpredictable usage patterns.
-{{% /notice %}}
-
-Use a text editor to create a file named `Makefile` containing the following content:
-
-```makefile
-# Simple Makefile for building and benchmarking div_bench with and without PGO
-
-# Compiler and flags
-CXX := g++
-CXXFLAGS := -O3 -std=c++17
-LDLIBS := -lbenchmark -lpthread
-
-# Default target: build both binaries
-.PHONY: all clean clean-gcda clean-perf run
-all: div_bench.base div_bench.opt
-
-# Build the baseline binary (no PGO)
-div_bench.base: div_bench.cpp
-	$(CXX) $(CXXFLAGS) $< $(LDLIBS) -o $@
-
-# Build the PGO-optimized binary:
-# Note: This target depends on the source file and cleans previous profile data first.
-# It runs the instrumented binary to generate new profile data before the final compilation.
-div_bench.opt: div_bench.cpp
-	$(MAKE) clean-gcda # Ensure no old profile data interferes
-	$(CXX) $(CXXFLAGS) -fprofile-generate $< $(LDLIBS) -o $@
-	@echo "Running instrumented binary to gather profile data..."
-	./div_bench.opt # Generate .gcda file
-	$(CXX) $(CXXFLAGS) -fprofile-use $< $(LDLIBS) -o $@ # Compile using the generated profile
-	$(MAKE) clean-perf # Optional: Clean perf data if generated elsewhere
-
-# Remove profile data files
-clean-gcda:
-	rm -f ./*.gcda
-
-# Remove perf data files (if applicable)
-clean-perf:
-	rm -f perf-division-*
-
-# Remove all generated files including binaries and profile data
-clean: clean-gcda clean-perf
-	rm -f div_bench.base div_bench.opt
-
-# Run both benchmarks with informative headers
-run: all # Ensure binaries are built before running
-	@echo "==================== Without Profile-Guided Optimization ===================="
-	./div_bench.base
-	@echo "==================== With Profile-Guided Optimization ===================="
-	./div_bench.opt
+```bash
+& "C:\Program Files\Microsoft Visual Studio\18\Community\Common7\Tools\Launch-VsDevShell.ps1" -Arch arm64
 ```
 
-You can run the following commands in your terminal:
+(**note:** you may need to change the version number in your Visual Studio path, depending on which Visual Studio version you've installed.)
 
-*   `make all` (or simply `make`): Compiles both `div_bench.base` (without PGO) and `div_bench.opt` (with PGO). This includes the steps of generating profile data for the optimized version.
-*   `make run`: Builds both binaries (if they don't exist) and then runs them, displaying the benchmark results for comparison.
-*   `make clean`: Removes the compiled binaries (`div_bench.base`, `div_bench.opt`) and any generated profile data files (`*.gcda`).
+Next, set an environment variable to refer to the installed packages directory:
 
-### Build with GitHub Actions
-
-Alternatively, you can integrate PGO into your Continuous Integration (CI) workflow using GitHub Actions. The YAML file below provides a basic example that compiles and runs the benchmark on a GitHub-hosted Ubuntu 24.04 Arm-based runner. This setup can be extended with automated tests to check for performance regressions.
-
-```yaml
-name: PGO Benchmark
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  build:
-    runs-on: ubuntu-24.04-arm
-
-    steps:
-      - name: Check out source
-        uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libbenchmark-dev g++
-
-      - name: Clean previous profiling data
-        run: |
-          rm -rf ./*gcda
-          rm -f div_bench.base div_bench.opt
-
-      - name: Compile base and instrumented binary
-        run: |
-          g++ -O3 -std=c++17 div_bench.cpp -lbenchmark -lpthread -o div_bench.base
-          g++ -O3 -std=c++17 -fprofile-generate div_bench.cpp -lbenchmark -lpthread -o div_bench.opt
-
-      - name: Generate profile data and compile with PGO
-        run: |
-          ./div_bench.opt
-          g++ -O3 -std=c++17 -fprofile-use div_bench.cpp -lbenchmark -lpthread -o div_bench.opt
-
-      - name: Run benchmarks
-        run: |
-            echo "==================== Without Profile-Guided Optimization ===================="
-            ./div_bench.base
-            echo "==================== With Profile-Guided Optimization ===================="
-            ./div_bench.opt
-            echo "==================== Benchmarking complete ===================="
+```bash
+$VCPKG="C:\git\vcpkg\installed\arm64-windows-static"
 ```
 
-To use this workflow, save the YAML content into a file named `pgo_benchmark.yml` (or any other `.yml` name) inside the `.github/workflows/` directory of your GitHub repository. Ensure your `div_bench.cpp` file is present in the repository root. When you push changes to the `main` branch, GitHub Actions will automatically detect this workflow file and execute the defined steps on an Arm-based runner, compiling both versions of the benchmark and running them.
+Next, run the following command, which includes the `/GENPROFILE` flag, to build the instrumented binary:
 
+```bash
+cl /O2 /GL /D BENCHMARK_STATIC_DEFINE /I "$VCPKG\include" /Fe:div_bench.exe div_bench.cpp /link /LTCG /GENPROFILE /PGD:div_bench.pgd /LIBPATH:"$VCPKG\lib" benchmark.lib benchmark_main.lib shlwapi.lib
+```
+
+The compiler options used in this command are:
+
+* **/O2**: Creates [fast code](https://learn.microsoft.com/en-us/cpp/build/reference/o1-o2-minimize-size-maximize-speed?view=msvc-170)
+* **/GL**: Enables [whole program optimization](https://learn.microsoft.com/en-us/cpp/build/reference/gl-whole-program-optimization?view=msvc-170).
+* **/D**: Enables the Benchmark [static preprocessor definition](https://learn.microsoft.com/en-us/cpp/build/reference/d-preprocessor-definitions?view=msvc-170).
+* **/I**: Adds the arm64 includes to the [list of include directories](https://learn.microsoft.com/en-us/cpp/build/reference/i-additional-include-directories?view=msvc-170).
+* **/Fe**: Specifies a name for the [executable file output](https://learn.microsoft.com/en-us/cpp/build/reference/fe-name-exe-file?view=msvc-170).
+* **/link**: Specifies [options to pass to linker](https://learn.microsoft.com/en-us/cpp/build/reference/link-pass-options-to-linker?view=msvc-170).
+
+The linker options used in this command are:
+
+* **/LTCG**: Specifies [link time code generation](https://learn.microsoft.com/en-us/cpp/build/reference/ltcg-link-time-code-generation?view=msvc-170).
+* **/GENPROFILE**: Specifies [generation of a .pgd file for PGO](https://learn.microsoft.com/en-us/cpp/build/reference/genprofile-fastgenprofile-generate-profiling-instrumented-build?view=msvc-170).
+* **/PGD**: Specifies a [database for PGO](https://learn.microsoft.com/en-us/cpp/build/reference/pgd-specify-database-for-profile-guided-optimizations?view=msvc-170).
+* **/LIBPATH**: Specifies the [additional library path](https://learn.microsoft.com/en-us/cpp/build/reference/libpath-additional-libpath?view=msvc-170).
+
+Next, run the instrumented binary to generate the profile data:
+
+```bash
+.\div_bench.exe
+```
+
+This execution creates profile data files (typically with a `.pgc` extension) in the same directory. 
+
+Now recompile the program using the `/USEPROFILE` flag to apply optimizations based on the collected data: 
+
+```bash
+cl /O2 /GL /D BENCHMARK_STATIC_DEFINE /I "$VCPKG\include" /Fe:div_bench_opt.exe div_bench.cpp /link /LTCG:PGOptimize /USEPROFILE /PGD:div_bench.pgd /LIBPATH:"$VCPKG\lib" benchmark.lib benchmark_main.lib shlwapi.lib
+```
+
+In this command, the [USEPROFILE linker option](https://learn.microsoft.com/en-us/cpp/build/reference/useprofile?view=msvc-170) instructs the linker to enable PGO with the profile generated during the previous run of the executable. 
+
+### Run the optimized binary 
+
+Now run the optimized binary:
+
+```bash
+.\div_bench_opt.exe
+```
+
+The following output shows the performance improvement:
+
+```output
+Running ./div_bench.opt
+Run on (4 X 2100 MHz CPU s)
+CPU Caches:
+  L1 Data 64 KiB (x4)
+  L1 Instruction 64 KiB (x4)
+  L2 Unified 1024 KiB (x4)
+  L3 Unified 32768 KiB (x1)
+Load Average: 0.10, 0.03, 0.01
+***WARNING*** Library was built as DEBUG. Timings may be affected.
+-------------------------------------------------------
+Benchmark             Time             CPU   Iterations
+-------------------------------------------------------
+baseDiv/1500       2.86 us         2.86 us       244429
+```
+
+As the terminal output above shows, the average execution time is reduced from 7.90 to 2.86 microseconds. This improvement occurs because the profile data informed the compiler that the input divisor was consistently 1500 during the profiled runs, allowing it to apply specific optimizations.

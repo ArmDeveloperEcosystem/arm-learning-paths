@@ -12,15 +12,29 @@ In this section, you'll learn how to use Google Benchmark and Profile-Guided Opt
 
 Integer division is ideal for benchmarking because it's significantly more expensive than operations like addition, subtraction, or multiplication. On most CPU architectures, including Arm, division instructions have higher latency and lower throughput compared to other arithmetic operations. By applying Profile-Guided Optimization to code containing division operations, we can potentially achieve significant performance improvements.
 
-## What tools are needed to run a Google Benchmark example?
+For this example, you can use an Arm computer (Linux or Windows).
 
-For this example, you can use any Arm Linux computer. For example, an AWS EC2 `c7g.xlarge` instance running Ubuntu 24.04 LTS can be used.
+## What tools are needed to run a Google Benchmark example on Linux?
 
-Run the following commands to install the prerequisite packages:
+For Linux, run the following commands to install the prerequisite packages:
 
 ```bash
 sudo apt update
 sudo apt install gcc g++ make libbenchmark-dev -y
+```
+
+## What tools are needed to run a Google Benchmark example on Windows?
+
+If you are using Windows, download the [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain) to install the prerequisite packages.
+
+Next, install the static version of Google Benchmark for Arm64 via vcpkg. Run the following commands in Powershell as Administrator:
+
+```bash
+cd C:\git
+git clone https://github.com/microsoft/vcpkg.git
+cd vcpkg
+.\bootstrap-vcpkg.bat
+.\vcpkg install benchmark:arm64-windows-static
 ```
 
 ## Division example
@@ -49,18 +63,30 @@ BENCHMARK(baseDiv)->Arg(1500)->Unit(benchmark::kMicrosecond); // value of 1500 i
 BENCHMARK_MAIN();
 ```
 
-To compile and run the microbenchmark on this function, you need to link with the `pthreads` and `benchmark` libraries.
+To compile and run the microbenchmark on this function, you need to link with the correct libraries:
 
-Compile with the command:
+**(Linux)** Compile with the command:
 
 ```bash
 g++ -O3 -std=c++17 div_bench.cpp -lbenchmark -lpthread -o div_bench.base
 ```
 
-Run the program:
+**(Windows)** Compile with the command:
+
+```bash
+cl /D BENCHMARK_STATIC_DEFINE div_bench.cpp /link /LIBPATH:"$VCPKG\lib" benchmark.lib benchmark_main.lib shlwapi.lib
+```
+
+**(Linux)** Run the program:
 
 ```bash
 ./div_bench.base
+```
+
+**(Windows)** Run the program:
+
+```bash
+.\div_bench.exe
 ```
 
 ### Example output
@@ -80,25 +106,3 @@ Benchmark             Time             CPU   Iterations
 -------------------------------------------------------
 baseDiv/1500       7.90 us         7.90 us        88512
 ```
-
-### Inspect assembly
-
-To inspect what assembly instructions are being executed most frequently, you can use the `perf` command. This is useful for identifying bottlenecks and understanding the performance characteristics of your code.
-
-Install Perf using the [install guide](https://learn.arm.com/install-guides/perf/) before proceeding.
-
-{{% notice Please Note %}}
-You may need to set the `perf_event_paranoid` value to -1 with the `sudo sysctl kernel.perf_event_paranoid=-1` command to run the commands below.
-{{% /notice %}}
-
-Run the following commands to record `perf` data and create a report in the terminal:
-
-```bash
-sudo perf record -o perf-division-base ./div_bench.base 
-sudo perf report --input=perf-division-base
-```
-
-As the `perf report` graphic below shows, the program spends a significant amount of time in the short loops with no loop unrolling. There is also an expensive `sdiv` operation, and most of the execution time is spent storing the result of the operation.
-
-![before-pgo](./before-pgo.gif)
-
