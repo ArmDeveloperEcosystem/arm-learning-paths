@@ -1,6 +1,6 @@
 ---
 title: Install Couchbase
-weight: 4
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -65,27 +65,30 @@ sudo systemctl enable couchbase-server
 sudo systemctl status couchbase-server
 ```
 
-### Prepare Couchbase Bucket
-Once the service is running, you can access the **Couchbase Web Console** to create a bucket for baseline and benchmarking.
+You should see the following snippet as part of your output:
+```output
+Active: active(running) since YYY XXXX-XX-XX
+```
 
-Open Web Console:
+### Check Required Ports
+This command checks if those ports are open and active. If you see “LISTEN” next to these ports, it means Couchbase is ready to accept connections.
+
+Couchbase uses the following ports for basic operation:
+
+- Web Console: `8091`  
+- Query Service: `8093` (optional for N1QL queries)  
+- Data Service: `11210`  
+
+Check if the ports are listening:
 
 ```console
-http://<VM-IP>:8091
+sudo ss -tuln | grep -E '8091|11210'
 ```
-Use the admin `username` and `password` you created during Couchbase setup.
 
-Create a bucket named `benchmark`:
-
-| **Parameter** | **Value** |
-|----------------|-----------|
-| **Bucket Name** | benchmark |
-| **Bucket Type** | Couchbase |
-| **RAM Quota** | 512 MB (or as per VM size) |
-| **Password** | Choose a secure password (e.g., `mypassword`) |
-
-- A **bucket** in Couchbase is like a **database** — it stores and manages your data.  
-- The **benchmark** bucket will be used for **load testing** and **performance benchmarking**.  
-- Setting the **RAM Quota** ensures Couchbase allocates sufficient memory for **in-memory data operations**, improving overall speed.
+```output
+tcp   LISTEN 0      128          0.0.0.0:8091       0.0.0.0:*
+tcp   LISTEN 0      1024         0.0.0.0:11210      0.0.0.0:*
+tcp   LISTEN 0      1024            [::]:11210         [::]:*
+```
 
 Once the **installation and setup are complete**, you can now proceed to the **baseline testing** phase.

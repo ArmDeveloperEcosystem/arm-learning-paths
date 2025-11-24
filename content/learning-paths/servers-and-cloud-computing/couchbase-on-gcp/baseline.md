@@ -1,89 +1,90 @@
 ---
 title: Couchbase  Baseline Testing on Google Axion C4A Arm Virtual Machine
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
 ## Couchbase Baseline Testing on GCP SUSE VMs
-This section confirms that Couchbase is correctly installed and running on the GCP SUSE Arm64 VM. It includes checking required ports, initializing the cluster, verifying node status, and accessing the Web UI — ensuring the setup is ready for benchmarking.
+This section confirms that Couchbase is correctly installed and running on the GCP SUSE Arm64 VM. It includes initializing the cluster, verifying node status, and accessing the Web UI to create a bucket — this ensures the setup is ready for benchmarking.
 
-### Check Required Ports
-This command checks if those ports are open and active. If you see “LISTEN” next to these ports, it means Couchbase is ready to accept connections.
+### Setup the default cluster 
+Once the service is running, we need to setup the default cluster for the first time.
 
-Couchbase uses the following ports for basic operation:
-
-- Web Console: `8091`  
-- Query Service: `8093` (optional for N1QL queries)  
-- Data Service: `11210`  
-
-Check if the ports are listening:
+- Open Web Console using your VM public IP address that you saved off in the last step:
 
 ```console
-sudo ss -tuln | grep -E '8091|11210'
+http://<VM-Public-IP>:8091
 ```
+- Press "Setup New Cluster"
 
-```output
-tcp   LISTEN 0      128          0.0.0.0:8091       0.0.0.0:*
-tcp   LISTEN 0      1024         0.0.0.0:11210      0.0.0.0:*
-tcp   LISTEN 0      1024            [::]:11210         [::]:*
-```
+![Setup new cluster](images/cluster-setup-1.png "Setup new cluster")
 
-### Initialize Couchbase Cluster
-This step sets up Couchbase for the first time, essentially turning it on and configuring its basic settings.
-- You’re giving it an admin username and password for login.
-- The cluster name helps identify your setup.
-- You’re enabling key services (data, index, query).
-- You’re assigning memory so Couchbase knows how much RAM it can use.
-If it says **“SUCCESS: Cluster initialized”**, Couchbase is ready to store and manage data.
+- Provide a name for your cluster (example: "my_cluster") and create a password for your administrator account (leave the username as the default "Administrator")
 
-```console
-/opt/couchbase/bin/couchbase-cli cluster-init \
-  -c localhost:8091 \
-  --cluster-username Administrator \
-  --cluster-password password \
-  --cluster-name MyCluster \
-  --services data,index,query \
-  --cluster-ramsize 1024 \
-  --cluster-index-ramsize 512
-```
+![Create cluster and admin count](images/cluster-setup-2.png "Create cluster and admin count")
 
-You should see an output similar to:
-```output
-SUCCESS: Cluster initialized
-```
+- Check the "Accept terms" checkbox and press "Configure Disk, Memory, Services" button
+
+![Accept Terms](images/cluster-setup-3.png "Accept Terms")
+
+- Accept the defaults of your cluster configuration and press "Save & Finish"
+
+![Finalize configuration](images/cluster-setup-4.png "Finalize configuration")
+
+Our default cluster is now created!  Please retain the passord you created for your "Administrator" account... you'll need that in the next steps. 
 
 ### Verify Cluster Nodes
-This command checks if your Couchbase server (called a “node”) is running properly.
+This command checks if your Couchbase server (called a “node”) is running properly. Replace "password" with your specified Couchbase Administrator password.
 If the output says **“healthy active”**, it means your Couchbase node is working fine and ready for operations.
 
 ```console
 /opt/couchbase/bin/couchbase-cli server-list \
-  -u Administrator -p password \
-  --cluster localhost
+  -u Administrator -p password --cluster localhost
 ```
 
 ```output
 ns_1@cb.local 127.0.0.1:8091 healthy active
 ```
 
-### Web UI Access
-Ensure the Couchbase service is running and ports **8091 (Web UI)** and **11210 (Data)** are open. 
+### Prepare a Couchbase Bucket for benchmarking
+Once the service is running, you can access the **Couchbase Web Console** to create a bucket for benchmarking.
+
+Open Web Console using the public IP address of your VM that you saved off from the last step:
 
 ```console
-sudo systemctl start couchbase-server
-sudo systemctl enable couchbase-server
-sudo systemctl status couchbase-server
+http://<VM-Public-IP>:8091
 ```
-These commands make sure Couchbase is running and will automatically start after system reboots. After starting the service, open your web browser and visit your VM’s IP on port 8091.
-Once the service is running, Couchbase is accessible in your browser at:
+Use the admin `username` (default is "Administrator") and `password` you created during Couchbase cluster setup in the previous step.
 
-```cpp
-http://<VM-IP>:8091
-```
-You will see the Couchbase Web Console — a dashboard where you can log in, manage data buckets, and monitor performance visually.
+![Couchbase Dashboard](images/dashboard-1.png "Couchbase Dashboard")
 
-![Couchbase Dashboard alt-text#center](images/couchbase.png "Couchbase Web")
+- On the left hand side select "Buckets"
+- Press the "Add Bucket" in the upper right hand corner:
+
+![Create Bucket](images/create-bucket-1.png "Create Bucket")
+
+- Name the new bucket "benchmark"
+- The bucket type will be "Couchbase"
+- The Memory Quota can be set to "512 MB"
+
+![Create Bucket](images/create-bucket-2.png "Create Bucket")
+
+| **Parameter** | **Value** |
+|----------------|-----------|
+| **Bucket Name** | benchmark |
+| **Bucket Type** | Couchbase |
+| **Memory Quota** | 512 MB |
+
+- You should now see that your bucket has been created:
+
+![Created Bucket](images/create-bucket-3.png "Created Bucket")
+
+#### Additional notes about buckets in Couchbase
+
+- A **bucket** in Couchbase is like a **database** — it stores and manages your data.  
+- The **benchmark** bucket will be used for **load testing** and **performance benchmarking**.  
+- Setting the **RAM Quota** ensures Couchbase allocates sufficient memory for **in-memory data operations**, improving overall speed.
 
 You can now proceed to the next section for benchmarking to measure Couchbase’s performance.
