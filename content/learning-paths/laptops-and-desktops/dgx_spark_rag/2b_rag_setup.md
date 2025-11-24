@@ -21,7 +21,7 @@ Key advantages of FAISS for this application:
 - Speed: Uses advanced indexing algorithms to perform nearest-neighbor searches in milliseconds
 - Flexibility: Supports multiple distance metrics (L2, cosine similarity) and index types
 
-## Set up youe RAG workspace and data folder
+## Set up your RAG workspace and data folder
 
 Create a directory structure for your data:
 
