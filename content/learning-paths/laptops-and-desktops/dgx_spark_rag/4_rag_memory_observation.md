@@ -6,7 +6,10 @@ layout: "learningpathall"
 
 ## Observe unified memory performance
 
-In this section, you will observe how the Grace CPU and Blackwell GPU share data through unified memory during RAG execution.
+In this section, you will learn how to monitor unified memory performance and GPU utilization on Grace–Blackwell systems during Retrieval-Augmented Generation (RAG) AI workloads. By observing real-time system memory and GPU activity, you will verify zero-copy data sharing and efficient hybrid AI inference enabled by the Grace–Blackwell unified memory architecture.
+
+
+You will start from an idle system state, then progressively launch the RAG model server and run a query, while monitoring both system memory and GPU activity from separate terminals. This hands-on experiment demonstrates how unified memory enables both the Grace CPU and Blackwell GPU to access the same memory space without data movement, optimizing AI inference performance.
 
 You will start from an idle system state, then progressively launch the model server and run a query, while monitoring both system memory and GPU activity from separate terminals.
 
@@ -21,7 +24,8 @@ Open two terminals on your GB10 system and use them as listed in the table below
 
 You should also have your original terminals open that you used to run the `llama-server` and the RAG queries in the previous section. You will run these again and use the two new terminals for observation.
 
-### Prepare for the experiments
+
+### Prepare for Unified Memory Observation Experiments
 
 Ensure the RAG pipeline is stopped before starting the observation.
 

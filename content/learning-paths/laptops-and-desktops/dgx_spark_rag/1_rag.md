@@ -8,14 +8,15 @@ layout: learningpathall
 
 ## Before you start
 
-Before starting this Learning Path, you should complete [Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark](/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/) to learn about the CPU and GPU builds of llama.cpp. This background is recommended for building the RAG solution on llama.cpp.
+Complete the [Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark](/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/) Learning Path first to understand how to build and run llama.cpp on both the CPU and GPU. This foundational knowledge is essential before you begin building the RAG solution described here.
 
-The NVIDIA DGX Spark is also referred to as the Grace-Blackwell platform or GB10, the name of the NVIDIA Grace-Blackwell Superchip. 
+{{% notice Note %}}
+The NVIDIA DGX Spark is also called the Grace–Blackwell platform or GB10, which refers to the NVIDIA Grace–Blackwell Superchip.
+{{% /notice %}}
 
 ## What is RAG?
 
-Retrieval-Augmented Generation (RAG) combines information retrieval with language-model generation.
-Instead of relying solely on pre-trained weights, a RAG system retrieves relevant text from a document corpus and passes it to a language model to create factual, context-aware responses.
+Retrieval-Augmented Generation (RAG) combines information retrieval with language-model generation. Instead of relying solely on pre-trained weights, a RAG system retrieves relevant text from a document corpus and passes it to a language model to create factual, context-aware responses.
 
 Here is a typical pipeline:
 
@@ -23,9 +24,9 @@ User Query ─> Embedding ─> Vector Search ─> Context ─> Generation ─> A
 
 Each stage in this pipeline plays a distinct role in transforming a question into a context-aware response:
 
-* Embedding model: Converts text into dense numerical vectors. An example is e5-base-v2.
-* Vector database: Searches for semantically similar chunks. An example is FAISS.
-* Language model: Generates an answer conditioned on retrieved context. An example is Llama 3.1 8B Instruct.
+* Embedding model: converts text into dense numerical vectors. An example is e5-base-v2.
+* Vector database: searches for semantically similar chunks. An example is FAISS.
+* Language model: generates an answer conditioned on retrieved context. An example is Llama 3.1 8B Instruct.
 
 ## Why is Grace–Blackwell good for RAG pipelines?
 

@@ -1,16 +1,11 @@
 ---
 title: Build a RAG pipeline on NVIDIA DGX Spark
-
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for developers who want to understand and implement a Retrieval-Augmented Generation (RAG) pipeline on the NVIDIA DGX Spark platform. It is ideal for those interested in exploring how Arm-based Grace CPUs manage local document retrieval and orchestration, while Blackwell GPUs accelerate large language model inference through the open-source llama.cpp REST server.
 
 learning_objectives:
-    - Understand how a RAG system combines document retrieval and language model generation.  
+    - Describe how a RAG system combines document retrieval and language model generation.  
     - Deploy a hybrid CPU–GPU RAG pipeline on the GB10 platform using open-source tools.
     - Use the llama.cpp REST Server for GPU-accelerated inference with CPU-managed retrieval.  
     - Build a reproducible RAG application that demonstrates efficient hybrid computing.  
