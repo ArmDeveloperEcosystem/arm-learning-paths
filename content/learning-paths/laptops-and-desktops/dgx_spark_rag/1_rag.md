@@ -1,5 +1,5 @@
 ---
-title: Build a RAG pipeline on Arm-based Grace–Blackwell systems
+title: Explore building a RAG pipeline on Arm-based Grace–Blackwell systems
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,14 +8,13 @@ layout: learningpathall
 
 ## Get started
 
-Before starting this Learning Path, you should complete [Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark](/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/) to learn about the CPU and GPU builds of llama.cpp. This background is recommended for building the RAG solution on llama.cpp.
+Before getting started, you should complete the Learning Path [Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark](/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/) to learn about the CPU and GPU builds of llama.cpp. This background is recommended for building the RAG solution on llama.cpp.
 
 The NVIDIA DGX Spark is also referred to as the Grace-Blackwell platform or GB10, the name of the NVIDIA Grace-Blackwell Superchip. 
 
 ## What is RAG?
 
-Retrieval-Augmented Generation (RAG) combines information retrieval with language-model generation.
-Instead of relying solely on pre-trained weights, a RAG system retrieves relevant text from a document corpus and passes it to a language model to create factual, context-aware responses.
+Retrieval-Augmented Generation (RAG) combines information retrieval with language-model generation. Instead of relying solely on pre-trained weights, a RAG system retrieves relevant text from a document corpus and passes it to a language model to create factual, context-aware responses.
 
 Here is a typical pipeline:
 
@@ -35,9 +34,9 @@ Its unique CPU–GPU design and unified memory enable seamless data exchange, ma
 
 The GB10 platform includes:
 
-- Grace CPU (Armv9.2 architecture) – 20 cores including 10 Cortex-X925 cores and 10 Cortex-A725 cores
-- Blackwell GPU – CUDA 13.0 Tensor Core architecture
-- Unified Memory (128 GB NVLink-C2C) – Shared address space between CPU and GPU which allows both processors to access the same 128 GB unified memory region without copy operations. 
+- Grace CPU (Armv9.2 architecture) - 20 cores including 10 Cortex-X925 cores and 10 Cortex-A725 cores
+- Blackwell GPU - CUDA 13.0 Tensor Core architecture
+- Unified Memory (128 GB NVLink-C2C) - Shared address space between CPU and GPU which allows both processors to access the same 128 GB unified memory region without copy operations. 
 
 The GB10 provides the following benefits for RAG applications:
 
@@ -102,7 +101,7 @@ The technology stack you will use is listed below:
 | Unified Memory Architecture | Unified LPDDR5X shared memory | Grace CPU and Blackwell GPU | Enables zero-copy data sharing between CPU and GPU for improved latency and efficiency. |
 
 
-## Prerequisites Check
+## Check your setup 
 
 Before starting, run the following commands to confirm your hardware is ready:
 

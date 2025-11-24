@@ -41,7 +41,7 @@ The output is:
 {"status":"ok"}
 ```
 
-### Create the RAG query script
+## Create the RAG query script
 
 This script performs the full pipeline using the flow:
 

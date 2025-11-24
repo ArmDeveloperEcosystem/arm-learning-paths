@@ -84,7 +84,7 @@ wget https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/ma
 
 Run a Python script to verify that the e5-base-v2 model loads correctly and can generate embeddings.
 
-Save the code below in a text file named `vector-test.py`.
+Save the code below in a text file named `vector-test.py`:
 
 ```bash
 from sentence_transformers import SentenceTransformer
@@ -136,7 +136,7 @@ The e5-base-v2 results show:
 
 A successful output confirms that the e5-base-v2 embedding model is functional and ready for use.
 
-### Verify the Llama 3.1 model
+## Verify the Llama 3.1 model
 
 The llama.cpp runtime will be used for text generation using the Llama 3.1 model. 
 
