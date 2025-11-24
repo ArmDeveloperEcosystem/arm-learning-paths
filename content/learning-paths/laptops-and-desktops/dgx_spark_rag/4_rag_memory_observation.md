@@ -29,7 +29,7 @@ You should also have your original terminals open that you used to run the `llam
 
 Ensure the RAG pipeline is stopped before starting the observation.
 
-### Terminal 1 - system memory observation
+### Terminal 1:system memory observation
 
 Run the Bash commands below in terminal 1 to print the free memory of the system:
 
@@ -56,7 +56,7 @@ The printed fields are:
 - `free` — Memory not currently allocated or reserved by the system.  
 - `available` — Memory immediately available for new processes, accounting for reclaimable cache and buffers.
 
-### Terminal 2 – GPU status observation
+### Terminal 2: GPU status observation
 
 Run the Bash commands below in terminal 2 to print the GPU statistics:
 
@@ -138,7 +138,7 @@ The output in monitor terminal 2 is similar to:
 This confirms the model is resident in unified memory, which is visible by the increased system RAM usage.
 
 
-## Execute the RAG Query
+## Execute the RAG query
 
 With the observation code and the `llama-server` still running, run the RAG query in another terminal: 
 
