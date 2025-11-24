@@ -7,13 +7,12 @@ layout: learningpathall
 ---
 
 ## Set up your TypeScript baseline
-This section walks you through the baseline setup and validation of TypeScript on a Google Cloud C4A (Axion Arm64) virtual machine running SUSE Linux.
-The goal is to confirm that your TypeScript environment is functioning correctly, from initializing a project to compiling and executing a simple TypeScript file, ensuring a solid foundation before performance or benchmarking steps.
+This section walks you through the baseline setup and validation of TypeScript on a Google Cloud C4A (Axion Arm64) virtual machine running SUSE Linux. The goal is to confirm that your TypeScript environment is functioning correctly, from initializing a project to compiling and executing a simple TypeScript file, ensuring a solid foundation before performance or benchmarking steps.
 
-## Set Up a TypeScript Project
+## Set up a TypeScript project
 Before running any tests, you’ll create a dedicated project directory and initialize a minimal TypeScript environment.
 
-### Create project folder
+## Create project folder
 
 Start by creating a new folder to hold your TypeScript project files:
 
@@ -31,7 +30,7 @@ Next, initialize a new Node.js project. This creates a `package.json` file that 
 npm init -y
 ```
 
-### Install Node.js type definitions
+## Install Node.js type definitions
 
 To enable TypeScript to properly recognize Node.js built-in APIs (like fs, path, and process), install the Node.js type definitions package:
 
@@ -58,7 +57,7 @@ You should see output similar to:
 ## Perform baseline testing
 With the TypeScript environment configured, you’ll now perform a baseline functionality test to confirm that TypeScript compilation and execution work correctly on your Google Cloud SUSE Arm64 VM.
 
-### Create a Simple TypeScript File
+### Create a simple TypeScript file
 
 Create a file named `hello.ts` with the following content:
 
