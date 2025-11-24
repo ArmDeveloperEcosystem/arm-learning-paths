@@ -1,6 +1,10 @@
 ---
 title: Deploy Django on Google Cloud C4A (Arm-based Axion VMs)
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 30
 
 who_is_this_for: This learning path is intended for software developers deploying and optimizing Django-based web applications on Linux/Arm64 environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
