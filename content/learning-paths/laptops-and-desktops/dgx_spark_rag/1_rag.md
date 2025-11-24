@@ -50,7 +50,7 @@ The GB10 provides the following benefits for RAG applications:
 Here is a diagram of the architecture:
 
 ```console
-.
+ 
                      ┌─────────────────────────────────────┐
                      │         User Query                  │
                      └──────────────┬──────────────────────┘
