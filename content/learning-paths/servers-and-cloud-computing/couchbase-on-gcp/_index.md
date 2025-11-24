@@ -7,13 +7,13 @@ cascade:
     
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is intended for software developers deploying and optimizing Couchbase  workloads on Linux/Arm64 environments, specifically using Google Cloud C4A virtual machines powered by Axion processors. 
+who_is_this_for: This learning path is intended for software developers deploying and optimizing Couchbase  workloads on Arm Linux environments, specifically using Google Cloud C4A virtual machines powered by Axion processors. 
 
 learning_objectives:
   - Provision an Arm-based SUSE SLES virtual machine on Google Cloud (C4A with Axion processors)
   - Install Couchbase Server on the SUSE Arm64 (C4A) instance
-  - Verify Couchbase deployment by accessing the Web Console, creating a test bucket, and confirming cluster health on Arm64  
-  - Benchmark Couchbase by measuring operations per second (Ops/sec), memory utilization, and disk performance on the Arm64 platform
+  - Verify Couchbase deployment by accessing the Web Console, creating a test bucket, and confirming cluster health 
+  - Benchmark Couchbase by measuring operations per second (ops/sec), memory utilization, and disk performance on the Arm platform
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled  
@@ -31,8 +31,6 @@ armips:
 
 tools_software_languages:
   - Couchbase
-  - cbc-pillowfight
-  - curl
 
 operatingsystems:
   - Linux
