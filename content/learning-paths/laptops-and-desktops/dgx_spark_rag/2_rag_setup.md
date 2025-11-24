@@ -1,5 +1,5 @@
 ---
-title: Configure your development environment and prepare models
+title: Configure the RAG development environment and models
 weight: 3
 layout: "learningpathall"
 ---
@@ -80,11 +80,11 @@ hf download intfloat/e5-base-v2 --local-dir ~/models/e5-base-v2
 wget https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/main/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf -P ~/models/Llama-3.1-8B-gguf
 ```
 
-### Verify the e5-base-v2 model
+## Verify the e5-base-v2 model
 
 Run a Python script to verify that the e5-base-v2 model loads correctly and can generate embeddings.
 
-Save the code below in a text file named `vector-test.py`.
+Save the code below in a text file named `vector-test.py`:
 
 ```bash
 from sentence_transformers import SentenceTransformer
@@ -136,7 +136,7 @@ The e5-base-v2 results show:
 
 A successful output confirms that the e5-base-v2 embedding model is functional and ready for use.
 
-### Verify the Llama 3.1 model
+## Verify the Llama 3.1 model
 
 The llama.cpp runtime will be used for text generation using the Llama 3.1 model. 
 

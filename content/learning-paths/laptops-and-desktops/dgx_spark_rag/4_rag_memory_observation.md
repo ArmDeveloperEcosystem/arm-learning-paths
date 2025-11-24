@@ -1,12 +1,15 @@
 ---
-title: Observe unified memory performance
+title: Monitor unified memory performance
 weight: 6
 layout: "learningpathall"
 ---
 
 ## Observe unified memory performance
 
-In this section, you will observe how the Grace CPU and Blackwell GPU share data through unified memory during RAG execution.
+In this section, you will learn how to monitor unified memory performance and GPU utilization on Grace–Blackwell systems during Retrieval-Augmented Generation (RAG) AI workloads. By observing real-time system memory and GPU activity, you will verify zero-copy data sharing and efficient hybrid AI inference enabled by the Grace–Blackwell unified memory architecture.
+
+
+You will start from an idle system state, then progressively launch the RAG model server and run a query, while monitoring both system memory and GPU activity from separate terminals. This hands-on experiment demonstrates how unified memory enables both the Grace CPU and Blackwell GPU to access the same memory space without data movement, optimizing AI inference performance.
 
 You will start from an idle system state, then progressively launch the model server and run a query, while monitoring both system memory and GPU activity from separate terminals.
 
@@ -21,11 +24,12 @@ Open two terminals on your GB10 system and use them as listed in the table below
 
 You should also have your original terminals open that you used to run the `llama-server` and the RAG queries in the previous section. You will run these again and use the two new terminals for observation.
 
-### Prepare for the experiments
+
+## Prepare for unified memory observation
 
 Ensure the RAG pipeline is stopped before starting the observation.
 
-#### Terminal 1 - system memory observation
+### Terminal 1:system memory observation
 
 Run the Bash commands below in terminal 1 to print the free memory of the system:
 
@@ -52,7 +56,7 @@ The printed fields are:
 - `free` — Memory not currently allocated or reserved by the system.  
 - `available` — Memory immediately available for new processes, accounting for reclaimable cache and buffers.
 
-#### Terminal 2 – GPU status observation
+### Terminal 2: GPU status observation
 
 Run the Bash commands below in terminal 2 to print the GPU statistics:
 
@@ -85,7 +89,7 @@ Here is an explanation of the fields:
 | `memory.used`        | GPU VRAM usage            | GB10 does not include separate VRAM; all data resides within Unified Memory |
 
 
-### Run the llama-server
+## Run the llama-server
 
 With the idle condition understood, start the `llama.cpp` REST server again in your original terminal, not the two new terminals being used for observation.
 
@@ -134,7 +138,7 @@ The output in monitor terminal 2 is similar to:
 This confirms the model is resident in unified memory, which is visible by the increased system RAM usage.
 
 
-## Execute the RAG Query
+## Execute the RAG query
 
 With the observation code and the `llama-server` still running, run the RAG query in another terminal: 
 
@@ -196,7 +200,7 @@ The GPU executes compute kernels with GPU utilization at 96%, without reading fr
 
 The `utilization.memory=0` and `memory.used=[N/A]` metrics are clear signs that data sharing, not data copying, is happening.
 
-### Observe and interpret unified memory behavior
+## Interpret unified memory behavior
 
 This experiment confirms the Grace–Blackwell Unified Memory architecture in action:
 - The CPU and GPU share the same address space.
@@ -207,7 +211,7 @@ Data does not move — computation moves to the data.
 
 The Grace CPU orchestrates retrieval, and the Blackwell GPU performs generation, both operating within the same Unified Memory pool.
 
-### Summary of unified memory behavior
+## Summary of unified memory behavior
 
 | **Observation**                                    | **Unified Memory Explanation**                           |
 |----------------------------------------------------|----------------------------------------------------------|

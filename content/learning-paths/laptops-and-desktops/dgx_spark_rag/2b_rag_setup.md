@@ -1,16 +1,16 @@
 ---
-title: Add documents to the vector database 
+title: Add documents to the RAG vector database 
 weight: 4
 layout: "learningpathall"
 ---
 
-## Prepare a sample document corpus
+## Prepare a sample document corpus for RAG
 
 You are now ready to add your documents to the RAG database that will be used for retrieval and reasoning. 
 
 This converts your raw knowledge documents into clean, chunked text segments that can later be vectorized and indexed by FAISS.
 
-## Understanding FAISS for vector search
+## Use FAISS for efficient vector search on Arm
 
 FAISS (Facebook AI Similarity Search) is an open-source library developed by Meta AI for efficient similarity search and clustering of dense vectors. It's particularly well-suited for RAG applications because it can quickly find the most relevant document chunks from large collections.
 
@@ -21,7 +21,7 @@ Key advantages of FAISS for this application:
 - Speed: Uses advanced indexing algorithms to perform nearest-neighbor searches in milliseconds
 - Flexibility: Supports multiple distance metrics (L2, cosine similarity) and index types
 
-### Create a workspace and data folder
+## Set up your RAG workspace and data folder
 
 Create a directory structure for your data:
 
@@ -57,7 +57,7 @@ Use `wget` to batch download all the PDFs into `~/rag/pdf`.
 wget -P ~/rag/pdf -i datasheet.txt
 ```
 
-### Convert PDF into txt file
+## Convert PDF documents to text files
 
 Then, create a Python file named `pdf2text.py` with the code below:
 
@@ -109,7 +109,7 @@ At the end of the output you see:
 Total converted PDFs: 12
 ```
 
-### Verify your corpus
+## Verify your document corpus
 
 You should now see a number of files in your folder. Run the command below to inspect the results: 
 
@@ -119,7 +119,7 @@ find ~/rag/text/ -type f -name "*.txt" -exec cat {} + | wc -l
 
 It will show how many lines are in total. The number is around 100,000.
 
-## Build an Embedding and Search Index
+## Build an embedding and search index with FAISS
 
 Convert your prepared text corpus into vector embeddings and store them in a FAISS index for efficient semantic search.
 
@@ -133,7 +133,7 @@ This stage enables your RAG pipeline to retrieve the most relevant text chunks w
 
 Use e5-base-v2 to encode the documents and create a FAISS vector index.
 
-### Create the FAISS builder script
+## Create and run the FAISS builder script
 
 
 ```bash

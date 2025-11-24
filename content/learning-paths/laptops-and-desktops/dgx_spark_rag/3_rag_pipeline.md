@@ -1,10 +1,10 @@
 ---
-title: Implementing the RAG pipeline
+title: Build and run the RAG pipeline
 weight: 5
 layout: "learningpathall"
 ---
 
-## Integrating retrieval and generation
+## Integrate retrieval and generation on Arm
 
 In the previous sections, you prepared the environment, validated the e5-base-v2 embedding model, and verified that the Llama 3.1 8B Instruct model runs successfully on the Grace–Blackwell (GB10) platform.
 
@@ -17,7 +17,7 @@ Building upon the previous modules, you will now:
 - Integrate the llama.cpp REST server for GPU-accelerated inference.
 - Execute a complete Retrieval-Augmented Generation (RAG) workflow for end-to-end question answering.
 
-### Start the llama.cpp REST server
+## Start the llama.cpp REST server
 
 Before running the RAG query script, ensure the LLM server is active by running:
 
@@ -41,7 +41,7 @@ The output is:
 {"status":"ok"}
 ```
 
-### Create the RAG query script
+## Create the RAG query script
 
 This script performs the full pipeline using the flow:
 
@@ -185,7 +185,7 @@ This demonstrates that the RAG system correctly retrieved relevant sources and g
 
 You can reference the section 5.1.2 on the PDF to verify the result.
 
-### Observe CPU and GPU utilization
+## Observe CPU and GPU utilization
 
 If you have installed `htop` and `nvtop`, you can observe CPU and GPU utilization.
 
