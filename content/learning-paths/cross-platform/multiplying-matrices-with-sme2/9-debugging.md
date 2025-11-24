@@ -96,7 +96,7 @@ product, and the trace displays the content of the ZA storage.
 You can get a Tarmac trace when invoking `run-fvp.sh` by adding the `--trace` option as the *first* argument, for example:
 
 ```BASH
-docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v2 ./run-fvp.sh --trace sme2_matmul_asm
+docker run --rm -v "$PWD:/work" armswdev/sme2-learning-path:sme2-environment-v3 ./run-fvp.sh --trace build-baremetal/sme2_matmul_asm
 ```
 
 {{% notice Tip %}}

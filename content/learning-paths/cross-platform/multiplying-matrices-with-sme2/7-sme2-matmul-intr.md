@@ -179,7 +179,7 @@ Note again that `matmul_intr_impl` function has been annotated at line 4 with:
 
 - `__arm_inout("za")`, because the function reuses the ZA storage from its caller
 
-The multiplication with the outer product is performed in a double-nested loop, over the `M` (line 7) and `N` (line 11) dimensions of the input matrices `matLeft_mod` and `matRight`. Both loops have an `SVL` step increment, which corresponds to the horizontal and vertical dimensions of the ZA storage that will be used as one tile at a time will be processed. 
+The multiplication with the outer product is performed in a double-nested loop, over the `M` (line 7) and `N` (line 11) dimensions of the input matrices `matLeft_mod` and `matRight`. Both loops have an `SVL` step increment, which corresponds to the horizontal and vertical dimensions of the ZA storage that will be used as one tile at a time will be processed.
 
 The `M` and `N` dimensions of the inputs might not be perfect multiples of `SVL` so the predicates `pMDim` (line 9) (respectively `pNDim` at line 13) are computed in order to know which rows (respectively columns) are valid.
 
@@ -217,33 +217,60 @@ with the `IMPL` macro defined to be `intr` in the `Makefile`.
 First, make sure that the `sme2_matmul_intr` executable is up-to-date:
 
 {{< tabpane code=true >}}
-  {{< tab header="Native SME2 support" language="bash" output_lines="2">}}
-  make sme2_matmul_intr
-  make: `sme2_matmul_intr' is up to date.
-  {{< /tab >}}
 
-  {{< tab header="Emulated SME2 support" language="bash" output_lines="2">}}
-  docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v2 make sme2_matmul_intr
-  make: 'sme2_matmul_intr' is up to date.
-  {{< /tab >}}
+{{< tab header="Native SME2 support" language="bash" output_lines="2-3">}}
+ninja -C build-native/ sme2_matmul_intr
+ninja: Entering directory `build-native/'
+ninja: no work to do.
+{{< /tab >}}
+
+{{< tab header="Android phones with SME2 support" language="bash" output_lines="2-3">}}
+ninja -C build-android/ sme2_matmul_intr
+ninja: Entering directory `build-android/'
+ninja: no work to do.
+{{< /tab >}}
+
+{{< tab header="Emulated SME2 support" language="bash" output_lines="2-3">}}
+docker run --rm -v "$PWD:/work" armswdev/sme2-learning-path:sme2-environment-v3 ninja -C build-baremetal/ sme2_matmul_intr
+ninja: Entering directory `build-baremetal/'
+ninja: no work to do.
+{{< /tab >}}
+
 {{< /tabpane >}}
 
 Then execute `sme2_matmul_intr` either natively or on the FVP:
 
 {{< tabpane code=true >}}
-  {{< tab header="Native SME2 support" language="bash" output_lines="2-4">}}
-  ./sme2_matmul_intr
-  SME2 Matrix Multiply fp32 *intr* [verification mode] with M=125, K=70, N=35
-  Matrix preprocessing: PASS !
-  Matrix multiplication: PASS !
-  {{< /tab >}}
 
-  {{< tab header="Emulated SME2 support" language="bash" output_lines="2-6">}}
-  docker run --rm -v "$PWD:/work" -w /work armswdev/sme2-learning-path:sme2-environment-v2 ./run-fvp.sh sme2_matmul_intr
-  SME2 Matrix Multiply fp32 *intr* [verification mode] with M=125, K=70, N=35
-  Matrix preprocessing: PASS !
-  Matrix multiplication: PASS !
+{{< tab header="Native SME2 support" language="bash" output_lines="2-4">}}
+./build-native/sme2_matmul_intr
+SME2 Matrix Multiply fp32 *intr* [verification mode] with M=125, K=70, N=35
+Matrix preprocessing: PASS !
+Matrix multiplication: PASS !
+{{< /tab >}}
 
-  Info: /OSCI/SystemC: Simulation stopped by user.
-  {{< /tab >}}
+{{< tab header="Android phones with SME2 support" language="bash" output_lines="2,5-7">}}
+adb push build-android/sme2_matmul_intr /data/local/tmp
+build-android/sme2_matmul_intr: 1 file pushed, 0 skipped. 29.7 MB/s (19456 bytes in 0.001s)
+adb shell chmod 755 /data/local/tmp/sme2_matmul_intr
+adb shell /data/local/tmp/sme2_matmul_intr
+SME2 Matrix Multiply fp32 *intr* [verification mode] with M=125, K=70, N=35
+Matrix preprocessing: PASS !
+Matrix multiplication: PASS !
+{{< /tab >}}
+
+{{< tab header="Emulated SME2 support" language="bash" output_lines="2-6">}}
+docker run --rm -v "$PWD:/work" armswdev/sme2-learning-path:sme2-environment-v3 ./run-fvp.sh build-baremetal/sme2_matmul_intr
+SME2 Matrix Multiply fp32 *intr* [verification mode] with M=125, K=70, N=35
+Matrix preprocessing: PASS !
+Matrix multiplication: PASS !
+
+Info: /OSCI/SystemC: Simulation stopped by user.
+{{< /tab >}}
+
 {{< /tabpane >}}
+
+{{% notice Tip %}}
+As with the `sme2_matmul_asm` program, you can provide the `M`, `K`and `N`
+parameters on the command line to `sme2_matmul_intr`.
+{{% /notice %}}

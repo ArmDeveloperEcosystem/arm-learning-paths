@@ -17,9 +17,11 @@ prerequisites:
     - Working knowledge of Arm’s SVE and SME2 instruction sets
     - Intermediate proficiency with the C programming language and the Armv9-A assembly language
     - A computer running Linux, macOS, or Windows
-    - Installations of Git and Docker for project setup and emulation
+    - Installations of Git, CMake and Ninja for project setup
     - A platform that supports SME2 - see the list of [devices with SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices) or an emulator to run code with SME2 instructions
-    - Compiler support for SME2 instructions (for example, LLVM 17+ with SME2 backend support)
+    - Installation of Docker for SME2 emulation (if you don't have SME2 available)
+    - Installation of Android Development Studio and adb (if you're targeting an Android phone with SME2 support)
+    - Compiler support for SME2 instructions (for example, LLVM 18 or later with SME2 backend support)
 
 author: Arnaud de Grandmaison
 
@@ -32,7 +34,6 @@ armips:
 tools_software_languages:
     - C
     - Clang
-    - Runbook
     - LLVM
 
 operatingsystems:
