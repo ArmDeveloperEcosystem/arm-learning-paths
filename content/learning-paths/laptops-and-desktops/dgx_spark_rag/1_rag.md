@@ -1,5 +1,5 @@
 ---
-title: Build a RAG pipeline on Arm-based Grace–Blackwell (GB10) systems
+title: Build a RAG pipeline on Arm-based Grace–Blackwell systems
 weight: 2
 
 ### FIXED, DO NOT MODIFY

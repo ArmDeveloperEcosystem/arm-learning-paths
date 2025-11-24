@@ -1,5 +1,5 @@
 ---
-title: Monitor unified memory performance on Arm-based Grace–Blackwell systems
+title: Monitor unified memory performance
 weight: 6
 layout: "learningpathall"
 ---

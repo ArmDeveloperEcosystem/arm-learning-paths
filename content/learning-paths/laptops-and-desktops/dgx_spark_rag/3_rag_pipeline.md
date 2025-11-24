@@ -1,5 +1,5 @@
 ---
-title: Build and run the RAG pipeline on Arm-based Grace–Blackwell (GB10) systems
+title: Build and run the RAG pipeline
 weight: 5
 layout: "learningpathall"
 ---
