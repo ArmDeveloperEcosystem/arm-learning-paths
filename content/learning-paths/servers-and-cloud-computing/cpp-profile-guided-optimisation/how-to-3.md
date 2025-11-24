@@ -16,7 +16,7 @@ For this example, you can use an Arm computer (Linux or Windows).
 
 ## What tools are needed to run a Google Benchmark example on Linux?
 
-For Linux, run the following commands to install the prerequisite packages:
+Run the following commands to install the prerequisite packages:
 
 ```bash
 sudo apt update
@@ -25,11 +25,11 @@ sudo apt install gcc g++ make libbenchmark-dev -y
 
 ## What tools are needed to run a Google Benchmark example on Windows?
 
-If you are using Windows, download the [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain) to install the prerequisite packages.
+Download the [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain) to install the prerequisite packages.
 
 Next, install the static version of Google Benchmark for Arm64 via vcpkg. Run the following commands in Powershell as Administrator:
 
-```bash
+```console
 cd C:\git
 git clone https://github.com/microsoft/vcpkg.git
 cd vcpkg
@@ -73,7 +73,7 @@ g++ -O3 -std=c++17 div_bench.cpp -lbenchmark -lpthread -o div_bench.base
 
 **(Windows)** Compile with the command:
 
-```bash
+```console
 cl /D BENCHMARK_STATIC_DEFINE div_bench.cpp /link /LIBPATH:"$VCPKG\lib" benchmark.lib benchmark_main.lib shlwapi.lib
 ```
 
@@ -85,7 +85,7 @@ cl /D BENCHMARK_STATIC_DEFINE div_bench.cpp /link /LIBPATH:"$VCPKG\lib" benchmar
 
 **(Windows)** Run the program:
 
-```bash
+```console
 .\div_bench.exe
 ```
 

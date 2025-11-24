@@ -10,7 +10,7 @@ layout: learningpathall
 
 To generate a binary optimized using runtime profile data, first build an instrumented binary that records usage data. Before building, open the Arm dev shell so that the compiler is in your PATH:
 
-```bash
+```console
 & "C:\Program Files\Microsoft Visual Studio\18\Community\Common7\Tools\Launch-VsDevShell.ps1" -Arch arm64
 ```
 
@@ -18,13 +18,13 @@ To generate a binary optimized using runtime profile data, first build an instru
 
 Next, set an environment variable to refer to the installed packages directory:
 
-```bash
+```console
 $VCPKG="C:\git\vcpkg\installed\arm64-windows-static"
 ```
 
 Next, run the following command, which includes the `/GENPROFILE` flag, to build the instrumented binary:
 
-```bash
+```console
 cl /O2 /GL /D BENCHMARK_STATIC_DEFINE /I "$VCPKG\include" /Fe:div_bench.exe div_bench.cpp /link /LTCG /GENPROFILE /PGD:div_bench.pgd /LIBPATH:"$VCPKG\lib" benchmark.lib benchmark_main.lib shlwapi.lib
 ```
 
@@ -46,7 +46,7 @@ The linker options used in this command are:
 
 Next, run the instrumented binary to generate the profile data:
 
-```bash
+```console
 .\div_bench.exe
 ```
 
@@ -54,7 +54,7 @@ This execution creates profile data files (typically with a `.pgc` extension) in
 
 Now recompile the program using the `/USEPROFILE` flag to apply optimizations based on the collected data: 
 
-```bash
+```console
 cl /O2 /GL /D BENCHMARK_STATIC_DEFINE /I "$VCPKG\include" /Fe:div_bench_opt.exe div_bench.cpp /link /LTCG:PGOptimize /USEPROFILE /PGD:div_bench.pgd /LIBPATH:"$VCPKG\lib" benchmark.lib benchmark_main.lib shlwapi.lib
 ```
 
@@ -64,7 +64,7 @@ In this command, the [USEPROFILE linker option](https://learn.microsoft.com/en-u
 
 Now run the optimized binary:
 
-```bash
+```console
 .\div_bench_opt.exe
 ```
 
