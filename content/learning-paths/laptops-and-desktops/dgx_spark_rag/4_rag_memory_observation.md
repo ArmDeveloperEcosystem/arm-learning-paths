@@ -1,5 +1,5 @@
 ---
-title: Observe unified memory performance
+title: Monitor unified memory performance on Arm-based Grace–Blackwell systems
 weight: 6
 layout: "learningpathall"
 ---
@@ -25,7 +25,7 @@ Open two terminals on your GB10 system and use them as listed in the table below
 You should also have your original terminals open that you used to run the `llama-server` and the RAG queries in the previous section. You will run these again and use the two new terminals for observation.
 
 
-### Prepare for Unified Memory Observation Experiments
+### Prepare for unified memory observation
 
 Ensure the RAG pipeline is stopped before starting the observation.
 
@@ -200,7 +200,7 @@ The GPU executes compute kernels with GPU utilization at 96%, without reading fr
 
 The `utilization.memory=0` and `memory.used=[N/A]` metrics are clear signs that data sharing, not data copying, is happening.
 
-### Observe and interpret unified memory behavior
+### Interpret unified memory behavior
 
 This experiment confirms the Grace–Blackwell Unified Memory architecture in action:
 - The CPU and GPU share the same address space.

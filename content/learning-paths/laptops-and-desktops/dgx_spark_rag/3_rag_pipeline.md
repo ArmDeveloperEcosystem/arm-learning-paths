@@ -1,10 +1,10 @@
 ---
-title: Implementing the RAG pipeline
+title: Build and run the RAG pipeline on Arm-based Grace–Blackwell (GB10) systems
 weight: 5
 layout: "learningpathall"
 ---
 
-## Integrating retrieval and generation
+## Integrate retrieval and generation on Arm
 
 In the previous sections, you prepared the environment, validated the e5-base-v2 embedding model, and verified that the Llama 3.1 8B Instruct model runs successfully on the Grace–Blackwell (GB10) platform.
 

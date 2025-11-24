@@ -1,5 +1,5 @@
 ---
-title: Configure your development environment and prepare models
+title: Configure the RAG development environment and models
 weight: 3
 layout: "learningpathall"
 ---

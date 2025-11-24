@@ -1,12 +1,12 @@
 ---
-title: Understanding RAG on Grace–Blackwell (GB10)
+title: Build a RAG pipeline on Arm-based Grace–Blackwell (GB10) systems
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Before you start
+## Get started
 
 Before starting this Learning Path, you should complete [Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark](/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/) to learn about the CPU and GPU builds of llama.cpp. This background is recommended for building the RAG solution on llama.cpp.
 
