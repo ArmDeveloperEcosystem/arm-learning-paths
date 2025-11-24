@@ -17,7 +17,7 @@ Building upon the previous modules, you will now:
 - Integrate the llama.cpp REST server for GPU-accelerated inference.
 - Execute a complete Retrieval-Augmented Generation (RAG) workflow for end-to-end question answering.
 
-### Start the llama.cpp REST server
+## Start the llama.cpp REST server
 
 Before running the RAG query script, ensure the LLM server is active by running:
 
@@ -185,7 +185,7 @@ This demonstrates that the RAG system correctly retrieved relevant sources and g
 
 You can reference the section 5.1.2 on the PDF to verify the result.
 
-### Observe CPU and GPU utilization
+## Observe CPU and GPU utilization
 
 If you have installed `htop` and `nvtop`, you can observe CPU and GPU utilization.
 

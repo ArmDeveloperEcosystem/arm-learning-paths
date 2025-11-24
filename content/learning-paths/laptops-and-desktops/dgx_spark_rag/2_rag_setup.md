@@ -80,7 +80,7 @@ hf download intfloat/e5-base-v2 --local-dir ~/models/e5-base-v2
 wget https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/main/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf -P ~/models/Llama-3.1-8B-gguf
 ```
 
-### Verify the e5-base-v2 model
+## Verify the e5-base-v2 model
 
 Run a Python script to verify that the e5-base-v2 model loads correctly and can generate embeddings.
 

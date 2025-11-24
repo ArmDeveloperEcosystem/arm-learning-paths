@@ -133,7 +133,7 @@ This stage enables your RAG pipeline to retrieve the most relevant text chunks w
 
 Use e5-base-v2 to encode the documents and create a FAISS vector index.
 
-### Create and run the FAISS builder script
+## Create and run the FAISS builder script
 
 
 ```bash
