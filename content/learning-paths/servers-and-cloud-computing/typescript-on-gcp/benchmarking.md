@@ -65,7 +65,7 @@ tsc benchmark_jmh.ts
 This command converts your TypeScript file into JavaScript and creates a new file called `benchmark_jmh.js` in your project directory.  
 You can now run this JavaScript file with Node.js to benchmark performance on your Google Cloud C4A (Arm64) VM.
 
-## Run the Benchmark
+## Run the benchmark
 Now, execute the compiled JavaScript file with Node.js:
 
 ```console
@@ -87,13 +87,13 @@ Iteration 10: 0.673 ms
 
 Average execution time over 10 iterations: 0.888 ms
 ```
-## Interpret your TypeScript performance data on Arm
+## Interpret your TypeScript performance data
 
 Each iteration measures how long it takes to run the benchmarked function once, while the average execution time is calculated by dividing the total time for all runs by the number of iterations. Running the benchmark multiple times helps smooth out fluctuations caused by factors like CPU scheduling, garbage collection, or memory caching. This approach produces more consistent and meaningful performance data, similar to the methodology used by Java’s JMH benchmarking framework.
 
 The average execution time reflects how efficiently the function executes under steady-state conditions. The first iteration often shows higher latency because Node.js performing initial JIT (Just-In-Time) compilation and optimization, a common warm-up behavior in JavaScript/TypeScript benchmarks.
 
-### Benchmark summary on Arm64
+## Benchmark summary
 Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
 
 | Iteration | 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10    | Average |

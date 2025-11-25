@@ -43,7 +43,7 @@ The `-g` flag installs packages globally, making tsc and ts-node available syste
 
 This approach simplifies workflows for developers running multiple TypeScript projects on the same VM.
 
-## Verify installations
+## Verify installation
 Check that Node.js, npm, TypeScript, and ts-node are all installed correctly:
 
 ```console
