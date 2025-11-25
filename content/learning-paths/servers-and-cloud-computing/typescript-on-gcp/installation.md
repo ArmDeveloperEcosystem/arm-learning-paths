@@ -6,22 +6,22 @@ weight: 4
 layout: learningpathall
 ---
 
-## Install TypeScript on GCP VM
+## Overview
 This section walks you through installing TypeScript and its dependencies on a Google Cloud Platform (GCP) SUSE Arm64 virtual machine. You’ll install Node.js, npm, TypeScript, and ts-node, and verify that everything works correctly.
 
-Running TypeScript on Google Cloud C4A instances, powered by Axion Arm64 processors, provides a high-performance and energy-efficient platform for Node.js-based workloads.
+Running TypeScript on Google Cloud C4A instances, powered by Axion Arm64 processors provides a high-performance and energy-efficient platform for Node.js-based workloads.
 
-### Update SUSE System
+## Update SUSE system
 Before installing new packages, refresh the repositories and update existing ones to ensure your environment is current and secure:
 
 ```console
 sudo zypper refresh
 sudo zypper update -y
 ```
-Keeping your system up to date ensures that dependencies, libraries, and compilers required for Node.js and TypeScript work seamlessly on the Arm64 architecture.
+Updating your system helps make sure all the tools and libraries you need for Node.js and TypeScript work smoothly on Arm64.
 
-### Install Node.js and npm
-Node.js provides the JavaScript runtime that powers TypeScript execution, while npm (Node Package Manager) manages project dependencies and global tools.
+## Install Node.js and npm
+Node.js is the JavaScript runtime that runs your TypeScript code. npm is the tool you use to install and manage packages and tools for your projects.
 
 Install both packages using SUSE’s repositories:
 
@@ -66,5 +66,4 @@ Version 5.9.3
 v10.9.2
 ```
 
-Node.js, npm, and TypeScript are now successfully installed and verified on your Google Cloud C4A (Arm64) virtual machine.
-You’re ready to create and execute TypeScript scripts for testing, deployment, or performance benchmarking.
+You’ve now installed and verified Node.js, npm, and TypeScript on your Google Cloud C4A (Arm64) virtual machine. You’re ready to start creating and running TypeScript scripts for testing, deployment, or performance checks.

@@ -56,16 +56,16 @@ Code explanation:
 
 This JMH-style benchmarking approach provides more accurate and repeatable performance metrics than a single execution, making it ideal for performance testing on Arm-based systems.
 
-### Compile the TypeScript Benchmark
+## Compile the TypeScript Benchmark
 First, compile the benchmark file from TypeScript to JavaScript using the TypeScript compiler (tsc):
 
 ```console
 tsc benchmark_jmh.ts
 ```
-This command transpiles your TypeScript code into standard JavaScript, generating a file named `benchmark_jmh.js` in the same directory.
-The resulting JavaScript can be executed by Node.js, allowing you to measure performance on your Google Cloud C4A (Arm64) virtual machine.
+This command converts your TypeScript file into JavaScript and creates a new file called `benchmark_jmh.js` in your project directory.  
+You can now run this JavaScript file with Node.js to benchmark performance on your Google Cloud C4A (Arm64) VM.
 
-### Run the Benchmark
+## Run the Benchmark
 Now, execute the compiled JavaScript file with Node.js:
 
 ```console
@@ -87,19 +87,11 @@ Iteration 10: 0.673 ms
 
 Average execution time over 10 iterations: 0.888 ms
 ```
+## Interpret your TypeScript performance data on Arm
 
-## Run and analyze TypeScript benchmark results on Google Axion C4A
+Each iteration measures how long it takes to run the benchmarked function once, while the average execution time is calculated by dividing the total time for all runs by the number of iterations. Running the benchmark multiple times helps smooth out fluctuations caused by factors like CPU scheduling, garbage collection, or memory caching. This approach produces more consistent and meaningful performance data, similar to the methodology used by Java’s JMH benchmarking framework.
 
-  * Iteration times → Each iteration represents the time taken for one complete execution of the benchmarked function.
-  * Average execution time → Calculated as the total of all iteration times divided by the number of iterations. This gives a stable measure of real-world performance.
-  * Why multiple iterations?
-    A single run can be affected by transient factors such as CPU scheduling, garbage collection, or memory caching.
-    Running multiple iterations and averaging the results smooths out variability, producing more repeatable and statistically meaningful data, similar to Java’s JMH benchmarking methodology.
-    
-### Interpret your TypeScript performance data on Arm
-
-The average execution time reflects how efficiently the function executes under steady-state conditions.
-The first iteration often shows higher latency because Node.js performing initial JIT (Just-In-Time) compilation and optimization, a common warm-up behavior in JavaScript/TypeScript benchmarks.
+The average execution time reflects how efficiently the function executes under steady-state conditions. The first iteration often shows higher latency because Node.js performing initial JIT (Just-In-Time) compilation and optimization, a common warm-up behavior in JavaScript/TypeScript benchmarks.
 
 ### Benchmark summary on Arm64
 Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
@@ -107,13 +99,12 @@ Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm6
 | Iteration | 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10    | Average |
 |-----------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|---------|
 | Time (ms) | 2.286 | 0.749 | 1.145 | 0.674 | 0.671 | 0.671 | 0.672 | 0.667 | 0.667 | 0.673 | 0.888   |
+## Summarize TypeScript benchmarking results on Arm64
 
-### TypeScript performance benchmarking summary on Arm64
+Here’s what the benchmark results show for Google Axion C4A Arm-based instances:
 
-When you look at the benchmarking results, you will notice that on the Google Axion C4A Arm-based instances:
+- The average execution time on Arm64 is about 0.888 ms, which means TypeScript code runs efficiently on Arm-based VMs.
+- The first run is usually a bit slower because Node.js is warming up and optimizing the code. This is normal for all architectures.
+- After the first run, the times are very consistent, showing that Arm64 delivers stable performance for repeated tasks.
 
-- The average execution time on Arm64 (~0.888 ms) shows that CPU-bound TypeScript operations run efficiently on Arm-based VMs.
-- Initial iterations may show slightly higher times due to runtime warm-up and optimization overhead, which is common across architectures.  
-- Arm64 demonstrates stable iteration times after the first run, indicating consistent performance for repeated workloads.  
-
-This demonstrates that Google Cloud C4A Arm64 virtual machines provide production-grade stability and throughput for TypeScript workloads, whether used for application logic, scripting, or performance-critical services.
+These results confirm that Google Cloud C4A Arm64 virtual machines are reliable and fast for running TypeScript workloads, whether you’re building application logic, scripts, or performance-sensitive services.
