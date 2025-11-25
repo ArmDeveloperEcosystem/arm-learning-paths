@@ -85,6 +85,10 @@ cmake \
 make -j$(nproc)
 ```
 
+{{% notice Note %}}
+We disable GPU and other backend support to focus exclusively on CPU performance and optimization for this learning path.
+{{% /notice %}}
+
 Then re-run benchmark in `build_v9_on` directory. 
 
 ```bash

@@ -112,11 +112,13 @@ print_info: general.name     = Ernie-4.5-21B-A3B-Thinking
 ```
 
 Once inference is complete, the expected output will look like this (in Chinese):
-```
-用户让我介绍“混合专家”（Mixture of Experts）在中文里的内容。首先，我需要明确Mixture of Experts的基本概念，然后考虑在中文语境下的特殊表达或常见翻译。首先，Mixture of Experts是一种机器学习模型，结合了多个专家模型，通过门控机制（gating network）来动态选择最佳专家，通常用于提升模型性能，尤其是在处理复杂数据时，不同专家处理不同的特征或子空间。
-```
 
-This confirms that the model router is functioning correctly (though not yet directly observable).
+![img1 alt-text#center](meo_result.png "Introduce Mixture of Experts in Chinese")
+
+This answer demonstrates the model’s multilingual and structured reasoning ability. It begins with a narrative explanation introducing the concept of Mixture of Experts (MoE), followed by a well-organized markdown-style summary with section headers and bullet points:
+- Concept breakdown: It describes MoE as a model combining multiple specialized sub-models (experts) and a routing mechanism (gateway) to activate only a few experts per input.
+- Workflow explanation: It explains how routing selects top experts based on input features and how the system reduces computation by only activating a small number of experts per token.
+- Chinese NLP examples: It gives examples such as word segmentation and translation, explaining how different experts may focus on distinct subtasks.
 
 This confirms:
 - The GGUF model is successfully loaded.
