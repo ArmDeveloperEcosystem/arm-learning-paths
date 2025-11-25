@@ -17,7 +17,7 @@ In the previous section, you saw that that both INT8-quantized Conv2d and pointw
 To evaluate the performance of Conv2d operators across multiple hardware platforms, you will create a set of benchmark models that utilize different GEMM implementation variants within the convolution operators for systematic comparative analysis.
 
 
-### INT8-Quantized Conv2d benchmark model
+## Create an INT8-quantized Conv2d benchmark model with KleidiAI
 
 The following example defines a simple model to generate INT8-quantized Conv2d nodes that can be accelerated by KleidiAI.
 
@@ -98,7 +98,7 @@ export_int8_quantize_conv2d_model("qint8_conv2d_pqs8_qc8w_gemm");
 
 ```
 
-### PointwiseConv2d benchmark model
+## Create a PointwiseConv2d benchmark model with Kleidiai
 
 In the following example model, you will use simple model to generate pointwise Conv2d nodes that can be accelerated by Kleidiai. 
 
@@ -164,7 +164,7 @@ These ETRecord files are essential for subsequent model analysis and performance
 {{%/notice%}}
 
 
-### Run the Complete Benchmark Model Script
+## Run the benchmark model export script for ExecuTorch and KleidiAI
 Rather than executing each block by hand, download and run the full export script. It will generate both Conv2d variants, run quantization (INT8) where applicable, partition to XNNPACK, lower, and export to ExecuTorch .pte together with .etrecord metadata.
 
 ```bash
@@ -172,7 +172,7 @@ wget https://raw.githubusercontent.com/pareenaverma/arm-learning-paths/refs/head
 chmod +x export-conv2d.py
 python3 ./export-conv2d.py
 ```
-### Validate Outputs
+## Validate exported model files for ExecuTorch and KleidiAI
 
 After running this script, both the PTE model file and the etrecord file are generated.
 

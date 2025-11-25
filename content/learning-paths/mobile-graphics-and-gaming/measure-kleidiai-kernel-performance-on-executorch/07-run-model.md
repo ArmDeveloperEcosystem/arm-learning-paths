@@ -6,7 +6,7 @@ weight: 8
 layout: learningpathall
 ---
 
-### Copy artifacts to your Arm64 target
+## Copy artifacts to your Arm64 target
 From your x86_64 host (where you cross-compiled), copy the runner and exported models to the Arm device:
 
 ```bash
@@ -14,7 +14,7 @@ scp $WORKSPACE/build-arm64/executor_runner <arm_user>@<arm_host>:~/bench/
 scp -r model/ <arm_user>@<arm_host>:~/bench/
 ```
 
-### Run a model and emit ETDump
+## Run a model and emit ETDump
 Use one of the models you exported earlier (e.g., FP32 linear: linear_model_pf32_gemm.pte).
 The flags below tell executor_runner where to write the ETDump and how many times to execute.
 

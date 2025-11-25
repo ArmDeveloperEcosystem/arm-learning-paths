@@ -62,8 +62,8 @@ First, compile the benchmark file from TypeScript to JavaScript using the TypeSc
 ```console
 tsc benchmark_jmh.ts
 ```
-This command converts your TypeScript file into JavaScript and creates a new file called `benchmark_jmh.js` in your project directory.  
-You can now run this JavaScript file with Node.js to benchmark performance on your Google Cloud C4A (Arm64) VM.
+This command transpiles your TypeScript code into standard JavaScript, generating a file named `benchmark_jmh.js` in the same directory.
+The resulting JavaScript can be executed by Node.js, allowing you to measure performance on your Google Cloud C4A (Arm64) virtual machine.
 
 ## Run the benchmark
 Now, execute the compiled JavaScript file with Node.js:

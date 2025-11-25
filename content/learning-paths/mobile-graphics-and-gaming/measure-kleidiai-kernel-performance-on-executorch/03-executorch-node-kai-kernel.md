@@ -1,5 +1,5 @@
 ---
-title: KleidiAI micro-kernels support in ExecuTorch
+title: Accelerate ExecuTorch operators with KleidiAI micro-kernels
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -23,15 +23,15 @@ In ExecuTorch v1.0.0, the following operator types are implemented through the X
 However, not all instances of these operators are accelerated by KleidiAI.
 
 Acceleration eligibility depends on several operator attributes and backend support, including:
-- Data types (e.g., float32, int8, int4)
-- Quantization schemes (e.g., symmetric/asymmetric, per-tensor/per-channel)
+- Data types (for example, float32, int8, int4)
+- Quantization schemes (for example, symmetric/asymmetric, per-tensor/per-channel)
 - Tensor memory layout and alignment
 - Kernel dimensions and stride settings
     
 The following section provides detailed information on which operator configurations can benefit from KleidiAI acceleration, along with their corresponding data type and quantization support.
 
 
-### XNNFullyConnected 
+## XNNFullyConnected 
 
 | XNNPACK GEMM Variant | Activations DataType| Weights DataType | Output DataType                      |
 | ------------------  | ---------------------------- | --------------------------------------- | ---------------------------- |
@@ -42,14 +42,14 @@ The following section provides detailed information on which operator configurat
 | qp8_f32_qb4w_gemm | Asymmetric INT8 per-row quantization | INT4 (signed), shared blockwise quantization | FP32                         |
 
 
-### XNNConv2d
+## XNNConv2d
 | XNNPACK GEMM Variant | Input DataType| Filter DataType | Output DataType                      |
 | ------------------  | ---------------------------- | --------------------------------------- | ---------------------------- |
 | pf32_gemm    | FP32                         | FP32, pointwise (1×1)                   | FP32                         |
 | pqs8_qc8w_gemm | Asymmetric INT8 quantization (NHWC) | Per-channel or per-tensor symmetric INT8 quantization | Asymmetric INT8 quantization(NHWC) |
 
 
-### XNNBatchMatrixMultiply
+## XNNBatchMatrixMultiply
 | XNNPACK GEMM Variant | Input A DataType| Input B DataType |Output DataType |
 | ------------------  | ---------------------------- | --------------------------------------- |--------------------------------------- |
 | pf32_gemm    | FP32                         | FP32                         | FP32 | 

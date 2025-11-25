@@ -10,7 +10,7 @@ You will use the ExecuTorch Inspector to correlate runtime events from the .etdu
 
 The Inspector analyzes the runtime data from the ETDump file and maps it to the corresponding operators in the Edge Dialect Graph.
 
-### Inspector script
+## Analyze ETDump and ETRecord files with the Inspector script
 
 Save the following code in a file named `inspect.py` and run it with the path to a .pte model. The script auto-derives .etrecord, .etdump, and an output .csv next to it.
 
@@ -40,7 +40,7 @@ with open(csvfile, "w", encoding="utf-8") as f:
 
 ```
 
-### Run the script
+## Run the Inspector script and review performance results
 
 Run the script, for example with the linear_model_pf32_gemm.pte model :
 

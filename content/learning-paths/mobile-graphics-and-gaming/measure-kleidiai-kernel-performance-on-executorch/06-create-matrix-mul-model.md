@@ -6,16 +6,17 @@ weight: 7
 layout: learningpathall
 ---
 
-The Batch Matrix Multiply operator (torch.bmm) under XNNPACK lowers to GEMM and, when shapes and dtypes match supported patterns, can dispatch to KleidiAI micro-kernels on Arm. 
 
-To evaluate the performance of these variants across different hardware platforms, you will construct a set of benchmark models that utilize the batch matrix multiply operator with different GEMM implementations for comparative analysis.
+The batch matrix multiply operator (`torch.bmm`) is commonly used for efficient matrix operations in deep learning models. When running on Arm systems with XNNPACK, this operator is lowered to a general matrix multiplication (GEMM) implementation. If your input shapes and data types match supported patterns, XNNPACK can automatically dispatch these operations to KleidiAI micro-kernels, which are optimized for Arm hardware.
+
+To compare the performance of different GEMM variants on various Arm platforms, you'll build a set of benchmark models. These models use the batch matrix multiply operator and allow you to evaluate how each GEMM implementation performs, helping you identify the best configuration for your workload.
 
 
-### Matrix multiply benchmark model
+## Define a matrix multiply benchmark model for KleidiAI and ExecuTorch
 
 The following example defines a simple model to generate nodes that can be accelerated by KleidiAI.
 
-By adjusting the input parameters, this model can also simulate the behavior of nodes commonly found in real-world models.
+By adjusting the input parameters, this model can also simulate the behavior of nodes commonly found in real-world models:
 
 
 ```python
@@ -28,7 +29,7 @@ class DemoBatchMatMulModel(nn.Module):
 
 ```
 
-### Export FP16/FP32 model for pf16_gemm/pf32_gemm variant
+## Export FP16 and FP32 models for pf16_gemm and pf32_gemm variants
 
 | XNNPACK GEMM Variant | Input A DataType| Input B DataType |Output DataType |
 | ------------------  | ---------------------------- | --------------------------------------- |--------------------------------------- |
@@ -77,9 +78,9 @@ When exporting models, the **generate_etrecord** option is enabled to produce th
 These ETRecord files are essential for subsequent model analysis and performance evaluation.
 {{%/notice%}}
 
-### Run the Complete Benchmark Model Script
+### Run the complete benchmark model script
 Instead of executing each export block manually, you can download and run the full matrix-multiply benchmark script.
-This script automatically builds and exports both FP16 and FP32 models, performing all necessary partitioning, lowering, and ETRecord generation.
+This script automatically builds and exports both FP16 and FP32 models, performing all necessary partitioning, lowering, and ETRecord generation:
 
 ```bash
 wget https://raw.githubusercontent.com/pareenaverma/arm-learning-paths/refs/heads/content_review/content/learning-paths/mobile-graphics-and-gaming/measure-kleidiai-kernel-performance-on-executorch/export-matrix-mul.py
@@ -87,7 +88,7 @@ chmod +x export-matrix-mul.py
 python3 ./export-matrix-mul.py
 ```
 
-### Verify the output
+## Verify the output
 
 After running this script, both the PTE model file and the etrecord file are generated.
 

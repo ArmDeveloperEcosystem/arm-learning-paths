@@ -1,19 +1,15 @@
 ---
-title: How to Benchmark a KleidiAI Micro-kernel in ExecuTorch
-
-draft: true
-cascade:
-    draft: true
+title: Benchmark a KleidiAI Micro-kernel in ExecuTorch
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic intended for developers, performance engineers, and ML framework contributors who want to benchmark and optimize KleidiAI micro-kernels within ExecuTorch to accelerate model inference on Arm64 (AArch64) platforms supporting SME/SME2 instructions.
+who_is_this_for: This is an advanced topic for developers, performance engineers, and ML framework contributors who want to benchmark and optimize KleidiAI micro-kernels within ExecuTorch to accelerate model inference on Arm64 (AArch64) platforms supporting SME/SME2 instructions.
 
 learning_objectives:
-  - Cross-compile ExecuTorch for Arm64 with XNNPACK and KleidiAI enabled, including SME/SME2 instructions.
-  - Build and export ExecuTorch models that can be accelerated by KleidiAI using SME/SME2 instructions.
-  - Use the executor_runner tool to run kernel workloads and collect ETDump profiling data.
-  - Inspect and analyze ETRecord and ETDump files using the ExecuTorch Inspector API to understand kernel-level performance behavior.
+    - Cross-compile ExecuTorch for Arm64 with XNNPACK and KleidiAI enabled including SME/SME2 instructions
+    - Build and export ExecuTorch models that can be accelerated by KleidiAI using SME/SME2 instructions
+    - Use the executor_runner tool to run kernel workloads and collect ETDump profiling data
+    - Inspect and analyze ETRecord and ETDump files using the ExecuTorch Inspector API to understand kernel-level performance behavior
 
 prerequisites:
   - An x86_64 Linux host machine running Ubuntu, with at least 15 GB of free disk space.
