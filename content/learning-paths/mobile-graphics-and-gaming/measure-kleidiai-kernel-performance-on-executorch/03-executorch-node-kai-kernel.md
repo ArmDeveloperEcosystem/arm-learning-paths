@@ -5,15 +5,15 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-ExecuTorch uses XNNPACK as its primary CPU backend to execute and optimize operators such as convolutions, matrix multiplications, and fully connected layers.
+## Understand how KleidiAI micro-kernels integrate with ExecuTorch
 
-Within this architecture, a subset of KleidiAI SME (Scalable Matrix Extension) micro-kernels has been integrated into XNNPACK to provide additional acceleration on supported Arm platforms.
+ExecuTorch uses XNNPACK as its main CPU backend to run and optimize operators like convolutions, matrix multiplications, and fully connected layers.
 
-These specialized micro-kernels are designed to accelerate operators with specific data types and quantization configurations in ExecuTorch models.
+KleidiAI SME (Scalable Matrix Extension) micro-kernels are integrated into XNNPACK to boost performance on supported Arm platforms. These micro-kernels accelerate operators that use specific data types and quantization settings in ExecuTorch models.
 
-When an operator matches one of the supported configurations, ExecuTorch automatically dispatches it through the KleidiAI-optimized path.
+When an operator matches a supported configuration, ExecuTorch automatically uses the KleidiAI-optimized path for faster execution. If an operator is not supported by KleidiAI, ExecuTorch falls back to the standard XNNPACK implementation. This ensures your models always run correctly, even if they do not use KleidiAI acceleration.
 
-Operators that are not covered by KleidiAI fall back to the standard XNNPACK implementations during inference, ensuring functional correctness across all models.
+## Understand how KleidiAI micro-kernels integrate with ExecuTorch
 
 In ExecuTorch v1.0.0, the following operator types are implemented through the XNNPACK backend and can potentially benefit from KleidiAI acceleration:
 - XNNFullyConnected – Fully connected (dense) layers

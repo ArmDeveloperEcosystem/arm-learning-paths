@@ -6,6 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
+## Learn how batch matrix multiply accelerates deep learning on Arm
 
 The batch matrix multiply operator (`torch.bmm`) is commonly used for efficient matrix operations in deep learning models. When running on Arm systems with XNNPACK, this operator is lowered to a general matrix multiplication (GEMM) implementation. If your input shapes and data types match supported patterns, XNNPACK can automatically dispatch these operations to KleidiAI micro-kernels, which are optimized for Arm hardware.
 
@@ -78,7 +79,7 @@ When exporting models, the **generate_etrecord** option is enabled to produce th
 These ETRecord files are essential for subsequent model analysis and performance evaluation.
 {{%/notice%}}
 
-### Run the complete benchmark model script
+## Run the complete benchmark model script
 Instead of executing each export block manually, you can download and run the full matrix-multiply benchmark script.
 This script automatically builds and exports both FP16 and FP32 models, performing all necessary partitioning, lowering, and ETRecord generation:
 

@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-In this section, you’ll cross-compile ExecuTorch for an AArch64 (Arm64) target platform with both XNNPACK and KleidiAI support enabled. Cross-compiling ensures that all binaries and libraries are built for your Arm target hardware, even when your development host is an x86_64 machine.
+In this section, you'll cross-compile ExecuTorch for an Arm64 (AArch64) target with XNNPACK and KleidiAI support. Cross-compiling builds all binaries and libraries for your Arm device, even if your development system uses x86_64. This process lets you run and test ExecuTorch on Arm hardware, taking advantage of Arm-optimized performance features.
 
 ## Install the cross-compilation toolchain
 On your x86_64 Linux host, install the GNU Arm cross-compilation toolchain along with Ninja, which is a fast build backend commonly used by CMake:
@@ -75,7 +75,7 @@ cmake --build . -j$(nproc)
 ```
 CMake invokes Ninja to perform the actual build, generating both static libraries and executables for the AArch64 target.
 
-## Locate the executor_runner Binary
+## Locate the executor_runner binary
 If the build completes successfully, you should see the main benchmarking and profiling utility, executor_runner, under:
 
 ```output

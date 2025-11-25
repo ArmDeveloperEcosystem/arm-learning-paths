@@ -6,6 +6,8 @@ weight: 6
 layout: learningpathall
 ---
 
+## Understand Conv2d benchmark variants and KleidiAI acceleration
+
 In the previous section, you saw that that both INT8-quantized Conv2d and pointwise (1×1) Conv2d operators can be accelerated using KleidiAI’s matrix-multiplication micro-kernels.
 
 
