@@ -1,3 +1,4 @@
+<div align="left">
 UltraEdge Middleware
 
 <span class="pill">Updated: 2025-11-01</span> <span class="pill">Skill:
@@ -370,37 +371,35 @@ Manage microservices running on the Edge platform.
 
 ##### Available Commands
 
-**install**  
-Installs a microservice. You must provide the path to the MPAC file as
-an argument.
+* **install**
+    Installs a microservice. You must provide the path to the MPAC file as an argument.
 
-    sudo tinkerblox-cli microboost install /path/to/your.mpac
+        sudo tinkerblox-cli microboost install -f /path/to/your.mpac
 
-**list**  
-Lists all installed microservices.
+* **list**
+    Lists all installed microservices.
 
-    sudo tinkerblox-cli microboost list
+        sudo tinkerblox-cli microboost list
 
-**status \<id\>**  
-Shows statistics (CPU, memory, status, etc.) for the specified
-microservice.
+* **status <id>**
+    Shows statistics (CPU, memory, status, etc.) for the specified microservice.
 
-    sudo tinkerblox-cli microboost status <id>
+        sudo tinkerblox-cli microboost status <id>
 
-**stop \<id\>**  
-Stops the microservice with the specified ID.
+* **stop <id>**
+    Stops the microservice with the specified ID.
 
-    sudo tinkerblox-cli microboost stop <id>
+        sudo tinkerblox-cli microboost stop <id>
 
-**start \<id\>**  
-Starts the microservice with the specified ID (must be stopped).
+* **start <id>**
+    Starts the microservice with the specified ID (must be stopped).
 
-    sudo tinkerblox-cli microboost start <id>
+        sudo tinkerblox-cli microboost start <id>
 
-**uninstall \<id\>**  
-Uninstalls the microservice with the specified ID.
+* **uninstall <id>**
+    Uninstalls the microservice with the specified ID.
 
-    sudo tinkerblox-cli microboost uninstall <id>
+        sudo tinkerblox-cli microboost uninstall <id>
 
 #### 3. Diagnostics Management
 
@@ -462,3 +461,4 @@ Check engine microboost neuroboost
 -   Ensure the target architecture is enabled.
 
 -   If issues persist, change the host architecture.
+</div>
