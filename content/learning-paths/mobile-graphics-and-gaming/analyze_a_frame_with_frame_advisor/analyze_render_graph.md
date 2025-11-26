@@ -19,6 +19,6 @@ Render passes flow from left to right. The render pass that outputs to the swapc
 
 1. In this example, we can see that some render passes have no consumers at all and that they do not contribute to the final rendered output.
 
-    ![Redundant render passes in Frame Advisor's Render Graph alt-text#center](Render_graph_egypt_redundant_rps.png "Figure 4. Redundant render passes")
+    ![Redundant render passes in Frame Advisor's Render Graph alt-text#center](render_graph_egypt_redundant_rps.webp "Figure 4. Redundant render passes")
 
     These render passes could therefore be removed, without affecting the output, saving processing power and bandwidth.

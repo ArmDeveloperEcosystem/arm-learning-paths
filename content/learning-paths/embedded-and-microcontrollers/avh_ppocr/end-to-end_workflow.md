@@ -14,7 +14,7 @@ This section provides hands-on instructions for you to deploy pre-trained Paddle
 
 The steps involved in the model deployment are shown in the figure below:
 
-![End-to-end workflow#center](./Figure3.png "Figure 3. End-to-end workflow")
+![End-to-end workflow#center](./figure3.webp "Figure 3. End-to-end workflow")
 
 ## Deploy PaddleOCR text recognition model on the Corstone-300 FVP included with Arm Virtual Hardware
 

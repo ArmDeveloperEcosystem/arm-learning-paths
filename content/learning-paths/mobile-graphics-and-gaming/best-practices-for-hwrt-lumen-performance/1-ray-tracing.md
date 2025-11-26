@@ -15,9 +15,9 @@ The demo is named **Steel Arms**. Created with Unreal Engine 5.3, Steel Arms bri
 The following screenshots are from scenes in **Steel Arms** which is powered by Unreal Lumen. Several optimization tips and techniques were used in the development of **Steel Arms** for achieving the best performance with Lumen. This learning path will start with an introduction to ray tracing and then cover the best practices for hardware ray tracing in Lumen.
 
 
-![](images/Garage.png)
+![](images/garage.webp)
 
-![](images/Garage2.png)
+![](images/garage2.webp)
 
 
 ## What is Ray Tracing?
