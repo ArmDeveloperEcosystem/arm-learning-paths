@@ -1,5 +1,5 @@
 ---
-title: Test the Kleidicv and verify SME backend support
+title: Test KleidiCV and verify SME backend support
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,14 +8,17 @@ layout: learningpathall
 
 ## Run the Test
 
-Once the build steps are complete, run the KleidiCV and OpenCV tests.
+Once the build steps are complete, you can run the KleidiCV and OpenCV tests.
 
-* Run the KleidiCV test
+The KleidiCV API test verifies the public C++ API. You can run it as shown below. The full test log is not included for brevity:
 
-The KleidiCV API test verifies the public C++ API. You can run it as shown below, though the full test log is not included:
+```bash
+./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test
+```
+
+The output is similar to:
 
 ```output
-./test/api/kleidicv-api-test
 Vector length is set to 16 bytes.
 Seed is set to 2542467924.
 [==========] Running 3703 tests from 141 test suites.
@@ -53,15 +56,15 @@ Seed is set to 2542467924.
 [----------] 4 tests from BitwiseAnd/0 (0 ms total)```
 ```
 {{% notice Note %}}
-Currently Apple xcode is built on clang17, and clang-1700.3.19.1 has an SME related code generation bug which causes float ResizeLinear API tests to fail.
+Currently, Apple Xcode is built on Clang 17. Version clang-1700.3.19.1 has an SME-related code generation bug that causes float `ResizeLinear` API tests to fail.
 {{% /notice %}}
 
 
-* Run the OpenCV test
+### Run the OpenCV test
 
-Upon completing the build steps for OpenCV with KleidiCV, the test binaries will be located in the "build-opencv-kleidicv-sme/bin/" directory. For example, `opencv_perf_imgproc` serves as OpenCV’s performance benchmark suite for the image processing (imgproc) module, evaluating both execution speed and throughput.
+Upon completing the build steps for OpenCV with KleidiCV, the test binaries are located in the `build-opencv-kleidicv-sme/bin/` directory. For example, `opencv_perf_imgproc` is OpenCV’s performance benchmark suite for the image processing (`imgproc`) module, which evaluates both execution speed and throughput.
 
-Testing can be customized by selecting specific test filters and parameters using the "`--gtest_filter`" and "`--gtest_param_filter`" options, respectively. For instance, to run the Gaussian blur 5×5 performance tests three times with the following parameter settings:
+You can customize testing by selecting specific test filters and parameters using the `--gtest_filter` and `--gtest_param_filter` options, respectively. For instance, to run the Gaussian blur 5×5 performance tests three times with the following parameter settings:
 - Image size: 1920x1080 (Full HD)
 - Image type: 8UC1 (8-bit unsigned, single channel, grayscale)
 - Border type: BORDER_REPLICATE
@@ -71,7 +74,7 @@ Additional test cases are available in [benchmarks.txt](https://gitlab.arm.com/k
 The command for running the test is as follows:
 
 ```bash
-./opencv_perf_imgproc \
+./build-opencv-kleidicv-sme/bin/opencv_perf_imgproc
   --gtest_filter='*gaussianBlur5x5/*' \
   --gtest_param_filter='(1920x1080, 8UC1, BORDER_REPLICATE)' \
   --gtest_repeat=3
@@ -80,7 +83,6 @@ The command for running the test is as follows:
 The output will appear as follows:
 
 ```output
-./opencv_perf_imgproc --gtest_filter='*gaussianBlur5x5/*' --gtest_param_filter='(1920x1080, 8UC1, BORDER_REPLICATE)' --gtest_repeat=3
 [ERROR:0@0.001] global persistence.cpp:566 open Can't open file: 'imgproc.xml' in read mode
 TEST: Skip tests with tags: 'mem_6gb', 'verylong'
 CTEST_FULL_OUTPUT
@@ -182,16 +184,16 @@ Note: Google Test parameter filter = (1920x1080, 8UC1, BORDER_REPLICATE)
 [  PASSED  ] 1 test.
 ```
 
-
-
-## KleidiCV Multiversion Backend Support
+## Understand KleidiCV multiversion backend support
 
 The KleidiCV library detects the platform hardware at runtime and selects the backend implementation based on the following priority:
 
-* SME2 backend implementation
-* SME backend implementation
-* SVE backend implementation
-* NEON backend implementation
+- SME2 backend implementation
+- SME backend implementation
+- SVE backend implementation
+- NEON backend implementation
+
+The following code shows how the library resolves which implementation to use:
 
 ```C { line_numbers = "true" }
 #define KLEIDICV_MULTIVERSION_C_API(api_name, neon_impl, sve2_impl, sme_impl, \
@@ -208,7 +210,7 @@ The KleidiCV library detects the platform hardware at runtime and selects the ba
   decltype(neon_impl) api_name = api_name##_resolver();                       \
   }
 ```
-It verifies SME support using the query "hw.optional.arm.FEAT_SME" as follows:
+It verifies SME support using the query `hw.optional.arm.FEAT_SME` as follows:
 
 ```C { line_numbers = "true" }
 #define KLEIDICV_SME_RESOLVE(sme_impl)                                       \
@@ -217,7 +219,7 @@ It verifies SME support using the query "hw.optional.arm.FEAT_SME" as follows:
     return sme_impl;                                                         \
   }
 ```
-It verifies SME2 support using the query "hw.optional.arm.FEAT_SME2" as follows:
+It verifies SME2 support using the query `hw.optional.arm.FEAT_SME2` as follows:
 
 ```C { line_numbers = "true" }
 #define KLEIDICV_SME2_RESOLVE(sme2_impl)                                      \
@@ -230,14 +232,16 @@ It verifies SME2 support using the query "hw.optional.arm.FEAT_SME2" as follows:
 
 ## Enable debug information for backend implementation at runtime
 
-To incorporate dump information for multi-version backend support during runtime testing, please update "kleidicv/include/kleidicv/dispatch.h" as outlined below:
+To incorporate dump information for multiversion backend support during runtime testing, update `kleidicv/include/kleidicv/dispatch.h` as outlined below:
 
+To patch `dispatch.h`, copy the entire code below and paste it in your terminal. It will run the `patch` command insert the print statements to identify the backend. 
 
-```C { line_numbers = "true" }
-diff --git a/kleidicv/include/kleidicv/dispatch.h b/kleidicv/include/kleidicv/dispatch.h
+```bash { line_numbers = "true" }
+patch -p1 -d "$HOME/kleidi" << 'EOF'
+diff --git a/kleidicv/kleidicv/include/kleidicv/dispatch.h b/kleidicv/kleidicv/include/kleidicv/dispatch.h
 index cc6ee01..44c98a5 100644
---- a/kleidicv/include/kleidicv/dispatch.h
-+++ b/kleidicv/include/kleidicv/dispatch.h
+--- a/kleidicv/kleidicv/include/kleidicv/dispatch.h
++++ b/kleidicv/kleidicv/include/kleidicv/dispatch.h
 @@ -1,10 +1,11 @@
 -// SPDX-FileCopyrightText: 2023 - 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
 +// SPDX-FileCopyrightText: 2024 - 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
@@ -283,14 +287,26 @@ index cc6ee01..44c98a5 100644
      return neon_impl;                                                         \
    }                                                                           \
    extern "C" {                                                                \
+EOF
 ```
 
-## Neon or SME backend data extraction on a MacBook
+After making the change, rebuild the benchmark:
+
+```bash
+cmake --build build-kleidicv-benchmark-SME --parallel
+```
+
+## Extract Neon or SME backend data on a MacBook
 
 After making the change and rebuilding for testing, you can display the SME backend usage summary as follows:
 
+```bash
+./build-kleidicv-benchmark-SME/benchmark/kleidicv-benchmark
+```
+
+The output starts by printing the backends followed by the benchmark output: 
+
 ```output
-./kleidicv-benchmark
 kleidicv API:: kleidicv_min_max_u8_resolver,SME backend.
 kleidicv API:: kleidicv_min_max_s8_resolver,SME backend.
 kleidicv API:: kleidicv_min_max_u16_resolver,SME backend.
@@ -407,28 +423,37 @@ kleidicv API:: kleidicv_remap_f32_u16_resolver,NEON backend.
 kleidicv API:: kleidicv_warp_perspective_stripe_u8_resolver,NEON backend.
 ```
 
-## Use lldb to check SME backend implementation
+The output is truncated, but you will see performance metrics for all operations at 1280x720 resolution.
 
-To perform source-level debugging during the build process, you should change the build type from "Release" to "Debug," as demonstrated in the following example:
+## Use lldb to check the SME backend implementation
+
+To perform source-level debugging during the build process, you must change the build type from `Release` to `Debug`, as demonstrated in the following example:
 
 ```bash
-cmake -S $WORKSPCE/kleidicv \ 
+cmake -S $WORKSPACE/kleidicv \ 
       -B build-kleidicv-benchmark-SME \
       -DKLEIDICV_ENABLE_SME2=ON \ 
       -DKLEIDICV_LIMIT_SME2_TO_SELECTED_ALGORITHMS=OFF \
       -DKLEIDICV_BENCHMARK=ON \
       -DCMAKE_BUILD_TYPE=Debug
-
 cmake --build build-kleidicv-benchmark-SME --parallel
 ```
 
-Use the lldb debug tool to set breakpoints during API testing and verify if the SME backend implementation is invoked. To view the function call backtrace, run the "bt" command as shown below:
+Use the `lldb` debug tool to set breakpoints during API testing and verify if the SME backend implementation is invoked. To view the function call backtrace, run the `bt` command as shown below:
 
-```C
+```bash
+lldb ./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test
+```
 
-lldb kleidicv-api-test
-(lldb) target create "kleidicv-api-test"
-Current executable set to '/Users/Shared/workspace/build-kleidicv-benchmark-SME-debug/test/api/kleidicv-api-test' (arm64).
+The interactions with the `(lldb)` command line are shown below. 
+
+Enter the `target` command followed by the `b` command for the breakpoint, and the `run` command. When the breakpoint is reached enter the `bt` command to see the stack trace followed by the `disassemble` command to display the assembly instructions in SME streaming mode. Use the `quit` command at the end to exit `lldb`. 
+
+Some of the paths will be different for you, but you can enter the commands and follow the output. 
+
+```console
+target create "./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test"
+Current executable set to '$HOME/kleidi/opencv/build-kleidicv-benchmark-SME/test/api/kleidicv-api-test' (arm64).
 (lldb) b saturating_add_abs_with_threshold
 Breakpoint 1: 2 locations.
 (lldb) run
@@ -467,13 +492,7 @@ Process 82381 stopped
     frame #13: 0x00000001004e8600 kleidicv-api-test`RUN_ALL_TESTS() at gtest.h:2293:73
     frame #14: 0x00000001004e83a8 kleidicv-api-test`main(argc=1, argv=0x000000016fdff3b0) at test_main.cpp:82:10
     frame #15: 0x000000019f492b98 dyld`start + 6076
-```
-
-In the meantime, the "disassemble --frame" command can be used to display the assembly instructions in SME streaming mode, as shown below:
-
-
-```C
-disassemble --frame
+(lldb) disassemble --frame
 kleidicv-api-test`kleidicv::sme::saturating_add_abs_with_threshold<short>:
     0x100695510 <+0>:   sub    sp, sp, #0xa0
     0x100695514 <+4>:   stp    d15, d14, [sp, #0x50]
@@ -512,6 +531,10 @@ kleidicv-api-test`kleidicv::sme::saturating_add_abs_with_threshold<short>:
     0x100695598 <+136>: ldp    d15, d14, [sp, #0x50]
     0x10069559c <+140>: add    sp, sp, #0xa0
     0x1006955a0 <+144>: ret
-(lldb)
+(lldb) quit
 ```
+
+## Summary
+
+In this Learning Path, you tested the KleidiCV build and verified its functionality. You ran both the KleidiCV API tests and the OpenCV performance tests. You also explored how KleidiCV's multiversion support works, enabling it to select the optimal backend like SME, SVE, or NEON at runtime. Finally, you learned how to enable debug output and use the `lldb` debugger to confirm that the SME backend is being used and to inspect the assembly code.
 
