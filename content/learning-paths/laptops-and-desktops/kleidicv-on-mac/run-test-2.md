@@ -9,8 +9,13 @@ layout: learningpathall
 ## Run the Test
 
 Once the build steps are complete, you can run the KleidiCV and OpenCV tests.
+The KleidiCV API test checks the public C++ API and confirms that the build is working as expected. To run the test, use the following command:
 
-The KleidiCV API test verifies the public C++ API. You can run it as shown below. The full test log is not included for brevity:
+```bash
+./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test
+```
+
+You will see output showing the number of tests run and their results. The full test log is omitted here for clarity.
 
 ```bash
 ./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test
@@ -60,16 +65,17 @@ Currently, Apple Xcode is built on Clang 17. Version clang-1700.3.19.1 has an SM
 {{% /notice %}}
 
 
-### Run the OpenCV test
+## Run the OpenCV test
 
-Upon completing the build steps for OpenCV with KleidiCV, the test binaries are located in the `build-opencv-kleidicv-sme/bin/` directory. For example, `opencv_perf_imgproc` is OpenCV’s performance benchmark suite for the image processing (`imgproc`) module, which evaluates both execution speed and throughput.
+After building OpenCV with KleidiCV, you will find the test binaries in the `build-opencv-kleidicv-sme/bin/` directory. The main tool for benchmarking image processing performance is `opencv_perf_imgproc`. This utility measures both execution speed and throughput for the OpenCV `imgproc` module, including KleidiCV-accelerated operations.
 
-You can customize testing by selecting specific test filters and parameters using the `--gtest_filter` and `--gtest_param_filter` options, respectively. For instance, to run the Gaussian blur 5×5 performance tests three times with the following parameter settings:
+To focus your testing, use the `--gtest_filter` option to select specific tests and `--gtest_param_filter` to set test parameters. For example, you can run the Gaussian blur 5×5 performance test three times on a 1920x1080 grayscale image with replicated borders:
+
 - Image size: 1920x1080 (Full HD)
-- Image type: 8UC1 (8-bit unsigned, single channel, grayscale)
+- Image type: 8UC1 (8-bit unsigned, single channel)
 - Border type: BORDER_REPLICATE
 
-Additional test cases are available in [benchmarks.txt](https://gitlab.arm.com/kleidi/kleidicv/-/blob/0.6.0/scripts/benchmark/benchmarks.txt?ref_type=tags).
+You can explore additional test cases and parameter combinations in the [benchmarks.txt](https://gitlab.arm.com/kleidi/kleidicv/-/blob/0.6.0/scripts/benchmark/benchmarks.txt?ref_type=tags) file in the KleidiCV repository.
 
 The command for running the test is as follows:
 

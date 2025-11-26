@@ -1,10 +1,6 @@
 ---
 title: Build and test KleidiCV on macOS
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers who want to build and test KleidiCV on macOS.
@@ -16,8 +12,8 @@ learning_objectives:
 
 prerequisites:
 - A Mac with Apple Silicon (M4 generation or newer)
-- Basic familiarity with command-line tools
 - Xcode command line tools installed
+- Basic familiarity with using the Terminal and command-line tools
 
 author: Jett Zhou
 
