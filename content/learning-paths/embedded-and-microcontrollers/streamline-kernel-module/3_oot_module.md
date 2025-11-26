@@ -223,7 +223,7 @@ The module above receives the size of a 2D array as a string through the `char_d
     ssh root@<your-target-ip>
     ```    
 
-4. Execute the following commads on the target to run the module:
+4. Execute the following commands on the target to run the module:
     ```bash
     insmod /root/mychardrv.ko
     mknod /dev/mychardrv c 42 0

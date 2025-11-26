@@ -20,7 +20,7 @@ This ensures you can install the CircleCI Runner package directly using `apt`.
 curl -s https://packagecloud.io/install/repositories/circleci/runner/script.deb.sh?any=true | sudo bash
 ```
 
-- The `curl` command downloads and executes the repository setup script from CircleCI’s official package server.  
+- The `curl` command downloads and executes the repository setup script from CircleCI's official package server.  
 - It configures the repository on your system, allowing `apt` to fetch and install the CircleCI runner package.  
 - After successful execution, the CircleCI repository will be added under `/etc/apt/sources.list.d/`.
 

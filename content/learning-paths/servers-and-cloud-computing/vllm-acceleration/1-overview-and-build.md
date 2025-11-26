@@ -21,7 +21,7 @@ You can use vLLM in two main ways:
 
 vLLM supports Hugging Face Transformer models out-of-the-box and scales seamlessly from single-prompt testing to production batch inference.
 
-## What'll you build
+## What you will build
 
 In this Learning Path, you'll build a CPU-optimized version of vLLM targeting the Arm64 architecture, integrated with oneDNN and the Arm Compute Library (ACL).
 This build enables high-performance LLM inference on Arm servers, leveraging specialized Arm math libraries and kernel optimizations.
@@ -39,7 +39,7 @@ vLLM achieves high performance on Arm servers by combining software and hardware
 
 These optimizations work together to deliver higher throughput and lower latency for LLM inference on Arm servers.
 
-vLLM’s performance on Arm servers is driven by both software optimization and hardware-level acceleration.
+vLLM's performance on Arm servers is driven by both software optimization and hardware-level acceleration.
 Each component of this optimized build contributes to higher throughput and lower latency during inference:
 
 - Optimized kernels: the aarch64 vLLM build uses direct oneDNN with the Arm Compute Library for key operations.
@@ -74,7 +74,7 @@ sudo apt-get install -y libtcmalloc-minimal4
 ```
 
 {{% notice Note %}}
-On aarch64, vLLM’s CPU backend automatically builds with the Arm Compute Library (ACL) through oneDNN.
+On aarch64, vLLM's CPU backend automatically builds with the Arm Compute Library (ACL) through oneDNN.
 This ensures optimized Arm kernels are used for matrix multiplications, layer normalization, and activation functions without additional configuration.
 {{% /notice %}}
 
@@ -160,7 +160,7 @@ python examples/offline_inference/basic/chat.py \
 Explanation:
 --dtype=bfloat16 runs inference in bfloat16 precision. Recent Arm processors support the BFloat16 (BF16) number format in PyTorch. For example, AWS Graviton3 and Graviton3 processors support BFloat16.
 --model specifies a small Hugging Face model for testing (TinyLlama-1.1B-Chat), ideal for functional validation before deploying larger models.
-You should see token streaming in the console, followed by a generated output confirming that vLLM’s inference pipeline is working correctly.
+You should see token streaming in the console, followed by a generated output confirming that vLLM's inference pipeline is working correctly.
 
 ```output
 Generated Outputs:
