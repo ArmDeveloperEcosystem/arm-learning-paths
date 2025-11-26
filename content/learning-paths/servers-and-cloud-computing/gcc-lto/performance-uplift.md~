@@ -1,0 +1,28 @@
+---
+title: Deploying LTO
+weight: 3
+
+### FIXED, DO NOT MODIFY
+layout: learningpathall
+---
+
+## Deploying LTO
+
+### A simple use-case
+To rely on GCC's default configuration for link-time optimization, using the feature is as simple as passing gcc the `-flto` flag when invoking it from the command line.
+
+For the step-wise build of an executable, we'd have:
+```sh
+gcc -c -O2 -flto foo.c
+gcc -c -O2 -flto bar.c
+gcc -o myprog -flto -O2 foo.o bar.o
+```
+This could be simplified to a one-liner, as follows:
+```sh
+gcc -o myprog -flto -O2 foo.c bar.c
+```
+
+### Modifying LTO behaviour
+Link-time optimization may be sped up by execution in parallel - `-flto=<nparallel>` allows us to manually specify the desired number of parallel jobs or `-flto=auto` can be used for automatic parallelization.
+
+During code development, it is possible to cache the outputs of translational units inside LTO, thus significantly shortening edit-compile cycles. This can be achieved using the `-flto-incremental=<path>` flag.
