@@ -6,18 +6,16 @@ weight: 5
 layout: learningpathall
 ---
 
+## Overview
+
 In the previous section, you saw that the Fully Connected operator supports multiple GEMM (General Matrix Multiplication) variants.
 
 To evaluate the performance of these variants across different hardware platforms, you will construct a series of benchmark models that utilize the Fully Connected operator with different GEMM implementations for comparative analysis.
 
 These models will be used later with executor_runner to measure throughput, latency, and ETDump traces for various KleidiAI micro-kernels.
 
-### Define a Simple Linear Benchmark Model
-
-The goal is to create a minimal PyTorch model containing a single torch.nn.Linear layer.
-This allows you to generate operator nodes that can be directly mapped to KleidiAI-accelerated GEMM kernels.
-
-By adjusting some of the model’s input parameters, we can also simulate the behavior of nodes that appear in real-world models.
+## Define a linear benchmark model with PyTorch for ExecuTorch
+This step can be confusing at first, but building a minimal model helps you focus on the core operator performance. You’ll be able to quickly test different GEMM implementations and see how each one performs on Arm-based hardware. If you run into errors, check that your PyTorch and ExecuTorch versions are up to date and that you’re using the correct data types for your target GEMM variant. By adjusting some of the model’s input parameters, we can also simulate the behavior of nodes that appear in real-world models.
 
 
 ```python
@@ -38,7 +36,7 @@ class DemoLinearModel(torch.nn.Module):
 ```
 This model creates a single 256×256 linear layer, which can easily be exported in different data types (FP32, FP16, INT8, INT4) to match KleidiAI’s GEMM variants.
 
-### Export FP16/FP32 model for pf16_gemm and pf32_gemm 
+### Export FP16 and FP32 models for pf16_gemm and pf32_gemm variants 
 
 | XNNPACK GEMM Variant | Activations DataType| Weights DataType | Output DataType                      |
 | ------------------  | ---------------------------- | --------------------------------------- | ---------------------------- |
@@ -89,7 +87,7 @@ export_executorch_model(torch.float32,"linear_model_pf32_gemm")
 
 ```
 
-### Export INT8 Quantized Model for pqs8_qc8w_gemm and qp8_f32_qc8w_gemm
+### Export INT8 quantized models for pqs8_qc8w_gemm and qp8_f32_qc8w_gemm variants
 INT8 quantized GEMMs are designed to reduce memory footprint and improve performance while maintaining acceptable accuracy.
 
 | XNNPACK GEMM Variant | Activations DataType| Weights DataType | Output DataType                      |
@@ -152,7 +150,7 @@ export_int8_quantize_model(True,"linear_model_qp8_f32_qc8w_gemm");
 
 ```
 
-### Export INT4 quantized model for qp8_f32_qb4w_gemm 
+## Export INT4 quantized model for qp8_f32_qb4w_gemm variant  
 This final variant represents KleidiAI’s INT4 path, accelerated by SME2 micro-kernels.
 
 | XNNPACK GEMM Variant | Activations DataType| Weights DataType | Output DataType                      |
@@ -214,7 +212,7 @@ These ETRecord files are essential for subsequent model inspection and performan
 {{%/notice%}}
 
 
-### Run the Complete Benchmark Model Export Script
+## Run the benchmark model export script for ExecuTorch 
 Instead of manually executing each code block explained above, you can download and run the full example script that builds and exports all linear-layer benchmark models (FP16, FP32, INT8, and INT4).
 This script automatically performs quantization, partitioning, lowering, and export to ExecuTorch format.
 
@@ -224,7 +222,7 @@ chmod +x export-linear-model.py
 python3 ./export-linear-model.py
 ```
 
-### Verify the Generated Files
+## Verify exported ExecuTorch and KleidiAI model files
 After successful execution, you should see both .pte (ExecuTorch model) and .etrecord (profiling metadata) files in the model/ directory:
 
 ``` bash 
@@ -240,4 +238,4 @@ linear_model_qp8_f32_qb4w_gemm.pte
 linear_model_qp8_f32_qc8w_gemm.etrecord
 linear_model_qp8_f32_qc8w_gemm.pte
 ```
-At this point, you have a suite of benchmark models exported for multiple GEMM variants and quantization levels.
+Great job! You now have a complete set of benchmark models exported for multiple GEMM variants and quantization levels. You’re ready to move on and measure performance using ExecuTorch and KleidiAI micro-kernels on Arm-based hardware.
