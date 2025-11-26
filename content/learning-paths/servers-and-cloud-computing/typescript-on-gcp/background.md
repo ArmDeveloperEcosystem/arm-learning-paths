@@ -1,23 +1,28 @@
 ---
-title: Getting started with TypeScript on Google Axion C4A (Arm Neoverse-V2)
+title: Get started with TypeScript on Google Axion C4A instances
 
 weight: 2
 
 layout: "learningpathall"
 ---
 
+## Introduction
+
+In this Learning Path, you'll deploy and benchmark TypeScript applications on Arm-based Google Cloud C4A instances powered by Axion processors. You'll provision a SUSE Linux Enterprise Server (SLES) virtual machine (VM), install and configure TypeScript, and measure performance using a JMH-style custom benchmark. This process shows you how to use TypeScript with Arm-based cloud infrastructure and helps you evaluate performance and compatibility for cloud-native workloads.
+
+
 ## Google Axion C4A Arm instances in Google Cloud
 
-Google Axion C4A is a family of Arm-based virtual machines built on Google’s custom Axion CPU, which is based on Arm Neoverse-V2 cores. Designed for high-performance and energy-efficient computing, these virtual machines offer strong performance for modern cloud workloads such as CI/CD pipelines, microservices, media processing, and general-purpose applications.
+Google Axion C4A is a family of Arm-based virtual machines built on Google’s custom Axion CPU, which is based on Arm Neoverse-V2 cores. Designed for high-performance and energy-efficient computing, they offer strong performance for modern cloud workloads such as CI/CD pipelines, microservices, media processing, and general-purpose applications.
 
-The C4A series provides a cost-effective alternative to x86 virtual machines while leveraging the scalability and performance benefits of the Arm architecture in Google Cloud.
+The C4A series provides a cost-effective alternative to x86 virtual machines while leveraging the scalability and performance benefits of the Arm architecture on Google Cloud.
 
-To learn more about Google Axion, refer to the [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu) blog.
+To learn more about Google Axion, see the Google blog [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
 
 ## TypeScript
 
-TypeScript is an open-source, strongly typed programming language developed and maintained by Microsoft.  
+TypeScript is an open-source, strongly-typed programming language developed and maintained by Microsoft.  
 
-It is a superset of JavaScript, which means all valid JavaScript code is also valid TypeScript, but TypeScript adds static typing, interfaces, and advanced tooling to help developers write more reliable and maintainable code.  
+TypeScript builds on JavaScript by adding features like static typing and interfaces. Any valid JavaScript code works in TypeScript, but TypeScript gives you extra tools to write code that is easier to maintain and less prone to errors. 
 
-TypeScript is widely used for web applications, server-side development (Node.js), and large-scale JavaScript projects** where type safety and code quality are important. Learn more from the [TypeScript official website](https://www.typescriptlang.org/) and its [handbook and documentation](https://www.typescriptlang.org/docs/).
+TypeScript is widely used for web applications, server-side development (Node.js), and large-scale JavaScript projects where type safety and code quality are important. Learn more by visiting the [TypeScript official website](https://www.typescriptlang.org/) and the [TypeScript handbook and documentation](https://www.typescriptlang.org/docs/).

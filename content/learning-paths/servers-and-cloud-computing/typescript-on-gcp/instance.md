@@ -8,15 +8,15 @@ layout: learningpathall
 
 ## Overview
 
-In this section, you will learn how to provision a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` (4 vCPUs, 16 GB memory) machine type in the Google Cloud Console.  
+In this section, you'll set up a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` machine type. This instance gives you four virtual CPUs and 16 GB of memory. You'll use the Google Cloud Console to complete each step. 
 
 {{% notice Note %}}
 For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
-## Provision a Google Axion C4A Arm VM in Google Cloud Console
+## Create the virtual machine
 
-To create a virtual machine based on the C4A instance type:
+To create the virtual machine, follow these steps:
 - Navigate to the [Google Cloud Console](https://console.cloud.google.com/).
 - Go to **Compute Engine > VM Instances** and select **Create Instance**. 
 - Under **Machine configuration**:
@@ -26,6 +26,6 @@ To create a virtual machine based on the C4A instance type:
 
    ![Create a Google Axion C4A Arm virtual machine in the Google Cloud Console with c4a-standard-4 selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
 
-- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. Pick the preferred version for your Operating System. Ensure you select the **Arm image** variant. Click **Select**.
+- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. Pick the preferred version for your operating system. Ensure you select the **Arm image** variant. Click **Select**.
 - Under **Networking**, enable **Allow HTTP traffic**.
 - Click **Create** to launch the instance.
