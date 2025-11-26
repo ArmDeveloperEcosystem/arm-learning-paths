@@ -121,7 +121,7 @@ Open `src/models/ernie4‑5‑moe.cpp` in the llama.cpp repository and locate th
 Insert a print statement right after the top‑k expert selection. For example:
 
 ```c
-printf("---[DEBUG]--- entering build_moe_ffn at layer %d with %d experts (use %d)\n", il, n_expert, n_expert_used); // Odin
+printf("---[DEBUG]--- entering build_moe_ffn at layer %d with %d experts (use %d)\n", il, n_expert, n_expert_used);
 ```
 
 Rebuild llama.cpp:
