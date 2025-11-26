@@ -27,6 +27,8 @@ subjects: Performance and Architecture
 tools_software_languages:
     - KleidiCV 
     - C 
+armips:
+    - Cortex-A
 operatingsystems:
     - macOS
 
