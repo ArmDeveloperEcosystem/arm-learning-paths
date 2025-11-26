@@ -86,7 +86,7 @@ The command for running the test is as follows:
   --gtest_repeat=3
 ```
 
-The output will appear as follows:
+The expected output is:
 
 ```output
 [ERROR:0@0.001] global persistence.cpp:566 open Can't open file: 'imgproc.xml' in read mode
@@ -428,8 +428,7 @@ kleidicv API:: kleidicv_remap_f32_u8_resolver,NEON backend.
 kleidicv API:: kleidicv_remap_f32_u16_resolver,NEON backend.
 kleidicv API:: kleidicv_warp_perspective_stripe_u8_resolver,NEON backend.
 ```
-
-The output is truncated, but you will see performance metrics for all operations at 1280x720 resolution.
+The output is truncated for brevity, but you will see detailed performance metrics for each operation at 1280x720 resolution. Look for lines showing the operation name, sample count, mean and median times, and standard deviation. These results help you compare the performance of different backends and confirm that SME or NEON acceleration is active.
 
 ## Use lldb to check the SME backend implementation
 
@@ -452,10 +451,35 @@ lldb ./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test
 ```
 
 The interactions with the `(lldb)` command line are shown below. 
+Start by entering the following commands in the `lldb` debugger:
 
-Enter the `target` command followed by the `b` command for the breakpoint, and the `run` command. When the breakpoint is reached enter the `bt` command to see the stack trace followed by the `disassemble` command to display the assembly instructions in SME streaming mode. Use the `quit` command at the end to exit `lldb`. 
+```console
+target create "./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test"
+b saturating_add_abs_with_threshold
+run
+```
 
-Some of the paths will be different for you, but you can enter the commands and follow the output. 
+When the program stops at your breakpoint, enter:
+
+```console
+bt
+```
+
+This command displays the stack trace, showing how the function was called.
+
+Next, to view the assembly instructions (including SME streaming mode), enter:
+
+```console
+disassemble --frame
+```
+
+After you finish inspecting the output, exit `lldb` by typing:
+
+```console
+quit
+```
+
+Note: Your file paths may differ, but the sequence of commands remains the same. Enter each command as shown and review the output at each step.
 
 ```console
 target create "./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test"

@@ -15,7 +15,13 @@ You can use KleidiCV as a standalone image processing library or integrate it wi
 
 ## Set up your environment 
 
-To follow this example you'll need a MacBook Pro with an Apple Silicon M4 processor. To check your operating system version, select the **Apple menu ()** in the top-left corner of your screen and choose **About This Mac**. Alternatively, open a terminal and run:
+To follow this example you'll need a MacBook Pro with an Apple Silicon M4 processor. 
+
+To check your operating system version, follow these steps:
+
+- Select the **Apple menu ()** in the top-left corner of your screen
+- Select **About This Mac**
+- Alternatively, open a terminal and run:
 
 ```console
 sw_vers
@@ -27,8 +33,9 @@ ProductName:		macOS
 ProductVersion:		15.5
 BuildVersion:		24F74
 ```
+### Install CMake
 
-You also need CMake. If CMake is not already installed on your host machine, you can install it using Homebrew:
+If CMake is not already installed on your host machine, you can install it using Homebrew:
 
 ```bash
 brew install cmake
@@ -115,7 +122,7 @@ export WORKSPACE=$HOME/kleidi
 
 To set up KleidiCV and OpenCV, first download the source code from GitLab. 
 
-In your $WORKSPACE directory, clone KleidiCV using the v0.6.0 release tag.
+In your $WORKSPACE directory, clone KleidiCV using the v0.6.0 release tag:
 
 ```bash
 cd $WORKSPACE
@@ -138,10 +145,11 @@ patch -p1 < ../kleidicv/adapters/opencv/opencv-4.12.patch
 patch -p1 < ../kleidicv/adapters/opencv/extra_benchmarks/opencv-4.12.patch
 ```
 
-
 ## Build options
 
-KleidiCV provides several CMake options to control which instruction sets and features are enabled during the build. Here are the most important options for Arm systems:
+KleidiCV provides several CMake options to control which instruction sets and features are enabled during the build. 
+
+Here are the most important options for Arm systems:
 
 - **KLEIDICV_ENABLE_SVE2**  
   Enables Scalable Vector Extension 2 (SVE2) code paths. This is on by default for popular compilers that support SVE2, but off otherwise.
@@ -191,7 +199,7 @@ ls ./build-kleidicv-benchmark-SME/benchmark/kleidicv-benchmark
 ```
 ## Build the OpenCV with KleidiCV
 
-The following command can be used to build OpenCV with KleidiCV:
+You can use the following command to build OpenCV with KleidiCV:
 
 ```bash
 cmake -S $WORKSPACE/opencv \
