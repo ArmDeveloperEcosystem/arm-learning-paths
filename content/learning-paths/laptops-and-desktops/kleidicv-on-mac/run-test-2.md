@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## Run the Test
+## Run the test
 
 Once the build steps are complete, you can run the KleidiCV and OpenCV tests.
 The KleidiCV API test checks the public C++ API and confirms that the build is working as expected. To run the test, use the following command:

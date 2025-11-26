@@ -151,26 +151,15 @@ KleidiCV provides several CMake options to control which instruction sets and fe
 
 Here are the most important options for Arm systems:
 
-- **KLEIDICV_ENABLE_SVE2**  
-  Enables Scalable Vector Extension 2 (SVE2) code paths. This is on by default for popular compilers that support SVE2, but off otherwise.
-
-    - **KLEIDICV_LIMIT_SVE2_TO_SELECTED_ALGORITHMS**  
-      Limits SVE2 code paths to algorithms where SVE2 is expected to outperform other options. This is on by default. It has no effect if SVE2 is disabled.
-
-- **KLEIDICV_BENCHMARK**  
-  Enables building KleidiCV benchmarks. The benchmarks use Google Benchmark, which is downloaded automatically. This is off by default.
-
-- **KLEIDICV_ENABLE_SME2**  
-  Enables Scalable Matrix Extension 2 (SME2) and Streaming SVE code paths. This is off by default while the ACLE SME specification is in beta.
-
-    - **KLEIDICV_LIMIT_SME2_TO_SELECTED_ALGORITHMS**  
-      Limits SME2 code paths to cases where SME2 is expected to provide a benefit. This is on by default. It has no effect if SME2 is disabled.
+- KLEIDICV_ENABLE_SVE2 enables Scalable Vector Extension 2 (SVE2) code paths. This is on by default for popular compilers that support SVE2, but off otherwise.
+- KLEIDICV_LIMIT_SVE2_TO_SELECTED_ALGORITHMS limits SVE2 code paths to algorithms where SVE2 is expected to outperform other options. This is on by default. It has no effect if SVE2 is disabled.
+- KLEIDICV_BENCHMARK enables building KleidiCV benchmarks. The benchmarks use Google Benchmark, which is downloaded automatically. This is off by default.
+- KLEIDICV_ENABLE_SME2 enables Scalable Matrix Extension 2 (SME2) and Streaming SVE code paths. This is off by default while the ACLE SME specification is in beta.
+- KLEIDICV_LIMIT_SME2_TO_SELECTED_ALGORITHMS limits SME2 code paths to cases where SME2 is expected to provide a benefit. This is on by default. It has no effect if SME2 is disabled.
 
 You can set these options when running `cmake` to customize your build for your hardware and use case.
 
-{{% notice Note %}}
 KleidiCV automatically selects the fastest available code path for your hardware. If the library detects that SVE2 (Scalable Vector Extension 2) or SME2 (Scalable Matrix Extension 2) is slower than NEON for a specific function, it defaults to NEON—unless you explicitly turn off this behavior by setting `-DKLEIDICV_LIMIT_SVE2_TO_SELECTED_ALGORITHMS=OFF` or `-DKLEIDICV_LIMIT_SME2_TO_SELECTED_ALGORITHMS=OFF`.
-{{% /notice %}}
 
 ## Build the KleidiCV standalone
 
