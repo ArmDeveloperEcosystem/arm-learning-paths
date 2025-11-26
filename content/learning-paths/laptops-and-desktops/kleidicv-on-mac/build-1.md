@@ -1,39 +1,51 @@
 ---
-title: Download and Build for the Kleidicv Software 
+title: Download and build KleidiCV software 
 weight: 2
 
-### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
 ## Introduction
 
-Arm KleidiCV is an open-source library of optimized performance-critical routines for Arm CPUs. It is designed for integrating into any CV framework to enable best performance for CV workloads on Arm, with no action needed by application developers.
+Arm KleidiCV is an open-source library of optimized, performance-critical routines for Arm CPUs. You can integrate it into any Computer Vision (CV) framework to get the best performance for CV workloads on Arm, with no action needed by application developers.
 
-Each KleidiCV function has three different implementations targeting Neon, SVE2 (Scalable Vector Extension) or Streaming SVE & SME2 (Scalable Matrix Extension). KleidiCV will automatically detect what hardware it's running on and select the best implementation accordingly.KleidiCV can be used as a lightweight standalone image processing library. Alternatively KleidiCV can be used seamlessly as part of the extremely popular OpenCV library. 
+Each KleidiCV function has different implementations targeting Neon, SVE2 (Scalable Vector Extension), or Streaming SVE and SME2 (Scalable Matrix Extension). KleidiCV automatically detects the hardware it is running on and selects the best implementation. You can use KleidiCV as a lightweight standalone image processing library or as part of the OpenCV library. 
 
-Since the Apple M4 family is based on the ARMv9.2‑A architecture, it supports the Scalable Matrix Extension (SME) (or a variant thereof) for matrix-compute acceleration. we will demostrate the build and do run test of the kleidicv, understand how the backend implementation is called for the KleidiCV functions.  
+Since the Apple M4 family is based on the Armv9.2‑A architecture, it supports the Scalable Matrix Extension (SME) for accelerating matrix computations. In this Learning Path, you will build and test KleidiCV to understand how the backend implementation is called for the KleidiCV functions.  
 
-## Host Environment
+## Host environment
 
-The host machine utilized is a MacBook Pro (Apple M4 Pro), and the operating system version is detailed below:
+The host machine is a MacBook Pro (Apple Silicon M4), and the operating system version is detailed below.
 
-```bash
+You can find this information on your Mac by selecting the **Apple menu ()** in the top-left corner of your screen, then selecting **About This Mac**. Alternatively, run the following command in a terminal:
+
+```console
+sw_vers
+```
+
+The output is similar to:
+
+```output
 ProductName:		macOS
 ProductVersion:		15.5
 BuildVersion:		24F74
 ```
 
-CMake is available for installation through Homebrew if it is not already installed on the host machine.
+If CMake is not already installed on your host machine, you can install it using Homebrew.
 
 ```bash
 brew install cmake
 ```
 
-The host architecture feature can be verified as outlined below, confirming that FEAT_SME is supported:
+You can verify the host architecture features as outlined below, confirming that `FEAT_SME` is supported:
 
 ```bash
 sysctl -a | grep hw.optional.arm.FEAT
+```
+
+The output is:
+
+```output
 hw.optional.arm.FEAT_CRC32: 1
 hw.optional.arm.FEAT_FlagM: 1
 hw.optional.arm.FEAT_FlagM2: 1
@@ -84,9 +96,28 @@ hw.optional.arm.FEAT_SME_F64F64: 1
 hw.optional.arm.FEAT_SME_I16I64: 1
 ```
 
+If you don't have an M4 Mac you will not see the `FEAT_SME` flags set to 1.
+
+## Create a workspace.
+
+You can use an environment variable to define your workspace. 
+
+```bash
+export WORKSPACE=<your-workspace-directdory>
+```
+
+For example, 
+
+```bash
+mkdir $HOME/kleidi
+export WORKSPACE=$HOME/kleidi
+```
+
 ## Download the Software
 
-To set up KleidiCV and OpenCV, first download the source code from GitLab. In your $WORKSPACE directory, clone KleidiCV using the v0.6.0 release tag.
+To set up KleidiCV and OpenCV, first download the source code from GitLab. 
+
+In your $WORKSPACE directory, clone KleidiCV using the v0.6.0 release tag.
 
 ```bash
 cd $WORKSPACE
@@ -98,6 +129,7 @@ Clone the OpenCV repository into $WORKSPACE using the v4.12.0 release tag.
 ```bash
 cd $WORKSPACE
 git clone https://github.com/opencv/opencv.git
+cd opencv
 git checkout 4.12.0
 ```
 
@@ -123,53 +155,52 @@ Normally, if our tests show SVE2 or SME2 are slower than NEON, we default to NEO
 
 ## Build the KleidiCV standalone
 
-Use the following command to build kleidicv natively:
+Use the following command to build KleidiCV natively:
 
 ```bash
-cmake -S $WORKSPCE/kleidicv \ 
+cmake -S $WORKSPACE/kleidicv \ 
       -B build-kleidicv-benchmark-SME \
       -DKLEIDICV_ENABLE_SME2=ON \ 
       -DKLEIDICV_LIMIT_SME2_TO_SELECTED_ALGORITHMS=OFF \
       -DKLEIDICV_BENCHMARK=ON \
       -DCMAKE_BUILD_TYPE=Release 
-
 cmake --build build-kleidicv-benchmark-SME --parallel
 ```
-Once the build completes, the kleidicv API and framework tests appear below:
+Once the build completes, the KleidiCV API and framework tests appear below:
 
 ```bash
-./build-kleidicv-benchmark-SME/test/framework/kleidicv-framework-test
-./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test
+ls ./build-kleidicv-benchmark-SME/test/framework/kleidicv-framework-test 
+ls ./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test
 ```
 
-The Kleidicv benchmark test is available as follows:
+The KleidiCV benchmark test is available as follows:
 
 ```bash
-./build-kleidicv-benchmark-SME/benchmark/kleidicv-benchmark
+ls ./build-kleidicv-benchmark-SME/benchmark/kleidicv-benchmark
 ```
 ## Build the OpenCV with KleidiCV
 
-The following command can be used to build OpenCV with kleidicv:
+The following command can be used to build OpenCV with KleidiCV:
 
 ```bash
-cmake -S $workspace/opencv /
-      -B build-opencv-kleidicv-sme /
-      -DWITH_KLEIDICV=ON / 
-      -DKLEIDICV_ENABLE_SME2=ON / 
-      -DKLEIDICV_SOURCE_PATH=$workspace/kleidicv /
-      -DBUILD_LIST=imgproc,core,ts /
-      -DBUILD_SHARED_LIBS=OFF /
-      -DBUILD_TESTS=ON /
-      -DBUILD_PERF_TEST=ON /
+cmake -S $WORKSPACE/opencv \
+      -B build-opencv-kleidicv-sme \
+      -DWITH_KLEIDICV=ON \ 
+      -DKLEIDICV_ENABLE_SME2=ON \ 
+      -DKLEIDICV_SOURCE_PATH=$WORKSPACE/kleidicv \
+      -DBUILD_LIST=imgproc,core,ts \
+      -DBUILD_SHARED_LIBS=OFF \
+      -DBUILD_TESTS=ON \
+      -DBUILD_PERF_TEST=ON \
       -DWITH_PNG=OFF
-
 cmake --build build-opencv-kleidicv-sme --parallel --target opencv_perf_imgproc opencv_perf_core
 ```
 
 Upon completion of the build process, the OpenCV test binary will be available at the following location:
 
 ```bash
-build-opencv-kleidicv-sme/bin/opencv_perf_core
-build-opencv-kleidicv-sme/bin/opencv_perf_imgproc
+ls build-opencv-kleidicv-sme/bin/opencv_perf_core
+ls build-opencv-kleidicv-sme/bin/opencv_perf_imgproc
 ```
 
+Continue to the next section to run the benchmarks and learn about SME. 

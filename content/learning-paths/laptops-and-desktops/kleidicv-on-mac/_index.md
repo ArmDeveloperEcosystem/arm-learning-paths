@@ -1,42 +1,48 @@
 ---
-title: Learn how to build and test Kleidicv on Mac OS
+title: Build and test KleidiCV on macOS
+
+draft: true
+cascade:
+    draft: true
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for software developers to learn how
-  to to build and test kleidicv on Mac OS.
+who_is_this_for: This is an introductory topic for software developers who want to build and test KleidiCV on macOS.
 
 learning_objectives: 
-- Install and compile kleidiCV on macOS
+- Install and compile KleidiCV on macOS
 - Run KleidiCV example tests
-- Enable SME build and verify SME backend
+- Enable Scalable Matrix Extensions (SME) and verify increased SME performance
 
 prerequisites:
-- An M4 Mac OS computer.
+- A Mac with Apple Silicon (M4 generation or newer)
+- Basic familiarity with command-line tools
+- Xcode command line tools installed
 
 author: Jett Zhou
 
 ### Tags
 skilllevels: Introductory
-subjects: SME
-armips:
-    - ARMv9-A
+subjects: Performance and Architecture
 tools_software_languages:
-    - kleidiCV and C/C++
+    - KleidiCV 
+    - C 
 operatingsystems:
-    - Mac OS
-
-
+    - macOS
 
 further_reading:
     - resource:
-        title: kleidicv doc
+        title: KleidiCV documentation
         link: https://gitlab.arm.com/kleidi/kleidicv/-/tree/0.6.0/doc?ref_type=tags
         type: documentation
     - resource:
         title: Announcing Arm KleidiCV 0.1
         link: https://developer.arm.com/community/arm-community-blogs/b/ai-blog/posts/kleidicv
         type: blog
+    - resource:
+        title: Learn about function multiversioning
+        link: https://learn.arm.com/learning-paths/cross-platform/function-multiversioning/
+        type: website
 
 
 
