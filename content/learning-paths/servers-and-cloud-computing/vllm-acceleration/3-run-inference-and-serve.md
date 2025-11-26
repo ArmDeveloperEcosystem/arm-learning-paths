@@ -19,7 +19,7 @@ On Arm-based servers, tuning them helps achieve stable throughput while avoiding
 
 ## Serve an OpenAI‑compatible API
 
-Start vLLM’s OpenAI-compatible API server using the quantized INT4 model and environment variables optimized for performance:
+Start vLLM's OpenAI-compatible API server using the quantized INT4 model and environment variables optimized for performance:
 
 ```bash
 export VLLM_TARGET_DEVICE=cpu
@@ -39,7 +39,7 @@ The server now exposes the standard OpenAI-compatible /v1/chat/completions endpo
 You can test it using any OpenAI-style client library to measure tokens-per-second throughput and response latency on your Arm-based server.
 
 ## Run multi‑request batch
-After verifying a single request in the previous section, simulate concurrent load against the OpenAI-compatible server to exercise vLLM’s continuous batching scheduler.
+After verifying a single request in the previous section, simulate concurrent load against the OpenAI-compatible server to exercise vLLM's continuous batching scheduler.
 
 About the client:
 Uses AsyncOpenAI with base_url="http://localhost:8000/v1" to target the vLLM server.

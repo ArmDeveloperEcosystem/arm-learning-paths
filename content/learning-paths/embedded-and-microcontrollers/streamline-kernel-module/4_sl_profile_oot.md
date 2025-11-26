@@ -70,7 +70,7 @@ If you are using an AArch32 target, use `arm` instead of `arm64`.
 
     ![Streamline command#center](./images/img04_streamline_cmd.png)
 
-8. In the Capture settings dialog, select Add image, add the absolut path of your kernel module file `mychardrv.ko` and click Save.
+8. In the Capture settings dialog, select Add image, add the absolute path of your kernel module file `mychardrv.ko` and click Save.
 ![Capture settings#center](./images/img05_capture_settings.png)
 
 9. Start the capture and enter a name and location for the capture file. Streamline will start collecting data and the charts will show activity being captured from the target.
