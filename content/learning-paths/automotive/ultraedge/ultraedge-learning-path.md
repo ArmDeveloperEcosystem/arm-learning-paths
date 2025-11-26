@@ -310,7 +310,7 @@ Place a `MicroPacFile` in your project directory.
 -   **name**: Application name (≤ 10 characters)
 -   **version**: Application version
 -   **target**: Target architecture
--   **applicationType**: Application type (python, others)
+-   **applicationType**: Application type (python, binary, custom)
 -   **image**: Base image
 -   **entry**: Entry point command
 -   **mode**: single-run
