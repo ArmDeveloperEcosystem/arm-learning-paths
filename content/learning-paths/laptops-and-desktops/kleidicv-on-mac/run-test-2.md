@@ -6,11 +6,16 @@ weight: 3
 layout: learningpathall
 ---
 
-## Run the Test
+## Run the test
 
 Once the build steps are complete, you can run the KleidiCV and OpenCV tests.
+The KleidiCV API test checks the public C++ API and confirms that the build is working as expected. To run the test, use the following command:
 
-The KleidiCV API test verifies the public C++ API. You can run it as shown below. The full test log is not included for brevity:
+```bash
+./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test
+```
+
+You will see output showing the number of tests run and their results. The full test log is omitted here for clarity.
 
 ```bash
 ./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test
@@ -60,16 +65,17 @@ Currently, Apple Xcode is built on Clang 17. Version clang-1700.3.19.1 has an SM
 {{% /notice %}}
 
 
-### Run the OpenCV test
+## Run the OpenCV test
 
-Upon completing the build steps for OpenCV with KleidiCV, the test binaries are located in the `build-opencv-kleidicv-sme/bin/` directory. For example, `opencv_perf_imgproc` is OpenCV’s performance benchmark suite for the image processing (`imgproc`) module, which evaluates both execution speed and throughput.
+After building OpenCV with KleidiCV, you will find the test binaries in the `build-opencv-kleidicv-sme/bin/` directory. The main tool for benchmarking image processing performance is `opencv_perf_imgproc`. This utility measures both execution speed and throughput for the OpenCV `imgproc` module, including KleidiCV-accelerated operations.
 
-You can customize testing by selecting specific test filters and parameters using the `--gtest_filter` and `--gtest_param_filter` options, respectively. For instance, to run the Gaussian blur 5×5 performance tests three times with the following parameter settings:
+To focus your testing, use the `--gtest_filter` option to select specific tests and `--gtest_param_filter` to set test parameters. For example, you can run the Gaussian blur 5×5 performance test three times on a 1920x1080 grayscale image with replicated borders:
+
 - Image size: 1920x1080 (Full HD)
-- Image type: 8UC1 (8-bit unsigned, single channel, grayscale)
+- Image type: 8UC1 (8-bit unsigned, single channel)
 - Border type: BORDER_REPLICATE
 
-Additional test cases are available in [benchmarks.txt](https://gitlab.arm.com/kleidi/kleidicv/-/blob/0.6.0/scripts/benchmark/benchmarks.txt?ref_type=tags).
+You can explore additional test cases and parameter combinations in the [benchmarks.txt](https://gitlab.arm.com/kleidi/kleidicv/-/blob/0.6.0/scripts/benchmark/benchmarks.txt?ref_type=tags) file in the KleidiCV repository.
 
 The command for running the test is as follows:
 
@@ -80,7 +86,7 @@ The command for running the test is as follows:
   --gtest_repeat=3
 ```
 
-The output will appear as follows:
+The expected output is:
 
 ```output
 [ERROR:0@0.001] global persistence.cpp:566 open Can't open file: 'imgproc.xml' in read mode
@@ -422,8 +428,7 @@ kleidicv API:: kleidicv_remap_f32_u8_resolver,NEON backend.
 kleidicv API:: kleidicv_remap_f32_u16_resolver,NEON backend.
 kleidicv API:: kleidicv_warp_perspective_stripe_u8_resolver,NEON backend.
 ```
-
-The output is truncated, but you will see performance metrics for all operations at 1280x720 resolution.
+The output is truncated for brevity, but you will see detailed performance metrics for each operation at 1280x720 resolution. Look for lines showing the operation name, sample count, mean and median times, and standard deviation. These results help you compare the performance of different backends and confirm that SME or NEON acceleration is active.
 
 ## Use lldb to check the SME backend implementation
 
@@ -446,10 +451,35 @@ lldb ./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test
 ```
 
 The interactions with the `(lldb)` command line are shown below. 
+Start by entering the following commands in the `lldb` debugger:
 
-Enter the `target` command followed by the `b` command for the breakpoint, and the `run` command. When the breakpoint is reached enter the `bt` command to see the stack trace followed by the `disassemble` command to display the assembly instructions in SME streaming mode. Use the `quit` command at the end to exit `lldb`. 
+```console
+target create "./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test"
+b saturating_add_abs_with_threshold
+run
+```
 
-Some of the paths will be different for you, but you can enter the commands and follow the output. 
+When the program stops at your breakpoint, enter:
+
+```console
+bt
+```
+
+This command displays the stack trace, showing how the function was called.
+
+Next, to view the assembly instructions (including SME streaming mode), enter:
+
+```console
+disassemble --frame
+```
+
+After you finish inspecting the output, exit `lldb` by typing:
+
+```console
+quit
+```
+
+Note: Your file paths may differ, but the sequence of commands remains the same. Enter each command as shown and review the output at each step.
 
 ```console
 target create "./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test"

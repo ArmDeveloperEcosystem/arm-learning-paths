@@ -7,22 +7,25 @@ layout: learningpathall
 
 ## Introduction
 
-Arm KleidiCV is an open-source library of optimized, performance-critical routines for Arm CPUs. You can integrate it into any Computer Vision (CV) framework to get the best performance for CV workloads on Arm, with no action needed by application developers.
+Arm KleidiCV is an open-source library that provides fast, optimized routines for Arm CPUs. You can use KleidiCV with any computer vision (CV) framework to boost performance for CV workloads on Arm systems. 
 
-Each KleidiCV function has different implementations targeting Neon, SVE2 (Scalable Vector Extension), or Streaming SVE and SME2 (Scalable Matrix Extension). KleidiCV automatically detects the hardware it is running on and selects the best implementation. You can use KleidiCV as a lightweight standalone image processing library or as part of the OpenCV library. 
+KleidiCV includes multiple optimized implementations for each function, targeting Arm Neon, SVE2 (Scalable Vector Extension 2), and SME2 (Scalable Matrix Extension 2) instruction sets. The library automatically detects your hardware and chooses the fastest available code path, so you don't need to adjust your code for different Arm CPUs. 
 
-Since the Apple M4 family is based on the Armv9.2‑A architecture, it supports the Scalable Matrix Extension (SME) for accelerating matrix computations. In this Learning Path, you will build and test KleidiCV to understand how the backend implementation is called for the KleidiCV functions.  
+You can use KleidiCV as a standalone image processing library or integrate it with OpenCV for broader computer vision support. On Apple M4 processors, which use the Armv9.2‑A architecture and support SME, you'll see improved performance for matrix operations. In this Learning Path, you'll build and test KleidiCV to observe how it selects the best backend for your hardware.  
 
-## Host environment
+## Set up your environment 
 
-The host machine is a MacBook Pro (Apple Silicon M4), and the operating system version is detailed below.
+To follow this example you'll need a MacBook Pro with an Apple Silicon M4 processor. 
 
-You can find this information on your Mac by selecting the **Apple menu ()** in the top-left corner of your screen, then selecting **About This Mac**. Alternatively, run the following command in a terminal:
+To check your operating system version, follow these steps:
+
+- Select the **Apple menu ()** in the top-left corner of your screen
+- Select **About This Mac**
+- Alternatively, open a terminal and run:
 
 ```console
 sw_vers
 ```
-
 The output is similar to:
 
 ```output
@@ -30,18 +33,20 @@ ProductName:		macOS
 ProductVersion:		15.5
 BuildVersion:		24F74
 ```
+### Install CMake
 
-If CMake is not already installed on your host machine, you can install it using Homebrew.
+If CMake is not already installed on your host machine, you can install it using Homebrew:
 
 ```bash
 brew install cmake
 ```
-
-You can verify the host architecture features as outlined below, confirming that `FEAT_SME` is supported:
+To check which Arm architecture features your Mac supports, run the following command in your terminal:
 
 ```bash
 sysctl -a | grep hw.optional.arm.FEAT
 ```
+
+Look for `hw.optional.arm.FEAT_SME: 1` in the output. If you see this line, your system supports SME (Scalable Matrix Extension). If the value is `0`, SME is not available on your hardware.
 
 The output is:
 
@@ -96,11 +101,11 @@ hw.optional.arm.FEAT_SME_F64F64: 1
 hw.optional.arm.FEAT_SME_I16I64: 1
 ```
 
-If you don't have an M4 Mac you will not see the `FEAT_SME` flags set to 1.
+If your Mac does not have an M4 processor, you won't see the `FEAT_SME` flags set to `1`. In that case, SME (Scalable Matrix Extension) features are not available on your hardware, and KleidiCV will use other optimized code paths instead.
 
-## Create a workspace.
+## Create a workspace
 
-You can use an environment variable to define your workspace. 
+You can use an environment variable to define your workspace:
 
 ```bash
 export WORKSPACE=<your-workspace-directdory>
@@ -113,18 +118,18 @@ mkdir $HOME/kleidi
 export WORKSPACE=$HOME/kleidi
 ```
 
-## Download the Software
+## Download the software
 
 To set up KleidiCV and OpenCV, first download the source code from GitLab. 
 
-In your $WORKSPACE directory, clone KleidiCV using the v0.6.0 release tag.
+In your $WORKSPACE directory, clone KleidiCV using the v0.6.0 release tag:
 
 ```bash
 cd $WORKSPACE
 git clone -b 0.6.0 https://git.gitlab.arm.com/kleidi/kleidicv.git
 ```
 
-Clone the OpenCV repository into $WORKSPACE using the v4.12.0 release tag.
+Clone the OpenCV repository into $WORKSPACE using the v4.12.0 release tag:
 
 ```bash
 cd $WORKSPACE
@@ -133,25 +138,28 @@ cd opencv
 git checkout 4.12.0
 ```
 
-Apply the patch for OpenCV version 4.12.
+Apply the patch for OpenCV version 4.12:
 
 ```bash
 patch -p1 < ../kleidicv/adapters/opencv/opencv-4.12.patch
 patch -p1 < ../kleidicv/adapters/opencv/extra_benchmarks/opencv-4.12.patch
 ```
 
+## Build options
 
-## Build Options
+KleidiCV provides several CMake options to control which instruction sets and features are enabled during the build. 
 
-* KLEIDICV_ENABLE_SVE2 - Enable Scalable Vector Extension 2 code paths. This is on by default for some popular compilers known to support SVE2 but otherwise off by default.
-  - KLEIDICV_LIMIT_SVE2_TO_SELECTED_ALGORITHMS - Limit Scalable Vector Extension 2 code paths to cases where it is expected to provide a benefit over other code paths. On by default. Has no effect if KLEIDICV_ENABLE_SVE2 is off.
-* KLEIDICV_BENCHMARK - Enable building KleidiCV benchmarks. The benchmarks use Google Benchmark which will be downloaded automatically. Off by default.
-* KLEIDICV_ENABLE_SME2 - Enable Scalable Matrix Extension 2 and Streaming Scalable Vector Extension code paths. Off by default while the ACLE SME specification is in beta.
-  - KLEIDICV_LIMIT_SME2_TO_SELECTED_ALGORITHMS - Limit Scalable Matrix Extension 2 code paths to cases where it is expected to provide a benefit over other code paths. On by default. Has no effect if KLEIDICV_ENABLE_SME2 is off.
+Here are the most important options for Arm systems:
 
-{{% notice Note %}}
-Normally, if our tests show SVE2 or SME2 are slower than NEON, we default to NEON (unless overridden with -DKLEIDICV_LIMIT_SVE2_TO_SELECTED_ALGORITHMS=OFF or -DKLEIDICV_LIMIT_SME2_TO_SELECTED_ALGORITHMS=OFF).
-{{% /notice %}}
+- KLEIDICV_ENABLE_SVE2 enables Scalable Vector Extension 2 (SVE2) code paths. This is on by default for popular compilers that support SVE2, but off otherwise.
+- KLEIDICV_LIMIT_SVE2_TO_SELECTED_ALGORITHMS limits SVE2 code paths to algorithms where SVE2 is expected to outperform other options. This is on by default. It has no effect if SVE2 is disabled.
+- KLEIDICV_BENCHMARK enables building KleidiCV benchmarks. The benchmarks use Google Benchmark, which is downloaded automatically. This is off by default.
+- KLEIDICV_ENABLE_SME2 enables Scalable Matrix Extension 2 (SME2) and Streaming SVE code paths. This is off by default while the ACLE SME specification is in beta.
+- KLEIDICV_LIMIT_SME2_TO_SELECTED_ALGORITHMS limits SME2 code paths to cases where SME2 is expected to provide a benefit. This is on by default. It has no effect if SME2 is disabled.
+
+You can set these options when running `cmake` to customize your build for your hardware and use case.
+
+KleidiCV automatically selects the fastest available code path for your hardware. If the library detects that SVE2 (Scalable Vector Extension 2) or SME2 (Scalable Matrix Extension 2) is slower than NEON for a specific function, it defaults to NEON—unless you explicitly turn off this behavior by setting `-DKLEIDICV_LIMIT_SVE2_TO_SELECTED_ALGORITHMS=OFF` or `-DKLEIDICV_LIMIT_SME2_TO_SELECTED_ALGORITHMS=OFF`.
 
 ## Build the KleidiCV standalone
 
@@ -180,7 +188,7 @@ ls ./build-kleidicv-benchmark-SME/benchmark/kleidicv-benchmark
 ```
 ## Build the OpenCV with KleidiCV
 
-The following command can be used to build OpenCV with KleidiCV:
+You can use the following command to build OpenCV with KleidiCV:
 
 ```bash
 cmake -S $WORKSPACE/opencv \
@@ -203,4 +211,8 @@ ls build-opencv-kleidicv-sme/bin/opencv_perf_core
 ls build-opencv-kleidicv-sme/bin/opencv_perf_imgproc
 ```
 
-Continue to the next section to run the benchmarks and learn about SME. 
+## What you've accomplished and what's next
+
+You've successfully set up your development environment, downloaded the KleidiCV and OpenCV source code, and built both libraries with SME2 support on your Apple Silicon Mac. At this point, you have all the tools you need to explore how KleidiCV optimizes for Arm architectures.
+
+In the next section, you'll run benchmarks to see SME in action and learn how KleidiCV automatically selects the best code paths for your hardware. This will help you understand the performance benefits of Arm's advanced instruction sets for computer vision workloads.
