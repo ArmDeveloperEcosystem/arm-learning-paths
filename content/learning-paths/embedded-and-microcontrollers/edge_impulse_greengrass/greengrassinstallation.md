@@ -17,7 +17,7 @@ Log into your edge device via SSH and we'll start the process of installing/conf
 Prior to installing AWS IoT Greengrass, we need to create a set of AWS credentials that will be used as part of the installation process. 
 
 >**_NOTE:_**
->These credentials may automatically be provided to you when you initiate the workshop has hosted by AWS Workshop Studio. If so, please copy the credentials as we'll need them in the next step. The credentials should look like this:
+>These credentials may automatically be provided to you when you initiate the workshop is hosted by AWS Workshop Studio. If so, please copy the credentials as we'll need them in the next step. The credentials should look like this:
 >
 >		export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
 >		export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
@@ -70,10 +70,19 @@ In this example, we choose the "Linux" device type and we are going to download 
 Lower down in the menu, you will see the specific instructions that are custom-crafted for you to download and invoke the "Nucleus Classic" installer. The basic sequence of instructions are:
 
 	1) Start with a SSH shell session into your edge device
-	2) copy and paste your two AWS credentials into the shell environment
-	3) copy and paste/run the installer download curl command into your shell
+	2) copy and paste your two AWS credentials into the shell environment 
+```
+	NOTE: Your "two AWS credentials" are the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY from above...
+```
+	3) copy and paste/run the installer download curl command into your shell 
+```
+	NOTE: The "installer download command" is in the "Download the installer" section in the image below...
+```
 	4) copy and paste/run the installer invocation command
-	5) wait for the installer to complete
+```
+	NOTE: The "installer invocation command" is in the "Run the installer" section in the image below...
+```
+	5) wait for the installer to complete on your edge device
 
  ![CreateDevice](./images/GG_Install_Device2.png)
 

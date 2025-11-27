@@ -25,9 +25,12 @@ Machine Code Analyzer (MCA) is a performance analysis tool that uses information
 
 ### How can MCA be useful?
 
-MCA takes as input a snippet of assembly code and then simulates the execution of that code in a loop of iterations, and the default is 100. 
+MCA takes as input a snippet of assembly code and then simulates the execution of that code in a loop of iterations, and the default is 100.
 
-MCA then outputs a performance report, which contains information such as the latency and throughput of the assembly block and the resource usage for each instruction. 
+MCA then outputs a performance report, which contains information such as the latency and throughput of the assembly block and the resource usage for each instruction.
 
 Using this information, you can identify bottlenecks in performance such as resource pressure and data dependencies. There are many options you can give MCA to get performance metrics. The options are explained in the [llvm-mca documentation](https://llvm.org/docs/CommandGuide/llvm-mca.html).
 
+### How to acquire MCA
+
+MCA is available as part of most Linux distributions, however the version tends to lag behind the current LLVM release. A recent version of MCA is also shipped as part of the Arm Toolchain for Linux (ATfL). You can find more information about ATfL and installation steps in the [ATfL user guide](https://developer.arm.com/documentation/110477/211/?lang=en). The set of cores available for performance estimation in MCA is determined by the LLVM version. You can check the version you are currently using by running `llvm-mca --version`. Using a recent version of LLVM is recommended in order to take advantage of improvements made to MCA. The most recent release can be obtained directly from LLVM, by downloading one of their [release packages](https://github.com/llvm/llvm-project/releases/). LLVM also makes nightly builds available to [download for Debian/Ubuntu](https://apt.llvm.org) based systems.

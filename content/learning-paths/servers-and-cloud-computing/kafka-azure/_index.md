@@ -1,23 +1,19 @@
 ---
-title: Deploy Kafka on the Microsoft Azure Cobalt 100 processors 
-
-draft: true
-cascade:
-    draft: true
+title: Deploy Apache Kafka on Arm-based Microsoft Azure Cobalt 100 virtual machines 
 
 minutes_to_complete: 30   
 
-who_is_this_for: This is an advanced topic designed for software developers looking to migrate their Kafka workloads from x86_64 to Arm-based platforms, specifically on the Microsoft Azure Cobalt 100 processors.
+who_is_this_for: This is an advanced topic for developers looking to migrate their Apache Kafka workloads from x86_64 to Arm-based platforms, specifically on Microsoft Azure Cobalt 100 (arm64) virtual machines.
 
 learning_objectives: 
-    - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image.
-    - Deploy Kafka on the Ubuntu virtual machine.
-    - Perform Kafka baseline testing and benchmarking on Arm64 virtual machines.
+    - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image
+    - Deploy Kafka on an Ubuntu virtual machine
+    - Perform Kafka baseline testing and benchmarking on Arm64 virtual machines
 
 prerequisites:
-    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6). 
-    - Basic understanding of Linux command line.
-    - Familiarity with the [Apache Kafka architecture](https://kafka.apache.org/) and deployment practices on Arm64 platforms.
+    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
+    - Basic understanding of Linux command line
+    - Familiarity with the [Apache Kafka architecture](https://kafka.apache.org/) and deployment practices on Arm64 platforms
 
 author: Pareena Verma
 

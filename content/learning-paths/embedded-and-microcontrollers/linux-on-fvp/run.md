@@ -101,4 +101,4 @@ Always check the name of the CPU instance when switching between different FVP m
 
 You can also run the FVP using its graphical user interface:
 
-![GUI #center](FVP.png "View of the FVP GUI")
+![GUI #center](fvp.webp "View of the FVP GUI")

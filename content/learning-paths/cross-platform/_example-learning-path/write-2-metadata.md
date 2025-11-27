@@ -114,7 +114,7 @@ Specifies the tools, softwares, or languages this Learning Path uses. Please lis
 | Libraries     | zlib, snappy  |
 
 
-### arm_ips (open)
+### armips (open)
 
 Specifies the Arm IP this Learning Path involves, providing a quick link to IP information for developers interested in learning more. You can enter multiple specific or groups of IP. Note that this is not used for filtering content, but is clickable for readers to find more information about these IPs through searching automatically on developer.arm.com.
 

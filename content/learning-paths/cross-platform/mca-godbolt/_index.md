@@ -14,14 +14,14 @@ prerequisites:
     - Familiarity with Arm assembly.
     - LLVM version 16 or newer, which includes support for Neoverse V2.
 
-author: Rin Dobrescu
+author: Asher Dobrescu
 
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
-    - Neoverse
     - Cortex-A
+    - Neoverse
 tools_software_languages:
     - Assembly
     - llvm-mca

@@ -1,5 +1,5 @@
 ---
-title: Evaluate Accuracy with LM Evaluation Harness
+title: Evaluate accuracy with LM Evaluation Harness
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Why accuracy benchmarking
 
-The lm-evaluation-harness is the standard way to measure model accuracy across common academic benchmarks (for example, MMLU, HellaSwag, GSM8K) and runtimes (Hugging Face, vLLM, llama.cpp, etc.). In this module, you will run accuracy tests for both BF16 and INT4 deployments of your model served by vLLM on Arm-based servers.
+The lm-evaluation-harness is the standard way to measure model accuracy across common academic benchmarks (for example, MMLU, HellaSwag, GSM8K) and runtimes (such as Hugging Face, vLLM, and llama.cpp). In this Learning Path, you'll run accuracy tests for both BF16 and INT4 deployments of your model served by vLLM on Arm-based servers.
 
 You will:
   * Install lm-eval-harness with vLLM support
@@ -16,8 +16,9 @@ You will:
   * Interpret key metrics and compare quality across precisions
 
 {{% notice Note %}}
-Results depend on CPU, dataset versions, and model choice. Use the same tasks and few-shot settings when comparing BF16 and INT4 to ensure a fair comparison.
+Results vary based on your CPU, dataset version, and model selection. For a fair comparison between BF16 and INT4, always use the same tasks and few-shot settings.
 {{% /notice %}}
+
 
 ## Prerequisites
 
@@ -70,9 +71,23 @@ lm_eval \
   --output_path results
 ```
 
-## Accuracy Benchmarking INT4 quantized model
+## Benchmark INT4 quantized model accuracy
 
-Use the INT4 quantization recipe & script from previous steps to quantize `meta-llama/Meta-Llama-3.1-8B-Instruct` model
+Run accuracy tests on your INT4 quantized model using the same tasks and settings as the BF16 baseline. Replace the model path with your quantized output directory.
+
+```bash
+lm_eval \
+  --model vllm \
+  --model_args \
+    pretrained=Meta-Llama-3.1-8B-Instruct-w4a8dyn-mse-channelwise,dtype=float32,max_model_len=4096,enforce_eager=True \
+  --tasks mmlu,hellaswag \
+  --batch_size auto \
+  --output_path results
+```
+
+The expected output includes per-task accuracy metrics. Compare these results to your BF16 baseline to evaluate the impact of INT4 quantization on model quality.
+
+Use the INT4 quantization recipe & script from previous steps to quantize `meta-llama/Meta-Llama-3.1-8B-Instruct` model.
 
 Channelwise INT4 (MSE):
 
@@ -86,7 +101,7 @@ lm_eval \
   --output_path results
 ```
 
-## Interpreting results
+## Interpret the results
 
 The harness prints per-task and aggregate scores (for example, `acc`, `acc_norm`, `exact_match`). Higher is generally better. Compare BF16 vs INT4 on the same tasks to assess quality impact.
 
@@ -94,7 +109,7 @@ Practical tips:
   * Use the same tasks and few-shot settings across runs.
   * For quick iteration, you can add `--limit 200` to run on a subset.
 
-## Example results for Meta‑Llama‑3.1‑8B‑Instruct model
+## Explore example results for Meta‑Llama‑3.1‑8B‑Instruct model
 
 These illustrative results are representative; actual scores may vary across hardware, dataset versions, and harness releases. Higher values indicate better accuracy.
 
@@ -108,6 +123,10 @@ Use these as ballpark expectations to check whether your runs are in a reasonabl
 
 ## Next steps
 
-  * Try additional tasks to match your usecase: `gsm8k`, `winogrande`, `arc_easy`, `arc_challenge`.
-  * Sweep quantization recipes (minmax vs mse; channelwise vs groupwise, group size) to find a better accuracy/performance balance.
-  * Record both throughput and accuracy to choose the best configuration for your workload.
+Now that you've completed accuracy benchmarking for both BF16 and INT4 models on Arm-based servers, you're ready to deepen your evaluation and optimize for your specific use case. Expanding your benchmarks to additional tasks helps you understand model performance across a wider range of scenarios. Experimenting with different quantization recipes lets you balance accuracy and throughput for your workload.
+
+- Try additional tasks to match your use case: `gsm8k`, `winogrande`, `arc_easy`, `arc_challenge`.
+- Sweep quantization recipes (minmax vs mse; channelwise vs groupwise, group size) to find a better accuracy/performance balance.
+- Record both throughput and accuracy to choose the best configuration for your workload.
+
+You've learned how to set up lm-evaluation-harness, run benchmarks for BF16 and INT4 models, and interpret key accuracy metrics on Arm platforms. Great job reaching this milestone—your results will help you make informed decisions about model deployment and optimization!

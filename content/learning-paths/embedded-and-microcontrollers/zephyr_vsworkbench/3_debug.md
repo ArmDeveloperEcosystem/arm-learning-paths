@@ -8,21 +8,21 @@ layout: learningpathall
 
 ## Analyze and debug Zephyr applications in VS Code
 
-In this module, you'll learn how to inspect memory usage and perform live debugging on your Zephyr applications using Zephyr Workbench. These capabilities are essential for diagnosing bugs and optimizing embedded firmware performance on Arm Cortex-M platforms.
+In this module, you'll learn how to inspect memory usage and perform live debugging on your Zephyr applications using Workbench for Zephyr. These capabilities are essential for diagnosing bugs and optimizing embedded firmware performance on Arm Cortex-M platforms.
 
 ## Analyze memory usage
 
-Understanding how your application uses memory is crucial for optimizing embedded firmware on resource-constrained Arm Cortex-M systems. Zephyr Workbench provides built-in tools to generate detailed memory usage reports after a successful build, helping you identify ROM and RAM consumption hotspots early in development.
+Understanding how your application uses memory is crucial for optimizing embedded firmware on resource-constrained Arm Cortex-M systems. Workbench for Zephyr provides built-in tools to generate detailed memory usage reports after a successful build, helping you identify ROM and RAM consumption hotspots early in development.
 
 ### Generate memory reports
 
-After building your Zephyr application, analyze how memory is allocated and used. Zephyr Workbench offers built-in memory reporting tools that help you visualize RAM and ROM usage, identify inefficient memory patterns, and guide optimization efforts. These insights are especially useful when working with constrained Arm Cortex-M platforms.
+After building your Zephyr application, analyze how memory is allocated and used. Workbench for Zephyr offers built-in memory reporting tools that help you visualize RAM and ROM usage, identify inefficient memory patterns, and guide optimization efforts. These insights are especially useful when working with constrained Arm Cortex-M platforms.
 
 To generate memory reports, open the **Zephyr Workbench** panel and select **Memory Analysis** after a successful build. The tool generates detailed reports showing RAM usage (stack, heap, static variables), ROM usage (code size, constants), and **Puncover** analysis for binary analysis including function size, call graphs, and timing on Arm Cortex-M processors.
 
 The following steps show how to generate and review memory reports:
 
-- Open the **Zephyr Workbench** panel
+- Open the **Workbench for Zephyr** panel
 - Select **Memory Analysis** after a successful build
 - Review detailed memory reports:
   - **RAM usage**: stack, heap, static variables
@@ -159,22 +159,22 @@ Root                                                                            
 ```
 
 
-## Install and configure debug tools
+## Install and configure debug Runners
 
-Depending on your board, different debug utilities might be required. Zephyr Workbench integrates several common runners:
-
-Go to **Host Tools > Install Debug Tools** in Zephyr Workbench. Debug tools vary depending on your target board.
+Depending on your board, different debug utilities may be required. Workbench for Zephyr integrates and discovers several common runners:
 
 - **OpenOCD**: Generic open-source debugger
 - **LinkServer**: For NXP targets
 - **STM32CubeProgrammer**: For STM32 boards
 - **J-Link**: For SEGGER debug probes
 
-### Install debug utilities
+Workbench for Zephyr will automatically detect these tools when they are installed in their default locations and available on your system `PATH`. If a tool is installed in a custom location, you can either update your `PATH` or configure your environment so that Workbench for Zephyr can find it.
+
+### Install Runners Utilities
 
 To install debug tools for your specific board, go to **Host Tools > Install Debug Tools** in the Zephyr Workbench panel and select the tools applicable to your board.
 
-![Debug Tools](images/install_debug_tools.png)
+![Debug Runners](images/install_runners.png)
 
 ## Configure debug settings
 
@@ -193,7 +193,7 @@ Choose the runner from OpenOCD, J-Link, LinkServer, or PyOCD. If the system does
 
 ### Manual debug runner configuration
 
-If Zephyr Workbench doesn't automatically detect the installed debug runner, open the **Debug Manager** from the sidebar and locate your board profile to enter the path to the runner executable manually.
+If Workbench for Zephyr doesn't automatically detect the installed debug runner, open the **Debug Manager** from the sidebar and locate your board profile to enter the path to the runner executable manually.
 
 {{% notice Note %}}
 Manual configuration might be required on first-time setups or if using custom runner versions.
@@ -201,7 +201,7 @@ Manual configuration might be required on first-time setups or if using custom r
 
 ## Launch and use the debugger
 
-You can start debugging from Zephyr Workbench by selecting **Debug**, or from VS Code by going to **Run and Debug** (`Ctrl+Shift+D`), selecting the debug config, and selecting **Run**.
+You can start debugging from Workbench for Zephyr by selecting **Debug**, or from VS Code by going to **Run and Debug** (`Ctrl+Shift+D`), selecting the debug config, and selecting **Run**.
 
 ![Debug Application](images/debug_app.png)
 
@@ -222,4 +222,4 @@ The debugger provides comprehensive inspection capabilities including breakpoint
 
 If using `pyocd`, target support might take a few seconds to initialize.
 
-In this Learning Path, you explored how to analyze memory usage and debug Zephyr applications using Zephyr Workbench in VS Code. You learned to generate memory reports, install and configure debug tools, and launch interactive debug sessions. These steps help you troubleshoot and optimize embedded applications for Arm Cortex-M boards.
+In this Learning Path, you explored how to analyze memory usage and debug Zephyr applications using Workbench for Zephyr. You learned to generate memory reports, install and configure debug tools, and launch interactive debug sessions. These steps help you troubleshoot and optimize embedded applications for Arm Cortex-M boards.

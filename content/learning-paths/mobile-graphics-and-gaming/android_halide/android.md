@@ -1,34 +1,34 @@
 ---
 # User change
-title: "Integrating Halide into an Android (Kotlin) Project"
+title: "Integrate Halide into an Android project with Kotlin"
 
 weight: 6
 
 layout: "learningpathall"
 ---
 
-## Objective
-In this lesson, we’ll learn how to integrate a high-performance Halide image-processing pipeline into an Android application using Kotlin.
+## What you'll build
+In this section you'll integrate a high-performance Halide image-processing pipeline into an Android application using Kotlin.
 
-## Overview of mobile integration with Halide
+## Learn about mobile integration with Halide
 Android is the world’s most widely-used mobile operating system, powering billions of devices across diverse markets. This vast user base makes Android an ideal target platform for developers aiming to reach a broad audience, particularly in applications requiring sophisticated image and signal processing, such as augmented reality, photography, video editing, and real-time analytics.
 
 Kotlin, now the preferred programming language for Android development, combines concise syntax with robust language features, enabling developers to write maintainable, expressive, and safe code. It offers seamless interoperability with existing Java codebases and straightforward integration with native code via JNI, simplifying the development of performant mobile applications. 
 
-##  Benefits of using Halide on mobile
+## Explore the benefits of using Halide on mobile
 Integrating Halide into Android applications brings several key advantages:
-1. Performance. Halide enables significant acceleration of complex image processing algorithms, often surpassing the speed of traditional Java or Kotlin implementations by leveraging optimized code generation. By generating highly optimized native code tailored for ARM CPUs or GPUs, Halide can dramatically increase frame rates and responsiveness, essential for real-time or interactive applications.
-2. Efficiency. On mobile devices, resource efficiency translates directly to improved battery life and reduced thermal output. Halide's scheduling strategies (such as operation fusion, tiling, parallelization, and vectorization) minimize unnecessary memory transfers, CPU usage, and GPU overhead. This optimization substantially reduces overall power consumption, extending battery life and enhancing the user experience by preventing overheating.
-3. Portability. Halide abstracts hardware-specific details, allowing developers to write a single high-level pipeline that easily targets different processor architectures and hardware configurations. Pipelines can seamlessly run on various ARM-based CPUs and GPUs commonly found in Android smartphones and tablets, enabling developers to support a wide range of devices with minimal platform-specific modifications.
-4. Custom Algorithm Integration. Halide allows developers to easily integrate their bespoke image-processing algorithms that may not be readily available or optimized in common libraries, providing full flexibility and control over application-specific performance and functionality.
+- Performance - Halide enables significant acceleration of complex image processing algorithms, often surpassing the speed of traditional Java or Kotlin implementations by leveraging optimized code generation. By generating highly optimized native code tailored for Arm CPUs or GPUs, Halide can dramatically increase frame rates and responsiveness, essential for real-time or interactive applications.
+- Efficiency - on mobile devices, resource efficiency translates directly to improved battery life and reduced thermal output. Halide's scheduling strategies (such as operation fusion, tiling, parallelization, and vectorization) minimize unnecessary memory transfers, CPU usage, and GPU overhead. This optimization substantially reduces overall power consumption, extending battery life and enhancing the user experience by preventing overheating.
+- Portability - Halide abstracts hardware-specific details, allowing developers to write a single high-level pipeline that easily targets different processor architectures and hardware configurations. Pipelines can seamlessly run on various Arm-based CPUs and GPUs commonly found in Android smartphones and tablets, enabling developers to support a wide range of devices with minimal platform-specific modifications.
+- Custom Algorithm Integration - Halide allows developers to easily integrate their bespoke image-processing algorithms that may not be readily available or optimized in common libraries, providing full flexibility and control over application-specific performance and functionality.
 
 In short, Halide delivers high-performance image processing without sacrificing portability or efficiency, a balance particularly valuable on resource-constrained mobile devices.
 
-### Android development ecosystem and challenges
+### Navigate Android development challenges
 While Android presents abundant opportunities for developers, the mobile development ecosystem brings its own set of challenges, especially for performance-intensive applications:
-1. Limited Hardware Resources. Unlike desktop or server environments, mobile devices have significant constraints on processing power, memory capacity, and battery life. Developers must optimize software meticulously to deliver smooth performance while carefully managing hardware resource consumption. Leveraging tools like Halide allows developers to overcome these constraints by optimizing computational workloads, making resource-intensive tasks feasible on constrained hardware.
-2. Cross-Compilation Complexities. Developing native code for Android requires handling multiple hardware architectures (such as armv8-a, ARM64, and sometimes x86/x86_64). Cross-compilation introduces complexities due to different instruction sets, CPU features, and performance characteristics. Managing this complexity involves careful use of the Android NDK, understanding toolchains, and correctly configuring build systems (e.g., Gradle, CMake). Halide helps mitigate these issues by abstracting away many platform-specific optimizations, automatically generating code optimized for target architectures.
-3. Image-Format Conversions (Bitmap ↔ Halide Buffer). Android typically handles images through the Bitmap class or similar platform-specific constructs, whereas Halide expects image data to be in raw, contiguous buffer formats. Developers must bridge the gap between Android-specific image representations (Bitmaps, YUV images from camera APIs, etc.) and Halide's native buffer format. Proper management of these conversions—including considerations for pixel formats, stride alignment, and memory copying overhead—can significantly impact performance and correctness, necessitating careful design and efficient implementation of buffer-handling routines.
+- Limited hardware resources: unlike desktop or server environments, mobile devices have significant constraints on processing power, memory capacity, and battery life. Developers must optimize software meticulously to deliver smooth performance while carefully managing hardware resource consumption. Leveraging tools like Halide allows developers to overcome these constraints by optimizing computational workloads, making resource-intensive tasks feasible on constrained hardware.
+- Cross-compilation complexities: developing native code for Android requires handling multiple hardware architectures (such as Armv8-A, ARM64, and sometimes x86/x86_64). Cross-compilation introduces complexities due to different instruction sets, CPU features, and performance characteristics. Managing this complexity involves careful use of the Android NDK, understanding toolchains, and correctly configuring build systems (e.g., Gradle, CMake). Halide helps mitigate these issues by abstracting away many platform-specific optimizations, automatically generating code optimized for target architectures.
+- Image format conversions (Bitmap ↔ Halide Buffer). Android typically handles images through the Bitmap class or similar platform-specific constructs, whereas Halide expects image data to be in raw, contiguous buffer formats. Developers must bridge the gap between Android-specific image representations (Bitmaps, YUV images from camera APIs, etc.) and Halide's native buffer format. Proper management of these conversions—including considerations for pixel formats, stride alignment, and memory copying overhead—can significantly impact performance and correctness, necessitating careful design and efficient implementation of buffer-handling routines.
 
 ## Project requirements
 Before integrating Halide into your Android application, ensure you have the necessary tools and libraries.
@@ -37,11 +37,11 @@ Before integrating Halide into your Android application, ensure you have the nec
 1. Android Studio. [Download link](https://developer.android.com/studio).
 2. Android NDK (Native Development Kit). Can be easily installed from Android Studio (Tools → SDK Manager → SDK Tools → Android NDK).
 
-## Setting up the Android project
-### Creating the project
+## Set up the Android project
+### Create the project
 1. Open Android Studio.
 2. Select New Project > Native C++.
-![img4](Figures/04.webp)
+![Android Studio New Project dialog showing Native C++ template selected. The dialog displays options for project name, language, and minimum SDK. The primary subject is the Native C++ template highlighted in the project creation workflow. The wider environment is a typical Android Studio interface with a neutral, technical tone. Visible text includes Native C++ and fields for configuring the new project.]
 
 ### Configure the project
 1. Set the project Name to Arm.Halide.AndroidDemo.
@@ -152,8 +152,9 @@ dependencies {
 
 Click the Sync Now button at the top. To verify that everything is configured correctly, click Build > Make Project in Android Studio.
 
-## UI
-Now, you'll define the application's User Interface, consisting of two buttons and an ImageView. One button loads the image, the other processes it, and the ImageView displays both the original and processed images.
+## Define the user interface
+Define the application's user interface, consisting of two buttons and an ImageView. One button loads the image, the other processes it, and the ImageView displays both the original and processed images.
+
 1. Open the res/layout/activity_main.xml file, and modify it as follows:
 ```XML
 <?xml version="1.0" encoding="utf-8"?>
@@ -204,8 +205,8 @@ Now you can run the app to view the UI:
 
 ![img7](Figures/07.webp)
 
-## Processing
-You will now implement the image processing code. First, pick up an image you want to process. Here we use the camera man. Then, under the Arm.Halide.AndroidDemo/src/main create assets folder, and save the image under that folder as img.png.
+## Implement image processing
+Implement the image processing code. First, pick an image you want to process. This example uses the camera man image. Under Arm.Halide.AndroidDemo/src/main, create an assets folder and save the image as img.png.
 
 Now, open MainActivity.kt and modify it as follows:
 ```java
@@ -330,13 +331,13 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-This Kotlin Android application demonstrates integrating a Halide-generated image-processing pipeline within an Android app. The main activity (MainActivity) manages loading and processing an image stored in the application’s asset folder.
+This Kotlin Android application demonstrates integrating a Halide-generated image-processing pipeline within an Android app. The main activity (MainActivity) manages loading and processing an image stored in the application's asset folder.
 
-When the app launches, the Process Image button is disabled. When a user taps Load Image, the app retrieves img.png from its assets directory and displays it within the ImageView, simultaneously enabling the Process Image button for further interaction.
+When the app launches, the app disables the Process Image button. When you tap Load Image, the app retrieves img.png from its assets directory and displays it within the ImageView, simultaneously enabling the Process Image button for further interaction.
 
 Upon pressing the Process Image button, the following sequence occurs:
 1. Background Processing. A Kotlin coroutine initiates processing on a background thread, ensuring the application’s UI remains responsive.
-2. Conversion to Grayscale. The loaded bitmap image is converted into a grayscale byte array using a simple RGB-average method, preparing it for processing by the native (JNI) layer.
+2. Conversion to Grayscale. The loaded bitmap image is converted into a grayscale byte array using a simple RGB (Red-Green-Blue) average method, preparing it for processing by the native (JNI) layer.
 3. Native Function Invocation. This grayscale byte array, along with image dimensions, is passed to a native function (blurThresholdImage) defined via JNI. This native function is implemented using the Halide pipeline, performing operations such as blurring and thresholding directly on the image data.
 4. Post-processing. After the native function completes, the resulting processed grayscale byte array is converted back into a Bitmap image.
 5. UI Update. The coroutine then updates the displayed image (on the main UI thread) with this newly processed bitmap, providing the user immediate visual feedback.
@@ -346,11 +347,11 @@ The code defines three utility methods:
 2. extractGrayScaleBytes - converts a Bitmap into a grayscale byte array suitable for native processing.
 3. createBitmapFromGrayBytes - converts a grayscale byte array back into a Bitmap for display purposes.
 
-Note that performing the grayscale conversion in Halide allows us to exploit operator fusion, further improving performance by avoiding intermediate memory accesses. This could be done as in our examples before (processing-workflow).
+Note that performing the grayscale conversion in Halide allows you to exploit operator fusion, further improving performance by avoiding intermediate memory accesses. You can do this as shown in the earlier processing-workflow examples.
 
 The JNI integration occurs through an external method declaration, blurThresholdImage, loaded via the companion object at app startup. The native library (armhalideandroiddemo) containing this function is compiled separately and integrated into the application (native-lib.cpp).
 
-You will now need to create blurThresholdImage function. To do so, in Android Studio put the cursor above blurThresholdImage function, and then click Create JNI function for blurThresholdImage:
+Create the blurThresholdImage function. In Android Studio, put the cursor above blurThresholdImage function, and then select Create JNI function for blurThresholdImage:
 ![img8](Figures/08.webp)
 
 This will generate a new function in the native-lib.cpp:
@@ -404,9 +405,9 @@ This C++ function acts as a bridge between Java (Kotlin) and native code. Specif
 
 The input Java byte array (input_bytes) is accessed and pinned into native memory via GetByteArrayElements. This provides a direct pointer (inBytes) to the grayscale data sent from Kotlin. The raw grayscale byte data is wrapped into a Halide::Runtime::Buffer<uint8_t> object (inputBuffer). This buffer structure is required by the Halide pipeline. An output buffer (outputBuffer) is created with the same dimensions as the input image. This buffer will store the result produced by the Halide pipeline. The native function invokes the Halide-generated AOT function blur_threshold, passing in both the input and output buffers. After processing, a new Java byte array (outputArray) is allocated to hold the processed grayscale data. The processed data from the Halide output buffer is copied into this Java array using SetByteArrayRegion. The native input buffer (inBytes) is explicitly released using ReleaseByteArrayElements, specifying JNI_ABORT as no changes were made to the input array. Finally, the processed byte array (outputArray) is returned to Kotlin.
 
-Through this JNI bridge, Kotlin can invoke high-performance native code. You can now re-run the application. Click the Load Image button, and then Process Image. You will see the following results:
+Through this JNI bridge, Kotlin can invoke high-performance native code. You can now re-run the application. Select the Load Image button, and then Process Image. You'll see the following results:
 
-![img9](Figures/09.png)
+Android app screenshot showing the Arm Halide Android demo interface. The screen displays two buttons labeled Load Image and Process Image, with the Process Image button enabled. Below the buttons, an ImageView shows a grayscale photo of a camera man standing outdoors, holding a camera and tripod. The environment appears neutral and technical, with no visible emotional tone. The layout is centered and uses a simple vertical arrangement, making the interface easy to navigate for users with visual impairment.
 ![img10](Figures/10.png)
 
 In the above code we created a new jbyteArray and copying the data explicitly, which can result in an additional overhead. To optimize performance by avoiding unnecessary memory copies, you can directly wrap Halide's buffer in a Java-accessible ByteBuffer like so
@@ -416,4 +417,4 @@ jobject outputBuffer = env->NewDirectByteBuffer(output.data(), width * height);
 ```
 
 ## Summary
-In this lesson, we’ve successfully integrated a Halide image-processing pipeline into an Android application using Kotlin. We started by setting up an Android project configured for native development with the Android NDK, employing Kotlin as the primary language. We then integrated Halide-generated static libraries and demonstrated their usage through Java Native Interface (JNI), bridging Kotlin and native code. This equips developers with the skills needed to harness Halide's  capabilities for building sophisticated, performant mobile applications on Android.
+You've successfully integrated a Halide image-processing pipeline into an Android application using Kotlin. You started by setting up an Android project configured for native development with the Android NDK, using Kotlin as the primary language. You then integrated Halide-generated static libraries and demonstrated their usage through Java Native Interface (JNI), bridging Kotlin and native code. You now have the skills needed to harness Halide's capabilities for building sophisticated, performant mobile applications on Android.

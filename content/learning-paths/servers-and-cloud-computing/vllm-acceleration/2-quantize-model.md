@@ -1,14 +1,14 @@
 ---
-title: Quantize an LLM to INT4 for Arm Platform
+title: Quantize an LLM to INT4
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Accelerating LLMs with 4-bit Quantization
+## Accelerate LLMs with 4-bit quantization
 
 You can accelerate many LLMs on Arm CPUs with 4‑bit quantization. In this section, you’ll quantize the deepseek-ai/DeepSeek-V2-Lite model to 4-bit integer (INT4) weights.
-The quantized model runs efficiently through vLLM’s INT4 inference path, which is accelerated by Arm KleidiAI microkernels.
+The quantized model runs efficiently through vLLM's INT4 inference path, which is accelerated by Arm KleidiAI microkernels.
 
 ## Install quantization tools
 
@@ -35,7 +35,7 @@ If the model you plan to quantize is gated on Hugging Face (e.g., DeepSeek or pr
 huggingface-cli login
 ```
 
-## INT4 Quantization Recipe
+## Apply the INT4 quantization recipe
 
 Using a file editor of your choice, save the following code into a file named `quantize_vllm_models.py`:
 
@@ -134,12 +134,16 @@ This script creates a Arm KleidiAI INT4 quantized copy of the vLLM model and sav
 
 ## Quantize DeepSeek‑V2‑Lite model
 
-### Quantization parameter tuning
-Quantization parameters determine how the model’s floating-point weights and activations are converted into lower-precision integer formats. Choosing the right combination is essential for balancing model accuracy, memory footprint, and runtime throughput on Arm CPUs.
+Quantizing your model to INT4 format significantly reduces memory usage and improves inference speed on Arm CPUs. In this section, you'll apply the quantization script to the DeepSeek‑V2‑Lite model, tuning key parameters for optimal performance and accuracy. This process prepares your model for efficient deployment with vLLM on Arm-based servers.
 
-1. You can choose `minmax` (faster model quantization) or `mse` (more accurate but slower model quantization) method. 
-2. `channelwise` is a good default for most models.
-3. `groupwise` can improve accuracy further; `--groupsize 32` is common.
+## Tune quantization parameters
+Quantization parameters control how the model’s floating-point weights and activations are converted to lower-precision integer formats. The right settings help you balance accuracy, memory usage, and performance on Arm CPUs.
+
+- Use `minmax` for faster quantization, or `mse` for higher accuracy (but slower)
+- Choose `channelwise` for most models; it’s a reliable default
+- Try `groupwise` for potentially better accuracy; `--groupsize 32` is a common choice
+
+Pick the combination that fits your accuracy and speed needs.
 
 Execute the following command to quantize the DeepSeek-V2-Lite model:
 
