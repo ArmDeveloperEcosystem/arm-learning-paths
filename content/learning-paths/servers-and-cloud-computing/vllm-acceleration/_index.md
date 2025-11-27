@@ -1,5 +1,5 @@
 ---
-title: Accelerate vLLM inference on Azure Cobalt 100 virtual machines
+title: Accelerate vllm inference on AWS Graviton processors
     
 minutes_to_complete: 60
 
@@ -23,6 +23,7 @@ author:
 ### Tags
 skilllevels: Introductory
 subjects: ML
+cloud_service_providers: AWS
 armips:
     - Neoverse
 operatingsystems:

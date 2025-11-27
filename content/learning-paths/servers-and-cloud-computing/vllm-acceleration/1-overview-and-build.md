@@ -1,5 +1,5 @@
 ---
-title: Build and validate vLLM for inference on Azure Cobalt 100
+title: Build and validate vLLM for inference 
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -56,7 +56,7 @@ Before you begin, make sure your environment meets these requirements:
 - Python 3.12 on Ubuntu 22.04 LTS or newer
 - At least 32 vCPUs, 64 GB RAM, and 64 GB of free disk space
 
-This Learning Path was tested on an AWS Graviton4 c8g.12xlarge instance with 64 GB of attached storage.
+This Learning Path was tested on an AWS Graviton4 `c8g.12xlarge` instance with 64 GB of attached storage.
 
 ## Install build dependencies
 
