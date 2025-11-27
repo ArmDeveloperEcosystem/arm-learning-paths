@@ -1,12 +1,12 @@
 ---
-title: Getting started with CircleCI on Google Axion C4A (Arm Neoverse-V2)
+title: Get started with CircleCI on Google Axion C4A
 
 weight: 2
 
 layout: "learningpathall"
 ---
 
-## Explore Google Axion C4A Arm instances on Google Cloud
+## Explore Google Axion C4A
 
 Google Axion C4A is a family of Arm-based virtual machines built on Google’s custom Axion CPU, which is based on Arm Neoverse-V2 cores. Designed for high-performance and energy-efficient computing, these virtual machines offer strong performance for modern cloud workloads such as CI/CD pipelines, microservices, media processing, and general-purpose applications.
 

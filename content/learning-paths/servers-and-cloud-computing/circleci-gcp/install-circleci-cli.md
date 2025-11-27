@@ -1,54 +1,64 @@
 ---
-title: Install CircleCI CLI on GCP VM
+title: Install CircleCI
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Install CircleCI CLI on GCP VM
-This section explains how to install the CircleCI Command Line Interface (CLI) on a SUSE Linux (Arm64) virtual machine running on Google Cloud C4A (Axion). The CLI allows you to interact with CircleCI directly from your terminal, to validate configuration files, run jobs locally, or manage runners.
+## Overview
 
-## Install required packages on SUSE Arm64
+This section walks you through how to install the CircleCI Command Line Interface (CLI) on a SUSE Linux (Arm64) virtual machine running on Google Cloud C4A (Axion). The CLI allows you to interact with CircleCI directly from your terminal, to validate configuration files, run jobs locally, or manage runners.
 
-Before installing the CLI, make sure your SUSE environment has the necessary repositories and development tools. 
+## Install dependencies
 
-Add the openSUSE Leap repository:
+Before installing the CLI, make sure your SUSE environment has the right repositories and development tools.
 
-```bash
+First, add the openSUSE Leap repository. This step ensures you can access the latest packages for your system:
+
+```console
 sudo zypper addrepo https://download.opensuse.org/distribution/leap/15.5/repo/oss/ openSUSE-Leap-15.5-OSS
 ```
 
-Refresh package repositories:
-```bash
+Next, refresh your package list so zypper recognizes the newest packages and dependencies:
+
+```console
 sudo zypper refresh
 ```
-This updates the local metadata so that zypper recognizes the latest available packages and dependencies.
 
-## Install git
+Now your system is ready to install the required tools for the CircleCI CLI.
 
-Before installing the CircleCI CLI, make sure your system has the basic tools required for downloading and extracting files:
+## Install Git and required tools
+
+To prepare your SUSE Linux (Arm64) VM for the CircleCI CLI, install Git and essential utilities for downloading and extracting files:
 
 ```console
 sudo zypper install -y curl tar gzip coreutils gpg git-core
 ```
-Once Git and the required tools are installed, you’re ready to download and configure the CircleCI CLI binary for Arm64.
 
-## Download and Extract the CircleCI CLI
-Download the CircleCI CLI binary for Linux Arm64 and extract it.
+After installing these tools, your environment is ready to download and set up the CircleCI CLI binary for Arm64.
+
+## Download and extract the CircleCI CLI
+
+Download the CircleCI CLI binary for Linux Arm64, then extract and move it to your system path.
+
+First, run the following command to download and extract the CLI in one step:
 
 ```console
 curl -fLSs https://github.com/CircleCI-Public/circleci-cli/releases/download/v0.1.33494/circleci-cli_0.1.33494_linux_arm64.tar.gz | tar xz
+```
+
+This command downloads the official CircleCI CLI archive and extracts its contents into your current directory.
+
+Next, move the CLI binary to a directory in your system path so you can run it from anywhere:
+
+```console
 sudo mv circleci-cli_0.1.33494_linux_arm64/circleci /usr/local/bin/
 ```
-Explanation of the commands:
 
-- The `curl` command downloads the `.tar.gz` archive from the official CircleCI GitHub release page.
-- The `| tar xz` part extracts the downloaded file directly without saving it separately.
+After running these commands, you’ll see a new folder called `circleci-cli_0.1.33494_linux_arm64` in your directory. The CLI is now ready to use.
 
-After extraction, you’ll see a new folder named `circleci-cli_0.1.33494_linux_arm64` in your current directory.
-
-### Verify the Installation
+## Verify the Installation
 Check that the CircleCI CLI is installed and executable:
 
 ```console
