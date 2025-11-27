@@ -1,5 +1,5 @@
 ---
-title: Install CircleCI CLI
+title: Install CircleCI CLI on GCP VM
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -9,9 +9,11 @@ layout: learningpathall
 ## Install CircleCI CLI on GCP VM
 This section explains how to install the CircleCI Command Line Interface (CLI) on a SUSE Linux (Arm64) virtual machine running on Google Cloud C4A (Axion). The CLI allows you to interact with CircleCI directly from your terminal, to validate configuration files, run jobs locally, or manage runners.
 
-### Install Required Packages
+## Install required packages on SUSE Arm64
 
-Before installing the CLI, make sure your SUSE environment has the necessary repositories and development tools. Add the openSUSE Leap repository:
+Before installing the CLI, make sure your SUSE environment has the necessary repositories and development tools. 
+
+Add the openSUSE Leap repository:
 
 ```bash
 sudo zypper addrepo https://download.opensuse.org/distribution/leap/15.5/repo/oss/ openSUSE-Leap-15.5-OSS
@@ -23,8 +25,9 @@ sudo zypper refresh
 ```
 This updates the local metadata so that zypper recognizes the latest available packages and dependencies.
 
-# Install git
-Before installing the CircleCI CLI, make sure your system has the basic tools required for downloading and extracting files.
+## Install git
+
+Before installing the CircleCI CLI, make sure your system has the basic tools required for downloading and extracting files:
 
 ```console
 sudo zypper install -y curl tar gzip coreutils gpg git-core

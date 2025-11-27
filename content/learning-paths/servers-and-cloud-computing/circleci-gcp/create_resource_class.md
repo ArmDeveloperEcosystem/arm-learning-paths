@@ -6,9 +6,10 @@ weight: 5
 layout: learningpathall
 ---
 
-## Create a Resource Class for Self-Hosted Runner in CircleCI
-This section explains how to create a Resource Class in the CircleCI Web Dashboard for a self-hosted runner.
-A Resource Class is a unique identifier that links your self-hosted runner to your CircleCI organization (namespace). It defines the “machine type” that CircleCI jobs can target, ensuring that only authorized jobs run on your managed infrastructure, in this case, your SUSE Linux Arm64 VM on Google Cloud C4A (Axion).
+## Create a resource class for a self-hosted runner in CircleCI
+This section explains how to create a resource class in the CircleCI web dashboard for a self-hosted runner.
+
+A resource class is a unique identifier that links your self-hosted runner to your CircleCI organization (namespace). It defines the *machine type* that CircleCI jobs can target, ensuring that only authorized jobs run on your managed infrastructure, which in this case is your SUSE Linux Arm64 VM on Google Cloud C4A (Axion).
 
 ### Steps
 
@@ -19,9 +20,9 @@ A Resource Class is a unique identifier that links your self-hosted runner to yo
      Check “Yes, I agree to the terms” to enable runner functionality for your organization.
    - After accepting, click Self-Hosted Runners again to continue the setup process.
 
-![Self-Hosted Runners alt-text#center](images/shrunner0.png "Figure 1: Self-Hosted Runners ")
+![CircleCI dashboard showing the Self-Hosted Runners section. The main panel displays options to add a new runner and manage existing ones. The left navigation menu highlights Self-Hosted Runners. The environment is a web interface with a neutral, professional tone. Visible text includes Self-Hosted Runners and related setup instructions. alt-text#center](images/shrunner0.png "Self-Hosted Runners")
 
-2. Create a New Resource Class
+## Create a New Resource Class
 
 On your CircleCI Dashboard, click Create Resource Class.
 
