@@ -1,5 +1,5 @@
 ---
-title: Using Streamline with the Statistical Profiling Extension
+title: Use Streamline with the Statistical Profiling Extension
 weight: 8
 
 ### FIXED, DO NOT MODIFY
@@ -16,7 +16,7 @@ To learn more about how SPE works with Streamline, see [Introduction to statisti
 
 To find out if your target supports SPE, see the [Streamline user guide](https://developer.arm.com/documentation/101816/9-7/Capture-a-Streamline-profile/Counter-Configuration/Configure-SPE-counters).
 
-### Profile the kernel module using SPE
+## Profile the kernel module using SPE
 
 To profile both in-tree and out-of-tree kernel modules, you can use the same setup steps as before. The only change is to add “Arm Statistical Profiling Extension” to the **Events to Collect** list in the Counter Configuration dialog.
 ![Streamline Counter Configuration dialog showing the selection of "Arm Statistical Profiling Extension" in the Events to Collect list. The dialog highlights available hardware counters and the SPE option for enhanced profiling. The interface is part of the Streamline profiling tool, focused on configuring performance event collection for kernel module analysis. alt-text#center](./images/img14_spe_select_counters.png "Streamline Counter Configuration dialog with Arm Statistical Profiling Extension selected")
@@ -31,5 +31,5 @@ As shown in the image, SPE provides much more data about the profiled code than 
 
 The following image shows the Streamline application window with the Statistical Profiling Extension (SPE) function tab selected. The main area lists functions with columns for metrics such as sample count, percentage, and address. The SPE data source is highlighted in the drop-down menu, making it easy to focus on profiling results collected with SPE.
 
-![Streamline application window displaying the Statistical Profiling Extension (SPE) function tab. The main area lists functions with columns for metrics such as sample count, percentage, and address. The user interface highlights the SPE data source in the drop-down menu. The environment is a typical developer desktop with a focus on performance profiling results. The tone is technical and informative. alt-text#center](./images/img15_spe_function_tab.gif)
+![Streamline application window displaying the Statistical Profiling Extension (SPE) function tab. The main area lists functions with columns for metrics such as sample count, percentage, and address. The user interface highlights the SPE data source in the drop-down menu. The environment is a typical developer desktop with a focus on performance profiling results. The tone is technical and informative. alt-text#center](./images/img15_spe_function_tab.gif "Streamline application window displaying the Statistical Profiling Extension (SPE) function tab")
 

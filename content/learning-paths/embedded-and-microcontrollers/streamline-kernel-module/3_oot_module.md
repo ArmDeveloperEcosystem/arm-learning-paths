@@ -6,13 +6,15 @@ weight: 4
 layout: learningpathall
 ---
 
-## Create an out-of-tree Linux kernel module
+## Develop a cache-unfriendly Linux kernel module
 
 You'll now create an example Linux kernel module (character device) that demonstrates a cache miss issue caused by traversing a 2D array in column-major order. This access pattern is not cache-friendly, as it skips over most of the neighboring elements in memory during each iteration.
 
-To build the Linux kernel module, start by creating a new directory, for example `example_module`. Inside this directory, add two files: `mychardrv.c` and `Makefile`. 
+To build the Linux kernel module, start by creating a new directory, for example `example_module`. Inside this directory, add two files: `Makefile` and `mychardrv.c`. 
 
 ## Makefile  
+
+To build your Linux kernel module for Arm, you need a Makefile that instructs the build system how to compile and link your code against the kernel source. The Makefile below is designed for use with Buildroot and cross-compiles your module for the aarch64 architecture. Update the `BUILDROOT_OUT` variable to match your Buildroot output directory before running the build:
 
 ```makefile
 obj-m += mychardrv.o
@@ -28,11 +30,10 @@ clean:
     $(MAKE) -C $(KDIR) M=$(PWD) clean
 ```
 
-{{% notice Note %}}
-Change `BUILDROOT_OUT` to the correct buildroot output directory on your host machine.
-{{% /notice %}}
 
 ## mychardrv.c  
+
+The `mychardrv.c` file contains the source code for your custom Linux kernel module. This module implements a simple character device that demonstrates cache-unfriendly behavior by traversing a two-dimensional array in column-major order. The code below allocates and initializes the array, performs the cache-unfriendly traversal, and exposes a write interface for user input. You’ll use this module to generate measurable performance bottlenecks for analysis with Arm Streamline.
 
 ```c
 // SPDX-License-Identifier: GPL-2.0
@@ -203,55 +204,54 @@ MODULE_DESCRIPTION("A simple char driver with cache misses issue");
 
 The module above receives the size of a 2D array as a string through the `char_dev_write()` function, converts it to an integer, and passes it to the `char_dev_cache_traverse()` function. This function then creates the 2D array, initializes it with simple data, traverses it in a column-major (cache-unfriendly) order, computes the sum of its elements, and prints the result to the kernel log. The cache-unfriendly aspects allows you to inspect a bottleneck using Streamline in the next section.
 
-## Building and Running the Kernel Module
+## Build and run the kernel module
 
-1. To compile the kernel module, run make inside the example_module directory. This will generate the output file `mychardrv.ko`.
+To compile the kernel module, run make inside the example_module directory. This generates the output file `mychardrv.ko`.
 
-2. Transfer the .ko file to the target using scp command and then insert it using insmod command. After inserting the module, you create a character device node using mknod command. Finally, you can test the module by writing a size value (e.g., 10000) to the device file and measuring the time taken for the operation using the `time` command.
+Transfer the kernel module (`mychardrv.ko`) to your target device using the `scp` command. Then, insert the module with `insmod` and create the character device node with `mknod`. To test the module, write a size value (such as 10000) to the device file and use the `time` command to measure how long the operation takes. This lets you see the performance impact of the cache-unfriendly access pattern in a clear, hands-on way.
 
-    ```bash
+```bash
     scp mychardrv.ko root@<target-ip>:/root/
-    ```
+```
 
-    {{% notice Note %}}
-    Replace \<target-ip> with your target's IP address
-    {{% /notice %}}
+{{% notice Note %}} Replace \<target-ip> with your target's IP address
+{{% /notice %}}
 
-3. SSH onto your target device:
+SSH onto your target device:
 
-    ```bash
+```bash
     ssh root@<your-target-ip>
-    ```    
+```    
 
-4. Execute the following commads on the target to run the module:
-    ```bash
+Execute the following commads on the target to run the module:
+```bash
     insmod /root/mychardrv.ko
     mknod /dev/mychardrv c 42 0
-    ```
+```
 
-    {{% notice Note %}}
+{{% notice Note %}}
     42 and 0 are the major and minor number specified in the module code above
-    {{% /notice %}}
+  {{% /notice %}}
 
-4. To verify that the module is active, run `dmesg` and the output should match the below:
+To verify that the module is active, run `dmesg` and the output should match the below:
 
-    ```bash
+ ```bash
     dmesg
-    ```
+ ```
 
-    ```output
+  ```output
       [12381.654983] mychardrv is open - Major(42) Minor(0)
-    ```
+  ```
 
-5. To make sure it's working as expected you can use the following command:
+To make sure it's working as expected you can use the following command:
 
-    ```bash { output_lines = "2-4" }
+```bash { output_lines = "2-4" }
     time echo '10000' > /dev/mychardrv
     #   real    0m 38.04s
     #   user    0m 0.00s
     #   sys     0m 38.03s
-    ```
+```
 
-    The command above passes 10000 to the module, which specifies the size of the 2D array to be created and traversed. The **echo** command takes a long time to complete (around 38 seconds) due to the cache-unfriendly traversal implemented in the `char_dev_cache_traverse()` function.
+The command above passes 10000 to the module, which specifies the size of the 2D array to be created and traversed. The **echo** command takes a long time to complete (around 38 seconds) due to the cache-unfriendly traversal implemented in the `char_dev_cache_traverse()` function.
 
 Great job building and running your kernel module! Now that you have a working example, you're ready to take the next step: profiling it with Arm Streamline. In the following section, you'll use Streamline to capture runtime behavior, identify performance bottlenecks, and see firsthand how cache-unfriendly access patterns impact your module. Get ready to gain valuable insights and optimize your code!

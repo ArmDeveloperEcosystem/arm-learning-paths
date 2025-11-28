@@ -6,13 +6,13 @@ weight: 3
 layout: learningpathall
 ---
 
-## Prepare to build Linux image with Buildroot
+## Prepare to build a Linux image with Buildroot
 
 Before you build a Linux image with [Buildroot](https://github.com/buildroot/buildroot), make sure your development environment includes all the required packages. These tools and libraries are essential for compiling, configuring, and assembling embedded Linux images on Arm platforms. Installing them now helps you avoid build errors and ensures a smooth workflow.
 
-## Install required packages for Buildroot
+## Install the required packages for Buildroot
 
-Run the following commands on your aarch64-based Linux system to update your package list and install the necessary dependencies:
+Run the following commands on your AArch64-based Linux system to update your package list and install the necessary dependencies:
 
 ```bash
 sudo apt update
@@ -43,7 +43,7 @@ If you're not using a Raspberry Pi 3B+ for this Learning Path, select the defaul
 make menuconfig
 ```
 
-![Buildroot menuconfig interface showing configuration options. The screen displays a blue dialog box with white text and a highlighted menu. The main menu lists Build options, System configuration, Kernel, and Target packages. The Build options section is selected, and sub-options include build packages with debugging symbols, gcc debug level set to debug level 3, and build packages with runtime debugging info. The environment is a text-based terminal interface, typical for embedded Linux development. The tone is technical and instructional, guiding users through enabling debugging features in Buildroot. alt-text#center](./images/menuconfig.png)
+![Buildroot menuconfig interface showing configuration options. The screen displays a blue dialog box with white text and a highlighted menu. The main menu lists Build options, System configuration, Kernel, and Target packages. The Build options section is selected, and sub-options include build packages with debugging symbols, gcc debug level set to debug level 3, and build packages with runtime debugging info. The environment is a text-based terminal interface, typical for embedded Linux development. The tone is technical and instructional, guiding users through enabling debugging features in Buildroot. alt-text#center](./images/menuconfig.png "Buildroot menuconfig interface showing configuration options.")
 
 Change the Buildroot configuration to enable debugging symbols and SSH access:
 
@@ -67,7 +67,6 @@ Target packages  --->
         [*] openssh
             [*]   server
             [*]   key utilities
-```
 You might need to update your default `sshd_config` file to match your network requirements. To do this, set the **Root filesystem overlay directories** option in the **System configuration** menu. Add a directory containing your customized `sshd_config` file. This ensures your SSH server uses the correct settings when the image boots.
 
 By default, Linux kernel images are stripped of debugging information. To make the image debuggable for profiling, you need to adjust the kernel build settings.
