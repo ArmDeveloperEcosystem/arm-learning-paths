@@ -1,12 +1,12 @@
 ---
-title: Build the in-tree kernel driver
+title: Integrate a custom character device driver into the Linux kernel
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Build an in-tree Linux kernel driver
+## Overview
 
 Now that you have learned how to build and profile an out-of-tree kernel module, you'll move on to building a driver statically into the Linux kernel. You will then profile it by adding the kernel’s `vmlinux` file as an image in Streamline’s capture settings, rather than the kernel object itself. This allows you to view function calls and call paths as before, and also inspect specific sections of the kernel code that might be contributing to performance issues.
 
@@ -16,7 +16,7 @@ Use the same example character driver you used earlier `mychardrv`. This time, y
 
 Go to your kernel source directory, in our case, it's located in Buildroot's output directory in `$(BUILDROOT_HOME)/output/build/linux-custom`.
 
-Copy the `mychardrv.c` file created earlier to `drivers/char` directory.
+Copy the `mychardrv.c` file created earlier to `drivers/char` directory:
 
     ```bash
     cd drivers/char
