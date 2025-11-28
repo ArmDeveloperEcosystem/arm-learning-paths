@@ -214,7 +214,7 @@ Transfer the kernel module (`mychardrv.ko`) to your target device using the `scp
     scp mychardrv.ko root@<target-ip>:/root/
 ```
 
-{{% notice Note %}} Replace \<target-ip> with your target's IP address
+{{% notice Note %}} Replace `<target-ip>` with your target's IP address
 {{% /notice %}}
 
 SSH onto your target device:
