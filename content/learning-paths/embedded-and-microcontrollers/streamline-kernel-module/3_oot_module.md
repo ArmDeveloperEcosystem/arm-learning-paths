@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Creating the Linux Kernel Module
+## Create an out-of-tree Linux kernel module
 
 You will now create an example Linux kernel module (Character device) that demonstrates a cache miss issue caused by traversing a 2D array in column-major order. This access pattern is not cache-friendly, as it skips over most of the neighboring elements in memory during each iteration.
 
@@ -254,4 +254,4 @@ The module above receives the size of a 2D array as a string through the `char_d
 
     The command above passes 10000 to the module, which specifies the size of the 2D array to be created and traversed. The **echo** command takes a long time to complete (around 38 seconds) due to the cache-unfriendly traversal implemented in the `char_dev_cache_traverse()` function.
 
-With the kernel module built, the next step is to profile it using Arm Streamline. You will use it to capture runtime behavior, highlight performance bottlenecks, and help identifying issues such as the cache-unfriendly traversal in your module.
+Great job building and running your kernel module! Now that you have a working example, you're ready to take the next step: profiling it with Arm Streamline. In the following section, you'll use Streamline to capture runtime behavior, identify performance bottlenecks, and see firsthand how cache-unfriendly access patterns impact your module. Get ready to gain valuable insights and optimize your code!
