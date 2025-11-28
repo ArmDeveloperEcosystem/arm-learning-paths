@@ -1,5 +1,5 @@
 ---
-title: Using Streamline with Statistical Profiling Extension
+title: Using Streamline with the Statistical Profiling Extension
 weight: 8
 
 ### FIXED, DO NOT MODIFY
@@ -25,4 +25,7 @@ To view SPE counter values, Select SPE in the data source drop-down in the Call 
 
 As shown in the image, SPE provides much more data about the profiled code than Event-Based Sampling (EBS), which provides us with deep insights into the CPU performance bottlenecks with very low overhead. It's also possible to view or hide columns from the table in Call paths or Functions views by menu-clicking on the table header and choosing from the list of columns.
 
-![SPE function tab#center](./images/img15_spe_function_tab.gif)
+![Streamline SPE function tab showing profiling results#center](./images/img15_spe_function_tab.gif)
+<!--
+Alt text: Streamline application window displaying the Statistical Profiling Extension (SPE) function tab. The main area lists functions with columns for metrics such as sample count, percentage, and address. The user interface highlights the SPE data source in the drop-down menu. The environment is a typical developer desktop with a focus on performance profiling results. The tone is technical and informative.
+-->

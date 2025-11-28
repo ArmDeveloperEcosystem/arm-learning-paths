@@ -6,11 +6,11 @@ weight: 3
 layout: learningpathall
 ---
 
-## Prepare your development environment for Buildroot on Arm
+## Prepare to build Linux image with Buildroot
 
-Before you build a Linux image with Buildroot, make sure your development environment includes all required packages. These tools and libraries are essential for compiling, configuring, and assembling embedded Linux images on Arm platforms. Installing them now helps you avoid build errors and ensures a smooth workflow.
+Before you build a Linux image with [Buildroot](https://github.com/buildroot/buildroot), make sure your development environment includes all the required packages. These tools and libraries are essential for compiling, configuring, and assembling embedded Linux images on Arm platforms. Installing them now helps you avoid build errors and ensures a smooth workflow.
 
-## Install required packages for Buildroot on Arm
+## Install required packages for Buildroot
 
 Run the following commands on your aarch64-based Linux system to update your package list and install the necessary dependencies:
 
@@ -26,9 +26,9 @@ These packages ensure that Buildroot can configure, compile, and assemble all th
 
 ## Build a debuggable kernel image
 
-For this Learning Path you'll be using [Buildroot](https://github.com/buildroot/buildroot) to build a Linux image for Raspberry Pi 3B+ with a debuggable Linux kernel. You'll profile Linux kernel modules built out-of-tree and Linux device drivers built in the Linux source code tree.  
+For this Learning Path you'll build a Linux image for Raspberry Pi 3B+ with a debuggable Linux kernel. You'll profile Linux kernel modules built out-of-tree and Linux device drivers built in the Linux source code tree.  
 
-Start by cloning the Buildroot Repository and initialize the build system with the default configurations:
+Start by cloning the Buildroot repository and initialize the build system with the default configurations:
 
 ```bash
 git clone https://github.com/buildroot/buildroot.git
@@ -45,7 +45,7 @@ make menuconfig
 
 ![Buildroot menuconfig interface showing configuration options. The screen displays a blue dialog box with white text and a highlighted menu. The main menu lists Build options, System configuration, Kernel, and Target packages. The Build options section is selected, and sub-options include build packages with debugging symbols, gcc debug level set to debug level 3, and build packages with runtime debugging info. The environment is a text-based terminal interface, typical for embedded Linux development. The tone is technical and instructional, guiding users through enabling debugging features in Buildroot. alt-text#center](./images/menuconfig.png)
 
-Change Buildroot configurations to enable debugging symbols and SSH access:
+Change the Buildroot configuration to enable debugging symbols and SSH access:
 
 ```plaintext
 Build options  --->
@@ -72,7 +72,7 @@ You might need to update your default `sshd_config` file to match your network r
 
 By default, Linux kernel images are stripped of debugging information. To make the image debuggable for profiling, you need to adjust the kernel build settings.
 
-Open the kernel configuration menu with:
+Open the kernel configuration menu using the following:
 
 ```bash
 make linux-menuconfig
@@ -111,7 +111,7 @@ sdcard.img
 
 If you see `sdcard.img` listed, your image is ready to be flashed to your SD card. You can now flash this image to your SD card and boot your Raspberry Pi with a debuggable Linux kernel.
 
-For details on flashing the SD card image, see [this helpful article](https://www.ev3dev.org/docs/tutorials/writing-sd-card-image-ubuntu-disk-image-writer/).
+For details on flashing the SD card image, see the article [Writing an SD Card Image Using Ubuntu Disk Image Writer](https://www.ev3dev.org/docs/tutorials/writing-sd-card-image-ubuntu-disk-image-writer/).
 
 ## What you've accomplished and what's next
 

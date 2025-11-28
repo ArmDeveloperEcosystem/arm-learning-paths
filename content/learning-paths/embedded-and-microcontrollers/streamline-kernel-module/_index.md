@@ -15,7 +15,7 @@ learning_objectives:
 
 prerequisites:
     - Basic understanding of Linux kernel development and module programming
-    - Arm-based Linux target device (such as a Raspberry Pi, BeagleBone, or similar board) with SSH access
+    - Arm-based Linux target device (such as a Raspberry Pi, BeagleBone, or similar board) with Secure Shell (SSH) access
     - A host machine that meets [Buildroot system requirements](https://buildroot.org/downloads/manual/manual.html#requirement)
 
 author: Yahya Abouelseoud

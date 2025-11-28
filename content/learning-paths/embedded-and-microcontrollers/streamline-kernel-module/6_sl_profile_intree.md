@@ -1,5 +1,5 @@
 ---
-title: Profile in-tree kernel driver
+title: Profile the in-tree kernel driver
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -26,4 +26,4 @@ After clicking Save in Capture settings dialog, you can start the capture and an
 Since you used `vmlinux` image, you can view the driver functions as well as all other kernel functions that were sampled during the capture.
 
 You can also view the full Call path of any sampled function within the kernel.
-![Vmlinux call paths tab#center](./images/img13_vmlinux_callpaths_tab.png)
+![Streamline call paths tab displaying hierarchical call stack data for vmlinux. The main section shows a tree view of kernel function calls, with each function indented to indicate its position in the call hierarchy. Columns display metrics such as sample count and percentage of total samples for each function. The selected function is highlighted, and the interface uses a neutral, technical design typical of performance profiling tools. Visible text includes Call Paths, Sample Count, and Percentage. The wider environment features other Streamline tabs and configuration options, supporting a focused, analytical workflow.](./images/img13_vmlinux_callpaths_tab.png)

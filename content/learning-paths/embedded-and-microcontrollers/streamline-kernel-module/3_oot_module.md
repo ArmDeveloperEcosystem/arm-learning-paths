@@ -1,5 +1,5 @@
 ---
-title: Build out-of-tree kernel module
+title: Build the out-of-tree kernel module
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Create an out-of-tree Linux kernel module
 
-You will now create an example Linux kernel module (Character device) that demonstrates a cache miss issue caused by traversing a 2D array in column-major order. This access pattern is not cache-friendly, as it skips over most of the neighboring elements in memory during each iteration.
+You'll now create an example Linux kernel module (character device) that demonstrates a cache miss issue caused by traversing a 2D array in column-major order. This access pattern is not cache-friendly, as it skips over most of the neighboring elements in memory during each iteration.
 
 To build the Linux kernel module, start by creating a new directory, for example `example_module`. Inside this directory, add two files: `mychardrv.c` and `Makefile`. 
 
-**Makefile**  
+## Makefile  
 
 ```makefile
 obj-m += mychardrv.o
@@ -29,10 +29,10 @@ clean:
 ```
 
 {{% notice Note %}}
-Change **BUILDROOT_OUT** to the correct buildroot output directory on your host machine.
+Change `BUILDROOT_OUT` to the correct buildroot output directory on your host machine.
 {{% /notice %}}
 
-**mychardrv.c**  
+## mychardrv.c  
 
 ```c
 // SPDX-License-Identifier: GPL-2.0

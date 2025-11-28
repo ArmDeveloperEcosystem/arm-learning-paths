@@ -1,5 +1,5 @@
 ---
-title: Build in-tree kernel driver
+title: Build the in-tree kernel driver
 weight: 6
 
 ### FIXED, DO NOT MODIFY
