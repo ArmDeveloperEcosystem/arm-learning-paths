@@ -5261,3 +5261,4 @@ tcmalloc
 tlsv
 vLLM's
 webp
+HugeTLB
