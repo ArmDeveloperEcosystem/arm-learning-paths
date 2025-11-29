@@ -107,6 +107,6 @@ You can also confirm that your runner is connected and active by visiting the Se
 
 Congratulations! You've successfully installed, configured, and registered your CircleCI Machine Runner on your SUSE Arm64 VM in Google Cloud C4A. Your environment is now ready to run Arm-native CircleCI jobs.
 
-Next, define jobs in the `.circleci/config.yml` file that uses your Arm reesource class. You'll be able to run builds and workflows directly on this runner, taking full advantage of Arm performance and scalability.
+Next, define jobs in the `.circleci/config.yml` file that uses your Arm resource class. You'll be able to run builds and workflows directly on this runner, taking full advantage of Arm performance and scalability.
 
 Ready to start building? You can now head to the next section and launch your first Arm-native pipeline.
