@@ -11,7 +11,7 @@ maintopic: true
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 30
-- Linux: 31
+- Linux: 32
 - macOS: 7
 - RTOS: 10
 - Windows: 4
@@ -21,7 +21,7 @@ subjects_filter:
 - Embedded Linux: 4
 - Libraries: 3
 - ML: 17
-- Performance and Architecture: 21
+- Performance and Architecture: 22
 - RTOS Fundamentals: 5
 - Security: 2
 - Virtual Hardware: 2
@@ -35,6 +35,8 @@ tools_software_languages_filter:
 - Arm Compute Library: 2
 - Arm Development Studio: 8
 - Arm Fast Models: 4
+- Arm Performance Studio: 1
+- Arm Streamline: 1
 - Arm Virtual Hardware: 12
 - Assembly: 1
 - C: 5
@@ -72,6 +74,7 @@ tools_software_languages_filter:
 - Keil Studio Cloud: 1
 - Kubernetes: 1
 - lgpio: 1
+- Linux kernel: 1
 - LLM: 2
 - MCP: 1
 - MPS3: 1
@@ -80,6 +83,7 @@ tools_software_languages_filter:
 - NumPy: 1
 - Ollama: 1
 - Paddle: 1
+- Performance analysis: 1
 - Porcupine: 1
 - Python: 8
 - PyTorch: 3

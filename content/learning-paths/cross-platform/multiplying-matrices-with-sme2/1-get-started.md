@@ -107,7 +107,7 @@ For the compiler, you can use [Clang](https://www.llvm.org/) version 18 or later
 At the time of writing, macOS ships with `clang` version 17.0.0, which doesn't support SME2. Use a newer version, such as 21.1.4, available through Homebrew.
 {{% /notice%}}
 
-You can check your compiler version using the command: `clang --version` if it's alreay installed. If not, install `clang` using the instructions below, selecting either macOS or Linux/Ubuntu, depending on your setup:
+You can check your compiler version using the command: `clang --version` if it's already installed. If not, install `clang` using the instructions below, selecting either macOS or Linux/Ubuntu, depending on your setup:
 
 {{< tabpane code=true >}}
 

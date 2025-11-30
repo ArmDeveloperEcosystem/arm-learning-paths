@@ -1,13 +1,9 @@
 ---
-title: CircleCI Arm Native Workflows on SUSE Arm (GCP VM)
-
-draft: true
-cascade:
-    draft: true
+title: Run CircleCI Arm Native Workflows on a SUSE Arm GCP VM
     
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for software developers and DevOps engineers looking to set up and run CircleCI Arm native workflows on SUSE Linux Arm64 VMs, specifically on Google Cloud C4A with Axion processors, using self-hosted runners.
+who_is_this_for: This is an introductory topic for developers and DevOps engineers looking to set up and run CircleCI Arm native workflows on SUSE Linux Arm64 virtual machines (VMs), specifically on Google Cloud C4A with Axion processors, using self-hosted runners.
 
 learning_objectives:
   - Provision a SUSE Arm64 virtual machine on Google Cloud (C4A with Axion processors)

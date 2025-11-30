@@ -101,7 +101,7 @@ You can also click the **Sync Project with Gradle Files** button in the toolbar,
 
     This inflates the layout file into a view binding object, and stores it in a member variable within the view controller for easier access later.
 
-![view binding alt-text#center](images/2/view_binding.png "Figure 5: View Binding.")
+![view binding alt-text#center](images/2/view_binding.webp "Figure 5: View Binding.")
 
 ## Configure CameraX preview
 

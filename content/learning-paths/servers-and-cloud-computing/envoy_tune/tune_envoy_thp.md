@@ -32,7 +32,7 @@ sudo apt-get update
 sudo apt-get install libhugetlbfs-dev libhugetlbfs-bin
 ```
 
-### Enable `hugetlbfs` and THP
+### Enable HugeTLB filesystem and THP
 
 Use the commands shown below to enable `hugetlbfs` and THP:
 

@@ -8,30 +8,33 @@ layout: learningpathall
 
 ## Install CircleCI Machine Runner on SUSE Arm64
 
-This section explains how to install and configure the CircleCI Machine Runner on a SUSE Linux Arm64 virtual machine running on Google Cloud C4A (Axion). By installing this runner, you enable your own VM to execute CircleCI Arm-native jobs.
+This section shows you how to install and set up the CircleCI Machine Runner on a SUSE Linux Arm64 virtual machine in Google Cloud C4A (Axion). After completing these steps, your VM can run CircleCI jobs natively on Arm.
+## Add the CircleCI package repository
 
-### Add CircleCI Package Repository
+Before you install the CircleCI runner, add the official CircleCI package repository to your SUSE system. This step ensures you get the latest Arm64 RPM package.
 
-Because SUSE is an RPM-based Linux distribution, you first need to add the official CircleCI package repository from PackageCloud:
+Run this command to set up the repository:
 
-```console
+```bash
 curl -s https://packagecloud.io/install/repositories/circleci/runner/script.rpm.sh?any=true | sudo bash
 ```
-This command automatically detects your distribution and adds the appropriate repository configuration for SUSE-based systems.
 
-### Install the CircleCI Runner
-Before installation, create a symbolic link for `adduser`. The CircleCI runner installation script is primarily built for Debian/Ubuntu systems, which use the `adduser` command. SUSE uses `useradd` instead.
+This script detects your SUSE version and configures the correct repository automatically.
+## Install the CircleCI runner
+
+Before installing, create a symbolic link for `adduser`. The CircleCI runner installation script expects `adduser`, which is standard on Debian/Ubuntu, but SUSE uses `useradd`. This link ensures compatibility:
 
 ```bash
 sudo ln -s /usr/sbin/useradd /usr/sbin/adduser
 ```
 
-Now install the CircleCI runner package:
+Next, install the CircleCI runner package using `zypper`:
 
-```console
+```bash
 sudo zypper install -y circleci-runner
 ```
-### Prepare User and Permissions
+
+## Prepare user and permissions
 Before starting the CircleCI runner, ensure the correct user, group, and directory permissions are in place. These steps ensure the runner operates securely and has proper access to its configuration and work directories.
 
 Create CircleCI system user and group: 
@@ -54,17 +57,23 @@ Verify service status:
 ```bash
 sudo systemctl status circleci-runner
 ```
+### Configure the runner authentication token
 
-### Configure the Runner Token
+To connect your runner to CircleCI, you need to add the authentication token from your resource class.
 
-Now, configure the authentication token that connects your runner to CircleCI.
-Use the token generated earlier from your Resource Class in the CircleCI dashboard.
+First, export your token as an environment variable. Replace `AUTH_TOKEN` with the value you copied from the CircleCI dashboard:
 
-```console
-export RUNNER_AUTH_TOKEN="AUTH_TOKEN "
+```bash
+export RUNNER_AUTH_TOKEN="your_actual_token_here"
+```
+
+Next, update the runner configuration file to use your token:
+
+```bash
 sudo sed -i "s/<< AUTH_TOKEN >>/$RUNNER_AUTH_TOKEN/g" /etc/circleci-runner/circleci-runner-config.yaml
 ```
-Replace AUTH_TOKEN with the actual token copied from the CircleCI dashboard.
+
+This command replaces the placeholder in the configuration file with your actual token. Your runner is now authenticated with CircleCI.
 
 ### Enable and Start the Runner
 Enable the CircleCI service to start automatically at boot, then start and verify the runner:
@@ -94,7 +103,10 @@ Oct 09 11:15:03 lpprojectsusearm64 circleci-runner[10150]: 11:15:03 6f109 46.144
 ```
 You can also confirm that your runner is connected and active by visiting the Self-Hosted Runners page in the CircleCI web dashboard.
 
-![Self-Hosted Runners alt-text#center](images/dashboard.png "Figure 1: Self-Hosted Runners ")
+![CircleCI dashboard showing self-hosted runner status. The main panel displays a list of registered runners, including runner name, status indicator showing active, last seen timestamp, and resource class. The interface uses a clean layout with navigation on the left and a white background. The overall tone is professional and informative. alt-text#center](images/dashboard.png "Self-Hosted Runners")
 
-Your CircleCI Machine Runner is now installed, configured, and registered on your SUSE Arm64 VM (Google Cloud C4A).
-You can now define jobs in your `.circleci/config.yml` that target your Arm-native Resource Class and begin running builds directly on this runner.
+Congratulations! You've successfully installed, configured, and registered your CircleCI Machine Runner on your SUSE Arm64 VM in Google Cloud C4A. Your environment is now ready to run Arm-native CircleCI jobs.
+
+Next, define jobs in the `.circleci/config.yml` file that uses your Arm resource class. You'll be able to run builds and workflows directly on this runner, taking full advantage of Arm performance and scalability.
+
+Ready to start building? You can now head to the next section and launch your first Arm-native pipeline.

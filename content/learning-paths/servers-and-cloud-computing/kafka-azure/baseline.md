@@ -47,7 +47,7 @@ This configuration file sets up a single Kafka server to act as both a controlle
 
 ## Format the storage directory
 
-Format the metadata storage directory using the kafka-storage.sh tool. This initializes KRaft’s internal Raft logs with a unique cluster ID.
+Format the metadata storage directory using the kafka-storage.sh tool. This initializes KRaft's internal Raft logs with a unique cluster ID.
 
 ```console
 bin/kafka-storage.sh format -t $(bin/kafka-storage.sh random-uuid) -c config/server.properties

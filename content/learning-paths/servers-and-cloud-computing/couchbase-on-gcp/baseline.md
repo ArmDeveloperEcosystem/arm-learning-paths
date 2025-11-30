@@ -33,7 +33,7 @@ http://<VM-Public-IP>:8091
 
 ![Finalize configuration](images/cluster-setup-4.png "Finalize configuration")
 
-Our default cluster is now created!  Please retain the passord you created for your "Administrator" account... you'll need that in the next steps. 
+Our default cluster is now created!  Please retain the password you created for your "Administrator" account... you'll need that in the next steps. 
 
 ### Verify Cluster Nodes
 This command checks if your Couchbase server (called a “node”) is running properly. Replace "password" with your specified Couchbase Administrator password.
@@ -87,4 +87,4 @@ Use the admin `username` (default is "Administrator") and `password` you created
 - The **benchmark** bucket will be used for **load testing** and **performance benchmarking**.  
 - Setting the **RAM Quota** ensures Couchbase allocates sufficient memory for **in-memory data operations**, improving overall speed.
 
-You can now proceed to the next section for benchmarking to measure Couchbase’s performance.
+You can now proceed to the next section for benchmarking to measure Couchbase's performance.
