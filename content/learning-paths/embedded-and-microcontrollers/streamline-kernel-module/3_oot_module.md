@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Develop a cache-unfriendly Linux kernel module
+## Develop a cache-unfriendly Linux kernel module to analyze with Arm Streamline
 
-You'll now create an example Linux kernel module (character device) that demonstrates a cache miss issue caused by traversing a 2D array in column-major order. This access pattern is not cache-friendly, as it skips over most of the neighboring elements in memory during each iteration.
+You'll create a simple Linux kernel module that acts as a character device and intentionally causes cache misses. It does this by traversing a two-dimensional array in column-major order, which is inefficient for the CPU cache because it jumps between non-adjacent memory locations. This pattern helps you see how cache-unfriendly code can slow down performance, making it easier to analyze with Arm Streamline.
 
 To build the Linux kernel module, start by creating a new directory, for example `example_module`. Inside this directory, add two files: `Makefile` and `mychardrv.c`. 
 
@@ -206,9 +206,9 @@ The module above receives the size of a 2D array as a string through the `char_d
 
 ## Build and run the kernel module
 
-To compile the kernel module, run make inside the example_module directory. This generates the output file `mychardrv.ko`.
+To compile the kernel module, run `make` inside the `example_module` directory. This generates the output file `mychardrv.ko`.
 
-Transfer the kernel module (`mychardrv.ko`) to your target device using the `scp` command. Then, insert the module with `insmod` and create the character device node with `mknod`. To test the module, write a size value (such as 10000) to the device file and use the `time` command to measure how long the operation takes. This lets you see the performance impact of the cache-unfriendly access pattern in a clear, hands-on way.
+Transfer the kernel module (`mychardrv.ko`) to your target device using the `scp` command. Then, insert the module with `insmod` and create the character device node with `mknod`. To test the module, write a size value (such as 10000) to the device file and use the `time` command to measure how long the operation takes. This lets you see the performance impact of the cache-unfriendly access pattern in a clear, hands-on way:
 
 ```bash
     scp mychardrv.ko root@<target-ip>:/root/
@@ -230,10 +230,11 @@ Execute the following commads on the target to run the module:
 ```
 
 {{% notice Note %}}
-    42 and 0 are the major and minor number specified in the module code above
+    42 and 0 are the major and minor number specified in the module code above.
   {{% /notice %}}
 
-To verify that the module is active, run `dmesg` and the output should match the below:
+To confirm that your kernel module is loaded and running, use the `dmesg` command. You should see a message like this in the output:
+
 
  ```bash
     dmesg
@@ -251,7 +252,6 @@ To make sure it's working as expected you can use the following command:
     #   user    0m 0.00s
     #   sys     0m 38.03s
 ```
+The command above sends the value 10000 to your kernel module, which sets the size of the 2D array it creates and traverses. Because the module accesses the array in a cache-unfriendly way, the `echo` command takes a noticeable amount of time to finish - it's about 38 seconds in this example. This delay is expected and highlights the performance impact of inefficient memory access patterns, making it easy to analyze with Arm Streamline.
 
-The command above passes 10000 to the module, which specifies the size of the 2D array to be created and traversed. The **echo** command takes a long time to complete (around 38 seconds) due to the cache-unfriendly traversal implemented in the `char_dev_cache_traverse()` function.
-
-Great job building and running your kernel module! Now that you have a working example, you're ready to take the next step: profiling it with Arm Streamline. In the following section, you'll use Streamline to capture runtime behavior, identify performance bottlenecks, and see firsthand how cache-unfriendly access patterns impact your module. Get ready to gain valuable insights and optimize your code!
+You have successfully built and run your kernel module. In the next section, you'll profile it using Arm Streamline to capture runtime behavior, identify performance bottlenecks, and observe the effects of cache-unfriendly access patterns. This analysis will help you understand and optimize your code.

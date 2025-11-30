@@ -7,11 +7,11 @@ minutes_to_complete: 60
 who_is_this_for: This is an advanced topic for developers and performance engineers interested in profiling Linux kernel performance.
 
 learning_objectives: 
-    - Explain the importance of profiling Linux kernel modules
-    - Set up and use Arm Streamline for kernel profiling
-    - Profile both out-of-tree and in-tree kernel modules
-    - Interpret profiling data to identify performance bottlenecks
-    - Use the Statistical Profiling Extension (SPE) for enhanced profiling
+    - Understand why profiling Linux kernel modules is important for performance and stability
+    - Set up and use Arm Streamline to profile the Linux kernel
+    - Profile both out-of-tree and in-tree kernel modules on Arm-based systems
+    - Analyze profiling data to find and address performance bottlenecks
+    - Use the Statistical Profiling Extension (SPE) for deeper kernel profiling insights
 
 prerequisites:
     - Basic understanding of Linux kernel development and module programming

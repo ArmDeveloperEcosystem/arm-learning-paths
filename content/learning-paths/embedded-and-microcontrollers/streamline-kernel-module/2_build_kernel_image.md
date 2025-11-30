@@ -26,7 +26,10 @@ These packages ensure that Buildroot can configure, compile, and assemble all th
 
 ## Build a debuggable kernel image
 
-For this Learning Path you'll build a Linux image for Raspberry Pi 3B+ with a debuggable Linux kernel. You'll profile Linux kernel modules built out-of-tree and Linux device drivers built in the Linux source code tree.  
+For this Learning Path you'll build a Linux image for Raspberry Pi 3B+ with a debuggable Linux kernel. You'll profile Linux kernel modules built out-of-tree and Linux device drivers built in the Linux source code tree. 
+
+{{% notice Note on using a different board%}}
+If you're not using a Raspberry Pi 3B+ for this Learning Path, select the default configuration that matches your hardware. Replace `raspberrypi3_64_defconfig` with the appropriate file from the `$(BUILDROOT_HOME)/configs` directory. This ensures Buildroot generates an image compatible with your target board.{{% /notice %}}
 
 Start by cloning the Buildroot repository and initialize the build system with the default configurations:
 
@@ -35,17 +38,12 @@ git clone https://github.com/buildroot/buildroot.git
 cd buildroot
 export BUILDROOT_HOME=$(pwd)
 make raspberrypi3_64_defconfig
-```
-{{% notice Note on using a different board%}}
-If you're not using a Raspberry Pi 3B+ for this Learning Path, select the default configuration that matches your hardware. Replace `raspberrypi3_64_defconfig` with the appropriate file from the `$(BUILDROOT_HOME)/configs` directory. This ensures Buildroot generates an image compatible with your target board.{{% /notice %}}
-
-```
 make menuconfig
 ```
 
-![Buildroot menuconfig interface showing configuration options. The screen displays a blue dialog box with white text and a highlighted menu. The main menu lists Build options, System configuration, Kernel, and Target packages. The Build options section is selected, and sub-options include build packages with debugging symbols, gcc debug level set to debug level 3, and build packages with runtime debugging info. The environment is a text-based terminal interface, typical for embedded Linux development. The tone is technical and instructional, guiding users through enabling debugging features in Buildroot. alt-text#center](./images/menuconfig.png "Buildroot menuconfig interface showing configuration options.")
+![Buildroot menuconfig interface showing configuration options. The screen displays a blue dialog box with white text and a highlighted menu. The main menu lists Build options, System configuration, Kernel, and Target packages. The Build options section is selected, and sub-options include build packages with debugging symbols, gcc debug level set to debug level 3, and build packages with runtime debugging info. The environment is a text-based terminal interface, typical for embedded Linux development. The tone is technical and instructional, guiding users through enabling debugging features in Buildroot. alt-text#center](./images/menuconfig.png "Buildroot menuconfig interface showing configuration options")
 
-Change the Buildroot configuration to enable debugging symbols and SSH access:
+Now change the Buildroot configuration to enable debugging symbols and SSH access:
 
 ```plaintext
 Build options  --->
@@ -77,7 +75,7 @@ Open the kernel configuration menu using the following:
 make linux-menuconfig
 ```
 
-In the menu, navigate to **Kernel hacking** and ensure that debugging options are enabled. Uncheck any option that reduces debugging information. This step preserves the symbols needed for effective kernel debugging and profiling.
+In the menu, navigate to **Kernel hacking** and ensure that debugging options are enabled. Uncheck any option that reduces debugging information. This step preserves the symbols needed for effective kernel debugging and profiling:
 
 ```plaintext
 Kernel hacking  --->
@@ -114,4 +112,4 @@ For details on flashing the SD card image, see the article [Writing an SD Card I
 
 ## What you've accomplished and what's next
 
-You've successfully built a custom Linux image with debugging features enabled and flashed it to your Raspberry Pi. This milestone means your development board is now running a kernel that's ready for profiling and advanced debugging. Great job reaching this point! Setting up a debuggable environment is a significant step in embedded Linux development. Next, you'll write and profile your own kernel module, building on the solid foundation you've established.
+You've now successfully built a custom Linux image with debugging features enabled and flashed it to your Raspberry Pi. This milestone means your development board is now running a kernel that's ready for profiling and advanced debugging. Great job! Setting up a debuggable environment is a significant step in embedded Linux development. Next, you'll write and profile your own kernel module, building on the solid foundation you've established.
