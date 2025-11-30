@@ -17,26 +17,26 @@ Go to your kernel source directory, which in this case is located in Buildroot's
 
 Copy the `mychardrv.c` file created earlier to `drivers/char` directory:
 
-    ```bash
-    cd drivers/char
-    cp <mychardrv.c file> ./mychardrv.c
-    ```
+```bash
+cd drivers/char
+cp <mychardrv.c file> ./mychardrv.c
+```
 Add the following configuration to the bottom of the `Kconfig` file to make the kernel configuration system aware of the the new driver you just added:
 
-    ```plaintext
-    config MYCHAR_DRIVER
-        tristate "My Character Driver"
-        default y
-        help
-          A simple character device driver for testing.
-    endmenu
-    ```
+```plaintext
+config MYCHAR_DRIVER
+tristate "My Character Driver"
+default y
+help
+A simple character device driver for testing.
+endmenu
+```
 
 You also need to modify the `Makefile` in the current directory to make it build the object file for `mychardrv.c`. Add the following line to it:
 
-    ```Makefile
-    obj-$(CONFIG_MYCHAR_DRIVER) += mychardrv.o
-    ```
+```Makefile
+obj-$(CONFIG_MYCHAR_DRIVER) += mychardrv.o
+```
 
 ## Rebuild and run the Linux image
 

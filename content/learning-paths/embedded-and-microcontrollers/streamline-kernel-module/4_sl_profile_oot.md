@@ -46,20 +46,16 @@ Run gator on the target to start system-wide capture mode:
 
 ![Terminal window showing the command to start gatord on the target device. The command entered is `/root/gatord -S yes -a`. The terminal background is dark with white text. The environment is a typical Linux shell session focused on system profiling setup. There is no emotional tone in the image. alt-text#center](./images/img01_gator_cmd.png "Start gatord on the target device")
 
-Open Streamline and choose **TCP mode**:
-
-Enter your target hostname or IP address.
+Open Streamline and choose **TCP mode**. Enter your target hostname or IP address.
 ![Streamline TCP settings dialog showing fields for entering the target hostname or IP address and port number. The dialog includes labels Hostname or IP and Port with example values entered. The window background is light gray with blue and white interface elements. The wider environment is a desktop application window focused on configuring a remote connection for profiling. The emotional tone is neutral and technical. alt-text#center](./images/img02_streamline_tcp.png "Configure TCP connection to target device")
 
 Select **Select counters** to open the counter configuration dialogue.
 
 Add `L1 data Cache: Refill` and `L1 Data Cache: Access` and enable Event-Based Sampling (EBS) for both of them as shown in the screenshot and select **Save**.
 
-{{% notice Further reading %}}
 To learn more about counters, see the Arm Developer [Counter Configuration Guide](https://developer.arm.com/documentation/101816/latest/Capture-a-Streamline-profile/Counter-Configuration).
 
 To learn more about EBS, see the [Streamline User Guide](https://developer.arm.com/documentation/101816/9-7/Capture-a-Streamline-profile/Counter-Configuration/Setting-up-event-based-sampling).
-  {{% /notice %}}
 
 ![Streamline counter configuration dialog showing two counters, L1 data Cache Refill and L1 Data Cache Access, both enabled with Event-Based Sampling selected. The dialog includes checkboxes and dropdown menus for configuring counters. The wider environment is a desktop application window focused on performance profiling setup. Text in the image includes labels for the counters and options for enabling EBS. The emotional tone is neutral and technical, supporting a step-by-step configuration process for Arm performance analysis. alt-text#center](./images/img03_counter_config.png "Configure counters and enable event-based sampling")
 
@@ -95,7 +91,7 @@ In the **Functions** tab, look for the function `char_dev_cache_traverse()`. You
 
 To view the call path for `char_dev_cache_traverse()`, right-click the function name and select **Select in Call Paths**.
 
-This opens the **Call Paths** tab, where you can trace which functions called `char_dev_cache_traverse()`. In the **Locations** column, you'll see the sequence of calls—starting from the userspace `echo` command and ending in your kernel module `mychardrv.ko`. This helps you understand how execution flows from userspace into your kernel code, making it easier to spot where performance issues might begin.
+This opens the **Call Paths** tab, where you can trace which functions called `char_dev_cache_traverse()`. In the **Locations** column, you'll see the sequence of calls which start from the userspace `echo` command and ending in your kernel module `mychardrv.ko`. This helps you understand how execution flows from userspace into your kernel code, making it easier to spot where performance issues might begin.
 ![Streamline Call Paths tab displaying a hierarchical call stack with the function char_dev_cache_traverse highlighted. The primary subject is the call path tree, showing the sequence of function calls from userspace echo command through to the kernel module mychardrv.ko. The wider environment is a desktop profiling application window with columns labeled Function, Image, and performance counters. Visible text includes function names, image names, and numerical metric values. The emotional tone is neutral and technical, supporting detailed analysis for Arm kernel module profiling and helping users trace performance issues through the call stack. alt-text#center](./images/img09_callpaths_tab.png "Trace function call paths in Streamline")
 
 Because you built your kernel module with debug information, Streamline highlights the exact lines of code that cause cache misses. This makes it easy to see which parts of your code need optimization.
@@ -104,5 +100,5 @@ Double-tap the function name to open the **Code** tab. The top section highlight
 ![Streamline Code tab displaying annotated source code and disassembly for the function char_dev_cache_traverse in the kernel module mychardrv.ko. The primary subject is the code analysis panel, which highlights individual lines of C source code and corresponding assembly instructions, each with associated cache miss metrics. The top half of the window shows the source code with numerical values indicating cache misses per line, while the bottom half presents the disassembly view with counter values for each instruction. The wider environment is a desktop profiling application window with labeled columns such as Function, Image, and performance counters. Visible text includes function names, source code lines, assembly instructions, and numerical metric values. The emotional tone is neutral and technical, supporting detailed analysis for Arm kernel module profiling and helping users identify performance bottlenecks at the code level. alt-text#center](./images/img10_code_tab.png "Analyze code and disassembly for cache misses in Streamline")
 
 {{% notice Note %}}
-You might need to configure path prefix substitution in the **Code** tab to view the source code correctly. For information on how to set this up and for more information about code analysis, see the [Streamline user guide](https://developer.arm.com/documentation/101816/latest/Analyze-your-capture/Analyze-your-code?lang=en).
+You might need to configure path prefix substitution in the **Code** tab to view the source code correctly. For information on how to set this up and for more information about code analysis, see the [Streamline User Guide](https://developer.arm.com/documentation/101816/latest/Analyze-your-capture/Analyze-your-code?lang=en).
 {{% /notice %}}
