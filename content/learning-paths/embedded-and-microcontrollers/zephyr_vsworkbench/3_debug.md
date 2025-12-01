@@ -31,7 +31,7 @@ The following steps show how to generate and review memory reports:
 
 ![Memory Analysis](images/memory_analysis.png)
 
-The RAM Report displays detailed memory allocation information:
+The RAM Report displays detailed memory allocation information and should look like this:
 
 ```
 Path                                                                                             Size       %  Address    Section
@@ -172,7 +172,7 @@ Workbench for Zephyr will automatically detect these tools when they are install
 
 ### Install Runners Utilities
 
-To install debug tools for your specific board, go to **Host Tools > Install Debug Tools** in the Zephyr Workbench panel and select the tools applicable to your board.
+To install debug tools for your specific board, go to **Host Tools > Install Debug Tools** in the Zephyr Workbench panel and select the tools applicable to your board. You may need to press the refresh symbol to get the latest installation state for the selected/installed runners:
 
 ![Debug Runners](images/install_runners.png)
 
@@ -204,6 +204,10 @@ Manual configuration might be required on first-time setups or if using custom r
 You can start debugging from Workbench for Zephyr by selecting **Debug**, or from VS Code by going to **Run and Debug** (`Ctrl+Shift+D`), selecting the debug config, and selecting **Run**.
 
 ![Debug Application](images/debug_app.png)
+
+{{% notice Note %}}
+Depending on whether you are running on Windows or a Mac, the selection of the serial monitor port may be different from what is shown above. The above picture shows a serial port from the development board being connected to a Mac. 
+{{% /notice %}}
 
 ### Debug toolbar controls
 

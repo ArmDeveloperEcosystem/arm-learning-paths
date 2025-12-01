@@ -72,7 +72,7 @@ When the installation completes, select **Verify Host Tools** to check the versi
 
 Next, download and configure the toolchain by selecting **Import Toolchain** in the Workbench for Zephyr panel. Select the toolchain family (*Zephyr SDK*) and configure the SDK Type by choosing *Minimal* for basic functionality.
 
-Select your desired version (such as v0.17.0 or v0.17.3) and choose the target architectures. For this Learning Path, you only need to select *arm*. 
+Select your desired version (such as v0.17.4... your version may vary a little) and choose the target architectures. For this Learning Path, you only need to select *arm*. 
 
 Specify the parent directory for SDK installation and select **Import** to download and install the SDK.
 
@@ -85,14 +85,16 @@ Zephyr uses a Git-based workspace manager called West to organize its source cod
 
 In the Workbench for Zephyr panel, select **Initialize Workspace** to set up your project environment. Configure the workspace settings by selecting "Minimal from template" for the source location and using the default path `https://github.com/zephyrproject-rtos/zephyr`. 
 
-Choose a target-specific template (such as STM32 or NXP) and select your Zephyr version (such as v3.7.0 or v4.1.0). Specify the directory for your workspace, keeping in mind that initialization takes approximately 10 minutes to complete. 
+Choose a target-specific template (such as STM32 or NXP) and select your Zephyr version (such as v4.3.0... your version may vary a bit). Specify the directory for your workspace, keeping in mind that initialization takes approximately 10 minutes to complete. 
 
 Select **Import** to create and update the workspace.
 
 ![Initialize West Workspace #center](images/initialize_workspace.png)
    
 {{% notice Note %}}
-The workspace initialization downloads the Zephyr source code and dependencies. This process may take several minutes depending on your internet connection speed.
+The workspace initialization downloads the Zephyr source code and dependencies. This process may take several minutes depending on your internet connection speed. 
+
+Additionally, the selected revision you select may be a bit different from the one shown above.
 {{% /notice %}}
 
 ### Verify setup
