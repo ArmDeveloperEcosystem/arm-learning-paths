@@ -105,4 +105,5 @@ Results from the run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in 
 
 - Both the ALIGNED mode and DEBLOAT modes demonstrate a strong throughput on the Arm64 VM.  
 - The benchmark confirms that the Arm64 architecture efficiently handles Flink's remote channel throughput workloads.  
-- Overall, the average throughput across both modes is approximately **14,854 ops/ms**, indicating strong baseline performance for Arm64deployments.
+
+Overall, Arm64 VMs have shown that they are highly suitable for real-time Flink workloads, especially streaming analytics, ETL pipelines, and JVM-based microbenchmarks.
