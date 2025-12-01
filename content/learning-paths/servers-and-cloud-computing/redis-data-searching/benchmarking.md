@@ -14,9 +14,16 @@ The `redis-benchmark` tool is an official performance testing utility for Redis.
 Ensure Redis server is running and accessible:
 
 ```console
+redis-cli ping
+```
+
+If you do not see a "PONG" response, please start redis:
+
+```console
 redis-server &
 redis-cli ping
 ```
+
 ### Benchmark SET (Write Performance)
 The `SET` benchmark helps validate Redis’s ability to handle high insertion rates efficiently on Arm-based servers.
 
@@ -145,25 +152,13 @@ Summary:
 - **p99:** 99th percentile — shows near worst-case latency, key for reliability analysis.
 - **max:** Slowest observed response time (worst case).
 
-### Benchmark summary on x86_64
-To compare the benchmark results, the following results were collected by running the same benchmark on a `x86 - c4-standard-4` (4 vCPUs, 15 GB Memory) x86_64 VM in GCP, running SUSE:
-
-| Operation | Total Requests | Concurrent Clients | Avg Latency (ms) | Min (ms) | P50 (ms) | P95 (ms) | P99 (ms) | Max (ms) | Throughput (req/sec) | Description |
-|------------|----------------|--------------------|------------------|-----------|-----------|-----------|-----------|-----------|-----------------------|--------------|
-| SET        | 100,000        | 50                 | 0.176            | 0.048     | 0.175     | 0.191     | 0.327     | 0.679     | 146,842.88            | Measures Redis write performance using SET command |
-| GET        | 100,000        | 50                 | 0.184            | 0.056     | 0.183     | 0.207     | 0.311     | 1.127     | 139,860.14            | Measures Redis read performance using GET command |
-
-
-### Benchmark summary on Arm64
-Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
+### Benchmark summary
+Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE Enterprise Server):
 
 | Operation | Total Requests | Concurrent Clients | Avg Latency (ms) | Min (ms) | P50 (ms) | P95 (ms) | P99 (ms) | Max (ms) | Throughput (req/sec) | Description |
 |------------|----------------|--------------------|------------------|-----------|-----------|-----------|-----------|-----------|-----------------------|--------------|
 | SET        | 100,000        | 50                 | 0.170            | 0.056     | 0.167     | 0.183     | 0.191     | 1.095     | 149,700.61            | Measures Redis write performance using SET command |
 | GET        | 100,000        | 50                 | 0.169            | 0.048     | 0.167     | 0.183     | 0.191     | 0.807     | 150,375.94            | Measures Redis read performance using GET command |
-
-
- ### Redis benchmarking comparison on Arm64 and x86_64
 
  - **High Efficiency:** Redis achieved over **150K ops/sec** on both read and write workloads, showcasing strong throughput on **Arm64 (C4A)** architecture.
 - **Low Latency:** Average latency remained around **0.17 ms**, demonstrating consistent response times under concurrency.
