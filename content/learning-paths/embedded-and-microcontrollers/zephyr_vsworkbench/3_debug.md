@@ -185,15 +185,15 @@ Before starting a debug session, make sure your settings match your application 
 ### Application configuration
 Select your application and build config (for example, "primary"), then wait for values to load or build the project if needed.
 
-### Program settings
+## Program settings
 The ELF executable path is auto-filled after build. You can optionally add a **CMSIS-SVD** file to enable register-level view.
 
-### Debug server
+## Debug server
 Choose the runner from OpenOCD, J-Link, LinkServer, or PyOCD. If the system doesn't detect your runner automatically, enter the runner path manually. Select **Apply** to save your settings or launch debug directly.
 
 ![Debug Manager panel in Workbench for Zephyr showing a list of connected debug runners and configuration options. The interface displays fields for selecting the runner executable path, board profile, and status indicators for each tool. The environment is a VS Code window with the Zephyr Workbench sidebar open. The tone is technical and neutral. Visible text includes Debug Manager, Runner Path, Board Profile, and status labels for detected runners.](images/debug_manager.png "Debug Manager panel in Workbench for Zephyr")
 
-### Manual debug runner configuration
+## Manual debug runner configuration
 
 If Workbench for Zephyr doesn't automatically detect the installed debug runner, open the **Debug Manager** from the sidebar and locate your board profile to enter the path to the runner executable manually.
 

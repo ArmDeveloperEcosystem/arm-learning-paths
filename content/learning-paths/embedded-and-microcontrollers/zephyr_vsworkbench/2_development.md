@@ -13,18 +13,21 @@ In this session, you'll learn how to create and build your first Zephyr applicat
 For demonstration, you'll use an [NXP FRDM-MCXN947](https://www.nxp.com/design/design-center/development-boards-and-designs/FRDM-MCXN947) development board as the target device. However, the same steps apply to any Zephyr-supported Arm Cortex-M board. 
 You can find the full list of supported boards in the [Supported Boards](https://docs.zephyrproject.org/latest/boards/#).
 
-Depending on your board, you might need to install a different debug tool aka `runner`. The next module covers this setup.
+Depending on your board, you might need to install a different debug tool aka `runner`. The next section covers this setup.
 
 ### Create application
 
 In the Zephyr Workbench panel:
 
-1. Select **Create New Application**
-2. Configure your project:
-   - Select workspace and SDK
-   - Choose your target board (for example, NXP FRDM-MCXN947)
-   - Select a sample app (for example, `hello_world`)
-   - Provide a project name
+Select **Create New Application** in the Zephyr Workbench panel.
+
+Configure your project:
+    - Select the workspace and SDK version.
+    - Choose your target board (for example, NXP FRDM-MCXN947).
+    - Select a sample application (for example, `hello_world`).
+    - Enter a project name.
+
+After you complete these steps, Workbench for Zephyr creates the project and prepares it for building.
 
 ![Zephyr Workbench Create New Application panel in VS Code showing workspace selection SDK version target board dropdown sample application selection and project name fields. The interface is clean and organized with clear labels and buttons. The wider VS Code environment is visible in the background with a neutral and professional tone. All text in the panel is legible and guides the user through creating a new Zephyr application.](images/create_app.png "Zephyr Workbench Create New Application panel")
 
@@ -79,7 +82,7 @@ int main(void)
 
 `CONFIG_BOARD` expands to your target board name. You'll modify this app in the next module!
 
-### Try this: modify and rebuild
+## Try this: modify and rebuild
 
 Now that the app works, try editing the message in `printk()` or changing the board target in the application settings. Then rebuild and observe the output. This helps verify that your toolchain and workspace respond correctly to code and config changes.
 
