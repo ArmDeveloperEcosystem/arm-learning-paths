@@ -13,7 +13,7 @@ When setting up the project's Run-Time Environment, ensure you add the appropria
 
 Once this is done, the `RTX5` initialization code is typically the same. It involves setting up the `SysTick` timer with the [SystemCoreClockUpdate()](https://www.keil.com/pack/doc/CMSIS/Core/html/group__system__init__gr.html#gae0c36a9591fe6e9c45ecb21a794f0f0f) function, then initializing and starting the RTOS.
 
-## Create `main()`
+## Create the main() function 
 
 Return to the `CMSIS` view.
 
