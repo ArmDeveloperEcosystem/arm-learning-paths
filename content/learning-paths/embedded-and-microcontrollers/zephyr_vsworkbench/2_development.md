@@ -1,21 +1,21 @@
 ---
-title: Build Zephyr applications in VS Code
+title: Build a Zephyr application with Zephyr workbench
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Create and build your first Zephyr application
+## Set up your Zephyr development board and environment
 
-In this session, you'll learn how to create and build your first Zephyr application using Workbench for Zephyr. This step prepares you to customize, test, and expand real firmware projects on Arm Cortex-M boards.
+In this section, you'll learn how to create and build your first Zephyr application using Workbench for Zephyr. This step prepares you to customize, test, and expand real firmware projects on Arm Cortex-M boards.
+For this demonstration, you'll use an [NXP FRDM-MCXN947](https://www.nxp.com/design/design-center/development-boards-and-designs/FRDM-MCXN947) development board as your target device. The same process works for any Zephyr-supported Arm Cortex-M board. 
 
-For demonstration, you'll use an [NXP FRDM-MCXN947](https://www.nxp.com/design/design-center/development-boards-and-designs/FRDM-MCXN947) development board as the target device. However, the same steps apply to any Zephyr-supported Arm Cortex-M board. 
-You can find the full list of supported boards in the [Supported Boards](https://docs.zephyrproject.org/latest/boards/#).
+To see all compatible boards, visit the [Zephyr Supported Boards list](https://docs.zephyrproject.org/latest/boards/#).
 
 Depending on your board, you might need to install a different debug tool aka `runner`. The next section covers this setup.
 
-### Create application
+## Create the application
 
 In the Zephyr Workbench panel:
 
@@ -29,9 +29,9 @@ Configure your project:
 
 After you complete these steps, Workbench for Zephyr creates the project and prepares it for building.
 
-![Zephyr Workbench Create New Application panel in VS Code showing workspace selection SDK version target board dropdown sample application selection and project name fields. The interface is clean and organized with clear labels and buttons. The wider VS Code environment is visible in the background with a neutral and professional tone. All text in the panel is legible and guides the user through creating a new Zephyr application.](images/create_app.png "Zephyr Workbench Create New Application panel")
+![Zephyr Workbench Create New Application panel in VS Code showing workspace selection SDK version target board dropdown sample application selection and project name fields. The interface is clean and organized with clear labels and buttons. The wider VS Code environment is visible in the background with a neutral and professional tone. All text in the panel is legible and guides the user through creating a new Zephyr application. alt-text #center](images/create_app.png "Zephyr Workbench Create New Application panel")
 
-### Build the application
+## Build the application
 
 Select the **Build** button in Workbench for Zephyr or press `Ctrl+Shift+B`.
 
@@ -39,7 +39,7 @@ The build system compiles your application and links it against the Zephyr kerne
 
 ![VS Code Zephyr Workbench build application panel showing workspace selection, SDK version, target board dropdown, sample application selection, and project name fields. The primary subject is the Zephyr Workbench interface guiding users through building a Zephyr application. Visible text includes labels such as Workspace, SDK, Target Board, Sample Application, and Project Name, with buttons for Create New Application and Build. The wider VS Code environment is visible in the background, presenting a clean and organized workspace with a neutral, professional tone. alt-text#center]
 
-### Install board-specific debug utilities
+## Install board-specific debug utilities
 
 To enable debugging on your target hardware, you might need to install additional tools based on the board vendor.
 
@@ -54,7 +54,7 @@ If Workbench for Zephyr doesn't automatically detect the installed debug runner,
 Open the **Debug Manager** from the Zephyr sidebar, and enter the full path to the runner executable.
 {{% /notice %}}
 
-### Review output
+## Review the output
 
 Check the build output at the bottom panel of VS Code. Make sure there are no errors or warnings. A successful build displays:
 
@@ -65,7 +65,7 @@ Memory region         Used Size  Region Size  % Used
             SRAM:       4048 B       256 KB      1.5%
 ```
 
-### Code walkthrough: hello_world
+## Code walkthrough: hello_world
 
 The following code shows a basic Zephyr application that prints a message to the console:
 
