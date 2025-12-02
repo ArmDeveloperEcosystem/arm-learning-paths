@@ -49,10 +49,8 @@ For the NXP FRDM-MCXN947, download and install the LinkServer debug utility:
 Once installed, Workbench for Zephyr attempts to detect it automatically during a debug session.
 If you're using a different board, see your vendor's documentation to install the appropriate debug utility.
 
-{{% notice Note %}}
-If Workbench for Zephyr doesn't automatically detect the installed debug runner, you can manually configure it.
-Open the **Debug Manager** from the Zephyr sidebar, and enter the full path to the runner executable.
-{{% /notice %}}
+{{% notice Note %}} If Workbench for Zephyr doesn't automatically detect the installed debug runner, you can manually configure it.
+Open the **Debug Manager** from the Zephyr sidebar, and enter the full path to the runner executable.{{% /notice %}}
 
 ## Review the output
 
