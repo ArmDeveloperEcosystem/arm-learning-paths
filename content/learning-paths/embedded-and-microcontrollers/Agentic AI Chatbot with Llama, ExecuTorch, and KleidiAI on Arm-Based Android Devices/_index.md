@@ -8,13 +8,10 @@ learning_objectives:
     - Explain the architecture and capabilities of Llama models (e.g., Llama 3.2 1B/3B) for mobile use.
     - Master the process of quantizing LLMs (e.g., 4-bit PTQ) to reduce model size and enable efficient inference on resource-constrained mobile devices.
     - Gain proficiency in using ExecuTorch to export PyTorch models to .pte format for on-device deployment.
-    - Learn to leverage Arm-specific optimizations including XNNPACK and **KleidiAI** to achieve 2-3x faster inference on Arm-based Android devices.
-    - Understand how KleidiAI provides optimized kernels for matrix multiplication and quantized operations on Arm CPUs.
-    - **Design and Implement an Agentic Loop in Kotlin**: Create a system where the LLM can "reason" and "act" by invoking Android system tools (e.g., Battery Manager, Mock Database).
-    - **Master Prompt Engineering for Agents**: Craft system prompts that enforce structured outputs (e.g., JSON or specific Action tags) for reliable tool calling on mobile.
-
+    
+    
 prerequisites:
-    - **Android Development Basics**: Familiarity with Kotlin, Android Studio, and the Android Lifecycle.
+    - Android Development Basics, Familiarity with Kotlin, Android Studio, and the Android Lifecycle.
     - Basic Understanding of Machine Learning & Deep Learning (Familiarity with concepts like supervised learning, neural networks, transfer learning).             
     - Familiarity with Deep Learning Frameworks (PyTorch, Hugging Face Transformers).
     - An Arm-powered smartphone with the i8mm feature running Android, with 16GB of RAM.

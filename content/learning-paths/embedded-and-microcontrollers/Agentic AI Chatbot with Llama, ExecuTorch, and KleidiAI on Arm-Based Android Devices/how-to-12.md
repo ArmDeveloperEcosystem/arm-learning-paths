@@ -343,6 +343,6 @@ Agentic AI Chatbot is now production-ready with:
 - Performance monitoring
 - Excellent user experience
 
-![Agentic_AI_ChatBOT](./Agentic AI ChatBOT.png)
+![AgenticAIChatBOT](./AgenticAIChatBOT.png)
 
 ![ChatBOT](./ChatBOT.png)
