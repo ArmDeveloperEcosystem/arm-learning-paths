@@ -11,7 +11,7 @@ In this step, you will implement the main RTOS thread (`app_main`), which is pri
 
 You will create three threads. The number and naming of the threads are flexible, so feel free to adjust as needed.
 
-## Create `app_main`
+## Create the app_main() function
 
 Click on the `+` icon within the `Source Files` Group, and add a new file `app_main.c`. Populate with the below.
 
@@ -28,6 +28,7 @@ void app_main (void *argument) {
 	osThreadNew(thread3, NULL, NULL);	// Create thread3
 }
 ```
+
 ## Create Threads
 
 Now you can implement the functionality of the threads themselves. Start with a simple example. Each thread will say hello, and then pause for a period, forever.

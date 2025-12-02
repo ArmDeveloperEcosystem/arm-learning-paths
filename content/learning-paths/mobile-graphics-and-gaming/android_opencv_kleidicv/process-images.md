@@ -18,7 +18,8 @@ This Learning Path uses a [cameraman image](https://github.com/antimatter15/came
 
 For easier navigation between files in Android Studio, use the **Project** menu option from the project browser pane.
 
-## `ImageOperation`
+## Create the ImageOperation class
+
 You will now create an enum class, which is an enumeration, for a set of image processing operations in an application that uses the OpenCV library. 
 
 In the `src/main/java/com/arm/arm64kleidicvdemo` file directory, add the `ImageOperation.kt` file, and modify it as follows:
@@ -89,7 +90,8 @@ Generally, only single-channel images are supported; with Gaussian blur being an
 
 There is also the companion object that provides a utility method `fromDisplayName`. This function maps the string `displayName` to its corresponding enum constant by iterating through the list of all enum values, and returns null if no match is found.
 
-## `ImageProcessor`
+## Create the ImageProcessor class
+
 Now add the `ImageProcessor.kt`:
 
 ```Kotlin
@@ -110,7 +112,7 @@ The `ImageProcessor` class acts as a simple orchestrator for image processing ta
 
 This design is clean and modular, allowing developers to easily add new processing operations or reuse the `ImageProcessor` in different parts of an application. It aligns with object-oriented principles by promoting encapsulation and reducing processing logic complexity.
 
-## `PerformanceMetrics`
+## Create the PerformanceMetrics class
 Now supplement the project with the `PerformanceMetrics.kt` file:
 
 ```Kotlin
@@ -150,7 +152,8 @@ The `PerformanceMetrics` class analyzes and summarizes performance measurements,
 
 By encapsulating the raw data `durationsNano` and exposing only meaningful metrics through computed properties, the class ensures clear separation of data and functionality. The overridden `toString` method makes it easy to generate a human-readable summary for reporting or debugging purposes. You can use this method to report the performance metrics to the user.
 
-## `MainActivity`
+## Create the MainActivity
+
 You can now move on to modify `MainActivity.kt` as follows:
 
 ```Kotlin
@@ -332,7 +335,8 @@ The activity also implements several helper methods:
 7. `measureOperationTime` - Measures the execution time of an operation in nanoseconds using System.nanoTime().
 8. `displayProcessedImage`. This method converts the processed Mat back to a Bitmap for display and updates the ImageView with the processed image.
 
-## `Databinding`
+## Add Databinding
+
 Finally, modify `build.gradle.kts` by adding the databinding under build features:
 
 ```JSON
