@@ -28,14 +28,14 @@ As you can see, reflections are ideal for ray tracing. Other traditional techniq
 It is common to find corner cases and bugs on Screen Space Reflection at the same time. This technique is more difficult to implement, requiring more magic numbers. The main limitation of Screen Space Reflections is that they depend on the G-buffer information, so occluded objects and objects outside the view frustum cannot be reflected, causing visible artifacts that are common in current games.
 
 {{< tabpane >}}
-  {{< tab header="Example 1: SSR" title="Example 1: Screen space reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_1_ssr.png">}}{{< /tab >}}
-  {{< tab header="Example 1: RT" title="Example 1: Ray tracing reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_1_rt.png">}}{{< /tab >}}
-  {{< tab header="Example 2: SSR" title="Example 2: Screen space reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_2_ssr.png">}}{{< /tab >}}
-  {{< tab header="Example 2: RT" title="Example 2: Ray tracing reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_2_rt.png">}}{{< /tab >}}
-  {{< tab header="Example 3: SSR" title="Example 3: Screen space reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_3_ssr.png">}}{{< /tab >}}
-  {{< tab header="Example 3: RT" title="Example 3: Ray tracing reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_3_rt.png">}}{{< /tab >}}
-  {{< tab header="Example 4: SSR" title="Example 4: Screen space reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_4_ssr.png">}}{{< /tab >}}
-  {{< tab header="Example 4: RT" title="Example 4: Ray tracing reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_4_rt.png">}}{{< /tab >}}
+  {{< tab header="Example 1: SSR" title="Example 1: Screen space reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_1_ssr.webp">}}{{< /tab >}}
+  {{< tab header="Example 1: RT" title="Example 1: Ray tracing reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_1_rt.webp">}}{{< /tab >}}
+  {{< tab header="Example 2: SSR" title="Example 2: Screen space reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_2_ssr.webp">}}{{< /tab >}}
+  {{< tab header="Example 2: RT" title="Example 2: Ray tracing reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_2_rt.webp">}}{{< /tab >}}
+  {{< tab header="Example 3: SSR" title="Example 3: Screen space reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_3_ssr.webp">}}{{< /tab >}}
+  {{< tab header="Example 3: RT" title="Example 3: Ray tracing reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_3_rt.webp">}}{{< /tab >}}
+  {{< tab header="Example 4: SSR" title="Example 4: Screen space reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_4_ssr.webp">}}{{< /tab >}}
+  {{< tab header="Example 4: RT" title="Example 4: Ray tracing reflections" img_src="/learning-paths/mobile-graphics-and-gaming/ray_tracing/images/reflections_artifacts_4_rt.webp">}}{{< /tab >}}
 {{< /tabpane >}}
 
 ### Generating Reflection rays from the G-buffer

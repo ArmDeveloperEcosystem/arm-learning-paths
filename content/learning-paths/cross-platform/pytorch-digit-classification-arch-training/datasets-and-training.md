@@ -72,7 +72,7 @@ Make sure to replace 'x' with the version number of Python that you have install
 
 After running the code, you will see output similar to Figure 5:
 
-![image alt-text#center](figures/01.png "Figure 5. Output")
+![image alt-text#center](figures/01.webp "Figure 5. Output")
 
 ## Train the Model
 
@@ -134,7 +134,7 @@ for t in range(epochs):
 
 After running the code, you see the following output showing the training progress, as displayed in Figure 2.
 
-![image alt-text#center](figures/02.png "Figure 2. Output 2")
+![image alt-text#center](figures/02.webp "Figure 2. Output 2")
 
 Once the training is complete, you see output similar to:
 

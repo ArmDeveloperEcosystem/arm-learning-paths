@@ -36,7 +36,7 @@ wget https://gitlab.arm.com/server_management/PoCs/fvp-poc/-/raw/2a79ae93560969a
 ```
 
 Before running the simulation, open the `run.sh` script and locate the line that defines `FVP_KEYWORD`.
-This variable determines when the host FVP should be launched by monitoring OpenBMC’s console output.
+This variable determines when the host FVP should be launched by monitoring OpenBMC's console output.
 
 If not set correctly, the script might hang or fail to start the host simulation.
 Update the line to:
@@ -94,7 +94,7 @@ The simulation proceeds to the **CSSv3 r1** GRUB menu. Press **Enter** to boot.
 
 A successful run shows login prompts on both BMC and host consoles. You can also confirm final state in the Web UI or using UART output.
 
-![img2 BMC and host consoles each showing a login prompt after a successful OpenBMC + host UEFI simulation on RD-V3 FVP#center](openbmc_cssv3_sim.jpg "Simulation success with BMC and host consoles")
+![img2 BMC and host consoles each showing a login prompt after a successful OpenBMC + host UEFI simulation on RD-V3 FVP#center](openbmc_cssv3_sim.webp "Simulation success with BMC and host consoles")
 
 
 Shown here is a short recording that illustrates OpenBMC and UEFI interaction during pre-silicon execution.

@@ -22,9 +22,9 @@ export ANDROID_NDK=$ANDROID_HOME/ndk/28.0.12433566/
 Make sure you can confirm $ANDROID_NDK/build/cmake/android.toolchain.cmake is available for CMake to cross-compile.
 {{% /notice %}}
 
-### 2. Build ExecuTorch and associated libraries for Android with KleidiAI 
+### 2. Build ExecuTorch and associated libraries for Android with KleidiAI
 
-You are now ready to build ExecuTorch for Android by taking advantage of the performance optimization provided by the [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) kernels. 
+You are now ready to build ExecuTorch for Android by taking advantage of the performance optimization provided by the [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) kernels.
 
 Use `cmake` to cross-compile ExecuTorch:
 
@@ -32,6 +32,7 @@ Use `cmake` to cross-compile ExecuTorch:
 cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
     -DANDROID_ABI=arm64-v8a \
     -DANDROID_PLATFORM=android-23 \
+    -DEXECUTORCH_BUILD_EXTENSION_NAMED_DATA_MAP=ON \
     -DCMAKE_INSTALL_PREFIX=cmake-out-android \
     -DEXECUTORCH_ENABLE_LOGGING=1 \
     -DCMAKE_BUILD_TYPE=Release \
@@ -69,11 +70,7 @@ cmake  -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
     -DCMAKE_INSTALL_PREFIX=cmake-out-android \
     -DCMAKE_BUILD_TYPE=Release \
     -DPYTHON_EXECUTABLE=python \
-    -DEXECUTORCH_BUILD_XNNPACK=ON \
     -DEXECUTORCH_BUILD_KERNELS_OPTIMIZED=ON \
-    -DEXECUTORCH_BUILD_KERNELS_QUANTIZED=ON \
-    -DEXECUTORCH_BUILD_KERNELS_CUSTOM=ON \
-    -DSUPPORT_REGEX_LOOKAHEAD=ON \
     -DBUILD_TESTING=OFF \
     -Bcmake-out-android/examples/models/llama \
     examples/models/llama
@@ -119,7 +116,7 @@ adb push cmake-out-android/examples/models/llama/llama_main /data/local/tmp/llam
 Use the Llama runner to execute the model on the phone with the `adb` command:
 
 ``` bash
-adb shell "cd /data/local/tmp/llama && ./llama_main --model_path llama3_1B_kv_sdpa_xnn_qe_4_64_1024_embedding_4bit.pte --tokenizer_path tokenizer.model --prompt "<|start_header_id|>system<|end_header_id|>\nYour name is Cookie. you are helpful, polite, precise, concise, honest, good at writing. You always give precise and brief answers up to 32 words<|eot_id|><|start_header_id|>user<|end_header_id|>\nHey Cookie! how are you today?<|eot_id|><|start_header_id|>assistant<|end_header_id|>" --warmup=1 --cpu_threads=5"
+adb shell "cd /data/local/tmp/llama && ./llama_main --model_path llama3_1B_kv_sdpa_xnn_qe_4_64_1024_embedding_4bit.pte --tokenizer_path tokenizer.model --prompt '<|start_header_id|>system<|end_header_id|>\nYour name is Cookie. you are helpful, polite, precise, concise, honest, good at writing. You always give precise and brief answers up to 32 words<|eot_id|><|start_header_id|>user<|end_header_id|>\nHey Cookie! how are you today?<|eot_id|><|start_header_id|>assistant<|end_header_id|>' --warmup=1 --cpu_threads=5"
 ```
 
 The output should look something like this.

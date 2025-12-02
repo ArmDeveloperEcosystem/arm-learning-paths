@@ -12,28 +12,26 @@ Different IRQ management patterns can significantly impact network performance a
 
 Network interrupt requests (IRQs) can be distributed across CPU cores in various ways, each with potential benefits depending on your workload characteristics and system configuration. By strategically assigning network IRQs to specific cores, you can improve cache locality, reduce contention, and potentially boost overall system performance.
 
-The following patterns have been tested on various systems and can be implemented using the provided scripts. An optimal pattern is suggested at the conclusion of this Learning Path, but your specific workload may benefit from a different approach.
+The following patterns have been tested on various systems and can be implemented using the provided scripts. An optimal pattern is suggested at the conclusion of this Learning Path, but your specific workload might benefit from a different approach.
 
-### Patterns
+## Common IRQ distribution patterns
 
-1. Default: IRQ pattern provided at boot.
-2. Random: All IRQs are assigned a core and do not overlap with network IRQs.
-3. Housekeeping: All IRQs outside of network IRQs are assigned to specific core(s).
-4. NIC IRQs are assigned to single or multiple ranges of cores, including pairs. 
+Four main distribution strategies offer different performance characteristics:
 
-### Scripts to change IRQ
+- Default: uses the IRQ pattern provided at boot time by the Linux kernel
+- Random: assigns all IRQs to cores without overlap with network IRQs  
+- Housekeeping: assigns all non-network IRQs to specific dedicated cores
+- NIC-focused: assigns network IRQs to single or multiple ranges of cores, including pairs 
 
-The scripts below demonstrate how to implement different IRQ management patterns on your system. Each script targets a specific distribution strategy:
+## Scripts to implement IRQ management patterns
 
-Before running these scripts, identify your network interface name using `ip link show` and determine your system's CPU topology with `lscpu`. Always test these changes in a non-production environment first, as improper IRQ assignment can impact system stability.
+The scripts below demonstrate how to implement different IRQ management patterns on your system. Each script targets a specific distribution strategy. Before running these scripts, identify your network interface name using `ip link show` and determine your system's CPU topology with `lscpu`. Always test these changes in a non-production environment first, as improper IRQ assignment can impact system stability.
 
-To change the NIC IRQs or IRQs in general you can use the following scripts.
+## Housekeeping pattern
 
-### Housekeeping
+The housekeeping pattern isolates non-network IRQs to dedicated cores, reducing interference with your primary workloads.
 
-The housekeeping pattern isolates non-network IRQs to dedicated cores. 
-
-You need to add more to account for other IRQs on your system.
+Replace `#core range here` with your desired CPU range (for example: "0,3"):
 
 ```bash
 HOUSEKEEP=#core range here (example: "0,3")
@@ -43,13 +41,11 @@ for irq in $(awk '/ACPI:Ged/ {sub(":","",$1); print $1}' /proc/interrupts); do
 done
 ```
 
-### Paired core 
+## Paired core pattern
 
-The paired core assignment pattern distributes network IRQs across CPU core pairs for better cache coherency. 
+The paired core assignment pattern distributes network IRQs across CPU core pairs for better cache coherency.
 
-This is for pairs on a 16 vCPU machine.
-
-You need to add the interface name.
+This example works for a 16 vCPU machine. Replace `#interface name` with your network interface (for example: "ens5"):
 
 ```bash
 IFACE=#interface name (example: "ens5")
@@ -68,13 +64,11 @@ for irq in "${irqs[@]}"; do
 done
 ```
 
-### Range assignment  
+## Range assignment pattern
 
-The range assignment pattern assigns network IRQs to a specific range of cores.
+The range assignment pattern assigns network IRQs to a specific range of cores, providing dedicated network processing capacity.
 
-This will assign a specific core(s) to NIC IRQs only.
-
-You need to add the interface name.
+Replace `#interface name` with your network interface (for example: "ens5"):
 
 ```bash
 IFACE=#interface name (example: "ens5")
@@ -84,6 +78,6 @@ for irq in $(awk '/'$IFACE'/ {sub(":","",$1); print $1}' /proc/interrupts); do
 done
 ```
 
-Each pattern offers different performance characteristics depending on your workload. The housekeeping pattern reduces system noise, paired cores optimize cache usage, and range assignment provides dedicated network processing capacity. Test these patterns in your environment to determine which provides the best performance for your specific use case.
+Each pattern offers different performance characteristics depending on your workload. The housekeeping pattern reduces system noise, paired cores optimize cache usage, and range assignment provides dedicated network processing capacity. Improper configuration can degrade performance or stability, so always test these patterns in a non-production environment to determine which provides the best results for your specific use case.
 
 Continue to the next section for additional guidance.

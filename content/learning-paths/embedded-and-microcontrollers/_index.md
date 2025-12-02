@@ -11,18 +11,18 @@ maintopic: true
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 30
-- Linux: 30
+- Linux: 32
 - macOS: 7
-- RTOS: 9
+- RTOS: 10
 - Windows: 4
 subjects_filter:
 - CI-CD: 5
 - Containers and Virtualization: 6
 - Embedded Linux: 4
 - Libraries: 3
-- ML: 16
-- Performance and Architecture: 21
-- RTOS Fundamentals: 4
+- ML: 17
+- Performance and Architecture: 22
+- RTOS Fundamentals: 5
 - Security: 2
 - Virtual Hardware: 2
 subtitle: Learn best practices for microcontroller development
@@ -35,9 +35,11 @@ tools_software_languages_filter:
 - Arm Compute Library: 2
 - Arm Development Studio: 8
 - Arm Fast Models: 4
+- Arm Performance Studio: 1
+- Arm Streamline: 1
 - Arm Virtual Hardware: 12
 - Assembly: 1
-- C: 4
+- C: 5
 - C++: 1
 - ChatGPT: 1
 - Clang: 1
@@ -50,9 +52,9 @@ tools_software_languages_filter:
 - DetectNet: 1
 - Docker: 10
 - DSTREAM: 2
-- Edge AI: 2
-- Edge Impulse: 1
-- ExecuTorch: 3
+- Edge AI: 3
+- Edge Impulse: 2
+- ExecuTorch: 4
 - FastAPI: 1
 - FPGA: 1
 - Fusion 360: 1
@@ -72,6 +74,7 @@ tools_software_languages_filter:
 - Keil Studio Cloud: 1
 - Kubernetes: 1
 - lgpio: 1
+- Linux kernel: 1
 - LLM: 2
 - MCP: 1
 - MPS3: 1
@@ -80,6 +83,7 @@ tools_software_languages_filter:
 - NumPy: 1
 - Ollama: 1
 - Paddle: 1
+- Performance analysis: 1
 - Porcupine: 1
 - Python: 8
 - PyTorch: 3
@@ -96,6 +100,6 @@ tools_software_languages_filter:
 - TVMC: 1
 - vcpkg: 1
 - Yocto Project: 1
-- Zephyr: 1
+- Zephyr: 2
 weight: 5
 ---

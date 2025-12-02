@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 3
-- Linux: 179
+- Linux: 197
 - macOS: 13
 - Windows: 14
 pinned_modules:
@@ -18,14 +18,14 @@ pinned_modules:
     - providers
     - migration
 subjects_filter:
-- CI-CD: 7
-- Containers and Virtualization: 32
-- Databases: 18
+- CI-CD: 10
+- Containers and Virtualization: 34
+- Databases: 21
 - Libraries: 9
-- ML: 32
-- Performance and Architecture: 72
-- Storage: 1
-- Web: 12
+- ML: 34
+- Performance and Architecture: 74
+- Storage: 2
+- Web: 17
 subtitle: Optimize cloud native apps on Arm for performance and cost
 title: Servers and Cloud Computing
 tools_software_languages_filter:
@@ -36,6 +36,9 @@ tools_software_languages_filter:
 - AI: 1
 - Android Studio: 1
 - Ansible: 2
+- Apache: 1
+- Apache Bench: 1
+- Apache Cassandra: 1
 - Apache Spark: 2
 - Apache Tomcat: 2
 - ApacheBench: 1
@@ -50,6 +53,7 @@ tools_software_languages_filter:
 - ASP.NET Core: 2
 - Assembly: 5
 - async-profiler: 1
+- Autocannon: 1
 - AWS: 2
 - AWS CDK: 2
 - AWS Cloud Formation: 1
@@ -59,44 +63,58 @@ tools_software_languages_filter:
 - AWS Elastic Kubernetes Service (EKS): 3
 - AWS Graviton: 1
 - AWS Lambda: 1
+- Azure: 1
 - Azure CLI: 2
 - Azure Portal: 1
 - Bash: 1
 - bash: 2
+- Bash/Shell scripting: 1
 - Bastion: 3
 - BOLT: 2
 - bpftool: 1
+- Buildkite: 1
 - C: 10
 - C#: 2
 - C++: 12
 - Capstone: 1
+- Cargo: 1
+- cassandra-stress: 1
 - CCA: 8
+- CircleCI: 2
 - Clair: 1
 - Clang: 13
 - ClickBench: 1
 - ClickHouse: 1
+- Cloud Build: 1
 - CMake: 1
 - conda: 1
+- Couchbase: 1
+- cqlsh: 1
+- Criterion: 1
 - Daytona: 1
 - Demo: 3
-- Django: 1
-- Docker: 23
+- Django: 2
+- Docker: 25
+- Docker Buildx: 1
 - Envoy: 3
 - ExecuTorch: 1
+- Facter: 1
 - FAISS: 1
 - FlameGraph: 1
-- Flink: 1
+- Flink: 2
 - Fortran: 1
 - FunASR: 1
 - FVP: 7
 - GCC: 25
 - gdb: 1
 - Geekbench: 1
-- Generative AI: 12
+- Generative AI: 13
+- Git: 1
 - GitHub: 6
 - GitHub Actions: 1
 - GitHub CLI: 1
 - GitLab: 1
+- GKE: 1
 - glibc: 1
 - Go: 4
 - Golang: 1
@@ -104,33 +122,36 @@ tools_software_languages_filter:
 - Google Benchmark: 1
 - Google Cloud: 2
 - Google Test: 1
+- Gunicorn: 1
 - HammerDB: 1
 - Helm: 1
 - Herd7: 1
-- Hugging Face: 11
+- Hiera: 1
+- Hugging Face: 12
 - InnoDB: 1
 - Intrinsics: 1
 - iPerf3: 1
 - ipmitool: 1
-- Java: 4
+- Java: 6
 - JAX: 1
 - JMH: 1
-- Kafka: 1
+- Kafka: 2
 - KEDA: 1
 - Kedify: 1
-- Keras: 1
-- KleidiAI: 1
-- Kubernetes: 11
+- Keras: 2
+- Kubernetes: 13
 - Libamath: 1
 - libbpf: 1
 - Linaro Forge: 1
 - Litmus7: 1
 - llama.cpp: 1
 - Llama.cpp: 2
-- LLM: 10
+- LLM: 11
 - llvm-mca: 1
+- LM Evaluation Harness: 1
 - LSE: 1
 - MariaDB: 1
+- Maven: 1
 - Memcached: 2
 - MLPerf: 1
 - ModelScope: 1
@@ -142,8 +163,11 @@ tools_software_languages_filter:
 - NEON: 7
 - Networking: 1
 - Nexmark: 1
+- nginx: 1
 - NGINX: 4
-- Node.js: 3
+- Node.js: 5
+- node.js: 1
+- npm: 3
 - Ollama: 1
 - ONNX Runtime: 2
 - OpenBLAS: 1
@@ -153,19 +177,26 @@ tools_software_languages_filter:
 - Orchard Core: 1
 - PAPI: 1
 - perf: 6
-- PostgreSQL: 4
+- Perf: 1
+- PHP: 1
+- PHPBench: 1
+- PostgreSQL: 5
 - Profiling: 1
-- Python: 32
-- PyTorch: 9
+- Puppet: 1
+- Python: 35
+- PyTorch: 10
 - QEMU: 1
 - RAG: 1
+- Rails: 1
 - Redis: 3
 - Remote.It: 2
 - RME: 8
+- Ruby: 2
 - Runbook: 71
-- Rust: 2
+- Rust: 3
 - Service Mesh: 1
 - Siege: 1
+- Skaffold: 1
 - snappy: 1
 - Snort3: 1
 - SQL: 8
@@ -177,18 +208,20 @@ tools_software_languages_filter:
 - Sysbench: 1
 - Tekton: 1
 - Telemetry: 1
-- TensorFlow: 2
+- TensorFlow: 3
 - Terraform: 11
 - ThirdAI: 1
+- topdown-tool: 1
 - Trusted Firmware: 1
 - Trustee: 1
 - TSan: 1
-- TypeScript: 1
+- TypeScript: 2
 - Vectorscan: 1
 - Veraison: 2
 - Visual Studio Code: 5
-- vLLM: 2
+- vLLM: 3
 - vvenc: 1
+- Web Server: 1
 - Whisper: 1
 - WindowsPerf: 1
 - WordPress: 3
@@ -200,8 +233,8 @@ tools_software_languages_filter:
 - ZooKeeper: 1
 weight: 1
 cloud_service_providers_filter:
-- AWS: 17
-- Google Cloud: 18
-- Microsoft Azure: 17
+- AWS: 18
+- Google Cloud: 31
+- Microsoft Azure: 19
 - Oracle: 2
 ---

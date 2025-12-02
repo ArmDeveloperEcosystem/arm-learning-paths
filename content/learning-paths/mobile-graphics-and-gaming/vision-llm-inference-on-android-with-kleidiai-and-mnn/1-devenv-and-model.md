@@ -18,9 +18,9 @@ sudo apt update
 sudo apt install cmake git-lfs -y
 ```
 
-You can use Android Studio to obtain the NDK. 
+You can use Android Studio to obtain the NDK.
 
-Click **Tools > SDK Manager** and navigate to the **SDK Tools** tab. 
+Click **Tools > SDK Manager** and navigate to the **SDK Tools** tab.
 
 Select the **NDK (Side by side)** and **CMake** checkboxes, as shown below:
 
@@ -55,7 +55,7 @@ source vision_llm/bin/activate
 
 ## Set up Phone Connection
 
-You need to set up an authorized connection with your phone. The Android SDK Platform Tools package, included with Android Studio, provides Android Debug Bridge (ADB) for transferring files. 
+You need to set up an authorized connection with your phone. The Android SDK Platform Tools package, included with Android Studio, provides Android Debug Bridge (ADB) for transferring files.
 
 Connect your phone to your computer using a USB cable, and enable USB debugging on your phone. To do this, tap the **Build Number** in your **Settings** app 7 times, then enable **USB debugging** in **Developer Options**.
 
@@ -79,7 +79,9 @@ The pre-quantized model is available in Hugging Face, you can download with the 
 ```bash
 git lfs install
 git clone https://huggingface.co/taobao-mnn/Qwen2.5-VL-3B-Instruct-MNN
+cd Qwen2.5-VL-3B-Instruct-MNN
 git checkout a4622194b3c518139e2cb8099e147e3d71975f7a
+cd ..
 ```
 
 ## (Optional) Download and Convert the Model
@@ -133,11 +135,11 @@ Verify that the model was built correctly by checking that the `Qwen2.5-VL-3B-In
 
 ## Push the model to Android device
 
-Push the model onto the device:
+Push the repository you cloned earlier onto the device:
 
 ```shell
 adb shell mkdir /data/local/tmp/models/
-adb push Qwen2.5-VL-3B-Instruct-MNN /data/local/tmp/models
+adb push Qwen2.5-VL-3B-Instruct-MNN/ /data/local/tmp/models
 ```
 
 With the model set up, you're ready to build and run an example application.

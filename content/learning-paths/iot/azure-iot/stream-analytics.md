@@ -22,7 +22,7 @@ To process and analyze the telemetry data you are streaming to Azure IoT Hub, yo
 1. Sign in to the Azure Portal.
 2. Click **Create a resource**, type “Stream Analytics job” into the search box, and press **Enter**.
 3. From the search results, select **Stream Analytics job**, then click **Create**:
-![img9 alt-text#center](figures/09.png)
+![img9 alt-text#center](figures/09.webp)
 4. Provide the necessary information:
 * Subscription: choose the Azure subscription you want to use for this job.
 * Resource group: select the resource group you previously created (e.g., your IoT project's resource group).
@@ -54,7 +54,7 @@ After successfully creating the Stream Analytics job, you will need to configure
 * Encoding: Choose **UTF-8**.
 * Event compression type: Set this to None.
 
-![img12 alt-text#center](figures/12.png)
+![img12 alt-text#center](figures/12.webp)
 
 5. After entering these details, carefully verify them for accuracy and completeness. Click **Save** to apply the changes and successfully link your Azure IoT Hub as the input source for your Stream Analytics job. 
 
@@ -80,7 +80,7 @@ This straightforward query selects all relevant fields (deviceId, temperature, p
 
 Before running this query, ensure your Python IoT simulator `iot_simulator.py` is actively sending telemetry data. After the simulator begins transmitting data, you can test and verify your Stream Analytics query within the Azure Portal using the built-in Test query feature. Doing this allows you to view live-streamed sensor data in real-time and confirm that your streaming pipeline is working as expected:
 
-![img13 alt-text#center](figures/13.png)
+![img13 alt-text#center](figures/13.webp)
 
 Constructing queries in Azure Stream Analytics involves using a straightforward SQL-like syntax specifically optimized for real-time stream processing. Typically, a query contains a `SELECT` statement to specify which fields from the incoming telemetry data to process, and a `FROM` statement to indicate the source stream. Queries can be expanded with advanced features such as filtering, aggregations, and temporal window functions to handle more complex scenarios.
 

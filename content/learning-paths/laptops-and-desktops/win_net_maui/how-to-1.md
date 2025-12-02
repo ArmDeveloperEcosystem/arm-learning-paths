@@ -53,7 +53,7 @@ Then, accept any other license terms that appear, including the Android SDK - Li
 
 Your project should be now ready. Next, open the Solution Explorer (View -> Solution Explorer) to view the created projects:
 
-![fig6](figures/06.png)
+![fig6](figures/06.webp)
 
 ## Understanding the project structure
 The .NET MAUI project template is structured to enable the development of cross-platform applications using a single codebase, targeting Android, iOS, macOS, and Windows. Therefore, the project we have just created contains the following elements:
@@ -66,4 +66,4 @@ The .NET MAUI project template is structured to enable the development of cross-
 
 You can now run the created application. To do so, click _Debug/Start Debugging_. The running application will look like the figure below:
 
-![fig7](figures/07.png)
+![fig7](figures/07.webp)

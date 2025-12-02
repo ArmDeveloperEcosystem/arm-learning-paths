@@ -150,7 +150,7 @@ Once the script starts successfully, you will see a similar output to the image 
 
 You can use your browser to monitor the simulation data in real-time.
 
-![img1 alt-text#center](vnc_address.png "Figure 1: Execute run.sh")
+![img1 alt-text#center](vnc_address.webp "Figure 1: Execute run.sh")
 
 Now you can use the browser to access visualization.
 In this example the URL is http://34.244.98.151:6080/vnc.html

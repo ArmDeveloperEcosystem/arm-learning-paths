@@ -15,7 +15,7 @@ After you register, [create a cluster](https://docs.zilliz.com/docs/create-clust
 
 Now create a **Dedicated** cluster deployed in AWS using Arm-based machines to store and retrieve the vector data as shown:
 
-![cluster](create_cluster.png)
+![cluster](create_cluster.webp)
 
 When you select the **Create Cluster** Button, you should see the cluster running in your **Default Project**.
 

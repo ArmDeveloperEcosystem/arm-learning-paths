@@ -21,8 +21,8 @@ Follow the steps below to add single board computers to the rack:
 
 5. Insert card and plate into a bay slot
 
-![card plate back](./card01.jpg)
+![card plate back](./card01.webp)
 
-![card plate top](./card02.jpg)
+![card plate top](./card02.webp)
 
-![finished assembly](./assembled.jpg)
+![finished assembly](./assembled.webp)

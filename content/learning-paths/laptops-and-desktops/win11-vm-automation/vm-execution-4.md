@@ -12,11 +12,17 @@ After your Windows 11 Arm VM is created, launching it is simple with the unified
 ./run-win11-vm.sh $HOME/win11-vm
 ```
 
-This single command handles the entire VM startup and connection process automatically. The script performs three key steps: checks if the VM is already running, starts it in headless mode if needed, and connects you via RDP using Remmina.
+This single command handles the entire VM startup and connection process automatically. 
+
+The script performs three key steps. It does the following: 
+
+- Checks if the VM is already running
+- Starts the VM in headless mode if required
+- Connects you through RDP using Remmina
 
 When the virtual machine starts you will see it on your Linux desktop:
 
-![Windows on Arm VM](./images/win11arm.png)
+![Screenshot showing the Windows 11 desktop running in a virtual machine on an Arm-based Linux system. The Windows Start menu and taskbar are visible, confirming successful VM launch and RDP connection. alt-text#center](./images/win11arm.webp "Windows 11 Arm VM desktop")
 
 ## What does the run script do? 
 
@@ -279,4 +285,4 @@ RDP session ended
 
 This is a known Remmina issue and does not affect VM functionality.
 
-You have learned how to create Windows on Arm virtual machines on an Arm Linux system with QEMU and KVM. You can use these virtual machines for software development and testing. You can speedup your development tasks by using an Arm Linux desktop or server with high processor count and plenty of RAM.
+You have completed the VM execution section. You now know how to run, monitor, and manage Windows on Arm virtual machines on an Arm Linux system. Keep building your skills and explore more advanced automation or troubleshooting as your next step - great work!

@@ -114,7 +114,7 @@ There are a number of tabs on the left side showing the collected data.
 
 You can browse the data and see what has been collected.
 
-![APerf #center](/install-guides/_images/aperf0.png)
+![APerf #center](/install-guides/_images/aperf0.webp)
 
 {{% notice Note %}}
 The Kernel Config and Sysctl Data tabs are blank unless you click No.
@@ -142,7 +142,7 @@ Open the `index.html` file in the `compare/` directory to see the 2 runs side by
 
 A screenshot is shown below:
 
-![APerf #center](/install-guides/_images/aperf.png)
+![APerf #center](/install-guides/_images/aperf.webp)
 
 ### How do I use an HTTP server to view reports?
 

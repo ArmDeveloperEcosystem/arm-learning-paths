@@ -59,9 +59,9 @@ For Python functions on Linux-based plans, local development and deployment repr
 You will start by creating an Azure Function App, in which you will create an Azure Function that regularly queries temperature data from Cosmos DB. In the next step, you will add the capability to send notifications, whenever the temperature reading exceeds a predefined threshold. Proceed as follows:
 1. Sign in to the Azure Portal.
 2. Click **Create a resource**, type “Function App”, and select it:
-![img24 alt-text#center](figures/24.png)
+![img24 alt-text#center](figures/24.webp)
 3. Click **Create**, then select Consumption as a hosting option:
-![img25 alt-text#center](figures/25.png)
+![img25 alt-text#center](figures/25.webp)
 4. Provide the required details:
 * Subscription: Your Azure subscription.
 * Resource Group: Select your existing IoT resource group.
@@ -72,7 +72,7 @@ You will start by creating an Azure Function App, in which you will create an Az
 * Operating System: Select Linux as Windows is unavailable for Python.
 5. Click Review + Create, and then Create.
 
-![img26 alt-text#center](figures/26.png)
+![img26 alt-text#center](figures/26.webp)
 
 ## Install Prerequisites
 Before writing the code make sure you have the following tools installed:
@@ -98,7 +98,7 @@ Ensure you also see a v4.x.x output, indicating compatibility with Python v2 mod
 Follow these steps to create an Azure Function locally using Visual Studio Code:
 1. In Visual Studio Code, click View->Command Palette... 
 2. Type "Create Function":
-![img27 alt-text#center](figures/27.png)
+![img27 alt-text#center](figures/27.webp)
 3. Select Azure Functions: Create Function...
 4. Select folder for your new function. For example create a new folder `Arm.AzureIoT.AzureFunctions`
 5. Visual Studio Code will display the wizard, which enables you to configure your function:
@@ -175,7 +175,7 @@ func start
 
 You should then see the following logs, depending on the generated temperature values:
 
-![img29 alt-text#center](figures/29.png)
+![img29 alt-text#center](figures/29.webp)
 
 ## Monitoring and Notifications
 In this section, you will extend your existing Azure Function to send email notifications using `SendGrid` whenever the temperature exceeds the defined threshold
@@ -184,23 +184,23 @@ In this section, you will extend your existing Azure Function to send email noti
 Follow these steps to create a SendGrid account:
 1. Sign in to the Azure Portal.
 2. Click “Create a resource” and search for SendGrid.
-![img30 alt-text#center](figures/30.png)
+![img30 alt-text#center](figures/30.webp)
 3. Select Twilio SendGrid, choose the Free 100 (2022) plan, and then click Subscribe.
 4. Provide the following details:
 * Subscription: Select your Azure subscription.
 * Resource group: Choose your existing IoT project resource group.
 * Name: Enter a descriptive name (e.g., iot-alerts-sendgrid).
-![img31 alt-text#center](figures/31.png)
+![img31 alt-text#center](figures/31.webp)
 5. Click Review + subscribe and then Subscribe.
 6. On the next screen, click Configure account now:
-![img32 alt-text#center](figures/32.png)
+![img32 alt-text#center](figures/32.webp)
 7. Accept any permissions required by SendGrid, and then enter your details to create a sender identity:
-![img33 alt-text#center](figures/33.png)
+![img33 alt-text#center](figures/33.webp)
 8. Fill out the required details, such as your name and email address.
 9. After the sender identity is verified, click API Keys in the left menu:
-![img34 alt-text#center](figures/34.png)
+![img34 alt-text#center](figures/34.webp)
 10. Click Create API Key. In the popup window, enter a key name (e.g., iot-api-key), and select Full Access.
-![img35 alt-text#center](figures/35.png)
+![img35 alt-text#center](figures/35.webp)
 11. Copy the generated API key securely. You will not be able to retrieve it later.
 
 ### Configure SendGrid API Key in your Azure Function

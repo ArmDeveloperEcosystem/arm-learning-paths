@@ -169,15 +169,15 @@ To connect the Python application you developed earlier to Azure IoT Hub, follow
 
 1. Register a Device on Azure IoT Hub:
 * Open the Azure Portal, go to your IoT Hub, and click **Devices** under **Device management**:
-![img6 alt-text#center](figures/06.png)
+![img6 alt-text#center](figures/06.webp)
 * Click **Add Device**, enter a device ID (for example, "arm64Device01"), and leave the authentication type as **Symmetric key**:
-![img7 alt-text#center](figures/07.png)
+![img7 alt-text#center](figures/07.webp)
 * Click **Save**.
 
 2. Next, you’ll need to retrieve the connection string to integrate your Python application with Azure IoT Hub.
 * From the device list, select your newly-created device, "arm64Device01".
 * Copy the **Primary connection string** from the device details page. You’ll need this connection string to authenticate your Python application when connecting and streaming telemetry data.
-![img8 alt-text#center](figures/08.png)
+![img8 alt-text#center](figures/08.webp)
 
 Ensure this connection string is stored securely, as it provides authentication credentials for your device. 
 

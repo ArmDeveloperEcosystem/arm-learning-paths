@@ -37,7 +37,7 @@ If you are unsure of how to insert the ribbon into the connector [watch the vide
 You can use a USB camera instead for object detection, but the instructions below assume a MIPI CSI-2 camera.
 {{% /notice %}}
 
-![image of the ribbon inserted into the connector](./cam0connector.jpg)
+![image of the ribbon inserted into the connector](./cam0connector.webp)
 
 ### Power on the Jetson Orin Nano
 

@@ -36,7 +36,7 @@ Optionally, you can set a preferred location to store your captures using `Windo
 1. The application starts automatically on the device. Interact with the application as desired for the profiling run you wish to do.
 
 1. When you have collected enough data, click `Stop capture`.
-![Stop capture #center](images/stop_capture.png "Stop Capture")
+![Stop capture #center](images/stop_capture.webp "Stop Capture")
 
 Streamline will stop capturing data, remove the daemon, and process the captured data.
 

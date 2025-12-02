@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Host machine requirements
 
-This Learning Path demonstrates how to improve the performance of camera pipelines using KleidiAI and KleidiCV on Arm. You’ll need an Arm64 machine, preferably running an Ubuntu-based distribution. The instructions have been tested on Ubuntu 24.04.
+This Learning Path demonstrates how to improve the performance of camera pipelines using SME2 on Arm. You’ll need an Arm64 machine with SME2 support, preferably running an Ubuntu-based distribution. The instructions have been tested on Ubuntu 24.04.
 
 ## Install required software
 

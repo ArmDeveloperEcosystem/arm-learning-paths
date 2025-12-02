@@ -30,12 +30,12 @@ Before you start coding, here are some useful tips:
 1. Navigate to **File** > **New** > **New Project**.
 
 2. Select **Empty Views Activity** in the **Phone and Tablet** gallery as Figure 1 shows, then select **Next**.
-![Empty Views Activity.png alt-text#center](images/2/empty%20project.png "Figure 1: Select Empty Views Activity.")
+![Empty Views Activity.png alt-text#center](images/2/empty_project.png "Figure 1: Select Empty Views Activity.")
 
 3. Choose a project name, and select the default configurations as Figure 2 shows. 
 
     Make sure that the **Language** field is set to **Kotlin**, and the **Build configuration language** field is set to **Kotlin DSL**.
-![Project configuration.png alt-text#center](images/2/project%20config.png "Figure 2: Project Configuration.")
+![Project configuration.png alt-text#center](images/2/project_config.png "Figure 2: Project Configuration.")
 
 ## Add CameraX dependencies
 
@@ -45,7 +45,7 @@ Before you start coding, here are some useful tips:
 
 2. Once the project is synced, navigate to `libs.versions.toml` in your project's root directory. See Figure 3. This file serves as the version catalog for all dependencies that the project uses.
 
-![Version Catalog.png alt-text#center](images/2/dependency%20version%20catalog.png "Figure 3: Version Catalog.")
+![Version Catalog.png alt-text#center](./images/2/dependency_version_catalog.png "Figure 3: Version Catalog.")
 
 {{% notice Info %}}
 
@@ -88,20 +88,20 @@ camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "
 
 2. You should see that a notification appears. See Figure 4. Click **Sync Now** to sync your project.
 
-![Gradle sync.png alt-text#center](images/2/gradle%20sync.png "Figure 4: Gradle Sync.")
+![Gradle sync.png alt-text#center](images/2/gradle_sync.png "Figure 4: Gradle Sync.")
 
 {{% notice Tip %}}
 
 You can also click the **Sync Project with Gradle Files** button in the toolbar, or enter the corresponding shortcut to start a sync.
 
-![Sync Project with Gradle Files](images/2/sync%20project%20with%20gradle%20files.png)
+![Sync Project with Gradle Files](images/2/sync_project_with_gradle_files.png)
 {{% /notice %}}
 
 3. Navigate to the `MainActivity.kt` source file and make the changes that Figure 5 shows in the View Binding screenshot. 
 
     This inflates the layout file into a view binding object, and stores it in a member variable within the view controller for easier access later.
 
-![view binding alt-text#center](images/2/view%20binding.png "Figure 5: View Binding.")
+![view binding alt-text#center](images/2/view_binding.webp "Figure 5: View Binding.")
 
 ## Configure CameraX preview
 

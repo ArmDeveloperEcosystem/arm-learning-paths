@@ -8,20 +8,20 @@ layout: learningpathall
 
 ## Install Kafka on Azure Cobalt 100
 
-This section walks you through installing latest version of Apache Kafka on an Ubuntu Pro 24.04 Arm virtual machine. You’ll download Kafka, extract it into `/opt`, configure permissions, and verify the installation by checking the installed version.
+This section guides you through installing the latest version of Apache Kafka on an Ubuntu Pro 24.04 (Arm64) virtual machine running on Azure Cobalt 100. Kafka is a high-throughput, distributed event streaming platform used for real-time data pipelines and messaging applications. 
 
-Follow the below instructions to install Kafka on Ubuntu Pro 24.04 virtual machine.
+## Install Java
 
-### Install Java
-
-Kafka requires Java to run. Install it by executing the following commands:
+Apache Kafka runs on the Java Virtual Machine (JVM), so Java must be installed before setting up Kafka. Use the following commands to update your package index and install the default JDK:
 ```console
 sudo apt update
 sudo apt install -y default-jdk
 ```
-### Download and Install Kafka
+This installs the Java Development Kit (JDK), which includes the JVM, compiler, and standard libraries required for running Kafka services.
 
-This sequence of commands downloads Kafka version 4.1.0 to the `/opt` directory, extracts the tarball, renames the folder to kafka for simplicity, and sets ownership so the current user can access and manage the Kafka installation. It prepares the system for running Kafka without permission issues.
+## Download and install Kafka
+
+Use the following commands to download and install Apache Kafka 4.1.0 in the /opt directory, extract the archive, and set appropriate permissions for your user. This prepares your system to run Kafka without requiring elevated privileges later.
 
 ```console
 cd /opt
@@ -31,19 +31,20 @@ sudo mv kafka_2.13-4.1.0 kafka
 sudo chown -R $USER:$USER kafka
 ```
 {{% notice Note %}}
-Kafka [3.5.0 release announcement](https://kafka.apache.org/blog#apache_kafka_350_release_announcement) includes a significant number of new features and fixes, including improving Kafka Connect and MirrorMaker 2. They aren't Arm-specific, but can benefit all architectures, including Linux/Arm64.
+Kafka [3.5.0 release announcement](https://kafka.apache.org/blog#apache_kafka_350_release_announcement) includes a significant number of new features and fixes, including improving Kafka Connect and MirrorMaker 2, benefiting both x86 and Arm architectures.
 The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends Apache Kafka version 3.5.0 as the minimum recommended on Arm platforms.
 {{% /notice %}}
 
-### Check installed Kafka version
+## Check installed Kafka version
 
-These commands navigate to the Kafka installation directory and check the installed Kafka version, confirming that Kafka has been successfully installed and is ready for use.
+After extraction, verify that Kafka was installed successfully by checking the version:
+
 ```console
 cd /opt/kafka
 bin/kafka-topics.sh --version
 ```
 
-You should see an output similar to:
+You should see output similar to:
 ```output
 4.1.0
 ```

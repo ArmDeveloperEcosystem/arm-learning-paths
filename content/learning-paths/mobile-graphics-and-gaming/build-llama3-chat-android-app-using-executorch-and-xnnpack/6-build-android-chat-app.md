@@ -6,17 +6,16 @@ weight: 7
 layout: learningpathall
 ---
 
+In this section, you will use a Android demo application to demonstrate local inference with ExecuTorch.
+
 ## Build the Android Archive (AAR)
-{{% notice Note %}}
-You can use the Android demo application included in ExecuTorch repository [LlamaDemo](https://github.com/pytorch/executorch/tree/main/examples/demo-apps/android/LlamaDemo) to demonstrate local inference with ExecuTorch.
-{{% /notice %}}
 
 1. Open a terminal window and navigate to the root directory of the `executorch` repository.
 
-2. Set the following environment variables:
+2. If you haven't already, set the following environment variables:
 
     ``` bash
-    export ANDROID_NDK=$ANDROID_HOME/ndk/28.0.12433566/
+    export ANDROID_NDK=$ANDROID_HOME/ndk/29.0.14206865/
     export ANDROID_ABI=arm64-v8a
     ```
 
@@ -25,20 +24,11 @@ You can use the Android demo application included in ExecuTorch repository [Llam
 Make sure you can confirm <path_to_android_ndk>/build/cmake/android.toolchain.cmake is available for CMake to cross-compile.
 {{% /notice %}}
 
-3. Run the following commands to set up the required JNI library:
+3. Run the following command to set up the required JNI library:
 
     ``` bash
-    pushd extension/android
-    ./gradlew build
-    popd
-    pushd examples/demo-apps/android/LlamaDemo
-    ./gradlew :app:setup
-    popd
+    sh scripts/build_android_library.sh
     ```
-
-{{% notice Note %}}
-This is running the shell script setup.sh which configures and builds the required core ExecuTorch, Llama, and Android libraries.
-{{% /notice %}}
 
 ## Getting models
 
@@ -64,31 +54,36 @@ adb push <tokenizer.bin> /data/local/tmp/llama/
 
 1. Use Android Studio's device explorer to look for the model files.
 
-![Device Explorer](device-explorer.png "Figure 1. Android Studio Device Explorer")
+![Device Explorer](device-explorer.webp "Figure 1. Android Studio Device Explorer")
 
 2. Upload the files.
 
 If the files are not on the device, use the device explorer to copy them.
 
-![Files Upload](device-explorer-upload.png "Figure 2. Android Studio upload files using Device Explorer")
+![Files Upload](device-explorer-upload.webp "Figure 2. Android Studio upload files using Device Explorer")
 
 ## Build the Android Package Kit
+
+Before starting, you need to obtain the example app by cloning `executorch-examples`:
+
+```
+git clone https://github.com/meta-pytorch/executorch-examples.git
+```
 
 ### Option 1: Using Android Studio
 
 This is the recommended option.
 
-1. Open Android Studio and select **Open an existing Android Studio project** and navigate to open `examples/demo-apps/android/LlamaDemo`.
+1. Open Android Studio and select **Open an existing Android Studio project** and navigate to open `executorch-examples/llm/android/LlamaDemo`.
 
 2. Run the app (^R). This builds and launches the app on the phone.
 
 ### Option 2: Command line
 
-Without Android Studio UI, you can run gradle directly to build the app. You need to set up the Android SDK path and invoke gradle.
+Without Android Studio UI, you can run gradle directly to build the app. You need to set up the Android SDK path and invoke gradle. Navigate to the newly cloned `executorch-examples` repository. 
 
 ``` bash
-export ANDROID_HOME=<path_to_android_sdk_home>
-pushd examples/demo-apps/android/LlamaDemo
+pushd llm/android/LlamaDemo
 ./gradlew :app:installDebug
 popd
 ```

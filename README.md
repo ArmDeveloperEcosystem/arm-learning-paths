@@ -20,6 +20,10 @@ All contributions are welcome as long as they relate to software development for
 
 Note that all site content, including new contributions, is licensed under a [Creative Commons Attribution 4.0 International license](https://creativecommons.org/licenses/by/4.0/).
 
+## AI Development Tools
+
+When using AI coding assistants (GitHub Copilot, Amazon Q, Gemini, Cursor, etc.), refer to `.github/copilot-instructions.md` for project-specific guidelines including content requirements, writing style standards, and Arm terminology conventions for Learning Paths.
+
 <br/>
 
 # Other Arm Learning Resources

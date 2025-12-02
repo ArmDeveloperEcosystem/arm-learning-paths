@@ -149,7 +149,7 @@ Build Analyzer results available
 10. Run this application on an 64-bit Arm powered smartphone running Android. We ran the app on a Google Pixel 7 phone using a USB cable connected to the development machine running Android Studio. You can also pair your phone over Wi-Fi.
 Connect your device and select `Tools->Device Manager`. Select the `Physical` tab and your connected phone should show up on the list of devices as shown in the image below:
 
-![img6](neon6.png)
+![img6](neon6.webp)
 
 Then select `Run->Run app` or press `Shift+F10` to run the app on the connected phone.
 

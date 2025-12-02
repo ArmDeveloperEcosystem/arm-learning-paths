@@ -24,7 +24,7 @@ WebGPU is available through web browsers using the webgpu.h header file.
 
 The high-level view of WebGPU is shown below in Figure 1:
 
-![Figure 1: WebGPU high level view #center](images/webgpu_highlevel.png "Figure 1: WebGPU High-Level View")
+![Figure 1: WebGPU high level view #center](images/webgpu_highlevel.webp "Figure 1: WebGPU High-Level View")
 
 ## What are the benefits of WebGPU?
 

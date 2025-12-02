@@ -38,7 +38,7 @@ pulumi new azure-typescript
 
 The last command starts the wizard, but you first need to log in to Pulumi (see below).
 
-![Pulumi#left](figures/01.png)
+![Pulumi#left](figures/01.webp)
 
 You can use the access token or press ENTER to log in using a web browser.
 
@@ -50,4 +50,4 @@ After you log in to Pulumi, configure the project as follows:
 
 The wizard will save this configuration and proceed to install the npm packages required by Pulumi: 
 
-![Pulumi#left](figures/02.png)
+![Pulumi#left](figures/02.webp)

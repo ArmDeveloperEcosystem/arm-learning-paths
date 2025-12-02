@@ -12,7 +12,7 @@ Learning Paths are created using Markdown.
 
 Refer to this section when you have questions on how to format your content correctly.
 
-You can also refer to other Markdown resources, and if you are unsure, look [this page in GitHub](https://github.com/jasonrandrews/arm-learning-paths/blob/main/content/learning-paths/cross-platform/_example-learning-path/appendix-1-formatting.md?plain=1) to see how to do formatting.
+You can also refer to other Markdown resources, and if you are unsure, look [this page in GitHub](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/cross-platform/_example-learning-path/appendix-1-formatting.md?plain=1) to see how to do formatting.
 
 ## Learning Path Formatting
 
@@ -299,5 +299,6 @@ You can also give a custom title as specified here.
 - Also
 - Work
 {{% /notice %}}
+
 
 

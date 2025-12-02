@@ -28,7 +28,7 @@ The above procedure will open the Container instances, in which you click the **
 
 At this point, the Create container instance wizard will look as shown below:
 
-![Azure#left](figures/02.png)
+![Azure#left](figures/02.webp)
 
 Then, continue with the other settings:
 1.	SKU: **Standard**
@@ -41,11 +41,11 @@ Then, continue with the other settings:
 
 You should end up with the following configuration:
 
-![Azure#left](figures/03.png)
+![Azure#left](figures/03.webp)
 
 Now you will need to configure the port mapping. Let's click the **Next: Networking >** button, and under the Networking tab scroll down to Ports. Then, add an 8080 port for the TCP protocol: 
 
-![Azure#left](figures/04.png)
+![Azure#left](figures/04.webp)
 
 This setting enables us to create the port mapping, which will map port 8080 of the container instance to the corresponding point inside the running container.
 
@@ -53,8 +53,8 @@ This setting enables us to create the port mapping, which will map port 8080 of 
 
 Finally, click the **Review + create** button. This will run the final validation of your configuration, and you will see the following screen:
 
-![Azure#left](figures/05.png)
+![Azure#left](figures/05.webp)
 
 Click the **Create** button, and wait a few moments for the resource to be created. You will then see the confirmation screen, where you click the **Go to resource** button.
 
-![Azure#left](figures/06.png)
+![Azure#left](figures/06.webp)

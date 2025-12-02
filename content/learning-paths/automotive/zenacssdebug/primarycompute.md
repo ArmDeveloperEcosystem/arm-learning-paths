@@ -25,8 +25,9 @@ For example the processors start in `EL3` and move to `EL2N` when the Linux kern
 
 ``` text
 stop
-add-symbol-file /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-a/2.11.0+git/image/firmware/bl2.elf EL3:0x0
+add-symbol-file "/arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/trusted-firmware-a/2.13.0+git/image/firmware/bl2.elf" EL3:0x0
 tbreak bl2_entrypoint
+
 ```
 
 {{% notice Note %}}
@@ -41,12 +42,20 @@ Symbol loading is Exception Level–aware. If execution changes Exception Level,
 
 ## Debug the Linux kernel with OS awareness (symmetric multiprocessing)
 
-Switch to the `Primary_Linux.launch` connection you created earlier to enable Arm Development Studio OS awareness for the Linux kernel. Load the kernel symbols and set source mapping if your kernel sources are located outside the default paths:
+{{% notice Note %}}
+OS awareness for Linux Kernel 6.12 (as used with Reference Software Stack 2.1) is not currently supported as of Arm Development Studio 2025.0.
+
+It will be supported in a future Development Studio version.
+{{% /notice %}}
+
+Disconnect `Primary_init.launch` and use the `Primary_Linux.launch` connection you created earlier to enable Arm Development Studio OS awareness for the Linux kernel.
+
+Load the kernel symbols and set source mapping if your kernel sources are located outside the default paths:
 
 ```text
 stop
-add-symbol-file /arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/linux-yocto/6.6.54+git/linux-fvp_rd_aspen-standard-build/vmlinux EL2N:0x0
-set substitute-path /usr/src/kernel/ /arm-auto-solutions/build/tmp_baremetal/work-shared/fvp-rd-aspen/kernel-source/
+add-symbol-file "/arm-auto-solutions/build/tmp_baremetal/work/fvp_rd_aspen-poky-linux/linux-yocto-rt/6.12.30+git/linux-fvp_rd_aspen-preempt-rt-build/vmlinux" EL2N:0x0
+set substitute-path "/usr/src/kernel/" "/arm-auto-solutions/build/tmp_baremetal/work-shared/fvp-rd-aspen/kernel-source/"
 ```
 
 Run the FVP until the OS prompt appears.
@@ -73,7 +82,7 @@ You might see a warning like:
 ```text
 WARNING(ROS60): Could not enable OS support as the OS does not appear to be initialized. This might be caused by a mismatch between the loaded symbols and the code on the target or because the OS is not up and running. Enabling OS support will be re-attempted when the target next stops.
 ```
-This occurs if the OS has not completed boot when you connect; it is safe to ignore and will clear after the next target stop.
+This occurs if the OS has not completed boot when you connect; it is safe to ignore and will clear when stopping target after the OS has booted.
 {{% /notice %}}
 
 You have successfully learnt how to use Arm Development Studio to explore and debug the Arm Zena CSS Reference Software Stack.

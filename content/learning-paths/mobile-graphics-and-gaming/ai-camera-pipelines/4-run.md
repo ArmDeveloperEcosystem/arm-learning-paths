@@ -16,32 +16,32 @@ In the previous section, you built the AI Camera Pipelines. In this section, you
 cd $HOME/ai-camera-pipelines
 python3 -m venv venv
 . venv/bin/activate
-pip install -r ai-camera-pipelines.git/docker/python-requirements.txt
+pip install numpy opencv-python pillow torch
 ```
 
 ## Background blur
 
-Run the background Blur pipeline, using `resources/test_input.png` as the input image and write the transformed image to `test_output.png`:
+Run the background Blur pipeline, using `resources/test_input.png` as the input image and write the transformed image to `test_output_cinematic_mode.png`:
 
 ```bash
 cd $HOME/ai-camera-pipelines
-bin/cinematic_mode resources/test_input.png test_output.png resources/depth_and_saliency_v3_2_assortedv2_w_augment_mobilenetv2_int8_only_ptq.tflite
+bin/cinematic_mode resources/test_input.png test_output_cinematic_mode.png resources/depth_and_saliency_v3_2_assortedv2_w_augment_mobilenetv2_int8_only_ptq.tflite
 ```
 
-![example image alt-text#center](test_input2.png "Input image")
-![example image alt-text#center](test_output2.png "Image with blur applied")
+![example image alt-text#center](test_input2.webp "Input image")
+![example image alt-text#center](test_output2.webp "Image with blur applied")
 
 ## Low-Light Enhancement
 
-Run the Low-Light Enhancement pipeline, using `resources/test_input.png` as the input image and write the transformed image to `test_output2_lime.png`:
+Run the Low-Light Enhancement pipeline, using `resources/test_input.png` as the input image and write the transformed image to `test_output_lime.png`:
 
 ```bash
 cd $HOME/ai-camera-pipelines
-bin/low_light_image_enhancement resources/test_input.png test_output2_lime.png resources/HDRNetLIME_lr_coeffs_v1_1_0_mixed_low_light_perceptual_l1_loss_float32.tflite
+bin/low_light_image_enhancement resources/test_input.png test_output_lime.png resources/HDRNetLIME_lr_coeffs_v1_1_0_mixed_low_light_perceptual_l1_loss_float32.tflite
 ```
 
-![example image alt-text#center](test_input2.png "Input image")
-![example image alt-text#center](test_output2_lime.png "Image with low-light enhancement applied")
+![example image alt-text#center](test_input2.webp "Input image")
+![example image alt-text#center](test_output2_lime.webp "Image with low-light enhancement applied")
 
 
 ### Neural denoising

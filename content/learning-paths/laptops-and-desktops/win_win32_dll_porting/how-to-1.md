@@ -129,7 +129,7 @@ You will now create the main application which will use the above DLL. To do so,
 2. Select Add -> New Project... This will open the **Add a new project** window.
 3. In the **Add a new project** window, select the **Console App project** template and click the **Next** button:
 
-![fig3](figures/03.png)
+![fig3](figures/03.webp)
 
 4. In the **Configure your new project window**, set the project name to MainApplication and click the **Create** button
 
@@ -221,7 +221,7 @@ The project is now ready and we can launch the application for various platforms
 ## Running the application
 To launch the application, select **x64** from the platform dropdown, and then click **Local Windows Debugger**:
 
-![fig9](figures/09.png)
+![fig9](figures/09.webp)
 
 The application will launch and you will observe the execution time for the x86_64 platform:
 
