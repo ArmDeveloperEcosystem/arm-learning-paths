@@ -33,7 +33,7 @@ These insights help you identify memory bottlenecks and optimize your embedded f
 
 ![Workbench for Zephyr Memory Analysis panel displaying a detailed memory usage report. The main subject is a table listing memory sections, allocation sizes, percentages, addresses, and section names for an embedded Zephyr application targeting Arm Cortex-M. The environment is a technical workspace within Visual Studio Code, with the Zephyr Workbench sidebar open. Visible text includes Memory Analysis, RAM usage, ROM usage, and Puncover analysis. The tone is neutral and focused on software development and debugging tasks. alt-text#center](images/memory_analysis.png "Workbench for Zephyr Memory Analysis panel")
 
-The RAM Report displays detailed memory allocation information:
+The RAM Report displays detailed memory allocation information and should look like this:
 
 ```
 Path                                                                                             Size       %  Address    Section
@@ -174,7 +174,7 @@ Workbench for Zephyr will automatically detect these tools when they are install
 
 ## Install runners utilities
 
-To install debug tools for your specific board, go to **Host Tools > Install Debug Tools** in the Zephyr Workbench panel and select the tools applicable to your board.
+To install debug tools for your specific board, go to **Host Tools > Install Debug Tools** in the Zephyr Workbench panel and select the tools applicable to your board. You may need to press the refresh symbol to get the latest installation state for the selected/installed runners:
 
 ![Install Debug Runners panel in Workbench for Zephyr showing a list of available debug runner tools with checkboxes for selection. The main subject is the installation interface, which displays options such as OpenOCD, J-Link, LinkServer, and STM32CubeProgrammer, each with status indicators and install buttons. The environment is a Visual Studio Code window with the Zephyr Workbench sidebar open. Visible text includes Install Debug Tools, OpenOCD, J-Link, LinkServer, STM32CubeProgrammer, and status labels for each tool. The tone is neutral and focused on technical setup tasks. alt-text#center](images/install_runners.png "Install Debug Runners panel in Workbench for Zephyr showing a list of available debug runner tools with checkboxes for selection")
 
