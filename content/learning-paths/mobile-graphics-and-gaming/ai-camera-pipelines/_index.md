@@ -1,5 +1,5 @@
 ---
-title: Accelerate Denoising, Background Blur and Low-Light Camera Effects with KleidiAI and KleidiCV
+title: Accelerate Denoising, Background Blur and Low-Light Camera Effects with SME2
 
 minutes_to_complete: 30
 
@@ -7,7 +7,7 @@ who_is_this_for: This introductory topic is for mobile and computer-vision devel
 
 learning_objectives:
     - Build and run AI-powered camera pipeline applications
-    - Use KleidiCV and KleidiAI to improve the performance of real-time camera pipelines
+    - Use SME2 to improve the performance of real-time camera pipelines
 
 prerequisites:
     - A computer running Arm Linux or macOS with Docker installed
@@ -46,6 +46,22 @@ further_reading:
     - resource:
         title: TensorFlow Lite is now LiteRT
         link: https://developers.googleblog.com/en/tensorflow-lite-is-now-litert/
+        type: blog
+    - resource:
+        title: Introducing the Scalable Matrix Extension for the Armv9-A Architecture
+        link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/scalable-matrix-extension-armv9-a-architecture
+        type: website
+    - resource:
+        title: Arm Scalable Matrix Extension (SME) Introduction (Part 1)
+        link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction
+        type: blog
+    - resource:
+        title: Arm Scalable Matrix Extension (SME) Introduction (Part 2)
+        link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2
+        type: blog
+    - resource:
+        title: (Part 3) Matrix-matrix multiplication. Neon, SVE, and SME compared
+        link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/matrix-matrix-multiplication-neon-sve-and-sme-compared
         type: blog
 
 ### FIXED, DO NOT MODIFY

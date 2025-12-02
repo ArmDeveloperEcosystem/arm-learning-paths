@@ -1,5 +1,5 @@
 ---
-title: Accelerate vLLM inference on AWS Graviton processors
+title: Accelerate vLLM inference on Arm servers
     
 minutes_to_complete: 60
 

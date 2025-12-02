@@ -6,13 +6,32 @@ weight: 4
 layout: learningpathall
 ---
 
-## KleidiAI
+## About SME/SME2
+
+Arm Scalable Matrix Extension (SME) is an architecture extension that provides enhanced support for matrix operations. SME builds on the Scalable Vector Extensions (SVE and SVE2), adding new capabilities to efficiently process matrices.
+
+Key features include:
+- Outer product between two vectors
+- Matrix tile storage
+- Load, store, insert, and extract of tile vectors, including on-the-fly transposition
+- Streaming SVE mode
+
+SME defines the following new features:
+- A new architectural state capable of holding two-dimensional matrix tiles.
+- Streaming SVE mode which supports execution of SVE2 instructions with a vector length that matches the tile width.
+- New instructions that accumulate the outer product of two vectors into a tile.
+- New load, store, and move instructions that transfer a vector to or from a tile row or column.
+- Like SVE2, SME is a scalable vector length extension which enables Vector Length Agnostic (VLA), per-lane predication, predicate-driven loop control and management features.
+
+This makes SME and SME2 particularly fit for image processing. In this learning path, you will use SME2 instructions thru the KleidiAI and KleidiCV libraries:
+
+### KleidiAI
 
 [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) is an open-source library of optimized, performance-critical routines (micro-kernels) for AI workloads on Arm CPUs. These routines are tuned for specific Arm microarchitectures to maximize performance and are designed for straightforward integration into C/C++ ML and AI frameworks.
 
 Several popular AI frameworks already take advantage of KleidiAI to improve performance on Arm platforms.
 
-## KleidiCV
+### KleidiCV
 
 [KleidiCV](https://gitlab.arm.com/kleidi/kleidicv) is an open-source library that provides high-performance image-processing functions for AArch64. It is lightweight and simple to integrate, and computer-vision frameworks such as OpenCV can leverage KleidiCV to accelerate image processing on Arm devices.
 

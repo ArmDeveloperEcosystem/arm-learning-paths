@@ -7,10 +7,11 @@ layout: learningpathall
 ---
 
 ## Apache Flink Baseline Testing on GCP SUSE VM
-This guide explains how to perform **baseline testing** for Apache Flink after installation on a **GCP SUSE VM**. Baseline testing ensures that the Flink cluster is operational, the environment is correctly configured, and basic jobs run successfully.
+In this section you will perform baseline testing for Apache Flink after installation on a GCP SUSE VM. Baseline testing validates that your installation is correct, the JVM is functioning properly, and Flink’s JobManager/TaskManager can execute jobs successfully.
 
-### Download and Extract Maven
-Before running Flink jobs, ensure that **Java** and **Maven** are installed on your VM.  
+### Install Maven (Required to Build and Run Flink Jobs)
+Before running Flink jobs, ensure that Maven is installed on your VM. Many Flink examples and real-world jobs require Apache Maven to compile Java applications.
+
 Download Maven and extract it:
 
 ```console
@@ -20,8 +21,8 @@ sudo tar -xvzf apache-maven-3.8.6-bin.tar.gz
 sudo mv apache-maven-3.8.6 /opt/maven
 ```
 
-### Set Environment Variables
-Configure the environment so Maven commands are recognized system-wide:
+### Configure Environment Variables
+Configure the environment so Maven commands can be run system-wide:
 
 ```console
 echo "export M2_HOME=/opt/maven" >> ~/.bashrc
@@ -47,9 +48,9 @@ OS name: "linux", version: "5.14.21-150500.55.124-default", arch: "aarch64", fam
 At this point, both Java and Maven are installed and ready to use.
 
 ### Start the Flink Cluster
-Before proceeding to start the Flink cluster, you need to allow port 8081 from your GCP console.
+Before launching Flink, open port 8081 in the Google Cloud Firewall Rules so that the Web UI is reachable externally.
 
-Start the Flink cluster using the provided startup script:
+Start the standalone Flink cluster using the provided startup script:
 
 ```console
 cd $FLINK_HOME
@@ -64,7 +65,7 @@ Starting standalonesession daemon on host lpprojectsusearm64.
 Starting taskexecutor daemon on host lpprojectsusearm64.
 ```
 
-Verify that the JobManager and TaskManager processes are running:
+Verify that the Flink Processes (JobManager and TaskManager) are running:
 
 ```console
 jps
@@ -76,30 +77,29 @@ You should see output similar to:
 2621 Jps
 2559 TaskManagerRunner
 ```
+StandaloneSessionClusterEntrypoint is the JobManager process
+TaskManagerRunner is the worker responsible for executing tasks and maintaining state.
 
 ### Access the Flink Web UI
 
-Open the Flink Web UI in a browser:
+In a browser, navigate to:
 
 ```console
 http://<VM_IP>:8081
 ```
-
-- A successfully loaded dashboard confirms the cluster network and UI functionality.
--This serves as the baseline for network and UI validation.
-
+You should see the Flink Dashboard:
 ![Flink Dashboard alt-text#center](images/flink-dashboard.png "Figure 1: Flink Dashboard")
 
+A successfully loaded dashboard confirms the cluster network and UI functionality. This serves as the baseline for network and UI validation.
+
 ### Run a Simple Example Job
-Execute a sample streaming job to verify that Flink can run tasks correctly:
+A basic sanity test is to run the built-in WordCount example:
 
 ```console
 cd $FLINK_HOME
 ./bin/flink run examples/streaming/WordCount.jar
 ```
-
-- Monitor the job in the Web UI or check console logs.
-- Confirm that the job completes successfully.
+You can monitor the job in the Web UI or check console logs. A successful WordCount run confirms that your Flink cluster lifecycle works end-to-end.
 
 ![Flink Dashboard alt-text#center](images/wordcount.png "Figure 2: Word Count Job")
 
