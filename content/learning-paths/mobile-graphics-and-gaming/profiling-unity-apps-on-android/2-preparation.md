@@ -17,7 +17,7 @@ Although the sample application is a project, you will still need to create a bl
 
 1. Select _New Project_
 
-1. Select the _3D (URP) Core_ template
+1. Select the _3D (URP) Core_ template - add photo
 
 1. Enter project name (this will be used as the name of the project folder)
 
