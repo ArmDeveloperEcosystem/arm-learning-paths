@@ -19,7 +19,7 @@ We can also choose to use any previously created projects in our Gitlab account.
 1. From the Home page, Click on the **`Projects`** icon from the menu on the left hand side panel as the image below.  
 
 2. Click on the **`New Project`** button on the top right hand side as the image below.
-![Gitlab-Projects #center](_images/Gitlab-Projects.png)
+![Gitlab-Projects #center](_images/gitlab-projects.png)
 
 3. We will get a new screen like the image below with multiple options. You can choose any of the 2 options highlighted in red from the image below.
 
@@ -27,11 +27,11 @@ We can also choose to use any previously created projects in our Gitlab account.
 If we chose option 2 then we will need to choose **`GitLab CI/CD components`** option from the list of templates.
 {{%/notice%}}
 
-![New-Project #center](_images/New-Project.png)
+![New-Project #center](_images/new-project.png)
 
 4. Regardles of which option we choose, We will get a screen like the image below where we need to fill-in fields highlighted in red. The first field is the **`Project Name`** which we will name it **`CI-CD Runner`**. In the second field we need to choose any option from the **`Project Url`** list then click on the  **`Create Project`** button at the end of the page.
-![Project-Info #center](_images/Project-Info.png) 
+![Project-Info #center](_images/project-info.png) 
 
 ##### **If we did everything correctly then we should get a screen like the one in the image below.**
-![Project-Done #center](_images/Project-Done.png)
+![Project-Done #center](_images/project-done.png)
 

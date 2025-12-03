@@ -41,14 +41,14 @@ Gitlab offers a lot of documentions on how to create pipeline that fits differen
 ## How to run your pipeline for testing and to check the results:
 
 From the left hand side panel, Navigate to **`Build`** then to **`Pipeline`** then click on **`New pipeline`** button on the top right hand side just like the image below. In the new window click on **`New pipeline`** button again and your pipeline will start to execute.
-![New-Pipeline #center](_images/New-Pipeline.png)
+![New-Pipeline #center](_images/new-pipeline.png)
 
 To check the status of your pipeline and to check the output of any of it's Jobs simply click on any of the **`Jobs`** as the image below (with red rectangle around them).
-![pipeline-execution #center](_images/Pipeline-execution.png)
+![pipeline-execution #center](_images/pipeline-execution.png)
 
 ## Gitlab Helpful tools
 
-If you navigate to your pipeline editor from before you will notice that there are more tabs in that page other than the **`Edit`** tab. ![visual-pipeline #center](_images/Visual-pipeline.png)
+If you navigate to your pipeline editor from before you will notice that there are more tabs in that page other than the **`Edit`** tab. ![visual-pipeline #center](_images/visual-pipeline.png)
 
 ### The other Tabs are:
 
