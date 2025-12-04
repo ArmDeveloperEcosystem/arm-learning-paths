@@ -21,8 +21,10 @@ This enables SUSE’s official container support, so Docker and container tools 
 
 ``` console
 sudo SUSEConnect -p sle-module-containers/15.5/arm64
-SUSEConnect --list-extensions | grep Containers
+sudo SUSEConnect --list-extensions | grep Containers
 ```
+
+You should see "Activated" as part of the output from the above commands. 
 
 ### Install Docker
 Docker is required to run KinD and Kubernetes components as containers. This step installs Docker, starts it, and allows your user to run Docker without sudo.
@@ -32,7 +34,18 @@ sudo zypper install -y docker
 sudo systemctl enable --now docker
 sudo usermod -aG docker $USER
 exit
+```
+
+Next, re-open a new shell into your VM and type the following:
+
+```console
 docker ps
+```
+
+You should see the following output:
+
+```output
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
 ### Install Go 1.24 (Manual)
@@ -81,7 +94,9 @@ Kustomize Version: v5.7.1
 Helm is used to install and manage Kubernetes applications. Gardener uses Helm internally to deploy its components.
 
 ``` console
-curl -sSfL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | console
+curl -sSfL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
+chmod 755 ./get_helm.sh
+./get_helm.sh
 helm version
 ```
 
@@ -114,6 +129,12 @@ curl -LO https://github.com/kubernetes-sigs/kustomize/releases/download/kustomiz
 tar -xvf kustomize_v5.3.0_linux_arm64.tar.gz
 sudo mv kustomize /usr/local/bin/
 kustomize version
+```
+
+You should see an output (Kustomize version) that is similar to:
+
+```output
+v5.3.0
 ```
 
 ### Install Kind
@@ -160,17 +181,38 @@ Here you download the Gardener’s source code and switch to a known, stable rel
 ``` console
 cd ~
 git clone https://github.com/gardener/gardener.git
+cd gardener
 git fetch --all --tags
 git checkout v1.122.0
-cd gardener
 ```
 
 ### Clean Old KinD Network
 This removes any leftover KinD network from previous runs to avoid IP or port conflicts.
 
 ``` console
-docker network rm kind || true
+docker network rm kind
+```
+
+You should get the following output which is correct:
+
+```output
+Error response from daemon: network kind not found
+exit status 1
+```
+
+You can confirm this by typing:
+
+```console
 docker network ls
+```
+
+Your output should look something like this (note the absence of the "kind" name...its not present in the network config):
+
+```output
+NETWORK ID     NAME      DRIVER    SCOPE
+bb9f7955c11b   bridge    bridge    local
+aec64365a860   host      host      local
+d60c34b45e0a   none      null      local
 ```
 
 ### Create Gardener KinD Cluster
@@ -200,17 +242,19 @@ certificatesigningrequest.certificates.k8s.io/csr-rnvdk approved
 Kubelet Serving Certificate Signing Requests approved.
 ```
 
-### If IP/port binding fails (common on SUSE)
-If KinD fails due to networking issues (common on SUSE), re-adding loopback IPs fixes the problem.
+### If the above "make" command fails...
+
+If the above make command fails, please reset the loopback interfaces as follows and re-try the make command:
 
 ``` console
 sudo ip addr del 172.18.255.1/32 dev lo
 sudo ip addr del 172.18.255.22/32 dev lo
 sudo ip addr add 172.18.255.1/32 dev lo
 sudo ip addr add 172.18.255.22/32 dev lo
-docker network rm kind
+ip addr show lo
 make kind-up
 ```
+
 
 ### Export kubeconfig
 This config file allows `kubectl` to connect to the newly created Gardener local cluster.
@@ -325,12 +369,27 @@ EOF
 ```
 
 ### Get Shoot Admin Kubeconfig
+
+{{% notice Note %}}
+You may need to wait a 4-5 minutes before running the next commands... otherwise, they may fail. 
+If they fail, please wait a bit and retry again. 
+{{% /notice %}}
+
 This generates an admin kubeconfig so you can access and manage the Shoot Kubernetes cluster.
 
 ``` console
 ./hack/usage/generate-admin-kubeconf.sh > admin-kubeconf.yaml
 KUBECONFIG=admin-kubeconf.yaml kubectl get nodes
 ```
+
+{{% notice Note %}}
+If you get the following result from the "kubectl get nodes" command above:
+```output
+No resources found
+```
+Please wait a bit and retry again. Your nodes are still being generated! 
+{{% /notice %}}
+
 
 You should see an output similar to:
 
