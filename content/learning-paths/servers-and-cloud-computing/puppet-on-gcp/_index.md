@@ -15,12 +15,6 @@ learning_objectives:
   - Verify Puppet by applying a test manifest and confirming successful resource creation on Arm64  
   - Benchmark Puppet by measuring catalog compile time, apply speed, and resource usage on Arm64
 
-prerequisites:
-  - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled  
-  - Basic familiarity with [Puppet](https://www.puppet.com/)
-
-author: Pareena Verma
-
 ##### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
