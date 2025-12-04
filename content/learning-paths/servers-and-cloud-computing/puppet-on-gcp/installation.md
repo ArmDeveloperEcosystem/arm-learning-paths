@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Install Puppet on GCP VM
-This guide walks you through installing Puppet on a **Google Cloud Platform (GCP) SUSE Linux Arm64 VM**, including all dependencies, Ruby setup, and environment preparation.
+This walks you through installing Puppet on a Google Cloud Platform (GCP) SUSE Linux arm64 VM. You'll set up all required dependencies, build Ruby from source, and prepare the environment for Puppet automation.
 
 ### Install build dependencies and Ruby from source
 Installs all required tools and builds Ruby 3.1.4 from source to ensure compatibility with Puppet.

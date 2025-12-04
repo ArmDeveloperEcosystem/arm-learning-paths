@@ -34,10 +34,10 @@ To create a virtual machine based on the C4A instance type:
 - Click **Create** to launch the instance.
 - Once created, you should see a "SSH" option to the right in your list of VM instances.  Click on this to launch a SSH shell into your VM instance:
 
-![Invoke a SSH session via your browser alt-text#center](images/gcp-ssh.png "Invoke a SSH session into your running VM instance")
+![Browser window showing the Google Cloud Console with the SSH button highlighted next to a running VM instance. The interface displays the VM name, status, and available actions. The environment is a web-based dashboard with navigation menus on the left. The emotional tone is neutral and instructional. Visible text includes VM instance details and the SSH button label. alt-text#center](images/gcp-ssh.png "Invoke a SSH session into your running VM instance")
 
 - A window from your browser should come up and you should now see a shell into your VM instance:
 
-![Terminal Shell in your VM instance alt-text#center](images/gcp-shell.png "Terminal shell in your VM instance")
+![Terminal window displaying a shell prompt inside a Google Axion C4A Arm VM instance. The interface shows a command line ready for input, with the username and hostname visible at the prompt. The wider environment is a browser-based SSH session within the Google Cloud Console. The emotional tone is neutral and instructional. Visible text includes the shell prompt and any default welcome messages shown in the terminal. alt-text#center](images/gcp-shell.png "Terminal shell in your VM instance")
 
 Next, let's install puppet!
