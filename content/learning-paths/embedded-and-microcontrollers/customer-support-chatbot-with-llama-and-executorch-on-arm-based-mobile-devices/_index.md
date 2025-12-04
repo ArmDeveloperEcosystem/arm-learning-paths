@@ -1,5 +1,10 @@
 ---
 title: Customer Support Chatbot with Llama and ExecuTorch on Arm-Based Mobile Devices (with Agentic AI Capabilities)
+
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 60
 
 who_is_this_for: This learning plan is designed for developers with basic knowledge of Python, Mobile development, and machine learning concepts.It guides you through creating an on-device customer support chatbot using Meta's Llama models deployed via PyTorch's ExecuTorch runtime.The focus is on Arm-based Android devices.The chatbot will handle common customer queries (e.g., product info, troubleshooting) with low latency, privacy (no cloud dependency), and optimized performance.Incorporates agentic AI capabilities, transforming the chatbot from reactive (simple Q&A) to proactive and autonomous. Agentic AI enables the bot to plan multi-step actions, use external tools,reason over user intent, and adapt responses dynamically. This is achieved by extending the core LLM with tool-calling mechanisms and multi-agent orchestration.
