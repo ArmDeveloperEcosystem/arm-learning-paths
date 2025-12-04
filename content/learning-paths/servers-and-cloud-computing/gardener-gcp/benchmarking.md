@@ -23,7 +23,10 @@ If the cluster is not running or you don’t have admin access, security checks 
 **Verify cluster:**
 
 ```console
-kubectl get shoots -n garden
+cd ~/gardener
+export KUBECONFIG=$PWD/example/gardener-local/kind/local/kubeconfig
+kubectl apply -f example/provider-local/shoot.yaml
+kubectl -n garden-local get shoots
 kubectl get nodes
 ```
 If the cluster is not ready, benchmarking does not make sense yet.
@@ -32,8 +35,8 @@ If the cluster is not ready, benchmarking does not make sense yet.
 Download the Arm64-compatible kube-bench binary from the official GitHub release. This tool will be used to check your Kubernetes cluster against CIS security benchmarks.
 
 ```console
-curl -L \
-https://github.com/aquasecurity/kube-bench/releases/download/v0.10.3/kube-bench_0.10.3_linux_arm64.tar.gz
+cd ~
+curl -L https://github.com/aquasecurity/kube-bench/releases/download/v0.10.3/kube-bench_0.10.3_linux_arm64.tar.gz --output ./kube-bench_0.10.3_linux_arm64.tar.gz
 ```
 
 ### Extract and Install kube-bench Configuration
@@ -123,36 +126,9 @@ resources and that all new resources are created in a specific namespace.
 49 checks WARN
 0 checks INFO
 ```
-### Benchmark summary on x86_64
-To compare the benchmark results, the following results were collected by running the same benchmark on a `x86 - c4-standard-4` (4 vCPUs, 15 GB Memory) x86_64 VM in GCP, running SUSE:
 
-| Category / Subsection                       | PASS | FAIL | WARN |
-| ------------------------------------------- | :--: | :--: | :--: |
-| **1. Control Plane Security Configuration** |      |      |      |
-| └─ 1.1 Control Plane Node Configuration Files  |  0   | 18   |  3   |
-| └─ 1.2 API Server                              |  9   |  7   |  5   |
-| └─ 1.3 Controller Manager                      |  5   |  0   |  1   |
-| └─ 1.4 Scheduler                               |  1   |  1   |  0   |
-| **2. Etcd Node Configuration**              |      |      |      |
-| └─ 2.1-2.7 Etcd Node Config                    |  7   |  0   |  0   |
-| **3. Control Plane Configuration**          |      |      |      |
-| └─ 3.1 Authentication and Authorization       |  0   |  0   |  3   |
-| └─ 3.2 Logging                                 |  0   |  0   |  2   |
-| **4. Worker Node Security Configuration**   |      |      |      |
-| └─ 4.1 Worker Node Configuration Files         |  2   |  5   |  4   |
-| └─ 4.2 Kubelet                                 |  5   |  3   |  3   |
-| └─ 4.3 kube-proxy                              |  1   |  0   |  0   |
-| **5. Kubernetes Policies**                  |      |      |      |
-| └─ 5.1 RBAC and Service Accounts               |  0   |  6   |  7   |
-| └─ 5.2 Pod Security Standards                  |  0   |  0   | 13   |
-| └─ 5.3 Network Policies and CNI                |  0   |  0   |  2   |
-| └─ 5.4 Secrets Management                      |  0   |  0   |  2   |
-| └─ 5.5 Extensible Admission Control            |  0   |  0   |  1   |
-| └─ 5.7 General Policies                        |  0   |  0   |  4   |
-| **Total**                                   | 34   | 42   | 54   |
-
-### Benchmark summary on Arm64
-Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
+### Benchmark summary
+Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE) will be similar to:
 
 | Category / Subsection                            | PASS | FAIL | WARN |
 |-------------------------------------------------|:----:|:----:|:----:|
@@ -179,8 +155,7 @@ Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm6
 | └─ 5.7 General Policies                          | 0    | 0    | 4    |
 | **Total**                                       | 43   | 38   | 49   |
 
-### Gardener benchmarking comparison on Arm64 and x86_64
-
+### Conclusions
 - **Strong Baseline Security:** The cluster passed **43 CIS checks**, indicating a solid foundational security posture out of the box on **Arm64 (C4A)** infrastructure.
 - **Control Plane Hardening Gaps:** A significant number of **FAIL results (38)** are concentrated in **control plane file permissions and API server settings**, which are commonly unmet in development and local/KinD-based setups.
 - **Healthy Etcd Configuration:** All **Etcd-related checks passed (7/7)**, demonstrating correct encryption, access controls, and secure peer/client configuration on **Arm64**.

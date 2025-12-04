@@ -12,7 +12,7 @@ This section checks whether your Gardener Local setup is working correctly on an
 ### Set Kubeconfig
 This tells Kubernetes commands (**kubectl) which cluster to talk to**. Without this, kubectl won’t know where your Gardener cluster is.
 ``` console
-export KUBECONFIG=/home/gcpuser/gardener/kind/kubeconfig.yaml
+export KUBECONFIG=$PWD/example/gardener-local/kind/local/kubeconfig
 ```
 
 ### Check Cluster Health
@@ -140,6 +140,8 @@ test-nginx   0/1     ContainerCreating   0          1s
 test-nginx   1/1     Running             0          4s
 ```
 
+Now, press "ctrl-c" in the ssh shell to kill the currently running monitor. 
+
 ### Expose the Pod (ClusterIP Service)
 Pods cannot be accessed directly by other pods reliably.
 So we create a Kubernetes Service.
@@ -234,7 +236,7 @@ Ensures CoreDNS is functioning and services resolve properly. Run `nslookup` ins
 If DNS resolves correctly, service discovery is healthy.
 
 ``` console
-kubectl exec curl -- nslookup test-nginx-svc
+kubectl exec curl -- nslookup test-nginx-svc.default.svc.cluster.local
 ```
 
 You should see an output similar to:
