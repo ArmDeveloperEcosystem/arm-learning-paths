@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 3
-- Linux: 197
+- Linux: 200
 - macOS: 13
 - Windows: 14
 pinned_modules:
@@ -18,9 +18,9 @@ pinned_modules:
     - providers
     - migration
 subjects_filter:
-- CI-CD: 10
-- Containers and Virtualization: 34
-- Databases: 21
+- CI-CD: 11
+- Containers and Virtualization: 35
+- Databases: 22
 - Libraries: 9
 - ML: 34
 - Performance and Architecture: 74
@@ -94,7 +94,7 @@ tools_software_languages_filter:
 - Daytona: 1
 - Demo: 3
 - Django: 2
-- Docker: 25
+- Docker: 26
 - Docker Buildx: 1
 - Envoy: 3
 - ExecuTorch: 1
@@ -105,6 +105,7 @@ tools_software_languages_filter:
 - Fortran: 1
 - FunASR: 1
 - FVP: 7
+- Gardener: 1
 - GCC: 25
 - gdb: 1
 - Geekbench: 1
@@ -113,7 +114,7 @@ tools_software_languages_filter:
 - GitHub: 6
 - GitHub Actions: 1
 - GitHub CLI: 1
-- GitLab: 1
+- GitLab: 2
 - GKE: 1
 - glibc: 1
 - Go: 4
@@ -124,7 +125,7 @@ tools_software_languages_filter:
 - Google Test: 1
 - Gunicorn: 1
 - HammerDB: 1
-- Helm: 1
+- Helm: 2
 - Herd7: 1
 - Hiera: 1
 - Hugging Face: 12
@@ -139,7 +140,9 @@ tools_software_languages_filter:
 - KEDA: 1
 - Kedify: 1
 - Keras: 2
-- Kubernetes: 13
+- KinD: 1
+- kube-bench: 1
+- Kubernetes: 14
 - Libamath: 1
 - libbpf: 1
 - Linaro Forge: 1
@@ -188,7 +191,8 @@ tools_software_languages_filter:
 - QEMU: 1
 - RAG: 1
 - Rails: 1
-- Redis: 3
+- Redis: 4
+- redis-benchmark: 1
 - Remote.It: 2
 - RME: 8
 - Ruby: 2
@@ -233,8 +237,8 @@ tools_software_languages_filter:
 - ZooKeeper: 1
 weight: 1
 cloud_service_providers_filter:
-- AWS: 18
-- Google Cloud: 31
+- AWS: 19
+- Google Cloud: 34
 - Microsoft Azure: 19
 - Oracle: 2
 ---

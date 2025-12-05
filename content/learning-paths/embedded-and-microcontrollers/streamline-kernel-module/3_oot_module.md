@@ -223,7 +223,8 @@ SSH onto your target device:
     ssh root@<your-target-ip>
 ```    
 
-Execute the following commads on the target to run the module:
+Execute the following commands on the target to run the module:
+
 ```bash
     insmod /root/mychardrv.ko
     mknod /dev/mychardrv c 42 0
