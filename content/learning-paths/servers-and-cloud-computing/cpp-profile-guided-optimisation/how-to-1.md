@@ -8,10 +8,10 @@ layout: learningpathall
 
 ### What is Profile-Guided Optimization (PGO) and how does it work?
 
-Profile-Guided Optimization (PGO) is a compiler optimization technique that enhances program performance by utilizing real-world execution data. In GCC/G++, PGO involves a two-step process: 
+Profile-Guided Optimization (PGO) is a compiler optimization technique that enhances program performance by utilizing real-world execution data. PGO typically involves a two-step process: 
 
-- First, compile the program with the `-fprofile-generate` flag to produce an instrumented binary that collects profiling data during execution; 
-- Second, recompile the program with the `-fprofile-use` flag, allowing the compiler to leverage the collected data to make informed optimization decisions. This approach identifies frequently executed paths — known as “hot” paths — and optimizes them more aggressively, while potentially reducing emphasis on less critical code paths.
+- First, compile the program to produce an instrumented binary that collects profiling data during execution; 
+- Second, recompile the program with an optimization profile, allowing the compiler to leverage the collected data to make informed optimization decisions. This approach identifies frequently executed paths — known as “hot” paths — and optimizes them more aggressively, while potentially reducing emphasis on less critical code paths.
 
 ### When should I use Profile-Guided Optimization?
 
