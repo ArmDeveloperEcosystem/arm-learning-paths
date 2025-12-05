@@ -1,16 +1,15 @@
 ---
-title: Puppet Baseline Testing on Google Axion C4A Arm Virtual Machine
+title: Perform Puppet baseline testing 
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Puppet baseline testing on GCP SUSE VMs
+## Overview
+You can perform baseline testing of Puppet on a GCP SUSE Arm64 VM to make sure your installation works as expected. In this Learning Path, you'll verify Puppet and Facter versions, run basic Puppet commands, apply a simple manifest, and confirm that system facts are collected correctly. These steps help you validate your setup before moving on to advanced Puppet tasks.
 
-You can perform baseline testing of Puppet on a GCP SUSE Arm64 VM to verify that the installation works correctly. You will check Puppet and Facter versions, run basic Puppet commands, apply a simple manifest, and confirm that system facts are collected accurately.
-
-### Verify the Puppet installation
+## Verify the Puppet installation
 
 Verify that Puppet and Facter are correctly installed and respond to version checks.
 
@@ -49,7 +48,7 @@ The output confirms the Ruby version and architecture:
 ruby 3.1.4p223 (2023-03-30 revision 957bb7cb81) [aarch64-linux]
 ```
 
-### Run a simple Puppet command
+## Run a simple Puppet command
 
 Check that Puppet responds to commands by running `puppet help`. If the help menu appears, Puppet is working correctly.
 
@@ -96,9 +95,9 @@ See 'puppet help <subcommand>' for help on a specific subcommand.
 Puppet v8.10.0
 ```
 
-### Test a Simple Puppet Manifest
+## Test a simple Puppet manifest
 
-Create a basic Puppet script to make sure Puppet can apply configurations. If it successfully creates the test file, your Puppet agent functions as expected.
+Create a basic Puppet script to make sure Puppet can apply configurations. The purpose of this script is to verify that Puppet can successfully apply configurations on your system. If the script runs and creates the specified test file, it confirms that your Puppet agent is functioning correctly:
 
 ```bash
 cd ~
@@ -124,7 +123,7 @@ Notice: /Stage[main]/Main/File[/tmp/puppet_test.txt]/ensure: defined content as 
 Notice: Applied catalog in 0.01 seconds
 ```
 
-Open the file created by Puppet to confirm the content matches your script. This step validates that Puppet executed your manifest correctly.
+Open the file created by Puppet to confirm the content matches your script. This step validates that Puppet executed your manifest correctly:
 
 ```console
 cat /tmp/puppet_test.txt
@@ -135,7 +134,7 @@ Output:
 Hello from Puppet on SUSE ARM64!
 ```
 
-### Check Facter integration
+## Check Facter integration
 
 Run `facter` commands to verify that it collects accurate system details, such as the OS and CPU type. This ensures Puppet can gather the facts it needs for automation decisions.
 
@@ -207,4 +206,13 @@ The output is similar to the following:
 }
 ```
 
-With these checks complete, proceed to the Puppet benchmarking section to run workload-focused tests on the GCP SUSE VMs.
+## What you've accomplished and what's next
+
+You've completed the essential baseline checks for Puppet on your GCP SUSE Arm64 VM. At this point, you've:
+
+- Verified that Puppet, Facter, and Ruby are installed and working
+- Confirmed Puppet responds to commands and applies manifests
+- Validated that Facter collects accurate system facts
+
+This progress means your environment is ready for more advanced testing. Next, you'll move on to Puppet benchmarking, where you'll run workload-focused tests to measure performance on your GCP SUSE VM.
+
