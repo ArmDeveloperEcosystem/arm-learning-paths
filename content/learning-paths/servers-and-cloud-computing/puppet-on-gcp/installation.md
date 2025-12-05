@@ -1,30 +1,28 @@
 ---
-title: Install Puppet
+title: Install Puppet on a GCP VM
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Install Puppet on GCP VM
-This walks you through installing Puppet on a Google Cloud Platform (GCP) SUSE Linux arm64 VM. You'll set up all required dependencies, build Ruby from source, and prepare the environment for Puppet automation.
+## Set up your environment and install Puppet
+This section walks you through installing Puppet on a Google Cloud Platform (GCP) SUSE Linux arm64 VM. You'll set up all required dependencies, build Ruby from source, and prepare the environment for Puppet automation.
 
-### Install build dependencies and Ruby from source
-Installs all required tools and builds Ruby 3.1.4 from source to ensure compatibility with Puppet.
+## Install dependencies and Ruby
+To get started, you'll install the required development tools and libraries, then build Ruby 3.1.4 from source. This approach prepares your environment for Puppet and helps prevent compatibility problems.
 
-First we install the prerequisites for ruby:
+To install the necessary packages for Ruby use this command:
+
 ```console
 sudo zypper install git curl gcc make patch libyaml-devel libffi-devel libopenssl-devel readline-devel zlib-devel gdbm-devel bzip2 bzip2-devel
 ```
 
-NOTE:
-```note
-Due to changing version dependencies, you may receive a message in the "zypper" 
-command above that ncurses-devel is not the correct version. If so, please select the 
-option that permits downgrading of the installed ncurses-devel package to the required 
-version (normally "Solution 1"), followed by confirmation with "y".
-```
-Then, we will install ruby itself:
+
+{{% notice Note %}}If you see a version conflict for `ncurses-devel` during the `zypper` install, choose the option that allows downgrading `ncurses-devel` to the required version (usually "Solution 1"). Confirm the downgrade by entering "y" when prompted. This step can be confusing at first, but it's a common requirement for building Ruby from source on SUSE Linux.{{% /notice %}}
+
+Next, install ruby:
+
 ```console
 cd ~
 sudo wget https://cache.ruby-lang.org/pub/ruby/3.1/ruby-3.1.4.tar.gz
@@ -34,45 +32,57 @@ sudo ./configure
 sudo make && sudo make install
 ```
 
-### Verify Ruby
-Checks that Ruby is correctly installed and available in your system path.
+## Verify Ruby
+Check that Ruby is correctly installed and available in your system PATH:
 
 ```console
 ruby -v   
 which ruby
 ```
+The expected output is:
 
 ```output
 ruby 3.1.4p223 (2023-03-30 revision 957bb7cb81) [aarch64-linux]
 /usr/local/bin/ruby
 ```
 
-### Install Puppet dependencies
-Installs essential Puppet libraries (`semantic_puppet, facter, hiera`) needed for automation tasks.
+## Install Puppet dependencies
+Install the core Puppet libraries to enable automation and configuration management on your Arm-based GCP VM.
 
-- **semantic_puppet** – Provides tools for handling Puppet-specific versioning, modules, and dependency constraints.
-- **facter** – Collects system information (facts) such as OS, IP, and hardware details for Puppet to use in configuration decisions.
-- **hiera** – Key-value lookup tool that manages configuration data outside of Puppet manifests for flexible data separation.
+First, download and extract the Puppet source code:
 
 ```console
 cd ~
 sudo wget https://github.com/puppetlabs/puppet/archive/refs/tags/8.10.0.tar.gz
 sudo tar -xvf 8.10.0.tar.gz
 cd ~/puppet-8.10.0
+```
+
+Next, install the required Ruby gems for Puppet:
+
+```console
 sudo /usr/local/bin/gem install semantic_puppet -v "~> 1.0"
 sudo gem install facter -v "~> 4.0"
 sudo gem install hiera
 ```
 
-{{% notice Note %}}
-Puppet 8.8.1 version expands official support for Arm and AArch64, with new agent compatibility for AlmaLinux 9 (AARCH64), Rocky Linux 9 (AARCH64), and Ubuntu 24.04 (ARM). The release ensures compatibility with Ruby 3.3 and resolves multiple agent and catalog-related issues. Security is enhanced with an OpenSSL 3.0.14 upgrade, addressing CVE-2024-4603 and CVE-2024-2511 vulnerabilities.
-You can view [this release note](https://help.puppet.com/osp/current/Content/PuppetCore/PuppetReleaseNotes/release_notes_puppet_x-8-8-1.htm)
+- `semantic_puppet` manages Puppet-specific versioning and module dependencies
+- `facter` collects system information, such as operating system, IP address, and hardware details, for Puppet to use
+- `hiera` separates configuration data from Puppet manifests, making your automation setup more flexible
 
-The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends Puppet version 8.8.1, the minimum recommended on the Arm platforms.
-{{% /notice %}}
+These libraries ensure Puppet runs smoothly and can manage your Arm-based SUSE Linux VM effectively.
 
-### Build and install the Puppet gem
-The **Puppet gem** provides the core Puppet framework, including its CLI, manifest parser, and resource management engine.
+These libraries are required for Puppet to work correctly on your Arm-based GCP VM.
+
+
+
+< notice Note %>Puppet version 8.8.1 introduces expanded support for Arm and AArch64 platforms. This release adds agent compatibility for AlmaLinux 9 (AARCH64), Rocky Linux 9 (AARCH64), and Ubuntu 24.04 (ARM). It works with Ruby 3.3 and fixes several agent and catalog issues. Security is improved with OpenSSL 3.0.14, addressing recent vulnerabilities (CVE-2024-4603 and CVE-2024-2511).</notice%>
+
+For more information, see the [official Puppet release notes](https://help.puppet.com/osp/current/Content/PuppetCore/PuppetReleaseNotes/release_notes_puppet_x-8-8-1.htm).
+
+The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends Puppet 8.8.1 as the minimum version for Arm platforms.
+## Build and install the Puppet gem
+The Puppet gem provides the core Puppet framework, including its CLI, manifest parser, and resource management engine.
 
 Build and install the Puppet 8.10.0 package from source into your Ruby environment.
 
@@ -81,7 +91,7 @@ sudo gem build puppet.gemspec
 sudo /usr/local/bin/gem install puppet-8.10.0.gem
 ```
 
-### Verification
+## Verify Puppet installation 
 Confirm Puppet is successfully installed and ready to use on the system.
 
 ```console

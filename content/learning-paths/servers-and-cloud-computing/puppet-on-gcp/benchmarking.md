@@ -9,7 +9,7 @@ layout: learningpathall
 
 ##  Benchmark Puppet on a GCP SUSE Arm64 VM
 
-This guide explains how to perform a Puppet standalone benchmark on a Google Cloud Platform (GCP) SUSE Linux Arm64 VM. It measures Puppet’s local execution performance without requiring a Puppet Master.
+This section walks you through how to perform a Puppet standalone benchmark on a Google Cloud Platform (GCP) SUSE Linux Arm64 VM. It measures Puppet’s local execution performance without requiring a Puppet Master.
 
 
 ## Prerequisites
@@ -40,7 +40,7 @@ notify { 'Benchmark Test':
 }
 ```
 
-### Explore the code 
+## Explore the code 
 
 Here is a breakdown of the key elements in the `benchmark.pp` manifest to help you understand how Puppet processes and displays information during the benchmark:
 
@@ -102,3 +102,9 @@ Confirm that your benchmark output matches the expected metrics for catalog comp
 These benchmark results demonstrate that catalog compilation completed in only 0.01 seconds, highlighting the processing speed of the Arm64 platform. The benchmark ran smoothly in the production environment, and the configuration version was successfully recorded as 1763407825. Catalog application also finished in 0.01 seconds, indicating very low execution latency. The total runtime was 1.054 seconds, which reflects efficient overall performance for Puppet on an Arm64 SUSE VM in Google Cloud Platform.
 
 This benchmarking method is useful for validating Puppet performance after migration to Arm64, or when optimizing infrastructure for cost and speed. For more advanced benchmarking, consider automating multiple runs, collecting metrics over time, and comparing results with x86-based VMs to quantify the benefits of Arm64 on GCP.
+
+## Summary and next steps
+
+You’ve successfully benchmarked Puppet on an Arm64-based SUSE VM in Google Cloud Platform. You created and applied a simple manifest, measured key performance metrics, and interpreted the results to validate Puppet’s efficiency on Arm infrastructure. These steps help ensure your configuration management setup is optimized for speed and reliability on modern cloud platforms.
+
+Well done - completing this benchmark gives you a solid foundation for further automation and optimization with Puppet on Arm.

@@ -1,5 +1,5 @@
 ---
-title: Perform Puppet Baseline testing 
+title: Perform Puppet baseline testing 
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -123,7 +123,7 @@ Notice: /Stage[main]/Main/File[/tmp/puppet_test.txt]/ensure: defined content as 
 Notice: Applied catalog in 0.01 seconds
 ```
 
-Open the file created by Puppet to confirm the content matches your script. This step validates that Puppet executed your manifest correctly.
+Open the file created by Puppet to confirm the content matches your script. This step validates that Puppet executed your manifest correctly:
 
 ```console
 cat /tmp/puppet_test.txt
@@ -205,6 +205,8 @@ The output is similar to the following:
   threads => 1
 }
 ```
+
+## What you've accomplished and what's next
 
 You've completed the essential baseline checks for Puppet on your GCP SUSE Arm64 VM. At this point, you've:
 
