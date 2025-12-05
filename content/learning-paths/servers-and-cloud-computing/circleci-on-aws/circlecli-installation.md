@@ -6,29 +6,29 @@ weight: 4
 layout: learningpathall
 ---
 
-## Install CircleCI CLI on AWS Graviton2 (Neoverse N1) Instance
-This guide explains installing the **CircleCI Command Line Interface (CLI)** on an **AWS Graviton2 (Neoverse N1) Arm64 EC2 instance**.  
-The CLI enables you to interact with CircleCI directly from your terminal — for validating configuration files, managing pipelines, and operating self-hosted runners on your EC2 instance.
+## Install CircleCI CLI on AWS Graviton2 (Neoverse N1) instance
+This section walks you through how to install the CircleCI command line interface (CLI) on an AWS Graviton2 (Neoverse N1) Arm64 EC2 instance.  
+With the CLI, you can work with CircleCI from your terminal to check configuration files, manage pipelines, and run self-hosted runners on your EC2 instance.
 
-### Install Required Packages
-Before installing the CircleCI CLI, ensure your system has the necessary tools for downloading and extracting files.
+## Install the required packages
+Before installing the CircleCI CLI, ensure your system has the necessary tools for downloading and extracting files:
 
 ```console
 sudo apt update && sudo apt install -y curl tar gzip coreutils gpg git
 ```
-### Download and Extract the CircleCI CLI
+## Download and extract the CircleCI CLI
 
-Next, download the CircleCI CLI binary for **Linux arm64** and extract it.
+Next, download the CircleCI CLI binary for Linux arm64 and extract it:
 
 ```console
 curl -fLSs https://github.com/CircleCI-Public/circleci-cli/releases/download/v0.1.33494/circleci-cli_0.1.33494_linux_arm64.tar.gz | tar xz
 sudo mv circleci-cli_0.1.33494_linux_arm64/circleci /usr/local/bin/
 ```
-- The `curl` command fetches the official **CircleCI CLI archive** from GitHub.  
+- The `curl` command fetches the official CircleCI CLI archive from GitHub.  
 - The `| tar xz` command extracts the compressed binary in a single step.  
 - After extraction, a new folder named **`circleci-cli_0.1.33494_linux_arm64`** appears in your current directory.
 
-### Verify the Installation
+## Verify the installation
 
 To ensure that the CLI is installed successfully, check its version:
 

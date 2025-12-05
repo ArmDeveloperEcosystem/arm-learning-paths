@@ -1,5 +1,5 @@
 ---
-title: Verify CircleCI Arm64 Self-Hosted Runner
+title: Verify CircleCI Arm64 Self-Hosted runner
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Verify CircleCI Arm64 Self-Hosted Runner
 
-This guide demonstrates validating your **self-hosted CircleCI runner** on an **Arm64 machine** by executing a simple workflow and a test computation. This ensures your runner is correctly configured and ready to process jobs.
+This section walks you through validating your self-hosted CircleCI runner on an Arm64 machine by executing a simple workflow and a test computation. This ensures your runner is correctly configured and ready to process jobs.
 
-### Create a Test Repository
+## Create a test repository
 Start by creating a GitHub repository dedicated to verifying your Arm64 runner:
 
 ```console
@@ -19,16 +19,23 @@ cd aws-circleci
 ```
 This repository serves as a sandbox to confirm that your CircleCI runner can pick up and run jobs for Arm64 workflows.
 
-### Add a Sample Script
-Create a minimal shell script that will be used to confirm the runner executes commands correctly:
+## Add a sample script
+Create a minimal shell script to confirm your runner can execute commands:
+
+```bash
+echo 'echo "Hello from CircleCI Arm64 Runner!"' > hello.sh
+chmod +x hello.sh
+```
+
+This script prints a message when run, helping you verify that your self-hosted runner is working as expected.
 
 ```console
 echo 'echo "Hello from CircleCI Arm64 Runner!"' > hello.sh
 chmod +x hello.sh
 ```
 
-### Define the CircleCI Configuration
-Create a `.circleci/config.yml` file to define the workflow that will run on your Arm64 runner:
+## Define the CircleCI configuration
+Now create a `.circleci/config.yml` file to define the workflow that runs on your Arm64 runner:
 
 ```yaml
 version: 2.1
@@ -59,13 +66,17 @@ workflows:
     jobs:
       - test-Arm64
 ```
-- Defines a single job `test-Arm64` using a machine executor on a self-hosted Arm64 runner.  
-- Checks CPU architecture with `uname -m` and `lscpu` to verify the runner.  
-- Executes a simple script `hello.sh` to confirm the runner can run commands.  
-- Runs a sample computation step to display CPU info and print.
+This configuration does the following:
 
-### Commit and Push to GitHub
-Once all files you created (`hello.sh`, `.circleci/config.yml`) are ready, push your project to GitHub so CircleCI can build and verify the Arm64 runner automatically.
+- Defines a single job called `test-Arm64` that uses a machine executor on your self-hosted Arm64 runner
+- Verifies the runner's architecture by running `uname -m` and checking the output of `lscpu`
+- Runs the `hello.sh` script to confirm the runner can execute commands
+- Performs a sample computation step that displays CPU information and prints a success message
+
+Each step helps you confirm that your CircleCI Arm64 runner is set up correctly and ready to process jobs.
+
+## Commit and push to GitHub
+After you create `hello.sh` and `.circleci/config.yml`, push your project to GitHub so CircleCI can build and verify your Arm64 runner:
 
 ```console
 git add .
@@ -74,36 +85,38 @@ git branch -M main
 git push -u origin main
 ```
 
-- **Add Changes**: Stage all modified and new files using `git add .`.
-- **Commit Changes**: Commit the staged files with a descriptive message.
-- **Set Main Branch**: Rename the current branch to `main`.
-- **Add Remote Repository**: Link your local repository to GitHub.
-- **Push Changes**: Push the committed changes to the `main` branch on GitHub.
+Here's what each command does:
+- git add . — stages all your files for commit
+- git commit -m ... — saves your changes with a message
+- git branch -M main — sets your branch to main (if it's not already)
+- git push -u origin main — pushes your code to GitHub
 
-### Start CircleCI Runner and Execute Job
-Ensure that your CircleCI runner is enabled and started. This will allow your self-hosted runner to pick up jobs from CircleCI.
+Once your code is on GitHub, CircleCI can start running your workflow automatically.
+## Start the CircleCI runner and run your job
+
+Before you test your workflow, make sure your CircleCI runner is enabled and running. This lets your self-hosted runner pick up jobs from CircleCI:
 
 ```console
 sudo systemctl enable circleci-runner
 sudo systemctl start circleci-runner
 sudo systemctl status circleci-runner
 ```
-- **Enable CircleCI Runner**: Ensure the CircleCI runner is set to start automatically on boot.
-- **Start and Check Status**: Start the CircleCI runner and verify it is running.
+- Enable the runner so it starts automatically when your machine boots
+- Start the runner and check its status to confirm it is running
 
-After pushing your code to GitHub, open your **CircleCI Dashboard → Projects**, and confirm that your **test-Arm64 workflow** starts running using your **self-hosted runner**.
+After you push your code to GitHub, go to your CircleCI Dashboard and select Projects. Look for your test-Arm64 workflow and check that it is running on your self-hosted runner.
 
-If the setup is correct, you’ll see your job running under the resource class you created.
+If everything is set up correctly, you’ll see your job running under the resource class you created.
 
-### Output
-Once the job starts running, CircleCI will:
+## Output
+Once the job starts running, CircleCI does the following:
 
-- Verify Arm64 Runner:
+- It verifies the Arm64 Runner:
 
-  ![Self-Hosted Runners alt-text#center](images/runnerv1.png "Figure 1: Self-Hosted Runners ")
+  ![CircleCI self-hosted runner dashboard showing a successful Arm64 job execution. The main panel displays job status as successful with green check marks. The sidebar lists workflow steps including checkout, verify Arm64 runner, and run sample computation. The environment is a web interface with a clean, professional layout. The overall tone is positive and confirms successful validation of the self-hosted runner. alt-text#center](images/runnerv1.png "Self-Hosted Runners ")
   
-- Run sample computation:
+- It runs a sample computation:
 
-  ![Self-Hosted Runners alt-text#center](images/computation.png "Figure 1: Self-Hosted Runners ")
+  ![CircleCI dashboard displaying the results of a sample computation job on a self-hosted Arm64 runner. The main panel shows the job status as successful with green check marks. Workflow steps listed in the sidebar include checkout, verify Arm64 runner, and run sample computation. The environment is a modern web interface with a clean, organized layout. On-screen text includes Success and CPU Info. The overall tone is positive, confirming the successful execution of the computation step on the Arm64 runner. alt-text#center](images/computation.png "Self-Hosted Runners ")
 
 All CircleCI jobs have run successfully, the sample computation completed, and all outputs are visible in the CircleCI Dashboard.
