@@ -40,4 +40,9 @@ To create a virtual machine based on the C4A instance type:
 
 ![Terminal window displaying a shell prompt inside a Google Axion C4A Arm VM instance. The interface shows a command line ready for input, with the username and hostname visible at the prompt. The wider environment is a browser-based SSH session within the Google Cloud Console. The emotional tone is neutral and instructional. Visible text includes the shell prompt and any default welcome messages shown in the terminal. alt-text#center](images/gcp-shell.png "Terminal shell in your VM instance")
 
-Next, let's install puppet!
+
+## What you've accomplished and what's next 
+
+You have successfully provisioned a Google Axion C4A Arm virtual machine on Google Cloud Platform using the Console. You selected the Arm64-based SUSE Linux Enterprise Server image, configured networking, and launched your VM. You also connected to your instance using the built-in SSH feature. You now have a running Arm VM on GCP and access to its shell environment.
+
+Next, you'll install Puppet on your new instance to automate configuration and management tasks. 
