@@ -15,7 +15,7 @@ You should always check the performance of your app on a device comparable to th
 
 1. To activate profiling, we will enable the _Development Build_ and _Autoconnect Profiler_ options.
 
-![Enable profiling options](images/build-settings-enable-profiling.png "Figure 1. Enable options for profiling")
+ ![Enable profiling options#center](images/build-profiles-android.png "Figure 1. Build Profiles window")
 
 3. You should already have the Android platform selected, so connect your device and click on _Build and Run_.
 
