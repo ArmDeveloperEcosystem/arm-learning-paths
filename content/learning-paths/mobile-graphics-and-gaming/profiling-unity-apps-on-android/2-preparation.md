@@ -17,7 +17,7 @@ Although the sample application is a project, you will still need to create a bl
 
 1. Select _New Project_
 
-1. Select the _3D (URP) Core_ template - add photo
+1. Select the _3D (URP) Core_ template - add photo "urp confirmation"
 
 1. Enter project name (this will be used as the name of the project folder)
 
@@ -77,11 +77,11 @@ Once Unity has loaded, you will be presented with a template project. You can ig
 ## Set up the project
 Once the sample project has been imported, you will see some errors and warnings.
 
-1. Open _File_ menu and select _Build Settings_
+1. Open _File_ menu and select _Build Profiles_
 
 1. Select _Android_ from the Platform list
 
-1. Select _Switch Platform_
+1. Select _Switch Platform_as you have done in the [previous learning path](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android/3-test-on-android/)
 
 Unity will take a moment to build the assets for the Android platform.
 
@@ -95,9 +95,9 @@ Your scene view will look something like this:
 
 It is worth checking that everything has imported and been built correctly.
 
-1. Close the _Build Settings_ window
+1. Close the _Build profiles_ window
 
-1. In the Project tab (usually at the bottom in default configurations) you will see the list of asset files.
+1. In the Project tab (usually at the bottom in default configurations) you will see the list of asset files. - add photo
 
 1. Open the _BurstNeonCollisions_ folder
 
@@ -114,21 +114,21 @@ The game will launch and you will see an empty environment begin to fill with mo
 ## Deploy to Android
 You will now deploy the sample to your Android device. Your device must already be set up for development. For detailed instructions, read the learning path [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android).
 
-1. Open _Build Settings_ from the File menu
+1. Open _Build profile_ from the File menu
 
 1. Tick the _Development Build_ option
 
-1. Select _Add Open Scenes_ to add the demo scene to your _Scenes in Build_ list
+1. Select _Add Open Scenes_ to add the demo scene to your _Scenes in Build_ list - check if this is needed
 
 1. Plug your Android device into your computer
 
 1. Once recognized, your device will be listed in the drop-down menu next to _Run Device_
 
-1. The screenshot below shows the settings with a _Samsung S8_ selected as the _Run Device_
+1. The screenshot below shows the settings with a our demo device selected as the _Run Device_ you will see you own device in this box
 
 1. Select _Build and Run_
 
-    ![Build settings#center](images/android-build-settings.PNG "Figure 5. Android build settings showing selected Android device.")
+    ![Build settings#center](images/android-build-settings.PNG "Figure 5. Android build settings showing selected Android device.") - update SS
 
 1. Enter a name for the APK (the Android package) and select _Save_
 
