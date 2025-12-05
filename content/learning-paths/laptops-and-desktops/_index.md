@@ -9,11 +9,11 @@ maintopic: true
 operatingsystems_filter:
 - Android: 2
 - ChromeOS: 2
-- Linux: 36
+- Linux: 37
 - macOS: 10
 - Windows: 46
 subjects_filter:
-- CI-CD: 5
+- CI-CD: 6
 - Containers and Virtualization: 7
 - Migration to Arm: 30
 - ML: 4
@@ -42,7 +42,7 @@ tools_software_languages_filter:
 - GCC: 12
 - Git: 1
 - GitHub: 3
-- GitLab: 1
+- GitLab: 2
 - Google Test: 1
 - HTML: 2
 - Hugging Face: 1
