@@ -15,6 +15,7 @@ learning_objectives:
 
 prerequisites:
   - An [AWS account](https://aws.amazon.com/free/) with billing enabled
+  - A [CircleCI account](https://circleci.com/)
   - Basic familiarity with Linux command line
   - Basic understanding of CircleCI concepts such as 
     [workflows](https://circleci.com/docs/guides/orchestrate/workflows/), 
