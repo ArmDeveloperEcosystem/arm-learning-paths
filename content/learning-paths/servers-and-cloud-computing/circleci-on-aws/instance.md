@@ -11,7 +11,7 @@ layout: learningpathall
 In this section, you'll learn how to provision an AWS Graviton2 Arm64 EC2 instance on Amazon Web Services (AWS) using the m6g.xlarge instance type (2 vCPUs, 8 GB memory) in the AWS Management Console.
 
 {{% notice Note %}}
-For support on AWS setup, see the Learning Path [Getting started with AWS](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/aws/).
+For support on AWS setup, see the Learning Path [Getting started with AWS](/learning-paths/servers-and-cloud-computing/csp/aws/).
 {{% /notice %}}
 
 ## Provision the instance in the AWS Management Console
