@@ -1,17 +1,13 @@
 ---
-title: CircleCI Arm Native Workflows on AWS Graviton2 (EC2)
+title: Deploy CircleCI Arm Native Workflows on AWS EC2 Graviton2 
     
 minutes_to_complete: 45
 
-draft: true
-cascade:
-    draft: true
-
-who_is_this_for: This learning path is intended for software developers and DevOps engineers looking to set up and run CircleCI Arm native workflows on Linux Arm64 VMs, specifically on AWS EC2 Graviton2 instances (Neoverse N1), using self-hosted runners.
+who_is_this_for: This is an introductory topic for developers and DevOps engineers who want to set up and run CircleCI Arm native workflows on Linux Arm64 virtual machines. You'll use AWS EC2 Graviton2 instances (Neoverse N1) and self-hosted runners. 
 
 learning_objectives:
   - Provision an AWS EC2 Graviton2 Arm64 virtual machine
-  - Install and configure CircleCI self-hosted machine runners on Arm64
+  - Install and configure a CircleCI self-hosted machine runners on Arm64
   - Verify the runner by running a simple workflow and test computation
   - Define and execute CircleCI job using a machine executor
   - Check CPU architecture and execute a basic script to confirm if the runner is operational
@@ -19,6 +15,7 @@ learning_objectives:
 
 prerequisites:
   - An [AWS account](https://aws.amazon.com/free/) with billing enabled
+  - A [CircleCI account](https://circleci.com/)
   - Basic familiarity with Linux command line
   - Basic understanding of CircleCI concepts such as 
     [workflows](https://circleci.com/docs/guides/orchestrate/workflows/), 

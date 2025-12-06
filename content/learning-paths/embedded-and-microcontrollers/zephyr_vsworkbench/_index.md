@@ -1,10 +1,6 @@
 ---
 title: Build Zephyr projects with Workbench for Zephyr in VS Code
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for embedded developers targeting Arm-based platforms with the Zephyr RTOS using the Workbench for Zephyr extension for VS Code.
@@ -18,7 +14,7 @@ learning_objectives:
 
 prerequisites:
     - Basic familiarity with embedded C programming
-    - Visual Studio Code installed and running
+    - Visual Studio Code
     - A Cortex-M development board
     - Windows 10+ (64-bit), macOS with Homebrew, or Linux (preferably Ubuntu 20.04+)
 

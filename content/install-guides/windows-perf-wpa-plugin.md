@@ -117,7 +117,7 @@ wpa -addsearchdir %USERPROFILE%\Downloads\wpa-plugin-1.0.3
 
 Set the `WPA_ADDITIONAL_SEARCH_DIRECTORIES` environment variable to the location of the `.dll` file.
 
-##### Option 3: Copy the  `.dll` file to the `CustomDataSources` directory next to the WPA executable.
+##### Option 3: Copy the  DLL to the CustomDataSources directory next to the WPA executable.
 
 The default location is: 
         `C:\\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\CustomDataSources`

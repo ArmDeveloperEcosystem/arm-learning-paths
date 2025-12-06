@@ -9,18 +9,18 @@ key_ip:
 - Ethos-U
 maintopic: true
 operatingsystems_filter:
-- Android: 1
+- Android: 2
 - Baremetal: 30
-- Linux: 32
+- Linux: 34
 - macOS: 7
 - RTOS: 10
-- Windows: 4
+- Windows: 5
 subjects_filter:
-- CI-CD: 5
+- CI-CD: 6
 - Containers and Virtualization: 6
 - Embedded Linux: 4
 - Libraries: 3
-- ML: 17
+- ML: 18
 - Performance and Architecture: 22
 - RTOS Fundamentals: 5
 - Security: 2
@@ -54,15 +54,16 @@ tools_software_languages_filter:
 - DSTREAM: 2
 - Edge AI: 3
 - Edge Impulse: 2
-- ExecuTorch: 4
+- ExecuTorch: 5
 - FastAPI: 1
 - FPGA: 1
 - Fusion 360: 1
 - FVP: 10
 - GCC: 9
+- GenAI: 1
 - Generative AI: 2
 - GitHub: 3
-- GitLab: 1
+- GitLab: 2
 - gpiozero: 1
 - Himax SDK: 1
 - Hugging Face: 3
@@ -75,7 +76,7 @@ tools_software_languages_filter:
 - Kubernetes: 1
 - lgpio: 1
 - Linux kernel: 1
-- LLM: 2
+- LLM: 3
 - MCP: 1
 - MPS3: 1
 - MXNet: 1
@@ -85,8 +86,8 @@ tools_software_languages_filter:
 - Paddle: 1
 - Performance analysis: 1
 - Porcupine: 1
-- Python: 8
-- PyTorch: 3
+- Python: 9
+- PyTorch: 4
 - QEMU: 1
 - Raspberry Pi: 7
 - Remote.It: 1

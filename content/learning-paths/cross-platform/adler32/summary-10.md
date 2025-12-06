@@ -47,13 +47,13 @@ The project includes:
 
 ### Implementations
 
-#### 1. Simple Implementation (`adler32-simple.c`)
+#### 1. Simple Implementation
 
-This is a straightforward C implementation following the standard Adler-32 algorithm definition. It processes the input data byte by byte, updating two 16-bit accumulators (`a` and `b`) modulo 65521 (the largest prime smaller than 2^16).
+The code in `adler32-simple.c` is a straightforward C implementation following the standard Adler-32 algorithm definition. It processes the input data byte by byte, updating two 16-bit accumulators (`a` and `b`) modulo 65521 (the largest prime smaller than 2^16).
 
-#### 2. NEON-Optimized Implementation (`adler32-neon.c`)
+#### 2. NEON-Optimized Implementation
 
-This implementation leverages ARM NEON SIMD (Single Instruction, Multiple Data) instructions to accelerate the checksum calculation. Key aspects include:
+The code in `adler32-neon.c` leverages ARM NEON SIMD (Single Instruction, Multiple Data) instructions to accelerate the checksum calculation. Key aspects include:
 *   Processing data in blocks (16 bytes at a time).
 *   Using NEON intrinsics (`vld1q_u8`, `vmovl_u8`, `vaddq_u16`, `vpaddlq_u16`, `vmulq_u16`, etc.) to perform parallel operations on data vectors.
 *   Calculating the sums `S1` (sum of bytes) and `S2` (weighted sum) for each block using vector operations.

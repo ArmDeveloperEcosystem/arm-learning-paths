@@ -68,7 +68,7 @@ Now inspect this litmus file to gain a better understanding of the assembly code
   - "On `P1`, is it possible to observe register `W0` (the flag) set to 1 **AND** register `W2` (the payload) set to 0?"
     - Wait...but the condition uses register names `X0` and `X2`, not `W0` and `W2`. See the note below for more.
   - In this condition check syntax, `/\` is a logical **AND**, while `\/` is a logical **OR**.
-#### Note on `X` and `W` Registers:
+#### Note on X and W Registers:
   - Notice you are using `X` registers for storing addresses and for doing the condition check, but `W` registers for everything else.
     - Addresses need to be stored as 64-bit values, hence the need to use `X` registers for the addresses because they are 64-bit. `W` registers are 32-bit. In fact, register `Wn` is the lower 32-bits of register `Xn`.
     - Writing the litmus tests this way is simpler than using all `X` registers. If all `X` registers are used, the data type of each register needs to be declared on additional lines. For this reason, most tests are written as shown above. The way this is done may be changed in the future to reduce potential confusion around the mixed use of `W` and `X` registers, but all of this is functionally correct.
@@ -77,7 +77,7 @@ Before you run this test with `herd7` and `litmus7`, you can hypothesize on what
 
 Further, if you interleave these instructions in all possible permutations, you can figure out all of the possible valid outcomes of registers `X0` (flag) and `X2` (payload) on `P1`. For the example test above, the possible valid outcomes of `(X0,X2)` (or `(flag,data)`) are `(0,0)`, `(0,1)`, & `(1,1)`. Some permutations that result in these valid outcomes are shown below. These are not all the possible instruction permutations for this test. Listing them all would make this section needlessly long.
 
-#### A Permutation That Results in `(0,0)`:
+#### A Permutation That Results in (0,0):
 
 ```output
 (P1)  LDR  W0,  [X1]  # P1 reads flag, gets 0
@@ -89,7 +89,7 @@ Further, if you interleave these instructions in all possible permutations, you 
 ```
 In this permutation of the test execution, `P1` runs to completion before `P0` even starts its execution. For this reason, `P1` observes the initial values of 0 for both the flag and payload.
 
-#### A Permutation That Results in `(0,1)`:
+#### A Permutation That Results in (0,1):
 
 ```output
 (P1)  LDR  W0,  [X1]  # P1 reads flag, gets 0
@@ -101,7 +101,7 @@ In this permutation of the test execution, `P1` runs to completion before `P0` e
 ```
 In this permutation of the test execution, `P1` reads the initial value of the flag (the first line) because this instruction is executed before `P0` writes the flag (the last list). However `P1` reads the payload value of 1 because it executes after `P0` writes the payload to 1 (third and forth lines).
 
-#### A Permutation that Results in `(1,1)`:
+#### A Permutation that Results in (1,1):
 
 ```output
 (P0)  MOV  W0,  #1
@@ -142,7 +142,7 @@ The Arm memory model tends to be considered a Relaxed Consistency model, which m
 
 In a Release Consistency model, ordinary memory accesses like `STR` and `LDR` do not need to follow program order. This relaxation in the ordering rules expands the list of instruction permutations in the litmus test above. It is these additional instruction permutations allowed by the Relaxed Consistency model that yield at least one permutation that results in `(1,0)`. Below is one such example of a permutation. For this permutation, the `LDR` instructions in `P1` are reordered.
 
-#### One Possible Permutation Resulting in `(1,0)`:
+#### One Possible Permutation Resulting in (1,0):
 
 ```output
 (P1)  LDR  W2,  [X3]  # P1 reads payload, gets 0
