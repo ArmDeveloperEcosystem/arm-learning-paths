@@ -1,0 +1,29 @@
+name: Oldest Quarter Workflow
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * */3 *'
+jobs:
+  oldest-quarter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: main
+      - name: Install requirements
+        run: pip install -r tools/requirements.txt
+      - name: Run maintenance for outdates files
+        run: python3 tools/maintenance.py -r 1
+      - name: Run find-oldest-quarter.sh
+        run: tools/find-oldest-quarter.sh
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: oldest-quarter
+          path: oldest-quarter.csv
+      - name: Next step
+        run: |
+          echo "The content list has been uploaded as an artifact.
+          Review the content for this quarter by downloading it"
