@@ -91,13 +91,14 @@ Your scene view will look something like this:
 
 ![Scene view#center](images/sample-project-default-scene-view.PNG "Figure 3. Default scene view of sample project.")
 
+if it doesn't then follow the steps below
 ## Run the project inside the editor
 
 It is worth checking that everything has imported and been built correctly.
 
 1. Close the _Build profiles_ window
 
-1. In the Project tab (usually at the bottom in default configurations) you will see the list of asset files. - add photo
+1. In the Project tab (usually at the bottom in default configurations) you will see the list of asset files. - add photo "bad load"
 
 1. Open the _BurstNeonCollisions_ folder
 
@@ -118,7 +119,7 @@ You will now deploy the sample to your Android device. Your device must already 
 
 1. Tick the _Development Build_ option
 
-1. Select _Add Open Scenes_ to add the demo scene to your _Scenes in Build_ list - check if this is needed
+1. Select _Add Open Scenes_ to add the demo scene to your _Scenes in Build_ list 
 
 1. Plug your Android device into your computer
 
