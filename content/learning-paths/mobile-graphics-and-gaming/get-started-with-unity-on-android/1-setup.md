@@ -58,7 +58,7 @@ Follow these steps if you already have a version of Unity and just need to add t
 
 Android Build Support installs and manages the Android SDK and Android NDK for you. If you ever need to access the SDK or NDK directly, you can find them in the _External Tools_ tab of Unity Editor Preferences (menu option _Edit->Preferences_).
 
-![Android settings in preferences#center](images/unity-prefs-external-tools.png "Figure 6. Android settings in Preferences")
+![Android settings in preferences#center](images/external-tools6.3.png "Figure 6. Android settings in Preferences")
 
 _Note that this will be within a project not the hub_
 
