@@ -1,5 +1,5 @@
 ---
-title: Create an AWS EC2 Arm64 Graviton2 Instance
+title: Create an AWS EC2 Arm64 Graviton Instance
 weight: 3
 
 ### FIXED, DO NOT MODIFY

@@ -6,9 +6,7 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## AWS Graviton2 Arm instances on Amazon EC2
-
-## AWS Graviton Arm Instances on Amazon EC2
+## AWS Graviton Arm instances on Amazon EC2
 
 AWS Graviton is a family of Arm-based processors designed by AWS and built on Arm Neoverse-N1 cores. These instances deliver price-to-performance efficiency, making them suitable for compute-intensive workloads such as CI/CD pipelines, microservices, containerized applications, and data processing tasks.
 
