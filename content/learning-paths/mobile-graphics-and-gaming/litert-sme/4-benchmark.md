@@ -5,33 +5,44 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+Once you have:
+  * A LiteRT model (for example, fc_fp32.tflite), and
+  * The benchmark_model binary built with and without KleidiAI + SME2,
+you can run benchmarks directly on an SME2-capable Android device.
+### Verify SME2 Support on the Device
 
-### Use the benchmark tool
-
-First, you should check if your Android phone supports SME2. You can check it by the following command.
-
+First, you should check if your Android phone supports SME2. 
+On the device (via adb shell), run:
 ``` bash
 cat /proc/cpuinfo
-
+```
+You should see a Features line similar to:
+```output
 ...
 processor	: 7
 BogoMIPS	: 2000.00
 Features	: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm ssbs sb dcpodp sve2 sveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svebf16 i8mm bf16 dgh bti mte ecv afp mte3 sme smei8i32 smef16f32 smeb16f32 smef32f32 wfxt rprfm sme2 smei16i32 smebi32i32 hbc lrcpc3
 ```
-
 As you can see from the `Features`, the CPU 7 supports the SME2.
 
-Then, you can run the `benchmark_model` tool on the CPU that supports the SME2. One of the example is as follows. 
 
-This example uses the `taskset` command to configure the benchmark workload to run on cores 7. It specifies to utilize 1 thread by the option `--num_threads=1`, and running the inferences at least 1000 times by the option `--num_runs=1000`. The CPU is selected. Also, it passes the option `--use_profiler=true` to produce a operator level profiling during inference.
+## Run benchmark_model on an SME2 Core
+
+Next, run the benchmark tool and bind execution to a core that supports SME2.
+In this example, you will pin to CPU 7, use a single thread, and run enough iterations to get stable timing.
 
 ``` bash
 taskset 80 ./benchmark_model --graph=./fc_fp32.tflite --num_runs=1000 --num_threads=1 --use_cpu=true --use_profiler=true
+```
 
+This example uses the `taskset` command to configure the benchmark workload to run on cores 7. It specifies to utilize 1 thread by the option `--num_threads=1`, and running the inferences at least 1000 times by the option `--num_runs=1000`. The CPU is selected. Also, it passes the option `--use_profiler=true` to produce a operator level profiling during inference.
+
+You should see output similar to:
+```output
 ...
 INFO: [litert/runtime/accelerators/auto_registration.cc:148] CPU accelerator registered.
 INFO: [litert/runtime/compiled_model.cc:415] Flatbuffer model initialized directly from incoming litert model.
-INFO: Initialized TensorFlow Lite runtime.
+INFO: Initialized TensorFlow Lite runtime.
 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 VERBOSE: Replacing 1 out of 1 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 0.
 INFO: The input model file size (MB): 3.27774
@@ -90,7 +101,7 @@ Memory (bytes): count=0
 5 nodes observed
 ```
 
-As you can see from the results above, the results include the time spent on model initialization, warm-up, and inference, as well as memory usage. Since the profiler was enabled, the output also reports the execution time of each operator.
+From the results above you will see the time spent on model initialization, warm-up, and inference, as well as memory usage. Since the profiler was enabled, the output also reports the execution time of each operator.
 
 Because the model contains only a single fully connected layer, the node type `Fully Connected (NC, PF32) GEMM` shows the average execution time is 0.382 ms, accounting for 93.171% of the total inference time.
 
@@ -100,13 +111,15 @@ To verify the KleidiAI SME2 micro-kernels are invoked for the Fully Connected op
 
 ## Measure the performance impact of KleidiAI SME2 micro-kernels
 
-To compare the performance of the KleidiAI SME2 implementation with the original XNNPACK implementation, you can run the `benchmark_model` tool without KleidiAI enabled and then benchmark again using the same parameters.
+To compare the performance of the KleidiAI SME2 implementation with the original XNNPACK implementation, you can run the `benchmark_model` tool without KleidiAI enabled using the same parameters.
 
-One example is as follows.
+Run with the same parameters:
 
 ``` bash
 taskset 80 ./benchmark_model --graph=./fc_fp32.tflite --num_runs=1000 --num_threads=1 --use_cpu=true --use_profiler=true
-
+```
+The output should look like:
+```output
 ...
 INFO: [litert/runtime/accelerators/auto_registration.cc:148] CPU accelerator registered.
 INFO: [litert/runtime/compiled_model.cc:415] Flatbuffer model initialized directly from incoming litert model.
@@ -169,6 +182,9 @@ Memory (bytes): count=0
 5 nodes observed
 ```
 
+From these benchmarking results you should notice significant latency reduction and throughput increase when KleidiAI SME2 micro-kernels are enabled.
+
+### Interpreting Node Type Names for KleidiAI 
 As you can see from the results, for the same model, the XNNPACK node type name is different. For the non-KleidiAI implementation, the node type is `Fully Connected (NC, F32) GEMM`, whereas for the KleidiAI implementation, it is `Fully Connected (NC, PF32) GEMM`.
 
 For other operators supported by KleidiAI, the per-operator profiling node types differ between the implementations with and without KleidiAI enabled in XNNPACK as follows:
@@ -188,7 +204,7 @@ For other operators supported by KleidiAI, the per-operator profiling node types
 | Conv2D                                 | Convolution (NHWC, PQS8, QS8, QC8W)                   | Convolution (NHWC, QC8)                                |
 | TransposeConv                          | Deconvolution (NHWC, PQS8, QS8, QC8W)                 | Deconvolution (NC, QS8, QC8W)                          |
 
-As you can see from the list, the letter “P” indicates that the node type corresponds to a KleidiAI implementation.
+The letter “P” in the node type indicates that it corresponds to a KleidiAI implementation.
 
 For example, in `Convolution (NHWC, PQS8, QS8, QC8W)`, this represents a Conv2D operator computation by KleidiAI micro-kernel, where the tensor is in NHWC layout.
 
