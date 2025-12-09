@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## LiteRT, XNNPACK, KleidiAI and SME2
 
-LiteRT (short for Lite Runtime), formerly known as TensorFlow Lite, is a runtime for on-device AI.
+LiteRT (Lite Runtime), formerly known as TensorFlow Lite, is a runtime for on-device AI.
 The default CPU acceleration library used by LiteRT is XNNPACK.
 
 XNNPACK is an open-source library that provides highly optimized implementations of neural-network operators. It continuously integrates KleidiAI library to leverage new CPU features such as SME2.

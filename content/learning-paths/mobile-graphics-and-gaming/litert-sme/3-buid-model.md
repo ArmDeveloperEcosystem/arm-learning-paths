@@ -8,11 +8,13 @@ layout: learningpathall
 
 ### KleidiAI SME2 support in LiteRT
 
+LiteRT uses XNNPACK as its default CPU backend. KleidiAI micro-kernels are integrated through XNNPACK in LiteRT.
 Only a subset of KleidiAI SME, SME2 micro-kernels has been integrated into XNNPACK.
 These micro-kernels support operators using the following data types and quantization configurations in the LiteRT model.
 Other operators are using XNNPACK’s default implementation during the inference.
 
-* Fully connected 
+Fully connected:
+
 | Activations                  | Weights                                 | Output                       |
 | ---------------------------- | --------------------------------------- | ---------------------------- |
 | FP32                         | FP32                                    | FP32                         |
@@ -21,15 +23,16 @@ Other operators are using XNNPACK’s default implementation during the inferenc
 | Asymmetric INT8 quantization | Per-channel symmetric INT8 quantization | Asymmetric INT8 quantization |
 | FP32                         | Per-channel symmetric INT4 quantization | FP32                         |
 
-* Batch Matrix Multiply
+Batch Matrix Multiply:
+
 | Input A | Input B                                 |
 | ------- | --------------------------------------- |
 | FP32    | FP32                                    |
 | FP16    | FP16                                    |   
 | FP32    | Per-channel symmetric INT8 quantization |
 
+Conv2D:
 
-* Conv2D
 | Activations                  | Weights                                               | Output                       |
 | ---------------------------- | ----------------------------------------------------- | ---------------------------- |
 | FP32                         | FP32, pointwise (kernerl size is 1)                   | FP32                         |
@@ -38,15 +41,24 @@ Other operators are using XNNPACK’s default implementation during the inferenc
 | Asymmetric INT8 quantization | Per-channel or per-tensor symmetric INT8 quantization | Asymmetric INT8 quantization |
 
 
-* TransposeConv
+TransposeConv:
+
 | Activations                  | Weights                                               | Output                       |
 | ---------------------------- | ----------------------------------------------------- | ---------------------------- |
 | Asymmetric INT8 quantization | Per-channel or per-tensor symmetric INT8 quantization | Asymmetric INT8 quantization |
 
 
-### Create LiteRT models by Keras
+### Create LiteRT models using Keras
+To demonstrate SME2 acceleration on Android, you will construct simple single-layer models (e.g., Fully Connected) using Keras and convert them into LiteRT (.tflite) format.
+This allows you to benchmark isolated operators and directly observe SME2 improvements.
 
-To evaluate the performance of SME2 acceleration per operator, the following script is provided as an example. It uses the Keras to create a simple model containing only a single fully connected operator and convert it into the LiteRT model.
+Install the tensorflow package dependency for your script:
+
+```bash
+sudo pip3 install tensorflow
+```
+
+Save the following script as an example in a file named `model.py`:
 
 ``` python
 import tensorflow as tf
@@ -74,9 +86,23 @@ fc_fp32 = converter.convert()
 save_litert_model(fc_fp32, "fc_fp32.tflite")
 ```
 
-The model above is created in FP32 format. As mentioned in the previous section, this operator can invoke the KleidiAI SME2 micro-kernel for acceleration.
+Now run the script:
+
+```bash
+python3 model.py
+```
+
+The model `fc_fp32.tflite` is created in FP32 format. As mentioned in the previous section, this operator can invoke the KleidiAI SME2 micro-kernel for acceleration. 
+
+You can then use ADB to push the model for benchmarking to your Android device.
+```bash
+adb push fc_fp32.tflite /data/local/tmp/
+adb shell chmod +x /data/local/tmp/fc_fp32.tflite
+```
 
 You can also optimize this Keras model using post-training quantization to create a LiteRT model that suits your requirements.
+
+## Post-Training Quantization Options
 
 * Post-training FP16 quantization
 ``` python
