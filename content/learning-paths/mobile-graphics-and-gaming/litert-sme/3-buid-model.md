@@ -13,7 +13,8 @@ Only a subset of KleidiAI SME, SME2 micro-kernels has been integrated into XNNPA
 These micro-kernels support operators using the following data types and quantization configurations in the LiteRT model.
 Other operators are using XNNPACK’s default implementation during the inference.
 
-* Fully connected 
+Fully connected:
+
 | Activations                  | Weights                                 | Output                       |
 | ---------------------------- | --------------------------------------- | ---------------------------- |
 | FP32                         | FP32                                    | FP32                         |
@@ -22,15 +23,16 @@ Other operators are using XNNPACK’s default implementation during the inferenc
 | Asymmetric INT8 quantization | Per-channel symmetric INT8 quantization | Asymmetric INT8 quantization |
 | FP32                         | Per-channel symmetric INT4 quantization | FP32                         |
 
-* Batch Matrix Multiply
+Batch Matrix Multiply:
+
 | Input A | Input B                                 |
 | ------- | --------------------------------------- |
 | FP32    | FP32                                    |
 | FP16    | FP16                                    |   
 | FP32    | Per-channel symmetric INT8 quantization |
 
+Conv2D:
 
-* Conv2D
 | Activations                  | Weights                                               | Output                       |
 | ---------------------------- | ----------------------------------------------------- | ---------------------------- |
 | FP32                         | FP32, pointwise (kernerl size is 1)                   | FP32                         |
@@ -39,7 +41,8 @@ Other operators are using XNNPACK’s default implementation during the inferenc
 | Asymmetric INT8 quantization | Per-channel or per-tensor symmetric INT8 quantization | Asymmetric INT8 quantization |
 
 
-* TransposeConv
+TransposeConv:
+
 | Activations                  | Weights                                               | Output                       |
 | ---------------------------- | ----------------------------------------------------- | ---------------------------- |
 | Asymmetric INT8 quantization | Per-channel or per-tensor symmetric INT8 quantization | Asymmetric INT8 quantization |
@@ -48,7 +51,7 @@ Other operators are using XNNPACK’s default implementation during the inferenc
 ### Create LiteRT models using Keras
 To demonstrate SME2 acceleration on Android, you will construct simple single-layer models (e.g., Fully Connected) using Keras and convert them into LiteRT (.tflite) format.
 This allows you to benchmark isolated operators and directly observe SME2 improvements.
-The following script is provided as an example:
+Use the following script as an example:
 
 ``` python
 import tensorflow as tf
