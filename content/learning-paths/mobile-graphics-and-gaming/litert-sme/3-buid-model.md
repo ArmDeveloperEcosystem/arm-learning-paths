@@ -51,7 +51,14 @@ TransposeConv:
 ### Create LiteRT models using Keras
 To demonstrate SME2 acceleration on Android, you will construct simple single-layer models (e.g., Fully Connected) using Keras and convert them into LiteRT (.tflite) format.
 This allows you to benchmark isolated operators and directly observe SME2 improvements.
-Use the following script as an example:
+
+Install the tensorflow package dependency for your script:
+
+```bash
+sudo pip3 install tensorflow
+```
+
+Save the following script as an example in a file named `model.py`:
 
 ``` python
 import tensorflow as tf
@@ -77,6 +84,12 @@ model = tf.keras.Sequential([
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
 fc_fp32 = converter.convert()
 save_litert_model(fc_fp32, "fc_fp32.tflite")
+```
+
+Now run the script:
+
+```bash
+python3 model.py
 ```
 
 The model `fc_fp32.tflite` is created in FP32 format. As mentioned in the previous section, this operator can invoke the KleidiAI SME2 micro-kernel for acceleration.
