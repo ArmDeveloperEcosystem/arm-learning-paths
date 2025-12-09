@@ -76,7 +76,7 @@ fc_fp32 = converter.convert()
 save_litert_model(fc_fp32, "fc_fp32.tflite")
 ```
 
-The model above is created in FP32 format. As mentioned in the previous section, this operator can invoke the KleidiAI SME2 micro-kernel for acceleration.
+The model `fc_fp32.tflite` is created in FP32 format. As mentioned in the previous section, this operator can invoke the KleidiAI SME2 micro-kernel for acceleration.
 
 You can also optimize this Keras model using post-training quantization to create a LiteRT model that suits your requirements.
 
