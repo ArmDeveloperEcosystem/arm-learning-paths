@@ -54,6 +54,20 @@ The first install is usually slower because of following reasons:
 
 This warm-up ensures the real benchmark measures Helm performance, not setup overhead.
 
+You should see output (near the top of the output) that is simlar to:
+```output
+NAME: warmup
+LAST DEPLOYED: Tue Dec  9 21:10:44 2025
+NAMESPACE: helm-bench
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: nginx
+CHART VERSION: 22.3.3
+APP VERSION: 1.29.3
+```
+
 **After validation, remove the warm-up deployment:**
 
 ```console
@@ -89,9 +103,9 @@ What this measures:
 
 You should see an output similar to:
 ```output
-real 0m4.109s
-user 0m12.178s
-sys 0m0.470s
+real    0m3.998s
+user    0m12.798s
+sys     0m0.339s
 ```
 
 ### Verify Deployments
@@ -134,11 +148,9 @@ What this measures:
 
 You should see an output similar to:
 ```output
-WARNING: There are "resources" sections in the chart not set. Using "resourcesPreset" is not recommended for production. 
-For production installations, please set the following values according to your workload needs: - cloneStaticSiteFromGit.gitSync.resources - resources +info https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/ 
-real 0m12.758s
-user 0m7.360s
-sys 0m0.227s
+real    0m12.924s
+user    0m7.333s
+sys     0m0.312s
 ```
 
 ### Metrics to Record
@@ -148,24 +160,13 @@ sys 0m0.227s
 - **Failures**: Any Helm failures or Kubernetes API errors.
 - **Pod readiness delay**: Time pods take to become Ready (resource pressure)
 
-### Benchmark summary on x86_64
-To compare the benchmark results, the following results were collected by running the same benchmark on an `x86 - c4-standard-4` (4 vCPUs, 15 GB Memory) x86_64 VM in GCP, running SUSE:
-
-| Test Case                    | Parallel Installs | `--wait` Used | Timeout | Total Time (real) |
-| ---------------------------- | ----------------- | ------------- | ------- | ----------------- |
-| Parallel Install (No Wait)   | 5                 | No          | 10m     | **6.06 s**        |
-| Parallel Install (With Wait) | 3                 | Yes         | 15m     | **14.41 s**       |
-
-
-### Benchmark summary on Arm64
+### Benchmark summary
 Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
 
 | Test Case                    | Parallel Installs | `--wait` Used | Timeout | Total Time (real) |
 | ---------------------------- | ----------------- | ------------- | ------- | ----------------- |
-| Parallel Install (No Wait)   | 5                 |  No          | 10m     | **4.11 s**        |
-| Parallel Install (With Wait) | 3                 | Yes         | 15m     | **12.76 s**       |
-
-### Helm Benchmark comparison insights
+| Parallel Install (No Wait)   | 5                 |  No          | 10m     | **3.99 s**        |
+| Parallel Install (With Wait) | 3                 | Yes         | 15m     | **12.92 s**       |
 
 - **Arm64 shows faster Helm execution** for both warm and ready states, indicating efficient CLI and Kubernetes API handling on Arm-based GCP instances.
 - **The `--wait` flag significantly increases total execution time** because Helm waits for pods and services to reach a Ready state, revealing scheduler latency and image-pull delays rather than Helm CLI overhead.

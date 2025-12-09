@@ -17,6 +17,36 @@ sudo zypper refresh
 sudo zypper update -y
 sudo zypper install -y curl git tar gzip
 ```
+### Enable SUSE Containers Module
+This enables SUSE’s official container support, so Docker and container tools can work properly.
+``` console
+sudo SUSEConnect -p sle-module-containers/15.5/arm64
+sudo SUSEConnect --list-extensions | grep Containers
+```
+You should see "Activated" as part of the output from the above commands. 
+
+### Install Docker
+Docker is required to run KinD and Kubernetes components as containers. This step installs Docker, starts it, and allows your user to run Docker without sudo.
+``` console
+sudo zypper refresh
+sudo zypper install -y docker
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
+exit
+```
+
+Next, re-open a new shell into your VM and type the following:
+
+```console
+docker ps
+```
+
+You should see the following output:
+
+```output
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+```
+
 ### Install kubectl
 This step installs kubectl, the command-line tool used to interact with Kubernetes clusters, compiled for the Arm64 architecture.
 
@@ -44,7 +74,9 @@ Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
 This step installs Helm using the official Helm installation script, ensuring you get a verified and up-to-date release.
 
 ```console
-curl -sSfL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | console
+curl -sSfL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
+chmod 755 ./get_helm.sh
+./get_helm.sh
 ```
 
 ### Verify Installation
@@ -88,6 +120,6 @@ You should see an output similar to:
 NAME                     STATUS   ROLES           AGE   VERSION
 helm-lab-control-plane   Ready    control-plane   23h   v1.34.0
 ```
-The node should be in the **Ready** state.
+The node should be in the **Ready** state. If not, please retry the command again. 
 
 You now have a fully working local Kubernetes environment on Arm64, ready for deploying applications using Helm.
