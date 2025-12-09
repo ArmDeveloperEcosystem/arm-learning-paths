@@ -3,6 +3,10 @@ title: Deploy Helm on Google Cloud C4A (Arm-based Axion VMs)
 
 minutes_to_complete: 30
 
+draft: true
+cascade:
+    draft: true
+
 who_is_this_for: This learning path is intended for software developers deploying and optimizing Helm on Linux/Arm64 environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
 
 learning_objectives:
