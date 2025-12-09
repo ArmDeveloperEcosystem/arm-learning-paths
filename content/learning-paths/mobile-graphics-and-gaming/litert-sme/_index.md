@@ -7,7 +7,7 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for developers looking to leverage the SME2 instrutions to accelerate LiteRT models inference on Android.
+who_is_this_for: This is an advanced topic for developers looking to leverage the Arm's Scalable Matrix Extension Version 2 (SME2) instructions to accelerate LiteRT models inference on Android.
 
 learning_objectives: 
     - Understand how KleidiAI works in LiteRT.
@@ -17,8 +17,8 @@ learning_objectives:
 
 
 prerequisites:
-    - A Linux development machine.
-    - An Android device that supports the SME2 Arm architecture features.
+    - An x86_64 Linux development machine.
+    - An Android device that supports the Arm SME2 architecture features.
 
 author: Jiaming Guo
 
