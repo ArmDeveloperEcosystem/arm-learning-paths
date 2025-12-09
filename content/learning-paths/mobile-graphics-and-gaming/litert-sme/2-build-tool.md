@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-### Build the LiteRT benchamrk tool with KleidiAI and SME2 enabled
+### Build the LiteRT benchmark tool with KleidiAI and SME2 enabled
 
 LiteRT provides provides a standalone performance measurement utility called `benchmark_model` for evaluating the performance of LiteRT models. 
 
