@@ -182,7 +182,7 @@ Memory (bytes): count=0
 5 nodes observed
 ```
 
-From these benchmarking results you should notice significant latency reduction and throughput increase when KleidiAI SME2 micro-kernels are enabled.
+From these benchmarking results you should notice significant throughput uplift and speedup in inference time when KleidiAI SME2 micro-kernels are enabled.
 
 ### Interpreting Node Type Names for KleidiAI 
 As you can see from the results, for the same model, the XNNPACK node type name is different. For the non-KleidiAI implementation, the node type is `Fully Connected (NC, F32) GEMM`, whereas for the KleidiAI implementation, it is `Fully Connected (NC, PF32) GEMM`.
@@ -211,3 +211,5 @@ For example, in `Convolution (NHWC, PQS8, QS8, QC8W)`, this represents a Conv2D 
 * The input is packed INT8 quantized,
 * The weights are per-channel INT8 quantized,
 * The output is INT8 quantized.
+
+By comparing benchmark_model runs with and without KleidiAI + SME2, and inspecting the profiled node types (PF32, PF16, QP8, PQS8), you can reliably confirm that LiteRT is dispatching to SME2-optimized KleidiAI micro-kernels and quantify their performance impact on your Android device.
