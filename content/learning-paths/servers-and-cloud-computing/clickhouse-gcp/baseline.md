@@ -165,4 +165,10 @@ Query id: b3db69f8-c885-419f-9900-53d258f0b996
 Peak memory usage: 785.05 KiB.
 ```
 
+Exit the client:
+
+```console
+exit;
+```
+
 The baseline tests confirm that ClickHouse is stable, functional, and performing efficiently on the Arm64 VM. With core operations validated, the setup is now ready for detailed performance benchmarking.
