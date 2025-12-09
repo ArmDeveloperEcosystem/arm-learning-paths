@@ -1,18 +1,15 @@
 ---
-title: Deploy Couchbase on Google Cloud C4A (Arm-based Axion VMs)
+title: Deploy Couchbase on Google Cloud C4A
 
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is intended for software developers deploying and optimizing Couchbase  workloads on Arm Linux environments, specifically using Google Cloud C4A virtual machines powered by Axion processors. 
+who_is_this_for: This is an introductory topic for developers deploying Couchbase workloads on Arm Linux environments, specifically using Google Cloud C4A virtual machines (VM) powered by Axion processors. 
 
 learning_objectives:
-  - Provision an Arm-based SUSE SLES virtual machine on Google Cloud (C4A with Axion processors)
+  - Provision an Arm-based SUSE Linux Enterprise Server (SLES) virtual machine on Google Cloud (C4A with Axion processors)
   - Install Couchbase Server on the SUSE Arm64 (C4A) instance
-  - Verify Couchbase deployment by accessing the Web Console, creating a test bucket, and confirming cluster health 
+  - Verify Couchbase deployment by accessing the web console, creating a test bucket, and confirming cluster health 
   - Benchmark Couchbase by measuring operations per second (ops/sec), memory utilization, and disk performance on the Arm platform
 
 prerequisites:
