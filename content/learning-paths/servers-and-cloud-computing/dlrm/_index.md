@@ -14,6 +14,7 @@ prerequisites:
     - Any [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider (CSP), or an on-premise Arm server with at least 400GB of RAM and 800 GB of disk space.
 
 author: 
+    - Phalani Paladugu
     - Annie Tallund
     - Pareena Verma
 
