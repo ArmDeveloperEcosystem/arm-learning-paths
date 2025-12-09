@@ -14,7 +14,7 @@ This section walks you through validating your self-hosted CircleCI runner on an
 Start by creating a GitHub repository dedicated to verifying your Arm64 runner:
 
 ```console
-git clone https://github.com/<your_repo_name/aws-circleci/
+git clone https://github.com/<your-username>/aws-circleci/
 cd aws-circleci
 ```
 This repository serves as a sandbox to confirm that your CircleCI runner can pick up and run jobs for Arm64 workflows.
@@ -34,8 +34,14 @@ echo 'echo "Hello from CircleCI Arm64 Runner!"' > hello.sh
 chmod +x hello.sh
 ```
 
-## Define the CircleCI configuration
-Now create a `.circleci/config.yml` file to define the workflow that runs on your Arm64 runner:
+### Define the CircleCI Configuration
+The next step is to add a `.circleci/config.yml` file to define the workflow that will run on your Arm64 runner. Start by creating the directory in your new repository.
+
+```bash
+mkdir .circleci
+```
+
+Then enter the YAML content:
 
 ```yaml
 version: 2.1
@@ -44,7 +50,7 @@ jobs:
   test-Arm64:
     machine:
       enabled: true
-    resource_class: your-namespace/Arm64-linux   # Replace with your actual resource class
+    resource_class: circleci/arm64   # Replace with your actual resource class
     steps:
       - checkout
       - run:
@@ -66,45 +72,35 @@ workflows:
     jobs:
       - test-Arm64
 ```
-This configuration does the following:
 
-- Defines a single job called `test-Arm64` that uses a machine executor on your self-hosted Arm64 runner
-- Verifies the runner's architecture by running `uname -m` and checking the output of `lscpu`
-- Runs the `hello.sh` script to confirm the runner can execute commands
-- Performs a sample computation step that displays CPU information and prints a success message
+{{% notice Resource Class %}}
+In the snippet above, you need to replace the `resource_class` variable with the name you defined in the previous section.
+{{% /notice %}}
 
-Each step helps you confirm that your CircleCI Arm64 runner is set up correctly and ready to process jobs.
 
-## Commit and push to GitHub
-After you create `hello.sh` and `.circleci/config.yml`, push your project to GitHub so CircleCI can build and verify your Arm64 runner:
+This snippet:
+- Defines a single job `test-Arm64` using a machine executor on a self-hosted Arm64 runner.  
+- Checks CPU architecture with `uname -m` and `lscpu` to verify the runner.  
+- Executes a simple script `hello.sh` to confirm the runner can run commands.  
+- Runs a sample computation step to display CPU info and print.
 
-```console
+### Commit and Push to GitHub
+When the files you created (`hello.sh`, `.circleci/config.yml`) are ready, push your project to GitHub so CircleCI can build and verify the Arm64 runner automatically.
+
+
+```bash
 git add .
 git commit -m "Initial CircleCI Arm64 test"
+```
+
+If you haven't already, you need to configure your GitHub credentials before pushing. Once that is done, run the following to upstream your changes:
+
+```bash
 git branch -M main
 git push -u origin main
 ```
 
-Here's what each command does:
-- git add . — stages all your files for commit
-- git commit -m ... — saves your changes with a message
-- git branch -M main — sets your branch to main (if it's not already)
-- git push -u origin main — pushes your code to GitHub
-
-Once your code is on GitHub, CircleCI can start running your workflow automatically.
-## Start the CircleCI runner and run your job
-
-Before you test your workflow, make sure your CircleCI runner is enabled and running. This lets your self-hosted runner pick up jobs from CircleCI:
-
-```console
-sudo systemctl enable circleci-runner
-sudo systemctl start circleci-runner
-sudo systemctl status circleci-runner
-```
-- Enable the runner so it starts automatically when your machine boots
-- Start the runner and check its status to confirm it is running
-
-After you push your code to GitHub, go to your CircleCI Dashboard and select Projects. Look for your test-Arm64 workflow and check that it is running on your self-hosted runner.
+After pushing your code to GitHub, open your CircleCI Dashboard → Projects, and confirm that your test-Arm64 workflow starts running using your self-hosted runner.
 
 If everything is set up correctly, you’ll see your job running under the resource class you created.
 

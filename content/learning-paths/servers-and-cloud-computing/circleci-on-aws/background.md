@@ -1,18 +1,16 @@
 ---
-title: Get Started with CircleCI on AWS Graviton2
+title: Get Started with CircleCI on AWS Graviton
 
 weight: 2
 
 layout: "learningpathall"
 ---
 
-## AWS Graviton2 Arm instances on Amazon EC2
+## AWS Graviton Arm instances on Amazon EC2
 
-AWS Graviton2 is a family of Arm-based processors designed by AWS and built on Arm Neoverse-N1 cores. These instances deliver exceptional price-to-performance efficiency, making them ideal for compute-intensive workloads such as CI/CD pipelines, microservices, containerized applications, and data processing tasks.
+AWS Graviton is a family of Arm-based processors designed by AWS and built on Arm Neoverse-N1 cores. These instances deliver price-to-performance efficiency, making them suitable for compute-intensive workloads such as CI/CD pipelines, microservices, containerized applications, and data processing tasks.
 
-Graviton2-powered EC2 instances provide high performance and energy efficiency compared to traditional x86-based instances while maintaining compatibility with popular Linux distributions and open-source software stacks.
-
-To learn more about AWS Graviton processors, see the [AWS Graviton2 Processor Overview](https://aws.amazon.com/ec2/graviton/).
+Graviton-powered EC2 instances provide high performance and energy efficiency while maintaining compatibility with popular Linux distributions and open-source software stacks.
 
 ## CircleCI
 
@@ -22,7 +20,7 @@ It seamlessly integrates with popular version control systems such as GitHub, Bi
 
 CircleCI supports multiple execution environments, including Docker, Linux, macOS, and Windows, while providing advanced capabilities like parallel job execution, build caching, and matrix builds for optimized performance.
 
-It is widely adopted by development teams to accelerate build cycles, enforce code quality, automate testing, and streamline application delivery.  
+It is widely adopted by development teams to accelerate build cycles, enforce code quality, automate testing, and streamline application delivery.
 
-To learn more, visit the [CircleCI website](https://circleci.com/) and the [CircleCI documentation](https://circleci.com/docs/).
+Continue to the next section to set up your Graviton instance that you will use to run CircleCI workloads.
 
