@@ -249,17 +249,7 @@ localhost:9000, queries: 5, QPS: 20.935, RPS: 10467305.309, MiB/s: 79.859, resul
 - **Result RPS / Result MiB/s:** Reflects the size and rate of returned query results. Low values are expected for aggregate queries like `COUNT(*)`.
 - **Insert Benchmark Metrics:** Write tests measure ingestion speed and stability, where consistent latency indicates reliable bulk insert performance.
 
-### Benchmark summary on x86_64
-To compare the benchmark results, the following results were collected by running the same benchmark on an `x86 - c4-standard-4` (4 vCPUs, 15 GB Memory) x86_64 VM in GCP, running SUSE:
-
-| Test Category           | Test Case      | Query / Operation                                                                  | Iterations | Concurrency | QPS    | Rows / sec (RPS) | Throughput (MiB/s) | p50 Latency | p95 Latency | p99 Latency |
-| ----------------------- | -------------- | ---------------------------------------------------------------------------------- | ---------- | ----------- | ------ | ---------------- | ------------------ | ----------- | ----------- | ----------- |
-| Read                    | Filtered COUNT | `SELECT COUNT(*) FROM bench.hits WHERE url LIKE '/page/%'`                         | 10         | 1           | 63.22  | 63.22 M          | 958.68             | 4 ms        | 6 ms        | 6 ms        |
-| Read / Aggregate        | GROUP BY       | `SELECT url, COUNT(*) FROM bench.hits GROUP BY url`                                | 10         | 2           | 67.23  | 67.23 M          | 1019.43            | 7 ms        | 8 ms        | 8 ms        |
-| Read (High Concurrency) | Filtered COUNT | `SELECT COUNT(*) FROM bench.hits WHERE user_id % 10 = 0`                           | 20         | 8           | 102.54 | 102.54 M         | 782.31             | 23 ms       | 54 ms       | 60 ms       |
-| Write                   | Bulk Insert    | `INSERT INTO bench.hits SELECT now(), rand64(), '/benchmark' FROM numbers(500000)` | 5          | 4           | 22.09  | 11.04 M          | 84.25              | 80 ms       | 81 ms       | 81 ms       |
-
-### Benchmark summary on Arm64
+### Benchmark summary
 Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
 
 | Test Category           | Test Case      | Query / Operation                      | Iterations | Concurrency |   QPS | Rows / sec (RPS) | Throughput (MiB/s) | p50 Latency | p95 Latency | p99 Latency |
@@ -268,8 +258,6 @@ Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm6
 | Read / Aggregate        | GROUP BY       | `GROUP BY url`                         |         10 |           2 | 67.15 |          67.15 M |            1018.25 |        7 ms |        8 ms |        8 ms |
 | Read (High Concurrency) | Filtered COUNT | `COUNT(*) WHERE user_id % 10 = 0`      |         20 |           8 | 99.72 |          99.72 M |             760.83 |       29 ms |       63 ms |       78 ms |
 | Write                   | Bulk Insert    | `INSERT SELECT … FROM numbers(500000)` |          5 |           4 | 20.94 |          10.47 M |              79.86 |       68 ms |       73 ms |       73 ms |
-
-### ClickHouse Benchmark comparison insights
 
 - **High Read Throughput:** Simple filtered reads and aggregations achieved over **63–67 million rows/sec**, demonstrating strong scan and aggregation performance on Arm64.
 - **Scales Under Concurrency:** At higher concurrency (8 clients), the system sustained nearly **100 million rows/sec**, showing efficient parallel execution and CPU utilization.

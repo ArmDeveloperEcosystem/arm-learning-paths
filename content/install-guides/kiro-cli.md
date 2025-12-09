@@ -206,94 +206,62 @@ Use the arrow keys to select the model you want to use.
 
 You can ask Kiro to set the default model for future sessions.
 
-## Install an MCP server
+## Install a local MCP server
 
-As an example of using MCP with Kiro, you can configure a local GitHub MCP server.
+The Arm MCP Server is an MCP server providing AI assistants with tools and knowledge for Arm architecture development, migration, and optimization. This section shows how to configure the Arm MCP server locally using Docker.
 
-Go to your GitHub account developer settings and create a personal access token with the following permissions:
+First, pull the MCP server image to your local machine:
 
-- `repo` (Full control of private repositories)
-- `read:org` (Read organization membership)
-- `read:user` (Read user profile data)
+```console
+docker pull armlimited/arm-mcp:latest
+```
 
-Use an editor to add the content below to the file `$HOME/.kiro/settings/mcp.json`:
+You also need Docker running on the system. See the [Docker install guide](/install-guides/docker/) for instructions.
+
+### How do I configure the Arm MCP server?
+
+Modify the file `~/.kiro/settings/mcp.json` to add the Arm MCP server via a Docker container.
+
+To analyze a local codebase, use a `-v` command to mount a volume to the Arm MCP server `/workspace` folder so it can access code you want to analyze with migrate-ease and other tools.
+
+Replace the path `/Users/yourname01/yourlocalcodebase` with the path to your local codebase:
 
 ```json
 {
   "mcpServers": {
-    "github": {
+    "arm_mcp_server": {
       "command": "docker",
       "args": [
         "run",
-        "-i",
         "--rm",
-        "-e",
-        "GITHUB_PERSONAL_ACCESS_TOKEN",
-        "ghcr.io/github/github-mcp-server"
+        "-i",
+        "-v", "/Users/yourname01/yourlocalcodebase:/workspace",
+        "--name", "arm-mcp",
+        "armlimited/arm-mcp:latest"
       ],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "<your-github-pat>"
-      },
-      "disabled": false,
-      "autoApprove": []
+      "env": {},
+      "timeout": 60000
     }
   }
 }
 ```
 
-Replace `<your-github-pat>` with your GitHub personal access token.
+### How do I verify the Arm MCP server is working?
 
-You also need Docker running on the system. See the [Docker install guide](/install-guides/docker/) for instructions.
-
-Restart `kiro-cli` with the new MCP configuration:
+Start Kiro CLI chat from your local shell and list the tools from the MCP server to verify it is working:
 
 ```console
 kiro-cli chat
 ```
 
-The output shows the GitHub MCP server loaded and running:
+Use the `/tools` command to list the available tools:
 
-```output
-✓ github loaded in 0.16 s
-✓ 1 of 1 mcp servers initialized.
-
+```console
+/tools
 ```
 
-You can now use the GitHub MCP server to interact with GitHub repositories and do things like:
+You should see the Arm MCP server tools listed in the output. If the arm-mcp server says it's still loading, wait a moment and run `/tools` again.
 
-**Repository Management**
-- Create new repositories
-- Fork existing repositories
-- List branches and tags
-- Create new branches
-
-**Code Management**
-- Get file contents from repositories
-- Create or update files
-- Delete files
-- Push multiple files in a single commit
-- Search code across repositories
-
-**Pull Requests**
-- Create pull requests
-- List pull requests
-- Get pull request details
-- Update pull requests
-- Merge pull requests
-- Review pull requests
-- Request GitHub Copilot reviews
-- Get pull request files and comments
-
-**Issues**
-- Create issues
-- List issues
-- Get issue details
-- Update issues
-- Add comments to issues
-- Search issues
-
-**Commits**
-- List commits
-- Get commit details
+If you are facing issues or have questions, reach out to mcpserver@arm.com.
 
 You're ready to use Kiro CLI.
