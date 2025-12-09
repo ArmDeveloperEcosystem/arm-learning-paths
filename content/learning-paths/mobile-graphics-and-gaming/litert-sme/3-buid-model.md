@@ -8,6 +8,7 @@ layout: learningpathall
 
 ### KleidiAI SME2 support in LiteRT
 
+LiteRT uses XNNPACK as its default CPU backend. KleidiAI micro-kernels are integrated through XNNPACK in LiteRT.
 Only a subset of KleidiAI SME, SME2 micro-kernels has been integrated into XNNPACK.
 These micro-kernels support operators using the following data types and quantization configurations in the LiteRT model.
 Other operators are using XNNPACK’s default implementation during the inference.
@@ -44,9 +45,10 @@ Other operators are using XNNPACK’s default implementation during the inferenc
 | Asymmetric INT8 quantization | Per-channel or per-tensor symmetric INT8 quantization | Asymmetric INT8 quantization |
 
 
-### Create LiteRT models by Keras
-
-To evaluate the performance of SME2 acceleration per operator, the following script is provided as an example. It uses the Keras to create a simple model containing only a single fully connected operator and convert it into the LiteRT model.
+### Create LiteRT models using Keras
+To demonstrate SME2 acceleration on Android, you will construct simple single-layer models (e.g., Fully Connected) using Keras and convert them into LiteRT (.tflite) format.
+This allows you to benchmark isolated operators and directly observe SME2 improvements.
+The following script is provided as an example:
 
 ``` python
 import tensorflow as tf
@@ -77,6 +79,8 @@ save_litert_model(fc_fp32, "fc_fp32.tflite")
 The model above is created in FP32 format. As mentioned in the previous section, this operator can invoke the KleidiAI SME2 micro-kernel for acceleration.
 
 You can also optimize this Keras model using post-training quantization to create a LiteRT model that suits your requirements.
+
+## Post-Training Quantization Options
 
 * Post-training FP16 quantization
 ``` python
