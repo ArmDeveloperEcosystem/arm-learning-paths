@@ -18,7 +18,7 @@ learning_objectives:
 
 prerequisites:
     - An x86_64 Linux development machine.
-    - An Android device that supports the Arm SME2 architecture features.
+    - An Android device that supports the Arm SME2 architecture features - see the list of [devices with SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices)
 
 author: Jiaming Guo
 
