@@ -92,7 +92,13 @@ Now run the script:
 python3 model.py
 ```
 
-The model `fc_fp32.tflite` is created in FP32 format. As mentioned in the previous section, this operator can invoke the KleidiAI SME2 micro-kernel for acceleration.
+The model `fc_fp32.tflite` is created in FP32 format. As mentioned in the previous section, this operator can invoke the KleidiAI SME2 micro-kernel for acceleration. 
+
+You can then use ADB to push the model for benchmarking to your Android device.
+```bash
+adb push fc_fp32.tflite /data/local/tmp/
+adb shell chmod +x /data/local/tmp/fc_fp32.tflite
+```
 
 You can also optimize this Keras model using post-training quantization to create a LiteRT model that suits your requirements.
 
