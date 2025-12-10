@@ -43,15 +43,6 @@ subjects:
     - ML
     - CI-CD
     - Performance and Architecture
-  iot:
-    - ML
-    - CI-CD
-    - Performance and Architecture
-    - Containers and Virtualization
-    - Security
-    - Libraries
-    - Virtual Hardware
-    - Embedded Linux
   embedded-and-microcontrollers:
     - ML
     - CI-CD

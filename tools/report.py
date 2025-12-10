@@ -13,7 +13,6 @@ dname = ["content/install-guides",
          "content/learning-paths/cross-platform",
          "content/learning-paths/laptops-and-desktops",
          "content/learning-paths/embedded-and-microcontrollers",
-         "content/learning-paths/iot",
          "content/learning-paths/mobile-graphics-and-gaming",
          "content/learning-paths/servers-and-cloud-computing",
          "content/learning-paths/automotive"]
@@ -125,13 +124,6 @@ def init_graph(title):
                     "y": [],
                     "type": "bar",
                     "name": "learning-paths/embedded-and-microcontrollers",
-                    "xaxis": "x2"
-                },
-                {
-                    "x": [],
-                    "y": [],
-                    "type": "bar",
-                    "name": "learning-paths/iot",
                     "xaxis": "x2"
                 },
                 {
