@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 3
-- Linux: 200
+- Linux: 202
 - macOS: 13
 - Windows: 14
 pinned_modules:
@@ -19,8 +19,8 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 11
-- Containers and Virtualization: 35
-- Databases: 22
+- Containers and Virtualization: 36
+- Databases: 23
 - Libraries: 9
 - ML: 34
 - Performance and Architecture: 74
@@ -66,9 +66,8 @@ tools_software_languages_filter:
 - Azure: 1
 - Azure CLI: 2
 - Azure Portal: 1
-- Bash: 1
+- Bash: 2
 - bash: 2
-- Bash/Shell scripting: 1
 - Bastion: 3
 - BOLT: 2
 - bpftool: 1
@@ -84,7 +83,8 @@ tools_software_languages_filter:
 - Clair: 1
 - Clang: 13
 - ClickBench: 1
-- ClickHouse: 1
+- ClickHouse: 2
+- clickhouse-benchmark: 1
 - Cloud Build: 1
 - CMake: 1
 - conda: 1
@@ -125,7 +125,7 @@ tools_software_languages_filter:
 - Google Test: 1
 - Gunicorn: 1
 - HammerDB: 1
-- Helm: 2
+- Helm: 3
 - Herd7: 1
 - Hiera: 1
 - Hugging Face: 12
@@ -140,9 +140,9 @@ tools_software_languages_filter:
 - KEDA: 1
 - Kedify: 1
 - Keras: 2
-- KinD: 1
+- KinD: 2
 - kube-bench: 1
-- Kubernetes: 14
+- Kubernetes: 15
 - Libamath: 1
 - libbpf: 1
 - Linaro Forge: 1
@@ -238,7 +238,7 @@ tools_software_languages_filter:
 weight: 1
 cloud_service_providers_filter:
 - AWS: 19
-- Google Cloud: 34
+- Google Cloud: 36
 - Microsoft Azure: 19
 - Oracle: 2
 ---

@@ -10,18 +10,18 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 2
-- Baremetal: 30
-- Linux: 34
-- macOS: 7
-- RTOS: 10
-- Windows: 5
+- Baremetal: 31
+- Linux: 38
+- macOS: 8
+- RTOS: 11
+- Windows: 6
 subjects_filter:
-- CI-CD: 6
+- CI-CD: 7
 - Containers and Virtualization: 6
-- Embedded Linux: 4
+- Embedded Linux: 6
 - Libraries: 3
-- ML: 18
-- Performance and Architecture: 22
+- ML: 19
+- Performance and Architecture: 23
 - RTOS Fundamentals: 5
 - Security: 2
 - Virtual Hardware: 2
@@ -30,15 +30,19 @@ title: Embedded and Microcontrollers
 tools_software_languages_filter:
 - AI: 1
 - Arduino: 2
-- Arm Compiler for Embedded: 7
+- Arm Compiler for Embedded: 8
 - Arm Compiler for Linux: 1
 - Arm Compute Library: 2
 - Arm Development Studio: 8
 - Arm Fast Models: 4
 - Arm Performance Studio: 1
 - Arm Streamline: 1
-- Arm Virtual Hardware: 12
+- Arm Virtual Hardware: 16
 - Assembly: 1
+- AWS IoT Greengrass: 1
+- Azure: 1
+- balenaCloud: 1
+- BalenaOS: 1
 - C: 5
 - C++: 1
 - ChatGPT: 1
@@ -58,11 +62,11 @@ tools_software_languages_filter:
 - FastAPI: 1
 - FPGA: 1
 - Fusion 360: 1
-- FVP: 10
+- FVP: 11
 - GCC: 9
 - GenAI: 1
 - Generative AI: 2
-- GitHub: 3
+- GitHub: 4
 - GitLab: 2
 - gpiozero: 1
 - Himax SDK: 1
@@ -77,6 +81,7 @@ tools_software_languages_filter:
 - lgpio: 1
 - Linux kernel: 1
 - LLM: 3
+- Matter: 1
 - MCP: 1
 - MPS3: 1
 - MXNet: 1
@@ -86,10 +91,10 @@ tools_software_languages_filter:
 - Paddle: 1
 - Performance analysis: 1
 - Porcupine: 1
-- Python: 9
+- Python: 10
 - PyTorch: 4
 - QEMU: 1
-- Raspberry Pi: 7
+- Raspberry Pi: 9
 - Remote.It: 1
 - Runbook: 4
 - STM32: 2
@@ -100,6 +105,7 @@ tools_software_languages_filter:
 - TrustZone: 2
 - TVMC: 1
 - vcpkg: 1
+- Visual Studio Code: 1
 - Yocto Project: 1
 - Zephyr: 2
 weight: 5
