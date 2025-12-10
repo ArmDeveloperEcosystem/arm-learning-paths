@@ -1,6 +1,8 @@
 ---
 title: Gemini CLI
 
+draft: true
+
 author: Jason Andrews
 minutes_to_complete: 15
 official_docs: https://ai.google.dev/gemini-api/docs/cli
