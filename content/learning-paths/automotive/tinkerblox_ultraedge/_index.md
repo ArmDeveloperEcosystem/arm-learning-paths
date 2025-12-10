@@ -39,8 +39,8 @@ armips:
   
 operatingsystems:
   - Linux
-  - Yocto
-  
+  - other
+
 further_reading:
   - resource:
       title: Tinkerblox
