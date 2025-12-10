@@ -29,11 +29,18 @@ prerequisites:
 author: Tinkerblox
 
 ### Tags
-skilllevels: Intermediate
-subjects: HPC-I computing infrastructure efficiency
+skilllevels: Advanced
+subjects: Containers and Virtualization
 tools_software_languages:
   - Tinkerblox
 
+armips:
+  - Neoverse
+  
+operatingsystems:
+  - Linux
+  - Yocto
+  
 further_reading:
   - resource:
       title: Tinkerblox
