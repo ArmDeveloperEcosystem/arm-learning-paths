@@ -1,5 +1,5 @@
 ---
-title: Install Gemini CLI on macOS and Arm Linux
+title: Gemini CLI
 
 author: Jason Andrews
 minutes_to_complete: 15
@@ -158,7 +158,7 @@ Before installing Gemini CLI, install prerequisite packages and Node.js.
 
 Install the required packages on Ubuntu/Debian systems:
 
-```bash { target="ubuntu:latest" }
+```bash
 sudo apt update && sudo apt install -y curl
 ```
 
@@ -170,19 +170,13 @@ Gemini CLI requires Node.js version 20 or higher. The easiest way to install Nod
 
 Download and run the Node.js 20.x setup script:
 
-```bash { target="ubuntu:latest" }
+```bash
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-```
-
-Install Node.js:
-
-```bash { target="ubuntu:latest" }
-sudo apt install -y nodejs
 ```
 
 Verify Node.js is installed correctly:
 
-```bash { target="ubuntu:latest" }
+```bash
 node --version
 ```
 
@@ -194,7 +188,7 @@ v20.19.4
 
 Verify npm is available:
 
-```bash { target="ubuntu:latest" }
+```bash
 npm --version
 ```
 
@@ -210,7 +204,7 @@ With Node.js installed, install Gemini CLI globally using npm.
 
 Install Gemini CLI globally:
 
-```bash { target="ubuntu:latest" }
+```bash
 sudo npm install -g @google/gemini-cli
 ```
 
@@ -222,7 +216,7 @@ You now have Gemini CLI installed on your Arm Linux system.
 
 Confirm the CLI is available by checking the version:
 
-```bash { target="ubuntu:latest" }
+```bash
 gemini --version
 ```
 
@@ -236,7 +230,7 @@ The output shows the version:
 
 To print the available commands and options, use the `--help` flag:
 
-```bash { target="ubuntu:latest" }
+```bash 
 gemini --help
 ```
 
@@ -315,13 +309,13 @@ Verify that Gemini is loading your context file by starting a chat session and a
 
 Start Gemini CLI:
 
-```bash
+```console
 gemini 
 ```
 
 Ask a question that should trigger context-aware responses:
 
-```
+```output
 How do I install gcloud?
 ```
 
@@ -339,7 +333,7 @@ First, ensure Docker is installed and running on your system. Install Docker by 
 
 Pull the Arm MCP server Docker image:
 
-```bash
+```console
 docker pull armlimited/arm-mcp:latest
 ```
 
