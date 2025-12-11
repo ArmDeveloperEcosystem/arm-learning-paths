@@ -104,8 +104,6 @@ This build enables the KleidiAI and SME2 micro-kernels integrated into XNNPACK a
 bazel-bin/litert/tools/benchmark_model
 ```
 
----
-
 ## Build the LiteRT benchmark tool without KleidiAI (baseline comparison)
 
 To compare the performance of the KleidiAI SME2 implementation against XNNPACK’s original implementation, build another version of the LiteRT benchmark tool without KleidiAI and SME2 enabled.
@@ -139,7 +137,5 @@ You can then use Android Debug Bridge (ADB) to push the benchmark tool to your A
 adb push bazel-bin/litert/tools/benchmark_model /data/local/tmp/
 adb shell chmod +x /data/local/tmp/benchmark_model
 ```
-
----
 
 You have now built both versions of the LiteRT benchmark tool. You are ready to benchmark and compare SME2-accelerated and baseline performance on your Arm-based Android device.
