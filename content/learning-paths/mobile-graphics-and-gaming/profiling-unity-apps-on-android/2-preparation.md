@@ -18,7 +18,7 @@ Although the sample application is a project, you will still need to create a bl
 1. Select _New Project_
 
 1. Select the _3D (URP) Core_ template - add photo "urp confirmation"
-  ![Display URP Template#center](images/URP-Confirmation.PNG "Figure 1. URP 3D template")
+  ![Display URP Template#center](images/URP-confirmation.PNG "Figure 1. URP 3D template")
 
 1. Enter project name (this will be used as the name of the project folder)
 
@@ -58,7 +58,7 @@ Once Unity has loaded, you will be presented with a template project. You can ig
     e. Select _Open Unity Editor_
 
 1. The Unity Editor will bring itself to the front and show the _Package Manager_
-  ![Open Project manager#center](images/PM.PNG "Figure 2. Packet Manager with asset showing.")
+  ![Open Project manager#center](images/PM .PNG "Figure 2. Packet Manager with asset showing.")
 
 1. You will see the sample project listed and highlighted. Select _Download_.
 
