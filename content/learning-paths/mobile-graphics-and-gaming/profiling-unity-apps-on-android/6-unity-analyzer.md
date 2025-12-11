@@ -9,13 +9,13 @@ layout: learningpathall
 ## Set up the Analyzer
 Before you can use the Analyzer tool, you need to install the related package it comes in. Follow these steps with the Package Manager:
 
-1. Select menu option _Window/Package Manager_
+1. Select menu option _Window/Package Management/PacketManager_
 
 1. Switch Packages option to _Packages: Unity Registry_
 
 1. Select _Profile Analyzer_
 
-    ![Package Manager showing Analyzer#center](images/package-manager-install-profile-analyzer.PNG "Figure 1. Profile Analyzer package in Package Manager.")
+    ![Package Manager showing Analyzer#center](images/PA.PNG "Figure 1. Profile Analyzer package in Package Manager.")
 
 1. Select _Install_
 
