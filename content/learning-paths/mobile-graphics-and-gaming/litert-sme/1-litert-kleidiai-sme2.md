@@ -1,24 +1,20 @@
 ---
-title: Understand LiteRT, XNNPACK, KleidiAI and SME2
+title: Understand LiteRT, XNNPACK, KleidiAI, and SME2
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## LiteRT, XNNPACK, KleidiAI and SME2
+## LiteRT, XNNPACK, KleidiAI, and SME2
 
-LiteRT (Lite Runtime), formerly known as TensorFlow Lite, is a runtime for on-device AI.
-The default CPU acceleration library used by LiteRT is XNNPACK.
+LiteRT (Lite Runtime, formerly TensorFlow Lite) is a runtime for on-device AI on Arm platforms. The default CPU acceleration library used by LiteRT is XNNPACK (an open-source library providing highly optimized neural-network operators).
 
 XNNPACK is an open-source library that provides highly optimized implementations of neural-network operators. It continuously integrates KleidiAI library to leverage new CPU features such as SME2.
 
 KleidiAI is a library developed by Arm that offers performance-critical micro-kernels leveraging Arm architecture features, such as SME2.
 
-Both XNNPACK and KleidiAI are external dependencies of LiteRT. LiteRT specifies the versions of these libraries to use.
-When LiteRT is built with both XNNPACK and KleidiAI enabled, XNNPACK invokes KleidiAI’s micro-kernels at runtime to accelerate operators with supported data types; otherwise, it falls back to its own implementation.
-
-The software stack for LiteRT is as follows.
+The software stack for LiteRT is shown below.
 
 ![LiteRT, XNNPACK, KleidiAI and SME2#center](./litert-sw-stack.png "LiteRT, XNNPACK, KleidiAI and SME2")
 
