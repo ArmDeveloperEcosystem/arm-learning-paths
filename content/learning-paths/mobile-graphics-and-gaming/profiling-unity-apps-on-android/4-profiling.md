@@ -35,11 +35,11 @@ On the other hand, if the performance issues happen later in the app's lifetime,
 
 In our sample, the performance issues will be apparent soon after launch. To profile directly on an Android device:
 
-1. Open the _Build Settings_
+1. Open the _Build Profile_
 
 1. Ensure _Autoconnect Profiler_ is ticked
 
-    ![Build settings to autoconnect profiler#center](images/android-build-settings-autoconnect-profiler.PNG "Figure 1. Build settings with connected Android device and Autoconnect Profiler enabled.")
+    ![Build settings to autoconnect profiler#center](images/AC.png "Figure 1. Build settings with connected Android device and Autoconnect Profiler enabled.")
 
 1. Select _Build and Run_
 
@@ -50,6 +50,8 @@ In our sample, the performance issues will be apparent soon after launch. To pro
 1. Once the Profiler is connected, the Profiler window will open and the _CPU Usage_ graph will start to fill
 
 If you forget to tick the auto-connect option or you want to wait before you connect the Profiler, you can connect the Profiler while the app is running:
+
+Whilst inside the unity editor
 
 1. Select _Window_ menu, then _Analysis_, then _Profiler_
 
@@ -69,7 +71,7 @@ The Profiler window contains a lot of information spread over two main scrollabl
 ### CPU Usage graph and frame-rate labels
 The CPU Usage graph captures profiling data every frame while it is active.
 
-![Profiler CPU usage#center](images/profiler-samsung-s8-plain.PNG "Figure 2. The CPU Usage graph with data from the sample collision code app collected from a Samsung S8.")
+![Profiler CPU usage#center](images/profiler-samsung-s8-plain.PNG "Figure 2. The CPU Usage graph with data from the sample collision code app collected.")
 
 If you have a performance issue that worsens over time (as with the case of the collision sample), you will see the graph gradually (or quickly) fill over time. Watch the frame rate labels on the left of the graph. These labels mark the Y-axis at set intervals. They show you what CPU Usage would be required to achieve given frame rates. For example, if your CPU Usage remained under 16 milliseconds then as far as the CPU is concerned, a frame rate of 60 frames-per-second (FPS) would be achievable. If the CPU Usage is under 16ms but your frame rate is still lower than expected, that is an indication that the app has performance issues elsewhere, e.g., in the GPU.
 
