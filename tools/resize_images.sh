@@ -5,7 +5,7 @@ set -e
 #
 # Tunables: Defaults
 #
-export dry_run=true   # if true, do not perform any file modifications
+export dry_run=false   # if true, do not perform any file modifications
 export quality=85     # quality for webp conversion (1-100)
 export max_width=1600 # maximum width before resizing
 export target_width=1280 # target width for resizing      
@@ -78,8 +78,12 @@ process_images() {
         echo "Checking $img..."
         width=$(identify -format "%w" "$img" 2>/dev/null || echo 0)
 
-        # Get file size in KB (macOS stat is different)
-        filesize=$(stat -c%s "$img" 2>/dev/null || echo 0)
+        # Get file size in KB (handle both macOS and Linux)
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            filesize=$(stat -f%z "$img" 2>/dev/null || echo 0)
+        else
+            filesize=$(stat -c%s "$img" 2>/dev/null || echo 0)
+        fi
         kbsize=$((filesize / 1024))
 
         # Define new filename
@@ -107,8 +111,17 @@ process_images() {
                 fi
                 echo "Optimizing $img (${kbsize}KB, ${width}px), quality=$quality"
                 # Resize and convert to WebP. If error occurs, capture it and exit.
-                error=$(magick "$img" -resize ${target_width}x\> -quality $quality -define webp:lossless=true "$webp_img" 2>&1)
-                convert_status=$?
+                # Try 'magick' first (newer ImageMagick), fall back to 'convert' (older/traditional)
+                if command -v magick &> /dev/null; then
+                    error=$(magick "$img" -resize ${target_width}x\> -quality $quality -define webp:lossless=true "$webp_img" 2>&1)
+                    convert_status=$?
+                elif command -v convert &> /dev/null; then
+                    error=$(convert "$img" -resize ${target_width}x\> -quality $quality -define webp:lossless=true "$webp_img" 2>&1)
+                    convert_status=$?
+                else
+                    echo "⚠️ Neither 'magick' nor 'convert' command found. Please install ImageMagick."
+                    exit 1
+                fi
                 if [ $convert_status -ne 0 ]; then
                     echo "⚠️ Error converting $img to WebP format."
                     if [ -z "${error}" ]; then
@@ -130,8 +143,14 @@ process_images() {
                 find "$img_dir" "$(dirname "$img_dir")" -name "*.md" 2>/dev/null | while read -r md_file; do
                     if grep -q "$img_name" "$md_file"; then
                         echo "Replacing $img_name → $webp_name in $md_file"
-                        sed -i '' "s|($img_name|(${webp_name}|g" "$md_file"
-                        sed -i '' "s|/$img_name|/${webp_name}|g" "$md_file"
+                        # Handle sed differences between macOS and Linux
+                        if [[ "$OSTYPE" == "darwin"* ]]; then
+                            sed -i '' "s|($img_name|(${webp_name}|g" "$md_file"
+                            sed -i '' "s|/$img_name|/${webp_name}|g" "$md_file"
+                        else
+                            sed -i "s|($img_name|(${webp_name}|g" "$md_file"
+                            sed -i "s|/$img_name|/${webp_name}|g" "$md_file"
+                        fi
                     fi
                 done
             fi                                  
