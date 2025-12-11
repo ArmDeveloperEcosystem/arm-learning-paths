@@ -24,7 +24,7 @@ You will now collect some data from the unoptimized version of the code. To do t
 
 1. Build and deploy to your Android device:
 
-    - Open _File/Build Settings_
+    - Open _File/Build profiles_
 
     - Ensure the following options are ticked:
 
@@ -72,7 +72,7 @@ Let's repeat the above process but this time build and deploy the optimized vers
 
     - Build and deploy to your Android device:
 
-        1. Open _File/Build Settings_
+        1. Open _File/Build Profiles_
 
         1. Ensure the following options are ticked:
 
