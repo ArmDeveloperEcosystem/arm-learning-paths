@@ -58,7 +58,7 @@ Once Unity has loaded, you will be presented with a template project. You can ig
     e. Select _Open Unity Editor_
 
 1. The Unity Editor will bring itself to the front and show the _Package Manager_
-  ![Open Project manager#center](images/PM .PNG "Figure 2. Packet Manager with asset showing.")
+  ![Open Project manager#center](images/PM.PNG "Figure 2. Packet Manager with asset showing.")
 
 1. You will see the sample project listed and highlighted. Select _Download_.
 
