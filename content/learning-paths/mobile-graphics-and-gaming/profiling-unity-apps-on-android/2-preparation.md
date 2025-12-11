@@ -19,7 +19,7 @@ Although the sample application is a project, you will still need to create a bl
 
 1. Select the _3D (URP) Core_ template 
  
-  ![Display URP Template#center](images/URP.PNG "Figure 1. URP 3D template")
+  ![Display URP Template#center](images/URP.png "Figure 1. URP 3D template")
 
 1. Enter project name (this will be used as the name of the project folder)
 
