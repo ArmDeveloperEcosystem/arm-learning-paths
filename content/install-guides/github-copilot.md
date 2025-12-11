@@ -16,7 +16,7 @@ tool_install: true
 weight: 1
 ---
 
-GitHub Copilot is an AI-powered code completion tool that helps you write code faster and with less effort. It suggests whole lines or entire functions based on your comments and code context.
+GitHub Copilot is an AI coding assistant that helps you write code faster and with less effort. It suggests whole lines or entire functions based on your comments and code context.
 
 GitHub Copilot works seamlessly on Arm-based systems, including Linux distributions running on Arm servers, macOS on Apple Silicon, and Windows on Arm devices.
 
@@ -284,7 +284,7 @@ Open the GitHub Copilot Chat panel by selecting the chat icon in the Activity Ba
 
 To view available MCP tools, select the tools icon in the top left corner of the chat box. This opens the MCP server list showing all available tools from the Arm MCP Server.
 
-![MCP Server Tools#center](_images/mcp-server-tools.png "Figure 1. Tools loaded from the Arm MCP Server")
+![MCP Server Tools](_images/mcp-server-tools.png "Figure 1. Tools loaded from the Arm MCP Server")
 
 You can also ask Copilot to use specific Arm MCP tools:
 
