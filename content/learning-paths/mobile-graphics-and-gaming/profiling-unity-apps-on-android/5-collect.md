@@ -50,7 +50,7 @@ You will now collect some data from the unoptimized version of the code. To do t
 
     - Select the disk icon in the top right of the Profiler window
 
-    - Enter filename
+    - Enter filename by clicking on the name in the file list on the left of the screen
     
         ```
         plain.data
