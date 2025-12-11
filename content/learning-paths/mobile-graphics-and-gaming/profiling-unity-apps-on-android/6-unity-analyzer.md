@@ -15,7 +15,7 @@ Before you can use the Analyzer tool, you need to install the related package it
 
 1. Select _Profile Analyzer_
 
-    ![Package Manager showing Analyzer#center](images/PA.PNG "Figure 1. Profile Analyzer package in Package Manager.")
+    ![Package Manager showing Analyzer#center](images/PA.png "Figure 1. Profile Analyzer package in Package Manager.")
 
 1. Select _Install_
 
