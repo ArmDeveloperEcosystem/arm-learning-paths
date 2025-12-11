@@ -284,7 +284,7 @@ Open the GitHub Copilot Chat panel by selecting the chat icon in the Activity Ba
 
 To view available MCP tools, select the tools icon in the top left corner of the chat box. This opens the MCP server list showing all available tools from the Arm MCP Server.
 
-![MCP Server Tools](_images/mcp-server-tools.png "Figure 1. Tools loaded from the Arm MCP Server")
+![MCP Server Tools](/install-guides/_images/new-mcp-server-tools.png "Figure 1. Tools loaded from the Arm MCP Server")
 
 You can also ask Copilot to use specific Arm MCP tools:
 
