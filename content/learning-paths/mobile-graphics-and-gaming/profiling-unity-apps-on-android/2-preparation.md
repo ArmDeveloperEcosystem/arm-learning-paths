@@ -18,6 +18,7 @@ Although the sample application is a project, you will still need to create a bl
 1. Select _New Project_
 
 1. Select the _3D (URP) Core_ template - add photo "urp confirmation"
+  ![Display URP Template#center](images/URP-Confirmation.PNG "Figure 1. URP 3D template")
 
 1. Enter project name (this will be used as the name of the project folder)
 
@@ -57,6 +58,7 @@ Once Unity has loaded, you will be presented with a template project. You can ig
     e. Select _Open Unity Editor_
 
 1. The Unity Editor will bring itself to the front and show the _Package Manager_
+  ![Open Project manager#center](images/PM.PNG "Figure 2. Packet Manager with asset showing.")
 
 1. You will see the sample project listed and highlighted. Select _Download_.
 
@@ -68,11 +70,11 @@ Once Unity has loaded, you will be presented with a template project. You can ig
 
 1. The Import Unity Package window will appear. It allows individual files and folders to be imported or ignored. You will need all of the files in the project. Leave all items ticked and select _Next_.
 
-    ![Import sample project#center](images/Import-window-step-1.PNG "Figure 1. Import the sample project using the Package Manager.")
+    ![Import sample project#center](images/Import-window-step-1.PNG "Figure 3. Import the sample project using the Package Manager.")
 
 1. A second window will open that lists the project settings that will be overwritten. We want the settings from the sample code so leave all items ticked. Select _Import_.
 
-    ![Overwrite project settings#center](images/import-window-step-2.png "Figure 2. Overwrite project settings with the settings from the imported sample project.")
+    ![Overwrite project settings#center](images/import-window-step-2.png "Figure 4. Overwrite project settings with the settings from the imported sample project.")
 
 ## Set up the project
 Once the sample project has been imported, you will see some errors and warnings.
@@ -82,6 +84,7 @@ Once the sample project has been imported, you will see some errors and warnings
 1. Select _Android_ from the Platform list
 
 1. Select _Switch Platform_as you have done in the [previous learning path](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android/3-test-on-android/)
+  ![Build-Profile-Menu#center](images/BP-Menu.PNG "Figure 5. Build profile menu .")
 
 Unity will take a moment to build the assets for the Android platform.
 
@@ -89,7 +92,7 @@ The errors will disappear but some warnings regarding unreachable code will appe
 
 Your scene view will look something like this:
 
-![Scene view#center](images/sample-project-default-scene-view.PNG "Figure 3. Default scene view of sample project.")
+![Scene view#center](images/sample-project-default-scene-view.PNG "Figure 6. Default scene view of sample project.")
 
 if it doesn't then follow the steps below
 ## Run the project inside the editor
@@ -110,7 +113,7 @@ It is worth checking that everything has imported and been built correctly.
 
 The game will launch and you will see an empty environment begin to fill with more and more characters (capsules) over time. It will look something like this:
 
-![Screenshot at runtime#center](images/game-view.PNG "Figure 4. Sample running in Game view.")
+![Screenshot at runtime#center](images/game-view.PNG "Figure 7. Sample running in Game view.")
 
 ## Deploy to Android
 You will now deploy the sample to your Android device. Your device must already be set up for development. For detailed instructions, read the learning path [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android).
@@ -118,6 +121,7 @@ You will now deploy the sample to your Android device. Your device must already 
 1. Open _Build profile_ from the File menu
 
 1. Tick the _Development Build_ option
+  ![Import sample project#center](images/BP-Menu-Build.PNG "Figure 8. Development Build .")
 
 1. Select _Add Open Scenes_ to add the demo scene to your _Scenes in Build_ list 
 
@@ -125,14 +129,12 @@ You will now deploy the sample to your Android device. Your device must already 
 
 1. Once recognized, your device will be listed in the drop-down menu next to _Run Device_
 
-1. The screenshot below shows the settings with a our demo device selected as the _Run Device_ you will see you own device in this box
+1. The screenshot above shows the settings with a our demo device selected as the _Run Device_ you will see you own device in this box
 
 1. Select _Build and Run_
-
-    ![Build settings#center](images/android-build-settings.PNG "Figure 5. Android build settings showing selected Android device.") - update SS
 
 1. Enter a name for the APK (the Android package) and select _Save_
 
 Unity will take a moment to build the Android version and then automatically deploy it to your connected Android device. Depending on your setup, the build and deployment might take several minutes.
 
-![Running on Android#center](images/android-plain-mode.webp "Figure 6. Sample application running on Android.")
+![Running on Android#center](images/android-plain-mode.webp "Figure 9. Sample application running on Android.")
