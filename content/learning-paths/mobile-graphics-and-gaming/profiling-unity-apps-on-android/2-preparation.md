@@ -17,8 +17,9 @@ Although the sample application is a project, you will still need to create a bl
 
 1. Select _New Project_
 
-1. Select the _3D (URP) Core_ template - add photo "urp confirmation"
-  ![Display URP Template#center](images/URP-confirmation.PNG "Figure 1. URP 3D template")
+1. Select the _3D (URP) Core_ template 
+ 
+  ![Display URP Template#center](images/URP.PNG "Figure 1. URP 3D template")
 
 1. Enter project name (this will be used as the name of the project folder)
 
@@ -58,6 +59,7 @@ Once Unity has loaded, you will be presented with a template project. You can ig
     e. Select _Open Unity Editor_
 
 1. The Unity Editor will bring itself to the front and show the _Package Manager_
+ 
   ![Open Project manager#center](images/PM.PNG "Figure 2. Packet Manager with asset showing.")
 
 1. You will see the sample project listed and highlighted. Select _Download_.
@@ -84,7 +86,8 @@ Once the sample project has been imported, you will see some errors and warnings
 1. Select _Android_ from the Platform list
 
 1. Select _Switch Platform_as you have done in the [previous learning path](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android/3-test-on-android/)
-  ![Build-Profile-Menu#center](images/BP-Menu.PNG "Figure 5. Build profile menu .")
+
+![Build-Profile-Menu#center](images/BP-Menu.PNG "Figure 5. Build profile menu .")
 
 Unity will take a moment to build the assets for the Android platform.
 
@@ -121,6 +124,7 @@ You will now deploy the sample to your Android device. Your device must already 
 1. Open _Build profile_ from the File menu
 
 1. Tick the _Development Build_ option
+ 
   ![Import sample project#center](images/BP-Menu-Build.PNG "Figure 8. Development Build .")
 
 1. Select _Add Open Scenes_ to add the demo scene to your _Scenes in Build_ list 
