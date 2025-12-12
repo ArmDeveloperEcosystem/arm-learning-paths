@@ -10,7 +10,7 @@ layout: learningpathall
 ## WhatsApp Notification Use Case using RabbitMQ  
 This document demonstrates a **real-world asynchronous messaging use case** where RabbitMQ is used to process WhatsApp notifications reliably using a worker-based architecture.
 
-### Use Case Overview
+### Use case overview
 
 In many production systems, sending WhatsApp notifications must be:
 - Reliable
@@ -19,7 +19,7 @@ In many production systems, sending WhatsApp notifications must be:
 
 RabbitMQ is used as a **message broker** to decouple message production from message consumption.
 
-### Architecture Flow
+### Architecture flow
 
 1. Application publishes a message to RabbitMQ
 2. RabbitMQ routes the message to a queue
@@ -34,7 +34,7 @@ RabbitMQ is used as a **message broker** to decouple message production from mes
 - Python 3.8+
 - `pika` Python client library installed
 
-### Install Python Dependencies
+### Install Python dependencies
 Installs Python and the RabbitMQ Python client needed to build a consumer.
 
 ```console
@@ -42,7 +42,7 @@ sudo zypper install -y python3 python3-pip
 pip3 install pika
 ```
 
-### RabbitMQ Topology
+### RabbitMQ topology
 This use case uses a direct exchange topology for exact-match routing.
 
 **Exchanges**
@@ -56,7 +56,7 @@ This use case uses a direct exchange topology for exact-match routing.
 - Routing key: **whatsapp** – Ensures only WhatsApp-related messages are routed.
 - Queue: **whatsapp.notifications**– Final destination where messages are delivered for processing.
 
-### Declare RabbitMQ Resources
+### Declare RabbitMQ resources
 Creates the required exchange, queue, and binding for WhatsApp notifications.
 
 - `Declare exchange`: Creates a durable direct exchange named notifications to route messages using exact routing keys.
@@ -142,7 +142,7 @@ Confirms topology correctness before consuming messages.
 +---------------+------------------------+------------------------+
 ```
 
-### WhatsApp Worker Implementation
+### WhatsApp worker implementation
 The worker attaches as a **blocking consumer** to the `whatsapp.notifications` queue and processes incoming messages.
 
 Create a `whatsapp_worker.py` file with the content below:
@@ -202,7 +202,7 @@ print("[DEBUG] Starting consumer loop (this should block)...")
 channel.start_consuming()
 ```
 
-### Start the Worker
+### Start the worker
 Run the worker in a dedicated terminal session:
 
 ```console
@@ -223,7 +223,7 @@ WhatsApp Worker started. Waiting for messages...
 
 The process must block without returning to the shell prompt.
 
-### Publish a Test Message
+### Publish a test message
 From another SSH terminal: Publishes a WhatsApp notification message to RabbitMQ.
 
 ```console
@@ -241,7 +241,7 @@ You should see the following output from whatsapp_worker.py that is running in t
 [Worker] Message sent successfully
 ```
 
-### Message Consumption Validation
+### Message consumption validation
 The worker terminal displays logs similar to:
 
 ```output
@@ -260,15 +260,15 @@ WhatsApp Worker started. Waiting for messages...
 - Queue consumption is successful
 - Manual acknowledgments are applied
 
-End-to-end message flow validated.
+This validates the end-to-end message flow.
 
-### Verify Queue State
+### Verify queue state
 
 ```console
 ./rabbitmqadmin list queues name messages consumers
 ```
 
-Expected output should be similar to:
+Expected output is similar to:
 
 ```output
 +------------------------+----------+-----------+
@@ -281,7 +281,7 @@ Expected output should be similar to:
 +------------------------+----------+-----------+
 ```
 
-**This confirms that:**
+This confirms that:
 
 - Messages were consumed successfully
 - One active consumer is connected

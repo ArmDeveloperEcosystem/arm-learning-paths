@@ -16,7 +16,7 @@ This use case demonstrates how RabbitMQ enables event-driven architectures using
 
 The use case models an **event-driven system**, where order-related events are published and processed asynchronously by workers.
 
-### Use Case Overview
+### Use case overview
 
 **Scenario:**  
 An application publishes order-related events (`order.created`, `order.updated`, etc.) to RabbitMQ. A background worker consumes these events from a queue and processes them independently.
@@ -38,7 +38,7 @@ This architecture improves scalability, fault tolerance, and system decoupling.
 - Python 3 installed
 - Network access to RabbitMQ broker
 
-### Declare a Topic Exchange
+### Declare a topic exchange
 Create a durable topic exchange to route events based on routing keys.
 
 ```console
@@ -46,10 +46,10 @@ Create a durable topic exchange to route events based on routing keys.
 ```
 
 - Creates a durable topic exchange named events.
-- Routes messages using wildcard-based routing keys (e.g., order.*).
+- Routes messages using wildcard-based routing keys (for example, order.*).
 - Ensures the exchange survives broker restarts.
 
-### Declare a Durable Queue
+### Declare a durable queue
 Create a durable queue to store order-related events.
 
 ```console
@@ -65,7 +65,7 @@ You should see an output similar to:
 queue declared
 ```
 
-### Bind Queue to Exchange
+### Bind queue to exchange
 Bind the queue to the exchange using a topic routing pattern.
 
 ```console
@@ -86,7 +86,7 @@ This binding ensures the queue receives all messages with routing keys such as:
 - order.updated
 - order.completed
 
-### Publish an Event Message
+### Publish an event message
 Publish a sample order event to the exchange.
 
 ```console
@@ -102,7 +102,7 @@ You should see an output similar to:
 Message published
 ```
 
-### Install Python Dependencies
+### Install Python dependencies
 Install pip and the pika RabbitMQ client library.
 
 ```console
@@ -110,12 +110,12 @@ sudo zypper install -y python3-pip
 pip install pika
 ```
 
-### Create the Worker Script
+### Create the worker script
 Create a Python worker file to process messages from a queue.
 
 A **Python worker** was created to process messages from a RabbitMQ queue (jobs) using the pika library. The queue is durable, ensuring message persistence. The worker implements fair dispatch (prefetch_count=1) and manual acknowledgments to reliably process each job without loss. Messages were successfully published to the queue using rabbitmqadmin, and the worker consumed them as expected.
 
-Using your favorite editor (example is using "edit" below...) create your "worker.py" file:
+Using your favorite editor (the example uses "edit") create your "worker.py" file:
 
 ```console
 edit worker.py
@@ -162,7 +162,7 @@ channel.basic_consume(
 channel.start_consuming()
 ```
 
-### Start the Worker
+### Start the worker
 Run the worker process.
 
 ```console
@@ -174,7 +174,7 @@ You should see an output similar to:
 The worker started. Waiting for jobs...
 ```
 
-### Publish Job Messages
+### Publish job messages
 From another SSH terminal, publish a job message.
 
 ```console
@@ -200,9 +200,9 @@ Publish another job:
 Worker started. Waiting for jobs...
 [Worker] Received job: {'job': 'hello1'}
 ```
-Now press "CTRL-C" to exit the worker application.
+Press "CTRL-C" to exit the worker application.
 
-## Use Case Validation
+## Use case validation
 
 - Event routing via topic exchanges functions correctly  
 - Durable queues and acknowledgments ensure reliable message processing  
