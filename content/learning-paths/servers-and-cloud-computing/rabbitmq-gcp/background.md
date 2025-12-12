@@ -12,7 +12,7 @@ Google Axion C4A is a family of Arm-based virtual machines built on Google’s c
 
 The C4A series provides a cost-effective alternative to x86 virtual machines while leveraging the scalability and performance benefits of the Arm architecture in Google Cloud.
 
-To learn more about Google Axion, refer to the [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu) blog.
+To learn more about Google Axion, see the [Introducing Google Axion Processors, Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu) blog.
 
 ## RabbitMQ
 

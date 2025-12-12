@@ -126,7 +126,7 @@ You should see an output similar to:
 | testqueue    | 1        |
 ```
 
-Baseline Validation Summary
+### Baseline validation summary
 
 - RabbitMQ node is running and healthy
 - The management plugin is enabled and accessible

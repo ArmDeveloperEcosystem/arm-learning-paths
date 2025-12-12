@@ -260,7 +260,7 @@ WhatsApp Worker started. Waiting for messages...
 - Queue consumption is successful
 - Manual acknowledgments are applied
 
-End-to-end message flow validated.
+This validates the end-to-end message flow.
 
 ### Verify Queue State
 
@@ -268,7 +268,7 @@ End-to-end message flow validated.
 ./rabbitmqadmin list queues name messages consumers
 ```
 
-Expected output should be similar to:
+Expected output is similar to:
 
 ```output
 +------------------------+----------+-----------+
@@ -281,7 +281,7 @@ Expected output should be similar to:
 +------------------------+----------+-----------+
 ```
 
-**This confirms that:**
+This confirms that:
 
 - Messages were consumed successfully
 - One active consumer is connected

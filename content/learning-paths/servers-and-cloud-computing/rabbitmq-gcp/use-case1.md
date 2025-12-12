@@ -46,7 +46,7 @@ Create a durable topic exchange to route events based on routing keys.
 ```
 
 - Creates a durable topic exchange named events.
-- Routes messages using wildcard-based routing keys (e.g., order.*).
+- Routes messages using wildcard-based routing keys (for example, order.*).
 - Ensures the exchange survives broker restarts.
 
 ### Declare a Durable Queue
@@ -115,7 +115,7 @@ Create a Python worker file to process messages from a queue.
 
 A **Python worker** was created to process messages from a RabbitMQ queue (jobs) using the pika library. The queue is durable, ensuring message persistence. The worker implements fair dispatch (prefetch_count=1) and manual acknowledgments to reliably process each job without loss. Messages were successfully published to the queue using rabbitmqadmin, and the worker consumed them as expected.
 
-Using your favorite editor (example is using "edit" below...) create your "worker.py" file:
+Using your favorite editor (the example uses "edit") create your "worker.py" file:
 
 ```console
 edit worker.py
@@ -200,7 +200,7 @@ Publish another job:
 Worker started. Waiting for jobs...
 [Worker] Received job: {'job': 'hello1'}
 ```
-Now press "CTRL-C" to exit the worker application.
+Press "CTRL-C" to exit the worker application.
 
 ## Use Case Validation
 

@@ -62,10 +62,10 @@ sudo rpm -Uvh rabbitmq-server-4.2.0-1.el8.noarch.rpm
 ```
 
 {{% notice Note %}}
-RabbitMQ version 3.11.0 introduced significant performance enhancements for Arm-based architectures. This version requires Erlang 25.0 or later, which brings Just-In-Time (JIT) compilation and modern flame graph profiling tooling to both x86 and ARM64 CPUs. These features result in improved performance on ARM64 architectures.
+RabbitMQ version 3.11.0 introduced significant performance enhancements for Arm-based architectures. This version needs Erlang 25.0 or later, which brings Just-In-Time (JIT) compilation and modern flame graph profiling tooling to both x86 and Arm64 CPUs. These features result in improved performance on Arm64 architectures.
 You can view [this release note](https://github.com/rabbitmq/rabbitmq-server/blob/main/release-notes/3.11.0.md)
 
-The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends RabbitMQ version 3.11.0, the minimum recommended on the Arm platforms.
+The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends RabbitMQ version 3.11.0, the minimum recommended on Arm platforms.
 {{% /notice %}}
 
 ### Enable and Start RabbitMQ Service
@@ -112,11 +112,9 @@ You should see an output similar to:
 ```
 
 ### Access RabbitMQ Management UI
-Create a new RabbitMQ user for remote access
+Create a new RabbitMQ user for remote access.
 
-- Create a new `admin` user
-
-**Run these commands on the VM:**
+Create a new `admin` user by running these commands on the VM:
 
 ```console
 sudo rabbitmqctl add_user admin StrongPassword123
@@ -126,7 +124,7 @@ sudo rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
 
 **Log in to Management UI**
 
-Now, let’s test it from outside the VM. Open a web browser on your LOCAL machine (Chrome, Firefox, Edge, etc.) and enter the following URL and credentials in the address bar:
+Now, test it from outside the VM. Open a web browser on your local machine (Chrome, Firefox, Edge, etc.) and enter the following URL and credentials in the address bar:
 
 - **URL**: http://<VM_IP>:15672
 - **Username**: admin
@@ -134,7 +132,7 @@ Now, let’s test it from outside the VM. Open a web browser on your LOCAL machi
 
 Replace `<VM_IP>` with the public IP of your GCP VM.
 
-If everything is set up correctly, you will see a RabbitMQ login page in your browser. It looks like this:
+If everything is configured correctly, you see a RabbitMQ login page in your browser that looks like this:
 
 ![RabbitMQ page alt-text#center](images/rabbitmq.png "Figure 1: RabbitMQ Login page")
 
