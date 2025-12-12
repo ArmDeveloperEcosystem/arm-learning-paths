@@ -94,6 +94,9 @@ sw_categories:
     gfortran:
       readable_title: GFortran
       tests_and_status: []
+    github-copilot:
+      readable_title: GitHub Copilot
+      tests_and_status: []
     go:
       readable_title: Go
       tests_and_status: []

@@ -318,6 +318,7 @@ These Apple devices support SME2 natively.
 | Device                              | Release Date | Chip Options              |
 |-------------------------------------|--------------|---------------------------|
 | iPhone 16                           | 2024         | A18                       |
+| iPhone 17                           | 2025         | A19                       |
 | iPad Pro (7th generation)           | 2024         | M4                        |
 | iMac (2024)                         | 2024         | M4                        |
 | Mac Mini (2024)                     | 2024         | M4, M4 Pro, M4 Max        |
