@@ -10,19 +10,22 @@ learning_objectives:
     - Create a virtual machine in a Realm running guest Linux using a pre-built docker container.
     - Run a simple application in a Realm running guest Linux.
     - Obtain a CCA attestation token from the virtual guest in a Realm.
+    - Run the CCA software stack using MEC (Memory Encryption Contexts)
 
 prerequisites:
-    - An AArch64 or x86_64 computer running Linux. You can use cloud instances, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
+    - An AArch64 or x86_64 computer running Linux or MacOS. You can use cloud instances, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
-author: Pareena Verma
+author:
+    - Pareena Verma
+    - Arnaud de Grandmaison
 
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
-    - Neoverse 
+    - Neoverse
 operatingsystems:
-    - Linux 
+    - Linux
 tools_software_languages:
     - GCC
     - FVP
@@ -31,8 +34,12 @@ tools_software_languages:
     - Docker
     - Runbook
 
-    
+
 further_reading:
+    - resource:
+        title: Learn the architecture - Introducing Arm Confidential Compute Architecture
+        link: https://developer.arm.com/documentation/den0125
+        type: documentation
     - resource:
         title: Arm Confidential Compute Architecture
         link: https://www.arm.com/architecture/security-features/arm-confidential-compute-architecture
