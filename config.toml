@@ -1,6 +1,6 @@
 title = 'Arm Learning Paths'
 
-baseURL = 'https://localhost:1313/'
+baseURL = '/'
 languageCode = 'en-us'
 theme = "arm-design-system-hugo-theme"
 
