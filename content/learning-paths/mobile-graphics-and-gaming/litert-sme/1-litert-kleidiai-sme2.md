@@ -20,7 +20,7 @@ The software stack for LiteRT is shown below.
 
 ## How KleidiAI works in LiteRT
 
-To understand how KleidiAI SME2 micro-kernels work in LiteRT, think about a LiteRT model with one fully connected operator using the FP32 data type. The following diagrams illustrate the execution workflow of XNNPACK’s implementation compared with the workflow when KleidiAI SME2 is enabled in XNNPACK.
+To understand how KleidiAI SME2 micro-kernels work in LiteRT, think about a LiteRT model with one fully connected operator using the FP32 data type. The following diagrams illustrate the execution workflow of XNNPACK's implementation compared with the workflow when KleidiAI SME2 is enabled in XNNPACK.
 
 ### LiteRT → XNNPACK workflow
 

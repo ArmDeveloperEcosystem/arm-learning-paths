@@ -106,7 +106,7 @@ bazel-bin/litert/tools/benchmark_model
 
 ## Build the LiteRT benchmark tool without KleidiAI (baseline comparison)
 
-To compare the performance of the KleidiAI SME2 implementation against XNNPACK’s original implementation, build another version of the LiteRT benchmark tool without KleidiAI and SME2 enabled.
+To compare the performance of the KleidiAI SME2 implementation against XNNPACK's original implementation, build another version of the LiteRT benchmark tool without KleidiAI and SME2 enabled.
 
 Set the build options to disable SME2 and KleidiAI:
 
@@ -129,7 +129,7 @@ ${XNNPACK_OPTIONS} "${BENCHMARK_TOOL_PATH}" \
 --repo_env=HERMETIC_PYTHON_VERSION=3.12
 ```
 
-This build of the `benchmark_model` disables all SME2 micro-kernels and forces fallback to XNNPACK’s NEON or SVE2 kernels.
+This build of the `benchmark_model` disables all SME2 micro-kernels and forces fallback to XNNPACK's NEON or SVE2 kernels.
 
 You can then use Android Debug Bridge (ADB) to push the benchmark tool to your Android device:
 
