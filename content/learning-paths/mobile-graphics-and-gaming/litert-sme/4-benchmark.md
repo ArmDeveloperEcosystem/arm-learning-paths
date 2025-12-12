@@ -1,10 +1,14 @@
----
 title: Benchmark the LiteRT model
-weight: 4
-
+weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+
+## Prerequisites for Benchmarking on SME2
+
+Before you begin benchmarking LiteRT models on an SME2-capable Android device, make sure you have the following components prepared:
+
 
 Once you have:
 - A LiteRT model (for example, `fc_fp32.tflite`)
@@ -83,12 +87,12 @@ INFO: [./litert/tools/benchmark_litert_model.h:179]
 	        LiteRT::Run[buffer registration]	    0.020	    0.014	  3.309%	  3.309%	     0.000	        1	LiteRT::Run[buffer registration]/0
 	                         AllocateTensors	    0.291	    0.291	  0.022%	  3.331%	   452.000	        0	AllocateTensors/0
 	                     Static Reshape (NC)	    0.085	    0.003	  0.739%	  4.070%	     0.000	        1	Delegate/Static Reshape (NC):0
-	         Fully Connected (NC, PF32) GEMM	    0.538	    0.382	 92.948%	 97.018%	     0.000	        1	Delegate/Fully Connected (NC, PF32) GEMM:1
+	         Fully connected (NC, PF32) GEMM	    0.538	    0.382	 92.948%	 97.018%	     0.000	        1	Delegate/fully connected(NC, PF32) GEMM:1
 	                LiteRT::Run[Buffer sync]	    0.013	    0.012	  2.982%	100.000%	     0.000	        1	LiteRT::Run[Buffer sync]/0
 
 ============================== Top by Computation Time ==============================
 	                             [node type]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
-	         Fully Connected (NC, PF32) GEMM	    0.538	    0.382	 92.948%	 92.948%	     0.000	        1	Delegate/Fully Connected (NC, PF32) GEMM:1
+	         fully connected(NC, PF32) GEMM	    0.538	    0.382	 92.948%	 92.948%	     0.000	        1	Delegate/fully connected(NC, PF32) GEMM:1
 	                         AllocateTensors	    0.291	    0.291	  0.022%	 92.970%	   452.000	        0	AllocateTensors/0
 	        LiteRT::Run[buffer registration]	    0.020	    0.014	  3.309%	 96.279%	     0.000	        1	LiteRT::Run[buffer registration]/0
 	                LiteRT::Run[Buffer sync]	    0.013	    0.012	  2.982%	 99.261%	     0.000	        1	LiteRT::Run[Buffer sync]/0
@@ -97,7 +101,7 @@ INFO: [./litert/tools/benchmark_litert_model.h:179]
 Number of nodes executed: 5
 ============================== Summary by node type ==============================
 	                             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
-	         Fully Connected (NC, PF32) GEMM	        1	     0.382	    93.171%	    93.171%	     0.000	        1
+	         fully connected(NC, PF32) GEMM	        1	     0.382	    93.171%	    93.171%	     0.000	        1
 	        LiteRT::Run[buffer registration]	        1	     0.013	     3.171%	    96.341%	     0.000	        1
 	                LiteRT::Run[Buffer sync]	        1	     0.012	     2.927%	    99.268%	     0.000	        1
 	                     Static Reshape (NC)	        1	     0.003	     0.732%	   100.000%	     0.000	        1
@@ -113,7 +117,7 @@ You will see the time spent on model initialization, warm-up, and inference, as 
 Because the model contains only a single fully connected layer, the node type `Fully Connected (NC, PF32) GEMM` shows the average execution time and its percentage of total inference time.
 
 {{% notice Note %}}
-To verify that KleidiAI SME2 micro-kernels are invoked for the Fully Connected operator during inference, you can use `simpleperf record -g -- <workload>` to capture the calling graph. For `benchmark_model`, build with the `-c dbg` option.
+To verify that KleidiAI SME2 micro-kernels are invoked for the FullyConnected operator during inference, run `simpleperf record -g -- <workload>` to capture the calling graph. If you're using the `benchmark_model`, build it with the `-c dbg` option.
 {{% /notice %}}
 
 ## Measure the performance impact of KleidiAI SME2 micro-kernels
@@ -217,3 +221,10 @@ The letter “P” in the node type indicates a KleidiAI implementation.
 For example, `Convolution (NHWC, PQS8, QS8, QC8W)` represents a Conv2D operator computed by a KleidiAI micro-kernel, where the tensor is in NHWC layout, the input is packed INT8 quantized, the weights are per-channel INT8 quantized, and the output is INT8 quantized.
 
 By comparing `benchmark_model` runs with and without KleidiAI and SME2, and inspecting the profiled node types (PF32, PF16, QP8, PQS8), you can confirm that LiteRT is dispatching to SME2-optimized KleidiAI micro-kernels and quantify their performance impact on your Android device.
+
+
+## What you've accomplished and what's next
+
+In this section, you learned how to benchmark LiteRT models on SME2-capable Android devices, verify SME2 support, and interpret performance results with and without KleidiAI SME2 micro-kernels. You also discovered how to identify which micro-kernels are used during inference by examining node type names in the profiler output.
+
+You are now ready to further analyze performance, experiment with different models, or explore advanced profiling and optimization techniques for on-device AI with LiteRT, XNNPACK, and KleidiAI. Continue to the next section to deepen your understanding or apply these skills to your own projects.

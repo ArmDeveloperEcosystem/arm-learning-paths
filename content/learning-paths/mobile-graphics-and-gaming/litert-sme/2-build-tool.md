@@ -1,6 +1,6 @@
 ---
 title: Build the LiteRT benchmark tool
-weight: 3
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

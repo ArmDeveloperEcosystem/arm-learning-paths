@@ -12,7 +12,7 @@ LiteRT uses XNNPACK as its default CPU backend. KleidiAI micro-kernels are integ
 
 ### Supported operator configurations
 
-**Fully connected:**
+#### Fully Connected:
 
 | Activations                  | Weights                                 | Output                       |
 | ---------------------------- | --------------------------------------- | ---------------------------- |
@@ -22,7 +22,7 @@ LiteRT uses XNNPACK as its default CPU backend. KleidiAI micro-kernels are integ
 | Asymmetric INT8 quantization | Per-channel symmetric INT8 quantization | Asymmetric INT8 quantization |
 | FP32                         | Per-channel symmetric INT4 quantization | FP32                         |
 
-**Batch matrix multiply:**
+#### Batch matrix multiply:
 
 | Input A | Input B                                 |
 | ------- | --------------------------------------- |
@@ -30,7 +30,7 @@ LiteRT uses XNNPACK as its default CPU backend. KleidiAI micro-kernels are integ
 | FP16    | FP16                                    |   
 | FP32    | Per-channel symmetric INT8 quantization |
 
-**Conv2D:**
+#### Conv2D:
 
 | Activations                  | Weights                                               | Output                       |
 | ---------------------------- | ----------------------------------------------------- | ---------------------------- |
@@ -39,17 +39,16 @@ LiteRT uses XNNPACK as its default CPU backend. KleidiAI micro-kernels are integ
 | FP32                         | Per-channel or per-tensor symmetric INT8 quantization | FP32                         |
 | Asymmetric INT8 quantization | Per-channel or per-tensor symmetric INT8 quantization | Asymmetric INT8 quantization |
 
-**TransposeConv:**
+#### TransposeConv:
 
 | Activations                  | Weights                                               | Output                       |
 | ---------------------------- | ----------------------------------------------------- | ---------------------------- |
 | Asymmetric INT8 quantization | Per-channel or per-tensor symmetric INT8 quantization | Asymmetric INT8 quantization |
 
----
 
 ## Create LiteRT models using Keras
 
-To demonstrate SME2 acceleration on Android, you will construct simple single-layer models (for example, Fully Connected) using Keras and convert them into LiteRT (`.tflite`) format. This allows you to benchmark isolated operators and directly observe SME2 improvements.
+To demonstrate SME2 acceleration on Android, you will construct simple single-layer models (for example, fully connected) using Keras and convert them into LiteRT (`.tflite`) format. This allows you to benchmark isolated operators and directly observe SME2 improvements.
 
 Install the TensorFlow package dependency for your script:
 
@@ -122,8 +121,6 @@ This method applies FP16 quantization to a model with FP32 operators. In practic
 
 KleidiAI provides FP16 packing micro-kernels for both the activations and weights matrix, as well as FP16 matrix multiplication micro-kernels.
 
----
-
 **Post-training INT8 dynamic range quantization**
 
 ```python
@@ -137,8 +134,6 @@ save_litert_model(fc_int8_dynamic, "fc_dynamic_int8.tflite")
 This quantization method optimizes operators with large parameter sizes by quantizing their weights to INT8 while keeping the activations in the FP32 data format.
 
 KleidiAI provides micro-kernels that dynamically quantize activations to INT8 at runtime, as well as packing micro-kernels for the weights matrix and INT8 matrix multiplication micro-kernels that produce FP32 outputs.
-
----
 
 **Post-training INT8 static quantization**
 
@@ -163,6 +158,13 @@ This quantization method quantizes both the activations and the weights to INT8.
 
 KleidiAI provides INT8 packing micro-kernels for both the activations and weights matrix, as well as INT8 matrix multiplication micro-kernels.
 
----
+## What you've accomplishee and what's next
+You have now created several LiteRT models with different quantization options, ready for benchmarking on your Arm-based Android device. You have:
 
-You have now created several LiteRT models with different quantization options, ready for benchmarking on your Arm-based Android device.
+- Built a simple Keras model and converted it to LiteRT (`.tflite`) format.
+- Generated models with different quantization types: FP32, FP16, INT8 dynamic, and INT8 static.
+- Learned how each quantization method affects model size, performance, and compatibility with KleidiAI SME2 micro-kernels.
+
+Now that you have created and converted your models, you can benchmark them on your Android device to measure the performance gains from SME2 acceleration. Consider experimenting with additional layers such as Conv2D, BatchMatMul, or TransposeConv to further explore SME2 support for different operators. You can also apply more quantization and optimization techniques to enhance model efficiency. Finally, integrate your optimized models into your Android applications to leverage Arm SME2 acceleration in real-world use cases.
+
+By following these steps, you can maximize the performance of your machine learning models on Arm-based devices using LiteRT and KleidiAI SME2.
