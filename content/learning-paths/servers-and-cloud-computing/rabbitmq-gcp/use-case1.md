@@ -1,6 +1,6 @@
 ---
 title: RabbitMQ Use Case 1 – Event Processing with Python Workers
-weight: 6 
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -90,7 +90,7 @@ This binding ensures the queue receives all messages with routing keys such as:
 Publish a sample order event to the exchange.
 
 ```console
-./rabbitmqadmin publish exchange=events routing_key="order.created" payload='{"order_id":123}
+./rabbitmqadmin publish exchange=events routing_key="order.created" payload='{"order_id":123}'
 ```
 
 - Publishes an event to the events exchange.
@@ -115,8 +115,10 @@ Create a Python worker file to process messages from a queue.
 
 A **Python worker** was created to process messages from a RabbitMQ queue (jobs) using the pika library. The queue is durable, ensuring message persistence. The worker implements fair dispatch (prefetch_count=1) and manual acknowledgments to reliably process each job without loss. Messages were successfully published to the queue using rabbitmqadmin, and the worker consumed them as expected.
 
+Using your favorite editor (example is using "edit" below...) create your "worker.py" file:
+
 ```console
-vi worker.py
+edit worker.py
 ```
 
 **worker.py:**
@@ -173,7 +175,7 @@ The worker started. Waiting for jobs...
 ```
 
 ### Publish Job Messages
-From another terminal, publish a job message.
+From another SSH terminal, publish a job message.
 
 ```console
 ./rabbitmqadmin publish routing_key=jobs payload='{"job":"test1"}'
@@ -198,13 +200,13 @@ Publish another job:
 Worker started. Waiting for jobs...
 [Worker] Received job: {'job': 'hello1'}
 ```
+Now press "CTRL-C" to exit the worker application.
 
 ## Use Case Validation
 
 - Event routing via topic exchanges functions correctly  
 - Durable queues and acknowledgments ensure reliable message processing  
 - Worker-based consumption supports safe and controlled job execution
-
 
 This use case demonstrates how RabbitMQ enables reliable, decoupled, and scalable event processing using topic-based routing and Python workers.
 The setup provides a strong foundation for production-grade, message-driven architectures on GCP SUSE Arm64 virtual machines.

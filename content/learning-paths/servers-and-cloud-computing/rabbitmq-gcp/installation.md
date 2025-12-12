@@ -1,6 +1,6 @@
 ---
 title: Install RabbitMQ
-weight: 4
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -126,19 +126,16 @@ sudo rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
 
 **Log in to Management UI**
 
+Now, let’s test it from outside the VM. Open a web browser on your LOCAL machine (Chrome, Firefox, Edge, etc.) and enter the following URL and credentials in the address bar:
+
 - **URL**: http://<VM_IP>:15672
 - **Username**: admin
 - **Password**: StrongPassword123
 
-This is the production-safe approach.
-
-Now, let’s test it from outside the VM. Open a web browser on your local machine (Chrome, Firefox, Edge, etc.) and enter the following URL in the address bar:
-
-```console
-[http://<YOUR_VM_PUBLIC_IP>/info.php](http://<VM_IP>:15672)
-```
-- Replace `<VM_IP>` with the public IP of your GCP VM.
+Replace `<VM_IP>` with the public IP of your GCP VM.
 
 If everything is set up correctly, you will see a RabbitMQ login page in your browser. It looks like this:
 
 ![RabbitMQ page alt-text#center](images/rabbitmq.png "Figure 1: RabbitMQ Login page")
+
+This confirms that your RabbitMQ management dashboard is operational.

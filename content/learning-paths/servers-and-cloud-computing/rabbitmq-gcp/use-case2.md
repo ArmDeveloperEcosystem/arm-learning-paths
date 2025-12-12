@@ -1,6 +1,6 @@
 ---
 title: RabbitMQ use case 2 - WhatsApp Notification
-weight: 7 
+weight: 8 
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -218,23 +218,27 @@ The worker is running correctly and waiting for messages without exiting.
 [DEBUG] Declaring queue...
 [DEBUG] Setting QoS...
 WhatsApp Worker started. Waiting for messages...
-[DEBUG] Starting consumer loop (this should BLOCK)...
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: Your order #1234 has been confirmed
-[Worker] Message sent successfully
-[Worker] Sending WhatsApp message to +911234567890
+[DEBUG] Starting consumer loop (this should block)...
 ```
 
 The process must block without returning to the shell prompt.
 
 ### Publish a Test Message
-From another terminal: Publishes a WhatsApp notification message to RabbitMQ.
+From another SSH terminal: Publishes a WhatsApp notification message to RabbitMQ.
 
 ```console
 ./rabbitmqadmin publish \
   exchange=notifications \
   routing_key=whatsapp \
   payload='{"phone":"+911234567890","message":"Hello from RabbitMQ"}'
+```
+
+You should see the following output from whatsapp_worker.py that is running in the first SSH terminal:
+
+```output
+[Worker] Sending WhatsApp message to +911234567890
+[Worker] Message content: Hello from RabbitMQ
+[Worker] Message sent successfully
 ```
 
 ### Message Consumption Validation
@@ -245,30 +249,9 @@ The worker terminal displays logs similar to:
 [DEBUG] Declaring queue...
 [DEBUG] Setting QoS...
 WhatsApp Worker started. Waiting for messages...
-[DEBUG] Starting consumer loop (this should BLOCK)...
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: Your order #1234 has been confirmed
-[Worker] Message sent successfully
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: Your order #1234 has been confirmed
-[Worker] Message sent successfully
-[Worker] Sending WhatsApp message to +9111
-[Worker] Message content: Test-1
-[Worker] Message sent successfully
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: Validation test
-[Worker] Message sent successfully
+[DEBUG] Starting consumer loop (this should block)...
 [Worker] Sending WhatsApp message to +911234567890
 [Worker] Message content: Hello from RabbitMQ
-[Worker] Message sent successfully
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: Hello from RabbitMQ
-[Worker] Message sent successfully
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: FINAL validation test
-[Worker] Message sent successfully
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: FINAL validation test
 [Worker] Message sent successfully
 ```
 **What this confirms:**
@@ -285,14 +268,14 @@ End-to-end message flow validated.
 ./rabbitmqadmin list queues name messages consumers
 ```
 
-Expected output:
+Expected output should be similar to:
 
 ```output
 +------------------------+----------+-----------+
 |          name          | messages | consumers |
 +------------------------+----------+-----------+
-| jobs                   | 1        | 0         |
-| order.events           | 1        | 0         |
+| jobs                   | 0        | 0         |
+| order.events           | 2        | 0         |
 | testqueue              | 1        | 0         |
 | whatsapp.notifications | 0        | 1         |
 +------------------------+----------+-----------+

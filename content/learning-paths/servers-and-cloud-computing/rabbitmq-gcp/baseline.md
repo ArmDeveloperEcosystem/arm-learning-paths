@@ -1,6 +1,6 @@
 ---
 title: RabbitMQ Baseline Testing on Google Axion C4A Arm Virtual Machine
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
