@@ -9,7 +9,7 @@ layout: learningpathall
 ## Install RabbitMQ on GCP SUSE Arm64 VM
 This guide describes a **step-by-step installation of RabbitMQ** on a **Google Cloud Platform SUSE Linux Arm64 virtual machine**, using **RPM packages** for both **Erlang** and **RabbitMQ Server**.
 
-RabbitMQ requires Erlang to be installed before setting up the server.
+RabbitMQ needs Erlang to be installed before setting up the server.
 
 
 ### Prerequisites
@@ -18,14 +18,14 @@ RabbitMQ requires Erlang to be installed before setting up the server.
 - Root or sudo privileges
 - Outbound internet access
 
-### Refresh System Repositories
+### Refresh system repositories
 This step updates the system’s package list so the operating system knows about the latest software available from its repositories.
 
 ```console
 sudo zypper refresh
 ```
 
-### Install Required System Utilities
+### Install required system utilities
 You can install the basic tools needed to download and manage packages.
 
 ```console
@@ -40,7 +40,7 @@ wget https://github.com/rabbitmq/erlang-rpm/releases/download/v26.2.5/erlang-26.
 sudo rpm -Uvh erlang-26.2.5-1.el8.aarch64.rpm
 ```
 
-### Verify Erlang Installation
+### Verify Erlang installation
 Confirm that Erlang is installed correctly.
 
 ```console
@@ -68,14 +68,14 @@ You can view [this release note](https://github.com/rabbitmq/rabbitmq-server/blo
 The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends RabbitMQ version 3.11.0, the minimum recommended on Arm platforms.
 {{% /notice %}}
 
-### Enable and Start RabbitMQ Service
+### Enable and start RabbitMQ service
 Enable RabbitMQ to start automatically on boot and start the service immediately.
 
 ```console
 sudo systemctl enable rabbitmq-server --now
 ```
 
-### Verify RabbitMQ Service Status
+### Verify RabbitMQ service status
 Check the status of the RabbitMQ service.
 
 ```console
@@ -84,7 +84,7 @@ sudo systemctl status rabbitmq-server
 
 The service should be in an active (running) state.
 
-### Enable RabbitMQ Management Plugin
+### Enable RabbitMQ management plugin
 Enable the RabbitMQ management plugin to access the web-based dashboard.
 
 ```console
@@ -98,7 +98,7 @@ Restart RabbitMQ to apply plugin changes.
 sudo systemctl restart rabbitmq-server
 ```
 
-### Verify RabbitMQ Version
+### Verify RabbitMQ version
 Confirm the installed RabbitMQ version.
 
 ```console
@@ -111,7 +111,7 @@ You should see an output similar to:
 4.2.0
 ```
 
-### Access RabbitMQ Management UI
+### Access RabbitMQ management UI
 Create a new RabbitMQ user for remote access.
 
 Create a new `admin` user by running these commands on the VM:
