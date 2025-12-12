@@ -8,6 +8,7 @@ on:
 
 jobs:
   resize-images:
+    if: github.repository == 'ArmDeveloperEcosystem/arm-learning-paths'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -19,7 +20,7 @@ jobs:
         id: changed-files
         run: |
           # Find all image files that changed since last Monday
-          CHANGED_IMAGES=$(git log --since="7 days ago" --name-only --pretty="" \
+          CHANGED_IMAGES=$(git log --since="10 days ago" --name-only --pretty="" \
           -- '*.jpg' '*.jpeg' '*.png' '*.JPG' '*.JPEG' '*.PNG' | sort -u | tr '\n' ' ')
           
           echo "changed_images=$CHANGED_IMAGES" >> $GITHUB_OUTPUT

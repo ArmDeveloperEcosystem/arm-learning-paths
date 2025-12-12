@@ -17,7 +17,7 @@ Once we run our pipeline with the correct **`tags`** Gitlab will create everythi
 1. Start by going to the main project page where we will need to Create the CI/CD pipeline.
 
 2. We can choose to create **`.gitlab-ci.yml`** file by using one of the 2 options circled in red in the image below. 
-![CI-CD-New #center](_images/ci-cd-new.png)
+![CI-CD-New #center](_images/ci-cd-new.webp)
 
 Option1: We can Click on **`Set up CI/CD`** button/link and follow the wizad to create an empty **`.gitlab-ci.yml`** file.
 
@@ -25,7 +25,7 @@ Option2: Click on the "+" button. From the popup menu click on **`New File`** op
 ![New-YML #center](_images/new-yml.png)
 
 3. A page like the one in the image below will be visible with our **`.gitlab-ci.yml`** file. From here, we will need to Click on the **`Edit`** button. A menu will pop up, We will click on **`Edit in pipeline Editor`** which will allow us to add our CD/CD script.
-![Editor-YML #center](_images/editor-yml.png)
+![Editor-YML #center](_images/editor-yml.webp)
 
 4. In the pipeline editor, just copy and paste the following YML script and click on commit changes (Add any relevent message as your commit update message).
 ```YML

@@ -26,6 +26,8 @@ Next, refresh your package list so zypper recognizes the newest packages and dep
 sudo zypper refresh
 ```
 
+You may be prompted to trust or reject a key... if so please press "t" to accept/trust the key. 
+
 Now your system is ready to install the required tools for the CircleCI CLI.
 
 ## Install Git and required tools

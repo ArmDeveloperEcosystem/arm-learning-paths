@@ -46,4 +46,4 @@ To create a virtual machine based on the C4A instance type:
 
 ![Terminal Shell in your VM instance alt-text#center](images/gcp-shell.png "Terminal shell in your VM instance")
 
-Next, let's install Couchbase!
+Next, let's install django!

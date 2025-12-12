@@ -1,35 +1,27 @@
 ---
-title: Install CircleCI machine runner on AWS Graviton2
+title: Install CircleCI machine runner on AWS Graviton
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Install CircleCI machine runner on AWS Graviton2
+## Install CircleCI machine runner on AWS Graviton
 
-This Learning Path shows you how to install and configure the CircleCI Machine Runner on an AWS Graviton2 (Neoverse N1) instance. With this setup, your self-hosted Arm64 environment can efficiently execute CircleCI jobs directly on the Graviton2 architecture, enabling faster builds and improved performance for Arm-based workloads.
+This section provides step-by-step instructions to install and configure the CircleCI Machine Runner. With this setup, your self-hosted Arm64 environment can efficiently execute CircleCI jobs directly on the Graviton architecture, enabling faster builds and improved performance for ARM-based workloads.
 
 
-## Add the CircleCI package repository
-For Debian/Ubuntu-based systems running on AWS Graviton2 (Arm64), first add the official CircleCI repository. This ensures you can install the CircleCI Runner package directly using `apt`:
+### Add the CircleCI package repository
+For Debian/Ubuntu-based systems running on AWS Graviton (Arm64), first add the official CircleCI repository. This ensures you can install the CircleCI Runner package directly using `apt`.
 
 ```console
 curl -s https://packagecloud.io/install/repositories/circleci/runner/script.deb.sh?any=true | sudo bash
 ```
 
-- The `curl` command downloads and executes the repository setup script from CircleCI's official package server.  
-- It configures the repository on your system, allowing `apt` to fetch and install the CircleCI runner package.  
-- After successful execution, the CircleCI repository will be added under `/etc/apt/sources.list.d/`.
+After successful execution, the CircleCI repository will be added under `/etc/apt/sources.list.d/`. Run the command to verify:
 
-## Configure the runner token
-- Each self-hosted runner requires a unique authentication token generated from your resource class in the CircleCI dashboard.  
-- Copy the token from the CircleCI web interface.  
-- Export the token as an environment variable and update the runner configuration file as shown:
-
-```console
-export RUNNER_AUTH_TOKEN="YOUR_AUTH_TOKEN"
-sudo sed -i "s/<< AUTH_TOKEN >>/$RUNNER_AUTH_TOKEN/g" /etc/circleci-runner/circleci-runner-config.yaml
+```bash
+ls /etc/apt/sources.list.d/
 ```
 
 ## Install the CircleCI runner
@@ -87,4 +79,4 @@ This confirms that the CircleCI Runner is actively connected to your CircleCI ac
 
 You can also verify it from the dashboard:
 
-![Diagram showing the CircleCI self-hosted runner architecture. The main subject is an AWS Graviton2 server labeled as a self-hosted runner, connected to the CircleCI cloud platform. Arrows indicate job requests flowing from CircleCI to the runner and job results returning to CircleCI. The environment includes icons for cloud infrastructure and developer workstations. The tone is technical and informative. Any visible text in the image is transcribed as: Self-Hosted Runners. alt-text#center](images/runner.png "Self-Hosted Runners ")
+![Diagram showing the CircleCI self-hosted runner architecture. The main subject is an AWS Graviton server labeled as a self-hosted runner, connected to the CircleCI cloud platform. Arrows indicate job requests flowing from CircleCI to the runner and job results returning to CircleCI. The environment includes icons for cloud infrastructure and developer workstations. The tone is technical and informative. Any visible text in the image is transcribed as: Self-Hosted Runners. alt-text#center](images/runner.png "Self-Hosted Runners ")

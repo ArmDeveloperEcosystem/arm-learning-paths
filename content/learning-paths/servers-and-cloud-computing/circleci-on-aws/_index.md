@@ -1,30 +1,21 @@
 ---
-title: Deploy CircleCI Arm Native Workflows on AWS EC2 Graviton2 
+title: Deploy CircleCI Arm Native Workflows on AWS EC2 Graviton
     
-minutes_to_complete: 45
+minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers and DevOps engineers who want to set up and run CircleCI Arm native workflows on Linux Arm64 virtual machines. You'll use AWS EC2 Graviton2 instances (Neoverse N1) and self-hosted runners. 
+who_is_this_for: This is an introductory topic for developers and DevOps engineers who want to set up and run CircleCI Arm native workflows on Linux Arm64 virtual machines. You'll use AWS EC2 Graviton instances (Neoverse N1) and self-hosted runners. 
 
 learning_objectives:
-  - Provision an AWS EC2 Graviton2 Arm64 virtual machine
-  - Install and configure a CircleCI self-hosted machine runners on Arm64
+  - Create an AWS EC2 Graviton Arm64 virtual machine
+  - Install and configure CircleCI self-hosted machine runners on Arm64
   - Verify the runner by running a simple workflow and test computation
-  - Define and execute CircleCI job using a machine executor
-  - Check CPU architecture and execute a basic script to confirm if the runner is operational
-  - Display CPU information and validate outputs from the sample computation
 
 prerequisites:
   - An [AWS account](https://aws.amazon.com/free/) with billing enabled
-  - A [CircleCI account](https://circleci.com/)
-  - Basic familiarity with Linux command line
-  - Basic understanding of CircleCI concepts such as 
-    [workflows](https://circleci.com/docs/guides/orchestrate/workflows/), 
-    [jobs](https://circleci.com/docs/guides/orchestrate/jobs-steps/),
-    [resource classes](https://circleci.com/docs/guides/execution-managed/resource-class-overview/), and 
-    [runners](https://circleci.com/docs/guides/execution-runner/runner-overview/)
+  - A CircleCI account
+  - Basic understanding of CircleCI workflows, jobs and resource classes
 
-
-author: Pareena Verma
+author: Annie Tallund
 
 ##### Tags
 skilllevels: Introductory
@@ -36,7 +27,7 @@ armips:
 
 tools_software_languages:
   - CircleCI
-  - Bash/Shell scripting
+  - Bash
   - Git
 
 
@@ -48,8 +39,8 @@ operatingsystems:
 # ================================================================================
 further_reading:
   - resource:
-      title: AWS EC2 Documentation
-      link: https://docs.aws.amazon.com/ec2/index.html
+      title: AWS EC2 Graviton Documentation
+      link: https://aws.amazon.com/ec2/graviton/
       type: documentation
 
   - resource:

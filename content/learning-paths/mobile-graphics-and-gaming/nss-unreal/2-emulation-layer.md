@@ -71,9 +71,17 @@ Open your project directory in Windows explorer, and create a new folder called 
 
 Enabling the plugin will look slightly different depending on what Unreal version you are using. Follow the steps corresponding to your setup.
 
+## For Unreal 5.4 and 4.27
+
+1. Copy the downloaded and extracted `.zip` archive into the new `Plugins` directory:
+   - `UE5.4` or `UE4.27`
+2. Re-open Unreal Engine. When prompted, confirm plugin integration.
+3. Rebuild your project in Visual Studio from source.
+4. Verify the installation by opening the Plugins view in Unreal Engine, and making sure the checkbox is selected for `NSS`. Restart Unreal Engine if prompted.
+
 ## For Unreal 5.5
 
-1. Copy the downloaded and extracted `.zip` into the new `Plugins` directory:
+1. Copy the downloaded and extracted `.zip` archives into the new `Plugins` directory:
    - `UE5.5`
    - `NNERuntimeRDGMLExtensionsForVulkan`
 2. Re-open Unreal Engine. When prompted, confirm plugin integration.
@@ -81,14 +89,5 @@ Enabling the plugin will look slightly different depending on what Unreal versio
 4. Verify the installation by opening the Plugins view in Unreal Engine, and making sure the checkbox is selected for both `NSS` and `NNERuntimeRDGMLExtensionsForVulkan` as shown. Restart Unreal Engine if prompted.
 
 ![Unreal Engine plugins window showing NSS and NNERuntimeRDGMLExtensionsForVulkan enabled#center](./images/verify_plugin_enabled.png "Figure 5: Verify plugin installation in Unreal Engine.")
-
-
-## For Unreal 5.4
-
-1. Copy the downloaded and extracted `.zip` into the new `Plugins` directory:
-   - `UE5.4`
-2. Re-open Unreal Engine. When prompted, confirm plugin integration.
-3. Rebuild your project in Visual Studio from source.
-4. Verify the installation by opening the Plugins view in Unreal Engine, and making sure the checkbox is selected for `NSS`. Restart Unreal Engine if prompted.
 
 With the emulation layers and plugins configured, you're ready to run Neural Super Sampling in Unreal Engine. Continue to the next section to test the integration.
