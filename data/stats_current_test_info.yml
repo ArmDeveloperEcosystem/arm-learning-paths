@@ -96,7 +96,8 @@ sw_categories:
       tests_and_status: []
     github-copilot:
       readable_title: GitHub Copilot
-      tests_and_status: []
+      tests_and_status:
+      - ubuntu:latest: passed
     go:
       readable_title: Go
       tests_and_status: []
