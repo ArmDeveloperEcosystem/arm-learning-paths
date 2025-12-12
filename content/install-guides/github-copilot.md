@@ -38,11 +38,11 @@ Visual Studio Code is one of the most popular editors for using GitHub Copilot, 
 
 ### Install Visual Studio Code
 
-If you don't have Visual Studio Code installed, download and install it for your operating system:
+If you don't have Visual Studio Code installed, download and install it from the [offical download page]((https://code.visualstudio.com/download) for your operating system:
 
-- macOS (Apple Silicon): Download from [Visual Studio Code for macOS](https://code.visualstudio.com/download) and select the Apple Silicon version
-- Linux (Arm): Download the Arm64 `.deb` or `.rpm` package from the same download page
-- Windows on Arm: Download the Arm64 installer from the download page
+- macOS (Apple Silicon): Download the the Apple Silicon version
+- Linux (Arm): Download the Arm64 `.deb` or `.rpm` package
+- Windows on Arm: Download the Arm64 installer
 
 For Linux, you can install VS Code using the package manager. On Ubuntu and Debian-based distributions:
 
@@ -188,13 +188,25 @@ The Arm MCP Server includes several tools designed for Arm development:
 
 You need Docker running on your system to use the Arm MCP Server. See the [Docker install guide](/install-guides/docker/) for instructions.
 
-First, pull the Arm MCP Server image:
+You can configure the MCP server using one of these methods:
 
-```console
-docker pull armlimited/arm-mcp:latest
-```
+Method 1: Install from GitHub MCP Registry (recommended)
 
-Configure the Arm MCP Server manually by creating a configuration file in your workspace. You can configure MCP servers in two locations:
+The easiest way to install the Arm MCP Server is through the GitHub MCP Registry:
+
+1. Visit the [Arm MCP Server registry page](https://github.com/mcp/arm/arm-mcp)
+2. Select the **Install MCP Server** button
+3. From the dropdown, choose **Install in VSCode**
+4. VS Code opens with the Arm MCP Server installation page
+5. Select **Install** as you would with other extensions
+
+![MCP Server Install](/install-guides/_images/mcp-server-install.png "Figure 1. Install Arm MCP Server")
+
+This method automatically installs the Arm MCP Server and pulls the Docker image. No manual configuration is required.
+
+Method 2: Workspace configuration (recommended for sharing)
+
+For manual configuration, you can create a configuration file in your workspace. MCP servers can be configured in two locations:
 
 - For a specific repository: Create a `.vscode/mcp.json` file in the root of your repository. This enables you to share MCP server configuration with anyone who opens the project.
 - For your personal VS Code instance: Add the configuration to your `settings.json` file. This makes the server available in all workspaces.
@@ -203,9 +215,11 @@ Configure the Arm MCP Server manually by creating a configuration file in your w
 Use only one location per server to avoid conflicts and unexpected behavior.
 {{% /notice %}}
 
-You can configure the MCP server using one of these methods:
+First, pull the Arm MCP Server image:
 
-Method 1: Workspace configuration (recommended for sharing)
+```console
+docker pull armlimited/arm-mcp:latest
+```
 
 Create a `.vscode` directory in your project root if it doesn't exist, then create an `mcp.json` file:
 
@@ -233,7 +247,7 @@ Add the following configuration to `.vscode/mcp.json`:
 }
 ```
 
-Method 2: User configuration (available in all workspaces)
+Method 3: User configuration (available in all workspaces)
 
 Open the Command Palette (`Ctrl+Shift+P` on Windows/Linux or `Cmd+Shift+P` on macOS) and select **MCP: Open User Configuration**. This opens your user-level `mcp.json` file located at `~/Library/Application Support/Code/User/mcp.json` (macOS) or `%APPDATA%\Code\User\mcp.json` (Windows).
 
@@ -286,7 +300,7 @@ Open the GitHub Copilot Chat panel by selecting the chat icon in the Activity Ba
 
 To view available MCP tools, select the tools icon in the top left corner of the chat box. This opens the MCP server list showing all available tools from the Arm MCP Server.
 
-![MCP Server Tools](/install-guides/_images/new-mcp-server-tools.png "Figure 1. Tools loaded from the Arm MCP Server")
+![MCP Server Tools](/install-guides/_images/new-mcp-server-tools.png "Figure 2. Tools loaded from the Arm MCP Server")
 
 You can also ask Copilot to use specific Arm MCP tools:
 
