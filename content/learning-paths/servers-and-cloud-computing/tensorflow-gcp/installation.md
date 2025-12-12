@@ -46,7 +46,7 @@ python3.11 -m venv tf-venv
 source tf-venv/bin/activate
 ```
 
-This creates and activates a virtual environment named `tf-venv` to prevent package conflicts.
+Your virtual environment `tf-venv` is now active and isolated from system packages.
 
 ## Upgrade pip
 
