@@ -1,6 +1,8 @@
 ---
 title: GitHub Copilot
 
+draft: true 
+
 author: Pareena Verma
 minutes_to_complete: 10
 official_docs: https://docs.github.com/en/copilot
