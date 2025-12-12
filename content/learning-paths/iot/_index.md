@@ -12,11 +12,11 @@ subjects_filter:
 - CI-CD: 4
 - Containers and Virtualization: 2
 - Embedded Linux: 2
-- ML: 2
+- ML: 3
 - Performance and Architecture: 3
 operatingsystems_filter:
 - Baremetal: 4
-- Linux: 9
+- Linux: 10
 - macOS: 2
 - RTOS: 2
 - Windows: 2
@@ -28,13 +28,16 @@ tools_software_languages_filter:
 - Azure: 1
 - balenaCloud: 1
 - BalenaOS: 1
+- Bash: 1
 - C: 1
+- C++: 1
 - Docker: 2
 - FVP: 1
 - GitHub: 3
+- llama.cpp: 1
 - Matter: 1
 - MCP: 1
-- Python: 2
+- Python: 3
 - Raspberry Pi: 4
 - Remote.It: 1
 - ROS 2: 1

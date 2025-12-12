@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## KleidiAI SME2 support in LiteRT
 
-LiteRT uses XNNPACK as its default CPU backend. KleidiAI micro-kernels are integrated through XNNPACK in LiteRT. Only a subset of KleidiAI Scalable Matrix Extension (SME and SME2) micro-kernels has been integrated into XNNPACK. These micro-kernels support operators using the following data types and quantization configurations in the LiteRT model. Other operators use XNNPACK’s default implementation during inference.
+LiteRT uses XNNPACK as its default CPU backend. KleidiAI micro-kernels are integrated through XNNPACK in LiteRT. Only a subset of KleidiAI Scalable Matrix Extension (SME and SME2) micro-kernels has been integrated into XNNPACK. These micro-kernels support operators using the following data types and quantization configurations in the LiteRT model. Other operators use XNNPACK's default implementation during inference.
 
 ### Supported operator configurations
 
@@ -158,7 +158,7 @@ This quantization method quantizes both the activations and the weights to INT8.
 
 KleidiAI provides INT8 packing micro-kernels for both the activations and weights matrix, as well as INT8 matrix multiplication micro-kernels.
 
-## What you've accomplishee and what's next
+## What you've accomplished and what's next
 You have now created several LiteRT models with different quantization options, ready for benchmarking on your Arm-based Android device. You have:
 
 - Built a simple Keras model and converted it to LiteRT (`.tflite`) format
