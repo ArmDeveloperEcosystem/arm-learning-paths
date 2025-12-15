@@ -3,7 +3,7 @@ title: Fine Tune LLM performance on CPU with multithreading
 
 minutes_to_complete: 20
 
-who_is_this_for: ML Engineers looking to fine tune the inference performance of PyTorch running on CPU systems
+who_is_this_for: ML Engineers looking to fine tune the inference performance of LLMs running on CPU 
 
 learning_objectives: 
     - Understand how PyTorch uses multiple threads for CPU inference and the various tradeoffs involved

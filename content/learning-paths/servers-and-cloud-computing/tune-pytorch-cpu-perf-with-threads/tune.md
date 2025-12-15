@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Tuning thread size
 
-We will run inference on Google's [Gemma-3-1B-it](https://huggingface.co/google/gemma-3-1b-it) and measure how inference performance changes as we vary the thread count for both the 270-million-parameter and 1-billion-parameter models. We will be running the `transformers_llm_text_gen.py` script which by default applies groupwise, layout-aware INT4 quantization of our model. 
+We will run inference on Google's [Gemma-3-1B-it](https://huggingface.co/google/gemma-3-1b-it) and measure how inference performance vaires with thread count for both the 270-million-parameter and 1-billion-parameter models. We will be running the `transformers_llm_text_gen.py` script which by default applies groupwise, layout-aware INT4 quantization of our model. 
 
 Create a file names `comparison-1b.sh` and paste in the following script. 
 
@@ -34,7 +34,7 @@ for t in 2 4 8 16 32 64 96; do
 done
 ```
 
-Likewise a separate script for comparing the 270m model 
+Likewise create a separate script, `comparison-1b.sh` for comparing the 270m model 
 
 ```bash
 #!/usr/bin/env bash
@@ -57,7 +57,7 @@ for t in 2 4 8 16 32 64 96; do
 done
 ```
 
-Run both scripts from the directory containing the `transformers_llm_text_gen.py` script with the following commands. For clarity we are only printing the final statistics.
+Run both scripts from the directory containing the `transformers_llm_text_gen.py` file using the commands below. For clarity, we print only the final statistics.
 
 ```bash
 ./comparison-1b.sh
@@ -70,7 +70,7 @@ Run both scripts from the directory containing the `transformers_llm_text_gen.py
 watch -n 0.1 'pid=$(pgrep -n python); [ -n "$pid" ] && ps -L -p "$pid" -o pid,tid,psr,pcpu,stat,comm'
 ```
 
-You should see the following output, which shows the CPU utilization of each thread and illustrates how new, inter-op, and intra-op threads are spawned over time.
+You should see output similar to the example below, showing the CPU utilization of each thread. This illustrates how new threads, both inter-op and intra-op, are created and used over time.
 
 ```output
  PID     TID PSR %CPU STAT COMMAND
@@ -100,7 +100,7 @@ Decode Tokens per second: 45.23
 
 ```
 
-The graph above shows how prefill tokens per second change with the number of OpenMP threads for the 270M and 1B variants of Gemma-3. As expected, the smaller 270M model generally runs faster. Both models reach their optimal token generation rate at around 16–32 threads, though the 270M model exhibits a sharper performance drop-off beyond this range compared with the 1B variant.
+The graph above shows how prefill tokens per second change with the number of OpenMP threads for the 270M and 1B variants of Gemma-3. As expected, the smaller 270M model runs faster. Both models reach their optimal token generation rate at around 16–32 threads, though the 270M model exhibits a sharper performance drop-off beyond this range compared with the 1B variant.
 
 ![comparison](./Prefill%20Throughput%20vs%20OMP_NUM_THREADS%20(270M%20vs%201B).png)
 
@@ -114,7 +114,7 @@ So far, we have been running in PyTorch's eager execution mode, we can observe t
 sudo apt update && sudo apt install g++ python3.10-dev build-essential
 ```
 
-First, we will run the `gemma-3-270m` model with the `--compile` flag without the default number of OpenMP threads.
+Then run the `gemma-3-270m` model with the `--compile` flag without the default number of OpenMP threads.
 
 ```bash
 TORCHINDUCTOR_CPP_WRAPPER=1 TORCHINDUCTOR_FREEZING=1 python transformers_llm_text_gen.py --comp
@@ -128,7 +128,7 @@ Prefill Tokens per second: 133.52
 Decode Tokens per second: 11.33
 ```
 
-Now we can the the following command with `OMP_NUM_THREADS` set to 16.
+Now run with `OMP_NUM_THREADS` set to 16.
 
 ```bash
 TORCHINDUCTOR_CPP_WRAPPER=1 TORCHINDUCTOR_FREEZING=1 OMP_NUM_THREADS=16 python transformers_llm_text_gen.py --compile --model google/gemma-3-270m-it
@@ -146,5 +146,5 @@ Decode Tokens per second: 107.37
 
 ### Summary
 
-In this learning path, we explored how the number of OpenMP threads is a tunable parameter that can significantly impact the performance of a large language model. This is especially important when running such models on Arm systems with high core counts. You should also take the model’s parameter size into account. In practice, using a heuristic or trial-and-error approach is often the fastest way to determine the optimal thread count for a given system.
+In this learning path, we explored how the number of OpenMP threads is a tunable parameter that can significantly impact the performance of a large language model. This is especially important when running such models on Arm systems with high core counts. You should also take the model’s parameter size into account. In practice, using a heuristic or trial-and-error approach is often the fastest way to determine the optimal thread count for a given model and system.
 
