@@ -1,3 +1,4 @@
+---
 title: Benchmark the LiteRT model
 weight: 5
 ### FIXED, DO NOT MODIFY
@@ -210,11 +211,13 @@ For other operators supported by KleidiAI, the per-operator profiling node types
 | Fully Connected                        | Fully Connected (NC, QP8, F32, QC4W)                  | Fully Connected (NC, QD8, F32, QC4W)                   |
 | Fully Connected / Conv2D (Pointwise)   | Fully Connected (NC, QP8, F32, QC8W)                  | Fully Connected (NC, QD8, F32, QC8W)                   |
 | Fully Connected / Conv2D (Pointwise)   | Fully Connected (NC, PQS8, QC8W)                      | Fully Connected (NC, QS8, QC8W)                        |
+| Conv2D                                 | Convolution (NHWC, PF32)                              | Convolution (NHWC, F32)                                |
+| Conv2D                                 | Convolution (NHWC, PF16)                              | Convolution (NHWC, F16)                                |
+| Conv2D                                 | Convolution (NHWC, PQS8, QS8, QC8W)                   | Convolution (NHWC, QC8)                                |
+| TransposeConv                          | Deconvolution (NHWC, PQS8, QS8, QC8W)                 | Deconvolution (NC, QS8, QC8W)                          |
 | Batch Matrix Multiply                  | Batch Matrix Multiply (NC, PF32)                      | Batch Matrix Multiply (NC, F32)                        |
 | Batch Matrix Multiply                  | Batch Matrix Multiply (NC, PF16)                      | Batch Matrix Multiply (NC, F16)                        |
 | Batch Matrix Multiply                  | Batch Matrix Multiply (NC, QP8, F32, QC8W)            | Batch Matrix Multiply (NC, QD8, F32, QC8W)             |
-| Conv2D                                 | Convolution (NHWC, PQS8, QS8, QC8W)                   | Convolution (NHWC, QC8)                                |
-| TransposeConv                          | Deconvolution (NHWC, PQS8, QS8, QC8W)                 | Deconvolution (NC, QS8, QC8W)                          |
 
 The letter “P” in the node type indicates a KleidiAI implementation.
 
