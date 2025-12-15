@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Tuning thread size
 
-We will run inference on Google's [Gemma-3-1B-it](https://huggingface.co/google/gemma-3-1b-it) and measure how inference performance vaires with thread count for both the 270-million-parameter and 1-billion-parameter models. We will be running the `transformers_llm_text_gen.py` script which by default applies groupwise, layout-aware INT4 quantization of our model. 
+We will run inference on Google's [Gemma-3](https://huggingface.co/google/gemma-3-1b-it) model and measure how inference performance vaires with thread count for both the 270-million-parameter and 1-billion-parameter models. We will be running the `transformers_llm_text_gen.py` script which by default applies groupwise, layout-aware INT4 quantization of our model. 
 
 Create a file names `comparison-1b.sh` and paste in the following script. 
 
@@ -34,7 +34,7 @@ for t in 2 4 8 16 32 64 96; do
 done
 ```
 
-Likewise create a separate script, `comparison-1b.sh` for comparing the 270m model 
+Likewise create a separate script, `comparison-270m.sh` for comparing the 270m model 
 
 ```bash
 #!/usr/bin/env bash
@@ -114,7 +114,7 @@ So far, we have been running in PyTorch's eager execution mode, we can observe t
 sudo apt update && sudo apt install g++ python3.10-dev build-essential
 ```
 
-Then run the `gemma-3-270m` model with the `--compile` flag without the default number of OpenMP threads.
+Then run the `gemma-3-270m` model with the `--compile` flag but without the default number of OpenMP threads.
 
 ```bash
 TORCHINDUCTOR_CPP_WRAPPER=1 TORCHINDUCTOR_FREEZING=1 python transformers_llm_text_gen.py --comp
@@ -146,5 +146,5 @@ Decode Tokens per second: 107.37
 
 ### Summary
 
-In this learning path, we explored how the number of OpenMP threads is a tunable parameter that can significantly impact the performance of a large language model. This is especially important when running such models on Arm systems with high core counts. You should also take the model’s parameter size into account. In practice, using a heuristic or trial-and-error approach is often the fastest way to determine the optimal thread count for a given model and system.
+In this learning path, we explored how the number of OpenMP threads is a tunable parameter that can impact the performance of a large language model. This is especially important when running such models on Arm systems with high core counts. You should also take the model’s parameter size into account. In practice, using a heuristic or trial-and-error approach is often the fastest way to determine the optimal thread count for a given model and system.
 
