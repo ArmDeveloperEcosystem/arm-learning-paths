@@ -29,7 +29,7 @@ For batch sizes greater than 1, a fully connected operator performs a matrix mul
 
 When LiteRT loads a model, it reads the operators and builds a computation graph. If you select the CPU as the accelerator, LiteRT uses XNNPACK by default.
 
-XNNPACK scans the computation graph and looks for operators it can optimize. XNNPACK also checks the hardware compatibility and chooses the best available micro-kernel.Then, it packs the weight matrix to prepare for efficient computation. On Arm platforms, XNNPACK uses NEON instructions to speed up this packing.
+XNNPACK scans the computation graph and looks for operators it can optimize. XNNPACK also checks the hardware compatibility and chooses the best available micro-kernel. Then, it packs the weight matrix to prepare for efficient computation. On Arm platforms, XNNPACK uses NEON instructions to speed up this packing.
 
 During model inference, it splits the matrices into smaller tiles and runs the multiplications in parallel across multiple threads, using NEON instructions for faster processing.
 
@@ -41,7 +41,7 @@ When KleidiAI and SME2 are enabled at build time, the KleidiAI SME2 micro-kernel
 
 During the model loading stage, when XNNPACK optimizes the subgraph, it checks the operator’s data type to determine whether a KleidiAI implementation is available. If KleidiAI supports it, XNNPACK bypasses its own default implementation. As a result, RHS packing is performed using the KleidiAI SME packing micro-kernel. Because KleidiAI typically requires packing of the LHS, a flag is also set during this stage.
 
-During model inference, the LHS packing micro-kernel is invoked. After the LHS is packed, XNNPACK performs the matrix multiplication. At this point, the KleidiAI SME micro-kernel is used to compute the matrix .
+During model inference, the LHS packing micro-kernel is invoked. After the LHS is packed, XNNPACK performs the matrix multiplication. At this point, the KleidiAI SME micro-kernel is used to compute the matrix.
 
 ## What you've accomplished and what's next
 
