@@ -22,7 +22,7 @@ Under **Machine configuration**, populate fields such as **Instance name**, **Re
 
    ![Create a Google Axion C4A Arm virtual machine in the Google Cloud Console with c4a-standard-4 selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
 
-Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. Select "Pay As You Go" for the license type and select **Select**.
+Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. Select "Pay As You Go" for the license type and press **Select**.
 
 Under **Networking**, enable **Allow HTTP traffic** and add "allow-tcp-15672" as a network tag in the **Network tags** text field.
 
