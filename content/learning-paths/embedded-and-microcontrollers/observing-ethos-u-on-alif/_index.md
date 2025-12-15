@@ -22,6 +22,7 @@ prerequisites:
 author_primary: Waheed Brown
 
 author:
+    - Waheed Brown
     - Fidel Makatia Omusilibwa
 
 ### Tags
