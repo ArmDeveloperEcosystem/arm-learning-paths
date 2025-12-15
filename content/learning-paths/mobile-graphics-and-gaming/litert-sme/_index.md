@@ -1,7 +1,7 @@
 ---
 title: Accelerate LiteRT Models on Android with KleidiAI and SME2
 
-minutes_to_complete: 30
+minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for developers looking to leverage Arm's Scalable Matrix Extension 2 (SME2) instructions to accelerate LiteRT model inference on Android.
 

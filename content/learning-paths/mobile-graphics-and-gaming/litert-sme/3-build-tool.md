@@ -12,7 +12,7 @@ LiteRT provides a standalone performance measurement utility called `benchmark_m
 
 In this section, you will build two versions of the benchmark tool:
 - With KleidiAI and Scalable Matrix Extension version 2 (SME2) enabled, which uses Arm-optimized micro-kernels
-- Without KleidiAI and SME2, which provides baseline performance using NEON or SVE2 fallback
+- Without KleidiAI and SME2, which provides baseline performance using NEON micro-kernels
 
 This comparison demonstrates the performance gains provided by SME2 acceleration.
 
@@ -23,9 +23,9 @@ cd $WORKSPACE
 git clone https://github.com/google-ai-edge/LiteRT.git
 ```
 
-Because LiteRT integrates KleidiAI through XNNPACK (an open-source library providing highly optimized neural-network operators), you must build LiteRT from source to enable SME2 micro-kernels.
+Because LiteRT integrates KleidiAI through XNNPACK, you must build LiteRT from source to enable SME2 micro-kernels.
 
-Next, set up your Android build environment using Docker on your Linux development machine. Google provides a Dockerfile that installs the toolchain needed for TensorFlow Lite (TFLite)/LiteRT Android builds.
+Next, set up your Android build environment using Docker on your Linux development machine. Google provides a Dockerfile that installs the toolchain needed for LiteRT Android builds.
 
 Download the Dockerfile:
 
@@ -129,7 +129,7 @@ ${XNNPACK_OPTIONS} "${BENCHMARK_TOOL_PATH}" \
 --repo_env=HERMETIC_PYTHON_VERSION=3.12
 ```
 
-This build of the `benchmark_model` disables all SME2 micro-kernels and forces fallback to XNNPACK's NEON or SVE2 kernels.
+This build of the `benchmark_model` disables all SME2 micro-kernels and forces fallback to XNNPACK's NEON miccro-kernels.
 
 You can then use Android Debug Bridge (ADB) to push the benchmark tool to your Android device:
 

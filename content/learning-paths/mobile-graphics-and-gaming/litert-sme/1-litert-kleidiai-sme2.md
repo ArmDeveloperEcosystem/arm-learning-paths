@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Inside the LiteRT software stack
 
-LiteRT (Lightweight Runtime, formerly TensorFlow Lite) is a runtime for on-device AI on Arm platforms. The default CPU acceleration library used by LiteRT is XNNPACK.
+LiteRT (Lite Runtime, formerly TensorFlow Lite) is a runtime for on-device AI. The default CPU acceleration library used by LiteRT is XNNPACK.
 
 XNNPACK is an open-source library that provides highly optimized implementations of neural-network operators. It continuously integrates the KleidiAI library to use new CPU features such as Scalable Matrix Extension 2 (SME2).
 
@@ -25,13 +25,13 @@ To understand how KleidiAI SME2 micro-kernels work in LiteRT, think about a Lite
 ### LiteRT → XNNPACK workflow
 
 ![Diagram showing the workflow for a fully connected operator in LiteRT using XNNPACK. The diagram depicts the flow from LiteRT to XNNPACK, highlighting the use of NEON instructions for matrix multiplication and weight packing on Arm platforms. The technical environment emphasizes operator traversal, hardware detection, and parallel computation. alt-text #center](./litert-xnnpack-workflow.png "LiteRT, XNNPACK workflow")
-A fully connected operator multiplies two matrices: the input activations (LHS) and the weights (RHS).
+For batch sizes greater than 1, a fully connected operator performs a matrix multiplication between the input activations (LHS) and the weights (RHS).
 
 When LiteRT loads a model, it reads the operators and builds a computation graph. If you select the CPU as the accelerator, LiteRT uses XNNPACK by default.
 
-XNNPACK scans the computation graph and looks for operators it can optimize. It packs the weight matrix to prepare for efficient computation. On Arm platforms, XNNPACK uses NEON instructions to speed up this packing and the matrix multiplication.
+XNNPACK scans the computation graph and looks for operators it can optimize. XNNPACK also checks the hardware compatibility and chooses the best available micro-kernel.Then, it packs the weight matrix to prepare for efficient computation. On Arm platforms, XNNPACK uses NEON instructions to speed up this packing.
 
-At runtime, XNNPACK checks the hardware and chooses the best available micro-kernel. During inference, it splits the matrices into smaller tiles and runs the multiplications in parallel across multiple threads, using NEON instructions for faster processing.
+During model inference, it splits the matrices into smaller tiles and runs the multiplications in parallel across multiple threads, using NEON instructions for faster processing.
 
 ### LiteRT → XNNPACK → KleidiAI workflow
 
@@ -41,7 +41,7 @@ When KleidiAI and SME2 are enabled at build time, the KleidiAI SME2 micro-kernel
 
 During the model loading stage, when XNNPACK optimizes the subgraph, it checks the operator’s data type to determine whether a KleidiAI implementation is available. If KleidiAI supports it, XNNPACK bypasses its own default implementation. As a result, RHS packing is performed using the KleidiAI SME packing micro-kernel. Because KleidiAI typically requires packing of the LHS, a flag is also set during this stage.
 
-During model inference, the LHS packing micro-kernel is invoked. After the LHS is packed, XNNPACK performs the matrix multiplication. At this point, the KleidiAI SME micro-kernel is used to compute the matrix product.
+During model inference, the LHS packing micro-kernel is invoked. After the LHS is packed, XNNPACK performs the matrix multiplication. At this point, the KleidiAI SME micro-kernel is used to compute the matrix .
 
 ## What you've accomplished and what's next
 
