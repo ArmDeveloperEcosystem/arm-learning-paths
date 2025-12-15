@@ -1,6 +1,6 @@
 ---
 title: Install RabbitMQ
-weight: 4
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -9,7 +9,7 @@ layout: learningpathall
 ## Install RabbitMQ on GCP SUSE Arm64 VM
 This guide describes a **step-by-step installation of RabbitMQ** on a **Google Cloud Platform SUSE Linux Arm64 virtual machine**, using **RPM packages** for both **Erlang** and **RabbitMQ Server**.
 
-RabbitMQ requires Erlang to be installed before setting up the server.
+RabbitMQ needs Erlang to be installed before setting up the server.
 
 
 ### Prerequisites
@@ -18,14 +18,14 @@ RabbitMQ requires Erlang to be installed before setting up the server.
 - Root or sudo privileges
 - Outbound internet access
 
-### Refresh System Repositories
+### Refresh system repositories
 This step updates the system’s package list so the operating system knows about the latest software available from its repositories.
 
 ```console
 sudo zypper refresh
 ```
 
-### Install Required System Utilities
+### Install required system utilities
 You can install the basic tools needed to download and manage packages.
 
 ```console
@@ -40,7 +40,7 @@ wget https://github.com/rabbitmq/erlang-rpm/releases/download/v26.2.5/erlang-26.
 sudo rpm -Uvh erlang-26.2.5-1.el8.aarch64.rpm
 ```
 
-### Verify Erlang Installation
+### Verify Erlang installation
 Confirm that Erlang is installed correctly.
 
 ```console
@@ -62,20 +62,20 @@ sudo rpm -Uvh rabbitmq-server-4.2.0-1.el8.noarch.rpm
 ```
 
 {{% notice Note %}}
-RabbitMQ version 3.11.0 introduced significant performance enhancements for Arm-based architectures. This version requires Erlang 25.0 or later, which brings Just-In-Time (JIT) compilation and modern flame graph profiling tooling to both x86 and ARM64 CPUs. These features result in improved performance on ARM64 architectures.
+RabbitMQ version 3.11.0 introduced significant performance enhancements for Arm-based architectures. This version needs Erlang 25.0 or later, which brings Just-In-Time (JIT) compilation and modern flame graph profiling tooling to both x86 and Arm64 CPUs. These features result in improved performance on Arm64 architectures.
 You can view [this release note](https://github.com/rabbitmq/rabbitmq-server/blob/main/release-notes/3.11.0.md)
 
-The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends RabbitMQ version 3.11.0, the minimum recommended on the Arm platforms.
+The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends RabbitMQ version 3.11.0, the minimum recommended on Arm platforms.
 {{% /notice %}}
 
-### Enable and Start RabbitMQ Service
+### Enable and start RabbitMQ service
 Enable RabbitMQ to start automatically on boot and start the service immediately.
 
 ```console
 sudo systemctl enable rabbitmq-server --now
 ```
 
-### Verify RabbitMQ Service Status
+### Verify RabbitMQ service status
 Check the status of the RabbitMQ service.
 
 ```console
@@ -84,7 +84,7 @@ sudo systemctl status rabbitmq-server
 
 The service should be in an active (running) state.
 
-### Enable RabbitMQ Management Plugin
+### Enable RabbitMQ management plugin
 Enable the RabbitMQ management plugin to access the web-based dashboard.
 
 ```console
@@ -98,7 +98,7 @@ Restart RabbitMQ to apply plugin changes.
 sudo systemctl restart rabbitmq-server
 ```
 
-### Verify RabbitMQ Version
+### Verify RabbitMQ version
 Confirm the installed RabbitMQ version.
 
 ```console
@@ -111,12 +111,10 @@ You should see an output similar to:
 4.2.0
 ```
 
-### Access RabbitMQ Management UI
-Create a new RabbitMQ user for remote access
+### Access RabbitMQ management UI
+Create a new RabbitMQ user for remote access.
 
-- Create a new `admin` user
-
-**Run these commands on the VM:**
+Create a new `admin` user by running these commands on the VM:
 
 ```console
 sudo rabbitmqctl add_user admin StrongPassword123
@@ -126,19 +124,16 @@ sudo rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
 
 **Log in to Management UI**
 
+Now, test it from outside the VM. Open a web browser on your local machine (Chrome, Firefox, Edge, etc.) and enter the following URL and credentials in the address bar:
+
 - **URL**: http://<VM_IP>:15672
 - **Username**: admin
 - **Password**: StrongPassword123
 
-This is the production-safe approach.
+Replace `<VM_IP>` with the public IP of your GCP VM.
 
-Now, let’s test it from outside the VM. Open a web browser on your local machine (Chrome, Firefox, Edge, etc.) and enter the following URL in the address bar:
-
-```console
-[http://<YOUR_VM_PUBLIC_IP>/info.php](http://<VM_IP>:15672)
-```
-- Replace `<VM_IP>` with the public IP of your GCP VM.
-
-If everything is set up correctly, you will see a RabbitMQ login page in your browser. It looks like this:
+If everything is configured correctly, you see a RabbitMQ login page in your browser that looks like this:
 
 ![RabbitMQ page alt-text#center](images/rabbitmq.png "Figure 1: RabbitMQ Login page")
+
+This confirms that your RabbitMQ management dashboard is operational.
