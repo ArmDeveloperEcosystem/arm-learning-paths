@@ -102,7 +102,7 @@ Decode Tokens per second: 45.23
 
 The graph above shows how prefill tokens per second change with the number of OpenMP threads for the 270M and 1B variants of Gemma-3. As expected, the smaller 270M model runs faster. Both models reach their optimal token generation rate at around 16–32 threads, though the 270M model exhibits a sharper performance drop-off beyond this range compared with the 1B variant.
 
-![comparison](./Prefill%20Throughput%20vs%20OMP_NUM_THREADS%20(270M%20vs%201B).png)
+![comparison](./prefill_throughput.png)
 
 
 

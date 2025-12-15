@@ -58,7 +58,7 @@ aarch64_pytorch ~>
 
 Create a new `read` token on HuggingFace by clicking [this link](https://huggingface.co/settings/tokens/new?tokenType=read). 
 
-![hf-token](./HF-access-token.jpg)
+![hf-token](./hf-access-token.jpg)
 
 Provide a suitable token name, press create token and copy the generated token value. From within docker container, enter the following command and paste the token to login.
 
