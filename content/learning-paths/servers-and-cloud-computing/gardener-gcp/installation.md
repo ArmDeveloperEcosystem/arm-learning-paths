@@ -1,5 +1,5 @@
 ---
-title: Install Gardener
+title: Install Gardener on your Arm-based SUSE VM
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -10,7 +10,7 @@ layout: learningpathall
 
 This section guides you through setting up Gardener Local on a Google Cloud Arm64 (C4A) VM running SUSE Linux Enterprise Server. You'll install system dependencies, CLI tools, and Gardener components to create a fully functional local Kubernetes cluster management system.
 
-### Update your system
+## Update your system
 
 Update your operating system packages to the latest versions:
 
@@ -19,7 +19,7 @@ sudo zypper refresh
 sudo zypper update -y
 ```
 
-### Enable the SUSE Containers Module
+## Enable the SUSE Containers Module
 
 Enable SUSE's official container support module for Docker and container tools:
 
@@ -30,7 +30,7 @@ sudo SUSEConnect --list-extensions | grep Containers
 
 The output shows "Activated" for the Containers module, confirming successful enablement.
 
-### Install Docker
+## Install Docker
 
 Install Docker to run Kubernetes in Docker (KinD) and Kubernetes components as containers:
 
@@ -56,7 +56,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 An empty container list confirms Docker is installed and running correctly.
 
-### Install Go 1.24
+## Install Go 1.24
 
 Gardener requires Go 1.24, which isn't available in the default SUSE repositories. Download and install the Arm64-compatible Go binary:
 
@@ -76,7 +76,7 @@ The output is similar to:
 go version go1.24.0 linux/arm64
 ```
 
-### Install build tools
+## Install build tools
 
 Install Git and build tools needed to download and compile Gardener components:
 
@@ -84,7 +84,7 @@ Install Git and build tools needed to download and compile Gardener components:
 sudo zypper install -y git curl tar gzip make gcc
 ```
 
-### Install kubectl
+## Install kubectl
 
 Install kubectl, the command-line tool for interacting with Kubernetes clusters:
 
@@ -102,7 +102,7 @@ Client Version: v1.34.0
 Kustomize Version: v5.7.1
 ```
 
-### Install Helm
+## Install Helm
 
 Install Helm to manage Kubernetes applications. Gardener uses Helm internally to deploy components:
 
@@ -119,7 +119,7 @@ The output is similar to:
 version.BuildInfo{Version:"v3.19.2", GitCommit:"8766e718a0119851f10ddbe4577593a45fadf544", GitTreeState:"clean", GoVersion:"go1.24.9"}
 ```
 
-### Install yq
+## Install yq
 
 Install yq, a YAML processing tool used by Gardener scripts to modify configuration files:
 
@@ -135,7 +135,7 @@ The output is similar to:
 yq (https://github.com/mikefarah/yq/) version v4.43.1
 ```
 
-### Install Kustomize
+## Install Kustomize
 
 Install Kustomize to customize Kubernetes YAML files without modifying the originals:
 
@@ -152,7 +152,7 @@ The output is similar to:
 v5.3.0
 ```
 
-### Install Kind
+## Install Kind
 
 Install Kind (Kubernetes in Docker) to create a local Kubernetes cluster inside Docker containers:
 
@@ -169,7 +169,7 @@ The output is similar to:
 kind v0.30.0 go1.24.6 linux/arm64
 ```
 
-### Configure network settings
+## Configure network settings
 
 Add required loopback IP addresses for Gardener services and local API endpoints:
 
@@ -191,7 +191,7 @@ The output is similar to:
 127.0.0.1 garden.local.gardener.cloud
 ```
 
-### Clone the Gardener repository
+## Clone the Gardener repository
 
 Download the Gardener source code and check out a stable release version:
 
@@ -203,7 +203,7 @@ git fetch --all --tags
 git checkout v1.122.0
 ```
 
-### Remove the Kind network
+## Remove the Kind network
 
 Remove any existing Kind network from previous installations to avoid conflicts:
 
@@ -235,7 +235,7 @@ d60c34b45e0a   none      null      local
 
 The Kind network isn't listed, confirming a clean state for installation.
 
-### Create the KinD cluster
+## Create the KinD cluster
 
 Create the Kubernetes cluster using Kind:
 
@@ -277,7 +277,7 @@ make kind-up
 ```
 {{% /notice %}}
 
-### Configure kubectl access
+## Configure kubectl access
 
 Set the kubeconfig environment variable to connect kubectl to your new cluster:
 
@@ -295,7 +295,7 @@ gardener-local-control-plane   Ready    control-plane   41s   v1.32.5
 
 A node in "Ready" status confirms the cluster is operational.
 
-### Deploy Gardener components
+## Deploy Gardener components
 
 Install all Gardener control plane services, including the API server, controller, scheduler, and monitoring tools:
 
@@ -348,7 +348,7 @@ vpa-updater-7dd7dccc6d-bcgv8                          1/1     Running   0       
 vpa-updater-7dd7dccc6d-jdxrg                          1/1     Running   0               116s
 ```
 
-### Verify seed cluster
+## Verify seed cluster
 This checks whether the seed cluster (the infrastructure cluster managed by Gardener) is healthy and ready.
 
 ``` console
@@ -367,7 +367,7 @@ local   Ready    Reconcile Succeeded (100%)   local      local    2m48s   v1.122
 
 A "Ready" status with "Succeeded" operation confirms the Seed cluster is fully operational.
 
-### Create a Shoot cluster
+## Create a Shoot cluster
 
 A Shoot cluster is a user-managed Kubernetes cluster created and managed by Gardener. Create a sample Shoot cluster:
 
@@ -387,7 +387,7 @@ local   local          local      local    1.33.0        Awake         Create Su
 
 The Shoot cluster creation takes four to five minutes. Wait for the "STATUS" column to show "healthy" before proceeding.
 
-### Add Shoot cluster DNS entries
+## Add Shoot cluster DNS entries
 
 Add DNS entries to resolve your Shoot cluster's API endpoint:
 
@@ -399,7 +399,7 @@ cat <<EOF | sudo tee -a /etc/hosts
 EOF
 ```
 
-### Generate Shoot cluster kubeconfig
+## Generate Shoot cluster kubeconfig
 
 Generate an admin kubeconfig to access and manage your Shoot cluster:
 
@@ -412,13 +412,7 @@ Wait four to five minutes after creating the Shoot cluster before running these 
 KUBECONFIG=admin-kubeconf.yaml kubectl get nodes
 ```
 
-{{% notice Note %}}
-If you get the following result from the "kubectl get nodes" command above:
-```output
-No resources found
-```
-Please wait a bit and retry again. Your nodes are still being generated! 
-{{% /notice %}}
+
 
 
 You should see an output similar to:
