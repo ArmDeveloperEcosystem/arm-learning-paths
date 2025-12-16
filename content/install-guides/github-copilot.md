@@ -1,8 +1,6 @@
 ---
 title: GitHub Copilot
 
-draft: true 
-
 author: Pareena Verma
 minutes_to_complete: 10
 official_docs: https://docs.github.com/en/copilot
@@ -18,6 +16,8 @@ tool_install: true
 weight: 1
 ---
 
+## Overview
+
 GitHub Copilot is an AI coding assistant that helps you write code faster and with less effort. It suggests whole lines or entire functions based on your comments and code context.
 
 Copilot works seamlessly on Arm-based systems, including Linux distributions running on Arm servers, macOS on Apple Silicon, and Windows on Arm devices. This guide shows you how to install GitHub Copilot in Visual Studio Code and extend it with the Arm MCP Server for Arm-specific development assistance.
@@ -26,20 +26,22 @@ Copilot works seamlessly on Arm-based systems, including Linux distributions run
 For installation instructions for other editors (JetBrains IDEs, Neovim, Vim), see the [GitHub Copilot documentation](https://docs.github.com/en/copilot).
 {{% /notice %}}
 
-## What should I do before installing GitHub Copilot?
+## Before you begin
 
-You need a GitHub account with an active GitHub Copilot subscription to use GitHub Copilot. 
+To use GitHub Copilot on Arm systems, you need a GitHub account with an active subscription.
 
-If you don't have a GitHub account, visit [GitHub](https://github.com/) and sign up.
+### Create a GitHub account
+
+[Sign up for a GitHub account](https://github.com/) if you don't already have one.
 
 ### Subscribe to GitHub Copilot
 
 GitHub Copilot offers several subscription plans:
 
-- **Individual** — For personal development
-- **Business** — For teams and organizations  
-- **Enterprise** — For large-scale deployments
-- **Free tier** — For verified students, teachers, and maintainers of popular open source projects
+- Individual: for personal development
+- Business: for teams and organizations  
+- Enterprise: for large-scale deployments
+- Free tier: for verified students, teachers, and maintainers of popular open source projects
 
 [Select your GitHub Copilot subscription plan](https://github.com/features/copilot/plans) to get started.
 
@@ -47,9 +49,9 @@ GitHub Copilot offers several subscription plans:
 
 After subscribing, verify your subscription is active:
 
-1. Sign in to your GitHub account
-2. Navigate to **Settings** → **Copilot**
-3. Confirm your subscription status shows as **Active**
+- Sign in to your GitHub account
+- Navigate to **Settings** → **Copilot**
+- Confirm your subscription status shows as **Active**
 
 ## Install Visual Studio Code
 
@@ -94,9 +96,9 @@ arm64
 
 Open Visual Studio Code and install the GitHub Copilot extension:
 
-1. Open the Extensions view by selecting the Extensions icon in the Activity Bar or press `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (macOS)
-2. Search for **GitHub Copilot**
-3. Select **Install** on the GitHub Copilot extension by GitHub
+- Open the Extensions view by selecting the Extensions icon in the Activity Bar or press `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (macOS)
+- Search for **GitHub Copilot**
+- Select **Install** on the GitHub Copilot extension by GitHub
 
 Alternatively, install from the command line:
 
@@ -118,27 +120,27 @@ You can also search for **GitHub Copilot Chat** in the Extensions view and selec
 
 After installing the extensions, authorize GitHub Copilot:
 
-1. In VS Code, select the GitHub Copilot icon in the status bar (bottom right)
-2. Select **Sign in to GitHub**
-3. Follow the prompts to authorize the extension in your browser
-4. Return to VS Code to complete the setup
+- In VS Code, select the GitHub Copilot icon in the status bar (bottom right)
+- Select **Sign in to GitHub**
+- Follow the prompts to authorize the extension in your browser
+- Return to VS Code to complete the setup
 
 ### Verify Copilot is working
 
 Test that GitHub Copilot is generating suggestions:
 
-1. Create a new file (**File** → **New File** or press `Ctrl+N` on Windows/Linux or `Cmd+N` on macOS)
-2. Save the file with a programming language extension (`test.py` for Python, `test.js` for JavaScript, or `test.go` for Go)
-3. Type a comment describing a function:
+- Create a new file (**File** → **New File** or press `Ctrl+N` on Windows/Linux or `Cmd+N` on macOS)
+- Save the file with a programming language extension (`test.py` for Python, `test.js` for JavaScript, or `test.go` for Go)
+- Type a comment describing a function:
    ```python
    # Function to calculate fibonacci numbers
    ```
-4. Press Enter to start a new line
+- Press Enter to start a new line
 
 Copilot analyzes your comment and suggests code as gray text in the editor.
 
-5. Press Tab to accept the suggestion or Esc to dismiss it
-6. Continue typing to see more suggestions as you work
+- Press Tab to accept the suggestion or Esc to dismiss it
+- Continue typing to see more suggestions as you work
 
 If you don't see suggestions:
 
@@ -157,8 +159,8 @@ Agent Mode enables Copilot to take autonomous actions in your workspace. Copilot
 
 To use Agent Mode:
 
-1. Open the Copilot Chat panel by selecting the chat icon in the Activity Bar or press `Ctrl+Enter` (Windows/Linux) or `Cmd+Ctrl+I` (macOS)
-2. Type `@workspace` followed by your request
+- Open the Copilot Chat panel by selecting the chat icon in the Activity Bar or press `Ctrl+Enter` (Windows/Linux) or `Cmd+Ctrl+I` (macOS)
+- Type `@workspace` followed by your request
 
 Example prompts:
 - `Create a Python application to calculate fibonacci numbers`
@@ -170,10 +172,10 @@ Edit Mode focuses on making targeted changes to your current file or selected co
 
 To use Edit Mode with selected code:
 
-1. Select the code you want to modify in your editor
-2. Press `Ctrl+I` (Windows/Linux) or `Cmd+I` (macOS) to open inline chat
-3. Describe the changes you want
-4. Copilot shows a preview before applying changes
+- Select the code you want to modify in your editor
+- Press `Ctrl+I` (Windows/Linux) or `Cmd+I` (macOS) to open inline chat
+- Describe the changes you want
+- Copilot shows a preview before applying changes
 
 Example prompts:
 - Select a function and ask: `Add input validation and error handling`
@@ -185,8 +187,8 @@ Ask Mode helps you understand code and learn concepts without making changes to 
 
 To use Ask Mode:
 
-1. Open the Copilot Chat panel
-2. Type your question directly without any special prefixes
+- Open the Copilot Chat panel
+- Type your question directly without any special prefixes
 
 Example prompts:
 - `How does this function work?` (with code selected)
@@ -221,7 +223,7 @@ The easiest way to install the Arm MCP Server is through the GitHub MCP Registry
 2. Select the **Install MCP Server** button
 3. From the dropdown, choose **Install in VSCode**
 4. VS Code opens with the Arm MCP Server installation page
-5. Select **Install** as you would with other extensions
+5. Select **Install** like you would with other extensions
 
 ![Screenshot of the Arm MCP Server installation page in Visual Studio Code showing the Install button and server description alt-text#center](/install-guides/_images/mcp-server-install.png "Install Arm MCP Server")
 
@@ -373,4 +375,4 @@ If you see volume mount errors when starting the MCP server:
 
 For support, contact [mcpserver@arm.com](mailto:mcpserver@arm.com).
 
-You're ready to use GitHub Copilot with the Arm MCP Server to enhance your Arm development workflow.
+You're now ready to use GitHub Copilot with the Arm MCP Server to enhance your Arm development workflow!
