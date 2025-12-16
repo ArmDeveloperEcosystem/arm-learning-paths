@@ -1,0 +1,192 @@
+TECHNICAL ACCURACY REVIEW - DeepSeek-CPU Learning Path
+======================================================
+Review Date: December 16, 2025
+
+SUMMARY
+-------
+The Learning Path appears technically current with Ubuntu 24.04 LTS and recent tools.
+Several items require investigation to ensure continued accuracy and maintenance.
+
+FINDINGS AND RECOMMENDATIONS
+=============================
+
+1. OPERATING SYSTEM
+-------------------
+Status: ✓ GOOD
+- Uses Ubuntu 24.04 LTS (current LTS release as of April 2024)
+- No upgrade needed at this time
+- Recommendation: Monitor for Ubuntu 26.04 LTS release (expected April 2026)
+
+2. SOFTWARE VERSIONS AND DEPENDENCIES
+--------------------------------------
+Status: ⚠ NEEDS INVESTIGATION
+
+a) llama.cpp
+   - Currently: Clones from main branch (no version pinning)
+   - Concern: Main branch may introduce breaking changes
+   - Recommendation: Test with latest llama.cpp to verify compatibility
+   - Action: Consider pinning to a specific commit/tag for reproducibility
+   - Reference commit mentioned: 0f1a39f3 (includes Arm optimizations)
+
+b) Python packages
+   - openai==1.55.3 (specified in deepseek-server.md)
+   - Recommendation: Check if this is still the recommended version
+   - Action: Verify compatibility with latest llama.cpp server API
+   - Check: https://pypi.org/project/openai/ for latest version
+
+c) huggingface_hub
+   - Currently: No version specified (uses latest via pip)
+   - Recommendation: Test download functionality with current version
+   - Action: May want to specify a minimum version for stability
+
+d) Build tools
+   - gcc, g++, cmake, make (system packages)
+   - Status: Using system defaults from apt
+   - Recommendation: Verify minimum versions if compatibility issues arise
+
+3. MODEL DOWNLOADS AND REFERENCES
+----------------------------------
+Status: ⚠ REQUIRES VERIFICATION
+
+a) DeepSeek-R1 Model
+   - Model: bartowski/DeepSeek-R1-GGUF
+   - Quantization: Q4_0 format
+   - Size: ~354 GB (10 files)
+   - Concern: Model availability and naming may change
+   - Recommendation: Verify the model is still available at this location
+   - Action: Check if newer quantizations are available (Q4_K_M, Q5_0, etc.)
+   - Link: https://huggingface.co/bartowski/DeepSeek-R1-GGUF
+
+b) Model naming convention
+   - Current: DeepSeek-R1-Q4_0-00001-of-00010.gguf
+   - Concern: File naming may change with model updates
+   - Recommendation: Verify current file naming scheme
+
+4. EXTERNAL LINKS
+-----------------
+Status: ⚠ NEEDS VERIFICATION
+
+Links to verify (couldn't be tested due to network restrictions):
+a) https://huggingface.co/deepseek-ai/DeepSeek-R1
+   - Official DeepSeek-R1 model page
+   - Action: Verify this link is still valid
+
+b) https://huggingface.co/docs
+   - Hugging Face documentation
+   - Action: Verify link or update to more specific docs URL
+
+c) https://blogs.oracle.com/ai-and-datascience/post/democratizing-generative-ai-with-cpu-based-inference
+   - Oracle blog post
+   - Action: Verify blog post is still accessible
+
+d) https://huggingface.co/bartowski/DeepSeek-R1-GGUF
+   - Model download location
+   - Critical: Must verify this model is still available
+
+Links verified as working:
+✓ https://github.com/ggerganov/llama.cpp
+✓ https://github.com/deepseek-ai/DeepSeek-R1/blob/main/LICENSE
+✓ https://github.com/ggerganov/llama.cpp/commit/0f1a39f3
+
+5. HARDWARE REQUIREMENTS
+------------------------
+Status: ✓ DOCUMENTED
+- AWS Graviton4 r8g.24xlarge (64 cores, 512GB RAM, 400GB storage)
+- Appropriately specified for 671B parameter model
+- Recommendation: Consider adding cost estimates or alternative instance types
+
+6. TECHNICAL ACCURACY ISSUES
+-----------------------------
+
+a) Command line flags
+   - Uses: --prompt with special characters (<|User|>, <｜Assistant｜>)
+   - Concern: Encoding issues may occur on different terminals
+   - Recommendation: Test on various terminals/shells
+
+b) File paths
+   - Model path: DeepSeek-R1-Q4_0/DeepSeek-R1-Q4_0/DeepSeek-R1-Q4_0-00001-of-00010.gguf
+   - Note: Nested directory structure may vary based on download method
+   - Recommendation: Clarify expected directory structure after download
+
+c) Performance metrics
+   - Shows specific timings from test run
+   - Recommendation: Add note that performance varies by hardware
+   - Consider: Adding performance comparison table for different instances
+
+7. MISSING OR OUTDATED CONTENT
+-------------------------------
+
+a) Security considerations
+   - Recommendation: Add note about securing the API server (authentication, firewall)
+
+b) Troubleshooting section
+   - Recommendation: Add common issues and solutions
+   - Examples: Memory errors, model download failures, compilation issues
+
+c) Resource cleanup
+   - Recommendation: Add section on cleaning up resources (stopping server, deactivating venv)
+
+d) Alternative quantizations
+   - Recommendation: Mention other quantization options (Q5_0, Q8_0) and tradeoffs
+
+8. DEPENDENCIES TO MONITOR
+---------------------------
+
+Regular monitoring recommended for:
+- llama.cpp releases and Arm-specific optimizations
+- DeepSeek model updates or new versions
+- Python openai package compatibility
+- Ubuntu package updates (gcc, cmake versions)
+- Hugging Face CLI changes
+
+9. TESTING PRIORITIES
+---------------------
+
+High Priority:
+1. Verify DeepSeek-R1 model is still available at specified location
+2. Test llama.cpp build with latest commits
+3. Verify huggingface-cli download command works
+4. Test openai Python package version compatibility
+
+Medium Priority:
+5. Verify all external links are accessible
+6. Test commands on different Arm instances
+7. Check for newer model quantizations
+
+Low Priority:
+8. Review documentation for clarity improvements
+9. Consider adding alternative deployment methods
+10. Evaluate if additional Arm instance types should be mentioned
+
+10. RECOMMENDED UPDATE SCHEDULE
+-------------------------------
+
+Quarterly review (every 3 months):
+- Check llama.cpp for major updates
+- Verify model availability
+- Test external links
+- Review Python package versions
+
+Annual review:
+- Evaluate Ubuntu LTS upgrade path
+- Review hardware recommendations
+- Update performance benchmarks
+- Check for new DeepSeek model releases
+
+Ad-hoc updates needed when:
+- llama.cpp releases breaking changes
+- DeepSeek releases new model versions
+- External links break
+- User reports issues
+
+CONCLUSION
+----------
+The Learning Path is currently using modern, up-to-date software (Ubuntu 24.04, recent tools).
+Main concerns are around external dependencies (model availability, llama.cpp stability).
+Recommend establishing a regular testing schedule to catch issues before users encounter them.
+
+Priority actions:
+1. Verify model download still works from Hugging Face
+2. Test the complete workflow on a Graviton4 instance
+3. Pin or document llama.cpp version for reproducibility
+4. Add troubleshooting section for common issues
