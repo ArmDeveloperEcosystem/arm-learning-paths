@@ -104,7 +104,8 @@ It is worth checking that everything has imported and been built correctly.
 
 1. Close the _Build profiles_ window
 
-1. In the Project tab (usually at the bottom in default configurations) you will see the list of asset files. - add photo "bad load"
+1. In the Project tab (usually at the bottom in default configurations) you will see the list of asset files. 
+![Scenes Folder#center](images/Bad-Load.png "Figure 7. assests area")
 
 1. Open the _BurstNeonCollisions_ folder
 
@@ -116,7 +117,7 @@ It is worth checking that everything has imported and been built correctly.
 
 The game will launch and you will see an empty environment begin to fill with more and more characters (capsules) over time. It will look something like this:
 
-![Screenshot at runtime#center](images/game-view.PNG "Figure 7. Sample running in Game view.")
+![Screenshot at runtime#center](images/game-view.PNG "Figure 8. Sample running in Game view.")
 
 ## Deploy to Android
 You will now deploy the sample to your Android device. Your device must already be set up for development. For detailed instructions, read the learning path [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android).
@@ -125,7 +126,7 @@ You will now deploy the sample to your Android device. Your device must already 
 
 1. Tick the _Development Build_ option
  
-  ![Import sample project#center](images/BP-Menu-Build.png "Figure 8. Development Build .")
+  ![Import sample project#center](images/BP-Menu-Build.png "Figure 9. Development Build .")
 
 1. Select _Add Open Scenes_ to add the demo scene to your _Scenes in Build_ list 
 
@@ -133,7 +134,7 @@ You will now deploy the sample to your Android device. Your device must already 
 
 1. Once recognized, your device will be listed in the drop-down menu next to _Run Device_
 
-1. The screenshot above shows the settings with a our demo device selected as the _Run Device_ you will see you own device in this box
+1. The screenshot above shows the settings with a our demo device selected as the _Run Device_ you will see your own device in this box
 
 1. Select _Build and Run_
 
@@ -141,4 +142,4 @@ You will now deploy the sample to your Android device. Your device must already 
 
 Unity will take a moment to build the Android version and then automatically deploy it to your connected Android device. Depending on your setup, the build and deployment might take several minutes.
 
-![Running on Android#center](images/android-plain-mode.webp "Figure 9. Sample application running on Android.")
+![Running on Android#center](images/android-plain-mode.webp "Figure 10. Sample application running on Android.")
