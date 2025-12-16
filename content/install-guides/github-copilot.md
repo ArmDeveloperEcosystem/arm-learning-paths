@@ -129,13 +129,15 @@ After installing the extensions, authorize GitHub Copilot:
 
 Test that GitHub Copilot is generating suggestions:
 
-- Create a new file (**File** → **New File** or press `Ctrl+N` on Windows/Linux or `Cmd+N` on macOS)
-- Save the file with a programming language extension (`test.py` for Python, `test.js` for JavaScript, or `test.go` for Go)
-- Type a comment describing a function:
-   ```python
-   # Function to calculate fibonacci numbers
-   ```
-- Press Enter to start a new line
+Create a new file by selecting **File** > **New File** or press `Ctrl+N` (Windows/Linux) or `Cmd+N` (macOS).
+
+Save the file with a programming language extension (for example, `test.py` for Python, `test.js` for JavaScript, or `test.go` for Go).
+
+Type a comment describing a function:
+
+```python
+# Function to calculate fibonacci numbers
+```
 
 Copilot analyzes your comment and suggests code as gray text in the editor.
 
