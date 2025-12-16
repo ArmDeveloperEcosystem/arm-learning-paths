@@ -20,9 +20,11 @@ weight: 1
 
 GitHub Copilot is an AI coding assistant that helps you write code faster and with less effort. It suggests whole lines or entire functions based on your comments and code context.
 
-GitHub Copilot works seamlessly on Arm-based systems, including Linux distributions running on Arm servers, macOS on Apple Silicon, and Windows on Arm devices.
+Copilot works seamlessly on Arm-based systems, including Linux distributions running on Arm servers, macOS on Apple Silicon, and Windows on Arm devices. This guide shows you how to install GitHub Copilot in Visual Studio Code and extend it with the Arm MCP Server for Arm-specific development assistance.
 
-This guide focuses on installing GitHub Copilot in Visual Studio Code. GitHub Copilot also supports other editors including JetBrains IDEs (IntelliJ IDEA, PyCharm, WebStorm), Neovim, and others. Visit the [official GitHub Copilot documentation](https://docs.github.com/en/copilot) for installation instructions for other editors.
+{{% notice Note %}}
+For installation instructions for other editors (JetBrains IDEs, Neovim, Vim), see the [GitHub Copilot documentation](https://docs.github.com/en/copilot).
+{{% /notice %}}
 
 ## What should I do before installing GitHub Copilot?
 
@@ -30,21 +32,38 @@ You need a GitHub account with an active GitHub Copilot subscription to use GitH
 
 If you don't have a GitHub account, visit [GitHub](https://github.com/) and sign up.
 
-To subscribe to GitHub Copilot, visit [GitHub Copilot pricing](https://github.com/features/copilot/plans) and choose a plan that fits your needs. GitHub Copilot offers individual, business, and enterprise plans, plus a free tier for verified students, teachers, and maintainers of popular open source projects.
+### Subscribe to GitHub Copilot
 
-## How do I install GitHub Copilot in Visual Studio Code?
+GitHub Copilot offers several subscription plans:
 
-Visual Studio Code is one of the most popular editors for using GitHub Copilot, and it works natively on Arm systems.
+- **Individual** — For personal development
+- **Business** — For teams and organizations  
+- **Enterprise** — For large-scale deployments
+- **Free tier** — For verified students, teachers, and maintainers of popular open source projects
 
-### Install Visual Studio Code
+[Select your GitHub Copilot subscription plan](https://github.com/features/copilot/plans) to get started.
 
-If you don't have Visual Studio Code installed, download and install it from the [offical download page]((https://code.visualstudio.com/download) for your operating system:
+### Verify your subscription
 
-- macOS (Apple Silicon): Download the the Apple Silicon version
-- Linux (Arm): Download the Arm64 `.deb` or `.rpm` package
-- Windows on Arm: Download the Arm64 installer
+After subscribing, verify your subscription is active:
 
-For Linux, you can install VS Code using the package manager. On Ubuntu and Debian-based distributions:
+1. Sign in to your GitHub account
+2. Navigate to **Settings** → **Copilot**
+3. Confirm your subscription status shows as **Active**
+
+## Install Visual Studio Code
+
+Visual Studio Code runs natively on Arm systems and provides the best experience for GitHub Copilot.
+
+Download Visual Studio Code from the [Visual Studio Code download page](https://code.visualstudio.com/download). Select the version for your operating system:
+
+- **macOS (Apple Silicon)** — Download the Apple Silicon version
+- **Linux (Arm)** — Download the Arm64 `.deb` or `.rpm` package
+- **Windows on Arm** — Download the Arm64 installer
+
+After downloading, run the installer and follow the installation prompts.
+
+For Linux systems, install VS Code using your package manager. On Ubuntu and Debian-based distributions:
 
 ```bash { target="ubuntu:latest" }
 curl -L "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64" -o vscode-arm64.deb
@@ -52,14 +71,32 @@ sudo dpkg -i vscode-arm64.deb
 sudo apt-get install -f 
 ```
 
-### Install the GitHub Copilot extension
+### Verify the installation
+
+Open a terminal and verify the installation:
+
+```bash
+code --version
+```
+
+The output is similar to:
+
+```output
+1.95.3
+f1a4fb101478ce6ec82fe9627c43efbf9e98c813
+arm64
+```
+
+
+## Install GitHub Copilot extensions
+
+### Install the main extension
 
 Open Visual Studio Code and install the GitHub Copilot extension:
 
-1. Open VS Code
-2. Select the Extensions view by selecting the Extensions icon in the Activity Bar on the left side or pressing `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (macOS)
-3. Search for "GitHub Copilot"
-4. Select **Install** on the "GitHub Copilot" extension by GitHub
+1. Open the Extensions view by selecting the Extensions icon in the Activity Bar or press `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (macOS)
+2. Search for **GitHub Copilot**
+3. Select **Install** on the GitHub Copilot extension by GitHub
 
 Alternatively, install from the command line:
 
@@ -67,124 +104,110 @@ Alternatively, install from the command line:
 code --install-extension GitHub.copilot
 ```
 
-### Install the GitHub Copilot Chat extension 
+### Install Copilot Chat
 
-For an enhanced experience with conversational AI assistance, install the GitHub Copilot Chat extension:
+For conversational AI assistance, install the GitHub Copilot Chat extension:
 
 ```console
 code --install-extension GitHub.copilot-chat
 ```
 
-Or search for "GitHub Copilot Chat" in the Extensions view and install it.
+You can also search for **GitHub Copilot Chat** in the Extensions view and select **Install**.
 
-### Sign in to GitHub Copilot
+### Authorize GitHub Copilot
 
-After installing the extension, you need to authorize it:
+After installing the extensions, authorize GitHub Copilot:
 
 1. In VS Code, select the GitHub Copilot icon in the status bar (bottom right)
 2. Select **Sign in to GitHub**
 3. Follow the prompts to authorize the extension in your browser
 4. Return to VS Code to complete the setup
 
-## How do I confirm GitHub Copilot is working?
+### Verify Copilot is working
 
-You now have GitHub Copilot installed in Visual Studio Code. 
+Test that GitHub Copilot is generating suggestions:
 
-Confirm it's working by testing code suggestions:
-
-1. In VSCode, create a new file by selecting **File** → **New File** or pressing `Ctrl+N` (Windows/Linux) or `Cmd+N` (macOS)
-2. Save the file with a programming language extension by selecting **File** → **Save As** (for example, `test.py` for Python, `test.js` for JavaScript, or `test.go` for Go)
-3. In the VS Code editor window, type a comment describing a function:
-   - For Python: `# Function to calculate fibonacci numbers`
-   - For JavaScript: `// Function to calculate fibonacci numbers`
-   - For Go: `// Function to calculate fibonacci numbers`
+1. Create a new file (**File** → **New File** or press `Ctrl+N` on Windows/Linux or `Cmd+N` on macOS)
+2. Save the file with a programming language extension (`test.py` for Python, `test.js` for JavaScript, or `test.go` for Go)
+3. Type a comment describing a function:
+   ```python
+   # Function to calculate fibonacci numbers
+   ```
 4. Press Enter to start a new line
 
-GitHub Copilot analyzes your comment and suggests code. The suggestion appears as gray text in the editor.
+Copilot analyzes your comment and suggests code as gray text in the editor.
 
-5. Press Tab to accept the suggestion, or press Esc to dismiss it
+5. Press Tab to accept the suggestion or Esc to dismiss it
 6. Continue typing to see more suggestions as you work
 
-If you don't see suggestions, check that:
-- You're working in the Visual Studio Code editor window (not a terminal)
-- The GitHub Copilot icon in the status bar (bottom right) shows it's active
-- You're signed in to your GitHub account
-- Your subscription is active
+If you don't see suggestions:
 
-## What are the different GitHub Copilot modes?
+- Verify you're working in the VS Code editor window (not a terminal)
+- Check that the GitHub Copilot icon in the status bar shows it's active
+- Confirm you're signed in to your GitHub account
+- Verify your subscription is active
 
-GitHub Copilot Chat in Visual Studio Code offers three modes to help you work with code in different ways: Agent, Edit, and Ask modes. Each mode is designed for specific tasks.
+## Work with GitHub Copilot modes
+
+GitHub Copilot Chat in Visual Studio Code offers three modes: Agent, Edit, and Ask. Each mode helps you work with code in different ways.
 
 ### Agent Mode
 
-Agent Mode enables GitHub Copilot to take autonomous actions in your workspace. In this mode, Copilot can:
-
-- Read and analyze multiple files in your project
-- Make changes across different files
-- Create new files and directories
-- Execute tasks that require understanding your entire codebase
+Agent Mode enables Copilot to take autonomous actions in your workspace. Copilot can read and analyze multiple files, make changes across your project, and create new files.
 
 To use Agent Mode:
 
-1. Open the GitHub Copilot Chat panel by selecting the chat icon in the Activity Bar or pressing `Ctrl+Enter` (Windows/Linux) or `Cmd+Ctrl+I` (macOS)
-2. Type `@workspace` followed by your request or prompt to engage Agent Mode
-3. Copilot analyzes your workspace and takes appropriate actions
+1. Open the Copilot Chat panel by selecting the chat icon in the Activity Bar or press `Ctrl+Enter` (Windows/Linux) or `Cmd+Ctrl+I` (macOS)
+2. Type `@workspace` followed by your request
 
-Example prompts for Agent Mode:
-- `Create a python application to calculate fibonacci numbers on my arm machine`
+Example prompts:
+- `Create a Python application to calculate fibonacci numbers`
 - `@workspace add error handling throughout the application`
 
 ### Edit Mode
 
 Edit Mode focuses on making targeted changes to your current file or selected code. This mode is useful when you want Copilot to modify existing code without creating new files.
 
-To use Edit Mode:
+To use Edit Mode with selected code:
 
 1. Select the code you want to modify in your editor
-2. Open the Copilot Chat panel
-3. Type your request describing the changes you want
-
-Alternatively, use the inline chat:
-
-1. Select the code you want to modify
 2. Press `Ctrl+I` (Windows/Linux) or `Cmd+I` (macOS) to open inline chat
-3. Describe the changes you want to make
-4. Copilot shows a preview of the changes before applying them
+3. Describe the changes you want
+4. Copilot shows a preview before applying changes
 
-Example prompts for Edit Mode:
+Example prompts:
 - Select a function and ask: `Add input validation and error handling`
-- Select a code block and ask: `Optimize this code for better performance on my arm machine`
+- Select a code block and ask: `Optimize this code for Arm architecture`
 
 ### Ask Mode
 
-Ask Mode is designed for questions and explanations. Use this mode when you want to understand code, learn about concepts, or get guidance without making changes to your files.
+Ask Mode helps you understand code and learn concepts without making changes to your files.
 
 To use Ask Mode:
 
-1. Open the GitHub Copilot Chat panel
+1. Open the Copilot Chat panel
 2. Type your question directly without any special prefixes
 
-Example prompts for Ask Mode:
+Example prompts:
 - `How does this function work?` (with code selected)
 - `What are the best practices for error handling in Python?`
+- `Explain the difference between Arm64 and x86 architectures`
 
-## How do I use MCP Servers with GitHub Copilot?
+## Extend with the Arm MCP Server
 
-Model Context Protocol (MCP) Servers extend GitHub Copilot's capabilities by providing specialized tools and knowledge bases. GitHub Copilot can connect to MCP servers to access domain-specific expertise and functionality.
+Model Context Protocol (MCP) Servers extend GitHub Copilot's capabilities by providing specialized tools and knowledge bases. The Arm MCP Server provides AI assistants with tools and knowledge for Arm architecture development, migration, and optimization.
 
-The Arm MCP Server provides AI assistants with tools and knowledge for Arm architecture development, migration, and optimization. This is particularly useful when working on Arm-based systems.
+### About the Arm MCP Server
 
-### What tools does the Arm MCP Server provide?
+The Arm MCP Server includes several tools for Arm development:
 
-The Arm MCP Server includes several tools designed for Arm development:
+- **migrate-ease scan** — Analyzes codebases for x86-specific code that needs updating for Arm compatibility
+- **skopeo** — Inspects container images to check for ARM64 architecture support
+- **knowledge_base_search** — Searches Arm documentation and learning resources
+- **mca (Machine Code Analyzer)** — Analyzes assembly code for performance on Arm architectures
+- **check_image** — Verifies Docker image architecture compatibility
 
-- migrate-ease scan: Analyzes codebases for x86-specific code that needs updating for Arm compatibility
-- skopeo: Inspects container images to check for ARM64 architecture support
-- knowledge_base_search: Searches Arm documentation and learning resources
-- mca (Machine Code Analyzer): Analyzes assembly code for performance on Arm architectures
-- check_image: Verifies Docker image architecture compatibility
-
-### How do I configure the Arm MCP Server with GitHub Copilot?
+### Install the Arm MCP Server
 
 You need Docker running on your system to use the Arm MCP Server. See the [Docker install guide](/install-guides/docker/) for instructions.
 
@@ -200,22 +223,15 @@ The easiest way to install the Arm MCP Server is through the GitHub MCP Registry
 4. VS Code opens with the Arm MCP Server installation page
 5. Select **Install** as you would with other extensions
 
-![MCP Server Install](/install-guides/_images/mcp-server-install.png "Figure 1. Install Arm MCP Server")
+![Screenshot of the Arm MCP Server installation page in Visual Studio Code showing the Install button and server description alt-text#center](/install-guides/_images/mcp-server-install.png "Install Arm MCP Server")
 
 This method automatically installs the Arm MCP Server and pulls the Docker image. No manual configuration is required.
 
-Method 2: Workspace configuration (recommended for sharing)
+### Configure manually (alternative method)
 
-For manual configuration, you can create a configuration file in your workspace. MCP servers can be configured in two locations:
+You can also configure the Arm MCP Server manually for more control over the installation.
 
-- For a specific repository: Create a `.vscode/mcp.json` file in the root of your repository. This enables you to share MCP server configuration with anyone who opens the project.
-- For your personal VS Code instance: Add the configuration to your `settings.json` file. This makes the server available in all workspaces.
-
-{{% notice Note %}}
-Use only one location per server to avoid conflicts and unexpected behavior.
-{{% /notice %}}
-
-First, pull the Arm MCP Server image:
+First, ensure Docker is running on your system. Pull the Arm MCP Server image:
 
 ```console
 docker pull armlimited/arm-mcp:latest
@@ -227,7 +243,7 @@ Create a `.vscode` directory in your project root if it doesn't exist, then crea
 mkdir -p .vscode
 ```
 
-Add the following configuration to `.vscode/mcp.json`:
+Create an `mcp.json` file in the `.vscode` directory with the following configuration:
 
 ```json
 {
@@ -279,30 +295,36 @@ To analyze code in your workspace, mount your local directory to the MCP server'
 
 Update your `.vscode/mcp.json` configuration to include the volume mount. Replace `/path/to/your/codebase` with the actual path to your project
 
-For example, if your project is at `/Users/username/myproject`, the volume mount args in your `mcp.json` would be:
+For example, if your project is at `/Users/username/myproject`, the volume mount configuration is:
 
 ```json
 "-v",
 "/Users/username/myproject:/workspace",
 ```
 
-### How do I verify the Arm MCP Server is working?
+{{% notice Note %}}
+The volume mount (`-v` flag) connects your local directory to the MCP server's `/workspace` folder. This enables the server to analyze code in your workspace. Use absolute paths for the source directory to avoid mounting errors.
+{{% /notice %}}
 
-After saving the `.vscode/mcp.json` file, the **Start** button appears at the top of the servers list. Select **Start** to start the MCP server.
+After saving the `.vscode/mcp.json` file, select the **Start** button that appears at the top of the servers list to start the MCP server.
 
-To confirm the server is running:
+### Verify the installation
+
+After starting the MCP server, confirm it's running:
 
 1. Open the Command Palette (`Ctrl+Shift+P` on Windows/Linux or `Cmd+Shift+P` on macOS)
 2. Type and select **MCP: List Servers**
-3. You should see `arm-mcp` listed as a Running configured server
+3. Verify `arm-mcp` appears as a Running configured server
 
 Open the GitHub Copilot Chat panel by selecting the chat icon in the Activity Bar. In the chat box, select **Agent** from the mode dropdown.
 
 To view available MCP tools, select the tools icon in the top left corner of the chat box. This opens the MCP server list showing all available tools from the Arm MCP Server.
 
-![MCP Server Tools](/install-guides/_images/new-mcp-server-tools.png "Figure 2. Tools loaded from the Arm MCP Server")
+![Screenshot of the MCP Server Tools panel in Visual Studio Code showing available tools from the Arm MCP Server alt-text#center](/install-guides/_images/new-mcp-server-tools.png "Tools from the Arm MCP Server")
 
-You can also ask Copilot to use specific Arm MCP tools:
+### Use the Arm MCP Server
+
+Ask Copilot to use specific Arm MCP tools in your prompts:
 
 ```
 Use the Arm MCP Server to scan my codebase for x86-specific code
@@ -314,25 +336,41 @@ or
 Check if the nginx:latest Docker image supports Arm64
 ```
 
-### Example prompts using the Arm MCP Server
-
-Here are some example prompts that use the Arm MCP Server tools:
+Example prompts that use the Arm MCP Server:
 
 - `Scan my workspace for code that needs updating for Arm compatibility`
 - `Check if the postgres:latest container image supports Arm64 architecture`
 - `Search the Arm knowledge base for NEON intrinsics examples`
 - `Find learning resources about migrating from x86 to Arm`
 
-### Troubleshooting MCP Server connections
+## Troubleshooting
+
+### MCP Server doesn't connect
 
 If the Arm MCP Server doesn't connect:
 
 - Verify Docker is running: `docker ps`
 - Check that the image was pulled successfully: `docker images | grep arm-mcp`
-- Ensure the timeout value (60000ms) is sufficient for your system
-- Check VS Code Output panel (select **Output** → **GitHub Copilot Chat**) for error messages
+- Review the VS Code Output panel (**View** → **Output** → **GitHub Copilot Chat**) for error messages
 - Restart VS Code after making configuration changes
 
-If you encounter issues or have questions, reach out to mcpserver@arm.com.
+### Copilot suggestions don't appear
+
+If you don't see Copilot suggestions:
+
+- Verify you're in the editor window (not a terminal or output panel)
+- Check that the GitHub Copilot icon in the status bar is active (not grayed out)
+- Confirm you're signed in to GitHub (**View** → **Command Palette** → **GitHub: Sign In**)
+- Verify your subscription is active in GitHub settings
+
+### Volume mount errors
+
+If you see volume mount errors when starting the MCP server:
+
+- Ensure you're using absolute paths (not relative paths like `./myproject`)
+- Verify the directory exists and you have read permissions
+- On Linux, ensure your user has permission to run Docker commands
+
+For support, contact [mcpserver@arm.com](mailto:mcpserver@arm.com).
 
 You're ready to use GitHub Copilot with the Arm MCP Server to enhance your Arm development workflow.
