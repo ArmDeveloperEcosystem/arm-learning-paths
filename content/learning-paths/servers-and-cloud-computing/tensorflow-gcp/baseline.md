@@ -1,5 +1,5 @@
 ---
-title: Test TensorFlow baseline performance on Google Axion C4A Arm virtual machines
+title: Test TensorFlow baseline performance on Google Axion C4A 
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -10,7 +10,7 @@ layout: learningpathall
 
 This section helps you confirm that TensorFlow is installed and working correctly on your Google Axion C4A Arm virtual machine (VM). You'll run tests to check that your CPU can perform TensorFlow operations and basic neural network training.
 
-### Check available devices
+## Check available devices
 
 List the hardware devices TensorFlow can use, such as CPU or GPU. On most VMs, only the CPU is available:
 
@@ -24,7 +24,7 @@ The output is similar to:
 [PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU')]
 ```
 
-### Run a computation test
+## Run a computation test
 
 Multiply two large matrices to verify TensorFlow computations on your CPU and measure execution time:
 
@@ -43,9 +43,9 @@ Computation time: 0.008263111114501953 seconds
 
 This provides a baseline measurement for CPU performance.
 
-### Test neural network execution
+## Test neural network execution
 
-Create a new file named `test_nn.py` to test a simple neural network:
+Create a file named `test_nn.py` with the following code:
 
 ```python
 import keras
@@ -71,7 +71,7 @@ model.fit(x, y, epochs=1, batch_size=32)
 
 This script creates and trains a basic neural network using random data to verify that TensorFlow's deep learning functions work on the Arm platform.
 
-### Run the neural network test
+## Run the neural network test
 
 Execute the script:
 
@@ -85,4 +85,4 @@ TensorFlow displays training progress similar to:
 32/32 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 0.1024
 ```
 
-You have now verified that TensorFlow is working on your Arm-based VM and can perform both basic computations and neural network training. Great job—your environment is ready for benchmarking!
+TensorFlow is working correctly on your Arm-based VM for both basic computations and neural network training. Your environment is ready for benchmarking.

@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## KleidiAI SME2 support in LiteRT
 
-LiteRT uses XNNPACK as its default CPU backend. KleidiAI micro-kernels are integrated through XNNPACK in LiteRT. Only a subset of KleidiAI Scalable Matrix Extension (SME and SME2) micro-kernels has been integrated into XNNPACK. These micro-kernels support operators using the following data types and quantization configurations in the LiteRT model. Other operators use XNNPACK’s default implementation during inference.
+LiteRT uses XNNPACK as its default CPU backend. KleidiAI micro-kernels are integrated through XNNPACK in LiteRT. Only a subset of KleidiAI SME2 micro-kernels has been integrated into XNNPACK. These micro-kernels support operators using the following data types and quantization configurations in the LiteRT model. Other operators use XNNPACK's default implementation during inference.
 
 ### Supported operator configurations
 
@@ -34,8 +34,8 @@ LiteRT uses XNNPACK as its default CPU backend. KleidiAI micro-kernels are integ
 
 | Activations                  | Weights                                               | Output                       |
 | ---------------------------- | ----------------------------------------------------- | ---------------------------- |
-| FP32                         | FP32, pointwise (kernel size is 1)                    | FP32                         |
-| FP32                         | FP16, pointwise (kernel size is 1)                    | FP32                         |
+| FP32                         | FP32                                                  | FP32                         |
+| FP32                         | FP16                                                  | FP32                         |
 | FP32                         | Per-channel or per-tensor symmetric INT8 quantization | FP32                         |
 | Asymmetric INT8 quantization | Per-channel or per-tensor symmetric INT8 quantization | Asymmetric INT8 quantization |
 
@@ -101,8 +101,6 @@ adb shell chmod +x /data/local/tmp/fc_fp32.tflite
 
 You can also optimize this Keras model using post-training quantization to create a LiteRT model that suits your requirements.
 
----
-
 ## Post-training quantization options
 
 **Post-training FP16 quantization**
@@ -158,7 +156,7 @@ This quantization method quantizes both the activations and the weights to INT8.
 
 KleidiAI provides INT8 packing micro-kernels for both the activations and weights matrix, as well as INT8 matrix multiplication micro-kernels.
 
-## What you've accomplishee and what's next
+## What you've accomplished and what's next
 You have now created several LiteRT models with different quantization options, ready for benchmarking on your Arm-based Android device. You have:
 
 - Built a simple Keras model and converted it to LiteRT (`.tflite`) format

@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 3
-- Linux: 200
+- Linux: 204
 - macOS: 13
 - Windows: 14
 pinned_modules:
@@ -19,10 +19,10 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 11
-- Containers and Virtualization: 35
-- Databases: 22
+- Containers and Virtualization: 36
+- Databases: 24
 - Libraries: 9
-- ML: 34
+- ML: 35
 - Performance and Architecture: 74
 - Storage: 2
 - Web: 17
@@ -66,16 +66,15 @@ tools_software_languages_filter:
 - Azure: 1
 - Azure CLI: 2
 - Azure Portal: 1
-- Bash: 1
+- Bash: 3
 - bash: 2
-- Bash/Shell scripting: 1
 - Bastion: 3
 - BOLT: 2
 - bpftool: 1
 - Buildkite: 1
 - C: 10
 - C#: 2
-- C++: 12
+- C++: 13
 - Capstone: 1
 - Cargo: 1
 - cassandra-stress: 1
@@ -84,7 +83,8 @@ tools_software_languages_filter:
 - Clair: 1
 - Clang: 13
 - ClickBench: 1
-- ClickHouse: 1
+- ClickHouse: 2
+- clickhouse-benchmark: 1
 - Cloud Build: 1
 - CMake: 1
 - conda: 1
@@ -97,6 +97,7 @@ tools_software_languages_filter:
 - Docker: 26
 - Docker Buildx: 1
 - Envoy: 3
+- Erlang: 1
 - ExecuTorch: 1
 - Facter: 1
 - FAISS: 1
@@ -125,7 +126,7 @@ tools_software_languages_filter:
 - Google Test: 1
 - Gunicorn: 1
 - HammerDB: 1
-- Helm: 2
+- Helm: 3
 - Herd7: 1
 - Hiera: 1
 - Hugging Face: 12
@@ -140,14 +141,14 @@ tools_software_languages_filter:
 - KEDA: 1
 - Kedify: 1
 - Keras: 2
-- KinD: 1
+- KinD: 2
 - kube-bench: 1
-- Kubernetes: 14
+- Kubernetes: 15
 - Libamath: 1
 - libbpf: 1
 - Linaro Forge: 1
 - Litmus7: 1
-- llama.cpp: 1
+- llama.cpp: 2
 - Llama.cpp: 2
 - LLM: 11
 - llvm-mca: 1
@@ -183,12 +184,14 @@ tools_software_languages_filter:
 - Perf: 1
 - PHP: 1
 - PHPBench: 1
+- pika: 1
 - PostgreSQL: 5
 - Profiling: 1
 - Puppet: 1
-- Python: 35
+- Python: 37
 - PyTorch: 10
 - QEMU: 1
+- RabbitMQ: 1
 - RAG: 1
 - Rails: 1
 - Redis: 4
@@ -238,7 +241,7 @@ tools_software_languages_filter:
 weight: 1
 cloud_service_providers_filter:
 - AWS: 19
-- Google Cloud: 34
+- Google Cloud: 37
 - Microsoft Azure: 19
 - Oracle: 2
 ---

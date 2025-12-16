@@ -1,5 +1,5 @@
 ---
-title: Getting started with TensorFlow on Google Axion C4A (Arm Neoverse-V2)
+title: Get started with TensorFlow on Google Axion C4A
 
 weight: 2
 
@@ -22,8 +22,6 @@ With support for neural networks, natural language processing (NLP), and compute
 
 To learn more, visit the [official TensorFlow website](https://www.tensorflow.org/).
 
-## Recap and next steps
+## Next steps
 
-You’ve learned about Google Axion C4A Arm-based VMs and the fundamentals of TensorFlow. These technologies provide a powerful, cost-effective foundation for running machine learning workloads in the cloud.
-
-You’re ready to provision your own Arm-based VM and start building and benchmarking TensorFlow models on Google Cloud. Great job—let’s get started!
+Now that you understand Google Axion C4A Arm-based VMs and TensorFlow fundamentals, you can provision your own VM and start benchmarking machine learning workloads on Google Cloud.
