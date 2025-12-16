@@ -67,7 +67,7 @@ _Note that this will be within a project not the hub_
 We have provided a simple project to accompany this learning path. To open it in Unity, please follow these instructions:
 
 - Unzip the [simple profiling example](supporting-files/simple-profiling-example.zip) to your computer. 
-  Important to make sure you save this to your local disk and NOT a cloud storage like OneDrive as that may result in errors further down the road 
+  Save this to your local disk only. Using cloud storage (e.g. OneDrive, iCloud) may cause errors later on
 
 - In Unity Hub, from the _Projects_ tab, select _Add project from disk_ from the drop-down menu:
 
@@ -79,7 +79,7 @@ You will see your project listed in the _Projects_ tab in Unity Hub.
 
 - You can now click on the project to open it. We used Unity 2022.3.18f1 to create the sample; if you use a different version, you will get a warning. The project is very simple and should be safe to convert. However, if in doubt, we recommend installing 2022.3.18f1 via the Unity Hub as we have already showed.
 
-- The project will now open in Unity. Once loaded (the first time can take a while) find the scene folder and open the sample scene then click on the _Play_ button to run the sample. This will run the project inside the editor. You will see a spinning cube.
+- The project will now open in Unity. Once loaded (the first time can take a while) find the scene folder, open the sample scene, and then click the _Play_ button to run the sample. This will run the project inside the editor. You will see a spinning cube.
 
 ![Spinning cube sample#center](images/app-running-slowly.png "Figure 8. The spinning cube sample running in the editor")
 
