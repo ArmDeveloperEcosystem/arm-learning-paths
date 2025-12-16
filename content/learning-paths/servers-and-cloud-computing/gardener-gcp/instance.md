@@ -1,44 +1,78 @@
 ---
-title: Create a Google Axion C4A Arm virtual machine on GCP 
+title: Create a Google Axion C4A Arm virtual machine for Gardener
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
+## Create your Google Axion C4A VM
 
-In this section, you will learn how to provision a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` (4 vCPUs, 16 GB memory) machine type in the Google Cloud Console.  
+You'll provision a Google Axion C4A Arm-based virtual machine on Google Cloud Platform (GCP) to host your Gardener installation. The C4A series uses Arm Neoverse-V2 cores, providing cost-effective performance for cloud-native workloads like Kubernetes cluster management.
+
+You'll use the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory—sufficient resources for running Gardener Local with Garden, Seed, and Shoot clusters.
 
 {{% notice Note %}}
-For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
+For detailed GCP setup instructions, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
-## Provision a Google Axion C4A Arm VM in Google Cloud Console
+## Configure machine settings
 
-To create a virtual machine based on the C4A instance type:
-- Navigate to the [Google Cloud Console](https://console.cloud.google.com/).
-- Go to **Compute Engine > VM Instances** and select **Create Instance**. 
-- Under **Machine configuration**:
-   - Populate fields such as **Instance name**, **Region**, and **Zone**.
-   - Set **Series** to `C4A`.
-   - Select `c4a-standard-4` for machine type.
+Navigate to the [Google Cloud Console](https://console.cloud.google.com/) and go to **Compute Engine > VM Instances**. Click **Create Instance**.
 
-   ![Create a Google Axion C4A Arm virtual machine in the Google Cloud Console with c4a-standard-4 selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
+Under **Machine configuration**, configure the following settings:
 
+- Set **Instance name** to a descriptive name like `gardener-vm`
+- Select your preferred **Region** and **Zone** (C4A instances are available in select regions)
+- Set **Series** to **C4A**
+- Select **c4a-standard-4** for the machine type
 
-- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. 
-- If using use **SUSE Linux Enterprise Server**. Select "Pay As You Go" for the license type.
-- Edit the Disk size ("Size(GB)" Textfield...) below and change it from "10" to "50" to increase the disk size of the VM to 50 GB...
-- Once appropriately selected and configured, please Click **Select**.
-- Under **Networking**, enable **Allow HTTP traffic** as well as **Allow HTTPS traffic**.
-- Click **Create** to launch the instance.
-- Once created, you should see a "SSH" option to the right in your list of VM instances.  Click on this to launch a SSH shell into your VM instance:
+![Google Cloud Console VM creation screen showing C4A series and c4a-standard-4 machine type selected #center](images/gcp-vm.png)
 
-![Invoke a SSH session via your browser alt-text#center](images/gcp-ssh.png "Invoke a SSH session into your running VM instance")
+### Select the operating system
 
-- A window from your browser should come up and you should now see a shell into your VM instance:
+Under **Boot disk**, click **Change** to configure the operating system and storage.
 
-![Terminal Shell in your VM instance alt-text#center](images/gcp-shell.png "Terminal shell in your VM instance")
+Select **SUSE Linux Enterprise Server** as your operating system. SUSE provides excellent support for Arm64 architecture and includes the container tools needed for Gardener.
 
-Next, let's install Gardner!
+For the license type, select **Pay As You Go** to use SUSE's subscription-based licensing.
+
+Increase the disk size from the default 10 GB to 50 GB by setting **Size (GB)** to `50`. Gardener requires additional storage for Docker images, Kubernetes components, and cluster data.
+
+Click **Select** to confirm your boot disk configuration.
+
+### Configure networking
+
+Under **Firewall**, enable both **Allow HTTP traffic** and **Allow HTTPS traffic**. These settings allow your Gardener cluster to serve web traffic and API endpoints.
+
+### Create and connect to your VM
+
+Click **Create** to provision your virtual machine. The VM creation takes one to two minutes.
+
+After creation completes, locate your running instance in the VM instances list. Click **SSH** to open a browser-based terminal connection to your VM.
+
+![SSH button in VM instances list #center](images/gcp-ssh.png)
+
+A new browser window opens with a terminal shell connected to your VM:
+
+![Browser-based SSH terminal connected to VM #center](images/gcp-shell.png)
+
+### Verify your Arm64 VM
+
+Confirm that your VM is running on Arm64 architecture:
+
+```console
+uname -m
+```
+
+The output is:
+
+```output
+aarch64
+```
+
+This confirms your VM is running on Arm64 (aarch64) architecture, ready for Gardener installation.
+
+---
+
+You have successfully created a Google Axion C4A Arm-based virtual machine running SUSE Linux Enterprise Server. Your VM is configured with the resources needed to run Gardener Local and is ready for software installation. You're now ready to install Gardener and its dependencies!
