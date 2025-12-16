@@ -9,7 +9,7 @@ layout: learningpathall
 ## Set up the Analyzer
 Before you can use the Analyzer tool, you need to install the related package it comes in. Follow these steps with the Package Manager:
 
-1. Select menu option _Window/Package Management/PacketManager_
+1. Select menu option _Window/Package Management/Packet Manager_
 
 1. Switch Packages option to _Packages: Unity Registry_
 
