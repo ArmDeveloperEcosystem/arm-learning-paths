@@ -281,3 +281,31 @@ Voice and Tone:
 - Write comprehensive summaries that AI can use as content overviews
 - Ensure each section can stand alone as a coherent piece of information
 - Use clear, declarative statements rather than implied or contextual references
+
+### Generating draft meta descriptions (human review required)
+
+If a Learning Path or install guide is missing a `description` field in the front matter, add a draft `description` field.
+
+Generate the draft description using existing content only, following these rules:
+
+- Use the page title and the first one or two sentences of the introduction as the primary sources.
+- Do not copy sentences verbatim from the body text.
+- Reframe the page intent rather than summarizing steps.
+- Write one or two concise sentences that describe:
+  - what the page is about
+  - the main outcome or capability the developer will gain
+  - the relevant Arm platform or context, if already stated
+
+Constraints:
+
+- Do not introduce new concepts, tools, claims, or benefits that are not already present in the content.
+- Do not invent performance claims or imply results that are not explicitly stated.
+- Do not repeat the page title verbatim.
+- Do not use marketing language or promotional adjectives.
+- Do not include markdown, lists, or formatting in the description.
+- Target approximately 140–180 characters where possible, but prioritize accuracy and clarity over exact length.
+
+The generated `description` must always be treated as a draft and reviewed and approved by a human before publication.
+
+
+  
