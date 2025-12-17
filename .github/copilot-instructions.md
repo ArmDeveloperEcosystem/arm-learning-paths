@@ -340,13 +340,6 @@ Avoid placeholders or generic phrases. Alt text should stand alone as a full des
 - Ensure each section can stand alone as a coherent piece of information
 - Use clear, declarative statements rather than implied or contextual references
 
-### Install guide scope awareness
-
-- Install guides are positioned as quick-start experiences focused on common setup paths. When editing or generating install guide content:
-  - Preserve the stated scope and positioning of the guide
-  - Avoid expanding explanations beyond what is necessary for initial setup unless explicitly instructed
-  - If content naturally extends into advanced configuration, flag this rather than restructuring or relocating content
-
 #### Editorial decision priorities
 
 When content trade-offs are required, prioritize the following in order:
