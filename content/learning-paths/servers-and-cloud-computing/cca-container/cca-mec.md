@@ -106,3 +106,5 @@ SMC_RMI_VERSION                   10000 > RMI_SUCCESS 10000 10001
 With FEAT_MEC enabled, the RMM detects MEC support and no longer reports it as missing. The RMM will now make use of multiple memory encryption contexts, assigning distinct MECIDs to Realms that you create using the lkvm command in the previous sections of this learning path.
 
 You can now shut down the FVP simulation. Switch back to the main screen console with ctrl+a 1, log in as root (no password), and run poweroff to exit. You can then exit the docker container with exit.
+
+You have learned how to enable Memory Encryption Contexts (MEC) on the FVP and verified that the RMM detects and uses this capability.
