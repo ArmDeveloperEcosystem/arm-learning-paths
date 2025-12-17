@@ -68,8 +68,13 @@ void exp_sve(float *x, float *y, size_t n) {
                     r = svmls_lane(r, k, lane_consts, 0);
 
         /* Compute the scaling factor 2^k */
-        svfloat32_t scale = svreinterpret_f32_u32(
-            svlsl_n_u32_m(pg, svreinterpret_u32_f32(z), 23));
+        svint32_t ki = svcvt_s32_f32_x(pg, k);          // float k -> int
+        svint32_t ei = svadd_n_s32_x(pg, ki, 127);      // add exponent bias
+        svuint32_t ebits = svlsl_n_u32_x(
+            pg,
+            svreinterpret_u32_s32(ei),
+            23);
+        svfloat32_t scale = svreinterpret_f32_u32(ebits);
 
         /* Compute poly(r) = exp(r) - 1 */
         svfloat32_t p12  = svmla_lane(svdup_f32(c1), r, lane_consts, 2); // c1 + c2 * r
@@ -205,17 +210,17 @@ Benchmarking exponential function with 1000000 elements...
 Running 100 iterations for accuracy
 
 Sample accuracy check (first 5 values):
-  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=-4638380449307299824564292406489382912.000000 (error=4.64e+36)
-  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=-4638419429563256842618388430112948224.000000 (error=4.64e+36)
-  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=-4638458409819213860672484453736513536.000000 (error=4.64e+36)
-  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=-4638497706987820935783930851535880192.000000 (error=4.64e+36)
-  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=-4638537004156428010895377249335246848.000000 (error=4.64e+36)
+  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006815 (error=7.75e-05)
+  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006816 (error=7.75e-05)
+  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006816 (error=7.75e-05)
+  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006816 (error=7.75e-05)
+  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006816 (error=7.75e-05)
 
 Performance Results:
 Implementation              Time (sec) Speedup vs Baseline
 -------------              ----------- -------------------
-Baseline (expf)               0.002485            1.00x
-SVE (degree-4 poly)           0.000570            4.36x
+Baseline (expf)               0.002496            1.00x
+SVE (degree-4 poly)           0.000633            3.94x
 ```
 
 The benchmark demonstrates the performance benefit of using SVE intrinsics for vectorized exponential computation. You should see a noticeable speedup compared to the standard library's scalar `expf()` function, with typical speedups ranging from 1.5x to 4x depending on your system's SVE vector length and memory bandwidth.

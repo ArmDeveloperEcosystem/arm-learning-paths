@@ -55,35 +55,29 @@ Open your `exp_sve.c` file and add the following function after the `exp_sve()` 
 ```C
 // SVE exponential implementation with FEXPA (degree-2 polynomial)
 void exp_sve_fexpa(float *x, float *y, size_t n) {
+    const float shift_fexpa = 196735.0f;
     float constants[1] = {ln2_lo};
     size_t i = 0;
-    
+
     svbool_t pg = svptrue_b32();
-    
+
     while (i < n) {
         pg = svwhilelt_b32((uint64_t)i, (uint64_t)n);
         svfloat32_t x_vec = svld1(pg, &x[i]);
-        
         svfloat32_t lane_consts = svld1rq(pg, constants);
 
-        /* Compute k as round(x/ln2) using shift = 1.5*2^(23-6) + 127 */
-        svfloat32_t z = svmad_x(pg, svdup_f32(inv_ln2), x_vec, shift);
-        svfloat32_t k = svsub_x(pg, z, shift);
+        svfloat32_t z = svmad_x(pg, svdup_f32(inv_ln2), x_vec, svdup_f32(shift_fexpa));
+        svfloat32_t k = svsub_x(pg, z, svdup_f32(shift_fexpa));
 
-        /* Compute r as x - k*ln2 with Cody and Waite */
         svfloat32_t r = svmsb_x(pg, svdup_f32(ln2_hi), k, x_vec);
-                    r = svmls_lane(r, k, lane_consts, 0);
+        r = svmls_lane_f32(r, k, lane_consts, 0);
 
-        /* Compute the scaling factor 2^k using FEXPA */
         svfloat32_t scale = svexpa(svreinterpret_u32_f32(z));
 
-        /* Compute poly(r) = exp(r) - 1 (degree-2 polynomial) */
-        svfloat32_t p01 = svmla_x(pg, svdup_f32(c0), r, svdup_f32(c1)); // c0 + c1 * r
-        svfloat32_t poly = svmul_x(pg, r, p01); // r * (c0 + c1 * r)
+        svfloat32_t p01 = svmla_x(pg, svdup_f32(c0), r, svdup_f32(c1));
+        svfloat32_t poly = svmul_x(pg, r, p01);
 
-        /* exp(x) = scale * exp(r) = scale * (1 + poly(r)) */
         svfloat32_t result = svmla_f32_x(pg, scale, poly, scale);
-        
         svst1(pg, &y[i], result);
         i += svcntw();
     }
@@ -128,11 +122,11 @@ The output shows the final comparison:
 
 ```output
 Performance Results:
-Implementation             Time (sec)   Speedup vs Baseline
--------------              -----------  -------------------
-Baseline (expf)              0.004523             1.00x
-SVE (degree-4 poly)          0.002187             4.36x
-SVE+FEXPA (degree-2)         0.001453             6.09x
+Implementation              Time (sec) Speedup vs Baseline
+-------------              ----------- -------------------
+Baseline (expf)               0.002458            1.00x
+SVE (degree-4 poly)           0.000640            3.84x
+SVE+FEXPA (degree-2)          0.000414            5.94x
 ```
 
 ## Results analysis
