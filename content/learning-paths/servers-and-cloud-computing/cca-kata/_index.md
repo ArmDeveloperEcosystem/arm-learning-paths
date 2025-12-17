@@ -1,6 +1,10 @@
 ---
 title: Run Confidentail Containers with encrypted images using Arm CCA and Trustee
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 60
 
 who_is_this_for: This Learning Path is for software developers who want to understand how Confidential Containers can be run in Arm CCA realm.
