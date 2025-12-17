@@ -10,11 +10,11 @@ minutes_to_complete: 15
 who_is_this_for: This is an introductory topic for developers interested in implementing the exponential function and optimizing it. The Scalable Vector Extension (SVE), introduced with the Armv8-A architecture, includes a dedicated instruction, FEXPA. Although initially not supported in SME, the FEXPA instruction has been made available in Scalable Matrix Extension (SME) version 2.2.
 
 learning_objectives: 
-    - Implementing with SVE intrinsics the exponential function
-    - Optimizing it with FEXPA
+    - Implement the exponential function using SVE intrinsics
+    - Optimize the function with FEXPA
 
 prerequisites:
-    - An AArch64 computer running Linux or macOS. You can use cloud instances, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) for a list of cloud service providers. 
+    - Access to an [AWS Graviton4, Google Axion, or Azure Cobalt 100 virtual machine from a cloud service provider](/learning-paths/servers-and-cloud-computing/csp/).
     - Some familiarity with SIMD programming and SVE intrinsics.
 
 author: 

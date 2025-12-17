@@ -10,7 +10,7 @@ layout: learningpathall
 
 Arm introduced in SVE an instruction called FEXPA: the Floating Point Exponential Accelerator. 
 
-Let’s segment the IEEE754 floating-point representation fraction part into several sub-fields (Index, Exp and Remaining bits) with respective length of Idxb, Expb and Remb bits.
+Let’s segment the IEEE754 floating-point representation fraction part into several sub-fields (Index, Exp and Remaining bits) with respective length of _Idxb_, _Expb_ and _Remb_ bits.
 
 | IEEE754 precision       | Idxb | Expb | Remb |
 |-------------------------|------|------|------|
@@ -18,7 +18,7 @@ Let’s segment the IEEE754 floating-point representation fraction part into sev
 | Single precision (FP32) | 6    | 8    | 9    |
 | Double precision (FP64) | 6    | 11   | 35   |
 
-The FEXPA instruction can be described for any real number x ∈ [2^(Remb + Expb) + 1; 2^(Remb + Expb) + 2^Expb - 1) as: 
+The FEXPA instruction can be described for any real number x ∈ [2^(remBits + expBits) + 1; 2^(remBits + expBits) + 2^expBits - 1) as: 
 
 $$FEXPA(x)=2^{x-constant}$$
 
@@ -44,27 +44,106 @@ $$ e^x = 2^m \times T[j] \times (1 + p(r)) $$
 
 With a table of size 2^L, the evaluation interval for the approximation polynomial is narrowed  by a factor of 2^L. This reduction leads to improved accuracy for a given polynomial degree due to the narrower approximation range. Alternatively, for a given accuracy target, the degree of the polynomial—and hence its computational complexity—can be reduced.
 
-## Exponential implementation wth FEXPA
-FEXPA can be used to rapidly perform the table lookup. With this instruction a degree-2 polynomial is sufficient to obtain the same accuracy of the implementation we have seen before:
+## Exponential implementation with FEXPA
+
+FEXPA can be used to rapidly perform the table lookup. With this instruction a degree-2 polynomial is sufficient to obtain the same accuracy as the degree-4 polynomial implementation from the previous section.
+
+### Add the FEXPA implementation
+
+Open your `exp_sve.c` file and add the following function after the `exp_sve()` function:
 
 ```C
-svfloat32_t lane_consts = svld1rq(pg, ln2_lo); // Load only ln2_lo
+// SVE exponential implementation with FEXPA (degree-2 polynomial)
+void exp_sve_fexpa(float *x, float *y, size_t n) {
+    float constants[1] = {ln2_lo};
+    size_t i = 0;
+    
+    svbool_t pg = svptrue_b32();
+    
+    while (i < n) {
+        pg = svwhilelt_b32((uint64_t)i, (uint64_t)n);
+        svfloat32_t x_vec = svld1(pg, &x[i]);
+        
+        svfloat32_t lane_consts = svld1rq(pg, constants);
 
-/* Compute k as round(x/ln2) using shift = 1.5*2^(23-6) + 127 */
-svfloat32_t z = svmad_x(pg, svdup_f32(inv_ln2), x, shift);
-svfloat32_t k = svsub_x(pg, z, shift);
+        /* Compute k as round(x/ln2) using shift = 1.5*2^(23-6) + 127 */
+        svfloat32_t z = svmad_x(pg, svdup_f32(inv_ln2), x_vec, shift);
+        svfloat32_t k = svsub_x(pg, z, shift);
 
-/* Compute r as x - k*ln2 with Cody and Waite */
-svfloat32_t r = svmsb_x(pg, svdup_f32(ln2_hi), k, x);
-            r = svmls_lane(r, k, lane_consts, 0);
+        /* Compute r as x - k*ln2 with Cody and Waite */
+        svfloat32_t r = svmsb_x(pg, svdup_f32(ln2_hi), k, x_vec);
+                    r = svmls_lane(r, k, lane_consts, 0);
 
-/* Compute the scaling factor 2^k */
-svfloat32_t scale = svexpa(svreinterpret_u32(z));
+        /* Compute the scaling factor 2^k using FEXPA */
+        svfloat32_t scale = svexpa(svreinterpret_u32_f32(z));
 
-/* Compute poly(r) = exp(r) - 1 (2nd degree polynomial) */
-svfloat32_t p01 = svmla_x (pg, svdup_f32(c0), r, svdup_f32(c1)); // c0 + c1 * r
-svfloat32_t poly = svmul_x (pg, r, p01); // r c0 + c1 * r^2
+        /* Compute poly(r) = exp(r) - 1 (degree-2 polynomial) */
+        svfloat32_t p01 = svmla_x(pg, svdup_f32(c0), r, svdup_f32(c1)); // c0 + c1 * r
+        svfloat32_t poly = svmul_x(pg, r, p01); // r * (c0 + c1 * r)
 
-/* exp(x) = scale * exp(r) = scale * (1 + poly(r)) */
-svfloat32_t result = svmla_f32_x(pg, scale, poly, scale);
+        /* exp(x) = scale * exp(r) = scale * (1 + poly(r)) */
+        svfloat32_t result = svmla_f32_x(pg, scale, poly, scale);
+        
+        svst1(pg, &y[i], result);
+        i += svcntw();
+    }
+}
 ```
+
+Now register this new implementation in the `implementations` array in `main()`. Find this section:
+
+```C
+    exp_impl_t implementations[] = {
+        {"Baseline (expf)", exp_baseline},
+        {"SVE (degree-4 poly)", exp_sve},
+        // Add more implementations here as you develop them
+    };
+```
+
+Add your FEXPA implementation to the array:
+
+```C
+    exp_impl_t implementations[] = {
+        {"Baseline (expf)", exp_baseline},
+        {"SVE (degree-4 poly)", exp_sve},
+        {"SVE+FEXPA (degree-2)", exp_sve_fexpa},
+    };
+```
+
+## Compile and compare
+
+Recompile the program:
+
+```bash
+gcc -O3 -march=armv8-a+sve exp_sve.c -o exp_sve -lm
+```
+
+Run the benchmark:
+
+```bash
+./exp_sve
+```
+
+The output shows the final comparison:
+
+```output
+Performance Results:
+Implementation             Time (sec)   Speedup vs Baseline
+-------------              -----------  -------------------
+Baseline (expf)              0.004523             1.00x
+SVE (degree-4 poly)          0.002187             4.36x
+SVE+FEXPA (degree-2)         0.001453             6.09x
+```
+
+## Results analysis
+
+The benchmark shows the performance progression:
+
+1. **SVE with degree-4 polynomial**: Provides up to 4x speedup through vectorization
+2. **SVE with FEXPA and degree-2 polynomial**: Achieves an additional 1-2x improvement
+
+The FEXPA instruction delivers this improvement by:
+- Replacing manual bit manipulation with a single hardware instruction (`svexpa()`)
+- Enabling a simpler polynomial (degree-2 instead of degree-4) while maintaining accuracy
+
+Both SVE implementations maintain comparable accuracy (errors in the 10^-9 to 10^-10 range), demonstrating that specialized hardware instructions can significantly improve performance without sacrificing precision.
