@@ -17,11 +17,11 @@ The Profiler will be able to help you in various ways:
 
 - Monitor and measure CPU usage across various areas of the Unity engine and your app, e.g., graphics rendering, script processing, physics, animation, UI etc.
 
-- Monitor and measure memory allocations
+- Monitor and measure memory allocations.
 
-- Get a breakdown of how long specific functions are taking
+- Get a breakdown of how long specific functions are taking.
 
-- Help identifying where the bottlenecks are in your application
+- Help identifying where the bottlenecks are in your application.
 
 ## Launch the Profiler
 
