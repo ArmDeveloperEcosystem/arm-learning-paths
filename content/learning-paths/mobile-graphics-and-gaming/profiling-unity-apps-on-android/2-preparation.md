@@ -85,9 +85,9 @@ Once the sample project has been imported, you will see some errors and warnings
 
 1. Select _Android_ from the Platform list
 
-1. Select _Switch Platform_as you have done in the [previous learning path](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android/3-test-on-android/)
+1. Select _Switch Platform_ as you have done in the [previous learning path](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android/3-test-on-android/)
 
-   ![Build-Profile-Menu#center](images/BP-menu.png "Figure 5. Build profile menu .")
+   ![Build-Profile-Menu#center](images/BP-menu.png "Figure 5. Build Profile menu .")
 
 Unity will take a moment to build the assets for the Android platform.
 
@@ -97,12 +97,12 @@ Your scene view will look something like this:
 
    ![Scene view#center](images/sample-project-default-scene-view.PNG "Figure 6. Default scene view of sample project.")
 
-if it doesn't then follow the steps below
+If it doesn't then our next steps should hopefully reveal the issue.
 ## Run the project inside the editor
 
 It is worth checking that everything has imported and been built correctly.
 
-1. Close the _Build profiles_ window
+1. Close the _Build Profiles_ window
 
 1. In the Project tab (usually at the bottom in default configurations) you will see the list of asset files. 
    ![Scenes Folder#center](images/Bad-Load.png "Figure 7. assests area")
@@ -122,7 +122,7 @@ The game will launch and you will see an empty environment begin to fill with mo
 ## Deploy to Android
 You will now deploy the sample to your Android device. Your device must already be set up for development. For detailed instructions, read the learning path [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android).
 
-1. Open _Build profile_ from the File menu
+1. Open _Build Profiles_ from the File menu
 
 1. Tick the _Development Build_ option
  
