@@ -20,7 +20,7 @@ author: Joe Stech
 
 ### Tags
 skilllevels: Introductory
-subjects: Migration to Arm
+subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
