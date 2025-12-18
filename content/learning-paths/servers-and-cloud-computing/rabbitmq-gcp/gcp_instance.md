@@ -1,6 +1,6 @@
 ---
 title: Create a Google Axion C4A Arm virtual machine on GCP 
-weight: 4
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -9,6 +9,7 @@ layout: learningpathall
 ## Overview
 
 In this section, you provision a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` (4 vCPUs, 16 GB memory) machine type in the Google Cloud Console.  
+We will then use this GCP VM to execute a few RabbitMQ use cases.
 
 {{% notice Note %}}
 For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
