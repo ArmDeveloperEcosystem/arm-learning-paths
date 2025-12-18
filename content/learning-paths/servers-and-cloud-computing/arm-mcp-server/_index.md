@@ -7,7 +7,7 @@ cascade:
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an introductory topic for software developers who want to use AI-powered tools to migrate x86 applications to Arm-based cloud instances.
+who_is_this_for: This is an advanced topic for software developers who want to use AI-powered tools to migrate x86 applications to Arm-based cloud instances.
 
 learning_objectives:
     - Understand how the Arm MCP Server enables AI developer tools to assist with cloud migration
@@ -16,14 +16,14 @@ learning_objectives:
     - Configure different agentic systems to automate Arm migration workflows
 
 prerequisites:
-    - An AI-powered IDE such as VS Code with GitHub Copilot, Claude Code, Cursor, or similar
+    - An AI-powered IDE such as VS Code with agentic tools like GitHub Copilot, Claude Code, Cursor, or similar
     - Basic familiarity with Docker and C/C++ development
     - Access to an Arm-based cloud instance or local Arm computer for testing
 
 author: Joe Stech
 
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
     - Neoverse
