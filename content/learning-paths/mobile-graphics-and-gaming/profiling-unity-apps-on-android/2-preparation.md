@@ -19,7 +19,8 @@ Although the sample application is a project, you will still need to create a bl
 
 1. Select the _3D (URP) Core_ template 
  
-  ![Display URP Template#center](images/URP.png "Figure 1. URP 3D template")
+   ![Display URP Template#center](images/URP.png "Figure 1. URP 3D template")
+  
 1. Enter project name (this will be used as the name of the project folder)
 
 1. Enter location (path of your project on disk)
@@ -59,7 +60,7 @@ Once Unity has loaded, you will be presented with a template project. You can ig
 
 1. The Unity Editor will bring itself to the front and show the _Package Manager_
  
-  ![Open Project manager#center](images/PM.png "Figure 2. Packet Manager with asset showing.")
+   ![Open Project manager#center](images/PM.png "Figure 2. Packet Manager with asset showing.")
 
 1. You will see the sample project listed and highlighted. Select _Download_.
 
@@ -86,7 +87,7 @@ Once the sample project has been imported, you will see some errors and warnings
 
 1. Select _Switch Platform_as you have done in the [previous learning path](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android/3-test-on-android/)
 
-![Build-Profile-Menu#center](images/BP-menu.png "Figure 5. Build profile menu .")
+   ![Build-Profile-Menu#center](images/BP-menu.png "Figure 5. Build profile menu .")
 
 Unity will take a moment to build the assets for the Android platform.
 
@@ -94,7 +95,7 @@ The errors will disappear but some warnings regarding unreachable code will appe
 
 Your scene view will look something like this:
 
-![Scene view#center](images/sample-project-default-scene-view.PNG "Figure 6. Default scene view of sample project.")
+   ![Scene view#center](images/sample-project-default-scene-view.PNG "Figure 6. Default scene view of sample project.")
 
 if it doesn't then follow the steps below
 ## Run the project inside the editor
@@ -104,7 +105,7 @@ It is worth checking that everything has imported and been built correctly.
 1. Close the _Build profiles_ window
 
 1. In the Project tab (usually at the bottom in default configurations) you will see the list of asset files. 
-![Scenes Folder#center](images/Bad-Load.png "Figure 7. assests area")
+   ![Scenes Folder#center](images/Bad-Load.png "Figure 7. assests area")
 
 1. Open the _BurstNeonCollisions_ folder
 
