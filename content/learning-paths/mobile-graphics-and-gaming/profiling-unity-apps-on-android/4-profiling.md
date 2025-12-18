@@ -51,17 +51,17 @@ In our sample, the performance issues will be apparent soon after launch. To pro
 
 If you forget to tick the auto-connect option or you want to wait before you connect the Profiler, you can connect the Profiler while the app is running:
 
-While inside the unity editor
+While inside the unity editor:
 
-1. Select _Window_ menu, then _Analysis_, then _Profiler_
+1. Select _Window_ menu, then _Analysis_, then _Profiler_ .
 
-1. A round record button is present in the top-left
+1. A round record button is present in the top-left.
 
 1. To the left of the record button is a drop-down menu identifying the connection mode and device. To profile the app running in the editor, you would set this to _Play Mode_.
 
 1. Your Android device should appear in the list. Select it to connect the Profiler.
 
-1. Press the record button to start profiling (the button will turn red)
+1. Press the record button to start profiling (the button will turn red).
 
 You can stop the recording at any time by pressing the Record button. It will turn gray when recording is not in progress.
 
