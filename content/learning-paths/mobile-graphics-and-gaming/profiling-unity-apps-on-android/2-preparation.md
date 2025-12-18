@@ -134,7 +134,7 @@ You will now deploy the sample to your Android device. Your device must already 
 
 1. Once recognized, your device will be listed in the drop-down menu next to _Run Device_
 
-1. The screenshot above shows the settings with a our demo device selected as the _Run Device_ you will see your own device in this box
+1. The screenshot above shows the settings with our demo device selected as the _Run Device_ you will see your own device in this box
 
 1. Select _Build and Run_
 
