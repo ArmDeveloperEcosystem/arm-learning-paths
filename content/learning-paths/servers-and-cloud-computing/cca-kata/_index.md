@@ -16,7 +16,7 @@ learning_objectives:
 
 prerequisites:
   - An AArch64 or x86_64 computer running Linux or macOS; you can use cloud instances - see the [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/)
-  - Completion of the ["Run an end-to-end Attestation with Arm CCA and Trustee"](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cca-trustee) Learning Path
+  - Completion of the ["Run an end-to-end Attestation with Arm CCA and Trustee"](/learning-paths/servers-and-cloud-computing/cca-trustee) Learning Path
 
 author:
   - Anton Antonov

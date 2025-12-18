@@ -12,7 +12,7 @@ learning_objectives:
     - Use Libamath with different vector accuracy modes in practice
 
 prerequisites:
-    - An Arm computer running Linux with [Arm Performance Libraries](https://learn.arm.com/install-guides/armpl/) version 25.04 or newer installed. 
+    - An Arm computer running Linux with [Arm Performance Libraries](/install-guides/armpl/) version 25.04 or newer installed. 
 
 ### Tags
 skilllevels: Introductory
@@ -33,7 +33,7 @@ further_reading:
         type: documentation
     - resource:
         title: ArmPL Installation Guide
-        link: https://learn.arm.com/install-guides/armpl/
+        link: /install-guides/armpl/
         type: website
 
 

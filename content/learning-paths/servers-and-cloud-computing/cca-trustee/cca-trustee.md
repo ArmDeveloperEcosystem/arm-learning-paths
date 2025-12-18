@@ -60,7 +60,7 @@ A Verifier driver parses the attestation evidence provided by the hardware TEE a
 In this Learning Path, the AS is configured to use an external CCA Verifier.
 
 [Linaro](https://www.linaro.org) provides an attestation Verifier for pre-silicon Arm CCA platforms. It is built from the open-source [Veraison](https://github.com/veraison) project. Learn more in
-[Get Started with CCA Attestation and Veraison](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cca-veraison/).
+[Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison/).
 
 ## Policy engine
 
@@ -84,7 +84,7 @@ You will run this tool in a realm to make requests for an attestation result tok
 The client tool can also be used to provision the KBS/AS with resources and policies.
 
 To prove the environment’s trustworthiness, the KBS Client sends CCA attestation evidence (a CCA attestation token) to the KBS. Learn more about CCA attestation tokens in
-[Get Started with CCA Attestation and Veraison](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cca-veraison/).
+[Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison/).
 
 For convenience, Trustee services and the client software are packaged in Docker containers, which you can run on any suitable AArch64 or x86_64 development host. Because the client runs in a realm, it uses the Fixed Virtual Platform (FVP) and the reference software stack for Arm CCA. If you are new to running applications in realms with FVP, see
 [Run an application in a Realm using the Arm Confidential Computing Architecture (CCA)](/learning-paths/servers-and-cloud-computing/cca-container).

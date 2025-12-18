@@ -40,7 +40,7 @@ further_reading:
         type: documentation
     - resource:
         title: Analyze a Frame with Frame Advisor
-        link: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/analyze_a_frame_with_frame_advisor/
+        link: /learning-paths/mobile-graphics-and-gaming/analyze_a_frame_with_frame_advisor/
         type: blog
     - resource:
         title: Arm Performance Studio

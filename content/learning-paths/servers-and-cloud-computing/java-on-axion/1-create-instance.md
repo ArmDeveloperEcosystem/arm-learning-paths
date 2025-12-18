@@ -12,9 +12,9 @@ Axion is Google's first Arm-based server processor, built using the Armv9 Neover
 
 There are several ways to create an Arm-based Google Axion VM: the Google Cloud console, the gcloud CLI tool, or using your choice of IaC (Infrastructure as Code).
 
-This guide will use the gcloud CLI. If you would like to read more about deploying to Google Cloud via IaC, please check out the [Learning Path to Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/gcp/).
+This guide will use the gcloud CLI. If you would like to read more about deploying to Google Cloud via IaC, please check out the [Learning Path to Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](/learning-paths/servers-and-cloud-computing/gcp/).
 
-If you have never used the Google Cloud Platform before, please review [Getting Started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
+If you have never used the Google Cloud Platform before, please review [Getting Started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 
 #### Open and configure the Google Cloud Shell Editor
 

@@ -11,7 +11,7 @@ layout: learningpathall
 In this section, you create a Firewall Rule within Google Cloud Console to expose TCP port 15672.
 
 {{% notice Note %}}
-For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
+For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
 ## Create a Firewall Rule in GCP

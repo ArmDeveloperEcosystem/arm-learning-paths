@@ -63,7 +63,7 @@ cp build-native-gcc-rel/gatord ~/pulumi-ec2/
 ```
 
 ## Install awscli and set environment variables
-Use the [awscli](https://learn.arm.com/install-guides/aws-cli/) learning path to install the awscli. 
+Use the [awscli](/install-guides/aws-cli/) learning path to install the awscli. 
 
 Set the following environment variables on your local computer to connect to your AWS account:
 ```bash

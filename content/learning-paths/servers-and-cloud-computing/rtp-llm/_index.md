@@ -48,7 +48,7 @@ further_reading:
         type: blog
     - resource: 
         title: Get started with Arm-based cloud instances
-        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/
+        link: /learning-paths/servers-and-cloud-computing/csp/
         type: website
      
 
