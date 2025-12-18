@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Objective
-You will create the managed Kubernetes cluster in Azure, which is integrated with the Azure Container Registry. The cluster will use arm64 VMs as the nodes. This tutorial shows how to manually create the cluster. Optionally you can use Terraform-based deployment as described here: https://learn.arm.com/learning-paths/servers-and-cloud-computing/aks/cluster_deployment/.
+You will create the managed Kubernetes cluster in Azure, which is integrated with the Azure Container Registry. The cluster will use arm64 VMs as the nodes. This tutorial shows how to manually create the cluster. Optionally you can use [Terraform-based deployment](/learning-paths/servers-and-cloud-computing/aks/cluster_deployment/).
 
 ## Create the Kubernetes cluster
 Login to the Azure Portal and type **Kubernetes** in the search box. Then, look for the Kubernetes services:
