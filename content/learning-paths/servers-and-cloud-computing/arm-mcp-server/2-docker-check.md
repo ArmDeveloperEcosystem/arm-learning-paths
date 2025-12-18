@@ -10,11 +10,13 @@ layout: learningpathall
 
 This section demonstrates just one example of using direct AI chat with the Arm MCP Server. You can use similar natural language prompts to check library compatibility, search for Arm documentation, or analyze code for migration issues.
 
-One of the first steps in migrating a containerized application to Arm is verifying that your base images support the `arm64` architecture. The Arm MCP Server makes this easy with a simple natural language prompt.
+A common first step when migrating a containerized application to Arm is verifying that the base container images support the arm64 architecture. The Arm MCP Server simplifies this process by allowing you to ask this question directly using a natural language prompt, without manually inspecting image manifests or registry metadata. 
 
 ## Example: Legacy CentOS 6 Application
 
-Consider an application built on CentOS 6, a legacy distribution that has reached end-of-life. Here's a Dockerfile that represents a typical x86-optimized compute benchmark application. Copy it to your VS Code with GitHub Copilot or other agentic IDE:
+Consider an application built on CentOS 6, a legacy Linux distribution that has reached end of life (EOL). The following Dockerfile represents a typical x86-optimized, compute-heavy benchmark application that you might encounter when migrating older workloads.
+
+Copy this Dockerfile into VS Code using GitHub Copilot or another agentic IDE connected to the Arm MCP Server:
 
 ```dockerfile
 FROM centos:6
@@ -78,7 +80,7 @@ This Dockerfile has several x86-specific elements:
 
 ## Using the Arm MCP Server to Check Compatibility
 
-With the Arm MCP Server connected to your AI assistant, you can check the base image compatibility with a simple prompt:
+With the Arm MCP Server connected to your AI assistant, you can quickly verify base image compatibility using a simple natural language prompt:
 
 ```text
 Check this base image for Arm compatibility
