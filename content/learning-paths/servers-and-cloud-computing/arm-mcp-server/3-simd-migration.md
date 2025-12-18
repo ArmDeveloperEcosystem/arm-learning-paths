@@ -8,9 +8,8 @@ layout: learningpathall
 
 ## Migrating SIMD Code with AI Assistance
 
-One of the most complex aspects of migrating from x86 to Arm is converting SIMD (Single Instruction, Multiple Data) intrinsics. x86 uses SSE, AVX, and AVX2 instructions, while Arm uses NEON intrinsics.
-
-The Arm MCP Server, combined with a well-crafted prompt file, can automate much of this migration process.
+A challenging aspect of migrating some applications from x86 to Arm is converting SIMD (Single Instruction, Multiple Data) code. On x86 platforms, SIMD is typically implemented using SSE, AVX, or AVX2 intrinsics, while Arm platforms use NEON and SVE intrinsics to achieve similar vectorized performance.
+Manually rewriting SIMD intrinsics is time-consuming and error-prone. By combining the Arm MCP Server with a well-defined prompt file, you can automate much of this migration process and guide an AI assistant through a systematic, architecture-aware transformation of your codebase.
 
 ## Sample x86 Code with AVX2 Intrinsics
 
