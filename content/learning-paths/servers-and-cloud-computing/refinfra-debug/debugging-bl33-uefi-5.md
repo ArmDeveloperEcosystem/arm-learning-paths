@@ -61,7 +61,7 @@ You can see that it has stopped at the breakpoint.
 Older versions of Arm Development Studio have Beta support for DWARF 5 formats. EDK2 builds the debug files in DWARF 5
 format.
 
-In order to load the debug files properly, follow the instructions [here](https://developer.arm.com/documentation/101470/2023-0/Reference/Standards-compliance-in-Arm-Debugger).
+In order to load the debug files properly, follow the [Standards compliance in Arm Debugger](https://developer.arm.com/documentation/101470/2023-0/Reference/Standards-compliance-in-Arm-Debugger) instructions.
 
 These instructions state that you must enable the LLVM DWARF parser to use DWARF 5 format. To enable the LLVM DWARF parser, do the following.
 

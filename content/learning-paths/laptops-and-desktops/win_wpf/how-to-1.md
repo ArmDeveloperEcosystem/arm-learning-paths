@@ -17,7 +17,7 @@ Through its comprehensive feature set and the support for modern application dev
 
 In this learning path, you will create a WPF application from scratch. The application will perform the computationally intensive task of the multiply-add operation on two vectors. By measuring execution times of these operations, you will see the enhancements provided by Arm64 architecture-based devices. Along the way, you will learn how to use Syncfusion's chart library, a third-party tool, to create a column series chart demonstrating the computation times.
 
-You can find the complete project code used in this learning path [here](https://github.com/dawidborycki/Arm64.DesktopApp.WPF).
+You can find the [complete project code on GitHub](https://github.com/dawidborycki/Arm64.DesktopApp.WPF).
 
 ## Create the project
 You will now create the WPF project. Open Visual Studio and click **Create a new project**: 

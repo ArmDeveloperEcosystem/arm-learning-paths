@@ -22,7 +22,7 @@ Before going further, let's make sure you have installed Python v3.12 using the 
 1. [x64](https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe)
 2. [Arm64](https://www.python.org/ftp/python/3.12.0/python-3.12.0-arm64.exe)
 
-Install Python v3.12 for Arm64 and x64. The installation process is the same as described [here](/install-guides/py-woa/).
+Install Python v3.12 for Arm64 and x64. The installation process is the same as described in [Python on Windows on Arm](/install-guides/py-woa/).
 
 To run the Python interpreter for x64, open the command prompt and type the following command:
 

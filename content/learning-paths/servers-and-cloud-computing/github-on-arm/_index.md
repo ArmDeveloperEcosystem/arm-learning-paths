@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free?utm_source=google&hl=en) account with billing enabled
-  - A GitHub account; you can sign up [here](https://github.com/signup)
+  - A GitHub account; you can [sign up for GitHub](https://github.com/signup)
 
 author: Annie Tallund
 

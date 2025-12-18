@@ -26,7 +26,7 @@ Download and copy the configuration file `model_config.json` and the model itsel
 ls -lha $WORKSPACE/model_config.json $WORKSPACE/model.ckpt
 ```
 
-You can learn more about this model [here](https://huggingface.co/stabilityai/stable-audio-open-small).
+You can learn more about [stable-audio-open-small on Hugging Face](https://huggingface.co/stabilityai/stable-audio-open-small).
 
 ### Good prompting practices
 
