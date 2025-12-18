@@ -35,7 +35,7 @@ On the other hand, if the performance issues happen later in the app's lifetime,
 
 In our sample, the performance issues will be apparent soon after launch. To profile directly on an Android device:
 
-1. Open the _Build Profile_
+1. Open the _Build Profiles_
 
 1. Ensure _Autoconnect Profiler_ is ticked
 
@@ -51,7 +51,7 @@ In our sample, the performance issues will be apparent soon after launch. To pro
 
 If you forget to tick the auto-connect option or you want to wait before you connect the Profiler, you can connect the Profiler while the app is running:
 
-Whilst inside the unity editor
+While inside the unity editor
 
 1. Select _Window_ menu, then _Analysis_, then _Profiler_
 
