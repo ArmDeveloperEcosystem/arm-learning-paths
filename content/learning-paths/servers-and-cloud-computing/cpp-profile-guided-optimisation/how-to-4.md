@@ -1,5 +1,5 @@
 ---
-title: Using Profile Guided Optimization
+title: Using Profile Guided Optimization (Linux)
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -22,13 +22,34 @@ Next, run the instrumented binary to generate the profile data:
 
 This execution creates profile data files (typically with a `.gcda` extension) in the same directory. 
 
+### Inspect assembly
+
+To inspect what assembly instructions are being executed most frequently, you can use the `perf` command. This is useful for identifying bottlenecks and understanding the performance characteristics of your code.
+
+Install Perf using the [install guide](https://learn.arm.com/install-guides/perf/) before proceeding.
+
+{{% notice Please Note %}}
+You may need to set the `perf_event_paranoid` value to -1 with the `sudo sysctl kernel.perf_event_paranoid=-1` command to run the commands below.
+{{% /notice %}}
+
+Run the following commands to record `perf` data and create a report in the terminal:
+
+```bash
+sudo perf record -o perf-division-base ./div_bench.base 
+sudo perf report --input=perf-division-base
+```
+
+As the `perf report` graphic below shows, the program spends a significant amount of time in the short loops with no loop unrolling. There is also an expensive `sdiv` operation, and most of the execution time is spent storing the result of the operation.
+
+![before-pgo](./before-pgo.gif)
+
+### Compile and run the optimized binary 
+
 Now recompile the program using the `-fprofile-use` flag to apply optimizations based on the collected data: 
 
 ```bash
 g++ -O3 -std=c++17 -fprofile-use div_bench.cpp -lbenchmark -lpthread -o div_bench.opt
 ```
-
-### Run the optimized binary 
 
 Now run the optimized binary:
 
