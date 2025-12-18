@@ -18,7 +18,7 @@ prerequisites:
     - 'Visual Studio Code: https://code.visualstudio.com/download' 
     - 'Docker Extension for Visual Studio Code: https://code.visualstudio.com/docs/containers/overview'
     - 'C# Extension for Visual Studio Code: https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp'
-    - '[Install Docker on Arm64](/install-guides/docker/docker-woa/)'
+    - '[Install Docker on Arm64](/install-guides/docker/docker-desktop/)'
 
 author: Dawid Borycki
 
