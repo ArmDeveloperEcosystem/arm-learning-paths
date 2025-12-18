@@ -17,7 +17,20 @@ prerequisites:
     - An AArch64 computer running Linux or macOS. You can use cloud instances, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) for a list of cloud service providers. 
     - Some familiarity with SIMD programming and SVE intrinsics.
 
-author: Arnaud Grasset, Claudio Martino, Alexandre Romana
+author: 
+- Arnaud Grasset
+- Claudio Martino
+- Alexandre Romana
+
+further_reading:
+    - resource:
+        title: Scalable Vector Extensions documentation
+        link: https://developer.arm.com/Architectures/Scalable%20Vector%20Extensions
+        type: documentation
+    - resource:
+        title: FEXPA documentation
+        link: https://developer.arm.com/documentation/ddi0602/2025-12/SVE-Instructions/FEXPA--Floating-point-exponential-accelerator-?lang=en
+        type: documentation
 
 ### Tags
 skilllevels: Introductory
