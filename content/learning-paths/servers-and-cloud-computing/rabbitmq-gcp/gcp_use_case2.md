@@ -1,6 +1,6 @@
 ---
 title: RabbitMQ use case 2 - WhatsApp Notification
-weight: 8 
+weight: 11 
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

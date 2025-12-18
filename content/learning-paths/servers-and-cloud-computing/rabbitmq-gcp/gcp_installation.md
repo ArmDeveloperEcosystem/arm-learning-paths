@@ -1,6 +1,6 @@
 ---
-title: Install RabbitMQ
-weight: 5
+title: Install RabbitMQ on GCP SUSE Arm64 VM
+weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
