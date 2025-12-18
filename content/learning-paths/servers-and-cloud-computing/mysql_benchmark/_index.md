@@ -15,7 +15,7 @@ prerequisites:
 
 author: Bolt Liu
 
-skilllevels: introductory
+skilllevels: Introductory
 subjects: Databases
 armips:
     - Neoverse
