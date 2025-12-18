@@ -53,11 +53,11 @@ further_reading:
       type: documentation
   - resource:
       title: Learn how to deploy nginx [Arm Learning Path]
-      link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/nginx/
+      link: /learning-paths/servers-and-cloud-computing/nginx/
       type: documentation
   - resource:
       title: Learn how to tune nginx [Arm Learning Path]
-      link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/nginx_tune/
+      link: /learning-paths/servers-and-cloud-computing/nginx_tune/
       type: documentation
 
 ### FIXED, DO NOT MODIFY

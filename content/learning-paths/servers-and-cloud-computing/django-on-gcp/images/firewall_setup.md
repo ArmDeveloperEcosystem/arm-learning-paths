@@ -11,7 +11,7 @@ layout: learningpathall
 In this section, you will learn how to create a Firewall Rule within Google Cloud Console.  For this learning path, we need to expose TCP port 8000.
 
 {{% notice Note %}}
-For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
+For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
 ## Create a Firewall Rule in GCP

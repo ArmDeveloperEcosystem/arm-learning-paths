@@ -11,7 +11,7 @@ layout: learningpathall
 Before you can access your Django development server from your browser, you need to configure Google Cloud's firewall to allow inbound traffic on port 8000. This section walks you through creating a firewall rule that permits HTTP requests to reach your VM.
 
 {{% notice Note %}}
-For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
+For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
 

@@ -11,7 +11,7 @@ layout: learningpathall
 In this section, you'll set up a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` machine type. This instance gives you four virtual CPUs and 16 GB of memory. You'll use the Google Cloud Console to complete each step. 
 
 {{% notice Note %}}
-For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
+For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
 ## Create the virtual machine

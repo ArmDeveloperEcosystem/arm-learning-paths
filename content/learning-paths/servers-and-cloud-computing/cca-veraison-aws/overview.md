@@ -14,7 +14,7 @@ Veraison acts as the Verifier role in the [RATS architecture (RFC9334)](https://
 Attestation is essential for confidential computing, and Veraison acts as a verifier for Arm's Confidential Compute Architecture (CCA). 
 
 {{% notice Learning Tip %}}
-If you're new to CCA attestation and Veraison, you will benefit from first completing the Learning Paths [Get Started with CCA Attestation and Veraison](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cca-veraison/) and [Run an end-to-end Attestation Flow with Arm CCA](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cca-essentials/). These two Learning Paths above use a Veraison verification service hosted by [Linaro](https://www.linaro.org).
+If you're new to CCA attestation and Veraison, you will benefit from first completing the Learning Paths [Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison/) and [Run an end-to-end Attestation Flow with Arm CCA](/learning-paths/servers-and-cloud-computing/cca-essentials/). These two Learning Paths above use a Veraison verification service hosted by [Linaro](https://www.linaro.org).
 {{% /notice %}}
 
 In this Learning Path, you'll create and deploy your own Veraison verification service on AWS. After completing this Learning Path, you'll be able to revisit the two Learning Paths mentioned above, using your own AWS-hosted Veraison service instead of the one hosted by Linaro.

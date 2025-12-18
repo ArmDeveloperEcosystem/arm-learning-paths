@@ -539,7 +539,7 @@ pip uninstall torchao && cd ao/ && rm -rf build && python setup.py install
 ```
 
 {{% notice Note %}}
-See this Learning Path [Run a Large Language Model Chatbot on Arm servers](https://learn.arm.com/learning-paths/servers-and-cloud-computing/pytorch-llama/pytorch-llama/) for further information.
+See this Learning Path [Run a Large Language Model Chatbot on Arm servers](/learning-paths/servers-and-cloud-computing/pytorch-llama/pytorch-llama/) for further information.
 {{% /notice %}}
 
 Once you have installed the optimized PyTorch, enable bfloat16 fast math kernels by setting DNNL_DEFAULT_FPMATH_MODE.
