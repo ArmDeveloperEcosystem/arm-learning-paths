@@ -24,20 +24,20 @@ To create a virtual machine based on the C4A instance type:
    - Set **Series** to `C4A`.
    - Select `c4a-standard-4` for machine type.
 
-   ![Create a Google Axion C4A Arm virtual machine in the Google Cloud Console with c4a-standard-4 selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
+   ![Screenshot of Google Cloud Console showing the machine configuration section with C4A series and c4a-standard-4 machine type selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
 
 
-- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. 
-- If using use **SUSE Linux Enterprise Server**. Select "Pay As You Go" for the license type. 
-- Once appropriately selected, please Click **Select**. 
+- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**.
+- If using **SUSE Linux Enterprise Server**, select "Pay As You Go" for the license type.
+- Once appropriately selected, click **Select**. 
 - Under **Networking**, enable **Allow HTTP traffic**.
 - Click **Create** to launch the instance.
-- Once created, you should see a "SSH" option to the right in your list of VM instances.  Click on this to launch a SSH shell into your VM instance:
+- Once created, you should see a "SSH" option to the right in your list of VM instances. Click on this to launch a SSH shell into your VM instance:
 
-![Invoke a SSH session via your browser alt-text#center](images/gcp-ssh.png "Invoke a SSH session into your running VM instance")
+![Screenshot of VM instances list showing the SSH button in the Connect columnalt-text#center](images/gcp-ssh.png "Invoke a SSH session into your running VM instance")
 
 - A window from your browser should come up and you should now see a shell into your VM instance:
 
-![Terminal Shell in your VM instance alt-text#center](images/gcp-shell.png "Terminal shell in your VM instance")
+![Screenshot of terminal window showing a command-line shell interface connected to the VM instance#center](images/gcp-shell.png "Terminal shell in your VM instance")
 
-Next, let's install rust!
+You're now ready to install Rust on your C4A instance.
