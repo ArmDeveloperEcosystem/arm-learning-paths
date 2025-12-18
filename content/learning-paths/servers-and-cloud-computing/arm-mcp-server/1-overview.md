@@ -77,8 +77,8 @@ Provides instructions for installing and using sysreport, a tool that obtains sy
 To use the Arm MCP Server with an AI coding assistant, you must configure the assistant to connect to the MCP server. This connection allows the assistant to query Arm-specific tools, documentation, and capabilities exposed through the Model Context Protocol (MCP).
 The required configuration steps vary by AI coding assistant. Refer to the installation guides below for step-by-step instructions on connecting the following AI coding assistants to the Arm MCP server:
 
-[GitHub Copilot](/install-guides/github-copilot/)
-[Gemini CLI](/install-guides/gemini/)
-[Kiro CLI](/install-guides/kiro-cli/)
+  [GitHub Copilot](/install-guides/github-copilot/)
+  [Gemini CLI](/install-guides/gemini/)
+  [Kiro CLI](/install-guides/kiro-cli/)
 
 Continue to the next section to see the Arm MCP Server in action.
