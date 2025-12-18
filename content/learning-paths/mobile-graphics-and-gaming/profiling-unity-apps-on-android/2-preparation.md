@@ -21,6 +21,7 @@ Although the sample application is a project, you will still need to create a bl
  
   ![Display URP Template#center](images/URP.png "Figure 1. URP 3D template")
 
+
 1. Enter project name (this will be used as the name of the project folder)
 
 1. Enter location (path of your project on disk)
