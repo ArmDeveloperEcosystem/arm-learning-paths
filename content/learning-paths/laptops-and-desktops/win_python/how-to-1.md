@@ -170,7 +170,7 @@ Successfully installed numpy-1.26.2
 ```
 
 ## Arm build tools
-To install the NumPy package, we will need to provide the Arm build tools. Install Visual Studio 2022 Community with the **Desktop development with C++** workload and **Arm build tools** as explained in this [installation guide](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio). 
+To install the NumPy package, we will need to provide the Arm build tools. Install Visual Studio 2022 Community with the **Desktop development with C++** workload and **Arm build tools** as explained in the [Visual Studio installation guide](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio). 
 
 After installing the build tools, restart your machine and install NumPy package with the following command:
 
