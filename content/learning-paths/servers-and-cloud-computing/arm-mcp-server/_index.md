@@ -1,7 +1,7 @@
 ---
 title: Migrate an x86 application to Arm using the Arm MCP Server
 
-minutes_to_complete: 30
+minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers who want to use AI-powered tools to migrate x86 applications to Arm-based cloud instances.
 
@@ -26,7 +26,7 @@ armips:
 tools_software_languages:
     - MCP
     - Docker
-    - GCC
+    - C++
     - GitHub Copilot
 operatingsystems:
     - Linux
