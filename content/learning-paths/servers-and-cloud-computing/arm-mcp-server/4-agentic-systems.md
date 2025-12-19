@@ -92,4 +92,4 @@ codex /prompts:arm-migrate
 
 ## Other AI assistants
 
-You should now have a good feel for how agents generally implement these types of instructions. You can search for documentation on how your specific AI coding assistent implements them.
+You should now have a general understanding of how agentic systems support persistent migration instructions. For other AI coding assistants, consult their documentation to learn how to define equivalent prompt files or configuration mechanisms and adapt the same Arm migration workflow.
