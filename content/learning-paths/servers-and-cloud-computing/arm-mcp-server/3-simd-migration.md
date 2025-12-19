@@ -238,4 +238,3 @@ Result sum: 2.01203e+08
 ```
 If compilation or runtime issues occur, feed the errors back to the AI assistant. This iterative loop allows the agent to refine the migration until the application is correct, performant, and Arm-native.
 
-If there are failures, feed the failures back to the agent so that it can improve the code.
