@@ -110,7 +110,7 @@ python3 ./scripts/export_dit_autoencoder.py --model_config "$WORKSPACE/model_con
 
 After successful conversion, you now have `dit_model.tflite` and `autoencoder_model.tflite` models in your current directory.
 
-A more detailed explanation of the above scripts is available [here](https://github.com/ARM-software/ML-examples/blob/main/kleidiai-examples/audiogen/scripts/README.md).
+A more detailed explanation of the above scripts is available in the [audiogen scripts README](https://github.com/ARM-software/ML-examples/blob/main/kleidiai-examples/audiogen/scripts/README.md).
 
 For easy access, add all the required models to one directory:
 

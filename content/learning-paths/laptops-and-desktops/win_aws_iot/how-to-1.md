@@ -27,8 +27,8 @@ In this learning path, you create an application that emulates the weather stati
 
 ## Before you begin
 Before you start, ensure you have installed and prepared the following tools:
-1. Download and install Node.js for ARM64 [here](https://nodejs.org/dist/v21.7.3/node-v21.7.3-arm64.msi).
-2. Download and configure AWS CLI [here](https://aws.amazon.com/cli/).
+1. Download and install [Node.js for ARM64](https://nodejs.org/dist/v21.7.3/node-v21.7.3-arm64.msi).
+2. Download and configure the [AWS CLI](https://aws.amazon.com/cli/).
 
 ## Create the project
 You now create a Node.js project. Open the Command Prompt and type the following commands:

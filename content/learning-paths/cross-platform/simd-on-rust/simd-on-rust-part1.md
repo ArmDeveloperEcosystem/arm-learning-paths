@@ -282,7 +282,7 @@ Feature detection in particular refers to minor extensions in the ISA that are n
 #endif
 ```
 
-A full list of current extensions for Arm can be found [here](https://doc.rust-lang.org/std/arch/macro.is_aarch64_feature_detected.html) while the full list of supported intrinsics is [here](https://doc.rust-lang.org/core/arch/aarch64/index.html).
+A [full list of current extensions for Arm](https://doc.rust-lang.org/std/arch/macro.is_aarch64_feature_detected.html) is available, and the [full list of supported intrinsics](https://doc.rust-lang.org/core/arch/aarch64/index.html) is also documented.
 
 ## An alternative way with Rust using std::simd
 

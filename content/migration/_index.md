@@ -104,7 +104,7 @@ The below resources are curated to address migration challenges on specific clou
 - [Porting architecture specific intrinsics](/learning-paths/cross-platform/intrinsics/) - perfect for porting intrinsics from another architecture.
 - [Arm software install guides](/install-guides) - good for quickly installing common tools and software.
 - [simd.info](https://simd.info/) - a searchable reference tool for C intrinsics for SIMD engines.
-- [migrate-ease](https://github.com/migrate-ease/migrate-ease) - scan your source code for suggestions to migrate to Arm Neoverse, get started [here](/learning-paths/servers-and-cloud-computing/migrate-ease/).
+- [migrate-ease](https://github.com/migrate-ease/migrate-ease) - scan your source code for suggestions to migrate to Arm Neoverse, get started with [Migrate applications to Arm servers using migrate-ease](/learning-paths/servers-and-cloud-computing/migrate-ease/).
 - [Arm Infrastructure Solutions blog](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/) - an Arm-specific technical blog.
 - [Arm Learning Paths for Servers and Cloud](/learning-paths/servers-and-cloud-computing/) - general tutorials for Arm servers. You can search for specific cloud service providers, including [AWS](/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=aws/#), [Google Cloud](/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=google-cloud/#), [Microsoft Azure](/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=microsoft-azure/#), and [Oracle](/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=oracle/#).
      

@@ -18,7 +18,7 @@ layout: "learningpathall"
 
 ## Download and Install Arm Performance Studio
 
-Arm Performance Studio is supported on Windows, Linux, and macOS hosts. Get the installation package [here](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads).
+Arm Performance Studio is supported on Windows, Linux, and macOS hosts. Get the [Arm Performance Studio installation package](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads).
 
 Refer to the [Arm Performance Studio install guide](/install-guides/ams/) for installation instructions.
 

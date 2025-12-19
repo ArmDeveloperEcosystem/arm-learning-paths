@@ -69,7 +69,7 @@ Run the installer(s) and follow on-screen instructions.
 
 ### How do I install Git for version control functionality?
 
-You can download the latest version from [here](https://git-scm.com/).
+You can download the latest version from [git-scm.com](https://git-scm.com/).
 
 ### What about Keil Studio for VS Code?
 

@@ -18,7 +18,7 @@ You’ll need the AWS Command-Line Interface (CLI) installed for this section. F
 ## Set up authentication
 You'll need to set up your local environment to authenticate with AWS before deploying Veraison.
 
-The recommended method is Single Sign-On (SSO). Follow the steps in Veraison's documentation [here](https://github.com/veraison/services/tree/main/deployments/aws#aws-account).
+The recommended method is Single Sign-On (SSO). Follow the steps in [Veraison's AWS account documentation](https://github.com/veraison/services/tree/main/deployments/aws#aws-account).
 
 To confirm authentication is configured correctly, run a simple command, such as:
 
