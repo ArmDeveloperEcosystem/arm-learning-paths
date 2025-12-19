@@ -74,7 +74,7 @@ cd python-rag-extension/vectorstore
 
 2. It is recommended that you use a virtual environment to manage dependencies.
 
-Ensure you have `conda` set up in your development environment. If you need guidance, follow the [Installation Guide](https://docs.anaconda.com/miniconda/install/.
+Ensure you have `conda` set up in your development environment. If you need guidance, follow the [Installation Guide](https://docs.anaconda.com/miniconda/install/).
 
 3. To create a new conda environment, use the following command:
 
