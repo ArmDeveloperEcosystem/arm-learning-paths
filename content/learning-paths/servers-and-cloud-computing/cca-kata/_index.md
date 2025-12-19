@@ -1,5 +1,5 @@
 ---
-title: Run Confidentail Containers with encrypted images using Arm CCA and Trustee
+title: Run Confidential Containers with encrypted images using Arm CCA and Trustee
 
 draft: true
 cascade:

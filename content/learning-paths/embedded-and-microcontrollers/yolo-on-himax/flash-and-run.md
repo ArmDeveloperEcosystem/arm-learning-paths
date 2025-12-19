@@ -53,7 +53,7 @@ The COM identifier is prefixed with **tty**, so you can use this to help you ide
   {{< tab header="Linux" language="shell">}}
 sudo grep -i 'tty' /var/log/dmesg
   {{< /tab >}}
-  {{< tab header="MacOS" language="shell">}}
+  {{< tab header="macOS" language="shell">}}
 ls /dev/tty.*
   {{< /tab >}}
 {{< /tabpane >}}

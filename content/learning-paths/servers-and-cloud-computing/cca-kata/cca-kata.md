@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 
 
-## Confidentail Containers
+## Confidential Containers
 
 ["Confidential Containers"](https://github.com/confidential-containers/confidential-containers) is an open source community
 working to enable cloud native confidential computing by leveraging Trusted Execution Environments to protect containers and data.
@@ -55,14 +55,14 @@ Confidential Containers provides [Trustee](https://github.com/confidential-conta
 This is a simplified diagram of the attestation process
 ![Attestation alt-text#center](attestation.png "Attestation")
 
-In this Learnig Path the attestation process will be used to obtain an encryption key required to decrypt a container image.
+In this Learning Path the attestation process will be used to obtain an encryption key required to decrypt a container image.
 Learn more about how Trustee services are used to evaluate the trustworthiness of a CCA realm and how attestation policy gates secrets release in
 ["Run an end-to-end Attestation with Arm CCA and Trustee"](/learning-paths/servers-and-cloud-computing/cca-trustee)
 
 ### Full diagram
 
 If we take Kata Containers and add guest image pulling and attestation, we arrive at the following diagram, which represents Confidential Containers.
-![Confidentail Containers alt-text#center](confidential_containers.png "Confidential Containers")
+![Confidential Containers alt-text#center](confidential_containers.png "Confidential Containers")
 
 
 For convenience, Trustee services and the Confidential Containers software are packaged in Docker containers,
