@@ -8,12 +8,11 @@ layout: learningpathall
 
 ## Migrating SIMD Code with AI Assistance
 
-A challenging aspect of migrating some applications from x86 to Arm is converting SIMD (Single Instruction, Multiple Data) code. On x86 platforms, SIMD is typically implemented using SSE, AVX, or AVX2 intrinsics, while Arm platforms use NEON and SVE intrinsics to achieve similar vectorized performance.
-Manually rewriting SIMD intrinsics is time-consuming and error-prone. By combining the Arm MCP Server with a well-defined prompt file, you can automate much of this migration process and guide an AI assistant through a systematic, architecture-aware transformation of your codebase.
+When migrating applications from x86 to Arm, you may encounter SIMD (Single Instruction, Multiple Data) code that is written using architecture-specific intrinsics. On x86 platforms, SIMD is commonly implemented with SSE, AVX, or AVX2 intrinsics, while Arm platforms use NEON and SVE intrinsics to provide similar vectorized capabilities. Updating this code manually can be time-consuming and challenging. By combining the Arm MCP Server with a well-defined prompt file, you can automate much of this work and guide an AI assistant through a structured, architecture-aware migration of your codebase.
 
 ## Sample x86 Code with AVX2 Intrinsics
 
-The following example shows a matrix multiplication implementation using x86 AVX2 intrinsics. Copy this code into a file named `matrix_operations.cpp` to follow along:
+The following example shows a matrix multiplication implementation using x86 AVX2 intrinsics. This is representative of performance-critical code found in compute benchmarks and scientific workloads. Copy this code into a file named `matrix_operations.cpp`:
 
 ```cpp
 #include "matrix_operations.h"
@@ -117,7 +116,7 @@ void benchmark_matrix_ops() {
 }
 ```
 
-You'll also need the header file `matrix_operations.h`:
+Create the header file `matrix_operations.h`:
 
 ```cpp
 #ifndef MATRIX_OPERATIONS_H
@@ -149,7 +148,7 @@ void benchmark_matrix_ops();
 #endif // MATRIX_OPERATIONS_H
 ```
 
-Finally, create `main.cpp` to run the benchmark:
+Create `main.cpp` to run the benchmark:
 
 ```cpp
 #include "matrix_operations.h"
@@ -173,10 +172,8 @@ int main() {
 
 ## The Arm Migration Prompt File
 
-To automate the migration of code like this, you can use a prompt file that instructs the AI assistant how to systematically approach the migration. Here's an example prompt file for GitHub Copilot:
-
-Create a file at `.github/prompts/arm-migration.prompt.md`:
-
+To automate migration, you can define a prompt file that instructs the AI assistant how to analyze and transform the project using the Arm MCP Server.
+Create the following example prompt file to use with GitHub Copilot `.github/prompts/arm-migration.prompt.md`:
 ```markdown
 ---
 tools: ['search/codebase', 'edit/editFiles', 'arm-mcp/skopeo', 'arm-mcp/check_image', 'arm-mcp/knowledge_base_search', 'arm-mcp/migrate_ease_scan', 'arm-mcp/mca', 'arm-mcp/sysreport_instructions']
@@ -203,25 +200,31 @@ If you feel you have good versions to update to for the Dockerfile, requirements
 
 Give a nice summary of the changes you made and how they will improve the project.
 ```
+This prompt file encodes best practices, tool usage, and migration strategy, allowing the AI assistant to operate fully agentically.
 
 ## Running the Migration
 
-With the prompt file in place and the Arm MCP Server connected, you can run the migration by referencing the prompt in your AI assistant:
+With the prompt file in place and the Arm MCP Server connected, invoke the migration workflow from your AI assistant:
 
 ```text
 /arm-migration
 ```
-
+The assistant will:
+   * Detect x86-specific intrinsics
+   * Rewrite SIMD code using NEON
+   * Remove architecture-specific build flags
+   * Update container and dependency configurations as needed
+     
 ## Verifying the Migration
 
-After accepting the agent's migration changes, build and test the code on an Arm system:
+After reviewing and accepting the changes, build and run the application on an Arm system:
 
 ```bash
 g++ -O2 -o benchmark matrix_operations.cpp main.cpp -std=c++11
 ./benchmark
 ```
 
-If everything works, you should see something like this (the agent may use different wording):
+If everything works, a successful migration produces output similar to the following:
 
 ```bash
 ARM-Optimized Matrix Operations Benchmark
@@ -233,5 +236,6 @@ Matrix size: 200x200
 Time: 12 ms
 Result sum: 2.01203e+08
 ```
+If compilation or runtime issues occur, feed the errors back to the AI assistant. This iterative loop allows the agent to refine the migration until the application is correct, performant, and Arm-native.
 
 If there are failures, feed the failures back to the agent so that it can improve the code.
