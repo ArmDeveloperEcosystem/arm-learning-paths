@@ -6,6 +6,8 @@ weight: 5
 layout: learningpathall
 ---
 
+## Overview
+
 Now that Cassandra is installed on your GCP C4A Arm virtual machine, verify that it's running and functioning properly.
 
 ## Start Cassandra
@@ -45,7 +47,7 @@ UN  127.0.0.1  162.51 KiB  16      100.0%            78774686-39f3-47e7-87c3-3ab
 
 For a single-node setup, the output should indicate that the node is Up (U) and Normal (N), confirming that your Cassandra instance is running and ready to accept queries.
 
-### Connect with CQLSH
+## Connect with CQLSH
 
 `cqlsh` is the interactive command-line shell for Cassandra that allows you to run Cassandra Query Language (CQL) commands.
 
@@ -55,7 +57,7 @@ cqlsh
 
 You'll enter the CQL (Cassandra Query Language) shell.
 
-### Create a keyspace
+## Create a keyspace
 
 A keyspace in Cassandra is similar to a database in SQL systems. Create a simple keyspace `testks` with a replication factor of 1 (suitable for a single-node setup):
 
@@ -78,7 +80,7 @@ system       system_distributed  system_traces  system_virtual_schema
 system_auth  system_schema       system_views   testks
 ```
 
-### Create a table
+## Create a table
 
 Create a `users` table with three columns:
 
@@ -92,7 +94,7 @@ CREATE TABLE users (
 );
 ```
 
-### Insert data
+## Insert data
 
 Insert two sample rows into the `users` table. The `uuid()` function generates a unique identifier for each row:
 
@@ -101,7 +103,7 @@ INSERT INTO users (id, name, age) VALUES (uuid(), 'Alice', 30);
 INSERT INTO users (id, name, age) VALUES (uuid(), 'Bob', 25);
 ```
 
-### Query data
+## Query data
 
 Retrieve all rows from the `users` table:
 
@@ -122,4 +124,4 @@ The output is similar to:
 
 This baseline test verifies that Cassandra 5.0.5 is installed and running correctly on the VM, confirming node status, CQLSH connectivity, and basic database operations.
 
-Press Ctrl-D to exit the Cassandra Query Shell. 
+Press `Ctrl-D` to exit the Cassandra Query Shell. 
