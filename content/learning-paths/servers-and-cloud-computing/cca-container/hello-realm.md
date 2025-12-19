@@ -57,7 +57,7 @@ The `--privileged` option is needed to be able to mount the host and guest files
 The `~/CCA-docker-share` directory on your development machine is available within the container at `/home/cca/CCA-docker-share` thanks to the `-v ~/CCA-docker-share:/home/cca/CCA-docker-share` command line option to `docker run`.
 {{% /notice %}}
 
-Inside the running container, compile the **hello world** application, the source code file `hello.c` should be present in the shared irectory `/home/cca/CCA-docker-share` :
+Inside the running container, compile the **hello world** application, the source code file `hello.c` should be present in the shared directory `/home/cca/CCA-docker-share` :
 
 ```console { output_lines="2" }
 ls CCA-docker-share/

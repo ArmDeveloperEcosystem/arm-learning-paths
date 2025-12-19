@@ -44,7 +44,7 @@ $$ e^x = 2^m \times T[j] \times (1 + p(r)) $$
 
 With a table of size 2^L, the evaluation interval for the approximation polynomial is narrowed  by a factor of 2^L. This reduction leads to improved accuracy for a given polynomial degree due to the narrower approximation range. Alternatively, for a given accuracy target, the degree of the polynomial—and hence its computational complexity—can be reduced.
 
-## Exponential implementation wth FEXPA
+## Exponential implementation with FEXPA
 FEXPA can be used to rapidly perform the table lookup. With this instruction a degree-2 polynomial is sufficient to obtain the same accuracy of the implementation we have seen before:
 
 ```C

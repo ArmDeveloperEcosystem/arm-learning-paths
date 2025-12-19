@@ -8,8 +8,8 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 3
-- Linux: 204
-- macOS: 13
+- Linux: 207
+- macOS: 15
 - Windows: 14
 pinned_modules:
 - module:
@@ -20,10 +20,10 @@ pinned_modules:
 subjects_filter:
 - CI-CD: 11
 - Containers and Virtualization: 36
-- Databases: 24
+- Databases: 23
 - Libraries: 9
 - ML: 35
-- Performance and Architecture: 74
+- Performance and Architecture: 78
 - Storage: 2
 - Web: 17
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -66,19 +66,19 @@ tools_software_languages_filter:
 - Azure: 1
 - Azure CLI: 2
 - Azure Portal: 1
-- Bash: 3
 - bash: 2
+- Bash: 3
 - Bastion: 3
 - BOLT: 2
 - bpftool: 1
 - Buildkite: 1
-- C: 10
+- C: 11
 - C#: 2
-- C++: 13
+- C++: 15
 - Capstone: 1
 - Cargo: 1
 - cassandra-stress: 1
-- CCA: 8
+- CCA: 9
 - CircleCI: 2
 - Clair: 1
 - Clang: 13
@@ -88,13 +88,14 @@ tools_software_languages_filter:
 - Cloud Build: 1
 - CMake: 1
 - conda: 1
+- Confidential containers: 1
 - Couchbase: 1
 - cqlsh: 1
 - Criterion: 1
 - Daytona: 1
 - Demo: 3
 - Django: 2
-- Docker: 26
+- Docker: 28
 - Docker Buildx: 1
 - Envoy: 3
 - Erlang: 1
@@ -105,7 +106,7 @@ tools_software_languages_filter:
 - Flink: 2
 - Fortran: 1
 - FunASR: 1
-- FVP: 7
+- FVP: 8
 - Gardener: 1
 - GCC: 25
 - gdb: 1
@@ -115,6 +116,7 @@ tools_software_languages_filter:
 - GitHub: 6
 - GitHub Actions: 1
 - GitHub CLI: 1
+- GitHub Copilot: 1
 - GitLab: 2
 - GKE: 1
 - glibc: 1
@@ -138,6 +140,7 @@ tools_software_languages_filter:
 - JAX: 1
 - JMH: 1
 - Kafka: 2
+- Kata containers: 1
 - KEDA: 1
 - Kedify: 1
 - Keras: 2
@@ -148,14 +151,15 @@ tools_software_languages_filter:
 - libbpf: 1
 - Linaro Forge: 1
 - Litmus7: 1
-- llama.cpp: 2
 - Llama.cpp: 2
+- llama.cpp: 2
 - LLM: 11
 - llvm-mca: 1
 - LM Evaluation Harness: 1
 - LSE: 1
 - MariaDB: 1
 - Maven: 1
+- MCP: 1
 - Memcached: 2
 - MLPerf: 1
 - ModelScope: 1
@@ -167,8 +171,8 @@ tools_software_languages_filter:
 - NEON: 7
 - Networking: 1
 - Nexmark: 1
-- nginx: 1
 - NGINX: 4
+- nginx: 1
 - Node.js: 5
 - node.js: 1
 - npm: 3
@@ -197,7 +201,7 @@ tools_software_languages_filter:
 - Redis: 4
 - redis-benchmark: 1
 - Remote.It: 2
-- RME: 8
+- RME: 9
 - Ruby: 2
 - Runbook: 71
 - Rust: 3
@@ -220,11 +224,11 @@ tools_software_languages_filter:
 - ThirdAI: 1
 - topdown-tool: 1
 - Trusted Firmware: 1
-- Trustee: 1
+- Trustee: 2
 - TSan: 1
 - TypeScript: 2
 - Vectorscan: 1
-- Veraison: 2
+- Veraison: 3
 - Visual Studio Code: 5
 - vLLM: 3
 - vvenc: 1

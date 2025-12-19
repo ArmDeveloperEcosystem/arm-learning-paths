@@ -36,7 +36,7 @@ Start by downloading and installing the latest version of Android Studio by navi
 https://developer.android.com/studio/
 ```
 
-### For MacOS: Using UI
+### For macOS: Using UI
 
 Follow these steps to configure Android Studio:
 

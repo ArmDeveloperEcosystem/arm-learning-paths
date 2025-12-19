@@ -139,7 +139,7 @@ Attestation tokens are small reports that are produced by a device upon request.
 
 Refer to [section A7.2 of the Realm Management Monitor Specification](https://developer.arm.com/documentation/den0137/latest/) to learn about the details of the CCA attestation token.
 
-The retrieval of a CCA attestation token from a running guest is done by reading from `/sys/kernel/config/tsm/report/`. This is available when linux's `configfs` has been mounted, which has been done automatically as part of the guest boot process --- if you are curious, this is the `configfs    /sys/kernel/config      configfs    defaults        0       0` line in `/etc/fstab`.
+The retrieval of a CCA attestation token from a running guest is done by reading from `/sys/kernel/config/tsm/report/`. This is available when Linux's `configfs` has been mounted, which has been done automatically as part of the guest boot process --- if you are curious, this is the `configfs    /sys/kernel/config      configfs    defaults        0       0` line in `/etc/fstab`.
 
 You can now generate an attestation token by running the following commands:
 

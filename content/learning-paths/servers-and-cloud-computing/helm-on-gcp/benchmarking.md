@@ -54,7 +54,7 @@ The first install is usually slower because of following reasons:
 
 This warm-up ensures the real benchmark measures Helm performance, not setup overhead.
 
-You should see output (near the top of the output) that is simlar to:
+You should see output (near the top of the output) that is similar to:
 ```output
 NAME: warmup
 LAST DEPLOYED: Tue Dec  9 21:10:44 2025

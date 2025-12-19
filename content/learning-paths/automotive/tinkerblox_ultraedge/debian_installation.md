@@ -164,7 +164,7 @@ Place a `MicroPacFile` in your project directory.
 -   **limits**: Resource limits (memory, cpu)
 -   **mount**: Volume mount points
 -   **network**: Network configuration
--   **createdBy**: maintanier of the application
+-   **createdBy**: maintainer of the application
 -   **description**: description of the application
 
 ### Building the MicroPac
