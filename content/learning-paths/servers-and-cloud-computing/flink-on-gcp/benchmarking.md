@@ -10,7 +10,7 @@ layout: learningpathall
 
 This section walks you through running Apache Flink microbenchmarks on a Google Cloud Axion C4A (Arm64) SUSE VM. You will clone the official Flink-benchmarks repository, build the benchmark suite, and run the Remote Channel Throughput Benchmark.
 
-### Clone the repository
+## Clone the repository
 Clone the official Flink microbenchmarks repository:
 
 ```console
@@ -20,7 +20,7 @@ cd flink-benchmarks
 ```
 This repository contains microbenchmarks built using JMH (Java Microbenchmark Harness), widely used for JVM-level performance testing.
 
-### Build the benchmarks with Maven
+## Build the benchmarks with Maven
 Compile the benchmarks and create the executable JAR:
 
 ```console
@@ -37,7 +37,7 @@ After building, the compiled benchmarks.jar files appear under:
 flink-benchmarks/target/
 ```
 
-### Explore the JAR contents
+## Explore the JAR contents
 Verify that benchmarks.jar was generated:
 
 ```console
@@ -88,7 +88,9 @@ RemoteChannelThroughputBenchmark.remoteRebalance  ALIGNED  thrpt   30  17445.341
 RemoteChannelThroughputBenchmark.remoteRebalance  DEBLOAT  thrpt   30  10536.511 ±  60.121  ops/ms
 ```
 
-## Understand benchmark metrics  
+## Understand benchmark metrics
+
+The output from the Remote Channel Throughput benchmark includes several statistical measures that help you interpret Flink's performance on Arm64. Understanding these metrics enables you to assess both the average performance and the consistency of results across multiple iterations.
 
 - Run Count: total benchmark iterations executed, higher count improves reliability.  
 - Average Throughput: mean operations per second across all iterations.  
@@ -97,7 +99,7 @@ RemoteChannelThroughputBenchmark.remoteRebalance  DEBLOAT  thrpt   30  10536.511
 - Min Throughput: the lowest throughput was observed, and it shows worst-case performance.  
 - Max Throughput: highest throughput observed, shows best-case performance.
 
-### Benchmark summary on Arm64
+## Benchmark summary for Arm64
 Results from the run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE) are summarized below:
 
 | Benchmark                                          | Mode     | Count | Score (ops/ms) | Error (±) | Min       | Max       | Stdev   | CI (99.9%)             | Units  |

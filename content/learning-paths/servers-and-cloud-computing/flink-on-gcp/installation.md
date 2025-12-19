@@ -10,7 +10,7 @@ layout: learningpathall
 
 This section shows you how to install Apache Flink and its required dependencies on a Google Cloud Platform (GCP) SUSE Arm64 virtual machine.
 
-### Update the system and install Java
+## Update the system and install Java
 
 ```console
 sudo zypper refresh
@@ -19,7 +19,7 @@ sudo zypper install -y java-17-openjdk java-17-openjdk-devel
 ```
 This step ensures you have the latest system updates and the Java runtime needed to execute Flink applications.
 
-### Download Apache Flink Binary
+## Download Apache Flink Binary
 Navigate to /opt (a standard location for system-wide tools) and download the official Flink distribution:
 
 ```console
@@ -34,7 +34,7 @@ Flink 2.0.0 introduced Disaggregated State Management architecture, which enable
 For best performance on Arm, the [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends using Flink ≥ 2.0.0.
 {{% /notice %}}
 
-### Extract the archive
+## Extract the archive
 Untar the archive:
 
 ```console
@@ -48,7 +48,7 @@ sudo mv flink-2.1.1 /opt/flink
 ```
 This makes configuration, upgrades, and scripting easier for your Flink installation.
 
-### Configure environment variables
+## Configure environment variables
 Add Flink to your shell environment:
 
 ```console
@@ -70,7 +70,7 @@ source ~/.bashrc
 ```
 Adding Flink to the global PATH lets you use commands like `flink`, `start-cluster.sh`, and `taskmanager.sh` from any terminal.
 
-### Verify the installation
+## Verify the installation
 To confirm that Flink has been installed correctly, check its version:
 
 ```console

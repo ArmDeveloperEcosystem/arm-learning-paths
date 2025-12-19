@@ -9,10 +9,10 @@ layout: learningpathall
 ## Apache Flink Baseline Testing on GCP SUSE VM
 In this section you will perform baseline testing for Apache Flink after installation on a GCP SUSE VM. Baseline testing validates that your installation is correct, the JVM is functioning properly, and Flink’s JobManager/TaskManager can execute jobs successfully.
 
-### Install Maven (Required to Build and Run Flink Jobs)
+## Install Maven (Required to Build and Run Flink Jobs)
 Before running Flink jobs, ensure that Maven is installed on your VM. Many Flink examples and real-world jobs require Apache Maven to compile Java applications.
 
-### Install Maven
+## Install Maven
 
 ```console
 cd /opt
@@ -46,7 +46,7 @@ Default locale: en, platform encoding: UTF-8
 OS name: "linux", version: "5.14.21-150500.55.124-default", arch: "aarch64", family: "unix"
 ```
 
-### Start the Flink cluster
+## Start the Flink cluster
 
 Before launching Flink, open port 8081 in the Google Cloud Firewall Rules so that the Web UI is reachable externally.
 
@@ -80,7 +80,7 @@ The output is similar to:
 
 `StandaloneSessionClusterEntrypoint` is the JobManager process, and `TaskManagerRunner` is the worker responsible for executing tasks and maintaining state.
 
-### Access the Flink Web UI
+## Access the Flink Web UI
 
 In a browser, navigate to `http://<VM_IP>:8081`.
 
@@ -90,7 +90,7 @@ You should see the Flink Dashboard:
 
 A successfully loaded dashboard confirms the cluster network and UI functionality. This serves as the baseline for network and UI validation.
 
-### Run a simple example job
+## Run a simple example job
 A basic check is to run the built-in WordCount example:
 
 ```console
