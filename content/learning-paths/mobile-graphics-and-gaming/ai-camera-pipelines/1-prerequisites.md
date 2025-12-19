@@ -45,7 +45,7 @@ docker --version
 Docker version 27.3.1, build ce12230
 ```
 
-If you see "`docker: command not found`," follow the [Docker Install Guide](https://learn.arm.com/install-guides/docker/).
+If you see "`docker: command not found`," follow the [Docker Install Guide](/install-guides/docker/).
 
 {{% notice Note %}}
 You might need to log in again or restart your machine for the changes to take effect.

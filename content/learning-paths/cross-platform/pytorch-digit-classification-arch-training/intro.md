@@ -47,7 +47,7 @@ If Python3 is not installed, you can download and install it from [python.org](h
 
 Alternatively, you can also install Python3 using package managers such as Homebrew or APT. 
 
-If you are using Windows on Arm, see the [Python install guide](https://learn.arm.com/install-guides/py-woa/).
+If you are using Windows on Arm, see the [Python install guide](/install-guides/py-woa/).
 
 Next, if you do not already have it, download and install [Visual Studio Code](https://code.visualstudio.com/download).
 

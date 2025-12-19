@@ -19,7 +19,7 @@ You will need an [Oracle OCI account](https://cloud.oracle.com/) to complete thi
 
 You can deploy an Arm (Ampere) compute instance in OCI via the console or using Terraform.
 
-If you want to deploy a compute instance using Terraform, you can follow the Learning Path [Deploy Arm Instances on Oracle Cloud Infrastructure (OCI) using Terraform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/oci-terraform/).
+If you want to deploy a compute instance using Terraform, you can follow the Learning Path [Deploy Arm Instances on Oracle Cloud Infrastructure (OCI) using Terraform](/learning-paths/servers-and-cloud-computing/oci-terraform/).
 
 The compute instance should be created with Oracle Linux 9 as the operating system. 
 

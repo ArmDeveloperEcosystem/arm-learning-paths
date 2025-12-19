@@ -46,7 +46,7 @@ Each component in the diagram plays a distinct role in enabling AI agents to int
 - The **Remote services** are external APIs the server can call on the host’s behalf.
 
 {{% notice Learning Tip %}}
-Learn more about AI Agents in the Learning Path [Deploy an AI Agent on Arm with llama.cpp and llama-cpp-agent using KleidiAI](https://learn.arm.com/learning-paths/servers-and-cloud-computing/ai-agent-on-cpu/).
+Learn more about AI Agents in the Learning Path [Deploy an AI Agent on Arm with llama.cpp and llama-cpp-agent using KleidiAI](/learning-paths/servers-and-cloud-computing/ai-agent-on-cpu/).
 {{% /notice %}}
 
 ## Section summary

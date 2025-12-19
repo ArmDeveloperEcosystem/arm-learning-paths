@@ -18,7 +18,7 @@ Here is a suggested optimization checklist:
 1. Check the functions that are the most frontend bound:
     
     * If you see high instruction cache miss rate, apply profile-guided optimization to reduce the code size of less important functions. This frees up more instruction cache space for the important hot-functions.
-    * If you see high instruction TLB misses, apply code layout optimization, using tools such as [Bolt](https://learn.arm.com/learning-paths/servers-and-cloud-computing/bolt/overview/). This improves locality of code accesses, reducing the number of TLB misses.
+    * If you see high instruction TLB misses, apply code layout optimization, using tools such as [Bolt](/learning-paths/servers-and-cloud-computing/bolt/overview/). This improves locality of code accesses, reducing the number of TLB misses.
 
 1. Check the functions that have the highest bad speculation rate. If you see high branch mispredict rates, use a more predictable branching pattern, or change the software to avoid branches by using conditional selects.
 

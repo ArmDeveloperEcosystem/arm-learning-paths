@@ -37,7 +37,7 @@ further_reading:
         type: blog
     - resource:
         title: Learn about glibc with Large System Extensions (LSE) for performance improvement
-        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/glibc-with-lse/
+        link: /learning-paths/servers-and-cloud-computing/glibc-with-lse/
         type: website
 
 

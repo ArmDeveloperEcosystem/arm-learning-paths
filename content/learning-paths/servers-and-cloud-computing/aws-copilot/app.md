@@ -17,7 +17,7 @@ This guide is applicable to both Linux and macOS users.
 
 Before starting, ensure you have Docker and Copilot installed on your computer.
 
-For Docker installation, refer to the [Docker install guide](https://learn.arm.com/install-guides/docker/).
+For Docker installation, refer to the [Docker install guide](/install-guides/docker/).
 
 For Copilot installation, refer to the [AWS Copilot CLI install guide](/install-guides/aws-copilot).
 

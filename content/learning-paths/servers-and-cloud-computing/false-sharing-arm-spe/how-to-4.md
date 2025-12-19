@@ -76,7 +76,7 @@ The instructions per cycle (IPC) are also notably different, (0.74 vs. 1.70) and
 
 There are many root causes of variations in IPC. 
 
-To identify where the bottleneck occurs, we’ll start by using the [Arm Topdown methodology](https://developer.arm.com/documentation/109542/0100/Arm-Topdown-methodology). Install the python script using the [Telemetry Solution Install Guide](https://learn.arm.com/install-guides/topdown-tool/).
+To identify where the bottleneck occurs, we’ll start by using the [Arm Topdown methodology](https://developer.arm.com/documentation/109542/0100/Arm-Topdown-methodology). Install the python script using the [Telemetry Solution Install Guide](/install-guides/topdown-tool/).
 
 Run the following command to observe the ratio of frontend to backend stall cycles. These indicate which section of the CPU pipeline is waiting on resources and causing slower performance. 
 

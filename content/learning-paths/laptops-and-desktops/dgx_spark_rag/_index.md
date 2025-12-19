@@ -42,7 +42,7 @@ further_reading:
         type: documentation
     - resource:
         title: Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark
-        link: https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/
+        link: /learning-paths/laptops-and-desktops/dgx_spark_llamacpp/
         type: Learning Path
 
 

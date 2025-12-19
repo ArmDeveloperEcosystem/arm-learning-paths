@@ -8,17 +8,17 @@ layout: learningpathall
 
 ## Agentic AI Systems for Migration
 
-Different AI coding tools have different ways of configuring persistent instructions and prompt files. This section shows how to set up Arm migration workflows in a couple other popular agentic systems.
+Different AI coding tools provide different mechanisms for defining persistent instructions, such as prompt files or configuration documents. This section shows how to set up Arm migration workflows in a few popular agentic AI systems.
 
-The goal is the same across all systems: provide the AI with structured instructions that enable it to use the Arm MCP Server tools effectively and execute multi-step migration workflows autonomously.
+Although the configuration details vary by tool, the goal is the same across all systems: provide the AI with clear, structured instructions so it can use the Arm MCP Server effectively and carry out multi-step migration workflows autonomously.
 
 ## Kiro Steering Documents
 
-[Kiro](https://kiro.dev/) uses "steering documents" - markdown files stored in `.kiro/steering/` that provide persistent context to the AI. Steering files support different inclusion modes based on when you want the instructions to apply.
+[Kiro](https://kiro.dev/) uses "steering documents" - markdown files stored in `.kiro/steering/` that provide persistent context to the AI. Steering documents can be configured with different inclusion modes to control when and how the instructions are applied.
 
 ### Create Arm Migration Steering Document
 
-Create a file at `.kiro/steering/arm-migration.md`:
+Create the following file at `.kiro/steering/arm-migration.md`:
 
 ```markdown
 ---
@@ -50,11 +50,11 @@ Reference this steering document in chat with `#arm-migration`.
 
 ## OpenAI Codex Prompt Files
 
-[OpenAI Codex](https://openai.com/codex/) uses markdown prompt files stored in `~/.codex/prompts/` or `$CODEX_HOME/prompts/`. The filename becomes the command name.
+[OpenAI Codex](https://openai.com/codex/) uses markdown prompt files stored in `~/.codex/prompts/` or `$CODEX_HOME/prompts/`. The filename determines the command name used to invoke the prompt.
 
 ### Create Arm Migration Prompt
 
-Create a file at `~/.codex/prompts/arm-migrate.md`:
+Create the following file at `~/.codex/prompts/arm-migrate.md`:
 
 ```markdown
 ---
@@ -92,4 +92,4 @@ codex /prompts:arm-migrate
 
 ## Other AI assistants
 
-You should now have a good feel for how agents generally implement these types of instructions. You can search for documentation on how your specific AI coding assistent implements them.
+You should now have a general understanding of how agentic systems support persistent migration instructions. For other AI coding assistants, consult their documentation to learn how to define equivalent prompt files or configuration mechanisms and adapt the same Arm migration workflow.

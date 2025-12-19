@@ -38,7 +38,7 @@ shared_between:
 further_reading:
     - resource:
         title: Write a Dynamic Memory Allocator
-        link: https://learn.arm.com/learning-paths/cross-platform/dynamic-memory-allocator/
+        link: /learning-paths/cross-platform/dynamic-memory-allocator/
         type: website
     - resource:
         title: Memory Latency

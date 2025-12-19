@@ -9,7 +9,7 @@ layout: learningpathall
 
 Before you begin, you can use the Arm Sysreport utility to determine whether your system configuration supports hardware-assisted profiling. Follow the instructions in [Get ready for performance analysis with Sysreport][1] to discover how to download and run this utility.
 
-[1]: https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/
+[1]: /learning-paths/servers-and-cloud-computing/sysreport/
 
 The `perf counters` entry in the generated report indicates how many CPU counters are available. The `perf sampling` entry indicates if SPE is available. You can achieve the best profiles in systems with at least 6 available CPU counters and SPE.
 
