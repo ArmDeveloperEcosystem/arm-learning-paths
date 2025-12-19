@@ -1,37 +1,39 @@
 ---
-title: Test Redis on Google Axion C4A
+title: Test Redis 
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Redis Baseline Testing on GCP SUSE VMs
+## Perform Redis baseline testing on GCP SUSE VMs
 This section shows you how to perform baseline testing for Redis running on a GCP SUSE Arm64 VM, focusing on data insertion, retrieval, and search performance.
 
 ### Prerequisites
 This command launches the Redis server process in the background. It allows you to run subsequent commands in the same terminal session while Redis continues running.
+
 Start the Redis service:
 
 ```console
 redis-server &
 ```
+
 Check if Redis is active and responding to commands:
-The redis-cli ping command sends a simple health check request to the Redis server. A PONG response confirms that the server is running correctly and the client can communicate with it.
 ```console
 redis-cli ping
 ```
-
-output:
+The output is similar to:
 
 ```output
 PONG
 ```
 
-### Insert Sample Data
-These steps populate the Redis database with a sample dataset to validate insertion performance and data persistence. You will create 10,000 key-value pairs using a simple shell loop and verify that the data has been successfully stored.
+## Insert sample data
+
+Populate the Redis database with a sample dataset to validate insertion performance and data persistence. You create 10,000 key-value pairs using a simple shell loop and verify that the data has been successfully stored.
 
 Use `redis-cli` to insert 10,000 sample key-value pairs:
+
 ```console
 for i in $(seq 1 10000); do
   redis-cli SET key:$i "value-$i" > /dev/null
@@ -39,21 +41,23 @@ done
 ```
 - This command iterates through numbers **1 to 10,000**, setting each as a Redis key in the format `key:<number>` with the corresponding value `"value-<number>"`.
 - The `> /dev/null` part suppresses command output to make the insertion process cleaner and faster.
+- The `> /dev/null` part suppresses command output to make the insertion process cleaner and faster.
 
-**Verify Data Storage Count:**
-
-The `DBSIZE` command returns the total number of keys currently stored in the Redis database.
+Verify data storage count:
 
 ```console
 redis-cli DBSIZE
 ```
 
+The output is similar to:
+
 ```output
 (integer) 10000
 ```
-Seeing `(integer) 10000` confirms that all key-value pairs were inserted successfully.
 
-**Verify Sample Data Retrieval**
+This confirms that all key-value pairs were inserted successfully.
+
+### Verify sample data retrieval
 
 Fetch one of the inserted keys to confirm data correctness:
 
@@ -70,7 +74,7 @@ You should see an output similar to:
 "value-5000"
 ```
 
-### Perform Basic Data Search Tests
+## Perform basic data search tests
 This step verifies Redis’s ability to retrieve specific data efficiently using unique keys. The `GET` command fetches the value associated with a given key from Redis.
 
 Verify Redis's ability to retrieve specific data efficiently using unique keys. The `GET` command fetches the value associated with a given key from Redis.
@@ -87,7 +91,7 @@ You should see an output similar to:
 ```
 This confirms that Redis is storing and retrieving data correctly from memory.
 
-### Search for Multiple Keys Using Pattern Matching
+## Search for multiple keys using pattern matching
 This test demonstrates how Redis can locate multiple keys that match a pattern, useful for exploratory queries or debugging.
 
 Use the `KEYS` command to search for keys matching a pattern:
@@ -95,9 +99,8 @@ Use the `KEYS` command to search for keys matching a pattern:
 ```console
 redis-cli KEYS "key:1*"
 ```
-`KEYS` is fast but **blocks the server** when handling large datasets, so it’s not recommended in production.
 
-You should see an output similar to:
+The output is similar to:
 
 ```output
    1) "key:1392"
@@ -116,7 +119,7 @@ You should see an output similar to:
 `KEYS` is fast but blocks the server when handling large datasets, so it's not recommended in production.
 {{% /notice %}}
 
-### Production-safe searching with SCAN
+## Production-safe searching with SCAN
 
 Use the `SCAN` command for larger datasets — it is non-blocking and iterates safely.
 
@@ -140,9 +143,7 @@ You should see an output similar to:
 Redis will return a cursor value (for example, `9792`).  
 Continue scanning by reusing the cursor until it returns `0`, meaning the iteration is complete.
 
-### Measure data retrieval performance
-
-
+## Measure data retrieval performance
 
 Measure how quickly Redis can retrieve a single key from memory, helping to establish a baseline for data access latency on the Arm-based VM.
 

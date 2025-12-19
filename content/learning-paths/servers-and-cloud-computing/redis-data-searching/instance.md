@@ -14,7 +14,7 @@ In this section, you will learn how to provision a Google Axion C4A Arm virtual 
 For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
-## Create your Google Axion C4A Arm VM
+## Create your Google Axion C4A Arm virtual machine
 
 To create a virtual machine based on the C4A instance type:
 - Navigate to the [Google Cloud Console](https://console.cloud.google.com/).
@@ -24,7 +24,7 @@ To create a virtual machine based on the C4A instance type:
    - Set **Series** to `C4A`.
    - Select `c4a-standard-4` for machine type.
 
-   ![Create a Google Axion C4A Arm virtual machine in the Google Cloud Console with c4a-standard-4 selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
+   ![Google Cloud Console showing Create Instance form with Machine configuration section displaying C4A series and c4a-standard-4 machine type selected alt-text#center](images/gcp-vm.png "Create a Google Axion C4A Arm virtual machine")
 
 
 - Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. 
@@ -34,10 +34,10 @@ To create a virtual machine based on the C4A instance type:
 - Select **Create** to launch the instance.
 - Once created, you should see an **SSH** option to the right in your list of VM instances. Select this to launch an SSH shell into your VM instance:
 
-![Google Cloud Console showing VM instances list with SSH button highlighted for connecting to the running C4A instance#center](images/gcp-ssh.png "SSH connection to VM instance")
+![Google Cloud Console showing VM instances list with SSH button highlighted for connecting to the running C4A instance alt-text#center](images/gcp-ssh.png "SSH connection to VM instance")
 
-- A window from your browser should come up and you should now see a shell into your VM instance:
+- A window from your browser opens and you see a shell into your VM instance:
 
-![Terminal Shell in your VM instance alt-text#center](images/gcp-shell.png "Terminal shell in your VM instance")
+   ![Browser-based SSH terminal window showing command prompt connected to the SUSE Linux VM instance alt-text#center](images/gcp-shell.png "Terminal shell in VM instance")
 
-Next, install Redis.
+You're now ready to install Redis.

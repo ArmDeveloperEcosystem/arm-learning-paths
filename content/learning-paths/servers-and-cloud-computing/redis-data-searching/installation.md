@@ -38,7 +38,7 @@ make distclean
 ```
 This removes any residual files from a previous build, ensuring a clean build environment.
 
-**Now build Redis dependencies and compile Redis:**
+Build Redis dependencies and compile Redis:
 
 Redis relies on several third-party libraries (such as hiredis, jemalloc, and lua) to optimize performance and functionality. After building dependencies, the Redis source is compiled with BUILD_TLS=yes, enabling support for encrypted TLS connections.
 
@@ -53,23 +53,23 @@ sudo make BUILD_TLS=yes
 The `BUILD_TLS=yes` flag enables TLS (SSL) support for secure Redis connections.
 {{% /notice %}}
 
-### Verify Redis binary
+## Verify Redis binary
 
-After a successful build, check that the redis-server binary exists:
+After a successful build, check that the `redis-server` binary exists:
 
 ```
 cd src
 ls -l redis-server
 ```
 
-You should see a file similar to:
+The output is similar to:
 
 ```output
 -rwxr-xr-x 1 root root 17869216 Oct 23 11:48 redis-server
 ```
 This confirms that Redis compiled successfully and that the `redis-server` binary is present in the `/src` directory. The file’s permissions indicate it is executable.
 
-### Install Redis system-wide
+## Install Redis system-wide
 Use the following command to install Redis binaries (`redis-server` and `redis-cli`) globally, making them accessible from any directory:
 
 ```console
@@ -94,7 +94,8 @@ The expected output is:
 
 This confirms that Redis binaries are installed in your system path.
 
-### Verify Installation
+### Verify installation
+
 Check Redis versions:
 
 ```console

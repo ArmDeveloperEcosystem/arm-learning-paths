@@ -22,4 +22,4 @@ Redis is designed for high performance, low latency, and high throughput, making
 
 Redis is widely adopted for caching, session management, real-time analytics, pub/sub messaging, and leaderboards in gaming and web applications. It integrates seamlessly with programming languages like Python, Java, Go, and Node.js.
 
-To learn more, visit the [Redis website](https://redis.io/) and explore the [Reddis documentation](https://redis.io/docs/latest/).
+To learn more, visit the [Redis website](https://redis.io/) and explore the [Redis documentation](https://redis.io/docs/latest/).
