@@ -24,6 +24,10 @@ author:
 
 further_reading:
     - resource:
+        title: Arm Optimized Routines
+        link: https://github.com/ARM-software/optimized-routines
+        type: website
+    - resource:
         title: Scalable Vector Extensions documentation
         link: https://developer.arm.com/Architectures/Scalable%20Vector%20Extensions
         type: documentation

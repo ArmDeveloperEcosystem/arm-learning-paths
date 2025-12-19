@@ -10,15 +10,15 @@ layout: learningpathall
 
 Arm introduced in SVE an instruction called FEXPA: the Floating Point Exponential Accelerator. 
 
-Let’s segment the IEEE754 floating-point representation fraction part into several sub-fields (Index, Exp and Remaining bits) with respective length of _Idxb_, _Expb_ and _Remb_ bits.
+Let’s segment the IEEE 754 floating-point representation fraction part into several sub-fields (Index, Exp and Remaining bits) with respective length of _Idxb_, _Expb_ and _Remb_ bits.
 
-| IEEE754 precision       | Idxb | Expb | Remb |
+| IEEE 754 precision       | Idxb | Expb | Remb |
 |-------------------------|------|------|------|
 | Half precision (FP16)   | 5    | 5    | 0    |
 | Single precision (FP32) | 6    | 8    | 9    |
 | Double precision (FP64) | 6    | 11   | 35   |
 
-The FEXPA instruction can be described for any real number x ∈ [2^(remBits + expBits) + 1; 2^(remBits + expBits) + 2^expBits - 1) as: 
+The FEXPA instruction can be described for any real number x ∈ [2^(Remb + Expb) + 1; 2^(Remb + Expb) + 2^Expb - 1) as: 
 
 $$FEXPA(x)=2^{x-constant}$$
 
@@ -55,16 +55,20 @@ Open your `exp_sve.c` file and add the following function after the `exp_sve()` 
 ```C
 // SVE exponential implementation with FEXPA (degree-2 polynomial)
 void exp_sve_fexpa(float *x, float *y, size_t n) {
-    const float shift_fexpa = 196735.0f;
-    float constants[1] = {ln2_lo};
+    // FEXPA-specific coeffs
+    const float c0_fexpa = 1.000003695487976f;   // 0x1.00003ep0
+    const float c1_fexpa = 0.5000003576278687f;  // 0x1.00000cp-1
+    const float shift_fexpa = 196735.0f;         // 1.5*2^(23-6) + 127
+
+    float constants[1] = { ln2_lo };
     size_t i = 0;
 
-    svbool_t pg = svptrue_b32();
+    const svbool_t p_all = svptrue_b32();
+    svfloat32_t lane_consts = svld1rq(p_all, constants);  // load once
 
     while (i < n) {
-        pg = svwhilelt_b32((uint64_t)i, (uint64_t)n);
+        const svbool_t pg = svwhilelt_b32((uint64_t)i, (uint64_t)n);
         svfloat32_t x_vec = svld1(pg, &x[i]);
-        svfloat32_t lane_consts = svld1rq(pg, constants);
 
         svfloat32_t z = svmad_x(pg, svdup_f32(inv_ln2), x_vec, svdup_f32(shift_fexpa));
         svfloat32_t k = svsub_x(pg, z, svdup_f32(shift_fexpa));
@@ -74,7 +78,7 @@ void exp_sve_fexpa(float *x, float *y, size_t n) {
 
         svfloat32_t scale = svexpa(svreinterpret_u32_f32(z));
 
-        svfloat32_t p01 = svmla_x(pg, svdup_f32(c0), r, svdup_f32(c1));
+        svfloat32_t p01  = svmla_x(pg, svdup_f32(c0_fexpa), r, svdup_f32(c1_fexpa));
         svfloat32_t poly = svmul_x(pg, r, p01);
 
         svfloat32_t result = svmla_f32_x(pg, scale, poly, scale);
@@ -83,6 +87,11 @@ void exp_sve_fexpa(float *x, float *y, size_t n) {
     }
 }
 ```
+
+{{% notice Note %}}
+This implementation can be found in [ARM Optimized Routines](https://github.com/ARM-software/optimized-routines/blob/ba35b32/math/aarch64/sve/sv_expf_inline.h).
+{{% /notice %}}
+
 
 Now register this new implementation in the `implementations` array in `main()`. Find this section:
 
@@ -124,9 +133,9 @@ The output shows the final comparison:
 Performance Results:
 Implementation              Time (sec) Speedup vs Baseline
 -------------              ----------- -------------------
-Baseline (expf)               0.002458            1.00x
-SVE (degree-4 poly)           0.000640            3.84x
-SVE+FEXPA (degree-2)          0.000414            5.94x
+Baseline (expf)               0.002462            1.00x
+SVE (degree-4 poly)           0.000578            4.26x
+SVE+FEXPA (degree-2)          0.000414            5.95x
 ```
 
 ## Results analysis

@@ -28,16 +28,20 @@ Create a new file named `exp_sve.c` with the following implementation:
 #include <stdlib.h>
 #include <time.h>
 
-// Constants for exponential computation
-static const float ln2_hi = 0.693359375f;
-static const float ln2_lo = -2.12194440e-4f;
-static const float inv_ln2 = 1.4426950216f;
-static const float shift = 12582912.0f; // 1.5*2^23 + 127
-static const float c0 = 0.999999995f;
-static const float c1 = 1.00000000f;
-static const float c2 = 0.499991506f;
-static const float c3 = 0.166676521f;
-static const float c4 = 0.0416637054f;
+static const float c0 = 0.9999997019767761f;   // 0x1.fffff6p-1
+static const float c1 = 0.4999915063381195f;   // 0x1.fffdc6p-2
+static const float c2 = 0.16667652130126953f;  // 0x1.555a8p-3
+static const float c3 = 0.04189782217144966f;  // 0x1.573a1ap-5
+static const float c4 = 0.008289290592074394f; // 0x1.0f9f9cp-7
+
+// Range reduction constants
+static const float ln2_val = 0.6931471824645996f;     // 0x1.62e43p-1
+static const float ln2_hi  = 0.693145751953125f;      // 0x1.62e4p-1f
+static const float ln2_lo  = 1.428606765330187e-06f;  // 0x1.7f7d1cp-20f
+static const float inv_ln2 = 1.4426950216293335f;     // 0x1.715476p+0f
+
+// Shift
+static const float shift   = 12583039.0f;             // 0x1.8000fep23f
 
 // Baseline exponential using standard library
 void exp_baseline(float *x, float *y, size_t n) {
@@ -68,13 +72,7 @@ void exp_sve(float *x, float *y, size_t n) {
                     r = svmls_lane(r, k, lane_consts, 0);
 
         /* Compute the scaling factor 2^k */
-        svint32_t ki = svcvt_s32_f32_x(pg, k);          // float k -> int
-        svint32_t ei = svadd_n_s32_x(pg, ki, 127);      // add exponent bias
-        svuint32_t ebits = svlsl_n_u32_x(
-            pg,
-            svreinterpret_u32_s32(ei),
-            23);
-        svfloat32_t scale = svreinterpret_f32_u32(ebits);
+        svfloat32_t scale = svreinterpret_f32_u32(svlsl_n_u32_m(pg, svreinterpret_u32_f32(z), 23));
 
         /* Compute poly(r) = exp(r) - 1 */
         svfloat32_t p12  = svmla_lane(svdup_f32(c1), r, lane_consts, 2); // c1 + c2 * r
@@ -187,6 +185,11 @@ int main() {
 }
 ```
 
+{{% notice Additional optimization %}}
+You can reduce constant loads further by packing them into a single SVE register, as done in [Arm Optimized Routines](https://github.com/ARM-software/optimized-routines/blob/1931794/pl/math/sv_expf_2u.c).
+{{% /notice %}}
+
+
 This implementation includes the core exponential function logic with SVE intrinsics, along with benchmarking code to measure the performance difference.
 
 ## Compile and run the benchmark
@@ -210,17 +213,17 @@ Benchmarking exponential function with 1000000 elements...
 Running 100 iterations for accuracy
 
 Sample accuracy check (first 5 values):
-  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006815 (error=7.75e-05)
-  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006816 (error=7.75e-05)
-  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006816 (error=7.75e-05)
-  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006816 (error=7.75e-05)
-  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006816 (error=7.75e-05)
+  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006738 (error=4.66e-10)
+  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006738 (error=4.66e-10)
+  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006738 (error=4.66e-10)
+  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006738 (error=9.31e-10)
+  x=-5.00: Baseline (expf)=0.006738, SVE (degree-4 poly)=0.006738 (error=9.31e-10)
 
 Performance Results:
 Implementation              Time (sec) Speedup vs Baseline
 -------------              ----------- -------------------
-Baseline (expf)               0.002496            1.00x
-SVE (degree-4 poly)           0.000633            3.94x
+Baseline (expf)               0.002640            1.00x
+SVE (degree-4 poly)           0.000576            4.58x
 ```
 
 The benchmark demonstrates the performance benefit of using SVE intrinsics for vectorized exponential computation. You should see a noticeable speedup compared to the standard library's scalar `expf()` function, with typical speedups ranging from 1.5x to 4x depending on your system's SVE vector length and memory bandwidth.
