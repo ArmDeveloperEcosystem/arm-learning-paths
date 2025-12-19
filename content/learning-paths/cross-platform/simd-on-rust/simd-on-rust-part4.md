@@ -225,7 +225,7 @@ fff6 0000 0000 0000
 
 A 4x4 matrix `a` is initialized and a `fDCT` function is called on it. The function carries out 2 passes of the same algorithm on the elements of the array, calls the 2 butterfly functions (for one and two coefficients respectively) and transposes the results in between the calculations. The result is rounded and stored in the output buffer `dct`.
 
-The assembly output is linked [here](/learning-paths/cross-platform/simd-on-rust/butterfly1.asm) instead of being displayed due to its size.
+The [assembly output](/learning-paths/cross-platform/simd-on-rust/butterfly1.asm) is available separately due to its size.
 
 Now create a Rust version of this algorithm and save the contents below in a file called `butterfly2.rs`:
 
@@ -393,7 +393,7 @@ ff71 0000 0000 0000
 fff6 0000 0000 0000
 ```
 
-The disassembly output is linked [here](/learning-paths/cross-platform/simd-on-rust/butterfly2.asm) for size reasons. You will see that it is very similar to the C version, apart from the cpu feature check at the start.
+The [disassembly output](/learning-paths/cross-platform/simd-on-rust/butterfly2.asm) is available separately for size reasons. You will see that it is very similar to the C version, apart from the cpu feature check at the start.
 
 ### Comments
 

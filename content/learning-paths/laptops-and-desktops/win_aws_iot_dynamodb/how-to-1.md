@@ -7,7 +7,7 @@ weight: 3
 layout: "learningpathall"
 ---
 ## Before you begin
-Before you begin, prepare the weather station emulator and connect it to AWS IoT Core by completing this [Learning Path](/learning-paths/laptops-and-desktops/win_aws_iot). 
+Before you begin, prepare the weather station emulator and connect it to AWS IoT Core by completing [Create IoT applications with Windows on Arm and AWS IoT Core](/learning-paths/laptops-and-desktops/win_aws_iot). 
 ## Create the rule
 Start by creating the rule: 
 
