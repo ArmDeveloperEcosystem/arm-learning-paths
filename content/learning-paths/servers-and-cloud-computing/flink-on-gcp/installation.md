@@ -6,12 +6,12 @@ weight: 4
 layout: learningpathall
 ---
 
-## Install Apache Flink on GCP VM
-In this section you will install Apache Flink and its required dependencies on a Google Cloud Platform (GCP) SUSE Arm64 Virtual Machine (VM). By the end, you will have a fully configured Flink environment ready for local execution, standalone clusters, or benchmarking Flink workloads on Arm.
+## Install Apache Flink
 
-###  Update the System and Install Java
-Apache Flink requires a Java runtime (JRE) and development kit (JDK).
-Update the system and install Java:
+This section shows you how to install Apache Flink and its required dependencies on a Google Cloud Platform (GCP) SUSE Arm64 virtual machine.
+
+### Update the system and install Java
+
 ```console
 sudo zypper refresh
 sudo zypper update -y
@@ -29,13 +29,12 @@ sudo wget https://dlcdn.apache.org/flink/flink-2.1.1/flink-2.1.1-bin-scala_2.12.
 This command retrieves the official Flink binary distribution for installation on your VM.
 
 {{% notice Note %}}
-Flink 2.0.0 introduced Disaggregated State Management architecture, which enables more efficient resource utilization in cloud-native environments, ensuring high-performance real-time processing while minimizing resource overhead.
-You can view [this release note](https://flink.apache.org/2025/03/24/apache-flink-2.0.0-a-new-era-of-real-time-data-processing/)
+Flink 2.0.0 introduced Disaggregated State Management architecture, which enables more efficient resource utilization in cloud-native environments, ensuring high-performance real-time processing while minimizing resource overhead. See [the Flink 2.0.0 Release Note](https://flink.apache.org/2025/03/24/apache-flink-2.0.0-a-new-era-of-real-time-data-processing/).
 
 For best performance on Arm, the [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends using Flink ≥ 2.0.0.
 {{% /notice %}}
 
-### Extract the Downloaded Archive
+### Extract the archive
 Untar the archive:
 
 ```console
@@ -49,14 +48,16 @@ sudo mv flink-2.1.1 /opt/flink
 ```
 This makes configuration, upgrades, and scripting easier for your Flink installation.
 
-### Configure Environment Variables
+### Configure environment variables
 Add Flink to your shell environment:
 
 ```console
 echo "export FLINK_HOME=/opt/flink" >> ~/.bashrc
 echo "export PATH=\$FLINK_HOME/bin:\$PATH" >> ~/.bashrc
 ```
+
 Create a logging directory and assign proper permissions:
+
 ```console
 sudo mkdir -p /opt/flink/log
 sudo chown -R $(whoami):$(id -gn) /opt/flink/log
@@ -69,7 +70,7 @@ source ~/.bashrc
 ```
 Adding Flink to the global PATH lets you use commands like `flink`, `start-cluster.sh`, and `taskmanager.sh` from any terminal.
 
-### Verify the Installation
+### Verify the installation
 To confirm that Flink has been installed correctly, check its version:
 
 ```console
@@ -81,4 +82,5 @@ You should see an output similar to:
 ```output
 Version: 2.1.1, Commit ID: 074f8c5
 ```
-This confirms that Apache Flink has been installed and is ready for use.
+
+Apache Flink is now installed and ready for use.
