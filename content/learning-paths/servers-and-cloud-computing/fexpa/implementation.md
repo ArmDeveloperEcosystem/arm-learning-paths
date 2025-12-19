@@ -55,10 +55,11 @@ void exp_sve(float *x, float *y, size_t n) {
     float constants[4] = {ln2_lo, c0, c2, c4};
     size_t i = 0;
     
-    svbool_t pg = svptrue_b32();
+    const svbool_t p_all = svptrue_b32();
+    const svfloat32_t lane_consts = svld1rq(p_all, constants);
     
     while (i < n) {
-        pg = svwhilelt_b32((uint64_t)i, (uint64_t)n);
+        const svbool_t pg = svwhilelt_b32((uint64_t)i, (uint64_t)n);
         svfloat32_t x_vec = svld1(pg, &x[i]);
         
         svfloat32_t lane_consts = svld1rq(pg, constants);
@@ -185,12 +186,11 @@ int main() {
 }
 ```
 
-{{% notice Additional optimization %}}
-You can reduce constant loads further by packing them into a single SVE register, as done in [Arm Optimized Routines](https://github.com/ARM-software/optimized-routines/blob/1931794/pl/math/sv_expf_2u.c).
+{{% notice Arm Optimized Routines %}}
+You can find this implementation in [Arm Optimized Routines](https://github.com/ARM-software/optimized-routines/blob/1931794/pl/math/sv_expf_2u.c).
 {{% /notice %}}
 
-
-This implementation includes the core exponential function logic with SVE intrinsics, along with benchmarking code to measure the performance difference.
+This implementation includes the core exponential function logic with SVE intrinsics, along with benchmarking code to measure the performance difference. By packing constant loads into a single SVE register, the code reduces memory traffic and enables efficient lane-based access to individual constants throughout the computation.
 
 ## Compile and run the benchmark
 
