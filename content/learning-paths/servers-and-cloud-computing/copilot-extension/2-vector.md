@@ -74,7 +74,7 @@ cd python-rag-extension/vectorstore
 
 2. It is recommended that you use a virtual environment to manage dependencies.
 
-Ensure you have `conda` set up in your development environment. If you need guidance, follow the [Installation Guide](https://docs.anaconda.com/miniconda/install/.
+Ensure you have `conda` set up in your development environment. If you need guidance, follow the [Installation Guide](https://docs.anaconda.com/miniconda/install/).
 
 3. To create a new conda environment, use the following command:
 
@@ -104,7 +104,7 @@ python chunk_a_learning_path.py --url <LEARNING_PATH_URL>
 
 Replace `<LEARNING_PATH_URL>` with the URL of the Learning Path that you want to process. 
 
-If no URL is provided, the script defaults to a [known Learning Path URL](https://learn.arm.com/learning-paths/cross-platform/kleidiai-explainer).
+If no URL is provided, the script defaults to a [known Learning Path URL](/learning-paths/cross-platform/kleidiai-explainer).
 
 The script processes the specified Learning Path and saves the chunks as YAML files in a `./chunks/` directory.
 

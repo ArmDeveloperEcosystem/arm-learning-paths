@@ -27,11 +27,11 @@ further_reading:
         type: website
     - resource:
         title: Get started with Arm Performance Studio for mobile
-        link: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/ams/fa
+        link: /learning-paths/mobile-graphics-and-gaming/ams/fa
         type: website
     - resource:
         title: Analyze a frame with Frame Advisor
-        link: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/analyze_a_frame_with_frame_advisor
+        link: /learning-paths/mobile-graphics-and-gaming/analyze_a_frame_with_frame_advisor
         type: website
     - resource:
         title: Video tutorial – Capture and analyze a problem frame with Frame Advisor

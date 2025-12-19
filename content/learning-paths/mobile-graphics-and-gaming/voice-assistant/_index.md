@@ -36,17 +36,17 @@ further_reading:
 
     - resource:
         title: Accelerate Generative AI workloads using KleidiAI
-        link: https://learn.arm.com/learning-paths/cross-platform/kleidiai-explainer
+        link: /learning-paths/cross-platform/kleidiai-explainer
         type: website
 
     - resource:
         title: LLM inference on Android with KleidiAI, MediaPipe, and XNNPACK
-        link: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/kleidiai-on-android-with-mediapipe-and-xnnpack/
+        link: /learning-paths/mobile-graphics-and-gaming/kleidiai-on-android-with-mediapipe-and-xnnpack/
         type: website
 
     - resource:
         title: Vision LLM inference on Android with KleidiAI and MNN
-        link: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/vision-llm-inference-on-android-with-kleidiai-and-mnn/
+        link: /learning-paths/mobile-graphics-and-gaming/vision-llm-inference-on-android-with-kleidiai-and-mnn/
         type: website
 
 ### FIXED, DO NOT MODIFY

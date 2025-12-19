@@ -10,7 +10,7 @@ layout: learningpathall
 
 Here is an example invoking all accuracy modes of the Neon single precision exp function. The file `ulp_error.h` is from the previous section. 
 
-Make sure you have [Arm Performance Libraries](https://learn.arm.com/install-guides/armpl/) installed. 
+Make sure you have [Arm Performance Libraries](/install-guides/armpl/) installed. 
 
 Use a text editor to save the code below in a file named `example.c`.
 

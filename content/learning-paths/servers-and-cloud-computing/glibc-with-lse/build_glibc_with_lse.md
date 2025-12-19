@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Overview
 
-"Glibc with LSE" refers to the version of [the GNU C Library (glibc)](https://www.gnu.org/software/libc/) that includes support for [LSE (Large Systems Extensions)](https://learn.arm.com/learning-paths/servers-and-cloud-computing/lse/). LSE is an extension to the ARMv8-A architecture that provides enhanced atomic operations and memory model features.
+"Glibc with LSE" refers to the version of [the GNU C Library (glibc)](https://www.gnu.org/software/libc/) that includes support for [LSE (Large Systems Extensions)](/learning-paths/servers-and-cloud-computing/lse/). LSE is an extension to the ARMv8-A architecture that provides enhanced atomic operations and memory model features.
 
 LSE introduces additional atomic instructions and operations, such as Load-Acquire, Store-Release, and Atomic Compare-and-Swap (CAS). These operations allow for more efficient synchronization and concurrent access to shared memory in multi-threaded applications running on ARMv8-A processors.
 

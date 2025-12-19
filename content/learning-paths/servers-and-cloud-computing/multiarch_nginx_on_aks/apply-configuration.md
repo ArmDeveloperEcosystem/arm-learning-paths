@@ -65,7 +65,7 @@ You can now log in to any pod and monitor system performance with `btop`. Many f
 {{% notice Note %}}
 Network performance can impact load testing accuracy when running from your local machine. If you experience low request rates (under 70,000 requests/s), consider running the test from an Azure VM in the same region as your cluster.
 
-You can create an [Azure VM instance](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/azure/) and install the `nginx_util.sh` script there for more reliable results.{{% /notice %}}
+You can create an [Azure VM instance](/learning-paths/servers-and-cloud-computing/csp/azure/) and install the `nginx_util.sh` script there for more reliable results.{{% /notice %}}
 
 Running two btop terminals, one for each pod, is a convenient way to view performance in real time. 
 

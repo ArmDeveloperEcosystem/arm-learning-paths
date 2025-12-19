@@ -27,8 +27,8 @@ layout: learningpathall
 	--output_name="llama3_kv_sdpa_xnn_qe_4_32.pte"
 ```
 
--	Build the Llama Runner binary for [Android](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/build-llama3-chat-android-app-using-executorch-and-xnnpack/5-run-benchmark-on-android/).
--	Build and Run [Android](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/build-llama3-chat-android-app-using-executorch-and-xnnpack/6-build-android-chat-app/).
+-	Build the Llama Runner binary for [Android](/learning-paths/mobile-graphics-and-gaming/build-llama3-chat-android-app-using-executorch-and-xnnpack/5-run-benchmark-on-android/).
+-	Build and Run [Android](/learning-paths/mobile-graphics-and-gaming/build-llama3-chat-android-app-using-executorch-and-xnnpack/6-build-android-chat-app/).
 -	Open Android Studio and choose "Open an existing Android Studio project" to navigate to examples/demo-apps/android/LlamaDemo and Press Run (^R) to build and launch the app on your phone.
 -	Tap the Settings widget to select a model, configure its parameters, and set any prompts.
 -	After choosing the model, tokenizer, and model type, click "Load Model" to load it into the app and return to the main Chat activity.

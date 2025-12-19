@@ -52,7 +52,7 @@ further_reading:
         type: documentation
     - resource:
         title: Port Code to Arm Scalable Vector Extension (SVE)
-        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/sve
+        link: /learning-paths/servers-and-cloud-computing/sve
         type: website
     - resource:
         title: Introducing the Scalable Matrix Extension for the Armv9-A Architecture
@@ -72,7 +72,7 @@ further_reading:
         type: blog
     - resource:
         title: Build adaptive libraries with multiversioning
-        link: https://learn.arm.com/learning-paths/cross-platform/function-multiversioning/
+        link: /learning-paths/cross-platform/function-multiversioning/
         type: website
     - resource:
         title: SME Programmer's Guide

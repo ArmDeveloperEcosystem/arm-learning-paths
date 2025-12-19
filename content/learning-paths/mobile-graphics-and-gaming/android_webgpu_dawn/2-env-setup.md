@@ -56,7 +56,7 @@ One of the components of Performance Studio is Streamline. Streamline captures d
 Install Arm Performance Studio using the [Arm Performance Studio Install Guide](/install-guides/ams/).
 
 {{% notice Tip %}}
-To learn more about Arm Performance Studio and Streamline, see [Get started with Arm Performance Studio for mobile](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/ams/ams/).
+To learn more about Arm Performance Studio and Streamline, see [Get started with Arm Performance Studio for mobile](/learning-paths/mobile-graphics-and-gaming/ams/ams/).
 {{% /notice %}}
 
 Android Studio and Arm Performance Studio are now installed, and you are ready to create a WebGPU Android application. 
