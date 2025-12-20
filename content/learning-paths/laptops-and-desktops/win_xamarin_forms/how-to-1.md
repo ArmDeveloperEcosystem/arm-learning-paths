@@ -11,7 +11,7 @@ Xamarin Forms is a cross-platform UI toolkit that allows developers to create na
 
 In this learning path, you will learn how to use Xamarin Forms to create a cross-platform application. Then, you will launch this application on Windows on Arm using x64 and Arm64 build configurations and compare the performance. By doing so, we will be able to see how Arm64 can accelerate Xamarin Forms applications. 
 
-You can find the complete project code used in this learning path [here](https://github.com/dawidborycki/Arm64.MobileApp.XamarinForms.git).
+You can find the [complete project code on GitHub](https://github.com/dawidborycki/Arm64.MobileApp.XamarinForms.git).
 
 ## Before you begin
 Before you begin the implementation, install Visual Studio 2022 with the following workloads:
@@ -230,7 +230,7 @@ protected override void OnLaunched(LaunchActivatedEventArgs e)
 ## Helpers
 You will now supplement the shared project with two helper classes:
 
-1. **MatrixHelper**: this class implements matrix multiplication based on the mathematical formula detailed [here](https://en.wikipedia.org/wiki/Matrix_multiplication).
+1. **MatrixHelper**: this class implements matrix multiplication based on the [mathematical formula for matrix multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication).
 2. **PerformanceHelper**: this class provides functionality to measure code execution time.
 
 To implement these classes, follow these steps:

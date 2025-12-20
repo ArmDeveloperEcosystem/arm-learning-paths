@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - Basic understanding of networking principles such as Transmission Control Protocol/Internet Protocol (TCP/IP) and User Datagram Protocol (UDP).
-    - Access to two [Arm-based cloud instances](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/).
+    - Access to two [Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/).
 
 author: Kieran Hejmadi
 

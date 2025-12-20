@@ -11,7 +11,7 @@ learning_objectives:
 
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
-    - Node.js for Arm64. You can find the installer [here](https://nodejs.org/dist/v20.10.0/node-v20.10.0-arm64.msi)
+    - Node.js for Arm64. You can find the [Node.js installer](https://nodejs.org/dist/v20.10.0/node-v20.10.0-arm64.msi).
     - Any code editor; we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).
 
 author: Dawid Borycki

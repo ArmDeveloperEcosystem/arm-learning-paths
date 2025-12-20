@@ -1,6 +1,6 @@
 ---
 title: RabbitMQ Baseline Testing on Google Axion C4A Arm Virtual Machine
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -15,7 +15,7 @@ The purpose of this baseline is to confirm:
 - Queue operations (create, publish, consume)
 - CLI tooling functionality (`rabbitmqctl` and `rabbitmqadmin`)
 
-### Check RabbitMQ Node Status
+### Check RabbitMQ node status
 Verify that the RabbitMQ node is operational and healthy.
 
 ```console
@@ -26,7 +26,7 @@ sudo rabbitmqctl status
 - Listeners are active on ports 5672 and 15672
 - Memory and disk space are within safe limits
 
-### Verify Enabled Plugins
+### Verify enabled plugins
 Confirm that the RabbitMQ management plugins are enabled.
 
 ```console
@@ -42,7 +42,7 @@ You should see an output similar to:
 [  ] rabbitmq_stream_management              4.2.0
 ```
 
-### Validate RabbitMQ Listeners
+### Validate RabbitMQ listeners
 Ensure RabbitMQ is listening on the required ports.
 
 ```console
@@ -58,7 +58,7 @@ Interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI 
 Interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
 ```
 
-### Download RabbitMQ Admin CLI Tool
+### Download RabbitMQ Admin CLI tool
 Download the rabbitmqadmin CLI tool from the local management endpoint.
 
 ```console
@@ -69,7 +69,7 @@ curl -u guest:guest http://localhost:15672/cli/rabbitmqadmin -o rabbitmqadmin
 ```console
 chmod +x rabbitmqadmin
 ```
-### Validate Queue Creation
+### Validate queue creation
 Create a test queue to validate write operations.
 
 ```console
@@ -81,7 +81,7 @@ You should see an output similar to:
 queue declared
 ```
 
-### Publish a Test Message
+### Publish a test message
 Send a test message to the queue.
 
 ```console
@@ -93,7 +93,7 @@ You should see an output similar to:
 Message published
 ```
 
-### Consume Message From Queue
+### Consume message from queue
 Retrieve messages from the queue to verify read functionality.
 
 ```console
@@ -109,7 +109,7 @@ You should see an output similar to:
 +-------------+----------+---------------+-------------+---------------+------------------+------------+-------------+
 ```
 
-### Verify Queue State
+### Verify queue state
 Confirm that the queue is empty after consumption.
 
 ```console
@@ -126,7 +126,7 @@ You should see an output similar to:
 | testqueue    | 1        |
 ```
 
-Baseline Validation Summary
+### Baseline validation summary
 
 - RabbitMQ node is running and healthy
 - The management plugin is enabled and accessible

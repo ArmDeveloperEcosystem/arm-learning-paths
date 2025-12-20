@@ -1,32 +1,32 @@
 ---
-title: Cassandra Benchmarking
+title: Benchmark Cassandra performance
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Cassandra Benchmarking by Cassandra-Stress
-Cassandra benchmarking can be performed using the built-in `cassandra-stress` tool, which helps measure database performance under different workloads such as write, read, and mixed operations.
+## Benchmark Cassandra with cassandra-stress
 
-### Steps for Cassandra Benchmarking with Cassandra-Stress
-**Verify cassandra-stress Installation:**
+You can perform Cassandra benchmarking using the built-in `cassandra-stress` tool, which measures database performance under different workloads such as write, read, and mixed operations.
 
-Cassandra comes with a built-in tool called **cassandra-stress** that is used for testing performance. It is usually located in the `tools/bin/` folder of your Cassandra installation. 
+## Verify cassandra-stress installation
+
+Cassandra comes with a built-in tool called `cassandra-stress` that is used for testing performance. It's located in the `tools/bin/` folder of your Cassandra installation.
 
 ```console
 ls ~/cassandra/tools/bin | grep cassandra-stress
 ```
-If you see cassandra-stress in the list, it means the tool is installed and ready to use.
 
-**Run the version check:**
+If you see `cassandra-stress` in the list, the tool is installed and ready to use.
 
-To make sure the tool works correctly, check its help options.
+Check the tool's help options to verify it works correctly:
 
 ```console
 ~/cassandra/tools/bin/cassandra-stress help
 ```
-You should see output similar to the following:
+
+The output is similar to:
 
 ```output
 Usage:      cassandra-stress <command> [options]
@@ -43,10 +43,10 @@ help                 : Print help for a command or option
 print                : Inspect the output of a distribution definition
 version              : Print the version of cassandra stress
 ```
-If the tool is working, you will see a list of commands and options that you can use to run benchmarks.
-This confirms that your setup is correct and you’re ready to start testing Cassandra’s performance.
 
-### Basic Write Test
+The list of commands and options confirms that your setup is correct and you're ready to start testing Cassandra's performance.
+
+## Run a basic write test
 Insert 10,000 rows with 50 concurrent threads using `cassandra-stress`:
 
 ```console
@@ -56,7 +56,7 @@ Insert 10,000 rows with 50 concurrent threads using `cassandra-stress`:
 - **n=10000** → Specifies the number of rows to insert during the benchmark test.  
 - **-rate threads=50** → Sets the number of concurrent worker threads simulating multiple clients writing to the cluster. 
 
-You should see output similar to the following:
+The output is similar to:
 
 ```output
 ******************** Stress Settings ********************
@@ -186,13 +186,16 @@ Total operation time      : 00:00:00
 END
 ```
 
-### Read Test
-The following command runs a **read benchmark** on your Cassandra database using `cassandra-stress`. It simulates multiple clients reading from the cluster at the same time and records performance metrics such as **throughput** and **latency**.
+## Run a read test
+
+Run a read benchmark on your Cassandra database using `cassandra-stress`. This simulates multiple clients reading from the cluster at the same time and records performance metrics such as throughput and latency.
 
 ```console
 ~/cassandra/tools/bin/cassandra-stress read n=10000 -rate threads=50
 ```
-You should see output similar to the following:
+
+The output is similar to:
+
 ```output
 ******************** Stress Settings ********************
 Command:
@@ -322,21 +325,24 @@ Total operation time      : 00:00:02
 END
 ```
 
-## Benchmark Results Table Explained:
+## Understand benchmark results
 
-- **Op rate (operations per second):** The number of read operations Cassandra successfully executed per second.  
-- **Partition rate:** Number of partitions read per second. Since this is a read test, the partition rate equals the op rate.  
-- **Row rate:** Number of rows read per second. Again, for this test it equals the op rate.  
-- **Latency mean:** The average time taken for each read request to complete.  
-- **Latency median:** The 50th percentile latency — half of the operations completed faster than this time.  
-- **Latency max:** The slowest single read request during the test.  
-- **Total partitions:** The total number of partitions read during the test.  
-- **Total errors:** Number of failed read operations.  
-- **GC metrics (Garbage Collection):** Shows whether JVM garbage collection paused Cassandra during the test.  
-- **Total operation time:** The total wall-clock time taken to run the benchmark.  
+The metrics below explain what each value in the `cassandra-stress` output represents:
 
-### Benchmark summary on Arm64
-Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SuSE shown, Ubuntu results were very similar):
+- Op rate (operations per second): the number of read operations Cassandra successfully executed per second.  
+- Partition rate: the number of partitions read per second. Since this is a read test, the partition rate equals the op rate.  
+- Row rate: the number of rows read per second. Again, for this test it equals the op rate.  
+- Latency mean: the average time taken for each read request to complete.  
+- Latency median: the 50th percentile latency - half of the operations completed faster than this time.  
+- Latency max: the slowest single read request during the test.  
+- Total partitions: the total number of partitions read during the test.  
+- Total errors: the number of failed read operations.  
+- GC metrics (Garbage Collection): shows whether JVM garbage collection paused Cassandra during the test.  
+- Total operation time: the total wall-clock time taken to run the benchmark.  
+
+## Benchmark summary for Arm64
+
+Results from the run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE shown; Ubuntu results were very similar):
 
 | Metric                     | Write Test             | Read Test              |
 |----------------------------|----------------------|----------------------|
@@ -356,12 +362,12 @@ Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm6
 | Total GC Time               | 0.0 s                | 0.0 s                |
 | Total Operation Time        | 0:00:00              | 0:00:02              |
 
-### Cassandra performance benchmarking notes
-When examining the benchmark results, you will notice that on the Google Axion C4A Arm-based instances:
+## What you've accomplished and what's next
 
-- The write operations achieved a high throughput of **10,690 op/s**, while read operations reached **4,962 op/s** on the `c4a-standard-4` Arm64 VM.  
-- Latency for writes was very low (mean: **3.7 ms**) compared to reads (mean: **6.3 ms**), indicating fast write processing on this Arm64 VM.  
-- The 95th and 99th percentile latencies show consistent performance, with writes significantly faster than reads.  
-- There were no errors or GC overhead, confirming stable and reliable benchmarking results.  
+You've successfully deployed Apache Cassandra 5.0.5 on a Google Axion C4A Arm-based virtual machine, validated its functionality, and measured its performance using cassandra-stress. The benchmark results on Google Axion C4A Arm-based instances demonstrate strong performance characteristics. 
 
-Overall, the Arm64 VM provides efficient and predictable performance, making it suitable for high-throughput Cassandra workloads.
+Write operations achieved high throughput of 10,690 op/s, while read operations reached 4,962 op/s on the `c4a-standard-4` Arm64 VM. Write latency was notably low with a mean of 3.7 ms compared to reads at 6.3 ms, indicating fast write processing on this Arm64 VM. The 95th and 99th percentile latencies show consistent performance, with writes significantly faster than reads. Zero errors or GC overhead confirm stable and reliable benchmarking results. 
+
+The Arm64 VM provides efficient and predictable performance, making it suitable for high-throughput Cassandra workloads. The low write latencies and high operation rates demonstrate that Arm-based infrastructure can effectively handle database operations that require both speed and consistency. These results provide a solid baseline for evaluating Cassandra performance on Arm64 architecture and can guide decisions about instance sizing and configuration for production deployments.
+
+To continue building on this foundation, you can explore advanced Cassandra configurations such as multi-node cluster deployments, replication strategies for high availability, or performance tuning for specific workload patterns. You might also investigate integrating Cassandra with application frameworks or comparing performance across different Arm-based instance types to optimize for your use case.

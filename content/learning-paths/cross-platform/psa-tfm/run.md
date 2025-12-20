@@ -8,7 +8,7 @@ weight: 4 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 {{% notice  MPS3%}}
-MPS3 users can jump to [here](#mps3).
+MPS3 users can jump to the [MPS3 section](#mps3).
 {{% /notice %}}
 
 

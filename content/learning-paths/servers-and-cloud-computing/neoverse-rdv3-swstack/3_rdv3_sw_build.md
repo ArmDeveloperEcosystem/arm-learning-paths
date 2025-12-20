@@ -92,7 +92,7 @@ There are two supported methods for building the reference firmware stack: **hos
 
 In this Learning Path, you will use the **container-based** approach.
 
-The container image uses your host source directory (~/rdv3) and performs the build inside Docker. Ensure Docker is installed on your machine. You can follow this [installation guide](https://learn.arm.com/install-guides/docker/).
+The container image uses your host source directory (~/rdv3) and performs the build inside Docker. Ensure Docker is installed on your machine. You can follow this [installation guide](/install-guides/docker/).
 
 
 After Docker is installed, you’re ready to build the container image.

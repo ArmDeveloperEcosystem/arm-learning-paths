@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 ### AWS Lambda
 
-You will now use the AWS Lambda console to retrieve the AWS Lambda endpoint for the static website. Before you begin make sure to prepare the `GetAverageTemperature` AWS Lambda function as explained in this [Learning Path](/learning-paths/laptops-and-desktops/win_aws_iot_lambda_dynamodb/). Then proceed as follows:
+You will now use the AWS Lambda console to retrieve the AWS Lambda endpoint for the static website. Before you begin make sure to prepare the `GetAverageTemperature` AWS Lambda function as explained in [Integrate AWS Lambda with DynamoDB for IoT applications running Windows on Arm](/learning-paths/laptops-and-desktops/win_aws_iot_lambda_dynamodb/). Then proceed as follows:
 1. Go to the AWS Lambda console, and click the `GetAverageTemperature` Lambda function.
 2. In the Lambda function dashboard, click the **Configuration** tab and then the **Function URL** as shown below:
 

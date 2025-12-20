@@ -1,71 +1,90 @@
 ---
-title: Install Django
+title: Install Django on your Arm-based VM
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Install Django on GCP VM
-This guide walks you through installing Django on a **Google Cloud Platform (GCP) SUSE Linux Arm64 VM**, including all dependencies, Python setup, and environment preparation.
+## Install Django and dependencies
 
-### Update Your System
-Before installing Django, it’s good practice to update your package list and upgrade installed software to ensure you have the latest versions and security patches.
+After connecting to your SUSE Linux Enterprise Server (SLES) VM using SSH, you'll update your system, install Python 3.11, and set up a virtual environment for your Django project.
+
+## Update your system
+
+Begin by refreshing your package list and upgrading installed software to ensure you have the latest versions and security patches:
 
 ```console
 sudo zypper refresh
 sudo zypper update -y
 ```
 
-### Install Python and Tools
-**Django** requires **Python 3.10+**. We will use Python 3.11, which is compatible with Django 5.
-You will also install `pip` for package management, and basic developer tools (`git`, `gcc`, and `make`) to build Python packages and work with Django projects.
+## Install Python 3.11 and development tools
+
+Django requires Python 3.10 or later. You'll install Python 3.11 along with pip (Python's package manager) and essential build tools needed for compiling Python packages:
+
 ```console
-sudo zypper install -y python311 python311-pip python311-devel
-sudo zypper install -y git gcc make
+sudo zypper install -y python311 python311-pip python311-devel git gcc make
 ```
 
-**Ensure that both Python and pip are installed correctly:**
+Verify that Python and pip are installed correctly:
 
-```console
+```bash
 python3.11 --version
-pip3 --version
+pip3.11 --version
 ```
 
-You should see an output similar to:
+The output is similar to:
+
 ```output
 Python 3.11.10
 pip 22.3.1 from /usr/lib/python3.11/site-packages/pip (python 3.11)
 ```
 
-### Create a Project Folder and Virtual Environment
-It’s recommended to create a dedicated project directory and use a **virtual environment** to isolate project dependencies.
+## Create a project directory and virtual environment
+
+Create a dedicated directory for your Django project and set up a Python virtual environment to isolate your project's dependencies:
 
 ```console
 mkdir ~/myproject && cd ~/myproject
 python3.11 -m venv venv
 source venv/bin/activate
 ```
-- `python3.11 -m venv venv` — creates a virtual environment named venv inside your project folder.
-- `source venv/bin/activate` — activates the virtual environment.
-Once activated, your command prompt will show (venv) at the beginning, indicating that you’re working inside an isolated Python environment.
 
-### Upgrade Pip and Install Django
-With your virtual environment active, upgrade pip and install Django using the following commands:
+The `python3.11 -m venv venv` command creates an isolated Python environment named `venv` inside your project folder. Running `source venv/bin/activate` activates this environment.
+
+Once activated, your command prompt displays `(venv)` at the beginning, indicating you're working inside an isolated Python environment where all packages are isolated from your system Python installation.
+
+## Upgrade pip and install Django
+
+With your virtual environment active, upgrade pip to the latest version:
 
 ```console
 python3 -m pip install --upgrade pip
-python3 -m pip install django
 ```
 
-**Confirm that Django is installed correctly by checking its version:**
+Now install Django and additional useful packages for web development:
 
-```console
+```bash
+python3 -m pip install django gunicorn
+```
+
+This installs:
+- **Django** — the web framework for building your application
+- **Gunicorn** — a production-ready WSGI (Web Server Gateway Interface) server for running Django applications
+
+Verify that Django is installed correctly:
+
+```bash
 django-admin --version
 ```
 
-You should see an output similar to:
+The output is similar to:
+
 ```output
 5.2.8
 ```
-Django is installed successfully and ready for project setup.
+
+## Summary and what's next
+
+You have successfully installed Django and all required dependencies on your Arm-based VM. Your environment is now ready for creating Django projects and applications!

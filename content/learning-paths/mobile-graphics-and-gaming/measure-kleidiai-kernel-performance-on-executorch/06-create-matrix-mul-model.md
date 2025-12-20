@@ -102,4 +102,4 @@ model/matrix_mul_pf32_gemm.pte
 ```
 These files are the inputs for upcoming executor_runner benchmarks, where you’ll measure and compare KleidiAI micro-kernel performance.
 
-The complete source code is available [here](../export-matrix-mul.py).
+The [complete source code](../export-matrix-mul.py) is available.

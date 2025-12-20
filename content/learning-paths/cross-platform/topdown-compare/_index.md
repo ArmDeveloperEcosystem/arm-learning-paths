@@ -51,7 +51,7 @@ further_reading:
         type: documentation
     - resource:
         title: How to use the Arm Performance Monitoring Unit and System Counter
-        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/arm_pmu/
+        link: /learning-paths/servers-and-cloud-computing/arm_pmu/
         type: website
 
 

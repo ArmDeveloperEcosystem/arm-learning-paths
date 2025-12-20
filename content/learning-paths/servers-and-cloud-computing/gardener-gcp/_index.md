@@ -1,18 +1,14 @@
 ---
 title: Deploy Gardener on Google Cloud C4A (Arm-based Axion VMs)
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 50
 
-who_is_this_for: This learning path is intended for software developers deploying and optimizing Gardener workloads on Linux/Arm64 environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
+who_is_this_for: This is an introductory topic for software developers deploying and optimizing Gardener workloads on Linux Arm64 environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
 
 learning_objectives:
-  - Provision an Arm-based SUSE SLES virtual machine on Google Cloud (C4A with Axion processors)
+  - Provision an Arm-based SUSE Linux Enterprise Server (SLES) virtual machine on Google Cloud (C4A with Axion processors)
   - Install and configure Gardener on a SUSE Arm64 (C4A) instance
-  - Deploy Garden, Seed, and Shoot clusters locally using KinD
+  - Deploy Garden, Seed, and Shoot clusters locally using Kubernetes in Docker (KinD)
   - Validate Gardener functionality by deploying workloads into a Shoot cluster
   - Perform baseline security benchmarking of Gardener-managed Kubernetes clusters using kube-bench on Arm64
 
@@ -62,7 +58,7 @@ further_reading:
       type: documentation
 
   - resource:
-      title: kube-bench documentation
+      title: kube-bench security benchmarking tool
       link: https://github.com/aquasecurity/kube-bench
       type: documentation
     

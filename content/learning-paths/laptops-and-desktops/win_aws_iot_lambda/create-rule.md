@@ -7,7 +7,7 @@ weight: 4
 layout: "learningpathall"
 ---
 ## Before you begin
-Before you begin, prepare the weather station emulator and connect it to AWS IoT Core by completing this [Learning Path](/learning-paths/laptops-and-desktops/win_aws_iot). Note that this Learning Path also includes the rule created in the [Learning Path about Amazon DynamoDB for IoT applications running on Arm64](/learning-paths/laptops-and-desktops/win_aws_iot_dynamodb).
+Before you begin, prepare the weather station emulator and connect it to AWS IoT Core by completing [Create IoT applications with Windows on Arm and AWS IoT Core](/learning-paths/laptops-and-desktops/win_aws_iot). Note that this Learning Path also includes the rule created in [Use Amazon DynamoDB for your IoT applications running on Arm64](/learning-paths/laptops-and-desktops/win_aws_iot_dynamodb).
 
 ## Create the rule
 Start by creating the rule: 

@@ -74,7 +74,7 @@ Clicking on "Object Detection" on the left, you will see some detail on the mode
 
 ![Edge Impulse](./images/EI_Project_3.png)
 
-In our project, the "Impulse" is fully created, trained, and optimized so we won't have to walk through those steps.  Edge Impulse has a ton of examples and docs available [here](https:://docs.edgeimpulse.com) to walk you through your first "Impulse" creation:
+In our project, the "Impulse" is fully created, trained, and optimized so we won't have to walk through those steps.  Edge Impulse has a ton of [examples and documentation](https:://docs.edgeimpulse.com) to walk you through your first "Impulse" creation:
 
 ![Edge Impulse](./images/EI_Project_4.png)
 

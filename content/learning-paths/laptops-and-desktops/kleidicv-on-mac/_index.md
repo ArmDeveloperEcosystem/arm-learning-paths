@@ -39,7 +39,7 @@ further_reading:
         type: blog
     - resource:
         title: Learn about function multiversioning
-        link: https://learn.arm.com/learning-paths/cross-platform/function-multiversioning/
+        link: /learning-paths/cross-platform/function-multiversioning/
         type: website
 
 

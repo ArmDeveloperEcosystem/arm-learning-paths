@@ -9,7 +9,7 @@ learning_objectives:
     - Tune PostgreSQL to increase performance
 
 prerequisites:
-    - Bare-metal or cloud [installation of PostgreSQL](/learning-paths//servers-and-cloud-computing/postgresql)
+    - Bare-metal or cloud [installation of PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql/)
 
 author: Julio Suarez
 

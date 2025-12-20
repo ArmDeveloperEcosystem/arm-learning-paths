@@ -1,19 +1,26 @@
 ---
-title: Django Baseline Testing on Google Axion C4A Arm Virtual Machine
+title: Verify Django installation and run the development server
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Django Baseline Testing on GCP SUSE VMs
-This baseline testing guide verifies that your **Django installation**, **web server**, and **basic application routing** are functioning correctly on a **Google Cloud SUSE Linux Arm64 (Axion C4A)** virtual machine.  
-You will first run the Django development server and access it from your browser, then create a simple Django app to ensure routing works.
+## Verify Django is working on your Arm-based VM
 
-### Baseline 1 — View Django Welcome Page
-This test confirms that Django is installed correctly and the server runs successfully.
+In this section, you'll confirm that Django is installed correctly and can serve web requests on your Google Cloud C4A VM. You'll create a Django project, run the development server, and access it from your browser. This hands-on verification ensures your environment is ready for development and testing.
 
-#### Create a new Django project
+By the end of this section, you'll have:
+- Created a Django project with proper directory structure
+- Configured Django to accept requests from your VM's external IP
+- Run the development server and accessed it from your browser
+- Built a simple Django app with custom routing and views
+- Verified that Django can handle HTTP requests and render responses
+
+Let's get started!
+
+## Create and test a basic Django project
+
 Run the following command to create a new Django project named `myproject`:
 
 ```console
@@ -32,33 +39,30 @@ myproject/
     ├── asgi.py
     └── wsgi.py
 ```
-- `manage.py` is Django’s command-line utility for project management (running server, migrations, etc.).
-- The inner `myproject/` folder contains the core configuration files that define your project’s settings and URLs.-
 
-#### Run initial migrations
-Migrations prepare your project’s database by creating the required tables for Django’s internal apps (admin, authentication, etc.):
+The `manage.py` file is Django's command-line utility for project management. The inner `myproject/` folder contains your project's core settings and URL configuration.
+
+## Run initial database migrations
+
+Set up your project's database by running migrations, which create the required tables for Django's built-in apps:
 
 ```console
 python3 manage.py migrate
 ```
 
-You should get output showing the Running Migrations (all of which should be "OK").
+The output shows all migrations applied successfully (marked "OK").
 
-#### Start the Django development server
-Before starting the Django development server, you must configure your ALLOWED_HOSTS setting to allow access from your VM’s external IP.
-This ensures that Django accepts HTTP requests from outside the localhost (e.g., when testing in a browser or from another machine).
+## Configure ALLOWED_HOSTS for external access
 
-**ALLOWED_HOSTS:** is a security setting in Django that defines which host/domain names your Django site can serve.
+Before starting the Django development server, you must configure your `ALLOWED_HOSTS` setting to allow access from your VM's external IP. This ensures that Django accepts HTTP requests from outside localhost (for example, when testing in a browser from another machine).
 
-- Navigate to Your Project Settings
-  Move into your Django project directory where the settings.py file is located.
+Navigate to your project settings directory:
 
-  ```console
-  cd ~/myproject/myproject/
-  ```
+```console
+cd ~/myproject/myproject/
+```
 
-- Open settings.py File
-  Use any text editor (like vi or nano) to open the file ("edit" is used as an example below).
+Open `settings.py` using a text editor:
 
   ```console
   edit myproject/settings.py
@@ -67,10 +71,11 @@ This ensures that Django accepts HTTP requests from outside the localhost (e.g.,
 - Locate the `ALLOWED_HOSTS` Line
   Inside the file, find the following line:
 
-   ```python
-  ALLOWED_HOSTS = []
-  ```
- This setting defines which host/domain names Django will serve.
+```python
+ALLOWED_HOSTS = []
+```
+
+Update it to allow your VM's external IP address:
 
 - Allow All Hosts (for Testing Only)
   To make your Django app accessible from your VM’s external IP address, update it to:
@@ -78,49 +83,54 @@ This ensures that Django accepts HTTP requests from outside the localhost (e.g.,
   ALLOWED_HOSTS = ['*']
   ```
 {{% notice Note %}}
-Allowing all hosts `('*')` is suitable **only for development or testing**.
-For production, replace `'*'` with specific domain names or IPs, such as your public IP address for your VM that you recorded earlier:
+For development and testing only, you can use `ALLOWED_HOSTS = ['*']` to allow all hosts. However, for production deployments, always specify explicit domain names or IP addresses such as `ALLOWED_HOSTS = ['your-external-ip', 'your-domain.com']`.
 {{% /notice %}}
 
 ```python
 ALLOWED_HOSTS = ['your-external-ip', 'your-domain.com']
 ```
 
-**Now start the Django development server:**
+Now that you've configured `ALLOWED_HOSTS`, start the development server:
 
-We can now start the Django development server since we have exposed TCP/8000 in our VM via firewall rules: 
 ```console
 python3 manage.py runserver 0.0.0.0:8000
 ```
 
-#### View in browser
-Open a web browser on your local machine (Chrome, Firefox, Edge, etc.) and enter the following URL in the address bar. Please replace "YOUR_VM_EXTERNAL_IP" with the external IP address of your VM that you saved off earlier:
+This starts the Django development server on port 8000, listening on all network interfaces.
 
-```console
+## Access Django in your browser
+
+Open a web browser on your local machine and navigate to:
+
+```
 http://<YOUR_VM_EXTERNAL_IP>:8000
 ```
-- Replace `<YOUR_VM_EXTERNAL_IP>` with the public IP of your GCP VM.
 
-If everything is set up correctly, you should see the default Django welcome page (“The install worked successfully!”). It looks like this:
+Replace `<YOUR_VM_EXTERNAL_IP>` with the public IP address of your GCP VM.
 
-![Django welcome page alt-text#center](images/django-welcome-page.png "Figure 1: Django web page")
+You should see the Django welcome page with the message "The install worked successfully!":
 
-### Baseline 2 — Create a Simple Django App
-This test ensures Django’s application routing and view rendering work as expected.
+![Screenshot of the Django welcome page displayed in a web browser. The page features a large heading stating The install worked successfully followed by a subheading congratulating the user on successfully installing Django. Below are instructions for the next steps, including editing the settings file and reading the Django documentation. The page has a clean white background with blue highlights. alt-text#center](images/django-welcome-page.png "Django welcome page")
 
-#### Stop the server
-Press `Ctrl + C` to stop the Django server if running.
+## Build a simple Django app with custom routing
 
-#### Create a new app
+This section demonstrates that Django's application routing and view rendering work correctly by creating a simple app with a custom view.
+
+## Stop the server
+
+Press **Ctrl + C** in your terminal to stop the Django development server.
+
+## Create a new Django app
+
 Within your Django project directory, create a new app named `hello`:
 
 ```console
 python3 manage.py startapp hello
 ```
 
-**This creates the following directory:**
+This generates the following directory structure with files for views, models, configuration, and more:
 
-```markdown
+```output
 hello/
 ├── admin.py
 ├── apps.py
@@ -130,19 +140,22 @@ hello/
 └── urls.py
 ```
 
-#### Create a simple view
-Edit `hello/views.py`. Replace your existing file with this:
+## Define a view function
+
+Edit `hello/views.py` and replace the entire file with:
 
 ```python
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("<h1>Hello, Django on GCP SUSE ARM64!</h1>")
+    return HttpResponse("<h1>Hello, Django on Arm!</h1>")
 ```
-This defines a simple view function that sends a basic HTML message as the HTTP response.
 
-#### Create app URL configuration
-Create a new file `hello/urls.py` and add:
+This simple view function returns a basic HTML message as an HTTP response.
+
+## Create URL configuration for your app
+
+Create a new file `hello/urls.py`:
 
 ```python
 from django.urls import path
@@ -152,10 +165,12 @@ urlpatterns = [
     path('', views.home, name='home'),
 ]
 ```
-This maps the root URL `(/)`of your app to the `home()` view function.
 
-#### Link the app to the main project
-Replace your default `myproject/urls.py` file with this version.
+This maps the root URL path to your `home()` view function.
+
+## Include the app in your project's main URLs
+
+Edit `myproject/urls.py` to include the `hello` app's URLs:
 
 ```python
 """myproject URL Configuration
@@ -182,11 +197,12 @@ urlpatterns = [
     path('', include('hello.urls')),
 ]
 ```
-This tells Django to delegate routing for the root path (`''`) to the `hello` app’s URLs.
 
-#### Add the app to settings
-This makes Django aware of your new app so it can load its configuration and routes.
-Edit `myproject/settings.py` → add `'hello'` to INSTALLED_APPS:
+This tells Django to route the root path to your `hello` app.
+
+## Register the app in Django settings
+
+Django needs to know about your new app. Edit `myproject/settings.py` and add `'hello'` to the `INSTALLED_APPS` list:
 
 ```python
 INSTALLED_APPS = [
@@ -199,18 +215,27 @@ INSTALLED_APPS = [
     'hello',
 ]
 ```
-#### Run the server again
+
+## Start the server again
+
+Restart the Django development server:
 
 ```console
 python3 manage.py runserver 0.0.0.0:8000
 ```
 
-#### Test your app
-Open in browser:
+## Test your custom app
 
-```console
-http://<YOUR_VM_IP>:8000
+Open your browser and navigate to:
+
 ```
-You should see the Django app. It looks like this:
+http://<YOUR_VM_EXTERNAL_IP>:8000
+```
 
-![Django App alt-text#center](images/django-app.png "Figure 2: Django App")
+You should now see your custom message displayed:
+
+![Screenshot of a web browser displaying a Django app with a large heading that reads Hello, Django on Arm centered on a clean white background. The page contains no additional content or navigation, creating a straightforward and welcoming tone. alt-text#center](images/django-app.png "Django custom app")
+
+## Summary and what's next
+
+You've successfully verified that Django is installed and working on your Arm-based VM. Your application can serve web requests, handle routing, and render custom views. Great job, you're ready to benchmark your Django application!

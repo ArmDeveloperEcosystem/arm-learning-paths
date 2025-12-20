@@ -1,6 +1,6 @@
 ---
 title: RabbitMQ use case 2 - WhatsApp Notification
-weight: 7 
+weight: 8 
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -10,7 +10,7 @@ layout: learningpathall
 ## WhatsApp Notification Use Case using RabbitMQ  
 This document demonstrates a **real-world asynchronous messaging use case** where RabbitMQ is used to process WhatsApp notifications reliably using a worker-based architecture.
 
-### Use Case Overview
+### Use case overview
 
 In many production systems, sending WhatsApp notifications must be:
 - Reliable
@@ -19,7 +19,7 @@ In many production systems, sending WhatsApp notifications must be:
 
 RabbitMQ is used as a **message broker** to decouple message production from message consumption.
 
-### Architecture Flow
+### Architecture flow
 
 1. Application publishes a message to RabbitMQ
 2. RabbitMQ routes the message to a queue
@@ -34,7 +34,7 @@ RabbitMQ is used as a **message broker** to decouple message production from mes
 - Python 3.8+
 - `pika` Python client library installed
 
-### Install Python Dependencies
+### Install Python dependencies
 Installs Python and the RabbitMQ Python client needed to build a consumer.
 
 ```console
@@ -42,7 +42,7 @@ sudo zypper install -y python3 python3-pip
 pip3 install pika
 ```
 
-### RabbitMQ Topology
+### RabbitMQ topology
 This use case uses a direct exchange topology for exact-match routing.
 
 **Exchanges**
@@ -56,7 +56,7 @@ This use case uses a direct exchange topology for exact-match routing.
 - Routing key: **whatsapp** – Ensures only WhatsApp-related messages are routed.
 - Queue: **whatsapp.notifications**– Final destination where messages are delivered for processing.
 
-### Declare RabbitMQ Resources
+### Declare RabbitMQ resources
 Creates the required exchange, queue, and binding for WhatsApp notifications.
 
 - `Declare exchange`: Creates a durable direct exchange named notifications to route messages using exact routing keys.
@@ -142,7 +142,7 @@ Confirms topology correctness before consuming messages.
 +---------------+------------------------+------------------------+
 ```
 
-### WhatsApp Worker Implementation
+### WhatsApp worker implementation
 The worker attaches as a **blocking consumer** to the `whatsapp.notifications` queue and processes incoming messages.
 
 Create a `whatsapp_worker.py` file with the content below:
@@ -202,7 +202,7 @@ print("[DEBUG] Starting consumer loop (this should block)...")
 channel.start_consuming()
 ```
 
-### Start the Worker
+### Start the worker
 Run the worker in a dedicated terminal session:
 
 ```console
@@ -218,17 +218,13 @@ The worker is running correctly and waiting for messages without exiting.
 [DEBUG] Declaring queue...
 [DEBUG] Setting QoS...
 WhatsApp Worker started. Waiting for messages...
-[DEBUG] Starting consumer loop (this should BLOCK)...
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: Your order #1234 has been confirmed
-[Worker] Message sent successfully
-[Worker] Sending WhatsApp message to +911234567890
+[DEBUG] Starting consumer loop (this should block)...
 ```
 
 The process must block without returning to the shell prompt.
 
-### Publish a Test Message
-From another terminal: Publishes a WhatsApp notification message to RabbitMQ.
+### Publish a test message
+From another SSH terminal: Publishes a WhatsApp notification message to RabbitMQ.
 
 ```console
 ./rabbitmqadmin publish \
@@ -237,7 +233,15 @@ From another terminal: Publishes a WhatsApp notification message to RabbitMQ.
   payload='{"phone":"+911234567890","message":"Hello from RabbitMQ"}'
 ```
 
-### Message Consumption Validation
+You should see the following output from whatsapp_worker.py that is running in the first SSH terminal:
+
+```output
+[Worker] Sending WhatsApp message to +911234567890
+[Worker] Message content: Hello from RabbitMQ
+[Worker] Message sent successfully
+```
+
+### Message consumption validation
 The worker terminal displays logs similar to:
 
 ```output
@@ -245,30 +249,9 @@ The worker terminal displays logs similar to:
 [DEBUG] Declaring queue...
 [DEBUG] Setting QoS...
 WhatsApp Worker started. Waiting for messages...
-[DEBUG] Starting consumer loop (this should BLOCK)...
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: Your order #1234 has been confirmed
-[Worker] Message sent successfully
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: Your order #1234 has been confirmed
-[Worker] Message sent successfully
-[Worker] Sending WhatsApp message to +9111
-[Worker] Message content: Test-1
-[Worker] Message sent successfully
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: Validation test
-[Worker] Message sent successfully
+[DEBUG] Starting consumer loop (this should block)...
 [Worker] Sending WhatsApp message to +911234567890
 [Worker] Message content: Hello from RabbitMQ
-[Worker] Message sent successfully
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: Hello from RabbitMQ
-[Worker] Message sent successfully
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: FINAL validation test
-[Worker] Message sent successfully
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: FINAL validation test
 [Worker] Message sent successfully
 ```
 **What this confirms:**
@@ -277,28 +260,28 @@ WhatsApp Worker started. Waiting for messages...
 - Queue consumption is successful
 - Manual acknowledgments are applied
 
-End-to-end message flow validated.
+This validates the end-to-end message flow.
 
-### Verify Queue State
+### Verify queue state
 
 ```console
 ./rabbitmqadmin list queues name messages consumers
 ```
 
-Expected output:
+Expected output is similar to:
 
 ```output
 +------------------------+----------+-----------+
 |          name          | messages | consumers |
 +------------------------+----------+-----------+
-| jobs                   | 1        | 0         |
-| order.events           | 1        | 0         |
+| jobs                   | 0        | 0         |
+| order.events           | 2        | 0         |
 | testqueue              | 1        | 0         |
 | whatsapp.notifications | 0        | 1         |
 +------------------------+----------+-----------+
 ```
 
-**This confirms that:**
+This confirms that:
 
 - Messages were consumed successfully
 - One active consumer is connected

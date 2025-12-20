@@ -86,7 +86,7 @@ On the Simulation and Visualization node, execute:
 
 Once both machines are running their launch scripts, the Visualizer container exposes a web-accessible interface at: http://6080/vnc.html.
 
-Open this link in your browser to observe the simulation in real time. The demo closely resembles the output in the [previous Learning Path, Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](http://learn.arm.com/learning-paths/automotive/openadkit1_container/4_run_openadkit/). 
+Open this link in your browser to observe the simulation in real time. The demo closely resembles the output in the [previous Learning Path, Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](/learning-paths/automotive/openadkit1_container/4_run_openadkit/). 
 
 ![Distributed OpenAD Kit simulation running on two Arm-based instances with visualizer and simulator coordination over DDS alt-text#center](split_aws_run.gif "Visualizer output from a distributed OpenAD Kit simulation showing ROS 2 modules running across two cloud instances using DDS communication.")
 

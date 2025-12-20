@@ -16,8 +16,8 @@ Before migrating, confirm that your applications can run on the Arm 64-bit (`arm
 
 Use the following tools to inspect container images for multi-architecture support:
 
-- [KubeArchInspect](https://learn.arm.com/learning-paths/servers-and-cloud-computing/kubearchinspect/): scans container images in your Kubernetes cluster.
-- [Docker inspect script](https://learn.arm.com/learning-paths/cross-platform/docker/check-images/): checks local image manifests for platform variants.
+- [KubeArchInspect](/learning-paths/servers-and-cloud-computing/kubearchinspect/): scans container images in your Kubernetes cluster.
+- [Docker inspect script](/learning-paths/cross-platform/docker/check-images/): checks local image manifests for platform variants.
 
 {{% notice Note %}}
 The OpenShift Pipelines Tutorial supports `arm64` and has no architecture restrictions.

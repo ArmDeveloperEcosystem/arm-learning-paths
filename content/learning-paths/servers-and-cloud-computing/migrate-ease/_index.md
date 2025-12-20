@@ -43,7 +43,7 @@ further_reading:
         type: website
     - resource:
         title: Migrating Applications to Arm Servers
-        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/migration/
+        link: /learning-paths/servers-and-cloud-computing/migration/
         type: website
 
 

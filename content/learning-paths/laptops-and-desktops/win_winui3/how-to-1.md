@@ -17,7 +17,7 @@ WinUI 3 is an open-source project, offering backwards compatibility with existin
 
 In this learning path you will implement a Win UI 3 application, which will perform square matrix multiplication. The idea is to reproduce the same functionality used in [Windows Forms learning path](/learning-paths/laptops-and-desktops/win_forms). You will also be able to measure performance improvements on Arm64 architecture.
 
-You can find the complete code used in this learning path [here](https://github.com/dawidborycki/Arm64.WinUIApp.git).
+You can find the [complete code on GitHub](https://github.com/dawidborycki/Arm64.WinUIApp.git).
 
 ## Before you begin
 Before you begin the implementation, install Visual Studio 2022 with the following workloads:
