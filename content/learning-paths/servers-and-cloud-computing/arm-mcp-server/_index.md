@@ -1,10 +1,6 @@
 ---
 title: Migrate an x86 application to Arm using the Arm MCP Server
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 20
 
 who_is_this_for: This is an advanced topic for software developers who want to use AI-powered tools to migrate x86 applications to Arm-based cloud instances.
@@ -46,6 +42,18 @@ further_reading:
         title: Model Context Protocol Documentation
         link: https://modelcontextprotocol.io/
         type: documentation
+    - resource:
+        title: Install Docker
+        link: /install-guides/docker/
+        type: install-guide
+    - resource:
+        title: Migrate applications to Arm servers
+        link: /learning-paths/servers-and-cloud-computing/migration/
+        type: learning-path
+    - resource:
+        title: Learn about Arm Neoverse processors
+        link: /learning-paths/servers-and-cloud-computing/intro/
+        type: learning-path
 
 
 

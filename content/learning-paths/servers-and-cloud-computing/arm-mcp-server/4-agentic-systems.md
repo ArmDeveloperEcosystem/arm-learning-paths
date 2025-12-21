@@ -69,7 +69,7 @@ Steps to follow:
 * Look at the contents of any requirements.txt files line-by-line and send each line to the knowledge_base_search tool to check each package for Arm compatibility. If a package isn't compatible, change it to a compatible version.
 * Look at the codebase that you have access to, and determine what the language used is.
 * Run the migrate_ease_scan tool on the codebase, using the appropriate language scanner based on what language the codebase uses, and apply the suggested changes.
-* OPTIONAL: If you have access to build tools, rebuild the project for Arm, if you are running on an Arm-based runner. Fix any compilation errors.
+* OPTIONAL: If you have access to build tools, rebuild the project for Arm, if you're running on an Arm-based runner. Fix any compilation errors.
 * OPTIONAL: If you have access to any benchmarks or integration tests for the codebase, run these and report the timing improvements to the user.
 
 Pitfalls to avoid:

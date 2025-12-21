@@ -216,7 +216,7 @@ The assistant will:
    * Remove architecture-specific build flags
    * Update container and dependency configurations as needed
      
-## Verifying the Migration
+## Verify the migration
 
 After reviewing and accepting the changes, build and run the application on an Arm system:
 
