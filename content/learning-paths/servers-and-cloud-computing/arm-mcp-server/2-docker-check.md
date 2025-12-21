@@ -14,7 +14,9 @@ A common first step when migrating a containerized application to Arm is verifyi
 
 ## Example: Legacy CentOS 6 Application
 
-Consider an application built on CentOS 6, a legacy Linux distribution that has reached end of life (EOL). The following Dockerfile represents a typical x86-optimized, compute-heavy benchmark application that you might encounter when migrating older workloads.
+Consider an application built on CentOS 6, a legacy Linux distribution that has reached end of life (EOL). This example represents a typical x86-optimized, compute-heavy benchmark application that you might encounter when migrating older workloads.
+
+Before examining the Dockerfile, note that it contains several x86-specific elements that need attention during migration: the `centos:6` base image (which might lack arm64 support), the `-mavx2` compiler flag for x86 AVX2 SIMD instructions, and C++ source files with x86 intrinsics.
 
 Copy this Dockerfile into VS Code using GitHub Copilot or another agentic IDE connected to the Arm MCP Server:
 
@@ -73,11 +75,6 @@ RUN chmod +x start.sh
 CMD ["./start.sh"]
 ```
 
-This Dockerfile has several x86-specific elements:
-- The `centos:6` base image
-- The `-mavx2` compiler flag for x86 AVX2 SIMD instructions
-- C++ source files containing x86 intrinsics (which you will examine in the next section)
-
 ## Using the Arm MCP Server to Check Compatibility
 
 With the Arm MCP Server connected to your AI assistant, you can quickly verify base image compatibility using a simple natural language prompt:
@@ -86,6 +83,10 @@ With the Arm MCP Server connected to your AI assistant, you can quickly verify b
 Check this base image for Arm compatibility
 ```
 
-The AI assistant will use the `check_image` or `skopeo` tool to inspect the image and return a report. For `centos:6`, you would discover that this legacy image does **not** support `arm64` architecture.
+The AI assistant will use the `check_image` or `skopeo` tool to inspect the image and return a report. For `centos:6`, you'd discover that this legacy image doesn't support `arm64` architecture.
 
-This simple interaction demonstrates how direct AI chat can quickly surface compatibility issues. In the next section, you'll see how to resolve these issues automatically using a fully agentic migration workflow with prompt files.
+## What you've accomplished and what's next
+
+In this section, you've used direct AI chat with the Arm MCP Server to check Docker base images for Arm compatibility. You've seen how a simple natural language prompt can quickly identify compatibility issues without manually inspecting image manifests.
+
+In the next section, you'll migrate x86 SIMD code to Arm using a fully agentic workflow with prompt files.
