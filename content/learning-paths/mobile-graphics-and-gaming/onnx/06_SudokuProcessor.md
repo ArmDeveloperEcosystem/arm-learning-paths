@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Sudoku Processor: From Image to Solution"
+title: "Sudoku Processor. From Image to Solution"
 weight: 7
 layout: "learningpathall"
 

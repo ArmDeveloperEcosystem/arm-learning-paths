@@ -8,7 +8,7 @@ layout: "learningpathall"
 ---
 
 ## Objective
-This step gets you ready to build, export, run, and optimize ONNX models on Arm64. You’ll set up Python, install ONNX & ONNX Runtime, confirm hardware-backed execution providers, and—optionally—prepare multi-arch Docker builds or source builds for advanced acceleration.
+This step gets you ready to build, export, run, and optimize ONNX models on Arm64. You’ll set up Python, install ONNX & ONNX Runtime, confirm hardware-backed execution providers.
 
 ## Choosing the hardware
 You can choose a variety of hardware, including:
