@@ -1,5 +1,5 @@
 ---
-title: Direct AI Chat
+title: Verify Docker image compatibility with Arm using AI
 weight: 3
 
 ### FIXED, DO NOT MODIFY

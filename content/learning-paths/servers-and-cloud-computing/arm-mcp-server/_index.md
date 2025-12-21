@@ -1,5 +1,5 @@
 ---
-title: Migrate an x86 application to Arm using the Arm MCP Server
+title: Automate x86-to-Arm application migration using Arm MCP Server
 
 minutes_to_complete: 20
 
