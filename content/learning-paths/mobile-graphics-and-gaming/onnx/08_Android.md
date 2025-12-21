@@ -1053,3 +1053,7 @@ Despite these constraints, the application stands as a practical and self-contai
 From here, there are many natural directions for improvement. You could enhance robustness by incorporating additional training data or more advanced preprocessing, extend the app to use live camera input with CameraX, refine the user experience with animations and progress feedback, or experiment with quantized models on devices that support additional execution providers. The same architectural pattern can also be applied beyond Sudoku, to other document- or grid-based vision problems where lightweight, on-device inference is essential.
 
 This concludes the learning path and provides a solid foundation for building, optimizing, and deploying ONNX-based machine learning applications on Arm64 and mobile platforms.
+
+## Companion code
+1. (Sudoku solver) [https://github.com/dawidborycki/SudokuSolverOnnx.git]
+2. (Python code) [https://github.com/dawidborycki/ONNX-LP.git]
