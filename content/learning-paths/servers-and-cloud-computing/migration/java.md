@@ -89,7 +89,7 @@ bool UseSimpleArrayEquals                     = false                           
 
 Depending on your application, you may want to investigate the vector processing flags for SIMD, NEON, SVE, and CRC. 
 
-You can try [Process Watch](https://learn.arm.com/learning-paths/servers-and-cloud-computing/processwatch/) to monitor the usage of SIMD and CRC instructions. 
+You can try [Process Watch](/learning-paths/servers-and-cloud-computing/processwatch/) to monitor the usage of SIMD and CRC instructions. 
 
 Refer to the [Java documentation](https://docs.oracle.com/en/java/javase/17/docs/specs/man/java.html) for more information about the flags.
 

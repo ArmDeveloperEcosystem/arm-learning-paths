@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Android NDK and Android Studio -  Environment Setup
 
-#### Plartform Required 
+#### Platform Required  
 - An AWS Graviton4 r8g.16xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server or Arm based laptop.
 - An Arm-powered smartphone with the i8mm feature running Android, with 16GB of RAM.
 - A USB cable to connect your smartphone to your development machine.

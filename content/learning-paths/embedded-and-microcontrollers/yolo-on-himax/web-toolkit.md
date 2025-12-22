@@ -54,7 +54,7 @@ Run the script corresponding to the OS of your host machine.
   {{< tab header="Linux" language="shell">}}
 ./we2_local_image_gen project_case1_blp_wlcsp.json
   {{< /tab >}}
-  {{< tab header="MacOS" language="shell">}}
+  {{< tab header="macOS" language="shell">}}
 ./we2_local_image_gen_macOS_arm64 project_case1_blp_wlcsp.json
   {{< /tab >}}
 {{< /tabpane >}}

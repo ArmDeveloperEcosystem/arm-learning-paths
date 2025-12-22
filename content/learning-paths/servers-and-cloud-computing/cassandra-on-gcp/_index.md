@@ -1,9 +1,5 @@
 ---
-title:  Deploy Cassandra on a Google Axion C4A virtual machine
-
-draft: true
-cascade:
-    draft: true
+title: Deploy Cassandra on a Google Axion C4A virtual machine
 
 minutes_to_complete: 30
 
@@ -18,7 +14,7 @@ learning_objectives:
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
-  - Familiarity with Cassandra architecture, replication, and [Cassandra partitioning & event-driven I/O](https://cassandra.apache.org/doc/stable/cassandra/architecture/)
+  - Familiarity with Cassandra architecture, replication, and [Cassandra partitioning and event-driven I/O](https://cassandra.apache.org/doc/stable/cassandra/architecture/)
 
 author: Pareena Verma
 

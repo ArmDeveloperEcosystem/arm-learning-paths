@@ -15,7 +15,7 @@ The example has been tested on [AWS EC2](https://aws.amazon.com/ec2/) and an [Am
 
 ## Installation
 
-You need Docker to run Open AD Kit. Refer to the [Docker install guide](https://learn.arm.com/install-guides/docker/) to learn how to install Docker on an Arm platform.
+You need Docker to run Open AD Kit. Refer to the [Docker install guide](/install-guides/docker/) to learn how to install Docker on an Arm platform.
 
 First, verify Docker is installed on your development computer by running:
 

@@ -15,10 +15,10 @@ In this learning path you will learn how to create a Desktop application for Win
 
 Here, you will use the posts endpoint of the `JSONPlaceholder`. This endpoint enables you to retrieve the list of hypothetical posts.
 
-You can find the the complete code used in the learning path [here](https://github.com/dawidborycki/electron-sample-app.git)
+You can find the [complete code on GitHub](https://github.com/dawidborycki/electron-sample-app.git).
 
 ## Before you begin
-Before you begin, install Node.JS for Arm64. You can find the installer [here](https://nodejs.org/en/download). In this learning path, you will use version 20.10.0. The installation process is automatic. However, make sure to check the "Automatically install the necessary tools" checkbox so that it automatically installs the build tools for the NPM packages:
+Before you begin, install Node.JS for Arm64. You can find the [Node.js installer](https://nodejs.org/en/download). In this learning path, you will use version 20.10.0. The installation process is automatic. However, make sure to check the "Automatically install the necessary tools" checkbox so that it automatically installs the build tools for the NPM packages:
 
 ![fig1](figures/01.png)
 

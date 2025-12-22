@@ -10,7 +10,7 @@ layout: "learningpathall"
 ## Objective
 In this section, you will use the NumPy package you installed previously to create a sample application. The application will use NumPy to perform fast Fourier transforms (FFTs) of the synthesized sine waves corrupted by the noise. The application will run the FFTs several times for the variable lengths of the input waves. The application will measure the code execution time and we can then analyze the performance boost of the Python interpreter and NumPy package on Arm64. 
 
-You can find the complete code [here](https://github.com/dawidborycki/PythonOnWoA)
+You can find the [complete code on GitHub](https://github.com/dawidborycki/PythonOnWoA).
 
 ## Creating the application
 Start by creating a new file, `sample.py`:

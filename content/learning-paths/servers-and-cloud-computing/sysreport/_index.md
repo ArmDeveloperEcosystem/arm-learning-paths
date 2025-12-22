@@ -32,15 +32,15 @@ operatingsystems:
 further_reading:
     - resource:
         title: Perf for Linux on Arm (LinuxPerf)
-        link: https://learn.arm.com/install-guides/perf/
+        link: /install-guides/perf/
         type: website
     - resource:
         title: AWS Perf (APerf) 
-        link: https://learn.arm.com/install-guides/aperf/
+        link: /install-guides/aperf/
         type: website
     - resource:
         title: Arm Performance Studio
-        link: https://learn.arm.com/install-guides/ams/
+        link: /install-guides/ams/
         type: website
 
 

@@ -13,7 +13,7 @@ In this section, you will learn how to deploy the .NET Aspire application you cr
 To create an Arm64 VM, follow these steps:
 1. Create a Google Cloud Account. If you don’t already have an account, sign up for Google Cloud.
 
-2. Open the Google Cloud Console [here](https://console.cloud.google.com).
+2. Open the [Google Cloud Console](https://console.cloud.google.com).
 
 3. Navigate to Compute Engine. In the Google Cloud Console, open the Navigation menu, and go to **Compute Engine** > **VM Instances**. Enable any relevant APIs if prompted.
 

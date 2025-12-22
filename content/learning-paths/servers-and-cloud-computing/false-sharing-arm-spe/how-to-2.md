@@ -66,7 +66,7 @@ If the output is blank then SPE is not available.
 
 You can install and run a Python script named Sysreport to summarize your system's performance profiling capabilities.
 
-See the Learning Path [Get ready for performance analysis with Sysreport](https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/) to learn how to install and run it.
+See the Learning Path [Get ready for performance analysis with Sysreport](/learning-paths/servers-and-cloud-computing/sysreport/) to learn how to install and run it.
 
 Look at the Sysreport output and confirm SPE is available by checking the `perf sampling` field. 
 

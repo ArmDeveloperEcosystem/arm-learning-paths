@@ -72,4 +72,4 @@ You can find detailed information on MTE modes in the [MTE Guide for Android OS]
 
 The last step is to enable MTE in the phone settings. 
 
-For this, follow the indications provided in the Learning Path [Memory Tagging Extension on Google Pixel 8](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/mte_on_pixel8/).
+For this, follow the indications provided in the Learning Path [Memory Tagging Extension on Google Pixel 8](/learning-paths/mobile-graphics-and-gaming/mte_on_pixel8/).

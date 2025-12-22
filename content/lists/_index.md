@@ -8,18 +8,18 @@ title: "Learn more about Arm Servers and Cloud Computing"
 |-----------------------------------|---------------|
 | [Improving Java performance on Neoverse N1 systems](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/java-performance-on-neoverse-n1) | Blog |
 | [Spark on AWS Graviton2 best practices K-Means clustering case study](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/optimize-spark-on-aws-graviton2-best-practices-k-means-clustering) | Blog |
-| [Learn how to Tune MySQL](https://learn.arm.com/learning-paths/servers-and-cloud-computing/mysql_tune/)  | Learning Path |
-| [Learn how to Tune PostgreSQL](https://learn.arm.com/learning-paths/servers-and-cloud-computing/postgresql_tune/)  | Learning Path |
-| [Learn how to tune Nginx](https://learn.arm.com/learning-paths/servers-and-cloud-computing/nginx_tune/)  | Learning Path |
-| [Learn how to tune Envoy](https://learn.arm.com/learning-paths/servers-and-cloud-computing/envoy_tune/) | Learning Path |
-| [Learn how to tune Redis](https://learn.arm.com/learning-paths/servers-and-cloud-computing/redis_tune/) | Learning Path |
+| [Learn how to Tune MySQL](/learning-paths/servers-and-cloud-computing/mysql_tune/)  | Learning Path |
+| [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/)  | Learning Path |
+| [Learn how to tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune/)  | Learning Path |
+| [Learn how to tune Envoy](/learning-paths/servers-and-cloud-computing/envoy_tune/) | Learning Path |
+| [Learn how to tune Redis](/learning-paths/servers-and-cloud-computing/redis_tune/) | Learning Path |
 | [DPDK Tuning Guide](https://developer.arm.com/documentation/109701/1-0/?lang=en) | Documentation |
 
 ## How can I migrate my application to Arm? 
 
 | Migration Guides                  | Resource Type |
 |-----------------------------------|---------------|
-| [Migrating applications to Arm servers](https://learn.arm.com/learning-paths/servers-and-cloud-computing/migration/) | Learning Path |
+| [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) | Learning Path |
 | [Migrating to AWS Graviton with AWS container services](https://www.youtube.com/watch?v=9JZVomrx6uQ) | Video |
 
 ## How does Arm Neoverse performance compare?

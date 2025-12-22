@@ -13,7 +13,7 @@ learning_objectives:
     - Run the CCA software stack using MEC (Memory Encryption Contexts)
 
 prerequisites:
-    - An AArch64 or x86_64 computer running Linux or MacOS. You can use cloud instances, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
+    - An AArch64 or x86_64 computer running Linux or macOS. You can use cloud instances, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
 author:
     - Pareena Verma

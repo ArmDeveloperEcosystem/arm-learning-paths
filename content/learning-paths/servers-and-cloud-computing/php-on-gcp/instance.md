@@ -11,7 +11,7 @@ layout: learningpathall
 In this section, you’ll provision a Google Cloud Axion C4A Arm virtual machine (VM) using the `c4a-standard-4` (four vCPUs, 16 GB memory) machine type in the Google Cloud Console. This process sets up a high-performance Arm server for PHP workloads, leveraging the scalability and efficiency of Axion C4A and SUSE Linux on Google Cloud.
 
 {{% notice Note %}}
-For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
+For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
 ## Provision your Google Axion C4A instance

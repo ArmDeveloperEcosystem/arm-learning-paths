@@ -1,6 +1,6 @@
 ---
 # User change
-title: Run confidentail containers with encrypted images using Arm CCA and Trustee
+title: Run confidential containers with encrypted images using Arm CCA and Trustee
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -99,10 +99,10 @@ Generate an image encryption key:
 head -c 32 /dev/urandom | openssl enc >image.key
 ```
 
-Publish the encryption key as a KBS secret resourse. This resource can be obtained only with an attestation token with **affirming** status.
+Publish the encryption key as a KBS secret resource. This resource can be obtained only with an attestation token with **affirming** status.
 
 Learn more about how the attestation result is used to evaluate the trustworthiness of a CCA realm and how attestation policy gates secrets release in
-["Run an end-to-end Attestation with Arm CCA and Trustee"](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cca-trustee)
+["Run an end-to-end Attestation with Arm CCA and Trustee"](/learning-paths/servers-and-cloud-computing/cca-trustee)
 ``` bash
 ./publish-key.sh
 ```
@@ -178,13 +178,13 @@ host login: root
 ## Inject the local docker registry self-signed certificate
 
 The local docker registry service was deployed with a self-signed certificate.
-To trust this certicate it needs to be added into the CA certificates list in the guest VM image.
+To trust this certificate it needs to be added into the CA certificates list in the guest VM image.
 
 Inject the local docker repository certificate into the image:
 ``` bash { output_lines = "2-6" }
 inject_registry_cert.sh
 
-### Injecting the ceritficate into guest file system image
+### Injecting the certificate into guest file system image
 [ 2250.576395] loop0: detected capacity change from 0 to 518144
 [ 2250.588006] EXT4-fs (loop0): mounted filesystem ae947b26-4cdd-4e7c-8018-52b3e1594c9e r/w with ordered data mode. Quota mode: none.
 [ 2250.862743] EXT4-fs (loop0): unmounting filesystem ae947b26-4cdd-4e7c-8018-52b3e1594c9e.
@@ -211,7 +211,7 @@ REM1: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 REM2: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 REM3: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 ```
-Realm Extensible Measurements (REMs) are not used for attesation in this Learning Path and can be ignored.
+Realm Extensible Measurements (REMs) are not used for attestation in this Learning Path and can be ignored.
 
 
 ## Endorse Realm Initial Measurement (RIM)
@@ -224,7 +224,7 @@ In the terminal where you started Trustee services, run **endorse-rim.sh** scrip
 Reference Values Updated
 ```
 
-## Launch a Confidentail container in CCA realm
+## Launch a Confidential container in CCA realm
 
 Reduce amount of kernel messages printed to console:
 ``` bash
@@ -271,13 +271,13 @@ These messages can be ignored. The docker image will be downloaded by **image-rs
 {{% /notice %}}
 
 {{% notice Failed attestation note %}}
-If you forget to endorse RIM for your environment or make a mistake doing that, then CCA realm attesation would fail.
+If you forget to endorse RIM for your environment or make a mistake doing that, then CCA realm attestation would fail.
 In this case you will see an image decryption error when starting a confidential container with an encrypted image.
 ```
 FATA[0189] failed to create shim task: rpc status: Status { code: INTERNAL, message: "[CDH] [ERROR]: Image Pull error: Failed to pull image registry:5000/busybox_encrypted from all mirror/mapping locations or original location: image: registry:5000/busybox_encrypted:latest, error: Errors happened when pulling image: Failed to decrypt layer: Failed to decrypt the image layer, please ensure that the decryption key is placed and correct", details: [], special_fields: SpecialFields { unknown_fields: UnknownFields { fields: None }, cached_size: CachedSize { size: 0 } } }
 ```
 
-By checking KBS logs (in the termial where you run Trustee services)  you could see that the ecnryption key couldn't be obtained because of an AS policy:
+By checking KBS logs (in the terminal where you run Trustee services)  you could see that the encryption key couldn't be obtained because of an AS policy:
 ``` bash { output_lines = "2-5" }
 docker compose logs kbs
 
@@ -287,10 +287,10 @@ kbs-1  | [2025-12-08T12:25:40Z ERROR kbs::error] PolicyDeny
 ```
 {{% /notice %}}
 
-You have successfully run a confidentail container with Arm CCA using an encrypted image.
+You have successfully run a confidential container with Arm CCA using an encrypted image.
 
 {{% notice Unencrypted docker images note %}}
-In this Learnig Path environment you can also run confidential containers in Arm CCA realm from any unencrypted docker images.
+In this Learning Path environment you can also run confidential containers in Arm CCA realm from any unencrypted docker images.
 Please notice that you need to define the **annotation** parameter so **image-rs** knows where to pull the image from.
 For example:
 ```

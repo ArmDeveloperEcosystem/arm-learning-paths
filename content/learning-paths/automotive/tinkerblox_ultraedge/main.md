@@ -97,21 +97,21 @@ execution fabric for high-performance compute infrastructure
 
 ### 5.2 High-Level Architecture
 
-**UltraEdge ‘Core’ Layer **  
+**UltraEdge ‘Core’ Layer**  
 Handles compute infrastructure management including service
 orchestration, lifecycle management, rule engine orchestration, and
 data-flow management .
 
-**UltraEdge ‘Boost’ Layer **  
+**UltraEdge ‘Boost’ Layer**  
 Implements performance-critical routines and FFI (Foreign Function
 Interface) calls; Contains dynamic connectors, and southbound protocol
 adapters
 
-**UltraEdge ‘Prime’ Layer **  
+**UltraEdge ‘Prime’ Layer**  
 Contains business logic, trigger & activation sequences, and AI & mixed
 workload orchestration .
 
-**UltraEdge Edge-Cloud ‘Connect’ Layer **  
+**UltraEdge Edge-Cloud ‘Connect’ Layer**  
 Supports data streaming to databases (InfluxDB, SQLite) and provides
 diagnostic/logging outputs .
 
@@ -322,7 +322,7 @@ Place a `MicroPacFile` in your project directory.
 -   **limits**: Resource limits (memory, cpu)
 -   **mount**: Volume mount points
 -   **network**: Network configuration
--   **createdBy**: maintanier of the application
+-   **createdBy**: maintainer of the application
 -   **description**: description of the application
 
 ### 7.4 Building the MicroPac

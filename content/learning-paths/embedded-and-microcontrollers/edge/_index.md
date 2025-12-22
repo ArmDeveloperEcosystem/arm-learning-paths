@@ -12,7 +12,7 @@ learning_objectives:
   - Control LEDs by turning them on and off based on model predictions.
 
 prerequisites:
-  - Completion of [Embedded programming with Arduino on the Raspberry Pi Pico](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/arduino-pico/) if you're an absolute beginner.
+  - Completion of [Embedded programming with Arduino on the Raspberry Pi Pico](/learning-paths/embedded-and-microcontrollers/arduino-pico/) if you're an absolute beginner.
   - An [Edge Impulse Studio](https://studio.edgeimpulse.com/signup) account.
   - The [Arduino IDE](/install-guides/arduino-pico/) with the RP2040 board support package installed on your computer.
   - An [Arduino Nano RP2040 Connect board](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers).

@@ -241,11 +241,11 @@ localhost:9000, queries: 5, QPS: 20.935, RPS: 10467305.309, MiB/s: 79.859, resul
 ### Benchmark Metrics Explanation
 
 - **QPS (Queries Per Second):** Indicates how many complete queries ClickHouse can execute per second. Higher QPS reflects stronger overall query execution capacity.
-- **RPS (Rows Per Second):** Shows the number of rows processed every second. Very high RPS values demonstrate ClickHouse’s efficiency in scanning large datasets.
+- **RPS (Rows Per Second):** Shows the number of rows processed every second. Very high RPS values demonstrate ClickHouse's efficiency in scanning large datasets.
 - **MiB/s (Throughput):** Represents data processed per second in mebibytes. High throughput highlights effective CPU, memory, and disk utilization during analytics workloads.
 - **Latency Percentiles (p50, p95, p99):** Measure query response times. p50 is the median latency, while p95 and p99 show tail latency under heavier load—critical for understanding performance consistency.
 - **Iterations:** Number of times the same query is executed. More iterations improve measurement accuracy and stability.
-- **Concurrency:** Number of parallel query clients. Higher concurrency tests ClickHouse’s ability to scale under concurrent workloads.
+- **Concurrency:** Number of parallel query clients. Higher concurrency tests ClickHouse's ability to scale under concurrent workloads.
 - **Result RPS / Result MiB/s:** Reflects the size and rate of returned query results. Low values are expected for aggregate queries like `COUNT(*)`.
 - **Insert Benchmark Metrics:** Write tests measure ingestion speed and stability, where consistent latency indicates reliable bulk insert performance.
 

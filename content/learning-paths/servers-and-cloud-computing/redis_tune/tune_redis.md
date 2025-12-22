@@ -10,7 +10,7 @@ Optimizing Redis allows you to gain performance improvement without scaling your
 
 ##  Redis File Configuration
 
-In the [Configure Redis single-node](https://learn.arm.com/learning-paths/servers-and-cloud-computing/redis/single-node_deployment/) section of the [Learn how to deploy Redis on Arm](https://learn.arm.com/learning-paths/servers-and-cloud-computing/redis/) learning path, a bare minimum file server configuration was discussed. In this section, a tuned file server configuration is discussed.
+In the [Configure Redis single-node](/learning-paths/servers-and-cloud-computing/redis/single-node_deployment/) section of the [Learn how to deploy Redis on Arm](/learning-paths/servers-and-cloud-computing/redis/) learning path, a bare minimum file server configuration was discussed. In this section, a tuned file server configuration is discussed.
 
 ### Top Level redis.conf
 
