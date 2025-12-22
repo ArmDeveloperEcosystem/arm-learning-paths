@@ -216,7 +216,7 @@ In the sample grid, each tile shows one crop together with its True label (T:) a
 Run the evaluation script from the project root:
 
 ```console
-python 04_Test.py
+python3 04_Test.py
 ```
 
 In the example below, the PyTorch and ONNX accuracies match exactly, confirming that the export process preserved model behavior.

@@ -21,6 +21,7 @@ To quantify these contributions, we will add simple timing measurements around e
 * preprocess_ms – total time spent preprocessing all 81 cells
 * onnx_ms – time spent running batched ONNX inference
 * solve_ms – time spent solving the Sudoku
+* split_ms – time spent splitting the warped grid into 81 cells
 * total_ms – end-to-end processing time
 
 ## Performance measurements
@@ -195,7 +196,7 @@ The single-image measurements introduced earlier are useful for understanding th
 
 To obtain more reliable performance numbers, we extend the evaluation to multiple images and compute aggregated statistics. This allows us to track not only average performance, but also variability and tail latency, which are particularly important for interactive applications.
 
-To do this, we add two helper functions to 05_RunSudokuProcessor.py.
+To do this, we add two helper functions to 05_RunSudokuProcessor.py, and make sure you have import glob and import numpy as np at the top of the runner script.
 
 The first function, summarize, computes basic statistics from a list of timing measurements:
 * mean – average runtime
@@ -320,7 +321,7 @@ total_ms        mean=93.58  median=17.06  p90=65.10  p95=92.55
 This result is expected for such a small model: ONNX inference is already efficient, and the dominant costs lie in image preprocessing and occasional solver backtracking. This highlights why system-level profiling is essential before focusing on model-level optimizations.
 
 ## Quantize the model (FP32 -> INT8)
-Quantization is one of the most impactful optimizations for Arm64 and mobile deployments because it reduces both model size and compute cost. The simplest approach is dynamic quantization, which requires no calibration dataset and is quick to apply.
+Quantization is one of the most impactful optimizations for Arm64 and mobile deployments because it reduces both model size and compute cost. For CNNs, the most compatible approach is static INT8 quantization in QDQ format. This uses a small calibration set to estimate activation ranges and typically works well across runtimes.
 
 Create a small script 06_QuantizeModel.py:
 

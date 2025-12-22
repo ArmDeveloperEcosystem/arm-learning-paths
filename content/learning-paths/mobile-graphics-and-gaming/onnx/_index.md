@@ -8,8 +8,8 @@ who_is_this_for: This is an introductory topic for developers who are interested
 learning_objectives:
   - Describe what ONNX is, and what it can offer in the ML ecosystem.
   - Build and export a simple neural network model in Python to ONNX format.
-  - Perform inference and training using ONNX Runtime on Arm64.
-  - Apply optimization techniques such as layer fusion to improve performance.
+  - Perform inference and training using ONNX Runtime.
+  - Apply optimization techniques to improve performance.
   - Deploy an optimized ONNX model inside an Android app.
 
 prerequisites:

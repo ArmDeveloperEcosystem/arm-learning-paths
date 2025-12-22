@@ -1055,5 +1055,6 @@ From here, there are many natural directions for improvement. You could enhance 
 This concludes the learning path and provides a solid foundation for building, optimizing, and deploying ONNX-based machine learning applications on Arm64 and mobile platforms.
 
 ## Companion code
-1. (Sudoku solver) [https://github.com/dawidborycki/SudokuSolverOnnx.git]
-2. (Python code) [https://github.com/dawidborycki/ONNX-LP.git]
+You can find the companion code in these repositories:
+1. [Sudoku solver](https://github.com/dawidborycki/SudokuSolverOnnx.git)
+2. [Python scripts](https://github.com/dawidborycki/ONNX-LP.git)

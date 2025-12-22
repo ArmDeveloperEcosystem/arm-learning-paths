@@ -192,7 +192,7 @@ Right after export, the script runs a parity test: it feeds the same randomly ge
 To run the training script, type:
 
 ```console
-python 03_Training.py
+python3 03_Training.py
 ```
 
 The script will train, validate, export, and verify the digit recognizer in one go. After it finishes, you’ll have both a portable ONNX model and a PyTorch checkpoint ready for the next step—building the image processor that detects the Sudoku grid, rectifies it, segments cells, and performs batched ONNX inference to reconstruct the board for solving.

@@ -23,7 +23,6 @@ By generating synthetic Sudoku pages directly from the parquet dataset, we get:
 4. Scalability. With millions of Sudoku solutions available, we can easily generate tens of thousands of training samples in minutes, ensuring a dataset that is both large and diverse.
 
 This synthetic data generation strategy allows us to create a custom-fit dataset for our Sudoku digit recognition problem, bridging the gap between clean digital puzzles and noisy real-world inputs.
-In this Learning Path, you have created an Android application to capture and process camera images using OpenCV. 
 
 ## What we’ll produce
 By the end of this step, you will have two complementary datasets:
@@ -246,7 +245,7 @@ pip install pandas pyarrow opencv-python tqdm numpy
 
 3. Run the generator
 ```console
-python 02_PrepareData.py
+python3 02_PrepareData.py
 ```
 
 4.	Inspect outputs:

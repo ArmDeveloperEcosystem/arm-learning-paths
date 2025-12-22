@@ -375,6 +375,8 @@ The processor saves several artifacts to help debugging and demonstration:
 - `artifacts/overlay_solution.png` – solution digits overlaid onto the original image (if solved).
 - (Optional) `artifacts/recognized_board.png`, `artifacts/solved_board.png`, `artifacts/boards_side_by_side.png` – clean board renderings if you enabled those helpers.
 
+The driver script below saves warped.png and overlay_solution.png by default.
+
 ## Running the processor
 A small driver script (05_RunSudokuProcessor.py) demonstrates how to use the SudokuProcessor:
 
