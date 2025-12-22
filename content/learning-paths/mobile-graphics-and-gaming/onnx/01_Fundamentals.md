@@ -57,10 +57,10 @@ Importantly, ONNX models are not static. Developers can insert, remove, or repla
 While ONNX provides a standard way to represent models, it still needs a high-performance engine to actually execute them. This is where ONNX Runtime (ORT) comes in. ONNX Runtime is the official, open-source inference engine for ONNX models, designed to run them quickly and efficiently across a wide variety of hardware.
 
 At its core, ONNX Runtime is optimized for speed, portability, and extensibility:
-1. Cross-platform support. ORT runs on Windows, Linux, macOS, and mobile operating systems like Android and iOS. It has first-class support for both x86 and Arm64 architectures, making it ideal for deployment on devices ranging from cloud servers to Raspberry Pi boards and smartphones.
+1. Cross-platform support. ORT runs on Windows, Linux, and macOS, as well as mobile platforms like Android and iOS. It supports both x86 and Arm64 architectures, making it suitable for deployment from cloud servers to edge devices such as Raspberry Pi boards and smartphones.
 
 2. Hardware acceleration. ORT integrates with a wide range of execution providers (EPs) that tap into hardware capabilities:
-* Arm NEON / Arm Compute Library for efficient CPU execution on Arm64.
+* Arm Kleidi kernels accelerated with Arm NEON, SVE2, and SME2 instructions for efficient CPU execution on Arm64.
 * CUDA for NVIDIA GPUs.
 * DirectML for Windows.
 * NNAPI on Android, enabling direct access to mobile accelerators (DSPs, NPUs).
@@ -80,7 +80,7 @@ One of the biggest advantages of ONNX is how naturally it integrates into a deve
 A typical ONNX workflow looks like this:
 1. Train the model. You first use your preferred framework (e.g., PyTorch, TensorFlow, or scikit-learn) to design and train a model. At this stage, you benefit from the flexibility and ecosystem of the framework of your choice.
 2. Export to ONNX. Once trained, the model is exported into the ONNX format using built-in converters (such as torch.onnx.export for PyTorch). This produces a portable .onnx file describing the network architecture, weights, and metadata.
-3. Run inference with ONNX Runtime. The ONNX model can now be executed on different devices using ONNX Runtime. On Arm64 hardware, ONNX Runtime takes advantage of the Arm Compute Library and NEON instructions, while on Android devices it can leverage NNAPI for mobile accelerators.
+3. Run inference with ONNX Runtime. The ONNX model can now be executed on different devices using ONNX Runtime. On Arm64 hardware, ONNX Runtime can take advantage of Arm Kleidi kernels accelerated with NEON, SVE2, and SME2 instructions, while on Android devices it can leverage NNAPI to access mobile accelerators (where available).
 4. Optimize the model. Apply graph optimizations like layer fusion, constant folding, or quantization to improve performance and reduce memory usage, making the model more suitable for edge and mobile deployments.
 5. Deploy. Finally, the optimized ONNX model is packaged into its target environment. This could be an Arm64-based embedded system (e.g., Raspberry Pi), a server powered by Arm CPUs (e.g., AWS Graviton), or an Android application distributed via the Play Store.
 
