@@ -58,7 +58,7 @@ void exp_sve_fexpa(float *x, float *y, size_t n) {
     // FEXPA-specific coeffs
     const float c0_fexpa = 1.000003695487976f;   // 0x1.00003ep0
     const float c1_fexpa = 0.5000003576278687f;  // 0x1.00000cp-1
-    const float shift_fexpa = 196735.0f;         // 1.5*2^(23-6) + 127
+    const float shift_fexpa = 196735.0f;         // 0x1.803f8p17f
 
     size_t i = 0;
 
