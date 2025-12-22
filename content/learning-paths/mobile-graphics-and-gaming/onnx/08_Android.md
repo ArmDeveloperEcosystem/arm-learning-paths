@@ -391,7 +391,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSolve.setOnClickListener {
-            // Phase 1 placeholder: we’ll replace this with real solving in Phase 2
             txtStatus.text = "Solve clicked (engine not wired yet)"
             imgOutput.setImageBitmap(currentBitmap) // temporary: mirror input
         }
