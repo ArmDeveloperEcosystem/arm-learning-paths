@@ -11,8 +11,8 @@ who_is_this_for: This Learning Path is for software developers who want to under
 
 learning_objectives:
   - Overview of Confidential Containers
-  - Understand how Trustee services are used for CCA realm attestation to unlock the confidential processing of data.
-  - Use an encrypted image to deploy a Confidential Containers in a CCA realm on an Armv9-A AEM Base Fixed Virtual Platform (FVP) that has support for RME extensions.
+  - Understand how Trustee services are used for CCA attestation to unlock the confidential processing of data.
+  - Use an encrypted image to deploy a Confidential Container in a CCA realm on an Armv9-A AEM Base Fixed Virtual Platform (FVP) that has support for RME extensions.
 
 prerequisites:
   - An AArch64 or x86_64 computer running Linux or macOS; you can use cloud instances - see the [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/)

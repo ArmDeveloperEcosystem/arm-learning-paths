@@ -16,9 +16,9 @@ working to enable cloud native confidential computing by leveraging Trusted Exec
 
 ## Design overview
 
-Confidential computing projects are largely defined by what is inside the enclave and what is not.
-For Confidential Containers, the enclave contains the workload pod and helper processes and daemons that facilitate the workload pod.
-Everything else, including the hypervisor, other pods, and the control plane, is outside of the enclave and untrusted.
+Confidential computing projects are largely defined by what is inside the Trusted Execution Environment (TEE) and what is not.
+For Confidential Containers, the TEE contains the workload pod and helper processes and daemons that facilitate the workload pod.
+Everything else, including the hypervisor, other pods, and the control plane, is outside of the TEE and untrusted.
 
 ### Kata Containers
 
@@ -46,7 +46,7 @@ This is a simplified diagram showing the interaction of **containerd**, the **ny
 Confidential Containers also provides components inside the guest and elsewhere to facilitate attestation.
 Attestation is a crucial part of confidential computing and a direct requirement of many guest operations.
 For example, to unpack an encrypted container image, the guest must retrieve a secret key.
-Inside the guest the **confidential-data-hub** and **attestation-agent** handle operations involving secrets and attestation.
+Inside the guest the **Confidential Data Hub (CDH)** and **Attestation Agent (AA)** handle operations involving secrets and attestation.
 Again, these components are beyond the scope of traditional Kata deployments and are located in the ["guest components"](https://github.com/confidential-containers/guest-components) repository.
 
 The CDH and AA use the KBS Protocol to communicate with an external, trusted entity.
