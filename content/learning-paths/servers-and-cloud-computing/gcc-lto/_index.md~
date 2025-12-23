@@ -1,0 +1,52 @@
+---
+title: LTO Optimization With GCC
+
+minutes_to_complete: 10
+
+who_is_this_for: This is an introductory topic for developers wishing to optimize code performance via link-time optimization using the GCC toolchain.
+
+learning_objectives: 
+    - PLACEHOLDER OBJECTIVE 1
+    - PLACEHOLDER OBJECTIVE 2
+
+prerequisites:
+    - PLACEHOLDER PREREQ 1
+    - PLACEHOLDER PREREQ 2
+
+author: Victor Do Nascimento, Arm
+
+### Tags
+skilllevels: Introductory
+subjects: Compiler Optimization
+armips:
+    - PLACEHOLDER IP A
+    - PLACEHOLDER IP B
+tools_software_languages:
+    - GCC
+operatingsystems:
+    - Linux
+
+
+
+further_reading:
+    - resource:
+        title: PLACEHOLDER MANUAL 
+        link: PLACEHOLDER MANUAL LINK
+        type: documentation
+    - resource:
+        title: PLACEHOLDER BLOG 
+        link: PLACEHOLDER BLOG LINK
+        type: blog
+    - resource:
+        title: GCC Wiki
+        link: https://gcc.gnu.org/wiki/LinkTimeOptimization
+        type: website
+
+
+
+### FIXED, DO NOT MODIFY
+# ================================================================================
+weight: 1                       # _index.md always has weight of 1 to order correctly
+layout: "learningpathall"       # All files under learning paths have this same wrapper
+learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
+---
