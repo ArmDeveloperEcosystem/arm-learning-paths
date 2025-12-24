@@ -14,21 +14,20 @@ We're going to build the sample for Android. To do so takes just a few steps and
 
 1. First off, we need to switch the project to _Android_.
 
-1. Select _File->Build Settings_ to show the Build Settings window:
+1. Select _File->Build Profile_ to show the Build Profile window:
 
-    ![Build Settings window#center](images/build-settings.png "Figure 1. Build Settings window")
+    ![Build Profiles window#center](images/build-profiles-android.png "Figure 1. Build Profiles window")
 
-1. Notice how the project is currently in "Windows, Mac, Linux" mode. We need to switch to Android.
+1. In your project the platform labelled _Active_ will be your machine's operating systems (Windows, Mac or Linux). Since we are developing an Android app we must rebuild for Android.
 
-1. Select _Android_ on the left and then click on _Switch Platform_. This will take a few moments as it re-builds the assets for the Android mode (this step can take longer the first time it is done for any project).
+1. Select _Android_ on the left and then click on _Switch Platform_ at the bottom of the build profiles screen. This will take a few moments as it re-builds the assets for the Android mode (this step can take longer the first time it is done for any project).
 
-    ![Switch platform to Android#center](images/build-settings-switch-platform.png "Figure 2. Switch platform to Android")
+   ![List of scenes#center](images/scene-list.png "Figure 2. Scene list")
 
-1. We must now tell Unity which scene to open when the app runs. This affects all platforms. Click on _Add Open Scenes_ to add the opened sample scene to the _Scenes in Build_ list. We will only need to do this once.
-
-![Scenes in Build#center](images/build-settings-scenes-in-build.png "Figure 3. Scenes in Build list")
-
-That's all we need to do to simply run the app. There are a couple more steps required to run the profiler but we'll cover those later.
+1. In the screenshot, you can see that our SampleScene is already included in the build and preselected as the first scene to load.
+This list shows all the scenes that will be packaged into the final build.
+The top scene in the list is the one Unity will load first when the game starts.
+If your project contains multiple scenes, this is where you would select which ones to include and set your startup scene.
 
 ## Prepare your Android device for development
 
@@ -48,9 +47,9 @@ Connect your Android device to your computer using a USB cable. Unity may take a
 
 Android may ask for confirmation before enabling the connection.
 
-In the _Build Settings_ window:
+In the _Build Profile_ window:
 
-1. Ensure your device appears in the _Run Device_ menu and select it.
+1. Ensure your device appears in the _Run Device_ menu and select it, if the device doesn't appear make sure to press the "Refresh" button then your device should appear in the drop down menu.
 
 1. Select _Build and Run_. Choose a location to save your build.
 

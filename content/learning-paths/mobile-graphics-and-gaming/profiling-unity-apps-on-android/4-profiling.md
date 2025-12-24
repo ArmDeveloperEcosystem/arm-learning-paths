@@ -17,11 +17,11 @@ The Profiler will be able to help you in various ways:
 
 - Monitor and measure CPU usage across various areas of the Unity engine and your app, e.g., graphics rendering, script processing, physics, animation, UI etc.
 
-- Monitor and measure memory allocations
+- Monitor and measure memory allocations.
 
-- Get a breakdown of how long specific functions are taking
+- Get a breakdown of how long specific functions are taking.
 
-- Help identifying where the bottlenecks are in your application
+- Help identifying where the bottlenecks are in your application.
 
 ## Launch the Profiler
 
@@ -35,11 +35,11 @@ On the other hand, if the performance issues happen later in the app's lifetime,
 
 In our sample, the performance issues will be apparent soon after launch. To profile directly on an Android device:
 
-1. Open the _Build Settings_
+1. Open the _Build Profiles_
 
 1. Ensure _Autoconnect Profiler_ is ticked
 
-    ![Build settings to autoconnect profiler#center](images/android-build-settings-autoconnect-profiler.PNG "Figure 1. Build settings with connected Android device and Autoconnect Profiler enabled.")
+    ![Build settings to autoconnect profiler#center](images/AC.png "Figure 1. Build settings with connected Android device and Autoconnect Profiler enabled.")
 
 1. Select _Build and Run_
 
@@ -51,15 +51,17 @@ In our sample, the performance issues will be apparent soon after launch. To pro
 
 If you forget to tick the auto-connect option or you want to wait before you connect the Profiler, you can connect the Profiler while the app is running:
 
-1. Select _Window_ menu, then _Analysis_, then _Profiler_
+While inside the unity editor:
 
-1. A round record button is present in the top-left
+1. Select _Window_ menu, then _Analysis_, then _Profiler_ .
+
+1. A round record button is present in the top-left.
 
 1. To the left of the record button is a drop-down menu identifying the connection mode and device. To profile the app running in the editor, you would set this to _Play Mode_.
 
 1. Your Android device should appear in the list. Select it to connect the Profiler.
 
-1. Press the record button to start profiling (the button will turn red)
+1. Press the record button to start profiling (the button will turn red).
 
 You can stop the recording at any time by pressing the Record button. It will turn gray when recording is not in progress.
 
@@ -69,7 +71,7 @@ The Profiler window contains a lot of information spread over two main scrollabl
 ### CPU Usage graph and frame-rate labels
 The CPU Usage graph captures profiling data every frame while it is active.
 
-![Profiler CPU usage#center](images/profiler-samsung-s8-plain.PNG "Figure 2. The CPU Usage graph with data from the sample collision code app collected from a Samsung S8.")
+![Profiler CPU usage#center](images/profiler-samsung-s8-plain.PNG "Figure 2. The CPU Usage graph with data from the sample collision code app collected.")
 
 If you have a performance issue that worsens over time (as with the case of the collision sample), you will see the graph gradually (or quickly) fill over time. Watch the frame rate labels on the left of the graph. These labels mark the Y-axis at set intervals. They show you what CPU Usage would be required to achieve given frame rates. For example, if your CPU Usage remained under 16 milliseconds then as far as the CPU is concerned, a frame rate of 60 frames-per-second (FPS) would be achievable. If the CPU Usage is under 16ms but your frame rate is still lower than expected, that is an indication that the app has performance issues elsewhere, e.g., in the GPU.
 
