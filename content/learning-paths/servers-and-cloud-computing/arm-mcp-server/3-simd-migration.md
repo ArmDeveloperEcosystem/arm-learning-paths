@@ -6,11 +6,13 @@ weight: 4
 layout: learningpathall
 ---
 
-## Migrating SIMD Code with AI Assistance
+## Migrating SIMD code with AI assistance
 
-When migrating applications from x86 to Arm, you may encounter SIMD (Single Instruction, Multiple Data) code that is written using architecture-specific intrinsics. On x86 platforms, SIMD is commonly implemented with SSE, AVX, or AVX2 intrinsics, while Arm platforms use NEON and SVE intrinsics to provide similar vectorized capabilities. Updating this code manually can be time-consuming and challenging. By combining the Arm MCP Server with a well-defined prompt file, you can automate much of this work and guide an AI assistant through a structured, architecture-aware migration of your codebase.
+When migrating applications from x86 to Arm, you might encounter SIMD (Single Instruction, Multiple Data) code that is written using architecture-specific intrinsics. On x86 platforms, SIMD is commonly implemented with SSE, AVX, or AVX2 intrinsics, while Arm platforms use NEON and SVE intrinsics to provide similar vectorized capabilities. Updating this code manually can be time-consuming and challenging. By combining the Arm MCP Server with a well-defined prompt file, you can automate much of this work and guide an AI assistant through a structured, architecture-aware migration of your codebase.
 
-## Sample x86 Code with AVX2 Intrinsics
+## Sample x86 code with AVX2 intrinsics
+
+{{% notice Note %}}You don't need to understand every detail of this code to follow the migration workflow. It's included to represent the kind of architecture-specific SIMD logic commonly found in real-world applications. {{% /notice %}}
 
 The following example shows a matrix multiplication implementation using x86 AVX2 intrinsics. This is representative of performance-critical code found in compute benchmarks and scientific workloads. Copy this code into a file named `matrix_operations.cpp`:
 
@@ -170,7 +172,9 @@ int main() {
 }
 ```
 
-## The Arm Migration Prompt File
+Prompt files act as executable migration playbooks. They encode a repeatable process that the AI can follow reliably, rather than relying on one-off instructions or guesswork.
+
+## The Arm migration prompt file
 
 To automate migration, you can define a prompt file that instructs the AI assistant how to analyze and transform the project using the Arm MCP Server. Prompt files encode best practices, tool usage, and migration strategy, allowing the AI assistant to operate fully autonomously through complex multi-step workflows.
 
@@ -203,7 +207,7 @@ Provide a summary of the changes you made and how they'll improve the project.
 ```
 This prompt file encodes best practices, tool usage, and migration strategy, allowing the AI assistant to operate fully agentically.
 
-## Running the Migration
+## Running the migration
 
 With the prompt file in place and the Arm MCP Server connected, invoke the migration workflow from your AI assistant:
 

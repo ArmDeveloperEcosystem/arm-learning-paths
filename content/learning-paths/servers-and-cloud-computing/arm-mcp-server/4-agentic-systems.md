@@ -6,17 +6,21 @@ weight: 5
 layout: learningpathall
 ---
 
-## Agentic AI Systems for Migration
+## Set up an agent workflow
 
 Different AI coding tools provide different mechanisms for defining persistent instructions, such as prompt files or configuration documents. While the configuration details vary by tool, the goal remains the same: provide the AI with clear, structured instructions so it can use the Arm MCP Server effectively and carry out multi-step migration workflows autonomously.
 
 This section shows how to set up Arm migration workflows in popular agentic AI systems. You'll see that the core migration logic stays consistent across platforms, but each tool has its own format for defining these instructions.
 
-## Kiro Steering Documents
+{{% notice Note %}}
+The migration instructions below are the same workflow you used in the previous section. Each AI tool simply wraps those instructions in a different format.
+{{% /notice %}}
+
+## Set up Kiro steering documents
 
 [Kiro](https://kiro.dev/) uses "steering documents" - markdown files stored in `.kiro/steering/` that provide persistent context to the AI. You can configure steering documents with different inclusion modes to control when and how the instructions are applied.
 
-### Create Arm Migration Steering Document
+### Create Arm migration steering document
 
 To set up Arm migration in Kiro, create the following file at `.kiro/steering/arm-migration.md`:
 
@@ -48,11 +52,11 @@ Provide a summary of the changes you made and how they'll improve the project.
 
 Reference this steering document in chat with `#arm-migration`.
 
-## OpenAI Codex Prompt Files
+## OpenAI Codex prompt files
 
 [OpenAI Codex](https://openai.com/codex/) uses markdown prompt files stored in `~/.codex/prompts/` or `$CODEX_HOME/prompts/`. The filename determines the command name you'll use to invoke the prompt.
 
-### Create Arm Migration Prompt
+### Create Arm migration prompt
 
 Create the following file at `~/.codex/prompts/arm-migrate.md`:
 
@@ -82,7 +86,7 @@ If you have good versions to update for the Dockerfile, requirements.txt, and ot
 Provide a summary of the changes you made and how they'll improve the project.
 ```
 
-### Running the Codex Prompt
+### Running the Codex prompt
 
 Invoke the prompt with:
 

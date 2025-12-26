@@ -3,13 +3,14 @@ title: Automate x86-to-Arm application migration using Arm MCP Server
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an advanced topic for software developers who want to use AI-powered tools to migrate x86 applications to Arm-based cloud instances.
+who_is_this_for: This is an advanced topic for developers who want to use AI-powered tools to migrate x86 applications to Arm-based cloud instances.
 
 learning_objectives:
-    - Understand how the Arm MCP Server enables AI developer tools to assist with cloud migration
-    - Use AI prompts to check Docker images for Arm compatibility
-    - Perform a fully automated C++ application migration using prompt files with the Arm MCP Server
-    - Configure different agentic systems to automate Arm migration workflows
+  - Explain how the Arm MCP Server enables AI-driven x86-to-Arm migration workflows
+  - Use AI-assisted checks to inspect Docker images for Arm compatibility
+  - Automate the migration of x86-specific C++ code to Arm using structured prompt files
+  - Validate and run a migrated Dockerized C++ application on Arm-based systems
+  - Configure AI agents to reuse the same migration workflow across different tools
 
 prerequisites:
     - An AI-powered IDE such as VS Code with agentic tools like GitHub Copilot, Claude Code, Cursor, or similar
