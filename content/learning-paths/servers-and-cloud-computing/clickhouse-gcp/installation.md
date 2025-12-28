@@ -7,10 +7,11 @@ layout: learningpathall
 ---
 
 ## Install ClickHouse on GCP VM
-This guide covers installing, configuring, and validating ClickHouse on a GCP SUSE Linux Arm64 VM. It includes system preparation, installing ClickHouse with the official installer, verifying the setup, starting the server, and connecting via the client. The guide also configures ClickHouse as a systemd service to ensure reliable, automatic startup on Arm-based environments.
+This section shows you how to install, configure, and validate ClickHouse on your Google Cloud SUSE Linux Arm64 virtual machine. This includes system preparation, installing ClickHouse with the official installer, verifying the setup, starting the server, and connecting via the client. You'll also configure ClickHouse as a systemd service to ensure reliable, automatic startup.
 
-### Install required system packages and the ClickHouse repo
-Refresh system repositories and install basic utilities needed to download and run ClickHouse.
+## Install required system packages and add the ClickHouse repository
+
+Refresh system repositories and add the ClickHouse repository:
 
 ```console
 sudo zypper refresh
@@ -18,22 +19,24 @@ sudo zypper addrepo -r https://packages.clickhouse.com/rpm/clickhouse.repo -g
 sudo zypper --gpg-auto-import-keys refresh clickhouse-stable
 ```
 
-### Install ClickHouse via the ClickHouse repo
-Download and install ClickHouse for SuSE systems:
+### Install ClickHouse
+
+Install ClickHouse server and client:
 
 ```console
 sudo zypper install -y clickhouse-server clickhouse-client
 ``` 
 
-This installs:
+This installs the following components:
 
-- **ClickHouse Server** – Runs the core database engine and handles all data storage, queries, and processing.
-- **ClickHouse Client** – Provides a command-line interface to connect to the server and run SQL queries.
-- **ClickHouse Local** – Allows running SQL queries on local files without starting a server.
-- **Default configuration files (/etc/clickhouse-server)** – Stores server settings such as ports, users, storage paths, and performance tuning options.
+- ClickHouse Server: runs the core database engine and handles data storage, queries, and processing.
+- ClickHouse Client: provides a command-line interface to connect to the server and run SQL queries.
+- ClickHouse Local: allows running SQL queries on local files without starting a server.
+- Default configuration files (`/etc/clickhouse-server`): stores server settings such as ports, users, storage paths, and performance tuning options.
 
 ### Verify the installed version
-Confirm that all ClickHouse components are installed correctly by checking their versions.
+
+Verify that ClickHouse is installed:
 
 ```console
 clickhouse --version
@@ -42,15 +45,16 @@ clickhouse client --version
 clickhouse local --version
 ```
 
-You should see an output similar to:
+The output is similar to:
 ```output
 ClickHouse local version 25.11.2.24 (official build).
 ClickHouse server version 25.11.2.24 (official build).
 ClickHouse client version 25.11.2.24 (official build).
 ```
 
-### Create ClickHouse user and directories
-Create a dedicated system user and required directories for data, logs, and runtime files.
+## Create ClickHouse user and directories
+
+Create a dedicated system user and required directories for data, logs, and runtime files:
 
 ```console
 sudo useradd -r -s /sbin/nologin clickhouse || true
@@ -58,7 +62,8 @@ sudo mkdir -p /var/lib/clickhouse
 sudo mkdir -p /var/log/clickhouse-server
 sudo mkdir -p /var/run/clickhouse-client
 ```
-Set proper ownership so ClickHouse can access these directories.
+
+Set proper ownership:
 
 ```console
 sudo chown -R clickhouse:clickhouse \
@@ -70,26 +75,31 @@ sudo chmod 755 /var/lib/clickhouse \
   /var/run/clickhouse-client
 ```
 
-### Start ClickHouse Server manually
-You can just run the ClickHouse server in the foreground to confirm the configuration is valid.
+## Start ClickHouse server manually
+
+Run the ClickHouse server in the foreground to confirm the configuration is valid:
 
 ```console
 sudo -u clickhouse clickhouse server --config-file=/etc/clickhouse-server/config.xml
 ```
+
 Keep this terminal open while testing.
 
-### Connect using ClickHouse Client
-Open a new SSH terminal and connect to the ClickHouse server.
+## Connect using ClickHouse client
+
+Open a new SSH terminal and connect to the ClickHouse server:
 
 ```console
 clickhouse client
 ```
-Run a test query to confirm connectivity.
+
+Run a test query to confirm connectivity:
 
 ```sql
 SELECT version();
 ```
-You should see an output similar to:
+
+The output is similar to:
 ```output
 SELECT version()
 
@@ -102,17 +112,18 @@ Query id: ddd3ff38-c0c6-43c5-8ae1-d9d07af4c372
 1 row in set. Elapsed: 0.001 sec.
 ```
 
-Please close the client SSH terminal and press "ctrl-c" in the server SSH terminal to halt the manual invocation of ClickHouse. FYI, the server may take a few seconds to close down when "ctrl-c" is received. 
+Close the client SSH terminal and press `Ctrl+C` in the server SSH terminal to stop the manual invocation of ClickHouse. The server may take a few seconds to shut down.
 
-{{% notice Note %}}
-Recent benchmarks show that ClickHouse (v22.5.1.2079-stable) delivers up to 26% performance improvements on Arm-based platforms, such as AWS Graviton3, compared to other architectures, highlighting the efficiency of its vectorized execution engine on modern Arm CPUs.
-You can view [this Blog](https://community.arm.com/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/improve-clickhouse-performance-up-to-26-by-using-aws-graviton3)
+{{% notice Note %}} Recent benchmarks show that ClickHouse (v22.5.1.2079-stable) delivers up to 26% performance improvements on Arm-based platforms, such as AWS Graviton3, compared to other architectures. This highlights the efficiency of its vectorized execution engine on modern Arm CPUs.
 
-The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends ClickHouse version v22.5.1.2079-stable, the minimum recommended on the Arm platforms.
+For more information, see [Improve ClickHouse performance up to 26% by using AWS Graviton3](https://community.arm.com/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/improve-clickhouse-performance-up-to-26-by-using-aws-graviton3).
+
+The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends ClickHouse version v22.5.1.2079-stable as the minimum version for Arm platforms.
 {{% /notice %}}
 
-### Create a systemd service
-Set up ClickHouse as a system service so it starts automatically on boot.
+## Create a systemd service
+
+Set up ClickHouse as a system service so it starts automatically on boot:
 
 ```console
 sudo tee /etc/systemd/system/clickhouse-server.service <<'EOF'
@@ -133,7 +144,8 @@ LimitNOFILE=1048576
 WantedBy=multi-user.target
 EOF
 ```
-**Reload systemd and enable the service:**
+
+Reload systemd and enable the service:
 
 ```console
 sudo systemctl enable clickhouse-server
@@ -142,19 +154,20 @@ sudo systemctl daemon-reload
 ```
 
 {{% notice Note %}}
-You may get the following error which can be safely ignored:
+You might see the following error, which can be safely ignored:
 
-"ln: failed to create symbolic link '/etc/init.d/rc2.d/S50clickhouse-server': No such file or directory"
+`ln: failed to create symbolic link '/etc/init.d/rc2.d/S50clickhouse-server': No such file or directory`
 {{% /notice %}}
 
-### Verify ClickHouse service
-Ensure the ClickHouse server is running correctly as a background service.
+## Verify ClickHouse service
+
+Verify the ClickHouse server is running as a background service:
 
 ```console
 sudo systemctl status clickhouse-server
 ```
 
-This confirms that the ClickHouse server is running correctly under systemd and ready to accept connections.
+The output is similar to:
 
 ```output
 ● clickhouse-server.service - ClickHouse Server
@@ -169,7 +182,8 @@ This confirms that the ClickHouse server is running correctly under systemd and 
 ```
 
 ### Final validation
-Reconnect to ClickHouse and confirm it is operational.
+
+Reconnect to ClickHouse and confirm it's operational:
 
 ```console
 clickhouse client
@@ -179,7 +193,7 @@ clickhouse client
 SELECT version();
 ```
 
-You should see an output similar to:
+The output is similar to:
 ```output
 SELECT version()
 
@@ -192,4 +206,4 @@ Query id: ddd3ff38-c0c6-43c5-8ae1-d9d07af4c372
 1 row in set. Elapsed: 0.001 sec.
 ```
 
-ClickHouse is now successfully installed, configured, and running on SUSE Linux Arm64 with automatic startup enabled.
+ClickHouse is now installed, configured, and running on SUSE Linux Arm64 with automatic startup enabled.
