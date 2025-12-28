@@ -17,8 +17,7 @@ You can benchmark different aspects of ClickHouse performance, including read qu
 
 
 ### Verify the benchmarking tool exists
-
-Confirm that `clickhouse-benchmark` is installed:
+Confirm that `clickhouse-benchmark` is installed and available on the system before running performance tests:
 
 ```console
 which clickhouse-benchmark
@@ -262,9 +261,11 @@ The benchmarking output includes several key metrics:
 - Result RPS / Result MiB/s: size and rate of returned query results. Low values are expected for aggregate queries like `COUNT(*)`.
 - Insert Benchmark Metrics: write tests measure ingestion speed and stability. Consistent latency indicates reliable bulk insert performance.
 
-## Review benchmark results
+## Review the benchmark results
 
-Results from the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 virtual machine:
+The table below summarizes baseline read, aggregation, concurrent workload, and insert performance for ClickHouse running on a `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 virtual machine.
+
+Use these results as a reference point for this specific configuration. They are intended to support comparison across different instance sizes, configurations, or architectures rather than to represent an absolute performance benchmark.
 
 | Test Category           | Test Case      | Query / Operation                      | Iterations | Concurrency |   QPS | Rows / sec (RPS) | Throughput (MiB/s) | p50 Latency | p95 Latency | p99 Latency |
 | ----------------------- | -------------- | -------------------------------------- | ---------: | ----------: | ----: | ---------------: | -----------------: | ----------: | ----------: | ----------: |
@@ -272,11 +273,14 @@ Results from the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 virtual machine:
 | Read / Aggregate        | GROUP BY       | `GROUP BY url`                         |         10 |           2 | 67.15 |          67.15 M |            1018.25 |        7 ms |        8 ms |        8 ms |
 | Read (High Concurrency) | Filtered COUNT | `COUNT(*) WHERE user_id % 10 = 0`      |         20 |           8 | 99.72 |          99.72 M |             760.83 |       29 ms |       63 ms |       78 ms |
 | Write                   | Bulk Insert    | `INSERT SELECT … FROM numbers(500000)` |          5 |           4 | 20.94 |          10.47 M |              79.86 |       68 ms |       73 ms |       73 ms |
-## Interpret the results
 
-The benchmark results demonstrate strong analytical and ingestion performance on the Arm-based C4A instance:
+### Observations
 
-- High read throughput: filtered reads and aggregations achieved over 63–67 million rows/sec, demonstrating strong scan and aggregation performance on Arm64.
-- Scales under concurrency: at higher concurrency (8 clients), the system sustained nearly 100 million rows/sec, showing efficient parallel execution and CPU utilization.
-- Fast aggregations: `GROUP BY` workloads delivered over 1 GiB/s throughput with low single-digit millisecond latency at moderate concurrency.
-- Stable write performance: bulk inserts maintained consistent throughput with predictable latency, indicating reliable ingestion performance on C4A Arm cores.
+- Filtered read and aggregation queries processed between 63–67 million rows per second for this dataset and configuration.
+- Under higher concurrency (8 parallel clients), the system sustained close to 100 million rows per second, with increased tail latency as expected.
+- Aggregation queries using `GROUP BY` achieved over 1 GiB/s of throughput at moderate concurrency.
+- Bulk insert tests showed consistent latency across iterations for the tested insert size and concurrency level.
+
+These results provide a baseline for this environment and can be used to compare alternative configurations, instance sizes, or architectures in subsequent testing.
+
+

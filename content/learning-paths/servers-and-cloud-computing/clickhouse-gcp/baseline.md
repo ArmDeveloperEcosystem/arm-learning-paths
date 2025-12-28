@@ -1,15 +1,15 @@
 ---
-title: Test ClickHouse baseline performance
+title: Establish a ClickHouse baseline on Arm
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Validate ClickHouse functionality and establish a baseline
+## Establish a ClickHouse baseline
 
-You can validate that ClickHouse is functioning correctly and establish a basic performance baseline on your SUSE Linux Arm64 virtual machine.
+This section shows you how to validate that ClickHouse is functioning correctly and establish a basic performance baseline on your SUSE Linux Arm64 virtual machine.
 
-## Verify ClickHouse is running
+### Verify ClickHouse is running
 
 Verify that the ClickHouse server is running:
 
@@ -40,6 +40,7 @@ clickhouse client
 ```
 
 ### Create a test database and table
+
 Create a test database and table to establish a controlled environment for baseline evaluation:
 
 ```sql
@@ -129,7 +130,9 @@ Query id: 644f6556-e69b-4f98-98ec-483ee6869d6e
 
 ### Baseline read performance test
 
-Run analytical queries to establish a performance baseline.
+{{% notice Note %}}
+The results below are intended to establish a baseline for this environment and configuration, not to serve as a comprehensive benchmark or comparison.
+{{% /notice %}}
 
 Run a simple filtered count query:
 
@@ -182,4 +185,4 @@ exit
 
 ## What you've accomplished and what's next
 
-You've validated that ClickHouse is stable, functional, and performing efficiently on the Arm64 virtual machine. With core operations confirmed, you can now proceed to detailed performance benchmarking.
+You’ve validated that ClickHouse is stable and functional on the Arm64 virtual machine and established a basic performance baseline you can build on.

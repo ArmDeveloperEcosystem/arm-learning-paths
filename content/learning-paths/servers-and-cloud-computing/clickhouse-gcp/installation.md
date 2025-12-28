@@ -7,9 +7,12 @@ layout: learningpathall
 ---
 
 ## Install ClickHouse on GCP VM
-This section shows you how to install, configure, and validate ClickHouse on your Google Cloud SUSE Linux Arm64 virtual machine. This includes system preparation, installing ClickHouse with the official installer, verifying the setup, starting the server, and connecting via the client. You'll also configure ClickHouse as a systemd service to ensure reliable, automatic startup.
 
-## Install required system packages and add the ClickHouse repository
+This section shows you how to install and validate ClickHouse on your Google Cloud SUSE Linux Arm64 virtual machine. You’ll install ClickHouse using the official repository, verify the installation, start the server, connect using the client, and configure ClickHouse to run as a systemd service for reliable startup.
+
+{{% notice Note %}}On some SUSE configurations, the ClickHouse system user and runtime directories might not be created automatically. The following steps ensure ClickHouse has the required paths and permissions.{{% /notice %}}
+
+### Install required system packages and add the ClickHouse repository
 
 Refresh system repositories and add the ClickHouse repository:
 
@@ -52,7 +55,7 @@ ClickHouse server version 25.11.2.24 (official build).
 ClickHouse client version 25.11.2.24 (official build).
 ```
 
-## Create ClickHouse user and directories
+### Create ClickHouse user and directories
 
 Create a dedicated system user and required directories for data, logs, and runtime files:
 
@@ -75,7 +78,7 @@ sudo chmod 755 /var/lib/clickhouse \
   /var/run/clickhouse-client
 ```
 
-## Start ClickHouse server manually
+### Start ClickHouse server manually
 
 Run the ClickHouse server in the foreground to confirm the configuration is valid:
 
@@ -85,7 +88,7 @@ sudo -u clickhouse clickhouse server --config-file=/etc/clickhouse-server/config
 
 Keep this terminal open while testing.
 
-## Connect using ClickHouse client
+### Connect using ClickHouse client
 
 Open a new SSH terminal and connect to the ClickHouse server:
 
@@ -114,14 +117,7 @@ Query id: ddd3ff38-c0c6-43c5-8ae1-d9d07af4c372
 
 Close the client SSH terminal and press `Ctrl+C` in the server SSH terminal to stop the manual invocation of ClickHouse. The server may take a few seconds to shut down.
 
-{{% notice Note %}} Recent benchmarks show that ClickHouse (v22.5.1.2079-stable) delivers up to 26% performance improvements on Arm-based platforms, such as AWS Graviton3, compared to other architectures. This highlights the efficiency of its vectorized execution engine on modern Arm CPUs.
-
-For more information, see [Improve ClickHouse performance up to 26% by using AWS Graviton3](https://community.arm.com/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/improve-clickhouse-performance-up-to-26-by-using-aws-graviton3).
-
-The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends ClickHouse version v22.5.1.2079-stable as the minimum version for Arm platforms.
-{{% /notice %}}
-
-## Create a systemd service
+### Create a systemd service
 
 Set up ClickHouse as a system service so it starts automatically on boot:
 
@@ -146,11 +142,10 @@ EOF
 ```
 
 Reload systemd and enable the service:
-
 ```console
+sudo systemctl daemon-reload
 sudo systemctl enable clickhouse-server
 sudo systemctl start clickhouse-server
-sudo systemctl daemon-reload
 ```
 
 {{% notice Note %}}
