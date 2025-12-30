@@ -1,5 +1,5 @@
 ---
-title: Analyze and optimize Arm applications with Gemini CLI 
+title: Analyze and optimize Arm applications with Gemini CLI
 
 minutes_to_complete: 60
 
@@ -22,14 +22,12 @@ author: Jason Andrews
 ##### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
-armips:
-    - Neoverse
 tools_software_languages:
-    - Gemini CLI
-    - Docker   
+  - Gemini CLI
+  - Docker
 operatingsystems:
-    - Linux
-    - macOS
+  - Linux
+  - macOS
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
@@ -53,7 +51,7 @@ further_reading:
   - resource:
       title: Automate x86-to-Arm application migration using Arm MCP Server
       link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/arm-mcp-server/
-      type: Install Guide
+      type: documentation
 weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
