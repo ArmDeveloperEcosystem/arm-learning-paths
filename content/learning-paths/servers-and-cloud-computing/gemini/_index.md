@@ -6,7 +6,7 @@ minutes_to_complete: 60
 who_is_this_for: This is an advanced topic for developers and platform engineers who want to use Gemini CLI to analyze, migrate, and optimize applications for Arm-based systems.
 
 learning_objectives:
-  - Install and authenticate Gemini CLI on Arm Linux or macOS
+  - Verify an existing Gemini CLI installation and authentication
   - Configure Gemini CLI with persistent context for Arm development
   - Integrate the Arm Model Context Protocol (MCP) server with Gemini CLI
   - Use Gemini CLI to analyze code and workflows for Arm compatibility
