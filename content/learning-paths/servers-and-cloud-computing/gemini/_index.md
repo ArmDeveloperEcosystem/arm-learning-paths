@@ -21,16 +21,15 @@ author: Jason Andrews
 
 ##### Tags
 skilllevels: Advanced
-subjects: Developer Tools
-cloud_service_providers: Google Cloud
-
+subjects: Performance and Architecture
+armips:
+    - Neoverse
 tools_software_languages:
-  - Gemini CLI
-  - Docker
-
+    - Gemini CLI
+    - Docker   
 operatingsystems:
-  - Linux
-  - macOS
+    - Linux
+    - macOS
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
