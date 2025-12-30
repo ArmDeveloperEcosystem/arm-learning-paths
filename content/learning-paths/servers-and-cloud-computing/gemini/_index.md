@@ -25,6 +25,8 @@ subjects: Performance and Architecture
 tools_software_languages:
   - Gemini CLI
   - Docker
+armips:
+  - Neoverse
 operatingsystems:
   - Linux
   - macOS
