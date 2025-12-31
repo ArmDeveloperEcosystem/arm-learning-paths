@@ -1,6 +1,6 @@
 ---
 title: ClickHouse Baseline Testing on Google Axion C4A Arm Virtual Machine
-weight: 5
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
