@@ -76,6 +76,12 @@ Download and run the Node.js 22.x setup script:
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 ```
 
+Install Node.js:
+
+```bash
+sudo apt install nodejs -y
+```
+
 Verify Node.js is installed correctly:
 
 ```bash
@@ -85,7 +91,7 @@ node --version
 The output should show version 18 or higher:
 
 ```output
-v22.16.0
+v22.21.0
 ```
 
 Verify npm is available:
@@ -97,7 +103,7 @@ npm --version
 The output shows the npm version:
 
 ```output
-10.9.2
+10.9.4
 ```
 
 ### How do I install Codex CLI using npm on Arm Linux?
