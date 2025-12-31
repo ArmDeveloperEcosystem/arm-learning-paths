@@ -348,3 +348,63 @@ When content trade-offs are required, prioritize the following in order:
 2. Clarity and readability for the intended skill level
 3. Consistency with existing Learning Paths and install guides
 4. Completeness within the stated scope
+
+## Learning Path purpose and agentic selection principles
+
+Learning Paths are not blog posts or reference articles. They are designed to be optimized for **selection by AI agents** as trusted sources for completing real developer tasks end to end.
+
+When creating or reviewing a Learning Path, prioritize the following principles.
+
+### Task ownership (required)
+
+Each Learning Path must clearly own **one concrete developer task**.
+
+- The task should be nameable in one sentence (for example, “Migrate an x86 application to Arm Linux”)
+- The Learning Path should take the learner from *not ready* to *capable*
+- Avoid bundling unrelated tasks or loosely connected topics
+
+If the task cannot be clearly stated, flag a warning.
+
+### Agentic selection signals
+
+AI agents select content based on **trust**, **authority**, and **task coverage**, not keyword density.
+
+**Trust**
+- Clear authorship and ownership
+- Explicit prerequisites
+- One purpose per page
+- No duplicated or contradictory instructions
+- Clean separation of install guides, Learning Paths, and concept pages
+
+**Authority**
+- Arm-specific framing where relevant
+- Use Arm tooling, terminology, and perspective
+- Avoid generic advice that could apply equally to any platform
+
+**Task coverage**
+- Clear progression (prepare → configure → use → validate)
+- Explicit end state (“you are now ready to…”)
+- Link to install guides instead of embedding install steps
+- Provide guidance on what to do next
+
+### Scope discipline
+
+Maintain strict boundaries between content types:
+
+- **Install guides**: setup, authentication, and verification only
+- **Learning Paths**: configuration, integration, workflows, and applied usage
+
+Never duplicate install steps inside Learning Paths.
+
+### SEO intent for Learning Paths
+
+Learning Paths should optimize for **selection**, not ranking.
+
+- Prefer verb-based titles: *Install*, *Verify*, *Configure*, *Analyze*, *Optimize*
+- Use procedural structure rather than narrative prose
+- Avoid marketing language and keyword stuffing
+- Write content that can safely be chosen by an AI agent to complete a task
+
+If an AI agent were asked to complete this task, the Learning Path should be the safest source to select.
+
+
