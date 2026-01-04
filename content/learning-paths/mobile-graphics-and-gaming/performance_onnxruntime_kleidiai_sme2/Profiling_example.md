@@ -70,10 +70,7 @@ P95 Latency: 0.34682 s
 P99 Latency: 0.34682 s
 P999 Latency: 0.34682 s
 ```
-### Performance Indicators
-| Metric   | Non-KleidiAI  | KleidiAI (with SME2)     | Speed Up                                |
-|---------|----------------|----------------|-------------------------------------------------|
-| Latency per inference (ms) | 339           | 99  | >3.4       |
+### Performance 
 
 We can use [prefetto tool](https://ui.perfetto.dev/), to view the two JSON profile files.
 
