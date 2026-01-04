@@ -79,7 +79,7 @@ onnxruntime::InferenceSession::Run
 
 For example, the figure below shows a Gemm node.
 
-![Diagram illustrating an example of Gemm node alt-text#center](images/Gemm_node.jpg "An example of Gemm node")
+![Diagram illustrating an example of Gemm node alt-text#center](images/gemm_node.jpg "An example of Gemm node")
 
 The function calls of fp32 Gemm operators are shown below.
 ```text
