@@ -92,9 +92,6 @@ The required configuration steps vary by AI coding assistant. Refer to the insta
 - [GitHub Copilot](/install-guides/github-copilot/)
 - [Gemini CLI](/install-guides/gemini/)
 - [Kiro CLI](/install-guides/kiro-cli/)
-
-## What you've accomplished and what's next
-
-In this section, you've learned about the Arm MCP Server and its available tools for migration and optimization. You've also seen the different ways to interact with it: direct AI chat, prompt files, and agentic workflows.
+- [Codex CLI](/install-guides/codex-cli/)
 
 In the next section, you'll use direct AI chat with the Arm MCP Server to check Docker base images for Arm compatibility.
