@@ -1,6 +1,10 @@
 ---
 title: LTO Optimization With GCC
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 10
 
 who_is_this_for: This is an introductory topic for developers wishing to optimize code performance via link-time optimization using the GCC toolchain.
