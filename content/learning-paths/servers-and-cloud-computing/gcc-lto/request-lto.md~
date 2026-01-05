@@ -1,0 +1,27 @@
+---
+title: An LTO Primer
+weight: 2
+
+### FIXED, DO NOT MODIFY
+layout: learningpathall
+---
+
+## A Brief Introduction to Link-Time Optimization
+
+### Optimizations and Their Scope of Operation
+Different optimizations carried out by the compiler may be categorized by the scope within which they operate.
+
+Some optimizations such as dead code elimination operate within the limited scope of a single function.  If some defined variable is known not to be used within its scope, it can be thrown away without knowledge of what the program does outside of its scope.
+
+Others, however, require knowledge of the rest of the code.  A function known to be called with a constant as one if its parameters is likely to benefit from inter-procedural constant propagation, for example.  Any such optimization must, however, be conservative.
+
+A function not visible outside of the file in which it is defined - its translational unit - will have enough information by default for the compiler to make such decisions.  For a function exposed in a library, on the other hand, it is impossible to make conclusions such as how it will be called at compile-time and such optimizations cannot be made. Between these two extremes lie functions defined for use throughout a program's various components, but whose use will be fully defined once the final executable is defined.
+
+It is for these cases that link-time optimization (LTO) is able to provide executables with maximal performance gains.
+
+### Link-Time Optimization and Intermediate Code Representation
+Typically, when a translational unit is finished compiling, GCC emits an object file - A binary object containing a largely complete section of executable code minus potentially unresolved symbols, together with data and metadata needed for the final linking.  This having committed to particular instructions and thrown away the compiler's intermediate representation greatly reduces any ability the compiler might have had to further optimize the code when objects are combined into the final executable.
+
+Given the loss of optimization opportunities that comes with the move to a particular assembly sequence, requesting LTO causes GCC to alter the format of output following the completion of compiling the translational unit. To quote the GCC Wiki, the use of LTO for the single compilation unit causes GCC to dump its internal representation (GIMPLE) to disk as bytecode, so that all the different compilation units that make up a single executable can be optimized as a single module.
+
+Once all the different lto-enabled object files have been emitted, link time optimization can be executed. Link time optimization is implemented as a GCC front end for a bytecode representation of GIMPLE that is emitted in special sections of .o files.
