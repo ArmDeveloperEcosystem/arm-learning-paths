@@ -1,6 +1,10 @@
 ---
 title: Deploy Jenkins on Arm64 Cloud Platforms (Azure & GCP)
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30   
 
 who_is_this_for: This learning path is intended for software developers deploying and optimizing Jenkins workloads on Linux/Arm64 environments, specifically on Microsoft Azure Cobalt 100 Arm processors and Google Cloud C4A virtual machines powered by Axion processors.
