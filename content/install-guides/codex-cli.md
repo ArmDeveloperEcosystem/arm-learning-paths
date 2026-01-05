@@ -20,6 +20,8 @@ Codex CLI is a lightweight coding agent from OpenAI that runs locally in your te
 
 It supports multiple operating systems, including Arm-based Linux distributions and macOS.
 
+This guide explains how to install Codex CLI on macOS and Arm Linux.
+
 ## What should I do before installing Codex CLI?
 
 You need an OpenAI account to use Codex CLI. You can either sign in with your ChatGPT account (Plus, Pro, Team, Edu, or Enterprise plan) or use an OpenAI API key.
