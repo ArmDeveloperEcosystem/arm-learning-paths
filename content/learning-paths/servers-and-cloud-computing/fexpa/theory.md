@@ -60,3 +60,4 @@ As previously discussed, this value can be approximated by computing a 32-bit in
 
 $$i = 2^{23} \times x⁄ln2 + 2^{23} \times bias = a \times x + b $$
 
+Continue to the next section to make a C-based implementation of the exponential function.
