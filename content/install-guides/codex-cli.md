@@ -1,6 +1,6 @@
 ---
 title: Codex CLI
-
+draft: true
 author: Joe Stech
 minutes_to_complete: 10
 official_docs: https://developers.openai.com/codex/cli/
