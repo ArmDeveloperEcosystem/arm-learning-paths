@@ -17,11 +17,11 @@ learning_objectives:
 prerequisites:
     - A recent release of the GCC toolchain
 
-author: Victor Do Nascimento, Arm
+author: Victor Do Nascimento
 
 ### Tags
 skilllevels: Introductory
-subjects: Compiler Optimization
+subjects: Performance and Architecture
 armips:
     - Neoverse
     - Cortex-A
