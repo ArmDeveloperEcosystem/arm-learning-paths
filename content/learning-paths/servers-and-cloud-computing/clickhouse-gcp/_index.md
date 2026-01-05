@@ -14,7 +14,6 @@ learning_objectives:
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Basic familiarity with [ClickHouse](https://clickhouse.com/)
-  - An install guide on [how to get started with Google Cloud Platform](/install-guides/gcp/)
 
 author: Pareena Verma
 
