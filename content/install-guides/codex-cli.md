@@ -24,7 +24,7 @@ This guide explains how to install Codex CLI on macOS and Arm Linux.
 
 ## What should I do before installing Codex CLI?
 
-You need an OpenAI account to use Codex CLI. You can either sign in with your ChatGPT account (Plus, Pro, Team, Edu, or Enterprise plan) or use an OpenAI API key.
+You need an OpenAI account to use Codex CLI. You can either sign in with your [ChatGPT](https://chatgpt.com/) account (Plus, Pro, Team, Edu, or Enterprise plan) or use an OpenAI API key.
 
 Codex CLI requires Node.js 18 or later.
 
@@ -44,7 +44,7 @@ npm install -g @openai/codex
 
 ### Can I use Homebrew to install Codex CLI on macOS?
 
-Yes, you can install [Homebrew](https://brew.sh/) if it's not already available on your computer.
+Yes. Install [Homebrew](https://brew.sh/) if it's not already available on your computer.
 
 Install Codex CLI using Homebrew:
 
@@ -72,7 +72,7 @@ If you are not using Ubuntu/Debian use your package manager to install curl.
 
 Codex CLI requires Node.js version 18 or higher. The easiest way to install Node.js on Arm Linux is using the NodeSource repository.
 
-Download and run the Node.js 22.x setup script:
+Download and run the Node.js setup script (example shown for Node.js 22.x):
 
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
@@ -147,8 +147,7 @@ Run the `codex` command and select **Sign in with ChatGPT** to authenticate:
 ```console
 codex
 ```
-
-Follow the prompts to sign in with your OpenAI account. This is recommended if you have a ChatGPT Plus, Pro, Team, Edu, or Enterprise plan.
+This opens a browser window to complete authentication. This option is recommended if you have a ChatGPT Plus, Pro, Team, Edu, or Enterprise plan.
 
 **Option 2: Use an OpenAI API key**
 
@@ -160,7 +159,7 @@ Set the `OPENAI_API_KEY` environment variable:
 export OPENAI_API_KEY=your-api-key-here
 ```
 
-To make this permanent, add the export command to your shell configuration file (such as `~/.bashrc` or `~/.zshrc`).
+Add this command to your shell configuration file (such as ~/.bashrc or ~/.zshrc) to make it permanent.
 
 You can generate an API key from the [OpenAI Platform](https://platform.openai.com/api-keys).
 
@@ -177,7 +176,7 @@ You can configure various options including the default model, approval mode, an
 To see all configuration options, refer to the [Configuration documentation](https://developers.openai.com/codex/cli/reference/).
 
 
-## Install a local MCP server
+## Install the Arm MCP server
 
 The Arm MCP Server is an MCP server providing AI assistants with tools and knowledge for Arm architecture development, migration, and optimization. This section shows how to configure the Arm MCP server locally using Docker.
 
@@ -186,12 +185,11 @@ First, pull the MCP server image to your local machine:
 ```console
 docker pull armlimited/arm-mcp:latest
 ```
-
-You also need Docker running on the system. See the [Docker install guide](/install-guides/docker/) for instructions.
+Ensure Docker is installed and running. See the [Docker install guide](/install-guides/docker/) for instructions.
 
 ### How do I configure the Arm MCP server?
 
-Codex CLI uses a TOML configuration file for MCP servers. Modify the file `~/.codex/config.toml` to add the Arm MCP server via a Docker container.
+Codex CLI uses a TOML configuration file for MCP servers. Modify the file `~/.codex/config.toml` to add the Arm MCP server using Docker.
 
 To analyze a local codebase, use a `-v` argument to mount a volume to the Arm MCP server `/workspace` folder so it can access code you want to analyze with migrate-ease and other tools.
 
@@ -225,7 +223,7 @@ Start Codex CLI and list the tools from the MCP server to verify it is working:
 codex
 ```
 
-Use the `/mcp` command to view active MCP servers and their status:
+At the Codex prompt, run the `/mcp` command to view active MCP servers and their status:
 
 ```console
 /mcp
