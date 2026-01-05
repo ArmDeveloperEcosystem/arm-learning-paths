@@ -235,4 +235,4 @@ You can also verify the tools are available by asking Codex to list the availabl
 
 If you are facing issues or have questions, reach out to mcpserver@arm.com.
 
-You're ready to use Codex CLI with Arm development tools.
+You're ready to use Codex CLI.
