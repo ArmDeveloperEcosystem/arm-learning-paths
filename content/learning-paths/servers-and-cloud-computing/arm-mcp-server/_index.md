@@ -13,10 +13,9 @@ learning_objectives:
   - Configure AI agents to reuse the same migration workflow across different tools
 
 prerequisites:
-    - An AI-powered IDE such as VS Code with agentic tools like GitHub Copilot, Claude Code, Cursor, or similar
+    - An AI-powered IDE such as VS Code, Copilot in VS Code, Kiro (IDE or CLI) or Codex
     - Basic familiarity with Docker and C/C++ development
-    - Access to an Arm-based cloud instance or local Arm computer for testing
-
+    - Access to an Arm-based cloud instance or local Arm computer running Linux or macOS
 author: Joe Stech
 
 ### Tags
