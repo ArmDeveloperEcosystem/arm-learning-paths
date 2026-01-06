@@ -1,5 +1,5 @@
 ---
-title: Run Confidential Containers with encrypted images using Arm CCA and Trustee
+title: Run Confidential Containers with Encrypted Images using Arm CCA and Trustee
 
 draft: true
 cascade:
@@ -7,15 +7,15 @@ cascade:
     
 minutes_to_complete: 60
 
-who_is_this_for: This Learning Path is for software developers who want to understand how Confidential Containers can be run in Arm CCA realm.
+who_is_this_for: This Learning Path is for software developers who want to understand how Confidential Containers can be run in Arm CCA Realm.
 
 learning_objectives:
-  - Overview of Confidential Containers
-  - Understand how Trustee services are used for CCA attestation to unlock the confidential processing of data.
-  - Use an encrypted image to deploy a Confidential Container in a CCA realm on an Armv9-A AEM Base Fixed Virtual Platform (FVP) that has support for RME extensions.
+  - Gain an overview of Confidential Containers and their role in confidential computing.
+  - Understand how Trustee services are used with Arm CCA attestation to authorize and unlock confidential workloads.
+  - Deploy a Confidential Container from an encrypted image inside an Arm CCA Realm using an Armv9-A AEM Base Fixed Virtual Platform (FVP) with RME support.
 
 prerequisites:
-  - An AArch64 or x86_64 computer running Linux or macOS; you can use cloud instances - see the [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/)
+  - An AArch64 or x86_64 computer running Linux or macOS. Cloud-based instances can also be used; see the [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
   - Completion of the ["Run an end-to-end Attestation with Arm CCA and Trustee"](/learning-paths/servers-and-cloud-computing/cca-trustee) Learning Path
 
 author:
@@ -37,8 +37,8 @@ tools_software_languages:
   - Docker
   - Veraison
   - Trustee
-  - Confidential containers
-  - Kata containers
+  - Confidential Containers
+  - Kata Containers
 
 further_reading:
   - resource:
@@ -46,7 +46,7 @@ further_reading:
       link: https://www.arm.com/architecture/security-features/arm-confidential-compute-architecture
       type: website
   - resource:
-      title: Arm Confidential Compute Architecture open-source enablement
+      title: Arm Confidential Compute Architecture Open-Source enablement
       link: https://www.youtube.com/watch?v=JXrNkYysuXw
       type: video
   - resource:
@@ -54,7 +54,7 @@ further_reading:
       link: https://developer.arm.com/documentation/den0126
       type: documentation
   - resource:
-      title: Realm Management Monitor specification
+      title: Realm Management Monitor Specification
       link: https://developer.arm.com/documentation/den0137/latest/
       type: documentation
 
