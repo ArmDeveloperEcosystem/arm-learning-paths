@@ -292,3 +292,4 @@ Stop all Trustee service containers with:
 ```bash
 docker compose down
 ```
+In this section, you brought up the Trustee services (AS, KBS, and RVPS) along with a local Docker registry, published an encrypted container image, and configured the environment so a guest running in an Arm CCA Realm could trust and pull from that registry. You then calculated and endorsed a Realm Initial Measurement (RIM), enabling successful attestation and allowing the guest to retrieve the decryption key from KBS. Finally, you launched a Confidential Container from the encrypted image and verified it was running inside a Realm by checking RME-related kernel messages.
