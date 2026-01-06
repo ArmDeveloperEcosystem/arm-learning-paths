@@ -28,7 +28,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Python
-    - C++
+    - CPP
     - Bash
     - llama.cpp
 

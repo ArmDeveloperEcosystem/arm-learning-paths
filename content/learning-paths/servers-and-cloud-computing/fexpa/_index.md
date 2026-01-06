@@ -46,7 +46,7 @@ operatingsystems:
     - macOS
 tools_software_languages:
     - C
-    - C++
+    - CPP
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

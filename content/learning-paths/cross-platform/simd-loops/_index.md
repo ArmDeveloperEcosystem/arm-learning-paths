@@ -31,7 +31,7 @@ operatingsystems:
     - macOS
 tools_software_languages:
   - C
-  - C++
+  - CPP
   - GCC
   - Clang
 

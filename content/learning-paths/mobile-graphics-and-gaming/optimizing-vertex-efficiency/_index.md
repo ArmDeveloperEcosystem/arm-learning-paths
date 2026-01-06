@@ -25,7 +25,7 @@ armips:
     - Mali
 tools_software_languages:
     - C
-    - C++
+    - CPP
 operatingsystems:
     - Android
 

@@ -25,7 +25,7 @@ armips:
     - Cortex-A
     - Neoverse
 tools_software_languages:
-    - C++
+    - CPP
 operatingsystems:
     - Linux
 shared_path: true
