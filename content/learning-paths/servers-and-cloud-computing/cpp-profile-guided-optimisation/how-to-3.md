@@ -12,7 +12,7 @@ In this section, you'll learn how to use Google Benchmark and Profile-Guided Opt
 
 Integer division is ideal for benchmarking because it's significantly more expensive than operations like addition, subtraction, or multiplication. On most CPU architectures, including Arm, division instructions have higher latency and lower throughput compared to other arithmetic operations. By applying Profile-Guided Optimization to code containing division operations, we can potentially achieve significant performance improvements.
 
-## What tools are needed to run a Google Benchmark example on Linux?
+## What tools are needed to run a Google Benchmark example?
 
 For this example, you can use any Arm Linux computer. For example, an AWS EC2 `c7g.xlarge` instance running Ubuntu 24.04 LTS can be used.
 

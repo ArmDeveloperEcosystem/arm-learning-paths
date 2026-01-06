@@ -22,8 +22,6 @@ Next, run the instrumented binary to generate the profile data:
 
 This execution creates profile data files (typically with a `.gcda` extension) in the same directory. 
 
-### Compile and run the optimized binary 
-
 Now recompile the program using the `-fprofile-use` flag to apply optimizations based on the collected data: 
 
 ```bash
