@@ -59,7 +59,8 @@ Learn more about how Trustee services are used to evaluate the trustworthiness o
 
 ### Full Architecture Overview
 
-By combining, Kata Containers, Guest-side image pulling and attestation and secret management, you arrive at the complete Confidential Containers architecture shown below.
+By combining, Kata Containers, Guest-side image pulling and attestation and secret management, you arrive at the complete Confidential Containers architecture shown below:
+
 ![Confidential Containers alt-text#center](confidential_containers.png "Confidential Containers")
 
 
