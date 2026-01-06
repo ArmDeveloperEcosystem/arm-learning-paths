@@ -23,8 +23,8 @@ tools_software_languages_filter:
 - Arm Development Studio: 1
 - Arm Zena CSS: 1
 - C: 2
-- C++: 1
 - Clang: 3
+- CPP: 1
 - DDS: 1
 - Docker: 2
 - FVP: 1

@@ -31,10 +31,10 @@ tools_software_languages_filter:
 - Bash: 3
 - C: 10
 - C#: 6
-- C++: 12
 - CCA: 1
 - Clang: 13
 - CMake: 3
+- CPP: 12
 - CSS: 1
 - Daytona: 1
 - Docker: 5

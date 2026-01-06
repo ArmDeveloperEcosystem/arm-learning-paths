@@ -35,10 +35,10 @@ tools_software_languages_filter:
 - Bazel: 1
 - C: 5
 - C#: 3
-- C++: 14
 - CCA: 1
 - Clang: 12
 - CMake: 2
+- CPP: 14
 - Docker: 1
 - ExecuTorch: 3
 - Frame Advisor: 1
