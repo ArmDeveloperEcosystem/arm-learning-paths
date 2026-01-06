@@ -11,62 +11,60 @@ layout: "learningpathall"
 
 ## Confidential Containers
 
-["Confidential Containers"](https://github.com/confidential-containers/confidential-containers) is an open source community
-working to enable cloud native confidential computing by leveraging Trusted Execution Environments to protect containers and data.
+["Confidential Containers"](https://github.com/confidential-containers/confidential-containers) is an open-source community
+project focused on enabling cloud native confidential computing by leveraging Trusted Execution Environments (TEEs) to protect container workloads and the data they process.
 
 ## Design overview
 
-Confidential computing projects are largely defined by what is inside the Trusted Execution Environment (TEE) and what is not.
-For Confidential Containers, the TEE contains the workload pod and helper processes and daemons that facilitate the workload pod.
-Everything else, including the hypervisor, other pods, and the control plane, is outside of the TEE and untrusted.
+Confidential computing systems are typically defined by what runs inside the Trusted Execution Environment (TEE) and what remains outside of it.
+In the Confidential Containers architecture, the TEE contains:
+  * The workload pod
+  * Helper processes and daemons required to support the workload pod.
+Everything else outside of the TEE, including the hypervisor, other pods, and the control plane, is considered untrusted. This trust boundary is fundamental to how Confidential Containers protect workload confidentiality.
 
 ### Kata Containers
 
-Confidential Containers and ["Kata Containers"](https://github.com/kata-containers/kata-containers) are closely linked,
-but the relationship might not be obvious at first. Kata Containers is an existing open source project that encapsulates pods inside of VMs and
-VMs can be run in TEEs. In this Learning Path the guest VM will be run in an ARM CCA realm and you will be able to confirm it by checking kernel messages.
+Confidential Containers and [Kata Containers](https://github.com/kata-containers/kata-containers) are closely related, although the distinction between them is not always immediately clear. Kata Containers is an established open-source project that runs Kubernetes pods inside lightweight virtual machines. These VMs can, in turn, be executed within a TEE. In this Learning Path, the guest virtual machine is run inside an Arm CCA Realm, which you will later verify by inspecting kernel messages inside the guest.
 
-Given the pod-centric design of Confidential Containers this is a perfect match. But if Kata runs pods inside of VM,
-why do we need the Confidential Containers project at all? There are crucial changes needed on top of Kata Containers to preserve confidentiality.
+This VM-based isolation model aligns well with the pod-centric design of Confidential Containers. However, while Kata Containers provide strong isolation, additional functionality is required to preserve confidentiality when the host environment is untrusted. These extensions are provided by the Confidential Containers project.
 
 ### Image Pulling
 
-When using Kata Containers container images are pulled on the worker node with the help of a CRI runtime like **containerd**.
-The images are exposed to the guest via filesystem passthrough. This is not suitable for confidential workloads
-because the container images are exposed to the untrusted host. With Confidential Containers images are pulled and unpacked inside of the guest.
-This requires additional components such as **image-rs** to be part of the guest rootfs. These components are beyond the scope of
-traditional Kata deployments and live in the Confidential Containers ["guest components"](https://github.com/confidential-containers/guest-components) repository.
+In a standard Kata Containers deployment, container images are pulled on the worker node using a CRI runtime such as containerd. The images are then exposed to the guest VM via filesystem passthrough. This approach is not suitable for confidential workloads because container images are visible to the untrusted host. Confidential Containers address this limitation by pulling and unpacking container images inside the guest VM.
+To enable this, additional components such as **image-rs** are included in the guest root filesystem. These components go beyond traditional Kata deployments and are maintained in the Confidential Containers ["guest components"](https://github.com/confidential-containers/guest-components) repository.
 
-On the host, a **nydus snapshotter** is used to pre-empt image pull and divert control flow to **image-rs** inside the guest.
-This is a simplified diagram showing the interaction of **containerd**, the **nydus snapshotter**, and **image-rs**.
+On the host side, a **nydus snapshotter** intercepts the image pull process and redirects control to **image-rs** running inside the guest.
+The diagram below illustrates the interaction between **containerd**, the **nydus snapshotter**, and **image-rs**.
 ![Image pulling alt-text#center](image_pulling.png "Image pulling")
 
 ### Attestation
 
-Confidential Containers also provides components inside the guest and elsewhere to facilitate attestation.
-Attestation is a crucial part of confidential computing and a direct requirement of many guest operations.
-For example, to unpack an encrypted container image, the guest must retrieve a secret key.
-Inside the guest the **Confidential Data Hub (CDH)** and **Attestation Agent (AA)** handle operations involving secrets and attestation.
-Again, these components are beyond the scope of traditional Kata deployments and are located in the ["guest components"](https://github.com/confidential-containers/guest-components) repository.
+Confidential Containers also include components that enable attestation, which is a core requirement for confidential computing.
+Many guest operations depend on attestation. For example, before an encrypted container image can be unpacked, the guest must prove its identity and integrity in order to retrieve the decryption key.
+Inside the guest the Confidential Data Hub (CDH) and Attestation Agent (AA) manage attestation flows and secret handling.
+Like image pulling components, these services extend beyond traditional Kata deployments and are part of the Confidential Containers ["guest components"](https://github.com/confidential-containers/guest-components) repository.
 
-The CDH and AA use the KBS Protocol to communicate with an external, trusted entity.
-Confidential Containers provides [Trustee](https://github.com/confidential-containers/trustee) as an attestation service and key management engine that validates the guest TCB and releases secret resources.
+The CDH and AA communicate with an external trusted service using the Key Broker Service (KBS) protocol.
+Confidential Containers provide [Trustee](https://github.com/confidential-containers/trustee) as an attestation service and key management engine that:
+   * Verifies the guest Trusted Computing Base (TCB)
+   * Evaluates attestation evidence
+   * Releases secrets only when policy requirements are met
 
-This is a simplified diagram of the attestation process
+The diagram below shows a simplified view of the attestation flow.
 ![Attestation alt-text#center](attestation.png "Attestation")
 
-In this Learning Path the attestation process will be used to obtain an encryption key required to decrypt a container image.
-Learn more about how Trustee services are used to evaluate the trustworthiness of a CCA realm and how attestation policy gates secrets release in
-["Run an end-to-end Attestation with Arm CCA and Trustee"](/learning-paths/servers-and-cloud-computing/cca-trustee)
+In this Learning Path, attestation is used to obtain the encryption key required to decrypt a container image.
+Learn more about how Trustee services are used to evaluate the trustworthiness of a CCA Realm and how attestation policy gates secrets release in the
+["Run an end-to-end Attestation with Arm CCA and Trustee"](/learning-paths/servers-and-cloud-computing/cca-trustee) Learning Path.
 
-### Full diagram
+### Full Architecture Overview
 
-If we take Kata Containers and add guest image pulling and attestation, we arrive at the following diagram, which represents Confidential Containers.
+By combining, Kata Containers, Guest-side image pulling and attestation and secret management, you arrive at the complete Confidential Containers architecture shown below:
+
 ![Confidential Containers alt-text#center](confidential_containers.png "Confidential Containers")
 
 
-For convenience, Trustee services and the Confidential Containers software are packaged in Docker containers,
-which you can run on any suitable AArch64 or x86_64 development host.
-Because the client runs in a realm, it uses the Fixed Virtual Platform (FVP) and the reference software stack for Arm CCA.
+For convenience, both the Confidential Containers software stack and Trustee services are packaged as Docker containers. These can be run on any suitable AArch64 or x86_64 development host.
+Because the confidential workload itself runs inside an Arm CCA Realm, this Learning Path uses the Arm Fixed Virtual Platform (FVP) along with the Arm CCA reference software stack to provide the required environment.
 
 Proceed to the next section to run a confidential container using the components and architecture described here.
