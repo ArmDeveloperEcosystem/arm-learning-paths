@@ -101,3 +101,4 @@ sudo perf report --input=perf-division-base
 As the `perf report` graphic below shows, the program spends a significant amount of time in the short loops with no loop unrolling. There is also an expensive `sdiv` operation, and most of the execution time is spent storing the result of the operation.
 
 ![before-pgo](./before-pgo.gif)
+
