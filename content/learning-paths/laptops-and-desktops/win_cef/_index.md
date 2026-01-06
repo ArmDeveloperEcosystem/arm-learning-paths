@@ -23,7 +23,7 @@ armips:
 operatingsystems:
     - Windows
 tools_software_languages:
-    - C++
+    - CPP
     - CMake 
     - HTML
     - JavaScript

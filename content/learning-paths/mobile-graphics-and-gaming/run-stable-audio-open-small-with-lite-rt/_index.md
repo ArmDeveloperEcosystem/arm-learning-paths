@@ -32,7 +32,7 @@ armips:
     - Cortex-X
 
 tools_software_languages:
-    - C++
+    - CPP
     - Python
     - Hugging Face
 

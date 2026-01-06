@@ -24,7 +24,7 @@ subjects: Performance and Architecture
 armips:
     - Cortex-A
 tools_software_languages:
-    - C++
+    - CPP
     - Docker
 operatingsystems:
     - Linux

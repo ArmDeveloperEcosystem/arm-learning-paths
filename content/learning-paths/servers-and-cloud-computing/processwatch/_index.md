@@ -26,7 +26,7 @@ tools_software_languages:
     - libbpf
     - Capstone
     - C
-    - C++
+    - CPP
     - Runbook
 
 operatingsystems:

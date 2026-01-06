@@ -27,7 +27,7 @@ armips:
 tools_software_languages:
     - MCP
     - Docker
-    - C++
+    - CPP
     - GitHub Copilot
 operatingsystems:
     - Linux

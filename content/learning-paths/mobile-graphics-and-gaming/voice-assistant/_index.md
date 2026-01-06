@@ -26,7 +26,7 @@ armips:
 tools_software_languages:
     - Java
     - Kotlin
-    - C++
+    - CPP
 operatingsystems:
     - Android
     - Linux
