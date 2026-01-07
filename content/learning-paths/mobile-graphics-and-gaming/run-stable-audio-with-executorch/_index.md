@@ -14,7 +14,7 @@ learning_objectives:
 prerequisites:
     - A Linux-based x86 or macOS development machine with at least 8 GB of RAM and 50 GB of disk space (tested on Ubuntu 22.04 with x86_64 and macOS with Apple Silicon).
     - A [HuggingFace](https://huggingface.co/) account.
-    - For Android deployment: An Android phone in [developer mode](https://developer.android.com/studio/debug/dev-options) with at least 8 GB of RAM and a cable to connect it to your development machine.
+    - An Android phone in [developer mode](https://developer.android.com/studio/debug/dev-options) with at least 8 GB of RAM and a cable to connect it to your development machine.
 
 author:
     - Adnan AlSinan
