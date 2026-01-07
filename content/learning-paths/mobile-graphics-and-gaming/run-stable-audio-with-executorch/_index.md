@@ -1,6 +1,10 @@
 ---
 title: Generate audio with Stable Audio Open Small using ExecuTorch
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for developers looking to deploy the Stable Audio Open Small text-to-audio model using ExecuTorch on an Android™ device or macOS®.
