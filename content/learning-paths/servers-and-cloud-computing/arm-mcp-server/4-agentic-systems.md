@@ -12,9 +12,7 @@ Different AI coding tools provide different mechanisms for defining persistent i
 
 This section shows how to set up Arm migration workflows in popular agentic AI systems. You'll see that the core migration logic stays consistent across platforms, but each tool has its own format for defining these instructions.
 
-{{% notice Note %}}
-The migration instructions below are the same workflow you used in the previous section. Each AI tool simply wraps those instructions in a different format.
-{{% /notice %}}
+{{% notice Note %}}The migration instructions below implement the same workflow shown in the previous section. If you skipped that section, you can start here directly. Each AI tool simply wraps the same core instructions in a different format.{{% /notice %}}
 
 ## Set up Kiro steering documents
 

@@ -82,10 +82,10 @@ CMD ["./start.sh"]
 With the Arm MCP Server connected to your AI assistant, you can quickly verify base image compatibility using a simple natural language prompt:
 
 ```text
-Check this base image for Arm compatibility
+Check if this Dockerfile supports Arm
 ```
 
-The AI assistant will use the `check_image` or `skopeo` tool to inspect the image and return a report. For `centos:6`, you'd discover that this legacy image doesn't support `arm64` architecture.
+The AI assistant uses the `check_image` or `skopeo` tool to inspect the base image and return a compatibility report. For `centos:6`, you'd discover that this legacy image doesn't support `arm64` architecture.
 
 ## What you've accomplished and what's next
 

@@ -5,8 +5,9 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
 ## Migrating SIMD code with AI assistance
+
+{{% notice Note %}} This section uses Visual Studio Code with GitHub Copilot Chat or Copilot Edits. If you're using a different AI assistant, skip to the next section, where you'll configure the same migration workflow using other agentic systems.{{% /notice %}}
 
 When migrating applications from x86 to Arm, you might encounter SIMD (Single Instruction, Multiple Data) code that is written using architecture-specific intrinsics. On x86 platforms, SIMD is commonly implemented with SSE, AVX, or AVX2 intrinsics, while Arm platforms use NEON and SVE intrinsics to provide similar vectorized capabilities. Updating this code manually can be time-consuming and challenging. By combining the Arm MCP Server with a well-defined prompt file, you can automate much of this work and guide an AI assistant through a structured, architecture-aware migration of your codebase.
 
