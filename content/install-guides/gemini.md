@@ -122,7 +122,7 @@ Install Gemini CLI globally using npm:
 npm install -g @google/gemini-cli
 ```
 
-This installs the latest version, such as 0.20.0, directly from npm. Homebrew can lag behind npm, so versions might differ.
+This installs the latest version, such as 0.23.0, directly from npm. Homebrew can lag behind npm, so versions might differ.
 
 ### How do I confirm Gemini CLI is working on macOS?
 
@@ -137,7 +137,7 @@ gemini --version
 The output is similar to:
 
 ```output
-0.20.0
+0.23.0
 ```
 
 Start an interactive session to test basic functionality:
@@ -223,7 +223,7 @@ gemini --version
 The output shows the version:
 
 ```output
-0.20.0
+0.23.0
 ```
 
 ### How do I view the available command-line options?
@@ -380,13 +380,32 @@ Start the Gemini CLI and list the tools from the MCP server to verify it's worki
 gemini
 ```
 
-Use the `/tools` command to list the available tools:
+The output shows the MCP server.
 
-```console
-/tools
+```output
+ Using: 1 GEMINI.md file | 1 MCP server
 ```
 
-The Arm MCP server tools are listed in the output. If the arm-mcp server indicates it's still loading, wait a moment and run `/tools` again.
+Use the `/mcp` command to list the available tools:
+
+```console
+/mcp
+```
+
+The Arm MCP server tools are listed in the output. 
+
+```output
+Configured MCP servers:
+
+🟢 arm_mcp_server - Ready (6 tools)
+  Tools:
+  - check_image
+  - knowledge_base_search
+  - mca
+  - migrate_ease_scan
+  - skopeo
+  - sysreport_instructions
+```
 
 If you're facing issues or have questions, reach out to mcpserver@arm.com.
 
