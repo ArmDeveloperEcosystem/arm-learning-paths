@@ -1,6 +1,10 @@
 ---
 title: Unleashing SME2 Performance - Profile ONNX models with KleidiAI-Optimized ONNX Runtime
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 40
 
 who_is_this_for: This is an advanced topic for software developers, performance engineers, and AI practitioners 
