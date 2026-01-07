@@ -1,8 +1,6 @@
 ---
 title: Gemini CLI
 
-draft: true
-
 author: Jason Andrews
 minutes_to_complete: 15
 official_docs: https://ai.google.dev/gemini-api/docs/cli
@@ -82,11 +80,11 @@ Benefits of using Vertex AI:
 
 ## How do I install Gemini CLI on macOS?
 
-The easiest way to install Gemini CLI on macOS is using Homebrew, which handles all dependencies automatically.
+The easiest way to install Gemini CLI on macOS is using Homebrew, which handles all dependencies.
 
 ### Install Gemini CLI on macOS using Homebrew
 
-Yes, you can install [Homebrew](https://brew.sh/) if it isn't already available on your computer.
+You can install [Homebrew](https://brew.sh/) if it isn't already available on your computer.
 
 Install Gemini CLI using Homebrew:
 
@@ -98,7 +96,7 @@ This installs Gemini CLI and automatically handles the Node.js dependency. The H
 
 ### Install Gemini CLI on macOS using npm
 
-Yes, if you prefer to use npm or need the latest version, you can install Gemini CLI globally using npm.
+If you prefer to use npm or need the latest version, you can install Gemini CLI globally using npm.
 
 First, make sure you have Node.js version 20 or higher installed. Install Node.js using Homebrew:
 
@@ -112,7 +110,7 @@ Verify Node.js is installed correctly:
 node --version
 ```
 
-The output should show version 20 or higher:
+The output is similar to:
 
 ```output
 v25.2.1
@@ -124,7 +122,7 @@ Install Gemini CLI globally using npm:
 npm install -g @google/gemini-cli
 ```
 
-This installs the latest version (for example, 0.20.0) directly from npm. Homebrew can lag behind npm, so versions may differ.
+This installs the latest version, such as 0.20.0, directly from npm. Homebrew can lag behind npm, so versions might differ.
 
 ### How do I confirm Gemini CLI is working on macOS?
 
@@ -136,7 +134,7 @@ Confirm the CLI is available by checking the version:
 gemini --version
 ```
 
-The output shows the version:
+The output is similar to:
 
 ```output
 0.20.0
@@ -164,7 +162,7 @@ Install the required packages on Ubuntu/Debian systems:
 sudo apt update && sudo apt install -y curl
 ```
 
-If you are not using Ubuntu/Debian use your package manager to install curl.
+If you're not using Ubuntu/Debian, use your package manager to install curl.
 
 ### How do I install Node.js on Arm Linux?
 
@@ -194,7 +192,7 @@ Verify npm is available:
 npm --version
 ```
 
-The output shows the npm version:
+The output is similar to:
 
 ```output
 10.2.4
@@ -361,7 +359,7 @@ You may have other objects already in the file so make sure to use a `,` at the 
         "run",
         "--rm",
         "-i",
-        "-v", "/Users/yourname01/yourlocalcodebase:/workspace",
+        "-v", "$HOME/workspace:/workspace",
         "--name", "arm-mcp",
         "armlimited/arm-mcp:latest"
       ],
@@ -388,8 +386,8 @@ Use the `/tools` command to list the available tools:
 /tools
 ```
 
-You should see the Arm MCP server tools listed in the output. If the arm-mcp server says it's still loading, wait a moment and run `/tools` again.
+The Arm MCP server tools are listed in the output. If the arm-mcp server indicates it's still loading, wait a moment and run `/tools` again.
 
-If you're facing issues or have questions, reach out to mcpserver@arm.com .
+If you're facing issues or have questions, reach out to mcpserver@arm.com.
 
-You're ready to use the Gemini CLI.
+You're now ready to use Gemini CLI with the Arm MCP server for Arm-specific development assistance.
