@@ -9,7 +9,7 @@ learning_objectives:
   - Explain how the Arm MCP Server enables AI-driven x86-to-Arm migration workflows
   - Use AI-assisted checks to inspect Docker images for Arm compatibility
   - Automate the migration of x86-specific C++ code to Arm using structured prompt files
-  - Validate and run a migrated Dockerized C++ application on Arm-based systems
+  - Validate and run a migrated C++ application using Docker on Arm-based systems
   - Configure AI agents to reuse the same migration workflow across different tools
 
 prerequisites:
