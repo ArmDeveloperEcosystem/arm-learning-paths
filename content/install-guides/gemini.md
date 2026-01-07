@@ -388,8 +388,8 @@ Use the `/tools` command to list the available tools:
 /tools
 ```
 
-You should see the Arm MCP server tools listed in the output. If the arm-mcp server says it's still loading, wait a moment and run `/tools` again.
+The Arm MCP server tools are listed in the output. If the arm-mcp server indicates it's still loading, wait a moment and run `/tools` again.
 
-If you're facing issues or have questions, reach out to mcpserver@arm.com .
+If you're facing issues or have questions, reach out to mcpserver@arm.com.
 
-You're ready to use the Gemini CLI.
+You're now ready to use Gemini CLI with the Arm MCP server for Arm-specific development assistance.
