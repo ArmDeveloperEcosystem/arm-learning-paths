@@ -11,10 +11,10 @@ ONNX runtime is built with KleidiAI support:
 1.	Detection: At runtime, MLAS checks the CPU capabilities for SME2 support.
 2.	Dispatch: If SME2 is detected, MLAS overrides its default kernels. For example, a Gemm (General Matrix Multiplication) operation that would normally use standard vector instructions (such as NEON) is dispatched to a KleidiAI SME2 micro-kernel.
 
-Currently, KleidiAI in MLAS provides ArmKleidiAI::MlasConv, ArmKleidiAI::MlasGemmBatch and ArmKleidiAI::MlasDynamicQGemmBatch kernels.
+Currently, KleidiAI in MLAS provides `ArmKleidiAI::MlasConv`, `ArmKleidiAI::MlasGemmBatch` and `ArmKleidiAI::MlasDynamicQGemmBatch` kernels.
 
 ### The ArmKleidiAI::MlasConv kernel  
-Usually, 2D fp32 convolution operators with batch_size=1 and multiple filters (filter kernel is equal or greater than (3,3)) are dispatched to the ArmKleidiAI::MlasConv kernel. 
+Usually, 2D fp32 convolution operators with batch_size=1 and multiple filters (filter kernel is equal or greater than (3,3)) are dispatched to the `ArmKleidiAI::MlasConv` kernel. 
 
 For example, the figure below shows a (7,7) Conv node.
 
@@ -46,7 +46,7 @@ onnxruntime::InferenceSession::Run
 ```
 
 ### The ArmKleidiAI::MlasGemmBatch kernel
-It performs a batched fp32 matrix multiplication (GEMM or GemV) operation using KleidiAI matmul micro kernels. fp32 Conv operators with (1,1) filter kernels also use this kernel. 
+It performs a batched fp32 matrix multiplication (GEMM or GemV) operation using KleidiAI matmul micro kernels. fp32 Conv operators with (1,1) filter kernels also uses this kernel. 
 
 For example, the figure below shows a (1,1) Conv node.
 
@@ -101,5 +101,5 @@ onnxruntime::InferenceSession::Run
 ```
 
 ### The ArmKleidiAI::MlasDynamicQGemmBatch kernel
-This kernel is for Matmul with float output of dynamic quantized A and symmetric quantized B. 
+This kernel is for matrix multiplication with float output of dynamic quantized A and symmetric quantized B. 
 It uses KleidiAI *kai_kernel_matmul_clamp_f32_qai8dxp1vlx4_qsi8cxp4vlx4_1vlx4vl_sme2_mopa* micro kernel.
