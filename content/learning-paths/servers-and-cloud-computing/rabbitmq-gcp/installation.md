@@ -53,7 +53,7 @@ The output is similar to:
 Erlang/OTP 26 [erts-14.2.5] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1] [jit]
 ```
 
-### Download RabbitMQ Server RPM
+### Download RabbitMQ server RPM
 Download the RabbitMQ Server RPM package.
 
 ```console

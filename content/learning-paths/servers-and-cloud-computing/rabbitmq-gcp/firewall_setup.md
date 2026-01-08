@@ -14,7 +14,7 @@ In this section, you create a Firewall Rule within Google Cloud Console to expos
 For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
-## Create a Firewall Rule in GCP
+## Create a firewall rule in GCP
 
 To expose TCP port 15672, create a firewall rule.
 

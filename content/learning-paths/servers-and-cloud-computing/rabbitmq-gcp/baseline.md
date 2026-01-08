@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## RabbitMQ Baseline Validation on GCP SUSE Arm64 VM
+## RabbitMQ baseline validation on GCP SUSE Arm64 VM
 This document defines a **baseline validation procedure** for RabbitMQ installed on a **Google Cloud SUSE Linux Arm64 virtual machine**.  
 The purpose of this baseline is to confirm:
 
@@ -58,7 +58,7 @@ Interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI 
 Interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
 ```
 
-### Download RabbitMQ Admin CLI tool
+### Download RabbitMQ admin CLI tool
 Download the rabbitmqadmin CLI tool from the local management endpoint.
 
 ```console
