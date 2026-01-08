@@ -41,13 +41,13 @@ sudo rpm -Uvh erlang-26.2.5-1.el8.aarch64.rpm
 ```
 
 ### Verify Erlang installation
-Confirm that Erlang is installed correctly.
+Confirm that Erlang is installed correctly:
 
 ```console
 erl -eval 'io:format("~s~n", [erlang:system_info(system_version)]), halt().' -noshell
 ```
 
-You should see an output similar to:
+The output is similar to:
 
 ```output
 Erlang/OTP 26 [erts-14.2.5] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1] [jit]
@@ -63,7 +63,8 @@ sudo rpm -Uvh rabbitmq-server-4.2.0-1.el8.noarch.rpm
 
 {{% notice Note %}}
 RabbitMQ version 3.11.0 introduced significant performance enhancements for Arm-based architectures. This version needs Erlang 25.0 or later, which brings Just-In-Time (JIT) compilation and modern flame graph profiling tooling to both x86 and Arm64 CPUs. These features result in improved performance on Arm64 architectures.
-You can view [this release note](https://github.com/rabbitmq/rabbitmq-server/blob/main/release-notes/3.11.0.md)
+
+View the [release notes](https://github.com/rabbitmq/rabbitmq-server/blob/main/release-notes/3.11.0.md) for more information.
 
 The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends RabbitMQ version 3.11.0, the minimum recommended on Arm platforms.
 {{% /notice %}}
@@ -99,13 +100,13 @@ sudo systemctl restart rabbitmq-server
 ```
 
 ### Verify RabbitMQ version
-Confirm the installed RabbitMQ version.
+Confirm the installed RabbitMQ version:
 
 ```console
 sudo rabbitmqctl version
 ```
 
-You should see an output similar to:
+The output is similar to:
 
 ```output
 4.2.0
@@ -134,6 +135,10 @@ Replace `<VM_IP>` with the public IP of your GCP VM.
 
 If everything is configured correctly, you see a RabbitMQ login page in your browser that looks like this:
 
-![RabbitMQ page alt-text#center](images/rabbitmq.png "Figure 1: RabbitMQ Login page")
+![Screenshot of RabbitMQ management UI login page showing username and password fields alt-txt#center](images/rabbitmq.png "RabbitMQ Login page")
 
 This confirms that your RabbitMQ management dashboard is operational.
+
+## What you've accomplished and what's next
+
+You've successfully installed RabbitMQ on a Google Cloud SUSE Arm64 virtual machine, enabled the management plugin, created an admin user, and verified access to the web-based management interface. Next, you'll validate the RabbitMQ installation with baseline messaging tests to ensure all components are functioning correctly.

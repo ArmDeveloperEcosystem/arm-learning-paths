@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-In this section, you provision a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` (4 vCPUs, 16 GB memory) machine type in the Google Cloud Console.  
+In this section, you provision a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` (4 vCPUs, 16 GB memory) machine type in the Google Cloud Console.
 
 {{% notice Note %}}
 For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
@@ -30,10 +30,12 @@ Under **Networking**, enable **Allow HTTP traffic** and add "allow-tcp-15672" as
 
 Select **Create** to launch the instance. Once created, you see an **SSH** option and the public IP address for your VM in the list of VM instances. Save the public IP address as you need it in the next step. Select the **SSH** option to launch an SSH shell into your VM instance.
 
-![Invoke an SSH session via your browser alt-text#center](images/gcp-pubip-ssh.png "Invoke an SSH session into your running VM instance")
+![Screenshot of Google Cloud Console VM instances list showing SSH button and external IP address column alt-txt#center](images/gcp-pubip-ssh.png "Invoke an SSH session into your running VM instance")
 
 A window opens from your browser and you see a shell into your VM instance.
 
-![Terminal Shell in your VM instance alt-text#center](images/gcp-shell.png "Terminal shell in your VM instance")
+![Screenshot of browser-based SSH terminal window connected to Google Cloud VM instance alt-txt#center](images/gcp-shell.png "Terminal shell in your VM instance")
 
-Next, install RabbitMQ.
+## What you've accomplished and what's next
+
+You've successfully provisioned a Google Axion C4A Arm virtual machine on Google Cloud Platform with the appropriate firewall rules and network configuration. The VM is running SUSE Linux Enterprise Server and is accessible via SSH. Next, you'll install and configure RabbitMQ on this instance.
