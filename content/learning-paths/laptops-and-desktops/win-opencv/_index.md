@@ -23,7 +23,7 @@ tools_software_languages:
     - Visual Studio
     - Clang
     - OpenCV
-    - C++
+    - CPP
 operatingsystems:
     - Windows
 

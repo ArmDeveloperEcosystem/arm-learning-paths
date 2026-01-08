@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 3
-- Linux: 207
+- Linux: 210
 - macOS: 15
 - Windows: 14
 pinned_modules:
@@ -18,12 +18,12 @@ pinned_modules:
     - providers
     - migration
 subjects_filter:
-- CI-CD: 11
+- CI-CD: 12
 - Containers and Virtualization: 36
 - Databases: 23
 - Libraries: 9
-- ML: 35
-- Performance and Architecture: 78
+- ML: 36
+- Performance and Architecture: 79
 - Storage: 2
 - Web: 17
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -66,15 +66,14 @@ tools_software_languages_filter:
 - Azure: 1
 - Azure CLI: 2
 - Azure Portal: 1
+- Bash: 4
 - bash: 2
-- Bash: 3
 - Bastion: 3
 - BOLT: 2
 - bpftool: 1
 - Buildkite: 1
 - C: 11
 - C#: 2
-- C++: 15
 - Capstone: 1
 - Cargo: 1
 - cassandra-stress: 1
@@ -88,14 +87,15 @@ tools_software_languages_filter:
 - Cloud Build: 1
 - CMake: 1
 - conda: 1
-- Confidential containers: 1
+- Confidential Containers: 1
 - Couchbase: 1
+- CPP: 15
 - cqlsh: 1
 - Criterion: 1
 - Daytona: 1
 - Demo: 3
 - Django: 2
-- Docker: 28
+- Docker: 29
 - Docker Buildx: 1
 - Envoy: 3
 - Erlang: 1
@@ -108,7 +108,7 @@ tools_software_languages_filter:
 - FunASR: 1
 - FVP: 8
 - Gardener: 1
-- GCC: 25
+- GCC: 26
 - gdb: 1
 - Geekbench: 1
 - Generative AI: 13
@@ -126,6 +126,7 @@ tools_software_languages_filter:
 - Google Benchmark: 1
 - Google Cloud: 2
 - Google Test: 1
+- Groovy (Jenkins Pipeline): 1
 - Gunicorn: 1
 - HammerDB: 1
 - Helm: 3
@@ -138,21 +139,23 @@ tools_software_languages_filter:
 - ipmitool: 1
 - Java: 6
 - JAX: 1
+- Jenkins: 1
 - JMH: 1
 - Kafka: 2
-- Kata containers: 1
+- Kata Containers: 1
 - KEDA: 1
 - Kedify: 1
 - Keras: 2
 - KinD: 2
 - kube-bench: 1
+- kubectl: 1
 - Kubernetes: 15
 - Libamath: 1
 - libbpf: 1
 - Linaro Forge: 1
 - Litmus7: 1
-- Llama.cpp: 2
 - llama.cpp: 2
+- Llama.cpp: 2
 - LLM: 11
 - llvm-mca: 1
 - LM Evaluation Harness: 1
@@ -171,8 +174,8 @@ tools_software_languages_filter:
 - NEON: 7
 - Networking: 1
 - Nexmark: 1
-- NGINX: 4
 - nginx: 1
+- NGINX: 4
 - Node.js: 5
 - node.js: 1
 - npm: 3
@@ -180,6 +183,7 @@ tools_software_languages_filter:
 - ONNX Runtime: 2
 - OpenBLAS: 1
 - OpenBMC: 1
+- OpenJDK 17: 1
 - OpenJDK 21: 2
 - OpenShift: 1
 - Orchard Core: 1
@@ -192,8 +196,8 @@ tools_software_languages_filter:
 - PostgreSQL: 5
 - Profiling: 1
 - Puppet: 1
-- Python: 37
-- PyTorch: 10
+- Python: 38
+- PyTorch: 11
 - QEMU: 1
 - RabbitMQ: 1
 - RAG: 1

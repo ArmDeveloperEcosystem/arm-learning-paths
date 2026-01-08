@@ -28,7 +28,7 @@ operatingsystems:
 tools_software_languages:
     - Android Studio
     - Halide
-    - C++
+    - CPP
     - Kotlin
     - Android Studio
     - CMake

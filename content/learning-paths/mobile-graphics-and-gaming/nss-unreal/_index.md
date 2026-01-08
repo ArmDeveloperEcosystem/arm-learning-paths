@@ -15,7 +15,7 @@ learning_objectives:
 
 prerequisites:
     - Windows 11
-    - Unreal Engine 5.4 or 5.5 (Templates and Feature Pack enabled)
+    - Unreal Engine 4.27, 5.4 or 5.5 (with the Templates and Feature Pack enabled)
     - Visual Studio 2022 (with Desktop Development with C++ and .NET desktop build tools)
 
 

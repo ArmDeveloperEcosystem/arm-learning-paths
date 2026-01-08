@@ -30,7 +30,7 @@ tools_software_languages_filter:
 - BalenaOS: 1
 - Bash: 1
 - C: 1
-- C++: 1
+- CPP: 1
 - Docker: 2
 - FVP: 1
 - GitHub: 3

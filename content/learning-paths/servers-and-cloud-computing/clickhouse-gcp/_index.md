@@ -1,23 +1,20 @@
 ---
-title: Deploy ClickHouse on Google Cloud C4A (Arm-based Axion VMs)
-
-draft: true
-cascade:
-    draft: true
+title: Deploy ClickHouse on Google Cloud C4A Arm virtual machines
     
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is intended for software developers deploying and optimizing ClickHouse on Linux/Arm64 environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
+who_is_this_for: This is an introductory topic for developers deploying and optimizing ClickHouse on Arm-based Linux environments using Google Cloud C4A virtual machines powered by Axion processors, to evaluate ClickHouse performance and behavior on Arm-based infrastructure.
 
 learning_objectives:
-  - Provision an Arm-based SUSE SLES virtual machine on Google Cloud (C4A with Axion processors)
-  - Install ClickHouse on a SUSE Arm64 (C4A) instance
-  - Verify ClickHouse functionality by starting the server, connecting via client, and performing baseline data insertion and simple query tests on the Arm64 VM
-  - Measure ClickHouse query performance (read, aggregation, and concurrent workloads) to evaluate throughput and latency on Arm64 (Aarch64)
+  - Provision an Arm-based SUSE SLES virtual machine on Google Cloud using C4A instances powered by Axion processors
+  - Install and start a ClickHouse server on a SUSE Arm64 (C4A) virtual machine
+  - Verify ClickHouse functionality by connecting to the server and running basic insert and query operations
+  - Run baseline ClickHouse performance tests to produce throughput and query latency results for evaluating Arm-based deployments on Google Cloud
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Basic familiarity with [ClickHouse](https://clickhouse.com/)
+
 author: Pareena Verma
 
 ##### Tags

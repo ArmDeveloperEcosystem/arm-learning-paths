@@ -22,7 +22,7 @@ armips:
     - Cortex-A
     - Neoverse
 tools_software_languages:
-    - C++
+    - CPP
     - Generative AI
     - NEON
     - Runbook

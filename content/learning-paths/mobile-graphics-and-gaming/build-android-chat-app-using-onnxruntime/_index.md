@@ -22,7 +22,7 @@ armips:
     - Cortex-A
 tools_software_languages:
     - Kotlin
-    - C++
+    - CPP
     - ONNX Runtime
     - Android
     - Hugging Face
