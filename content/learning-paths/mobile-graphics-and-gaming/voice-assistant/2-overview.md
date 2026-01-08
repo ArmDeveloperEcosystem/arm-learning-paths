@@ -72,14 +72,15 @@ You can build this pipeline for various platforms and independently benchmark th
 |Platform|Details|
 |---|---|
 |Linux|x86_64 - KleidiAI is disabled by default, aarch64 - KleidiAI is enabled by default.|
-|Android|Cross-compile for an Android device, ensure the Android NDK path is set and correct toolchain file is provided. KleidiAI enabled by default.|
+|Android|Cross-compile for an Android device, ensure the Android NDK path is set and correct toolchain file is provided. KleidiAI enabled by default. SME kernels can be used if available on device.|
 |macOS|Native or cross-compilation for a Mac device. KleidiAI and SME kernels can be used if available on device.|
 
 Currently, this module provides a thin C++ layer as well as JNI bindings for developers targeting Android based applications, supported backends are:
 |Framework|Dependency|Input modalities supported|Output modalities supported|Neural Network|
 |---|---|---|---|---|
-|llama.cpp|https://github.com/ggml-org/llama.cpp|`image`, `text`|`text`|phi-2,Qwen2-VL-2B-Instruct|
+|llama.cpp|https://github.com/ggml-org/llama.cpp|`image`, `text`|`text`|phi-2, qwen-2-VL, llama-3.2-1B|
 |onnxruntime-genai|https://github.com/microsoft/onnxruntime-genai|`text`|`text`|phi-4-mini-instruct-onnx|
+|mnn|https://github.com/alibaba/MNN|`text`|`text`|qwen-2.5-VL, llama-3.2-1B|
 |mediapipe|https://github.com/google-ai-edge/mediapipe|`text`|`text`|gemma-2b-it-cpu-int4|
 
 
