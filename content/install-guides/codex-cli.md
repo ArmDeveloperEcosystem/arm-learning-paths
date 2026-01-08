@@ -133,7 +133,7 @@ codex --version
 The output shows the version:
 
 ```output
-@openai/codex, 0.77.0
+@openai/codex, 0.79.0
 ```
 
 ## How do I authenticate with OpenAI?
