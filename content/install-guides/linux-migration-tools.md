@@ -152,7 +152,7 @@ cd arm-linux-migration-tools
 sudo ./scripts/install.sh
 ```
 
-After successful installation, you can remove the downloaded files:
+After successful installation, remove the downloaded files:
 
 ```bash
 cd ..
@@ -200,7 +200,7 @@ The install script:
 - Sets up the Python virtual environment with the built dependencies
 - Configures permissions for all installed components
 
-After successful installation, you can clean up the build directory:
+After successful installation, clean up the build directory:
 
 ```bash
 cd ..
@@ -227,13 +227,13 @@ ls /usr/local/bin/ | grep -E "(sysreport|skopeo|llvm-mca|topdown-tool|kubearchin
 
 A Python virtual environment is located at `/opt/arm-migration-tools/venv/` and contains all Python packages required by the migration tools.
 
-The wrapper scripts in `/usr/local/bin` use this environment automatically, but you can activate it with:
+The wrapper scripts in `/usr/local/bin` use this environment automatically. To activate it manually:
 
 ```bash
 source /opt/arm-migration-tools/venv/bin/activate
 ```
 
-You can view the installed Python packages in the virtual environment:
+View the installed Python packages in the virtual environment:
 
 ```bash
 /opt/arm-migration-tools/venv/bin/pip list
