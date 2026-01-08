@@ -120,7 +120,7 @@ sudo npm install -g @openai/codex
 
 This downloads and installs the latest version of Codex CLI.
 
-### How do I confirm Codex CLI is working?
+## How do I confirm Codex CLI is working?
 
 You now have the latest version of Codex CLI installed.
 
@@ -136,7 +136,7 @@ The output shows the version:
 @openai/codex, 0.77.0
 ```
 
-### How do I authenticate with OpenAI?
+## How do I authenticate with OpenAI?
 
 There are two ways to authenticate with Codex CLI.
 
