@@ -1,6 +1,6 @@
 ---
 title: Codex CLI
-draft: true
+
 author: Joe Stech
 minutes_to_complete: 10
 official_docs: https://developers.openai.com/codex/cli/
@@ -28,11 +28,9 @@ You need an OpenAI account to use Codex CLI. You can either sign in with your [C
 
 Codex CLI requires Node.js 18 or later.
 
-This guide explains how to install Codex CLI on macOS and Arm Linux.
-
 ## How do I download and install Codex CLI?
 
-On most systems, you should install codex using `npm`. On macOS Homebrew can also be used.
+On most systems, install Codex CLI using npm. On macOS, there is also the option for you to use Homebrew.
 
 ### How do I use npm to install Codex CLI?
 
@@ -66,13 +64,13 @@ Install the required packages on Ubuntu/Debian systems:
 sudo apt update && sudo apt install -y curl
 ```
 
-If you are not using Ubuntu/Debian use your package manager to install curl.
+If you're not using Ubuntu/Debian, use your package manager to install curl.
 
 ### How do I install Node.js on Arm Linux?
 
 Codex CLI requires Node.js version 18 or higher. The easiest way to install Node.js on Arm Linux is using the NodeSource repository.
 
-Download and run the Node.js setup script (example shown for Node.js 22.x):
+Download and run the Node.js setup script. For example, for Node.js 22.x:
 
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
@@ -229,10 +227,10 @@ At the Codex prompt, run the `/mcp` command to view active MCP servers and their
 /mcp
 ```
 
-You should see the Arm MCP server listed. If the arm-mcp server says it's still loading, wait a moment and check again.
+The Arm MCP server is listed in the output. If the arm-mcp server indicates it's still loading, wait a moment and check again.
 
 You can also verify the tools are available by asking Codex to list the available Arm MCP tools.
 
-If you are facing issues or have questions, reach out to mcpserver@arm.com.
+If you're facing issues or have questions, reach out to mcpserver@arm.com.
 
-You're ready to use Codex CLI.
+You're now ready to use Codex CLI with Arm-specific development assistance.
