@@ -18,7 +18,7 @@ You can learn more about [stable-audio-open-small on Hugging Face](https://huggi
 
 ## Download model files
 
-[Log in](https://huggingface.co/login) to HuggingFace and navigate to the model landing page:
+[Log in](https://huggingface.co/login) to Hugging Face and navigate to the model landing page:
 
 ```url
 https://huggingface.co/stabilityai/stable-audio-open-small/tree/main
@@ -59,4 +59,6 @@ For more information, see the [Prompt structure user guide](https://stableaudio.
 
 You can explore additional training and inference code in the [Stable Audio Tools repository](https://github.com/Stability-AI/stable-audio-tools).
 
-You now have the model files ready for conversion to ExecuTorch format.
+## What you've accomplished and what's next
+
+You've downloaded the Stable Audio Open Small model files and learned how to structure effective prompts. In the next section, you'll convert these model files to ExecuTorch format for on-device deployment.

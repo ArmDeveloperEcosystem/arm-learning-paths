@@ -159,9 +159,7 @@ Exit the `adb shell` by typing `exit`, then pull the generated audio file from t
 adb pull /data/local/tmp/app/warm_arpeggios_on_house_beats_120bpm_with_drums_effect_99.wav
 ```
 
-You can now play the audio file on your Android phone.
-
-You can now experiment with different prompts to generate various audio samples on your Android device. The application uses ExecuTorch with XNNPack and Arm KleidiAI optimizations to deliver efficient inference on Arm CPUs.
+Play the audio file on your development machine or transfer it to your Android phone. Experiment with different prompts to generate various audio samples on your Android device. The application uses ExecuTorch with XNNPack and Arm KleidiAI optimizations to deliver efficient inference on Arm CPUs.
 
 Try different prompts such as:
 - "ambient piano melody with soft strings 80BPM"
@@ -172,4 +170,4 @@ The Stable Audio Open Small model works best with clear, descriptive prompts tha
 
 ## Summary
 
-You have successfully deployed the Stable Audio Open Small model on Android using ExecuTorch. Throughout this Learning Path, you converted the three model submodules (Conditioners, DiT, and AutoEncoder) to ExecuTorch format, built an optimized audio generation application, and ran it on an Arm-based Android device. The application leverages ExecuTorch with XNNPack and Arm KleidiAI to deliver efficient on-device audio generation, enabling real-time text-to-audio synthesis without requiring cloud connectivity. You can now integrate this capability into mobile applications or continue exploring audio generation with different prompts and configurations.
+You've successfully deployed the Stable Audio Open Small model on Android using ExecuTorch. Throughout this Learning Path, you converted the three model submodules (Conditioners, DiT, and AutoEncoder) to ExecuTorch format, built an optimized audio generation application, and ran it on an Arm-based Android device. The application leverages ExecuTorch with XNNPack and Arm KleidiAI to deliver efficient on-device audio generation, enabling real-time text-to-audio synthesis without requiring cloud connectivity. Integrate this capability into mobile applications or continue exploring audio generation with different prompts and configurations.
