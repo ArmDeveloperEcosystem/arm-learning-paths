@@ -16,9 +16,11 @@ tool_install: true
 weight: 1
 ---
 
-Codex CLI is a lightweight coding agent from OpenAI that runs locally in your terminal. It can help you with coding tasks, understand your codebase, run commands, and assist with development workflows.
+Codex CLI is a local, terminal-based coding agent from OpenAI that helps developers explore codebases, generate changes, and run commands using natural language.
 
-It supports multiple operating systems, including Arm-based Linux distributions and macOS.
+It’s useful for tasks such as understanding unfamiliar projects, refactoring code, and accelerating development workflows directly from the command line.
+
+It supports multiple operating systems, including Arm-based Linux distributions and macOS. By integrating AI assistance directly into command-line workflows, it reduces context switching during development.
 
 This guide explains how to install Codex CLI on macOS and Arm Linux.
 
@@ -67,6 +69,8 @@ sudo apt update && sudo apt install -y curl
 If you're not using Ubuntu/Debian, use your package manager to install curl.
 
 ### How do I install Node.js on Arm Linux?
+
+{{% notice Note %}}If you already have Node.js 18 or later installed, you can skip this section.{{% /notice %}}
 
 Codex CLI requires Node.js version 18 or higher. The easiest way to install Node.js on Arm Linux is using the NodeSource repository.
 
