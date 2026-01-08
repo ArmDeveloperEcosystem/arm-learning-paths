@@ -10,9 +10,24 @@ layout: learningpathall
 
 In this section, you will build and run the audio generation application on macOS. The application uses ExecuTorch with XNNPack and Arm KleidiAI for optimized inference on Arm CPUs.
 
+
+{{% notice Note %}}
+These steps assume you are using macOS running on Apple Silicon (Arm64).
+{{% /notice %}}
+
+
 ## Set up the environment
 
+Start a fresh virtual environment to avoid dependency conflicts from earlier steps:
+
+```bash
+cd $WORKSPACE/ML-examples/kleidiai-examples/audiogen-et/
+python3.10 -m venv new-venv
+source new-venv/bin/activate
+
 Start a fresh virtual environment:
+
+
 
 ```bash
 cd $WORKSPACE/ML-examples/kleidiai-examples/audiogen-et/
@@ -61,7 +76,7 @@ The build process creates an `audiogen` executable in the `build` directory.
 
 ## Download the tokenizer model
 
-The audio generation application uses a SentencePiece-based tokenizer. Download the `spiece.model` file from HuggingFace:
+The audio generation application uses a SentencePiece-based tokenizer. Download the `spiece.model` file from Hugging Face:
 
 ```bash
 curl -L https://huggingface.co/google-t5/t5-base/resolve/main/spiece.model -o $EXECUTORCH_MODELS_PATH/spiece.model
@@ -121,6 +136,6 @@ open warm_arpeggios_on_house_beats_120bpm_with_drums_effect_99.wav
 
 ## What you've accomplished and what's next
 
-You've built the audio generation application for macOS, downloaded the tokenizer model, and generated audio from a text prompt using ExecuTorch with Arm KleidiAI optimizations. The application delivers efficient inference on Arm CPUs, allowing you to experiment with different prompts to generate various audio samples.
+You've built the audio generation application for macOS, downloaded the tokenizer model, and generated audio from a text prompt using ExecuTorch with Arm KleidiAI optimizations. The application delivers efficient inference on Arm CPUs, and lets you experiment with different prompts to generate audio.
 
 If you want to deploy to Android instead, proceed to the next section.

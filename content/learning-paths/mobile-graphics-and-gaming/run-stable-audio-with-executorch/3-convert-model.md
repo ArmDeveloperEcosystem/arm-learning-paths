@@ -24,7 +24,7 @@ Install the ExecuTorch package version 1.0.0:
 pip install executorch==1.0.0
 ```
 
-Alternatively, you can clone the ExecuTorch repository and run the installation script:
+Alternatively, clone the ExecuTorch repository and run the installation script:
 
 ```bash
 git clone https://github.com/pytorch/executorch.git
@@ -34,7 +34,7 @@ bash ./install_executorch.sh
 cd ..
 ```
 
-## Install Stable Audio tools
+## Install Stable Audio Tools
 
 Install the Stable Audio Open tools dependency:
 
@@ -87,5 +87,6 @@ ls -lh conditioners_model.pte dit_model.pte autoencoder_model.pte
 
 The files should be in `$WORKSPACE/ML-examples/kleidiai-examples/audiogen-et/`.
 
+## What you've accomplished and what's next
 
 You've installed ExecuTorch and the Stable Audio Tools dependencies, then converted the three Stable Audio Open Small submodules (Conditioners, DiT, and AutoEncoder) to ExecuTorch format. Next, you'll build the audio generation application for your target platform (Android or macOS).

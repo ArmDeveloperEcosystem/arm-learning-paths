@@ -14,10 +14,10 @@ In this Learning Path, you will learn how to convert the Stable Audio Open Small
 
 Before you begin, you need a development environment with the required software:
 
-- An Android device with an Arm CPU supporting FEAT_DotProd (dotprod) and optionally FEAT_I8MM (i8mm), with at least 8 GB of RAM.
-- Python 3.10 or newer.
-- CMake version 3.16.0 or newer.
-- Android NDK r27c (if building for Android).
+- An Android device with an Arm CPU supporting FEAT_DotProd (dotprod) and optionally FEAT_I8MM (i8mm), with at least 8 GB of RAM
+- Python 3.10 or newer
+- CMake version 3.16.0 or newer
+- Android NDK r27c (if building for Android)
 
 ## Create workspace directory
 

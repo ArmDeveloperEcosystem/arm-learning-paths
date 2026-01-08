@@ -10,9 +10,11 @@ layout: learningpathall
 
 In this section, you will cross-compile the audio generation application for Android and run it on an Android device with an Arm CPU.
 
+{{% notice Note %}}These steps assume an Arm64 Android device with sufficient memory (8 GB recommended).{{% /notice %}}
+
 ## Set up the environment
 
-Start a fresh virtual environment:
+Start a fresh virtual environment to avoid dependency conflicts from earlier steps.
 
 ```bash
 cd $WORKSPACE/ML-examples/kleidiai-examples/audiogen-et/
@@ -87,6 +89,8 @@ The build process creates an `audiogen` executable for Android in the `android-b
 
 ## Transfer files to Android device
 
+Ensure adb is installed and your Android device is connected by running `adb devices`.
+
 Use `adb` to transfer the application and model files to your Android device.
 
 Create a directory on the device:
@@ -94,6 +98,7 @@ Create a directory on the device:
 ```bash
 adb shell mkdir -p /data/local/tmp/app
 ```
+{{% notice Note %}}The `/data/local/tmp` directory is writable without root access and commonly used for testing native binaries.{{% /notice %}}
 
 Push the application executable:
 
@@ -149,7 +154,7 @@ The arguments are:
 - Prompt (`-p`): Text description of the desired audio
 - CPU Threads (`-t`): Number of CPU threads to use (adjust based on your device)
 
-The application generates audio based on your prompt.
+The application generates a short audio sample based on your prompt.
 
 ## Retrieve the generated audio
 

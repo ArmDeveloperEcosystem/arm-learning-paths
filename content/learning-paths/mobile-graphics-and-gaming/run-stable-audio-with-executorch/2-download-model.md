@@ -9,10 +9,9 @@ layout: learningpathall
 ## About the Stable Audio Open Small model
 
 Stable Audio Open Small is an open-source model optimized for generating short audio samples, sound effects, and production elements using text prompts. The model consists of three main submodules:
-
-- **Conditioners**: Include a T5-based text encoder for input prompts and a numerical duration encoder. These components encode the inputs into numerical values to be passed to the DiT model.
-- **Diffusion Transformer (DiT)**: Takes random noise and denoises it through multiple steps to produce structured latent audio, guided by conditioner embeddings.
-- **AutoEncoder**: Compresses input waveforms into a manageable sequence length for processing by the DiT model. At the end of the denoising step, it decompresses the result into a waveform.
+- Conditioners: include a T5-based text encoder for input prompts and a numerical duration encoder. These components encode the inputs into numerical values to be passed to the DiT model.
+- Diffusion Transformer (DiT): takes random noise and denoises it through multiple steps to produce structured latent audio, guided by conditioner embeddings.
+- AutoEncoder: compresses input waveforms into a manageable sequence length for processing by the DiT model. At the end of the denoising step, it decompresses the result into a waveform.
 
 You can learn more about [stable-audio-open-small on Hugging Face](https://huggingface.co/stabilityai/stable-audio-open-small).
 
