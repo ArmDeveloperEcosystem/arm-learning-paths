@@ -18,7 +18,7 @@ weight: 1
 
 Codex CLI is a local, terminal-based coding agent from OpenAI that helps developers explore codebases, generate changes, and run commands using natural language. It’s useful for tasks such as understanding unfamiliar projects, refactoring code, and accelerating development workflows directly from the command line.
 
-It supports multiple operating systems, including Arm-based Linux distributions and macOS. By integrating AI assistance directly into command-line workflows, it reduces context switching during development.
+Codex CLI supports multiple operating systems, including Arm-based Linux distributions and macOS. By integrating AI assistance directly into command-line workflows, it reduces context switching during development.
 
 This guide explains how to install Codex CLI on macOS and Arm Linux.
 
