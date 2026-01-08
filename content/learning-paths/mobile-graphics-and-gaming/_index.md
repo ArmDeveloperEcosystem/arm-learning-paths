@@ -9,15 +9,15 @@ key_ip:
 - Mali
 maintopic: true
 operatingsystems_filter:
-- Android: 33
-- Linux: 33
-- macOS: 14
+- Android: 35
+- Linux: 35
+- macOS: 15
 - Windows: 14
 subjects_filter:
 - Gaming: 6
 - Graphics: 6
-- ML: 16
-- Performance and Architecture: 35
+- ML: 17
+- Performance and Architecture: 36
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech
 title: Mobile, Graphics, and Gaming
 tools_software_languages_filter:
@@ -35,12 +35,13 @@ tools_software_languages_filter:
 - Bazel: 1
 - C: 5
 - C#: 3
+- C++: 1
 - CCA: 1
 - Clang: 12
 - CMake: 2
-- CPP: 14
+- CPP: 15
 - Docker: 1
-- ExecuTorch: 3
+- ExecuTorch: 4
 - Frame Advisor: 1
 - GCC: 12
 - Generative AI: 2
@@ -48,7 +49,7 @@ tools_software_languages_filter:
 - Google Pixel 8: 1
 - Google Test: 1
 - Halide: 1
-- Hugging Face: 5
+- Hugging Face: 6
 - Java: 6
 - Jupyter Notebook: 1
 - KleidiAI: 2
@@ -62,8 +63,9 @@ tools_software_languages_filter:
 - MTE: 2
 - NEON: 1
 - ONNX Runtime: 1
+- ONNX runtime: 1
 - OpenGL ES: 1
-- Python: 7
+- Python: 8
 - PyTorch: 2
 - QEMU: 1
 - RenderDoc: 1

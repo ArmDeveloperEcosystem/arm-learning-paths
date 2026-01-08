@@ -87,7 +87,7 @@ tools_software_languages_filter:
 - Cloud Build: 1
 - CMake: 1
 - conda: 1
-- Confidential containers: 1
+- Confidential Containers: 1
 - Couchbase: 1
 - CPP: 15
 - cqlsh: 1
@@ -142,7 +142,7 @@ tools_software_languages_filter:
 - Jenkins: 1
 - JMH: 1
 - Kafka: 2
-- Kata containers: 1
+- Kata Containers: 1
 - KEDA: 1
 - Kedify: 1
 - Keras: 2
