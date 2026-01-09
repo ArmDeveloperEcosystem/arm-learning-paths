@@ -5,6 +5,7 @@ weight: 9
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## ClickHouse benchmarking on Axion processors
 
 
 ## ClickHouse Benchmarking on Axion Processors
@@ -23,13 +24,16 @@ SET use_query_cache = 0;
 ```
 This ensures every query is executed fully and not served from cache.
 
-### Validate Dataset Size
-Ensures enough data is present to produce meaningful latency results.
+### Validate dataset size
+
+Ensure enough data is present to produce meaningful latency results by checking the current row count.
 
 ```console
 SELECT count(*) FROM realtime.logs;
 ```
-You should see an output similar to:
+
+The output is similar to:
+
 ```output
    ┌─count()─┐
 1. │ 5000013 │ -- 5.00 million
@@ -48,7 +52,8 @@ SELECT
 FROM numbers(1000000);
 ```
 
-You should see an output similar to:
+The output is similar to:
+
 ```output
 Query id: 8fcbefab-fa40-4124-8f23-516fca2b8fdd
 Ok.
@@ -56,12 +61,13 @@ Ok.
 Peak memory usage: 106.54 MiB.
 ```
 
-### Define Benchmark Queries
+### Define benchmark queries
+
 These queries represent common real-time analytics patterns:
 
-- **Filtered count** – service-level analytics
-- **Time-windowed count** – recent activity
-- **Aggregation by service** – grouped analytics
+- **Filtered count**: service-level analytics
+- **Time-windowed count**: recent activity
+- **Aggregation by service**: grouped analytics
 
 Each query scans and processes millions of rows to stress the execution engine.
 
@@ -73,7 +79,7 @@ FROM realtime.logs
 WHERE service = 'service-5';
 ```
 
-You should see an output similar to:
+The output is similar to:
 ```output
 Query id: cfbab386-7168-42ce-a752-2d5146f68b48
 
@@ -92,7 +98,8 @@ FROM realtime.logs
 WHERE event_time >= now() - INTERVAL 10 MINUTE;
 ```
 
-You should see an output similar to:
+The output is similar to:
+
 ```output
 Query id: 7654746b-3068-4663-a5c6-6944d9c2d2b9
    ┌─count()─┐
@@ -144,8 +151,9 @@ Query id: c48c0d30-0ef6-4fb9-bbb9-815a509a5f91
 Peak memory usage: 7.18 MiB.
 ```
 
-### Run Repeatable Latency Measurements
-To calculate reliable latency metrics, the same query is executed multiple times(10) using `clickhouse-client --time`.
+### Run repeatable latency measurements
+
+To calculate reliable latency metrics, execute the same query multiple times (10 iterations) using `clickhouse-client --time`.
 
 ```sql
 clickhouse-client --time --query "
@@ -249,12 +257,15 @@ The 10th value in the sorted list is your p95 latency.
 p95 latency = 0.011 seconds ≈ 11 ms
 ```
 
-The ClickHouse query was executed 10 times on a GCP Axion (Arm) VM. Observed p95 query latency was ~11 ms, demonstrating consistently low-latency analytical performance on Arm-based infrastructure.
+After executing the ClickHouse query 10 times on the GCP Axion (Arm) VM, the observed p95 query latency was ~11 ms, demonstrating consistently low-latency analytical performance on Arm-based infrastructure.
 
-### Benchmark summary
-Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
+## What you've accomplished
+
+You've successfully completed a comprehensive ClickHouse benchmarking exercise on Google Axion (Arm64) processors. Key results from the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM running SUSE:
 
 - ClickHouse on **Google Axion (Arm64)** delivered consistently low query latency, even while scanning ~6 million rows per query.
 - Across **10 repeat executions, the p95 latency was ~11 ms**, indicating stable and predictable performance.
 - Disabling the query cache ensured true execution latency, not cache-assisted results.
 - Analytical queries sustained **500M+ rows/sec throughput** with minimal memory usage.
+
+Throughout this Learning Path, you provisioned an Arm-based VM on Google Cloud, deployed ClickHouse, configured a real-time streaming pipeline with Pub/Sub and Dataflow, and validated end-to-end analytical performance. You can now deploy, optimize, and benchmark ClickHouse workloads on Google Cloud Arm infrastructure.

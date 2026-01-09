@@ -88,7 +88,7 @@ Grant the following roles to the **Compute Engine default service account**:
 4. Assign the roles listed above
 5. Save
 
-![ GCP onsole alt-text#center](images/roles.png "Figure 4: Required IAM Roles")
+![Google Cloud Console IAM page displaying assigned roles for Compute Engine service account including Dataflow and Pub/Sub permissions alt-txt#center](images/roles.png "Figure 4: Required IAM Roles")
 
 VM OAuth scopes are limited by default. IAM roles are authoritative.
 

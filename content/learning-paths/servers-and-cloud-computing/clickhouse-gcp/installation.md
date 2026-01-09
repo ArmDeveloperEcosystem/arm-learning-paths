@@ -7,10 +7,11 @@ layout: learningpathall
 ---
 
 ## Install ClickHouse and gcloud CLI on GCP VM
-This guide covers the installation of **Google Cloud CLI (gcloud)** and **ClickHouse** on a GCP SUSE Linux Arm64 (Axion C4A) VM.
+
+In this section you'll install Google Cloud CLI (gcloud) and ClickHouse on your GCP SUSE Linux Arm64 (Axion C4A) VM.
 These tools are required to:
-- Interact with GCP services such as **Pub/Sub** and **Dataflow**
-- Store and query real-time analytics data efficiently using **ClickHouse on Arm64**
+- Interact with GCP services such as Pub/Sub and Dataflow
+- Store and query real-time analytics data efficiently using ClickHouse on Arm64
 
 ### Install Google Cloud CLI (gcloud)
 The Google Cloud CLI is required to authenticate with GCP, publish Pub/Sub messages, and submit Dataflow jobs from the VM.
