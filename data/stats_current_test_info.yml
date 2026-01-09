@@ -35,7 +35,7 @@ sw_categories:
       readable_title: Ansible
       tests_and_status: []
     aperf:
-      readable_title: AWS Perf (APerf)
+      readable_title: APerf
       tests_and_status: []
     arduino-pico:
       readable_title: Arduino core for the Raspberry Pi Pico
