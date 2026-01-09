@@ -1,6 +1,7 @@
 ---
 title: Establish a ClickHouse baseline on Arm
-weight: 5
+weight: 7
+
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
