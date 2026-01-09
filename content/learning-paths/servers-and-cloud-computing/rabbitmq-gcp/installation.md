@@ -135,7 +135,7 @@ Replace `<VM_IP>` with the public IP of your GCP VM.
 
 If everything is configured correctly, you see a RabbitMQ login page in your browser that looks like this:
 
-![Screenshot of RabbitMQ management UI login page showing username and password fields alt-txt#center](images/rabbitmq.png "RabbitMQ Login page")
+![Screenshot showing the RabbitMQ management UI login interface with username and password input fields and a login button alt-txt#center](images/rabbitmq.png "RabbitMQ Login page")
 
 This confirms that your RabbitMQ management dashboard is operational.
 

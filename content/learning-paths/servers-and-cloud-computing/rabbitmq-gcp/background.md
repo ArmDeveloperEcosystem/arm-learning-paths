@@ -1,5 +1,5 @@
 ---
-title: Get started with RabbitMQ on Google Axion C4A
+title: Learn about RabbitMQ and Google Axion C4A
 
 weight: 2
 

@@ -8,16 +8,16 @@ layout: learningpathall
 
 ## Event processing with topic-based routing
 
-In this use case, you implement an event-driven workflow using RabbitMQ with a **topic exchange**, a durable queue, and a Python worker consumer. You publish order events (for example, `order.created`, `order.updated`) and process them asynchronously.
+In this use case, you implement an event-driven workflow using RabbitMQ with a topic exchange, a durable queue, and a Python worker consumer. You publish order events (for example, `order.created`, `order.updated`) and process them asynchronously.
 
-This pattern is useful when you need **flexible, wildcard-based routing** (such as `order.*`) where multiple event types route to the same queue and you want producers and consumers to evolve independently.
+This pattern is useful when you need flexible, wildcard-based routing (such as `order.*`) where multiple event types route to the same queue and producers and consumers evolve independently.
 
 ### Use case overview
 
 **Scenario:**  
 An application publishes order-related events (`order.created`, `order.updated`, etc.) to RabbitMQ. A background worker consumes these events from a queue and processes them independently.
 
-The goal of this use case is to showcase how order-related events can be published to RabbitMQ and processed asynchronously by background workers without tightly coupling producers and consumers.
+This use case shows how order-related events can be published to RabbitMQ and processed asynchronously by background workers without tightly coupling producers and consumers.
 
 **Typical events include:**
 
@@ -45,7 +45,7 @@ Create a durable topic exchange to route events based on routing keys:
 
 This creates a durable topic exchange named `events` that routes messages using wildcard-based routing keys (for example, `order.*`) and survives broker restarts.
 
-The output is similar to:
+You should see:
 ```output
 exchange declared
 ```
@@ -60,7 +60,7 @@ Create a durable queue to store order-related events.
 
 This creates a durable queue for order events that guarantees messages are persisted until consumed, ensuring reliability in case of worker or broker restarts.
 
-The output is similar to:
+You should see:
 ```output
 queue declared
 ```

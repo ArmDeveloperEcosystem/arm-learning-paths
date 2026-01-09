@@ -15,12 +15,13 @@ prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Basic understanding of message queues and messaging concepts (publishers, consumers)
   - Familiarity with Linux command-line operations
+  - Basic knowledge of Python for the use case examples
 
 author: Pareena Verma
 
 ##### Tags
 skilllevels: Introductory
-subjects: Databases
+subjects: Containers and Virtualization
 cloud_service_providers: Google Cloud
 
 armips:
