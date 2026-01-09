@@ -1,8 +1,6 @@
 ---
 title: Arm Linux Migration Tools
 
-draft: true 
-
 additional_search_terms:
 - migration
 - porting
@@ -42,11 +40,11 @@ multitool_install_part: false
 weight: 1
 ---
 
-[Arm Linux Migration Tools](https://github.com/arm/arm-linux-migration-tools) provides a comprehensive collection of thirteen essential utilities to help you migrate applications from x86 to Arm Linux systems. Instead of installing and managing each tool individually, you get everything you need in a single, streamlined installation.
+[Arm Linux Migration Tools](https://github.com/arm/arm-linux-migration-tools) provides a comprehensive collection of 13 essential utilities to help you migrate applications from x86 to Arm Linux systems. Instead of installing and managing each tool individually, get everything you need in a single, streamlined installation.
 
-This package includes code analysis, performance, and migration tools such as Sysreport, Skopeo, LLVM Machine Code Analyzer, Telemetry Solution, KubeArchInspect, Migrate Ease, Aperf, BOLT, PAPI, Perf, Process Watch, Check Image, and Porting Advisor for Graviton. These tools help you assess application compatibility, analyze performance characteristics, optimize code layout, and identify potential issues before and after migration.
+This package includes code analysis, performance, and migration tools such as Sysreport, Skopeo, LLVM Machine Code Analyzer, Telemetry Solution, KubeArchInspect, Migrate Ease, Aperf, BOLT, PAPI, Perf, Process Watch, Check Image, and Porting Advisor for Graviton. These tools assess application compatibility, analyze performance characteristics, optimize code layout, and identify potential issues before and after migration.
 
-Whether you're migrating containerized applications, analyzing system performance, or optimizing binaries for Arm processors, this package simplifies your migration workflow by providing all the necessary tools through a unified installation process, saving you time on setup and configuration. 
+Whether you're migrating containerized applications, analyzing system performance, or optimizing binaries for Arm processors, this package simplifies your migration workflow by providing all necessary tools through a unified installation process. 
 
 ## What are the tools included in Arm Linux Migration Tools? 
 
@@ -154,7 +152,7 @@ cd arm-linux-migration-tools
 sudo ./scripts/install.sh
 ```
 
-After successful installation, you can remove the downloaded files:
+After successful installation, remove the downloaded files:
 
 ```bash
 cd ..
@@ -202,7 +200,7 @@ The install script:
 - Sets up the Python virtual environment with the built dependencies
 - Configures permissions for all installed components
 
-After successful installation, you can clean up the build directory:
+After successful installation, clean up the build directory:
 
 ```bash
 cd ..
@@ -213,21 +211,29 @@ rm -rf arm-linux-migration-tools
 
 After successful installation, the Arm Linux Migration Tools are organized in a structured directory layout that separates the core tools, dependencies, and user-accessible commands. Understanding this structure helps you troubleshoot issues and manage the installation effectively.
 
-All tools and their dependencies are installed in the `/opt/arm-migration-tools/` directory. Review the details of the software installed there. 
+All tools and their dependencies are installed in the `/opt/arm-migration-tools/` directory:
 
-For easy access from anywhere in your system, wrapper scripts are also installed in `/usr/local/bin/`, making it easier to invoke each tool. View the available executables there.
+```bash
+ls /opt/arm-migration-tools/
+```
+
+For easy access from anywhere in your system, wrapper scripts are installed in `/usr/local/bin/`:
+
+```bash
+ls /usr/local/bin/ | grep -E "(sysreport|skopeo|llvm-mca|topdown-tool|kubearchinspect|migrate-ease|aperf|llvm-bolt|papi|perf|processwatch|check-image|porting-advisor)"
+```
 
 ### Python virtual environment
 
 A Python virtual environment is located at `/opt/arm-migration-tools/venv/` and contains all Python packages required by the migration tools.
 
-The wrapper scripts in `/usr/local/bin` use this environment automatically, but you can activate it with:
+The wrapper scripts in `/usr/local/bin` use this environment automatically. To activate it manually:
 
 ```bash
 source /opt/arm-migration-tools/venv/bin/activate
 ```
 
-You can view the installed Python packages in the virtual environment:
+View the installed Python packages in the virtual environment:
 
 ```bash
 /opt/arm-migration-tools/venv/bin/pip list
@@ -295,15 +301,15 @@ Execute the included test script to verify all 13 tools are properly installed a
 The script performs a basic invocation of each tool to confirm it runs.
 
 {{% notice Note %}}
-If you get an error on Topdown Tool you need to run the commands below. 
+If you get an error when running Topdown Tool, run these commands:
 ```console
 sudo sh -c "echo -1 > /proc/sys/kernel/perf_event_paranoid"
 sudo sh -c "echo 0 > /proc/sys/kernel/kptr_restrict"
 ```
-More information about the options is in the [Linux Perf install guide](/install-guides/perf/).
+For more information about these options, see the [Linux Perf install guide](/install-guides/perf/).
 {{% /notice %}}
 
-### Next steps
+## Next steps
 
 Now that you have successfully installed and verified the Arm Linux Migration Tools, you're ready to begin.
 

@@ -17,6 +17,7 @@ In this section, you will use a Android demo application to demonstrate local in
     ``` bash
     export ANDROID_NDK=$ANDROID_HOME/ndk/29.0.14206865/
     export ANDROID_ABI=arm64-v8a
+    export ANDROID_SDK=$ANDROID_HOME
     ```
 
 {{% notice Note %}}

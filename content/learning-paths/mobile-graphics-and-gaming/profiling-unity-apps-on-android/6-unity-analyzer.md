@@ -9,35 +9,35 @@ layout: learningpathall
 ## Set up the Analyzer
 Before you can use the Analyzer tool, you need to install the related package it comes in. Follow these steps with the Package Manager:
 
-1. Select menu option _Window/Package Manager_
+1. Select menu option _Window/Package Management/Packet Manager_
 
-1. Switch Packages option to _Packages: Unity Registry_
+2. Switch Packages option to _Packages: Unity Registry_
 
-1. Select _Profile Analyzer_
+3. Select _Profile Analyzer_
 
-    ![Package Manager showing Analyzer#center](images/package-manager-install-profile-analyzer.PNG "Figure 1. Profile Analyzer package in Package Manager.")
+    ![Package Manager showing Analyzer#center](images/pa.png "Figure 1. Profile Analyzer package in Package Manager.")
 
-1. Select _Install_
+4. Select _Install_
 
-1. After the installation has completed, you will have a new menu option _Window/Analysis/Profile Analyzer_
+5. After the installation has completed, you will have a new menu option _Window/Analysis/Profile Analyzer_
 
 ## Pulling data into the Analyzer
 
-Because we have already collected data from both sessions, you will need to repeat some steps. This is because the Analyzer cannot actually use the saved data directly so we will need to use the Profiler again. Once you are familiar with the tools, you can streamline the steps to better suit your preferred workflow.
+Because you have already collected data from both sessions, you will need to repeat some steps. This is because the Analyzer cannot actually use the saved data directly so you will need to use the Profiler again. Once you are familiar with the tools, you can streamline the steps to better suit your preferred workflow.
 
-For now, open the Analyzer we have just installed:
+For now, open the Analyzer you have just installed:
 
 1. Open the Analyzer from the menu option _Window/Analysis/Profile Analyzer_
 
-1. Select _Open Profiler Window_
+2. Select _Open Profiler Window_
 
-1. The Profiler may show data from a previous session, so clear it using the _Clear_ button at the top of the panel
+3. The Profiler may show data from a previous session, so clear it using the _Clear_ button at the top of the panel
 
-1. Select the _Load_ button (icon of an open folder) in the Profiler panel in the top right
+4. Select the _Load_ button (icon of an open folder) in the Profiler panel in the top right
 
-1. Select your file `plain.data`
+5. Select your file `plain.data`
 
-1. Click into the Analyzer window and select Pull Data in the top left
+6. Click into the Analyzer window and select Pull Data in the top left
 
 The Analyzer will now import the unoptimized recording and you will see several panels summarizing the data:
 
@@ -50,16 +50,12 @@ The Analyzer will now import the unoptimized recording and you will see several 
 - A graph of the first 300 frames of activity
 
 - Filters that let you search the data, e.g., by marker name or thread:
+    - _Top 10 markers on the median frame_ (i.e., a quick indication of which areas are taking the most time on the median frame)
+    - Table of Marker Details for selected range
+    - Frame summary (for frame range and timing ranges for those frames)
+    - Thread summary details
+    - Marker summary
 
-      - _Top 10 markers on the median frame_ (i.e., a quick indication of which areas are taking the most time on the median frame)
-
-      - Table of Marker Details for selected range
-
-      - Frame summary (for frame range and timing ranges for those frames)
-
-      - Thread summary details
-
-      - Marker summary
 
 Markers relate to the profiling data markers as named in calls such as `BeginSample`.
 
@@ -103,11 +99,11 @@ You can see from the Marker Details table, the function _CollisionCalculationScr
 
 ### Is the sample code GPU bound?
 
-The CPU and GPU work concurrently to perform their respective tasks. Depending on your application, one may be taking longer to perform its tasks than the other. Some games may have a higher GPU load where as others may have a higher CPU load. At some point, when the necessary work on both CPU and GPU is done, the rendered frame must be presented to the user. If one is taking a lot longer than the other, then our application's performance is bound by that resource.
+The CPU and GPU work concurrently to perform their respective tasks. Depending on your application, one may be taking longer to perform its tasks than the other. Some games may have a higher GPU load where as others may have a higher CPU load. At some point, when the necessary work on both CPU and GPU is done, the rendered frame must be presented to the user. If one is taking a lot longer than the other, then the application's performance is bound by that resource.
 
-If the GPU is left idle waiting for the CPU to give it more work, we are likely to be CPU bound. If the CPU is left waiting for the GPU to finish then we are likely to be GPU bound.
+If the GPU is left idle waiting for the CPU to give it more work, the app is likely to be CPU bound. If the CPU is left waiting for the GPU to finish then the app is likely to be GPU bound.
 
-We don’t think the collision sample is GPU bound but here's how to tell using the Analyzer.
+The collision sample is unlikely to be GPU bound but here's how to tell using the Analyzer.
 
 - Type _Gfx.WaitForPresent_ in the _Name Filter_
 
@@ -117,7 +113,7 @@ We don’t think the collision sample is GPU bound but here's how to tell using 
 
 - If the median value is _non-zero_, the CPU is waiting for the GPU to finish which means that your application could be GPU-bound
 
-- In the case of the collision sample, the median is zero. Under _Marker Summary_ we can see the min and max values are also both zero. Our sample never seems to be waiting for the GPU.
+- In the case of the collision sample, the median is zero. Under _Marker Summary_ you can see the min and max values are also both zero. The sample never seems to be waiting for the GPU.
 
 ![Check if GPU-bound#center](images/analyzer-check-gpu-bound.PNG "Figure 4. Check if the CPU is waiting (Gfx.WaitForPresent) for the GPU.")
 
@@ -125,7 +121,7 @@ We don’t think the collision sample is GPU bound but here's how to tell using 
 
 Right-click on the graph and choose _Clear_ selection. The graph will turn white and the Marker Details will disappear.
 
-The Analyzer allows you to reduce the information presented so we can focus on specific areas.
+The Analyzer allows you to reduce the information presented so you can focus on specific areas.
 
 Select multiple frames again by left-clicking and dragging on the graph.
 
@@ -139,7 +135,7 @@ When you click on one of the functions or markers, you will see the time for tha
 
 The Marker Summary panel is showing 24.06% for the marker named “Collision movement”.
 
-You can see the code from _CollisionCalculationScript.cs_ starting at line 256.
+You can see the code from `CollisionCalculationScript.cs` starting at line 256.
 
 ```
 UnityEngine.Profiling.Profiler.BeginSample("Collision movement");
@@ -149,11 +145,11 @@ collisionMoveMs.Stop();
 UnityEngine.Profiling.Profiler.EndSample();
 ```
 
-We have used the `BeginSample()` and `EndSample()` functions to create a custom sample marker.
+The code uses the `BeginSample()` and `EndSample()` functions to create a custom sample marker.
 
 ## Compare data from pre- and post- optimization
 
-Up to now we have concentrated on a single data set, that of the unoptimized version. You will now import the optimized version and use the Analyzer to compare them.
+Up to now you have concentrated on a single data set, that of the unoptimized version. You will now import the optimized version and use the Analyzer to compare them.
 
 ### Pull the optimized data into the Analyzer
 
@@ -161,19 +157,19 @@ Keep the unoptimized data in the Analyzer. Leave the Name Filter set to “colli
 
 1. Click in the Profiler window or open it using the menu option _Window/Analysis/Profiler_
 
-1. Click _Clear_ to reset the Profiler
+2. Click _Clear_ to reset the Profiler
 
-1. Click on the _Load Binary_ (folder icon) in the top-right
+3. Click on the _Load Binary_ (folder icon) in the top-right
 
-1. Select the data file you named _neon.data_
+4. Select the data file you named `neon.data`
 
-1. Click back to the Analyzer window
+5. Click back to the Analyzer window
 
-1. Now click _Compare_ in the top-left. You will see the unoptimized data set repeated in two rows, each with a frame time graph. To the left of the graphs, you will see that both are labeled “Unsaved 1”
+6. Now click _Compare_ in the top-left. You will see the unoptimized data set repeated in two rows, each with a frame time graph. To the left of the graphs, you will see that both are labeled “Unsaved 1”
 
-1. Click on the _Pull Data_ button for the second row.
+7. Click on the _Pull Data_ button for the second row.
 
-1. The graph will change to the new data set and will now be named “Unsaved 2”
+8. The graph will change to the new data set and will now be named “Unsaved 2”
 
 You are now looking at the unoptimized (upper graph) and optimized (lower graph) data.
 
@@ -187,15 +183,15 @@ Right-click on either graph and choose Select All. Do the same for the lower gra
 You are now comparing the first 300 frames of each data set.
 
 ### Comparing the two data sets
-You will notice immediately a difference in the _Top 10 markers on median frames_ area. You can see the difference between the two median frames in the screenshot below. The upper frame duration is 87.7ms while the lower frame is 33.4ms (these numbers are to the right of the colored entries). The size of each marker/function for the optimized set are all reduced compared to the unoptimized version. This is as we would expect since the optimizations will have reduced how long each of those operations takes.
+You will notice immediately a difference in the _Top 10 markers on median frames_ area. You can see the difference between the two median frames in the screenshot below. The upper frame duration is 87.7ms while the lower frame is 33.4ms (these numbers are to the right of the colored entries). The size of each marker/function for the optimized set are all reduced compared to the unoptimized version. This is as expected since the optimizations will have reduced how long each of those operations takes.
 
 ![Data comparison#center](images/analyzer-dataset-comparison.PNG "Figure 7. Comparing performance data pre- and post-optimization.")
 
-In the Marker Details table (now labeled Marker Comparison) you will see that there are new columns. Left Median, Right Median and two columns marked “<” and “>”. The “left” dataset is the unoptimized code, the right is the optimized code. The Diff and Abs Diff columns give us the numerical difference (and absolute difference) between each function/marker.
+In the Marker Details table (now labeled Marker Comparison) you will see that there are new columns. Left Median, Right Median and two columns marked "<" and ">". The "left" dataset is the unoptimized code, the right is the optimized code. The Diff and Abs Diff columns give you the numerical difference (and absolute difference) between each function/marker.
 
 The Diff column values are all negative so all of the functions/markers named “collision” have been reduced. The optimizations have worked!
 
 ## Summary
-We have covered using the Profiler and the Analyzer tools to collect and analyze performance data of an application running on an Android device. Arm provides a Unity package that enables support for [Mali GPU](https://www.arm.com/products/silicon-ip-multimedia) hardware counters. Mali hardware counters will provide a lot more information about what's going on inside the GPU. If you would like to profile your application on a Mali GPU, we recommend you read [Install and Use Arm integration packages for Unity](/learning-paths/mobile-graphics-and-gaming/unity_packages/mali_metrics).
+This Learning Path covered using the Profiler and the Analyzer tools to collect and analyze performance data of an application running on an Android device. Arm provides a Unity package that enables support for [Mali GPU](https://www.arm.com/products/silicon-ip-multimedia) hardware counters. Mali hardware counters will provide a lot more information about what's going on inside the GPU. If you would like to profile your application on a Mali GPU, read [Install and Use Arm integration packages for Unity](/learning-paths/mobile-graphics-and-gaming/unity_packages/mali_metrics).
 
-Thank you for following this learning path. The next learning path in this series, [Using Neon intrinsics to optimize Unity on Android](/learning-paths/mobile-graphics-and-gaming/using-neon-intrinsics-to-optimize-unity-on-android/), will explore the optimizations (the Burst compiler and Arm Neon) used by the collision sample code.
+Thank you for following this Learning Path. The next Learning Path in this series, [Using Neon intrinsics to optimize Unity on Android](/learning-paths/mobile-graphics-and-gaming/using-neon-intrinsics-to-optimize-unity-on-android/), will explore the optimizations (the Burst compiler and Arm Neon) used by the collision sample code.

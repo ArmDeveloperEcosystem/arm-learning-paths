@@ -1,27 +1,23 @@
 ---
-title: RabbitMQ Use Case 1 – Event Processing with Python Workers
+title: "RabbitMQ use case 1: event processing with Python workers"
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## RabbitMQ Use Case – Event Processing with Python Workers
-This use case demonstrates how RabbitMQ enables event-driven architectures using topic exchanges, durable queues, and Python-based worker consumers. It focuses on reliable, asynchronous event processing, which is a common production pattern.
+## Event processing with topic-based routing
 
-- Topic exchange–based routing
-- Durable queues and bindings
-- A Python-based worker using the `pika` client
-- Message publishing and consumption validation
+In this use case, you implement an event-driven workflow using RabbitMQ with a topic exchange, a durable queue, and a Python worker consumer. You publish order events (for example, `order.created`, `order.updated`) and process them asynchronously.
 
-The use case models an **event-driven system**, where order-related events are published and processed asynchronously by workers.
+This pattern is useful when you need flexible, wildcard-based routing (such as `order.*`) where multiple event types route to the same queue and producers and consumers evolve independently.
 
 ### Use case overview
 
 **Scenario:**  
 An application publishes order-related events (`order.created`, `order.updated`, etc.) to RabbitMQ. A background worker consumes these events from a queue and processes them independently.
 
-The goal of this use case is to showcase how order-related events can be published to RabbitMQ and processed asynchronously by background workers without tightly coupling producers and consumers.
+This use case shows how order-related events can be published to RabbitMQ and processed asynchronously by background workers without tightly coupling producers and consumers.
 
 **Typical events include:**
 
@@ -31,182 +27,207 @@ The goal of this use case is to showcase how order-related events can be publish
 
 This architecture improves scalability, fault tolerance, and system decoupling.
 
-### Prerequisites
+**When to use this pattern:**
 
-- RabbitMQ installed and running
-- RabbitMQ management plugin enabled
-- Python 3 installed
-- Network access to RabbitMQ broker
+Use topic exchanges when you need wildcard routing where `order.*` matches `order.created`, `order.updated`, and `order.completed`. This approach allows multiple related event types to flow to the same consumer and provides flexibility to add new event types without reconfiguring consumers.
+
+**Comparison:**
+
+Use Case 1 (Topic Exchange) provides flexible routing with wildcards, ideal for event streams. Use Case 2 (Direct Exchange) provides exact-match routing, ideal for targeted notifications.
 
 ### Declare a topic exchange
-Create a durable topic exchange to route events based on routing keys.
+
+Create a durable topic exchange to route events based on routing keys:
 
 ```console
 ./rabbitmqadmin declare exchange name=events type=topic durable=true
 ```
 
-- Creates a durable topic exchange named events.
-- Routes messages using wildcard-based routing keys (for example, order.*).
-- Ensures the exchange survives broker restarts.
+This creates a durable topic exchange named `events` that routes messages using wildcard-based routing keys (for example, `order.*`) and survives broker restarts.
+
+You should see:
+```output
+exchange declared
+```
 
 ### Declare a durable queue
+
 Create a durable queue to store order-related events.
 
 ```console
 ./rabbitmqadmin declare queue name=order.events durable=true
 ```
 
-- Create a durable queue for order events.
-- Guarantee that messages are persisted until consumed.
-- Ensure reliability in case of worker or broker restarts.
+This creates a durable queue for order events that guarantees messages are persisted until consumed, ensuring reliability in case of worker or broker restarts.
 
-You should see an output similar to:
+You should see:
 ```output
 queue declared
 ```
 
 ### Bind queue to exchange
-Bind the queue to the exchange using a topic routing pattern.
+
+Bind the queue to the exchange using a topic routing pattern:
 
 ```console
 ./rabbitmqadmin declare binding source=events destination=order.events routing_key="order.*"
 ```
 
-- Connects the queue to the exchange.
-- Ensures all order-related routing keys match the queue.
-- Enables flexible event expansion without changing consumers.
+This connects the queue to the exchange so all order-related routing keys match the queue. The wildcard pattern `order.*` matches routing keys such as `order.created`, `order.updated`, and `order.completed`, enabling flexible event expansion without changing consumers.
 
-You should see an output similar to:
+The output is similar to:
 ```output
 binding declared
 ```
 
-This binding ensures the queue receives all messages with routing keys such as:
-- order.created
-- order.updated
-- order.completed
+### Validate the setup
 
-### Publish an event message
-Publish a sample order event to the exchange.
+Confirm that the exchange, queue, and binding exist and are correctly connected:
 
 ```console
-./rabbitmqadmin publish exchange=events routing_key="order.created" payload='{"order_id":123}'
+./rabbitmqadmin list exchanges name type
+./rabbitmqadmin list queues name messages
+./rabbitmqadmin list bindings
 ```
 
-- Publishes an event to the events exchange.
-- Uses a routing key that matches the binding filter.
-- Payload is structured JSON to simulate real event data.
+These commands verify that the `events` exchange exists (type: `topic`), the `order.events` queue exists with zero messages initially, and a binding connects `events` to `order.events` with the `order.*` routing pattern.
 
-You should see an output similar to:
+The output is similar to:
+
 ```output
-Message published
++--------+-------+
+| name   | type  |
++--------+-------+
+| events | topic |
++--------+-------+
+
++--------------+----------+
+| name         | messages |
++--------------+----------+
+| order.events | 0        |
++--------------+----------+
+
++--------+--------------+-------------+
+| source | destination  | routing_key |
++--------+--------------+-------------+
+| events | order.events | order.*     |
++--------+--------------+-------------+
 ```
 
 ### Install Python dependencies
-Install pip and the pika RabbitMQ client library.
+
+To create the worker, you need Python 3 with the `pika` library, which provides the RabbitMQ client:
 
 ```console
 sudo zypper install -y python3-pip
-pip install pika
+pip3 install pika
 ```
+
+This installs `pip` (Python package manager) and `pika` (RabbitMQ client library for Python).
 
 ### Create the worker script
-Create a Python worker file to process messages from a queue.
 
-A **Python worker** was created to process messages from a RabbitMQ queue (jobs) using the pika library. The queue is durable, ensuring message persistence. The worker implements fair dispatch (prefetch_count=1) and manual acknowledgments to reliably process each job without loss. Messages were successfully published to the queue using rabbitmqadmin, and the worker consumed them as expected.
+The Python worker consumes order-related events from the `order.events` queue. This worker uses durable queues for message persistence, `prefetch_count=1` for fair dispatch, and manual acknowledgments for reliable processing.
 
-Using your favorite editor (the example uses "edit") create your "worker.py" file:
-
-```console
-edit worker.py
-```
-
-**worker.py:**
+Using a text editor, create a `worker.py` file with the content below: 
 
 ```python
 import pika
 import time
 import json
 
-# RabbitMQ broker address
-RABBITMQ_IP = "localhost"
+RABBITMQ_HOST = "localhost"
+QUEUE_NAME = "order.events"
 
+print("[DEBUG] Connecting to RabbitMQ...")
 connection = pika.BlockingConnection(
-    pika.ConnectionParameters(host=RABBITMQ_IP)
+    pika.ConnectionParameters(host=RABBITMQ_HOST)
 )
 channel = connection.channel()
 
-# Ensure queue exists
-channel.queue_declare(queue='jobs', durable=True)
+print("[DEBUG] Declaring queue...")
+channel.queue_declare(queue=QUEUE_NAME, durable=True)
 
-print("Worker started. Waiting for jobs...")
-
-def process_job(ch, method, properties, body):
-    job = json.loads(body.decode())
-    print(f"[Worker] Received job: {job}")
-
-    # Simulate processing
-    time.sleep(2)
-
-    # Acknowledge message
-    ch.basic_ack(delivery_tag=method.delivery_tag)
-
-# Fair dispatch configuration
+print("[DEBUG] Setting QoS...")
 channel.basic_qos(prefetch_count=1)
 
+print("Worker started. Waiting for events...")
+
+def process_event(ch, method, properties, body):
+    event = json.loads(body.decode())
+    print(f"[Worker] Received event: {event}")
+    print(f"[Worker] Processing event type: {event.get('event', 'unknown')}")
+
+    # Simulate processing time
+    time.sleep(2)
+    
+    print("[Worker] Event processed successfully")
+    ch.basic_ack(delivery_tag=method.delivery_tag)
+
 channel.basic_consume(
-    queue='jobs',
-    on_message_callback=process_job
+    queue=QUEUE_NAME,
+    on_message_callback=process_event
 )
 
+print("[DEBUG] Starting consumer loop...")
 channel.start_consuming()
 ```
 
 ### Start the worker
-Run the worker process.
+
+Now that you've created the worker script, run it to start consuming messages:
 
 ```console
 python3 worker.py
 ```
 
-You should see an output similar to:
+The worker connects to RabbitMQ and begins listening for events. The output is similar to:
 ```output
-The worker started. Waiting for jobs...
+[DEBUG] Connecting to RabbitMQ...
+[DEBUG] Declaring queue...
+[DEBUG] Setting QoS...
+Worker started. Waiting for events...
+[DEBUG] Starting consumer loop...
 ```
 
-### Publish job messages
-From another SSH terminal, publish a job message.
+### Publish event messages
+
+With the worker running, open another SSH terminal and publish an order event:
 
 ```console
-./rabbitmqadmin publish routing_key=jobs payload='{"job":"test1"}'
+./rabbitmqadmin publish exchange=events routing_key="order.created" payload='{"order_id":123,"event":"order.created"}'
 ```
 
-**Worker output:**
+The message routes through the `events` exchange to the `order.events` queue, where the worker consumes it. The worker output shows:
 
 ```output
-Worker started. Waiting for jobs...
-[Worker] Received job: {'job': 'test1'}
+[Worker] Received event: {'order_id': 123, 'event': 'order.created'}
+[Worker] Processing event type: order.created
+[Worker] Event processed successfully
 ```
 
-Publish another job:
+Publish a second event to test the wildcard routing:
 
 ```console
-./rabbitmqadmin publish routing_key=jobs payload='{"job":"hello1"}'
+./rabbitmqadmin publish exchange=events routing_key="order.updated" payload='{"order_id":123,"event":"order.updated"}'
 ```
 
-**Worker output:**
+The worker processes this event using the same logic. The output shows:
 
 ```output
-Worker started. Waiting for jobs...
-[Worker] Received job: {'job': 'hello1'}
+[Worker] Received event: {'order_id': 123, 'event': 'order.updated'}
+[Worker] Processing event type: order.updated
+[Worker] Event processed successfully
 ```
-Press "CTRL-C" to exit the worker application.
 
-## Use case validation
+The wildcard binding (`order.*`) allows the worker to process any event with a routing key matching this pattern. You can publish additional events such as `order.completed` or `order.cancelled` and the worker processes them all.
 
-- Event routing via topic exchanges functions correctly  
-- Durable queues and acknowledgments ensure reliable message processing  
-- Worker-based consumption supports safe and controlled job execution
+When you're done testing, press Ctrl+C in the worker terminal to exit the application.
 
-This use case demonstrates how RabbitMQ enables reliable, decoupled, and scalable event processing using topic-based routing and Python workers.
-The setup provides a strong foundation for production-grade, message-driven architectures on GCP SUSE Arm64 virtual machines.
+## What you've accomplished and what's next
+
+You've implemented an event-driven system using RabbitMQ with topic exchange routing, durable queues, manual acknowledgments, and fair dispatch. The Python worker processes order events asynchronously, and the wildcard routing pattern (`order.*`) allows multiple related event types to flow to the same consumer.
+
+This pattern works well for event streams where you want flexibility to add new event types without reconfiguring consumers.
+
+Next, you implement a WhatsApp notification pipeline using a direct exchange with exact-match routing, better suited for targeted notifications.

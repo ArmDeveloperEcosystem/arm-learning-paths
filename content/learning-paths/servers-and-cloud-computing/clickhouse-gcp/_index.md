@@ -3,7 +3,7 @@ title: Build a Real-Time Analytics Pipeline with ClickHouse on Google Cloud Axio
     
 minutes_to_complete: 50
 
-who_is_this_for: This learning path is intended for software developers, data engineers, and platform engineers who want to build and benchmark a real-time analytics pipeline using ClickHouse on Linux/Arm64 environments, specifically Google Cloud C4A virtual machines powered by Axion processors.
+who_is_this_for: This is an introductory topic for developers deploying and optimizing ClickHouse on Arm-based Linux environments using Google Cloud C4A virtual machines powered by Axion processors, to evaluate ClickHouse performance and behavior on Arm-based infrastructure.
 
 learning_objectives:
   - Provision an Arm-based SUSE SLES virtual machine on Google Cloud using C4A (Axion processors)
