@@ -1,6 +1,10 @@
 ---
 title: Optimize C++ performance with Profile-Guided Optimization and Google Benchmark
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 15
 
 who_is_this_for: Developers looking to optimize C++ performance on an Arm-based Windows device, based on runtime behavior.
