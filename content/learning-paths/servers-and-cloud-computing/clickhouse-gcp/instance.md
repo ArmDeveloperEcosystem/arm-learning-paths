@@ -28,8 +28,8 @@ To create a virtual machine based on the C4A instance type:
 
 
 - Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. 
-- If using use **SUSE Linux Enterprise Server**. Select "Pay As You Go" for the license type.
-- Once appropriately selected and configured, please Click **Select**.
+- If using **SUSE Linux Enterprise Server**, select "Pay As You Go" for the license type.
+- Once appropriately selected and configured, click **Select**.
 - Under **Networking**, enable **Allow HTTP traffic**.
 - Click **Create** to launch the instance.
 - Once created, you should see a "SSH" option to the right in your list of VM instances.  Click on this to launch a SSH shell into your VM instance:

@@ -1,5 +1,5 @@
 ---
-title: ClickHouse Benchmarking on Google Axion (Arm)
+title: Benchmark ClickHouse on Google Axion processors
 weight: 9
 
 ### FIXED, DO NOT MODIFY
@@ -7,10 +7,7 @@ layout: learningpathall
 ---
 ## ClickHouse benchmarking on Axion processors
 
-
-## ClickHouse Benchmarking on Axion Processors
-This phase benchmarks **query latency on ClickHouse running on Google Axion (Arm64)**.  
-The goal is to measure **repeatable query latency** with a focus on **p95 latency**, using data ingested via the real-time Dataflow pipeline.
+In this section you'll benchmark query latency on ClickHouse running on Google Axion (Arm64). The goal is to measure repeatable query latency with a focus on p95 latency, using data ingested with the real-time Dataflow pipeline.
 
 ## Prepare ClickHouse for Accurate Latency Measurement
 
@@ -65,9 +62,9 @@ Peak memory usage: 106.54 MiB.
 
 These queries represent common real-time analytics patterns:
 
-- **Filtered count**: service-level analytics
-- **Time-windowed count**: recent activity
-- **Aggregation by service**: grouped analytics
+- Filtered count: service-level analytics
+- Time-windowed count: recent activity
+- Aggregation by service: grouped analytics
 
 Each query scans and processes millions of rows to stress the execution engine.
 
@@ -119,7 +116,8 @@ GROUP BY service
 ORDER BY total DESC;
 ```
 
-You should see an output similar to:
+The output is similar to:
+
 ```output
 Query id: c48c0d30-0ef6-4fb9-bbb9-815a509a5f91
 
@@ -236,16 +234,18 @@ sort -n latency-results.txt
 ```
 
 **Calculate p95 latency (manual):**
+
 The p95 latency represents the value under which 95% of query executions complete.
 
 **Formula:**
 
-```pqsql
+```
 p95 index = ceil(0.95 × N)
 ```
 
 For 10 samples:
-```cpp
+
+```
 ceil(0.95 × 10) = ceil(9.5) = 10
 ```
 
@@ -263,9 +263,9 @@ After executing the ClickHouse query 10 times on the GCP Axion (Arm) VM, the obs
 
 You've successfully completed a comprehensive ClickHouse benchmarking exercise on Google Axion (Arm64) processors. Key results from the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM running SUSE:
 
-- ClickHouse on **Google Axion (Arm64)** delivered consistently low query latency, even while scanning ~6 million rows per query.
-- Across **10 repeat executions, the p95 latency was ~11 ms**, indicating stable and predictable performance.
+- ClickHouse on Google Axion (Arm64) delivered consistently low query latency, even while scanning ~6 million rows per query.
+- Across 10 repeat executions, the p95 latency was ~11 ms, indicating stable and predictable performance.
 - Disabling the query cache ensured true execution latency, not cache-assisted results.
-- Analytical queries sustained **500M+ rows/sec throughput** with minimal memory usage.
+- Analytical queries sustained 500M+ rows/sec throughput with minimal memory usage.
 
 Throughout this Learning Path, you provisioned an Arm-based VM on Google Cloud, deployed ClickHouse, configured a real-time streaming pipeline with Pub/Sub and Dataflow, and validated end-to-end analytical performance. You can now deploy, optimize, and benchmark ClickHouse workloads on Google Cloud Arm infrastructure.

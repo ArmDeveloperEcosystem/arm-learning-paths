@@ -1,5 +1,5 @@
 ---
-title: Dataflow Streaming ETL to ClickHouse
+title: Build a Dataflow streaming ETL pipeline to ClickHouse
 weight: 8
 
 ### FIXED, DO NOT MODIFY
@@ -138,11 +138,9 @@ Successful output confirms:
 - Subscription is readable
 - IAM is functioning correctly
 
-### Create Dataflow Streaming ETL Script
-Create the Dataflow pipeline file:
+### Create Dataflow streaming ETL script
 
-Purpose
-Defines a streaming Beam pipeline that:
+Create the Dataflow pipeline file that defines a streaming Beam pipeline to:
 
 - Reads JSON events from Pub/Sub
 - Parses messages
@@ -212,8 +210,9 @@ gcloud pubsub subscriptions list
 hostname -I
 ```
 
-### Run the Dataflow Streaming Job
-Launches the pipeline on managed Dataflow workers.
+### Run the Dataflow streaming job
+
+Launch the pipeline on managed Dataflow workers:
 
 ```console
 python3.11 dataflow_etl.py \
@@ -237,8 +236,9 @@ Autoscaling is enabled for Dataflow Streaming Engine. Workers will scale between
 - Streaming mode is active
 - Workers scale automatically
 
-### End-to-End Validation
-Publish live streaming data.
+### End-to-end validation
+
+Publish live streaming data:
 
 ```console
 gcloud pubsub topics publish logs-topic \
