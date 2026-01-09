@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Install RabbitMQ on GCP SUSE Arm64 VM
-This guide describes a **step-by-step installation of RabbitMQ** on a **Google Cloud Platform SUSE Linux Arm64 virtual machine**, using **RPM packages** for both **Erlang** and **RabbitMQ Server**.
+This guide describes the installation of RabbitMQ on a Google Cloud Platform SUSE Linux Arm64 virtual machine using RPM packages for both Erlang and RabbitMQ Server.
 
 RabbitMQ needs Erlang to be installed before setting up the server.
 
@@ -19,14 +19,14 @@ RabbitMQ needs Erlang to be installed before setting up the server.
 - Outbound internet access
 
 ### Refresh system repositories
-This step updates the system’s package list so the operating system knows about the latest software available from its repositories.
+Update the system's package list to get the latest available software from repositories.
 
 ```console
 sudo zypper refresh
 ```
 
 ### Install required system utilities
-You can install the basic tools needed to download and manage packages.
+Install the basic tools needed to download and manage packages.
 
 ```console
 sudo zypper install -y curl wget gnupg tar socat logrotate
@@ -122,6 +122,10 @@ sudo rabbitmqctl add_user admin StrongPassword123
 sudo rabbitmqctl set_user_tags admin administrator
 sudo rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
 ```
+
+{{% notice Warning %}}
+Replace `StrongPassword123` with a strong, unique password. For production environments, use environment variables or a secrets management system instead of hardcoding passwords.
+{{% /notice %}}
 
 **Log in to Management UI**
 

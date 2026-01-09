@@ -22,4 +22,4 @@ RabbitMQ helps decouple application components, improve scalability, and increas
 
 RabbitMQ is widely used for **event-driven architectures**, **background job processing**, **microservices communication**, and **notification systems**. It integrates easily with many programming languages and platforms.
 
-Learn more from the [RabbitMQ official website](https://www.rabbitmq.com/) and the [official documentation](https://www.rabbitmq.com/documentation.html).
+Learn more from the [RabbitMQ website](https://www.rabbitmq.com/) and the [RabbitMQ documentation](https://www.rabbitmq.com/documentation.html).

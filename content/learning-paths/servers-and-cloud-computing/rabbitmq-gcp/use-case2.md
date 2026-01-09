@@ -1,5 +1,5 @@
 ---
-title: "RabbitMQ use case 2: WhatsApp Notification"
+title: "RabbitMQ use case 2: WhatsApp notification"
 weight: 8 
 
 ### FIXED, DO NOT MODIFY
@@ -59,7 +59,7 @@ exchange declared
 
 This creates a durable queue to persist WhatsApp notification messages until consumed.
 
-The output is similar to:
+You should see:
 ```output
 queue declared
 ```
@@ -265,3 +265,28 @@ You've implemented an asynchronous notification system using RabbitMQ with direc
 This pattern works well for targeted notifications (email, SMS, WhatsApp, push notifications) where routing needs to be simple and predictable. Each notification type routes to a dedicated queue using an exact-match routing key, providing reliable, guaranteed delivery.
 
 The key difference from Use Case 1 is the routing approach: Use Case 1 uses topic exchange with wildcard routing (`order.*`) for flexible event streams, while Use Case 2 uses direct exchange with exact routing (`whatsapp`) for targeted notifications.
+
+## Cleanup resources
+
+When you're finished with this Learning Path, clean up your resources to avoid unnecessary charges:
+
+**Stop RabbitMQ workers:**
+Press Ctrl+C in each terminal running a Python worker.
+
+**Delete RabbitMQ resources:**
+
+```console
+./rabbitmqadmin delete queue name=order.events
+./rabbitmqadmin delete queue name=whatsapp.notifications
+./rabbitmqadmin delete queue name=testqueue
+./rabbitmqadmin delete exchange name=events
+./rabbitmqadmin delete exchange name=notifications
+```
+
+**Delete the Google Cloud VM:**
+
+Navigate to **Compute Engine > VM Instances** in the Google Cloud Console, select your VM, and select **Delete**.
+
+**Delete the firewall rule:**
+
+Navigate to **VPC Network > Firewall**, find the `allow-tcp-15672` rule, and select **Delete**.
