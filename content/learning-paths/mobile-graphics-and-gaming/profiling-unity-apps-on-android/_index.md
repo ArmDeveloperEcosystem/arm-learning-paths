@@ -16,7 +16,7 @@ prerequisites:
     - Basic knowledge of Unity and programming concepts
     - Learning path [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android)
 
-author: Arm
+author: Joshua Marshall-Law
 
 ### Tags
 skilllevels: Introductory
