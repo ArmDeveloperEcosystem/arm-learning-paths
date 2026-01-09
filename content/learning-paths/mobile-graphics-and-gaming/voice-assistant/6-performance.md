@@ -127,7 +127,7 @@ To get benchmark numbers with use of SME kernels, you can rerun the full Benchma
 
 ## Example performance with a Vivo X300 Android phone
 
-The table table shows the measurements (in tokens per second) measured on a Vivo X300 android phone:
+The table table shows the measurements (in tokens per second) measured on a Vivo X300 Android phone:
 
 | LLM Framework     | Model                                     | Without SME2   | With SME2 | Uplift  |
 |-------------------|-------------------------------------------|----------------|-----------|---------|
