@@ -7,7 +7,8 @@ layout: learningpathall
 ---
 
 ## Install RabbitMQ on GCP SUSE Arm64 VM
-This guide describes the installation of RabbitMQ on a Google Cloud Platform SUSE Linux Arm64 virtual machine using RPM packages for both Erlang and RabbitMQ Server.
+
+In this section you'll install RabbitMQ on a Google Cloud Platform SUSE Linux Arm64 virtual machine using RPM packages for both Erlang and RabbitMQ Server.
 
 RabbitMQ needs Erlang to be installed before setting up the server.
 
@@ -155,7 +156,16 @@ Replace `<VM_IP>` with the public IP of your GCP VM.
 
 If everything is configured correctly, you see a RabbitMQ login page in your browser that looks like this:
 
-![Screenshot showing the RabbitMQ management UI login interface with username and password input fields and a login button alt-txt#center](images/rabbitmq.png "RabbitMQ Login page")
+![Screenshot showing the RabbitMQ management UI login interface with username and password input fields and a login button#center](images/rabbitmq.png "RabbitMQ Login page")
+
+## What you've accomplished and what's next
+
+You've successfully installed RabbitMQ on your Google Cloud Arm64 VM with:
+- Erlang and RabbitMQ Server installed via RPM packages
+- RabbitMQ Management UI enabled and accessible
+- Administrative user configured for UI access
+
+Next, you'll validate your RabbitMQ installation and verify it's functioning correctly.
 
 This confirms that your RabbitMQ management dashboard is operational.
 

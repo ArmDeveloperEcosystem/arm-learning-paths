@@ -27,7 +27,7 @@ The application publishes a WhatsApp notification message to the `notifications`
 
 ### RabbitMQ topology
 
-This use case uses a direct exchange topology for exact-match routing. The `notifications` exchange (type: `direct`) routes notification messages based on exact routing key matches. The `whatsapp.notifications` queue is durable, which means it persists messages across broker restarts. The binding connects the exchange to the queue using the `whatsapp` routing key, ensuring only messages published with this exact key are routed to the queue.
+A direct exchange topology is used for exact-match routing. The `notifications` exchange (type: `direct`) routes notification messages based on exact routing key matches. The `whatsapp.notifications` queue is durable, which means it persists messages across broker restarts. The binding connects the exchange to the queue using the `whatsapp` routing key, ensuring only messages published with this exact key are routed to the queue.
 
 ### Declare RabbitMQ resources
 
@@ -44,7 +44,7 @@ Create the required exchange, queue, and binding for WhatsApp notifications.
 
 This creates a durable direct exchange named `notifications` that routes messages using exact routing keys.
 
-You should see:
+The output is similar to:
 ```output
 exchange declared
 ```
@@ -59,7 +59,7 @@ exchange declared
 
 This creates a durable queue to persist WhatsApp notification messages until consumed.
 
-You should see:
+The output is similar to:
 ```output
 queue declared
 ```

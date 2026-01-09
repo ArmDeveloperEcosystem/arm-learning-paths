@@ -7,7 +7,8 @@ layout: learningpathall
 ---
 
 ## RabbitMQ baseline validation on GCP SUSE Arm64 VM
-This section validates your RabbitMQ installation on the Google Cloud SUSE Linux Arm64 virtual machine by confirming:
+
+In this section you'll validate your RabbitMQ installation on the Google Cloud SUSE Linux Arm64 virtual machine by confirming:
 
 - RabbitMQ service health
 - Management plugin availability
@@ -20,6 +21,9 @@ Verify that the RabbitMQ node is operational and healthy.
 ```console
 sudo rabbitmqctl status
 ```
+
+The command returns detailed status information. Verify that:
+
 - Node status reports RabbitMQ is running
 - No active alarms
 - Listeners are active on ports 5672 and 15672
