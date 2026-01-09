@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 ## WhatsApp notification with direct exchange routing
 
-In this use case, you implement an asynchronous notification workflow where RabbitMQ routes WhatsApp notification messages using a **direct exchange** with exact-match routing. A Python worker consumes and processes these messages reliably.
+In this use case, you implement an asynchronous notification workflow where RabbitMQ routes WhatsApp notification messages using a direct exchange with exact-match routing. A Python worker consumes and processes these messages reliably.
 
 ### Use case overview
 
@@ -266,14 +266,9 @@ This pattern works well for targeted notifications (email, SMS, WhatsApp, push n
 
 The key difference from Use Case 1 is the routing approach: Use Case 1 uses topic exchange with wildcard routing (`order.*`) for flexible event streams, while Use Case 2 uses direct exchange with exact routing (`whatsapp`) for targeted notifications.
 
-## Cleanup resources
+## Delete RabbitMQ resources
 
-When you're finished with this Learning Path, clean up your resources to avoid unnecessary charges:
-
-**Stop RabbitMQ workers:**
-Press Ctrl+C in each terminal running a Python worker.
-
-**Delete RabbitMQ resources:**
+When you're finished, stop the RabbitMQ workers and delete the resources. 
 
 ```console
 ./rabbitmqadmin delete queue name=order.events
@@ -283,10 +278,5 @@ Press Ctrl+C in each terminal running a Python worker.
 ./rabbitmqadmin delete exchange name=notifications
 ```
 
-**Delete the Google Cloud VM:**
+When you are done, be sure to delete the Google Cloud VM and the firewall rule. 
 
-Navigate to **Compute Engine > VM Instances** in the Google Cloud Console, select your VM, and select **Delete**.
-
-**Delete the firewall rule:**
-
-Navigate to **VPC Network > Firewall**, find the `allow-tcp-15672` rule, and select **Delete**.

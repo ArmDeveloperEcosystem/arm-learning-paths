@@ -58,16 +58,21 @@ Interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
 ```
 
 ### Download RabbitMQ admin CLI tool
-Download the rabbitmqadmin CLI tool from the local management endpoint.
+
+The `rabbitmqadmin` command is a Python script to manage and monitor RabbitMQ.
+
+Download the CLI tool from the local management endpoint to the virtual machine. You can also download and run `rabbitmqadmin` on your local computer, but you need to have `python3` installed, including `pip3`. 
 
 ```console
 curl -u guest:guest http://localhost:15672/cli/rabbitmqadmin -o rabbitmqadmin
 ```
-**Make the tool executable:**
+
+Make the tool executable:
 
 ```console
 chmod +x rabbitmqadmin
 ```
+
 ### Validate queue creation
 Create a test queue to validate write operations:
 
@@ -117,12 +122,11 @@ Confirm that the queue is empty after consumption:
 
 The output is similar to:
 ```output
-+--------------+----------+
-|     name     | messages |
-+--------------+----------+
-| jobs         | 0        |
-| order.events | 1        |
-| testqueue    | 1        |
++-----------+----------+
+|   name    | messages |
++-----------+----------+
+| testqueue | 1        |
++-----------+----------+
 ```
 
 ## What you've accomplished and what's next

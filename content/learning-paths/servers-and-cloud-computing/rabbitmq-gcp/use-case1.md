@@ -95,23 +95,31 @@ These commands verify that the `events` exchange exists (type: `topic`), the `or
 The output is similar to:
 
 ```output
-+--------+-------+
-| name   | type  |
-+--------+-------+
-| events | topic |
-+--------+-------+
-
++--------------------+---------+
+|        name        |  type   |
++--------------------+---------+
+|                    | direct  |
+| amq.direct         | direct  |
+| amq.fanout         | fanout  |
+| amq.headers        | headers |
+| amq.match          | headers |
+| amq.rabbitmq.trace | topic   |
+| amq.topic          | topic   |
+| events             | topic   |
++--------------------+---------+
 +--------------+----------+
-| name         | messages |
+|     name     | messages |
 +--------------+----------+
 | order.events | 0        |
+| testqueue    | 1        |
 +--------------+----------+
-
-+--------+--------------+-------------+
-| source | destination  | routing_key |
-+--------+--------------+-------------+
-| events | order.events | order.*     |
-+--------+--------------+-------------+
++--------+--------------+--------------+
+| source | destination  | routing_key  |
++--------+--------------+--------------+
+|        | order.events | order.events |
+|        | testqueue    | testqueue    |
+| events | order.events | order.*      |
++--------+--------------+--------------+
 ```
 
 ### Install Python dependencies
@@ -226,7 +234,9 @@ When you're done testing, press Ctrl+C in the worker terminal to exit the applic
 
 ## What you've accomplished and what's next
 
-You've implemented an event-driven system using RabbitMQ with topic exchange routing, durable queues, manual acknowledgments, and fair dispatch. The Python worker processes order events asynchronously, and the wildcard routing pattern (`order.*`) allows multiple related event types to flow to the same consumer.
+You've implemented an event-driven system using RabbitMQ with topic exchange routing, durable queues, manual acknowledgments, and fair dispatch. 
+
+The Python worker processes order events asynchronously, and the wildcard routing pattern (`order.*`) allows multiple related event types to flow to the same consumer.
 
 This pattern works well for event streams where you want flexibility to add new event types without reconfiguring consumers.
 
