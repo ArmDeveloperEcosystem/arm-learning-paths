@@ -11,8 +11,8 @@ Now that both ERNIE-4.5 models are installed and verified, you can compare their
 In this section, you compare the inference styles of PT and Thinking models, and learn how to inspect internal MoE expert routing behavior during generation.
 
 Both ERNIE-4.5 models share the same MoE architecture and parameter count (around 21 B total, around 3 B activated at runtime), but they're tuned for different objectives:
-- PT: General-purpose model trained on multilingual corpora for versatile tasks
-- Thinking: Tuned for multi-step reasoning, long context, and structured response generation
+- PT: general-purpose model trained on multilingual corpora for versatile tasks
+- Thinking: tuned for multi-step reasoning, long context, and structured response generation
 
 You can now observe how these different tuning objectives affect output behavior.
 
@@ -41,7 +41,7 @@ Here is the PT variant:
     --jinja
 ```
 
-The answer looks like this:
+The output is similar to:
 
 ```output
 Assistant: 1. **Top Motivation**: Achieving visible results and maintaining progress through efficient recovery nutrition.  
@@ -49,11 +49,10 @@ Assistant: 1. **Top Motivation**: Achieving visible results and maintaining prog
 2. **New Product Line**: *Smart Recovery Meal Kits* – Customizable, nutrient-dense, and easy-to-prepare post-workout meals designed for quick consumption and recovery optimization.  
 3. **Marketing Tagline**: "Fuel Progress, Recover Faster – Smart Nutrition for the Hard Worker."
 ```
-
 The answer shows:
-- Delivers conclusions directly: motivations and pain points are briefly mentioned with little reasoning.
-- Product ideas are sensible but templated: suggestions like "Smart Recovery Meal Kits" are plausible but lack contextual grounding in user behavior.
-- Tagline reads like a standard advertisement: for example, "Fuel Progress, Recover Faster" feels promotional rather than personalized.
+- Direct conclusions with minimal reasoning
+- Sensible but general product suggestions (such as "Smart Recovery Meal Kits")
+- Standard advertising tone in the tagline ("Fuel Progress, Recover Faster")
 
 Here is the Thinking variant:
 
@@ -65,7 +64,7 @@ Here is the Thinking variant:
     --jinja
 ```
 
-You see a more comprehensive answer like this:
+The output is similar to:
 
 ```output
 assistant
@@ -98,9 +97,9 @@ So to sum up:
 ```
 
 The answer shows:
-- Responses show deeper layering: begins with inferring user motivation, iterates through possible product strategies, and only then crafts a refined tagline.
-- Transparent reasoning process: the model "thinks out loud" ("let me try again… maybe that's too long…"), mimicking human deliberation.
-- Marketing language reflects user mindset: taglines like "Share. Track. Conquer." directly appeal to community sharing and progress motivation.
+- Deeper layering: the model begins by inferring user motivation, explores multiple product strategies, and then refines the tagline through iteration.
+- Transparent reasoning: the model "thinks out loud" with phrases like "let me try again… maybe that's too long…", mimicking human deliberation.
+- User-focused messaging: taglines like "Share. Track. Conquer." directly appeal to the user's community sharing and progress motivation.
 
 ### Compare the outputs
 After execution, review the responses and compare them along the following dimensions:
@@ -161,18 +160,23 @@ Run inference with the same prompt and monitor the console for lines like this:
 ---[DEBUG]--- entering build_moe_ffn at layer 27 with 64 experts (use 64)
 ```
 
-This reveals how many experts (for example, 6) and how many tokens (for example, 16) were routed at that layer.
+This output shows that each layer has 64 total experts available. The actual number of experts activated per token (typically 6 for ERNIE-4.5) is determined by the router during inference and isn't directly visible in this debug output.
 
 {{% notice Note %}}
-You can also trace the function `llm_graph_context::build_moe_ffn()` in `src/llama-graph.cpp` to see how expert selection works.
+You can also trace the function `llm_graph_context::build_moe_ffn()` in `src/llama-graph.cpp` to see how expert selection works at a deeper level.
 {{% /notice %}}
 
-Remove the print statement from `src/models/ernie4-5-moe.cpp` before moving to the next section. 
+Remove the print statement from `src/models/ernie4-5-moe.cpp` and rebuild llama.cpp before moving to the next section. 
 
 As you review the debug output, observe whether the number of active experts changes between the PT and Thinking models. Look for patterns in routing, such as different token batches routing to differing expert sets. You can also correlate routing behavior with output differences, as deeper routing variety might align with more detailed responses.
 
-## Summary
+## What you've accomplished and what's next
 
-This task highlights the advantage of MoE fine-tuning. Even with the same architecture, thoughtful tuning can significantly change a model's reasoning behavior. The Thinking model is better suited for applications that need analytical depth, making it ideal for edge AI scenarios like customer profiling or real-time recommendations.
+In this section, you:
+- Compared ERNIE-4.5 PT and Thinking model outputs on the same task
+- Observed how fine-tuning affects reasoning depth and response structure
+- Learned how to add debug instrumentation to examine MoE expert routing
+
+This comparison highlights the advantage of MoE fine-tuning. Even with the same architecture, thoughtful tuning can significantly change a model's reasoning behavior. The Thinking model is better suited for applications that need analytical depth, making it ideal for edge AI scenarios like customer profiling or real-time recommendations.
 
 In the next section, you switch focus from model behavior to system-level performance by compiling with Armv9 instruction sets and measuring the impact on inference speed.
