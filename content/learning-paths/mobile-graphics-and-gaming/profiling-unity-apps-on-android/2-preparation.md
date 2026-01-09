@@ -12,19 +12,19 @@ Although the sample application is itself a project, you will still need to crea
 
 1. Open the Unity Hub
 
-1. Log in (if you are not already)
+2. Log in (if you are not already)
 
-1. Select _New Project_
+3. Select _New Project_
 
-1. Select the _3D (URP) Core_ template 
+4. Select the _3D (URP) Core_ template 
  
-   ![Display URP Template#center](images/URP.png "Figure 1. URP 3D template")
+   ![Display URP Template#center](images/urp.png "Figure 1. URP 3D template")
   
-1. Enter a project name (this will be used as the name of the project folder)
+5. Enter a project name (this will be used as the name of the project folder)
 
-1. Enter a location (the path of your project on disk)
+6. Enter a location (the path of your project on disk)
 
-1. Select _Create Project_
+7. Select _Create Project_
 
 Note that [Universal Render Pipeline](https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@17.0/manual/index.html) projects are recommended for mobile applications.
 
@@ -35,17 +35,17 @@ Once Unity has loaded, you will be presented with a template project. You can ig
 
 1. Open a web browser
 
-1. Open the [sample project page](https://assetstore.unity.com/packages/essentials/tutorial-projects/optimizing-collisions-with-burst-and-neon-intrinsics-196303)
+2. Open the [sample project page](https://assetstore.unity.com/packages/essentials/tutorial-projects/optimizing-collisions-with-burst-and-neon-intrinsics-196303)
 
-1. You will need to log in (if you haven’t already)
+3. You will need to log in (if you haven’t already)
 
-1. On the asset (Optimizing Collisions with Burst and Neon Intrinsics) page, select the _Add to my assets_ button
+4. On the asset (Optimizing Collisions with Burst and Neon Intrinsics) page, select the _Add to my assets_ button
 
-1. The button will change to _Open in Unity_. Select it.
+5. The button will change to _Open in Unity_. Select it.
 
-1. A pop-up window will ask to open the asset in Unity. Select the _Open Unity Editor_ button.
+6. A pop-up window will ask to open the asset in Unity. Select the _Open Unity Editor_ button.
 
-1. If Unity fails to open the asset or no pop-up appears, select the _My Assets_ button in the top-right of the page:
+7. If Unity fails to open the asset or no pop-up appears, select the _My Assets_ button in the top-right of the page:
 
     a. Your assets should appear in a list
 
@@ -57,23 +57,23 @@ Once Unity has loaded, you will be presented with a template project. You can ig
     
     e. Select _Open Unity Editor_
 
-1. The Unity Editor will come to the foreground and display the _Package Manager_
+8. The Unity Editor will come to the foreground and display the _Package Manager_
  
-   ![Open Project manager#center](images/PM.png "Figure 2. Package Manager with asset showing.")
+   ![Open Project manager#center](images/pm.png "Figure 2. Package Manager with asset showing.")
 
-1. You will see the sample project listed and highlighted. Select _Download_.
+9. You will see the sample project listed and highlighted. Select _Download_.
 
-1. Select _Import_
+10. Select _Import_
 
-1. A warning message will appear because the sample project will replace the project settings in your current project. Since this is a newly created project, it is fine to overwrite them. Select _Import_.
+11. A warning message will appear because the sample project will replace the project settings in your current project. Since this is a newly created project, it is fine to overwrite them. Select _Import_.
 
-1. A further warning may appear because the sample project has additional dependencies that your blank project hasn’t activated yet. Select _Install/Upgrade_.
+12. A further warning may appear because the sample project has additional dependencies that your blank project hasn’t activated yet. Select _Install/Upgrade_.
 
-1. The Import Unity Package window will appear. It allows individual files and folders to be imported or ignored. You will need all of the files in the project. Leave all items ticked and select _Next_.
+13. The Import Unity Package window will appear. It allows individual files and folders to be imported or ignored. You will need all of the files in the project. Leave all items ticked and select _Next_.
 
-    ![Import sample project#center](images/Import-window-step-1.PNG "Figure 3. Import the sample project using the Package Manager.")
+    ![Import sample project#center](images/import-window-step-1.PNG "Figure 3. Import the sample project using the Package Manager.")
 
-1. A second window will open listing the project settings that will be overwritten. We want the settings from the sample project, so leave all items ticked and select _Import_.
+14. A second window will open listing the project settings that will be overwritten. You want the settings from the sample project, so leave all items ticked and select _Import_.
 
     ![Overwrite project settings#center](images/import-window-step-2.png "Figure 4. Overwrite project settings with the settings from the imported sample project.")
 
@@ -82,9 +82,9 @@ Once the sample project has been imported, you will see some errors and warnings
 
 1. Open the _File_ menu and select _Build Profiles_
 
-1. Select _Android_ from the Platform list
+2. Select _Android_ from the Platform list
 
-1. Select _Switch Platform_, as you did in the [previous learning path](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android/3-test-on-android/)
+3. Select _Switch Platform_, as you did in the [previous Learning Path](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android/3-test-on-android/)
 
    ![Build-Profile-Menu#center](images/BP-menu.png "Figure 5. Build Profile menu.")
 
@@ -103,17 +103,17 @@ It is worth checking that everything has been imported and built correctly.
 
 1. Close the _Build Profiles_ window
 
-1. In the Project tab (usually at the bottom in the default layout), you will see the list of asset files.
+2. In the Project tab (usually at the bottom in the default layout), you will see the list of asset files.
  
-   ![Scenes Folder#center](images/Bad-Load.png "Figure 7. Assets area")
+   ![Scenes Folder#center](images/bad-load.png "Figure 7. Assets area")
 
-1. Open the _BurstNeonCollisions_ folder
+3. Open the *BurstNeonCollisions* folder
 
-1. Open the _Scenes_ folder
+4. Open the *Scenes* folder
 
-1. Open the scene called _SampleScene_
+5. Open the scene called _SampleScene_
 
-1. Select the _Play_ (triangle) button to launch the program.
+6. Select the _Play_ (triangle) button to launch the program.
 
 The game will launch, and you will see an empty environment begin to fill with more and more characters (capsules) over time. It will look something like this:
 
@@ -124,21 +124,21 @@ You will now deploy the sample to your Android device. Your device must already 
 
 1. Open _Build Profiles_ from the _File_ menu
 
-1. Tick the _Development Build_ option
+2. Tick the _Development Build_ option
  
-  ![Import sample project#center](images/BP-Menu-Build.png "Figure 9. Development Build.")
+  ![Import sample project#center](images/bp-menu-build.png "Figure 9. Development Build.")
 
-1. Select _Add Open Scenes_ to add the demo scene to your _Scenes in Build_ list
+3. Select _Add Open Scenes_ to add the demo scene to your _Scenes in Build_ list
 
-1. Plug your Android device into your computer
+4. Plug your Android device into your computer
 
-1. Once recognized, your device will appear in the drop-down menu next to _Run Device_
+5. Once recognized, your device will appear in the drop-down menu next to _Run Device_
 
-1. The screenshot above shows the demo device selected as the _Run Device_. You will see your own device listed here.
+6. The screenshot above shows the demo device selected as the _Run Device_. You will see your own device listed here
 
-1. Select _Build and Run_
+7. Select _Build and Run_
 
-1. Enter a name for the APK (the Android package) and select _Save_
+8. Enter a name for the APK (the Android package) and select _Save_
 
 Unity will take a moment to build the Android version and then automatically deploy it to your connected Android device. Depending on your setup, the build and deployment process may take several minutes.
 
