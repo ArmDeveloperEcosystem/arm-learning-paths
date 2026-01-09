@@ -127,18 +127,17 @@ To get benchmark numbers with use of SME kernels, you can rerun the full Benchma
 
 ## Example performance with a Vivo X300 Android phone
 
-The table table shows the measurements (in tokens per second) measured on a Vivo X300 Android phone:
+The table table shows the measurements taken on a Vivo X300 Android phone:
 
-| LLM Framework     | Model                                     | Without SME2   | With SME2 | Uplift  |
-|-------------------|-------------------------------------------|----------------|-----------|---------|
-| mnn               | llama-3.2-1B                              | 187.06         | 334.57    | 78.87%  |
-|                   | qwen25vl-3b                               | 73.5           | 132.46    | 80.22%  |
-
+| LLM Framework     | Model                 | Without SME2   | With SME2 | Uplift   |
+|-------------------|-----------------------|----------------|-----------|----------|
+| mnn               | llama-3.2-1B          | 187.06         | 334.57    | 78.87 %  |
+|                   | qwen25vl-3b           | 73.49          | 124.56    | 69.49 %  |
 
 
 {{% notice Note %}}
 The Android system enforces throttling, so your own results may vary slightly.
 {{% /notice %}}
 
-As shown, SME2 brings a dramatic performance improvement.
+These measurements show how fast the model processes (encodes) 128 input tokens when running on a single CPU thread. As the results illustrate, SME2 delivers a significant performance boost even when using just one CPU core on an Android phone, meaning faster processing without needing to involve multiple CPU cores.
 
