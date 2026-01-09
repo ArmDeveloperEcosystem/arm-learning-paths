@@ -60,7 +60,7 @@ Create a durable queue to store order-related events.
 
 This creates a durable queue for order events that guarantees messages are persisted until consumed, ensuring reliability in case of worker or broker restarts.
 
-You should see:
+The output is similar to:
 ```output
 queue declared
 ```

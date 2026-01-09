@@ -44,7 +44,7 @@ Create the required exchange, queue, and binding for WhatsApp notifications.
 
 This creates a durable direct exchange named `notifications` that routes messages using exact routing keys.
 
-You should see:
+The output is similar to:
 ```output
 exchange declared
 ```
@@ -59,7 +59,7 @@ exchange declared
 
 This creates a durable queue to persist WhatsApp notification messages until consumed.
 
-You should see:
+The output is similar to:
 ```output
 queue declared
 ```
