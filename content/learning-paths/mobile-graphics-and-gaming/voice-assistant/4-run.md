@@ -68,7 +68,7 @@ Choose the image, and add image for voice assistant:
 
 ![add image alt-text#center](add_image.png "Add image to the question")
 
-You can now ask questions related to this image, the large language model will you the image and text for multimodal question answering.
+You can now ask questions related to this image, the large language model will use both the image and text for multimodal question answering.
 
 ![ask question image alt-text#center](voice_assistant_multimodal_2.png "Add image to the question")
 
