@@ -1,21 +1,23 @@
 ---
-title: Fine tune LLM performance on CPU with multithreading
+title: Fine tune LLM CPU inference performance with multithreading
 
 draft: true
 cascade:
     draft: true
 
-minutes_to_complete: 20
+minutes_to_complete: 30
 
-who_is_this_for: ML Engineers looking to fine tune the inference performance of LLMs running on CPU 
+who_is_this_for: This is an introductory topic ML engineers optimizing LLM inference performance on Arm CPUs.
 
 learning_objectives: 
-    - Understand how PyTorch uses multiple threads for CPU inference and the various tradeoffs involved
-    - Tune the thread count to improve performance for specific models and systems
+    - Understand how PyTorch uses multiple threads for CPU inference
+    - Measure performance impact of thread count on LLM inference
+    - Tune thread count to optimize inference for specific models and systems
 
 prerequisites:
-    - Intermediate understanding of Python and PyTorch
-    - Access to an Arm-based system
+    - An [Arm-based cloud instance](/learning-paths/servers-and-cloud-computing/csp/) or an Arm server with at least 16 cores
+    - Basic understanding of Python and PyTorch
+    - Ability to install Docker on your Arm system
 
 author: Kieran Hejmadi
 
@@ -27,16 +29,23 @@ armips:
 tools_software_languages:
     - Python
     - PyTorch
-    - Bash
 operatingsystems:
     - Linux
 
 
 further_reading:
     - resource:
-        title: Arm Tool Solutions
-        link: https://github.com/ARM-software/Tool-Solutions/tree/main
+        title: PyTorch CPU Threading Documentation
+        link: https://docs.pytorch.org/docs/stable/notes/cpu_threading_torchscript_inference.html
+        type: documentation
+    - resource:
+        title: Arm Tool Solutions Repository
+        link: https://github.com/ARM-software/Tool-Solutions/tree/main/ML-Frameworks/pytorch-aarch64
         type: website
+    - resource:
+        title: Docker install guide
+        link: /install-guides/docker/
+        type: install-guide
 
 
 ### FIXED, DO NOT MODIFY
