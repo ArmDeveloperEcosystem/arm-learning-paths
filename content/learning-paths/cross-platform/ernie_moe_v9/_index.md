@@ -1,10 +1,6 @@
 ---
 title: Run ERNIE-4.5 Mixture of Experts model on Armv9 with llama.cpp
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 60
 
 who_is_this_for: This Learning Path is for developers and engineers who want to deploy Mixture of Experts (MoE) models, such as ERNIE 4.5, on edge devices. MoE architectures allow large LLMs with 21 billion or more parameters to run with only a fraction of their weights active per inference, making them ideal for resource constrained environments.
