@@ -98,10 +98,10 @@ cd $HOME/llama.cpp/build
 ```
 
 Note the flags:
-- `-p`: Passes the input prompt directly as a string.
-- `-c 4096`: Sets the context length (in tokens). A longer context allows the model to "remember" more input text, which is crucial for long-form tasks. Here, you use the recommended 4096 tokens.
-- `-t 12`: Specifies the number of CPU threads used for inference. You should match this number to the physical cores (or logical threads) available on your system to maximize performance.
-- `--jinja`: Enables Jinja-style prompt templates. Many Chinese-oriented MoE models rely on this template format for structured inputs.
+- `-p`: passes the input prompt directly as a string.
+- `-c 4096`: sets the context length (in tokens). A longer context allows the model to "remember" more input text, which is crucial for long-form tasks. Here, you use the recommended 4096 tokens.
+- `-t 12`: specifies the number of CPU threads used for inference. You should match this number to the physical cores (or logical threads) available on your system to maximize performance.
+- `--jinja`: enables Jinja-style prompt templates. Many Chinese-oriented MoE models rely on this template format for structured inputs.
 
 If everything is set up correctly, you see metadata output from llama.cpp indicating the model's architecture and size:
 
@@ -113,7 +113,7 @@ print_info: general.name     = Ernie-4.5-21B-A3B-Thinking
 
 Once inference is complete, the expected output looks like this (in Chinese):
 
-![img1 alt-text#center](meo_result.png "Introduce Mixture of Experts in Chinese")
+![Terminal output showing ERNIE-4.5 model response in Chinese with structured markdown formatting explaining Mixture of Experts concept alt-txt#center](meo_result.png "Introducing Mixture of Experts in Chinese")
 
 This answer demonstrates the model's multilingual and structured reasoning ability. It begins with a narrative explanation introducing the concept of Mixture of Experts (MoE), followed by a well-organized markdown-style summary with section headers and bullet points. The response describes MoE as a model combining multiple specialized sub-models (experts) and a routing mechanism (gateway) to activate only a few experts per input. It explains how routing selects top experts based on input features and how the system reduces computation by activating only a small number of experts per token. The answer also gives examples such as word segmentation and translation, explaining how different experts might focus on distinct subtasks in Chinese NLP applications.
 

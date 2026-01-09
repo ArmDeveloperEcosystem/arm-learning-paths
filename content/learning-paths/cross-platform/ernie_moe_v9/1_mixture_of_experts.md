@@ -20,15 +20,15 @@ In a typical MoE setup, the model consists of many expert sub-networks (for exam
 
 MoE architecture provides several advantages that make it particularly well-suited for edge deployment and large-scale model development:
 
-**Scalable model size**: You can increase total parameter count without linearly increasing inference cost, allowing for larger, more capable models within the same resource constraints.
+Scalable model size: you can increase total parameter count without linearly increasing inference cost, allowing for larger, more capable models within the same resource constraints.
 
-**Efficient inference**: The architecture requires lower memory and FLOPs per input compared to dense models of equivalent capacity, making real-time applications more feasible.
+Efficient inference: the architecture requires lower memory and FLOPs per input compared to dense models of equivalent capacity, making real-time applications more feasible.
 
-**Modularity**: Each expert can learn domain-specific patterns such as finance, medicine, or language, enabling the model to handle diverse tasks without retraining the entire network.
+Modularity: each expert can learn domain-specific patterns such as finance, medicine, or language, enabling the model to handle diverse tasks without retraining the entire network.
 
-**Specialization**: The architecture encourages the model to learn distinct processing behaviors across different experts, improving performance on specialized tasks while maintaining general capability.
+Specialization: the architecture encourages the model to learn distinct processing behaviors across different experts, improving performance on specialized tasks while maintaining general capability.
 
-**Routing flexibility**: The dynamic expert selection makes it easier to adapt to specific tasks using fine-tuned routing strategies, allowing for task-specific optimizations without modifying the core model.
+Routing flexibility: the dynamic expert selection makes it easier to adapt to specific tasks using fine-tuned routing strategies, allowing for task-specific optimizations without modifying the core model.
 
 ## ERNIE-4.5: An MoE model for Chinese NLP
 

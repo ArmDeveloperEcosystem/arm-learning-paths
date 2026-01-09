@@ -11,8 +11,8 @@ Now that both ERNIE-4.5 models are installed and verified, you can compare their
 In this section, you compare the inference styles of PT and Thinking models, and learn how to inspect internal MoE expert routing behavior during generation.
 
 Both ERNIE-4.5 models share the same MoE architecture and parameter count (around 21 B total, around 3 B activated at runtime), but they're tuned for different objectives:
-- PT: General-purpose model trained on multilingual corpora for versatile tasks
-- Thinking: Tuned for multi-step reasoning, long context, and structured response generation
+- PT: general-purpose model trained on multilingual corpora for versatile tasks
+- Thinking: tuned for multi-step reasoning, long context, and structured response generation
 
 You can now observe how these different tuning objectives affect output behavior.
 
@@ -49,11 +49,10 @@ Assistant: 1. **Top Motivation**: Achieving visible results and maintaining prog
 2. **New Product Line**: *Smart Recovery Meal Kits* – Customizable, nutrient-dense, and easy-to-prepare post-workout meals designed for quick consumption and recovery optimization.  
 3. **Marketing Tagline**: "Fuel Progress, Recover Faster – Smart Nutrition for the Hard Worker."
 ```
-
 The answer shows:
-- Delivers conclusions directly: motivations and pain points are briefly mentioned with little reasoning.
-- Product ideas are sensible but templated: suggestions like "Smart Recovery Meal Kits" are plausible but lack contextual grounding in user behavior.
-- Tagline reads like a standard advertisement: for example, "Fuel Progress, Recover Faster" feels promotional rather than personalized.
+- Direct conclusions with minimal reasoning
+- Sensible but general product suggestions (such as "Smart Recovery Meal Kits")
+- Standard advertising tone in the tagline ("Fuel Progress, Recover Faster")
 
 Here is the Thinking variant:
 
