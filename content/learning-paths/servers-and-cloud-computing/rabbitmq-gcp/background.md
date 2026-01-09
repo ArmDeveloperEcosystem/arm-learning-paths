@@ -1,5 +1,5 @@
 ---
-title: Getting started with RabbitMQ on Google Axion C4A (Arm Neoverse-V2)
+title: Get started with RabbitMQ on Google Axion C4A
 
 weight: 2
 

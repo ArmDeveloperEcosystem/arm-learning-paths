@@ -14,23 +14,25 @@ In this section, you create a Firewall Rule within Google Cloud Console to expos
 For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
-## Create a Firewall Rule in GCP
+## Create a firewall rule in GCP
 
 To expose TCP port 15672, create a firewall rule.
 
 Navigate to the [Google Cloud Console](https://console.cloud.google.com/), go to **VPC Network > Firewall**, and select **Create firewall rule**.
 
-![Create a firewall rule](images/firewall-rule.png "Create a firewall rule")
+![Screenshot of Google Cloud Console VPC Network Firewall page with Create firewall rule button highlighted alt-txt#center](images/firewall-rule.png "Create a firewall rule")
 
 Next, create the firewall rule that exposes TCP port 15672.
 Set the **Name** of the new rule to "allow-tcp-15672". Select your network that you intend to bind to your VM (default is "autoscaling-net" but your organization might have others).
 
-Set **Direction of traffic** to "Ingress". Set **Allow on match** to "Allow" and **Targets** to "Specified target tags". Enter "allow-tcp-15672" in the **Target tags** text field. Set **Source IPv4 ranges** to "0.0.0.0/0".
+Set **Direction of traffic** to "Ingress". Set **Allow on match** to "Allow" and **Targets** to "Specified target tags". Enter "allow-tcp-15672" in the **Target tags** text field. Set **Source IPv4 ranges** to your IP address so that only you can access the application.
 
-![Create a firewall rule](images/network-rule.png "Creating the TCP/15672 firewall rule")
+![Screenshot of firewall rule configuration showing TCP port 15672 settings with allow-tcp-15672 as target tag alt-txt#center](images/network-rule.png "Creating the TCP/15672 firewall rule")
 
 Finally, select **Specified protocols and ports** under the **Protocols and ports** section. Select the **TCP** checkbox, enter "15672" in the **Ports** text field, and select **Create**.
 
-![Specifying the TCP port to expose](images/network-port.png "Specifying the TCP port to expose")
+![Specifying the TCP port to expose alt-txt#center](images/network-port.png "Specifying the TCP port to expose")
 
-The network firewall rule is now created and you can continue with the VM creation.
+## What you've accomplished and what's next
+
+You've successfully created a firewall rule to allow TCP traffic on port 15672 for the RabbitMQ management interface. This firewall rule will be applied to your virtual machine using network tags. Next, you'll provision the Google Axion C4A Arm virtual machine.

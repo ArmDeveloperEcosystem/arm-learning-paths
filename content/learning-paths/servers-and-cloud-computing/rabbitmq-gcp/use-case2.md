@@ -1,5 +1,5 @@
 ---
-title: RabbitMQ use case 2 - WhatsApp Notification
+title: "RabbitMQ use case 2: WhatsApp Notification"
 weight: 8 
 
 ### FIXED, DO NOT MODIFY
@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 
-## WhatsApp Notification Use Case using RabbitMQ  
+## WhatsApp notification use case using RabbitMQ  
 This document demonstrates a **real-world asynchronous messaging use case** where RabbitMQ is used to process WhatsApp notifications reliably using a worker-based architecture.
 
 ### Use case overview
@@ -254,13 +254,8 @@ WhatsApp Worker started. Waiting for messages...
 [Worker] Message content: Hello from RabbitMQ
 [Worker] Message sent successfully
 ```
-**What this confirms:**
 
-- Message routing works correctly
-- Queue consumption is successful
-- Manual acknowledgments are applied
-
-This validates the end-to-end message flow.
+This confirms that message routing works correctly, queue consumption is successful, and manual acknowledgments are applied, validating the end-to-end message flow.
 
 ### Verify queue state
 
@@ -268,7 +263,7 @@ This validates the end-to-end message flow.
 ./rabbitmqadmin list queues name messages consumers
 ```
 
-Expected output is similar to:
+The output is similar to:
 
 ```output
 +------------------------+----------+-----------+
@@ -281,8 +276,8 @@ Expected output is similar to:
 +------------------------+----------+-----------+
 ```
 
-This confirms that:
+This confirms messages were consumed successfully, one active consumer is connected, and no backlog remains in the queue.
 
-- Messages were consumed successfully
-- One active consumer is connected
-- No backlog remains in the queue
+## What you've accomplished
+
+You've successfully implemented a real-world asynchronous messaging scenario using RabbitMQ for WhatsApp notifications. The worker-based architecture demonstrates reliable message processing with durable queues, manual acknowledgments, and fair dispatch patterns. This pattern can be applied to various notification systems (email, SMS, push notifications) and scales well for production environments on Google Cloud Axion C4A Arm-based virtual machines running SUSE Linux.

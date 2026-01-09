@@ -1,10 +1,6 @@
 ---
 title: Deploy RabbitMQ on Google Cloud C4A (Arm-based Axion VMs)
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software engineers and platform engineers migrating messaging and event-driven workloads from x86_64 to Arm-based servers, specifically on Google Cloud C4A virtual machines powered by Axion processors.
