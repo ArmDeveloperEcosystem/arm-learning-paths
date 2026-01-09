@@ -10,9 +10,11 @@ layout: learningpathall
 
 In this section, you will cross-compile the audio generation application for Android and run it on an Android device with an Arm CPU.
 
+{{% notice Note %}}These steps assume an Arm64 Android device with sufficient memory (8 GB recommended).{{% /notice %}}
+
 ## Set up the environment
 
-Start a fresh virtual environment:
+Start a fresh virtual environment to avoid dependency conflicts from earlier steps.
 
 ```bash
 cd $WORKSPACE/ML-examples/kleidiai-examples/audiogen-et/
@@ -87,6 +89,8 @@ The build process creates an `audiogen` executable for Android in the `android-b
 
 ## Transfer files to Android device
 
+Ensure adb is installed and your Android device is connected by running `adb devices`.
+
 Use `adb` to transfer the application and model files to your Android device.
 
 Create a directory on the device:
@@ -94,6 +98,7 @@ Create a directory on the device:
 ```bash
 adb shell mkdir -p /data/local/tmp/app
 ```
+{{% notice Note %}}The `/data/local/tmp` directory is writable without root access and commonly used for testing native binaries.{{% /notice %}}
 
 Push the application executable:
 
@@ -149,7 +154,7 @@ The arguments are:
 - Prompt (`-p`): Text description of the desired audio
 - CPU Threads (`-t`): Number of CPU threads to use (adjust based on your device)
 
-The application generates audio based on your prompt.
+The application generates a short audio sample based on your prompt.
 
 ## Retrieve the generated audio
 
@@ -159,9 +164,7 @@ Exit the `adb shell` by typing `exit`, then pull the generated audio file from t
 adb pull /data/local/tmp/app/warm_arpeggios_on_house_beats_120bpm_with_drums_effect_99.wav
 ```
 
-You can now play the audio file on your Android phone.
-
-You can now experiment with different prompts to generate various audio samples on your Android device. The application uses ExecuTorch with XNNPack and Arm KleidiAI optimizations to deliver efficient inference on Arm CPUs.
+Play the audio file on your development machine or transfer it to your Android phone. Experiment with different prompts to generate various audio samples on your Android device. The application uses ExecuTorch with XNNPack and Arm KleidiAI optimizations to deliver efficient inference on Arm CPUs.
 
 Try different prompts such as:
 - "ambient piano melody with soft strings 80BPM"
@@ -172,4 +175,4 @@ The Stable Audio Open Small model works best with clear, descriptive prompts tha
 
 ## Summary
 
-You have successfully deployed the Stable Audio Open Small model on Android using ExecuTorch. Throughout this Learning Path, you converted the three model submodules (Conditioners, DiT, and AutoEncoder) to ExecuTorch format, built an optimized audio generation application, and ran it on an Arm-based Android device. The application leverages ExecuTorch with XNNPack and Arm KleidiAI to deliver efficient on-device audio generation, enabling real-time text-to-audio synthesis without requiring cloud connectivity. You can now integrate this capability into mobile applications or continue exploring audio generation with different prompts and configurations.
+You've successfully deployed the Stable Audio Open Small model on Android using ExecuTorch. Throughout this Learning Path, you converted the three model submodules (Conditioners, DiT, and AutoEncoder) to ExecuTorch format, built an optimized audio generation application, and ran it on an Arm-based Android device. The application leverages ExecuTorch with XNNPack and Arm KleidiAI to deliver efficient on-device audio generation, enabling real-time text-to-audio synthesis without requiring cloud connectivity. Integrate this capability into mobile applications or continue exploring audio generation with different prompts and configurations.

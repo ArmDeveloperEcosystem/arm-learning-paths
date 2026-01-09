@@ -14,10 +14,10 @@ In this Learning Path, you will learn how to convert the Stable Audio Open Small
 
 Before you begin, you need a development environment with the required software:
 
-- An Android device with an Arm CPU supporting FEAT_DotProd (dotprod) and optionally FEAT_I8MM (i8mm), with at least 8 GB of RAM.
-- Python 3.10 or newer.
-- CMake version 3.16.0 or newer.
-- Android NDK r27c (if building for Android).
+- An Android device with an Arm CPU supporting FEAT_DotProd (dotprod) and optionally FEAT_I8MM (i8mm), with at least 8 GB of RAM
+- Python 3.10 or newer
+- CMake version 3.16.0 or newer
+- Android NDK r27c (if building for Android)
 
 ## Create workspace directory
 
@@ -33,7 +33,7 @@ cd $WORKSPACE
 
 ## Install Python 3.10
 
-You need Python 3.10 or newer for compatibility with the required packages.
+Install Python 3.10 or newer for compatibility with the required packages:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
@@ -59,7 +59,7 @@ Python 3.10.19
 
 ## Install CMake
 
-CMake automates the build process for the audio generation application.
+Install CMake to automate the build process for the audio generation application:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux">}}
@@ -95,4 +95,6 @@ git clone https://github.com/Arm-Examples/ML-examples.git
 cd ML-examples/kleidiai-examples/audiogen-et/
 ```
 
-You now have the necessary tools and repository to proceed with model setup.
+## What you've accomplished and what's next
+
+Your development environment is ready with Python 3.10, CMake, and the ML examples repository. In the next section, you'll download the Stable Audio Open Small model from Hugging Face.
