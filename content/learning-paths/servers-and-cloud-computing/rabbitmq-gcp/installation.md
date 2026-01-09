@@ -85,6 +85,22 @@ sudo systemctl status rabbitmq-server
 
 The service should be in an active (running) state.
 
+```output
+● rabbitmq-server.service - Open source RabbitMQ server
+     Loaded: loaded (/usr/lib/systemd/system/rabbitmq-server.service; enabled; vendor preset: disabled)
+     Active: active (running) since Fri 2026-01-09 14:50:52 UTC; 3s ago
+   Main PID: 3953 (beam.smp)
+      Tasks: 53
+        CPU: 2.432s
+     CGroup: /system.slice/rabbitmq-server.service
+             ├─ 3953 /usr/lib64/erlang/erts-14.2.5/bin/beam.smp -W w -MBas ageffcbf -MHas ageffcbf -MBlmbcs 512 -MHlmbcs 512 -MMmcs 30 -pc unicode -P 1048576 -t 5000000 -stbt db -zdbbl >
+             ├─ 3967 erl_child_setup 32768
+             ├─ 4014 /usr/lib64/erlang/erts-14.2.5/bin/inet_gethost 4
+             ├─ 4015 /usr/lib64/erlang/erts-14.2.5/bin/inet_gethost 4
+             ├─ 4024 /usr/lib64/erlang/erts-14.2.5/bin/epmd -daemon
+             └─ 4077 /bin/sh -s rabbit_disk_monitor
+```
+
 ### Enable RabbitMQ management plugin
 Enable the RabbitMQ management plugin to access the web-based dashboard.
 
