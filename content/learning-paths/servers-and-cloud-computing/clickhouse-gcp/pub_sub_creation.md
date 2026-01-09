@@ -1,5 +1,5 @@
 ---
-title: GCP Pub/Sub and IAM Setup for ClickHouse Real-Time Analytics on Axion
+title: Set up GCP Pub/Sub and IAM for ClickHouse real-time analytics on Axion
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -13,31 +13,31 @@ It focuses on **Pub/Sub resource creation and IAM roles**, ensuring Dataflow and
 ### Create Pub/Sub Topic
 The Pub/Sub topic acts as the **ingestion entry point** for streaming log events.
 
-1. Open **Google Cloud Console**
-2. Navigate to **Pub/Sub → Topics**
-3. Click **Create Topic**
-4. Enter:
+- Open **Google Cloud Console**
+- Navigate to **Pub/Sub → Topics**
+- Click **Create Topic**
+- Enter:
    - **Topic ID:** `logs-topic`
-5. Leave encryption and retention as the default
-6. Click **Create**
+- Leave encryption and retention as the default
+- Click **Create**
 
 This topic will receive streaming log messages from producers.
 
-![ GCP onsole alt-text#center](images/pub_sub1.png "Figure 1: Pub/Sub Topic")
+![Google Cloud Console showing Pub/Sub topic creation screen with logs-topic configured alt-txt#center](images/pub_sub1.png "Pub/Sub Topic")
 
 ### Create Pub/Sub Subscription
 
 The subscription allows **Dataflow to pull messages** from the topic.
 
-1. Open the newly created `logs-topic`
-2. Click **Create Subscription**
-3. Configure:
+- Open the newly created `logs-topic`
+- Click **Create Subscription**
+- Configure:
    - **Subscription ID:** `logs-sub`
    - **Delivery type:** Pull
    - **Ack deadline:** Default (10 seconds)
-4. Click **Create**
+- Click **Create**
 
-![ GCP onsole alt-text#center](images/pub_sub2.png "Figure 2: Pub/Sub Subscription")
+![Google Cloud Console displaying Pub/Sub subscription configuration screen for logs-sub with Pull delivery alt-txt#center](images/pub_sub2.png "Pub/Sub Subscription")
 
 This subscription will later be referenced by the Dataflow pipeline.
 
@@ -50,7 +50,7 @@ Navigate to **Pub/Sub → Topics** and confirm:
 
 This confirms the messaging layer is ready.
 
-![ GCP onsole alt-text#center](images/verify_pub_sub.png "Figure 3: Pub/Sub Resources")
+![Google Cloud Console Pub/Sub topics list showing logs-topic and logs-sub subscription verified alt-txt#center](images/verify_pub_sub.png "Pub/Sub Resources")
 
 ### Identify Compute Engine Service Account
 
@@ -82,13 +82,13 @@ Grant the following roles to the **Compute Engine default service account**:
 | Service Account User | Allow service account usage |
 
 **Steps (UI):**
-1. Go to **IAM & Admin → IAM**
-2. Click **Grant Access**
-3. Add the service account
-4. Assign the roles listed above
-5. Save
+- Go to **IAM & Admin → IAM**
+- Click **Grant Access**
+- Add the service account
+- Assign the roles listed above
+- Save
 
-![ GCP onsole alt-text#center](images/roles.png "Figure 4: Required IAM Roles")
+![Google Cloud Console IAM page displaying assigned roles for Compute Engine service account including Dataflow and Pub/Sub permissions alt-txt#center](images/roles.png "Required IAM Roles")
 
 VM OAuth scopes are limited by default. IAM roles are authoritative.
 
@@ -96,16 +96,16 @@ VM OAuth scopes are limited by default. IAM roles are authoritative.
 
 Dataflow requires a Cloud Storage bucket for staging and temp files.
 
-1. Go to **Cloud Storage → Buckets**
-2. Click **Create**
-3. Configure:
+- Go to **Cloud Storage → Buckets**
+- Click **Create**
+- Configure:
    - **Bucket name:** `imperial-time-463411-q5-dataflow-temp`
    - **Location type:** Region
    - **Region:** `us-central1`
-4. Leave defaults for storage class and access control
-5. Click **Create**
+- Leave defaults for storage class and access control
+- Click **Create**
 
-![ GCP onsole alt-text#center](images/bucket.png "Figure 5: GCS Bucket")
+![Google Cloud Console showing Cloud Storage bucket creation screen with dataflow-temp bucket configured alt-txt#center](images/bucket.png "GCS Bucket")
 
 ### Grant Bucket Access
 

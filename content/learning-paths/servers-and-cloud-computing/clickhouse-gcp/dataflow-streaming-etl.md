@@ -1,16 +1,16 @@
 ---
-title: Dataflow Streaming ETL to ClickHouse
+title: Build a Dataflow streaming ETL pipeline to ClickHouse
 weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Dataflow Streaming ETL (Pub/Sub → ClickHouse)
-This section implements a real-time streaming ETL pipeline that ingests events from Pub/Sub, processes them using Dataflow (Apache Beam), and writes them into ClickHouse running on a GCP Axion (Arm64) VM.
+## Dataflow streaming ETL (Pub/Sub → ClickHouse)
 
-## Pipeline Overview
-Flow
+In this section you'll implement a real-time streaming ETL pipeline that ingests events from Pub/Sub, processes them using Dataflow (Apache Beam), and writes them into ClickHouse running on a GCP Axion (Arm64) VM.
+
+## Pipeline overview
 
 ```bash
 Pub/Sub → Dataflow (Apache Beam) → ClickHouse (Axion VM)
@@ -23,7 +23,8 @@ Pub/Sub → Dataflow (Apache Beam) → ClickHouse (Axion VM)
 - ClickHouse: real-time analytical storage on Arm64
 
 ### Install Python 3.11 on the Axion VM
-Install Python 3.11 and the required system packages
+
+Install Python 3.11 and the required system packages:
 
 ```console
 sudo zypper refresh
@@ -37,7 +38,8 @@ python3.11 --version
 pip3.11 --version
 ```
 
-### Create a Python Virtual Environment (Recommended)
+### Create a Python virtual environment (recommended)
+
 Using a virtual environment avoids dependency conflicts with the system Python.
 
 ```console
@@ -45,7 +47,8 @@ python3.11 -m venv beam-venv
 source beam-venv/bin/activate
 ```
 
-### Install Apache Beam with GCP Support
+### Install Apache Beam with GCP support
+
 Install Apache Beam and the required dependencies for Dataflow:
 
 ```console
@@ -68,7 +71,7 @@ Connect to ClickHouse on the Axion VM:
 clickhouse client
 ```
 
-**Creates the target database and table for streaming inserts:**
+Create the target database and table for streaming inserts:
 
 ```sql
 CREATE DATABASE IF NOT EXISTS realtime;
@@ -104,7 +107,8 @@ Query id: aa25de9d-c07f-4538-803f-5473744631bc
 exit;
 ```
 
-### Validate Pub/Sub (Before Dataflow)
+### Validate Pub/Sub before Dataflow
+
 Before running Dataflow, confirm that messages can be published and pulled.
 
 **Publish a test message:**
@@ -134,11 +138,9 @@ Successful output confirms:
 - Subscription is readable
 - IAM is functioning correctly
 
-### Create Dataflow Streaming ETL Script
-Create the Dataflow pipeline file:
+### Create Dataflow streaming ETL script
 
-Purpose
-Defines a streaming Beam pipeline that:
+Create the Dataflow pipeline file that defines a streaming Beam pipeline to:
 
 - Reads JSON events from Pub/Sub
 - Parses messages
@@ -208,8 +210,9 @@ gcloud pubsub subscriptions list
 hostname -I
 ```
 
-### Run the Dataflow Streaming Job
-Launches the pipeline on managed Dataflow workers.
+### Run the Dataflow streaming job
+
+Launch the pipeline on managed Dataflow workers:
 
 ```console
 python3.11 dataflow_etl.py \
@@ -233,8 +236,9 @@ Autoscaling is enabled for Dataflow Streaming Engine. Workers will scale between
 - Streaming mode is active
 - Workers scale automatically
 
-### End-to-End Validation
-Publish live streaming data.
+### End-to-end validation
+
+Publish live streaming data:
 
 ```console
 gcloud pubsub topics publish logs-topic \
@@ -276,4 +280,8 @@ This confirms:
 - ClickHouse ingests data on Axion (Arm64) via HTTP
 - The end-to-end real-time pipeline is operational
 
-This pipeline serves as the foundation for ClickHouse latency benchmarking and real-time analytics on Google Axion.
+## What you've accomplished and what's next
+
+You've successfully built a complete streaming ETL pipeline connecting Google Cloud Pub/Sub to ClickHouse running on an Arm-based Axion VM. The pipeline processes real-time events through Dataflow and stores them in ClickHouse for analytics.
+
+This pipeline serves as the foundation for ClickHouse latency benchmarking and real-time analytics on Google Axion, which you'll perform in the next section.
