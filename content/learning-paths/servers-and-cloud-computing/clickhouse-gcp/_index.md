@@ -1,5 +1,9 @@
 ---
 title: Build a Real-Time Analytics Pipeline with ClickHouse on Google Cloud Axion (Arm-based C4A VMs)
+
+draft: true
+cascade:
+    draft: true
     
 minutes_to_complete: 50
 
