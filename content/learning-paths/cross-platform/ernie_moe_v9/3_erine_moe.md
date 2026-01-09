@@ -41,7 +41,7 @@ Here is the PT variant:
     --jinja
 ```
 
-The answer looks like this:
+The output is similar to:
 
 ```output
 Assistant: 1. **Top Motivation**: Achieving visible results and maintaining progress through efficient recovery nutrition.  
@@ -65,7 +65,7 @@ Here is the Thinking variant:
     --jinja
 ```
 
-You see a more comprehensive answer like this:
+The output is similar to:
 
 ```output
 assistant
@@ -161,18 +161,23 @@ Run inference with the same prompt and monitor the console for lines like this:
 ---[DEBUG]--- entering build_moe_ffn at layer 27 with 64 experts (use 64)
 ```
 
-This reveals how many experts (for example, 6) and how many tokens (for example, 16) were routed at that layer.
+This output shows that each layer has 64 total experts available. The actual number of experts activated per token (typically 6 for ERNIE-4.5) is determined by the router during inference and isn't directly visible in this debug output.
 
 {{% notice Note %}}
-You can also trace the function `llm_graph_context::build_moe_ffn()` in `src/llama-graph.cpp` to see how expert selection works.
+You can also trace the function `llm_graph_context::build_moe_ffn()` in `src/llama-graph.cpp` to see how expert selection works at a deeper level.
 {{% /notice %}}
 
-Remove the print statement from `src/models/ernie4-5-moe.cpp` before moving to the next section. 
+Remove the print statement from `src/models/ernie4-5-moe.cpp` and rebuild llama.cpp before moving to the next section. 
 
 As you review the debug output, observe whether the number of active experts changes between the PT and Thinking models. Look for patterns in routing, such as different token batches routing to differing expert sets. You can also correlate routing behavior with output differences, as deeper routing variety might align with more detailed responses.
 
-## Summary
+## What you've accomplished and what's next
 
-This task highlights the advantage of MoE fine-tuning. Even with the same architecture, thoughtful tuning can significantly change a model's reasoning behavior. The Thinking model is better suited for applications that need analytical depth, making it ideal for edge AI scenarios like customer profiling or real-time recommendations.
+In this section, you:
+- Compared ERNIE-4.5 PT and Thinking model outputs on the same task
+- Observed how fine-tuning affects reasoning depth and response structure
+- Learned how to add debug instrumentation to examine MoE expert routing
+
+This comparison highlights the advantage of MoE fine-tuning. Even with the same architecture, thoughtful tuning can significantly change a model's reasoning behavior. The Thinking model is better suited for applications that need analytical depth, making it ideal for edge AI scenarios like customer profiling or real-time recommendations.
 
 In the next section, you switch focus from model behavior to system-level performance by compiling with Armv9 instruction sets and measuring the impact on inference speed.

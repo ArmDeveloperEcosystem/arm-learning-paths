@@ -4,7 +4,7 @@ weight: 3
 layout: "learningpathall"
 ---
 
-## Set up llama.cpp on an Armv9 development board
+## Overview
 
 In the previous section, you learned how Mixture of Experts (MoE) models reduce resource consumption by activating only a fraction of parameters. 
 Now, you'll walk through how to prepare your environment to deploy ERNIE-4.5 models on an Armv9 platform using llama.cpp.
@@ -121,4 +121,6 @@ This confirms the GGUF model is successfully loaded, the llama.cpp build functio
 
 The prompt "Please introduce Mixture of Experts in Chinese." was chosen because it tests two important capabilities. First, it verifies bilingual capability since the instruction is in English but the answer is expected in Chinese, confirming that ERNIE-4.5's multilingual support works correctly. Second, it engages MoE behavior by having the model explain a technical concept in Chinese, which likely activates different experts within the model during inference. Even though routing isn't explicitly logged, the richness and precision of the output suggest that MoE routing functions as designed. This type of prompt increases the likelihood of multiple experts being activated simultaneously, including language generation, machine learning knowledge, and Chinese translation experts.
 
-You've now successfully set up llama.cpp on Armv9 hardware, deployed the ERNIE-4.5 model, and confirmed that multilingual inference works correctly. With this foundation in place, you're ready to explore expert routing behavior and benchmark performance optimizations in the next sections.
+## What you've accomplished and what's next
+
+You've successfully set up llama.cpp on Armv9 hardware, deployed the ERNIE-4.5 model, and confirmed that multilingual inference works correctly. With this foundation in place, you're ready to explore expert routing behavior and compare model variants in the next section.
