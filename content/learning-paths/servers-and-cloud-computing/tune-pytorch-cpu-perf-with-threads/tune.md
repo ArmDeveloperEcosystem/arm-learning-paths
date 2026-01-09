@@ -1,17 +1,14 @@
 ---
-title: Fine-Tune Thread Count
+title: Tune thread count for LLM inference
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+This section runs inference on Google's [Gemma-3](https://huggingface.co/google/gemma-3-1b-it) model and measures how inference performance varies with thread count for both the 270 million parameter and 1 billion parameter models. The `transformers_llm_text_gen.py` script applies groupwise, layout-aware INT4 quantization by default.
 
-## Tuning thread size
-
-We will run inference on Google's [Gemma-3](https://huggingface.co/google/gemma-3-1b-it) model and measure how inference performance vaires with thread count for both the 270-million-parameter and 1-billion-parameter models. We will be running the `transformers_llm_text_gen.py` script which by default applies groupwise, layout-aware INT4 quantization of our model. 
-
-Create a file names `comparison-1b.sh` and paste in the following script. 
+Create a file named `comparison-1b.sh` with the following script: 
 
 ```bash
 #!/usr/bin/env bash
@@ -34,7 +31,7 @@ for t in 2 4 8 16 32 64 96; do
 done
 ```
 
-Likewise create a separate script, `comparison-270m.sh` for comparing the 270m model 
+Create a second script named `comparison-270m.sh` for the 270M model: 
 
 ```bash
 #!/usr/bin/env bash
@@ -57,20 +54,20 @@ for t in 2 4 8 16 32 64 96; do
 done
 ```
 
-Run both scripts from the directory containing the `transformers_llm_text_gen.py` file using the commands below. For clarity, we print only the final statistics.
+Run both scripts from the directory containing the `transformers_llm_text_gen.py` file. The output shows only the final statistics for clarity:
 
 ```bash
 ./comparison-1b.sh
 ./comparison-270m.sh
 ```
 
-> Note: In a separate terminal session you can observe the realtime CPU utilization and the spawning on threads by running the following command.
+To observe real-time CPU utilization and thread spawning, run the following command in a separate terminal session:
 
 ```bash
 watch -n 0.1 'pid=$(pgrep -n python); [ -n "$pid" ] && ps -L -p "$pid" -o pid,tid,psr,pcpu,stat,comm'
 ```
 
-You should see output similar to the example below, showing the CPU utilization of each thread. This illustrates how new threads, both inter-op and intra-op, are created and used over time.
+The expected output is similar to:
 
 ```output
  PID     TID PSR %CPU STAT COMMAND
@@ -80,9 +77,11 @@ You should see output similar to the example below, showing the CPU utilization 
   10600   10608  34  2.4 Sl+  python
 ```
 
+This output shows the CPU utilization of each thread, demonstrating how new threads (both inter-op and intra-op) are created and used over time.
+
 ## Results
 
-You should see the following output summarizing the statistics for each run as we sweep through the number of threads.
+The output summarizes the statistics for each run as the script sweeps through different thread counts:
 
 ```out
 ===============================
@@ -100,26 +99,32 @@ Decode Tokens per second: 45.23
 
 ```
 
-The graph above shows how prefill tokens per second change with the number of OpenMP threads for the 270M and 1B variants of Gemma-3. As expected, the smaller 270M model runs faster. Both models reach their optimal token generation rate at around 16–32 threads, though the 270M model exhibits a sharper performance drop-off beyond this range compared with the 1B variant.
+The graph below shows how prefill tokens per second change with the number of OpenMP threads for the 270M and 1B variants of Gemma-3:
 
-![comparison](./prefill_throughput.png)
+![Graph showing prefill tokens per second versus number of OpenMP threads for Gemma-3 270M and 1B models. Both models peak at 16-32 threads, with the 270M model showing steeper decline after the peak#center](./prefill_throughput.png "Prefill throughput comparison")
+
+As expected, the smaller 270M model runs faster. Both models reach their optimal token generation rate at around 16–32 threads, though the 270M model exhibits a sharper performance drop-off beyond this range compared with the 1B variant.
 
 
 
-## Using PyTorch Compilation Mode
+## Use PyTorch compilation mode
 
-So far, we have been running in PyTorch's eager execution mode, we can observe the performance characteristics with PyTorch's compile mode using the following. First install a C++ compiler and various dependencies.
+The examples so far have used PyTorch's eager execution mode. You can also test performance with PyTorch's compile mode.
 
-```bash
-sudo apt update && sudo apt install g++ python3.10-dev build-essential
-```
-
-Then run the `gemma-3-270m` model with the `--compile` flag but without the default number of OpenMP threads.
+Install a C++ compiler and dependencies:
 
 ```bash
-TORCHINDUCTOR_CPP_WRAPPER=1 TORCHINDUCTOR_FREEZING=1 python transformers_llm_text_gen.py --comp
-ile --model google/gemma-3-270m-it
+sudo apt update && sudo apt install g++ python3.10-dev build-essential -y
 ```
+
+Run the `gemma-3-270m` model with the `--compile` flag using the default number of OpenMP threads:
+
+```bash
+TORCHINDUCTOR_CPP_WRAPPER=1 TORCHINDUCTOR_FREEZING=1 python transformers_llm_text_gen.py --compile --model google/gemma-3-270m-it
+```
+
+The output is similar to:
+
 ```output
 E2E Generation time: 6.15 seconds
 Decoded Tokens: 65
@@ -128,13 +133,13 @@ Prefill Tokens per second: 133.52
 Decode Tokens per second: 11.33
 ```
 
-Now run with `OMP_NUM_THREADS` set to 16.
+Run the same command with `OMP_NUM_THREADS` set to 16:
 
 ```bash
 TORCHINDUCTOR_CPP_WRAPPER=1 TORCHINDUCTOR_FREEZING=1 OMP_NUM_THREADS=16 python transformers_llm_text_gen.py --compile --model google/gemma-3-270m-it
 ```
 
-As the output below shows, we see a huge reduction in the end-to-end generation time by reducing the number the thread count from 96 (default) to 16.
+The output is similar to:
 
 ```output
 E2E Generation time: 0.63 seconds
@@ -144,7 +149,15 @@ Prefill Tokens per second: 2728.34
 Decode Tokens per second: 107.37
 ```
 
-### Summary
+Reducing the thread count from 96 (default) to 16 provides a significant reduction in end-to-end generation time.
 
-In this learning path, we explored how the number of OpenMP threads is a tunable parameter that can impact the performance of a large language model. This is especially important when running such models on Arm systems with high core counts. You should also take the model’s parameter size into account. In practice, using a heuristic or trial-and-error approach is often the fastest way to determine the optimal thread count for a given model and system.
+## What you've learned
 
+You've explored how the number of OpenMP threads impacts LLM inference performance on Arm CPUs. You've learned that:
+
+- Default thread settings on many-core systems don't always provide optimal performance
+- Smaller models typically benefit from fewer threads due to lower synchronization overhead
+- The optimal thread count depends on both model size and system architecture
+- PyTorch's compile mode can provide additional performance improvements when combined with thread tuning
+
+In practice, use a heuristic or trial-and-error approach to determine the optimal thread count for your specific model and system configuration.
