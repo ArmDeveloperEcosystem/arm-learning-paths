@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Install RabbitMQ on GCP SUSE Arm64 VM
-This guide describes a **step-by-step installation of RabbitMQ** on a **Google Cloud Platform SUSE Linux Arm64 virtual machine**, using **RPM packages** for both **Erlang** and **RabbitMQ Server**.
+This guide describes the installation of RabbitMQ on a Google Cloud Platform SUSE Linux Arm64 virtual machine using RPM packages for both Erlang and RabbitMQ Server.
 
 RabbitMQ needs Erlang to be installed before setting up the server.
 
@@ -19,14 +19,14 @@ RabbitMQ needs Erlang to be installed before setting up the server.
 - Outbound internet access
 
 ### Refresh system repositories
-This step updates the system’s package list so the operating system knows about the latest software available from its repositories.
+Update the system's package list to get the latest available software from repositories.
 
 ```console
 sudo zypper refresh
 ```
 
 ### Install required system utilities
-You can install the basic tools needed to download and manage packages.
+Install the basic tools needed to download and manage packages.
 
 ```console
 sudo zypper install -y curl wget gnupg tar socat logrotate
@@ -123,6 +123,10 @@ sudo rabbitmqctl set_user_tags admin administrator
 sudo rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
 ```
 
+{{% notice Warning %}}
+Replace `StrongPassword123` with a strong, unique password. For production environments, use environment variables or a secrets management system instead of hardcoding passwords.
+{{% /notice %}}
+
 **Log in to Management UI**
 
 Now, test it from outside the VM. Open a web browser on your local machine (Chrome, Firefox, Edge, etc.) and enter the following URL and credentials in the address bar:
@@ -135,7 +139,7 @@ Replace `<VM_IP>` with the public IP of your GCP VM.
 
 If everything is configured correctly, you see a RabbitMQ login page in your browser that looks like this:
 
-![Screenshot of RabbitMQ management UI login page showing username and password fields alt-txt#center](images/rabbitmq.png "RabbitMQ Login page")
+![Screenshot showing the RabbitMQ management UI login interface with username and password input fields and a login button alt-txt#center](images/rabbitmq.png "RabbitMQ Login page")
 
 This confirms that your RabbitMQ management dashboard is operational.
 
