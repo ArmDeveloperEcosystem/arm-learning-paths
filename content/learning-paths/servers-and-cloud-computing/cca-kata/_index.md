@@ -1,21 +1,17 @@
 ---
-title: Run Confidential Containers with Encrypted Images using Arm CCA and Trustee
+title: Run Confidential Containers with encrypted images using Arm CCA and Trustee
 
-draft: true
-cascade:
-    draft: true
-    
 minutes_to_complete: 60
 
-who_is_this_for: This Learning Path is for software developers who want to understand how Confidential Containers can be run in Arm CCA Realm.
+who_is_this_for: This Learning Path is for developers who want to understand how Confidential Containers run in Arm CCA Realms.
 
 learning_objectives:
-  - Gain an overview of Confidential Containers and their role in confidential computing.
-  - Understand how Trustee services are used with Arm CCA attestation to authorize and unlock confidential workloads.
-  - Deploy a Confidential Container from an encrypted image inside an Arm CCA Realm using an Armv9-A AEM Base Fixed Virtual Platform (FVP) with RME support.
+  - Gain an overview of Confidential Containers and their role in confidential computing
+  - Understand how Trustee services are used with Arm CCA attestation to authorize and unlock confidential workloads
+  - Deploy a Confidential Container from an encrypted image inside an Arm CCA Realm using an Armv9-A AEM Base Fixed Virtual Platform (FVP) with RME support
 
 prerequisites:
-  - An AArch64 or x86_64 computer running Linux or macOS. Cloud-based instances can also be used; see the [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
+  - An AArch64 or x86_64 computer running Linux or macOS. Cloud-based instances can also be used; see the [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/)
   - Completion of the ["Run an end-to-end Attestation with Arm CCA and Trustee"](/learning-paths/servers-and-cloud-computing/cca-trustee) Learning Path
 
 author:
