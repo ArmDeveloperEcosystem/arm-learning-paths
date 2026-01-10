@@ -41,7 +41,7 @@ For now, open the Analyzer you have just installed:
 
 The Analyzer will now import the unoptimized recording and you will see several panels summarizing the data:
 
-![Analyzer panels#center](images/analyzer-panels-after-pull-data.PNG "Figure 2. Profiler Analyzer panels; Mode and Export (top left), activity graph (top), filters (middle left), profile markers (bottom) and summaries (right).")
+![Analyzer panels#center](images/analyzer-panels-after-pull-data.png "Figure 2. Profiler Analyzer panels; Mode and Export (top left), activity graph (top), filters (middle left), profile markers (bottom) and summaries (right).")
 
 - The Mode can be switched between _Single_ (view a single data set) and _Compare_ (compare two frames from the same or different data sets)
 
@@ -93,7 +93,7 @@ You can also reduce the data analysis to a specific range of frames.
 
 6. Hover your mouse over the selected frames in the graph to see a pop-up summary. The pop-up will tell you the frame duration of the exact frame you are hovering over and also the total time of the selected frames.
 
-![Analyzer frame selection#center](images/analyzer-select-similar-frames.PNG "Figure 3. Selected range of similar frames from the unoptimized version.")
+![Analyzer frame selection#center](images/analyzer-select-similar-frames.png "Figure 3. Selected range of similar frames from the unoptimized version.")
 
 You can see from the Marker Details table, the function _CollisionCalculationScript.Update_ is high in the list.
 
@@ -115,7 +115,7 @@ The collision sample is unlikely to be GPU bound but here's how to tell using th
 
 - In the case of the collision sample, the median is zero. Under _Marker Summary_ you can see the min and max values are also both zero. The sample never seems to be waiting for the GPU.
 
-![Check if GPU-bound#center](images/analyzer-check-gpu-bound.PNG "Figure 4. Check if the CPU is waiting (Gfx.WaitForPresent) for the GPU.")
+![Check if GPU-bound#center](images/analyzer-check-gpu-bound.png "Figure 4. Check if the CPU is waiting (Gfx.WaitForPresent) for the GPU.")
 
 ### Performance data for specific functions or markers
 
@@ -127,7 +127,7 @@ Select multiple frames again by left-clicking and dragging on the graph.
 
 You have seen already that the collision detection script is taking a significant amount of the total frame time. In the Name Filter enter “collision” to reduce the Marker Details table.
 
-![Use name filter#center](images/analyzer-filter-text-collision.PNG "Figure 5. Use the Name Filter to search for collision.")
+![Use name filter#center](images/analyzer-filter-text-collision.png "Figure 5. Use the Name Filter to search for collision.")
 
 You can now see data for functions and markers with “collision” in their name.
 
@@ -173,7 +173,7 @@ Keep the unoptimized data in the Analyzer. Leave the Name Filter set to “colli
 
 You are now looking at the unoptimized (upper graph) and optimized (lower graph) data.
 
-![Pulled datasets#center](images/analyzer-pulled-datasets.PNG "Figure 6. Comparing two datasets.")
+![Pulled datasets#center](images/analyzer-pulled-datasets.png "Figure 6. Comparing two datasets.")
 
 ### Graph selection
 Each graph can have a range of frames selected. If you want to ensure that you select the same frames from both graphs, tick the option _Pair Graph Selection_. Do this now. When you click on a specific frame in either graph, the same frame will be selected in the other graph automatically.
@@ -185,7 +185,7 @@ You are now comparing the first 300 frames of each data set.
 ### Comparing the two data sets
 You will notice immediately a difference in the _Top 10 markers on median frames_ area. You can see the difference between the two median frames in the screenshot below. The upper frame duration is 87.7ms while the lower frame is 33.4ms (these numbers are to the right of the colored entries). The size of each marker/function for the optimized set are all reduced compared to the unoptimized version. This is as expected since the optimizations will have reduced how long each of those operations takes.
 
-![Data comparison#center](images/analyzer-dataset-comparison.PNG "Figure 7. Comparing performance data pre- and post-optimization.")
+![Data comparison#center](images/analyzer-dataset-comparison.png "Figure 7. Comparing performance data pre- and post-optimization.")
 
 In the Marker Details table (now labeled Marker Comparison) you will see that there are new columns. Left Median, Right Median and two columns marked "<" and ">". The "left" dataset is the unoptimized code, the right is the optimized code. The Diff and Abs Diff columns give you the numerical difference (and absolute difference) between each function/marker.
 

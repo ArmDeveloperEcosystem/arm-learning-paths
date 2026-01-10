@@ -71,7 +71,7 @@ The Profiler window contains a lot of information spread over two main scrollabl
 ### CPU Usage graph and frame-rate labels
 The CPU Usage graph captures profiling data every frame while it is active.
 
-![Profiler CPU usage#center](images/profiler-samsung-s8-plain.PNG "Figure 2. The CPU Usage graph with data from the sample collision code app collected.")
+![Profiler CPU usage#center](images/profiler-samsung-s8-plain.png "Figure 2. The CPU Usage graph with data from the sample collision code app collected.")
 
 If you have a performance issue that worsens over time (as with the case of the collision sample), you will see the graph gradually (or quickly) fill over time. Watch the frame rate labels on the left of the graph. These labels mark the Y-axis at set intervals. They show you what CPU Usage would be required to achieve given frame rates. For example, if your CPU Usage remained under 16 milliseconds then as far as the CPU is concerned, a frame rate of 60 frames-per-second (FPS) would be achievable. If the CPU Usage is under 16ms but your frame rate is still lower than expected, that is an indication that the app has performance issues elsewhere, e.g., in the GPU.
 
@@ -83,7 +83,7 @@ The CPU Usage graph provides a very high level view of what is happening in the 
 
 The peaks on the CPU Usage graph tell you where there are particularly high loads. Ensure that the drop-down menu in the lower panel is showing Timeline. Select a frame on your graph where there is a peak or any frame that looks as if it took more time than it should (in this case, all frames look suitable).
 
-![Profiler selected frame#center](images/profiler-analyse-selected-frame.PNG "Figure 3. Profiler highlighting selected frame.")
+![Profiler selected frame#center](images/profiler-analyse-selected-frame.png "Figure 3. Profiler highlighting selected frame.")
 
 The lower panel will show activity from the selected frame. The rows show main thread, render thread, job worker threads (expand Job entry to see the workers and what tasks they performed) and several other areas and job types. The colors of the boxes match those of the categories listed in the CPU Usage panel.
 
@@ -99,7 +99,7 @@ The PlayerLoop entry on the main thread is an internal Unity engine function, th
 
 Staying in the lower panel, select the drop-down menu currently labeled Timeline. Change it to Hierarchy mode. You will now see a Hierarchy of functions and profiled areas. Expand the Hierarchy to show *PlayerLoop/Update.ScriptRunBehaviourUpdate/BehaviourUpdate*.
 
-![Profiler hierarchy view#center](images/profiler-analyse-selected-frame-hierarchy.PNG "Figure 4. Hierarchy view of selected frame.")
+![Profiler hierarchy view#center](images/profiler-analyse-selected-frame-hierarchy.png "Figure 4. Hierarchy view of selected frame.")
 
 Under BehaviourUpdate, you will see the custom script `CollisionCalculationScript.Update`. If you look across to the right, you will see information about the calls to this function. Under the Total column below you will see that the `CollisionCalculationScript Update()` function took 66.4% of the total of PlayerLoop. Expand `CollisionCalculationScript` to drill down even further.
 
@@ -113,7 +113,7 @@ The Deep Profile option tells the Profiler to collect much more performance data
 
 In addition to performance timings, you can also see how often memory allocations are made. The Call Stacks option enables recording of such memory allocations. It is accompanied by a pull-down menu with three options, _GC.Alloc_ is the default. You can see when your code triggers a memory allocation. Click on the GC.Alloc block (in magenta) to see the call stack in the pop-up window.
 
-![Call Stacks#center](images/profiler-analyse-selected-frame-call-stacks-enabled.PNG "Figure 5. Call stack leading to a memory allocation using GC.Alloc mode of Call Stacks option.")
+![Call Stacks#center](images/profiler-analyse-selected-frame-call-stacks-enabled.png "Figure 5. Call stack leading to a memory allocation using GC.Alloc mode of Call Stacks option.")
 
 ### Mark your own code for profiling
 
