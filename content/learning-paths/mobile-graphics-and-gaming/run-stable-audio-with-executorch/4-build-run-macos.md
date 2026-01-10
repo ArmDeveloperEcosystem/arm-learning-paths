@@ -24,10 +24,9 @@ Start a fresh virtual environment to avoid dependency conflicts from earlier ste
 cd $WORKSPACE/ML-examples/kleidiai-examples/audiogen-et/
 python3.10 -m venv new-venv
 source new-venv/bin/activate
+```
 
 Start a fresh virtual environment:
-
-
 
 ```bash
 cd $WORKSPACE/ML-examples/kleidiai-examples/audiogen-et/
