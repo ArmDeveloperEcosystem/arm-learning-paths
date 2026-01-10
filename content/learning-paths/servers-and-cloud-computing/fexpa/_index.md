@@ -1,13 +1,10 @@
 ---
-title: Accelerate the exponential function
+title: Accelerate the exponential function with Fexpa
 
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 15
 
-who_is_this_for: This is an introductory topic for developers interested in implementing the exponential function and optimizing it. The Scalable Vector Extension (SVE), introduced with the Armv8-A architecture, includes a dedicated instruction, FEXPA. Although initially not supported in SME, the FEXPA instruction has been made available in Scalable Matrix Extension (SME) version 2.2.
+who_is_this_for: This is an introductory topic for developers who want to accelerate exponential function computations using Arm's Scalable Vector Extension (SVE). You'll learn how to use the FEXPA instruction, which provides hardware acceleration for exponential calculations on Arm Neoverse processors.
 
 learning_objectives: 
     - Implement the exponential function using SVE intrinsics
