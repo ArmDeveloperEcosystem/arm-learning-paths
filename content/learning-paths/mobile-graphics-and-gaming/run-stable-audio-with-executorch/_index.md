@@ -1,24 +1,21 @@
 ---
 title: Generate audio with Stable Audio Open Small using ExecuTorch
 
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for developers looking to deploy the Stable Audio Open Small text-to-audio model using ExecuTorch on an Android™ device or macOS®.
+who_is_this_for: This is an introductory topic for developers who want to deploy the Stable Audio Open Small text-to-audio model using ExecuTorch on an Android device or macOS.
 
 learning_objectives:
-    - Download the Stable Audio Open Small model from HuggingFace.
-    - Convert the Stable Audio Open Small model to ExecuTorch (.pte) format.
-    - Build the audio generation application for Arm CPUs.
-    - Run the application on an Android smartphone or macOS and generate audio snippets.
+    - Download the Stable Audio Open Small model from Hugging Face
+    - Convert the Stable Audio Open Small model to ExecuTorch (.pte) format
+    - Build the audio generation application for Arm CPUs
+    - Run the application on an Android smartphone or macOS and generate audio snippets
 
 prerequisites:
-    - A Linux-based x86 or macOS development machine with at least 8 GB of RAM and 50 GB of disk space (tested on Ubuntu 22.04 with x86_64 and macOS with Apple Silicon).
-    - A [HuggingFace](https://huggingface.co/) account.
-    - An Android phone in [developer mode](https://developer.android.com/studio/debug/dev-options) with at least 8 GB of RAM and a cable to connect it to your development machine.
+    - A Linux-based x86 or macOS development machine with at least 8 GB of RAM and 50 GB of disk space (tested on Ubuntu 22.04 with x86_64 and macOS with Apple Silicon)
+    - A [Hugging Face](https://huggingface.co/) account
+    - An Android phone in [developer mode](https://developer.android.com/studio/debug/dev-options) with at least 8 GB of RAM and a cable to connect it to your development machine
 
 author:
     - Adnan AlSinan

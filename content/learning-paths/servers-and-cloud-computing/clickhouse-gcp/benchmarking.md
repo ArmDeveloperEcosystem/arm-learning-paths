@@ -1,286 +1,271 @@
 ---
-title: Benchmark ClickHouse performance
-weight: 6
+title: Benchmark ClickHouse on Google Axion processors
+weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## ClickHouse benchmarking on Axion processors
 
-## Prepare for benchmarking
+In this section you'll benchmark query latency on ClickHouse running on Google Axion (Arm64). The goal is to measure repeatable query latency with a focus on p95 latency, using data ingested with the real-time Dataflow pipeline.
 
-ClickHouse provides an official benchmarking utility called `clickhouse-benchmark`, which is included in the ClickHouse installation. This tool measures query throughput and latency.
+## Prepare ClickHouse for Accurate Latency Measurement
 
+### Disable Query Cache
+ClickHouse may serve repeated queries from its query cache, which can artificially reduce latency numbers. To ensure that every query is fully executed, the query cache is disabled.
 
-## Run benchmark tests
+Run this **inside the ClickHouse client**:
 
-You can benchmark different aspects of ClickHouse performance, including read queries, aggregations, concurrent workloads, and insert operations.
+```sql
+SET use_query_cache = 0;
+```
+This ensures every query is executed fully and not served from cache.
 
+### Validate dataset size
 
-### Verify the benchmarking tool exists
-Confirm that `clickhouse-benchmark` is installed and available on the system before running performance tests:
+Ensure enough data is present to produce meaningful latency results by checking the current row count.
 
 ```console
-which clickhouse-benchmark
+SELECT count(*) FROM realtime.logs;
 ```
 
 The output is similar to:
 
 ```output
-/usr/bin/clickhouse-benchmark
+   ┌─count()─┐
+1. │ 5000013 │ -- 5.00 million
+   └─────────┘
 ```
 
-### Prepare benchmark database and table
-
-Create a test database and table:
-
-```console
-clickhouse client
-```
+If data volume is low, generate additional rows (optional):
 
 ```sql
-CREATE DATABASE IF NOT EXISTS bench;
-USE bench;
-
-CREATE TABLE IF NOT EXISTS hits
-(
-  event_time DateTime,
-  user_id UInt64,
-  url String
-)
-ENGINE = MergeTree
-ORDER BY (event_time, user_id);
-```
-
-The output is similar to:
-```output
-Query id: 83485bc4-ad93-4dfc-bafe-c0e2a45c1b34
-Ok.
-0 rows in set. Elapsed: 0.005 sec.
-```
-
-Exit the client:
-
-```console
-exit
-```
-
-### Load benchmark data
-
-Insert one million sample records into the table:
-
-```sql
-clickhouse-client --query "
-INSERT INTO bench.hits
+INSERT INTO realtime.logs
 SELECT
-  now() - number,
-  number,
-  concat('/page/', toString(number % 100))
-FROM numbers(1000000)"
+    now() - number,
+    concat('service-', toString(number % 10)),
+    'INFO',
+    'benchmark message'
+FROM numbers(1000000);
 ```
 
-Verify the data load:
+The output is similar to:
+
+```output
+Query id: 8fcbefab-fa40-4124-8f23-516fca2b8fdd
+Ok.
+1000000 rows in set. Elapsed: 0.058 sec. Processed 1.00 million rows, 8.00 MB (17.15 million rows/s., 137.20 MB/s.)
+Peak memory usage: 106.54 MiB.
+```
+
+### Define benchmark queries
+
+These queries represent common real-time analytics patterns:
+
+- Filtered count: service-level analytics
+- Time-windowed count: recent activity
+- Aggregation by service: grouped analytics
+
+Each query scans and processes millions of rows to stress the execution engine.
+
+**Query 1 – Filtered Count (Service-level analytics)**
 
 ```sql
-clickhouse-client --query "SELECT count(*) FROM bench.hits"
+SELECT count(*)
+FROM realtime.logs
+WHERE service = 'service-5';
 ```
 
 The output is similar to:
 ```output
-1000000
+Query id: cfbab386-7168-42ce-a752-2d5146f68b48
+
+   ┌─count()─┐
+1. │  350000 │
+   └─────────┘
+1 row in set. Elapsed: 0.013 sec. Processed 6.00 million rows, 74.50 MB (466.81 million rows/s., 5.80 GB/s.)
+Peak memory usage: 3.25 MiB.
 ```
 
-### Run read query benchmark
-
-Measure how fast ClickHouse can scan and count rows using a filter:
+**Query 2 – Time-windowed Count (Recent activity)**
 
 ```sql
-clickhouse-benchmark \
-  --host localhost \
-  --port 9000 \
-  --iterations 10 \
-  --concurrency 1 \
-  --query "SELECT count(*) FROM bench.hits WHERE url LIKE '/page/%'"
+SELECT count(*)
+FROM realtime.logs
+WHERE event_time >= now() - INTERVAL 10 MINUTE;
 ```
 
 The output is similar to:
+
 ```output
-Loaded 1 queries.
-
-Queries executed: 10 (100%).
-
-localhost:9000, queries: 10, QPS: 63.167, RPS: 63167346.434, MiB/s: 957.833, result RPS: 63.167, result MiB/s: 0.000.
-
-0%              0.003 sec.
-10%             0.003 sec.
-20%             0.003 sec.
-30%             0.004 sec.
-40%             0.004 sec.
-50%             0.004 sec.
-60%             0.004 sec.
-70%             0.004 sec.
-80%             0.004 sec.
-90%             0.004 sec.
-95%             0.005 sec.
-99%             0.005 sec.
-99.9%           0.005 sec.
-99.99%          0.005 sec.
+Query id: 7654746b-3068-4663-a5c6-6944d9c2d2b9
+   ┌─count()─┐
+1. │     572 │
+   └─────────┘
+1 row in set. Elapsed: 0.003 sec.
 ```
 
-### Run aggregation query benchmark
-
-Test the performance of grouping and aggregation operations:
+**Query 3 – Aggregation by Service**
 
 ```sql
-clickhouse-benchmark \
-  --host localhost \
-  --port 9000 \
-  --iterations 10 \
-  --concurrency 2 \
-  --query "
-  SELECT
-    url,
+SELECT
+    service,
     count(*) AS total
-  FROM bench.hits
-  GROUP BY url
-  "
+FROM realtime.logs
+GROUP BY service
+ORDER BY total DESC;
 ```
 
 The output is similar to:
+
 ```output
-Queries executed: 10 (100%).
+Query id: c48c0d30-0ef6-4fb9-bbb9-815a509a5f91
 
-localhost:9000, queries: 10, QPS: 67.152, RPS: 67151788.647, MiB/s: 1018.251, result RPS: 6715.179, result MiB/s: 0.153.
-
-0%              0.005 sec.
-10%             0.005 sec.
-20%             0.005 sec.
-30%             0.007 sec.
-40%             0.007 sec.
-50%             0.007 sec.
-60%             0.007 sec.
-70%             0.007 sec.
-80%             0.007 sec.
-90%             0.007 sec.
-95%             0.008 sec.
-99%             0.008 sec.
-99.9%           0.008 sec.
-99.99%          0.008 sec.
+    ┌─service────┬──total─┐
+ 1. │ service-6  │ 350000 │
+ 2. │ service-1  │ 350000 │
+ 3. │ service-0  │ 350000 │
+ 4. │ service-7  │ 350000 │
+ 5. │ service-3  │ 350000 │
+ 6. │ service-4  │ 350000 │
+ 7. │ service-5  │ 350000 │
+ 8. │ service-2  │ 350000 │
+ 9. │ service-9  │ 350000 │
+10. │ service-8  │ 350000 │
+11. │ service-10 │ 250000 │
+12. │ service-15 │ 250000 │
+13. │ service-16 │ 250000 │
+14. │ service-13 │ 250000 │
+15. │ service-18 │ 250000 │
+16. │ service-17 │ 250000 │
+17. │ service-19 │ 250000 │
+18. │ service-12 │ 250000 │
+19. │ service-11 │ 250000 │
+20. │ service-14 │ 250000 │
+21. │ api        │     12 │
+22. │ local      │      1 │
+    └────────────┴────────┘
+22 rows in set. Elapsed: 0.011 sec. Processed 6.00 million rows, 74.50 MB (527.10 million rows/s., 6.54 GB/s.)
+Peak memory usage: 7.18 MiB.
 ```
 
-### Run concurrent read workload benchmark
+### Run repeatable latency measurements
 
-Run multiple queries simultaneously to evaluate how ClickHouse handles higher user load:
+To calculate reliable latency metrics, execute the same query multiple times (10 iterations) using `clickhouse-client --time`.
 
 ```sql
-clickhouse-benchmark \
-  --host localhost \
-  --port 9000 \
-  --iterations 20 \
-  --concurrency 8 \
-  --query "
-  SELECT count(*)
-  FROM bench.hits
-  WHERE user_id % 10 = 0
-  "
+clickhouse-client --time --query "
+SELECT count(*)
+FROM realtime.logs
+WHERE service = 'service-5';
+"
 ```
 
-The output is similar to:
+You should see an output similar to:
 ```output
-Loaded 1 queries.
+350000
+0.009
+350000
+0.009
+350000
+0.009
+350000
+0.011
+350000
+0.010
+350000
+0.0011
+350000
+0.009
+350000
+0.009
+350000
+0.009
+350000
+0.011
+```
+**Each run prints:**
 
-Queries executed: 20 (100%).
+- Query result (row count)
+- Execution time (seconds)
+- Output has row count + time mixed. We only need the time values.
 
-localhost:9000, queries: 20, QPS: 99.723, RPS: 99723096.882, MiB/s: 760.827, result RPS: 99.723, result MiB/s: 0.001.
+Edit your file:
 
-0%              0.012 sec.
-10%             0.012 sec.
-20%             0.013 sec.
-30%             0.017 sec.
-40%             0.020 sec.
-50%             0.029 sec.
-60%             0.029 sec.
-70%             0.038 sec.
-80%             0.051 sec.
-90%             0.062 sec.
-95%             0.063 sec.
-99%             0.078 sec.
-99.9%           0.078 sec.
-99.99%          0.078 sec.
+```console
+vi latency-results.txt
 ```
 
-### Measure insert performance
+Only the latency values are required for statistical analysis. Row counts are removed.
 
-Measure bulk data ingestion speed and write latency:
-
-```sql
-clickhouse-benchmark \
-  --iterations 5 \
-  --concurrency 4 \
-  --query "
-  INSERT INTO bench.hits
-  SELECT
-    now(),
-    rand64(),
-    '/benchmark'
-  FROM numbers(500000)
-  "
+```txt
+0.009
+0.009
+0.009
+0.011
+0.010
+0.011
+0.009
+0.009
+0.009
+0.011
 ```
 
-The output is similar to:
+- Clean input for sorting and percentile calculation.
+- Remove 350000 lines if they exist.
+
+**Sort the latency values:**
+Latency values are sorted in ascending order to compute percentiles.
+
+```console
+sort -n latency-results.txt
+```
 ```output
-Queries executed: 5 (100%).
-
-localhost:9000, queries: 5, QPS: 20.935, RPS: 10467305.309, MiB/s: 79.859, result RPS: 0.000, result MiB/s: 0.000.
-
-0%              0.060 sec.
-10%             0.060 sec.
-20%             0.060 sec.
-30%             0.060 sec.
-40%             0.068 sec.
-50%             0.068 sec.
-60%             0.068 sec.
-70%             0.069 sec.
-80%             0.069 sec.
-90%             0.073 sec.
-95%             0.073 sec.
-99%             0.073 sec.
-99.9%           0.073 sec.
-99.99%          0.073 sec.
+0.009
+0.009
+0.009
+0.009
+0.009
+0.009
+0.010
+0.011
+0.011
+0.011
 ```
 
-## Understand benchmark metrics
+**Calculate p95 latency (manual):**
 
-The benchmarking output includes several key metrics:
+The p95 latency represents the value under which 95% of query executions complete.
 
-- QPS (Queries Per Second): number of complete queries ClickHouse can execute per second. Higher QPS reflects stronger overall query execution capacity.
-- RPS (Rows Per Second): number of rows processed every second. Very high RPS values demonstrate ClickHouse's efficiency in scanning large datasets.
-- MiB/s (Throughput): data processed per second in mebibytes. High throughput indicates effective CPU, memory, and disk utilization during analytics workloads.
-- Latency Percentiles (p50, p95, p99): query response times. p50 is the median latency, while p95 and p99 show tail latency under heavier load, which is critical for understanding performance consistency.
-- Iterations: number of times the same query is executed. More iterations improve measurement accuracy and stability.
-- Concurrency: number of parallel query clients. Higher concurrency tests ClickHouse's ability to scale under concurrent workloads.
-- Result RPS / Result MiB/s: size and rate of returned query results. Low values are expected for aggregate queries like `COUNT(*)`.
-- Insert Benchmark Metrics: write tests measure ingestion speed and stability. Consistent latency indicates reliable bulk insert performance.
+**Formula:**
 
-## Review the benchmark results
+```
+p95 index = ceil(0.95 × N)
+```
 
-The table below summarizes baseline read, aggregation, concurrent workload, and insert performance for ClickHouse running on a `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 virtual machine.
+For 10 samples:
 
-Use these results as a reference point for this specific configuration. They are intended to support comparison across different instance sizes, configurations, or architectures rather than to represent an absolute performance benchmark.
+```
+ceil(0.95 × 10) = ceil(9.5) = 10
+```
 
-| Test Category           | Test Case      | Query / Operation                      | Iterations | Concurrency |   QPS | Rows / sec (RPS) | Throughput (MiB/s) | p50 Latency | p95 Latency | p99 Latency |
-| ----------------------- | -------------- | -------------------------------------- | ---------: | ----------: | ----: | ---------------: | -----------------: | ----------: | ----------: | ----------: |
-| Read                    | Filtered COUNT | `COUNT(*) WHERE url LIKE '/page/%'`    |         10 |           1 | 63.17 |          63.17 M |             957.83 |        4 ms |        5 ms |        5 ms |
-| Read / Aggregate        | GROUP BY       | `GROUP BY url`                         |         10 |           2 | 67.15 |          67.15 M |            1018.25 |        7 ms |        8 ms |        8 ms |
-| Read (High Concurrency) | Filtered COUNT | `COUNT(*) WHERE user_id % 10 = 0`      |         20 |           8 | 99.72 |          99.72 M |             760.83 |       29 ms |       63 ms |       78 ms |
-| Write                   | Bulk Insert    | `INSERT SELECT … FROM numbers(500000)` |          5 |           4 | 20.94 |          10.47 M |              79.86 |       68 ms |       73 ms |       73 ms |
+The 10th value in the sorted list is your p95 latency.
 
-### Observations
+**p95 result**
 
-- Filtered read and aggregation queries processed between 63–67 million rows per second for this dataset and configuration.
-- Under higher concurrency (8 parallel clients), the system sustained close to 100 million rows per second, with increased tail latency as expected.
-- Aggregation queries using `GROUP BY` achieved over 1 GiB/s of throughput at moderate concurrency.
-- Bulk insert tests showed consistent latency across iterations for the tested insert size and concurrency level.
+```txt
+p95 latency = 0.011 seconds ≈ 11 ms
+```
 
-These results provide a baseline for this environment and can be used to compare alternative configurations, instance sizes, or architectures in subsequent testing.
+After executing the ClickHouse query 10 times on the GCP Axion (Arm) VM, the observed p95 query latency was ~11 ms, demonstrating consistently low-latency analytical performance on Arm-based infrastructure.
 
+## What you've accomplished
 
+You've successfully completed a comprehensive ClickHouse benchmarking exercise on Google Axion (Arm64) processors. Key results from the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM running SUSE:
+
+- ClickHouse on Google Axion (Arm64) delivered consistently low query latency, even while scanning ~6 million rows per query.
+- Across 10 repeat executions, the p95 latency was ~11 ms, indicating stable and predictable performance.
+- Disabling the query cache ensured true execution latency, not cache-assisted results.
+- Analytical queries sustained 500M+ rows/sec throughput with minimal memory usage.
+
+Throughout this Learning Path, you provisioned an Arm-based VM on Google Cloud, deployed ClickHouse, configured a real-time streaming pipeline with Pub/Sub and Dataflow, and validated end-to-end analytical performance. You can now deploy, optimize, and benchmark ClickHouse workloads on Google Cloud Arm infrastructure.

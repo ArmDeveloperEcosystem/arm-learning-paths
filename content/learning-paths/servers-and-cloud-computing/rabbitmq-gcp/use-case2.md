@@ -1,153 +1,135 @@
 ---
-title: RabbitMQ use case 2 - WhatsApp Notification
+title: "RabbitMQ use case 2: WhatsApp notification"
 weight: 8 
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## WhatsApp notification with direct exchange routing
 
-
-## WhatsApp Notification Use Case using RabbitMQ  
-This document demonstrates a **real-world asynchronous messaging use case** where RabbitMQ is used to process WhatsApp notifications reliably using a worker-based architecture.
+In this use case, you implement an asynchronous notification workflow where RabbitMQ routes WhatsApp notification messages using a direct exchange with exact-match routing. A Python worker consumes and processes these messages reliably.
 
 ### Use case overview
 
-In many production systems, sending WhatsApp notifications must be:
-- Reliable
-- Asynchronous
-- Independent of the main application flow
+In many production systems, sending WhatsApp notifications must be reliable, asynchronous, and independent of the main application flow. RabbitMQ acts as a message broker to decouple message production from consumption.
 
-RabbitMQ is used as a **message broker** to decouple message production from message consumption.
+**When to use this pattern:**
+
+Use direct exchanges when you need exact-match routing where `whatsapp` routes only to the WhatsApp queue. This approach provides simple, predictable routing without wildcards, and each message type routes to a specific, dedicated queue.
+
+**Comparison:**
+
+Use Case 1 (Topic Exchange) provides flexible routing with wildcards, ideal for event streams. Use Case 2 (Direct Exchange) provides exact-match routing, ideal for targeted notifications.
 
 ### Architecture flow
 
-1. Application publishes a message to RabbitMQ
-2. RabbitMQ routes the message to a queue
-3. A Python worker consumes the message
-4. The worker simulates sending a WhatsApp notification
-
-### Prerequisites
-
-- GCP SUSE Arm64 virtual machine
-- RabbitMQ is installed and running
-- RabbitMQ Management Plugin enabled
-- Python 3.8+
-- `pika` Python client library installed
-
-### Install Python dependencies
-Installs Python and the RabbitMQ Python client needed to build a consumer.
-
-```console
-sudo zypper install -y python3 python3-pip
-pip3 install pika
-```
+The application publishes a WhatsApp notification message to the `notifications` exchange. RabbitMQ routes the message to the `whatsapp.notifications` queue using the exact-match routing key `whatsapp`. The Python worker then consumes the message from the queue and simulates sending the WhatsApp notification. In production, this would call an external WhatsApp API.
 
 ### RabbitMQ topology
-This use case uses a direct exchange topology for exact-match routing.
 
-**Exchanges**
-- **notifications (direct):** Routes WhatsApp notification messages based on an exact routing key match.
-
-**Queue**
-- **whatsapp.notifications (durable):** Stores WhatsApp messages persistently until they are consumed by a worker.
-
-**Binding**
-- Exchange: **notifications** – Connects the exchange to the WhatsApp notification queue.
-- Routing key: **whatsapp** – Ensures only WhatsApp-related messages are routed.
-- Queue: **whatsapp.notifications**– Final destination where messages are delivered for processing.
+A direct exchange topology is used for exact-match routing. The `notifications` exchange (type: `direct`) routes notification messages based on exact routing key matches. The `whatsapp.notifications` queue is durable, which means it persists messages across broker restarts. The binding connects the exchange to the queue using the `whatsapp` routing key, ensuring only messages published with this exact key are routed to the queue.
 
 ### Declare RabbitMQ resources
-Creates the required exchange, queue, and binding for WhatsApp notifications.
 
-- `Declare exchange`: Creates a durable direct exchange named notifications to route messages using exact routing keys.
-- `Declare queue`: Creates a durable queue whatsapp.notifications to persist WhatsApp notification messages until consumed.
-- `Declare binding`: Links the notifications exchange to the whatsapp.notifications queue using the whatsapp routing key.
-  
+Create the required exchange, queue, and binding for WhatsApp notifications.
+
+**Declare the exchange:**
+
 ```console
 ./rabbitmqadmin declare exchange \
   name=notifications \
   type=direct \
   durable=true
+```
 
+This creates a durable direct exchange named `notifications` that routes messages using exact routing keys.
+
+The output is similar to:
+```output
+exchange declared
+```
+
+**Declare the queue:**
+
+```console
 ./rabbitmqadmin declare queue \
   name=whatsapp.notifications \
   durable=true
+```
 
+This creates a durable queue to persist WhatsApp notification messages until consumed.
+
+The output is similar to:
+```output
+queue declared
+```
+
+**Declare the binding:**
+
+```console
 ./rabbitmqadmin declare binding \
   source=notifications \
   destination=whatsapp.notifications \
   routing_key=whatsapp
 ```
-Each command confirms successful creation with messages like **exchange declared, queue declared, and binding declared**.
 
-**Validate the setup:**
+This links the exchange to the queue using the `whatsapp` routing key.
 
-Validates that RabbitMQ resources exist and are correctly connected.
-
-```console
-./rabbitmqadmin list queues name messages
-./rabbitmqadmin list exchanges name type
-./rabbitmqadmin list bindings
+Expected output:
+```output
+binding declared
 ```
 
-- `list queues` displays all queues along with the number of messages currently stored in each queue.
-- `list exchanges` lists all exchanges and their types, allowing verification of correct exchange configuration.
-- `list bindings` shows how exchanges, queues, and routing keys are connected.
+### Validate the setup
 
-**Output shows:**
+Validate that RabbitMQ resources exist and are correctly connected:
 
-- notifications exchange of type direct
-- whatsapp.notifications durable queue
-- Correct routing key binding (whatsapp)
-- Zero or more queued messages
+```console
+./rabbitmqadmin list exchanges name type
+./rabbitmqadmin list queues name messages
+./rabbitmqadmin list bindings source destination routing_key
+```
 
-Confirms topology correctness before consuming messages.
+These commands verify that the `notifications` exchange exists (type: `direct`), the `whatsapp.notifications` queue exists with zero messages, and the binding connects the exchange to the queue with routing key `whatsapp`.
+
+The output is similar to:
 
 ```output
-> ./rabbitmqadmin list queues name messages
++---------------+--------+
+| name          | type   |
++---------------+--------+
+| notifications | direct |
++---------------+--------+
+
 +------------------------+----------+
-|          name          | messages |
+| name                   | messages |
 +------------------------+----------+
-| jobs                   | 0        |
-| order.events           | 1        |
-| testqueue              | 1        |
 | whatsapp.notifications | 0        |
 +------------------------+----------+
 
-> ./rabbitmqadmin list exchanges name type
-+--------------------+---------+
-|        name        |  type   |
-+--------------------+---------+
-|                    | direct  |
-| amq.direct         | direct  |
-| amq.fanout         | fanout  |
-| amq.headers        | headers |
-| amq.match          | headers |
-| amq.rabbitmq.trace | topic   |
-| amq.topic          | topic   |
-| events             | topic   |
-| notifications      | direct  |
-+--------------------+---------+
-
-> ./rabbitmqadmin list bindings
-+---------------+------------------------+------------------------+
-|    source     |      destination       |      routing_key       |
-+---------------+------------------------+------------------------+
-|               | jobs                   | jobs                   |
-|               | order.events           | order.events           |
-|               | testqueue              | testqueue              |
-|               | whatsapp.notifications | whatsapp.notifications |
-| events        | order.events           | order.*                |
-| notifications | whatsapp.notifications | whatsapp               |
-+---------------+------------------------+------------------------+
++---------------+------------------------+-------------+
+| source        | destination            | routing_key |
++---------------+------------------------+-------------+
+| notifications | whatsapp.notifications | whatsapp    |
++---------------+------------------------+-------------+
 ```
 
+### Install Python dependencies
+
+If you haven't already installed Python dependencies in Use Case 1, install them now:
+
+```console
+sudo zypper install -y python3-pip
+pip3 install pika
+```
+
+This installs `pip` (Python package manager) and `pika` (RabbitMQ client library for Python).
+
 ### WhatsApp worker implementation
-The worker attaches as a **blocking consumer** to the `whatsapp.notifications` queue and processes incoming messages.
 
-Create a `whatsapp_worker.py` file with the content below:
+The worker attaches as a blocking consumer to the `whatsapp.notifications` queue and processes incoming messages. This worker uses durable queues for message persistence, `prefetch_count=1` for fair dispatch, and manual acknowledgments for reliable processing.
 
-This Python script implements a **RabbitMQ consumer (worker)** that processes WhatsApp notification messages from a queue in a reliable and controlled manner.
+Using a text editor, create a `whatsapp_worker.py` file with the content below:
 
 ```python
 import pika
@@ -155,22 +137,12 @@ import json
 import time
 
 RABBITMQ_HOST = "localhost"
-RABBITMQ_VHOST = "/"
-RABBITMQ_USER = "guest"
-RABBITMQ_PASS = "guest"
 QUEUE_NAME = "whatsapp.notifications"
 
-credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASS)
-
-parameters = pika.ConnectionParameters(
-    host=RABBITMQ_HOST,
-    virtual_host=RABBITMQ_VHOST,
-    credentials=credentials,
-    heartbeat=60
-)
-
 print("[DEBUG] Connecting to RabbitMQ...")
-connection = pika.BlockingConnection(parameters)
+connection = pika.BlockingConnection(
+    pika.ConnectionParameters(host=RABBITMQ_HOST)
+)
 channel = connection.channel()
 
 print("[DEBUG] Declaring queue...")
@@ -183,13 +155,17 @@ print("WhatsApp Worker started. Waiting for messages...")
 
 def send_whatsapp(ch, method, properties, body):
     data = json.loads(body.decode())
-    print(f"[Worker] Sending WhatsApp message to {data['phone']}")
-    print(f"[Worker] Message content: {data['message']}")
+    phone = data.get('phone', 'unknown')
+    message = data.get('message', '')
+    
+    print(f"[Worker] Processing WhatsApp notification")
+    print(f"[Worker] Recipient: {phone}")
+    print(f"[Worker] Message: {message}")
 
     # Simulate external WhatsApp API call
     time.sleep(1)
 
-    print("[Worker] Message sent successfully")
+    print("[Worker] WhatsApp notification sent successfully")
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 channel.basic_consume(
@@ -203,15 +179,14 @@ channel.start_consuming()
 ```
 
 ### Start the worker
-Run the worker in a dedicated terminal session:
+
+Now that you've created the worker script, run it in a dedicated terminal session:
 
 ```console
 python3 whatsapp_worker.py
 ```
 
-The worker is running correctly and waiting for messages without exiting.
-
-**output:**
+The worker connects to RabbitMQ and begins listening for WhatsApp notifications. The output is similar to:
 
 ```output
 [DEBUG] Connecting to RabbitMQ...
@@ -221,10 +196,11 @@ WhatsApp Worker started. Waiting for messages...
 [DEBUG] Starting consumer loop (this should block)...
 ```
 
-The process must block without returning to the shell prompt.
+The worker blocks at this point, waiting for messages without returning to the shell prompt.
 
 ### Publish a test message
-From another SSH terminal: Publishes a WhatsApp notification message to RabbitMQ.
+
+With the worker running, open another SSH terminal and publish a WhatsApp notification message:
 
 ```console
 ./rabbitmqadmin publish \
@@ -233,16 +209,18 @@ From another SSH terminal: Publishes a WhatsApp notification message to RabbitMQ
   payload='{"phone":"+911234567890","message":"Hello from RabbitMQ"}'
 ```
 
-You should see the following output from whatsapp_worker.py that is running in the first SSH terminal:
+The message routes through the `notifications` exchange to the `whatsapp.notifications` queue, where the worker consumes it. In the first SSH terminal where the worker is running, you should see:
 
 ```output
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: Hello from RabbitMQ
-[Worker] Message sent successfully
+[Worker] Processing WhatsApp notification
+[Worker] Recipient: +911234567890
+[Worker] Message: Hello from RabbitMQ
+[Worker] WhatsApp notification sent successfully
 ```
 
 ### Message consumption validation
-The worker terminal displays logs similar to:
+
+The complete worker output shows the full message flow:
 
 ```output
 [DEBUG] Connecting to RabbitMQ...
@@ -250,39 +228,55 @@ The worker terminal displays logs similar to:
 [DEBUG] Setting QoS...
 WhatsApp Worker started. Waiting for messages...
 [DEBUG] Starting consumer loop (this should block)...
-[Worker] Sending WhatsApp message to +911234567890
-[Worker] Message content: Hello from RabbitMQ
-[Worker] Message sent successfully
+[Worker] Processing WhatsApp notification
+[Worker] Recipient: +911234567890
+[Worker] Message: Hello from RabbitMQ
+[Worker] WhatsApp notification sent successfully
 ```
-**What this confirms:**
 
-- Message routing works correctly
-- Queue consumption is successful
-- Manual acknowledgments are applied
-
-This validates the end-to-end message flow.
+This output confirms that message routing works correctly through the direct exchange, the worker successfully consumes from the queue, manual acknowledgments are applied, and the end-to-end message flow is validated.
 
 ### Verify queue state
+
+To confirm successful message consumption, check the queue status:
 
 ```console
 ./rabbitmqadmin list queues name messages consumers
 ```
 
-Expected output is similar to:
+The output is similar to:
 
 ```output
 +------------------------+----------+-----------+
-|          name          | messages | consumers |
+| name                   | messages | consumers |
 +------------------------+----------+-----------+
-| jobs                   | 0        | 0         |
-| order.events           | 2        | 0         |
-| testqueue              | 1        | 0         |
 | whatsapp.notifications | 0        | 1         |
 +------------------------+----------+-----------+
 ```
 
-This confirms that:
+The output shows zero messages remaining (all were consumed), one active consumer connected, and no message backlog in the queue.
 
-- Messages were consumed successfully
-- One active consumer is connected
-- No backlog remains in the queue
+When you're done testing, press Ctrl+C in the worker terminal to exit the application.
+
+## What you've accomplished
+
+You've implemented an asynchronous notification system using RabbitMQ with direct exchange routing, durable queues, manual acknowledgments, and fair dispatch. The Python worker processes WhatsApp notifications asynchronously, and the exact-match routing ensures messages go only to the intended queue.
+
+This pattern works well for targeted notifications (email, SMS, WhatsApp, push notifications) where routing needs to be simple and predictable. Each notification type routes to a dedicated queue using an exact-match routing key, providing reliable, guaranteed delivery.
+
+The key difference from Use Case 1 is the routing approach: Use Case 1 uses topic exchange with wildcard routing (`order.*`) for flexible event streams, while Use Case 2 uses direct exchange with exact routing (`whatsapp`) for targeted notifications.
+
+## Delete RabbitMQ resources
+
+When you're finished, stop the RabbitMQ workers and delete the resources. 
+
+```console
+./rabbitmqadmin delete queue name=order.events
+./rabbitmqadmin delete queue name=whatsapp.notifications
+./rabbitmqadmin delete queue name=testqueue
+./rabbitmqadmin delete exchange name=events
+./rabbitmqadmin delete exchange name=notifications
+```
+
+When you are done, be sure to delete the Google Cloud VM and the firewall rule. 
+

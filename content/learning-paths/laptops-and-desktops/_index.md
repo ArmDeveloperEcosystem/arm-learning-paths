@@ -11,12 +11,12 @@ operatingsystems_filter:
 - ChromeOS: 2
 - Linux: 38
 - macOS: 10
-- Windows: 46
+- Windows: 47
 subjects_filter:
 - CI-CD: 6
 - Containers and Virtualization: 7
 - Migration to Arm: 30
-- ML: 5
+- ML: 6
 - Performance and Architecture: 28
 subtitle: Create and migrate apps for power efficient performance
 title: Laptops and Desktops
@@ -43,6 +43,7 @@ tools_software_languages_filter:
 - Git: 1
 - GitHub: 3
 - GitLab: 2
+- Google Benchmark: 1
 - Google Test: 1
 - HTML: 2
 - Hugging Face: 1
@@ -73,7 +74,7 @@ tools_software_languages_filter:
 - RDP: 1
 - Remote.It: 1
 - RME: 1
-- Runbook: 17
+- Runbook: 18
 - Rust: 2
 - SVE: 1
 - SVE2: 1

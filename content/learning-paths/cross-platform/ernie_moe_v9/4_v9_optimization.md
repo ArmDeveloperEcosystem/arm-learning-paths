@@ -114,8 +114,8 @@ After running benchmarks with and without Armv9-specific instructions, the resul
 
 Vectorized kernels (i8mm, dotprod, SVE) drastically improve inference throughput. The pp512 test shows the most significant acceleration with a 2.57× improvement. Other patterns like tg128 and pp128+tg128 also achieve measurable gains. These results demonstrate the broad benefit of hardware-aware builds and show that Armv9 optimization enables practical real-time inference for 21 B models on edge-class hardware.
 
-### Summary
+## What you've accomplished
 
-Throughout this Learning Path, you deployed a 21 B parameter Chinese MoE model on edge-class Armv9 hardware. You started by understanding how MoE reduces memory usage by activating only a small subset of parameters per token. After setting up llama.cpp on a Radxa O6 board, you compared ERNIE-4.5 Thinking and PT model behaviors while examining expert routing logic with debug instrumentation. Finally, you applied Armv9 hardware optimizations and achieved over 2.5× speed improvements in token throughput. 
+Throughout this Learning Path, you deployed a 21-billion-parameter Chinese MoE model on edge-class Armv9 hardware. You started by understanding how MoE reduces memory usage by activating only a small subset of parameters per token. After setting up llama.cpp on a Radxa O6 board, you compared ERNIE-4.5 Thinking and PT model behaviors while examining expert routing logic with debug instrumentation. Finally, you applied Armv9 hardware optimizations and achieved over 2.5× speed improvements in token throughput. 
 
 You can now deploy, profile, and tune Chinese LLMs for efficient inference on modern Arm CPUs.

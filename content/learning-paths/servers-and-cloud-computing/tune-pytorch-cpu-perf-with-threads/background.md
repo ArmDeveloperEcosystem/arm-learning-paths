@@ -1,38 +1,30 @@
 ---
-title: Background Information
+title: Understand PyTorch threading for CPU inference
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Background Information
+A well-known challenge in parallel programming is choosing the right number of threads for a given amount of work. When multiple threads are created to perform a task, the actual computation must be large enough to justify the overhead of coordinating those threads.
 
-A well-known challenge in parallel programming is choosing the right number of threads for a given amount of work. When multiple threads are created to perform a task, the actual computation must be large enough to justify the overhead of coordinating those threads. 
+If a computation is split across many threads, the costs of creating the threads and synchronizing their results through shared memory can easily outweigh any performance gains from parallel execution. The same principle applies to generative AI workloads running on CPU.
 
-For example, if a computation is split across many threads, the costs of:
-- creating the threads, and  
-- synchronizing their results through shared memory  
+When work is distributed across multiple threads, communication and synchronization overhead increases the total amount of work the system must perform. This creates a trade-off between latency (the time to process a single request) and throughput (the number of requests processed per unit time).
 
-can easily outweigh any performance gains from parallel execution. The same principle applies to generative AI workloads running on CPU.
+PyTorch attempts to automatically choose an appropriate number of threads. However, as you will learn, in some cases you can manually tune this configuration to improve performance.
 
-When work is distributed across multiple threads, communication and synchronization overhead increases the total amount of work the system must perform. This creates a trade-off between:
+## Multithreading with PyTorch on CPU
 
-- **Latency** – the time to process a single request, and  
-- **Throughput** – the number of requests processed per unit time.
+When running inference, PyTorch uses an Application Thread Pool. PyTorch supports two types of parallelism: inter-op parallelism spawns threads to run separate operations in a graph in parallel (for example, one thread for a matmul and another thread for a softmax), while intra-op parallelism spawns multiple threads to work on the same operation.
 
-PyTorch attempts to automatically choose an appropriate number of threads. However, as we will show, in some cases you may want to manually fine-tune this configuration to improve performance.
+The diagram below is taken from the [PyTorch documentation](https://docs.pytorch.org/docs/stable/index.html). 
 
-## Multi-threading with PyTorch on CPU
+![Diagram showing PyTorch's threading model with application thread pool, inter-op thread pool, and intra-op thread pool for CPU inference#center](./pytorch-threading.jpg "PyTorch threading model")
 
+The `torch.set_num_threads()` [API](https://docs.pytorch.org/docs/stable/generated/torch.set_num_threads.html) sets the maximum number of threads to spawn in the Application Thread Pool.
 
-The diagram below is taken from the [PyTorch documentation](https://docs.pytorch.org/docs/2.8/notes/cpu_threading_torchscript_inference.html). When running inference, PyTorch uses an **Application Thread Pool**. In PyTorch, there are inter-op parallelism, which is spawning threads to run separate operations in a graph in parallel (e.g., 1 thread for a matmul and another thread for a softmax). Additionally there's intra-op parallelism can be used to spawn multiple threads to work on the same operation. 
-
-![threading-in-pytorch](./pytorch-threading.jpg)
-
-In PyTorch, the `torch.set_num_threads()` [API](https://docs.pytorch.org/docs/stable/generated/torch.set_num_threads.html) is used to set the maximum number of threads to spawn in the Application Thread Pool. 
-
-As of PyTorch 2.8.0, the default number of threads is equal to the number of CPU cores (see [PyTorch CPU Threading Documentation](https://docs.pytorch.org/docs/2.8/notes/cpu_threading_torchscript_inference.html) for more detail). PyTorch looks to find the ideal number of threads as described with the following code snippet taken from the PyTorch source code, [ParallemOpenMP.h](https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/ParallelOpenMP.h).
+As of PyTorch 2.8.0, the default number of threads equals the number of CPU cores (see [PyTorch CPU Threading Documentation](https://docs.pytorch.org/docs/2.8/notes/cpu_threading_torchscript_inference.html) for more detail). PyTorch determines the ideal number of threads based on the workload size, as shown in this code snippet from [ParallelOpenMP.h](https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/ParallelOpenMP.h):
 
 ```cpp
 int64_t num_threads = omp_get_num_threads();
@@ -46,17 +38,13 @@ inline int64_t divup(int64_t x, int64_t y) {
 }
 ```
  
-In PyTorch builds that use OpenMP, the maximum size of the application’s thread pool can be configured once at runtime using the `OMP_NUM_THREADS` environment variable. The actual number of threads used will scale up to this limit depending on the workload and the `grain_size`. 
+In PyTorch builds that use OpenMP, the maximum size of the application's thread pool can be configured at runtime using the `OMP_NUM_THREADS` environment variable. The actual number of threads used scales up to this limit depending on the workload and the `grain_size`.
 
-The short example below illustrates that the default settings on many-core systems may not provide optimal performance for all workloads.
+The example below demonstrates that the default settings on many-core systems might not provide optimal performance for all workloads.
 
-## Basic PyTorch Example
+## Basic PyTorch example
 
-Create a new file named `pytorch_omp_example.py` and paste in the Python script below. The script performs a matrix multiplication in eager mode on two 256×256 random matrices.  
-For this relatively small computation, we will:
-
-- Observe the default performance of PyTorch’s parallelism  
-- Print the parallel configuration using `torch.__config__.parallel_info()`.
+Create a new file named `pytorch_omp_example.py` with the following Python script. The script performs a matrix multiplication in eager mode on two 256×256 random matrices, showing the default performance of PyTorch's parallelism and printing the parallel configuration:
 
 ```python
 import os
@@ -95,13 +83,13 @@ if __name__ == "__main__":
     main()
 ```
 
-Run the python script 
+Run the Python script:
 
 ```bash
 python pytorch_omp_example.py
 ```
 
-You will observe the an output similar to the follow. As you can see the number of threads is set to core count of 96 and the time to execute is 2.24 ms. 
+The output is similar to: 
 
 
 ```output
@@ -124,11 +112,15 @@ Environment variables:
 ATen parallel backend: OpenMP
 ```
 
-Now reduce the number of OpenMP threads using the `OMP_NUM_THREADS` value and observe a reduction is matrix multiply time to 0.64 ms. 
+The number of threads is set to the core count of 96, and the execution time is 2.24 ms.
+
+Reduce the number of OpenMP threads using the `OMP_NUM_THREADS` environment variable: 
 
 ```bash
 OMP_NUM_THREADS=16 python pytorch_omp_example.py
 ```
+
+The output shows a different `Matrix multiply time` of of 0.64 ms. 
 
 ```output
 PyTorch version: 2.10.0.dev20251124
@@ -150,4 +142,6 @@ Environment variables:
 ATen parallel backend: OpenMP
 ```
 
-We will now move on from this trivial example to a much larger workload of a large language model (LLM). 
+The time varies with the number of threads and type of processor in your system. 
+
+In the next section, you'll apply these concepts to a much larger workload using a large language model (LLM). 
