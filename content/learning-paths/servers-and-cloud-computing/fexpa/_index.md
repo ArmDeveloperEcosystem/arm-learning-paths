@@ -1,18 +1,18 @@
 ---
-title: Accelerate the exponential function with Fexpa
+title: Optimize exponential functions with FEXPA
 
     
 minutes_to_complete: 15
 
-who_is_this_for: This is an introductory topic for developers who want to accelerate exponential function computations using Arm's Scalable Vector Extension (SVE). You'll learn how to use the FEXPA instruction, which provides hardware acceleration for exponential calculations on Arm Neoverse processors.
+who_is_this_for: This is an introductory topic for developers interested in accelerating exponential function computations using Arm's Scalable Vector Extension (SVE). The FEXPA instruction provides hardware acceleration for exponential calculations on Arm Neoverse processors.
 
 learning_objectives: 
     - Implement the exponential function using SVE intrinsics
     - Optimize the function with FEXPA
 
 prerequisites:
-    - Access to an [AWS Graviton4, Google Axion, or Azure Cobalt 100 virtual machine from a cloud service provider](/learning-paths/servers-and-cloud-computing/csp/).
-    - Some familiarity with SIMD programming and SVE intrinsics.
+    - Access to an [AWS Graviton4, Google Axion, or Azure Cobalt 100 virtual machine from a cloud service provider](/learning-paths/servers-and-cloud-computing/csp/)
+    - Some familiarity with SIMD programming and SVE intrinsics
 
 author: 
 - Arnaud Grasset

@@ -1,5 +1,5 @@
 ---
-title: FEXPA
+title: Optimize with FEXPA instruction
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## The FEXPA instruction
 
-Arm introduced in SVE an instruction called FEXPA: the Floating Point Exponential Accelerator. 
+Arm introduced an instruction in SVE called FEXPA: the Floating Point Exponential Accelerator. 
 
-Let’s segment the IEEE 754 floating-point representation fraction part into several sub-fields (Index, Exp and Remaining bits) with respective length of _Idxb_, _Expb_ and _Remb_ bits.
+The IEEE 754 floating-point representation fraction part can be segmented into several sub-fields (Index, Exp and Remaining bits) with respective length of _Idxb_, _Expb_ and _Remb_ bits.
 
 | IEEE 754 precision       | Idxb | Expb | Remb |
 |-------------------------|------|------|------|
@@ -46,7 +46,7 @@ With a table of size 2^L, the evaluation interval for the approximation polynomi
 
 ## Exponential implementation with FEXPA
 
-FEXPA can be used to rapidly perform the table lookup. With this instruction a degree-2 polynomial is sufficient to obtain the same accuracy as the degree-4 polynomial implementation from the previous section.
+Use FEXPA to rapidly perform the table lookup. With this instruction, a degree-2 polynomial is sufficient to obtain the same accuracy as the degree-4 polynomial implementation from the previous section.
 
 ### Add the FEXPA implementation
 
@@ -93,7 +93,7 @@ void exp_sve_fexpa(float *x, float *y, size_t n) {
 ```
 
 {{% notice Arm Optimized Routines %}}
-This implementation can be found in [ARM Optimized Routines](https://github.com/ARM-software/optimized-routines/blob/ba35b32/math/aarch64/sve/sv_expf_inline.h).
+This implementation can be found in [Arm Optimized Routines](https://github.com/ARM-software/optimized-routines/blob/ba35b32/math/aarch64/sve/sv_expf_inline.h).
 {{% /notice %}}
 
 
@@ -146,11 +146,20 @@ SVE+FEXPA (degree-2)          0.000414            5.95x
 
 The benchmark shows the performance progression:
 
-1. **SVE with degree-4 polynomial**: Provides up to 4x speedup through vectorization
-2. **SVE with FEXPA and degree-2 polynomial**: Achieves an additional 1-2x improvement
+- SVE with degree-4 polynomial provides up to 4x speedup through vectorization
+- SVE with FEXPA and degree-2 polynomial achieves an additional 1-2x improvement
 
 The FEXPA instruction delivers this improvement by:
 - Replacing manual bit manipulation with a single hardware instruction (`svexpa()`)
 - Enabling a simpler polynomial (degree-2 instead of degree-4) while maintaining accuracy
 
 Both SVE implementations maintain comparable accuracy (errors in the 10^-9 to 10^-10 range), demonstrating that specialized hardware instructions can significantly improve performance without sacrificing precision.
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Implemented exponential function optimization using the FEXPA instruction
+- Reduced polynomial degree from four to two while maintaining accuracy
+- Achieved up to 6x speedup over the baseline implementation
+
+Next, you'll review the key benefits and applications of FEXPA optimization.

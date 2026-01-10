@@ -1,5 +1,5 @@
 ---
-title: Theory
+title: Learn exponential function optimization techniques
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -10,7 +10,7 @@ layout: learningpathall
 The exponential function is a fundamental mathematical function used across a wide range of algorithms for signal processing, High-Performance Computing and Machine Learning. Researchers have extensively studied optimizing its computation for decades. The precision of the computation depends both on the selected approximation method and on the inherent rounding errors associated with finite-precision arithmetic, and it is directly traded off against performance when implementing the exponential function. 
 
 ## Range reduction
-Polynomial approximations are among the most widely used methods for software implementations of the exponential function. The accuracy of a Taylor series approximation for exponential function can be improved with the polynomial's degree but deteriorates as the evaluation point moves further from the expansion point. By applying range reduction techniques, the approximation of the exponential function can however be restricted to a very narrow interval where the function is well-conditioned. This approach consists in reformulating the exponential function in the following way:
+Polynomial approximations are among the most widely used methods for software implementations of the exponential function. The accuracy of a Taylor series approximation for exponential function can be improved with the polynomial's degree but deteriorates as the evaluation point moves further from the expansion point. By applying range reduction techniques, you can restrict the approximation of the exponential function to a very narrow interval where the function is well-conditioned. This approach reformulates the exponential function in the following way:
 
 $$e^x=e^{k×ln2+r}=2^k \times e^r$$
 
@@ -25,11 +25,11 @@ $$e^x \approx 2^k \times p(r)$$
 The polynomial p(r) is evaluated exclusively over the interval [-ln2/2, +ln2/2]. So, the computational complexity can be optimized by selecting the polynomial degree based on the required precision of p(r) within this narrow range. Rather than relying on a Taylor polynomial, a minimax polynomial approximation can be used to minimize the maximum approximation error over the considered interval.
 
 ## Decomposition of the input
-The decomposition of an input value as x = k × ln2 + r can be done in 2 steps:
+Decompose an input value as x = k × ln2 + r in two steps:
 - Compute k as: k = round(x⁄ln2), where round(.) is the round-to-nearest function
 - Compute r as: r = x - k × ln2
 
-Rounding of k is performed by adding an adequately chosen large number to a floating-point value and subtracting it just afterward (the original value is rounded due to the finite precision of floating-point representation). Although explicit rounding instructions are available in both SVE and SME, this method remains advantageous as the addition of the constant can be fused with the multiplication by the reciprocal of ln2. This approach assumes however that the floating-point rounding mode is set to round-to-nearest, which is the default mode in Armv9-A. By integrating the bias into the constant, 2^k can also be directly computed by shifting the intermediate value.
+Rounding of k is performed by adding an adequately chosen large number to a floating-point value and subtracting it just afterward (the original value is rounded because of the finite precision of floating-point representation). Although explicit rounding instructions are available in both SVE and SME, this method remains advantageous because the addition of the constant can be fused with the multiplication by the reciprocal of ln2. This approach assumes that the floating-point rounding mode is set to round-to-nearest, which is the default mode in Armv9-A. By integrating the bias into the constant, 2^k can also be directly computed by shifting the intermediate value.
 
 A rounding error during the second step introduces a global error as you have:
 
@@ -60,4 +60,11 @@ As previously discussed, this value can be approximated by computing a 32-bit in
 
 $$i = 2^{23} \times x⁄ln2 + 2^{23} \times bias = a \times x + b $$
 
-Continue to the next section to make a C-based implementation of the exponential function.
+## What you've accomplished and what's next
+
+In this section, you learned the mathematical foundations for optimizing exponential functions:
+- Range reduction techniques that narrow the evaluation interval
+- How to decompose inputs using k × ln2 + r reformulation
+- Bit manipulation techniques for computing scaling factors
+
+Next, you'll implement these concepts in C using SVE intrinsics.
