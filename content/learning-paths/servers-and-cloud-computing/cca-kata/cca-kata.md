@@ -50,7 +50,7 @@ Learn more about how Trustee services are used to evaluate the trustworthiness o
 
 By combining Kata Containers, guest-side image pulling, and attestation and secret management, you arrive at the complete Confidential Containers architecture shown below:
 
-![Complete Confidential Containers architecture diagram showing the host environment with containerd, nydus snapshotter, and Trustee services, plus the guest VM running inside an Arm CCA Realm with the Attestation Agent, CDH, and image-rs components that enable secure container deployment#center](confidential_containers.png "Complete Confidential Containers architecture")
+![Complete Confidential Containers architecture diagram showing the host environment with containerd, nydus snapshotter, and Trustee services, plus the guest VM running inside an Arm CCA Realm with the Attestation Agent, CDH, and image-rs components that enable secure container deployment alt-txt#center](confidential_containers.png "Complete Confidential Containers architecture")
 
 Both the Confidential Containers software stack and Trustee services are packaged as Docker containers. These can run on any suitable AArch64 or x86_64 development host. Because the confidential workload runs inside an Arm CCA Realm, this Learning Path uses the Arm Fixed Virtual Platform (FVP) along with the Arm CCA reference software stack to provide the required environment.
 
