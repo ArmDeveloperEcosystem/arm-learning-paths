@@ -71,7 +71,7 @@ Once Unity has loaded, you will be presented with a template project. You can ig
 
 13. The Import Unity Package window will appear. It allows individual files and folders to be imported or ignored. You will need all of the files in the project. Leave all items ticked and select _Next_.
 
-    ![Import sample project#center](images/import-window-step-1.PNG "Figure 3. Import the sample project using the Package Manager.")
+    ![Import sample project#center](images/import-window-step-1.png "Figure 3. Import the sample project using the Package Manager.")
 
 14. A second window will open listing the project settings that will be overwritten. You want the settings from the sample project, so leave all items ticked and select _Import_.
 
@@ -86,7 +86,7 @@ Once the sample project has been imported, you will see some errors and warnings
 
 3. Select _Switch Platform_, as you did in the [previous Learning Path](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android/3-test-on-android/)
 
-   ![Build-Profile-Menu#center](images/BP-menu.png "Figure 5. Build Profile menu.")
+   ![Build-Profile-Menu#center](images/bp-menu.png "Figure 5. Build Profile menu.")
 
 Unity will take a moment to build the assets for the Android platform.
 
@@ -94,7 +94,7 @@ The errors will disappear, but some warnings regarding unreachable code may appe
 
 Your Scene view should look something like this:
 
-   ![Scene view#center](images/sample-project-default-scene-view.PNG "Figure 6. Default scene view of the sample project.")
+   ![Scene view#center](images/sample-project-default-scene-view.png "Figure 6. Default scene view of the sample project.")
 
 If it does not, the next steps should help identify the issue.
 
@@ -117,7 +117,7 @@ It is worth checking that everything has been imported and built correctly.
 
 The game will launch, and you will see an empty environment begin to fill with more and more characters (capsules) over time. It will look something like this:
 
-![Screenshot at runtime#center](images/game-view.PNG "Figure 8. Sample running in Game view.")
+![Screenshot at runtime#center](images/game-view.png "Figure 8. Sample running in Game view.")
 
 ## Deploy to Android
 You will now deploy the sample to your Android device. Your device must already be set up for development. For detailed instructions, read the learning path [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android).
