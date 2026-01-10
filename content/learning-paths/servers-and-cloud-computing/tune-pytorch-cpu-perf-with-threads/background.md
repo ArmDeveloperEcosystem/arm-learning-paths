@@ -22,7 +22,7 @@ When running inference, PyTorch uses an Application Thread Pool. PyTorch support
 
 The diagram below shows PyTorch's threading model from the [PyTorch documentation](https://docs.pytorch.org/docs/stable/index.html). 
 
-![Diagram showing PyTorch's threading model with application thread pool, inter-op thread pool, and intra-op thread pool for CPU inference#center](./pytorch-threading.jpg "PyTorch threading model")
+![Diagram showing PyTorch's threading model with application thread pool, inter-op thread pool, and intra-op thread pool for CPU inference alt-txt#center](./pytorch-threading.jpg "PyTorch threading model")
 
 The `torch.set_num_threads()` [API](https://docs.pytorch.org/docs/stable/generated/torch.set_num_threads.html) sets the maximum number of threads to spawn in the Application Thread Pool.
 
