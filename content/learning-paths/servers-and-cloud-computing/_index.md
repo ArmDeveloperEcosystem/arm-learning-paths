@@ -19,8 +19,8 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 12
-- Containers and Virtualization: 36
-- Databases: 23
+- Containers and Virtualization: 37
+- Databases: 22
 - Libraries: 9
 - ML: 36
 - Performance and Architecture: 79
@@ -37,6 +37,7 @@ tools_software_languages_filter:
 - Android Studio: 1
 - Ansible: 2
 - Apache: 1
+- Apache Beam: 1
 - Apache Bench: 1
 - Apache Cassandra: 1
 - Apache Spark: 2
@@ -66,7 +67,7 @@ tools_software_languages_filter:
 - Azure: 1
 - Azure CLI: 2
 - Azure Portal: 1
-- Bash: 4
+- Bash: 3
 - bash: 2
 - Bastion: 3
 - BOLT: 2
@@ -83,7 +84,6 @@ tools_software_languages_filter:
 - Clang: 13
 - ClickBench: 1
 - ClickHouse: 2
-- clickhouse-benchmark: 1
 - Cloud Build: 1
 - CMake: 1
 - conda: 1
@@ -125,6 +125,8 @@ tools_software_languages_filter:
 - Google Axion: 3
 - Google Benchmark: 1
 - Google Cloud: 2
+- Google Cloud Pub/Sub: 1
+- Google Dataflow: 1
 - Google Test: 1
 - Groovy (Jenkins Pipeline): 1
 - Gunicorn: 1
@@ -197,6 +199,7 @@ tools_software_languages_filter:
 - Profiling: 1
 - Puppet: 1
 - Python: 38
+- Python 3.11: 1
 - PyTorch: 11
 - QEMU: 1
 - RabbitMQ: 1
