@@ -1,17 +1,13 @@
 ---
-title: Fine tune LLM CPU inference performance with multithreading
-
-draft: true
-cascade:
-    draft: true
+title: Tune LLM CPU inference performance with multithreading
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic ML engineers optimizing LLM inference performance on Arm CPUs.
+who_is_this_for: This is an introductory topic for ML engineers optimizing LLM inference performance on Arm CPUs.
 
 learning_objectives: 
     - Understand how PyTorch uses multiple threads for CPU inference
-    - Measure performance impact of thread count on LLM inference
+    - Measure the performance impact of thread count on LLM inference
     - Tune thread count to optimize inference for specific models and systems
 
 prerequisites:

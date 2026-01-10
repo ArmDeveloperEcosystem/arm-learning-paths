@@ -6,6 +6,10 @@ weight: 4
 layout: learningpathall
 ---
 
+## Run inference experiments with different thread counts
+
+Now that you understand how PyTorch threading works and have your environment configured, you're ready to tune thread settings for actual LLM inference workloads. This section shows you how to measure inference performance across different thread counts using Google's Gemma-3 models on Arm CPUs. You'll run experiments with both the 270M and 1B parameter variants to understand how model size affects optimal thread configuration.
+
 This section runs inference on Google's [Gemma-3](https://huggingface.co/google/gemma-3-1b-it) model and measures how inference performance varies with thread count for both the 270 million parameter and 1 billion parameter models. The `transformers_llm_text_gen.py` script applies groupwise, layout-aware INT4 quantization by default.
 
 Create a file named `comparison-1b.sh` with the following script: 
@@ -101,17 +105,17 @@ Decode Tokens per second: 45.23
 
 The graph below shows how prefill tokens per second change with the number of OpenMP threads for the 270M and 1B variants of Gemma-3:
 
-![Graph showing prefill tokens per second versus number of OpenMP threads for Gemma-3 270M and 1B models. Both models peak at 16-32 threads, with the 270M model showing steeper decline after the peak#center](./prefill_throughput.png "Prefill throughput comparison")
+![Line graph comparing prefill throughput performance of Gemma-3 270M and 1B models across different thread counts from 2 to 96. The y-axis shows tokens per second (0-3000), and the x-axis shows number of OpenMP threads. Both lines peak at 16-32 threads, with the 270M model achieving higher throughput but showing a steeper decline after peak performance alt-txt#center](./prefill_throughput.png "Prefill throughput versus thread count for Gemma-3 models")
 
-As expected, the smaller 270M model runs faster. Both models reach their optimal token generation rate at around 16–32 threads, though the 270M model exhibits a sharper performance drop-off beyond this range compared with the 1B variant.
+As expected, the smaller 270M model runs faster. Both models reach their optimal token generation rate at around 16 to 32 threads, though the 270M model exhibits a sharper performance drop-off beyond this range compared with the 1B variant.
 
 
 
 ## Use PyTorch compilation mode
 
-The examples so far have used PyTorch's eager execution mode. You can also test performance with PyTorch's compile mode.
+The examples so far have used PyTorch's eager execution mode. PyTorch's compile mode can provide additional performance improvements. 
 
-Install a C++ compiler and dependencies:
+Before testing compile mode, install a C++ compiler and dependencies:
 
 ```bash
 sudo apt update && sudo apt install g++ python3.10-dev build-essential -y
@@ -151,13 +155,13 @@ Decode Tokens per second: 107.37
 
 Reducing the thread count from 96 (default) to 16 provides a significant reduction in end-to-end generation time.
 
-## What you've learned
+## What you've accomplished and what's next
 
-You've explored how the number of OpenMP threads impacts LLM inference performance on Arm CPUs. You've learned that:
+You've explored how the number of OpenMP threads impacts LLM inference performance on Arm CPUs and learned that:
 
 - Default thread settings on many-core systems don't always provide optimal performance
-- Smaller models typically benefit from fewer threads due to lower synchronization overhead
+- Smaller models typically benefit from fewer threads because of lower synchronization overhead
 - The optimal thread count depends on both model size and system architecture
-- PyTorch's compile mode can provide additional performance improvements when combined with thread tuning
+- PyTorch's compile mode provides additional performance improvements when combined with thread tuning
 
-In practice, use a heuristic or trial-and-error approach to determine the optimal thread count for your specific model and system configuration.
+For your specific workloads, experiment with different thread counts to find the optimal setting. Start with powers of 2 (8, 16, 32) and measure the actual throughput and latency for your use case. The performance characteristics you observed in this Learning Path apply to other LLM inference workloads on Arm CPUs.

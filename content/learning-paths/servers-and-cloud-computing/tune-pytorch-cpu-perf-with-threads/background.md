@@ -6,6 +6,8 @@ weight: 3
 layout: learningpathall
 ---
 
+## Understanding threading trade-offs in CPU inference
+
 A well-known challenge in parallel programming is choosing the right number of threads for a given amount of work. When multiple threads are created to perform a task, the actual computation must be large enough to justify the overhead of coordinating those threads.
 
 If a computation is split across many threads, the costs of creating the threads and synchronizing their results through shared memory can easily outweigh any performance gains from parallel execution. The same principle applies to generative AI workloads running on CPU.
@@ -16,15 +18,15 @@ PyTorch attempts to automatically choose an appropriate number of threads. Howev
 
 ## Multithreading with PyTorch on CPU
 
-When running inference, PyTorch uses an Application Thread Pool. PyTorch supports two types of parallelism: inter-op parallelism spawns threads to run separate operations in a graph in parallel (for example, one thread for a matmul and another thread for a softmax), while intra-op parallelism spawns multiple threads to work on the same operation.
+When running inference, PyTorch uses an Application Thread Pool. PyTorch supports two types of parallelism: inter-op parallelism spawns threads to run separate operations in a graph in parallel (for example, one thread for a matrix multiplication and another thread for a softmax), while intra-op parallelism spawns multiple threads to work on the same operation.
 
-The diagram below is taken from the [PyTorch documentation](https://docs.pytorch.org/docs/stable/index.html). 
+The diagram below shows PyTorch's threading model from the [PyTorch documentation](https://docs.pytorch.org/docs/stable/index.html). 
 
 ![Diagram showing PyTorch's threading model with application thread pool, inter-op thread pool, and intra-op thread pool for CPU inference#center](./pytorch-threading.jpg "PyTorch threading model")
 
 The `torch.set_num_threads()` [API](https://docs.pytorch.org/docs/stable/generated/torch.set_num_threads.html) sets the maximum number of threads to spawn in the Application Thread Pool.
 
-As of PyTorch 2.8.0, the default number of threads equals the number of CPU cores (see [PyTorch CPU Threading Documentation](https://docs.pytorch.org/docs/2.8/notes/cpu_threading_torchscript_inference.html) for more detail). PyTorch determines the ideal number of threads based on the workload size, as shown in this code snippet from [ParallelOpenMP.h](https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/ParallelOpenMP.h):
+As of PyTorch 2.8.0, the default number of threads equals the number of CPU cores (see the [PyTorch CPU Threading Documentation](https://docs.pytorch.org/docs/2.8/notes/cpu_threading_torchscript_inference.html) for more detail). PyTorch determines the ideal number of threads based on the workload size, as shown in this code snippet from [ParallelOpenMP.h](https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/ParallelOpenMP.h):
 
 ```cpp
 int64_t num_threads = omp_get_num_threads();
@@ -112,9 +114,9 @@ Environment variables:
 ATen parallel backend: OpenMP
 ```
 
-The number of threads is set to the core count of 96, and the execution time is 2.24 ms.
+PyTorch uses all 96 cores, and the execution time is 2.24 ms.
 
-Reduce the number of OpenMP threads using the `OMP_NUM_THREADS` environment variable: 
+Now reduce the number of OpenMP threads using the `OMP_NUM_THREADS` environment variable: 
 
 ```bash
 OMP_NUM_THREADS=16 python pytorch_omp_example.py
@@ -142,6 +144,10 @@ Environment variables:
 ATen parallel backend: OpenMP
 ```
 
-The time varies with the number of threads and type of processor in your system. 
+The execution time varies with the number of threads and the processor type in your system.
 
-In the next section, you'll apply these concepts to a much larger workload using a large language model (LLM). 
+## What you've accomplished and what's next
+
+You've learned how PyTorch manages threads for CPU inference and seen how thread count affects performance in a simple example. The optimal thread count depends on both the workload size and system architecture.
+
+Next, you'll apply these concepts to a more realistic workload by tuning thread settings for large language model inference. 
