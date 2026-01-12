@@ -93,6 +93,11 @@ jobs:
             *) echo "Unknown target: ${{ inputs.target }}"; exit 1 ;;
           esac
 
-          aws cloudfront create-invalidation \
+          echo "Invalidating CloudFront distribution: $DIST_ID"
+          INVALIDATION_ID=$(aws cloudfront create-invalidation \
             --distribution-id "$DIST_ID" \
-            --paths "/*"
+            --paths "/*" \
+            --query 'Invalidation.Id' \
+            --output text)
+
+          echo "Created invalidation: $INVALIDATION_ID"
