@@ -82,3 +82,17 @@ jobs:
       # Deploys website to AWS S3 and invalidate CloudFront Cache
       - name: Deploy to S3
         run: hugo deploy --force --maxDeletes -1 --invalidateCDN --target ${{ inputs.target }}
+
+      # Force invalidation of viewer paths (pretty URLs like /server-and-cloud-computing/)
+      - name: Invalidate CloudFront (viewer paths)
+        run: |
+          case "${{ inputs.target }}" in
+            internal) DIST_ID="ENN4LK1IZUDIX" ;;
+            internal-existing) DIST_ID="E2VDQ2CYZATMO9" ;;
+            production) DIST_ID="E2NEF61QWPFRIH" ;;
+            *) echo "Unknown target: ${{ inputs.target }}"; exit 1 ;;
+          esac
+
+          aws cloudfront create-invalidation \
+            --distribution-id "$DIST_ID" \
+            --paths "/*"
