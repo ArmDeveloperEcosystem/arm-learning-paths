@@ -1,5 +1,6 @@
 ---
 title: Run distributed inference with llama.cpp on Arm-based AWS Graviton4 instances
+description: Deploy and scale distributed LLM inference using llama.cpp on Arm servers, including multi-node setup, coordination, and performance considerations.
 
 minutes_to_complete: 30
 
