@@ -7,15 +7,16 @@ cascade:
     
 minutes_to_complete: 10
 
-who_is_this_for: This is an introductory topic for developers wishing to optimize code performance via link-time optimization using the GCC toolchain.
+who_is_this_for: This is an introductory topic intended for developers who want to learn about improving application performance
+  using link-time optimization (LTO) with the GCC toolchain.
 
 learning_objectives:
-    - Understand the key concepts behind LTO
-    - Understand how to employ the optimization in GCC
-    - Develop some intuition as to the potential performance gains achievable
+    - Understand the key concepts behind link-time optimization (LTO)
+    - Learn how to enable and use LTO with the GCC compiler
+    - Develop intuition about the types of performance improvements LTO can provide
 
 prerequisites:
-    - A recent release of the GCC toolchain
+    - A recent version of the GCC toolchain
 
 author: Victor Do Nascimento
 
@@ -32,11 +33,11 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: GCC Wiki
+        title: GCC Wiki Link-Time Optimization
         link: https://gcc.gnu.org/wiki/LinkTimeOptimization
         type: website
     - resource:
-        title: Gentoo Wiki
+        title: Gentoo Wiki LTO
         link: https://wiki.gentoo.org/wiki/LTO
         type: website
 
