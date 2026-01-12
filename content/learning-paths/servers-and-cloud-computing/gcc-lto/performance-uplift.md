@@ -35,7 +35,8 @@ Without LTO, such symbols must be retained conservatively, as they may be refere
 
 While global visibility often enables code size reductions, some LTO-driven optimizations can lead to larger binaries when they are deemed profitable for performance.
 Examples include:
-Aggressive loop unrolling when iteration counts are known in specific call paths
-Increased function inlining when call relationships are well understood
+  * Aggressive loop unrolling when iteration counts are known in specific call paths
+  * Increased function inlining when call relationships are well understood
+    
 In addition, LTO enables function cloning. When a function exhibits multiple common usage patterns, the compiler may generate specialized versions optimized for frequent cases, while retaining a generic version for less common ones. Although this approach preserves correctness and improves performance for hot paths, it can introduce code duplication and increase overall binary size.
 As with other interprocedural optimizations, these trade-offs reflect the compiler’s attempt to balance performance gains against code size growth, and the net effect depends heavily on the structure of the application.
